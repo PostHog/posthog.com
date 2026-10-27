@@ -22,7 +22,7 @@ import BoardWindow from './BoardWindow'
 import { EVENT_KINDS, EventTile } from './eventKinds'
 import { CHAT_BOUNDARIES, CHAT_DONE_AT, CHAT_EVENTS, CHAT_LENGTH_MS, CHAT_RIDER, ChatEvent } from './fetchScript'
 import FetchWindow from './FetchWindow'
-import { SOURCE_AMBIENT_MS, SPOTLIGHT_SOURCES, SourceTile, useSpotlightLogos } from './sources'
+import { SOURCE_AMBIENT_MS, SPOTLIGHT_SOURCES, SourceTile, SpotlightPlatform, useSpotlightPlatforms } from './sources'
 
 const AMBIENT_EVENT_MS = { minMs: 700, maxMs: 2200 }
 const ROW_COLUMNS =
@@ -40,7 +40,7 @@ const LiveDot = () => (
     </span>
 )
 
-const RowName = ({ origin, logos }: { origin: Origin; logos: (string | undefined)[] }) =>
+const RowName = ({ origin, platforms }: { origin: Origin; platforms: SpotlightPlatform[] }) =>
     origin.type === 'event' ? (
         <>
             <EventTile kind={origin.kind} />
@@ -50,7 +50,7 @@ const RowName = ({ origin, logos }: { origin: Origin; logos: (string | undefined
         </>
     ) : (
         <>
-            <SourceTile logo={logos[origin.source]} />
+            <SourceTile logo={platforms[origin.source].image} />
             <span className="min-w-0 truncate font-semibold text-primary @md:shrink-0">
                 {SPOTLIGHT_SOURCES[origin.source].name}
             </span>
@@ -60,12 +60,12 @@ const RowName = ({ origin, logos }: { origin: Origin; logos: (string | undefined
 const EventsTable = React.memo(function EventsTable({
     rows,
     now,
-    logos,
+    platforms,
     className,
 }: {
     rows: BoardRow[]
     now: number
-    logos: (string | undefined)[]
+    platforms: SpotlightPlatform[]
     className?: string
 }) {
     const reduceMotion = useReducedMotion()
@@ -78,9 +78,23 @@ const EventsTable = React.memo(function EventsTable({
                     Live events
                 </>
             }
-            aside={SPOTLIGHT_SOURCES.map(({ name }, index) => (
-                <SourceTile key={name} logo={logos[index]} />
-            ))}
+            aside={SPOTLIGHT_SOURCES.map(({ name }, index) => {
+                const { image, url } = platforms[index]
+                return url ? (
+                    <Link
+                        key={name}
+                        to={url}
+                        state={{ newWindow: true }}
+                        aria-label={`${name} source docs`}
+                        title={`${name} source docs`}
+                        className="rounded-[5px] transition-transform hover:-translate-y-px"
+                    >
+                        <SourceTile logo={image} />
+                    </Link>
+                ) : (
+                    <SourceTile key={name} logo={image} />
+                )
+            })}
             className={className}
         >
             <div className={cn(ROW_COLUMNS, 'border-b border-primary py-1 font-mono text-[11px] uppercase text-muted')}>
@@ -108,7 +122,7 @@ const EventsTable = React.memo(function EventsTable({
                             )}
                         >
                             <span className="flex min-w-0 items-center gap-2">
-                                <RowName origin={origin} logos={logos} />
+                                <RowName origin={origin} platforms={platforms} />
                                 <span className="hidden min-w-0 truncate text-xs text-muted @md:block">{detail}</span>
                             </span>
                             <span
@@ -164,7 +178,7 @@ export default function EventBoard(): JSX.Element {
     const inView = useInView(rootRef, { amount: 0.25 })
     const reduceMotion = useReducedMotion()
     const ambientActive = inView && !reduceMotion
-    const logos = useSpotlightLogos()
+    const platforms = useSpotlightPlatforms()
     const [board, dispatch] = useReducer(reduceBoard, undefined, emptyBoard)
     const riders = useRef(new AmbientRiders())
     const elapsed = useEventClock(rootRef, {
@@ -209,7 +223,7 @@ export default function EventBoard(): JSX.Element {
                 <EventsTable
                     rows={board.rows}
                     now={board.now}
-                    logos={logos}
+                    platforms={platforms}
                     className="relative z-10 ml-6 h-[24rem] @2xl:col-[7/13] @2xl:row-[1/3] @2xl:mb-10 @2xl:ml-0 @2xl:mt-12 @2xl:h-auto @2xl:[contain:size] @2xl:[&>header]:pl-11"
                 />
                 <BoxPlotChart

@@ -36,12 +36,17 @@ export const STRIPE = SPOTLIGHT_SOURCES.findIndex(({ name }) => name === 'Stripe
 
 const normalizeName = (name: string): string => name.toLowerCase().replace(/\s/g, '')
 
-export function useSpotlightLogos(): (string | undefined)[] {
-    const platforms = useSourcePlatforms() as { label: string; image: string }[]
+export interface SpotlightPlatform {
+    image?: string
+    url?: string
+}
+
+export function useSpotlightPlatforms(): SpotlightPlatform[] {
+    const platforms = useSourcePlatforms() as { label: string; image: string; url: string }[]
     return useMemo(
         () =>
             SPOTLIGHT_SOURCES.map(
-                ({ name }) => platforms.find(({ label }) => normalizeName(label) === normalizeName(name))?.image
+                ({ name }) => platforms.find(({ label }) => normalizeName(label) === normalizeName(name)) ?? {}
             ),
         [platforms]
     )

@@ -329,7 +329,7 @@ const Dock = ({
                 <span
                     className={cn(
                         SCENE_TEXT[11],
-                        'pointer-events-none absolute bottom-full mb-2 whitespace-nowrap rounded-md bg-primary px-2 py-0.5 font-semibold text-primary opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100'
+                        'pointer-events-none absolute bottom-full mb-3 whitespace-nowrap rounded-md bg-primary px-2 py-0.5 font-semibold text-primary opacity-0 shadow-sm transition duration-200 ease-out group-hover:-translate-y-1.5 group-hover:opacity-100 group-focus-visible:-translate-y-1.5 group-focus-visible:opacity-100'
                     )}
                 >
                     {label}
