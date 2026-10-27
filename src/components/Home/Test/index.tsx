@@ -167,6 +167,15 @@ function Hero(): JSX.Element {
     )
 }
 
+const Control = () => (
+    <>
+        <DataStackSection />
+        <PricingSection />
+        <WhyPostHogSection />
+        <BedtimeReadingSection />
+    </>
+)
+
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -184,18 +193,14 @@ export default function HomeTest() {
                 <Hero />
                 <Customers />
                 <RenderInClient
+                    placeholder={<Control />}
                     render={() =>
                         posthog?.getFeatureFlag?.(DATA_STORY_FLAG) === DATA_STORY_VARIANT ? (
                             <Suspense fallback={null}>
                                 <StepsSection />
                             </Suspense>
                         ) : (
-                            <>
-                                <DataStackSection />
-                                <PricingSection />
-                                <WhyPostHogSection />
-                                <BedtimeReadingSection />
-                            </>
+                            <Control />
                         )
                     }
                 />
