@@ -423,7 +423,9 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
               currentPath: slug,
           })
         : undefined
-    const productSelect = isProductDocsPage ? <ProductSwitcher activeHandle={productSurfaceData.handle} /> : undefined
+    const productSelect = isProductDocsPage ? (
+        <ProductSwitcher activeHandle={productSurfaceData.handle} surface="docs" />
+    ) : undefined
 
     const components = {
         Team,
