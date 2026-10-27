@@ -1,5 +1,5 @@
 ---
-date: 2026-10-26
+date: 2026-10-27
 title: Lifecycle marketers roasted our lifecycle marketing
 rootPage: /blog
 sidebar: Blog
