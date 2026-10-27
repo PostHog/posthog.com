@@ -62,7 +62,9 @@ Every metric lands as `proposed` – whether a human or an agent created it. A h
 
 Editing an approved metric's definition, name, description, or unit resets it to `proposed`. A metric is never silently redefined: any change to what the number means goes back through a human. Cosmetic fields – `display_name`, `owner` – never reset approval.
 
-Creating a metric with a name that a live metric already holds fails with a 409 `metric_name_taken` error, and the existing metric stays unchanged. To replace it, send the create again with `overwrite` set to `true`. That writes the fields you send over the existing metric, and resets an approved one to `proposed` the same way an edit does. When the existing metric reads a table you don't have access to, the 409 only says the name is taken, and `overwrite` can't replace it.
+Creating a metric with a name that a live metric already holds fails with a 409 `metric_name_taken` error, and the existing metric stays unchanged. To replace it, send the create again with `overwrite` set to `true`. That writes the fields you send over the existing metric, and resets an approved one to `proposed` the same way an edit does.
+
+When the existing metric reads a table you don't have access to, the 409 only says the name is taken, and `overwrite` can't replace it.
 
 ## Renaming and deleting
 
@@ -89,7 +91,7 @@ A worked example:
 
 <CalloutBox icon="IconWarning" title="The canonical rule" type="caution">
 
-A result is canonical only when `status = 'approved'` and `is_drifted = false`. Agents never present a `proposed` or drifted metric's result as canonical. A `proposed` result they use opens with "📝 **Proposed definition in your data catalog**". When the match is drifted, the agent works the number out itself and tells you it's a one-off calculation.
+A result is canonical only when `status = 'approved'` and `is_drifted = false`. Agents never present a `proposed` or drifted metric's result as canonical. When an agent uses a `proposed` result, the answer opens with "📝 Proposed definition in your data catalog". When the match is drifted, the agent works the number out itself and tells you it's a one-off calculation.
 
 </CalloutBox>
 

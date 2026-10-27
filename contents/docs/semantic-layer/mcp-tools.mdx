@@ -10,13 +10,21 @@ This works in any MCP client – Claude Code, Claude Desktop, Cursor, Codex, Win
 
 ## Catalog-first routing
 
-With the semantic layer enabled, the MCP server changes how agents answer metric questions. The agent goes to the catalog based on the shape of the question, not on whether it names a KPI: a count, sum, or amount over time, a rate, an average or percentile, a cost per unit, or a conversion between two events, plus breakdowns, rankings, and comparisons of them. That covers anything your product records, from revenue to sessions, tickets, or tool calls. One-off exploration and debugging skip the catalog. For a question of that shape, the agent:
+With the semantic layer enabled, the MCP server changes how agents answer metric questions. The agent checks the catalog first when a question asks for:
+
+- A count, sum, or amount over time
+- A rate, average, or percentile
+- A cost per unit
+- A conversion between two events
+- A breakdown, ranking, or comparison of any of these
+
+That covers anything your product records, from revenue to sessions, tickets, or tool calls, not only named KPIs. One-off exploration and debugging skip the catalog. For one of these questions, the agent:
 
 1. Calls `metric-list` to read the catalog, then `metric-describe` to inspect a candidate's definition
-2. If exactly one `approved`, non-drifted match exists, runs it with `data-catalog-metric-run` and opens the answer with "🛡️ **From your data catalog**", naming who approved the definition and when
+2. If exactly one `approved`, non-drifted match exists, runs it with `data-catalog-metric-run` and opens the answer with "🛡️ From your data catalog", naming who approved the definition and when
 3. If several materially different approved matches exist, asks you which one and stops
-4. If the match is only `proposed`, uses it when its definition fits the question, opens the answer with "📝 **Proposed definition in your data catalog**" and a link to review it, and says why it used it
-5. Otherwise writes the query itself, tells you the number is a one-off calculation, not a saved definition, and offers to save a reusable measure as a proposed metric
+4. If the match is only `proposed`, uses it when its definition fits the question, opens the answer with "📝 Proposed definition in your data catalog" and a link to review it, and says why it used it
+5. Otherwise writes the query itself, tells you the number is a one-off calculation and not a saved definition, and offers to save a reusable measure as a proposed metric
 
 This routing takes precedence over the agent's generic query-writing behavior, typed query tools, and any skill's query recipe. The effect: governed definitions win by default, and you always know when a number is a one-off derivation instead.
 
