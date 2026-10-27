@@ -37,7 +37,7 @@ Use the existing Salesforce record type: **`New revenue - existing customer`**
 
 Not every deal needs every stage. If a customer already knows the product and just needs help getting started, skip to Trial. The stages exist for tracking, not bureaucracy.
 
-When closing an opp (won or lost), do it manually even though Vitally may auto-close goals when a revenue threshold is met. Consciously closing the opp shows you're on top of the account and creates a clean intent-to-outcome link in our data.
+When closing an opp (won or lost), do it manually, even if a goal closes automatically when the customer meets a revenue threshold. Consciously closing the opp shows you're on top of the account and creates a clean intent-to-outcome link in our data.
 
 ## Trial guidelines
 
