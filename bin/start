@@ -13,6 +13,16 @@ export NODE_OPTIONS='--max_old_space_size=16384' # At least 16GB of RAM is requi
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 export GATSBY_TELEMETRY_DISABLED=1
 export GATSBY_CPU_COUNT="${GATSBY_CPU_COUNT:-2}"
+port="${PORT:-8001}"
+
+# Gatsby asks to pick another port when this one is busy, and that prompt waits forever without a terminal
+owner=$(lsof -tiTCP:"$port" -sTCP:LISTEN 2>/dev/null | head -1)
+if [ -n "$owner" ]; then
+    owner_dir=$(lsof -a -p "$owner" -d cwd -Fn 2>/dev/null | sed -n 's/^n//p')
+    echo "Something is already running at http://localhost:$port (process $owner, in ${owner_dir:-another folder})." >&2
+    echo "If it is the site, open that address. Otherwise stop it (Ctrl+C in its terminal) and run pnpm start again." >&2
+    exit 1
+fi
 
 # Ensure .cache directory exists (Gatsby expects it before onPreBootstrap runs)
 mkdir -p .cache
@@ -21,4 +31,4 @@ mkdir -p .cache
 # (error #11903) when macOS has dropped some of them. A fresh snapshot costs a few seconds.
 rm -rf .cache/.parcel-cache
 
-gatsby develop -H 0.0.0.0 -p "${PORT:-8001}"
+gatsby develop -H 0.0.0.0 -p "$port"
