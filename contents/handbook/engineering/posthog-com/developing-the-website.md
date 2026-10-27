@@ -170,10 +170,12 @@ Any time you want to preview changes you are making to the local version of the 
 
 **Troubleshooting**
 
-If the server fails to start, the first troubleshooting step is to clear cache. You can do this (and start the server again) by running:
+If the server stops, fails to start, or stops responding, stop it and run `pnpm start` again. A restart keeps the cache, so it is much faster than a clean start.
+
+If the restart does not fix the problem, clear the cache and start again:
 
 ```bash
-pnpm clean && mkdir .cache && pnpm install && pnpm start
+pnpm clean && pnpm install && pnpm start
 ```
 
 ### Minimal mode

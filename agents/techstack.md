@@ -7,10 +7,14 @@ pnpm install                    # Install dependencies (NOT npm)
 pnpm start                      # Dev server at localhost:8001
 pnpm build                      # Production build
 pnpm clean                      # Clear Gatsby cache
-pnpm clean && mkdir .cache && pnpm i && pnpm start      # Full reset when things break
+pnpm clean && pnpm i && pnpm start      # Full reset if a plain restart does not fix it
 ```
 
 Requires 16GB RAM (`NODE_OPTIONS='--max_old_space_size=16384'`).
+
+If the dev server crashes or stops responding, restart it before you run `pnpm clean`. A restart keeps the cache.
+
+While the dev server runs, write each file once per change. Many fast writes to one file can crash the dev server during hot reload.
 
 ## Testing
 
