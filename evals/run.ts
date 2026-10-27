@@ -2,6 +2,7 @@ import { execFileSync } from 'node:child_process'
 import { mkdir, mkdtemp, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { createInterface } from 'node:readline/promises'
 import { fileURLToPath } from 'node:url'
 import { dryRun, findRequestId, gaugeAvailable, toGaugeSpecs, wait } from './gauge/send-to-gauge.ts'
 import {
@@ -39,8 +40,8 @@ Commands:
   plan            Build the selected checks' prompts and run gauge --dry-run. Free.
   sync            Create or update one saved Gauge eval per selected check, and record
                   their ids in gauge/saved-evals.json. Starts no sessions.
-  run --yes       Launch the selected checks under their saved evals and wait for judging.
-                  Spends Gauge credits. Without --yes, the same as plan.
+  run             Show how many saved evals and agent sessions would launch, ask to
+                  confirm, then launch them and wait for judging. Spends Gauge credits.
 
 Filters (combine):
   --page <docs path>     e.g. product-analytics/identify; repeatable
@@ -52,7 +53,8 @@ Filters (combine):
                          (default https://posthog.com)
   --include-unverified   add shared/run-config.yml harnesses with verified: false
   --write <dir>          plan: also write the Gauge specs there
-  --prune                sync with no filters: delete saved evals whose check no longer exists`
+  --prune                sync with no filters: delete saved evals whose check no longer exists
+  --yes, -y              run: answer yes to the launch question (for CI and scripts)`
 
 type Options = {
     command: string
@@ -81,7 +83,7 @@ export function parseArgs(argv: string[]): Options {
         changed: changedAt === -1 ? null : valuesOf('--changed')[0] ?? 'origin/master',
         baseUrl: valuesOf('--base-url')[0] ?? 'https://posthog.com',
         includeUnverified: argv.includes('--include-unverified'),
-        yes: argv.includes('--yes'),
+        yes: argv.includes('--yes') || argv.includes('-y'),
         prune: argv.includes('--prune'),
         write: valuesOf('--write')[0] ?? null,
     }
@@ -171,6 +173,17 @@ export function setupOf(check: CheckPrompt): string {
     return parts.length > 0 ? parts.join(' + ') : 'no docs'
 }
 
+// Groups skipped checks under their reason, so 40 checks with one cause read as one line.
+function printSkipped(title: string, skipped: CantRun[]) {
+    const byReason = new Map<string, string[]>()
+    for (const { key, reason } of skipped) byReason.set(reason, [...(byReason.get(reason) ?? []), key])
+    console.log(`\n${title} (${skipped.length})`)
+    for (const [reason, keys] of byReason) {
+        console.log(`\n  ${reason} (${keys.length})`)
+        for (const key of keys) console.log(`    ${key}`)
+    }
+}
+
 function printProblems(title: string, problems: string[]) {
     console.error(`${title}:\n${problems.map((p) => `  ${p}`).join('\n')}`)
 }
@@ -240,18 +253,18 @@ async function main(argv: string[]): Promise<number> {
         return reason ? [{ key: c.key, reason }] : []
     })
     const checks = built.filter((c) => !cantRun.some((x) => x.key === c.key))
-    if (cantRun.length > 0)
-        printProblems(
-            `Can't run ${cantRun.length} check(s), skipping them`,
-            cantRun.map((x) => `${x.key}: ${x.reason}`)
-        )
+    if (cantRun.length > 0) printSkipped('Skipping', cantRun)
     console.log(
-        `${checks.length} check(s) to run, on ${harnesses.map((h) => `${h.id} (${h.models.join(', ')})`).join(', ')}:`
+        `\nTo run (${checks.length}), on ${harnesses.map((h) => `${h.id} (${h.models.join(', ')})`).join(', ')}\n`
     )
-    for (const c of checks)
-        console.log(
-            `  ${c.key}  ${setupOf(c)}  ${c.criteria.length} criteria  ${c.codebase ? c.codebase.name : 'answer-only'}`
-        )
+    const rows = checks.map((c) => [
+        c.key,
+        setupOf(c),
+        `${c.criteria.length} criteria`,
+        c.codebase ? c.codebase.name : 'answer-only',
+    ])
+    const widths = rows.reduce((w, row) => row.map((cell, i) => Math.max(w[i] ?? 0, cell.length)), [] as number[])
+    for (const row of rows) console.log(`  ${row.map((cell, i) => cell.padEnd(widths[i])).join('   ')}`.trimEnd())
     if (checks.length === 0) {
         console.log('Nothing to run.')
         return cantRun.length > 0 ? 1 : 0
@@ -266,7 +279,7 @@ async function main(argv: string[]): Promise<number> {
         return 1
     }
     if (options.command === 'sync') return sync(checks, built, shared, options)
-    if (options.command === 'plan' || !options.yes) {
+    if (options.command === 'plan') {
         const specDir = options.write ?? (await mkdtemp(join(tmpdir(), 'posthog-evals-')))
         await mkdir(specDir, { recursive: true })
         for (const [i, spec] of toGaugeSpecs(checks, shared.runConfig.samples).entries()) {
@@ -274,12 +287,10 @@ async function main(argv: string[]): Promise<number> {
             await writeFile(path, `${JSON.stringify(spec, null, 4)}\n`)
             console.log(dryRun(path))
         }
-        console.log(
-            options.command === 'run' ? 'Plan only. Re-run with --yes to launch these sessions.' : `Specs in ${specDir}`
-        )
+        console.log(`Specs in ${specDir}`)
         return 0
     }
-    return runSavedEvals(checks, shared, cantRun)
+    return runSavedEvals(checks, shared, cantRun, options.yes)
 }
 
 const unfiltered = (options: Options) =>
@@ -340,10 +351,11 @@ type CantRun = { key: string; reason: string }
 // Launches each check under its saved eval, then waits for every one that launched.
 // Nothing here stops the run early except running out of credits: a check that can't
 // run is recorded with its reason, and the summary at the end lists them all.
-async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: CantRun[]): Promise<number> {
+async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: CantRun[], yes: boolean): Promise<number> {
     const ids = readIds()
     const saved = listSavedEvals()
     const launchable: CheckPrompt[] = []
+    const alreadyReported = cantRun.length
     for (const check of checks) {
         const live = saved.get(savedEvalName(check.key))
         if (!ids[check.key] || !live || live.id !== ids[check.key])
@@ -352,6 +364,13 @@ async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: Can
             cantRun.push({ key: check.key, reason: 'saved eval is out of date; run pnpm evals sync' })
         else launchable.push(check)
     }
+    const notSynced = cantRun.slice(alreadyReported)
+    if (notSynced.length > 0) printSkipped('Also skipping, saved eval not ready', notSynced)
+    if (launchable.length === 0) {
+        console.log('Nothing to launch.')
+        return 1
+    }
+    if (!(await confirmLaunch(launchable, shared, cantRun.length, yes))) return 1
 
     const outDir = join(repoRoot, 'evals', 'results', new Date().toISOString().replace(/[:.]/g, '-'))
     await mkdir(outDir, { recursive: true })
@@ -397,12 +416,43 @@ async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: Can
     console.log(
         `\n${passed} passed, ${verdicts.length - passed} failed, ${cantRun.length} couldn't run. Results in ${outDir}`
     )
-    if (cantRun.length > 0)
-        printProblems(
-            "Couldn't run",
-            cantRun.map((x) => `${x.key}: ${x.reason}`)
-        )
+    if (cantRun.length > 0) printSkipped("Couldn't run", cantRun)
     return passed === verdicts.length && cantRun.length === 0 ? 0 : 1
+}
+
+// One saved eval launches one session per harness model per sample.
+export const sessionsFor = (checks: CheckPrompt[], samples: number) =>
+    checks.reduce((sum, c) => sum + c.harnesses.reduce((n, h) => n + h.models.length, 0) * samples, 0)
+
+// The last free step before credits are spent: say what will launch and ask.
+async function confirmLaunch(launchable: CheckPrompt[], shared: Shared, skipped: number, yes: boolean) {
+    const harnesses = [
+        ...new Set(launchable.flatMap((c) => c.harnesses.map((h) => `${h.id} (${h.models.join(', ')})`))),
+    ]
+    console.log(
+        [
+            '',
+            'Ready to launch on Gauge',
+            `  Saved evals   ${launchable.length}`,
+            `  Sessions      ${sessionsFor(launchable, shared.runConfig.samples)}`,
+            `  Samples       ${shared.runConfig.samples} per harness model`,
+            `  Harnesses     ${harnesses.join(', ')}`,
+            `  Skipped       ${skipped}${skipped > 0 ? ' (listed above)' : ''}`,
+            '',
+            'This spends Gauge credits.',
+        ].join('\n')
+    )
+    if (yes) return true
+    if (!process.stdin.isTTY) {
+        console.error('Not launched: no terminal to confirm in. Pass --yes to launch without asking.')
+        return false
+    }
+    const prompt = createInterface({ input: process.stdin, output: process.stdout })
+    const answer = await prompt.question('Launch? [y/N] ')
+    prompt.close()
+    if (/^y(es)?$/i.test(answer.trim())) return true
+    console.log('Not launched.')
+    return false
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) process.exitCode = await main(process.argv.slice(2))

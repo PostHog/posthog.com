@@ -166,7 +166,7 @@ Everything goes through one command, `pnpm evals <command> [filters]`, run from 
 | `pnpm evals index` | Prints each page and every check that reads it. | Free |
 | `pnpm evals plan [filters]` | Builds the selected checks' prompts and has Gauge dry-run them. Nothing runs. | Free |
 | `pnpm evals sync [filters]` | Creates or updates the saved evals in Gauge, one per check. Starts no sessions. | Free |
-| `pnpm evals run [filters] --yes` | Launches the selected checks under their saved evals and waits for the verdicts. Without `--yes` it's the same as `plan`. | **Paid** |
+| `pnpm evals run [filters]` | Shows how many saved evals and agent sessions will launch, asks you to confirm, then launches them and waits for the verdicts. `--yes` skips the question. | **Paid** |
 | `pnpm test:evals` | The harness's offline unit tests. | Free |
 
 ### The usual workflow
@@ -175,8 +175,26 @@ Everything goes through one command, `pnpm evals <command> [filters]`, run from 
 2. `pnpm evals validate`
 3. `pnpm evals sync --page <page>`: brings that page's saved evals in Gauge up to date.
 4. `pnpm evals plan --page <page>`: free; shows what would run and lets Gauge check it.
-5. `pnpm evals run --page <page> --yes`: the paid run.
+5. `pnpm evals run --page <page>`: the paid run. It asks before it launches anything.
 6. Commit the eval file and `gauge/saved-evals.json` together.
+
+### Before a paid run
+
+`run` checks which saved evals it can launch, then prints a summary and waits for an answer. Nothing is spent until you type `y`:
+
+```
+Ready to launch on Gauge
+  Saved evals   21
+  Sessions      21
+  Samples       1 per harness model
+  Harnesses     claude-code (claude-sonnet-5-5)
+  Skipped       51 (listed above)
+
+This spends Gauge credits.
+Launch? [y/N]
+```
+
+Each saved eval starts one agent session for each harness model and sample. So `--include-unverified` or a higher `samples` value in `shared/run-config.yml` multiplies the session count.
 
 ### Choosing what to run
 
@@ -198,31 +216,32 @@ Other options:
 - `--include-unverified` adds the agents marked `verified: false` in `shared/run-config.yml`.
 - `--write <dir>` (`plan` only) keeps the Gauge spec files it generates.
 - `--prune` (`sync` with no filters only) deletes saved evals whose check no longer exists.
+- `--yes` or `-y` (`run` only) answers yes to the launch question in advance. Use it in CI and scripts: without a terminal, `run` stops before it launches unless it gets `--yes`.
 
 ### Recipes
 
 ```sh
 # One page: every check in its eval file, and any other check that reads it
 pnpm evals sync --page product-analytics/installation/go
-pnpm evals run  --page product-analytics/installation/go --yes
+pnpm evals run  --page product-analytics/installation/go
 
 # Several pages
-pnpm evals run --page product-analytics/installation/python --page product-analytics/installation/ruby --yes
+pnpm evals run --page product-analytics/installation/python --page product-analytics/installation/ruby
 
 # Everything with a tag
-pnpm evals run --tag install --yes
+pnpm evals run --tag install
 
 # Every page a branch changed
-pnpm evals run --changed --yes
+pnpm evals run --changed
 
 # A docs PR, against its deploy preview
 pnpm evals sync --page product-analytics/identify --base-url https://<preview-url>
-pnpm evals run  --page product-analytics/identify --base-url https://<preview-url> --yes
+pnpm evals run  --page product-analytics/identify --base-url https://<preview-url>
 
 # Everything: sync it all, check it for free, then run it
 pnpm evals sync
 pnpm evals plan
-pnpm evals run --yes
+pnpm evals run
 ```
 
 Use the same filters and `--base-url` for `sync` and `run`: `run` launches what the saved evals hold, and refuses a check whose saved eval doesn't match.
@@ -255,7 +274,7 @@ Launching many runs at once has hit `insufficient_credits` while the org still h
 
 ### Output
 
-`run --yes` writes three files to `evals/results/<timestamp>/` (gitignored):
+`run` writes three files to `evals/results/<timestamp>/` (gitignored):
 
 | File | Holds |
 | --- | --- |

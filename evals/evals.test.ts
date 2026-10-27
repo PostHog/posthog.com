@@ -10,7 +10,7 @@ import { describe, test } from 'node:test'
 import { toGaugeSpecs } from './gauge/send-to-gauge.ts'
 import { definitionFor, isCurrent, savedEvalName, type SavedEval } from './gauge/saved-evals.ts'
 import { appendDocs, buildPrompts, checkKey, type CheckPrompt } from './build-eval-prompts.ts'
-import { cantRunReason, changedSelection, parseArgs, select, setupOf } from './run.ts'
+import { cantRunReason, changedSelection, parseArgs, select, sessionsFor, setupOf } from './run.ts'
 import {
     loadEvalFiles,
     loadShared,
@@ -304,6 +304,16 @@ describe('prompts', () => {
         const pinned = { ...shared, runConfig: { ...shared.runConfig, mcp: { posthog: 'mcp.posthog.com@v1' } } }
         assert.match(cantRunReason(mcp, shared)!, /attach_mcp posthog has no version pinned/)
         assert.equal(cantRunReason({ ...mcp, mcp: { name: 'posthog', ref: 'mcp.posthog.com@v1' } }, pinned), null)
+    })
+
+    test('a run counts one session per harness model per sample', () => {
+        const harnesses = [
+            { id: 'a', gauge: 'A', models: ['m1'], verified: true },
+            { id: 'b', gauge: 'B', models: ['m2', 'm3'], verified: false },
+        ]
+        const checks = [{ harnesses }, { harnesses: harnesses.slice(0, 1) }] as unknown as CheckPrompt[]
+        assert.equal(sessionsFor(checks, 1), 4)
+        assert.equal(sessionsFor(checks, 3), 12)
     })
 
     test('Gauge specs hold at most 20 Gauge cases each', () => {
