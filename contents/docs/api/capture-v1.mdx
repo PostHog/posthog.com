@@ -36,7 +36,7 @@ Capture v1 has two endpoints: one for analytics events and one for AI events. Bo
 
 Use `https://us.i.posthog.com` for US Cloud and `https://eu.i.posthog.com` for EU Cloud. Both endpoints accept POST only.
 
-Self-hosted (hobby) instances serve both endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward. [Upgrade your instance](/docs/self-host#upgrading) before you move an SDK to capture v1. An older instance doesn't serve one or both endpoints, and v1 SDKs drop events that get a `404`.
+Self-hosted (hobby) instances serve both endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward. [Upgrade your instance](/docs/self-host#upgrading) before you move an SDK to capture v1. An older instance doesn't serve one or both endpoints, and v1 SDKs drop events that still get a `404` after their retries.
 
 ### Send each event to its own endpoint
 
@@ -239,10 +239,11 @@ The AI endpoint accepts AI events up to 8MB each. See [capturing large AI events
 | `400` | The whole request is invalid, for example a missing header, bad JSON, an empty batch, or an invalid `uuid`. Nothing was stored. | No – fix the request |
 | `401` | The project token is missing or invalid, or you used a personal API key | No |
 | `402` | Your project hit a [billing limit](/docs/billing/limits-alerts). Events in this request aren't stored. | No – raise or remove the limit |
+| `404` | Nothing serves this path, for example a self-hosted instance that predates capture v1 or a proxy that doesn't forward it | Yes. If it keeps failing, check the host, your proxy, and your instance version. |
 | `408` | The request timed out while PostHog read it | Yes |
 | `413` | The body is over the size limit | No – send smaller requests |
 | `415` | Unsupported `Content-Type` or `Content-Encoding` | No |
-| `429` | Too many requests from one source. PostHog's network edge, in front of capture, can send this when a single client sends an unusually high request rate. It's rare. | No – v1 SDKs treat it as final. Send fewer, larger requests. |
+| `429` | Too many requests from one source. PostHog's network edge, in front of capture, can send this when a single client sends an unusually high request rate. It's rare. | Yes, after at least the `Retry-After` time if the response has one. Send fewer, larger requests. |
 | `500`, `502`, `503`, `504` | A temporary problem | Yes |
 
 
@@ -310,7 +311,7 @@ Many drops also raise an [ingestion warning](/docs/data/ingestion-warnings) in y
 
 ## Retries
 
-Retry when the response is `408`, `500`, `502`, `503`, or `504`, when the network fails, and for each event whose result is `retry`. Treat every other response as final.
+Retry when the response is `404`, `408`, `429`, `500`, `502`, `503`, or `504`, when the network fails, and for each event whose result is `retry`. Treat every other response as final.
 
 When you retry:
 
