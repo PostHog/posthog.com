@@ -6561,6 +6561,11 @@
             "destination": "/handbook/growth/sales/reverse-demo-calls"
         },
         {
+            "source": "/handbook/cs-and-onboarding/:path*",
+            "destination": "/handbook/customer-success/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
             "destination": "/data-stack"
         },

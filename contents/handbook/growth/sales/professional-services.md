@@ -54,7 +54,7 @@ Here we make sure that PostHog is correctly integrated into the codebase using o
  - Ensure they are only tracking the events which they need to (including implementing custom events where necessary).
  - Integrate the first set of feature flags into their application.
  - Set up the relevant dashboards and insights as documented in the scoping phase.
- - Ensure that everything is set up according to our best practice [guidance](/handbook/cs-and-onboarding/health-checks).
+ - Ensure that everything is set up according to our best practice [guidance](/handbook/customer-success/health-checks).
 
 ### Getting started training
 

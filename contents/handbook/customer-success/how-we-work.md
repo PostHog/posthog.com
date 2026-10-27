@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> This page covers more of the operational detail of how our team generally works - for a broader overview of roles and responsibilities, visit the [customer success team page](/handbook/cs-and-onboarding/customer-success).
+> This page covers more of the operational detail of how our team generally works - for a broader overview of roles and responsibilities, visit the [customer success team page](/handbook/customer-success/customer-success).
 
 ## Main metrics for each role
 
@@ -42,7 +42,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - Monthly customers: the total of their 3 invoices in the quarter × 4.
   - Annual customers: their usage-based spend in the quarter × 4. We don't use the total contract value ÷ 12.
 - Usage is measured before discounts and excludes tax.
-- If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. This needs to be conveyed to the customer in writing and spike credits must be given via the billing admin with the reason `Unwanted Spike`. Credits and refunds for genuine usage are left in. The full method is documented in [how commissions are calculated](/handbook/growth/revops/commissions).
+- If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. This needs to be conveyed to the customer in writing and spike credits must be given via the billing admin with the reason `Unwanted Spike`. Credits and refunds for genuine usage are left in.
 - If we offer a customer a product trial where we will provide credit for their usage back, this will be removed from their usage in the NRR to align with billing addon trials which are not counted towards revenue either.  The goal of a trial is to ascertain whether a product is fit for purpose for a customer's needs and as such isn't considered 'retained' as a product until that customer is paying for it.
 - If a customer churns or gives formal notice of churn during the quarter, their ARR counts as $0 and they're removed from your book at the start of the following quarter.
 - Once a quarter has been paid out, it's final. If we later find a correction, we fix it in the next quarter's calculation, not by reopening the past quarter.
@@ -107,7 +107,7 @@ Sometimes an existing or potential customer may ask us to fix an issue or build 
 - Engineers at PostHog [talk to customers](/handbook/making-users-happy#engineers-talk-to-users-and-provide-support). It's much better to bring engineers onto calls to speak to large customer to talk to them directly than just do the call yourself and copy and paste notes back and forth. This is especially useful if a) the team was already considering building the feature at some point, b) it's an interesting new use case, or c) the customer is really unhappy for valid reasons and could churn.
 - Provide as much internal context as you can. If a customer sends a one-liner in Slack, don't just copy and paste into a product team's channel - find out as much as you reasonably can first, ask clarifying questions up front etc. Otherwise the relevant team will just ask you to do this anyway.
 - We already have [principles](/handbook/how-we-make-money#principles-for-dealing-with-big-customers) for how we build for big customers - if you have a big customer with a niche use case that isn't applicable to anyone else, you should assume we won't build for them (don't be mad!)
-- For any [feature requests](/handbook/cs-and-onboarding/feature-requests) customers care deeply about, we should file and track those on the Feature requests tab in Customer analytics.
+- For any [feature requests](/handbook/customer-success/feature-requests) customers care deeply about, we should file and track those on the Feature requests tab in Customer analytics.
 
 **Inviting a product engineer into a customer conversation**
 
@@ -119,7 +119,7 @@ Separately from product requests, there are moments where it's worth seeing whet
 
 **Why not just always invite one?**
 
-CSMs here are technical enough to solve real problems without asking our engineers. [You're the expert!](/handbook/cs-and-onboarding/customer-success) Bringing an engineer in is the exception, earned by genuine two-way value (one of the cases above), not a default or a comfort blanket. If you can't say what the engineer would get out of it, that's your answer.
+CSMs here are technical enough to solve real problems without asking our engineers. [You're the expert!](/handbook/customer-success/customer-success) Bringing an engineer in is the exception, earned by genuine two-way value (one of the cases above), not a default or a comfort blanket. If you can't say what the engineer would get out of it, that's your answer.
 
 Finally, if you are bringing engineers onto a call, brief them first - what is the call about, who will be there. And then afterwards, summarize what you talked about. This goes a long way to ensuring sales <\> engineering happiness.
 
