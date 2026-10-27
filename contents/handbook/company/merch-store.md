@@ -45,7 +45,7 @@ Shipping is also done through Micromerch (in partnership with Shiphero) - they c
 
 ### Customers
 
-Give a code when someone outside PostHog goes out of their way to help us: a merged PR, a clear bug report, useful feedback, or a forum answer that saves someone else time. There's no checklist, so use your judgement. If you're debating whether something counts, it probably does.
+Give a code when someone outside PostHog goes out of their way to help us: a merged PR, a clear bug report, useful feedback, or a forum answer that saves someone else time. There's no checklist, so use your judgment. If you're debating whether something counts, it probably does.
 
 As a rough guide, we give $30 for feedback, bug reports, and general thanks (enough for a t-shirt) and $50 for code contributions. Feedback calls have their own amounts in [talking to users](/handbook/product/user-feedback). We don't put expiration dates on codes.
 
