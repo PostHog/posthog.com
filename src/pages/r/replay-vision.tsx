@@ -662,7 +662,7 @@ export default function ReplayVisionLanding(): JSX.Element {
                                 <CallToAction
                                     size="sm"
                                     type="primary"
-                                    to="/docs/replay-vision/start-here"
+                                    to="https://app.posthog.com/replay-vision"
                                     state={{ newWindow: true }}
                                 >
                                     Open Replay Vision
