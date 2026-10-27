@@ -16,11 +16,11 @@ const Title = ({ pipeline }: { pipeline: any }) => {
         (pipeline.status !== 'coming_soon' &&
             pipeline.type === 'source' &&
             pipeline.slug &&
-            `/docs/data-warehouse/sources/${pipeline.slug}`) ||
+            `/docs/data-pipelines/sources/${pipeline.slug}`) ||
         (pipeline.status !== 'coming_soon' &&
             pipeline.type &&
             pipeline.slug &&
-            `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
+            `/docs/data-pipelines/${pipeline.type}s/${pipeline.slug}`)
 
     return (
         <div className="flex items-center space-x-2">

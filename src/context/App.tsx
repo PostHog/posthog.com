@@ -358,7 +358,6 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -446,7 +445,6 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -498,7 +496,6 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
-    closeOnEscape?: boolean
     toolbar?: boolean
     hideTitle?: boolean
 }
@@ -945,7 +942,6 @@ const appSettings: AppSettings = {
         },
     },
     '/display-options': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -1024,7 +1020,6 @@ const appSettings: AppSettings = {
         },
     },
     '/vibe-check': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 750,
@@ -1586,7 +1581,7 @@ const appSettings: AppSettings = {
     '/field-guide/the-rage-clicker': { toolbar: false, hideTitle: true },
     '/field-guide/the-refreshing-pilgrim': { toolbar: false, hideTitle: true },
     '/field-guide/the-tab-hopper': { toolbar: false, hideTitle: true },
-    '/field-guide/the-mid-form-fleer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-halfway-houdini': { toolbar: false, hideTitle: true },
     '/field-guide/the-pricing-page-loiterer': { toolbar: false, hideTitle: true },
     '/field-guide/the-tutorial-skipper': { toolbar: false, hideTitle: true },
     '/field-guide/the-modal-slammer': { toolbar: false, hideTitle: true },
@@ -1626,7 +1621,6 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
     scrollbars?: 'system' | 'show' | 'auto'
@@ -1642,7 +1636,12 @@ const readStoredSiteSettings = (): Partial<SiteSettings> => {
     }
     try {
         const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
-        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {}
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+            return {}
+        }
+        // Retired setting. Drop it so a later save does not write it back.
+        delete parsed.reduceTransparency
+        return parsed
     } catch (error) {
         console.error('Failed to read site settings:', error)
         return {}
@@ -1659,7 +1658,6 @@ const getInitialSiteSettings = (): SiteSettings => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         ...readStoredSiteSettings(),
     }
@@ -1690,7 +1688,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
@@ -1751,18 +1748,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
-    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
-    const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
+    const sourcesNav = useSourcesNav('/docs/data-pipelines/sources')
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
             'data-pipeline-source-webhooks': sourceWebhooksNav,
-            'data-pipeline-sources': cdpSourcesNav,
-            'data-warehouse-sources': dwSourcesNav,
+            'data-pipeline-sources': sourcesNav,
         }),
-        [destinationNav, transformationNav, sourceWebhooksNav, cdpSourcesNav, dwSourcesNav]
+        [destinationNav, transformationNav, sourceWebhooksNav, sourcesNav]
     )
 
     const desktopParams = useMemo(() => {
@@ -2724,7 +2719,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
-        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {

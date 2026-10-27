@@ -47,7 +47,7 @@ Every trial _should_ include:
 
 1. **Kickoff call** - Use this time to align on the "must-haves": success criteria, timeline. An understanding of "how" they will evaluate is just as critical as what you can be doing throughout the trial to help check off the success criteria. Using this time to collaboratively build the success criteria ensures alignment and mutual understanding.
 2. **Shared Slack channel** - Set up before kickoff if possible, so that there's a more "live" way to communicate that comes with better and more accessible support. See [Shared Slack Channels with Customers](/handbook/growth/sales/slack-channels) for additional guidance.
-3. **Onboarding success plan** - Use the [30-day onboarding success plan template](/handbook/cs-and-onboarding/onboarding-success-plan) as a starting point, then iterate where appropriate. Adapt for trial length, and share with the customer as a Slack canvas in the shared Slack channel.
+3. **Onboarding success plan** - Use the [30-day onboarding success plan template](/handbook/customer-success/onboarding-success-plan) as a starting point, then iterate where appropriate. Adapt for trial length, and share with the customer as a Slack canvas in the shared Slack channel.
 
 ## AI products in a trial
 

@@ -1,8 +1,13 @@
 # Learn analytics and Twig handoff
 
-Learn tracking in the website PostHog project records `learn_section_selected` for hub sidebar
-sections, `learn_chapter_selected` for chapter links, and `learn_resource_selected` for the
-agent/story/Twig choices. The agent prompt copy button records `learn_prompt_copied`.
+Learn tracking in the website PostHog project records `learn_section_selected` for the sidebar
+Overview and hub page links, `learn_chapter_selected` for chapter links, and `learn_resource_selected` for the
+agent/story/Twig choices. The agent prompt copy buttons record `learn_prompt_copied`.
+These events come from shared components, so every Learn hub sends them with its own `volume`:
+`LearnNav` in `buildProductMenuTabs.tsx` (sidebar), `LearnLanding.tsx` (overview),
+`AgentPromptsPage.tsx` and `AgentTeachingActions.tsx` (agent page), and `LivePlaygroundPage.tsx`
+(Explore Twig). `handOffToTwig` in `learnTracking.ts` holds the Twig handoff, and its
+`learn_source` is the volume.
 `learn_chapter_engaged` fires once per chapter visit after ten seconds with the tab visible, the
 reader window active, and the reader reaching the chapter's end; it is an engagement signal,
 not proof of comprehension.

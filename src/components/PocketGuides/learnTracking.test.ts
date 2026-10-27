@@ -5,7 +5,7 @@ import { createRequire } from 'node:module'
 import { runInNewContext } from 'node:vm'
 import { fileURLToPath } from 'node:url'
 
-import { isReaderWindowActive, twigLearnUrl } from './learnTracking.ts'
+import { handOffToTwig, isReaderWindowActive, twigLearnUrl } from './learnTracking.ts'
 
 const requireDependency = createRequire(import.meta.url)
 const React = requireDependency('react')
@@ -49,7 +49,7 @@ function component(file: string, window: Window, dependencies: Record<string, un
         IntersectionObserver: window.IntersectionObserver,
         require: (name: string) => {
             if (name === 'react') return React
-            if (name === './learnTracking') return { twigLearnUrl, isReaderWindowActive }
+            if (name === './learnTracking') return { twigLearnUrl, isReaderWindowActive, handOffToTwig }
             assert.ok(name in dependencies, `Unexpected dependency: ${name}`)
             return dependencies[name]
         },
@@ -192,22 +192,32 @@ test('Twig clicks use current consent and SDK, and create profiles only for a ha
     window.posthog = { capture: () => snippetCalls.push('capture') }
     const Button = ({ children, to, onClick }: { children: React.ReactNode; to?: string; onClick: () => void }) =>
         React.createElement(to ? 'a' : 'button', { href: to, onClick }, children)
-    const Landing = component('./ProductAnalyticsLearnLanding.tsx', window, {
-        '@posthog/brand/hoggies': { HedgehogCursor: () => null, HedgehogEinstein: () => null },
-        '@posthog/brand/logo': { Logo: () => null },
-        '@posthog/twig-components/lab.css': {},
+    // Every Learn overview shares LearnLanding, which owns the Explore Twig handoff.
+    const Landing = component('./LearnLanding.tsx', window, {
+        '@posthog/brand/hoggies': { HedgehogEinstein: () => null, HedgehogRobot: () => null },
         '@posthog/icons': { IconBook: () => null, IconPlay: () => null, IconTerminal: () => null },
-        'components/CodeBlock': { SingleCodeBlock: () => null },
         'components/OSButton': Button,
-        'components/OSIcons': { IconClaudeCode: () => null, LogomarkCodex: () => null },
         'components/Products/ReaderViewProduct': { PRODUCT_SURFACE_H1: '' },
         '../../constants': { TWIG_URL: twigUrl },
         '../../constants/pocketGuides': { volumeById: () => undefined },
         '../../hooks/usePocketGuideCounts': () => ({}),
         '../../hooks/usePostHog': () => window.posthog,
         './Cover': () => null,
+        './bookOpening': { openPocketGuide: () => undefined },
+        './bookModel': { learnChapterPath: (base: string) => base, useBookPages: () => [] },
     })
-    act(() => root.render(React.createElement(Landing, { productName: 'Product Analytics', storyUrl: '/story' })))
+    act(() =>
+        root.render(
+            React.createElement(Landing, {
+                productName: 'Product Analytics',
+                description: '',
+                storyUrl: '/story',
+                learnUrl: '/learn/product-analytics',
+                volumeId: 'product-analytics',
+                playground: { figure: null },
+            })
+        )
+    )
     const link = [...window.document.querySelectorAll('a')].find((element) => element.textContent === 'Explore Twig')
     assert.ok(link)
     assert.equal(link.href, twigUrl + '/')
@@ -272,13 +282,25 @@ for (const initiallyAvailable of [false, true]) {
                 useStaticQuery: () => ({ pages: { nodes: [{ body: 'chapter', fields: { slug: '/chapter' } }] } }),
             },
             'gatsby-plugin-mdx': { MDXRenderer: passthrough },
+            'lucide-react': { BookOpen: () => null },
+            'components/Link': passthrough,
+            'components/OSButton': passthrough,
+            '../../hooks/usePocketGuideCounts': () => ({}),
+            './Cover': () => null,
+            './bookOpening': { openPocketGuide: () => undefined },
+            './bookContext': { useEntry: () => ({}) },
             '../../context/App': { useAppWindows: () => ({ windows }) },
+            '../../constants/pocketGuides': {
+                pocketGuideDestination: (url: string) => url,
+                volumeById: () => undefined,
+            },
             '../../context/Window': { useWindow: () => ({ appWindow: { key: 'reader' } }) },
             'hooks/usePostHog': () => window.posthog,
             './bookComponents': { EntryProvider: passthrough, bookMdxComponents: {} },
             './bookModel': {
                 useBookPages: () => [{ url: '/chapter', isFrontMatter: false }],
                 learnChapterSlug: () => '101',
+                learnChapterPath: (base: string) => base,
                 normalizeUrl: (url: string) => url,
             },
         })

@@ -15,6 +15,7 @@ import {
     generateProductPagesMarkdown,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
+import { pocketGuideDestination } from '../src/constants/pocketGuides'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import { syncStandardSiteDocuments } from './standardSite'
 
@@ -134,9 +135,14 @@ const generateMarkdownArtifacts = async (graphql: any) => {
         }
     `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
 
-    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
-    // Only include docs pages in llms.txt (not handbook)
-    const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
+    const filteredPages = await generateRawMarkdownPages(
+        docsQuery.data.allMdx.nodes.map((node) => ({
+            ...node,
+            fields: { ...node.fields, slug: pocketGuideDestination(node.fields.slug) },
+        }))
+    )
+    // Include product documentation and learning pages, excluding the handbook.
+    const docsPages = filteredPages.filter((page) => /^\/(docs|learn)\//.test(page.fields.slug))
     generateLlmsTxt(docsPages)
 
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents

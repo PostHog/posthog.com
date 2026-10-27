@@ -73,7 +73,7 @@ export default function CDP(): JSX.Element {
                     </li>
                 </ul>
                 <p>
-                    <Link to="/docs/cdp/transformations" state={{ newWindow: true }}>
+                    <Link to="/docs/data-pipelines/transformations" state={{ newWindow: true }}>
                         Learn about realtime transformations &rarr;
                     </Link>
                 </p>
@@ -102,7 +102,7 @@ export default function CDP(): JSX.Element {
                     <li>Feeding machine learning models with fresh data</li>
                 </ul>
                 <p>
-                    <Link to="/docs/cdp/destinations" state={{ newWindow: true }}>
+                    <Link to="/docs/data-pipelines/destinations" state={{ newWindow: true }}>
                         Explore event destinations →
                     </Link>
                 </p>
