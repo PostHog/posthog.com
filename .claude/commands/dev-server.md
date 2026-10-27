@@ -41,7 +41,7 @@ Start the Gatsby development server at http://localhost:8001
 
 ## Notes
 
-- First run takes 5-10 minutes for Gatsby to build. A restart takes 1-2 minutes
+- First run takes about 5 minutes for Gatsby to build. A restart takes 1-2 minutes
 - If `pnpm start` says something is already running on the port, do not start a second server. Use the one that runs, or ask the user to stop it
 - Don't use `pnpm build` locally - it runs out of memory on this large site
 - If build fails with "Module not found" errors, try merging master first
