@@ -16,6 +16,7 @@ Spans nest into a tree. The incoming request is the root span, and everything it
 - A **start time** and **duration** - when it happened, and how long it took
 - A **status** - whether it succeeded or failed
 - **Attributes** - any context you attach, like a user ID or a query parameter
+- **Events** - timestamped annotations during the span, often used for exceptions or important checkpoints
 
 Because every span in a request shares the same `trace_id`, you can reconstruct the request as a waterfall and see exactly where the time went and where things broke.
 
