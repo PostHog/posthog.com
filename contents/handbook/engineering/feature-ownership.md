@@ -35,7 +35,7 @@ This process does four things:
 
 The bigger the change, the more it shapes the owning team's direction, and they maintain it after it merges, so they get a say before the code exists.
 
-Not sure which row fits your change? If all else fails, ask the owning team.
+Not sure which row fits your change? If all else fails, ask the owning team. Not sure who owns it? See [Fuzzy ownership](/handbook/company/fuzzy-ownership).
 
 ### If you open the PR, you own it
 
