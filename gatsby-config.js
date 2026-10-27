@@ -132,7 +132,8 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+                // Eval files sit beside their pages but are read only by evals/, never by the site.
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`, `**/*.eval.yaml`],
             },
         },
         {

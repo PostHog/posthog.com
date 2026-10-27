@@ -53,7 +53,9 @@ const shortHash = (text: string) => createHash('sha256').update(text).digest('he
 
 // Gauge needs a unique case key of at most 64 characters.
 export function checkKey(file: EvalFile, check: EvalCheck): string {
-    const owner = file.page ? slug(file.page) : `journey-${file.path.replace(/^.*\//, '').replace(/\.eval\.yaml$/, '')}`
+    const owner = file.page
+        ? slug(file.page)
+        : `e2e-${slug(file.path.replace(/^evals\/e2e-evals\//, '').replace(/\.eval\.yaml$/, ''))}`
     const key = `${owner}-${check.id}`
     return key.length <= 64 ? key : `${key.slice(0, 51).replace(/-$/, '')}-${shortHash(key)}`
 }

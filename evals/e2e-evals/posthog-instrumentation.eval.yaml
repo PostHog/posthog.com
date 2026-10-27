@@ -1,0 +1,93 @@
+# An end-to-end eval across several pages: no single page owns it, so it lives here and
+# names its own owner. Every check reads the pages listed below.
+owner: product-analytics
+tags: [instrumentation, e2e, javascript, nextjs]
+status: active
+pages:
+    - docs/libraries/next-js
+    - docs/product-analytics/identify
+    - docs/product-analytics/best-practices
+
+checks:
+    - id: instrument-app
+      description: >-
+          Tests whether the Next.js, identify and best practices pages together get an
+          agent from nothing to a well-instrumented app: PostHog set up the way the
+          Next.js page says, users identified on sign-in and on reload and reset on
+          sign-out, a business event captured on the backend with a well-formed name
+          and the same distinct ID as the frontend, and advice on filtering out
+          internal traffic. The prompt describes outcomes and never names identify,
+          reset, posthog-node, distinct IDs or the internal user filter.
+      codebase_to_test: acme-dispatch-nextjs
+      suite: deep
+      prompt: &instrument-app-prompt |
+          Set up product analytics with PostHog in the field-service app in
+          {folder}/, following good practice. We want to know who does what:
+          activity should belong to the signed-in staff member, including after a
+          page reload, and someone who signs in after a colleague on the same
+          computer must not be counted as that colleague. We also want an exact
+          count of jobs created, even for staff whose browsers block trackers.
+          Our developers run the app on localhost while they work; tell us how to
+          keep that traffic out of our numbers.
+          Only change files inside {folder}/. Read the project token and host from
+          environment variables rather than writing them into the code. Make sure
+          the app still builds when you're done.
+      append_docs_link: true
+      criteria: &instrument-app-criteria
+          shared: [config-from-env, stays-in-folder, builds]
+          rubrics:
+              client-setup: >-
+                  {folder}/package.json lists `posthog-js`, and posthog-js is
+                  initialized in {folder}/src/instrumentation-client.ts (or .js) with
+                  the project token and host from NEXT_PUBLIC_ environment variables
+                  and a `defaults` option set to a date string. Cite the file and
+                  line(s).
+              identify-signed-in-user: >-
+                  The code calls `posthog.identify` with the signed-in user's
+                  database id (as a string) after a successful sign-in in
+                  {folder}/src/app/login/page.tsx, and again when a signed-in page
+                  loads, so a reload stays identified. Cite the line(s).
+              reset-on-sign-out: >-
+                  {folder}/src/components/SignOutButton.tsx (or the code it calls)
+                  calls `posthog.reset()` when the user signs out.
+              job-created-on-backend: >-
+                  {folder}/package.json lists `posthog-node`, and
+                  `createJobAction` in {folder}/src/app/(app)/jobs/actions.ts
+                  captures an event on the server after the job is created. Fails if
+                  job creation is only captured in the browser.
+              event-name-convention: >-
+                  The job event's name is lowercase snake_case with a present-tense
+                  verb, such as `job_create`. Names like `Job Created`,
+                  `job-created` or `jobCreated` fail.
+              same-distinct-id: >-
+                  The backend event uses the same distinct ID as the frontend
+                  identify call: the signed-in user's database id in the same
+                  string format. A catch-all ID such as "server" or "system" fails.
+              internal-traffic-advice: >-
+                  The final message says to add a filter under "Filter out internal
+                  and test users" in the project settings, using the event property
+                  Host with a negative operator such as "doesn't contain" and a
+                  value like `localhost`, and to turn the filter on in insights.
+
+    - id: instrument-app-no-docs
+      description: Same task as instrument-app, with no docs and nothing attached. Compare the two to see what the pages add.
+      codebase_to_test: acme-dispatch-nextjs
+      suite: deep
+      prompt: *instrument-app-prompt
+      criteria: *instrument-app-criteria
+
+    - id: instrument-app-content
+      description: Same task as instrument-app, with the three pages pasted into the prompt instead of linked.
+      codebase_to_test: acme-dispatch-nextjs
+      suite: deep
+      prompt: *instrument-app-prompt
+      append_docs_content: true
+      criteria: *instrument-app-criteria
+
+    - id: instrument-app-mcp
+      description: Same task as instrument-app, with no docs in the prompt and the PostHog MCP attached.
+      codebase_to_test: acme-dispatch-nextjs
+      suite: deep
+      prompt: *instrument-app-prompt
+      attach_mcp: posthog
+      criteria: *instrument-app-criteria

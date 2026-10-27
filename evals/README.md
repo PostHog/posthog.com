@@ -20,7 +20,10 @@ evals/
     criteria.yaml                  # shared rubrics, listed by name in criteria.shared
     codebases-to-test.yaml         # repos the agent works in, by name
     run-config.yml                 # agents, models, samples and MCP servers for every run
-  journeys/                        # checks that span pages and no single page owns
+  e2e-evals/                       # end-to-end checks across several pages that no single page owns
+    pick-an-sdk.eval.yaml          # key prefix e2e-pick-an-sdk-
+    product-analytics/             # optional subfolders, by product
+      e2e.eval.yaml                # key prefix e2e-product-analytics-e2e-
   run.ts                           # the CLI: calls the three steps below in order
   load-eval-files.ts               # 1. find, read and validate eval files
   build-eval-prompts.ts            # 2. build one prompt per check
@@ -31,7 +34,9 @@ evals/
     gauge.json                     # Gauge project settings
 ```
 
-A folder page (`foo/index.mdx`) has `foo/index.eval.yaml`. Gatsby builds no pages from YAML, so eval files never change the site.
+A folder page (`foo/index.mdx`) has `foo/index.eval.yaml`. `gatsby-config.js` ignores `**/*.eval.yaml`, so Gatsby never sources, watches or builds them, however many there are.
+
+**Every eval file under `contents/` maps to exactly one page.** A file with no page beside it fails `validate`. That rule is what lets `--page` and `--changed` find every check for a page. A product-level eval that reads the overview page and a few others can go beside the section's `index.mdx`, for example `contents/docs/product-analytics/index.eval.yaml`. Anything that belongs to no single page goes in `evals/e2e-evals/`.
 
 The page URL and its `.md` URL are never written down. The runner derives them from the file path, the same way Gatsby derives the slug.
 
@@ -75,14 +80,14 @@ checks:
 
 | Field                        | Required                  | Default                    | Meaning                                                                                                                         |
 | ---------------------------- | ------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `owner`                      | journeys only             |                            | Team slug from `contents/teams/`.                                                                                               |
+| `owner`                      | in `e2e-evals/`           |                            | Team slug from `contents/teams/`.                                                                                               |
 | `tags`                       | no                        | `[]`                       | Filter with `--tag`.                                                                                                            |
 | `status`                     | no                        | `active`                   | `draft` and `skipped` files are validated but never run.                                                                        |
-| `pages`                      | journeys only             |                            | The pages a journey file tests. At least one.                                                                                   |
+| `pages`                      | in `e2e-evals/`           |                            | The pages every check in the file reads. At least one, up to 8.                                                                 |
 | `checks[].id`                | yes                       |                            | Kebab-case, unique in the file.                                                                                                 |
 | `checks[].description`       | when there's a codebase   |                            | What the check tests and what the prompt leaves out on purpose. Read it before you edit the prompt. Never sent to the agent.    |
 | `checks[].codebase_to_test`  | when the prompt edits code | none: an answer-only check | The repo the agent works in: a key in `shared/codebases-to-test.yaml`.                                                                                                       |
-| `checks[].pages`             | no                        | `[]`                       | Other pages the check depends on, as `docs/...` paths with no extension. Up to 4. An edit to any of them reruns the check.     |
+| `checks[].pages`             | no                        | `[]`                       | Other pages the check depends on, as `docs/...` paths with no extension. Up to 4 pages in total beside a page, 8 in `e2e-evals/`. An edit to any of them selects the check. |
 | `checks[].prompt`            | yes                       |                            | What the user asks. Say nothing about docs: the `append_` keys add them.                                                        |
 | `checks[].suite`             | no                        | `smoke`                    | `smoke` or `deep`. Filter with `--suite`, so a quick run can skip the expensive checks.                                         |
 | `checks[].append_docs_link`    | no                      | off                        | `true` adds each page's `.md` URL to the end of the prompt. See [What the agent gets](#what-the-agent-gets).                    |
@@ -116,7 +121,7 @@ Checks that test the same task in different setups share the prompt and criteria
 - **Say what fails.** "Fails if it only identifies at login" stops the judge from passing a half-done job.
 - **Keep rubrics checkable.** The judge sees the agent's trace, its final message and the diff. "Cite the file and line" helps it.
 - **Answer-only checks** (no `codebase_to_test`) are graded on the final message. Add `answers-directly` to `criteria.shared`.
-- **Multi-page checks** list the other pages in `pages:`. If the prompt needs PostHog installed first, include the install page.
+- **Multi-page checks** list the other pages in `pages:`. If the prompt needs PostHog installed first, include the install page. When no single page owns the task, or it needs more than 4 pages, put it in `evals/e2e-evals/` instead, in a product subfolder if you like. That file names an `owner` and a file-level `pages:` list that every check in it reads.
 
 ## What the agent gets
 
@@ -180,12 +185,12 @@ With no filters, a command acts on every active check. Filters narrow that down:
 | Filter | Selects |
 | --- | --- |
 | `--page <docs path>` | Every check that reads the page: the page's own eval file, plus any other check that lists the page in `pages:`. Write the path without `docs/`, for example `product-analytics/installation/go`. |
-| `--tag <tag>` | Eval files with that tag, for example `install`, `journey` or `python`. |
+| `--tag <tag>` | Eval files with that tag, for example `install`, `e2e` or `python`. |
 | `--suite <suite>` | `smoke` or `deep`. |
 | `--harness <id>` | One agent from `shared/run-config.yml`, including an unverified one. |
 | `--changed [base]` | Checks whose page or eval file changed against `base` (default `origin/master`), including uncommitted work. |
 
-Repeating a filter widens the selection: `--page a --page b` means page a **or** page b. Different filters narrow it: `--page a --tag journey` means page a **and** tag journey.
+Repeating a filter widens the selection: `--page a --page b` means page a **or** page b. Different filters narrow it: `--page a --tag e2e` means page a **and** tag e2e.
 
 Other options:
 

@@ -40,19 +40,20 @@ export type EvalCheck = {
 
 export type EvalFile = {
     path: string // repo-relative
-    page: string | null // docs path such as docs/product-analytics/identify; null for a journey
-    journey: boolean
+    page: string | null // docs path such as docs/product-analytics/identify; null in evals/e2e-evals/
+    e2e: boolean // in evals/e2e-evals/ (any subfolder): spans several pages, and no single page owns it
     owner: string | null
     tags: string[]
     status: Status
-    pages: string[] // journeys only: the pages the file tests
+    pages: string[] // evals/e2e-evals/ only: the pages every check in the file reads
     checks: EvalCheck[]
 }
 
 export type Problem = { path: string; message: string }
 
 const kebab = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
-export const maxPagesPerCheck = 4
+// A check beside a page reads a few pages; a bigger one belongs in evals/e2e-evals/.
+export const maxPagesPerCheck = { page: 4, e2e: 8 }
 const fileKeys = ['owner', 'tags', 'status', 'pages', 'checks']
 const checkKeys = [
     'id',
@@ -86,7 +87,7 @@ export function loadShared(): Shared {
 }
 
 export const evalFilePaths = () =>
-    globSync(['contents/**/*.eval.yaml', 'evals/journeys/*.eval.yaml'], { cwd: repoRoot, posix: true }).sort()
+    globSync(['contents/**/*.eval.yaml', 'evals/e2e-evals/**/*.eval.yaml'], { cwd: repoRoot, posix: true }).sort()
 
 // contents/docs/a/b.eval.yaml → docs/a/b, and contents/docs/a/index.eval.yaml → docs/a,
 // the same slug Gatsby gives b.mdx and a/index.mdx.
@@ -120,7 +121,7 @@ export function parseEvalFile(
 ): { file: EvalFile | null; problems: Problem[] } {
     const problems: Problem[] = []
     const problem = (message: string) => problems.push({ path, message })
-    const journey = path.startsWith('evals/journeys/')
+    const e2e = path.startsWith('evals/e2e-evals/')
     const page = pageForEvalFile(path)
 
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
@@ -129,22 +130,22 @@ export function parseEvalFile(
     }
     const spec = raw as Record<string, unknown>
     for (const key of Object.keys(spec)) if (!fileKeys.includes(key)) problem(`unknown key "${key}"`)
-    if (!journey && !page) problem('eval files live beside a page under contents/, or in evals/journeys/')
+    if (!e2e && !page) problem('eval files live beside a page under contents/, or in evals/e2e-evals/')
     if (page && !pageExists(page)) problem(`no page for this eval file: expected contents/${page}.mdx or .md`)
 
     const status = (spec.status ?? 'active') as Status
     if (!statuses.includes(status)) problem(`status must be one of ${statuses.join(', ')}`)
     const owner = spec.owner ?? null
     if (owner !== null && typeof owner !== 'string') problem('owner must be a team slug')
-    if (journey && !owner) problem('journeys need an owner')
+    if (e2e && !owner) problem('files in evals/e2e-evals/ need an owner')
     const tags = spec.tags ?? []
     if (!isStringList(tags)) problem('tags must be a list of strings')
 
     const filePages = spec.pages ?? []
     if (!isStringList(filePages)) problem('pages must be a list of docs paths')
-    else if (!journey && filePages.length > 0)
-        problem('file-level pages is for journeys; list pages on the check instead')
-    else if (journey && filePages.length === 0) problem('journeys need at least one page in pages')
+    else if (!e2e && filePages.length > 0)
+        problem('file-level pages is for evals/e2e-evals/; list pages on the check instead')
+    else if (e2e && filePages.length === 0) problem('files in evals/e2e-evals/ need at least one page in pages')
     const validatePages = (list: string[], where: string) => {
         for (const listed of list) {
             if (!/^docs\/[a-z0-9/_-]+$/.test(listed))
@@ -207,9 +208,12 @@ export function parseEvalFile(
                 ...(isStringList(filePages) ? filePages : []),
                 ...listedPages,
             ])
-            if (total.size > maxPagesPerCheck)
+            const limit = e2e ? maxPagesPerCheck.e2e : maxPagesPerCheck.page
+            if (total.size > limit)
                 problem(
-                    `${where}: ${total.size} pages; the limit is ${maxPagesPerCheck}, move bigger checks to evals/journeys/`
+                    `${where}: ${total.size} pages; the limit is ${limit}${
+                        e2e ? '' : ', move bigger checks to evals/e2e-evals/'
+                    }`
                 )
         }
 
@@ -304,7 +308,7 @@ export function parseEvalFile(
     const file: EvalFile = {
         path,
         page,
-        journey,
+        e2e,
         owner: typeof owner === 'string' ? owner : null,
         tags: isStringList(tags) ? tags : [],
         status,

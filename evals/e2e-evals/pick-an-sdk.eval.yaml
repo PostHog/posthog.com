@@ -1,6 +1,7 @@
-# A journey: no single page owns it, so it lives here and names its own owner.
+# An end-to-end eval across several pages: no single page owns it, so it lives here and
+# names its own owner. Every check reads the pages listed below.
 owner: wizard-and-docs
-tags: [install, journey]
+tags: [install, e2e]
 status: active
 pages:
     - docs/product-analytics/installation/react-router

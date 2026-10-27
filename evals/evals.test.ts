@@ -46,7 +46,7 @@ describe('eval file paths', () => {
             pageForEvalFile('contents/docs/product-analytics/installation/index.eval.yaml'),
             'docs/product-analytics/installation'
         )
-        assert.equal(pageForEvalFile('evals/journeys/pick-an-sdk.eval.yaml'), null)
+        assert.equal(pageForEvalFile('evals/e2e-evals/pick-an-sdk.eval.yaml'), null)
     })
 
     test('changed source files map to pages, snippets do not', () => {
@@ -117,10 +117,27 @@ describe('eval file validation', () => {
         assert.ok(found.some((m) => m.includes('the limit is 4')))
     })
 
-    test('journeys need an owner and pages', () => {
-        const found = messages('evals/journeys/j.eval.yaml', answerOnly)
-        assert.ok(found.includes('journeys need an owner'))
-        assert.ok(found.includes('journeys need at least one page in pages'))
+    test('an e2e file in a subfolder gets the subfolder in its check key', () => {
+        const file = fileFor('evals/e2e-evals/product-analytics/e2e.eval.yaml', {
+            ...answerOnly,
+            owner: 'product-analytics',
+            pages: ['docs/product-analytics/identify'],
+        })
+        assert.equal(checkKey(file, file.checks[0]), 'e2e-product-analytics-e2e-ask')
+    })
+
+    test('files in e2e-evals need an owner and pages, and may read up to 8 pages', () => {
+        const found = messages('evals/e2e-evals/j.eval.yaml', answerOnly)
+        assert.ok(found.includes('files in evals/e2e-evals/ need an owner'))
+        assert.ok(found.includes('files in evals/e2e-evals/ need at least one page in pages'))
+        const eight = ['docs/a', 'docs/b', 'docs/c', 'docs/d', 'docs/e', 'docs/f', 'docs/g', 'docs/h']
+        assert.deepEqual(messages('evals/e2e-evals/j.eval.yaml', { ...answerOnly, owner: 'docs', pages: eight }), [])
+        const nine = messages('evals/e2e-evals/j.eval.yaml', {
+            owner: 'docs',
+            pages: eight,
+            checks: [{ ...answerOnly.checks[0], pages: ['docs/i'] }],
+        })
+        assert.ok(nine.some((m) => m.includes('9 pages; the limit is 8')))
     })
 
     test('a listed page that does not exist fails', () => {
