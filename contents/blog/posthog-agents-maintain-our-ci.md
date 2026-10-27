@@ -1,6 +1,6 @@
 ---
 date: "2026-10-27"
-title: "Our CI became a bottleneck. We used PostHog to help fix it"
+title: "How PostHog agents help maintain our own CI"
 author:
   - raul-negron-otero
 rootPage: /blog
