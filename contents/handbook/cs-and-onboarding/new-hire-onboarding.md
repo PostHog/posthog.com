@@ -29,7 +29,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 - Reading the [CS](/handbook/cs-and-onboarding/customer-success) and [sales](/handbook/growth/sales/) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
-- Booking 30 minutes with each CSM on the team to learn how they work. Spread them over the first three weeks.
+- Meet with a couple of CSMs on the team to learn how they approach the role.
 - Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide. For hands-on exercises, the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) gets you familiar with the PostHog product, and the [HogLabs](https://github.com/PostHog/hoglabs-gtm) with implementing it. 
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
@@ -95,8 +95,6 @@ This is the bar for end of month 1.
 
 **You're working with signals.** You know what the signals are and have a sense of how to prioritise and work through them.
 
-**You've started building your own way of working.** You've met each CSM, picked a few approaches to try, and have your own view on how you run your book.
-
 **You're sharing with the team.** You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
 
 ## Month 2 and beyond
@@ -112,12 +110,6 @@ This is the bar for end of month 1.
 - On track to consistently hit your retention targets
 - You've suggested and made changes to our systems that enable you to do your job better
 - Think about customer health scores and add/change anything you learn here
-
-## Meet each CSM
-
-Every CSM on the team works a bit differently, and there's no single right way to run a book. Management here is [light-touch](/handbook/company/management), so you're expected to build a way of working that suits you. The fastest way is to see how several people already do it.
-
-In your first three weeks, book 30 minutes with each CSM on the team. This isn't shadowing a customer call - it's a conversation about how they work. Aim for one or two a week, and do a couple before your first customer calls so you have options when you plan how to run your book. Ask your onboarding buddy or team lead to introduce you if you haven't met someone yet.
 
 **How to run it:**
 
