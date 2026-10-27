@@ -195,7 +195,7 @@ The best place to start looking is in the `web` container, which runs all the da
 
 To upgrade, you can run the `upgrade-hobby` script from the PostHog repo.
 
-Upgrade before you move an SDK to a [capture v1](/docs/libraries/capture-v1) version. Instances serve the capture v1 endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward, and v1 SDKs drop events that get a `404`.
+Upgrade before you move an SDK to a [capture v1](/docs/libraries/capture-v1) version. Instances serve the capture v1 endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward, and v1 SDKs drop events that still get a `404` after their retries.
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/posthog/posthog/HEAD/bin/upgrade-hobby)"
