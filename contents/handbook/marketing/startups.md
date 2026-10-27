@@ -12,6 +12,7 @@ We run two special programs for early-stage teams, plus external partnerships wi
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
+| Limit                       | Once per founder or org, whichever comes first | Once per founder or org, whichever comes first (annual renewals for the same org don't count) |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
 | Can use credit for AI tools? | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) | ❌ No, from September 14, 2026 (PostHog Desktop, PostHog Slack app, Replay Vision, PostHog AI, Inbox) |
 | Founder merch               | Welcome pack (max 1)                                  | Different welcome pack (max 4)                        |
@@ -33,7 +34,9 @@ Any company that is <2 years old and has raised less than $5M in funding is elig
 
 > ⭐ **Small open source projects** without corporate backing and less than $200k annual revenue can contact support to have the 12-month credit expiry waived.
 
-All applications are **automatically approved**, then **manually reviewed** for eligibility.
+All applications are **automatically approved**, then **manually reviewed** for eligibility. Credits are always issued at PostHog's discretion.
+
+> ❗Credits are issued only **once per founder and once per organization**, whichever comes first. A founder who already got credits for one startup can't claim them again for a new company or a new PostHog organization. This rule covers both programs: a founder who got YC credits can't then claim PostHog for Startups credits, and the reverse. Annual YC renewals for the same organization don't count as a new claim.
 
 Applications from free or disposable email domains (gmail.com, outlook.com, and similar) are rejected automatically at submission. This applies to both programs. Founders who don't have a company domain yet can still use the monthly free allowance on every product and apply once they have one.
 
@@ -51,7 +54,7 @@ This program is similar to our startup program but has some key differences for 
 
 You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it.
 
-> This deal is not available to YC alumni, who started another company – if they're eligible, they can apply for PostHog for Startups instead
+> This deal is not available to YC alumni, who started another company – if the new company is eligible and the founder hasn't received startup or YC credits before, they can apply for PostHog for Startups instead
 
 > This deal is also not available if the YC company has been acquired by a non-YC parent. If an acquisition happens mid-term, existing credits can be honored until expiry but will not auto-renew. The acquiring company can apply for PostHog for Startups if eligible.
 
@@ -110,6 +113,8 @@ Subscribers to [Every](https://every.to/) get:
 Applications are automatically enriched with Clearbit and Clay, then approved. We then manually review all emails to ensure eligibility. If there's a mismatch (e.g. on founding date or funding raised), we’ll email the founder.
 If we don’t hear back in a week or confirm ineligibility, we remove the credits.
 
+We also check that the founder and the organization have not received startup or YC credits before. If either has, we reject the application or remove the credits. People sometimes claim to be part of several startups to get credits again. Because credits are always issued at our discretion, we don't need to prove this before we decline. Don't tell applicants how we detect duplicate claims.
+
 ## Merch
 
 All merch is fulfilled through the [PostHog store](/merch) by Micromerch.
@@ -136,6 +141,8 @@ Credits can be used for most PostHog products and add-ons, including [platform p
 Buying a platform package with credits – including the enterprise add-on – does not come with a dedicated account manager, CSM, or sales contact, in the same way it does not come with high priority support. Those are for paying customers. Founders who want one-to-one help can buy a [30-minute onboarding call](/merch?product=30-min-onboarding-consultation) from the merch store.
 
 Credits are valid are not transferable, and don’t carry over or convert to cash. They are valid for 12 months and that timer begins at application. Once expired or fully used, teams are moved to standard billing.
+
+Credits are issued once per founder and once per organization, whichever comes first. A team can't get a new set of credits by creating a new organization or using a different founder's account.
 
 ## Partners
 
