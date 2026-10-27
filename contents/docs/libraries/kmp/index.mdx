@@ -559,6 +559,18 @@ sessionRecording = SessionRecordingConfig(
 
 > **Warning:** Screenshots may contain sensitive information. Make sure masking is configured appropriately before enabling screenshot mode.
 
+On Android, enable experimental mask-alignment verification to help preserve screenshot captures during pixel-only redraws, such as continuously animated content:
+
+```kotlin
+sessionRecording = SessionRecordingConfig(
+    enabled = true,
+    screenshot = true,
+    verifyScreenshotMaskAlignment = true,
+)
+```
+
+`verifyScreenshotMaskAlignment` defaults to `false` and only affects Android screenshot mode. It adds view-hierarchy walks during capture, so evaluate its performance in your app. Windows with a Compose root already use verification regardless of this flag; setting it to `false` doesn't disable verification for those windows. Other platforms ignore this option.
+
 ## Opt out of data capture
 
 You can opt users out of data capture in two ways.
@@ -696,6 +708,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | `screenshot` | `Boolean` | `false` | Uses screenshots instead of wireframes (experimental, Android and iOS). |
 | `captureLogcat` | `Boolean` | `true` | Captures Android logcat output (Android only). |
 | `debouncerDelayMs` | `Long` | `1000` | Touch event debounce delay in milliseconds (Android only). |
+| `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshot mode. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
 
 ## Platform support
 
