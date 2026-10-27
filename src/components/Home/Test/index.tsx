@@ -7,7 +7,8 @@ import PricingSection from 'components/Home/Sections/PricingSection'
 import WhyPostHogSection from 'components/Home/Sections/WhyPostHogSection'
 import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSection'
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
-import { FeatureFlagged } from 'components/FeatureFlagged'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from 'hooks/usePostHog'
 import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
@@ -37,6 +38,7 @@ const StepsSection =
         : () => null
 
 const DATA_STORY_FLAG = 'homepage-data-story'
+const DATA_STORY_VARIANT = 'test'
 
 const SecondaryActions = ({
     justify = 'center',
@@ -168,6 +170,7 @@ function Hero(): JSX.Element {
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
+    const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
@@ -180,21 +183,22 @@ export default function HomeTest() {
             <div className="space-y-12">
                 <Hero />
                 <Customers />
-                <FeatureFlagged
-                    flag={DATA_STORY_FLAG}
-                    fallback={
-                        <>
-                            <DataStackSection />
-                            <PricingSection />
-                            <WhyPostHogSection />
-                            <BedtimeReadingSection />
-                        </>
+                <RenderInClient
+                    render={() =>
+                        posthog?.getFeatureFlag?.(DATA_STORY_FLAG) === DATA_STORY_VARIANT ? (
+                            <Suspense fallback={null}>
+                                <StepsSection />
+                            </Suspense>
+                        ) : (
+                            <>
+                                <DataStackSection />
+                                <PricingSection />
+                                <WhyPostHogSection />
+                                <BedtimeReadingSection />
+                            </>
+                        )
                     }
-                >
-                    <Suspense fallback={null}>
-                        <StepsSection />
-                    </Suspense>
-                </FeatureFlagged>
+                />
                 <ShamelessCTASection />
                 <HitCounter />
             </div>
