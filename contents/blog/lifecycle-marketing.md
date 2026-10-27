@@ -1,6 +1,6 @@
 ---
 date: 2026-10-26
-title: I don't know anything about lifecycle marketing
+title: Lifecycle marketers roasted our lifecycle marketing
 rootPage: /blog
 sidebar: Blog
 showTitle: true
