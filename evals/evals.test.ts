@@ -10,7 +10,7 @@ import { describe, test } from 'node:test'
 import { toGaugeSpecs } from './gauge/send-to-gauge.ts'
 import { definitionFor, isCurrent, savedEvalName, type SavedEval } from './gauge/saved-evals.ts'
 import { appendDocs, buildPrompts, checkKey, type CheckPrompt } from './build-eval-prompts.ts'
-import { cantRunReason, changedSelection, parseArgs, select, sessionsFor, setupOf } from './run.ts'
+import { cantRunReason, changedSelection, duplicateKeys, parseArgs, select, sessionsFor, setupOf } from './run.ts'
 import {
     loadEvalFiles,
     loadShared,
@@ -59,6 +59,26 @@ describe('eval file paths', () => {
             'docs/product-analytics/installation'
         )
         assert.equal(pageForSourceFile('contents/docs/product-analytics/_snippets/thing.mdx'), null)
+    })
+
+    test('a changed snippet selects the pages that import it', () => {
+        const { files } = loadEvalFiles(shared)
+        const keys = changedSelection(files, [
+            'contents/docs/product-analytics/installation/_snippets/pa-installation-wrapper.tsx',
+        ])
+        assert.ok(keys.has('contents/docs/product-analytics/installation/go.eval.yaml#install'))
+        assert.equal(changedSelection(files, ['contents/docs/product-analytics/_snippets/nothing.mdx']).size, 0)
+    })
+
+    test('two checks that make the same key are reported', () => {
+        const react = fileFor('contents/docs/product-analytics/installation/react.eval.yaml', {
+            checks: [{ ...answerOnly.checks[0], id: 'native-install' }],
+        })
+        const native = fileFor('contents/docs/product-analytics/installation/react-native.eval.yaml', {
+            checks: [{ ...answerOnly.checks[0], id: 'install' }],
+        })
+        assert.equal(duplicateKeys([react, native]).length, 1)
+        assert.deepEqual(duplicateKeys(loadEvalFiles(shared).files), [])
     })
 })
 

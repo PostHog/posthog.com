@@ -31,8 +31,8 @@ checks:
                   Cite the file and line.
               reset-button-excluded: >-
                   The "Reset All Data" button in src/pages/settings.js is excluded
-                  from autocapture, either with the `ph-no-autocapture` class or a
-                  `data-ph-no-autocapture` attribute on the button, or with an
+                  from autocapture: with the `ph-no-capture` or `ph-no-autocapture`
+                  class, a `data-ph-no-autocapture` attribute on the button, or an
                   `autocapture.css_selector_ignorelist` entry that matches it.
                   Setting `autocapture: false` globally does not pass.
               task-id-attribute: >-

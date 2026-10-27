@@ -206,7 +206,7 @@ With no filters, a command acts on every active check. Filters narrow that down:
 | `--tag <tag>` | Eval files with that tag, for example `install`, `e2e` or `python`. |
 | `--suite <suite>` | `smoke` or `deep`. |
 | `--harness <id>` | One agent from `shared/run-config.yml`, including an unverified one. |
-| `--changed [base]` | Checks whose page or eval file changed against `base` (default `origin/master`), including uncommitted work. |
+| `--changed [base]` | Checks whose page, eval file, or a snippet or component the page imports changed against `base` (default `origin/master`), including uncommitted work. |
 
 Repeating a filter widens the selection: `--page a --page b` means page a **or** page b. Different filters narrow it: `--page a --tag e2e` means page a **and** tag e2e.
 

@@ -19,13 +19,15 @@ import {
     savedEvalName,
     writeIds,
 } from './gauge/saved-evals.ts'
-import { buildPrompts, fetchPageText, type CheckPrompt, type Selection } from './build-eval-prompts.ts'
+import { buildPrompts, checkKey, fetchPageText, type CheckPrompt, type Selection } from './build-eval-prompts.ts'
 import {
     loadEvalFiles,
     loadShared,
     pageForEvalFile,
+    localImports,
     pageForSourceFile,
     pageIndex,
+    pageSourceFile,
     repoRoot,
     suites,
     type EvalFile,
@@ -102,12 +104,28 @@ function changedFiles(base: string): string[] {
     ]
 }
 
+export function duplicateKeys(files: EvalFile[]): string[] {
+    const owners = new Map<string, string[]>()
+    for (const file of files)
+        for (const check of file.checks) {
+            const key = checkKey(file, check)
+            owners.set(key, [...(owners.get(key) ?? []), `${file.path}#${check.id}`])
+        }
+    return [...owners].filter(([, where]) => where.length > 1).map(([key, where]) => `${key}: ${where.join(', ')}`)
+}
+
 export function changedSelection(files: EvalFile[], changed: string[]): Set<string> {
     const index = pageIndex(files)
     const keys = new Set<string>()
+    // A page also changes when a snippet or component it imports changes.
+    const changedPages = new Set(changed.map(pageForSourceFile).filter((page): page is string => page !== null))
+    for (const page of index.keys()) {
+        const source = pageSourceFile(page)
+        if (source && changed.some((path) => localImports(source).has(path))) changedPages.add(page)
+    }
+    for (const page of changedPages)
+        for (const { file, check } of index.get(page) ?? []) keys.add(`${file.path}#${check.id}`)
     for (const path of changed) {
-        const page = pageForSourceFile(path)
-        for (const { file, check } of page ? index.get(page) ?? [] : []) keys.add(`${file.path}#${check.id}`)
         if (path.endsWith('.eval.yaml'))
             for (const file of files.filter((f) => f.path === path))
                 for (const check of file.checks) keys.add(`${file.path}#${check.id}`)
@@ -203,6 +221,14 @@ async function main(argv: string[]): Promise<number> {
         )
         return 1
     }
+    // A check key names its saved eval, so two checks with one key would overwrite each
+    // other in Gauge: product-analytics/installation/react#native-install and
+    // .../react-native#install, for example.
+    const collisions = duplicateKeys(files)
+    if (collisions.length > 0) {
+        printProblems(`${collisions.length} check key(s) used by more than one check; rename one check id`, collisions)
+        return 1
+    }
     const checkCount = files.reduce((sum, f) => sum + f.checks.length, 0)
 
     if (options.command === 'validate') {
@@ -246,12 +272,26 @@ async function main(argv: string[]): Promise<number> {
         console.error('No harness selected; check shared/run-config.yml or pass --harness / --include-unverified')
         return 2
     }
-    const built = await buildPrompts(selections, harnesses, shared, options.baseUrl, pageText)
     // Checks that can't run are left out and reported, never fatal: the rest still run.
-    const cantRun = built.flatMap((c) => {
+    // Each prompt is built on its own, so a page that fails to fetch skips only the
+    // checks that paste it in.
+    const built: CheckPrompt[] = []
+    const cantRun: CantRun[] = []
+    for (const selection of selections) {
+        try {
+            built.push(...(await buildPrompts([selection], harnesses, shared, options.baseUrl, pageText)))
+        } catch (error) {
+            const message = error instanceof Error ? error.message : String(error)
+            cantRun.push({
+                key: checkKey(selection.file, selection.check),
+                reason: `couldn't build the prompt: ${message}`,
+            })
+        }
+    }
+    for (const c of built) {
         const reason = cantRunReason(c, shared)
-        return reason ? [{ key: c.key, reason }] : []
-    })
+        if (reason) cantRun.push({ key: c.key, reason })
+    }
     const checks = built.filter((c) => !cantRun.some((x) => x.key === c.key))
     if (cantRun.length > 0) printSkipped('Skipping', cantRun)
     console.log(
@@ -278,7 +318,7 @@ async function main(argv: string[]): Promise<number> {
         console.error('The gauge CLI is not on PATH: npm install -g @withgauge/cli, then gauge auth login')
         return 1
     }
-    if (options.command === 'sync') return sync(checks, built, shared, options)
+    if (options.command === 'sync') return sync(checks, files, shared, options)
     if (options.command === 'plan') {
         // Absolute, because the gauge CLI runs from evals/gauge/, not from here.
         const specDir = options.write ? resolve(options.write) : await mkdtemp(join(tmpdir(), 'posthog-evals-'))
@@ -300,9 +340,9 @@ const unfiltered = (options: Options) =>
 
 // Makes Gauge's saved evals match the eval files. An eval is edited only when something
 // in it changed, so Gauge starts a new revision only for a real change. `ready` are the
-// checks that can run; `all` also holds the skipped ones, so their saved evals, if any,
-// don't count as orphans.
-function sync(ready: CheckPrompt[], all: CheckPrompt[], shared: Shared, options: Options): number {
+// checks that can run; `files` holds every check, including skipped ones and ones in
+// draft or skipped files, so their saved evals, if any, don't count as orphans.
+function sync(ready: CheckPrompt[], files: EvalFile[], shared: Shared, options: Options): number {
     const slugs = harnessSlugs()
     const saved = listSavedEvals()
     const ids = readIds()
@@ -327,9 +367,9 @@ function sync(ready: CheckPrompt[], all: CheckPrompt[], shared: Shared, options:
 
     // Saved evals for checks that no longer exist. Only knowable when sync saw every check.
     if (unfiltered(options)) {
-        const keys = new Set(all.map((c) => c.key))
+        const keys = new Set(files.flatMap((file) => file.checks.map((check) => checkKey(file, check))))
         for (const key of Object.keys(ids)) if (!keys.has(key)) delete ids[key]
-        const names = new Set(all.map((c) => savedEvalName(c.key)))
+        const names = new Set([...keys].map(savedEvalName))
         const orphans = [...saved.values()].filter((e) => !names.has(e.name))
         for (const orphan of orphans) {
             if (options.prune) removeSavedEval(orphan.id)

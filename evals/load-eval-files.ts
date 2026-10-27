@@ -110,6 +110,28 @@ export function pageForSourceFile(path: string): string | null {
     return match && !path.includes('/_snippets/') ? match[1] : null
 }
 
+// Every repo file a page imports through a relative path, followed transitively, as
+// repo-relative paths. Imports from packages or from the posthog repo are left out:
+// --changed can't see those.
+const importCache = new Map<string, Set<string>>()
+export function localImports(sourceFile: string): Set<string> {
+    const cached = importCache.get(sourceFile)
+    if (cached) return cached
+    const found = new Set<string>()
+    importCache.set(sourceFile, found)
+    const text = readFileSync(join(repoRoot, sourceFile), 'utf8')
+    for (const [, spec] of text.matchAll(/\bfrom\s+['"](\.{1,2}\/[^'"]+)['"]/g)) {
+        const base = join(dirname(sourceFile), spec)
+        const target = ['', '.mdx', '.md', '.tsx', '.ts', '.jsx', '.js', '/index.tsx', '/index.ts', '/index.js']
+            .map((ending) => `${base}${ending}`)
+            .find((candidate) => existsSync(join(repoRoot, candidate)) && /\.(mdx?|[jt]sx?)$/.test(candidate))
+        if (!target || found.has(target)) continue
+        found.add(target)
+        for (const nested of localImports(target)) found.add(nested)
+    }
+    return found
+}
+
 const isStringList = (value: unknown): value is string[] =>
     Array.isArray(value) && value.every((item) => typeof item === 'string')
 

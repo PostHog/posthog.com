@@ -24,8 +24,11 @@ checks:
                   {folder}/package.json lists `@posthog/react` as a dependency.
               required-steps-done: >-
                   {folder}/src/main.tsx wraps the rendered app in PostHogProvider
-                  imported from @posthog/react, passing the project token as apiKey
-                  and an options object with api_host. The token and host come from
+                  imported from @posthog/react, set up in either supported way:
+                  posthog.init(token, options with api_host) from posthog-js and
+                  then <PostHogProvider client={posthog}>, or the project token as
+                  apiKey and an options object with api_host on the provider. The
+                  token and host come from
                   VITE_-prefixed variables read through import.meta.env (the expected
                   names are VITE_POSTHOG_PROJECT_TOKEN and VITE_POSTHOG_HOST, though
                   other VITE_ names pass). Cite the file and line(s).
