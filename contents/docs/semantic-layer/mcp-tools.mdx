@@ -34,8 +34,9 @@ Your agent makes both calls – you read the message and type "confirm". The spl
 | `data-catalog-metric-update` | Updates a metric's fields, including renaming it via `new_name` (which frees the old name and breaks references to it). Editing an approved metric's definition, name, description, or unit resets it to `proposed`. | – | `data_catalog:write` |
 | `data-catalog-metrics-refresh-from-insight-create` | Re-snapshots the linked insight's current query into the metric to clear drift. If the snapshot changes an approved metric's definition, the metric resets to `proposed`. Requires the metric to have a `source_insight_short_id`. | – | `data_catalog:write`, `insight:read` |
 | `data-catalog-metric-approve-prepare` / `-execute` | Blesses a metric as canonical. Blocked while the metric is drifted from its source insight – refresh or unlink it first. | Typed "confirm" | `data_catalog_approval:write`, `data_catalog:read` |
+| `data-catalog-metric-delete-prepare` / `-execute` | Deletes a metric and frees its name, so anything that referenced the old name stops resolving. Agents delete only a metric that shouldn't exist, and update one that's wrong, stale, or badly named instead. | Typed "confirm" | `data_catalog:write` |
 
-There's deliberately no "list metrics" tool: agents discover metrics with `execute-sql` over `system.information_schema.metrics` – see the [SQL reference](/docs/semantic-layer/query). There's also no delete tool: agents can propose and update metrics, but [deleting one](/docs/semantic-layer/metrics#renaming-and-deleting) is a human act, done from the Data Catalog UI or the API.
+There's deliberately no "list metrics" tool: agents discover metrics with `execute-sql` over `system.information_schema.metrics` – see the [SQL reference](/docs/semantic-layer/query).
 
 ## Certification tools
 

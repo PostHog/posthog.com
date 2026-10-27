@@ -70,7 +70,7 @@ Both are ways a name stops meaning what it used to, so both come with the same w
 
 **Renaming.** Rename a metric from its page in the Data Catalog UI, or by updating `name` through the API or the [`data-catalog-metric-update`](/docs/semantic-layer/mcp-tools#metric-tools) tool. The old name is freed for a new metric to claim, and renaming an approved metric resets it to `proposed` – agents pick metrics by name, so a definition under a different name is a different promise, and it needs approving again.
 
-**Deleting.** Delete a metric from the Data Catalog UI or the API. Deleting requires only editor access (the `data_catalog:write` scope) and works on approved metrics too – no approval scope, no typed confirmation beyond the dialog. There's no undo in the product, and there's deliberately no MCP delete tool: agents can propose and update metrics, but retiring one is a human act.
+**Deleting.** Delete a metric from the Data Catalog UI, the API, or the [`data-catalog-metric-delete-prepare` / `-execute`](/docs/semantic-layer/mcp-tools#metric-tools) tools. Deleting requires only editor access (the `data_catalog:write` scope), not the approval scope, and works on approved metrics too. The UI asks you to confirm in a dialog. Over MCP, the delete runs only after you type "confirm", so an agent can't retire a metric on its own. There's no undo in the product.
 
 Deleting frees the name immediately. Creating a metric with a deleted name starts completely fresh – no definition, history, or approval carries over from the old one.
 
