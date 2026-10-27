@@ -124,16 +124,17 @@ PostHog::MCP.instrument(
 | `event_properties` | – | `(request, extra) -> Hash`. Adds properties to every event. |
 | `logger` | no-op | `->(message) { ... }`. A stdio-safe sink. Never writes to stdout. |
 
-Callbacks receive `extra`, a Hash with `session_id`, `request_id`, `protocol_version`, `session`, and `headers`. On HTTP transports, `headers` holds only `user-agent`, `x-anthropic-client`, `mcp-session-id`, and `mcp-protocol-version`, with lowercase keys. On stdio, it's an empty Hash. `identify` can't read an `Authorization` header, so look the user up from the session your app authenticated:
+Callbacks receive `extra`, a Hash with `session_id`, `request_id`, `protocol_version`, `session`, and `headers`. On HTTP transports, `headers` holds every request header, with lowercase keys (`posthog-ruby` 3.29.0 and later). On stdio, it's an empty Hash. To identify the user from a bearer token, read the `authorization` header:
 
 ```ruby
 identify = lambda do |_request, extra|
-  user = lookup_user_for_session(extra["session_id"])
+  token = extra["headers"]["authorization"]
+  user = token && resolve_user_from_token(token)
   user && { distinct_id: user.id }
 end
 ```
 
-To identify from a bearer token, use a [custom dispatcher](#custom-dispatchers), which takes `distinct_id:` on each capture.
+The SDK never captures header values. Don't return a raw token, cookie, or API key in `properties:` or from `event_properties`, because the SDK doesn't redact those, and person properties persist on the person profile. Resolve the header to an ID first.
 
 The SDK removes the arguments it adds before your tool's `call` runs, so `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it. A tool whose `input_schema` uses `oneOf`, `allOf`, `anyOf`, or `$ref` gets no added arguments.
 
