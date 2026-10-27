@@ -142,7 +142,7 @@ On Flutter Web, a `$rageclick` event names the widget a user tapped, but only af
 
    If you want to limit autocapture to tappable widgets, use `css_selector_allowlist: ['[role="button"]']`. Don't use `element_allowlist: ['button']` – Flutter's semantics nodes are `flt-semantics` elements, not `<button>` elements, so that allowlist matches nothing. Rage clicks go through the same allowlist check as `$autocapture`, so an allowlist that matches no semantics node drops rage clicks too.
 
-2. **Enable semantics in `main.dart`.** Flutter Web draws your app into a single canvas, so by default every click targets the `flutter-view` element and `$rageclick` has no `$el_text`. With semantics on, Flutter places a `flt-semantics` node over each widget and tappable nodes receive the click. `$rageclick` then carries the widget label in `$el_text` and its `aria-label` and `role` in `$elements_chain`.
+2. **Enable semantics in `main.dart`.** Flutter Web draws your app into a single canvas, so by default every click targets the `flutter-view` element and `$rageclick` has no `$el_text`. With semantics on, Flutter places a `flt-semantics` node over each widget and tappable nodes receive the click. `$rageclick` then includes the widget label and `role` in `$elements_chain`. Which field carries the label depends on how Flutter renders the semantics node: a leaf button puts the label in DOM text, which fills `$el_text`, while a node with children puts it in `aria-label`.
 
    ```dart
    import 'package:flutter/semantics.dart';
