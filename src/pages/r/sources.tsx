@@ -5,8 +5,12 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { CallToAction } from 'components/CallToAction'
 import List from 'components/List'
 import Link from 'components/Link'
-import CloudinaryImage from 'components/CloudinaryImage'
 import WizardCTA from 'components/WizardCTA'
+import HeroCarousel from 'components/Home/HeroCarousel'
+import { Tab } from 'components/Home/HeroCarousel/tabs'
+import { Logo } from '@posthog/brand/logo'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+import { HedgehogConstruction } from '@posthog/brand/hoggies'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { getLogo } from 'constants/logos'
 import {
@@ -21,15 +25,15 @@ import {
     IconCheckCircle,
     IconWarning,
     IconX,
+    IconSearch,
 } from '@posthog/icons'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 
 const STATS = [
-    { stat: '$735', label: 'for 100M rows a month, vs $2,894 on Fivetran' },
+    { stat: '$2,159/mo', label: 'saved on 100M rows vs Fivetran' },
     { stat: '1M rows', label: 'free every month' },
-    { stat: '7 days', label: 'of free historical syncs for every new source' },
-    { stat: '1,400+', label: 'sources, with new ones shipping all the time' },
+    { stat: '7 days', label: 'of free backfills per new source' },
 ]
 
 const POPULAR_SOURCES = [
@@ -48,12 +52,12 @@ const DESTINATIONS = [
     { label: 'Snowflake', image: getLogo('snowflake') },
     { label: 'BigQuery', image: getLogo('bigquery') },
     { label: 'Redshift', image: getLogo('redshift') },
-    { label: 'Databricks', icon: 'IconDatabase' },
+    { label: 'Databricks' },
     { label: 'Postgres', image: getLogo('postgres') },
     { label: 'S3', image: getLogo('s3') },
     { label: 'Azure Blob', image: getLogo('azureBlob') },
-    { label: 'PostHog', icon: 'IconLogomark' },
-].map((destination) => ({ ...destination, url: '/docs/data-pipelines/destinations/elt-destinations' }))
+    { label: 'PostHog' },
+]
 
 const COMPARISON_TOOLS = ['PostHog Sources', 'Fivetran', 'Airbyte Cloud']
 
@@ -149,6 +153,197 @@ const FeatureCards = ({ items }: { items: IconItem[] }) => (
     </ul>
 )
 
+const DemoFrame = ({ title, children }: { title: string; children: React.ReactNode }) => (
+    <div className="not-prose border border-primary rounded bg-primary overflow-hidden">
+        <div className="px-3 py-2 border-b border-primary bg-accent text-sm font-semibold">{title}</div>
+        <div className="p-3 @md:p-4">{children}</div>
+    </div>
+)
+
+const SourcePickerDemo = () => {
+    const allSources = useSourcePlatforms()
+    const sources = POPULAR_SOURCES.map((slug) =>
+        allSources.find((source: { url: string }) => source.url === `/docs/data-pipelines/sources/${slug}`)
+    ).filter(Boolean)
+
+    return (
+        <DemoFrame title="New source">
+            <div className="flex items-center gap-2 border border-primary rounded px-2 py-1.5 mb-3 text-sm text-secondary">
+                <IconSearch className="size-4 shrink-0" />
+                Search 1,400+ sources
+            </div>
+            <ul className="grid grid-cols-2 @md:grid-cols-3 gap-2 list-none p-0 m-0">
+                {sources.map(({ label, image }: { label: string; image: string }, index: number) => (
+                    <li
+                        key={label}
+                        className={`flex items-center gap-2 rounded px-2 py-1.5 text-sm font-semibold border ${
+                            index === 0 ? 'border-blue bg-blue/10' : 'border-primary bg-accent'
+                        }`}
+                    >
+                        <img src={image} alt="" className="size-4 object-contain shrink-0" />
+                        <span className="truncate">{label}</span>
+                        {index === 0 && <IconCheckCircle className="ml-auto size-4 shrink-0 text-blue" />}
+                    </li>
+                ))}
+            </ul>
+        </DemoFrame>
+    )
+}
+
+const DestinationPickerDemo = () => (
+    <DemoFrame title="Choose a destination">
+        <ul className="grid grid-cols-2 gap-2 list-none p-0 m-0">
+            {DESTINATIONS.map(({ label, image }, index) => (
+                <li
+                    key={label}
+                    className={`flex items-center gap-2 rounded px-2 py-1.5 text-sm font-semibold border ${
+                        index === 0 ? 'border-teal bg-teal/10' : 'border-primary bg-accent'
+                    }`}
+                >
+                    {image ? (
+                        <img src={image} alt="" className="size-4 object-contain shrink-0" />
+                    ) : label === 'PostHog' ? (
+                        <Logo layout="logomark" variant="gradient" className="w-4 shrink-0" />
+                    ) : (
+                        <IconDatabase className="size-4 shrink-0 text-secondary" />
+                    )}
+                    <span className="truncate">{label}</span>
+                    {index === 0 && <IconCheckCircle className="ml-auto size-4 shrink-0 text-teal hidden @md:block" />}
+                    {label === 'PostHog' && (
+                        <span className="ml-auto text-xs text-secondary font-normal hidden @md:inline">Default</span>
+                    )}
+                </li>
+            ))}
+        </ul>
+    </DemoFrame>
+)
+
+const SYNC_ROWS = [
+    { table: 'charges', method: 'Webhook', frequency: 'Real time', status: 'Running' },
+    { table: 'customers', method: 'Incremental', frequency: 'Every 5 mins', status: 'Completed' },
+    { table: 'invoices', method: 'Append only', frequency: 'Every hour', status: 'Completed' },
+    { table: 'products', method: 'Full table', frequency: 'Every day', status: 'Completed' },
+]
+
+const SyncManagerDemo = () => (
+    <DemoFrame title="Stripe · Schemas">
+        <table className="w-full text-sm m-0">
+            <thead>
+                <tr className="text-left text-xs text-secondary">
+                    <th className="font-semibold pb-2">Table</th>
+                    <th className="font-semibold pb-2">Sync method</th>
+                    <th className="font-semibold pb-2 hidden @md:table-cell">Frequency</th>
+                    <th className="font-semibold pb-2 text-right">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {SYNC_ROWS.map(({ table, method, frequency, status }) => (
+                    <tr key={table} className="border-t border-primary">
+                        <td className="py-2 font-semibold">{table}</td>
+                        <td className="py-2">{method}</td>
+                        <td className="py-2 hidden @md:table-cell text-secondary">{frequency}</td>
+                        <td className="py-2 text-right">
+                            <span
+                                className={`text-xs font-semibold border rounded px-1.5 py-0.5 ${
+                                    status === 'Running'
+                                        ? 'text-orange border-orange animate-pulse'
+                                        : 'text-green border-green'
+                                }`}
+                            >
+                                {status}
+                            </span>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    </DemoFrame>
+)
+
+const SectionCTA = ({ to, children, className = 'mt-4' }: { to: string; children: string; className?: string }) => (
+    <div className={className}>
+        <CallToAction type="primary" size="md" to={to} state={to.startsWith('/') ? { newWindow: true } : undefined}>
+            {children}
+        </CallToAction>
+    </div>
+)
+
+const PipelineSlide = ({
+    visual,
+    title,
+    children,
+}: {
+    visual: React.ReactNode
+    title: string
+    children: React.ReactNode
+}) => (
+    <div className="@container rounded p-4 @md:p-6 h-full flex items-center">
+        <div className="w-full grid grid-cols-1 @2xl:grid-cols-[1.4fr_1fr] gap-6 @2xl:gap-8 items-center">
+            <div className="min-w-0">{visual}</div>
+            <div className="flex flex-col gap-3">
+                <h3 className="text-2xl font-bold m-0">{title}</h3>
+                {children}
+            </div>
+        </div>
+    </div>
+)
+
+const PIPELINE_TABS: Tab[] = [
+    {
+        value: 'source',
+        label: '1. Select your source',
+        content: (
+            <PipelineSlide visual={<SourcePickerDemo />} title="Pick from 1,400+ sources">
+                <p className="text-secondary m-0">
+                    Choose a database, SaaS tool, or file. Paste in a read-only key, then pick the tables you want.
+                </p>
+                <SectionCTA to="/docs/data-pipelines/sources" className="self-start">
+                    Browse all sources
+                </SectionCTA>
+            </PipelineSlide>
+        ),
+        color: 'bg-blue',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
+    },
+    {
+        value: 'destination',
+        label: '2. Select your destination',
+        content: (
+            <PipelineSlide visual={<DestinationPickerDemo />} title="Send it to any warehouse">
+                <p className="text-secondary m-0">
+                    Load into Snowflake, BigQuery, Redshift, Databricks, Postgres, or S3. Don't have a warehouse? Use
+                    PostHog's and start querying straight away.
+                </p>
+                <SectionCTA to="/docs/data-pipelines/destinations/elt-destinations" className="self-start">
+                    See all destinations
+                </SectionCTA>
+            </PipelineSlide>
+        ),
+        color: 'bg-teal',
+        activeText: 'text-black',
+        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+    {
+        value: 'manage',
+        label: '3. Manage your syncs',
+        content: (
+            <PipelineSlide visual={<SyncManagerDemo />} title="Control every sync">
+                <p className="text-secondary m-0">
+                    Set a sync method and schedule for each table, as often as every 5 minutes. See the status and rows
+                    synced for every table in one place.
+                </p>
+                <SectionCTA to={SIGNUP_URL} className="self-start">
+                    Start syncing for free
+                </SectionCTA>
+            </PipelineSlide>
+        ),
+        color: 'bg-purple',
+        activeText: 'text-white',
+        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
+    },
+]
+
 const scrollToQuestItem = (id: string) => {
     const el = document.getElementById(id)
     if (el) {
@@ -207,7 +402,7 @@ export default function SourcesLanding(): JSX.Element {
                 contentMaxWidthClass="max-w-5xl"
                 showQuestions={false}
             >
-                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-6">
+                <div className="grid grid-cols-1 @lg:grid-cols-[1.2fr_1fr] gap-10 items-center mb-12">
                     <div>
                         <h1 className="text-3xl @2xl:text-5xl !mb-4">Sources, the ELT tool from PostHog</h1>
                         <p className="text-lg @2xl:text-xl mb-6 text-secondary">
@@ -226,24 +421,26 @@ export default function SourcesLanding(): JSX.Element {
                                 Compare pricing
                             </CallToAction>
                         </div>
+                        <dl className="grid grid-cols-3 gap-4 mt-6 pt-4 border-t border-primary not-prose">
+                            {STATS.map(({ stat, label }) => (
+                                <div key={stat}>
+                                    <dt className="text-xl @2xl:text-2xl font-bold">{stat}</dt>
+                                    <dd className="text-sm text-secondary m-0 leading-snug">{label}</dd>
+                                </div>
+                            ))}
+                        </dl>
                     </div>
                     <div className="flex justify-center">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png"
-                            alt="A hedgehog moving data into a warehouse"
-                            className="w-full max-w-[220px] mx-auto"
-                        />
+                        <div className="flex items-end justify-center">
+                            <HedgehogConstruction variant="1" size={260} className="w-1/2 max-w-[260px] h-auto" />
+                            <HedgehogConstruction variant="2" size={260} className="w-1/2 max-w-[260px] h-auto" />
+                        </div>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 @2xl:grid-cols-4 gap-4 mb-12 not-prose">
-                    {STATS.map(({ stat, label }) => (
-                        <div key={stat} className="border border-primary rounded-md p-4 bg-primary">
-                            <p className="text-2xl font-bold !m-0">{stat}</p>
-                            <p className="text-sm text-secondary !m-0">{label}</p>
-                        </div>
-                    ))}
-                </div>
+                <section className="mb-12">
+                    <HeroCarousel tabs={PIPELINE_TABS} staticHeight />
+                </section>
 
                 <div className={isIdle ? 'quest-idle' : ''}>
                     <QuestLog firstSpeechBubble="Let's move some data!" lastSpeechBubble="Time to cancel Fivetran!">
@@ -253,14 +450,18 @@ export default function SourcesLanding(): JSX.Element {
                             icon="IconPlug"
                         >
                             <p>
-                                Paste in a read-only key, pick the tables you want, your destination, and the first sync
-                                starts straight away. After that, Sources keeps your data updated on a schedule you set.
-                            </p>
-
-                            <p>
                                 Got a lot of sources? The <strong>PostHog Wizard</strong> finds the databases and APIs
                                 in your code and connects them for you.
                             </p>
+
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_30_at_10_45_12_ef06f67105.png"
+                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_30_at_10_47_20_f6c1d42503.png"
+                                alt="Source settings in PostHog"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
 
                             <WizardCTA
                                 command="warehouse"
@@ -286,39 +487,42 @@ export default function SourcesLanding(): JSX.Element {
                                 </Link>
                                 .
                             </p>
+
+                            <SectionCTA to={SIGNUP_URL}>Connect your first source</SectionCTA>
                         </QuestLogItem>
 
-                        <QuestLogItem
-                            title="Leave the plumbing to us"
-                            subtitle="Fully managed and secure by default"
-                            icon="IconBolt"
-                        >
-                            <h3 className="!text-lg">Fully managed</h3>
-
+                        <QuestLogItem title="Leave the plumbing to us" subtitle="Fully managed syncs" icon="IconBolt">
                             <FeatureCards items={FULLY_MANAGED} />
 
-                            <h3 className="!text-lg">Secure by default</h3>
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_16_at_11_04_28_2x_905d242fe0.png"
+                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_16_at_11_04_02_2x_690da5bd8b.png"
+                                alt="Managed sources in PostHog with rows synced and sync status"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
 
-                            <FeatureCards items={SECURE_BY_DEFAULT} />
+                            <SectionCTA to="/docs/data-pipelines/sources#sync-methods">
+                                Learn about sync methods
+                            </SectionCTA>
                         </QuestLogItem>
 
-                        <QuestLogItem
-                            title="Load it into your warehouse"
-                            subtitle="Your data goes where you want it"
-                            icon="IconDatabase"
-                        >
-                            <List className="grid gap-4 grid-cols-2 @2xl:grid-cols-3 not-prose" items={DESTINATIONS} />
+                        <QuestLogItem title="Keep your data safe" subtitle="Secure by default" icon="IconShieldLock">
+                            <FeatureCards items={SECURE_BY_DEFAULT} />
 
-                            <p className="mt-4">
-                                Don't have a warehouse yet? Sources loads into PostHog's own warehouse by default, so
-                                you can start querying your data straight away.
-                            </p>
+                            <p>Choose who can see each source and its tables, by person or by role.</p>
 
-                            <div className="mt-4">
-                                <CallToAction type="primary" size="md" to={SIGNUP_URL}>
-                                    Get started free
-                                </CallToAction>
-                            </div>
+                            <ProductScreenshot
+                                imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/source_access_control_light_dc6bd412f4.png"
+                                imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/source_access_control_dark_39b0d2ea8a.png"
+                                alt="Access control settings for a source in PostHog"
+                                classes="rounded"
+                                padding={false}
+                                zoom={undefined}
+                            />
+
+                            <SectionCTA to="/docs/settings/warehouse-access-control">Set up access control</SectionCTA>
                         </QuestLogItem>
 
                         <QuestLogItem
@@ -368,6 +572,8 @@ export default function SourcesLanding(): JSX.Element {
                                     </div>
                                 ))}
                             </div>
+
+                            <SectionCTA to="/pricing">See full pricing</SectionCTA>
                         </QuestLogItem>
 
                         <QuestLogItem
