@@ -2591,6 +2591,10 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
+                    name: 'Security',
+                    url: '/docs/tasks/security',
+                },
+                {
                     name: 'Apps',
                 },
                 {
@@ -2729,6 +2733,28 @@ export const docsMenu = {
                 {
                     name: 'From our inbox',
                     url: '/docs/self-driving/from-our-inbox',
+                },
+                {
+                    name: 'Task infrastructure',
+                    url: '/docs/tasks',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/tasks',
+                        },
+                        {
+                            name: 'Security',
+                            url: '/docs/tasks/security',
+                        },
+                        {
+                            name: 'Agent instructions',
+                            url: '/docs/tasks/agent-instructions',
+                        },
+                        {
+                            name: 'Detect a task environment',
+                            url: '/docs/tasks/agent-environment',
+                        },
+                    ],
                 },
                 {
                     name: 'Pricing',
