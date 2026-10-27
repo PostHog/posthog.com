@@ -2,14 +2,20 @@
 title: Running time and sample size
 ---
 
-import {ProductScreenshot} from 'components/ProductScreenshot'
+import { ProductScreenshot } from "components/ProductScreenshot";
 
-export const RunningTimeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/w_400,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T16_38_32_989_Z_361d910bf8.png"
-export const RunningTimeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/w_400,c_limit,q_auto,f_auto/Screenshot_2025_12_16_at_17_43_43_a8f08f51f6.png"
-export const ConfigModalLight = "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_b288872be7.png"
-export const ConfigModalDark = "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_3_9ac460a093.png"
-export const ManualModeLight = "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_2_9907deabe4.png"
-export const ManualModeDark = "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_4_a6ce94be6c.png"
+export const RunningTimeLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/w_400,c_limit,q_auto,f_auto/pasted_image_2025_12_16_T16_38_32_989_Z_361d910bf8.png";
+export const RunningTimeDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/w_400,c_limit,q_auto,f_auto/Screenshot_2025_12_16_at_17_43_43_a8f08f51f6.png";
+export const ConfigModalLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_b288872be7.png";
+export const ConfigModalDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_3_9ac460a093.png";
+export const ManualModeLight =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_2_9907deabe4.png";
+export const ManualModeDark =
+  "https://res.cloudinary.com/dmukukwp6/image/upload/h_1000,c_limit,q_auto,f_auto/us_posthog_com_project_2_experiments_182150_4_a6ce94be6c.png";
 
 Before running an experiment, you'll want to know how long it needs to run to get reliable results. The running time calculator helps you estimate this based on your traffic and the size of effect you want to detect.
 
@@ -18,26 +24,27 @@ Before running an experiment, you'll want to know how long it needs to run to ge
 The running time indicator appears on your experiment page, showing the estimated remaining time and a progress indicator:
 
 <ProductScreenshot
-    imageLight={RunningTimeLight}
-    imageDark={RunningTimeDark}
-    alt="Running time indicator showing remaining days and progress"
-    classes="rounded"
+  imageLight={RunningTimeLight}
+  imageDark={RunningTimeDark}
+  alt="Running time indicator showing remaining days and progress"
+  classes="rounded"
 />
 
 Click the gear icon next to the time estimate to open the configuration modal:
 
 <ProductScreenshot
-    imageLight={ConfigModalLight}
-    imageDark={ConfigModalDark}
-    alt="Running time configuration modal"
-    classes="rounded"
+  imageLight={ConfigModalLight}
+  imageDark={ConfigModalDark}
+  alt="Running time configuration modal"
+  classes="rounded"
 />
 
 ## Calculation modes
 
 The calculator offers two modes: **automatic** and **manual**:
-- Automatic is the default mode for *launched* experiments and provides more accurate results. 
-- Manual mode is default for *draft* experiments, and *optional* for launched experiments.
+
+- Automatic is the default mode for _launched_ experiments and provides more accurate results.
+- Manual mode is default for _draft_ experiments, and _optional_ for launched experiments.
 
 ### Automatic mode
 
@@ -55,21 +62,30 @@ This mode requires at least **1 day** of runtime and **100 exposures** before es
 
 </CalloutBox>
 
-Once you have enough data, automatic mode shows:
-- **Remaining time**: How many more days until you reach the recommended sample size
-- **Progress**: Current exposures vs. target sample size
-- **Rate**: Your observed daily exposure rate
+Once you have enough data, automatic mode shows a **"What the experiment can detect"** table with checkpoints at different dates:
+
+| Column                | Description                                                       |
+| --------------------- | ----------------------------------------------------------------- |
+| **When**              | Today, upcoming weekly milestones, and the target date            |
+| **Exposures**         | The number of exposures at each checkpoint                        |
+| **Detectable effect** | The smallest change detectable at that point                      |
+| **Use**               | Click to adopt that checkpoint's detectable effect as your target |
+
+The table also names the primary metric the estimate is based on, along with the average daily exposure rate since launch.
+
+Dragging the MDE slider moves only the target row in the table instantly, without a server request. Clicking **Use** on any row sets that row's detectable effect as your MDE.
+
+When the target is more than four weeks away, the running time indicator in the experiment header shows **"Can detect X%+ changes within 4 weeks"** instead of a day countdown, helping you understand what's realistically achievable. A warning icon appears on the target row in the table as well.
 
 ### Manual mode
 
 Manual mode lets you estimate running time using your own inputs rather than real data. Use it when you know your approximate traffic numbers and baseline metrics.
 
-
 <ProductScreenshot
-    imageLight={ManualModeLight}
-    imageDark={ManualModeDark}
-    alt="Manual mode configuration with metric type selection"
-    classes="rounded"
+  imageLight={ManualModeLight}
+  imageDark={ManualModeDark}
+  alt="Manual mode configuration with metric type selection"
+  classes="rounded"
 />
 
 To use manual mode:
@@ -109,11 +125,12 @@ The MDE setting is shared between automatic and manual modes—changing it in on
 
 ## Understanding the results
 
-The calculator outputs the following results:
+In **manual mode**, the calculator outputs:
 
 - **Recommended sample size**: Total number of exposures needed across all variants
-- **Estimated running time**: Days to reach the sample size at your current (or expected) exposure rate
-- **Progress**: How close you are to the target (automatic mode only)
+- **Estimated running time**: Days to reach the sample size at your expected exposure rate
+
+In **automatic mode**, the checkpoint table shows what the experiment can detect at each point in time, from today through weekly milestones to your target date. Each row shows the exposures accumulated by that date and the smallest effect size those exposures can detect.
 
 When you've collected enough data, the indicator shows "Target reached", meaning you have sufficient statistical power to detect the effect size you specified.
 
@@ -129,6 +146,7 @@ N = (16 × variance) / d²
 ```
 
 Where:
+
 - **N** is the sample size per variant
 - **16** comes from achieving 80% statistical power at 95% confidence (this is the standard threshold for experiments)
 - **variance** depends on your metric type
@@ -138,13 +156,14 @@ The total sample size is then multiplied by the number of variants in your exper
 
 **Variance by metric type:**
 
-| Metric type | Variance formula |
-|-------------|------------------|
-| Funnel | p × (1 - p), where p is the conversion rate |
-| Count | 2 × baseline |
-| Sum/Avg | 0.25 × baseline² |
+| Metric type | Variance formula                            |
+| ----------- | ------------------------------------------- |
+| Funnel      | p × (1 - p), where p is the conversion rate |
+| Count       | 2 × baseline                                |
+| Sum/Avg     | 0.25 × baseline²                            |
 
 For example, with a 10% conversion rate (p = 0.1) and 20% MDE:
+
 - Variance = 0.1 × 0.9 = 0.09
 - Absolute effect d = 0.2 × 0.1 = 0.02
 - Sample size per variant = (16 × 0.09) / 0.02² = 3,600
