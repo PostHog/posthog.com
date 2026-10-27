@@ -84,7 +84,7 @@ server.registerTool("search_events", { /* ... */ }, async (args) => {
 
 </MultiLanguage>
 
-`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server does nothing new. It logs a warning through your `logger` and returns a working handle.
+`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server does nothing new. It logs a warning through the `logger` from the first call and returns a working handle.
 
 </Step>
 
@@ -264,7 +264,7 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | `identify` | – | `(request, extra) => UserIdentity \| null`, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `reportMissing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
-| `collectFeedback` | `false` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It covers missing capabilities too, so enable it instead of `reportMissing`. Pass `{ toolName, description, extraProperties, onFeedback }` to customize it. |
+| `collectFeedback` | `false` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `reportMissing` reports. Pass `{ toolName, description, extraProperties, onFeedback }` to customize it. |
 | `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
 | `beforeSend` | – | `(event) => event \| null`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | – | `(request, extra) => Record<string, unknown>`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
@@ -338,8 +338,8 @@ Pass `errorType` to `captureToolCall` to set `$mcp_error_type` to your own label
 Other capture methods cover the rest of the protocol:
 
 - `captureToolsList({ toolNames })` sends `$mcp_tools_list`. Without it, a dispatcher server has no listing events, so you can't find tools that are advertised but never called.
-- `captureFeedback({ report: prepared.feedbackReport })` sends `$mcp_feedback` when `prepareToolCall` returns a `feedbackReport`. Return `sendFeedbackResult()` to the agent. To advertise the tool, set `collectFeedback` on the constructor and pass `collectFeedback: true` to `prepareToolList`.
-- `getToolInputProperties(args, inputSchema)` returns `$mcp_input_keys` and `$mcp_input_aliases_used` for the original arguments. Pass the result in `properties`.
+- `captureFeedback({ report })` sends `$mcp_feedback`. Call it when `prepared.isFeedback` is true, with `report` set to `prepared.feedbackReport`. Return `sendFeedbackResult()` to the agent. To advertise the tool, set `collectFeedback` on the constructor and pass `collectFeedback: true` to `prepareToolList`.
+- `getToolInputProperties(args, inputSchema, { inputAliases })` returns `$mcp_input_keys`, plus `$mcp_input_aliases_used` when you pass `inputAliases`, for the original arguments. Pass the result in `properties`.
 
 These methods queue events and never throw, so analytics can't break your tool. Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
 

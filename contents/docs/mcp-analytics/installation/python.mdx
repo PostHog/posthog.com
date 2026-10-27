@@ -155,7 +155,7 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `identify` | – | `(request, extra) -> UserIdentity \| None`, sync or async, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `report_missing` | `False` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missing_capability_tool_name` | `"get_more_tools"` | Renames the `report_missing` tool. |
-| `collect_feedback` | `False` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It covers missing capabilities too, so enable it instead of `report_missing`. |
+| `collect_feedback` | `False` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `report_missing` reports. |
 | `enable_exception_autocapture` | `True` | Emit a `$exception` event for each failed tool call. |
 | `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |

@@ -108,7 +108,7 @@ An identity has three fields, named in each language's style:
 When the callback returns an identity, the SDK:
 
 1. Uses the distinct ID as the event's `distinct_id`.
-2. Adds the person properties as `$set` and the groups as `$groups` on every event.
+2. Adds the person properties as `$set` on every event except `$exception`, and the groups as `$groups` on every event.
 3. Caches the identity per session, merging person properties across requests. The Go SDK has no cache.
 
 The TypeScript, Python, and Go SDKs don't send a standalone `$identify` event. The Ruby SDK still sends one when the identity for a session changes.
