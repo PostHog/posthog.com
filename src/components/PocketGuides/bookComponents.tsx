@@ -11,6 +11,23 @@ import {
     SessionGroupingFigure,
     SessionReplayLinkFigure,
 } from './ProductAnalyticsIdentityExhibits'
+import {
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+} from './ProductAnalyticsTrendsFunnelsExhibits'
+import {
+    BookingRetentionFigure,
+    RepeatBookingFigure,
+    SavedCohortRetentionFigure,
+    SavedStayJourneyFigure,
+} from './ProductAnalyticsRetentionExhibits'
+import {
+    BookingDashboardFigure,
+    FindingStaysDashboardFigure,
+    ReturningGuestsDashboardFigure,
+} from './ProductAnalyticsDashboardExhibits'
+import ProductAnalyticsDashboardNextSteps from './ProductAnalyticsDashboardNextSteps'
 
 import Action, { Setup } from './Action'
 import Callout from './Callout'
@@ -28,15 +45,17 @@ import {
     LoopFigure,
     PersonsModalFigure,
     RedirectLoopFigure,
+    ReleaseConditionsFigure,
     ReportFigure,
     ScoutFigure,
     ScreenshotFigure,
     SkillFigure,
     TraceFigure,
     TriggerGroupFigure,
+    VariantsFigure,
 } from './figures'
 import { Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
-import { AskAI, CTA, ScannerTemplate, ViewRecording, ViewRecordings } from './UIButton'
+import { AskAI, CTA, ScannerStarter, ViewRecording, ViewRecordings } from './UIButton'
 
 export { EntryProvider } from './bookContext'
 
@@ -62,6 +81,17 @@ export const bookMdxComponents = {
     IdentifySavedStayFigure,
     ResetIdentityFigure,
     SessionReplayLinkFigure,
+    FilterUsersTrendFigure,
+    BookingStepsFigure,
+    BookingFunnelFigure,
+    RepeatBookingFigure,
+    BookingRetentionFigure,
+    SavedStayJourneyFigure,
+    SavedCohortRetentionFigure,
+    BookingDashboardFigure,
+    FindingStaysDashboardFigure,
+    ReturningGuestsDashboardFigure,
+    ProductAnalyticsDashboardNextSteps,
     LessonFooter,
     ReportFigure,
     AnatomyFigure,
@@ -78,6 +108,8 @@ export const bookMdxComponents = {
     PersonsModalFigure,
     ScreenshotFigure,
     TriggerGroupFigure,
+    ReleaseConditionsFigure,
+    VariantsFigure,
     RedirectLoopFigure,
     LoopFigure,
     Watches,
@@ -91,7 +123,7 @@ export const bookMdxComponents = {
     ViewRecording,
     AskAI,
     CTA,
-    ScannerTemplate,
+    ScannerStarter,
     Term,
     ...proseComponents,
 }

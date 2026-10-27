@@ -8,6 +8,8 @@ showTitle: true
 ## Managing billing
 
 > This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
+>
+> Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA).
 
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
@@ -18,9 +20,13 @@ The Billing Service is the source of truth for product information, what plans a
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
+The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, and applies the credits after the customer pays. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) if you have a question about a deal.
+
+For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
+
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
 ##### Upfront Payment Setup
 
@@ -29,7 +35,7 @@ Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#rout
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
 ###### Step 2: Create invoice
-- Go to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
+- Go to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) and click “Create Invoice - Upfront”. This will:
   - Create a draft Invoice object against the Stripe Customer Object.
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 
@@ -47,7 +53,7 @@ If this is a new contract for an existing customer, you will need to add their e
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
 - **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
-- **If customer wishes to begin using credits  in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
+- **If customer wishes to begin using credits  in the next billing cycle:** apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription
 - If the client has an existing subscription, no further action is needed.
@@ -75,6 +81,8 @@ You can find a list of failed and overdue payments <PrivateLink url='https://us.
 As the account owner you will be assigned a risk indicator in Vitally, as well as being tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>.  For unmanaged accounts with a failed payment of $1500 or more Simon and Dana are tagged instead.
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
+
+> If the billing contact left the company, or the invoice goes to the wrong person, [update the billing details in billing admin](/handbook/growth/sales/contracts#updating-the-billing-email-and-address).
 
 > Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps.
 

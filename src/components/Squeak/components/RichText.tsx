@@ -117,8 +117,9 @@ export default function RichText({
     cta = React.ReactNode,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
+    const previewPane = useRef<HTMLDivElement>(null)
+    const [editorHeight, setEditorHeight] = useState<number>()
     const [value, setValue] = useState(initialValue ?? '')
-    const [cursor, setCursor] = useState<number | null>(null)
     const [imageLoading, setImageLoading] = useState(false)
     const [showPreview, setShowPreview] = useState(false)
     // The `@` or `#` word that the caret is in, while its suggestion menu is open.
@@ -139,6 +140,13 @@ export default function RichText({
         '@': mentions || references || inForumPost,
         '#': references || inForumPost,
         ':': true,
+    }
+
+    const changePreview = (nextPreview: boolean) => {
+        if (nextPreview === showPreview) return
+        const activePane = showPreview ? previewPane.current : textarea.current
+        if (activePane) setEditorHeight(activePane.offsetHeight)
+        setShowPreview(nextPreview)
     }
 
     const onDrop = useCallback(
@@ -177,6 +185,16 @@ export default function RichText({
         return { selectedText, selectionStart, selectionEnd }
     }
 
+    const insertUndoably = (selectionStart: number, selectionEnd: number, text: string) => {
+        const el = textarea.current
+        if (!el) return
+        el.focus()
+        el.setSelectionRange(selectionStart, selectionEnd)
+        if (!document.execCommand('insertText', false, text)) {
+            setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, text, prevValue))
+        }
+    }
+
     const handleClick = (
         e: React.MouseEvent<HTMLButtonElement>,
         replaceWith: (text: string) => string,
@@ -184,10 +202,10 @@ export default function RichText({
     ) => {
         e.preventDefault()
 
-        const { selectionStart, selectionEnd, selectedText } = getTextSelection()
-        textarea?.current?.focus()
-        setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, replaceWith(selectedText), prevValue))
-        setCursor(cursor)
+        const { selectionStart = 0, selectionEnd = 0, selectedText = '' } = getTextSelection()
+        const replacement = replaceWith(selectedText)
+        pendingCaret.current = selectionStart + replacement.length + cursor
+        insertUndoably(selectionStart, selectionEnd, replacement)
     }
 
     // Opens a menu when the caret is at the end of a word that starts with an enabled trigger. The trigger must start
@@ -264,20 +282,12 @@ export default function RichText({
         findTrigger()
     }
 
-    const replaceSelectionWithLink = (url: string) => {
-        const { selectionStart, selectionEnd, selectedText } = getTextSelection()
-        if (selectedText) {
-            textarea?.current?.focus()
-            setValue((prevValue) =>
-                replaceSelection(selectionStart, selectionEnd, `[${selectedText}](${url})`, prevValue)
-            )
-        }
-    }
-
     const handlePaste = async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
-        const text = e.clipboardData.getData('text')
-        if (text && isURL(text)) {
-            replaceSelectionWithLink(text)
+        const text = e.clipboardData.getData('text').trim()
+        const { selectionStart = 0, selectionEnd = 0, selectedText } = getTextSelection()
+        if (selectedText && isURL(text)) {
+            e.preventDefault()
+            insertUndoably(selectionStart, selectionEnd, `[${selectedText}](${text})`)
         }
         const images = Array.from(e.clipboardData.items).filter((item) =>
             ['image/jpeg', 'image/png'].includes(item.type)
@@ -287,17 +297,6 @@ export default function RichText({
             await onDrop([image])
         }
     }
-
-    useEffect(() => {
-        if (cursor && textarea.current) {
-            textarea.current.focus()
-            textarea.current.setSelectionRange(
-                textarea.current.value.length + cursor,
-                textarea.current.value.length + cursor
-            )
-            setCursor(null)
-        }
-    }, [cursor])
 
     useEffect(() => {
         setFieldValue(bodyKey, value)
@@ -369,7 +368,7 @@ export default function RichText({
                                         icon={<Edit />}
                                         iconClassName="size-5 justify-center items-center flex"
                                         tooltip="Edit"
-                                        onClick={() => setShowPreview(false)}
+                                        onClick={() => changePreview(false)}
                                         active={!showPreview}
                                     />
                                 </li>
@@ -400,7 +399,7 @@ export default function RichText({
                                             </svg>
                                         }
                                         tooltip="Preview"
-                                        onClick={() => setShowPreview(true)}
+                                        onClick={() => changePreview(true)}
                                         active={showPreview}
                                         iconClassName="size-5 justify-center items-center flex"
                                     />
@@ -410,20 +409,30 @@ export default function RichText({
                     </ul>
                 </div>
                 {showPreview ? (
-                    <div className="bg-primary text-primary text-base h-[200px] px-3 py-2 resize-none w-full outline-none focus:ring-0 overflow-auto border border-primary border-t-0">
-                        <Markdown
-                            transformImageUri={(fakeImagePath) => {
-                                const objectURL = values.images.find(
-                                    (image) => image.fakeImagePath === fakeImagePath
-                                )?.objectURL
-                                return objectURL || fakeImagePath
-                            }}
+                    <div key="preview" className="border border-primary border-t-0 rounded-b">
+                        <div
+                            ref={previewPane}
+                            style={{ height: editorHeight }}
+                            className="bg-primary text-primary text-base h-[200px] min-h-40 px-3 py-2 resize-y w-full outline-none focus:ring-0 overflow-auto rounded-b"
                         >
-                            {value}
-                        </Markdown>
+                            <Markdown
+                                transformImageUri={(fakeImagePath) => {
+                                    const objectURL = values.images.find(
+                                        (image) => image.fakeImagePath === fakeImagePath
+                                    )?.objectURL
+                                    return objectURL || fakeImagePath
+                                }}
+                            >
+                                {value}
+                            </Markdown>
+                        </div>
                     </div>
                 ) : (
-                    <div ref={suggestionContainerRef} className="relative border border-primary border-t-0 rounded-b">
+                    <div
+                        key="edit"
+                        ref={suggestionContainerRef}
+                        className="relative border border-primary border-t-0 rounded-b"
+                    >
                         <AnimatePresence>
                             {trigger && (
                                 <SuggestionMenu
@@ -441,6 +450,7 @@ export default function RichText({
                             <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
                         )}
                         <OSTextarea
+                            style={editorHeight === undefined ? undefined : { height: editorHeight, maxHeight: 'none' }}
                             onPaste={handlePaste}
                             disabled={imageLoading}
                             autoFocus={autoFocus}

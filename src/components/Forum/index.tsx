@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { lazy, Suspense, useMemo, useState } from 'react'
 import { MotionConfig } from 'framer-motion'
 import { IconGear, IconPencil, IconPlus } from '@posthog/icons'
 import { navigate } from 'gatsby'
@@ -22,6 +22,8 @@ import DeleteTopicDialog from './DeleteTopicDialog'
 import TopicTags from './TopicTags'
 import ForumAlerts from './ForumAlerts'
 import ManageSubscriptions from './ManageSubscriptions'
+
+const GettingStarted = typeof window !== 'undefined' ? lazy(() => import('./GettingStarted')) : () => null
 
 type View = 'home' | 'following' | 'drafts' | 'new' | 'topic' | 'tags' | 'post' | 'alerts'
 
@@ -225,8 +227,14 @@ export default function Forum(props: any) {
                 <div data-scheme="secondary" className="@container w-full h-full flex flex-col border-t border-primary">
                     <div className="flex flex-col @2xl:flex-row flex-grow min-h-0">
                         <Sidebar view={view} topics={topics} activeTopic={activeTopic} loading={topicsLoading} />
-                        <main data-scheme="primary" className="flex-1 min-w-0 min-h-0 bg-primary text-primary">
+                        <main
+                            data-scheme="primary"
+                            className="relative overflow-hidden flex-1 min-w-0 min-h-0 bg-primary text-primary"
+                        >
                             <ScrollArea className="h-full">{content()}</ScrollArea>
+                            <Suspense fallback={null}>
+                                <GettingStarted visible={view !== 'post' && view !== 'new'} />
+                            </Suspense>
                         </main>
                     </div>
                 </div>

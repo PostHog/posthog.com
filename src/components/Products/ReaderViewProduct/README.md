@@ -5,11 +5,18 @@ Stacked, prose-first product pages rendered inside `ReaderView`. This is the rep
 - **Product surface:** `/<product-slug>` → `<ProductReaderView productHandle="…" />` stacks one `<section>` per `productMenu` item.
 - **Pricing surface:** `/<product-slug>/pricing` → `<ProductReaderView productHandle="…" surface="pricing" />` stacks one `<section>` per `pricingMenu` item.
 - **Docs surface:** `/docs/<product-slug>` → a normal `<ReaderView>` that shares the same tabbed sidebar via `buildProductMenuTabs({ productData, activeSurface: 'docs' })`.
+- **Learn surface:** `/learn/<product-slug>` → `LearnShell` (rendered by `AppWindow`) holds the product sidebar, and `LearnPage` renders the learning overview or guide chapters inside it.
 
-Tabs with an `href` navigate when they are not already active. The active tab keeps its menu open
-unless `navigateOnActiveClick` is enabled. Products with `learnHub` enable that flag
-for Learn, so clicking the active Learn tab returns to the product's learning hub.
-Menu items then navigate within or between surfaces as their component defines.
+Tabs with an `href` navigate when they are not already active. Clicking the active Learn tab
+keeps the current page open. Its Overview link returns to the learning hub.
+
+Products opt in to Learn with `pocketGuideVolume`. Volumes with `learnHub` in
+`src/constants/pocketGuides.ts` use one `TreeMenu` on the overview, hub pages, and chapter pages.
+The tree contains direct links to Overview and Pocket guide, then the pages in `learnHub.pages`
+(Agent prompts and MCP for every hub, and Live playground where Twig has a lab). Pocket guide
+links to the introduction and has nested chapter links sourced from `useBookPages`; the shared
+TreeMenu handles expansion and selection. Learn does not use anchor links or swap menus based
+on the current route. Products without a hub retain a flat list of chapter links.
 
 ---
 
@@ -261,6 +268,7 @@ Both `ProductReaderView` and the docs page set this up automatically; pass it ma
 Props:
 - `activeHandle: string` – the currently selected product's `handle`.
 - `excludeHandles?: string[]` – handles to hide from the dropdown.
+- `surface?: ProductSurface` – the tab of the current page (`'product'`, `'pricing'`, `'docs'`, or `'learn'`). Defaults to `'product'`.
 
 ### Sizing and styling
 
@@ -275,7 +283,7 @@ What's still hard-coded inside `OSSelect` (not exposed as props): the search inp
 
 ### Navigation
 
-Switching products always navigates to the product root (`/<newSlug>`). Surface-preserving navigation (e.g. staying on `/pricing`) is deferred until every product has those pages. [`getProductSurfaceUrl`](./getProductSurfaceUrl.ts) still exists for that future use.
+Switching products opens the new product's tab for the current `surface`, using the `href` that `buildProductMenuTabs` gives that tab. If the new product has no such tab, for example no Learn hub, the switcher opens the product root (`/<newSlug>`).
 
 ---
 
@@ -287,8 +295,7 @@ Switching products always navigates to the product root (`/<newSlug>`). Surface-
 | `types.ts`                 | `ProductNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
 | `buildProductMenuTabs.tsx` | Returns the `[Product, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
 | `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits Gatsby `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
-| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `BROWSE_TOOLS_HANDLES` + `useProduct()`; always navigates to `/<slug>`. |
-| `getProductSurfaceUrl.ts`  | Helper for surface-preserving product switches (not currently used by the switcher). |
+| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `BROWSE_TOOLS_HANDLES` + `useProduct()`; keeps the current `surface` tab when the new product has it. |
 | `templates/`               | One file per section template + the `templateRegistry`.            |
 
 ---

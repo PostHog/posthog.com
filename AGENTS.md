@@ -85,6 +85,7 @@ Reference these when working on specific areas:
 
 ### Always
 
+- Commits must have signatures that GitHub can verify. See [signing setup](README.md#sign-your-commits). If you cannot sign a commit, tell the user that the signature check will fail and the PR cannot merge.
 - For any non-trivial change, present a plan and get confirmation from your user before you build.
 - Confirm that your change is a PR and not an issue before you build. See [Issue or PR?](#issue-or-pr).
 - When using a component, check for a `README.md` inside the component's folder for detailed documentation.

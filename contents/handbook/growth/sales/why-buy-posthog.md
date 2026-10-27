@@ -56,7 +56,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 - [Replace Google Analytics](/web-analytics) to get a view on your marketing data which is familiar to experienced marketers.  Recent updates to GA4 have not sat well with that persona so folks are looking for something more familiar.
 - [Define conversion funnels](/funnels) to understand which content drives your users to sign up to your product.  
 - [View aggregated page engagement](/heatmaps) with heatmaps and scroll depth tracking understanding what’s popular in your content.
-- [Ad platform connection](/docs/cdp/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
+- [Ad platform connection](/docs/data-pipelines/destinations/google-ads) provides pre-built insights to help you understand your campaign performance and associated costs.
 
 ## Data Engineers
 
@@ -69,7 +69,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
 
 ### Use cases
-- Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/docs/cdp/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
+- Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/docs/data-pipelines/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
 - Let your engineers and product team self-serve analytics and error tracking from within a familiar platform.
 
 # General talking points for all roles
@@ -82,8 +82,15 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 ## Per-product sales enablement
 
-The Developer Marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
+Product marketers on the [Developer Marketing team](/teams/developer-marketing) make sales enablement material for the products they own. Some examples:
 
+- [Data foundations](/handbook/growth/sales/data-foundations) – how to sell the data warehouse and the rest of the data stack, with a recording of the training session
+- [Data foundations training deck](https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit) – by Lizzie Epton
+- [Sales training deck](https://www.figma.com/deck/yHjzK2vmjWdbkcNA9Ee4ph) – by Sara Miteva
 - [Managed data warehouse (Trino)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
 
-If there are additional products you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  
+This is not a full list. Each product marketer keeps the material for their own product current in the handbook.
+
+If you want material for a different product, ask in the **#team-developer-marketing** Slack channel.
+
+Product marketers: to make new material, follow the [sales enablement guide](/handbook/marketing/sales-enablement).

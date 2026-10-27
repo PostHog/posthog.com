@@ -1486,7 +1486,7 @@ export default function ProfilePage({ params }: PageProps) {
             linkedin: profile?.linkedin,
             github: profile?.github,
             discord: profile?.discord,
-            avatar: getAvatarURL(profile),
+            avatar: getAvatarURL(data),
             firstName: profile?.firstName,
             lastName: profile?.lastName,
             location: profile?.location,

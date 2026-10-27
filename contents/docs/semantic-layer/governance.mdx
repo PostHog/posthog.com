@@ -19,7 +19,7 @@ The result: your agents build the catalog for you during normal work, and nothin
 
 | Primitive | Lands as | Human promotes to | Demoted or terminal |
 |-----------|----------|-------------------|---------------------|
-| [Metric](/docs/semantic-layer/metrics) | `proposed` | `approved` | Editing the definition, name, description, or unit – or drifting from the source insight – resets it toward `proposed`; deleting frees the name (activity-logged, no undo in the product) |
+| [Metric](/docs/semantic-layer/metrics) | `proposed` | `approved` | Editing the definition, name, description, or unit resets it to `proposed`. [Drift](/docs/semantic-layer/metrics#drift) from the source insight doesn't change the status, but a drifted metric isn't canonical. Clearing the drift resets it to `proposed`, whether you refresh the metric or unlink it. Deleting frees the name (activity-logged, no undo in the product) |
 | [Certification](/docs/semantic-layer/certifications-and-relationships#table-certifications) | `proposed` | `certified` or `deprecated` | Revoking deletes the mark (activity-logged) |
 | [Relationship](/docs/semantic-layer/certifications-and-relationships#relationship-proposals) | `proposed` | `accepted` (becomes a real join) | `rejected` – permanent, never re-proposed |
 
@@ -54,7 +54,7 @@ Every AI-authored object records its origin: `created_source: ai_generated`, the
 
 You don't need a cataloging project. Let the catalog grow out of normal work:
 
-1. **Agents propose as they go.** When an agent derives a number that gets reused, it offers to save the derivation as a proposed metric. When it notices a stale table or an obvious join, it proposes a trust mark.
+1. **Agents propose as they go.** When an agent derives a number that gets reused, it offers to save the derivation as a proposed metric. When it notices a stale table it proposes deprecating it, and when it spots an obvious join it proposes the relationship with evidence.
 2. **A data owner reviews the queue weekly.** The review queue is one query away:
 
    ```sql

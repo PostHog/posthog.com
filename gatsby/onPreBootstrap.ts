@@ -100,6 +100,7 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
 posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
     ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
+    defaults: 'latest',
     ${assetHostConfig}capture_pageview: false,
     capture_pageleave: true,
     // A windowed page scrolls inside its app window, not the document, so the default
@@ -129,6 +130,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
         }
         return event
     },
+    capture_webmcp: true,
     person_profiles: 'identified_only',
     __preview_heatmaps: true,
     opt_in_site_apps: true,

@@ -52,7 +52,7 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                         ...(isModerator
                             ? {
                                   user: {
-                                      fields: ['distinctId', 'email'],
+                                      fields: ['distinctId', 'email', 'blocked'],
                                   },
                               }
                             : null),
@@ -99,6 +99,13 @@ const query = (id: string | number, isModerator: boolean, isForumModerator: bool
                                 teams: {
                                     fields: ['id'],
                                 },
+                                ...(isModerator
+                                    ? {
+                                          user: {
+                                              fields: ['blocked'],
+                                          },
+                                      }
+                                    : null),
                             },
                         },
                     },

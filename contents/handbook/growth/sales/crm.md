@@ -72,6 +72,8 @@ When a new task is created, we first check whether the associated account alread
 - If the account has an owner, task is automatically assigned to that person.
 - If the account is unowned, account and task are assigned to a salesperson via round robin within their territory.
 
+A round robin assignment makes you a temporary owner only. It does not count toward your quota. See [account ownership in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics).
+
 This ensures we avoid double assignments and maintain clear ownership.
 
 Territories
@@ -315,7 +317,7 @@ When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](htt
 -   **ARR up for renewal** - Copied over from the original amount; so that we can track expansion/churn
 -   **Close date** - 4 weeks in the future (may need adjusting if the opportunity record isn't closed on the contract start date)
 
-Keep the renewal opportunity dates in line with the dates we actually invoice against. If the contract dates and the dates in Stripe disagree, the account owner must add a comment on the opportunity that records both dates and the confirmed one, and then correct the opportunity dates. See [when the contract dates and the billing dates don't match](/handbook/cs-and-onboarding/renewals#when-the-contract-dates-and-the-billing-dates-dont-match).
+Keep the renewal opportunity dates in line with the dates we actually invoice against. If the contract dates and the dates in Stripe disagree, the account owner must add a comment on the opportunity that records both dates and the confirmed one, and then correct the opportunity dates. See [when the contract dates and the billing dates don't match](/handbook/customer-success/renewals#when-the-contract-dates-and-the-billing-dates-dont-match).
 
 The renewal pipeline stages are:
 

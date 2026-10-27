@@ -39,7 +39,7 @@ We evaluated these tools based on their:
 <details>
   <summary>What is the best business intelligence tool for startups?</summary>
 
-[PostHog](#1-posthog) provides startups like [HeadshotPro](/customers/headshotpro), with a full suite of tools they need to build a great product, including pre-built [web](/docs/web-analytics) and [revenue analytics](/docs/revenue-analytics) dashboards, simple connectors for their existing data sources ([Postgres](/docs/data-warehouse/sources/postgres), [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), etc.), and a bunch more.
+[PostHog](#1-posthog) provides startups like [HeadshotPro](/customers/headshotpro), with a full suite of tools they need to build a great product, including pre-built [web](/docs/web-analytics) and [revenue analytics](/docs/revenue-analytics) dashboards, simple connectors for their existing data sources ([Postgres](/docs/data-pipelines/sources/postgres), [Stripe](/docs/data-pipelines/sources/stripe), [Hubspot](/docs/data-pipelines/sources/hubspot), etc.), and a bunch more.
 
 </details>
 <details>
@@ -66,7 +66,7 @@ Because it can easily combine product and business data, [PostHog](#1-posthog) i
 ### 1. PostHog
 
 - License: MIT
-- GitHub stars: 32.1k as of March 2026
+- GitHub stars: 40.2k as of October 2026
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
 <ProductScreenshot
@@ -80,7 +80,7 @@ PostHog is an all-in-one developer platform that combines business intelligence 
 
 Its business intelligence stack contains three key pieces:
 
-1. A [data warehouse](/context-warehouse) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-warehouse/sources/stripe), [Hubspot](/docs/data-warehouse/sources/hubspot), [Postgres](/docs/data-warehouse/sources/postgres), [Google Sheets](/docs/data-warehouse/sources/google-sheets), [S3](/docs/data-warehouse/sources/s3), [Snowflake](/docs/data-warehouse/sources/snowflake), and more.
+1. A [data warehouse](/context-warehouse) that stores data captured into PostHog and syncs with external sources you already use, like [Stripe](/docs/data-pipelines/sources/stripe), [Hubspot](/docs/data-pipelines/sources/hubspot), [Postgres](/docs/data-pipelines/sources/postgres), [Google Sheets](/docs/data-pipelines/sources/google-sheets), [S3](/docs/data-pipelines/sources/s3), [Snowflake](/docs/data-pipelines/sources/snowflake), and more.
 
 2. [Product analytics](/docs/product-analytics) which provides a simple but powerful interface for building dashboards and insights including trends, funnels, retention graphs, user paths, and more. 
 
@@ -111,20 +111,20 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 
 <details>
   <summary>What tools does PostHog replace?</summary>
 
-PostHog is less of a traditional replacement for tools like Looker and Tableau and more a replacement for your suite of dev tools like [Amplitude](/blog/posthog-vs-amplitude), [Mixpanel](/blog/posthog-vs-mixpanel), [Fullstory](/compare/posthog-vs-fullstory), [LaunchDarkly](/compare/posthog-vs-launchdarkly), [Hotjar](/compare/posthog-vs-hotjar), [Sentry](/blog/posthog-vs-sentry), and [Survicate](/compare/best-survicate-alternatives).
+PostHog is less of a traditional replacement for tools like Looker and Tableau and more a replacement for your suite of dev tools like [Amplitude](/blog/posthog-vs-amplitude), [Mixpanel](/blog/posthog-vs-mixpanel), [Fullstory](/compare/posthog-vs-fullstory), [LaunchDarkly](/compare/posthog-vs-launchdarkly), [Hotjar](/compare/posthog-vs-hotjar), [Sentry](/compare/posthog-vs-sentry), and [Survicate](/compare/best-survicate-alternatives).
 
 </details>
 <details>
   <summary>Can it connect to my data warehouse?</summary>
 
-Yes. PostHog can connect to many of the popular data warehouse providers including [S3](/docs/data-warehouse/sources/s3), [R2](/docs/data-warehouse/sources/r2), [GCS](/docs/data-warehouse/sources/gcs), [Snowflake](/docs/data-warehouse/sources/snowflake), [BigQuery](/docs/data-warehouse/sources/bigquery), and more.
+Yes. PostHog can connect to many of the popular data warehouse providers including [S3](/docs/data-pipelines/sources/s3), [R2](/docs/data-pipelines/sources/r2), [GCS](/docs/data-pipelines/sources/gcs), [Snowflake](/docs/data-pipelines/sources/snowflake), [BigQuery](/docs/data-pipelines/sources/bigquery), and more.
 </details>
 <details>
   <summary>Is there a hosted version?</summary>
@@ -142,12 +142,12 @@ Yes. PostHog AI can generate and fix SQL queries for you, answer questions about
 ### 2. Metabase
 
 - License: AGPLv3
-- GitHub stars: 46.5k as of March 2026
+- GitHub stars: 49.6k as of October 2026
 - [Metabase on GitHub](https://github.com/metabase/metabase)
 
 ![Metabase](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/metabase_fa7dbf71d9.png)
 
-Metabase is an [open source analytics tool](/blog/best-open-source-analytics-tools) that easily connects to your existing database. 
+Metabase is an [open source analytics tool](/compare/best-open-source-analytics-tools) that easily connects to your existing database. 
 
 Once connected, Metabase offers an easy to use and powerful query builder. Visualizations can be built with or without SQL. Within these, users can drill down to filter, breakout, or view the source table.
 
@@ -187,7 +187,7 @@ Yes. Metabot lets you generate SQL queries, summarize charts, and answer docs qu
 ### 3. Superset
 
 - License: Apache 2.0
-- GitHub stars: 71k as of March 2026
+- GitHub stars: 75.1k as of October 2026
 - [Superset on GitHub](https://github.com/apache/superset)
 
 ![Superset](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/superset_6f35a66cc9.jpg)
@@ -232,7 +232,7 @@ Preset's *AI Assist* lets you write SQL queries with ease, but is only available
 ### 4. Grafana
 
 - License: AGPLv3
-- GitHub stars: 72.7k as of March 2026
+- GitHub stars: 77.1k as of October 2026
 - [Grafana on GitHub](https://github.com/grafana/grafana)
 
 ![Grafana](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/grafana_dashboard_english_2fe2b3cb4d.png)
@@ -277,7 +277,7 @@ Some data sources, like Azure Data Explorer, have AI query generation. Grafana h
 ### 5. Evidence
 
 - License: MIT
-- GitHub stars: 6k as of March 2026
+- GitHub stars: 7k as of October 2026
 - [Evidence on GitHub](https://github.com/evidence-dev/evidence)
 
 ![Evidence](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/evidence_c0c74bbd76.png)
@@ -324,7 +324,7 @@ Evidence's AI agent can look up documentation, check your schema, and write quer
 ### 6. Redash
 
 - License: BSD-2
-- GitHub stars: 28.3k as of March 2026
+- GitHub stars: 28.8k as of October 2026
 - [Redash on GitHub](https://github.com/getredash/redash)
 
 ![Redash](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/redash_b3a8f5a223.png)
@@ -377,7 +377,7 @@ Redash doesn't have AI query generation.
 ### 7. Lightdash
 
 - License: MIT
-- GitHub stars: 5.6k as of March 2026
+- GitHub stars: 6.2k as of October 2026
 - [Lightdash on GitHub](https://github.com/lightdash/lightdash)
 
 ![Lightdash](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/lightdash_63940e2642.webp)

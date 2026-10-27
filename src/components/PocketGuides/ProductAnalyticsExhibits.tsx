@@ -28,15 +28,20 @@ const destinations = [
 export function Exhibit({
     stacked = false,
     onReset,
+    header,
+    caption,
     children,
 }: {
     stacked?: boolean
     onReset?: () => void
+    header?: React.ReactNode
+    caption?: React.ReactNode
     children: React.ReactNode
 }): JSX.Element {
     return (
         <figure className="not-prose my-6 mx-0 overflow-hidden rounded border border-primary bg-accent p-3 dark:bg-accent-dark @container @md:p-4">
             {onReset && <ExhibitResetButton onReset={onReset} />}
+            {header}
             <div
                 className={`grid items-start gap-4 ${
                     stacked ? '' : '@lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]'
@@ -44,6 +49,9 @@ export function Exhibit({
             >
                 {children}
             </div>
+            {caption && (
+                <figcaption className="mt-2 font-rounded text-xs leading-snug text-secondary">{caption}</figcaption>
+            )}
         </figure>
     )
 }

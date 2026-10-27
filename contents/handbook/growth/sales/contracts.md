@@ -35,7 +35,7 @@ The quoting interface is intuitive and, of course, uses the same pricing we disp
 
 Quotes can be shared externally or embedded in an external source. Clicking the Dot Menu from a Quote and click "Share". If someone asks for a PDF version of a quote, you can view the external version and print it to PDF.
 
-QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.net/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
+QuoteHog also provides Stripe reported usage and spend for existing customers. To do this, you need to first connect QuoteHog to Salesforce from the <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>. As you build a quote, click "Add customer info" and search for your customer account. This also allows you to link the quote to an existing Salesforce opportunity.
 
 When building a quote for an annual plan conversion or renewal, consider:
 
@@ -53,6 +53,12 @@ When building a quote for an annual plan conversion or renewal, consider:
 You can create quotes with multiple options: e.g. one based on current usage, one with a higher tier to account for growth potential.
 
 The legacy pricing calculator is available <PrivateLink url="https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing">here</PrivateLink>.
+
+### Automatic renewal quotes
+
+QuoteHog can draft a renewal quote for you once a renewal opportunity in Salesforce will close within 90 days. A daily job picks up the opportunity, builds a quote from the customer's last billing cycle of Stripe usage, and sends the opportunity owner a Slack message in #sales-alerts with the link. Treat it as a starting point and tweak it according to the usage trends above before you share it with the customer.
+
+The automation is off by default. To turn it on, connect QuoteHog to Salesforce, then switch on **QuoteHog Bot Integration** in the **Salesforce Integration** card on your <PrivateLink url="https://quote.posthog.com/profile">profile page</PrivateLink>.
 
 ## Order form
 
@@ -91,7 +97,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
                 - If a customer wants to start using credits starting the next billing cycle, your contract start date should be November 1.
                 - If you set the start date correctly, our Zapier automation flow will create the invoices with correct dates so our revenue calculations are not affected from the transition.
             - **Do not backdate beyond the current billing period.** You can only set the start date as far back as the beginning of the *current, not-yet-invoiced* billing period (Immediate Activation above). Never set it into a period we have already issued an invoice for. Doing so rewrites an issued invoice and breaks revenue recognition, which is not something we support.
-            - **Renewals:** Salesforce auto-populates the renewal opportunity with the anniversary date (the day the previous term ends), but don't assume that's the correct `Contract.EffectiveDate`. The same rule applies as above: the start date must match the beginning of the billing period the new credits need to cover. If the customer has run out of credits on their existing plan and there's an open billing period the renewal credits should cover, backdate the start date to the beginning of that period — which may be up to a month before the anniversary date — so the new credits map to that invoice. Only start the renewal on the anniversary date itself if the customer's existing credits carry them cleanly through to it. If the order form won't be signed before that period's invoice is issued, don't hold the backdated start date. Move the start date to the beginning of the next billing period instead, and tell the customer the new credits apply from then. See [contract timing rules](#contract-timing-rules) below, and [timing your renewals with billing](/handbook/cs-and-onboarding/renewals#timing-your-renewals-with-billing) for how to avoid getting into this position.
+            - **Renewals:** Salesforce auto-populates the renewal opportunity with the anniversary date (the day the previous term ends), but don't assume that's the correct `Contract.EffectiveDate`. The same rule applies as above: the start date must match the beginning of the billing period the new credits need to cover. If the customer has run out of credits on their existing plan and there's an open billing period the renewal credits should cover, backdate the start date to the beginning of that period — which may be up to a month before the anniversary date — so the new credits map to that invoice. Only start the renewal on the anniversary date itself if the customer's existing credits carry them cleanly through to it. If the order form won't be signed before that period's invoice is issued, don't hold the backdated start date. Move the start date to the beginning of the next billing period instead, and tell the customer the new credits apply from then. See [contract timing rules](#contract-timing-rules) below, and [timing your renewals with billing](/handbook/customer-success/renewals#timing-your-renewals-with-billing) for how to avoid getting into this position.
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
         - **Startup credits** - If the customer [qualifies for the 2 free months](/handbook/growth/sales/contract-rules#startup-plan-discounts) set the start date of the contract for 2 months in the future, to account for the two free months ahead of the contract. The one-time free credits you add in billing admin cover the invoices before this date.
         - **Campaigns and beta plans** - Do not apply the startup rule above. These customers are already paying us — their plan makes usage cheaper, not free — so future-dating the term would leave them on undiscounted list pricing until it starts. Set the start date normally and size the credits for the point at which their plan expires instead. See [contracts for customers on time-limited plans](/handbook/growth/sales/contract-rules#contracts-for-customers-on-time-limited-plans).
@@ -122,7 +128,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 4. Click Send at the top of the document and add a message explaining the context of the order form.
 5. Once the Client and then PostHog have signed it you should get an email to confirm completion.
 6. Don't forget to link to an opportunity in Salesforce and mark the associated opportunity as Closed Won.
-7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc Order Form ID.
+7. Zapier will [automatically add](https://zapier.com/editor/217375860) a record in the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) with the PandaDoc Order Form ID.
 8. Celebrate!
 
 ### Manual upload of signed order form
@@ -139,11 +145,11 @@ We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer t
     - Mark the status as completed.
     - Link to an opportunity in Salesforce and close the associated opportunity as Closed Won.
 
-Once you the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works for more information.
+Once the signed form in PandaDoc is marked as complete and the Salesforce opportunity status is set to Closed Won, the RevOps team will get a notification and handle setting up the subscription and invoicing. See the [Billing](/handbook/growth/sales/billing) page for steps on how the billing setup works, and [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for the parts that now run on their own.
 
 ### Updating the billing email and address
 
-You do not need the RevOps or billing team to change a customer's billing email or billing address in Stripe. You can do it yourself in billing admin.
+You do not need the RevOps or billing team to change a customer's business name, billing email, or billing address in Stripe. You can do it yourself in billing admin. Do this when the customer's billing contact leaves the company, or when invoices go to the wrong person. Do not try to edit the customer in the Stripe dashboard. Most people do not have permission to do this.
 
 1. Open the customer in <PrivateLink url="https://billing.posthog.com/admin/billing/customer/">billing admin</PrivateLink> and find the **Billing details** panel on their profile.
 2. Click **Edit billing details**.
@@ -152,6 +158,8 @@ You do not need the RevOps or billing team to change a customer's billing email 
     - **Billing email** - the address that receives invoices and billing notifications.
     - **Billing address** - leave all address fields blank to keep the current Stripe address. If you set one address field, then address line 1, city, postal code, and country are also necessary. State/province is necessary for the US and Canada.
 4. Click **Save to Stripe**. The update goes to all Stripe customers in the **Stripe customers that get this update** list on the form.
+
+An invoice that Stripe already finalized keeps the old details. If the customer needs an invoice with the new details, ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) for an updated invoice PDF.
 
 > Stripe uses the billing address as the tax location. A change to the address can add or remove sales tax or VAT on the next invoice, so make sure the customer gives you their correct legal address.
 
@@ -164,7 +172,7 @@ Monthly invoices are generated automatically at the end of each billing period. 
 
 Credits added before billing period ends are applied automatically and the customer never has to pay the PAYG charge out of pocket. No further action needed here. 
 
-If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the billing team to pause collection. Flag it as early as possible, because billing can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, billing releases the invoice and the prepurchase credits cover it.
+If they won't have enough credits to cover an invoice and won't sign before the invoice issue date, ask the RevOps team in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) to pause collection. Flag it as early as possible, because RevOps can only pause an invoice that hasn't been issued yet. A pause lasts 48 hours, and each invoice only gets one pause. Once the contract is signed and the credits are added, RevOps releases the invoice and the prepurchase credits cover it.
 
 #### Contract timing rules
 

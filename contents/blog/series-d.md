@@ -9,6 +9,10 @@ featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/EXisgy6eWJ0'
 tags:
     - PostHog news
+    - Founders
+    - Raising money
+crosspost:
+    - Founders
 ---
 
 Hello everyone!

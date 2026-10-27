@@ -151,7 +151,7 @@ Remember, too, that culture can vary from team-to-team in larger companies, so i
 
 ## 4. Increasing your odds
 
-You need to [think like a recruiter](/founders/what-recruiters-see).
+You need to [think like a recruiter](/blog/what-recruiters-see).
 
 You may spend hours, days even, researching a company, crafting a cover letter, resumé, and so on, but even mid-sized startups get hundreds of applications.
 
@@ -192,7 +192,7 @@ Not writing a cover letter might work for bigger companies that are hiring at a 
 
 * [How to get a job at a startup](/newsletter/how-to-get-job-startup)  
 * [Interview questions engineers should ask (but don’t)](/newsletter/job-interview-questions-engineers)  
-* [What startup recruiters actually see when you apply for a job](/founders/what-recruiters-see)
+* [What startup recruiters actually see when you apply for a job](/blog/what-recruiters-see)
 
 <NewsletterForm />
 

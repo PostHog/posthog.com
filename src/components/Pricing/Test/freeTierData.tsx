@@ -65,7 +65,7 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-red',
     },
     {
-        name: 'Data warehouse',
+        name: 'Sources',
         allocation: '1M rows + FREE historical',
         note: (
             <>
@@ -77,7 +77,7 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-purple',
     },
     {
-        name: 'Data pipelines',
+        name: 'Destinations',
         allocation: '10K events + 1M rows',
         note: (
             <>
@@ -91,7 +91,7 @@ export const freeTierProducts: FreeTierProduct[] = [
     },
     {
         name: 'AI Observability',
-        allocation: '100K events',
+        allocation: '100K events/month, shared with evaluations',
         icon: Icons.IconLlmAnalytics,
         iconColor: 'text-purple',
     },

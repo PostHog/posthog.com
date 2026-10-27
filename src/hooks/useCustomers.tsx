@@ -48,7 +48,11 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import ResendLogo from '../components/CustomerLogos/ResendLogo'
+import RunableLogo from '../images/customers/runable-light.svg'
+import RunableLogoDark from '../images/customers/runable-dark.svg'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SoundBoostLogo from '../images/customers/soundboost-light.svg'
+import SoundBoostLogoDark from '../images/customers/soundboost-dark.svg'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
@@ -1400,6 +1404,52 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 8,
     },
+    runable: {
+        name: 'Runable',
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'logs',
+            'ai_observability',
+            'data_warehouse',
+            'cdp',
+        ],
+        industries: ['AI'],
+        users: ['Engineering', 'Growth'],
+        notes: 'AI agent platform for small business owners',
+        featured: false,
+        logo: {
+            light: RunableLogo,
+            dark: RunableLogoDark,
+        },
+        height: 8,
+        quotes: {
+            ankit_kumar: {
+                // This is the author handle used in OSQuote
+                name: 'Ankit Kumar',
+                role: 'Software Development Engineer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ankit_caa4201fc2.png',
+                },
+                quotes: [
+                    'All decisions are driven by PostHog metrics. It gives us the direction when something is failing or impacts a specific event that really helps us a lot.',
+                ],
+            },
+            eshaan_pawan: {
+                name: 'Eshaan Pawan',
+                role: 'Head of Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Eshaan_dfad398910.png',
+                },
+                quotes: [
+                    "I don't need to leave the PostHog ecosystem often. I get almost everything I need on PostHog, which makes it easy for me to make a lot of decisions very fast.",
+                    'Instead of using 10 different data layers, data providers, and data collectors, you can just use PostHog.',
+                ],
+            },
+        },
+    },
     rebtel: {
         name: 'Rebtel',
         toolsUsed: ['product_analytics', 'web_analytics', 'feature_flags', 'experiments', 'cdp', 'data_warehouse'],
@@ -1487,6 +1537,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     web_analytics:
                         "PostHog gives me all the same information Plausible used to give us, and a lot more. It's way more powerful and insightful than Plausible.",
                 },
+            },
+        },
+    },
+    soundboost: {
+        name: 'SoundBoost',
+        toolsUsed: ['session_replay', 'feature_flags', 'error_tracking', 'surveys', 'inbox'],
+        industries: ['AI', 'Music'],
+        users: ['Founders', 'Engineering'],
+        notes: 'AI music mastering',
+        featured: false,
+        logo: {
+            light: SoundBoostLogo,
+            dark: SoundBoostLogoDark,
+        },
+        height: 8,
+        quotes: {
+            berkan_cesur: {
+                name: 'Berkan Cesur',
+                role: 'Founder',
+                image: {
+                    thumb: '/images/customers/berkan-cesur.jpg',
+                },
+                quotes: [
+                    "We're a small team and we can't find everything that's going on across different browsers, operating systems, and device types. PostHog just finds it for us now.",
+                    "PostHog was always a good analytics tool, but it needed a human to understand, analyze, and combine everything to get something valuable from it. Now it's just on autopilot.",
+                ],
             },
         },
     },

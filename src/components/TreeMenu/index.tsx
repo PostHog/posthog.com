@@ -15,10 +15,14 @@ interface MenuItem {
     icon?: React.ReactNode
     /** Renders a trailing ↗ and opens in a new tab. Also inferred for `http(s)` URLs. */
     external?: boolean
+    /** Start this collapsible item expanded (otherwise it only opens when a child is active). */
+    defaultOpen?: boolean
     badge?: {
         title: string
         className?: string
     }
+    /** `sidebar` appearance only: wrap a long label onto more lines instead of truncating it. */
+    wrap?: boolean
 }
 
 /** A flat list of `{name}` headers + `{name,url}` links grouped into sections. */
@@ -66,6 +70,8 @@ interface TreeMenuProps {
      * the `listed` variant.
      */
     expandOnly?: boolean
+    /** Called after a link is clicked, e.g. to capture an analytics event. */
+    onItemClick?: (item: MenuItem) => void
 }
 
 /** Genuinely off-site URL — opens in a new browser tab. */
@@ -140,11 +146,14 @@ const MarqueeLabel = ({
     children,
     hovering,
     className = '',
+    wrap = false,
 }: {
     children: React.ReactNode
     /** Driven by the parent link's hover so the whole row triggers the scroll, not just the text. */
     hovering: boolean
     className?: string
+    /** Wrap the text onto more lines instead of truncating and scrolling it. */
+    wrap?: boolean
 }) => {
     const outerRef = useRef<HTMLSpanElement>(null)
     const [distance, setDistance] = useState(0)
@@ -160,7 +169,7 @@ const MarqueeLabel = ({
         setDistance(overflow > 1 ? overflow : 0)
     }, [hovering])
 
-    const animate = hovering && distance > 0
+    const animate = !wrap && hovering && distance > 0
     // Scroll a little past the end so the last characters clear the right-edge fade.
     const travel = distance + 16
 
@@ -182,13 +191,17 @@ const MarqueeLabel = ({
                     {children}
                 </motion.span>
             ) : (
-                <span data-marquee-text className="block truncate">
+                <span data-marquee-text className={`block ${wrap ? 'whitespace-normal' : 'truncate'}`}>
                     {children}
                 </span>
             )}
         </span>
     )
 }
+
+/** An element icon before a `sidebar` link label, as in ProductNav. String icon names are ignored. */
+const SidebarIcon = ({ icon }: { icon: MenuItem['icon'] }) =>
+    icon && typeof icon !== 'string' ? <span className="mr-1 size-4 inline-flex shrink-0">{icon}</span> : null
 
 /** ProductNav-matching link used by the `sidebar` appearance. */
 const SidebarLink = ({
@@ -227,7 +240,10 @@ const SidebarLink = ({
             }`}
             style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
         >
-            <MarqueeLabel hovering={hovering}>{menuItem.name}</MarqueeLabel>
+            <SidebarIcon icon={menuItem.icon} />
+            <MarqueeLabel hovering={hovering} wrap={menuItem.wrap}>
+                {menuItem.name}
+            </MarqueeLabel>
             {arrow && <IconArrowUpRight className="size-3.5 shrink-0 opacity-60" />}
         </Link>
     )
@@ -316,6 +332,7 @@ function SidebarCollapsibleItem({
                     }`}
                     style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
                 >
+                    <SidebarIcon icon={item.icon} />
                     <MarqueeLabel hovering={hovering}>{item.name}</MarqueeLabel>
                 </Link>
                 <button
@@ -429,6 +446,7 @@ export function TreeMenu(props: TreeMenuProps) {
 
     const handleClick = (item: MenuItem) => {
         setActiveItem(item)
+        props.onItemClick?.(item)
     }
 
     const items = props.items
@@ -638,7 +656,7 @@ function TreeMenuItem({
     onClick: (item: MenuItem) => void
     expandOnly?: boolean
 }) {
-    const [open, setOpen] = useState(() => Boolean(item.children) && isOpen(item, activeItem))
+    const [open, setOpen] = useState(() => item.defaultOpen || (Boolean(item.children) && isOpen(item, activeItem)))
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
     const pathname = replacePath(location?.pathname)

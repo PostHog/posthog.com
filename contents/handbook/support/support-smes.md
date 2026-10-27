@@ -18,7 +18,7 @@ The various PostHog products have been split into the following product groups:
 - Analytics (analytics platform, customer analytics, product analytics, web analytics, growth, ingestion)
 - Unclassified (tickets tagged with `support_needs_triage`)
 - Flags (conversations, experiments, feature flags, surveys)
-- Data (batch exports, data stack, workflows, managed warehouse)
+- Data (batch exports, data stack, workflows, warehouse)
 - Replay (replay)
 - Observability + AI & client libraries (AI observability, error tracking, logs, mobile, PostHog AI, self-driving, SDKs/implementation)
 - Accounts & Billing (platform features, login/SSO, billing)

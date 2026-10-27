@@ -1,19 +1,39 @@
-## Q3 2026 Objectives
+## Q4 2026 objectives
 
-**North star: make shipping 10,000 PRs a month easy.** Agents will write most of the code, so the quarter is about hardening the loop that makes that volume work: write → verify → review/merge → measure.
+We're keeping the Q3 goal: shipping 10,000 PRs a month should be easy. In Q3, CI got faster and cheaper, the merge queue stopped master from breaking every day, and StampHog v2 shipped. Now the slow part is getting PRs reviewed and merged, and keeping a fast-growing codebase manageable.
 
-### Write: local dev loop (<TeamMember name="Raúl Negrón-Otero" photo />)
+### CI optimization (<TeamMember name="Georges-Antoine Assi" photo />, everyone contributes)
 
-Shorten the inner loop and let agents run the stack and tests locally, with devboxes as a favored way to spin up a full stack. Local agent steering (skills, contexts) is part of this.
+The big repo-wide wins are done. Next is the slow end (p90): teams and authors whose CI got worse, moving all required checks to Depot CI, and running only the CI a PR needs.
 
-### Verify: CI loop we trust (<TeamMember name="Julian Bez" photo />, <TeamMember name="Georges-Antoine Assi" photo />, <TeamMember name="Raúl Negrón-Otero" photo />)
+### Merge queue stability (<TeamMember name="Georges-Antoine Assi" photo />)
 
-Fast, cheap, low-flake CI that people actually believe. Keep sharding optimal against a wall-clock target, move preview and end-to-end onto sandboxes, and drive flakiness down.
+Fewer CI reruns caused by flaky tests, and separate queue lanes for teams whose work doesn't touch anyone else's.
 
-### Review & merge: agents gating agents (everyone)
+### Product foundation system (<TeamMember name="Julian Bez" photo />)
 
-As agents author most PRs, no one reviews every diff by hand. Route PRs by blast radius, let independent reviewer agents gate rather than just comment, and lean on deploy and rollback as the safety valve.
+A product built in the standard shape gets scoped CI, its own queue lane, and StampHog approval with less human review. The standard shape covers product isolation, MCP, code generation, ingress/egress, and guardrails.
 
-### Measure: how do we know it's getting better? (everyone)
+### StampHog + ReviewHog (<TeamMember name="Julian Bez" photo />)
 
-Every loop above gets a metric: PR-to-merge time, flakiness, CI run times, and per-product attribution so teams own their own cost. Non-goal: measuring individual engineering productivity.
+ReviewHog becomes the PR reviewer for the repo and replaces the paid review bots. StampHog stays separate and gets stricter about what it approves. We also want to try cheaper reviews that run locally on developers' own subscriptions.
+
+### Test growth (<TeamMember name="Raúl Negrón-Otero" photo />)
+
+Tests grow faster than anything else in the repo. We'll measure which tests are actually useful, starting with the teams that own the most, and stop adding tests that don't add coverage.
+
+### DevEx simplicity (<TeamMember name="Raúl Negrón-Otero" photo />, <TeamMember name="Julian Bez" photo />)
+
+Fewer tools and fewer bots commenting on PRs. CI workflows split into smaller pieces that other engineers can read and change safely.
+
+### AgentEx (<TeamMember name="Georges-Antoine Assi" photo />)
+
+Agents should deal with reviews, queue ejections, and flaky tests without someone telling them to. That needs the right skills and tools, and agents that can see what's going on.
+
+### Code quality and PR experience (<TeamMember name="Julian Bez" photo />)
+
+How agents keep code quality up, locally and on PRs. Also a small helper that tells people why their PR is stuck, without taking over from their own agent.
+
+To hear from teams, we'll post team-specific numbers (merge times, flakes) in each team's channel, with a poll or a 15-minute slot to talk.
+
+Not this quarter: building our own flaky test quarantining (Trunk keeps doing it, and we'll look again in Q1), and new local dev environment work.

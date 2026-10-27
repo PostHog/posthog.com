@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 import dotenv from 'dotenv'
-import { createCareersOG, createOGImages, createOrUpdateStrapiPosts } from '../gatsby/postBuildTasks'
+import { createOGImages, createOrUpdateStrapiPosts } from '../gatsby/postBuildTasks'
 
 dotenv.config({ path: path.resolve(process.cwd(), '.env.production') })
 dotenv.config({ path: path.resolve(process.cwd(), '.env') })
@@ -31,7 +31,6 @@ const main = async () => {
     if (task === 'og') {
         const data = await fetchData()
         console.log('Creating OG images')
-        await createCareersOG()
         await createOGImages(data)
         console.log('Finished creating OG images')
         return

@@ -53,7 +53,7 @@ A few things to keep in mind:
 - If the customer has a CSM, AE, or AM assigned, their dedicated PostHog human should run the call.
 - If the customer already belongs to the Onboarding bucket, prioritize meeting with them, and add credits to their account, as they would get the same service anyway.
 
-Internally, when someone purchases a call, we get notified in our Slack channel. Check who completed the purchase, look them up in Vitally for more context, and check whether they booked a call. Change the status in Vitally to `Paid Call purchased` for tracking purposes, and add a note if needed.
+Internally, when someone purchases a call, we get notified in our Slack channel. Check who completed the purchase, look them up in PostHog Customer Analytics for more context, and check whether they booked a call. Change the status in PostHog Customer Analytics to `Paid Call purchased` for tracking purposes, and add a note if needed.
 
 ### Tooling
 
@@ -61,7 +61,7 @@ Check out the list of [shared tools](https://posthog.com/handbook/growth/sales/s
 
 The team-specific tools for this team are:
 
-- Onboarding hub in Vitally, and [main view](https://posthog.vitally-eu.io/hubs/08486fc6-0250-4c4c-abd8-3c5a168fd874/9f17c73c-94d2-487f-bc9a-e5041a568c8b) with Onboarding accounts.
+- Onboarding hub in PostHog Customer Analytics, and [comprehensive onboarding view](https://us.posthog.com/project/2/customer_analytics/accounts?view=01a11d0a-3430-73f3-be27-777e0b6c904b) with Onboarding accounts.
 - [Shared Calendly link](https://calendly.com/posthog-onboarding-team) - make sure to add buffer to your schedule to avoid having calls back-to-back.
 - [Github project board](https://github.com/orgs/PostHog/projects/134/views/1).
 - [Onboarding Google Drive](https://drive.google.com/drive/u/0/folders/0ADuSyIJNgdr-Uk9PVA) with all relevant documents.
@@ -86,7 +86,7 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 -   Go through Sales docs, especially [Contract Rules](https://posthog.com/handbook/growth/sales/contract-rules), [Creating Contracts](https://posthog.com/handbook/growth/sales/contracts), and others from the SalesOps section. There will be some related conversations that you'll need to handle yourself, so come prepared.
 -   Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
 -   Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) and [Sales & CS Trainings](https://app.buildbetter.app/folders/18024) BuildBetter folders.
--   Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh) and [Analytics Exercise](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding-exercise).
--   Go through the [PostHog curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum).
+-   Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh) and [Analytics Exercise](https://posthog.com/handbook/customer-success/new-hire-onboarding-exercise).
+-   Go through the [PostHog curriculum](https://posthog.com/handbook/customer-success/new-hire-onboarding#learning-posthog).
 -   Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend/watch [Product AMAs](https://drive.google.com/drive/u/0/folders/0ANaJ7VgQLiw-Uk9PVA) that are scheduled periodically.
 -   Take [CoachHog](https://coachhog.lovable.app/) for a spin!

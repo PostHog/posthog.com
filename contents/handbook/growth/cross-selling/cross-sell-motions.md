@@ -16,7 +16,7 @@ Described here are some of the current goals and tactics to improve effective cr
 
 The main objective is to get existing PostHog customers to adopt more of the platform. We firmly believe that adopting more products leads to a better experience and higher satisfaction with PostHog. 
 
-For a TAM today, a quantitative goal is to move from an average 4.8 products adopted currently to 6 products adopted for AM managed accounts over the next two quarters. Accounts may be promoted to CSM coverage and continue with the adoption plan.
+For a TAM today, a quantitative goal is to move from an average 4.8 products adopted currently to 6 products adopted for TAM managed accounts over the next two quarters. Accounts may be promoted to CSM coverage and continue with the adoption plan.
 
 AEs and CSMs goals might be polar opposites. Where AEs may want wide exposure, it's also important to establish the right time for product adoption, rather than overselling something that may not apply to the initial implementation.  
 
@@ -223,7 +223,7 @@ What alerts would be helpful to have that would indicate good cross sell opportu
 
 ## **Discovery through conversation**
 
-Effective [discovery](https://posthog.com/handbook/cs-and-onboarding/getting-to-know-your-customers) focuses on understanding customer challenges rather than pushing products.
+Effective [discovery](https://posthog.com/handbook/customer-success/getting-started-with-customers#3-your-first-call) focuses on understanding customer challenges rather than pushing products.
 
 ### Example questions to ask
 

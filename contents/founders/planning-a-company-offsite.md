@@ -8,7 +8,7 @@ author:
   - grace-mckenzie
 tags:
   - Founders
-  - Ops & finance
+  - Running the company
 crosspost:
   - Blog
 ---

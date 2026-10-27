@@ -16,7 +16,7 @@ const WindowList = React.memo(function WindowList() {
     const { windows } = useAppWindows()
 
     return (
-        <div data-app="WindowList" className="flex size-full justify-center items-center">
+        <div data-app="WindowList" className="relative flex size-full justify-center items-center pointer-events-none">
             {windows.map((item) => (
                 <AppWindow item={item} key={item.key} />
             ))}
@@ -29,9 +29,9 @@ export default function Wrapper() {
     const { compact } = useAppSettings()
 
     return (
-        <AppContainer className="h-dvh flex flex-col p-2">
+        <AppContainer className="relative h-dvh flex flex-col p-2">
             {!compact && <TaskBarMenu />}
-            <div data-app="DesktopViewport" ref={constraintsRef} className={`flex-grow relative min-h-0 overflow-clip`}>
+            <div data-app="DesktopViewport" ref={constraintsRef} className={`flex-grow min-h-0 overflow-clip`}>
                 <Desktop />
                 <WindowList />
             </div>

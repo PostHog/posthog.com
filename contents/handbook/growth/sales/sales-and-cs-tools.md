@@ -92,7 +92,7 @@ Unless otherwise indicated, you can self-serve access requests to the following 
 - <PrivateLink url='https://posthog.slack.com/archives/C08UNFX75ST'>#closed-won</PrivateLink> - yay!
 - <PrivateLink url='https://posthog.slack.com/archives/C096DC85NH5'>#closed-lost</PrivateLink> - boo!
 - <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#customer-churn</PrivateLink> - discussion of potential and actual customer churn.
-- <PrivateLink url='https://posthog.slack.com/archives/C09HKF565MZ'>#changelog</PrivateLink> - product launches.
+- <PrivateLink url='https://posthog.slack.com/archives/C06G2G7JSM6'>#posthog-changelog</PrivateLink> - product launches.
 - <PrivateLink url='https://posthog.slack.com/archives/C0975UEGHT5'>#today-i-learned</PrivateLink> - where we share our learnings.
 - <PrivateLink url='https://posthog.slack.com/archives/C07TQR0V16U'>#ask-max</PrivateLink> - bot focused on internal processes and questions.
 - <PrivateLink url='https://posthog.slack.com/archives/C0AP5NXF8D7'>#demo-posthog-anything</PrivateLink> - show off something cool or see how others are demoing things.
@@ -105,7 +105,7 @@ Why should engineers have all the fun? We routinely build our own internal tooli
 - <PrivateLink url='https://github.com/PostHog/hedgeground'>Hedgeground</PrivateLink> - LLM-focused demo app.
 - <PrivateLink url='https://reinvented-won.vercel.app/'>Wheel of Names</PrivateLink> - randomly pick a person.
 - <PrivateLink url='https://posthog-academy.vercel.app/'>Academy</PrivateLink> - training platform.
-- <PrivateLink url='https://quote.posthog.com'>QuoteHog</PrivateLink> - create quotes for customers.
+- <PrivateLink url='https://quote.posthog.com'>QuoteHog</PrivateLink> - create quotes for customers. Automatically create quotes 90 days out from renewal by connecting QuoteHog to Salesforce, then switching on <strong>QuoteHog Bot Integration</strong> in the <strong>Salesforce Integration</strong> card on your profile page
 - <PrivateLink url='https://github.com/PostHog/hogspy'>HogSpy</PrivateLink> - Chrome extension for extra debugging info about PostHog usage.
 - <PrivateLink url='https://github.com/PostHog/learn'>Learn</PrivateLink> - prompts for PostHog Code on how to use PostHog effectively.
 - <PrivateLink url='https://github.com/PostHog/yahe'>Yet Another Hog Spy</PrivateLink> - Chrome extension to identify SDKs used on a website.

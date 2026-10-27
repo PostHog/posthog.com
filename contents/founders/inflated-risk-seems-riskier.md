@@ -8,6 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
+  - CEO diaries
 crosspost:
   - Blog
 ---

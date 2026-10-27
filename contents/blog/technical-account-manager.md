@@ -37,7 +37,7 @@ Products have gotten broader and more technical. Seemingly [everyone is an engin
 
 - Installing PostHog might mean integrating [feature flags](/feature-flags) into page render logic and writing SQL queries across multiple sources using complex joins.
 
-Engineers are skeptical of how much "non-technical" people can help with all this. TAMs must add technical value or engineers will tune them out.
+Engineers are skeptical of how much "non-technical" people can help with all this. TAMs must [add technical value](/blog/being-in-a-sales-role-has-made-me-a-better-software-engineer#buying-software-is-not-fun) or engineers will tune them out.
 
 Along with this, SaaS has moved away from simple subscriptions. There is much more usage or credit-based pricing. AI accelerated this trend. This means there is more work to do to figure out what the correct amount of spend is for a given account, as well as work to do to optimize that spend. There's an expectation TAMs will help with this.
 
@@ -115,7 +115,7 @@ As for more character traits, a good way to summarize is that great TAMs are [lo
 
 Because TAMs are special at PostHog, we also have special requirements for them. Generally, we look for two types of people:
 
-- Account executives who have owned longer term customer relationships and are technical enough to hold their own. They won't be bringing engineers to their demos for example. We look for salespeople who have built their own [vibe coded tools](/blog/best-analytics-stack-for-vibe-coded-apps) and side projects.
+- Account executives who have owned longer term customer relationships and are [technical enough to hold their own](/blog/hiring-technical-csms). They won't be bringing engineers to their demos for example. We look for salespeople who have built their own [vibe coded tools](/blog/best-analytics-stack-for-vibe-coded-apps) and side projects.
 - Sales engineers or product specialists who are tired of letting the sales team get all the credit. Some of our TAMs are literally ex-[product engineers](/product-engineer/what-is-a-product-engineer).
 
 We then empower these people to really make our customers successful, even if that means smaller renewals. We count our anti-revenue wins as wins too. 

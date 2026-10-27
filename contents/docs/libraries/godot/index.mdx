@@ -1,0 +1,472 @@
+---
+title: Godot
+sidebarTitle: Godot
+sidebar: Docs
+showTitle: true
+github: 'https://github.com/PostHog/posthog-godot'
+features:
+  eventCapture: true
+  userIdentification: true
+  autoCapture: false
+  sessionRecording: false
+  featureFlags: true
+  groupAnalytics: true
+  surveys: false
+  aiObservability: false
+  errorTracking: true
+---
+
+> **Note:** This SDK is experimental and not yet production-ready. APIs and behavior may change without notice. Test thoroughly before using it in a production game.
+
+The PostHog SDK for Godot is a GDScript addon for Godot 4.5 and later. It supports custom events, user identification, Feature Flags, Experiments, and Error Tracking without .NET or native dependencies.
+
+The SDK queues events and sends them asynchronously in batches. With persistence enabled (the default), it writes events to local storage when you capture them. Call its public APIs on the main thread.
+
+## Installation
+
+1. Download the `posthog-godot-<version>.zip` addon asset from [GitHub Releases](https://github.com/PostHog/posthog-godot/releases). Use the addon ZIP, not the automatically generated source archives.
+2. Extract the ZIP at your project root so the addon is at `res://addons/posthog/`.
+3. Enable **PostHog** in **Project > Project Settings > Plugins**. This adds the `PostHog` autoload.
+
+### Code-based initialization
+
+Initialize PostHog once from your startup scene:
+
+```gdscript
+extends Node
+
+func _ready() -> void:
+    var config := PostHogConfig.new()
+    config.api_key = "<ph_project_token>"
+    config.host = "<ph_client_api_host>"
+    if PostHog.setup(config):
+        PostHog.capture("game_started", {"mode": "single_player"})
+```
+
+Set `api_key` to your [project token](https://app.posthog.com/settings/project), not a personal API key. The ingestion host is usually `https://us.i.posthog.com` or `https://eu.i.posthog.com`, depending on your region.
+
+You can also set `host` to your [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) URL, such as `https://analytics.example.com`. For Windows exports, see [TLS certificate failures](#tls-certificate-failures-on-windows).
+
+`setup()` returns `false` and logs a warning if the configuration is invalid or the client is already initialized. It copies the configuration, so changing the original resource after setup doesn't reconfigure the client.
+
+> **Important:** By default, setup captures application lifecycle events and starts a feature flag request. If you need consent before collection, set `config.opt_out_by_default = true` before calling `setup()`. See [Opt out of data capture](#opt-out-of-data-capture).
+
+### Resource-based initialization
+
+Instead of calling `setup()` in code:
+
+1. Create a **PostHogConfig** resource in the Inspector and save it as a `.tres` file.
+2. Set its `api_key`, `host`, and any other options.
+3. Enable **Advanced Settings** in **Project Settings** and set **Posthog > Config** (`posthog/config`) to the resource's path.
+
+In exported games, the autoload initializes from this resource before your scenes run. Don't combine resource-based initialization with a manual `setup()` call.
+
+By default, `skip_auto_init_on_editor_play = true` skips resource-based initialization when you run the game with an editor build, including from the command line. Set it to `false` in the resource to enable development tracking. Explicit `setup()` calls aren't affected by this safeguard. Use a separate PostHog project for development.
+
+### Configuration options
+
+Set these properties on `PostHogConfig` before initialization. Exported properties are also editable in the Inspector.
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `host` | `"https://us.i.posthog.com"` | Ingestion host. Use HTTPS outside local testing. |
+| `flush_at` | `20` | Number of queued events that triggers a flush. |
+| `flush_interval_seconds` | `30.0` | Interval between automatic flushes. |
+| `max_queue_size` | `1000` | Maximum queued events. When full, the queue drops the oldest events. |
+| `max_batch_size` | `50` | Maximum events per request. |
+| `request_timeout_seconds` | `10.0` | Timeout for each event or feature flag request. |
+| `capture_application_lifecycle_events` | `true` | Capture installed, updated, opened, and backgrounded events. |
+| `capture_exceptions` | `true` | Capture Godot errors automatically. |
+| `capture_exceptions_in_editor` | `true` | Capture automatic errors when running with an editor build. |
+| `preload_feature_flags` | `true` | Load flags on startup, identify, reset, group changes, and opt-in. |
+| `send_feature_flag_event` | `true` | Capture `$feature_flag_called` when a known flag is accessed. |
+| `opt_out_by_default` | `false` | Start opted out when there's no saved consent preference. |
+| `persistence` | `true` | Persist identity, consent, properties, flags, lifecycle history, and queued events. |
+| `storage_path` | `"user://posthog"` | Parent storage directory. Each project token and host use a separate subdirectory. |
+| `flush_on_quit` | `true` | Attempt a final flush on intercepted window close or `PostHog.quit()`. |
+| `flush_on_quit_timeout_seconds` | `3.0` | Maximum wait for the final flush. |
+
+See [all configuration options](https://github.com/PostHog/posthog-godot/blob/main/docs/configuration.md), including person profiles, application version/build, and error debouncing.
+
+Persistent data is stored as unencrypted JSON under `user://posthog`. Set `persistence = false` for memory-only operation; identity and consent then reset when the game restarts.
+
+## Capturing events
+
+Call `capture()` with an event name and optional properties:
+
+```gdscript
+PostHog.capture("level_completed", {"level_id": 5, "score": 1250})
+```
+
+Use `snake_case` event and property names that describe the action, such as `level_completed`, `item_purchased`, or `quest_started`.
+
+Properties must contain JSON-compatible values, such as dictionaries, arrays, strings, numbers, booleans, and `null`. Convert Godot types such as `Vector2`, `Color`, Nodes, and Resources before passing them to the SDK:
+
+```gdscript
+PostHog.capture("checkpoint_reached", {
+    "position_x": position.x,
+    "position_y": position.y,
+})
+```
+
+The SDK copies properties, so later changes to your dictionary don't modify queued events.
+
+### Capturing screen views
+
+Record navigation explicitly with `screen()`. It captures a `$screen` event with a `$screen_name` property:
+
+```gdscript
+PostHog.screen("main_menu")
+PostHog.screen("level_select", {"unlocked_levels": 5})
+```
+
+## Identifying users
+
+Read our [identifying users guide](/docs/product-analytics/identify) before adding identification.
+
+The SDK starts with a persistent anonymous distinct ID. When a player logs in, call `identify()` with a stable player ID and optional person properties:
+
+```gdscript
+await PostHog.identify("player_123", {
+    "name": "Max Hedgehog",
+    "plan": "premium",
+}, {
+    "first_game_version": "1.0",
+})
+```
+
+The second dictionary sets or updates person properties. The third sets properties only if they haven't been set before (`$set_once`). The first identification links the player's anonymous events to their identified user.
+
+With `preload_feature_flags` enabled, `identify()` waits for a flag reload. Its boolean result reports whether that reload succeeded; a failed reload doesn't undo the identity change.
+
+### Reset on logout
+
+Call `reset()` when a player logs out, before identifying another account:
+
+```gdscript
+await PostHog.reset()
+```
+
+By default, this creates a new anonymous distinct ID and session and clears groups, super properties, flag evaluation properties, and cached flags. It doesn't change consent. Previously queued events retain their original identity.
+
+## Anonymous vs identified events
+
+By default, events captured before `identify()` don't create a [person profile](/docs/data/persons). After identification, events create or update a profile. See [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) for the distinction.
+
+Configure this before setup:
+
+```gdscript
+config.person_profiles = PostHogConfig.PersonProfiles.IDENTIFIED_ONLY
+```
+
+Available options:
+
+- `IDENTIFIED_ONLY` (default) – Process person profiles after `identify()`.
+- `ALWAYS` – Process person profiles for anonymous events too.
+- `NEVER` – Don't process person profiles. This also disables `identify()` and `alias()`.
+
+`NEVER` doesn't stop event collection. Use [opt-out](#opt-out-of-data-capture) to stop collection.
+
+## Super properties
+
+Register a property once to include it with future events. With persistence enabled, super properties survive game restarts:
+
+```gdscript
+PostHog.register("game_mode", "ranked")
+PostHog.register("release_channel", "stable")
+```
+
+Event-specific properties override super properties with the same key. The SDK's own metadata, such as `$os` and `$lib`, takes precedence over both.
+
+Remove a property with `unregister()`:
+
+```gdscript
+PostHog.unregister("game_mode")
+```
+
+`reset()` clears all super properties.
+
+## Group analytics
+
+Associate the current player's events with a group, such as a guild or team. See [Group Analytics](/docs/product-analytics/group-analytics) for setup and [pricing](/pricing) for availability.
+
+```gdscript
+PostHog.group("guild", "guild_123")
+```
+
+Pass properties to update the group:
+
+```gdscript
+PostHog.group("guild", "guild_123", {
+    "name": "The Hedgehogs",
+    "member_count": 42,
+})
+```
+
+The SDK persists memberships and attaches them to subsequent events as `$groups`. Calling `reset()` clears memberships.
+
+## Feature flags
+
+Use [Feature Flags](/docs/feature-flags) to roll out features to selected players.
+
+### Boolean feature flags
+
+```gdscript
+if PostHog.is_feature_enabled("new_game_mode"):
+    print("New game mode enabled")
+```
+
+Getters read cached values without making a request. For an unknown or not-yet-loaded flag, `is_feature_enabled()` returns `false`, or the fallback you pass as its second argument:
+
+```gdscript
+var enabled := PostHog.is_feature_enabled("new_game_mode", false)
+```
+
+The fallback applies only to unknown flags, not flags explicitly evaluated as `false`.
+
+### Multivariate feature flags
+
+`get_feature_flag()` returns a `PostHogFeatureFlag` object, not a boolean. Check its properties:
+
+```gdscript
+var flag := PostHog.get_feature_flag("shop_layout")
+if flag.is_enabled and flag.get_variant() == "compact":
+    print("Use the compact shop layout")
+```
+
+`has_value` indicates whether the flag is known. `value` is a boolean, a variant string, or `null` for an unknown flag.
+
+### Feature flag payloads
+
+Payloads use Godot's native JSON values:
+
+```gdscript
+var flag := PostHog.get_feature_flag("shop_layout")
+if flag.is_enabled:
+    var payload = flag.get_payload({})
+    if payload is Dictionary:
+        print(payload.get("theme", "light"))
+```
+
+You can also read the payload directly:
+
+```gdscript
+var payload = PostHog.get_feature_flag_payload("shop_layout", {})
+```
+
+The second argument is the fallback when there's no payload.
+
+### Waiting for flags
+
+By default, the SDK loads flags in the background on startup and restores a saved cache when it matches the current user context. On a first launch, flags aren't available until the request finishes.
+
+Connect to `feature_flags_loaded` to update your UI when flags become available. Check `feature_flags_are_loaded` too, in case initialization loaded flags before your scene was ready:
+
+```gdscript
+func _ready() -> void:
+    PostHog.feature_flags_loaded.connect(_update_feature_ui)
+    if PostHog.feature_flags_are_loaded:
+        _update_feature_ui()
+
+func _update_feature_ui() -> void:
+    if PostHog.is_feature_enabled("new_game_mode"):
+        print("Show the new game mode")
+```
+
+If you initialize manually, connect before `setup()` to receive its startup notification. `feature_flags_request_finished(success)` also reports failed or canceled requests.
+
+### Reloading feature flags
+
+Fetch fresh values explicitly:
+
+```gdscript
+var success := await PostHog.reload_feature_flags()
+if not success:
+    print("Feature flags could not be refreshed")
+```
+
+Identity, group, and evaluation-property changes invalidate old flag values. Getters use their fallback until new values arrive. A failed reload without a context change retains the previous cache.
+
+### Properties for flag evaluation
+
+Override person and group properties used to evaluate flags. These methods don't update stored person or group profiles in PostHog:
+
+```gdscript
+PostHog.set_person_properties_for_flags({"plan": "premium"}, false)
+PostHog.set_group_properties_for_flags("guild", {"member_count": 42}, false)
+await PostHog.reload_feature_flags()
+```
+
+Setters reload flags by default. Passing `false` as the final argument enables you to batch changes and reload once.
+
+Clear overrides with `reset_person_properties_for_flags()` or `reset_group_properties_for_flags("guild")`. Omit the group type to clear all group overrides. Reset methods also reload by default.
+
+## Experiments (A/B tests)
+
+[Experiments](/docs/experiments/start-here) use feature flags to assign variants:
+
+```gdscript
+var flag := PostHog.get_feature_flag("shop_experiment")
+if flag.has_value:
+    match flag.get_variant():
+        "control":
+            print("Show the original shop")
+        "compact":
+            print("Show the compact shop")
+```
+
+By default, accessing a known flag captures a `$feature_flag_called` exposure event. Repeated accesses are deduplicated for the same flag key and value until a successful reload or context change. Keep `send_feature_flag_event = true` for experiment exposure tracking.
+
+## Error tracking
+
+With `capture_exceptions = true` (the default), the SDK uses Godot's Logger API to capture script, engine, and shader errors, including `push_error()`, after initialization. It doesn't capture warnings or ordinary console messages.
+
+### Manual error capture
+
+Pass an error message, optional properties, an error type, and stack frames:
+
+```gdscript
+PostHog.capture_exception(
+    "Inventory save failed",
+    {"save_slot": 2},
+    "SaveError",
+    get_stack()
+)
+```
+
+Manual errors are marked as handled by default. Automatic errors are marked as unhandled. Call `capture_exception()` when your code detects an error you want to report.
+
+### Configuration
+
+Set these options before setup:
+
+```gdscript
+config.capture_exceptions = true
+config.capture_exceptions_in_editor = true
+config.exception_debounce_interval_ms = 1000
+```
+
+Identical automatic errors are suppressed for one second by default. Separate safety limits cap automatic capture at five errors per frame, 20 per rolling 10 seconds, and 20 pending errors. Manual captures aren't subject to these limits.
+
+Set `capture_exceptions = false` to disable automatic capture. Explicit `capture_exception()` calls remain enabled.
+
+For GDScript stack frames in release exports, enable **Debug > Settings > GDScript > Always Track Call Stacks** (`debug/settings/gdscript/always_track_call_stacks`) in Project Settings. Native crashes and errors before SDK initialization aren't captured.
+
+## Application lifecycle events
+
+With `capture_application_lifecycle_events = true` (the default), the SDK captures:
+
+| Event | When it fires |
+| --- | --- |
+| `Application Installed` | Setup with no saved lifecycle history. |
+| `Application Updated` | Setup after the application version or build changes. |
+| `Application Opened` | Setup, or a transition back to the foreground. |
+| `Application Backgrounded` | A transition to the background based on Godot's focus/pause notifications. |
+
+Version detection uses `config.app_version`, or `application/config/version` when the override is empty. Set `config.app_build` to include a build identifier in update detection.
+
+Lifecycle collection is subject to opt-out and the editor initialization safeguard.
+
+## Opt out of data capture
+
+To start without collecting events or requesting flags, set the default before setup:
+
+```gdscript
+var config := PostHogConfig.new()
+config.api_key = "<ph_project_token>"
+config.host = "<ph_client_api_host>"
+config.opt_out_by_default = true
+PostHog.setup(config)
+```
+
+Resume collection after consent, or stop it later:
+
+```gdscript
+PostHog.opt_in()
+PostHog.opt_out()
+
+if PostHog.is_opted_out:
+    print("Analytics collection is disabled")
+```
+
+Opt-out clears pending events and cached flags, cancels active requests, and blocks event capture, flag requests, identity/group changes, and automatic errors. It can't retract requests already received by the server.
+
+Consent persists across restarts when persistence is enabled. A saved preference takes precedence over `opt_out_by_default`. Opt-out doesn't erase the locally stored identity or registered properties; call `reset()` to clear user context without changing consent.
+
+## Manual flush
+
+Events flush after 20 queued events or 30 seconds by default. To attempt delivery immediately:
+
+```gdscript
+var success := await PostHog.flush()
+if not success:
+    print("Queued events could not all be delivered")
+```
+
+A flush can fail because of opt-out, a request failure, or active retry backoff. It doesn't guarantee ingestion or downstream processing. Retryable failures retain events for a later attempt; permanent HTTP errors can drop rejected events.
+
+## Shutdown
+
+To attempt a final flush before exiting, call `PostHog.quit()` instead of `get_tree().quit()`:
+
+```gdscript
+PostHog.quit()
+```
+
+With `flush_on_quit = true` (the default), it waits up to `flush_on_quit_timeout_seconds` (three seconds by default). The SDK also intercepts window close for a best-effort flush when `SceneTree.auto_accept_quit` hasn't already been disabled by your game. Direct `SceneTree.quit()` calls bypass this interception.
+
+To stop the SDK without exiting, flush explicitly before shutdown:
+
+```gdscript
+await PostHog.flush()
+PostHog.shutdown()
+```
+
+`shutdown()` doesn't wait for network delivery. With persistence enabled, unsent events remain on disk for a later launch. Mobile force-kill and browser tab close can't guarantee a final flush.
+
+## Platform support
+
+Use Godot 4.5 or later. See the SDK's [platform notes](https://github.com/PostHog/posthog-godot/blob/main/docs/unity-parity.md#platform-status-and-requirements) for export validation and limitations.
+
+| Platform | Requirements and validation |
+| --- | --- |
+| Windows, macOS, and Linux | CI includes release-export tests. Sandboxed macOS exports need outgoing network access. |
+| Android | Enable the Internet permission in your export preset. The repository records emulator smoke tests; physical devices remain unverified. |
+| iOS | Use HTTPS and configure network entitlements where required. The repository records simulator smoke tests using a custom ARM64 simulator library; physical devices remain unverified. |
+| Web | Use HTTPS, an ingestion host with appropriate CORS, and a CSP `connect-src` policy that permits that host. Browser tests cover Chromium; other browsers remain unverified. |
+
+Web persistence depends on browser storage availability and synchronization. An abrupt tab close can lose writes that haven't reached browser storage.
+
+## Troubleshooting
+
+### Events not appearing in PostHog
+
+1. Check that `PostHog.setup(config)` succeeded and `PostHog.is_initialized` is `true`.
+2. Verify your project token and ingestion host match your PostHog project and region.
+3. Check `PostHog.is_opted_out` and your saved consent preference.
+4. Call `await PostHog.flush()` to attempt delivery rather than waiting for the automatic interval.
+5. Check Godot's output for SDK warnings and your platform's network permissions.
+
+### No events when running from the editor
+
+Resource-based initialization skips editor builds by default. Set `skip_auto_init_on_editor_play = false` in the resource, or initialize explicitly with `setup()` using a development project token.
+
+### Feature flags use their fallback
+
+Wait for `feature_flags_loaded` or check the result of `await PostHog.reload_feature_flags()`. Confirm the flag exists, its targeting matches the current player, and the SDK isn't opted out.
+
+### TLS certificate failures on Windows
+
+Some Windows installations may lack the root certificates needed to verify your managed reverse proxy's certificate chain. Requests can fail in Godot even when the same host works in a browser.
+
+If affected, bundle an up-to-date PEM CA certificate bundle with your game and configure **Project Settings > Network > TLS > Certificate Bundle Override** (`network/tls/certificate_bundle_override`). Ensure the bundle is included in exported builds. See [Godot's TLS certificate documentation](https://docs.godotengine.org/en/4.5/tutorials/networking/ssl_certificates.html).
+
+This setting replaces Godot's default trust configuration for the game, not just PostHog requests. Include the roots needed by your other HTTPS services, keep certificate verification enabled, and test your exported game on target Windows machines.
+
+The managed proxy's certificate chain can change, including the issuing certificate authority. A bundled CA set mitigates missing-root failures but doesn't guarantee compatibility with future chains. Maintain the bundle and plan how to deliver updates to installed games. Bundling only the current proxy certificate or its root isn't a permanent solution.
+
+If you need control over certificate issuance, consider a [self-managed reverse proxy](/docs/advanced/proxy). You still need to manage certificate renewal and client trust compatibility.
+
+### Web requests fail
+
+Check the browser console for CORS, CSP, and HTTPS errors. Use the ingestion host directly; the SDK doesn't follow HTTP redirects.

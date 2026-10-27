@@ -9,7 +9,7 @@ Forward deployed engineering (FDE) works alongside the sales, customer success (
 ## Who owns what
 
 - **Sales** owns the deal and the commercial relationship; see [new business](/handbook/growth/sales/new-business-how-we-work).
-- **CS / TAMs** own the ongoing customer relationship and health; see [customer success](/handbook/cs-and-onboarding/customer-success).
+- **CS / TAMs** own the ongoing customer relationship and health; see [customer success](/handbook/customer-success/customer-success).
 - **FDE** owns scoped technical engagements that unblock adoption or expansion.
 
 We collaborate with these teams to provide focused, embedded technical work. The commercial relationship stays with the account owner throughout.

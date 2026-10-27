@@ -34,7 +34,7 @@ export const errorTracking = {
     seo: {
         title: 'Error Tracking – Catch and fix issues faster with PostHog',
         description:
-            'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
+            'Capture exceptions with stack traces, group them into issues, and get alerts. See the session replay behind every error. 100K exceptions free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     /**
@@ -327,7 +327,7 @@ export const errorTracking = {
             {
                 name: 'Sentry',
                 key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
+                link: '/compare/posthog-vs-sentry',
             },
             {
                 name: 'Signoz',

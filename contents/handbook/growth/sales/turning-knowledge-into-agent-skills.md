@@ -40,7 +40,7 @@ The [context mill](/handbook/wizard-and-docs/context-mill) transforms handbook c
 - **Explain the "why"**: Context about when to use something helps the AI apply it correctly
 - **Use clear structure**: Headers, bullet points, and numbered steps work better than walls of text
 
-For example, the [Logs skill](https://github.com/PostHog/context-mill/blob/main/transformation-config/skills/logs/description.md) is just a root prompt with some [reference material](https://github.com/PostHog/context-mill/blob/main/transformation-config/skills/logs/config.yaml) – it's that simple.
+For example, the [Logs skill](https://github.com/PostHog/context-mill/blob/main/context/skills/logs/description.md) is just a root prompt with some [reference material](https://github.com/PostHog/context-mill/blob/main/context/skills/logs/config.yaml) – it's that simple.
 
 ### 3. Think about automation
 
@@ -50,7 +50,7 @@ For example, if you write a playbook for gathering a customer dossier, that coul
 
 ## What gets turned into skills?
 
-Skills are defined using a YAML specification that allows for different variants based on app detection and context. The <SmallTeam slug="wizard-and-docs" /> team currently has over 60 skills the Wizard can use.
+Skills are defined using a YAML specification that allows for different variants based on app detection and context. The [context mill](/handbook/wizard-and-docs/context-mill) has over 60 skills the Wizard can use. Each product team owns the skills for its product.
 
 Your handbook contributions can become skills that:
 - Help customers integrate specific products

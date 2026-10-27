@@ -73,7 +73,7 @@ Large account requests
 
 Before doing a refund, review customer's usage. Some useful sources:
 
--   If you have access to Vitally, find the customer's Metabase dashboard link under the 'Usage Dashboard Link' trait. The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
+-   Find the customer's Metabase usage dashboard (the [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) shows how). The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
 -   [This dashboard](https://us.posthog.com/project/2/dashboard/259114) for an overview with usage reports and invoice history.
 -   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=) to help identify issues for customers with many projects
 -   You can also make a copy of [this PostHog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.
@@ -151,6 +151,7 @@ Once you do that (through any of the two options), you'll land on the "Add refun
 
 1. Allocate refund amounts per product. Refunds must be issued per product. Enter the refund amount for each affected product. You may need to do more math here: for an event spike refund may span Product Analytics, Person Profiles, and Group Analytics. Billing Admin does not automatically split refunds across products, you must do the math and allocate amounts manually. As you enter per product amounts, the total refund amount updates automatically.
 2. Select refund reasons: Choose a Stripe refund reason (required) and select an internal reason (used for internal reporting and analysis)
+    - Only use the `Fraudulent` Stripe reason for payment fraud, e.g. a stolen card. Stripe then adds the customer's email and card to the Radar blocklists, and blocks their future payments. If the customer was a victim of abuse or had unwanted usage (e.g. project token abuse), use a different Stripe reason and record the details in the internal reason and notes.
 3. Add any relevant notes or context (e.g. support ticket, Slack link, short explanation)
 4. Once you review everything and all looks good save the refund in Billing Admin. This will issue a Stripe credit note, which is processed as a refund to the customer’s default payment method. Stripe automatically sends a notification email to the customer.
 

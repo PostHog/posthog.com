@@ -51,7 +51,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 | Fathom | Multi-site agencies | ✔ | ✖ | ✔ | None |
 | Matomo | GA replacement | ✔ | ✔ | ✔ | Self-host only |
 | Vercel | Vercel users | ✖ | ✖ | ✔ | 50k events |
-| Countly | Mobile apps | ✔ | ✔ | ✖ | 500 MAU |
+| Countly | Mobile apps | ✔ | ✔ | ✖ | Self-host only |
 | TelemetryDeck | iOS/Android apps | ✔ | ✖ | ✔ | 100k signals |
 | GoAccess | Sysadmins | ✔ | ✔ | ✔ | Unlimited |
 
@@ -59,7 +59,7 @@ All the tools in this list offer one or more of these methods. We've also chosen
 
 ![posthog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/screenshots/hogflix-dashboard.png)
 
-[PostHog](https://posthog.com) is an all-in-one, open-source developer platform that combines [product analytics](/blog/best-open-source-analytics-tools), [web analytics](/web-analytics), [error tracking](/error-tracking), [session replay](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), and [experimentation](/experiments) into a single platform. Think [Amplitude](/blog/posthog-vs-amplitude) + [Hotjar](/compare/posthog-vs-hotjar) + [LaunchDarkly](/compare/posthog-vs-launchdarkly) in one.
+[PostHog](https://posthog.com) is an all-in-one, open-source developer platform that combines [product analytics](/compare/best-open-source-analytics-tools), [web analytics](/web-analytics), [error tracking](/error-tracking), [session replay](/session-replay), [feature flags](/feature-flags), [surveys](/surveys), and [experimentation](/experiments) into a single platform. Think [Amplitude](/blog/posthog-vs-amplitude) + [Hotjar](/compare/posthog-vs-hotjar) + [LaunchDarkly](/compare/posthog-vs-launchdarkly) in one.
 
 PostHog offers EU data hosting, so you can keep all your user data within the EU to comply with the GDPR. Hobbyists can also self-host PostHog Open Source via Docker Compose, though this is only recommended for smaller event volumes in the ~100k per month range. PostHog also supports event [autocapture](/docs/product-analytics/autocapture), so you can start collecting useful data immediately without instrumenting events by hand.
 
@@ -83,7 +83,7 @@ PostHog is especially helpful for engineers and product teams that want to under
 
 Smaller projects can self-host PostHog Open Source using Docker Compose, but [PostHog Cloud EU](/eu), a fully-managed service with servers hosted in Frankfurt, Germany, is **the best option for most users**.
 
-While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). To use PostHog without cookies, data is stored in a JavaScript object in `memory` that only lasts the duration of the pageview.
+While PostHog uses cookies by default, it can be [configured not to use cookies](/tutorials/cookieless-tracking). With cookieless server hash mode enabled, PostHog measures visitors using a privacy-preserving hash generated on its servers. The hash changes daily, and PostHog does not store a distinct ID in the visitor's browser.
 
 #### How much does PostHog cost?
 
@@ -279,7 +279,7 @@ Like PostHog, Countly can be deployed onto your own infrastructure, or in cloud 
 
 #### How much does Countly cost?
 
-The SaaS version is free up to 500 MAU; for additional tracking, the Flex plan starts at $40/month for 1,000 MAU, and can scale up to 160,000 MAU at $4300/month. The Enterprise plan requires a custom quote.
+The Flex plan (private cloud) starts at $175/month with usage-based pricing and a 14-day free trial. The Enterprise plan requires a custom quote.
 
 Its open source Community Edition is free to self-host, but it excludes most of its user behavior features. 
 
@@ -369,7 +369,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 

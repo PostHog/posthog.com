@@ -9,6 +9,7 @@ import { useForumPostSearch, useForumTopics } from 'components/Forum/hooks'
 import TopicIcon from 'components/Forum/TopicIcon'
 import { CurrentQuestionContext } from './Question'
 import Avatar from './Avatar'
+import getAvatarURL from '../util/getAvatar'
 
 // The editor's suggestion menus: `@` finds people, `#` finds forum topics, tags, and posts, and `:` finds emoji. The
 // editor owns the text and the caret; a menu only lists matches and says what to insert.
@@ -197,10 +198,7 @@ const SuggestionList = forwardRef<SuggestionMenuHandle, MenuProps & { groups: Gr
 
 const PersonIcon = ({ profile }) => (
     <span className="relative size-6 shrink-0 rounded-full">
-        <Avatar
-            className="w-full"
-            image={profile.attributes.avatar?.data?.attributes?.url || profile.attributes.gravatarURL}
-        />
+        <Avatar className="w-full" image={getAvatarURL(profile)} />
         {isModProfile(profile) && (
             <span className="absolute -right-1 -bottom-1 size-3.5 flex items-center justify-center rounded-full bg-primary border border-primary">
                 <Logo layout="logomark" className="w-2.5" />

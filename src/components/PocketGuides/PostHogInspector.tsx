@@ -9,19 +9,32 @@ export const COMPACT_INSPECTOR_CLASSES =
 export default function PostHogInspector({
     children,
     className = '',
+    headerAction,
+    title = 'Inspector',
+    live = 'polite',
+    showHeader = true,
 }: {
     children: React.ReactNode
     className?: string
+    headerAction?: React.ReactNode
+    title?: string
+    live?: React.AriaAttributes['aria-live']
+    showHeader?: boolean
 }): JSX.Element {
     return (
         <section
-            aria-label="Inspector"
+            aria-label={title}
             className={`min-w-0 overflow-hidden rounded border ${BORDER} bg-[#fffdfa] font-rounded text-[#292724] shadow-sm [&_details]:!m-0 [&_details]:!rounded-none [&_details]:!border-0 [&_details]:!bg-transparent [&_details]:!pb-0 ${className}`}
         >
-            <div className={`flex items-center gap-2 border-b ${BORDER} bg-[#f6f3ed] px-3 py-2 text-sm font-semibold`}>
-                Inspector
-            </div>
-            <div aria-live="polite" className="min-w-0 text-sm">
+            {showHeader && (
+                <div
+                    className={`flex items-center justify-between gap-2 border-b ${BORDER} bg-[#f6f3ed] px-3 py-2 text-sm font-semibold`}
+                >
+                    <span>{title}</span>
+                    {headerAction}
+                </div>
+            )}
+            <div aria-live={live} className="min-w-0 text-sm">
                 {children}
             </div>
         </section>
@@ -217,10 +230,25 @@ function EventTree({ value }: { value: string }): JSX.Element {
     )
 }
 
-export function InspectorStatus({ children }: { children: React.ReactNode }): JSX.Element {
+export function InspectorStatus({
+    children,
+    tone = 'neutral',
+}: {
+    children: React.ReactNode
+    tone?: 'neutral' | 'error'
+}): JSX.Element {
+    const error = tone === 'error'
+
     return (
-        <div className="flex items-start gap-2 bg-[#faf8f3] px-3 py-2 text-xs leading-relaxed text-[#5f5a52]">
-            <span aria-hidden="true" className="mt-[5px] size-1.5 shrink-0 rounded-full bg-orange" />
+        <div
+            className={`flex items-start gap-2 px-3 py-2 text-xs leading-relaxed ${
+                error ? 'bg-[#fff1ef] text-[#8f3328]' : 'bg-[#faf8f3] text-[#5f5a52]'
+            }`}
+        >
+            <span
+                aria-hidden="true"
+                className={`mt-[5px] size-1.5 shrink-0 rounded-full ${error ? 'bg-[#a93228]' : 'bg-orange'}`}
+            />
             <span>{children}</span>
         </div>
     )

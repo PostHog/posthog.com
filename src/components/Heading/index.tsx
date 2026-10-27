@@ -19,7 +19,7 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
     return (
         <span
             style={{ opacity: hovered || visible ? '1' : '0' }}
-            className="absolute left-0 top-2 -translate-x-4 @md/reader-content:-translate-x-5 @lg/reader-content:-translate-x-full pr-2 hidden xl:flex justify-center transition-opacity"
+            className="absolute left-0 top-2 -translate-x-4 @md/reader-content:-translate-x-5 @lg/reader-content:-translate-x-full pr-2 hidden @lg/reader-content-container:flex justify-center transition-opacity focus-within:!opacity-100"
         >
             <AnimatePresence>
                 {visible && (
@@ -32,7 +32,13 @@ export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean 
                     </motion.div>
                 )}
             </AnimatePresence>
-            <button className="hover:opacity-100 opacity-20 transition-opacity" onClick={handleClick}>
+            <button
+                type="button"
+                aria-label="Copy link to this section"
+                title="Copy link to this section"
+                className="hover:opacity-100 focus-visible:opacity-100 opacity-20 transition-opacity"
+                onClick={handleClick}
+            >
                 <IconLink className="size-4" />
             </button>
         </span>

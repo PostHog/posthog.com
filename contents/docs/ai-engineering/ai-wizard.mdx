@@ -2,7 +2,7 @@
 title: AI wizard
 ---
 
-import WizardInstall from 'getting-started/_snippets/wizard.mdx'
+import WizardInstall from "getting-started/_snippets/wizard.mdx";
 
 The PostHog wizard is an agentic CLI tool that uses AI to set up and manage PostHog in your codebase. By default, it installs and instruments PostHog for you with a single command: `npx -y @posthog/wizard@latest`.
 
@@ -13,20 +13,24 @@ It does more than installation, though. The wizard can also audit an existing in
 When it's done, your project is onboarded with:
 
 <ProductList
-className="grid gap-4 grid-cols-2 not-prose"
-urlPrefix="/docs/"
-sourceField="wizardSupport"
-sourceValues={[true, { value: "In development", color: "red" }, { value: "Coming soon", color: "yellow" }]}
+  className="grid gap-4 grid-cols-2 not-prose"
+  urlPrefix="/docs/"
+  sourceField="wizardSupport"
+  sourceValues={[
+    true,
+    { value: "In development", color: "red" },
+    { value: "Coming soon", color: "yellow" },
+  ]}
 />
 
 ## How it works
 
 <ProductVideo
-videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/wizard_clip_0a996d3379.mp4"
-alt="AI wizard install in Cursor"
-classes="rounded"
-autoPlay={true}
-loop={true}
+  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/wizard_clip_0a996d3379.mp4"
+  alt="AI wizard install in Cursor"
+  classes="rounded"
+  autoPlay={true}
+  loop={true}
 />
 
 Running the wizard automatically:
@@ -41,12 +45,14 @@ Running the wizard automatically:
 8. Optionally installs the [PostHog MCP server](/docs/model-context-protocol) for your AI agent
 
 <Caption>
-The AI wizard integrating both the JS Web SDK and Node SDK into a Next.js application
+  The AI wizard integrating both the JS Web SDK and Node SDK into a Next.js application
 </Caption>
 
 ## AI wizard installation
 
 <WizardInstall />
+
+> **Using an AI assistant?** If your AI client is connected to the [PostHog MCP server](/docs/model-context-protocol), you can ask it to install PostHog in your GitHub repository – no terminal required. The wizard runs in the cloud and opens a pull request for you to review.
 
 ## Self-driving
 
@@ -70,46 +76,50 @@ For the full walkthrough, see the [self-driving setup guide](/docs/self-driving/
 
 Running `npx @posthog/wizard` starts the default integration flow. The wizard also supports the following commands:
 
-| Command | What it does |
-|---|---|
-| `wizard` | Default flow – installs and instruments PostHog |
-| `wizard self-driving` | Turn on [self-driving](/docs/self-driving) – enable signal sources, set up scouts, and get your inbox link |
-| `wizard audit <subcommand>` | Audit an existing integration – see [Audit subcommands](#audit-subcommands) |
-| `wizard revenue-analytics` | Wire up Stripe + PostHog revenue analytics |
-| `wizard mcp-analytics` | Instrument your own MCP server with [MCP Analytics](/docs/mcp-analytics) |
-| `wizard ai-observability` | Instrument your LLM calls with [AI Observability](/docs/ai-observability) |
-| `wizard replay-vision` | Turn on Session Replay and create [Replay Vision](/docs/replay-vision) scanners written for your product |
-| `wizard migrate` | Migrate from another analytics or feature-flag vendor |
-| `wizard upload-source-maps` | Upload source maps to PostHog Error Tracking |
-| `wizard mcp add` / `wizard mcp remove` / `wizard mcp tutorial` | Manage the PostHog MCP server for your AI agent, or explore the MCP tutorial |
-| `wizard slack add` | Connect PostHog to your Slack |
-| `wizard skill <skill-name>` | Run a single skill by name – browse the available skills in the [context-mill releases](https://github.com/PostHog/context-mill/releases/latest) |
+| Command                                                        | What it does                                                                                                                                     |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `wizard`                                                       | Default flow – installs and instruments PostHog                                                                                                  |
+| `wizard self-driving`                                          | Turn on [self-driving](/docs/self-driving) – enable signal sources, set up scouts, and get your inbox link                                       |
+| `wizard audit <subcommand>`                                    | Audit an existing integration – see [Audit subcommands](#audit-subcommands)                                                                      |
+| `wizard revenue-analytics`                                     | Wire up Stripe + PostHog revenue analytics                                                                                                       |
+| `wizard mcp-analytics`                                         | Instrument your own MCP server with [MCP Analytics](/docs/mcp-analytics)                                                                         |
+| `wizard ai-observability`                                      | Instrument your LLM calls with [AI Observability](/docs/ai-observability)                                                                        |
+| `wizard replay-vision`                                         | Turn on Session Replay and create [Replay Vision](/docs/replay-vision) scanners written for your product                                         |
+| `wizard migrate`                                               | Migrate from another analytics or feature-flag vendor                                                                                            |
+| `wizard upload-source-maps`                                    | Upload source maps to PostHog Error Tracking                                                                                                     |
+| `wizard error-tracking`                                        | Set up [Error Tracking](/docs/error-tracking), with source map upload and release linking                                                        |
+| `wizard warehouse`                                             | Detect and connect [data warehouse sources](/docs/data-warehouse/sources)                                                                        |
+| `wizard feature-flags`                                         | Set up example [feature flags](/docs/feature-flags)                                                                                              |
+| `wizard metrics`                                               | Add PostHog application metrics to your project                                                                                                  |
+| `wizard mcp add` / `wizard mcp remove` / `wizard mcp tutorial` | Manage the PostHog MCP server for your AI agent, or explore the MCP tutorial                                                                     |
+| `wizard slack add`                                             | Connect PostHog to your Slack                                                                                                                    |
+| `wizard skill <skill-name>`                                    | Run a single skill by name – browse the available skills in the [context-mill releases](https://github.com/PostHog/context-mill/releases/latest) |
 
 ### Audit subcommands
 
 `@npx @posthog/wizard audit` on its own runs the `events` audit. Pass a subcommand to run a specific one.
 
-| Command | What it does |
-|---|---|
-| `wizard audit events` | Audit event capture quality and cost (default) |
-| `wizard audit all` | Comprehensive audit across every area |
-| `wizard audit autocapture` | Audit autocapture setup and cost |
-| `wizard audit feature-flags` | Audit feature flag usage and cost |
-| `wizard audit identify` | Audit your `$identify` implementation |
-| `wizard audit session-replay` | Audit session replay setup |
-| `wizard audit web-analytics` | Audit web analytics setup |
+| Command                       | What it does                                   |
+| ----------------------------- | ---------------------------------------------- |
+| `wizard audit events`         | Audit event capture quality and cost (default) |
+| `wizard audit all`            | Comprehensive audit across every area          |
+| `wizard audit autocapture`    | Audit autocapture setup and cost               |
+| `wizard audit feature-flags`  | Audit feature flag usage and cost              |
+| `wizard audit identify`       | Audit your `$identify` implementation          |
+| `wizard audit session-replay` | Audit session replay setup                     |
+| `wizard audit web-analytics`  | Audit web analytics setup                      |
 
 ### Legacy commands
 
 The CLI was overhauled to consolidate commands into a smaller, more consistent surface. If you used an older command name, here's where it went:
 
-| Old command | New command | What changed |
-|---|---|---|
-| `wizard integrate` | `wizard` | The default flow now runs the integration |
-| `wizard events-audit` | `wizard audit events` | Now an `audit` subcommand |
-| `wizard audit` | `wizard audit <subcommand>` | Now takes a subcommand; `wizard audit all` runs a full audit |
-| `wizard revenue` | `wizard revenue-analytics` | Renamed – update any scripts using `revenue` |
-| `wizard upload-sourcemaps` | `wizard upload-source-maps` | Renamed (the old `upload-sourcemaps` still works) |
+| Old command                | New command                 | What changed                                                 |
+| -------------------------- | --------------------------- | ------------------------------------------------------------ |
+| `wizard integrate`         | `wizard`                    | The default flow now runs the integration                    |
+| `wizard events-audit`      | `wizard audit events`       | Now an `audit` subcommand                                    |
+| `wizard audit`             | `wizard audit <subcommand>` | Now takes a subcommand; `wizard audit all` runs a full audit |
+| `wizard revenue`           | `wizard revenue-analytics`  | Renamed – update any scripts using `revenue`                 |
+| `wizard upload-sourcemaps` | `wizard upload-source-maps` | Renamed (the old `upload-sourcemaps` still works)            |
 
 ## Feedback
 

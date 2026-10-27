@@ -33,7 +33,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
  - Check out some [BuildBetter](https://app.buildbetter.app/) and [Gong](https://us-26000.app.gong.io/library/company?workspace-id=8823646477612786274&folder-id=5690024503570726123) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practice a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
-   - For familiarization and self-led training, follow the [product framework](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#learning-posthog). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
+   - For familiarization and self-led training, follow the [product framework](https://posthog.com/handbook/customer-success/new-hire-onboarding#learning-posthog). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
  - Read all of the `Sales, CS & Onboarding` section in the Handbook, and [update it as you learn more](/handbook/company/new-to-github#creating-a-pull-request).
  - Explore Slack. We're public by default, so Slack is one of the richest resources you have.
  - Meet with Ben Bradley, who's responsible for GTM teams.
@@ -41,8 +41,8 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 ## Week 2
 
 - Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. Check out our [Onboarding folder](https://app.buildbetter.app/folders/14521), where you can also find sessions on productivity and workflows.
-- Explore Vitally and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
-- Try running through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
+- Explore Customer Analytics and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
+- Try running through the [onboarding exercise](/handbook/customer-success/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Magda. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
 - Learn how to think about each product. As you go through the fundamentals, for each product you're trying to be able to answer:
@@ -59,7 +59,7 @@ Ideally, this will happen in Week 2-3, with the company of a few colleagues (dep
 
 - Demo practice session with the team.
 - The data we track on customers in PostHog and some hands-on exercises to get you comfortable using PostHog itself.
-- Deep dive on Vitally and Metabase, i.e., seeing how the systems we use come together day-to-day.
+- Deep dive on Customer Analytics and Metabase, i.e., seeing how the systems we use come together day-to-day.
 - Toolkit and internal processes.
 - No stupid questions session.
 
@@ -74,8 +74,8 @@ This is when you start working with your customers. Reach out, take the first ca
 - You're already reaching out to our customer base.
 - Focus on taking more and more ownership on calls so that team members are just there as a safety net.  
 - Continue to meet with customers - very quickly, you should be doing these solo. The customers you are working with will mostly just be getting started, so you'll see a lot of very familiar patterns emerge.
-- Evaluate implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](https://posthog.com/handbook/cs-and-onboarding/foundation-check) and [health check](https://posthog.com/handbook/cs-and-onboarding/health-checks) are the structured ways to do this.
-- Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Vitally playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
+- Evaluate implementations as you go - is the customer set up well, are they getting value? The [basic implementation review](https://posthog.com/handbook/customer-success/foundation-check) and [health check](https://posthog.com/handbook/customer-success/health-checks) are the structured ways to do this.
+- Set up a call with [Daniel](https://posthog.com/community/profiles/34722) to get a "soft intro" to Customer Analytics playbooks, segments, and our internal metrics. It's not a deep-dive - just getting familiar.
 - Keep working on your product knowledge. You can find a couple of [exercises here](https://posthog.com/handbook/onboarding/onboarding-team#how-to-deepen-your-knowledge).
 
 ## How do I know if I'm on track?
@@ -107,12 +107,12 @@ Our customers are always central to our work. There’s time and space to work o
 
 **Core responsibilities**
 
-- Make sure you’re on top of our customer base in Vitally. Don’t let renewals fall through the cracks.
+- Make sure you’re on top of our customer base in Customer Analytics. Don’t let renewals fall through the cracks.
 - It's not a race - quality over quantity, always. Spend time reviewing accounts, be accurate, and genuinely helpful in what you email to customers. 
 - Listen to customers and respond to their needs. It’s a conversation, not a monologue with a set agenda. 
 - Make sure your Calendly schedule stays available for customers. You’re the master of your own calendar, and we trust you, but be reasonable.
 - Do the [Sales handoff](https://posthog.com/handbook/onboarding/sales-handover) where appropriate and always provide context on the customer.
-- Maintain the hygiene - follow the process in Vitally, add notes, or tasks when necessary. Remember that we share the workspace, so keep the order.
+- Maintain the hygiene - follow the process in Customer Analytics, add notes, or tasks when necessary. Remember that we share the workspace, so keep the order.
 - You’re the driver, so take initiative. Keep in mind improvements, optimization, process, or content updates as you go. Don’t be afraid to voice your ideas.
 - AI should never be a substitute for learning. Use it to increase efficiency, but don't follow it blindly.
 

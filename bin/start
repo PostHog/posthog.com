@@ -13,6 +13,7 @@ export NODE_OPTIONS='--max_old_space_size=16384' # At least 16GB of RAM is requi
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 export TAILWIND_MODE=watch
 export GATSBY_TELEMETRY_DISABLED=1
+export GATSBY_CPU_COUNT="${GATSBY_CPU_COUNT:-2}"
 
 # Ensure .cache directory exists (Gatsby expects it before onPreBootstrap runs)
 mkdir -p .cache

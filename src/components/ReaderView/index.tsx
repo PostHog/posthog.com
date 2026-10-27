@@ -208,6 +208,9 @@ const backgroundImageOptions: (BackgroundImageOption & ToggleOption)[] = [
     },
 ]
 
+const SCROLL_EDGE_FADE_MASK =
+    '[mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]'
+
 const ContributorsSmall = ({ contributors }) => {
     return contributors?.[0] ? (
         <div className="not-prose">
@@ -666,7 +669,7 @@ const SidebarSearchResults = ({
         }
         const matches = extractOnPageMatches(contentRef.current, searchQuery)
         setOnPageMatches(matches.slice(0, 20))
-    }, [searchQuery])
+    }, [searchQuery, currentPath])
 
     useEffect(() => {
         if (!searchQuery || searchQuery.length < 2) {
@@ -995,7 +998,7 @@ const LeftSidebar = ({
     onMobileClose,
 }: LeftSidebarProps) => {
     const { searchQuery } = useSearch()
-    const { hasMounted } = useReaderView()
+    const { hasMounted, isWidthMeasured } = useReaderView()
     const posthog = usePostHog()
     const hasActiveSearch = !!searchQuery && searchQuery.length >= 2
 
@@ -1158,7 +1161,9 @@ const LeftSidebar = ({
             data-scheme="secondary"
             className={`relative flex-shrink-0 ${
                 transitionsEnabled && !mobile ? 'transition-[flex-basis] duration-300' : ''
-            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'}`}
+            } ${mobile ? 'basis-0' : isPinned ? 'basis-[250px]' : 'basis-12'} ${
+                isWidthMeasured ? '' : 'hidden @2xl/app-reader:block'
+            }`}
         >
             <div
                 ref={panelRef}
@@ -1183,9 +1188,9 @@ const LeftSidebar = ({
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
                         : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${PANEL_BG}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG}`
                         : 'z-30'
                 }`}
             >
@@ -1462,7 +1467,7 @@ function ReaderViewContent({
     hideMenu = false,
     className = '',
 }: ReaderViewProps) {
-    const { compact, focusedWindow } = useApp()
+    const { compact, focusedWindow, isMobile } = useApp()
     const { appWindow, activeInternalMenu } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef<HTMLDivElement>(null)
@@ -1554,8 +1559,9 @@ function ReaderViewContent({
                     // on a <Steps> page is the step container, not the viewport.
                     const targetRect = targetElement.getBoundingClientRect()
                     const scrollRect = scrollElement.getBoundingClientRect()
+                    const scrollMarginTop = parseFloat(getComputedStyle(targetElement).scrollMarginTop) || 0
                     scrollElement.scrollTo({
-                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop),
+                        top: Math.max(0, targetRect.top - scrollRect.top + scrollElement.scrollTop - scrollMarginTop),
                         behavior: 'smooth',
                     })
                     return
@@ -1694,7 +1700,11 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
+                            <InlineSearch
+                                contentRef={onSearch ? undefined : contentRef}
+                                onSearch={onSearch}
+                                currentPath={appWindow?.path}
+                            />
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
@@ -1752,7 +1762,7 @@ function ReaderViewContent({
                         <ScrollArea
                             dataScheme="primary"
                             isScrollRoot={focusedWindow === appWindow}
-                            className="flex-1 min-w-0 min-h-0 relative [mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]"
+                            className={`flex-1 min-w-0 min-h-0 relative ${isMobile ? '' : SCROLL_EDGE_FADE_MASK}`}
                         >
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(
@@ -1933,7 +1943,7 @@ function ReaderViewContent({
                                                     : contentMaxWidthClass || 'max-w-2xl'
                                             } overflow-x-hidden`}
                                         >
-                                            <h3 id="squeak-questions" className="mb-4">
+                                            <h3 id="community-questions" className="mb-4">
                                                 Community questions
                                             </h3>
                                             <Questions

@@ -185,7 +185,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       # reading order, but not one of the "N guides" the cover prints.
       isPrimer: Boolean
       # Groups a book's contents into named sections (e.g. "Ask a quick question" vs
-      # "Long-term modeling"). Pages without one print in a single flat list, as before.
+      # "Data modeling"). Pages without one print in a single flat list, as before.
       section: String
       watches: [FrontmatterWatches]
       requires: [FrontmatterRequires]
@@ -427,6 +427,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       year: Int
       githubUrls: [String]
       githubPRMetadata: GitHubPRMetadata
+      tags: [String]
     }
     type GitHubPRMetadata {
       url: String
@@ -539,6 +540,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       icon_url: String
       docsUrl: String
       unreleased: Boolean
+      releaseStatus: String
       beta: Boolean
       featured: Boolean
       caption: String
@@ -637,9 +639,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type ProductDataProductsAddons {
       legacy_product: Boolean
+      no_billing_limit: Boolean
     }
     type ProductDataProducts {
       legacy_product: Boolean
+      companion_of: String
+      no_billing_limit: Boolean
     }
     type ProductDataProductsAddonsFeatures {
         category: String
@@ -751,6 +756,23 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         product: String
         unique_users: Int
         unique_orgs: Int
+    }
+    type McpLeaderboardRow {
+        week: String!
+        facet: String!
+        grp: String
+        label: String!
+        calls_pct: Float
+        users_pct: Float
+        error_rate_pct: Float
+        p50_ms: Float
+        p95_ms: Float
+        calls_index: Float
+        users_index: Float
+    }
+    type McpLeaderboard implements Node @dontInfer {
+        rows: [McpLeaderboardRow!]!
+        fetchedAt: Date @dateformat
     }
     # searchContentId is how Algolia indexing (gatsby/algoliaConfig.js) joins a page to the MDX it
     # renders. Content templates must pass \`id\` in createPage context, or the page is invisible to search.

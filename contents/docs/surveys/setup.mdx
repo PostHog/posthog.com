@@ -37,25 +37,23 @@ posthog.getActiveMatchingSurveys((surveys) => {
 })
 ```
 
-> **Note:** You'll need to handle whether a user has seen a survey already or not manually if you're using this option. The [survey app](https://github.com/PostHog/feature-surveys/blob/main/site.ts) uses `localStorage` to keep track of this, which you can implement similarly in your code.
+> **Note:** When you capture `survey sent` or `survey dismissed` with `posthog-js`, the SDK marks the survey as seen so it doesn't show again. Include `$survey_iteration: survey.current_iteration` in each event. See [mark a survey as seen](/docs/surveys/implementing-custom-surveys#mark-a-survey-as-seen) if you capture these events another way.
 > **Note:** If you're using a URL or selector targeting option, you'll need to poll with `posthog.getActiveMatchingSurveys()` to get the most updated survey results.
 
-3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's name, ID, and any properties you'd want.
+3. In order for survey responses to be recorded, you'll need to send in a "survey sent" capture call event with the survey's ID, a response for each question, and any properties you'd want. See [capture survey responses](/docs/surveys/implementing-custom-surveys#capture-survey-responses) for the full list of properties.
 
 ```js-web
-posthog.capture("survey_sent", {
-    $survey_id: {survey.id}, // required
-    $survey_response: {survey_response}, // required
-    $survey_questions: [
-        {
-            id: "a3071551-d599-4eeb-9ffe-69e93dc647b6",
-            question: "Do you like PostHog?",
-        }
-    ], // required for `getSurveyResponse` to work as expected
-    $survey_name: {survey.name} // optional
+posthog.capture("survey sent", {
+    $survey_id: survey.id, // required
+    $survey_iteration: survey.current_iteration,
+    $survey_submission_id: crypto.randomUUID(),
+    $survey_completed: true,
+    $survey_questions: survey.questions.map(({ id, question }) => ({ id, question })),
+    [`$survey_response_${survey.questions[0].id}`]: surveyResponse,
+    $survey_name: survey.name // optional
 })
 ```
 
 Surveys that are shown should be captured with a "survey shown" event and those that are dismissed, with a "survey dismissed" event similar to the above.
 
-> PostHog currently supports surveys with either a single text input, or a link to another page (such as a form, or scheduling platform), so be sure to use the syntax above in order to track results. We'll be adding more survey types soon!
+> API surveys support the same question types as other surveys, such as open text, rating, single choice, and multiple choice. Send each response in the format described in [response formats](/docs/surveys/implementing-custom-surveys#response-formats).

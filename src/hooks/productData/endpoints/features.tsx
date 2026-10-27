@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconBrackets, IconCode, IconDashboard, IconLaptop, IconPlug, IconTerminal, IconTrends } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
+import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 
 /**
@@ -58,8 +59,16 @@ export const features = {
         features: [
             {
                 title: 'Predefined aggregate queries',
-                description:
-                    'Create endpoints for queries like "top selling products for this week" or "most active users".',
+                description: (
+                    <>
+                        Create endpoints for queries like "top selling products for this week" or "most active users".
+                        Our{' '}
+                        <Link to="/mcp/leaderboard" className="font-bold underline" state={{ newWindow: true }}>
+                            MCP leaderboard
+                        </Link>{' '}
+                        runs on two of them.
+                    </>
+                ),
             },
             {
                 title: 'Stable URLs your app can keep calling',
