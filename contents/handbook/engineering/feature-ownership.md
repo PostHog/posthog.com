@@ -27,13 +27,15 @@ This process does four things:
 
 "Context" means a Slack message or issue to the owning team that explains the problem and why it matters, without code.
 
-| Change                                          | What to do                                                                                                                                              |
+| Change                                          | Suggested path                                                                                                                                          |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Typo or small bug                               | Open a PR, then tell the owning team.                                                                                                                   |
 | Small improvement (one screen, no new behavior) | Open a PR, then tell the owning team. If you don't know that code well, check with them first.                                                          |
 | New feature, or a change in how something works | Give the owning team context first. They decide whether you build it or they do. A draft PR can come with the context, as long as they're free to close it. |
 
 The bigger the change, the more it shapes the owning team's direction, and they maintain it after it merges, so they get a say before the code exists.
+
+Not sure which row fits your change? If all else fails, ask the owning team.
 
 ### If you open the PR, you own it
 
