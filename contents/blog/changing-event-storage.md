@@ -1,6 +1,6 @@
 ---
 title: Queries are 2x faster, but we're making some event properties temporary
-date: 2026-10-26
+date: 2026-10-27
 rootPage: /blog
 sidebar: Blog
 showTitle: true
