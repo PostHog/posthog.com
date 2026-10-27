@@ -9,9 +9,9 @@ availability:
 sourceId: NoCRM
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The noCRM.io connector syncs leads, activities, users, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -39,6 +39,13 @@ You'll be asked for:
 <SyncModes />
 
 Some noCRM.io tables sync incrementally, so later runs only fetch new or updated rows. The rest are full refresh.
+
+## Per-lead tables
+
+The `lead_action_histories` and `lead_comments` tables are disabled by default. Syncing them requires one API request per lead, which can quickly consume noCRM's daily API quota. You can toggle them on in the schema configuration when setting up or editing your noCRM source.
+
+- **`lead_action_histories`** – History of actions on each lead, such as step and status changes, amount updates, assignments, comments, and emails. Full refresh only.
+- **`lead_comments`** – Comments posted on each lead, including logged activities and emails. Full refresh only.
 
 ## Configuration
 
