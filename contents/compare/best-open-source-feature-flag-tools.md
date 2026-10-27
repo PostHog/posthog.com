@@ -200,7 +200,7 @@ FeatBit is designed for self-hosting, with support for Helm Charts, Terraform, a
 
 ## How much does it cost?
 
-The self-hosted Foundation tier is free, with no limits on seats, MAUs, or projects. It includes feature flags, targeting, SDKs, audit logs, and experimentation. Some features are only on the Enterprise plan, which costs $3,999 per year. These include SSO, Terraform and GitOps, flag change approvals and scheduling, and shareable segments. Enterprise also adds priority support with a reply SLA. Enterprise Premium adds more capabilities and dedicated support at custom prices.
+The self-hosted Foundation tier is free, with no limits on seats, MAUs, or projects. It includes feature flags, targeting, audit logs, and experimentation. SSO, Terraform and GitOps, flag change approvals, scheduling, and shareable segments are only on the Enterprise plan, which costs $3,999 per year. Enterprise Premium adds more capabilities and dedicated support at custom prices.
 
 > ### Bottom line
 >
