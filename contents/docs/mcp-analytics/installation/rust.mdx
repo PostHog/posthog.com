@@ -188,7 +188,10 @@ match run_tool(call.arguments()).await {
         let result = call.complete(result); // deliver this, it may carry a conversation handle
         respond(result)
     }
-    Err(error) => call.fail(ToolCallError::new(&error).error_type("timeout")),
+    Err(error) => {
+        call.fail(ToolCallError::new(&error).error_type("timeout"));
+        respond_error(error)
+    }
 }
 ```
 
@@ -217,7 +220,7 @@ The Rust SDK doesn't yet have:
 - Resource and prompt events
 - Task handling. A tool that returns a task handle sends no event
 - A session token for stateless servers. It reads tokens other SDKs mint, but doesn't mint its own
-- Client name and version on stateless HTTP servers, unless the client replays a PostHog session token
+- Client name and version on stateless HTTP servers for clients older than `2026-07-28`, unless the client replays a PostHog session token. A `2026-07-28` client sends them in each request's `_meta`
 - An event properties callback, or an analytics handle for [custom events](/docs/mcp-analytics/custom-events). Call `capture` on your `posthog-rs` client instead
 - `$identify` and the merge of anonymous events into a user
 - Stack traces and model properties on the `$exception`
