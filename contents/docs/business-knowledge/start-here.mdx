@@ -1,0 +1,80 @@
+---
+title: Get started with Business Knowledge
+sidebar: Docs
+showTitle: true
+hideRightSidebar: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import OSButton from 'components/OSButton'
+
+<PrivateBeta />
+
+<QuestLog firstSpeechBubble="Add what PostHog should know." lastSpeechBubble="Your agents know your business now!">
+
+<QuestLogItem title="Add your knowledge" subtitle="Docs, website, and policies" icon="IconUpload">
+
+Open [**Business Knowledge**](https://app.posthog.com/business-knowledge) and choose **Add source**. Most teams start with their docs and website. Paste the URL and choose **Sitemap.xml** or **Same-origin crawl**, so PostHog indexes every page instead of one. Set auto-refresh to every day, and new pages show up without you adding them again.
+
+You can also paste a policy as text, or upload a PDF, DOCX, Markdown, CSV, or plain text file.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/sources#source-types">Add a source</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Turn on AI data processing" subtitle="Before answers work" icon="IconListCheck">
+
+Answers stay empty until two checks pass:
+
+1. An organization owner or admin approves AI data processing under **AI service providers** in organization settings. Until then, PostHog doesn't send source text to a model, and the Playground refuses questions.
+2. Each document passes the content check. Keyword search works as soon as it does. Semantic search can take up to an hour more, and the source shows **indexing** until it's ready.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/ai-data-processing">Turn on processing</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Choose what every reply includes" subtitle="Tone and policies" icon="IconNotebook">
+
+Turn on **Always include in replies** for guidance that should be in every answer: tone, policies, and company direction. PostHog still runs the content check.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/sources#always-include-in-replies">Set a source to always include</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Connect your GitHub repos" subtitle="Optional" icon="IconGithub">
+
+Select the repositories your agents should know about. When document search finds nothing, Business Knowledge looks in those repositories for a matching file and reads it.
+
+<CalloutBox icon="IconLock" title="PostHog does not index your repositories" type="fyi">
+
+Your code is **not** indexed, and PostHog doesn't search inside files. Business Knowledge searches file names and README text, then reads the matching file from GitHub when an answer needs it.
+
+</CalloutBox>
+
+Install the [PostHog GitHub App](https://app.posthog.com/settings/project-integrations), then connect it under **GitHub repositories** in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings).
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/github">Connect a repository</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="See what's covered and what's missing" subtitle="Playground" icon="IconSparkles">
+
+Use **Chat** to ask a question a customer or teammate would ask. If the answer cites a source, that fact is already in Business Knowledge. If it can't find the fact, add a source and ask again. Use **Search** to see which chunks match a query, without an answer.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/playground">Open the Playground</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Learn from support" subtitle="Optional: needs Support" icon="IconSupport">
+
+Let PostHog add reusable answers from resolved [Support](/docs/support/start-here) tickets. It learns only from public replies your team wrote, never from private notes or AI drafts.
+
+Learning is off until you turn on **Self-learning** in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings). Support has to be on in that environment first.
+
+<OSButton variant="primary" asLink to="/docs/business-knowledge/learn-from-support">Enable learning</OSButton>
+
+</QuestLogItem>
+
+</QuestLog>

@@ -1,4 +1,4 @@
-import { calculatePrice } from './calculatorLogic'
+import { calculatePrice, calculateRetentionPrice, getAddonTiers, getRetentionMonths } from './calculatorLogic'
 import { MODELS, MAX_OBSERVATIONS, estimateReplayVisionPricing } from '../../ReplayVision/PricingEstimator'
 
 type ProductInputs = Record<string, any>
@@ -30,6 +30,7 @@ export const getProductInputs = (product: any, analyticsData: ProductInputs = {}
                 ])
             ),
         }),
+        ...(product.retention && { retentionMonths: getRetentionMonths(product.retention, product.retentionMonths) }),
     }
 }
 
@@ -56,7 +57,6 @@ export const priceProductInputs = (product: any, inputs: ProductInputs, computeR
     const tiers = product.billingData?.plans.find((plan: any) => plan.tiers)?.tiers
     let volume = inputs.volume ?? 0
     let extraCost = 0
-    let parentVolume = 0
     if (product.type === 'product_analytics') {
         volume = Object.values(inputs.types).reduce((sum: number, value: any) => sum + value.volume, 0)
         const enhancedTiers = product.billingData?.addons
@@ -70,7 +70,6 @@ export const priceProductInputs = (product: any, inputs: ProductInputs, computeR
             .find((item: any) => item.type === addon.key)
             ?.plans.find((plan: any) => plan.tiers)?.tiers
         extraCost += calculatePrice(addonVolume, addonTiers).total
-        if (addon.countsTowardParentVolume) parentVolume += addonVolume
     }
     if (product.type === 'replay_vision') {
         const estimate = estimateReplayVisionPricing({
@@ -87,6 +86,12 @@ export const priceProductInputs = (product: any, inputs: ProductInputs, computeR
     }
     if (product.type === 'posthog_code')
         volume = Math.round(inputs.hours * computeRate * 100) + Math.round(inputs.modelSpend * 100)
-    const price = calculatePrice(volume + parentVolume, tiers)
+    if (product.retention) {
+        // Keeps months read from the URL within what the product allows
+        inputs = { ...inputs, retentionMonths: getRetentionMonths(product.retention, inputs.retentionMonths) }
+        const retentionTiers = getAddonTiers(product.billingData, product.retention.key)
+        extraCost += calculateRetentionPrice(retentionTiers, volume, inputs.retentionMonths).total
+    }
+    const price = calculatePrice(volume, tiers)
     return { ...inputs, volume, cost: product.billedWith ? 0 : price.total + extraCost, costByTier: price.costByTier }
 }

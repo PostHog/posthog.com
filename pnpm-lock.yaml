@@ -81,8 +81,8 @@ importers:
         specifier: 0.36.6
         version: 0.36.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/twig-components':
-        specifier: 0.1.3
-        version: 0.1.3(react@18.3.1)
+        specifier: 0.2.3
+        version: 0.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -576,6 +576,9 @@ importers:
       '@babel/core':
         specifier: ^7.15.5
         version: 7.28.4
+      '@babel/preset-typescript':
+        specifier: 7.27.1
+        version: 7.27.1(@babel/core@7.28.4)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.5
         version: 0.5.17(@types/webpack@4.41.40)(react-refresh@0.14.2)(type-fest@4.41.0)(webpack-hot-middleware@2.26.1)(webpack@5.101.3)
@@ -3629,10 +3632,11 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
 
-  '@posthog/twig-components@0.1.3':
-    resolution: {integrity: sha512-k3yRoTjL5kyPbblPCY+2lIGYV/dHYpa9qSsWeDp1YWRgMC/tTZ0ysbS6SZZtoEaL9oZtHs95M192r4uNatsyrw==}
+  '@posthog/twig-components@0.2.3':
+    resolution: {integrity: sha512-ekl1td3EqVxFiZagYRDEC5XFjFhL3kda3O56fXqUkDCQp5JuKmFtUo1a9QS56Bxnynf9P48JWi4J/c1+5dvBng==}
     peerDependencies:
       react: ^18.3.0 || ^19.0.0
+      react-dom: ^18.3.0 || ^19.0.0
 
   '@preact/signals-core@1.12.1':
     resolution: {integrity: sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==}
@@ -21643,12 +21647,14 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@posthog/twig-components@0.1.3(react@18.3.1)':
+  '@posthog/twig-components@0.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@rrweb/record': 2.1.6
       '@rrweb/replay': 2.1.6
       '@rrweb/types': 2.1.6
+      canvas-confetti: 1.9.4
       react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@preact/signals-core@1.12.1': {}
 

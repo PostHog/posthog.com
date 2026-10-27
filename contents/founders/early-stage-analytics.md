@@ -44,7 +44,7 @@ As much as we value analytics, we believe the best way to create a successful st
 
 Session recordings are the most useful analytical tool for early-stage startups. They help you learn exactly how early users are using your product, uncovering usage patterns, obvious failure modes, and unexpected behaviors. In other words, big problems.
 
-PostHog includes 5k monthly recordings for free – more than enough for any early-stage product. Just include the [snippet or library](/docs/integrate) in your app and turn them on in project settings. Once done, you get a steady stream of session recordings (if you have users) in your PostHog instance. 
+PostHog includes 5k monthly recordings for free – more than enough for any early-stage product. Just include the [snippet or library](/docs/getting-started/install) in your app and turn them on in project settings. Once done, you get a steady stream of session recordings (if you have users) in your PostHog instance. 
 
 To maximize your problem-solving potential, setup PostHog [error tracking](/docs/error-tracking) to monitor errors. Captured exceptions link to the session recording. The recording becomes the re-creation steps that make squashing bugs and fixing issues easier.
 
@@ -58,7 +58,7 @@ A key metrics dashboard is useful for validating that users are actually using t
 
 It's probably too early to start optimizing your conversion funnel or set up a [dashboard like AARRR](/blog/aarrr-pirate-funnel), though. It encourages premature optimization, or worse, hides bigger problems (like no one wanting your product). A key metrics dashboard strikes the balance between being useful and overanalyzing. 
 
-PostHog's snippet or library [autocaptures](/docs/data/autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a [template for a product analytics dashboard](/templates/product-analytics), and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
+PostHog's snippet or library [autocaptures](/docs/product-analytics/autocapture) the metrics you want, like pageviews, button clicks, and inputs without additional setup. We then offer a [template for a product analytics dashboard](/templates/product-analytics), and our insights make it easy to customize it to work for you. With PostHog, none of these tasks require a lot of work, and you can get back to building.
 
 ### 3. Gather feedback and talk to users
 

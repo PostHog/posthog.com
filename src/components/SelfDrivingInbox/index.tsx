@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 
+import { pocketGuideDestination } from '../../constants/pocketGuides'
 import scoutSkillsData from '../../data/scout-skills.json'
 
 import { InboxTemplate, ScoutSpec, UNCATEGORIZED } from './types'
@@ -28,7 +29,7 @@ function scoutFromAppTemplate(appTemplate: string, schedule?: string): ScoutSpec
 export function useSelfDrivingTemplates(): InboxTemplate[] {
     const data = useStaticQuery(graphql`
         query SelfDrivingInboxQuery {
-            guides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides/self-driving//" } } }) {
+            guides: allMdx(filter: { fields: { slug: { regex: "/^/learn/self-driving/pocket-guide/" } } }) {
                 nodes {
                     id
                     fields {
@@ -88,9 +89,12 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
     return useMemo(() => {
         const nodes = data?.guides?.nodes || []
 
-        // Keyed by the guide slug that owns each scout: /pocket-guides/x/SKILL -> /pocket-guides/x
+        // Join guide and sibling skill by their public reader URL.
         const scoutsByTemplate = new Map<string, any>(
-            (data?.scouts?.nodes || []).map((node: any) => [node.fields.slug.replace(/\/SKILL$/, ''), node])
+            (data?.scouts?.nodes || []).map((node: any) => [
+                pocketGuideDestination(node.fields.slug.replace(/\/SKILL$/, '')),
+                node,
+            ])
         )
 
         return (
@@ -108,9 +112,9 @@ export function useSelfDrivingTemplates(): InboxTemplate[] {
                     )
                 })
                 .map((node: any) => {
-                    const scoutNode = scoutsByTemplate.get(node.fields.slug)
+                    const scoutNode = scoutsByTemplate.get(pocketGuideDestination(node.fields.slug))
                     return {
-                        url: node.fields.slug,
+                        url: pocketGuideDestination(node.fields.slug),
                         category: node.frontmatter.category || UNCATEGORIZED,
                         templateTitle: node.frontmatter.title,
                         templateShortTitle: node.frontmatter.shortTitle,

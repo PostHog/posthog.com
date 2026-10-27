@@ -92,7 +92,7 @@ If you see an unnatural spike in $set or $identify events in the two previous ch
 
 
 #### 9. Hog Destinations
-If they pay for [data pipelines](https://posthog.com/docs/cdp) but have no active destinations, flag the mismatch and suggest enabling or removing the add-on. Newer accounts pay by usage (rather than the add-on), so keep an eye out for that as well.
+If they pay for [data pipelines](https://posthog.com/docs/data-pipelines) but have no active destinations, flag the mismatch and suggest enabling or removing the add-on. Newer accounts pay by usage (rather than the add-on), so keep an eye out for that as well.
 
 ![Hog destinations, batch exports, data warehouse syncs](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/13_Metabase_hog_batch_warehouse_06e8238ce9.png)
 

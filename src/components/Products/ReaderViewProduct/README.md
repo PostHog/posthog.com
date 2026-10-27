@@ -5,11 +5,18 @@ Stacked, prose-first product pages rendered inside `ReaderView`. This is the rep
 - **Product surface:** `/<product-slug>` → `<ProductReaderView productHandle="…" />` stacks one `<section>` per `productMenu` item.
 - **Pricing surface:** `/<product-slug>/pricing` → `<ProductReaderView productHandle="…" surface="pricing" />` stacks one `<section>` per `pricingMenu` item.
 - **Docs surface:** `/docs/<product-slug>` → a normal `<ReaderView>` that shares the same tabbed sidebar via `buildProductMenuTabs({ productData, activeSurface: 'docs' })`.
+- **Learn surface:** `/learn/<product-slug>` → `LearnPage` shares the product sidebar and renders the learning overview or guide chapters.
 
-Tabs with an `href` navigate when they are not already active. The active tab keeps its menu open
-unless `navigateOnActiveClick` is enabled. Products with `learnHub` enable that flag
-for Learn, so clicking the active Learn tab returns to the product's learning hub.
-Menu items then navigate within or between surfaces as their component defines.
+Tabs with an `href` navigate when they are not already active. Clicking the active Learn tab
+keeps the current page open. Its Overview link returns to the learning hub.
+
+Products opt in to Learn with `pocketGuideVolume`. Volumes with `learnHub` in
+`src/constants/pocketGuides.ts` use one `TreeMenu` on the overview, hub pages, and chapter pages.
+The tree contains direct links to Overview and Pocket guide, then the pages in `learnHub.pages`
+(Agent prompts and MCP for every hub, and Live playground where Twig has a lab). Pocket guide
+links to the introduction and has nested chapter links sourced from `useBookPages`; the shared
+TreeMenu handles expansion and selection. Learn does not use anchor links or swap menus based
+on the current route. Products without a hub retain a flat list of chapter links.
 
 ---
 

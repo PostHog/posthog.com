@@ -37,7 +37,7 @@ For customers with existing paid subscriptions we need to complete additional st
    
 If they need a shared Slack channel as part of the trial, [follow these instructions.](/handbook/growth/sales/slack-channels)
 
-Consider framing a collaborative method for progressing in the trial period with timed objectives. If it's new and depending on the level of engagement, we can use a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan).
+Consider framing a collaborative method for progressing in the trial period with timed objectives. If it's new and depending on the level of engagement, we can use a detailed [success plan](/handbook/customer-success/onboarding-success-plan).
 
 ## Spend caps during a trial
 
