@@ -81,7 +81,7 @@ Lead discussions with finding out what questions a user is asking their data, if
 | Sales & success | Which sign ups should we call first? | HubSpot + events |
 | Sales & success | Who's outgrowing their plan? | Stripe + events |
 
-Find tutorials on how to answer common questions and Skills that users can run [here.](/learn/warehouse)
+Find tutorials on how to answer common questions, and skills that users can run, in [the data warehouse learning hub](/learn/warehouse).
 
 ### Tools to help
 
