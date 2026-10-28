@@ -28,7 +28,7 @@ Labs like Anthropic and OpenAI use them to measure, compare, and market new mode
 
 But benchmarks aren't just for frontier labs. They're useful for anyone who wants to understand how well a model, harness, or skill works in their given stack. For example, you might run three different models with the same code review prompt on the same PR to choose the best one based on how many known bugs they catch, how long they take, and what they cost.
 
-The idea is similar to running controlled experiments, but in reality, benchmarking is never that easy. Evaluation is often subjective, behavior is unpredictable, and – perhaps most painful of all – agents love to cheat. They'll search for leaked context, memory, and database query logs to pass benchmark tests with as little work as possible.
+The idea is similar to running [controlled experiments](/product-engineers/ab-testing), but in reality, benchmarking is never that easy. Evaluation is often subjective, behavior is unpredictable, and – perhaps most painful of all – agents love to cheat. They'll search for leaked context, memory, and database query logs to pass benchmark tests with as little work as possible.
 
 In this post, I'll explain how we benchmark our agents at PostHog, what we learned, and where we messed up (so you don't have to) – all with links to real PRs.
 
@@ -76,7 +76,7 @@ So that's what we did.
 
 ![Build a golden set from real incidents, recreate the PRs that introduced the bugs, and evaluate whether reviewers identify their causes.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/02_golden_set_b744f1abbe.png)
 
-We looked through old PostHog tickets to create a golden set of 33 actual incidents, the PRs that caused them, descriptions of the problem, and the PR that fixed the incident. We analyzed each of them with ReviewHog and other bots to compare their performance, and the results were pretty good:
+We looked through old PostHog tickets to create a [golden set](/docs/ai-evals/datasets) of 33 actual incidents, the PRs that caused them, descriptions of the problem, and the PR that fixed the incident. We analyzed each of them with ReviewHog and other bots to compare their performance, and the results were pretty good:
 
 - ReviewHog found the incident-causing bugs in 62% of the cases
 - In 47% of the cases, ReviewHog was the only bot that discovered those bugs, while other bots missed them
@@ -163,7 +163,7 @@ With multi-step agents that simulate human-agent conversation, state leaks into 
 
 This approach is only valid if your agents don't generate meaningful artifacts (like traces, memory files, and logs) beyond the output that gets graded. Potential examples include simple classifiers or summarizers. 
 
-In these cases, you could run multiple variants at the same time; no shared state means no contamination. But in most cases (at least, for us at PostHog), our agents are complex and have many potential places to leak information, such as through observability tools or error logs.
+In these cases, you could run multiple variants at the same time; no shared state means no contamination. But in most cases (at least, for us at PostHog), our agents are complex and have many potential places to leak information, such as through [observability tools](/ai-observability) or error logs.
 
 So let's go back to the B4 and B12 example above to explain the failure modes. 
 
@@ -195,13 +195,13 @@ Most of us don't have unlimited time and patience to do sequential runs. The goo
 - Private writable state (scratchpads, memory, vector stores, and DBs)
 - Separate evaluation so scoring happens independently
 
-DB state isn't the only leak. If your agent has tools to query ClickHouse, PostHog, logs, and so on, an earlier benchmark run leaves traces in those sources. A subsequent run can find those error spikes or query histories and use them as clues. True isolation means isolating telemetry and log scopes too.
+DB state isn't the only leak. If your agent has tools to query ClickHouse, PostHog, [logs](/logs), and so on, an earlier benchmark run leaves traces in those sources. A subsequent run can find those error spikes or query histories and use them as clues. True isolation means isolating telemetry and log scopes too.
 
 ![Isolate each trial's memory, outputs, and telemetry so agents cannot read other benchmark runs.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/06_isolate_everything_v4_a4b4878c87.png)
 
 There's also a risk of *over*-isolating. If the benchmarking agent doesn't have as many tools as the real agent, it can get confused and skew the results unrealistically.
 
-Here's an example of one of the first dry-runs we tested. It differs from the previous two traces; it wasn't cheating, just following instructions a bit too literally and promised not to write any inbox reports:
+Here's an example of one of the first dry-runs we tested. It differs from the previous two traces; it wasn't cheating, just following instructions a bit too literally and promised not to write any [inbox reports](/docs/self-driving/inbox):
 
 ![Scout trace showing the agent retaining findings in memory but skipping inbox reports because dry-run reports would be discarded.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/07_trace_dry_run_8d886e28ed.png)
 
@@ -215,7 +215,7 @@ If these types of blind spots *are* a blocker for your agent and critical to you
 
 You can *technically* run hundreds of isolated agents with full tool access against the production database pretty reliably. But this will also interfere with the benchmark because it means state and data is not controlled between runs. You can't compare between them equally since it raises the question: "did this agent's score improve because of the variables we're testing, or because something in the data changed?"
 
-We solved this by moving benchmarks from a "production environment that changes all the time" to a "production environment with the same starting state" – i.e. frozen environments. To do this, we had to replicate or simulate our app, inject real (or real-enough) data, and make the agent believe it's a real thing. We call these offline benchmarks.
+We solved this by moving benchmarks from a "production environment that changes all the time" to a "production environment with the same starting state" – i.e. frozen environments. To do this, we had to replicate or simulate our app, inject real (or real-enough) data, and make the agent believe it's a real thing. We call these [offline benchmarks](/docs/ai-evals/offline-evals).
 
 That's a lot. So why bother?
 
@@ -231,13 +231,13 @@ We went through three stages to get this working.
 
 ### Level 1: Mocked MCP replies
 
-The first thing we tried was to create mock MCP calls of the agent, so when agent thinks it's querying the DB, it's actually just getting a pre-stored answer to what it asked for before in prod. For example, what query it ran with `execute_query(sql)` and what slice of the DB it returned:
+The first thing we tried was to create mock [MCP](/docs/model-context-protocol) calls of the agent, so when agent thinks it's querying the DB, it's actually just getting a pre-stored answer to what it asked for before in prod. For example, what query it ran with `execute_query(sql)` and what slice of the DB it returned:
 
 ![An agent calls a mocked MCP tool, which returns a saved response instead of querying a live service.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/08_mcp_mock_ace037214f.png)
 
 This sounds straightforward and worked well for basic tech demos, like returning static JSON to SQL queries, but it failed miserably on any meaningful production-like work. 
 
-This is because agents aren't deterministic; the query from Run 1 doesn't guarantee that Run 2 will run the same one. And since we had to mock MCP replies in advance, if the agent asks something different or new compared to the runs from prod we recorded, we couldn't always provide a reasonable answer.
+This is because [agents aren't deterministic](/blog/testing-ai-agents); the query from Run 1 doesn't guarantee that Run 2 will run the same one. And since we had to mock MCP replies in advance, if the agent asks something different or new compared to the runs from prod we recorded, we couldn't always provide a reasonable answer.
 
 It's not a big surprise, but it would still be cool if it worked out-of-the-box. Still, the case isn't that desperate, and we tried a couple of tweaks.
 
@@ -251,7 +251,7 @@ For how much effort this approach takes, it's not really worth it if you already
 
 For us, since most of our benchmarking needs at PostHog were for internal tasks, we do have access to lots of real data, so we decided to stop messing with mocked MCP replies and go with an approach more grounded in real data.
 
-### Level 3: Restored real-data slices
+### Level 3: Restored real-data slices
 
 The solution that actually worked for us was to spin up an isolated PostHog sandbox seeded with a restored, real-world data slice.
 
@@ -290,6 +290,6 @@ Building quality benchmarks sounds like a lot of work because it is, but it's en
 
  Parts A and B are now part of PostHog and going through internal testing. We're still working on Part C, freezing environments, but wanted to share our learnings so far. 
 
-If you take anything away from this blog, it's that agents will happily exploit whatever mess you leave behind and cheat. Watch for unexpected parameters, iterate a lot, and pay attention to traces. 
+If you take anything away from this blog, it's that agents will happily exploit whatever mess you leave behind and cheat. Watch for unexpected parameters, iterate a lot, and [pay attention to traces](/docs/ai-observability/trace-reviews). 
 
 Vibes can still take you pretty far in the short run, especially for smaller and simpler use cases. But for anyone who wants to get serious about evaluating AI at scale – it's time to bench.
