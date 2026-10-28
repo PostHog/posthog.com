@@ -3,6 +3,7 @@ import Link from 'components/Link'
 import React, { useState, useEffect } from 'react'
 import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/OSButton'
+import usePostHog from 'hooks/usePostHog'
 import { isMarkdownContentPath } from '../../constants'
 
 // `location.pathname` carries a trailing slash where `appWindow.path` doesn't, and
@@ -104,6 +105,7 @@ interface MarkdownActionsProps {
 export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, className = '' }) => {
     const [copied, setCopied] = useState(false)
     const [popoverOpen, setPopoverOpen] = useState(false)
+    const posthog = usePostHog()
 
     const path = normalizePath(pageUrl)
     const isAllowedPath = !!path && isMarkdownContentPath(path)
@@ -115,7 +117,10 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, class
 
     const markdownUrl = getMarkdownUrl(path)
 
-    const handleCopyMarkdown = async () => {
+    const trackAction = (action: string) => posthog?.capture('markdown action clicked', { action, path })
+
+    const handleCopyMarkdown = async (action: string) => {
+        trackAction(action)
         setPopoverOpen(false)
         try {
             const response = await fetch(markdownUrl)
@@ -151,7 +156,7 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, class
                     size="md"
                     icon={copied ? <IconCheck className="text-green" /> : <IconCopy />}
                     iconClassName="text-secondary"
-                    onClick={handleCopyMarkdown}
+                    onClick={() => handleCopyMarkdown('copy page')}
                     aria-label="Copy this page as Markdown"
                     tooltip="Copy this page as Markdown"
                 >
@@ -176,12 +181,18 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, class
                         </span>
                     }
                 >
-                    <button onClick={handleCopyMarkdown} className={menuItemButtonStyles}>
+                    <button onClick={() => handleCopyMarkdown('copy as markdown')} className={menuItemButtonStyles}>
                         <IconCopy className={menuItemIconStyles} />
                         <span>Copy as Markdown</span>
                     </button>
 
-                    <a href={markdownUrl} target="_blank" rel="noopener noreferrer" className={menuItemButtonStyles}>
+                    <a
+                        href={markdownUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => trackAction('view as markdown')}
+                        className={menuItemButtonStyles}
+                    >
                         <IconEye className={menuItemIconStyles} />
                         <span>View as Markdown</span>
                     </a>
@@ -191,6 +202,7 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, class
                             `Read from ${markdownUrl} so I can ask questions about it`
                         )}`}
                         externalNoIcon
+                        onClick={() => trackAction('open in chatgpt')}
                         className={menuItemButtonStyles}
                     >
                         <IconExternal className={menuItemIconStyles} />
@@ -202,6 +214,7 @@ export const MarkdownActions: React.FC<MarkdownActionsProps> = ({ pageUrl, class
                             `Read from ${markdownUrl} so I can ask questions about it`
                         )}`}
                         externalNoIcon
+                        onClick={() => trackAction('open in claude')}
                         className={menuItemButtonStyles}
                     >
                         <IconExternal className={menuItemIconStyles} />

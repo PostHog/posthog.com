@@ -13,6 +13,9 @@ It renders as two grouped buttons: a primary **Copy page** (copies the `.md` con
 flipping to a green check + "Copied" for 2s) and a chevron that opens a `Popover` with **Copy as Markdown**,
 **View as Markdown**, **Open in ChatGPT** and **Open in Claude**.
 
+Each click sends a `markdown action clicked` event with `action` (`copy page`, `copy as markdown`,
+`view as markdown`, `open in chatgpt` or `open in claude`) and `path`.
+
 ## Props
 
 | Prop | Type | Default | Notes |
