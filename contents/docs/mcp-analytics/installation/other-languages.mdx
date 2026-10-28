@@ -82,7 +82,7 @@ The SDKs derive session IDs with a different hash, so a session served partly by
 
 <Step title="Capture a $mcp_tool_call event" badge="required">
 
-Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Most PostHog SDKs queue the event and send it in the background. Some send during the capture call. For example, the PHP SDK sends its queue when the queue is full. With such an SDK, capture after the response is sent, such as after `fastcgi_finish_request()` in PHP.
+Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Most PostHog SDKs queue the event and send it in the background. Some send during the capture call. For example, the PHP SDK sends its queue when the queue reaches its batch size. With such an SDK, capture after the response is sent, such as after `fastcgi_finish_request()` in PHP.
 
 Capture only the final outcome of a call to a tool your server has. Don't capture a `$mcp_tool_call` for:
 
