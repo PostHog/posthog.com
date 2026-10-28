@@ -144,6 +144,10 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
+        },
+        {
+            "source": "/:path(.*)\\.md",
+            "destination": "/api/md-not-found?path=:path"
         }
     ],
     "redirects": [
