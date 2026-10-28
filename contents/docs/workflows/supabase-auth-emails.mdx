@@ -73,7 +73,7 @@ Click **Save connection**. PostHog uses the secret to check that each hook reque
 
 The table in the setup window lists every email Supabase can send. Pick a template for each one you want PostHog to send.
 
-Templates for auth emails must be transactional and marked sensitive. Sensitive templates keep sign-in codes and reset links out of stored emails and click tracking. Only templates that meet both rules appear in the picker.
+Templates for auth emails must be transactional and marked sensitive. Sensitive templates keep sign-in codes and reset links out of stored emails and click tracking. Only templates that meet both rules appear in the picker. To use one of your own templates, open it in your [library](/docs/workflows/library), go to the **API** tab, click **Make transactional**, and then turn on **Protect sensitive data**. Making a template transactional can't be undone.
 
 The quickest way to start is the **Create starter templates** button, which shows how many templates it will create. It creates a template for each of the six core auth emails that doesn't have one yet, and maps it. Starter templates are plain, editable designs. Click the pencil icon next to a template to open it in the email editor and change the copy or styling, or click **View templates** to open your library.
 
@@ -138,7 +138,7 @@ Supabase waits for the hook before it finishes the user's action. If PostHog tak
 | Every hook request fails, and Supabase's auth logs show a 401 from the hook | The hook secret in PostHog doesn't match Supabase. Paste the full secret again, including `v1,whsec_`, and click **Save connection**. |
 | Supabase shows "email rate limit exceeded" | Supabase's own hourly email limit stopped the email before it reached PostHog. Raise it under **Authentication** > **Rate Limits** in Supabase. |
 | Auth emails fail with "We couldn't send your email. Try again in a few minutes." | Check that the **Supabase project URL** is saved, that each mapped template still exists and is transactional and marked sensitive, and that your email channel still has a verified sending domain. If all of that is fine, the send was slow or hit your email quota. Try again. |
-| A template doesn't appear in the picker | The template must be transactional and marked sensitive. Use **Create starter templates** to get templates that meet both rules. |
+| A template doesn't appear in the picker | The template must be transactional and marked sensitive. Turn both on in the template's **API** tab, or use **Create starter templates**. |
 | **Create starter templates** fails | Verify a sending domain on your [email channel](/docs/workflows/configure-channels) first. |
 | Links in emails point to the wrong place | Check the **Supabase project URL**. Confirmation links use it to build the `/auth/v1/verify` link. |
 
