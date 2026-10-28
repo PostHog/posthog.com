@@ -26,7 +26,7 @@ Events for sessions with **no** resolved identity are sent with `$process_person
 
 ## Configure `identify`
 
-`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. In TypeScript, Python, and Ruby, `identify` can also be a static identity instead of a callback. Except in Go, the SDK caches the identity per session and merges each new result into it. Go has no cache, so the resolver runs once for each captured event.
+`identify` (`WithIdentity` in Go) is a callback that returns an identity or nothing. It runs on each request. In TypeScript, Python, and Ruby, `identify` can also be a static identity instead of a callback. Except in Go and Rust, the SDK caches the identity per session and merges each new result into it. Go and Rust have no cache. In Go, the resolver runs once for each captured event. In Rust, it runs once per request, so a failed call's `$mcp_tool_call` and `$exception` share one result.
 
 <MultiLanguage>
 
@@ -108,10 +108,10 @@ An identity has three fields, named in each language's style:
 When the callback returns an identity, the SDK:
 
 1. Uses the distinct ID as the event's `distinct_id`.
-2. Adds the person properties as `$set` on every event except `$exception`, and the groups as `$groups` on every event.
-3. Caches the identity per session, merging person properties across requests. The Go SDK has no cache.
+2. Adds the person properties as `$set` on every event except `$exception` (Rust includes `$exception`), and the groups as `$groups` on every event.
+3. Caches the identity per session, merging person properties across requests. The Go and Rust SDKs have no cache.
 
-The TypeScript, Python, and Go SDKs don't send a standalone `$identify` event. The Ruby SDK still sends one when the identity for a session changes.
+The TypeScript, Python, Go, and Rust SDKs don't send a standalone `$identify` event. The Ruby SDK still sends one when the identity for a session changes.
 
 ## Events before identification
 
