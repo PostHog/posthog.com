@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import NonModal from './NonModal'
 import nonModalSource from '!!../../rawSourceLoader!./NonModal.tsx?raw'
@@ -34,44 +34,18 @@ export const doc: ComponentDoc = {
             id: 'nonmodal',
             title: 'Non-modal reference panel',
             description:
-                'Set modal to false to keep the page active. The drawer has no backdrop, and a click on the page goes to the page. Set disablePointerDismissal to keep the drawer open after that click.',
+                'Set modal={false} to remove the backdrop and keep the page usable. Add disablePointerDismissal so clicks on the page do not close it.',
             Component: NonModal,
             source: nonModalSource,
         },
     ],
     notes: [
+        'Use a drawer for a secondary task or for details that keep the page in view. Bottom drawers suit narrow screens. Side drawers suit details on wide screens.',
         <>
-            Set <code>swipeDirection</code> on <code>Drawer.Root</code> to select the edge:{' '}
-            <code>&quot;down&quot;</code> (default), <code>&quot;up&quot;</code>, <code>&quot;left&quot;</code>, or{' '}
-            <code>&quot;right&quot;</code>.
+            Put the body in <Snippet.Inline>{'Drawer.Content'}</Snippet.Inline> and the actions in{' '}
+            <Snippet.Inline>{'Drawer.Footer'}</Snippet.Inline>, after the content.
         </>,
-        <>
-            A bottom drawer shows its grab handle above the header, so start it with <code>Drawer.Header</code>.
-        </>,
-        <>
-            <code>Drawer.Header</code>, <code>Drawer.Footer</code>, <code>Drawer.Title</code>, and{' '}
-            <code>Drawer.Description</code> are the <Link to="/components/ui/dialog">Dialog</Link> parts.
-        </>,
-        <>
-            Put actions in <code>Drawer.Footer</code>, after <code>Drawer.Content</code>. The footer stays at the bottom
-            of the drawer, and the content scrolls above it. Set <code>separator</code> to add a divider.
-        </>,
-        <>
-            Put the body in <code>Drawer.Content</code>. It has padding, and it scrolls when the content is long.
-        </>,
-        <>
-            A mouse drag in <code>Drawer.Content</code> selects text. So a mouse user drags the header to close the
-            drawer.
-        </>,
-        <>
-            Top and bottom drawers are <code>max-w-2xl</code> wide. Side drawers are <code>w-96</code> wide. Pass{' '}
-            <code>className</code> to <code>Drawer.Popup</code> to change the size.
-        </>,
-        <>
-            <code>Drawer.Popup</code> renders the portal, the backdrop, the viewport, and the popup. It renders at the
-            end of <code>{'<body>'}</code> and sets <code>data-scheme=&quot;primary&quot;</code>, so its colors match
-            the site theme.
-        </>,
+        'Users close a drawer by swiping it toward its edge. Mouse users drag the header.',
     ],
     props: [
         {

@@ -54,7 +54,7 @@ export type ToggleGroupProps = Omit<BaseToggleGroup.Props, 'ref' | 'render' | 'c
 
 export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(function ToggleGroup(
     {
-        appearance = 'flat',
+        appearance = 'raised',
         variant = 'secondary',
         size = 'md',
         className,

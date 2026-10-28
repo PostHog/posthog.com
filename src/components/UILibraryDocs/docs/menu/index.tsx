@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import CheckboxItems from './CheckboxItems'
@@ -51,35 +52,15 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            <code>Menu.CheckboxItem</code> and <code>Menu.RadioItem</code> render their own check mark and dot.{' '}
-            <code>Menu.SubmenuTrigger</code> renders its own chevron.
+            Use Menu for actions. To choose a value, use <Link to="/components/ui/select">Select</Link>. For site
+            navigation, use <Link to="/components/ui/navigation-menu">NavigationMenu</Link>.
         </>,
         <>
-            Put each <code>Menu.GroupLabel</code> in a <code>Menu.Group</code>.
+            Use <Snippet.Inline>{'Menu.LinkItem'}</Snippet.Inline> for an item that opens a page.
         </>,
         <>
-            Use <code>Menu.LinkItem</code> for an item that goes to a page.
-        </>,
-        <>
-            <code>Menu.Popup</code> combines Base UI&apos;s <code>Portal</code>, <code>Positioner</code>, and{' '}
-            <code>Popup</code>. Pass positioner props, such as <code>side</code>, <code>align</code>, and{' '}
-            <code>sideOffset</code>, to it.
-        </>,
-        <>
-            <code>Menu.Popup</code> sets <code>sideOffset</code> to 4. In a submenu, pass{' '}
-            <code>{'sideOffset={0}'}</code> so that the submenu touches its parent menu.
-        </>,
-        <>
-            The popup renders at the end of <code>{'<body>'}</code>, outside the window that opened it. It sets{' '}
-            <code>data-scheme=&quot;primary&quot;</code>, so its colors match the site theme.
-        </>,
-        <>
-            <code>Menu.Trigger</code> renders a plain <code>{'<button>'}</code>. Pass{' '}
-            <code>{'render={<Button />}'}</code> to show a library button.
-        </>,
-        <>
-            For a menu that opens on right-click, use <Link to="/components/ui/context-menu">ContextMenu</Link>. For a
-            row of menus, use <Link to="/components/ui/menubar">Menubar</Link>.
+            In a submenu, pass <Snippet.Inline>{'sideOffset={0}'}</Snippet.Inline> to{' '}
+            <Snippet.Inline>{'Menu.Popup'}</Snippet.Inline>, so it touches its parent menu.
         </>,
     ],
     props: [

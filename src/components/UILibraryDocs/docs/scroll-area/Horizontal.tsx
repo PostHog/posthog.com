@@ -20,7 +20,7 @@ export default function ScrollAreaHorizontal(): JSX.Element {
                     {dashboards.map((name) => (
                         <div
                             key={name}
-                            className="w-32 shrink-0 rounded border border-primary bg-accent px-3 py-6 text-sm font-semibold"
+                            className="w-32 shrink-0 rounded border border-primary bg-accent px-3 py-6 text-body-sm font-semibold"
                         >
                             {name}
                         </div>

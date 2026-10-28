@@ -35,9 +35,8 @@ export const doc: ComponentDoc = {
         },
         {
             id: 'options',
-            title: 'Stroke, roughness, speed, and padding',
-            description:
-                'strokeWidth sets the line weight. iterations sets how many passes the pen makes. animationDuration sets the draw time in milliseconds. padding adds space around the text.',
+            title: 'Stroke, passes, and padding',
+            description: 'Tune the line weight, the number of pen passes, and the space around the text.',
             Component: Options,
             source: optionsSource,
             replay: true,
@@ -59,11 +58,9 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'The default color is currentColor, so a mark takes the text color. Pass a translucent color for a highlight, for example rgba(247, 165, 1, 0.35).',
-        'color accepts a CSS variable, for example var(--mark-color). Set the variable with a class to change the color in dark mode.',
-        'When show is set, the mark ignores animateOnScroll and follows show.',
-        'The mark draws again in place when the text wraps differently, for example when the window resizes.',
-        'With reduced motion, the mark shows at once with no draw animation. The mark is hidden from screen readers.',
+        'Use annotations rarely, to draw attention to one phrase.',
+        'Pass a brand color name. Lines use the full color. The highlight type uses a see-through tint of it, so the text stays readable. Gray follows the text color.',
+        'The mark is decorative and screen readers skip it. Do not use it to carry meaning.',
     ],
     props: [
         {
@@ -76,9 +73,9 @@ export const doc: ComponentDoc = {
                 },
                 {
                     name: 'color',
-                    type: 'string',
-                    defaultValue: "'currentColor'",
-                    description: 'The stroke or fill color.',
+                    type: "'gray' | 'brand' | 'blue' | 'cobalt' | 'coral' | 'corn-blue' | 'green' | 'lemon' | 'lime' | 'purple' | 'tangerine' | 'teal' | 'violet' | 'yellow'",
+                    defaultValue: "'gray'",
+                    description: 'A brand color for the mark. Gray uses the text color.',
                 },
                 { name: 'strokeWidth', type: 'number', defaultValue: '2', description: 'The line weight in pixels.' },
                 {

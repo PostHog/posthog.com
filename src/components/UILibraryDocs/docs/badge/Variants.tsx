@@ -1,18 +1,22 @@
 import React from 'react'
 import { Badge } from 'components/UI/Badge'
+import type { ColorName } from 'components/UI/colors'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
+
+const colors: ColorName[] = ['gray', 'blue', 'green', 'tangerine']
 
 export default function Variants(): JSX.Element {
     return (
-        <div className="flex flex-col gap-3">
-            {(['soft', 'solid'] as const).map((appearance) => (
-                <div key={appearance} className="flex flex-wrap gap-2">
-                    {(['neutral', 'info', 'success', 'warning', 'error', 'brand'] as const).map((tone) => (
-                        <Badge key={tone} tone={tone} appearance={appearance}>
-                            {tone}
+        <DemoRows>
+            {(['solid', 'soft'] as const).map((appearance) => (
+                <DemoRow key={appearance} label={appearance}>
+                    {colors.map((color) => (
+                        <Badge key={color} color={color} appearance={appearance}>
+                            {color}
                         </Badge>
                     ))}
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

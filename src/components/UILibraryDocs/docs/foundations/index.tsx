@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import FieldStates from './FieldStates'
 import fieldStatesSource from '!!../../rawSourceLoader!./FieldStates.tsx?raw'
@@ -36,40 +37,19 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        'Fields and buttons share three heights: sm is 26px, md is 36px (the default), and lg is 44px. Use one size in a row.',
+        'Fields use a see-through white fill, so they work on every wallpaper. Do not give a field a gray fill, because gray reads as disabled.',
         <>
-            Fields and buttons share three heights: sm is 26px, md is 36px, and lg is 44px. Text areas use the same text
-            sizes and padding scale.
+            For your own borders and dividers, use the text color at low opacity, such as{' '}
+            <Snippet.Inline>{'rgb(var(--text-primary)/0.16)'}</Snippet.Inline>, not a fixed gray.
         </>,
         <>
-            Site windows are frosted glass, so the color behind a field changes with the wallpaper. Fields use a
-            see-through white fill (50% in light mode, 8% in dark mode), so they are lighter than the window. Do not use
-            a gray fill: a gray field looks disabled.
+            Use the shared classes in <Snippet.Inline>{'styles.ts'}</Snippet.Inline> for focus rings, surfaces, and
+            shadows. Do not copy their values.
         </>,
         <>
-            Borders, dividers, and hover fills use the text color at low opacity, for example{' '}
-            <code>rgb(var(--text-primary)/0.16)</code>. They work on every wallpaper.
-        </>,
-        <>
-            Focus is an orange border and a soft orange glow. Disabled is a dashed border, a hatched fill, and 70%
-            opacity.
-        </>,
-        <>
-            Only floating surfaces (popups, dialogs, drawers, and toasts) use the solid <code>bg-primary</code>, because
-            they sit above other content.
-        </>,
-        <>
-            Overlay shadows use three steps in <code>styles.ts</code>: small (<code>overlayShadowSm</code>), medium (
-            <code>overlayShadowMd</code>), and large (<code>overlayShadowLg</code>). Popups and toasts also get a 1px
-            bottom edge in the border color: <code>raisedOverlayShadowMd</code>.
-        </>,
-        <>
-            Animations use transitions on <code>transform</code>, <code>opacity</code>, colors, SVG strokes, and panel
-            heights. Every animated part has <code>motion-reduce:transition-none</code>.
-        </>,
-        <>
-            Popups animate with Base UI&apos;s <code>data-[starting-style]</code> and <code>data-[ending-style]</code>{' '}
-            attributes. They skip the animation only for <code>data-instant=&quot;group&quot;</code> and{' '}
-            <code>&quot;trigger-change&quot;</code>.
+            Animate only <Snippet.Inline>{'transform'}</Snippet.Inline>, <Snippet.Inline>{'opacity'}</Snippet.Inline>,
+            and colors, and add <Snippet.Inline>{'motion-reduce:transition-none'}</Snippet.Inline>.
         </>,
     ],
 }

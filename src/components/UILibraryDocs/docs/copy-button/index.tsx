@@ -12,17 +12,15 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'examples',
-            title: 'Examples',
-            description: 'Copy fixed or computed text. The last example shows a disabled button.',
+            title: 'Text sources',
+            description: 'Pass text for a fixed value, or getText to compute the value when the user clicks.',
             Component: Examples,
             source: examplesSource,
         },
     ],
     notes: [
-        'The button announces Copied or Copy failed through a polite live region.',
-        'The result icon stays visible for two seconds. On default and secondary buttons, the check is green and the error icon is red. Reduced motion disables the transition.',
-        'Clipboard access needs a secure context and browser permission. A failed write shows the error icon.',
-        'Use a label that describes the text. getText runs when the user activates the button.',
+        'Use a label that names what is copied, such as "Copy API key".',
+        'Copying needs a secure context (HTTPS). When the browser blocks it, the button shows an error icon.',
     ],
     props: [
         {
@@ -39,7 +37,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'raised'",
                     description: 'The shape: flat, raised 3D, or outlined.',
                 },
                 {

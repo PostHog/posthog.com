@@ -1,6 +1,13 @@
 import React, { useState } from 'react'
 import { Choicebox } from 'components/UI/Choicebox'
 
+const productNames: Record<string, string> = {
+    analytics: 'Product analytics',
+    replay: 'Session replay',
+    flags: 'Feature flags',
+    experiments: 'Experiments',
+}
+
 export default function Products(): JSX.Element {
     const [products, setProducts] = useState(['analytics'])
     return (
@@ -18,8 +25,14 @@ export default function Products(): JSX.Element {
                     <Choicebox.Title>Feature flags</Choicebox.Title>
                     <Choicebox.Description>Control access to new features.</Choicebox.Description>
                 </Choicebox.Item>
+                <Choicebox.Item value="experiments">
+                    <Choicebox.Title>Experiments</Choicebox.Title>
+                    <Choicebox.Description>Test changes on real users.</Choicebox.Description>
+                </Choicebox.Item>
             </Choicebox.Group>
-            <p className="mb-0 mt-3 text-sm text-secondary">Selected: {products.join(', ') || 'None'}</p>
+            <p className="mb-0 mt-3 text-sm text-secondary">
+                Selected: {products.map((value) => productNames[value]).join(', ') || 'None'}
+            </p>
         </div>
     )
 }

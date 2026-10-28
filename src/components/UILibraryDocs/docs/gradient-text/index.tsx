@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Palettes from './Palettes'
 import palettesSource from '!!../../rawSourceLoader!./Palettes.tsx?raw'
@@ -13,8 +15,8 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'palettes',
-            title: 'Three palettes',
-            description: 'Use brand, spectrum, or cool colors.',
+            title: 'Palettes',
+            description: 'Each palette blends three PostHog brand colors.',
             Component: Palettes,
             source: palettesSource,
         },
@@ -28,18 +30,11 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Replaces: FlowingGradientHighlight in desktop.tsx, .text-gradient, .text-gradient-wizard, and RainbowText.',
-        'Use spectrum for the yellow, green, and blue treatment. Use brand for warm colors or cool for blue, purple, and teal.',
-        'The palettes use vivid project tokens. Spectrum matches the yellow, green, and blue colors in FlowingGradientHighlight.',
-        'Supported browsers interpolate in OKLCH with the shorter hue path. This keeps color transitions bright. Other browsers use the standard gradient.',
-        'The background spans twice the text width. A full 12-second cycle shows the complete palette.',
-        'Animation changes background position only. The server shows a complete static gradient.',
-        'The effect pauses outside the viewport and when the document is hidden. Reduced motion shows a static gradient.',
-        'Pass animate={false} for static text. This color-only effect has no separate pause button.',
-        'duration uses seconds. Values below one second clamp to one second.',
-        'The component owns its CSS keyframes. It does not depend on the misplaced text-gradient keyframe in tailwind.config.js.',
-        'Forced colors use CanvasText. Browsers without text clipping use the first palette color.',
-        'Reserve this effect for large headings. Check contrast against the actual background before use.',
+        'Use the effect on one large heading phrase per page at most.',
+        <>
+            Check the contrast against the real background. Pass <Snippet.Inline>{'animate={false}'}</Snippet.Inline>{' '}
+            where motion distracts.
+        </>,
     ],
     props: [
         {
@@ -47,9 +42,10 @@ export const doc: ComponentDoc = {
             rows: [
                 {
                     name: 'palette',
-                    type: "'brand' | 'spectrum' | 'cool'",
-                    defaultValue: "'brand'",
-                    description: 'Sets the gradient colors.',
+                    type: "'sunset' | 'citrus' | 'fresh' | 'ocean' | 'dusk'",
+                    defaultValue: "'sunset'",
+                    description:
+                        'Sets the gradient colors. sunset is coral, tangerine, and yellow. citrus is tangerine, yellow, and lemon. fresh is lime, green, and teal. ocean is corn blue, blue, and cobalt. dusk is violet, purple, and coral.',
                 },
                 {
                     name: 'animate',

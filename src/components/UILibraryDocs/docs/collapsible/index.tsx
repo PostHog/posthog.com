@@ -31,17 +31,8 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            <code>Collapsible.Trigger</code> adds a chevron that turns when the panel opens.
-        </>,
-        <>
-            <code>Collapsible.Panel</code> puts its children in a padded inner element, so the height animation does not
-            jump. The padding aligns the content with the trigger text.
-        </>,
-        <>
-            <code>Collapsible.Root</code> is the Base UI part with no styles. Set its width with <code>className</code>.
-        </>,
-        <>
-            Use <Link to="/components/ui/accordion">Accordion</Link> for a set of panels.
+            Use Collapsible for a single panel. For a set of panels, use{' '}
+            <Link to="/components/ui/accordion">Accordion</Link>.
         </>,
     ],
 }

@@ -31,15 +31,14 @@ export const doc: ComponentDoc = {
         {
             id: 'groups',
             title: 'Groups',
-            description:
-                'Pass a list of groups to Root. List gives each group to its children. Each Group gets its own items, and Collection renders them.',
+            description: 'Pass grouped items to Root. Each group shows a heading above its items.',
             Component: Groups,
             source: groupsSource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Select sm, md, or lg. The button uses the same size.',
+            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -54,23 +53,11 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Autocomplete uses the same input group, popup, and list styles as{' '}
-            <Link to="/components/ui/combobox">Combobox</Link>. Put <code>Input</code> inside <code>InputGroup</code>,
-            and put <code>Empty</code> next to <code>List</code> inside <code>Popup</code>.
+            Use Autocomplete when the user can type any value and the list only suggests. To pick from a fixed list, use{' '}
+            <Link to="/components/ui/select">Select</Link> for a short list or{' '}
+            <Link to="/components/ui/combobox">Combobox</Link> for a long one.
         </>,
-        <>
-            Items have no check mark, because Autocomplete does not keep a selection. To select from a fixed list, use{' '}
-            <Link to="/components/ui/combobox">Combobox</Link>.
-        </>,
-        <>
-            The popup opens when the user types or presses an arrow key. It does not open when the user clicks the
-            input.
-        </>,
-        <>
-            <code>Popup</code> renders the Base UI <code>Portal</code>, <code>Positioner</code>, and <code>Popup</code>{' '}
-            together. It takes the positioner props, for example <code>side</code> and <code>align</code>, and the
-            portal <code>container</code> prop.
-        </>,
+        'The list opens when the user types or presses an arrow key, not on click.',
     ],
     props: [
         {

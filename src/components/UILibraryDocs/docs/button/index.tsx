@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Groups from './Groups'
@@ -25,69 +26,60 @@ export const doc: ComponentDoc = {
             id: 'variants',
             title: 'Appearances and variants',
             description:
-                'appearance sets the shape: flat (the default), raised, or outline. variant sets the meaning: secondary (the default), primary, or danger. Every pair works. Buttons of the same size have the same height.',
+                'appearance sets the shape: raised (the default), flat, or outline. variant sets the meaning: secondary (the default), primary, or danger.',
             Component: Variants,
             source: variantsSource,
         },
         {
+            id: 'sizes-states',
+            title: 'Sizes and states',
+            description: 'Every appearance comes in sm, md, and lg. Click Save to see the loading state.',
+            Component: Additions,
+            source: additionsSource,
+        },
+        {
             id: 'with-icon',
             title: 'With an icon',
-            description: 'Pass icon, and iconPosition="end" to put it after the text.',
+            description: 'icon goes before the label. iconPosition="end" moves it after. iconEnd adds a second icon.',
             Component: WithIcon,
             source: withIconSource,
         },
         {
             id: 'icon-buttons',
             title: 'Icon buttons',
-            description: 'IconButton shows only an icon, so it needs an aria-label.',
+            description: 'IconButton shows only an icon, so give it an aria-label.',
             Component: IconButtons,
             source: iconButtonsSource,
         },
         {
             id: 'groups',
             title: 'Button groups',
-            description: 'Buttons in a ButtonGroup take its variant and size, and join edge to edge.',
+            description: 'Buttons in a ButtonGroup take its appearance, variant, and size, and join edge to edge.',
             Component: Groups,
             source: groupsSource,
         },
-        {
-            id: 'loading-danger-end-icon',
-            title: 'Loading, danger, and two icons',
-            description:
-                'Click Save changes to start a two-second load. Danger marks destructive actions. iconEnd adds an icon after the label.',
-            Component: Additions,
-            source: additionsSource,
-        },
     ],
     notes: [
-        'Pick the appearance from where the button sits and the variant from what it does. Use raised primary for the main action in a section, flat for toolbars and bars, and outline for a secondary action next to a raised one. For a button over images or video, use FloatingButton. Use danger only for destructive actions.',
-        'Disabled flat buttons use muted text. Loading buttons keep their normal color.',
-        'Disabled raised buttons fade the face and base together. In an enabled group, only the disabled segment content dims.',
-        'Set disabled on ButtonGroup to block all buttons and fade the group as one unit.',
         <>
-            Use <code>danger</code> for destructive actions, such as deletion. Use a confirmation dialog when an action
-            cannot be undone.
+            Raised is the default. Use flat only where a raised button does not fit, such as toolbars, bars, and actions
+            that repeat in a list. Use outline for a secondary action next to a raised one. Make the main action in a
+            section primary, and use one primary per section. Over images or video, use{' '}
+            <Link to="/components/ui/floating-button">FloatingButton</Link>.
         </>,
         <>
-            <code>loading</code> puts a spinner in place of the start icon. A button without a start icon shows the
-            spinner on top of a transparent label, so the width does not change and screen readers still read the label.
-            Loading buttons stay focusable, but they do not accept actions.
+            Pick the variant by what the button does. Use danger only for destructive actions, and confirm actions that
+            cannot be undone with an <Link to="/components/ui/alert-dialog">AlertDialog</Link>.
         </>,
         <>
-            Use <code>ButtonLink</code> for navigation, not <code>Button</code>. A <code>Button</code> rendered as
-            another element gets <code>role=&quot;button&quot;</code>.
+            Use <Snippet.Inline>{'loading'}</Snippet.Inline>, not <Snippet.Inline>{'disabled'}</Snippet.Inline>, while a
+            request runs. The width stays the same and the button stays focusable.
         </>,
         <>
-            Raised buttons have a two-tone edge: a darker border around a lighter 3D base. The base is a{' '}
-            <code>::before</code> layer behind the bottom half, so a pressed face never shows it above the button.
+            For navigation, use <Link to="/components/ui/button-link">ButtonLink</Link>.
         </>,
         <>
-            <code>OSButton</code> does not forward its ref, so it cannot be a Base UI <code>render</code> target. Use{' '}
-            <code>Button</code>, for example <code>{'<Popover.Trigger render={<Button />}>'}</code>.
-        </>,
-        <>
-            A <code>Button</code> inside a Base UI <code>Toggle</code> shows the pressed state. See{' '}
-            <Link to="/components/ui/toggle">Toggle</Link>.
+            To use a library button as a Base UI trigger, pass it to <Snippet.Inline>{'render'}</Snippet.Inline>, for
+            example <Snippet.Inline>{'<Popover.Trigger render={<Button />}>'}</Snippet.Inline>.
         </>,
     ],
     props: [
@@ -97,7 +89,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'raised'",
                     description: 'The shape: flat, raised 3D, or outlined.',
                 },
                 {
@@ -140,7 +132,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'raised'",
                     description: 'The shape: flat, raised 3D, or outlined. Sets it for every button in the group.',
                 },
                 {

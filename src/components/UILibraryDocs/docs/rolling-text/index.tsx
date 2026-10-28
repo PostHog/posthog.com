@@ -13,34 +13,24 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'headline',
-            title: 'Stable headline with hover and focus pause',
-            description: 'Each option contributes to the reserved width.',
+            title: 'Headline',
+            description:
+                'The longest word sets the width, so the headline does not move. Hover or focus pauses the motion.',
             Component: Headline,
             source: headlineSource,
             replay: true,
         },
         {
             id: 'static',
-            title: 'Static and short lists',
-            description: 'Single and empty lists do not animate.',
+            title: 'Without motion',
+            description: 'animate={false}, a single word, or an empty list shows static text.',
             Component: Static,
             source: staticSource,
         },
     ],
     notes: [
-        'Replaces: SlotMachineText and the unused RollingWords. Pass words instead of timed steps. Put a prefix outside RollingText.',
-        'All options contribute to the width from the server render. The surrounding headline does not move as words change.',
-        'Use short words or phrases that fit the narrowest window. Each option stays on one line.',
-        'Screen readers receive the full word list once. staticText adds an optional description before the list. The reel and width placeholders are decorative.',
-        'The server and reduced-motion mode show the first nonempty word. Empty lists use staticText as a fallback.',
-        'CSS transforms move the reel. No timer or JavaScript runs for each frame or word.',
-        'Hover or keyboard focus pauses the current reel position. Move the pointer away or move focus to resume.',
-        'The animated span accepts keyboard focus and shows a focus outline. It has no pause button.',
-        'The reel also pauses outside the viewport and when the tab is hidden. Reduced motion removes animation and shows the first word.',
-        'animate={false} shows the first word without motion.',
-        "interval includes each word's hold and transition. Values below 1200 milliseconds clamp to 1200 milliseconds.",
-        'Empty strings do not become options. An empty list shows staticText, or an empty span if staticText is absent.',
-        "This component loops at a uniform interval. It does not reproduce RollingWords' accelerating sequence or final stop.",
+        'Use short words that fit the narrowest window. The longest word sets the width.',
+        'Use the effect in one headline per page at most.',
     ],
     props: [
         {
@@ -64,6 +54,11 @@ export const doc: ComponentDoc = {
                     type: 'boolean',
                     defaultValue: 'true',
                     description: 'Enables the CSS reel while the component is visible.',
+                },
+                {
+                    name: 'color',
+                    type: "'gray' | 'brand' | 'blue' | 'cobalt' | 'coral' | 'corn-blue' | 'green' | 'lemon' | 'lime' | 'purple' | 'tangerine' | 'teal' | 'violet' | 'yellow'",
+                    description: 'A brand color for the words. Omit it to use the text color.',
                 },
             ],
         },

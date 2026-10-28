@@ -1,4 +1,6 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Tones from './Tones'
 import ContentOnly from './ContentOnly'
@@ -18,8 +20,8 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'tones',
-            title: 'Tones',
-            description: 'Each tone uses the shared status colors.',
+            title: 'Statuses',
+            description: 'Each status sets a brand color and an icon. You can also pass any brand color.',
             Component: Tones,
             source: tonesSource,
         },
@@ -46,23 +48,31 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Place Icon, Title, Content, Action, and Close directly inside Root. Fragments are supported. Use one of each part.',
-        'Title is optional. It adds a slim tinted strip above the body. Omit Title for a compact row. Omit Icon to remove the decorative icon.',
-        'Put Action next to Content, not inside it. The action sits beside the body at container widths of 448px or more. It moves below the body in narrower containers.',
-        'Use a small button for Action. The icon, the text, the action, and the close button then share one 20px text line.',
-        'Content is a block. Inline links and emphasis stay in the sentence.',
-        'Close calls onDismiss. The caller removes the banner and stores the dismissed state.',
-        'Banner has no live region. If a notice appears after a user action, put it in a live region.',
+        'Use a status alias when the message has a status: info (blue), success (green), warning (yellow), error (coral), neutral (gray), or brand (orange). The alias also picks the matching icon. Use a brand color name for a message without a status. Say the meaning in words, because the icon and color are decorative.',
+        <>
+            Use Banner for a notice about the whole page or window that stays until the user acts or dismisses it. For
+            context inside content, use <Link to="/components/ui/note">Note</Link>. For brief feedback after an action,
+            use <Link to="/components/ui/toast">Toast</Link>.
+        </>,
+        <>
+            <Snippet.Inline>{'Close'}</Snippet.Inline> only calls <Snippet.Inline>{'onDismiss'}</Snippet.Inline>. Remove
+            the banner and remember the dismissal yourself.
+        </>,
+        'A banner is not announced to screen readers. If it appears after a user action, also announce it in a live region.',
+        <>
+            Use a small button in <Snippet.Inline>{'Action'}</Snippet.Inline>.
+        </>,
     ],
     props: [
         {
             component: 'Banner.Root',
             rows: [
                 {
-                    name: 'tone',
-                    type: 'Tone',
+                    name: 'color',
+                    type: "ColorName | 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'",
                     defaultValue: "'brand'",
-                    description: 'Sets the title strip tint, title color, and icon color.',
+                    description:
+                        'A brand color, or a status alias for one. Sets the title strip tint, title color, and icon.',
                 },
             ],
         },
@@ -73,7 +83,7 @@ export const doc: ComponentDoc = {
                     name: 'children',
                     type: 'ReactNode',
                     defaultValue: 'Tone icon',
-                    description: 'Replaces the default tone icon. Omit this part to remove the icon.',
+                    description: 'Replaces the default status icon. Omit this part to remove the icon.',
                 },
             ],
         },

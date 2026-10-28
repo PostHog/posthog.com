@@ -1,14 +1,14 @@
 import React from 'react'
 import { Select } from 'components/UI/Select'
-import { Button } from 'components/UI/Button'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 const items = ['Product analytics', 'Session replay', 'Feature flags'].map((value) => ({ value, label: value }))
 
 export default function Sizes(): JSX.Element {
     return (
-        <div className="flex flex-col gap-4">
+        <DemoRows>
             {(['sm', 'md', 'lg'] as const).map((size) => (
-                <div key={size} className="flex flex-wrap items-start gap-2">
+                <DemoRow key={size} label={size}>
                     <Select.Root size={size} items={items} defaultValue="Product analytics">
                         <Select.Trigger aria-label={`${size} product`}>
                             <Select.Value />
@@ -22,11 +22,8 @@ export default function Sizes(): JSX.Element {
                             ))}
                         </Select.Popup>
                     </Select.Root>
-                    <Button size={size} appearance="raised">
-                        {size}
-                    </Button>
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

@@ -1,3 +1,6 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Tones from './Tones'
 import ContentOnly from './ContentOnly'
@@ -22,8 +25,8 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'tones',
-            title: 'All tones',
-            description: 'Each tone has a default icon.',
+            title: 'Status colors',
+            description: 'Each status sets a brand color and an icon. You can also pass any brand color.',
             Component: Tones,
             source: tonesSource,
         },
@@ -37,7 +40,7 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Use small padding in compact content.',
+            description: 'sm uses 13px text and less padding, for compact content.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -56,40 +59,34 @@ export const doc: ComponentDoc = {
             source: withactionSource,
         },
         {
-            id: 'legacy',
-            title: 'Legacy type and custom icons',
-            description:
-                'type maps the old CalloutBox types to tones. Pass an icon as children to replace the default icon.',
+            id: 'custom-icons',
+            title: 'Custom icons',
+            description: 'Pass an icon as the children of Note.Icon to replace the default icon.',
             Component: Legacy,
             source: legacySource,
         },
     ],
     notes: [
-        'Use Note for context in docs and handbook pages.',
-        'CalloutBox types map as follows: action → warning, fyi → neutral, caution → error. An explicit tone takes priority.',
-        'Put the legacy title in Note.Title. Put prose in Note.Content. Existing CalloutBox uses remain unchanged.',
-        'Pass an icon element as the children of Note.Icon to replace the default icon. Omit Note.Icon to remove the icon.',
-        'Note, Banner, and Toast share one tone icon map in toneIcons.ts. Neutral and info use IconInfo. Success uses IconCheckCircle. Warning and error use IconWarning. Brand uses IconSparkles.',
-        'Icons are decorative. State the meaning in the title or body. Notes do not announce themselves as alerts.',
-        'Place Icon, Title, Content, and Action directly inside Root. Fragments are supported. Use one of each part.',
-        'The action sits beside the body at container widths of 448px or more. It moves below the body in narrower containers. Use a small button, so that it fits on the text line.',
-        'Omit Title to remove the title strip. Content and the optional icon share one compact row.',
-        'Small size uses 13px text and less padding. Medium size uses 14px text. Both sizes use a 20px line height.',
+        <>
+            Use Note for context inside content, such as docs and handbook pages. For a notice about the whole page, use{' '}
+            <Link to="/components/ui/banner">Banner</Link>. For brief feedback after an action, use{' '}
+            <Link to="/components/ui/toast">Toast</Link>.
+        </>,
+        'Use a status alias when the message has a status: info (blue), success (green), warning (yellow), error (coral), neutral (gray), or brand (orange). The alias also picks the matching icon. Use a brand color name for a message without a status. Say the meaning in words, because the icon and color are decorative.',
+        <>
+            Use a small button in <Snippet.Inline>{'Action'}</Snippet.Inline>.
+        </>,
     ],
     props: [
         {
             component: 'Note.Root',
             rows: [
                 {
-                    name: 'tone',
-                    type: "'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'",
+                    name: 'color',
+                    type: "ColorName | 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'",
                     defaultValue: "'info'",
-                    description: 'Sets the title strip tint, title color, and icon color.',
-                },
-                {
-                    name: 'type',
-                    type: "'action' | 'fyi' | 'caution'",
-                    description: 'Maps a legacy CalloutBox type to a tone.',
+                    description:
+                        'A brand color, or a status alias for one. Sets the title strip tint, title color, and icon.',
                 },
                 {
                     name: 'size',

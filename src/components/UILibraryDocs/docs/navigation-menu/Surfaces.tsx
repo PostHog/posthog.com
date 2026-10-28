@@ -1,12 +1,18 @@
 import React from 'react'
 import { NavigationMenu } from 'components/UI/NavigationMenu'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
+
+const appearances = [
+    { appearance: 'raised', label: 'Raised (default)' },
+    { appearance: 'outlined', label: 'Outlined' },
+    { appearance: 'plain', label: 'Plain' },
+] as const
 
 export default function Surfaces(): JSX.Element {
     return (
-        <div className="flex flex-col gap-5">
-            {(['plain', 'outlined', 'raised'] as const).map((appearance) => (
-                <div key={appearance} className="flex flex-col gap-2">
-                    <span className="text-sm font-medium capitalize">{appearance}</span>
+        <DemoRows>
+            {appearances.map(({ appearance, label }) => (
+                <DemoRow key={appearance} label={label}>
                     <NavigationMenu.Root>
                         <NavigationMenu.List appearance={appearance} aria-label={`${appearance} product navigation`}>
                             <NavigationMenu.Item>
@@ -30,13 +36,26 @@ export default function Surfaces(): JSX.Element {
                                 </NavigationMenu.Content>
                             </NavigationMenu.Item>
                             <NavigationMenu.Item>
-                                <NavigationMenu.Link href="/docs">Docs</NavigationMenu.Link>
+                                <NavigationMenu.Trigger>
+                                    Company
+                                    <NavigationMenu.Icon />
+                                </NavigationMenu.Trigger>
+                                <NavigationMenu.Content>
+                                    <ul className="w-48">
+                                        <li>
+                                            <NavigationMenu.Link href="/about">About</NavigationMenu.Link>
+                                        </li>
+                                        <li>
+                                            <NavigationMenu.Link href="/careers">Careers</NavigationMenu.Link>
+                                        </li>
+                                    </ul>
+                                </NavigationMenu.Content>
                             </NavigationMenu.Item>
                         </NavigationMenu.List>
                         <NavigationMenu.Popup />
                     </NavigationMenu.Root>
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

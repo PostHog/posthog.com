@@ -3,16 +3,16 @@ import { RoughAnnotation } from 'components/UI/RoughAnnotation'
 
 export default function Sequence(): JSX.Element {
     return (
-        <p className="m-0 text-2xl font-bold leading-relaxed [--mark-color:theme(colors.red)] dark:[--mark-color:theme(colors.yellow)]">
-            <RoughAnnotation type="underline" color="var(--mark-color)">
+        <p className="m-0 text-heading-lg font-bold">
+            <RoughAnnotation type="underline" color="tangerine">
                 Capture
             </RoughAnnotation>
             ,{' '}
-            <RoughAnnotation type="underline" color="var(--mark-color)" delay={600}>
+            <RoughAnnotation type="underline" color="tangerine" delay={600}>
                 analyze
             </RoughAnnotation>
             , and{' '}
-            <RoughAnnotation type="circle" color="var(--mark-color)" padding={6} delay={1200}>
+            <RoughAnnotation type="circle" color="tangerine" padding={6} delay={1200}>
                 ship
             </RoughAnnotation>
             .

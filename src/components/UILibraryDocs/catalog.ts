@@ -38,6 +38,12 @@ export type CatalogEntry = {
 
 export const catalog: CatalogEntry[] = [
     {
+        slug: 'typography',
+        name: 'Typography',
+        description: 'The type roles, fonts, and rules for all text.',
+        category: 'Foundations',
+    },
+    {
         slug: 'foundations',
         name: 'Fields and motion',
         description: 'How fields sit on see-through windows, and how components animate.',
@@ -175,6 +181,12 @@ export const catalog: CatalogEntry[] = [
         slug: 'chip',
         name: 'Chip',
         description: 'A small label with an optional image, icon, or remove button.',
+        category: 'Display',
+    },
+    {
+        slug: 'chart',
+        name: 'Charts',
+        description: 'Line, bar, pie, and sparkline charts in the site colors.',
         category: 'Display',
     },
     {

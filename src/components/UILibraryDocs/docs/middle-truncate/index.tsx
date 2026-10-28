@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Values from './Values'
 import valuesSource from '!!../../rawSourceLoader!./Values.tsx?raw'
@@ -21,19 +23,17 @@ export const doc: ComponentDoc = {
         {
             id: 'widths',
             title: 'Available width',
-            description: 'CSS updates the text when the container width changes.',
+            description: 'The same path in narrower boxes. The end stays visible at every width.',
             Component: Widths,
             source: widthsSource,
         },
     ],
     notes: [
-        'Set a width or constrain the parent. Use min-w-0 on parent flex and grid items.',
-        'endChars reserves the last characters. The suffix uses at most half the available width when a prefix exists.',
-        'The prefix shows an ellipsis when it overflows. Very narrow fields also clip the start of the suffix.',
-        'The full string stays in the DOM. Screen readers receive it once. The native title shows it on pointer hover.',
-        'Select text and copy to receive the full value, even for a partial selection. Pair with CopyButton for a keyboard and touch action.',
-        'This component targets left-to-right identifiers. Use normal text for prose or bidirectional language.',
-        'The component uses CSS clipping. It needs no measurement, observer, or effect. Truncation does not conceal secrets.',
+        'Use MiddleTruncate for identifiers where both ends matter, such as keys, IDs, and file paths. Do not use it for prose.',
+        <>
+            It needs a width limit. Add <Snippet.Inline>{'min-w-0'}</Snippet.Inline> to flex and grid parents.
+        </>,
+        'Truncation is visual only. It does not hide secrets.',
     ],
     props: [
         {

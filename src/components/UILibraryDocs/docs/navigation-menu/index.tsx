@@ -1,14 +1,11 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Surfaces from './Surfaces'
 import surfacesSource from '!!../../rawSourceLoader!./Surfaces.tsx?raw'
 import ListLinks from './ListLinks'
 import listLinksSource from '!!../../rawSourceLoader!./ListLinks.tsx?raw'
-import Outlined from './Outlined'
-import outlinedSource from '!!../../rawSourceLoader!./Outlined.tsx?raw'
-import Plain from './Plain'
-import plainSource from '!!../../rawSourceLoader!./Plain.tsx?raw'
 
 const containerType = 'HTMLElement | ShadowRoot | RefObject | null'
 
@@ -22,24 +19,10 @@ export const doc: ComponentDoc = {
         {
             id: 'surfaces',
             title: 'Surfaces',
-            description: 'Choose plain, outlined, or raised. Raised adds a translucent fill and a shadow.',
+            description:
+                'Raised is the default. Use outlined or plain only where a raised bar does not fit. Each Trigger opens its Content in one shared Popup.',
             Component: Surfaces,
             source: surfacesSource,
-        },
-        {
-            id: 'outlined',
-            title: 'Outlined',
-            description:
-                'Set appearance="outlined" on List to draw a border. Each Trigger opens its Content in the shared Popup.',
-            Component: Outlined,
-            source: outlinedSource,
-        },
-        {
-            id: 'plain',
-            title: 'Plain',
-            description: 'Set appearance="plain" on List to remove the border.',
-            Component: Plain,
-            source: plainSource,
         },
         {
             id: 'list-links',
@@ -52,28 +35,13 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Use <code>NavigationMenu</code> for site navigation (links). Use{' '}
-            <Link to="/components/ui/menubar">Menubar</Link> for app commands.
+            Use NavigationMenu for site navigation. For app commands, use{' '}
+            <Link to="/components/ui/menubar">Menubar</Link>.
         </>,
         <>
-            Put <code>NavigationMenu.Icon</code> inside each <code>Trigger</code> to show the chevron.
-        </>,
-        <>
-            Put one <code>NavigationMenu.Popup</code> after the <code>List</code>. It shows the <code>Content</code> of
-            the open item.
-        </>,
-        <>
-            Set <code>appearance</code> on <code>List</code>. The default is raised. The popup keeps its own solid
-            overlay surface.
-        </>,
-        <>
-            <code>Link</code> looks like a menu row inside <code>Content</code>, and like a trigger in the{' '}
-            <code>List</code>. A click on a link closes the menu.
-        </>,
-        <>
-            <code>components/Link</code> does not forward its ref. For an internal link, pass{' '}
-            <code>{'render={<GatsbyLink to="/path" />}'}</code> (from <code>gatsby</code>) to{' '}
-            <code>NavigationMenu.Link</code>.
+            For an internal link, pass <Snippet.Inline>{'render={<GatsbyLink to="/path" />}'}</Snippet.Inline> to{' '}
+            <Snippet.Inline>{'NavigationMenu.Link'}</Snippet.Inline>.{' '}
+            <Snippet.Inline>{'components/Link'}</Snippet.Inline> does not forward a ref.
         </>,
     ],
     props: [

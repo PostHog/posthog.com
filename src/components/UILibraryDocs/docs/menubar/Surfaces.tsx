@@ -1,13 +1,19 @@
 import React from 'react'
 import { Menu } from 'components/UI/Menu'
 import { Menubar } from 'components/UI/Menubar'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
+
+const appearances = [
+    { appearance: 'raised', label: 'Raised (default)' },
+    { appearance: 'outlined', label: 'Outlined' },
+    { appearance: 'plain', label: 'Plain' },
+] as const
 
 export default function Surfaces(): JSX.Element {
     return (
-        <div className="flex flex-col gap-5">
-            {(['plain', 'outlined', 'raised'] as const).map((appearance) => (
-                <div key={appearance} className="flex flex-col gap-2">
-                    <span className="text-sm font-medium capitalize">{appearance}</span>
+        <DemoRows>
+            {appearances.map(({ appearance, label }) => (
+                <DemoRow key={appearance} label={label}>
                     <Menubar.Root appearance={appearance} aria-label={`${appearance} insight commands`}>
                         <Menu.Root>
                             <Menubar.Trigger>Insight</Menubar.Trigger>
@@ -24,8 +30,8 @@ export default function Surfaces(): JSX.Element {
                             </Menu.Popup>
                         </Menu.Root>
                     </Menubar.Root>
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
@@ -17,9 +18,9 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'basic',
-            title: 'Basic toast',
+            title: 'Basic',
             description:
-                'Call add() from Toast.useToastManager() with a title and a description. Click more than once to stack the toasts.',
+                'Call add() from Toast.useToastManager() with a title and a description. Click more than once to stack toasts.',
             Component: Basic,
             source: basicSource,
         },
@@ -27,36 +28,33 @@ export const doc: ComponentDoc = {
             id: 'with-action',
             title: 'With an action',
             description:
-                'Pass actionProps to show a button in the toast. The action does not close the toast, so close it in onClick.',
+                'Pass actionProps to add a button. The action does not close the toast, so close it in onClick.',
             Component: WithAction,
             source: withActionSource,
         },
         {
             id: 'types',
             title: 'Types',
-            description: 'Each type shows a colored status icon.',
+            description: 'A status type sets the icon and its color.',
             Component: Types,
             source: typesSource,
         },
     ],
     notes: [
+        'Use a toast for brief feedback after an action. Do not put information in it that the user must keep.',
         <>
-            Render one <code>Toast.Provider</code> and one <code>Toast.Viewport</code> near the root of the page. Then
-            call <code>Toast.useToastManager().add()</code> from any component inside the provider. Each example on this
-            page has its own provider, so that you can copy it.
+            The site root already renders the toast stack. Add a toast with{' '}
+            <Snippet.Inline>{'Toast.useToastManager().add()'}</Snippet.Inline> in a component, or with{' '}
+            <Snippet.Inline>{'globalToastManager.add()'}</Snippet.Inline> outside React. Do not render another provider.
         </>,
         <>
-            <code>Toast.Viewport</code> renders the toasts. Each toast shows a title, a description, one action, and a
-            close button. You do not render the toast parts.
-        </>,
-        <>Toasts stack at the bottom right of the screen. The stack expands when the pointer is on it.</>,
-        <>
-            The action does not close its toast. Call <code>toastManager.close(id)</code> in its <code>onClick</code>,
-            with the id that <code>add()</code> returns.
+            Toasts stack in one column at the bottom right, newest at the bottom, and close after 3 seconds. Set{' '}
+            <Snippet.Inline>{'timeout: 0'}</Snippet.Inline> for a toast that stays until the user closes it, and use{' '}
+            <Snippet.Inline>{'onClose'}</Snippet.Inline> to react to the close.
         </>,
         <>
-            The viewport renders at the end of <code>{'<body>'}</code>. Each toast sets{' '}
-            <code>data-scheme=&quot;primary&quot;</code>, so its colors match the site theme.
+            An action does not close its toast. Call <Snippet.Inline>{'close(id)'}</Snippet.Inline> with the id that{' '}
+            <Snippet.Inline>{'add()'}</Snippet.Inline> returns.
         </>,
     ],
     props: [
@@ -65,8 +63,25 @@ export const doc: ComponentDoc = {
             rows: [
                 {
                     name: 'type',
-                    type: "'success' | 'error' | 'warning' | 'info' | 'loading'",
-                    description: 'Shows a colored status icon. loading shows a spinner. Omit type to show no icon.',
+                    type: "ColorName | 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand' | 'loading'",
+                    description:
+                        'A status alias shows its icon in its brand color. A brand color name shows the info icon in that color. loading shows a spinner. Omit type to show no icon.',
+                },
+            ],
+        },
+        {
+            component: 'Toast.useToastManager().add data',
+            rows: [
+                {
+                    name: 'image',
+                    type: 'ReactNode',
+                    description: 'A decorative image placed in the toast. Position it with absolute classes.',
+                },
+                {
+                    name: 'align',
+                    type: "'start' | 'center'",
+                    defaultValue: "'center'",
+                    description: 'Aligns the icon and buttons with the top or the middle of the text.',
                 },
             ],
         },

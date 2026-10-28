@@ -1,31 +1,36 @@
 import React from 'react'
-import { IconArrowUpRight, IconPlus } from '@posthog/icons'
-import { Button, ButtonGroup, IconButton } from 'components/UI/Button'
+import { Button } from 'components/UI/Button'
+import type { ButtonAppearance } from 'components/UI/Button'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
-export default function Additions(): JSX.Element {
+const appearances: ButtonAppearance[] = ['raised', 'flat', 'outline']
+const LOADING_MS = 2000
+
+export default function SizesAndStates(): JSX.Element {
     const [loading, setLoading] = React.useState(false)
     const timeout = React.useRef<ReturnType<typeof setTimeout>>()
     React.useEffect(() => () => clearTimeout(timeout.current), [])
     const startLoading = () => {
         setLoading(true)
-        timeout.current = setTimeout(() => setLoading(false), 2000)
+        timeout.current = setTimeout(() => setLoading(false), LOADING_MS)
     }
     return (
-        <div className="flex flex-wrap items-center gap-3">
-            <Button appearance="raised" variant="primary" loading={loading} onClick={startLoading}>
-                Save changes
-            </Button>
-            <IconButton icon={<IconPlus />} aria-label="Add item" loading={loading} onClick={startLoading} />
-            <Button appearance="raised" variant="danger">
-                Delete insight
-            </Button>
-            <ButtonGroup appearance="raised" variant="danger" aria-label="Delete options">
-                <Button>Delete selected</Button>
-                <Button>Delete all</Button>
-            </ButtonGroup>
-            <Button icon={<IconPlus />} iconEnd={<IconArrowUpRight />}>
-                Create insight
-            </Button>
-        </div>
+        <DemoRows>
+            {appearances.map((appearance) => (
+                <DemoRow key={appearance} label={appearance}>
+                    {(['sm', 'md', 'lg'] as const).map((size) => (
+                        <Button key={size} appearance={appearance} size={size}>
+                            {size}
+                        </Button>
+                    ))}
+                    <Button appearance={appearance} disabled>
+                        Disabled
+                    </Button>
+                    <Button appearance={appearance} loading={loading} onClick={startLoading}>
+                        Save
+                    </Button>
+                </DemoRow>
+            ))}
+        </DemoRows>
     )
 }

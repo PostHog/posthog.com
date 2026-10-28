@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import FieldsetFooter from './FieldsetFooter'
 import fieldsetFooterSource from '!!../../rawSourceLoader!./FieldsetFooter.tsx?raw'
@@ -55,21 +55,16 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Give each <code>Field.Root</code> a <code>name</code>. <code>Form</code> uses the name as the key in the
-            values and in <code>errors</code>.
+            Give each <Snippet.Inline>{'Field.Root'}</Snippet.Inline> a <Snippet.Inline>{'name'}</Snippet.Inline>. It is
+            the key in the submitted values and in <Snippet.Inline>{'errors'}</Snippet.Inline>.
         </>,
         <>
-            Inside a <code>Form</code>, a field validates when the user submits. After that, it validates again on each
-            change. To validate earlier, set <code>validationMode</code> on <code>Form</code> or on{' '}
-            <code>Field.Root</code>. See <Link to="/components/ui/field">Field</Link>.
+            Fields validate on submit, then again on each change. Set{' '}
+            <Snippet.Inline>{'validationMode'}</Snippet.Inline> to validate earlier.
         </>,
         <>
-            <code>Fieldset.Legend</code> renders a native <code>{'<legend>'}</code>, so the browser cuts a gap in the
-            border for it. The legend has a transparent background. This overrides the global{' '}
-            <code>fieldset legend</code> style, so the legend also works on see-through windows.
-        </>,
-        <>
-            Set <code>disabled</code> on <code>Fieldset.Root</code> to disable all the fields in it.
+            Group related fields in a <Snippet.Inline>{'Fieldset'}</Snippet.Inline>. Set{' '}
+            <Snippet.Inline>{'disabled'}</Snippet.Inline> on it to disable them all.
         </>,
     ],
     props: [

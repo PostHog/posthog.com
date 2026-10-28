@@ -3,7 +3,7 @@ import { Separator } from 'components/UI/Separator'
 
 export default function SeparatorVertical(): JSX.Element {
     return (
-        <div className="flex items-center gap-3 text-sm">
+        <div className="flex items-center gap-3 text-body-sm">
             <span>Docs</span>
             <Separator orientation="vertical" />
             <span>Pricing</span>

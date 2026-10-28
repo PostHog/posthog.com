@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Delay from './Delay'
 import delaySource from '!!../../rawSourceLoader!./Delay.tsx?raw'
@@ -23,33 +24,16 @@ export const doc: ComponentDoc = {
         {
             id: 'delay',
             title: 'Open delay',
-            description:
-                'A card opens 600 ms after the pointer enters the link. Pass delay to PreviewCard.Trigger to change it. This link goes to another site, so it uses href.',
+            description: 'Cards open 600 ms after hover. Pass delay to PreviewCard.Trigger to change it.',
             Component: Delay,
             source: delaySource,
         },
     ],
     notes: [
+        'Use PreviewCard to preview a linked page. Touch screens cannot hover, so do not put information in the card that the linked page does not have.',
         <>
-            <code>PreviewCard.Trigger</code> renders a plain <code>{'<a>'}</code> with the site&apos;s link color. For
-            an internal link, pass <code>{'render={<GatsbyLink to="/path" />}'}</code> (<code>Link</code> from{' '}
-            <code>gatsby</code>).
-        </>,
-        <>
-            Do not pass <code>components/Link</code> to <code>render</code>. It does not forward its ref.
-        </>,
-        <>
-            The card opens after 600 ms and closes 300 ms after the pointer leaves. Pass <code>delay</code> and{' '}
-            <code>closeDelay</code> to <code>PreviewCard.Trigger</code> to change this.
-        </>,
-        <>
-            Touch screens have no hover, so some users never see the card. Do not put information in the card that is
-            not also on the linked page.
-        </>,
-        <>
-            <code>PreviewCard.Popup</code> combines Base UI&apos;s <code>Portal</code>, <code>Positioner</code>, and{' '}
-            <code>Popup</code>. Pass positioner props, such as <code>side</code> and <code>align</code>, to it. It
-            renders at the end of <code>{'<body>'}</code> and sets <code>data-scheme=&quot;primary&quot;</code>.
+            For an internal link, pass <Snippet.Inline>{'render={<GatsbyLink to="/path" />}'}</Snippet.Inline> to{' '}
+            <Snippet.Inline>{'PreviewCard.Trigger'}</Snippet.Inline>.
         </>,
     ],
     props: [

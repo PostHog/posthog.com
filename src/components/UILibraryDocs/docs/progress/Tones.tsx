@@ -1,37 +1,29 @@
 import React from 'react'
 import { Progress } from 'components/UI/Progress'
-import { Meter } from 'components/UI/Meter'
-import type { Tone } from 'components/UI/styles'
+import type { ColorName } from 'components/UI/colors'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
-const tones: Tone[] = ['brand', 'success', 'warning', 'error', 'info', 'neutral']
+const colors: ColorName[] = ['yellow', 'blue', 'green', 'gray']
 
-export default function Tones(): JSX.Element {
+export default function Colors(): JSX.Element {
     return (
-        <div className="flex max-w-sm flex-col gap-4">
-            {tones.map((tone) => (
-                <div key={tone} className="flex flex-col gap-3">
-                    <Progress.Root value={60} tone={tone}>
-                        <Progress.Label>Progress: {tone}</Progress.Label>
-                        <Progress.Value />
-                        <Progress.Track>
-                            <Progress.Indicator />
-                        </Progress.Track>
-                    </Progress.Root>
-                    <Progress.Root value={null} tone={tone}>
-                        <Progress.Label>Indeterminate: {tone}</Progress.Label>
-                        <Progress.Track>
-                            <Progress.Indicator />
-                        </Progress.Track>
-                    </Progress.Root>
-                    <Meter.Root value={60} tone={tone}>
-                        <Meter.Label>Meter: {tone}</Meter.Label>
-                        <Meter.Value />
-                        <Meter.Track>
-                            <Meter.Indicator />
-                        </Meter.Track>
-                    </Meter.Root>
-                </div>
+        <DemoRows>
+            {colors.map((color) => (
+                <DemoRow key={color} label={color}>
+                    <div className="grid w-full gap-4 @lg:grid-cols-2">
+                        <Progress.Root value={60} color={color} aria-label={`${color} progress`}>
+                            <Progress.Track>
+                                <Progress.Indicator />
+                            </Progress.Track>
+                        </Progress.Root>
+                        <Progress.Root value={null} color={color} aria-label={`${color} loading`}>
+                            <Progress.Track>
+                                <Progress.Indicator />
+                            </Progress.Track>
+                        </Progress.Root>
+                    </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

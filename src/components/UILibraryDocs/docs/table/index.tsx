@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Surfaces from './Surfaces'
 import surfacesSource from '!!../../rawSourceLoader!./Surfaces.tsx?raw'
@@ -25,14 +27,15 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic table',
             description:
-                'Use a caption and native header cells to describe the data. The default appearance is outlined.',
+                'Use a caption and native header cells to describe the data. The default appearance is raised.',
             Component: Basic,
             source: basicSource,
         },
         {
             id: 'surfaces',
             title: 'Surfaces',
-            description: 'Choose plain, outlined, or raised. Raised adds a translucent fill and a shadow.',
+            description:
+                'Raised is the default, with a fill and a shadow. Use outlined or plain only where a raised table does not fit, such as inside another raised surface.',
             Component: Surfaces,
             source: surfacesSource,
         },
@@ -73,17 +76,20 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Root wraps a native table in a scroll container. The default appearance is outlined. Raised adds a translucent fill and a shadow.',
-        'A sticky header has a solid fill in the color of the nearest color scheme. It does not use a blur, because a blur inside a glass window often does not show in Chrome.',
-        'Root forwards its ref and native props to the table. Pass scroll styles and attributes through containerProps.',
-        'Use Caption to name the table. Use scope="row" on row headers. Native colSpan and rowSpan are available.',
-        'Sort shows two carets and sets aria-sort. Add onSort to make the header a button. The caller keeps the sort state and orders the data.',
-        'On an end-aligned column, the carets go before the label. The label then lines up with the numbers below it.',
-        'Interactive adds a hover tint. It does not make rows focusable or add click actions.',
-        'A className on Row sets a row fill, for example a selected row. Stripes and the hover tint have no specificity, so the row fill wins.',
-        'Cell padding, text size, borders, and vertical alignment use ! classes. They beat the global .prose and .article-content table rules. To change them, use ! too, for example className="!px-0".',
-        'The caller supplies data, grouping, pagination, loading states, and number formats.',
-        'This component does not replace OSTable yet.',
+        <>
+            To line up the columns of several tables, add <Snippet.Inline>{'table-fixed'}</Snippet.Inline> to{' '}
+            <Snippet.Inline>{'Table.Root'}</Snippet.Inline> and give each table the same{' '}
+            <Snippet.Inline>{'<colgroup>'}</Snippet.Inline> widths.
+        </>,
+        <>
+            Name the table with <Snippet.Inline>{'Caption'}</Snippet.Inline>, and set{' '}
+            <Snippet.Inline>{'scope="row"'}</Snippet.Inline> on row headers.
+        </>,
+        'The table only shows data. Sorting, filtering, pagination, and number formats are yours to supply.',
+        <>
+            Cell styles use <Snippet.Inline>{'!'}</Snippet.Inline> classes to beat prose table styles. Use{' '}
+            <Snippet.Inline>{'!'}</Snippet.Inline> to override them, such as <Snippet.Inline>{'!px-0'}</Snippet.Inline>.
+        </>,
     ],
     props: [
         {
@@ -92,7 +98,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'plain' | 'outlined' | 'raised'",
-                    defaultValue: "'outlined'",
+                    defaultValue: "'raised'",
                     description:
                         'Sets the scroll container surface. Plain has no border or fill. Raised adds elevation.',
                 },

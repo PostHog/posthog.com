@@ -4,7 +4,7 @@ import { EmptyState } from 'components/UI/EmptyState'
 
 export default function Small(): JSX.Element {
     return (
-        <EmptyState.Root size="sm" outlined>
+        <EmptyState.Root size="sm" outlined className="max-w-xs">
             <EmptyState.Icon>
                 <IconSearch />
             </EmptyState.Icon>

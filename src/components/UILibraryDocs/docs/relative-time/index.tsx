@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Relative from './Relative'
 import relativeSource from '!!../../rawSourceLoader!./Relative.tsx?raw'
@@ -27,14 +29,11 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'The native time element includes an ISO dateTime value. The library Tooltip shows the exact time.',
-        'The server and the first client render show an absolute date in UTC. Relative text appears after mount.',
-        'Times less than an hour from the current time update once per minute. The interval stops on unmount.',
-        'Intl.RelativeTimeFormat uses numeric="auto". It can show words such as yesterday or tomorrow.',
-        'Months use 30 days. Years use 365 days. These units show approximate elapsed time.',
-        'Use an ISO string with a time zone or a numeric timestamp to avoid ambiguous date parsing.',
-        'Invalid dates show Invalid date without a tooltip.',
-        'The time accepts keyboard focus. A dotted underline appears only on hover.',
+        'Pass an ISO string with a time zone, or a timestamp, so the date is not ambiguous.',
+        'The first render shows an absolute date in UTC. The relative text appears after the page loads.',
+        <>
+            Set <Snippet.Inline>{'tooltip={false}'}</Snippet.Inline> where the exact time tooltip would get in the way.
+        </>,
     ],
     props: [
         {

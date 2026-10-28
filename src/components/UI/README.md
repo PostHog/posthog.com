@@ -112,6 +112,7 @@ Site windows are frosted glass, so the color behind a field changes with the wal
 - **Solid surfaces:** only floating surfaces (popups, dialogs, drawers, toasts) use the solid `bg-primary`, because they sit above other content.
 - **Dark mode:** a `data-[...]` or `focus-visible` state that changes a fill or shadow also needs a `dark:` copy, because Tailwind puts `dark:` rules after state rules.
 - **Forms plugin:** `@tailwindcss/forms` gives every input a blue focus ring and padding. `textInput` and `bareInput` (for an input inside a group) include `formsPluginReset` to remove them.
+- **Touch text size:** on a touch pointer, editable text is 16px at every size (`touchFieldText`), because iOS Safari zooms into a focused field whose text is smaller than 16px.
 
 ### Animation
 

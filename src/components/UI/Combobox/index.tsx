@@ -179,6 +179,7 @@ const Clear = React.forwardRef<HTMLButtonElement, BaseCombobox.Clear.Props>(func
                 delete clearProps.children
                 return (
                     <IconButton
+                        appearance="flat"
                         {...clearProps}
                         size={fieldIconButtonIconSize[size]}
                         aria-label={label}

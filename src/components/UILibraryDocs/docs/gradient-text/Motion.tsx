@@ -5,7 +5,7 @@ export default function Motion(): JSX.Element {
         <div className="space-y-5">
             <h2 className="!m-0 !text-3xl">
                 Turn product data into{' '}
-                <GradientText palette="spectrum" duration={12}>
+                <GradientText palette="fresh" duration={12}>
                     your next idea
                 </GradientText>
                 .

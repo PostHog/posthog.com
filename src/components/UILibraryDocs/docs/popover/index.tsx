@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
@@ -32,25 +33,13 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Do not set <code>overflow</code> on <code>Popover.Popup</code>, because it clips the arrow. Scroll an
-            element inside the popup instead.
+            Use a popover for content that the user interacts with next to a trigger. For a short text hint, use{' '}
+            <Link to="/components/ui/tooltip">Tooltip</Link>. For a task that needs full focus, use{' '}
+            <Link to="/components/ui/dialog">Dialog</Link>.
         </>,
         <>
-            <code>Popover.Popup</code> combines Base UI&apos;s <code>Portal</code>, <code>Positioner</code>, and{' '}
-            <code>Popup</code>. Pass positioner props, such as <code>side</code>, <code>align</code>, and{' '}
-            <code>sideOffset</code>, to it.
-        </>,
-        <>
-            The popup renders at the end of <code>{'<body>'}</code>, outside the window that opened it. It sets{' '}
-            <code>data-scheme=&quot;primary&quot;</code>, so its colors match the site theme.
-        </>,
-        <>
-            <code>Popover.Trigger</code> renders a plain <code>{'<button>'}</code>. Pass{' '}
-            <code>{'render={<Button />}'}</code> to show a library button.
-        </>,
-        <>
-            Use a popover for content that the user can click. For a short hint, use a{' '}
-            <Link to="/components/ui/tooltip">Tooltip</Link>.
+            Do not set <Snippet.Inline>{'overflow'}</Snippet.Inline> on{' '}
+            <Snippet.Inline>{'Popover.Popup'}</Snippet.Inline>, because it clips the arrow. Scroll an element inside it.
         </>,
     ],
     props: [

@@ -1,4 +1,6 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Examples from './Examples'
 import examplesSource from '!!../../rawSourceLoader!./Examples.tsx?raw'
@@ -11,15 +13,20 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'examples',
-            title: 'Sizes',
-            description: 'The spinner uses the current text color. Sizes are 14, 16, and 20 pixels.',
+            title: 'Sizes and color',
+            description: 'Three sizes. The spinner takes the current text color.',
             Component: Examples,
             source: examplesSource,
         },
     ],
     notes: [
-        <>The spinner has a status role and a hidden label. Set the label to describe the loading task.</>,
-        <>Reduced motion slows the rotation to 2.5 seconds per turn.</>,
+        <>
+            Set <Snippet.Inline>{'label'}</Snippet.Inline> to say what is loading.
+        </>,
+        <>
+            For a button action, use the button&apos;s <Snippet.Inline>{'loading'}</Snippet.Inline> prop. For content
+            that loads, use <Link to="/components/ui/skeleton">Skeleton</Link>.
+        </>,
     ],
     props: [
         {

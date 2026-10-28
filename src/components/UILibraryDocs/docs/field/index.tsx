@@ -1,16 +1,11 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
-import Appearances from './Appearances'
-import appearancesSource from '!!../../rawSourceLoader!./Appearances.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
-import Disabled from './Disabled'
-import disabledSource from '!!../../rawSourceLoader!./Disabled.tsx?raw'
-import Invalid from './Invalid'
-import invalidSource from '!!../../rawSourceLoader!./Invalid.tsx?raw'
 import StandaloneInput from './StandaloneInput'
 import standaloneInputSource from '!!../../rawSourceLoader!./StandaloneInput.tsx?raw'
 import Validation from './Validation'
@@ -50,46 +45,22 @@ export const doc: ComponentDoc = {
             id: 'validation',
             title: 'Validation',
             description:
-                'Set validationMode="onBlur" to validate when the field loses focus. A Field.Error with match shows its text for one validity error.',
+                'Type an invalid email, then press Tab. validationMode="onBlur" checks the field when it loses focus.',
             Component: Validation,
             source: validationSource,
         },
         {
-            id: 'invalid',
-            title: 'Invalid state',
-            description:
-                'Set invalid on Field.Root when your code finds an error, for example a name that is taken. The control gets a red border, or a yellow border in dark mode.',
-            Component: Invalid,
-            source: invalidSource,
-        },
-        {
-            id: 'disabled',
-            title: 'Disabled',
-            description:
-                'Set disabled on Field.Root. The control gets a dashed border, a hatched fill, and 70% opacity. The label becomes muted.',
-            Component: Disabled,
-            source: disabledSource,
-        },
-        {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Select sm, md, or lg. The button uses the same size.',
+            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
             Component: Sizes,
             source: sizesSource,
-        },
-        {
-            id: 'appearances',
-            title: 'Appearances',
-            description:
-                'Inset is the default for forms. Line shows only a bottom line, so a field does not look like a card or a section. It is the field version of the outline button. For a search bar, use SearchInput, which also has pill and floating shapes.',
-            Component: Appearances,
-            source: appearancesSource,
         },
         {
             id: 'states',
             title: 'States',
             description:
-                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+                'Inset is the default. Line shows only a bottom line, for light or inline editing. Set invalid or disabled on Field.Root for the other states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },
@@ -109,7 +80,7 @@ export const doc: ComponentDoc = {
                     type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Keep inset for forms. Use line for a lighter form that must not look like a card or a section.',
+                        'Sets the field shape. Keep inset for forms. Use line for light or inline editing, such as renaming in place, filters, and quick settings.',
                 },
             ],
         },
@@ -127,36 +98,29 @@ export const doc: ComponentDoc = {
                     type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Keep inset for forms. Use line for a lighter form that must not look like a card or a section.',
+                        'Sets the field shape. Keep inset for forms. Use line for light or inline editing, such as renaming in place, filters, and quick settings.',
                 },
             ],
         },
     ],
     notes: [
         <>
-            Use the default <code>inset</code> appearance for form fields. Use <code>line</code> when boxed fields look
-            heavy, for example inside a card, a popover, or a dialog. Input, Field.Control, Textarea, Select, Combobox,
-            Autocomplete, NumberField, OTPField, and SearchInput all have <code>line</code>. Do not mix appearances in
-            one form. For a search bar, use <Link to="/components/ui/search-input">SearchInput</Link>.
+            Use <Snippet.Inline>{'inset'}</Snippet.Inline> by default. Use <Snippet.Inline>{'line'}</Snippet.Inline> for
+            light or inline editing, such as renaming in place, filters, and quick settings. Use one appearance in a
+            form.
         </>,
         <>
-            The default <code>validationMode</code> is <code>onSubmit</code>. A field outside a form thus never shows
-            its errors. Put the field in a <Link to="/components/ui/form">Form</Link>, or set{' '}
-            <code>validationMode=&quot;onBlur&quot;</code> or <code>&quot;onChange&quot;</code>.
+            A field outside a <Link to="/components/ui/form">Form</Link> validates only on submit, so it never shows
+            errors. Put it in a form, or set <Snippet.Inline>{'validationMode'}</Snippet.Inline> to{' '}
+            <Snippet.Inline>{'"onBlur"'}</Snippet.Inline> or <Snippet.Inline>{'"onChange"'}</Snippet.Inline>.
         </>,
         <>
-            <code>Field.Error</code> without <code>match</code> shows the message from the browser. Set{' '}
-            <code>match</code> to a validity key, for example <code>valueMissing</code>, to show your own text. Set{' '}
-            <code>match</code> to <code>true</code> to show the message at all times.
+            <Snippet.Inline>{'Field.Error'}</Snippet.Inline> without <Snippet.Inline>{'match'}</Snippet.Inline> shows
+            the browser message. Set <Snippet.Inline>{'match'}</Snippet.Inline> to a validity key, such as{' '}
+            <Snippet.Inline>{'valueMissing'}</Snippet.Inline>, to write your own message.
         </>,
         <>
-            Other controls also work inside <code>Field.Root</code>. They get the label, the validation, and the error
-            state of the field. See <Link to="/components/ui/textarea">Textarea</Link> and{' '}
-            <Link to="/components/ui/number-field">NumberField</Link>.
-        </>,
-        <>
-            Fields have a see-through fill, so they work on the frosted windows of the site. See{' '}
-            <Link to="/components/ui/foundations">Fields and motion</Link>.
+            For a search box, use <Link to="/components/ui/search-input">SearchInput</Link>.
         </>,
     ],
 }

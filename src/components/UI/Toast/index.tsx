@@ -3,27 +3,38 @@ import { Toast as BaseToast } from '@base-ui/react/toast'
 import { IconX } from '@posthog/icons'
 import { cn } from '../../../utils'
 import { Button, IconButton } from '../Button'
-import { raisedOverlayShadowMd, toneIcon } from '../styles'
-import { isTone, toneIcons } from '../toneIcons'
+import { raisedOverlayShadowMd } from '../styles'
+import { colorIcon, isColorOrStatus, resolveColor } from '../colors'
+import { statusIcon } from '../toneIcons'
 import { Spinner } from '../Spinner'
 
-const toastViewport =
-    'fixed bottom-4 right-4 top-auto z-50 mx-auto w-[calc(100vw-2rem)] sm:bottom-8 sm:right-8 sm:w-[22.5rem]'
+export type ToastData = {
+    image?: React.ReactNode
+    align?: 'start' | 'center'
+}
 
-const toastStack =
-    "[--gap:0.75rem] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] absolute bottom-0 left-auto right-0 z-[calc(1000-var(--toast-index))] mr-0 h-[var(--height)] w-full origin-bottom select-none [transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))] [transition:transform_0.5s_cubic-bezier(0.22,1,0.36,1),opacity_0.5s,height_0.15s] after:absolute after:left-0 after:top-full after:h-[calc(var(--gap)+1px)] after:w-full after:content-[''] data-[expanded]:h-[var(--toast-height)] data-[expanded]:[transform:translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--offset-y)))] data-[limited]:opacity-0 data-[ending-style]:opacity-0 data-[starting-style]:[transform:translateY(150%)] [&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:[transform:translateY(150%)] data-[ending-style]:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))] data-[ending-style]:data-[swipe-direction=left]:[transform:translateX(calc(var(--toast-swipe-movement-x)-150%))_translateY(var(--offset-y))] data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))] data-[ending-style]:data-[swipe-direction=up]:[transform:translateY(calc(var(--toast-swipe-movement-y)-150%))] motion-reduce:[transition:opacity_0.15s]"
+const SITE_TOAST_TIMEOUT_MS = 3000
+const SITE_TOAST_LIMIT = 20
+
+const toastViewport =
+    'pointer-events-none fixed bottom-4 right-0 top-auto z-50 m-0 h-[min(75vh,720px)] w-[calc(390px+1rem)] max-w-[calc(100vw-1rem)] outline-none [mask-image:linear-gradient(to_top,#000_calc(100%-8rem),transparent)]'
+
+const toastMotion =
+    "pointer-events-auto absolute bottom-0 right-4 z-[calc(1000-var(--toast-index))] w-[calc(100%-1rem)] [--gap:0.5rem] [--stack-y:calc(var(--toast-offset-y,0px)*-1-var(--toast-index,0)*var(--gap))] [transform:translateX(var(--toast-swipe-movement-x,0px))_translateY(var(--stack-y))] transition-[transform,opacity] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] after:absolute after:left-0 after:top-full after:h-[calc(var(--gap)+1px)] after:w-full after:content-[''] data-[starting-style]:[transform:translateX(calc(100%+1rem))_translateY(var(--stack-y))] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 [&[data-ending-style]:not([data-swipe-direction])]:[transform:translateX(calc(100%+1rem))_translateY(var(--stack-y))] data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+100%+1rem))_translateY(var(--stack-y))] data-[limited]:pointer-events-none data-[limited]:opacity-0 motion-reduce:transition-[opacity]"
 
 const toastSurface = `rounded-md border border-primary bg-primary text-primary ${raisedOverlayShadowMd}`
 
+export const globalToastManager = BaseToast.createToastManager<ToastData>()
+
 const StatusIcon = ({ type }: { type?: string }): JSX.Element | null => {
     if (type === 'loading') return <Spinner aria-hidden size="lg" className="text-secondary" />
-    if (!isTone(type)) return null
-    const Icon = toneIcons[type]
-    return <Icon aria-hidden className={cn('size-5 shrink-0', toneIcon[type])} />
+    if (!isColorOrStatus(type)) return null
+    const Icon = statusIcon(type)
+    return <Icon aria-hidden className={cn('size-5 shrink-0', colorIcon[resolveColor(type)])} />
 }
 
 const ToastList = (): JSX.Element => {
-    const { toasts } = BaseToast.useToastManager()
+    const { toasts } = BaseToast.useToastManager<ToastData>()
 
     return (
         <>
@@ -32,19 +43,25 @@ const ToastList = (): JSX.Element => {
                     key={toast.id}
                     toast={toast}
                     data-scheme="primary"
-                    className={cn(toastStack, toastSurface)}
+                    swipeDirection="right"
+                    className={cn(toastMotion, toastSurface)}
                 >
-                    <BaseToast.Content className="flex items-start gap-3 overflow-hidden p-4 transition-opacity duration-[250ms] data-[behind]:opacity-0 data-[expanded]:opacity-100">
+                    <BaseToast.Content
+                        className={cn('flex gap-3 p-4', toast.data?.align === 'start' ? 'items-start' : 'items-center')}
+                    >
                         <StatusIcon type={toast.type} />
                         <div className="flex min-w-0 flex-1 flex-col gap-1">
                             <BaseToast.Title className="my-0 text-[15px] font-semibold leading-5 text-primary" />
                             <BaseToast.Description className="my-0 text-sm text-secondary" />
                         </div>
                         <div className="-my-[3px] flex shrink-0 items-center gap-1">
-                            <BaseToast.Action render={<Button size="sm" />} />
-                            <BaseToast.Close render={<IconButton size="sm" aria-label="Close" icon={<IconX />} />} />
+                            <BaseToast.Action render={<Button appearance="flat" size="sm" />} />
+                            <BaseToast.Close
+                                render={<IconButton appearance="flat" size="sm" aria-label="Close" icon={<IconX />} />}
+                            />
                         </div>
                     </BaseToast.Content>
+                    {toast.data?.image}
                 </BaseToast.Root>
             ))}
         </>
@@ -68,7 +85,22 @@ const Viewport = React.forwardRef<HTMLDivElement, ToastViewportProps>(function T
     )
 })
 
+export type SiteToastProviderProps = Omit<BaseToast.Provider.Props, 'toastManager'>
+
+const SiteProvider = ({ children, ...props }: SiteToastProviderProps): JSX.Element => (
+    <BaseToast.Provider
+        toastManager={globalToastManager}
+        timeout={SITE_TOAST_TIMEOUT_MS}
+        limit={SITE_TOAST_LIMIT}
+        {...props}
+    >
+        {children}
+        <Viewport />
+    </BaseToast.Provider>
+)
+
 export const Toast = {
+    SiteProvider,
     Provider: BaseToast.Provider,
     Viewport,
     useToastManager: BaseToast.useToastManager,

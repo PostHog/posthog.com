@@ -1,5 +1,6 @@
 import React from 'react'
 import { ButtonGroup, ButtonLink } from 'components/UI/Button'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 const productDocs = [
     { to: '/docs/product-analytics', label: 'Product analytics' },
@@ -9,16 +10,18 @@ const productDocs = [
 
 export default function ButtonLinkInGroup(): JSX.Element {
     return (
-        <div className="flex flex-col items-start gap-3">
-            {(['flat', 'raised'] as const).map((appearance) => (
-                <ButtonGroup key={appearance} aria-label="Product docs" appearance={appearance}>
-                    {productDocs.map(({ to, label }) => (
-                        <ButtonLink key={to} to={to}>
-                            {label}
-                        </ButtonLink>
-                    ))}
-                </ButtonGroup>
+        <DemoRows>
+            {(['raised', 'flat'] as const).map((appearance) => (
+                <DemoRow key={appearance} label={appearance}>
+                    <ButtonGroup aria-label="Product docs" appearance={appearance}>
+                        {productDocs.map(({ to, label }) => (
+                            <ButtonLink key={to} to={to}>
+                                {label}
+                            </ButtonLink>
+                        ))}
+                    </ButtonGroup>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

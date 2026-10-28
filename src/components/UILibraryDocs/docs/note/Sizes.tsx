@@ -1,18 +1,21 @@
 import React from 'react'
 import { Note } from 'components/UI/Note'
+import { DemoColumn, DemoColumns } from 'components/UILibraryDocs/DemoLayout'
 
 export default function Sizes(): JSX.Element {
     return (
-        <div className="flex flex-col gap-3">
+        <DemoColumns>
             {(['sm', 'md'] as const).map((size) => (
-                <Note.Root key={size} size={size}>
-                    <Note.Icon />
-                    <Note.Title>Size {size}</Note.Title>
-                    <Note.Content>
-                        <p>Check the configuration before the next step.</p>
-                    </Note.Content>
-                </Note.Root>
+                <DemoColumn key={size} label={size === 'md' ? 'md (default)' : 'sm'}>
+                    <Note.Root size={size}>
+                        <Note.Icon />
+                        <Note.Title>Check your plan</Note.Title>
+                        <Note.Content>
+                            <p>Session replay counts toward your monthly quota.</p>
+                        </Note.Content>
+                    </Note.Root>
+                </DemoColumn>
             ))}
-        </div>
+        </DemoColumns>
     )
 }

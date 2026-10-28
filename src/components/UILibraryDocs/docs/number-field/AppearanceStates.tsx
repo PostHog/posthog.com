@@ -2,6 +2,7 @@ import React from 'react'
 import { Field } from 'components/UI/Field'
 import { NumberField } from 'components/UI/NumberField'
 import type { FieldAppearance } from 'components/UI/styles'
+import { DemoColumn, DemoColumns } from 'components/UILibraryDocs/DemoLayout'
 
 function StateColumn({ appearance }: { appearance: FieldAppearance }): JSX.Element {
     return (
@@ -37,15 +38,13 @@ function StateColumn({ appearance }: { appearance: FieldAppearance }): JSX.Eleme
 
 export default function States(): JSX.Element {
     return (
-        <div className="grid gap-8 @2xl:grid-cols-2">
-            <div className="flex flex-col gap-3">
-                <span className="text-sm font-bold">Inset (default)</span>
+        <DemoColumns>
+            <DemoColumn label="Inset (default)">
                 <StateColumn appearance="inset" />
-            </div>
-            <div className="flex flex-col gap-3">
-                <span className="text-sm font-bold">Line</span>
+            </DemoColumn>
+            <DemoColumn label="Line">
                 <StateColumn appearance="line" />
-            </div>
-        </div>
+            </DemoColumn>
+        </DemoColumns>
     )
 }

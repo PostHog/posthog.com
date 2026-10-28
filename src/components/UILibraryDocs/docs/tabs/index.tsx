@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Horizontal from './Horizontal'
 import horizontalSource from '!!../../rawSourceLoader!./Horizontal.tsx?raw'
@@ -48,16 +49,10 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            <code>Tabs.Tab</code> renders its children two times. An invisible bold copy keeps the width, so the active
-            tab does not move the tabs next to it.
+            Use Tabs to switch between views of the same content. For a marketing feature tour, use{' '}
+            <Link to="/components/ui/feature-tabs">FeatureTabs</Link>. To go to another page, use links.
         </>,
-        <>
-            Keep tab labels to text and icons. Do not put an <code>id</code> or interactive content in a tab.
-        </>,
-        <>
-            The default appearance shows a light pane with a thin edge. The underline appearance changes only the text
-            on hover.
-        </>,
+        'Keep tab labels to text and icons. Do not put links or buttons in a tab.',
     ],
     props: [
         {

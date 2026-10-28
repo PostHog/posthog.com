@@ -334,7 +334,7 @@ type ButtonRootProps = BaseButton.Props &
 
 const ButtonRoot = React.forwardRef<HTMLElement, ButtonRootProps>(function ButtonRoot(
     {
-        appearance = 'flat',
+        appearance = 'raised',
         variant = 'secondary',
         size = 'md',
         icon,
@@ -378,7 +378,7 @@ export const IconButton = React.forwardRef<HTMLElement, IconButtonProps>(functio
 })
 
 export function ButtonLink({
-    appearance = 'flat',
+    appearance = 'raised',
     variant = 'secondary',
     size = 'md',
     icon,
@@ -408,7 +408,7 @@ export function ButtonLink({
 }
 
 export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(
-    { appearance = 'flat', variant = 'secondary', size = 'md', className, disabled = false, children, ...props },
+    { appearance = 'raised', variant = 'secondary', size = 'md', className, disabled = false, children, ...props },
     ref
 ) {
     const look = React.useMemo(() => ({ appearance, variant, size, disabled }), [appearance, variant, size, disabled])

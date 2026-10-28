@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Meter } from 'components/UI/Meter'
 import { Button } from 'components/UI/Button'
-import type { Tone } from 'components/UI/styles'
+import type { ColorName } from 'components/UI/colors'
 
 export default function QuotaMeter(): JSX.Element {
     const [used, setUsed] = useState(62)
-    const tone: Tone = used > 95 ? 'error' : used > 80 ? 'warning' : 'brand'
+    const color: ColorName = used > 95 ? 'coral' : used > 80 ? 'tangerine' : 'brand'
     return (
         <div className="flex max-w-sm flex-col gap-3">
-            <Meter.Root value={used} tone={tone}>
+            <Meter.Root value={used} color={color}>
                 <Meter.Label>Monthly events used</Meter.Label>
                 <Meter.Value />
                 <Meter.Track>
@@ -16,7 +16,7 @@ export default function QuotaMeter(): JSX.Element {
                 </Meter.Track>
             </Meter.Root>
             <div className="flex flex-wrap gap-2">
-                {[62, 80, 81, 95, 96].map((value) => (
+                {[62, 85, 97].map((value) => (
                     <Button key={value} size="sm" onClick={() => setUsed(value)} aria-pressed={used === value}>
                         {value}%
                     </Button>

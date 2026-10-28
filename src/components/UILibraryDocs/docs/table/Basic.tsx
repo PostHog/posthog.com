@@ -26,7 +26,7 @@ export default function Basic(): JSX.Element {
                             {key}
                         </Table.Head>
                         <Table.Cell>
-                            <Badge tone={enabled ? 'success' : 'neutral'}>{enabled ? 'Enabled' : 'Disabled'}</Badge>
+                            <Badge color={enabled ? 'green' : 'gray'}>{enabled ? 'Enabled' : 'Disabled'}</Badge>
                         </Table.Cell>
                         <Table.Cell align="end">{rollout}%</Table.Cell>
                     </Table.Row>

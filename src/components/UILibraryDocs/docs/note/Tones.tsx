@@ -1,8 +1,9 @@
 import React from 'react'
 import { Note } from 'components/UI/Note'
-import type { Tone } from 'components/UI/styles'
+import { DemoLabel } from 'components/UILibraryDocs/DemoLayout'
+import type { StatusAlias } from 'components/UI/colors'
 
-const notes: { tone: Tone; title: string; body: string }[] = [
+const notes: { tone: StatusAlias; title: string; body: string }[] = [
     { tone: 'neutral', title: 'Before you start', body: 'You need a PostHog project and its project token.' },
     {
         tone: 'info',
@@ -17,15 +18,18 @@ const notes: { tone: Tone; title: string; body: string }[] = [
 
 export default function Tones(): JSX.Element {
     return (
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
             {notes.map(({ tone, title, body }) => (
-                <Note.Root key={tone} tone={tone}>
-                    <Note.Icon />
-                    <Note.Title>{title}</Note.Title>
-                    <Note.Content>
-                        <p>{body}</p>
-                    </Note.Content>
-                </Note.Root>
+                <div key={tone} className="flex flex-col gap-1.5">
+                    <DemoLabel>{tone}</DemoLabel>
+                    <Note.Root color={tone}>
+                        <Note.Icon />
+                        <Note.Title>{title}</Note.Title>
+                        <Note.Content>
+                            <p>{body}</p>
+                        </Note.Content>
+                    </Note.Root>
+                </div>
             ))}
         </div>
     )

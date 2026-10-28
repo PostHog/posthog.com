@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
@@ -44,20 +45,14 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Give the <code>RadioGroup</code> an accessible name. Use <code>aria-label</code>, or{' '}
-            <code>aria-labelledby</code> with the ID of a visible heading.
+            Use radios for one choice from a few options that should all stay visible, about 5 or fewer. For more
+            options, use <Link to="/components/ui/select">Select</Link>. For one on or off choice, use{' '}
+            <Link to="/components/ui/checkbox">Checkbox</Link> or <Link to="/components/ui/switch">Switch</Link>.
         </>,
         <>
-            Put <code>Radio.Root</code> and its text in a <code>{'<label>'}</code>. Then a click on the text selects the
-            radio.
-        </>,
-        <>
-            <code>Radio.Indicator</code> stays mounted, so a change of value changes one attribute and the DOM does not
-            change. The dot scales in and out with a CSS transition.
-        </>,
-        <>
-            For one option that the user turns on or off, use a <Link to="/components/ui/checkbox">Checkbox</Link> or a{' '}
-            <Link to="/components/ui/switch">Switch</Link>.
+            Name the group with <Snippet.Inline>{'aria-label'}</Snippet.Inline> or{' '}
+            <Snippet.Inline>{'aria-labelledby'}</Snippet.Inline>, and put each radio and its text in a{' '}
+            <Snippet.Inline>{'<label>'}</Snippet.Inline>.
         </>,
     ],
     props: [

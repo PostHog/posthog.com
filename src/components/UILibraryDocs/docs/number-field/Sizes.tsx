@@ -1,23 +1,20 @@
 import React from 'react'
 import { NumberField } from 'components/UI/NumberField'
-import { Button } from 'components/UI/Button'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 export default function Sizes(): JSX.Element {
     return (
-        <div className="flex flex-col gap-4">
+        <DemoRows>
             {(['sm', 'md', 'lg'] as const).map((size) => (
-                <div key={size} className="flex flex-wrap items-start gap-2">
+                <DemoRow key={size} label={size}>
                     <NumberField.Root defaultValue={10}>
                         <NumberField.Group size={size}>
                             <NumberField.Input aria-label={`${size} number`} />
                             <NumberField.Steppers />
                         </NumberField.Group>
                     </NumberField.Root>
-                    <Button size={size} appearance="raised">
-                        {size}
-                    </Button>
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

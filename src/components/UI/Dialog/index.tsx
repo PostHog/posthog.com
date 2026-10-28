@@ -44,7 +44,9 @@ const Header = ({ children, className, showCloseButton = true }: DialogHeaderPro
         </BaseDialog.Title>
         {showCloseButton && (
             <BaseDialog.Close
-                render={<IconButton aria-label="Close" size="sm" icon={<IconX className="size-4" />} />}
+                render={
+                    <IconButton appearance="flat" aria-label="Close" size="sm" icon={<IconX className="size-4" />} />
+                }
             />
         )}
     </div>

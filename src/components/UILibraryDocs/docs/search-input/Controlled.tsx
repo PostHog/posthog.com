@@ -14,7 +14,7 @@ export default function Controlled(): JSX.Element {
                 value={query}
                 onValueChange={setQuery}
             />
-            <div aria-live="polite" className="text-sm text-secondary">
+            <div aria-live="polite" className="text-body-sm text-secondary">
                 {matches.length ? matches.join(', ') : 'No events match this search.'}
             </div>
         </div>

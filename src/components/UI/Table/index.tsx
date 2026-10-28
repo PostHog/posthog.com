@@ -32,7 +32,7 @@ type TableContextValue = { density: TableDensity; stickyHeader: boolean; appeara
 const TableContext = React.createContext<TableContextValue>({
     density: 'default',
     stickyHeader: false,
-    appearance: 'outlined',
+    appearance: 'raised',
 })
 
 const alignment = { start: 'text-start', center: 'text-center', end: 'text-end' }
@@ -65,7 +65,7 @@ const sortButton = `group/sort -mx-1.5 -my-1 inline-flex max-w-[calc(100%+0.75re
 
 const Root = React.forwardRef<HTMLTableElement, TableRootProps>(function TableRoot(
     {
-        appearance = 'outlined',
+        appearance = 'raised',
         density = 'default',
         striped = false,
         interactive = false,

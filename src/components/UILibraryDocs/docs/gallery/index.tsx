@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import ProductScreenshots from './ProductScreenshots'
 import productScreenshotsSource from '!!../../rawSourceLoader!./ProductScreenshots.tsx?raw'
@@ -14,36 +16,26 @@ export const doc: ComponentDoc = {
         {
             id: 'screenshots',
             title: 'Product screenshots',
-            description:
-                'Select a screenshot to inspect it. Light and dark sources match existing ProductScreenshot call sites.',
+            description: 'Select a screenshot to inspect it.',
             Component: ProductScreenshots,
             source: productScreenshotsSource,
         },
         {
             id: 'columns',
             title: 'Photos and merch in columns',
-            description:
-                'Images keep their proportions. The layout uses CSS columns instead of a JavaScript masonry dependency.',
+            description: 'Images keep their proportions in CSS columns.',
             Component: PhotoColumns,
             source: photoColumnsSource,
         },
     ],
     notes: [
-        'Set frame={false} and renderThumbnail to put the zoom on an existing frame. Thumbnail content must not contain interactive controls.',
-        'Set showThumbnailCaptions={false} when the caller already shows the caption. The lightbox still shows the caption.',
-        'The column count never exceeds the image count. Use columns={1} for a single full-width frame.',
-        'Replaces: groups of ProductScreenshot images can become Gallery items. Map imageLight, imageDark, and alt directly. Add a caption when useful.',
-        'Replaces: grouped ZoomImage or react-medium-image-zoom images can use one Gallery lightbox with previous and next controls.',
-        'Keep ZoomImage for an isolated image in article prose. Its inline zoom behavior differs from a collection lightbox. Gallery does not remove that dependency.',
-        'Careers/Pizza can use this lightbox approach instead of its custom fullscreen modal. Gallery displays a grid, so a carousel composition needs separate integration.',
-        'The library Dialog supplies modal focus, Escape, and the close button. Closing returns focus to the thumbnail that opened it.',
-        'Use the left and right arrow keys inside the lightbox to change images. Navigation wraps at the ends. A status announces the image position and description.',
-        'The popup follows the site theme because Dialog uses a portal. A light or dark docs preview controls its thumbnails only.',
-        'Grid order runs across rows. CSS columns run down each column. DOM order, keyboard order, and lightbox order remain the same.',
-        'Supply width and height from the image metadata to reserve space before images load. Column layouts keep each image ratio.',
-        'Thumbnails load lazily. The selected lightbox image loads eagerly. Light and dark sources use separate image elements, as ProductScreenshot does.',
-        'Empty collections render nothing. One image still opens, but it has no navigation buttons. Dialog transitions respect reduced motion.',
-        'Gallery offers an enlarged image view, not pan or pinch zoom. Keep captions descriptive and keep interactive controls outside captions.',
+        'Use Gallery for a set of screenshots or photos that users may want to see larger.',
+        <>
+            Give each image <Snippet.Inline>{'width'}</Snippet.Inline> and <Snippet.Inline>{'height'}</Snippet.Inline>{' '}
+            from its metadata to stop layout shift, and write <Snippet.Inline>{'alt'}</Snippet.Inline> text. A caption
+            does not replace alt text.
+        </>,
+        'Do not put links or buttons in thumbnails or captions.',
     ],
     props: [
         {

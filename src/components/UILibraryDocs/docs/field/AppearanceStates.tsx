@@ -1,13 +1,14 @@
 import React from 'react'
 import { Field } from 'components/UI/Field'
 import type { FieldAppearance } from 'components/UI/styles'
+import { DemoColumn, DemoColumns } from 'components/UILibraryDocs/DemoLayout'
 
 function StateColumn({ appearance }: { appearance: FieldAppearance }): JSX.Element {
     return (
         <div className="flex flex-col gap-5">
             <Field.Root>
                 <Field.Label>Empty</Field.Label>
-                <Field.Control appearance={appearance} placeholder="Hogflix" />
+                <Field.Control appearance={appearance} placeholder="Project name" />
             </Field.Root>
             <Field.Root>
                 <Field.Label>Filled</Field.Label>
@@ -28,15 +29,13 @@ function StateColumn({ appearance }: { appearance: FieldAppearance }): JSX.Eleme
 
 export default function States(): JSX.Element {
     return (
-        <div className="grid gap-8 @2xl:grid-cols-2">
-            <div className="flex flex-col gap-3">
-                <span className="text-sm font-bold">Inset (default)</span>
+        <DemoColumns>
+            <DemoColumn label="Inset (default)">
                 <StateColumn appearance="inset" />
-            </div>
-            <div className="flex flex-col gap-3">
-                <span className="text-sm font-bold">Line</span>
+            </DemoColumn>
+            <DemoColumn label="Line">
                 <StateColumn appearance="line" />
-            </div>
-        </div>
+            </DemoColumn>
+        </DemoColumns>
     )
 }

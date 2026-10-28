@@ -1,5 +1,24 @@
 import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { extendTailwindMerge } from 'tailwind-merge'
+
+const typeRoleSizes = [
+    'display',
+    'title',
+    'heading-lg',
+    'heading-md',
+    'heading-sm',
+    'body-lg',
+    'body',
+    'body-sm',
+    'caption',
+    'caption-sm',
+    'label',
+    'mono',
+]
+
+const twMerge = extendTailwindMerge({
+    extend: { classGroups: { 'font-size': [{ text: typeRoleSizes }] } },
+})
 
 export function cn(...inputs: ClassValue[]): string {
     return twMerge(clsx(inputs))

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Required from './Required'
@@ -25,16 +26,14 @@ export const doc: ComponentDoc = {
         {
             id: 'variants',
             title: 'Variants',
-            description:
-                'A toggle stays pressed after a click. The second toggle in each row starts pressed, with defaultPressed.',
+            description: 'A toggle stays pressed after a click. The second toggle in each row starts pressed.',
             Component: Variants,
             source: variantsSource,
         },
         {
             id: 'group',
             title: 'Toggle group',
-            description:
-                'Only one toggle in a group is pressed at a time. Here, onValueChange ignores empty arrays, so one toggle stays pressed.',
+            description: 'Only one toggle in a group is pressed at a time.',
             Component: Group,
             source: groupSource,
         },
@@ -48,31 +47,19 @@ export const doc: ComponentDoc = {
         {
             id: 'required',
             title: 'Keep one value pressed',
-            description: 'Set required to prevent the last pressed toggle from becoming unpressed.',
+            description: 'Set required so the last pressed toggle cannot be unpressed.',
             Component: Required,
             source: requiredSource,
         },
     ],
     notes: [
-        'Disabled groups fade as one unit. A disabled segment in an enabled raised group dims only its content.',
         <>
-            <code>Toggle</code> renders a <Link to="/components/ui/button">Button</Link>, and <code>ToggleGroup</code>{' '}
-            renders a <code>ButtonGroup</code>. They take the same <code>variant</code> and <code>size</code> props.
+            Use a toggle for an on or off state in a toolbar or view control, such as bold text or a view mode. For a
+            setting, use <Link to="/components/ui/switch">Switch</Link>.
         </>,
         <>
-            A pressed toggle keeps its color. A flat toggle gets a fill and darker text. A raised toggle stays pushed
-            down, with a soft inner shadow and a darker face. In dark mode, a pressed secondary toggle gets a lighter
-            face, so it stays visible.
-        </>,
-        <>
-            Toggles in a <code>ToggleGroup</code> take the <code>variant</code> and <code>size</code> of the group.
-        </>,
-        <>
-            Set <code>required</code> to keep at least one toggle pressed. Supply an initial <code>value</code> or{' '}
-            <code>defaultValue</code>. This option does not select an item automatically or add form validation.
-        </>,
-        <>
-            A <code>Button</code> that you render inside a Base UI <code>Toggle</code> also shows the pressed state.
+            Set <Snippet.Inline>{'required'}</Snippet.Inline> on <Snippet.Inline>{'ToggleGroup'}</Snippet.Inline> to
+            keep one option pressed, and give it an initial value.
         </>,
     ],
     props: [
@@ -82,7 +69,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'raised'",
                     description: 'The shape: flat, raised 3D, or outlined.',
                 },
                 {
@@ -105,7 +92,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'raised'",
                     description: 'The shape: flat, raised 3D, or outlined. Sets it for every button in the group.',
                 },
                 {

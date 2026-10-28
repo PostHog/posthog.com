@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
@@ -39,16 +40,12 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Use a switch for a setting that takes effect at once. In a form that the user submits, use a{' '}
+            Use a switch for a setting that applies at once. In a form that the user submits, use a{' '}
             <Link to="/components/ui/checkbox">Checkbox</Link>.
         </>,
         <>
-            Put <code>Switch.Root</code> and its text in a <code>{'<label>'}</code>. Then a click on the text toggles
-            the switch.
-        </>,
-        <>
-            <code>Switch.Thumb</code> renders a raised face with two grip lines. The face moves down a little when the
-            user presses the switch.
+            Put <Snippet.Inline>{'Switch.Root'}</Snippet.Inline> and its text in a{' '}
+            <Snippet.Inline>{'<label>'}</Snippet.Inline>, so a click on the text toggles it.
         </>,
     ],
     props: [

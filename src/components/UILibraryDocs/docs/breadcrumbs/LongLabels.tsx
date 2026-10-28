@@ -3,7 +3,7 @@ import { Breadcrumbs } from 'components/UI/Breadcrumbs'
 
 export default function LongLabels(): JSX.Element {
     return (
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-sm rounded border border-dashed border-[rgb(var(--text-primary)/0.2)] p-2">
             <Breadcrumbs.Root>
                 <Breadcrumbs.Item>
                     <Breadcrumbs.Link to="/handbook">PostHog company handbook</Breadcrumbs.Link>

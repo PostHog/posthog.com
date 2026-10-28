@@ -29,6 +29,12 @@ export const surfaceDivider = 'border-[rgb(var(--text-primary)/0.14)]'
 
 export const sectionSurface = `rounded-[8px] border ${surfaceDivider}`
 
+export const heightRevealPanel =
+    'h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0 motion-reduce:transition-none'
+
+export const cardBarSurface =
+    'border-[rgb(var(--text-primary)/0.12)] bg-[rgb(var(--text-primary)/0.045)] dark:bg-white/[0.035]'
+
 export const cardLevels = {
     1: `${grainSurface} [--ui-card-radius:8px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.13)] bg-white/60 shadow-[0_1px_0_rgb(0_0_0/0.05),0_1px_2px_-1px_rgb(0_0_0/0.08)] dark:border-[rgb(var(--text-primary)/0.12)] dark:bg-white/[0.06] dark:shadow-[0_1px_0_rgb(0_0_0/0.3)]`,
     2: `${grainSurface} [--ui-card-radius:6px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.1)] bg-[rgb(var(--text-primary)/0.035)] shadow-[inset_0_1px_0_rgb(0_0_0/0.08)] dark:bg-black/20 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]`,
@@ -40,7 +46,7 @@ export const cardInnerBottomRadius = 'rounded-b-[calc(var(--ui-card-radius)_-_1p
 
 export const cardAppearances = {
     glass: '',
-    solid: 'bg-white dark:bg-accent-dark dark:[background-image:linear-gradient(rgb(255_255_255/0.05),rgb(255_255_255/0.05))]',
+    solid: 'bg-white dark:bg-accent-dark dark:[background-image:linear-gradient(rgb(255_255_255/0.025),rgb(255_255_255/0.025))]',
     dashed: 'border-dashed border-[rgb(var(--text-primary)/0.28)] dark:border-[rgb(var(--text-primary)/0.28)]',
 } as const
 
@@ -115,7 +121,9 @@ export const plainCode = 'block rounded-none border-0 bg-transparent p-0 font-no
 
 export const placeholderText = 'placeholder:text-muted dark:placeholder:text-[rgb(var(--text-primary)/0.5)]'
 
-const textInputBase = `${fieldState} ${formsPluginReset} h-9 w-full px-2.5 py-0 text-sm text-primary ${placeholderText}`
+export const touchFieldText = '[@media(pointer:coarse)]:text-[16px]'
+
+const textInputBase = `${fieldState} ${formsPluginReset} h-9 w-full px-2.5 py-0 text-sm text-primary ${placeholderText} ${touchFieldText}`
 
 export const textInput = `${fieldSurface} ${fieldFocusVisible} ${textInputBase}`
 
@@ -153,7 +161,7 @@ export const fieldGroupSurface = (appearance: FieldAppearance): string =>
 export const textInputFor = (appearance: FieldAppearance): string =>
     `${fieldAppearanceSurfaces[appearance]} ${fieldAppearanceFocusVisible[appearance]} ${textInputBase}`
 
-export const bareInput = `${formsPluginReset} min-w-0 flex-1 self-stretch border-0 bg-transparent p-0 text-sm text-primary shadow-none outline-none ${placeholderText} focus:border-0 focus:shadow-none`
+export const bareInput = `${formsPluginReset} min-w-0 flex-1 self-stretch border-0 bg-transparent p-0 text-sm text-primary shadow-none outline-none ${placeholderText} focus:border-0 focus:shadow-none ${touchFieldText}`
 
 const inputGroupBase = `${fieldState} flex min-h-8 w-full cursor-text items-center gap-0.5 px-1 text-sm text-primary`
 
@@ -208,7 +216,8 @@ export const barLabel = 'text-sm font-semibold text-primary'
 
 export const barValue = 'col-start-2 text-right text-sm tabular-nums text-secondary'
 
-export const barTrack = `col-span-2 h-2 overflow-hidden rounded-full ${trackSurface}`
+export const barTrack =
+    'col-span-2 h-2 overflow-hidden rounded-full bg-[rgb(var(--text-primary)/0.08)] shadow-[inset_0_1px_0_rgb(0_0_0/0.06)] dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)]'
 
 export const barIndicator =
     'block h-full rounded-full bg-orange transition-[width] duration-500 ease-out motion-reduce:transition-none'
@@ -315,3 +324,6 @@ export const textareaSizes = {
     md: 'min-h-14 px-2.5 py-[7px] text-sm leading-5',
     lg: 'min-h-[68px] px-3 py-[9px] text-[15px] leading-6',
 } as const
+
+export const tintedHeaderEdge =
+    'border-b-2 shadow-[inset_0_1px_0_rgb(255_255_255/0.45)] dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.08)]'

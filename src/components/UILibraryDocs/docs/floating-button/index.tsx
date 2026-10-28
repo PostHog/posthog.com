@@ -1,3 +1,6 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import OverContent from './OverContent'
 import overContentSource from '!!../../rawSourceLoader!./OverContent.tsx?raw'
@@ -24,16 +27,20 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes and states',
-            description: 'Three sizes, a disabled button, and a loading button.',
+            description: 'Three sizes, an icon button, and the disabled and loading states.',
             Component: Sizes,
             source: sizesSource,
         },
     ],
     notes: [
-        'Use a floating button only over other content, such as carousel arrows, a video control, or a chat launcher. On a normal surface, use Button.',
-        'The glass has one look. It has no primary or danger colors.',
-        'The blur shows the content inside the same window. Content behind the site window does not show through.',
-        'FloatingIconButton needs an aria-label, because it has no visible text.',
+        <>
+            Use a floating button only over images, video, or other content. On a normal surface, use{' '}
+            <Link to="/components/ui/button">Button</Link>.
+        </>,
+        <>
+            <Snippet.Inline>{'FloatingIconButton'}</Snippet.Inline> needs an{' '}
+            <Snippet.Inline>{'aria-label'}</Snippet.Inline>.
+        </>,
     ],
     props: [
         {

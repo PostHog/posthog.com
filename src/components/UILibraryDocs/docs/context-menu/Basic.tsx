@@ -4,7 +4,7 @@ import { ContextMenu } from 'components/UI/ContextMenu'
 export default function ContextMenuBasic(): JSX.Element {
     return (
         <ContextMenu.Root>
-            <ContextMenu.Trigger className="flex h-28 max-w-sm select-none items-center justify-center rounded border border-dashed border-primary text-sm text-secondary">
+            <ContextMenu.Trigger className="flex h-28 w-full select-none items-center justify-center rounded border border-dashed border-primary text-sm text-secondary">
                 Right-click here
             </ContextMenu.Trigger>
             <ContextMenu.Popup>

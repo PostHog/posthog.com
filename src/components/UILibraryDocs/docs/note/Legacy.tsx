@@ -2,10 +2,10 @@ import React from 'react'
 import { IconCheck, IconLightBulb } from '@posthog/icons'
 import { Note } from 'components/UI/Note'
 
-export default function Legacy(): JSX.Element {
+export default function CustomIcons(): JSX.Element {
     return (
         <div className="flex flex-col gap-3">
-            <Note.Root type="action">
+            <Note.Root color="warning">
                 <Note.Icon>
                     <IconLightBulb />
                 </Note.Icon>
@@ -14,7 +14,7 @@ export default function Legacy(): JSX.Element {
                     <p>Connect your data source.</p>
                 </Note.Content>
             </Note.Root>
-            <Note.Root tone="success">
+            <Note.Root color="success">
                 <Note.Icon>
                     <IconCheck />
                 </Note.Icon>

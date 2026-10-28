@@ -21,18 +21,10 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            <code>ContextMenu.Trigger</code> has no style. It is the area that the user right-clicks. Give it a size and
-            a visible edge, so that users can find it.
+            A context menu is hidden until the user right-clicks. Make every command in it also available in a visible
+            place, such as a <Link to="/components/ui/menu">Menu</Link> or a button.
         </>,
-        <>
-            The items, checkbox items, radio items, groups, separators, and submenus are the{' '}
-            <Link to="/components/ui/menu">Menu</Link> parts. They look and work the same.
-        </>,
-        <>
-            <code>ContextMenu.Popup</code> combines Base UI&apos;s <code>Portal</code>, <code>Positioner</code>, and{' '}
-            <code>Popup</code>. It renders at the end of <code>{'<body>'}</code> and sets{' '}
-            <code>data-scheme=&quot;primary&quot;</code>, so its colors match the site theme.
-        </>,
+        'Give the trigger area a visible edge, so users can find it.',
     ],
     props: [
         {

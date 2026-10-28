@@ -1,12 +1,11 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
-import Disabled from './Disabled'
-import disabledSource from '!!../../rawSourceLoader!./Disabled.tsx?raw'
 
 import Sizes from './Sizes'
 import sizesSource from '!!../../rawSourceLoader!./Sizes.tsx?raw'
@@ -22,51 +21,35 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic',
             description:
-                'Group shows the input and the step arrows. The label is in ScrubArea, so the user can drag it to change the value.',
+                'Group shows the input and the step arrows. Put Field.Label in ScrubArea to make the label draggable.',
             Component: Basic,
             source: basicSource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Select sm, md, or lg. The button uses the same size.',
+            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
             Component: Sizes,
             source: sizesSource,
-        },
-        {
-            id: 'disabled',
-            title: 'Disabled',
-            description:
-                'Set disabled on Field.Root. The input, the step arrows, and the scrub area stop working, and the label is muted.',
-            Component: Disabled,
-            source: disabledSource,
         },
         {
             id: 'states',
             title: 'States',
             description:
-                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+                'Inset is the default. Line shows only a bottom line, for light or inline editing. Set invalid or disabled on Field.Root for the other states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },
     ],
     notes: [
         <>
-            <code>NumberField.Group</code> renders the input and a spin box (stacked up and down arrows) by default, at{' '}
-            <code>w-32</code>. Pass your own children to change the layout. <code>NumberField.Steppers</code> renders
-            the two arrows.
+            Label the field with <Snippet.Inline>{'Field.Label'}</Snippet.Inline> inside{' '}
+            <Snippet.Inline>{'Field.Root'}</Snippet.Inline>. Put the label in{' '}
+            <Snippet.Inline>{'NumberField.ScrubArea'}</Snippet.Inline> to let users drag it to change the value.
         </>,
         <>
-            Base UI has no <code>NumberField.Label</code>. Put the field in <code>Field.Root</code> and use{' '}
-            <code>Field.Label</code>. See <Link to="/components/ui/field">Field</Link>.
-        </>,
-        <>
-            Put the label in <code>NumberField.ScrubArea</code>, so that users can drag the label to change the value.
-            Add <code>NumberField.ScrubAreaCursor</code> to show an arrow cursor while the user drags.
-        </>,
-        <>
-            <code>Increment</code> and <code>Decrement</code> show a chevron by default. Pass <code>children</code> to
-            replace it.
+            For a value inside a range, where position matters more than the exact number, use{' '}
+            <Link to="/components/ui/slider">Slider</Link>.
         </>,
     ],
     props: [
@@ -102,8 +85,8 @@ export const doc: ComponentDoc = {
                     type: 'string',
                     description: (
                         <>
-                            Classes for the column that holds <code>Increment</code> and <code>Decrement</code>. This
-                            part is not in Base UI.
+                            Classes for the column that holds <Snippet.Inline>Increment</Snippet.Inline> and{' '}
+                            <Snippet.Inline>Decrement</Snippet.Inline>. This part is not in Base UI.
                         </>
                     ),
                 },

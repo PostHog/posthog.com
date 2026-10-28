@@ -6,7 +6,8 @@ import { assignRef, mergeClassName, useSmoothHeight, withClassName } from '../ut
 
 type Appearance = 'pane' | 'underline'
 const AppearanceContext = React.createContext<Appearance>('pane')
-const root = 'flex w-full flex-col gap-2 data-[orientation=vertical]:flex-row data-[orientation=vertical]:items-start'
+const root =
+    'flex w-full flex-col gap-2 [&[data-orientation=horizontal]>*]:shrink-0 data-[orientation=vertical]:flex-row data-[orientation=vertical]:items-start'
 
 const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> & { appearance?: Appearance }>(
     function TabsRoot({ appearance = 'pane', className, onValueChange, ...props }, ref) {

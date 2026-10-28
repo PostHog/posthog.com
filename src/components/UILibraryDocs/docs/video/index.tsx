@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Themed from './Themed'
 import themedSource from '!!../../rawSourceLoader!./Themed.tsx?raw'
@@ -20,29 +22,22 @@ export const doc: ComponentDoc = {
         },
         {
             id: 'manual',
-            title: 'Poster and manual playback',
-            description: 'Remove the frame when the surrounding surface supplies one.',
+            title: 'Manual playback',
+            description:
+                'Set autoPlay={false} to show the poster and native controls. The video starts when the user presses play.',
             Component: Manual,
             source: manualSource,
         },
     ],
     notes: [
-        'Video supports direct files. Use WistiaVideo for Wistia embeds. Provider scripts and player APIs remain separate.',
-        'The source follows useApp().siteSettings.theme. Change the site theme to check both sources. The example preview toggle changes styles only.',
-        'Reduced motion disables autoplay and shows native controls by default. A preference change pauses an autoplay clip. Users can start it manually.',
-        'Autoplay clips hide native controls by default. A small play/pause button appears on hover or keyboard focus. Its label changes between Pause and Play.',
-        'Explicit controls values override the default. Set controls to true for native controls on autoplay clips. Browsers can block autoplay with sound.',
-        'Lazy loading attaches the source within 200 pixels of the viewport. Posters can load sooner. Set loading to eager for an immediately needed clip.',
-        'Provide a label. Add caption for visible context. For speech, add native track children with timed captions. A figure caption does not replace them.',
-        'Migration: videoLight → src, videoDark → darkSrc, classes → className, background → frame, and alt → label. ProductVideo ignored alt.',
-        'Keep autoPlay, muted, and loop as boolean props. With autoPlay false, loop defaults to false. Add wrapperClassName="mb-4" for the old outer margin.',
-        'ProductVideo autoplay clips keep their clean appearance. Video adds a keyboard-accessible pause button instead of native controls.',
-        'Muted and inline playback default to true. Loop defaults to the requested autoPlay value. Native event handlers and the video ref remain available.',
-        'Lazy loading disconnects its observer after the first intersection. Without IntersectionObserver, the source attaches after mount. Preload defaults to none.',
-        'The frame uses cardLevels[1]. Set frame to false to remove its border, tint, and shadow. Rounded corners remain.',
-        'Without darkSrc or darkPoster, dark mode uses src or poster. The initial render disables autoplay until the motion preference check completes.',
-        'The demo URLs come from the notebooks docs and the product analytics page. The poster uses a Cloudinary frame from that clip.',
-        'The default ratio is 16:9. Use className to set the clip ratio. A theme change can restart playback.',
+        'Use Video for video files. For Wistia, use WistiaVideo.',
+        <>
+            Give every video a <Snippet.Inline>{'label'}</Snippet.Inline>. For speech, add caption tracks.
+        </>,
+        <>
+            Set <Snippet.Inline>{'darkSrc'}</Snippet.Inline> when the clip shows UI, so it matches dark mode.
+        </>,
+        'Autoplay clips are muted and loop. Autoplay is off for users who prefer reduced motion.',
     ],
     props: [
         {

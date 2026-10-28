@@ -1,19 +1,21 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { cardLevels, toneFill, toneText, toneIcon } from '../styles'
-import type { Tone } from '../styles'
-import { toneIcons } from '../toneIcons'
+import { cardLevels, tintedHeaderEdge } from '../styles'
+import { colorHeader, colorIcon, colorText, resolveColor } from '../colors'
+import type { ColorOrStatus } from '../colors'
+import { statusIcon } from '../toneIcons'
 
-export type NoteType = 'action' | 'fyi' | 'caution'
-export type NoteRootProps = React.HTMLAttributes<HTMLDivElement> & { tone?: Tone; type?: NoteType; size?: 'sm' | 'md' }
+export type NoteRootProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> & {
+    color?: ColorOrStatus
+    size?: 'sm' | 'md'
+}
 export type NoteIconProps = React.HTMLAttributes<HTMLSpanElement>
 
 const noteSizes = {
     sm: 'text-[13px] [--note-x:0.625rem] [--note-y:0.375rem] [--note-title-y:0.25rem]',
     md: 'text-sm [--note-x:0.75rem] [--note-y:0.5rem] [--note-title-y:0.375rem]',
 }
-const NoteTone = React.createContext<Tone>('info')
-const legacyTones: Record<NoteType, Tone> = { action: 'warning', fyi: 'neutral', caution: 'error' }
+const NoteColor = React.createContext<ColorOrStatus>('info')
 
 function flattenChildren(children: React.ReactNode): React.ReactNode[] {
     return React.Children.toArray(children).flatMap((child) =>
@@ -24,29 +26,36 @@ function flattenChildren(children: React.ReactNode): React.ReactNode[] {
 }
 
 const Root = React.forwardRef<HTMLDivElement, NoteRootProps>(function NoteRoot(
-    { tone, type, size = 'md', children, className, ...props },
+    { color = 'info', size = 'md', children, className, ...props },
     ref
 ) {
-    const resolvedTone = tone ?? (type ? legacyTones[type] : 'info')
+    const noteColor = color
     const parts = flattenChildren(children)
     const icon = parts.find((child) => React.isValidElement(child) && child.type === Icon)
     const title = parts.find((child) => React.isValidElement(child) && child.type === Title)
     const action = parts.find((child) => React.isValidElement(child) && child.type === Action)
     const body = parts.filter((child) => child !== icon && child !== title && child !== action)
     return (
-        <NoteTone.Provider value={resolvedTone}>
+        <NoteColor.Provider value={noteColor}>
             <div className="@container">
                 <div
                     ref={ref}
                     {...props}
-                    className={cn(cardLevels[1], 'overflow-hidden leading-5 text-primary', noteSizes[size], className)}
+                    className={cn(
+                        cardLevels[1],
+                        'overflow-hidden leading-5 text-primary',
+                        title && 'border-t-0',
+                        noteSizes[size],
+                        className
+                    )}
                 >
                     {title ? (
                         <>
                             <div
                                 className={cn(
                                     'flex min-w-0 items-start gap-2 px-[var(--note-x)] py-[var(--note-title-y)]',
-                                    toneFill[resolvedTone]
+                                    tintedHeaderEdge,
+                                    colorHeader[resolveColor(noteColor)]
                                 )}
                             >
                                 {icon}
@@ -68,7 +77,7 @@ const Root = React.forwardRef<HTMLDivElement, NoteRootProps>(function NoteRoot(
                     )}
                 </div>
             </div>
-        </NoteTone.Provider>
+        </NoteColor.Provider>
     )
 })
 
@@ -76,14 +85,18 @@ const Icon = React.forwardRef<HTMLSpanElement, NoteIconProps>(function NoteIcon(
     { children, className, ...props },
     ref
 ) {
-    const tone = React.useContext(NoteTone)
-    const DefaultIcon = toneIcons[tone]
+    const noteColor = React.useContext(NoteColor)
+    const DefaultIcon = statusIcon(noteColor)
     return (
         <span
             ref={ref}
             {...props}
             aria-hidden
-            className={cn('flex h-5 shrink-0 items-center [&>svg]:size-4', toneIcon[tone], className)}
+            className={cn(
+                'flex h-5 shrink-0 items-center [&>svg]:size-4',
+                colorIcon[resolveColor(noteColor)],
+                className
+            )}
         >
             {children === undefined ? <DefaultIcon /> : children}
         </span>
@@ -93,12 +106,16 @@ const Title = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEleme
     { className, ...props },
     ref
 ) {
-    const tone = React.useContext(NoteTone)
+    const noteColor = React.useContext(NoteColor)
     return (
         <div
             ref={ref}
             {...props}
-            className={cn('min-w-0 flex-1 font-semibold [overflow-wrap:anywhere]', toneText[tone], className)}
+            className={cn(
+                'min-w-0 flex-1 font-semibold [overflow-wrap:anywhere]',
+                colorText[resolveColor(noteColor)],
+                className
+            )}
         />
     )
 })

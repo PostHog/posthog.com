@@ -14,7 +14,7 @@ export default function Basic(): JSX.Element {
                     <Menu.Item onClick={() => setStatus('Insight published')}>Save and publish</Menu.Item>
                 </SplitButton.Popup>
             </SplitButton.Root>
-            <span role="status" className="text-sm text-secondary">
+            <span role="status" className="text-body-sm text-secondary">
                 {status}
             </span>
         </div>

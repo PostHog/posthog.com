@@ -26,11 +26,11 @@ const docsSections: DocsSection[] = [
 export default function AutocompleteGroups(): JSX.Element {
     return (
         <Field.Root className="max-w-xs">
-            <Field.Label>Search the docs</Field.Label>
+            <Field.Label>Search by product</Field.Label>
             <Autocomplete.Root items={docsSections}>
                 <Autocomplete.InputGroup>
                     <IconSearch className="ml-1.5 size-4 shrink-0 self-center text-secondary" />
-                    <Autocomplete.Input placeholder="e.g. funnel" />
+                    <Autocomplete.Input placeholder="e.g. replay" />
                     <Autocomplete.Clear />
                 </Autocomplete.InputGroup>
                 <Autocomplete.Popup>

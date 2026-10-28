@@ -4,6 +4,7 @@ import '@fontsource-variable/ibm-plex-sans'
 import '@fontsource-variable/ibm-plex-sans/wght-italic.css'
 import './src/styles/global.css'
 import { Provider as ToastProvider } from './src/context/Toast'
+import { Toast as LibraryToast } from './src/components/UI/Toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
@@ -12,7 +13,9 @@ initKea(false)
 
 export const wrapRootElement = ({ element }) => (
     <ToastProvider>
-        <UserProvider>{wrapElement({ element })}</UserProvider>
+        <LibraryToast.SiteProvider>
+            <UserProvider>{wrapElement({ element })}</UserProvider>
+        </LibraryToast.SiteProvider>
     </ToastProvider>
 )
 

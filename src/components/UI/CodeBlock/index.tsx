@@ -4,10 +4,18 @@ import type { Language, PrismTheme } from 'prism-react-renderer'
 import { lightTheme, darkTheme } from '../../CodeBlock/theme'
 import languageMap from '../../CodeBlock/languages'
 import { cn } from '../../../utils'
-import { Button } from '../Button'
 import { CopyButton } from '../CopyButton'
 import { Tabs } from '../Tabs'
-import { insetFocusRing, plainCode, surfaceDivider, scrollbarHidden } from '../styles'
+import {
+    cardAppearances,
+    cardBarSurface,
+    cardInnerBottomRadius,
+    cardInnerTopRadius,
+    cardLevels,
+    insetFocusRing,
+    plainCode,
+    scrollbarHidden,
+} from '../styles'
 import { useId } from '../utils'
 
 export type CodeSnippet = {
@@ -46,8 +54,15 @@ function syntaxColor(types: string[], language: string, theme: PrismTheme): stri
     }
     return color
 }
-const glassButton =
-    'hover:bg-[rgb(var(--text-primary)/0.07)] active:bg-[rgb(var(--text-primary)/0.1)] dark:hover:bg-[rgb(var(--text-primary)/0.07)] dark:active:bg-[rgb(var(--text-primary)/0.1)]'
+const CODE_LINE_HEIGHT_PX = 24
+const CODE_PADDING_Y_PX = 16
+const codeLineStyle: React.CSSProperties = { lineHeight: `${CODE_LINE_HEIGHT_PX}px`, minHeight: CODE_LINE_HEIGHT_PX }
+const codePaneStyle: React.CSSProperties = { lineHeight: `${CODE_LINE_HEIGHT_PX}px`, paddingBlock: CODE_PADDING_Y_PX }
+
+function codeHeight(code: string): number {
+    const lineCount = code.split(/\r\n|\r|\n/).length
+    return lineCount * CODE_LINE_HEIGHT_PX + CODE_PADDING_Y_PX * 2
+}
 
 function revealTab(list: HTMLDivElement, tab: HTMLElement) {
     const listBounds = list.getBoundingClientRect()
@@ -79,21 +94,11 @@ function SnippetContent({
     lineNumberStart: number
     maxHeight?: number
 }) {
-    const contentRef = React.useRef<HTMLPreElement>(null)
     const regionId = useId()
-    const [contentHeight, setContentHeight] = React.useState<number>()
     const [expanded, setExpanded] = React.useState(false)
     const heightLimit = maxHeight === undefined ? undefined : Math.max(1, maxHeight)
-    React.useEffect(() => {
-        const content = contentRef.current
-        if (!content) return
-        const measure = () => setContentHeight(content.scrollHeight)
-        measure()
-        const observer = new ResizeObserver(measure)
-        observer.observe(content)
-        return () => observer.disconnect()
-    }, [snippet.code])
-    const canExpand = heightLimit !== undefined && contentHeight !== undefined && contentHeight > heightLimit
+    const contentHeight = codeHeight(snippet.code)
+    const canExpand = heightLimit !== undefined && contentHeight > heightLimit
     const hasDiff = Boolean(snippet.addedLines?.length || snippet.removedLines?.length)
     const language = snippet.language?.toLowerCase() || 'text'
 
@@ -118,12 +123,10 @@ function SnippetContent({
                 >
                     {({ tokens, getTokenProps }) => (
                         <pre
-                            ref={contentRef}
-                            className={cn(
-                                'm-0 w-max min-w-full bg-transparent py-4 font-code text-sm leading-6 text-primary'
-                            )}
+                            className={cn('m-0 w-max min-w-full bg-transparent font-code text-sm text-primary')}
+                            style={codePaneStyle}
                         >
-                            <code className={cn(plainCode, 'm-0 font-code text-sm leading-6 text-primary')}>
+                            <code className={cn(plainCode, 'm-0 font-code text-sm text-primary')} style={codeLineStyle}>
                                 {tokens.map((line, index) => {
                                     const lineNumber = index + 1
                                     const added = snippet.addedLines?.includes(lineNumber)
@@ -132,12 +135,13 @@ function SnippetContent({
                                         <span
                                             key={index}
                                             className={cn(
-                                                'flex min-h-6 border-l px-4 border-transparent',
+                                                'flex border-l px-4 border-transparent',
                                                 snippet.highlightedLines?.includes(lineNumber) &&
                                                     'border-yellow bg-yellow/15 dark:bg-yellow/10',
                                                 added && 'border-green bg-green/15 dark:bg-green/10',
                                                 removed && 'border-red bg-red/10 dark:bg-red/15'
                                             )}
+                                            style={codeLineStyle}
                                         >
                                             {lineNumbers && (
                                                 <span
@@ -204,18 +208,21 @@ function SnippetContent({
                 </Highlight>
             </div>
             {canExpand && (
-                <div className={cn('flex justify-between items-center gap-3 border-t px-3 py-2', surfaceDivider)}>
-                    <span className="text-xs text-secondary">{expanded ? 'Complete snippet' : 'More lines below'}</span>
-                    <Button
-                        size="sm"
-                        className={glassButton}
-                        aria-controls={regionId}
-                        aria-expanded={expanded}
-                        onClick={() => setExpanded(!expanded)}
-                    >
-                        {expanded ? 'Show less' : 'Show more'}
-                    </Button>
-                </div>
+                <button
+                    type="button"
+                    aria-controls={regionId}
+                    aria-expanded={expanded}
+                    onClick={() => setExpanded(!expanded)}
+                    className={cn(
+                        'flex min-h-10 w-full items-center justify-between gap-3 border-0 border-t px-4 py-1.5 text-left text-[13px] text-secondary transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] hover:text-primary active:bg-[rgb(var(--text-primary)/0.1)] motion-reduce:transition-none',
+                        cardInnerBottomRadius,
+                        cardBarSurface,
+                        insetFocusRing
+                    )}
+                >
+                    <span>{expanded ? 'Complete snippet' : 'More lines below'}</span>
+                    <span className="font-semibold text-primary">{expanded ? 'Show less' : 'Show more'}</span>
+                </button>
             )}
         </>
     )
@@ -259,8 +266,9 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
             {...props}
             ref={ref}
             className={cn(
-                'not-prose min-w-0 overflow-hidden text-primary',
-                '@container/codeblock rounded-[8px] border border-[rgb(var(--text-primary)/0.16)] bg-white dark:bg-white-dark',
+                cardLevels[1],
+                cardAppearances.solid,
+                '@container/codeblock not-prose min-w-0 overflow-hidden text-primary',
                 className
             )}
         >
@@ -271,13 +279,13 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                     if (value === undefined) setInternalValue(nextId)
                     onValueChange?.(nextId)
                 }}
-                appearance="underline"
                 className="gap-0"
             >
                 <div
                     className={cn(
-                        'flex min-w-0 items-center gap-2 border-b bg-[rgb(var(--text-primary)/0.04)] pr-2',
-                        surfaceDivider
+                        'flex min-h-11 min-w-0 items-center gap-2 border-b py-1.5 pl-1.5 pr-2',
+                        cardInnerTopRadius,
+                        cardBarSurface
                     )}
                 >
                     {snippets.length > 1 ? (
@@ -288,23 +296,23 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                                 const tab = (event.target as HTMLElement).closest<HTMLElement>('[role="tab"]')
                                 if (tab) revealTab(event.currentTarget, tab)
                             }}
-                            className={`min-w-0 shrink overflow-x-auto overflow-y-hidden border-0 p-0 ${scrollbarHidden}`}
+                            className={`min-w-0 shrink overflow-x-auto overflow-y-hidden p-0 ${scrollbarHidden}`}
                         >
                             {snippets.map((snippet) => (
                                 <Tabs.Tab
                                     key={snippet.id}
                                     value={snippet.id}
-                                    className="rounded-none border-r border-[rgb(var(--text-primary)/0.12)] px-4 py-3 font-code text-xs data-[active]:bg-white dark:data-[active]:bg-white-dark"
+                                    className="px-2.5 py-1.5 font-code text-[13px]"
                                 >
                                     {snippetLabel(snippet)}
                                 </Tabs.Tab>
                             ))}
                         </Tabs.List>
                     ) : (
-                        <div className="min-w-0 px-2 py-1 text-xs font-semibold [overflow-wrap:anywhere]">
+                        <div className="min-w-0 px-2.5 text-[13px] font-semibold [overflow-wrap:anywhere]">
                             {snippetLabel(activeSnippet)}
                             {activeSnippet.fileName && activeSnippet.language && (
-                                <span className="ml-2 font-normal text-muted">
+                                <span className="ml-2 font-code font-normal text-secondary">
                                     {languageMap[activeSnippet.language]?.label || activeSnippet.language}
                                 </span>
                             )}
@@ -312,13 +320,14 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                     )}
                     {showCopy && (
                         <CopyButton
+                            appearance="flat"
                             key={activeSnippet.id}
                             text={activeSnippet.code}
                             onCopy={onCopy}
                             label={`Copy ${
                                 activeSnippet.fileName || activeSnippet.label || activeSnippet.language || 'code'
                             }`}
-                            className={cn('ml-auto shrink-0', glassButton)}
+                            className="ml-auto shrink-0"
                         />
                     )}
                 </div>

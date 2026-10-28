@@ -7,7 +7,7 @@ export default function WithAction(): JSX.Element {
             {([640, 320] as const).map((width) => (
                 <div key={width} className="space-y-1" style={{ width: `min(100%, ${width}px)` }}>
                     <div className="text-xs text-secondary">Maximum width: {width}px</div>
-                    <Note.Root tone="warning">
+                    <Note.Root color="warning">
                         <Note.Icon />
                         <Note.Title>Check your settings</Note.Title>
                         <Note.Content>

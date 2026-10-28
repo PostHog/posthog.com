@@ -1,15 +1,15 @@
 import React from 'react'
 import { Autocomplete } from 'components/UI/Autocomplete'
-import { Button } from 'components/UI/Button'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 const items = ['First', 'Second', 'Third']
 
 export default function Sizes(): JSX.Element {
     return (
-        <div className="flex flex-col gap-4">
+        <DemoRows>
             {(['sm', 'md', 'lg'] as const).map((size) => (
-                <div key={size} className="flex flex-wrap items-start gap-2">
+                <DemoRow key={size} label={size}>
                     <Autocomplete.Root items={items}>
-                        <Autocomplete.InputGroup size={size} className="max-w-xs">
+                        <Autocomplete.InputGroup size={size} className="w-full max-w-xs">
                             <Autocomplete.Input aria-label={`${size} options`} placeholder="Choose an option" />
                             <Autocomplete.Clear />
                         </Autocomplete.InputGroup>
@@ -24,11 +24,8 @@ export default function Sizes(): JSX.Element {
                             </Autocomplete.List>
                         </Autocomplete.Popup>
                     </Autocomplete.Root>
-                    <Button size={size} appearance="raised">
-                        {size}
-                    </Button>
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import AppearanceStates from './AppearanceStates'
@@ -31,15 +32,14 @@ export const doc: ComponentDoc = {
         {
             id: 'multiple',
             title: 'Multiple values with chips',
-            description:
-                'Set multiple on Root. Value gives the selected items to its children. Put a Chip for each item and the Input in Chips, so that they wrap together.',
+            description: 'Set multiple on Root. Selected items show as chips that wrap with the input.',
             Component: Multiple,
             source: multipleSource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Select sm, md, or lg. The button uses the same size.',
+            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -54,36 +54,17 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Put <code>Input</code> inside <code>InputGroup</code>. The group draws the border and the focus ring.{' '}
-            <code>Input</code> has no border.
+            Use Combobox when the list is long enough to need filtering, more than about 10 options, or when the user
+            picks several values. For a short list, use <Link to="/components/ui/select">Select</Link>. For free text
+            with suggestions, use <Link to="/components/ui/autocomplete">Autocomplete</Link>.
         </>,
         <>
-            <code>Popup</code> does not contain <code>List</code>. Put <code>Empty</code> and <code>Status</code> next
-            to <code>List</code> inside <code>Popup</code>.
+            Put <Snippet.Inline>{'Empty'}</Snippet.Inline> next to <Snippet.Inline>{'List'}</Snippet.Inline> inside{' '}
+            <Snippet.Inline>{'Popup'}</Snippet.Inline>, not in the list.
         </>,
         <>
-            For multiple selection, put the chips and the <code>Input</code> inside <code>Chips</code>.{' '}
-            <code>Combobox.Chip</code> uses the same styles as <Link to="/components/ui/chip">Chip</Link>.
-        </>,
-        <>
-            While the list is open below the field, a new row of chips scrolls the page up by the same height, so the
-            list stays in place and every chip stays visible.
-        </>,
-        <>
-            <code>Clear</code> and <code>ChipRemove</code> show an icon by default. Pass <code>children</code> to
-            replace it.
-        </>,
-        <>
-            Combobox has no arrow button. A click on the input opens the list, and the arrow keys open it from the
-            keyboard.
-        </>,
-        <>
-            <code>Popup</code> renders the Base UI <code>Portal</code>, <code>Positioner</code>, and <code>Popup</code>{' '}
-            together. It takes the positioner props, for example <code>side</code> and <code>align</code>, and the
-            portal <code>container</code> prop.
-        </>,
-        <>
-            For free text with suggestions, use <Link to="/components/ui/autocomplete">Autocomplete</Link>.
+            Name each <Snippet.Inline>{'ChipRemove'}</Snippet.Inline> after its chip, for example &quot;Remove Session
+            replay&quot;.
         </>,
     ],
     props: [
@@ -101,7 +82,7 @@ export const doc: ComponentDoc = {
                     type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Keep inset for forms. Use line for a lighter form that must not look like a card or a section.',
+                        'Sets the field shape. Keep inset for forms. Use line for light or inline editing, such as renaming in place, filters, and quick settings.',
                 },
             ],
         },
@@ -126,7 +107,7 @@ export const doc: ComponentDoc = {
                     description: (
                         <>
                             The accessible name of the remove button. Name the chip in it, for example{' '}
-                            <code>{'`Remove ${product}`'}</code>.
+                            <Snippet.Inline>{'`Remove ${product}`'}</Snippet.Inline>.
                         </>
                     ),
                 },

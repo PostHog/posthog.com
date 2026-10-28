@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
@@ -40,20 +41,12 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            <code>Accordion.Trigger</code> adds a chevron before the label. The chevron turns down when the panel opens,
-            the same as in <code>Collapsible</code>. Your <code>children</code> are the label only.
+            Use Accordion for a set of related panels. For a single panel, use{' '}
+            <Link to="/components/ui/collapsible">Collapsible</Link>.
         </>,
         <>
-            <code>Accordion.Header</code> renders an <code>{'<h3>'}</code>. To change the heading level, pass{' '}
-            <code>{'render={<h2 />}'}</code>.
-        </>,
-        <>
-            <code>Accordion.Panel</code> puts its children in a padded inner element, so the height animation does not
-            jump. The first and last paragraphs in the panel have no outer margin.
-        </>,
-        <>A line separates the items. The accordion has no outer border.</>,
-        <>
-            Use <Link to="/components/ui/collapsible">Collapsible</Link> for one panel.
+            <Snippet.Inline>{'Accordion.Header'}</Snippet.Inline> renders an <Snippet.Inline>{'<h3>'}</Snippet.Inline>.
+            Pass <Snippet.Inline>{'render={<h2 />}'}</Snippet.Inline> when the page outline needs another level.
         </>,
     ],
 }

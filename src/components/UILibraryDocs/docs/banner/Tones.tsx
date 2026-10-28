@@ -1,8 +1,9 @@
 import React from 'react'
 import { Banner } from 'components/UI/Banner'
-import type { Tone } from 'components/UI/styles'
+import type { StatusAlias } from 'components/UI/colors'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
-const banners: { tone: Tone; title: string; body: string }[] = [
+const banners: { tone: StatusAlias; title: string; body: string }[] = [
     { tone: 'neutral', title: 'Read-only project', body: 'Ask a project admin for access to change settings.' },
     { tone: 'info', title: 'New SDK version', body: 'posthog-js 1.200 adds faster feature flag loading.' },
     { tone: 'success', title: 'Export ready', body: 'Your CSV export of 12,408 events is ready to download.' },
@@ -13,18 +14,16 @@ const banners: { tone: Tone; title: string; body: string }[] = [
 
 export default function Tones(): JSX.Element {
     return (
-        <div className="flex w-full flex-col gap-3">
+        <DemoRows className="@md:items-start">
             {banners.map(({ tone, title, body }) => (
-                <Banner.Root key={tone} tone={tone}>
-                    <Banner.Icon />
-                    <Banner.Title>{title}</Banner.Title>
-                    <Banner.Content>{body}</Banner.Content>
-                </Banner.Root>
+                <DemoRow key={tone} label={tone} fill>
+                    <Banner.Root color={tone}>
+                        <Banner.Icon />
+                        <Banner.Title>{title}</Banner.Title>
+                        <Banner.Content>{body}</Banner.Content>
+                    </Banner.Root>
+                </DemoRow>
             ))}
-            <Banner.Root tone="info">
-                <Banner.Title>Without an icon</Banner.Title>
-                <Banner.Content>The SDK sends events in batches.</Banner.Content>
-            </Banner.Root>
-        </div>
+        </DemoRows>
     )
 }

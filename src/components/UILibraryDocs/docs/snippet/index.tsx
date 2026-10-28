@@ -1,10 +1,17 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Examples from './Examples'
 import examplesSource from '!!../../rawSourceLoader!./Examples.tsx?raw'
 import Inline from './Inline'
 import inlineSource from '!!../../rawSourceLoader!./Inline.tsx?raw'
-import Tones from './Tones'
-import tonesSource from '!!../../rawSourceLoader!./Tones.tsx?raw'
+import Colors from './Colors'
+import InlineColors from './InlineColors'
+import inlineColorsSource from '!!../../rawSourceLoader!./InlineColors.tsx?raw'
+import colorsSource from '!!../../rawSourceLoader!./Colors.tsx?raw'
+import CopyOnClick from './CopyOnClick'
+import copyOnClickSource from '!!../../rawSourceLoader!./CopyOnClick.tsx?raw'
 
 export const doc: ComponentDoc = {
     slug: 'snippet',
@@ -17,34 +24,47 @@ export const doc: ComponentDoc = {
         {
             id: 'examples',
             title: 'Examples',
-            description: 'Show one command, multiple commands, or code without prompts.',
+            description: 'One command, several commands, or a line without a prompt.',
             Component: Examples,
             source: examplesSource,
         },
         {
             id: 'inline',
             title: 'Inline code',
-            description: 'Snippet.Inline puts code, URLs, and values inside a sentence. It wraps long values.',
+            description: 'Snippet.Inline puts code, URLs, and values inside a sentence. Long values wrap.',
             Component: Inline,
             source: inlineSource,
         },
         {
-            id: 'tones',
-            title: 'Accents',
-            description: 'The neutral style is the default. Use tone to accent a key command or value.',
-            Component: Tones,
-            source: tonesSource,
+            id: 'colors',
+            title: 'Colors',
+            description:
+                'Gray is the default and lets the surface show through. White and the brand colors are opaque.',
+            Component: Colors,
+            source: colorsSource,
+        },
+        {
+            id: 'inline-colors',
+            title: 'Every inline color',
+            description: 'Every color, as inline code.',
+            Component: InlineColors,
+            source: inlineColorsSource,
+        },
+        {
+            id: 'copy-on-click',
+            title: 'Copy on click',
+            description:
+                'By default, a click selects the whole snippet. With copyOnClick, a click also copies it. Use it for values that people copy often, such as tokens and install commands.',
+            Component: CopyOnClick,
+            source: copyOnClickSource,
         },
     ],
     notes: [
-        'Snippet replaces InlineCode. Use Snippet.Inline for code in a sentence and the block for a command to copy.',
-        'Replaces: the inline code helper in Products/ReaderViewProduct/helpers.tsx. Use tone="brand" for its orange look.',
-        'Use one accent per section at most. The neutral style suits most technical copy.',
-        'Inline code is 0.82em, so it scales with headings and body text.',
-        'The copy button copies every line with newline separators. It excludes the prompts.',
-        'Prompts are hidden from assistive technology and cannot be selected.',
-        'Long lines scroll horizontally. Keyboard users can focus the code region.',
-        'The copy button announces copy results through a polite live region.',
+        <>
+            Use Snippet for a command to copy, and <Snippet.Inline>{'Snippet.Inline'}</Snippet.Inline> for code in a
+            sentence. For multi-line code, use <Link to="/components/ui/code-block">CodeBlock</Link>.
+        </>,
+        'Use gray in most cases, and one other color per section at most. The colors are decoration and have no status meaning.',
     ],
     props: [
         {
@@ -62,10 +82,17 @@ export const doc: ComponentDoc = {
                     description: 'Show a dollar prompt before each line.',
                 },
                 {
-                    name: 'tone',
-                    type: "'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'",
-                    defaultValue: "'neutral'",
+                    name: 'color',
+                    type: "'gray' | 'white' | 'blue' | 'cobalt' | 'coral' | 'corn-blue' | 'green' | 'lemon' | 'lime' | 'purple' | 'tangerine' | 'teal' | 'violet' | 'yellow'",
+                    defaultValue: "'gray'",
                     description: 'Sets the fill, border, and text color.',
+                },
+                {
+                    name: 'copyOnClick',
+                    type: 'boolean',
+                    defaultValue: 'false',
+                    description:
+                        'Copies the snippet when the user clicks it. Without it, a click selects the whole snippet.',
                 },
                 {
                     name: 'onCopy',
@@ -78,10 +105,22 @@ export const doc: ComponentDoc = {
             component: 'Snippet.Inline',
             rows: [
                 {
-                    name: 'tone',
-                    type: "'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'",
-                    defaultValue: "'neutral'",
+                    name: 'color',
+                    type: "'gray' | 'white' | 'blue' | 'cobalt' | 'coral' | 'corn-blue' | 'green' | 'lemon' | 'lime' | 'purple' | 'tangerine' | 'teal' | 'violet' | 'yellow'",
+                    defaultValue: "'gray'",
                     description: 'Sets the fill, border, and text color.',
+                },
+                {
+                    name: 'copyOnClick',
+                    type: 'boolean',
+                    defaultValue: 'false',
+                    description:
+                        'Copies the snippet when the user clicks it. Without it, a click selects the whole snippet.',
+                },
+                {
+                    name: 'onCopy',
+                    type: '() => void',
+                    description: 'Runs after a click copies the text. Needs copyOnClick.',
                 },
                 { name: 'children', type: 'ReactNode', description: 'The code text.' },
             ],

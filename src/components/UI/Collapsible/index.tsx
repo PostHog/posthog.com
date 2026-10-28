@@ -1,7 +1,7 @@
 import React from 'react'
 import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'
 import { IconChevronRight } from '@posthog/icons'
-import { disclosureChevron, focusRing } from '../styles'
+import { disclosureChevron, focusRing, heightRevealPanel } from '../styles'
 import { mergeClassName } from '../utils'
 
 const collapsibleTrigger = `group flex cursor-default select-none items-center gap-1 rounded py-1 text-left text-sm font-semibold text-primary data-[disabled]:text-muted ${focusRing}`
@@ -18,8 +18,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, BaseCollapsible.Trigger.Prop
     )
 })
 
-const collapsiblePanel =
-    'h-[var(--collapsible-panel-height)] overflow-hidden text-sm text-primary transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0 motion-reduce:transition-none'
+const collapsiblePanel = `${heightRevealPanel} text-sm text-primary`
 
 const Panel = React.forwardRef<HTMLDivElement, BaseCollapsible.Panel.Props>(function CollapsiblePanel(
     { className, children, ...props },

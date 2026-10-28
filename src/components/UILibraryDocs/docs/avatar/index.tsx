@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Reverse from './Reverse'
 import reverseSource from '!!../../rawSourceLoader!./Reverse.tsx?raw'
@@ -30,8 +31,7 @@ export const doc: ComponentDoc = {
         {
             id: 'fallback',
             title: 'Fallback',
-            description:
-                'Avatar.Fallback shows when the image fails or when there is no image. A delay stops a flash of the fallback when the image loads fast.',
+            description: 'Avatar.Fallback shows when the image fails or when there is none.',
             Component: Fallback,
             source: fallbackSource,
         },
@@ -39,7 +39,7 @@ export const doc: ComponentDoc = {
             id: 'group',
             title: 'Stacked group',
             description:
-                'Avatar.Group stacks its avatars and sets their size. Set max to show only the first avatars and a "+N" count.',
+                'Avatar.Group stacks its avatars and sets their size. max shows the first avatars and a "+N" count.',
             Component: Group,
             source: groupSource,
         },
@@ -53,20 +53,15 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            <code>Avatar.Fallback</code> shows while the image loads and when the image fails. Set <code>delay</code>{' '}
-            (in ms) to stop a flash of the fallback when the image loads fast.
+            Always add <Snippet.Inline>{'Avatar.Fallback'}</Snippet.Inline> with initials. Images can fail or load
+            slowly.
         </>,
         <>
-            <code>Avatar.Group</code> sets the size of every avatar in it. It ignores the <code>size</code> on each{' '}
-            <code>Avatar.Root</code>.
+            Give <Snippet.Inline>{'Avatar.Group'}</Snippet.Inline> an <Snippet.Inline>{'aria-label'}</Snippet.Inline>,
+            such as &quot;Team members&quot;.
         </>,
         <>
-            <code>max</code> counts the direct children of the group. A fragment that contains many avatars counts as
-            one avatar.
-        </>,
-        <>
-            Base UI has no <code>Avatar.Group</code>. The library adds it as a <code>{'<div>'}</code> with{' '}
-            <code>role=&quot;group&quot;</code>. Give the group an <code>aria-label</code>.
+            <Snippet.Inline>{'max'}</Snippet.Inline> counts direct children, so a fragment of avatars counts as one.
         </>,
     ],
     props: [

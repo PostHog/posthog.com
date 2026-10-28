@@ -352,6 +352,7 @@ export function Carousel({
                     )}
                     {canAutoplay && (
                         <IconButton
+                            appearance="flat"
                             ref={rotationControl}
                             type="button"
                             size="sm"

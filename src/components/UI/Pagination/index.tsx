@@ -53,6 +53,7 @@ export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(functio
 
         return getPageHref && !disabled ? (
             <ButtonLink
+                appearance="flat"
                 to={getPageHref(target)}
                 size={size}
                 icon={icon}
@@ -62,6 +63,7 @@ export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(functio
             />
         ) : (
             <IconButton
+                appearance="flat"
                 size={size}
                 icon={icon}
                 aria-label={label}
@@ -92,6 +94,7 @@ export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(functio
                             )}
                             {getPageHref ? (
                                 <ButtonLink
+                                    appearance="flat"
                                     to={getPageHref(number)}
                                     size={size}
                                     aria-label={`Page ${number}`}
@@ -103,6 +106,7 @@ export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(functio
                                 </ButtonLink>
                             ) : (
                                 <Button
+                                    appearance="flat"
                                     size={size}
                                     aria-label={`Page ${number}`}
                                     aria-current={isCurrent ? 'page' : undefined}

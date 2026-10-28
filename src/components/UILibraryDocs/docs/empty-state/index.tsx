@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import NoResults from './NoResults'
 import noResultsSource from '!!../../rawSourceLoader!./NoResults.tsx?raw'
@@ -37,9 +38,11 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Use a title that explains why the list is empty.',
-        'Use Actions for recovery or the first action. Root uses Section when outlined is true.',
-        'Icons are decorative. Put the information in the title and description.',
+        <>
+            Say why the area is empty and what the user can do next. Use <Snippet.Inline>{'Actions'}</Snippet.Inline>{' '}
+            for the first step or a way to recover.
+        </>,
+        'The icon is decorative. Put the information in the title and description.',
     ],
     props: [
         {

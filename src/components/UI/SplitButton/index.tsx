@@ -34,7 +34,7 @@ export type SplitButtonRootProps = Omit<React.ComponentProps<typeof Menu.Root>, 
     }
 
 function Root({
-    appearance = 'flat',
+    appearance = 'raised',
     variant = 'secondary',
     size = 'md',
     className,

@@ -1,3 +1,5 @@
+import React from 'react'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Tones from './Tones'
 import tonesSource from '!!../../rawSourceLoader!./Tones.tsx?raw'
@@ -16,16 +18,16 @@ export const doc: ComponentDoc = {
     apiNote: 'Badge is a site component, not a Base UI component. It accepts span element props.',
     examples: [
         {
-            id: 'tones',
-            title: 'All tones',
-            description: 'Choose a tone that matches the label.',
+            id: 'colors',
+            title: 'Colors',
+            description: 'Solid is the default. Pick the color that suits the page.',
             Component: Tones,
             source: tonesSource,
         },
         {
             id: 'variants',
-            title: 'Soft and solid',
-            description: 'Soft badges have a border. Solid badges have a filled background.',
+            title: 'Solid and soft',
+            description: 'Solid is the default. Soft has a tint and a border.',
             Component: Variants,
             source: variantsSource,
         },
@@ -45,25 +47,26 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Use Badge for short labels, such as release stages.',
-        'Badge is not interactive. Use a Button for an action.',
-        'Keep the meaning in the text. Do not use color alone.',
-        'Give truncated text a title or show its full text nearby. Icons are decorative.',
+        <>
+            Use Badge for short status or category labels, such as a release stage. It is not interactive. For an
+            action, use a <Link to="/components/ui/button">Button</Link>.
+        </>,
+        'Put the meaning in the text. Colors are decoration and do not mean a status.',
     ],
     props: [
         {
             component: 'Badge',
             rows: [
                 {
-                    name: 'tone',
-                    type: "'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'",
-                    defaultValue: "'neutral'",
-                    description: 'Sets the status color.',
+                    name: 'color',
+                    type: "'gray' | 'brand' | 'blue' | 'cobalt' | 'coral' | 'corn-blue' | 'green' | 'lemon' | 'lime' | 'purple' | 'tangerine' | 'teal' | 'violet' | 'yellow'",
+                    defaultValue: "'gray'",
+                    description: 'Sets the color. Gray or one of the PostHog brand colors.',
                 },
                 {
                     name: 'appearance',
-                    type: "'soft' | 'solid'",
-                    defaultValue: "'soft'",
+                    type: "'solid' | 'soft'",
+                    defaultValue: "'solid'",
                     description: 'Sets the fill and border.',
                 },
                 {

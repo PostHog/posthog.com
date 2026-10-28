@@ -1,14 +1,11 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
-import Plain from './Plain'
-import plainSource from '!!../../rawSourceLoader!./Plain.tsx?raw'
+import Content from './Content'
+import contentSource from '!!../../rawSourceLoader!./Content.tsx?raw'
 import Removable from './Removable'
 import removableSource from '!!../../rawSourceLoader!./Removable.tsx?raw'
-import WithIcon from './WithIcon'
-import withIconSource from '!!../../rawSourceLoader!./WithIcon.tsx?raw'
-import WithImage from './WithImage'
-import withImageSource from '!!../../rawSourceLoader!./WithImage.tsx?raw'
 
 export const doc: ComponentDoc = {
     slug: 'chip',
@@ -18,53 +15,30 @@ export const doc: ComponentDoc = {
     apiNote: 'Chip is a site component, not a Base UI component. It also takes all the props of a <span>.',
     examples: [
         {
-            id: 'plain',
-            title: 'Plain',
-            description: 'A chip with only text.',
-            Component: Plain,
-            source: plainSource,
-        },
-        {
-            id: 'with-icon',
-            title: 'With an icon',
-            description: 'Pass icon to show an icon before the text.',
-            Component: WithIcon,
-            source: withIconSource,
-        },
-        {
-            id: 'with-image',
-            title: 'With an image',
-            description: 'Pass image (a URL) to show a round image before the text.',
-            Component: WithImage,
-            source: withImageSource,
+            id: 'content',
+            title: 'Content',
+            description: 'A chip shows text, an icon and text, or an image and text.',
+            Component: Content,
+            source: contentSource,
         },
         {
             id: 'removable',
             title: 'Removable',
-            description: 'Pass onRemove to add a remove button. Remove all the chips to show the reset button.',
+            description: 'Pass onRemove to add a remove button.',
             Component: Removable,
             source: removableSource,
         },
     ],
     notes: [
         <>
-            <code>Chip</code> is a site component, not a Base UI component. It renders a <code>{'<span>'}</code> and
-            takes all <code>{'<span>'}</code> props.
+            Use Chip for a compact label or a selected value. For status, use{' '}
+            <Link to="/components/ui/badge">Badge</Link>.
         </>,
         <>
-            If you pass both <code>image</code> and <code>icon</code>, only the image shows.
+            When the children are not a string, pass <Snippet.Inline>{'removeLabel'}</Snippet.Inline>, so the remove
+            button has a useful name.
         </>,
-        <>
-            The image has an empty <code>alt</code>, so the text must name the chip.
-        </>,
-        <>
-            The remove button gets its label from the text, for example &quot;Remove Beta&quot;. If the children are not
-            a string, the label is only &quot;Remove&quot;, so pass <code>removeLabel</code>.
-        </>,
-        <>A long label truncates when the chip is wider than its container.</>,
-        <>
-            <code>Combobox.Chip</code> uses the same styles. See <Link to="/components/ui/combobox">Combobox</Link>.
-        </>,
+        'The image is decorative. The text must name the chip.',
     ],
     props: [
         {

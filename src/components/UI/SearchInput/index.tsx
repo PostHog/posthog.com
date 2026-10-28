@@ -142,6 +142,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             />
             {canClear ? (
                 <IconButton
+                    appearance="flat"
                     type="button"
                     size={fieldIconButtonIconSize[size]}
                     aria-label={clearLabel}

@@ -3,17 +3,19 @@ import { IconX } from '@posthog/icons'
 import { cn } from '../../../utils'
 import { IconButton } from '../Button'
 import type { IconButtonProps } from '../Button'
-import { cardLevels, toneFill, toneText, toneIcon } from '../styles'
-import type { Tone } from '../styles'
-import { toneIcons } from '../toneIcons'
+import { cardLevels, tintedHeaderEdge } from '../styles'
+import { colorHeader, colorIcon, colorText, resolveColor } from '../colors'
+import type { ColorOrStatus } from '../colors'
+import { statusIcon } from '../toneIcons'
 import { HEIGHT_CHANGE_MS, heightChangeEasing, mergeClassName, prefersReducedMotion } from '../utils'
 
-export type BannerRootProps = React.HTMLAttributes<HTMLDivElement> & { tone?: Tone }
+export type BannerRootProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> & { color?: ColorOrStatus }
 export type BannerCloseProps = Omit<IconButtonProps, 'icon' | 'onClick' | 'aria-label'> & {
     onDismiss: () => void
     'aria-label'?: string
 }
-const ToneContext = React.createContext<Tone>('brand')
+const ColorContext = React.createContext<ColorOrStatus>('brand')
+const InHeaderContext = React.createContext(false)
 const CollapseContext = React.createContext<(onCollapsed: () => void) => void>((onCollapsed) => onCollapsed())
 function flattenChildren(children: React.ReactNode): React.ReactNode[] {
     return React.Children.toArray(children).flatMap((child) =>
@@ -24,7 +26,7 @@ function flattenChildren(children: React.ReactNode): React.ReactNode[] {
 }
 
 const Root = React.forwardRef<HTMLDivElement, BannerRootProps>(function BannerRoot(
-    { tone = 'brand', children, className, ...props },
+    { color = 'brand', children, className, ...props },
     ref
 ) {
     const parts = flattenChildren(children)
@@ -50,7 +52,7 @@ const Root = React.forwardRef<HTMLDivElement, BannerRootProps>(function BannerRo
         animation.onfinish = onCollapsed
     }, [])
     return (
-        <ToneContext.Provider value={tone}>
+        <ColorContext.Provider value={color}>
             <CollapseContext.Provider value={collapse}>
                 <div ref={frame} className="@container w-full">
                     <div
@@ -59,15 +61,22 @@ const Root = React.forwardRef<HTMLDivElement, BannerRootProps>(function BannerRo
                         className={cn(
                             cardLevels[1],
                             'w-full overflow-hidden rounded-none border-x-0 text-sm leading-5 text-primary',
+                            title && 'border-t-0',
                             className
                         )}
                     >
                         {title ? (
                             <>
-                                <div className={cn('flex min-w-0 items-start gap-2 px-3 py-1.5', toneFill[tone])}>
+                                <div
+                                    className={cn(
+                                        'flex min-w-0 items-start gap-2 px-3 py-1.5',
+                                        tintedHeaderEdge,
+                                        colorHeader[resolveColor(color)]
+                                    )}
+                                >
                                     {icon}
                                     {title}
-                                    {close}
+                                    <InHeaderContext.Provider value>{close}</InHeaderContext.Provider>
                                 </div>
                                 <div className="flex min-w-0 flex-col items-start gap-2 px-3 py-2 @md:flex-row @md:items-center">
                                     <div className="min-w-0 flex-1">{body}</div>
@@ -87,21 +96,21 @@ const Root = React.forwardRef<HTMLDivElement, BannerRootProps>(function BannerRo
                     </div>
                 </div>
             </CollapseContext.Provider>
-        </ToneContext.Provider>
+        </ColorContext.Provider>
     )
 })
 const Icon = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function BannerIcon(
     { className, children, ...props },
     ref
 ) {
-    const tone = React.useContext(ToneContext)
-    const DefaultIcon = toneIcons[tone]
+    const color = React.useContext(ColorContext)
+    const DefaultIcon = statusIcon(color)
     return (
         <span
             ref={ref}
             {...props}
             aria-hidden
-            className={cn('flex h-5 shrink-0 items-center [&_svg]:size-4', toneIcon[tone], className)}
+            className={cn('flex h-5 shrink-0 items-center [&_svg]:size-4', colorIcon[resolveColor(color)], className)}
         >
             {children === undefined ? <DefaultIcon /> : children}
         </span>
@@ -111,12 +120,16 @@ const Title = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEleme
     { className, ...props },
     ref
 ) {
-    const tone = React.useContext(ToneContext)
+    const color = React.useContext(ColorContext)
     return (
         <div
             ref={ref}
             {...props}
-            className={cn('min-w-0 flex-1 font-semibold [overflow-wrap:anywhere]', toneText[tone], className)}
+            className={cn(
+                'min-w-0 flex-1 font-semibold [overflow-wrap:anywhere]',
+                colorText[resolveColor(color)],
+                className
+            )}
         />
     )
 })
@@ -143,15 +156,17 @@ const Close = React.forwardRef<HTMLElement, BannerCloseProps>(function BannerClo
     ref
 ) {
     const collapse = React.useContext(CollapseContext)
+    const inHeader = React.useContext(InHeaderContext)
     return (
         <IconButton
+            appearance="flat"
             ref={ref}
             {...props}
             size={size}
             aria-label={label}
             icon={<IconX className="size-4" />}
             onClick={() => collapse(onDismiss)}
-            className={mergeClassName('-my-[3px] -mr-1', className)}
+            className={mergeClassName(inHeader ? '-mb-1 -mr-1 -mt-0.5' : '-my-[3px] -mr-1', className)}
         />
     )
 })

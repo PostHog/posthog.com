@@ -1,18 +1,26 @@
 import React from 'react'
 import { RollingText } from 'components/UI/RollingText'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
+
 export default function Static(): JSX.Element {
     return (
-        <div className="space-y-4 text-xl">
-            <p className="!m-0">
-                Give your agents{' '}
-                <RollingText words={['analytics', 'replays']} staticText="product context" animate={false} />.
-            </p>
-            <p className="!m-0">
-                Start with <RollingText words={['session replay']} />.
-            </p>
-            <p className="!m-0">
-                Explore <RollingText words={[]} staticText="PostHog" />.
-            </p>
-        </div>
+        <DemoRows className="text-body-lg">
+            <DemoRow label="animate={false}">
+                <span>
+                    Give your agents{' '}
+                    <RollingText words={['analytics', 'replays']} staticText="product context" animate={false} />
+                </span>
+            </DemoRow>
+            <DemoRow label="One word">
+                <span>
+                    Start with <RollingText words={['session replay']} />
+                </span>
+            </DemoRow>
+            <DemoRow label="No words">
+                <span>
+                    Explore <RollingText words={[]} staticText="PostHog" />
+                </span>
+            </DemoRow>
+        </DemoRows>
     )
 }

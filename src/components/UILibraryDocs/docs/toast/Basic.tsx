@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from 'components/UI/Button'
 import { Toast } from 'components/UI/Toast'
 
-function SaveInsightButton(): JSX.Element {
+export default function ToastBasic(): JSX.Element {
     const toastManager = Toast.useToastManager()
     const [savedCount, setSavedCount] = useState(0)
 
@@ -16,13 +16,4 @@ function SaveInsightButton(): JSX.Element {
     }
 
     return <Button onClick={saveInsight}>Show a toast</Button>
-}
-
-export default function ToastBasic(): JSX.Element {
-    return (
-        <Toast.Provider>
-            <SaveInsightButton />
-            <Toast.Viewport />
-        </Toast.Provider>
-    )
 }

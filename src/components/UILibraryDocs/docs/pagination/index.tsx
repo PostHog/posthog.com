@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
@@ -46,27 +47,14 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        'Pages start at 1.',
         <>
-            Pages start at <code>1</code>. The existing list Pagination also starts at 1. OSTable starts at 0. For
-            OSTable, pass <code>{'page={currentPage + 1}'}</code> and{' '}
-            <code>{'onPageChange={(page) => goToPage(page - 1)}'}</code>.
+            Use <Snippet.Inline>{'getPageHref'}</Snippet.Inline> when each page has a URL, and{' '}
+            <Snippet.Inline>{'onPageChange'}</Snippet.Inline> for local state.
         </>,
         <>
-            Pass <code>onPageChange</code> for local state or <code>getPageHref</code> for navigation. Link mode uses
-            URLs and does not call <code>onPageChange</code>.
+            Set <Snippet.Inline>{'compact'}</Snippet.Inline> in narrow containers. It does not switch on its own.
         </>,
-        <>For the existing list routes, return the base path for page 1. Append the page number for other pages.</>,
-        <>
-            The current page has <code>aria-current="page"</code> and the flat button's pressed style.
-        </>,
-        <>
-            Set <code>compact</code> for a narrow container. The component does not switch modes automatically.
-        </>,
-        <>
-            The control always shows the same number of slots, so its width does not change when the page changes. An
-            ellipsis always hides two or more pages.
-        </>,
-        <>A zero or invalid page count renders nothing. The component clamps the current page to the valid range.</>,
     ],
     props: [
         {

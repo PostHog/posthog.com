@@ -22,7 +22,7 @@ const events = [
 
 export default function StickyHeader(): JSX.Element {
     return (
-        <Table.Root stickyHeader striped density="compact" containerProps={{ className: 'max-h-60' }}>
+        <Table.Root stickyHeader striped density="compact" containerProps={{ className: 'max-h-[14.25rem]' }}>
             <Table.Header>
                 <Table.Row>
                     <Table.Head>Event</Table.Head>

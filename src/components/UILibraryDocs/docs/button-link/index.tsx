@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import External from './External'
@@ -7,8 +8,6 @@ import InGroup from './InGroup'
 import inGroupSource from '!!../../rawSourceLoader!./InGroup.tsx?raw'
 import Internal from './Internal'
 import internalSource from '!!../../rawSourceLoader!./Internal.tsx?raw'
-import TwoIcons from './TwoIcons'
-import twoIconsSource from '!!../../rawSourceLoader!./TwoIcons.tsx?raw'
 
 export const doc: ComponentDoc = {
     slug: 'button-link',
@@ -18,16 +17,10 @@ export const doc: ComponentDoc = {
     apiNote: 'ButtonLink is a site component, not a Base UI component. It also takes the props of an <a> element.',
     examples: [
         {
-            id: 'two-icons',
-            title: 'Start and end icons',
-            description: 'Use icon and iconEnd to show an icon on each side of the label.',
-            Component: TwoIcons,
-            source: twoIconsSource,
-        },
-        {
             id: 'internal',
             title: 'Links to site pages',
-            description: 'Pass a site path in the to prop. ButtonLink takes the same variant and size props as Button.',
+            description:
+                'Pass a site path to to. ButtonLink takes the same appearance, variant, size, and icon props as Button.',
             Component: Internal,
             source: internalSource,
         },
@@ -35,30 +28,25 @@ export const doc: ComponentDoc = {
             id: 'external',
             title: 'External links',
             description:
-                'Pass external to open the link in a new tab. ButtonLink does not add an arrow, so pass one with icon.',
+                'Pass external to open the link in a new tab. Add an arrow icon to show that it leaves the site.',
             Component: External,
             source: externalSource,
         },
         {
             id: 'in-group',
             title: 'In a button group',
-            description: 'Links in a ButtonGroup take its variant and size, and join edge to edge.',
+            description: 'Links in a ButtonGroup take its appearance, variant, and size, and join edge to edge.',
             Component: InGroup,
             source: inGroupSource,
         },
     ],
     notes: [
         <>
-            Use <code>ButtonLink</code> for navigation, and <code>Button</code> for actions. <code>ButtonLink</code>{' '}
-            renders <code>components/Link</code> (an <code>{'<a>'}</code>) with the{' '}
-            <Link to="/components/ui/button">Button</Link> styles. It does not use Base UI.
+            Use ButtonLink for navigation and <Link to="/components/ui/button">Button</Link> for actions.
         </>,
         <>
-            In a <code>ButtonGroup</code>, <code>ButtonLink</code> turns off the link context menu. The wrapper element
-            of the menu breaks the edges of the group.
-        </>,
-        <>
-            <code>ButtonLink</code> does not forward its ref, so it cannot be a Base UI <code>render</code> target.
+            ButtonLink does not forward a ref, so it cannot be a Base UI <Snippet.Inline>{'render'}</Snippet.Inline>{' '}
+            target.
         </>,
     ],
     props: [
@@ -69,7 +57,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'raised'",
                     description: 'The shape: flat, raised 3D, or outlined.',
                 },
                 {

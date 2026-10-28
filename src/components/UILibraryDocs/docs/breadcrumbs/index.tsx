@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
@@ -31,32 +32,20 @@ export const doc: ComponentDoc = {
         {
             id: 'long-labels',
             title: 'Long labels',
-            description: 'Labels truncate with an ellipsis when the container is narrow.',
+            description: 'In a narrow container, labels truncate with an ellipsis. This one is 384px wide.',
             Component: LongLabels,
             source: longLabelsSource,
         },
     ],
     notes: [
         <>
-            Root renders a <code>nav</code> with an ordered list. Put Item and Separator directly inside Root. Each part
-            renders a list item.
-        </>,
-        <>Put Link or Page inside Item. Page marks the current page and does not create a link.</>,
-        <>
-            Link uses <code>components/Link</code>. It accepts site paths, external URLs, click handlers, and navigation
-            state.
+            End the trail with <Snippet.Inline>{'Breadcrumbs.Page'}</Snippet.Inline> for the current page, not a link.
         </>,
         <>
-            Use <code>maxItems</code> to keep the first item and the final items. The menu trigger counts as one item.
-            The minimum is 3.
+            <Snippet.Inline>{'maxItems'}</Snippet.Inline> folds the middle items into a menu. Keep each folded item a{' '}
+            <Snippet.Inline>{'Breadcrumbs.Link'}</Snippet.Inline> directly inside its{' '}
+            <Snippet.Inline>{'Item'}</Snippet.Inline>, so it still works from the menu.
         </>,
-        <>
-            For collapse, use Link as a direct child of each hidden Item. Hidden links use Gatsby navigation and keep
-            their state and click handler.
-        </>,
-        <>A native button inside a hidden Item becomes a menu action. Other content becomes a disabled menu item.</>,
-        <>Separator is hidden from assistive technology. Pass children to replace its default chevron.</>,
-        <>Long labels remain available to assistive technology. No item wraps onto a second line.</>,
     ],
     props: [
         {

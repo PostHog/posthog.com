@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Controlled from './Controlled'
@@ -53,23 +54,17 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Put <code>Checkbox.Root</code> and its text in a <code>{'<label>'}</code>. Then a click on the text toggles
-            the box.
+            Use checkboxes for choices that a form saves on submit. For a setting that applies at once, use{' '}
+            <Link to="/components/ui/switch">Switch</Link>.
         </>,
         <>
-            For a select-all checkbox, pass <code>allValues</code> to <code>CheckboxGroup</code> and add a{' '}
-            <code>Checkbox.Root</code> with <code>parent</code>. The parent shows the indeterminate state when only some
-            items are checked.
+            Put <Snippet.Inline>{'Checkbox.Root'}</Snippet.Inline> and its text in a{' '}
+            <Snippet.Inline>{'<label>'}</Snippet.Inline>, so a click on the text toggles it.
         </>,
         <>
-            In a <code>CheckboxGroup</code>, give each <code>Checkbox.Root</code> a <code>value</code>.
-        </>,
-        <>
-            <code>Checkbox.Indicator</code> stays mounted, so a toggle changes one attribute and the DOM does not
-            change. The check mark draws itself with a CSS stroke transition.
-        </>,
-        <>
-            For a setting that takes effect at once, use a <Link to="/components/ui/switch">Switch</Link>.
+            For select all, pass <Snippet.Inline>{'allValues'}</Snippet.Inline> to{' '}
+            <Snippet.Inline>{'CheckboxGroup'}</Snippet.Inline> and add a{' '}
+            <Snippet.Inline>{'Checkbox.Root'}</Snippet.Inline> with <Snippet.Inline>{'parent'}</Snippet.Inline>.
         </>,
     ],
     props: [

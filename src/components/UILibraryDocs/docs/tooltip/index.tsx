@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import WithoutArrow from './WithoutArrow'
@@ -48,37 +49,13 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        'Use a tooltip for a short label or hint, such as the name of an icon button. Touch users cannot hover, so never put the only copy of important information in a tooltip.',
         <>
-            A tooltip opens at once, like <code>OSButton</code> tooltips. Pass <code>delay</code> (in ms) to{' '}
-            <code>Tooltip.Trigger</code> to wait first.
+            Do not put links or buttons in a tooltip. Use a <Link to="/components/ui/popover">Popover</Link>.
         </>,
         <>
-            A tooltip closes as soon as the pointer leaves the trigger. The popup takes no pointer events, so it never
-            blocks the content under it.
-        </>,
-        <>
-            <code>Tooltip.Trigger</code> always sets its own <code>delay</code>, so the <code>delay</code> prop of{' '}
-            <code>Tooltip.Provider</code> has no effect. Use the provider to group tooltips: when one tooltip is open,
-            the next one opens with no animation.
-        </>,
-        <>
-            <code>Tooltip.Popup</code> renders its own arrow. There is no <code>Tooltip.Arrow</code> part.
-        </>,
-        <>
-            <code>Tooltip.Popup</code> combines Base UI&apos;s <code>Portal</code>, <code>Positioner</code>, and{' '}
-            <code>Popup</code>. Pass positioner props, such as <code>side</code> and <code>align</code>, to it.
-        </>,
-        <>
-            The popup renders at the end of <code>{'<body>'}</code>. It sets{' '}
-            <code>data-scheme=&quot;primary&quot;</code>, so a tooltip has the same color as other popups.
-        </>,
-        <>
-            <code>Tooltip.Trigger</code> renders a plain <code>{'<button>'}</code>. Pass{' '}
-            <code>{'render={<Button />}'}</code> to show a library button.
-        </>,
-        <>
-            Do not put links or buttons in a tooltip. Use a <Link to="/components/ui/popover">Popover</Link> for content
-            that the user can click.
+            Wrap nearby tooltips in <Snippet.Inline>{'Tooltip.Provider'}</Snippet.Inline>, so the next one opens at
+            once.
         </>,
     ],
     props: [

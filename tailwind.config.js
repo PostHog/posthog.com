@@ -1,5 +1,20 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { colors: brandPalette } = require('@posthog/brand/colors')
+
+const brandColors = Object.fromEntries(
+    Object.values(brandPalette).map(({ name, core, lighter, darker }) => [
+        name.replace(/\s+/g, '-'),
+        { DEFAULT: core, lighter, darker },
+    ])
+)
+
 module.exports = {
-    content: ['./src/**/*.{js,jsx,ts,tsx}', './contents/**/*.{js,jsx,ts,tsx,mdx}', './safelist.txt'],
+    content: [
+        './src/**/*.{js,jsx,ts,tsx}',
+        './contents/**/*.{js,jsx,ts,tsx,mdx}',
+        './safelist.txt',
+        './node_modules/@posthog/quill-charts/dist/index.js',
+    ],
     options: {
         safelist: [
             // use safelist.txt
@@ -139,6 +154,7 @@ module.exports = {
 
                 transparent: 'transparent',
                 current: 'currentColor',
+                brand: brandColors,
 
                 highlight: 'rgba(235,157,42,.2)',
                 footer: '#08042f',
@@ -264,6 +280,8 @@ module.exports = {
                     'sans-serif',
                 ],
                 fancy: ['Zapfino', 'serif'],
+                heading: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
+                body: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
@@ -292,6 +310,18 @@ module.exports = {
             },
             fontSize: {
                 '2xs': '.625rem',
+                display: ['2.5rem', { lineHeight: '2.75rem', letterSpacing: '-0.025em', fontWeight: '700' }],
+                title: ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.02em', fontWeight: '700' }],
+                'heading-lg': ['1.5rem', { lineHeight: '2rem', letterSpacing: '-0.015em', fontWeight: '700' }],
+                'heading-md': ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '-0.01em', fontWeight: '700' }],
+                'heading-sm': ['0.9375rem', { lineHeight: '1.25rem', letterSpacing: '0em', fontWeight: '600' }],
+                'body-lg': ['1.125rem', { lineHeight: '1.75rem', fontWeight: '500' }],
+                body: ['0.9375rem', { lineHeight: '1.5rem', fontWeight: '500' }],
+                'body-sm': ['0.875rem', { lineHeight: '1.25rem', fontWeight: '500' }],
+                caption: ['0.8125rem', { lineHeight: '1.125rem', fontWeight: '500' }],
+                'caption-sm': ['0.75rem', { lineHeight: '1rem', fontWeight: '500' }],
+                label: ['0.875rem', { lineHeight: '1.25rem', fontWeight: '600' }],
+                mono: ['0.8125rem', { lineHeight: '1.25rem', fontWeight: '500' }],
             },
             gridTemplateColumns: {
                 16: 'repeat(16, minmax(0, 1fr))',

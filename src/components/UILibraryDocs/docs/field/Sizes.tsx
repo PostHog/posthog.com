@@ -1,22 +1,17 @@
 import React from 'react'
 import { Field } from 'components/UI/Field'
-import { Input } from 'components/UI/Input'
-import { Button } from 'components/UI/Button'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 export default function Sizes(): JSX.Element {
     return (
-        <div className="flex flex-col gap-4">
+        <DemoRows>
             {(['sm', 'md', 'lg'] as const).map((size) => (
-                <div key={size} className="flex flex-wrap items-start gap-2">
-                    <Field.Root className="min-w-0 flex-1">
-                        <Field.Control size={size} aria-label={`${size} field`} placeholder="Field control" />
+                <DemoRow key={size} label={size}>
+                    <Field.Root className="w-full max-w-xs">
+                        <Field.Control size={size} aria-label={`${size} field`} placeholder="Project name" />
                     </Field.Root>
-                    <Input size={size} aria-label={`${size} input`} placeholder="Input" className="min-w-0 flex-1" />
-                    <Button size={size} appearance="raised">
-                        {size}
-                    </Button>
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

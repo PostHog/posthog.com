@@ -14,7 +14,7 @@ export default function ToggleVariants(): JSX.Element {
         <div className="flex flex-col gap-4">
             {looks.map(({ label, appearance, variant }) => (
                 <div key={label} className="flex flex-wrap items-center gap-3">
-                    <code className="w-36 text-sm">{label}</code>
+                    <span className="w-36 shrink-0 font-code text-caption text-secondary">{label}</span>
                     <Toggle appearance={appearance} variant={variant} aria-label="Bold">
                         <span className="w-3 text-center font-bold">B</span>
                     </Toggle>

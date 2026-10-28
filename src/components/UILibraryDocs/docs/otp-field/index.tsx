@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
@@ -40,16 +41,11 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Put one <code>OTPField.Input</code> in <code>OTPField.Root</code> for each character, and set{' '}
-            <code>length</code> to the same number.
+            Set <Snippet.Inline>{'length'}</Snippet.Inline> to the number of inputs.
         </>,
         <>
-            Give each input after the first an <code>aria-label</code>, for example &quot;Character 2 of 6&quot;. The
-            first input ignores <code>aria-label</code>. Label it with <code>Field.Label</code> or a{' '}
-            <code>{'<label>'}</code>.
-        </>,
-        <>
-            Put <code>OTPField.Separator</code> between inputs to show the code in groups.
+            Label the first input with <Snippet.Inline>{'Field.Label'}</Snippet.Inline>. Give each other input an{' '}
+            <Snippet.Inline>{'aria-label'}</Snippet.Inline>, such as &quot;Character 2 of 6&quot;.
         </>,
     ],
     props: [

@@ -1,5 +1,7 @@
 import { IconCheckCircle, IconInfo, IconSparkles, IconWarning } from '@posthog/icons'
 import type { Tone } from './styles'
+import { isStatusAlias } from './colors'
+import type { ColorOrStatus } from './colors'
 
 export const toneIcons: Record<Tone, typeof IconInfo> = {
     neutral: IconInfo,
@@ -12,3 +14,6 @@ export const toneIcons: Record<Tone, typeof IconInfo> = {
 
 export const isTone = (value: unknown): value is Tone =>
     typeof value === 'string' && Object.prototype.hasOwnProperty.call(toneIcons, value)
+
+export const statusIcon = (value: ColorOrStatus): typeof IconInfo =>
+    isStatusAlias(value) ? toneIcons[value] : IconInfo

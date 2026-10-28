@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import EdgeFades from './EdgeFades'
 import edgeFadesSource from '!!../../rawSourceLoader!./EdgeFades.tsx?raw'
@@ -38,19 +39,13 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Edge fades read the Base UI scroll distance variables. Each fade grows with the distance to its edge, up to 24px, so it does not jump on or off. The mask reveals the surface behind the viewport. The scrollbars stay outside the mask.',
         <>
-            Give <code>ScrollArea.Root</code> a fixed height, for example <code>h-40</code>. A max height alone does not
-            make the content scroll.
+            Give <Snippet.Inline>{'ScrollArea.Root'}</Snippet.Inline> a fixed height, such as{' '}
+            <Snippet.Inline>{'h-40'}</Snippet.Inline>. A max height alone does not make it scroll.
         </>,
         <>
-            Add one <code>ScrollArea.Scrollbar</code> with a <code>ScrollArea.Thumb</code> for each direction that
-            scrolls. If both directions scroll, also add <code>ScrollArea.Corner</code>.
-        </>,
-        <>The scrollbars show when the pointer is on the area or when the area scrolls. They fade out 300 ms later.</>,
-        <>
-            <code>ScrollArea</code> does not read the &quot;scrollbars&quot; site setting yet. The Radix{' '}
-            <code>ScrollArea</code> in <code>components/RadixUI/ScrollArea</code> does.
+            Add a <Snippet.Inline>{'ScrollArea.Scrollbar'}</Snippet.Inline> for each direction that scrolls. Add{' '}
+            <Snippet.Inline>{'ScrollArea.Corner'}</Snippet.Inline> when both directions scroll.
         </>,
     ],
     props: [

@@ -8,7 +8,7 @@ export default function Files(): JSX.Element {
             snippets={[
                 {
                     id: 'setup',
-                    fileName: 'src/analytics/posthog.ts',
+                    fileName: 'posthog.ts',
                     language: 'ts',
                     code: `import posthog from 'posthog-js'
 
@@ -18,7 +18,7 @@ posthog.init('<ph_project_token>', {
                 },
                 {
                     id: 'capture',
-                    fileName: 'src/reports/capture-export.ts',
+                    fileName: 'export.ts',
                     language: 'ts',
                     code: `import posthog from 'posthog-js'
 
@@ -31,7 +31,7 @@ export function captureExport(reportId: string) {
                 },
                 {
                     id: 'query',
-                    fileName: 'queries/report-exports.sql',
+                    fileName: 'exports.sql',
                     language: 'sql',
                     code: `SELECT properties.report_id, count() AS exports
 FROM events

@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
@@ -20,14 +22,14 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'states',
-            title: 'Search states',
+            title: 'Loading, disabled, and read-only',
             description: 'The spinner replaces the search icon. Disabled and read-only fields cannot clear.',
             Component: States,
             source: statesSource,
         },
         {
             id: 'sizes',
-            title: 'Field sizes',
+            title: 'Sizes',
             description: 'Use the same sizes as other fields.',
             Component: Sizes,
             source: sizesSource,
@@ -49,7 +51,7 @@ export const doc: ComponentDoc = {
         },
         {
             id: 'field-states',
-            title: 'Field states',
+            title: 'States',
             description:
                 'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
             Component: AppearanceStates,
@@ -57,13 +59,12 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Supply a visible label or aria-label. A placeholder does not replace a label.',
-        'Use value and onValueChange for controlled use. Use defaultValue for uncontrolled use.',
-        'The clear button appears when the field has text. Escape clears text and keeps focus. Empty Escape can reach a parent dialog.',
-        'onKeyDown runs first. Call preventDefault to override Escape. Escape does not clear during text composition.',
-        'The shortcut hint hides when the input has focus or text. It is a hint only. Register the shortcut in the parent.',
-        'Pass combobox roles and ARIA props for result navigation. The parent owns results, filters, and debounce timing.',
-        'onValueChange includes clear actions. Native onChange only reports input changes. Loading does not disable typing.',
+        <>
+            Give the field a visible label or an <Snippet.Inline>{'aria-label'}</Snippet.Inline>. A placeholder is not a
+            label.
+        </>,
+        'Pick the appearance by place: inset in forms, line for light or inline filters, pill for a search bar above a list, and floating over images or content.',
+        'The shortcut hint is only a hint. Register the shortcut yourself.',
     ],
     props: [
         {
@@ -80,7 +81,7 @@ export const doc: ComponentDoc = {
                     type: "'inset' | 'line' | 'pill' | 'floating'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Use inset in forms, line where a box looks heavy, pill for a search bar that stands alone above a list, and floating for a search bar over images or content.',
+                        'Sets the field shape. Use inset in forms, line for light or inline filters, pill for a search bar that stands alone above a list, and floating for a search bar over images or content.',
                 },
                 {
                     name: 'value / defaultValue',

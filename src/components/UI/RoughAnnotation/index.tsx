@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import type { annotate } from 'rough-notation'
+import { colorHighlight, colorStroke } from '../colors'
+import type { ColorName } from '../colors'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
 
 export type AnnotationType = 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket'
@@ -7,7 +9,7 @@ export type AnnotationType = 'underline' | 'box' | 'circle' | 'highlight' | 'str
 export interface RoughAnnotationProps {
     children: React.ReactNode
     type: AnnotationType
-    color?: string
+    color?: ColorName
     strokeWidth?: number
     animationDuration?: number
     padding?: number | [number, number] | [number, number, number, number]
@@ -44,7 +46,7 @@ function layoutKey(element: HTMLElement, block: HTMLElement): string {
 export function RoughAnnotation({
     children,
     type,
-    color = 'currentColor',
+    color = 'gray',
     strokeWidth = 2,
     animationDuration = 800,
     padding = 0,
@@ -102,7 +104,7 @@ export function RoughAnnotation({
 
             annotationRef.current = annotate(element, {
                 type,
-                color,
+                color: 'currentColor',
                 strokeWidth,
                 animate: !prefersReducedMotion,
                 animationDuration: prefersReducedMotion ? 0 : animationDuration,
@@ -114,6 +116,7 @@ export function RoughAnnotation({
 
             const svg = type === 'highlight' ? element.previousElementSibling : element.nextElementSibling
             if (svg?.matches('svg.rough-annotation')) {
+                svg.classList.add(...(type === 'highlight' ? colorHighlight[color] : colorStroke[color]).split(' '))
                 svg.setAttribute('aria-hidden', 'true')
                 svg.setAttribute('focusable', 'false')
             }

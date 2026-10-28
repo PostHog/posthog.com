@@ -1,3 +1,5 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Examples from './Examples'
 import examplesSource from '!!../../rawSourceLoader!./Examples.tsx?raw'
@@ -12,16 +14,17 @@ export const doc: ComponentDoc = {
         {
             id: 'examples',
             title: 'Examples',
-            description: 'Show one key or a group of keys. Set the platform explicitly.',
+            description: 'Show one key or a shortcut. Set platform="other" for Windows and Linux names.',
             Component: Examples,
             source: examplesSource,
         },
     ],
     notes: [
-        'Keycaps describe keys. They are not buttons and do not run commands.',
-        'Shortcut groups have an accessible name that spells out the keys.',
-        'The default platform is mac. On other platforms, modifier keys show as words: Ctrl, Alt, Shift, Enter. No platform detection runs during rendering.',
-        'This component covers the keycap display from KeyboardShortcut. Existing uses stay unchanged.',
+        'Keycaps show keys. They do not run commands, so register the shortcut yourself.',
+        <>
+            <Snippet.Inline>{'Kbd.Shortcut'}</Snippet.Inline> shows Mac symbols by default. Set{' '}
+            <Snippet.Inline>{'platform'}</Snippet.Inline> when you know the user&apos;s platform.
+        </>,
     ],
     props: [
         {

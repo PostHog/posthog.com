@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Plans from './Plans'
 import plansSource from '!!../../rawSourceLoader!./Plans.tsx?raw'
@@ -20,15 +21,15 @@ export const doc: ComponentDoc = {
     examples: [
         {
             id: 'plans',
-            title: 'Single choice plans',
-            description: 'Select one plan. The prices are examples.',
+            title: 'Single choice',
+            description: 'The user selects one item.',
             Component: Plans,
             source: plansSource,
         },
         {
             id: 'products',
-            title: 'Multiple choice products',
-            description: 'Select more than one product.',
+            title: 'Multiple choice',
+            description: 'Set multiple to let the user select more than one item.',
             Component: Products,
             source: productsSource,
         },
@@ -41,11 +42,15 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Group uses Base UI RadioGroup by default. multiple uses CheckboxGroup.',
-        'Give Group an accessible name with aria-label or aria-labelledby.',
-        'Use string values. Each value must be unique in its group.',
-        'The whole card is a label. Do not put links or buttons inside Item.',
-        'The grid changes with the container width. Base UI supplies keyboard and screen-reader behavior.',
+        <>
+            Use Choicebox when each option needs a description or more room than a radio label. Set{' '}
+            <Snippet.Inline>{'multiple'}</Snippet.Inline> to allow more than one choice.
+        </>,
+        <>
+            Name the group with <Snippet.Inline>{'aria-label'}</Snippet.Inline> or{' '}
+            <Snippet.Inline>{'aria-labelledby'}</Snippet.Inline>.
+        </>,
+        'The whole card is a label. Do not put links or buttons in an item.',
     ],
     props: [
         {

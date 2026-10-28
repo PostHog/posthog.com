@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'components/Link'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
@@ -7,8 +7,6 @@ import AutoExpand from './AutoExpand'
 import autoExpandSource from '!!../../rawSourceLoader!./AutoExpand.tsx?raw'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
-import Disabled from './Disabled'
-import disabledSource from '!!../../rawSourceLoader!./Disabled.tsx?raw'
 
 import Sizes from './Sizes'
 import sizesSource from '!!../../rawSourceLoader!./Sizes.tsx?raw'
@@ -31,24 +29,16 @@ export const doc: ComponentDoc = {
         {
             id: 'auto-expand',
             title: 'Grow with the content',
-            description:
-                'Set autoExpand. The box grows as the user types, up to max-h-80. Then it scrolls. The user cannot resize it.',
+            description: 'Set autoExpand to grow the box as the user types, up to 320px. Then it scrolls.',
             Component: AutoExpand,
             source: autoExpandSource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Select sm, md, or lg. The button uses the same size.',
+            description: 'sm, md, and lg set the text size and padding to match fields of the same size.',
             Component: Sizes,
             source: sizesSource,
-        },
-        {
-            id: 'disabled',
-            title: 'Disabled',
-            description: 'Set disabled on Field.Root. The box gets a dashed border and a hatched fill.',
-            Component: Disabled,
-            source: disabledSource,
         },
         {
             id: 'states',
@@ -61,16 +51,8 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            <code>Textarea</code> is a Base UI <code>Input</code> that renders a <code>{'<textarea>'}</code>. Inside{' '}
-            <code>Field.Root</code>, it gets the label, the validation, and the error state of the field. See{' '}
-            <Link to="/components/ui/field">Field</Link>.
-        </>,
-        <>
-            <code>autoExpand</code> uses the CSS <code>field-sizing: content</code> property, with no JavaScript.
-        </>,
-        <>
-            Browsers older than Chrome 123, Safari 26.2, and Firefox 152 do not support <code>field-sizing</code>. In
-            these browsers, an <code>autoExpand</code> box keeps a fixed height and scrolls.
+            <Snippet.Inline>{'autoExpand'}</Snippet.Inline> grows the box with its content up to a maximum height.
+            Browsers without <Snippet.Inline>{'field-sizing'}</Snippet.Inline> support keep a fixed height and scroll.
         </>,
     ],
     props: [
@@ -88,13 +70,13 @@ export const doc: ComponentDoc = {
                     type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the field shape. Use line for a lighter form that must not look like a card or a section.',
+                        'Sets the field shape. Use line for light or inline editing, such as renaming in place, filters, and quick settings.',
                 },
                 {
                     name: 'autoExpand',
                     type: 'boolean',
                     defaultValue: 'false',
-                    description: 'Makes the box grow with its content, up to max-h-80. The user cannot resize the box.',
+                    description: 'Grows the box with its content, up to 320px. The user cannot resize it.',
                 },
                 {
                     name: 'rows',

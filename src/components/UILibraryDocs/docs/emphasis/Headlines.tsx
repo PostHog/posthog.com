@@ -10,7 +10,7 @@ export default function Headlines(): JSX.Element {
                 Your data stack, <Emphasis color="green">working together</Emphasis>
             </h3>
             <p className="!m-0 text-lg">
-                Connect PostHog to your <Emphasis color="red">favorite coding agent</Emphasis>.
+                Connect PostHog to your <Emphasis color="tangerine">favorite coding agent</Emphasis>.
             </p>
         </div>
     )

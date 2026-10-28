@@ -5,7 +5,7 @@ import { Tooltip } from 'components/UI/Tooltip'
 export default function TooltipSides(): JSX.Element {
     return (
         <Tooltip.Provider>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap justify-center gap-2 py-8">
                 {(['top', 'right', 'bottom', 'left'] as const).map((side) => (
                     <Tooltip.Root key={side}>
                         <Tooltip.Trigger render={<Button />}>{side}</Tooltip.Trigger>

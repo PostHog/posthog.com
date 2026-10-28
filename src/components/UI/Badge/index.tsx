@@ -1,12 +1,14 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { toneFill, toneBorder, toneText, toneSolid } from '../styles'
-import type { Tone } from '../styles'
+import { colorSoft, colorSolid } from '../colors'
+import type { ColorName } from '../colors'
 
 type BadgeSize = 'sm' | 'md'
 
-export type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
-    tone?: Tone
+export type BadgeColor = ColorName
+
+export type BadgeProps = Omit<React.HTMLAttributes<HTMLSpanElement>, 'color'> & {
+    color?: BadgeColor
     appearance?: 'soft' | 'solid'
     size?: BadgeSize
     icon?: React.ReactNode
@@ -23,7 +25,7 @@ const iconSizes: Record<BadgeSize, string> = {
 }
 
 export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
-    { tone = 'neutral', appearance = 'soft', size = 'sm', icon, children, className, ...props },
+    { color = 'gray', appearance = 'solid', size = 'sm', icon, children, className, ...props },
     ref
 ) {
     return (
@@ -32,9 +34,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badg
             className={cn(
                 'inline-flex max-w-full items-center whitespace-nowrap rounded-[4px] border align-middle font-semibold',
                 badgeSizes[size],
-                appearance === 'soft'
-                    ? cn(toneFill[tone], toneBorder[tone], toneText[tone])
-                    : cn('border-transparent', toneSolid[tone]),
+                appearance === 'soft' ? colorSoft[color] : cn('border-transparent', colorSolid[color]),
                 className
             )}
             {...props}

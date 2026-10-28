@@ -12,10 +12,13 @@ import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
 import { Provider as ToastProvider } from './src/context/Toast'
+import { Toast as LibraryToast } from './src/components/UI/Toast'
 
 export const wrapRootElement = ({ element }) => (
     <ToastProvider>
-        <UserProvider>{wrapElement({ element })}</UserProvider>
+        <LibraryToast.SiteProvider>
+            <UserProvider>{wrapElement({ element })}</UserProvider>
+        </LibraryToast.SiteProvider>
     </ToastProvider>
 )
 

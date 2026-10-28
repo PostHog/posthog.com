@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Confirm from './Confirm'
@@ -35,44 +36,24 @@ export const doc: ComponentDoc = {
         {
             id: 'long-content',
             title: 'Long content',
-            description: 'The body scrolls. The header and footer stay fixed. Set separator on the footer.',
+            description:
+                'The body scrolls, and the header and footer stay fixed. Set separator to draw a line above the actions.',
             Component: LongContent,
             source: longContentSource,
         },
     ],
     notes: [
         <>
-            Use <code>AlertDialog.Body</code> for content. It has padding and scrolls when content is long.
+            Use an alert dialog only when the user must decide before going on, such as confirming a delete. A click
+            outside does not close it. For anything else, use <Link to="/components/ui/dialog">Dialog</Link>.
         </>,
         <>
-            Use <code>AlertDialog.Footer</code> for actions. It has compact spacing and no divider by default. It stays
-            fixed below the body. Set <code>separator</code> to add a divider for long content.
+            Name each action by what it does, such as &quot;Delete project&quot;, not &quot;OK&quot;. Put each one in{' '}
+            <Snippet.Inline>{'AlertDialog.Close'}</Snippet.Inline>.
         </>,
         <>
-            Use an alert dialog when the user must answer, for example to confirm a delete. A click outside does not
-            close it. For other dialogs, use <Link to="/components/ui/dialog">Dialog</Link>.
-        </>,
-        <>
-            Put each action in an <code>AlertDialog.Close</code>. Pass <code>{'render={<Button />}'}</code> to show a
-            library button.
-        </>,
-        <>
-            <code>AlertDialog</code> looks the same as <code>Dialog</code>. <code>AlertDialog.Header</code> is the{' '}
-            shared header that Dialog and Drawer use. Use it as the standard header. It has no close button by default,
-            because the user must select an action.
-        </>,
-        <>
-            For a custom layout that needs no header, omit <code>AlertDialog.Header</code> and put{' '}
-            <code>AlertDialog.Title</code> in the body. Every alert dialog needs a title.
-        </>,
-        <>
-            <code>AlertDialog.Popup</code> has no padding, and it is <code>max-w-lg</code> wide, the same as{' '}
-            <code>Dialog.Popup</code>. Use <code>AlertDialog.Body</code> for the content.
-        </>,
-        <>
-            <code>AlertDialog.Popup</code> renders the portal, the backdrop, the viewport, and the popup. It renders at
-            the end of <code>{'<body>'}</code> and sets <code>data-scheme=&quot;primary&quot;</code>, so its colors
-            match the site theme.
+            Every alert dialog needs an <Snippet.Inline>{'AlertDialog.Title'}</Snippet.Inline>, even when you leave out
+            the header.
         </>,
     ],
     props: [

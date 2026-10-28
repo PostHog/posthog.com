@@ -1,5 +1,6 @@
 import React from 'react'
 import { SearchInput } from 'components/UI/SearchInput'
+import { DemoLabel } from 'components/UILibraryDocs/DemoLayout'
 
 const imageLight =
     'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_09_09_at_17_05_35_2x_42e293fddd.png'
@@ -11,20 +12,20 @@ export default function Appearances(): JSX.Element {
         <div className="flex flex-col gap-6">
             <div className="grid gap-6 @2xl:grid-cols-3">
                 <div className="flex flex-col gap-2">
-                    <span className="text-sm font-bold">Inset (default)</span>
+                    <DemoLabel>Inset (default)</DemoLabel>
                     <SearchInput aria-label="Search docs" placeholder="Search docs" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <span className="text-sm font-bold">Line</span>
+                    <DemoLabel>Line</DemoLabel>
                     <SearchInput appearance="line" aria-label="Search members" placeholder="Search members" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <span className="text-sm font-bold">Pill</span>
+                    <DemoLabel>Pill</DemoLabel>
                     <SearchInput appearance="pill" aria-label="Search insights" placeholder="Search insights" />
                 </div>
             </div>
             <div className="flex flex-col gap-2">
-                <span className="text-sm font-bold">Floating</span>
+                <DemoLabel>Floating</DemoLabel>
                 <div className="relative h-48 overflow-hidden rounded-md border border-[rgb(var(--text-primary)/0.12)]">
                     <img
                         src={imageLight}

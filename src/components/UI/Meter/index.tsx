@@ -1,21 +1,21 @@
 import React from 'react'
 import { Meter as BaseMeter } from '@base-ui/react/meter'
-import { barIndicator, barLabel, barRoot, barTrack, barValue, toneSolid } from '../styles'
-import type { Tone } from '../styles'
+import { barIndicator, barLabel, barRoot, barTrack, barValue } from '../styles'
+import { colorFill } from '../colors'
+import type { ColorName } from '../colors'
 import { mergeClassName, withClassName } from '../utils'
 
-const ToneContext = React.createContext<Tone>('brand')
+const ColorContext = React.createContext<ColorName>('brand')
 
-const Root = React.forwardRef<HTMLDivElement, Omit<BaseMeter.Root.Props, 'ref'> & { tone?: Tone }>(function MeterRoot(
-    { tone = 'brand', className, ...props },
-    ref
-) {
-    return (
-        <ToneContext.Provider value={tone}>
-            <BaseMeter.Root ref={ref} className={mergeClassName(barRoot, className)} {...props} />
-        </ToneContext.Provider>
-    )
-})
+const Root = React.forwardRef<HTMLDivElement, Omit<BaseMeter.Root.Props, 'ref' | 'color'> & { color?: ColorName }>(
+    function MeterRoot({ color = 'brand', className, ...props }, ref) {
+        return (
+            <ColorContext.Provider value={color}>
+                <BaseMeter.Root ref={ref} className={mergeClassName(barRoot, className)} {...props} />
+            </ColorContext.Provider>
+        )
+    }
+)
 
 const Label = withClassName(BaseMeter.Label, barLabel)
 
@@ -27,8 +27,8 @@ const Indicator = React.forwardRef<HTMLDivElement, Omit<BaseMeter.Indicator.Prop
     { className, ...props },
     ref
 ) {
-    const tone = React.useContext(ToneContext)
-    const fill = tone === 'neutral' ? 'bg-[rgb(var(--text-primary)/0.5)]' : toneSolid[tone]
+    const color = React.useContext(ColorContext)
+    const fill = colorFill[color]
     return <BaseMeter.Indicator ref={ref} className={mergeClassName(`${barIndicator} ${fill}`, className)} {...props} />
 })
 

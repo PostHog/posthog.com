@@ -1,26 +1,31 @@
 import React from 'react'
 import { GradientText } from 'components/UI/GradientText'
+import type { GradientPalette } from 'components/UI/GradientText'
+
+const palettes: { palette: GradientPalette; phrase: string }[] = [
+    { palette: 'sunset', phrase: 'product context' },
+    { palette: 'citrus', phrase: 'every feature flag' },
+    { palette: 'fresh', phrase: 'working together' },
+    { palette: 'ocean', phrase: 'every user journey' },
+    { palette: 'dusk', phrase: 'your next idea' },
+]
+
 export default function Palettes(): JSX.Element {
     return (
-        <div className="@container space-y-6">
-            <h2 className="!m-0 !text-3xl @lg:!text-5xl">
-                Build with{' '}
-                <GradientText palette="brand" animate={false}>
-                    product context
-                </GradientText>
-            </h2>
-            <h3 className="!m-0 !text-3xl">
-                Your data,{' '}
-                <GradientText palette="spectrum" animate={false}>
-                    working together
-                </GradientText>
-            </h3>
-            <h3 className="!m-0 !text-3xl">
-                Understand{' '}
-                <GradientText palette="cool" animate={false}>
-                    every user journey
-                </GradientText>
-            </h3>
+        <div className="flex flex-col divide-y divide-[rgb(var(--text-primary)/0.1)]">
+            {palettes.map(({ palette, phrase }) => (
+                <div
+                    key={palette}
+                    className="grid gap-1 py-3 first:pt-0 last:pb-0 @md:grid-cols-[6rem_1fr] @md:items-center @md:gap-4"
+                >
+                    <span className="font-code text-caption text-secondary">{palette}</span>
+                    <span className="text-heading-lg">
+                        <GradientText palette={palette} animate={false}>
+                            {phrase}
+                        </GradientText>
+                    </span>
+                </div>
+            ))}
         </div>
     )
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Horizontal from './Horizontal'
 import horizontalSource from '!!../../rawSourceLoader!./Horizontal.tsx?raw'
@@ -29,12 +30,11 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            A vertical separator stretches to the height of its flex row. Outside a flex container, it has no height, so
-            give it one, for example <code>h-4</code>.
+            Inside Menu, Select, Combobox, Autocomplete, and Toolbar, use that component&apos;s{' '}
+            <Snippet.Inline>{'Separator'}</Snippet.Inline> part.
         </>,
         <>
-            Inside <code>Menu</code>, <code>Select</code>, <code>Combobox</code>, <code>Autocomplete</code>, and{' '}
-            <code>Toolbar</code>, use the <code>Separator</code> part of that component. It has the correct spacing.
+            Outside a flex row, a vertical separator needs a height, such as <Snippet.Inline>{'h-4'}</Snippet.Inline>.
         </>,
     ],
 }

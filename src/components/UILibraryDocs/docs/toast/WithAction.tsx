@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'components/UI/Button'
 import { Toast } from 'components/UI/Toast'
 
-function DeleteInsightButton(): JSX.Element {
+export default function ToastWithAction(): JSX.Element {
     const toastManager = Toast.useToastManager()
 
     const deleteInsight = () => {
@@ -20,13 +20,4 @@ function DeleteInsightButton(): JSX.Element {
     }
 
     return <Button onClick={deleteInsight}>Delete insight</Button>
-}
-
-export default function ToastWithAction(): JSX.Element {
-    return (
-        <Toast.Provider>
-            <DeleteInsightButton />
-            <Toast.Viewport />
-        </Toast.Provider>
-    )
 }

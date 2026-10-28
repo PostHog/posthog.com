@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import LongContent from './LongContent'
@@ -18,8 +19,7 @@ export const doc: ComponentDoc = {
         {
             id: 'title-bar',
             title: 'With a header',
-            description:
-                'Dialog.Header shows the title and a close button on the glass, with no separate bar. Use Dialog.Body for the content.',
+            description: 'Dialog.Header shows the title and a close button. Put the content in Dialog.Body.',
             Component: TitleBar,
             source: titleBarSource,
         },
@@ -42,41 +42,22 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Use <code>Dialog.Body</code> for content. It has padding and scrolls when content is long. A scroll in the
-            body does not move the page behind the dialog.
+            Use a dialog for a focused task that interrupts the page. When the user must decide before going on, use{' '}
+            <Link to="/components/ui/alert-dialog">AlertDialog</Link>. For a panel from a screen edge, use{' '}
+            <Link to="/components/ui/drawer">Drawer</Link>. For light content next to a trigger, use{' '}
+            <Link to="/components/ui/popover">Popover</Link>.
         </>,
         <>
-            Use <code>Dialog.Footer</code> for actions. It has compact spacing and no divider by default. It stays fixed
-            below the body. Set <code>separator</code> to add a divider for long content.
+            Every dialog needs a title. Use <Snippet.Inline>{'Dialog.Header'}</Snippet.Inline>, or put{' '}
+            <Snippet.Inline>{'Dialog.Title'}</Snippet.Inline> in the body.
         </>,
         <>
-            Use <code>Dialog.Header</code> as the standard header. Drawer and AlertDialog use the same header. It shows
-            the title and a close button. The title aligns with the body text. A long title wraps.
+            Put long content in <Snippet.Inline>{'Dialog.Body'}</Snippet.Inline>, so it scrolls and the footer stays
+            visible.
         </>,
         <>
-            For a custom layout that needs no header, omit <code>Dialog.Header</code> and put <code>Dialog.Title</code>{' '}
-            in the body. Every dialog needs a title.
-        </>,
-        <>
-            <code>Dialog.Popup</code> is <code>max-w-lg</code> wide and no taller than the screen. It hides content that
-            does not fit. Use <code>Dialog.Body</code> for long content.
-        </>,
-        <>
-            Your <code>className</code> merges on top of the default classes, so <code>max-w-2xl</code> replaces the
-            default width.
-        </>,
-        <>
-            <code>Dialog.Popup</code> renders the portal, the backdrop, the viewport, and the popup. It renders at the
-            end of <code>{'<body>'}</code>, outside the window that opened it. It sets{' '}
-            <code>data-scheme=&quot;primary&quot;</code>, so its colors match the site theme.
-        </>,
-        <>
-            <code>Dialog.Trigger</code> and <code>Dialog.Close</code> render a plain <code>{'<button>'}</code>. Pass{' '}
-            <code>{'render={<Button />}'}</code> to show a library button.
-        </>,
-        <>
-            When the user must answer before the dialog closes, use{' '}
-            <Link to="/components/ui/alert-dialog">AlertDialog</Link>.
+            Pass a width class, such as <Snippet.Inline>{'max-w-2xl'}</Snippet.Inline>, to{' '}
+            <Snippet.Inline>{'Dialog.Popup'}</Snippet.Inline> to change its width.
         </>,
     ],
     props: [

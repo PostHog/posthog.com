@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ReactNode } from 'react'
 import { IconToggle, IconAI, IconBrain, IconBatteryCharge, IconHandMoney, IconTerminal } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -153,8 +154,8 @@ const featureTabs: FeatureTabsTab[] = [
                             <span className="text-base font-bold text-primary">Context</span>
                         </div>
                         <p className="m-0 mt-1 text-sm leading-snug text-secondary">
-                            A 1M-token window, with a live meter as you chat. Run <code>/compact</code> any time to
-                            summarize.
+                            A 1M-token window, with a live meter as you chat. Run{' '}
+                            <Snippet.Inline>/compact</Snippet.Inline> any time to summarize.
                         </p>
                     </div>
                     <div>

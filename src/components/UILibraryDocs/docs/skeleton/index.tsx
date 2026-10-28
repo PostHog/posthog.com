@@ -1,4 +1,3 @@
-import React from 'react'
 import type { ComponentDoc } from '../../types'
 import Examples from './Examples'
 import examplesSource from '!!../../rawSourceLoader!./Examples.tsx?raw'
@@ -13,18 +12,14 @@ export const doc: ComponentDoc = {
             id: 'examples',
             title: 'Shapes and content',
             description:
-                'Use placeholders while content loads. Select Toggle content to show or hide all report content.',
+                'Placeholders match the shape and size of the content they stand in for. Use the button to switch.',
             Component: Examples,
             source: examplesSource,
         },
     ],
     notes: [
-        <>Placeholders are hidden from screen readers. The wrapper sets aria-busy while content loads.</>,
-        <>
-            Reduced motion stops the shimmer. Each text line is one line height tall, so a placeholder takes the same
-            space as the text. Set the text size class on the Skeleton to match the content. The last of several lines
-            is shorter.
-        </>,
+        'Match the shape and text size of the real content, so the layout does not move when it loads.',
+        'Show skeletons only for loads that take long enough to notice.',
     ],
     props: [
         {

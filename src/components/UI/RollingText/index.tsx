@@ -4,6 +4,8 @@ import type { CSSProperties, HTMLAttributes } from 'react'
 import { useTextAnimation } from '../textEffects'
 import { focusRing } from '../styles'
 import { cn } from '../../../utils'
+import { colorInk } from '../colors'
+import type { ColorName } from '../colors'
 import './styles.css'
 
 export type RollingTextProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'> & {
@@ -11,6 +13,7 @@ export type RollingTextProps = Omit<HTMLAttributes<HTMLSpanElement>, 'children'>
     staticText?: string
     interval?: number
     animate?: boolean
+    color?: ColorName
 }
 
 export function RollingText({
@@ -18,6 +21,7 @@ export function RollingText({
     staticText,
     interval = 2400,
     animate = true,
+    color,
     className,
     style,
     ...props
@@ -45,6 +49,7 @@ export function RollingText({
             className={cn(
                 'ui-rolling-text relative inline-grid max-w-full overflow-hidden align-baseline',
                 enabled && focusRing,
+                color && colorInk[color],
                 className
             )}
             style={

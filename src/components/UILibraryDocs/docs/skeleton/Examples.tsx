@@ -1,42 +1,48 @@
 import React from 'react'
-import { Skeleton } from 'components/UI/Skeleton'
-import { Button } from 'components/UI/Button'
 import { IconPerson } from '@posthog/icons'
+import { Button } from 'components/UI/Button'
+import { Card } from 'components/UI/Card'
+import { Skeleton } from 'components/UI/Skeleton'
 
 export default function Examples(): JSX.Element {
     const [loading, setLoading] = React.useState(true)
     return (
-        <div className="flex w-full max-w-sm flex-col gap-4">
-            <Skeleton shape="text" width="60%" loading={loading}>
-                <h3 className="m-0 text-base font-semibold">Weekly product report</h3>
-            </Skeleton>
-            <Skeleton shape="text" lines={3} loading={loading}>
-                <p className="m-0 text-sm text-secondary">
-                    Review your most used features, compare weekly active users, and find where people leave your signup
-                    funnel.
-                </p>
-            </Skeleton>
-            <Skeleton shape="rect" height={64} loading={loading}>
-                <div className="flex min-h-16 flex-col justify-center rounded-md border border-[rgb(var(--text-primary)/0.14)] px-3">
-                    <span className="text-sm text-secondary">Weekly active users</span>
-                    <strong className="text-lg tabular-nums">2,418</strong>
-                </div>
-            </Skeleton>
-            <Skeleton shape="circle" className="size-8" loading={loading}>
-                <span
-                    role="img"
-                    aria-label="Report owner"
-                    className="flex size-8 items-center justify-center rounded-full bg-[rgb(var(--text-primary)/0.08)]"
-                >
-                    <IconPerson className="size-5" />
-                </span>
-            </Skeleton>
-            <Skeleton loading={loading}>
-                <p className="m-0">Your insights are ready.</p>
-            </Skeleton>
-            <Button className="self-start" onClick={() => setLoading(!loading)}>
-                Toggle content
+        <div className="flex flex-col items-start gap-4">
+            <Button size="sm" onClick={() => setLoading(!loading)}>
+                {loading ? 'Show content' : 'Show placeholders'}
             </Button>
+            <Card.Root className="w-full max-w-lg" padding="md">
+                <div className="flex items-center gap-3">
+                    <Skeleton shape="circle" className="size-10 shrink-0" loading={loading}>
+                        <span
+                            role="img"
+                            aria-label="Report owner"
+                            className="flex size-10 items-center justify-center rounded-full bg-[rgb(var(--text-primary)/0.08)]"
+                        >
+                            <IconPerson className="size-5" />
+                        </span>
+                    </Skeleton>
+                    <div className="flex min-w-0 flex-1 flex-col">
+                        <Skeleton shape="text" width="55%" loading={loading} className="text-heading-sm">
+                            <span className="text-heading-sm">Weekly product report</span>
+                        </Skeleton>
+                        <Skeleton shape="text" width="35%" loading={loading} className="text-caption">
+                            <span className="text-caption text-secondary">Max Hedgehog · Monday</span>
+                        </Skeleton>
+                    </div>
+                </div>
+                <Skeleton shape="text" lines={2} loading={loading} className="mt-4 text-body">
+                    <p className="m-0 mt-4 text-body text-secondary">
+                        Weekly active users grew 12%. Most people leave the signup funnel at the plan step.
+                    </p>
+                </Skeleton>
+                <Skeleton shape="rect" height={96} loading={loading} className="mt-4">
+                    <div className="mt-4 flex h-24 flex-col justify-center rounded-md border border-[rgb(var(--text-primary)/0.14)] px-3">
+                        <span className="text-caption text-secondary">Weekly active users</span>
+                        <strong className="text-heading-md tabular-nums">2,418</strong>
+                    </div>
+                </Skeleton>
+            </Card.Root>
         </div>
     )
 }

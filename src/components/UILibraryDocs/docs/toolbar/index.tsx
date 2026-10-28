@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Surfaces from './Surfaces'
 import surfacesSource from '!!../../rawSourceLoader!./Surfaces.tsx?raw'
@@ -19,7 +20,8 @@ export const doc: ComponentDoc = {
         {
             id: 'surfaces',
             title: 'Surfaces',
-            description: 'Choose plain, outlined, or raised. Raised adds a translucent fill and a shadow.',
+            description:
+                'Raised is the default. Use outlined or plain only where a raised bar does not fit, such as inside another raised surface.',
             Component: Surfaces,
             source: surfacesSource,
         },
@@ -49,29 +51,14 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        'A toolbar is one tab stop. The arrow keys move between its controls.',
         <>
-            The toolbar is one tab stop. Tab moves focus into and out of the toolbar, and the arrow keys move focus
-            between its controls.
+            Use at most one <Snippet.Inline>{'Toolbar.Input'}</Snippet.Inline>, and put it last.
         </>,
         <>
-            A disabled <code>Toolbar.Button</code> stays focusable, so keyboard users can find it. Set{' '}
-            <code>focusableWhenDisabled={'{false}'}</code> to remove it from the focus order.
-        </>,
-        <>
-            To open a popup from the toolbar, put its trigger in the <code>render</code> prop of{' '}
-            <code>Toolbar.Button</code>, for example <code>{'<Toolbar.Button render={<Menu.Trigger />}>'}</code>. For a
-            tooltip, do the opposite: <code>{'<Tooltip.Trigger render={<Toolbar.Button />}>'}</code>.
-        </>,
-        <>
-            Use a maximum of one <code>Toolbar.Input</code>, and put it last. In a horizontal toolbar, the left and
-            right arrow keys move the text cursor and also move focus.
-        </>,
-        <>
-            <code>Toolbar.Link</code> renders a plain <code>{'<a>'}</code>. For an internal link, pass{' '}
-            <code>{'render={<GatsbyLink to="/path" />}'}</code> (from <code>gatsby</code>).
-        </>,
-        <>
-            A vertical <code>Toolbar.Root</code> uses only the width that its controls need.
+            To open a popup, put its trigger in the <Snippet.Inline>{'render'}</Snippet.Inline> prop of{' '}
+            <Snippet.Inline>{'Toolbar.Button'}</Snippet.Inline>. For a tooltip, do the opposite:{' '}
+            <Snippet.Inline>{'<Tooltip.Trigger render={<Toolbar.Button />}>'}</Snippet.Inline>.
         </>,
     ],
     props: [

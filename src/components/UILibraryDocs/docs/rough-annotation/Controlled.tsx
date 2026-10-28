@@ -4,17 +4,12 @@ import { Button } from 'components/UI/Button'
 
 export default function Controlled(): JSX.Element {
     const [shown, setShown] = useState(false)
-    const [completed, setCompleted] = useState(0)
+    const [drawn, setDrawn] = useState(false)
     return (
         <div className="flex flex-col items-start gap-4">
-            <p className="m-0 text-lg">
+            <p className="m-0 text-body-lg">
                 Flags let you{' '}
-                <RoughAnnotation
-                    type="highlight"
-                    color="rgba(247, 165, 1, 0.35)"
-                    show={shown}
-                    onComplete={() => setCompleted((count) => count + 1)}
-                >
+                <RoughAnnotation type="highlight" color="yellow" show={shown} onComplete={() => setDrawn(shown)}>
                     roll out to 5% of users first
                 </RoughAnnotation>
                 .
@@ -23,7 +18,7 @@ export default function Controlled(): JSX.Element {
                 <Button size="sm" onClick={() => setShown((value) => !value)}>
                     {shown ? 'Hide' : 'Show'} the highlight
                 </Button>
-                <span className="text-sm text-secondary">onComplete calls: {completed}</span>
+                <span className="text-caption text-secondary">{drawn && shown ? 'Drawn' : 'Not drawn'}</span>
             </div>
         </div>
     )

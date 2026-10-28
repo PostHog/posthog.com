@@ -1,4 +1,6 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
@@ -37,7 +39,7 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Select sm, md, or lg. The button uses the same size.',
+            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -52,24 +54,13 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Pass <code>items</code> to <code>Select.Root</code>. Without it, <code>Select.Value</code> shows the raw
-            value (for example <code>us</code>), not the label.
+            Use Select for a short fixed list, about 10 options or fewer. For a longer list, use{' '}
+            <Link to="/components/ui/combobox">Combobox</Link>. For free text, use{' '}
+            <Link to="/components/ui/autocomplete">Autocomplete</Link>.
         </>,
         <>
-            <code>Select.Popup</code> renders the list and the scroll arrows. Put <code>Item</code>, <code>Group</code>,
-            and <code>Separator</code> directly in <code>Popup</code>.
-        </>,
-        <>
-            <code>Select.Item</code> renders a check mark and the item text. Its children become the text.
-        </>,
-        <>
-            <code>Popup</code> renders the Base UI <code>Portal</code>, <code>Positioner</code>, and <code>Popup</code>{' '}
-            together. It takes the positioner props, for example <code>side</code> and <code>align</code>, and the
-            portal <code>container</code> prop.
-        </>,
-        <>
-            When the user opens the select with a mouse, the popup covers the trigger and aligns the selected item with
-            it. Set <code>alignItemWithTrigger={'{false}'}</code> on <code>Popup</code> to open it below the trigger.
+            Pass <Snippet.Inline>{'items'}</Snippet.Inline> to <Snippet.Inline>{'Select.Root'}</Snippet.Inline>. Without
+            it, the trigger shows the raw value, such as <Snippet.Inline>{'us'}</Snippet.Inline>, not the label.
         </>,
     ],
     props: [
@@ -87,7 +78,7 @@ export const doc: ComponentDoc = {
                     type: "'inset' | 'line'",
                     defaultValue: "'inset'",
                     description:
-                        'Sets the trigger shape. Keep inset for forms. Use line for a lighter form that must not look like a card or a section.',
+                        'Sets the trigger shape. Keep inset for forms. Use line for light or inline editing, such as renaming in place, filters, and quick settings.',
                 },
             ],
         },

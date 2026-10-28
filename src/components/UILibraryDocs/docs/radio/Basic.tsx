@@ -10,7 +10,7 @@ export default function BasicRadioGroup(): JSX.Element {
     return (
         <RadioGroup defaultValue="monthly" aria-label="Billing period">
             {billingPeriods.map(({ value, label }) => (
-                <label key={value} className="flex items-center gap-2 text-sm">
+                <label key={value} className="flex items-center gap-2 text-body-sm">
                     <Radio.Root value={value}>
                         <Radio.Indicator />
                     </Radio.Root>

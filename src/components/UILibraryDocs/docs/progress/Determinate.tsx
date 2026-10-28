@@ -3,9 +3,10 @@ import { Button } from 'components/UI/Button'
 import { Progress } from 'components/UI/Progress'
 
 const EXPORT_STEP_MS = 400
+const STARTING_PROGRESS = 40
 
 export default function ProgressDeterminate(): JSX.Element {
-    const [exported, setExported] = useState(0)
+    const [exported, setExported] = useState(STARTING_PROGRESS)
     const [running, setRunning] = useState(false)
 
     useEffect(() => {

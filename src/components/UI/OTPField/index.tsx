@@ -32,7 +32,9 @@ const Input = React.forwardRef<HTMLInputElement, BaseOTPField.Input.Props>(funct
         <BaseOTPField.Input
             ref={ref}
             className={mergeClassName(
-                `${textInputFor(appearance)} size-10 shrink-0 p-0 text-center text-lg font-semibold tabular-nums ${
+                `${textInputFor(
+                    appearance
+                )} size-10 shrink-0 p-0 text-center text-lg font-semibold [@media(pointer:coarse)]:text-lg tabular-nums ${
                     fieldAppearanceShape[appearance]
                 }`,
                 className

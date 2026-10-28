@@ -69,7 +69,7 @@ function CollapsedItems({ items }: { items: React.ReactElement<{ children?: Reac
         <li className="flex shrink-0 items-center">
             <Menu.Root>
                 <Menu.Trigger
-                    render={<Button size="sm" className="-my-[3px] px-1" />}
+                    render={<Button appearance="flat" size="sm" className="-my-[3px] px-1" />}
                     aria-label="Show hidden breadcrumbs"
                 >
                     <IconEllipsis aria-hidden="true" className="size-4" />

@@ -1,4 +1,5 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Determinate from './Determinate'
 import determinateSource from '!!../../rawSourceLoader!./Determinate.tsx?raw'
@@ -25,7 +26,7 @@ export const doc: ComponentDoc = {
             id: 'determinate',
             title: 'Determinate',
             description:
-                'Pass a value from 0 to 100. Progress.Value shows it as a percentage. Click Run export to fill the bar.',
+                'Pass a value from 0 to 100. Progress.Value shows it as a percentage. Run export to fill the bar.',
             Component: Determinate,
             source: determinateSource,
         },
@@ -37,43 +38,35 @@ export const doc: ComponentDoc = {
             source: indeterminateSource,
         },
         {
-            id: 'tones',
-            title: 'Tones',
-            description: 'Each tone sets the fill for Progress and Meter. The shimmer uses the same color.',
+            id: 'colors',
+            title: 'Colors',
+            description: 'Pass any brand color. The shimmer uses the same color.',
             Component: Tones,
             source: tonesSource,
         },
         {
             id: 'meter',
-            title: 'Quota',
-            description:
-                'The caller selects warning above 80% and error above 95%. Use the buttons to check each threshold.',
+            title: 'Meter thresholds',
+            description: 'Meter shows a fixed amount, such as quota use. Change the color above 80% and above 95%.',
             Component: QuotaMeter,
             source: quotaMeterSource,
         },
     ],
     notes: [
+        'Use Progress for a task that is running. For a fixed amount, such as quota use, use Meter.',
         <>
-            Use <code>Progress</code> for a task that runs. Use <code>Meter</code> for a fixed amount, such as quota
-            use.
-        </>,
-        <>
-            <code>Root</code> is a two-column grid. <code>Label</code> goes on the left and <code>Value</code> goes on
-            the right. <code>Track</code> fills the full row below them.
-        </>,
-        <>
-            The indeterminate bar uses the site <code>shimmer</code> animation. When the user prefers reduced motion,
-            the shimmer has no movement.
+            When you cannot know how long the task takes, pass <Snippet.Inline>{'value={null}'}</Snippet.Inline> to show
+            an indeterminate bar.
         </>,
     ],
     props: ['Progress.Root', 'Meter.Root'].map((component) => ({
         component,
         rows: [
             {
-                name: 'tone',
-                type: "'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'",
+                name: 'color',
+                type: "'gray' | 'brand' | 'blue' | 'cobalt' | 'coral' | 'corn-blue' | 'green' | 'lemon' | 'lime' | 'purple' | 'tangerine' | 'teal' | 'violet' | 'yellow'",
                 defaultValue: "'brand'",
-                description: 'Set the indicator color. The caller selects the tone.',
+                description: 'Sets the indicator color.',
             },
         ],
     })),

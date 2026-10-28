@@ -1,4 +1,6 @@
 import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
@@ -49,20 +51,12 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            In a range slider, set <code>index</code> on each <code>Slider.Thumb</code>. Server-side rendering needs it
-            to place the thumbs.
+            Give each thumb an <Snippet.Inline>{'aria-label'}</Snippet.Inline>. In a range slider, also set{' '}
+            <Snippet.Inline>{'index'}</Snippet.Inline> on each thumb.
         </>,
         <>
-            Give each <code>Slider.Thumb</code> an <code>aria-label</code>. In a range slider, the labels tell the two
-            thumbs apart.
-        </>,
-        <>
-            <code>Slider.Value</code> rolls each digit as a column of 0–9 that CSS draws with <code>content</code>. The
-            digits are thus not DOM text. A hidden copy of the value is there for screen readers.
-        </>,
-        <>
-            Each step of the roll is one line height, so keep that line height a whole number of pixels. The default{' '}
-            <code>text-sm</code> gives 20px.
+            When the exact number matters, show <Snippet.Inline>{'Slider.Value'}</Snippet.Inline> or use a{' '}
+            <Link to="/components/ui/number-field">NumberField</Link>.
         </>,
     ],
     props: [

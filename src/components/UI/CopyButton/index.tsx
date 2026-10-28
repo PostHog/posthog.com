@@ -5,9 +5,12 @@ import type { IconButtonProps } from '../Button'
 import { toneIcon } from '../styles'
 import { cn } from '../../../utils'
 
+export type CopyButtonActions = { copy: () => void }
+
 export type CopyButtonProps = Omit<IconButtonProps, 'icon' | 'aria-label' | 'onCopy'> & {
     label?: string
     onCopy?: () => void
+    actionsRef?: React.Ref<CopyButtonActions>
 } & ({ text: string; getText?: never } | { text?: never; getText: () => string })
 
 const feedbackDuration = 2000
@@ -15,7 +18,7 @@ const iconTransition =
     'col-start-1 row-start-1 size-full transition-[opacity,transform] duration-150 ease-out motion-reduce:transition-none'
 
 export const CopyButton = React.forwardRef<HTMLElement, CopyButtonProps>(function CopyButton(
-    { text, getText, label = 'Copy', onCopy, onClick, size = 'sm', variant = 'secondary', ...props },
+    { text, getText, label = 'Copy', onCopy, onClick, actionsRef, size = 'sm', variant = 'secondary', ...props },
     ref
 ) {
     const [status, setStatus] = React.useState<'idle' | 'copied' | 'error'>('idle')
@@ -49,6 +52,8 @@ export const CopyButton = React.forwardRef<HTMLElement, CopyButtonProps>(functio
         timer.current = setTimeout(() => setStatus('idle'), feedbackDuration)
         if (succeeded) onCopy?.()
     }
+
+    React.useImperativeHandle(actionsRef, () => ({ copy: () => void copy() }))
 
     return (
         <>

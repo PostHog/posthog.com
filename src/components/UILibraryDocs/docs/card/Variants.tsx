@@ -10,7 +10,7 @@ const appearances: { appearance: CardAppearance; title: string; description: str
 
 export default function CardAppearances(): JSX.Element {
     return (
-        <div className="grid gap-4 @xl:grid-cols-2">
+        <div className="grid gap-4 @xl:grid-cols-3">
             {appearances.map(({ appearance, title, description }) => (
                 <Card.Root key={appearance} appearance={appearance}>
                     <Card.Header>
@@ -19,7 +19,7 @@ export default function CardAppearances(): JSX.Element {
                     </Card.Header>
                     <Card.Root padding="sm">
                         <Card.Title>Hogflix</Card.Title>
-                        <Card.Description>A nested card becomes an inset well.</Card.Description>
+                        <Card.Description>A nested card.</Card.Description>
                     </Card.Root>
                 </Card.Root>
             ))}

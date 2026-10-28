@@ -1,16 +1,20 @@
 import React from 'react'
 import { Emphasis } from 'components/UI/Emphasis'
-import type { EmphasisColor } from 'components/UI/Emphasis'
-const colors: EmphasisColor[] = ['red', 'blue', 'green', 'yellow', 'purple', 'gray']
+import { colorNames } from 'components/UI/colors'
+
 export default function Tones(): JSX.Element {
     return (
-        <div className="space-y-5">
-            {colors.map((color) => (
-                <p key={color} className="!m-0 max-w-[20ch] text-2xl font-semibold leading-relaxed">
-                    Build with <Emphasis color={color}>analytics, replays, and product context</Emphasis>{' '}
-                    <span className="text-sm font-normal text-secondary">({color})</span>
-                </p>
-            ))}
+        <div className="flex flex-col gap-6">
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-heading-md">
+                {colorNames.map((color) => (
+                    <Emphasis key={color} color={color}>
+                        {color}
+                    </Emphasis>
+                ))}
+            </div>
+            <p className="!m-0 max-w-[20ch] text-heading-lg">
+                Build with <Emphasis color="violet">analytics, replays, and product context</Emphasis>
+            </p>
         </div>
     )
 }

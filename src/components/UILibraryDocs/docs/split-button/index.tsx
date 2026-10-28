@@ -1,3 +1,6 @@
+import React from 'react'
+import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
@@ -27,30 +30,32 @@ export const doc: ComponentDoc = {
             id: 'variants',
             title: 'Every variant and size',
             description:
-                'Both segments share the group appearance. Raised faces move independently above one underside.',
+                'Each appearance and variant in sm, md, and lg, from left to right. Each raised segment lifts on its own.',
             Component: Variants,
             source: variantsSource,
         },
         {
             id: 'states',
-            title: 'Disabled and pending actions',
+            title: 'States',
             description:
-                'Root disabled blocks both actions and fades the whole group. Button loading leaves the menu available without a disabled fade.',
+                'Set disabled on the root to block both parts. Set loading or disabled on the button to keep the menu usable.',
             Component: States,
             source: statesSource,
         },
     ],
     notes: [
-        'A disabled segment keeps its raised face opaque and dims only its content. An open menu keeps the outer corner rounded.',
-        'Root accepts controlled open state and other Base UI Menu root props. Button forwards its ref to the main action.',
-        'Trigger supplies the chevron. It does not accept render or children. Popup defaults to align="end".',
-        'Keep Button and Trigger in that order as direct rendered children of Root. Popup renders in a portal.',
-        'Use Menu parts inside Popup. Base UI manages keyboard navigation, dismissal, and focus return.',
-        'Set variant and size on Root. The group overrides the appearance on each segment.',
-        'The menu trigger stays pushed down while its menu is open.',
-        'Button loading alone leaves the menu available. Set disabled on Root when all related actions must wait.',
-        'Use type="submit" on Button for a form action. Trigger opens the menu without submitting the form.',
-        'Give Trigger a specific aria-label when the page has several action menus.',
+        <>
+            Use a split button when one action is the usual choice and a few related actions are less common. When no
+            action is the default, use a <Link to="/components/ui/menu">Menu</Link>.
+        </>,
+        <>
+            Set <Snippet.Inline>{'appearance'}</Snippet.Inline>, <Snippet.Inline>{'variant'}</Snippet.Inline>, and{' '}
+            <Snippet.Inline>{'size'}</Snippet.Inline> on <Snippet.Inline>{'Root'}</Snippet.Inline>.
+        </>,
+        <>
+            When a page has several split buttons, give each trigger a specific{' '}
+            <Snippet.Inline>{'aria-label'}</Snippet.Inline>.
+        </>,
     ],
     props: [
         {
@@ -59,7 +64,7 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'raised'",
                     description: 'The shape: flat, raised 3D, or outlined. Sets it for every button in the group.',
                 },
                 {

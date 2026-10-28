@@ -1,6 +1,13 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { cardInnerBottomRadius, cardInnerTopRadius, cardLevels, cardAppearances, surfacePaddings } from '../styles'
+import {
+    cardBarSurface,
+    cardInnerBottomRadius,
+    cardInnerTopRadius,
+    cardLevels,
+    cardAppearances,
+    surfacePaddings,
+} from '../styles'
 
 export type CardLevel = keyof typeof cardLevels
 export type CardPadding = keyof typeof surfacePaddings
@@ -35,8 +42,6 @@ const statusBarBleed: Record<CardPadding, string> = {
     md: '-mx-4 -mb-4',
     lg: '-mx-6 -mb-6',
 }
-
-const barSurface = 'border-[rgb(var(--text-primary)/0.12)] bg-[rgb(var(--text-primary)/0.045)] dark:bg-white/[0.035]'
 
 export type CardRootProps = React.HTMLAttributes<HTMLDivElement> & {
     level?: CardLevel
@@ -105,7 +110,7 @@ const TitleBar = ({ icon, meta, actions, className, children, ...props }: CardTi
             className={cn(
                 'flex min-h-11 shrink-0 items-center gap-2.5 border-b py-2',
                 cardInnerTopRadius,
-                barSurface,
+                cardBarSurface,
                 barInset[padding],
                 titleBarBleed[padding],
                 className
@@ -131,7 +136,7 @@ const StatusBar = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>
             className={cn(
                 'flex min-h-10 shrink-0 items-center gap-2 border-t py-2 text-[13px] text-secondary',
                 cardInnerBottomRadius,
-                barSurface,
+                cardBarSurface,
                 barInset[padding],
                 statusBarBleed[padding],
                 className

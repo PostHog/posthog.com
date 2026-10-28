@@ -1,12 +1,13 @@
 import React from 'react'
 import { Badge } from 'components/UI/Badge'
+import { colorNames } from 'components/UI/colors'
 
-export default function Tones(): JSX.Element {
+export default function Colors(): JSX.Element {
     return (
         <div className="flex flex-wrap gap-2">
-            {(['neutral', 'info', 'success', 'warning', 'error', 'brand'] as const).map((tone) => (
-                <Badge key={tone} tone={tone}>
-                    {tone}
+            {colorNames.map((color) => (
+                <Badge key={color} color={color}>
+                    {color}
                 </Badge>
             ))}
         </div>

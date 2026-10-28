@@ -1,15 +1,15 @@
 import React from 'react'
 import { Combobox } from 'components/UI/Combobox'
-import { Button } from 'components/UI/Button'
+import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 const items = ['First', 'Second', 'Third']
 
 export default function Sizes(): JSX.Element {
     return (
-        <div className="flex flex-col gap-4">
+        <DemoRows>
             {(['sm', 'md', 'lg'] as const).map((size) => (
-                <div key={size} className="flex flex-wrap items-start gap-2">
+                <DemoRow key={size} label={size}>
                     <Combobox.Root items={items}>
-                        <Combobox.InputGroup size={size} className="max-w-xs">
+                        <Combobox.InputGroup size={size} className="w-full max-w-xs">
                             <Combobox.Input aria-label={`${size} options`} placeholder="Choose an option" />
                             <Combobox.Clear />
                         </Combobox.InputGroup>
@@ -24,11 +24,8 @@ export default function Sizes(): JSX.Element {
                             </Combobox.List>
                         </Combobox.Popup>
                     </Combobox.Root>
-                    <Button size={size} appearance="raised">
-                        {size}
-                    </Button>
-                </div>
+                </DemoRow>
             ))}
-        </div>
+        </DemoRows>
     )
 }

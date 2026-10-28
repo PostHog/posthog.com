@@ -14,13 +14,13 @@ export default function LineChanges(): JSX.Element {
                     highlightedLines: [1],
                     removedLines: [2],
                     addedLines: [3, 4, 5],
-                    code: `const userId = 'user_123'
-const showReports = false
-const showReports = await posthog.isFeatureEnabled(
-    'new-reports', userId
+                    code: `const flag = 'new-reports'
+const enabled = false
+const enabled = await isFeatureOn(
+    flag
 )
 
-renderReports({ enabled: showReports })`,
+renderReports({ enabled })`,
                 },
             ]}
         />
