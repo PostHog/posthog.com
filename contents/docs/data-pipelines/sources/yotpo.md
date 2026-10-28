@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Alpha:** This source is in alpha. If you run into issues, reach out to [our support team](/docs/support).
-
 The Yotpo connector syncs your review and email marketing data – product reviews, email analytics, raw email delivery records, and unsubscribers – into PostHog, so you can analyze customer feedback and email engagement alongside your product data.
 
 ## Prerequisites

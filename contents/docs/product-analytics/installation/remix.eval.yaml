@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, javascript, react, remix]
+# No starting app exists for the remix-app fixture yet.
+status: draft
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Remix app from a one-line request?
+          The agent gets no docs, so docs-read shows which pages it finds on its own.
+      codebase_to_test: remix-app
+      prompt: >-
+          Set up PostHog in the Remix app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-js` and `@posthog/react`.
+              ssr-and-provider: >-
+                  {folder}/vite.config.ts adds 'posthog-js' and '@posthog/react' to
+                  ssr.noExternal, and a provider component in {folder}/app/ wraps the
+                  app with the project token and api_host. Cite the file and line(s).

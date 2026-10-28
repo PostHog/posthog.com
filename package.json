@@ -40,6 +40,8 @@
         "test:gatsby-utils": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/utils.test.ts",
         "test:navs": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/navs/activeMenu.test.ts src/navs/applicationMetrics.test.ts src/navs/applicationMetricsPresence.test.ts src/components/ReaderView/tabNavigation.test.ts src/components/PocketGuides/learnRoutes.test.ts src/components/PocketGuides/learnTracking.test.ts src/components/Docs/AppsList/index.test.ts",
         "test:sdk-references": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/SdkReferences/utils.test.ts",
+        "evals": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON evals/run.ts",
+        "test:evals": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test evals/evals.test.ts",
         "test:twig-integration": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/PocketGuides/twigIntegration.test.ts",
         "test:pocket-guides": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/PocketGuides/pocketGuides.test.ts",
         "check-links-post-build": "node scripts/check-links-post-build.js",
@@ -301,7 +303,8 @@
         "tailwindcss": "^3.4.14",
         "takumi-js": "2.14.0",
         "webpack": "5",
-        "wrangler": "^4.67.0"
+        "wrangler": "^4.67.0",
+        "yaml": "^2.8.1"
     },
     "resolutions": {
         "undici": "5.26.3"

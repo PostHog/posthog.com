@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, javascript, react-native, mobile]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a React Native app from a one-line
+          request? The agent gets no docs, so docs-read shows which pages it finds on
+          its own.
+      codebase_to_test: react-native-app
+      prompt: >-
+          Set up PostHog in the React Native app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-react-native`.
+              provider: >-
+                  The app's root component is wrapped in PostHogProvider from
+                  posthog-react-native, with the project token and the PostHog host.
+                  Cite the file and line(s).
