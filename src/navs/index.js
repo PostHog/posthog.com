@@ -7661,6 +7661,10 @@ export const docsMenu = {
                             name: 'WebMCP',
                             url: '/docs/mcp-analytics/installation/webmcp',
                         },
+                        {
+                            name: 'Other languages',
+                            url: '/docs/mcp-analytics/installation/other-languages',
+                        },
                     ],
                 },
                 {
