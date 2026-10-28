@@ -39,7 +39,6 @@ window.addEventListener("phx:navigate", ({ detail: { href } }) =>
 This captures a `$pageview` event any time the browser's URL bar is programmatically changed by Phoenix or the user.
 You can learn more about the `phx:navigate` event in the [Phoenix LiveView documentation](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html#navigate/2).
 
-
 ## Capture custom events
 
 To [capture custom events](/docs/product-analytics/capture-events), you can use `posthog.capture()` in your LiveView or regular Phoenix views. Here are some examples:
@@ -106,6 +105,12 @@ document.addEventListener('phx:click', (e) => {
     }
 })
 ```
+
+## Backend trace context
+
+For backend events and spans, use the [Elixir SDK request and trace context setup](/docs/libraries/elixir#trace-context). The optional processor links Cowboy request spans and handler child spans when the two PostHog tracing headers are explicitly captured. Keep your existing OpenTelemetry provider and exporter.
+
+The JavaScript setup above does not transfer context into a LiveView server process. LiveView and other background processes need explicit context in their own process. Bandit request tracing has not been verified with this setup.
 
 ## Next steps
 
