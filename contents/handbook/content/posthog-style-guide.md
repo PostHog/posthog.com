@@ -76,6 +76,14 @@ Why does this matter? Consider the old joke:
 
 That doesn't work without the Oxford.
 
+### Don't put a comma after "i.e." or "e.g."
+
+Write "i.e." and "e.g." with periods, but don't add a comma after them.
+
+> **Example:** "Use a short title (i.e. under 60 characters)", not "Use a short title (i.e., under 60 characters)"
+
+AP and Chicago both want the comma. We don't. It adds clutter and looks ugly.
+
 ### Use "enable", not "allow"
 
 **Allow** is another way of saying permit.
