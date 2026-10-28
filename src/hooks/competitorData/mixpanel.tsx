@@ -72,7 +72,9 @@ export const mixpanel = {
                 },
                 funnels: {
                     available: true,
-                    features: {},
+                    features: {
+                        correlation_analysis: true,
+                    },
                 },
                 retention: {
                     available: true,

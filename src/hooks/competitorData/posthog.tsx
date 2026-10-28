@@ -262,6 +262,7 @@ export const posthog = {
                 cohorts: true,
                 conversion_funnels: true,
                 conversion_windows: true,
+                correlation_analysis: false,
                 custom_events: true,
                 custom_properties: true,
                 define_number_of_users_on_path: true,
@@ -298,6 +299,7 @@ export const posthog = {
                     features: {
                         conversion_funnels: true,
                         conversion_windows: true,
+                        correlation_analysis: false,
                         exclusion_events: true,
                         filter_by_cohort: true,
                         filter_by_events_or_person_property: true,

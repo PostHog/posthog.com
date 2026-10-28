@@ -65,6 +65,7 @@ export const fathom = {
                     available: false,
                     features: {
                         conversion_funnels: true,
+                        correlation_analysis: false,
                     },
                 },
                 retention: {

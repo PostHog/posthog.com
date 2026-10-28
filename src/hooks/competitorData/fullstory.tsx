@@ -82,7 +82,9 @@ export const fullstory = {
                 },
                 funnels: {
                     available: true,
-                    features: {},
+                    features: {
+                        correlation_analysis: false,
+                    },
                 },
                 retention: {
                     available: true,

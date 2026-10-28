@@ -181,7 +181,9 @@ export const statsig = {
                 },
                 funnels: {
                     available: true,
-                    features: {},
+                    features: {
+                        correlation_analysis: false,
+                    },
                 },
                 retention: {
                     available: true,

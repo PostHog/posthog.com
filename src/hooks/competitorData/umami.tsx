@@ -39,6 +39,7 @@ export const umami = {
                         conversion_windows: true,
                         step_ordering: true,
                         any_order: false,
+                        correlation_analysis: false,
                     },
                 },
                 retention: {

@@ -38,7 +38,9 @@ export const amplitude = {
                 },
                 funnels: {
                     available: true,
-                    features: {},
+                    features: {
+                        correlation_analysis: true,
+                    },
                 },
                 retention: {
                     available: true,

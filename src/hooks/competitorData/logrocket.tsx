@@ -36,7 +36,9 @@ export const logrocket = {
                 },
                 funnels: {
                     available: true,
-                    features: {},
+                    features: {
+                        correlation_analysis: false,
+                    },
                 },
                 retention: {
                     available: true,

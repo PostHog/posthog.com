@@ -42,6 +42,7 @@ export const heap = {
                     available: true,
                     features: {
                         conversion_funnels: true,
+                        correlation_analysis: true,
                     },
                 },
                 retention: {

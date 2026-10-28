@@ -27,6 +27,7 @@ export const matomo = {
                     available: true,
                     features: {
                         conversion_funnels: true,
+                        correlation_analysis: false,
                     },
                 },
                 retention: {

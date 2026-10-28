@@ -37,7 +37,9 @@ export const pendo = {
                 },
                 funnels: {
                     available: true,
-                    features: {},
+                    features: {
+                        correlation_analysis: false,
+                    },
                 },
                 retention: {
                     available: true,

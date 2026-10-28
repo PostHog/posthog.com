@@ -65,6 +65,7 @@ export const plausible = {
                 funnels: {
                     available: 'Business plan only',
                     features: {
+                        correlation_analysis: false,
                         conversion_funnels: true,
                     },
                 },
