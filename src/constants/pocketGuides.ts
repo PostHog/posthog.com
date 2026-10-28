@@ -1,7 +1,7 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
 /** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
-export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
+export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow' | 'red'
 
 /** Optional pages under a Learn hub, at /learn/<product>/<page>. */
 export type LearnHubPage = 'agent-prompts-and-mcp' | 'live-playground'
@@ -23,7 +23,11 @@ export interface PocketGuideVolume {
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
     /** Show an Overview page at /learn/<product> and list the extra hub pages that exist. Omit for a flat chapter list. */
-    learnHub?: { pages?: LearnHubPage[] }
+    learnHub?: {
+        pages?: LearnHubPage[]
+        /** Chapters with this `section:` frontmatter sit in a collapsible Self-driving group, not under Pocket guide. */
+        selfDrivingSection?: string
+    }
     /** Count the front matter and primer while this volume consists of those two learning pages. */
     countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
@@ -103,6 +107,17 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         volume: 1,
         docsProduct: 'self-driving',
         learnPath: '/docs/self-driving/pocket-guide',
+    },
+    {
+        id: 'error-tracking',
+        title: 'Error Tracking',
+        description: 'Catch what breaks, measure who it hurts, and hand the fix to an agent.',
+        token: 'red',
+        volume: 7,
+        docsProduct: 'error-tracking',
+        productHandle: 'error_tracking',
+        learnPath: '/learn/error-tracking/pocket-guide',
+        learnHub: { pages: ['agent-prompts-and-mcp'], selfDrivingSection: 'Self-drive' },
     },
 ]
 

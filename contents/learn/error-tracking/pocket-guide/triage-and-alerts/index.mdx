@@ -1,0 +1,73 @@
+---
+title: Triage and alerts
+shortTitle: Triage and alerts
+subtitle: Route each issue to the team that owns it, and alert on regressions and spikes.
+pocketGuideOrder: 6
+section: Automate
+pocketGuideCta:
+  kind: prompt
+  label: Suggest rules with PostHog AI
+  note: It suggests rules from your recent exceptions. You add them under Assignment rules in Error Tracking settings.
+  prompt: >-
+    Group my $exception events from the last 30 days by the source files in $exception_sources and the path of
+    $current_url, and leave out third-party code. Name each group by the part of my product it covers, like
+    trips or bookings. Suggest one error tracking assignment rule per group, with the property, operator, and
+    value it filters on. List the rules most specific first, because the first rule that matches assigns the issue.
+---
+
+<LeftPage>
+
+<AssignmentRuleFigure
+    n={1}
+    caption="This rule assigns issues from source files under src/trips/ to the Trips role. Before you save it, you can test how many exceptions it would have matched in the last 7 days."
+/>
+
+<ExternalIssueFigure
+    n={2}
+    caption="A GitHub issue created from PostHog. PostHog fills in the link back to the issue, and you can edit the body to add the impact and a suggested fix before you create it."
+/>
+
+<IssueSpikeFigure
+    n={3}
+    caption="Twig's Trip details issue gets 720 occurrences in the latest 5-minute window, about 12 times its baseline from the past hour."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Triage and alerts
+
+Once the engineers know which issues matter most, each one needs an owner.
+
+## Assignment rules
+
+Assignment rules route each new issue to the team that owns it. A rule matches on the exception's properties and assigns the issue to a role or a teammate <SeeFig n={1} />. To assign issues to a team, the engineers create a role for it in the organization settings.
+
+Rules run at ingestion, after <Term name="source map">source maps</Term> are applied, so they match Twig's unminified <Term name="stack trace" />. For example, the engineers set a rule on the source file that sends issues from `src/trips/` to the Trips role. The first match wins, so they put specific rules first.
+
+To track the fix in another tool, the engineers [connect](/docs/error-tracking/integrations) GitHub, GitLab, Linear, or Jira, and create the issue from the PostHog issue page. It links back to the PostHog issue, with every exception and the people the issue impacts, and they can add the impact before they create it <SeeFig n={2} />.
+
+PostHog AI can group Twig's recent exceptions by source file and URL path, and suggest a rule for each group.
+
+## Alerts
+
+Each alert fires on one of three triggers:
+
+- **Issue created** fires once for every new issue, which can mean many messages a day.
+- **Issue reopened** fires when an issue the engineers resolved comes back. Use it to catch regressions.
+- **Issue spiking** fires when an issue suddenly gets far more exceptions than usual. Spike detection compares each 5-minute window with the issue's baseline from the past hour, and ignores windows below a minimum count <SeeFig n={3} />.
+
+Each alert pairs one trigger with one destination, like a [Slack](/docs/data-pipelines/destinations/slack) channel or a [webhook](/docs/data-pipelines/destinations/webhook), so to catch both regressions and spikes, the engineers set up two alerts.
+
+The engineers add both in [alerting settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting).
+
+<Action />
+
+<LessonFooter nextLabel="Self-driving" nextHref="/learn/error-tracking/pocket-guide/errors-as-signals">
+
+[Assign issues to teammates](/docs/error-tracking/assigning-issues) · [Set up integrations](/docs/error-tracking/integrations) · [Send error tracking alerts](/docs/error-tracking/alerts) · [Detect spikes](/docs/error-tracking/spikes)
+
+</LessonFooter>
+
+</RightPage>

@@ -18,6 +18,10 @@ interface AgentPromptsPageProps {
     focus: string
     /** One prompt per topic. The shared exercise and safety instructions are appended. */
     chapterPrompts: { title: string; prompt: string }[]
+    /** Ready-to-run prompts, shown as written after the teaching prompts. */
+    examplePrompts?: { title: string; prompt: string }[]
+    /** Product-specific sections after the prompts, such as the product's MCP tools. */
+    children?: React.ReactNode
 }
 
 /** A Learn hub page of copyable teaching prompts for a coding agent connected to the PostHog MCP server. */
@@ -27,6 +31,8 @@ export default function AgentPromptsPage({
     docsSlug,
     focus,
     chapterPrompts,
+    examplePrompts = [],
+    children,
 }: AgentPromptsPageProps): JSX.Element {
     const posthog = usePostHog()
     const volume = (useProduct({ handle: productHandle }) as any)?.pocketGuideVolume
@@ -40,6 +46,10 @@ Use my code and PostHog data. Teach one concept at a time with a small exercise,
 
 Don’t change my project without asking. If context is missing, ask for it.`,
         })),
+    ]
+    const prompts = [
+        ...teachingPrompts.map((entry) => ({ ...entry, label: 'Your teaching prompt', resource: 'agent_teacher' })),
+        ...examplePrompts.map((entry) => ({ ...entry, label: 'Example prompt', resource: 'agent_example' })),
     ]
 
     return (
@@ -85,21 +95,19 @@ Don’t change my project without asking. If context is missing, ask for it.`,
                         </ul>
                     </aside>
                 </div>
-                {teachingPrompts.map(({ title, prompt }) => (
+                {prompts.map(({ title, prompt, label, resource }) => (
                     <section key={title} className="min-w-0 border-t border-primary pt-6">
                         <h2 className="mt-0 mb-4 text-xl font-semibold">{title}</h2>
                         <div className="min-w-0 [&_.code-block]:mt-0 [&_.code-block_pre]:max-h-72 [&_.code-block_pre]:overflow-y-auto [&_.code-block_pre]:[scrollbar-width:none] [&_.code-block_pre::-webkit-scrollbar]:hidden [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
                             <SingleCodeBlock
                                 language="text"
-                                label="Your teaching prompt"
+                                label={label}
                                 showLabel
                                 showCopy
                                 showLineNumbers={false}
                                 showAskAI={false}
                                 // Records the copy, not the prompt text.
-                                onCopy={() =>
-                                    posthog?.capture('learn_prompt_copied', { volume, resource: 'agent_teacher' })
-                                }
+                                onCopy={() => posthog?.capture('learn_prompt_copied', { volume, resource })}
                             >
                                 {prompt}
                             </SingleCodeBlock>
@@ -107,6 +115,7 @@ Don’t change my project without asking. If context is missing, ask for it.`,
                         <AgentTeachingActions prompt={prompt} volume={volume} />
                     </section>
                 ))}
+                {children}
             </div>
         </LearnPage>
     )

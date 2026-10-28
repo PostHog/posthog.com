@@ -5,6 +5,7 @@ import LessonFooter from './LessonFooter'
 import TwigFilterFigure from './TwigFilterFigure'
 import TwigEventFigure from './TwigEventFigure'
 import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
+import { AutocapturedExceptionFigure, TripDetailsErrorFigure } from './ErrorTrackingExhibits'
 import {
     IdentifySavedStayFigure,
     ResetIdentityFigure,
@@ -34,12 +35,16 @@ import Callout from './Callout'
 import ReaderWrapper, { LeftPage, RightPage } from './ReaderWrapper'
 import {
     AnatomyFigure,
+    AssignmentRuleFigure,
+    SqlBarChartFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
     ExampleFigure,
+    ExternalIssueFigure,
     FactorSplitFigure,
     Fig,
+    IssueSpikeFigure,
     LeakFigure,
     LedgerFigure,
     LoopFigure,
@@ -48,6 +53,8 @@ import {
     ReleaseConditionsFigure,
     ReportFigure,
     ScoutFigure,
+    StackTraceFigure,
+    TimelineFigure,
     ScreenshotFigure,
     SkillFigure,
     TraceFigure,
@@ -75,6 +82,8 @@ export const bookMdxComponents = {
     TwigFilterFigure,
     TwigEventFigure,
     AutocaptureFigure,
+    AutocapturedExceptionFigure,
+    TripDetailsErrorFigure,
     FilterPropertiesFigure,
     DestinationChartFigure,
     SessionGroupingFigure,
@@ -95,14 +104,20 @@ export const bookMdxComponents = {
     LessonFooter,
     ReportFigure,
     AnatomyFigure,
+    AssignmentRuleFigure,
+    SqlBarChartFigure,
     DetailFigure,
     DivergenceFigure,
     EvalRunsFigure,
     ExampleFigure,
+    ExternalIssueFigure,
     FactorSplitFigure,
     LedgerFigure,
     LeakFigure,
+    IssueSpikeFigure,
     ScoutFigure,
+    StackTraceFigure,
+    TimelineFigure,
     SkillFigure,
     TraceFigure,
     PersonsModalFigure,

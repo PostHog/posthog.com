@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import {
+    IconBolt,
     IconBook,
     IconCursorClick,
     IconEye,
@@ -121,6 +122,15 @@ const LearnNav = ({
         wrap: fullTitles,
     }))
     const hub = volume?.learnHub
+    const isSelfDriving = (index: number) =>
+        Boolean(hub?.selfDrivingSection) && pages[index].section === hub?.selfDrivingSection
+    // Self-driving numbers its own chapters from 1, apart from the story.
+    const scoutChapters = chapters
+        .filter((_, index) => isSelfDriving(index))
+        .map((chapter, index) => {
+            const page = pages.find((candidate) => learnChapterPath(guideBasePath, candidate) === chapter.url)
+            return { ...chapter, name: `${index + 1}. ${page?.shortTitle || page?.title}` }
+        })
     const items = hub
         ? [
               { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
@@ -128,10 +138,21 @@ const LearnNav = ({
                   name: 'Pocket guide',
                   url: guideBasePath,
                   icon: <IconBook className="size-4" />,
-                  children: chapters.filter((_, index) => !pages[index].isFrontMatter),
+                  children: chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
               },
               // Only the hub pages this volume has, so a smaller hub has no dead links.
               ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
+              // The label opens the first scout chapter; the chevron shows the rest.
+              ...(scoutChapters.length
+                  ? [
+                        {
+                            name: 'Self-driving',
+                            url: scoutChapters[0].url,
+                            icon: <IconBolt className="size-4" />,
+                            children: scoutChapters,
+                        },
+                    ]
+                  : []),
           ]
         : chapters
 

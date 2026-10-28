@@ -3,7 +3,8 @@ import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
 
 import Link from 'components/Link'
-import { SingleCodeBlock } from 'components/CodeBlock'
+import { MdxCodeBlock, SingleCodeBlock } from 'components/CodeBlock'
+import Mermaid from 'components/Mermaid'
 import { InlineCode } from 'components/InlineCode'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
@@ -123,21 +124,36 @@ function BookLink({ href: authoredHref, ...props }: any): JSX.Element {
     )
 }
 
+/** Long lines wrap instead of scrolling a sentence sideways. */
+const CODE_WRAP =
+    'my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words'
+
 /** The parent reader supplies docs prose styles; only book-specific behavior is mapped here. */
 export const proseComponents = {
     // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`.
     pre: ({ children }: any) => <>{children}</>,
-    code: ({ className, children }: any) => (
-        <div className="my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
-            <SingleCodeBlock
-                language={String(className ?? '').replace('language-', '') || 'text'}
-                showCopy
-                showAskAI={false}
-            >
-                {String(children).replace(/\n$/, '')}
-            </SingleCodeBlock>
-        </div>
-    ),
+    code: ({ className, children }: any) =>
+        String(className ?? '').includes('language-mermaid') ? (
+            <div className="my-[0.8em]">
+                <Mermaid>{String(children)}</Mermaid>
+            </div>
+        ) : (
+            <div className={CODE_WRAP}>
+                <SingleCodeBlock
+                    language={String(className ?? '').replace('language-', '') || 'text'}
+                    showCopy
+                    showAskAI={false}
+                >
+                    {String(children).replace(/\n$/, '')}
+                </SingleCodeBlock>
+            </div>
+        ),
     inlineCode: InlineCode,
     a: (props: any) => <BookLink {...props} />,
+    // The docs' language tabs, one fenced block per SDK.
+    MultiLanguage: (props: any) => (
+        <div className={CODE_WRAP}>
+            <MdxCodeBlock {...props} />
+        </div>
+    ),
 }

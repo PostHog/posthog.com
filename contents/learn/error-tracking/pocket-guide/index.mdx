@@ -1,0 +1,32 @@
+---
+# Volume front matter. Cover, contents, and the one prerequisite every page assumes.
+title: Error Tracking
+shortTitle: Introduction
+subtitle: Catch what breaks, measure who it hurts, and hand the fix to an agent.
+pocketGuideOrder: 0
+---
+
+import Link from "components/Link"
+import { TWIG_URL } from "constants/index"
+
+<LeftPage>
+
+# <Eyebrow>A pocket guide to</Eyebrow> Error Tracking
+
+The <Link to={TWIG_URL} external>Twig</Link> engineers are building a vacation rental marketplace. They want to know when uncaught exceptions are breaking the experience for their customers.
+
+Error Tracking captures exceptions in Twig's code as exception events in PostHog. This gives them queryable stack traces and lets them analyze the exceptions along with other PostHog data, so they can triage and prioritize.
+
+By the end of this pocket guide, you should know how to capture, query, act on, and self-drive fixes for exceptions in your app.
+
+<CoverWithChapters />
+
+</LeftPage>
+
+<RightPage>
+
+To follow along with your own app, run the Error Tracking Wizard, or [install it yourself](/docs/error-tracking/installation):
+
+<Setup />
+
+</RightPage>

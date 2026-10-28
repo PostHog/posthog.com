@@ -1,0 +1,214 @@
+---
+title: Stack traces
+shortTitle: Stack traces
+subtitle: Map Twig's minified frames back to its source code.
+pocketGuideOrder: 2
+section: Capture
+pocketGuideCta:
+  kind: link
+  label: Check your symbol sets
+  href: https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets
+  note: After your next build, find your latest upload in the list.
+---
+
+import Link from 'components/Link'
+import { getDarkClassForLogo } from 'constants/logos'
+
+<LeftPage>
+
+<StackTraceFigure
+    n={1}
+    caption="Without source maps, every frame points into a bundle."
+    type="TypeError"
+    message="Cannot read properties of undefined (reading 'name')"
+    frames={[
+        {
+            fn: 'readTripHost',
+            source: '/assets/index-a1b2c3.js@1:48213',
+            unresolved: true,
+            marker: {
+                n: 1,
+                label: 'An unresolved frame',
+                gloss: 'PostHog couldn\'t map this frame to your source, so it points at a line and column in a bundle. Hover the warning for the message the app shows.',
+            },
+        },
+        { fn: 'openTripDetails', source: '/assets/index-a1b2c3.js@1:61877', unresolved: true },
+        { fn: 'renderWithHooks', source: '/assets/react-dom-d4e5f6.js@1:5654', unresolved: true },
+        {
+            fn: 'performUnitOfWork',
+            source: '/assets/react-dom-d4e5f6.js@1:12561',
+            unresolved: true,
+            marker: {
+                n: 2,
+                label: 'Nothing marked as yours',
+                gloss: 'Without a source map, PostHog can\'t tell your frames from the framework\'s.',
+            },
+        },
+    ]}
+/>
+
+<StackTraceFigure
+    n={2}
+    caption="With source maps, your own frames show in bold at the top of the trace."
+    type="TypeError"
+    message="Cannot read properties of undefined (reading 'name')"
+    frames={[
+        {
+            fn: 'readTripHost',
+            source: 'src/trips/trip-details.ts@12:20',
+            inApp: true,
+            marker: {
+                n: 1,
+                label: 'Your own code',
+                gloss: 'Click it to open the source around the failing line.',
+            },
+            context: {
+                startLine: 10,
+                failingLine: 12,
+                lines: [
+                    'export function readTripHost(hosts: Record<string, Host>, hostId: string) {',
+                    '  const host = hosts[hostId]',
+                    '  const hostName = host.name',
+                    '  return hostName',
+                    '}',
+                ],
+            },
+        },
+        { fn: 'openTripDetails', source: 'src/account/AccountPages.tsx@42:18', inApp: true },
+        {
+            fn: 'useParams',
+            source: 'node_modules/react-router/index.tsx@5663:28',
+            marker: {
+                n: 2,
+                label: 'A dependency',
+                gloss: 'New issues group on dependency frames alongside your own.',
+            },
+        },
+        { fn: 'renderWithHooks', source: 'node_modules/react-dom/client.js@5654:24' },
+        { fn: 'performUnitOfWork', source: 'node_modules/react-dom/client.js@12561:98' },
+    ]}
+/>
+
+<TimelineFigure
+    n={3}
+    caption="The Timeline tab shows your recorded steps in order, next to everything else in the session."
+    rows={[
+        {
+            time: '09:14:02',
+            category: 'pageview',
+            primary: '/account/trips',
+            marker: {
+                n: 1,
+                label: 'A pageview',
+                gloss: 'PostHog captures each page the person opened in the session, with no code from you.',
+            },
+        },
+        {
+            time: '09:14:06',
+            category: 'exception step',
+            primary: 'open_trip_details',
+            secondary: 'stay_id stay-02',
+            marker: {
+                n: 2,
+                label: 'An exception step',
+                gloss: 'Each addExceptionStep call adds a row. You choose the name and the properties.',
+            },
+        },
+        {
+            time: '09:14:07',
+            category: 'exception step',
+            primary: 'read_trip_host',
+            secondary: 'surface trip_details',
+        },
+        {
+            time: '09:14:07',
+            category: 'exception',
+            primary: 'TypeError',
+            secondary: "Cannot read properties of undefined (reading 'name')",
+            current: true,
+            marker: {
+                n: 3,
+                label: 'The exception',
+                gloss: 'The SDK held the steps above in memory and sent them with this exception.',
+            },
+        },
+        { time: '09:14:19', category: 'pageview', primary: '/account/trips' },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Stack traces
+
+The **Trip details** exception is in PostHog, but the stack trace points to Twig's minified code. This means the engineers can only see stack traces like this, which isn't very useful <SeeFig n={1} />.
+
+Twig's web app is a minified React bundle. An app that uses one of these frameworks likely has the same issue:
+
+<div className="grid grid-cols-3 @xl:grid-cols-4 gap-x-6 gap-y-3 my-4">
+    {[
+        { label: 'Web', href: '/docs/error-tracking/upload-source-maps/web', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg' },
+        { label: 'React', href: '/docs/error-tracking/upload-source-maps/react', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg' },
+        { label: 'Next.js', href: '/docs/error-tracking/upload-source-maps/nextjs', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg' },
+        { label: 'Angular', href: '/docs/error-tracking/upload-source-maps/angular', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/angular.svg' },
+        { label: 'Nuxt', href: '/docs/error-tracking/upload-source-maps/nuxt', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg' },
+        { label: 'Node.js', href: '/docs/error-tracking/upload-source-maps/node', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg' },
+        { label: 'React Native', href: '/docs/error-tracking/upload-source-maps/react-native', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg' },
+        { label: 'iOS', href: '/docs/error-tracking/upload-source-maps/ios', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg' },
+        { label: 'Android', href: '/docs/error-tracking/upload-mappings/android', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg' },
+        { label: 'Kotlin', href: '/docs/error-tracking/installation/kmp', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg' },
+        { label: 'Flutter', href: '/docs/error-tracking/upload-source-maps/flutter', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg' },
+        { label: 'Rust', href: '/docs/error-tracking/upload-source-maps/rust', image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/rust.svg' },
+    ].map(({ label, href, image }) => (
+        <Link key={label} to={href} className="flex items-center gap-2">
+            <img src={image} alt="" className={`size-6 ${getDarkClassForLogo(image)}`} />
+            {label}
+        </Link>
+    ))}
+</div>
+
+## Source map uploads
+
+To get full stack traces, the engineers need to upload a <Term name="source map" /> to map minified code to source code <SeeFig n={2} />. PostHog can get the maps three ways:
+
+| Option | Trade-off |
+| --- | --- |
+| Upload in CI | The default. The source stays private, and each build uploads its own maps. |
+| Host them publicly | No upload step, but anyone can read the source. |
+| Embed them in the bundle | No upload, but users download larger files and can read the source. |
+
+The engineers link each upload to a [release](/docs/error-tracking/releases). PostHog then shows the version and commit on every trace. With a [GitHub or GitLab integration](/docs/error-tracking/integrations), it also links each frame to the file and line in `twig/web`.
+
+The Wizard's Error Tracking setup already adds uploads where the platform needs them. To add them to an existing setup:
+
+<Setup subcommand="upload-source-maps" />
+
+After uploading, the engineers check the [symbol sets](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets) in PostHog, which show any failed uploads or missing bundles.
+
+<Action />
+
+## Breadcrumbs
+
+Breadcrumbs, which PostHog calls exception steps, hold context that only matters if something breaks. The engineers call `addExceptionStep` at checkpoints like a retry or a fallback path. The SDK attaches the steps to the next exception, and they show up in the issue's **Timeline** tab <SeeFig n={3} />.
+
+If no exception happens, the SDK discards the steps, so successful runs cost nothing.
+
+The engineers pick where context goes by when they'll need it:
+
+| Record it as | When |
+| --- | --- |
+| An exception step | It only matters if this run fails |
+| A log | The team wants it kept for every run, failed or not |
+| A property on the exception | The team wants to filter, group, assign, or count issues by it |
+| An event | The team wants to count the action on its own |
+
+Steps work in the <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/error-tracking/installation/web), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="" className="inline-block size-4 align-text-bottom" /> [React Native](/docs/error-tracking/installation/react-native), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg" alt="" className="inline-block size-4 align-text-bottom dark:invert" /> [iOS](/docs/error-tracking/installation/ios), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Android](/docs/error-tracking/installation/android), and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Flutter](/docs/error-tracking/installation/flutter) SDKs.
+
+<LessonFooter nextLabel="Issue grouping" nextHref="/learn/error-tracking/pocket-guide/issue-grouping">
+
+[Stack traces](/docs/error-tracking/stack-traces) · [Upload source maps](/docs/error-tracking/upload-source-maps) · [Releases](/docs/error-tracking/releases)
+
+</LessonFooter>
+
+</RightPage>

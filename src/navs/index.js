@@ -2725,6 +2725,10 @@ export const docsMenu = {
                             name: 'Error patterns',
                             url: '/docs/self-driving/pocket-guide/ai-error-patterns',
                         },
+                        {
+                            name: 'Errors by account value',
+                            url: '/docs/self-driving/pocket-guide/errors-your-best-accounts-hit',
+                        },
                     ],
                     badge: {
                         title: 'New',
