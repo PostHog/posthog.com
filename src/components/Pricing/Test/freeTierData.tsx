@@ -29,16 +29,11 @@ export const freeTierProducts: FreeTierProduct[] = [
     {
         name: 'Analytics',
         allocation: '1M events',
+        note: <>Shared by product analytics and web analytics. Web analytics is billed as analytics events.</>,
         icon: Icons.IconGraph,
         iconColor: 'text-blue',
         icon2: Icons.IconPieChart,
         icon2Color: 'text-green',
-    },
-    {
-        name: 'Web analytics',
-        description: 'Billed with analytics',
-        icon: Icons.IconPieChart,
-        iconColor: 'text-green',
     },
     {
         name: 'Session replay',
