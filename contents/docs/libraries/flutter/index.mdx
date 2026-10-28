@@ -377,7 +377,7 @@ They do **not** intercept native-initiated events such as:
 - Session replay events (`$snapshot`)
 - Application lifecycle events (`Application Opened`, etc.)
 
-Additionally, only user-provided properties are available in the callback. System properties (like `$device_type`, `$session_id`) are added by the native SDK at a later stage.
+On iOS, macOS and Android, only the properties you pass are available in the callback. The native SDK adds system properties (like `$device_type` and `$session_id`) and registered super properties later. On Windows and Linux, the callback sees every property and option the SDK adds.
 
 ## Debug mode 
 
@@ -403,7 +403,9 @@ await Posthog().debug(false);
 
 ## Upgrading from version 5 to version 6
 
-Version 6 moves the iOS and macOS SDK to `posthog-ios` 4.0, raises the minimum iOS and macOS versions, and removes the APIs that version 5 deprecated.
+Version 6 moves iOS and macOS to `posthog-ios` 4.0 and Android to `posthog-android` 4.0, sends events to PostHog's capture v1 API on every platform except web, raises the minimum iOS and macOS versions, and removes the APIs that version 5 deprecated.
+
+If you send events through a reverse proxy or to a self-hosted PostHog instance, read [Events go to capture v1](#events-go-to-capture-v1) before you upgrade.
 
 Before you upgrade, update to the latest version 5 release and fix its deprecation warnings. The replacements below work in both versions, with one exception: the parameter of `getFeatureFlagResult()` that controls the `$feature_flag_called` event is named `sendEvent` in version 5 and `sendFeatureFlagEvent` in version 6. Version 6 also removes a few members that version 5 never marked as deprecated: the `sendEvent` parameter itself, the `toMap()` and `fromMap()` helpers, and some members of the platform interface classes.
 
@@ -471,6 +473,114 @@ If you implement or mock `PosthogFlutterPlatformInterface`, `PosthogFlutterIO` o
 - Rename the `sendEvent` parameter of `getFeatureFlagResult()` to `sendFeatureFlagEvent`.
 
 Calls to `Posthog()` aren't affected by these.
+
+### Events go to capture v1
+
+On iOS, macOS, Android, Windows and Linux, version 6 sends events to capture v1 instead of `/batch/`. iOS and macOS do this through `posthog-ios` 4.0, Android through `posthog-android` 4.0, and Windows and Linux in the SDK's Dart client.
+
+Web is unchanged. Flutter web runs `posthog-js`, which keeps sending events to the endpoints it uses today.
+
+| Data | Version 5 | Version 6 on iOS, macOS, Android, Windows and Linux |
+| --- | --- | --- |
+| Events | `/batch/` | `/i/v1/analytics/events` |
+| AI events (`captureAi`) | – | `/i/v1/ai/events` |
+
+Session replay, logs and feature flags keep their endpoints.
+
+PostHog Cloud serves both capture v1 endpoints. If you self-host PostHog, check that your instance serves `/i/v1/analytics/events` and `/i/v1/ai/events` before you upgrade.
+
+If you send events through your own reverse proxy, update it before you upgrade:
+
+- Forward `/i/v1/analytics/events` and `/i/v1/ai/events` to PostHog.
+- Pass `Authorization` (the project token, sent as `Bearer <token>`), every `PostHog-*` header, `Content-Type`, `Content-Encoding` and `User-Agent` through unchanged.
+- Accept request bodies up to 20 MB. AI requests are often larger than 1 MB, the default limit in NGINX.
+- If your app also runs on web, keep the routes the proxy already forwards for `posthog-js`. One proxy that serves every platform needs both sets of routes.
+
+PostHog's [managed reverse proxy](/docs/advanced/proxy) already does this.
+
+The SDK doesn't fall back to `/batch/`. A 404 is retried, so events stay queued until the path is served.
+
+Other changes that come with capture v1, on every platform except web:
+
+- **Redirects:** the SDK only follows a 307 or 308 redirect to the same origin as `host`. Any other redirect drops the batch. If your proxy redirects capture requests to another host, point `host` at the final host.
+- **Event validation:** PostHog checks each event on its own and drops only the invalid ones, so the rest of the batch is delivered. It drops an event with an empty name, an empty distinct ID, or a name or distinct ID over 200 UTF-8 bytes. Version 5 shortened a long distinct ID and kept the event. If you identify users with a long ID, such as a JWT, shorten or hash it before you upgrade.
+- **`$lib` and `$lib_version`:** PostHog sets them from the SDK's `PostHog-Sdk-Info` request header. A value you set in properties or in `beforeSend` doesn't reach PostHog.
+- **Personal API keys:** on iOS, macOS and Android, a personal API key (`phx_...`) in `projectToken` disables the SDK at setup. Use your project token (`phc_...`).
+
+### Property precedence
+
+On iOS, macOS, Android, Windows and Linux, an event's properties are merged in this order, and later values win:
+
+1. properties the SDK sets itself, such as device and app context, `$is_identified` and `$session_id`
+2. registered super properties (`register`)
+3. the properties you pass to `capture` or another event-sending method
+
+In version 5, the SDK's own values won over the properties you registered or passed. In version 6, your value wins for that event. A registered `$session_id` now overrides the SDK's session ID, which can detach events from their session replay.
+
+`beforeSend` runs at a different point on each platform:
+
+- **Windows and Linux:** `beforeSend` runs after the merge, so it sees and can change every property and option the SDK adds.
+- **iOS, macOS and Android:** `beforeSend` runs in Dart before the native SDK adds its properties, so it sees only the properties you passed. See [Limitations](#limitations).
+
+### Event options
+
+Capture v1 reads processing settings from an `options` map sent next to the event's properties. `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group` and `captureException` take a new `options` argument, and `beforeSend` can read and change `PostHogEvent.options`.
+
+```dart
+// Version 5
+await Posthog().capture(
+  eventName: 'signed_up',
+  properties: {r'$cookieless_mode': true},
+);
+
+// Version 6
+await Posthog().capture(
+  eventName: 'signed_up',
+  options: {'cookieless_mode': true},
+);
+```
+
+| Legacy property | Option |
+| --- | --- |
+| `$process_person_profile` | `process_person_profile` |
+| `$cookieless_mode` | `cookieless_mode` |
+| `$ignore_sent_at` | `disable_skew_correction` |
+| `$product_tour_id` | `product_tour_id` |
+
+- The legacy properties still work. An option you pass, or set in `beforeSend`, wins over its legacy property. A `null` option counts as unset.
+- On iOS, macOS, Android, Windows and Linux, other option keys are sent unchanged.
+- On web, the known options are sent as their legacy properties and other keys are dropped. `posthog-js` sets `$process_person_profile` itself, so `process_person_profile` has no effect on web, and the options of `identify`, `setPersonProperties`, `alias` and `group` are dropped.
+
+### AI events
+
+Version 6 adds `captureAi`, which sends AI events such as `$ai_generation` to PostHog's AI endpoint instead of the events endpoint. It takes the same arguments as `capture` and goes through the same `beforeSend` callbacks.
+
+```dart
+await Posthog().captureAi(
+  eventName: r'$ai_generation',
+  properties: {
+    r'$ai_trace_id': traceId,
+    r'$ai_model': 'gpt-4o',
+  },
+);
+```
+
+- `captureAi` returns the event's UUID, or `null` when the event isn't queued: `beforeSend` dropped it, it's over `captureAiMaxEventBytes`, or the SDK is disabled or opted out.
+- PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint, even ones named `$ai_*`.
+- AI events are queued separately from other events. `PostHogConfig.captureAiCompression`, `captureAiMaxQueueSize`, `captureAiTimeout` and `captureAiMaxEventBytes` configure that queue and its requests.
+- The SDK sends AI events unchanged. It doesn't redact or truncate prompts, outputs or media, so use `beforeSend` to remove anything you don't want to send.
+- On web, `captureAi` is a no-op: it sends nothing and returns `null`.
+
+### Retries
+
+On iOS, macOS, Android, Windows and Linux:
+
+- The SDK retries network errors and 404, 408, 429, 500, 502, 503 and 504 responses. Other error statuses drop the events.
+- When PostHog asks to retry only some events of a batch, the SDK keeps those events queued and removes the rest.
+- A 413 splits the batch into smaller requests.
+- After a failed send, the wait before the next one doubles from 1 second up to 30 seconds, with up to 25% random jitter.
+- A `Retry-After` header pauses sending for at most 30 seconds.
+- Retries have no limit. Queued events stay until they're delivered or a full queue evicts the oldest.
 
 ### Behavior changes on iOS and macOS
 
