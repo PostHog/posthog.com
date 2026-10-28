@@ -86,7 +86,7 @@ Unless otherwise indicated, you can self-serve access requests to the following 
 - <PrivateLink url='https://posthog.slack.com/archives/C090RCG671C'>#group-cs-sales-support</PrivateLink> - cross-team discussion for everyone who owns customers.
 - <PrivateLink url='https://posthog.slack.com/archives/C01MGUHFH6G'>#sales</PrivateLink> - for general sales topics.
 - <PrivateLink url='https://posthog.slack.com/archives/C03V7SP3Z3K'>#incidents</PrivateLink> - for notifications of incidents which may impact customers.  Make sure you set this to alert you for every message so that you know when something is up.
-- <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> - automated notifications from Vitally.
+- <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> - automated notifications, for example [overdue invoice alerts](/handbook/growth/sales/billing#failedlate-payments).
 - <PrivateLink url='https://posthog.slack.com/archives/C054BJSHG82'>#sales-leads</PrivateLink> -  automated notifications for new sales leads.
 - <PrivateLink url='https://posthog.slack.com/archives/C08MYQX74KH'>#legal</PrivateLink> - for requests from our legal folks.
 - <PrivateLink url='https://posthog.slack.com/archives/C08UNFX75ST'>#closed-won</PrivateLink> - yay!
