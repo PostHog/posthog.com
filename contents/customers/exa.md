@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/lovable_light_png_cb215659ae.png
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/exa_c102c1d824.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/exa_1920x1080_30971a5876.png
 industries:
     - AI
 users:

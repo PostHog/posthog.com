@@ -20,7 +20,9 @@ import { Steps, Step } from 'components/Docs/Steps'
 | `@modelcontextprotocol/sdk` | v1 | `2025-11-25` and earlier |
 | `@modelcontextprotocol/core`, `/server`, `/client` | v2 | `2025-11-25` and `2026-07-28` |
 
-You need Node.js 20.20+ or 22.22+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
+The minimum versions are `@modelcontextprotocol/sdk` 1.26.0 for v1 and `@modelcontextprotocol/server` 2.0.0 for v2.
+
+You need Node.js 20.20+ or 22.22+, `posthog-node` 5, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
 
 <WizardCommand command="mcp-analytics" />
 
@@ -82,7 +84,7 @@ server.registerTool("search_events", { /* ... */ }, async (args) => {
 
 </MultiLanguage>
 
-`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server logs a warning and returns early.
+`instrument()` returns an analytics handle for [custom events](/docs/mcp-analytics/custom-events). A second call on the same server does nothing new. It logs a warning through the `logger` from the first call and returns a working handle.
 
 </Step>
 
@@ -257,11 +259,12 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | --- | --- | --- |
 | `context` | `true` | Add a `context` argument to capture [agent intent](/docs/mcp-analytics/intent). Pass `{ description }` to change its prompt. |
 | `intentFallback` | – | `(request, extra) => string \| null`. Supplies intent when the agent sends no `context`. |
-| `captureModel` | `true` | Capture the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata or an `llm_model` argument. |
+| `captureModel` | `true` | Capture the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata or an `llm_model` argument. Pass `{ description }` to change the argument's prompt. |
 | `enableConversationId` | `true` | Add a `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. |
-| `identify` | – | `(request, extra) => UserIdentity \| null`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
+| `identify` | – | `(request, extra) => UserIdentity \| null`, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `reportMissing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
+| `collectFeedback` | `false` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `reportMissing` reports. Pass `{ toolName, description, extraProperties, onFeedback }` to customize it. |
 | `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
 | `beforeSend` | – | `(event) => event \| null`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | – | `(request, extra) => Record<string, unknown>`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
@@ -273,7 +276,7 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 
 ## Custom dispatchers
 
-`instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes the same constructor arguments:
+`instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes its constructor arguments, plus `serverBuild`, `captureModel`, `enableConversationId`, `missingCapabilityToolName`, and `collectFeedback`:
 
 ```ts
 import { PostHogMCP, getMoreToolsResult } from "@posthog/mcp"
@@ -330,6 +333,14 @@ posthog.captureInitialize({
 })
 ```
 
+Pass `errorType` to `captureToolCall` to set `$mcp_error_type` to your own label, such as `validation` or `rate_limited`.
+
+Other capture methods cover the rest of the protocol:
+
+- `captureToolsList({ toolNames })` sends `$mcp_tools_list`. Without it, a dispatcher server has no listing events, so you can't find tools that are advertised but never called.
+- `captureFeedback({ report })` sends `$mcp_feedback`. Call it when `prepared.isFeedback` is true, with `report` set to `prepared.feedbackReport`. Return `sendFeedbackResult()` to the agent. To advertise the tool, set `collectFeedback` on the constructor and pass `collectFeedback: true` to `prepareToolList`.
+- `getToolInputProperties(args, inputSchema, { inputAliases })` returns `$mcp_input_keys`, plus `$mcp_input_aliases_used` when you pass `inputAliases`, for the original arguments. Pass the result in `properties`.
+
 These methods queue events and never throw, so analytics can't break your tool. Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).
 
 Every capture method takes these fields:
@@ -337,7 +348,7 @@ Every capture method takes these fields:
 | Field | Becomes | Notes |
 | --- | --- | --- |
 | `distinctId` | `distinct_id` | Turns on person processing. Omit it for anonymous traffic. |
-| `sessionId` | `$session_id` | Omitted when you don't pass one. |
+| `sessionId` | `$session_id` | Omitted when you don't pass one. Keep it to 128 characters or fewer. |
 | `protocolVersion` | `$mcp_protocol_version` | Pass the revision of each request. |
 | `clientUserAgent` | `$mcp_client_user_agent` | The raw `User-Agent` header on HTTP transports. |
 | `vendorClient` | `$mcp_vendor_client` | A vendor client header, such as `x-anthropic-client`. |

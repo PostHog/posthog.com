@@ -9,6 +9,7 @@ import {
 } from '../src/components/SdkReferences/utils'
 import { convertHtmlToAgentMarkdown, extractTitleFromHtml } from './turndownService'
 import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
+import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
 // still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
@@ -1001,8 +1002,10 @@ export const generatePricingMd = (products: any[]) => {
     const tierTable = (tiers: any[], unit: string): string => {
         if (!tiers || tiers.length === 0) return ''
 
+        // A GB-month already includes the months, and one unbounded tier has no volume bands
+        const singleTier = tiers.length === 1 && tiers[0].up_to === null
         const rows: string[] = []
-        rows.push(`| Monthly volume | Price per ${unit} |`)
+        rows.push(`| ${singleTier || unit.endsWith('-month') ? 'Volume' : 'Monthly volume'} | Price per ${unit} |`)
         rows.push('|---|---|')
 
         for (let i = 0; i < tiers.length; i++) {
@@ -1010,7 +1013,9 @@ export const generatePricingMd = (products: any[]) => {
             const price = formatPrice(tier.unit_amount_usd)
             const prevUpTo = i > 0 ? tiers[i - 1].up_to : 0
 
-            if (tier.up_to === null) {
+            if (singleTier) {
+                rows.push(`| Every ${unit} | ${price} |`)
+            } else if (tier.up_to === null) {
                 // Last tier (unlimited)
                 rows.push(`| Above ${formatVolume(prevUpTo)} | ${price} |`)
             } else if (parseFloat(tier.unit_amount_usd) === 0) {
@@ -1057,6 +1062,13 @@ export const generatePricingMd = (products: any[]) => {
         },
     }
 
+    // Add-on notes the billing API doesn't carry
+    const addonMeta: Record<string, { note: string }> = {
+        logs_retention_custom: {
+            note: "Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires.",
+        },
+    }
+
     const productDisplayOrder = [
         'product_analytics',
         'session_replay',
@@ -1069,8 +1081,9 @@ export const generatePricingMd = (products: any[]) => {
 
     // Separate products from the platform product
     const platformProduct = products.find((p) => p.type === 'platform_and_support')
+    // Companion products are listed with their parent's add-ons below
     const billedProducts = products.filter(
-        (p) => p.type !== 'platform_and_support' && !p.legacy_product && !p.inclusion_only
+        (p) => p.type !== 'platform_and_support' && !p.legacy_product && !p.inclusion_only && !p.companion_of
     )
 
     // Sort products: known order first, then any new ones from the API
@@ -1106,11 +1119,10 @@ export const generatePricingMd = (products: any[]) => {
     // Build product add-ons section
     const productAddons: any[] = []
     for (const product of orderedProducts) {
-        if (product.addons) {
-            for (const addon of product.addons) {
-                if (addon.legacy_product) continue
-                productAddons.push({ ...addon, parentName: product.name })
-            }
+        for (const addon of withCompanionAddons(product, products).addons || []) {
+            // Custom retention replaced the 30-day add-on, but billing doesn't mark it `legacy_product`
+            if (addon.legacy_product || addon.type === 'logs_retention_30d') continue
+            productAddons.push({ ...addon, parentName: product.name })
         }
     }
 
@@ -1123,6 +1135,12 @@ export const generatePricingMd = (products: any[]) => {
             addonsSection += `### ${addon.name}\n\n`
             addonsSection += `*Extends ${addon.parentName}*\n\n`
             addonsSection += `${addon.description}\n\n`
+            if (addonMeta[addon.type]) {
+                addonsSection += `${addonMeta[addon.type].note}\n\n`
+            }
+            if (addon.no_billing_limit) {
+                addonsSection += `Billing limits don't apply. Your ${addon.parentName} billing limit doesn't cap it.\n\n`
+            }
 
             const paidPlan = addon.plans?.find((plan: any) => plan.tiers)
             if (paidPlan?.tiers) {
@@ -1225,6 +1243,7 @@ For full details on how discounts work, see our transparent contract rules: http
 - **Exception**: A single error or exception captured
 - **Row**: A single row synced from an external data source
 - **Trigger event**: A single event sent to a realtime destination
+- **GB-month**: One GB kept for 30 days, counted by the day
 
 All prices are in USD, excluding taxes.
 `

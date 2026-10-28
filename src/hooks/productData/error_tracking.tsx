@@ -327,7 +327,7 @@ export const errorTracking = {
             {
                 name: 'Sentry',
                 key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
+                link: '/compare/posthog-vs-sentry',
             },
             {
                 name: 'Signoz',

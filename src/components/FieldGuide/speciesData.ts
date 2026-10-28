@@ -138,14 +138,14 @@ export const SPECIES: Species[] = [
     },
     {
         slug: 'mid-form-fleer',
-        route: '/field-guide/the-mid-form-fleer',
-        name: 'The Mid-Form Fleer',
+        route: '/field-guide/the-halfway-houdini',
+        name: 'The Halfway Houdini',
         latin: 'Abandonus formularis',
         heroImage: '/images/field-guide/mid-form-fleer.png',
         plateI: img('mid-form-fleer', 1),
         plateII: img('mid-form-fleer', 2),
         map: { top: 58, left: 49 },
-        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_mid_form_fleer_b94e4b60df.png',
+        ogImage: 'https://res.cloudinary.com/dmukukwp6/image/upload/Field_guide_halfway_houdini_3c9fcc0e0b.png',
         sections: [
             {
                 label: 'Appearance',
@@ -153,11 +153,11 @@ export const SPECIES: Species[] = [
             },
             {
                 label: 'Habitat',
-                body: `Signup flows. Checkout forms. Anywhere a credit-card field appears later than expected. The Mid-Form Fleer has a marked preference for the second-to-last field of any multi-step form.`,
+                body: `Signup flows. Checkout forms. Anywhere a credit-card field appears later than expected. The Halfway Houdini has a marked preference for the second-to-last field of any multi-step form.`,
             },
             {
                 label: 'Field notes',
-                body: `The Mid-Form Fleer arrives in good faith. It completes name, email, and company. Then it encounters something it did not expect: a "How did you hear about us?" dropdown with no fitting option, a phone-number field marked required, a CAPTCHA. And, it's gone.`,
+                body: `The Halfway Houdini arrives in good faith. It completes name, email, and company. Then it encounters something it did not expect: a "How did you hear about us?" dropdown with no fitting option, a phone-number field marked required, a CAPTCHA. And, it's gone.`,
             },
             {
                 label: 'Resolution',

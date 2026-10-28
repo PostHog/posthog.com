@@ -29,10 +29,10 @@ The application in this tutorial is built entirely upon open-source technologies
 To follow this tutorial along, you need to have:
 
 1. A [self-hosted instance of PostHog](/docs/self-host) or [sign up for PostHog Cloud](https://app.posthog.com/signup)
-1. A [self-hosted instance of Supabase](https://supabase.io/docs/guides/hosting/overview) or [sign up for a hosted Supabase account](https://app.supabase.io/api/login)
+1. A [self-hosted instance of Supabase](https://supabase.io/docs/guides/hosting/overview) or [sign up for a hosted Supabase account](https://supabase.com/dashboard/sign-up)
 1. [Node.js](https://nodejs.org/en/download/) installed
 
-It's easier to get up an running with the cloud hosted options. If you want to go with self-hosted then the [DigitalOcean PostHog 1-click deployment](/docs/self-host/deploy/digital-ocean) makes getting started with PostHog much easier. For Supabase, [the Docker setup](https://supabase.io/docs/guides/hosting/docker) appears to be the best option.
+It's easier to get up and running with the cloud hosted options. If you want to go with self-hosted then the [DigitalOcean PostHog 1-click deployment](/docs/self-host/deploy/digital-ocean) makes getting started with PostHog much easier. For Supabase, [the Docker setup](https://supabase.io/docs/guides/hosting/docker) appears to be the best option.
 
 ## Bootstrap sign up with Supabase Auth
 
@@ -319,8 +319,8 @@ Here's how some of the events can tie in to the flow we're trying to build:
 
 | Step                                                           | Event                             | Url / Screen        |
 | -------------------------------------------------------------- | --------------------------------- | ------------------- |
-| 1. User lands on the main website landing page                 | Pageview                          | locahost:3000/      |
-| 2. User clicks on one of the sign up buttons                   | clicked button with text "SignUp" | locahost:3000/      |
+| 1. User lands on the main website landing page                 | Pageview                          | localhost:3000/     |
+| 2. User clicks on one of the sign up buttons                   | clicked button with text "SignUp" | localhost:3000/     |
 | 3. User enters their details to sign up and submits the form   | submitted form                    | localhost:3000/auth |
 | 4. User receives registration verification email               | _no event_                        | _outside of app_    |
 | 5. User clicks the link in the email and successfully signs up | _no event_                        | localhost:3000/auth |
@@ -370,8 +370,8 @@ First, let's recap the events in the funnel and include the new `loggedIn` event
 
 | Step                                                           | Event                             | Url / Screen        |
 | -------------------------------------------------------------- | --------------------------------- | ------------------- |
-| 1. User lands on the main website landing page                 | Pageview                          | locahost:3000/      |
-| 2. User clicks on one of the sign up buttons                   | clicked button with text "SignUp" | locahost:3000/      |
+| 1. User lands on the main website landing page                 | Pageview                          | localhost:3000/     |
+| 2. User clicks on one of the sign up buttons                   | clicked button with text "SignUp" | localhost:3000/     |
 | 3. User enters their details to sign up and submits the form   | submitted form                    | localhost:3000/auth |
 | 4. User receives registration verification email               | _no event_                        | _outside of app_    |
 | 5. User clicks the link in the email and successfully signs up | loggedIn                          | localhost:3000/auth |

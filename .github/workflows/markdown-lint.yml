@@ -47,3 +47,7 @@ jobs:
             - name: No hardcoded source release status
               if: ${{ !cancelled() }}
               run: node scripts/check-source-release-callouts.js
+
+            - name: No hardcoded posthog-js defaults dates
+              if: ${{ !cancelled() }}
+              run: node scripts/check-posthog-js-defaults.js

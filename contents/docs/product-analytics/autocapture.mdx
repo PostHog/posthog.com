@@ -44,7 +44,7 @@ Autocapture is available in the following SDKs, each with a different set of cap
 - [Android](/docs/libraries/android) – navigation, lifecycle, and deep-link autocapture enabled by default; interaction autocapture is not supported
 - [iOS](/docs/libraries/ios) – enabled by default (element interactions – `$autocapture` events disabled by default)
 - [React Native](/docs/libraries/react-native) – disabled by default
-- [Flutter](/docs/libraries/flutter) – disabled by default
+- [Flutter](/docs/libraries/flutter) – lifecycle autocapture enabled by default; interaction autocapture is not supported on iOS or Android, and on [Flutter Web via posthog-js](/docs/libraries/flutter#interaction-autocapture) it is disabled by default
 
 <CalloutBox icon="IconInfo" title="Looking for session and exception autocapture?" type="fyi">
 
@@ -227,6 +227,8 @@ const MyForm = () => {
 A rage click is captured when a user clicks three times in rapid succession in roughly the same spot. Specifically, PostHog fires a `$rageclick` event once it sees three clicks that are each within **30 pixels** and **1 second** of the previous one. All three thresholds (click count, pixel distance, and timeout) are configurable – see [Configuring rageclick](/docs/libraries/js/config#configuring-rageclick).
 
 The event is captured as a `$rageclick` event. You can use it to identify opportunities to improve your UI, as it often points to where users are frustrated with your product.
+
+Rage click detection runs inside interaction autocapture, so `autocapture` must be enabled for `$rageclick` to fire. For canvas-rendered apps such as Flutter Web, see [rage clicks on Flutter Web](/docs/libraries/flutter#rage-click-autocapture).
 
 <details>
 <summary>Reducing rage click false positives</summary>
@@ -533,7 +535,7 @@ Autocaptured events (and client-side custom events) have many default properties
 
 #### Notes:
 
-- If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties at ingestion.
+- If enabled, [GeoIP data](/docs/data-pipelines/transformations/template-geoip) is added also as properties at ingestion.
 - Many of these are also captured as [session properties](/docs/data/sessions).
 - These properties can be hidden in activity by checking the **Hide PostHog properties** box.
 

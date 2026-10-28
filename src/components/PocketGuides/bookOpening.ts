@@ -112,6 +112,7 @@ export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElemen
     const startPath = window.location.pathname
     const stillHere = () => cover.isConnected && window.location.pathname === startPath
     let navigationTimeout: ReturnType<typeof setTimeout> | undefined
+    let waitingForRoute = true
     const previousPointerEvents = viewport.style.pointerEvents
     const previousVisibility = cover.style.visibility
     viewport.style.pointerEvents = 'none'
@@ -168,19 +169,31 @@ export async function openPocketGuide(event: React.MouseEvent, cover: HTMLElemen
             ...(spine ? [play(spine, [{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: 420 })] : []),
         ])
         if (!stillHere()) return
-        // A stalled page load must not leave the source page covered and unclickable.
+        // Gatsby's navigate returns before the route changes: it first loads the page's data, which
+        // takes a network request in production. Wait for the url to change, so the faded source
+        // doesn't reappear while the destination loads.
         await Promise.race([
-            navigate(to),
+            new Promise<void>((resolve, reject) => {
+                Promise.resolve(navigate(to)).catch(reject)
+                const check = () => {
+                    if (window.location.pathname !== startPath) resolve()
+                    else if (waitingForRoute) requestAnimationFrame(check)
+                }
+                requestAnimationFrame(check)
+            }),
+            // A stalled page load must not leave the source page covered and unclickable.
             new Promise<void>((resolve) => {
                 navigationTimeout = setTimeout(resolve, 5000)
             }),
         ])
+        if (window.location.pathname === startPath) return
         // Keep the faded source in place until the destination has painted.
         await new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve())))
     } catch {
         // Cancellation or failed navigation restores the source instead of leaving it faded.
     } finally {
         clearTimeout(navigationTimeout)
+        waitingForRoute = false
         animations.forEach((animation) => animation.cancel())
         cover.style.visibility = previousVisibility
         viewport.style.pointerEvents = previousPointerEvents

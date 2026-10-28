@@ -117,7 +117,7 @@ export const AskAnythingSlide = () => {
                     <p className="text-secondary m-0">
                         Pipe in third party data from{' '}
                         <Link
-                            to="/docs/cdp/sources"
+                            to="/docs/data-pipelines/sources"
                             state={{ newWindow: true }}
                             className="underline underline-offset-2"
                         >

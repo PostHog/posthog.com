@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }: AppProps) {
     return (
         <PostHogProvider
             apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY!}
-            clientOptions={{ api_host: '/ingest' }}
+            clientOptions={{ api_host: '/ingest', defaults: '<ph_posthog_js_defaults>' }}
         >
             <PostHogPageView captureRouteTemplate />
             <Component {...pageProps} />
