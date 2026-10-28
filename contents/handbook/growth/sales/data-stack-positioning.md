@@ -4,9 +4,9 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[Full deck for sales training](https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit?usp=sharing)
+> Read the [full deck for sales training](https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit?usp=sharing)
 
-This page covers what to sell, to who, and when. If you're new to data tools, read [data foundations](/handbook/growth/sales/data-foundations) first. It explains the modern data stack, how PostHog maps to it, and the two personas we sell to.
+This page covers what to sell, to who, and when. If you're new to data tools, read about [data foundations](/handbook/growth/sales/data-foundations) first. It explains the modern data stack, how PostHog maps to it, and the two personas we sell to.
 
 ## How PostHog users use data, without a data stack
 
@@ -24,7 +24,7 @@ When most PostHog users sign up they don't have a lot of data, don't have the ex
 
 That's because our primary persona is a [product engineer](/handbook/growth/sales/data-foundations#primary-persona--today-product-engineers) at a Seed to Series B startup with no data hire yet. Offering them Fivetran, Snowflake, dbt, Airflow, Looker and Hightouch equivalents is overkill.
 
-So we split the offering into two packages. Regular and Sexy
+So we split the offering into two packages. Regular and Sexy.
 
 ## The regular package
 
@@ -58,7 +58,7 @@ No new tools to buy. Orchestration, a warehouse, complex modeling and activation
 | Views | Save a query as a reusable table. Materialize it on a schedule so heavy queries stay fast. | "Do the work once, reuse it everywhere." |
 | Dashboards | Product and business metrics on one dashboard, shared with the whole team. | "One place to see how the company is doing." |
 
-### The problem's we're solving
+### The problems we're solving
 
 | The problem | What we say |
 |-------------|-------------|
