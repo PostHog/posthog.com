@@ -104,9 +104,9 @@ Present on `$exception` events emitted alongside any failed tool call. The SDK r
 | `$exception_list`  | Array of structured exceptions. Each has `type`, `value` (the message), `mechanism`, and a `stacktrace` with parsed `frames` (`filename`, `function`, `lineno`, `colno`, `in_app`). An `Error.cause` chain appears as additional entries. |
 | `$exception_level` | Severity, always `"error"`.                                                                                                                                                                                                               |
 
-Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_name`, `$mcp_client_version`, `$mcp_protocol_version`, and, in TypeScript and Python, `$mcp_interface` and `$mcp_server_build`. Only TypeScript adds `$mcp_client_user_agent` and `$mcp_vendor_client`. Intent, model, duration, and `$set` properties stay on the main event.
+Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_name`, `$mcp_client_version`, `$mcp_protocol_version`, `$mcp_interface` in TypeScript, Python, and Rust, and `$mcp_server_build` in TypeScript and Python. TypeScript and Rust add `$mcp_client_user_agent` and `$mcp_vendor_client`. Intent, model, and duration properties stay on the main event. So does `$set`, except in Rust.
 
-In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace. In Rust, it has no stack trace. It also carries `$mcp_interface`, `$mcp_server_build`, `$mcp_client_user_agent`, `$mcp_vendor_client`, and `$set`.
+In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace. In Rust, it has no stack trace.
 
 <CalloutBox icon="IconInfo" title="Symbolicating minified MCP servers" type="fyi">
 
