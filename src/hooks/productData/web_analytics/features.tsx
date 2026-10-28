@@ -84,6 +84,10 @@ export const features = {
                 title: 'Session explorer',
                 description: 'Deep dive into individual session attribution details',
             },
+            {
+                title: 'Marketing analytics',
+                description: 'Track campaign costs and performance from Google Ads, Meta, LinkedIn, and more (beta)',
+            },
         ],
     },
     web_vitals: {
@@ -145,10 +149,6 @@ export const features = {
             {
                 title: 'Revenue tracking',
                 description: 'Connect revenue data from events or payment platforms',
-            },
-            {
-                title: 'Marketing analytics',
-                description: 'Track campaign costs and performance from Google Ads, Meta, LinkedIn, and more (beta)',
             },
             {
                 title: 'Active hours heatmap',

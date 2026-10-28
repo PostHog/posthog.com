@@ -268,7 +268,7 @@ const statusTooltipLabel: Record<string, string> = {
 
 const ProductStatusLink = ({ product, className = '' }: { product: any; className?: string }) => {
     if (!product) return null
-    const { Icon, color, name, slug, status } = product
+    const { Icon, color, name, slug, url, status } = product
 
     const content = (
         <>
@@ -303,7 +303,7 @@ const ProductStatusLink = ({ product, className = '' }: { product: any; classNam
 
     return (
         <Link
-            to={`/${slug}`}
+            to={url || `/${slug}`}
             state={{ newWindow: true }}
             className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm !font-medium whitespace-nowrap relative top-0.5 ${className}`}
         >

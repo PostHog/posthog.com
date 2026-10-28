@@ -15,6 +15,8 @@ export const marketingAnalytics = {
     colorSecondary: 'orange',
     category: 'analytics',
     slug: 'web-analytics',
+    // No landing page of its own, so product links go to its docs instead of /web-analytics.
+    url: '/docs/web-analytics/marketing-analytics',
     status: 'beta',
     // Ad platform syncs are billed as Sources (`data_warehouse`) rows.
     billingType: 'data_warehouse',
