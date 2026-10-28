@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Smartlook connector syncs visitors, sessions, event definitions, funnels, and visitor events into the PostHog data warehouse, so you can analyze them alongside your product data.
 
-> **Alpha:** This source is in alpha. If you run into issues, please [let us know](https://app.posthog.com/home#supportModal).
-
 ## Prerequisites
 
 - A Smartlook account with REST API access enabled.
