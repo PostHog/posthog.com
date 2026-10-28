@@ -1920,6 +1920,10 @@ export const handbookSidebar = [
                                 name: 'Data foundations',
                                 url: '/handbook/growth/sales/data-foundations',
                             },
+                            {
+                                name: 'PostHog Sources Datasheet',
+                                url: '/handbook/growth/sales/sources-datasheet',
+                            },
                         ],
                     },
                 ],
