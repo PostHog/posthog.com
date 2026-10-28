@@ -1920,6 +1920,10 @@ export const handbookSidebar = [
                                 name: 'Data foundations',
                                 url: '/handbook/growth/sales/data-foundations',
                             },
+                            {
+                                name: 'Data stack positioning',
+                                url: '/handbook/growth/sales/data-stack-positioning',
+                            },
                         ],
                     },
                 ],
