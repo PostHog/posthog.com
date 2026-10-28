@@ -47,7 +47,7 @@ In the PlanetScale dashboard, open your database and click **Connect** to create
 - **Password**: the password for that role.
 - **Schema**: optional, defaults to `public`.
 
-PlanetScale always connects over TLS, which PostHog uses by default.
+PlanetScale always connects over TLS, which PostHog uses by default. To verify your database's TLS certificate or use a client certificate, see [Verify the server certificate](/docs/data-pipelines/sources/postgres#verify-the-server-certificate) on the Postgres page. The same fields and errors apply.
 
 ## Sync modes
 

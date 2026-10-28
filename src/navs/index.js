@@ -1920,6 +1920,10 @@ export const handbookSidebar = [
                                 name: 'Data foundations',
                                 url: '/handbook/growth/sales/data-foundations',
                             },
+                            {
+                                name: 'Data stack positioning',
+                                url: '/handbook/growth/sales/data-stack-positioning',
+                            },
                         ],
                     },
                 ],
@@ -2591,6 +2595,10 @@ export const docsMenu = {
                     url: '/docs/self-driving/setup',
                 },
                 {
+                    name: 'Security',
+                    url: '/docs/self-driving/security',
+                },
+                {
                     name: 'Apps',
                 },
                 {
@@ -2731,6 +2739,28 @@ export const docsMenu = {
                     url: '/docs/self-driving/from-our-inbox',
                 },
                 {
+                    name: 'Task infrastructure',
+                    url: '/docs/tasks',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/tasks',
+                        },
+                        {
+                            name: 'Security',
+                            url: '/docs/tasks/security',
+                        },
+                        {
+                            name: 'Agent instructions',
+                            url: '/docs/tasks/agent-instructions',
+                        },
+                        {
+                            name: 'Detect a task environment',
+                            url: '/docs/tasks/agent-environment',
+                        },
+                    ],
+                },
+                {
                     name: 'Pricing',
                     url: '/docs/self-driving/pricing',
                 },
@@ -2865,6 +2895,14 @@ export const docsMenu = {
                         {
                             name: 'Go',
                             url: '/docs/libraries/go',
+                        },
+                        {
+                            name: 'Godot',
+                            url: '/docs/libraries/godot',
+                            badge: {
+                                title: 'Experimental',
+                                className: '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50',
+                            },
                         },
                         {
                             name: 'iOS',
@@ -7616,8 +7654,16 @@ export const docsMenu = {
                             url: '/docs/mcp-analytics/installation/ruby',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/mcp-analytics/installation/rust',
+                        },
+                        {
                             name: 'WebMCP',
                             url: '/docs/mcp-analytics/installation/webmcp',
+                        },
+                        {
+                            name: 'Other languages',
+                            url: '/docs/mcp-analytics/installation/other-languages',
                         },
                     ],
                 },

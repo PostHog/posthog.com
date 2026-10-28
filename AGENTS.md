@@ -66,7 +66,7 @@ Complete every item below, then record what you did in the PR description:
 - Sentence casing for headings
 - American English
 - Oxford comma
-- Use relative URLs for internal links (e.g., `/docs/feature-flags` not `https://posthog.com/docs/feature-flags`)
+- Use relative URLs for internal links (e.g. `/docs/feature-flags` not `https://posthog.com/docs/feature-flags`)
 - When writing copy, follow our [writing style guide](@contents/handbook/content/posthog-style-guide.md) and [docs style guide](@contents/handbook/wizard-and-docs/docs-style-guide.md)
 
 ## Detailed guides

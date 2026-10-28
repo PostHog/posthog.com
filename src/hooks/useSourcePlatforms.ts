@@ -1,4 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby'
+import { getSourceDocsPath } from '../lib/sourceDocs'
 
 export default function useSourcePlatforms() {
     const { allPostHogSource } = useStaticQuery(graphql`
@@ -7,6 +8,11 @@ export default function useSourcePlatforms() {
                 nodes {
                     name
                     slug
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                     icon_url
                 }
             }
@@ -15,7 +21,7 @@ export default function useSourcePlatforms() {
 
     return allPostHogSource.nodes.map((node: any) => ({
         label: node.name,
-        url: `/docs/data-pipelines/sources/${node.slug}`,
+        url: getSourceDocsPath(node),
         image: node.icon_url,
     }))
 }

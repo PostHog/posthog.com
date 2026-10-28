@@ -48,7 +48,7 @@ This can largely mirror what goes in our sprint planning, and shouldn't be dupli
 
 ### Early warning signals
 
-These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics.
+These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics. Some of these signals automatically create a Customer Analytics task for the account owner. See [managed customer scouts](/handbook/customer-success/how-we-use-automation#managed-customer-scouts).
 
 | Signal | Why it matters |
 |--------|----------------|
@@ -57,6 +57,8 @@ These aren't emergencies yet, but they should make you pay closer attention. Man
 | Only 1-2 active users | Single point of failure, low organizational buy-in |
 | No Slack activity for 14+ days | Relationship is going cold |
 | Billing page visits without context | They're evaluating costs, possibly shopping around |
+| Low survey score or a complaint in a survey | They told us that something is wrong |
+| Product turned off because of cost | Contraction often comes before churn |
 | Champion changed roles or left | Your internal advocate is gone |
 | Support tickets spiking | Something is broken or frustrating |
 | Single product usage | Low switching cost, easy to replace |

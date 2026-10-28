@@ -72,7 +72,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     alerts: {
         feature: 'Alerts',
-        owner: ['product-analytics'],
+        owner: ['apm'],
     },
     annotations: {
         feature: 'Annotations',

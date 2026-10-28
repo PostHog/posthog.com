@@ -227,39 +227,39 @@ import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-te
 
 When your app evaluates a feature flag, the SDK sends a `$feature_flag_called` event. This section calls these events flag calls. Today, PostHog stores flag calls in the `events` table. We're moving them to a table built for them, `flag_evaluations`, which keeps the last 90 days of flag calls. The move has two steps:
 
-1. **Reads move.** PostHog starts to read flag calls from `flag_evaluations`. PostHog still writes them to the `events` table, so nothing you built stops working. This step starts about a week after we email you.
-2. **Writes move.** PostHog stops writing flag calls to the `events` table. This step starts at least 30 days after we email you.
+1. **Reads move.** PostHog starts to read flag calls from `flag_evaluations`. PostHog still writes them to the `events` table, so nothing you built stops working. This step starts after we email you.
+2. **Writes move.** PostHog stops writing flag calls to the `events` table. This step starts on November 30.
 
 Flag calls [aren't billed](/docs/feature-flags/cutting-costs#understanding-your-bill), so the move doesn't change your bill.
 
 <CalloutBox icon="IconInfo" title="You don't need to do anything yet" type="info">
 
-We'll email you before anything changes. PostHog won't stop writing flag calls to the `events` table for your organization (step 2) until at least 30 days after that email.
+We'll email you before your organization moves. PostHog won't stop writing flag calls to the `events` table (step 2) until November 30.
 
 </CalloutBox>
 
 ### What you can do now
 
-- Don't build new [actions](/docs/data/actions) or [cohorts](/docs/data/cohorts) on `$feature_flag_called`. They can't read the `flag_evaluations` table, so after the move they stop matching new flag calls.
-- If you write [SQL](/docs/sql), the SQL editor warns you when a query reads `$feature_flag_called` from the `events` table.
+- If you write [SQL](/docs/sql) that reads `$feature_flag_called`, list the columns you need instead of `*`, and don't use `SAMPLE` or `FINAL`. After the move, these queries return an error.
+- The SQL editor warns you when a query reads `$feature_flag_called` from the `events` table.
 
 ### What shows flag calls after the move
 
 - A flag's [**Usage** tab](/docs/feature-flags/surfaces/web-app#see-how-a-flag-is-used)
 - The [activity tab](/docs/activity)
 - The event list in [Session Replay](/docs/session-replay)
-- "Feature flag called" series in [insights](/docs/product-analytics/insights)
+- [Insights](/docs/product-analytics/insights), including funnels, on `$feature_flag_called`
+- [Actions](/docs/data/actions) and [cohorts](/docs/data/cohorts) on `$feature_flag_called`
+- [SQL](/docs/sql) and [API](/docs/api/queries) queries that read `$feature_flag_called` from the `events` table
 - [Destinations](/docs/cdp/destinations) and [Workflows](/docs/workflows) triggered by `$feature_flag_called`
 
-After the move, insights on flag calls show at most 90 days.
+After the move, queries on flag calls return at most the last 90 days.
 
 ### What stops showing new flag calls after the move
 
-- [Actions](/docs/data/actions) with a step on `$feature_flag_called`
-- [Cohorts](/docs/data/cohorts) with a criterion on `$feature_flag_called`
-- [SQL](/docs/sql) and [API](/docs/api/queries) queries that read `$feature_flag_called` from the `events` table
 - [Batch exports](/docs/cdp/batch-exports) of the `events` table
-- [Paths](/docs/product-analytics/paths)
+
+[Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, don't include `$feature_flag_called` events.
 
 ## Server-side SDK gotchas
 
