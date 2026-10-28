@@ -28,7 +28,7 @@ PostHog CS leverages several integrated tools to monitor account health and iden
 * [**Zapier**](https://zapier.com/app/home)**:** Used for numerous automations such as:  
   * Renewal reminders  
   * Stale Slack channel notifications  
-  * Billing updates, failed payments
+  * Billing updates
 
 ### **How to surface calls for shared accounts**
 On larger accounts, a TAM and a CSM share ownership. Both need visibility of every customer call, not just the ones they attended.
@@ -46,7 +46,8 @@ Once live, the stream posts each call to the channel after it ends. Everyone wor
 * MRR changes exceeding certain thresholds generate investigation tasks  
 * inactivity periods to flag engagement reviews  
 * New product usage (any amount) creates cross-sell opportunity indicator  
-* Payment failures and low credit balances to send Slack alerts to assigned CSM  
+* Overdue invoices and failed card payments send Slack alerts to the assigned AE, CSM, or TAM (see [failed/late payments](/handbook/growth/sales/billing#failedlate-payments))  
+* Low credit balances send Slack alerts to the assigned CSM  
 * Health score changes can trigger Customer Analytics tasks or PostHog automation  
 * Annual renewal dates trigger preparation workflows in advance and a ping in Slack
 
