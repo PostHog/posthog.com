@@ -48,7 +48,7 @@ This can largely mirror what goes in our sprint planning, and shouldn't be dupli
 
 ### Early warning signals
 
-These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics. Some of these signals automatically create a Customer Analytics task for the account owner. See [company-wide scouts](/handbook/customer-success/how-we-use-automation#company-wide-scouts).
+These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics. Some of these signals automatically create a Customer Analytics task for the account owner. See [managed customer scouts](/handbook/customer-success/how-we-use-automation#managed-customer-scouts).
 
 | Signal | Why it matters |
 |--------|----------------|
