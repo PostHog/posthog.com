@@ -40,17 +40,17 @@ pocketGuideCta:
 
 <AnatomyFigure
     n={2}
-    caption="This follow-up report card lands in your inbox. It shows the scout's claim and triage, and the evidence is inside the report."
+    caption="This follow-up report card lands in Twig's inbox. It shows the scout's claim and triage, and the evidence is inside the report."
     priority="P2"
     status="Ready"
     actionability="Actionable"
-    headline="A day after twig/web#4891 merged, the Trip details TypeError fired 296 times for 38 guests, against 312 times for 41 guests the day before"
+    headline="A day after twig.com#4891 merged, the Trip details TypeError fired 296 times for 38 guests, against 312 times for 41 guests the day before"
     report={{
         title: 'Trip details TypeError still fires at its pre-fix rate a day after the fix merged',
         source: 'Scout · inbox validation',
         receivedAgo: '2h',
         affected: '38 guests · 296 exceptions in 24 hours',
-        body: "Follow-up to the resolved report **Trip details fails after a guest books a stay**. Its fix, twig/web#4891, merged yesterday at 10:30 and passed the loaded host records to `readTripHost` when Trip details loads.\n\nIn the 24 hours after the merge, the issue fired 296 times for 38 guests. In the 24 hours before, it fired 312 times for 41 guests. Trip details sessions held steady across both windows.\n\nEvery stack trace since the merge reaches `readTripHost` from the **Try again** path, which still calls `readTripHost({}, stay.hostId)`. The pull request didn't change that path.",
+        body: "Follow-up to the resolved report **Trip details fails after a guest books a stay**. Its fix, twig.com#4891, merged yesterday at 10:30 and passed the loaded host records to `readTripHost` when Trip details loads.\n\nIn the 24 hours after the merge, the issue fired 296 times for 38 guests. In the 24 hours before, it fired 312 times for 41 guests. Trip details sessions held steady across both windows.\n\nEvery stack trace since the merge reaches `readTripHost` from the **Try again** path, which still calls `readTripHost({}, stay.hostId)`. The pull request didn't change that path.",
         suggestedAction: 'Pass the loaded host records on the **Try again** path too, so it calls `readTripHost(hosts, stay.hostId)` like the first load.',
         actionNote: 'An agent opens the pull request – you review and merge.',
     }}
@@ -62,7 +62,7 @@ pocketGuideCta:
 
 # Check whether the fix held
 
-A merged fix doesn't always stop the error. The Inbox validation scout checks each fix once it has reached guests, and reports the fixes that didn't hold. Some browsers keep running the old code for a while, so the scout waits and compares rates before it reports.
+The Inbox validation scout checks each fix once it has reached guests, and reports the fixes that didn't hold. It waits and compares rates first, because some browsers keep running the old code for a while.
 
 ## What the scout looks at
 
@@ -74,11 +74,7 @@ A fix that didn't hold becomes a new <Term name="report" /> in the team's <Term 
 
 ## The scout itself
 
-PostHog maintains this scout, listed as **Inbox validation** in the project's scouts, and anyone can read [its skill file on GitHub](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-inbox-validation/SKILL.md). It waits 24 hours after the merge for a server fix, and 72 hours or more for web and mobile. Then it compares the issue's exceptions and affected users with the same window before the merge. It also checks Twig's overall traffic, so a quiet weekend doesn't pass for a fix. For a fix no report links to, the [PR follow-up](/learn/error-tracking/pocket-guide/what-changed) scout runs the same check.
-
-## The schedule it runs on
-
-The scout runs every 24 hours by default, but stays quiet unless something needs the team's attention. The engineers change the schedule in its **Settings**.
+PostHog maintains this scout, listed as **Inbox validation** in the project's scouts. Its [skill file](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-inbox-validation/SKILL.md) is on GitHub. It waits 24 hours after the merge for a server fix, and 72 hours or more for web and mobile. Then it compares the issue's exceptions and affected users with the same window before the merge. It also checks Twig's overall traffic, so a quiet weekend doesn't pass for a fix. For a fix no report links to, the [PR follow-up](/learn/error-tracking/pocket-guide/deploy-regressions) scout runs the same check. It runs every 24 hours by default and stays quiet unless something needs the team's attention.
 
 ## Add this to your scout troop
 

@@ -4,14 +4,14 @@
 # <Enable />, <Watches />, <ScoutFigure />, and <DetailFigure /> only render under
 # /docs/self-driving/pocket-guide/, so this page names the scout's sources in prose, writes the
 # report inline on <AnatomyFigure />, and sends the reader to the self-driving chapter to add it.
-title: Find the errors your paying hosts hit
-shortTitle: Errors by host value
+title: Find the errors Twig's paying hosts hit
+shortTitle: Errors in paying hosts
 subtitle: Which issues are Twig's paying hosts hitting?
 pocketGuideOrder: 9
 section: Self-drive
 pocketGuideCta:
   kind: link
-  label: Open the errors by account value scout
+  label: Open the scout
   href: /docs/self-driving/pocket-guide/errors-your-best-accounts-hit
   note: A scout that checks your issues every day and reports the ones concentrated in paying accounts.
 ---
@@ -45,14 +45,14 @@ pocketGuideCta:
 
 <AnatomyFigure
     n={2}
-    caption="The report card in your inbox. The claim is on the card, and the accounts and the comparison are inside the report."
+    caption="The report card in Twig's inbox. The claim is on the card, and the hosts and the comparison are inside the report."
     priority="P1"
     status="Ready"
     actionability="Actionable"
     headline="Four paying hosts carry 71% of one issue and get 9% of Twig's traffic. The issue isn't in the top ten by occurrences"
     report={{
         title: 'One issue is 71% concentrated in four paying hosts',
-        source: 'Scout · errors by account value',
+        source: 'Scout · errors in paying hosts',
         receivedAgo: '3h',
         affected: '4 paying hosts · 71% of the issue',
         body: '`TypeError: Cannot read properties of null` fired 2,340 times this week on the stays of 31 hosts. Four of them carry 71% of those exceptions while getting 9% of Twig\'s traffic, and all four carry a Stripe customer ID.\n\nThe issue does not rank in the top ten by occurrences. The top issue is a retry loop in one guest\'s browser, which fired more exceptions this week than all four paying hosts combined.',
@@ -65,15 +65,15 @@ pocketGuideCta:
 
 <RightPage>
 
-# Find the errors your paying hosts hit
+# Find the errors Twig's paying hosts hit
 
-Twig's hosts pay a monthly fee. An issue that keeps hitting a few paying hosts can hide below one guest's retry loop in the issue list, so the engineers add a custom scout that reports <Term name="issue">issues</Term> concentrated in paying hosts.
+Twig's hosts pay a monthly fee. This custom scout reports <Term name="issue">issues</Term> concentrated in paying hosts, even when they rank low by occurrences.
 
 ## What the scout looks at
 
 `TypeError: Cannot read properties of null` fired 2,340 times this week on the stays of 31 hosts. Four of them pay for Twig's top plan and get 9% of its traffic, but they carry 71% of the issue, so the scout reports it <SeeFig n={1} />. An issue spread evenly across hosts gets no report.
 
-The scout skips issues driven by one browser retrying. The [spikes and stuck loops](/learn/error-tracking/pocket-guide/errors-as-signals) scout covers those.
+The scout skips issues driven by one browser retrying. The [spikes and stuck loops](/learn/error-tracking/pocket-guide/spikes-and-stuck-loops) scout covers those.
 
 ## The report in your inbox
 
@@ -81,11 +81,7 @@ The <Term name="report" /> names the issue and the hosts, with each host's share
 
 ## The scout itself
 
-This is a custom scout, and its file is in the [Self-driving pocket guide](/docs/self-driving/pocket-guide/errors-your-best-accounts-hit). With [group analytics](/docs/product-analytics/group-analytics), each `$exception` <Term name="event" /> carries the host of the stay. The scout compares each host's share of an issue with its share of Twig's traffic over the last seven days. It checks which hosts pay by their [Stripe](/docs/data-pipelines/sources/stripe) customer ID in Customer analytics. It only reports issues that fired in the last 24 hours. [Querying exceptions](/learn/error-tracking/pocket-guide/querying-exceptions#rank-issues-by-bookings-at-risk) shows the same join.
-
-## The schedule it runs on
-
-The scout runs every 24 hours by default, but stays quiet unless something needs the team's attention. The engineers change the schedule in its **Settings**.
+This is a custom scout, and its file is in the [Self-driving pocket guide](/docs/self-driving/pocket-guide/errors-your-best-accounts-hit). With [group analytics](/docs/product-analytics/group-analytics), each `$exception` <Term name="event" /> carries the host of the stay. The scout compares each host's share of an issue with its share of Twig's traffic over the last seven days. It checks which hosts pay by their [Stripe](/docs/data-pipelines/sources/stripe) customer ID in Customer analytics. It only reports issues that fired in the last 24 hours. [Querying exceptions](/learn/error-tracking/pocket-guide/querying-exceptions#rank-issues-by-bookings-at-risk) shows the same join. It runs every 24 hours by default and stays quiet unless something needs the team's attention.
 
 ## Add this to your scout troop
 

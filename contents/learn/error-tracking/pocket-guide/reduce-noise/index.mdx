@@ -72,7 +72,7 @@ Local development environments are especially noisy, and many of the exceptions 
 
 ## Drop browser errors with before_send
 
-The browser throws `ResizeObserver loop` errors that the engineers can't fix. They drop them in Twig with the SDK's `before_send` hook, which runs before the SDK sends anything. It returns `null` to drop an exception, or edits its properties to redact sensitive data:
+The engineers drop the browser's `ResizeObserver loop` errors in Twig with the SDK's `before_send` hook, which runs before the SDK sends anything. It returns `null` to drop an exception, or edits its properties to redact sensitive data:
 
 ```js
 posthog.init('<ph_project_token>', {
@@ -92,17 +92,17 @@ The <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/cont
 
 ## Stop looping browsers with burst protection
 
-A bug that loops in one guest's browser can throw the same exception over and over. The <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/libraries/js) and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Node.js](/docs/libraries/node) SDKs stop that with burst protection: a client sends 10 autocaptured exceptions of one type, then 1 every 10 seconds. It's on by default.
+Burst protection in the <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/libraries/js) and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Node.js](/docs/libraries/node) SDKs keeps a bug that loops in one guest's browser from flooding the project: a client sends 10 autocaptured exceptions of one type, then 1 every 10 seconds. It's on by default.
 
 Burst protection only runs in those two SDKs, in the client. To cap volume from every SDK, the engineers use [rate limits](#cap-outages-with-rate-limits).
 
 ## Drop extension errors with a suppression rule
 
-Errors from guests' browser extensions land in Twig's issue list too. They add a suppression rule in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-suppression-rules) that drops future exceptions matching its filters, like the exception type or message <SeeFig n={1} />. PostHog applies rules at ingestion, and some SDKs apply them in the app too.
+The engineers add a suppression rule in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-suppression-rules) for errors from guests' browser extensions. It drops future exceptions that match its filters, like the exception type or message <SeeFig n={1} />. PostHog applies rules at ingestion, and some SDKs apply them in the app too.
 
 ## Cap outages with rate limits
 
-During an outage, one broken page can flood Twig's project. Rate limits cap how many exceptions PostHog ingests in a window of 15 minutes, 30 minutes, or an hour. The engineers set a per-issue limit, so one noisy issue can't use up the whole project's limit. A project-wide limit caps the project's total volume.
+Rate limits cap how many exceptions PostHog ingests during an outage, in a window of 15 minutes, 30 minutes, or an hour. The engineers set a per-issue limit, so one noisy issue can't use up the whole project's limit. A project-wide limit caps the project's total volume.
 
 Bypass rules let critical exceptions skip both limits. PostHog still bills the exceptions they let through.
 

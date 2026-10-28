@@ -57,7 +57,7 @@ pocketGuideCta:
 
 # Catch error spikes and stuck loops
 
-Twig's engineers can't read every alert. This <Term name="scout" /> reports error spikes and ranks them by how many guests they affect. Sorted by occurrences alone, a few browsers stuck in a retry loop can rank above a bug that breaks booking for hundreds of guests.
+This <Term name="scout" /> reports error spikes and ranks them by how many guests they affect. A bug that breaks booking for hundreds of guests ranks above a few browsers stuck in a retry loop.
 
 ## What the scout looks at
 
@@ -75,11 +75,7 @@ Each spike becomes a <Term name="report" /> in the team's <Term name="inbox" />,
 
 ## The scout itself
 
-PostHog maintains this scout, listed as **Error tracking** in the project's scouts, and anyone can read [its skill file on GitHub](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md). Each run queries Twig's issues and `$exception` events through the [PostHog MCP](/learn/error-tracking/agent-prompts-and-mcp), and checks its notes and the team's inbox so it doesn't report the same spike twice.
-
-## The schedule it runs on
-
-The scout runs every 24 hours by default, but stays quiet unless something needs the team's attention. The engineers change the schedule in its **Settings**.
+PostHog maintains this scout, listed as **Error tracking** in the project's scouts. Its [skill file](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-error-tracking/SKILL.md) is on GitHub. Each run queries Twig's issues and `$exception` events through the [PostHog MCP](/learn/error-tracking/agent-prompts-and-mcp), and checks its notes and the team's inbox so it doesn't report the same spike twice. It runs every 24 hours by default and stays quiet unless something needs the team's attention.
 
 ## Add this to your scout troop
 

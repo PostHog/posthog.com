@@ -33,17 +33,17 @@ pocketGuideCta:
 
 <AnatomyFigure
     n={2}
-    caption="This report card lands in your inbox. It shows the scout's claim and triage, and the evidence is inside the report."
+    caption="This report card lands in Twig's inbox. It shows the scout's claim and triage, and the evidence is inside the report."
     priority="P2"
     status="Ready"
     actionability="Actionable"
-    headline="A new TypeError on Trip details started with the 1.4.2 deploy. Its top frame is in a file twig/web#4877 changed"
+    headline="A new TypeError on Trip details started with the 1.4.2 deploy. Its top frame is in a file twig.com#4877 changed"
     report={{
-        title: 'New Trip details TypeError since the 1.4.2 deploy, thrown from a file twig/web#4877 changed',
+        title: 'New Trip details TypeError since the 1.4.2 deploy, thrown from a file twig.com#4877 changed',
         source: 'Scout · PR follow-up',
         receivedAgo: '2h',
         affected: '31 guests, 47 sessions in 6 hours',
-        body: "twig/web#4877, \"Move the trip host lookup into readTripHost\" by @dana, merged at 08:41 and went live at 09:10 with release 1.4.2 (GitHub deployment to production). Its description calls it a refactor with no change in behavior.\n\nA new issue, `TypeError: Cannot read properties of undefined (reading 'name')`, was first seen at 09:14. Its top frame is `readTripHost` in `src/trips/trip-details.ts`, and #4877 changed that file and added the call `readTripHost({}, stay.hostId)`. In the 6 hours since the deploy, it fired in 47 sessions for 31 guests. In the 6 hours before the merge, it didn't fire at all, and Trip details sessions held steady across both windows.\n\nThe deploy carried four other pull requests. None of them changed a file in this stack trace.",
+        body: "twig.com#4877, \"Move the trip host lookup into readTripHost\" by @dana, merged at 08:41 and went live at 09:10 with release 1.4.2 (GitHub deployment to production). Its description calls it a refactor with no change in behavior.\n\nA new issue, `TypeError: Cannot read properties of undefined (reading 'name')`, was first seen at 09:14. Its top frame is `readTripHost` in `src/trips/trip-details.ts`, and #4877 changed that file and added the call `readTripHost({}, stay.hostId)`. In the 6 hours since the deploy, it fired in 47 sessions for 31 guests. In the 6 hours before the merge, it didn't fire at all, and Trip details sessions held steady across both windows.\n\nThe deploy carried four other pull requests. None of them changed a file in this stack trace.",
         suggestedAction: 'Pass the loaded host records with `readTripHost(hosts, stay.hostId)`, or roll back #4877 while the fix is written.',
         actionNote: 'An agent opens the pull request – you review and merge.',
     }}
@@ -55,11 +55,11 @@ pocketGuideCta:
 
 # Connect a deploy to an error burst
 
-Twig ships several times a day, and a new error often starts with a deploy. The PR follow-up scout ties a new <Term name="issue" /> after a deploy to the pull request that likely caused it, so the engineers don't read each pull request against the <Term name="stack trace" />.
+Twig ships several times a day. The PR follow-up scout ties a new <Term name="issue" /> after a deploy to the pull request that likely caused it, by matching its <Term name="stack trace" /> against the files each pull request changed.
 
 ## What the scout looks at
 
-Twig's release 1.4.2 went out at 09:10 with five pull requests. Four minutes later, a new `TypeError` started firing on **Trip details** <SeeFig n={1} />. Its stack frames are in a file one of those pull requests changed, so the scout reports it against that pull request. A new issue with no frames in changed files goes to the [spikes and stuck loops](/learn/error-tracking/pocket-guide/errors-as-signals) scout instead.
+Twig's release 1.4.2 went out at 09:10 with five pull requests. Four minutes later, a new `TypeError` started firing on **Trip details** <SeeFig n={1} />. Its stack frames are in a file one of those pull requests changed, so the scout reports it against that pull request. A new issue with no frames in changed files goes to the [spikes and stuck loops](/learn/error-tracking/pocket-guide/spikes-and-stuck-loops) scout instead.
 
 An older issue counts too if it reopens or fires at a clearly higher rate after the deploy.
 
@@ -69,11 +69,7 @@ The <Term name="report" /> names the pull request, its author, merge time, and d
 
 ## The scout itself
 
-PostHog maintains this scout, and anyone can read [its skill file on GitHub](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-pr-follow-up/SKILL.md). It waits for each merged pull request to deploy. Then it matches the stack frames of issues that started in the deploy window against the files the pull request changed. It reads deploy times from GitHub deployments, GitHub releases, or deploy annotations. Without one, it estimates 24 hours after the merge for server code, and 72 hours or more for web and mobile.
-
-## The schedule it runs on
-
-The scout runs on the schedule the engineers set in its **Settings**, but stays quiet unless something needs the team's attention. Each run judges about eight pull requests.
+PostHog maintains this scout. Its [skill file](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-pr-follow-up/SKILL.md) is on GitHub. It waits for each merged pull request to deploy. Then it matches the stack frames of issues that started in the deploy window against the files the pull request changed. It reads deploy times from GitHub deployments, GitHub releases, or deploy annotations. Without one, it estimates 24 hours after the merge for server code, and 72 hours or more for web and mobile. It runs on the schedule the engineers set in its **Settings**, checks about eight pull requests each run, and stays quiet unless something needs the team's attention.
 
 ## Add this to your scout troop
 
