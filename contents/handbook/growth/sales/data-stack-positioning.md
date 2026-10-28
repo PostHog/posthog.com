@@ -68,7 +68,7 @@ No new tools to buy. Orchestration, a warehouse, complex modeling and activation
 
 ### Common use cases
 
-Lead discussions with finding out what questions a user is asking their data, if these questions can't be answered without connecting an external data source to PostHog data, thats the opening to the rest of the data stack.
+Lead discussions with finding out what questions a user is asking their data, if these questions can't be answered without connecting an external data source to PostHog data, that's the opening to the rest of the data stack.
 
 | Who | Question they're asking | Data it needs |
 |-----|----------|---------------|
