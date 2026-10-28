@@ -70,15 +70,26 @@ If this is a new contract for an existing customer, you will need to add their e
 We define late payments as follows:
 
 1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
-2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
+2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  After 4 failed payments we will stop attempting to take further payments.
 
-In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
+In either of the above scenarios the account owner needs to take action to ensure that payment is made. The account owners are the AE, CSM, and TAM in <PrivateLink url='https://us.posthog.com/project/2/customer_analytics/accounts'>Customer Analytics</PrivateLink>. If the account has no owner, <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
 
 You can find a list of failed and overdue payments <PrivateLink url='https://us.posthog.com/project/2/insights/qEt5N1xg'>in PostHog</PrivateLink>
 
+#### Automated reminders and alerts
+
+PostHog Workflows send these messages for you. Do not send the same reminder yourself.
+
+- **Payment reminders:** For an open invoice that the customer pays by bank transfer, the customer gets an email 7 days and 3 days before the due date. The email comes from collections@posthog.com and goes to the billing contacts in Stripe. The account owners are in CC.
+- **Overdue alerts:** An alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> tags the account owners at 09:00 UTC on days 1, 6, 7, 13, and 14. These are steps 1 to 5 below. Each alert tells you what to do, and links to this process, the Stripe invoice, and the customer payment page. If the customer already paid or agreed a different date, reply in the alert thread so the team knows.
+  - For an invoice that the customer pays by bank transfer, day 0 is the due date.
+  - For a card payment, day 0 is the first failed payment. We send this alert only if the account has an owner.
+
+The reminders and alerts stop when the customer pays. They only go to accounts that are tracked in Customer Analytics, not ignored.
+
 #### Step 1 - On the day their payment becomes late
 
-As the account owner you will be assigned a risk indicator in Vitally, as well as being tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>.  For unmanaged accounts with a failed payment of $1500 or more Simon and Dana are tagged instead.
+As the account owner, you are tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>. If the account has no owner, the alert tags <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> instead.
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 

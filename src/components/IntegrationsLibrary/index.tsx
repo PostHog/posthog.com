@@ -65,6 +65,11 @@ export default function IntegrationsLibrary(): JSX.Element {
                 nodes {
                     name
                     slug
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                     icon_url
                     unreleased
                 }

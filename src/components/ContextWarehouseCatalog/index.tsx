@@ -34,7 +34,7 @@ const catalogSections: {
                 name: 'Warehouse',
                 description:
                     'Store, query, and join your product and business data in one place without maintaining any infrastructure.',
-                url: '/context-warehouse/warehouse',
+                url: '/warehouse',
                 Icon: IconDatabase,
                 iconColor: 'text-purple',
             },

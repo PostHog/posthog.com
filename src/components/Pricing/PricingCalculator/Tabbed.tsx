@@ -149,6 +149,7 @@ export const TabContent = ({
     const [showBreakdown, setShowBreakdown] = useState(false)
     const freeAmount = freeLimit || slider?.min
     const unitLabel = pluralizeUnit(billingData.unit, 2)
+    const isAIObservability = type === 'ai_observability'
 
     return (
         <>
@@ -164,8 +165,12 @@ export const TabContent = ({
                 }) ||
                     (activeProduct.billedWith ? (
                         <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-2 text-sm">
-                            {activeProduct.name} is currently bundled with {activeProduct.billedWith} and shares a free
-                            tier and volume pricing.
+                            {activeProduct.billingDescription || (
+                                <>
+                                    {activeProduct.name} is currently bundled with {activeProduct.billedWith} and shares
+                                    a free tier and volume pricing.
+                                </>
+                            )}
                         </div>
                     ) : activeProduct.addonSliders || activeProduct.retention ? (
                         <StandaloneAddonsTab
@@ -182,7 +187,9 @@ export const TabContent = ({
                                         <UsageSliderRow
                                             label={unitLabel}
                                             subtitle={
-                                                startsAt
+                                                isAIObservability
+                                                    ? 'Includes online evaluations and offline evaluation metric results'
+                                                    : startsAt
                                                     ? `$${startsAt} each${afterFirstFree(
                                                           freeAmount,
                                                           billingData.unit,
@@ -879,7 +886,9 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
                                 <div className="w-full">
                                     <div className="flex items-center gap-2.5 justify-between">
                                         <h3 className="m-0 leading-none">
-                                            {activeProduct.categoryName || activeProduct.name}
+                                            {activeProduct.type === 'ai_observability'
+                                                ? 'AI observability'
+                                                : activeProduct.categoryName || activeProduct.name}
                                         </h3>
                                         <button
                                             type="button"

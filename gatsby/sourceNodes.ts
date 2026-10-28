@@ -11,6 +11,7 @@ import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
+import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
 
@@ -557,7 +558,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const statsFor = async (forumTag: string | null) => {
             const questionTagFilter = forumTag
-                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: 'questions' } } } }
+                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } } }
                 : {}
             const replyTagFilter = forumTag ? { question: questionTagFilter } : {}
 
@@ -579,7 +580,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         try {
             const tagsQuery = qs.stringify(
                 {
-                    filters: { topic: { slug: { $eq: 'questions' } } },
+                    filters: { topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } },
                     fields: ['slug'],
                     pagination: { pageSize: 100 },
                 },

@@ -37,8 +37,7 @@ import { InlineSearch } from 'components/Search/InlineSearch'
 import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
-import { PANEL_BG, WINDOW_SCHEME, WINDOW_TINT } from '../../constants/frostedSurfaces'
-import FrostedBackdrop from 'components/FrostedBackdrop'
+import { PANEL_BG } from '../../constants/frostedSurfaces'
 import { useWindow } from '../../context/Window'
 import { MenuItem, useApp } from '../../context/App'
 import { useActiveFeatureFlags, filterMenuByFlags } from '../../hooks/useActiveFeatureFlags'
@@ -211,21 +210,6 @@ const backgroundImageOptions: (BackgroundImageOption & ToggleOption)[] = [
 
 const SCROLL_EDGE_FADE_MASK =
     '[mask-image:linear-gradient(to_bottom,transparent_0,black_2rem,black_calc(100%_-_2rem),transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_1rem,black_calc(100%_-_1rem),transparent_100%)]'
-
-const FrostedScrollEdges = () => (
-    <>
-        <FrostedBackdrop
-            className="inset-x-0 top-0 h-8 [mask-image:linear-gradient(to_bottom,black,transparent)] [-webkit-mask-image:linear-gradient(to_bottom,black,transparent)]"
-            tintClassName={WINDOW_TINT}
-            dataScheme={WINDOW_SCHEME}
-        />
-        <FrostedBackdrop
-            className="inset-x-0 bottom-0 h-8 [mask-image:linear-gradient(to_top,black,transparent)] [-webkit-mask-image:linear-gradient(to_top,black,transparent)]"
-            tintClassName={WINDOW_TINT}
-            dataScheme={WINDOW_SCHEME}
-        />
-    </>
-)
 
 const ContributorsSmall = ({ contributors }) => {
     return contributors?.[0] ? (
@@ -685,7 +669,7 @@ const SidebarSearchResults = ({
         }
         const matches = extractOnPageMatches(contentRef.current, searchQuery)
         setOnPageMatches(matches.slice(0, 20))
-    }, [searchQuery])
+    }, [searchQuery, currentPath])
 
     useEffect(() => {
         if (!searchQuery || searchQuery.length < 2) {
@@ -1204,9 +1188,9 @@ const LeftSidebar = ({
                     // On mobile the panel is always an overlay drawer above the
                     // content; it just slides off-screen when closed.
                     mobile
-                        ? `z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG} ${mobileOpen ? '' : 'pointer-events-none'}`
                         : !isPinned && expanded
-                        ? `z-50 shadow-2xl ${PANEL_BG}`
+                        ? `reader-panel-overlay z-50 shadow-2xl ${PANEL_BG}`
                         : 'z-30'
                 }`}
             >
@@ -1716,7 +1700,11 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
+                            <InlineSearch
+                                contentRef={onSearch ? undefined : contentRef}
+                                onSearch={onSearch}
+                                currentPath={appWindow?.path}
+                            />
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}
@@ -1775,7 +1763,6 @@ function ReaderViewContent({
                             dataScheme="primary"
                             isScrollRoot={focusedWindow === appWindow}
                             className={`flex-1 min-w-0 min-h-0 relative ${isMobile ? '' : SCROLL_EDGE_FADE_MASK}`}
-                            overlay={isMobile && <FrostedScrollEdges />}
                         >
                             <article
                                 className={`reader-view-content-container @container/reader-content-container ${getProseClasses(

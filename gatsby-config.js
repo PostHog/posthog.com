@@ -210,7 +210,7 @@ module.exports = {
                 background_color: '#E5E7E0',
                 theme_color: '#E5E7E0',
                 display: 'minimal-ui',
-                icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
+                icon: 'src/images/posthog-icon-white.svg',
             },
         },
         `gatsby-plugin-postcss`,

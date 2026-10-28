@@ -8,6 +8,8 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 - **Code-based (Hog)** – Runs deterministic code you write against each generation, returning a pass/fail result, a numeric score, or categories. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
 - **Sentiment analysis** – Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Great for monitoring how users feel during conversations with your AI features. Free to run with no LLM cost.
 
+This page covers online evaluations and backfills. To test changes before they reach production, see [offline evals](/docs/ai-evals/offline-evals).
+
 ## Why use evaluations?
 
 - **Monitor output quality at scale** – Automatically check if generations are helpful, relevant, or safe without manual review.
@@ -409,6 +411,8 @@ You can also filter generations by evaluation results or create [insights](/docs
 ## Evaluating past data
 
 An evaluation only grades data captured after you create it. To apply one to data you already have, run a **backfill** from the **Backfills** tab on the evaluation.
+
+Backfills use your existing live data. To test changes before they reach production, use [offline evaluations](/docs/ai-evals/offline-evals) instead.
 
 A backfill covers whatever the evaluation targets: generations, traces, or sessions.
 

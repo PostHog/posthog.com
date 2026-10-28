@@ -144,6 +144,10 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
+        },
+        {
+            "source": "/:path(.*)\\.md",
+            "destination": "/api/md-not-found?path=:path"
         }
     ],
     "redirects": [
@@ -297,33 +301,48 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/data-warehouse/pocket-guide",
+            "destination": "/learn/warehouse/pocket-guide",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/pocket-guide.md",
+            "destination": "/learn/warehouse/pocket-guide.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/pocket-guide/:path*",
+            "destination": "/learn/warehouse/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/pocket-guides/data-stack",
-            "destination": "/docs/data-warehouse/pocket-guide",
+            "destination": "/learn/warehouse/pocket-guide",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/data-stack.md",
-            "destination": "/docs/data-warehouse/pocket-guide.md",
+            "destination": "/learn/warehouse/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/data-stack/:path*",
-            "destination": "/docs/data-warehouse/pocket-guide/:path*",
+            "destination": "/learn/warehouse/pocket-guide/:path*",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse",
-            "destination": "/docs/data-warehouse/pocket-guide",
+            "destination": "/learn/warehouse/pocket-guide",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse.md",
-            "destination": "/docs/data-warehouse/pocket-guide.md",
+            "destination": "/learn/warehouse/pocket-guide.md",
             "statusCode": 301
         },
         {
             "source": "/pocket-guides/context-warehouse/:path*",
-            "destination": "/docs/data-warehouse/pocket-guide/:path*",
+            "destination": "/learn/warehouse/pocket-guide/:path*",
             "statusCode": 301
         },
         {
@@ -346,6 +365,14 @@
         {
             "source": "/blog/posthog-vs-fullstory",
             "destination": "/compare/posthog-vs-fullstory"
+        },
+        {
+            "source": "/blog/posthog-vs-sentry",
+            "destination": "/compare/posthog-vs-sentry"
+        },
+        {
+            "source": "/blog/best-sentry-alternatives",
+            "destination": "/compare/best-sentry-alternatives"
         },
         {
             "source": "/blog/posthog-vs-growthbook",
@@ -596,6 +623,10 @@
             "destination": "/compare/best-product-analytics-tools-for-startups"
         },
         {
+            "source": "/blog/best-open-source-analytics-tools",
+            "destination": "/compare/best-open-source-analytics-tools"
+        },
+        {
             "source": "/blog/best-real-time-analytics-platforms",
             "destination": "/compare/best-real-time-analytics-platforms"
         },
@@ -642,7 +673,7 @@
         },
         {
             "source": "/docs/posthog-desktop/ai-generated-content:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop/settings#ai-generated-content",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
@@ -1179,6 +1210,106 @@
             "statusCode": 301
         },
         {
+            "source": "/docs/posthog-desktop/skills:ext(\\.md)?",
+            "destination": "/docs/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/self-driving:ext(\\.md)?",
+            "destination": "/docs/self-driving/inbox:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/git-github-integration:ext(\\.md)?",
+            "destination": "/docs/libraries/github:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/mcp-servers:ext(\\.md)?",
+            "destination": "/docs/model-context-protocol:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop:ext(\\.md)?",
+            "destination": "/docs/self-driving:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/:path(.*).md",
+            "destination": "/docs/self-driving.md",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-desktop/:path*",
+            "destination": "/docs/self-driving",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/ai-observability/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/ai-observability/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-pipelines/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/data-pipelines/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/data-warehouse/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/data-warehouse/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/endpoints/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/endpoints/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/error-tracking/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/error-tracking/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/experiments/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/experiments/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/feature-flags/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/feature-flags/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/logs/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/logs/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/mcp-analytics/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/mcp-analytics/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/product-analytics/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/product-analytics/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/session-replay/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/session-replay/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/surveys/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/surveys/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/web-analytics/surfaces/desktop:ext(\\.md)?",
+            "destination": "/docs/web-analytics/surfaces/web-app:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/start-here:ext(\\.md)?",
             "destination": "/docs/self-driving:ext?",
             "statusCode": 301
@@ -1429,7 +1560,7 @@
         },
         {
             "source": "/docs/posthog-code/quick-tour:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop:ext?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
@@ -1558,17 +1689,22 @@
         },
         {
             "source": "/docs/posthog-code/download-posthog-code:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop/download-posthog-desktop:ext?",
+            "destination": "/docs/self-driving:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code:ext(\\.md)?",
-            "destination": "/docs/posthog-desktop:ext?",
+            "destination": "/docs/self-driving:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/posthog-code/:path(.*).md",
+            "destination": "/docs/self-driving.md",
             "statusCode": 301
         },
         {
             "source": "/docs/posthog-code/:path*",
-            "destination": "/docs/posthog-desktop/:path*",
+            "destination": "/docs/self-driving",
             "statusCode": 301
         },
         {
@@ -2732,6 +2868,10 @@
         },
         {
             "source": "/docs/migrate/migrate-between-cloud-and-self-hosted:ext(\\.md)?",
+            "destination": "/docs/migrate/migrate-to-cloud:ext?"
+        },
+        {
+            "source": "/docs/migrate/migrate-between-posthog-instances:ext(\\.md)?",
             "destination": "/docs/migrate/migrate-to-cloud:ext?"
         },
         {
@@ -6425,6 +6565,11 @@
             "destination": "/handbook/growth/sales/reverse-demo-calls"
         },
         {
+            "source": "/handbook/cs-and-onboarding/:path*",
+            "destination": "/handbook/customer-success/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
             "destination": "/data-stack"
         },
@@ -6748,7 +6893,7 @@
         },
         {
             "source": "/data-stack/managed-warehouse",
-            "destination": "/context-warehouse/warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-stack/:path*",
@@ -6756,7 +6901,11 @@
         },
         {
             "source": "/context-warehouse/managed-warehouse",
-            "destination": "/context-warehouse/warehouse"
+            "destination": "/warehouse"
+        },
+        {
+            "source": "/context-warehouse/warehouse",
+            "destination": "/warehouse"
         },
         {
             "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
@@ -6923,6 +7072,16 @@
         {
             "source": "/docs/cdp/:path*",
             "destination": "/docs/data-pipelines/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/business-knowledge/requirements:ext(\\.md)?",
+            "destination": "/docs/business-knowledge/ai-data-processing:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/business-knowledge/start:ext(\\.md)?",
+            "destination": "/docs/business-knowledge/start-here:ext?",
             "statusCode": 301
         }
     ]

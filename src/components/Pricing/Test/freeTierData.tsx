@@ -91,7 +91,7 @@ export const freeTierProducts: FreeTierProduct[] = [
     },
     {
         name: 'AI Observability',
-        allocation: '100K events',
+        allocation: '100K events/month, shared with evaluations',
         icon: Icons.IconLlmAnalytics,
         iconColor: 'text-purple',
     },

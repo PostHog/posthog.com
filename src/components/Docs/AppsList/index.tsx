@@ -9,7 +9,6 @@ const docsUrlOverrides: Record<string, string> = {
     realtime_destinations: '/docs/data-pipelines/destinations',
     posthog_ai: '/docs/posthog-ai',
     inbox: '/docs/self-driving/inbox',
-    posthog_code: '/docs/posthog-desktop',
     llm_evals: '/docs/ai-evals',
 }
 
@@ -24,10 +23,11 @@ interface AppsListProps {
 // stays in sync with the real product lineup instead of scraping the docs nav.
 export const AppsList = ({ className = '' }: AppsListProps): JSX.Element => {
     const { products } = useProducts()
+    const docsProducts = products.filter((product) => product.handle !== 'posthog_code')
 
     return (
         <div data-scheme="primary" className={`columns-2 @md:columns-3 @2xl:columns-4 gap-x-8 ${className}`}>
-            {products.map((product: any) => {
+            {docsProducts.map((product: any) => {
                 const Icon = product.Icon
                 return (
                     <Link

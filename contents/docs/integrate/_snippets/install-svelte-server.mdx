@@ -4,21 +4,29 @@ import InstallNodePackageManagers from "./install-node-package-managers.mdx"
 
 <InstallNodePackageManagers />
 
-Then, initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [load function](https://kit.svelte.dev/docs/load#page-data):
+Create one client in a server-only module. Import this client from your server hooks, load functions, and tracing setup:
 
-```js file=routes/+page.server.js
+```js file=src/lib/server/posthog.js
 import { PostHog } from 'posthog-node';
 
-export async function load() {
-  const posthog = new PostHog('<ph_project_token>', { host: '<ph_client_api_host>' });
+export const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+});
+```
 
+For example, capture an event from a [load function](https://svelte.dev/docs/kit/load):
+
+```js file=src/routes/+page.server.js
+import { posthog } from '$lib/server/posthog';
+
+export async function load() {
   posthog.capture({
     distinctId: 'distinct_id_of_the_user',
     event: 'event_name',
-  })
+  });
 
-  await posthog.shutdown()
+  await posthog.flush();
 }
 ```
 
-> **Note:** Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
+Flush queued events before your platform can stop server work. Call `posthog.shutdown()` once when the server stops.

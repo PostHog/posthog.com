@@ -358,7 +358,6 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -446,7 +445,6 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -499,6 +497,7 @@ export interface AppSetting {
         type: 'standard' | 'side' | 'floating'
     }
     toolbar?: boolean
+    toolbarFade?: boolean
     hideTitle?: boolean
 }
 
@@ -1611,6 +1610,11 @@ const appSettings: AppSettings = {
     '/changelog': {
         toolbar: true,
     },
+    '/roadmap': {
+        toolbar: true,
+        toolbarFade: true,
+        hideTitle: true,
+    },
     '/feet-pics': {
         toolbar: true,
     },
@@ -1623,7 +1627,6 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
     scrollbars?: 'system' | 'show' | 'auto'
@@ -1639,7 +1642,12 @@ const readStoredSiteSettings = (): Partial<SiteSettings> => {
     }
     try {
         const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
-        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {}
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+            return {}
+        }
+        // Retired setting. Drop it so a later save does not write it back.
+        delete parsed.reduceTransparency
+        return parsed
     } catch (error) {
         console.error('Failed to read site settings:', error)
         return {}
@@ -1656,7 +1664,6 @@ const getInitialSiteSettings = (): SiteSettings => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         ...readStoredSiteSettings(),
     }
@@ -1687,7 +1694,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
@@ -2719,7 +2725,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
-        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {

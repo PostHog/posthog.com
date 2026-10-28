@@ -8,14 +8,14 @@ import { stays } from '@posthog/twig-components/catalog'
 import cabin from '@posthog/twig-components/assets/cabin.jpg'
 import coast from '@posthog/twig-components/assets/coast.jpg'
 import '@posthog/twig-components/catalog.css'
+import '@posthog/twig-components/compact.css'
+import { TwigWordmark } from '@posthog/twig-components/compact'
 
 import PostHogInspector, { COMPACT_INSPECTOR_CLASSES, InspectorDetails, InspectorStatus } from './PostHogInspector'
 import { Exhibit } from './ProductAnalyticsExhibits'
 
-const twigBookingPanelClasses =
-    'twig-browser min-w-0 overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]'
-const twigBookingCardClasses =
-    'vac-card grid min-w-0 grid-cols-1 items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-2 @sm:grid-cols-[6rem_minmax(0,1fr)] [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:!text-base [&_.vac-card-body_p]:!text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-image]:aspect-[16/7] @sm:[&_.vac-image]:aspect-[4/3]'
+const twigBookingPanelClasses = 'twig-compact'
+const twigBookingCardClasses = 'twig-compact-stay'
 
 type BookingStep = 0 | 1 | 2 | 3
 
@@ -85,11 +85,14 @@ export function RepeatBookingFigure(): JSX.Element {
         >
             <div ref={rootRef} className="grid items-start gap-3 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <div className="relative min-w-0">
-                    <section className={twigBookingPanelClasses} aria-label="Twig booking preview">
-                        <div className="border-b border-[#d7c8b6] px-3 py-2 font-semibold leading-5">Twig</div>
+                    <section className={`${twigBookingPanelClasses} relative`} aria-label="Twig booking preview">
+                        <div className="twig-compact-header">
+                            <TwigWordmark />
+                        </div>
                         <div className="grid gap-3 p-3">
                             <article className={twigBookingCardClasses}>
                                 <StayCardContent
+                                    compact
                                     stay={stay}
                                     image={
                                         <div className="vac-image">
@@ -458,11 +461,12 @@ export function SavedStayJourneyFigure(): JSX.Element {
                         >
                             {step === 1 ? (
                                 <section className={twigBookingPanelClasses} aria-label="Twig saved stays">
-                                    <div className="border-b border-[#d7c8b6] px-3 py-2 font-semibold leading-5">
-                                        Twig
+                                    <div className="twig-compact-header">
+                                        <TwigWordmark />
                                     </div>
-                                    <div className="p-3 [&_.twig-account-page>h1]:!mt-0 [&_.twig-account-page>h1]:!mb-3 [&_.twig-account-page>h1]:!text-xl [&_.twig-account-page>.vac-eyebrow]:hidden [&_.twig-account-page>.twig-account-muted]:hidden [&_.twig-account-stay-grid]:!grid-cols-1 [&_.twig-account-stay-card>a]:!grid [&_.twig-account-stay-card>a]:!grid-cols-[5rem_minmax(0,1fr)] [&_.twig-account-stay-card>a]:!overflow-hidden [&_.twig-account-stay-card>a]:!rounded [&_.twig-account-stay-card>a]:!border [&_.twig-account-stay-card>a]:!border-[#d7c8b6] [&_.twig-account-stay-card>a]:!bg-[#fff8ee] [&_.vac-card-body]:!p-2 [&_.vac-card-body_h3]:!text-sm [&_.vac-card-body_p]:!text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-image]:!h-full [&_.vac-image]:!aspect-auto @md:[&_.twig-account-stay-card>a]:!grid-cols-[7rem_minmax(0,1fr)]">
+                                    <div className="twig-account-layout p-3">
                                         <SavedStaysView
+                                            compact
                                             stays={[stays[0]]}
                                             renderImage={() => image}
                                             stayHref={() => '#retention-saved-stay'}
@@ -472,13 +476,16 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                 </section>
                             ) : (
                                 <>
-                                    <section className={twigBookingPanelClasses} aria-label="Twig booking preview">
-                                        <div className="border-b border-[#d7c8b6] px-3 py-2 font-semibold leading-5">
-                                            Twig
+                                    <section
+                                        className={`${twigBookingPanelClasses} relative`}
+                                        aria-label="Twig booking preview"
+                                    >
+                                        <div className="twig-compact-header">
+                                            <TwigWordmark />
                                         </div>
                                         <div className="grid gap-3 p-3">
                                             <article className={twigBookingCardClasses}>
-                                                <StayCardContent stay={stays[0]} image={image} />
+                                                <StayCardContent compact stay={stays[0]} image={image} />
                                             </article>
                                             {step > 0 && (
                                                 <div className="twig-account-layout !m-0 !block !w-full">
@@ -502,19 +509,19 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                                 </div>
                                             )}
                                         </div>
+                                        {step === 0 && (
+                                            <div className="twig-saved-control absolute left-4 top-[3.15rem] z-10">
+                                                <SavedStay
+                                                    stayName={stays[0].title ?? 'Stay'}
+                                                    signedIn
+                                                    saved={false}
+                                                    onSavedChange={(nextSaved) => {
+                                                        if (nextSaved) changeStep(1)
+                                                    }}
+                                                />
+                                            </div>
+                                        )}
                                     </section>
-                                    {step === 0 && (
-                                        <div className="twig-saved-control absolute right-4 top-[3.15rem] z-10">
-                                            <SavedStay
-                                                stayName={stays[0].title ?? 'Stay'}
-                                                signedIn
-                                                saved={false}
-                                                onSavedChange={(nextSaved) => {
-                                                    if (nextSaved) changeStep(1)
-                                                }}
-                                            />
-                                        </div>
-                                    )}
                                 </>
                             )}
                         </div>
@@ -547,11 +554,7 @@ export function SavedStayJourneyFigure(): JSX.Element {
                                 />
                             </svg>
                             {step !== 1 && (
-                                <span
-                                    className={`absolute whitespace-nowrap rounded border border-[#2d2b29] bg-[#fffdf9] px-2 py-1 font-rounded text-xs font-semibold text-[#2d2b29] shadow-[2px_2px_0_#f7a81b] ${
-                                        step === 0 ? 'right-5 top-5' : 'left-6 top-5'
-                                    }`}
-                                >
+                                <span className="absolute left-6 top-5 whitespace-nowrap rounded border border-[#2d2b29] bg-[#fffdf9] px-2 py-1 font-rounded text-xs font-semibold text-[#2d2b29] shadow-[2px_2px_0_#f7a81b]">
                                     Twig visitor
                                 </span>
                             )}

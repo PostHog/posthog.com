@@ -79,7 +79,7 @@ Then, opportunities!
 
 We use a combination of proactive outreach, insights, and automated alerts in tools such as Vitally to identify cross-sell opportunities. Below are some examples and we will go in more detail on specific motions. 
 
-You can use these signals which are documented on [health-tracking](/handbook/cs-and-onboarding/health-tracking) alongside regular customer interactions to prioritize outreach.
+You can use these signals which are documented on [health-tracking](/handbook/customer-success/health-tracking) alongside regular customer interactions to prioritize outreach.
 
 The best opportunities connect products to customer outcomes using their terminology and context. 
 
