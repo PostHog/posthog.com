@@ -492,6 +492,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             belowTitle={belowTitle}
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
+            renderMdx={(content) => <MDXRenderer>{content}</MDXRenderer>}
             commits={commits}
             filePath={post.parent?.relativePath}
             showSurvey
