@@ -2,7 +2,7 @@
 title: How Phantom enhanced its product and cut failure rates by 90%
 customer: Phantom
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/phantom_posthog_1316dbb231.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Qred_1920x1080_1_62027a95dc.png
 date: 2021-12-01
 ---
 

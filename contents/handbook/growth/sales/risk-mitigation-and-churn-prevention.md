@@ -48,7 +48,7 @@ This can largely mirror what goes in our sprint planning, and shouldn't be dupli
 
 ### Early warning signals
 
-These aren't emergencies yet, but they should make you pay closer attention. Many of these are also tracked automatically as [risk indicators in Vitally](/handbook/cs-and-onboarding/health-tracking#risk-indicators).
+These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics.
 
 | Signal | Why it matters |
 |--------|----------------|
@@ -93,23 +93,23 @@ If they're doing all their analysis in Looker or Mode, ask why. Sometimes it's h
 
 A lot of customers self-serve without ever talking to a PostHog human. This means they can implement PostHog in ways that cause problems down the road: inflated bills, inaccurate data, or features that don't work as expected. Left unchecked, these issues lead to avoidable churn.
 
-Proactively check for common implementation issues, especially for newer accounts or accounts that haven't had a technical review. See [checking the health of a customer's deployment](/handbook/cs-and-onboarding/health-checks) for the full checklist.
+Proactively check for common implementation issues, especially for newer accounts or accounts that haven't had a technical review. See [checking the health of a customer's deployment](/handbook/customer-success/health-checks) for the full checklist.
 
 **When a customer wants to cut costs**
 
 If a customer expresses interest in reducing their PostHog spend, view it as an opportunity to act in their interest, help them optimize, and stabilize the relationship. The fact that they're telling you is a signal of trust. Deepen that trust by helping them save money (which is a totally reasonable goal to support).
 
-Tag the account `cost optimizing` in PostHog Customer Analytics while you work on it – see [cost optimization](/handbook/cs-and-onboarding/cost-optimization) for what the tag is for and how we share these with the team.
+Tag the account `cost optimizing` in PostHog Customer Analytics while you work on it – see [cost optimization](/handbook/customer-success/cost-optimization) for what the tag is for and how we share these with the team.
 
 - **First, help them do what they asked, fast.** At this point, the customer already decided that they need to cut costs, so don't lead with discovery questions that may suggest an effort to talk them out of that decision. Take action on their request first. Gather context along the way or after.
-- **Give them actionable ways to reduce spend.** This is where your product expertise comes into play - what are the concrete levers they can pull to reduce spend? [Customer health check](/handbook/cs-and-onboarding/health-checks#are-they-paying-for-things-they-dont-need) is a good starting point to identify opportunities to reduce billing waste.
-- **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U), PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/cs-and-onboarding/how-we-work#working-with-engineering-teams) so they can better assist you).
+- **Give them actionable ways to reduce spend.** This is where your product expertise comes into play - what are the concrete levers they can pull to reduce spend? [Customer health check](/handbook/customer-success/health-checks#are-they-paying-for-things-they-dont-need) is a good starting point to identify opportunities to reduce billing waste.
+- **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U), PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/customer-success/how-we-work#working-with-engineering-teams) so they can better assist you).
 - **Consider proposing a target spend.** Once you've acted on their initial request, consider aligning on a target monthly spend. You can then work backwards from that goal to improve their implementation and shape how you support them going forward.
 - **Pause any cross-selling or expansion work until they're at their target monthly spend.** You make the call on when the relationship is stable enough to recommend increased adoption of our products, but it's a safe bet to pause on this while they're in the process of lowering their spend.
 
 **Billing waste:**
 
-- **Group Analytics enabled but not implemented.** We have a Vitally risk indicator for this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
+- **Group Analytics enabled but not implemented.** The [health check](/handbook/customer-success/health-checks) covers how to spot this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
 - **Autocapture noise.** If >50% of events are autocapture and they haven't defined any autocapture actions, they're likely paying for events they don't use. Help them tune or disable it.
 - **Session replay capturing everything.** Default settings capture all sessions. At minimum, recommend setting minimum duration to 2+ seconds to filter out low-value recordings.
 
@@ -129,7 +129,7 @@ When you find implementation issues, don't just tell them what's wrong. Help the
 
 ### De-risking common churn scenarios
 
-Most churn follows predictable patterns. See [common churn reasons](/handbook/cs-and-onboarding/churn-reasons) for the full list. Here's how to de-risk the scenarios we have some control over:
+Most churn follows predictable patterns. See [common churn reasons](/handbook/customer-success/churn-reasons) for the full list. Here's how to de-risk the scenarios we have some control over:
 
 | Churn scenario | De-risking strategy |
 |----------------|---------------------|
@@ -138,7 +138,7 @@ Most churn follows predictable patterns. See [common churn reasons](/handbook/cs
 | **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |
-| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Vitally](/handbook/cs-and-onboarding/feature-requests) |
+| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Customer Analytics](/handbook/customer-success/feature-requests) |
 | **PostHog isn't trusted as source of truth** | Dig into data discrepancies. Often an implementation issue. If they're exporting everything to another tool, they're one step from leaving. |
 | **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](https://posthog.com/docs/data-pipelines/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
 
@@ -217,7 +217,7 @@ Once flagged, your job is to diagnose and act:
 
 ### When churn happens
 
-Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn as soon as possible while the details are fresh. See [learn from churn](/handbook/cs-and-onboarding/customer-churn-retros) for the template and guidance.
+Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn as soon as possible while the details are fresh. See [learn from churn](/handbook/customer-success/customer-churn-retros) for the template and guidance.
 
 ---
 

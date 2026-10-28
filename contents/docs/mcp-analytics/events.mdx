@@ -19,7 +19,8 @@ This page is the wire-level contract for the MCP Analytics SDKs. TypeScript-only
 | `$mcp_initialize`         | Every `2025-11-25` client/server handshake                                        | `$mcp_client_name`, `$mcp_client_version`, `$mcp_server_name`, `$mcp_server_version`, `$mcp_protocol_version`                                                                                                        |
 | _(your event name)_       | A call to `analytics.capture({ event, properties })`                              | Sent under the verbatim `event` name you pass (a customer event, not `$`-prefixed), with your `properties` merged in. See [Custom events](/docs/mcp-analytics/custom-events).                                        |
 | `$mcp_missing_capability` | The `get_more_tools` virtual tool is invoked                                      | The agent's reasoning is captured as `$mcp_intent`. See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability).                                                                                     |
-| `$identify`               | `identify()` returns a new identity for a session                                 | `$set` populated from the identity's `properties`                                                                                                                                                                    |
+| `$mcp_feedback`           | The `send_feedback` virtual tool is invoked, when `collectFeedback` is on. TypeScript and Python only. | `$mcp_feedback_type` and the other [feedback properties](#feedback-properties), plus the summary and details as `$mcp_intent`. Never a `$mcp_tool_call`. |
+| `$identify`               | `identify()` returns a new or changed identity for a session. Ruby SDK only. The TypeScript, Python, and Go SDKs put the identity on every event instead. | `$set` populated from the identity's `properties`                                                                                                                                                                    |
 | `$exception`              | Sibling event whenever a tool call or resource request errors (unless `enableExceptionAutocapture: false`) | `$exception_list`, `$exception_level`, plus the same `$mcp_*` context as the main event                                                                                                                              |
 
 The TypeScript, Python, and Ruby SDKs capture resource events. The Go SDK doesn't yet. The Go SDK sends neither `$mcp_tools_list` nor `$mcp_initialize`. Only the Ruby SDK emits `$mcp_prompts_list` and `$mcp_prompt_get`. Prompt payloads pass through unchanged.
@@ -30,7 +31,7 @@ Present on most `mcp_*` events.
 
 | Wire key                 | Type                                | Source                                                                                                                                                                                                |
 | ------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `$session_id` | string | The MCP session ID (`ses_<32-hex>`). Go also emits `ses_<UUIDv7>` for a session it generates. A custom ID you pass must be 128 characters or fewer. See [session resolution](#session-resolution) below. |
+| `$session_id` | string | The MCP session ID. A session ID the SDK derives, from a transport session or a conversation handle, is `ses_<32-hex>`. A session ID it generates is `ses_<UUIDv7>`. A custom ID you pass must be 128 characters or fewer. See [session resolution](#session-resolution) below. |
 | `$mcp_source`            | string                              | Always `"posthog_mcp_analytics"`. Use this to filter out non-MCP events when querying mixed projects. The Go SDK's `$mcp_unknown_tool`, `$mcp_input_required`, and `$mcp_missing_capability` events don't carry it.                                                                                                 |
 | `$mcp_resource_name`     | string                              | Tool or prompt name, or on resource events the resource URI with its credentials redacted (see [Privacy](/docs/mcp-analytics/privacy))                                                                                                                                                                        |
 | `$mcp_tool_name`         | string                              | Same as `$mcp_resource_name`, but only on `$mcp_tool_call`. The Go SDK also sets it on `$mcp_unknown_tool` and `$mcp_input_required`                                                                                                                                            |
@@ -39,7 +40,7 @@ Present on most `mcp_*` events.
 | `$mcp_listed_tool_names` | string[]                            | Names of tools advertised in a `tools/list` response. Only on `$mcp_tools_list`. Useful for joining against `$mcp_tool_call` via `$session_id` to find tools advertised but never called.             |
 | `$mcp_duration_ms`       | number (ms)                         | Wall-clock duration of the tool call or resource request                                                                                                                                                                  |
 | `$mcp_is_error`          | boolean                             | True if the handler threw or returned `isError: true`                                                                                                                                                    |
-| `$mcp_error_type` | string | Failure category, present only when `$mcp_is_error` is true. Defaults to the thrown error type. In Go, the default is the package-qualified Go type, such as `fs.PathError`. Typed `mcp.AddTool` errors keep their type, plain errors give `Error`, and the Go adapter has no override. Override it with a label such as `validation`, `permission`, `timeout`, or `rate_limited`. Use it to group failures without joining `$exception` events. |
+| `$mcp_error_type` | string | Failure category, present only when `$mcp_is_error` is true. Defaults to the thrown error type. In Go, the default is the package-qualified Go type, such as `fs.PathError`. Typed `mcp.AddTool` errors keep their type, and plain errors give `Error`. Only a custom dispatcher can set it, with a label such as `validation`, `permission`, `timeout`, or `rate_limited`. Pass `errorType` in TypeScript, `error_type` in Python and Ruby, or `ToolCall.ErrorType` in Go. `instrument()` and the Go adapter have no override. Use it to group failures without joining `$exception` events. |
 | `$mcp_error_message`     | string                              | The failed call's error message, truncated and passed through the same redaction as `$mcp_parameters` and `$mcp_response`. Only set when `$mcp_is_error` is true.          |
 | `$mcp_server_name`       | string                              | `server._serverInfo.name`. Go sets it only from `WithServerInfo`.                                                                                                                                     |
 | `$mcp_server_version`    | string                              | `server._serverInfo.version`. Go sets it only from `WithServerInfo`.                                                                                                                                  |
@@ -53,8 +54,12 @@ Present on most `mcp_*` events.
 | `$mcp_llm_model` | string | The model from recognized client metadata or an SDK-injected `llm_model` argument. Enabled by default. Missing, blank, and `unknown` values are omitted. Both sources are unverified. |
 | `$mcp_llm_model_source` | `"client_metadata" \| "self_reported"` | How the model identifier was obtained. Recognized client metadata takes priority over self-report. |
 | `$mcp_parameters` | object | Sanitized request arguments. SDK-owned analytics arguments are removed before dispatch. Arguments declared by the application remain application data. See [Privacy & redaction](/docs/mcp-analytics/privacy). |
-| `$mcp_response`          | object                              | Sanitized tool result, or the listing on `$mcp_tools_list` and `$mcp_resources_list`. Never a resource body.                                                                                                                                                                                 |
+| `$mcp_response`          | object                              | Sanitized tool result, or the listing on `$mcp_resources_list`. On `$mcp_tools_list`, only the response envelope (`nextCursor`, `ttlMs`, `cacheScope`, `_meta`) without the `tools` array, and omitted when the envelope is empty. Never a resource body.                                                                                                                                                                                 |
 | `$mcp_conversation_id`   | string                              | Present when `enableConversationId` is on. See [Conversation IDs](/docs/mcp-analytics/conversation-id).                                                                                               |
+| `$mcp_interface` | `"mcp" \| "webmcp"` | Where the call came from: `"mcp"` for MCP servers, `"webmcp"` for [WebMCP](/docs/mcp-analytics/installation/webmcp) tools in the browser. On every event, including `$exception`. The TypeScript and Python server SDKs send `"mcp"`, and `posthog-js` sends `"webmcp"`. Go and Ruby don't send it. |
+| `$mcp_input_keys` | string[] | The argument names the agent sent on `$mcp_tool_call`. Names the tool's input schema doesn't declare are recorded as one `[redacted]` entry, because a name can carry private data. Change the rule with `shouldRecordInputKey`. TypeScript and Python only. |
+| `$mcp_input_aliases_used` | string[] | The alternative argument names the agent used instead of the canonical ones, when `resolveInputAliases` declares aliases for the tool. TypeScript and Python only. |
+| `$mcp_server_build` | string | The exact server build you passed as `serverBuild`, such as a Git commit SHA. On every event, including `$exception`. TypeScript and Python only. |
 
 ### Session resolution
 
@@ -99,9 +104,9 @@ Present on `$exception` events emitted alongside any failed tool call. The SDK r
 | `$exception_list`  | Array of structured exceptions. Each has `type`, `value` (the message), `mechanism`, and a `stacktrace` with parsed `frames` (`filename`, `function`, `lineno`, `colno`, `in_app`). An `Error.cause` chain appears as additional entries. |
 | `$exception_level` | Severity, always `"error"`.                                                                                                                                                                                                               |
 
-Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_*` (including `$mcp_client_user_agent` and `$mcp_vendor_client`), `$mcp_protocol_version`, and the model properties when captured.
+Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_name`, `$mcp_client_version`, `$mcp_protocol_version`, and, in TypeScript and Python, `$mcp_interface` and `$mcp_server_build`. Only TypeScript adds `$mcp_client_user_agent` and `$mcp_vendor_client`. Intent, model, duration, and `$set` properties stay on the main event.
 
-In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace, and no user agent, vendor client, or model properties.
+In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace.
 
 <CalloutBox icon="IconInfo" title="Symbolicating minified MCP servers" type="fyi">
 
@@ -111,7 +116,7 @@ Upload source maps with the [PostHog CLI](/docs/error-tracking/upload-source-map
 
 ## Person properties (`$set`)
 
-Set on `$identify` events when `identify()` returns a user.
+Set on every event except `$exception` once `identify()` returns a user. The Ruby SDK also sends them on its `$identify` event.
 
 | Key   | Source                                                                                                                                 |
 | ----- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -119,7 +124,25 @@ Set on `$identify` events when `identify()` returns a user.
 
 The SDK sends `$set` to update the person profile. PostHog does not retain `$set` on the stored event. Query the resulting values as [person properties](/docs/product-analytics/person-properties) rather than filtering events by `$set`.
 
-In Go, `$set` rides on `$mcp_tool_call`, `$mcp_unknown_tool`, and `$mcp_input_required`, not on a `$identify` event. It needs an explicit `DistinctID`. The SDK drops it without one, or if the event is too large.
+In Go, `$set` rides on `$mcp_tool_call`, `$mcp_unknown_tool`, and `$mcp_input_required`. It needs an explicit `DistinctID`. The SDK drops it without one, or if the event is too large.
+
+## Feedback properties
+
+Present on `$mcp_feedback` events. Turn the `send_feedback` tool on with `collectFeedback` (`collect_feedback` in Python). It also reports missing capabilities, as `feedback_type: "missing_capability"`. The MCP Analytics views read only `$mcp_missing_capability`, so query these events with SQL or insights.
+
+| Wire key | Source |
+| --- | --- |
+| `$mcp_feedback_type` | `"missing_capability"`, `"issue"`, `"praise"`, or `"other"` |
+| `$mcp_feedback_summary` | One sentence: the missing capability, or the tool and its problem |
+| `$mcp_feedback_details` | Optional longer context, such as what the agent tried and the error it saw |
+| `$mcp_feedback_tool` | The existing tool the feedback is about, for `issue` or `praise` |
+| `$mcp_feedback_task_completed` | Boolean. Whether the agent still completed the user's task |
+| `$mcp_feedback_sentiment` | `"positive"`, `"neutral"`, `"negative"`, or `"mixed"` |
+| `$mcp_feedback_friction_points` | The moments that slowed the agent down |
+| `$mcp_feedback_suggested_improvement` | The change that would have helped |
+| `$mcp_feedback_<key>` | Each key you declare in `extraProperties` (`extra_properties` in Python) |
+
+Feedback text gets the same PII redaction as `$mcp_intent` and is capped at 2,048 characters per field.
 
 ## Groups (`$groups`)
 

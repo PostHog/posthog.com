@@ -212,3 +212,14 @@ test('the Warehouse Learn tab keeps the former docs guide URLs working', () => {
         assert.equal(redirect?.statusCode, 301)
     }
 })
+
+test('a Learn hub root shows a landing page exactly when its volume has a learnHub', () => {
+    // LearnShell hides "Copy page" on a hub root by `learnHub`, and LearnPage shows the landing by its `landing` prop.
+    for (const volume of POCKET_GUIDE_VOLUMES) {
+        if (!volume.productHandle || !volume.learnPath?.startsWith('/learn/')) continue
+        const hubSlug = volume.learnPath.split('/')[2]
+        const index = new URL(`../../pages/learn/${hubSlug}/index.tsx`, import.meta.url)
+        assert.ok(existsSync(index), `${volume.id} needs src/pages/learn/${hubSlug}/index.tsx`)
+        assert.equal(/\blanding=\{/.test(readFileSync(index, 'utf8')), Boolean(volume.learnHub), volume.id)
+    }
+})

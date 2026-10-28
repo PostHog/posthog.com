@@ -94,7 +94,7 @@ export const amplitude = {
                 canvas_recording: false,
                 chat_with_recordings: false,
                 clickmaps: false,
-                conditional_recording: false,
+                conditional_recording: true,
                 event_timeline: true,
                 export_to_json: false,
                 export_to_video: false,
@@ -217,7 +217,7 @@ export const amplitude = {
                 native_goal_tracking: true,
                 no_code_experiments: true,
                 low_code_experiments: true,
-                ratio_metrics: false,
+                ratio_metrics: true,
                 recommended_run_time: true,
                 secondary_metrics: true,
                 shared_metrics_library: true,
@@ -357,7 +357,7 @@ export const amplitude = {
             available: false,
         },
         ai_observability: {
-            available: false,
+            available: true,
         },
         logs: {
             available: false,
@@ -405,7 +405,7 @@ export const amplitude = {
         developer: {
             api: true,
             mobile_sdks: true,
-            proxies: false,
+            proxies: true,
             sdks: true,
             sql: true,
             terraform: false,

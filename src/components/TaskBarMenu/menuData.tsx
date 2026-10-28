@@ -888,6 +888,14 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             customIcon: null,
         },
         {
+            label: 'Hoggie tier list',
+            link: '/tier-list',
+            iconName: null,
+            customIcon: (
+                <img src="https://brand.posthog.com/hoggies/judge.png" alt="" className="size-12 object-contain" />
+            ),
+        },
+        {
             label: 'HogPaint',
             link: '/paint',
             iconName: 'hogpaint' as AppIconName,

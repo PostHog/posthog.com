@@ -619,6 +619,10 @@
             "destination": "/compare/best-product-analytics-tools-for-startups"
         },
         {
+            "source": "/blog/best-open-source-analytics-tools",
+            "destination": "/compare/best-open-source-analytics-tools"
+        },
+        {
             "source": "/blog/best-real-time-analytics-platforms",
             "destination": "/compare/best-real-time-analytics-platforms"
         },
@@ -6555,6 +6559,11 @@
         {
             "source": "/handbook/cs-and-onboarding/customer-led-calls",
             "destination": "/handbook/growth/sales/reverse-demo-calls"
+        },
+        {
+            "source": "/handbook/cs-and-onboarding/:path*",
+            "destination": "/handbook/customer-success/:path*",
+            "statusCode": 301
         },
         {
             "source": "/customer-data-infrastructure/:path*",

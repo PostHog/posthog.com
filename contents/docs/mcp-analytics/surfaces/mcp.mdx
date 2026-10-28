@@ -30,6 +30,8 @@ PostHog's [MCP server](/docs/model-context-protocol) provides tools to query MCP
 - Retrieve intent clusters and their tool distribution
 - Recompute clusters after you capture new data
 
+The intent cluster tools appear only in projects where intent clustering has rolled out.
+
 **Dig into tool quality**
 
 - Per-tool stats: volume, error rate, and latency
@@ -39,9 +41,11 @@ PostHog's [MCP server](/docs/model-context-protocol) provides tools to query MCP
 - Neighboring tools that get called alongside it
 - Sample intents behind its calls
 - Harness and client breakdown
+- The distinct descriptions seen for a tool, to spot description drift
 
 **Report missing capabilities**
 
+- List the missing-capability reports agents sent, with text search
 - Report a missing capability your agent needed but couldn't find
 - Submit other tool feedback through the [API](/docs/mcp-analytics/surfaces/api)
 
