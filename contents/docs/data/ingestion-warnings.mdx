@@ -220,8 +220,6 @@ These warnings apply to [AI Observability](/docs/llm-analytics) events.
 | Rejected a batch containing an event with an invalid UUID | An event's `uuid` wasn't a valid UUID. Nothing in the request was stored. |
 | Discarded events that reused another event's UUID in the same request | Two or more events in one request had the same `uuid`. PostHog kept the first and dropped the rest. Give every event its own [UUID](/docs/api/capture-v1#event-uuids). |
 
-<!-- TODO(capture-v1): confirm these titles match the app's ingestion warnings view at release, and add docs anchors for them in the app. -->
-
 ## Query warnings via MCP
 
 If you use the [PostHog MCP server](/docs/model-context-protocol), your AI agent can query ingestion warnings directly with the `ingestion-warnings-list` tool. Ask questions like "What ingestion warnings has my project received?" or "Why are my person merges failing?" and the agent will filter, search, and summarize warnings for you. See the [MCP tools reference](/docs/model-context-protocol/tools) for the full list of available tools.
