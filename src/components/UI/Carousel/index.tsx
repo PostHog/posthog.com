@@ -133,11 +133,16 @@ export function Carousel({
     }, [cloned, count])
 
     useEffect(() => {
-        if (multiple) setCloned(true)
+        setCloned(multiple)
     }, [multiple])
 
     useIsomorphicLayoutEffect(() => {
-        if (!cloned) return
+        if (!cloned) {
+            position.current = 0
+            setActive(0)
+            if (track.current) track.current.scrollLeft = 0
+            return
+        }
         measure()
         scrollToPosition(position.current, false)
     }, [cloned])
