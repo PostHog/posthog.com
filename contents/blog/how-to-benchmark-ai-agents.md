@@ -1,8 +1,7 @@
 ---
 title: "Do you even benchmark? How we evaluate agents at scale (with real examples)"
 date: 2026-10-28
-featuredImage: >-
-https://res.cloudinary.com/dmukukwp6/image/upload/evaluating_agents_at_scale_with_real_data_9c0258497d.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/evaluating_agents_at_scale_with_real_data_9c0258497d.png
 featuredImageType: full
 rootPage: /blog
 sidebar: Blog
@@ -20,6 +19,7 @@ seo:
     metaTitle: "How to benchmark AI agents at scale against real data"
     metaDescription: "How we benchmark AI agents at PostHog: defining criteria, isolating runs so agents can't cheat, and running offline on real data."
 ---
+
 We spend 2 trillion+ LLM tokens per month, with the lion's share going to running agents. We know what they do and how good they are *most* of the time, but we spend way too much money on them to trust their output based on vibes alone.
 
 That's why we use benchmarks. 
