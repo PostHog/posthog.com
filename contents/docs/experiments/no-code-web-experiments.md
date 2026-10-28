@@ -12,18 +12,18 @@ import { IconTestTube } from '@posthog/icons'
 
 No-code experiments are great because they're quick to set up and require no coding, but it's important to understand their limitations and ensure they're the right fit for your website.
 
-| Use case | Explanation |
-|----------|-----|
-| ✅ **Simple layout changes** | Small edits to text or basic formatting are easy to manage and less likely to break anything |
-| ✅ **Server-rendered web applications (e.g., Next.js)** | Because the page doesn't typically re-render on the client, your changes are less likely to be overwritten |
-| ❌ **Complex changes or interactions** | While possible, making multiple or intricate CSS and HTML modifications can introduce more risk and requires careful management |
-| ❌ **Single-page applications (e.g., React, Vue, Angular)** | Frameworks that frequently re-render or replace DOM elements may overwrite any no-code changes you apply |
+| Use case                                                    | Explanation                                                                                                                     |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| ✅ **Simple layout changes**                                | Small edits to text or basic formatting are easy to manage and less likely to break anything                                    |
+| ✅ **Server-rendered web applications (e.g., Next.js)**     | Because the page doesn't typically re-render on the client, your changes are less likely to be overwritten                      |
+| ❌ **Complex changes or interactions**                      | While possible, making multiple or intricate CSS and HTML modifications can introduce more risk and requires careful management |
+| ❌ **Single-page applications (e.g., React, Vue, Angular)** | Frameworks that frequently re-render or replace DOM elements may overwrite any no-code changes you apply                        |
 
 ## Building a new experiment
 
 No-code web experiments enable you to run A/B tests, multivariate tests, and other experiments that modify your website without writing a single line of code.
 
-You can build your web experiment directly in the PostHog [toolbar](/docs/toolbar), our no-code tool. Once you save your experiment in the toolbar, it automatically appears in PostHog where you can configure metrics, launch it, and track results.
+You can build your web experiment directly in the PostHog [toolbar](/docs/toolbar), our no-code tool. You can also use the [PostHog browser extension](/docs/advanced/browser-extension)'s side panel, which provides the same experiment editor in a docked panel. Once you save your experiment in the toolbar or the extension, it automatically appears in PostHog where you can configure metrics, launch it, and track results.
 
 In this example, we will change the text of a button on a sample webpage without writing any code.
 
@@ -32,6 +32,7 @@ In this example, we will change the text of a button on a sample webpage without
 Before creating your experiment, you'll need to add `disable_web_experiments: false` to your PostHog web snippet configuration. Otherwise, experiments configured with the toolbar won't run on your live site.
 
 Add `disable_web_experiments: false` to your PostHog init code like this:
+
 ```js-web
 posthog.init('<ph_project_token>', {
   api_host: '<ph_client_api_host>',
@@ -47,6 +48,8 @@ Launch the toolbar on your website:
 1. Go to the [toolbar tab](https://app.posthog.com/toolbar) in PostHog.
 2. Add your website URL as an authorized domain if you haven't already.
 3. Click **Launch** to open the toolbar on your site.
+
+> **Tip:** You can also create and edit web experiments using the [PostHog browser extension](/docs/advanced/browser-extension)'s side panel, which provides the same experiment editor in a docked panel.
 
 Once on your site with the toolbar active:
 
@@ -70,10 +73,10 @@ For security reasons, certain HTML tags and patterns are not allowed in the **Te
 
 <CalloutBox icon="IconInfo" title="Changing an element on multiple pages">
 
-If you need to update an element such as a button shared by many pages, use a common **CSS class selector**. For example, to change the **Sign up** button: 
+If you need to update an element such as a button shared by many pages, use a common **CSS class selector**. For example, to change the **Sign up** button:
 
 1. Add a common class such as `class="sign-up-button"`
-2. Select it using the `.sign-up-button` CSS selector. 
+2. Select it using the `.sign-up-button` CSS selector.
 
 </CalloutBox>
 
@@ -96,10 +99,10 @@ Once you save your experiment in the toolbar, it appears in the [Experiments tab
 
 The toolbar also enables further editing of your experiment. For example, you can:
 
--   Add multiple element changes to a variant by clicking **+ Add element**. Elements are buttons, headers, images, and more.
--   Remove an element from a variant by clicking the trash bin icon.
--   Add more versions of your experiment by clicking **+ Add variant**.
--   Change all elements, headers, buttons, and/or images by clicking the **Change element** dropdown.
+- Add multiple element changes to a variant by clicking **+ Add element**. Elements are buttons, headers, images, and more.
+- Remove an element from a variant by clicking the trash bin icon.
+- Add more versions of your experiment by clicking **+ Add variant**.
+- Change all elements, headers, buttons, and/or images by clicking the **Change element** dropdown.
 
 ## How to see how your experiment will look
 
