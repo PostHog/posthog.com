@@ -125,7 +125,22 @@ function createPocketGuidePages(
     }
 }
 
-export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql, getNodesByType }) => {
+export const createPages: GatsbyNode['createPages'] = async ({
+    actions: { createPage, createRedirect },
+    graphql,
+    getNodesByType,
+}) => {
+    if (process.env.GATSBY_REDIRECTS === '1') {
+        for (const { source, destination, statusCode, permanent } of vercelConfig.redirects) {
+            createRedirect({
+                fromPath: source,
+                toPath: destination,
+                isPermanent: permanent !== false && statusCode !== 302 && statusCode !== 303 && statusCode !== 307,
+                redirectInBrowser: true,
+            })
+        }
+    }
+
     const redirectedPaths = new Set(vercelConfig.redirects.map(({ source }) => source))
 
     for (const team of getNodesByType('SqueakTeam')) {
