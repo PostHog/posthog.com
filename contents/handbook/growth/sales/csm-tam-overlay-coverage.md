@@ -317,7 +317,7 @@ How can you both be the driver if there are two people in the same car? It's oka
 
 ## **Related reading**
 
-- [Account allocation](/handbook/growth/sales/account-allocation) covers [adding a TAM](/handbook/growth/sales/account-allocation#adding-a-tam-to-an-account), [removing a TAM](/handbook/growth/sales/account-allocation#removing-a-tam-from-an-account), and [keeping the context with the CSM](/handbook/growth/sales/account-allocation#keeping-the-context-with-the-csm) when the overlay ends
+- [Account allocation](/handbook/growth/sales/account-allocation) covers coverage and books; [adding and removing a TAM](/handbook/growth/sales/adding-and-removing-a-tam) covers [adding a TAM](/handbook/growth/sales/adding-and-removing-a-tam#adding-a-tam-to-an-account), [removing a TAM](/handbook/growth/sales/adding-and-removing-a-tam#removing-a-tam-from-an-account), and [keeping the context with the CSM](/handbook/growth/sales/adding-and-removing-a-tam#keeping-the-context-with-the-csm) when the overlay ends
 - [Customer journey](/handbook/growth/sales/customer-journey#ownership-rules) for the coverage matrix by phase, and co-owned churn saves
 - [Customer health tracking](/handbook/customer-success/health-tracking) for what the score is made of
 - [Quarterly account planning](/handbook/growth/sales/risk-mitigation-and-churn-prevention#quarterly-account-planning) for the account plan note format

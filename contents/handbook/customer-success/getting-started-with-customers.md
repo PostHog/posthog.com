@@ -23,7 +23,7 @@ Before you reach out, build context. The more you bring to your first conversati
 - Which PostHog products are they using?
 - Which are they *not* using?
 - Does their setup look complete? Are they paying for products they don't use? Run the [customer deployment health check](/handbook/customer-success/health-checks).
-- Review their [product onboarding](/handbook/growth/sales/account-allocation#product-onboarding) status.
+- Review their [product onboarding](/handbook/growth/sales/account-handovers#product-onboarding) status.
 
 ### Data management
 

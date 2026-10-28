@@ -92,4 +92,4 @@ There's no formula. There is a small set of evidence sources you can reliably bu
 
 - **Grow** — there's a real, qualified expansion opportunity. This account gets proactive TAM work this quarter.
 - **Nurture** — a real opportunity that isn't workable yet, because it's waiting on a funding event, a champion hire, or a roadmap item. If it's already a TAM account, it's fine to keep. If it isn't, it can wait for a TAM to be assigned.
-- **Release from TAM** — healthy and retained, but no viable growth. Drop it from TAM coverage per the [quarterly book planning rules](/handbook/growth/sales/account-allocation#quarterly-book-planning). This is a good outcome: it concentrates TAM attention where it compounds.
+- **Release from TAM** — healthy and retained, but no viable growth. Drop it from TAM coverage per the [quarterly book planning rules](/handbook/growth/sales/adding-and-removing-a-tam#removing-a-tam-from-an-account). This is a good outcome: it concentrates TAM attention where it compounds.
