@@ -144,6 +144,7 @@ Here's an example of a report I ran while writing this blog to check whether Sol
 If you want to see how our rubric generator and ranking work under the hood, check out our [code](https://github.com/PostHog/posthog/tree/master/products/signals/backend/scout_harness).
 
 So all of those three approaches were just the first step of developing an answer key or grading system for the agents. After defining what's "good", we need to make these tests work and stay objective at scale.
+
 ---
 
 ## B. Isolate benchmark runs
