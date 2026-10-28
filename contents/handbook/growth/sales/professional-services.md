@@ -54,7 +54,7 @@ Here we make sure that PostHog is correctly integrated into the codebase using o
  - Ensure they are only tracking the events which they need to (including implementing custom events where necessary).
  - Integrate the first set of feature flags into their application.
  - Set up the relevant dashboards and insights as documented in the scoping phase.
- - Ensure that everything is set up according to our best practice [guidance](/handbook/cs-and-onboarding/health-checks).
+ - Ensure that everything is set up according to our best practice [guidance](/handbook/customer-success/health-checks).
 
 ### Getting started training
 
@@ -74,9 +74,9 @@ If the customer is replacing a feature flagging tool and has existing feature fl
 
 ### Data connectivity
 
-This will normally involve the setup of [realtime](/docs/cdp/destinations) and [batch export](/docs/cdp/batch-exports) destinations for other tools in the customer's stack.  We'll need API keys for the relevant tools as well as an agreed criteria for choosing which events will go to which destination.
+This will normally involve the setup of [realtime](/docs/data-pipelines/destinations) and [batch export](/docs/data-pipelines/batch-exports) destinations for other tools in the customer's stack.  We'll need API keys for the relevant tools as well as an agreed criteria for choosing which events will go to which destination.
 
-This may also involve getting data into PostHog without using our SDKs, for example, by using the [Webhooks](/docs/cdp/sources/incoming-webhooks) or Data Warehouse [sources](/docs/cdp/sources).
+This may also involve getting data into PostHog without using our SDKs, for example, by using the [Webhooks](/docs/data-pipelines/sources/incoming-webhooks) or Data Warehouse [sources](/docs/data-pipelines/sources).
 
 ### SQL Query implementation
 

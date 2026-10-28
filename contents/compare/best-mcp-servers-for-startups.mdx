@@ -51,8 +51,6 @@ You're writing code and want the agent to help you scaffold it, open the PR, wat
 
 The loop: **write code → open PR → check deploy status → verify it didn't break anything in production.**
 
-_...or you can just use [PostHog Desktop](/desktop) (wink)._
-
 The servers:
 
 - **[GitHub MCP](https://github.com/github/github-mcp-server)** and **[Filesystem MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem)** are the foundation; they allow you to edit code locally, push branches, open PRs, run Actions, etc.
@@ -121,7 +119,7 @@ Not on the same stack as the recommendations above? Here's what to swap in.
 
 **Communication:** [Discord MCP](https://www.pulsemcp.com/servers?q=discord) (community-built, multiple options) if your team or community lives there. [Microsoft's MCP Server for Enterprise](https://learn.microsoft.com/en-us/graph/mcp-server/overview) covers Teams along with the rest of Microsoft 365 via Graph.
 
-**Analytics and observability:** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/compare/posthog-vs-heap) ship MCP servers for product analytics. [Sentry](/blog/posthog-vs-sentry) has one for error tracking. [LaunchDarkly](/compare/posthog-vs-launchdarkly) has three for feature flags, AI Configs, and observability.
+**Analytics and observability:** [Mixpanel](/blog/posthog-vs-mixpanel), [Amplitude](/blog/posthog-vs-amplitude), and [Heap](/compare/posthog-vs-heap) ship MCP servers for product analytics. [Sentry](/compare/posthog-vs-sentry) has one for error tracking. [LaunchDarkly](/compare/posthog-vs-launchdarkly) has three for feature flags, AI Configs, and observability.
 
 _PostHog appears in all of these six workflows because it covers product analytics, error tracking, session replay, feature flags, surveys, LLM observability, a data warehouse, and more under one connector. It's not that it's is the only option, just that it's the simplest single-connector option for teams that want all of it._
 
@@ -162,7 +160,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 

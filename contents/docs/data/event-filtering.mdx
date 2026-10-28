@@ -23,9 +23,9 @@ You can find it at [**Data management** > **Event filtering**](https://app.posth
 
 Each incoming event is evaluated against a set of conditions you define. If an event matches the filter, PostHog drops it before ingestion. If it doesn't match, it continues through the pipeline as normal.
 
-Filters run **before** [transformations](/docs/cdp/transformations) and [destinations](/docs/cdp/destinations), so dropped events don't trigger any downstream processing.
+Filters run **before** [transformations](/docs/data-pipelines/transformations) and [destinations](/docs/data-pipelines/destinations), so dropped events don't trigger any downstream processing.
 
-If your filtering logic can be expressed here, we recommend using event ingestion filtering over a [drop events transformation](/docs/cdp/transformations/drop-events). It runs earlier in the pipeline and doesn't require writing custom code.
+If your filtering logic can be expressed here, we recommend using event ingestion filtering over a [drop events transformation](/docs/data-pipelines/transformations/drop-events). It runs earlier in the pipeline and doesn't require writing custom code.
 
 ## Operating modes
 
@@ -114,4 +114,4 @@ Use these metrics to validate your filter is matching the right volume and type 
 
 - [How the ingestion pipeline works](/docs/how-posthog-works/ingestion-pipeline)
 - [Ingestion warnings](/docs/data/ingestion-warnings)
-- [Transformations](/docs/cdp/transformations)
+- [Transformations](/docs/data-pipelines/transformations)

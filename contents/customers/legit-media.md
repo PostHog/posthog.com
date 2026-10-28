@@ -2,7 +2,7 @@
 title: How Legit Media fixed their broken marketing reports with PostHog Endpoints
 customer: Legit Media
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/LEGIT_2b37bf6d2f.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/legit_media_1920x1080_15ffc2a0f0.png
 date: 2026-06-24
 ---
 
