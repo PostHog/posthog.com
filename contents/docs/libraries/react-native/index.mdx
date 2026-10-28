@@ -32,14 +32,14 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 
 The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use.
 
-`@posthog/react-native-plugin` 3.0 and later requires React Native 0.71 or later and, on every iOS dependency path, Xcode 26 or later and an iOS 15 or later deployment target (macOS 11 or later for React Native macOS apps). See [Upgrading to `@posthog/react-native-plugin` 3.0](#upgrading-to-posthogreact-native-plugin-30).
+`@posthog/react-native-plugin` 3.0 and later requires React Native 0.75 or later and, on every iOS dependency path, Xcode 26 or later and an iOS 15 or later deployment target (macOS 11 or later for React Native macOS apps). See [Upgrading to `@posthog/react-native-plugin` 3.0](#upgrading-to-posthogreact-native-plugin-30).
 
 Then choose one iOS dependency path:
 
 | Path | Requirements | What it resolves |
 | --- | --- | --- |
-| CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin and `posthog-ios`. This remains the default path. |
-| CocoaPods with `posthog-ios` through Swift Package Manager | React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. |
+| CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin. From `@posthog/react-native-plugin` 3.0, Swift Package Manager resolves `posthog-ios`. In earlier versions, CocoaPods resolves it. This remains the default path. |
+| CocoaPods with `posthog-ios` through Swift Package Manager | `@posthog/react-native-plugin` 2.x only. React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. From 3.0, the CocoaPods path does this by default. |
 | Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later (Xcode 26 or later for plugin 3.0 and later), and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
 
 This verification does not cover Expo or other React Native versions. Use CocoaPods or the hybrid path unless you validate the full Swift Package Manager path for your configuration.
@@ -53,9 +53,11 @@ cd ios
 pod install
 ```
 
-The plugin podspec adds `posthog-ios` as a CocoaPods dependency. You do not need to add `posthog-ios` separately.
+The plugin podspec adds `posthog-ios` for you. You do not need to add `posthog-ios` separately. From `@posthog/react-native-plugin` 3.0, the podspec adds it through Swift Package Manager with React Native's `spm_dependency` helper. Static libraries, static frameworks and dynamic frameworks all work. Earlier versions add it as a CocoaPods dependency.
 
 #### CocoaPods with `posthog-ios` through Swift Package Manager
+
+This path applies to `@posthog/react-native-plugin` 2.x only. From 3.0, the CocoaPods path already resolves `posthog-ios` through Swift Package Manager and the plugin ignores `posthog.useSpm`.
 
 Add the following property to `ios/Podfile.properties.json`:
 
@@ -701,9 +703,15 @@ const MyComponent = () => {
 
 `@posthog/react-native-plugin` 3.0 uses `posthog-ios` 4.0 and requires:
 
-- React Native 0.71 or later
+- React Native 0.75 or later
 - Xcode 26 or later, on every iOS dependency path
 - An iOS 15 or later deployment target, and macOS 11 or later for React Native macOS apps
+
+On iOS, the plugin now always resolves `posthog-ios` through Swift Package Manager:
+
+- Remove `"posthog.useSpm"` from `ios/Podfile.properties.json` if you set it. The plugin no longer reads it.
+- The plugin no longer needs `use_frameworks! :linkage => :dynamic`. Keep it only if another dependency needs it.
+- Remove the legacy `posthog-react-native-session-replay` package if your app still depends on it. It pulls in `posthog-ios` 3.x, and the plugin uses 4.x.
 
 Apps that use the plugin only through `posthog-react-native` need no code changes. If your code calls the plugin directly:
 
@@ -711,6 +719,8 @@ Apps that use the plugin only through `posthog-react-native` need no code change
 - Pass `throttleDelayMs` instead of `iOSdebouncerDelayMs` or `androidDebouncerDelayMs`, which the plugin no longer reads. `posthog-react-native` still maps these deprecated options to `throttleDelayMs`.
 
 On iOS, native uploads (session replay and native crash reports) pause while cellular data is turned off for your app, instead of sending requests that fail.
+
+The experimental iOS session replay option `sessionReplayConfig.screenshotModeBackgroundCapture` no longer has an effect, because `posthog-ios` 4.0 removes it.
 
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
