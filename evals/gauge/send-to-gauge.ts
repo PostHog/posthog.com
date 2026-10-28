@@ -1,5 +1,7 @@
 import { execFileSync, spawnSync } from 'node:child_process'
+import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { parse } from 'yaml'
 import { repoRoot } from '../load-eval-files.ts'
 import type { CheckPrompt } from '../build-eval-prompts.ts'
 
@@ -31,7 +33,43 @@ export type GaugeSpec = {
     }[]
 }
 
-export function toGaugeSpecs(checks: CheckPrompt[], samples: number): GaugeSpec[] {
+const gauge = (args: string[]) =>
+    execFileSync('gauge', [...args, '--hosted'], {
+        cwd: gaugeDir,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'inherit'],
+        maxBuffer: 64 * 1024 * 1024,
+    })
+
+// Our harness ids are Gauge's harness slugs (claude-code). Gauge's specs and saved evals
+// take its enum (CLAUDE_CODE), so this maps id → enum, from Gauge itself. Free.
+export type GaugeHarnesses = Map<string, string>
+export function gaugeHarnesses(): GaugeHarnesses {
+    const models = JSON.parse(gauge(['models', 'list', '-o', 'json'])) as { harness: string; harnessSlug: string }[]
+    return new Map(models.map((m) => [m.harnessSlug, m.harness]))
+}
+
+export function gaugeAgents(check: CheckPrompt, harnesses: GaugeHarnesses) {
+    return check.harnesses.map((h) => {
+        const agent = harnesses.get(h.id)
+        if (!agent) throw new Error(`Gauge has no harness ${h.id}; check shared/run-config.yml`)
+        return { agent, models: h.models }
+    })
+}
+
+// attach_mcp name → the Gauge server pinned for it, or null until one is pinned.
+const mcpPins = (parse(readFileSync(join(gaugeDir, 'mcp-servers.yml'), 'utf8')) ?? {}) as Record<string, string | null>
+export const gaugeMcpRefs = (check: CheckPrompt) =>
+    check.mcp ? [mcpPins[check.mcp.name]].filter((ref): ref is string => !!ref) : []
+
+// Why Gauge can't run a check that is otherwise ready, or null.
+export function gaugeCantRunReason(check: CheckPrompt): string | null {
+    if (check.mcp && !mcpPins[check.mcp.name])
+        return `attach_mcp ${check.mcp.name} has no Gauge server pinned in gauge/mcp-servers.yml`
+    return null
+}
+
+export function toGaugeSpecs(checks: CheckPrompt[], samples: number, harnesses: GaugeHarnesses): GaugeSpec[] {
     const specs: GaugeSpec[] = []
     for (let start = 0; start < checks.length; start += maxCasesPerRequest) {
         specs.push({
@@ -41,26 +79,18 @@ export function toGaugeSpecs(checks: CheckPrompt[], samples: number): GaugeSpec[
                 prompt: c.prompt,
                 criteria: c.criteria,
                 config: {
-                    agents: c.harnesses.map((h) => ({ agent: h.gauge, models: h.models })),
+                    agents: gaugeAgents(c, harnesses),
                     sampleCount: samples,
                     // An answer-only check has no codebase.
                     repoUrl: c.codebase?.repo ?? null,
                     repoRef: c.codebase?.ref ?? null,
-                    ...(c.mcp?.ref ? { mcpRefs: [c.mcp.ref] } : {}),
+                    ...(c.mcp ? { mcpRefs: gaugeMcpRefs(c) } : {}),
                 },
             })),
         })
     }
     return specs
 }
-
-const gauge = (args: string[]) =>
-    execFileSync('gauge', [...args, '--hosted'], {
-        cwd: gaugeDir,
-        encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'inherit'],
-        maxBuffer: 64 * 1024 * 1024,
-    })
 
 export const dryRun = (specPath: string) => gauge(['run', '--apply', specPath, '--dry-run'])
 
@@ -73,6 +103,46 @@ export function findRequestId(launchJson: string): string | null {
 }
 
 const sleep = (ms: number) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
+
+// One agent session's grade, in terms that don't depend on Gauge.
+export type SessionResult = {
+    check: string // check key
+    harness: string // id from shared/run-config.yml
+    model: string
+    passed: boolean
+    criteria: { name: string; passed: boolean; reason: string }[]
+    url: string | null // where to read the session
+}
+
+type GaugeVerdict = {
+    batches?: {
+        runs?: {
+            agent: string
+            model: string
+            result: string
+            url?: string
+            criterionResults?: { name: string; passed: boolean; reasoning?: string }[]
+        }[]
+    }[]
+}
+
+export function toSessionResults(check: string, verdict: unknown, harnesses: GaugeHarnesses): SessionResult[] {
+    const ids = new Map([...harnesses].map(([id, agent]) => [agent, id]))
+    return ((verdict as GaugeVerdict).batches ?? []).flatMap((batch) =>
+        (batch.runs ?? []).map((run) => ({
+            check,
+            harness: ids.get(run.agent) ?? run.agent,
+            model: run.model,
+            passed: run.result === 'PASSED',
+            criteria: (run.criterionResults ?? []).map((c) => ({
+                name: c.name,
+                passed: c.passed,
+                reason: c.reasoning ?? '',
+            })),
+            url: run.url ?? null,
+        }))
+    )
+}
 
 export type WaitResult = { verdict: unknown; passed: boolean } | { error: string }
 

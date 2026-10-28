@@ -34,7 +34,7 @@ checks:
                   other VITE_ names pass). Cite the file and line(s).
               uses-defaults: >-
                   The PostHog options include a defaults option set to a date string
-                  (the current recommended value is '2026-08-30'). Cite the file and
+                  (the current recommended value is '<ph_posthog_js_defaults>'). Cite the file and
                   line(s).
 
     - id: install-no-docs

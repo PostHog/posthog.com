@@ -1,29 +1,25 @@
 # Run settings: the harnesses and models every check runs on, the MCP servers a
-# check can attach, and how many samples. `verified: true` means the pair is listed by
-# `gauge models list --hosted` for our org and a dry run accepted it.
+# check can attach, and how many samples. Nothing here is specific to Gauge; evals/gauge/
+# maps it to Gauge. `verified: true` means a dry run accepted the pair.
 # Unverified pairs run only with --include-unverified.
 harnesses:
     - id: claude-code
-      gauge: CLAUDE_CODE
       models: [claude-sonnet-5-5]
       verified: true
     - id: codex
-      gauge: CODEX_CLI
       models: [gpt-6-sol]
       verified: false
 
 samples: 1
 
-# MCP servers a check can attach with `attach_mcp: <name>`. Each value pins a Gauge
-# server as handle@version (`gauge mcp list --hosted`). MCP checks log in to a PostHog
-# project made only for evals, never a real one. Until that project exists and its
-# login is added to Gauge as a new version, posthog has no version, and checks that
-# attach it are skipped.
+# MCP servers a check can attach with `attach_mcp: <name>`. MCP checks log in to a
+# PostHog project made only for evals, never a real one. The runner's own pin for each
+# server lives beside the runner, such as evals/gauge/mcp-servers.yml.
 mcp:
-    posthog: null
+    posthog:
+        url: https://mcp.posthog.com/mcp
 
-# `attach_skill: true` on a check. A placeholder: skills aren't built yet, because
-# Gauge only takes skills from GitHub and we haven't agreed where they live. Every
-# skill check is skipped.
+# `attach_skill: true` on a check. A placeholder: skills aren't built yet, because we
+# haven't agreed which GitHub repo they live in. Every skill check is skipped.
 skills:
     enabled: false

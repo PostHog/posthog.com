@@ -4,22 +4,35 @@ import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { createInterface } from 'node:readline/promises'
 import { fileURLToPath } from 'node:url'
-import { dryRun, findRequestId, gaugeAvailable, toGaugeSpecs, wait } from './gauge/send-to-gauge.ts'
+import {
+    dryRun,
+    findRequestId,
+    gaugeAvailable,
+    gaugeCantRunReason,
+    gaugeHarnesses,
+    toGaugeSpecs,
+    toSessionResults,
+    wait,
+    type GaugeHarnesses,
+    type SessionResult,
+} from './gauge/send-to-gauge.ts'
 import {
     createSavedEval,
     definitionFor,
     editSavedEval,
-    harnessSlugs,
-    idsFile,
     isCurrent,
     launchSavedEval,
     listSavedEvals,
-    readIds,
     removeSavedEval,
-    savedEvalName,
-    writeIds,
 } from './gauge/saved-evals.ts'
-import { buildPrompts, checkKey, fetchPageText, type CheckPrompt, type Selection } from './build-eval-prompts.ts'
+import {
+    buildPrompts,
+    checkKey,
+    checkName,
+    fetchPageText,
+    type CheckPrompt,
+    type Selection,
+} from './build-eval-prompts.ts'
 import {
     loadEvalFiles,
     loadShared,
@@ -40,8 +53,8 @@ Commands:
   validate        Check every eval file. Free.
   index           Print page → checks, from every eval file and pages: list.
   plan            Build the selected checks' prompts and run gauge --dry-run. Free.
-  sync            Create or update one saved Gauge eval per selected check, and record
-                  their ids in gauge/saved-evals.json. Starts no sessions.
+  sync            Create or update one saved Gauge eval per selected check, named
+                  [posthog.com/<path>] <check id>. Starts no sessions.
   run             Show how many saved evals and agent sessions would launch, ask to
                   confirm, then launch them and wait for judging. Spends Gauge credits.
 
@@ -171,13 +184,11 @@ export function select(files: EvalFile[], shared: Shared, options: Options, chan
 export function cantRunReason(check: CheckPrompt, shared: Shared): string | null {
     if (check.codebase && !check.codebase.ref)
         return `codebase ${check.codebase.name} has no ref in shared/codebases-to-test.yaml`
-    if (check.mcp && !check.mcp.ref)
-        return `attach_mcp ${check.mcp.name} has no version pinned in the mcp map of shared/run-config.yml`
     if (check.skill)
         return shared.runConfig.skills.enabled
             ? "attach_skill isn't built yet; skills need gauge/skills.ts"
             : 'attach_skill is a placeholder (skills.enabled is false in shared/run-config.yml)'
-    return null
+    return gaugeCantRunReason(check)
 }
 
 // What the agent gets on top of the prompt, for the plan output.
@@ -318,12 +329,13 @@ async function main(argv: string[]): Promise<number> {
         console.error('The gauge CLI is not on PATH: npm install -g @withgauge/cli, then gauge auth login')
         return 1
     }
-    if (options.command === 'sync') return sync(checks, files, shared, options)
+    const harnessMap = gaugeHarnesses()
+    if (options.command === 'sync') return sync(checks, files, shared, options, harnessMap)
     if (options.command === 'plan') {
         // Absolute, because the gauge CLI runs from evals/gauge/, not from here.
         const specDir = options.write ? resolve(options.write) : await mkdtemp(join(tmpdir(), 'posthog-evals-'))
         await mkdir(specDir, { recursive: true })
-        for (const [i, spec] of toGaugeSpecs(checks, shared.runConfig.samples).entries()) {
+        for (const [i, spec] of toGaugeSpecs(checks, shared.runConfig.samples, harnessMap).entries()) {
             const path = join(specDir, `spec-${i + 1}.json`)
             await writeFile(path, `${JSON.stringify(spec, null, 4)}\n`)
             console.log(dryRun(path))
@@ -331,60 +343,54 @@ async function main(argv: string[]): Promise<number> {
         console.log(`Specs in ${specDir}`)
         return 0
     }
-    return runSavedEvals(checks, shared, cantRun, options.yes)
+    return runSavedEvals(checks, shared, cantRun, options.yes, harnessMap)
 }
 
 const unfiltered = (options: Options) =>
     [options.pages, options.tags, options.suites, options.harnesses].every((list) => list.length === 0) &&
     !options.changed
 
-// Makes Gauge's saved evals match the eval files. An eval is edited only when something
-// in it changed, so Gauge starts a new revision only for a real change. `ready` are the
-// checks that can run; `files` holds every check, including skipped ones and ones in
-// draft or skipped files, so their saved evals, if any, don't count as orphans.
-function sync(ready: CheckPrompt[], files: EvalFile[], shared: Shared, options: Options): number {
-    const slugs = harnessSlugs()
+// Makes Gauge's saved evals match the eval files, matching them by name. An eval is
+// edited only when something in it changed, so Gauge starts a new revision only for a
+// real change. `ready` are the checks that can run; `files` holds every check,
+// including skipped ones and ones in draft or skipped files, so their saved evals, if
+// any, don't count as orphans.
+function sync(ready: CheckPrompt[], files: EvalFile[], shared: Shared, options: Options, harnesses: GaugeHarnesses) {
     const saved = listSavedEvals()
-    const ids = readIds()
-    const counts = { created: 0, updated: 0, unchanged: 0 }
+    const counts = { created: 0, updated: 0, unchanged: 0, duplicated: 0 }
     for (const check of ready) {
-        const wanted = definitionFor(check, shared.runConfig.samples)
-        const existing = saved.get(wanted.name)
-        if (!existing) {
-            ids[check.key] = createSavedEval(wanted, slugs)
+        const wanted = definitionFor(check, shared.runConfig.samples, harnesses)
+        const existing = saved.get(wanted.name) ?? []
+        if (existing.length > 1) {
+            counts.duplicated++
+            console.log(`  duplicate  ${check.name}: ${existing.length} saved evals have this name; delete all but one`)
+        } else if (existing.length === 0) {
+            createSavedEval(wanted, harnesses)
             counts.created++
-            console.log(`  created    ${check.key}  ${ids[check.key]}`)
-        } else if (!isCurrent(existing, wanted)) {
-            editSavedEval(existing.id, wanted, slugs)
-            ids[check.key] = existing.id
+            console.log(`  created    ${check.name}`)
+        } else if (!isCurrent(existing[0], wanted)) {
+            editSavedEval(existing[0].id, wanted, harnesses)
             counts.updated++
-            console.log(`  updated    ${check.key}  ${existing.id}`)
-        } else {
-            ids[check.key] = existing.id
-            counts.unchanged++
-        }
+            console.log(`  updated    ${check.name}`)
+        } else counts.unchanged++
     }
 
     // Saved evals for checks that no longer exist. Only knowable when sync saw every check.
     if (unfiltered(options)) {
-        const keys = new Set(files.flatMap((file) => file.checks.map((check) => checkKey(file, check))))
-        for (const key of Object.keys(ids)) if (!keys.has(key)) delete ids[key]
-        const names = new Set([...keys].map(savedEvalName))
-        const orphans = [...saved.values()].filter((e) => !names.has(e.name))
+        const names = new Set(files.flatMap((file) => file.checks.map((check) => checkName(file, check))))
+        const orphans = [...saved.values()].flat().filter((e) => !names.has(e.name))
         for (const orphan of orphans) {
             if (options.prune) removeSavedEval(orphan.id)
-            console.log(`  ${options.prune ? 'deleted' : 'orphan '}    ${orphan.name}  ${orphan.id}`)
+            console.log(`  ${options.prune ? 'deleted' : 'orphan '}    ${orphan.name}`)
         }
         if (orphans.length > 0 && !options.prune) console.log('Pass --prune to delete the orphans above.')
     }
-    writeIds(ids)
     console.log(
-        `${counts.created} created, ${counts.updated} updated, ${counts.unchanged} unchanged. Ids in ${idsFile.replace(
-            `${repoRoot}/`,
-            ''
-        )}`
+        `${counts.created} created, ${counts.updated} updated, ${counts.unchanged} unchanged${
+            counts.duplicated > 0 ? `, ${counts.duplicated} with duplicate names` : ''
+        }.`
     )
-    return 0
+    return counts.duplicated > 0 ? 1 : 0
 }
 
 type CantRun = { key: string; reason: string }
@@ -392,18 +398,24 @@ type CantRun = { key: string; reason: string }
 // Launches each check under its saved eval, then waits for every one that launched.
 // Nothing here stops the run early except running out of credits: a check that can't
 // run is recorded with its reason, and the summary at the end lists them all.
-async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: CantRun[], yes: boolean): Promise<number> {
-    const ids = readIds()
+async function runSavedEvals(
+    checks: CheckPrompt[],
+    shared: Shared,
+    cantRun: CantRun[],
+    yes: boolean,
+    harnesses: GaugeHarnesses
+): Promise<number> {
     const saved = listSavedEvals()
-    const launchable: CheckPrompt[] = []
+    const launchable: { check: CheckPrompt; evalId: string }[] = []
     const alreadyReported = cantRun.length
     for (const check of checks) {
-        const live = saved.get(savedEvalName(check.key))
-        if (!ids[check.key] || !live || live.id !== ids[check.key])
-            cantRun.push({ key: check.key, reason: 'no saved eval; run pnpm evals sync' })
-        else if (!isCurrent(live, definitionFor(check, shared.runConfig.samples)))
+        const live = saved.get(check.name) ?? []
+        if (live.length === 0) cantRun.push({ key: check.key, reason: 'no saved eval; run pnpm evals sync' })
+        else if (live.length > 1)
+            cantRun.push({ key: check.key, reason: 'more than one saved eval has its name; delete all but one' })
+        else if (!isCurrent(live[0], definitionFor(check, shared.runConfig.samples, harnesses)))
             cantRun.push({ key: check.key, reason: 'saved eval is out of date; run pnpm evals sync' })
-        else launchable.push(check)
+        else launchable.push({ check, evalId: live[0].id })
     }
     const notSynced = cantRun.slice(alreadyReported)
     if (notSynced.length > 0) printSkipped('Also skipping, saved eval not ready', notSynced)
@@ -411,21 +423,36 @@ async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: Can
         console.log('Nothing to launch.')
         return 1
     }
-    if (!(await confirmLaunch(launchable, shared, cantRun.length, yes))) return 1
+    if (
+        !(await confirmLaunch(
+            launchable.map((l) => l.check),
+            shared,
+            cantRun.length,
+            yes
+        ))
+    )
+        return 1
 
     const outDir = join(repoRoot, 'evals', 'results', new Date().toISOString().replace(/[:.]/g, '-'))
     await mkdir(outDir, { recursive: true })
-    await writeFile(join(outDir, 'checks.json'), `${JSON.stringify(launchable, null, 4)}\n`)
+    await writeFile(
+        join(outDir, 'checks.json'),
+        `${JSON.stringify(
+            launchable.map((l) => l.check),
+            null,
+            4
+        )}\n`
+    )
 
     // Launch everything first, so the sessions run side by side, then wait for each.
     const launched: { check: string; evalId: string; requestId: string; response: unknown }[] = []
     let stopReason: string | null = null
-    for (const check of launchable) {
+    for (const { check, evalId } of launchable) {
         if (stopReason) {
             cantRun.push({ key: check.key, reason: `not launched: ${stopReason}` })
             continue
         }
-        const launch = launchSavedEval(ids[check.key])
+        const launch = launchSavedEval(evalId)
         if (!launch.ok) {
             cantRun.push({ key: check.key, reason: `launch failed: ${launch.code}: ${launch.message}` })
             // Every later launch would fail the same way.
@@ -438,16 +465,22 @@ async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: Can
             continue
         }
         console.log(`Launched ${check.key} (${requestId})`)
-        launched.push({ check: check.key, evalId: ids[check.key], requestId, response: JSON.parse(launch.raw) })
+        launched.push({ check: check.key, evalId, requestId, response: JSON.parse(launch.raw) })
         // Saved after every launch: these sessions are paid for even if this process dies.
         await writeFile(join(outDir, 'request.json'), `${JSON.stringify(launched, null, 4)}\n`)
     }
 
-    const results: Record<string, unknown> = {}
+    // results.json is the same whatever runs the evals; gauge-raw.json keeps Gauge's own
+    // verdicts for debugging.
+    const sessions: SessionResult[] = []
+    const raw: Record<string, unknown> = {}
     const verdicts: { check: string; passed: boolean }[] = []
     if (launched.length > 0) console.log(`Waiting for judging on ${launched.length} launched run(s)`)
     // Saved after every verdict, so a crash or a CI timeout keeps what already came back.
-    const save = () => writeFile(join(outDir, 'results.json'), `${JSON.stringify({ results, cantRun }, null, 4)}\n`)
+    const save = async () => {
+        await writeFile(join(outDir, 'results.json'), `${JSON.stringify({ sessions, cantRun }, null, 4)}\n`)
+        await writeFile(join(outDir, 'gauge-raw.json'), `${JSON.stringify(raw, null, 4)}\n`)
+    }
     for (const run of launched) {
         const result = wait(run.requestId)
         if ('error' in result) {
@@ -457,7 +490,8 @@ async function runSavedEvals(checks: CheckPrompt[], shared: Shared, cantRun: Can
             })
             console.log(`  no verdict  ${run.check}`)
         } else {
-            results[run.check] = result.verdict
+            raw[run.check] = result.verdict
+            sessions.push(...toSessionResults(run.check, result.verdict, harnesses))
             verdicts.push({ check: run.check, passed: result.passed })
             console.log(`  ${result.passed ? 'passed' : 'failed'}  ${run.check}`)
         }

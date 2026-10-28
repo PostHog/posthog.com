@@ -7,9 +7,9 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
 
-import { toGaugeSpecs } from './gauge/send-to-gauge.ts'
-import { definitionFor, isCurrent, savedEvalName, type SavedEval } from './gauge/saved-evals.ts'
-import { appendDocs, buildPrompts, checkKey, type CheckPrompt } from './build-eval-prompts.ts'
+import { toGaugeSpecs, toSessionResults } from './gauge/send-to-gauge.ts'
+import { definitionFor, groupByName, isCurrent, type SavedEval } from './gauge/saved-evals.ts'
+import { appendDocs, buildPrompts, checkKey, checkName, type CheckPrompt } from './build-eval-prompts.ts'
 import { cantRunReason, changedSelection, duplicateKeys, parseArgs, select, sessionsFor, setupOf } from './run.ts'
 import {
     loadEvalFiles,
@@ -22,6 +22,10 @@ import {
 } from './load-eval-files.ts'
 
 const shared = loadShared()
+const gaugeHarnesses = new Map([
+    ['claude-code', 'CLAUDE_CODE'],
+    ['codex', 'CODEX_CLI'],
+])
 const everyPage = () => true
 const parse = (path: string, raw: unknown) => parseEvalFile(path, raw, shared, everyPage)
 const messages = (path: string, raw: unknown) => parse(path, raw).problems.map((p) => p.message)
@@ -299,10 +303,31 @@ describe('prompts', () => {
         assert.equal(checks[0].prompt, 'Edit apps/web/.')
         assert.equal(checks[0].criteria[0].rubric, 'Every changed or added file is inside apps/web/.')
         assert.deepEqual(checks[0].criteria[1], { name: 'has-sdk', rubric: 'apps/web/package.json lists posthog-js.' })
-        const [spec] = toGaugeSpecs(checks, 1)
+        const [spec] = toGaugeSpecs(checks, 1, gaugeHarnesses)
+        assert.deepEqual(spec.cases[0].config.agents, [{ agent: 'CLAUDE_CODE', models: ['claude-sonnet-5-5'] }])
         assert.equal(spec.cases[0].config.repoUrl, 'https://github.com/gauge-sh/acme-dispatch-nextjs')
         assert.equal(spec.cases[1].config.repoUrl, null)
         assert.equal(setupOf(checks[0]), 'no docs')
+    })
+
+    test('<ph_posthog_js_defaults> becomes the snapshot the docs code blocks show', async () => {
+        const file = fileFor('contents/docs/a.eval.yaml', {
+            checks: [
+                {
+                    ...answerOnly.checks[0],
+                    criteria: { rubrics: { 'uses-defaults': "defaults is '<ph_posthog_js_defaults>'." } },
+                },
+            ],
+        })
+        const [built] = await buildPrompts(
+            [{ file, check: file.checks[0] }],
+            shared.runConfig.harnesses.slice(0, 1),
+            shared,
+            'https://posthog.com',
+            pageText
+        )
+        assert.match(shared.posthogJsDefaults, /^\d{4}-\d{2}-\d{2}$/)
+        assert.equal(built.criteria[0].rubric, `defaults is '${shared.posthogJsDefaults}'.`)
     })
 
     test('MCP and skill checks are skipped until they can run', async () => {
@@ -321,15 +346,14 @@ describe('prompts', () => {
         )
         assert.equal(setupOf(skill), 'docs link + skill')
         assert.match(cantRunReason(skill, shared)!, /attach_skill is a placeholder/)
-        const pinned = { ...shared, runConfig: { ...shared.runConfig, mcp: { posthog: 'mcp.posthog.com@v1' } } }
-        assert.match(cantRunReason(mcp, shared)!, /attach_mcp posthog has no version pinned/)
-        assert.equal(cantRunReason({ ...mcp, mcp: { name: 'posthog', ref: 'mcp.posthog.com@v1' } }, pinned), null)
+        assert.deepEqual(mcp.mcp, { name: 'posthog', url: 'https://mcp.posthog.com/mcp' })
+        assert.match(cantRunReason(mcp, shared)!, /attach_mcp posthog has no Gauge server pinned/)
     })
 
     test('a run counts one session per harness model per sample', () => {
         const harnesses = [
-            { id: 'a', gauge: 'A', models: ['m1'], verified: true },
-            { id: 'b', gauge: 'B', models: ['m2', 'm3'], verified: false },
+            { id: 'a', models: ['m1'], verified: true },
+            { id: 'b', models: ['m2', 'm3'], verified: false },
         ]
         const checks = [{ harnesses }, { harnesses: harnesses.slice(0, 1) }] as unknown as CheckPrompt[]
         assert.equal(sessionsFor(checks, 1), 4)
@@ -346,7 +370,8 @@ describe('prompts', () => {
         } as unknown as CheckPrompt
         const specs = toGaugeSpecs(
             Array.from({ length: 45 }, (_, i) => ({ ...one, key: `k-${i}` })),
-            1
+            1,
+            gaugeHarnesses
         )
         assert.deepEqual(
             specs.map((s) => s.cases.length),
@@ -358,13 +383,14 @@ describe('prompts', () => {
 describe('saved evals', () => {
     const check = {
         key: 'product-analytics-installation-go-install',
+        name: '[posthog.com/docs/product-analytics/installation/go] install',
         prompt: 'Set up PostHog.',
         criteria: [{ name: 'builds', rubric: 'It builds.' }],
         codebase: { name: 'starter-go', repo: 'https://github.com/gauge-sh/starter-go', ref: 'abc', folder: '.' },
-        harnesses: [{ id: 'claude-code', gauge: 'CLAUDE_CODE', models: ['claude-sonnet-5-5'], verified: true }],
-        mcp: { name: 'posthog', ref: 'mcp.posthog.com@v1' },
+        harnesses: [{ id: 'claude-code', models: ['claude-sonnet-5-5'], verified: true }],
+        mcp: null,
     } as unknown as CheckPrompt
-    const wanted = definitionFor(check, 1)
+    const wanted = definitionFor(check, 1, gaugeHarnesses)
     const saved: SavedEval = {
         id: 'e1',
         name: wanted.name,
@@ -374,13 +400,26 @@ describe('saved evals', () => {
         repoRef: wanted.repoRef,
         agents: wanted.agents,
         sampleCount: 1,
-        mcpRefs: ['mcp.posthog.com@v1'],
+        mcpRefs: [],
         tags: [...wanted.tags].reverse(),
     }
 
-    test("names carry our prefix, so sync never touches anyone else's evals", () => {
-        assert.equal(wanted.name, '[posthog.com] product-analytics-installation-go-install')
-        assert.equal(savedEvalName(check.key), wanted.name)
+    test("a saved eval is named [posthog.com/<path>] <check id>, so sync never touches anyone else's", () => {
+        const page = fileFor('contents/docs/product-analytics/installation/go.eval.yaml', answerOnly)
+        assert.equal(checkName(page, page.checks[0]), '[posthog.com/docs/product-analytics/installation/go] ask')
+        const e2e = fileFor('evals/e2e-evals/flows/signup.eval.yaml', {
+            owner: 'growth',
+            pages: ['docs/a'],
+            ...answerOnly,
+        })
+        assert.equal(checkName(e2e, e2e.checks[0]), '[posthog.com/evals/e2e-evals/flows/signup] ask')
+        assert.equal(wanted.name, check.name)
+        assert.deepEqual(wanted.agents, [{ agent: 'CLAUDE_CODE', models: ['claude-sonnet-5-5'] }])
+    })
+
+    test('two saved evals with one name are both kept, so sync and run can report it', () => {
+        const byName = groupByName([saved, { ...saved, id: 'e2' }])
+        assert.equal(byName.get(check.name)?.length, 2)
     })
 
     test('a saved eval that matches is current, whatever the tag order', () => {
@@ -389,11 +428,40 @@ describe('saved evals', () => {
 
     test('any change to the prompt, criteria, codebase, agents, samples or MCP makes it out of date', () => {
         assert.ok(!isCurrent({ ...saved, mcpRefs: ['mcp.posthog.com@v2'] }, wanted))
-        assert.ok(!isCurrent({ ...saved, mcpRefs: [] }, wanted))
         assert.ok(!isCurrent({ ...saved, promptText: 'Set up PostHog now.' }, wanted))
         assert.ok(!isCurrent({ ...saved, criteria: [{ name: 'builds', rubric: 'It compiles.' }] }, wanted))
         assert.ok(!isCurrent({ ...saved, repoRef: 'def' }, wanted))
         assert.ok(!isCurrent({ ...saved, agents: [{ agent: 'CLAUDE_CODE', models: ['claude-opus-5-5'] }] }, wanted))
         assert.ok(!isCurrent({ ...saved, sampleCount: 3 }, wanted))
+    })
+})
+
+describe('results', () => {
+    test("Gauge's verdict becomes one neutral result per session", () => {
+        const verdict = {
+            batches: [
+                {
+                    runs: [
+                        {
+                            agent: 'CLAUDE_CODE',
+                            model: 'claude-sonnet-5-5',
+                            result: 'QUALITY_FAILED',
+                            url: 'https://example.com/run',
+                            criterionResults: [{ name: 'builds', passed: false, reasoning: 'It fails.' }],
+                        },
+                    ],
+                },
+            ],
+        }
+        assert.deepEqual(toSessionResults('go-install', verdict, gaugeHarnesses), [
+            {
+                check: 'go-install',
+                harness: 'claude-code',
+                model: 'claude-sonnet-5-5',
+                passed: false,
+                criteria: [{ name: 'builds', passed: false, reason: 'It fails.' }],
+                url: 'https://example.com/run',
+            },
+        ])
     })
 })

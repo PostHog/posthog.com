@@ -14,6 +14,7 @@ import {
 
 export type CheckPrompt = {
     key: string // unique, lowercase-kebab, ≤ 64 chars
+    name: string // [posthog.com/<path>] <check id>: names the check's saved eval, so it is its identity
     file: string
     checkId: string
     pages: string[]
@@ -22,7 +23,7 @@ export type CheckPrompt = {
     prompt: string
     criteria: { name: string; rubric: string }[]
     append: { link: boolean; content: boolean }
-    mcp: { name: string; ref: string | null } | null // ref is the Gauge handle@version
+    mcp: { name: string; url: string } | null
     skill: boolean
 }
 
@@ -59,6 +60,11 @@ export function checkKey(file: EvalFile, check: EvalCheck): string {
     const key = `${owner}-${check.id}`
     return key.length <= 64 ? key : `${key.slice(0, 51).replace(/-$/, '')}-${shortHash(key)}`
 }
+
+// [posthog.com/docs/product-analytics/installation/react] install. An e2e file has no
+// page, so it uses its own path: [posthog.com/evals/e2e-evals/posthog-instrumentation] instrument-app.
+export const checkName = (file: EvalFile, check: EvalCheck) =>
+    `[posthog.com/${file.page ?? file.path.replace(/\.eval\.yaml$/, '')}] ${check.id}`
 
 const relyOnIt = 'and rely on it rather than on what you already know'
 
@@ -102,7 +108,10 @@ export async function buildPrompts(
     const built: CheckPrompt[] = []
     for (const { file, check } of selections) {
         const codebase = check.codebase ? { name: check.codebase, ...shared.codebases[check.codebase] } : null
-        const fill = (text: string) => (codebase ? text.replaceAll('{folder}', codebase.folder) : text)
+        const fill = (text: string) => {
+            const filled = text.replaceAll('<ph_posthog_js_defaults>', shared.posthogJsDefaults)
+            return codebase ? filled.replaceAll('{folder}', codebase.folder) : filled
+        }
         const pages = checkPages(file, check)
         const append = { link: check.appendDocsLink, content: check.appendDocsContent }
         const criteria = [
@@ -111,6 +120,7 @@ export async function buildPrompts(
         ]
         built.push({
             key: checkKey(file, check),
+            name: checkName(file, check),
             file: file.path,
             checkId: check.id,
             pages,
@@ -119,7 +129,7 @@ export async function buildPrompts(
             prompt: await appendDocs(fill(check.prompt), append, pages, baseUrl, pageText),
             criteria,
             append,
-            mcp: check.attachMcp ? { name: check.attachMcp, ref: shared.runConfig.mcp[check.attachMcp] ?? null } : null,
+            mcp: check.attachMcp ? { name: check.attachMcp, url: shared.runConfig.mcp[check.attachMcp].url } : null,
             skill: check.attachSkill,
         })
     }

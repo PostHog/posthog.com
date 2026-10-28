@@ -14,14 +14,20 @@ export const suites = ['smoke', 'deep'] as const
 export type Suite = (typeof suites)[number]
 
 export type Codebase = { repo: string; ref?: string; folder: string; source?: string }
-export type Harness = { id: string; gauge: string; models: string[]; verified: boolean }
+export type Harness = { id: string; models: string[]; verified: boolean }
+export type McpServer = { url: string }
 export type RunConfig = {
     harnesses: Harness[]
     samples: number
-    mcp: Record<string, string | null> // name → Gauge handle@version; null until one is pinned
+    mcp: Record<string, McpServer>
     skills: { enabled: boolean }
 }
-export type Shared = { criteria: Record<string, string>; codebases: Record<string, Codebase>; runConfig: RunConfig }
+export type Shared = {
+    criteria: Record<string, string>
+    codebases: Record<string, Codebase>
+    runConfig: RunConfig
+    posthogJsDefaults: string // what <ph_posthog_js_defaults> becomes in prompts and rubrics
+}
 
 export type EvalCheck = {
     id: string
@@ -83,7 +89,19 @@ export function loadShared(): Shared {
             mcp: runConfig.mcp ?? {},
             skills: { enabled: runConfig.skills?.enabled === true },
         },
+        posthogJsDefaults: posthogJsDefaults(),
     }
+}
+
+// The posthog-js `defaults` snapshot that docs code blocks show. The code block is the
+// one place it's set, so eval files use the same placeholder and never go stale.
+const codeBlockFile = 'src/components/CodeBlock/index.tsx'
+export function posthogJsDefaults(): string {
+    const match = readFileSync(join(repoRoot, codeBlockFile), 'utf8').match(
+        /<ph_posthog_js_defaults>\/g,\s*'(\d{4}-\d{2}-\d{2})'/
+    )
+    if (!match) throw new Error(`Can't find the <ph_posthog_js_defaults> value in ${codeBlockFile}`)
+    return match[1]
 }
 
 export const evalFilePaths = () =>

@@ -1,19 +1,21 @@
 import { execFileSync, spawnSync } from 'node:child_process'
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { repoRoot } from '../load-eval-files.ts'
 import type { CheckPrompt } from '../build-eval-prompts.ts'
+import { gaugeAgents, gaugeMcpRefs, type GaugeHarnesses } from './send-to-gauge.ts'
 
-// Saved evals in Gauge ("eval sets"): one per check, each with a stable id that every
-// paid run launches under, so Gauge keeps one history per check.
-// `pnpm evals sync` creates or updates them from the eval files; `pnpm evals run`
-// launches them. Our evals share the Gauge org with other people's, so we only ever
-// touch evals whose name starts with namePrefix.
+// Saved evals in Gauge ("eval sets"): one per check, which every paid run launches
+// under, so Gauge keeps one history per check. A saved eval's name is the check's name,
+// [posthog.com/<path>] <check id>, and that name is its identity: nothing in the repo
+// records Gauge ids. `pnpm evals sync` creates or updates them from the eval files;
+// `pnpm evals run` launches them. Our evals share the Gauge org with other people's, so
+// we only ever touch evals whose name starts with namePrefix.
 
 const gaugeDir = join(repoRoot, 'evals', 'gauge')
-export const idsFile = join(gaugeDir, 'saved-evals.json')
-export const namePrefix = '[posthog.com] '
+// Also matches the older "[posthog.com] <key>" names, so sync lists them as orphans.
+export const namePrefix = '[posthog.com'
 const tag = 'posthog-com-evals'
 
 const gauge = (args: string[]) =>
@@ -51,26 +53,31 @@ export type SavedEval = {
     tags: string[]
 }
 
-export const savedEvalName = (checkKey: string) => `${namePrefix}${checkKey}`
-
-export function definitionFor(check: CheckPrompt, samples: number): SavedEvalDefinition {
+export function definitionFor(check: CheckPrompt, samples: number, harnesses: GaugeHarnesses): SavedEvalDefinition {
     return {
-        name: savedEvalName(check.key),
+        name: check.name,
         prompt: check.prompt,
         criteria: check.criteria,
         repoUrl: check.codebase?.repo ?? null,
         repoRef: check.codebase?.ref ?? null,
-        agents: check.harnesses.map((h) => ({ agent: h.gauge, models: h.models })),
+        agents: gaugeAgents(check, harnesses),
         sampleCount: samples,
-        mcpRefs: check.mcp?.ref ? [check.mcp.ref] : [],
+        mcpRefs: gaugeMcpRefs(check),
         tags: [tag],
     }
 }
 
-// Only our evals, keyed by name.
-export function listSavedEvals(): Map<string, SavedEval> {
+// Only our evals, keyed by name. A name maps to a list, because Gauge doesn't stop two
+// evals sharing one; sync and run report that rather than pick one.
+export function listSavedEvals(): Map<string, SavedEval[]> {
     const all = JSON.parse(gauge(['eval', 'list', '-o', 'json'])) as SavedEval[]
-    return new Map(all.filter((e) => e.name.startsWith(namePrefix)).map((e) => [e.name, e]))
+    return groupByName(all.filter((e) => e.name.startsWith(namePrefix)))
+}
+
+export function groupByName(evals: SavedEval[]): Map<string, SavedEval[]> {
+    const byName = new Map<string, SavedEval[]>()
+    for (const e of evals) byName.set(e.name, [...(byName.get(e.name) ?? []), e])
+    return byName
 }
 
 const sorted = <T>(items: T[], key: (item: T) => string) => [...items].sort((a, b) => key(a).localeCompare(key(b)))
@@ -94,12 +101,8 @@ export function isCurrent(saved: SavedEval, wanted: SavedEvalDefinition): boolea
 }
 
 // The CLI's --agent flag takes the harness slug (claude-code), not the enum (CLAUDE_CODE).
-export function harnessSlugs(): Map<string, string> {
-    const models = JSON.parse(gauge(['models', 'list', '-o', 'json'])) as { harness: string; harnessSlug: string }[]
-    return new Map(models.map((m) => [m.harness, m.harnessSlug]))
-}
-
-function definitionFlags(wanted: SavedEvalDefinition, slugs: Map<string, string>, editing: boolean): string[] {
+function definitionFlags(wanted: SavedEvalDefinition, harnesses: GaugeHarnesses, editing: boolean): string[] {
+    const slugs = new Map([...harnesses].map(([slug, agent]) => [agent, slug]))
     const dir = mkdtempSync(join(tmpdir(), 'posthog-evals-'))
     writeFileSync(join(dir, 'prompt.md'), wanted.prompt)
     // No criterion ids, so the list replaces the saved criteria whole.
@@ -130,16 +133,24 @@ function definitionFlags(wanted: SavedEvalDefinition, slugs: Map<string, string>
     ]
 }
 
-export function createSavedEval(wanted: SavedEvalDefinition, slugs: Map<string, string>): string {
-    const raw = gauge(['eval', 'create', '--name', wanted.name, ...definitionFlags(wanted, slugs, false), '-o', 'json'])
+export function createSavedEval(wanted: SavedEvalDefinition, harnesses: GaugeHarnesses): string {
+    const raw = gauge([
+        'eval',
+        'create',
+        '--name',
+        wanted.name,
+        ...definitionFlags(wanted, harnesses, false),
+        '-o',
+        'json',
+    ])
     const parsed = JSON.parse(raw) as { id?: string; evalSet?: { id?: string } }
     const id = parsed.id ?? parsed.evalSet?.id
     if (!id) throw new Error(`No id in the gauge eval create response; check its shape:\n${raw}`)
     return id
 }
 
-export function editSavedEval(id: string, wanted: SavedEvalDefinition, slugs: Map<string, string>): void {
-    gauge(['eval', 'edit', id, ...definitionFlags(wanted, slugs, true), '-o', 'json'])
+export function editSavedEval(id: string, wanted: SavedEvalDefinition, harnesses: GaugeHarnesses): void {
+    gauge(['eval', 'edit', id, ...definitionFlags(wanted, harnesses, true), '-o', 'json'])
 }
 
 export const removeSavedEval = (id: string) => gauge(['eval', 'rm', id])
@@ -165,14 +176,4 @@ export function launchSavedEval(id: string): Launch {
     } catch {
         return { ok: false, code: 'unknown', message: output.trim() || `gauge exited with ${result.status}` }
     }
-}
-
-// check key → saved eval id. Committed, so anyone can see which Gauge eval a check maps to.
-export function readIds(): Record<string, string> {
-    return existsSync(idsFile) ? (JSON.parse(readFileSync(idsFile, 'utf8')) as Record<string, string>) : {}
-}
-
-export function writeIds(ids: Record<string, string>): void {
-    const ordered = Object.fromEntries(Object.entries(ids).sort(([a], [b]) => a.localeCompare(b)))
-    writeFileSync(idsFile, `${JSON.stringify(ordered, null, 4)}\n`)
 }
