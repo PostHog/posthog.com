@@ -2,7 +2,7 @@
 title: How Witty Works created open-source plugins with the PostHog community
 customer: Witty Works
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/wittyworks_posthog_7efa8c904e.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/witty_works_1920x1080_46417e1b6a.png
 date: 2022-03-15
 ---
 

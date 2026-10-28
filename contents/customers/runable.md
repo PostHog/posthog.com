@@ -2,7 +2,7 @@
 title: How Runable builds an agent for small business owners and tracks everything in PostHog
 customer: Runable
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/RUNABLE_fb1f9c5d33.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/runable_1920x1080_1ad8796a7c.png
 date: 2026-10-07
 ---
 
