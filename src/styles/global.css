@@ -3124,15 +3124,8 @@ article.reader-view-content-container:has(.quest-sidebar) {
 
 /* On mobile, always present AppWindows as expanded (full-screen) regardless of SSR windowed state. */
 @media (max-width: 767px) {
-    [data-app='Desktop'] {
-        position: fixed;
-        top: 0;
-        bottom: auto;
-        height: 100dvh;
-    }
-
     #app-container div[data-app='AppWindow']:not([data-fixed-size]) {
-        @apply size-full rounded-none;
+        @apply size-full rounded-tr-none rounded-tl-none;
     }
 
     #app-container div[data-app='AppWindow']:not([data-fixed-size]) > .size-full.flex-grow {
