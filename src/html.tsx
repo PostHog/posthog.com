@@ -32,6 +32,19 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     href="/fonts/squeak-bold-webfont.woff"
                     crossOrigin="anonymous"
                 />
+                {/* WebMCP is an origin trial in Chrome 149-156. Without this token, document.modelContext
+                    is undefined for visitors and the tools in components/WebMCP register nothing. */}
+                {process.env.GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN && (
+                    <meta httpEquiv="origin-trial" content={process.env.GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN} />
+                )}
+
+                {props.headComponents}
+            </head>
+            <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
+                {props.preBodyComponents}
+                {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
+                <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
+                {/* Let server-rendered content paint before analytics, but initialize before Gatsby's app scripts. */}
                 {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
                     <>
                         <script
@@ -46,19 +59,6 @@ export default function HTML(props: HTMLProps): JSX.Element {
                         <script src="/scripts/posthog-init.js" />
                     </>
                 )}
-
-                {/* WebMCP is an origin trial in Chrome 149-156. Without this token, document.modelContext
-                    is undefined for visitors and the tools in components/WebMCP register nothing. */}
-                {process.env.GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN && (
-                    <meta httpEquiv="origin-trial" content={process.env.GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN} />
-                )}
-
-                {props.headComponents}
-            </head>
-            <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
-                {props.preBodyComponents}
-                {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
-                <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
                 {props.postBodyComponents}
             </body>
         </html>

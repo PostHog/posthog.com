@@ -30,13 +30,15 @@ function load(file, environment, dependencies = {}) {
     return exports
 }
 
-function scripts(environment) {
+function scripts(environment, postBodyComponents) {
     const HTML = load('src/html.tsx', environment).default
-    const markup = renderToStaticMarkup(React.createElement(HTML, { body: '', htmlAttributes: {}, bodyAttributes: {} }))
+    const markup = renderToStaticMarkup(
+        React.createElement(HTML, { body: '', htmlAttributes: {}, bodyAttributes: {}, postBodyComponents })
+    )
     const dom = new JSDOM(markup)
-    const result = [...dom.window.document.querySelectorAll('script')]
+    const document = dom.window.document.cloneNode(true)
     dom.window.close()
-    return result
+    return [...document.querySelectorAll('script')]
 }
 
 for (const assetHost of [env.GATSBY_POSTHOG_ASSET_HOST, undefined]) {
@@ -54,6 +56,16 @@ for (const assetHost of [env.GATSBY_POSTHOG_ASSET_HOST, undefined]) {
         assert.equal(elements[1].getAttribute('src'), '/scripts/posthog-init.js')
     })
 }
+
+test('analytics loads after server-rendered content and before Gatsby scripts', () => {
+    const elements = scripts(env, React.createElement('script', { src: '/app.js', async: true }))
+    const content = elements[0].ownerDocument.getElementById('___gatsby')
+    assert.equal(elements[0].parentElement.tagName, 'BODY')
+    assert.ok(content.compareDocumentPosition(elements[0]) & content.DOCUMENT_POSITION_FOLLOWING)
+    assert.equal(elements[1].getAttribute('src'), '/scripts/posthog-init.js')
+    assert.equal(elements[2].getAttribute('src'), '/app.js')
+    assert.equal(elements[2].hasAttribute('async'), true)
+})
 
 for (const missing of ['GATSBY_POSTHOG_API_KEY', 'GATSBY_POSTHOG_API_HOST']) {
     test(`omits both analytics scripts without ${missing}`, () => {
