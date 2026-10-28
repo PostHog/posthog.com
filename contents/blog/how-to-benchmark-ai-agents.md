@@ -133,7 +133,6 @@ With these rubrics in place, we could reliably track scout success rates across 
 | Thinking effort | Do scouts actually need to think at xhigh levels, if medium does it just fine with 30% fewer tokens? |
 | Prompt changes | If we create 5 different versions of the skill, which version works best for each task? |
 
-![Trial start screen](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_13_at_11_09_44_0a21ad656f.png)
 
 The result is a report with a close-to-clear answer. It's not 100% deterministic, but it's way better than just "vibes".
 
