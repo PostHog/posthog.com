@@ -251,13 +251,14 @@ We'll email you before your organization moves. PostHog won't stop writing flag 
 - [Insights](/docs/product-analytics/insights), including funnels, on `$feature_flag_called`
 - [Actions](/docs/data/actions) and [cohorts](/docs/data/cohorts) on `$feature_flag_called`
 - [SQL](/docs/sql) and [API](/docs/api/queries) queries that read `$feature_flag_called` from the `events` table
-- [Destinations](/docs/cdp/destinations) and [Workflows](/docs/workflows) triggered by `$feature_flag_called`
+- [Workflows](/docs/workflows) triggered by `$feature_flag_called`
 
 After the move, queries on flag calls return at most the last 90 days.
 
 ### What stops showing new flag calls after the move
 
 - [Batch exports](/docs/cdp/batch-exports) of the `events` table
+- [Destinations](/docs/cdp/destinations) triggered by `$feature_flag_called`
 
 [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, don't include `$feature_flag_called` events.
 

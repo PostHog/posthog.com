@@ -67,12 +67,13 @@ Here's more details on what this means:
 
 ### Do you need to change anything for flag calls?
 
-Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Destinations, workflows, and Zapier keep getting flag calls as they happen. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
+Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Workflows keep getting flag calls as they happen. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
 
-Two exceptions:
+Three exceptions:
 
 - **SQL with `SELECT *`, `SAMPLE`, or `FINAL`:** a query that reads `$feature_flag_called` with any of these returns an error. List the columns you need instead of `*`, and remove `SAMPLE` and `FINAL`.
 - **Batch exports:** from November 30, exports of the `events` table stop getting new flag calls. [Tell us](/support) if you need them.
+- **Destinations:** from November 30, destinations triggered by `$feature_flag_called` stop getting flag calls. [Tell us](/support) if you use one.
 
 We'll email you before your organization moves. For details, see [Where does PostHog store flag calls?](/docs/feature-flags/troubleshooting#where-does-posthog-store-flag-calls)
 
