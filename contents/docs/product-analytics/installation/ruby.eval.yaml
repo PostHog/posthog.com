@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, ruby]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Rails app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: starter-rails
+      prompt: >-
+          Set up PostHog in the Rails app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/Gemfile lists `posthog-ruby`.
+              initialized: >-
+                  The app requires 'posthog' and creates a client with
+                  PostHog::Client.new, passing api_key (the project token) and host (the
+                  PostHog host). Cite the file and line(s).
