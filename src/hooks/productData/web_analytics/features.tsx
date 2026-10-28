@@ -147,6 +147,10 @@ export const features = {
                 description: 'Connect revenue data from events or payment platforms',
             },
             {
+                title: 'Marketing analytics',
+                description: 'Track campaign costs and performance from Google Ads, Meta, LinkedIn, and more (beta)',
+            },
+            {
                 title: 'Active hours heatmap',
                 description: 'Visualize when your users are most active',
             },

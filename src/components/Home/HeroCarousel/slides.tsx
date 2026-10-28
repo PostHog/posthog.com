@@ -41,6 +41,7 @@ const manageQueryHandles = ['data_modeling', 'sql_editor', 'cdp', 'data_warehous
 
 const analyticsHandles = [
     'web_analytics',
+    'marketing_analytics',
     'product_analytics',
     'trends',
     'funnels',
@@ -330,6 +331,7 @@ const ProductStatusLink = ({ product, className = '' }: { product: any; classNam
 const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, number]; '@3xl': [number, number] }[] =
     [
         { handle: 'web_analytics', '@xl': [28, 4], '@2xl': [26, 6], '@3xl': [24, 6] },
+        { handle: 'marketing_analytics', '@xl': [72, 4], '@2xl': [74, 6], '@3xl': [76, 6] },
         { handle: 'product_analytics', '@xl': [18, 22], '@2xl': [16, 22], '@3xl': [14, 22] },
         { handle: 'session_replay', '@xl': [10, 36], '@2xl': [10, 38], '@3xl': [10, 40] },
         { handle: 'funnels', '@xl': [7, 6], '@2xl': [5, 59], '@3xl': [6, 60] },

@@ -68,7 +68,7 @@ const sections = [
                 label: 'Understand product usage',
                 colSpan: 2,
                 columns: [
-                    ['web_analytics', 'product_analytics', 'trends'],
+                    ['web_analytics', 'marketing_analytics', 'product_analytics', 'trends'],
                     ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
                     ['ai_observability', 'llm_evals', 'activity'],
                 ],
