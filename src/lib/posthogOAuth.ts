@@ -7,11 +7,19 @@ const RETURN_PATH_KEY = 'posthog_oauth_return_path'
 const isSafeReturnPath = (path: string | null): path is string =>
     isSafeInternalPath(path) && !path.startsWith(POSTHOG_OAUTH_REDIRECT_PATH)
 
+const saveReturnPath = (path: string) => {
+    try {
+        sessionStorage.setItem(RETURN_PATH_KEY, path)
+    } catch {
+        return
+    }
+}
+
 export const startPostHogOAuth = ({ intent }: { intent?: 'link' } = {}): void => {
     const { pathname, search, hash } = window.location
     const currentPath = `${pathname}${search}${hash}`
     if (isSafeReturnPath(currentPath)) {
-        sessionStorage.setItem(RETURN_PATH_KEY, currentPath)
+        saveReturnPath(currentPath)
     }
     if (intent) {
         localStorage.setItem('posthog_oauth_intent', intent)
@@ -20,7 +28,11 @@ export const startPostHogOAuth = ({ intent }: { intent?: 'link' } = {}): void =>
 }
 
 export const consumePostHogOAuthReturnPath = (): string | null => {
-    const path = sessionStorage.getItem(RETURN_PATH_KEY)
-    sessionStorage.removeItem(RETURN_PATH_KEY)
-    return isSafeReturnPath(path) ? path : null
+    try {
+        const path = sessionStorage.getItem(RETURN_PATH_KEY)
+        sessionStorage.removeItem(RETURN_PATH_KEY)
+        return isSafeReturnPath(path) ? path : null
+    } catch {
+        return null
+    }
 }
