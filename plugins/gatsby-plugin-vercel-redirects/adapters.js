@@ -16,5 +16,8 @@ exports.createCloudflarePagesMiddleware = (findRedirect) => (context) => {
 
 exports.redirectBrowserNavigation = (findRedirect, location, replace) => {
     const redirect = findRedirect(new URL(`${location.pathname}${location.search}`, location.href))
-    if (redirect) replace(`${redirect.location}${redirect.location.includes('#') ? '' : location.hash}`)
+    if (!redirect) return false
+
+    replace(`${redirect.location}${redirect.location.includes('#') ? '' : location.hash}`)
+    return true
 }
