@@ -169,7 +169,7 @@ So let's go back to the B4 and B12 example above to explain the failure modes.
 
 **Failure mode #1** is when cheating makes an agent appear better than it actually is. An agent using a faster but lighter model like Luna could easily just read and copy notes from an agent running on Opus.
 
-Failure mode #2 is less obvious and, funnily enough, can make a model seem worse than it actually is. Even if an agent doesn't actively try to cheat, shared state could still cause problems anyway. For example, an agent could decide to honestly skip a task because it sees that another agent already completed it. One time, during a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely:
+**Failure mode #2** is when shared state leads smarter models to make decisions that make them seem worse than they are, such as skipping a task because it sees that an another agent already completed. One time, during a benchmark run, Run B2 looked at candidate anomalies, saw that an earlier run had already covered the target bug, and skipped that candidate entirely:
 
 ![Scout trace showing run B2 skipping a candidate because an earlier run had already covered it.](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/05_trace_b2_prior_run_4c6e841386.png)
 
