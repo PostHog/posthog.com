@@ -85,7 +85,7 @@ export const freeTierProducts: FreeTierProduct[] = [
     {
         name: 'Marketing analytics',
         badge: 'Beta',
-        description: 'Billed with sources (rows synced)',
+        description: 'Billed with sources',
         icon: Icons.IconMegaphone,
         iconColor: 'text-orange',
     },
