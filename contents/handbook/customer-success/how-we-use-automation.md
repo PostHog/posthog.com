@@ -47,7 +47,7 @@ Once live, the stream posts each call to the channel after it ends. Everyone wor
 * inactivity periods to flag engagement reviews  
 * The first real use of a paid product that the account did not use before creates a Customer Analytics task for the account owner (see [managed customer scouts](#managed-customer-scouts))  
 * Overdue invoices and failed card payments send Slack alerts to the assigned AE, CSM, or TAM (see [failed/late payments](/handbook/growth/sales/billing#failedlate-payments))  
-* Paid credit that will run out at least a month before it expires sends Slack alerts to the assigned AE, CSM, or TAM (see [when they don't have enough credit](/handbook/growth/sales/contract-rules#when-they-dont-have-enough-credit-to-cover-their-term))  
+* Paid credit that will run out at least a month before it expires sends Slack alerts to the assigned AE, CSM, or TAM, and creates a Customer Analytics task for the account owner (see [when they don't have enough credit](/handbook/growth/sales/contract-rules#when-they-dont-have-enough-credit-to-cover-their-term))  
 * Health score changes can trigger Customer Analytics tasks or PostHog automation  
 * Annual renewal dates trigger preparation workflows in advance and a ping in Slack
 
