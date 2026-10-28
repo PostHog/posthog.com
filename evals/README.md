@@ -55,30 +55,23 @@ status: active # active | draft | skipped
 checks:
     - id: install
       description: >-
-          Tests whether the React install page alone gets an agent to wrap a Vite React
-          app in PostHogProvider, with config from VITE_ env variables and the
-          recommended defaults.
+          Baseline: can an agent set up PostHog in a Vite React app from a one-line
+          request? The agent gets no docs, so docs-read shows which pages it finds on
+          its own.
       codebase_to_test: react-vite # key in shared/codebases-to-test.yaml
-      prompt: &install-prompt |
-          The app in {folder}/ needs product analytics. Set up PostHog in it.
-          Only change files inside {folder}/. Read the project token and host from
-          environment variables rather than writing them into the code.
-      append_docs_link: true # add the page's .md URL to the end of the prompt
-      criteria: &install-criteria
-          shared: [config-from-env, stays-in-folder, builds]
+      prompt: >-
+          Set up PostHog in the React app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
           rubrics:
-              has-posthog-js: >-
-                  {folder}/package.json lists `posthog-js` as a dependency.
-              uses-defaults: >-
-                  The PostHog options include a defaults option set to
-                  '<ph_posthog_js_defaults>'. Cite the file and line(s).
-
-    - id: install-no-docs # the same task with nothing added, to compare against
-      description: Same task as install, with no docs and nothing attached.
-      codebase_to_test: react-vite
-      prompt: *install-prompt # YAML anchors share the prompt and criteria
-      criteria: *install-criteria
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-js` and `@posthog/react`.
+              provider: >-
+                  {folder}/src/main.tsx wraps the rendered app in PostHogProvider from
+                  @posthog/react. Cite the file and line(s).
 ```
+
+Every eval file has one check for now: a baseline with a one-line prompt and no docs, MCP or skill added. The `append_` and `attach_` keys below still work, for checks added later.
 
 | Field                          | Required                   | Default                    | Meaning                                                                                                                                                                      |
 | ------------------------------ | -------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -107,34 +100,36 @@ Each criterion is a pass condition the judge grades. `criteria` has two keys:
 | `shared`  | Names of rubrics many pages reuse, from `shared/criteria.yaml` |
 | `rubrics` | This check's own pass conditions, as `name: text`              |
 
-Rubric names are kebab-case and can't repeat a shared name. The runner sends shared rubrics first.
+Rubric names are kebab-case and can't repeat a shared name. The runner sends shared rubrics first. There are two shared rubrics:
+
+- `builds`, for code checks: the app builds or starts after the change.
+- `docs-read`, for every check: the agent read at least one posthog.com page. The judge lists every posthog.com URL the agent read, so the results show which pages agents find on their own.
 
 Prompts and rubrics take two template variables:
 
 - `{folder}` becomes the codebase's folder, so only checks with a `codebase_to_test` can use it.
 - `<ph_posthog_js_defaults>` becomes the posthog-js `defaults` date that docs code blocks show, read from `src/components/CodeBlock/index.tsx`. Use it instead of a date, so the rubric stays correct when the docs move to a new date. `scripts/check-posthog-js-defaults.js` fails on any hardcoded date in an eval file.
 
-Checks that test one task in different setups share the prompt and criteria with YAML anchors: `prompt: &install-prompt |` on the first check, `prompt: *install-prompt` on the others. The checks then differ only in what they add, so their results compare directly.
+If you add a check that tests the same task in another setup, such as with the page linked, share the prompt and criteria with YAML anchors: `prompt: &install-prompt` on the first check, `prompt: *install-prompt` on the others. The checks then differ only in what they add, so their results compare directly.
 
 ### Writing a good check
 
-- **Ask what a user would ask.** Describe the goal in product terms, and don't name the API or concept the page teaches. If the agent only gets it right when the prompt names the API, the page didn't help. A `-no-docs` pass means the prompt gives too much away.
-- **Give every check a `-no-docs` twin**, with the same prompt and criteria and nothing added. It shows what the page adds.
+- **Ask what a user would ask**, in one line. Name the stack and the goal, and don't name the API or concept the page teaches. If the agent only gets it right when the prompt names the API, the docs didn't help.
 - **Say why in `description`**, especially what the prompt leaves out on purpose, so the next editor doesn't put it back.
 - **Grade what the page says.** The judge never sees the page, so a rubric names the exact package, function, option or UI path the page gives. Quote the page where you can.
 - **Test what the docs add.** Prefer criteria an agent working from memory would miss: a required option, a newer API, a step the page marks required.
 - **Say what fails.** "Fails if it only identifies at login" stops the judge passing a half-done job.
 - **Keep rubrics checkable.** The judge sees the agent's trace, its final message and the diff. "Cite the file and line" helps.
-- **Answer-only checks** (no `codebase_to_test`) are graded on the final message. Add `answers-directly` to `criteria.shared`.
+- **Answer-only checks** (no `codebase_to_test`) are graded on the final message. Use `shared: [docs-read]`; code checks use `[builds, docs-read]`.
 - **Multi-page checks** list the other pages in `pages:`. If the task needs PostHog installed first, include the install page. If no single page owns the task, or it needs more than 4 pages, put it in `evals/e2e-evals/`. That file names an `owner` and a file-level `pages:` list that every check in it reads.
 
 ## What the agent gets
 
-Each check runs once, as written. Four keys add to it, in any combination. `append_` keys add to the end of the prompt. `attach_` keys add to the Gauge eval.
+Each check runs once, as written. With none of the keys below, the agent gets only the prompt and finds docs on its own, which is how every baseline check runs. Four keys add to it, in any combination. `append_` keys add to the end of the prompt. `attach_` keys add to the Gauge eval.
 
 | Key                         | What the agent gets on top of the prompt                                                | Status                                              |
 | --------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| none                        | Nothing. Measures what the agent already knows. Name the check `<id>-no-docs`.          | Works                                               |
+| none                        | Nothing. The agent works from what it knows and what it finds. Every baseline check.    | Works                                               |
 | `append_docs_link: true`    | The `.md` URL of the page and every `pages:` page, with an instruction to follow them.  | Works                                               |
 | `append_docs_content: true` | The built `.md` of each page, pasted in. With `append_docs_link`, the link comes first. | Works                                               |
 | `attach_mcp: <name>`        | The MCP server's tools, logged in. Gauge holds the login; the agent never sees it.      | Skipped until `gauge/mcp-servers.yml` pins a server |
@@ -189,11 +184,11 @@ Run everything from the repo root with `pnpm evals <command> [filters]`. `pnpm e
 
 ```
 Ready to launch on Gauge
-  Saved evals   21
-  Sessions      21
+  Saved evals   10
+  Sessions      10
   Samples       1 per harness model
   Harnesses     claude-code (claude-sonnet-5-5)
-  Skipped       51 (listed above)
+  Skipped       12 (listed above)
 
 This spends Gauge credits.
 Launch? [y/N]
@@ -295,10 +290,11 @@ Launching many runs at once has hit `insufficient_credits` while the org still h
 
 ## Reading the results
 
-Compare checks that share a prompt:
+For each baseline check, read two things:
 
-- **The `-no-docs` twin passes:** the agent didn't need the docs, so the page isn't being tested. The prompt often names what the page should teach.
-- **The docs checks disagree:** how the docs reach the agent matters. If a content check passes and a link check fails, read the link run's logs to see whether the agent fetched the page.
-- **Every docs check fails on the same criterion:** the page is the problem.
+- **`docs-read`:** which posthog.com pages the agent found on its own, if any. A failed check where the agent never reached the page is a discoverability problem. One where it read the page and still failed points at the page.
+- **The failed rubric:** what the agent missed. If agents miss the same step across several pages, the docs likely bury it.
+
+When a check later gets a setup twin, such as the page linked, compare the two: a gap between them shows what the page adds.
 
 Read failed runs with `gauge run get <run-id> --logs --hosted` before you act. A failure can come from the page, the agent, a badly worded rubric or Gauge, and only the first is a docs fix.

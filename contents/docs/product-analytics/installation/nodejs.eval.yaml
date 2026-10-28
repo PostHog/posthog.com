@@ -5,41 +5,18 @@ status: active
 checks:
     - id: install
       description: >-
-          Tests whether the Node.js install page alone gets an agent to a working
-          posthog-node client with config from env, on an Express app.
+          Baseline: can an agent set up PostHog in a Node.js app from a one-line
+          request? The prompt names only the stack; the agent gets no docs, so docs-read
+          shows which pages it finds on its own.
       codebase_to_test: node-express
-      prompt: &install-prompt |
-          The app in {folder}/ needs product analytics. Set up PostHog in it.
-          Only change files inside {folder}/. Read the project token and host from
-          environment variables rather than writing them into the code. Make sure the
-          app still builds or starts without errors when you're done.
-      append_docs_link: true
-      criteria: &install-criteria
-          shared: [config-from-env, stays-in-folder, builds]
+      prompt: >-
+          Set up PostHog in the Node.js app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
           rubrics:
-              has-posthog-node: >-
-                  {folder}/package.json lists `posthog-node` as a dependency.
-              required-steps-done: >-
-                  The app creates a client with new PostHog(token, { host }) using the
-                  PostHog class from posthog-node, passing the project token and a
-                  host option. Cite the file and line(s).
-
-    - id: install-no-docs
-      description: Same task as install, with no docs and nothing attached. Compare the two to see what the page adds.
-      codebase_to_test: node-express
-      prompt: *install-prompt
-      criteria: *install-criteria
-
-    - id: install-mcp
-      description: Same task as install, with no docs in the prompt and the PostHog MCP attached.
-      codebase_to_test: node-express
-      prompt: *install-prompt
-      attach_mcp: posthog
-      criteria: *install-criteria
-
-    - id: install-skill # placeholder: skipped until skills are built
-      description: Same task as install, with this page attached as a skill instead of in the prompt.
-      codebase_to_test: node-express
-      prompt: *install-prompt
-      attach_skill: true
-      criteria: *install-criteria
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-node`.
+              initialized: >-
+                  The app creates a client with new PostHog(token, { host }) from
+                  posthog-node, passing the project token and a host option. Cite the
+                  file and line(s).

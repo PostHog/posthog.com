@@ -5,37 +5,19 @@ status: active
 checks:
     - id: install
       description: >-
-          Tests whether the iOS install page alone gets an agent to add posthog-ios and
-          set it up at launch, with config from the build, on the Hackers iOS app.
+          Baseline: can an agent set up PostHog in a iOS app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
       codebase_to_test: ios-app
-      prompt: &install-prompt |
-          The app in {folder}/ needs product analytics. Set up PostHog in it.
-          Only change files inside {folder}/. Read the project token and host from the app's build configuration rather than hard-coding them in source. Make sure the app still builds or starts without errors when you're done.
-      append_docs_link: true
-      criteria: &install-criteria
-          shared: [config-from-env, stays-in-folder, builds]
+      prompt: >-
+          Set up PostHog in the iOS app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
           rubrics:
               sdk-installed: >-
-                  The PostHog iOS SDK is added as a dependency: a Swift Package reference to https://github.com/PostHog/posthog-ios.git in {folder}/Hackers.xcodeproj/project.pbxproj, or pod "PostHog" in a Podfile.
-              required-steps-done: >-
-                  The app imports PostHog, creates PostHogConfig(projectToken:host:) with the project token and PostHog host, and calls PostHogSDK.shared.setup(config) at launch, for example in application(_:didFinishLaunchingWithOptions:) in {folder}/App/AppDelegate.swift. Cite the file and line(s).
-
-    - id: install-no-docs
-      description: Same task as install, with no docs and nothing attached. Compare the two to see what the page adds.
-      codebase_to_test: ios-app
-      prompt: *install-prompt
-      criteria: *install-criteria
-
-    - id: install-mcp
-      description: Same task as install, with no docs in the prompt and the PostHog MCP attached.
-      codebase_to_test: ios-app
-      prompt: *install-prompt
-      attach_mcp: posthog
-      criteria: *install-criteria
-
-    - id: install-skill # placeholder: skipped until skills are built
-      description: Same task as install, with this page attached as a skill instead of in the prompt.
-      codebase_to_test: ios-app
-      prompt: *install-prompt
-      attach_skill: true
-      criteria: *install-criteria
+                  The PostHog iOS SDK is a dependency: a Swift Package reference to
+                  https://github.com/PostHog/posthog-ios.git, or a PostHog pod.
+              initialized: >-
+                  The app imports PostHog, creates PostHogConfig(projectToken:host:)
+                  with the project token and PostHog host, and calls
+                  PostHogSDK.shared.setup(config) at launch. Cite the file and line(s).

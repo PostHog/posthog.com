@@ -1,19 +1,11 @@
 # Shared rubrics. A check pulls one in with `criteria.shared: [<name>]`, so the same
 # rubric reads the same way on every page and results line up across pages.
-# {folder} resolves to the check's codebase folder (see codebases-to-test.yaml).
-
-config-from-env: >-
-    The project token and host are read from environment variables or the
-    platform's usual config mechanism. No PostHog project token appears as a
-    literal anywhere in {folder}/.
-
-stays-in-folder: >-
-    Every changed or added file is inside {folder}/.
 
 builds: >-
     The trace shows the app building, starting, or compiling without errors
     after the PostHog changes were made.
 
-answers-directly: >-
-    The agent's final message answers the question in its own words, with the
-    steps or code needed. A bare link to a docs page does not pass.
+docs-read: >-
+    The trace shows the agent read at least one posthog.com page. In your
+    reasoning, list every posthog.com URL the agent read, in the order it read
+    them, or say that it read none.

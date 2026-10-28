@@ -5,38 +5,18 @@ status: draft
 checks:
     - id: install
       description: >-
-          Tests whether the PHP install page alone gets an agent to a working
-          posthog-php setup with config from env. Draft until the php-app fixture
-          exists.
+          Baseline: can an agent set up PostHog in a PHP app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
       codebase_to_test: php-app
-      prompt: &install-prompt |
-          The app in {folder}/ needs product analytics. Set up PostHog in it.
-          Only change files inside {folder}/. Read the project token and host from environment variables rather than writing them into the code. Make sure the app still builds or starts without errors when you're done.
-      append_docs_link: true
-      criteria: &install-criteria
-          shared: [config-from-env, stays-in-folder, builds]
+      prompt: >-
+          Set up PostHog in the PHP app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
           rubrics:
-              has-posthog-posthog-php: >-
-                  {folder}/composer.json lists `posthog/posthog-php` as a dependency.
-              required-steps-done: >-
-                  The app calls PostHog\PostHog::init with the project token as the first argument and an options array that sets 'host' to the PostHog host. Cite the file and line(s).
-
-    - id: install-no-docs
-      description: Same task as install, with no docs and nothing attached. Compare the two to see what the page adds.
-      codebase_to_test: php-app
-      prompt: *install-prompt
-      criteria: *install-criteria
-
-    - id: install-mcp
-      description: Same task as install, with no docs in the prompt and the PostHog MCP attached.
-      codebase_to_test: php-app
-      prompt: *install-prompt
-      attach_mcp: posthog
-      criteria: *install-criteria
-
-    - id: install-skill # placeholder: skipped until skills are built
-      description: Same task as install, with this page attached as a skill instead of in the prompt.
-      codebase_to_test: php-app
-      prompt: *install-prompt
-      attach_skill: true
-      criteria: *install-criteria
+              sdk-installed: >-
+                  {folder}/composer.json lists `posthog/posthog-php`.
+              initialized: >-
+                  The app calls PostHog\PostHog::init with the project token as the
+                  first argument and an options array that sets 'host' to the PostHog
+                  host. Cite the file and line(s).

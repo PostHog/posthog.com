@@ -10,29 +10,16 @@ pages:
 checks:
     - id: frontend-and-backend
       description: >-
-          Checks that the React Router and Node.js install pages together lead
-          the agent to the right package for each side of a full-stack app,
-          sending to one project. The question names the frameworks but not the
-          PostHog packages.
-      prompt: &frontend-and-backend-prompt |
-          We have a React Router 7 frontend and an Express API, and we want product analytics
-          events from both into the same PostHog project. Which PostHog packages do we install
-          where, and how do we initialize each one?
-      append_docs_link: true
-      criteria: &frontend-and-backend-criteria
-          shared: [answers-directly]
+          Baseline: can an agent pick the right SDK for each half of a full-stack app?
+          The agent gets no docs, so docs-read shows which pages it finds on its own.
+      prompt: >-
+          Which PostHog SDKs do I need for a React Router 7 frontend and an Express API?
+      criteria:
+          shared: [docs-read]
           rubrics:
               frontend-packages: >-
-                  The answer installs posthog-js and @posthog/react in the React Router app and
-                  initializes posthog-js on the client, wrapping the app in PostHogProvider.
+                  The answer installs posthog-js and @posthog/react in the React Router
+                  app and wraps the app in PostHogProvider.
               backend-package: >-
-                  The answer installs posthog-node in the Express API and creates a PostHog client
-                  with the project token and a host option.
-              same-project: >-
-                  The answer uses the same project token for both apps, so events land in one
-                  project.
-
-    - id: frontend-and-backend-no-docs
-      description: Same task as frontend-and-backend, with no docs and nothing attached. Compare the two to see what the page adds.
-      prompt: *frontend-and-backend-prompt
-      criteria: *frontend-and-backend-criteria
+                  The answer installs posthog-node in the Express API and creates a
+                  PostHog client with the project token and a host option.

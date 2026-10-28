@@ -35,7 +35,7 @@ const answerOnly = {
         {
             id: 'ask',
             prompt: 'How do I do the thing?',
-            criteria: { shared: ['answers-directly'], rubrics: { 'names-the-button': 'It names the button.' } },
+            criteria: { shared: ['docs-read'], rubrics: { 'names-the-button': 'It names the button.' } },
         },
     ],
 }
@@ -216,7 +216,7 @@ describe('descriptions and suites', () => {
         description: 'Why this check exists.',
         codebase_to_test: 'acme-dispatch-nextjs',
         prompt: 'Tie events in {folder}/ to the signed-in user.',
-        criteria: { shared: ['stays-in-folder'] },
+        criteria: { shared: ['builds'] },
     }
 
     test('code checks need a description', () => {
@@ -282,7 +282,7 @@ describe('prompts', () => {
                     description: 'Checks the codebase folder fills in.',
                     codebase_to_test: 'acme-dispatch-nextjs',
                     criteria: {
-                        shared: ['stays-in-folder'],
+                        shared: ['builds'],
                         rubrics: { 'has-sdk': '{folder}/package.json lists posthog-js.' },
                     },
                 },
@@ -301,7 +301,7 @@ describe('prompts', () => {
             pageText
         )
         assert.equal(checks[0].prompt, 'Edit apps/web/.')
-        assert.equal(checks[0].criteria[0].rubric, 'Every changed or added file is inside apps/web/.')
+        assert.equal(checks[0].criteria[0].name, 'builds')
         assert.deepEqual(checks[0].criteria[1], { name: 'has-sdk', rubric: 'apps/web/package.json lists posthog-js.' })
         const [spec] = toGaugeSpecs(checks, 1, gaugeHarnesses)
         assert.deepEqual(spec.cases[0].config.agents, [{ agent: 'CLAUDE_CODE', models: ['claude-sonnet-5-5'] }])

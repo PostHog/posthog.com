@@ -3,41 +3,21 @@ tags: [instrumentation, javascript, identify]
 status: active
 
 checks:
-    - id: identify-on-login-web
+    - id: identify-on-login
       description: >-
-          Checks that the identify page teaches the agent to identify users on
-          login and on reload, and to reset on logout so a shared browser
-          doesn't merge two people. The prompt describes who events belong to and
-          never names identify, reset or distinct IDs.
+          Baseline: can an agent identify users on login and reset on logout from a
+          one-line request? The prompt doesn't mention reset. The agent gets no docs, so
+          docs-read shows which pages it finds on its own.
       codebase_to_test: web-vite
-      pages:
-          - docs/product-analytics/installation/web
-      prompt: &identify-on-login-web-prompt |
-          PostHog isn't set up yet in the app in {folder}/. Set it up and make
-          sure events are tied to the signed-in team member, including when
-          the app is reloaded while already signed in. When someone signs out,
-          the next person using the same browser must not be counted as them.
-      append_docs_link: true
-      criteria: &identify-on-login-web-criteria
-          shared: [config-from-env, stays-in-folder, builds]
+      prompt: >-
+          Set up PostHog in the app in {folder}/ and identify users when they log in.
+      criteria:
+          shared: [builds, docs-read]
           rubrics:
               identify-after-login: >-
                   After a successful login (src/pages/login.js, src/api.js or
-                  store.login in src/store.js) the code calls
-                  `posthog.identify(<member id or email>, { ...person properties })`
-                  with a stable per-user ID and person properties such as email and
-                  name. Cite the line.
-              identify-on-load: >-
-                  On app load, when `store.state.currentUser` is already set, the
-                  code also calls `posthog.identify` with the same distinct ID.
+                  store.login in src/store.js), the code calls posthog.identify with the
+                  member's id or email. Cite the file and line(s).
               reset-on-logout: >-
                   The sign-out path (the logout button in src/components/shell.js,
-                  api.logout or store.logout) calls `posthog.reset()`.
-
-    - id: identify-on-login-web-no-docs
-      description: Same task as identify-on-login-web, with no docs and nothing attached. Compare the two to see what the page adds.
-      codebase_to_test: web-vite
-      pages:
-          - docs/product-analytics/installation/web
-      prompt: *identify-on-login-web-prompt
-      criteria: *identify-on-login-web-criteria
+                  api.logout or store.logout) calls posthog.reset().

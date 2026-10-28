@@ -5,46 +5,20 @@ status: active
 checks:
     - id: capture-without-sdk
       description: >-
-          Tests whether the API install page alone gets an agent to send a correctly
-          shaped capture request over plain HTTP, with no SDK. Runs in Gauge's
-          acme-dispatch-django, where every job, from the web UI or the JSON API, is
-          created by create_job() in records/services/jobs.py.
+          Baseline: can an agent send an event straight to the PostHog capture API, with
+          no SDK? The agent gets no docs, so docs-read shows which pages it finds on its
+          own.
       codebase_to_test: acme-dispatch-django
-      prompt: &capture-without-sdk-prompt |
-          We want to know each time a job is created in the app in {folder}/, without
-          adding PostHog's SDK or any other new dependency. Send a job_created event
-          to PostHog from the server whenever a job is created.
-          Only change files inside {folder}/. Read the project token and host from
-          environment variables rather than writing them into the code. Make sure the
-          app still builds or starts without errors when you're done.
-      append_docs_link: true
-      criteria: &capture-without-sdk-criteria
-          shared: [config-from-env, stays-in-folder, builds]
+      prompt: >-
+          Send a job_created event to PostHog when a job is created in the app in
+          {folder}/, without adding a dependency.
+      criteria:
+          shared: [builds, docs-read]
           rubrics:
-              no-sdk-added: >-
-                  No new dependency is added: {folder}/pyproject.toml gains no packages,
-                  and no changed file imports posthog, requests, httpx or any other
-                  third-party HTTP client. The HTTP call uses the standard library (for
-                  example urllib.request).
               capture-request: >-
                   The code sends an HTTP POST to a PostHog capture endpoint on the
-                  PostHog host: /capture/ (for example
-                  https://us.i.posthog.com/capture/) or /i/v0/e/, with Content-Type:
-                  application/json. Cite the file and line(s).
+                  PostHog host, /capture/ or /i/v0/e/, with a JSON content type. Cite
+                  the file and line(s).
               payload-fields: >-
-                  The JSON body has a top-level api_key set to the project token, a
-                  top-level event set to job_created, and a distinct_id (for example
-                  the job's ID or the acting user's ID), either at the top level or
-                  inside properties. PostHog accepts both. Cite the file and line(s).
-              fires-on-create: >-
-                  The event is sent after a job is saved: in create_job() in
-                  {folder}/records/services/jobs.py, or in code it calls, so jobs created
-                  from both the web UI and the JSON API send it. Sending it only from the
-                  web view in {folder}/web/views/jobs.py does not pass. It is not sent
-                  when create_job raises a validation error. Cite the file and line(s).
-
-    - id: capture-without-sdk-no-docs
-      description: Same task as capture-without-sdk, with no docs and nothing attached. Compare the two to see what the page adds.
-      codebase_to_test: acme-dispatch-django
-      prompt: *capture-without-sdk-prompt
-      criteria: *capture-without-sdk-criteria
+                  The JSON body has api_key set to the project token, event set to
+                  job_created, and a distinct_id, at the top level or in properties.

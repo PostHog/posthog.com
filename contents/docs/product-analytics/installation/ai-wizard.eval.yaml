@@ -3,31 +3,15 @@ tags: [install, wizard]
 status: active
 
 checks:
-    - id: one-command-setup
+    - id: setup-command
       description: >-
-          Tests whether the AI wizard page alone lets an agent answer with the exact
-          wizard command, where to run it, and what to check once it finishes.
-      prompt: &one-command-setup-prompt |
-          Is there a single command I can run to set up PostHog product analytics in
-          my Next.js app, instead of wiring it up by hand? What is it, and where do
-          I run it?
-      append_docs_link: true
-      criteria: &one-command-setup-criteria
-          shared: [answers-directly]
+          Baseline: does an agent recommend the PostHog wizard for a Next.js setup? The
+          agent gets no docs, so docs-read shows which pages it finds on its own.
+      prompt: >-
+          How do I set up PostHog in my Next.js app?
+      criteria:
+          shared: [docs-read]
           rubrics:
               gives-command: >-
-                  The final message gives the command npx @posthog/wizard exactly. A
-                  different package name (for example posthog-wizard or
-                  @posthog/cli) does not pass.
-              run-location: >-
-                  The final message says to run the command in the project's
-                  directory, that is the root of the Next.js app.
-              says-to-test: >-
-                  The final message tells the user to let the wizard finish and then
-                  check that the setup works, for example by loading the app and
-                  confirming events arrive in PostHog.
-
-    - id: one-command-setup-no-docs
-      description: Same task as one-command-setup, with no docs and nothing attached. Compare the two to see what the page adds.
-      prompt: *one-command-setup-prompt
-      criteria: *one-command-setup-criteria
+                  The final message gives the command `npx @posthog/wizard` exactly. A
+                  different package name, such as posthog-wizard or @posthog/cli, fails.

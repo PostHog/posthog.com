@@ -5,47 +5,16 @@ status: active
 checks:
     - id: filter-internal-users
       description: >-
-          Checks that the best practices page teaches the internal user filter:
-          where to set it, that it needs negative operators, that it must be
-          turned on per insight, and how to exclude an anonymous browser. The
-          question describes the problem without naming the setting.
-      prompt: &filter-internal-users-prompt |
-          Our product analytics numbers in PostHog are inflated by our own
-          team: people logging in with company emails, plus testing on
-          localhost and our staging site. I also want to exclude my own
-          browser when I browse our marketing site without logging in. How do
-          I set this up?
-      append_docs_link: true
-      criteria: &filter-internal-users-criteria
-          shared: [answers-directly]
+          Baseline: can an agent explain how to filter internal users? The agent gets no
+          docs, so docs-read shows which pages it finds on its own.
+      prompt: >-
+          How do I filter out internal users in PostHog?
+      criteria:
+          shared: [docs-read]
           rubrics:
               names-the-toggle: >-
                   The final answer mentions "Filter out internal and test users".
               settings-filter: >-
-                  The answer says to add filters in the project settings, and that
-                  a filter describes the traffic to keep, so it needs a negative
-                  operator such as "doesn't equal", "doesn't contain" or "doesn't
-                  end with" (for example person property `email` doesn't end with
-                  `@yourcompany.com`, and event property Host doesn't contain
-                  `localhost`).
-              turn-filter-on: >-
-                  The answer says the filter must also be turned on where data is
-                  viewed: the "Filter out internal and test users" toggle on each
-                  insight (or the "Filter test accounts" switch in Web Analytics).
-              own-browser: >-
-                  For the anonymous own-browser case, the answer says to call
-                  `posthog.setInternalOrTestUser()` (which sets the
-                  `$internal_or_test_user` person property) or
-                  `posthog.opt_out_capturing()` in that browser, and notes that an
-                  email filter alone only works for identified users.
-
-    - id: filter-internal-users-no-docs
-      description: Same task as filter-internal-users, with no docs and nothing attached. Compare the two to see what the page adds.
-      prompt: *filter-internal-users-prompt
-      criteria: *filter-internal-users-criteria
-
-    - id: filter-internal-users-mcp
-      description: Same task as filter-internal-users, with no docs in the prompt and the PostHog MCP attached.
-      prompt: *filter-internal-users-prompt
-      attach_mcp: posthog
-      criteria: *filter-internal-users-criteria
+                  The answer says to add filters in the project settings, with a
+                  negative operator such as "doesn't equal" or "doesn't contain",
+                  because a filter describes the traffic to keep.

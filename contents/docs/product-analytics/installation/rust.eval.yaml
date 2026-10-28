@@ -5,40 +5,18 @@ status: active
 checks:
     - id: install
       description: >-
-          Tests whether the Rust install page alone gets an agent to a posthog-rs client
-          with the token from env that flushes or shuts down before exit. Runs in
-          Gauge's starter-rust, a bare Axum server.
+          Baseline: can an agent set up PostHog in a Rust app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
       codebase_to_test: starter-rust
-      prompt: &install-prompt |
-          The app in {folder}/ needs product analytics. Set up PostHog in it.
-          Only change files inside {folder}/. Read the project token from an environment variable rather than writing it into the code. Make sure the app still builds or starts without errors when you're done.
-      append_docs_link: true
-      criteria: &install-criteria
-          shared: [stays-in-folder, builds]
+      prompt: >-
+          Set up PostHog in the Rust app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
           rubrics:
-              has-posthog-rs: >-
-                  {folder}/Cargo.toml lists `posthog-rs` as a dependency.
-              token-from-env: >-
-                  The project token is read from an environment variable. No PostHog project token appears as a literal anywhere in {folder}/.
-              required-steps-done: >-
-                  The app creates a client with posthog_rs::client, passing the project token (awaited when using the default async client), and calls flush() or shutdown() on the client before the program exits so buffered events are sent. Cite the file and line(s).
-
-    - id: install-no-docs
-      description: Same task as install, with no docs and nothing attached. Compare the two to see what the page adds.
-      codebase_to_test: starter-rust
-      prompt: *install-prompt
-      criteria: *install-criteria
-
-    - id: install-mcp
-      description: Same task as install, with no docs in the prompt and the PostHog MCP attached.
-      codebase_to_test: starter-rust
-      prompt: *install-prompt
-      attach_mcp: posthog
-      criteria: *install-criteria
-
-    - id: install-skill # placeholder: skipped until skills are built
-      description: Same task as install, with this page attached as a skill instead of in the prompt.
-      codebase_to_test: starter-rust
-      prompt: *install-prompt
-      attach_skill: true
-      criteria: *install-criteria
+              sdk-installed: >-
+                  {folder}/Cargo.toml lists `posthog-rs`.
+              initialized: >-
+                  The app creates a client with posthog_rs::client, passing the project
+                  token, and calls flush() or shutdown() on the client before exit. Cite
+                  the file and line(s).
