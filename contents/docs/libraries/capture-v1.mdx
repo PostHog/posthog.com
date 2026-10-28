@@ -264,8 +264,6 @@ posthog.captureAi({
 
 </MultiLanguage>
 
-<!-- TODO(capture-v1): check the AI property names and model value in these examples against the AI Observability docs. -->
-
 `capture` doesn't move `$ai_` events to the AI path for you. For now, PostHog still accepts AI events sent with `capture`, so existing code keeps working while you upgrade. This is temporary, and large AI events always need the AI method. Calling `flush` or `shutdown` sends both queues. See [capturing large AI events](/docs/ai-observability/large-events) for limits and the AI integrations.
 
 ## Proxies
