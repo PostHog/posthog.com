@@ -115,13 +115,14 @@ A few details:
 
 - A value from a lower layer only fills keys you didn't set higher up. This is a change: before v1, some SDKs let global values overwrite the ones you passed on the call.
 - A property set to `null` (or `None`, or `nil`) counts as set, so a lower layer can't replace it. An option set to `null` counts as unset.
-- `$set`, `$set_once`, `$groups`, and `$group_set` merge key by key, and the most specific value wins for each key.
+- On Python, Go, Node.js, and Rust, `$set`, `$set_once`, `$groups`, and `$group_set` merge key by key, and the most specific value wins for each key. On iOS and Android, a `$set` or `$set_once` you pass on the call replaces a registered one, as before.
 - A `$set` in a global or context layer adds those person properties to every event that layer reaches.
-- Not every SDK has every layer. Rust has no global or context layers, and iOS and Android have global properties but no global options or context layer. Your SDK's migration guide lists the layers it has and which calls they reach.
+- Not every SDK has every layer. Rust has no global layer, and iOS and Android have global properties but no global options or context layer. Your SDK's migration guide lists the layers it has and which calls they reach.
 
 ### Person processing
 
-- Adding groups to an event no longer turns on person processing. To use [group analytics](/docs/product-analytics/group-analytics), send events with person processing on.
+- On server SDKs, adding groups to an event doesn't turn on person processing. The Rust SDK did before 1.0. To use [group analytics](/docs/product-analytics/group-analytics), send events with person processing on.
+- On iOS and Android, an event with groups still turns on person processing, as before, unless `personProfiles` is set to `never`.
 - An event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Setting `$process_person_profile: true` no longer changes that. (The Go SDK returns an error for a missing distinct ID instead.)
 - Use a real distinct ID: one visitor, or your own ID for a known user. See [choosing a distinct ID](/docs/api/capture-v1#choosing-a-distinct-id).
 - **Group identify without a distinct ID** uses `$<group type>_<group key>` as the event's distinct ID. If that is over 200 bytes, pass a `distinct_id` explicitly, or PostHog drops the event.
