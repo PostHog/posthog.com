@@ -1,9 +1,9 @@
 import React from 'react'
 import { Drawer as BaseDrawer } from '@base-ui/react/drawer'
 import { cn } from '../../../utils'
-import { Dialog } from '../Dialog'
+import { Dialog, scrollBodyRoot, scrollBodyViewport } from '../Dialog'
+import { ScrollArea } from '../ScrollArea'
 import { dialogBackdrop, dialogSurface } from '../styles'
-import { withClassName } from '../utils'
 
 type DrawerSwipeDirection = BaseDrawer.Popup.State['swipeDirection']
 
@@ -77,7 +77,25 @@ const Popup = React.forwardRef<HTMLDivElement, DrawerPopupProps>(function Drawer
     )
 })
 
-const Content = withClassName(BaseDrawer.Content, 'min-h-0 grow overflow-y-auto overscroll-contain p-4')
+export type DrawerContentProps = Omit<BaseDrawer.Content.Props, 'className'> & { className?: string }
+
+const Content = React.forwardRef<HTMLDivElement, DrawerContentProps>(function DrawerContent(
+    { className, children, ...props },
+    ref
+) {
+    return (
+        <BaseDrawer.Content className={scrollBodyRoot} {...props}>
+            <ScrollArea.Root className={scrollBodyRoot}>
+                <ScrollArea.Viewport ref={ref} className={cn(`${scrollBodyViewport} p-4`, className)}>
+                    {children}
+                </ScrollArea.Viewport>
+                <ScrollArea.Scrollbar>
+                    <ScrollArea.Thumb />
+                </ScrollArea.Scrollbar>
+            </ScrollArea.Root>
+        </BaseDrawer.Content>
+    )
+})
 
 export const Drawer = {
     Provider: BaseDrawer.Provider,

@@ -3,6 +3,7 @@ import { Dialog as BaseDialog } from '@base-ui/react/dialog'
 import { IconX } from '@posthog/icons'
 import { cn } from '../../../utils'
 import { IconButton } from '../Button'
+import { ScrollArea } from '../ScrollArea'
 import { dialogBackdrop, dialogPopup, dialogViewport, surfacePaddings, surfaceDivider } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
@@ -56,16 +57,24 @@ const Title = withClassName(BaseDialog.Title, 'my-0 text-base font-bold text-pri
 
 const Description = withClassName(BaseDialog.Description, 'my-0 text-sm text-secondary')
 
+export const scrollBodyRoot = 'flex min-h-0 grow flex-col'
+export const scrollBodyViewport = 'h-auto min-h-0 grow'
+
 const Body = React.forwardRef<HTMLDivElement, React.ComponentPropsWithoutRef<'div'>>(function DialogBody(
     { className, ...props },
     ref
 ) {
     return (
-        <div
-            ref={ref}
-            className={cn(`flex min-h-0 flex-col overflow-y-auto overscroll-contain ${surfacePaddings.md}`, className)}
-            {...props}
-        />
+        <ScrollArea.Root className={scrollBodyRoot}>
+            <ScrollArea.Viewport
+                ref={ref}
+                className={cn(`${scrollBodyViewport} flex flex-col ${surfacePaddings.md}`, className)}
+                {...props}
+            />
+            <ScrollArea.Scrollbar>
+                <ScrollArea.Thumb />
+            </ScrollArea.Scrollbar>
+        </ScrollArea.Root>
     )
 })
 export type DialogFooterProps = React.ComponentPropsWithoutRef<'div'> & {
