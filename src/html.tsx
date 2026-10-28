@@ -33,7 +33,18 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     crossOrigin="anonymous"
                 />
                 {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
-                    <script src="/scripts/posthog-init.js" />
+                    <>
+                        <script
+                            src={
+                                process.env.GATSBY_POSTHOG_ASSET_HOST
+                                    ? `${process.env.GATSBY_POSTHOG_ASSET_HOST}/static/1/loader.js`
+                                    : `${process.env.GATSBY_POSTHOG_API_HOST}/static/loader.js`
+                            }
+                            data-defer-init="true"
+                            crossOrigin="anonymous"
+                        />
+                        <script src="/scripts/posthog-init.js" />
+                    </>
                 )}
 
                 {/* WebMCP is an origin trial in Chrome 149-156. Without this token, document.modelContext
