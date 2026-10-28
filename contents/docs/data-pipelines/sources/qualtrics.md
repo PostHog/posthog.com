@@ -9,9 +9,9 @@ availability:
 sourceId: Qualtrics
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Qualtrics connector syncs surveys, users, groups, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -27,7 +27,7 @@ Enter your Qualtrics datacenter ID and credentials to pull surveys, responses an
 
 Find your datacenter ID under **Account settings > Qualtrics IDs**. It looks like `iad1` or `fra1`. If your brand uses a custom domain, paste the full hostname instead.
 
-The quickest way to connect is an API token from **Account settings > Qualtrics IDs**. The Qualtrics user needs the "Access API" permission plus read access to the surveys, users, groups, divisions and distributions you want to sync.
+The quickest way to connect is an API token from **Account settings > Qualtrics IDs**. The Qualtrics user needs the "Access API" permission plus read access to the surveys, users, groups, divisions and distributions you want to sync. The directories, directory contacts, mailing lists and distribution history tables need XM Directory.
 
 You can also connect with an OAuth client: create one under **Account settings > Qualtrics IDs**, pick the client credentials grant, and give it read access to surveys, survey responses, survey definitions, users, groups, divisions and distributions.
 
@@ -42,7 +42,7 @@ You'll be asked for:
 
 <SyncModes />
 
-All Qualtrics tables are full refresh. Each sync replaces the contents of the table.
+Most Qualtrics tables are full refresh. Each sync replaces the contents of the table. Survey responses sync incrementally on `recordedDate`.
 
 ## Configuration
 
