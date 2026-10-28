@@ -34,7 +34,17 @@ The MCP server provides these tools for running SQL:
 | `query-run`                          | Run a HogQL query and return results. Supports any valid HogQL syntax including joins, CTEs, subqueries, and window functions.                                                                          |
 | `query-generate-hogql-from-question` | Generate a HogQL query from a natural language question. Returns the query string so you can review or modify it before running. Requires [AI data processing approval](/docs/posthog-ai/allow-access). |
 | `property-definitions`               | List all event and person properties in your project. Useful for understanding what data is available before writing a query.                                                                           |
-| `event-definitions-list`             | List all event definitions in your project with volume and usage data.                                                                                                                                  |
+
+## Event definition tools
+
+These tools manage [event definitions](/docs/data/events#managing-event-definitions), including owners for data governance:
+
+| Tool                      | Description                                                                                                                                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `event-definition-get`    | Get a single event definition by exact name. Returns description, owner (ID, email, name), tags, verified status, hidden status, first seen, and last seen. Returns `found: false` if not found. |
+| `event-definition-create` | Create a new event definition with optional owner, description, and tags. Set `owner` to a user ID from `org-members-list`, or `null` for no owner.                                              |
+| `event-definition-update` | Update an event definition's description, tags, verified/hidden status, or owner. Set `owner` to a user ID or `null` to remove the owner.                                                        |
+| `event-definitions-list`  | List all event definitions in your project with volume and usage data.                                                                                                                           |
 
 ## View management tools
 
@@ -150,6 +160,13 @@ For column annotations:
 - `Describe the 'amount' column in my stripe_charges table as 'Transaction amount in cents'.`
 - `List all column descriptions for my user_metrics view.`
 - `What descriptions exist for my imported Stripe tables?`
+
+For event definition management:
+
+- `Get the event definition for 'user_signed_up' including its owner.`
+- `Create an event definition for 'checkout_completed' and assign user ID 42 as the owner.`
+- `Update the 'purchase_completed' event definition to set a new owner.`
+- `Remove the owner from the 'page_viewed' event definition.`
 
 ## Install the MCP server
 
