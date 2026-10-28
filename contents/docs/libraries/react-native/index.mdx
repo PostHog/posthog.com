@@ -715,7 +715,18 @@ On iOS, the plugin now always resolves `posthog-ios` through Swift Package Manag
 
 Apps that use the plugin only through `posthog-react-native` need no code changes. If your code calls the plugin directly:
 
-- Call `setup()` instead of the removed `start()` method.
+- Call `setup()` instead of the removed `start()` method. `setup()` takes three arguments and reads the replay settings from `pluginConfig.sessionReplay`. Replay starts only when `sessionReplay.enabled` is `true`, which defaults to `false`:
+
+  ```ts
+  // Before
+  start(sessionId, sdkOptions, sdkReplayConfig, decideReplayConfig)
+
+  // After
+  setup(sessionId, sdkOptions, {
+    sessionReplay: { enabled: true, sdkReplayConfig, decideReplayConfig },
+  })
+  ```
+
 - Pass `throttleDelayMs` instead of `iOSdebouncerDelayMs` or `androidDebouncerDelayMs`, which the plugin no longer reads. `posthog-react-native` still maps these deprecated options to `throttleDelayMs`.
 
 On iOS, native uploads (session replay and native crash reports) pause while cellular data is turned off for your app, instead of sending requests that fail.
