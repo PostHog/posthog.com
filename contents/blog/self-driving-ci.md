@@ -1,12 +1,12 @@
 ---
-date: "2026-10-27"
-title: "How PostHog agents help maintain our own CI"
+date: "2026-10-28"
+title: "Engineers are shipping faster, we made our CI self-driving to keep up"
 author:
   - raul-negron-otero
 rootPage: /blog
 sidebar: Blog
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/making_our_ci_self_driving_1_ae62e64744.png
 featuredImageType: full
 showTitle: true
 hideAnchor: true
@@ -17,21 +17,19 @@ tags:
   - Developer experience
 ---
 
-At PostHog, the same self-driving agents that work on product features and bug fixes also push changes to our continuous integration (CI) and automated testing pipelines. We've set this up such that data from GitHub and other sources feed into our [data warehouse](/docs/data-warehouse), and then we built a product called "Engineering Analytics" on top of this data layer. PostHog engineers and (especially) their agents use the Engineering Analytics product to find and analyze issues in CI workflows, such as higher p90 week-over-week over a particular test suite.
+PostHog ships at a rapid pace, and that pace has only accelerated in recent months due to LLM adoption. We went from merging 1,354 PRs in October 2025 to more than 6,500 PRs in October 2026.
 
-## Keeping up with self-driving agents
+It's the job of the [Developer Experience team](/teams/developer-experience) to ensure engineers at PostHog are shipping as fast as possible while balancing code quality and CI stability. We actually have a goal of making [10,000 pull requests a month](/blog/10k-prs-a-month) easy. That said, it's difficult to keep up with CI maintenance just by observing and reacting manually.
 
-PostHog engineers ship a lot of product features and fixes at a rapid pace, and that pace has only accelerated in recent months due to LLM adoption. A portion of this acceleration comes from [self-driving](/docs/self-driving) pull requests, which PostHog opens on its own after a [scout](/docs/self-driving/scouts) (a scheduled agent that explores your product data) finds something worth acting on. The result is a stream of completely agentic pull requests on top of all the ones human engineers steer and open.
+So we took inspiration from how things are being shipped elsewhere at PostHog, specifically self-driving. In October, 11% of PRs merged were [self-driving](/docs/self-driving). This means PostHog opened them on its own after a [scout](/docs/self-driving/scouts) (a scheduled agent that explores your product data) found something worth acting on.
 
-The [Developer Experience team](/teams/developer-experience) cares about the pace of PRs and monitors how our CI is evolving. We actually have a goal to enable [10,000 pull requests a month](/blog/10k-prs-a-month). And we intend to do this while balancing code quality and without sacrificing CI stability. That said, it's difficult to keep up with CI maintenance just by observing and reacting manually.
-
-So naturally, we decided to fight fire with fire 🔥. If self-driving agents are in part responsible for the increase in PR volume, these same agents can also help us keep up with CI maintenance. The first step was giving them CI data they could query without hitting rate limits.
+We saw this and decided to fight fire with fire. The same self-driving agents that are increasing in PR volume can help us keep up with CI maintenance. Here's how.
 
 ## Step 1: Get CI/CD data out of GitHub
 
 We're proud to be open source and use [GitHub to host our monorepo](https://github.com/PostHog/posthog). This means most of our CI-related data lives on GitHub and is queryable from there. But querying this data frequently means we hit rate limits and, in any case, it would be really wasteful to constantly ask GitHub for mostly unchanging data (think last week's merged PRs and completed workflow runs). Above all, PostHog is a data company! So we decided to get CI/CD data into our own product and see what features and ideas we could unlock from there.
 
-To accomplish this, we rely on our data warehouse [GitHub source](/docs/cdp/sources/github), which continuously syncs repository data. Specifically, we were interested in pull request, workflow runs, and workflow jobs data.
+To accomplish this, we rely on our [GitHub warehouse source](/docs/cdp/sources/github), which continuously syncs repository data. Specifically, pull request, workflow runs, and workflow jobs data.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_10_22_at_16_39_44_2x_fca9283bfb.png"
@@ -55,15 +53,15 @@ In building this, we were able to benefit from the fact that other PostHog produ
   classes="rounded"
 />
 
-Under the hood, the Engineering Analytics product is basically a curated view into the surfaces the DevEx team cares about: our CI system, the merge queue, and tests.
+Under the hood, Engineering Analytics is basically a curated view into the surfaces the DevEx team cares about: our CI system, the merge queue, and tests.
 
-Besides being a useful place for humans (i.e. PostHog engineers) to quickly get a general sense for CI health, we included MCP support from the start so our agents could query for specific data when investigating CI troubles or looking for optimization opportunities. This way, agents don't need to rely on the GitHub API and we can better control the data and agentic flows here. We also leverage specific [skills](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills) for agentic steering. For example, the [investigating-ci-failures](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills/investigating-ci-failures) skill helps steer an agent in finding the commit that broke a particular CI job, and then check whether a later commit fixed it.
+Besides being a useful place for engineers to quickly get a general sense for CI health, we included MCP support from the start so our agents could query for specific data when investigating CI troubles or looking for optimization opportunities. This way, agents don't need to rely on the GitHub API and we can better control the data and agentic flows here. It also lets us build and use specific [skills](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills) like [investigating-ci-failures](https://github.com/PostHog/posthog/tree/master/products/engineering_analytics/skills/investigating-ci-failures) that help agents find the commit that broke a particular CI job, and then checks whether a later commit fixed it.
 
 ## Step 3: Make it self-driving
 
-Engineering Analytics is also capable of plugging into PostHog's [self-driving](/docs/self-driving) capabilities and generating its own ["signals"](/docs/self-driving/signals) (findings along with their evidence), which agents then investigate autonomously and potentially attempt to remediate by opening pull requests.
+Engineering Analytics plugs into PostHog's [self-driving](/docs/self-driving) capabilities and generates its own ["signals"](/docs/self-driving/signals) (findings along with their evidence), which agents then investigate autonomously and potentially attempt to remediate by opening pull requests.
 
-We decided to start with three deterministic detectors that run over the ingested GitHub data (each one is a pre-baked query):
+These signals are generated from three deterministic detectors that run over the ingested GitHub data (each one is a pre-baked query):
 
 - **Flaky check**: a job that fails and then passes on a rerun of the same commit.
 
@@ -77,11 +75,11 @@ These detectors led to real fixes, like:
 2. [Deflaking a Rust test job](https://github.com/PostHog/posthog/pull/75826): the job flaked twice in one week (two tests were racing over shared tracing state).
 3. [Speeding up a check on every pull request](https://github.com/PostHog/posthog/pull/95082): a workflow job installed the whole workspace before a dry run that didn't really need any dependencies. After the fix, the whole job takes 33 seconds (down from 51 seconds).
 
-We've shipped more than a dozen related improvements since.
+Thanks to Engineering Analytics combined with self-driving, we've shipped more than a dozen related improvements since.
 
 ## What we learned from building all this out
 
-You can imagine that finding the right signal-to-noise ratio requires some experimentation, and a bit of prompt massaging. For us, having deterministic detectors has helped keep the signal-powered agents grounded on data we know we care about and expect to be continuously triaged.
+Finding the right signal-to-noise ratio requires some experimentation and a bit of prompt massaging. For us, having deterministic detectors has helped keep the signal-powered agents grounded on data we know we care about and expect to be continuously triaged.
 
 Besides the utility of the MCP-first approach, Engineering Analytics's frontend UI has gained traction inside the DevEx team, primarily as a "one-stop shop" where we can get a useful, at a glance look across our ownership surfaces. Because of this, we are working on optimizing product performance by moving from ad-hoc queries into pre-computed tables and otherwise optimizing our queries whenever possible. As an added bonus from both UI and MCP sharing the query layer, optimizations here also benefit the performance of agents reaching for these tools.
 
@@ -91,7 +89,7 @@ Finally, once we had GitHub and related CI data ingested, the team has come up w
 
 ## How you can set up a self-improving CI yourself
 
-As we continue to shape Engineering Analytics as an internal beta product, you can still get a lot of value out of your CI data today by using the PostHog data warehouse as an ingestion source and combining it with MCP and signals + scouts.
+We're continuing to shape Engineering Analytics as an internal beta product, but you can build something similar today by combining warehouse sources with our MCP and scouts. To do this:
 
 1. **Get your CI data into the warehouse.** Link the [GitHub source](/docs/cdp/sources/github) and sync the pull request, workflow run, and workflow job [tables](/docs/cdp/sources/github#supported-tables). Add [webhooks](/docs/cdp/sources/github#webhooks) to keep runs and jobs up to date in real time.
 
@@ -99,4 +97,4 @@ As we continue to shape Engineering Analytics as an internal beta product, you c
 
 3. **Make it self-driving.** [Set up self-driving](/docs/self-driving/setup) and [connect the GitHub app](/docs/libraries/github) so agents can open pull requests on your behalf. Then, try writing a [scout](/docs/self-driving/scouts#built-in-and-custom-scouts) that watches your newly synced tables. Consider something like our deterministic detectors as a starting point, but there are more [ideas for custom scouts](/docs/self-driving/scout-examples#ideas-for-custom-scouts) in the docs.
 
-Finally, consider that your CI/CD platform is already collecting all this data. You might as well put it to work for you!
+Your CI/CD platform is already collecting all this data, you might as well put it to work for you!
