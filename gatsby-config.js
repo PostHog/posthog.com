@@ -60,6 +60,10 @@ const getQuestionPages = async (base) => {
 
 module.exports = {
     developMiddleware: (app) => {
+        const { createRedirectMatcher } = require('./plugins/gatsby-plugin-vercel-redirects/matcher')
+        const { createDevelopmentMiddleware } = require('./plugins/gatsby-plugin-vercel-redirects/adapters')
+        const rules = require('./.cache/vercel-redirects.json')
+        app.use(createDevelopmentMiddleware(createRedirectMatcher(rules)))
         ;['luma-events', 'notion-events', 'posthog-desktop-pricing'].forEach((route) => {
             app.use(`/api/${route}`, async (req, res) => {
                 try {
@@ -87,6 +91,9 @@ module.exports = {
     },
     trailingSlash: 'never',
     plugins: [
+        ...(process.env.NODE_ENV === 'development' || process.env.VERCEL !== '1'
+            ? [`${__dirname}/plugins/gatsby-plugin-vercel-redirects`]
+            : []),
         {
             resolve: `gatsby-source-ashby`,
             options: {
