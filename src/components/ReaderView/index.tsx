@@ -19,7 +19,6 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import Link from 'components/Link'
 import { navigate } from 'gatsby'
 import usePostHog from '../../hooks/usePostHog'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import ElementScrollLink, { ScrollSpyProvider } from 'components/ElementScrollLink'
 import { TreeMenu } from 'components/TreeMenu'
@@ -45,7 +44,7 @@ import { Questions } from 'components/Squeak'
 import { DocsPageSurvey } from 'components/DocsPageSurvey'
 import AskAIInput from 'components/AskAIInput'
 import MarkdownActions from 'components/MarkdownActions'
-import CustomerMetadata from './CustomerMetadata'
+const CustomerMetadata = React.lazy(() => import('./CustomerMetadata'))
 import { getVideoClasses } from '../../constants'
 import AboutPostHog from 'components/AboutPostHog'
 import { shouldNavigateMenuTab } from './tabNavigation'
@@ -99,6 +98,7 @@ interface ReaderViewProps {
     tableOfContents?: any
     hideMobileTableOfContents?: boolean
     mdxComponents?: any
+    renderMdx?: (content: string) => React.ReactNode
     commits?: any[]
     filePath?: string
     children?: React.ReactNode
@@ -440,6 +440,7 @@ export default function ReaderView({
     tableOfContents,
     hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
@@ -480,6 +481,7 @@ export default function ReaderView({
                 tableOfContents={tableOfContents}
                 hideMobileTableOfContents={hideMobileTableOfContents}
                 mdxComponents={mdxComponents}
+                renderMdx={renderMdx}
                 commits={commits}
                 filePath={filePath}
                 leftSidebar={leftSidebar}
@@ -1441,6 +1443,7 @@ function ReaderViewContent({
     tableOfContents,
     hideMobileTableOfContents = false,
     mdxComponents,
+    renderMdx,
     commits,
     filePath,
     children,
@@ -1913,11 +1916,13 @@ function ReaderViewContent({
                                                 }`}
                                             >
                                                 {isCustomerPage && customerKey && (
-                                                    <CustomerMetadata customerKey={customerKey} />
+                                                    <React.Suspense fallback={null}>
+                                                        <CustomerMetadata customerKey={customerKey} />
+                                                    </React.Suspense>
                                                 )}
 
                                                 <MDXProvider components={mdxComponents}>
-                                                    <MDXRenderer>{body.content}</MDXRenderer>
+                                                    {renderMdx?.(body.content)}
                                                 </MDXProvider>
                                             </div>
                                         ) : (

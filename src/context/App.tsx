@@ -16,14 +16,14 @@ import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
-import Start from 'components/Start'
+const Start = React.lazy(() => import('components/Start'))
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import useSourcesNav from '../navs/useSourcesNav'
 import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
-import ContactSales from 'components/ContactSales'
+const ContactSales = React.lazy(() => import('components/ContactSales'))
 import qs from 'qs'
 import usePostHog from '../hooks/usePostHog'
 
@@ -2054,7 +2054,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 zIndex: 2,
             })
             const formWindow = createNewWindow(
-                <ContactSales location={{ pathname: `/talk-to-a-human` }} key="/talk-to-a-human" />,
+                <React.Suspense fallback={null}>
+                    <ContactSales location={{ pathname: `/talk-to-a-human` }} key="/talk-to-a-human" />
+                </React.Suspense>,
                 [],
                 { pathname: `talk-to-a-human` },
                 isSSR,
@@ -2332,13 +2334,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const openStart = ({ subdomain, initialTab }: { subdomain?: string; initialTab?: string }) => {
         addWindow(
-            <Start
-                subdomain={subdomain}
-                initialTab={initialTab}
-                location={{ pathname: `start` }}
-                key="start"
-                newWindow
-            />
+            <React.Suspense fallback={null}>
+                <Start
+                    subdomain={subdomain}
+                    initialTab={initialTab}
+                    location={{ pathname: `start` }}
+                    key="start"
+                    newWindow
+                />
+            </React.Suspense>
         )
     }
 
