@@ -8,6 +8,16 @@ Our email communications can be broadly divided into broadcasts (one-off emails 
 
 This page doesn't deal with [our build mode newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
+## We send email with PostHog Workflows
+
+We've moved all our email marketing out of Customer.io and into [PostHog Workflows](/docs/workflows). This means every email can use the same product data we use everywhere else, without a separate pipeline to keep in sync. It gives us much more data to target and personalize emails with, and many more ways to use email alongside the rest of PostHog.
+
+## Treat emails as code
+
+All emails sent from PostHog should be treated as code. At least one peer must review an email before it's sent.
+
+For customer-facing comms, we recommend you also get a review from a member of the <SmallTeam slug="developer-marketing" />. To do this, ask for feedback in the #team-developer-marketing Slack channel if you're not sure who to ask.
+
 ## Linking to the PostHog app or PostHog AI
 
 To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/` and do not include the project path. 
