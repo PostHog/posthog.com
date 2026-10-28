@@ -7654,8 +7654,16 @@ export const docsMenu = {
                             url: '/docs/mcp-analytics/installation/ruby',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/mcp-analytics/installation/rust',
+                        },
+                        {
                             name: 'WebMCP',
                             url: '/docs/mcp-analytics/installation/webmcp',
+                        },
+                        {
+                            name: 'Other languages',
+                            url: '/docs/mcp-analytics/installation/other-languages',
                         },
                     ],
                 },
