@@ -25,7 +25,10 @@ To link Redshift:
    - **User:** The username with the necessary permissions to access the database.
    - **Password:** The password for the user.
    - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
-4. Click **Next**
+4. Optionally, configure TLS certificate verification:
+   - **Verify the server certificate?** Whether to check that your database's TLS certificate comes from a trusted authority and matches the host. Defaults to No.
+   - **Certificate authority (optional):** The PEM certificate of the authority that signed your database's certificate. Add it when your database uses a private authority or a self-signed certificate. Adding a certificate authority automatically turns on certificate verification.
+5. Click **Next**
 
 The data warehouse then starts syncing your Redshift data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
 
@@ -34,6 +37,23 @@ The data warehouse then starts syncing your Redshift data. You can see details a
 ## Configuration
 
 <SourceParameters />
+
+## TLS certificate verification
+
+Redshift connections use TLS encryption by default (`sslmode=require`). You can optionally enable certificate verification to check that the server's TLS certificate is trusted and matches the host.
+
+To enable certificate verification, set **Verify the server certificate?** to **Yes** in the source configuration. With verification on, PostHog checks:
+
+- The certificate chain — that a trusted authority signed the server's certificate.
+- The hostname — that the certificate matches the host you entered.
+
+If you connect through an SSH tunnel, PostHog checks the certificate chain but not the hostname, because the tunnel presents the database on a local address.
+
+### Using a custom certificate authority
+
+If your database uses a private certificate authority or a self-signed certificate, paste the authority's PEM certificate into the **Certificate authority** field. Adding a certificate authority automatically turns on certificate verification, even if the toggle is set to No.
+
+Without a custom authority, verification uses the system's default trusted certificates.
 
 ## Selecting columns
 
