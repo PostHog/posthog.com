@@ -49,22 +49,22 @@ export const colorSolid: Record<ColorName, string> = {
 }
 
 export const colorSoft: Record<ColorName, string> = {
-    gray: 'border-[rgb(var(--text-primary)/0.14)] bg-[rgb(var(--text-primary)/0.06)] text-secondary',
-    brand: 'border-orange/40 bg-orange/15 text-[color:color-mix(in_srgb,theme(colors.orange-dark)_62%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.orange)_70%,white)]',
-    blue: 'border-brand-blue/40 bg-brand-blue/15 text-[color:color-mix(in_srgb,theme(colors.brand.blue.darker)_62%,black)] dark:text-brand-blue-lighter',
-    cobalt: 'border-brand-cobalt/40 bg-brand-cobalt/15 text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.darker)_62%,black)] dark:text-brand-cobalt-lighter',
-    coral: 'border-brand-coral/40 bg-brand-coral/15 text-[color:color-mix(in_srgb,theme(colors.brand.coral.darker)_62%,black)] dark:text-brand-coral-lighter',
+    gray: 'border-[rgb(var(--text-primary)/0.14)] bg-[rgb(var(--text-primary)/0.06)] text-primary',
+    brand: 'border-orange/40 bg-orange/15 text-[color:color-mix(in_srgb,theme(colors.orange-dark)_64%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.orange)_40%,white)]',
+    blue: 'border-brand-blue/40 bg-brand-blue/15 text-[color:color-mix(in_srgb,theme(colors.brand.blue.darker)_76%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.blue.lighter)_94%,white)]',
+    cobalt: 'border-brand-cobalt/40 bg-brand-cobalt/15 text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.darker)_88%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.lighter)_88%,white)]',
+    coral: 'border-brand-coral/40 bg-brand-coral/15 text-[color:color-mix(in_srgb,theme(colors.brand.coral.darker)_68%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.coral.lighter)_96%,white)]',
     'corn-blue':
-        'border-brand-corn-blue/40 bg-brand-corn-blue/15 text-[color:color-mix(in_srgb,theme(colors.brand.corn-blue.darker)_62%,black)] dark:text-brand-corn-blue-lighter',
-    green: 'border-brand-green/40 bg-brand-green/15 text-[color:color-mix(in_srgb,theme(colors.brand.green.darker)_62%,black)] dark:text-brand-green-lighter',
-    lemon: 'border-brand-lemon/40 bg-brand-lemon/15 text-[color:color-mix(in_srgb,theme(colors.brand.lemon.darker)_62%,black)] dark:text-brand-lemon-lighter',
-    lime: 'border-brand-lime/40 bg-brand-lime/15 text-[color:color-mix(in_srgb,theme(colors.brand.lime.darker)_62%,black)] dark:text-brand-lime-lighter',
-    purple: 'border-brand-purple/40 bg-brand-purple/15 text-[color:color-mix(in_srgb,theme(colors.brand.purple.darker)_62%,black)] dark:text-brand-purple-lighter',
+        'border-brand-corn-blue/40 bg-brand-corn-blue/15 text-[color:color-mix(in_srgb,theme(colors.brand.corn-blue.darker)_68%,black)] dark:text-brand-corn-blue-lighter',
+    green: 'border-brand-green/40 bg-brand-green/15 text-[color:color-mix(in_srgb,theme(colors.brand.green.darker)_58%,black)] dark:text-brand-green-lighter',
+    lemon: 'border-brand-lemon/40 bg-brand-lemon/15 text-[color:color-mix(in_srgb,theme(colors.brand.lemon.darker)_50%,black)] dark:text-brand-lemon-lighter',
+    lime: 'border-brand-lime/40 bg-brand-lime/15 text-[color:color-mix(in_srgb,theme(colors.brand.lime.darker)_56%,black)] dark:text-brand-lime-lighter',
+    purple: 'border-brand-purple/40 bg-brand-purple/15 text-[color:color-mix(in_srgb,theme(colors.brand.purple.darker)_84%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.purple.lighter)_90%,white)]',
     tangerine:
-        'border-brand-tangerine/40 bg-brand-tangerine/15 text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.darker)_62%,black)] dark:text-brand-tangerine-lighter',
-    teal: 'border-brand-teal/40 bg-brand-teal/15 text-[color:color-mix(in_srgb,theme(colors.brand.teal.darker)_62%,black)] dark:text-brand-teal-lighter',
-    violet: 'border-brand-violet/40 bg-brand-violet/15 text-[color:color-mix(in_srgb,theme(colors.brand.violet.darker)_62%,black)] dark:text-brand-violet-lighter',
-    yellow: 'border-brand-yellow/40 bg-brand-yellow/15 text-[color:color-mix(in_srgb,theme(colors.brand.yellow.darker)_62%,black)] dark:text-brand-yellow-lighter',
+        'border-brand-tangerine/40 bg-brand-tangerine/15 text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.darker)_60%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.lighter)_92%,white)]',
+    teal: 'border-brand-teal/40 bg-brand-teal/15 text-[color:color-mix(in_srgb,theme(colors.brand.teal.darker)_56%,black)] dark:text-brand-teal-lighter',
+    violet: 'border-brand-violet/40 bg-brand-violet/15 text-[color:color-mix(in_srgb,theme(colors.brand.violet.darker)_82%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.violet.lighter)_90%,white)]',
+    yellow: 'border-brand-yellow/40 bg-brand-yellow/15 text-[color:color-mix(in_srgb,theme(colors.brand.yellow.darker)_56%,black)] dark:text-brand-yellow-lighter',
 }
 
 export const colorOpaque: Record<ColorName, string> = {
@@ -88,21 +88,21 @@ export const colorOpaque: Record<ColorName, string> = {
 
 export const colorText: Record<ColorName, string> = {
     gray: 'text-primary',
-    brand: 'text-[color:color-mix(in_srgb,theme(colors.orange-dark)_62%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.orange)_70%,white)]',
-    blue: 'text-[color:color-mix(in_srgb,theme(colors.brand.blue.darker)_62%,black)] dark:text-brand-blue-lighter',
-    cobalt: 'text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.darker)_62%,black)] dark:text-brand-cobalt-lighter',
-    coral: 'text-[color:color-mix(in_srgb,theme(colors.brand.coral.darker)_62%,black)] dark:text-brand-coral-lighter',
+    brand: 'text-[color:color-mix(in_srgb,theme(colors.orange-dark)_64%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.orange)_40%,white)]',
+    blue: 'text-[color:color-mix(in_srgb,theme(colors.brand.blue.darker)_76%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.blue.lighter)_94%,white)]',
+    cobalt: 'text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.darker)_88%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.lighter)_88%,white)]',
+    coral: 'text-[color:color-mix(in_srgb,theme(colors.brand.coral.darker)_68%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.coral.lighter)_96%,white)]',
     'corn-blue':
-        'text-[color:color-mix(in_srgb,theme(colors.brand.corn-blue.darker)_62%,black)] dark:text-brand-corn-blue-lighter',
-    green: 'text-[color:color-mix(in_srgb,theme(colors.brand.green.darker)_62%,black)] dark:text-brand-green-lighter',
-    lemon: 'text-[color:color-mix(in_srgb,theme(colors.brand.lemon.darker)_62%,black)] dark:text-brand-lemon-lighter',
-    lime: 'text-[color:color-mix(in_srgb,theme(colors.brand.lime.darker)_62%,black)] dark:text-brand-lime-lighter',
-    purple: 'text-[color:color-mix(in_srgb,theme(colors.brand.purple.darker)_62%,black)] dark:text-brand-purple-lighter',
+        'text-[color:color-mix(in_srgb,theme(colors.brand.corn-blue.darker)_68%,black)] dark:text-brand-corn-blue-lighter',
+    green: 'text-[color:color-mix(in_srgb,theme(colors.brand.green.darker)_58%,black)] dark:text-brand-green-lighter',
+    lemon: 'text-[color:color-mix(in_srgb,theme(colors.brand.lemon.darker)_50%,black)] dark:text-brand-lemon-lighter',
+    lime: 'text-[color:color-mix(in_srgb,theme(colors.brand.lime.darker)_56%,black)] dark:text-brand-lime-lighter',
+    purple: 'text-[color:color-mix(in_srgb,theme(colors.brand.purple.darker)_84%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.purple.lighter)_90%,white)]',
     tangerine:
-        'text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.darker)_62%,black)] dark:text-brand-tangerine-lighter',
-    teal: 'text-[color:color-mix(in_srgb,theme(colors.brand.teal.darker)_62%,black)] dark:text-brand-teal-lighter',
-    violet: 'text-[color:color-mix(in_srgb,theme(colors.brand.violet.darker)_62%,black)] dark:text-brand-violet-lighter',
-    yellow: 'text-[color:color-mix(in_srgb,theme(colors.brand.yellow.darker)_62%,black)] dark:text-brand-yellow-lighter',
+        'text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.darker)_60%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.lighter)_92%,white)]',
+    teal: 'text-[color:color-mix(in_srgb,theme(colors.brand.teal.darker)_56%,black)] dark:text-brand-teal-lighter',
+    violet: 'text-[color:color-mix(in_srgb,theme(colors.brand.violet.darker)_82%,black)] dark:text-[color:color-mix(in_srgb,theme(colors.brand.violet.lighter)_90%,white)]',
+    yellow: 'text-[color:color-mix(in_srgb,theme(colors.brand.yellow.darker)_56%,black)] dark:text-brand-yellow-lighter',
 }
 
 export const colorFill: Record<ColorName, string> = {
@@ -143,19 +143,21 @@ export const colorShimmer: Record<ColorName, string> = {
 
 export const colorHeader: Record<ColorName, string> = {
     gray: 'border-b-[rgb(var(--text-primary)/0.18)] bg-[rgb(var(--text-primary)/0.1)]',
-    brand: 'border-b-orange-dark/40 bg-orange/30 dark:border-b-orange/40',
-    blue: 'border-b-brand-blue-darker/40 bg-brand-blue/30 dark:border-b-brand-blue/40',
-    cobalt: 'border-b-brand-cobalt-darker/40 bg-brand-cobalt/30 dark:border-b-brand-cobalt/40',
-    coral: 'border-b-brand-coral-darker/40 bg-brand-coral/30 dark:border-b-brand-coral/40',
-    'corn-blue': 'border-b-brand-corn-blue-darker/40 bg-brand-corn-blue/30 dark:border-b-brand-corn-blue/40',
-    green: 'border-b-brand-green-darker/40 bg-brand-green/30 dark:border-b-brand-green/40',
-    lemon: 'border-b-brand-lemon-darker/40 bg-brand-lemon/30 dark:border-b-brand-lemon/40',
-    lime: 'border-b-brand-lime-darker/40 bg-brand-lime/30 dark:border-b-brand-lime/40',
-    purple: 'border-b-brand-purple-darker/40 bg-brand-purple/30 dark:border-b-brand-purple/40',
-    tangerine: 'border-b-brand-tangerine-darker/40 bg-brand-tangerine/30 dark:border-b-brand-tangerine/40',
-    teal: 'border-b-brand-teal-darker/40 bg-brand-teal/30 dark:border-b-brand-teal/40',
-    violet: 'border-b-brand-violet-darker/40 bg-brand-violet/30 dark:border-b-brand-violet/40',
-    yellow: 'border-b-brand-yellow-darker/40 bg-brand-yellow/30 dark:border-b-brand-yellow/40',
+    brand: 'border-b-orange-dark/40 bg-orange/30 dark:bg-orange/20 dark:border-b-orange/40',
+    blue: 'border-b-brand-blue-darker/40 bg-brand-blue/30 dark:bg-brand-blue/20 dark:border-b-brand-blue/40',
+    cobalt: 'border-b-brand-cobalt-darker/40 bg-brand-cobalt/30 dark:bg-brand-cobalt/20 dark:border-b-brand-cobalt/40',
+    coral: 'border-b-brand-coral-darker/40 bg-brand-coral/30 dark:bg-brand-coral/20 dark:border-b-brand-coral/40',
+    'corn-blue':
+        'border-b-brand-corn-blue-darker/40 bg-brand-corn-blue/30 dark:bg-brand-corn-blue/20 dark:border-b-brand-corn-blue/40',
+    green: 'border-b-brand-green-darker/40 bg-brand-green/30 dark:bg-brand-green/20 dark:border-b-brand-green/40',
+    lemon: 'border-b-brand-lemon-darker/40 bg-brand-lemon/30 dark:bg-brand-lemon/20 dark:border-b-brand-lemon/40',
+    lime: 'border-b-brand-lime-darker/40 bg-brand-lime/30 dark:bg-brand-lime/20 dark:border-b-brand-lime/40',
+    purple: 'border-b-brand-purple-darker/40 bg-brand-purple/30 dark:bg-brand-purple/20 dark:border-b-brand-purple/40',
+    tangerine:
+        'border-b-brand-tangerine-darker/40 bg-brand-tangerine/30 dark:bg-brand-tangerine/20 dark:border-b-brand-tangerine/40',
+    teal: 'border-b-brand-teal-darker/40 bg-brand-teal/30 dark:bg-brand-teal/20 dark:border-b-brand-teal/40',
+    violet: 'border-b-brand-violet-darker/40 bg-brand-violet/30 dark:bg-brand-violet/20 dark:border-b-brand-violet/40',
+    yellow: 'border-b-brand-yellow-darker/40 bg-brand-yellow/30 dark:bg-brand-yellow/20 dark:border-b-brand-yellow/40',
 }
 
 export const colorIcon: Record<ColorName, string> = {
@@ -177,21 +179,21 @@ export const colorIcon: Record<ColorName, string> = {
 
 export const colorEmphasis: Record<ColorName, string> = {
     gray: 'bg-[rgb(var(--text-primary)/0.06)] text-primary dark:bg-[rgb(var(--text-primary)/0.1)]',
-    brand: 'bg-orange/15 text-orange-dark dark:bg-orange/20 dark:text-orange',
-    blue: 'bg-brand-blue/15 text-brand-blue-darker dark:bg-brand-blue/20 dark:text-brand-blue-lighter',
-    cobalt: 'bg-brand-cobalt/15 text-brand-cobalt-darker dark:bg-brand-cobalt/20 dark:text-brand-cobalt-lighter',
-    coral: 'bg-brand-coral/15 text-brand-coral-darker dark:bg-brand-coral/20 dark:text-brand-coral-lighter',
+    brand: 'bg-orange/15 text-[color:color-mix(in_srgb,theme(colors.orange-dark)_64%,black)] dark:bg-orange/20 dark:text-[color:color-mix(in_srgb,theme(colors.orange)_40%,white)]',
+    blue: 'bg-brand-blue/15 text-[color:color-mix(in_srgb,theme(colors.brand.blue.darker)_76%,black)] dark:bg-brand-blue/20 dark:text-[color:color-mix(in_srgb,theme(colors.brand.blue.lighter)_94%,white)]',
+    cobalt: 'bg-brand-cobalt/15 text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.darker)_88%,black)] dark:bg-brand-cobalt/20 dark:text-[color:color-mix(in_srgb,theme(colors.brand.cobalt.lighter)_88%,white)]',
+    coral: 'bg-brand-coral/15 text-[color:color-mix(in_srgb,theme(colors.brand.coral.darker)_68%,black)] dark:bg-brand-coral/20 dark:text-[color:color-mix(in_srgb,theme(colors.brand.coral.lighter)_96%,white)]',
     'corn-blue':
-        'bg-brand-corn-blue/15 text-brand-corn-blue-darker dark:bg-brand-corn-blue/20 dark:text-brand-corn-blue-lighter',
-    green: 'bg-brand-green/15 text-brand-green-darker dark:bg-brand-green/20 dark:text-brand-green',
-    lemon: 'bg-brand-lemon/15 text-brand-lemon-darker dark:bg-brand-lemon/20 dark:text-brand-lemon',
-    lime: 'bg-brand-lime/15 text-brand-lime-darker dark:bg-brand-lime/20 dark:text-brand-lime',
-    purple: 'bg-brand-purple/15 text-brand-purple-darker dark:bg-brand-purple/20 dark:text-brand-purple-lighter',
+        'bg-brand-corn-blue/15 text-[color:color-mix(in_srgb,theme(colors.brand.corn-blue.darker)_68%,black)] dark:bg-brand-corn-blue/20 dark:text-brand-corn-blue-lighter',
+    green: 'bg-brand-green/15 text-[color:color-mix(in_srgb,theme(colors.brand.green.darker)_58%,black)] dark:bg-brand-green/20 dark:text-brand-green-lighter',
+    lemon: 'bg-brand-lemon/15 text-[color:color-mix(in_srgb,theme(colors.brand.lemon.darker)_50%,black)] dark:bg-brand-lemon/20 dark:text-brand-lemon-lighter',
+    lime: 'bg-brand-lime/15 text-[color:color-mix(in_srgb,theme(colors.brand.lime.darker)_56%,black)] dark:bg-brand-lime/20 dark:text-brand-lime-lighter',
+    purple: 'bg-brand-purple/15 text-[color:color-mix(in_srgb,theme(colors.brand.purple.darker)_84%,black)] dark:bg-brand-purple/20 dark:text-[color:color-mix(in_srgb,theme(colors.brand.purple.lighter)_90%,white)]',
     tangerine:
-        'bg-brand-tangerine/15 text-brand-tangerine-darker dark:bg-brand-tangerine/20 dark:text-brand-tangerine-lighter',
-    teal: 'bg-brand-teal/15 text-brand-teal-darker dark:bg-brand-teal/20 dark:text-brand-teal',
-    violet: 'bg-brand-violet/15 text-brand-violet-darker dark:bg-brand-violet/20 dark:text-brand-violet-lighter',
-    yellow: 'bg-brand-yellow/15 text-brand-yellow-darker dark:bg-brand-yellow/20 dark:text-brand-yellow',
+        'bg-brand-tangerine/15 text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.darker)_60%,black)] dark:bg-brand-tangerine/20 dark:text-[color:color-mix(in_srgb,theme(colors.brand.tangerine.lighter)_92%,white)]',
+    teal: 'bg-brand-teal/15 text-[color:color-mix(in_srgb,theme(colors.brand.teal.darker)_56%,black)] dark:bg-brand-teal/20 dark:text-brand-teal-lighter',
+    violet: 'bg-brand-violet/15 text-[color:color-mix(in_srgb,theme(colors.brand.violet.darker)_82%,black)] dark:bg-brand-violet/20 dark:text-[color:color-mix(in_srgb,theme(colors.brand.violet.lighter)_90%,white)]',
+    yellow: 'bg-brand-yellow/15 text-[color:color-mix(in_srgb,theme(colors.brand.yellow.darker)_56%,black)] dark:bg-brand-yellow/20 dark:text-brand-yellow-lighter',
 }
 
 export const colorStroke: Record<ColorName, string> = {
