@@ -37,45 +37,43 @@ const Root = React.forwardRef<HTMLDivElement, NoteRootProps>(function NoteRoot(
     const body = parts.filter((child) => child !== icon && child !== title && child !== action)
     return (
         <NoteColor.Provider value={noteColor}>
-            <div className="@container">
-                <div
-                    ref={ref}
-                    {...props}
-                    className={cn(
-                        cardLevels[1],
-                        'overflow-hidden leading-5 text-primary',
-                        title && 'border-t-0',
-                        noteSizes[size],
-                        className
-                    )}
-                >
-                    {title ? (
-                        <>
-                            <div
-                                className={cn(
-                                    'flex min-w-0 items-start gap-2 px-[var(--note-x)] py-[var(--note-title-y)]',
-                                    tintedHeaderEdge,
-                                    colorHeader[resolveColor(noteColor)]
-                                )}
-                            >
-                                {icon}
-                                {title}
-                            </div>
-                            <div className="flex min-w-0 flex-col items-start gap-2 px-[var(--note-x)] py-[var(--note-y)] @md:flex-row @md:items-center">
-                                <div className="min-w-0 flex-1">{body}</div>
-                                {action && <div className="max-w-full shrink-0">{action}</div>}
-                            </div>
-                        </>
-                    ) : (
-                        <div className="flex min-w-0 items-start gap-2 px-[var(--note-x)] py-[var(--note-y)]">
+            <div
+                ref={ref}
+                {...props}
+                className={cn(
+                    cardLevels[1],
+                    '@container overflow-hidden leading-5 text-primary',
+                    title && 'border-t-0',
+                    noteSizes[size],
+                    className
+                )}
+            >
+                {title ? (
+                    <>
+                        <div
+                            className={cn(
+                                'flex min-w-0 items-start gap-2 px-[var(--note-x)] py-[var(--note-title-y)]',
+                                tintedHeaderEdge,
+                                colorHeader[resolveColor(noteColor)]
+                            )}
+                        >
                             {icon}
-                            <div className="flex min-w-0 flex-1 flex-col gap-2 @md:flex-row @md:items-center">
-                                <div className="min-w-0 flex-1">{body}</div>
-                                {action && <div className="max-w-full shrink-0 @md:-my-[3px]">{action}</div>}
-                            </div>
+                            {title}
                         </div>
-                    )}
-                </div>
+                        <div className="flex min-w-0 flex-col items-start gap-2 px-[var(--note-x)] py-[var(--note-y)] @md:flex-row @md:items-center">
+                            <div className="min-w-0 flex-1">{body}</div>
+                            {action && <div className="max-w-full shrink-0">{action}</div>}
+                        </div>
+                    </>
+                ) : (
+                    <div className="flex min-w-0 items-start gap-2 px-[var(--note-x)] py-[var(--note-y)]">
+                        {icon}
+                        <div className="flex min-w-0 flex-1 flex-col gap-2 @md:flex-row @md:items-center">
+                            <div className="min-w-0 flex-1">{body}</div>
+                            {action && <div className="max-w-full shrink-0 @md:-my-[3px]">{action}</div>}
+                        </div>
+                    </div>
+                )}
             </div>
         </NoteColor.Provider>
     )
