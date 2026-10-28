@@ -4,7 +4,7 @@
 title: Connect a deploy to an error burst
 shortTitle: Deploy regressions
 subtitle: Which merged pull request started the new error after Twig's last deploy?
-pocketGuideOrder: 9
+pocketGuideOrder: 10
 section: Self-drive
 pocketGuideCta:
   kind: link
@@ -55,9 +55,7 @@ pocketGuideCta:
 
 # Connect a deploy to an error burst
 
-The engineers add a <Term name="scout" /> to Twig's project. It's a scheduled agent that queries Twig's PostHog events and files a <Term name="report" /> in the team's <Term name="inbox" /> when it finds something.
-
-This one, PR follow-up, ties a new <Term name="issue" /> after a deploy to the pull request that likely caused it. A deploy often carries several pull requests, so doing this by hand means reading each one against the <Term name="stack trace" />.
+Twig ships several times a day, and a new error often starts with a deploy. The PR follow-up scout ties a new <Term name="issue" /> after a deploy to the pull request that likely caused it, so the engineers don't read each pull request against the <Term name="stack trace" />.
 
 ## What the scout looks at
 
@@ -67,7 +65,7 @@ An older issue counts too if it reopens or fires at a clearly higher rate after 
 
 ## The report in your inbox
 
-The <Term name="report" /> names the pull request, its author, merge time, and deploy time, compares the error before and after, and recommends fixing the code or rolling back <SeeFig n={2} />. The engineers click **Ask AI** on the report to ask who else is affected, whether the problem is new, or what to do next. See [reports](/docs/self-driving/reports#ask-ai-about-a-report).
+The <Term name="report" /> names the pull request, its author, merge time, and deploy time, compares the error before and after, and recommends fixing the code or rolling back <SeeFig n={2} />.
 
 ## The scout itself
 
@@ -79,7 +77,7 @@ The scout runs on the schedule the engineers set in its **Settings**, but stays 
 
 ## Add this to your scout troop
 
-PostHog ships this scout, and it can be turned on or off for each project. It uses:
+The engineers turn it on for each project. It uses:
 
 - **Required:** GitHub connected to PostHog, so the scout can see merged pull requests and the files they changed. See [GitHub](/docs/libraries/github).
 - **Recommended:** a deploy signal, like GitHub deployments synced through the [GitHub source](/docs/data-pipelines/sources/github). Without one, the scout estimates deploy times.

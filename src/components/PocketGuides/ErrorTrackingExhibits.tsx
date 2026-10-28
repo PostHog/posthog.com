@@ -7,8 +7,14 @@ import '@posthog/twig-components/catalog.css'
 import '@posthog/twig-components/compact.css'
 import { TwigWordmark } from '@posthog/twig-components/compact'
 
-import PostHogInspector, { InspectorCode, InspectorDetails, InspectorStatus } from './PostHogInspector'
+import PostHogInspector, {
+    InspectorCode,
+    InspectorDetails,
+    InspectorJavaScript,
+    InspectorStatus,
+} from './PostHogInspector'
 import { Exhibit } from './ProductAnalyticsExhibits'
+import { Fig } from './figures'
 
 // The booking from Twig's Error Tracking lab. Its host record never reaches `readTripHost`.
 const stay = stays.find((candidate) => candidate.id === 'stay-02') ?? stays[0]
@@ -184,5 +190,36 @@ export function TripDetailsErrorFigure(): JSX.Element {
                 </PostHogInspector>
             </div>
         </Exhibit>
+    )
+}
+
+/** Twig's capture call for a missing host, with a marker on each property it sends. */
+export function FingerprintCaptureFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <PostHogInspector>
+                <InspectorJavaScript
+                    meta="captureException"
+                    highlightedLine={4}
+                    lines={[
+                        'posthog.captureException(error, {',
+                        '  surface: context.surface,',
+                        '  stay_id: context.stayId,',
+                        '  $exception_fingerprint:',
+                        '    `host-not-found:${error.hostId}`,',
+                        '})',
+                    ]}
+                    notes={{
+                        1: { n: 1, label: 'Surface', gloss: 'Where it failed, like trip_details or stay_page.' },
+                        2: { n: 2, label: 'Stay', gloss: 'The stay the guest was on, like stay-03.' },
+                        4: {
+                            n: 3,
+                            label: 'Fingerprint',
+                            gloss: 'Becomes host-not-found:colette. Every exception with this fingerprint joins one issue.',
+                        },
+                    }}
+                />
+            </PostHogInspector>
+        </Fig>
     )
 }

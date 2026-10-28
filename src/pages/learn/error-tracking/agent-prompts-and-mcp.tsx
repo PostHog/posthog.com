@@ -1,8 +1,5 @@
 import React from 'react'
 import AgentPromptsPage from 'components/PocketGuides/AgentPromptsPage'
-import { normalizeUrl } from 'components/PocketGuides/bookModel'
-import { useSkillFiles } from 'components/PocketGuides/useSkillFile'
-import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
 const chapterPrompts = [
     {
@@ -54,36 +51,6 @@ const examplePrompts = [
     },
 ]
 
-// Each skill lives beside the chapter that teaches it, as that chapter's `SKILL.md`.
-const skills = [
-    { title: 'Fix misgrouped issues', chapter: 'issue-grouping' },
-    { title: 'Quiet noisy issues', chapter: 'reduce-noise' },
-    { title: 'Rank errors by revenue', chapter: 'querying-exceptions' },
-]
-
-function Skills(): JSX.Element {
-    const files = useSkillFiles()
-    return (
-        <section id="skills" className="min-w-0 border-t border-primary pt-6">
-            <h2 className="mt-0 mb-4 text-xl font-semibold">Skills</h2>
-            <p className="mt-0 mb-4 leading-relaxed">Give your agent one of these skills:</p>
-            <div className="flex flex-col gap-6">
-                {skills.map(({ title, chapter }) => {
-                    const skill = files.get(normalizeUrl(`/learn/error-tracking/pocket-guide/${chapter}`))
-                    return skill?.raw ? (
-                        <div key={chapter} className="min-w-0">
-                            <h3 className="mt-0 mb-3 text-base font-semibold">{title}</h3>
-                            <ScoutFile
-                                scout={{ name: skill.name ?? '', description: skill.description ?? '', raw: skill.raw }}
-                            />
-                        </div>
-                    ) : null
-                })}
-            </div>
-        </section>
-    )
-}
-
 const mcpTools = [
     { tool: 'query-error-tracking-issues-list', use: 'Listing, filtering, and sorting issues' },
     {
@@ -107,7 +74,6 @@ export default function ErrorTrackingAgentTeaching(): JSX.Element {
             chapterPrompts={chapterPrompts}
             examplePrompts={examplePrompts}
         >
-            <Skills />
             <section className="min-w-0 border-t border-primary pt-6">
                 <h2 className="mt-0 mb-4 text-xl font-semibold">Available MCP tools</h2>
                 <p className="mt-0 mb-2 leading-relaxed">You can query exceptions using these MCP tools:</p>

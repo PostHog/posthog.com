@@ -38,33 +38,35 @@ pocketGuideCta:
 
 # Triage and alerts
 
-Once the engineers know which issues matter most, each one needs an owner.
+Twig's issue list now shows which issues matter most. As the team grows, the engineers split into teams, and each issue needs to reach the team that owns it.
 
-## Assignment rules
+## Route issues to their owners with assignment rules
 
-Assignment rules route each new issue to the team that owns it. A rule matches on the exception's properties and assigns the issue to a role or a teammate <SeeFig n={1} />. To assign issues to a team, the engineers create a role for it in the organization settings.
+The Trips team owns everything under `src/trips/`, including **Trip details**. The engineers create a Trips role in the organization settings, then add an assignment rule that sends issues from `src/trips/` to it <SeeFig n={1} />.
 
-Rules run at ingestion, after <Term name="source map">source maps</Term> are applied, so they match Twig's unminified <Term name="stack trace" />. For example, the engineers set a rule on the source file that sends issues from `src/trips/` to the Trips role. The first match wins, so they put specific rules first.
-
-To track the fix in another tool, the engineers [connect](/docs/error-tracking/integrations) GitHub, GitLab, Linear, or Jira, and create the issue from the PostHog issue page. It links back to the PostHog issue, with every exception and the people the issue impacts, and they can add the impact before they create it <SeeFig n={2} />.
-
-PostHog AI can group Twig's recent exceptions by source file and URL path, and suggest a rule for each group.
-
-## Alerts
-
-Each alert fires on one of three triggers:
-
-- **Issue created** fires once for every new issue, which can mean many messages a day.
-- **Issue reopened** fires when an issue the engineers resolved comes back. Use it to catch regressions.
-- **Issue spiking** fires when an issue suddenly gets far more exceptions than usual. Spike detection compares each 5-minute window with the issue's baseline from the past hour, and ignores windows below a minimum count <SeeFig n={3} />.
-
-Each alert pairs one trigger with one destination, like a [Slack](/docs/data-pipelines/destinations/slack) channel or a [webhook](/docs/data-pipelines/destinations/webhook), so to catch both regressions and spikes, the engineers set up two alerts.
-
-The engineers add both in [alerting settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting).
+Rules run at ingestion, after <Term name="source map">source maps</Term> are applied, so they match Twig's unminified <Term name="stack trace" />. The first rule that matches assigns the issue, so specific rules go first.
 
 <Action />
 
-<LessonFooter nextLabel="Self-driving" nextHref="/learn/error-tracking/pocket-guide/errors-as-signals">
+## Track fixes in GitHub
+
+The Trips team plans its work in GitHub. From the issue page, the engineers create a GitHub issue that links back to PostHog, with every exception and the guests the issue impacts <SeeFig n={2} />. The [GitLab, Linear, and Jira integrations](/docs/error-tracking/integrations) work the same way.
+
+## Get alerted when an issue spikes
+
+The issue list doesn't tell the engineers when **Trip details** breaks at 09:14. They set up alerts to tell them. Each alert pairs one trigger with one destination, like a [Slack](/docs/data-pipelines/destinations/slack) channel or a [webhook](/docs/data-pipelines/destinations/webhook):
+
+- **Issue created** fires for every new issue, which can mean many messages a day.
+- **Issue reopened** fires when a resolved issue comes back, which catches regressions.
+- **Issue spiking** fires when an issue gets far more exceptions than usual. PostHog compares each 5-minute window with the issue's baseline from the past hour <SeeFig n={3} />.
+
+The engineers add two alerts in [alerting settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting), for reopened issues and for spikes. Both go to the Trips team's Slack channel.
+
+## Self-driving
+
+But that's not the end of the story. As Twig grows with more users, checking alerts and dashboards and getting issues auto-assigned still leaves many exceptions unresolved. So Twig's engineers turn to self-driving to help resolve these issues.
+
+<LessonFooter nextLabel="Self-driving" nextHref="/learn/error-tracking/pocket-guide/self-driving">
 
 [Assign issues to teammates](/docs/error-tracking/assigning-issues) · [Set up integrations](/docs/error-tracking/integrations) · [Send error tracking alerts](/docs/error-tracking/alerts) · [Detect spikes](/docs/error-tracking/spikes)
 

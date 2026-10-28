@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { IconFlask, IconPlus, IconX } from '@posthog/icons'
+import { IconFlask, IconInfo, IconPlus, IconX } from '@posthog/icons'
 
 import AnatomyFrame from './AnatomyFrame'
 import { FigureMarker } from './FigureMarker'
@@ -56,7 +56,12 @@ function FooterButton({
     )
 }
 
+/** The operator select's labels, symbol first, as PropertyFilters prints them. */
+const OPERATOR_LABELS: Record<string, string> = { equals: '= equals', contains: '∋ contains' }
+
 export interface AssignmentRuleFormProps {
+    /** Which rule editor to draw. A grouping rule has no assignee and groups its matches into one issue. */
+    kind?: 'assignment' | 'grouping'
     /** The exception property the filter reads, as the app labels it. */
     property?: string
     /** The filter's operator, as the app's select renders it. */
@@ -72,6 +77,7 @@ export interface AssignmentRuleFormProps {
 }
 
 export default function AssignmentRuleForm({
+    kind = 'assignment',
     property = 'Exception source',
     operator = 'contains',
     value = 'src/trips/',
@@ -80,16 +86,27 @@ export default function AssignmentRuleForm({
     issueCount = 7,
 }: AssignmentRuleFormProps): JSX.Element {
     return (
-        <AnatomyFrame className="rounded border border-primary bg-accent p-3 dark:bg-accent-dark @md:p-4">
-            <span className="block text-[0.8em] font-bold leading-snug text-primary">New assignment rule</span>
-            <p className="mb-3 mt-1 text-[0.7em] leading-snug text-secondary">
-                Matching exceptions will be automatically assigned to the chosen user or role.
-            </p>
+        // Drawn after the app's `RuleModal`: a LemonModal with the title and description, the
+        // Filters section with its Match toggle, PropertyFilters, the match banner, then the footer.
+        <AnatomyFrame className="rounded border border-primary bg-primary text-primary shadow-sm">
+            <div className="flex items-start justify-between gap-3 px-3 pb-2 pt-3">
+                <div className="min-w-0">
+                    <span className="block text-[0.85em] font-bold leading-snug">
+                        {kind === 'grouping' ? 'New grouping rule' : 'New assignment rule'}
+                    </span>
+                    <p className="m-0 mt-0.5 text-[0.7em] leading-snug text-secondary">
+                        {kind === 'grouping'
+                            ? 'Matching exceptions will be grouped as a single issue.'
+                            : 'Matching exceptions will be automatically assigned to the chosen user or role.'}
+                    </p>
+                </div>
+                <IconX className="size-3.5 shrink-0 text-secondary" aria-hidden="true" />
+            </div>
 
-            <div className="space-y-3 rounded border border-primary bg-primary p-3">
+            <div className="space-y-3 border-y border-primary px-3 py-3">
                 <div>
                     <div className="mb-2 flex items-center justify-between gap-2">
-                        <span className="text-[0.75em] font-bold leading-snug text-primary">Filters</span>
+                        <span className="text-[0.75em] font-semibold leading-snug">Filters</span>
                         <span className="flex items-center gap-1.5">
                             <span className="text-[0.7em] leading-snug text-secondary">Match</span>
                             <MatchToggle value="All" />
@@ -102,54 +119,65 @@ export default function AssignmentRuleForm({
                         </span>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-1.5">
-                        <span className="w-32">
-                            <Control value={property} select />
+                    <div className="flex flex-wrap items-center gap-1.5 text-[0.7em] leading-none">
+                        <span className="rounded border border-primary bg-primary px-2 py-1.5 font-semibold">
+                            {property}
                         </span>
-                        <span className="w-24">
-                            <Control value={operator} select />
-                        </span>
-                        <span className="min-w-[6rem] flex-1">
-                            <Control value={value} />
-                        </span>
-                        <IconX className="size-3 shrink-0 text-secondary" aria-hidden="true" />
                         <FigureMarker
                             n={2}
                             label="Filter"
                             gloss="a property of the exception, read after source maps are applied – so this is the original file, not the minified bundle"
                             visibility="always"
                         />
+                        <span className="w-24">
+                            <Control value={OPERATOR_LABELS[operator] ?? operator} select />
+                        </span>
+                        <span className="flex min-w-[8rem] flex-1 items-center rounded border border-primary bg-primary px-1 py-1">
+                            <span className="inline-flex items-center gap-1 rounded-sm bg-accent px-1.5 py-0.5 dark:bg-accent-dark">
+                                {value}
+                                <IconX className="size-2.5 text-secondary" aria-hidden="true" />
+                            </span>
+                        </span>
+                        <IconX className="size-3 shrink-0 text-secondary" aria-hidden="true" />
                     </div>
 
-                    <span className="mt-2 inline-flex select-none items-center gap-1 rounded border border-primary px-1.5 py-0.5 text-[0.65em] font-semibold leading-none text-secondary">
+                    <span className="mt-2 inline-flex select-none items-center gap-1 rounded border border-primary px-2 py-1 text-[0.7em] font-semibold leading-none">
                         <IconPlus className="size-2.5" aria-hidden="true" />
                         Add filter
                     </span>
                 </div>
 
-                <div>
-                    <span className="flex items-center gap-1.5 text-[0.75em] font-bold leading-snug text-primary">
-                        Assignee
-                        <FigureMarker
-                            n={3}
-                            label="Assignee"
-                            gloss="a role such as a team, or one teammate – the first rule that matches wins"
-                            visibility="always"
-                        />
-                    </span>
-                    <div className="mt-2">
-                        <Control value={assignee} select />
+                {kind === 'assignment' && (
+                    <div>
+                        <span className="flex items-center gap-1.5 text-[0.75em] font-semibold leading-snug">
+                            Assignee
+                            <FigureMarker
+                                n={3}
+                                label="Assignee"
+                                gloss="a role such as a team, or one teammate – the first rule that matches wins"
+                                visibility="always"
+                            />
+                        </span>
+                        <div className="mt-2">
+                            <Control value={assignee} select />
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <p className="mb-0 rounded border border-green/30 bg-green/10 px-2 py-1.5 text-[0.7em] leading-snug text-primary">
-                    <span className="font-bold underline">{exceptionCount} exceptions</span> across{' '}
-                    <span className="font-bold underline">{issueCount} issues</span> would have been assigned in the
-                    last 7 days
+                <p className="m-0 flex items-start gap-2 rounded border border-green/40 bg-green/10 px-2.5 py-2 text-[0.7em] leading-snug">
+                    <IconInfo className="mt-px size-3.5 shrink-0" aria-hidden="true" />
+                    <span>
+                        <span className="font-semibold text-orange">
+                            {exceptionCount.toLocaleString('en-US')} exceptions
+                        </span>{' '}
+                        across <span className="font-semibold text-orange">{issueCount} issues</span>{' '}
+                        {kind === 'grouping' ? 'would have been grouped into one issue' : 'would have been assigned'} in
+                        the last 7 days
+                    </span>
                 </p>
             </div>
 
-            <div className="mt-3 flex items-center justify-end gap-1.5">
+            <div className="flex items-center justify-end gap-1.5 px-3 py-2.5">
                 <FooterButton label="Test rule" icon={<IconFlask className="size-3" aria-hidden="true" />} />
                 <FooterButton label="Cancel" />
                 <FooterButton label="Save" primary />

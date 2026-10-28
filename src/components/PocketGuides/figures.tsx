@@ -19,6 +19,7 @@ import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import { ReleaseConditionsForm, VariantsForm } from './FeatureFlagForms'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import IssueList from './IssueList'
 import IssueSpike from './IssueSpike'
 import EvalRuns, { EvalRun } from './EvalRuns'
 import PersonsModal, { PersonsModalProps } from './PersonsModal'
@@ -466,6 +467,15 @@ export function AssignmentRuleFigure({
     )
 }
 
+/** Twig's issue list with one bug split into two issues. */
+export function IssueListFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <IssueList />
+        </Fig>
+    )
+}
+
 /** An issue volume chart that explains why its sharp increase is worth an alert. */
 export function IssueSpikeFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
     return (
@@ -583,6 +593,27 @@ export function StackTraceFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <StackFrames {...trace} />
+        </Fig>
+    )
+}
+
+/** Two stack traces side by side, to compare the frames that set each one's fingerprint. */
+export function StackTraceCompareFigure({
+    n = 1,
+    caption,
+    traces,
+}: {
+    n?: number
+    caption: string
+    traces: StackFramesProps[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <div className="grid gap-3 @xl:grid-cols-2">
+                {traces.map((trace) => (
+                    <StackFrames key={trace.message} {...trace} />
+                ))}
+            </div>
         </Fig>
     )
 }

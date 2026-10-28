@@ -10,13 +10,13 @@ section: Query
 
 <SqlBarChartFigure
     n={1}
-    caption="Example: issues ranked by the MRR of the accounts they hit. Search throws the most exceptions, but checkout hits accounts that pay twelve times as much."
+    caption="Example: issues ranked by the MRR of the hosts they hit. Stay search throws the most exceptions, but Book stay fails for hosts who pay twelve times as much."
     series="mrr"
     format="currency"
     rows={[
-        { label: 'Checkout confirm fails · 620 exceptions', value: 48000 },
-        { label: 'Invoice download fails · 180 exceptions', value: 16000 },
-        { label: 'Search request times out · 9,000 exceptions', value: 4000 },
+        { label: 'Book stay fails · 620 exceptions', value: 48000 },
+        { label: 'Payout statement fails · 180 exceptions', value: 16000 },
+        { label: 'Stay search times out · 9,000 exceptions', value: 4000 },
     ]}
 />
 
@@ -34,12 +34,12 @@ section: Query
 
 <SqlBarChartFigure
     n={3}
-    caption="Example: one account's issues, ranked by how many of its users each one hit. Search fired 2,840 times for only 2 users, which looks like a retry loop."
+    caption="Example: one host's issues, ranked by how many of the host's guests each one hit. Stay search fired 2,840 times for only 2 guests, which looks like a retry loop."
     series="users"
     rows={[
-        { label: 'Checkout confirm fails · 314 exceptions', value: 186 },
-        { label: 'Invoice download fails · 41 exceptions', value: 27 },
-        { label: 'Search request times out · 2,840 exceptions', value: 2 },
+        { label: 'Book stay fails · 314 exceptions', value: 186 },
+        { label: 'Payout statement fails · 41 exceptions', value: 27 },
+        { label: 'Stay search times out · 2,840 exceptions', value: 2 },
     ]}
 />
 
@@ -63,23 +63,25 @@ section: Query
     ]}
 />
 
+<SkillFigure n={5} caption="The skill that ranks errors by the revenue they put at risk. Copy it and give it to your agent." />
+
 </LeftPage>
 
 <RightPage>
 
 # Querying exceptions
 
-Now that the engineers capture high quality exceptions, they can query them for analysis.
+Now that Twig's engineers capture high quality exceptions, they can query them for analysis.
 
-Exceptions are just noise if the team can't accurately understand their impact and urgency. To justify fixing one before another, a team needs context from its other PostHog data, like who the issue impacts and what they pay.
+Here are ways Twig's engineers use other PostHog events to understand the impact of issues in error tracking.
 
 Each check below has a prompt to give an agent on [Learn Error Tracking with your agent](/learn/error-tracking/agent-prompts-and-mcp).
 
-## Joining exceptions to other PostHog events
+## Join exceptions to the rest of Twig's data
 
-PostHog keeps Twig's events in one [context warehouse](/docs/self-driving/context) with persons, groups, sessions, and the tables an app can [sync](/docs/data-pipelines/sources) from tools like [Stripe](/docs/data-pipelines/sources/stripe) or [Zendesk](/docs/data-pipelines/sources/zendesk). [HogQL](/docs/data-warehouse/sql) queries all of it together, so anything sent to PostHog can be joined to Twig's exceptions.
+PostHog keeps Twig's events in one [context warehouse](/docs/self-driving/context) with persons, groups, sessions, and the tables an app can [sync](/docs/data-pipelines/sources) from other tools, like [Zendesk](/docs/data-pipelines/sources/zendesk). [HogQL](/docs/data-warehouse/sql) queries all of it together, so anything sent to PostHog can be joined to Twig's exceptions.
 
-Filter, break down, or join exceptions on these properties:
+The engineers filter, break down, or join exceptions on these properties:
 
 | To answer | Use | Set up |
 | --- | --- | --- |
@@ -88,7 +90,7 @@ Filter, break down, or join exceptions on these properties:
 | Is it a crash? | `$exception_level` set to `fatal` | Set automatically for crashes by the <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Android](/docs/error-tracking/installation/android), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg" alt="" className="inline-block size-4 align-text-bottom dark:invert" /> [iOS](/docs/error-tracking/installation/ios), and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="" className="inline-block size-4 align-text-bottom" /> [React Native](/docs/error-tracking/installation/react-native) SDKs |
 | Which SDK or app sent it? | `$lib` or `$app_namespace` | `$lib` is set automatically by every SDK, and `$app_namespace` by the mobile SDKs |
 | Who hit it? | `distinct_id` and person properties, like email | [Identify your users](/docs/getting-started/identify-users) |
-| Which account hit it, and what does it pay? | `$groups` and the account's group properties | [Set up group analytics](/docs/product-analytics/group-analytics) |
+| Which host's stay was it, and what does the host pay? | `$groups` and the host's group properties | [Set up group analytics](/docs/product-analytics/group-analytics) |
 | Which flag variant did they see? | `$feature/<flag-key>` | [Send flags with your events](/docs/feature-flags/adding-feature-flag-code), on the server too |
 | Which session was it in, and what's in its replay? | `$session_id` | Set automatically by the web and mobile SDKs. On the server, [pass the session ID](/docs/data/sessions#server-sdks-and-sessions) |
 | Which LLM trace was it in? | `$ai_trace_id` | [Link exceptions to traces](/docs/ai-observability/link-error-tracking) |
@@ -97,31 +99,29 @@ Filter, break down, or join exceptions on these properties:
 
 [Issues and exceptions](/docs/error-tracking/issues-and-exceptions) lists every property PostHog sets.
 
-## Revenue at risk
+## Rank issues by bookings at risk
 
 <Callout title="Prerequisites">
 
-- Group analytics to relate users to the company they belong to. [Configure group analytics](/docs/product-analytics/group-analytics#set-up-group-analytics)
-- An `mrr` property from a warehouse connection with [Stripe](/docs/data-pipelines/sources/stripe). [Connect your payment data](/docs/data-warehouse/warehouse-properties#set-up-a-warehouse-property)
+- Group analytics with hosts as a group, so each exception carries the host of the stay. [Configure group analytics](/docs/product-analytics/group-analytics#set-up-group-analytics)
+- An `mrr` property on each host from a warehouse connection with [Stripe](/docs/data-pipelines/sources/stripe). [Connect your payment data](/docs/data-warehouse/warehouse-properties#set-up-a-warehouse-property)
 
 </Callout>
 
-Rank issues by the revenue of the accounts that hit them. If an issue hits accounts with high MRR, it might be more important, even with fewer occurrences <SeeFig n={1} />.
+Hosts pay Twig a monthly fee, which the engineers sync from Stripe as each host's `mrr`. They rank issues by the MRR of the hosts they hit. An issue that hits high-MRR hosts can matter more, even with fewer occurrences <SeeFig n={1} />.
 
-Combine this with the checks below to judge how severe the impact is: whether the error [makes people leave](#churn), and what they saw in [their sessions](#session-replays).
-
-This joins exceptions to accounts on `$groups`:
+This joins exceptions to hosts on `$groups`:
 
 | Source | What it adds |
 | --- | --- |
-| `$exception` | The accounts each issue hit |
-| `groups` | What each account pays, from its `mrr` property |
+| `$exception` | The hosts each issue hit |
+| `groups` | What each host pays, from its `mrr` property |
 
-To build a version of this, give an agent the [revenue skill](/learn/error-tracking/agent-prompts-and-mcp#skills).
+To build a version of this, give an agent the revenue skill <SeeFig n={5} />.
 
-The [Errors by account value](/learn/error-tracking/pocket-guide/who-it-breaks) scout runs a related check every day. It reports issues concentrated in paying accounts.
+The [Errors by host value](/learn/error-tracking/pocket-guide/who-it-breaks) scout runs a related check every day. It reports issues concentrated in paying hosts.
 
-## Churn
+## Check whether an error makes guests leave
 
 <Callout title="Prerequisites">
 
@@ -129,7 +129,7 @@ The [Errors by account value](/learn/error-tracking/pocket-guide/who-it-breaks) 
 
 </Callout>
 
-Revenue shows an error's potential impact. Next, confirm whether it actually makes people leave:
+To see whether an error makes guests leave, the engineers check three things:
 
 - **Funnels.** The engineers build a <Term name="funnel" /> of booking a stay on Twig, with its graph type set to [historical trends](/docs/product-analytics/funnels#graph-type), to see whether conversion fell when the error appeared <SeeFig n={2} />. They [break it down](/docs/product-analytics/funnels#breakdowns) by the issue's cohort, created from the issue page, to compare people who hit the error with people who didn't.
 - **Retention.** They filter a [retention insight](/docs/product-analytics/retention) to the issue's cohort and compare it with all users. If people who hit the error come back less, the error is driving churn.
@@ -140,9 +140,9 @@ The session drop-off check joins exceptions to the events that followed on `$ses
 | Source | What it adds |
 | --- | --- |
 | `$exception` | When the error fired |
-| `$pageview`, `$autocapture` | Whether the person kept going |
+| `$pageview` and Twig's named events, like `twig_stay_viewed` | Whether the guest kept going |
 
-## Session replays
+## Watch what guests saw
 
 <Callout title="Prerequisites">
 
@@ -151,7 +151,7 @@ The session drop-off check joins exceptions to the events that followed on `$ses
 
 </Callout>
 
-When an error makes people leave, the engineers watch their sessions to see what happened.
+When an error makes guests leave, the engineers watch their sessions to see what happened.
 
 This joins exceptions to recordings on `$session_id`:
 
@@ -160,26 +160,24 @@ This joins exceptions to recordings on `$session_id`:
 | `$exception` | The error and when it fired |
 | `session_replay_events` | What the person saw and did |
 
-## A customer's errors
+## Start from one host's errors
 
 <Callout title="Prerequisites">
 
-- Group analytics to relate users to the company they belong to. [Configure group analytics](/docs/product-analytics/group-analytics#set-up-group-analytics)
+- Group analytics with hosts as a group. [Configure group analytics](/docs/product-analytics/group-analytics#set-up-group-analytics)
 
 </Callout>
 
-In a product with paying accounts, triage can also start from a customer. When one reports a problem, rank every issue their account hit by how many of their users the issue impacts <SeeFig n={3} />. In the issue list, filter to their account and sort by **Users**.
+Triage can also start from a host. When a host reports a problem, the engineers rank every issue on that host's stays by how many guests it impacts <SeeFig n={3} />. In the issue list, that's the host as a filter, sorted by **Users**.
 
-Checkout hit 186 of their users, so fix it first.
-
-This joins exceptions to accounts on `$groups`:
+This joins exceptions to hosts on `$groups`:
 
 | Source | What it adds |
 | --- | --- |
-| `$exception` | Each issue and how many users it impacts |
-| `groups` | Which customer those users belong to |
+| `$exception` | Each issue and how many guests it impacts |
+| `groups` | Which host's stays those guests were on |
 
-## Support tickets
+## Find the errors behind support tickets
 
 <Callout title="Prerequisites">
 
@@ -188,7 +186,7 @@ This joins exceptions to accounts on `$groups`:
 
 </Callout>
 
-Support tickets work the same way. A ticket with an error behind it points at a bug the team can fix.
+Guests and hosts reach Twig's support in Zendesk, which the engineers sync to PostHog. A ticket with an error behind it points at a bug they can fix.
 
 This joins tickets to exceptions on the session ID in each ticket's replay link:
 
@@ -197,7 +195,7 @@ This joins tickets to exceptions on the session ID in each ticket's replay link:
 | A tickets table, like `zendesk.tickets` | What the customer reported |
 | `$exception` | The error behind it |
 
-## People who hit the error
+## Reach the guests an error hit
 
 <Callout title="Prerequisites">
 
@@ -205,7 +203,7 @@ This joins tickets to exceptions on the session ID in each ticket's replay link:
 
 </Callout>
 
-Once the engineers fix an issue, they might want to tell the people the issue impacts, or survey them. They create a <Term name="cohort" /> from the issue page, then [duplicate it as a static cohort](/docs/data/cohorts#can-you-use-a-dynamic-cohort-as-a-feature-flag-target) to target them with a survey or flag.
+Once the engineers fix an issue, they tell the guests it hit, or survey them. They create a <Term name="cohort" /> from the issue page, then [duplicate it as a static cohort](/docs/data/cohorts#can-you-use-a-dynamic-cohort-as-a-feature-flag-target) to target them with a survey or flag.
 
 This joins exceptions to people on `distinct_id`:
 
@@ -214,7 +212,7 @@ This joins exceptions to people on `distinct_id`:
 | `$exception` | The issue each person hit |
 | `persons` | Who they are, so the team can reach them |
 
-## Experiments
+## Catch new errors in experiments
 
 <Callout title="Prerequisites">
 
@@ -222,9 +220,9 @@ This joins exceptions to people on `distinct_id`:
 
 </Callout>
 
-When the next change ships as an <Term name="experiment" />, check that it doesn't add errors. Add `$exception` as a [secondary metric](/docs/experiments/metrics#primary-and-secondary-metrics) to compare errors across variants.
+When Twig ships a change as an <Term name="experiment" />, the engineers add `$exception` as a [secondary metric](/docs/experiments/metrics#primary-and-secondary-metrics) to compare errors across variants.
 
-To see when the errors started, chart each variant's error rate <SeeFig n={4} />. When the traffic split isn't even, compare a ratio, like exceptions per pageview, rather than raw counts. A variant on 5% of traffic then compares fairly with one on 95%. The Feature Flags pocket guide covers [running the experiment](/learn/feature-flags/pocket-guide/flag-to-experiment).
+To see when errors started, they chart each variant's error rate <SeeFig n={4} />. With an uneven split, they compare a ratio, like exceptions per pageview, so a variant on 5% of traffic compares fairly with one on 95%. The Feature Flags pocket guide covers [running the experiment](/learn/feature-flags/pocket-guide/flag-to-experiment).
 
 This joins exceptions to variants on `$feature/<flag-key>`:
 
@@ -233,22 +231,22 @@ This joins exceptions to variants on `$feature/<flag-key>`:
 | `$exception` | Errors in each variant |
 | `$pageview` | Traffic in each variant, for the rate |
 
-## Crash-free sessions
+## Track crash-free sessions
 
 <Callout title="Prerequisites">
 
-- Crash reporting in an <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Android](/docs/error-tracking/installation/android), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg" alt="" className="inline-block size-4 align-text-bottom dark:invert" /> [iOS](/docs/error-tracking/installation/ios), or <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="" className="inline-block size-4 align-text-bottom" /> [React Native](/docs/error-tracking/installation/react-native) app.
+- Exception autocapture, so unhandled exceptions are captured. On mobile, crash reporting in an <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Android](/docs/error-tracking/installation/android), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg" alt="" className="inline-block size-4 align-text-bottom dark:invert" /> [iOS](/docs/error-tracking/installation/ios), or <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="" className="inline-block size-4 align-text-bottom" /> [React Native](/docs/error-tracking/installation/react-native) app.
 
 </Callout>
 
-To watch an app's stability across all these changes, track its crash-free rate. It's the share of sessions without a fatal exception.
+Twig is a web app, so the engineers track stability as the share of sessions without an unhandled exception.
 
-This joins sessions to fatal exceptions on `$session_id`:
+This joins sessions to unhandled exceptions on `$session_id`:
 
 | Source | What it adds |
 | --- | --- |
 | `sessions` | Every session |
-| `$exception` with a `fatal` level | Which sessions crashed |
+| `$exception` with `$exception_handled` set to `false` | Which sessions hit an unhandled exception |
 
 <LessonFooter nextLabel="Triage and alerts" nextHref="/learn/error-tracking/pocket-guide/triage-and-alerts">
 

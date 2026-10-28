@@ -5,7 +5,7 @@ import LessonFooter from './LessonFooter'
 import TwigFilterFigure from './TwigFilterFigure'
 import TwigEventFigure from './TwigEventFigure'
 import { AutocaptureFigure, FilterPropertiesFigure, DestinationChartFigure } from './ProductAnalyticsExhibits'
-import { AutocapturedExceptionFigure, TripDetailsErrorFigure } from './ErrorTrackingExhibits'
+import { AutocapturedExceptionFigure, FingerprintCaptureFigure, TripDetailsErrorFigure } from './ErrorTrackingExhibits'
 import {
     IdentifySavedStayFigure,
     ResetIdentityFigure,
@@ -45,6 +45,7 @@ import {
     FactorSplitFigure,
     Fig,
     IssueSpikeFigure,
+    IssueListFigure,
     LeakFigure,
     LedgerFigure,
     LoopFigure,
@@ -54,6 +55,7 @@ import {
     ReportFigure,
     ScoutFigure,
     StackTraceFigure,
+    StackTraceCompareFigure,
     TimelineFigure,
     ScreenshotFigure,
     SkillFigure,
@@ -84,6 +86,7 @@ export const bookMdxComponents = {
     AutocaptureFigure,
     AutocapturedExceptionFigure,
     TripDetailsErrorFigure,
+    FingerprintCaptureFigure,
     FilterPropertiesFigure,
     DestinationChartFigure,
     SessionGroupingFigure,
@@ -115,8 +118,10 @@ export const bookMdxComponents = {
     LedgerFigure,
     LeakFigure,
     IssueSpikeFigure,
+    IssueListFigure,
     ScoutFigure,
     StackTraceFigure,
+    StackTraceCompareFigure,
     TimelineFigure,
     SkillFigure,
     TraceFigure,

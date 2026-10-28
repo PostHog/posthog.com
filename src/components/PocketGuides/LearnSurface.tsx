@@ -14,7 +14,14 @@ import Cover from './Cover'
 import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { useEntry } from './bookContext'
-import { learnChapterPath, learnChapterSlug, normalizeUrl, sectionPages, useBookPages } from './bookModel'
+import {
+    learnChapterPath,
+    learnChapterSlug,
+    normalizeUrl,
+    sectionPages,
+    useBookPages,
+    volumeIdFromUrl,
+} from './bookModel'
 import { isReaderWindowActive } from './learnTracking'
 
 interface LearnBodyNode {
@@ -60,13 +67,17 @@ const IntroContext = React.createContext<IntroContextValue | null>(null)
 // Defined once, outside the render. New component functions on every render would remount the
 // intro and reset the chapter list's scroll position.
 
-/** `align="center"` lines the button up under a centered cover. */
-function StartReading({ align }: { align?: 'center' }): JSX.Element | null {
+/**
+ * `align="center"` lines the button up under a centered cover. `to` opens a given page instead of the
+ * guide's first chapter, for a section's introduction page that has no cover.
+ */
+function StartReading({ align, to }: { align?: 'center'; to?: string }): JSX.Element | null {
     const intro = React.useContext(IntroContext)
-    if (!intro?.coverVolume || !intro.firstChapterPath) return null
+    const destination = to ?? (intro?.coverVolume ? intro.firstChapterPath : undefined)
+    if (!destination) return null
     return (
         <div className={`not-prose my-6 ${align === 'center' ? 'flex justify-center' : ''}`}>
-            <OSButton asLink to={intro.firstChapterPath} variant="primary" size="md">
+            <OSButton asLink to={destination} variant="primary" size="md">
                 Start reading <span aria-hidden="true">→</span>
             </OSButton>
         </div>
@@ -110,13 +121,17 @@ function CoverWithChapters({ size }: { size?: 'small' | 'medium' }): JSX.Element
 
 /**
  * A chapter's `#` heading, with "Chapter 01" above it in the intro eyebrow's style. The number sits
- * outside the h1, so the heading and the page title stay the chapter's own title.
+ * outside the h1, so the heading and the page title stay the chapter's own title. Self-driving pages
+ * are not chapters, so they get no number.
  */
 function ChapterHeading(props: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element {
-    const chapter = useEntry()?.entry.page
+    const entry = useEntry()?.entry
+    const chapter = entry?.page
+    const selfDrivingSection = entry ? volumeById(volumeIdFromUrl(entry.url))?.learnHub?.selfDrivingSection : undefined
+    const isSelfDriving = Boolean(selfDrivingSection) && entry?.section === selfDrivingSection
     return (
         <>
-            {chapter ? (
+            {chapter && !isSelfDriving ? (
                 <p className="not-prose m-0 mb-[7.5px] flex items-center gap-1.5 text-[15px] font-normal leading-[36px] text-primary">
                     <BookOpen className="size-4 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                     Chapter {String(chapter).padStart(2, '0')}

@@ -7,7 +7,7 @@
 title: Check whether the fix held
 shortTitle: Verify the fix
 subtitle: Is the error the engineers fixed still firing?
-pocketGuideOrder: 10
+pocketGuideOrder: 11
 section: Self-drive
 pocketGuideCta:
   kind: link
@@ -62,9 +62,7 @@ pocketGuideCta:
 
 # Check whether the fix held
 
-The engineers add a <Term name="scout" /> to Twig's project. It's a scheduled agent that queries Twig's PostHog events and files a <Term name="report" /> in the team's <Term name="inbox" /> when it finds something.
-
-This one checks each fix once it has had time to reach users, and reports the fixes that didn't hold. An <Term name="issue" /> can keep firing after a fix while some clients still run the old code, so the scout waits and compares rates before it reports.
+A merged fix doesn't always stop the error. The Inbox validation scout checks each fix once it has reached guests, and reports the fixes that didn't hold. Some browsers keep running the old code for a while, so the scout waits and compares rates before it reports.
 
 ## What the scout looks at
 
@@ -72,7 +70,7 @@ Yesterday at `10:30` the engineers merged a fix for the Trip details `TypeError`
 
 ## The report in your inbox
 
-A fix that didn't hold becomes a new <Term name="report" /> in the team's <Term name="inbox" />, linked to the original so the team can see what was already tried <SeeFig n={2} />. The engineers click **Ask AI** on the report to ask who else is affected, whether the problem is new, or what to do next. See [reports](/docs/self-driving/reports#ask-ai-about-a-report).
+A fix that didn't hold becomes a new <Term name="report" /> in the team's <Term name="inbox" />, linked to the original so the team can see what was already tried <SeeFig n={2} />.
 
 ## The scout itself
 
@@ -80,11 +78,11 @@ PostHog maintains this scout, listed as **Inbox validation** in the project's sc
 
 ## The schedule it runs on
 
-The scout runs every 24 hours by default, but stays quiet unless something needs the team's attention. The engineers can change the schedule in its **Settings**.
+The scout runs every 24 hours by default, but stays quiet unless something needs the team's attention. The engineers change the schedule in its **Settings**.
 
 ## Add this to your scout troop
 
-PostHog ships this scout turned on, and it can be switched off for each project. It checks a fix once exceptions reach PostHog and the fix's report resolves, either when its linked pull request merges or when the engineers resolve it themselves.
+PostHog ships this scout turned on, and the engineers can turn it off for each project. It checks a fix once exceptions reach PostHog and the fix's report resolves, either when its linked pull request merges or when the engineers resolve it themselves.
 
 <Action />
 

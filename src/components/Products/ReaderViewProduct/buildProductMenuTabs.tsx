@@ -124,12 +124,12 @@ const LearnNav = ({
     const hub = volume?.learnHub
     const isSelfDriving = (index: number) =>
         Boolean(hub?.selfDrivingSection) && pages[index].section === hub?.selfDrivingSection
-    // Self-driving numbers its own chapters from 1, apart from the story.
+    // Self-driving pages aren't chapters of the story, so they carry no number.
     const scoutChapters = chapters
         .filter((_, index) => isSelfDriving(index))
-        .map((chapter, index) => {
+        .map((chapter) => {
             const page = pages.find((candidate) => learnChapterPath(guideBasePath, candidate) === chapter.url)
-            return { ...chapter, name: `${index + 1}. ${page?.shortTitle || page?.title}` }
+            return { ...chapter, name: page?.shortTitle || page?.title || chapter.name }
         })
     const items = hub
         ? [
@@ -140,19 +140,21 @@ const LearnNav = ({
                   icon: <IconBook className="size-4" />,
                   children: chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
               },
-              // Only the hub pages this volume has, so a smaller hub has no dead links.
-              ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
-              // The label opens the first scout chapter; the chevron shows the rest.
+              // The story continues into Self-driving, so it follows the pocket guide.
               ...(scoutChapters.length
                   ? [
                         {
+                            // The section's first page is its introduction, so the label opens it
+                            // and the chevron lists the scout pages after it.
                             name: 'Self-driving',
                             url: scoutChapters[0].url,
                             icon: <IconBolt className="size-4" />,
-                            children: scoutChapters,
+                            children: scoutChapters.slice(1),
                         },
                     ]
                   : []),
+              // Only the hub pages this volume has, so a smaller hub has no dead links.
+              ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
           ]
         : chapters
 

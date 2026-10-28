@@ -441,6 +441,12 @@ export const TERMS = {
             'The value that decides which issue an exception joins. PostHog builds one from the exception type, message, and stack frames, and you can override it when the default groups too coarsely or too finely.',
         slug: '/docs/error-tracking/fingerprints',
     },
+    'grouping rule': {
+        title: 'Grouping rule',
+        description:
+            'A set of filters on exception properties, saved in PostHog. Every exception that matches the filters joins the same issue. PostHog checks rules at ingestion, so changing one needs no deploy.',
+        slug: '/docs/error-tracking/grouping-issues#option-1-custom-grouping-rule',
+    },
     'stack trace': {
         title: 'Stack trace',
         description:

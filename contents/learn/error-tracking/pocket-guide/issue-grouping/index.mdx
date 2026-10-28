@@ -1,20 +1,85 @@
 ---
 title: Issue grouping
 shortTitle: Issue grouping
-subtitle: Control which exceptions land in the same issue.
+subtitle: PostHog groups exceptions into issues by code. Sometimes exceptions that appear different in code share similar semantics to the engineers, like every exception from a missing host record.
 pocketGuideOrder: 3
 section: Capture
 ---
 
 <LeftPage>
 
-<ScreenshotFigure
+<IssueListFigure
     n={1}
-    product="error_tracking"
-    screenshot="grouping-rule"
-    caption="The rule editor tests how many exceptions a grouping rule matches before you save it."
+    caption="One missing host record opens two issues in Twig's issue list, one for each function that throws."
 />
 
+<StackTraceCompareFigure
+    n={2}
+    caption="The same error from two places. The Twig frames differ, so the fingerprints differ."
+    traces={[
+        {
+            type: 'HostNotFoundError',
+            message: 'Host "colette" not found for booking booking_1',
+            frames: [
+                {
+                    fn: 'readTripHost',
+                    source: 'src/trips/trip-details.ts@12:11',
+                    inApp: true,
+                    fingerprinted: true,
+                    marker: {
+                        n: 1,
+                        label: 'Twig frames',
+                        gloss: 'The fingerprint icon marks the frames PostHog fingerprinted: readTripHost and openTripDetails.',
+                    },
+                },
+                {
+                    fn: 'openTripDetails',
+                    source: 'src/account/AccountPages.tsx@42:18',
+                    inApp: true,
+                    fingerprinted: true,
+                },
+                { fn: 'renderWithHooks', source: 'node_modules/react-dom/client.js@5654:24' },
+            ],
+        },
+        {
+            type: 'HostNotFoundError',
+            message: 'Host "colette" not found for stay stay-03',
+            frames: [
+                {
+                    fn: 'StayPageView',
+                    source: 'src/stays/StayPageView.tsx@14:11',
+                    inApp: true,
+                    fingerprinted: true,
+                    marker: {
+                        n: 2,
+                        label: 'Different Twig frames',
+                        gloss: 'Here only StayPageView is fingerprinted, so this fingerprint differs from the other one.',
+                    },
+                },
+                { fn: 'renderWithHooks', source: 'node_modules/react-dom/client.js@5654:24' },
+                { fn: 'performUnitOfWork', source: 'node_modules/react-dom/client.js@12561:98' },
+            ],
+        },
+    ]}
+/>
+
+<AssignmentRuleFigure
+    n={3}
+    kind="grouping"
+    property="Exception type"
+    operator="equals"
+    value="HostNotFoundError"
+    exceptionCount={1442}
+    issueCount={2}
+    caption="A grouping rule that puts every HostNotFoundError in one issue. Before saving, the editor tests how many exceptions it would have grouped in the last 7 days."
+/>
+
+<FingerprintCaptureFigure
+    n={4}
+    caption="Twig's capture call for a missing host. The fingerprint includes the host, so each missing host gets its own issue."
+/>
+
+<SkillFigure n={5} caption="The skill Twig's engineers use to debug misgrouped issues. Copy it and give it to your agent." />
 
 </LeftPage>
 
@@ -22,34 +87,45 @@ section: Capture
 
 # Issue grouping
 
-With readable stack traces, the engineers check how PostHog groups the **Trip details** exceptions.
+PostHog groups exceptions into <Term name="issue">issues</Term> by their code. Sometimes exceptions that look different in code have the same cause.
 
-PostHog groups each exception into an <Term name="issue" /> by the first of these that applies:
+When a stay's host record is missing, **Trip details** and the stay page both throw a `HostNotFoundError`, from `readTripHost` and `StayPageView`. PostHog puts these exceptions in two issues <SeeFig n={1} />.
 
-1. **A fingerprint the engineers set at capture time.** It wins over everything else, and changing it takes a code deploy.
-2. **A grouping rule the engineers defined in PostHog.** It runs at ingestion, so it doesn't need a deploy.
-3. **The fingerprint PostHog generates.** PostHog uses it when the engineers have set neither.
+## How PostHog groups
 
-## Default grouping
+PostHog decides how to group exceptions into issues by going through these rules, in order:
 
-By default, PostHog builds a <Term name="fingerprint" /> for each exception and puts exceptions with the same fingerprint in the same issue.
+1. **A custom <Term name="fingerprint" /> set in source code.** If that's not set:
+2. **A <Term name="grouping rule" /> in PostHog.** If that's not set:
+3. **A default fingerprint PostHog generates.**
 
-PostHog builds the fingerprint from the exception type and the frames in its <Term name="stack trace" />. If the exception has no stack trace, PostHog uses the exception message in place of the frames.
+## Default generated fingerprints
 
-In minified code, the fingerprint uses the bundle's frames until PostHog has the bundle's <Term name="source map" />. A new build can change those frames, so a deploy can open a new issue for a bug Twig already has. To prevent it, the engineers [upload Twig's source maps](/learn/error-tracking/pocket-guide/stack-traces#source-map-uploads).
+PostHog generates the fingerprint from the exception type and Twig's frames in the <Term name="stack trace" />, or from the message if there's no stack trace.
+
+Both exceptions are a `HostNotFoundError`, but one throws in `readTripHost` and the other in `StayPageView` <SeeFig n={2} />. Different frames make different fingerprints, so PostHog puts them in two issues.
+
+When a <Term name="source map" /> is absent, PostHog groups by the first in-app frame in the minified code instead. Each deploy can minify that frame differently, so the same bug can land in a new issue after every deploy.
 
 ## Custom grouping
 
-The engineers customize grouping when the default splits one bug into many issues, or puts different bugs in one issue:
+The engineers want every `HostNotFoundError` in one issue, wherever Twig throws it. They add a grouping rule in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-custom-grouping) that matches the exception type <SeeFig n={3} />.
 
-- **Grouping rules.** The engineers add a rule in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-custom-grouping). A rule filters on any event property, such as the exception type or source file, and the editor tests how many exceptions match before saving <SeeFig n={1} />. Rules run in order and the first match wins, so specific rules go first.
-- **Custom fingerprints.** The engineers set `$exception_fingerprint` when they capture the exception. It fits when Twig's code has to pick the group for each exception. For autocaptured exceptions, they set it in [`before_send`](/learn/error-tracking/pocket-guide/reduce-noise#filters-in-the-app), a hook that edits events before the SDK sends them.
+The rule only applies to new exceptions, so the engineers also select the two existing issues in the issue list and click **Merge**.
 
-Both apply at ingestion, so they only change exceptions captured after the engineers add them. To combine issues that already exist, the engineers select them in the issue list and click **Merge**.
+## Custom fingerprinting
+
+The grouping rule puts every `HostNotFoundError` in one issue. The engineers want one issue per missing host instead, because each host record needs its own fix.
+
+A grouping rule would need a new rule for every host. Twig's code already knows which host is missing, so it's easier to put the host in the fingerprint there <SeeFig n={4} />.
+
+A custom fingerprint wins over the grouping rule. Each missing host now gets its own issue, whether Trip details or the stay page finds it. Like grouping rules, custom fingerprints only apply to new exceptions.
 
 ## Misgrouped issues
 
-When an issue looks misgrouped, the engineers give their agent the [grouping skill](/learn/error-tracking/agent-prompts-and-mcp#skills). It asks these questions about each issue and stops at the first yes:
+As software grows and the organization changes, how you think about grouping will change as well.
+
+When issues are misgrouped, Twig's engineers debug like this:
 
 ```mermaid
 %%{init: {"block": {"padding": 22}, "themeCSS": ".edgeLabel foreignObject { overflow: visible; } span.edgeLabel { background: transparent !important; } .yes, .no { background: white; padding: 0 3px; } .no { position: relative; left: 30px; }"}}%%
@@ -81,9 +157,7 @@ block-beta
     class maps,leave,narrow,rule,fingerprint,add act
 ```
 
-It checks Twig's exceptions and code, then lists each issue it changed and which changes need a deploy.
-
-If no property tells the exceptions apart, the skill tags them in Twig's code, like `surface: trip_details` on every exception from **Trip details**. A grouping rule can then match on that tag.
+We turned this into a skill for you to debug your misgrouped issues <SeeFig n={5} />.
 
 <LessonFooter nextLabel="Reduce noise" nextHref="/learn/error-tracking/pocket-guide/reduce-noise">
 

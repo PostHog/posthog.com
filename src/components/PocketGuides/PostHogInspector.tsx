@@ -95,10 +95,13 @@ export function InspectorJavaScript({
     lines,
     highlightedLine,
     meta,
+    notes = {},
 }: {
     lines: string[]
     highlightedLine: number
     meta?: string
+    /** Numbered markers keyed by line index, drawn at the end of that line. */
+    notes?: Record<number, PropertyNote>
 }): JSX.Element {
     return (
         <div className={`min-w-0 border-b ${BORDER}`}>
@@ -133,6 +136,16 @@ export function InspectorJavaScript({
                                         <mark className="bg-[#fff0dc] px-1 text-inherit">{line}</mark>
                                     ) : (
                                         line
+                                    )}
+                                    {notes[index] && (
+                                        <span className="ml-1.5 inline-flex align-middle">
+                                            <FigureMarker
+                                                n={notes[index].n}
+                                                label={notes[index].label}
+                                                gloss={notes[index].gloss}
+                                                visibility="always"
+                                            />
+                                        </span>
                                     )}
                                 </span>
                             ))}

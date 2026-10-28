@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { IconEllipsis, IconWarning } from '@posthog/icons'
+import { IconBox, IconEllipsis, IconWarning } from '@posthog/icons'
 
 import Tooltip from 'components/RadixUI/Tooltip'
 
@@ -25,6 +25,8 @@ interface StackFrame {
     source: string
     /** Your code rather than a dependency. Drawn heavier, because these are the ones you act on. */
     inApp?: boolean
+    /** One of the frames PostHog built the fingerprint from. Draws the app's fingerprint icon. */
+    fingerprinted?: boolean
     /** PostHog could not map this frame back to source. Draws the warning and its tooltip. */
     unresolved?: boolean
     /** Source around the failing line, shown when the frame is opened. First line is `startLine`. */
@@ -66,6 +68,48 @@ function UnresolvedWarning(): JSX.Element {
     )
 }
 
+/** The app's fingerprint icon (`IconFingerprint` in lemon-ui), on frames that set the issue's fingerprint. */
+function FingerprintIcon(): JSX.Element {
+    return (
+        <Tooltip
+            delay={0}
+            side="bottom"
+            contentClassName="max-w-64 px-3 py-2 text-left leading-normal"
+            trigger={
+                <span className="inline-flex cursor-help items-center text-secondary hover:text-red">
+                    <svg viewBox="1 1 23 23" fill="none" className="size-[1.3em]" aria-label="Fingerprinted frame">
+                        <path
+                            d="M13.1427 20.9999C10.8077 19.5438 9.25254 16.9522 9.25254 13.9968C9.25254 12.4783 10.4833 11.2476 12.0008 11.2476C13.5184 11.2476 14.7491 12.4783 14.7491 13.9968C14.7491 15.5153 15.9798 16.746 17.4974 16.746C19.0149 16.746 20.2457 15.5153 20.2457 13.9968C20.2457 9.44139 16.5544 5.74922 12.0017 5.74922C7.44907 5.74922 3.75781 9.44139 3.75781 13.9968C3.75781 15.0122 3.87145 16.001 4.08038 16.954M8.49027 20.2989C7.23938 18.5138 6.50351 16.3419 6.50351 13.9968C6.50351 10.9599 8.96405 8.49844 11.9992 8.49844C15.0343 8.49844 17.4948 10.9599 17.4948 13.9968M17.7927 19.4806C17.6937 19.4861 17.5966 19.4953 17.4967 19.4953C14.4616 19.4953 12.0011 17.0338 12.0011 13.9969M19.6734 6.47682C17.7993 4.34802 15.0593 3 12.0004 3C8.94141 3 6.20138 4.34802 4.32734 6.47682"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        />
+                    </svg>
+                </span>
+            }
+        >
+            <span className="text-[0.75rem] leading-snug text-primary">Fingerprinted by this frame</span>
+        </Tooltip>
+    )
+}
+
+/** The app's vendor icon, on frames from a dependency rather than the app's own code. */
+function VendorIcon(): JSX.Element {
+    return (
+        <Tooltip
+            delay={0}
+            side="bottom"
+            trigger={
+                <span className="inline-flex cursor-help items-center text-secondary">
+                    <IconBox className="size-[1.2em]" />
+                </span>
+            }
+        >
+            <span className="text-[0.75rem] text-primary">Vendor frame</span>
+        </Tooltip>
+    )
+}
+
 export default function StackFrames({ type, message, frames, marker }: StackFramesProps): JSX.Element {
     // One open frame at a time. The app allows several; the figure only ever needs to show one.
     const [openFrame, setOpenFrame] = useState<number | null>(null)
@@ -96,10 +140,14 @@ export default function StackFrames({ type, message, frames, marker }: StackFram
                                     onClick={() => setOpenFrame(isOpen ? null : index)}
                                     className="flex min-w-0 flex-1 items-baseline gap-2 py-1 text-left disabled:cursor-default"
                                 >
-                                    <span className={frame.inApp ? 'font-bold text-primary' : 'text-secondary'}>
-                                        {frame.fn}
+                                    <span className="font-medium text-primary">{frame.fn}</span>
+                                    <span
+                                        className={`min-w-0 truncate font-light ${
+                                            frame.unresolved ? 'italic text-secondary/70' : 'text-secondary'
+                                        }`}
+                                    >
+                                        {frame.source}
                                     </span>
-                                    <span className="min-w-0 truncate text-secondary/70">{frame.source}</span>
                                 </button>
                                 <span className="flex shrink-0 items-center gap-1.5 text-secondary/70">
                                     {frame.marker && (
@@ -109,7 +157,9 @@ export default function StackFrames({ type, message, frames, marker }: StackFram
                                             gloss={frame.marker.gloss}
                                         />
                                     )}
+                                    {frame.fingerprinted && <FingerprintIcon />}
                                     {frame.unresolved && <UnresolvedWarning />}
+                                    {!frame.inApp && !frame.unresolved && <VendorIcon />}
                                     <IconEllipsis className="size-[1.2em]" aria-hidden="true" />
                                 </span>
                             </div>

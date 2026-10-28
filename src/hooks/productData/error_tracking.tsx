@@ -135,14 +135,6 @@ export const errorTracking = {
             // Both variants are the same screen at the same size, so one set of coordinates holds.
             // The pocket guide annotates this inline – see contents/learn/error-tracking/pocket-guide/101.
         },
-        'grouping-rule': {
-            // The rule editor, reused from /docs/error-tracking/grouping-issues. Small enough at
-            // source that no resize is needed.
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_35_56_474_Z_03f7bcfafb.png',
-            srcDark:
-                'https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_36_15_781_Z_a162179a94.png',
-            alt: 'The grouping rule editor: a filter on exception message, a match mode, and a test result counting the exceptions the rule would group',
-        },
         'suppression-rule': {
             // The suppression rule editor, reused from /docs/error-tracking/pricing. 1338x646 at source.
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_light_8db44eb6b1.png',

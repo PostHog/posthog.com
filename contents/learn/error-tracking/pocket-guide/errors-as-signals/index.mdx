@@ -2,7 +2,7 @@
 title: Catch error spikes and stuck loops
 shortTitle: Spikes and stuck loops
 subtitle: 'Is that error spike a bug many people hit, or a few clients stuck in a loop?'
-pocketGuideOrder: 7
+pocketGuideOrder: 8
 section: Self-drive
 pocketGuideCta:
   kind: link
@@ -57,23 +57,21 @@ pocketGuideCta:
 
 # Catch error spikes and stuck loops
 
-The engineers add a <Term name="scout" /> to Twig's project. It's a scheduled agent that queries Twig's PostHog events and files a <Term name="report" /> in the team's <Term name="inbox" /> when it finds something.
-
-This one reports error spikes and ranks them by how many people they affect. Sorted by occurrences alone, a few clients stuck in a retry loop can rank above a bug that breaks checkout for hundreds of people.
+Twig's engineers can't read every alert. This <Term name="scout" /> reports error spikes and ranks them by how many guests they affect. Sorted by occurrences alone, a few browsers stuck in a retry loop can rank above a bug that breaks booking for hundreds of guests.
 
 ## What the scout looks at
 
 The scout reports an issue when its exceptions jump well above the issue's own baseline. It sets the priority by comparing exceptions with distinct users:
 
-- **Both climb.** Many people hit a regression. The report is P1, or P2 when the reach is moderate.
-- **Exceptions climb, users stay flat.** A few clients are stuck in a loop <SeeFig n={1} />. The report is P3, or P2 when it's fresh and in the thousands.
+- **Both climb.** Many guests hit a regression. The report is P1, or P2 when the reach is moderate.
+- **Exceptions climb, users stay flat.** A few browsers are stuck in a loop <SeeFig n={1} />. The report is P3, or P2 when it's fresh and in the thousands.
 - **A resolved issue fires again.** The report is P1.
 
-The scout files new issues with overlapping stack traces as one report, and skips one-off exceptions and known upstream errors, like rate limits from an LLM provider.
+The scout files new issues with overlapping stack traces as one report, and skips one-off exceptions and known upstream errors.
 
 ## The report in your inbox
 
-Each spike becomes a <Term name="report" /> in the team's <Term name="inbox" />, with exceptions, distinct users, and an hourly chart against the issue's baseline <SeeFig n={2} />. The engineers click **Ask AI** on the report to ask who else is affected, whether the problem is new, or what to do next. See [reports](/docs/self-driving/reports#ask-ai-about-a-report).
+Each spike becomes a <Term name="report" /> in the team's <Term name="inbox" />, with exceptions, distinct users, and an hourly chart against the issue's baseline <SeeFig n={2} />. From the report, the engineers can [ask AI](/docs/self-driving/reports#ask-ai-about-a-report) who else is affected or what to do next.
 
 ## The scout itself
 
@@ -81,11 +79,11 @@ PostHog maintains this scout, listed as **Error tracking** in the project's scou
 
 ## The schedule it runs on
 
-The scout runs every 24 hours by default, but stays quiet unless something needs the team's attention. The engineers can change the schedule in its **Settings**.
+The scout runs every 24 hours by default, but stays quiet unless something needs the team's attention. The engineers change the schedule in its **Settings**.
 
 ## Add this to your scout troop
 
-This scout can be turned on or off for each project. It needs exceptions reaching PostHog.
+The engineers turn it on for each project. It needs exceptions reaching PostHog.
 
 <Action />
 
