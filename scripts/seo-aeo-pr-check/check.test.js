@@ -137,3 +137,20 @@ test('flags title changes and site-wide URL settings', () => {
         ['blocker']
     )
 })
+
+test('ignores known false alarms', () => {
+    const base = [{ source: '/docs/old', destination: '/docs/a' }]
+    const head = [{ source: '/docs/old', destination: '/docs/b' }]
+    assert.equal(analyzeRedirects(base, head).filter((f) => f.title.includes('removed')).length, 0)
+
+    const pageUrls = new Set(['/docs/real'])
+    const files = [
+        { filename: 'contents/teams/agents/objectives.mdx', status: 'removed', patch: '' },
+        {
+            filename: 'contents/docs/real.mdx',
+            status: 'modified',
+            patch: '@@\n-Old [x](/docs/gone) text.\n+New [x](/docs/gone) text.\n+See [y](/docs/data-pipelines/destinations/foo).\n+User-Agent: curl',
+        },
+    ]
+    assert.deepEqual(analyzeFiles(files, [], { pageUrls }), [])
+})
