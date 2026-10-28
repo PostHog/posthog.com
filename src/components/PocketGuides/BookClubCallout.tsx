@@ -18,7 +18,7 @@ export default function BookClubCallout(): JSX.Element | null {
     return (
         <Callout to={EVENT_URL} label="Join the event">
             <strong className="text-primary">We have a book club. Yes, really.</strong> Wed Nov 4, 1:30pm ET on Discord.
-            We'll read through the Product Analytics Pocket Guide together, then set it up on Twig so you can watch it
+            We'll read through the [Product Analytics Pocket Guide](/learn/product-analytics/pocket-guide) together, then set it up on Twig so you can watch it
             work on a real product.
         </Callout>
     )
