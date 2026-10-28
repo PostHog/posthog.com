@@ -54,4 +54,4 @@ A message like this one does wonders to help them understand how to open a ticke
 
 >We also have an app here that will open a support ticket if I'm sleeping. You only have to add the :ticket: emoji to the thread and it will open a ticket automatically, and capture the back and forth in the specific Slack thread that received that emoji. You can also mention `@SupportHog` in a thread to open a ticket as well. It's a good habit to get into in order to make sure our distributed team can help.
 
-The [New sales playbook has more](https://posthog.com/handbook/growth/sales/new-sales#4-product-evaluation) on ensuring that the customer is set up for success.
+The [New sales playbook has more](https://posthog.com/handbook/growth/sales/new-sales#5-product-evaluation) on ensuring that the customer is set up for success.

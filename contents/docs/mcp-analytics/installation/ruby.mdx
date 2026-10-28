@@ -124,13 +124,16 @@ PostHog::MCP.instrument(
 | `event_properties` | – | `(request, extra) -> Hash`. Adds properties to every event. |
 | `logger` | no-op | `->(message) { ... }`. A stdio-safe sink. Never writes to stdout. |
 
-Callbacks receive `extra["headers"]`, a Hash with lowercase keys on HTTP transports and an empty Hash on stdio:
+Callbacks receive `extra`, a Hash with `session_id`, `request_id`, `protocol_version`, `session`, and `headers`. On HTTP transports, `headers` holds only `user-agent`, `x-anthropic-client`, `mcp-session-id`, and `mcp-protocol-version`, with lowercase keys. On stdio, it's an empty Hash. `identify` can't read an `Authorization` header, so look the user up from the session your app authenticated:
 
 ```ruby
 identify = lambda do |_request, extra|
-  resolve_user(extra["headers"]["authorization"])
+  user = lookup_user_for_session(extra["session_id"])
+  user && { distinct_id: user.id }
 end
 ```
+
+To identify from a bearer token, use a [custom dispatcher](#custom-dispatchers), which takes `distinct_id:` on each capture.
 
 The SDK removes the arguments it adds before your tool's `call` runs, so `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it. A tool whose `input_schema` uses `oneOf`, `allOf`, `anyOf`, or `$ref` gets no added arguments.
 
@@ -163,7 +166,7 @@ def handle_tools_list
 end
 ```
 
-It adds a required `context` argument and an optional `llm_model` argument to every tool. With `report_missing: true`, it also adds the `get_more_tools` tool. Pass `context: false` or `capture_model: false` to skip an argument.
+It adds a required `context` argument and a required `llm_model` argument to every tool. With `report_missing: true`, it also adds the `get_more_tools` tool. Pass `context: false` or `capture_model: false` to skip an argument.
 
 ### 2. Prepare each tool call
 

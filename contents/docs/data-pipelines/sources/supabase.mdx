@@ -65,6 +65,8 @@ See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#se
 
 Supabase sources created after February 18, 2026 require SSL/TLS encryption for database connections. Supabase enforces SSL/TLS by default, so this is typically already in place. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
 
+To verify your database's TLS certificate or use a client certificate, see [Verify the server certificate](/docs/data-pipelines/sources/postgres#verify-the-server-certificate) on the Postgres page. The same fields and errors apply.
+
 </CalloutBox>
 
 > **Permissions** The Supabase source only requires read permissions on the schemas and tables you intend to sync. We recommend creating a dedicated read-only role in Supabase rather than using the default `postgres` superuser.

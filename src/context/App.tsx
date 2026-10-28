@@ -497,6 +497,7 @@ export interface AppSetting {
         type: 'standard' | 'side' | 'floating'
     }
     toolbar?: boolean
+    toolbarFade?: boolean
     hideTitle?: boolean
 }
 
@@ -1608,6 +1609,11 @@ const appSettings: AppSettings = {
     },
     '/changelog': {
         toolbar: true,
+    },
+    '/roadmap': {
+        toolbar: true,
+        toolbarFade: true,
+        hideTitle: true,
     },
     '/feet-pics': {
         toolbar: true,

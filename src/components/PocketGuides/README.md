@@ -18,7 +18,7 @@ Pocket guides open and remain inside their product's Learn tab, with chapters in
 The rendering path is:
 
 1. `gatsby/createPages.ts` builds one page per chapter. `pocketGuidePageContext` in `src/constants/pocketGuides.ts` maps each source file to its volume's `learnPath`, and every page uses `src/templates/PocketGuide.tsx`. Full and minimal builds share this helper. Each chapter has its own title and canonical URL in the initial HTML. There are no client-only chapter routes.
-2. The template renders `LearnPage` for products with a Learn tab, or `DocsPocketGuide` for Self-driving. `LearnPage.tsx` reads `pocketGuideVolume` from product data and supplies the product navigation through `ReaderView`. `DocsPocketGuide.tsx` supplies the product's existing docs `TreeMenu`, without product tabs.
+2. The template renders `LearnPage` for products with a Learn tab, or `DocsPocketGuide` for Self-driving. `LearnShell.tsx` reads `pocketGuideVolume` from product data and supplies the product navigation through `ReaderView`. `AppWindow` renders `LearnShell` around every `/learn/<product>` page, so the sidebar stays mounted when the reader moves between Learn pages. `LearnPage` renders only the page content inside it. `DocsPocketGuide.tsx` supplies the product's existing docs `TreeMenu`, without product tabs.
 3. `LearnSurface.tsx` renders the chapter from page context, using `useBookPages(volumeId)` for reading order. An empty or unknown chapter falls back to the introduction.
 4. `EntryProvider` supplies page data and the guide's `basePath`. `MDXProvider` uses `bookMdxComponents`, including `ReaderWrapper`, to render the body.
 
@@ -151,7 +151,7 @@ Use the source files for current fixture values, timing, and interaction details
 - `LearnLanding.tsx` renders every hub overview: the product name, an intro line, a Learn through a story section with the cover, a Learn with your agent preview when the hub lists `agent-prompts-and-mcp`, and a Learn by doing preview when the page passes `playground`. The intro defaults to the page description, and the story text defaults to the volume description.
 - `ProductAnalyticsLearnLanding.tsx` passes its own copy and its Twig filter preview to `LearnLanding`. The AI Observability and Session Replay overview pages pass a Twig figure. Session Replay sets `playground.fullWidth` to place its player and event inspector below the introduction. The replay panels sit side by side when the figure has enough room, with a scrollable inspector and bounded height.
 - `AgentPromptsPage.tsx` renders each hub's `agent-prompts-and-mcp` page: MCP setup steps, a starter prompt, and one prompt per topic, each with Claude Code and Codex actions. Each product page passes its name, docs slug, starter focus, and topic prompts.
-- `LivePlaygroundPage.tsx` renders the shared top of each hub's `live-playground` page: the title, the Twig introduction, and the Explore Twig link. Each page writes its own sections as children, a `SectionIntro` followed by its figure. By convention, every playground opens with the Twig session replay (`SessionReplayLinkFigure`). `AiObservabilityPlaygroundExhibits.tsx` builds its trace, event, and code figures from the `@posthog/twig-components/ai-lab` fixtures and reducer. `SessionReplayPlaygroundExhibits.tsx` shows input masking with the `replay-lab` `searchValue` helper. These are focused views; the full labs stay on Twig.com. The dedicated `src/pages/learn/product-analytics/agent-prompts-and-mcp.tsx` and `live-playground.tsx` own their full page content. Overview and page copy can change separately. Both pages pass their content to the shared `LearnPage` shell as children; the overview uses its `landing` prop.
+- `LivePlaygroundPage.tsx` renders the shared top of each hub's `live-playground` page: the title, the Twig introduction, and the Explore Twig link. Each page writes its own sections as children, a `SectionIntro` followed by its figure. By convention, every playground opens with the Twig session replay (`SessionReplayLinkFigure`). `AiObservabilityPlaygroundExhibits.tsx` builds its trace, event, and code figures from the `@posthog/twig-components/ai-lab` fixtures and reducer. `SessionReplayPlaygroundExhibits.tsx` shows input masking with the `replay-lab` `searchValue` helper. These are focused views; the full labs stay on Twig.com. The dedicated `src/pages/learn/product-analytics/agent-prompts-and-mcp.tsx` and `live-playground.tsx` own their full page content. Overview and page copy can change separately. Both pages pass their content to the shared `LearnPage` as children; the overview uses its `landing` prop.
 - `AgentTeachingActions.tsx` shares the teaching prompt and the Claude Code and Codex launch controls. It exports `agentTeachingPrompt()` for every product's starter prompt, and `AGENT_TEACHING_PROMPT` for Product Analytics, so the displayed and launched instructions stay identical. Keep the prompt text unchanged unless someone asks for an instruction change. Pass a chapter-specific prompt through the optional `prompt` prop.
 - The Live playground page stacks `SessionReplayLinkFigure` (pass `autoPlay` for muted, looping playback), `TwigEventFigure`, and `BookingStepsFigure`. Chapter embeds keep manual playback.
 
@@ -193,3 +193,58 @@ The transition animates an inert copy of the cover in a temporary layer clipped 
 - A navigation that stalls for 5 seconds restores the source page.
 
 Run `pnpm exec node --test src/components/PocketGuides/bookOpening.test.ts` after changes.
+
+### Product Analytics compact Twig audit
+
+All current Product Analytics Twig figure consumers use `/compact.css` and the
+shared compact primitives. The guide retains its PostHog inspector styling.
+
+| Consumer | Compact Twig parts |
+| --- | --- |
+| `TwigBrowseFigure` (101 autocapture, events, filters, properties, and Learn overview) | Wordmark, destination filters, photo/name/location/price card |
+| `SessionGroupingFigure` | Forest/Coast filters and compact stay |
+| `IdentifySavedStayFigure` | Stay, bookmark, login, saved-stay list |
+| `ResetIdentityFigure` | Profile menu/sign-out, saved-stay list, signed-out stay |
+| `BookingStepsFigure` | Stay and booking action/disabled state |
+| `RepeatBookingFigure` | Stay and booking action/confirmation |
+| `SavedStayJourneyFigure` | Bookmark, saved list, stay and booking action |
+
+The retention bookmark must remain inside `.twig-compact`, including when
+positioned over the photo. Otherwise it inherits the legacy standalone control
+palette. Profile-menu layout belongs in the shared compact stylesheet rather
+than host overrides. Event figures need no extra host border around the Twig
+surface.
+
+Trends, funnels, retention charts, cohorts, dashboards, and replay-player chrome
+are PostHog UI, not compact Twig. Replay footage remains a recorded asset.
+`TwigBrowseStaysMockup` has no consumers; it and the package's read-only
+`BrowseStaysPreview` are not used by this guide. Other guide volumes are outside
+this change. No guide prose, simulated event payloads, or lesson flow changes.
+
+### Compact Twig integration checks
+
+The guide pins the published `@posthog/twig-components@0.2.3` release, including
+`/compact`, `/compact.css`, and the compact account and stay-card APIs. Keep the
+exact registry dependency and pnpm lockfile together when upgrading. Do not use
+local paths, archives, Git refs, aliases, or an assumed next version.
+
+1. Verify a clean `pnpm install --frozen-lockfile`, then run
+   `pnpm test:gatsby-functions`, `pnpm test:pocket-guides`, and
+   `pnpm test:twig-integration` under Node 22. The integration test uses the
+   installed package, including its CSS and font assets. Convention tests alone
+   do not validate this dependency.
+2. Run the Gatsby build and inspect 101, identity-sessions,
+   trends-and-funnels, and retention-cohorts in the actual site. Check keyboard
+   controls, manual and autoplay flows, reset, and reduced motion. Capture the
+   required narrow/wide and light/dark before/after screenshots and motion GIFs
+   before human review.
+
+Saved-stay views need `.twig-account-layout` inside `.twig-compact` to initialize
+shared account tokens. Keep the wrapper in both identity and retention figures;
+otherwise muted account text inherits the surrounding text color. The saved-stay
+journey's visitor label sits to the right of the cursor during the bookmark and
+booking previews, and stays hidden on the saved-stay page.
+
+A local component build can test host behavior, but cannot replace a clean
+registry install and actual-site review. Do not commit local package
+substitutions as the consumer dependency.
