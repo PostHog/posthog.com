@@ -82,7 +82,7 @@ Write "i.e." and "e.g." with periods, but don't add a comma after them.
 
 > **Example:** "Use a short title (i.e. under 60 characters)", not "Use a short title (i.e., under 60 characters)"
 
-AP and Chicago both want the comma. We don't. It adds clutter and looks ugly. Andy says the AP and Chicago style guides are dumb.
+AP and Chicago both want the comma. We don't. It adds clutter. Andy says the AP and Chicago style guides are dumb, and he is correct.
 
 ### Use "enable", not "allow"
 
