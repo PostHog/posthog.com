@@ -9,9 +9,9 @@ availability:
 sourceId: EZOfficeInventory
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The EZOfficeInventory connector syncs your asset and inventory management data into PostHog, so you can analyze your equipment and stock alongside your product data.
 
@@ -41,6 +41,8 @@ All EZOfficeInventory tables sync via full refresh. The API exposes no general s
 ## Supported tables
 
 <SourceTables />
+
+`asset_checkout_history`, `member_stock_histories`, and `reservation_requests` are disabled by default. EZOfficeInventory serves history and reservation records one item at a time, so these tables need a request per asset or member and are slow to sync on large accounts. Enable them if you need to report on utilization, stock movement, or upcoming reservations.
 
 ## Troubleshooting
 
