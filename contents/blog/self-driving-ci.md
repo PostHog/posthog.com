@@ -21,9 +21,9 @@ PostHog ships code at a rapid pace, and that pace has only accelerated in recent
 
 It's the job of the [Developer Experience team](/teams/developer-experience) to ensure engineers at PostHog are shipping as fast as possible while we work to balance code quality and CI stability. In fact, we have a goal of making [10,000 pull requests a month](/blog/10k-prs-a-month) easy. That said, it's difficult to keep up with CI maintenance just by observing and reacting manually.
 
-So we took inspiration from how things are being shipped elsewhere at PostHog, specifically when it comes to self-driving. This October, 11% of merged PRs were [self-driving](/docs/self-driving). Meaning that PostHog opened them on its own after a [scout](/docs/self-driving/scouts) (a scheduled agent that explores your product data) found something worth acting on.
+So we took inspiration from how things are being shipped elsewhere at PostHog. This October, 11% of merged PRs were [self-driving](/docs/self-driving), meaning PostHog opened them on its own after a [scout](/docs/self-driving/scouts) (a scheduled agent that explores your product data) found something worth acting on.
 
-We saw this approach and decided to fight fire with fire. The same self-driving agents that are increasing our PR volume can be used to help us keep up with all the necessary CI maintenance. Here's how we set it all up:
+We saw this and decided to fight fire with fire. The same self-driving agents that are increasing our PR volume can help us keep up with CI maintenance. Here's how we set it all up:
 
 ## Step 1: Get CI/CD data out of GitHub
 
