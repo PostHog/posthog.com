@@ -23,17 +23,19 @@ Once the syncs are complete, you can start using PagerDuty data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `incidents` | Incidents in your account | Incremental |
-| `log_entries` | Log entries recording activity on incidents | Full refresh |
-| `services` | Services that incidents are raised against | Full refresh |
-| `users` | PagerDuty users | Full refresh |
-| `teams` | Teams in your account | Full refresh |
-| `escalation_policies` | Escalation policies | Full refresh |
-| `schedules` | On-call schedules | Full refresh |
-| `priorities` | Incident priorities | Full refresh |
-| `vendors` | Integration vendors | Full refresh |
+| Table                 | Description                                     | Sync method  |
+| --------------------- | ----------------------------------------------- | ------------ |
+| `business_services`   | Business services in your account               | Full refresh |
+| `incidents`           | Incidents in your account                       | Incremental  |
+| `log_entries`         | Log entries recording activity on incidents     | Full refresh |
+| `maintenance_windows` | Maintenance windows (past, ongoing, and future) | Full refresh |
+| `services`            | Services that incidents are raised against      | Full refresh |
+| `users`               | PagerDuty users                                 | Full refresh |
+| `teams`               | Teams in your account                           | Full refresh |
+| `escalation_policies` | Escalation policies                             | Full refresh |
+| `schedules`           | On-call schedules                               | Full refresh |
+| `priorities`          | Incident priorities                             | Full refresh |
+| `vendors`             | Integration vendors                             | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
