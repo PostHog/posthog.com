@@ -56,7 +56,7 @@ In your `tools/list` response, add a `context` string to each tool's input schem
 }
 ```
 
-Mark `context` as required only if you remove it before your MCP framework validates arguments. Agents fill required arguments more reliably than optional ones. If your framework validates first, make `context` optional so calls without it don't fail.
+Remove `context` from the arguments before your MCP framework validates them, if you can. Then you can mark `context` as required, and agents fill required arguments more reliably than optional ones. If your framework validates first, make `context` optional, and add it to the schema that the framework validates against. A schema with `additionalProperties: false` rejects every argument it doesn't list, so calls that include `context` fail.
 
 Skip any tool that already has an argument named `context`, because that argument belongs to the tool. Also skip any tool whose root schema uses `$ref`, `oneOf`, `anyOf`, or `allOf`.
 
@@ -82,7 +82,7 @@ The SDKs derive session IDs with a different hash, so a session served partly by
 
 <Step title="Capture a $mcp_tool_call event" badge="required">
 
-Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Your PostHog SDK's capture call is already asynchronous.
+Measure each call with a monotonic clock. Capture one event after the handler returns or throws, and don't block the response while it sends. Most PostHog SDKs queue the event and send it in the background. Some send during the capture call. For example, the PHP SDK sends its queue when the queue is full. With such an SDK, capture after the response is sent, such as after `fastcgi_finish_request()` in PHP.
 
 Capture only the final outcome of a call to a tool your server has. Don't capture a `$mcp_tool_call` for:
 
