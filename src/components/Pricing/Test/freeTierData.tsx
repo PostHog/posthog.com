@@ -35,6 +35,12 @@ export const freeTierProducts: FreeTierProduct[] = [
         icon2Color: 'text-green',
     },
     {
+        name: 'Web analytics',
+        description: 'Billed with analytics',
+        icon: Icons.IconPieChart,
+        iconColor: 'text-green',
+    },
+    {
         name: 'Session replay',
         allocation: '5K recordings',
         icon: Icons.IconRewindPlay,
@@ -75,6 +81,13 @@ export const freeTierProducts: FreeTierProduct[] = [
         ),
         icon: Icons.IconDatabase,
         iconColor: 'text-purple',
+    },
+    {
+        name: 'Marketing analytics',
+        badge: 'Beta',
+        description: 'Billed with sources (rows synced)',
+        icon: Icons.IconMegaphone,
+        iconColor: 'text-orange',
     },
     {
         name: 'Destinations',
