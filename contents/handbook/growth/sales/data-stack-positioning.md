@@ -8,57 +8,23 @@ showTitle: true
 
 This page covers what to sell, to who, and when. If you're new to data tools, read [data foundations](/handbook/growth/sales/data-foundations) first. It explains the modern data stack, how PostHog maps to it, and the two personas we sell to.
 
-## PostHog covers steps 2 to 7
+## How PostHog users use data, without a data stack
 
-Sources are the other tools your customers already use, so there's nothing for us to replace there. We cover everything after that:
+When most PostHog users sign up they don't have a lot of data, don't have the experience to build a data stack, and don't unify their data. Today, a typical user looks like this:
 
-| Step | What it does | Traditional tools | PostHog |
-|------|--------------|-------------------|---------|
-| 1. Sources | Where data is born | Postgres, Stripe, HubSpot | Your customer's own tools |
-| 2. Ingestion | Move it into the warehouse | Fivetran, Airbyte | Data pipelines |
-| 3. Storage | Keep it in one place | Snowflake, BigQuery | Warehouse |
-| 4. Modeling | Clean and shape it so it's accurate | dbt | Data modeling + SQL editor |
-| 5. Orchestration | Keep it running | Airflow, Dagster | Scheduled syncs and materialization |
-| 6. BI | Analyze it | Looker, Tableau | Notebooks, insights, dashboards, BI |
-| 7. Activation | Push it back out | Hightouch, Census | Data pipelines |
-
-Our messaging pillars: **PostHog collapses the stack.** Your events and your business data, together and queryable, under one roof.
-
-- **One platform, one bill**: No vendor sprawl, no stitching contracts together.
-- **Full context with no pipelines to maintain**: Product and business data side by side from day one.
-- **Optimized for agents as the consumer**: Clean, defined data that PostHog AI and MCP clients can query.
-
-## But the typical PostHog user isn't ready for a full stack
-
-Most PostHog users don't have a lot of data, don't have the knowledge to build a data stack, and don't unify their data. Today, a typical user looks like this:
-
-| Step | What most users have today |
-|------|----------------------------|
-| Sources | Event data with some company data |
-| Ingestion | Event pipeline via SDKs |
-| Storage | Shared cluster, with query limits set by us |
-| Modeling | Skipped |
-| Orchestration | Skipped |
-| BI | Insights on raw events |
-| Activation | Limited data exports |
+| Step | PostHog tools | What most users have today |
+|------|-------------------|---------|
+| 1. Sources | Your customer's own tools | Event data with some company data 
+| 2. Ingestion | Data pipelines | Event pipeline via SDKs |
+| 3. Storage | Warehouse | Shared cluster, with query limits set by us |
+| 4. Modeling | Data modeling + SQL editor | Skipped |
+| 5. Orchestration | Scheduled syncs and materialization | Skipped |
+| 6. BI | Notebooks, insights, dashboards, BI | Insights on raw events |
+| 7. Activation | Data pipelines | Limited data exports |
 
 That's because our primary persona is a [product engineer](/handbook/growth/sales/data-foundations#primary-persona--today-product-engineers) at a Seed to Series B startup with no data hire yet. Offering them Fivetran, Snowflake, dbt, Airflow, Looker and Hightouch equivalents is overkill.
 
-So we split the offering into two packages.
-
-## The two packages
-
-| Regular | Sexy |
-|---------|------|
-| For product engineers at growing startups | For data leads |
-| Sources | ELT |
-| Semantic layer | Data warehouse |
-| Queries using MCP or PostHog AI | Semantic layer |
-| Views and materialized views | Modeling |
-| Dashboards | Notebooks |
-| | Dashboards / BI |
-
-The goal is to land product engineers on the regular package, teach them to get more from their data, and graduate them to the sexy package as they grow.
+So we split the offering into two packages. Regular and Sexy
 
 ## The regular package
 
@@ -82,9 +48,7 @@ No new tools to buy. Orchestration, a warehouse, complex modeling and activation
 - **10k+ event rows**: Enough data through PostHog to show they have users and are starting to generate data at volume.
 - **Exploring sources**: They're reading the data pipelines docs or landing pages, or asking if we support a particular source.
 
-### What's included
-
-It's five products that work together:
+### What's included:
 
 | Product | What it does | How to say it |
 |---------|--------------|---------------|
@@ -94,7 +58,7 @@ It's five products that work together:
 | Views | Save a query as a reusable table. Materialize it on a schedule so heavy queries stay fast. | "Do the work once, reuse it everywhere." |
 | Dashboards | Product and business metrics on one dashboard, shared with the whole team. | "One place to see how the company is doing." |
 
-### Don't sell a data stack, sell answers
+### The problem's we're solving
 
 | The problem | What we say |
 |-------------|-------------|
@@ -102,11 +66,11 @@ It's five products that work together:
 | Every dashboard counts "active users" or "revenue" a bit differently, so nobody trusts the numbers. | Define metrics once in the semantic layer. Every insight and AI answer uses the same definition. |
 | There's no data person to ask, and writing SQL is a chore. | PostHog AI turns plain English into SQL, insights and dashboards. |
 
-### Lead with a question
+### Common use cases
 
-Pick a question where the answer adds value to the business:
+Lead discussions with finding out what questions a user is asking their data, if these questions can't be answered without connecting an external data source to PostHog data, thats the opening to the rest of the data stack.
 
-| Who | Question | Data it needs |
+| Who | Question they're asking | Data it needs |
 |-----|----------|---------------|
 | Product engineer | Which features do our paying customers use most? | Stripe + events |
 | Product engineer | Do support tickets predict churn? | Zendesk + Stripe + events |
@@ -117,15 +81,17 @@ Pick a question where the answer adds value to the business:
 | Sales & success | Which sign ups should we call first? | HubSpot + events |
 | Sales & success | Who's outgrowing their plan? | Stripe + events |
 
-### How we make it easy
+Find tutorials on how to answer common questions and Skills that users can run [here.](/learn/warehouse)
 
-1. **Connect – sources setup wizard**: Guided setup walks them through connecting a source and picking tables. The wizard scans their codebase for sources that can be connected.
-2. **Model – skills for basic modeling**: Agent skills set up the joins and models behind common questions, then save the result as a reusable insight to get users from zero to aha faster.
-3. **Ask – PostHog AI**: As long as the data is there, users can ask questions in plain English. PostHog AI writes the SQL, runs it, and builds the insight or dashboard.
+### Tools to help
 
-### Good data hygiene is cheapest on day one
+1. **[Sources setup wizard](/docs/data-pipelines/sources)**: Guided setup walks them through connecting a source and picking tables. The wizard scans their codebase for sources that can be connected.
+2. **[Skills for basic modeling](/learn/warehouse)**: Agent skills set up the joins and models behind common questions, then save the result as a reusable insight to get users from zero to aha faster.
+3. **PostHog AI**: As long as the data is there, users can ask questions in plain English. PostHog AI writes the SQL, runs it, and builds the insight or dashboard.
 
-Fixing data at 10k rows takes an afternoon. At 10M rows it's a project. The semantic layer is independent of the warehouse, so it can be set up on day one. Encourage customers to:
+### Why semantic layer for data beginners?
+
+Good data hygiene is cheapest on day one. Fixing data at 10k rows takes an afternoon. At 10M rows it's a project. The semantic layer is independent of the warehouse, so it can be set up on day one. With the Semantic layer, customers can:
 
 - Name events consistently
 - Define metrics once
@@ -164,12 +130,12 @@ Fixing data at 10k rows takes an afternoon. At 10M rows it's a project. The sema
 | Context-switching across tools | **One place for all of it.** Ingestion, storage, modeling and BI sit next to the product data they already trust. |
 | Inheriting a messy stack | **SQL all the way down.** No black boxes. They own and have full access to their data. Every view and model is plain SQL they can read, check and change. |
 
-### We help them set it up, not just sign up
+### Additional setup support
 
-- **Source setup wizard**: Guided setup for every warehouse source. Pick the tables, set the sync, done.
-- **Skills for modeling**: Agent skills handle the common joins and models, so the data lead starts from a working base. These go beyond what the regular package needs.
-- **PostHog AI**: Plain-English queries for everyone else on the team, so the data lead isn't the bottleneck. Data leads can write SQL with AI and sense-check it after.
-- **FDE support (advanced only)**: Forward deployed engineers help set up sources, models and dashboards with the customer.
+**FDE support**: Forward deployed engineers can help customers with complex data needs set up sources, models and dashboards with the customer. Rough criteria for bringing in an FDE: 
+* Struggles with trusting data
+* Have tried other warehouses
+* Are early in experimenting with other data stack tools
 
 ## Competition at each layer of the stack
 
@@ -195,9 +161,8 @@ PostHog replaces dbt with SQL views you write in the browser and materialize on 
 | `ref()` and the DAG | Dependency-ordered refresh + lineage |
 | dbt Cloud jobs / Airflow | Built-in schedule, 15 minutes to monthly |
 | Semantic layer (MetricFlow) | Semantic layer |
-| Tests and Git workflow | Not yet – Git is on the roadmap |
+| Tests and Git workflow | Not yet - Git is on the roadmap |
 
 **Speed to value:**
-
 - **With dbt**: Set up a Git repo and project, configure the warehouse connection, wire up a scheduler, then write, test and deploy models.
 - **With PostHog**: Write SQL in the browser, save it as a view, pick a refresh schedule.
