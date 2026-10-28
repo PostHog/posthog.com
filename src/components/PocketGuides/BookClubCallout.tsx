@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Callout from './Callout'
 
@@ -9,7 +9,11 @@ const EVENT_ENDS_AT = Date.parse('2026-11-04T20:00:00Z')
 
 /** Promotes the Product Book Club on the Product Analytics pocket guide pages and the Learn hub. */
 export default function BookClubCallout(): JSX.Element | null {
-    if (Date.now() >= EVENT_ENDS_AT) return null
+    // Check the clock after mount, so the first client render matches the prebuilt HTML.
+    const [expired, setExpired] = useState(false)
+    useEffect(() => setExpired(Date.now() >= EVENT_ENDS_AT), [])
+
+    if (expired) return null
 
     return (
         <Callout to={EVENT_URL} label="Join the event">
