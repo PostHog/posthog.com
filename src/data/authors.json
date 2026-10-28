@@ -826,5 +826,11 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/juliaestebanedo/",
         "profile_id": 33236
+    },
+    {
+        "handle": "tom-owers",
+        "name": "Tom Owers",
+        "role": "Full Stack Engineer",
+        "profile_id": 29577
     }
 ]
