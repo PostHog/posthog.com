@@ -157,6 +157,8 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `missing_capability_tool_name` | `"get_more_tools"` | Renames the `report_missing` tool. |
 | `collect_feedback` | `False` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `report_missing` reports. |
 | `enable_exception_autocapture` | `True` | Emit a `$exception` event for each failed tool call. |
+| `send_initialize_event` | `True` | Emit `$mcp_initialize` for each `initialize` handshake. Set to `False` to stop it. Other events keep their sessions and client names. MCP onboarding and the default dashboard's users and sessions tiles then show no data. |
+| `send_tools_list_event` | `True` | Emit `$mcp_tools_list` for each `tools/list`. Set to `False` to stop it. Tools keep their injected arguments. |
 | `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
 | `server_build` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
