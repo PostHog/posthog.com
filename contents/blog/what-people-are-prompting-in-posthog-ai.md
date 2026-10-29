@@ -7,7 +7,7 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/My_life_working_in_sales_at_Post_Hog_264f6fcdd5.png
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/prompting_in_posthog_ai_b267620e4f.png
 featuredImageType: full
 category: Blog
 tags:
