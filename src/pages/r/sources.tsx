@@ -32,7 +32,7 @@ const SIGNUP_URL = 'https://app.posthog.com/signup'
 
 const STATS = [
     { stat: '4x cheaper', label: 'than Fivetran at 100M rows' },
-    { stat: 'Free', label: 'for your first 1M rows every month' },
+    { stat: '1M rows free', label: 'every month' },
     { stat: 'Free backfills', label: "for each new source's first seven days" },
 ]
 
