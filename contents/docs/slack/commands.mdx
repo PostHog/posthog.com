@@ -10,6 +10,7 @@ You mention `@PostHog` to start a task. Everything else – routing rules, proje
 | `@PostHog <task description>` | Create a task for the agent to work on |
 | `/posthog rules list` | Show all routing rules |
 | `/posthog rules add "description" org/repo` | Add a routing rule |
+| `/posthog rules add "description"` | Add a routing rule and pick its repository from a list |
 | `/posthog rules remove <number(s)>` | Remove routing rules by number (e.g. `remove 1` or `remove 1,2`) |
 | `/posthog project` | Show which PostHog project your mentions route to in this workspace |
 | `/posthog project <id>` | Set the PostHog project your mentions route to in this workspace |
@@ -35,7 +36,7 @@ Routing rules let you map a mention's content to a specific repo so the agent do
 /posthog rules add "billing changes" posthog/billing
 ```
 
-A rule needs both parts. `/posthog rules add "frontend bug"` with no repo is refused, and the bot replies with the full spelling to use.
+A rule needs a description and a repository. Include the repository in the command, or omit it to choose from a list. For example, `/posthog rules add "frontend bug"` opens a repository picker. You need a personal GitHub connection to use the picker.
 
 When several rules match, the first one in `rules list` wins. Use `/posthog rules remove 1,2` to drop rules you no longer want. The numbers correspond to the positions printed by `rules list`.
 
