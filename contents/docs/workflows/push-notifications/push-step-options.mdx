@@ -18,7 +18,7 @@ Text fields accept variables, for example `{event.properties.chat_id}` or `{pers
 | **Link** | Where a tap should take the person. See [Link and group](#link-and-group). |
 | **Group** | Bundles related notifications together, such as one conversation. See [Link and group](#link-and-group). |
 | **Custom data payload** | Key-value pairs delivered to your app. Values must be strings, because FCM only accepts strings. |
-| **Collapse key** | Notifications with the same key replace each other, so the person only sees the latest one. |
+| **Collapse key** | On iOS, a notification with the same key replaces the one already shown. On Android, it only collapses messages still waiting for an offline device. To replace a notification already shown on Android, use **Android tag**. |
 | **TTL (seconds)** | How long the provider keeps the message for a device that's offline. |
 
 The step also has **Android** and **iOS** sections for platform settings: priority, channel ID, sound, tag, icon, color and click action on Android, and sound, badge, subtitle, category, thread ID, interruption level and mutable content on iOS.
@@ -30,6 +30,11 @@ The step also has **Android** and **iOS** sections for platform settings: priori
 | **Show a notification** (default) | The system shows the notification. | The system shows the notification. |
 | **Data only on Android, notification on iOS** | Nothing is shown. Your app gets the message in `onMessageReceived`, even in the background, and draws the notification itself. | The system shows the notification. |
 | **Silent, show nothing** | Nothing is shown. Your app gets the message in `onMessageReceived`. | Nothing is shown. iOS wakes your app in the background with the data. |
+
+With **Show a notification**, the system only shows the notification while your app is in the background. When your app is in the foreground:
+
+- On Android, the message goes to `onMessageReceived`, and your app has to show it.
+- On iOS, your `UNUserNotificationCenterDelegate` has to return the presentation options, such as `[.banner, .sound]`, from `userNotificationCenter(_:willPresent:withCompletionHandler:)`.
 
 For data only and silent pushes, put everything your app needs in **Custom data payload**. On Android, the title, body and image aren't sent with a data only push, and only the **Android priority** setting applies. A silent push sends no title, body or image to any device.
 
@@ -89,7 +94,22 @@ Turn on **Protect sensitive data** in the step's settings panel for notification
 When it's on:
 
 - The notification is still sent as usual.
-- PostHog doesn't keep a copy of the title, subtitle, body or image as sent. The message history shows that a notification was sent, with the title as you wrote it in the step, before variables are filled in, and a note that the content wasn't stored.
+- The workflow doesn't keep a copy of the title, subtitle, body or image as sent. The message history shows that a notification was sent, with the title as you wrote it in the step, before variables are filled in, and a note that the content wasn't stored.
 - The workflow run doesn't keep its variables, so the run can't be rerun.
 
 The message history never includes a push's custom data, whether or not this setting is on.
+
+This setting only covers what the workflow stores. When someone taps the notification, the iOS SDK captures a `$push_notification_opened` event with the notification's title, subtitle and body. To keep that content out of your events, remove it before the event is sent:
+
+```swift
+config.setBeforeSend { event in
+    if event.event == "$push_notification_opened" {
+        event.properties["$notification_title"] = nil
+        event.properties["$notification_subtitle"] = nil
+        event.properties["$notification_body"] = nil
+    }
+    return event
+}
+```
+
+On Android, opens captured automatically carry no title or body. React Native and Flutter apps capture iOS opens in the native SDK, where your JavaScript or Dart before send hook can't reach them. In those apps, turn off `capturePushNotificationOpened` and capture opens yourself without the content. Whenever you capture an open yourself, on any platform, don't pass the content.
