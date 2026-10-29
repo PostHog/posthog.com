@@ -53,7 +53,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Data connections',
-                url: '/data-pipelines',
+                url: '/context-warehouse/integrations-library',
             },
             {
                 title: 'Customer stories',
@@ -175,7 +175,7 @@ const linklist: IProps[] = [
             },
             {
                 title: 'Integrations',
-                url: '/data-pipelines',
+                url: '/context-warehouse/integrations-library',
             },
             {
                 title: 'Dashboard templates',

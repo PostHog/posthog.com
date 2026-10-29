@@ -30,7 +30,7 @@ export default function Pipelines() {
                 <PipelinesList hideBuildYourOwn pipelines={pipelines.nodes} />
 
                 <footer className="text-center">
-                    <CallToAction to="/data-pipelines" type="outline" className="mt-8">
+                    <CallToAction to="/context-warehouse/integrations-library" type="outline" className="mt-8">
                         Browse 50ish data connections
                     </CallToAction>
                 </footer>
