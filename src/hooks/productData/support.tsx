@@ -15,7 +15,7 @@ import {
 import { Tweet } from 'components/Tweet'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import type { SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
-import { applications, topFeatures } from './support/slides'
+import { applications, keyFeatures } from './support/slides'
 
 const SupportTweet = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose">
@@ -91,11 +91,11 @@ export const support = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

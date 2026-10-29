@@ -16,7 +16,7 @@ import {
 } from '@posthog/icons'
 import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import { features } from './logs/features'
-import { applications, topFeatures } from './logs/slides'
+import { applications, keyFeatures } from './logs/slides'
 import { getTool } from '../../data/tools'
 
 const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
@@ -78,11 +78,11 @@ export const logs = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
