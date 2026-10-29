@@ -26,8 +26,6 @@ It also covers Supabase's security notifications: password changed, email addres
 
 PostHog records each email against the Supabase user's ID.
 
-An AI agent connected to the [PostHog MCP server](/docs/model-context-protocol) can do the PostHog side of this setup for you. You still do the Supabase steps yourself.
-
 <Steps>
 
 <Step title="Before you start" badge="required">
@@ -46,7 +44,7 @@ You need:
 2. Under **Auth emails**, find the **Supabase** card and click **Connect**. If you started the setup before, the button says **Manage**.
 3. Copy the **Hook URL**. It's specific to your PostHog project.
 
-Keep this window open. You come back to it in the next step.
+Leave the setup window open. You fill in the rest after you add the hook in Supabase.
 
 </Step>
 
@@ -58,7 +56,11 @@ Keep this window open. You come back to it in the next step.
 4. Generate a secret. It starts with `v1,whsec_`. Copy the whole value.
 5. Leave **Enable Send Email hook** off for now, and save the hook. You turn it on after PostHog has a template for each email.
 
-Back in PostHog, fill in:
+</Step>
+
+<Step title="Save the connection in PostHog" badge="required">
+
+In the PostHog setup window, fill in:
 
 | Field | What to enter |
 | --- | --- |
@@ -147,3 +149,7 @@ If Supabase retries a hook request, PostHog doesn't send the same email twice.
 </Step>
 
 </Steps>
+
+## Set it up over MCP
+
+Agents can do the PostHog side for you. Over the [PostHog MCP](/docs/workflows/surfaces/mcp), ask for something like "Connect my Supabase project to PostHog auth emails and create the starter templates". The agent uses `supabase-auth-emails-settings-get`, `supabase-auth-emails-settings-update`, and `supabase-auth-emails-starter-templates-create`. You still add and turn on the hook in Supabase yourself. To keep the hook secret out of the conversation, paste it into the setup window instead.
