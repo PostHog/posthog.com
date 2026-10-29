@@ -16,7 +16,7 @@ We've moved all our email marketing out of Customer.io and into [PostHog Workflo
 
 Treat every email we send from PostHog like code. At least one peer must review it before it goes out.
 
-For customer-facing comms, we recommend you also get a review from a member of the <SmallTeam slug="developer-marketing" />. You can do this in two ways:
+For customer-facing comms, we recommend all comms are reviewed by a member of the <SmallTeam slug="developer-marketing" />. You can do this in two ways:
 
 - **If you've already created the email,** ask for feedback in the #team-developer-marketing Slack channel.
 - **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the [Requests for Comments Internal repo](https://github.com/PostHog/requests-for-comments-internal), and assign a member of the team. They'll figure it out from there. 
@@ -39,6 +39,8 @@ All new broadcasts and automations should use these defaults:
 ## Addressing emails
 
 We prefer emails to come from a named person where possible, so users can reply with feedback. Only use generic addresses, such as hey@posthog.com, for very broad comms.
+
+If you're sending the email and are happy to receive replies, feel free to set yourself as a sender. If you'd prefer not to, use the email of the <SmallTeam slug="developer-marketing" /> team lead.
 
 ## Targeting emails
 
