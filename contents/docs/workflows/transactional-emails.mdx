@@ -132,7 +132,6 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
 import os
 
 from posthog import Posthog
-from posthog.emails import EmailError
 
 posthog = Posthog(
     "<ph_project_api_key>",
@@ -141,17 +140,15 @@ posthog = Posthog(
 )
 
 def send_password_reset(user_id: str, email: str, first_name: str, reset_link: str, reset_request_id: str) -> str:
-    try:
-        result = posthog.emails.send(
-            to=email,
-            template_id="<template_id>",
-            template_data={"first_name": first_name, "reset_link": reset_link},
-            distinct_id=user_id,
-            # Identifies this one email, so a retry never sends it twice
-            idempotency_key=f"password-reset-{reset_request_id}",
-        )
-    except EmailError as error:
-        raise RuntimeError(f"PostHog refused the email: {error.code}") from error
+    # Raises posthog.emails.EmailError when PostHog doesn't queue the email. Branch on error.code.
+    result = posthog.emails.send(
+        to=email,
+        template_id="<template_id>",
+        template_data={"first_name": first_name, "reset_link": reset_link},
+        distinct_id=user_id,
+        # Identifies this one email, so a retry never sends it twice
+        idempotency_key=f"password-reset-{reset_request_id}",
+    )
     return result.id
 ```
 
@@ -161,6 +158,8 @@ import { PostHog } from "posthog-node"
 const posthog = new PostHog("<ph_project_api_key>", {
     host: "https://us.i.posthog.com",
     secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    // This client only sends email, so it doesn't poll flag definitions with the secret key
+    enableLocalEvaluation: false,
 })
 
 export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
@@ -173,7 +172,8 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
         idempotencyKey: `password-reset-${resetRequestId}`,
     })
     if (error) {
-        throw new Error(`PostHog refused the email: ${error.code}`)
+        // An EmailError. Branch on error.code
+        throw error
     }
     return data.id
 }
@@ -187,11 +187,69 @@ The older route, `POST /api/projects/@current/messaging_templates/:template_id/s
 
 The [Python SDK](/docs/libraries/python) from version 7.81.0 and the [Node.js SDK](/docs/libraries/node) from version 5.61.0 send transactional emails with `emails.send`.
 
-- **Key:** Set `secret_key` in Python or `secretKey` in Node.js to your project secret API key. The client still captures events with your project token.
+- **Install:** `pip install posthog` for Python, or `npm install posthog-node` for Node.js. For async Python code, install `posthog[async]` and use `AsyncPosthog`.
+- **Client:** Reuse the client your application already creates. Set `secret_key` in Python or `secretKey` in Node.js to your project secret API key. The client still captures events with your project token. Shut the client down when your application exits, not after each send.
 - **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` in Python or `appHost` in Node.js to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
-- **Local evaluation:** The client also uses the secret key to [evaluate flags locally](/docs/feature-flags/local-evaluation). If you do that, give the key the **Feature flag** read scope too. In Node.js, if the client only sends email, set `enableLocalEvaluation: false`.
-- **Retries:** The client sends an idempotency key on each send, and retries network errors, rate limits, and a `503` up to two times with the same key. Pass `idempotency_key` or `idempotencyKey` to cover retries outside the call too, such as from a job queue.
-- **Errors:** In Python, a send that PostHog doesn't queue raises `EmailError`. In Node.js, `send` returns `{ data, error }` and doesn't throw. Both errors carry the `code` from the [errors table](#errors).
+- **Local evaluation:** The client also uses the secret key to [evaluate flags locally](/docs/feature-flags/local-evaluation). If your application does that, give the key the **Feature flag** read scope too. In Node.js, a client that only sends email needs `enableLocalEvaluation: false`, because the client starts polling flag definitions when it starts. In Python, the client loads flag definitions only when it evaluates a flag.
+- **Timeouts and retries:** Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key, waiting about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds returns the error at once. To change this, set `email_request_timeout_seconds` and `email_request_max_retries` in Python, or `emailRequestTimeoutMs` and `emailRequestMaxRetries` in Node.js. When a job queue already retries the send, set the retries to `0` and pass an `idempotency_key` or `idempotencyKey` that identifies the email.
+- **Errors:** In Python, a send that PostHog doesn't queue raises `EmailError`. In Node.js, `send` returns `{ data, error }` and doesn't throw. Both errors carry the `code` from the [errors table](#errors). After a `network_error` or a `503`, PostHog might have queued the email. Retry with the same idempotency key rather than sending the email through another provider, or the recipient can get it twice.
+
+#### Test without sending email
+
+Pass your own HTTP transport to check what your code sends, without a network call. This checks your integration, not delivery. To check delivery, send a real email to your own address.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+import httpx
+from posthog.emails import AsyncEmails
+
+requests = []
+
+def handler(request: httpx.Request) -> httpx.Response:
+    requests.append(request)
+    return httpx.Response(202, json={"message_id": "msg_1", "replayed": False})
+
+async def test_send_password_reset():
+    emails = AsyncEmails(
+        "phs_test",
+        host="https://us.posthog.com",
+        http_client=httpx.AsyncClient(transport=httpx.MockTransport(handler)),
+    )
+
+    result = await emails.send(to="jane@example.com", template_id="<template_id>", idempotency_key="password-reset-1")
+
+    assert result.id == "msg_1"
+    assert requests[0].headers["Idempotency-Key"] == "password-reset-1"
+```
+
+```js file=Node.js
+import assert from "node:assert/strict"
+import { PostHog } from "posthog-node"
+
+const requests = []
+const posthog = new PostHog("phc_test", {
+    secretKey: "phs_test",
+    enableLocalEvaluation: false,
+    fetch: async (url, options) => {
+        requests.push({ url, options })
+        return new Response(JSON.stringify({ message_id: "msg_1", replayed: false }), { status: 202 })
+    },
+})
+
+const { data } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateId: "<template_id>",
+    idempotencyKey: "password-reset-1",
+})
+
+assert.equal(data.id, "msg_1")
+assert.equal(requests[0].options.headers["Idempotency-Key"], "password-reset-1")
+```
+
+</MultiLanguage>
+
+For synchronous Python code, pass a `requests.Session` with a test adapter to `Emails(session=...)`. Any library that mocks `requests` or `httpx` works too.
 
 ## Retry safely with an idempotency key
 
@@ -312,21 +370,36 @@ curl "https://us.posthog.com/api/projects/@current/messaging/emails/<message_id>
 ```
 
 ```python file=Python
-status = posthog.emails.get(message_id)
-if status.status == "bounced":
-    print(f"The email bounced: {status.reason}")
+from posthog.emails import EmailError
+
+def email_bounced(message_id: str) -> bool | None:
+    try:
+        status = posthog.emails.get(message_id)
+    except EmailError as error:
+        if error.code == "not_found":
+            # The first status can take a few seconds to arrive. Try again later.
+            return None
+        raise
+    return status.status == "bounced"
 ```
 
 ```js file=Node.js
-const { data: status, error } = await posthog.emails.get(messageId)
-if (status?.status === "bounced") {
-    console.log(`The email bounced: ${status.reason}`)
+export async function emailBounced(messageId) {
+    const { data: status, error } = await posthog.emails.get(messageId)
+    if (error) {
+        if (error.code === "not_found") {
+            // The first status can take a few seconds to arrive. Try again later.
+            return null
+        }
+        throw error
+    }
+    return status.status === "bounced"
 }
 ```
 
 </MultiLanguage>
 
-In Python, `get` returns an `EmailStatus`, with `created_at` and `status_at` as `datetime` objects. It raises `EmailError` with the code `not_found` when the status isn't found. In Node.js, `get` returns `{ data, error }`.
+In Python, `get` returns an `EmailStatus`, with `created_at` and `status_at` as `datetime` objects. It raises `EmailError` with the code `not_found` when the status isn't found. In Node.js, `get` returns `{ data, error }`. Neither SDK retries a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.
 
 ## How transactional emails behave
 
