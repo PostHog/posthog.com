@@ -49,6 +49,20 @@ Calling `PostHog.reset()` on logout unregisters the token for the signed-out use
 
 Registration and unregistration are durable. If the device is offline or the request fails, the SDK retries on the next `flush()`, identity change, or app launch.
 
+### Firebase Installation IDs
+
+Firebase is moving from FCM registration tokens to Firebase Installation IDs. If your app turns on installation ID mode (the `firebase_messaging_installation_id_enabled` manifest flag), `getToken()` throws, so the SDK's automatic registration can't get a token. Until the SDK supports installation IDs, register the ID yourself from `onRegistered` (firebase-messaging 25.1.0 and later):
+
+```kotlin
+class MyFirebaseMessagingService : FirebaseMessagingService() {
+    override fun onRegistered(installationId: String) {
+        PostHog.registerPushNotificationToken(installationId, appId = "your-firebase-project-id")
+    }
+}
+```
+
+Firebase says FCM accepts an installation ID in place of a registration token during its transition period, so pushes to a registered installation ID should be delivered. Firebase hasn't announced when that period ends.
+
 ## Capturing opens
 
 Automatic open capture detects cold-start taps on a notification from the system tray, recognized by the `google.message_id` extra that Firebase puts on the intent.

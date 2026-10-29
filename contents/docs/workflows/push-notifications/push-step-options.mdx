@@ -1,0 +1,95 @@
+---
+title: Push step settings
+---
+
+The **Push** step in the [workflow builder](/docs/workflows/workflow-builder) sends a notification to every device a person registered with one of your [push channels](/docs/workflows/configure-channels?tab=Push). This page covers each setting on the step and what your app receives.
+
+Text fields accept variables, for example `{event.properties.chat_id}` or `{person.properties.name}`. The body uses Liquid instead, for example `{{ person.properties.name }}`.
+
+## Main settings
+
+| Setting | What it does |
+| --- | --- |
+| **Push channels** | The FCM and APNs channels to send through. Each person gets the notification on the devices they registered with those channels. People with no device on a channel are skipped and aren't counted as a send. |
+| **Delivery** | Whether the device shows the notification, or only your app gets it. See [Delivery](#delivery). |
+| **Notification title** | Required unless the push is silent. |
+| **Notification body** | Optional text under the title. |
+| **Image URL** | Optional image shown in the notification. On iOS, your app needs a notification service extension to display it. |
+| **Link** | Where a tap should take the person. See [Link and group](#link-and-group). |
+| **Group** | Bundles related notifications together, such as one conversation. See [Link and group](#link-and-group). |
+| **Custom data payload** | Key-value pairs delivered to your app. Values must be strings, because FCM only accepts strings. |
+| **Collapse key** | Notifications with the same key replace each other, so the person only sees the latest one. |
+| **TTL (seconds)** | How long the provider keeps the message for a device that's offline. |
+
+The step also has **Android** and **iOS** sections for platform settings: priority, channel ID, sound, tag, icon, color and click action on Android, and sound, badge, subtitle, category, thread ID, interruption level and mutable content on iOS.
+
+## Delivery
+
+| Option | Android | iOS |
+| --- | --- | --- |
+| **Show a notification** (default) | The system shows the notification. | The system shows the notification. |
+| **Data only on Android, notification on iOS** | Nothing is shown. Your app gets the message in `onMessageReceived`, even in the background, and draws the notification itself. | The system shows the notification. |
+| **Silent, show nothing** | Nothing is shown. Your app gets the message in `onMessageReceived`. | Nothing is shown. iOS wakes your app in the background with the data. |
+
+For data only and silent pushes, put everything your app needs in **Custom data payload**. On Android, the title, body and image aren't sent with a data only push, and only the **Android priority** setting applies. A silent push sends no title, body or image to any device.
+
+Things to know about silent pushes on iOS:
+
+- Your app needs the **Remote notifications** background mode, and it receives the push in `application(_:didReceiveRemoteNotification:fetchCompletionHandler:)`.
+- Apple sends them at low priority and limits how often an app is woken, so a silent push can arrive late or not at all. Don't use them for anything time critical.
+
+If you create a workflow through the API and leave out the title for a push that shows a notification, PostHog uses the template's default title.
+
+## Link and group
+
+**Link** and **Group** are sent to your app in the custom data, as the `link` and `group` keys. If you also set a `link` key in **Custom data payload**, the **Link** field replaces it.
+
+On iOS, **Group** is also used as the thread ID, so iOS bundles notifications with the same group. If you set **iOS thread ID**, that's used instead.
+
+PostHog SDKs don't open the link or group notifications on Android yet, so your app has to read these keys itself.
+
+On Android, read them where your app handles the push. For a data only or silent push, that's `onMessageReceived`, where you can also pass `group` to `setGroup()` when you build the notification:
+
+```kotlin
+class MyFirebaseMessagingService : FirebaseMessagingService() {
+    override fun onMessageReceived(message: RemoteMessage) {
+        val link = message.data["link"]
+        val group = message.data["group"]
+        // Build the notification, using `group` with NotificationCompat.Builder.setGroup()
+    }
+}
+```
+
+When the system shows the notification and the app is in the background, a tap opens your launcher activity with the data in its intent extras:
+
+```kotlin
+val link = intent.extras?.getString("link")
+```
+
+On iOS, read them when the person taps the notification:
+
+```swift
+func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse,
+    withCompletionHandler completionHandler: @escaping () -> Void
+) {
+    let userInfo = response.notification.request.content.userInfo
+    if let link = userInfo["link"] as? String, let url = URL(string: link) {
+        UIApplication.shared.open(url)
+    }
+    completionHandler()
+}
+```
+
+## Protect sensitive data
+
+Turn on **Protect sensitive data** in the step's settings panel for notifications that carry private content, such as direct messages or sign-in codes. It's off by default.
+
+When it's on:
+
+- The notification is still sent as usual.
+- PostHog doesn't keep a copy of the title, subtitle, body or image as sent. The message history shows that a notification was sent, with the title as you wrote it in the step, before variables are filled in, and a note that the content wasn't stored.
+- The workflow run doesn't keep its variables, so the run can't be rerun.
+
+The message history never includes a push's custom data, whether or not this setting is on.
