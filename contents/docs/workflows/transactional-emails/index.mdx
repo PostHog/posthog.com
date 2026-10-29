@@ -10,43 +10,51 @@ Transactional emails are a new feature. Things might change or break while we wo
 
 </CalloutBox>
 
-Transactional emails are one-off emails that a person triggers in your product, like password resets, sign-in codes, and receipts. You design the email as a [message template](/docs/workflows/library) in Workflows. Your backend then sends it to one recipient with one API call.
+Transactional emails are one-off emails that a person triggers in your product, like password resets, sign-in codes, and receipts. You write the email once in PostHog. Your backend then sends it to one recipient with one API call.
 
-Each transactional template has its own workflow behind it. PostHog doesn't show this workflow on the **Workflows** tab. It shows the workflow's data on the template instead:
+**Quick start:** [Node.js](/docs/workflows/transactional-emails/node) · [Python](/docs/workflows/transactional-emails/python) · [API](/docs/workflows/transactional-emails/api)
 
-- **Metrics** shows the metrics for the template's sends.
+## Create a transactional email
+
+1. Open [**Transactional**](https://app.posthog.com/transactional) in PostHog and click **New transactional email**.
+2. **Name:** Name the email, and turn on [**Protect sensitive data**](#protect-sensitive-data) if it carries sign-in codes or reset links.
+3. **Sender:** Choose the verified sender the email comes from. To set up a sender, see [configure a channel](/docs/workflows/configure-channels).
+4. **Content:** Write the subject and the body. Add the variables your code sends, such as `reset_link`, and use them as `{{ variables.reset_link }}`.
+5. **Send from your code:** Copy the example with the email's template ID.
+
+Each transactional email has its own page in **Transactional**, with these tabs:
+
+- **Design** edits the email and its sender.
+- **Metrics** shows the metrics for its sends.
 - **Sends** lists each send, with its log messages.
-- **Versions** keeps each version of the email that you publish.
+- **Versions** keeps each version that you publish.
+- **API** shows the template ID and an example send.
 
-## Make a template transactional
+<CalloutBox icon="IconWarning" title="An email stays transactional" type="caution">
 
-1. In Workflows, open the [**Templates** tab](https://app.posthog.com/workflows/library) and choose **Email templates**.
-2. Open the template you want to send, or create one.
-3. Open the **API** tab and click **Make transactional**.
-
-The template needs these before you can make it transactional:
-
-- **A subject and a body.** Save any changes first.
-- **A verified email sender.** PostHog uses your project's default sender. You can change the sender later. To set up a sender, see [configure a channel](/docs/workflows/configure-channels).
-- **No marketing category.** Transactional emails ignore opt-outs, so PostHog doesn't send a template that is in a marketing [message category](/docs/workflows/opt-outs#message-categories).
-
-<CalloutBox icon="IconWarning" title="You can't undo this" type="caution">
-
-A template stays transactional after you make it transactional. If you still use the template for other emails, click **Duplicate** in the template's menu first, and make the copy transactional.
+Transactional emails ignore marketing opt-outs, so use them only for emails that a person needs, never for marketing. A transactional email can't be changed back to a regular template.
 
 </CalloutBox>
 
-You can also make a template transactional over the API. Call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:write` scope.
+### Use an existing template
 
-### Edit a transactional template
+To send an email template you already have, open it in the **Templates** tab, open its **API** tab, and click **Make transactional**. The template needs a subject and a body, a verified sender, and no marketing [message category](/docs/workflows/opt-outs#message-categories). If you still use the template for other emails, click **Duplicate** in its menu first, and make the copy transactional.
+
+### Set it up with an agent
+
+With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to set up a transactional email. It can design the email from your brand, make it transactional, and write the code that sends it. It asks you to confirm before it makes a template transactional, and you create the API key yourself.
+
+You can also make a template transactional with the API: call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:write` scope.
+
+### Edit a transactional email
 
 - **Sender:** The **Design** tab shows who the email comes from. Click **Edit sender** to choose a different verified sender, or to set a display name, a from address, or a reply-to address. The from address must be on the sender's verified domain. To use more than one reply-to address, separate them with commas.
 - **Drafts:** Your edits save as a draft. Sends use the live version of the email until you click **Publish**. Each publish adds a version on the **Versions** tab. To remove your edits, use **Discard draft**.
-- **Checks:** PostHog doesn't publish a change that would stop the template from sending, such as an empty subject or body, or a marketing category.
+- **Checks:** PostHog doesn't publish a change that would stop the email from sending, such as an empty subject or body, or a marketing category.
 
 ### Protect sensitive data
 
-For emails with sign-in codes, reset links, or other secrets, turn on **Protect sensitive data** on the **API** tab. PostHog then keeps no copy of the body or the filled-in subject of each email, and clicked links keep only the site address. You can turn this setting on or off at any time.
+For emails with sign-in codes, reset links, or other secrets, turn on **Protect sensitive data**, in the first step of a new email or on its **API** tab. PostHog then keeps no copy of what each email contained, and doesn't track link clicks, so a code or a token in a link never goes through a tracking redirect. Deliveries, opens, bounces, and the email's status are still tracked. You can turn this setting on or off at any time.
 
 ## Create an API key
 
@@ -116,7 +124,7 @@ Use `code` in your error handling. The text in `detail` can change.
 | `400` | Varies, with `"type": "validation_error"` | The body isn't valid. For example, `to` is missing or isn't an email address. `attr` names the field. | Fix the request. |
 | `400` | `invalid_recipient` | The `to` address contains `{` or `}`. | Send a plain email address. |
 | `400` | `invalid_idempotency_key` | The `Idempotency-Key` header isn't 1 to 255 visible ASCII characters. | Use a valid key. |
-| `400` | `template_not_transactional` | The template isn't transactional. | [Make the template transactional](#make-a-template-transactional). |
+| `400` | `template_not_transactional` | The template isn't transactional. | [Make the template transactional](#create-a-transactional-email). |
 | `400` | `template_not_sendable` | The template has no subject or no body. | Add them and publish the template. |
 | `400` | `marketing_template` | The template is in a marketing category. | Move the template to a transactional category, or remove its category. |
 | `400` | `transactional_email_paused` | The workflow that sends this template isn't active, or it was deleted. | Don't retry. A retry gets the same error. |
