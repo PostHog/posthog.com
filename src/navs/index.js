@@ -1669,6 +1669,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
+                        name: 'Customer deep dive skill',
+                        url: '/handbook/onboarding/customer-deep-dive-skill',
+                    },
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
