@@ -17,7 +17,7 @@ The materialized view failures check fires when a [materialized view](/docs/data
 
 Once a day, the check looks at your Data Warehouse saved queries and raises a **warning** for any materialized view whose latest materialization failed (or that recorded an error and isn't currently running). The issue includes the view name and the error from the failed run.
 
-Separately, if a view fails enough times in a row to be [suspended](/docs/data-warehouse/views/materialization-troubleshooting#the-view-isnt-refreshing), PostHog sends an immediate email and in-app notification at the moment of suspension. This is independent of the daily check — it tells you the view has stopped refreshing right when it happens, rather than waiting for the next digest.
+Separately, if a view fails enough times in a row to be [suspended](/docs/data-warehouse/views/materialize-troubleshooting#the-view-isnt-refreshing), PostHog sends an immediate email and in-app notification at the moment of suspension. This is independent of the daily check — it tells you the view has stopped refreshing right when it happens, rather than waiting for the next digest.
 
 ## Why it matters
 
