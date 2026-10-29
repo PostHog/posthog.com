@@ -17,9 +17,9 @@ tags:
 
 As a product marketer, I’m a bit nosy. Are you? 
 
-You must be seeing as you clicked on this post. Well in that case, let’s get on with it. Take a peek over PostHog AI’s shoulder into the past year of prompting. 
+You must be seeing as you clicked on this post. In that case, let’s take a peek over PostHog AI’s shoulder into the past year of prompting. 
 
-See how we aggregated this data at the [end](#how-we-pulled-this-data). 
+> See how we aggregated this data [at the end](#how-we-pulled-this-data). 
 
 ## Prompters mind their manners (mostly) 
 
@@ -37,7 +37,7 @@ In aggregate, Tuesday is the busiest prompting day of the week, and the peak hou
 
 ## PostHog AI: data analyst, career coach, therapist?
 
-Prompters put their trust in PostHog AI, asking things like "what should be my goal if i wanna make this startup actually successful?" and "I want to create a weekly report and send it to my boss. Please help me". 
+Prompters put their trust in PostHog AI, asking things like "what should be my goal if I wanna make this startup actually successful?" and "I want to create a weekly report and send it to my boss. Please help me". 
 
 1,424 people asked our AI how to pay us less (which we can [definitely help with](/handbook/customer-success/cost-optimization)), and almost 800 people asked for help with something for their boss or investors. 734 just wanted to know "is this good?" 
 
@@ -53,7 +53,7 @@ A lot of people asked about PostHog Dashboards (more than 53,600). Next were ses
 
 ![2.8 prompts per conversation on average. The longest conversation had 259 prompts, and we hope it ended well.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_per_conversation_d974ecc20a.png)
 
-## All roles are asking data questions
+## All roles ask data questions
 
 People with a data role are the heaviest PostHog AI users: an average of 29 prompts per person. When digging into the data, people asked about drops in their metrics 2.3x more than spikes. 
 
@@ -71,7 +71,7 @@ When asking PostHog AI about other tools, Claude was the most named (by 7.2k peo
 
 People prompted PostHog AI every single day of the year. The longest streak of consecutive days with prompts from a single person was 49. 
 
-Compared with a normal day, New Year's Day 2026 was the quietest day of the year, with only 29% of the people of a normal Thursday. Plenty of people were still prompting, though. Over the past year, 1,218 people sent the exact same prompt 5 or more times in one day. It wasn’t groundhog day (or maybe it was?).
+Compared with a normal day, New Year's Day 2026 was the quietest day of the year, with only 29% of the people of a normal Thursday. Plenty of people were still prompting, though. Over the past year, 1,218 people sent the exact same prompt 5 or more times in one day. It wasn’t Groundhog Day (or maybe it was?).
 
 ![219 prompts by one user in a single day. A record, surprisingly, not held by a PostHog employee. We hope they took a coffee break.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_by_one_user_in_one_day_56d7f323b1.png)
 
@@ -89,13 +89,13 @@ Compared with a normal day, New Year's Day 2026 was the quietest day of the year
 
 **What**: We used every message that people sent to PostHog AI in the PostHog web app from October 28, 2025 to October 27, 2026: 3.67 million messages from 230,000 people, on US Cloud and EU Cloud.
 
-This does not include PostHog AI in Slack. It also does not include prompts that people send to their own AI tools (like Claude Code or Cursor) through the [PostHog MCP server](/docs/model-context-protocol). Those prompts go to a different agent: the MCP server only runs tool calls in PostHog, and the prompt stays in the person's own tool. (If you want to know what those agents get up to, we [watched them too](/blog/how-ai-agents-behave).)
+This does not include PostHog AI in Slack or the prompts that people send to their own AI tools (like Claude Code or Cursor) through the [PostHog MCP server](/docs/model-context-protocol). Those go to a different agent: the MCP server only runs tool calls in PostHog, and the prompt stays in the person's own tool. If you want to know what those agents get up to, we [watched them too](/blog/how-ai-agents-behave).
 
 **Where it comes from**: We did all of the work in PostHog:
 
 * **Product Analytics:** PostHog records an event each time a person sends a message to PostHog AI. Product analytics connects each message to a person, with their job role and time zone. People can choose their job role [when they sign up](/blog/how-we-built-email-onboarding) (it is optional), and the time zone comes from their IP address.  
-* **SQL and Python**: every number in this post comes from a SQL query. For the local-time and holiday stats, Python did the math on the SQL results.  
-* **Notebooks**: all of the queries were dumped into four PostHog notebooks, with SQL and Python cells, so any person on our team can run them again.  
+* **SQL and Python**: Every number in this post comes from a SQL query. For the local-time and holiday stats, Python did the math on the SQL results.  
+* **Notebooks**: All of the queries were dumped into four PostHog notebooks, with SQL and Python cells, so any person on our team can run them again.  
 * **PostHog Slack app** (with the PostHog MCP): This started as an idea in Slack, where I tagged our [trusty agent](/blog/slack-app-beta) to write and run the queries. 
 
 **What we removed:**
