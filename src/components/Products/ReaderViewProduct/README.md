@@ -232,6 +232,14 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 
 If a template finds nothing to render, it returns `null` – the section disappears but the menu item stays.
 
+The `plans` template also accepts optional props through a menu item's `props`, for a product that shows Plans once per billing meter (see `src/hooks/productData/data_pipelines.tsx`):
+
+- `meterName` – prefixes the TL;DR title, as in "Sources TL;DR:".
+- `hidePricingDetails` – hides the "Things you should know about our pricing" column, so a second Plans block doesn't repeat it.
+- `intro` – content above the TL;DR in the left column, so the pricing notes column starts level with it.
+
+A menu item's `props.productData` replaces the page's product data for that one section, which points it at a different billing product.
+
 ### Adding a new template
 
 1. Create a component in `templates/` that accepts `SectionComponentProps` and wraps its output in `<section id={id} className="scroll-mt-20 not-prose">…</section>`.

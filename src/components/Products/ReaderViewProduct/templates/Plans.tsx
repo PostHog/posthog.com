@@ -165,7 +165,16 @@ const SubheaderRow = ({ label }: { label: string }) => (
     </div>
 )
 
-const Plans = ({ id, productData }: SectionComponentProps) => {
+type PlansProps = SectionComponentProps & {
+    /** Names the billing meter in the TL;DR title ("Sources TL;DR:"), for pages that show Plans once per meter. */
+    meterName?: string
+    /** Hides the "Things you should know about our pricing" column, so a second Plans block doesn't repeat it. */
+    hidePricingDetails?: boolean
+    /** Content above the TL;DR in the left column, so the pricing notes column starts level with it. */
+    intro?: React.ReactNode
+}
+
+const Plans = ({ id, productData, meterName, hidePricingDetails, intro }: PlansProps) => {
     // `useProduct` resolves `sharesFreeTier` from a handle string into the full
     // product object, so read the handle back off it. Accept both shapes – callers
     // that pass raw productData still hand us the string.
@@ -326,7 +335,10 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
         >
             {/* TL;DR */}
             <div className="@container @4xl:[grid-area:tldr]">
-                <h2 className="text-3xl font-bold text-primary mt-0 mb-6">TL;DR:</h2>
+                {intro}
+                <h2 className="text-3xl font-bold text-primary mt-0 mb-6">
+                    {meterName ? `${meterName} TL;DR:` : 'TL;DR:'}
+                </h2>
                 <p className="text-3xl leading-snug font-normal text-primary mb-3">
                     {freePlan?.free_allocation && (
                         <>
@@ -589,19 +601,23 @@ const Plans = ({ id, productData }: SectionComponentProps) => {
             </div>
 
             {/* Sidebar: combined pricing details */}
-            <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-primary @4xl:pl-12">
-                <h3 className="mb-4 !text-sm font-normal text-secondary">Things you should know about our pricing</h3>
-                <ul className="space-y-6 list-none m-0 p-0">
-                    {pricingDetails
-                        .map((detail) => (detail === billingLimitDetail && noBillingLimitDetail) || detail)
-                        .map((point, i) => (
-                            <li key={i}>
-                                <p className="font-semibold text-primary leading-tight mb-1">{point.headline}</p>
-                                <p className="text-sm text-primary/60 mb-0">{point.body}</p>
-                            </li>
-                        ))}
-                </ul>
-            </aside>
+            {!hidePricingDetails && (
+                <aside className="@container @4xl:[grid-area:sidebar] @4xl:border-l @4xl:border-primary @4xl:pl-12">
+                    <h3 className="mb-4 !text-sm font-normal text-secondary">
+                        Things you should know about our pricing
+                    </h3>
+                    <ul className="space-y-6 list-none m-0 p-0">
+                        {pricingDetails
+                            .map((detail) => (detail === billingLimitDetail && noBillingLimitDetail) || detail)
+                            .map((point, i) => (
+                                <li key={i}>
+                                    <p className="font-semibold text-primary leading-tight mb-1">{point.headline}</p>
+                                    <p className="text-sm text-primary/60 mb-0">{point.body}</p>
+                                </li>
+                            ))}
+                    </ul>
+                </aside>
+            )}
         </section>
     )
 }

@@ -243,6 +243,7 @@ const PRIMARY_TOOL_HANDLES: string[] = [
     'ai_observability',
     'session_replay',
     'replay_vision',
+    'data_pipelines',
     'feature_flags',
     'experiments',
     'error_tracking',
