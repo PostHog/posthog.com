@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react'
 import ReaderView from 'components/ReaderView'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
@@ -63,10 +63,12 @@ class DataStoryErrorBoundary extends React.Component<
 }
 
 const DataStoryExposure = ({ variant, children }: { variant?: string; children: React.ReactNode }) => {
-    const [slotTopRef, slotTopInView] = useInView({ triggerOnce: true })
+    const [slotTopRef, slotTopInView] = useInView()
+    const exposureSent = useRef(false)
 
     useEffect(() => {
-        if (slotTopInView && variant) {
+        if (slotTopInView && variant && !exposureSent.current) {
+            exposureSent.current = true
             window.posthog?.capture(DATA_STORY_EXPOSURE_EVENT, { [`$feature/${DATA_STORY_FLAG}`]: variant })
         }
     }, [slotTopInView, variant])
