@@ -97,6 +97,6 @@ This table is being queried from app and for every query, figures out what shard
 
 The source of truth for person info and person to `distinct_id` mappings is in PostgreSQL, but to speed up queries we replicate it to ClickHouse. Both tables use the [ReplacingMergeTree](https://clickhouse.com/docs/en/engines/table-engines/mergetree-family/replacingmergetree/) and collapse by the `version` column, which is incremented every time a person is updated.
 
-> **Note:** Querying both tables _requires_ handling duplicated rows. Check out [PersonQuery code](https://github.com/PostHog/posthog/blob/master/posthog/queries/person_query.py) for an example of how it's done.
+> **Note:** Querying both tables _requires_ handling duplicated rows.
 
 In sharded setups, `person` and `person_distinct_id` tables are not sharded and instead replicated onto each node to avoid JOINs over the network.

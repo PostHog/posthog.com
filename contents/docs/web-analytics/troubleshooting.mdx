@@ -27,7 +27,7 @@ All good web analytics dashboards need to include a world map. Ours includes it 
 
 ## Do stats include bots and crawlers?
 
-By default, no. The PostHog JavaScript SDK blocks known bots and crawlers client-side, so they never send events – you can see the [list of blocked user agents](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts) (pull requests welcome). If you want to capture that traffic instead of blocking it, set the `opt_out_useragent_filter` [config option](/docs/libraries/js/config) to `true` – PostHog then sets `$browser_type` to either `bot` or `browser` instead of dropping bot events entirely.
+By default, no. The PostHog JavaScript SDK blocks known bots and crawlers client-side, so they never send events – you can see the [list of blocked user agents](https://github.com/PostHog/posthog-js/blob/main/packages/browser-common/src/utils/blocked-uas.ts) (pull requests welcome). If you want to capture that traffic instead of blocking it, set the `opt_out_useragent_filter` [config option](/docs/libraries/js/config) to `true` – PostHog then sets `$browser_type` to either `bot` or `browser` instead of dropping bot events entirely.
 
 This only covers events captured by the JavaScript SDK. Most crawlers and AI agents don't run JavaScript, so they never trigger a client-side `$pageview` in the first place. To measure that traffic instead of dropping it, forward your server logs as `$http_log` events and classify them at query time with [bot and traffic detection](/docs/web-analytics/bot-detection).
 
@@ -91,7 +91,7 @@ _Affects: visitor count, session count, pageview count_
 
 Some traffic to your site might be bots like search engines crawlers, archivers, or content scrapers. You may want some of these to be able to access your site, but you don't want them to appear in your analytics data. Different tools use different methods, which may result in different visitor or page view counts.
 
-Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
+Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser-common/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
 
 You can also block custom user agents by setting the `custom_blocked_useragents` [config](/docs/libraries/js/config) option if there's a specific user agent that you don't want to track – your custom user agent or maybe a bad actor you want to block.
 

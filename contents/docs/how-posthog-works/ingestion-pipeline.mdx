@@ -97,7 +97,7 @@ In the sections below we will dive deeper into each step:
 4. [Writing to ClickHouse](#4-writing-to-clickhouse)
 5. [CDP destinations](#5-cdp-destinations)
 
-If you would like to dive even deeper the related source code can be found in the [event pipeline implementation](https://github.com/PostHog/posthog/tree/master/nodejs/src/worker/ingestion/event-pipeline).
+If you would like to dive even deeper the related source code can be found in the [event pipeline implementation](https://github.com/PostHog/posthog/tree/master/nodejs/src/ingestion/pipelines/analytics).
 
 ### 1. CDP transformations
 
@@ -107,7 +107,7 @@ This first step runs any [transformations](/docs/data-pipelines) you have enable
 
 ### 2. Person processing
 
-The next step in the ingestion pipeline is processing the [person](/docs/how-posthog-works/data-model#person) who sent the event, which is determined by the `distinct_id` field. This step can be skipped for events sent with `$process_person_profile` set to `false` (personless mode), which avoids the PostgreSQL lookup and uses a deterministic UUID instead.
+The next step in the ingestion pipeline is processing the [person](/docs/how-posthog-works/data-model#person-fields) who sent the event, which is determined by the `distinct_id` field. This step can be skipped for events sent with `$process_person_profile` set to `false` (personless mode), which avoids the PostgreSQL lookup and uses a deterministic UUID instead.
 
 Many actions can happen here depending on if we've seen this `distinct_id` before, as well as which type of event is being sent.
 
@@ -133,7 +133,7 @@ In the case of an `$identify` event, the first step is to use the `$distinct_id`
 
 - `$distinct_id`: The distinct identifier for whichever user sent the event (email, UUID, etc.). This can be set by the sender or is defaulted to `$anon_distinct_id` if it is not set
 
-> **Note**: In the case the `$anon_distinct_id` is missing (e.g. events from backend libraries), we will treat this event like [all other events](#3.1.3---all-other-events).
+> **Note**: In the case the `$anon_distinct_id` is missing (e.g. events from backend libraries), we will treat this event like [all other events](#option-3-all-other-events).
 
 To determine what to do at this stage, we need to make a call to PostgreSQL to determine which scenario we are in:
 
@@ -143,6 +143,8 @@ To determine what to do at this stage, we need to make a call to PostgreSQL to d
 | 2. _Only one_ of `$anon_distinct_id` and `$distinct_id` have been associated with a Person | Create a new mapping to associate the `$distinct_id` and `$anon_distinct_id` with the already existing `person_id` |
 | 3. _Both_ `$anon_distinct_id` _and_ `$distinct_id` have been associated with a Person      | We will [merge these two people](#merging-two-persons) and associate all future events with the `person_id` that was associated with the `$distinct_id` |
 
+> <a id="merging-two-persons" />
+>
 > **Merging two persons**
 >
 > In the third scenario, where we have inadvertently created two persons for the same user, we need to merge them. PostHog has a few built-in protections, in which case the merge will not be aborted ([more info](/docs/integrate/identifying-users#considerations)). 

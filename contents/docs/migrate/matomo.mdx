@@ -66,7 +66,7 @@ To return all rows, set the filter limit to `-1`. Matomo recommends you only exp
 
 ## 2. Converting Matomo event data to the PostHog schema
 
-The schema of Matomo's exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Matomo's exported event data is similar to PostHog's schema, but it requires conversion to work with the rest of PostHog's data. You can see details on Matomo's schema in [their docs](https://developer.matomo.org/guides/database-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#types-of-autocaptured-events).
 
 The big difference is that Matomo structures its data around **visits** that contain one or more **actions**. Matomo's actions are similar to PostHog's [events](/docs/data/events). You can go through each visit and convert it to PostHog's schema by doing the following:
 
