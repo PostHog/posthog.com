@@ -54,14 +54,14 @@ How you set these depends on how you ingest. With the [capture API](/docs/api/ca
 
 Each function takes a user agent string and returns its classification. PostHog stores the user agent as `$raw_user_agent`, which the JavaScript SDK, server-side capture, and `$http_log` events all set. Some SDKs send `$user_agent` instead, so the examples below pass `coalesce(properties.$raw_user_agent, properties.$user_agent)` to cover both. To skip passing it, use the [virtual properties](#virtual-properties) below, which read `$raw_user_agent` for you.
 
-| Function                         | Returns                                                                                                                                                                                      | Example          |
-| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| `isLikelyBot(user_agent)`        | `true` if the user agent matches a bot or automation pattern, otherwise `false`. An empty user agent counts as a bot.                                                                        | `true`           |
-| `getTrafficType(user_agent)`     | One of `AI Agent`, `Bot`, `Automation`, or `Regular`.                                                                                                                                        | `Bot`            |
-| `getTrafficCategory(user_agent)` | A subcategory such as `ai_crawler`, `ai_search`, `search_crawler`, `seo_crawler`, `social_crawler`, `monitoring`, `http_client`, or `headless_browser`. Returns `regular` for human traffic. | `search_crawler` |
-| `getBotType(user_agent)`         | The same subcategory as `getTrafficCategory`, but returns an empty string for human traffic – handy for filtering.                                                                           | `search_crawler` |
-| `getBotName(user_agent)`         | The bot's name, such as `Googlebot`, `ChatGPT`, or `curl`. Empty for human traffic.                                                                                                          | `Googlebot`      |
-| `getBotOperator(user_agent)`     | The company or operator behind the bot, such as `Google`, `OpenAI`, or `Anthropic`. Empty for human traffic.                                                                                 | `Google`         |
+| Function                         | Returns                                                                                                                                                                                                      | Example          |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| `isLikelyBot(user_agent)`        | `true` if the user agent matches a bot or automation pattern, otherwise `false`. An empty user agent counts as a bot, except for events from known server and mobile SDKs (see [limitations](#limitations)). | `true`           |
+| `getTrafficType(user_agent)`     | One of `AI Agent`, `Bot`, `Automation`, or `Regular`.                                                                                                                                                        | `Bot`            |
+| `getTrafficCategory(user_agent)` | A subcategory such as `ai_crawler`, `ai_search`, `search_crawler`, `seo_crawler`, `social_crawler`, `monitoring`, `http_client`, or `headless_browser`. Returns `regular` for human traffic.                 | `search_crawler` |
+| `getBotType(user_agent)`         | The same subcategory as `getTrafficCategory`, but returns an empty string for human traffic – handy for filtering.                                                                                           | `search_crawler` |
+| `getBotName(user_agent)`         | The bot's name, such as `Googlebot`, `ChatGPT`, or `curl`. Empty for human traffic.                                                                                                                          | `Googlebot`      |
+| `getBotOperator(user_agent)`     | The company or operator behind the bot, such as `Google`, `OpenAI`, or `Anthropic`. Empty for human traffic.                                                                                                 | `Google`         |
 
 `isLikelyBot` is named "likely" because detection is based on user agent heuristics – it can't confirm with certainty that a request is automated.
 
@@ -80,18 +80,18 @@ Each function takes a user agent string and returns its classification. PostHog 
 
 `getTrafficCategory` and `getBotType` return a finer-grained category within each traffic type:
 
-| Category           | Traffic type | Description                   | Examples                                   |
-| ------------------ | ------------ | ----------------------------- | ------------------------------------------ |
-| `ai_crawler`       | AI Agent     | Training data collection      | GPTBot, ClaudeBot, Google-Extended         |
-| `ai_search`        | AI Agent     | AI-powered search results     | OAI-SearchBot, Claude-SearchBot, Applebot  |
-| `ai_assistant`     | AI Agent     | Real-time user-facing AI      | ChatGPT-User, Claude-User, Perplexity-User |
-| `search_crawler`   | Bot          | Traditional search engines    | Googlebot, Bingbot, Baidu                  |
-| `seo_crawler`      | Bot          | SEO analysis tools            | AhrefsBot, SemrushBot, Majestic            |
-| `social_crawler`   | Bot          | Social media preview crawlers | Facebook, Twitter, LinkedIn, Slack         |
-| `monitoring`       | Bot          | Uptime and health monitoring  | Pingdom, UptimeRobot, Datadog              |
-| `http_client`      | Automation   | HTTP client libraries         | curl, Wget, Python requests, axios         |
-| `headless_browser` | Automation   | Automated browsers            | HeadlessChrome, Puppeteer, Playwright      |
-| `no_user_agent`    | Automation   | Empty or missing user agent   | –                                          |
+| Category           | Traffic type | Description                                                               | Examples                                   |
+| ------------------ | ------------ | ------------------------------------------------------------------------- | ------------------------------------------ |
+| `ai_crawler`       | AI Agent     | Training data collection                                                  | GPTBot, ClaudeBot, Google-Extended         |
+| `ai_search`        | AI Agent     | AI-powered search results                                                 | OAI-SearchBot, Claude-SearchBot, Applebot  |
+| `ai_assistant`     | AI Agent     | Real-time user-facing AI                                                  | ChatGPT-User, Claude-User, Perplexity-User |
+| `search_crawler`   | Bot          | Traditional search engines                                                | Googlebot, Bingbot, Baidu                  |
+| `seo_crawler`      | Bot          | SEO analysis tools                                                        | AhrefsBot, SemrushBot, Majestic            |
+| `social_crawler`   | Bot          | Social media preview crawlers                                             | Facebook, Twitter, LinkedIn, Slack         |
+| `monitoring`       | Bot          | Uptime and health monitoring                                              | Pingdom, UptimeRobot, Datadog              |
+| `http_client`      | Automation   | HTTP client libraries                                                     | curl, Wget, Python requests, axios         |
+| `headless_browser` | Automation   | Automated browsers                                                        | HeadlessChrome, Puppeteer, Playwright      |
+| `no_user_agent`    | Automation   | Empty or missing user agent (not applied to server and mobile SDK events) | –                                          |
 
 ## Example queries
 
@@ -134,13 +134,13 @@ ORDER BY hits DESC
 
 For convenience, PostHog exposes the classification as virtual event properties. They read `$raw_user_agent` for you, so you don't have to pass it in. Events that only carry `$user_agent` are classified as having no user agent. They're available wherever you select event properties, including breakdowns:
 
-| Property                 | Name in the UI     | Equivalent to             |
-| ------------------------ | ------------------ | ------------------------- |
-| `$virt_is_bot`           | Is bot             | `isLikelyBot(...)`        |
-| `$virt_traffic_type`     | Traffic type       | `getTrafficType(...)`     |
-| `$virt_traffic_category` | Traffic category   | `getTrafficCategory(...)` |
-| `$virt_bot_name`         | Bot name           | `getBotName(...)`         |
-| `$virt_bot_operator`     | Bot operator       | `getBotOperator(...)`     |
+| Property                 | Name in the UI   | Equivalent to             |
+| ------------------------ | ---------------- | ------------------------- |
+| `$virt_is_bot`           | Is bot           | `isLikelyBot(...)`        |
+| `$virt_traffic_type`     | Traffic type     | `getTrafficType(...)`     |
+| `$virt_traffic_category` | Traffic category | `getTrafficCategory(...)` |
+| `$virt_bot_name`         | Bot name         | `getBotName(...)`         |
+| `$virt_bot_operator`     | Bot operator     | `getBotOperator(...)`     |
 
 The **Property** column is the name you use in SQL. The **Name in the UI** column is what you search for in the property picker when building an insight, dashboard, or breakdown.
 
@@ -200,11 +200,11 @@ Go to **Settings** > **Customization** > **Custom bots**, or open them [directly
 
 Click **Add bot**, then enter a name, like `Acme scraper`, and pick a category. The name becomes the **Bot name** and **Bot operator** for matching events. The category sets the **Traffic category** and the **Traffic type**:
 
-| Category | Traffic type |
-| --- | --- |
-| Custom (default), Search crawler, SEO crawler, Social crawler, Monitoring | `Bot` |
-| AI crawler, AI search, AI assistant | `AI Agent` |
-| HTTP client, Headless browser | `Automation` |
+| Category                                                                  | Traffic type |
+| ------------------------------------------------------------------------- | ------------ |
+| Custom (default), Search crawler, SEO crawler, Social crawler, Monitoring | `Bot`        |
+| AI crawler, AI search, AI assistant                                       | `AI Agent`   |
+| HTTP client, Headless browser                                             | `Automation` |
 
 </Step>
 
@@ -228,22 +228,22 @@ You can also manage rules without the web app. Ask an AI agent to list, create, 
 
 A condition can match on any of these event properties:
 
-| Property in the rule | Event property |
-| --- | --- |
-| Raw user agent | `$raw_user_agent` |
-| IP address | `$ip` |
-| Library | `$lib` |
-| Host | `$host` |
-| Path name | `$pathname` |
-| Current URL | `$current_url` |
-| Browser | `$browser` |
-| OS | `$os` |
-| Browser language | `$browser_language` |
-| Screen width | `$screen_width` |
-| Screen height | `$screen_height` |
-| Country code | `$geoip_country_code` |
-| Referrer | `$referrer` |
-| Referring domain | `$referring_domain` |
+| Property in the rule | Event property        |
+| -------------------- | --------------------- |
+| Raw user agent       | `$raw_user_agent`     |
+| IP address           | `$ip`                 |
+| Library              | `$lib`                |
+| Host                 | `$host`               |
+| Path name            | `$pathname`           |
+| Current URL          | `$current_url`        |
+| Browser              | `$browser`            |
+| OS                   | `$os`                 |
+| Browser language     | `$browser_language`   |
+| Screen width         | `$screen_width`       |
+| Screen height        | `$screen_height`      |
+| Country code         | `$geoip_country_code` |
+| Referrer             | `$referrer`           |
+| Referring domain     | `$referring_domain`   |
 
 Each condition uses one of these matchers:
 
@@ -262,8 +262,8 @@ Your rules are checked before PostHog's built-in lists, in the order they're lis
 
 - **An internal load test** – **IP address** **is in range** `198.51.100.0/24`, in the **HTTP client** category.
 - **A scraper that names itself** – **Raw user agent** **contains** `AcmeBot`.
-- **A scraper that pretends to be a browser** – a combination no real visitor sends: **Screen width** **equals** `800` *and* **Screen height** **equals** `600` *and* **OS** **equals** `Linux`.
-- **A partner integration** – **Library** **equals** `posthog-python` *and* **Path name** **matches regex** `^/api/`.
+- **A scraper that pretends to be a browser** – a combination no real visitor sends: **Screen width** **equals** `800` _and_ **Screen height** **equals** `600` _and_ **OS** **equals** `Linux`.
+- **A partner integration** – **Library** **equals** `posthog-python` _and_ **Path name** **matches regex** `^/api/`.
 
 ### Limits
 
@@ -281,5 +281,5 @@ A custom rule only changes how events are classified, so you can still include o
 
 Detection is best-effort, so a few cases are worth keeping in mind:
 
-- **No user agent** – requests with an empty or missing user agent (server-to-server calls, misconfigured SDKs) can't be classified from the user agent alone. They're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them.
+- **No user agent** – requests with an empty or missing user agent can't be classified from the user agent alone. By default, they're treated as `Automation` with the `no_user_agent` category, so `isLikelyBot` returns `true` for them. However, events from known server SDKs (`posthog-node`, `posthog-python`, `posthog-go`, `posthog-ruby`, `posthog-java`, `posthog-php`, `posthog-dotnet`, `posthog-elixir`, `posthog-rs`) and mobile SDKs (`posthog-react-native`, `posthog-ios`, `posthog-android`, `posthog-flutter`, `posthog-roblox`, `posthog-unity`, `posthog-kmp`) are exempt – a missing user agent is expected for these libraries, so they're classified as regular traffic unless another signal (like a bot user agent or IP range) matches. Events from `posthog-js` (web), unknown libraries, or with no `$lib` set still count as automation when the user agent is missing.
 - **Spoofing** – some bots disguise themselves with regular browser user agents, and some legitimate tools use bot-like ones. IP-based detection catches known crawlers that use real browser user agents (such as ChatGPT-User and Bing preview fetches), but only covers operators that publish their crawler IP ranges. Bots from unpublished IP ranges with spoofed user agents can still evade detection, which is why the boolean function is named `isLikelyBot`. If you can identify one by its IP range or by a combination of properties, add a [custom bot rule](#custom-bot-rules).
