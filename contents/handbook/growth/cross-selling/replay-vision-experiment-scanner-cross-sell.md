@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[Experiment scanners](/docs/replay-vision/scanner-types#experiment) in Replay Vision summarize sessions across different variants to paint a picture on how users behave differently between variants. For existing users of experiments, the metrics-based results quantitatively tell them which variant won and by how much. The scanner adds what people did in each variant, adding a behavioral/qualitative lens.
+[Experiment scanners](/docs/replay-vision/scanner-types#experiment) in Replay Vision summarize sessions across different variants to paint a picture of how users behave differently between variants. For existing users of experiments, the metrics-based results quantitatively tell them which variant won and by how much. The scanner adds what people did in each variant, adding a behavioral/qualitative lens.
 
 This cross-sell playbook outlines which customers in your book are the best candidates for finding experiment scanners valuable, how to ask the right questions and how to run a successful trial with the aim of long-term adoption.
 
@@ -22,6 +22,8 @@ Steps 1, 2 & 4 each have an agent prompt in a collapsed section. Point your agen
 ## Prioritize accounts that fit
 
 Given that Experiment scanners require customers to already use both, Experiments & Session Replay, a key piece to prioritizing accounts for outreach is to understand how deeply they use both at the moment. Experiments come first because the scanner needs one to compare, and replay is something you can help them turn on.
+
+Combine the criteria in this section and in the next section ([Find who to talk to](#find-who-to-talk-to)) to come up with a list of which users at which companies should be prioritized first.
 
 ### Experiments use
 
@@ -45,11 +47,11 @@ Once you have a sense of their Experiments usage, the next step is to understand
 | Records sessions, uses Experiments, no Replay Vision | Recordings this billing period, no scans | Full pitch and a trial. |
 | No Session Replay, but uses Experiments | No recordings this billing period | Start with Session Replay. See [the next section](#if-they-do-not-record-sessions-yet). |
 
-Quick note: some accounts have older scanners that filter on an experiment's feature flag. Those don't label sessions by variant, so if you see one, offer to swap each one with an experiment scanner.
+Quick note: some accounts have older scanners that filter on an experiment's feature flag. Those don't label sessions by variant, so if you see one, offer to swap it with an experiment scanner.
 
 #### If they do not record sessions yet
 
-Since recordings are required for the scanner to work, try a combined Session Replay + Replay Vision pitch [Session Replay](/docs/session-replay) first, and keep the scope small with [trigger groups](/docs/session-replay/how-to-control-which-sessions-you-record).
+Since recordings are required for the scanner to work, try a combined Session Replay + Replay Vision pitch first, and keep the scope small with [trigger groups](/docs/session-replay/how-to-control-which-sessions-you-record).
 
 1. Cross-sell through Error Tracking:
    - If the account uses [Error Tracking](/docs/error-tracking), start there:
@@ -76,8 +78,8 @@ Goal: list the organizations that I own that fit the Replay Vision experiment sc
    - last_launch: the date of the latest event
 
 3. Give each organization an experiment fit:
-   - Strong: experiments_launched is 8 or more, people_launching is 2 or more, and last_launch is in the last 30 days.
-   - Possible: experiments_launched is 3 to 7, and last_launch is in the last 30 days.
+   - Strong: experiments_launched is 6 or more, people_launching is 2 or more, and last_launch is in the last 30 days.
+   - Possible: experiments_launched is 2 to 5, and last_launch is in the last 30 days.
    - Long-shot: all other organizations with 1 or more experiments launched in the last 90 days.
    - Not yet: no experiments launched in the last 90 days. Leave these organizations out.
 
@@ -93,7 +95,6 @@ Goal: list the organizations that I own that fit the Replay Vision experiment sc
 6. Give each other organization the first bucket that matches, with its next move:
    - "Uses Replay Vision on experiments without new scanner type" if scans_7d > 0 and older_experiment_scanner is yes. Next move: short pitch. They know scanners, so show them the experiment type.
    - "Uses Replay Vision, not on experiments" if scans_7d > 0. Next move: short pitch. Show them the value of qualitatively capturing user behavior across variants.
-   - "Stopped using Replay Vision" if scans_30d > 0 and scans_7d = 0. Next move: ask what stopped them, then show the experiment scanner on an experiment they run now.
    - "Records sessions, uses Experiments, no Replay Vision" if recordings > 0. Next move: full pitch and a trial.
    - "No Session Replay, but uses Experiments" for all others. Next move: pitch Session Replay first with trigger groups. If exceptions > 0, start with an $exception trigger group for Error Tracking.
 
@@ -115,7 +116,7 @@ Your champion is whoever reads experiment results most often. If they also open 
 | Experiment results reader who also watches recordings | Top 3 for experiment views and refreshes, and opens recordings from experiments | Your best champion, since the scanner saves them the most time for something they're already doing |
 | Experiment results reader | Top 3 for experiment views and refreshes | Your champion, if there's no experiment results reader who watches recordings. They're the ones asking why a variant won. |
 | Experiment creator | Creates and launches experiments, views fewer results | Your second contact, since they set up the scanner and at least tangentially care about the results. |
-| Replay Vision user | Views Replay Vision observations | A second contact who already knows the energy drain in watching sessions manually |
+| Replay Vision user | Views Replay Vision observations | A second contact who already knows the energy drain of watching sessions manually |
 
 ### How to contact them
 
@@ -184,7 +185,7 @@ After a successful first pitch, use these as inspiration for how to start a conv
 | Does anyone pull recordings or session summaries into their own tools, like a notebook or an agent, to explain a result? | That's effectively a "Mom: We have a scanner at home" flow. Show them that the **Variant analysis** scout (mentioned below) does this inside PostHog, where the whole team can see it. |
 | Which of your experiment metrics come from backend events? | If they care about backend metrics, an important check is ensuring that those events carry `$session_id`, so each backend event links to a recording. |
 | If you could put one more number on each variant, next to the main metric, what would it be? | The behavior they care about, like frustration or confusion. Use it in the focus text for setting up the scanner! |
-| After an experiment is concluded, who asks why a variant won, and how are those metrics/changed communicated? | A wider audience that might care, such as design, leadership, or support. Scout reports can go to a Slack channel for them. |
+| After an experiment is concluded, who asks why a variant won, and how are those metrics/changes communicated? | A wider audience that might care, such as design, leadership, or support. Scout reports can go to a Slack channel for them. |
 | Did you ever ship a winner that later confused people or caused support tickets? | This helps drill why they need a scanner like this, as this is the cost of not knowing the "why". Maybe ask for the experiment name and use it in the pitch? |
 | Which experiment that runs now are you least sure about? | This would be the perfect trial experiment to run the scanner on. |
 
@@ -276,7 +277,7 @@ Do not create, edit, or delete anything. Do not run Replay Vision scans.
    - On the experiment's **Recordings** tab, select **Set up experiment scanner**. For a new experiment, turn on **Compare what users do in each variant** in the experiment form. Then:
       - Name each variant after what users see, like "Single-page checkout" and "Three-step checkout". The model uses those names to tell the variants apart.
       - Paste your focus text into **What to focus on**. It should name the changed screen and asks about behavior after it appears.
-      - Keep **Sample variants evenly** on, so even a 90/10 split then still gives the small variant enough sessions.
+      - Keep **Sample variants evenly** on, so even a 90/10 split still gives the small variant enough sessions.
       - Start with the default model at 5 credits per observation, it should be enough for a layout or flow change.
    - A new scanner turns on when you save it, and its [first sweep starts within minutes](/docs/replay-vision/creating-scanners#enabling-and-disabling).
       - From the experiment form, it turns on when the experiment launches. Turn the scanner off in the **Scanners** list right after it turns on. It then spends no credits before you test the focus text.
