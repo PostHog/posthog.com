@@ -9,11 +9,11 @@ availability:
 sourceId: Pendo
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Pendo connector syncs your Pendo product data – features, pages, guides, visitors, and accounts – into PostHog, so you can analyze product engagement alongside your other data.
+The Pendo connector syncs your Pendo product data – features, pages, guides, visitors, accounts, events, survey responses, product areas, and reports – into PostHog, so you can analyze product engagement alongside your other data.
 
 ## Prerequisites
 
@@ -32,7 +32,12 @@ When linking Pendo, you'll need:
 
 <SyncModes />
 
-Every Pendo table is full refresh only. Pendo's list endpoints expose no server-side timestamp filter, and the aggregation endpoint's time filters apply only to event sources, not the visitor and account metadata this source pulls.
+Most Pendo tables use full refresh, but event tables support incremental syncing:
+
+- **Incremental** – `events`, `page_events`, `feature_events`, `track_events` (by `day`), and `survey_responses` (by `lastUpdatedAt`) sync only new data on each run.
+- **Full refresh** – `features`, `pages`, `guides`, `track_types`, `reports`, `visitors`, `accounts`, and `product_areas` reload completely on each sync.
+
+Pendo's list endpoints expose no server-side timestamp filter, and the aggregation endpoint's time filters apply only to event sources – this is why metadata tables require full refresh.
 
 ## Configuration
 
