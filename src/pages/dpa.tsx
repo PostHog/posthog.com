@@ -822,7 +822,8 @@ function DpaGenerator() {
                         </p>
                         <p>
                             In the event of a conflict between this Agreement and the provisions of related agreements,
-                            including the Principal Agreement, the terms of this Agreement shall prevail.
+                            including the Principal Agreement, with respect to the Processing of Company Personal Data,
+                            the terms of this Agreement shall prevail.
                         </p>
                         <p>WHEREAS</p>
                         <p>(A) The Company acts as a Controller.</p>
@@ -1283,7 +1284,7 @@ function DpaGenerator() {
                             <p>
                                 10.7. In relation to Swiss Personal Data that is transferred outside of the Protected
                                 Area, the Parties agree that such transfers shall be subject to the EU Standard
-                                Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
+                                Contractual Clauses as compiled and completed in Sections 10.4 and 10.5 above, with the
                                 following amendments: (a) any references to the GDPR shall be interpreted as references
                                 to the FADP; (b) references to the EU and EU Member States shall be interpreted to mean
                                 Switzerland; (c) the competent supervisory authority according to Clause 13(a) and Part
