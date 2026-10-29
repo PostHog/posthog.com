@@ -369,15 +369,36 @@ config.beforeSend = [
 The `beforeSend` callbacks only apply to events captured via Dart APIs:
 
 - `Posthog().capture()` - custom events
+- `Posthog().captureAi()` - AI events
 - `Posthog().screen()` - screen events (event name is `$screen`)
 - `Posthog().captureException()` - exception events (event name is `$exception`)
 
-They do **not** intercept native-initiated events such as:
+`identify`, `alias`, `group` and `setPersonProperties` don't go through them, and neither do events the native SDK captures itself, such as:
 
 - Session replay events (`$snapshot`)
 - Application lifecycle events (`Application Opened`, etc.)
+- Crash events
+- `$feature_flag_called` events
 
-On iOS, macOS and Android, only the properties you pass are available in the callback. The native SDK adds system properties (like `$device_type` and `$session_id`) and registered super properties later. On Windows and Linux, the callback sees every property and option the SDK adds.
+Since version 6, the callbacks get the final event on every platform, with the system properties (like `$device_type` and `$session_id`) and registered super properties the SDK adds, and their changes are final. On iOS, macOS and Android, `PostHogEvent` also has the event's `uuid`, `distinctId` and `timestamp`.
+
+### Filtering native events
+
+On iOS, macOS and Android, use `PosthogFlutterPlugin.addBeforeSend` to change or drop the events the native SDK captures itself. Native hooks run on every event, in the order you add them, after the Dart callbacks. Return the event to send it, or `nil`/`null` to drop it. Add them before the SDK is set up.
+
+```swift
+// AppDelegate.swift, before GeneratedPluginRegistrant.register(with: self)
+PosthogFlutterPlugin.addBeforeSend { event in
+    event.event == "Application Backgrounded" ? nil : event
+}
+```
+
+```kotlin
+// MainApplication.onCreate
+PosthogFlutterPlugin.addBeforeSend { event ->
+    if (event.event == "Application Backgrounded") null else event
+}
+```
 
 ## Debug mode 
 
@@ -505,7 +526,7 @@ Other changes that come with capture v1, on every platform except web:
 - **Redirects:** the SDK only follows a 307 or 308 redirect to the same origin as `host`. Any other redirect drops the batch. If your proxy redirects capture requests to another host, point `host` at the final host.
 - **Event validation:** PostHog checks each event on its own and drops only the invalid ones, so the rest of the batch is delivered. It drops an event with an empty name, an empty distinct ID, or a name or distinct ID over 200 UTF-8 bytes. Version 5 shortened a long distinct ID and kept the event. If you identify users with a long ID, such as a JWT, shorten or hash it before you upgrade.
 - **`$lib` and `$lib_version`:** PostHog sets them from the SDK's `PostHog-Sdk-Info` request header. A value you set in properties or in `beforeSend` doesn't reach PostHog.
-- **Personal API keys:** on iOS, macOS and Android, a personal API key (`phx_...`) in `projectToken` disables the SDK at setup. Use your project token (`phc_...`).
+- **Personal API keys:** a personal API key (`phx_...`) in `projectToken` disables the SDK at setup. Use your project token (`phc_...`).
 
 ### Property precedence
 
@@ -517,10 +538,7 @@ On iOS, macOS, Android, Windows and Linux, an event's properties are merged in t
 
 In version 5, the SDK's own values won over the properties you registered or passed. In version 6, your value wins for that event. A registered `$session_id` now overrides the SDK's session ID, which can detach events from their session replay.
 
-`beforeSend` runs at a different point on each platform:
-
-- **Windows and Linux:** `beforeSend` runs after the merge, so it sees and can change every property and option the SDK adds.
-- **iOS, macOS and Android:** `beforeSend` runs in Dart before the native SDK adds its properties, so it sees only the properties you passed. See [Limitations](#limitations).
+`beforeSend` runs after the merge, so it sees and can change every property and option the SDK adds. In version 5, on iOS, macOS and Android, it ran before the native SDK added its properties and saw only the properties you passed.
 
 ### Event options
 
