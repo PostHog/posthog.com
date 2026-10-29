@@ -19,7 +19,7 @@ Treat every email we send from PostHog like code. At least one peer must review 
 For customer-facing comms, we recommend you also get a review from a member of the <SmallTeam slug="developer-marketing" />. You can do this in two ways:
 
 - **If you've already created the email,** ask for feedback in the #team-developer-marketing Slack channel.
-- **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the [Requests for Comments Internal repo](https://github.com/PostHog/requests-for-comments-internal), and assign a member of the team.
+- **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the [Requests for Comments Internal repo](https://github.com/PostHog/requests-for-comments-internal), and assign a member of the team. They'll figure it out from there. 
 
 ## Writing emails with AI
 
@@ -29,12 +29,12 @@ When you use an agent to edit email copy, ask it to use the [`no-slop` skill](ht
 
 ## Building emails in Workflows
 
-We usually send emails as HTML blocks. Use the [PostHog HTML Email Maker](https://us.posthog.com/project/2/skills/posthog-html-email-maker?owner_id=3301) skill to style your HTML blocks so they match the rest of our emails.
+We usually send emails as HTML blocks. Use the [PostHog HTML Email Maker](https://us.posthog.com/project/2/skills/posthog-html-email-maker?owner_id=3301) skill to style your HTML blocks so they match the rest of our emails. It works great if you just feed it the copy and image you want as raw text!
 
 All new broadcasts and automations should use these defaults:
 
-- **Messaging limit:** Send each user no more than one email every two days. Apply this limit to all campaigns and broadcasts, unless the message is urgent.
-- **UTM tracking:** Enable UTM tracking on all new broadcasts and automations, so we can measure what each email does.
+- **Messaging limit:** Enable the default messaging limit, which ensures each user gets no more than one email every two days. Apply this limit to all campaigns and broadcasts, unless the message is urgent.
+- **UTM tracking:** Enable UTM tracking on all new broadcasts and automations, so we can measure what each email does. We have setup default UTM parameters in PostHog that should be applied automatically.
 
 ## Addressing emails
 
@@ -44,15 +44,15 @@ We prefer emails to come from a named person where possible, so users can reply 
 
 Since we started moving to Workflows, Workflows has automatically paused some broadcasts for loud comms, such as SDK update notices. Those broadcasts targeted huge numbers of users, and many of the email addresses are no longer in use. If this keeps happening, it harms our [sending reputation](/docs/workflows/sending-reputation) and our emails end up in spam.
 
-In Customer.io, we targeted a segment of users who had logged in at least once in the last four months. This worked, but you can now use PostHog without ever logging in, for example through MCP. We never sent Customer.io the data to filter on those other signals. Workflows already has it.
 
-We now use the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, loading the toolbar, or creating a feature flag.
+We solve this using the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, loading the toolbar, or creating a feature flag.
 
 **Add this cohort to all broadcasts by default.**
 
 ## Before you send
 
 - **Send yourself a test.** Check it on mobile and in dark mode, click every link, and make sure every Liquid variable has a fallback.
+- **Get a review.** Again: we treat emails as code. 
 - **Pick the right message category.** Every email needs the correct category so unsubscribes work. Never label a marketing email as transactional or `Service updates` to get around opt-outs.
 - **Add alt text to every image.** Some email clients block images, so never put important information only in an image.
 
