@@ -42,8 +42,6 @@ export interface StackFramesProps {
     message: string
     /** Innermost frame first, the way the issue page prints it. */
     frames: StackFrame[]
-    /** Annotates the panel with a hoverable number. */
-    marker?: { n: number; label: string; gloss: string }
 }
 
 /** What the app puts behind the warning icon, quoted so the figure teaches the same words. */
@@ -110,7 +108,7 @@ function VendorIcon(): JSX.Element {
     )
 }
 
-export default function StackFrames({ type, message, frames, marker }: StackFramesProps): JSX.Element {
+export default function StackFrames({ type, message, frames }: StackFramesProps): JSX.Element {
     // One open frame at a time. The app allows several; the figure only ever needs to show one.
     const [openFrame, setOpenFrame] = useState<number | null>(null)
 
@@ -119,7 +117,6 @@ export default function StackFrames({ type, message, frames, marker }: StackFram
             <div className="border-b border-primary px-3 py-2">
                 <p className="m-0 flex items-center gap-1.5 text-[0.95em] font-bold leading-tight text-primary">
                     {type}
-                    {marker && <FigureMarker n={marker.n} label={marker.label} gloss={marker.gloss} />}
                 </p>
                 <p className="m-0 mt-0.5 text-[0.8em] leading-snug text-secondary">{message}</p>
             </div>

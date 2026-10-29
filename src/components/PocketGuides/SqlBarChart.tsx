@@ -24,7 +24,7 @@ export interface SqlBarChartProps {
 }
 
 const formatValue = (value: number, format: SqlBarChartProps['format']) =>
-    format === 'currency' ? `$${value.toLocaleString()}` : value.toLocaleString()
+    format === 'currency' ? `$${value.toLocaleString('en-US')}` : value.toLocaleString('en-US')
 
 export default function SqlBarChart({ rows, series, format = 'number' }: SqlBarChartProps): JSX.Element {
     const max = Math.max(...rows.map((row) => row.value))

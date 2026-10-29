@@ -20,7 +20,7 @@ pocketGuideCta:
 
 <DivergenceFigure
     n={1}
-    caption="What the scout saw: The fix merged at 10:30. In the 24 hours after, Trip details sessions held steady and the issue fired at nearly the rate it did in the 24 hours before."
+    caption="What the scout saw: The fix merged at 10:30. In the 72 hours after, Trip details sessions held steady and the issue fired at nearly the rate it did in the 72 hours before."
     markerAt={0.5}
     markerLabel="10:30 fix merged"
     series={[
@@ -44,13 +44,13 @@ pocketGuideCta:
     priority="P2"
     status="Ready"
     actionability="Actionable"
-    headline="A day after twig.com#4891 merged, the Trip details TypeError fired 296 times for 38 guests, against 312 times for 41 guests the day before"
+    headline="Three days after twig.com#4891 merged, the Trip details TypeError fired 296 times for 38 guests, against 312 times for 41 guests in the 72 hours before"
     report={{
-        title: 'Trip details TypeError still fires at its pre-fix rate a day after the fix merged',
+        title: 'Trip details TypeError still fires at its pre-fix rate three days after the fix merged',
         source: 'Scout · inbox validation',
         receivedAgo: '2h',
-        affected: '38 guests · 296 exceptions in 24 hours',
-        body: "Follow-up to the resolved report **Trip details fails after a guest books a stay**. Its fix, twig.com#4891, merged yesterday at 10:30 and passed the loaded host records to `readTripHost` when Trip details loads.\n\nIn the 24 hours after the merge, the issue fired 296 times for 38 guests. In the 24 hours before, it fired 312 times for 41 guests. Trip details sessions held steady across both windows.\n\nEvery stack trace since the merge reaches `readTripHost` from the **Try again** path, which still calls `readTripHost({}, stay.hostId)`. The pull request didn't change that path.",
+        affected: '38 guests · 296 exceptions in 72 hours',
+        body: "Follow-up to the resolved report **Trip details fails after a guest books a stay**. Its fix, twig.com#4891, merged three days ago at 10:30 and passed the loaded host records to `readTripHost` when Trip details loads.\n\nIn the 72 hours after the merge, the issue fired 296 times for 38 guests. In the 72 hours before, it fired 312 times for 41 guests. Trip details sessions held steady across both windows.\n\nEvery stack trace since the merge reaches `readTripHost` from the **Try again** path, which still calls `readTripHost({}, stay.hostId)`. The pull request didn't change that path.",
         suggestedAction: 'Pass the loaded host records on the **Try again** path too, so it calls `readTripHost(hosts, stay.hostId)` like the first load.',
         actionNote: 'An agent opens the pull request – you review and merge.',
     }}
@@ -66,7 +66,7 @@ The Inbox validation scout checks each fix once it has reached guests, and repor
 
 ## What the scout looks at
 
-Yesterday at `10:30` the engineers merged a fix for the Trip details `TypeError`. Today the issue still fires at about the rate it did before the merge, so the scout reports it <SeeFig n={1} />. When the rate fell hard and keeps falling, the fix is still rolling out, and the scout checks again later.
+Three days ago at 10:30, the engineers merged a fix for the Trip details `TypeError`. The issue still fires at about the rate it did before the merge, so the scout reports it <SeeFig n={1} />. When the rate fell hard and keeps falling, the fix is still rolling out, and the scout checks again later.
 
 ## The report in your inbox
 

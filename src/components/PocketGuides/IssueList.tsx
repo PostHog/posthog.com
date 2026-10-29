@@ -11,7 +11,7 @@ const JS_ICON = 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/c
 // the issue list. Volume is occurrences per 12 hours, oldest first, and sums to the occurrences.
 const issues = [
     {
-        message: 'Host "colette" not found for booking booking_1',
+        message: 'Host "colette" not found for booking booking_3',
         frame: 'readTripHost',
         source: 'src/trips/trip-details.ts',
         lastSeen: '4 minutes ago',

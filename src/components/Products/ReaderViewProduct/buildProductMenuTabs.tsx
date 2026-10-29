@@ -11,7 +11,7 @@ import {
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/PocketGuides/bookModel'
-import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
+import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
@@ -122,15 +122,9 @@ const LearnNav = ({
         wrap: fullTitles,
     }))
     const hub = volume?.learnHub
-    const isSelfDriving = (index: number) =>
-        Boolean(hub?.selfDrivingSection) && pages[index].section === hub?.selfDrivingSection
-    // Self-driving pages aren't chapters of the story, so they carry no number.
-    const scoutChapters = chapters
-        .filter((_, index) => isSelfDriving(index))
-        .map((chapter) => {
-            const page = pages.find((candidate) => learnChapterPath(guideBasePath, candidate) === chapter.url)
-            return { ...chapter, name: page?.shortTitle || page?.title || chapter.name }
-        })
+    const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
+    // Self-driving pages have no chapter number, so their names come through unnumbered.
+    const scoutChapters = chapters.filter((_, index) => isSelfDriving(index))
     const items = hub
         ? [
               { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },

@@ -8,20 +8,18 @@ import OSButton from 'components/OSButton'
 import { useAppWindows } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
-import { pocketGuideDestination, volumeById, type PocketGuideVolume } from '../../constants/pocketGuides'
+import {
+    isSelfDrivingPage,
+    pocketGuideDestination,
+    volumeById,
+    type PocketGuideVolume,
+} from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import Cover from './Cover'
 import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { useEntry } from './bookContext'
-import {
-    learnChapterPath,
-    learnChapterSlug,
-    normalizeUrl,
-    sectionPages,
-    useBookPages,
-    volumeIdFromUrl,
-} from './bookModel'
+import { learnChapterPath, learnChapterSlug, normalizeUrl, sectionPages, useBookPages } from './bookModel'
 import { isReaderWindowActive } from './learnTracking'
 
 interface LearnBodyNode {
@@ -121,17 +119,13 @@ function CoverWithChapters({ size }: { size?: 'small' | 'medium' }): JSX.Element
 
 /**
  * A chapter's `#` heading, with "Chapter 01" above it in the intro eyebrow's style. The number sits
- * outside the h1, so the heading and the page title stay the chapter's own title. Self-driving pages
- * are not chapters, so they get no number.
+ * outside the h1, so the heading and the page title stay the chapter's own title.
  */
 function ChapterHeading(props: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element {
-    const entry = useEntry()?.entry
-    const chapter = entry?.page
-    const selfDrivingSection = entry ? volumeById(volumeIdFromUrl(entry.url))?.learnHub?.selfDrivingSection : undefined
-    const isSelfDriving = Boolean(selfDrivingSection) && entry?.section === selfDrivingSection
+    const chapter = useEntry()?.entry.page
     return (
         <>
-            {chapter && !isSelfDriving ? (
+            {chapter ? (
                 <p className="not-prose m-0 mb-[7.5px] flex items-center gap-1.5 text-[15px] font-normal leading-[36px] text-primary">
                     <BookOpen className="size-4 shrink-0" strokeWidth={1.75} aria-hidden="true" />
                     Chapter {String(chapter).padStart(2, '0')}
@@ -251,7 +245,7 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
     }
 
     const coverVolume = entry.isFrontMatter ? volumeById(volumeId) : undefined
-    const chapters = pages.filter((page) => !page.isFrontMatter)
+    const chapters = pages.filter((page) => !page.isFrontMatter && !isSelfDrivingPage(volumeId, page))
     const firstChapter = chapters[0]
     const firstChapterPath = firstChapter ? learnChapterPath(basePath, firstChapter) : undefined
     const chapterPaths = new Set(chapters.map((page) => learnChapterPath(basePath, page)))

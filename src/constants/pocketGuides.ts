@@ -130,6 +130,12 @@ export function volumeById(id: string): PocketGuideVolume | undefined {
     return POCKET_GUIDE_VOLUMES.find((v) => v.id === id)
 }
 
+/** A page in the volume's Self-driving section (`learnHub.selfDrivingSection`), which sits after the story. */
+export function isSelfDrivingPage(volumeId: string, page: { section?: string | null }): boolean {
+    const section = volumeById(volumeId)?.learnHub?.selfDrivingSection
+    return Boolean(section) && page.section === section
+}
+
 /** SEO title for a chapter. The intro chapter shares the volume's title, so it reads "A pocket guide to <volume>". */
 export function pocketGuidePageTitle(volume: PocketGuideVolume, chapterTitle?: string): string {
     if (!chapterTitle || chapterTitle === volume.title) return `A pocket guide to ${volume.title}`

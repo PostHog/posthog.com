@@ -112,7 +112,7 @@ Don’t change my project without asking. If context is missing, ask for it.`,
                                 {prompt}
                             </SingleCodeBlock>
                         </div>
-                        <AgentTeachingActions prompt={prompt} volume={volume} />
+                        <AgentTeachingActions prompt={prompt} volume={volume} resource={resource} />
                     </section>
                 ))}
                 {children}

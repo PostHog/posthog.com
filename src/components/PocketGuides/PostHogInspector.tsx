@@ -247,6 +247,11 @@ function PropertyNode({
             <details open={open}>
                 <summary className="cursor-pointer select-none text-[#77529a]">
                     {name}{' '}
+                    {note && (
+                        <span className="mr-1 inline-flex align-middle">
+                            <FigureMarker n={note.n} label={note.label} gloss={note.gloss} visibility="always" />
+                        </span>
+                    )}
                     <span className="text-[#716c63]">
                         {Array.isArray(value) ? `[${children.length}]` : `{${children.length}}`}
                     </span>

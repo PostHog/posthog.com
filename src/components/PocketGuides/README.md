@@ -28,6 +28,7 @@ The rendering path is:
 | --- | --- |
 | Product Analytics | Overview at `/learn/product-analytics`; guide at `/learn/product-analytics/pocket-guide`; also `/agent-prompts-and-mcp` and `/live-playground` |
 | AI Observability, Session Replay, Feature Flags | Overview at `/learn/<product>`; guide at `/learn/<product>/pocket-guide` |
+| Error Tracking | Overview at `/learn/error-tracking`; guide at `/learn/error-tracking/pocket-guide`, with a Self-driving section; also `/agent-prompts-and-mcp` |
 | Self-driving | `/docs/self-driving/pocket-guide` |
 | Data Stack | Warehouse Learn tab at `/learn/warehouse`, which opens on the first "Ask a quick question" chapter; guide at `/learn/warehouse/pocket-guide` |
 
