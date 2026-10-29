@@ -264,3 +264,11 @@ Sharing externally isn't available yet, but you can request it in the notebook s
 ### Do notebooks support real-time multiplayer editing?
 
 No. Although other people can see and edit your notebooks, they can't edit them at the same time. We do conflict detection and warn you of potential conflicts when you are trying to save (overwrite or revert).
+
+### How do I see what changed since my last visit?
+
+When you return to a saved notebook that has been edited since your last visit, PostHog shows a dismissible notice at the top. Click **Review changes** to open a read-only comparison showing added and removed lines, with unchanged sections folded.
+
+The comparison baseline is fixed for your current visit, so new saves during your session don't interrupt your review.
+
+Change tracking uses your browser's local storage and doesn't sync across browsers. It isn't available for shared notebooks, templates, scratchpads, or canvases.
