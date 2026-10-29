@@ -23,7 +23,7 @@ hideAnchor: false
 - **[Session Replay](/docs/session-replay)** — Reproduce bugs from the user's actual perspective during rollout. When a user reports "the new feature is broken," you don't need to guess. Filter replays by feature flag variant and watch exactly what happened. Also useful for rollout validation: watch how real users interact with the new feature before expanding the rollout.
 - **[AI Evals](/docs/ai-evals)** — For products with AI features: detect quality regressions after prompt or model changes. Traditional error tracking won't catch a model that starts producing lower-quality output. Evals compare output quality before and after a change, catching regressions that look "fine" from an error rate perspective but degrade user experience.
 - **[self-driving](/docs/self-driving)** — Release engineering is where self-driving converts best, because the work is mostly maintenance: a regression after a deploy has a right answer, so an agent can investigate it and open a pull request. Scouts watch feature flags (including [stale ones](/docs/self-driving/scout-examples)), experiments, error tracking, and CI. Billed at $15 per pull request, first three each month free; reports are always free. ([How to pitch it](/handbook/growth/sales/how-to-pitch-self-driving))
-- **[PostHog Desktop](/docs/posthog-desktop)** *beta* — Where engineers review and merge the work self-driving proposes. Its [enricher](/docs/posthog-desktop/posthog-integration) parses the local codebase and annotates PostHog SDK calls inline with live data: what percentage a flag is rolled out to, whether it's stale, whether the experiment behind it is still running. For a team drowning in flags, that's the flag-hygiene feature LaunchDarkly charges for. ([Positioning](/handbook/marketing/positioning/desktop))
+- **[PostHog Desktop](/docs/self-driving)** *beta* — Where engineers review and merge the work self-driving proposes. Its [enricher](/docs/self-driving) parses the local codebase and annotates PostHog SDK calls inline with live data: what percentage a flag is rolled out to, whether it's stale, whether the experiment behind it is still running. For a team drowning in flags, that's the flag-hygiene feature LaunchDarkly charges for. ([Positioning](/handbook/marketing/positioning/desktop))
 
 ## Adoption path and expansion path
 
@@ -170,7 +170,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 | Flag management UX is simpler than LaunchDarkly's | Enterprise teams with hundreds of flags may want more organizational features | PostHog flags work well at scale. For very complex targeting, review the [multivariate flags](/docs/feature-flags/creating-feature-flags#multivariate-feature-flags) and [payloads](/docs/feature-flags/payloads) documentation. |
 | No built-in flag approval workflows | Some enterprise teams want PR-style review before a flag goes live | Use existing code review processes (flags are in code). PostHog [activity logs](/docs/settings/activity-logs) track changes. |
 | Choosing between Bayesian and frequentist | Teams arrive with a strong preference and expect you to have picked wrong | Not a limitation any more — we ship [both](/docs/experiments/statistics-frequentist), selectable per experiment, alongside [CUPED](/docs/experiments/cuped) variance reduction and [holdouts](/docs/experiments/holdouts). Ask which they use and match it. |
-| Stale flags accumulate in the codebase | Every flag-heavy team ends up with dead flags nobody dares delete | [Stale flag cleanup](/docs/feature-flags/cleaning-up-stale-flags) plus the PostHog Desktop [enricher](/docs/posthog-desktop/posthog-integration), which annotates flag calls in the editor with live rollout and staleness. There's also a scout that watches for them. |
+| Stale flags accumulate in the codebase | Every flag-heavy team ends up with dead flags nobody dares delete | [Stale flag cleanup](/docs/feature-flags/cleaning-up-stale-flags) plus the PostHog Desktop [enricher](/docs/self-driving), which annotates flag calls in the editor with live rollout and staleness. There's also a scout that watches for them. |
 
 ## Getting a customer started
 
@@ -193,7 +193,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 - [ ] Review experiment results and use them to make a ship/no-ship decision
 - [ ] Plan second experiment to establish the workflow as a team habit
 - [ ] Point out [frequentist vs Bayesian](/docs/experiments/statistics-frequentist) early if they have a stats opinion
-- [ ] For flag-heavy teams, install [PostHog Desktop](/docs/posthog-desktop) and show the enricher annotating their own flag calls with live rollout data
+- [ ] For flag-heavy teams, install [PostHog Desktop](/docs/self-driving) and show the enricher annotating their own flag calls with live rollout data
 
 ## Cross-sell pathways from this use case
 
@@ -215,7 +215,7 @@ Usually **Feature Flags**. Engineering team wants controlled rollouts. Common en
 - **Session Replay docs:** [Session Replay](/docs/session-replay)
 - **Experiment statistics:** [Frequentist](/docs/experiments/statistics-frequentist) · [Bayesian](/docs/experiments/statistics-bayesian) · [CUPED](/docs/experiments/cuped) · [Holdouts](/docs/experiments/holdouts) · [Warehouse metrics](/docs/experiments/data-warehouse)
 - **self-driving:** [How to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving) · [Docs](/docs/self-driving) · [Anatomy of a PR](/docs/self-driving/anatomy-of-a-pr)
-- **PostHog Desktop:** [Positioning](/handbook/marketing/positioning/desktop) · [Docs](/docs/posthog-desktop) · [Enricher](/docs/posthog-desktop/posthog-integration)
+- **PostHog Desktop:** [Positioning](/handbook/marketing/positioning/desktop) · [Docs](/docs/self-driving) · [Enricher](/docs/self-driving)
 - **Competitive battlecard:** *To be added: LaunchDarkly competitive positioning*
 
 ## Appendix: Company archetype considerations
