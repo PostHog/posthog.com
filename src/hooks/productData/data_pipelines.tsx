@@ -14,6 +14,7 @@ import {
     IconSparkles,
     IconCheckCircle,
 } from '@posthog/icons'
+import { HedgehogConstruction } from '@posthog/brand/hoggies'
 import { getTool } from '../../data/tools'
 import { applications, GetStarted, PricingIntro, topFeatures } from './data_pipelines/slides'
 import { dataWarehouse } from './data_warehouse'
@@ -29,6 +30,10 @@ const NO = false
 // Neither meter has paid-only product features, so the plans show platform features only.
 const sourcesBilling = { ...dataWarehouse, label: 'Sources', hideProductFeatures: true }
 const destinationsBilling = { ...realtimeDestinations, label: 'Destinations', hideProductFeatures: true }
+
+const HedgehogCarryingPipe = (props: React.ComponentProps<typeof HedgehogConstruction>) => (
+    <HedgehogConstruction variant="2" {...props} />
+)
 
 export const dataPipelines = {
     ...getTool('cdp'),
@@ -175,8 +180,8 @@ export const dataPipelines = {
         },
         // `mobileHog` renders on the Overview hero screenshot.
         mobileHog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/construction_hog_80a362973d.png',
-            alt: 'A hedgehog in a hard hat building a pipeline',
+            Component: HedgehogCarryingPipe,
+            alt: 'A hedgehog in a hard hat carrying a pipe',
         },
     },
     screenshots: {
