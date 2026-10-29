@@ -547,29 +547,20 @@ PostHog.setup(
 )
 ```
 
-You can also enable experimental screenshot mode instead of the default wireframe recording:
+Recordings are masked screenshots on Android and iOS. Screenshots show everything that isn't masked, including custom-drawn views, maps, and video, so make sure masking covers anything sensitive. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
 
-```kotlin
-sessionRecording = SessionRecordingConfig(
-    enabled = true,
-    screenshot = true,   // capture screenshots instead of wireframes
-    maskAllImages = true, // recommended when using screenshots
-)
-```
-
-> **Warning:** Screenshots may contain sensitive information. Make sure masking is configured appropriately before enabling screenshot mode.
+> **Note:** Version 0.11.0 removes the `screenshot` option, because the native Android and iOS 4.0 SDKs always record screenshots. Delete it from your `SessionRecordingConfig` when you upgrade. Earlier versions record wireframes unless `screenshot = true`.
 
 On Android, enable experimental mask-alignment verification to help preserve screenshot captures during pixel-only redraws, such as continuously animated content:
 
 ```kotlin
 sessionRecording = SessionRecordingConfig(
     enabled = true,
-    screenshot = true,
     verifyScreenshotMaskAlignment = true,
 )
 ```
 
-`verifyScreenshotMaskAlignment` defaults to `false` and only affects Android screenshot mode. It adds view-hierarchy walks during capture, so evaluate its performance in your app. Windows with a Compose root already use verification regardless of this flag; setting it to `false` doesn't disable verification for those windows. Other platforms ignore this option.
+`verifyScreenshotMaskAlignment` defaults to `false` and only affects Android. It adds view-hierarchy walks during capture, so evaluate its performance in your app. Windows with a Compose root already use verification regardless of this flag; setting it to `false` doesn't disable verification for those windows. Other platforms ignore this option.
 
 ## Opt out of data capture
 
@@ -705,10 +696,9 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | `maskAllImages` | `Boolean` | `true` | Masks all images. |
 | `captureNetworkTelemetry` | `Boolean` | `true` | Includes network requests in the recording. |
 | `captureLogs` | `Boolean` | `false` | Captures console and system logs (iOS and web). |
-| `screenshot` | `Boolean` | `false` | Uses screenshots instead of wireframes (experimental, Android and iOS). |
 | `captureLogcat` | `Boolean` | `true` | Captures Android logcat output (Android only). |
 | `debouncerDelayMs` | `Long` | `1000` | Touch event debounce delay in milliseconds (Android only). |
-| `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshot mode. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
+| `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshot captures. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
 
 ## Platform support
 
