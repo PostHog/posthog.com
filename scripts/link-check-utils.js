@@ -147,6 +147,7 @@ function importingPages(files) {
     }
     function pages(file, visited = new Set()) {
         const absolute = fs.realpathSync(file)
+        if (path.basename(absolute) === 'SKILL.md') return []
         if (visited.has(absolute)) return []
         visited.add(absolute)
         const relative = path.relative(process.cwd(), absolute)
@@ -168,7 +169,17 @@ function changedFiles(files, base) {
         ['diff', '--name-only', '--diff-filter=DR', base, 'HEAD', '--', 'contents/', 'src/pages/'],
         { encoding: 'utf8' }
     ).trim()
-    if (changed.has('vercel.json') || deleted) return files
+    const checkerChanged = [...changed].some(
+        (file) =>
+            /^scripts\/(?:[^/]*link[^/]*|seo-aeo-pr-check\/check\.js)$/.test(file) ||
+            [
+                '.github/workflows/internal-links-check.yml',
+                'package.json',
+                'pnpm-lock.yaml',
+                'src/constants/pocketGuides.ts',
+            ].includes(file)
+    )
+    if (changed.has('vercel.json') || deleted || checkerChanged) return files
     return files.filter((file) => changed.has(file.split(path.sep).join('/')))
 }
 

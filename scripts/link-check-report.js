@@ -41,7 +41,9 @@ function writeSummary(directory, summaryFile) {
         '## Internal link check',
         '',
         summary.complete
-            ? `Found ${value('brokenLinks')} broken page links and ${value('brokenAnchors')} broken anchors.`
+            ? `Found ${value('brokenLinks')} broken page or source links and ${value(
+                  'brokenAnchors'
+              )} broken content anchors.`
             : 'The link scan did not complete. Missing results are not a passing check.',
         '',
         `Checked ${value('markdownFiles')} content files and ${value('sourceFiles')} source files.`,

@@ -5,7 +5,7 @@ const assert = require('node:assert/strict')
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
-const { spawnSync } = require('child_process')
+const { spawnSync, execFileSync } = require('child_process')
 const { extractLinks, resolveUrl, importingPages, changedFiles } = require('./link-check-utils')
 const { processLink, extractAnchorsFromHtml } = require('./check-links-post-build')
 const sourceChecker = require('./check-src-links')
@@ -219,4 +219,103 @@ test('fallback rewrites do not loop or override generated files', () => {
     const fallback = [{ source: '/:path(.*)\\.md', destination: '/api/md-not-found', rewrite: true }]
     assert.equal(resolveUrl('/docs/page.md', null, fallback, () => true).url.pathname, '/docs/page.md')
     assert.equal(resolveUrl('/docs/page.md', null, fallback).url.pathname, '/api/md-not-found')
+})
+
+test('browser text directives do not become element IDs', (t) => {
+    const write = fixture(t)
+    const file = write('public/docs/guide/index.html', '<h1 id="actual">Guide</h1>')
+    const previous = process.cwd()
+    process.chdir(path.resolve(file, '../../../..'))
+    t.after(() => process.chdir(previous))
+    const check = (url) => processLink({ url }, 'contents/docs/guide.md', ['/docs/guide'], []).type
+    assert.equal(check('/docs/guide#:~:text=Guide'), 'valid')
+    assert.equal(check('/docs/guide#actual:~:text=Guide'), 'valid')
+    assert.equal(check('/docs/guide#missing:~:text=Guide'), 'broken_anchor')
+    assert.equal(check('/docs/guide#actual#invented'), 'broken_anchor')
+    assert.equal(check('/docs/guide#top'), 'valid')
+    assert.equal(check('/missing#:~:text=Guide'), 'broken')
+})
+
+test('non-page skill instructions are excluded while imported snippets are checked', (t) => {
+    const write = fixture(t)
+    const skill = write('contents/learn/test/SKILL.md', '[Local file](references/method.md)')
+    const snippet = write('contents/docs/_snippets/shared.mdx', '[Missing](#missing)')
+    const page = write('contents/docs/guide.mdx', 'import Shared from "./_snippets/shared.mdx"\n\n<Shared />')
+    write('public/docs/guide/index.html', '<h1 id="actual">Guide</h1>')
+    write('public/sitemap/sitemap-0.xml', '<urlset><url><loc>https://posthog.com/docs/guide</loc></url></urlset>')
+    write('vercel.json', '{}')
+    const cwd = path.resolve(page, '../../..')
+    const previous = process.cwd()
+    process.chdir(cwd)
+    t.after(() => process.chdir(previous))
+    assert.deepEqual(importingPages([skill, snippet, page])(skill), [])
+    const result = spawnSync(process.execPath, [cli, 'results'], { cwd, encoding: 'utf8' })
+    assert.equal(result.status, 1, result.stdout + result.stderr)
+    const report = JSON.parse(fs.readFileSync(path.join(cwd, 'results/link-check.json'), 'utf8'))
+    assert.equal(report.summary.markdownFiles, 2)
+    assert.equal(report.summary.brokenLinks, 0)
+    assert.equal(report.summary.brokenAnchors, 1)
+    assert.equal(report.brokenAnchors[0].page, 'https://posthog.com/docs/guide')
+})
+
+test('source links validate explicit destination anchors after redirects', (t) => {
+    const write = fixture(t)
+    const file = write(
+        'src/component.tsx',
+        [
+            '<a href="/docs/guide#actual" />',
+            '<a href="https://posthog.com/docs/guide#missing" />',
+            '<a href="/old#missing" />',
+            '<a href="/docs/guide#:~:text=Guide" />',
+            '<a href="#local" />',
+        ].join('\n')
+    )
+    write('public/docs/guide/index.html', '<h1 id="actual">Guide</h1>')
+    const previous = process.cwd()
+    process.chdir(path.resolve(file, '../..'))
+    t.after(() => process.chdir(previous))
+    const result = sourceChecker.checkLinks(
+        new Set(['/docs/guide']),
+        [{ source: '/old', destination: '/docs/guide' }],
+        [file]
+    )
+    assert.deepEqual([...result.brokenByUrl.keys()], ['/docs/guide#missing', '/old#missing'])
+    assert.equal(result.stats.totalLinks, 4)
+})
+
+test('checker-only changes scan all files while content-only changes stay scoped', (t) => {
+    const write = fixture(t)
+    const marker = write('marker', '')
+    const cwd = path.dirname(marker)
+    const git = (args, options = {}) => execFileSync('git', args, { cwd, encoding: 'utf8', ...options }).trim()
+    git(['init', '--quiet'])
+    const commit = (mark, parent, name, content) =>
+        [
+            'commit refs/heads/main',
+            `mark :${mark}`,
+            'committer Test <test@example.com> 1234567890 +0000',
+            'data 4',
+            'test',
+            ...(parent ? [`from :${parent}`] : []),
+            `M 100644 inline ${name}`,
+            `data ${Buffer.byteLength(content)}`,
+            content,
+            '',
+        ].join('\n')
+    git(['fast-import', '--quiet'], {
+        input:
+            commit(1, null, 'contents/docs/guide.md', 'Guide') +
+            commit(2, 1, 'scripts/link-check-utils.js', 'Checker') +
+            commit(3, 2, 'contents/docs/guide.md', 'Updated guide'),
+    })
+    git(['symbolic-ref', 'HEAD', 'refs/heads/main'])
+    const initial = git(['rev-parse', 'HEAD~2'])
+    const checker = git(['rev-parse', 'HEAD~1'])
+    const previous = process.cwd()
+    process.chdir(cwd)
+    t.after(() => process.chdir(previous))
+    const files = ['contents/docs/guide.md', 'contents/docs/other.md']
+    assert.deepEqual(changedFiles(files, checker), ['contents/docs/guide.md'])
+    git(['update-ref', 'refs/heads/main', checker])
+    assert.deepEqual(changedFiles(files, initial), files)
 })

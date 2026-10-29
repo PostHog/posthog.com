@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const ts = require('typescript')
 const { internalUrl, resolveUrl, changedFiles, cliOptions, builtUrlExists } = require('./link-check-utils')
+const { validateAnchor } = require('./check-links-post-build')
 
 const CONFIG = {
     SITEMAP_URL: 'https://posthog.com/sitemap/sitemap-0.xml',
@@ -164,8 +165,8 @@ function checkLinks(pages, redirectSources, files) {
             }
             const target = normalizeUrl(resolved.url.pathname)
             if (resolved.redirected) stats.redirectedLinks++
-            if (!resolved.error && builtUrlExists(target, pages)) continue
-            const base = normalizeUrl(url)
+            if (!resolved.error && builtUrlExists(target, pages) && validateAnchor(target, resolved.url.hash)) continue
+            const base = normalizeUrl(url) + internalUrl(url).hash
             if (!brokenByUrl.has(base)) {
                 brokenByUrl.set(base, [])
             }
@@ -241,7 +242,7 @@ function writeMarkdownReport(brokenByUrl, pages, resultsDir) {
         '',
         '## Instructions',
         '',
-        'You are fixing broken internal links in the posthog.com repository. These targets are absent from the built sitemap and static files after redirect resolution. Confirm live behavior before changing content. For each item:',
+        'You are fixing broken internal links in the posthog.com repository. These links have missing page targets or element anchors after redirect resolution. Confirm live behavior before changing content. For each item:',
         '',
         '1. Open every listed location and read the link in context.',
         '2. Pick the fix:',

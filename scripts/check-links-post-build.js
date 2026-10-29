@@ -244,16 +244,22 @@ function extractAnchorsFromHtml(htmlPath) {
 // ============================================================================
 
 // Check if anchor exists in HTML file
-function validateAnchor(url) {
-    const [baseUrl, anchor] = url.split('#')
+function validateAnchor(pathname, hash) {
+    // Browser directives are not element IDs. Decode only the ID before the directive.
+    let anchor = hash.replace(/^#/, '').split(':~:')[0]
+    try {
+        anchor = decodeURIComponent(anchor)
+    } catch {
+        /* Match malformed escapes literally. */
+    }
 
     // No anchor to validate
-    if (!anchor) {
+    if (!anchor || anchor.toLowerCase() === 'top') {
         return true
     }
 
     // Get the HTML file path and check if it exists
-    const htmlPath = getHtmlFilePath(baseUrl)
+    const htmlPath = getHtmlFilePath(pathname)
     if (!fs.existsSync(htmlPath)) {
         return false
     }
@@ -285,7 +291,7 @@ function findMarkdownFiles(dir) {
 
             if (stat.isDirectory()) {
                 walkDirectory(filePath)
-            } else if (file.endsWith('.md') || file.endsWith('.mdx')) {
+            } else if (file !== 'SKILL.md' && (file.endsWith('.md') || file.endsWith('.mdx'))) {
                 markdownFiles.push(filePath)
             }
         }
@@ -356,13 +362,7 @@ function processLink(link, file, pages, redirects) {
     if (error || !builtUrlExists(pathname, pages)) {
         return result('broken')
     }
-    let fragment = url.hash.slice(1)
-    try {
-        fragment = decodeURIComponent(fragment)
-    } catch {
-        /* Match malformed escapes literally. */
-    }
-    if (url.hash && !validateAnchor(pathname + '#' + fragment)) {
+    if (!validateAnchor(pathname, url.hash)) {
         return result('broken_anchor')
     }
     return { type: 'valid', redirected }
@@ -625,4 +625,12 @@ if (require.main === module) {
     }
 }
 
-module.exports = { processLink, extractInternalLinks, extractAnchorsFromHtml, getSitemapPages, checkLinks, main }
+module.exports = {
+    processLink,
+    extractInternalLinks,
+    extractAnchorsFromHtml,
+    validateAnchor,
+    getSitemapPages,
+    checkLinks,
+    main,
+}
