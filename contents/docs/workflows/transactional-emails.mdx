@@ -187,9 +187,9 @@ The older route, `POST /api/projects/@current/messaging_templates/:template_id/s
 
 The [Python SDK](/docs/libraries/python) from version 7.81.0 and the [Node.js SDK](/docs/libraries/node) from version 5.61.0 send transactional emails with `emails.send`.
 
-- **Key:** Set `secret_key` in Python or `secretKey` in Node.js to your project secret API key. The client still captures events with your project API key.
+- **Key:** Set `secret_key` in Python or `secretKey` in Node.js to your project secret API key. The client still captures events with your project token.
 - **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` in Python or `appHost` in Node.js to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
-- **Local evaluation:** The client also uses the secret key to [evaluate feature flags locally](/docs/feature-flags/local-evaluation). If you do that, give the key the **Feature flag** read scope too. In Node.js, if the client only sends email, set `enableLocalEvaluation: false`.
+- **Local evaluation:** The client also uses the secret key to [evaluate flags locally](/docs/feature-flags/local-evaluation). If you do that, give the key the **Feature flag** read scope too. In Node.js, if the client only sends email, set `enableLocalEvaluation: false`.
 - **Retries:** The client sends an idempotency key on each send, and retries network errors, rate limits, and a `503` up to two times with the same key. Pass `idempotency_key` or `idempotencyKey` to cover retries outside the call too, such as from a job queue.
 - **Errors:** In Python, a send that PostHog doesn't queue raises `EmailError`. In Node.js, `send` returns `{ data, error }` and doesn't throw. Both errors carry the `code` from the [errors table](#errors).
 
@@ -326,7 +326,7 @@ if (status?.status === "bounced") {
 
 </MultiLanguage>
 
-In Python, `get` returns an `EmailStatus`, with `created_at` and `status_at` as datetimes. It raises `EmailError` with the code `not_found` when the status isn't found. In Node.js, `get` returns `{ data, error }`.
+In Python, `get` returns an `EmailStatus`, with `created_at` and `status_at` as `datetime` objects. It raises `EmailError` with the code `not_found` when the status isn't found. In Node.js, `get` returns `{ data, error }`.
 
 ## How transactional emails behave
 
