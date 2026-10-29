@@ -3,7 +3,6 @@ title: How Juno uses PostHog self-driving PRs to make health tracking less tirin
 customer: Juno
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/juno_1920x1080_fe31f124d8.png
-ogImage: generated
 date: 2026-09-23
 seo:
   metaTitle: How Juno uses PostHog self-driving PRs to make health tracking less tiring

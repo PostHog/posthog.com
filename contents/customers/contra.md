@@ -3,7 +3,6 @@ title: How Contra used session replays to increase registrations by 30%
 customer: Contra
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Contra_1920x1080_a21dfccabd.png
-ogImage: generated
 date: 2023-03-06
 ---
 

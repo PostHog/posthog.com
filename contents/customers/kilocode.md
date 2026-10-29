@@ -3,7 +3,6 @@ title: How Kilo Code uses PostHog as the connective tissue behind a hyper-fast p
 customer: KiloCode
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/kilocode_customer_story_0e3f1f21b8.png
-ogImage: generated
 date: 2026-01-28
 ---
 

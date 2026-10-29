@@ -3,7 +3,6 @@ title: 'How Adauris tracks performance, tailors activation and grew traffic by 5
 customer: Adauris
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/adauris_1920x1080_740d0b6cc3.png
-ogImage: generated
 date: 2023-11-05
 ---
 

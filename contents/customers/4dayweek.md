@@ -3,7 +3,6 @@ title: How 4DayWeek increased conversion by 4% with one A/B experiment
 customer: 4DayWeek
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/4dayweek_1920x1080_47b801aa87.png
-ogImage: generated
 date: 2023-09-15
 ---
 

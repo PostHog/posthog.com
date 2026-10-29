@@ -3,7 +3,6 @@ title: How carVertical uses feature flags and analytics without autocapture
 customer: carVertical
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Carvertical_1920x1080_0ffc3f3392.png
-ogImage: generated
 date: 2023-12-01
 ---
 

@@ -3,7 +3,6 @@ title: Why AssemblyAI switched from Mixpanel to PostHog
 customer: AssemblyAI
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/assembly_ai_1920x1080_dd397a97d2.png
-ogImage: generated
 date: 2022-03-23
 ---
 

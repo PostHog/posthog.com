@@ -3,7 +3,6 @@ title: How Vendasta replaced Snowplow and cut onboarding drop-off by 50%
 customer: Vendasta
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Vendasta_1920x1080_812b44c417.png
-ogImage: generated
 date: 2022-03-07
 ---
 

@@ -3,7 +3,6 @@ title: How Juicebox tracks AI latency using PostHog and LangFuse
 customer: Juicebox
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Juicebox_1920x1080_4c51c2c5c8.png
-ogImage: generated
 date: 2024-05-24
 ---
 

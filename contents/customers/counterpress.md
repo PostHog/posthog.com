@@ -3,7 +3,6 @@ title: How CounterPress built a fully custom analytics product without hiring a 
 customer: CounterPress
 featuredImage: >-
    https://res.cloudinary.com/dmukukwp6/image/upload/Counterpress_1920x1080_d2712f4aa3.png
-ogImage: generated
 date: 2026-03-11
 ---
 [CounterPress](https://counterpress.media/), a publishing platform that helps sports journalists and creators get more value from small but highly engaged audiences, initially powered their customer analytics using PostHog’s Dashboard API. They simply created dashboards in PostHog and embedded them in their React app for users to view. 

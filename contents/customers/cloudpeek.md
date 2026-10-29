@@ -3,7 +3,6 @@ title: How CloudPeek cut debugging time by 10x with PostHog Logs and Error Track
 customer: CloudPeek
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/cloudpeek_1920x1080_5580a17db2.png
-ogImage: generated
 date: 2026-03-10
 ---
 

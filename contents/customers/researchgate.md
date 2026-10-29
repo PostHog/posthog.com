@@ -3,7 +3,6 @@ title: 'How ResearchGate tests product changes for over 25M users'
 customer: ResearchGate
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_1920x1080_040d47a06b.png
-ogImage: generated
 date: 2024-06-25
 ---
 

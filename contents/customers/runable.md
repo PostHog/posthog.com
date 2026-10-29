@@ -3,7 +3,6 @@ title: How Runable builds an agent for small business owners and tracks everythi
 customer: Runable
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/runable_1920x1080_1ad8796a7c.png
-ogImage: generated
 date: 2026-10-07
 ---
 

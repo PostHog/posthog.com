@@ -3,7 +3,6 @@ title: How Gankster leveled up retention with PostHog AI
 customer: Gankster
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Gankster_1920x1080_ec34bd07a3.png
-ogImage: generated
 date: 2025-08-21
 ---
 

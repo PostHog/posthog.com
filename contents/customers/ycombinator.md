@@ -3,7 +3,6 @@ title: How Y Combinator used PostHog experiments to boost engagement by 40%
 customer: Y Combinator
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/YC_1920x1080_4f7d68d93a.png
-ogImage: generated
 date: 2022-10-05
 ---
 

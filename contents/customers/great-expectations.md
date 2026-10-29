@@ -3,7 +3,6 @@ title: 'How Great Expectations uses PostHog to improve content strategy'
 customer: Great Expectations
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog_great_expectations_f90a29aa4d.jpg
-ogImage: generated
 date: 2024-10-05
 ---
 

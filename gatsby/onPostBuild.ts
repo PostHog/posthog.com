@@ -348,22 +348,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                 }
             }
-            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        featuredImage {
-                            publicURL
-                        }
-                        logo {
-                            publicURL
-                        }
-                        title
-                    }
-                }
-            }
             careers: allAshbyJobPosting(filter: { isListed: { eq: true } }) {
                 nodes {
                     title

@@ -2,7 +2,6 @@
 title: Why Creatify switched from Google Analytics to PostHog
 customer: Creatify
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/Creatify1920x1080_e1ebb64d7d.png
-ogImage: generated
 date: 2024-03-19
 ---
 

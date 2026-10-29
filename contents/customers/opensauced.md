@@ -3,7 +3,6 @@ title: How OpenSauced is moving to product-market fit with PostHog for Startups
 customer: OpenSauced
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Open_Sauced_1920x1080_058850d507.png
-ogImage: generated
 date: 2023-09-03
 ---
 
