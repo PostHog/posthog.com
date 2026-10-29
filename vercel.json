@@ -2283,6 +2283,16 @@
             "statusCode": 301
         },
         {
+            "source": "/group-analytics",
+            "destination": "/docs/product-analytics/group-analytics",
+            "statusCode": 301
+        },
+        {
+            "source": "/group-analytics/pricing",
+            "destination": "/docs/product-analytics/group-analytics",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/tutorials/b2b",
             "destination": "/tutorials/b2b"
         },
