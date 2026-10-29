@@ -14,6 +14,8 @@ Pass an output directory to save `link-check.json` or `src-link-check.json`. Bot
 
 The workflow keeps full logs in files. It reads counts from the JSON reports for the job summary and the existing Slack payload. Missing or invalid reports produce an incomplete result, with unknown counts. Slack HTTP failures fail the notification step. Full scan output is never copied into the process environment.
 
+The workflow fetches the exact PR base commit before it builds. A shallow checkout alone may not contain that commit. The full production build retries once for a network fetch failure; other build errors fail immediately. Both attempt logs are saved with the scan reports. A failed build still produces an incomplete summary.
+
 Weekly and manual runs check all content and source files. PR runs check added or modified content and source files against the built site. This prevents unrelated old findings from blocking each edit. Page removals, renames, redirect changes, and changes to the checker, its workflow, dependencies, or page URL mapping trigger a full scan. The scheduled full scan remains necessary to find incoming links to a heading changed elsewhere. PR runs do not send Slack notifications.
 
 The manual `save_results` input controls artifact upload. Reports are still written locally because the summary needs them. The `send_slack_notification` input controls manual Slack notifications.

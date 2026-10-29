@@ -40,6 +40,11 @@ jobs:
               uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
               with:
                   fetch-depth: 2
+            - name: Fetch PR base commit
+              if: ${{ github.event_name == 'pull_request' }}
+              env:
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+              run: git fetch --no-tags --depth=1 origin "$BASE_SHA"
             - name: Install pnpm
               uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
             - name: Setup Node.js
@@ -53,7 +58,22 @@ jobs:
               run: pnpm test:links
             - name: Build site
               id: build
-              run: pnpm build
+              run: |
+                  mkdir -p link-check-results
+                  for ATTEMPT in 1 2; do
+                    BUILD_LOG="link-check-results/build-$ATTEMPT.log"
+                    set +e
+                    pnpm build > "$BUILD_LOG" 2>&1
+                    EXIT_CODE=$?
+                    set -e
+                    tail -n 80 "$BUILD_LOG"
+                    if [ "$EXIT_CODE" -eq 0 ]; then exit 0; fi
+                    if [ "$ATTEMPT" -eq 2 ] || ! grep -Eq 'Fetch.onAborted|fetch failed|ECONNRESET|UND_ERR_SOCKET|ETIMEDOUT' "$BUILD_LOG"; then
+                      exit "$EXIT_CODE"
+                    fi
+                    echo "Transient fetch failure. Retrying the build once; the first attempt log is saved."
+                    sleep 10
+                  done
             - name: Check content links
               if: ${{ !cancelled() && steps.build.outcome == 'success' }}
               env:
