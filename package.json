@@ -58,7 +58,8 @@
         "format:docs": "git diff --name-only --diff-filter=AM \"*.mdx\" \"*.md\" | xargs node scripts/fix-mdx.js",
         "vale": "vale",
         "vale:staged": "git diff --cached --name-only --diff-filter=AM -- '*.md' '*.mdx' | xargs vale",
-        "vale:test": "vale .vale/test"
+        "vale:test": "vale .vale/test",
+        "test:links": "node --test scripts/link-check*.test.js"
     },
     "dependencies": {
         "@amcharts/amcharts5": "^5.13.6",
@@ -290,6 +291,7 @@
         "lint-staged": "^10.2.12",
         "markdownlint-cli2": "0.19.0",
         "node-gyp": "^12.2.0",
+        "path-to-regexp": "6.3.0",
         "postcss": "^8.4.14",
         "postinstall-postinstall": "^2.1.0",
         "prettier": "^2.1.0",

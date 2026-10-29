@@ -6,6 +6,15 @@ permissions:
 on:
     schedule:
         - cron: '0 11 * * 1' # Every Monday at 11am UTC
+    pull_request:
+        paths:
+            - 'contents/**'
+            - 'src/**'
+            - 'vercel.json'
+            - 'scripts/*link*'
+            - '.github/workflows/internal-links-check.yml'
+            - 'package.json'
+            - 'pnpm-lock.yaml'
     workflow_dispatch:
         inputs:
             save_results:
@@ -22,90 +31,70 @@ on:
 jobs:
     check-internal-links:
         runs-on: depot-ubuntu-latest-8
-
+        timeout-minutes: 45
         env:
             NODE_OPTIONS: '--max-old-space-size=16384 --expose-gc'
             GATSBY_CPU_COUNT: 1
-
         steps:
             - name: Checkout code
               uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-
+              with:
+                  fetch-depth: 2
             - name: Install pnpm
               uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
-
             - name: Setup Node.js
               uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
               with:
                   node-version: '22'
                   cache: 'pnpm'
-
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
-
+            - name: Test link checker
+              run: pnpm test:links
             - name: Build site
+              id: build
               run: pnpm build
-
-            - name: Check links (console only)
-              if: ${{ github.event_name == 'workflow_dispatch' && inputs.save_results == false }}
-              run: |
-                  set +e
-                  OUTPUT=$(node scripts/check-links-post-build.js 2>&1)
-                  EXIT_CODE=$?
-                  echo "$OUTPUT"
-                  echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
-                  echo "$OUTPUT" >> $GITHUB_ENV
-                  echo "EOF" >> $GITHUB_ENV
-                  exit $EXIT_CODE
-
-            - name: Check links (with file output)
-              if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false) }}
-              run: |
-                  set +e
-                  OUTPUT=$(node scripts/check-links-post-build.js link-check-results 2>&1)
-                  EXIT_CODE=$?
-                  echo "$OUTPUT"
-                  echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
-                  echo "$OUTPUT" >> $GITHUB_ENV
-                  echo "EOF" >> $GITHUB_ENV
-                  exit $EXIT_CODE
-
-            - name: Check source code links
-              if: always()
+            - name: Check content links
+              if: ${{ !cancelled() && steps.build.outcome == 'success' }}
               env:
-                  GH_EVENT_NAME: ${{ github.event_name }}
-                  INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
               run: |
+                  mkdir -p link-check-results
+                  ARGS=()
+                  if [ -n "$BASE_SHA" ]; then ARGS+=("--changed-from=$BASE_SHA"); fi
                   set +e
-                  if [ "$GH_EVENT_NAME" = "workflow_dispatch" ] && [ "$INPUT_SAVE_RESULTS" = "false" ]; then
-                    OUTPUT=$(node scripts/check-src-links.js 2>&1)
-                  else
-                    OUTPUT=$(node scripts/check-src-links.js link-check-results 2>&1)
-                  fi
+                  node scripts/check-links-post-build.js link-check-results "${ARGS[@]}" > link-check-results/content.log 2>&1
                   EXIT_CODE=$?
-                  echo "$OUTPUT"
-                  echo "SRC_LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
-                  echo "$OUTPUT" >> $GITHUB_ENV
-                  echo "EOF" >> $GITHUB_ENV
-                  exit $EXIT_CODE
-
+                  tail -n 60 link-check-results/content.log
+                  exit "$EXIT_CODE"
+            - name: Check source code links
+              if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+              env:
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+              run: |
+                  mkdir -p link-check-results
+                  ARGS=()
+                  if [ -n "$BASE_SHA" ]; then ARGS+=("--changed-from=$BASE_SHA"); fi
+                  set +e
+                  node scripts/check-src-links.js link-check-results "${ARGS[@]}" > link-check-results/source.log 2>&1
+                  EXIT_CODE=$?
+                  tail -n 60 link-check-results/source.log
+                  exit "$EXIT_CODE"
+            - name: Write link check summary
+              if: ${{ !cancelled() }}
+              run: node scripts/link-check-report.js link-check-results
             - name: Upload link check results
-              if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false)) }}
+              if: ${{ !cancelled() && (github.event_name != 'workflow_dispatch' || inputs.save_results != false) }}
               id: upload-results
               uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
                   name: link-check-results
-                  path: |
-                      link-check-results/*.json
-                      link-check-results/*.md
-                  if-no-files-found: warn
+                  path: link-check-results/
+                  if-no-files-found: error
                   retention-days: 30
-
             - name: Send Slack notification
-              if: always()
+              if: ${{ !cancelled() && github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.send_slack_notification != false) }}
               env:
-                  INPUT_SEND_SLACK: ${{ inputs.send_slack_notification }}
-                  INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
                   GH_REPOSITORY: ${{ github.repository }}
                   GH_RUN_ID: ${{ github.run_id }}
                   GH_JOB_STATUS: ${{ job.status }}
@@ -113,119 +102,5 @@ jobs:
                   GH_ACTOR: ${{ github.actor }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_BROKEN_WEBSITE_INTERNAL_LINKS }}
                   ARTIFACT_ID: ${{ steps.upload-results.outputs.artifact-id }}
-              run: |
-                  # Default to true for scheduled runs, use input value for manual runs
-                  SEND_SLACK="$INPUT_SEND_SLACK"
-                  if [ "$SEND_SLACK" = "" ]; then SEND_SLACK="true"; fi
-
-                  if [ "$SEND_SLACK" = "true" ] && [ -n "$SLACK_WEBHOOK" ]; then
-                    WORKFLOW_URL="https://github.com/$GH_REPOSITORY/actions/runs/$GH_RUN_ID"
-
-                    if [ "$GH_JOB_STATUS" = "success" ]; then
-                      COLOR="good"
-                      EMOJI=":white_check_mark:"
-                      STATUS="completed successfully"
-                    else
-                      COLOR="danger"
-                      EMOJI=":x:"
-                      STATUS="failed"
-                    fi
-
-                    # Set triggered_by based on event type
-                    if [ "$GH_EVENT_NAME" = "workflow_dispatch" ]; then
-                      TRIGGERED_BY="manually run by $GH_ACTOR"
-                    elif [ "$GH_EVENT_NAME" = "schedule" ]; then
-                      TRIGGERED_BY="Triggered via schedule"
-                    else
-                      TRIGGERED_BY="$GH_ACTOR"
-                    fi
-
-                    # Extract statistics from the environment variable (suppress extra output)
-                    if [ -n "$LINK_CHECK_OUTPUT" ]; then
-                      MARKDOWN_FILES=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Scanned [0-9]* markdown files" | grep -o "[0-9]*" | head -1 || echo "0")
-                      TOTAL_INTERNAL_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Processed [0-9]* internal links" | grep -o "[0-9]*" | head -1 || echo "0")
-                      EXCLUDED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* excluded links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
-                      REDIRECTED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* redirected links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
-                      BROKEN_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken links" | grep -o "[0-9]*" | head -1 || echo "0")
-                      BROKEN_ANCHORS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken anchor links" | grep -o "[0-9]*" | head -1 || echo "0")
-                    else
-                      MARKDOWN_FILES="0"
-                      TOTAL_INTERNAL_LINKS="0"
-                      EXCLUDED_LINKS="0"
-                      REDIRECTED_LINKS="0"
-                      BROKEN_LINKS="0"
-                      BROKEN_ANCHORS="0"
-                    fi
-
-                    if [ -n "$SRC_LINK_CHECK_OUTPUT" ]; then
-                      SRC_LINKS=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Processed [0-9]* internal links" | grep -o "[0-9]*" | head -1 || echo "0")
-                      SRC_EXCLUDED=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* excluded links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
-                      SRC_REDIRECTED=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* redirected links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
-                      SRC_BROKEN=$(echo "$SRC_LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken links" | grep -o "[0-9]*" | head -1 || echo "0")
-                    else
-                      SRC_LINKS="0"
-                      SRC_EXCLUDED="0"
-                      SRC_REDIRECTED="0"
-                      SRC_BROKEN="0"
-                    fi
-
-                    TOTAL_INTERNAL_LINKS=$(( ${TOTAL_INTERNAL_LINKS:-0} + ${SRC_LINKS:-0} ))
-                    EXCLUDED_LINKS=$(( ${EXCLUDED_LINKS:-0} + ${SRC_EXCLUDED:-0} ))
-                    REDIRECTED_LINKS=$(( ${REDIRECTED_LINKS:-0} + ${SRC_REDIRECTED:-0} ))
-                    BROKEN_LINKS=$(( ${BROKEN_LINKS:-0} + ${SRC_BROKEN:-0} ))
-
-                    # Prepare variables for Slack payload
-                    # Default to true for scheduled runs, use input value for manual runs
-                    SAVE_RESULTS="$INPUT_SAVE_RESULTS"
-                    if [ "$SAVE_RESULTS" = "" ]; then SAVE_RESULTS="true"; fi
-
-                    RESULTS_DOWNLOAD=""
-                    if [ "$SAVE_RESULTS" = "true" ]; then
-                      if [ -n "$ARTIFACT_ID" ]; then
-                        RESULTS_DOWNLOAD="https://github.com/$GH_REPOSITORY/actions/runs/$GH_RUN_ID/artifacts/$ARTIFACT_ID"
-                      else
-                        RESULTS_DOWNLOAD="$WORKFLOW_URL"
-                      fi
-                    fi
-
-                    curl -s -X POST "$SLACK_WEBHOOK" \
-                      -H "Content-Type: application/json" \
-                      -d "{
-                        \"status\": \"$STATUS\",
-                        \"emoji\": \"$EMOJI\",
-                        \"repository\": \"$GH_REPOSITORY\",
-                        \"triggered_by\": \"$TRIGGERED_BY\",
-                        \"workflow_url\": \"$WORKFLOW_URL\",
-                        \"markdown_files\": \"$MARKDOWN_FILES\",
-                        \"links_checked\": \"$TOTAL_INTERNAL_LINKS\",
-                        \"excluded_links\": \"$EXCLUDED_LINKS\",
-                        \"redirected_links\": \"$REDIRECTED_LINKS\",
-                        \"broken_links\": \"$BROKEN_LINKS\",
-                        \"broken_anchors\": \"$BROKEN_ANCHORS\",
-                        \"results_download\": \"$RESULTS_DOWNLOAD\",
-                        \"save_results\": \"$SAVE_RESULTS\"
-                      }" > /dev/null 2>&1
-
-                    echo "✅ Slack notification sent successfully"
-                  else
-                    if [ "$SEND_SLACK" = "false" ]; then
-                      echo "Slack notifications disabled by user input"
-                    else
-                      echo "SLACK_LINKS_CHECK_WEBHOOK not configured, skipping Slack notification"
-                    fi
-                  fi
-
-            - name: Report results
-              if: always()
-              env:
-                  INPUT_SAVE_RESULTS: ${{ inputs.save_results }}
-              run: |
-                  # Default to true for scheduled runs, use input value for manual runs
-                  SAVE_RESULTS="$INPUT_SAVE_RESULTS"
-                  if [ "$SAVE_RESULTS" = "" ]; then SAVE_RESULTS="true"; fi
-
-                  echo "Link check completed!"
-                  echo "Check the job output above for detailed results."
-                  if [ "$SAVE_RESULTS" = "true" ]; then
-                    echo "Results files have been uploaded as artifacts."
-                  fi
+                  SAVE_RESULTS: ${{ inputs.save_results }}
+              run: node scripts/link-check-report.js link-check-results --notify
