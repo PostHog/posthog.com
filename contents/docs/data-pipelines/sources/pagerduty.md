@@ -15,7 +15,7 @@ The PagerDuty connector pulls your PagerDuty incident and on-call data into the 
 
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click **+ New source** and then click **Link** next to PagerDuty.
-3. You need a PagerDuty REST API key. In your PagerDuty account, go to **Integrations → API Access Keys** and create a key, selecting the **Read-only** option — that's all this source needs.
+3. You need a PagerDuty REST API key. In your PagerDuty account, go to **Integrations → API Access Keys** and create a key, selecting the **Read-only** option – that's all this source needs.
 4. Back in PostHog, enter the key in the `API key` field and click **Next**.
 5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
 
