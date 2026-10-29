@@ -6346,7 +6346,7 @@
         },
         {
             "source": "/manual/trends",
-            "destination": "/docs/product-analytics/trends"
+            "destination": "/docs/product-analytics/trends/overview"
         },
         {
             "source": "/docs/cdp/url-query:ext(\\.md)?",
