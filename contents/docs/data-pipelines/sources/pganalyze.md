@@ -17,7 +17,7 @@ To link pganalyze:
 
 2. Click **+ New source** and then click **Link** next to pganalyze.
 
-3. Enter your pganalyze API key. You can generate a read-only key from your [pganalyze API keys settings](https://app.pganalyze.com/settings/api-keys).
+3. Enter your pganalyze API key. Generate a read-only key from your organization's **Settings** > **API Access** page, as described in the [pganalyze API key guide](https://pganalyze.com/docs/api/create-api-key).
 
 4. Enter your organization slug. This is the slug visible in your pganalyze URL (e.g., `https://app.pganalyze.com/organizations/your-org-slug`).
 
