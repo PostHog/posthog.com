@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/session-recording-performance/session-recording.jpg
 featuredImageType: full
+ogImage: generated
 category: Engineering
 ---
 

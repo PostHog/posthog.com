@@ -9,6 +9,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/slack_app_blog_post_da4d458870.png
 featuredImageType: full
+ogImage: generated
 category: Blog
 tags:
   - Product

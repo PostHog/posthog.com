@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/mykonoshackathon_979cf7bec6.jpeg
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
   - Offsites

@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Frame_144170_14616c41e1.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Using PostHog
   - User research

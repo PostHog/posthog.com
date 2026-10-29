@@ -288,6 +288,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         title
+                        ogImage
                         featuredImage {
                             publicURL
                         }

@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1711365816/posthog.com/contents/images/blog/risotto-startup.jpg
 featuredImageType: full
+ogImage: generated
 category: Startups
 ---
 

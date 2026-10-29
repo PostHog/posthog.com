@@ -3,6 +3,7 @@ title: Why Significa switched from Plausible to PostHog
 customer: Significa
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Significa_1920x1080_7d226dd4ec.png
+ogImage: generated
 date: 2024-03-20
 ---
 

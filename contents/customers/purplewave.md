@@ -3,6 +3,7 @@ title: How Purplewave reached a 25% response rate with PostHog surveys
 customer: Purplewave
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Purple_Wave_1920x1080_9c4471a574.png
+ogImage: generated
 date: 2023-09-15
 ---
 

@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/logs_ga_cover_84292178a1.jpg
 featuredImageType: full
+ogImage: generated
 category: Product
 tags:
     - Logs

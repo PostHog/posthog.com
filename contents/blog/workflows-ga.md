@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/workflows_terminator_blog_3853c8567f.jpg
 featuredImageType: full
+ogImage: generated
 category: Product
 tags:
     - Workflows

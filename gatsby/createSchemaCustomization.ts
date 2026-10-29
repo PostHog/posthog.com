@@ -213,6 +213,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      # "generated" draws the post title onto the featured image for the social card.
+      # Absent: the featured image is the social card.
+      ogImage: String
       sourceId: String
     }
     type TeamData {

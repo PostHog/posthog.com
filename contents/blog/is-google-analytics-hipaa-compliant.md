@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hipaa-compliant-product-analytics.png
 featuredImageType: full
+ogImage: generated
 author:
   - andy-vandervell
 category: General

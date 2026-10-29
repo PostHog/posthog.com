@@ -2,6 +2,7 @@
 date: "2026-05-07"
 title: "4,063 errors closed without a human opening PostHog – here's what we learned"
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/Template_cover_14_0da4d45933.jpg
+ogImage: generated
 author:
   - sara-miteva
 rootPage: /blog

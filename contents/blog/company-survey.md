@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog_survey_v1_be1f1494d7.jpg
 featuredImageType: full
+ogImage: generated
 tags:
   - Culture
   - Inside PostHog

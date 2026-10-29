@@ -3,6 +3,7 @@ title: How RayFit uses PostHog AI to make all their data accessible
 customer: RayFit
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Ray_1920x1080_8de20167d1.png
+ogImage: generated
 date: 2025-11-24
 ---
 

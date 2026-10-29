@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/marketing_hiring_fbb1d110d0.png
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
   - Hiring

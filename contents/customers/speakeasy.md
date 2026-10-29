@@ -3,6 +3,7 @@ title: How Speakeasy manages features and developer relations using PostHog
 customer: Speakeasy
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Speakeasy_1920x1080_b3d567f7e7.png
+ogImage: generated
 date: 2023-08-31
 ---
 ​

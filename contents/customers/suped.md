@@ -3,6 +3,7 @@ title: How Suped is consolidating product data and email automation with PostHog
 customer: Suped
 featuredImage: >-
    https://res.cloudinary.com/dmukukwp6/image/upload/Suped_1920x1080_ca0a54b6eb.png
+ogImage: generated
 date: 2026-03-03
 ---
 

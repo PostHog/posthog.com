@@ -7,6 +7,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/take_my_money_11433edb48.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
   - Running the company

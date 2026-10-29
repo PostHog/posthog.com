@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hacktoberfest/hacktoberfest.png
+ogImage: generated
 category: Engineering
 tags:
   - Open source

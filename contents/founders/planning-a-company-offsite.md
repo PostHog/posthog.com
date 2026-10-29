@@ -4,6 +4,7 @@ title: How to plan a killer company offsite in just 8 weeks
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/planning-a-company-offsite/planning-offsite.jpeg
 featuredImageType: full
+ogImage: generated
 author:
   - grace-mckenzie
 tags:

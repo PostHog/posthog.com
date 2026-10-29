@@ -304,8 +304,9 @@ seo: {
 -   `rootPage`: necessary for listing all blog posts on /blog. should always be set to `/blog`
 -   `author`: the author(s) of the post. correlates to your handle located in /src/data/authors.json
 -   `featuredVideo`: the iframe src of the video that appears at the top of the post. replaces the featured image on post pages.
--   `featuredImage`: the Cloudinary URL of the image that appears at the top of the post and on the blog listing page
+-   `featuredImage`: the Cloudinary URL of the image that appears at the top of the post, on the blog listing page, and as the Open Graph image
 -   `featuredImageType`: `standard` | `full` - determines the width of the featured image on the blog post
+-   `ogImage`: set to `generated` when the featured image has no headline, so the social card draws the title, author, and wordmark on top of it
 -   `category`: the broader category the post belongs to. one of the following:
     -   <CategoryData />
 -   `tags`: the more specific tag(s) the post belongs to. an array containing any number of the following:

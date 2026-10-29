@@ -9,6 +9,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/is-ga-illegal-microsite.png
+ogImage: generated
 author:
   - cory-watilo
 category: Inside PostHog

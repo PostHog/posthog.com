@@ -3,6 +3,7 @@ title: How Groove uses A/B testing and surveys to test new pricing models
 customer: Groove
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/groove_4f9d69e0c9.png
+ogImage: generated
 date: 2023-09-15
 ---
 

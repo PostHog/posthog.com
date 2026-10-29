@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/non-coders-thoughts/non-coders-thoughts.jpg
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 ---
 

@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Film_Noir_Hog_Evals_beta_announcement_blog_95685493eb.png
 featuredImageType: full
+ogImage: generated
 category: PostHog news
 tags:
   - Product updates

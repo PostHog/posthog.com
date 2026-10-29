@@ -3,6 +3,7 @@ title: How Lovable builds better agents with AI Observability and experimentatio
 customer: Lovable
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Lovable_1920x1080_57294dd040.png
+ogImage: generated
 date: 2025-08-19
 ---
 

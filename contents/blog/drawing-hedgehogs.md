@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/blog-hedgehog-design.png
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
   - Marketing

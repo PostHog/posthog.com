@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/413293711_2ad62f5e_8fca_44cf_b73a_0848f9537a56_3e39fca48c.jpg
 featuredImageType: full
+ogImage: generated
 category: Startups
 ---
 The irony of going viral is that everybody wants it, but nobody’s ready for it. 
