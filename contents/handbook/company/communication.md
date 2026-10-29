@@ -39,7 +39,7 @@ We have two repos to centralize and document private internal communication. The
 
 ### Company Internal
 
-Repository can be found in <PrivateLink url="https://github.com/PostHog/company-internal">https://github.com/PostHog/company-internal</PrivateLink>
+Repository can be found in <PrivateLink url="https://github.com/PostHog/company-internal">https&#58;//github.com/PostHog/company-internal</PrivateLink>
 
 Documents any company-wide information that can't be shared publicly within People, Ops, Legal, Finance or Strategy.
 
@@ -67,7 +67,7 @@ For company-related issues that _can_ be discussed publicly, these should go in 
 
 ### Product Internal
 
-Repository can be found in <PrivateLink url="https://github.com/PostHog/product-internal">https://github.com/PostHog/product-internal</PrivateLink>
+Repository can be found in <PrivateLink url="https://github.com/PostHog/product-internal">https&#58;//github.com/PostHog/product-internal</PrivateLink>
 
 Contains internal information related to the PostHog product. Documents any non-public information (as established in these guidelines) that specifically relates to engineering, product, growth or design.
 

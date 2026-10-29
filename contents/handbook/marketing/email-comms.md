@@ -60,7 +60,7 @@ If you're sending a launch email (alpha, beta, GA), it's helpful to add an annot
 
 When we ask users to share feedback through email, it should either link to beta-feedback@posthog.com, the [support modal](http://app.posthog.com/home#supportModal), or to ourselves personally. Never hey@posthog.com.
 
-Doing this lets us filter out the noise for everyone else while still giving good visibility on meaningful feedback internally. If a user sends you feedback, you should share that with the relevant product team or in <PrivateLink url="https://posthog.slack.com/archives/C011L071P8U">https://posthog.slack.com/archives/C011L071P8U</PrivateLink>
+Doing this lets us filter out the noise for everyone else while still giving good visibility on meaningful feedback internally. If a user sends you feedback, you should share that with the relevant product team or in <PrivateLink url="https://posthog.slack.com/archives/C011L071P8U">https&#58;//posthog.slack.com/archives/C011L071P8U</PrivateLink>
 
 >When adding yourself as a send-from address in Customer.io, be sure to edit the display name to '[your name] **from PostHog**'.
 
