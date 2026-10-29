@@ -1,0 +1,23 @@
+owner: wizard-and-docs
+tags: [install, kmp]
+status: draft
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Kotlin Multiplatform app from a
+          one-line request? The prompt names only the stack; the agent gets no docs, so
+          docs-read shows which pages it finds on its own.
+      codebase_to_test: kmp-app
+      prompt: >-
+          Set up PostHog in the Kotlin Multiplatform app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  The shared module's build.gradle.kts in {folder}/ adds
+                  com.posthog:posthog-kmp to the commonMain dependencies.
+              initialized: >-
+                  The app calls PostHog.setup() once, early in its lifecycle, with
+                  PostHogConfig(apiKey = <project token>, host = <PostHog host>) and a
+                  PostHogContext. Cite the file and line(s).

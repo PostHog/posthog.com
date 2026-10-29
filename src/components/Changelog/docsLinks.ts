@@ -3,12 +3,12 @@
 // uncategorized, community) are intentionally left out.
 export const CHANGELOG_TOPIC_DOCS: Record<string, string> = {
     api: '/docs/api',
-    apps: '/docs/cdp',
-    'batch-exports': '/docs/cdp/batch-exports',
-    cdp: '/docs/cdp',
+    apps: '/docs/data-pipelines',
+    'batch-exports': '/docs/data-pipelines/batch-exports',
+    cdp: '/docs/data-pipelines',
     cohorts: '/docs/data/cohorts',
     dashboards: '/docs/product-analytics/dashboards',
-    'data-pipelines': '/docs/cdp',
+    'data-pipelines': '/docs/data-pipelines',
     'data-warehouse': '/docs/data-warehouse',
     desktop: '/docs/posthog-desktop',
     endpoints: '/docs/endpoints',
@@ -37,7 +37,7 @@ export const CHANGELOG_TOPIC_DOCS: Record<string, string> = {
     slack: '/docs/slack',
     surveys: '/docs/surveys',
     toolbar: '/docs/toolbar',
-    trends: '/docs/product-analytics/trends',
+    trends: '/docs/product-analytics/trends/overview',
     'web-analytics': '/docs/web-analytics',
     workflows: '/docs/workflows',
 }

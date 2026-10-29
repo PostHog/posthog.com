@@ -66,6 +66,7 @@ Approvals currently support gating the following actions:
 | Resource      | Gateable actions                                                      |
 | ------------- | --------------------------------------------------------------------- |
 | Feature flags | Enable, disable, change rollout percentage, change release conditions |
+| Experiments   | Launch, pause, change rollout percentage or variant split             |
 
 More resource types and actions are coming soon. If you need approval gates for other actions, [let us know](https://posthog.com/questions).
 
@@ -82,6 +83,30 @@ An **Update feature flag** policy requires approval when someone changes a flag'
 Renaming or describing a condition set doesn't need approval. Saving a flag without changing its conditions doesn't create a change request.
 
 Release condition changes need approval only on flags that no other product manages. A flag that an experiment, survey, product tour, or early access feature created needs approval for rollout percentage changes only, because those products update its conditions themselves.
+
+### Experiment policies
+
+Experiments have approval policies of their own. Each policy applies to the flags of one kind:
+
+| Flag | Policies that apply |
+| ---- | ------------------- |
+| A flag that no other product manages | **Enable feature flag**, **Disable feature flag**, **Update feature flag** |
+| A flag that an experiment manages | **Launch experiment**, **Pause experiment**, **Update experiment** |
+| A flag that a survey, product tour, or early access feature manages | None |
+
+- **Launch experiment** requires approval to launch or resume an experiment, which turns its flag on.
+- **Pause experiment** requires approval to pause an experiment, which turns its flag off.
+- **Update experiment** requires approval to change an experiment's rollout percentage, variant split, or holdout exclusion, including shipping a winning variant. Its [conditions](#conditions) work the same way as on **Update feature flag**.
+
+An experiment policy applies wherever the change is made, on the experiment or on its flag's page. Changes to an experiment's release conditions don't need approval, and neither do freezing exposure or resetting an experiment, because the experiment updates those conditions itself.
+
+A few changes are refused instead of creating a change request:
+
+- **Creating an experiment that is already running** while **Launch experiment** requires approval. Create the experiment as a draft, then launch it to request approval.
+- **Attaching a flag that is already on to an experiment** while **Launch experiment** requires approval. Turn the flag off first, or create a new one.
+- **Attaching a flag to an experiment, survey, or early access feature** when its new policies would let through a change that its current policies stop. Pick a different flag, or create a new one.
+
+Experiment policies are rolling out to organizations gradually. Until your organization has them, feature flag policies also cover experiment flags, and the policies page doesn't list experiment policies. When your organization gets them, its experiment policies start as copies of its feature flag policies.
 
 ## Approval policies
 

@@ -39,8 +39,15 @@ Click **Fix with AI** on the issue details page. You choose two things:
     classes="rounded"
 />
 
+## Self-driving reports
+
+When recurring exceptions are grouped into a [report](/docs/self-driving/reports) and a code fix is possible, [Self-driving](/docs/self-driving) opens a draft pull request. Reports queue up in the [Self-driving inbox](https://app.posthog.com/inbox), with the highest-priority reports first, and nothing ships until you merge. To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+- **Read the report** – the recurring issue behind it, with the related stack traces, [session replays](/docs/session-replay), and events attached.
+- **Review the draft pull request** – see the files it changed, the diff, and its checks before you merge.
+- **Hand it to an agent** – start a discussion to investigate an issue, or start a task to draft a fix.
+
 ## Related
 
 - Learn how exceptions become issues in [Issues and exceptions](/docs/error-tracking/issues-and-exceptions).
 - Debug from your editor or terminal over [MCP](/docs/error-tracking/surfaces/mcp).
-- Review and merge Self-driving fixes in [PostHog Desktop](/docs/error-tracking/surfaces/desktop).

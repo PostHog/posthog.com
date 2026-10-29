@@ -22,6 +22,10 @@ import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-re
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="React Native" />
+
 ## Installation
 
 import ReactNativeInstall from '../../integrate/_snippets/install-react-native.mdx'
@@ -312,7 +316,7 @@ We strongly recommend reading our docs on [alias](/docs/product-analytics/identi
 
 ## Setting person properties
 
-Person properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more.
+Person properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends/filters) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more.
 
 To set a user's properties, include the `$set` or `$set_once` property when capturing any event:
 

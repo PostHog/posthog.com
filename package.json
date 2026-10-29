@@ -31,12 +31,18 @@
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "test-redirects": "jest scripts",
         "check:source-release-callouts": "node scripts/check-source-release-callouts.js",
+        "check:posthog-js-defaults": "node scripts/check-posthog-js-defaults.js",
         "test:bundle": "node --test scripts/bundle/check-eager-graph.test.mjs",
         "test:markdown": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/turndownService.test.ts",
+        "test:tier-list": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/TierList/catalog.test.ts src/components/TierList/state.test.ts",
         "test:middleware": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test middleware.test.ts",
+        "test:gatsby-functions": "node --test scripts/gatsby-functions.test.cjs",
         "test:gatsby-utils": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/utils.test.ts",
-        "test:navs": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/navs/activeMenu.test.ts src/navs/applicationMetrics.test.ts src/navs/applicationMetricsPresence.test.ts src/components/ReaderView/tabNavigation.test.ts src/components/PocketGuides/learnRoutes.test.ts src/components/PocketGuides/learnTracking.test.ts",
+        "test:navs": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/navs/activeMenu.test.ts src/navs/applicationMetrics.test.ts src/navs/applicationMetricsPresence.test.ts src/components/ReaderView/tabNavigation.test.ts src/components/PocketGuides/learnRoutes.test.ts src/components/PocketGuides/learnTracking.test.ts src/components/Docs/AppsList/index.test.ts",
         "test:sdk-references": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/SdkReferences/utils.test.ts",
+        "evals": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON evals/run.ts",
+        "test:evals": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test evals/evals.test.ts",
+        "test:twig-integration": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/PocketGuides/twigIntegration.test.ts",
         "test:pocket-guides": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/PocketGuides/pocketGuides.test.ts",
         "check-links-post-build": "node scripts/check-links-post-build.js",
         "check-src-links": "node scripts/check-src-links.js",
@@ -78,7 +84,7 @@
         "@posthog/brand": "0.13.0",
         "@posthog/hedgehog-mode": "^0.0.63",
         "@posthog/icons": "0.36.6",
-        "@posthog/twig-components": "0.1.3",
+        "@posthog/twig-components": "0.2.3",
         "@radix-ui/react-accordion": "^1.2.3",
         "@radix-ui/react-collapsible": "^1.1.12",
         "@radix-ui/react-icons": "^1.3.2",
@@ -245,6 +251,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",
+        "@babel/preset-typescript": "7.27.1",
         "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
         "@storybook/addon-actions": "^6.3.9",
         "@storybook/addon-essentials": "^6.3.9",
@@ -296,7 +303,8 @@
         "tailwindcss": "^3.4.14",
         "takumi-js": "2.14.0",
         "webpack": "5",
-        "wrangler": "^4.67.0"
+        "wrangler": "^4.67.0",
+        "yaml": "^2.8.1"
     },
     "resolutions": {
         "undici": "5.26.3"

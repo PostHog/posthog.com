@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, lazy, useEffect, useState } from 'react'
 import ReaderView from 'components/ReaderView'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
@@ -7,6 +7,8 @@ import PricingSection from 'components/Home/Sections/PricingSection'
 import WhyPostHogSection from 'components/Home/Sections/WhyPostHogSection'
 import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSection'
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
+import { RenderInClient } from 'components/RenderInClient'
+import usePostHog from 'hooks/usePostHog'
 import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
@@ -29,6 +31,33 @@ import { HeroBody, HeroHeadline } from 'components/Home/HeroCopy'
 import HeroCarousel from 'components/Home/HeroCarousel'
 import { buildTabs } from 'components/Home/HeroCarousel/tabs'
 import Customers from '../Customers'
+
+const StepsSection =
+    typeof window !== 'undefined'
+        ? lazy(() => import('components/Home/DataStory').then((module) => ({ default: module.StepsSection })))
+        : () => null
+
+const DATA_STORY_FLAG = 'homepage-data-story'
+const DATA_STORY_VARIANT = 'test'
+
+class DataStoryErrorBoundary extends React.Component<
+    { fallback: React.ReactNode; children: React.ReactNode },
+    { failed: boolean }
+> {
+    state = { failed: false }
+
+    static getDerivedStateFromError(): { failed: boolean } {
+        return { failed: true }
+    }
+
+    componentDidCatch(error: Error): void {
+        window.posthog?.captureException?.(error)
+    }
+
+    render(): React.ReactNode {
+        return this.state.failed ? this.props.fallback : this.props.children
+    }
+}
 
 const SecondaryActions = ({
     justify = 'center',
@@ -157,9 +186,19 @@ function Hero(): JSX.Element {
     )
 }
 
+const Control = () => (
+    <>
+        <DataStackSection />
+        <PricingSection />
+        <WhyPostHogSection />
+        <BedtimeReadingSection />
+    </>
+)
+
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
+    const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
@@ -172,10 +211,20 @@ export default function HomeTest() {
             <div className="space-y-12">
                 <Hero />
                 <Customers />
-                <DataStackSection />
-                <PricingSection />
-                <WhyPostHogSection />
-                <BedtimeReadingSection />
+                <RenderInClient
+                    placeholder={<Control />}
+                    render={() =>
+                        posthog?.getFeatureFlag?.(DATA_STORY_FLAG) === DATA_STORY_VARIANT ? (
+                            <DataStoryErrorBoundary fallback={<Control />}>
+                                <Suspense fallback={null}>
+                                    <StepsSection />
+                                </Suspense>
+                            </DataStoryErrorBoundary>
+                        ) : (
+                            <Control />
+                        )
+                    }
+                />
                 <ShamelessCTASection />
                 <HitCounter />
             </div>

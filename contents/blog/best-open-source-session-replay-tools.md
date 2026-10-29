@@ -18,7 +18,7 @@ tags:
   - Comparisons
 ---
 
-[Open-source analytics](/blog/best-open-source-analytics-tools) is great when you need hard numbers, but hard numbers don't give you the full picture. 
+[Open-source analytics](/compare/best-open-source-analytics-tools) is great when you need hard numbers, but hard numbers don't give you the full picture. 
 
 What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.
 
@@ -38,7 +38,7 @@ In this guide, we're looking at [Hotjar alternatives](/compare/best-hotjar-alter
 
 [PostHog](/) (that's us 👋) is an all-in-one developer platform that includes [session replay](/session-replay), [product analytics](/product-analytics), [heatmaps](/heatmaps), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [surveys](/surveys), and more. 
 
-This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternativs).
+This means it's not just an open source session replay tool, but a full replacement for tools like [Hotjar](/compare/best-hotjar-alternatives), [FullStory](/compare/best-fullstory-alternatives), [LaunchDarkly](/compare/best-launchdarkly-alternatives), and [Sentry](/blog/best-sentry-alternatives).
 
 PostHog's [session replay](/docs/session-replay) includes console logs, network activity, a DOM explorer, and performance metrics so you can identify the root cause of bugs without leaving the replay. You can filter recordings by user, event, feature flag, or any combination of properties, save playlists of related sessions, and export recordings offline for safe keeping. 
 
@@ -103,7 +103,7 @@ OpenReplay offers three ways to deploy, plus a custom enterprise option:
 
 ![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_03_12_T19_18_34_436_Z_d79ea5531f.png)
 
-[Sentry](/blog/posthog-vs-sentry) is a source-available application monitoring platform primarily known for error tracking and performance monitoring. 
+[Sentry](/compare/posthog-vs-sentry) is a source-available application monitoring platform primarily known for error tracking and performance monitoring. 
 
 Session replay was added in 2023 and is tightly integrated with Sentry's error data: when an exception fires, the session replay for the affected user is automatically linked, giving you the full interaction context without any additional investigation.
 

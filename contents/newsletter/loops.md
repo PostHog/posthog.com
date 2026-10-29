@@ -41,7 +41,7 @@ This is how the agent checks itself. [Tests](/blog/testing-ai-agents), [evals](/
 
 **4. An agent (obviously)**
 
-The most basic is using something like Claude Code with a `while true` (aka [Ralph](https://ghuntley.com/ralph/)) or using `/goal`. More complicated is purpose-built harnesses and context systems – e.g. an agent on a cron that pulls signals from your product data and emit work to subagents, or a loop that codegens its own test suite to verify itself.
+The most basic is using something like Claude Code with a `while true` (aka [Ralph](https://ghuntley.com/ralph/)) or using `/goal`. More complicated is purpose-built harnesses and context systems – e.g. [an agent on a cron](/newsletter/scheduled-agents) that pulls signals from your product data and emit work to subagents, or a loop that codegens its own test suite to verify itself.
 
 Good examples of loops include:
 

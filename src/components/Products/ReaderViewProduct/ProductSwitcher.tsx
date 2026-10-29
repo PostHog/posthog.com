@@ -4,24 +4,27 @@ import OSSelect from 'components/OSForm/select'
 import { useSidebarExpanded } from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
 import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
+import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTabs'
 
 interface ProductSwitcherProps {
     /** Handle of the currently active product (matches `product.handle`). */
     activeHandle: string
     /** Optional list of product handles to hide from the dropdown. */
     excludeHandles?: string[]
+    /** The sidebar tab of the current page. Switching products opens the same tab. Defaults to `'product'`. */
+    surface?: ProductSurface
 }
 
 /**
  * Searchable product picker rendered at the top of `ReaderView`'s LeftSidebar.
  * Uses the same curated handle list/order as the taskbar "Browse tools" menu
- * (`BROWSE_TOOLS_HANDLES`). Always navigates to the product root (`/<slug>`),
- * not the current surface (e.g. pricing), since not every product has those
- * pages yet.
+ * (`BROWSE_TOOLS_HANDLES`). Navigates to the target product's tab for the current
+ * `surface` (e.g. Learn), or to the product root (`/<slug>`) when the target
+ * product has no such tab.
  *
  * Pass via `<ReaderView productSelect={<ProductSwitcher activeHandle="…" />}>`.
  */
-const ProductSwitcher = ({ activeHandle, excludeHandles = [] }: ProductSwitcherProps) => {
+const ProductSwitcher = ({ activeHandle, excludeHandles = [], surface = 'product' }: ProductSwitcherProps) => {
     const allProducts = useProduct() as any[]
     const expanded = useSidebarExpanded()
 
@@ -44,7 +47,10 @@ const ProductSwitcher = ({ activeHandle, excludeHandles = [] }: ProductSwitcherP
         if (handle === activeHandle) return
         const target = allProducts.find((p: any) => p.handle === handle)
         if (!target?.slug) return
-        navigate(`/${target.slug}`)
+        const tab = buildProductMenuTabs({ productData: target, activeSurface: surface }).find(
+            ({ value }) => value === surface
+        )
+        navigate(tab?.href ?? `/${target.slug}`)
     }
 
     // Collapsed sidebar: render only the active product's icon, centered.

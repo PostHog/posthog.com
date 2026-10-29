@@ -3,7 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { HedgehogGardener } from '@posthog/brand/hoggies'
+import { HedgehogGardener, HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -123,12 +123,6 @@ const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'item',
-        label: 'PostHog Desktop',
-        link: '/docs/posthog-desktop',
-        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
-    },
-    {
-        type: 'item',
         label: 'PostHog Slack',
         link: '/docs/slack',
         icon: <Icons.IconAtSign className="size-4 text-purple" />,
@@ -156,7 +150,7 @@ const docsMenuItems: MenuItemType[] = [
     {
         type: 'item',
         label: 'Data pipelines',
-        link: '/docs/cdp',
+        link: '/docs/data-pipelines',
         icon: <Icons.IconPlug className="size-4 text-sky-blue" />,
     },
     {
@@ -206,6 +200,7 @@ const docsMenuItems: MenuItemType[] = [
 ]
 
 const docsProductIconFallbacks = {
+    'business-knowledge': { Icon: Icons.IconBook, color: 'purple' },
     'customer-analytics': { Icon: Icons.IconPeople, color: 'blue' },
     'revenue-analytics': { Icon: Icons.IconPiggyBank, color: 'green' },
     skills: { Icon: Icons.IconMagic, color: 'purple' },
@@ -535,33 +530,9 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'MCP leaderboard',
-                    link: '/mcp/leaderboard',
-                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Field guide to wild users',
-                    link: '/field-guide',
-                    icon: <Icons.IconTelescope className="size-4 text-salmon" />,
-                },
-                {
-                    type: 'item',
                     label: 'Things that spark joy',
                     link: '/sparks-joy',
                     icon: <IconSparksJoy className="size-4" />,
-                },
-                // {
-                //     type: 'item',
-                //     label: 'Video library',
-                //     link: '/videos',
-                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
-                // },
-                {
-                    type: 'item',
-                    label: 'Services',
-                    link: '/services',
-                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'separator',
@@ -581,6 +552,21 @@ export function useMenuData(): MenuType[] {
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Services',
+                    link: '/services',
+                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
                     type: 'separator',
@@ -612,7 +598,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'SOC 2',
-                    link: '/handbook/company/security#soc-2',
+                    link: '/docs/privacy/soc2',
                     icon: <Icons.IconShieldLock className="size-4 text-teal" />,
                 },
                 {
@@ -632,10 +618,22 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Enterprise',
-                    link: '/enterprise',
-                    icon: <Icons.IconBuilding className="size-4 text-blue" />,
+                    label: 'MCP leaderboard',
+                    link: '/mcp/leaderboard',
+                    icon: <Stickers name="StickerTrophy" label="1" className="size-4" />,
                 },
+                {
+                    type: 'item',
+                    label: 'Field guide to wild users',
+                    link: '/field-guide',
+                    icon: <Icons.IconTelescope className="size-4 text-salmon" />,
+                },
+                // {
+                //     type: 'item',
+                //     label: 'Video library',
+                //     link: '/videos',
+                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
+                // },
             ],
         },
     ]
@@ -849,6 +847,13 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             ),
             external: true,
         },
+        {
+            label: 'GuessHog',
+            link: 'https://guesshog.posthog.com',
+            iconName: null,
+            customIcon: <HedgehogMagnifyingGlass className="size-12" />,
+            external: true,
+        },
     ],
     notGames: [
         {
@@ -882,6 +887,14 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             link: '/photobooth',
             iconName: 'photobooth' as AppIconName,
             customIcon: null,
+        },
+        {
+            label: 'Hoggie tier list',
+            link: '/tier-list',
+            iconName: null,
+            customIcon: (
+                <img src="https://brand.posthog.com/hoggies/judge.png" alt="" className="size-12 object-contain" />
+            ),
         },
         {
             label: 'HogPaint',

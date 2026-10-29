@@ -1,0 +1,25 @@
+# An end-to-end eval across several pages: no single page owns it, so it lives here and
+# names its own owner. Every check reads the pages listed below.
+owner: wizard-and-docs
+tags: [install, e2e]
+status: active
+pages:
+    - docs/product-analytics/installation/react-router
+    - docs/product-analytics/installation/nodejs
+
+checks:
+    - id: frontend-and-backend
+      description: >-
+          Baseline: can an agent pick the right SDK for each half of a full-stack app?
+          The agent gets no docs, so docs-read shows which pages it finds on its own.
+      prompt: >-
+          Which PostHog SDKs do I need for a React Router 7 frontend and an Express API?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              frontend-packages: >-
+                  The answer installs posthog-js and @posthog/react in the React Router
+                  app and wraps the app in PostHogProvider.
+              backend-package: >-
+                  The answer installs posthog-node in the Express API and creates a
+                  PostHog client with the project token and a host option.
