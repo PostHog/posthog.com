@@ -73,13 +73,13 @@ Click **Save connection**. PostHog uses the secret to check that each hook reque
 
 <Step title="Pick a template for each email" badge="required">
 
-The table in the setup window lists every email Supabase can send. Pick a template for each one you want PostHog to send.
+The table in the setup window lists every email Supabase can send. Pick a template for every auth email your app uses. Once the hook is on, Supabase sends all of its auth emails through PostHog, so a core auth email with no template fails instead of falling back to Supabase.
 
 Templates for auth emails must be transactional and marked sensitive. Sensitive templates keep sign-in codes and reset links out of stored emails and click tracking. Only templates that meet both rules appear in the picker. To use one of your own templates, open it in your [library](/docs/workflows/library), go to the **API** tab, click **Make transactional**, and then turn on **Protect sensitive data**. Making a template transactional can't be undone.
 
 The quickest way to start is the **Create starter templates** button, which shows how many templates it will create. It creates a template for each of the six core auth emails that doesn't have one yet, and maps it. Starter templates are plain, editable designs. Click the pencil icon next to a template to open it in the email editor and change the copy or styling, or click **View templates** to open your library.
 
-The security notifications have no starter templates. To send them through PostHog, map a template to each one.
+The security notifications have no starter templates. To send them through PostHog, map a template to each one. Supabase only sends a security notification when it's [turned on for your project](https://supabase.com/docs/guides/auth/auth-email-templates), so turn on the ones you want in Supabase too.
 
 #### Template variables
 
