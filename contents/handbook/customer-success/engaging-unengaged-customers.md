@@ -26,7 +26,7 @@ Use the customer's PostHog usage data to understand what they're actually doing 
 
 For example, if a customer is creating and viewing insights with titles around "funnel conversions," they almost certainly care about improving funnel conversion rates. Lead with that.
 
-**Where to look:** Customer engagement dashboard in PostHog — filter by the customer's org/team and check insight creation and viewing activity. Use PostHog AI or the PostHog MCP ([with CS Skills like User Deep Dive](https://github.com/PostHog/skills/tree/main/skills/team/customer-success)) to pull additional details and summaries.
+**Where to look:** The <PrivateLink url="https://us.posthog.com/project/2/dashboard/557459">Engagement metrics dashboard</PrivateLink> breaks down each user's activity across products, from insights and dashboards to flags, replay, experiments, surveys and the MCP. Open it from the `Engagement metrics dashboard` property on the account in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>, or set the `organization_id` variable on the dashboard yourself. Use PostHog AI or the PostHog MCP ([with CS Skills like User Deep Dive](https://github.com/PostHog/skills/tree/main/skills/team/customer-success)) to pull additional details and summaries.
 
 ### Walk through their site with debug mode
 
