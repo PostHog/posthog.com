@@ -426,7 +426,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (filename === 'src/components/seo.tsx' || filename === 'gatsby-ssr.js') {
             findings.push({
-                severity: 'minor',
+                severity: 'blocker',
                 title: 'Site-wide head tags changed',
                 detail: 'This file writes the title, description, canonical, Open Graph, and structured data for every page.',
                 fix: 'Compare the `<head>` of a docs page, a blog post, and the homepage in the Vercel preview against production.',
@@ -447,7 +447,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
             [...added, ...removed].some((l) => /sitemap|excludes?\b|serialize/i.test(l))
         ) {
             findings.push({
-                severity: 'minor',
+                severity: 'blocker',
                 title: 'Sitemap config changed',
                 detail: 'Pages left out of the sitemap get crawled less often, and a broken sitemap slows indexing of new pages.',
                 fix: 'Check `/sitemap/sitemap-index.xml` in the Vercel preview and confirm the important pages are still listed.',
@@ -470,7 +470,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
 
         if (filename === 'middleware.ts') {
             findings.push({
-                severity: 'minor',
+                severity: 'blocker',
                 title: 'Markdown serving for AI agents changed',
                 detail: 'This middleware serves the Markdown version of docs, handbook, blog, and newsletter pages to AI agents and to clients that ask for `text/markdown`.',
                 fix: 'Fetch a docs page with `curl -H "Accept: text/markdown"` in the Vercel preview and confirm it still returns Markdown.',

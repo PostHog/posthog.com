@@ -4,7 +4,8 @@ name: SEO/AEO PR check
 # pages deleted or moved without a redirect, noindex, robots.txt rules, canonical and head-tag
 # changes, sitemap and llms.txt changes, redirect chains, removed titles, and second H1s.
 # It posts one comment (updated in place on later pushes) and requests a review from the SEO owner
-# only for critical findings: 404s, deindexing, site-wide URL changes, and large performance costs.
+# only for critical findings: 404s, deindexing, site-wide URL changes, site-wide head tags, sitemap
+# and Markdown serving changes, and large performance costs.
 # Lower-risk findings show in that comment only, and never start one.
 #
 # `pull_request_target` gives a write token for fork and bot PRs. Safe: the checkout is the base

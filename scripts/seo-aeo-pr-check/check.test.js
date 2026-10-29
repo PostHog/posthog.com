@@ -154,3 +154,15 @@ test('ignores known false alarms', () => {
     ]
     assert.deepEqual(analyzeFiles(files, [], { pageUrls }), [])
 })
+
+test('flags site-wide head tags, sitemap, and Markdown serving as blockers', () => {
+    const files = [
+        { filename: 'src/components/seo.tsx', status: 'modified', patch: '@@\n+const a = 1' },
+        { filename: 'middleware.ts', status: 'modified', patch: '@@\n+const a = 1' },
+        { filename: 'gatsby-config.js', status: 'modified', patch: '@@\n+  excludes: []' },
+    ]
+    assert.deepEqual(
+        analyzeFiles(files, []).map((f) => f.severity),
+        ['blocker', 'blocker', 'blocker']
+    )
+})
