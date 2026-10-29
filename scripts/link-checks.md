@@ -16,6 +16,8 @@ The workflow keeps full logs in files. It reads counts from the JSON reports for
 
 The workflow fetches the exact PR base commit before it builds. A shallow checkout alone may not contain that commit. The full production build retries once for a network fetch failure; other build errors fail immediately. Both attempt logs are saved with the scan reports. A failed build still produces an incomplete summary.
 
+The build receives the read-only GitHub job token as `GITHUB_API_KEY`. The existing data loader requires this variable to generate pipeline documentation. Without it, valid generated pages can be reported as missing.
+
 Weekly and manual runs check all content and source files and fail for any findings. PR runs build the PR merge revision and its exact base commit in parallel, with each revision's own dependencies. Both scans use the PR's checker code. A comparison blocks only findings that are new in the PR. Existing findings remain in the full reports, and `pr-link-check.json` separates new, existing, and resolved findings. Line number changes do not count as new problems. Additional occurrences do. Missing or incomplete reports fail the check.
 
 PR scans check all files, including incoming links from unchanged pages. Removing a heading can therefore fail the check even when its referring pages did not change. PR runs do not send Slack notifications. The base comparison requires a second production build; parallel jobs keep it out of the PR build's critical path.

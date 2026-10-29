@@ -76,6 +76,9 @@ jobs:
                   echo "SITE_DIR=$SITE_DIR" >> "$GITHUB_ENV"
             - name: Build site
               id: build
+              env:
+                  # Enables generated pipeline docs in sourceNodes. Use only the read-only job token.
+                  GITHUB_API_KEY: ${{ github.token }}
               run: |
                   mkdir -p "$GITHUB_WORKSPACE/link-check-results"
                   cd "$SITE_DIR"
