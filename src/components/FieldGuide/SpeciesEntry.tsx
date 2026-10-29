@@ -95,36 +95,40 @@ export default function SpeciesEntry({ species }: { species: Species }): JSX.Ele
                 padding={false}
                 contentMaxWidthClass="max-w-none"
             >
-                <div className="se-spread">
-                    <div className="se-plates">
-                        <Plate label="Plate I" src={species.plateI} alt={`${species.name} — Plate I`} />
-                        <Plate label="Plate II" src={species.plateII} alt={`${species.name} — Plate II`} />
-                    </div>
-                    <div className="se-text">
-                        <Link to="/field-guide#the-species" className="se-back">
-                            ← Back to the map
-                        </Link>
-                        <h1 className="se-name">{species.name}</h1>
-                        <p className="se-latin">{species.latin}</p>
-                        {species.sections.map((s) => (
-                            <section key={s.label} className="se-section">
-                                <h2 className="se-section-label">{s.label}</h2>
-                                <SectionBody section={s} />
-                            </section>
-                        ))}
+                <div className="se-page">
+                    <Link to="/field-guide#the-species" className="se-back">
+                        ← Back to the map
+                    </Link>
+                    <div className="se-spread">
+                        <div className="se-plates">
+                            <Plate label="Plate I" src={species.plateI} alt={`${species.name} — Plate I`} />
+                            <Plate label="Plate II" src={species.plateII} alt={`${species.name} — Plate II`} />
+                        </div>
+                        <div className="se-text">
+                            <h1 className="se-name">{species.name}</h1>
+                            <p className="se-latin">{species.latin}</p>
+                            {species.sections.map((s) => (
+                                <section key={s.label} className="se-section">
+                                    <h2 className="se-section-label">{s.label}</h2>
+                                    <SectionBody section={s} />
+                                </section>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <style>{`
                     [class~="pt-12"]:has(.se-spread) { padding-top: 0 !important; }
-                    .se-spread {
-                        container-type: inline-size;
+                    .se-page {
                         background: ${PLATE_PAPER};
                         color: ${INK};
                         padding: clamp(1.25rem, 4cqw, 3rem);
+                        min-height: 100%;
+                    }
+                    .se-spread {
+                        container-type: inline-size;
                         display: grid;
                         grid-template-columns: 1fr 1fr;
                         gap: clamp(1.5rem, 4cqw, 3.5rem);
-                        min-height: 100%;
                         align-items: start;
                     }
                     .se-plates {
