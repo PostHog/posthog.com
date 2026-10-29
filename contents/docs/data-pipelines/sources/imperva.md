@@ -15,7 +15,7 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Imperva (Thales) Cloud Application Security connector syncs your web application security data into the PostHog Data warehouse, including site inventory, visitor traffic, hit statistics, and bandwidth metrics – so you can analyze security traffic patterns alongside your product data.
 
-[Imperva Cloud Application Security](https://www.imperva.com/products/cloud-application-security/) (now part of Thales) provides web application security services including DDoS protection, WAF, CDN, and bot management.
+Imperva Cloud Application Security (now part of Thales) provides web application security services including DDoS protection, WAF, CDN, and bot management.
 
 ## Prerequisites
 

@@ -37,7 +37,7 @@ It was fascinating to see the team learn it was the messier style of human commu
 ![Yvonne and Jason presenting DealWise](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_dealwise_9b33d8b450.png)
 
 ## 2. Problem solving means noticing pain
-**Project:** [RoadMate]([https://devpost.com/software/john-ai](https://devpost.com/software/roadmate-t28eqk)) (San Francisco second place winner)
+**Project:** [RoadMate](https://devpost.com/software/roadmate-t28eqk) (San Francisco second place winner)
 
 Connecting your phone to your dashcam and an AI agent, RoadMate monitors your drowsiness during long road trips, helps you keep your eyes on the road, and can call your emergency contact if things get dicey. The demo from Russel, Anwar and William impressed the judges from both a technical execution standpoint, and for its social impact.
 

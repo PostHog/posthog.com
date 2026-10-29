@@ -30,17 +30,17 @@ This week is about getting set up and learning how we talk about PostHog. You'll
  - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](/community/profiles/30207) can add you if you haven't.
  - Work your way through your onboarding checklist that a member of the <SmallTeam slug="people" /> should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
- - Check out some [BuildBetter](https://app.buildbetter.app/) and [Gong](https://us-26000.app.gong.io/library/company?workspace-id=8823646477612786274&folder-id=5690024503570726123) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
-   - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
+ - Check out some [BuildBetter](https://app.buildbetter.app/) and <PrivateLink url="https://us-26000.app.gong.io/library/company?workspace-id=8823646477612786274&amp;folder-id=5690024503570726123">Gong</PrivateLink> calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
+   - There are a few BuildBetter playlists to start with – <PrivateLink url="https://app.buildbetter.app/folders/15381">customer training calls</PrivateLink>, <PrivateLink url="https://app.buildbetter.app/folders/14593">PostHog knowledge calls</PrivateLink>, <PrivateLink url="https://app.buildbetter.app/folders/14521">onboarding specialist calls</PrivateLink>, add to them as you listen!
  - Learn and practice a [demo](https://youtu.be/1FZji2L-LmM) of PostHog.
-   - For familiarization and self-led training, follow the [product framework](https://posthog.com/handbook/customer-success/new-hire-onboarding#learning-posthog). You work through this with the [HogFlix Demo 3000 project](https://us.posthog.com/project/99423/dashboard), which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
+   - For familiarization and self-led training, follow the [product framework](https://posthog.com/handbook/customer-success/new-hire-onboarding#learning-posthog). You work through this with the <PrivateLink url="https://us.posthog.com/project/99423/dashboard">HogFlix Demo 3000 project</PrivateLink>, which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
  - Read all of the `Sales, CS & Onboarding` section in the Handbook, and [update it as you learn more](/handbook/company/new-to-github#creating-a-pull-request).
  - Explore Slack. We're public by default, so Slack is one of the richest resources you have.
  - Meet with Ben Bradley, who's responsible for GTM teams.
 
 ## Week 2
 
-- Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. Check out our [Onboarding folder](https://app.buildbetter.app/folders/14521), where you can also find sessions on productivity and workflows.
+- Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. Check out our <PrivateLink url="https://app.buildbetter.app/folders/14521">Onboarding folder</PrivateLink>, where you can also find sessions on productivity and workflows.
 - Explore Customer Analytics and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
 - Try running through the [onboarding exercise](/handbook/customer-success/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Magda. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
@@ -63,7 +63,7 @@ Ideally, this will happen in Week 2-3, with the company of a few colleagues (dep
 - Toolkit and internal processes.
 - No stupid questions session.
 
-Detailed training plan available in the [new hire onboarding checklist](https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0). This is a checklist for the Manager, you don't have to read it beforehand.
+Detailed training plan available in the <PrivateLink url="https://docs.google.com/document/d/1DvZm6o3mBeSxwgMh2X8JAuXCLrOCS8sJAVLjC0K9VT8/edit?tab=t.0">new hire onboarding checklist</PrivateLink>. This is a checklist for the Manager, you don't have to read it beforehand.
 
 - We'll start routing new leads to you at the end of week 2. Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practice and fail.
 

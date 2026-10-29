@@ -28,7 +28,7 @@ Sure, building out fast CI pipelines and continuous deployment, improving system
 
 At PostHog, giving people the option to self-host is one of our biggest advantages compared to our competitors. That means we treat our self-hosted infra like a product. And, like any good product, we've written great public documentation.
 
-To make sure our customers don't experience issues, we do automated testing of our Helm chart on all major cloud providers. We get [Issues](https://github.com/PostHog/charts/issues) raised by real customers, not just internal 'consumers'.
+To make sure our customers don't experience issues, we do automated testing of our Helm chart on all major cloud providers. We get <PrivateLink url="https://github.com/PostHog/charts/issues">Issues</PrivateLink> raised by real customers, not just internal 'consumers'.
 
 It's not just that building stuff _for_ our customers is fun.
 
