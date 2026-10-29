@@ -49,6 +49,10 @@ One prompt in four was a question. 8% started with a specific request ("show me"
 
 A lot of people asked about PostHog Dashboards (more than 53,600). Next were session replay (45.1k), funnels (40.0k) and general web traffic (31.5k). Other popular topics included feature flags, retention, surveys, experiments, and error tracking. 
 
+![214 characters in the average prompt. Just a few sentences, though one person pasted in a 118,583-character sci-fi manuscript and asked PostHog AI to continue the story.](https://res.cloudinary.com/dmukukwp6/image/upload/average_prompt_length_4cad0d1a22.png)
+
+![2.8 prompts per conversation on average. The longest conversation had 259 prompts, and we hope it ended well.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_per_conversation_d974ecc20a.png)
+
 ## All roles are asking data questions
 
 People with a data role are the heaviest PostHog AI users: an average of 29 prompts per person. When digging into the data, people asked about drops in their metrics 2.3x more than spikes. 
@@ -68,6 +72,8 @@ When asking PostHog AI about other tools, Claude was the most named (by 7.2k peo
 People prompted PostHog AI every single day of the year. The longest streak of consecutive days with prompts from a single person was 49. 
 
 Compared with a normal day, New Year's Day 2026 was the quietest day of the year, with only 29% of the people of a normal Thursday. Plenty of people were still prompting, though. Over the past year, 1,218 people sent the exact same prompt 5 or more times in one day. It wasn’t groundhog day (or maybe it was?).
+
+![219 prompts by one user in a single day. A record, surprisingly, not held by a PostHog employee. We hope they took a coffee break.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_by_one_user_in_one_day_56d7f323b1.png)
 
 ## What each role actually asks
 
