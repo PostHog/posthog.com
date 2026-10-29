@@ -273,7 +273,12 @@ const useFreeTier = () => {
     )
 
     return [
-        sources && { label: 'Sources', value: `${sources} free`, detail: 'Every month, plus free historical syncs' },
+        sources && {
+            label: 'Sources',
+            value: `${sources} free`,
+            // Same limits as the Sources free tier on /pricing (src/components/Pricing/Test/freeTierData.tsx).
+            detail: 'Every month, plus free historical syncs for the first 7 days of each new source (up to 100M rows on the free plan)',
+        },
         destinations && {
             label: 'Destinations',
             value: `${destinations} free`,

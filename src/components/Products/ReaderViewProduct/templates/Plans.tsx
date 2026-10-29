@@ -172,9 +172,11 @@ type PlansProps = SectionComponentProps & {
     hidePricingDetails?: boolean
     /** Content above the TL;DR in the left column, so the pricing notes column starts level with it. */
     intro?: React.ReactNode
+    /** Section that the "or less!" link scrolls to. Set it when the calculator has a slug other than `calculator`. */
+    calculatorId?: string
 }
 
-const Plans = ({ id, productData, meterName, hidePricingDetails, intro }: PlansProps) => {
+const Plans = ({ id, productData, meterName, hidePricingDetails, intro, calculatorId = 'calculator' }: PlansProps) => {
     // `useProduct` resolves `sharesFreeTier` from a handle string into the full
     // product object, so read the handle back off it. Accept both shapes – callers
     // that pass raw productData still hand us the string.
@@ -406,12 +408,12 @@ const Plans = ({ id, productData, meterName, hidePricingDetails, intro }: PlansP
                                         <em className="text-sm text-primary/60">
                                             {' '}
                                             <a
-                                                href="#calculator"
+                                                href={`#${calculatorId}`}
                                                 className="text-primary/60 hover:text-primary/80 underline decoration-dotted"
                                                 onClick={(e) => {
                                                     e.preventDefault()
                                                     document
-                                                        .getElementById('calculator')
+                                                        .getElementById(calculatorId)
                                                         ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                                                 }}
                                             >

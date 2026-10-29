@@ -128,6 +128,7 @@ export const dataPipelines = {
             props: {
                 productData: sourcesBilling,
                 meterName: 'Sources',
+                calculatorId: 'sources-calculator',
                 intro: <PricingIntro />,
             },
         },
@@ -148,6 +149,7 @@ export const dataPipelines = {
                 // The pricing notes column already shows next to Sources.
                 hidePricingDetails: true,
                 meterName: 'Destinations',
+                calculatorId: 'destinations-calculator',
             },
         },
         {

@@ -237,6 +237,7 @@ The `plans` template also accepts optional props through a menu item's `props`, 
 - `meterName` – prefixes the TL;DR title, as in "Sources TL;DR:".
 - `hidePricingDetails` – hides the "Things you should know about our pricing" column, so a second Plans block doesn't repeat it.
 - `intro` – content above the TL;DR in the left column, so the pricing notes column starts level with it.
+- `calculatorId` – the section that the "or less!" link scrolls to. It defaults to `calculator`.
 
 A menu item's `props.productData` replaces the page's product data for that one section, which points it at a different billing product.
 
