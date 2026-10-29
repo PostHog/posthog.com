@@ -48,6 +48,8 @@ This also means an upstream view refreshes at least as often as anything downstr
 
 To manually trigger a view along with its dependencies or dependents, use the [MCP `view-run` tool](/docs/data-warehouse/surfaces/mcp#view-management-tools) with the `direction` parameter set to `upstream` or `downstream`.
 
+Manual runs target ClickHouse by default. If your organization has a managed warehouse, you can also run models on Trino by setting `engine` to `trino`. Trino runs use the same dependency-ordered workflow as the nightly scheduled Trino build, so ClickHouse is not touched. Only one Trino run can execute at a time per project – if a run is already in progress, the request returns a 409 error.
+
 ## Incremental materialization
 
 Every run of a materialized view rebuilds the whole table by default. With incremental materialization, each run reads only the rows that are new since the last run. It then updates the table in place.
