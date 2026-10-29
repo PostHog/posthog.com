@@ -38,7 +38,7 @@ Before adding a lab, you'll need to add PostHog instrumentation:
 1. Choose the PostHog product you want to add.
 2. Find a natural place in Twig for the instrumentation. What would a human guest do there, and what would the PostHog product help Twig understand?
 3. If Twig needs a new feature to make that possible, discuss the idea with <PrivateLink url="https://posthog.slack.com/archives/C09GTQY5RLZ">#team-wizard-and-docs</PrivateLink> before adding it.
-4. Open a PR to add the instrumentation in [`twig.com`](https://github.com/PostHog/twig.com).
+4. Open a PR to add the instrumentation in <PrivateLink url="https://github.com/PostHog/twig.com"><code>twig.com</code></PrivateLink>.
 
 If you'd like to use an agent for the instrumentation, use this prompt:
 
@@ -59,10 +59,10 @@ A lab teaches someone about the PostHog product through instrumentation. You can
 
 1. **Sketch the learner's path.** What will they do in Twig, what evidence will they inspect, and what should they understand by the end? Look at an existing lab for inspiration and see what other labs exist before inventing a new flow.
 2. **Build the reusable lesson in [`twig-components`](https://github.com/PostHog/twig-components).** Put the lab UI, example data, and simulated state there. Add a clickable example to its [workbench](https://github.com/PostHog/twig-components/blob/main/docs/workbench.md).
-3. **Show the instrumentation in the Playground.** Register the lab's ID and page in [`twig-components`](https://github.com/PostHog/twig-components/blob/main/src/playground.ts), then place [Twig.com's existing `Marker`](https://github.com/PostHog/twig.com/blob/main/src/components/vacation/Playground.tsx) beside the action it teaches. This numbered touchpoint appears when the Playground is open – its number is page-specific, and its color comes from the PostHog product.
+3. **Show the instrumentation in the Playground.** Register the lab's ID and page in [`twig-components`](https://github.com/PostHog/twig-components/blob/main/src/playground.ts), then place <PrivateLink url="https://github.com/PostHog/twig.com/blob/main/src/components/vacation/Playground.tsx">Twig.com's existing <code>Marker</code></PrivateLink> beside the action it teaches. This numbered touchpoint appears when the Playground is open – its number is page-specific, and its color comes from the PostHog product.
 4. **Try the full lab.** Check that someone can find, complete, reset, and understand it on a narrow and wide screen. Explain what's simulated at the start, and ask the relevant product team to check the PostHog lesson.
 
-Keep the vacation rental site's styling distinct from the Playground's lesson styling. Reuse existing components and follow the [Twig site](https://github.com/PostHog/twig.com/blob/main/docs/design-system.md) and [shared component](https://github.com/PostHog/twig-components/blob/main/docs/design-system.md) design guides. The Playground gets PostHog branding from the [PostHog Brand Book](https://brand.posthog.com).
+Keep the vacation rental site's styling distinct from the Playground's lesson styling. Reuse existing components and follow the <PrivateLink url="https://github.com/PostHog/twig.com/blob/main/docs/design-system.md">Twig site</PrivateLink> and [shared component](https://github.com/PostHog/twig-components/blob/main/docs/design-system.md) design guides. The Playground gets PostHog branding from the [PostHog Brand Book](https://brand.posthog.com).
 
 The [component integration guide](https://github.com/PostHog/twig-components/blob/main/docs/integration.md#authoring-scenarios) covers how to release the shared package and update Twig.com when the lab is ready.
 
@@ -95,7 +95,7 @@ So we integrated Twig into pocket guides as a canonical example app to drive sto
 | Repo | Owns | Make changes here when... |
 | --- | --- | --- |
 | [`twig-components`](https://github.com/PostHog/twig-components) | Shared Twig views, hosts, stays, styles, and local lab logic | You need a reusable view or lab interface. Keep example events and outcomes local. |
-| [`twig.com`](https://github.com/PostHog/twig.com) | Website pages, navigation, account state, and real PostHog tracking | You need to place a shared component in the app or connect it to site behavior. |
+| <PrivateLink url="https://github.com/PostHog/twig.com"><code>twig.com</code></PrivateLink> | Website pages, navigation, account state, and real PostHog tracking | You need to place a shared component in the app or connect it to site behavior. |
 | [`posthog.com`](https://github.com/PostHog/posthog.com) | Pocket guide prose, example data, and PostHog figures | You need to tell the story or show a focused Twig view in a guide. |
 
 The sites install published versions of `twig-components`, so a package change also needs a release and an update in whichever site uses it.

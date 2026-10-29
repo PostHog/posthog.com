@@ -44,4 +44,4 @@ Sales owns the detail — see [contracts for customers on time-limited plans](/h
 
 ## Creating a new campaign
 
-For technical implementation details, see the [internal billing docs](https://github.com/PostHog/billing/blob/main/notes/campaigns-and-coupons.md).
+For technical implementation details, see the <PrivateLink url="https://github.com/PostHog/billing/blob/main/notes/campaigns-and-coupons.md">internal billing docs</PrivateLink>.

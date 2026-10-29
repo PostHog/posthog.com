@@ -38,7 +38,7 @@ The automation flips the Customer Analytics Onboarding pipeline property to `Sal
 
 ### Proactively looking out for opportunities
 - If you see an account with a promising, positive growth trajectory, but they may achieve the $ threshold after finishing the onboarding program, **set a task in Customer Analytics assigned to yourself** in order to circle back after some time and see if they're eligible for being passed on to Sales.
-- If you reach out to a high spender (+$1000), add a Customer Analytics task to see if the first bill came through. If it did, we could pass them on to Sales faster, without having to circle back to the account before the second bill comes up. We currently have a [playbook](https://us.posthog.com/project/2/workflows/01a11165-4311-0000-eec5-642052e6944c/workflow) running that automates task creation. 
+- If you reach out to a high spender (+$1000), add a Customer Analytics task to see if the first bill came through. If it did, we could pass them on to Sales faster, without having to circle back to the account before the second bill comes up. We currently have a <PrivateLink url="https://us.posthog.com/project/2/workflows/01a11165-4311-0000-eec5-642052e6944c/workflow">playbook</PrivateLink> running that automates task creation.
 
 ### Confusion about previous Sales engagement
 
