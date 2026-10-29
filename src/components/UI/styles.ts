@@ -2,10 +2,8 @@ import './grain.css'
 
 export const grainSurface = 'ui-grain'
 
-export const flatHover =
-    'transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] motion-reduce:transition-none'
-
-export const flatPressable = `${flatHover} [&:not([data-disabled]):not([aria-disabled=true]):active]:bg-[rgb(var(--text-primary)/0.12)]`
+export const flatPressable =
+    'transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] [&:not([data-disabled]):not([aria-disabled=true]):active]:bg-[rgb(var(--text-primary)/0.12)] motion-reduce:transition-none'
 
 export const focusRing =
     'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--text-primary))]'
@@ -217,7 +215,7 @@ export const dialogPopup = `${dialogSurface} relative flex max-h-full w-full fle
 
 export const barRoot = 'grid w-full grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1.5'
 
-export const barLabel = 'text-sm font-semibold text-primary'
+export const controlLabel = 'text-sm font-semibold text-primary data-[disabled]:text-muted'
 
 export const barValue = 'col-start-2 text-right text-sm tabular-nums text-secondary'
 

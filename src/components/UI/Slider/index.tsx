@@ -1,13 +1,13 @@
 import React from 'react'
 import { Slider as BaseSlider } from '@base-ui/react/slider'
-import { grainSurface, trackSurface } from '../styles'
+import { controlLabel, grainSurface, trackSurface } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const RANGE_SEPARATOR = ' – '
 
 const Root = withClassName(BaseSlider.Root, 'flex w-full touch-none select-none flex-col gap-1.5')
 
-const Label = withClassName(BaseSlider.Label, 'text-sm font-semibold text-primary data-[disabled]:text-muted')
+const Label = withClassName(BaseSlider.Label, controlLabel)
 
 const digitColumn =
     "block w-min break-all transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] before:content-['0123456789'] motion-reduce:transition-none"

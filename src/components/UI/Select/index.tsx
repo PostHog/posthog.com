@@ -6,6 +6,7 @@ import {
     fieldListItemSizes,
     fieldSizes,
     checkListItem,
+    controlLabel,
     fieldAppearanceShape,
     fieldTriggerSurface,
     menuGroupLabel,
@@ -39,7 +40,7 @@ function Root({ size = 'md', appearance = 'inset', ...props }: SelectRootProps):
     )
 }
 
-const Label = withClassName(BaseSelect.Label, 'cursor-default text-sm font-semibold text-primary')
+const Label = withClassName(BaseSelect.Label, `cursor-default ${controlLabel}`)
 
 export type SelectTriggerProps = Omit<BaseSelect.Trigger.Props, 'size'> & { size?: FieldSize }
 

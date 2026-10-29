@@ -1,7 +1,7 @@
 import React from 'react'
 import { Progress as BaseProgress } from '@base-ui/react/progress'
 import { cn } from '../../../utils'
-import { barIndicator, barLabel, barRoot, barTrack, barValue } from '../styles'
+import { barIndicator, barRoot, barTrack, barValue, controlLabel } from '../styles'
 import { colorFill, colorShimmer } from '../colors'
 import type { ColorName } from '../colors'
 import { mergeClassName, withClassName } from '../utils'
@@ -18,7 +18,7 @@ const Root = React.forwardRef<HTMLDivElement, Omit<BaseProgress.Root.Props, 'ref
     }
 )
 
-const Label = withClassName(BaseProgress.Label, barLabel)
+const Label = withClassName(BaseProgress.Label, controlLabel)
 
 const Value = withClassName(BaseProgress.Value, barValue)
 

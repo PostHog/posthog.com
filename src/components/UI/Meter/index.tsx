@@ -1,6 +1,6 @@
 import React from 'react'
 import { Meter as BaseMeter } from '@base-ui/react/meter'
-import { barIndicator, barLabel, barRoot, barTrack, barValue } from '../styles'
+import { barIndicator, barRoot, barTrack, barValue, controlLabel } from '../styles'
 import { colorFill } from '../colors'
 import type { ColorName } from '../colors'
 import { mergeClassName, withClassName } from '../utils'
@@ -17,7 +17,7 @@ const Root = React.forwardRef<HTMLDivElement, Omit<BaseMeter.Root.Props, 'ref' |
     }
 )
 
-const Label = withClassName(BaseMeter.Label, barLabel)
+const Label = withClassName(BaseMeter.Label, controlLabel)
 
 const Value = withClassName(BaseMeter.Value, barValue)
 

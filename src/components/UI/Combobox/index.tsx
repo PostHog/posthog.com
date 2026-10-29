@@ -13,6 +13,7 @@ import {
     checkListItem,
     chip,
     chipRemove,
+    controlLabel,
     fieldAppearanceShape,
     inputGroupFor,
     insetFocusRing,
@@ -40,7 +41,7 @@ import { TruncatedText, truncateTextChildren } from '../truncation'
 
 const comboboxListMessage = 'px-3.5 py-2 text-sm leading-none text-muted empty:p-0'
 
-const Label = withClassName(BaseCombobox.Label, 'cursor-default text-sm font-semibold text-primary')
+const Label = withClassName(BaseCombobox.Label, `cursor-default ${controlLabel}`)
 
 const SizeContext = React.createContext<FieldSize>('md')
 

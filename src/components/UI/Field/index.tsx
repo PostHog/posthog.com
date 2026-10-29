@@ -1,12 +1,12 @@
 import React from 'react'
 import { Field as BaseField } from '@base-ui/react/field'
-import { fieldAppearanceShape, fieldSizes, textInputFor } from '../styles'
+import { controlLabel, fieldAppearanceShape, fieldSizes, textInputFor } from '../styles'
 import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const Root = withClassName(BaseField.Root, 'flex flex-col gap-1')
 
-const Label = withClassName(BaseField.Label, 'text-sm font-semibold text-primary data-[disabled]:text-muted')
+const Label = withClassName(BaseField.Label, controlLabel)
 
 export type FieldControlProps = Omit<BaseField.Control.Props, 'size'> & {
     size?: FieldSize
