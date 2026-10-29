@@ -44,17 +44,15 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 {props.preBodyComponents}
                 {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
-                {/* Let server-rendered content paint before analytics, but initialize before Gatsby's app scripts. */}
+                {/* Create the local queue before Gatsby starts without waiting for the analytics host. */}
                 {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
                     <>
                         <script
-                            src={
-                                process.env.GATSBY_POSTHOG_ASSET_HOST
-                                    ? `${process.env.GATSBY_POSTHOG_ASSET_HOST}/static/1/loader.js`
-                                    : `${process.env.GATSBY_POSTHOG_API_HOST}/static/loader.js`
+                            src="/scripts/posthog-bootstrap.js"
+                            data-asset-host={
+                                process.env.GATSBY_POSTHOG_ASSET_HOST || process.env.GATSBY_POSTHOG_API_HOST
                             }
-                            data-defer-init="true"
-                            crossOrigin="anonymous"
+                            data-sdk-version="1"
                         />
                         <script src="/scripts/posthog-init.js" />
                     </>
