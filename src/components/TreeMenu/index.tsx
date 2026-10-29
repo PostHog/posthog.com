@@ -434,14 +434,18 @@ function SidebarCollapsibleItem({
     )
 }
 
-const findMatchingItem = (items: MenuItem[], target: MenuItem): MenuItem | undefined => {
+const findItem = (items: MenuItem[], matches: (item: MenuItem) => boolean): MenuItem | undefined => {
     for (const item of items) {
-        if (item === target || (item.url === target.url && item.name === target.name)) return item
-        const match = findMatchingItem(item.children || [], target)
+        if (matches(item)) return item
+        const match = findItem(item.children || [], matches)
         if (match) return match
     }
     return undefined
 }
+
+const findMatchingItem = (items: MenuItem[], target: MenuItem): MenuItem | undefined =>
+    findItem(items, (item) => item === target) ??
+    findItem(items, (item) => item.url === target.url && item.name === target.name)
 
 const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
     const url = currentUrl.replace(/\/$/, '')
