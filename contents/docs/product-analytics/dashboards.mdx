@@ -183,6 +183,21 @@ Filters can be accessed in SQL insights through the [`filters` variable](/docs/d
 
 > **Note:** Dashboard property filter overrides are not applied to insights containing [data warehouse series](/docs/data-warehouse/insights). A warning is displayed on the insight card when this happens. Date range overrides still work for all insight types.
 
+### Dashboard-level comparison
+
+You can apply a comparison period to every insight on a dashboard at once, instead of toggling comparison on each insight individually. The **Comparison** control is in the dashboard's advanced options panel – click the **⋯** at the end of the edit bar.
+
+Available options:
+
+- **Previous period** – Compares all insights to their previous period.
+- **Custom date range** – Specify a custom prior range (e.g., "1 month earlier", "4 weeks earlier").
+- **Each insight's comparison** – Returns each tile to its own individual comparison setting. This is the default.
+- **No comparison** – Disables comparison for all tiles.
+
+The control is disabled when the dashboard date range is set to **All time**, since there is no earlier period to compare against. Certain visualization types also ignore the dashboard comparison because they cannot render a previous-period series: world map, calendar heatmap, and proportion bar charts.
+
+When a comparison override is active, it is counted in the advanced options badge.
+
 ### Overriding filters at the tile level
 
 You can override dashboard-level filters for individual tiles. This lets one insight use different settings while the rest of the dashboard uses the dashboard-level filters.
@@ -196,6 +211,7 @@ To configure tile-level overrides:
    - **Interval** – Change the grouping interval (hour, day, week, or month). Select "inherit" to use the dashboard's interval.
    - **Properties** – Add property filters specific to this tile. These combine with dashboard filters using AND logic.
    - **Breakdown** – Split the data by a different property than the dashboard setting.
+   - **Comparison** – Override the dashboard comparison with a different setting or remove comparison for this tile.
 
 Some controls may be disabled depending on the insight type. For example, interval is only available for time-series insights, and breakdown isn't supported by all chart types.
 
@@ -203,7 +219,7 @@ Some controls may be disabled depending on the insight type. For example, interv
 
 Individual tiles (insights) can have their own filters and date ranges configured separately from dashboard-level overrides. When both are set, **tile-level filters take precedence**:
 
-- **Scalar settings** like breakdown, interval, and filter test accounts: the tile's value completely replaces the dashboard override.
+- **Scalar settings** like breakdown, interval, comparison, and filter test accounts: the tile's value completely replaces the dashboard override.
 - **Date ranges:** If a tile has its own `date_from` or `date_to` set, its entire date range is used and the dashboard date override is ignored.
 - **Property filters:** Filters from both levels are combined using AND logic. However, if a tile filter directly contradicts a dashboard filter on the same property key, the tile filter wins and the conflicting dashboard filter is dropped.
 
@@ -213,7 +229,7 @@ The insight card displays a warning when tile filters are merging with or overri
 
 To completely detach a tile from all dashboard filters, toggle **Ignore dashboard filters** on in the tile's filter override modal (**⋯** → **Override tile filters**).
 
-When enabled, the tile ignores the dashboard's date range, properties, breakdown, interval, and test account filter. Tile-level overrides still apply, and [dashboard variables](/docs/data-warehouse/sql/variables) continue to work.
+When enabled, the tile ignores the dashboard's date range, properties, breakdown, interval, comparison, and test account filter. Tile-level overrides still apply, and [dashboard variables](/docs/data-warehouse/sql/variables) continue to work.
 
 Tiles ignoring dashboard filters display an **Ignores dashboard filters** indicator in the card heading.
 
