@@ -16,7 +16,9 @@ The workflow keeps full logs in files. It reads counts from the JSON reports for
 
 The workflow fetches the exact PR base commit before it builds. A shallow checkout alone may not contain that commit. The full production build retries once for a network fetch failure; other build errors fail immediately. Both attempt logs are saved with the scan reports. A failed build still produces an incomplete summary.
 
-Weekly and manual runs check all content and source files. PR runs check added or modified content and source files against the built site. This prevents unrelated old findings from blocking each edit. Page removals, renames, redirect changes, and changes to the checker, its workflow, dependencies, or page URL mapping trigger a full scan. The scheduled full scan remains necessary to find incoming links to a heading changed elsewhere. PR runs do not send Slack notifications.
+Weekly and manual runs check all content and source files and fail for any findings. PR runs build the PR merge revision and its exact base commit in parallel, with each revision's own dependencies. Both scans use the PR's checker code. A comparison blocks only findings that are new in the PR. Existing findings remain in the full reports, and `pr-link-check.json` separates new, existing, and resolved findings. Line number changes do not count as new problems. Additional occurrences do. Missing or incomplete reports fail the check.
+
+PR scans check all files, including incoming links from unchanged pages. Removing a heading can therefore fail the check even when its referring pages did not change. PR runs do not send Slack notifications. The base comparison requires a second production build; parallel jobs keep it out of the PR build's critical path.
 
 The manual `save_results` input controls artifact upload. Reports are still written locally because the summary needs them. The `send_slack_notification` input controls manual Slack notifications.
 
@@ -30,7 +32,7 @@ pnpm check-src-links link-check-results
 node scripts/link-check-report.js link-check-results
 ```
 
-To check only changed files, append `--changed-from=<full-base-commit-SHA>` to either checker. The base commit must be available locally.
+For an optional local scan of only changed files, append `--changed-from=<full-base-commit-SHA>` to either checker. The base commit must be available locally.
 
 ## Test Slack delivery
 
@@ -39,3 +41,9 @@ The automated tests verify the payload, incomplete reports, and HTTP error handl
 For an end-to-end test, open the **Check internal links** workflow in GitHub Actions. Select **Run workflow**, choose the PR branch, and leave **Save results to file** and **Send Slack notification** enabled. This sends a real notification through the existing repository secret, `SLACK_WEBHOOK_BROKEN_WEBSITE_INTERNAL_LINKS`.
 
 Check that the notification step succeeds, then confirm the message appears in the destination Slack channel. Compare its counts and artifact link with the run's summary and downloaded reports. A successful HTTP response confirms webhook acceptance; check Slack to confirm that the workflow posted the message. The scan can fail because it found broken links and still deliver its notification.
+
+To compare two complete scans locally:
+
+```sh
+node scripts/link-check-report.js head-results --compare-base=base-results
+```

@@ -5,7 +5,8 @@ const assert = require('node:assert/strict')
 const fs = require('fs')
 const os = require('os')
 const path = require('path')
-const { summarize, writeSummary, notify } = require('./link-check-report')
+const { summarize, writeSummary, notify, compareReports } = require('./link-check-report')
+const { spawnSync } = require('child_process')
 
 function reports(t) {
     const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'link-report-'))
@@ -89,4 +90,75 @@ test('an incomplete scan sends unknown counts instead of a success message', asy
     )
     assert.equal(payload.status, 'scan incomplete')
     assert.equal(payload.broken_links, 'unknown')
+})
+
+function scan(t, pages = [], anchors = [], source = []) {
+    const directory = reports(t)
+    for (const name of ['link-check.json', 'src-link-check.json']) {
+        const report = JSON.parse(fs.readFileSync(path.join(directory, name), 'utf8'))
+        report.brokenLinks = name === 'link-check.json' ? pages : source
+        report.brokenAnchors = name === 'link-check.json' ? anchors : []
+        report.summary.brokenLinks = report.brokenLinks.length
+        report.summary.brokenAnchors = report.brokenAnchors.length
+        fs.writeFileSync(path.join(directory, name), JSON.stringify(report))
+    }
+    return directory
+}
+
+test('PR comparisons retain backlog and ignore line shifts while reporting resolved findings', (t) => {
+    const old = { file: 'contents/docs/page.md', line: 5, brokenLink: '/old-missing' }
+    const fixed = { file: 'contents/docs/page.md', line: 10, brokenLink: '/now-fixed' }
+    const baseline = scan(t, [old, fixed])
+    const directory = scan(t, [{ ...old, line: 50 }])
+    const result = compareReports(directory, baseline)
+    assert.equal(result.newFindings.length, 0)
+    assert.equal(result.existingFindings.length, 1)
+    assert.deepEqual(
+        result.resolvedFindings.map((item) => item.brokenLink),
+        ['/now-fixed']
+    )
+    const cli = spawnSync(
+        process.execPath,
+        [path.join(__dirname, 'link-check-report.js'), directory, `--compare-base=${baseline}`],
+        { encoding: 'utf8' }
+    )
+    assert.equal(cli.status, 0, cli.stdout + cli.stderr)
+})
+
+test('PR comparisons block new pages, incoming anchor failures, source links, and duplicate occurrences', (t) => {
+    const old = { file: 'contents/docs/page.md', brokenLink: '/missing', line: 1 }
+    const baseline = scan(t, [old])
+    const directory = scan(
+        t,
+        [old, { ...old, line: 2 }, { ...old, brokenLink: '/new-missing' }],
+        [{ file: 'contents/docs/unchanged.md', brokenLink: '/changed-page#removed-heading', line: 10 }],
+        [
+            {
+                brokenUrl: 'https://posthog.com/source-missing',
+                locations: [{ file: 'src/component.tsx', link: '/source-missing', line: 5 }],
+            },
+        ]
+    )
+    const result = compareReports(directory, baseline)
+    assert.equal(result.newFindings.length, 4)
+    assert.equal(result.existingFindings.length, 1)
+    const cli = spawnSync(
+        process.execPath,
+        [path.join(__dirname, 'link-check-report.js'), directory, `--compare-base=${baseline}`],
+        { encoding: 'utf8' }
+    )
+    assert.equal(cli.status, 1, cli.stdout + cli.stderr)
+})
+
+test('a missing baseline is an execution failure, never a passing comparison', (t) => {
+    const directory = scan(t)
+    const baseline = scan(t)
+    fs.unlinkSync(path.join(baseline, 'src-link-check.json'))
+    assert.throws(() => compareReports(directory, baseline), /Incomplete link scan/)
+    const cli = spawnSync(
+        process.execPath,
+        [path.join(__dirname, 'link-check-report.js'), directory, `--compare-base=${baseline}`],
+        { encoding: 'utf8' }
+    )
+    assert.equal(cli.status, 2)
 })

@@ -32,6 +32,10 @@ jobs:
     check-internal-links:
         runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
+        strategy:
+            fail-fast: false
+            matrix:
+                target: ${{ fromJSON(github.event_name == 'pull_request' && '["head", "base"]' || '["head"]') }}
         env:
             NODE_OPTIONS: '--max-old-space-size=16384 --expose-gc'
             GATSBY_CPU_COUNT: 1
@@ -55,13 +59,28 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
             - name: Test link checker
+              if: ${{ matrix.target == 'head' }}
               run: pnpm test:links
+            - name: Prepare site revision
+              env:
+                  TARGET: ${{ matrix.target }}
+                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+              run: |
+                  SITE_DIR="$GITHUB_WORKSPACE"
+                  if [ "$TARGET" = base ]; then
+                    SITE_DIR="$RUNNER_TEMP/link-check-base"
+                    git worktree add --detach "$SITE_DIR" "$BASE_SHA"
+                    cd "$SITE_DIR"
+                    pnpm install --frozen-lockfile
+                  fi
+                  echo "SITE_DIR=$SITE_DIR" >> "$GITHUB_ENV"
             - name: Build site
               id: build
               run: |
-                  mkdir -p link-check-results
+                  mkdir -p "$GITHUB_WORKSPACE/link-check-results"
+                  cd "$SITE_DIR"
                   for ATTEMPT in 1 2; do
-                    BUILD_LOG="link-check-results/build-$ATTEMPT.log"
+                    BUILD_LOG="$GITHUB_WORKSPACE/link-check-results/build-$ATTEMPT.log"
                     set +e
                     pnpm build > "$BUILD_LOG" 2>&1
                     EXIT_CODE=$?
@@ -77,28 +96,28 @@ jobs:
             - name: Check content links
               if: ${{ !cancelled() && steps.build.outcome == 'success' }}
               env:
-                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+                  PR_SCAN: ${{ github.event_name == 'pull_request' }}
               run: |
-                  mkdir -p link-check-results
-                  ARGS=()
-                  if [ -n "$BASE_SHA" ]; then ARGS+=("--changed-from=$BASE_SHA"); fi
+                  cd "$SITE_DIR"
                   set +e
-                  node scripts/check-links-post-build.js link-check-results "${ARGS[@]}" > link-check-results/content.log 2>&1
+                  node "$GITHUB_WORKSPACE/scripts/check-links-post-build.js" "$GITHUB_WORKSPACE/link-check-results" > "$GITHUB_WORKSPACE/link-check-results/content.log" 2>&1
                   EXIT_CODE=$?
-                  tail -n 60 link-check-results/content.log
+                  tail -n 60 "$GITHUB_WORKSPACE/link-check-results/content.log"
+                  # PR findings are gated by the base comparison. Execution errors still fail.
+                  if [ "$PR_SCAN" = true ] && [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
                   exit "$EXIT_CODE"
             - name: Check source code links
               if: ${{ !cancelled() && steps.build.outcome == 'success' }}
               env:
-                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
+                  PR_SCAN: ${{ github.event_name == 'pull_request' }}
               run: |
-                  mkdir -p link-check-results
-                  ARGS=()
-                  if [ -n "$BASE_SHA" ]; then ARGS+=("--changed-from=$BASE_SHA"); fi
+                  cd "$SITE_DIR"
                   set +e
-                  node scripts/check-src-links.js link-check-results "${ARGS[@]}" > link-check-results/source.log 2>&1
+                  node "$GITHUB_WORKSPACE/scripts/check-src-links.js" "$GITHUB_WORKSPACE/link-check-results" > "$GITHUB_WORKSPACE/link-check-results/source.log" 2>&1
                   EXIT_CODE=$?
-                  tail -n 60 link-check-results/source.log
+                  tail -n 60 "$GITHUB_WORKSPACE/link-check-results/source.log"
+                  # PR findings are gated by the base comparison. Execution errors still fail.
+                  if [ "$PR_SCAN" = true ] && [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
                   exit "$EXIT_CODE"
             - name: Write link check summary
               if: ${{ !cancelled() }}
@@ -108,7 +127,7 @@ jobs:
               id: upload-results
               uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
-                  name: link-check-results
+                  name: ${{ matrix.target == 'head' && 'link-check-results' || 'link-check-base-results' }}
                   path: link-check-results/
                   if-no-files-found: error
                   retention-days: 30
@@ -124,3 +143,36 @@ jobs:
                   ARTIFACT_ID: ${{ steps.upload-results.outputs.artifact-id }}
                   SAVE_RESULTS: ${{ inputs.save_results }}
               run: node scripts/link-check-report.js link-check-results --notify
+
+    compare-pr-links:
+        name: Check new broken links
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
+        needs: check-internal-links
+        runs-on: depot-ubuntu-latest-8
+        steps:
+            - name: Checkout checker
+              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+            - name: Setup Node.js
+              uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+              with:
+                  node-version: '22'
+            - name: Download PR report
+              uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+              with:
+                  name: link-check-results
+                  path: link-check-results/head
+            - name: Download base report
+              uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+              with:
+                  name: link-check-base-results
+                  path: link-check-results/base
+            - name: Compare findings
+              run: node scripts/link-check-report.js link-check-results/head --compare-base=link-check-results/base
+            - name: Upload comparison
+              if: ${{ !cancelled() }}
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+              with:
+                  name: link-check-comparison
+                  path: link-check-results/head/pr-link-check.json
+                  if-no-files-found: error
+                  retention-days: 30

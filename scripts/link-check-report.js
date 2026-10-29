@@ -96,9 +96,56 @@ async function notify(summary, env = process.env, send = fetch) {
     console.log('Slack notification sent successfully')
 }
 
+function compareReports(directory, baseline, summaryFile) {
+    function findings(dir) {
+        const summary = summarize(dir)
+        if (!summary.complete) throw new Error(`Incomplete link scan at ${dir}: ${summary.errors.join('; ')}`)
+        const content = JSON.parse(fs.readFileSync(path.join(dir, 'link-check.json'), 'utf8'))
+        const source = JSON.parse(fs.readFileSync(path.join(dir, 'src-link-check.json'), 'utf8'))
+        return [
+            ...content.brokenLinks.map((item) => ({ ...item, kind: 'page' })),
+            ...content.brokenAnchors.map((item) => ({ ...item, kind: 'anchor' })),
+            ...source.brokenLinks.flatMap((item) =>
+                item.locations.map((location) => ({ ...location, brokenLink: location.link, kind: 'source' }))
+            ),
+        ]
+    }
+    const key = (item) => JSON.stringify([item.kind, item.file, item.brokenLink])
+    const base = findings(baseline)
+    const remaining = new Map()
+    for (const item of base) remaining.set(key(item), [...(remaining.get(key(item)) || []), item])
+    const added = []
+    const existing = []
+    for (const item of findings(directory)) {
+        if (remaining.get(key(item))?.length) {
+            remaining.get(key(item)).pop()
+            existing.push(item)
+        } else added.push(item)
+    }
+    const resolved = [...remaining.values()].flat()
+    const result = { newFindings: added, existingFindings: existing, resolvedFindings: resolved }
+    fs.writeFileSync(path.join(directory, 'pr-link-check.json'), JSON.stringify(result, null, 2))
+    const markdown = [
+        '## New broken links',
+        '',
+        `Found ${added.length} new findings, ${existing.length} existing findings, and ${resolved.length} resolved findings.`,
+        'Only new findings block this PR. Full reports retain the existing backlog.',
+        '',
+        ...added.map((item) => `- ${item.file}:${item.line} — ${item.brokenLink}`),
+        '',
+    ].join('\n')
+    if (summaryFile) fs.appendFileSync(summaryFile, markdown)
+    console.log(markdown)
+    return result
+}
+
 async function main() {
     const directory = process.argv[2] || 'link-check-results'
-    if (process.argv.includes('--notify')) {
+    const baseline = process.argv.find((arg) => arg.startsWith('--compare-base='))?.slice('--compare-base='.length)
+    if (baseline) {
+        const result = compareReports(directory, baseline, process.env.GITHUB_STEP_SUMMARY)
+        if (result.newFindings.length) process.exitCode = 1
+    } else if (process.argv.includes('--notify')) {
         await notify(summarize(directory))
     } else {
         const summary = writeSummary(directory, process.env.GITHUB_STEP_SUMMARY)
@@ -110,4 +157,4 @@ if (require.main === module)
         console.error(error.message)
         process.exitCode = 2
     })
-module.exports = { summarize, writeSummary, notify }
+module.exports = { summarize, writeSummary, notify, compareReports }
