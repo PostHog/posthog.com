@@ -242,7 +242,7 @@ export const features = {
                 description: (
                     <>
                         {'Browse our '}
-                        <Link to="/cdp?type=destination" state={{ newWindow: true }}>
+                        <Link to="/data-pipelines" state={{ newWindow: true }}>
                             {'destination library'}
                         </Link>
                         {' to explore the possibilities'}

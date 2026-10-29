@@ -35,12 +35,8 @@ export const customerDataInfrastructureNav = {
             url: '/context-warehouse/posthog-ai',
         },
         {
-            name: 'Data sources & import (ELT)',
-            url: '/context-warehouse/sources',
-        },
-        {
-            name: 'CDP',
-            url: '/cdp',
+            name: 'Data pipelines',
+            url: '/data-pipelines',
         },
         {
             name: 'Data modeling',
@@ -53,10 +49,6 @@ export const customerDataInfrastructureNav = {
         {
             name: 'Business intelligence (BI)',
             url: '/context-warehouse/business-intelligence',
-        },
-        {
-            name: 'Reverse ETL & export',
-            url: '/context-warehouse/reverse-etl-export',
         },
         {
             name: 'Integrations',

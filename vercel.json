@@ -3642,11 +3642,11 @@
         },
         {
             "source": "/apps/bitbucket-release-tracker",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/currency-normalization",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/customer-io",
@@ -3654,7 +3654,7 @@
         },
         {
             "source": "/apps/databricks",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/downsampling",
@@ -3662,7 +3662,7 @@
         },
         {
             "source": "/apps/email-scoring",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/engage-connector",
@@ -3702,7 +3702,7 @@
         },
         {
             "source": "/apps/heartbeat",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/hubspot-connector",
@@ -3710,7 +3710,7 @@
         },
         {
             "source": "/apps/ingestion-alert",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/intercom",
@@ -3730,7 +3730,7 @@
         },
         {
             "source": "/apps/orbit",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/outfunnel-exporter",
@@ -3742,7 +3742,7 @@
         },
         {
             "source": "/apps/pagerduty-connector",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/patterns-connector",
@@ -3758,7 +3758,7 @@
         },
         {
             "source": "/apps/property-flattener",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/redshift-export",
@@ -3810,7 +3810,7 @@
         },
         {
             "source": "/apps/shopify",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/snowflake-export",
@@ -3818,7 +3818,7 @@
         },
         {
             "source": "/apps/stripe-connector",
-            "destination": "/cdp"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/taxonomy-standardizer",
@@ -3830,11 +3830,11 @@
         },
         {
             "source": "/apps/twitter-followers",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/unduplicator",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/url-normalizer",
@@ -3854,7 +3854,7 @@
         },
         {
             "source": "/apps/zapier-connector",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/zendesk-connector",
@@ -5917,7 +5917,7 @@
         },
         {
             "source": "/apps",
-            "destination": "/cdp",
+            "destination": "/data-pipelines",
             "statusCode": 302
         },
         {
@@ -6902,6 +6902,18 @@
         {
             "source": "/context-warehouse/warehouse",
             "destination": "/warehouse"
+        },
+        {
+            "source": "/cdp",
+            "destination": "/data-pipelines"
+        },
+        {
+            "source": "/context-warehouse/sources",
+            "destination": "/data-pipelines"
+        },
+        {
+            "source": "/context-warehouse/reverse-etl-export",
+            "destination": "/data-pipelines"
         },
         {
             "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
