@@ -147,7 +147,7 @@ To determine what to do at this stage, we need to make a call to PostgreSQL to d
 >
 > **Merging two persons**
 >
-> In the third scenario, where we have inadvertently created two persons for the same user, we need to merge them. PostHog has a few built-in protections, in which case the merge will not be aborted ([more info](/docs/integrate/identifying-users#considerations)). 
+> In the third scenario, where we have inadvertently created two persons for the same user, we need to merge them. PostHog has a few built-in protections, in which case the merge will not be aborted ([more info](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user)).
 >
 > In the case of an `$identify` call, we merge the person tied to `$anon_distinct_id` (`person_2`) into the person identified by `distinct_id` (`person_1`). This means that we associate `$anon_distinct_id` with `person_1`, delete `person_2` and all future events for `$anon_distinct_id` are associated with `person_1`.
 >

@@ -39,7 +39,7 @@ Tables using this engine set up Kafka consumers that consume data on read querie
 
 ### `events_mv` materialized view
 
-The `events_mv` table is a [materialized view](https://clickhouse.com/docs/en/sql-reference/statements/create/view/#materialized).
+The `events_mv` table is a materialized view.
 
 In this case, it acts as a data pipe which periodically pulls data from `kafka_events` and pushes it into the target (events) table.
 
