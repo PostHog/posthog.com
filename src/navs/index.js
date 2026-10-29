@@ -8510,6 +8510,24 @@ export const docsMenu = {
                     url: '/docs/workflows/transactional-emails',
                     icon: 'IconLetter',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows/transactional-emails',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/workflows/transactional-emails/node',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/workflows/transactional-emails/python',
+                        },
+                        {
+                            name: 'API',
+                            url: '/docs/workflows/transactional-emails/api',
+                        },
+                    ],
                 },
                 {
                     name: 'Channels',
