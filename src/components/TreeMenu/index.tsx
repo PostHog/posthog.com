@@ -244,6 +244,7 @@ const SidebarLink = ({
             <MarqueeLabel hovering={hovering} wrap={menuItem.wrap}>
                 {menuItem.name}
             </MarqueeLabel>
+            <Badge badge={menuItem.badge} />
             {arrow && <IconArrowUpRight className="size-3.5 shrink-0 opacity-60" />}
         </Link>
     )
@@ -334,6 +335,7 @@ function SidebarCollapsibleItem({
                 >
                     <SidebarIcon icon={item.icon} />
                     <MarqueeLabel hovering={hovering}>{item.name}</MarqueeLabel>
+                    <Badge badge={item.badge} />
                 </Link>
                 <button
                     type="button"
