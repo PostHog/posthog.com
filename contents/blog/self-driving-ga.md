@@ -59,7 +59,7 @@ Every new org gets $10 off self-driving in its first month. That's enough for up
 
 - **You pay per run.** A scout scan, a signals investigation, or a PR implementation each counts as one run, and each one tells you what it cost.
 
-- **Not all runs cost the same.** Cost depends on how much context the agent reads, which model it uses, and how long it spends in a sandbox. Light runs cost cents. Deep dives into your data cost more.
+- **Not all runs cost the same.** Cost depends on how much context the agent reads and how long it spends in a sandbox. Light runs cost cents. Deep dives into your data cost more.
 
 - **You only pay for what you turn on.** Choose reports, PRs, or both, and billing limits cap what you spend.
 
