@@ -345,15 +345,13 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                         >
                             <p>
                                 PostHog ships the full analytics toolkit: funnels, retention, user paths, lifecycle
-                                charts, correlation analysis, stickiness, and HogQL. Pick the right lens for any
-                                question.
+                                charts, stickiness, and HogQL. Pick the right lens for any question.
                             </p>
 
                             <h3>Funnels</h3>
                             <p>
-                                See exactly where users drop off. Correlation analysis automatically surfaces what makes
-                                users convert — without you having to guess. Jump directly from any funnel step to watch
-                                session recordings for those exact users.
+                                See exactly where users drop off. Jump directly from any funnel step to watch session
+                                recordings for those exact users.
                             </p>
                             <ProductScreenshot
                                 imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png"
@@ -527,12 +525,12 @@ export default function ProductAnalyticsLanding(): JSX.Element {
                                     },
                                     {
                                         question: "What's my churn rate and how can I reduce it?",
-                                        answer: 'Build a retention chart and define what "return" means for your product. Correlation analysis automatically surfaces what churned users did differently — no guesswork.',
+                                        answer: 'Build a retention chart and define what "return" means for your product. Then watch session recordings of churned users to see what they did differently.',
                                         url: '/tutorials/churn-rate',
                                     },
                                     {
                                         question: 'Which features increase user retention?',
-                                        answer: 'Filter your retention chart by feature usage events and compare cohorts. You can also use correlation analysis on retained users to find which actions predict long-term engagement.',
+                                        answer: 'Filter your retention chart by feature usage events and compare cohorts.',
                                         url: '/tutorials/feature-retention',
                                     },
                                     {
