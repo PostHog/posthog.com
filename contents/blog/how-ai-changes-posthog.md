@@ -92,24 +92,27 @@ Although this undercounts unassignable SQL tool calls, the split is clear. Watch
 
 - The wizard is for setup. 64% of its tool calls are for writing (creating or updating objects), much higher than the next largest write source (WebMCP at 22%).
 - Slack is almost the opposite: 78% is SQL and schema lookups, only 5% writes.
-- The PostHog team uses our Slack app 11x more than our customers. Our team made 39% of all Slack app calls.
+- The PostHog team makes our 11x more Slack calls per user than our customers. Our team made 39% of all Slack app calls.
 
-## Agent users do more
+## AI users adopt and use PostHog more
 
-Usage across PostHog is up. Between July 2025 and September 2026, the median PostHog creator went from 3 objects a month to 6. Among people who created something in both September 2025 and September 2026, those who started using agents went from a median of 5 objects created to 11. Those who didn't went from 4 to 3.
+AI is drives adoption. Our AI installation wizard is the first way that happens. 14.2% of orgs who use it to install PostHog convert to paid against 2.6% for manual installs. They average 0.88 extra products adopted in their second month against 0.36 for manual installs.
 
-![Agent vs non-agent creation](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_10_27_at_13_49_11_2x_6c34ba217e.png)
+Our MCP also helps. After the first month of using it, 28–37% of orgs added a product within two months, against 4–8% of non-adopting controls, depending on their start month and size. 
 
-They also use more products beyond just product analytics like session replay, feature flags, error tracking, and logs. For orgs with over 1M events:
+AI users expand beyond product analytics more often into products like [session replay](/session-replay), [feature flags](/feature-flags), [error tracking](/error-tracking), and [logs](/logs). For orgs with over 1M events:
 
 | Org type       | Extra products in use | Orgs with 3+ extra products |
 | -------------- | --------------------- | --------------------------- |
 | No AI          | 1.33                  | 14%                         |
 | 100+ MCP calls | 3.46                  | 68%                         |
 
-After first using the MCP, 28–37% of orgs added a product within two months, against 4–8% of non-adopting controls, depending on their start month and size. 
 
-This increased adoption is also true of orgs that install with the wizard. In their second month, they average 0.88 extra products against 0.36 for manual installs. The wizard also converts to paid a lot better: 14.2% of them convert to paid against 2.6% for manual installs. 
+At an individual level, usage across PostHog is up too. Usage across PostHog is up. Between July 2025 and September 2026, the median PostHog creator went from 3 objects a month to 6. 
+
+AI is a big part of what's driving it. Among people who created something in both September 2025 and September 2026, those who started using agents went from a median of 5 objects created to 11. Those who didn't went from 4 to 3.
+
+![Agent vs non-agent creation](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2026_10_27_at_13_49_11_2x_6c34ba217e.png)
 
 ## Most free orgs don't use AI. Most paying orgs do.
 
@@ -125,7 +128,9 @@ Our new ICP of "[AI-pilled software teams](/handbook/who-we-build-for)" is looki
 
 Agent experience matters a lot and we're focusing on getting it right.
 
-MCP tool count is up 6x since April and as of September covers 68 features from AI observability to business knowledge to access controls to billing.
+First, [our CLI](/docs/cli) has made big jumps. In June, it only had error tracking and source map support, but since then we've matched its functionality with the MCP server. It went from 113k calls in July to 707k calls in September. 
+
+On the MCP side, tool count is up 6x since April and as of September covers 68 features from AI observability to business knowledge to access controls to billing.
 
 | Date        | MCP tools | Features covered |
 | ----------- | --------- | ---------------- |
@@ -135,8 +140,6 @@ MCP tool count is up 6x since April and as of September covers 68 features from 
 | Sep 1       | 909       | 68               |
 
 For tools other than `execute-sql`, error rate has dropped significantly between August and September from 2.8% to 1.7%. 
-
-[Our CLI](/docs/cli) has made big jumps too. In June, it only had error tracking and source map support, but since then we've matched its functionality with the MCP server. It went from 113k calls in July to 707k calls in September. 
 
 We're also building more UI for humans to work with AI. [Notebooks](/docs/notebooks) were rewritten on markdown, gained AI-generated widgets you can pin to dashboards, and now show what's changed since last visit. We're also building a dedicated [business intelligence product](/context-warehouse/business-intelligence) with pivots, drill-downs, and period comparisons. 
 
