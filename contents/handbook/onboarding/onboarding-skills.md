@@ -1,14 +1,25 @@
 ---
-title: Customer deep dive skill
+title: Onboarding skills
 sidebar: Handbook
 showTitle: true
 ---
 
+These are the Claude skills the onboarding team has built for work we do over and over, like researching an account before we write to it or following up after a call. Each one drafts and never sends: whatever it writes lands with you to read, edit and send yourself.
+
+| Skill | Use it for | Where it lives | Owner |
+|---|---|---|---|
+| [Customer deep dive](#customer-deep-dive) | Researching an account before an email, a reply or a call | [PostHog/skills](https://github.com/PostHog/skills/tree/main/skills/team/onboarding/posthog-customer-deep-dive), as a Claude Code plugin | [Daniel](/community/profiles/34722) |
+| [Customer call follow-up](#customer-call-follow-up) | The follow-up email after a customer call | The skills store on our internal PostHog project | [Magda](/community/profiles/33065) |
+
+When you build a skill the rest of the team should use, add a row and a section here.
+
+## Customer deep dive
+
 The customer deep dive is a Claude Code skill the onboarding team uses to research a PostHog account before emailing it, replying to it, or joining a call with it. You give it an email address or an account, it pulls everything PostHog knows about that account, and it hands back a draft email or a call-prep brief in chat for you to review.
 
-It lives in the [PostHog/skills repo](https://github.com/PostHog/skills/tree/main/skills/team/onboarding/posthog-customer-deep-dive), and the [README](https://github.com/PostHog/skills/blob/main/skills/team/onboarding/posthog-customer-deep-dive/README.md) there carries the full setup. This page covers what it does and how we use it.
+It lives in the [PostHog/skills repo](https://github.com/PostHog/skills/tree/main/skills/team/onboarding/posthog-customer-deep-dive), and the [README](https://github.com/PostHog/skills/blob/main/skills/team/onboarding/posthog-customer-deep-dive/README.md) there carries the full setup. This section covers what it does and how we use it.
 
-## What it does
+### What it does
 
 The skill resolves whatever you hand it to an account in [Customer Analytics](/docs/customer-analytics/start-here), then reads the account across the sources onboarding already works from:
 
@@ -21,7 +32,7 @@ The skill resolves whatever you hand it to an account in [Customer Analytics](/d
 
 It runs these reads in parallel through subagents, reconciles what they return, and then checks every product claim it plans to make against a live search of the PostHog docs before it writes anything.
 
-## What it produces
+### What it produces
 
 The skill picks an output from the account's state. If you ask for something specific, your ask wins.
 
@@ -37,7 +48,7 @@ Every output starts with the same header: pipeline stage, what onboarding sent a
 
 Every recommendation in a customer-facing draft carries a link to the docs page it came from.
 
-## When to use it
+### When to use it
 
 - Before the first email to an account in the onboarding queue.
 - Before a follow-up, to see what changed and whether they acted on the last email.
@@ -46,7 +57,7 @@ Every recommendation in a customer-facing draft carries a link to the docs page 
 
 You don't need it for a one-line nudge on a thread you already know well.
 
-## Install
+### Install
 
 It's a Claude Code plugin in the `PostHog/skills` repo. A copy also sits in the skills store of our internal PostHog project, which is what PostHog's own cloud runs, like the `@PostHog` Slack app, pick up for its owners. On your own machine, install the plugin. Pick one route, then restart Claude Code.
 
@@ -64,12 +75,13 @@ Or copy the folder instead:
 
 ```bash
 git clone https://github.com/PostHog/skills.git
+mkdir -p ~/.claude/skills
 cp -r skills/skills/team/onboarding/posthog-customer-deep-dive ~/.claude/skills/
 ```
 
 Updates are never automatic. The skill checks its own version against the published one at most once a day and prints the update commands when you're behind.
 
-## Setup
+### Setup
 
 Two things are required:
 
@@ -82,7 +94,7 @@ Everything else is optional and gets skipped when it's set to `none`: Gong, your
 
 The README has a numbered section for each tool, each ending with a check that proves it works.
 
-## Running it
+### Running it
 
 ```
 /posthog-customer-deep-dive someone@example.com
@@ -98,7 +110,7 @@ A typical call-prep run looks like this:
 4. It verifies each product claim against the docs, then writes the brief into chat, followed by a prompt you can paste into a PostHog AI notebook in the customer's project.
 5. A closing note lists what it skipped and why, and how many claims it checked against a fetched docs page.
 
-## Guardrails
+### Guardrails
 
 - **It never sends, posts or writes anything.** No email to a customer, no account property, note, task, tag or workflow in PostHog, nothing in Salesforce. Every output lands in chat for you to read, edit and send yourself. When the pipeline needs a manual change, like a referral tag or an opt-out, it reminds you to make it.
 - **Every number comes from a query it ran in that run, and every product fact from a docs search it ran in that run.** Nothing from memory. Derived figures show their arithmetic so a slipped digit is visible. Where it can't verify something, it gives you the question to ask the customer instead.
@@ -108,7 +120,7 @@ A typical call-prep run looks like this:
 - **It surfaces disagreements between sources** with both figures, instead of picking one.
 - **Product state is never written into the skill.** Prices, tiers and where a setting lives are searched live every run.
 
-## Known limits
+### Known limits
 
 - **It depends on data that changes.** Customer Analytics, the onboarding model behind it, the email sync and the `Onboarding::` workflows are all still being built, and warehouse tables change too. A read that comes back empty can be a stale query rather than a real zero, and the skill says when it couldn't measure something.
 - **It's a draft tool, not an autopilot.** A human reads every output before anything reaches a customer.
@@ -116,6 +128,37 @@ A typical call-prep run looks like this:
 - **The email sync only keeps a short snippet of the latest message.** For the full thread it needs Gmail, and Gmail only reads your own mailbox, so a teammate's thread needs their copy.
 - **Call prep is the heaviest run.** It fans out many reads plus a verification pass and shares query capacity with anyone else running it, so don't start it in the minutes before the call.
 
-## Who to ask
+### Who to ask
 
 [Daniel](/community/profiles/34722) maintains the skill. Ask in `#team-onboarding`, or open an issue on the [PostHog/skills repo](https://github.com/PostHog/skills). If you change a file in the skill, bump the version in `.claude-plugin/plugin.json` in the same PR, or nobody's installed copy will update.
+
+## Customer call follow-up
+
+The customer call follow-up skill writes the email after a call. It turns the call transcript into a recap with the recording link, answers to the open questions and the docs the customer needs, and hands it over as a page you paste into Gmail.
+
+### What it does
+
+- Finds the meeting and every external attendee through your calendar, Granola or Gong, and puts all of them on the To line.
+- Reads the Granola transcript, or Gong's for older calls, and pulls out what you covered and anything you promised to follow up on. If there's no transcript anywhere, it says so and stops.
+- Answers the open questions with a link to the exact docs page, searches Slack for how a feature behaves, and queries the customer's own PostHog project for questions about their setup. Anything it can't answer confidently gets flagged instead of guessed.
+- Picks resources that match what you discussed, plus the PostHog AI prompt library, the MCP, one to three videos on how we use PostHog, the booking link and the feedback survey.
+
+### What you get
+
+A plain HTML page with the email on it. A note at the top lists the recipients, the subject (`PostHog's meeting - summary`) and every `[link]` placeholder you still fill in by hand, like the Gong share link for the recording. Select everything below the line, copy it, and paste it into a Gmail compose window. Pasting from the page keeps every link direct, where a Gmail draft would turn them into google.com redirects.
+
+### Setup
+
+It's in the skills store on our internal PostHog project, and it runs in an agent with Granola, Gong, Google Calendar, Slack and the PostHog MCP connected. Gmail is optional and only adds context from earlier threads.
+
+The booking link, the survey link, the videos and the sign-off are Magda's, so swap in your own before you use it.
+
+### Guardrails
+
+- **It never sends an email and never creates a Gmail draft.** The paste page is the whole deliverable.
+- **No invented links or facts.** Every link comes from its standing list or a docs search.
+- **Internal context stays internal.** Anything it learns in Slack goes into the email as a clean answer for the customer, never as a quote.
+
+### Who to ask
+
+[Magda](/community/profiles/33065) maintains the skill. Ask in `#team-onboarding`.
