@@ -333,3 +333,75 @@ test('checker-only changes scan all files while content-only changes stay scoped
     git(['update-ref', 'refs/heads/main', checker])
     assert.deepEqual(changedFiles(files, initial), files)
 })
+
+test('workflow base selection uses the merge parent when the webhook SHA is stale', (t) => {
+    const write = fixture(t)
+    const directory = path.dirname(write('marker', ''))
+    const git = (cwd, args, options = {}) => execFileSync('git', args, { cwd, encoding: 'utf8', ...options }).trim()
+    const origin = path.join(directory, 'origin')
+    fs.mkdirSync(origin)
+    git(origin, ['init', '--quiet'])
+    git(origin, ['fast-import', '--quiet'], {
+        input: [
+            'commit refs/heads/master',
+            'mark :1',
+            'committer Test <test@example.com> 1234567890 +0000',
+            'data 4',
+            'test',
+            'M 100644 inline page',
+            'data 3',
+            'old',
+            '',
+            'commit refs/heads/feature',
+            'mark :2',
+            'committer Test <test@example.com> 1234567891 +0000',
+            'data 4',
+            'test',
+            'from :1',
+            'M 100644 inline feature',
+            'data 3',
+            'new',
+            '',
+            'commit refs/heads/master',
+            'mark :3',
+            'committer Test <test@example.com> 1234567892 +0000',
+            'data 4',
+            'test',
+            'from :1',
+            'M 100644 inline page',
+            'data 7',
+            'current',
+            '',
+            'commit refs/heads/pr-merge',
+            'committer Test <test@example.com> 1234567893 +0000',
+            'data 4',
+            'test',
+            'from :3',
+            'merge :2',
+            'M 100644 inline feature',
+            'data 3',
+            'new',
+            '',
+        ].join('\n'),
+    })
+    const stale = git(origin, ['rev-parse', 'master~1'])
+    const expected = git(origin, ['rev-parse', 'master'])
+    const checkout = path.join(directory, 'checkout')
+    git(directory, ['clone', '--quiet', '--no-local', '--depth=2', '--branch=pr-merge', origin, checkout])
+    const workflow = fs.readFileSync(path.join(__dirname, '../.github/workflows/internal-links-check.yml'), 'utf8')
+    const block = workflow.match(/- name: Fetch PR base commit\n[\s\S]*? {14}run: \|\n((?: {18}[^\n]*\n)+)/)[1]
+    const script = block
+        .split('\n')
+        .map((line) => line.slice(18))
+        .join('\n')
+    const output = path.join(directory, 'github-env')
+    const run = spawnSync('bash', ['-e'], {
+        cwd: checkout,
+        input: script,
+        encoding: 'utf8',
+        env: { ...process.env, BASE_SHA: stale, GITHUB_ENV: output },
+    })
+    assert.equal(run.status, 0, run.stdout + run.stderr)
+    assert.equal(fs.readFileSync(output, 'utf8').trim(), `BASE_SHA=${expected}`)
+    assert.notEqual(expected, stale)
+})

@@ -46,9 +46,11 @@ jobs:
                   fetch-depth: 2
             - name: Fetch PR base commit
               if: ${{ github.event_name == 'pull_request' }}
-              env:
-                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
-              run: git fetch --no-tags --depth=1 origin "$BASE_SHA"
+              run: |
+                  # The webhook base SHA can lag behind the checked-out PR merge ref.
+                  BASE_SHA=$(git rev-parse HEAD^1)
+                  git fetch --no-tags --depth=1 origin "$BASE_SHA"
+                  echo "BASE_SHA=$BASE_SHA" >> "$GITHUB_ENV"
             - name: Install pnpm
               uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
             - name: Setup Node.js
@@ -64,7 +66,6 @@ jobs:
             - name: Prepare site revision
               env:
                   TARGET: ${{ matrix.target }}
-                  BASE_SHA: ${{ github.event.pull_request.base.sha }}
               run: |
                   SITE_DIR="$GITHUB_WORKSPACE"
                   if [ "$TARGET" = base ]; then

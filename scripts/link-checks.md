@@ -14,7 +14,7 @@ Pass an output directory to save `link-check.json` or `src-link-check.json`. Bot
 
 The workflow keeps full logs in files. It reads counts from the JSON reports for the job summary and the existing Slack payload. Missing or invalid reports produce an incomplete result, with unknown counts. Slack HTTP failures fail the notification step. Full scan output is never copied into the process environment.
 
-The workflow fetches the exact PR base commit before it builds. A shallow checkout alone may not contain that commit. The full production build retries once for a network fetch failure; other build errors fail immediately. Both attempt logs are saved with the scan reports. A failed build still produces an incomplete summary.
+The workflow uses the checked-out PR merge commit's first parent as its base, then fetches that exact commit before it builds. The webhook base SHA can lag behind the merge ref when master advances. A shallow checkout alone may not contain that commit. The full production build retries once for a network fetch failure; other build errors fail immediately. Both attempt logs are saved with the scan reports. A failed build still produces an incomplete summary.
 
 The build receives the read-only GitHub job token as `GITHUB_API_KEY`. The existing data loader requires this variable to generate pipeline documentation. Without it, valid generated pages can be reported as missing.
 
