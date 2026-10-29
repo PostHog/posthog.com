@@ -17,9 +17,9 @@ seo:
     metaDescription: "PostHog self-driving is out of beta. See how Juno, SoundBoost, Higgsfield, and our own team use it, and how the new per-run pricing works."
 ---
 
-In July we launched the PostHog self-driving Inbox as an open beta. Our agents dug through your product data, found things worth fixing, and tried to fix them. Their fix rate is now high enough that it's out of beta, and it has real pricing.
+In July we launched PostHog [self-driving](/self-driving) as an open beta. Our agents dug through your product data, found things worth fixing, and tried to fix them. Their fix rate is now high enough that it's out of beta, and it has real pricing.
 
-The pricing is on [our pricing page](/pricing). If that's all you came for, skip to [the pricing section](#all-i-want-to-know-about-is-the-pricing). For everyone else, here's what thousands of teams, including ours, are doing with it.
+If pricing is all you came for, skip to [the pricing section](#all-i-want-to-know-about-is-the-pricing). For everyone else, here's what thousands of teams, including ours, are doing with it.
 
 ## Juno merged 26 of the last 30 PRs our agents opened
 
@@ -33,7 +33,7 @@ Juno's team merged 26 of the agents' last 30 PRs straight away. Some fixed bugs,
 
 [SoundBoost](/customers/soundboost) is an AI mastering tool with 225,000 users and a team of four. Founder Berkan Cesur starts every morning in the self-driving Inbox, where reports rank what to fix next. "If we fix 10% here, 5% there? Those gains add up, and PostHog compiles that into a menu for me," he says.
 
-Most mornings that's bug fixes and performance work, but one morning it was an existential problem. A scout noticed daily clicks from Google had dropped to zero shortly after SoundBoost moved from an .ai domain to a .com. The team assumed Google was lagging on the new domain and was ready to leave it be, but the report showed that conversions had stopped, traffic was down, and their best funnel was gone. They rolled back to .ai immediately and the Google traffic came back.
+Most mornings, reports are bug fixes and performance work, but one morning it was an existential problem. A scout noticed daily clicks from Google had dropped to zero shortly after SoundBoost moved from an .ai domain to a .com. The team assumed Google was lagging on the new domain and was ready to leave it be, but the report showed that conversions had stopped, traffic was down, and their best funnel was gone. They rolled back to .ai immediately and the Google traffic came back.
 
 The diagnosis was fast because Berkan tracks every button and feature as an [action](/docs/data/actions), mostly through the [PostHog MCP](/mcp) from his editor. He used to review every self-driving PR line by line. Now he merges them almost instantly.
 
@@ -51,7 +51,7 @@ We can't fix the model, but we can steer users away from it before it gives them
 
 Self-driving PRs go straight to GitHub, and the Inbox is accessible over MCP and other surfaces. If your team works AI-native and rarely logs in to PostHog's web interface, it still fits your workflow.
 
-[Higgsfield](https://higgsfield.ai/), an AI creative suite, works this way. It has merged over 120 self-driving PRs, all of them from GitHub. The team set up a handful of scouts to watch error-tracking [signals](/docs/self-driving/signals) and reviews the output alongside their daily work. Fixes so far include broken Stripe tracking and noisy exceptions that showed up as errors when they weren't.
+[Higgsfield](https://higgsfield.ai/), an AI creative suite, works this way. They has merged over 120 self-driving PRs, all of them from GitHub. The team set up a handful of scouts to watch error tracking [signals](/docs/self-driving/signals) and reviews the output alongside their daily work. Fixes so far include broken Stripe tracking and noisy exceptions that showed up as errors when they weren't.
 
 ## "All I want to know about is the pricing"
 
@@ -61,7 +61,7 @@ Every new org gets $10 off self-driving in its first month. That's enough for up
 
 - **Not all runs cost the same.** Cost depends on how much context the agent reads and how long it spends in a sandbox. Light runs cost cents. Deep dives into your data cost more.
 
-- **You only pay for what you turn on.** Choose reports, PRs, or both, and billing limits cap what you spend.
+- **You only pay for what you turn on.** Choose reports, PRs, or both. Billing limits cap what you spend.
 
 In the beta we charged $15 per PR and gave the reports away for free. That turned out to be backwards. The research is where the agents do most of the work, and it's the part people care about most, so now every run is billed, reports included.
 
@@ -76,9 +76,9 @@ We've also built a skill to help you manage spend. Ask your agent to run the `ma
 
 Two more things to know:
 
-- If you removed your billing limit during the beta, we're putting one back at $150. Raise it whenever you like. We'd rather you chose to spend the money than found out you had.
+1. If you removed your billing limit during the beta, we're putting one back at $150. Raise it whenever you like. We'd rather you chose to spend the money than found out you had.
 
-- If you have credits or a billing limit, your spend might not change, but your usage might count against it at a different rate. If it's faster, you'll hit the limit earlier than you did in the beta and runs will stop. The call above is for you too.
+2. If you have credits or a billing limit, your spend might not change, but your usage might count against it at a different rate. If it's faster, you'll hit the limit earlier than you did in the beta and runs will stop. The call above is for you too.
 
 ## What's next for the self-driving Inbox
 
@@ -88,4 +88,3 @@ You can see what the agents are working on right now. [Our docs have a public fe
 
 Everything above is available today. [Set up self-driving](/docs/self-driving/setup), browse the [scout examples](/docs/self-driving/scout-examples) to see what else a scout can watch, and check [what your first month looks like](/docs/self-driving/pricing).
 
-And if you build something weird with a scout, [tell us on X](https://x.com/posthog).
