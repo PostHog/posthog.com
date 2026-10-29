@@ -20,9 +20,14 @@ import { Steps, Step } from 'components/Docs/Steps'
 | `@modelcontextprotocol/sdk` | v1 | `2025-11-25` and earlier |
 | `@modelcontextprotocol/core`, `/server`, `/client` | v2 | `2025-11-25` and `2026-07-28` |
 
-The minimum versions are `@modelcontextprotocol/sdk` 1.26.0 for v1 and `@modelcontextprotocol/server` 2.0.0 for v2.
+You need:
 
-You need Node.js 20.20+ or 22.22+, `posthog-node` 5, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
+- Node.js 20.20+ or 22.22+
+- `@modelcontextprotocol/sdk` 1.26.0+ (v1) or `@modelcontextprotocol/server` 2.0.0+ (v2)
+- `posthog-node` 5
+- A PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key)
+
+Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
 
 <WizardCommand command="mcp-analytics" />
 
@@ -264,7 +269,7 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | `identify` | – | `(request, extra) => UserIdentity \| null`, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `reportMissing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
-| `collectFeedback` | `false` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `reportMissing` reports. Pass `{ toolName, description, extraProperties, onFeedback }` to customize it. |
+| `collectFeedback` | `false` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). Its missing-capability reports don't appear in the [Missing capabilities](/docs/mcp-analytics/missing-capability) views. Pass `{ toolName, description, extraProperties, onFeedback }` to customize it. |
 | `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
 | `sendInitializeEvent` | `true` | Emit `$mcp_initialize` for each `initialize` handshake. Set to `false` to stop it. Other events keep their sessions and client names. MCP onboarding and the default dashboard's users and sessions tiles then show no data. |
 | `sendToolsListEvent` | `true` | Emit `$mcp_tools_list` for each `tools/list`. Set to `false` to stop it. Tools keep their injected arguments. |
@@ -340,7 +345,17 @@ Pass `errorType` to `captureToolCall` to set `$mcp_error_type` to your own label
 Other capture methods cover the rest of the protocol:
 
 - `captureToolsList({ toolNames })` sends `$mcp_tools_list`. Without it, a dispatcher server has no listing events, so you can't find tools that are advertised but never called.
-- `captureFeedback({ report })` sends `$mcp_feedback`. Call it when `prepared.isFeedback` is true, with `report` set to `prepared.feedbackReport`. Return `sendFeedbackResult()` to the agent. To advertise the tool, set `collectFeedback` on the constructor and pass `collectFeedback: true` to `prepareToolList`.
+- `captureFeedback({ report })` sends `$mcp_feedback`. Set `collectFeedback` on the constructor and pass `collectFeedback: true` to `prepareToolList`, then handle the report before the tool runs:
+
+  ```ts
+  import { sendFeedbackResult } from "@posthog/mcp"
+
+  if (prepared.isFeedback && prepared.feedbackReport) {
+    posthog.captureFeedback({ report: prepared.feedbackReport, distinctId: user.id })
+    return sendFeedbackResult()
+  }
+  ```
+
 - `getToolInputProperties(args, inputSchema, { inputAliases })` returns `$mcp_input_keys`, plus `$mcp_input_aliases_used` when you pass `inputAliases`, for the original arguments. Pass the result in `properties`.
 
 These methods queue events and never throw, so analytics can't break your tool. Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).

@@ -40,7 +40,7 @@ Present on most `mcp_*` events.
 | `$mcp_listed_tool_names` | string[]                            | Names of tools advertised in a `tools/list` response. Only on `$mcp_tools_list`. Useful for joining against `$mcp_tool_call` via `$session_id` to find tools advertised but never called.             |
 | `$mcp_duration_ms`       | number (ms)                         | Wall-clock duration of the tool call or resource request                                                                                                                                                                  |
 | `$mcp_is_error`          | boolean                             | True if the handler threw or returned `isError: true`                                                                                                                                                    |
-| `$mcp_error_type` | string | Failure category, present only when `$mcp_is_error` is true. Defaults to the thrown error type. In Go, the default is the package-qualified Go type, such as `fs.PathError`. Typed `mcp.AddTool` errors keep their type, and plain errors give `Error`. Only a custom dispatcher can set it, with a label such as `validation`, `permission`, `timeout`, or `rate_limited`. Pass `errorType` in TypeScript, `error_type` in Python and Ruby, or `ToolCall.ErrorType` in Go. `instrument()` and the Go adapter have no override. Use it to group failures without joining `$exception` events. |
+| `$mcp_error_type` | string | Failure category, present only when `$mcp_is_error` is true. Defaults to the thrown error type. In Go, the default is the package-qualified Go type, such as `fs.PathError`. Typed `mcp.AddTool` errors keep their type, and plain errors give `Error`. A custom dispatcher can set your own label, such as `validation` or `rate_limited`, with `errorType` (TypeScript), `error_type` (Python, Ruby), or `ToolCall.ErrorType` (Go). Use it to group failures without joining `$exception` events. |
 | `$mcp_error_message`     | string                              | The failed call's error message, truncated and passed through the same redaction as `$mcp_parameters` and `$mcp_response`. Only set when `$mcp_is_error` is true.          |
 | `$mcp_server_name`       | string                              | `server._serverInfo.name`. Go sets it only from `WithServerInfo`.                                                                                                                                     |
 | `$mcp_server_version`    | string                              | `server._serverInfo.version`. Go sets it only from `WithServerInfo`.                                                                                                                                  |
@@ -104,7 +104,14 @@ Present on `$exception` events emitted alongside any failed tool call. The SDK r
 | `$exception_list`  | Array of structured exceptions. Each has `type`, `value` (the message), `mechanism`, and a `stacktrace` with parsed `frames` (`filename`, `function`, `lineno`, `colno`, `in_app`). An `Error.cause` chain appears as additional entries. |
 | `$exception_level` | Severity, always `"error"`.                                                                                                                                                                                                               |
 
-Plus `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_tool_name`, `$mcp_tool_description` and `$mcp_tool_category` (tool calls only), `$mcp_server_*`, `$mcp_client_name`, `$mcp_client_version`, `$mcp_protocol_version`, `$mcp_interface` in TypeScript, Python, and Rust, and `$mcp_server_build` in TypeScript and Python. TypeScript and Rust add `$mcp_client_user_agent` and `$mcp_vendor_client`. Intent, model, and duration properties stay on the main event. So does `$set`, except in Rust.
+The `$exception` also carries the context of the failed call:
+
+- All SDKs: `$session_id`, `$mcp_conversation_id`, `$mcp_resource_name`, `$mcp_server_*`, `$mcp_client_name`, `$mcp_client_version`, and `$mcp_protocol_version`. Tool calls also add `$mcp_tool_name`, `$mcp_tool_description`, and `$mcp_tool_category`.
+- TypeScript, Python, and Rust: `$mcp_interface`.
+- TypeScript and Python: `$mcp_server_build`.
+- TypeScript and Rust: `$mcp_client_user_agent` and `$mcp_vendor_client`.
+
+Intent, model, and duration properties stay on the main event. So does `$set`, except in Rust.
 
 In Go, the `$exception` has `type`, `value`, and `mechanism` but no stack trace. In Rust, it has no stack trace.
 
@@ -128,7 +135,7 @@ In Rust, `$set` rides on every MCP event, `$exception` included. In Go, `$set` r
 
 ## Feedback properties
 
-Present on `$mcp_feedback` events. Turn the `send_feedback` tool on with `collectFeedback` (`collect_feedback` in Python). It also reports missing capabilities, as `feedback_type: "missing_capability"`. The MCP Analytics views read only `$mcp_missing_capability`, so query these events with SQL or insights.
+Present on `$mcp_feedback` events. Turn the `send_feedback` tool on with `collectFeedback` (`collect_feedback` in Python). It also reports missing capabilities, as `feedback_type: "missing_capability"`. These reports don't appear in the [Missing capabilities](/docs/mcp-analytics/missing-capability) views.
 
 | Wire key | Source |
 | --- | --- |
