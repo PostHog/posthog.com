@@ -1,7 +1,8 @@
 import React from 'react'
 import { Tooltip as BaseTooltip } from '@base-ui/react/tooltip'
+import { mergeProps } from '@base-ui/react/merge-props'
 import { grainSurface, popupArrow, overlayShadowSm, popupTransition, positionerLayer } from '../styles'
-import { mergeClassName, positionerPropNames, splitProps } from '../utils'
+import { assignRef, mergeClassName, positionerPropNames, splitProps } from '../utils'
 import type { PositionerPropName } from '../utils'
 
 const OPEN_DELAY_MS = 0
@@ -14,11 +15,51 @@ function Root(props: TooltipRootProps): JSX.Element {
     return <BaseTooltip.Root {...props} disableHoverablePopup />
 }
 
-const Trigger = React.forwardRef<HTMLButtonElement, Omit<BaseTooltip.Trigger.Props, 'ref'>>(function TooltipTrigger(
-    { delay = OPEN_DELAY_MS, ...props },
+type TriggerRender = BaseTooltip.Trigger.Props['render']
+
+type TriggerRenderFunction = Extract<NonNullable<TriggerRender>, (...args: never[]) => unknown>
+
+type ElementWithRef = React.ReactElement & { ref?: React.Ref<HTMLElement> }
+
+const POPUP_OPEN_ATTRIBUTE = 'data-popup-open'
+
+function withoutPopupOpen<Props extends React.HTMLAttributes<HTMLElement>>(props: Props): Props {
+    return Object.fromEntries(Object.entries(props).filter(([name]) => name !== POPUP_OPEN_ATTRIBUTE)) as Props
+}
+
+type TriggerElementProps = React.HTMLAttributes<HTMLElement> & { element: ElementWithRef }
+
+const TriggerElement = React.forwardRef<HTMLElement, TriggerElementProps>(function TooltipTriggerElement(
+    { element, ...props },
     ref
 ) {
-    return <BaseTooltip.Trigger ref={ref} delay={delay} {...props} />
+    const elementRef = element.ref
+    const composedRef = React.useCallback(
+        (node: HTMLElement | null) => {
+            assignRef(ref, node)
+            assignRef(elementRef ?? null, node)
+        },
+        [ref, elementRef]
+    )
+    return React.cloneElement(element, { ...mergeProps(withoutPopupOpen(props), element.props), ref: composedRef })
+})
+
+const renderWithoutPopupOpen =
+    (render: TriggerRenderFunction): TriggerRenderFunction =>
+    (props, state) =>
+        render(withoutPopupOpen(props), state)
+
+const Trigger = React.forwardRef<HTMLButtonElement, Omit<BaseTooltip.Trigger.Props, 'ref'>>(function TooltipTrigger(
+    { delay = OPEN_DELAY_MS, render, ...props },
+    ref
+) {
+    const triggerRender =
+        typeof render === 'function' ? (
+            renderWithoutPopupOpen(render)
+        ) : (
+            <TriggerElement element={render ?? <button type={props.type ?? 'button'} />} />
+        )
+    return <BaseTooltip.Trigger ref={ref} delay={delay} render={triggerRender} {...props} />
 })
 
 export type TooltipPopupProps = BaseTooltip.Popup.Props &
