@@ -24,6 +24,9 @@ const CHECKED_URL_PREFIX =
     /^\/(docs|blog|tutorials|handbook|product-engineers|founders|newsletter|customers|spotlight)\//
 // Pages that gatsby/createPages.ts builds from API data, with no file under contents/.
 const GENERATED_URL_PATTERN = /\/(api|references|tags|categories)(\/|$)|^\/docs\/data-pipelines\/\w+s\//
+const POCKET_GUIDES_PATH = 'src/constants/pocketGuides.ts'
+const PRODUCTION_ORIGIN = 'https://posthog.com'
+const MAX_PRODUCTION_CHECKS = 50
 
 function isPagePath(filename) {
     if (!filename || !filename.startsWith('contents/') || !PAGE_EXTENSIONS.test(filename)) {
@@ -32,15 +35,45 @@ function isPagePath(filename) {
     if (filename.startsWith('contents/images/')) {
         return false
     }
+    // Pocket guide SKILL.md files are agent instructions, not pages.
+    if (/\/SKILL\.md$/.test(filename)) {
+        return false
+    }
     // Snippets are imported into other pages and have no URL of their own.
     return !filename.split('/').some((segment) => segment.startsWith('_'))
 }
 
 // Mirrors the slug that gatsby-source-filesystem's createFilePath builds for a file under contents/.
-function contentPathToUrl(filename) {
+// pocketGuides maps a volume id to its public path, because gatsby/createPages.ts serves
+// contents/learn/<id>/pocket-guide/ at that path (see pocketGuidePageContext).
+function contentPathToUrl(filename, pocketGuides = {}) {
     let url = filename.replace(/^contents/, '').replace(PAGE_EXTENSIONS, '')
     url = url.replace(/\/index$/, '')
+    const guide = /^\/learn\/([^/]+)\/pocket-guide(\/.*)?$/.exec(url)
+    if (guide && pocketGuides[guide[1]]) {
+        url = `${pocketGuides[guide[1]]}${guide[2] || ''}`
+    }
     return url === '' ? '/' : url
+}
+
+// Reads the volume ids and public paths from POCKET_GUIDE_VOLUMES in src/constants/pocketGuides.ts.
+function pocketGuidePathsFromSource(source) {
+    const paths = {}
+    const start = (source || '').indexOf('POCKET_GUIDE_VOLUMES')
+    if (start === -1) {
+        return paths
+    }
+    const volumes = source.slice(start, source.indexOf('\n]', start))
+    let id = null
+    for (const match of volumes.matchAll(/\bid:\s*['"]([^'"]+)['"]|\blearnPath:\s*['"]([^'"]+)['"]/g)) {
+        if (match[1]) {
+            id = match[1]
+            paths[id] = `/pocket-guides/${id}`
+        } else if (id) {
+            paths[id] = match[2].replace(/\/$/, '')
+        }
+    }
+    return paths
 }
 
 function sourceToRegExp(source) {
@@ -111,14 +144,14 @@ function resolvesToPage(url, pageUrls, redirects) {
     return pageUrls.has(path) || Boolean(redirectFor(redirects, path))
 }
 
-function pageUrlsFromTree(tree) {
+function pageUrlsFromTree(tree, pocketGuides = {}) {
     const urls = new Set()
     for (const entry of tree) {
         if (entry.type !== 'blob') {
             continue
         }
         if (isPagePath(entry.path)) {
-            urls.add(contentPathToUrl(entry.path))
+            urls.add(contentPathToUrl(entry.path, pocketGuides))
         }
         const page = /^src\/pages\/(.*)\.(tsx|ts|jsx|js)$/.exec(entry.path)
         if (page && !/\[|(^|\/)_/.test(page[1])) {
@@ -126,6 +159,34 @@ function pageUrlsFromTree(tree) {
         }
     }
     return urls
+}
+
+// Links that the patch adds. A link that is also on a removed line was already there.
+function addedLinks(patch) {
+    const { added, removed } = parsePatch(patch)
+    const existing = new Set(internalLinks(removed))
+    return internalLinks(added).filter((link) => !existing.has(link))
+}
+
+// Returns the paths that production serves without an error. Production has every page that
+// already ships, including routes that gatsby/createPages.ts builds and this check cannot predict.
+async function livePaths(urls) {
+    const paths = [...new Set(urls.map(normalizeUrl))].slice(0, MAX_PRODUCTION_CHECKS)
+    const results = await Promise.all(
+        paths.map(async (path) => {
+            const url = new URL(path, PRODUCTION_ORIGIN)
+            if (url.origin !== PRODUCTION_ORIGIN) {
+                return null
+            }
+            try {
+                const response = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(10000) })
+                return response.ok ? path : null
+            } catch {
+                return null
+            }
+        })
+    )
+    return results.filter(Boolean)
 }
 
 function internalLinks(lines) {
@@ -274,8 +335,11 @@ function analyzeRedirects(baseRedirects, headRedirects, pageUrls = null) {
         }
     }
 
-    // Compare by source: a redirect with a new destination still serves the old URL.
-    const removed = baseRedirects.filter((r) => !headSourceSet.has(r.source) && !r.has)
+    // Compare by source: a redirect with a new destination still serves the old URL. A redirect that
+    // a real page replaces still serves the URL too.
+    const removed = baseRedirects.filter(
+        (r) => !headSourceSet.has(r.source) && !r.has && !(pageUrls && pageUrls.has(normalizeUrl(r.source)))
+    )
     if (removed.length > 0) {
         const sample = removed
             .slice(0, 5)
@@ -341,10 +405,12 @@ function analyzeVercelConfig(baseConfig, headConfig) {
 // headRedirects: the redirects array from vercel.json at the PR head.
 // ctx.pageUrls: every page URL at the PR head, or null when the tree was not loaded.
 // ctx.sizes: file size in bytes by path at the PR head.
+// ctx.pocketGuides: pocket guide public paths by volume id, from pocketGuidePathsFromSource.
 function analyzeFiles(files, headRedirects, ctx = {}) {
     const findings = []
     const pageUrls = ctx.pageUrls || null
     const sizes = ctx.sizes || {}
+    const pocketGuides = ctx.pocketGuides || {}
     const missingLinks = []
     const redirectedLinks = []
     const imagesWithoutAlt = []
@@ -356,8 +422,9 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
         const lostPath = status === 'removed' ? filename : status === 'renamed' ? previousFilename : null
         // vercel.json rewrites every /teams/ URL to the team page, so a deleted team file never returns 404.
         if (lostPath && isPagePath(lostPath) && !lostPath.startsWith('contents/teams/')) {
-            const oldUrl = contentPathToUrl(lostPath)
-            const stillServed = status === 'renamed' && isPagePath(filename) && contentPathToUrl(filename) === oldUrl
+            const oldUrl = contentPathToUrl(lostPath, pocketGuides)
+            const stillServed =
+                status === 'renamed' && isPagePath(filename) && contentPathToUrl(filename, pocketGuides) === oldUrl
             if (!stillServed && !redirectFor(headRedirects, oldUrl)) {
                 findings.push({
                     severity: 'blocker',
@@ -368,7 +435,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
                     fix:
                         status === 'renamed' && isPagePath(filename)
                             ? `Add \`{ "source": "${clean(oldUrl)}", "destination": "${clean(
-                                  contentPathToUrl(filename)
+                                  contentPathToUrl(filename, pocketGuides)
                               )}" }\` to \`redirects\` in \`vercel.json\`.`
                             : 'Add a redirect in `vercel.json` to the closest page that replaces it.',
                     file: lostPath,
@@ -531,9 +598,7 @@ function analyzeFiles(files, headRedirects, ctx = {}) {
         }
 
         if (isPagePath(filename)) {
-            // A link that is also on a removed line was already there, so this PR does not add it.
-            const existingLinks = new Set(internalLinks(removed))
-            for (const link of internalLinks(added).filter((l) => !existingLinks.has(l))) {
+            for (const link of addedLinks(patch)) {
                 const path = normalizeUrl(link)
                 if (!resolvesToPage(link, pageUrls, headRedirects)) {
                     missingLinks.push({ file: filename, link })
@@ -791,14 +856,28 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
         per_page: 100,
     })
 
+    // Compare with the commit the branch started from. pr.base.sha can be newer, and then changes
+    // that landed on the base branch later look like this PR removed them.
+    const { data: comparison } = await github.rest.repos.compareCommitsWithBasehead({
+        owner,
+        repo,
+        basehead: `${pr.base.sha}...${pr.head.sha}`,
+        per_page: 1,
+    })
+    const baseSha = comparison.merge_base_commit.sha
+
     const touchesPages = files.some((f) => isPagePath(f.filename) || isPagePath(f.previous_filename))
     const touchesVercel = files.some((f) => f.filename === 'vercel.json')
     let pageUrls = null
     const sizes = {}
+    const pocketGuides =
+        touchesPages || touchesVercel
+            ? pocketGuidePathsFromSource(await getText(github, owner, repo, POCKET_GUIDES_PATH, pr.head.sha))
+            : {}
     if (touchesPages || touchesVercel || files.some((f) => IMAGE_EXTENSIONS.test(f.filename))) {
         const { data: tree } = await github.rest.git.getTree({ owner, repo, tree_sha: pr.head.sha, recursive: 'true' })
         if (!tree.truncated) {
-            pageUrls = pageUrlsFromTree(tree.tree)
+            pageUrls = pageUrlsFromTree(tree.tree, pocketGuides)
         }
         for (const entry of tree.tree) {
             sizes[entry.path] = entry.size
@@ -815,17 +894,31 @@ async function checkPullRequest({ github, core, owner, repo, number, reviewer, b
             file.headContent = await getText(github, owner, repo, file.filename, pr.head.sha)
         }
         if (file.status === 'modified' && removedLines >= 20) {
-            file.baseContent = await getText(github, owner, repo, file.filename, pr.base.sha)
+            file.baseContent = await getText(github, owner, repo, file.filename, baseSha)
         }
     }
 
     const headConfig =
         touchesPages || touchesVercel ? await getJsonFile(github, owner, repo, 'vercel.json', pr.head.sha) : null
     const headRedirects = headConfig?.redirects || []
+    const baseConfig = touchesVercel ? await getJsonFile(github, owner, repo, 'vercel.json', baseSha) : null
 
-    const findings = analyzeFiles(files, headRedirects, { pageUrls, sizes })
+    if (pageUrls) {
+        // Before a link or redirect target counts as missing, confirm that production does not serve it.
+        const baseKeys = new Set((baseConfig?.redirects || []).map(redirectKey))
+        const targets = [
+            ...files.filter((f) => isPagePath(f.filename)).flatMap((f) => addedLinks(f.patch)),
+            ...(touchesVercel ? headRedirects : [])
+                .filter((r) => !baseKeys.has(redirectKey(r)) && r.destination?.startsWith('/'))
+                .map((r) => r.destination),
+        ].filter((url) => !url.includes(':') && !resolvesToPage(url, pageUrls, headRedirects))
+        for (const path of await livePaths(targets)) {
+            pageUrls.add(path)
+        }
+    }
+
+    const findings = analyzeFiles(files, headRedirects, { pageUrls, sizes, pocketGuides })
     if (touchesVercel) {
-        const baseConfig = await getJsonFile(github, owner, repo, 'vercel.json', pr.base.sha)
         findings.push(...analyzeRedirects(baseConfig?.redirects || [], headRedirects, pageUrls))
         findings.push(...analyzeVercelConfig(baseConfig, headConfig))
     }
@@ -894,6 +987,7 @@ module.exports = {
     pageUrlsFromTree,
     buildComment,
     contentPathToUrl,
+    pocketGuidePathsFromSource,
     isPagePath,
     redirectFor,
     addedH1s,

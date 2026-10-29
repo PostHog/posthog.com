@@ -4,7 +4,9 @@ const {
     analyzeFiles,
     analyzeRedirects,
     analyzeVercelConfig,
+    pageUrlsFromTree,
     contentPathToUrl,
+    pocketGuidePathsFromSource,
     redirectFor,
     addedH1s,
 } = require('./check')
@@ -142,6 +144,12 @@ test('ignores known false alarms', () => {
     const base = [{ source: '/docs/old', destination: '/docs/a' }]
     const head = [{ source: '/docs/old', destination: '/docs/b' }]
     assert.equal(analyzeRedirects(base, head).filter((f) => f.title.includes('removed')).length, 0)
+    const replacedByPage = analyzeRedirects(
+        [{ source: '/mcp-analytics', destination: '/docs/mcp-analytics' }],
+        [],
+        new Set(['/mcp-analytics'])
+    )
+    assert.equal(replacedByPage.length, 0)
 
     const pageUrls = new Set(['/docs/real'])
     const files = [
@@ -165,4 +173,34 @@ test('flags site-wide head tags, sitemap, and Markdown serving as blockers', () 
         analyzeFiles(files, []).map((f) => f.severity),
         ['blocker', 'blocker', 'blocker']
     )
+})
+
+test('maps pocket guide sources to their public paths and skips SKILL.md files', () => {
+    const pocketGuides = pocketGuidePathsFromSource(`
+export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
+    { id: 'self-driving', learnHub: { pages: ['a'] }, learnPath: '/docs/self-driving/pocket-guide' },
+    { id: 'error-tracking', title: 'Error tracking' },
+]`)
+    assert.deepEqual(pocketGuides, {
+        'self-driving': '/docs/self-driving/pocket-guide',
+        'error-tracking': '/pocket-guides/error-tracking',
+    })
+    const pageUrls = pageUrlsFromTree(
+        [
+            { type: 'blob', path: 'contents/learn/self-driving/pocket-guide/scout/index.mdx' },
+            { type: 'blob', path: 'contents/learn/self-driving/pocket-guide/scout/SKILL.md' },
+        ],
+        pocketGuides
+    )
+    assert.deepEqual([...pageUrls], ['/docs/self-driving/pocket-guide/scout'])
+    const files = [
+        {
+            filename: 'contents/learn/error-tracking/pocket-guide/hosts/index.mdx',
+            status: 'added',
+            patch: '@@\n+  href: /docs/self-driving/pocket-guide/scout\n+[x](/docs/self-driving/pocket-guide/scout)',
+            headContent: '---\ntitle: Hosts\n---\n',
+        },
+        { filename: 'contents/learn/error-tracking/pocket-guide/hosts/SKILL.md', status: 'added', patch: '' },
+    ]
+    assert.deepEqual(analyzeFiles(files, [], { pageUrls, pocketGuides }), [])
 })
