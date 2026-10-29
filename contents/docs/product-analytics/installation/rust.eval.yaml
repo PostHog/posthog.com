@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, rust]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Rust app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: starter-rust
+      prompt: >-
+          Set up PostHog in the Rust app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/Cargo.toml lists `posthog-rs`.
+              initialized: >-
+                  The app creates a client with posthog_rs::client, passing the project
+                  token, and calls flush() or shutdown() on the client before exit. Cite
+                  the file and line(s).

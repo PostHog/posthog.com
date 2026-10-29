@@ -198,7 +198,7 @@ export const tools = [
         handle: 'group_analytics',
         name: 'Group Analytics',
         description: 'Analyze multi-seat accounts and other groups.',
-        slug: 'group-analytics',
+        slug: 'docs/product-analytics/group-analytics',
         category: 'analytics',
     },
     {

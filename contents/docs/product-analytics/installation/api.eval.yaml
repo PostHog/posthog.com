@@ -1,0 +1,24 @@
+owner: wizard-and-docs
+tags: [api, python, server]
+status: active
+
+checks:
+    - id: capture-without-sdk
+      description: >-
+          Baseline: can an agent send an event straight to the PostHog capture API, with
+          no SDK? The agent gets no docs, so docs-read shows which pages it finds on its
+          own.
+      codebase_to_test: acme-dispatch-django
+      prompt: >-
+          Send a job_created event to PostHog when a job is created in the app in
+          {folder}/, without adding a dependency.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              capture-request: >-
+                  The code sends an HTTP POST to a PostHog capture endpoint on the
+                  PostHog host, /capture/ or /i/v0/e/, with a JSON content type. Cite
+                  the file and line(s).
+              payload-fields: >-
+                  The JSON body has api_key set to the project token, event set to
+                  job_created, and a distinct_id, at the top level or in properties.

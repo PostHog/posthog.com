@@ -12,7 +12,7 @@ import WizardCommand from 'components/WizardCommand'
 
 <CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
 
-The TypeScript package `@posthog/mcp` is pre-1.0. The Python integration is in beta, and the Ruby integration is experimental. We're building them in public, so event shapes and options may still change. Pin a specific version.
+The TypeScript package `@posthog/mcp` is pre-1.0. The Python integration is in beta, and the Ruby and Rust integrations are experimental. We're building them in public, so event shapes and options may still change. Pin a specific version.
 
 </CalloutBox>
 
@@ -54,6 +54,10 @@ go get github.com/posthog/posthog-go/posthogmcpsdk
 
 ```bash file=Ruby
 bundle add posthog-ruby
+```
+
+```bash file=Rust
+cargo add posthog-rs --features mcp
 ```
 
 </MultiLanguage>
@@ -122,9 +126,25 @@ PostHog::MCP.instrument(server, posthog)
 at_exit { posthog.shutdown }
 ```
 
+```rust file=Rust
+use std::sync::Arc;
+
+use rmcp::ServiceExt;
+
+let token = std::env::var("POSTHOG_PROJECT_TOKEN")?;
+let posthog = Arc::new(
+    posthog_rs::client((token.as_str(), "https://us.i.posthog.com")).await, // or https://eu.i.posthog.com
+);
+
+let server = posthog_rs::mcp::instrument(server, posthog.clone());
+server.serve(rmcp::transport::stdio()).await?.waiting().await?;
+
+posthog.shutdown().await;
+```
+
 </MultiLanguage>
 
-Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. The Ruby SDK is [experimental](/docs/mcp-analytics/installation/ruby).
+Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. The [Ruby](/docs/mcp-analytics/installation/ruby) and [Rust](/docs/mcp-analytics/installation/rust) SDKs are experimental.
 
 For TypeScript and Python servers, the wizard does the setup for you:
 
@@ -210,9 +230,18 @@ PostHog::MCP.instrument(
 )
 ```
 
+```rust file=Rust
+use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+
+let options = McpOptionsBuilder::default()
+    .capture_responses(false) // keep tool results out of PostHog
+    .build()?;
+let server = McpAnalytics::new(posthog.clone(), options).instrument(server);
+```
+
 </MultiLanguage>
 
-In Go, `WithCaptureResponses(false)` still sends a failed call's error text as `$mcp_error_message` and in `$exception`. A full before-send hook is the `BeforeSend` field of your `posthog.Config`. See the [Go example](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
+In Go and Rust, turning off response capture still sends a failed call's error text, as `$mcp_error_message` and in `$exception`. In Go, a full before-send hook is the `BeforeSend` field of your `posthog.Config`. See the [Go example](/docs/mcp-analytics/privacy#3-your-before-send-hook-optional).
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/privacy">
 
@@ -342,6 +371,19 @@ PostHog::MCP.instrument(
 )
 ```
 
+```rust file=Rust
+use posthog_rs::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
+
+let options = McpOptionsBuilder::default()
+    .identify(|request| {
+        // AuthenticatedUser is the type your HTTP auth middleware inserts.
+        let user = request.http?.extensions.get::<AuthenticatedUser>()?;
+        Some(Identity::new(user.id.clone()).with_property("plan", user.plan.clone()))
+    })
+    .build()?;
+let server = McpAnalytics::new(posthog.clone(), options).instrument(server);
+```
+
 </MultiLanguage>
 
 <OSButton variant="primary" asLink to="/docs/mcp-analytics/identifying-users">
@@ -378,6 +420,15 @@ PostHog::MCP.instrument(server, posthog, report_missing: true)
 posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 	posthogmcpsdk.WithMissingCapabilityTool("get_more_tools"),
 )
+```
+
+```rust file=Rust
+use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+
+let options = McpOptionsBuilder::default()
+    .missing_capability_tool("get_more_tools")
+    .build()?;
+let server = McpAnalytics::new(posthog.clone(), options).instrument(server);
 ```
 
 </MultiLanguage>
