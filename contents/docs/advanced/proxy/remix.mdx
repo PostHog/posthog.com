@@ -72,8 +72,9 @@ const posthogProxy = async (request: Request) => {
   headers.set("host", hostname)
   // Remove cookies before forwarding to PostHog
   headers.delete("cookie")
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!headers.get("authorization")?.startsWith("Bearer ")) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!headers.get("authorization")?.startsWith("Bearer phc_")) {
     headers.delete("authorization")
   }
   headers.delete("accept-encoding")
@@ -128,8 +129,9 @@ const posthogProxy = async (request: Request) => {
   headers.set("host", hostname)
   // Remove cookies before forwarding to PostHog
   headers.delete("cookie")
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!headers.get("authorization")?.startsWith("Bearer ")) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!headers.get("authorization")?.startsWith("Bearer phc_")) {
     headers.delete("authorization")
   }
   headers.delete("accept-encoding")

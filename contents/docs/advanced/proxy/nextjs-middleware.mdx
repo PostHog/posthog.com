@@ -80,8 +80,9 @@ export function proxy(request) {
   requestHeaders.set('host', hostname)
   // Remove cookies before forwarding to PostHog
   requestHeaders.delete('cookie')
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!requestHeaders.get('authorization')?.startsWith('Bearer ')) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!requestHeaders.get('authorization')?.startsWith('Bearer phc_')) {
     requestHeaders.delete('authorization')
   }
 
@@ -113,8 +114,9 @@ export function proxy(request) {
   requestHeaders.set('host', hostname)
   // Remove cookies before forwarding to PostHog
   requestHeaders.delete('cookie')
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!requestHeaders.get('authorization')?.startsWith('Bearer ')) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!requestHeaders.get('authorization')?.startsWith('Bearer phc_')) {
     requestHeaders.delete('authorization')
   }
 
@@ -153,8 +155,9 @@ export function middleware(request) {
   requestHeaders.set('host', hostname)
   // Remove cookies before forwarding to PostHog
   requestHeaders.delete('cookie')
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!requestHeaders.get('authorization')?.startsWith('Bearer ')) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!requestHeaders.get('authorization')?.startsWith('Bearer phc_')) {
     requestHeaders.delete('authorization')
   }
 
@@ -186,8 +189,9 @@ export function middleware(request) {
   requestHeaders.set('host', hostname)
   // Remove cookies before forwarding to PostHog
   requestHeaders.delete('cookie')
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!requestHeaders.get('authorization')?.startsWith('Bearer ')) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!requestHeaders.get('authorization')?.startsWith('Bearer phc_')) {
     requestHeaders.delete('authorization')
   }
 
@@ -218,7 +222,7 @@ The proxy does the following:
 - It determines which PostHog host to use: the assets host for `/static/*` and `/array/*` requests (so that cache headers are preserved), the main host for everything else
 - It sets the `host` header so PostHog knows how to route the request. Without this, you'll get 401 errors.
 - It rewrites the URL to PostHog's domain and strips the `/yourpath` prefix
-- It removes cookies and any `Authorization` header that isn't a `Bearer` token. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, so the proxy forwards that header.
+- It removes cookies and any `Authorization` header that isn't a `Bearer phc_` project token. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, so the proxy forwards that header. If your project token doesn't start with `phc_`, check for `Bearer ` instead.
 - It passes the headers as `request: { headers }`, so Next.js applies them to the request it forwards to PostHog
 
 See [Next.js proxy documentation](https://nextjs.org/docs/app/api-reference/file-conventions/proxy) for more details.
@@ -324,8 +328,9 @@ function posthogProxy(request) {
   requestHeaders.set('host', hostname)
   // Remove cookies before forwarding to PostHog
   requestHeaders.delete('cookie')
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!requestHeaders.get('authorization')?.startsWith('Bearer ')) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!requestHeaders.get('authorization')?.startsWith('Bearer phc_')) {
     requestHeaders.delete('authorization')
   }
 
@@ -373,8 +378,9 @@ function posthogProxy(request) {
   requestHeaders.set('host', hostname)
   // Remove cookies before forwarding to PostHog
   requestHeaders.delete('cookie')
-  // Forward the SDK's Bearer token, which capture v1 needs. Strip any other credentials.
-  if (!requestHeaders.get('authorization')?.startsWith('Bearer ')) {
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  if (!requestHeaders.get('authorization')?.startsWith('Bearer phc_')) {
     requestHeaders.delete('authorization')
   }
 
