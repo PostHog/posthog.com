@@ -67,7 +67,7 @@ In the beta we charged $15 per PR and gave the reports away for free. That turne
 
 ### If you used the beta
 
-Your org stays on beta pricing until [TODO: GA date + 30 days]. After that you move to per-run pricing like everyone else.
+Your org stays on beta pricing until November 28, 2026. After that you move to per-run pricing like everyone else.
 
 For some of you that means a bigger bill. We'll email every org whose monthly cost goes up by more than $200, or more than doubles past $50 (about 300 of you), and offer a call with one of our engineers to tune your setup, so you're not paying for scouts and sources that aren't earning their keep.
 
