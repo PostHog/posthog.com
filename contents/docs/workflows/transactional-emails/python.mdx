@@ -90,7 +90,7 @@ async def send_password_reset(user_id: str, email: str, first_name: str, reset_l
 
 Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds returns the error at once.
 
-To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client. When a job queue already retries the send, set `email_request_max_retries=0` and pass an `idempotency_key` that identifies the email.
+To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client, or `max_retries` on one send. When a job queue already retries the send, set the retries to `0` and pass an `idempotency_key` that identifies the email.
 
 ## Check an email's status
 
