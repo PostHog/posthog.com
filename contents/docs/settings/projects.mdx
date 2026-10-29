@@ -82,6 +82,18 @@ IP data capture can be configured at both the organization and project levels:
 
 Individual projects can override organization defaults to meet specific privacy requirements.
 
+#### Events retention
+
+Organization admins can set a project-specific events retention window under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). This overrides the organization's default retention window for that project.
+
+The settings page shows the organization's current window and the maximum window your plan allows. The window you choose must fall between 1 month and the smaller of your plan's maximum and any limit set by your organization.
+
+Only organization admins can change this setting. Project admins and members can view it but not edit it.
+
+> **Warning:** Events older than the configured window are permanently deleted during the monthly cleanup and can't be restored.
+
+Clearing the project-specific window causes the project to fall back to the [organization's default](/docs/settings/organizations#events-retention). See [events data retention](/docs/data/events-retention) for more details.
+
 It's best to use separate projects for:
 
 - Apps that are entirely separate products with unlinked authentication systems
