@@ -231,7 +231,7 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: ^2.2.2
-  posthog_flutter: ^4.0.1
+  posthog_flutter: ^6.0.0
 
 # rest of your code
 ```

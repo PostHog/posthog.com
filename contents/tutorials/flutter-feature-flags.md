@@ -110,7 +110,7 @@ To start, install [PostHog’s Flutter SDK](/docs/libraries/flutter) by adding `
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^4.0.1
+  posthog_flutter: ^6.0.0
 
 # rest of your code
 ```

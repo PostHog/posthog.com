@@ -84,7 +84,7 @@ To start, install [PostHog's Flutter SDK](/docs/libraries/flutter) by adding `po
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^4.0.1
+  posthog_flutter: ^6.0.0
 ```
 
 Next, we configure PostHog in each platform using our project token and instance address which you can find in [your project settings](https://us.posthog.com/settings/project).
@@ -315,7 +315,7 @@ Finally, add the `provider` package to your `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^4.0.1
+  posthog_flutter: ^6.0.0
   provider: ^6.1.1
 ```
 
