@@ -208,7 +208,7 @@ _Note:_ It can be helpful to request MCP ignore weekend events when doing these 
 
 Many customers will often use PostHog via our MCP rather than the UI, so it's a good idea to factor in these sessions in your engagement strategy.
 
-While the <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> gives you a solid glimpse into UI usage and MCP tool calls, <PrivateLink url="https://us.posthog.com/project/2/mcp-analytics/sessions">MCP Analytics</PrivateLink> goes even deeper and shows you specific users' sessions and their intents behind each tool call. In other words, this clearly articulates what they were trying to accomplish via the MCP, which gives you a strong starting point for a wider look at their usage.
+While the <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> and the <PrivateLink url="https://us.posthog.com/project/2/dashboard/557459">Engagement metrics dashboard</PrivateLink> give you a solid glimpse into UI usage and MCP tool calls, <PrivateLink url="https://us.posthog.com/project/2/mcp-analytics/sessions">MCP Analytics</PrivateLink> goes even deeper and shows you specific users' sessions and their intents behind each tool call. In other words, this clearly articulates what they were trying to accomplish via the MCP, which gives you a strong starting point for a wider look at their usage.
 
 **Recommended approach:**
 
