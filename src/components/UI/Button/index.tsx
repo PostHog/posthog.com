@@ -6,6 +6,7 @@ import type { Props as LinkProps } from '../../Link'
 import { disabledHatch, focusRing, toneSolid, toneText } from '../styles'
 import { mergeClassName } from '../utils'
 import { Spinner } from '../Spinner'
+import './styles.css'
 
 export type ButtonAppearance = 'flat' | 'raised' | 'outline'
 export type ButtonVariant = 'primary' | 'secondary' | 'danger'
@@ -59,7 +60,7 @@ const busyCursor = '[&[data-disabled][aria-busy=true]]:cursor-progress'
 
 const disabledFade = '[&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:opacity-50'
 
-const flatBase = `relative inline-flex items-center justify-center rounded border border-transparent bg-transparent text-primary transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] [&:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent motion-reduce:transition-none skin-classic:border-b-3 ${busyCursor} ${focusRing}`
+const flatBase = `relative inline-flex items-center justify-center rounded border border-transparent bg-transparent text-primary ui-button-flat hover:bg-[rgb(var(--text-primary)/0.06)] [&[aria-pressed]:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent skin-classic:border-b-3 ${busyCursor} ${focusRing}`
 
 const flatPadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-1 text-xs leading-4',
@@ -70,16 +71,16 @@ const flatPadding: Record<ButtonSize, string> = {
 const flatTones: Record<ButtonVariant, string> = {
     secondary: '',
     primary:
-        'text-red hover:bg-orange/10 [&:not([data-disabled]):active]:bg-orange/20 data-[pressed]:bg-orange/15 data-[popup-open]:bg-orange/15 dark:text-yellow',
-    danger: `${toneText.error} hover:bg-salmon/10 [&:not([data-disabled]):active]:bg-salmon/20 data-[pressed]:bg-salmon/15 data-[popup-open]:bg-salmon/15`,
+        'text-red hover:bg-orange/10 [&[aria-pressed]:not([data-disabled]):active]:bg-orange/20 data-[pressed]:bg-orange/15 data-[popup-open]:bg-orange/15 dark:text-yellow',
+    danger: `${toneText.error} hover:bg-salmon/10 [&[aria-pressed]:not([data-disabled]):active]:bg-salmon/20 data-[pressed]:bg-salmon/15 data-[popup-open]:bg-salmon/15`,
 }
 
 const outlineTones: Record<ButtonVariant, string> = {
     secondary:
         'border-[rgb(var(--text-primary)/0.22)] hover:border-[rgb(var(--text-primary)/0.4)] hover:bg-[rgb(var(--text-primary)/0.05)] data-[disabled]:hover:border-[rgb(var(--text-primary)/0.22)]',
     primary:
-        'border-orange text-red hover:border-orange hover:bg-orange/10 [&:not([data-disabled]):active]:border-orange [&:not([data-disabled]):active]:bg-orange/15 data-[pressed]:border-orange data-[pressed]:bg-orange/15 data-[popup-open]:border-orange data-[popup-open]:bg-orange/15 data-[disabled]:hover:border-orange dark:text-yellow',
-    danger: `border-salmon/70 ${toneText.error} hover:border-salmon hover:bg-salmon/10 [&:not([data-disabled]):active]:border-salmon [&:not([data-disabled]):active]:bg-salmon/15 data-[pressed]:border-salmon data-[pressed]:bg-salmon/15 data-[popup-open]:border-salmon data-[popup-open]:bg-salmon/15 data-[disabled]:hover:border-salmon/70`,
+        'border-orange text-red hover:border-orange hover:bg-orange/10 [&[aria-pressed]:not([data-disabled]):active]:border-orange [&[aria-pressed]:not([data-disabled]):active]:bg-orange/15 data-[pressed]:border-orange data-[pressed]:bg-orange/15 data-[popup-open]:border-orange data-[popup-open]:bg-orange/15 data-[disabled]:hover:border-orange dark:text-yellow',
+    danger: `border-salmon/70 ${toneText.error} hover:border-salmon hover:bg-salmon/10 [&[aria-pressed]:not([data-disabled]):active]:border-salmon [&[aria-pressed]:not([data-disabled]):active]:bg-salmon/15 data-[pressed]:border-salmon data-[pressed]:bg-salmon/15 data-[popup-open]:border-salmon data-[popup-open]:bg-salmon/15 data-[disabled]:hover:border-salmon/70`,
 }
 
 const outlineDisabled = `${disabledHatch} [&[data-disabled]:not([aria-busy=true])]:border-dashed`
@@ -118,9 +119,9 @@ const raisedUndersideWidth: Record<ButtonSize, string> = {
 const raisedFrameBase = `relative inline-block text-center ${raisedUnderside} data-[disabled]:cursor-not-allowed ${disabledFade} ${busyCursor} ${focusRing}`
 
 const raisedHatchMotion: Record<ButtonSize, string> = {
-    sm: 'before:transition-[background-position] before:duration-100 motion-reduce:before:transition-none [&:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)]:before:[background-position:0_-1px] [&:not([data-disabled]):active]:before:[background-position:0_1px] [&[data-pressed]]:before:[background-position:0_1px] [&[data-popup-open]]:before:[background-position:0_1px]',
-    md: 'before:transition-[background-position] before:duration-100 motion-reduce:before:transition-none [&:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)]:before:[background-position:0_-1px] [&:not([data-disabled]):active]:before:[background-position:0_1.5px] [&[data-pressed]]:before:[background-position:0_1.5px] [&[data-popup-open]]:before:[background-position:0_1.5px]',
-    lg: 'before:transition-[background-position] before:duration-100 motion-reduce:before:transition-none [&:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)]:before:[background-position:0_-2px] [&:not([data-disabled]):active]:before:[background-position:0_1.5px] [&[data-pressed]]:before:[background-position:0_1.5px] [&[data-popup-open]]:before:[background-position:0_1.5px]',
+    sm: 'before:transition-[background-position] before:duration-150 before:[transition-timing-function:cubic-bezier(0.2,0.7,0.3,1)] motion-reduce:before:transition-none [&:not([data-disabled]):active]:before:[background-position:0_1px] [&[data-pressed]]:before:[background-position:0_1px] [&[data-popup-open]]:before:[background-position:0_1px]',
+    md: 'before:transition-[background-position] before:duration-150 before:[transition-timing-function:cubic-bezier(0.2,0.7,0.3,1)] motion-reduce:before:transition-none [&:not([data-disabled]):active]:before:[background-position:0_1.5px] [&[data-pressed]]:before:[background-position:0_1.5px] [&[data-popup-open]]:before:[background-position:0_1.5px]',
+    lg: 'before:transition-[background-position] before:duration-150 before:[transition-timing-function:cubic-bezier(0.2,0.7,0.3,1)] motion-reduce:before:transition-none [&:not([data-disabled]):active]:before:[background-position:0_1.5px] [&[data-pressed]]:before:[background-position:0_1.5px] [&[data-popup-open]]:before:[background-position:0_1.5px]',
 }
 
 const raisedFrames: Record<ButtonVariant, string> = {
@@ -143,14 +144,14 @@ const raisedUndersideRadius: Record<ButtonSize, string> = {
 }
 
 const raisedFaceBase =
-    'relative flex select-none items-center justify-center font-bold transition-[transform,background-color,border-color,color,box-shadow] duration-100 motion-reduce:transition-none [[data-disabled]:not([aria-busy=true])>&]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
+    'ui-button-face relative flex select-none items-center justify-center font-bold [[data-disabled]:not([aria-busy=true])>&]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
 
 const raisedFaces: Record<ButtonVariant, string> = {
-    danger: `border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] ${toneSolid.error} [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)]`,
+    danger: `border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] ${toneSolid.error} [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)]`,
     primary:
-        'border-button bg-orange text-black [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:border-button-dark',
+        'border-button bg-orange text-black [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:border-button-dark',
     secondary:
-        'border-gray bg-white text-primary [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] dark:bg-dark dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)]',
+        'border-gray bg-white text-primary [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] dark:bg-dark dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)]',
 }
 
 const raisedFaceBorder: Record<ButtonSize, string> = {
@@ -162,9 +163,9 @@ const raisedFaceBorder: Record<ButtonSize, string> = {
 const raisedFaceInset: Record<ButtonSize, string> = { sm: 'mx-[-1px]', md: 'mx-[-1px]', lg: 'mx-[-1px]' }
 
 const raisedFaceMotion: Record<ButtonSize, string> = {
-    sm: 'translate-y-[-1.5px] [:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)>&]:translate-y-[-2.5px] [:not([data-disabled]):active>&]:translate-y-[-0.5px] [[data-disabled]>&]:translate-y-[-1.5px] [[data-pressed]>&]:translate-y-[-0.5px] [[data-popup-open]>&]:translate-y-[-0.5px]',
-    md: 'translate-y-[-2px] [:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)>&]:translate-y-[-3px] [:not([data-disabled]):active>&]:translate-y-[-0.5px] [[data-disabled]>&]:translate-y-[-2px] [[data-pressed]>&]:translate-y-[-0.5px] [[data-popup-open]>&]:translate-y-[-0.5px]',
-    lg: 'translate-y-[-2px] [:not([data-disabled]):not([data-pressed]):not([data-popup-open]):hover:not(:active)>&]:translate-y-[-4px] [:not([data-disabled]):active>&]:translate-y-[-0.5px] [[data-disabled]>&]:translate-y-[-2px] [[data-pressed]>&]:translate-y-[-0.5px] [[data-popup-open]>&]:translate-y-[-0.5px]',
+    sm: 'translate-y-[-1.5px] [:not([data-disabled]):active>&]:translate-y-0 [[data-disabled]>&]:translate-y-[-1.5px] [[data-pressed]>&]:translate-y-0 [[data-popup-open]>&]:translate-y-[-0.5px]',
+    md: 'translate-y-[-2px] [:not([data-disabled]):active>&]:translate-y-0 [[data-disabled]>&]:translate-y-[-2px] [[data-pressed]>&]:translate-y-0 [[data-popup-open]>&]:translate-y-[-0.5px]',
+    lg: 'translate-y-[-2px] [:not([data-disabled]):active>&]:translate-y-0 [[data-disabled]>&]:translate-y-[-2px] [[data-pressed]>&]:translate-y-0 [[data-popup-open]>&]:translate-y-[-0.5px]',
 }
 
 const raisedFacePadding: Record<ButtonSize, string> = {
