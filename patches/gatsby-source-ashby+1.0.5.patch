@@ -1,0 +1,54 @@
+diff --git a/node_modules/gatsby-source-ashby/gatsby-node.js b/node_modules/gatsby-source-ashby/gatsby-node.js
+--- a/node_modules/gatsby-source-ashby/gatsby-node.js
++++ b/node_modules/gatsby-source-ashby/gatsby-node.js
+@@ -1,4 +1,9 @@
+ const axios = require("axios");
++
++const MAX_ATTEMPTS = 3;
++const REQUEST_TIMEOUT_MS = 15000;
++const RETRY_DELAY_MS = 1000;
++const RETRYABLE_CODES = ["ECONNRESET", "ECONNABORTED", "ETIMEDOUT", "EAI_AGAIN"];
+-
++
+ exports.sourceNodes = async (
+   { createContentDigest, actions: { createNode } },
+@@ -12,6 +17,7 @@
+     const requestOptions = {
+       method: "POST",
+       url,
++      timeout: REQUEST_TIMEOUT_MS,
+       headers: {
+         Accept: "application/json",
+         "Content-Type": "application/json",
+@@ -19,12 +25,24 @@
+       },
+     };
+     if (options) requestOptions.data = JSON.stringify(options);
+-    try {
+-      const {
+-        data: { results },
+-      } = await axios.request(requestOptions);
+-      return results;
+-    } catch (err) {
+-      console.error(`gatsby-source-ashby: ${err}`);
++    for (let attempt = 1; ; attempt++) {
++      try {
++        const { data } = await axios.request(requestOptions);
++        if (data?.success !== true || data.results == null) {
++          throw new Error(data?.errorInfo?.code || "invalid response");
++        }
++        return data.results;
++      } catch (error) {
++        const status = error.response?.status;
++        const retryable = status >= 500 || RETRYABLE_CODES.includes(error.code);
++        if (!retryable || attempt >= MAX_ATTEMPTS) {
++          throw new Error(
++            `gatsby-source-ashby: ${url} failed (${status || error.code || error.message})`
++          );
++        }
++        await new Promise((resolve) =>
++          setTimeout(resolve, RETRY_DELAY_MS * 2 ** (attempt - 1))
++        );
++      }
+     }
+   }
