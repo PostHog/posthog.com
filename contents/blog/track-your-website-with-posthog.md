@@ -35,7 +35,7 @@ Reducing your stack can have a few overlooked benefits, including greater data c
 
 Even if data consistency isn’t a concern, there are still plenty of reasons to consider moving away from Google Analytics. Recent GDPR rulings within the EU have bought [the legality of Google Analytics](https://isgoogleanalyticsillegal.com/) into question, for example, and prompted many organizations to look for a self-hosted alternative. 
 
-Worried about GDPR but don’t want to self-host? We recently, we offer [PostHog Cloud EU](https://posthog.com/eu) where all your data (and the product itself) is hosted in the EU, making it the [perfect alternative to GA4](/blog/ga4-alternatives).  
+Worried about GDPR but don’t want to self-host? We recently, we offer [PostHog Cloud EU](https://posthog.com/eu) where all your data (and the product itself) is hosted in the EU, making it the [perfect alternative to GA4](/compare/ga4-alternatives).  
 
 <GDPRForm />
 
@@ -60,6 +60,6 @@ If you’re on board and want to move ahead with tracking your marketing site wi
 </script>
 ```
 
-It’s worth noting that you’ll need to add this snippet to all pages you want to track, and that the snippet above uses Javascript. Don’t want to use Javascript? [There are plenty of other options](/docs/integrate)!
+It’s worth noting that you’ll need to add this snippet to all pages you want to track, and that the snippet above uses Javascript. Don’t want to use Javascript? [There are plenty of other options](/docs/getting-started/install)!
 
 <NewsletterForm />

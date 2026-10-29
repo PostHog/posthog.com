@@ -2,7 +2,7 @@
 title: How carVertical uses feature flags and analytics without autocapture
 customer: carVertical
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/carvertical_528ae93e37.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Carvertical_1920x1080_0ffc3f3392.png
 date: 2023-12-01
 ---
 
@@ -10,7 +10,7 @@ date: 2023-12-01
 
 As befits a company which processes mountains of data on a regular basis, carVertical’s product and growth teams are incredibly data-led. In the past, they’ve used tools such as Google Analytics to help them understand user behavior, but as the company has grown, they’ve needed to get more sophisticated.
 
-“Our goal was to implement a proper product analytics platform.,” says Aleksandras Nelkinas, carVertical’s Head of Product Engineering. “Our first thought was something like Mixpanel, but we wanted to be fair to ourselves, so we decided to [consider alternatives](/blog/best-mixpanel-alternatives). That's how we stumbled upon PostHog. What stood out to us was its comprehensive suite of tools, extending beyond mere product analytics. This influenced our decision to give it a trial.”
+“Our goal was to implement a proper product analytics platform.,” says Aleksandras Nelkinas, carVertical’s Head of Product Engineering. “Our first thought was something like Mixpanel, but we wanted to be fair to ourselves, so we decided to [consider alternatives](/compare/best-mixpanel-alternatives). That's how we stumbled upon PostHog. What stood out to us was its comprehensive suite of tools, extending beyond mere product analytics. This influenced our decision to give it a trial.”
 
 ## Implementing product analytics without autocapture
 

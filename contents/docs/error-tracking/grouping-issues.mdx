@@ -4,7 +4,7 @@ title: Grouping exceptions into issues
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Issues are created by grouping together similar exception events. When **no custom grouping behavior is configured**, exceptions are grouped together automatically based on their [fingerprint](/docs/error-tracking/fingerprints). 
+Issues are created by grouping together similar exception events. When **no custom grouping behavior is configured**, exceptions are grouped together automatically based on their [fingerprint](/docs/error-tracking/fingerprints).
 
 > We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
@@ -16,33 +16,33 @@ PostHog's default grouping logic may not work for every use case, making custom 
 
 ## Custom issue grouping
 
-PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can use custom grouping rules during ingestion or define a client-side fingerprint.
+PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can use grouping rules during ingestion or define a client-side fingerprint.
 
 ### Option 1: Custom grouping rule
 
-You can group exceptions as a single issue based on their properties using custom grouping rules. As with [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment), you have access to properties of the unminified stack trace because the rules run during ingestion. 
+You can group exceptions as a single issue based on their properties using grouping rules. As with [assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment), you have access to properties of the unminified stack trace because the rules run during ingestion.
 
-The [error tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-custom-grouping) show a list of your custom grouping rules:
+The [error tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-custom-grouping) show a list of your grouping rules:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_39_272_Z_a38e139b94.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_57_025_Z_128bd9bfe4.png"
-  alt="List of custom grouping rules"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_39_272_Z_a38e139b94.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T14_03_57_025_Z_128bd9bfe4.png"
+alt="List of grouping rules"
+classes="rounded"
 />
 
 To create a **custom grouping rule**, click **Add rule** and configure it in the rule editor:
 
 1. Select **Any** to match any of the criteria, or **All** to match all of the criteria.
-2. Click the **+ Add filter** button to add a new filter. These filters can be configured to match any [event property](/docs/data/events) in PostHog. 
+2. Click the **+ Add filter** button to add a new filter. These filters can be configured to match any [event property](/docs/data/events) in PostHog.
 3. Click **Test** to check how many exceptions match the rule's conditions before saving.
 4. Click **Save** to create the rule.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_35_56_474_Z_03f7bcfafb.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_36_15_781_Z_a162179a94.png"
-  alt="Adding a custom grouping rule"
-  classes="rounded"
+imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_35_56_474_Z_03f7bcfafb.png"
+imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_06_24_T10_36_15_781_Z_a162179a94.png"
+alt="Adding a custom grouping rule"
+classes="rounded"
 />
 
 Here are some common exception event properties you can filter on:
@@ -54,6 +54,16 @@ Here are some common exception event properties you can filter on:
 | Exception source | `$exception_sources` | The source file(s) where the exception occurred. |
 | Exception level | `$exception_level` | The level of the severity of the error. |
 | Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
+
+When you group exceptions with a custom fingerprint, set `$issue_name` and `$issue_description` on the same event to name the resulting issue. PostHog uses these two properties only on the event that creates the issue, and truncates each to 255 characters. Later events on the same fingerprint keep the existing name and description. When you do not set them, PostHog uses the exception type as the name and the exception message as the description.
+
+```js
+posthog.captureException(error, {
+  $exception_fingerprint: "MyCustomGroup",
+  $issue_name: "Checkout failures",
+  $issue_description: "Payment provider timeouts during checkout",
+})
+```
 
 You can also set custom properties on the error tracking event to filter on. You can find more about custom properties on exception capture in the [capture guide](/docs/error-tracking/capture).
 
@@ -71,7 +81,7 @@ Every captured exception is assigned a [fingerprint](/docs/error-tracking/finger
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
 ```
 
-If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
+If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
 
 ```javascript
 posthog.init("<ph_project_token>", {
@@ -98,14 +108,14 @@ Some examples of this could be:
 - A common issue like `ClickHouseTimeout` that occurs in many different places, but are mistakenly labeled as different issues.
 - A specific error message that shouldn't account for any differences in stack traces, such as "Failed to send billing status to SQS for customer".
 
-You should avoid using grouping to address problems that can be otherwise solved by [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) or filtering by [custom properties](/docs/error-tracking/capture#customizing-exception-properties). When you over-group issues, they lack specificity and become meaningless.
+You should avoid using grouping to address problems that can be otherwise solved by [assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) or filtering by [custom properties](/docs/error-tracking/capture#customizing-exception-properties). When you over-group issues, they lack specificity and become meaningless.
 
 ## How PostHog prioritizes issue grouping logic
 
 PostHog prioritizes issue grouping logic in the following order:
 
 1. Client-side defined custom fingerprint using `$exception_fingerprint`
-2. Match custom grouping rules defined in PostHog
+2. Match grouping rules defined in PostHog
 3. If no user defined logic, fall back to grouping as issues based on automatic fingerprinting
 
 Read more about how PostHog prioritizes grouping logic in the [issues and exceptions guide](/docs/error-tracking/issues-and-exceptions#how-exceptions-are-grouped-into-issues).

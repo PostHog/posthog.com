@@ -10,6 +10,10 @@ author:
 category: CEO diaries
 tags:
   - Y Combinator
+  - Founders
+  - CEO diaries
+crosspost:
+  - Founders
 ---
 
 YC has been running for 15 years, and getting bigger every year.

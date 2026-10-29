@@ -6,14 +6,14 @@ import { ZoomImage } from 'components/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
 import { cn } from '../../../utils'
-import Link from 'components/Link'
+import { ReferenceLink } from './References'
 
 const replaceMentions = (body: string) => {
-    return body.replace(/@([a-zA-Z0-9_-]+\/[0-9]+|max)/g, (match, username) => {
+    return body.replace(/(^|[^\w.@/])@([a-zA-Z0-9_-]+\/[0-9]+|max\b)/g, (_match, before, username) => {
         if (username === 'max') {
-            return `[${match}](/community/profiles/${process.env.GATSBY_AI_PROFILE_ID})`
+            return `${before}[@max](/community/profiles/${process.env.GATSBY_AI_PROFILE_ID})`
         }
-        return `[${match}](/community/profiles/${username.split('/')[1]})`
+        return `${before}[@${username}](/community/profiles/${username.split('/')[1]})`
     })
 }
 
@@ -72,9 +72,7 @@ export const Markdown = ({
                 code: ({ node, ...props }) => {
                     return <code {...props} className="break-all inline-block" />
                 },
-                a: ({ node, ...props }) => {
-                    return <Link rel="nofollow noopener noreferrer" {...props} state={{ newWindow: true }} />
-                },
+                a: ReferenceLink,
                 img: ZoomImage,
                 ...components,
             }}

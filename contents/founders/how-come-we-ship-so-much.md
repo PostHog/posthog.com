@@ -8,9 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
     - Founders
-    - Product engineers
-    - Engineering
-    - Culture
+    - Building the team
 crosspost:
     - Product engineers
     - Blog
@@ -27,7 +25,7 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 -   [User surveys](/docs/surveys)
 -   [Heatmaps](/docs/toolbar/heatmaps)
 -   [SDKs](/docs/libraries) for all the above
--   A basic [CDP](/docs/cdp) to stream data to warehouses
+-   A basic [CDP](/docs/data-pipelines) to stream data to warehouses
 -   [Data warehouse](/docs/data-warehouse) MVP
 -   A wildly extensive website
 
@@ -131,7 +129,7 @@ Raising money does let you build more stuff, but whether you should is very ques
 
 ## 9. Trust and feedback over process
 
-This is one of [our values](/handbook/company/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
+This is one of [our values](/handbook/values). It's simply up to the person building in most situations. Building and scaling something people want is a nuanced problem, so we let people use their judgement. When they get it wrong, we are direct and give feedback.
 
 To quote one of our team: "process is scar tissue" – it often overcorrects, but because [humans are risk-adverse](https://www.adamjuliangoldstein.com/blog/anxiety-algorithm/) it feels natural to implement it when a company starts growing. Humans overcorrect by default. That's why large corporations are (in more cases than not) irrationally-obstructive to getting work done.
 

@@ -11,6 +11,7 @@ import React, {
 } from 'react'
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
+import { isSafeInternalPath } from 'lib/utils'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -57,6 +58,7 @@ interface ChatContext {
 
 export interface ChatParams {
     path: string
+    sessionKey?: number
     context?: ChatContext[]
     quickQuestions?: string[]
     chatId?: string
@@ -356,7 +358,7 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -443,7 +445,7 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
+        scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
     },
@@ -494,8 +496,8 @@ export interface AppSetting {
     modal?: {
         type: 'standard' | 'side' | 'floating'
     }
-    closeOnEscape?: boolean
     toolbar?: boolean
+    toolbarFade?: boolean
     hideTitle?: boolean
 }
 
@@ -505,10 +507,6 @@ export interface AppSettings {
 
 const appSettings: AppSettings = {
     '/': {
-        experiment: {
-            variant: 'control',
-            flag: 'homepage-test',
-        },
         size: {
             min: {
                 width: 700,
@@ -517,40 +515,6 @@ const appSettings: AppSettings = {
             max: {
                 width: 1200,
                 height: 1500,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
-        },
-    },
-    '/ko': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 960,
-                height: 1000,
             },
             fixed: false,
         },
@@ -642,6 +606,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // The e-reader: tall enough that a guide page reads like a page, wide enough for the
+    // front matter's two columns.
+    '/pocket-guides': {
+        size: {
+            min: {
+                width: 700,
+                height: 600,
+            },
+            max: {
+                width: 1100,
+                height: 1100,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/tooling': {
         size: {
             min: {
@@ -658,7 +640,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/code': {
+    '/desktop': {
         size: {
             min: {
                 width: 700,
@@ -667,6 +649,54 @@ const appSettings: AppSettings = {
             max: {
                 width: 900,
                 height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/newsletter': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/blog': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    '/compare': {
+        size: {
+            min: {
+                width: 700,
+                height: 500,
+            },
+            max: {
+                width: 1200,
+                height: 1500,
             },
             fixed: false,
         },
@@ -704,78 +734,6 @@ const appSettings: AppSettings = {
         },
         position: {
             center: true,
-        },
-    },
-    'home-test': {
-        experiment: {
-            variant: 'test',
-            flag: 'homepage-test',
-        },
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 1200,
-                height: 900,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
-        },
-    },
-    '/careers-og': {
-        size: {
-            min: {
-                width: 700,
-                height: 500,
-            },
-            max: {
-                width: 800,
-                height: 1000,
-            },
-            fixed: false,
-        },
-        position: {
-            center: true,
-            getPositionDefaults: (size, windows, getDesktopCenterPosition) => {
-                if (typeof window === 'undefined') {
-                    return {
-                        x: 0,
-                        y: 0,
-                    }
-                }
-
-                const { x, y } = getDesktopCenterPosition(size)
-                const iconColumnRight = 145
-                const keyboardGardenImageLeft = window.innerWidth - 700
-                if (x + size.width > keyboardGardenImageLeft) {
-                    const availableWidth = keyboardGardenImageLeft - iconColumnRight
-                    const newX = iconColumnRight + Math.max(0, (availableWidth - size.width) / 2)
-                    return { x: newX, y }
-                }
-                return { x, y }
-            },
         },
     },
     '/paint': {
@@ -840,6 +798,72 @@ const appSettings: AppSettings = {
             },
         },
     },
+    // Free-tier allowances, opened from the pricing page. Not a route — see
+    // components/Pricing/Redesign/FreeTierModal.
+    'pricing-free-tier': {
+        size: {
+            min: {
+                width: 535,
+                height: 400,
+            },
+            max: {
+                width: 535,
+                height: 680,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // Event types explanation, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/EventTypesModal.
+    'pricing-event-types': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
+    // All products and per-unit rates, opened from the pricing calculator. Not a route — see
+    // components/Pricing/PricingCalculator/AllProductsRatesModal.
+    'pricing-all-rates': {
+        size: {
+            min: {
+                width: 800,
+                height: 400,
+            },
+            max: {
+                width: 800,
+                height: 720,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/about': {
         size: {
             min: {
@@ -872,7 +896,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/data-stack': {
+    '/context-warehouse': {
         size: {
             min: {
                 width: 750,
@@ -901,8 +925,24 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
+    '/connect/posthog/redirect': {
+        size: {
+            min: {
+                width: 425,
+                height: 250,
+            },
+            max: {
+                width: 425,
+                height: 280,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/display-options': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 600,
@@ -981,7 +1021,6 @@ const appSettings: AppSettings = {
         },
     },
     '/vibe-check': {
-        closeOnEscape: true,
         size: {
             min: {
                 width: 750,
@@ -992,41 +1031,6 @@ const appSettings: AppSettings = {
                 height: 575,
             },
             fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
-    '/credits': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 300,
-                height: 700,
-            },
-            max: {
-                width: 300,
-                height: 700,
-            },
-            fixed: true,
-        },
-        position: {
-            center: true,
-        },
-    },
-    '/kbd': {
-        closeOnEscape: true,
-        size: {
-            min: {
-                width: 600,
-                height: 625,
-            },
-            max: {
-                width: 600,
-                height: 625,
-            },
-            fixed: true,
-            autoHeight: true,
         },
         position: {
             center: true,
@@ -1377,6 +1381,24 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    // Add/edit form from /side-projects. Not a route — opened via addWindow.
+    'side-project-form': {
+        size: {
+            min: {
+                width: 560,
+                height: 400,
+            },
+            max: {
+                width: 560,
+                height: 800,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     'application-success': {
         size: {
             min: {
@@ -1426,6 +1448,24 @@ const appSettings: AppSettings = {
         position: {
             center: true,
         },
+    },
+    '/achievements/manage': {
+        size: {
+            min: {
+                width: 550,
+                height: 700,
+            },
+            max: {
+                width: 550,
+                height: 780,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        toolbar: true,
     },
     '/community/achievements': {
         size: {
@@ -1529,50 +1569,39 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
-    '/docs': {
-        toolbar: true,
-    },
     '/merch': {
         toolbar: true,
         hideTitle: true,
     },
+    '/field-guide': {
+        toolbar: false,
+        hideTitle: true,
+    },
+    '/field-guide/foreword': { toolbar: false, hideTitle: true },
+    '/field-guide/closing-note': { toolbar: false, hideTitle: true },
+    '/field-guide/the-rage-clicker': { toolbar: false, hideTitle: true },
+    '/field-guide/the-refreshing-pilgrim': { toolbar: false, hideTitle: true },
+    '/field-guide/the-tab-hopper': { toolbar: false, hideTitle: true },
+    '/field-guide/the-halfway-houdini': { toolbar: false, hideTitle: true },
+    '/field-guide/the-pricing-page-loiterer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-tutorial-skipper': { toolbar: false, hideTitle: true },
+    '/field-guide/the-modal-slammer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-phantom-returner': { toolbar: false, hideTitle: true },
+    '/field-guide/the-dead-end-wanderer': { toolbar: false, hideTitle: true },
+    '/field-guide/the-console-opener': { toolbar: false, hideTitle: true },
     '/trash': {
         toolbar: true,
     },
-    '/product-analytics': {
-        toolbar: true,
-    },
-    '/web-analytics': {
-        toolbar: true,
-    },
-    '/feature-flags': {
-        toolbar: true,
-    },
-    '/experiments': {
-        toolbar: true,
-    },
-    '/surveys': {
-        toolbar: true,
-    },
-    '/error-tracking': {
-        toolbar: true,
-    },
-    '/logs': {
-        toolbar: true,
-    },
-    '/workflows': {
-        toolbar: true,
-    },
-    '/endpoints': {
-        toolbar: true,
-    },
+    // The forum's sidebar starts at the top of the window, so each forum route gets a title bar above it.
+    '/forum': { toolbar: true },
+    '/forum/following': { toolbar: true },
+    '/forum/drafts': { toolbar: true },
+    '/forum/alerts': { toolbar: true },
+    '/forum/new': { toolbar: true },
+    '/forum/t/:topic': { toolbar: true },
+    '/forum/t/:topic/tags': { toolbar: true },
+    '/forum/p/:permalink': { toolbar: true },
     '/ai': {
-        toolbar: true,
-    },
-    '/ai-observability': {
-        toolbar: true,
-    },
-    '/mcp-analytics': {
         toolbar: true,
     },
     '/hog': {
@@ -1580,6 +1609,11 @@ const appSettings: AppSettings = {
     },
     '/changelog': {
         toolbar: true,
+    },
+    '/roadmap': {
+        toolbar: true,
+        toolbarFade: true,
+        hideTitle: true,
     },
     '/feet-pics': {
         toolbar: true,
@@ -1593,14 +1627,32 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
+    scrollbars?: 'system' | 'show' | 'auto'
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
+const readStoredSiteSettings = (): Partial<SiteSettings> => {
+    if (typeof window === 'undefined') {
+        return {}
+    }
+    try {
+        const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+            return {}
+        }
+        // Retired setting. Drop it so a later save does not write it back.
+        delete parsed.reduceTransparency
+        return parsed
+    } catch (error) {
+        console.error('Failed to read site settings:', error)
+        return {}
+    }
+}
 
 const getInitialSiteSettings = (): SiteSettings => {
     const siteSettings: SiteSettings = {
@@ -1612,8 +1664,8 @@ const getInitialSiteSettings = (): SiteSettings => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
-        ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+        scrollbars: 'system',
+        ...readStoredSiteSettings(),
     }
 
     const retiredWallpapers = ['action-figure', '2001-bliss', 'parade', 'coding-at-night']
@@ -1642,7 +1694,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
+        scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
     const [lastClickedElementRect, setLastClickedElementRect] = useState<{ x: number; y: number } | null>(null)
@@ -1702,18 +1754,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
-    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
-    const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
+    const sourcesNav = useSourcesNav('/docs/data-pipelines/sources')
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
             'data-pipeline-source-webhooks': sourceWebhooksNav,
-            'data-pipeline-sources': cdpSourcesNav,
-            'data-warehouse-sources': dwSourcesNav,
+            'data-pipeline-sources': sourcesNav,
         }),
-        [destinationNav, transformationNav, sourceWebhooksNav, cdpSourcesNav, dwSourcesNav]
+        [destinationNav, transformationNav, sourceWebhooksNav, sourcesNav]
     )
 
     const desktopParams = useMemo(() => {
@@ -2156,7 +2206,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 newWindow.snapped = focusedWindow.snapped
                 newWindow.expanded = false
                 newWindow.windowed = false
-            } else if (focusedWindow) {
+            } else if (focusedWindow && !focusedWindow.fixedSize) {
                 // Navigating in place: keep the focused window's current display mode
                 // (windowed vs. expanded) so pages don't jump between sizes.
                 newWindow.expanded = focusedWindow.expanded ?? false
@@ -2193,6 +2243,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             setWindows([...windows.map((w) => (w === focusedWindow ? snappedFocused : w)), newWindow])
         } else if (newWindow.appSettings?.size?.fixed) {
             setWindows([...windows.filter((w) => !w.appSettings?.size?.fixed), newWindow])
+        } else if (focusedWindow?.fixedSize) {
+            setWindows([...windows.filter((w) => w !== focusedWindow), { ...newWindow, zIndex: focusedWindow.zIndex }])
         } else {
             replaceFocusedWindow(newWindow)
         }
@@ -2296,7 +2348,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     // than as a managed window. Opening a chat just stores its params and flips the
     // `chatOpen` flag; a fresh set of params remounts the overlay's `ChatProvider`.
     const openNewChat = (params: ChatParams) => {
-        setChatParams(params)
+        setChatParams((previous) => ({ ...params, sessionKey: (previous?.sessionKey ?? 0) + 1 }))
         setChatOpen(true)
     }
 
@@ -2494,11 +2546,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 // Open display options
                 navigate('/display-options', { state: { newWindow: true } })
             }
-            if (e.key === '.' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
-                e.preventDefault()
-                // Open keyboard shortcuts pane
-                navigate('/kbd', { state: { newWindow: true } })
-            }
 
             // Theme toggle with m key
             if (e.key === 'm' && !e.shiftKey && !e.ctrlKey && !e.metaKey && !e.altKey) {
@@ -2680,7 +2727,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
-        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {
@@ -2717,7 +2763,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
                 return
             }
-            if (e.data.type === 'navigate') {
+            if (e.data.type === 'navigate' && isSafeInternalPath(e.data.url)) {
                 navigate(e.data.url)
             }
         }

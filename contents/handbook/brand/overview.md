@@ -42,6 +42,6 @@ Be helpful to other companies. We are here to increase the number of successful 
 ## Things you're probably looking for
 
 - [Brand assets (logos, downloads)](/handbook/brand/assets)
-- [Content & messaging guidelines](/handbook/content/brand-message)
+- [Brand foundations](/handbook/brand/foundations)
 - [Requesting artwork](/handbook/brand/art-requests)
 - [Writing for PostHog](/handbook/content/writing-for-posthog)

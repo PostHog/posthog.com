@@ -2,9 +2,9 @@
 title: Log patterns
 ---
 
-Log patterns automatically group similar log lines into templates, so you can see the shape of your log traffic at a glance instead of scrolling through thousands of individual lines.
+Log patterns group similar log lines into templates, so you read the shape of your log traffic instead of scrolling through thousands of individual lines.
 
-Pattern mining reads your log messages, masks variable parts (IDs, numbers, IP addresses), and clusters the results into templates. Each template represents a family of log lines that share the same structure but differ in their variable content.
+Pattern mining reads your log messages, masks the variable parts (IDs, numbers, IP addresses), and clusters what's left into templates. Each template stands for a family of lines that share a structure but differ in their variable content.
 
 For example, these three log lines:
 
@@ -20,19 +20,35 @@ Become a single pattern:
 User <*> not found
 ```
 
-This makes it easy to spot noisy log lines, new error shapes, and unexpected changes in your log traffic.
+Multiply that across a real log volume and thousands of lines collapse into a few dozen templates. Noisy lines, new error shapes, and sudden changes in traffic become obvious.
 
-## Access the Patterns view
+## Why patterns matter
+
+Production logs have two problems, and they're different problems.
+
+**They're too big to read.** A busy service emits millions of lines a day. Nobody scrolls that, so you grep for a string you already suspect – which only ever finds problems you already know about.
+
+**They're too expensive to read.** Once an AI agent does the reading, every routine line you hand it costs tokens and crowds out the context it needs to write the fix. A 500,000-line window is on the order of 10 million tokens of mostly identical heartbeat, request, and retry lines. That's past what any context window holds, and expensive well before that.
+
+Patterns solve both by collapsing volume into structure:
+
+- **Compression, not summarization.** Templates are mined from your real lines. Nothing is paraphrased and nothing is invented – each pattern carries its own example lines and pivots back to the exact records it came from.
+- **No token cost.** Mining is deterministic. It doesn't call a model, so it doesn't bill AI spend, and the same input produces the same templates every time.
+- **Ranked by signal, not recency.** Every pattern carries its dominant severity, count, share of total volume, error count, and volume trend. The noisy and the anomalous both stand out without you knowing what to search for first.
+- **Readable by agents.** Your coding agent can [mine and diff patterns over MCP](#use-patterns-with-ai-agents), so it starts an investigation with up to 200 ranked templates instead of burning its context window on raw lines.
+- **One step from the rest of your data.** A pattern pivots to its matching logs, and a log line pivots to the [session replay](/docs/logs/link-session-replay), [person](/docs/logs/link-person), and [error](/docs/error-tracking) behind it.
+
+## Access the patterns view
 
 Go to the [Logs page](https://app.posthog.com/logs) and switch to the **Patterns** tab. The view uses whatever date range, service, and severity filters you already have applied.
 
-## What the Patterns table shows
+## What the patterns table shows
 
 Each row in the table represents a mined pattern:
 
 | Column        | Description                                                                                                                                                                                      |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Level**     | The dominant severity across the pattern's sample (e.g. `error`, `warn`, `info`). When multiple severities appear, the one with the highest count wins; ties break toward the more severe level. |
+| **Level**     | The dominant severity across the pattern's sample (e.g. `error`, `warn`, `info`). When multiple levels appear, the one with the highest count wins; ties break toward the more severe level. |
 | **Pattern**   | The template text. Variable parts are replaced with placeholder tokens (see below).                                                                                                              |
 | **Trend**     | A sparkline showing the pattern's volume over the selected time range.                                                                                                                           |
 | **Count**     | Estimated total occurrences across the full time window. Hover to see the underlying sample count.                                                                                               |
@@ -70,7 +86,7 @@ When you expand a pattern row, a **View matching logs** button appears. Click it
 
 The pivot:
 
-- Adds a visible message filter to the filter bar — the same kind you'd add manually, so you can inspect, edit, or remove it
+- Adds a visible message filter to the filter bar – the same kind you'd add manually, so you can inspect, edit, or remove it
 - Switches from the Patterns tab to the Logs tab
 - Preserves your existing date range, service, and severity filters so the pivot stays within your investigation context
 
@@ -82,31 +98,76 @@ Before shipping, the regex is validated against every stored example for the pat
 
 The **View matching logs** button tooltip tells you which mode is active:
 
-- **Regex mode** — "Open the Logs view filtered to lines matching this pattern"
-- **Literal fallback** — "Open the Logs view filtered to lines containing this pattern's literal text (pattern match unavailable)"
+- **Regex mode** – "Open the Logs view filtered to lines matching this pattern"
+- **Literal fallback** – "Open the Logs view filtered to lines containing this pattern's literal text (pattern match unavailable)"
 
 ### Automatic service and severity scoping
 
-When a pattern's sample is unambiguous — a single service or a single canonical severity — the pivot also sets the corresponding service and severity filters. These appear as visible filter chips you can remove if the pattern exists beyond what the sample captured.
+When a pattern's sample points to a single service or a single canonical severity, the pivot also sets those filters. These appear as visible filter chips you can remove if the pattern exists beyond what the sample captured.
 
 Scoping is withheld when it could silently exclude matching lines, such as when the services list is at the miner's cap (possibly truncated) or the severity is non-canonical.
 
+## Use patterns with AI agents
+
+Patterns are the cheapest way to give a coding agent a whole log window. Instead of pasting raw lines into a prompt, the agent pulls templates over the [PostHog MCP server](/docs/logs/surfaces/mcp) and reads the shape of the traffic first:
+
+- **`logs-patterns`** – mine templates for a service, severity, and time range, with counts, error counts, and share of volume.
+- **`logs-patterns-diff`** – compare two time ranges and return which templates are new, gone, or spiking.
+- **`query-logs`** – once the agent knows which template matters, pull only the lines behind it.
+
+That order matters. Mining first turns an unreadable window into a ranked list the agent can reason about, then it spends its context budget on the handful of lines that earned it. Because the agent has your codebase in the same session, it can tie a template back to the log statement that emitted it and draft the fix.
+
+Scope the mine to one service when you can. An unscoped mine of a busy project returns all 200 templates with their sample lines and regexes. This costs tens of thousands of tokens.
+
+Prompts that work well:
+
+| Goal | Ask your agent |
+| --- | --- |
+| Get oriented | `Mine log patterns for the payments service over the last 24 hours` |
+| Find what a deploy changed | `Compare log patterns from the last hour against the same hour yesterday and show me what's new` |
+| Cut the noise | `Which log patterns are the highest volume? Which ones are safe to stop logging?` |
+| Drill in | `Show me the actual log lines behind the top error pattern` |
+
+<CalloutBox icon="IconInfo" title="Diffing beats thresholds" type="fyi">
+
+A new error template at low volume is often a better early signal than an existing template that doubles. A diff of two windows finds the first kind. Volume alerts miss it.
+
+Read the example lines for a template before you treat it as a real change. A template can hold a value that the miner did not mask. That value becomes part of the template identity. One log statement can then show as new in one window, and gone in the other.
+
+</CalloutBox>
+
 ## Sampling
 
-When your log volume is large, patterns are mined from a representative sample rather than every line. A banner at the top of the Patterns view explains:
+When your log volume is large, PostHog mines patterns from a representative sample rather than every line. A banner at the top of the Patterns view explains:
 
 - How many lines were sampled out of the total matching your filters
-- What percentage of the time window the sample covers
+- What share of the matching lines fell inside the sampled time slices
 - That counts are estimates extrapolated to the full window
 
-Hover any count to see the raw sample figure the estimate was derived from. Estimated counts are prefixed with `~` to indicate they're extrapolations.
+Hover any count to see the raw sample figure behind the estimate. Estimated counts are prefixed with `~` to indicate they're extrapolations.
 
-To improve accuracy, narrow your filters — a specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
+To improve accuracy, narrow your filters. A specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
+
+### How sampling works
+
+Pattern mining narrows the logs in two steps.
+
+First, it bounds the scan. A wide window can hold more rows than one query can read. The miner therefore divides the window into evenly spaced time slices and reads only those. This keeps the sample spread across the window instead of concentrated at one end.
+
+Second, it samples the rows in those slices. The miner selects rows by a hash of each log's ID, not by a random draw. The same query over the same data returns the same templates every time.
+
+The miner then builds templates from the sample with Drain3, an open-source log clustering library. It scales each pattern's count from the sample up to the full window. A pattern seen a few times in the sample can therefore report a large estimate. A pattern rarer than the sample rate can be absent altogether.
+
+### Pattern limit
+
+Pattern mining returns at most 200 patterns for each query, ranked by volume. On a busy stream, the view shows the 200 largest templates and omits the rest. The table does not mark when this happens. A smaller pattern can be missing even when the sample covers its lines.
+
+To see smaller patterns, filter to one service or one severity level. A narrower stream spends the whole limit on fewer templates.
 
 ## Tips
 
 - **Start broad, then narrow.** Open Patterns with a wide time range to discover the dominant templates in your traffic, then narrow filters to focus on a specific service or severity.
 - **Use the pivot to investigate.** Spot an interesting pattern (a new error shape, a sudden volume spike) and click **View matching logs** to see the full log lines with all their attributes and trace context.
-- **Remove pivot filters when done.** The message filter added by the pivot is a normal filter chip — remove it from the filter bar when you're finished investigating to return to an unfiltered view.
+- **Remove pivot filters when done.** The message filter added by the pivot is a normal filter chip – remove it from the filter bar when you're finished investigating to return to an unfiltered view.
 - **Watch the error column.** Sort by **Errors** to surface the noisiest error patterns. High-volume error patterns are candidates for fixing or suppressing at the source.
 - **Combine with alerts.** After identifying a pattern worth monitoring, use the regex or literal string from the pivot filter to create a [log alert](/docs/logs/alerts) for ongoing monitoring.

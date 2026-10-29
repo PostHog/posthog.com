@@ -3,32 +3,36 @@ import { navigate } from 'gatsby'
 import OSSelect from 'components/OSForm/select'
 import { useSidebarExpanded } from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
-import { getProductSurfaceUrl } from './getProductSurfaceUrl'
+import { BROWSE_TOOLS_HANDLES } from 'constants/productNavigation'
+import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTabs'
 
 interface ProductSwitcherProps {
     /** Handle of the currently active product (matches `product.handle`). */
     activeHandle: string
     /** Optional list of product handles to hide from the dropdown. */
     excludeHandles?: string[]
+    /** The sidebar tab of the current page. Switching products opens the same tab. Defaults to `'product'`. */
+    surface?: ProductSurface
 }
 
 /**
  * Searchable product picker rendered at the top of `ReaderView`'s LeftSidebar.
- * Sources the product list from `useProduct()` (which chains in
- * `useProducts()` plus the extended/alpha entries) and navigates to the
- * equivalent surface on the new product via `getProductSurfaceUrl`.
+ * Uses the same curated handle list/order as the taskbar "Browse tools" menu
+ * (`BROWSE_TOOLS_HANDLES`). Navigates to the target product's tab for the current
+ * `surface` (e.g. Learn), or to the product root (`/<slug>`) when the target
+ * product has no such tab.
  *
  * Pass via `<ReaderView productSelect={<ProductSwitcher activeHandle="…" />}>`.
  */
-const ProductSwitcher = ({ activeHandle, excludeHandles = [] }: ProductSwitcherProps) => {
+const ProductSwitcher = ({ activeHandle, excludeHandles = [], surface = 'product' }: ProductSwitcherProps) => {
     const allProducts = useProduct() as any[]
     const expanded = useSidebarExpanded()
 
     const options = useMemo(
         () =>
-            allProducts
-                .filter((p) => p.handle && p.slug && !excludeHandles.includes(p.handle))
-                .map((p) => ({
+            BROWSE_TOOLS_HANDLES.map((handle) => allProducts.find((p: any) => p.handle === handle))
+                .filter((p: any) => p?.handle && p?.slug && !excludeHandles.includes(p.handle))
+                .map((p: any) => ({
                     label: p.name,
                     value: p.handle,
                     color: p.color,
@@ -37,14 +41,16 @@ const ProductSwitcher = ({ activeHandle, excludeHandles = [] }: ProductSwitcherP
         [allProducts, excludeHandles]
     )
 
-    const activeProduct = allProducts.find((p) => p.handle === activeHandle)
+    const activeProduct = allProducts.find((p: any) => p.handle === activeHandle)
 
     const handleChange = (handle: string) => {
         if (handle === activeHandle) return
-        const target = allProducts.find((p) => p.handle === handle)
+        const target = allProducts.find((p: any) => p.handle === handle)
         if (!target?.slug) return
-        const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
-        navigate(getProductSurfaceUrl(currentPath, target.slug))
+        const tab = buildProductMenuTabs({ productData: target, activeSurface: surface }).find(
+            ({ value }) => value === surface
+        )
+        navigate(tab?.href ?? `/${target.slug}`)
     }
 
     // Collapsed sidebar: render only the active product's icon, centered.

@@ -80,7 +80,7 @@ Next, we create groups of 3-5 events to test together. Typically, we aim for 5-1
 
 ![Groups](https://res.cloudinary.com/dmukukwp6/image/upload/image_16_bf16064d65.png)
 
-Once we have our potential activation metrics, we write an [SQL query](/docs/product-analytics/sql) to test how they correlate with retention.
+Once we have our potential activation metrics, we write an [SQL query](/docs/data-warehouse/sql) to test how they correlate with retention.
 
 The query starts by getting the companies that signed up for PostHog, broken down by month. We use [group analytics](/docs/product-analytics/group-analytics) to find activated companies rather than individual users, but both work.
 

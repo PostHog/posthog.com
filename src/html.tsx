@@ -11,7 +11,8 @@ export interface HTMLProps {
 
 export default function HTML(props: HTMLProps): JSX.Element {
     return (
-        <html {...props.htmlAttributes}>
+        // `lang` is a default: pages that set their own override it via htmlAttributes.
+        <html lang="en" {...props.htmlAttributes}>
             <head>
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
@@ -35,14 +36,15 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     <script src="/scripts/posthog-init.js" />
                 )}
 
+                {/* WebMCP is an origin trial in Chrome 149-156. Without this token, document.modelContext
+                    is undefined for visitors and the tools in components/WebMCP register nothing. */}
+                {process.env.GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN && (
+                    <meta httpEquiv="origin-trial" content={process.env.GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN} />
+                )}
+
                 {props.headComponents}
             </head>
-            <body
-                {...props.bodyAttributes}
-                className="light"
-                data-wallpaper="keyboard-garden"
-                data-reduce-transparency="false"
-            >
+            <body {...props.bodyAttributes} className="light" data-wallpaper="keyboard-garden">
                 {props.preBodyComponents}
                 {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />

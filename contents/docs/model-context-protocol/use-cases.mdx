@@ -9,11 +9,13 @@ import PromptExample from "./_snippets/prompt-example.tsx";
 
 Once you've [connected the PostHog MCP server](/docs/model-context-protocol#get-started-in-30-seconds), your agent can read and write across PostHog's products. Here's a tour of the most useful things to ask – click the copy icon next to any prompt to grab it for your own agent, then adapt it to your project.
 
+For a real example, read how [Runable](/customers/runable) uses agents in Claude Code, Codex, and its own product to run SQL, rank errors, and build dashboards in PostHog. [SoundBoost](/customers/soundboost) goes further: the MCP is now the main way its founder adds tracking and queries the data.
+
 ## Single-prompt examples
 
 ### Investigate bugs and errors
 
-Triage and fix issues from your editor instead of context-switching to a browser. See the [error tracking guide](/docs/error-tracking/debug-errors-mcp) and [logs guide](/docs/logs/debug-logs-mcp) for deeper walkthroughs.
+Triage and fix issues from your editor instead of context-switching to a browser. See the [error tracking guide](/docs/error-tracking/surfaces/mcp) and [logs guide](/docs/logs/surfaces/mcp) for deeper walkthroughs.
 
 <PromptExample
   prompt="What are the top 5 errors in my project this week?"
@@ -55,7 +57,7 @@ Diagnose why events are missing, dropped, or degraded during ingestion. Useful f
 
 ### Explore product analytics
 
-Ask data questions in plain English and get answers backed by a real PostHog query. See the [analytics guide](/docs/product-analytics/build-insights-mcp) for more.
+Ask data questions in plain English and get answers backed by a real PostHog query. See the [analytics guide](/docs/product-analytics/surfaces/mcp) for more.
 
 <PromptExample
   prompt="How many unique users signed up in the last 7 days, broken down by day?"
@@ -72,7 +74,7 @@ Ask data questions in plain English and get answers backed by a real PostHog que
 
 ### Manage path cleaning rules
 
-Path cleaning rules normalize dynamic URLs — like `/users/123` and `/users/456` — into consistent patterns like `/users/<id>` so they appear as a single row in your analytics. Manage rules directly from your agent instead of editing them by hand in project settings. See the [path cleaning docs](/docs/web-analytics/path-cleaning) for more on how rules work.
+Path cleaning rules normalize dynamic URLs – like `/users/123` and `/users/456` – into consistent patterns like `/users/<id>` so they appear as a single row in your analytics. Manage rules directly from your agent instead of editing them by hand in project settings. See the [path cleaning docs](/docs/web-analytics/path-cleaning) for more on how rules work.
 
 <PromptExample
   prompt="Show me the current path cleaning rules for this project."
@@ -97,7 +99,7 @@ Path cleaning rules normalize dynamic URLs — like `/users/123` and `/users/456
 
 ### Manage feature flags and experiments
 
-Spin up flags, multivariate tests, and full A/B experiments without leaving your code. See the [feature flags guide](/docs/feature-flags/create-flags-mcp) and [experiments guide](/docs/experiments/create-experiments-mcp).
+Spin up flags, multivariate tests, and full A/B experiments without leaving your code. See the [feature flags guide](/docs/feature-flags/surfaces/mcp) and [experiments guide](/docs/experiments/surfaces/mcp).
 
 <PromptExample
   prompt="Create a feature flag called new-checkout-flow enabled for 20% of users."
@@ -116,9 +118,30 @@ Spin up flags, multivariate tests, and full A/B experiments without leaving your
   outcome="Creates the feature and auto-links a dark-mode feature flag."
 />
 
+### Manage change request approvals
+
+Review and act on pending [approval requests](/docs/settings/approvals) without leaving your editor. Available to organizations with the approvals entitlement.
+
+<PromptExample
+  prompt="What change requests are waiting for my approval?"
+  outcome="Lists pending requests where you're an eligible approver who hasn't voted yet."
+/>
+<PromptExample
+  prompt="Show me the details of change request #42."
+  outcome="Returns the full intent, policy snapshot, and current approval status for the request."
+/>
+<PromptExample
+  prompt="Approve change request #42."
+  outcome="Casts your approval vote after you type 'confirm'. If quorum is reached, the change is applied immediately."
+/>
+<PromptExample
+  prompt="Reject change request #15 because the rollout is too aggressive for production."
+  outcome="Records your rejection with the reason and notifies the requester."
+/>
+
 ### Run SQL and HogQL queries
 
-Drop into raw queries when you need precision. See the [SQL guide](/docs/data-warehouse/run-sql-mcp).
+Drop into raw queries when you need precision. See the [SQL guide](/docs/data-warehouse/surfaces/mcp).
 
 <PromptExample
   prompt="Find all feature flags rolled out to less than 50% of users."
@@ -131,6 +154,23 @@ Drop into raw queries when you need precision. See the [SQL guide](/docs/data-wa
 <PromptExample
   prompt="Which cohorts contain users who made a purchase in the last week?"
   outcome="Cross-references system.cohorts with purchase events."
+/>
+
+### Install PostHog from chat
+
+Ask your AI assistant to set up PostHog in your codebase – no terminal required. The wizard runs in the cloud, makes the code changes, and opens a pull request for you to review. See the [AI wizard docs](/docs/ai-engineering/ai-wizard) for more on how the wizard works.
+
+<PromptExample
+  prompt="Install PostHog in my GitHub repository"
+  outcome="Connects to your GitHub, starts a wizard run in the cloud, and returns a pull request link for you to review."
+/>
+<PromptExample
+  prompt="Set up PostHog analytics in my Next.js app on the posthog/demo repo"
+  outcome="Targets a specific repository, runs the wizard, and shows progress updates until the PR is ready."
+/>
+<PromptExample
+  prompt="Check the status of my PostHog setup"
+  outcome="Polls an active wizard run and returns the current stage, progress, and pull request link when available."
 />
 
 ### Build CDP destinations and workflows
@@ -260,7 +300,7 @@ Set one-off or recurring reminders that fire as in-app notifications. Optionally
 
 ## Multi-step recipes
 
-Single prompts get you a long way, but the real value of MCP comes from chaining tool calls into end-to-end workflows. Drop these sequences into your agent one step at a time – each prompt builds on the context the previous one returned.
+Single prompts get you a long way, but the real value of MCP comes from chaining MCP tool calls into end-to-end workflows. Drop these sequences into your agent one step at a time – each prompt builds on the context the previous one returned.
 
 ### Investigate and contain a regression
 
@@ -339,6 +379,6 @@ Conversion is down – use MCP to figure out where users are dropping off, why, 
 
 ## Keep exploring
 
-- [Tools reference](/docs/model-context-protocol/tools) – every tool the MCP server exposes, grouped by category
+- [MCP tools reference](/docs/model-context-protocol/tools) – every MCP tool the server exposes, grouped by category
 - [FAQ and advanced setup](/docs/model-context-protocol/faq) – auth, scoping, filtering, and other operational details
 - [Overview](/docs/model-context-protocol) – back to the MCP overview and install instructions

@@ -13,6 +13,7 @@ prefix: '^[^:]+:\s+|^[\w\s]+[.)]\s+'
 # All entries in vocabularies/BrandsAndTechnologies/accept.txt are exempt from this rule
 exceptions:
     # For product names: The strings in this list are enforced with exact casing
+    - Business Knowledge
     - Customer Analytics
     - Data Pipelines
     - Data Warehouse

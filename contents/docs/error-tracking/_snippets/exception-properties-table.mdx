@@ -6,5 +6,7 @@
 | └─ `stacktrace` | Object | Contains a list of stack frames that occurred |
 | └─ `mechanism` | Object | If the stacktrace is handled and if it's synthetic |
 | `$exception_fingerprint` | String | A fingerprint of the exception |
+| `$issue_name` | String | Sets the name of the issue. PostHog uses it only on the event that creates the issue, and truncates it to 255 characters. Later events on the same fingerprint keep the existing name. When absent, PostHog uses the exception type. |
+| `$issue_description` | String | Sets the description of the issue. PostHog uses it only on the event that creates the issue, and truncates it to 255 characters. Later events on the same fingerprint keep the existing description. When absent, PostHog uses the exception message. |
 | `$exception_level` | String | The level of the severity of the error |
 | `$exception_steps` | List | Breadcrumb-style steps recorded via [`addExceptionStep`](/docs/error-tracking/capture#add-exception-steps) before the exception, each with a `$message`, `$timestamp`, and any custom properties |

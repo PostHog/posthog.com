@@ -1,0 +1,4 @@
+contact_links:
+    - name: 🎨 Art, brand, or merch request
+      url: https://github.com/PostHog/marketing/issues/new/choose
+      about: Art, brand, and merch requests live in the PostHog/marketing repo — please don't open them here.

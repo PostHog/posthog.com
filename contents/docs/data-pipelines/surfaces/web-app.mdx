@@ -1,0 +1,73 @@
+---
+title: Data pipelines in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is where you build pipelines and watch them run. Sources, transformations, destinations, and batch exports each get their own section, and every pipeline you create – whether from a template or written by hand – ends up as a [Hog function](/docs/hog) you can open, edit, and test.
+
+## Before you start
+
+1. **Set up a pipeline** – [create a source, destination, or transformation](/docs/data-pipelines/start-here) so there's something to manage.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+### Link sources
+
+Connect an external tool so its data syncs into PostHog on a schedule, or set up an [incoming webhook](/docs/data-pipelines/sources/incoming-webhooks) to push events in yourself. Synced data lands in the [data warehouse](/docs/data-warehouse), where you can join it to events and persons. See [sources](/docs/data-pipelines/sources) for the full list of connectors.
+
+### Transform events during ingestion
+
+[Transformations](/docs/data-pipelines/transformations) run before an event is stored, so they're the right place to enforce a schema, redact a property, label events, or [drop](/docs/data-pipelines/transformations/drop-events) traffic you don't want to pay for. Transformations run in a defined order, which you can rearrange, and a separate event ingestion filtering view lets you block events at the edge without writing code.
+
+### Send data to destinations
+
+[Realtime destinations](/docs/data-pipelines/destinations) fire as events arrive – useful for alerts, CRM syncs, and ad platform conversions. [Batch exports](/docs/data-pipelines/batch-exports) run on a schedule and are built for volume, which is what you want for S3, BigQuery, Snowflake, Postgres, Redshift, Databricks, and Azure Blob Storage. You can [customize any destination](/docs/data-pipelines/destinations/customizing-destinations) by editing its underlying function.
+
+### Test, monitor, and debug
+
+Each function has a test-invoke step that runs it against a real recent event and shows the exact request it would send, without delivering anything. Once it's live, per-function logs and metrics separate successful runs, failures, and events that were filtered out, so you can tell an empty filter apart from a rejecting destination. Event ingestion warnings surface problems that happen upstream of your pipelines.
+
+## Ask PostHog AI
+
+[PostHog AI](/docs/posthog-ai) works inside the pipeline editor – it's an interaction mode here, not a separate surface. Describe the function you want in plain language and it writes the Hog code, generates the input variables, and builds the event filters to go with it. You can then iterate on the result with follow-up instructions. See [writing Hog functions with PostHog AI](/docs/data-pipelines/hog-functions-ai) for prompts that work well.
+
+## Self-driving reports
+
+Pipeline failures are quiet – events keep ingesting and your dashboards stay green while a destination silently stops delivering – so a [scout](/docs/self-driving/scouts) watches delivery for you and files what it finds as a [report](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox). To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+### How a delivery problem becomes a report
+
+A dedicated data pipelines scout runs on a schedule across your destinations, transformations, batch exports, and hog flows. It only cares about the gap between what a pipeline is configured to do and what it's actually doing:
+
+- **Platform interventions** – PostHog's hog watcher degrading or auto-disabling an enabled function after sustained trouble, so delivery stops without anyone being told. A transformation in this state matters most, because it sits in the ingestion path for every event in the project.
+- **Rising failure share** – an enabled destination whose failure rate steps above its own history, including one that has been failing since the day it was created.
+- **Filter starvation** – a destination that stops firing because the event its filter matches was renamed or stopped. It isn't failing, it's starving.
+- **Stalled or failed batch exports** – a terminal failed run, or a schedule that has fallen behind its own interval. Each missed interval is a permanent data gap until someone backfills it.
+- **Flows failing for real people** – an active hog flow erroring for the recipients it triggers on, usually concentrated in one broken step like a dead webhook or a bad template.
+
+Anything you turned off on purpose is baseline, not a finding: paused exports, disabled functions, and draft or archived flows are operator choices, so the scout leaves them alone.
+
+When a finding clears the bar, the scout files a single report naming the pipeline, quantifying the contradiction against its own baseline, and dating the onset – with the error class pulled from the function's logs or the flow's failed invocations, and a suggested reviewer.
+
+### Two ways a report gets resolved
+
+Most pipeline problems need a person. A broken remote endpoint, an expired credential, or a watcher intervention isn't something a coding agent can fix, so the report is filed for human review with no repository attached and no pull request.
+
+When the fix is an obvious code change in a function or flow your team owns – a dead webhook URL, a bad template – the report is marked immediately actionable and can auto-start an [implementation run](/docs/self-driving/inbox/implementation). The coding agent works in a sandbox against your connected repo, pushes a branch, and opens a draft pull request. Merging it resolves the report.
+
+### What you can do with a report
+
+- **Read the report** – the pipeline, the failure numbers, and the error class, from real delivery data.
+- **Ask questions** – start a discussion with an agent about the report to dig further before you act.
+- **Review the draft pull request** – when the fix is code, see the files it changed, the diff, and its checks, then merge it on GitHub.
+- **Watch the agent work** – follow the live transcript and the files it changed.
+
+Nothing ships without you. The merge happens on GitHub, so a human is always the last step.
+
+## Related
+
+- Create and debug the same functions from your editor over [MCP](/docs/data-pipelines/surfaces/mcp).
+- Manage them programmatically with the [API](/docs/data-pipelines/surfaces/api).
+- Fix delivery problems with the [troubleshooting guide](/docs/data-pipelines/troubleshooting).

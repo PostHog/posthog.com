@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, go]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Go app from a one-line request? The
+          prompt names only the stack; the agent gets no docs, so docs-read shows which
+          pages it finds on its own.
+      codebase_to_test: starter-go
+      prompt: >-
+          Set up PostHog in the Go app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/go.mod lists `github.com/posthog/posthog-go`.
+              initialized: >-
+                  The app creates a client with posthog.NewWithConfig, passing the
+                  project token and a posthog.Config whose Endpoint is the PostHog host,
+                  and closes the client before exit. Cite the file and line(s).

@@ -46,13 +46,19 @@ PostHog is a global company. Our team and our customers are distributed around t
 
 ### Use sentence case for titles
 
-Write "Documentation style guide", not "Documentation Style Guide" and "PostHog has product analytics and session replay tools", not "PostHog has Product Analytics and Session Replay tools".
+Write "Documentation style guide", not "Documentation Style Guide".
 
-But...
+### Capitalize product names, not categories
 
-### Capitalize product names and proper nouns as appropriate
+Capitalize a product's name when you refer to the product itself – it's a proper noun.
 
-When using a product's name, capitalize it as a proper noun, like: "PostHog's second product was Session Replay." When referring to the general industry term while _not_ referencing a product name, you'd use it lowercase, like: "how many companies now offer product analytics."
+> **Example:** "PostHog's second product was Session Replay." or "PostHog Product Analytics supports SQL insights."
+
+Use lowercase when you refer to the general capability, category, or industry, even when PostHog is the subject.
+
+> **Example:** "PostHog has product analytics and session replay tools." or "How many companies now offer product analytics?"
+
+A quick test: if you can swap in "the product called X", capitalize it. If you can swap in "that kind of tool", use lowercase.
 
 ### Capitalize acronyms and define where needed
 
@@ -69,6 +75,14 @@ Why does this matter? Consider the old joke:
 "There are two hard problems in computer science: naming things, cache invalidation, and off by one errors."
 
 That doesn't work without the Oxford.
+
+### Don't put a comma after "i.e." or "e.g."
+
+Write "i.e." and "e.g." with periods, but don't add a comma after them.
+
+> **Example:** "Use a short title (i.e. under 60 characters)", not "Use a short title (i.e., under 60 characters)"
+
+AP and Chicago both want the comma. We don't. It adds clutter. Andy says the AP and Chicago style guides are hella lame.
 
 ### Use "enable", not "allow"
 
@@ -198,7 +212,7 @@ When [embedding YouTube videos](/handbook/engineering/posthog-com/markdown#embed
 
 #### Wistia
 
-<TeamMember name="Cory Watilo" photo /> or <TeamMember name="Jordo Dibb" photo /> can upload videos to Wistia. It's best to also have a thumbnail image which can be uploaded to Wistia as well. Videos can be embedded on the site using our <a href="/handbook/engineering/posthog-com/markdown#embedding-wistia-videos">Wistia component</a>.
+<TeamMember name="Jordo Dibb" photo /> can upload videos to Wistia. It's best to also have a thumbnail image which can be uploaded to Wistia as well. Videos can be embedded on the site using our <a href="/handbook/engineering/posthog-com/markdown#embedding-wistia-videos">Wistia component</a>.
 
 ### Best practices for images and videos
 

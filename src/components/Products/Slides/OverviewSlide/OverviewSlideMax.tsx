@@ -25,9 +25,9 @@ export default function OverviewSlideMax() {
                         />
                     </aside>
                     <div className="flex-1 prose">
-                        <h2 className="text-5xl font-bold text-primary mt-4 mb-4">
+                        <h1 className="text-5xl font-bold text-primary mt-4 mb-4">
                             PostHog AI is deeply connected with your data
-                        </h2>
+                        </h1>
                         <p className="text-2xl text-secondary mx-auto">
                             Ask it to build insights, write PostHog SQL queries, summarize session recordings, create
                             surveys, set up feature flags – basically handle the grunt work that would normally take 20

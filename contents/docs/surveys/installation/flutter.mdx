@@ -12,6 +12,10 @@ See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs
 
 import { FlutterSurveysInstallationWrapper } from "./_snippets/surveys-installation-wrapper.tsx";
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Flutter" />
+
 <FlutterSurveysInstallationWrapper />
 
 ## Limitations
@@ -24,7 +28,7 @@ import { FlutterSurveysInstallationWrapper } from "./_snippets/surveys-installat
 ## Troubleshooting
 
 - Update your SDK and iOS Pods.
-- Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`.
+- Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`, or, for Swift Package Manager projects, in the `Runner` target's **Minimum Deployments** in Xcode.
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
 - If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#step-two-install-posthogobserver).

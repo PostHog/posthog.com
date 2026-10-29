@@ -158,6 +158,7 @@ export const query = graphql`
                         gatsbyImageData
                     }
                 }
+                subtitle
                 filters {
                     type
                 }

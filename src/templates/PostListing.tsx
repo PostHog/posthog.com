@@ -12,7 +12,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
 import slugify from 'slugify'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { usePaginatedPosts } from 'components/Edition/hooks/usePaginatedPosts'
 import { IconSpinner } from '@posthog/icons'
 import LikeButton from 'components/Edition/LikeButton'
@@ -73,7 +73,7 @@ export const FeaturedImage = ({ url }: { url: string }) => {
     )
 }
 
-export default function Posts({ pageContext }) {
+export default function Posts({ pageContext, location }) {
     const [loginModalOpen, setLoginModalOpen] = useState(false)
     const { allPostCategory } = useStaticQuery(graphql`
         {
@@ -102,13 +102,28 @@ export default function Posts({ pageContext }) {
         }
     `)
     const articleRef = useRef<HTMLDivElement>(null)
+    const initialFilters = useMemo(() => {
+        const searchParams = new URLSearchParams(location?.search)
+        const category = searchParams.get('category')
+        const tag = searchParams.get('tag')
+        return {
+            root: category ? (category === 'all' ? null : category) : pageContext.root || null,
+            tag: tag ? (tag === 'all' ? null : tag) : pageContext.selectedTag,
+            author: searchParams.get('author') ? Number(searchParams.get('author')) : undefined,
+        }
+    }, [])
     const [authors, setAuthors] = useState<any[]>([])
-    const [selectedTag, setSelectedTag] = useState(pageContext.selectedTag)
-    const [root, setRoot] = useState(pageContext.root || null)
-    const [selectedAuthor, setSelectedAuthor] = useState()
-    const [sort, setSort] = useState(getSortOption(pageContext.root).label)
+    const [selectedTag, setSelectedTag] = useState(initialFilters.tag)
+    const [root, setRoot] = useState(initialFilters.root)
+    const [selectedAuthor, setSelectedAuthor] = useState(initialFilters.author)
+    const [sort, setSort] = useState(getSortOption(initialFilters.root).label)
     const [params, setParams] = useState(
-        getParams(pageContext.root, pageContext.selectedTag, getSortOption(pageContext.root).sort, selectedAuthor)
+        getParams(
+            initialFilters.root,
+            initialFilters.tag,
+            getSortOption(initialFilters.root).sort,
+            initialFilters.author
+        )
     )
     const allTags = useMemo(
         () =>
@@ -199,6 +214,25 @@ export default function Posts({ pageContext }) {
         scrollToTop()
     }, [selectedTag, root, selectedAuthor, sort])
 
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        const searchParams = new URLSearchParams()
+        if (root !== (pageContext.root || null)) {
+            searchParams.set('category', root ?? 'all')
+        }
+        if ((selectedTag || null) !== (pageContext.selectedTag || null)) {
+            searchParams.set('tag', selectedTag ?? 'all')
+        }
+        if (selectedAuthor) {
+            searchParams.set('author', String(selectedAuthor))
+        }
+        const search = searchParams.toString()
+        const newUrl = `${location.pathname}${search ? `?${search}` : ''}`
+        if (newUrl !== window.location.pathname + window.location.search) {
+            navigate(newUrl, { replace: true })
+        }
+    }, [selectedTag, root, selectedAuthor])
+
     return (
         <PostsContext.Provider value={{ setLoginModalOpen }}>
             <SEO title="Posts - PostHog" />
@@ -276,6 +310,7 @@ export default function Posts({ pageContext }) {
                               {
                                   label: 'author',
                                   value: 'authors',
+                                  initialValue: selectedAuthor,
                                   options: [
                                       {
                                           label: 'All',

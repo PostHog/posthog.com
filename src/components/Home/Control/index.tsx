@@ -16,7 +16,7 @@ import {
 } from 'components/OSIcons'
 import useProduct from 'hooks/useProduct'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 import MDXEditor from 'components/MDXEditor'
@@ -284,7 +284,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
             const { siteSettings } = useApp()
             return (
                 <>
-                    <Logo className="inline-block h-9" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />{' '}
+                    <Logo
+                        className="inline-block h-9"
+                        variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
+                        color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
+                    />{' '}
                 </>
             )
         },
@@ -299,7 +304,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+        Editor: () => <Button url="/context-warehouse">README: PostHog data stack.md</Button>,
     },
     { name: 'ButtonPricing', kind: 'flow', props: [], Editor: () => <Button url="/pricing">Explore pricing</Button> },
     { name: 'ButtonAI', kind: 'flow', props: [], Editor: () => <Button url="/ai">Learn about PostHog AI</Button> },

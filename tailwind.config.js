@@ -264,7 +264,7 @@ module.exports = {
                 button: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 nav: ['IBM Plex Sans Variable', 'IBM Plex Sans', 'sans-serif'],
                 code: ['Source Code Pro', 'Menlo', 'Consolas', 'monaco', 'monospace'],
-                rounded: ['Open Runde', 'sans-serif'],
+                rounded: ['RoundHog', 'sans-serif'],
                 squeak: ['Squeak', 'sans-serif'],
                 comic: [
                     'Comic Sans MS',
@@ -309,6 +309,7 @@ module.exports = {
                 4.5: '1.125rem',
                 5.5: '1.375rem',
                 6.5: '1.625rem',
+                8.5: '2.125rem',
             },
             maxWidth: {
                 '2xs': '16rem',
@@ -342,12 +343,12 @@ module.exports = {
                     },
                 },
                 slideDown: {
-                    from: { height: '0px' },
-                    to: { height: 'var(--radix-accordion-content-height)' },
+                    from: { gridTemplateRows: '0fr' },
+                    to: { gridTemplateRows: '1fr' },
                 },
                 slideUp: {
-                    from: { height: 'var(--radix-accordion-content-height)' },
-                    to: { height: '0px' },
+                    from: { gridTemplateRows: '1fr' },
+                    to: { gridTemplateRows: '0fr' },
                 },
                 develop: {
                     '0%': {
@@ -525,11 +526,6 @@ module.exports = {
             addVariant('wallpaper-hogzilla', 'body[data-wallpaper="hogzilla"] &')
             addVariant('wallpaper-office-party', 'body[data-wallpaper="office-party"] &')
             addVariant('wallpaper-startup-monopoly', 'body[data-wallpaper="startup-monopoly"] &')
-            // Site toggle (data attr, set early in theme-init) + OS prefers-reduced-transparency
-            addVariant('reduce-transparency', [
-                'body[data-reduce-transparency="true"] &',
-                '@media (prefers-reduced-transparency: reduce)',
-            ])
         },
     ],
 }

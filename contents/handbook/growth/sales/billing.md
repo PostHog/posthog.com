@@ -8,6 +8,8 @@ showTitle: true
 ## Managing billing
 
 > This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
+>
+> Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
@@ -18,9 +20,13 @@ The Billing Service is the source of truth for product information, what plans a
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
+The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, and applies the credits after the customer pays. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> if you have a question about a deal.
+
+For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
+
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
 ##### Upfront Payment Setup
 
@@ -29,7 +35,7 @@ Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#rout
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
 ###### Step 2: Create invoice
-- Go to the [Credit-based Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) and click “Create Invoice - Upfront”. This will:
+- Go to the [Prepurchase credit processing table](https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y) and click “Create Invoice - Upfront”. This will:
   - Create a draft Invoice object against the Stripe Customer Object.
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 
@@ -37,16 +43,17 @@ If this is a new contract for an existing customer, you will need to add their e
 - Click the invoice link in the table to open it in Stripe, or use the Invoice ID to locate the invoice in Stripe. 
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
 - If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
-- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
+- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
 **Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
-> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on <PrivateLink url="https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU">Stripe</PrivateLink> which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> **How do I know if a customer is using Bill.com for payment?** You should try and get ahead of this by asking your customer whether they use Bill.com or ask to be connected to their finance team if unsure. Bill.com invoice notifications are sent to sales@posthog.com from account-services@inform.bill.com. The [sales Google group](https://groups.google.com/a/posthog.com/g/sales) archives them, so you can search the archive directly for subject lines like "Acme Inc sent you a payment" or "A payment from Acme Inc should arrive shortly". Note any that match accounts in your book.
 
 ###### Step 4: Apply credits
 - Make sure that the payment is fully processed to avoid any automatic deductions.
 - **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
-- **If customer wishes to begin using credits  in the next billing cycle:** ask the RevOps team to apply the credits at the end of the current billing cycle.
+- **If customer wishes to begin using credits  in the next billing cycle:** apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription
 - If the client has an existing subscription, no further action is needed.
@@ -63,19 +70,34 @@ If this is a new contract for an existing customer, you will need to add their e
 We define late payments as follows:
 
 1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
-2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
+2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  After 4 failed payments we will stop attempting to take further payments.
 
-In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
+In either of the above scenarios the account owner needs to take action to ensure that payment is made. The account owners are the AE, CSM, and TAM in <PrivateLink url='https://us.posthog.com/project/2/customer_analytics/accounts'>Customer Analytics</PrivateLink>. If the account has no owner, <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
 
 You can find a list of failed and overdue payments <PrivateLink url='https://us.posthog.com/project/2/insights/qEt5N1xg'>in PostHog</PrivateLink>
 
+#### Automated reminders and alerts
+
+PostHog Workflows send these messages for you. Do not send the same reminder yourself.
+
+- **Payment reminders:** For an open invoice that the customer pays by bank transfer, the customer gets an email 7 days and 3 days before the due date. The email comes from collections@posthog.com and goes to the billing contacts in Stripe. The account owners are in CC.
+- **Overdue alerts:** An alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> tags the account owners at 09:00 UTC on days 1, 6, 7, 13, and 14. These are steps 1 to 5 below. Each alert tells you what to do, and links to this process, the Stripe invoice, and the customer payment page. If the customer already paid or agreed a different date, reply in the alert thread so the team knows.
+  - For an invoice that the customer pays by bank transfer, day 0 is the due date.
+  - For a card payment, day 0 is the first failed payment. We send this alert only if the account has an owner.
+
+The reminders and alerts stop when the customer pays. They only go to accounts that are tracked in Customer Analytics, not ignored.
+
 #### Step 1 - On the day their payment becomes late
 
-As the account owner you will be assigned a risk indicator in Vitally, as well as being tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>.  For unmanaged accounts with a failed payment of $1500 or more Simon and Dana are tagged instead.
+As the account owner, you are tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>. If the account has no owner, the alert tags <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> instead.
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
-> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
+> If the billing contact left the company, or the invoice goes to the wrong person, [update the billing details in billing admin](/handbook/growth/sales/contracts#updating-the-billing-email-and-address).
+
+> Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps.
+
+> If a credit-based customer asks to pay a late invoice by credit card instead, say no. Tell them to pay by bank transfer, and send the invoice PDF again. The [payment method rules](/handbook/growth/sales/contract-rules#payment-method) do not change because the invoice is late.
 
 #### Step 2 - 1 day before suspending user access
 
@@ -103,7 +125,21 @@ At this point they will be notified about this automatically via the billing ser
 
 #### Repeated failed payments
 
-After three consecutive missed payment periods, the customer must provide advance payment covering three months of service based on their typical usage before account access is restored. If the customer disagrees or fails to make the advance payment, the account may be reverted to the Free Tier. 
+A customer has *repeated* failed payments when payments have failed across three or more consecutive billing periods, or when a second late payment occurs within six months of a previous one that reached Step 3 (suspended access).
+
+At this point, catching up on the overdue balance isn't enough. We need payment predictability before restoring access, otherwise we're back here next month.
+
+**Step 1: collect the overdue balance.** Access stays suspended until the outstanding invoice is paid. Send the payment link and the invoice PDF from the Stripe invoice page.
+
+**Step 2: require a contract pre-commitment before restoring access.** Move the customer off pay-as-you-go onto a contract with payment upfront. The account's sales contact can size the commitment with the customer to base it on their trailing usage and what's realistic for them.
+
+Make it explicit in your outreach that if we can't agree a pre-commitment, the account will be downgraded to the Free tier and subject to that tier's usage limits.
+
+**Step 3: set a drop dead date.** Once the overdue invoice is paid, give the customer a specific calendar date roughly 4 weeks out to get the contract signed or move to Free. Put the date in writing. If it passes with no commitment, downgrade.
+
+> Restoring access before the contract is signed is a judgement call for the account owner, but set and communicate the drop-dead date at the same time.
+
+RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
@@ -114,7 +150,7 @@ After three consecutive missed payment periods, the customer must provide advanc
 PostHog Inc is a US incorporated company and a US tax resident and we do not claim benefits under any Double Taxation Avoidance Agreements (DTAA). To support this, we provide:
 - Our Tax Residency Certificate
 - Our no PE (Permanent Establishment) Certificate
-These documents are available in the [shared Finance drive](https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing). You can share them with the customer on request.
+These documents are available in the <PrivateLink url="https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing">shared Finance drive</PrivateLink>. You can share them with the customer on request.
  
 The full invoice amount is due. Any tax withheld is exclusive of the invoice, which will be treated as outstanding.
 
@@ -201,6 +237,10 @@ Employees can get access to paid features (like Boost) on personal or side proje
 1. **Special billing-only plan**: Add a plan like `boost-addon-20250602` to the customer's `plans_map` in the billing admin. These plans exist only in the billing system and grant features without a Stripe subscription.
 
 2. **Long trial**: Create a trial that does not auto-convert with a long `expires_at` date. This works well for temporary access or when you want a clear end date.
+
+Side projects on a long trial meet the same [spend caps](/handbook/growth/sales/trials) as a prospect on Replay Vision, Desktop, PostHog AI, and Inbox. They reach them quickly. To lift them, add the organization to the `billing-trial-expanded-free-allocation` feature flag in PostHog. It is an organization group flag, so target it on `organization.$group_key` with the organization ID. That gives the side project ten times each product's free allocation instead of twice it.
+
+The flag only changes what a trial lends where the customer set no limit. If the side project has a spend limit of its own, that limit still governs, so clear it first.
 
 ### Updating subscriptions
 

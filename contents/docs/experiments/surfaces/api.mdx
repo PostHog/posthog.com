@@ -1,0 +1,43 @@
+---
+title: Experiments API
+sidebar: Docs
+showTitle: true
+---
+
+Use the API when experiments need to be created or read by something other than a person – a release pipeline that opens an experiment with every feature branch, an internal dashboard that shows what's currently running, or a script that ends tests once they reach significance.
+
+Each resource has its own scopes on a [personal API key](/docs/api#authentication): `experiment:read` and `experiment:write` for experiments, `experiment_holdout:read` and `experiment_holdout:write` for holdouts, `experiment_saved_metric:read` and `experiment_saved_metric:write` for shared metrics, and `activity_log:read` for the change history.
+
+## Before you start
+
+1. **Set up Experiments** – [install a PostHog SDK](/docs/experiments/installation) so your app can serve variants.
+2. **Get API access** – [create a personal API key](/docs/api/personal-api-keys) with the scopes you need. See [authentication](#authentication) below.
+
+## What's available
+
+**Experiments**
+
+List, create, retrieve, and update experiments under `/api/projects/:project_id/experiments/`. Creating an experiment also creates its backing [feature flag](/docs/feature-flags). To delete an experiment, send a `PATCH` with `{"deleted": true}`. Hard `DELETE` requests are rejected. Lifecycle actions – launching, pausing, ending, shipping a variant, archiving, and freezing exposures – are available as sub-actions on an individual experiment, and there are endpoints for results, a results timeseries, and the change history.
+
+**Holdouts**
+
+Manage [holdout](/docs/experiments/holdouts) groups under `/api/projects/:project_id/experiment_holdouts/` so the same excluded users can be reused across experiments.
+
+**Shared metrics**
+
+Manage reusable [metrics](/docs/experiments/metrics) under `/api/projects/:project_id/experiment_saved_metrics/`.
+
+## Authentication
+
+Pass your personal API key as a bearer token:
+
+```bash
+curl -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  https://us.posthog.com/api/projects/:project_id/experiments/
+```
+
+## Related
+
+- Design and analyze experiments in the [web app](/docs/experiments/surfaces/web-app).
+- Drive the same endpoints conversationally over [MCP](/docs/experiments/surfaces/mcp).
+- See the full [PostHog API reference](/docs/api).

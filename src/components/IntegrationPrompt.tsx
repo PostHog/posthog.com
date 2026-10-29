@@ -13,12 +13,12 @@ const Row = ({ children }: { children: React.ReactNode }) => {
     return <li className="flex items-center gap-1">{children}</li>
 }
 
-export default function IntegrationPrompt() {
+export default function IntegrationPrompt({ command }: { command?: string }) {
     return (
         <>
             <h3>Install with AI in a single prompt</h3>
             <p className="text-[15px]">Paste into your terminal or code editor and make AI do the work.</p>
-            <WizardCommand />
+            <WizardCommand command={command} />
         </>
     )
 }

@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { IconFlag, IconLightBulb, IconRocket, IconSearch, IconSparkles } from '@posthog/icons'
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
 import { SELF_HOSTED_SOURCES } from 'constants/sources'
@@ -26,11 +26,11 @@ const pickedSourceSlugs = [
 ]
 
 const batchExportItems = [
-    { label: 'BigQuery', url: '/docs/cdp/batch-exports/bigquery', logoKey: 'bigquery' },
-    { label: 'Snowflake', url: '/docs/cdp/batch-exports/snowflake', logoKey: 'snowflake' },
-    { label: 'Amazon S3', url: '/docs/cdp/batch-exports/s3', logoKey: 's3' },
-    { label: 'PostgreSQL', url: '/docs/cdp/batch-exports/postgres', logoKey: 'postgres' },
-    { label: 'Redshift', url: '/docs/cdp/batch-exports/redshift', logoKey: 'redshift' },
+    { label: 'BigQuery', url: '/docs/data-pipelines/batch-exports/bigquery', logoKey: 'bigquery' },
+    { label: 'Snowflake', url: '/docs/data-pipelines/batch-exports/snowflake', logoKey: 'snowflake' },
+    { label: 'Amazon S3', url: '/docs/data-pipelines/batch-exports/s3', logoKey: 's3' },
+    { label: 'PostgreSQL', url: '/docs/data-pipelines/batch-exports/postgres', logoKey: 'postgres' },
+    { label: 'Redshift', url: '/docs/data-pipelines/batch-exports/redshift', logoKey: 'redshift' },
 ]
 
 const pickedDestinationSlugs = ['zapier', 'hubspot', 'salesforce', 'intercom', 'customerio', 'zendesk', 'webhook']
@@ -41,6 +41,7 @@ const manageQueryHandles = ['data_modeling', 'sql_editor', 'cdp', 'data_warehous
 
 const analyticsHandles = [
     'web_analytics',
+    'marketing_analytics',
     'product_analytics',
     'trends',
     'funnels',
@@ -89,7 +90,7 @@ export const OnePlaceSlide = () => {
     const managedPlatforms = useSourcePlatforms()
     const selfHosted = SELF_HOSTED_SOURCES.map((s) => ({
         label: s.name,
-        url: `/docs/data-warehouse/sources/${s.slug}`,
+        url: `/docs/data-pipelines/sources/${s.slug}`,
         image: getLogo(s.logo),
     }))
     const platforms = [...managedPlatforms, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))
@@ -125,7 +126,7 @@ export const OnePlaceSlide = () => {
         .filter(Boolean)
         .map((n: any) => ({
             label: n.name,
-            url: n.mdx?.fields?.slug || `/docs/cdp/destinations/${n.slug}`,
+            url: n.mdx?.fields?.slug || `/docs/data-pipelines/destinations/${n.slug}`,
             image: getIconUrl(n.icon_url),
         }))
 
@@ -179,7 +180,7 @@ export const OnePlaceSlide = () => {
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
-                            to="/docs/data-warehouse/sources"
+                            to="/docs/data-pipelines/sources"
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >
@@ -218,7 +219,7 @@ export const OnePlaceSlide = () => {
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
                         <Link
-                            to="/data-stack/integrations-library?type=destination"
+                            to="/context-warehouse/integrations-library?type=destination"
                             state={{ newWindow: true }}
                             className="text-sm font-semibold"
                         >
@@ -241,7 +242,7 @@ export const OnePlaceSlide = () => {
                         )}
                     </div>
                     <div className="@lg:text-center mt-auto leading-tight">
-                        <Link to="/data-stack" state={{ newWindow: true }} className="text-sm font-semibold">
+                        <Link to="/context-warehouse" state={{ newWindow: true }} className="text-sm font-semibold">
                             Data stack README
                         </Link>
                     </div>
@@ -267,7 +268,7 @@ const statusTooltipLabel: Record<string, string> = {
 
 const ProductStatusLink = ({ product, className = '' }: { product: any; className?: string }) => {
     if (!product) return null
-    const { Icon, color, name, slug, status } = product
+    const { Icon, color, name, slug, url, status } = product
 
     const content = (
         <>
@@ -302,7 +303,7 @@ const ProductStatusLink = ({ product, className = '' }: { product: any; classNam
 
     return (
         <Link
-            to={`/${slug}`}
+            to={url || `/${slug}`}
             state={{ newWindow: true }}
             className={`flex items-center gap-1.5 text-primary no-underline hover:underline text-sm !font-medium whitespace-nowrap relative top-0.5 ${className}`}
         >
@@ -330,6 +331,7 @@ const ProductStatusLink = ({ product, className = '' }: { product: any; classNam
 const productSlots: { handle: string; '@xl': [number, number]; '@2xl': [number, number]; '@3xl': [number, number] }[] =
     [
         { handle: 'web_analytics', '@xl': [28, 4], '@2xl': [26, 6], '@3xl': [24, 6] },
+        { handle: 'marketing_analytics', '@xl': [72, 4], '@2xl': [74, 6], '@3xl': [76, 6] },
         { handle: 'product_analytics', '@xl': [18, 22], '@2xl': [16, 22], '@3xl': [14, 22] },
         { handle: 'session_replay', '@xl': [10, 36], '@2xl': [10, 38], '@3xl': [10, 40] },
         { handle: 'funnels', '@xl': [7, 6], '@2xl': [5, 59], '@3xl': [6, 60] },
@@ -402,8 +404,8 @@ const emptyStateActions = [
 
 const PostHogAIEmptyState = () => (
     <div className="@container flex min-h-[242px] w-full flex-col items-center overflow-hidden rounded bg-[#F3F4F0] px-2 pt-5 text-center dark:bg-[#131316] @sm:px-3">
-        <Logo wordmark={false} className="h-7 w-[52px] dark:hidden" />
-        <Logo wordmark={false} variant="mono" color="white" className="hidden h-7 w-[52px] dark:block" />
+        <Logo layout="logomark" className="h-7 w-[52px] dark:hidden" width="auto" />
+        <Logo layout="logomark" variant="mono" color="white" className="hidden h-7 w-[52px] dark:block" width="auto" />
 
         <h3 className="mb-0 mt-5 text-lg font-bold leading-tight @sm:text-xl">Hello, builder!</h3>
 
@@ -486,8 +488,8 @@ export const DebugFixSlide = () => {
             <div className="bg-yellow/10 rounded px-3 border border-yellow mb-4">
                 <p className="text-secondary text-sm my-3">
                     <strong>New:</strong>{' '}
-                    <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                        PostHog Code
+                    <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                        PostHog Desktop
                     </Link>{' '}
                     proactively finds bugs, fixes them, and creates pull requests automatically.
                 </p>
@@ -554,8 +556,8 @@ export const TestRolloutSlide = () => {
             </p>
             <p className="text-secondary text-sm">
                 And you can build it all with{' '}
-                <Link to="/code" state={{ newWindow: true }} className="font-semibold">
-                    PostHog Code
+                <Link to="/desktop" state={{ newWindow: true }} className="font-semibold">
+                    PostHog Desktop
                 </Link>
                 , our new AI code editor. It builds new features with the proper PostHog instrumentation and lets you
                 manage AI agents in parallel.

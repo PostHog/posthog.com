@@ -4,10 +4,6 @@ title: Product Analytics troubleshooting
 
 This page covers troubleshooting for Product Analytics and event capture. For setup, see the [installation guides](/docs/product-analytics/installation).
 
-## Have a question? Ask PostHog AI
-
-<AskAIInput placeholder="Type your question and hit enter..." />
-
 ## Event capture questions
 
 ### Why are events not appearing in my project?
@@ -86,7 +82,7 @@ For production, the best way to limit the impact of ad blockers is to [set up a 
 
 Another common reason for missing events is that an app has been configured to drop certain or all events. To debug if this is the case, follow these steps in order:
 
-1. If you're using the [Filter Out](/cdp/filter-out) app, ensure that it is configured correctly.
+1. If you're using the [Filter Out](/docs/data-pipelines/transformations/drop-events) app, ensure that it is configured correctly.
 2. Try to temporarily disable the Filter Out plugin.
 3. Try to temporarily disable all other enabled plugins.
 

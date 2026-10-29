@@ -1,24 +1,21 @@
 import React from 'react'
 import { IconPlug } from '@posthog/icons'
+import { getTool } from '../../data/tools'
 
 // this data powers the CDP page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts under the 'integrations' handle.
 
 export const cdp = {
+    ...getTool('cdp'),
     parentIcon: 'spreadsheetSearch',
     Icon: IconPlug,
-    name: 'CDP',
-    description: 'Get data into PostHog and send it where it needs to go.',
-    handle: 'cdp', // integrations
     type: 'cdp', // integrations
-    slug: 'cdp',
     color: 'sky-blue',
     colorSecondary: 'blue',
-    category: 'data',
     hideFromPricingTableAndCalculator: true,
     seo: {
-        title: 'Ingest, transform, and send data between hundreds of tools',
+        title: 'CDP – Data pipelines for 50+ destinations | PostHog',
         description:
-            'Import data from a warehouse, sync with event data, and move it across 50+ destinations – the context agents act on to make your product self-driving.',
+            'Import data from your warehouse, transform events, and send them to 50+ destinations in real time or batch. A customer data platform built into PostHog.',
     },
     answersDescription: 'Ingest, transform, and send data between 145+ tools',
     overview: {

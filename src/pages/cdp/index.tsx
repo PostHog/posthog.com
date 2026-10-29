@@ -38,8 +38,8 @@ export default function CDP(): JSX.Element {
                     self-driving.
                 </p>
                 <p>
-                    Any event or action in PostHog can update user records or trigger workflows in other products in
-                    your stack.
+                    Any event or action in PostHog can update user records or trigger workflows in other tools in your
+                    stack.
                 </p>
 
                 <h2>Realtime event transformations</h2>
@@ -73,7 +73,7 @@ export default function CDP(): JSX.Element {
                     </li>
                 </ul>
                 <p>
-                    <Link to="/docs/cdp/transformations" state={{ newWindow: true }}>
+                    <Link to="/docs/data-pipelines/transformations" state={{ newWindow: true }}>
                         Learn about realtime transformations &rarr;
                     </Link>
                 </p>
@@ -102,7 +102,7 @@ export default function CDP(): JSX.Element {
                     <li>Feeding machine learning models with fresh data</li>
                 </ul>
                 <p>
-                    <Link to="/docs/cdp/destinations" state={{ newWindow: true }}>
+                    <Link to="/docs/data-pipelines/destinations" state={{ newWindow: true }}>
                         Explore event destinations →
                     </Link>
                 </p>
@@ -174,13 +174,13 @@ export default function CDP(): JSX.Element {
                     in complex ETL pipelines, though you can still export data via our CDP if you have specific tooling
                     needs Alternatively, you can connect external warehouses (like Snowflake or BigQuery) as sources to
                     use your warehouse tables inside PostHog.{' '}
-                    <Link to="/data-stack/warehouse-native" state={{ newWindow: true }}>
+                    <Link to="/context-warehouse/warehouse-native" state={{ newWindow: true }}>
                         Learn more about PostHog&apos;s integrated warehouse
                     </Link>
                 </p>
 
                 <h2 id="integrations-library">Integrations library</h2>
-                <Link to="/data-stack/integrations-library">Explore our integrations library →</Link>
+                <Link to="/context-warehouse/integrations-library">Explore our integrations library →</Link>
             </ReaderView>
         </>
     )

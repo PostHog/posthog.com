@@ -288,7 +288,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/product-analytics/build-insights-mcp"
+                                    to="/docs/product-analytics/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Deploy MCP for Analytics
@@ -333,7 +333,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/error-tracking/debug-errors-mcp"
+                                    to="/docs/error-tracking/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Debug with MCP
@@ -381,7 +381,7 @@ export default function PostHogMCPLanding(): JSX.Element {
                                 <CallToAction
                                     type="primary"
                                     size="md"
-                                    to="/docs/experiments/create-experiments-mcp"
+                                    to="/docs/experiments/surfaces/mcp"
                                     state={{ newWindow: true }}
                                 >
                                     Optimize with MCP

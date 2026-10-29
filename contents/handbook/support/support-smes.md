@@ -15,10 +15,10 @@ By allowing SMEs to own groups of PostHog products, we build the knowledge neede
 ### Product groups
 
 The various PostHog products have been split into the following product groups:
-- Analytics (analytics platform, customer analytics, product analytics, web analytics, growth)
+- Analytics (analytics platform, customer analytics, product analytics, web analytics, growth, ingestion)
 - Unclassified (tickets tagged with `support_needs_triage`)
-- Flags (experiments, feature flags, surveys)
-- Data (batch exports, data stack, ingestion, workflows)
+- Flags (conversations, experiments, feature flags, surveys)
+- Data (batch exports, data stack, workflows, warehouse)
 - Replay (replay)
 - Observability + AI & client libraries (AI observability, error tracking, logs, mobile, PostHog AI, self-driving, SDKs/implementation)
 - Accounts & Billing (platform features, login/SSO, billing)
@@ -37,7 +37,7 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 - EU: <TeamMember name="Ben Lea" photo />, NA: <TeamMember name="Phillip Ramirez" photo />
 
 **Data**
-- EU: <TeamMember name="Luke Belton" photo />, NA: <TeamMember name="Kyle Swank" photo />
+- EU: <TeamMember name="Luke Belton" photo />, <TeamMember name="Chris Shine" photo />, NA: <TeamMember name="Kyle Swank" photo />
 
 **Replay**
 - EU: <TeamMember name="Christian Rafferty" photo />, NA: <TeamMember name="Ben Haynes" photo />
@@ -46,7 +46,7 @@ Beyond that, we have SMEs who own specific product groups. For each product grou
 - EU: <TeamMember name="Christiaan Hendriksen" photo />, NA: <TeamMember name="Steven Shults" photo />
 
 **Analytics**
-- EU: <TeamMember name="Xander Jones" photo />
+- EU: <TeamMember name="Xander Jones" photo />, <TeamMember name="Alin-emanuel Cîciu" photo />
 
 **Accounts & Billing**
 - EU: <TeamMember name="Eleftheria Trivyzaki" photo />
@@ -88,7 +88,7 @@ These views contain tickets from your specific product groups (see groupings abo
 
 ### Your daily workflow
 
-Start your day with your SME views. Build your knowledge. Get really good at your products. Once you're on top of your SME queue, move to the [support shared view](https://us.posthog.com/project/2/support/tickets?view=eO1HETSX) which has all tickets the technical support team is responsible for.
+Start your day with your SME views. Build your knowledge. Get really good at your products. Once you're on top of your SME queue, move to the <PrivateLink url="https://us.posthog.com/project/2/support/tickets?view=eO1HETSX">support shared view</PrivateLink> which has all tickets the technical support team is responsible for.
 
 **But here's the key**: you're not locked into only your SME products. The goal is expertise, not silos. If you're caught up and the shared queue needs attention, dive in. If you're swamped and someone else can help with your SME queue, ask for it.
 

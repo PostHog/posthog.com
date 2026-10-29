@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Product metrics
-  - Growth engineering
+  - Growth
   - Product engineers
   - Experiments
 crosspost:

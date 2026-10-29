@@ -92,7 +92,7 @@ Everyone takes a mandatory two weeks off over Christmas to relax.
 
 We raised a $15m Series B [a little ahead of schedule](/blog/why-we-raised-a-15m-series-b-ahead-of-schedule), led by existing investor Y Combinator. 
 
-We're now focused on achieving strong [product-market fit](/blog/product-market-fit-game) with our target segment in 2021. 
+We're now focused on achieving strong [product-market fit](/founders/product-market-fit-game) with our target segment in 2021. 
 
 Our team had grown to 25 people in 10 countries. 
 
@@ -226,7 +226,7 @@ We ended the year cashflow positive, which we mostly didn't plan for. The [all-i
 
 ### February 2025: PostHog AI, and AI observability is born
 
-PostHog AI went from a thing we'd been tinkering with to a thing customers actually use every day. We were the first heavy users ourselves, which is also why we built [AI observability](/llm-analytics) – we needed to watch what PostHog AI was costing and how people were using it, and we realized every other AI team had the same problem, so we shipped it as a product!
+PostHog AI went from a thing we'd been tinkering with to a thing customers actually use every day. We were the first heavy users ourselves, which is also why we built [AI observability](/ai-observability) – we needed to watch what PostHog AI was costing and how people were using it, and we realized every other AI team had the same problem, so we shipped it as a product!
 
 ### June 2025: $70m Series D, led by Stripe
 
@@ -238,8 +238,8 @@ Around here we stopped calling ourselves an analytics company. We're (almost) ev
 
 We raised again – a $75m Series E led by Peak XV at a ~$1.4bn valuation. That technically makes us a unicorn. Total raised since 2020 is ~$194m, and we're ~140 people now. We also offered employees secondary, which we [wrote about](/blog/how-secondaries-actually-work).
 
-### Early 2026: PostHog Code
+### Early 2026: PostHog Desktop
 
-~200 people and a product list too long to keep reciting! [PostHog Code](/code) was probably our biggest launch yet.
+~200 people and a product list too long to keep reciting! [PostHog Desktop](/desktop) was probably our biggest launch yet.
 
 Our vision is now to make your product [self-driving](/self-driving). 

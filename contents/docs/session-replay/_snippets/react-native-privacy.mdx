@@ -51,3 +51,27 @@ Alternatively, to replace any type of `React.Component` with a redacted version 
 ```ts
 <Text accessibilityLabel="ph-no-capture">Sensitive!</Text>
 ```
+
+# Unmasking
+
+To explicitly prevent a component and all its children from being masked, even when `maskAllTextInputs` or `maskAllImages` is enabled, set the [accessibilityLabel](https://reactnative.dev/docs/accessibility#accessibilitylabel) to `ph-no-mask`:
+
+```ts
+<Text accessibilityLabel="ph-no-mask">Welcome to PostHog</Text>
+```
+
+The match is a case-insensitive substring, so the token can be combined with a label you already use:
+
+```ts
+<Text accessibilityLabel="Welcome banner ph-no-mask">Welcome to PostHog</Text>
+```
+
+## Precedence and propagation
+
+Unmasking applies to the component and all of its children, and it takes precedence over `ph-no-capture` and over the default masking behavior. A child marked `ph-no-capture` inside an unmasked subtree is **not** masked, and neither are inputs that would otherwise be masked automatically. Only unmask a subtree you know contains no sensitive data.
+
+<CalloutBox title="Native SDK versions" type="info" icon="IconInfo">
+
+`ph-no-mask` support is added in `posthog-ios` version 3.71.0 and `posthog-android` version 3.33.0.
+
+</CalloutBox>

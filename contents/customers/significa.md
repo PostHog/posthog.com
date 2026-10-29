@@ -2,7 +2,7 @@
 title: Why Significa switched from Plausible to PostHog
 customer: Significa
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/significa_ef952b52a3.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/Significa_1920x1080_7d226dd4ec.png
 date: 2024-03-20
 ---
 
@@ -10,7 +10,7 @@ date: 2024-03-20
 
 “We offer a range of services, but we’re design focused,” said Tomás Gouveia, Significa’s Digital Marketer. “We like to think about the product first, assemble a unique strategy, then design bespoke solutions. We don’t use templates. We always design from scratch, and the whole process is customized to the client.”
 
-When it came to web analytics, Significa used to rely on [Plausible](/blog/posthog-vs-plausible). But, as the company grew, the team began to find Plausible too simplistic. After less than a year on Plausible, they made the decision to switch to PostHog.
+When it came to web analytics, Significa used to rely on [Plausible](/compare/posthog-vs-plausible). But, as the company grew, the team began to find Plausible too simplistic. After less than a year on Plausible, they made the decision to switch to PostHog.
 
 “We knew that PostHog was a much more powerful product and could handle other sorts of analytics,” said Tomás. “When we saw that it also offered web analytics, we decided to switch.”
 

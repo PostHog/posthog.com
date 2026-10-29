@@ -1,0 +1,65 @@
+---
+title: Experiments
+description: An experiment splits users between versions of a product and measures which version performs better against a chosen metric. PostHog Experiments builds on feature flags for assignment and on product analytics insights for measurement.
+hogpedia:
+    categories: ['Products', 'Concepts']
+    aliases: ['A/B test', 'A/B testing', 'Split test', 'Multivariate test']
+    infobox:
+        title: Experiments
+        hog: HedgehogExperiment
+        rows:
+            - label: Type
+              value: Testing tool
+            - label: Answers
+              value: Did the change work?
+            - label: Assignment by
+              value: '[Feature flags](/hogpedia/feature-flags)'
+            - label: Measurement by
+              value: '[Product analytics](/hogpedia/product-analytics)'
+            - label: Documentation
+              value: '[/docs/experiments](/docs/experiments)'
+    seeAlso:
+        - 'A/B testing|/hogpedia/a-b-testing'
+        - 'Feature flags|/hogpedia/feature-flags'
+        - 'Product analytics|/hogpedia/product-analytics'
+    references:
+        - id: 1
+          text: 'PostHog documentation, Experiments'
+          url: /docs/experiments
+        - id: 2
+          text: 'PostHog Experiments'
+          url: /experiments
+    external:
+        - title: 'PostHog Experiments'
+          url: /experiments
+        - title: 'Experiments documentation'
+          url: /docs/experiments
+---
+
+An **experiment** splits the people who use a product between two or more versions of it, and measures which version does better against a metric chosen in advance. **Experiments** is also the name of the PostHog product that runs them.<Ref id="2" />
+
+For the statistical method and the reasons it is used, see [A/B testing](/hogpedia/a-b-testing). This article describes the PostHog product.
+
+## What problem it solves
+
+A team that ships a change and sees a number rise cannot tell whether the change caused the rise. The week, the season, a campaign, or an unrelated release could have caused it. Comparing before and after measures time as much as it measures the change.
+
+An experiment removes that ambiguity by running both versions at once, on comparable groups of people. The difference between the groups is then attributable to the difference between the versions.
+
+## How it works in PostHog
+
+An experiment is a [feature flag](/hogpedia/feature-flags) with a metric attached.<Ref id="1" />
+
+1. **Assignment.** A multi-variant flag assigns each person to a variant. Assignment is stable per person, so nobody moves between variants mid-experiment.
+2. **Exposure.** A person enters the analysis when the flag is evaluated for them. An experiment can instead use a custom exposure event, to count only the people who reached the part of the product being changed.
+3. **Metrics.** A primary metric decides the result. Secondary metrics watch for damage elsewhere. A metric is a count, a sum, a ratio, or a retention measure, built on the same [product analytics](/hogpedia/product-analytics) data everything else uses.
+4. **Result.** PostHog reports the difference between variants with an interval around it, so a team can see how much of the result is noise.
+
+## How it relates to other PostHog products
+
+| Product | Relationship |
+| --- | --- |
+| [Feature flags](/hogpedia/feature-flags) | Provides the assignment. Every experiment has a flag behind it. |
+| [Product analytics](/hogpedia/product-analytics) | Provides the metrics. An experiment metric is an insight. |
+| [Session replay](/hogpedia/session-replay) | Recordings can be filtered to one variant, to see how behavior differs. |
+| Surveys | A survey can be shown to one variant, to ask why. |

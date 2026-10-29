@@ -3,6 +3,7 @@ import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
+import { isSafeInternalPath } from 'lib/utils'
 import { useActions } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 
@@ -140,7 +141,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
                 return
             }
-            if (e.data.type === 'navigate') {
+            if (e.data.type === 'navigate' && isSafeInternalPath(e.data.url)) {
                 navigate(e.data.url)
             }
         }

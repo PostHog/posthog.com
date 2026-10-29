@@ -1,0 +1,66 @@
+---
+title: Session replay
+description: Session replay records what a person did in a product and plays it back as video. PostHog Session Replay captures clicks, scrolls, inputs, and page transitions, and links each recording to the events and errors from the same session.
+hogpedia:
+    categories: ['Products', 'Concepts']
+    aliases: ['Session recording', 'Replays']
+    infobox:
+        title: Session replay
+        hog: HedgehogMagnifyingGlass
+        rows:
+            - label: Type
+              value: Qualitative analysis tool
+            - label: Answers
+              value: What did this person actually do?
+            - label: Captures
+              value: Clicks, scrolls, inputs, page transitions
+            - label: Documentation
+              value: '[/docs/session-replay](/docs/session-replay)'
+    seeAlso:
+        - 'Product analytics|/hogpedia/product-analytics'
+        - 'Error tracking|/hogpedia/error-tracking'
+        - 'Event-based analytics|/hogpedia/event-based-analytics'
+    references:
+        - id: 1
+          text: 'PostHog glossary, "Session replay"'
+          url: /docs/glossary
+        - id: 2
+          text: 'PostHog documentation, Session replay'
+          url: /docs/session-replay
+    external:
+        - title: 'PostHog Session Replay'
+          url: /session-replay
+        - title: 'Session replay documentation'
+          url: /docs/session-replay
+---
+
+**Session replay** records a person's session in a product and plays it back. PostHog's glossary describes it as the ability to record and play back individual user sessions, so that a team can watch exactly how a real person moves through a product, and states that replays capture clicks, scrolls, inputs, and page transitions.<Ref id="1" />
+
+It is not screen recording. The browser sends the changes to the page structure, and the player rebuilds the page from them. This is why a replay is small enough to store at scale, and why the text in a replay can be searched.
+
+## What problem it solves
+
+[Product analytics](/hogpedia/product-analytics) reports that 40 per cent of people fail at a step. It cannot report why. The usual reasons – a button below the fold, a validation message that does not say what is wrong, a control that looks inactive – leave no event behind, because nothing happened.
+
+Session replay is the tool for that gap. It turns a number into an observation of one person.
+
+## How it works in PostHog
+
+The PostHog SDK records mutations to the page and sends them with the same event stream everything else uses.<Ref id="2" /> A recording is therefore joined to the rest of the data rather than stored beside it. In practice that means a team can:
+
+- Open the replays behind a specific funnel step, rather than search a list.
+- Jump to the moment an exception was thrown, from the [error](/hogpedia/error-tracking) itself.
+- Filter recordings by any person or event property.
+
+Inputs are masked by default, and a team can mark further elements to exclude, because a replay of a real session otherwise contains whatever a person typed.<Ref id="2" />
+
+## How it relates to other PostHog products
+
+| Product | Relationship |
+| --- | --- |
+| [Product analytics](/hogpedia/product-analytics) | Supplies the number. Replay supplies the reason. |
+| [Error tracking](/hogpedia/error-tracking) | Each exception links to the replay of the session that threw it. |
+| [Experiments](/hogpedia/experiments) | Replays can be filtered to one variant, to see how the variants differ in use. |
+| Surveys | A survey response links to the session that produced it. |
+
+Because all of these sit on one event stream, no export step connects them.

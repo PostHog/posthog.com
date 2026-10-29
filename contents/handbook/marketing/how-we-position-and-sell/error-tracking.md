@@ -91,7 +91,7 @@ Every PostHog exception is a product event with the user attached. Click an erro
 
 **Honest concession:** Sentry has deeper SDK coverage, more mature grouping, a longer mobile track record, and steep volume discounts that make them cheaper at 10M+ errors. We win on context, not coverage or cost-at-scale.
 
-Also useful: [PostHog vs. Sentry](https://posthog.com/blog/posthog-vs-sentry)
+Also useful: [PostHog vs. Sentry](https://posthog.com/compare/posthog-vs-sentry)
 
 ### vs Bugsnag and Rollbar
 

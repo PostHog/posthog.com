@@ -36,6 +36,7 @@ To add a breakdown, click on '+ Add breakdown' in the group filters section and 
 | Feature flag       | Events where a specific feature flag was enabled                                                   |
 | Group properties   | Properties stored on a group (requires [group analytics](/docs/product-analytics/group-analytics)) |
 | Cohorts            | Events performed by a pre-defined list of users                                                    |
+| Elements           | Autocaptured element properties (text, tag name, or href) for trends and funnels only              |
 | SQL                | Custom breakdown using SQL (see our [advanced breakdowns tutorial](/tutorials/hogql-breakdowns))   |
 
 Once you've selected a property, you should see your graph split into multiple series, each one corresponding to a distinct value of that property.
@@ -59,7 +60,7 @@ To just see the total count, switch to a total value bar chart or table like the
 />
 
 When viewing breakdowns in a total value bar chart, each breakdown value displays as a separate bar by default. Enable **Stack breakdown values** in the display settings to combine them into stacked bars grouped by series. This is particularly useful with [formulas](/docs/product-analytics/trends/formulas).
-Trends insights support up to 3 breakdowns at a time. Other insight types support a single breakdown (funnels support a single cohort breakdown). When you reach the limit, the **+ Breakdown** button becomes disabled with a tooltip explaining why. If you need more flexibility, you can use [SQL insights](/docs/sql) which don't have this limitation.
+Trends insights support up to 3 breakdowns at a time. Other insight types support a single breakdown (funnels support a single cohort breakdown). Element breakdowns (text, tag name, and href) are available for trends and funnels only. When you reach the limit, the **+ Breakdown** button becomes disabled with a tooltip explaining why. If you need more flexibility, you can use [SQL insights](/docs/sql) which don't have this limitation.
 
 To breakdown by the combination of browser and operating system, for example, you can use the following SQL expression:
 

@@ -17,16 +17,16 @@ export default function BI() {
         return <div>Product not found</div>
     }
 
-    const { name, overview, features, Icon, color, screenshots } = biProduct
+    const { name, overview, features, Icon, color, screenshots, seo } = biProduct
 
     return (
         <>
             <SEO
-                title={overview?.title || 'Business Intelligence'}
-                description={overview?.description || 'Business intelligence for data-driven teams'}
+                title={seo?.title || `${name} - PostHog`}
+                description={seo?.description || overview?.description}
                 image="/images/og/default.png"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title={overview.title} hideTitle>
+            <ReaderView leftSidebar={<LeftSidebarContent />} title={name} hideTitle>
                 <div className="space-y-8">
                     <div>
                         <div className="flex gap-2 items-center">

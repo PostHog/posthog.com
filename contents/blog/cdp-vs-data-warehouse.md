@@ -7,8 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/cdp_vs_dw_06a0b878d6.png
 featuredImageType: full
 tags:
- - data warehouse
- - data pipelines
+ - Data warehouse
+ - Data pipelines
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
@@ -23,9 +23,9 @@ Even by [modern data stack](/blog/modern-data-stack-sucks) standards, the name "
 
 In a nutshell, a CDP does three things:
 
-1. Ingests data from many different [sources](/docs/cdp/sources) / touchpoints, like your website, app, ads, analytics, email, helpdesk, and more.
+1. Ingests data from many different [sources](/docs/data-pipelines/sources) / touchpoints, like your website, app, ads, analytics, email, helpdesk, and more.
 2. Creates and stores a combined customer profile based on all these sources. Data scattered between platforms gets aggregated in one place.
-3. Sends customer data to [destinations](/docs/cdp/destinations) like ad platforms, CRMs, and more.
+3. Sends customer data to [destinations](/docs/data-pipelines/destinations) like ad platforms, CRMs, and more.
 
 <div class="md:hidden mb-4">
 <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/CDP_mobile_light_502b054e68.png" alt="What is a CDP?" class="dark:hidden" />
@@ -185,17 +185,17 @@ Another way CDPs are useful later is reverse ETL. This means getting data *out* 
 
 At huge scale, use cases fragment significantly. Each function will likely have their own set of specialized requirements that a data warehouse (if adopted) will likely play a large role in, but that’s beyond the scope of this post.
 
-If you’re at the point of evaluating different tools, our guide to [the best CDPs for developers](/blog/best-customer-data-platforms-for-developers) breaks down the top options and tradeoffs.
+If you’re at the point of evaluating different tools, our guide to [the best CDPs for developers](/compare/best-customer-data-platforms-for-developers) breaks down the top options and tradeoffs.
 
 ## PostHog is both a CDP and data warehouse
 
-If you spend any time with PostHog, you’ll quickly notice we have both a [CDP](/docs/cdp) (data pipelines) and a [data warehouse](/docs/data-warehouse). You might wonder: hey, I thought it was supposed to be one or the other? Well, we’ve broken that rule.
+If you spend any time with PostHog, you’ll quickly notice we have both a [CDP](/docs/data-pipelines) (data pipelines) and a [data warehouse](/docs/data-warehouse). You might wonder: hey, I thought it was supposed to be one or the other? Well, we’ve broken that rule.
 
 We and our customers have found both to be essential so in our effort to “[equip every developer to build successful products](/handbook/why-does-posthog-exist),” we’ve built both:
 
-1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from [Slack](/docs/cdp/destinations/slack) to [webhooks](/docs/cdp/destinations/webhook) to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it.
+1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from [Slack](/docs/data-pipelines/destinations/slack) to [webhooks](/docs/data-pipelines/destinations/webhook) to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it.
 
-2. Our **data warehouse** enables teams to sync data from the tools they already use like [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Postgres](/docs/cdp/sources/postgres), [S3](/docs/cdp/sources/s3) and query it alongside the event data they already have in PostHog. We provide a full [SQL editor](/docs/data-warehouse/query) as well as [visualizations](/docs/data-warehouse/query#sql-visualizations) for this data.
+2. Our **data warehouse** enables teams to sync data from the tools they already use like [Stripe](/docs/data-pipelines/sources/stripe), [Hubspot](/docs/data-pipelines/sources/hubspot), [Postgres](/docs/data-pipelines/sources/postgres), [S3](/docs/data-pipelines/sources/s3) and query it alongside the event data they already have in PostHog. We provide a full [SQL editor](/docs/data-warehouse/query) as well as [visualizations](/docs/data-warehouse/query#sql-visualizations) for this data.
 
 When compared with either of the stacks mentioned above, PostHog enables teams to have one that looks like this:
 

@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, python]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Django app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: starter-django
+      prompt: >-
+          Set up PostHog in the Django app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/pyproject.toml lists `posthog` as a dependency.
+              initialized: >-
+                  The app creates a Posthog client from the posthog package with the
+                  project token and the PostHog host, somewhere the app loads at
+                  startup. Cite the file and line(s).

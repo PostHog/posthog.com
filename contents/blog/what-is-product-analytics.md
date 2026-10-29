@@ -116,7 +116,7 @@ There are a variety of product analytics tools available to choose from however,
 
 - [How to measure product engagement](/blog/how-to-measure-product-engagement): How to define engagement for your platform, and how to use analytics tools to measure and build on the results
 
-- [How to achieve B2B product market fit](/blog/how-to-product-market-fit): How to approach finding market fit for a B2B product
+- [How to achieve B2B product market fit](/founders/product-market-fit-game): How to approach finding market fit for a B2B product
 
 > PostHog is an open-source developer platform that helps people build successful products. We help you debug and ship your product faster.
 

@@ -15,7 +15,7 @@ As a result, our focus is on awareness, not converting people to sign up or reve
 
 ### Who is our audience?
 
-It should be the same as [who we are building for](/handbook/who-we-are-building-for), but specifically:
+It should be the same as [who we are building for](/handbook/who-we-build-for), but specifically:
 
 - **Product engineers:** Software engineers who want to improve their product skills, understand users, and build successful new products.
 - **Founders:** Technical and non-technical founders seeking advice on how to run a successful startup.

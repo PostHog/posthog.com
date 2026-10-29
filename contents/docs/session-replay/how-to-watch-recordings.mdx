@@ -47,23 +47,21 @@ To watch recordings, you can visit the [Replay](https://app.posthog.com/replay) 
 
 9. Play, pause, and seek through the recording. Hold `alt` to switch the seek buttons to seek in 1 millisecond steps
 
-10. View AI summary segment markers on the player timeline as colored overlays – green for successful outcomes, red for failures. Click a marker to jump to that moment, or click a segment in the AI summary sidebar to navigate the player.
+10. Switch the timestamp view between "relative" (seconds in recording), UTC, and project timezone
 
-11. Switch the timestamp view between "relative" (seconds in recording), UTC, and project timezone
+11. Add comments by pressing **C** or clicking the **Comment** button to share your thoughts with your team. You can also add a comment as a task by clicking **Add as task** to track issues that need to be fixed.
 
-12. Add comments by pressing **C** or clicking the **Comment** button to share your thoughts with your team. You can also add a comment as a task by clicking **Add as task** to track issues that need to be fixed.
+12. Add emoji reactions by pressing **e** or clicking the **emoji quick reaction** button
 
-13. Add emoji reactions by pressing **e** or clicking the **emoji quick reaction** button
+13. Take a screenshot by pressing **s** or clcking the **screenshot** button
 
-14. Take a screenshot by pressing **s** or clcking the **screenshot** button
+14. Create a short gif clip around the current timestamp by pressing **x** or the **clip** button
 
-15. Create a short gif clip around the current timestamp by pressing **x** or the **clip** button
+15. Skip to the next recording in a playlist or collection by pressing **n** or the **play next** button
 
-16. Skip to the next recording in a playlist or collection by pressing **n** or the **play next** button
+16. Enter cinema mode to focus on the recording by pressing **t** or clicking the cinema mode button
 
-17. Enter cinema mode to focus on the recording by pressing **t** or clicking the cinema mode button
-
-18. Enter fullscreen mode by pressing **f** or clicking the fullscreen button
+17. Enter fullscreen mode by pressing **f** or clicking the fullscreen button
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/light_player_annotated_b298e2b90e.png"
@@ -71,6 +69,19 @@ To watch recordings, you can visit the [Replay](https://app.posthog.com/replay) 
   alt="Everything you can do in session replay"
   classes="rounded"
 />
+
+## Recordings across multiple tabs and windows
+
+PostHog records all tabs and windows of your site into one recording. A user opens a link in a second tab, and PostHog adds that tab to the same recording. PostHog starts a second recording only when a [new session](/docs/data/sessions#how-does-posthog-define-a-session) begins.
+
+PostHog assigns one `$session_id` to the session, and a separate `$window_id` to each tab. Every tab sends its events under the same `$session_id`. The player reads the `$window_id` to show you which tab each moment came from.
+
+The player shows one tab at a time. It follows the tab that the user is active in. Two controls let you change this:
+
+- **The window selector** in the player controls. Select **Follow the user** to move between tabs with them. Select **Follow window** and a window number to stay in one tab. PostHog disables this control when the session used one tab.
+- **The window badges** in the activity panel. Each event carries a numbered badge. Hover over a badge to see which tab the event came from. PostHog hides the badges when the session used one tab.
+
+Cross-tab recording needs the same browser, the same device, and the same browser profile. A user who moves from Chrome to Firefox starts a new session. PostHog then creates a second recording. Read [tabs are recorded as separate sessions](/docs/session-replay/troubleshooting#tabs-are-recorded-as-separate-sessions) if your tabs do not join into one recording.
 
 ## When watching a filter result or collection:
 
@@ -99,23 +110,14 @@ To watch recordings, you can visit the [Replay](https://app.posthog.com/replay) 
 
 ## Triage recordings with PostHog AI
 
-Have too many recordings to watch? PostHog AI can help you triage them for you.
-
-<ProductVideo
-  videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/session_summaries_664cfbb85d.mp4"
-  alt="PostHog AI chat summarizing session recordings"
-  classes="rounded border border-primary @md:max-w-[80%] mx-auto"
-  autoPlay={true}
-  background={false}
-/>
-
-<Caption>PostHog AI summarizes your session recordings for you</Caption>
+Have too many recordings to watch? PostHog AI can find the ones worth your time.
 
 You can ask PostHog AI to do the following:
 
 - [`Find sessions where users dropped off during checkout`](https://app.posthog.com/#panel=max:!Find%20sessions%20where%20users%20dropped%20off%20during%20checkout)
-- [`Summarize session replays where users got stuck`](https://app.posthog.com/#panel=max:!Summarize%20session%20replays%20where%20users%20got%20stuck)
 - [`Show recordings for users who triggered the rage click event`](https://app.posthog.com/#panel=max:!Show%20recordings%20for%20users%20who%20triggered%20the%20rage%20click%20event)
+
+To get a written summary of a recording, use [Replay Vision](/docs/replay-vision/scanner-types#summarizer).
 
 ## How to create saved filters
 

@@ -2,11 +2,11 @@
 title: How Supabase 10Xed with the help of PostHog
 customer: Supabase
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/445225882_d7aa6795_3350_4e88_9ca7_091c61e86e39_0ed5ee1f16.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/supabase_1920x1080_ca830453a7.png
 date: 2025-06-15
 ---
 
-When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](/blog/posthog-vs-plausible) to track website traffic, for example, and internal tools for some of the event tracking.
+When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](/compare/posthog-vs-plausible) to track website traffic, for example, and internal tools for some of the event tracking.
 
 “The result was that it was quite challenging to do even basic attribution or usage-pattern analysis with the data,” says Aleksi. “We were self-hosting Plausible, and we had some data there, but it was quite limited, and the UI was just a little too slow for people to want to use it. So we did basically everything through BigQuery.”
 

@@ -7,8 +7,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en">
             <body>
-                <PostHogProvider clientOptions={{ api_host: '/ingest' }} bootstrapFlags>
-                    <PostHogPageView />
+                <PostHogProvider
+                    clientOptions={{ api_host: '/ingest', defaults: '<ph_posthog_js_defaults>' }}
+                    bootstrapFlags
+                >
+                    <PostHogPageView captureRouteTemplate />
                     {children}
                 </PostHogProvider>
             </body>

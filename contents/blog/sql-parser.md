@@ -58,7 +58,7 @@ I tested two approaches in parallel:
 
 In the end, both of those approaches worked about as well as each other, but I wouldn’t know this until I’d been working on it for a couple of days.
 
-My goal was complete agreement with the oracle (i.e. the existing C++ parser) for all realistic queries and to get as close as possible for contrived ones. Having an oracle was critical for how I developed the new parser, because I could essentially do test-driven-development by finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.
+My goal was complete agreement with the oracle (i.e. the existing C++ parser) for all realistic queries and to get as close as possible for contrived ones. [Having an oracle](/newsletter/agent-autonomy#level-2-agent-delegation) was critical for how I developed the new parser, because I could essentially do test-driven-development by finding some SQL that the parsers disagreed on, fixing the new parser to agree, and repeating.
 
 ## Generating disagreement (many ways)
 

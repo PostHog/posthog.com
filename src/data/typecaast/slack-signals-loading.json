@@ -24,7 +24,7 @@
             "id": "posthog",
             "name": "PostHog",
             "kind": "app",
-            "avatar": "https://res.cloudinary.com/dmukukwp6/image/upload/avatar_posthog_f85279a2ad.png"
+            "avatar": "/brand/posthog-logomark-square.svg"
         }
     ],
     "timeline": [
@@ -55,7 +55,7 @@
                     "elements": [
                         {
                             "type": "text",
-                            "text": "2 signals · 👤 Suggested reviewer:<@cory>"
+                            "text": "2 signals · 👤 Suggested reviewer:<@james>"
                         }
                     ]
                 },

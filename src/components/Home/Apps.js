@@ -24,7 +24,7 @@ export default function Pipelines() {
                 <span className="text-blue">do more with your data</span>
             </h2>
             <p className="my-6 mx-auto text-center text-lg md:text-lg font-semibold mt-2 lg:mt-4 text-primary max-w-2xl opacity-75">
-                Or <a href="/docs/cdp">build your own data connection</a>
+                Or <a href="/docs/data-pipelines">build your own data connection</a>
             </p>
             <div className="mt-8 md:mt-12">
                 <PipelinesList hideBuildYourOwn pipelines={pipelines.nodes} />

@@ -47,6 +47,8 @@ interface OSTableProps {
     children?: React.ReactNode
     shadow?: boolean
     background?: 'full' | 'header' | 'none'
+    /** Show a right/left edge fade when the table overflows horizontally (defaults to true). */
+    fadeHorizontal?: boolean
 }
 
 const RowSkeleton = () => {
@@ -273,6 +275,7 @@ const OSTable: React.FC<OSTableProps> = ({
     children,
     shadow = false,
     background = 'full',
+    fadeHorizontal = true,
 }) => {
     const headerBg = background === 'none' ? '' : 'bg-input'
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
@@ -296,7 +299,7 @@ const OSTable: React.FC<OSTableProps> = ({
                     className="hidden @sm:block pointer-events-none absolute inset-0 bg-black blur-xl opacity-10 -z-10 rounded-md"
                 />
             )}
-            <ScrollArea fullWidth>
+            <ScrollArea fullWidth fadeX={fadeHorizontal}>
                 <div
                     className={`md:@2xs/not-full-width:px-0 flex ${
                         width === 'full'

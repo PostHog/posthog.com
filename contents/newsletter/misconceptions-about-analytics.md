@@ -4,7 +4,7 @@ date: 2024-03-11
 author:
   - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1711412696/posthog.com/contents/images/blog/misconceptions-about-analytics/analytics.webp
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/misconceptions-about-analytics/analytics.webp
 featuredImageType: full
 tags:
   - Product engineers

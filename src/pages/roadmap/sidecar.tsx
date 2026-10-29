@@ -27,9 +27,8 @@ export default function RoadmapPage() {
                     title={'Roadmap'}
                     hideSurvey
                     menu={[
-                        { name: 'Questions', url: '/questions' },
+                        { name: 'Questions', url: '/forum' },
                         { name: 'Roadmap', url: '/roadmap' },
-                        { name: 'Contributors', url: '/contributors' },
                         { name: 'Core team', url: '/team' },
                     ]}
                 >

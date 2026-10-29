@@ -1,5 +1,6 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
+const pLimit = require('p-limit')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}.local`,
@@ -10,9 +11,13 @@ require('dotenv').config({
 })
 
 const getQuestionPages = async (base) => {
+    const limit = pLimit(3)
+
     const fetchQuestions = async (page) => {
+        // Only need permalink for the sitemap — avoid populate:* payload
         const questionQuery = qs.stringify({
-            populate: '*',
+            fields: ['permalink'],
+            filters: { forumTopic: { id: { $notNull: true } } },
             pagination: {
                 page,
                 pageSize: 100,
@@ -34,8 +39,7 @@ const getQuestionPages = async (base) => {
                     throw error
                 }
                 console.log(`Attempt ${attempt} failed: ${error.message}. Retrying...`)
-                // Simple delay between retries (1 second)
-                await new Promise((resolve) => setTimeout(resolve, 1000))
+                await new Promise((resolve) => setTimeout(resolve, 1000 * attempt))
             }
         }
     }
@@ -43,18 +47,33 @@ const getQuestionPages = async (base) => {
     const initialResponse = await fetchQuestions(1)
     const totalPages = initialResponse.meta.pagination.pageCount
 
-    const allResponses = await Promise.all(Array.from({ length: totalPages }, (_, i) => fetchQuestions(i + 1)))
+    const allResponses = await Promise.all(
+        Array.from({ length: totalPages }, (_, i) => limit(() => fetchQuestions(i + 1)))
+    )
 
     const questions = allResponses.flatMap((response) =>
-        response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
+        response.data.map((question) => ({ path: `${base}/forum/p/${question.attributes.permalink}` }))
     )
 
     return questions
 }
 
 module.exports = {
+    developMiddleware: (app) => {
+        ;['luma-events', 'notion-events', 'posthog-desktop-pricing'].forEach((route) => {
+            app.use(`/api/${route}`, async (req, res) => {
+                try {
+                    await require(`./api/${route}`)(req, res)
+                } catch (error) {
+                    console.error(`${route} dev middleware error:`, error)
+                    res.status(500).json({ error: `Failed to fetch ${route}` })
+                }
+            })
+        })
+    },
     flags: {
         DEV_SSR: false,
+        PARALLEL_SOURCING: process.env.NODE_ENV === 'development',
     },
     siteMetadata: {
         title: 'PostHog',
@@ -113,7 +132,8 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+                // Eval files sit beside their pages but are read only by evals/, never by the site.
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`, `**/*.eval.yaml`],
             },
         },
         {
@@ -174,10 +194,10 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-source-strapi-pages`,
+            resolve: `gatsby-source-git-metadata`,
             options: {
-                strapiURL: process.env.STRAPI_URL,
-                strapiKey: process.env.STRAPI_API_KEY,
+                owner: 'PostHog',
+                repo: 'posthog.com',
             },
         },
         `gatsby-plugin-image`,
@@ -190,7 +210,7 @@ module.exports = {
                 background_color: '#E5E7E0',
                 theme_color: '#E5E7E0',
                 display: 'minimal-ui',
-                icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
+                icon: 'src/images/posthog-icon-white.svg',
             },
         },
         `gatsby-plugin-postcss`,
@@ -216,11 +236,16 @@ module.exports = {
                     return site.siteMetadata.siteUrl
                 },
                 resolvePages: async ({ allSitePage: { nodes: allPages }, site }) => {
-                    const transformedPages = allPages.map(({ path }) => {
-                        return {
-                            path: `${site.siteMetadata.siteUrl}${path}`,
-                        }
-                    })
+                    // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
+                    const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
+
+                    const transformedPages = allPages
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
+                        .map(({ path }) => {
+                            return {
+                                path: `${site.siteMetadata.siteUrl}${path}`,
+                            }
+                        })
 
                     let plugins = []
                     try {
@@ -247,8 +272,8 @@ module.exports = {
                     if (path === '/') {
                         priority = 1.0
                         changefreq = 'monthly'
-                    } else if (path.includes('blog')) {
-                        if (path === '/blog') {
+                    } else if (path.includes('blog') || path.includes('compare')) {
+                        if (path === '/blog' || path === '/compare') {
                             changefreq = 'weekly'
                         } else {
                             changefreq = 'yearly'
@@ -368,10 +393,104 @@ module.exports = {
                         `,
                         output: '/rss.xml',
                         title: "PostHog's RSS Feed",
+                        site_url: 'https://posthog.com',
+                        feed_url: 'https://posthog.com/rss.xml',
+                        language: 'en',
                         // optional configuration to insert feed reference in pages:
                         // if `string` is used, it will be used to create RegExp and then test if pathname of
                         // current page satisfied this regular expression;
                         // if not provided or `undefined`, all pages will have feed reference inserted
+                    },
+                    {
+                        serialize: ({ query: { site, allRoadmap } }) => {
+                            const { siteUrl } = site.siteMetadata
+
+                            return allRoadmap.nodes.map((node) => {
+                                const team = node.teams?.data?.[0]?.attributes?.name
+                                const topic = node.topic?.data?.attributes?.label
+                                const description = (node.description || '')
+                                    .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
+                                    .replace(/\]\(\//g, `](${siteUrl}/`) // absolutize relative links
+                                    .trim()
+                                const profile = node.profiles?.data?.[0]?.attributes
+                                const author = [profile?.firstName, profile?.lastName].filter(Boolean).join(' ')
+                                const media = node.media?.data?.attributes
+
+                                return {
+                                    title: node.title,
+                                    description,
+                                    date: node.date,
+                                    url: `${siteUrl}/changelog?id=${node.strapiID}`,
+                                    guid: `posthog-changelog-${node.strapiID}`,
+                                    categories: [team && `${team} Team`, topic].filter(Boolean),
+                                    ...(author ? { author } : {}),
+                                    ...(media?.url ? { enclosure: { url: media.url, type: media.mime } } : {}),
+                                    custom_elements: [
+                                        {
+                                            'content:encoded': {
+                                                _cdata: description,
+                                            },
+                                        },
+                                    ],
+                                }
+                            })
+                        },
+                        query: `
+                        {
+                            allRoadmap(
+                                filter: { complete: { eq: true }, date: { ne: null } }
+                                sort: { fields: date, order: DESC }
+                                limit: 50
+                            ) {
+                                nodes {
+                                    strapiID
+                                    title
+                                    description
+                                    date
+                                    media {
+                                        data {
+                                            attributes {
+                                                url
+                                                mime
+                                            }
+                                        }
+                                    }
+                                    profiles {
+                                        data {
+                                            attributes {
+                                                firstName
+                                                lastName
+                                            }
+                                        }
+                                    }
+                                    teams {
+                                        data {
+                                            attributes {
+                                                name
+                                            }
+                                        }
+                                    }
+                                    topic {
+                                        data {
+                                            attributes {
+                                                label
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        `,
+                        output: '/changelog.rss',
+                        title: 'PostHog Changelog',
+                        description: 'New features, improvements, and fixes shipped in PostHog.',
+                        // Without site_url and feed_url, node-rss falls back to its own repo as the
+                        // channel link and writes no self reference, so readers cannot follow either.
+                        site_url: 'https://posthog.com/changelog',
+                        feed_url: 'https://posthog.com/changelog.rss',
+                        language: 'en',
+                        // inserts <link rel="alternate" type="application/rss+xml"> on /changelog pages
+                        match: '^/changelog',
                     },
                 ],
             },

@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { IconLightBulb, IconX } from '@posthog/icons'
-import { LogSlider, inverseCurve, sliderCurve } from '../../PricingSlider/Slider'
-import { calculatePrice, formatUSD } from '../../PricingSlider/pricingSliderLogic'
+import { IconInfo, IconX } from '@posthog/icons'
+import { calculatePrice } from '../../PricingSlider/pricingSliderLogic'
 import { PricingTiers } from '../../Plans'
-import { NumericFormat } from 'react-number-format'
-import AutosizeInput from 'react-input-autosize'
-import pluralizeWord from 'pluralize'
+import { afterFirstFree, pluralizeUnit, unitWhenNotInLabel } from '../../utils'
+import { calculateRetentionPrice, getRetentionMonths } from '../calculatorLogic'
+import UsageSliderRow, { UsageSliderHeader } from '../UsageSliderRow'
+import { RetentionMonthsInput, RetentionSlider, retentionInputUnit } from '../RetentionControls'
+import Tooltip from 'components/Tooltip'
 
 const TriggerEventsModal = ({ onClose, isVisible }) => {
     return (
@@ -42,85 +43,9 @@ const TriggerEventsModal = ({ onClose, isVisible }) => {
     )
 }
 
-const SliderRow = ({
-    label = '',
-    sliderConfig,
-    volume,
-    setVolume,
-    unit,
-    cost,
-    billingTiers,
-    freeAllocation,
-    freeAllocationText,
-}) => {
-    const [currentVolume, setCurrentVolume] = useState(volume)
+const firstPaidUnitAmount = (tiers) => tiers?.find((tier) => parseFloat(tier.unit_amount_usd) > 0)?.unit_amount_usd
 
-    useEffect(() => {
-        if (billingTiers) {
-            const calculatedCost = calculatePrice(currentVolume, billingTiers).total
-            setVolume(currentVolume, calculatedCost)
-        }
-    }, [currentVolume, billingTiers])
-
-    const handleVolumeChange = (newVolume) => {
-        const roundedVolume = Math.round(newVolume)
-        setCurrentVolume(roundedVolume)
-
-        if (billingTiers) {
-            const calculatedCost = calculatePrice(roundedVolume, billingTiers).total
-            setVolume(roundedVolume, calculatedCost)
-        }
-    }
-
-    return (
-        <div className="grid grid-cols-8 mb-4">
-            <div className="col-span-6">
-                <p className="mb-2">
-                    <NumericFormat
-                        inputClassName="bg-transparent text-center focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark font-code max-w-[103px] text-sm border border-light hover:border-button dark:border-dark rounded-sm py-1 px-0 min-w-[25px] px-1"
-                        value={currentVolume}
-                        thousandSeparator=","
-                        onValueChange={({ floatValue }) => handleVolumeChange(floatValue)}
-                        customInput={AutosizeInput}
-                    />{' '}
-                    <span className="opacity-70 text-sm">{label}s/month</span>
-                </p>
-            </div>
-            <div className="col-span-2 text-right pr-3">
-                <p className="font-semibold mb-0">{formatUSD(cost)}</p>
-            </div>
-            <div className="col-span-full pr-1.5">
-                <LogSlider
-                    stepsInRange={100}
-                    marks={sliderConfig.marks}
-                    min={sliderConfig.min}
-                    max={sliderConfig.max}
-                    onChange={(value) => handleVolumeChange(Math.round(sliderCurve(value)))}
-                    value={inverseCurve(currentVolume)}
-                />
-            </div>
-            {(freeAllocation || freeAllocationText) && (
-                <div className="col-span-full pr-1.5 mt-10 md:mt-8 pb-4 flex gap-1 items-center">
-                    <IconLightBulb className="size-5 inline-block text-[#4f9032] dark:text-green relative -top-px" />
-                    <span className="text-sm text-[#4f9032] dark:text-green font-semibold">
-                        {freeAllocationText ? (
-                            freeAllocationText
-                        ) : (
-                            <>
-                                First {Math.round(freeAllocation).toLocaleString()}{' '}
-                                {pluralizeWord(unit, Math.round(freeAllocation))} free –&nbsp;
-                                <em>every month!</em>
-                            </>
-                        )}
-                    </span>
-                </div>
-            )}
-        </div>
-    )
-}
-
-const isDataPipelines = (product) =>
-    product?.categoryName === 'Data pipelines' || product?.handle === 'realtime_destinations'
+const isDestinations = (product) => product?.handle === 'realtime_destinations'
 
 export default function StandaloneAddonsTab({ activeProduct, setVolume, setProduct }) {
     const [mainVolume, setMainVolume] = useState(activeProduct.volume || 0)
@@ -132,7 +57,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     const [addonData, setAddonData] = useState(
         () =>
             activeProduct.addonSliders?.map((addon) => ({
-                volume: addon.volume || 0,
+                volume: activeProduct.addons?.[addon.key]?.volume ?? addon.volume ?? addon.sliderConfig?.min ?? 0,
                 cost: 0,
                 costByTier: [],
             })) || []
@@ -156,7 +81,16 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
         [activeProduct]
     )
 
-    const totalCost = mainCost + addonData.reduce((sum, addon) => sum + addon.cost, 0)
+    // Retention (Logs) bills every GB ingested again for each month kept, so it follows the main volume
+    const { retention } = activeProduct
+    const [retentionMonths, setRetentionMonths] = useState(() =>
+        retention ? getRetentionMonths(retention, activeProduct.retentionMonths) : 0
+    )
+    const retentionBilling = retention && activeProduct.billingData.addons?.find((ba) => ba.type === retention.key)
+    const retentionTiers = retentionBilling?.plans.find((plan) => plan.tiers)?.tiers
+    const retentionPrice = calculateRetentionPrice(retentionTiers, mainVolume, retentionMonths)
+
+    const totalCost = mainCost + retentionPrice.total + addonData.reduce((sum, addon) => sum + addon.cost, 0)
 
     useEffect(() => {
         if (mainBillingTiers) {
@@ -167,41 +101,60 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
     }, [mainVolume, mainBillingTiers])
 
     useEffect(() => {
-        const updatedAddonData = addonData.map((addon, index) => {
-            const addonBilling = addonBillingData[index]
-            if (addonBilling?.billingTiers && addon.volume > 0) {
-                const { total, costByTier } = calculatePrice(addon.volume, addonBilling.billingTiers)
-                return { ...addon, cost: total, costByTier }
-            }
-            return { ...addon, cost: 0, costByTier: [] }
-        })
-        setAddonData(updatedAddonData)
+        setAddonData((prev) =>
+            prev.map((addon, index) => {
+                const addonBilling = addonBillingData[index]
+                if (addonBilling?.billingTiers && addon.volume > 0) {
+                    const { total, costByTier } = calculatePrice(addon.volume, addonBilling.billingTiers)
+                    return { ...addon, cost: total, costByTier }
+                }
+                return { ...addon, cost: 0, costByTier: [] }
+            })
+        )
     }, [addonBillingData])
 
+    const addonVolumes = addonData.map((addon) => addon.volume).join(',')
     useEffect(() => {
         if (mainBillingTiers) {
             const { costByTier } = calculatePrice(mainVolume, mainBillingTiers)
             setProduct(activeProduct.handle, {
                 cost: totalCost,
                 volume: mainVolume,
+                addons: Object.fromEntries(
+                    addonBillingData.map((addon, index) => [addon.key, { volume: addonData[index].volume }])
+                ),
+                ...(retention && { retentionMonths }),
                 costByTier,
             })
         }
-    }, [totalCost, mainVolume, mainBillingTiers, activeProduct.handle, setProduct])
+        // Omit setProduct: it is a new function every render and would retrigger this
+        // effect, rebuild addonBillingData, and race a just-clicked volume.
+    }, [totalCost, mainVolume, mainBillingTiers, activeProduct.handle, addonVolumes, retentionMonths])
 
-    const handleMainVolumeChange = (volume, cost) => {
+    const handleMainVolumeChange = (volume) => {
         setMainVolume(volume)
-        setMainCost(cost)
     }
 
-    const handleAddonVolumeChange = (index) => (volume, cost) => {
+    const handleAddonVolumeChange = (index) => (volume) => {
+        const tiers = addonBillingData[index]?.billingTiers
+        const cost = tiers && volume > 0 ? calculatePrice(volume, tiers).total : 0
         setAddonData((prev) => prev.map((addon, i) => (i === index ? { ...addon, volume, cost } : addon)))
     }
 
+    const mainUnitLabel = pluralizeUnit(activeProduct.billingData.unit, 2)
+    // With a retention input the volume is every GB ingested, so it gets its own label
+    const volumeLabel = retention?.volumeLabel || activeProduct.productVariantName
+    const retentionUnitPrice = firstPaidUnitAmount(retentionTiers)
+    const retentionInfo = [retention?.note, retentionBilling?.no_billing_limit === true && retention.noBillingLimitNote]
+        .filter(Boolean)
+        .join(' ')
+    const mainStartsAt = firstPaidUnitAmount(mainBillingTiers)
+    const mainFree = activeProduct.freeLimit || activeProduct.slider.min
+
     return (
-        <div className="mb-4">
+        <div className="@container mb-4">
             <TriggerEventsModal onClose={() => setTriggerEventsModalOpen(false)} isVisible={triggerEventsModalOpen} />
-            {isDataPipelines(activeProduct) && (
+            {isDestinations(activeProduct) && (
                 <div className="border border-green bg-green/25 px-3 py-2 rounded italic mb-4 text-sm">
                     Trigger Events are the events that actually kick off destinations in your pipelines (
                     <button
@@ -213,124 +166,198 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                     ).
                 </div>
             )}
-            <div className="mb-4">
-                <h4 className="mb-3 text-base font-semibold">
-                    {activeProduct.productVariantName || activeProduct.name}
-                </h4>
-                <SliderRow
-                    label={activeProduct.billingData.unit}
-                    sliderConfig={activeProduct.slider}
-                    volume={mainVolume}
-                    setVolume={handleMainVolumeChange}
-                    unit={activeProduct.billingData.unit}
-                    cost={mainCost}
-                    billingTiers={mainBillingTiers}
-                    freeAllocation={activeProduct.slider.min}
-                    freeAllocationText={activeProduct.freeAllocationText}
+            <UsageSliderHeader unit={mainUnitLabel} />
+            <div className="divide-y divide-primary border-t border-primary">
+                <UsageSliderRow
+                    label={volumeLabel || mainUnitLabel}
+                    subtitle={
+                        mainStartsAt
+                            ? `$${mainStartsAt} each${afterFirstFree(
+                                  mainFree,
+                                  activeProduct.billingData.unit,
+                                  volumeLabel || mainUnitLabel
+                              )}`
+                            : undefined
+                    }
+                    value={mainVolume}
+                    onChange={handleMainVolumeChange}
+                    marks={activeProduct.slider.marks}
+                    min={0}
+                    max={activeProduct.slider.max}
+                    scaleMin={activeProduct.slider.scaleMin}
                 />
+                {retention && retentionTiers && (
+                    <div className="flex items-center gap-4 pt-3 pb-9">
+                        <div className="w-48 shrink-0">
+                            <div className="flex items-center gap-1 mb-0.5">
+                                <p className="m-0 text-sm font-bold">{retention.label}</p>
+                                {retentionInfo && (
+                                    <Tooltip content={retentionInfo} tooltipClassName="max-w-[250px]" placement="top">
+                                        <span className="relative inline-block">
+                                            <IconInfo className="size-4 opacity-70 inline-block" />
+                                        </span>
+                                    </Tooltip>
+                                )}
+                            </div>
+                            {retentionUnitPrice && (
+                                <p className="m-0 text-xs text-secondary">
+                                    ${retentionUnitPrice} per {activeProduct.billingData.unit} for each month kept
+                                </p>
+                            )}
+                        </div>
+                        {/* Laid out like UsageSliderRow: the slider hides on narrow screens, the input stays */}
+                        <div className="hidden @md:flex flex-1 justify-end min-w-0">
+                            <div className="w-full @md:w-3/4 pb-5">
+                                <RetentionSlider
+                                    retention={retention}
+                                    value={retentionMonths}
+                                    onChange={setRetentionMonths}
+                                />
+                            </div>
+                        </div>
+                        {/* As wide as the volume inputs, so both sliders line up; the unit hangs below the input */}
+                        <div className="relative ml-auto shrink-0">
+                            <RetentionMonthsInput
+                                retention={retention}
+                                value={retentionMonths}
+                                onChange={setRetentionMonths}
+                                className="w-14 bg-transparent text-center font-bold text-sm border border-light dark:border-dark rounded-md py-1 px-1.5 focus:ring-0 focus:border-red dark:focus:border-yellow focus:bg-white dark:focus:bg-accent-dark"
+                            />
+                            <span className="absolute left-1/2 top-full -translate-x-1/2 mt-1 w-20 text-center text-xs leading-tight text-secondary">
+                                {retentionInputUnit(retention, retentionMonths)}
+                            </span>
+                        </div>
+                    </div>
+                )}
+                {addonBillingData.map((addon, index) => {
+                    if (!addon.billingTiers) return null
+                    const price = firstPaidUnitAmount(addon.billingTiers)
+                    const free = addon.freeAllocation ?? addon.sliderConfig.min
+                    const unit = addon.unit || activeProduct.billingData.unit
+                    const info = addon.note || addon.pricingDescription
+                    return (
+                        <UsageSliderRow
+                            key={addon.key}
+                            label={addon.label}
+                            labelAccessory={
+                                info ? (
+                                    <Tooltip content={info} tooltipClassName="max-w-[250px]" placement="top">
+                                        <span className="relative inline-block">
+                                            <IconInfo className="size-4 opacity-70 inline-block" />
+                                        </span>
+                                    </Tooltip>
+                                ) : null
+                            }
+                            subtitle={
+                                price
+                                    ? `$${price} each${
+                                          free
+                                              ? afterFirstFree(free, unit, addon.label)
+                                              : unitWhenNotInLabel(unit, addon.label)
+                                      }`
+                                    : undefined
+                            }
+                            value={addonData[index]?.volume || 0}
+                            onChange={handleAddonVolumeChange(index)}
+                            marks={addon.sliderConfig.marks}
+                            min={0}
+                            max={addon.sliderConfig.max}
+                            scaleMin={addon.sliderConfig.scaleMin}
+                        />
+                    )
+                })}
+            </div>
+            <div className="pr-1.5 pt-3 border-t border-primary">
+                <button
+                    onClick={() => setShowBreakdown(!showBreakdown)}
+                    className="text-sm text-red dark:text-yellow font-semibold underline"
+                >
+                    {showBreakdown ? 'Hide breakdown' : 'Show breakdown'}
+                </button>
             </div>
 
-            {addonBillingData.map(
-                (addon, index) =>
-                    addon.billingTiers && (
-                        <div key={addon.key} className="mb-4">
-                            <h4 className="mb-3 text-base font-semibold">{addon.label}</h4>
-                            <SliderRow
-                                label={addon.unit}
-                                sliderConfig={addon.sliderConfig}
-                                volume={addonData[index]?.volume || 0}
-                                setVolume={handleAddonVolumeChange(index)}
-                                unit={addon.unit}
-                                cost={addonData[index]?.cost || 0}
-                                billingTiers={addon.billingTiers}
-                                freeAllocation={
-                                    addon.freeAllocation !== undefined ? addon.freeAllocation : addon.sliderConfig.min
-                                }
-                                freeAllocationText={addon.freeAllocationText}
-                            />
+            {showBreakdown && (
+                <div className="p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
+                    <button
+                        onClick={() => setShowBreakdown(false)}
+                        className="absolute top-4 right-4 text-muted hover:text-primary"
+                    >
+                        <IconX className="size-5" />
+                    </button>
+                    <h4 className="mb-1">How pricing is calculated</h4>
+                    <p className="text-sm font-normal mb-2">
+                        Each product is billed separately with usage-based tiers. Pricing gets cheaper as your volume
+                        increases.
+                    </p>
+                    <p className="my-4 font-bold border-t border-primary pt-4">Here's how your estimate breaks down:</p>
+                    <div className="space-y-8">
+                        <div>
+                            <h4 className="text-lg m-0">
+                                {volumeLabel || activeProduct.categoryName || activeProduct.name}
+                            </h4>
+                            <p className="opacity-70 m-0 text-sm mb-2">
+                                <strong>{mainVolume.toLocaleString()}</strong>{' '}
+                                {pluralizeUnit(activeProduct.billingData.unit, mainVolume)}
+                            </p>
+                            <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
+                                <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
+                                    <PricingTiers
+                                        plans={[{ tiers: mainCostByTier }]}
+                                        unit={activeProduct.billingData.unit}
+                                        type={activeProduct.handle}
+                                        showSubtotal
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    )
-            )}
 
-            <div className="grid grid-cols-6 gap-x-8 pt-4 mt-4 border-t border-primary">
-                <div className="col-span-full flex justify-between items-center">
-                    <div>
-                        <h3 className="m-0 text-base">Cost subtotal</h3>
-                        <button
-                            onClick={() => setShowBreakdown(!showBreakdown)}
-                            className="text-red dark:text-yellow font-semibold text-sm"
-                        >
-                            {showBreakdown ? 'Hide' : 'See'} how we calculate this
-                        </button>
-                    </div>
-                    <div className="pr-3">
-                        <strong>{formatUSD(totalCost)}</strong>
-                    </div>
-                </div>
-
-                {showBreakdown && (
-                    <div className="col-span-full p-4 mt-4 rounded border border-primary bg-white dark:bg-accent-dark relative">
-                        <button
-                            onClick={() => setShowBreakdown(false)}
-                            className="absolute top-4 right-4 text-muted hover:text-primary"
-                        >
-                            <IconX className="size-5" />
-                        </button>
-                        <h4 className="mb-1">How pricing is calculated</h4>
-                        <p className="text-sm font-normal mb-2">
-                            Each product is billed separately with usage-based tiers. Pricing gets cheaper as your
-                            volume increases.
-                        </p>
-                        <p className="my-4 font-bold border-t border-primary pt-4">
-                            Here's how your estimate breaks down:
-                        </p>
-                        <div className="space-y-8">
+                        {retention && retentionMonths > 0 && retentionTiers && (
                             <div>
-                                <h4 className="text-lg m-0">
-                                    {activeProduct.productVariantName || activeProduct.name}
-                                </h4>
+                                <h4 className="text-lg m-0">{retention.label}</h4>
                                 <p className="opacity-70 m-0 text-sm mb-2">
-                                    <strong>{mainVolume.toLocaleString()}</strong> {activeProduct.billingData.unit}s
+                                    <strong>{mainVolume.toLocaleString()}</strong>{' '}
+                                    {pluralizeUnit(activeProduct.billingData.unit, mainVolume)} kept for{' '}
+                                    <strong>{retentionMonths}</strong> {retentionMonths === 1 ? 'month' : 'months'}
                                 </p>
                                 <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
                                     <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
                                         <PricingTiers
-                                            plans={[{ tiers: mainCostByTier }]}
-                                            unit={activeProduct.billingData.unit}
-                                            type={activeProduct.handle}
+                                            plans={[{ tiers: retentionPrice.costByTier }]}
+                                            unit={retentionBilling?.unit || `${activeProduct.billingData.unit}-month`}
+                                            type={retention.key}
                                             showSubtotal
                                         />
                                     </div>
                                 </div>
                             </div>
+                        )}
 
-                            {addonBillingData.map(
-                                (addon: any, index: number) =>
-                                    addon.billingTiers &&
-                                    addonData[index]?.volume > 0 && (
-                                        <div key={addon.key}>
-                                            <h4 className="text-lg m-0">{addon.label}</h4>
-                                            <p className="opacity-70 m-0 text-sm mb-2">
-                                                <strong>{addonData[index].volume.toLocaleString()}</strong> {addon.unit}
-                                                s
-                                            </p>
-                                            <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
-                                                <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
-                                                    <PricingTiers
-                                                        plans={[{ tiers: addonData[index].costByTier }]}
-                                                        unit={addon.unit}
-                                                        type={addon.key}
-                                                        showSubtotal
-                                                    />
-                                                </div>
+                        {addonBillingData.map(
+                            (addon: any, index: number) =>
+                                addon.billingTiers &&
+                                addonData[index]?.volume > 0 && (
+                                    <div key={addon.key}>
+                                        <h4 className="text-lg m-0">{addon.label}</h4>
+                                        <p className="opacity-70 m-0 text-sm mb-2">
+                                            <strong>{addonData[index].volume.toLocaleString()}</strong>{' '}
+                                            {pluralizeUnit(addon.unit, addonData[index].volume)}
+                                        </p>
+                                        <div className="overflow-auto -mx-4 px-4 md:mx-0 md:px-0">
+                                            <div className="p-1 min-w-[500px] md:min-w-auto border border-input rounded-md mt-2">
+                                                <PricingTiers
+                                                    plans={[{ tiers: addonData[index].costByTier }]}
+                                                    unit={addon.unit}
+                                                    type={addon.key}
+                                                    showSubtotal
+                                                />
                                             </div>
                                         </div>
-                                    )
-                            )}
-                        </div>
+                                    </div>
+                                )
+                        )}
                     </div>
-                )}
-            </div>
+                </div>
+            )}
         </div>
     )
 }

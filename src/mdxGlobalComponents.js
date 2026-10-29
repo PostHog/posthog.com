@@ -7,6 +7,7 @@ import AskAIInput from './components/AskAIInput'
 import AskMax from './components/AskMax'
 import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
+import { BrandLogos } from './components/BrandLogos'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
 import { HearAboutUsCarousel } from './components/CardStackCarousel/HearAboutUsCarousel'
@@ -34,6 +35,7 @@ import ImageSlider from './components/ImageSlider'
 import { KeyboardShortcut } from './components/KeyboardShortcut'
 import { Label } from './components/Label'
 import Link from './components/Link'
+import LoopGame from './components/LoopGame'
 import { List } from './components/List'
 import { LPCTA } from './components/LPCTA'
 import { MaxCTA } from './components/MaxCTA'
@@ -41,6 +43,7 @@ import OSButton from './components/OSButton'
 import { OSQuote } from './components/OSQuote'
 import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
+import PricingCalculator from './components/Pricing/PricingCalculator/Embedded'
 import { PrivateLink } from './components/PrivateLink'
 import { ProductOS } from './components/Product/ProductOS'
 import { Competitor } from './components/Products/Competitor'
@@ -69,7 +72,6 @@ import TaskOwnershipTable from './components/TaskOwnershipTable'
 import TeamMember from './components/TeamMember'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
-import { ZendeskTicket } from './components/ZendeskTicket'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import SolvedQuestions from './components/Docs/SolvedQuestions'
 import WistiaEmbed from './components/WistiaEmbed'
@@ -81,6 +83,7 @@ export const shortcodes = {
     ArrayCTA,
     BasicHedgehogImage,
     BorderWrapper,
+    BrandLogos,
     CallToAction,
     CalloutBox,
     Caption,
@@ -109,9 +112,11 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    PricingCalculator,
     OSQuote,
     OSButton,
     Link,
+    LoopGame,
     PrivateLink,
     ProductOS,
     ProductScreenshot,
@@ -136,7 +141,6 @@ export const shortcodes = {
     StarRepoButton,
     TracksCTA,
     Tweet,
-    ZendeskTicket,
     MaxCTA,
     SmallTeam,
     TeamMember,

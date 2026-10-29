@@ -122,7 +122,7 @@ This problem is common in [remote companies](/newsletter/remote-working), especi
 
 You need to account for this by including all the context a reader needs to succeed. This usually means sharing:
 
-1. **Data.** Communication often includes the link to the [query](/docs/product-analytics/sql), [insight](/docs/product-analytics/insights), [dashboard](/docs/product-analytics/dashboards), or [error trace](/docs/error-tracking/monitoring). Say what metric you care about. Query performance, revenue churn, error volumes, and [conversion](/docs/product-analytics/funnels) are all common metrics at PostHog.
+1. **Data.** Communication often includes the link to the [query](/docs/data-warehouse/sql), [insight](/docs/product-analytics/insights), [dashboard](/docs/product-analytics/dashboards), or [error trace](/docs/error-tracking/monitoring). Say what metric you care about. Query performance, revenue churn, error volumes, and [conversion](/docs/product-analytics/funnels) are all common metrics at PostHog.
 
 2. **Feedback.** It is common to see “[X gave feedback that…](/tutorials/feedback-interviews-site-apps)” or "X is having trouble with Y" when communicating at PostHog. This often includes a link to the message from the user, or the problem area in-app, and a potential solution for it.
 

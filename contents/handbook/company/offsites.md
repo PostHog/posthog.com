@@ -41,7 +41,8 @@ We want team offsites to be social events and encourage you to optimize offsites
 - They're places where there are already a lot of PostHog people that you can hang out with. If most teams do their offsites there, you're much more likely to run into even more people
   - The more we have random cross-pollination, the more ambitious ideas we'll come up with and the more successful we'll be.
   - These hubs are places where you can get to know people outside your current team, which means you'll be more effective at getting stuff done.
-- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently.
+- SF has the benefit of being the epicenter of everything happening in tech, and we have lots of YC founders working out of Hogpatch who you can meet and learn from. It's good to get exposure to this, especially if you don't live in SF or haven't been recently. 
+  - This doesn't happen on its own though. Founders are usually pitching, in calls, or in deep focus, and other PostHog teams are only around if your offsites overlap. Put a specific slot in the agenda, otherwise it won't happen.
 
 
 Traveling to new places is a perk for PostHog employees. At the same time, going to the hubs, especially for newer joiners, can be beneficial to you as an employee and to the company as a whole. We trust you to make the right decision here, balancing personal preference with what's best for the company. 
@@ -95,9 +96,9 @@ Ideas for the agenda:
 
 > Don't run a hackathon during an onboarding offsite. Other offsites normally do have a hackathon. Participation should be _very_ strongly encouraged but not mandatory - if not everyone is taking part make sure that working spaces are available to accommodate the different styles of work. It is super important that people taking part are fully available and focused on participating. Given the offsite is an opportunity to work together there should be no teams of one. This extends beyond the formation of teams and into the hackathon itself in cases where there is team switching.
 
-Here's a real-world example: [Product Analytics team's Munich offsite agenda](https://posthog.slack.com/canvas/C07A0BQEAUB) (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
+Here's a real-world example: <PrivateLink url="https://posthog.slack.com/canvas/C07A0BQEAUB">Product Analytics team's Munich offsite agenda</PrivateLink> (internal Slack link). Feel free to take inspiration – though your team's needs and wants might be quite different!
 
-The budget for these trips is up to $2,000 per person in total. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
+The budget for these trips is up to $2,000 per person in total. Treat this as a guide rather than a hard cap. Some cities are more expensive than others, and hub offsites where several people fly in from overseas will usually go over it. We ask team members to use their best judgement for these and try to be thrifty where possible - these should be enjoyable, but not feel like a holiday. Generally it's easier to hit budget if you have people travel in on a Monday and out on a Friday - they don't need to be as long as a whole team offsite. 
 
 You should assign someone on the small team to be responsible for planning the offsite (doesn't have to be the lead), and they will be supported by the Ops & People team to ensure a successful experience. 
 
@@ -111,11 +112,11 @@ PostHog runs two Hedge Houses in the UK - a small one in Cambridge and a larger 
 Message <TeamMember name="Kendal Ijeh" photo /> to check availability or make a booking at the Cambridge Hedge House.
 
 ### London
-Our light-filled, studious office is a reliable homebase between Farringdon and Barbican. It’s entirely ours, open 24/7 and the perfect place to stay if you're visiting from abroad.  Use the [Hedge House London](https://posthog.slack.com/archives/D0AAA9M06R2) slack tool to see the full address, book a room and/or desk, plus see who else will be there during the week you visit. This means you can easily self-serve, but ask <TeamMember name="Kendal Ijeh" photo /> with any questions.
+Our light-filled, studious office is a reliable homebase between Farringdon and Barbican. It’s entirely ours, open 24/7 and the perfect place to stay if you're visiting from abroad.  Use the <PrivateLink url="https://posthog.slack.com/archives/D0AAA9M06R2">Hedge House London</PrivateLink> slack tool to see the full address, book a room and/or desk, plus see who else will be there during the week you visit. Ensure to read the House Manual too - you can find this in the app or pinned to the <PrivateLink url="https://posthog.slack.com/archives/C028MN3UUP5">London Slack channel</PrivateLink> The app means you can easily self-serve, but ask <TeamMember name="Kendal Ijeh" photo /> with any questions. We don’t allow weekend stays or Personal trips at Hedge House, the house is for co-working only, not for general stays.
 
 ## London hotel recommendations
 
-For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.: 
+For offsites and onboardings in London, below is a list of hotels recommended in our <PrivateLink url="https://posthog.slack.com/archives/C028MN3UUP5">#London Slack channel</PrivateLink> by folks who have stayed at these hotels.:
 
 - [Marrable's Farringdon hotel](https://marrableshotel.com/)
 - [The Zetter Clerkenwell](https://thezetter.com/clerkenwell/)
@@ -131,6 +132,23 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 
 If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 
+## Other London recommendations
+
+Visiting the Hedge House from out of town? Here are some local spots the team recommends for food, drinks, and things to do:
+
+- [Fare](https://www.farelondon.com/). Good Italian food and drinks in a relaxed atmosphere, 2 minutes walk from the Hedge House.
+- [Space Talk](https://www.spacetalklondon.com/). A hi-fi cocktail bar with a cozy vibe, 2 minutes walk from the Hedge House.
+- [The Slaughtered Lamb](https://www.urbanpubsandbars.com/venues/slaughtered-lamb). A busy London pub suitable for large groups, next door to the Hedge House.
+- [The Holy Tavern](https://www.tripadvisor.co.uk/Restaurant_Review-g186338-d23938423-Reviews-The_Holy_Tavern-London_England.html). One of the UK's oldest pubs and a PostHog favorite during summer, 7 minutes walk from the Hedge House.
+- [Gazette](https://www.gazettebrasserie.co.uk/clerkenwell). French restaurant inside the Marrable's Hotel, just 3 minutes walk from the Hedge House.
+- [Whitecross Market](https://www.whitecross-street-market.co.uk/). Lots of food options, open every day for lunch, 5 minutes walk from the Hedge House.
+- [Flight Club](https://flightclubdarts.com/uk/london-shoreditch/). Social darts, food and drinks for large groups, many locations.
+- [The Bill Murray](https://www.angelcomedy.co.uk/bill-murray/). North London comedy club with regular shows, good for small groups.
+- [West End shows](https://www.londontheatre.co.uk/). Wide variety of shows, with ticket prices much lower than in the US.
+- [Museums](https://www.visitlondon.com/things-to-do/sightseeing/london-attraction/museum). London has a wide variety of free museums, many with late-night events.
+
+For more, check the <PrivateLink url="https://posthog.slack.com/archives/C028MN3UUP5">#London Slack channel</PrivateLink> – it has a canvas with further details for visitors, including how to use the Hedge House music system.
+
 ## Border Control
 
 Quite often you will be required to travel to places where some kind of visa is required even if just a visitor visa like an [ESTA](https://esta.cbp.dhs.gov/). When entering places like the US, for work purposes, border control agents may ask the purpose of your trip. In these instances it's best to avoid using PostHog terms like "onboarding" as this can be confusing. It's much better to more generally describe the purpose of your trip. In nearly all circumstances this will be to hang out with your colleagues and to take part in team building exercises. It's usually good to emphasize that you'll be on a short trip and that the company is paying for everything. You should be prepared with the exact addresses of where you are staying and the details of your flight out of the country. 
@@ -143,7 +161,7 @@ For all company offsites, it's best to describe this as a company gathering wher
 
 Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
 
-In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to Kendal as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
+In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to Kendal as soon as possible. We will assist with making a claim based on our <PrivateLink url="https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link">policy binders</PrivateLink>.
 
 ### Flight delays
 
@@ -155,7 +173,7 @@ Sometimes at PostHog you will be asked to travel to places you've never been bef
 
 ## How to plan an offsite in 8 weeks - a checklist
 
-Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. Here's a [spreadsheet template](https://docs.google.com/spreadsheets/d/1aeRGN8DWqMQbQ9duSMCqCO2JJbPkQuSDt_Jz2jx10UI/edit?usp=sharing) you can use with your team to democratically vote for the meetup location, and in other tabs, include travel information (in case someone's flight gets delayed/cancelled), schedule, project ideas, team activities, etc. To use any of the templates, create a copy to your own drive and edit as you see fit.
+Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. Here's a <PrivateLink url="https://docs.google.com/spreadsheets/d/1aeRGN8DWqMQbQ9duSMCqCO2JJbPkQuSDt_Jz2jx10UI/edit?usp=sharing">spreadsheet template</PrivateLink> you can use with your team to democratically vote for the meetup location, and in other tabs, include travel information (in case someone's flight gets delayed/cancelled), schedule, project ideas, team activities, etc. To use any of the templates, create a copy to your own drive and edit as you see fit.
 
 **8 weeks out**
 
@@ -191,7 +209,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
     4. Have the new team member book travel as usual
 - [ ] Draft rough schedule
   - Building the schedule as a [separate Google Calendar](https://support.google.com/calendar/answer/37095?hl=en) that can eventually be [shared with the team](https://support.google.com/calendar/answer/37082?hl=en) will allow you to flexibly move sessions around as you finalize the itinerary
-- [ ] Send [info gathering form](https://docs.google.com/forms/d/1QWhbQbHxoq--XWhMfTXeccTaq1ru0v_VPhuwOA3xS48/edit?usp=sharing)
+- [ ] Send <PrivateLink url="https://docs.google.com/forms/d/1QWhbQbHxoq--XWhMfTXeccTaq1ru0v_VPhuwOA3xS48/edit?usp=sharing">info gathering form</PrivateLink>
   - Use this form to collect important information like flight details, clothing sizes for merch, dietary restriction, and preferences for things like sharing rooms
 - [ ] Brainstorm merch/meeting room decorations (generally just for company-wide offsites)
   - Having some branded merch to commemorate the offsite upon arrival is a great way to welcome people and get them excited for their time together (generally this is for whole team offsites only for budgetary reasons)
@@ -200,7 +218,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 **6 weeks out**
 
-- [ ] Draft [budget](https://docs.google.com/spreadsheets/d/1ZwDgcoEtDMICtxuozwEfJUHqJH12_E-jyylGQbWCLQQ/edit?usp=sharing)
+- [ ] Draft <PrivateLink url="https://docs.google.com/spreadsheets/d/1ZwDgcoEtDMICtxuozwEfJUHqJH12_E-jyylGQbWCLQQ/edit?usp=sharing">budget</PrivateLink>
   - Using the tentative schedule, you can begin to estimate a rough budget to guide planning. Here are some benchmarks to use, however these will vary a lot based on location, size of team, and how cost-constrained you are:
     - Accommodations = $200/night/person
     - Intercontinental airfare = $1000/person; intracontinental airfare = $500/person
@@ -215,7 +233,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 **5 weeks out**
 
-- [ ] Assign [rooms](https://docs.google.com/spreadsheets/d/1vqCz78COxulLU6aGnk9m7QmunI6wZTYdYqCE-fuTw1Y/edit?usp=sharing)
+- [ ] Assign <PrivateLink url="https://docs.google.com/spreadsheets/d/1vqCz78COxulLU6aGnk9m7QmunI6wZTYdYqCE-fuTw1Y/edit?usp=sharing">rooms</PrivateLink>
   - Using preferences from the info gathering form regarding sharing rooms, assign accordingly
 - [ ] Secure visas where necessary
 - [ ] Review and finalize merch proofs
@@ -223,7 +241,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 - [ ] Finalize budget
 - [ ] Assign session leads & secretaries
   - Decide in advance who is going to record the notes from each session - it is _really_ easy for post-offsite followup to fall through the cracks
-  - With the schedule finalized, assign folks as session leads to design [session plans](https://docs.google.com/document/d/1NHPr0dvKtbQeEQRTUdYnCPq_i3J1twGrHtUSOgB4pP4/edit?usp=sharing)
+  - With the schedule finalized, assign folks as session leads to design <PrivateLink url="https://docs.google.com/document/d/1NHPr0dvKtbQeEQRTUdYnCPq_i3J1twGrHtUSOgB4pP4/edit?usp=sharing">session plans</PrivateLink>
 
 **4 weeks out**
 
@@ -236,8 +254,8 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 **3 weeks out**
 
 - [ ] Draft session plans/presentations due
-- [ ] Draft [offsite guide package](https://docs.google.com/document/d/1fqi0vxWjwaZDw677pg86GVhXCJdArLL7hLVGxJHDCIQ/edit?usp=sharing)
-- [ ] Design and print [superlatives/awards](https://docs.google.com/spreadsheets/d/1kVUCOXWTKGGBJWdoPhzkUzPeKZ9fDhnvK8GaxE4qRSM/edit?usp=sharing)
+- [ ] Draft <PrivateLink url="https://docs.google.com/document/d/1fqi0vxWjwaZDw677pg86GVhXCJdArLL7hLVGxJHDCIQ/edit?usp=sharing">offsite guide package</PrivateLink>
+- [ ] Design and print <PrivateLink url="https://docs.google.com/spreadsheets/d/1kVUCOXWTKGGBJWdoPhzkUzPeKZ9fDhnvK8GaxE4qRSM/edit?usp=sharing">superlatives/awards</PrivateLink>
   - One activity we've found quite popular is giving out superlative awards to the team during the closing ceremonies
 
 **2 Weeks Out**
@@ -262,7 +280,7 @@ Below is a rough timeline for planning your next offsite, as well as links to te
 
 **1 week after**
 - [ ] Collect post-mortem feedback from the team
-  - We generally do this as an [open GitHub issue](https://github.com/PostHog/company-internal/issues/new?assignees=&labels=&projects=&template=small-team-offsite-retro.md&title=%5BRETRO%5D+%7Bteam_name%7D+%7Byear%7D+%7Blocation%7D+offsite), but you can also create a Google form to facilitate this
+  - We generally do this as an <PrivateLink url="https://github.com/PostHog/company-internal/issues/new?assignees=&amp;labels=&amp;projects=&amp;template=small-team-offsite-retro.md&amp;title=%5BRETRO%5D+%7Bteam_name%7D+%7Byear%7D+%7Blocation%7D+offsite">open GitHub issue</PrivateLink>, but you can also create a Google form to facilitate this
 
 
 **2 weeks after**

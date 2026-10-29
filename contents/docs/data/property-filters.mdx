@@ -18,7 +18,11 @@ String operators work on text-based properties. These are the most common operat
 |----------|-------------|
 | `exact` / `is not` | Matches when the property value equals (or does not equal) any value in the list |
 | `contains` / `does not contain` | Matches when the property value contains (or does not contain) the substring |
+| `starts with` / `does not start with` | Matches when the property value starts (or does not start) with the substring |
+| `ends with` / `does not end with` | Matches when the property value ends (or does not end) with the substring |
 | `matches regex` / `does not match regex` | Matches when the property value matches (or does not match) a regular expression |
+
+> **Tip:** To target by email domain, use `ends with` instead of `contains`. For example, `email contains @posthog.com` also matches `bad-person@posthog.computer.com`, while `email ends with @posthog.com` only matches addresses on that exact domain.
 
 String properties also support [semver operators](#semver-operators) for comparing version strings like `1.2.3`. These appear alongside the regular string operators in the filter dropdown.
 

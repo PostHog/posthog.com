@@ -70,7 +70,7 @@ Outdated SDKs miss bug fixes, performance improvements, and new features, and ma
 ## Fix it manually
 
 1. Open the **SDK health** page (in the Health section of the app). It lists every SDK you're sending events from, the versions in use, the latest available version, and how far behind each one is.
-2. For each outdated SDK, bump the dependency in your package manager – `npm`/`yarn`/`pnpm`, `pip`/`poetry`, `gem`, `go get`, etc. – and redeploy.
+2. For each outdated SDK, bump the dependency in your package manager – `npm`/`yarn`/`pnpm`/`bun`, `pip`/`poetry`, `gem`, `go get`, etc. – and redeploy.
 3. For browser-snippet installs, make sure you're loading the latest snippet.
 4. Check the SDK's changelog for any breaking changes before upgrading.
 
@@ -83,7 +83,7 @@ Click on any version number in the SDK health table to open a dropdown with two 
 - **Events on Activity page** – Opens the [Activity page](/docs/data/events) with filters pre-configured for the SDK type, version, and events from the last 7 days. Useful if you prefer a visual interface over writing queries.
 - **SQL query** – Opens the [SQL editor](/docs/hogql) with a HogQL query showing events for that SDK version. Useful if you want to customize the query or export data.
 
-## Fix it automatically with the Inbox and PostHog Code
+## Fix it automatically with the Inbox and PostHog Desktop
 
 If you've connected your repository to PostHog, enable health checks as a [signal source](/docs/self-driving/inbox/sources) and the agent will:
 

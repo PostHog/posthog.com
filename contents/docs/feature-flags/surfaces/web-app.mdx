@@ -1,0 +1,74 @@
+---
+title: Feature flags in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is home base for feature flags. It's where you create a flag, decide who gets it, watch the rollout, and turn it off when you need to – all without a deploy.
+
+Open **Feature flags** in [PostHog](https://app.posthog.com) to see every flag in the project with its status, type, and last-modified date. Open a flag to edit its release conditions, inspect which users match, test how it evaluates, and see the activity log of who changed what.
+
+## Before you start
+
+1. **Set up Feature Flags** – [install a PostHog SDK](/docs/feature-flags/installation) so your app can evaluate flags.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **[Create feature flags](/docs/feature-flags/creating-feature-flags)** – set up boolean, multivariate, or remote config flags and define their release conditions.
+- **[Add flag code to your app](/docs/feature-flags/adding-feature-flag-code)** – the snippet that reads the flag on the other side, for each SDK.
+- **[Test your flag](/docs/feature-flags/testing)** – check how a flag evaluates for a specific user before you widen the rollout.
+- **[See how a flag is used](#see-how-a-flag-is-used)** – watch how often your code called a flag and which values it returned, without building an insight.
+- **[Schedule flag changes](/docs/feature-flags/scheduled-flag-changes)** – queue an enable, disable, or condition change for a future date, including on a recurring schedule.
+- **[Manage early access features](/docs/feature-flags/early-access-feature-management)** – let users opt themselves in and out of a flagged feature.
+- **[Clean up stale flags](/docs/feature-flags/cleaning-up-stale-flags)** – find flags nothing has evaluated recently and retire them along with the dead code.
+- **Manage flags with [PostHog AI](/docs/posthog-ai)** – describe the flag you want and PostHog AI creates or updates it, or ask it which flags have gone stale. It's an interaction mode inside the web app, not a separate surface. See [Manage flags with PostHog AI](/docs/feature-flags/manage-flags-ai).
+
+Before you widen a rollout, the flag detail view also shows the **blast radius** for a release condition – roughly how many users it would affect relative to your total – so a "10% of enterprise accounts" change isn't a guess.
+
+## See how a flag is used
+
+Open a flag and go to the **Usage** tab to see how often your code called it and what it returned. PostHog builds the charts from the `$feature_flag_called` events your SDK sends:
+
+- **Feature flag called total volume** – calls over time, broken down by the value each caller received.
+- **Feature flag calls made by unique users per variant** – a table of how many distinct users received each value. Flags that aggregate by a [group](/docs/feature-flags/user-and-group-targeting) count groups instead.
+
+One date filter drives both charts, starting at the last 30 days. Your selection is stored in the URL, so you can send someone a link to the exact window you were looking at. Underneath the charts, an event table lists individual `$feature_flag_called` calls with the value each one returned, on its own date range.
+
+Send [enriched flag analytics](/docs/libraries/js/usage#enriched-flag-analytics) from your app to get two more charts here, covering how many people viewed the feature and how many interacted with it.
+
+These charts aren't saved insights, so they don't add anything to your insight or dashboard lists. If you want a usage dashboard you can edit, share, and subscribe to, create one by calling `POST /api/projects/:project_id/feature_flags/:id/dashboard/`. The flag's `usage_dashboard` field then points to it, and the **Usage** tab shows that dashboard instead of the charts above. Flags that already have a usage dashboard keep showing it, which is why older flags can look different from new ones.
+
+## Self-driving reports
+
+A [scout](/docs/self-driving/scouts) reads your flag roster against the `$feature_flag_called` stream, finds places where the flags in your PostHog project no longer match the flag checks in your code, and files what it finds as a [report](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox). To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+### What the flags scout watches for
+
+The scout is auditing the wiring between the flag UI and your code, not judging which features should be on. A flag whose evaluation stream matches its configured state is left alone, however its volume trends. What it looks for instead:
+
+- **Evaluation cliffs** – an active, healthy flag whose call volume falls off a cliff. Deactivating a flag doesn't stop `$feature_flag_called` events, so a cliff means the *code* call disappeared: a deploy removed the check, or an SDK path broke. If the flag was gating something users can see, they lost the feature.
+- **Ghost flags** – code calling a flag key with nothing behind it, because the flag was deleted or the key was typo'd. The SDK returns `false` without erroring, so shipped code can run the fallback path for months and nothing in the flag UI ever shows it.
+- **Response-distribution shifts** – a flag's mix of responses moving with no matching edit in its activity log. That usually means condition drift: a person property, group property, or [cohort](/docs/data/cohorts) a release condition targets changed underneath the flag.
+- **Flag debt** – stale flags, fully rolled-out flags still checked in hot paths, and deactivated or 0%-rollout flags still taking heavy call volume, all bundled into one cleanup report rather than one report per flag.
+
+Flags attached to an [experiment](/docs/experiments) are the experiments scout's territory, so this one skips them.
+
+### How a finding reaches you
+
+Most flag findings are an investigation rather than a one-line change, so the scout files a report for a human and stops there – no pull request, no repository attached. A dead check that a cliff exposed might be intentional cleanup or a broken deploy, and only someone who knows the feature can tell which.
+
+When the fix *is* an obvious code change – a ghost flag whose dead check just needs deleting, for example – the scout marks the report immediately actionable against your connected repository, and a coding agent opens a draft pull request. You review it in the inbox and merge it on GitHub, so a human is still the last step.
+
+### What you can do with a report
+
+- **Read the report** – the flag key, what contradicts its configured state, and the numbers behind it: baseline versus current call volume, reach, and the date the change started.
+- **Ask questions** – start a discussion with an agent about the report to dig further before you act.
+- **Review the draft pull request** – see the files it changed, the diff, and its checks before it goes anywhere.
+- **Merge** – the pull request opens on GitHub, and PostHog reflects the merged state back.
+
+## Related
+
+- Manage the same flags from your editor over [MCP](/docs/feature-flags/surfaces/mcp).
+- Evaluate and manage flags programmatically with the [API](/docs/feature-flags/surfaces/api).
+- Understand how a value gets decided in [server-side local evaluation](/docs/feature-flags/local-evaluation).

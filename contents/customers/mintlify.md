@@ -2,7 +2,7 @@
 title: 'How Mintlify launched user-facing analytics, powered by PostHog'
 customer: Mintlify
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/mintlify_posthog_f60afa6a38.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/Mintlify_1920x1080_ef34bd690a.png
 date: 2023-04-06
 ---
 

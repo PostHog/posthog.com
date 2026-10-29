@@ -70,8 +70,8 @@ export default function Workflow(): JSX.Element {
 
                 <h2>But if you like trying new things…</h2>
                 <p>
-                    PostHog Code, our AI code editor (available on desktop and soon on the web), has everything you've
-                    read about above, <em>but also comes with features you can't get anywhere else.</em>
+                    PostHog Desktop, our AI code editor (available on desktop and soon on the web), has everything
+                    you've read about above, <em>but also comes with features you can't get anywhere else.</em>
                 </p>
                 <ul>
                     <li>
@@ -81,8 +81,8 @@ export default function Workflow(): JSX.Element {
                     <li>Control Center – Monitor multiple agents all in one place</li>
                 </ul>
                 <p>
-                    With PostHog Code you don't need a separate subscription to Claude Code or Codex – you get access to
-                    all the latest AI models directly within PostHog, and it costs about the same.
+                    With PostHog Desktop you don't need a separate subscription to Claude Code or Codex – you get access
+                    to all the latest AI models directly within PostHog, and it costs about the same.
                 </p>
             </WhyPostHogViewer>
         </>

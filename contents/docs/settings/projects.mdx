@@ -3,14 +3,14 @@ title: Projects
 sidebar: Docs
 showTitle: true
 availability:
-    free: partial
-    selfServe: partial
-    enterprise: full
+  free: partial
+  selfServe: partial
+  enterprise: full
 ---
 
 A project is a silo of data within PostHog. All data belongs to a single project and all queries are project-specific.
 
-Every project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/integrate), as well as to connect to our [API](/docs/api). You can always regenerate this token, but keep in mind that the old one will be immediately revoked.
+Every project has its own distinct write-only token, which you can use to initialize your [integration of choice](/docs/getting-started/install), as well as to connect to our [API](/docs/api). You can always regenerate this token, but keep in mind that the old one will be immediately revoked.
 
 Every new organization (including the one created for you on account creation) comes with a fresh project named "Default Project". You can rename or delete it as you see fit.
 
@@ -19,15 +19,50 @@ To switch between projects, navigate to project settings, or create new projects
 ## How to organize projects
 
 For most companies, we recommend creating **three projects**:
+
 1. Local Development - when you're running the app on your own device
 2. Staging - when you're running your app on a staging server
 3. Production - for all your production data (e.g. your live website/app)
 
 This way you can test out analytics in development and staging environments, while keeping that test data separate from production.
 
+Usage from every project in your organization counts toward one bill and one free allowance, so extra projects don't give you extra free usage. The free plan includes one project, so you need a paid plan to create separate development and staging projects. See [billing common questions](/docs/billing/common-questions#do-projects-share-usage-and-free-allowances) for details.
+
 We also **strongly recommend** keeping your apps and marketing website on the same production project. This way you can track the user journey holistically (e.g. how many blog readers convert to paid product users) and see all the relevant events for a person in one place.
 
-You can still query data for your app or marketing website separately if needed. A way to do this is [filtering](/docs/product-analytics/trends/filters) by the `host` property, for example setting `host` to `posthog.com`. Alternatively, you could set [super properties](/docs/libraries/js/features#super-properties) and then filter by them.
+You can still query data for your app or marketing website separately if needed. A way to do this is [filtering](/docs/product-analytics/trends/filters) by the `host` property, for example setting `host` to `posthog.com`. Alternatively, you could set [super properties](/docs/libraries/js/usage#super-properties) and then filter by them.
+
+### Grouping projects
+
+If your organization has many projects across different products or services, you can assign each project to a group. Grouped projects appear together in the project switcher, making it easier to find the right environment.
+
+For example, you might create groups like "Marketing site" and "Main app", then assign the dev, staging, and production projects for each product to its group. Ungrouped projects appear under **Other projects** in the switcher.
+
+To set a project's group:
+
+1. Go to [**Settings**](https://app.posthog.com/settings/project#display-name) > **Project** > **Customization** > **Project details**
+2. Under **Tags**, enter a name in the **Project group** field
+3. Click **Save**
+
+You can select an existing group or type a new name. Each project can belong to only one group. Group names are case-insensitive and display in title case (e.g., "production apps" displays as "Production Apps").
+
+Only organization admins and owners can change project groups.
+
+### Project logo
+
+You can upload a custom logo for your project. The logo appears in the project switcher and account menu, making it easier to identify projects at a glance.
+
+To upload a project logo:
+
+1. Go to [**Settings**](https://app.posthog.com/settings/project#display-name) > **Project** > **Customization** > **Project details**
+2. Click **Upload** next to the project name and select an image
+3. Click **Save**
+
+To remove a logo, hover over the current logo, click the remove button, and then click **Save**.
+
+Only project admins and organization admins or owners can upload or remove project logos.
+
+If no logo is uploaded, the first character of the project name is used as the icon. You can use an emoji at the start of your project name (e.g., "🚀 My Project") as the project icon in the menu.
 
 ### Project settings inheritance
 
@@ -48,9 +83,11 @@ IP data capture can be configured at both the organization and project levels:
 Individual projects can override organization defaults to meet specific privacy requirements.
 
 It's best to use separate projects for:
+
 - Apps that are entirely separate products with unlinked authentication systems
 - Admin apps that aren't customer-facing products
 - Internal websites and services
+- [Embedded analytics](/docs/data/embedded-analytics-projects) products that need to isolate each customer's data
 
 ## Moving projects between organizations
 

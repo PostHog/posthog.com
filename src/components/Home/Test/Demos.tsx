@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import OSButton from 'components/OSButton'
 import { useApp } from '../../../context/App'
 import WistiaVideo, { WistiaVideoRef } from 'components/WistiaVideo'
@@ -421,14 +421,13 @@ const Image = ({ src, className }: { src: string; className?: string }) => {
 }
 
 // Customer constants and breakdowns
-const COL1 = ['ycombinator', 'airbus', 'trust', 'lovable', 'startengine', 'researchgate', 'exa', 'heygen']
+const COL1 = ['ycombinator', 'airbus', 'trust', 'startengine', 'researchgate', 'exa', 'heygen']
 const COL2 = ['supabase', 'mistralai', 'elevenlabs', 'hasura', 'raycast', 'posthog']
 
 const companyBreakdowns = {
     colorful: { col1: 'Colorful logos', col2: '"Sleek" logos' },
     hardware: { col1: 'Hardware companies', col2: 'Not hardware companies' },
     planes: { col1: 'Builds planes', col2: "Doesn't build planes (yet)" },
-    highValue: { col1: "Companies with >1 $B's in their valuations", col2: 'Everyone else (for now)' },
     caseStudy: { col1: 'Companies with PostHog case studies', col2: 'Companies who should do case studies' },
     easyToYell: { col1: 'Names you can yell easily', col2: 'Names that require breath control' },
     goodBandName: { col1: 'Good band names', col2: 'Could be mistaken for pharmaceuticals' },
@@ -436,25 +435,24 @@ const companyBreakdowns = {
         col1: 'Companies you can explain to your parents',
         col2: 'Companies your parents will never understand',
     },
-    shortNames: { col1: 'Names with 7 letters or less', col2: 'Names you can easily mistype' },
+    shortNames: { col1: 'Names with 7 letters or fewer', col2: 'Names you can easily mistype' },
     realWords: { col1: 'Real words', col2: 'Not real words' },
     american: { col1: 'Founded in America', col2: 'Not founded in America' },
     pokemon: { col1: 'Could be a Pokémon', col2: 'Could be a Bond Villain' },
 }
 
 const companyAttributes = {
-    colorful: ['ycombinator', 'trust', 'lovable', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
+    colorful: ['ycombinator', 'trust', 'supabase', 'startengine', 'mistralai', 'raycast', 'posthog'],
     hardware: ['airbus', 'posthog'],
     planes: ['airbus'],
-    highValue: ['airbus', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'mistralai'],
-    caseStudy: ['ycombinator', 'elevenlabs', 'lovable', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
+    caseStudy: ['ycombinator', 'elevenlabs', 'supabase', 'hasura', 'researchgate', 'exa', 'posthog'],
     easyToYell: ['airbus', 'trust', 'raycast', 'exa', 'heygen', 'posthog'],
-    goodBandName: ['elevenlabs', 'lovable', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
-    explainable: ['ycombinator', 'airbus', 'lovable', 'startengine', 'researchgate', 'exa'],
-    shortNames: ['airbus', 'trust', 'lovable', 'hasura', 'raycast', 'exa', 'heygen', 'posthog'],
-    realWords: ['airbus', 'trust', 'lovable', 'elevenlabs', 'startengine', 'researchgate', 'posthog'],
+    goodBandName: ['elevenlabs', 'trust', 'startengine', 'raycast', 'researchgate', 'posthog'],
+    explainable: ['ycombinator', 'airbus', 'startengine', 'researchgate', 'exa'],
+    shortNames: ['airbus', 'trust', 'hasura', 'raycast', 'exa', 'heygen', 'posthog'],
+    realWords: ['airbus', 'trust', 'elevenlabs', 'startengine', 'researchgate', 'posthog'],
     american: ['ycombinator', 'trust', 'supabase', 'hasura', 'startengine', 'researchgate', 'exa', 'heygen', 'posthog'],
-    pokemon: ['lovable', 'supabase', 'hasura', 'mistralai', 'raycast', 'exa', 'heygen'],
+    pokemon: ['supabase', 'hasura', 'mistralai', 'raycast', 'exa', 'heygen'],
 }
 
 const Customers = () => {
@@ -738,6 +736,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
                     className="inline-block"
                     variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
                     color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                    width="auto"
                 />
             )
         },
@@ -746,7 +745,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'ButtonDataStack',
         kind: 'flow',
         props: [],
-        Editor: () => <Button url="/data-stack">README: PostHog data stack.md</Button>,
+        Editor: () => <Button url="/context-warehouse">README: PostHog data stack.md</Button>,
     },
     {
         name: 'ButtonPricing',
@@ -843,7 +842,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 // Main Component
 // ============================================
 
-export default function Home2() {
+export default function Home2({ headingTag: Heading = 'h1' }: { headingTag?: 'h1' | 'h2' }) {
     const { siteSettings } = useApp()
     const videoRef = useRef<WistiaVideoRef>(null)
     const tvScreenRef = useRef<HTMLDivElement>(null)
@@ -980,7 +979,7 @@ export default function Home2() {
                 {/* Video Hero Section */}
                 <div className="flex flex-col @2xl:flex-row gap-8">
                     <div className="flex-1 @2xl:pt-2 @4xl:pt-8 @5xl:pt-8 @2xl:pt-16">
-                        <h1 className="text-4xl font-bold mb-4">The AI platform for engineers</h1>
+                        <Heading className="text-4xl font-bold mb-4">The AI platform for engineers</Heading>
                         <p className="text-xl mb-8 mt-0">
                             Debug products. Ship features faster. <br />
                             With all user and product data in one stack.

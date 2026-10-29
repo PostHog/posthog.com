@@ -24,10 +24,12 @@ import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { Link, navigate } from 'gatsby'
-import Inbox from 'components/Inbox'
+import LegacyQuestionsRedirect from 'components/Forum/LegacyQuestionsRedirect'
+import Forum from 'components/Forum'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
+import LearnShell from 'components/PocketGuides/LearnShell'
 import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
@@ -35,28 +37,9 @@ import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
-import { MOTION_LAYER, WINDOW_BG } from '../../constants/frostedSurfaces'
+import { WINDOW_SCHEME } from '../../constants/frostedSurfaces'
 
-const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
-    if (!array) return false
-
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i]
-
-        if (element.url?.split('?')[0] === value) {
-            return true
-        }
-
-        if (element.children) {
-            const found = recursiveSearch(element.children, value)
-            if (found) {
-                return true
-            }
-        }
-    }
-
-    return false
-}
+import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
 
 const snapThreshold = -50
 
@@ -82,11 +65,18 @@ const Router = (props) => {
     const { appWindow } = useWindow()
     const { children, path } = props
 
-    if (/^\/questions/.test(path)) {
-        return <Inbox {...props} />
+    if (/^\/questions(\/|$)/.test(path)) {
+        return <LegacyQuestionsRedirect path={path} />
+    }
+    if (/^\/forum(\/|$)/.test(path)) {
+        return <Forum {...props} />
     }
     if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
         return <Handbook {...props} />
+    }
+    // Learn pages share one shell, so the sidebar stays mounted between them.
+    if (/^\/learn\/[^/]+/.test(path)) {
+        return <LearnShell path={path}>{children}</LearnShell>
     }
     if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
         return <BlogPost {...props} />
@@ -204,7 +194,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [hasDeveloperMode, setHasDeveloperMode] = useState(false)
     const hasToolbar = item.appSettings?.toolbar
     const hideTitle = item.appSettings?.hideTitle
-    const isCompositorActive = animating || dragging || leftDragResizing || closing
     const inView = useMemo(() => {
         if (item.expanded) return true
 
@@ -232,7 +221,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const parent =
         (appMenu as Menu).find(({ children, url }) => {
             const currentURL = item?.path
-            return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
+            return currentURL === url?.split('?')[0] || containsURL(children, currentURL)
         }) ||
         appMenu.find(({ url }) => url === `/${item?.path?.split('/')[1]}`) ||
         appMenu.find(({ name }) => name === 'Docs')
@@ -240,10 +229,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const internalMenu = parent?.children || []
 
     const getActiveInternalMenu = useCallback(() => {
-        return internalMenu?.find((menuItem: MenuItem) => {
-            const currentURL = item?.path
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
+        return getActiveMenuSection<MenuItem>(internalMenu, item?.path)
     }, [internalMenu, item])
 
     const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(getActiveInternalMenu())
@@ -546,7 +532,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     }, [item.key])
 
     useEffect(() => {
-        if (!item.appSettings?.closeOnEscape || focusedWindow !== item || closing) return
+        if (!item.appSettings?.modal?.type || focusedWindow !== item || closing) return
 
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key !== 'Escape' || event.defaultPrevented) return
@@ -694,7 +680,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                 {item.appSettings?.size?.fixed && (
                     <div
                         onClick={handleClose}
-                        className={`fixed inset-0 z-50 bg-black/50 ${
+                        className={`fixed inset-0 z-50 bg-black/50 pointer-events-auto print:hidden ${
                             closing ? 'animate-overlay-fade-out' : !skipsOpenAnimation ? 'animate-overlay-fade-in' : ''
                         }`}
                     />
@@ -722,8 +708,9 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     data-expanded={item.expanded || undefined}
                     data-windowed={item.windowed || undefined}
                     data-snapped={item.snapped || undefined}
-                    data-scheme="tertiary"
-                    className={`@container relative overflow-hidden ${
+                    data-focused={focusedWindow === item || undefined}
+                    data-scheme={WINDOW_SCHEME}
+                    className={`@container relative overflow-hidden pointer-events-auto ${
                         item.appSettings?.size?.fixed
                             ? closing
                                 ? 'animate-window-slide-up'
@@ -737,15 +724,16 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : ''
                     } ${
                         item.appSettings?.size?.fixed
-                            ? '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)]'
+                            ? // The max height keeps auto-height modals inside the desktop area on short
+                              // screens — without it they grow past the bottom edge and get clipped by the
+                              // desktop's `overflow-clip` with nothing left to scroll.
+                              '!absolute top-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1rem)] max-h-[calc(100%-1rem)]'
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
-                    } !select-auto flex flex-col border-primary ${WINDOW_BG} ${
-                        isCompositorActive ? MOTION_LAYER : ''
-                    } rounded-lg ${item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''} ${
-                        item.expanded ? 'shadow-none' : 'shadow-md'
-                    } ${
+                    } !select-auto flex flex-col border-primary bg-primary rounded-lg ${
+                        item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''
+                    } ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
                         item.expanded
                             ? 'rounded-tr-none rounded-tl-none'
                             : item.snapped === 'left'
@@ -765,7 +753,15 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : undefined
                     }
                 >
-                    <div className={`${hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''}`}>
+                    <div
+                        className={`relative print:hidden ${
+                            hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''
+                        } ${
+                            hasToolbar && item.appSettings?.toolbarFade
+                                ? "z-20 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-4 after:bg-primary after:[mask-image:linear-gradient(to_bottom,black,transparent)] after:content-['']"
+                                : ''
+                        }`}
+                    >
                         {hasToolbar && (
                             <>
                                 {!hideTitle && (
@@ -830,9 +826,19 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     </div>
                     <div
                         ref={contentRef}
-                        className={`size-full flex-grow ${
+                        data-app="AppWindowContent"
+                        // With a toolbar above it, the content must be able to shrink below its content's minimum
+                        // height, or it overflows the bottom of the window by the toolbar's height.
+                        className={`relative size-full flex-grow ${hasToolbar ? 'min-h-0' : ''} ${
                             chrome
-                                ? `overflow-hidden rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
+                                ? `${
+                                      // A modal's auto height makes percentage heights inside it resolve to
+                                      // `auto`, so its own ScrollAreas never overflow and can't scroll. Scroll
+                                      // the content here instead of clipping whatever doesn't fit.
+                                      item.appSettings?.size?.fixed
+                                          ? 'overflow-x-hidden overflow-y-auto'
+                                          : 'overflow-clip min-h-0'
+                                  } rounded-lg ${hasToolbar ? 'rounded-t-none' : ''} ${
                                       item.expanded
                                           ? 'rounded-tr-none rounded-tl-none'
                                           : item.snapped === 'left'

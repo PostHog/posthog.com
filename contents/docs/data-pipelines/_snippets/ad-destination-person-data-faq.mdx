@@ -1,0 +1,10 @@
+### Why is person data missing from my ad destination events?
+
+Ad destinations filter the realtime event stream. This means they use person data as it exists at the exact moment the event is processed, not data added later.
+
+A common issue occurs when a backend event triggers the destination, but person properties are set by a frontend `identify` call that happens afterward. If the identify call merges with the person *after* the trigger event is processed, the destination won't have access to that data.
+
+To fix this, either:
+
+1. **Include the data directly in the event** that triggers the destination (e.g., pass email, phone, or other required properties as event properties)
+2. **Ensure the identify call happens before** the events you want to send to the ad platform

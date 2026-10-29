@@ -111,7 +111,7 @@ You can use magic placeholders or strings to replace the project token, project 
 | `<ph_app_host>`            | Your PostHog instance URL     | n/a                                             |
 | `<ph_client_api_host>`     | Your PostHog client API host  | `https://us.i.posthog.com`                      |
 | `<ph_region>`              | Your PostHog region (us/eu)   | n/a                                             |
-| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2026-05-30`                                    |
+| `<ph_posthog_js_defaults>` | Default values for posthog-js | `2026-08-30`                                    |
 | `<ph_proxy_path>`          | Your proxy path               | `relay-XXXX` (last 4 digits of project token)   |
 
 You can use these placeholders in the code block like this:
@@ -119,6 +119,8 @@ You can use these placeholders in the code block like this:
 ```js
 const client = new PostHog('<ph_project_token>', { host: '<ph_client_api_host>' })
 ```
+
+Always use `<ph_posthog_js_defaults>` for the posthog-js `defaults` option in a code example. Do not type a date. When posthog-js releases a new snapshot, change the date in `src/components/CodeBlock/index.tsx`, and every example updates. The `pnpm check:posthog-js-defaults` check fails a PR that adds a hardcoded date to a code example.
 
 ## Docs components
 
@@ -287,13 +289,30 @@ The `<AskMax>` component opens the PostHog AI chat window directly on the websit
 />
 ```
 
-Use `<AskAIInput>` for troubleshooting sections:
+`<AskAIInput>` renders a question box that opens the PostHog AI chat window seeded with what the reader typed, plus the current page as context. **Every docs page already gets one automatically under the title**, so don't add it by hand to a page under `/docs` – you'll end up with two.
+
+The shortcode is still available for pages outside `/docs` that want one:
 
 ```mdx
-## Have a question? Ask PostHog AI
-
 <AskAIInput placeholder="Ask about error tracking..." />
 ```
+
+#### Linking to PostHog AI in the app
+
+The `<MaxCTA>` component renders a callout that sends readers into the PostHog app with a question for PostHog AI:
+
+```jsx
+<MaxCTA question="What changed across my product this week?" />
+```
+
+Under the hood it builds a URL using the `#panel=max:` hash format, which you can also use directly in any link. The question must be URL-encoded (`encodeURIComponent`), and an optional prefix before the question controls what happens when the panel opens:
+
+| URL | Behavior |
+|-----|----------|
+| `https://app.posthog.com/#panel=max:What%20changed%3F` | Opens the PostHog AI side panel with "What changed?" pre-loaded, so the user can edit it before sending |
+| `https://app.posthog.com/#panel=max:!What%20changed%3F` | Auto-runs "What changed?" immediately, without waiting for the user to press enter |
+
+Use the pre-load form when the reader should review or adapt the question first, and the auto-run (`!`) form for CTAs where the question is fully self-contained, like `<MaxCTA>` does. The prefix parsing lives in `parseCommandString` in [`maxLogic`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/max/maxLogic.tsx) in the app repo.
 
 ## Platform logos
 

@@ -14,7 +14,7 @@ export const mparticle = {
                 no_code_setup: true,
                 built_in_analytics: 'Limited',
             },
-         },
+        },
         product_analytics: {
             available: 'Limited',
         },

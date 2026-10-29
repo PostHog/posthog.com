@@ -9,6 +9,8 @@ import SidebarSection from 'components/PostLayout/SidebarSection'
 
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { User } from '../../hooks/useUser'
+import { useForumSubscriptions } from 'components/Forum/hooks'
+import { ForumSubscription } from 'lib/strapi'
 
 export const Avatar = (props: { className?: string; src?: string; color?: string }) => {
     return (
@@ -109,9 +111,22 @@ export const Profile = ({ user }: { user: User }) => {
     )
 }
 
+const subscriptionLink = ({ forumTopic, forumTag }: ForumSubscription) =>
+    forumTopic
+        ? { label: `#${forumTopic.slug}`, to: `/forum/t/${forumTopic.slug}` }
+        : forumTag?.topic
+        ? {
+              label: `#${forumTag.topic.slug} › ${forumTag.label}`,
+              to: `/forum/t/${forumTag.topic.slug}?tag=${forumTag.slug}`,
+          }
+        : null
+
 export default function Sidebar() {
     const { user, logout } = useUser()
-    const topicSubscriptions = user?.profile?.topicSubscriptions
+    const { subscriptions } = useForumSubscriptions()
+    const followedLinks = subscriptions
+        .map(subscriptionLink)
+        .filter((link): link is { label: string; to: string } => !!link)
 
     return (
         <>
@@ -129,31 +144,27 @@ export default function Sidebar() {
 
             {user?.profile && (
                 <SidebarSection title="My discussions">
-                    <Link to="/community/dashboard" className="text-sm" state={{ newWindow: true }}>
+                    <Link to="/forum/following" className="text-sm" state={{ newWindow: true }}>
                         Visit my discussions
                     </Link>
                 </SidebarSection>
             )}
 
-            {topicSubscriptions && topicSubscriptions?.length > 0 && (
-                <SidebarSection title="Jump to subscribed topics">
-                    <>
-                        <ul className="list-none m-0 p-0">
-                            {topicSubscriptions.map(({ label, slug }) => {
-                                return (
-                                    <li key={label} className="mt-1 pt-1 first:mt-0">
-                                        <Link
-                                            to={`/questions/topic/${slug}`}
-                                            className="block text-sm p-1 rounded-sm hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
-                                            state={{ newWindow: true }}
-                                        >
-                                            {label}
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                    </>
+            {followedLinks.length > 0 && (
+                <SidebarSection title="Following in the forum">
+                    <ul className="list-none m-0 p-0">
+                        {followedLinks.map(({ label, to }) => (
+                            <li key={to} className="mt-1 pt-1 first:mt-0">
+                                <Link
+                                    to={to}
+                                    className="block text-sm p-1 rounded-sm hover:scale-[1.01] active:scale-[1] relative hover:top-[-.5px] top-[.5px] "
+                                    state={{ newWindow: true }}
+                                >
+                                    {label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
                 </SidebarSection>
             )}
         </>

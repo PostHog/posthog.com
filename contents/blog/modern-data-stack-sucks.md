@@ -60,7 +60,7 @@ Your data needs start to spiral once you reach Seed stage – as does the comple
 
 To answer these questions, you need to pull data from a growing number of sources - product analytics, CRM, help desk, ad platform, payment processors, and more. You also begin to utilize more of the features of these sources, such as customer engagement and session recordings, generating even more data.
 
-This is where customer data platforms (CDPs) like Segment or RudderStack come in. [CDPs](/blog/best-customer-data-platforms-for-developers) make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and [revenue data from Stripe](/tutorials/stripe-reports), and send it back to those same tools or a [warehouse](/blog/cdp-vs-data-warehouse) for use with a [business intelligence tool](/blog/best-open-source-business-intelligence-tools) like Hex.
+This is where customer data platforms (CDPs) like Segment or RudderStack come in. [CDPs](/compare/best-customer-data-platforms-for-developers) make it easier to bring data together by collecting it from different sources and sending it to various destinations. For example, a CDP might collect product data from PostHog, advertising data from Google, and [revenue data from Stripe](/tutorials/stripe-reports), and send it back to those same tools or a [warehouse](/blog/cdp-vs-data-warehouse) for use with a [business intelligence tool](/blog/best-open-source-business-intelligence-tools) like Hex.
 
 ![Seed](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/modern-data-stack-sucks/seed.png)
 
@@ -113,7 +113,7 @@ We want to make it easy to evaluate whether products are working or not. Key to 
 
 To change this, we are improving PostHog as a [customer data platform (CDP)](https://github.com/PostHog/posthog/issues/13126). We built the key functionality, such as the ability to:
 
-- Receive data from your app(s) and site(s) with our [SDKs](/docs/integrate?tab=sdks)
+- Receive data from your app(s) and site(s) with our [SDKs](/docs/getting-started/install?tab=sdks)
 - Receive data from sources like [Hubspot](/apps/hubspot-connector), [Intercom](/apps/intercom)
 - Export to destinations such as [Snowflake](/apps/snowflake-export), [BigQuery](/apps/bigquery-export), or [RedShift](/apps/redshift-export)
 

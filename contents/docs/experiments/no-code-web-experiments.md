@@ -6,9 +6,7 @@ showTitle: true
 
 import { IconTestTube } from '@posthog/icons'
 
-> 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#web-experiments) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your PostHog web snippet configuration.
->
-> We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+> **Note:** No-code web experiments require `disable_web_experiments: false` in your PostHog web snippet configuration.
 
 ## Limitations and use cases
 
@@ -44,7 +42,7 @@ posthog.init('<ph_project_token>', {
 
 ### 2. Launch the toolbar and create your experiment
 
-After enabling the [No code web experiments](https://app.posthog.com/settings/user-feature-previews) feature preview, launch the toolbar on your website:
+Launch the toolbar on your website:
 
 1. Go to the [toolbar tab](https://app.posthog.com/toolbar) in PostHog.
 2. Add your website URL as an authorized domain if you haven't already.

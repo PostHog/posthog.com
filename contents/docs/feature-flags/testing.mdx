@@ -7,7 +7,7 @@ import {ProductVideo} from 'components/ProductVideo'
 export const OverrideFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-light-mode.mp4"
 export const OverrideFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/features/feature-flags/override-feature-flag-dark-mode.mp4"
 
-Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 4 ways you can do this:
+Once you've written your code, it's a good idea to test that each variant behaves as you'd expect. There are 5 ways you can do this:
 
 ## Method 1: Assign a user a specific flag value
 
@@ -74,3 +74,16 @@ Rollout and variant assignment are computed by hashing the distinct ID, so diffe
 When the selected person has more than one merged distinct ID, the testing tab evaluates all of them at once instead of requiring you to test each one individually. Click **Test all N distinct IDs** (N is the count of merged IDs) and a results table shows how each ID evaluates side by side.
 
 If the IDs produce different results, a warning banner highlights the divergence. Click any row to expand that ID's full condition analysis and person properties. If evaluating one ID errors, that error is isolated to its own row and doesn't affect the results for the other IDs.
+
+## Method 5: Use the MCP test evaluation tool
+
+> **Note:** This requires the [PostHog MCP server](/docs/model-context-protocol) configured in your AI coding agent (Cursor, Claude Code, VS Code, etc.).
+
+If you use an MCP-enabled coding agent, you can run the same evaluation from your editor with the `feature-flags-test-evaluation-create` tool. Give it a flag ID and a `distinct_id` or `person_id`, and it returns the flag value, the reason it matched or didn't, which condition matched, the person properties used, and the per-condition analysis. Pass an optional `timestamp` to evaluate the flag as it existed at a point in time.
+
+Ask your agent:
+
+- `Test how the new-checkout-flow flag evaluates for user abc123.`
+- `Why doesn't the dark-mode flag match for user john@example.com?`
+
+See [manage feature flags over PostHog MCP](/docs/feature-flags/surfaces/mcp) for setup instructions and more example prompts.

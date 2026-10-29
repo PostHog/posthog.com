@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Sometimes we might want to offer a customer one time credits to cover an upcoming invoice, for example when accommodating a trial for a new product or offering compensation for a recent incident. Here’s how to do that.
+Sometimes we might want to offer a customer one time credits to cover an upcoming invoice, for example when accommodating a trial for a new product, offering compensation for a recent incident, or adding the free credits for a [startup plan roll-off](/handbook/growth/sales/contract-rules#startup-plan-discounts). Here’s how to do that.
 
 - Go to <PrivateLink url="https://billing.posthog.com/admin/billing/credit/">Billing Admin → Credits</PrivateLink>
 - Click Add Credit at the top right.
@@ -25,5 +25,5 @@ Sometimes we might want to offer a customer one time credits to cover an upcomin
 
 ## Things to keep in mind
 - Credits only apply to upcoming invoices.
-- If you’re trying to adjust a completed invoice, this should be handled as a [refund](/handbook/growth/sales/refunds) instead.
+- If you’re trying to adjust a completed invoice, this should be handled as a [refund](/handbook/growth/sales/refunds) instead. See [refund or credit?](/handbook/growth/sales/refunds#refund-or-credit) for which one to use.
 - Always include enough context in your notes or reference link so others understand why the credit was given.

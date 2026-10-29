@@ -4,13 +4,13 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> This page isn't accurate - we have deprecated Pylon and don't have a comparable broadcast capability in SupportHog or elsewhere.  In the meantime if you want to get a Slack message out to customers ask account owners to do it on your behalf in [#group-cs-sales-support](https://posthog.slack.com/archives/C090RCG671C)
+> This page isn't accurate - we have deprecated Pylon and don't have a comparable broadcast capability in SupportHog or elsewhere.  In the meantime if you want to get a Slack message out to customers ask account owners to do it on your behalf in <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C">#group-cs-sales-support</PrivateLink>
 
 We share [Slack channels with many of our customers and partners](/handbook/growth/sales/slack-channels) via Slack Connect, managed through [Pylon](/handbook/growth/sales/slack-channels), our own tool. These channels are normally used for support and relationship building, but Pylon's **broadcast** functionality also lets us send a single message to every customer or partner Slack channel at once.
 
 This is a powerful way to amplify [product announcements](/handbook/marketing/product-announcements) and other comms directly to the people building on PostHog, alongside our usual [email](/handbook/marketing/email-comms) and [in-app](/handbook/marketing/in-app) channels.
 
-> **Slack broadcasts do not reach our [PostHog Discord](https://posthog.com/questions).** The Discord community is managed by the IRL Events team, not Marketing, and is a separate audience. If you want your message to reach Discord too, coordinate with the IRL Events team.
+> **Slack broadcasts do not reach our [PostHog Discord](https://posthog.com/questions).** The Discord community is managed by the Builder Relations team, not Marketing, and is a separate audience. If you want your message to reach Discord too, coordinate with the Builder Relations team.
 
 ## When to use a Slack broadcast
 

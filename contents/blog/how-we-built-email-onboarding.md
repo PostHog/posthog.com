@@ -17,7 +17,7 @@ Marketers believe onboarding emails are a powerful tool for driving engagement. 
 
 People, and developers in particular, hate onboarding campaigns because the bad ones are so memorable. And how would you know what "good" looks like without signing up and risking a flood of tedious outreach emails from sales reps?
 
-We don’t do those sort of outreach emails. This is what we do instead, and how we got there over 7 major iterations. We think it works and we've included performance data so you can judge for yourself.
+We don’t do those sorts of outreach emails. This is what we do instead, and how we got there over 7 major iterations. We think it works and we've included performance data so you can judge for yourself.
 
 ## Onboarding 1.0: The one where it started costing lots
 

@@ -16,7 +16,7 @@ tags:
   - Guides
 ---
 
-With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/blog/ga4-alternatives). 
+With the sunsetting of the Google Analytics Universal Analytics platform and unhappiness with its replacement, Google Analytics 4 (GA4), many are [looking for alternatives](/compare/ga4-alternatives). 
 
 We’re biased, but PostHog is a great one. When [compared with Google Analytics](/blog/posthog-vs-ga4), it is:
 
@@ -154,7 +154,7 @@ Although [PostHog is event-based](/docs/how-posthog-works/data-model), it still 
 
 - Every event contains a distinct ID for a person.
 - With the snippet, every person gets an anonymous distinct ID. This gets stored in a cookie and automatically added to the events they trigger.
-- You can use the [identify](/docs/data/identify) function to connect a person with a distinct ID like email or username.
+- You can use the [identify](/docs/product-analytics/identify) function to connect a person with a distinct ID like email or username.
 - You can use the [group](/docs/product-analytics/group-analytics) function to connect a person with a group like an organization or company.
 
 ![Event structure](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/google-analytics-to-posthog/event.png)
@@ -165,7 +165,7 @@ You can then use all of this data in your insights. For example, you can aggrega
 
 Like Google Analytics, each of the event series, insights, and dashboards is filterable. Filters are largely created with our version of "dimensions," named [properties](/docs/data/events#event-properties). 
 
-Properties are keys and values set on events, persons, and groups adding more details about them. For example, the pageview event contains properties for the timestamp, OS, browser, current URL, referring domain, geographic data, and more. PostHog automatically adds some properties, but if you capture [custom events](/docs/libraries/js/features#custom-event-capture), you can also send as many custom properties as you want.
+Properties are keys and values set on events, persons, and groups adding more details about them. For example, the pageview event contains properties for the timestamp, OS, browser, current URL, referring domain, geographic data, and more. PostHog automatically adds some properties, but if you capture [custom events](/docs/libraries/js/usage#capturing-events), you can also send as many custom properties as you want.
 
 ```js
 posthog.capture('signed up', {email: 'ian@posthog.com', paid: true});
@@ -177,7 +177,7 @@ You can also use properties to create [cohorts](/docs/data/cohorts). These are l
 
 The PostHog equivalent to goals and conversions are [actions](/docs/data/actions). An action is one or more events with filters matching a user’s behavior. For example, a "shown interest" action could include a visit to the pricing page, clicking a book demo button, or signing up.
 
-You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also be used in destinations to send messages in [Slack](/docs/cdp/destinations/slack) or data to [custom webhooks](/docs/cdp/destinations/webhook).
+You create actions in the [data management tab](https://app.posthog.com/data-management/actions). Once created, you can use them in insights. For example, if you want to track conversion, they are especially useful in the funnel-type insight. Actions can also be used in destinations to send messages in [Slack](/docs/data-pipelines/destinations/slack) or data to [custom webhooks](/docs/data-pipelines/destinations/webhook).
 
 Beyond actions, PostHog also can run A/B tests, which compare "test" and "control" variants to calculate whether a change impacts a goal metric. This is our version of Google Optimize. For an example, see "[How to run A/B tests in Webflow with PostHog](/tutorials/webflow-ab-tests)."
 
@@ -199,7 +199,7 @@ Trends support simple mathematical formulas, which makes it easy to create custo
 
 <iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
 
-Session replay is incredibly powerful. Knowing how many people reach your pricing, and where they came from, is useful. Seeing what they _do_ when they get there is truly actionable. Session replay is tightly integrated in PostHog, so you can quickly go from viewing a funnel insight to watching users who went through it. You get 5,000 recordings for free each month, and there are numerous ways to [limit how many you capture](https://posthog.com/tutorials/limit-session-recordings) if you want to be selective.
+Session replay is incredibly powerful. Knowing how many people reach your pricing, and where they came from, is useful. Seeing what they _do_ when they get there is truly actionable. Session replay is tightly integrated in PostHog, so you can quickly go from viewing a funnel insight to watching users who went through it. You get 5,000 web and 2,500 mobile recordings for free each month, and there are numerous ways to [limit how many you capture](https://posthog.com/tutorials/limit-session-recordings) if you want to be selective.
 
 ### 4. Use the `Pageview` event to track unique users
 
@@ -231,15 +231,15 @@ This makes it an easy way to track new and returning visitors to your website, a
 
 ## Added benefits of PostHog
 
-- Easy [custom event capture](/docs/libraries/js/features#custom-event-capture) with nearly limitless custom properties.
+- Easy [custom event capture](/docs/libraries/js/usage#capturing-events) with nearly limitless custom properties.
 
 - [Session replays](/docs/session-replay) with visuals of actual user behavior on your site and performance stats.
 
-- [Data connections](/docs/cdp) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
+- [Data connections](/docs/data-pipelines) to import events from sources [Segment](/cdp/segment) and to export to destinations like [BigQuery](/cdp/bigquery-export) and [Snowflake](/cdp/snowflake-export).
 
-- Direct [SQL querying](/docs/product-analytics/sql) and customization.
+- Direct [SQL querying](/docs/data-warehouse/sql) and customization.
 
-- Free for 1 million events and 5,000 session recordings per month, see [pricing for more](/pricing).
+- Free for 1 million events, 5,000 web and 2,500 mobile session recordings per month, see [pricing for more](/pricing).
 
 ## Further reading
 

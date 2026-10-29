@@ -27,14 +27,14 @@ export const lunary = {
                 human_annotation: true,
             },
         },
-        product_analytics: { 
-            available: false
+        product_analytics: {
+            available: false,
         },
         session_replay: {
-            available: false
+            available: false,
         },
         feature_flags: {
-            available: false
+            available: false,
         },
     },
     platform: {
@@ -42,9 +42,9 @@ export const lunary = {
             self_serve: true,
             free_tier: true,
         },
-            deployment: {
-                open_source: true,
-                eu_hosting: true,
-            },
+        deployment: {
+            open_source: true,
+            eu_hosting: true,
+        },
     },
 }

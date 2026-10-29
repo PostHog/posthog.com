@@ -4,13 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
-
-<RevAnalyticsBetaWarning />
-
 When using revenue data from your Data Warehouse (like Stripe), PostHog will automatically defer revenue recognition to match your accounting practices. This is particularly useful for subscription businesses that need to recognize revenue over time rather than all at once.
 
-This implies that our dashboard will show future revenue if you filter by a date range including dates in the future, indicating all of the revenue that will be recognized in the future.
+This means future revenue is included when you query a date range that extends into the future, showing all of the revenue that will be recognized over time.
 
 > **Note**: Revenue deferring is automatically applied when using Stripe as your data source. You don't need to configure anything additional if you're already filling Stripe's `period` property on your invoice line items - PostHog handles the calculations based on the period information in your Stripe invoices.
 

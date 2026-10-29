@@ -93,7 +93,8 @@ interface CarouselSlideProps {
  *
  * - `float`: at narrow container sizes the image stacks above the prose; at
  *   `@2xl/reader-content`+ it floats right and the prose flows around it. Glow halo
- *   is opt-in via `image.glow: true | GlowColor`.
+ *   is opt-in via `image.glow: true | GlowColor`. Set `image.frameless: true` to
+ *   skip the default border around the floated image.
  *
  * All defaults are overridable via `slide.className`, `image.containerClassName`,
  * and `image.imgClassName`.
@@ -157,6 +158,10 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
     // 'float' layout
     // Glow is keyed off the inline image config (string-shorthand images can't carry glow);
     // resolved color falls back to the product's own brand color.
+    //
+    // Width is percentage-based once floated so the image and prose stay proportional as
+    // the reader container shrinks toward the stack breakpoint. Fixed max-w-* tokens left
+    // a wide mid-range where a ~28–36rem image crushed the text column.
     const inlineImage = typeof slide.image === 'object' ? slide.image : null
     const showGlow = !!inlineImage?.glow
     const glowColor = typeof inlineImage?.glow === 'string' ? inlineImage.glow : productData?.color
@@ -166,13 +171,17 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
             {image && (
                 <div
                     className={`${
-                        image.maxWidth ?? 'max-w-md @2xl:max-w-sm @3xl:max-w-md'
+                        image.maxWidth ?? 'w-full @2xl:w-[46%] @3xl:w-[48%] @4xl:w-1/2'
                     } @2xl:float-right transition-all leading-[0] mb-4 @2xl:mb-0 @2xl:ml-4 @3xl:ml-8 @4xl/reader-content:ml-10${
                         image.containerClassName ? ` ${image.containerClassName}` : ''
                     }`}
                 >
                     {showGlow ? (
-                        <Glow color={glowColor} intensity="soft" className="rounded border border-secondary">
+                        <Glow
+                            color={glowColor}
+                            intensity="soft"
+                            className={image.frameless ? 'rounded' : 'rounded border border-secondary'}
+                        >
                             <CloudinaryImage
                                 src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
                                 alt={image.alt || productData?.name}
@@ -184,7 +193,7 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
                         <CloudinaryImage
                             src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
                             alt={image.alt || productData?.name}
-                            className="w-full rounded border border-secondary"
+                            className={image.frameless ? 'w-full' : 'w-full rounded border border-secondary'}
                             imgClassName={`h-auto${image.imgClassName ? ` ${image.imgClassName}` : ''}`}
                         />
                     )}

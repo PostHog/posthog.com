@@ -1,5 +1,5 @@
 ---
-title: SvelteKit error tracking installation
+title: SvelteKit Error Tracking installation
 platformLogo: svelte
 showStepsToc: true
 ---
@@ -11,5 +11,9 @@ See the docs runbook for more info: https://posthog.com/handbook/wizard-and-docs
 -->
 
 import { ErrorTrackingSvelteInstallationWrapper } from './_snippets/et-installation-wrapper.tsx'
+
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="SvelteKit" flagCommand={{ flag: 'error-tracking-new-wizard', command: 'error-tracking' }} />
 
 <ErrorTrackingSvelteInstallationWrapper /> 

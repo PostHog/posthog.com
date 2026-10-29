@@ -60,9 +60,6 @@ export interface SectionComponentProps {
     /** HTML id applied to the `<section>` element; comes from the menu item's slug. */
     id: string
     productData: any
-    customers: any[]
-    customerSlugs: string[]
-    hasCaseStudy: (slug: string) => boolean
     allProducts: any[]
 }
 
@@ -124,7 +121,11 @@ export interface ImageConfig {
     maxWidth?: string
     /** Image alignment within its container. Default: 'left'. */
     align?: 'left' | 'center' | 'right'
-    /** Skip the default background and border of the framed wrapper in the `stack` layout. Padding is still controlled by `framePadding`. */
+    /**
+     * Skip the default frame chrome:
+     * - `stack`: no background/border on the image wrapper (padding still via `framePadding`)
+     * - `float`: no border/rounded on the floated image
+     */
     frameless?: boolean
     /**
      * Replaces the default `p-4` padding on the stack image frame. Use this to set

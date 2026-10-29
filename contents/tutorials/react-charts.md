@@ -64,7 +64,7 @@ export const fetchQuery = async (payload) => {
 }
 ```
 
-Finally, in our client component, we make the query request using PostHog's [query API](/docs/api/queries#post-api-projects-project_id-query) and display the data:
+Finally, in our client component, we make the query request using PostHog's [query API](/docs/api/queries#creating-a-query) and display the data:
 
 ```js
 // app/page.js

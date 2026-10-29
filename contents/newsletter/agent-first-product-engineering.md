@@ -22,7 +22,7 @@ Companies building for agents often treat them as a bolt-on feature. This is a m
 
 Agents today are more like a new form factor – an interaction layer that sits between your product and your users:
 
-![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent0_191d5281bd.png)
+![Agents as a new interaction layer between your product and users](https://res.cloudinary.com/dmukukwp6/image/upload/b_rgb:eeefe9,fl_flatten,q_auto,f_auto/agent0_191d5281bd.png)
 
 That means you need to build for agents as a *primary* surface, not an afterthought.
 
@@ -61,7 +61,7 @@ The result is a set of tool handlers – one file per product area – ready to 
 
 ## 2. Meet agents at their level of abstraction
 
-To build an agent-first experience, you have to find the semantic layer where agents already reason best and meet them there.
+To build an [agent-first experience](/newsletter/2030-shaped-software#product-infrastructure-is-agent-first), you have to find the semantic layer where agents already reason best and meet them there.
 
 This saves a ton of context (a precious resource) but the benefits are more than practical. They're fundamental. The more "raw" your product's agent interface is, the more creative potential you unlock.
 
@@ -93,7 +93,7 @@ ORDER BY week
 
 In the early days of AI, developers had to front-load *everything* into agents to compensate for smaller context windows and less capable models.
 
-But as the technology keeps improving, there's a new trend that removes as much context as possible and trusts the model to figure out the rest.
+But as the technology keeps improving, there's a new trend that [removes as much context as possible](/blog/wtf-is-context-engineering#2-the-models-just-kept-getting-better) and trusts the model to figure out the rest.
 
 That works for general-purpose agents since they're designed to be flexible. Anthropic can't predict everything that everyone is [using Claude for](/newsletter/ai-coding-mistakes).
 
@@ -119,7 +119,7 @@ Everything else gets pulled later. We let the agent figure out when.
 
 ## 4. Writing skills is a human skill
 
-Skills help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
+[Skills](/newsletter/writing-agent-skills) help you fill the gap between what your product can do and what an agent can do out of the box with your tools:
 
 ![Writing skills for agents](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/agent1_b1e92e5899.png)
 

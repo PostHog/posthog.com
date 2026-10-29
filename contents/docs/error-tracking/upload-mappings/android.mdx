@@ -57,6 +57,49 @@ You can also set `postHogExecutable` if you want to use a custom `posthog-cli` p
 
 </Step>
 
+<Step title="Upload native debug symbols (NDK)" badge="optional">
+
+> Requires [PostHog Android SDK 3.60.0](https://github.com/PostHog/posthog-android/releases/tag/android-v3.60.0) or later with `errorTrackingConfig.captureNativeCrashes` enabled, [Gradle plugin 1.5.0](https://github.com/PostHog/posthog-android/releases/tag/androidPlugin-v1.5.0) or later, and [CLI 0.7.32](https://github.com/PostHog/posthog/releases/tag/posthog-cli%2Fv0.7.32) or later.
+
+If your app includes native C or C++ code built with the NDK, upload the `.so` debug symbols so native crash stack traces resolve to function names, files, and line numbers.
+
+Enable the upload in your app's `build.gradle.kts`:
+
+```kotlin
+posthog {
+    uploadNativeSymbols.set(true)
+}
+```
+
+When enabled, the Gradle plugin's `uploadPostHogNativeSymbols<Variant>` task reads the variant's unstripped native libraries and uploads every one carrying debug info and a build ID, automatically after `assemble`, `install`, or `bundle`. This covers native code you build with the NDK as well as `.so` files bundled from `jniLibs` or dependencies, for minified and non-minified builds alike. Debuggable variants are skipped, so day-to-day debug builds don't upload symbols.
+
+To include source context around resolved crash frames, also bundle the project sources referenced by the debug info:
+
+```kotlin
+posthog {
+    uploadNativeSymbols.set(true)
+    includeNativeSymbolSources.set(true)
+}
+```
+
+You can also run the upload task explicitly, for any variant, without enabling the automatic upload:
+
+```bash
+./gradlew uploadPostHogNativeSymbolsRelease
+```
+
+You can also upload a directory of `.so` files directly, without the Gradle plugin:
+
+```bash
+posthog-cli symbol-sets upload --directory app/build/intermediates/merged_native_libs/release
+```
+
+PostHog matches crash frames to uploaded symbols by each library's GNU build ID, which the NDK emits by default. Each build has its own build ID, so symbols must be re-uploaded for every build you ship.
+
+Native crash events are captured on the next app launch, so event properties like `$app_version` reflect the app at capture time, not at crash time. If the app updated in between, check the crash's release (matched by build ID) rather than the event's version properties when investigating.
+
+</Step>
+
 <StepVerifySymbolSetsUpload symbolType="mappings" />
 
 </Steps>

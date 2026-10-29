@@ -1,28 +1,25 @@
 import React from 'react'
-import { TABLE_CLASSES } from '../../constants'
 import { OverflowXSection } from 'components/OverflowXSection'
 
 export const ComparisonTable = ({ column1, column2, children }) => {
     return (
         <OverflowXSection>
-            <div className={TABLE_CLASSES}>
-                <table className="w-full mt-4">
-                    <thead>
-                        <tr>
-                            <td className=""></td>
+            <table className="w-full mt-4">
+                <thead>
+                    <tr>
+                        <td className=""></td>
+                        <td className="text-center">
+                            <strong>{column1}</strong>
+                        </td>
+                        {column2 !== undefined && (
                             <td className="text-center">
-                                <strong>{column1}</strong>
+                                <strong>{column2}</strong>
                             </td>
-                            {column2 !== undefined && (
-                                <td className="text-center">
-                                    <strong>{column2}</strong>
-                                </td>
-                            )}
-                        </tr>
-                    </thead>
-                    <tbody>{children}</tbody>
-                </table>
-            </div>
+                        )}
+                    </tr>
+                </thead>
+                <tbody>{children}</tbody>
+            </table>
         </OverflowXSection>
     )
 }

@@ -1,0 +1,39 @@
+## Q4 2026 objectives
+
+### Objective 1: Proactively identify and improve suboptimal experiences for our customers <TeamMember name="Vasco de Krijger" photo />
+
+**Motivation:** Customers sometimes experience slow queries, timeouts and regressions before we notice them. We want to understand their experience, proactively identify optimizations and be able to demonstrate that our improvements help.
+
+**What we'll ship:**
+
+1. A shared performance dashboard (starting with a subset of customers), giving us insights across different levels (complete experience -> product experience -> query experience), tied to our internal monitoring stack.
+2. Surfaced regressions/frustrating paths proactively raised with the team, grounded in tested hypothesis to avoid hallucinations with possible suggestions for fixes.
+3. A way to continuously help our customers get to their data in an efficient way (through app, API and MCP), for example by spotting slow (saved) queries and offering (data-backed) ways to make these faster.
+
+### Objective 2: Make query-performance experiments easy to run and trust <TeamMember name="Andy Zhao" photo />
+
+**Motivation:** We can already experiment with query variants, but testing ClickHouse versions, sharding and physical data layouts requires more setup. A repeatable environment would let us explore larger improvements and build confidence before production changes.
+
+**What we'll ship:**
+
+1. A (documented) test environment with representative data distributions and a repeatable way to run experiments.
+2. Clear metrics / benchmark results at the end of a test to be able to compare across experiments.
+
+### Objective 3: Safely bring the JSON Events Table into production <TeamMember name="Sandy Spicer" photo />
+
+**Motivation:** The JSON Events Table offers substantial storage savings. We need to establish compatibility, resolve blocking differences and roll out supported workloads while preserving correctness and a good customer experience.
+
+**What we'll ship:**
+
+1. A clear before vs after impact assessment of the migration.
+2. Workloads migrated to the new JSON Events Table.
+
+### Objective 4: Turn HogQL into an extensible optimizing compiler <TeamMember name="George Munyoro" squeakId={40825} photo />
+
+**Motivation:** HogQL understands the meaning of queries across PostHog. We want to use that knowledge to automatically improve how those queries execute. A composable optimization pipeline will let engineers build on each other's work, adding independently verified passes that make queries faster and reduce compute costs.
+
+**What we'll ship:**
+
+1. A composable pass manager with explicit requirements for each pass, automatic handling of invalidated analyses, and verification between passes. Migrate existing transformations while preserving their behavior.
+2. A documented workflow for writing optimization passes, with reference implementations, independent tests, and tools to inspect changes and compare correctness and performance.
+3. Useful optimization passes built and shipped through this framework, with measured performance benefits and result-equivalence checks. Validate the contribution workflow with a pass written by another engineer.

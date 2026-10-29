@@ -24,7 +24,7 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 ## Who this is for
 
-* Existing customers already using two or more of these — Product Analytics, SQL/Logs, Dashboards, Surveys 
+* Existing customers already using two or more of these – Product Analytics, SQL/Logs, Dashboards, Surveys 
 * If you've heard a customer say any of the following, you should pitch them Endpoints:
    * "We're exporting CSVs and pasting numbers into a slide every Monday."
    * “We want to show our customers their own usage data inside our product."
@@ -124,6 +124,6 @@ Tinybird and custom-built analytics APIs solve the same surface problem. They do
 
 Enterprise Endpoints conversations follow the same rules as the rest of PostHog: pricing is published, terms are clear, and we don't oversell.
 
-The enterprise pitch is the data egress story. Large organizations often have PostHog deployed across multiple teams and use cases, but data still escapes via manual exports and one-off scripts. Endpoints replaces that pattern with something versioned, auditable, and self-serve — without requiring a data engineering queue.
+The enterprise pitch is the data egress story. Large organizations often have PostHog deployed across multiple teams and use cases, but data still escapes via manual exports and one-off scripts. Endpoints replaces that pattern with something versioned, auditable, and self-serve – without requiring a data engineering queue.
 
 The honest pitch: Endpoints wins when the data is already in PostHog and the team is tired of the work required to get it anywhere else. If a prospect's data isn't in PostHog, the right conversation is data pipelines and the data warehouse first.

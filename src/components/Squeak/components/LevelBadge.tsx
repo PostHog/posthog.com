@@ -45,7 +45,7 @@ export default function LevelBadge({ points, pointsOnly, tooltip = true }: Level
                         <span style={{ opacity: 0.7 }}>{points}</span>
                     </span>
                 ) : (
-                    <span className={`relative inline-block ${isHogfather ? 'select-none' : ''}`} onClick={handleClick}>
+                    <span className={`relative inline-flex ${isHogfather ? 'select-none' : ''}`} onClick={handleClick}>
                         {isHogfather && (
                             <span className="absolute top-0 size-8 animate-hogfather-roll z-10">
                                 <img

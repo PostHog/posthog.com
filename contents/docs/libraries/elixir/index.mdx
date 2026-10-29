@@ -17,6 +17,10 @@ features:
 
 This library provides an Elixir HTTP client for PostHog. [See the repository](https://github.com/posthog/posthog-elixir) for more information.
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Elixir" />
+
 ## Installation
 
 import ElixirInstall from '../../integrate/_snippets/install-elixir.mdx'
@@ -64,6 +68,34 @@ If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tr
 
 Tracing headers are client-controlled analytics context, not authentication or authorization. Pass an authenticated `distinct_id` explicitly for security-sensitive server-side decisions.
 
+## Trace context
+
+To link application spans to people and sessions, install the optional `opentelemetry` dependency and add this entry before the export processors in your existing OpenTelemetry `:processors` list:
+
+```elixir
+{PostHog.OpenTelemetry.ContextSpanProcessor, %{supervisor_name: PostHog}}
+```
+
+Use your named PostHog supervisor in place of `PostHog` if needed. Keep your existing provider, exporter, and sampler. The processor supports OpenTelemetry SDK 1.7.0 or later. It adds missing `sessionId` and `posthogDistinctId` attributes from the current process's PostHog context when spans start. Existing canonical attributes take precedence.
+
+The PostHog plug sets context for child spans. Phoenix with Cowboy starts its request span before the endpoint plugs run. To also link that earlier span, change your existing Cowboy instrumentation setup to capture only the two PostHog headers:
+
+```elixir
+:opentelemetry_cowboy.setup(%{
+  request_headers: ["x-posthog-session-id", "x-posthog-distinct-id"]
+})
+
+OpentelemetryPhoenix.setup(adapter: :cowboy2)
+```
+
+Configure instrumentation once, before the endpoint starts. Keep other existing options in the same configuration. Do not capture all request headers. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) in the browser SDK so it sends these headers to your selected backend hostname.
+
+Cowboy supplies the captured headers as initial span attributes. The processor sanitizes them and uses them only when no process identity or explicit canonical span attribute is present. Without header capture, an earlier request span stays unchanged. Missing IDs stay absent.
+
+This request path was tested with Phoenix 1.8.15, `opentelemetry_phoenix` 2.0.1, and `opentelemetry_cowboy` 1.0.0. The same setup has not been verified with Bandit. HTTP request context does not transfer into LiveView processes automatically.
+
+Context is process-local and ends when the request process exits. Clear it before you reuse the same process for unrelated work. Tasks and other processes need their own explicit context. Spans keep the IDs captured when they start. No trace provider, exporter, session, or recording is created by this bridge.
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
@@ -73,6 +105,32 @@ import FeatureFlagsLibsIntro from "../_snippets/feature-flags-libs-intro.mdx"
 import ElixirFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/feature-flags-code-elixir.mdx'
 
 <ElixirFeatureFlagsCode />
+
+### Local feature flag evaluation
+
+Local evaluation is available in version 2.15.0 and later. Follow the [server-side local evaluation guide](/docs/feature-flags/local-evaluation) to find your secure key and see how to pass the person properties, groups, and group properties that your flag conditions require.
+
+Store the secure key in a server-side environment variable. Don't expose it to client-side applications:
+
+```elixir file=config/runtime.exs
+config :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_token>",
+  secret_key: System.fetch_env!("POSTHOG_FEATURE_FLAGS_SECURE_API_KEY")
+```
+
+When `secret_key` is set, the SDK fetches definitions when it starts and polls for updates every 30 seconds. `PostHog.FeatureFlags.evaluate_flags/1` evaluates each flag locally first. If a flag can't be evaluated locally, the SDK makes one `/flags` request to resolve the remaining flags. Set `only_evaluate_locally: true` in the evaluation map to prevent this remote fallback. The SDK then omits unresolved flags from the snapshot.
+
+Use these configuration options to control local evaluation:
+
+| Option | Default | Purpose |
+| :----- | :------ | :------ |
+| `enable_local_evaluation` | `true` | Starts local evaluation when `secret_key` is set. |
+| `feature_flags_poll_interval_ms` | `30_000` | Sets the interval between definition refreshes. |
+| `flag_definition_request_timeout_ms` | `10_000` | Sets the timeout for each definition request. |
+| `flag_definition_cache_provider_timeout_ms` | `5_000` | Sets the timeout for each shared cache provider callback. |
+
+For multiple server instances, you can implement `PostHog.FeatureFlags.FlagDefinitionCacheProvider` and set `flag_definition_cache_provider: {module, state}`. This optional provider shares definitions and coordinates which instance polls PostHog. See [local evaluation in distributed environments](/docs/feature-flags/local-evaluation/distributed-environments?tab=Elixir) for the callback contract and configuration.
 
 ## Error tracking
 

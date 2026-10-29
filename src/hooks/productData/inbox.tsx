@@ -1,9 +1,9 @@
 import { IconNotification } from '@posthog/icons'
+import { getTool } from '../../data/tools'
 
 export const inbox = {
-    name: 'Inbox',
+    ...getTool('inbox'),
     Icon: IconNotification,
-    handle: 'inbox',
     type: 'inbox',
     color: 'blue',
     pricingBadge: 'Beta',

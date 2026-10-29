@@ -83,6 +83,7 @@ async function forwardRequest(request, pathWithSearch) {
   const ip = request.headers.get("CF-Connecting-IP") || ""
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
+  originHeaders.delete("authorization")
   originHeaders.set("X-Forwarded-For", ip)
 
   const originRequest = new Request(`https://${API_HOST}${pathWithSearch}`, {
@@ -132,6 +133,7 @@ async function forwardRequest(request, pathWithSearch) {
   const ip = request.headers.get("CF-Connecting-IP") || ""
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
+  originHeaders.delete("authorization")
   originHeaders.set("X-Forwarded-For", ip)
 
   const originRequest = new Request(`https://${API_HOST}${pathWithSearch}`, {
@@ -157,7 +159,7 @@ This code does three things:
 
 - **Routes requests:** The `handleRequest` function checks if the request is for static assets (`/static/*`) or remote config (`/array/*`), routing them to PostHog's asset server. Everything else goes to the main API.
 - **Caches assets:** The `retrieveAsset` function caches PostHog's JavaScript SDK, remote config, and other static files in Cloudflare's cache. This improves performance and preserves correct `cache-control` headers that the asset server provides.
-- **Preserves user location:** The `forwardRequest` function captures the real user IP from Cloudflare's `CF-Connecting-IP` header and sets it as `X-Forwarded-For`. This ensures PostHog records accurate user locations instead of showing all users at Cloudflare's data center locations. It also removes cookies for privacy.
+- **Preserves user location:** The `forwardRequest` function captures the real user IP from Cloudflare's `CF-Connecting-IP` header and sets it as `X-Forwarded-For`. This ensures PostHog records accurate user locations instead of showing all users at Cloudflare's data center locations. It also removes cookies and auth headers for privacy.
 
 </Step>
 

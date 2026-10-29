@@ -8,31 +8,31 @@ showTitle: true
 
 ## Elevator pitch
 
-PostHog Session Replay records every user session across web and mobile. From any analytics insight, jump to the sessions behind it. From any error in Error Tracking, watch exactly what the user was doing when it happened. From any rage click pattern, let PostHog Code Inbox research and open a fix PR.
+PostHog Session Replay records every user session across web and mobile. From any analytics insight, jump to the sessions behind it. From any error in Error Tracking, watch exactly what the user was doing when it happened. From any rage click pattern, let PostHog Desktop Inbox research and open a fix PR.
 
 Want to watch sessions manually but overwhelmed by the amount of data? PostHog AI can group and summarize sessions for you, separating signal from noise in an efficient way. 
 
-FullStory and Hotjar record sessions. PostHog records sessions *and* connects them to everything else — your metrics, your errors, your flags, and your agents.
+FullStory and Hotjar record sessions. PostHog records sessions *and* connects them to everything else – your metrics, your errors, your flags, and your agents.
 
 ## The unique belief (in terms of session replay)
 
-Session replay used to be reactive — you watched what went wrong *after* a user complained. In the [product autonomy loop](/blog/self-driving-product), replay is a proactive signal source. PostHog Code's Inbox reads replay patterns — rage clicks, dead ends, unexpected exits — and converts them into researched, prioritized fix PRs before users ever file a ticket.
+Session replay used to be reactive – you watched what went wrong *after* a user complained. In the [product autonomy loop](/blog/self-driving-product), replay is a proactive signal source. PostHog Desktop's Inbox reads replay patterns – rage clicks, dead ends, unexpected exits – and converts them into researched, prioritized fix PRs before users ever file a ticket.
 
 The shift is fundamental: replay isn't just evidence of a problem. It's the trigger that starts automated remediation. Watching sessions is what humans do. Generating signals from sessions is what self-driving product development does.
 
 ## Who this is for
 
-- **Engineers debugging why users are dropping off** — they need to see the session, not just the funnel.
-- **Product teams correlating qualitative behavior with quantitative metrics** — jump from a funnel drop to the sessions behind it in one click.
+- **Engineers debugging why users are dropping off** – they need to see the session, not just the funnel.
+- **Product teams correlating qualitative behavior with quantitative metrics** – jump from a funnel drop to the sessions behind it in one click.
 - **Teams replacing FullStory or Hotjar** and consolidating to a platform that also covers analytics, flags, and experiments.
 - **Mobile teams** who need iOS, Android, React Native, and Flutter replay with the same analytics integration as web.
 - **Anyone using PostHog** who wants to close the gap between "what happened" and "why."
 
 ### Who this isn't for
 
-- Enterprises needing advanced session reconstruction for legal, compliance, or accessibility audits — FullStory's enterprise features are more mature here.
-- High-volume consumer apps that need aggressive client-side sampling and complex retention policies — larger enterprise plans are required.
-- Marketing teams who primarily need heatmaps as the UX research tool — Hotjar is simpler for that specific use case.
+- Enterprises needing advanced session reconstruction for legal, compliance, or accessibility audits – FullStory's enterprise features are more mature here.
+- High-volume consumer apps that need aggressive client-side sampling and complex retention policies – larger enterprise plans are required.
+- Marketing teams who primarily need heatmaps as the UX research tool – Hotjar is simpler for that specific use case.
 
 ## Messaging
 
@@ -50,12 +50,12 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 
 ### Message 2: Replay as a signal source, not just a recording
 
-**Problem:** Most teams watch session replays when something goes wrong. The signal is already cold — the user has churned or complained. Proactive replay analysis requires someone to watch hundreds of recordings, which doesn't scale.
+**Problem:** Most teams watch session replays when something goes wrong. The signal is already cold – the user has churned or complained. Proactive replay analysis requires someone to watch hundreds of recordings, which doesn't scale.
 
-**Solution:** PostHog Code's Inbox connects to Session Replay as a signal source. Replay patterns — rage clicks, repeated form abandonment, dead-click clusters — are automatically surfaced, researched, and converted into prioritized fix PRs. Sessions feed directly into PR, while AI summarization enables manual review to scale as PostHog AI can group and summarize sessions for you.
+**Solution:** PostHog Desktop's Inbox connects to Session Replay as a signal source. Replay patterns – rage clicks, repeated form abandonment, dead-click clusters – are automatically surfaced, researched, and converted into prioritized fix PRs. Sessions feed directly into PR, while AI summarization enables manual review to scale as PostHog AI can group and summarize sessions for you.
 
 **Supporting features:**
-- PostHog Code Inbox integration with Session Replay as a signal source
+- PostHog Desktop Inbox integration with Session Replay as a signal source
 - Session replay summarization and automatic playlist generation
 - Rage click and dead click detection
 - Session collections for grouping related recordings
@@ -81,7 +81,7 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 
 **Where PostHog wins:**
 - Native connection to analytics, feature flags, experiments, and error tracking
-- PostHog Code agent integration — replays become inputs to automated fix PRs
+- PostHog Desktop agent integration – replays become inputs to automated fix PRs
 - Significantly lower cost at equivalent session volume
 - More generous free tier (5,000 sessions/month forever vs FullStory's trial limits)
 - AI summarization and automatic playlist generation
@@ -91,8 +91,8 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 **Their approach:** Simple heatmaps, scroll maps, and basic session replay. Popular with non-technical teams. No analytics depth, limited mobile support, no feature flags.
 
 **Where PostHog wins:**
-- Full analytics integration — jump from Hotjar's heatmaps to PostHog's funnel and back is not possible; PostHog provides both
-- Feature flag correlation — filter sessions by which flag variant the user saw
+- Full analytics integration – jump from Hotjar's heatmaps to PostHog's funnel and back is not possible; PostHog provides both
+- Feature flag correlation – filter sessions by which flag variant the user saw
 - Agent integration for automated investigation
 - AI summarization and automatic playlist generation
 
@@ -101,8 +101,8 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 **Their approach:** Developer-focused session replay with strong frontend performance monitoring. No product analytics or feature flags. Good DevTools integration.
 
 **Where PostHog wins:**
-- Broader platform — analytics, flags, experiments, warehouse, and error tracking included
-- PostHog Code Inbox integration — LogRocket has no equivalent agent loop
+- Broader platform – analytics, flags, experiments, warehouse, and error tracking included
+- PostHog Desktop Inbox integration – LogRocket has no equivalent agent loop
 - Usage-based pricing without seat limits
 
 ## Objections
@@ -125,4 +125,4 @@ The shift is fundamental: replay isn't just evidence of a problem. It's the trig
 
 Enterprise session replay customers get volume discounts, extended mobile replay retention, advanced access controls, SOC 2, and EU data residency. The consolidation pitch is particularly strong here: FullStory and Hotjar contracts are often standalone line items that can be eliminated when replay is included in a PostHog annual deal.
 
-The forward-looking pitch: replay as a signal source for PostHog Code Inbox is a capability no other vendor offers. Teams that instrument replay properly now will have a fully automated UX investigation loop as the agent features mature.
+The forward-looking pitch: replay as a signal source for PostHog Desktop Inbox is a capability no other vendor offers. Teams that instrument replay properly now will have a fully automated UX investigation loop as the agent features mature.

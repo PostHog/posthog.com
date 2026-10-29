@@ -28,6 +28,8 @@ interface ImageAnnotationsContextValue {
     type: AnnotationType
     hoveredIndex: number | null
     setHoveredIndex: (index: number | null) => void
+    /** Color classes for the markers and key chips (background + text). */
+    markerClassName: string
 }
 
 const ImageAnnotationsContext = createContext<ImageAnnotationsContextValue | null>(null)
@@ -45,6 +47,8 @@ export interface ImageAnnotationsProps {
     annotations: Annotation[]
     /** `dots` = pulsing, clickable markers with tooltips. `numbered` = numbered markers paired with a key. */
     type?: AnnotationType
+    /** Override the marker color (background + text classes). Defaults to the red used on product pages. */
+    markerClassName?: string
     children: React.ReactNode
 }
 
@@ -56,12 +60,17 @@ export interface ImageAnnotationsProps {
  * Coordinates are percentages of the rendered image, so markers stay anchored at
  * any size — no dimension measurement required.
  */
-function ImageAnnotations({ annotations, type = 'numbered', children }: ImageAnnotationsProps): JSX.Element {
+function ImageAnnotations({
+    annotations,
+    type = 'numbered',
+    markerClassName = 'bg-red text-white',
+    children,
+}: ImageAnnotationsProps): JSX.Element {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
     const value = useMemo<ImageAnnotationsContextValue>(
-        () => ({ annotations, type, hoveredIndex, setHoveredIndex }),
-        [annotations, type, hoveredIndex]
+        () => ({ annotations, type, hoveredIndex, setHoveredIndex, markerClassName }),
+        [annotations, type, hoveredIndex, markerClassName]
     )
 
     return <ImageAnnotationsContext.Provider value={value}>{children}</ImageAnnotationsContext.Provider>

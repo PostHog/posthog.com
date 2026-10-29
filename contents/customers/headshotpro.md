@@ -2,7 +2,7 @@
 title: How HeadshotPro analyzes Google Adwords data in PostHog
 customer: HeadshotPro
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/headshot_pro_posthog_56e4ed68be.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/Headshot_Pro_1920x1080_f2a05f9468.png
 date: 2024-06-02
 ---
 
@@ -16,9 +16,9 @@ After asking for recommendations from other founders, Danny narrowed his list to
 
 ### From beta warehouse to data warehouse
 
-During the beta, the <SmallTeam slug="data-stack" /> were naturally curious for feedback, so it wasn't long before they reached out to speak with Danny about what he needed.
+During the beta, the Data Stack team were naturally curious for feedback, so it wasn't long before they reached out to speak with Danny about what he needed.
 
-“HeadshotPro wasn’t using a data warehouse before PostHog,” says [Eric](/community/profiles/30209), our data warehouse team lead. “Instead, they were analyzing data in the respective platforms — and they really wanted to analyze their marketing data alongside product data. So, we helped them [get data from Google Adwords into PostHog](/docs/data-warehouse/sources/google-ads).”
+“HeadshotPro wasn’t using a data warehouse before PostHog,” says [Eric](/community/profiles/30209), our data warehouse team lead. “Instead, they were analyzing data in the respective platforms — and they really wanted to analyze their marketing data alongside product data. So, we helped them [get data from Google Adwords into PostHog](/docs/data-pipelines/sources/google-ads).”
 
 <BorderWrapper>
 <Quote

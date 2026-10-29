@@ -14,6 +14,7 @@ import Link from 'components/Link'
 import WizardFrameworksTeaser from 'components/WizardFrameworksTeaser'
 import { IconArrowUpRight } from '@posthog/icons'
 import { buildWizardCommand } from './buildCommand'
+import { MCP_SERVER_URL as MCP_URL } from '../../constants'
 
 export type InstallMethod = {
     label: string
@@ -46,6 +47,8 @@ export type PlatformOption = {
 export type Platform = PlatformOption & {
     icon: React.ReactNode
     group: 'editors' | 'platforms'
+    /** Destination used instead of expandable instructions when linkOnly is enabled. */
+    href?: string
 }
 
 export type InstallSchema = {
@@ -59,8 +62,6 @@ export type InstallSchema = {
     defaultCommand: string
     /** Clipboard override for `defaultCommand` (display shows `defaultCommand`, copy writes this). */
     defaultCopyCommand?: string
-    /** Append `--region <cloud>` (from the user's region) after the command, matching WizardCommand. */
-    appendRegion?: boolean
     /** Line shown below the command, e.g. "Supports Next.js, React, Python, and 21 more" */
     supports?: React.ReactNode
     platforms: Platform[]
@@ -68,7 +69,6 @@ export type InstallSchema = {
 
 const iconClass = 'size-4'
 
-const MCP_URL = 'https://mcp.posthog.com/mcp'
 // Displayed clean (`npx @posthog/wizard mcp add`); copied with `-y` and `@latest` pinned but hidden
 // from view, matching the inline command.
 const { displayCommand: wizardCommand, copyCommand: wizardCommandCopy } = buildWizardCommand({
@@ -412,6 +412,7 @@ const v0Methods: InstallMethod[] = [
 const installPlatforms: Platform[] = [
     {
         id: 'claude',
+        href: 'https://claude.ai/directory/connectors/posthog',
         label: 'Claude',
         group: 'editors',
         icon: <IconClaudeCode className={iconClass} />,
@@ -430,6 +431,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'cursor',
+        href: '/docs/model-context-protocol/cursor',
         label: 'Cursor',
         group: 'editors',
         icon: <LogomarkCursor className={iconClass} />,
@@ -437,6 +439,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'vscode',
+        href: '/docs/model-context-protocol/vscode',
         label: 'VS Code',
         group: 'editors',
         icon: <LogomarkVSCode className={iconClass} />,
@@ -444,6 +447,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'windsurf',
+        href: '/docs/model-context-protocol/windsurf',
         label: 'Windsurf',
         group: 'editors',
         icon: <LogomarkWindsurf className={iconClass} />,
@@ -451,6 +455,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'codex',
+        href: '/docs/model-context-protocol/codex',
         label: 'Codex',
         group: 'editors',
         icon: <LogomarkCodex className={iconClass} />,
@@ -458,6 +463,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'zed',
+        href: '/docs/model-context-protocol/zed',
         label: 'Zed',
         group: 'editors',
         icon: <LogomarkZed className={iconClass} />,
@@ -465,6 +471,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'lovable',
+        href: '/docs/model-context-protocol',
         label: 'Lovable',
         group: 'platforms',
         icon: <LogomarkLovable className={iconClass} />,
@@ -472,6 +479,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'replit',
+        href: '/docs/model-context-protocol',
         label: 'Replit',
         group: 'platforms',
         icon: <LogomarkReplit className={iconClass} />,
@@ -479,6 +487,7 @@ const installPlatforms: Platform[] = [
     },
     {
         id: 'v0',
+        href: '/docs/model-context-protocol',
         label: 'v0',
         group: 'platforms',
         icon: <LogomarkV0 className={iconClass} />,
@@ -538,10 +547,8 @@ export const wizardInstallSchema: InstallSchema = {
     },
     // Display shows a clean command; the copy adds `-y` (auto-confirm) and `@latest` (freshness).
     // `self-driving` is intentionally NOT baked in here — it's opt-in via PlatformInstall's `selfDriving` prop.
-    // The user's cloud region (`--region eu|us`) is appended automatically via `appendRegion`.
     defaultCommand: 'npx @posthog/wizard',
     defaultCopyCommand: 'npx -y @posthog/wizard@latest',
-    appendRegion: true,
     supports: supportsFrameworks,
     // Secondary install-methods row hidden for now on the homepage. Restore by
     // uncommenting installPlatforms (or swap in a custom array to diverge from MCP).

@@ -12,6 +12,10 @@ features:
   errorTracking: true
 ---
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Rust" />
+
 ## Installation
 
 import RustInstall from '../../integrate/_snippets/install-rust.mdx'
@@ -29,6 +33,18 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 import RustSendEvents from '../../integrate/send-events/_snippets/send-events-rust.mdx'
 
 <RustSendEvents />
+
+## Flushing on shutdown
+
+`capture` is fire-and-forget – it queues the event and returns, and a background worker delivers it. Events still queued when the process exits are lost.
+
+Call `flush` and then `shutdown` before your process ends, where your server future resolves – after `run().await` in an actix or axum `main`. If your app has no shutdown path today, that line is still the place – add the calls rather than skipping the flush.
+
+```rust
+server.run().await?;
+client.flush().await;
+client.shutdown().await;
+```
 
 ## Person profiles and properties
 

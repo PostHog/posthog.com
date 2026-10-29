@@ -5,6 +5,7 @@ showTitle: true
 ---
 
 import PlatformInstall, { cliInstallSchema } from "components/PlatformInstall"
+import CLIDownload from "./error-tracking/_snippets/cli/download.mdx"
 
 The PostHog CLI lets you use PostHog from your terminal, your coding agents, local scripts, and CI/CD pipelines.
 
@@ -21,13 +22,23 @@ Install the PostHog CLI with our wizard:
 
 <PlatformInstall schema={cliInstallSchema} />
 
-If you'd rather not use our wizard, you can install the CLI by running:
+If you'd rather not use our wizard, you can install the CLI with npm, the install script, Homebrew, or Cargo.
 
-```bash
-npm install -g @posthog/cli@latest
-```
+<CLIDownload />
 
 > **Using Claude Code, Codex, or another coding agent?**: You should follow our [CLI setup for agents](#setup-for-agents) instructions.
+
+### Updating
+
+To update the CLI, run:
+
+```bash
+posthog-cli update
+```
+
+If you installed with the install script, this updates the CLI in place. If you installed with npm, Homebrew, or Cargo, it prints the command your package manager uses to update instead. For example, Homebrew users run `brew upgrade posthog-cli`.
+
+`posthog-cli update` is available from version 0.18.7. On an older version, reinstall the CLI with the same method you used to install it.
 
 ### Authentication
 
@@ -138,7 +149,7 @@ If the snippet is installed but the agent still ignores the CLI, check that the 
 
 ### The `api` command is unavailable
 
-Install the latest version of the CLI, then rerun the command:
+Your CLI version is too old to include `api` or `posthog-cli update`. Reinstall the latest version with the method you used to [install it](#installation), then rerun the command. For example, with npm:
 
 ```bash
 npm install -g @posthog/cli@latest
@@ -147,10 +158,10 @@ posthog-cli api --agent-help
 
 ### The tool list looks outdated
 
-The tool catalog is bundled with the CLI, so an old binary serves an old catalog. Update the CLI and rerun the command:
+The tool catalog is bundled with the CLI, so an old binary serves an old catalog. [Update the CLI](#updating) and rerun the command:
 
 ```bash
-npm install -g @posthog/cli@latest
+posthog-cli update
 ```
 
 If a tool you used before is gone, names change as the PostHog API evolves — use `search` to find the current name:

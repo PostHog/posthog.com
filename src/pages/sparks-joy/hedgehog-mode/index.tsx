@@ -18,6 +18,8 @@ export default function HedgehogModeGame(): JSX.Element {
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
+                showAddressBar={false}
+                headerBarOptions={[]}
                 fullScreen
             >
                 <iframe src="https://hedgehog-mode-playground.vercel.app/" className="w-full h-full border-0" />

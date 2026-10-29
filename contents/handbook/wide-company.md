@@ -57,7 +57,7 @@ In other words, instead of your title being "Senior Engineer at PostHog" (which 
 
 When you build a startup from scratch, you are in an existential crisis. One day you might be building a gym, the next day a software product for accountants. The problem changes. At PostHog, we give each small team a product to build. (James and Tim focus on _which_ products we should build, as they often need sequencing.)
 
-Once we had [product-market fit](/blog/product-market-fit-game), and we had reached 15 people or so, we realized we needed to set some kind of goals. We started by using OKRs as they're pretty standard.
+Once we had [product-market fit](/founders/product-market-fit-game), and we had reached 15 people or so, we realized we needed to set some kind of goals. We started by using OKRs as they're pretty standard.
 
 *However*, one of our engineers one day told me, "I realized I needed to change my objective. Then I started rewriting my OKRs into the handbook. I realized I was spending time stressing about the wording of it, which was going to have zero impact on what I knew I had to build." That seemed silly, so instead we make a point of calling them just "goals". We intentionally don't sweat the wording.
 

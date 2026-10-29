@@ -2,7 +2,7 @@ import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconInfo } from '@posthog/icons'
-import { HedgehogSailorHog } from '@posthog/brand/hoggies'
+import { HedgehogSailor } from '@posthog/brand/hoggies'
 
 export const Image = ({ src, className = '', alt = '' }: { src: string; className?: string; alt?: string }) => (
     <CloudinaryImage src={src} alt={alt} className={className} />
@@ -17,7 +17,7 @@ export const HomeHappyHog = () => (
 )
 
 export const ImageDW = () => (
-    <HedgehogSailorHog
+    <HedgehogSailor
         size={220}
         className="relative -top-[12px] ml-auto @lg:-right-5 -mb-[85px] -scale-x-100 @lg:ml-12"
     />

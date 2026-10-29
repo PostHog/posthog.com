@@ -116,21 +116,6 @@ export const IconCouch = (props: IconProps) => (
     </BaseIcon>
 )
 
-export const IconDemoThumb = (props: IconProps) => (
-    <BaseIcon viewBox="0 0 48 48" width="48" height="48" {...props}>
-        <image
-            width="48"
-            height="32"
-            y="8"
-            href="https://res.cloudinary.com/dmukukwp6/image/upload/demo_icon_c491faf6f2.png"
-        />
-        <path
-            d="M20.3808 15.899C19.409 15.31 18.1667 16.0097 18.1667 17.1462V30.8539C18.1667 31.9903 19.409 32.69 20.3808 32.101L31.6897 25.2472C32.6263 24.6795 32.6263 23.3205 31.6897 22.7528L20.3808 15.899Z"
-            fill="white"
-        />
-    </BaseIcon>
-)
-
 export const IconChangelogThumb = (props: IconProps) => (
     <BaseIcon viewBox="0 0 48 48" width="48" height="48" {...props}>
         <image
@@ -170,6 +155,18 @@ export const IconDice = (props: IconProps) => (
     <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
         <path d="M8.822 7.73a1.75 1.75 0 0 1 2.16.915l3.169 6.797.068.166a1.751 1.751 0 0 1-.755 2.076l-.159.083-6.798 3.17a1.75 1.75 0 0 1-2.24-.688l-.085-.159-3.17-6.797a1.75 1.75 0 0 1 .847-2.326l6.797-3.169.166-.067Zm.515 1.411-.047.017-6.797 3.17a.25.25 0 0 0-.121.332l3.17 6.796.025.044a.25.25 0 0 0 .307.078l6.798-3.17.042-.026a.251.251 0 0 0 .095-.259l-.017-.047-3.17-6.797a.25.25 0 0 0-.285-.138Zm4.846-5.863a1.75 1.75 0 0 1 2.173-.881l5.169 1.882.165.07a1.75 1.75 0 0 1 .934 2.001l-.053.17-1.882 5.17a1.75 1.75 0 0 1-2.071 1.099l-.171-.053-5.17-1.881a1.75 1.75 0 0 1-1.045-2.243l1.882-5.17.07-.164Zm1.66.53a.25.25 0 0 0-.299.103l-.021.045-1.88 5.168a.25.25 0 0 0 .149.32l5.168 1.882.048.012a.25.25 0 0 0 .272-.162l1.88-5.168.013-.049a.25.25 0 0 0-.116-.249l-.046-.022-5.168-1.88Z" />
         <path d="M6.41 13.352a1 1 0 1 1-1.812.845 1 1 0 0 1 1.812-.845ZM10.399 14.803a1 1 0 1 1-1.813.845 1 1 0 0 1 1.813-.845ZM18.44 7.842a1 1 0 1 1-1.88-.684 1 1 0 0 1 1.88.684Z" />
+    </BaseIcon>
+)
+
+export const IconCoolNumbers = (props: IconProps) => (
+    <BaseIcon viewBox="0 0 48 48" width="100%" height="100%" {...props}>
+        <rect width="48" height="48" rx="7" fill="#F54E00" />
+        <g fill="#F2EEE2">
+            <path d="M19 12h5.2l-3.2 24h-5.2z" />
+            <path d="M29 12h5.2l-3.2 24h-5.2z" />
+            <rect x="11.6" y="18.4" width="26" height="4.6" rx="1" />
+            <rect x="10.4" y="26" width="26" height="4.6" rx="1" />
+        </g>
     </BaseIcon>
 )
 

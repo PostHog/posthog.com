@@ -6,9 +6,11 @@ import useProducts from '../../../hooks/useProducts'
 // Point those at the right docs page, keyed on the stable product handle.
 const docsUrlOverrides: Record<string, string> = {
     data_warehouse: '/docs/data-warehouse',
-    realtime_destinations: '/docs/cdp/destinations',
+    realtime_destinations: '/docs/data-pipelines/destinations',
     posthog_ai: '/docs/posthog-ai',
     inbox: '/docs/self-driving/inbox',
+    llm_evals: '/docs/ai-evals',
+    marketing_analytics: '/docs/web-analytics/marketing-analytics',
 }
 
 const docsUrlFor = (product: any): string => docsUrlOverrides[product.handle] || `/docs/${product.slug}`
@@ -22,10 +24,11 @@ interface AppsListProps {
 // stays in sync with the real product lineup instead of scraping the docs nav.
 export const AppsList = ({ className = '' }: AppsListProps): JSX.Element => {
     const { products } = useProducts()
+    const docsProducts = products.filter((product) => product.handle !== 'posthog_code')
 
     return (
         <div data-scheme="primary" className={`columns-2 @md:columns-3 @2xl:columns-4 gap-x-8 ${className}`}>
-            {products.map((product: any) => {
+            {docsProducts.map((product: any) => {
                 const Icon = product.Icon
                 return (
                     <Link

@@ -2,7 +2,7 @@
 title: How Qred Bank ditched four separate tools for one source of truth
 customer: Qred
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/dimension_56cccccb2c.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/Qred_1920x1080_a69826a6de.png
 date: 2025-08-26
 ---
 
@@ -30,7 +30,7 @@ It wasn’t just the open-source safety net that made PostHog stand out, he also
 
 "It used to be the case that if we didn't add tracking for something in Google Analytics then we just lost that datapoint. That's not the case with PostHog though!"
 
-Once Google Analytics was out of the picture for tracking product usage, Lezgin started consolidating other tools into PostHog — swapping out [LaunchDarkly](/blog/posthog-vs-launchdarkly) and other [experimentation](/experiments) and [replay tools](/session-replay). The whole development stack got leaner, cheaper, and more powerful.
+Once Google Analytics was out of the picture for tracking product usage, Lezgin started consolidating other tools into PostHog — swapping out [LaunchDarkly](/compare/posthog-vs-launchdarkly) and other [experimentation](/experiments) and [replay tools](/session-replay). The whole development stack got leaner, cheaper, and more powerful.
 
 PostHog has since become Qred Bank’s single source of truth for an increasing amount of frontend data — a place where the whole team can work together to make product decisions without bouncing between tools. Even non-technical staff now frequently use PostHog to make decisions.
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import TabbedCarousel from 'components/TabbedCarousel'
 import CarouselSlide from '../CarouselSlide'
+import { SECTION_H2 } from '../helpers'
 import type { CarouselSlide as CarouselSlideType, SectionComponentProps } from '../types'
 
 interface TopFeaturesProps extends SectionComponentProps {
@@ -12,7 +13,7 @@ const TopFeatures = ({ id, productData, slides = [] }: TopFeaturesProps) => {
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className="mb-8">Top features</h2>
+            <h2 className={SECTION_H2}>Top features</h2>
             <TabbedCarousel
                 tabs={slides.map((s) => ({
                     value: s.slug,

@@ -84,7 +84,7 @@ Under Shared-Disk Architecture, CPU and memory were split into nodes, but each c
 
 ![Shared Nothing Architecture.png](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/clickhouse-vs-snowflake/shared-nothing-architecture.png)
 
-Meanwhile, CPU, memory, and storage are encapsulated under Shared-Nothing Architecture in separate, parallel instances, only syncing via background jobs. The benefit of Shared-Nothing Architecture is speed. There is a risk that storage could go out of sync since usually replication here is eventually consistent, but that was the case with blob stores up until recently too. The easiest way to think about this is consider Postgres. When you install Postgres everything is boxed up nice and neat on a single instance. At smaller scale this is a much simpler setup and enables you to run the architecture pretty much anywhere.
+Meanwhile, CPU, memory, and storage are encapsulated under Shared-Nothing Architecture in separate, parallel instances, only syncing via background jobs. The benefit of Shared-Nothing Architecture is speed. There is a risk that storage could go out of sync since usually replication here is eventually consistent, but that was the case with blob stores up until recently too. The easiest way to think about this is to consider Postgres. When you install Postgres everything is boxed up nice and neat on a single instance. At smaller scale this is a much simpler setup and enables you to run the architecture pretty much anywhere.
 
 Part of Snowflake’s initial appeal is its hybrid solution that combines the advantages of Shared-Disk Architecture and Shared-Nothing Architecture. Snowflake achieved this by adding another layer of storage to each node that stored partial data, similar to the cache but more complete.
 
@@ -118,11 +118,11 @@ Overall, ClickHouse's close-metal optimizations enable it to return aggregate va
 
 ### Who uses Snowflake and ClickHouse?
 
-Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting [business intelligence tools](/blog/best-open-source-business-intelligence-tools) with warehouse data easy, which appeals to teams wanting explore their data. ClickHouse Cloud has a growing competitive offering, but the current integrations are less numerous.
+Part of Snowflake’s value prop is the broad appeal to both technical and non-technical users. Snowflake’s marketplace makes connecting [business intelligence tools](/blog/best-open-source-business-intelligence-tools) with warehouse data easy, which appeals to teams wanting to explore their data. ClickHouse Cloud has a growing competitive offering, but the current integrations are less numerous.
 
 ClickHouse and Snowflake are both used for analytics, but ClickHouse is more focused on analytical queries. 
 
-ClickHouse is a great fit for PostHog because we are an developer platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
+ClickHouse is a great fit for PostHog because we are a developer platform – we need to be able to answer questions like “what is the average time to convert for users who saw a certain feature?” in *real time* and *at speed of click*.
 
 Traditionally, Snowflake can be considered more of a standard data warehouse or data lake where you can store all your data and then query it. This is a great fit for companies that want to store all their data in one place and then query it.
 

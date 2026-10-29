@@ -17,8 +17,8 @@ If you don't have a CDP already set up, you might not need one. PostHog has:
 
 - [SDKs](/docs/libraries) and [API](/docs/api/capture) to capture data from anywhere.
 - A [data warehouse](/docs/data-warehouse) to easily import and query data from [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), [Zendesk](/tutorials/zendesk-reports), [S3](/docs/data-warehouse/setup/s3), and more.
-- Pre-built and customizable [transformations and destinations](/docs/cdp) for cleaning and sending data to other tools like [webhooks](/docs/cdp/destinations/webhook), [Slack](/docs/cdp/destinations/slack), and more.
-- A suite of dev tools including [SQL querying](/docs/product-analytics/sql) and visualizations.
+- Pre-built and customizable [transformations and destinations](/docs/data-pipelines) for cleaning and sending data to other tools like [webhooks](/docs/data-pipelines/destinations/webhook), [Slack](/docs/data-pipelines/destinations/slack), and more.
+- A suite of dev tools including [SQL querying](/docs/data-warehouse/sql) and visualizations.
 
 This means PostHog can act as your single source of truth without needing to set up and pay for another tool.
 
@@ -35,9 +35,9 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 In general, we recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
 
-We have most of the [destinations](/docs/cdp/destinations) you need, but if we don't currently support, you have three options:
+We have most of the [destinations](/docs/data-pipelines/destinations) you need, but if we don't currently support, you have three options:
 
-1. Use our [custom webhook destination](/docs/cdp/destinations/webhook) or build your own [realtime destinations](/docs/cdp/destinations) to call the 3rd-party API.
+1. Use our [custom webhook destination](/docs/data-pipelines/destinations/webhook) or build your own [realtime destinations](/docs/data-pipelines/destinations) to call the 3rd-party API.
 2. Request a new destination by clicking **Can't find what your looking for?** when [creating a new destination](https://app.posthog.com/pipeline/new/destination) in-app and our team will be notified.
 3. Fully transition to a 3rd party CDP.
 
@@ -47,7 +47,7 @@ A[Website - Javascript Web SDK] --> B[PostHog]
 C[iOS App - Swift SDK] --> B[PostHog]
 D[Android App - Java SDK] --> B[PostHog]
 E[Backend - Python SDK] --> B[PostHog]
-B[PostHog] --> H[Saleforce]
+B[PostHog] --> H[Salesforce]
 B[PostHog] --> I[Intercom]
 B[PostHog] --> K[Customer.io]
 B[PostHog] --> F[Data warehouse e.g. BigQuery / Snowflake]
@@ -63,7 +63,7 @@ B[PostHog] --> F[Data warehouse e.g. BigQuery / Snowflake]
 
 ### Sending PostHog data to a 3rd party CDP for extra destinations
 
-If PostHog doesn't have your destination and you can't build your own, another option is to send data to your CDP like [RudderStack](/docs/cdp/rudderstack-export) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog.
+If PostHog doesn't have your destination and you can't build your own, another option is to send data to your CDP like [RudderStack](/docs/data-pipelines/destinations/rudderstack) and then add the destination you need. This gives you more destinations than PostHog alone, while also mostly relying on PostHog.
 
 > **Note:** This won't work for the CDP device-mode sources such as Facebook Ads and Google Ads (where the CDP injects the marketing script onto the page). If you need this, we'd recommend integrating the marketing platforms directly, using Google Tag Manager or using a 3rd party CDP as your primary CDP (option 2).
 
@@ -75,7 +75,7 @@ D[Android App - Java SDK] --> B[PostHog]
 E[Backend - Python SDK] --> B[PostHog]
 B --> G
 G[3rd party CDP e.g. RudderStack] --> N[Extra destinations]
-B --> H[Saleforce]
+B --> H[Salesforce]
 B --> I[Intercom]
 B --> K[Customer.io]
 B --> F[Data warehouse e.g. BigQuery / Snowflake]
@@ -94,7 +94,7 @@ E[Backend - CDP Python SDK] --> G
 G[3rd party - CDP<br/>e.g. Segment/RudderStack] --> B[PostHog]
 G --> N[Google Ads]
 G --> O[Facebook Ads]
-G --> H[Saleforce]
+G --> H[Salesforce]
 G --> I[Intercom]
 G --> K[Customer.io]
 G --> F[Data warehouse e.g. BigQuery / Snowflake]

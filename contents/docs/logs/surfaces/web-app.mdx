@@ -1,0 +1,75 @@
+---
+title: Use Logs in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com/logs) is home base for Logs. It's where you search log records, narrow them down with facets, mine patterns across services, and set up the alerts that tell you when something changes.
+
+Most investigations start the same way: filter to a service and severity, find the log line that matters, then pivot to the [session replay](/docs/logs/link-session-replay), [person](/docs/logs/link-person), or error attached to it.
+
+## Before you start
+
+1. **Set up Logs** – [send them to PostHog with an OpenTelemetry client](/docs/logs/installation) so there's something to read.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **[Search and filter](/docs/logs/search)** – narrow logs with the facet rail, the filter bar, or free-text search, and save a filter combination as a view you can switch back to.
+- **[Mine patterns](/docs/logs/patterns)** – group similar log lines into templates to spot noisy logging, new error shapes, and changes in your traffic.
+- **[Set up alerts](/docs/logs/alerts)** – get notified when the volume of logs matching a filter crosses a threshold, with noise-reduction settings so brief spikes don't wake anyone up.
+- **[Explain a log with PostHog AI](/docs/logs/explain-logs-ai)** – open a log record and have PostHog AI write up what it means and what probably caused it.
+
+## Explain a log with PostHog AI
+
+Open any log record and switch to the **Explore with AI** tab, and [PostHog AI](/docs/posthog-ai) explains that line: a severity assessment, ranked probable causes, suggested next steps, and the fields worth your attention. It's handy when the log came from a service you don't own.
+
+This is a feature of the log detail view, not an assistant you can hold a conversation with. It explains the one record you have open – it doesn't search your logs and it can't act on them. Finding the right record is still the job of filters, patterns, and free-text search, or of your coding agent over [MCP](/docs/logs/surfaces/mcp).
+
+See [Explain a log with PostHog AI](/docs/logs/explain-logs-ai) for what it returns and what it reads.
+
+## Configure Logs for your project
+
+A few things are project setup rather than day-to-day investigation, so they live outside the logs viewer.
+
+[PII scrubbing](/docs/logs/pii-scrubbing) is a toggle in [**Settings** → **Environment** → **Logs**](https://app.posthog.com/settings/environment-logs). It redacts emails, bearer tokens, and secret keys at ingestion, before anything is written to storage.
+
+Sampling and drop rules live under **Logs** in the app. They decide what share of high-volume, low-value log records you keep, which is the main lever you have on [cost](/docs/logs/pricing). Set these up once when you onboard a noisy service, not while you're debugging.
+
+## Self-driving reports
+
+When a [log alert](/docs/logs/alerts) starts firing, or breaks and auto-disables, it emits a signal into [Self-driving](/docs/self-driving). Related signals get grouped into a [report](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox) with the logs behind them, and when there's a code fix, a drafted pull request. To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+From the inbox, you can:
+
+- Open a report to see the alert that triggered it, the matching logs, and any related errors and replays
+- Review the pull request, and merge it when the fix holds up
+
+### What gets signalled
+
+Alerts only signal on two transitions. Not every state change is worth waking an agent for:
+
+| Transition | Why it's signalled |
+| --- | --- |
+| **Firing** | The threshold was crossed – something is worth investigating now |
+| **Broken** | The alert failed repeatedly and auto-disabled – your monitoring has a hole in it |
+
+Resolving alerts and transient errors are deliberately not signalled, so your Self-driving inbox stays about real problems.
+
+### What PostHog finds on its own
+
+Alerts only catch what you thought to alert on. Alongside them, PostHog sweeps your logs for shifts nobody wrote a threshold for:
+
+- **New and rate-shifted patterns** – a message template that's brand new, or whose rate has moved sharply against the same window last week
+- **Volume bursts** – a service logging far more than it usually does
+- **Severity shifts** – the mix tilting toward error or fatal
+- **Silent services** – a service that was logging and has stopped
+
+These arrive as [reports](/docs/self-driving/reports) with the services, messages, and time ranges behind them. A log shift is usually an investigation rather than a one-line code change, so these are written up for you to confirm – they don't open a pull request on their own.
+
+## Related
+
+- Get your first logs flowing in [Start here](/docs/logs/start-here).
+- Query logs from your editor over [MCP](/docs/logs/surfaces/mcp).
+- Script alerts and exports with the [Logs API](/docs/logs/surfaces/api).
+- Make your logs worth searching with [logging best practices](/docs/logs/best-practices).

@@ -20,13 +20,15 @@ If the answer is "yes", we have to go back to the drawing board, either in terms
 
 The order of effectiveness for assets is video > graphics/photos > text only, and we prioritize what's posted accordingly.
 
-Unless otherwise stated, we optimize for a mobile viewing experience, as that's where approximately 80% of our impressions on social media come from. That means photos in 4x5, and video in 9x16.
+Unless otherwise stated, we optimize for a mobile viewing experience, as that's where approximately 80% of our impressions on social media come from. That means photos in 4:5, and video in 9:16. It also means we include captions whenever possible, since approximately 80% of people also browse social media on mute.
 
 We are not overly-concerned with everything PostHog-related needing to come from the PostHog brand accounts. On some platforms, LinkedIn especially, this is actually a hindrance: content performs much better and is perceived more earnestly when it comes from an individual.
 
 Posts from the brand account follow our [style guide](/handbook/content/posthog-style-guide), except if it's a reply.
 
 Replies should be done in lowercase. This humanizes the brand slightly as it underscores that a human would have written it, and is in the same style that [James](https://x.com/james406) uses on social media. More details on this can be found on the [voice & tone handbook page](/handbook/brand/tone).
+
+If you are a PM and looking to have posts go out about a specific product or campaign, hop on over to the [product marketing handbook section on social media](/handbook/marketing/social-media).
 
 ## What metrics we look at
 
@@ -36,7 +38,7 @@ Because of this, we take a more holistic view at social media performance: we pr
 
 ## How to run social media for PostHog
 
-There are two places to check a few times a day for opportunities to interact and repost: one is via each app's notifications. The other is the `#brand-mentions` Slack channel, where Octolens pulls in brand mentions from across several platforms. This channel is especially useful as it picks up mentions where we are not explicitly tagged.
+There are two places to check a few times a day for opportunities to interact and repost: one is via each app's notifications. The other is the `#brand-mentions` Slack channel, where [Octolens](octolens.com) pulls in brand mentions from across several platforms. This channel is especially useful as it picks up mentions where we are not explicitly tagged.
 
 On weekends at 11am PT, `#weekend-brand-mentions` has a summary of the 10 most relevant mentions we've received in the past 24 hours posted by a friendly bot.
 
@@ -64,7 +66,7 @@ LinkedIn is a platform that rewards individual contributions over amplifying com
 
 The audience which sees our posts on LinkedIn is less interested in technical content than X, so what we share reflects that. Insight into the business of PostHog and testimonies of building from PostHog employees are what performs well.
 
-Articles or posts are shared with a 4x5 graphic or photo and with the outbound link included at the foot of each post, only if required. This is an inexact science, as traditional advice is to never include outbound links or to bury it in the comments. However, LinkedIn-native articles have not performed especially well for us, so this is the logical best practice.
+Articles or posts are shared with a 4:5 graphic or photo and with the outbound link included at the foot of each post, only if required. This is an inexact science, as traditional advice is to never include outbound links or to bury it in the comments. However, LinkedIn-native articles have not performed especially well for us, so this is the logical best practice.
 
 For specific LinkedIn posting advice on personal channels, see the [LinkedIn posting page](/handbook/content/linkedin).
 
@@ -76,12 +78,12 @@ See the [video](/handbook/marketing/video) page.
 
 Yeah, we're on 'em.
 
-On these Twitter clones, our content consists of X posts, duplicated. In the case of articles, we duplicate our LinkedIn posts (4x5 image, short summary, link at bottom if necessary).
+On these Twitter clones, our content consists of X posts, duplicated. In the case of articles, we duplicate our LinkedIn posts (4:5 image, short summary, link at bottom if necessary).
 
 Because our offering is thinner on these two platforms, we can take more liberties with reposting use cases or mentions. Have fun with it.
 
 ### Posting on Instagram
 
-Instagram's a platform we are actively trying to mature on. Our goal is to set a cadence of posting articles in carousel format, and our [first carousel](https://instagram.com/p/DZ_dGYGgQZK) has already gone out.
+Instagram's a platform we are actively trying to mature on. Our goal is to set a cadence of posting articles in carousel format, interspersed with short-form video content.
 
 Like Threads and Bluesky, we can take more liberties with the mentions and interactions we have, especially if someone tags us in an IG story when they're at a conference or event.

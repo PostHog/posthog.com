@@ -14,12 +14,11 @@ export default function useDataPipelinesNav({ type }: { type?: string }): { slug
         }
     `)
 
-
     return allPostHogPipeline.nodes
         .filter((node: any) => (type ? node.type === type : true) && node.status !== 'coming_soon')
         .sort((a: any, b: any) => a.name.localeCompare(b.name))
         .map((node: any) => ({
-            url: `/docs/cdp/${type}s/${node.slug}`,
+            url: `/docs/data-pipelines/${type}s/${node.slug}`,
             name: node.name,
             ...(node.status === 'coming_soon' && {
                 badge: {

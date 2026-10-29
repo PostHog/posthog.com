@@ -15,10 +15,14 @@ interface MenuItem {
     icon?: React.ReactNode
     /** Renders a trailing ↗ and opens in a new tab. Also inferred for `http(s)` URLs. */
     external?: boolean
+    /** Start this collapsible item expanded (otherwise it only opens when a child is active). */
+    defaultOpen?: boolean
     badge?: {
         title: string
         className?: string
     }
+    /** `sidebar` appearance only: wrap a long label onto more lines instead of truncating it. */
+    wrap?: boolean
 }
 
 /** A flat list of `{name}` headers + `{name,url}` links grouped into sections. */
@@ -60,6 +64,14 @@ interface TreeMenuProps {
      */
     rootHeading?: string
     activeUrl?: string
+    /**
+     * When true, parent (collapsible) rows only toggle open/closed on click instead of
+     * navigating. For landing sidebars that want expand-in-place categories. Only applies to
+     * the `listed` variant.
+     */
+    expandOnly?: boolean
+    /** Called after a link is clicked, e.g. to capture an analytics event. */
+    onItemClick?: (item: MenuItem) => void
 }
 
 /** Genuinely off-site URL — opens in a new browser tab. */
@@ -134,11 +146,14 @@ const MarqueeLabel = ({
     children,
     hovering,
     className = '',
+    wrap = false,
 }: {
     children: React.ReactNode
     /** Driven by the parent link's hover so the whole row triggers the scroll, not just the text. */
     hovering: boolean
     className?: string
+    /** Wrap the text onto more lines instead of truncating and scrolling it. */
+    wrap?: boolean
 }) => {
     const outerRef = useRef<HTMLSpanElement>(null)
     const [distance, setDistance] = useState(0)
@@ -154,7 +169,7 @@ const MarqueeLabel = ({
         setDistance(overflow > 1 ? overflow : 0)
     }, [hovering])
 
-    const animate = hovering && distance > 0
+    const animate = !wrap && hovering && distance > 0
     // Scroll a little past the end so the last characters clear the right-edge fade.
     const travel = distance + 16
 
@@ -176,13 +191,17 @@ const MarqueeLabel = ({
                     {children}
                 </motion.span>
             ) : (
-                <span data-marquee-text className="block truncate">
+                <span data-marquee-text className={`block ${wrap ? 'whitespace-normal' : 'truncate'}`}>
                     {children}
                 </span>
             )}
         </span>
     )
 }
+
+/** An element icon before a `sidebar` link label, as in ProductNav. String icon names are ignored. */
+const SidebarIcon = ({ icon }: { icon: MenuItem['icon'] }) =>
+    icon && typeof icon !== 'string' ? <span className="mr-1 size-4 inline-flex shrink-0">{icon}</span> : null
 
 /** ProductNav-matching link used by the `sidebar` appearance. */
 const SidebarLink = ({
@@ -204,10 +223,12 @@ const SidebarLink = ({
     return (
         <Link
             to={menuItem.url || ''}
-            external={httpExternal}
+            externalNoIcon={httpExternal}
             // Arrow (`external`-flagged) internal links open in a new PostHog OS window.
             state={arrow && !httpExternal ? { newWindow: true } : undefined}
-            onClick={() => onClick(menuItem)}
+            onClick={() => {
+                if (!httpExternal) onClick(menuItem)
+            }}
             onMouseEnter={() => setHovering(true)}
             onMouseLeave={() => setHovering(false)}
             // Hover stays lighter than the selected state so the current page remains dominant.
@@ -219,8 +240,11 @@ const SidebarLink = ({
             }`}
             style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
         >
-            <MarqueeLabel hovering={hovering}>{menuItem.name}</MarqueeLabel>
-            {arrow && !httpExternal && <IconArrowUpRight className="size-3.5 shrink-0 opacity-60" />}
+            <SidebarIcon icon={menuItem.icon} />
+            <MarqueeLabel hovering={hovering} wrap={menuItem.wrap}>
+                {menuItem.name}
+            </MarqueeLabel>
+            {arrow && <IconArrowUpRight className="size-3.5 shrink-0 opacity-60" />}
         </Link>
     )
 }
@@ -290,10 +314,9 @@ function SidebarCollapsibleItem({
         if (childActive) setOpen(true)
     }, [childActive])
 
-    // When open, the nested submenu becomes an elevated white card (per wireframe).
     return (
-        <div className={open ? 'rounded bg-white dark:bg-dark p-px shadow-lg' : ''}>
-            <div className="flex items-center gap-px">
+        <div className={open ? 'mb-1' : ''}>
+            <div className={`flex items-center gap-px ${open ? 'rounded bg-accent/50' : ''}`}>
                 <Link
                     to={item.url || ''}
                     onClick={() => onClick(item)}
@@ -309,6 +332,7 @@ function SidebarCollapsibleItem({
                     }`}
                     style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
                 >
+                    <SidebarIcon icon={item.icon} />
                     <MarqueeLabel hovering={hovering}>{item.name}</MarqueeLabel>
                 </Link>
                 <button
@@ -338,7 +362,7 @@ function SidebarCollapsibleItem({
                         transition={{ duration: 0.2, ease: 'easeInOut' }}
                         className="overflow-hidden"
                     >
-                        <div className="flex flex-col gap-px pt-px">
+                        <div className="ml-2 mt-px flex flex-col gap-px border-l border-primary/30 pl-1">
                             {renderSidebarItems(item.children || [], activeItem, onClick, index + 1)}
                         </div>
                     </motion.div>
@@ -351,7 +375,7 @@ function SidebarCollapsibleItem({
 const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
     const url = currentUrl.replace(/\/$/, '')
     for (const item of items) {
-        if (item.url?.replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
+        if (item.url?.split('?')[0].replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
             return item
         }
         if (item.children?.length) {
@@ -406,7 +430,14 @@ const renderSectionItems = (
     })
 
 export function TreeMenu(props: TreeMenuProps) {
-    const { watchPath = true, variant = 'listed', appearance = 'os', rootHeading, activeUrl } = props
+    const {
+        watchPath = true,
+        variant = 'listed',
+        appearance = 'os',
+        rootHeading,
+        activeUrl,
+        expandOnly = false,
+    } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
@@ -415,16 +446,17 @@ export function TreeMenu(props: TreeMenuProps) {
 
     const handleClick = (item: MenuItem) => {
         setActiveItem(item)
+        props.onItemClick?.(item)
     }
 
-    const items = useMemo(() => props.items, [])
+    const items = props.items
     const sections = useMemo(() => buildSections(items || []), [items])
 
     useEffect(() => {
         if (watchPath) {
             setActiveItem(getActiveItem(items || [], activeUrl ?? appWindow?.path ?? pathname))
         }
-    }, [appWindow?.path, activeUrl])
+    }, [items, watchPath, activeUrl, appWindow?.path, pathname])
 
     if (!items?.length) {
         return <p className="text-sm">No posts available</p>
@@ -504,7 +536,14 @@ export function TreeMenu(props: TreeMenuProps) {
                 const key = `${item.name}-${index}-${item.url}`
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
-                    <TreeMenuItem key={key} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
+                    <TreeMenuItem
+                        key={key}
+                        item={item}
+                        activeItem={activeItem}
+                        index={0}
+                        onClick={handleClick}
+                        expandOnly={expandOnly}
+                    />
                 ) : (
                     <TreeLink key={key} menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
                 )
@@ -540,14 +579,24 @@ function CollapsibleSection({
         if (containsActive) setOpen(true)
     }, [containsActive])
 
-    // When open, the whole section becomes an elevated white card (per wireframe).
+    // Sidebar groups use a highlighted heading and an inset guide line rather
+    // than enclosing a potentially long branch in a card. The elevated
+    // treatment remains for the default OS-style TreeMenu elsewhere.
+    const openSectionClassName = open
+        ? appearance === 'sidebar'
+            ? 'mb-1'
+            : 'rounded bg-white dark:bg-dark p-px shadow-lg'
+        : ''
+
     return (
-        <div className={open ? 'rounded bg-white dark:bg-dark p-px shadow-lg' : ''}>
+        <div className={openSectionClassName}>
             <button
                 type="button"
                 onClick={() => setOpen((prev) => !prev)}
                 aria-expanded={open}
-                className="group flex w-full items-center justify-between gap-2 px-2 py-1 text-left text-secondary/50 hover:text-secondary transition-colors hover:transition-none"
+                className={`group flex w-full items-center justify-between gap-2 px-2 py-1 text-left text-secondary/50 hover:text-secondary transition-colors hover:transition-none ${
+                    open && appearance === 'sidebar' ? 'rounded bg-accent/50' : ''
+                }`}
             >
                 <span data-sidebar-label className="text-sm truncate">
                     {section.heading}
@@ -572,7 +621,11 @@ function CollapsibleSection({
                         transition={{ duration: 0.2, ease: 'easeInOut' }}
                         className="overflow-hidden"
                     >
-                        <div className="flex flex-col gap-px pb-px">
+                        <div
+                            className={`flex flex-col gap-px pb-px ${
+                                appearance === 'sidebar' ? 'ml-2 mt-px border-l border-primary/30 pl-1' : ''
+                            }`}
+                        >
                             {appearance === 'sidebar'
                                 ? renderSidebarItems(section.items, activeItem, onClick)
                                 : renderSectionItems(section.items, activeItem, onClick)}
@@ -584,14 +637,10 @@ function CollapsibleSection({
     )
 }
 
-const isOpen = (children: MenuItem[], activeItem: MenuItem | undefined): boolean => {
+const isOpen = (item: MenuItem, activeItem: MenuItem | undefined): boolean => {
     if (!activeItem) return false
-    return (
-        children &&
-        children.some((child: MenuItem) => {
-            return child === activeItem || (child.children && isOpen(child.children, activeItem))
-        })
-    )
+    if (item === activeItem) return true
+    return (item.children || []).some((child) => isOpen(child, activeItem))
 }
 
 function TreeMenuItem({
@@ -599,13 +648,15 @@ function TreeMenuItem({
     activeItem,
     index = 0,
     onClick,
+    expandOnly = false,
 }: {
     item: MenuItem
     activeItem: MenuItem | undefined
     index: number
     onClick: (item: MenuItem) => void
+    expandOnly?: boolean
 }) {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(() => item.defaultOpen || (Boolean(item.children) && isOpen(item, activeItem)))
     const hasChildren = item.children && item.children.length > 0
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
@@ -616,7 +667,7 @@ function TreeMenuItem({
 
     useEffect(() => {
         if (item.children && !open && activeItem) {
-            setOpen(isOpen(item.children, activeItem))
+            setOpen(isOpen(item, activeItem))
         }
     }, [pathname])
 
@@ -632,8 +683,7 @@ function TreeMenuItem({
                             : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
                     }`}
                     active={activeItem === item}
-                    to={item.url || item.children?.[0]?.url}
-                    asLink
+                    {...(expandOnly ? {} : { to: item.url || item.children?.[0]?.url, asLink: true })}
                     onClick={() => onClick(item)}
                     size="md"
                     hover="background"
@@ -666,6 +716,7 @@ function TreeMenuItem({
                                     activeItem={activeItem}
                                     index={index + 1}
                                     onClick={onClick}
+                                    expandOnly={expandOnly}
                                 />
                             ) : (
                                 <TreeLink

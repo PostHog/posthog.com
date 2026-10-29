@@ -7,7 +7,7 @@ import {
     DebugFixSlide,
     TestRolloutSlide,
 } from 'components/Home/HeroCarousel/slides'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useApp } from '../../../context/App'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { CTAs } from 'components/CTAs'
@@ -91,6 +91,7 @@ export const Hero = () => {
                         className="inline-block h-10 w-auto align-baseline relative ml-1.5 mr-1 relative top-2"
                         variant={siteSettings.theme === 'dark' ? 'mono' : 'gradient'}
                         color={siteSettings.theme === 'dark' ? 'white' : undefined}
+                        width="auto"
                     />{' '}
                     <span className="inline-block">
                         <RollingWords steps={HERO_VERBS} className="text-primary font-bold" />

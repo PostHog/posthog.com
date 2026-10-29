@@ -5,29 +5,81 @@ import { useState } from 'react'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
-import { IconMCP } from 'components/OSIcons'
+import { IconDiscord, IconMCP } from 'components/OSIcons'
 
-export const CTAs = () => {
+/**
+ * Secondary links shown under the buttons. A product can change the set with
+ * `ctaLinks` on its product data (e.g. `src/hooks/productData/replay_vision.tsx`),
+ * which the Overview template passes through as `links`.
+ */
+export type CTALinkKey = 'mcp' | 'demo' | 'discord' | 'talk-to-a-human'
+
+const ctaLinks: Record<CTALinkKey, { to: string; label: string; Icon: React.ComponentType<any> }> = {
+    mcp: { to: '/docs/model-context-protocol', label: 'MCP', Icon: IconMCP },
+    demo: { to: '/demo', label: 'Watch a demo', Icon: IconPlayFilled },
+    discord: { to: 'https://discord.gg/t57vmkcm95', label: 'Discord', Icon: IconDiscord },
+    'talk-to-a-human': { to: '/talk-to-a-human', label: 'Talk to a human', Icon: IconHeadset },
+}
+
+const DEFAULT_LINKS: CTALinkKey[] = ['mcp', 'demo', 'talk-to-a-human']
+
+/**
+ * Replaces the default "Get started - free" and "Install with AI" buttons. A product can
+ * set this with `ctaButtons` on its product data (e.g. a sales-led beta like
+ * `src/hooks/productData/data_warehouse.tsx`), which the Overview template passes through.
+ */
+export type CTAButtons = {
+    primary: { label: string; to: string }
+    secondary?: { label: string; to: string }
+}
+
+export const CTAs = ({
+    wizardCommand,
+    links = DEFAULT_LINKS,
+    buttons,
+}: {
+    wizardCommand?: string
+    links?: CTALinkKey[]
+    buttons?: CTAButtons
+}) => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <>
             <div className="@container">
-                <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
-                    <CallToAction
-                        to="https://app.posthog.com/signup"
-                        size="lg"
-                        state={{ newWindow: true, initialTab: 'signup' }}
-                    >
-                        Get started - free
-                    </CallToAction>
-                    <CallToAction
-                        type="secondary"
-                        size="lg"
-                        onClick={() => setShowIntegrationPrompt((current) => !current)}
-                    >
-                        Install with AI
-                    </CallToAction>
-                </div>
+                {buttons ? (
+                    <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
+                        <CallToAction to={buttons.primary.to} size="lg" state={{ newWindow: true }}>
+                            {buttons.primary.label}
+                        </CallToAction>
+                        {buttons.secondary && (
+                            <CallToAction
+                                type="secondary"
+                                size="lg"
+                                to={buttons.secondary.to}
+                                state={{ newWindow: true }}
+                            >
+                                {buttons.secondary.label}
+                            </CallToAction>
+                        )}
+                    </div>
+                ) : (
+                    <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
+                        <CallToAction
+                            to="https://app.posthog.com/signup"
+                            size="lg"
+                            state={{ newWindow: true, initialTab: 'signup' }}
+                        >
+                            Get started - free
+                        </CallToAction>
+                        <CallToAction
+                            type="secondary"
+                            size="lg"
+                            onClick={() => setShowIntegrationPrompt((current) => !current)}
+                        >
+                            Install with AI
+                        </CallToAction>
+                    </div>
+                )}
             </div>
             <motion.div
                 className="overflow-hidden"
@@ -38,29 +90,29 @@ export const CTAs = () => {
                     data-scheme="secondary"
                     className="mt-4 p-4 border border-primary rounded-md bg-primary [&_h3]:mt-0 [&_ul]:mb-0 [&_ul]:p-0"
                 >
-                    <IntegrationPrompt />
+                    <IntegrationPrompt command={wizardCommand} />
                 </div>
             </motion.div>
 
             <p className="!text-sm flex flex-wrap items-center gap-2 mt-4 justify-start">
-                <Link
-                    to="/docs/model-context-protocol"
-                    state={{ newWindow: true }}
-                    className="text-secondary hover:text-primary"
-                >
-                    <IconMCP className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">MCP</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/demo" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconPlayFilled className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Watch a demo</span>
-                </Link>
-                <span className="text-secondary">•</span>
-                <Link to="/talk-to-a-human" state={{ newWindow: true }} className="text-secondary hover:text-primary">
-                    <IconHeadset className="size-4 mr-1 inline-block relative -top-px" />
-                    <span className="underline font-semibold">Talk to a human</span>
-                </Link>
+                {links.map((key, index) => {
+                    const { to, label, Icon } = ctaLinks[key]
+                    const external = to.startsWith('http')
+                    return (
+                        <React.Fragment key={key}>
+                            {index > 0 && <span className="text-secondary">•</span>}
+                            <Link
+                                to={to}
+                                state={external ? undefined : { newWindow: true }}
+                                externalNoIcon={external}
+                                className="text-secondary hover:text-primary"
+                            >
+                                <Icon className="size-4 mr-1 inline-block relative -top-px" />
+                                <span className="underline font-semibold">{label}</span>
+                            </Link>
+                        </React.Fragment>
+                    )
+                })}
             </p>
         </>
     )

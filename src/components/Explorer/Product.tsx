@@ -162,7 +162,7 @@ export default function Product({
                         width="full"
                         size="xl"
                         icon={<IconMessage className="text-red" />}
-                        to={`/questions/topic${slug}`}
+                        to={`/forum`}
                         className="text-primary hover:text-primary"
                     >
                         Questions?

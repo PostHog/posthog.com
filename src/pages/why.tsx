@@ -117,7 +117,7 @@ export default function Why(): JSX.Element {
                     your codebase.
                 </p>
                 <p>
-                    And if you're using PostHog Code, our Signals suite constantly scans for bugs, issues, and UX
+                    And if you're using PostHog Desktop, our Signals suite constantly scans for bugs, issues, and UX
                     problems and creates pull requests to fix them – all automatically.
                 </p>
             </WhyPostHogViewer>

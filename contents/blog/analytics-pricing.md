@@ -7,6 +7,11 @@ author:
     - james-hawkins
 featuredImageType: full
 category: PostHog news
+crosspost:
+    - Founders
+tags:
+    - Founders
+    - Sales and pricing
 ---
 
 ## TL;DR
@@ -109,8 +114,6 @@ It's in pre-production. Release date TBD.
 We would never fight hedgehogs, how dare you.
 
 > ## FAQ
->
-> <p class="!-mb-12 text-xs">&nbsp;</p>
 >
 > ### Do I still get 1 million free events?
 >

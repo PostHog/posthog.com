@@ -8,7 +8,7 @@
  * it serves (a skill can serve several).
  *
  * `example_prompts` are illustrative user asks. They lean on PostHog's current
- * capabilities — including PostHog Code (our AI editor that opens PRs), Signals,
+ * capabilities — including PostHog Desktop (our AI editor that opens PRs), Signals,
  * and cross-product chains — so they show how skills and tools combine into real
  * outcomes, not just read-only analytics.
  *
@@ -43,7 +43,7 @@ export const skillsData: IncomingSkill[] = [
         example_prompts: [
             'Figure out what mary@acme.com is complaining about and summarize what broke',
             "Why did this user's checkout fail yesterday? Pull their session and the logs around it",
-            'Find the error behind this ticket and have PostHog Code open a PR with the fix',
+            'Find the error behind this ticket and have PostHog Desktop open a PR with the fix',
         ],
     },
     {
@@ -138,7 +138,7 @@ export const skillsData: IncomingSkill[] = [
         example_prompts: [
             'Did the 2pm deploy introduce any new errors? Compare before vs after the annotation',
             'Surface issues that only started after our last release',
-            'If the deploy caused this spike, open a revert PR with PostHog Code',
+            'If the deploy caused this spike, open a revert PR with PostHog Desktop',
         ],
     },
     {
@@ -615,7 +615,7 @@ export const skillsData: IncomingSkill[] = [
         example_prompts: [
             'List flags at 100% rollout or untouched for 6 months and propose cleanup',
             'Which flags are safe to remove from the code?',
-            'Find stale flags and open a cleanup PR with PostHog Code',
+            'Find stale flags and open a cleanup PR with PostHog Desktop',
         ],
     },
     {
@@ -2551,7 +2551,7 @@ export const skillsData: IncomingSkill[] = [
         flow: 'inbox-reports-list, inbox-reports-retrieve, conversations-tickets-update',
         example_prompts: [
             'Triage today’s Signals inbox and route each report to the right area',
-            'Disposition the inbox and, for the top crash, have PostHog Code open a PR',
+            'Disposition the inbox and, for the top crash, have PostHog Desktop open a PR',
             'Clear the inbox and tag everything by product',
         ],
     },

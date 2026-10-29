@@ -1,34 +1,34 @@
 ---
-title: Email channel
+title: Connect email
 sidebar: Docs
 showTitle: true
 ---
 
-The email channel lets customers reach you by email. Incoming emails become support tickets in PostHog, and your replies are sent back as emails – keeping the full conversation threaded in both places.
+The email channel lets customers reach you by email. Incoming emails turn into support tickets in PostHog. Your replies go back as emails, so the whole conversation stays threaded in both places.
 
-- **Email to PostHog** – incoming emails are forwarded to PostHog and become support tickets
-- **PostHog to email** – your replies in PostHog are sent as emails back to the customer
+- **Email to PostHog** – Incoming emails get forwarded to PostHog as support tickets.
+- **PostHog to email** – Your replies in PostHog are sent as emails back to the customer.
 
-## Connecting an email address
+## Connect an email address
 
-1. Go to **Support > Settings > Email channel**
-2. Click **Add email address**
-3. Enter the email customers will contact you at (e.g. `support@company.com`) and a display name
+1. Go to **Support** > **Settings** > **Email channel**.
+2. Click **Add email address**.
+3. Enter the email customers will contact you at, like `support@company.com`, and a display name.
 4. You'll get a **forwarding address** – set this up in your email provider:
-   - **Gmail:** Settings → Forwarding → Add a forwarding address
-   - **Outlook:** Settings → Mail → Forwarding → Enable forwarding
-5. Add the DNS records shown (SPF and DKIM) to your domain – this lets PostHog send replies on your behalf
-6. Click **Verify domain** once DNS records are in place
+   - **Gmail** – Settings > Forwarding > Add a forwarding address
+   - **Outlook** – Settings > Mail > Forwarding > Enable forwarding
+5. Add the SPF and DKIM DNS records shown to your domain – this lets PostHog send replies on your behalf.
+6. Click **Verify domain** once DNS records are in place.
 
 You can connect up to 10 email addresses per project (e.g. `support@`, `billing@`, `sales@`).
 
 <CalloutBox icon="IconInfo" title="Multiple addresses share one inbox" type="fyi">
 
-All connected email addresses feed into the same Support inbox. Use the sender address shown on each ticket to tell which address the customer contacted.
+All connected email addresses feed into the same Support inbox. Use the **sender address** shown on each ticket to tell which address the customer contacted.
 
 </CalloutBox>
 
-## Domain verification
+## Verify your domain
 
 Your domain must be verified before PostHog can send replies. Verification checks that the required SPF and DKIM DNS records are set up correctly.
 
@@ -46,7 +46,7 @@ Use **Send test email** after verification to confirm everything works.
 
 ## How it works
 
-### Inbound (customer to you)
+### Inbound – customer to you
 
 When a customer sends an email to your connected address, it's forwarded to PostHog and:
 
@@ -57,7 +57,7 @@ When a customer sends an email to your connected address, it's forwarded to Post
 
 Tickets from email show `email` as the channel source in the [inbox](/docs/support/inbox) and can be filtered by it.
 
-### Outbound (you to customer)
+### Outbound – you to customer
 
 When you reply to an email ticket in PostHog:
 
@@ -72,7 +72,40 @@ When you reply to an email ticket in PostHog:
 
 Email threads are tracked automatically. Replies from the customer land on the same ticket, and your replies appear in the customer's email thread. This works across email clients (Gmail, Outlook, Apple Mail, etc.).
 
-## Viewing email tickets
+## Start a new email ticket
+
+You can email a customer first, without an incoming email or chat. PostHog creates a ticket and sends your message as the first email.
+
+1. Go to **Support** > **Tickets**.
+2. Click **New ticket**.
+3. In **From**, select the address to send from. Only addresses with a verified domain show. Your primary address is selected by default.
+4. In **To**, enter the customer's email address.
+5. Add a **Subject** (optional) and your **Message**.
+6. Click **Send**.
+
+PostHog opens the new ticket with the status `open`. When the customer replies, the reply goes to the same ticket.
+
+<CalloutBox icon="IconInfo" title="Before you start" type="fyi">
+
+You need at least one connected email address with a verified domain, and editor access to tickets.
+
+</CalloutBox>
+
+### Start a ticket with the API
+
+To start tickets from your own systems, send a request to `POST /api/projects/:project_id/conversations/tickets/compose/`. Use a personal API key with the `ticket:write` scope.
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `recipient_email` | Yes | The customer's email address |
+| `email_config_id` | Yes | The ID of the connected email address to send from |
+| `message` | Yes | The message, in Markdown |
+| `email_subject` | No | The email subject |
+| `recipient_distinct_id` | No | Links the ticket to a person in PostHog |
+
+See the [Conversations API reference](/docs/api/conversations-2) for the full request and response.
+
+## View email tickets
 
 Email-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget and Slack tickets. Each email ticket shows:
 
@@ -83,15 +116,15 @@ You can filter the ticket list by channel source to see only email tickets.
 
 ## Workflows
 
-Email tickets work with [workflow automation](/docs/support/workflows) just like widget and Slack tickets. You can set SLAs, auto-assign, auto-tag, and change status based on any ticket event.
+Email tickets work with [workflow automation](/docs/support/workflows) like widget and Slack tickets. You can set SLAs, auto-assign, auto-tag, and change status based on any ticket event.
 
 The `channel_source` property is `email` for email-sourced tickets, so you can build channel-specific Workflows. For example, set a different SLA for email tickets or route them to a specific team.
 
-## Disconnecting
+## Disconnect an email address
 
 To remove a connected email address:
 
-1. Go to **Support > Settings > Email channel**
+1. Go to **Support** > **Settings** > **Email channel**
 2. Click **Disconnect** on the email address you want to remove
 
 Existing tickets from that address are not affected – they remain in your inbox.

@@ -12,7 +12,7 @@ featuredImage: >-
 category: Engineering
 tags:
   - Engineering
-  - AI Observability
+  - AI observability
 ---
 
 Software testing used to be relatively straightforward.
@@ -112,7 +112,7 @@ LLM-as-a-Judge evaluators have a higher cost than deterministic code-based evalu
 
 After learning about the types of evaluators that can help you test your agent, similar to how you used to write integration tests, you now write multiple evaluation suites, with a mix of code-based and LLM-as-a-Judge evaluators. You cover your happy paths as well as edge cases and some of the bugs you've been fixing over the past little while.
 
-Now, every time you make a change to your agent, you can run the agentic loop and regenerate all the outputs with instances of your database and everything else running locally. This feeds into the code-based and LLM-as-a-Judge evaluators and gives you a report of the evaluation results.
+Now, every time you make a change to your agent, you can run the agentic loop and regenerate all the outputs with [instances of your database](/blog/how-to-benchmark-ai-agents#level-3-restored-real-data-slices) and everything else running locally. This feeds into the code-based and LLM-as-a-Judge evaluators and gives you a report of the evaluation results.
 
 You then realize that running these locally means trusting that everyone to do that before shipping changes, but as with unit tests, we don't leave it to chance. You add a pipeline step in your CI to run all of these evaluation suites. You can, and probably should, limit which PRs these evaluations are run for. If there are no changes in the agent code it's not worth spending money on LLM tokens to run the evaluations.
 
@@ -163,4 +163,4 @@ First, you observe real behavior with tracing. Then you turn the failures you se
 
 That matters because you are never going to cover every possible input. You cannot. The goal is not perfect coverage. The goal is to make sure every bad interaction teaches your system something permanent. Manual review finds the issue. An eval makes it repeatable. CI and production monitoring stop it from quietly coming back.
 
-If you are just getting started, you do not need a huge eval platform on day one. Start with tracing, one small dataset built from real user queries and recent bugs, one or two cheap code-based evaluators, one LLM-as-a-Judge evaluator for a subjective criterion, and a regular trace review ritual. That is enough to move from testing your agent by vibes to operating a real quality system.
+If you are just getting started, you do not need a huge eval platform on day one. Start with tracing, one small dataset built from real user queries and recent bugs, one or two cheap code-based evaluators, one LLM-as-a-Judge evaluator [for a subjective criterion](/newsletter/agent-autonomy#level-1-human-in-the-loop), and a regular trace review ritual. That is enough to move from testing your agent by vibes to operating a real quality system.

@@ -8,15 +8,14 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - People
-  - Ops & finance
+  - Running the company
 crosspost:
   - Blog
 ---
 
 Most founders I talk to approach their first ops hire in a totally sensible but wrong way. Their typical approach is to look at the long list of admin debt they have accumulated, cry a bit, and then look for someone who has done those tasks before, plus a bit extra. However, the reality is that _attributes_ >>> technical expertise when it comes to your _first_ ops hire.
 
-This person will have a disproportionate impact on your company culture. They'll do work that affects everyone on the team personally, and hopefully ensure the founders can focus on [finding product-market fit](/blog/product-market-fit-game) and making the company a success. 
+This person will have a disproportionate impact on your company culture. They'll do work that affects everyone on the team personally, and hopefully ensure the founders can focus on [finding product-market fit](/founders/product-market-fit-game) and making the company a success. 
 
 With that in mind, these are the top three attributes they need...
 

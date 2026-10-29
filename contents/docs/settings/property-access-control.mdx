@@ -1,0 +1,74 @@
+---
+title: Property access control
+sidebar: Docs
+showTitle: true
+availability:
+  free: none
+  selfServe: none
+  enterprise: full
+---
+
+Use property access control to hide sensitive event and person properties from members who shouldn't see them. Restricted properties don't appear in filters and are masked in SQL.
+
+This is a separate feature from [resource access control](/docs/settings/access-control) and [warehouse access control](/docs/settings/warehouse-access-control). It requires the [Enterprise plan](/platform-packages).
+
+## How it works
+
+Each event or person property has a default access level, plus optional member and role overrides. Access levels are checked in this order:
+
+1. A rule for that member
+2. A rule for one of that member's roles
+3. The property's default
+
+Organization admins always have full access.
+
+Levels:
+
+- **Read & write** – Can query the property, edit person property values on a person's page, and update its definition (description, visibility, tags).
+- **Read only** – Can query the property but can't edit person property values.
+- **No access** – Can't view, query, or filter by the property. Explicit SQL reads return `NULL`, and whole-property objects omit the key.
+
+**Note:** Group and session properties aren't supported yet.
+
+## Set access for a property
+
+1. Go to [Property definitions](https://app.posthog.com/data-management/properties)
+2. Open the property and click **Edit**
+3. Set permissions under **Access control**
+
+Only project admins and organization admins can change these rules.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_def_access_control_light_e1aa06d386.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_def_access_control_dark_d6d1f88e08.png"
+    alt="Access control settings on a property definition"
+    classes="rounded"
+/>
+
+You can also review and configure all existing property rules in the project's [access control settings](https://app.posthog.com/settings/project-access).
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_access_control_settings_light_6b896d7650.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_access_control_settings_dark_9226f3e63f.png"
+    alt="Property rules in the project access control settings"
+    classes="rounded"
+/>
+
+## Prevent a role from exporting your user base
+
+**Use case**: You want to prevent members of a specific role from querying and exporting email addresses.
+
+**Setup**:
+
+1. Open the project's [access control settings](https://app.posthog.com/settings/project-access)
+2. Open the **Roles** tab and select the role
+3. Under **Property rules**, click **Add rule**
+4. Select the person property that contains email addresses and set it to **No access**
+5. Members with that role can't query the property or use it in filters
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_role_access_control_light_f273f3fd1e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/property_role_access_control_dark_1194cb3bac.png"
+    alt="Email property rules set to No access for the Contractor role"
+    classes="rounded"
+/>

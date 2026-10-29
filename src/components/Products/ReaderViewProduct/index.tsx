@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
-import { useCustomers } from 'hooks/useCustomers'
 import { useProductInterest } from 'hooks/useProductInterest'
 import ProgressBar from 'components/ProgressBar'
 
@@ -12,16 +11,15 @@ import buildProductMenuTabs, { type ProductSurface } from './buildProductMenuTab
 import ProductSwitcher from './ProductSwitcher'
 import { templateRegistry } from './templates'
 
-export { default as buildProductMenuTabs } from './buildProductMenuTabs'
+export { default as buildProductMenuTabs, surfaceBasePath } from './buildProductMenuTabs'
 export type { ProductSurface } from './buildProductMenuTabs'
 export { default as ProductNav } from './ProductNav'
 export { default as ProductSwitcher } from './ProductSwitcher'
-export { getProductSurfaceUrl } from './getProductSurfaceUrl'
 export { templateRegistry } from './templates'
 export { resolveTemplate } from './types'
 export type { ProductNavItem, SectionComponentProps } from './types'
 export type { MenuTab } from 'components/ReaderView'
-export { LabeledList, FilterTag, InlineCode } from './helpers'
+export { LabeledList, FilterTag, InlineCode, PRODUCT_SURFACE_H1 } from './helpers'
 
 interface ProductReaderViewProps {
     productHandle: string
@@ -77,14 +75,10 @@ export default function ProductReaderView({
 }: ProductReaderViewProps) {
     const productData = useProduct({ handle: productHandle }) as any
     const allProducts = useProduct() as any[]
-    const { getCustomers, hasCaseStudy } = useCustomers()
 
     useProductInterest(productData?.slug)
 
     const sectionsRef = useRef<HTMLDivElement>(null)
-
-    const customerSlugs = productData?.customers ? Object.keys(productData.customers) : []
-    const customers = getCustomers(customerSlugs)
 
     if (!productData) {
         return (
@@ -105,9 +99,6 @@ export default function ProductReaderView({
 
     const sharedSectionProps = {
         productData,
-        customers,
-        customerSlugs,
-        hasCaseStudy,
         allProducts,
     }
 
@@ -116,7 +107,7 @@ export default function ProductReaderView({
             <SEO
                 title={seoOverrides?.title || productData?.seo?.title}
                 description={seoOverrides?.description || productData?.seo?.description}
-                image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
+                image={seoOverrides?.image || productData?.seo?.image || `/images/og/default.png`}
             />
             <ReaderView
                 title={productData?.name}
@@ -124,7 +115,7 @@ export default function ProductReaderView({
                 proseSize="lg"
                 showQuestions={false}
                 menuTabs={menuTabs}
-                productSelect={<ProductSwitcher activeHandle={productData.handle} />}
+                productSelect={<ProductSwitcher activeHandle={productData.handle} surface={surface} />}
             >
                 <div ref={sectionsRef} className="flex flex-col gap-12">
                     {groupSurfaceMenu(surfaceMenu).map((group, groupIndex) => {

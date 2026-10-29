@@ -44,7 +44,7 @@ Consider:
 -   If you can get from your hacky MVP to production-ready easily. It's OK to start with basic, but be mindful of making it harder to fully roll something out in future.
 -   If you know what you're doing or need someone from another team's expertise to get the right architecture or overall approach. We have lots of experienced people, get their help if you would benefit from it.
 
-If this is a big feature which will need an announcement, content, or other marketing support then it's _never_ too early for [the owner](/handbook/engineering/development-process#assign-an-owner) to let the Marketing team know. Drop a post in their Slack channel or tagging them on an issue.
+If this is a big feature which will need an announcement, content, or other marketing support then it's _never_ too early for [the owner](/handbook/engineering/development-process#assign-an-owner) to let the Developer Marketing team know. Drop a post in their Slack channel or tagging them on an issue.
 
 ### Break up goals
 
@@ -64,7 +64,7 @@ Work in the iteration should:
 -   have a clear owner in the team
 -   have a clear link to the team or company goals
 
-As one of our values is [Why not now?](/handbook/company/values#why-not-now), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
+As one of our values is [Why not now?](/handbook/values#why-not-now), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
 
 ### Evaluate success
 
@@ -104,7 +104,7 @@ Sometimes, tasks need a few review cycles to get resolved, and PRs remain open f
 -   It's always good to put new features behind [feature flags](/docs/user-guides/feature-flags). It's even better to develop partial features behind feature flags. As long as it's clear what needs to be done before a flag can be lifted, you can usually get the smallest bit of any new feature out in a day this way.
 -   Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer if they get a clean PR to review.
 -   Push your code out as a draft PR early on, so everyone can see the work in progress, and comment on the validity of the general approach when needed.
--   Remember that PRs can be reverted as easily as they can be merged. Don't be afraid to get stuff in early if it makes things better. [Why not now?](/handbook/company/values#why-not-now).
+-   Remember that PRs can be reverted as easily as they can be merged. Don't be afraid to get stuff in early if it makes things better. [Why not now?](/handbook/values#why-not-now).
 -   Most importantly, [really understand why it's paramount to reduce WIP](https://loom.com/share/5efceb288b634a449041918bdba08202), until you feel it in your bones.
 
 ## Writing code
@@ -119,7 +119,7 @@ When you have a piece of code ready to be reviewed, create a PR. Link the PR to 
 
 All PRs should be attributable to a human author as far as possible, even if they were assisted by an agent.
 
-Fully automatically generated PRs might come from an agent like PostHog Code or from systems like Dependabot. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn never be attributed to a human author, as the changes were not directly or indirectly made by a human.
+Fully automatically generated PRs might come from an agent like PostHog Desktop or from systems like Dependabot. These PRs are fine, but they should be clearly labelled as such and include a clear description of the changes being made and any relevant context about the generation process. These PRs should in turn never be attributed to a human author, as the changes were not directly or indirectly made by a human.
 
 For external contributors, our [AI contributions policy](https://github.com/PostHog/posthog/blob/master/AI_POLICY.md) covers expectations around AI-assisted PRs.
 
@@ -257,7 +257,7 @@ Our testing, reviewing and building process should be good enough that we're com
 
 Always request a review on your pull request (or leave unassigned for anyone to pick up when available). We avoid merging without any review unless it's an emergency fix and no one else is available (especially for posthog.com). During an incident, the [Force-merge a PR](#break-glass-force-merge-a-pr) Slack app is the sanctioned break-glass way to merge a PR that branch protection would otherwise block.
 
-Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
+Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our <PrivateLink url="https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md">charts repository</PrivateLink>. Check out the `#platform-bots` Slack channel to see how your deploy is progressing.
 
 We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status.
 
@@ -274,13 +274,15 @@ Branch protection on the `posthog` repo requires a review and green CI before an
 - The PR author is a member of the PostHog GitHub org (no fork PRs from external contributors).
 - You're a full Slack workspace member with a `@posthog.com` email.
 
+It bypasses required reviews and checks, but **not** [commit signing](/handbook/engineering/security#commit-signing). A PR carrying an unsigned commit can't be force-merged, so sign your commits before reaching for this during an incident.
+
 **Everything is audited.** Each force-merge posts an audit message to Slack, comments on the PR recording who triggered it and the reason, and writes a tamper-proof (object-locked) record, alongside an EventBridge event and a CloudWatch metric that alarms on unusual volume. Accountability is after the fact, so expect to justify any force-merge — and cover it in the [post-mortem](/handbook/engineering/operations/post-mortems) if it was part of an incident.
 
 ### Deploy notification bot
 
 After your PR is deployed to an environment, a bot automatically comments on the merged PR with the deployment status. The **dev** deployment triggers the initial comment. As **prod-us** and **prod-eu** finish deploying, the bot updates the same comment in-place rather than posting new ones.
 
-If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the [deploy workflow](https://github.com/PostHog/charts/actions/workflows/state-deploy.yml) in PostHog/charts for failures.
+If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the <PrivateLink url="https://github.com/PostHog/charts/actions/workflows/state-deploy.yml">deploy workflow</PrivateLink> in PostHog/charts for failures.
 
 ### Verifying your deployment
 
@@ -288,7 +290,7 @@ After merging, your code should deploy automatically. If you need to verify your
 
 #### 1. Check state.yaml (what *should* be deployed)
 
-The [charts repository state.yaml](https://github.com/PostHog/charts/blob/main/state.yaml) is the source of truth for what ArgoCD is trying to deploy. Find your service (e.g., `ingestion`, `posthog`) and check the commit SHA listed.
+The <PrivateLink url="https://github.com/PostHog/charts/blob/main/state.yaml">charts repository state.yaml</PrivateLink> is the source of truth for what ArgoCD is trying to deploy. Find your service (e.g., `ingestion`, `posthog`) and check the commit SHA listed.
 
 #### 2. Check running pods (what's *actually* deployed)
 
@@ -338,7 +340,7 @@ If a deployment appears stuck, reach out in `#support-infrastructure` or ping `@
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="content" /> teams to document features.
+It's not the responsibility of either <SmallTeam slug="website" /> or <SmallTeam slug="marketing" /> teams to document features.
 
 See our [docs style guide](/handbook/content/posthog-style-guide) for tips on how to write great docs.
 

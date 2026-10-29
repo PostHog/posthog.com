@@ -351,7 +351,7 @@ Equally important, you can customize properties on the exceptions to help you co
 
 When capturing exceptions manually, passing properties to the capture exception method adds them to the event just like any other PostHog event.
 
-You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
+You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-exceptions-are-grouped-into-issues) exceptions together at capture time.
 
 Here are some examples of how to override exception properties:
 
@@ -451,7 +451,7 @@ client.Enqueue(exception)
 
 When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event. 
 
-You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
+You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-exceptions-are-grouped-into-issues) exceptions together at capture time.
 
 The process is slightly different depending on the SDK you're using.
 

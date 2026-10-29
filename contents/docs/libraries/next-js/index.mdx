@@ -77,7 +77,7 @@ See the [React SDK docs](/docs/libraries/react) for examples of how to use:
 - [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
 - [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
 
-You can also read [the full `posthog-js` documentation](/docs/libraries/js/features) for all the usable functions.
+You can also read [the full `posthog-js` documentation](/docs/libraries/js/usage) for all the usable functions.
 
 ## Server-side analytics
 
@@ -106,7 +106,9 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
 
 ## Configuring a reverse proxy to PostHog
 
-To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), [Next.js middleware](/docs/advanced/proxy/nextjs-middleware), and [Vercel rewrites](/docs/advanced/proxy/vercel).
+To improve the reliability of client-side tracking and make requests less likely to be intercepted by tracking blockers, you can setup a reverse proxy in Next.js. Read more about deploying a reverse proxy using [Next.js rewrites](/docs/advanced/proxy/nextjs), the [Next.js proxy file](/docs/advanced/proxy/nextjs-middleware) (`middleware.ts` on Next.js 15 and earlier), and [Vercel rewrites](/docs/advanced/proxy/vercel). With the Next.js rewrites and proxy file options, also set `skipTrailingSlashRedirect: true` in your Next.js config. PostHog API paths end with a slash, and without this setting, Next.js redirects each request before it forwards it.
+
+If you use [`@posthog/next`](/docs/libraries/next-js/posthog-next), its `proxy` option includes a reverse proxy. See [Add the proxy file](/docs/libraries/next-js/posthog-next#add-the-proxy-file).
 
 ## Further reading
 

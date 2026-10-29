@@ -7,7 +7,7 @@ showTitle: true
 sidebar: Docs
 tags:
   - feature flags
-  - experiments
+  - experimentation
 ---
 
 Sticky feature flags ensure users maintain their original variant assignment even after rollout conditions change. This is crucial for experiments where you need consistent user experiences throughout the test period, regardless of changes to targeting rules or rollout percentages.

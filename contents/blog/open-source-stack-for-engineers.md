@@ -20,7 +20,7 @@ At PostHog, we believe an open source approach doesn’t just lead to greater gr
 
 We think the open source approach is best because it forces teams to be transparent, both in their decision making and also in their implementation. Then, because other teams have full visibility of the code, they can build on it and make it even better, faster and _stronger_. Often, they can do this for free.  
 
-Of course, PostHog isn’t the only [open-source analytics platform](/blog/best-open-source-analytics-tools) out there. In fact, there’s such variety that it’s possible to build an entirely open-source stack — and here are some of our favorite open source alternatives for engineers.
+Of course, PostHog isn’t the only [open-source analytics platform](/compare/best-open-source-analytics-tools) out there. In fact, there’s such variety that it’s possible to build an entirely open-source stack — and here are some of our favorite open source alternatives for engineers.
 
 > Not an engineer? Find other [open source alternatives on the PostHog blog](/blog/categories/open-source)!
 
@@ -29,14 +29,14 @@ Of course, PostHog isn’t the only [open-source analytics platform](/blog/best-
 ![PostHog - best open source analytics for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/gdpr-compliant-analytics/posthog-gdpr-compliant.png)
 
 - **Useful for:** Product analytics, session recording, feature flags<br/>
-- **Alternative to:** [Amplitude](/blog/best-amplitude-alternatives), [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Matomo](/blog/posthog-vs-matomo)<br/>
+- **Alternative to:** [Amplitude](/compare/best-amplitude-alternatives), [Mixpanel](/blog/why-i-ditched-google-analytics-for-posthog), [Matomo](/compare/posthog-vs-matomo)<br/>
 - **License:** [MIT](https://en.wikipedia.org/wiki/MIT_License)<br/>
 
 Of course, [PostHog](https://posthog.com) may not be the _only_ open source software useful to engineers, but it’s our (completely biased) favorite. 
 
 PostHog’s all-in-one suite of dev tools that is direct alternative to expensive, proprietary tools such as Amplitude, Mixpanel or Heap. It’s entirely self-serve, can be self-hosted or deployed in the cloud, and offers everything from funnel analytics and path analysis to cohort creation and user tracking. Best of all, because PostHog can be deployed on-prem, it’s more suitable for teams worried about [GDPR compliance](/docs/privacy/gdpr-compliance) and [HIPAA compliance](/docs/privacy/hipaa-compliance).
 
-Unlike proprietary platforms such as Amplitude however, PostHog offers far more than just core analytics. Features such as session recording, feature flags and experimentation mean it can also act as an [open-source alternative to LaunchDarkly](/blog/best-open-source-feature-flag-tools), [HotJar](/blog/best-open-source-session-replay-tools), [VWO](/blog/best-open-source-ab-testing-tools) and more. This means PostHog isn’t just useful to engineers, but also to product managers and other teams which work closely with engineering.
+Unlike proprietary platforms such as Amplitude however, PostHog offers far more than just core analytics. Features such as session recording, feature flags and experimentation mean it can also act as an [open-source alternative to LaunchDarkly](/compare/best-open-source-feature-flag-tools), [HotJar](/blog/best-open-source-session-replay-tools), [VWO](/blog/best-open-source-ab-testing-tools) and more. This means PostHog isn’t just useful to engineers, but also to product managers and other teams which work closely with engineering.
  
 ### Strengths
 - All-in-one product analytics

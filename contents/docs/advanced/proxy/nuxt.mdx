@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
 
   // Forward headers, excluding ones that shouldn't be proxied
   const headers = new Headers()
-  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding']
+  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding', 'cookie', 'authorization']
 
   const requestHeaders = getRequestHeaders(event)
   for (const [key, value] of Object.entries(requestHeaders)) {
@@ -121,7 +121,7 @@ export default defineEventHandler(async (event) => {
 
   // Forward headers, excluding ones that shouldn't be proxied
   const headers = new Headers()
-  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding']
+  const excludedHeaders = ['host', 'connection', 'content-length', 'transfer-encoding', 'accept-encoding', 'cookie', 'authorization']
 
   const requestHeaders = getRequestHeaders(event)
   for (const [key, value] of Object.entries(requestHeaders)) {
