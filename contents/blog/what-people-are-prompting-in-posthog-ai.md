@@ -17,7 +17,7 @@ tags:
 
 As a product marketer, I’m a bit nosy. Are you? 
 
-You must be seeing as you clicked on this post. Well in that case, let’s get on with it. Take a peek over PostHog AI’s shoulder into the [past year](/blog/8-learnings-from-1-year-of-agents-posthog-ai) of prompting. 
+You must be seeing as you clicked on this post. Well in that case, let’s get on with it. Take a peek over PostHog AI’s shoulder into the past year of prompting. 
 
 See how we aggregated this data at the [end](#how-we-pulled-this-data). 
 
@@ -41,7 +41,7 @@ Prompters put their trust in PostHog AI, asking things like "what should be my g
 
 1,424 people asked our AI how to pay us less (which we can [definitely help with](/handbook/customer-success/cost-optimization)), and almost 800 people asked for help with something for their boss or investors. 734 just wanted to know "is this good?" 
 
-Even though more than 4 in 10 prompts have no capital letters, and sometimes contain a mild crash out like “I NEED A F\*CKING USER FUNNEL CHART AAAAH”, PostHog AI was happy to help with (almost) every query.
+Even though more than 4 in 10 prompts have no capital letters, and sometimes contain a mild crash out like “I NEED A F\*CKING USER FUNNEL CHART AAAAH”, PostHog AI was happy to help with ([almost](/blog/how-to-benchmark-ai-agents)) every query.
 
 ## Yes, and?
 
@@ -61,7 +61,7 @@ For unknown reasons, engineers ask for pie charts almost 2x as often as data peo
 
 Prompters misspelled "PostHog" in at least 29 ways. 2,916 people wrote "Post Hog" with a space. The top typos are poshog, posthug, psothog, and posthig. Only 350 people mentioned [hedgehogs](/blog/drawing-hedgehogs) (which is shockingly low).
 
-When asking PostHog AI about other tools, Claude was the most named (by 7.2k people, and 2.3k of them meant Claude Code), followed by Slack (6.2k), Stripe (5.5k), GitHub (3.2k), ChatGPT (2.9k), Vercel (2.8k), and Supabase (2.4k). We did not count ad and social platforms, like Google Ads and Facebook. More than 270 people asked PostHog AI who it is or which model it uses. 99 people still call it Max, its [old name](/blog/why-we-killed-our-ai-product-assistant) before it became PostHog AI. 
+When asking PostHog AI about other tools, Claude was the most named (by 7.2k people, and 2.3k of them meant Claude Code), followed by Slack (6.2k), Stripe (5.5k), GitHub (3.2k), ChatGPT (2.9k), Vercel (2.8k), and Supabase (2.4k). We did not count ad and social platforms, like Google Ads and Facebook. More than 270 people asked PostHog AI who it is or [which model it uses](/blog/training-ai-models). 99 people still call it Max, its [old name](/blog/why-we-killed-our-ai-product-assistant) before it became PostHog AI. 
 
 ## Celebrating data all year round
 
@@ -83,7 +83,7 @@ Compared with a normal day, New Year's Day 2026 was the quietest day of the year
 
 **What**: We used every message that people sent to PostHog AI in the PostHog web app from October 28, 2025 to October 27, 2026: 3.67 million messages from 230,000 people, on US Cloud and EU Cloud.
 
-This does not include PostHog AI in Slack. It also does not include prompts that people send to their own AI tools (like Claude Code or Cursor) through the [PostHog MCP server](/docs/model-context-protocol). Those prompts go to a different agent: the MCP server only runs tool calls in PostHog, and the prompt stays in the person's own tool.
+This does not include PostHog AI in Slack. It also does not include prompts that people send to their own AI tools (like Claude Code or Cursor) through the [PostHog MCP server](/docs/model-context-protocol). Those prompts go to a different agent: the MCP server only runs tool calls in PostHog, and the prompt stays in the person's own tool. (If you want to know what those agents get up to, we [watched them too](/blog/how-ai-agents-behave).)
 
 **Where it comes from**: We did all of the work in PostHog:
 
