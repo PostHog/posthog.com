@@ -110,13 +110,16 @@ This is the bar for end of month 1.
 - You've suggested and made changes to our systems that enable you to do your job better
 - Think about customer health scores and add/change anything you learn here
 
-## Anti-patterns
+## What to Avoid
 
-Habits we see new CSMs fall into. Every one of these has been done by someone on the team who is now good at the job.
+While you're ramping up, here are some common mistakes we often see new joiners make in their first few months:
 
 - **Skimming the surface of your accounts.** [Discovery calls](/handbook/customer-success/getting-started-with-customers#3-your-first-call) stay at "anything we can help with?", your outreach is an introduction with no value, and your account read is whatever Claude said, pasted forward without checking the data behind it. PostHog CS is about going deeper than a typical account manager, and providing tangible value to customers based on their use case. Aim to understand how each product is implemented, how your customer is using it, and what value they're getting out of it. [The levers we have](/handbook/customer-success/customer-success#the-levers-we-have) are a great reference, and you should be familiar with all of them.
+
 - **Polishing instead of shipping.** Researching and understanding a problem is great, but don't let the pursuit of perfect get in the way of good enough. Try to get a problem at least 60% of the way there before [reaching out to a customer](/handbook/customer-success/getting-started-with-customers#2-reach-out), but don't wait for 100%, it's often not worth the work. Quiet customers [act on tips without ever replying](/handbook/customer-success/engaging-unengaged-customers#steady-drumbeat-of-usage-specific-tips), so a message you didn't send is value you withheld.
+
 - **Being a better support ticket.** Your week is driven by whatever lands in Slack and PostHog Support, and you never talk to an account unless something is broken. The loudest customers find us anyway, but the quietly struggling ones don't, and those are the ones that churn. [Investigate your book](/handbook/customer-success/getting-started-with-customers#4-ongoing), and use our [health tracking](/handbook/customer-success/health-tracking) and [churn signals](/handbook/customer-success/churn-reasons) to find risk and proactively address it.
+
 - **Being content with one champion.** One great contact always replies, so you stop looking for anyone else, and the PM or data team never learns you exist. [Champion leaves](/handbook/customer-success/churn-reasons#champion-leaves) is one of our most common churn reasons. Cast a wide net from day one and [keep working with new people and departments](/handbook/customer-success/lifecycle-csm#stage-2-establishing-trust).
 
 ## Learning PostHog
