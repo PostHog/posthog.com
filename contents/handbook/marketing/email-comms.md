@@ -68,7 +68,7 @@ For example:
 ## Email broadcasts
 We regularly send three types of email broadcasts. 
 
-1. Changelog, a product announcement email sent bi-weekly via PostHog Workflows. 
+1. Changelog, a product announcement email sent bi-weekly (every two weeks) via PostHog Workflows. 
 2. PostHog for Startups, an email to users of our startup program. Sent monthly, via PostHog Workflows.
 3. Launch emails, which are 'random acts of marketing', but fairly consistent with every product team shipping alpha, beta and GA features each quarter.
 
@@ -77,12 +77,12 @@ Occasionally we send other ad-hoc email broadcasts for specific activities such 
 ### Changelog
 The changelog email is part of [the new release process](/handbook/marketing/product-announcements) and is used for [product announcements](/handbook/marketing/product-announcements).
 
-Every month, we use PostHog Workflows to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last month. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for making users aware of new beta features. A test is shared with the team before we send to users. 
+Every two weeks, we use PostHog Workflows to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last two weeks. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for making users aware of new beta features. A test is shared with the team before we send to users. 
 
 We categorize these emails as `Changelog updates` in Workflows, so users can manage their subscriptions. In order to maintain high deliverability, we target users in the [active users cohort](#targeting-emails). 
 
 ### PostHog for Startups
-Each month, we send an email to users in our PostHog for Startup program. A test is shared with the team before we send to users. This email is targeted to users in the following segments, all at once: `PostHog for Startups (Old)`, `Users in the YC program, old and new`, `Old startup teams (Backfill only)`, and `PostHog for Startups and YC (new)`.
+Each month, we send an email to users in our PostHog for Startup program. A test is shared with the team before we send to users.
 
 The email is usually comprised of three sections, which inform users of new guides which are relevant to startup use-cases, new betas which are available for them to try, and a spotlight written about a new org in the program. We end by asking for feedback.
 
@@ -96,7 +96,7 @@ The exceptions and other solutions are:
 - Sending emails from beta-feedback@posthog.com – this is a Google group tied to the automation in <PrivateLink url="https://posthog.slack.com/archives/C011L071P8U">#posthog-feedback</PrivateLink> by a Slack bot. Any responses to this address get posted in that channel and anyone can reply to them using the info in there.
 - Sending emails from a specific person, but setting the reply-to address as one of the above. This is not common, but it's there if you want to use it.
 
->We specifically do not want emails we think people will reply to going into hey@posthog.com because it is sporadically monitored at best, and hard to collaborate through.
+>We specifically do not want emails we think people will reply to going into hey@posthog.com because it is sporadically monitored at best, and hard to collaborate through. See [addressing emails](#addressing-emails) for more on who emails should come from.
 
 If you're sending a launch email (alpha, beta, GA), it's helpful to add an annotation in <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">our PostHog project</PrivateLink> on the send date, so we can see its impact on our metrics later.
 
@@ -120,7 +120,7 @@ Whenever we need to send an email broadcast like this we begin by creating an is
 If you'd like to work with Marketing on an email activity, please begin by opening an issue with the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md).
 
 ## Email campaigns
-We maintain many email campaigns to help users get the most out of the product. The most developed and documented of these are our four onboarding campaigns.  
+We maintain many email campaigns to help users get the most out of the product. All of these campaigns now live in PostHog Workflows, not Customer.io. The most developed and documented of these are our four onboarding campaigns.  
 
 ### Onboarding emails
 Generally, when we talk about onboarding emails we refer specifically to the flow for PostHog Cloud sign-ups, but there are also other flows in use for other occasions.
@@ -132,7 +132,7 @@ The onboarding flow regularly changes as we test new ideas. Any changes to it ar
 
 We aim for all content in this flow to be relevant and helpful to users, without being salesy. All emails come directly from Joe and he triages replies on a daily basis, answering or redirecting as needed. The campaign is triggered when a user signs up for the first time and has a goal of users achieving `billing product activated` within 7 days of opening any email in the flow. 
 
-We tag all these email flows as `onboarding` in Customer.io and categorize them as `Welcome emails` so that users can easily manage their preferences.
+We tag all these email flows as `onboarding` in Workflows and categorize them as `Welcome emails` so that users can easily manage their preferences.
 
 #### Self-hosted and open source onboarding emails
 We sunset our paid self-hosted product a long time ago, but some users still try to use the legacy version. For this reason we run a dedicated self-hosted onboarding campaign which includes three emails sent over a course of six weeks. These emails come from the `hey@posthog.com` email address. 
@@ -142,7 +142,7 @@ The goal of this flow is to set expectations for what the self-hosted experience
 Our open source onboarding email is essentially identical to the self-hosted onboarding flow, but excludes information about the sunsetting of the self-hosted product. 
 
 #### Waitlist, alpha, and beta onboarding emails
-When a user joins a waitlist or opts in to a feature preview — via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) or a waitlist form on either a product or [the roadmap](/roadmap) page — a `$feature_enrollment_update` event is sent to Customer.io through a data pipeline and enters them into the Waitlist, Alpha, Beta onboarding flow. The flow immediately segments on the `$feature_enrollment_stage` property:
+When a user joins a waitlist or opts in to a feature preview — via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) or a waitlist form on either a product or [the roadmap](/roadmap) page — a `$feature_enrollment_update` event enters them into the Waitlist, Alpha, Beta onboarding flow in Workflows. The flow immediately segments on the `$feature_enrollment_stage` property:
 
 - **Concept:** an immediate, simple confirmation that they're on the waitlist.
 - **Alpha:** an immediate email warning of rough edges and asking for feedback.
@@ -169,21 +169,10 @@ We run a series of other small campaigns with smaller volumes. These include:
 - **Startup & YC updates** is a series of campaigns for the startups and YC programs. These broadly notify users when they join the program, and use 50%, 75% and 100% of their available credit. 
 
 ## API triggered emails
-We maintain a series of API triggered emails by working with the <SmallTeam slug="growth" />. These are found in Customer.io's transactional tool and broadly encompass billing and security updates, such as an upcoming bill or a change to 2FA settings. These emails are triggered by API in order to keep them highly relevant and with high deliverability. 
+API triggered emails are owned by the <SmallTeam slug="billing" /> and live in PostHog Workflows. They should be tagged as `[TRANSACTIONAL]`, so they're easy to tell apart from marketing emails. These emails broadly encompass billing and security updates, such as an upcoming bill or a change to 2FA settings. These emails are triggered by API in order to keep them highly relevant and with high deliverability. 
 
 Transactional emails feature Liquid code to help personalize their content. All transactional emails should contain Liquid in the main body content to clearly indicate to the user which project or organization the email is regarding, with suitable fallbacks. For example:
 
 ```
 We turned the free allowance for {{ trigger.product_name | default: "a product" }} on {% if trigger.team_name %}{{ trigger.team_name }}{% else %}your account{% endif %} off and on again, giving you another month of free usage.
 ```
-
-## Adding a new event property to Customer.io
-
-We use Customer.io to target broadcasts and campaigns — for example, the onboarding flow targets users based on their events, as well as segments which define product intent and activation. PostHog sends this information to Customer.io through a data pipeline, so a new event or property has to flow through that pipeline before you can build a segment on it.
-
-To add a new event or property:
-
-1. **Confirm the data is tracked in PostHog.** Product intent and activation criteria (such as a product's `product_key` value) are usually set up by the product manager for the relevant product. If the event or property you need isn't being tracked yet, ask the PM to create it in PostHog before going any further.
-2. **Add the event or property to the Customer.io pipeline.** Any action or property we send to Customer.io must be added to the <PrivateLink url="https://us.posthog.com/project/2/functions/0191b762-f77d-0000-1956-121a0c25c878">Customer.io destination in PostHog</PrivateLink>. If you try to build a segment on something that isn't in the pipeline, the segment won't populate.
-3. **Create the segment in Customer.io.** A newly added property won't appear in Customer.io's autocomplete when you start typing it. Instead, copy and paste the exact property name, save, and the segment will populate when the data arrives (but this is always worth testing or checking later).
-
