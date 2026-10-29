@@ -2,7 +2,7 @@ import React from 'react'
 import { cn } from '../../utils'
 import { flattenFragments } from './utils'
 
-export const truncateText = 'block min-w-0 truncate [[data-disabled]_&]:pointer-events-auto'
+export const truncateText = 'block min-w-0 truncate -my-[0.2em] py-[0.2em] [[data-disabled]_&]:pointer-events-auto'
 
 export const wrapText = 'min-w-0 [overflow-wrap:anywhere]'
 
