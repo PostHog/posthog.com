@@ -39,7 +39,7 @@ We have two repos to centralize and document private internal communication. The
 
 ### Company Internal
 
-Repository can be found in https://github.com/PostHog/company-internal
+Repository can be found in <PrivateLink url="https://github.com/PostHog/company-internal">https&#58;//github.com/PostHog/company-internal</PrivateLink>
 
 Documents any company-wide information that can't be shared publicly within People, Ops, Legal, Finance or Strategy.
 
@@ -67,11 +67,11 @@ For company-related issues that _can_ be discussed publicly, these should go in 
 
 ### Product Internal
 
-Repository can be found in https://github.com/PostHog/product-internal
+Repository can be found in <PrivateLink url="https://github.com/PostHog/product-internal">https&#58;//github.com/PostHog/product-internal</PrivateLink>
 
 Contains internal information related to the PostHog product. Documents any non-public information (as established in these guidelines) that specifically relates to engineering, product, growth or design.
 
-This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldy. More context on [this decision](https://github.com/PostHog/company-internal/issues/262).
+This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldy. More context on <PrivateLink url="https://github.com/PostHog/company-internal/issues/262">this decision</PrivateLink>.
 
 <blockquote>
 Please be sure to read the README of the repo for guidelines on how to file specific issues.
@@ -158,7 +158,7 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 **Keeping up with what we ship**
 
-We recommend everyone at PostHog joins [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) to stay current on what's shipped. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updates constantly as PRs merge.
+We recommend everyone at PostHog joins <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT"><code>#changelog</code></PrivateLink> to stay current on what's shipped. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updates constantly as PRs merge.
 
 The channel is powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into it. PRs that are still behind a feature flag stay out, based on the *Release status* section of the `posthog/posthog` PR template. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for more detail.
 
@@ -224,7 +224,7 @@ We use RFCs to communicate and gather feedback on a decision. RFCs are useful be
 Here are the steps for an RFC:
 
 1. Identify a problem and a decision to be made
-2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/requests-for-comments-internal/tree/main/_TEMPLATES).
+2. Create an RFC as a pull request using one of the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/tree/main/_TEMPLATES">RFC templates</PrivateLink>.
     - Using a template isn't a requirement, though it is a helpful and recommended starting place if you haven't written many RFCs here before. You can also get inspiration from other RFCs, as many have different sections and styles depending on the type of thing being discussed.
 3. Share the RFC:
     - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.

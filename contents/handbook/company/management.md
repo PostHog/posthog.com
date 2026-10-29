@@ -8,7 +8,7 @@ A manager at PostHog has a short list of responsibilities:
 1. Setting the right [context](#how-do-i-set-context) for your direct reports to do their jobs
 2. Making sure your direct reports are happy and productive
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
-4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
+4. Creating good plans for new person <PrivateLink url="https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110">onboarding</PrivateLink> and [small team offsites](/handbook/company/offsites#small-team-offsites)
 5. Collaborating with execs on team performance concerns that need early intervention
 6. [Communicating downstream impact to other teams](#working-with-other-teams) as needed
 7. Leading [quarterly goal setting](/handbook/company/goal-setting) for your team and ensuring goals are published
@@ -145,7 +145,7 @@ We have compared statistics in Weave against other (imperfect!) metrics that can
 
 Two things:
 - You will conduct the technical interview by default. You'll also kick off the SuperDay with candidates, and be their main point of contact in Slack. Please help us keep hiring moving by giving feedback quickly!
-- If you think your team needs someone, make a [new hire request](https://github.com/PostHog/company-internal/issues/new/choose). The exec and people team are generally on top of hiring for all teams, but this is a good approach if you think something has been missed. You'll also be asked to do one of these anyway if we're hiring for a new type of role.
+- If you think your team needs someone, make a <PrivateLink url="https://github.com/PostHog/company-internal/issues/new/choose">new hire request</PrivateLink>. The exec and people team are generally on top of hiring for all teams, but this is a good approach if you think something has been missed. You'll also be asked to do one of these anyway if we're hiring for a new type of role.
 
 See the `#technical-interviewers` channel for more info here. 
 
