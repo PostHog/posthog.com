@@ -30,7 +30,15 @@
 const fs = require('fs')
 const path = require('path')
 const { JSDOM } = require('jsdom')
-const { pageUrl, resolveUrl, extractLinks, importingPages, changedFiles, cliOptions } = require('./link-check-utils')
+const {
+    pageUrl,
+    resolveUrl,
+    extractLinks,
+    importingPages,
+    changedFiles,
+    cliOptions,
+    builtUrlExists,
+} = require('./link-check-utils')
 
 // ============================================================================
 // CONFIGURATION
@@ -48,10 +56,6 @@ const CONFIG = {
     ],
     SITEMAP_PATH: path.join(process.cwd(), 'public', 'sitemap', 'sitemap-0.xml'),
     CONTENTS_DIR: 'contents',
-    // Special case URLs that should be considered valid even if not in sitemap
-    SPECIAL_CASE_URLS: [
-        '/startups', // Dynamic route in sitemap as /startups/[...slug]
-    ],
 }
 
 // Global cache for anchor links
@@ -93,7 +97,7 @@ function parseVercelRedirects() {
         const rewrites = vercelConfig.rewrites || []
 
         // Combine redirects and rewrites (rewrites also act as redirects for link validation)
-        return [...redirects, ...rewrites]
+        return [...redirects, ...rewrites.map((entry) => ({ ...entry, rewrite: true }))]
     } catch (error) {
         throw new Error(`Could not parse vercel.json: ${error.message}`)
     }
@@ -123,13 +127,6 @@ function getSitemapPages() {
     if (pages.length === 0) throw new Error('The built sitemap contains no PostHog pages')
 
     return pages
-}
-
-// Check if URL exists in sitemap
-function urlExistsInSitemap(url, pages) {
-    // Remove trailing slash for comparison
-    const normalizedUrl = url.replace(/\/$/, '')
-    return pages.includes(normalizedUrl) || pages.includes(normalizedUrl + '/')
 }
 
 // ============================================================================
@@ -246,30 +243,13 @@ function extractAnchorsFromHtml(htmlPath) {
 // LINK VALIDATION FUNCTIONS
 // ============================================================================
 
-// Check if internal URL exists in sitemap
-function validateInternalUrl(url, pages) {
-    const [baseUrl] = url.split('#')
-
-    // Check special case URLs that should be considered valid
-    if (CONFIG.SPECIAL_CASE_URLS.includes(baseUrl)) {
-        return true
-    }
-
-    return urlExistsInSitemap(baseUrl, pages)
-}
-
 // Check if anchor exists in HTML file
-function validateAnchor(url, pages) {
+function validateAnchor(url) {
     const [baseUrl, anchor] = url.split('#')
 
     // No anchor to validate
     if (!anchor) {
         return true
-    }
-
-    // First ensure the base URL exists
-    if (!urlExistsInSitemap(baseUrl, pages)) {
-        return false
     }
 
     // Get the HTML file path and check if it exists
@@ -350,7 +330,7 @@ function processFilesInBatches(files, batchSize = CONFIG.BATCH_SIZE) {
 // Process a single link and return validation result
 function processLink(link, file, pages, redirects) {
     const value = link.page ? new URL(link.url, 'https://posthog.com' + link.page).href : link.url
-    const resolved = resolveUrl(value, file, redirects)
+    const resolved = resolveUrl(value, file, redirects, (pathname) => builtUrlExists(pathname, pages))
     if (resolved.excluded) return { type: 'excluded' }
     const { url, redirected, error } = resolved
     const pathname = url.pathname
@@ -362,6 +342,8 @@ function processLink(link, file, pages, redirects) {
         redirected,
         brokenItem: {
             file,
+            page: link.page || pageUrl(file),
+            url: new URL(value, 'https://posthog.com' + pageUrl(file)).href,
             link: link.url,
             text: link.text,
             line: link.line,
@@ -371,8 +353,7 @@ function processLink(link, file, pages, redirects) {
             ...(error ? { reason: error } : {}),
         },
     })
-    const asset = getHtmlFilePath(pathname)
-    if (error || (!validateInternalUrl(pathname, pages) && !(fs.existsSync(asset) && fs.statSync(asset).isFile()))) {
+    if (error || !builtUrlExists(pathname, pages)) {
         return result('broken')
     }
     let fragment = url.hash.slice(1)
@@ -381,7 +362,7 @@ function processLink(link, file, pages, redirects) {
     } catch {
         /* Match malformed escapes literally. */
     }
-    if (url.hash && !validateAnchor(pathname + '#' + fragment, pages)) {
+    if (url.hash && !validateAnchor(pathname + '#' + fragment)) {
         return result('broken_anchor')
     }
     return { type: 'valid', redirected }
@@ -401,7 +382,7 @@ function processAllLinks(fileResults, pages, redirects) {
         totalLinks += links.length
 
         for (const link of links) {
-            // Check for anchor (like original code)
+            // Count fragment checks after query and redirect resolution.
             const hasAnchor = link.url.includes('#')
 
             const processResult = processLink(link, file, pages, redirects)
@@ -413,7 +394,7 @@ function processAllLinks(fileResults, pages, redirects) {
                     break
                 case 'broken':
                     brokenLinks.push(processResult.brokenItem)
-                    // Count anchor links for ALL non-excluded, non-redirected links (like original)
+                    // Count each checked fragment.
                     if (hasAnchor) {
                         anchorLinksChecked++
                     }
@@ -423,7 +404,7 @@ function processAllLinks(fileResults, pages, redirects) {
                     anchorLinksChecked++
                     break
                 case 'valid':
-                    // Count anchor links for ALL non-excluded, non-redirected links (like original)
+                    // Count each checked fragment.
                     if (hasAnchor) {
                         anchorLinksChecked++
                     }
@@ -469,9 +450,9 @@ function createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, r
         brokenLinks: brokenLinks.map((broken) => ({
             type: broken.type,
             file: path.relative(process.cwd(), broken.file),
-            page: convertToPostHogUrl(broken.file),
+            page: 'https://posthog.com' + (broken.page || pageUrl(broken.file)),
             brokenLink: broken.link,
-            brokenUrl: convertToPostHogUrl(broken.link),
+            brokenUrl: broken.url,
             line: broken.line,
             text: broken.text,
             context: broken.context,
@@ -481,9 +462,9 @@ function createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, r
         brokenAnchors: brokenAnchors.map((anchor) => ({
             type: anchor.type,
             file: path.relative(process.cwd(), anchor.file),
-            page: convertToPostHogUrl(anchor.file),
+            page: 'https://posthog.com' + (anchor.page || pageUrl(anchor.file)),
             brokenLink: anchor.link,
-            brokenUrl: convertToPostHogUrl(anchor.link),
+            brokenUrl: anchor.url,
             line: anchor.line,
             text: anchor.text,
             context: anchor.context,
@@ -525,7 +506,7 @@ function displayBrokenLinks(brokenLinks) {
         console.log(`File: ${path.relative(process.cwd(), broken.file)}`)
         console.log(`Page: ${convertToPostHogUrl(broken.file)}`)
         console.log(`Broken link: ${broken.link}`)
-        console.log(`Broken URL: ${convertToPostHogUrl(broken.link)}`)
+        console.log(`Broken URL: ${broken.url}`)
         console.log(`Line #: ${broken.line}`)
         if (broken.text) {
             console.log(`Hyperlinked text: ${broken.text}`)
@@ -546,7 +527,7 @@ function displayBrokenAnchors(brokenAnchors) {
         console.log(`File: ${path.relative(process.cwd(), anchor.file)}`)
         console.log(`Page: ${convertToPostHogUrl(anchor.file)}`)
         console.log(`Broken link: ${anchor.link}`)
-        console.log(`Broken URL: ${convertToPostHogUrl(anchor.link)}`)
+        console.log(`Broken URL: ${anchor.url}`)
         console.log(`Line #: ${anchor.line}`)
         if (anchor.text) {
             console.log(`Hyperlinked text: ${anchor.text}`)

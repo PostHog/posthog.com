@@ -137,6 +137,7 @@ test('CLI fails on anchor-only findings and writes usable reports', (t) => {
     assert.equal(report.summary.brokenLinks, 0)
     assert.equal(report.summary.brokenAnchors, 1)
     assert.equal(report.brokenAnchors[0].line, 1)
+    assert.equal(report.brokenAnchors[0].brokenUrl, 'https://posthog.com/docs/guide#missing')
     const error = spawnSync(process.execPath, [cli], { cwd: path.dirname(cwd), encoding: 'utf8' })
     assert.equal(error.status, 2)
 })
@@ -207,4 +208,15 @@ test('includes literal MDX component link props without treating dynamic express
         extractLinks(file).map((link) => link.url),
         ['/docs/component', '/docs/expression']
     )
+})
+
+test('fallback rewrites do not loop or override generated files', () => {
+    const rewrites = [{ source: '/dynamic/:path*', destination: '/dynamic/[slug]/index.html', rewrite: true }]
+    const target = resolveUrl('/dynamic/example#section', null, rewrites)
+    assert.equal(target.url.pathname, '/dynamic/[slug]/index.html')
+    assert.equal(target.url.hash, '#section')
+    assert.equal(target.error, undefined)
+    const fallback = [{ source: '/:path(.*)\\.md', destination: '/api/md-not-found', rewrite: true }]
+    assert.equal(resolveUrl('/docs/page.md', null, fallback, () => true).url.pathname, '/docs/page.md')
+    assert.equal(resolveUrl('/docs/page.md', null, fallback).url.pathname, '/api/md-not-found')
 })

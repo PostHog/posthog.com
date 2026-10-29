@@ -5,7 +5,7 @@
 const fs = require('fs')
 const path = require('path')
 const ts = require('typescript')
-const { internalUrl, resolveUrl, changedFiles, cliOptions } = require('./link-check-utils')
+const { internalUrl, resolveUrl, changedFiles, cliOptions, builtUrlExists } = require('./link-check-utils')
 
 const CONFIG = {
     SITEMAP_URL: 'https://posthog.com/sitemap/sitemap-0.xml',
@@ -78,7 +78,10 @@ async function getSitemapPages() {
 
 function getRedirectSources() {
     const vercelConfig = JSON.parse(fs.readFileSync('vercel.json', 'utf8'))
-    return [...(vercelConfig.redirects || []), ...(vercelConfig.rewrites || [])]
+    return [
+        ...(vercelConfig.redirects || []),
+        ...(vercelConfig.rewrites || []).map((entry) => ({ ...entry, rewrite: true })),
+    ]
 }
 
 function findSourceFiles(dir) {
@@ -154,16 +157,14 @@ function checkLinks(pages, redirectSources, files) {
                 stats.excludedLinks++
                 continue
             }
-            const resolved = resolveUrl(url, null, redirectSources)
+            const resolved = resolveUrl(url, null, redirectSources, (pathname) => builtUrlExists(pathname, pages))
             if (resolved.excluded || shouldExclude(resolved.url.pathname)) {
                 stats.excludedLinks++
                 continue
             }
             const target = normalizeUrl(resolved.url.pathname)
             if (resolved.redirected) stats.redirectedLinks++
-            const asset = path.join(process.cwd(), 'public', target)
-            if (!resolved.error && (pages.has(target) || (fs.existsSync(asset) && fs.statSync(asset).isFile())))
-                continue
+            if (!resolved.error && builtUrlExists(target, pages)) continue
             const base = normalizeUrl(url)
             if (!brokenByUrl.has(base)) {
                 brokenByUrl.set(base, [])

@@ -45,7 +45,7 @@ function routeMatch(source, pathname) {
     return routeCache.get(source)(pathname)
 }
 
-function resolveUrl(value, file, redirects) {
+function resolveUrl(value, file, redirects, isKnown = () => false) {
     let url = internalUrl(value, file)
     if (!url) return { excluded: true }
     const seen = new Set()
@@ -55,15 +55,23 @@ function resolveUrl(value, file, redirects) {
         seen.add(url.href)
         let selected
         let params
-        for (const entry of redirects) {
-            if (typeof entry.source !== 'string' || typeof entry.destination !== 'string') continue
-            const result = routeMatch(entry.source, url.pathname)
-            // A conditional redirect does not establish a target for an anonymous reader.
-            if (result && !entry.has?.length && !entry.missing?.length) {
-                selected = entry
-                params = result.params
-                break
+        for (const rewrite of [false, true]) {
+            if (rewrite && isKnown(url.pathname)) return { url, redirected }
+            for (const entry of redirects) {
+                if (
+                    Boolean(entry.rewrite) !== rewrite ||
+                    typeof entry.source !== 'string' ||
+                    typeof entry.destination !== 'string'
+                )
+                    continue
+                const result = routeMatch(entry.source, url.pathname)
+                if (result && !entry.has?.length && !entry.missing?.length) {
+                    selected = entry
+                    params = result.params
+                    break
+                }
             }
+            if (selected) break
         }
         if (!selected) return { url, redirected }
         const destination = selected.destination.replace(/:([\w]+)[*+?]?/g, (_, name) => {
@@ -76,8 +84,19 @@ function resolveUrl(value, file, redirects) {
         if (!destination.includes('?')) next.search = url.search
         url = next
         redirected = true
+        if (selected.rewrite) return { url, redirected }
     }
     return { url, redirected, error: 'Too many redirects' }
+}
+
+function builtUrlExists(pathname, pages) {
+    const normalized = pathname.replace(/\/$/, '') || '/'
+    const canonical = normalized.replace(/\/index\.html$/, '') || '/'
+    const contains = (value) =>
+        pages instanceof Set ? pages.has(value) : pages.includes(value) || pages.includes(value + '/')
+    if (contains(normalized) || contains(canonical)) return true
+    const asset = path.join(process.cwd(), 'public', pathname)
+    return (fs.existsSync(asset) && fs.statSync(asset).isFile()) || fs.existsSync(path.join(asset, 'index.html'))
 }
 
 function maskExamples(content) {
@@ -163,6 +182,7 @@ module.exports = {
     internalUrl,
     routeMatch,
     resolveUrl,
+    builtUrlExists,
     extractLinks,
     importingPages,
     changedFiles,
