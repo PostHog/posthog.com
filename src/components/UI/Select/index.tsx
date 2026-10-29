@@ -17,6 +17,7 @@ import {
 import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName, positionerPropNames, splitProps, withClassName } from '../utils'
 import type { PositionerPropName } from '../utils'
+import { TruncatedText } from '../truncation'
 
 const selectPositionerPropNames = [...positionerPropNames, 'alignItemWithTrigger'] as const
 
@@ -79,7 +80,7 @@ const Icon = React.forwardRef<HTMLSpanElement, BaseSelect.Icon.Props>(function S
     )
 })
 
-const selectPopup = `${popupSurface} ${popupTransition} group min-w-[var(--anchor-width)] bg-clip-padding data-[side=none]:min-w-[calc(var(--anchor-width)+2rem)]`
+const selectPopup = `${popupSurface} ${popupTransition} group min-w-[var(--anchor-width)] max-w-[min(var(--available-width),max(var(--anchor-width),24rem))] bg-clip-padding data-[side=none]:min-w-[calc(var(--anchor-width)+2rem)]`
 
 const scrollArrow =
     'z-[1] flex h-4 w-full cursor-default items-center justify-center rounded-md bg-primary text-secondary'
@@ -133,7 +134,9 @@ const Item = React.forwardRef<HTMLDivElement, BaseSelect.Item.Props>(function Se
             <BaseSelect.ItemIndicator className="col-start-1 flex">
                 <IconCheck className="size-4" />
             </BaseSelect.ItemIndicator>
-            <BaseSelect.ItemText className="col-start-2">{children}</BaseSelect.ItemText>
+            <BaseSelect.ItemText className="col-start-2 min-w-0">
+                <TruncatedText>{children}</TruncatedText>
+            </BaseSelect.ItemText>
         </BaseSelect.Item>
     )
 })

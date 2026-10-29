@@ -7,6 +7,8 @@ import { Button } from '../Button'
 import { Menu } from '../Menu'
 import { focusRing } from '../styles'
 import { cn } from '../../../utils'
+import { TruncatedText } from '../truncation'
+import { flattenFragments } from '../utils'
 
 export type BreadcrumbsRootProps = React.ComponentPropsWithoutRef<'nav'> & {
     maxItems?: number
@@ -56,14 +58,6 @@ const Page = React.forwardRef<HTMLSpanElement, React.ComponentPropsWithoutRef<'s
     return <span ref={ref} {...props} aria-current="page" className={cn('block truncate text-primary', className)} />
 })
 
-function childParts(children: React.ReactNode): React.ReactNode[] {
-    return React.Children.toArray(children).flatMap((child) =>
-        React.isValidElement<{ children?: React.ReactNode }>(child) && child.type === React.Fragment
-            ? childParts(child.props.children)
-            : [child]
-    )
-}
-
 function CollapsedItems({ items }: { items: React.ReactElement<{ children?: React.ReactNode }>[] }): JSX.Element {
     return (
         <li className="flex shrink-0 items-center">
@@ -76,7 +70,7 @@ function CollapsedItems({ items }: { items: React.ReactElement<{ children?: Reac
                 </Menu.Trigger>
                 <Menu.Popup align="start">
                     {items.map((item) => {
-                        const content = childParts(item.props.children).find(
+                        const content = flattenFragments(item.props.children).find(
                             (child) => React.isValidElement(child) && child.type !== Separator
                         )
                         if (React.isValidElement<SiteLinkProps>(content) && content.type === Link) {
@@ -98,7 +92,7 @@ function CollapsedItems({ items }: { items: React.ReactElement<{ children?: Reac
                                     }
                                     className="max-w-[min(24rem,var(--available-width))]"
                                 >
-                                    <span className="truncate">{children}</span>
+                                    <TruncatedText>{children}</TruncatedText>
                                 </Menu.LinkItem>
                             )
                         }
@@ -128,7 +122,7 @@ const Root = React.forwardRef<HTMLElement, BreadcrumbsRootProps>(function Breadc
     { className, children, maxItems, ...props },
     ref
 ) {
-    const parts = childParts(children)
+    const parts = flattenFragments(children)
     const items = parts.filter(
         (child): child is React.ReactElement<{ children?: React.ReactNode }> =>
             React.isValidElement(child) && child.type === Item

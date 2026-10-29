@@ -6,6 +6,7 @@ import type { Props as LinkProps } from '../../Link'
 import { disabledHatch, focusRing, toneSolid, toneText } from '../styles'
 import { mergeClassName } from '../utils'
 import { Spinner } from '../Spinner'
+import { truncateTextChildren } from '../truncation'
 import './styles.css'
 
 export type ButtonAppearance = 'flat' | 'raised' | 'outline'
@@ -60,7 +61,7 @@ const busyCursor = '[&[data-disabled][aria-busy=true]]:cursor-progress'
 
 const disabledFade = '[&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:opacity-50'
 
-const flatBase = `relative inline-flex items-center justify-center rounded border border-transparent bg-transparent text-primary ui-button-flat hover:bg-[rgb(var(--text-primary)/0.06)] [&[aria-pressed]:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent skin-classic:border-b-3 ${busyCursor} ${focusRing}`
+const flatBase = `relative inline-flex min-w-0 max-w-full items-center justify-center rounded border border-transparent bg-transparent text-primary ui-button-flat hover:bg-[rgb(var(--text-primary)/0.06)] [&[aria-pressed]:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent skin-classic:border-b-3 ${busyCursor} ${focusRing}`
 
 const flatPadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-1 text-xs leading-4',
@@ -105,7 +106,7 @@ const flatSegment =
 const flatSegmentPadding: Record<ButtonSize, string> = { sm: 'px-2', md: 'px-2.5', lg: 'px-3' }
 
 const flatGroup =
-    'inline-flex [&>[data-segment]~[data-segment]]:border-l [&>[data-segment]~[data-segment]]:border-primary data-[disabled]:opacity-50 overflow-hidden rounded border border-primary'
+    'inline-grid max-w-full grid-flow-col auto-cols-[minmax(0,max-content)] [&>[data-segment]~[data-segment]]:border-l [&>[data-segment]~[data-segment]]:border-primary data-[disabled]:opacity-50 overflow-hidden rounded border border-primary'
 
 const raisedUnderside =
     "before:absolute before:inset-x-0 before:bottom-0 before:top-1/2 before:border-t-0 before:bg-[repeating-linear-gradient(45deg,rgb(0_0_0/0.15)_0_1px,transparent_1px_5.6569px)] before:bg-[length:8px_8px] before:content-['']"
@@ -116,7 +117,7 @@ const raisedUndersideWidth: Record<ButtonSize, string> = {
     lg: 'p-px before:border',
 }
 
-const raisedFrameBase = `relative inline-block text-center ${raisedUnderside} data-[disabled]:cursor-not-allowed ${disabledFade} ${busyCursor} ${focusRing}`
+const raisedFrameBase = `relative inline-block min-w-0 max-w-full text-center ${raisedUnderside} data-[disabled]:cursor-not-allowed ${disabledFade} ${busyCursor} ${focusRing}`
 
 const raisedHatchMotion: Record<ButtonSize, string> = {
     sm: 'before:transition-[background-position] before:duration-150 before:[transition-timing-function:cubic-bezier(0.2,0.7,0.3,1)] motion-reduce:before:transition-none [&:not([data-disabled]):active]:before:[background-position:0_1px] [&[data-pressed]]:before:[background-position:0_1px] [&[data-popup-open]]:before:[background-position:0_1px]',
@@ -144,7 +145,7 @@ const raisedUndersideRadius: Record<ButtonSize, string> = {
 }
 
 const raisedFaceBase =
-    'ui-button-face relative flex select-none items-center justify-center font-bold [[data-disabled]:not([aria-busy=true])>&]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
+    'ui-button-face relative flex min-w-0 select-none items-center justify-center font-bold [[data-disabled]:not([aria-busy=true])>&]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
 
 const raisedFaces: Record<ButtonVariant, string> = {
     danger: `border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] ${toneSolid.error} [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)]`,
@@ -176,9 +177,10 @@ const raisedFacePadding: Record<ButtonSize, string> = {
 
 const raisedFaceSquarePadding: Record<ButtonSize, string> = { sm: 'p-1', md: 'p-2', lg: 'p-2.5' }
 
-const raisedGroupBase = 'relative inline-flex p-px data-[disabled]:opacity-50'
+const raisedGroupBase =
+    'relative inline-grid max-w-full grid-flow-col auto-cols-[minmax(0,max-content)] p-px data-[disabled]:opacity-50'
 
-const raisedSegment = `relative flex focus-visible:z-10 data-[disabled]:cursor-not-allowed ${busyCursor} ${focusRing}`
+const raisedSegment = `relative flex min-w-0 focus-visible:z-10 data-[disabled]:cursor-not-allowed ${busyCursor} ${focusRing}`
 
 const raisedSegmentUnderside: Record<ButtonSize, string> = {
     sm: 'before:-bottom-px before:-left-px before:border [&:not([data-segment]~[data-segment])]:before:rounded-bl-[4px] [&:not(:has(~[data-segment]))]:before:-right-px [&:not(:has(~[data-segment]))]:before:rounded-br-[4px]',
@@ -262,7 +264,7 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
     const label = (
         <span
             className={cn(
-                'flex items-center justify-center [gap:inherit]',
+                'flex min-w-0 max-w-full items-center justify-center [gap:inherit]',
                 spinnerCoversLabel && 'opacity-0',
                 isSegment &&
                     appearance === 'raised' &&
@@ -278,7 +280,7 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
                     </span>
                 )
             )}
-            {children}
+            {truncateTextChildren(children)}
             {trailingIcon && (
                 <span aria-hidden className={iconSlot}>
                     {trailingIcon}

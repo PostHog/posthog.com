@@ -67,7 +67,7 @@ const Root = React.forwardRef<HTMLDivElement, CardRootProps>(function CardRoot(
                         data-level={resolvedLevel}
                         data-appearance={resolvedAppearance}
                         className={cn(
-                            'flex flex-col text-primary',
+                            'flex min-w-0 flex-col text-primary',
                             cardLevels[resolvedLevel],
                             cardAppearances[resolvedAppearance],
                             surfacePaddings[padding],

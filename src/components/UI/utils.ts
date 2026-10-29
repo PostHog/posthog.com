@@ -123,3 +123,12 @@ export function useSmoothHeight(shouldAnimate?: () => boolean): (element: HTMLEl
         stopObserving.current = () => observer.disconnect()
     }, [])
 }
+
+export function flattenFragments(children: React.ReactNode, fragmentKeys: React.Key[] = []): React.ReactNode[] {
+    return React.Children.toArray(children).flatMap((child) => {
+        if (!React.isValidElement<{ children?: React.ReactNode }>(child)) return [child]
+        const keys = [...fragmentKeys, child.key ?? '']
+        if (child.type === React.Fragment) return flattenFragments(child.props.children, keys)
+        return fragmentKeys.length > 0 ? [React.cloneElement(child, { key: JSON.stringify(keys) })] : [child]
+    })
+}

@@ -3,6 +3,7 @@ import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'
 import { IconChevronRight } from '@posthog/icons'
 import { disclosureChevron, focusRing, heightRevealPanel } from '../styles'
 import { mergeClassName } from '../utils'
+import { wrapText } from '../truncation'
 
 const collapsibleTrigger = `group flex cursor-default select-none items-center gap-1 rounded py-1 text-left text-sm font-semibold text-primary data-[disabled]:text-muted ${focusRing}`
 
@@ -13,7 +14,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, BaseCollapsible.Trigger.Prop
     return (
         <BaseCollapsible.Trigger ref={ref} className={mergeClassName(collapsibleTrigger, className)} {...props}>
             <IconChevronRight aria-hidden className={disclosureChevron} />
-            {children}
+            <span className={wrapText}>{children}</span>
         </BaseCollapsible.Trigger>
     )
 })

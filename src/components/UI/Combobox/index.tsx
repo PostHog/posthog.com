@@ -36,6 +36,7 @@ import { IconButton } from '../Button'
 import { cn } from '../../../utils'
 import type { FieldAppearance, FieldSize } from '../styles'
 import type { PositionerPropName } from '../utils'
+import { TruncatedText, truncateTextChildren } from '../truncation'
 
 const comboboxListMessage = 'px-3.5 py-2 text-sm leading-none text-muted empty:p-0'
 
@@ -392,14 +393,25 @@ const Chips = React.forwardRef<HTMLDivElement, Omit<BaseCombobox.Chips.Props, 's
     )
 })
 
-const Chip = withGroupSize(BaseCombobox.Chip, `${chip} cursor-default ${insetFocusRing}`, fieldChipSizes)
+const SizedChip = withGroupSize(BaseCombobox.Chip, `${chip} cursor-default ${insetFocusRing}`, fieldChipSizes)
+
+const Chip = React.forwardRef<HTMLDivElement, Omit<BaseCombobox.Chip.Props, 'size'>>(function ComboboxChip(
+    { children, ...props },
+    ref
+) {
+    return (
+        <SizedChip ref={ref} {...props}>
+            {truncateTextChildren(children)}
+        </SizedChip>
+    )
+})
 
 const ChipRemove = withGroupSize(BaseCombobox.ChipRemove, chipRemove, fieldChipRemoveSizes, {
     children: <IconX className="size-3" />,
     'aria-label': 'Remove',
 })
 
-const comboboxPopup = `${popupSurface} ${popupTransition} min-w-[var(--anchor-width)] max-w-[var(--available-width)] bg-clip-padding`
+const comboboxPopup = `${popupSurface} ${popupTransition} min-w-[var(--anchor-width)] max-w-[min(var(--available-width),max(var(--anchor-width),24rem))] bg-clip-padding`
 
 export type ComboboxPopupProps = BaseCombobox.Popup.Props &
     Pick<BaseCombobox.Positioner.Props, PositionerPropName> & {
@@ -444,7 +456,9 @@ const Item = React.forwardRef<HTMLDivElement, BaseCombobox.Item.Props>(function 
             <BaseCombobox.ItemIndicator className="col-start-1 flex">
                 <IconCheck className="size-4" />
             </BaseCombobox.ItemIndicator>
-            <span className="col-start-2">{children}</span>
+            <span className="col-start-2 min-w-0">
+                <TruncatedText>{children}</TruncatedText>
+            </span>
         </BaseCombobox.Item>
     )
 })

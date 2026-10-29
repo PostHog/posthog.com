@@ -1,6 +1,7 @@
 import React from 'react'
 import { cn } from '../../../utils'
 import { Section } from '../Section'
+import { wrapText } from '../truncation'
 
 export type EmptyStateRootProps = React.HTMLAttributes<HTMLDivElement> & {
     size?: 'sm' | 'md'
@@ -50,7 +51,11 @@ const Title = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHead
     return (
         <h3
             ref={ref}
-            className={cn('m-0 max-w-prose text-lg font-semibold group-data-[size=sm]/empty:text-base', className)}
+            className={cn(
+                'm-0 max-w-prose text-lg font-semibold group-data-[size=sm]/empty:text-base',
+                wrapText,
+                className
+            )}
             {...props}
         />
     )
@@ -58,7 +63,7 @@ const Title = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHead
 
 const Description = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
     function EmptyStateDescription({ className, ...props }, ref) {
-        return <p ref={ref} className={cn('m-0 max-w-[48ch] text-sm text-secondary', className)} {...props} />
+        return <p ref={ref} className={cn('m-0 max-w-[48ch] text-sm text-secondary', wrapText, className)} {...props} />
     }
 )
 

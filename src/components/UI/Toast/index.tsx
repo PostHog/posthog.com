@@ -7,6 +7,7 @@ import { raisedOverlayShadowMd } from '../styles'
 import { colorIcon, isColorOrStatus, resolveColor } from '../colors'
 import { statusIcon } from '../toneIcons'
 import { Spinner } from '../Spinner'
+import { wrapText } from '../truncation'
 
 export type ToastData = {
     image?: React.ReactNode
@@ -51,10 +52,12 @@ const ToastList = (): JSX.Element => {
                     >
                         <StatusIcon type={toast.type} />
                         <div className="flex min-w-0 flex-1 flex-col gap-1">
-                            <BaseToast.Title className="my-0 text-[15px] font-semibold leading-5 text-primary" />
-                            <BaseToast.Description className="my-0 text-sm text-secondary" />
+                            <BaseToast.Title
+                                className={`my-0 text-[15px] font-semibold leading-5 text-primary ${wrapText}`}
+                            />
+                            <BaseToast.Description className={`my-0 text-sm text-secondary ${wrapText}`} />
                         </div>
-                        <div className="-my-[3px] flex shrink-0 items-center gap-1">
+                        <div className="-my-[3px] flex min-w-0 max-w-[50%] items-center gap-1">
                             <BaseToast.Action render={<Button appearance="flat" size="sm" />} />
                             <BaseToast.Close
                                 render={<IconButton appearance="flat" size="sm" aria-label="Close" icon={<IconX />} />}

@@ -3,6 +3,7 @@ import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import { IconChevronRight } from '@posthog/icons'
 import { disclosureChevron, focusRing } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
+import { wrapText } from '../truncation'
 
 const Root = withClassName(BaseAccordion.Root, 'w-full')
 
@@ -19,7 +20,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, BaseAccordion.Trigger.Props>
     return (
         <BaseAccordion.Trigger ref={ref} className={mergeClassName(accordionTrigger, className)} {...props}>
             <IconChevronRight aria-hidden className={disclosureChevron} />
-            <span className="flex flex-1 items-center gap-1">{children}</span>
+            <span className={`flex flex-1 items-center gap-1 ${wrapText}`}>{children}</span>
         </BaseAccordion.Trigger>
     )
 })

@@ -4,6 +4,7 @@ import { cardLevels, tintedHeaderEdge } from '../styles'
 import { colorHeader, colorIcon, colorText, resolveColor } from '../colors'
 import type { ColorOrStatus } from '../colors'
 import { statusIcon } from '../toneIcons'
+import { flattenFragments } from '../utils'
 
 export type NoteRootProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> & {
     color?: ColorOrStatus
@@ -17,20 +18,12 @@ const noteSizes = {
 }
 const NoteColor = React.createContext<ColorOrStatus>('info')
 
-function flattenChildren(children: React.ReactNode): React.ReactNode[] {
-    return React.Children.toArray(children).flatMap((child) =>
-        React.isValidElement<{ children?: React.ReactNode }>(child) && child.type === React.Fragment
-            ? flattenChildren(child.props.children)
-            : [child]
-    )
-}
-
 const Root = React.forwardRef<HTMLDivElement, NoteRootProps>(function NoteRoot(
     { color = 'info', size = 'md', children, className, ...props },
     ref
 ) {
     const noteColor = color
-    const parts = flattenChildren(children)
+    const parts = flattenFragments(children)
     const icon = parts.find((child) => React.isValidElement(child) && child.type === Icon)
     const title = parts.find((child) => React.isValidElement(child) && child.type === Title)
     const action = parts.find((child) => React.isValidElement(child) && child.type === Action)

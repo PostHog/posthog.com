@@ -12,6 +12,7 @@ import {
 } from '../styles'
 import { mergeClassName, positionerPropNames, splitProps, withClassName } from '../utils'
 import type { PositionerPropName } from '../utils'
+import { truncateTextChildren } from '../truncation'
 
 export type MenuPopupProps = BaseMenu.Popup.Props &
     Pick<BaseMenu.Positioner.Props, PositionerPropName> & {
@@ -38,9 +39,27 @@ const Popup = React.forwardRef<HTMLDivElement, MenuPopupProps>(function MenuPopu
     )
 })
 
-const Item = withClassName(BaseMenu.Item, menuItem)
+const Item = React.forwardRef<HTMLDivElement, BaseMenu.Item.Props>(function MenuItem(
+    { className, children, ...props },
+    ref
+) {
+    return (
+        <BaseMenu.Item ref={ref} className={mergeClassName(menuItem, className)} {...props}>
+            {truncateTextChildren(children)}
+        </BaseMenu.Item>
+    )
+})
 
-const LinkItem = withClassName(BaseMenu.LinkItem, `${menuItem} no-underline`)
+const LinkItem = React.forwardRef<HTMLAnchorElement, BaseMenu.LinkItem.Props>(function MenuLinkItem(
+    { className, children, ...props },
+    ref
+) {
+    return (
+        <BaseMenu.LinkItem ref={ref} className={mergeClassName(`${menuItem} no-underline`, className)} {...props}>
+            {truncateTextChildren(children)}
+        </BaseMenu.LinkItem>
+    )
+})
 
 const CheckboxItem = React.forwardRef<HTMLDivElement, BaseMenu.CheckboxItem.Props>(function MenuCheckboxItem(
     { className, children, ...props },
@@ -51,7 +70,7 @@ const CheckboxItem = React.forwardRef<HTMLDivElement, BaseMenu.CheckboxItem.Prop
             <BaseMenu.CheckboxItemIndicator className={menuItemIndicator}>
                 <IconCheck className="size-3.5" />
             </BaseMenu.CheckboxItemIndicator>
-            {children}
+            {truncateTextChildren(children)}
         </BaseMenu.CheckboxItem>
     )
 })
@@ -65,7 +84,7 @@ const RadioItem = React.forwardRef<HTMLDivElement, BaseMenu.RadioItem.Props>(fun
             <BaseMenu.RadioItemIndicator className={menuItemIndicator}>
                 <span className="size-1.5 rounded-full bg-[rgb(var(--text-primary))]" />
             </BaseMenu.RadioItemIndicator>
-            {children}
+            {truncateTextChildren(children)}
         </BaseMenu.RadioItem>
     )
 })
@@ -80,7 +99,7 @@ const SubmenuTrigger = React.forwardRef<HTMLDivElement, BaseMenu.SubmenuTrigger.
             className={mergeClassName(`${menuItem} data-[popup-open]:bg-accent`, className)}
             {...props}
         >
-            {children}
+            {truncateTextChildren(children)}
             <IconChevronRight className="-mr-1 ml-auto size-4 text-secondary" />
         </BaseMenu.SubmenuTrigger>
     )

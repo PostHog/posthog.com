@@ -7,7 +7,7 @@ import { cardLevels, tintedHeaderEdge } from '../styles'
 import { colorHeader, colorIcon, colorText, resolveColor } from '../colors'
 import type { ColorOrStatus } from '../colors'
 import { statusIcon } from '../toneIcons'
-import { HEIGHT_CHANGE_MS, heightChangeEasing, mergeClassName, prefersReducedMotion } from '../utils'
+import { HEIGHT_CHANGE_MS, flattenFragments, heightChangeEasing, mergeClassName, prefersReducedMotion } from '../utils'
 
 export type BannerRootProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> & { color?: ColorOrStatus }
 export type BannerCloseProps = Omit<IconButtonProps, 'icon' | 'onClick' | 'aria-label'> & {
@@ -17,19 +17,12 @@ export type BannerCloseProps = Omit<IconButtonProps, 'icon' | 'onClick' | 'aria-
 const ColorContext = React.createContext<ColorOrStatus>('brand')
 const InHeaderContext = React.createContext(false)
 const CollapseContext = React.createContext<(onCollapsed: () => void) => void>((onCollapsed) => onCollapsed())
-function flattenChildren(children: React.ReactNode): React.ReactNode[] {
-    return React.Children.toArray(children).flatMap((child) =>
-        React.isValidElement<{ children?: React.ReactNode }>(child) && child.type === React.Fragment
-            ? flattenChildren(child.props.children)
-            : [child]
-    )
-}
 
 const Root = React.forwardRef<HTMLDivElement, BannerRootProps>(function BannerRoot(
     { color = 'brand', children, className, ...props },
     ref
 ) {
-    const parts = flattenChildren(children)
+    const parts = flattenFragments(children)
     const icon = parts.find((child) => React.isValidElement(child) && child.type === Icon)
     const close = parts.find((child) => React.isValidElement(child) && child.type === Close)
     const title = parts.find((child) => React.isValidElement(child) && child.type === Title)

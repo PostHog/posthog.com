@@ -78,10 +78,10 @@ export const popupArrow =
 export const disclosureChevron =
     'size-4 shrink-0 text-secondary transition-transform duration-150 ease-out group-data-[panel-open]:rotate-90 motion-reduce:transition-none'
 
-export const menuPopup = `${popupSurface} ${popupTransition} min-w-[180px] max-h-[var(--available-height)] overflow-y-auto p-[5px]`
+export const menuPopup = `${popupSurface} ${popupTransition} min-w-[180px] max-w-[min(var(--available-width),24rem)] max-h-[var(--available-height)] overflow-y-auto p-[5px]`
 
 export const menuItem =
-    'relative flex h-[25px] cursor-default select-none items-center gap-2 rounded px-2.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:text-muted'
+    'relative flex h-[25px] cursor-default select-none items-center gap-2 rounded px-2.5 [&>svg]:shrink-0 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'
 
 export const menuItemWithIndicator = `${menuItem} pl-7`
 
@@ -202,9 +202,9 @@ export const chipIcon = 'flex size-3.5 shrink-0 items-center justify-center text
 export const chipRemove = `flex size-5 shrink-0 items-center justify-center rounded-full text-secondary hover:bg-[rgb(var(--text-primary)/0.07)] hover:text-primary ${insetFocusRing}`
 
 export const listItem =
-    'min-h-[25px] cursor-default select-none items-center gap-2 rounded py-1 text-sm leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:text-muted'
+    'min-h-[25px] cursor-default select-none items-center gap-2 rounded py-1 text-sm leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'
 
-export const checkListItem = `grid grid-cols-[1rem_1fr] pl-2 pr-4 data-[selected]:font-medium ${listItem}`
+export const checkListItem = `grid grid-cols-[1rem_minmax(0,1fr)] pl-2 pr-4 data-[selected]:font-medium ${listItem}`
 
 export const dialogBackdrop =
     'fixed inset-0 z-50 bg-black/25 transition-opacity duration-200 ease-[ease] data-[ending-style]:duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 motion-reduce:transition-none'
