@@ -832,5 +832,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/juliaestebanedo/",
         "profile_id": 33236
+    },
+    {
+        "handle": "benjamin-knofe-vider",
+        "name": "Benjamin Knofe-Vider",
+        "role": "Infrastructure Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/bknofevider/",
+        "profile_id": 43006
     }
 ]
