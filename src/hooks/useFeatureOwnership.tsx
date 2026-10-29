@@ -316,6 +316,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['context-and-mcp'],
         label: false,
     },
+    'mobile-app': {
+        feature: 'Mobile app',
+        owner: ['mobile-app'],
+        label: false,
+    },
     notebooks: {
         feature: 'Notebooks',
         owner: ['data-tools'],
