@@ -2206,7 +2206,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 newWindow.snapped = focusedWindow.snapped
                 newWindow.expanded = false
                 newWindow.windowed = false
-            } else if (focusedWindow) {
+            } else if (focusedWindow && !focusedWindow.fixedSize) {
                 // Navigating in place: keep the focused window's current display mode
                 // (windowed vs. expanded) so pages don't jump between sizes.
                 newWindow.expanded = focusedWindow.expanded ?? false
@@ -2243,6 +2243,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             setWindows([...windows.map((w) => (w === focusedWindow ? snappedFocused : w)), newWindow])
         } else if (newWindow.appSettings?.size?.fixed) {
             setWindows([...windows.filter((w) => !w.appSettings?.size?.fixed), newWindow])
+        } else if (focusedWindow?.fixedSize) {
+            setWindows([...windows.filter((w) => w !== focusedWindow), { ...newWindow, zIndex: focusedWindow.zIndex }])
         } else {
             replaceFocusedWindow(newWindow)
         }
