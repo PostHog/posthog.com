@@ -20,7 +20,7 @@ module.exports = {
             // use safelist.txt
         ],
     },
-    darkMode: ['variant', '&:is(.dark *):not(:where(.ui-force-light, .ui-force-light *))'],
+    darkMode: 'class',
     future: {
         hoverOnlyWhenSupported: true,
     },

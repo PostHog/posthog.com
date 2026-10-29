@@ -161,7 +161,7 @@ The docs site at `/components/ui` lives in `src/components/UILibraryDocs`. It wo
 - `src/pages/components/ui/<slug>.tsx` is the route. It renders `<DocsPage doc={doc} />`.
 - Import an example's source with `import fooSource from '!!../../rawSourceLoader!./Foo.tsx?raw'`. The `!!` prefix skips the site's loaders, and `rawSourceLoader.js` returns the file as a string. This needs no change to the Gatsby config.
 - Usage notes for each component live in its `docs/<slug>/index.tsx`, not in this README. Read them there or on the page.
-- Each preview has a Light/Dark toggle that starts with the site theme. A light preview inside the dark site works because of the `ui-force-light` class: the Tailwind dark variant (`tailwind.config.js`) and the dark `[data-scheme]` rules (`global.css`) skip any element inside it. The opt-out uses `:where()`, so it adds no specificity. Popups open outside the preview, so they follow the site theme.
+- Each preview's status bar has two icon buttons. One switches the site theme, the same as the site's own dark mode toggle. The other switches every preview between an opaque card and a transparent background. `UILibraryDocs/previewSurface.ts` keeps that choice in localStorage, so it applies to all previews and stays the same from page to page.
 
 ## Files
 
