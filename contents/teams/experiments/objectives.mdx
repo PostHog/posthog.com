@@ -3,18 +3,20 @@
 #### Self-driving experiment loop (TBD)
 We start with the health layer (below) so self-driving has good inputs. The self-driving offsite may bring architectural changes, so we wait for that context before we pick the self-driving feature to build in Q4.
 
-#### Feature flags v2 <TeamMember name="Anders Asheim Hennum" photo />
+#### Feature Flags v2 <TeamMember name="Anders Asheim Hennum" photo />
 Continue the rollout of the new config format (v2).
 - Stretch goal: everything specced in the RFC rolled out for internal testing.
 
 #### Health layer <TeamMember name="Marcel Poelker" photo />
-Experiments can be complex to configure, especially since since we serve a wide audience from humans to agents with varying degree of familiarity. Understanding issues an experiment has in one central layer is the foundation needed to proactively fix issues, and feeding good inputs into the creation workflow.
+Experiments can be complex to configure, especially since we serve a wide audience from humans to agents with varying degrees of familiarity. Understanding issues an experiment has in one central layer is the foundation needed to proactively fix issues, and feeding good inputs into the creation workflow.
+- Consolidate all health rules into a single layer of deterministic checks. This enables the diagnosing skill to become a thin judgment layer on top. Include the findings in the API and MCP responses that people and agents already use. <TeamMember name="Marcel Poelker" showOnlyFirstName />
+- Run the health layer automatically after each scheduled recalculation, using LLM judgment where deterministic rules are insufficient. Store the findings and send signals to the self-driving inbox whenever a finding is new or worsens. <TeamMember name="Rodrigo Iloro" showOnlyFirstName />
 
 #### MCP as the primary surface <TeamMember name="Ruby Childs" photo />
-Treat MCP as the main way people use experiments:
-- Interview customers who use experiments through agents. Learn why they still come to the UI. (Ruby)
-- Roast the MCP experience: run through it ourselves and fix what is broken or awkward. (Ruby)
-- Build MCP apps that show experiment results, config, and summaries in a rich way inside the agent. (Rodrigo)
+Treat MCP as the main way people use Experiments:
+- Interview customers who use experiments through agents. Learn why they still come to the UI. <TeamMember name="Ruby Childs" showOnlyFirstName />
+- Roast the MCP experience: run through it ourselves and fix what is broken or awkward. <TeamMember name="Ruby Childs" showOnlyFirstName />
+- Build MCP apps that show experiment results, config, and summaries in a rich way inside the agent. <TeamMember name="Rodrigo Iloro" showOnlyFirstName />
 
 #### Replay vision in experiment results <TeamMember name="Marcel Poelker" photo />
 Replay vision can watch the recordings from an experiment and describe how users behaved. Show what the AI sees per variant in the experiment UI, so users can compare behavior between variants, not just the numbers.
@@ -27,8 +29,8 @@ Let customers run experiments on data in their own warehouse.
 - Use AI to help the user write the metric query.
 
 #### Optimize compute costs <TeamMember name="Rodrigo Iloro" photo />
-- Stop recomputing results daily for every experiment. (Juraj)
-- Add a cooldown period before manual refreshes. (Rodrigo)
+- Stop recomputing results daily for every experiment. <TeamMember name="Juraj Majerik" showOnlyFirstName />
+- Add a cooldown period before manual refreshes. <TeamMember name="Rodrigo Iloro" showOnlyFirstName />
 
 #### Prompts <TeamMember name="Juraj Majerik" photo />
 - Keep adding the most requested features. Make sure power users have a great experience.
@@ -37,10 +39,10 @@ Let customers run experiments on data in their own warehouse.
 #### Prompt experiments: find out why traction is low <TeamMember name="Ruby Childs" photo />
 Prompts are growing fast, but few users run experiments on them. Research what is blocking adoption before we build more.
 
-#### Positioning: sell experiments better <TeamMember name="Ruby Childs" photo />
-We build a lot but we do not tell the story well. Improve how we present experiments to the outside world:
-- Improve the experiments pages on our website.
-- Explore a dedicated surface for experiments to capture direct demand, since AEO changes take months to show effect.
+#### Positioning: sell Experiments better <TeamMember name="Ruby Childs" photo />
+We build a lot but we do not tell the story well. Improve how we present Experiments to the outside world:
+- Improve the Experiments pages on our website.
+- Explore a dedicated surface for Experiments to capture direct demand, since AEO changes take months to show effect.
 
 #### Onboarding experience <TeamMember name="Ruby Childs" photo />
 Make it appealing and easy to set up your first experiment, with a strongly AI-driven wizard. This could drive growth.
