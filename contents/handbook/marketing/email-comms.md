@@ -38,7 +38,9 @@ All new broadcasts and automations should use these defaults:
 
 ## Addressing emails
 
-We prefer emails to come from a named person where possible, so users can reply with feedback. Only use generic addresses, such as hey@posthog.com, for very broad comms.
+We prefer marketing emails to come from a named person where possible, so users can reply with feedback. Only use generic addresses, such as hey@posthog.com, for very broad comms.
+
+Transactional emails should always be addressed from a generic address, such as hey@posthog.com. 
 
 If you're sending the email and are happy to receive replies, feel free to set yourself as a sender. If you'd prefer not to, use the email of the <SmallTeam slug="developer-marketing" /> team lead.
 
