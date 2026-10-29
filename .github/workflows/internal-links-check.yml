@@ -99,29 +99,25 @@ jobs:
                   done
             - name: Check content links
               if: ${{ !cancelled() && steps.build.outcome == 'success' }}
-              env:
-                  PR_SCAN: ${{ github.event_name == 'pull_request' }}
               run: |
                   cd "$SITE_DIR"
                   set +e
                   node "$GITHUB_WORKSPACE/scripts/check-links-post-build.js" "$GITHUB_WORKSPACE/link-check-results" > "$GITHUB_WORKSPACE/link-check-results/content.log" 2>&1
                   EXIT_CODE=$?
                   tail -n 60 "$GITHUB_WORKSPACE/link-check-results/content.log"
-                  # PR findings are gated by the base comparison. Execution errors still fail.
-                  if [ "$PR_SCAN" = true ] && [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
+                  # Findings are reported below. PR comparisons gate new findings; execution errors still fail.
+                  if [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
                   exit "$EXIT_CODE"
             - name: Check source code links
               if: ${{ !cancelled() && steps.build.outcome == 'success' }}
-              env:
-                  PR_SCAN: ${{ github.event_name == 'pull_request' }}
               run: |
                   cd "$SITE_DIR"
                   set +e
                   node "$GITHUB_WORKSPACE/scripts/check-src-links.js" "$GITHUB_WORKSPACE/link-check-results" > "$GITHUB_WORKSPACE/link-check-results/source.log" 2>&1
                   EXIT_CODE=$?
                   tail -n 60 "$GITHUB_WORKSPACE/link-check-results/source.log"
-                  # PR findings are gated by the base comparison. Execution errors still fail.
-                  if [ "$PR_SCAN" = true ] && [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
+                  # Findings are reported below. PR comparisons gate new findings; execution errors still fail.
+                  if [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
                   exit "$EXIT_CODE"
             - name: Write link check summary
               if: ${{ !cancelled() }}

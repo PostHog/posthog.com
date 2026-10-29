@@ -18,7 +18,7 @@ The workflow uses the checked-out PR merge commit's first parent as its base, th
 
 The build receives the read-only GitHub job token as `GITHUB_API_KEY`. The existing data loader requires this variable to generate pipeline documentation. Without it, valid generated pages can be reported as missing.
 
-Weekly and manual runs check all content and source files and fail for any findings. PR runs build the PR merge revision and its exact base commit in parallel, with each revision's own dependencies. Both scans use the PR's checker code. A comparison blocks only findings that are new in the PR. Existing findings remain in the full reports, and `pr-link-check.json` separates new, existing, and resolved findings. Line number changes do not count as new problems. Additional occurrences do. Missing or incomplete reports fail the check.
+Weekly and manual runs check all content and source files and report all findings without failing the workflow. Build failures, scanner execution errors, and incomplete reports still fail. Slack distinguishes a completed scan with findings from an execution failure. PR runs build the PR merge revision and its exact base commit in parallel, with each revision's own dependencies. Both scans use the PR's checker code. A comparison blocks only findings that are new in the PR. Existing findings remain in the full reports, and `pr-link-check.json` separates new, existing, and resolved findings. Line number changes do not count as new problems. Additional occurrences do. Missing or incomplete reports fail the check.
 
 PR scans check all files, including incoming links from unchanged pages. Removing a heading can therefore fail the check even when its referring pages did not change. PR runs do not send Slack notifications. The base comparison requires a second production build; parallel jobs keep it out of the PR build's critical path.
 
@@ -42,7 +42,7 @@ The automated tests verify the payload, incomplete reports, and HTTP error handl
 
 For an end-to-end test, open the **Check internal links** workflow in GitHub Actions. Select **Run workflow**, choose the PR branch, and leave **Save results to file** and **Send Slack notification** enabled. This sends a real notification through the existing repository secret, `SLACK_WEBHOOK_BROKEN_WEBSITE_INTERNAL_LINKS`.
 
-Check that the notification step succeeds, then confirm the message appears in the destination Slack channel. Compare its counts and artifact link with the run's summary and downloaded reports. A successful HTTP response confirms webhook acceptance; check Slack to confirm that the workflow posted the message. The scan can fail because it found broken links and still deliver its notification.
+Check that the notification step succeeds, then confirm the message appears in the destination Slack channel. Compare its counts and artifact link with the run's summary and downloaded reports. A successful HTTP response confirms webhook acceptance; check Slack to confirm that the workflow posted the message. A complete manual or weekly scan with findings stays green and sends `scan completed: broken links found`. A complete scan without findings sends `scan completed: no broken links found`. Execution failures still produce a failure or incomplete notification.
 
 To compare two complete scans locally:
 

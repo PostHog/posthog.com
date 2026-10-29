@@ -62,12 +62,17 @@ function writeSummary(directory, summaryFile) {
 
 async function notify(summary, env = process.env, send = fetch) {
     if (!env.SLACK_WEBHOOK) throw new Error('Slack webhook is not configured')
-    const success =
-        summary.complete && !summary.brokenLinks && !summary.brokenAnchors && env.GH_JOB_STATUS === 'success'
+    const success = summary.complete && env.GH_JOB_STATUS === 'success'
     const workflowUrl = `https://github.com/${env.GH_REPOSITORY}/actions/runs/${env.GH_RUN_ID}`
     const count = (key) => (summary[key] === null ? 'unknown' : String(summary[key]))
     const payload = {
-        status: success ? 'completed successfully' : summary.complete ? 'failed' : 'scan incomplete',
+        status: success
+            ? summary.brokenLinks || summary.brokenAnchors
+                ? 'scan completed: broken links found'
+                : 'scan completed: no broken links found'
+            : summary.complete
+            ? 'failed'
+            : 'scan incomplete',
         emoji: success ? ':white_check_mark:' : ':x:',
         repository: env.GH_REPOSITORY,
         triggered_by: env.GH_EVENT_NAME === 'schedule' ? 'Triggered via schedule' : `manually run by ${env.GH_ACTOR}`,

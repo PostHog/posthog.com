@@ -162,3 +162,61 @@ test('a missing baseline is an execution failure, never a passing comparison', (
     )
     assert.equal(cli.status, 2)
 })
+
+test('completed Slack scans distinguish findings from execution failures', async (t) => {
+    for (const [pages, anchors, jobStatus, status, emoji] of [
+        [1, 0, 'success', 'scan completed: broken links found', ':white_check_mark:'],
+        [0, 1, 'success', 'scan completed: broken links found', ':white_check_mark:'],
+        [0, 0, 'success', 'scan completed: no broken links found', ':white_check_mark:'],
+        [0, 0, 'failure', 'failed', ':x:'],
+        [1, 1, 'failure', 'failed', ':x:'],
+    ]) {
+        const directory = scan(t, Array(pages).fill({}), Array(anchors).fill({}))
+        let payload
+        await notify(
+            summarize(directory),
+            { SLACK_WEBHOOK: 'https://example.test', GH_JOB_STATUS: jobStatus },
+            async (_, request) => {
+                payload = JSON.parse(request.body)
+                return { ok: true }
+            }
+        )
+        assert.equal(payload.status, status)
+        assert.equal(payload.emoji, emoji)
+    }
+})
+
+test('workflow scan steps report findings but preserve execution failures', (t) => {
+    const directory = reports(t)
+    fs.mkdirSync(path.join(directory, 'link-check-results'))
+    const bin = path.join(directory, 'bin')
+    fs.mkdirSync(bin)
+    fs.writeFileSync(path.join(bin, 'node'), '#!/bin/sh\nexit "$SCAN_EXIT"\n', { mode: 0o755 })
+    const workflow = fs.readFileSync(path.join(__dirname, '../.github/workflows/internal-links-check.yml'), 'utf8')
+    for (const name of ['Check content links', 'Check source code links']) {
+        const section = workflow.split(`- name: ${name}\n`)[1].split('- name:')[0]
+        const script = section
+            .split('run: |\n')[1]
+            .split('\n')
+            .map((line) => line.slice(18))
+            .join('\n')
+        for (const [scanExit, expected] of [
+            [0, 0],
+            [1, 0],
+            [2, 2],
+            [137, 137],
+        ]) {
+            const result = spawnSync('bash', ['-e', '-c', script], {
+                encoding: 'utf8',
+                env: {
+                    ...process.env,
+                    PATH: `${bin}${path.delimiter}${process.env.PATH}`,
+                    SITE_DIR: directory,
+                    GITHUB_WORKSPACE: directory,
+                    SCAN_EXIT: String(scanExit),
+                },
+            })
+            assert.equal(result.status, expected, `${name}, exit ${scanExit}: ${result.stderr}`)
+        }
+    }
+})
