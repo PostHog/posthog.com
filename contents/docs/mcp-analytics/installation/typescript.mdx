@@ -302,8 +302,14 @@ const tools = posthog.prepareToolList(myTools, { reportMissing: true })
 // When you answer tools/call, before the tool runs:
 const prepared = posthog.prepareToolCall(name, request.params.arguments)
 if (prepared.isMissingCapability) {
-  posthog.captureMissingCapability({ context: prepared.intent, distinctId: user.id })
-  return getMoreToolsResult()
+  const reply = posthog.prepareToolResult(getMoreToolsResult(), prepared)
+  posthog.captureMissingCapability({
+    context: prepared.intent,
+    sessionId: reply.sessionId,
+    conversationId: reply.conversationId,
+    distinctId: user.id,
+  })
+  return reply.result
 }
 
 const start = Date.now()
@@ -351,8 +357,14 @@ Other capture methods cover the rest of the protocol:
   import { sendFeedbackResult } from "@posthog/mcp"
 
   if (prepared.isFeedback && prepared.feedbackReport) {
-    posthog.captureFeedback({ report: prepared.feedbackReport, distinctId: user.id })
-    return sendFeedbackResult()
+    const reply = posthog.prepareToolResult(sendFeedbackResult(), prepared)
+    posthog.captureFeedback({
+      report: prepared.feedbackReport,
+      sessionId: reply.sessionId,
+      conversationId: reply.conversationId,
+      distinctId: user.id,
+    })
+    return reply.result
   }
   ```
 

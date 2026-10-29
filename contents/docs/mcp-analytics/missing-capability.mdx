@@ -12,7 +12,7 @@ Turn on missing-capability reports to capture them. They're off by default.
 
 In TypeScript and Python, `collectFeedback` (`collect_feedback`) adds a `send_feedback` tool. Agents use it to report missing capabilities, broken tools, and praise. Each report is a [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties) event.
 
-The **Missing capabilities** tab, API, and MCP tool show only `get_more_tools` reports. To see missing capabilities there, use `reportMissing`. Query `$mcp_feedback` events with SQL or insights.
+The **Missing capabilities** tab, API, and MCP tool read only `$mcp_missing_capability` events, which `get_more_tools` sends. To show missing capabilities there, turn on `reportMissing` (`report_missing` in Python). To see `send_feedback` reports, query `$mcp_feedback` events with SQL or insights.
 
 </CalloutBox>
 
