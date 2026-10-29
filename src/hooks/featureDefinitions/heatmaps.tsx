@@ -2,7 +2,7 @@ export const heatmapsFeatures = {
     summary: {
         name: 'Heatmaps',
         description: 'Visualize where users click and scroll on your website',
-        url: '/docs/toolbar/heatmaps',
+        url: '/heatmaps',
         docsUrl: '/docs/session-replay/heatmaps',
     },
     features: {

@@ -2088,12 +2088,7 @@
         },
         {
             "source": "/product/heatmaps",
-            "destination": "/docs/toolbar/heatmaps",
-            "statusCode": 301
-        },
-        {
-            "source": "/heatmaps",
-            "destination": "/docs/toolbar/heatmaps",
+            "destination": "/heatmaps",
             "statusCode": 301
         },
         {

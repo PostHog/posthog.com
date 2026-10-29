@@ -23,6 +23,7 @@ export const BROWSE_TOOLS_HANDLES = [
     'workflows_emails',
     'surveys',
     'support',
+    'heatmaps',
 ] as const
 
 // Non-product pages that appear in the product navigation

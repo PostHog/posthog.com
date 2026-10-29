@@ -336,7 +336,7 @@ export const tools = [
         handle: 'heatmaps',
         name: 'Heatmaps',
         description: 'See where users click, scroll, and move on your site',
-        slug: 'docs/toolbar/heatmaps',
+        slug: 'heatmaps',
         category: 'dataviz',
     },
     {
