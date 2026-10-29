@@ -86,6 +86,6 @@ We assumed auto-generated PRs would be the draw, and they are interesting, but o
 
 You can see what the agents are working on right now. [Our docs have a public feed of real reports we found useful](/docs/self-driving/from-our-inbox), curated by a scout. Once a day it reads our Inbox, picks new examples, and opens a PR to add them to the page.
 
-Everything above is available today. [Set up self-driving](/docs/self-driving/setup) with one command, browse the [scout examples](/docs/self-driving/scout-examples) to see what else a scout can watch, and check [what your first month looks like](/docs/self-driving/pricing).
+Everything above is available today. [Set up self-driving](/docs/self-driving/setup), browse the [scout examples](/docs/self-driving/scout-examples) to see what else a scout can watch, and check [what your first month looks like](/docs/self-driving/pricing).
 
 And if you build something weird with a scout, [tell us on X](https://x.com/posthog).
