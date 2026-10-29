@@ -46,7 +46,6 @@ Use `appearance` for shape and material. Card, Tabs, FeatureTabs, Badge, Menubar
 | NavigationMenu | `components/UI/NavigationMenu` | [Navigation Menu](https://base-ui.com/react/components/navigation-menu) |
 | Note | `components/UI/Note` | None (site component) |
 | NumberField | `components/UI/NumberField` | [Number Field](https://base-ui.com/react/components/number-field) |
-| OTPField | `components/UI/OTPField` | [OTP Field](https://base-ui.com/react/components/otp-field) |
 | Pagination | `components/UI/Pagination` | None (site component) |
 | Popover | `components/UI/Popover` | [Popover](https://base-ui.com/react/components/popover) |
 | PreviewCard | `components/UI/PreviewCard` | [Preview Card](https://base-ui.com/react/components/preview-card) |

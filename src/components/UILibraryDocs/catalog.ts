@@ -121,7 +121,6 @@ export const catalog: CatalogEntry[] = [
         description: 'A number input with step arrows and a scrub area.',
         category: 'Inputs',
     },
-    { slug: 'otp-field', name: 'OTPField', description: 'One box per character of a code.', category: 'Inputs' },
     { slug: 'dialog', name: 'Dialog', description: 'A modal window on window glass.', category: 'Overlays' },
     {
         slug: 'alert-dialog',
