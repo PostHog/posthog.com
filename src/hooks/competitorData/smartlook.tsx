@@ -126,7 +126,7 @@ export const smartlook = {
             free_tier: true,
             transparent_pricing: true,
             usage_based_pricing: true,
-            self_serve: true,
+            self_serve: 'No new paid plans since May 2026', // https://www.smartlook.com/ end-of-sale notice
         },
         developer: {
             api: true,
