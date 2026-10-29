@@ -17,7 +17,7 @@ tags:
 
 As a product marketer, I’m a bit nosy. Are you? 
 
-You must be seeing as you clicked on this post. Well in that case, let’s get on with it. Take a peek over PostHog AI’s shoulder into the past year of prompting. 
+You must be seeing as you clicked on this post. Well in that case, let’s get on with it. Take a peek over PostHog AI’s shoulder into the [past year](/blog/8-learnings-from-1-year-of-agents-posthog-ai) of prompting. 
 
 See how we aggregated this data at the [end](#how-we-pulled-this-data). 
 
@@ -39,7 +39,7 @@ In aggregate, Tuesday is the busiest prompting day of the week, and the peak hou
 
 Prompters put their trust in PostHog AI, asking things like "what should be my goal if i wanna make this startup actually successful?" and "I want to create a weekly report and send it to my boss. Please help me". 
 
-1,424 people asked our AI how to pay us less (which we can definitely help with), and almost 800 people asked for help with something for their boss or investors. 734 just wanted to know "is this good?" 
+1,424 people asked our AI how to pay us less (which we can [definitely help with](/handbook/customer-success/cost-optimization)), and almost 800 people asked for help with something for their boss or investors. 734 just wanted to know "is this good?" 
 
 Even though more than 4 in 10 prompts have no capital letters, and sometimes contain a mild crash out like “I NEED A F\*CKING USER FUNNEL CHART AAAAH”, PostHog AI was happy to help with (almost) every query.
 
@@ -59,9 +59,9 @@ For unknown reasons, engineers ask for pie charts almost 2x as often as data peo
 
 ## Who are you, really?
 
-Prompters misspelled "PostHog" in at least 29 ways. 2,916 people wrote "Post Hog" with a space. The top typos are poshog, posthug, psothog, and posthig. Only 350 people mentioned hedgehogs (which is shockingly low).
+Prompters misspelled "PostHog" in at least 29 ways. 2,916 people wrote "Post Hog" with a space. The top typos are poshog, posthug, psothog, and posthig. Only 350 people mentioned [hedgehogs](/blog/drawing-hedgehogs) (which is shockingly low).
 
-When asking PostHog AI about other tools, Claude was the most named (by 7.2k people, and 2.3k of them meant Claude Code), followed by Slack (6.2k), Stripe (5.5k), GitHub (3.2k), ChatGPT (2.9k), Vercel (2.8k), and Supabase (2.4k). We did not count ad and social platforms, like Google Ads and Facebook. More than 270 people asked PostHog AI who it is or which model it uses. 99 people still call it Max, its old name before it became PostHog AI. 
+When asking PostHog AI about other tools, Claude was the most named (by 7.2k people, and 2.3k of them meant Claude Code), followed by Slack (6.2k), Stripe (5.5k), GitHub (3.2k), ChatGPT (2.9k), Vercel (2.8k), and Supabase (2.4k). We did not count ad and social platforms, like Google Ads and Facebook. More than 270 people asked PostHog AI who it is or which model it uses. 99 people still call it Max, its [old name](/blog/why-we-killed-our-ai-product-assistant) before it became PostHog AI. 
 
 ## Celebrating data all year round
 
@@ -87,16 +87,16 @@ This does not include PostHog AI in Slack. It also does not include prompts that
 
 **Where it comes from**: We did all of the work in PostHog:
 
-* **Product Analytics:** PostHog records an event each time a person sends a message to PostHog AI. Product analytics connects each message to a person, with their job role and time zone. People can choose their job role when they sign up (it is optional), and the time zone comes from their IP address.  
+* **Product Analytics:** PostHog records an event each time a person sends a message to PostHog AI. Product analytics connects each message to a person, with their job role and time zone. People can choose their job role [when they sign up](/blog/how-we-built-email-onboarding) (it is optional), and the time zone comes from their IP address.  
 * **SQL and Python**: every number in this post comes from a SQL query. For the local-time and holiday stats, Python did the math on the SQL results.  
 * **Notebooks**: all of the queries were dumped into four PostHog notebooks, with SQL and Python cells, so any person on our team can run them again.  
-* **PostHog Slack app** (with the PostHog MCP): This started as an idea in Slack, where I tagged our trusty agent to write and run the queries. 
+* **PostHog Slack app** (with the PostHog MCP): This started as an idea in Slack, where I tagged our [trusty agent](/blog/slack-app-beta) to write and run the queries. 
 
 **What we removed:**
 
 * Test scripts. 315 accounts sent the single word "hi" 100 or more times, about 157,000 times in total. One of them said hi 1,613 times in 15 days. We removed every message that was only "hi" just to be safe.  
-* All prompts from PostHog employees. We use PostHog AI all day, so our messages might skew important things like pineapple on pizza prompt volume.  
-* Identifiable information. The source data has person IDs, but totals are anonymous. For each quote, we removed names, company names, emails, web addresses and IDs. We kept the spelling mistakes. We did not use a quote if it could identify a person or a company (but if it was Joe, I’d definitely tell you).
+* All prompts from PostHog employees. We use PostHog AI all day, so our messages might skew important things like [pineapple on pizza](/blog/using-posthog#4-gather-user-feedback) prompt volume.  
+* Identifiable information. The source data has person IDs, but totals are anonymous. For each quote, we removed names, company names, emails, web addresses and IDs. We kept the spelling mistakes. We did not use a quote if it could identify a person or a company (but if it was [Joe](/community/profiles/29070), I’d definitely tell you).
 
 **Limits:**
 
