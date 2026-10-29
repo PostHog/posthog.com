@@ -126,7 +126,7 @@ To go back to Supabase's own emails, turn the hook off in Supabase. To remove th
 
 Supabase limits how many auth emails your project sends per hour, and checks that limit before it calls PostHog. With Supabase's built-in mailer, the limit is 2 an hour. When a user goes over it, Supabase shows "email rate limit exceeded" and PostHog never gets the request.
 
-Now that PostHog sends your auth emails, Supabase lets you change the limit. In Supabase, open **Authentication** > **Rate Limits** and raise **Rate limit for sending emails** to a value that fits your sign-up traffic. Your PostHog email quota still applies.
+Now that PostHog sends your auth emails, Supabase lets you change the limit. In Supabase, open **Authentication** > **Rate Limits** and raise **Rate limit for sending emails** to a value that fits your sign-up traffic. Auth emails count against your PostHog [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers) like any other email, so pick a Supabase limit that fits inside it.
 
 </Step>
 
@@ -139,7 +139,7 @@ Supabase waits for the hook before it finishes the user's action. If PostHog tak
 | Sign up or sign in fails with "No PostHog template is set for the ... email." | Map a template to that email. A core auth email with no template fails in Supabase. A security notification with no template is skipped, and the user's action still succeeds. |
 | Every hook request fails, and Supabase's auth logs show a 401 from the hook | The hook secret in PostHog doesn't match Supabase. Paste the full secret again, including `v1,whsec_`, and click **Save connection**. |
 | Supabase shows "email rate limit exceeded" | Supabase's own hourly email limit stopped the email before it reached PostHog. Raise it under **Authentication** > **Rate Limits** in Supabase. |
-| Auth emails fail with "We couldn't send your email. Try again in a few minutes." | Check that the **Supabase project URL** is saved, that each mapped template still exists and is transactional and marked sensitive, and that your email channel still has a verified sending domain. If all of that is fine, the send was slow or hit your email quota. Try again. |
+| Auth emails fail with "We couldn't send your email. Try again in a few minutes." | Check that the **Supabase project URL** is saved, that each mapped template still exists and is transactional and marked sensitive, and that your email channel still has a verified sending domain. If all of that is fine, the send was slow or hit your [sending allowance](/docs/workflows/sending-reputation#sending-allowance-tiers). Try again. |
 | A template doesn't appear in the picker | The template must be transactional and marked sensitive. Turn both on in the template's **API** tab, or use **Create starter templates**. |
 | **Create starter templates** fails | Verify a sending domain on your [email channel](/docs/workflows/configure-channels) first. |
 | Links in emails point to the wrong place | Check the **Supabase project URL**. Confirmation links use it to build the `/auth/v1/verify` link. |
