@@ -126,7 +126,7 @@ For customers who rarely reply, keep sending value anyway. Session replays will 
 >
 > Wanted to be upfront here! :pray:
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777971362108529?thread_ts=1777971362.108529&cid=C093XHYMGBE)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C093XHYMGBE/p1777971362108529?thread_ts=1777971362.108529&amp;cid=C093XHYMGBE">Slack discussion</PrivateLink>
 
 ### Account Handovers
 
@@ -156,7 +156,7 @@ When a customer channel goes completely silent, don't mass-ping — it gets igno
 > lovely meeting you all - excited to keep working together :hog-offers-heart:
 > cc @[people who showed interest on the call] - tagging you since you were esp excited about the merch :slightly_smiling_face:
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&cid=C08M011SBCM)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&amp;cid=C08M011SBCM">Slack discussion</PrivateLink>
 
 ### Post-event outbound to long-silent customers
 
@@ -166,7 +166,7 @@ After events (Stripe Sessions, conferences, meetups), sweep through post-event o
 
 **Why it works:** Event-tied context lowers the social bar to engage. The customer doesn't have to explain the silence — they just have to reply to "great to see you at X."
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C090RCG671C/p1778497201155889?thread_ts=1778497201.155889&cid=C090RCG671C)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C/p1778497201155889?thread_ts=1778497201.155889&amp;cid=C090RCG671C">Slack discussion</PrivateLink>
 
 ### Use a competitor pricing change (or market news) as a value-based reason
 
@@ -186,7 +186,7 @@ When something happens in the wider market that could cost the customer money �
 - If they push back on a gap, close the loop publicly: *"Let's put a pin in it for now. I'll keep an eye on this from our side, and if we can support [X] cleanly sooner, I'll come back with something then!"*
 - Loop in engineering in the customer channel when relevant — turns the conversation into a product input loop and shows the feedback is being taken seriously.
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777914846235949?thread_ts=1777914846.235949&cid=C093XHYMGBE)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C093XHYMGBE/p1777914846235949?thread_ts=1777914846.235949&amp;cid=C093XHYMGBE">Slack discussion</PrivateLink>
 
 ## Which channel, and which person
 
@@ -199,7 +199,7 @@ Getting the reason right is only half of it — most failed outreach dies becaus
 - **Non-technical people.** Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn't an engineer to talk to us given engineers don't want to.
 - **Escalate to senior stakeholders.** If you can't get hold of anyone, email more senior team members even if they don't use PostHog (credit to Steven). They can help you find the right person.
 - **"New users."** If you're not succeeding getting through with your champions, engage with colleagues recently invited into PostHog. Monitor for them via the "new user" segment in Vitally. Once they start engaging with features, reach out with an email and Slack invite offering to help get them started quickly.
-- **Their language.** If the customer's main language isn't English, that alone can make them hesitant to engage over Slack or email. Try writing your message in their language – but AI translation can read as unnatural depending on the language, so use it with discretion, ideally where you can spot-check the result. Better still, pull in a teammate who speaks the language (credit to Steven) – they don't need to own the account, just to remove the friction. ([Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1781285664051099?thread_ts=1781285664.051099&cid=C08M011SBCM))
+- **Their language.** If the customer's main language isn't English, that alone can make them hesitant to engage over Slack or email. Try writing your message in their language – but AI translation can read as unnatural depending on the language, so use it with discretion, ideally where you can spot-check the result. Better still, pull in a teammate who speaks the language (credit to Steven) – they don't need to own the account, just to remove the friction. (<PrivateLink url="https://posthog.slack.com/archives/C08M011SBCM/p1781285664051099?thread_ts=1781285664.051099&amp;cid=C08M011SBCM">Slack discussion</PrivateLink>)
 - **Ask the wider team for help** - we have to get creative here! You'd be surprised how often somebody knows someone...
 
 Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission.
@@ -208,7 +208,7 @@ Ideally you want to get multiple people into a [shared Slack channel](/handbook/
 
 Despite the organization using PostHog, they may not recognize you/PostHog, or may not even be the correct person to talk to about PostHog, which means your message needs to be well crafted.
 
-1. Your initial outreach isn't about you, it is about them. Lead with customer-centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. [Tim has some great thoughts on this subject](https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549).
+1. Your initial outreach isn't about you, it is about them. Lead with customer-centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. <PrivateLink url="https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549">Tim has some great thoughts on this subject</PrivateLink>.
 2. Open with a specific observation pulled from their actual PostHog usage, and pair it with a direct link to the relevant view in their project so they can act in one click.
 3. Avoid fluff. "I'm just reaching out to", "I just wanted to" etc. are empty phrases that take longer to get to the point. Before you hit send, reread and see if there is anything you can cut out.
 4. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
@@ -244,7 +244,7 @@ Rather than asking for a meeting and waiting, drop one on their calendar a coupl
 
 ### Ask directly whether they're churning
 
-Sometimes the best move is candidly asking where things stand. Seb and Jake have both broken through this way after months of silence — an email to the founder saying *"is [company] planning to churn from PostHog? Or is your team primarily self-serve and happy with how things are going?"* got a same-week reply and a warm intro to the actual PostHog owner, who then joined the Slack channel and booked a call. The question is easy to answer, and either answer tells you what to do next. ([Slack discussion](https://posthog.slack.com/archives/C0B020BPP8Q/p1784056518180709))
+Sometimes the best move is candidly asking where things stand. Seb and Jake have both broken through this way after months of silence — an email to the founder saying *"is [company] planning to churn from PostHog? Or is your team primarily self-serve and happy with how things are going?"* got a same-week reply and a warm intro to the actual PostHog owner, who then joined the Slack channel and booked a call. The question is easy to answer, and either answer tells you what to do next. (<PrivateLink url="https://posthog.slack.com/archives/C0B020BPP8Q/p1784056518180709">Slack discussion</PrivateLink>)
 
 ### Rebuild a dead channel one person at a time
 
@@ -261,7 +261,7 @@ When a customer channel goes completely silent, don't mass-ping — it gets igno
 > lovely meeting you all - excited to keep working together :hog-offers-heart:
 > cc @[people who showed interest on the call] - tagging you since you were esp excited about the merch :slightly_smiling_face:
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&cid=C08M011SBCM)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&amp;cid=C08M011SBCM">Slack discussion</PrivateLink>
 
 ### Have you been ghosted?
 
@@ -295,7 +295,7 @@ Leave the body empty. This will pick up about 80% of people who go dark. If not,
 ### Additional creative ways to engage customers
 
 - If they submit a support request outside of Slack, jump in and respond yourself to try and build a relationship.
-- Create a lightweight survey across your book to gather the basics: how they're using PostHog, whether they're happy, what they need help with, and how they'd prefer to hear from you. The answers then give you a specific reason for the follow-up. [Example here](https://us.posthog.com/project/2/surveys/019fb442-ff15-0000-fdb3-360d82cb621c) (credit to Luke).
+- Create a lightweight survey across your book to gather the basics: how they're using PostHog, whether they're happy, what they need help with, and how they'd prefer to hear from you. The answers then give you a specific reason for the follow-up. <PrivateLink url="https://us.posthog.com/project/2/surveys/019fb442-ff15-0000-fdb3-360d82cb621c">Example here</PrivateLink> (credit to Luke).
 - Subscribe to your customers' newsletters, set up Google Alerts or [Watch Tower](https://gotwatchtower.com/), use their products and follow their X or Reddit communities. This lets you time your outreach for when they've just shipped something - making it about them, not you. For example, if they just launched an AI feature, you can reach out the next day to the PM or engineer and congratulate them whilst they are energized and then connect it to a PostHog product they might not be using yet that helps them make their new product better.
 - Find your customer's GitHub – company open source repos or individual engineers' personal projects. Review any open bugs, issues, etc. and submit a real pull request. Extra points if you fix an open bug on their company repo. The customer will see your name somewhere other than their inbox and engage. For important customers, ask our engineering team for help with more complex fixes.
 - Guest-list your customer to a cool event – a PostHog event, industry meetup, hackathon, etc. – where they can meet potential customers, partners, or peers in their space. You're putting them in front of people who can help their business – and that's a reason to talk to you.

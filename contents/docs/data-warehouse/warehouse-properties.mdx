@@ -9,7 +9,7 @@ availability:
   enterprise: full
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 Warehouse properties copy columns from a synced [data warehouse](/docs/data-warehouse) table onto your [person properties](/docs/product-analytics/person-properties) and [group properties](/docs/product-analytics/group-analytics). Each row is matched to a person or a group by a key column. The mapped columns then stay up to date on every sync.
 
@@ -21,19 +21,21 @@ Once a column is mapped, it behaves like any other person or group property. You
 
 Warehouse properties are currently in beta. Contact support if you don't see **Warehouse properties** in the **Data** menu.
 
+Self-hosted instances have this feature enabled by default. Set `WAREHOUSE_PERSON_PROPERTIES_ENABLED_SELF_HOSTED` to `False` to disable it. See [environment variables](/docs/self-host/configure/environment-variables) for more.
+
 </CalloutBox>
 
 ## Warehouse properties or a join?
 
 PostHog gives you two ways to use warehouse data about a person. They are not interchangeable.
 
-| | Warehouse properties | [Person join](/docs/data-warehouse/join#person-joins) |
-|---|---|---|
-| How it works | The value is written onto the person profile | The tables are joined when a query runs |
-| Where you can use it | Anywhere a person property works | Insights, filters, and breakdowns |
-| Feature flags and experiments | Yes | No |
-| Cost of a value | One property update per changed row | No writes |
-| Freshness | Updated on each warehouse sync | Always current at query time |
+|                               | Warehouse properties                         | [Person join](/docs/data-warehouse/join#person-joins) |
+| ----------------------------- | -------------------------------------------- | ----------------------------------------------------- |
+| How it works                  | The value is written onto the person profile | The tables are joined when a query runs               |
+| Where you can use it          | Anywhere a person property works             | Insights, filters, and breakdowns                     |
+| Feature flags and experiments | Yes                                          | No                                                    |
+| Cost of a value               | One property update per changed row          | No writes                                             |
+| Freshness                     | Updated on each warehouse sync               | Always current at query time                          |
 
 Choose warehouse properties when something outside of a query has to read the value. Feature flags and experiments evaluate against stored person properties, so a join is invisible to them.
 
@@ -114,12 +116,12 @@ Only one run happens at a time per table. Both buttons are disabled while a run 
 
 Expand a row to see its runs. The counts follow the steps above:
 
-| Column | What it means |
-|---|---|
-| **Status** | Whether the run finished. A completed run that updated nobody is normal |
-| **Trigger** | What started the run: the sync schedule, **Sync now**, or **Backfill** |
-| **Rows read** | Rows the import staged for this run |
-| **Updated** | People or groups updated, out of the rows whose values changed, with the share of those rows |
+| Column                  | What it means                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------------------------------- |
+| **Status**              | Whether the run finished. A completed run that updated nobody is normal                           |
+| **Trigger**             | What started the run: the sync schedule, **Sync now**, or **Backfill**                            |
+| **Rows read**           | Rows the import staged for this run                                                               |
+| **Updated**             | People or groups updated, out of the rows whose values changed, with the share of those rows      |
 | **Skipped (no person)** | Changed rows whose key matched no existing person. Reads **Skipped (no group)** on the Groups tab |
 
 A row of zeros is not a failure on its own. The status carries a short note that says which zero you are looking at: `no new rows` means the import brought nothing, and `no changes` means every row already holds the values last sent.

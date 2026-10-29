@@ -96,7 +96,7 @@ For customers who rarely reply, keep sending value anyway. Session replays will 
 >
 > Wanted to be upfront here! :pray:
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777971362108529?thread_ts=1777971362.108529&cid=C093XHYMGBE)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C093XHYMGBE/p1777971362108529?thread_ts=1777971362.108529&amp;cid=C093XHYMGBE">Slack discussion</PrivateLink>
 
 ### 1:1 individualized outreach to revive a dead channel
 
@@ -115,7 +115,7 @@ When a customer channel goes completely silent, don't mass-ping — it gets igno
 > lovely meeting you all - excited to keep working together :hog-offers-heart:
 > cc @[people who showed interest on the call] - tagging you since you were esp excited about the merch :slightly_smiling_face:
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&cid=C08M011SBCM)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&amp;cid=C08M011SBCM">Slack discussion</PrivateLink>
 
 ### Post-event outbound to long-silent customers
 
@@ -125,7 +125,7 @@ After events (Stripe Sessions, conferences, meetups), sweep through post-event o
 
 **Why it works:** Event-tied context lowers the social bar to engage. The customer doesn't have to explain the silence — they just have to reply to "great to see you at X."
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C090RCG671C/p1778497201155889?thread_ts=1778497201.155889&cid=C090RCG671C)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C/p1778497201155889?thread_ts=1778497201.155889&amp;cid=C090RCG671C">Slack discussion</PrivateLink>
 
 ### Use a competitor pricing change (or market news) as a value-based reason
 
@@ -145,7 +145,7 @@ When something happens in the wider market that could cost the customer money �
 - If they push back on a gap, close the loop publicly: *"Let's put a pin in it for now. I'll keep an eye on this from our side, and if we can support [X] cleanly sooner, I'll come back with something then!"*
 - Loop in engineering in the customer channel when relevant — turns the conversation into a product input loop and shows the feedback is being taken seriously.
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777914846235949?thread_ts=1777914846.235949&cid=C093XHYMGBE)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C093XHYMGBE/p1777914846235949?thread_ts=1777914846.235949&amp;cid=C093XHYMGBE">Slack discussion</PrivateLink>
 
 ## Meta-tactics
 

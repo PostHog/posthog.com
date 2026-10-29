@@ -23,24 +23,26 @@ Once the syncs are complete, you can start using Mailjet data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `contact` | Contacts | Full refresh |
-| `contactslist` | Contact lists | Full refresh |
-| `listrecipient` | Contact-to-list membership records | Full refresh |
-| `campaign` | Campaigns | Full refresh |
-| `campaigndraft` | Campaign drafts | Full refresh |
-| `message` | Messages | Full refresh |
-| `contactmetadata` | Contact metadata definitions | Full refresh |
-| `template` | Templates | Full refresh |
-| `openinformation` | Email open statistics | Incremental |
-| `clickstatistics` | Email click statistics | Incremental |
+| Table                | Description                                 | Sync method  |
+| -------------------- | ------------------------------------------- | ------------ |
+| `contact`            | Contacts                                    | Full refresh |
+| `contactslist`       | Contact lists                               | Full refresh |
+| `listrecipient`      | Contact-to-list membership records          | Full refresh |
+| `campaign`           | Campaigns                                   | Full refresh |
+| `campaigndraft`      | Campaign drafts                             | Full refresh |
+| `message`            | Messages                                    | Full refresh |
+| `contactmetadata`    | Contact metadata definitions                | Full refresh |
+| `contactdata`        | Contact property values per contact         | Full refresh |
+| `template`           | Templates                                   | Full refresh |
+| `messageinformation` | Message sending, size, and spam information | Incremental  |
+| `openinformation`    | Email open statistics                       | Incremental  |
+| `clickstatistics`    | Email click statistics                      | Incremental  |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
 ## Sync limitations
 
-Only the statistics tables (`openinformation` and `clickstatistics`) support incremental syncing, using Mailjet's `FromTS` time-window filter. The list resources have no reliable server-side time filter and are full refresh only.
+The statistics and message information tables (`openinformation`, `clickstatistics`, and `messageinformation`) support incremental syncing, using Mailjet's `FromTS` time-window filter. The list resources have no reliable server-side time filter and are full refresh only.
 
 ## Configuration
 

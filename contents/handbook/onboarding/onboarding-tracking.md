@@ -47,7 +47,7 @@ For day-to-day operations, these are the statuses we use to track users in the *
 - `2. Onboarding Initiated` - Assigned as soon as we send out the initial outreach email.
 - `3. Onboarded` -  The onboarding program has been completed. The status chances automatically after the Graduation email is sent, or we change it manually for some reason.
 - `Sales Handoff` - Assigned to customers that we [hand over to sales](/handbook/onboarding/sales-handover). This can happen at any stage throughout the process.
-- `Paid call purchased` - Assigned when someone buys our consultation via the merch store. The status is applied automatically via [this Workflow](https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow). 
+- `Paid call purchased` - Assigned when someone buys our consultation via the merch store. The status is applied automatically via <PrivateLink url="https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow">this Workflow</PrivateLink>.
 
 The last two are not numbered, as they happen "outside" of the regular pipeline.
 
@@ -97,24 +97,24 @@ The live email templates are in the Workflows <PrivateLink url="https://us.posth
 
 ### How this is organized in Workflows
 
-All onboarding automation lives in the `Onboarding::` [workflows](https://us.posthog.com/project/2/workflows):
+All onboarding automation lives in the `Onboarding::` <PrivateLink url="https://us.posthog.com/project/2/workflows">workflows</PrivateLink>:
 
-- **[Enter queue](https://us.posthog.com/project/2/workflows/01a05810-fb1c-0000-5c4d-7ae187210c4d/workflow)** - Every day, moves eligible accounts with no onboarding stage to `1. New Account` and adds the `Onboarding Lead` tag.
-- **[Email sequence](https://us.posthog.com/project/2/workflows/01a0c9f0-60a6-0000-af22-9cd658e27d6c/workflow)** - Sends all four onboarding emails (first outreach, second outreach, last chance, and graduation) and moves the account through the stages. It skips accounts that have an owner, a referral tag, a booked call, or that opted out.
-- **[Stage reactor](https://us.posthog.com/project/2/workflows/01a0c9ee-f490-0000-4f72-e7640fd225e1/workflow)** - Keeps the tags, stage dates, and Onboarding specialist in step with the stage. It also moves referral accounts to `Sales Handoff`.
-- **[Set "Onboarding Initiated" when contacted by OS](https://us.posthog.com/project/2/workflows/01a12061-1ad1-0000-2b7e-9f88bc570da1/workflow)** - Moves an account from `1. New Account` to `2. Onboarding Initiated` when someone on the team emails it from their own inbox.
-- **[Automated 'check-in' status removal](https://us.posthog.com/project/2/workflows/01a11b55-55c2-0000-ecfc-d8c471e18ffb/workflow)** - Clears the Check-in status after a specialist emails the account.
-- **[Check in after the meeting](https://us.posthog.com/project/2/workflows/01a0859c-b295-0000-9509-e7e282dc9f20/workflow)** - Creates a task for the Onboarding specialist 14 days after a meeting.
-- **[Consider referring to Sales](https://us.posthog.com/project/2/workflows/01a11165-4311-0000-eec5-642052e6944c/workflow)** - Every week, creates a task for high-spend accounts that can be a good fit for Sales.
-- **[Close out finished sequences](https://us.posthog.com/project/2/workflows/01a0c97d-358a-0000-6ee6-d8b989c088a3/workflow)** - Every day, moves accounts that finished the sequence from `2. Onboarding Initiated` to `3. Onboarding Completed`.
-- **[Automated Payment Failed](https://us.posthog.com/project/2/workflows/01a07bfe-b0f8-0000-7687-9575eeec3b0f/workflow)** - Emails accounts in stage 1 or 2 when a payment fails.
-- **[Gong call summaries to account notes](https://us.posthog.com/project/2/workflows/01a1165b-7003-0000-42c5-4e13f3d663dc/workflow)** - Every hour, adds a summary note to the account for each new Gong call.
-- **[Create customer tasks from scout reports](https://us.posthog.com/project/2/workflows/01a0ab7a-3d0a-0000-f90b-fa73ccc51695/workflow)** - Creates a "Review onboarding brief" task for each onboarding research report from the scout.
-- **[User orders an onboarding consultation from the merch store](https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow)** - Sets the account to `Purchased Onboarding Call`, emails the buyer the booking link, and tells the team.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a05810-fb1c-0000-5c4d-7ae187210c4d/workflow">Enter queue</PrivateLink>** - Every day, moves eligible accounts with no onboarding stage to `1. New Account` and adds the `Onboarding Lead` tag.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a0c9f0-60a6-0000-af22-9cd658e27d6c/workflow">Email sequence</PrivateLink>** - Sends all four onboarding emails (first outreach, second outreach, last chance, and graduation) and moves the account through the stages. It skips accounts that have an owner, a referral tag, a booked call, or that opted out.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a0c9ee-f490-0000-4f72-e7640fd225e1/workflow">Stage reactor</PrivateLink>** - Keeps the tags, stage dates, and Onboarding specialist in step with the stage. It also moves referral accounts to `Sales Handoff`.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a12061-1ad1-0000-2b7e-9f88bc570da1/workflow">Set &quot;Onboarding Initiated&quot; when contacted by OS</PrivateLink>** - Moves an account from `1. New Account` to `2. Onboarding Initiated` when someone on the team emails it from their own inbox.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a11b55-55c2-0000-ecfc-d8c471e18ffb/workflow">Automated 'check-in' status removal</PrivateLink>** - Clears the Check-in status after a specialist emails the account.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a0859c-b295-0000-9509-e7e282dc9f20/workflow">Check in after the meeting</PrivateLink>** - Creates a task for the Onboarding specialist 14 days after a meeting.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a11165-4311-0000-eec5-642052e6944c/workflow">Consider referring to Sales</PrivateLink>** - Every week, creates a task for high-spend accounts that can be a good fit for Sales.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a0c97d-358a-0000-6ee6-d8b989c088a3/workflow">Close out finished sequences</PrivateLink>** - Every day, moves accounts that finished the sequence from `2. Onboarding Initiated` to `3. Onboarding Completed`.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a07bfe-b0f8-0000-7687-9575eeec3b0f/workflow">Automated Payment Failed</PrivateLink>** - Emails accounts in stage 1 or 2 when a payment fails.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a1165b-7003-0000-42c5-4e13f3d663dc/workflow">Gong call summaries to account notes</PrivateLink>** - Every hour, adds a summary note to the account for each new Gong call.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/01a0ab7a-3d0a-0000-f90b-fa73ccc51695/workflow">Create customer tasks from scout reports</PrivateLink>** - Creates a "Review onboarding brief" task for each onboarding research report from the scout.
+- **<PrivateLink url="https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow">User orders an onboarding consultation from the merch store</PrivateLink>** - Sets the account to `Purchased Onboarding Call`, emails the buyer the booking link, and tells the team.
 
 #### Other
 
-- [Post-onboarding satisfaction survey trigger](https://posthog.vitally-eu.io/settings/playbooks/5d5c0361-5565-4d5f-89e7-21744378a2fb)
+- <PrivateLink url="https://posthog.vitally-eu.io/settings/playbooks/5d5c0361-5565-4d5f-89e7-21744378a2fb">Post-onboarding satisfaction survey trigger</PrivateLink>
 
 ### Tags
 

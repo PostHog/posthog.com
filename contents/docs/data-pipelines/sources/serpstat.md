@@ -35,7 +35,7 @@ When linking Serpstat, you'll need:
 These fields are required only if you want to sync the domain and backlink tables (`domain_info`, `domain_history`, `domain_keywords`, `backlinks`):
 
 - **Domain** – the domain to analyze (e.g., `example.com`). You can paste a full URL like `https://Example.com/path` and PostHog normalizes it to `example.com`.
-- **Search engine database** – the Serpstat database code (e.g., `g_us` for Google US). Defaults to `g_us` if left blank. See the [database list](https://developers.serpstat.com/api-docs/ba97ni814ao9p-search-engine-short-names).
+- **Search engine database** – the Serpstat database code (e.g., `g_us` for Google US). Defaults to `g_us` if left blank.
 
 ## API credit usage
 

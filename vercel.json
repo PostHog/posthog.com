@@ -2283,6 +2283,16 @@
             "statusCode": 301
         },
         {
+            "source": "/group-analytics",
+            "destination": "/docs/product-analytics/group-analytics",
+            "statusCode": 301
+        },
+        {
+            "source": "/group-analytics/pricing",
+            "destination": "/docs/product-analytics/group-analytics",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/tutorials/b2b",
             "destination": "/tutorials/b2b"
         },
@@ -6346,7 +6356,7 @@
         },
         {
             "source": "/manual/trends",
-            "destination": "/docs/product-analytics/trends"
+            "destination": "/docs/product-analytics/trends/overview"
         },
         {
             "source": "/docs/cdp/url-query:ext(\\.md)?",
