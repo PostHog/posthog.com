@@ -1601,6 +1601,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'Engagement lifecycle',
+                        url: '/handbook/forward-deployed-engineering/fde-engagement-lifecycle',
+                    },
+                    {
                         name: 'How to get an FDE involved',
                         url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
