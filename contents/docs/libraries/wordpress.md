@@ -27,8 +27,8 @@ Two plugin options include:
 The workflow for these is the same:
 
 1. Install the plugin.
-2. Add the PostHog snippet to the header via the plugin.
-3. Activate the plugin.
+2. Activate the plugin.
+3. Open the plugin's settings and add the PostHog snippet to the header.
 
 ### Option 2: Edit your theme's functions file
 
@@ -95,3 +95,107 @@ To confirm PostHog is configured correctly, visit your website and then check if
 >
 > - Using the Theme Editor is very convenient, but you have to consider the potential drawbacks of having template files writable, which many prefer to disable for security purposes. Also, wrongfully editing a file may cause problems so be sure to perform appropriate backups before attempting this.
 > - If your theme auto-updates, manually editing the `header.php` file may lose your settings. Making a [Child Theme](https://developer.wordpress.org/themes/advanced-topics/child-themes/) is the recommended approach.
+
+## Capturing server-side events
+
+The snippet covers everything that happens in the visitor's browser: pageviews, clicks, and form submissions. Some events only exist on the server, and for those you need the [PostHog PHP SDK](/docs/libraries/php).
+
+WordPress fires an action for most of them:
+
+| Event | Action hook |
+|-------|-------------|
+| A comment is posted | `comment_post` |
+| A user registers | `user_register` |
+| A WooCommerce order completes | `woocommerce_thankyou` |
+
+WooCommerce is where this matters most. Autocapture sees the click on **Place order** and the pageview of the confirmation page, but it [deliberately doesn't capture form values](/docs/product-analytics/autocapture#sending-custom-properties-with-autocaptured-form-submissions), so those events carry no revenue and no line items. Subscription renewals, refunds, and the moment a bank transfer order is actually paid happen with no browser open at all. Server-side capture is the only way to record any of it.
+
+### Set up the PHP SDK in a plugin
+
+Ship server-side capture as a small standalone plugin rather than adding it to your theme's `functions.php` – code in a theme is lost on theme switch, while a plugin survives both.
+
+First, add your project token to `wp-config.php` – the same file that holds `DB_PASSWORD` – so it never lives in plugin source:
+
+```php
+define('POSTHOG_PROJECT_TOKEN', '<ph_project_token>');
+define('POSTHOG_HOST', '<ph_client_api_host>');
+```
+
+Then create `wp-content/plugins/posthog-events/posthog-events.php`:
+
+```php
+<?php
+/**
+ * Plugin Name: PostHog Events
+ * Description: Sends server-side events to PostHog.
+ */
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+require __DIR__ . '/vendor/autoload.php';
+
+use PostHog\PostHog;
+
+function posthog_events_init(): void
+{
+    if (!defined('POSTHOG_PROJECT_TOKEN')) {
+        return;
+    }
+
+    PostHog::init(POSTHOG_PROJECT_TOKEN, [
+        'host' => defined('POSTHOG_HOST') ? POSTHOG_HOST : 'https://us.i.posthog.com',
+    ]);
+}
+add_action('plugins_loaded', 'posthog_events_init');
+
+function posthog_events_track_comment(int $comment_id, $comment_approved, array $comment_data): void
+{
+    if (!defined('POSTHOG_PROJECT_TOKEN')) {
+        return;
+    }
+
+    PostHog::capture([
+        'distinctId' => $comment_data['comment_author_email'] ?? 'anonymous',
+        'event' => 'comment_posted',
+        'properties' => [
+            'comment_id' => $comment_id,
+            'post_id' => $comment_data['comment_post_ID'] ?? null,
+        ],
+    ]);
+
+    PostHog::flush();
+}
+add_action('comment_post', 'posthog_events_track_comment', 10, 3);
+```
+
+Install the SDK inside the plugin folder with `composer require posthog/posthog-php`, then activate the plugin from your WordPress admin.
+
+For WooCommerce, the same pattern on `woocommerce_thankyou` captures the full order – call `wc_get_order($order_id)` in the hook and send the total, currency, and item count as properties.
+
+Three details matter here:
+
+- **Call `PostHog::flush()` after capturing.** The PHP SDK queues events and sends them when the client is destroyed, but a web request has no single exit point the way a CLI script does. Flush where you capture, or events can be lost when the request ends.
+- **Guard the entry file.** `if (!defined('ABSPATH')) { exit; }` before any other code stops the file from running outside WordPress.
+- **Keep pageviews on the client.** The snippet already captures them, along with everything else that happens in the browser. Reserve `PostHog::capture()` for events the browser never sees.
+
+## Troubleshooting
+
+If the snippet is in place but events aren't appearing in PostHog, two things cause most of it on WordPress.
+
+### Caching and optimization plugins
+
+Performance plugins – Autoptimize, WP Rocket, LiteSpeed Cache, W3 Total Cache, and similar – rewrite the JavaScript on your pages. Depending on their settings they can minify the snippet, combine it into a bundle that loads later, defer it until the visitor interacts with the page, or strip the inline script entirely.
+
+If you use one:
+
+- Exclude the PostHog snippet from JavaScript minification, combination, and deferral. Most of these plugins accept an exclusion by filename or by a string in the inline script – `posthog` works for both.
+- Purge the cache after adding the snippet. Until you do, returning visitors keep getting the cached page from before the change.
+- Check the page source of your live site, not the editor preview, to confirm the snippet is really there.
+
+### Requests blocked before they reach PostHog
+
+Ad blockers and strict browser privacy modes – including Firefox's Enhanced Tracking Protection and Brave Shields – block requests to known analytics domains. The snippet loads, but the events never arrive, which looks the same as a broken installation.
+
+The fix is to [deploy a reverse proxy](/docs/advanced/proxy) so events go through your own subdomain instead. PostHog also offers a [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) if you'd rather not run one yourself.
