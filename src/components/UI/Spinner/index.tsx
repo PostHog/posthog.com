@@ -1,4 +1,5 @@
 import React from 'react'
+import { IconSpinner } from '@posthog/icons'
 import { cn } from '../../../utils'
 
 export type SpinnerProps = Omit<React.HTMLAttributes<HTMLSpanElement>, 'children'> & {
@@ -14,22 +15,7 @@ export const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(function 
 ) {
     return (
         <span {...props} ref={ref} role="status" className={cn('inline-flex shrink-0', sizes[size], className)}>
-            <svg
-                aria-hidden="true"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="size-full animate-spin motion-reduce:[animation-duration:2.5s]"
-            >
-                <circle
-                    cx="12"
-                    cy="12"
-                    r="9"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeDasharray="42 15"
-                />
-            </svg>
+            <IconSpinner aria-hidden className="size-full animate-spin motion-reduce:[animation-duration:2.5s]" />
             <span className="sr-only">{label}</span>
         </span>
     )
