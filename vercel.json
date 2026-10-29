@@ -3094,13 +3094,7 @@
         },
         {
             "source": "/docs/integrate/badge:ext(\\.md)?",
-            "destination": "https://brand.posthog.com/badges:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/contribute/badge:ext(\\.md)?",
-            "destination": "https://brand.posthog.com/badges:ext?",
-            "statusCode": 301
+            "destination": "/docs/contribute/badge:ext?"
         },
         {
             "source": "/brand/badge/posthog-badge-white-bg-color.svg",
@@ -3471,6 +3465,10 @@
         {
             "source": "/docs/advanced/proxy/troubleshooting:ext(\\.md)?",
             "destination": "/docs/advanced/proxy/proxy-reference:ext?"
+        },
+        {
+            "source": "/docs/integrate/badge:ext(\\.md)?",
+            "destination": "/docs/contribute/badge:ext?"
         },
         {
             "source": "/docs/integrate/libraries:ext(\\.md)?",

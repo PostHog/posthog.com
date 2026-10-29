@@ -3996,6 +3996,10 @@ export const docsMenu = {
                             name: 'Recognizing contributions',
                             url: '/docs/contribute/recognizing-contributions',
                         },
+                        {
+                            name: 'Badge',
+                            url: '/docs/contribute/badge',
+                        },
                     ],
                 },
             ],
