@@ -406,7 +406,7 @@ function UseCases(): JSX.Element {
                                 PostHog AI plugin
                             </Link>{' '}
                             in your coding agent, or open{' '}
-                            <Link to="/docs/posthog-desktop/skills" className="font-semibold">
+                            <Link to="/docs/skills" className="font-semibold">
                                 PostHog Desktop
                             </Link>
                             , then ask for the model you want, the Skills are already pre-loaded. More on{' '}
