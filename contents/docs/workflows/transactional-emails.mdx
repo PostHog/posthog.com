@@ -50,24 +50,26 @@ For emails with sign-in codes, reset links, or other secrets, turn on **Protect 
 
 ## Create an API key
 
-Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `hog_flow:write` scope.
+Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `hog_flow:write` scope. The same key can also [read the status](#check-an-emails-status) of each email it sends.
 
 1. Go to [**Project secret API keys**](https://app.posthog.com/settings/project-secret-api-keys) in your project settings.
 2. Click **Create project secret API key** and give the key a label.
 3. In the scopes list, set **Workflow** to **Write**.
 4. Copy the key. It starts with `phs_`, and you can't see it again after you leave the page.
 
-A project secret API key with this scope can send transactional emails and nothing else. It can't read or change your templates, and it can't use any other part of the Workflows API. Keep the key on your server. Never put it in client-side code.
+A project secret API key with this scope can send transactional emails and read their status, and nothing else. It can't read or change your templates, and it can't use any other part of the Workflows API. Keep the key on your server. Never put it in client-side code.
+
+To give a service a key that can read statuses but not send, set **Workflow** to **Read** instead.
 
 ## Send an email
 
 ```
-POST https://us.posthog.com/api/projects/@current/messaging_templates/:template_id/send/
+POST https://us.posthog.com/api/projects/@current/messaging/send/email/
 ```
 
 - **Host:** Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
 - **Project:** `@current` is the project that the key belongs to. You can use your project ID instead.
-- **Template ID:** The example on the template's **API** tab includes the full URL with the template ID.
+- **Template ID:** Send it in the body as `template.id`. The template's **API** tab shows it.
 
 ### Request
 
@@ -83,6 +85,7 @@ Send a JSON body with these fields:
 
 | Field | Required | Description |
 | --- | --- | --- |
+| `template.id` | Yes | The ID of the transactional template to send. |
 | `to` | Yes | The email address of the recipient. One address for each request. |
 | `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
 | `identifiers.distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. If you leave it out, PostHog uses the email address as the distinct ID, which might not match the person in your product. We recommend that you always send it. |
@@ -104,7 +107,7 @@ A successful request returns `202 Accepted`:
 }
 ```
 
-A `202` means that PostHog queued the email. It doesn't mean that the email was delivered. To see what happened to each email, open the template's **Sends** tab.
+A `202` means that PostHog queued the email. It doesn't mean that the email was delivered. To see what happened to the email, [check its status](#check-an-emails-status) with its `message_id`, or open the template's **Sends** tab.
 
 `replayed` is `true` when an earlier request with the same `Idempotency-Key` already queued this email. In that case, PostHog sent no new email, and `message_id` is the ID of the first send.
 
@@ -113,11 +116,12 @@ A `202` means that PostHog queued the email. It doesn't mean that the email was 
 <MultiLanguage selector="tabs">
 
 ```bash file=cURL
-curl -X POST "https://us.posthog.com/api/projects/@current/messaging_templates/<template_id>/send/" \
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: password-reset-8f14e45f" \
   -d '{
+    "template": { "id": "<template_id>" },
     "to": "jane@example.com",
     "identifiers": { "distinct_id": "user_123" },
     "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
@@ -127,61 +131,67 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging_templates/<
 ```python file=Python
 import os
 
-import requests
+from posthog import Posthog
+from posthog.emails import EmailError
 
-POSTHOG_HOST = "https://us.posthog.com"
-TEMPLATE_ID = "<template_id>"
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="https://us.i.posthog.com",
+    secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
+)
 
 def send_password_reset(user_id: str, email: str, first_name: str, reset_link: str, reset_request_id: str) -> str:
-    response = requests.post(
-        f"{POSTHOG_HOST}/api/projects/@current/messaging_templates/{TEMPLATE_ID}/send/",
-        headers={
-            "Authorization": f"Bearer {os.environ['POSTHOG_PROJECT_SECRET_API_KEY']}",
-            # Send the same key again when you retry this email
-            "Idempotency-Key": f"password-reset-{reset_request_id}",
-        },
-        json={
-            "to": email,
-            "identifiers": {"distinct_id": user_id},
-            "message_data": {"first_name": first_name, "reset_link": reset_link},
-        },
-        timeout=10,
-    )
-    response.raise_for_status()
-    return response.json()["message_id"]
+    try:
+        result = posthog.emails.send(
+            to=email,
+            template_id="<template_id>",
+            template_data={"first_name": first_name, "reset_link": reset_link},
+            distinct_id=user_id,
+            # Identifies this one email, so a retry never sends it twice
+            idempotency_key=f"password-reset-{reset_request_id}",
+        )
+    except EmailError as error:
+        raise RuntimeError(f"PostHog refused the email: {error.code}") from error
+    return result.id
 ```
 
 ```js file=Node.js
-const POSTHOG_HOST = "https://us.posthog.com"
-const TEMPLATE_ID = "<template_id>"
+import { PostHog } from "posthog-node"
+
+const posthog = new PostHog("<ph_project_api_key>", {
+    host: "https://us.i.posthog.com",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+})
 
 export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
-    const response = await fetch(`${POSTHOG_HOST}/api/projects/@current/messaging_templates/${TEMPLATE_ID}/send/`, {
-        method: "POST",
-        headers: {
-            Authorization: `Bearer ${process.env.POSTHOG_PROJECT_SECRET_API_KEY}`,
-            "Content-Type": "application/json",
-            // Send the same key again when you retry this email
-            "Idempotency-Key": `password-reset-${resetRequestId}`,
-        },
-        body: JSON.stringify({
-            to: email,
-            identifiers: { distinct_id: userId },
-            message_data: { first_name: firstName, reset_link: resetLink },
-        }),
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateId: "<template_id>",
+        templateData: { first_name: firstName, reset_link: resetLink },
+        distinctId: userId,
+        // Identifies this one email, so a retry never sends it twice
+        idempotencyKey: `password-reset-${resetRequestId}`,
     })
-    if (!response.ok) {
-        const error = await response.json()
-        throw new Error(`PostHog refused the email: ${response.status} ${error.code}`)
+    if (error) {
+        throw new Error(`PostHog refused the email: ${error.code}`)
     }
-    const { message_id } = await response.json()
-    return message_id
+    return data.id
 }
 ```
 
 </MultiLanguage>
 
-Support for transactional emails in the Python and Node.js SDKs is coming. Until then, call the API directly.
+The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, takes the same body without `template` and still works.
+
+### Send with an SDK
+
+The [Python SDK](/docs/libraries/python) from version 7.81.0 and the [Node.js SDK](/docs/libraries/node) from version 5.61.0 send transactional emails with `emails.send`.
+
+- **Key:** Set `secret_key` in Python or `secretKey` in Node.js to your project secret API key. The client still captures events with your project API key.
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` in Python or `appHost` in Node.js to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
+- **Local evaluation:** The client also uses the secret key to [evaluate feature flags locally](/docs/feature-flags/local-evaluation). If you do that, give the key the **Feature flag** read scope too. In Node.js, if the client only sends email, set `enableLocalEvaluation: false`.
+- **Retries:** The client sends an idempotency key on each send, and retries network errors, rate limits, and a `503` up to two times with the same key. Pass `idempotency_key` or `idempotencyKey` to cover retries outside the call too, such as from a job queue.
+- **Errors:** In Python, a send that PostHog doesn't queue raises `EmailError`. In Node.js, `send` returns `{ data, error }` and doesn't throw. Both errors carry the `code` from the [errors table](#errors).
 
 ## Retry safely with an idempotency key
 
@@ -224,6 +234,7 @@ Use `code` in your error handling. The text in `detail` can change.
 | `409` | `idempotency_key_in_flight` | A request with the same `Idempotency-Key` is still in progress. | Retry with the same key after a few seconds. |
 | `422` | `idempotency_key_reused` | The `Idempotency-Key` was already used for a different request. | Use a new key for a new email. |
 | `422` | `recipient_suppressed` | The address is on your project's [suppression list](/docs/workflows/opt-outs#the-suppression-list) after a hard bounce or a spam complaint. | Don't retry. Remove the address from the suppression list only if you know that it can receive email again. |
+| `422` | `recipient_unreachable` | The address isn't valid, or its domain has no mail servers, so the email would bounce. | Check the address for a typo. Don't retry the same address. |
 | `422` | `sending_paused` | Sending is paused for this transactional email because of its bounce or complaint rate. | Check the **Reputation** tab in Workflows. |
 | `422` | `sending_suspended` | Email sending is suspended for your project. | Check the **Reputation** tab in Workflows. |
 | `429` | `throttled` | You sent too many requests. | Wait for the number of seconds in the `Retry-After` header, then retry. |
@@ -236,6 +247,87 @@ If you make a template transactional or save it without a verified sender, PostH
 
 Each project secret API key can send 600 requests per minute and 20,000 requests per hour. All the keys of one project share the same limits in total. A request over a limit gets a `429` with the code `throttled`.
 
+## Check an email's status
+
+To find out what happened to an email, read its status with the `message_id` from the send:
+
+```
+GET https://us.posthog.com/api/projects/@current/messaging/emails/:message_id/
+```
+
+Send the same `Authorization` header as for a send. The key needs the `hog_flow:read` or `hog_flow:write` scope. Only a project secret API key can read a status.
+
+A found email returns `200`:
+
+```json
+{
+  "id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
+  "status": "delivered",
+  "created_at": "2026-10-28T16:27:44.364000Z",
+  "status_at": "2026-10-28T16:27:49.625000Z",
+  "reason": null
+}
+```
+
+| `status` | What it means |
+| --- | --- |
+| `queued` | The email waits to go out. |
+| `sent` | PostHog handed the email to the email provider. |
+| `failed` | The email wasn't sent. `reason` says why. |
+| `delivered` | The recipient's mail server accepted the email. |
+| `bounced` | The recipient's mail server refused the email. `reason` is `hard`, `soft`, or `unknown`. |
+| `complained` | The recipient marked the email as spam. |
+
+A status only moves forward. For example, a `delivered` email never goes back to `sent`. New statuses can appear in the future, so handle a value you don't know.
+
+`reason` is `null` unless the email failed or bounced. A failed email has one of these reasons:
+
+- `provider_error` or `provider_rejected`: The email provider refused the email.
+- `recipient_suppressed`, `recipient_unreachable`, or `missing_recipient`: PostHog skipped the email because of the recipient.
+- `sending_paused` or `sending_suspended`: Sending is paused for the template or suspended for the project. Check the **Reputation** tab in Workflows.
+- `canceled` or `workflow_unavailable`: The send stopped before the email went out.
+- Another value, such as `timeout`: The send failed with this kind of error. New values can appear.
+
+A `failed` email can still change to `sent` if PostHog retries the send.
+
+### When a status isn't found
+
+The lookup returns `404` with the code `not_found` when:
+
+- The email was sent in the last few seconds. Its first status takes a moment to arrive, so retry after a short wait.
+- The email is older than 30 days. PostHog keeps each status for 30 days after the send.
+- No email of this project has the ID.
+
+It returns `401` when the request has no project secret API key, `403` when the key doesn't have a Workflow scope, and `429` when you read too often.
+
+Each project secret API key can read 600 statuses per minute and 20,000 per hour. All the keys of one project share the same limits in total. Reads have their own limits, so they don't use up the limits for sends.
+
+### Examples
+
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
+curl "https://us.posthog.com/api/projects/@current/messaging/emails/<message_id>/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
+```
+
+```python file=Python
+status = posthog.emails.get(message_id)
+if status.status == "bounced":
+    print(f"The email bounced: {status.reason}")
+```
+
+```js file=Node.js
+const { data: status, error } = await posthog.emails.get(messageId)
+if (status?.status === "bounced") {
+    console.log(`The email bounced: ${status.reason}`)
+}
+```
+
+</MultiLanguage>
+
+In Python, `get` returns an `EmailStatus`, with `created_at` and `status_at` as datetimes. It raises `EmailError` with the code `not_found` when the status isn't found. In Node.js, `get` returns `{ data, error }`.
+
 ## How transactional emails behave
 
 - **No opt-outs or frequency caps.** Transactional emails ignore marketing [opt-outs](/docs/workflows/opt-outs) and frequency caps. Use them only for emails that a person needs, never for marketing.
@@ -243,4 +335,4 @@ Each project secret API key can send 600 requests per minute and 20,000 requests
 - **Billing and quotas.** Transactional emails are billed and quota limited like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
 - **Sending allowance.** Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its hourly or daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
 - **Engagement events.** If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails against the person in `identifiers.distinct_id`.
-- **Where to see sends.** The template's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.
+- **Where to see sends.** [Read the status](#check-an-emails-status) of an email with its `message_id`. The template's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.
