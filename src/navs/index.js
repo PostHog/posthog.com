@@ -2818,7 +2818,6 @@ export const docsMenu = {
             icon: 'IconBox',
             color: 'blue',
             url: '/docs/libraries',
-            navAppearance: 'sidebar',
             description: 'SDKs, framework guides, and service integrations',
             children: [
                 {
