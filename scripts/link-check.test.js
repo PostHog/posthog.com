@@ -283,6 +283,20 @@ test('source links validate explicit destination anchors after redirects', (t) =
     assert.equal(result.stats.totalLinks, 4)
 })
 
+test('source scans exclude test files and fixtures while retaining production links', (t) => {
+    const write = fixture(t)
+    const production = write('src/components/Link.tsx', '<a href="/missing-production-page" />')
+    write('src/components/Link.test.tsx', '<a href="/test-only" />')
+    write('src/components/Link.spec.js', '<a href="/spec-only" />')
+    write('src/__tests__/link.tsx', '<a href="/test-folder-only" />')
+    write('src/components/__fixtures__/link.tsx', '<a href="/fixture-only" />')
+    write('src/components/fixtures/link.tsx', '<a href="/fixture-only" />')
+    const files = sourceChecker.findSourceFiles(path.resolve(production, '../../..'))
+    assert.deepEqual(files, [production])
+    const result = sourceChecker.checkLinks(new Set(), [], files)
+    assert.deepEqual([...result.brokenByUrl.keys()], ['/missing-production-page'])
+})
+
 test('checker-only changes scan all files while content-only changes stay scoped', (t) => {
     const write = fixture(t)
     const marker = write('marker', '')

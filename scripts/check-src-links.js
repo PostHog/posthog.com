@@ -90,8 +90,9 @@ function findSourceFiles(dir) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
         const fullPath = path.join(dir, entry.name)
         if (entry.isDirectory()) {
-            files.push(...findSourceFiles(fullPath))
-        } else if (CONFIG.SOURCE_EXTENSIONS.test(entry.name)) {
+            if (!['__tests__', '__fixtures__', 'fixtures'].includes(entry.name))
+                files.push(...findSourceFiles(fullPath))
+        } else if (CONFIG.SOURCE_EXTENSIONS.test(entry.name) && !/\.(test|spec)\.[cm]?[jt]sx?$/.test(entry.name)) {
             files.push(fullPath)
         }
     }
@@ -347,4 +348,4 @@ if (require.main === module) {
         process.exitCode = 2
     })
 }
-module.exports = { checkLinks, extractLinks, shouldExclude }
+module.exports = { checkLinks, extractLinks, shouldExclude, findSourceFiles }

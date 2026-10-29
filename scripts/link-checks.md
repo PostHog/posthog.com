@@ -6,7 +6,7 @@ Redirects and rewrites use Vercel route patterns. The check follows internal tar
 
 Anchors must exist in the built HTML. The check does not invent IDs from heading text. Browser text directives (`:~:text=`) are excluded from element ID validation. An element anchor before a directive is still checked. Links in shared snippets use the pages that import those snippets. Client-only sections can still require manual verification.
 
-`pnpm check-src-links` applies the same URL and redirect rules to literal link properties, including JSX expressions and multiline values in `src/`. It checks page targets and explicit destination anchors, such as `/docs/guide#section`. It skips standalone anchors, such as `#section`, because a shared React component can appear on several pages. Source anchor failures are included in the source report's `brokenLinks` count.
+`pnpm check-src-links` applies the same URL and redirect rules to literal link properties, including JSX expressions and multiline values in `src/`. It checks page targets and explicit destination anchors, such as `/docs/guide#section`. It skips standalone anchors, such as `#section`, because a shared React component can appear on several pages. Source anchor failures are included in the source report's `brokenLinks` count. Test files (`*.test.*`, `*.spec.*`) and test fixture directories are excluded because their example URLs are not website links.
 
 ## Reports and exit codes
 
