@@ -8,7 +8,6 @@ import WhyPostHogSection from 'components/Home/Sections/WhyPostHogSection'
 import BedtimeReadingSection from 'components/Home/Sections/BedtimeReadingSection'
 import ShamelessCTASection from 'components/Home/Sections/ShamelessCTASection'
 import { RenderInClient } from 'components/RenderInClient'
-import usePostHog from 'hooks/usePostHog'
 import HitCounter from 'components/Home/HitCounter'
 import Link from 'components/Link'
 import { IconHeadset, IconPlayFilled } from '@posthog/icons'
@@ -17,6 +16,8 @@ import { Logo } from '@posthog/brand/logo'
 import { CallToAction } from 'components/CallToAction'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { motion } from 'framer-motion'
+import { useInView } from 'react-intersection-observer'
+import { getPostHogInstanceCookie } from 'hooks/usePostHogInstance'
 import ToolsTicker from 'components/Home/ToolsTicker'
 // NOTE: `components/PlatformInstall` (index/IconButton/schema/CopyableCommand), the new
 // `Logomark*` icons added to `components/OSIcons/Icons.tsx`, and the `canvas-confetti`
@@ -39,6 +40,8 @@ const StepsSection =
 
 const DATA_STORY_FLAG = 'homepage-data-story'
 const DATA_STORY_VARIANT = 'test'
+const DATA_STORY_CONTROL = 'control'
+const DATA_STORY_EXPOSURE_EVENT = 'homepage data story slot viewed'
 
 class DataStoryErrorBoundary extends React.Component<
     { fallback: React.ReactNode; children: React.ReactNode },
@@ -57,6 +60,50 @@ class DataStoryErrorBoundary extends React.Component<
     render(): React.ReactNode {
         return this.state.failed ? this.props.fallback : this.props.children
     }
+}
+
+const DataStoryExposure = ({ variant, children }: { variant?: string; children: React.ReactNode }) => {
+    const [slotTopRef, slotTopInView] = useInView({ triggerOnce: true })
+
+    useEffect(() => {
+        if (slotTopInView && variant) {
+            window.posthog?.capture(DATA_STORY_EXPOSURE_EVENT, { [`$feature/${DATA_STORY_FLAG}`]: variant })
+        }
+    }, [slotTopInView, variant])
+
+    return (
+        <div className="relative space-y-12">
+            {children}
+            <div ref={slotTopRef} aria-hidden className="absolute inset-x-0 top-0 h-px !m-0 pointer-events-none" />
+        </div>
+    )
+}
+
+const renderDataStorySlot = () => {
+    if (getPostHogInstanceCookie()) {
+        return (
+            <DataStoryExposure>
+                <Control />
+            </DataStoryExposure>
+        )
+    }
+
+    const variant = window.posthog?.getFeatureFlag?.(DATA_STORY_FLAG)
+    const exposedVariant = variant === DATA_STORY_VARIANT || variant === DATA_STORY_CONTROL ? variant : undefined
+
+    return (
+        <DataStoryExposure variant={exposedVariant}>
+            {variant === DATA_STORY_VARIANT ? (
+                <DataStoryErrorBoundary fallback={<Control />}>
+                    <Suspense fallback={null}>
+                        <StepsSection />
+                    </Suspense>
+                </DataStoryErrorBoundary>
+            ) : (
+                <Control />
+            )}
+        </DataStoryExposure>
+    )
 }
 
 const SecondaryActions = ({
@@ -198,7 +245,6 @@ const Control = () => (
 export default function HomeTest() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
-    const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
@@ -212,18 +258,12 @@ export default function HomeTest() {
                 <Hero />
                 <Customers />
                 <RenderInClient
-                    placeholder={<Control />}
-                    render={() =>
-                        posthog?.getFeatureFlag?.(DATA_STORY_FLAG) === DATA_STORY_VARIANT ? (
-                            <DataStoryErrorBoundary fallback={<Control />}>
-                                <Suspense fallback={null}>
-                                    <StepsSection />
-                                </Suspense>
-                            </DataStoryErrorBoundary>
-                        ) : (
+                    placeholder={
+                        <DataStoryExposure>
                             <Control />
-                        )
+                        </DataStoryExposure>
                     }
+                    render={renderDataStorySlot}
                 />
                 <ShamelessCTASection />
                 <HitCounter />
