@@ -2,6 +2,11 @@ import './grain.css'
 
 export const grainSurface = 'ui-grain'
 
+export const flatHover =
+    'transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] motion-reduce:transition-none'
+
+export const flatPressable = `${flatHover} [&:not([data-disabled]):not([aria-disabled=true]):active]:bg-[rgb(var(--text-primary)/0.12)]`
+
 export const focusRing =
     'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--text-primary))]'
 

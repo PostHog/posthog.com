@@ -5,19 +5,17 @@ import { cn } from '../../../utils'
 import { controlSurface, focusRing } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
-const Root = withClassName(
-    BaseCheckbox.Root,
-    cn(
-        'group flex size-5 shrink-0 items-center justify-center rounded text-white',
-        controlSurface,
-        'transition-[background-color,border-color] duration-150 ease-out motion-reduce:transition-none',
-        'data-[checked]:shadow-none data-[indeterminate]:shadow-none dark:data-[checked]:shadow-none dark:data-[indeterminate]:shadow-none',
-        'data-[checked]:border-button data-[checked]:bg-orange dark:data-[checked]:border-button-dark dark:data-[checked]:bg-orange',
-        'data-[indeterminate]:border-button data-[indeterminate]:bg-orange dark:data-[indeterminate]:border-button-dark dark:data-[indeterminate]:bg-orange',
-        'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
-        focusRing
-    )
+const checkboxBox = cn(
+    'group flex size-5 shrink-0 items-center justify-center rounded text-white',
+    controlSurface,
+    'transition-[background-color,border-color] duration-150 ease-out motion-reduce:transition-none',
+    'data-[checked]:shadow-none data-[indeterminate]:shadow-none dark:data-[checked]:shadow-none dark:data-[indeterminate]:shadow-none',
+    'data-[checked]:border-button data-[checked]:bg-orange dark:data-[checked]:border-button-dark dark:data-[checked]:bg-orange',
+    'data-[indeterminate]:border-button data-[indeterminate]:bg-orange dark:data-[indeterminate]:border-button-dark dark:data-[indeterminate]:bg-orange',
+    'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
 )
+
+const Root = withClassName(BaseCheckbox.Root, cn(checkboxBox, focusRing))
 
 const stroke =
     '[stroke-dasharray:1] [stroke-dashoffset:1] transition-[stroke-dashoffset] duration-100 ease-out motion-reduce:transition-none'
@@ -66,6 +64,29 @@ const Indicator = React.forwardRef<HTMLSpanElement, BaseCheckbox.Indicator.Props
     )
 })
 
-export const Checkbox = { Root, Indicator }
+type MarkProps = {
+    checked?: boolean
+    indeterminate?: boolean
+    disabled?: boolean
+    className?: string
+}
+
+const presenceAttribute = (present: boolean | undefined) => (present ? '' : undefined)
+
+function Mark({ checked, indeterminate, disabled, className }: MarkProps): JSX.Element {
+    return (
+        <span
+            aria-hidden
+            data-checked={presenceAttribute(checked && !indeterminate)}
+            data-indeterminate={presenceAttribute(indeterminate)}
+            data-disabled={presenceAttribute(disabled)}
+            className={cn(checkboxBox, 'pointer-events-none', className)}
+        >
+            <span className="flex">{drawnGlyphs}</span>
+        </span>
+    )
+}
+
+export const Checkbox = { Root, Indicator, Mark }
 
 export const CheckboxGroup = withClassName(BaseCheckboxGroup, 'flex flex-col gap-2')

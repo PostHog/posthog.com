@@ -165,6 +165,12 @@ export const catalog: CatalogEntry[] = [
     },
     { slug: 'tabs', name: 'Tabs', description: 'Switch between panels of content.', category: 'Navigation' },
     {
+        slug: 'tree',
+        name: 'Tree',
+        description: 'Nested items that open and close, with selection, checkboxes, or links.',
+        category: 'Navigation',
+    },
+    {
         slug: 'accordion',
         name: 'Accordion',
         description: 'A set of sections that open and close.',
