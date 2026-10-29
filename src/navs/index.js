@@ -8307,6 +8307,10 @@ export const docsMenu = {
                             name: 'Flutter',
                             url: '/docs/workflows/push-notifications/flutter',
                         },
+                        {
+                            name: 'Import device tokens',
+                            url: '/docs/workflows/push-notifications/import-device-tokens',
+                        },
                     ],
                 },
                 {

@@ -29,6 +29,8 @@ Follow the guide for your SDK:
 - [React Native](/docs/workflows/push-notifications/react-native)
 - [Flutter](/docs/workflows/push-notifications/flutter)
 
+Moving from another push provider? [Import your existing device tokens](/docs/workflows/push-notifications/import-device-tokens) so devices that registered before you added PostHog can still get pushes.
+
 ## Identity verification
 
 A device token says *where* to deliver a notification, not *who* the device belongs to. If you turn on identity verification for your push channel ([Optional or Required](/docs/workflows/configure-channels?tab=Push)), your app must attach a short-lived token that proves the logged-in user's identity when it registers a device.
