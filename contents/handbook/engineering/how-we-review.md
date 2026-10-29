@@ -24,7 +24,7 @@ We encourage the use of AI review agents (Codex, Copilot, Greptile, etc.) on PRs
 Stamphog is off for a repo until someone turns it on. Repos opt in one at a time, in two steps:
 
 1. Add the repo to the Stamphog GitHub App installation on the [PostHog org's installed apps page](https://github.com/organizations/PostHog/settings/installations/113819412). The install flow syncs the repo into Stamphog. You need org owner rights, or an org owner has to approve the request.
-2. Turn reviews on for the repo in the [Stamphog scene](https://us.posthog.com/project/2/stamphog), and pick the review mode. In label mode a review starts when someone adds the `stamphog` label to a PR, which is what every repo uses today. In auto mode every PR is reviewed. The daily Slack digest of Stamphog-approved merges is a separate toggle, and it needs reviews on.
+2. Turn reviews on for the repo in the <PrivateLink url="https://us.posthog.com/project/2/stamphog">Stamphog scene</PrivateLink>, and pick the review mode. In label mode a review starts when someone adds the `stamphog` label to a PR, which is what every repo uses today. In auto mode every PR is reviewed. The daily Slack digest of Stamphog-approved merges is a separate toggle, and it needs reviews on.
 
 Repo-level policy is optional. Stamphog reads `.stamphog/policy.yml` and `.stamphog/review-guidance.md` from the repo's default branch and layers them over hosted defaults, so a repo with no `.stamphog/` directory gets the defaults. Stamphog can never approve a change to those files. It reads them from the default branch and never from the PR head, and every edit to them routes to a human reviewer.
 

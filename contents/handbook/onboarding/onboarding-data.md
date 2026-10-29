@@ -9,7 +9,7 @@ showTitle: true
 Data used by Onboarding Specialists comes from three main sources:
 
 **Billing Postgres**
-[_admin panel view_](https://billing.posthog.com/admin/)
+<PrivateLink url="https://billing.posthog.com/admin/"><em>admin panel view</em></PrivateLink>
 - Customer account, subscription, and invoice type data
 - Usage reports and consumption metrics
 - Revenue amortization calculations

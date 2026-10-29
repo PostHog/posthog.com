@@ -17,7 +17,7 @@ The event formats we prefer (and organize ourselves) fall into one of these:
 -   Getting [product engineers](/product-engineer/what-is-a-product-engineer) together to identify problems and build solutions for users
 -   AFK time that we ourselves enjoy like hiking, gaming, cycling, cooking classes, etc.
 
-All plans come together – from conception through to final delivery – on our [event management tool](https://www.notion.so/2f552be1aa2f808494f3e7f9bf4e258c?v=2f552be1aa2f80009544000c428b8082) which centralizes owners, logstics and feedback in one place.
+All plans come together – from conception through to final delivery – on our <PrivateLink url="https://www.notion.so/2f552be1aa2f808494f3e7f9bf4e258c?v=2f552be1aa2f80009544000c428b8082">event management tool</PrivateLink> which centralizes owners, logstics and feedback in one place.
 
 ## Community incubator
 
@@ -102,18 +102,18 @@ PostHog team members who attended or presented at an event can share their feedb
 
 ## Sponsoring external events
 
-We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> channel.
 
 ## Speaking at events
 
-If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these [events taking place in 2026](https://us.posthog.com/project/2/notebooks/Gsvbo8CO). If you don't see an event you're interested in, please add it directly in the [reference sheet](https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0). 
+If you're interested in attending or speaking at a developer conference, consider submitting a CFP (Call for Papers) to one of these <PrivateLink url="https://us.posthog.com/project/2/notebooks/Gsvbo8CO">events taking place in 2026</PrivateLink>. If you don't see an event you're interested in, please add it directly in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1V32nuYgKSx3ZuR-oolxQTfMHsEIW845wH1XOINU-57M/edit?gid=0#gid=0">reference sheet</PrivateLink>.
 
 For first-time yappers, reference the [speaker's guide](/handbook/marketing/speaker-guide). If you need inspiration for a talk, pretty much any practice we use for actual production code is fair game. This includes integrations and implementations with other products. And at this point people are interested in not just what we build but how we did it. 
 
 
 ## Sponsoring student organizations
 
-Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) channel.
+Sometimes students at varying universities ask us if we are interested in sponsoring their career fairs, hackathons, or other student-led initiatives. We don't currently participate in these. Although we don't use specific years of experience as a qualifier for hiring, we rarely hire students straight out of school. If there is a custom partnership you have in mind or it involves an existing employee's alma-mater, ask in the <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> channel.
 
 ## Event submission form
 

@@ -8,7 +8,7 @@ showTitle: true
 
 ### How do I get access?
 
-Create a PR to the `posthog-cloud-infra` repository to add your details in the [identity center Terraform configuration](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50) with `groups = local.default_groups`.
+Create a PR to the `posthog-cloud-infra` repository to add your details in the <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/aws-accnt-root/identity-center.tf#L46-L50">identity center Terraform configuration</PrivateLink> with `groups = local.default_groups`.
 
 To give someone access
 1. Add the new user to the cloud infra repo (see link above)
@@ -60,7 +60,7 @@ See the [AWS self-host deployment guide](/docs/self-host/deploy/aws).
 
 Ask in the `#support-infrastructure` Slack channel for someone to add you.
 
-To give someone access: Navigate to [PostHog project IAM](https://console.cloud.google.com/iam-admin/iam?project=posthog-301601&supportedpurview=project) and use the `+Add` button at the top to add their PostHog email address and toggle `Basic` -> `Editor` role.
+To give someone access: Navigate to <PrivateLink url="https://console.cloud.google.com/iam-admin/iam?project=posthog-301601&amp;supportedpurview=project">PostHog project IAM</PrivateLink> and use the `+Add` button at the top to add their PostHog email address and toggle `Basic` -> `Editor` role.
 
 ### Deploying PostHog
 

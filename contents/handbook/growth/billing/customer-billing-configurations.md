@@ -24,7 +24,7 @@ Below are the main configurations. Each one outlines how the Stripe customers ar
    - Startup plan where users receive credits (e.g., $50,000).
    - Credits apply to all charges until the credits run out.
    - Credit usage needs to be tracked.
-   - Metadata added to the Stripe customer (`is_startup_plan_customer`, `credit_expires_at`, etc.), as agreed in [this RFC](https://github.com/PostHog/product-internal/pull/610). The [Vitally and Zapier automations](/handbook/growth/sales/automations) read the same metadata.
+   - Metadata added to the Stripe customer (`is_startup_plan_customer`, `credit_expires_at`, etc.), as agreed in <PrivateLink url="https://github.com/PostHog/product-internal/pull/610">this RFC</PrivateLink>. The [Vitally and Zapier automations](/handbook/growth/sales/automations) read the same metadata.
    - Revenue is not earned until credits are depleted or expired.
    - Can be with or without tax.
    - Should be using default products/prices.
@@ -65,7 +65,7 @@ Below are the main configurations. Each one outlines how the Stripe customers ar
      - Usage from all the organizations is added together and reported against the shared subscription.
      - The customer pays for each add-on one time. No override is necessary.
      - The customer cannot see a spend breakdown for each organization.
-     - Shared billing has limitations around usage displays, forecasting, and billing limits. Before recommending this setup, [review the limitations](https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#limitations) (PostHog team only) and explain the relevant limitations to the customer.
+     - Shared billing has limitations around usage displays, forecasting, and billing limits. Before recommending this setup, <PrivateLink url="https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#limitations">review the limitations</PrivateLink> (PostHog team only) and explain the relevant limitations to the customer.
      - Internally, MRR and invoices attach to the canonical organization, which is the organization with the lowest customer ID. The other organizations show no MRR in our own tools, which include flags, campaigns, and Vitally.
      - Use this option when the customer does not know the split, and their finance team does not need the spend for each organization.
 
