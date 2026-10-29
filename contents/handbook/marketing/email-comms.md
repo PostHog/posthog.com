@@ -8,6 +8,48 @@ Our email communications can be broadly divided into broadcasts (one-off emails 
 
 This page doesn't deal with [our build mode newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
+## We send email with PostHog Workflows
+
+We've moved all our email marketing out of Customer.io and into [PostHog Workflows](/docs/workflows). Workflows can use all the product data we already have in PostHog, so we no longer need to send data to a third party before we can use it. This gives us much more data to target and personalize emails with, and many more ways to use email alongside the rest of PostHog.
+
+## Treat emails as code
+
+All emails sent from PostHog should be treated as code. This means at least one peer reviews every email before it's sent.
+
+For customer-facing comms, we recommend you also get a review from a member of the <SmallTeam slug="developer-marketing" />. You can do this in two ways:
+
+- **If you've already created the email,** ask for feedback in the #team-developer-marketing Slack channel.
+- **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the [Requests for Comments Internal repo](https://github.com/PostHog/requests-for-comments-internal), and assign a member of the team.
+
+## Writing emails with AI
+
+We care a lot about avoiding AI slop in our emails. Because of this, we recommend you don't use AI to write original email content.
+
+When you use an agent to edit email copy, ask it to use the [`no-slop` skill](https://us.posthog.com/project/2/skills/no-slop?owner_id=3301) from the PostHog skills store. This skill removes or flags common AI writing patterns, and follows writing best practices and our style guides to help improve your copy.
+
+## Building emails in Workflows
+
+We generally send emails as HTML blocks. Use the [PostHog HTML Email Maker](https://us.posthog.com/project/2/skills/posthog-html-email-maker?owner_id=3301) skill to style your HTML blocks so they match the rest of our emails.
+
+All new broadcasts and automations should use these defaults:
+
+- **Messaging limit:** Send each user no more than one email every two days. Apply this limit to all campaigns and broadcasts, unless there is an urgent comm need.
+- **UTM tracking:** Enable UTM tracking on all new broadcasts and automations, so we can measure what each email does.
+
+## Addressing emails
+
+We prefer all emails to come from a named individual where possible, so users can reply with feedback. Use generic addresses, such as hey@posthog.com, only for very broad email comms.
+
+## Targeting emails
+
+Since we started moving to Workflows, some broadcasts for loud comms (such as SDK update notices) were automatically paused. This happened because they targeted very large numbers of users, and many of those email addresses are no longer in use. We must not let this happen repeatedly, because it harms our [sending reputation](/docs/workflows/sending-reputation) and sends our emails to spam.
+
+In Customer.io, we used a segment of users who had logged in at least once in the last four months. This worked, but it wasn't perfect, because you can now use PostHog without ever logging in (for example, through MCP). We didn't send all the data we needed to filter for this to Customer.io, but in Workflows we have much more data to use.
+
+We now use the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who shows any engagement signal in the last 90 days. For example, logging in, sending data, making an MCP call, loading the toolbar, or creating a feature flag.
+
+**Add this cohort to all broadcasts by default.**
+
 ## Linking to the PostHog app or PostHog AI
 
 To point users at a page in the PostHog app via email, use this format: `https://app.posthog.com/` and do not include the project path. 
@@ -26,8 +68,8 @@ For example:
 ## Email broadcasts
 We regularly send three types of email broadcasts. 
 
-1. Changelog, a product announcement email sent bi-weekly via Customer.io. 
-2. PostHog for Startups, an email to users of our startup program. Sent monthly, via Customer.io.
+1. Changelog, a product announcement email sent bi-weekly via PostHog Workflows. 
+2. PostHog for Startups, an email to users of our startup program. Sent monthly, via PostHog Workflows.
 3. Launch emails, which are 'random acts of marketing', but fairly consistent with every product team shipping alpha, beta and GA features each quarter.
 
 Occasionally we send other ad-hoc email broadcasts for specific activities such as outages, reminders, announcements, or deprecations. 
@@ -35,16 +77,16 @@ Occasionally we send other ad-hoc email broadcasts for specific activities such 
 ### Changelog
 The changelog email is part of [the new release process](/handbook/marketing/product-announcements) and is used for [product announcements](/handbook/marketing/product-announcements).
 
-Every month, we use Customer.io to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last month. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for making users aware of new beta features. A test is shared with the team before we send to users. 
+Every month, we use PostHog Workflows to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last month. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for making users aware of new beta features. A test is shared with the team before we send to users. 
 
-We tag these emails as `Product updates` in Customer.io, so users can manage their subscriptions. In order to maintain high deliverability, we target users in the `Recently Engaged (4 months)` segment which includes everyone who has logged in the last quarter. 
+We categorize these emails as `Changelog updates` in Workflows, so users can manage their subscriptions. In order to maintain high deliverability, we target users in the [active users cohort](#targeting-emails). 
 
 ### PostHog for Startups
 Each month, we send an email to users in our PostHog for Startup program. A test is shared with the team before we send to users. This email is targeted to users in the following segments, all at once: `PostHog for Startups (Old)`, `Users in the YC program, old and new`, `Old startup teams (Backfill only)`, and `PostHog for Startups and YC (new)`.
 
 The email is usually comprised of three sections, which inform users of new guides which are relevant to startup use-cases, new betas which are available for them to try, and a spotlight written about a new org in the program. We end by asking for feedback.
 
-We categorize these emails as `Actually useful marketing emails` in Customer.io, so users can unsubscribe if they wish. This email usually comes directly from Joe. 
+We categorize these emails as `Actually useful marketing emails` in Workflows, so users can unsubscribe if they wish. This email usually comes directly from Joe. 
 
 ### Launch emails
 Most product and feature launch emails come from the Product Marketer who sent them – but sometimes campaigns trigger from others, such as billing@posthog.com.
@@ -62,18 +104,18 @@ When we ask users to share feedback through email, it should either link to beta
 
 Doing this lets us filter out the noise for everyone else while still giving good visibility on meaningful feedback internally. If a user sends you feedback, you should share that with the relevant product team or in <PrivateLink url="https://posthog.slack.com/archives/C011L071P8U">https&#58;//posthog.slack.com/archives/C011L071P8U</PrivateLink>
 
->When adding yourself as a send-from address in Customer.io, be sure to edit the display name to '[your name] **from PostHog**'.
+>When adding yourself as a send-from address in Workflows, be sure to edit the display name to '[your name] **from PostHog**'.
 
 ### Other broadcasts
-Any ad-hoc customer email broadcasts are owned by the <SmallTeam slug="developer-marketing" />, and are usually sent via Customer.io. These can include product updates, outage alerts, or other PostHog news if needed.
+Any ad-hoc customer email broadcasts are owned by the <SmallTeam slug="developer-marketing" />, and are usually sent via PostHog Workflows. These can include product updates, outage alerts, or other PostHog news if needed.
 
-These emails are usually tagged as `Service updates` in Customer.io when they include important account or product information. These emails are given a dedicated unsubscribe option in the footer, making it clear that we do not recommend users unsubscribe to these emails. 
+These emails are usually categorized as `Service updates` in Workflows when they include important account or product information. These emails are given a dedicated unsubscribe option in the footer, making it clear that we do not recommend users unsubscribe to these emails. 
 
 Important service updates are the _only_ type of email we may send to unsubscribed users, and only if we feel it is warranted to do so.
 
 > `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
-Whenever we need to send an email broadcast like this we begin by creating an issue using the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) in the marketing repo, unless it involves discussion of personal information - in which case it is discussed in <PrivateLink url="https://github.com/PostHog/company-internal">Company Internal</PrivateLink>. This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone to log in to Customer.io. Issues are closed when an email is sent.
+Whenever we need to send an email broadcast like this we begin by creating an issue using the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) in the marketing repo, unless it involves discussion of personal information - in which case it is discussed in <PrivateLink url="https://github.com/PostHog/company-internal">Company Internal</PrivateLink>. This enables us to summarize information and seek approval from teams while also keeping our work open source. Issues are closed when an email is sent.
 
 If you'd like to work with Marketing on an email activity, please begin by opening an issue with the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md).
 
