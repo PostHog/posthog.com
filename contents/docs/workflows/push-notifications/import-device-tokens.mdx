@@ -57,10 +57,13 @@ The response says how many devices were stored and which people need to be sent 
 
 Split the list into batches of 1,000 and resend any rows whose `distinct_id` comes back in `failed_distinct_ids`. Imports are limited to 60 requests per minute per project. Above that the API answers `429` with a `Retry-After` header, so wait that many seconds and try again.
 
+The script below does all of this. Rows that still fail after five attempts go into `not_imported.csv`, and the script exits with an error so you know the import isn't complete.
+
 This Python script reads a CSV with `distinct_id` and `device_token` columns:
 
 ```python
 import csv
+import sys
 import time
 
 import requests
@@ -70,6 +73,7 @@ PROJECT_ID = "<project_id>"
 CHANNEL_ID = "<channel_id>"
 PERSONAL_API_KEY = "<personal_api_key>"
 BATCH_SIZE = 1000
+ATTEMPTS = 5
 
 url = f"{POSTHOG_HOST}/api/environments/{PROJECT_ID}/integrations/{CHANNEL_ID}/push_tokens/"
 headers = {"Authorization": f"Bearer {PERSONAL_API_KEY}"}
@@ -77,23 +81,39 @@ headers = {"Authorization": f"Bearer {PERSONAL_API_KEY}"}
 with open("devices.csv", newline="") as f:
     rows = [{"distinct_id": r["distinct_id"], "device_token": r["device_token"]} for r in csv.DictReader(f)]
 
+not_imported = []
 for start in range(0, len(rows), BATCH_SIZE):
     batch = rows[start : start + BATCH_SIZE]
-    failed = {row["distinct_id"] for row in batch}
-    for attempt in range(5):
-        response = requests.post(url, headers=headers, json={"subscriptions": batch})
+    for attempt in range(ATTEMPTS):
+        try:
+            response = requests.post(url, headers=headers, json={"subscriptions": batch}, timeout=(10, 60))
+        except requests.RequestException:
+            time.sleep(2**attempt)
+            continue
         if response.status_code == 429:
             time.sleep(int(response.headers.get("Retry-After", "60")))
             continue
+        if response.status_code >= 500:
+            time.sleep(2**attempt)
+            continue
         response.raise_for_status()
         failed = set(response.json()["failed_distinct_ids"])
-        if not failed:
-            break
         batch = [row for row in batch if row["distinct_id"] in failed]
+        if not batch:
+            break
         time.sleep(2)
-    else:
-        print(f"Rows {start} to {start + BATCH_SIZE} still failing for: {sorted(failed)}")
-    print(f"Sent rows {start} to {min(start + BATCH_SIZE, len(rows))}")
+    not_imported.extend(batch)
+    print(f"Rows {start} to {min(start + BATCH_SIZE, len(rows))}: {len(batch)} not imported")
+
+if not_imported:
+    with open("not_imported.csv", "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["distinct_id", "device_token"])
+        writer.writeheader()
+        writer.writerows(not_imported)
+    print(f"{len(not_imported)} rows not imported. Run the script again on not_imported.csv.")
+    sys.exit(1)
+```
+
 ```
 
 ## Billing
