@@ -138,7 +138,7 @@ metadata:
     nginx.ingress.kubernetes.io/configuration-snippet: |
       proxy_set_header Cookie "";
       # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-      # If your project token doesn't start with phc_, match 'Bearer ' instead.
+      # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
       set $posthog_authorization "";
       if ($http_authorization ~ "^Bearer phc_") {
         set $posthog_authorization $http_authorization;
@@ -202,7 +202,7 @@ The annotations in the Ingress configuration above do the following:
 - `proxy-ssl-verify` requires a valid certificate from the upstream.
 - `proxy-ssl-server-name` and `proxy-ssl-name` send and verify the correct hostname during the TLS handshake.
 - `proxy-body-size` allows large event batches and session recordings. ingress-nginx returns `413` for bodies over its limit, and capture v1 SDKs drop a request that gets a `413`.
-- `configuration-snippet` removes browser cookies before sending requests to PostHog. On the API Ingress, it forwards the `Authorization` header only when its value starts with `Bearer phc_`, because capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, match `"^Bearer "` instead. nginx does not send a header whose value is empty, so other credentials never reach PostHog. On the assets Ingress, it always clears the header.
+- `configuration-snippet` removes browser cookies before sending requests to PostHog. On the API Ingress, it forwards the `Authorization` header only when its value starts with `Bearer phc_`, because capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, change the `if` to `$http_authorization = "Bearer <your project token>"` instead. nginx does not send a header whose value is empty, so other credentials never reach PostHog. On the assets Ingress, it always clears the header.
 
 The API and asset paths use separate Ingress resources because each upstream needs its own Host header and verified TLS hostname. The ExternalName services keep the upstreams as DNS names, allowing ingress-nginx to re-resolve them when their DNS records change.
 

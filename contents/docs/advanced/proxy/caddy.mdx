@@ -61,7 +61,7 @@ e.yourdomain.com {
   }
   handle {
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
@@ -93,7 +93,7 @@ e.yourdomain.com {
   }
   handle {
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
@@ -113,7 +113,7 @@ The `header_up Host` directive tells PostHog which domain the request is for. Wi
 
 The `header_up -Cookie` directive removes the browser's cookies before the request goes to PostHog. PostHog does not need them.
 
-The `@non_bearer` matcher and `request_header` directive forward the `Authorization` header only when its value starts with `Bearer phc_`, and remove any other value, such as session tokens your app adds to its own requests. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, match `"Bearer *"` instead. The asset routes always remove the header with `header_up -Authorization`, because asset requests don't need it.
+The `@non_bearer` matcher and `request_header` directive forward the `Authorization` header only when its value starts with `Bearer phc_`, and remove any other value, such as session tokens your app adds to its own requests. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, match `"Bearer <your project token>"` instead, which is an exact match. The asset routes always remove the header with `header_up -Authorization`, because asset requests don't need it.
 
 The `header_down -Access-Control-Allow-Origin` directive removes CORS headers from PostHog's response. This prevents conflicts with your own CORS configuration.
 
@@ -214,7 +214,7 @@ In your working directory, create a file named `Caddyfile`:
   handle_path /yourpath-proxy* {
     rewrite * {path}
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
@@ -253,7 +253,7 @@ In your working directory, create a file named `Caddyfile`:
   handle_path /yourpath-proxy* {
     rewrite * {path}
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
@@ -451,7 +451,7 @@ e.yourdomain.com {
   }
   handle {
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
@@ -487,7 +487,7 @@ e.yourdomain.com {
   }
   handle {
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
@@ -638,7 +638,7 @@ e.yourdomain.com {
   }
   handle {
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
@@ -684,7 +684,7 @@ e.yourdomain.com {
   }
   handle {
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     @non_bearer not header Authorization "Bearer phc_*"
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {

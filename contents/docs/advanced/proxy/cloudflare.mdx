@@ -84,7 +84,7 @@ async function forwardRequest(request, pathWithSearch) {
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
   // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
   if (!originHeaders.get("authorization")?.startsWith("Bearer phc_")) {
     originHeaders.delete("authorization")
   }
@@ -138,7 +138,7 @@ async function forwardRequest(request, pathWithSearch) {
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
   // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-  // If your project token doesn't start with phc_, match 'Bearer ' instead.
+  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
   if (!originHeaders.get("authorization")?.startsWith("Bearer phc_")) {
     originHeaders.delete("authorization")
   }

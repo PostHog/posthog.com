@@ -20,7 +20,7 @@ Check your project URL in the [PostHog app](https://app.posthog.com) to confirm 
 ### Checklist
 
 - Set the `Host` header to the PostHog domain (e.g., `Host: us.i.posthog.com`). Without this, you'll get 401 errors.
-- Forward the `Authorization` header when its value starts with `Bearer phc_`. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. Strip any other `Authorization` value, such as session tokens your app adds to its own requests. If your project token doesn't start with `phc_`, forward any value that starts with `Bearer ` instead.
+- Forward the `Authorization` header when its value starts with `Bearer phc_`. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. Strip any other `Authorization` value, such as session tokens your app adds to its own requests. If your project token doesn't start with `phc_`, forward only the exact value `Bearer <your project token>` instead.
 - Forward every `PostHog-*` header, plus `Content-Type`, `Content-Encoding`, and `User-Agent`, unchanged. Capture v1 SDKs need them, and their request bodies can be compressed with `gzip`, `deflate`, `br`, or `zstd`.
 - Route `/i/v1/*` paths to the regional ingestion host, `us.i.posthog.com` or `eu.i.posthog.com`.
 - Allow `GET` and `POST`** on all paths.

@@ -67,7 +67,7 @@ Create a new configuration file at `/etc/nginx/sites-available/yourpath-proxy`:
 
 ```nginx
 # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-# If your project token doesn't start with phc_, match 'Bearer ' instead.
+# If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
 map $http_authorization $posthog_authorization {
     "~^Bearer phc_" $http_authorization;
     default     "";
@@ -130,7 +130,7 @@ Here's what each directive does:
 - `set`: Stores each upstream hostname in a variable. nginx only re-resolves names used through variables in `proxy_pass`.
 - `proxy_pass`: The upstream URL nginx forwards requests to. Omitting a URI preserves the complete request path.
 - `proxy_set_header Host`: Sets the Host header sent to PostHog. Without this, PostHog receives your domain and can't route the request, causing 401 errors.
-- `map` and `proxy_set_header Authorization`: Forward the `Authorization` header only when its value starts with `Bearer phc_`. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, match `"~^Bearer "` instead. nginx does not send a header whose value is empty, so other credentials never reach PostHog. The asset locations always clear the header, because asset requests don't need it.
+- `map` and `proxy_set_header Authorization`: Forward the `Authorization` header only when its value starts with `Bearer phc_`. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, replace the `map` pattern with `"Bearer <your project token>"` instead, which is an exact match. nginx does not send a header whose value is empty, so other credentials never reach PostHog. The asset locations always clear the header, because asset requests don't need it.
 - `proxy_set_header Cookie`: Clears the browser's cookies before the request goes to PostHog.
 - `proxy_ssl_server_name on`: Enables Server Name Indication (SNI) for the upstream SSL connection. Required because PostHog uses virtual hosting.
 - `proxy_ssl_name`: The hostname to use for SNI. Must match the upstream domain.
@@ -259,7 +259,7 @@ http {
     sendfile on;
 
     # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match 'Bearer ' instead.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
     map $http_authorization $posthog_authorization {
         "~^Bearer phc_" $http_authorization;
         default     "";

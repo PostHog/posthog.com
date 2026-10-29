@@ -111,7 +111,7 @@ function handler(event) {
   var request = event.request
   var authorization = request.headers.authorization
   // Keep the SDK's project token (Bearer phc_...). Strip any other credentials.
-  // If your project token doesn't start with phc_, check for 'Bearer ' instead.
+  // If your project token doesn't start with phc_, keep only exactly 'Bearer <your project token>' instead.
   if (authorization && authorization.value.indexOf('Bearer phc_') !== 0) {
     delete request.headers.authorization
   }
@@ -251,7 +251,7 @@ If capture v1 SDKs get `400` with `missing_required_headers` or `401` with `miss
 1. Confirm your default behavior uses your custom `posthog-origin-request-policy`
 2. Verify that policy forwards all viewer headers except `Host`
 3. Verify your cache policy includes the `Authorization` header
-4. If your project token doesn't start with `phc_`, edit the `posthog-authorization` function to check for `Bearer ` instead
+4. If your project token doesn't start with `phc_`, edit the `posthog-authorization` function to keep only the exact value `Bearer <your project token>`
 
 Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, along with `PostHog-*` headers that PostHog requires. If CloudFront drops any of them, PostHog rejects the request.
 
