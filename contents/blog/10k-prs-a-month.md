@@ -138,7 +138,7 @@ We built StampHog by looking at:
 
 20% of our PRs are approved by StampHog and it only costs us about $300 per month in tokens. This is an incredibly efficient investment for the speed up it gives engineers who can now deliver small safe steps very quickly. 
 
-For more complicated reviews, we're also building out ReviewHog which we'll eventually offer as part of self-driving product. It gives us the top-down, thorough review by a fleet of agents.
+For more complicated reviews, we're also building out [ReviewHog](/blog/how-to-benchmark-ai-agents#level-2-a-larger-golden-set-from-multiple-prs) which we'll eventually offer as part of self-driving product. It gives us the top-down, thorough review by a fleet of agents.
 
 Combined, these agentic tools let our engineers concentrate on the genuinely important questions that need human attention, like: 
 
