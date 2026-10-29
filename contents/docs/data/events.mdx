@@ -22,7 +22,7 @@ Events consist of:
 
 You can [capture custom events](/docs/product-analytics/capture-events) using any of [our SDKs](/docs/libraries) or [our API](/docs/api/capture). PostHog's client-side SDKs, like [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native), can also [autocapture](/docs/data/autocapture) events for you.
 
-You can view recent events in your [activity tab](https://us.posthog.com/events), which automatically updates every 30 seconds for a live view of activity in your app.
+You can view recent events in your [activity tab](https://app.posthog.com/events), which automatically updates every 30 seconds for a live view of activity in your app.
 
 ## How events power PostHog
 
@@ -61,7 +61,7 @@ While ingesting events, PostHog detects some type information for properties suc
 - Arrays
 - Objects
 
-If something has been detected incorrectly, you can manually change the type by going to [properties tab in data management](https://us.posthog.com/data-management/properties), selecting the property, clicking on `Edit`, and then changing the property type manually. You can also add tags or mark a property as verified on this page.
+If something has been detected incorrectly, you can manually change the type by going to [properties tab in data management](https://app.posthog.com/data-management/properties), selecting the property, clicking on `Edit`, and then changing the property type manually. You can also add tags or mark a property as verified on this page.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/edit_property_light_8c549c3cc2.png"
@@ -131,7 +131,9 @@ Generally, work with and build insights and queries with `timestamp` and only re
 
 ## Managing event definitions
 
-On the [events management page](https://app.posthog.com/data-management/events), you can edit event tags and descriptions. These show up when searching for events throughout PostHog and provide more context about the purpose of the event.
+On the [events management page](https://app.posthog.com/data-management/events), you can edit event tags, descriptions, and owners. These show up when searching for events throughout PostHog and provide more context about the purpose of the event.
+
+Event owners help with data governance by assigning responsibility for event definitions to specific team members. You can also manage event definitions programmatically using the [MCP server](/docs/model-context-protocol/tools).
 
 To edit tags on multiple events at once, select the checkboxes next to the events you want to update. This reveals the **Update tags** action, which lets you add, remove, or replace tags across all selected events.
 
