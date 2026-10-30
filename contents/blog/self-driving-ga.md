@@ -35,7 +35,7 @@ Juno's team merged 26 of the agents' last 30 PRs straight away. Some fixed bugs,
 
 Most mornings, reports are bug fixes and performance work, but one morning it was an existential problem. A scout noticed daily clicks from Google had dropped to zero shortly after SoundBoost moved from an .ai domain to a .com. The team assumed Google was lagging on the new domain and was ready to leave it be, but the report showed that conversions had stopped, traffic was down, and their best funnel was gone. They rolled back to .ai immediately and the Google traffic came back.
 
-The diagnosis was fast because Berkan tracks every button and feature as an [action](/docs/data/actions), mostly through the [PostHog MCP](/mcp) from his editor. He used to review every self-driving PR line by line. Now he merges them almost instantly.
+The diagnosis was fast because Berkan tracks every button and feature as an [action](/docs/data/actions), which he can then query using the [PostHog MCP](/mcp) in his editor. He used to review every self-driving PR line by line. Now he merges them almost instantly.
 
 ## Our self-driving team let self-driving drive itself
 
