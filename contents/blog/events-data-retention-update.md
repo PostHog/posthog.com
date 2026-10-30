@@ -1,6 +1,6 @@
 ---
 title: "Events data retention is changing for new paid plans"
-date: 2026-11-01
+date: 2026-11-05
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -8,15 +8,15 @@ hideAnchor: true
 category: PostHog news
 ---
 
-From November 1, 2026, new paid plans on PostHog Cloud will have a 2-year events data retention policy, instead of 7. Platform packages extend it to 3 years on Boost, 5 years on Scale, and 7 years on Enterprise. The free plan will stay at 1 year. Organizations already on a paid plan keep 7 years.
+From November 5, 2026, new paid plans on PostHog Cloud will have a 2-year events data retention policy, instead of 7. Platform packages extend it to 3 years on Boost, 5 years on Scale, and 7 years on Enterprise. The free plan will stay at 1 year. Organizations already on a paid plan keep 7 years.
 
 ## What changes
 
 **Existing paid organizations:** You keep 7 years while you stay on your current plan and platform package, or move to a bigger package. If you downgrade to the free plan or to a smaller platform package, you'll move to the new retention for your plan.
 
-**Existing free organizations:** You'll keep 1-year retention. If you upgrade to pay-as-you-go on or after November 1, you'll move to the 2-year default, or longer with a platform package.
+**Existing free organizations:** You'll keep 1-year retention. If you upgrade to pay-as-you-go on or after November 5, you'll move to the 2-year default, or longer with a platform package.
 
-**New organizations (created on or after November 1):** Free plans get 1 year, pay-as-you-go plans get 2 years, and platform packages get 3, 5, or 7 years.
+**New organizations (created on or after November 5):** Free plans get 1 year, pay-as-you-go plans get 2 years, and platform packages get 3, 5, or 7 years.
 
 ## What happens after the retention window?
 
