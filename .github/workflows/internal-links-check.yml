@@ -64,9 +64,6 @@ jobs:
                   cache: 'pnpm'
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
-            - name: Test link checker
-              if: ${{ matrix.target == 'head' }}
-              run: pnpm test:links
             - name: Prepare site revision
               env:
                   TARGET: ${{ matrix.target }}

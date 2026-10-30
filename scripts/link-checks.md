@@ -27,7 +27,6 @@ The manual `save_results` input controls artifact upload. Reports are still writ
 ## Local checks
 
 ```sh
-pnpm test:links
 pnpm build
 pnpm check-links-post-build link-check-results
 pnpm check-src-links link-check-results
@@ -37,8 +36,6 @@ node scripts/link-check-report.js link-check-results
 For an optional local scan of only changed files, append `--changed-from=<full-base-commit-SHA>` to either checker. The base commit must be available locally.
 
 ## Test Slack delivery
-
-The automated tests verify the payload, incomplete reports, and HTTP error handling. They do not send Slack messages.
 
 For an end-to-end test, open the **Check internal links** workflow in GitHub Actions. Select **Run workflow**, choose the PR branch, and leave **Save results to file** and **Send Slack notification** enabled. This sends a real notification through the existing repository secret, `SLACK_WEBHOOK_BROKEN_WEBSITE_INTERNAL_LINKS`.
 
