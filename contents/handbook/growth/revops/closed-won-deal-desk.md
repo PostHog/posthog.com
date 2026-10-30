@@ -29,6 +29,8 @@ Everything happens in the alert's thread in #closed-won. Replies must be thread 
 | Reply `use org <number or org id> <opportunity id>` | Triage asks which org is right, or it is a new customer with no Stripe account | Triage runs again with that org. For a new customer, Zap B creates the Stripe customer, then the draft invoice. |
 | Reply `approve <opportunity id>` (add `org <org id>` if the org was picked) | Rule-based deal (notes such as a credit rollover, a named billing email, or bank transfer) | Zap B fills the row. RevOps creates and sends the invoice by hand. |
 | Reply `approve <opportunity id> draft` | Specialist or rule-based deal that RevOps has already sorted out by hand | Triage skips the classification, credit balance, prepurchase credit, and backdating checks. Zap B fills the row and creates the draft invoice. Not for quarterly payment plans or AWS Marketplace deals. |
+| Reply `approve <opportunity id> draft start YYYY-MM-DD` | The start date in Salesforce is wrong, or you moved it (for example to the billing period day) | Same as above, but the row, the draft invoice, and the credits use your date instead of Salesforce's. Update the opportunity in Salesforce too. |
+| Reply `use org <org id> <opportunity id>` on an older alert | The alert was posted before triage was switched on, or triage never ran | Runs triage on that alert from the start. |
 | React `:moneybag:` on the alert | After the invoice is sent | Credits are applied, or the Zap replies why not. |
 
 **Who can react `:moneybag:`:** Mine, Erika, and Abhischek. The list is hardcoded in the Zap. Add new people in the Zap's first code step.
@@ -36,6 +38,21 @@ Everything happens in the alert's thread in #closed-won. Replies must be thread 
 **Deal owners get tagged** when triage needs an answer from them: the right org, a coverage gap, a missing Salesforce field, or a Contract Link that is not a PandaDoc document link. Their Slack IDs live in the skill's `deal-owners.md` file.
 
 **Before you send a draft invoice,** check the dates, the amount, and the billing email. If the reply flags a PO, add it from the Salesforce opportunity first.
+
+## Renewals with leftover credits
+
+When a renewal still has credit left from the current contract, triage does not ask the deal owner what to do with it. It works out the amount and lists the steps in its reply:
+
+- **Early renewal** (the opportunity says "early renewal", or the current contract's credits run past the new start date): the customer keeps the full leftover balance.
+- **Renewal at the end of the term:** the standard order form rolls over 50% of the unused credits.
+- If the special terms on the opportunity state different rollover terms, those win.
+
+The order matters:
+
+1. Remove the leftover credit from the account.
+2. Reply `approve <opportunity id> draft` to get the draft invoice, then send it so it is finalized.
+3. Add back the rollover amount (the full balance for an early renewal, half for a renewal at the end of the term).
+4. React `:moneybag:` on the alert to apply the new contract's credits.
 
 ## One-off credits
 
@@ -60,6 +77,7 @@ The triage logic lives in PostHog. Anything that writes to the table or to Strip
 | <PrivateLink url="https://us.posthog.com/project/2/llm-analytics/skills/closed-won-deal-desk-triage">closed-won-deal-desk-triage</PrivateLink> (skill) | The triage instructions that all three workflows run. Includes `deal-owners.md` (owner email to Slack ID). | Live, versioned in the skills store |
 | <PrivateLink url="https://us.posthog.com/project/2/endpoints/contract_org_lookup">contract_org_lookup</PrivateLink> (endpoint) | Finds candidate orgs by domain and company name, with Stripe IDs from billing tables | Live |
 | <PrivateLink url="https://us.posthog.com/project/2/endpoints/prepurchase_credit_by_invoice">prepurchase_credit_by_invoice</PrivateLink> (endpoint) | Tells the `:moneybag:` Zap whether credits were already applied for an invoice | Live |
+| <PrivateLink url="https://us.posthog.com/project/2/endpoints/deal_desk_opportunity_org">deal_desk_opportunity_org</PrivateLink> (endpoint) | Gives the `:moneybag:` Zap the PostHog org on a Salesforce opportunity, for its fallback row lookup | Live |
 | `salesforce.opportunity` warehouse sync | Source for triage. Full refresh every 30 minutes. (`salesforce.account` is still daily, so a brand-new account can be missing. Triage then takes the company name from the alert.) | Live |
 
 ### Zapier
@@ -67,7 +85,7 @@ The triage logic lives in PostHog. Anything that writes to the table or to Strip
 | Piece | What it does |
 | --- | --- |
 | Zap B: Webhook to Prepurchase credit processing table | Receives the triage payload. Finds or creates the row, writes credits, price, term and one off credit, reads the order form when needed, fills the Stripe address, creates the Stripe customer for new customers, creates the draft invoice, and reports in the thread. |
-| Deal desk: apply credits on `:moneybag:` reaction | Checks the reactor, the invoice, and existing credits. Then applies Credit Amount plus one off credit as prepurchase credits and marks the row. |
+| Deal desk: apply credits on `:moneybag:` reaction | Finds the row by the alert's Slack thread. If no row has the thread (for example a row you fixed by hand in the table), it finds the org from the triage reply or the Salesforce opportunity and uses that org's row with an invoice, then links the row to the thread. Checks the reactor, the invoice, and existing credits. Then applies Credit Amount plus one off credit as prepurchase credits, from the row's Start date for its Term, and marks the row. |
 | <PrivateLink url="https://tables.zapier.com/app/tables/t/01KFEYNYKVS60GR4A5PSXDX74Y">Prepurchase credit processing table</PrivateLink> | One row per contract. The buttons still work for manual setup. |
 | Create Stripe Customer button Zap | Manual button. Zap B copies its logic. |
 | Apply Credit button Zap | Manual button. The `:moneybag:` Zap copies its credit webhook. |
@@ -107,7 +125,9 @@ Most failures leave a message in the alert thread that says what to fix. None of
 | "Didn't create a Stripe customer … the row is missing …" | A row exists but has no address, Country, or billing email | Fill those fields in the row, then reply `use org …` again |
 | "Stripe already has customer … for this org id" | A Stripe customer is already tagged with this org | Add that customer ID to the row instead of creating a new one |
 | Two rows for the same contract | The order-form row's Domain or Start date did not match (for example a start date shifted by a time zone), so Zap B created a new row | Keep the deal desk row (it has the org, Stripe customer and invoice) and delete the other one before clicking any button |
-| "Didn't apply credits" after `:moneybag:` | Reactor not on the allow list, invoice not sent yet, customer mismatch, or credits already applied | The message says which. Fix it and react again |
+| "Didn't apply credits" after `:moneybag:` | Reactor not on the allow list, invoice not sent yet, customer mismatch, credits already applied, or no row for the thread or the deal's org has an invoice | The message says which. Fix it and react again |
+| No triage reply on an alert | The alert was posted before triage was switched on, or the warehouse sync missed it | Reply `use org <org id> <opportunity id>` in the thread |
+| You fixed the start date in the table, and `approve … draft` created a second row | Zap B matches the row on the start date it receives, which comes from Salesforce | Reply `approve <opportunity id> draft start YYYY-MM-DD` with the date you set in the table |
 
 **Editing the Zaps:** reload the Zapier editor before you publish. If you publish from an editor tab that you opened before someone else saved a change, you overwrite that change.
 
