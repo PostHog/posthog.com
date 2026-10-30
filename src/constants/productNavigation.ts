@@ -31,9 +31,9 @@ export const BROWSE_TOOLS_HANDLES = [
 // switcher uses the same order without the group labels.
 export const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
     // MCP Analytics belongs in Analyze – add it here once its product page ships
-    { label: 'Analyze', handles: ['product_analytics', 'web_analytics', 'ai_observability'] },
+    { label: 'Analyze', handles: ['product_analytics', 'web_analytics'] },
+    { label: 'Observe', handles: ['session_replay', 'replay_vision', 'error_tracking', 'ai_observability'] },
     { label: 'Sync', handles: ['data_warehouse', 'data_pipelines', 'endpoints'] },
-    { label: 'Observe', handles: ['session_replay', 'replay_vision', 'error_tracking'] },
     { label: 'Monitor', handles: ['logs', 'traces'] },
     { label: 'Deploy', handles: ['feature_flags', 'experiments'] },
     { label: 'Manage', handles: ['surveys', 'support', 'workflows_emails'] },
