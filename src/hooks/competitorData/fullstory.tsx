@@ -226,6 +226,12 @@ export const fullstory = {
         workflows: {
             available: false,
         },
+        data_warehouse: {
+            available: false,
+        },
+        ai_observability: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
