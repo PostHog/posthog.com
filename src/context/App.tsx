@@ -11,7 +11,7 @@ import React, {
 } from 'react'
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
-import { isSafeInternalPath } from 'lib/utils'
+import { getSharedWindows, isSafeInternalPath } from 'lib/internalPath'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
@@ -1717,7 +1717,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const queryString = urlObj?.search.substring(1)
         const parsed = qs.parse(queryString)
-        if (parsed?.windows) return []
+        if (getSharedWindows(parsed?.windows).length > 0) return []
         return getInitialWindows(element)
     })
     const windowsRef = useRef(windows)
@@ -2480,7 +2480,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const queryString = urlObj?.search.substring(1)
         const parsed = qs.parse(queryString)
-        if (parsed?.windows || location.state?.skipPageUpdate) {
+        if (getSharedWindows(parsed?.windows).length > 0 || location.state?.skipPageUpdate) {
             return
         }
         updatePages(element)
@@ -2830,10 +2830,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const queryString = urlObj?.search.substring(1)
         const parsed = qs.parse(queryString)
-        const paramsWindows = parsed?.windows
+        const paramsWindows = getSharedWindows(parsed?.windows)
 
-        if (paramsWindows) {
-            const [initialWindow, ...rest] = convertWindowsToPixels(parsed.windows)
+        if (paramsWindows.length > 0) {
+            const [initialWindow, ...rest] = convertWindowsToPixels(paramsWindows)
 
             // Preserve non-windows query parameters when navigating
             const nonWindowsParams = { ...parsed }
