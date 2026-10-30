@@ -59,9 +59,10 @@ const Group = React.forwardRef<HTMLDivElement, ChoiceboxGroupProps>(function Cho
 export type ChoiceboxItemProps = React.LabelHTMLAttributes<HTMLLabelElement> & { value: string; disabled?: boolean }
 
 const Item = React.forwardRef<HTMLLabelElement, ChoiceboxItemProps>(function ChoiceboxItem(
-    { value, disabled, className, children, ...props },
+    { value, disabled, className, children, onClick, ...props },
     ref
 ) {
+    const controlRef = React.useRef<HTMLElement>(null)
     const multiple = React.useContext(MultipleContext)
     if (multiple === null) throw new Error('Choicebox.Item requires Choicebox.Group')
     const Control = multiple ? Checkbox.Root : Radio.Root
@@ -78,8 +79,21 @@ const Item = React.forwardRef<HTMLLabelElement, ChoiceboxItemProps>(function Cho
                 className
             )}
             {...props}
+            onClick={(event) => {
+                onClick?.(event)
+                const target = event.target as Element
+                const control = controlRef.current
+                if (event.defaultPrevented || !control || control.contains(target) || target.tagName === 'INPUT') return
+                event.preventDefault()
+                control.click()
+            }}
         >
-            <Control value={value} disabled={disabled} className="absolute right-4 top-4 focus-visible:outline-0">
+            <Control
+                ref={controlRef}
+                value={value}
+                disabled={disabled}
+                className="absolute right-4 top-4 focus-visible:outline-0"
+            >
                 <Indicator />
             </Control>
             {children}
