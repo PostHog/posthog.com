@@ -19,7 +19,7 @@ You can find your salesforce ID by going to your profile and copy the text in th
 
 ### Activation
 1. For the new users on your accounts, how many came back to analyze an insight, watch a recording, create a feature flag, etc. within their first week?
-2. What are the monthly activation rates across all your accounts for product analytics? (Hint: read this [activation metric post](https://posthog.com/product-engineers/activation-metrics) and [these insights](https://us.posthog.com/project/2/insights?search=activation))
+2. What are the monthly activation rates across all your accounts for product analytics? (Hint: read this [activation metric post](https://posthog.com/product-engineers/activation-metrics) and <PrivateLink url="https://us.posthog.com/project/2/insights?search=activation">these insights</PrivateLink>)
 
 ### Retention / Usage 
 1. Which of your new users have retained their usage after their first 3 months?
@@ -40,20 +40,20 @@ You can find your salesforce ID by going to your profile and copy the text in th
 If you get stuck or want to verify your implementation against an example, below are existing cohorts, insights, etc. to match each question.
 
 __Cohorts__:
-1. [Example cohort](https://us.posthog.com/project/2/cohorts/144987)
-2. [Example cohort](https://us.posthog.com/project/2/cohorts/146377)
-3. [Example cohort](https://us.posthog.com/project/2/cohorts/154066)
-4. [Example cohort](https://us.posthog.com/project/2/cohorts/154067) 
+1. <PrivateLink url="https://us.posthog.com/project/2/cohorts/144987">Example cohort</PrivateLink>
+2. <PrivateLink url="https://us.posthog.com/project/2/cohorts/146377">Example cohort</PrivateLink>
+3. <PrivateLink url="https://us.posthog.com/project/2/cohorts/154066">Example cohort</PrivateLink>
+4. <PrivateLink url="https://us.posthog.com/project/2/cohorts/154067">Example cohort</PrivateLink>
 
 __Activation__:
-1. [Example insight](https://us.posthog.com/project/2/insights/aBpMC6Zv)
+1. <PrivateLink url="https://us.posthog.com/project/2/insights/aBpMC6Zv">Example insight</PrivateLink>
 
 __Retention / Usage__:
-1. [Example insight](https://us.posthog.com/project/2/insights/wlpuXyz2)
-2. [Example insight](https://us.posthog.com/project/2/insights/revCSbzO)
+1. <PrivateLink url="https://us.posthog.com/project/2/insights/wlpuXyz2">Example insight</PrivateLink>
+2. <PrivateLink url="https://us.posthog.com/project/2/insights/revCSbzO">Example insight</PrivateLink>
 
 __Churn__:
-1. [Example insight](https://us.posthog.com/project/2/insights/DpKrMKxj)
+1. <PrivateLink url="https://us.posthog.com/project/2/insights/DpKrMKxj">Example insight</PrivateLink>
 
 __Strategic questions__:
-1. [Example funnel](https://us.posthog.com/project/2/insights/O8lthh4G) -  Where would you dive deep next from here?
+1. <PrivateLink url="https://us.posthog.com/project/2/insights/O8lthh4G">Example funnel</PrivateLink> -  Where would you dive deep next from here?

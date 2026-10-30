@@ -141,7 +141,7 @@ Here are some other known examples that aren't necessarily 0 to 1 linear adoptio
 - Data warehouse has continued to receive special attention since the launch of PostHog's related products. 
   - AI Observability + data warehouse - enrich AI Observability with data from other sources like Stripe or Supabase
   - Customer analytics + data warehouse - natural fit between connecting up stripe and enriching data further
-  - Read a hot topic on [churn in high growth customers](https://posthog.slack.com/docs/TSS5W8YQZ/F0A0FGBNCNL) for specific advice
+  - Read a hot topic on <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0A0FGBNCNL">churn in high growth customers</PrivateLink> for specific advice
 - Feature flag + mobile replay - use for sampling/roll out that is not natively supported by mobile replay
 - Experiments / feature flags + error tracking - insight into errors for new/beta features, and seeing the impact of those errors on conversion rates is valuable
 - Feature flags + AI Observability - ability to granularly segment features based on cost/engagement of users. i.e. you can release higher cost models to users who have already shown a willingness to spend

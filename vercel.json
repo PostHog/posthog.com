@@ -301,6 +301,11 @@
             "statusCode": 301
         },
         {
+            "source": "/context-warehouse/warehouse-native",
+            "destination": "/docs/data-warehouse/warehouse-native",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/data-warehouse/pocket-guide",
             "destination": "/learn/warehouse/pocket-guide",
             "statusCode": 301

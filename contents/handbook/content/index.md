@@ -23,9 +23,9 @@ We do this by:
 - Not relying on freelancers or guest contributors for content
 - Avoiding tedious enterprise marketing nonsense (PDFs, gated content, webinars, etc.)
 
-Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
+Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't publish AI written posts. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
-Our latest goals can be found on the <SmallTeam slug="marketing" /> page. You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
+Our latest goals can be found on the <SmallTeam slug="marketing" /> page. You can share ad-hoc ideas in our <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y">#content-ideas Slack channel</PrivateLink>.
 
 ## Who is our audience?
 
@@ -55,12 +55,12 @@ It should be the same as [who we are building for](/handbook/who-we-build-for). 
 
 We work autonomously. You don't need permission or approval to write something or make a change. You're the driver.
 
-It is often helpful to share ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y) or as [a GitHub issue](https://github.com/PostHog/posthog.com/issues/new?template=content-idea-template.md). The GitHub issue template provides a structure to help you think through your idea.
+It is often helpful to share ideas in our <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y">#content-ideas Slack channel</PrivateLink> or as [a GitHub issue](https://github.com/PostHog/posthog.com/issues/new?template=content-idea-template.md). The GitHub issue template provides a structure to help you think through your idea.
 
 You can ask for feedback whenever, but it's often better when it's:
 
 1. Clear what feedback you're looking for. Ask if specific points or examples work, how you could word something better, where do you get bored, etc.
-2. You have something solid to give feedback on. Again, pull requests are better than issues.
+2. You have something solid to give feedback on. An outline, rough draft, or PR are all great.
 
 For specific details about writing, see our [style guide](/handbook/content/posthog-style-guide). When you're ready to get writing reviewed, create a pull request for your Markdown file(s) (`*.md` or `*.mdx`) in the [posthog.com repo](https://github.com/PostHog/posthog.com). See [developing the website](/handbook/engineering/posthog-com/developing-the-website) for more.
 
@@ -82,11 +82,15 @@ Follow our [SEO best practices guide](/handbook/content/seo-guide) for more on s
 
 Share a post using either your own account or the company account, but note that the company account will have dramatically less reach than your personal one. If you feel something needs to go out on from company account, tag <TeamMember name="Liam Graham" /> in `#team-editorial`.
 
+If you've written a blog, consider posting it as an Article on LinkedIn. This is better than just sharing a link in terms of distribution. We care more about getting people to read it than getting people to read it on `posthog.com` specifically.
+
 See our [LinkedIn posting advice](/handbook/content/linkedin) for more.
 
 ### 3. Twitter / X
 
-Tips for writing a good post:
+We publish a lot of content as articles on X which gives them extra distribution. 
+
+Beyond that, tips for writing a good post:
 
 - Write a brief summary of the post while sharing as much content as possible in it. [Good example](https://x.com/posthog/status/1851571551314825375).
 

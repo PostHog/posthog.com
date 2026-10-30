@@ -16,10 +16,6 @@ export const customerDataInfrastructureNav = {
             url: '/context-warehouse/use-cases',
         },
         {
-            name: 'Is PostHog warehouse native?',
-            url: '/context-warehouse/warehouse-native',
-        },
-        {
             name: 'The context gap report',
             url: '/the-context-gap-report',
         },

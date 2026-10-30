@@ -181,7 +181,7 @@ Once traffic reaches PostHog, it is ingested into the region you selected (EU or
 
 ### Does the managed reverse proxy forward my cookies to PostHog?
 
-No. The managed reverse proxy removes the `Cookie` header from every request before it forwards the request to PostHog. PostHog doesn't need your cookies, because ingestion authenticates with the project token in the request body.
+No. The managed reverse proxy removes the `Cookie` header from every request before it forwards the request to PostHog. PostHog doesn't need your cookies, because ingestion authenticates with the project token. SDKs send the token in the request body or, for capture v1 SDKs, in the `Authorization` header.
 
 Your proxy runs on a subdomain of your site, so the browser can send it cookies you set on the parent domain (for example, `.myapp.com`). To keep a cookie away from the proxy entirely, set it without a `Domain` attribute or use the `__Host-` prefix.
 
