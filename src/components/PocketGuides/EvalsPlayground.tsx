@@ -42,7 +42,7 @@ const SCORERS: Record<Scorer, { label: string; criterion: string; caption: strin
     code: {
         label: 'Code',
         criterion: 'Does the answer mention “30 days”?',
-        caption: 'A narrow rule: both can pass even when one answer is wrong.',
+        caption: 'A narrow rule: can pass even when answer is wrong.',
     },
     sentiment: {
         label: 'Sentiment',
@@ -74,7 +74,7 @@ const SCORE_LABEL: Record<string, string> = {
 }
 
 const ACTIONS: Record<Lane, string[]> = {
-    offline: ['Run your agent on this case', 'Send to your test runner', 'Report scores to PostHog'],
+    offline: ['Run your agent on this case', 'Send to your evaluator runner', 'Report scores to PostHog'],
     online: ['Let your agent respond', 'Trace it into PostHog', 'Record scores in PostHog'],
 }
 
@@ -145,7 +145,7 @@ function StepNumber({ n, current = false }: { n: number; current?: boolean }): J
 /** Where a step runs. Shown inside each step, so the steps need no wrapper box. */
 const WHERE = {
     local: { icon: <IconLaptop />, label: 'Your local machine / CI' },
-    runner: { icon: <IconTerminal />, label: 'Your test runner' },
+    runner: { icon: <IconTerminal />, label: 'Your evaluator runner' },
     app: { icon: <IconServer />, label: 'Your application' },
     posthog: { icon: <IconLogomark />, label: 'PostHog' },
 }
@@ -473,11 +473,11 @@ export default function EvalsPlayground(): JSX.Element {
         <div ref={root} className="not-prose @container min-w-0 scroll-m-6">
             <h1 className="m-0 mb-2 text-2xl font-bold">AI evaluations, explained side by side.</h1>
 
-            <CalloutBox type="action" icon="IconCursorClick" title="Test instructions">
+            <CalloutBox type="action" icon="IconCursorClick" title="Before you ship, or after?">
                 <div className="flex items-start gap-4 pt-3">
                     <p className="m-0 flex-1">
-                        Learn how offline and online evals work and the different results they can deliver. Select how
-                        you want to run your tests by clicking the buttons and progressing through the flow.
+                        Offline evals test your changes on saved cases before they go live. Online evals grade the real thing as it happens."
+                        Pick a path below and see what each one catches.
                     </p>
                     <HedgehogJudge size={112} className="hidden h-auto shrink-0 -mt-10 @md:block" />
                 </div>
@@ -530,8 +530,8 @@ export default function EvalsPlayground(): JSX.Element {
                                 <div className="mt-3">
                                     <Note>
                                         {state.origin === 'real'
-                                            ? 'This is a saved test case.'
-                                            : 'This is a synthetic test case.'}{' '}
+                                            ? 'This is a test case you got from a real user input.'
+                                            : 'This is a test case that you made up.'}{' '}
                                         {state.store === 'posthog'
                                             ? 'It’s stored as a PostHog dataset and fetched by your local / CI runner.'
                                             : 'It’s defined in your code and loaded by your test runner.'}
@@ -714,13 +714,13 @@ export default function EvalsPlayground(): JSX.Element {
             <div className="mt-6 flex flex-col gap-2 rounded border border-yellow bg-yellow/15 p-6 @xl:flex-row @xl:items-center @xl:gap-6">
                 <HedgehogResearch size={128} className="h-auto w-20 shrink-0 @xl:order-last @xl:w-32" />
                 <div className="min-w-0 flex-1">
-                    <h2 className="m-0 mb-1.5 text-xl font-bold">Know what your AI is actually up to</h2>
+                    <h2 className="m-0 mb-1.5 text-xl font-bold">'It works on my computer' doesn’t apply to your agent</h2>
                     <p className="m-0 text-base text-secondary">
-                        Bring this unexpected production request into your test suite.
+                        Don’t let your agent run wild without running evals first.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                         <OSButton asLink to="/docs/ai-observability" variant="primary" size="md">
-                            Implement AIO in your stack
+                            Add AI observability
                         </OSButton>
                         <OSButton asLink to="/docs/ai-evals" variant="secondary" size="md">
                             Read about evals
