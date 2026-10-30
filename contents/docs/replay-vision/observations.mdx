@@ -59,11 +59,11 @@ Succeeded, pending, and running observations spend [credits](/docs/replay-vision
 
 ## Observations in the replay player
 
-Observations also show up when you watch a recording:
+Observations also show up when you watch a recording in the **Observations** section of the watch panel, below Overview and Comments. The section opens automatically when the recording has observations, or when you open it manually – your preference is saved.
 
-- The **Observations** tab in the player sidebar lists what every scanner found about the session. Click one to read its result, or **View details** to open its page. If the session has a summary with chapters, the tab shows them as a timeline you can click through. **Scan this recording** runs any of your scanners on the session you're watching.
-- Marks on the seekbar show each scan's key moment: the moment its answer rests on most. Hover a mark to see which scanner and what it answered.
-- The bar under the player summarizes the recording. The button runs one of your summarizer scanners (pick which from the dropdown), or a built-in prompt if you have none, and opens the **Observations** tab in the sidebar, where the summary appears.
+- The section lists what every scanner found about the session. Click one to read its result, or **View details** to open its page. If the session has a summary with chapters, the section shows them as a timeline you can click through. **Scan this recording** runs any of your scanners on the session you're watching.
+- Without observations, the section shows an empty state with a scanner picker and links to create a scanner or read the docs. A recording that can't be scanned shows the reason with a link to [ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions).
+- The **Summarize** button on the title row summarizes the recording. The button runs one of your summarizer scanners (pick which from the dropdown), or a built-in prompt if you have none, and opens the **Observations** section, where the summary appears.
 
 ## Searching observations
 
@@ -81,36 +81,36 @@ Every successful observation is captured as a `$recording_observed` event in you
 
 ### Event properties
 
-| Property                           | Description                                                                                                                                          |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `scanner_name`                     | Human-readable name of the scanner                                                                                                                   |
-| `scanner_id`                       | Scanner UUID                                                                                                                                         |
-| `scanner_type`                     | `monitor`, `classifier`, `scorer`, `summarizer`, or `experiment`                                                                                     |
-| `scanner_version`                  | Version of the scanner config that produced this observation                                                                                         |
-| `session_id`                       | The recording that was observed                                                                                                                      |
-| `recording_distinct_id`            | Distinct ID of the person in the recorded session (the subject, not whoever triggered the scan)                                                      |
-| `recording_subject_email`          | Email of the recording subject at scan time, when known                                                                                              |
-| `triggered_by`                     | `schedule` (background sweep), `on_demand`, `backfill`, or `retry` (a re-run of a failed observation)                                                |
-| `triggered_by_user_id`             | The user who triggered an on-demand observation or retry; null for background sweeps and backfills                                                   |
-| `model_used`                       | The model that produced the result                                                                                                                   |
-| `provider_used`                    | The LLM provider behind `model_used`                                                                                                                 |
-| `credits`                          | What this observation cost, in credits (1 credit = $0.01), frozen at the price when it ran                                                           |
-| `emits_signals`                    | Whether the scanner was feeding findings into PostHog Signals when it ran                                                                            |
-| `scanner_output_confidence`        | The model's confidence (0.0 to 1.0)                                                                                                                  |
-| `scanner_output_notability`        | How worth watching the model judged the session, from 0.0 to 1.0, whatever the scanner's answer was                                                  |
-| `scanner_output_notability_reason` | One sentence naming the moment that makes the session worth watching, or saying that nothing stands out                                              |
-| `scanner_output_key_moment_ms`     | Offset into the recording, in milliseconds, of the moment the answer rests on most. Null when the model didn't pick one                              |
-| `scanner_output_reasoning`         | **Monitor, classifier, and scorer** – the model's reasoning text, including any inline citations. Summarizers don't have a separate reasoning field  |
-| `scanner_output_verdict`           | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"`                                                                                              |
-| `scanner_output_tags`              | **Classifier only** – the array of vocabulary tags assigned                                                                                          |
-| `scanner_output_tags_freeform`     | **Classifier only** – tags outside the vocabulary, when the scanner allows them                                                                      |
-| `scanner_output_score`             | **Scorer only** – the numeric score                                                                                                                  |
-| `scanner_output_label`             | **Scorer only** – the name of the scorer's scale                                                                                                     |
-| `scanner_output_title`             | **Summarizer only** – the generated one-line title                                                                                                   |
-| `scanner_output_summary`           | **Summarizer only** – the generated prose summary                                                                                                    |
-| `scanner_output_chapter_count`     | **Summarizer only** – how many chapters the summary has. The chapters themselves stay on the observation                                             |
-| `experiment_id`                    | **Experiment only** – the experiment the scanner watches                                                                                             |
-| `experiment_variant`               | **Experiment only** – the variant the session was in. Can be empty on older observations                                                             |
+| Property                           | Description                                                                                                                                         |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `scanner_name`                     | Human-readable name of the scanner                                                                                                                  |
+| `scanner_id`                       | Scanner UUID                                                                                                                                        |
+| `scanner_type`                     | `monitor`, `classifier`, `scorer`, `summarizer`, or `experiment`                                                                                    |
+| `scanner_version`                  | Version of the scanner config that produced this observation                                                                                        |
+| `session_id`                       | The recording that was observed                                                                                                                     |
+| `recording_distinct_id`            | Distinct ID of the person in the recorded session (the subject, not whoever triggered the scan)                                                     |
+| `recording_subject_email`          | Email of the recording subject at scan time, when known                                                                                             |
+| `triggered_by`                     | `schedule` (background sweep), `on_demand`, `backfill`, or `retry` (a re-run of a failed observation)                                               |
+| `triggered_by_user_id`             | The user who triggered an on-demand observation or retry; null for background sweeps and backfills                                                  |
+| `model_used`                       | The model that produced the result                                                                                                                  |
+| `provider_used`                    | The LLM provider behind `model_used`                                                                                                                |
+| `credits`                          | What this observation cost, in credits (1 credit = $0.01), frozen at the price when it ran                                                          |
+| `emits_signals`                    | Whether the scanner was feeding findings into PostHog Signals when it ran                                                                           |
+| `scanner_output_confidence`        | The model's confidence (0.0 to 1.0)                                                                                                                 |
+| `scanner_output_notability`        | How worth watching the model judged the session, from 0.0 to 1.0, whatever the scanner's answer was                                                 |
+| `scanner_output_notability_reason` | One sentence naming the moment that makes the session worth watching, or saying that nothing stands out                                             |
+| `scanner_output_key_moment_ms`     | Offset into the recording, in milliseconds, of the moment the answer rests on most. Null when the model didn't pick one                             |
+| `scanner_output_reasoning`         | **Monitor, classifier, and scorer** – the model's reasoning text, including any inline citations. Summarizers don't have a separate reasoning field |
+| `scanner_output_verdict`           | **Monitor only** – `"yes"`, `"no"`, or `"inconclusive"`                                                                                             |
+| `scanner_output_tags`              | **Classifier only** – the array of vocabulary tags assigned                                                                                         |
+| `scanner_output_tags_freeform`     | **Classifier only** – tags outside the vocabulary, when the scanner allows them                                                                     |
+| `scanner_output_score`             | **Scorer only** – the numeric score                                                                                                                 |
+| `scanner_output_label`             | **Scorer only** – the name of the scorer's scale                                                                                                    |
+| `scanner_output_title`             | **Summarizer only** – the generated one-line title                                                                                                  |
+| `scanner_output_summary`           | **Summarizer only** – the generated prose summary                                                                                                   |
+| `scanner_output_chapter_count`     | **Summarizer only** – how many chapters the summary has. The chapters themselves stay on the observation                                            |
+| `experiment_id`                    | **Experiment only** – the experiment the scanner watches                                                                                            |
+| `experiment_variant`               | **Experiment only** – the variant the session was in. Can be empty on older observations                                                            |
 
 The notability and key moment properties can be empty on older observations. The event also carries the recorded session's GeoIP properties and, if you use [group analytics](/docs/product-analytics/group-analytics), its group keys.
 
@@ -268,12 +268,12 @@ Confidence is self-reported, so this is a heuristic, not a guarantee – but it'
 
 You can save the users behind a scanner's findings as a static [cohort](/docs/data/cohorts) from the scanner's **Overview** tab. The cohort is a snapshot at creation time and won't live-update as new observations come in.
 
-| Scanner type   | Where to save it                                                                                  |
-| -------------- | ------------------------------------------------------------------------------------------------- |
-| **Monitor**    | **Save as cohort** next to each verdict in the **Verdict mix** panel                              |
-| **Classifier** | The cohort button next to each category in **Top configured categories** and **Top freeform categories**                               |
+| Scanner type   | Where to save it                                                                                                                          |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Monitor**    | **Save as cohort** next to each verdict in the **Verdict mix** panel                                                                      |
+| **Classifier** | The cohort button next to each category in **Top configured categories** and **Top freeform categories**                                  |
 | **Scorer**     | Not in the UI. Use the `vision-scanners-affected-cohort-create` [MCP tool](/docs/replay-vision/mcp) with a `min_score` and/or `max_score` |
-| **Summarizer** | Not supported (narratives don't have categorical findings)                                        |
+| **Summarizer** | Not supported (narratives don't have categorical findings)                                                                                |
 
 A cohort saved from the Overview tab covers the tab's date range, up to 90 days, counted by when the session was recorded. The range has to end today, because a cohort always covers the most recent days. The MCP tool takes a trailing window in days instead, 30 by default.
 
