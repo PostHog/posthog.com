@@ -206,7 +206,7 @@ const raisedStackedSegmentFace: Record<ButtonSize, string> = {
 }
 
 const pressedSegmentShade =
-    "[--shade-color:rgb(0_0_0/0.22)] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-100 after:content-[''] after:[box-shadow:var(--shade-start,0_0_#0000),var(--shade-end,0_0_#0000)] motion-reduce:after:transition-none [[data-pressed]>&]:after:opacity-100 [[data-popup-open]>&]:after:opacity-100 [:not([data-disabled]):active>&]:after:opacity-100"
+    "[--shade-color:rgb(0_0_0/0.22)] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-100 after:content-[''] after:[box-shadow:var(--shade-start,0_0_#0000),var(--shade-end,0_0_#0000)] motion-reduce:after:transition-none [[data-pressed]>&]:after:opacity-100 [[data-popup-open]>&]:after:opacity-100 [:not([data-disabled]):active>&]:after:opacity-100 [[data-segment][data-pressed]+[data-segment]>&]:[--shade-start:0_0_#0000] [[data-segment]:has(+[data-segment][data-pressed])>&]:[--shade-end:0_0_#0000]"
 
 const sideBySideShade =
     '[[data-segment]~[data-segment]>&]:[--shade-start:inset_4px_0_4px_-3px_var(--shade-color)] [[data-segment]:has(~[data-segment])>&]:[--shade-end:inset_-4px_0_4px_-3px_var(--shade-color)] [[data-segment]~[data-segment]>&:dir(rtl)]:[--shade-start:inset_-4px_0_4px_-3px_var(--shade-color)] [[data-segment]:has(~[data-segment])>&:dir(rtl)]:[--shade-end:inset_4px_0_4px_-3px_var(--shade-color)]'
