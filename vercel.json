@@ -3102,6 +3102,26 @@
             "destination": "/docs/contribute/badge:ext?"
         },
         {
+            "source": "/brand/badge/posthog-badge-white-bg-color.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge.svg",
+            "statusCode": 301
+        },
+        {
+            "source": "/brand/badge/posthog-badge-transparent-bg-color.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge.svg",
+            "statusCode": 301
+        },
+        {
+            "source": "/brand/badge/posthog-badge-transparent-bg-black-text.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge.svg",
+            "statusCode": 301
+        },
+        {
+            "source": "/brand/badge/posthog-badge-transparent-bg-white-text.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge-dark.svg",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/introduction-to-customer-retention",
             "destination": "/blog/customer-churn-analysis-guide"
         },
