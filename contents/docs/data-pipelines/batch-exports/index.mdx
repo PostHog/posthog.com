@@ -39,7 +39,7 @@ This test can detect and diagnose configuration issues, like invalid credentials
 
 Support for new destinations will be added based on demand. Message us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or open a request on [our roadmap](/roadmap) to voice your interest in new destinations.
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 import PersonsModelNote from "../_snippets/persons-model-note.mdx";
 
@@ -159,6 +159,7 @@ A timezone that you set in the query itself, like `toTimeZone(timestamp, 'UTC')`
 - **Rows are appended.** Each run appends the query's results to the destination and never updates rows from earlier runs. If your query can return the same row in more than one run, de-duplicate the rows in your destination. Other export modes, like merging rows into existing ones, are coming soon.
 - **Queries run with the access of the user who last saved the export.** If that user loses access to the project, runs fail until someone with access saves the export again.
 - **Queries have resource limits.** SQL queries run under stricter limits on execution time, memory usage, and data read than the other models. A run that exceeds a limit fails and isn't retried. Bound your query with a `WHERE` clause, like the placeholders above, to stay within the limits.
+- **Table support is being added progressively.** Not all tables are available for SQL query exports yet. If your query references an unsupported table, the run fails with an error listing the tables in your query. [Contact support](https://app.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) if you need access to a table that isn't supported.
 
 Pricing for SQL query exports hasn't been decided yet, but they're free while the model is in closed beta.
 

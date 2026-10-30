@@ -129,7 +129,7 @@ You can [send reports of CSP rule violations](/docs/csp-tracking) to PostHog, wh
 
 If you really want to have a restrictive CSP with the absolute bare minimum changes, you can bundle all required `posthog-js` dependencies as part of your own application JavaScript, ensuring there is no need to load extra scripts at runtime.
 
-1. Follow the instructions to **bundle all required extensions** when [installing PostHog via a package manager](/docs/libraries/js#option-2-install-via-package-manager) or [install the snippet](/docs/libraries/js#option-1-install-via-snippet).
+1. Follow the instructions to **bundle all required extensions** when [installing PostHog via a package manager](/docs/libraries/js#option-2-install-via-package-manager) or [install the snippet](/docs/libraries/js#installation).
 2. Update your content security policy to only include the `connect-src` directive as below
 
 ```html

@@ -23,6 +23,6 @@ We're not a ticket-routing operation. We genuinely care about making our users' 
 
 ## Slack channels to stay current
 
-To answer customer questions well we need to know what's just shipped. The [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) internal channel keeps this in front of you — every member of the Support team should join it. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
+To answer customer questions well we need to know what's just shipped. The <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT"><code>#changelog</code></PrivateLink> internal channel keeps this in front of you — every member of the Support team should join it. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 
 The channel is populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into it. PRs that are still behind a feature flag stay out, based on the *Release status* section of the `posthog/posthog` PR template. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
