@@ -923,16 +923,6 @@ export function useMenuSelectOptions() {
     // Build the select groups
     const selectGroups = [
         {
-            label: 'Context warehouse',
-            items: [
-                {
-                    value: 'products',
-                    label: 'Context warehouse',
-                    icon: <Icons.IconApps className="size-4 text-red" />,
-                },
-            ],
-        },
-        {
             label: 'Pricing',
             items: [
                 { value: 'pricing', label: 'Usage-based pricing' },
