@@ -31,8 +31,23 @@ function blockAncestor(element: HTMLElement): HTMLElement {
     return node ?? element
 }
 
-function layoutKey(element: HTMLElement, block: HTMLElement): string {
-    const origin = block.getBoundingClientRect()
+const annotationSelector = 'svg.rough-annotation'
+
+function isAnnotationNode(node: Node): boolean {
+    const element = node instanceof Element ? node : node.parentElement
+    return Boolean(element?.closest(annotationSelector))
+}
+
+function affectsLayout(record: MutationRecord): boolean {
+    if (isAnnotationNode(record.target)) return false
+    if (record.type !== 'childList') return true
+    return [...Array.from(record.addedNodes), ...Array.from(record.removedNodes)].some(
+        (node) => !(node instanceof Element && node.matches(annotationSelector))
+    )
+}
+
+function layoutKey(element: HTMLElement, context: Element): string {
+    const origin = context.getBoundingClientRect()
     return Array.from(element.getClientRects())
         .map(
             (rect) =>
@@ -85,6 +100,13 @@ export function RoughAnnotation({
         return () => observer.disconnect()
     }, [animateOnScroll, show])
 
+    const onCompleteRef = useRef(onComplete)
+    onCompleteRef.current = onComplete
+    const paddingKey = Array.isArray(padding) ? padding.join(' ') : String(padding)
+    const bracketsKey = JSON.stringify(brackets ?? null)
+    const shapeOptions = useRef({ padding, brackets })
+    shapeOptions.current = { padding, brackets }
+
     useEffect(() => {
         const element = elementRef.current
         if (!element) return
@@ -108,8 +130,8 @@ export function RoughAnnotation({
                 strokeWidth,
                 animate: !prefersReducedMotion,
                 animationDuration: prefersReducedMotion ? 0 : animationDuration,
-                padding,
-                brackets,
+                padding: shapeOptions.current.padding,
+                brackets: shapeOptions.current.brackets,
                 iterations,
                 multiline,
             })
@@ -132,10 +154,8 @@ export function RoughAnnotation({
                         animationEndTimerRef.current = setTimeout(() => {
                             isAnimatingRef.current = false
                             animationEndTimerRef.current = null
+                            onCompleteRef.current?.()
                         }, aniDuration)
-                        if (onComplete) {
-                            setTimeout(onComplete, aniDuration)
-                        }
                     },
                     prefersReducedMotion ? 0 : delay
                 )
@@ -159,46 +179,57 @@ export function RoughAnnotation({
         color,
         strokeWidth,
         animationDuration,
-        padding,
-        brackets,
+        paddingKey,
+        bracketsKey,
         iterations,
         multiline,
         isVisible,
         show,
         delay,
         prefersReducedMotion,
-        onComplete,
     ])
 
     useEffect(() => {
         const element = elementRef.current
         if (!element) return
         const block = blockAncestor(element)
+        const context = element.offsetParent ?? block
         const watched = [block, element.offsetParent, element.closest('main')].filter(
             (node, index, list): node is Element => node instanceof Element && list.indexOf(node) === index
         )
 
-        let timeout: ReturnType<typeof setTimeout>
-        let lastLayout = layoutKey(element, block)
+        let timeout: ReturnType<typeof setTimeout> | undefined
+        let lastLayout = layoutKey(element, context)
         const redrawIfMoved = () => {
             if (isAnimatingRef.current) {
                 scheduleRedraw()
                 return
             }
-            const layout = layoutKey(element, block)
+            const layout = layoutKey(element, context)
             if (layout === lastLayout) return
             lastLayout = layout
             if (annotationRef.current?.isShowing()) annotationRef.current.show()
         }
         const scheduleRedraw = () => {
-            clearTimeout(timeout)
-            timeout = setTimeout(redrawIfMoved, redrawDelay)
+            if (timeout) return
+            timeout = setTimeout(() => {
+                timeout = undefined
+                redrawIfMoved()
+            }, redrawDelay)
         }
 
         const resizeObserver = typeof ResizeObserver === 'undefined' ? undefined : new ResizeObserver(scheduleRedraw)
         watched.forEach((node) => resizeObserver?.observe(node))
-        const mutationObserver = new MutationObserver(scheduleRedraw)
-        mutationObserver.observe(block, { attributes: true, subtree: true, attributeFilter: ['style', 'class'] })
+        const mutationObserver = new MutationObserver((records) => {
+            if (records.some(affectsLayout)) scheduleRedraw()
+        })
+        mutationObserver.observe(context, {
+            attributes: true,
+            attributeFilter: ['style', 'class'],
+            characterData: true,
+            childList: true,
+            subtree: true,
+        })
         document.fonts?.ready.then(scheduleRedraw)
 
         return () => {

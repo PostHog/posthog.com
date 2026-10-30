@@ -16,7 +16,7 @@ export const doc: ComponentDoc = {
         {
             id: 'relative',
             title: 'Relative dates',
-            description: 'Hover over a time or focus it to see the exact local and UTC times.',
+            description: 'Hover over a time, tap it, or press Enter on it to see the exact local and UTC times.',
             Component: Relative,
             source: relativeSource,
         },
@@ -32,7 +32,7 @@ export const doc: ComponentDoc = {
         'Pass an ISO string with a time zone, or a timestamp, so the date is not ambiguous.',
         'The first render shows an absolute date in UTC. The relative text appears after the page loads.',
         <>
-            Set <Snippet.Inline>{'tooltip={false}'}</Snippet.Inline> where the exact time tooltip would get in the way.
+            Set <Snippet.Inline>{'tooltip={false}'}</Snippet.Inline> where the exact time popup would get in the way.
         </>,
     ],
     props: [
@@ -61,7 +61,7 @@ export const doc: ComponentDoc = {
                     type: 'boolean',
                     defaultValue: 'true',
                     description:
-                        'Shows the exact local and UTC time on hover and focus. Set it to false to render plain text.',
+                        'Shows the exact local and UTC time on hover, tap, or Enter. Set it to false to render plain text.',
                 },
                 { name: 'tabIndex', type: 'number', defaultValue: '0', description: 'Sets keyboard focus order.' },
             ],

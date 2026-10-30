@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '../../../utils'
 import { focusRing } from '../styles'
-import { Tooltip } from '../Tooltip'
+import { Popover } from '../Popover'
 import { useSyncExternalStore } from '../utils'
 
 export type RelativeTimeProps = Omit<React.ComponentPropsWithoutRef<'time'>, 'dateTime' | 'children'> & {
@@ -10,6 +10,8 @@ export type RelativeTimeProps = Omit<React.ComponentPropsWithoutRef<'time'>, 'da
     format?: 'relative' | 'date'
     tooltip?: boolean
 }
+
+const exactTimePopup = 'px-2 py-1 text-[13px] leading-4'
 
 const MINUTE_MS = 60_000
 const HOUR_MS = 60 * MINUTE_MS
@@ -95,37 +97,39 @@ export const RelativeTime = React.forwardRef<HTMLTimeElement, RelativeTimeProps>
     ]
 
     return (
-        <Tooltip.Provider>
-            <Tooltip.Root>
-                <Tooltip.Trigger
-                    render={
-                        <time
-                            {...props}
-                            ref={ref}
-                            dateTime={dateTime}
-                            tabIndex={tabIndex}
-                            className={cn(
-                                focusRing,
-                                'rounded-sm hover:underline decoration-dotted underline-offset-4',
-                                className
-                            )}
-                        />
-                    }
-                >
-                    {label}
-                </Tooltip.Trigger>
-                <Tooltip.Popup>
-                    <span className="grid grid-cols-[auto_auto_auto] gap-x-3 gap-y-1 tabular-nums">
-                        {rows.map(([zone, day, time]) => (
-                            <React.Fragment key={zone}>
-                                <span className="text-muted">{zone}</span>
-                                <span>{day}</span>
-                                <span>{time}</span>
-                            </React.Fragment>
-                        ))}
-                    </span>
-                </Tooltip.Popup>
-            </Tooltip.Root>
-        </Tooltip.Provider>
+        <Popover.Root>
+            <Popover.Trigger
+                openOnHover
+                delay={0}
+                nativeButton={false}
+                render={
+                    <time
+                        {...props}
+                        ref={ref}
+                        dateTime={dateTime}
+                        tabIndex={tabIndex}
+                        className={cn(
+                            focusRing,
+                            'rounded-sm decoration-dotted underline-offset-4 hover:underline',
+                            className
+                        )}
+                    />
+                }
+            >
+                {label}
+            </Popover.Trigger>
+            <Popover.Popup aria-label="Exact time" className={exactTimePopup}>
+                <Popover.Arrow />
+                <span className="grid grid-cols-[auto_auto_auto] gap-x-3 gap-y-1 tabular-nums">
+                    {rows.map(([zone, day, time]) => (
+                        <React.Fragment key={zone}>
+                            <span className="text-muted">{zone}</span>
+                            <span>{day}</span>
+                            <span>{time}</span>
+                        </React.Fragment>
+                    ))}
+                </span>
+            </Popover.Popup>
+        </Popover.Root>
     )
 })
