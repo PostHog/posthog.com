@@ -5,7 +5,6 @@ const { test } = require('node:test')
 const { runInNewContext } = require('node:vm')
 const http = require('node:http')
 const { once } = require('node:events')
-const { createHash } = require('node:crypto')
 const React = require('react')
 const { renderToStaticMarkup } = require('react-dom/server')
 const { JSDOM } = require('jsdom')
@@ -18,7 +17,7 @@ const env = {
     GATSBY_POSTHOG_ASSET_HOST: 'https://us-assets.i.posthog.com',
 }
 
-function load(file, environment, dependencies = {}) {
+function load(file, environment, dependencies = {}, globals = {}) {
     const filename = path.resolve(__dirname, '..', file)
     const { outputText } = ts.transpileModule(readFileSync(filename, 'utf8'), {
         compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React, esModuleInterop: true },
@@ -29,6 +28,10 @@ function load(file, environment, dependencies = {}) {
         __dirname: path.dirname(filename),
         process: { env: environment },
         require: (name) => (name in dependencies ? dependencies[name] : require(name)),
+        Request,
+        AbortSignal,
+        fetch,
+        ...globals,
     })
     return exports
 }
@@ -77,34 +80,90 @@ for (const missing of ['GATSBY_POSTHOG_API_KEY', 'GATSBY_POSTHOG_API_HOST']) {
     })
 }
 
-test('the local bootstrap matches the recorded SDK artifact provenance', () => {
-    const provenance = JSON.parse(readFileSync(path.resolve(__dirname, 'posthog-bootstrap.provenance.json'), 'utf8'))
-    const artifact = readFileSync(path.resolve(__dirname, '..', provenance.vendored_artifact))
-    assert.equal(createHash('sha256').update(artifact).digest('hex'), provenance.vendored_sha256)
-    assert.doesNotMatch(artifact.toString(), /sourceMappingURL=/)
-    assert.match(provenance.commit, /^[0-9a-f]{40}$/)
+test('each build downloads the current bootstrap and replaces an existing generated file', async () => {
+    const writes = new Map([['posthog-bootstrap.js', 'stale bootstrap']])
+    const requests = []
+    const download = async (request) => {
+        requests.push(request)
+        assert.equal(request.url, 'https://us-assets.i.posthog.com/static/1/loader-bootstrap.js')
+        assert.equal(request.cache, 'no-store')
+        assert.equal(request.signal.aborted, false)
+        return new Response(
+            `window.bootstrapVersion = ${requests.length};\n//# sourceMappingURL=loader-bootstrap.js.map\n`
+        )
+    }
+    await generatedInit(env, download, writes)
+    assert.equal(writes.get('posthog-bootstrap.js'), 'window.bootstrapVersion = 1;\n')
+    await generatedInit(env, download, writes)
+    assert.equal(writes.get('posthog-bootstrap.js'), 'window.bootstrapVersion = 2;\n')
+    assert.equal(requests.length, 2)
 })
 
-async function generatedInit(environment = env) {
-    const writes = new Map()
-    const { onPreBootstrap } = load('gatsby/onPreBootstrap.ts', environment, {
-        fs: {
-            existsSync: () => true,
-            readFileSync: () => JSON.stringify({ branch: 'master' }),
-            writeFileSync: (file, value) => writes.set(path.basename(file), value),
-            cpSync: () => {},
+for (const [name, download, message] of [
+    ['HTTP failure', async () => new Response('unavailable', { status: 503 }), /503/],
+    ['empty response', async () => new Response('  \n'), /empty/i],
+    [
+        'network failure',
+        async () => {
+            throw new Error('network unavailable')
         },
-        './devFetchCache': { cacheFetchResponsesInDevelopment: () => {} },
-        './enrichVideos': { enrichVideos: async () => {} },
-        './utils/fetchMCPTools': {
-            fetchAndProcessMCPTools: async () => ({ error: true }),
-            writeMCPToolsToFile: () => {},
-        },
-        './utils/fetchScoutSkills': {
-            fetchScoutSkills: async () => [],
-            writeScoutSkillsToFile: () => {},
-        },
+        /network unavailable/,
+    ],
+]) {
+    test(`a build fails instead of keeping a stale bootstrap after ${name}`, async () => {
+        const writes = new Map([['posthog-bootstrap.js', 'stale bootstrap']])
+        await assert.rejects(generatedInit(env, download, writes), message)
+        assert.equal(writes.get('posthog-bootstrap.js'), 'stale bootstrap')
+        assert.equal(writes.has('posthog-init.js'), false)
     })
+}
+
+for (const missing of ['GATSBY_POSTHOG_API_KEY', 'GATSBY_POSTHOG_API_HOST']) {
+    test(`a build does not download analytics without ${missing}`, async () => {
+        let requests = 0
+        const writes = new Map()
+        await generatedInit(
+            { ...env, [missing]: undefined },
+            async () => {
+                requests++
+                return new Response('window.bootstrapVersion = 1;')
+            },
+            writes
+        )
+        assert.equal(requests, 0)
+        assert.equal(writes.has('posthog-bootstrap.js'), false)
+        assert.equal(writes.has('posthog-init.js'), false)
+    })
+}
+
+async function generatedInit(
+    environment = env,
+    download = async () => new Response('window.bootstrapVersion = 1;'),
+    writes = new Map()
+) {
+    const { onPreBootstrap } = load(
+        'gatsby/onPreBootstrap.ts',
+        environment,
+        {
+            fs: {
+                existsSync: () => true,
+                readFileSync: () => JSON.stringify({ branch: 'master' }),
+                writeFileSync: (file, value) => writes.set(path.basename(file), value),
+                cpSync: () => {},
+            },
+            './devFetchCache': { cacheFetchResponsesInDevelopment: () => {} },
+            './enrichVideos': { enrichVideos: async () => {} },
+            './utils/fetchMCPTools': {
+                fetchAndProcessMCPTools: async () => ({ error: true }),
+                writeMCPToolsToFile: () => {},
+            },
+            './utils/fetchScoutSkills': {
+                fetchScoutSkills: async () => [],
+                writeScoutSkillsToFile: () => {},
+            },
+        },
+        { fetch: download }
+    )
     await onPreBootstrap({
         cache: {},
         store: {
@@ -113,18 +172,17 @@ async function generatedInit(environment = env) {
             }),
         },
     })
-    const script = writes.get('posthog-init.js')
-    assert.ok(script)
-    return script
+    return writes.get('posthog-init.js')
 }
 
 test(
     'Gatsby application scripts start and queue calls while the analytics response is held',
-    { timeout: 20000 },
+    { timeout: 60000 },
     async (t) => {
         const puppeteer = require('puppeteer')
         let markup
         let initialization
+        let bootstrap
         let pending
         let markRequested
         const analyticsRequests = []
@@ -136,7 +194,7 @@ test(
             response.setHeader('content-type', pathname === '/' ? 'text/html' : 'application/javascript')
             if (pathname === '/') return response.end(markup)
             if (pathname === '/scripts/posthog-bootstrap.js') {
-                return response.end(readFileSync(path.resolve(__dirname, '../static/scripts/posthog-bootstrap.js')))
+                return response.end(bootstrap)
             }
             if (pathname === '/scripts/posthog-init.js') return response.end(initialization)
             if (pathname === '/app.js') {
@@ -171,7 +229,10 @@ test(
             GATSBY_POSTHOG_API_HOST: `${origin}/ingest`,
             GATSBY_POSTHOG_ASSET_HOST: `${origin}/assets`,
         }
-        initialization = await generatedInit(environment)
+        const generated = new Map()
+        initialization = await generatedInit(environment, fetch, generated)
+        bootstrap = generated.get('posthog-bootstrap.js')
+        assert.ok(bootstrap)
         markup =
             '<!doctype html>' +
             render(

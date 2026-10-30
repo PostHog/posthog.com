@@ -87,6 +87,20 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
+        // A Request bypasses the URL-only development cache for this mutable asset.
+        const bootstrapResponse = await fetch(
+            new Request('https://us-assets.i.posthog.com/static/1/loader-bootstrap.js', {
+                cache: 'no-store',
+                signal: AbortSignal.timeout(30000),
+            })
+        )
+        if (!bootstrapResponse.ok) {
+            throw new Error(`Unable to download PostHog bootstrap: HTTP ${bootstrapResponse.status}`)
+        }
+        const bootstrap = (await bootstrapResponse.text()).replace(/\n\/\/# sourceMappingURL=.*\s*$/, '\n')
+        if (!bootstrap.trim()) {
+            throw new Error('Downloaded PostHog bootstrap is empty')
+        }
         const assetHost = process.env.GATSBY_POSTHOG_ASSET_HOST
         const assetHostConfig = assetHost
             ? `asset_host: "${assetHost}",\n    strict_script_versioning: true,\n    `
@@ -142,6 +156,7 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
     },
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
+        fs.writeFileSync(path.join(scriptsDir, 'posthog-bootstrap.js'), bootstrap)
         fs.writeFileSync(path.join(scriptsDir, 'posthog-init.js'), posthogScript)
     }
 
