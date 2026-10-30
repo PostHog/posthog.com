@@ -257,7 +257,7 @@ Our testing, reviewing and building process should be good enough that we're com
 
 Always request a review on your pull request (or leave unassigned for anyone to pick up when available). We avoid merging without any review unless it's an emergency fix and no one else is available (especially for posthog.com). During an incident, the [Force-merge a PR](#break-glass-force-merge-a-pr) Slack app is the sanctioned break-glass way to merge a PR that branch protection would otherwise block.
 
-Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our [charts repository](https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md). Check out the `#platform-bots` Slack channel to see how your deploy is progressing. 
+Once you merge a pull request, it will automatically deploy to all environments. The deployment process is documented in our <PrivateLink url="https://github.com/PostHog/charts/blob/main/DEPLOYMENT.md">charts repository</PrivateLink>. Check out the `#platform-bots` Slack channel to see how your deploy is progressing.
 
 We're managing deployments with [ArgoCD](http://go/argo) where you can also see individual resources and their status.
 
@@ -282,7 +282,7 @@ It bypasses required reviews and checks, but **not** [commit signing](/handbook/
 
 After your PR is deployed to an environment, a bot automatically comments on the merged PR with the deployment status. The **dev** deployment triggers the initial comment. As **prod-us** and **prod-eu** finish deploying, the bot updates the same comment in-place rather than posting new ones.
 
-If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the [deploy workflow](https://github.com/PostHog/charts/actions/workflows/state-deploy.yml) in PostHog/charts for failures.
+If you don't see a comment on your PR after a deploy, give it a few minutes -- the notification runs after ArgoCD finishes syncing. If it still hasn't appeared, check the <PrivateLink url="https://github.com/PostHog/charts/actions/workflows/state-deploy.yml">deploy workflow</PrivateLink> in PostHog/charts for failures.
 
 ### Verifying your deployment
 
@@ -290,7 +290,7 @@ After merging, your code should deploy automatically. If you need to verify your
 
 #### 1. Check state.yaml (what *should* be deployed)
 
-The [charts repository state.yaml](https://github.com/PostHog/charts/blob/main/state.yaml) is the source of truth for what ArgoCD is trying to deploy. Find your service (e.g., `ingestion`, `posthog`) and check the commit SHA listed.
+The <PrivateLink url="https://github.com/PostHog/charts/blob/main/state.yaml">charts repository state.yaml</PrivateLink> is the source of truth for what ArgoCD is trying to deploy. Find your service (e.g., `ingestion`, `posthog`) and check the commit SHA listed.
 
 #### 2. Check running pods (what's *actually* deployed)
 

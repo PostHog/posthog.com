@@ -233,7 +233,7 @@ If you're a support hero, there are a few things to make sure are in place so th
 - You have a Slack channel named `#team-<team-name>`, in exactly the same format as your team name on the teams page.
 - You have a Slack channel named `#support-<team-name>`, in exactly the same format as your team name on the teams page.
 - The PostHog Slack app is in your `#support-<team-name>` channel (invite it with `/invite @PostHog`) — without it, ticket notifications can't be posted there.
-- Configure a Slack user group for the team's `Support Hero: <team>` schedule in [incident.io](https://app.incident.io/posthog/on-call/schedules). This group always contains the person who is currently on call, so you can mention the current Support Hero from any Slack channel.
+- Configure a Slack user group for the team's `Support Hero: <team>` schedule in <PrivateLink url="https://app.incident.io/posthog/on-call/schedules">incident.io</PrivateLink>. This group always contains the person who is currently on call, so you can mention the current Support Hero from any Slack channel.
   1. Open the schedule, then click **Connect Slack group**.
   1. Select **Create new**.
   1. Remove the `On call` prefix (including the trailing space) from the generated group name and the `on-call-` prefix from its handle. This keeps it consistent with the other on-call groups. For example, use `Support Hero: Query Performance` and `support-hero-query-performance`, not `On call Support Hero: Query Performance` and `on-call-support-hero-query-performance`.
@@ -241,5 +241,5 @@ If you're a support hero, there are a few things to make sure are in place so th
 
 A couple more things to make sure of (these may happen magically in future):
 
-- Your team shows up with the correct name and membership in [roles settings](https://us.posthog.com/project/2/settings/organization-roles).
-- You have a view for your team in [PostHog Support](https://us.posthog.com/project/2/support/tickets), and that view is bookmarked in your `#support-<team-name>` channel.
+- Your team shows up with the correct name and membership in <PrivateLink url="https://us.posthog.com/project/2/settings/organization-roles">roles settings</PrivateLink>.
+- You have a view for your team in <PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink>, and that view is bookmarked in your `#support-<team-name>` channel.

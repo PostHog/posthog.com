@@ -20,7 +20,7 @@ If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/
 
 ## Slack channels to know
 
-To keep up with what's shipped across the company, join [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
+To keep up with what's shipped across the company, join <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT"><code>#changelog</code></PrivateLink> – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 
 The channel is populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into it. PRs that are still behind a feature flag stay out, based on the *Release status* section of the `posthog/posthog` PR template. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
 

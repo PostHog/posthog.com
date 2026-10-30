@@ -74,9 +74,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
-    // Remove cookies and auth headers before forwarding to PostHog
+    // Remove cookies before forwarding to PostHog
     headers.delete('cookie')
-    headers.delete('authorization')
+    // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    if (!headers.get('authorization')?.startsWith('Bearer phc_')) {
+      headers.delete('authorization')
+    }
     headers.set('accept-encoding', '')
 
     // Forward client IP for geolocation
@@ -120,9 +124,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     const headers = new Headers(event.request.headers)
     headers.set('host', hostname)
-    // Remove cookies and auth headers before forwarding to PostHog
+    // Remove cookies before forwarding to PostHog
     headers.delete('cookie')
-    headers.delete('authorization')
+    // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    if (!headers.get('authorization')?.startsWith('Bearer phc_')) {
+      headers.delete('authorization')
+    }
     headers.set('accept-encoding', '')
 
     // Forward client IP for geolocation

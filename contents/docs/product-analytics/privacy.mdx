@@ -35,7 +35,7 @@ Configure at the project level in **Settings** > **Project** > **Privacy** under
 
 If you're using [autocapture](/docs/product-analytics/autocapture), PostHog automatically attempts to prevent sensitive data capture. We specifically only collect the `name`, `id`, and `class` attributes from input tags.
 
-If there are specific elements you don't want to capture, add the [`ph-no-capture`](/docs/product-analytics/autocapture#preventing-sensitive-data-capture) class name.
+If there are specific elements you don't want to capture, add the [`ph-no-capture`](/docs/privacy/data-collection#hide-sensitive-information-with-autocapture) class name.
 
 ```html
 <button class='ph-no-capture'>Sensitive information here</button>

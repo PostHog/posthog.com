@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconBolt, IconBrowser, IconCode, IconDownload, IconPlug, IconUpload } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
+import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import useProduct from 'hooks/useProduct'
 import PlatformInstall from 'components/PlatformInstall'
@@ -33,10 +34,7 @@ export const applications: CarouselSlide[] = [
         heading: 'Build and monitor pipelines in PostHog',
         description: (
             <>
-                <p>
-                    Configure sources, transformations, and destinations from the Data pipelines page, then watch logs
-                    and metrics for each one.
-                </p>
+                <p>Configure sources, transformations, and destinations, then watch logs and metrics for each one.</p>
                 {list([
                     {
                         label: 'Start from a template',
@@ -134,7 +132,7 @@ export const topFeatures: CarouselSlide[] = [
         icon: <IconDownload className="size-5" />,
         progressBar: 'bg-purple',
         layout: 'stack',
-        heading: 'Sync data in from hundreds of tools and databases',
+        heading: 'Import data from hundreds of tools and databases',
         description: (
             <>
                 <p>
@@ -144,7 +142,19 @@ export const topFeatures: CarouselSlide[] = [
                 {list([
                     {
                         label: 'Managed sources',
-                        description: 'Stripe, HubSpot, Salesforce, Zendesk, Postgres, MySQL, BigQuery, and many more.',
+                        description: (
+                            <>
+                                Stripe, HubSpot, Salesforce, Zendesk, Postgres, MySQL, BigQuery, and{' '}
+                                <Link
+                                    to="/docs/data-pipelines/sources"
+                                    className="font-bold underline"
+                                    state={{ newWindow: true }}
+                                >
+                                    many more
+                                </Link>
+                                .
+                            </>
+                        ),
                     },
                     {
                         label: 'Incremental and CDC',

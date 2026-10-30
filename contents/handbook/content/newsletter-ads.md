@@ -31,7 +31,7 @@ In Q2+Q3 2025, we're testing Meta ads as a way to increase newsletter subscriber
 
 For access to the Ads Manager, please contact <TeamMember name="Lior Neu-ner" /> or <TeamMember name="Brian Young" />.
 
-We do not have Meta's pixel installed, as we do not allow any third-party cookies on our site. For tracking conversions, we use Meta's Conversions API via the [PostHog destination](https://us.posthog.com/project/2/functions/0196edd0-6d74-0000-636b-5f69c8e7e9f5). 
+We do not have Meta's pixel installed, as we do not allow any third-party cookies on our site. For tracking conversions, we use Meta's Conversions API via the <PrivateLink url="https://us.posthog.com/project/2/functions/0196edd0-6d74-0000-636b-5f69c8e7e9f5">PostHog destination</PrivateLink>.
 
 > **🚨 Important**: We must be extremely careful not to include any personally identifiable information. We should only include the `fbclid` parameter and the `client_user_agent`. Avoid sending personal identifiable information to Meta such as name or email.
 

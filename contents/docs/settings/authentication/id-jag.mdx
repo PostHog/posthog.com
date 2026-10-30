@@ -90,7 +90,7 @@ PostHog uses the issuer URL to fetch your IdP's public keys and verify every ID-
 
 ### 3. Grant the required scopes in your IdP
 
-Configure your IdP to include the scopes each integration needs when it issues ID-JAGs. At minimum, all tokens need `user:read`. For the [MCP server](/docs/model-context-protocol/enterprise-managed-authorization), also include `organization:read` and `project:read`. Add any additional [API scopes](/docs/api#scopes) for what you want to do (for example, `feature_flag:write` to manage flags).
+Configure your IdP to include the scopes each integration needs when it issues ID-JAGs. At minimum, all tokens need `user:read`. For the [MCP server](/docs/model-context-protocol/enterprise-managed-authorization), also include `organization:read` and `project:read`. Add any additional [API scopes](/docs/api/personal-api-keys) for what you want to do (for example, `feature_flag:write` to manage flags).
 
 PostHog issues the access token with the **intersection** of the scopes your IdP granted and the scopes the client requested.
 
