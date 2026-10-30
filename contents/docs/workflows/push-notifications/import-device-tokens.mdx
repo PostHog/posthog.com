@@ -1,0 +1,250 @@
+---
+title: Import existing device tokens
+sidebarTitle: Import device tokens
+---
+
+If you're moving to [Workflows](/docs/workflows) push notifications from another push provider, you can import the APNs device tokens and FCM registration tokens you already have. Imported devices can receive pushes right away, so users on older versions of your app don't need to open it again or update before they get notifications.
+
+The mobile SDKs register new devices on their own. Use this import once, for devices that registered with your old provider before you added PostHog.
+
+There are three ways to import:
+
+- [Upload a CSV](#upload-a-csv) in Workflows. Best for a one-off import.
+- [Ask your AI agent](#ask-your-ai-agent) to move the devices from your old provider.
+- [Use the API](#use-the-api) for very large lists or a scripted import.
+
+## Before you start
+
+- Connect an **APNs** or **FCM** channel. See [Configure a workflows channel](/docs/workflows/configure-channels?tab=Push).
+- You need to be an admin of the project.
+- For each device, you need its token and the person's `distinct_id` in PostHog. Use the same `distinct_id` your app passes to `identify`, so the device lands on the right person.
+
+### Which token goes to which channel
+
+| Channel | Token it takes | Looks like |
+| --- | --- | --- |
+| APNs | The APNs device token, hex encoded | 64 hex characters |
+| FCM | The FCM registration token | Around 150 letters, digits, `-` and `_`, often with a `:` |
+
+- An iOS app that sends through Firebase has FCM tokens. Import those into the FCM channel.
+- Expo push tokens (`ExponentPushToken[...]`) can't be imported. They only work through Expo's own push service. Your app needs to read the native APNs or FCM token with `getDevicePushTokenAsync` and register it with the PostHog SDK instead.
+
+### Rows that don't import
+
+PostHog checks every row and tells you why a row wasn't imported:
+
+| Reason | What it means | What to do |
+| --- | --- | --- |
+| No person has this distinct ID | No person in PostHog has this `distinct_id` | Check that it's the ID your app passes to `identify`. If the IDs are right and these people just haven't opened the app since you added PostHog, import them anyway and create new persons |
+| The token doesn't fit this channel | For example an Expo token, an APNs token in an FCM channel, or an FCM token in an APNs channel | Import it into the right channel, or drop it |
+| Not stored | PostHog didn't save the device | Import the row again |
+| Person processing is off for this person | PostHog didn't update the person, so the device wasn't saved | Check that [person profiles](/docs/data/persons) are processed for these people, then import again |
+
+Rows with an unknown `distinct_id` are rejected by default. If they were imported, PostHog would create a new person for each one, and a person your app never identifies never gets a push.
+
+A person with several devices gets one row per device. Importing the same row twice stores it once.
+
+## Upload a CSV
+
+1. Go to [Workflows > Channels](https://app.posthog.com/workflows/channels).
+2. Find your APNs or FCM channel under **Your connections** and click **Import devices**.
+3. Upload a CSV file. The first line must name the columns, and the file needs a `distinct_id` column and a `device_token` column. Other columns are ignored.
+
+   ```csv
+   distinct_id,device_token
+   user_123,f1e2d3c4b5a6f1e2d3c4b5a6f1e2d3c4b5a6f1e2d3c4b5a6f1e2d3c4b5a6f1e2
+   user_456,a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2
+   ```
+
+4. Check the preview. It shows how many devices are ready to import, leaves out repeated lines, and lists lines it will skip, such as a line with no token.
+5. Click **Import**. Keep the page open until the import finishes. You can click **Stop import** at any time. Devices sent before you stop stay imported.
+6. When it's done, you see how many devices were imported and a table of every line that wasn't, with the reason.
+7. If some lines failed because no person has the distinct ID, and you're sure the IDs are right, click **Import anyway and create new persons** to import just those lines.
+
+Files can be up to 20 MB. For a larger list, split it into several files or [use the API](#use-the-api).
+
+## Ask your AI agent
+
+If your AI agent is connected to the [PostHog MCP server](/docs/model-context-protocol), it can export devices from your old provider and import them into PostHog. It checks every row with a dry run before it imports anything.
+
+For example, ask it:
+
+> Import our push devices from OneSignal into our PostHog APNs and FCM channels. Our OneSignal external user ID is the ID we pass to PostHog identify.
+
+The agent uses the `integrations-push-tokens-create` tool and the `importing-push-tokens` skill, which covers exporting from OneSignal, Braze, Customer.io, Airship and your own Firebase backend. Tell the agent which ID your app passes to `identify`, because that's what pairs each device with the right person. If the dry run says many rows have no person, the ID mapping is wrong. Fix the mapping rather than creating new persons.
+
+## Use the API
+
+You need a [personal API key](/docs/api/personal-api-keys) with the `integration:write` scope. The key's user must be an admin of the project.
+
+### Find your channel's ID
+
+List your push channels. Use `kind=apns` for APNs and `kind=firebase` for FCM:
+
+```bash
+curl "https://us.posthog.com/api/environments/<project_id>/integrations/?kind=apns" \
+  -H "Authorization: Bearer <personal_api_key>"
+```
+
+Each result has an `id` and a `config` that shows the channel's bundle ID (APNs) or Firebase project ID (FCM). Pick the channel that matches your app. Use `eu.posthog.com` if your project is in the EU.
+
+### Check, then import
+
+Send up to 1,000 devices per request. Set `dry_run` to `true` first to check every row without storing anything:
+
+```bash
+curl -X POST "https://us.posthog.com/api/environments/<project_id>/integrations/<channel_id>/push_tokens/" \
+  -H "Authorization: Bearer <personal_api_key>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "dry_run": true,
+    "subscriptions": [
+      { "distinct_id": "user_123", "device_token": "f1e2d3c4b5a6f1e2d3c4b5a6f1e2d3c4b5a6f1e2d3c4b5a6f1e2d3c4b5a6f1e2" },
+      { "distinct_id": "user_456", "device_token": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2" }
+    ]
+  }'
+```
+
+The response says how many devices would be stored, and why each other row would fail:
+
+```json
+{
+    "imported": 1,
+    "dry_run": true,
+    "failed": [
+        {
+            "distinct_id": "user_456",
+            "device_token_suffix": "f6a1b2",
+            "reason": "unknown_person",
+            "detail": "No person has this distinct ID. Use the ID your app passes to identify, or import with create_missing_persons."
+        }
+    ],
+    "failed_distinct_ids": ["user_456"]
+}
+```
+
+`reason` is one of `unknown_person`, `token_mismatch`, `not_stored` or `person_processing_disabled`. See [Rows that don't import](#rows-that-dont-import). Fix the failed rows, then send the same request without `dry_run` to import.
+
+To import rows whose `distinct_id` has no person yet, set `create_missing_persons` to `true`. Only do this for IDs you're sure your app identifies.
+
+### Import a large list
+
+Split the list into batches of 1,000. Imports are limited to 60 requests per minute per project. Above that the API answers `429` with a `Retry-After` header, so wait that many seconds and try again.
+
+The Python script below reads a CSV with `distinct_id` and `device_token` columns and does all of this:
+
+1. It checks every row with a dry run. If any rows would fail, it writes them to `not_imported.csv` with the reason and stops, so you can fix them first. Set `IMPORT_PASSING_ROWS = True` to import the rows that passed anyway.
+2. It imports the rows that passed, and sends `not_stored` rows again up to five times.
+3. Rows that still fail go into `not_imported.csv`, and the script exits with an error so you know the import isn't complete.
+
+```python
+import csv
+import sys
+import time
+from collections import Counter
+
+import requests
+
+POSTHOG_HOST = "https://us.posthog.com"
+PROJECT_ID = "<project_id>"
+CHANNEL_ID = "<channel_id>"
+PERSONAL_API_KEY = "<personal_api_key>"
+IMPORT_PASSING_ROWS = False
+BATCH_SIZE = 1000
+ATTEMPTS = 5
+
+url = f"{POSTHOG_HOST}/api/environments/{PROJECT_ID}/integrations/{CHANNEL_ID}/push_tokens/"
+headers = {"Authorization": f"Bearer {PERSONAL_API_KEY}"}
+
+
+def post(batch, dry_run):
+    for attempt in range(ATTEMPTS):
+        try:
+            response = requests.post(
+                url, headers=headers, json={"subscriptions": batch, "dry_run": dry_run}, timeout=(10, 60)
+            )
+        except requests.RequestException:
+            time.sleep(2**attempt)
+            continue
+        if response.status_code == 429:
+            time.sleep(int(response.headers.get("Retry-After", "60")))
+            continue
+        if response.status_code >= 500:
+            time.sleep(2**attempt)
+            continue
+        response.raise_for_status()
+        return response.json()["failed"]
+    return None
+
+
+def split(batch, failed):
+    reasons = {(f["distinct_id"], f["device_token_suffix"]): f["reason"] for f in failed}
+    passed, rejected = [], []
+    for row in batch:
+        reason = reasons.get((row["distinct_id"], row["device_token"][-6:]))
+        if reason:
+            rejected.append({**row, "reason": reason})
+        else:
+            passed.append(row)
+    return passed, rejected
+
+
+with open("devices.csv", newline="") as f:
+    rows = [{"distinct_id": r["distinct_id"], "device_token": r["device_token"]} for r in csv.DictReader(f)]
+
+batches = [rows[start : start + BATCH_SIZE] for start in range(0, len(rows), BATCH_SIZE)]
+not_imported = []
+to_import = []
+for batch in batches:
+    failed = post(batch, dry_run=True)
+    if failed is None:
+        not_imported.extend({**row, "reason": "check_failed"} for row in batch)
+        continue
+    passed, rejected = split(batch, failed)
+    to_import.append(passed)
+    not_imported.extend(rejected)
+
+print(f"Check: {sum(map(len, to_import))} rows can be imported. {dict(Counter(r['reason'] for r in not_imported))}")
+
+if not_imported and not IMPORT_PASSING_ROWS:
+    to_import = []
+    print("Nothing imported. Fix the rows in not_imported.csv, or set IMPORT_PASSING_ROWS = True.")
+
+for batch in to_import:
+    for attempt in range(ATTEMPTS):
+        if not batch:
+            break
+        failed = post(batch, dry_run=False)
+        if failed is None:
+            break
+        stored, rejected = split(batch, failed)
+        not_imported.extend(r for r in rejected if r["reason"] != "not_stored")
+        batch = [{"distinct_id": r["distinct_id"], "device_token": r["device_token"]} for r in rejected if r["reason"] == "not_stored"]
+        if batch:
+            time.sleep(2)
+    not_imported.extend({**row, "reason": "not_stored"} for row in batch)
+
+if not_imported:
+    with open("not_imported.csv", "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=["distinct_id", "device_token", "reason"])
+        writer.writeheader()
+        writer.writerows(not_imported)
+    print(f"{len(not_imported)} rows not imported. See not_imported.csv.")
+    sys.exit(1)
+```
+
+## Billing
+
+Each device that's stored is recorded on its person as one event, so an import of 10,000 devices counts as 10,000 events toward your [product analytics](/pricing) usage. Rows you import again count again. A dry run stores nothing and isn't billed.
+
+## Check the import
+
+Each device is stored as a `$device_push_subscription_…` person property. To count the people who have at least one device, run this in the [SQL editor](/docs/data-warehouse/sql):
+
+```sql
+SELECT count()
+FROM persons
+WHERE arrayExists(key -> startsWith(key, '$device_push_subscription_'), JSONExtractKeys(properties))
+```
+
+Then send a test push to one of them from a workflow that uses the same channel.
