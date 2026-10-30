@@ -59,15 +59,13 @@ To run a single-node engine safely in the cloud, we have to size the worker befo
 
 Users shouldn't have to worry about this. They should be able to run whatever they need to get their work done. Our job is to handle the rest and make it as predictable as possible.
 
-## HTTP load balancing is more straight-forward
+## Speaking Postgres is harder than it sounds
 
 Offering direct Postgres connections over port 5432 sounds like a great idea. In practice, it was much harder to scale than HTTP.
 
 Missing reconnects and managing TTLs and idle connections at scale is hard, and long-running connections are expensive. There's also very little tooling for load balancing pgwire compared with HTTP. Compare the ergonomics of an AWS NLB with an ALB and you'll see what we mean. HTTP headers also make routing in Kubernetes much more flexible.
 
-## Every Postgres client has its own opinions
-
-There's an endless list of Postgres clients, and each expects its own niche Postgres behavior. Customers kept asking us to fix their client or library. We spent a lot of time shipping many of those fixes, but coverage never got good enough. We'd rather spend our time building an excellent warehouse than chasing the long tail of Postgres compatibility.
+There's also an endless list of Postgres clients, and each expects its own niche Postgres behavior. Customers kept asking us to fix their client or library. We spent a lot of time shipping many of those fixes, but coverage never got good enough. We'd rather spend our time building an excellent warehouse than chasing the long tail of Postgres compatibility.
 
 ## We're rebuilding on Trino with HogLake
 
