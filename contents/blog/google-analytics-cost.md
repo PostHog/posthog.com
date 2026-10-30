@@ -117,7 +117,7 @@ When a product does work, it mostly only works with Google and rarely includes o
 
 ### 2. It's just analytics
 
-Although Google Analytics is strong when it comes to [web](/web-analytics) and [product analytics](/product-analytics), the landscape of tools organizations rely on now has expanded dramatically and GA hasn't kept up. It lacks [session replays](/session-replay), [A/B testing](/experiments), [surveys](/surveys), [marketing automation](/cdp), and more. This means you miss out on a lot of potential benefits these tools provide.
+Although Google Analytics is strong when it comes to [web](/web-analytics) and [product analytics](/product-analytics), the landscape of tools organizations rely on now has expanded dramatically and GA hasn't kept up. It lacks [session replays](/session-replay), [A/B testing](/experiments), [surveys](/surveys), [marketing automation](/data-pipelines), and more. This means you miss out on a lot of potential benefits these tools provide.
 
 ## How PostHog is different
 

@@ -3,7 +3,7 @@ import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
-import { isSafeInternalPath } from 'lib/utils'
+import { isSafeInternalPath } from 'lib/internalPath'
 import { useActions } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 

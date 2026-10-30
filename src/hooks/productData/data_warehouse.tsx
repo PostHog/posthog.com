@@ -694,7 +694,7 @@ export const dataWarehouse = {
             description: 'Measure experiments on revenue, not just clicks',
         },
         {
-            slug: 'context-warehouse/reverse-etl-export',
+            slug: 'data-pipelines',
             description: 'Send warehouse-enriched data to the rest of your stack',
         },
         {
