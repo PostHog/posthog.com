@@ -1,5 +1,5 @@
 ---
-date: 2026-10-29
+date: 2026-10-30
 title: "What people are prompting in PostHog AI"
 author:
   - cleo-lant
