@@ -472,7 +472,6 @@ export default function EvalsPlayground(): JSX.Element {
     return (
         <div ref={root} className="not-prose @container min-w-0 scroll-m-6">
             <h1 className="m-0 mb-2 text-2xl font-bold">AI evaluations, explained side by side.</h1>
-            <p className="m-0 text-base text-secondary">Play with the two eval types to see what changes</p>
 
             <CalloutBox type="action" icon="IconCursorClick" title="Test instructions">
                 <div className="flex items-start gap-4 pt-3">
@@ -492,8 +491,8 @@ export default function EvalsPlayground(): JSX.Element {
                     </Cell>
                     <Cell row={2}>
                         <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
-                            Like unit / integration tests for your AI. Offline selects and loads test cases.{' '}
-                            <b className="text-primary">Run a test suite on your laptop or in CI.</b>
+                            Like unit / integration tests for your AI.
+                            <b className="text-primary">Run a test suite on your laptop or in your CI.</b>
                         </p>
                     </Cell>
                     <Cell row={3}>
