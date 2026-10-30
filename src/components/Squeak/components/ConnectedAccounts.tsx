@@ -3,7 +3,7 @@ import { CallToAction } from 'components/CallToAction'
 import { Logo } from '@posthog/brand/logo'
 import { useUser } from 'hooks/useUser'
 import { useToast } from '../../../context/Toast'
-import { SQUEAK_HOST } from 'lib/strapi'
+import { startPostHogOAuth } from 'lib/posthogOAuth'
 import { isPostHogEmail } from 'lib/employee'
 import { IconCheck } from '@posthog/icons'
 
@@ -33,12 +33,7 @@ const ConnectedAccounts: React.FC<{ hideHeading?: boolean; stacked?: boolean }> 
     const isOAuthOnly = user.provider === 'posthog'
     const isLinked = isOAuthOnly || !!user.hasPosthogLogin
 
-    const handleConnect = () => {
-        // The OAuth redirect page reads this intent and links to the current
-        // account (rather than starting a fresh sign-in).
-        localStorage.setItem('posthog_oauth_intent', 'link')
-        window.location.href = `${SQUEAK_HOST}/api/connect/posthog`
-    }
+    const handleConnect = () => startPostHogOAuth({ intent: 'link' })
 
     const handleDisconnect = async () => {
         setBusy(true)

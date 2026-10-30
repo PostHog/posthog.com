@@ -98,7 +98,7 @@ The best opportunities connect products to customer outcomes using their termino
 * Questions about problems that other PostHog products solve  
 * 20%+ month-over-month event volume growth  
 * Custom implementations replicating native PostHog features  
-* Actively using PostHog competitors identified by using BuiltWith, Wappalyzer, or internal [SDK Scanner](https://sdk-scanner.posthog.dev).
+* Actively using PostHog competitors identified by using BuiltWith, Wappalyzer, or internal <PrivateLink url="https://sdk-scanner.posthog.dev">SDK Scanner</PrivateLink>.
 
 ## How to run a cross-sell process
 

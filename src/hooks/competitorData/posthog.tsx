@@ -720,7 +720,8 @@ export const posthog = {
                 features: {
                     email: true,
                     sms: true,
-                    push: false,
+                    // Open beta per /docs/workflows/configure-channels and /docs/workflows/push-notifications.
+                    push: 'Beta',
                     webhooks: true,
                     whatsapp: false,
                 },

@@ -19,7 +19,7 @@ Unstructured is a document ETL platform that turns raw files (PDFs, Office docum
 
 ## Prerequisites
 
-- An [Unstructured platform](https://platform.unstructuredapp.io) account (a free tier is available).
+- An Unstructured platform account (a free tier is available).
 - An Unstructured API key. The key has account-wide read access, so no extra scopes are required.
 
 ## Adding a data source
@@ -28,9 +28,9 @@ Unstructured is a document ETL platform that turns raw files (PDFs, Office docum
 
 When linking Unstructured, you'll need:
 
-- **API key** – sign in to the [Unstructured platform dashboard](https://platform.unstructuredapp.io), open **API Keys**, and generate a new key. Copy the key and paste it into the **API key** field in PostHog.
+- **API key** – sign in to the Unstructured platform dashboard, open **API Keys**, and generate a new key. Copy the key and paste it into the **API key** field in PostHog.
 
-Leave **API host** blank unless Unstructured provisioned your account with a custom API URL, in which case enter that origin (for example `https://platform.unstructuredapp.io`).
+Leave **API host** blank unless Unstructured provisioned your account with a custom API URL, in which case enter the origin Unstructured provided.
 
 ## Sync modes
 

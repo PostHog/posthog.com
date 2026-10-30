@@ -28,7 +28,7 @@ Security vulnerabilities and other security related findings can be reported via
 
 PRs to this page which update advisories or CVEs should only occur as part of an incident and should follow all [our usual processes for an incident](/handbook/engineering/operations/incidents). If you need to issue an advisory or CVE and an incident is _not_ declared, you should declare one. 
 
-Declaring an incident will ensure that there is good internal visibility and that members of relevant teams, including our Support team, are aware. Once an advisory is posted to this page, you should also update other teams by posting in the [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY) Slack channel. 
+Declaring an incident will ensure that there is good internal visibility and that members of relevant teams, including our Support team, are aware. Once an advisory is posted to this page, you should also update other teams by posting in the <PrivateLink url="https://posthog.slack.com/archives/C0351B1DMUY">#tell-posthog-anything</PrivateLink> Slack channel.
 
 ## Security best practices
 

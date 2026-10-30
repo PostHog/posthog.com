@@ -486,7 +486,7 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                     {isInUnitedStates && (
                         <div className="px-6 md:px-12 mb-8">
                             <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/laptop_sticker_6c15a03be1.png"
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_sticker_f57f258a6d.png"
                                 width={140}
                                 className="float-right ml-4 -mt-2 rotate-3"
                             />
@@ -543,7 +543,7 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                                 </button>
                             </div>
                             <CallToAction
-                                to="/merch?product=posthog-sticker"
+                                to={`/merch?product=posthog-sticker&coupon=${code}`}
                                 size="sm"
                                 className="!w-full"
                                 state={{ newWindow: true }}

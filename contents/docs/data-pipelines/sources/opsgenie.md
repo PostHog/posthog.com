@@ -13,11 +13,11 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Opsgenie connector pulls your Opsgenie alerting and on-call data – alerts, incidents, users, teams, schedules, escalations, services, and integrations – into the PostHog data warehouse.
+The Opsgenie connector pulls your Opsgenie alerting and on-call data – alerts, alert logs, incidents, users, teams, schedules, schedule overrides, escalations, services, and integrations – into the PostHog data warehouse.
 
 <CalloutBox icon="IconWarning" title="Opsgenie end of support" type="caution">
 
-Atlassian has announced [end of support for Opsgenie](https://support.atlassian.com/opsgenie/docs/important-update-opsgenie-end-of-support-announcement/). Opsgenie APIs are scheduled to shut down on April 5, 2027, after which this source will stop syncing.
+Atlassian has announced end of support for Opsgenie. Opsgenie APIs are scheduled to shut down on April 5, 2027, after which this source will stop syncing.
 
 </CalloutBox>
 
@@ -39,6 +39,8 @@ When linking Opsgenie, you need to provide:
 <SyncModes />
 
 The `alerts` and `incidents` tables support incremental sync on `createdAt`. Opsgenie's search API can only filter on creation time, so incremental syncs pick up newly created rows but not later status changes to existing rows – run a periodic full refresh if you need those reflected.
+
+The `alert_logs` table is full refresh only because the Opsgenie logs API has no time filter – a new log entry can appear on an alert of any age.
 
 ## Configuration
 

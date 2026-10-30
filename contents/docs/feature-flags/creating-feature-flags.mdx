@@ -27,7 +27,7 @@ Before you can evaluate a feature flag in your application code, you need to cre
 | 2    | [The key in your code used to evaluate the feature flag](#step-2-add-feature-flag-key-and-description-required)   | Required  |
 | 3    | [The type of feature flag – boolean, multivariate, or remote config](#step-3-choose-a-feature-flag-type-required) | Required  |
 | 4    | [Additional feature flag behaviors](#step-4-configure-feature-flag-behavior-optional)                             | Optional  |
-| 5    | [Evaluation runtime and environments](#step-5-configure-evaluation-runtime-and-environments-optional)             | Optional  |
+| 5    | [Evaluation runtime and environments](#step-5-configure-evaluation-runtime-and-contexts-optional)             | Optional  |
 
 ## Step 1. Create a new feature flag (required)
 
@@ -132,7 +132,7 @@ Rollout percentages support decimal values with up to two decimal places of prec
 
 - If you capture identified events, you can target based on [person properties](/docs/product-analytics/person-properties) and [cohorts](/docs/data/cohorts).
 
-- If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties).
+- If you enabled group analytics, you can target based on [group properties](/docs/product-analytics/group-analytics#set-group-properties).
 
 - If the property you want to target lives in another system, like a plan tier in Stripe or a lifecycle stage in Salesforce, sync that table into the [data warehouse](/docs/data-warehouse) and map it onto person or group properties with [warehouse properties](/docs/data-warehouse/warehouse-properties). Flags can then target it like any other property. A [join](/docs/data-warehouse/join) does not work here, because flags evaluate against stored properties rather than at query time.
 

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-> Read the [full deck for sales training](https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit?usp=sharing)
+> Read the <PrivateLink url="https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit?usp=sharing">full deck for sales training</PrivateLink>
 
 This page covers what to sell, to who, and when. If you're new to data tools, read about [data foundations](/handbook/growth/sales/data-foundations) first. It explains the modern data stack, how PostHog maps to it, and the two personas we sell to.
 
