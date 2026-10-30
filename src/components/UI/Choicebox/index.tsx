@@ -15,32 +15,43 @@ export type ChoiceboxGroupProps =
 
 const groupClasses = 'grid grid-cols-1 gap-3 @sm:grid-cols-2 @2xl:grid-cols-3'
 
+type LayoutProps<State> = {
+    className?: string | ((state: State) => string | undefined)
+    style?: React.CSSProperties | ((state: State) => React.CSSProperties | undefined)
+}
+
+function splitLayout<State>({ className, style }: LayoutProps<State>) {
+    return {
+        wrapper: {
+            className: typeof className === 'string' ? className : undefined,
+            style: typeof style === 'function' ? undefined : style,
+        },
+        grid: {
+            className: mergeClassName(groupClasses, typeof className === 'function' ? className : undefined),
+            style: typeof style === 'function' ? style : undefined,
+        },
+    }
+}
+
 const Group = React.forwardRef<HTMLDivElement, ChoiceboxGroupProps>(function ChoiceboxGroup(props, ref) {
+    let wrapper: { className?: string; style?: React.CSSProperties }
     let group: React.ReactNode
     if (props.multiple) {
-        const { multiple, className, ...rest } = props
-        group = (
-            <BaseCheckboxGroup
-                ref={ref}
-                data-multiple={multiple}
-                {...rest}
-                className={mergeClassName(groupClasses, className)}
-            />
-        )
+        const { multiple, className, style, ...rest } = props
+        const layout = splitLayout({ className, style })
+        wrapper = layout.wrapper
+        group = <BaseCheckboxGroup ref={ref} data-multiple={multiple} {...rest} {...layout.grid} />
     } else {
-        const { multiple, className, ...rest } = props
-        group = (
-            <BaseRadioGroup
-                ref={ref}
-                data-multiple={multiple || undefined}
-                {...rest}
-                className={mergeClassName(groupClasses, className)}
-            />
-        )
+        const { multiple, className, style, ...rest } = props
+        const layout = splitLayout({ className, style })
+        wrapper = layout.wrapper
+        group = <BaseRadioGroup ref={ref} data-multiple={multiple || undefined} {...rest} {...layout.grid} />
     }
     return (
         <MultipleContext.Provider value={Boolean(props.multiple)}>
-            <div className="@container w-full">{group}</div>
+            <div className={cn('@container w-full', wrapper.className)} style={wrapper.style}>
+                {group}
+            </div>
         </MultipleContext.Provider>
     )
 })

@@ -23,21 +23,21 @@ export default function Examples(): JSX.Element {
                         </span>
                     </Skeleton>
                     <div className="flex min-w-0 flex-1 flex-col">
-                        <Skeleton shape="text" width="55%" loading={loading} className="text-heading-sm">
+                        <Skeleton loading={loading}>
                             <span className="text-heading-sm">Weekly product report</span>
                         </Skeleton>
-                        <Skeleton shape="text" width="35%" loading={loading} className="text-caption">
+                        <Skeleton loading={loading}>
                             <span className="text-caption text-secondary">Max Hedgehog · Monday</span>
                         </Skeleton>
                     </div>
                 </div>
-                <Skeleton shape="text" lines={2} loading={loading} className="mt-4 text-body">
-                    <p className="m-0 mt-4 text-body text-secondary">
+                <Skeleton loading={loading} className="mt-4">
+                    <p className="m-0 text-body text-secondary">
                         Weekly active users grew 12%. Most people leave the signup funnel at the plan step.
                     </p>
                 </Skeleton>
-                <Skeleton shape="rect" height={96} loading={loading} className="mt-4">
-                    <div className="mt-4 flex h-24 flex-col justify-center rounded-md border border-[rgb(var(--text-primary)/0.14)] px-3">
+                <Skeleton shape="rect" loading={loading} className="mt-4">
+                    <div className="flex h-24 flex-col justify-center rounded-md border border-[rgb(var(--text-primary)/0.14)] px-3">
                         <span className="text-caption text-secondary">Weekly active users</span>
                         <strong className="text-heading-md tabular-nums">2,418</strong>
                     </div>

@@ -101,7 +101,10 @@ function keepPopupInPlace(group: HTMLElement): () => void {
     observer.observe(group)
     return () => {
         observer.disconnect()
+        if (!frame) return
         cancelAnimationFrame(frame)
+        group.style.height = ''
+        group.style.overflow = ''
     }
 }
 

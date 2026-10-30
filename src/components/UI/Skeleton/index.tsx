@@ -14,7 +14,17 @@ const shimmer =
 
 const blockShapes = { rect: 'h-8 rounded-md', circle: 'size-8 shrink-0 rounded-full' }
 
+const measuredShapes = { rect: 'after:rounded-md', circle: 'after:rounded-full' }
+
+const measuredText =
+    'select-none !text-transparent line-through decoration-[rgb(var(--text-primary)/0.08)] decoration-[0.8em] [text-decoration-skip-ink:none] [&_*]:!text-transparent [&_*]:line-through [&_*]:decoration-[rgb(var(--text-primary)/0.08)] [&_*]:decoration-[0.8em] [&_*]:[text-decoration-skip-ink:none] [&_img]:invisible [&_svg]:invisible animate-pulse motion-reduce:animate-none'
+
+const measuredBlock =
+    "relative !text-transparent [&>*]:invisible after:pointer-events-none after:absolute after:inset-0 after:bg-[rgb(var(--text-primary)/0.08)] after:bg-[linear-gradient(90deg,transparent,rgb(var(--text-primary)/0.06),transparent)] after:bg-[length:200%_100%] after:animate-[shimmer_2s_linear_infinite] after:content-[''] motion-reduce:after:animate-none"
+
 const lastLineWidth = '60%'
+
+const hiddenContent = { 'aria-hidden': true, inert: '' } as React.HTMLAttributes<HTMLDivElement>
 
 function TextLine({ width, height }: { width?: number | string; height?: number | string }): JSX.Element {
     return (
@@ -47,11 +57,21 @@ export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(function
             />
         )
 
-    return children !== undefined ? (
-        <div {...props} ref={ref} aria-busy={loading}>
-            {loading ? placeholder : children}
-        </div>
-    ) : (
-        React.cloneElement(placeholder, { ...props, ref, 'aria-hidden': true })
-    )
+    if (children !== undefined) {
+        const measured = shape === 'text' ? measuredText : cn(measuredBlock, measuredShapes[shape])
+        return (
+            <div
+                {...props}
+                {...(loading ? hiddenContent : undefined)}
+                ref={ref}
+                aria-busy={loading}
+                className={cn(loading && measured, className)}
+                style={style}
+            >
+                {children}
+            </div>
+        )
+    }
+
+    return React.cloneElement(placeholder, { ...props, ref, 'aria-hidden': true })
 })

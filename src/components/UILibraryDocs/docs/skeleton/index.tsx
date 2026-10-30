@@ -18,7 +18,8 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Match the shape and text size of the real content, so the layout does not move when it loads.',
+        'Wrap the real layout in Skeleton. While it loads, Skeleton hides the content and draws the placeholder in exactly its space, so nothing moves when it loads. Render sample text in place of data that has not arrived.',
+        'Without children, set lines, width, and height to estimate the size of content you cannot render yet.',
         'Show skeletons only for loads that take long enough to notice.',
     ],
     props: [
@@ -31,17 +32,38 @@ export const doc: ComponentDoc = {
                     defaultValue: "'text'",
                     description: 'The placeholder shape.',
                 },
-                { name: 'width', type: 'number | string', description: 'A width in pixels or a CSS value.' },
-                { name: 'height', type: 'number | string', description: 'A height in pixels or a CSS value.' },
-                { name: 'lines', type: 'number', defaultValue: '1', description: 'The number of text lines.' },
+                {
+                    name: 'width',
+                    type: 'number | string',
+                    description: 'A width in pixels or a CSS value. Used without children.',
+                },
+                {
+                    name: 'height',
+                    type: 'number | string',
+                    description: 'A height in pixels or a CSS value. Used without children.',
+                },
+                {
+                    name: 'lines',
+                    type: 'number',
+                    defaultValue: '1',
+                    description: 'The number of text lines. Used without children.',
+                },
                 {
                     name: 'loading',
                     type: 'boolean',
                     defaultValue: 'true',
                     description: 'Shows placeholders when true. Shows children when false.',
                 },
-                { name: 'children', type: 'ReactNode', description: 'The content to show after loading.' },
-                { name: 'className', type: 'string', description: 'Classes for the placeholder.' },
+                {
+                    name: 'children',
+                    type: 'ReactNode',
+                    description: 'The content. While loading, it sets the size and shape of the placeholder.',
+                },
+                {
+                    name: 'className',
+                    type: 'string',
+                    description: 'Classes for the placeholder, or for the wrapper around children.',
+                },
             ],
         },
     ],
