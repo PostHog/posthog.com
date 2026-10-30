@@ -698,8 +698,8 @@ export default function DataStack(): JSX.Element {
                                         connected your third, you'll stop thinking about your stack entirely, which is
                                         the whole point.
                                     </p>
-                                    <div className="flex flex-wrap items-center gap-3">
-                                        <ContextWarehouseCTA label="Get Started" />
+                                    <div className="space-y-3">
+                                        <ContextWarehouseCTA label="Get started" />
                                         <p className="mb-0 text-sm text-secondary">
                                             Not using PostHog?{' '}
                                             <Link

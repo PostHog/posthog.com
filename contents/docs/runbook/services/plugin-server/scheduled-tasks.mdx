@@ -41,7 +41,7 @@ kubectl rollout restart deployment/ingestion-plugins-scheduler -n posthog
 
 ### Scaling up the Graphile Worker database
 
-If you've determined that the Graphile Worker database is the bottleneck, you should be able to safely scale it up by [changing the instance type in the `posthog-cloud-infra` repo](https://github.com/PostHog/posthog-cloud-infra/blob/b00dc23df4944506ab104eb4e180b963e026d57c/terraform/environments/aws-accnt-prod/us-east-1/graphile_worker.tf#L29).
+If you've determined that the Graphile Worker database is the bottleneck, you should be able to safely scale it up by <PrivateLink url="https://github.com/PostHog/posthog-cloud-infra/blob/b00dc23df4944506ab104eb4e180b963e026d57c/terraform/environments/aws-accnt-prod/us-east-1/graphile_worker.tf#L29">changing the instance type in the <code>posthog-cloud-infra</code> repo</PrivateLink>.
 
 ### Disabling a plugin
 

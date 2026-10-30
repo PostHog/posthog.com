@@ -51,16 +51,16 @@ Most product and feature launch emails come from the Product Marketer who sent t
 
 The exceptions and other solutions are:
 - Sending emails from hey@posthog.com – this is what we usually do for BIG sends, because it would overwhelm the sender's inbox with 'out-of-office' auto-replies.
-- Sending emails from beta-feedback@posthog.com – this is a Google group tied to the automation in [#posthog-feedback](https://posthog.slack.com/archives/C011L071P8U ) by a Slack bot. Any responses to this address get posted in that channel and anyone can reply to them using the info in there.
+- Sending emails from beta-feedback@posthog.com – this is a Google group tied to the automation in <PrivateLink url="https://posthog.slack.com/archives/C011L071P8U">#posthog-feedback</PrivateLink> by a Slack bot. Any responses to this address get posted in that channel and anyone can reply to them using the info in there.
 - Sending emails from a specific person, but setting the reply-to address as one of the above. This is not common, but it's there if you want to use it.
 
 >We specifically do not want emails we think people will reply to going into hey@posthog.com because it is sporadically monitored at best, and hard to collaborate through.
 
-If you're sending a launch email (alpha, beta, GA), it's helpful to add an annotation in [our PostHog project](https://us.posthog.com/project/2/data-management/annotations) on the send date, so we can see its impact on our metrics later.
+If you're sending a launch email (alpha, beta, GA), it's helpful to add an annotation in <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">our PostHog project</PrivateLink> on the send date, so we can see its impact on our metrics later.
 
 When we ask users to share feedback through email, it should either link to beta-feedback@posthog.com, the [support modal](http://app.posthog.com/home#supportModal), or to ourselves personally. Never hey@posthog.com.
 
-Doing this lets us filter out the noise for everyone else while still giving good visibility on meaningful feedback internally. If a user sends you feedback, you should share that with the relevant product team or in https://posthog.slack.com/archives/C011L071P8U 
+Doing this lets us filter out the noise for everyone else while still giving good visibility on meaningful feedback internally. If a user sends you feedback, you should share that with the relevant product team or in <PrivateLink url="https://posthog.slack.com/archives/C011L071P8U">https&#58;//posthog.slack.com/archives/C011L071P8U</PrivateLink>
 
 >When adding yourself as a send-from address in Customer.io, be sure to edit the display name to '[your name] **from PostHog**'.
 
@@ -73,7 +73,7 @@ Important service updates are the _only_ type of email we may send to unsubscrib
 
 > `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
-Whenever we need to send an email broadcast like this we begin by creating an issue using the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) in the marketing repo, unless it involves discussion of personal information - in which case it is discussed in [Company Internal](https://github.com/PostHog/company-internal). This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone to log in to Customer.io. Issues are closed when an email is sent. 
+Whenever we need to send an email broadcast like this we begin by creating an issue using the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) in the marketing repo, unless it involves discussion of personal information - in which case it is discussed in <PrivateLink url="https://github.com/PostHog/company-internal">Company Internal</PrivateLink>. This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone to log in to Customer.io. Issues are closed when an email is sent.
 
 If you'd like to work with Marketing on an email activity, please begin by opening an issue with the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md).
 
@@ -108,7 +108,7 @@ When a user joins a waitlist or opts in to a feature preview — via [the featur
 
 When a feature moves from concept to alpha or beta, users who registered interest are automatically opted in to the new stage and a `user moved feature preview stage` event fires — we then email them to let them know the feature is enabled and now available, and ask for feedback.
 
-> **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed.
+> **Launching a beta?** It helps to let the Brand team know in <PrivateLink url="https://posthog.slack.com/archives/C083V7C6GKE">the team Slack</PrivateLink>. The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed.
 
 
 #### Onboarding - new hires
@@ -142,6 +142,6 @@ We use Customer.io to target broadcasts and campaigns — for example, the onboa
 To add a new event or property:
 
 1. **Confirm the data is tracked in PostHog.** Product intent and activation criteria (such as a product's `product_key` value) are usually set up by the product manager for the relevant product. If the event or property you need isn't being tracked yet, ask the PM to create it in PostHog before going any further.
-2. **Add the event or property to the Customer.io pipeline.** Any action or property we send to Customer.io must be added to the [Customer.io destination in PostHog](https://us.posthog.com/project/2/functions/0191b762-f77d-0000-1956-121a0c25c878). If you try to build a segment on something that isn't in the pipeline, the segment won't populate.
+2. **Add the event or property to the Customer.io pipeline.** Any action or property we send to Customer.io must be added to the <PrivateLink url="https://us.posthog.com/project/2/functions/0191b762-f77d-0000-1956-121a0c25c878">Customer.io destination in PostHog</PrivateLink>. If you try to build a segment on something that isn't in the pipeline, the segment won't populate.
 3. **Create the segment in Customer.io.** A newly added property won't appear in Customer.io's autocomplete when you start typing it. Instead, copy and paste the exact property name, save, and the segment will populate when the data arrives (but this is always worth testing or checking later).
 

@@ -295,7 +295,7 @@ import MigrationWarning from "./_snippets/migration-warning.mdx"
 
 > **Note:** As of writing this guide, the Statsig event API was not returning events. This is written using a mix of their sample data and data returned from requests in-app.
 
-The schema of Statsig's event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Statsig's schema in [their docs](https://www.statsig.com/glossary/event-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Statsig's event data is similar to PostHog's schema, but it requires converting to work with the rest of PostHog's data. You can see details on Statsig's schema in [their docs](https://www.statsig.com/glossary/event-schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#types-of-autocaptured-events).
 
 With Statsig's event data, you can go through each row and convert it to PostHog's schema. This requires converting:
 
