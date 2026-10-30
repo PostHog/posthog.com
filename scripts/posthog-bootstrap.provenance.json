@@ -7,6 +7,5 @@
     "vendored_artifact": "static/scripts/posthog-bootstrap.js",
     "vendored_sha256": "a79b693f47438c678e0710a4e83f58930c5a1f38566d9315a494d2eaf494c764",
     "transformation": "Remove only the trailing sourceMappingURL comment.",
-    "license": "static/scripts/posthog-bootstrap.LICENSE.txt",
     "status": "Temporary preview vendor. Replace with the published SDK artifact after PR 5470 is released."
 }

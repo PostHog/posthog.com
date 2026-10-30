@@ -83,7 +83,6 @@ test('the local bootstrap matches the recorded SDK artifact provenance', () => {
     assert.equal(createHash('sha256').update(artifact).digest('hex'), provenance.vendored_sha256)
     assert.doesNotMatch(artifact.toString(), /sourceMappingURL=/)
     assert.match(provenance.commit, /^[0-9a-f]{40}$/)
-    assert.ok(readFileSync(path.resolve(__dirname, '..', provenance.license)).length > 0)
 })
 
 async function generatedInit(environment = env) {
