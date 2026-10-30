@@ -2,12 +2,6 @@
 title: Offline evals
 ---
 
-<CalloutBox icon="IconFlask" title="Offline evals are rolling out" type="fyi">
-
-We're currently rolling out offline evals to users. If you don't see them in your project yet, [contact us](https://app.posthog.com/ai-evals#panel=support%3Afeedback%3Allm-analytics%3Alow%3Atrue) to request access.
-
-</CalloutBox>
-
 Offline evals test your AI agent against a set of known inputs. Run them locally or in your CI to check whether a prompt, model, or code change improves your answers or breaks something that worked before.
 
 Your code runs your agent and scores its outputs. The PostHog SDK uploads the results so you can compare runs, follow scores over time, and inspect the answers behind a regression. You can use your existing test framework and evaluators.
@@ -36,14 +30,17 @@ These functions belong to your code, not the PostHog SDK.
 
 ### 1. Install the SDK and configure access
 
-Use Python 3.10 or later, or a server-side JavaScript/TypeScript environment.
+Install the latest SDK. The examples below require:
+
+-   **Python:** Python 3.10+ and `posthog` 7.74.0+.
+-   **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
 
 ```bash file=Python
 pip install --upgrade posthog
 ```
 
 ```bash file=TypeScript
-pnpm add @posthog/ai
+pnpm add @posthog/ai@latest
 ```
 
 Create a [personal API key](/docs/api#authentication) with access to your project and these scopes:
@@ -250,6 +247,8 @@ Use the same test cases and scorer versions when you compare an agent change. Ch
 
 In your CI, set `run_source="ci"` in Python or `runSource: "ci"` in TypeScript. Record your agent's commit SHA in `application_version` or `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
 
+For runs that use multiple models, set `model_version` / `modelVersion` on each `EvaluationItem` to override the experiment's model. Omit it to use the experiment's model. You can also pass it to `from_dataset_item()` / `fromDatasetItem()`. This requires `posthog` 7.76.0+ or `@posthog/ai` 8.17.0+.
+
 Completing an experiment means the run finished, not that every case passed. To block a deployment, check scores against your own threshold in the test script and exit with a failure code.
 
 ## Use a PostHog dataset (optional)
@@ -344,9 +343,15 @@ All offline evals SDK operations are also available through the [PostHog MCP ser
 
 ## Data retention
 
-Experiment item payloads have a 30-day retention period. This includes the input, actual output, expected output, and payload metadata you upload for each item. Keep your own copy if you need to inspect those payloads after 30 days.
+Item and result payloads expire 30 days after PostHog first accepts them.
 
-This retention policy applies to the experiment's copy of the item payload.
+| Data                                                                                    | Retention             |
+| --------------------------------------------------------------------------------------- | --------------------- |
+| Item inputs, actual outputs, expected outputs, and payload metadata                     | Deleted after 30 days |
+| Result reasoning, error messages, and payload metadata                                  | Deleted after 30 days |
+| Experiment, item, and result records, including scores, statuses, summaries, and trends | Kept                  |
+
+Keep your own copy of payloads you need after 30 days.
 
 ## Pricing
 

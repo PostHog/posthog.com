@@ -53,7 +53,7 @@ A few things to keep in mind:
 - If the customer has a CSM, AE, or AM assigned, their dedicated PostHog human should run the call.
 - If the customer already belongs to the Onboarding bucket, prioritize meeting with them, and add credits to their account, as they would get the same service anyway.
 
-Internally, when someone purchases a call, we get notified in our Slack channel. Check who completed the purchase, look them up in PostHog Customer Analytics for more context, and check whether they booked a call. Change the status in PostHog Customer Analytics to `Paid Call purchased` for tracking purposes, and add a note if needed.
+Internally, when someone purchases a call, we get notified in our Slack channel, and `Onboarding:: User orders an onboarding consultation from the merch store` sets the account's Onboarding Pipeline to `Purchased Onboarding Call` for tracking purposes. If it can't find the buyer's account, it says so in the channel, and you set the status by hand. Check who completed the purchase, look them up in PostHog Customer Analytics for more context, check whether they booked a call, and add a note if needed.
 
 ### Tooling
 
