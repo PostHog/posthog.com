@@ -8,7 +8,8 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 /**
  * Offline and online evals, side by side. Each lane walks Input (0) → Output (1) → Evaluator (2) → reported (3).
  * The box at a lane's step is current, earlier boxes are done, and later ones are locked.
- * Step 4 then closes the loop: the failing live request becomes an offline test case, and the offline lane reruns it.
+ * Step 4 then closes the loop in two passes: the failing live request becomes an offline test case and passes there,
+ * then the fix ships and the online lane passes on the next similar request.
  */
 
 type Lane = 'offline' | 'online'
@@ -34,6 +35,10 @@ const CASES = {
     saved: {
         output: '“Returns are limited to 30 days, but defects have a one-year warranty. I can help replace it.”',
         expected: 'Recognize a defect; offer help under the one-year warranty.',
+    },
+    // The next similar request in production, after the fix ships. The agent answers with `saved.output`.
+    next: {
+        input: '“It was a gift, so I don’t have a receipt. It stopped working after two months. Can I get it replaced?”',
     },
 }
 
@@ -74,6 +79,17 @@ const ONLINE_RESULTS: Record<Scorer, { label: string; kind: ScoreKind; caption: 
     },
 }
 
+// The same evaluators on the next similar request, once the fix is in production.
+const SHIPPED_RESULTS: Record<Scorer, { label: string; kind: ScoreKind; caption: string }> = {
+    judge: {
+        label: 'Pass ✓',
+        kind: 'pass',
+        caption: 'Pass: the fixed prompt applies the warranty to the defect, in production too.',
+    },
+    code: { label: 'Pass ✓', kind: 'pass', caption: 'Pass: the answer still mentions “30 days”.' },
+    sentiment: { label: 'Neutral', kind: 'tone', caption: 'Neutral: this user is calm, so nothing gets flagged.' },
+}
+
 const SCORE_LABEL: Record<string, string> = {
     pass: 'Pass ✓',
     true: 'True ✓',
@@ -107,12 +123,14 @@ const initialState = {
     scorers: { offline: 'judge', online: 'judge' } as Record<Lane, Scorer>,
     /** The live request was saved as an offline test case ("Close the loop" in step 4). */
     saved: false,
+    /** The fix shipped, so the online lane handles the next similar request. */
+    shipped: false,
 }
 type State = typeof initialState
 
 function score(lane: Lane, state: State): { label: string; kind: ScoreKind } {
     const scorer = state.scorers[lane]
-    if (lane === 'online') return ONLINE_RESULTS[scorer]
+    if (lane === 'online') return (state.shipped ? SHIPPED_RESULTS : ONLINE_RESULTS)[scorer]
     // The saved case still carries the frustrated user's message.
     if (scorer === 'sentiment')
         return state.saved ? ONLINE_RESULTS.sentiment : { label: SCORE_LABEL.neutral, kind: 'tone' }
@@ -126,7 +144,7 @@ function caption(lane: Lane, state: State): string {
         return lane === 'offline'
             ? 'Scores the answer using the input, output, tool call, and reference answer.'
             : 'Scores the answer using the input, output, and tool call. Production requests have no reference answer.'
-    if (lane === 'online' && step >= 2) return ONLINE_RESULTS[scorer].caption
+    if (lane === 'online' && step >= 2) return (state.shipped ? SHIPPED_RESULTS : ONLINE_RESULTS)[scorer].caption
     if (lane === 'online' && scorer === 'judge') return 'It ignores the defect and applies the ordinary return rule.'
     if (state.saved && step >= 2 && scorer === 'judge')
         return 'Pass: the fixed prompt applies the warranty to the defect, not the return window.'
@@ -443,8 +461,8 @@ function LaneHeading({ id, title, tag }: { id: string; title: string; tag: strin
 
 export default function EvalsPlayground(): JSX.Element {
     const [state, setState] = useState(initialState)
-    // Bumped once the scroll up to a saved case ends, to play its fade-in.
-    const [reveal, setReveal] = useState(0)
+    // Bumped once the scroll back up a lane ends, to play the fade-in of its new request.
+    const [reveal, setReveal] = useState<Record<Lane, number>>({ offline: 0, online: 0 })
     const root = useRef<HTMLDivElement>(null)
     const { steps } = state
 
@@ -468,16 +486,23 @@ export default function EvalsPlayground(): JSX.Element {
             steps: { ...s.steps, [lane]: Math.min(s.steps[lane], 2) },
         }))
     const startOver = () => {
-        setState((s) => ({ ...s, steps: initialState.steps, origin: 'real', store: 'code', saved: false }))
-        setReveal(0)
+        setState((s) => ({
+            ...s,
+            steps: initialState.steps,
+            origin: 'real',
+            store: 'code',
+            saved: false,
+            shipped: false,
+        }))
+        setReveal({ offline: 0, online: 0 })
         root.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-    // The live request becomes a test case in a PostHog dataset, and the offline lane starts again with it.
-    const saveCase = () => {
-        setState((s) => ({ ...s, origin: 'real', store: 'posthog', saved: true, steps: { ...s.steps, offline: 0 } }))
-        setReveal(0)
+    // Restarts a lane with a new request, scrolls up to it, and fades the request in.
+    const loopBack = (lane: Lane, patch: Partial<State>) => {
+        setState((s) => ({ ...s, ...patch, steps: { ...s.steps, [lane]: 0 } }))
+        setReveal((r) => ({ ...r, [lane]: 0 }))
         requestAnimationFrame(() => {
-            const action = root.current?.querySelector<HTMLElement>('[data-current] [data-action="offline"]')
+            const action = root.current?.querySelector<HTMLElement>(`[data-current] [data-action="${lane}"]`)
             action?.focus({ preventScroll: true })
             action?.closest('article')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             // Fade in when the scroll stops, so the change happens in view. Some browsers lack scrollend.
@@ -486,20 +511,53 @@ export default function EvalsPlayground(): JSX.Element {
                 if (played) return
                 played = true
                 document.removeEventListener('scrollend', play, true)
-                setReveal((n) => n + 1)
+                setReveal((r) => ({ ...r, [lane]: r[lane] + 1 }))
             }
             document.addEventListener('scrollend', play, true)
             setTimeout(play, 1200)
         })
     }
+    // The live request becomes a test case in a PostHog dataset, and the offline lane reruns it.
+    const saveCase = () => loopBack('offline', { origin: 'real', store: 'posthog', saved: true })
+    // The fix ships, and the online lane handles the next similar request.
+    const shipFix = () => loopBack('online', { shipped: true })
 
     const offlineCase = state.saved ? { ...CASES.live, ...CASES.saved } : CASES[state.origin]
-    // A saved case stays hidden until the scroll up ends, then fades in.
-    const savedFade = !state.saved
-        ? ''
-        : reveal
-        ? 'animate-slide-up-fade-in [animation-delay:300ms] [animation-duration:900ms] [animation-fill-mode:both]'
-        : 'opacity-0'
+    // A new request stays hidden until the scroll up ends, then fades in.
+    const fadeIn = (active: boolean, lane: Lane) =>
+        !active
+            ? ''
+            : reveal[lane]
+            ? 'animate-slide-up-fade-in [animation-delay:300ms] [animation-duration:900ms] [animation-fill-mode:both]'
+            : 'opacity-0'
+    const savedFade = fadeIn(state.saved, 'offline')
+    const shippedFade = fadeIn(state.shipped, 'online')
+
+    // Where the loop stands, shown under the results.
+    const loop = !state.saved
+        ? {
+              title: 'Strengthen your offline tests.',
+              note: 'Bring this unexpected production request into your test suite. Save it as a test case, fix your prompt, and rerun it offline. That closes the loop, so the same failure can’t ship again.',
+          }
+        : steps.offline < 3
+        ? {
+              title: 'Strengthen your offline tests.',
+              note: 'Saved to your test suite as a PostHog dataset. Rerun the offline track above with your fixed prompt.',
+          }
+        : !state.shipped
+        ? {
+              title: 'Your offline tests are stronger.',
+              note: 'Saved and passing, so this case now guards against regressions. Ship the fix, and let online evals check it on real traffic.',
+          }
+        : steps.online < 3
+        ? {
+              title: 'Shipped to production.',
+              note: 'Run the online track above to see how your fixed agent handles the next similar request.',
+          }
+        : {
+              title: 'Both tracks pass.',
+              note: 'Offline evals guard against regressions before you ship. Online evals confirm the fix holds up in production.',
+          }
 
     // Step 4 unlocks once either lane reports, and fades like any locked step until then.
     const resultsLocked = steps.offline < 3 && steps.online < 3
@@ -540,7 +598,7 @@ export default function EvalsPlayground(): JSX.Element {
                             title="Input"
                             onAdvance={() => advance('offline')}
                         >
-                            <div key={reveal} className={savedFade}>
+                            <div key={reveal.offline} className={savedFade}>
                                 <Message role="user">{offlineCase.input}</Message>
                             </div>
                             <div className="mt-4 border-t border-primary pt-4">
@@ -553,7 +611,11 @@ export default function EvalsPlayground(): JSX.Element {
                                         { value: 'synthetic', label: 'Synthetic' },
                                     ]}
                                     onChange={(origin) =>
-                                        resetOffline({ origin: origin as State['origin'], saved: false })
+                                        resetOffline({
+                                            origin: origin as State['origin'],
+                                            saved: false,
+                                            shipped: false,
+                                        })
                                     }
                                 />
                                 <Choice
@@ -579,7 +641,7 @@ export default function EvalsPlayground(): JSX.Element {
                                             : 'It’s defined in your code and loaded by your test runner.'}
                                     </Note>
                                 </div>
-                                <div key={reveal} className={savedFade}>
+                                <div key={reveal.offline} className={savedFade}>
                                     <Evidence label="Reference answer">{offlineCase.expected}</Evidence>
                                 </div>
                             </div>
@@ -646,17 +708,24 @@ export default function EvalsPlayground(): JSX.Element {
                             title="Input"
                             onAdvance={() => advance('online')}
                         >
-                            <Message role="user">{CASES.live.input}</Message>
-                            <div className="mt-4 border-t border-primary pt-4">
-                                <Note>
-                                    This is an unexpected request from a real user in prod. This user is asking about a
-                                    defective product, but your test suite only covers late returns.
-                                </Note>
+                            <div key={reveal.online} className={shippedFade}>
+                                <Message role="user">{state.shipped ? CASES.next.input : CASES.live.input}</Message>
+                                <div className="mt-4 border-t border-primary pt-4">
+                                    <Note>
+                                        {state.shipped
+                                            ? 'This is the next similar request from a real user, after you shipped the fix. It’s another defect with no receipt.'
+                                            : 'This is an unexpected request from a real user in prod. This user is asking about a defective product, but your test suite only covers late returns.'}
+                                    </Note>
+                                </div>
                             </div>
                         </Stage>
                     </Cell>
                     <Cell row={4}>
-                        <Connector locked={steps.online < 1}>Your agent responds to the user</Connector>
+                        <Connector locked={steps.online < 1}>
+                            {state.shipped
+                                ? 'Your fixed agent responds to the user'
+                                : 'Your agent responds to the user'}
+                        </Connector>
                     </Cell>
                     <Cell row={5}>
                         <Stage
@@ -672,7 +741,7 @@ export default function EvalsPlayground(): JSX.Element {
                                 placeholder="Waiting for the app’s response…"
                                 note="Captured from production."
                             >
-                                {CASES.live.output}
+                                {state.shipped ? CASES.saved.output : CASES.live.output}
                             </Output>
                         </Stage>
                     </Cell>
@@ -734,25 +803,19 @@ export default function EvalsPlayground(): JSX.Element {
                         stepLocked={resultsLocked}
                         state={state}
                         waiting="Waiting for the evaluation results."
-                        done="Recorded in PostHog. Inspect the trace and track real-world patterns."
+                        done={
+                            state.shipped
+                                ? 'Recorded in PostHog. The fix holds up on real traffic.'
+                                : 'Recorded in PostHog. Inspect the trace and track real-world patterns.'
+                        }
                     />
                 </div>
-                {/* Close the loop: the failing live request becomes an offline test case. */}
-                {steps.online === 3 && (
+                {/* Close the loop: the live request becomes an offline test, then the fix ships. */}
+                {(steps.online === 3 || state.saved) && (
                     <div className="mt-4">
                         {/* The page's main takeaway, so it leads in bold. */}
-                        <p className="m-0 mb-1 text-base font-bold">
-                            {state.saved && steps.offline === 3
-                                ? 'Your offline tests are stronger.'
-                                : 'Strengthen your offline tests.'}
-                        </p>
-                        <Note>
-                            {!state.saved
-                                ? 'Bring this unexpected production request into your test suite. Save it as a test case, fix your prompt, and rerun it offline. That closes the loop, so the same failure can’t ship again.'
-                                : steps.offline < 3
-                                ? 'Saved to your test suite as a PostHog dataset. Rerun the offline track above with your fixed prompt.'
-                                : 'Saved and passing. This case now guards against regressions every time your suite runs.'}
-                        </Note>
+                        <p className="m-0 mb-1 text-base font-bold">{loop.title}</p>
+                        <Note>{loop.note}</Note>
                         {!state.saved ? (
                             <div className="mt-4">
                                 <OSButton
@@ -766,8 +829,22 @@ export default function EvalsPlayground(): JSX.Element {
                                     Add the live request to your test suite
                                 </OSButton>
                             </div>
+                        ) : steps.offline === 3 && !state.shipped ? (
+                            <div className="mt-4">
+                                <OSButton
+                                    variant="primary"
+                                    size="md"
+                                    // Loops back: the next request arrives at the top of the online lane.
+                                    icon={<IconRefresh />}
+                                    iconPosition="right"
+                                    onClick={shipFix}
+                                >
+                                    Ship the fix to production
+                                </OSButton>
+                            </div>
                         ) : (
-                            steps.offline === 3 && (
+                            state.shipped &&
+                            steps.online === 3 && (
                                 <div className="mt-4">
                                     <OSButton variant="secondary" size="md" icon={<IconRefresh />} onClick={startOver}>
                                         Start over
