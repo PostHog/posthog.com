@@ -211,7 +211,9 @@ Opportunities track potential deals in Salesforce. Managing opportunities effect
 
 New Revenue: Select this type when engaging with a customer who has never paid us before. This includes new customers and startup customers transitioning to a paid plan for the first time.
 
-New Revenue – Existing Customer: Choose this type for additional credits to a customer who is already paying us. This includes upsells, cross sells, or expansion within the same account.
+New Revenue – Existing Customer: Choose this type for upsells, cross sells, or expansion within the same account.
+
+Credit Top Up: Choose this type for a mid-contract credit purchase from an existing annual contract customer (for example, they bought $50k in credits, then later want an additional $30k before the term ends). Only annual contract Types apply to this record type; see [Opportunity stages](#opportunity-stages) below for its simplified stages.
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
@@ -296,6 +298,13 @@ Exit criteria:
 > **Duplicate opportunities should be deleted, not marked as Closed Lost.** A duplicate isn't a real loss, so marking it Closed Lost pollutes our loss data and skews win/loss reporting. Delete the duplicate record instead. Only use Closed Lost when a genuine opportunity didn't work out.
 
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
+
+The Credit Top Up record type uses a simplified 4-stage process instead, since these are typically faster deals within an existing relationship:
+
+1. Identified
+2. Commercial Agreement
+3. Closed Won (100%)
+4. Closed Lost (0%) - The Loss Reason field is required for any opportunity marked as Closed Lost.
 
 ### Forecast categories
 
