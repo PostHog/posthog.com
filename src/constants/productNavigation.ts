@@ -32,10 +32,11 @@ export const BROWSE_TOOLS_HANDLES = [
 export const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
     // MCP Analytics belongs in Analyze – add it here once its product page ships
     { label: 'Analyze', handles: ['product_analytics', 'web_analytics', 'ai_observability'] },
-    { label: 'Observe', handles: ['session_replay', 'replay_vision', 'error_tracking', 'logs', 'traces'] },
+    { label: 'Sync', handles: ['data_warehouse', 'data_pipelines', 'endpoints'] },
+    { label: 'Observe', handles: ['session_replay', 'replay_vision', 'error_tracking'] },
+    { label: 'Monitor', handles: ['logs', 'traces'] },
     { label: 'Deploy', handles: ['feature_flags', 'experiments'] },
     { label: 'Manage', handles: ['surveys', 'support', 'workflows_emails'] },
-    { label: 'Sync', handles: ['data_warehouse', 'data_pipelines', 'endpoints'] },
 ]
 
 // Non-product pages that appear in the product navigation
