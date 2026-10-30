@@ -73,8 +73,14 @@ function withSiteTheme<Props extends ThemedProps>(
         const frame = React.useRef<HTMLDivElement>(null)
         const siteTheme = useSiteChartTheme(frame)
         const theme = themeOverride ?? siteTheme
+        const { height, fill } = props as { height?: unknown; fill?: unknown }
+        const reservedHeight = typeof height === 'number' && fill !== true ? height : undefined
         return (
-            <div ref={frame} className={cn('flex min-w-0 flex-col text-primary', chartTokens, className)}>
+            <div
+                ref={frame}
+                className={cn('flex min-w-0 flex-col text-primary', chartTokens, className)}
+                style={reservedHeight === undefined ? undefined : { minHeight: reservedHeight }}
+            >
                 {theme && (
                     <QuillChart
                         {...(props as unknown as Props)}

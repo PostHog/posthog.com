@@ -29,19 +29,32 @@ const Root = React.forwardRef<HTMLDivElement, BannerRootProps>(function BannerRo
     const action = parts.find((child) => React.isValidElement(child) && child.type === Action)
     const body = parts.filter((child) => child !== icon && child !== close && child !== title && child !== action)
     const frame = React.useRef<HTMLDivElement>(null)
+    const dismissed = React.useRef(false)
+    const collapsing = React.useRef<Animation | null>(null)
+    React.useEffect(
+        () => () => {
+            const animation = collapsing.current
+            if (!animation) return
+            animation.onfinish = null
+            animation.cancel()
+        },
+        []
+    )
     const collapse = React.useCallback((onCollapsed: () => void) => {
+        if (dismissed.current) return
+        dismissed.current = true
         const element = frame.current
         if (!element || prefersReducedMotion()) {
             onCollapsed()
             return
         }
-        const animation = element.animate(
+        const animation = (collapsing.current = element.animate(
             [
                 { height: `${element.offsetHeight}px`, opacity: 1, overflow: 'hidden' },
                 { height: '0px', opacity: 0, overflow: 'hidden' },
             ],
             { duration: HEIGHT_CHANGE_MS, easing: heightChangeEasing, fill: 'forwards' }
-        )
+        ))
         animation.onfinish = onCollapsed
     }, [])
     return (
