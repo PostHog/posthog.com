@@ -13,7 +13,6 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 type Lane = 'offline' | 'online'
 type Scorer = 'judge' | 'code' | 'sentiment'
-type Verdict = 'pass' | 'fail'
 type ScoreKind = 'pass' | 'fail' | 'tone'
 
 const CASES = {
@@ -51,24 +50,27 @@ const SCORERS: Record<Scorer, { label: string; criterion: string; caption: strin
     },
 }
 
-const ONLINE_CAPTIONS: Record<Scorer, Record<Verdict, string>> = {
+// Each evaluator type reaches its own verdict on the live case.
+const ONLINE_RESULTS: Record<Scorer, { label: string; kind: ScoreKind; caption: string }> = {
     judge: {
-        fail: 'Fail: it ignores the defect and applies the ordinary return rule.',
-        pass: 'Pass: the judge accepts the answer, so this defect case slips through unnoticed.',
+        label: 'Fail ↘',
+        kind: 'fail',
+        caption: 'Fail: it ignores the defect and applies the ordinary return rule.',
     },
     code: {
-        pass: 'Pass: the answer mentions “30 days”. A narrow rule can pass even when the answer is wrong.',
-        fail: 'Fail: the rule flags this answer, so it shows up for review in PostHog.',
+        label: 'Pass ✓',
+        kind: 'pass',
+        caption: 'Pass: the answer mentions “30 days”. A narrow rule can pass even when the answer is wrong.',
     },
     sentiment: {
-        fail: 'Fail: the user sounds frustrated, so the conversation gets flagged.',
-        pass: 'Pass: the tone is treated as acceptable, so nothing gets flagged.',
+        label: 'Negative ↘',
+        kind: 'fail',
+        caption: 'Negative: the user sounds frustrated, so the conversation gets flagged.',
     },
 }
 
 const SCORE_LABEL: Record<string, string> = {
     pass: 'Pass ✓',
-    fail: 'Fail ↘',
     true: 'True ✓',
     neutral: 'Neutral',
 }
@@ -98,16 +100,12 @@ const initialState = {
     origin: 'real' as 'real' | 'synthetic',
     store: 'code' as 'code' | 'posthog',
     scorers: { offline: 'judge', online: 'judge' } as Record<Lane, Scorer>,
-    verdicts: { judge: 'fail', code: 'pass', sentiment: 'fail' } as Record<Scorer, Verdict>,
 }
 type State = typeof initialState
 
 function score(lane: Lane, state: State): { label: string; kind: ScoreKind } {
     const scorer = state.scorers[lane]
-    if (lane === 'online') {
-        const verdict = state.verdicts[scorer]
-        return { label: SCORE_LABEL[verdict], kind: verdict }
-    }
+    if (lane === 'online') return ONLINE_RESULTS[scorer]
     if (scorer === 'sentiment') return { label: SCORE_LABEL.neutral, kind: 'tone' }
     return { label: scorer === 'code' ? SCORE_LABEL.true : SCORE_LABEL.pass, kind: 'pass' }
 }
@@ -119,7 +117,7 @@ function caption(lane: Lane, state: State): string {
         return lane === 'offline'
             ? 'Scores the answer using the input, output, tool call, and reference answer.'
             : 'Scores the answer using the input, output, and tool call. Production requests have no reference answer.'
-    if (lane === 'online' && step >= 2) return ONLINE_CAPTIONS[scorer][state.verdicts[scorer]]
+    if (lane === 'online' && step >= 2) return ONLINE_RESULTS[scorer].caption
     if (lane === 'online' && scorer === 'judge') return 'It ignores the defect and applies the ordinary return rule.'
     return SCORERS[scorer].caption
 }
@@ -327,14 +325,12 @@ function Evaluator({
     state,
     onScorer,
     onAdvance,
-    children,
 }: {
     lane: Lane
     where: Where
     state: State
     onScorer: (scorer: Scorer) => void
     onAdvance: () => void
-    children?: React.ReactNode
 }): JSX.Element {
     return (
         <Stage lane={lane} index={2} step={state.steps[lane]} where={where} title="Evaluator" onAdvance={onAdvance}>
@@ -345,7 +341,6 @@ function Evaluator({
                 options={scorerOptions}
                 onChange={(value) => onScorer(value as Scorer)}
             />
-            {children}
             <div className="mt-3 flex items-baseline gap-2 text-sm leading-relaxed">
                 <span className="shrink-0 text-secondary">Check</span>
                 <p className="m-0">{SCORERS[state.scorers[lane]].criterion}</p>
@@ -457,8 +452,6 @@ export default function EvalsPlayground(): JSX.Element {
             scorers: { ...s.scorers, [lane]: scorer },
             steps: { ...s.steps, [lane]: Math.min(s.steps[lane], 2) },
         }))
-    const setVerdict = (verdict: Verdict) =>
-        setState((s) => ({ ...s, verdicts: { ...s.verdicts, [s.scorers.online]: verdict } }))
     const startOver = () => {
         setState((s) => ({ ...s, steps: initialState.steps, origin: 'real', store: 'code' }))
         root.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -476,8 +469,8 @@ export default function EvalsPlayground(): JSX.Element {
             <CalloutBox type="action" icon="IconCursorClick" title="Before you ship, or after?">
                 <div className="flex items-start gap-4 pt-3">
                     <p className="m-0 flex-1">
-                        Offline evals test your changes on saved cases before they go live. Online evals grade the real thing as it happens."
-                        Pick a path below and see what each one catches.
+                        Offline evals test your changes on saved cases before they go live. Online evals grade the real
+                        thing as it happens." Pick a path below and see what each one catches.
                     </p>
                     <HedgehogJudge size={112} className="hidden h-auto shrink-0 -mt-10 @md:block" />
                 </div>
@@ -491,7 +484,7 @@ export default function EvalsPlayground(): JSX.Element {
                     </Cell>
                     <Cell row={2}>
                         <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
-                            Like unit / integration tests for your AI.
+                            Like unit / integration tests for your AI.{' '}
                             <b className="text-primary">Run a test suite on your laptop or in your CI.</b>
                         </p>
                     </Cell>
@@ -590,8 +583,8 @@ export default function EvalsPlayground(): JSX.Element {
                     </Cell>
                     <Cell row={2}>
                         <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
-                            Real users go beyond your finite test suite. Online brings real requests your suite may have
-                            missed. <b className="text-primary">Monitor their interactions in PostHog.</b>
+                            Real users go beyond your finite test suite.{' '}
+                            <b className="text-primary">Monitor their interactions in PostHog.</b>
                         </p>
                     </Cell>
                     <Cell row={3}>
@@ -645,18 +638,7 @@ export default function EvalsPlayground(): JSX.Element {
                             state={state}
                             onScorer={(scorer) => setScorer('online', scorer)}
                             onAdvance={() => advance('online')}
-                        >
-                            <Choice
-                                label="Your score"
-                                title="Online score"
-                                value={state.verdicts[state.scorers.online]}
-                                options={[
-                                    { value: 'pass', label: 'Pass' },
-                                    { value: 'fail', label: 'Fail' },
-                                ]}
-                                onChange={(verdict) => setVerdict(verdict as Verdict)}
-                            />
-                        </Evaluator>
+                        />
                     </Cell>
                 </section>
             </div>
@@ -714,7 +696,9 @@ export default function EvalsPlayground(): JSX.Element {
             <div className="mt-6 flex flex-col gap-2 rounded border border-yellow bg-yellow/15 p-6 @xl:flex-row @xl:items-center @xl:gap-6">
                 <HedgehogResearch size={128} className="h-auto w-20 shrink-0 @xl:order-last @xl:w-32" />
                 <div className="min-w-0 flex-1">
-                    <h2 className="m-0 mb-1.5 text-xl font-bold">'It works on my computer' doesn’t apply to your agent</h2>
+                    <h2 className="m-0 mb-1.5 text-xl font-bold">
+                        'It works on my computer' doesn’t apply to your agent
+                    </h2>
                     <p className="m-0 text-base text-secondary">
                         Don’t let your agent run wild without running evals first.
                     </p>
