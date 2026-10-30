@@ -160,4 +160,4 @@ The formal engagement didn't go ahead, and we didn't deliver any work.
 
 A [retro](#retro) on a lost engagement is optional. Consider one when the reason it was lost could teach us something, for example if pricing, scoping, legal, or a product gap blocked the engagement.
 
-At the end of each quarter, we may also run a wider retro across all completed engagements and lost opportunities from that quarter, to help set objectives and improvements for the next one.
+At the end of each quarter, we may also run a wider retro across all closed engagements from that quarter (completed, partial scope, canceled, assisted, and lost), to help set objectives and improvements for the next one.
