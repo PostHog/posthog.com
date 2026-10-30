@@ -5,7 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
-# TODO: add featuredImage (bare Cloudinary URL, no transform segment) and featuredImageType: full
+featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/Self_driving_pricing_1x_d2d6846f08.png
+featuredImageType: full
 author:
     - joe-martin
 category: PostHog news
