@@ -87,10 +87,59 @@ config.pushIdentityProvider = { distinctId, appId, completion ->
 }
 ```
 
+## Reading link and group from the payload
+
+When you configure **Link** or **Group** on a push step, those values arrive in the notification's data payload under the `link` and `group` keys. Your app reads them to handle navigation or grouping.
+
+Unlike iOS, Android doesn't group notifications automatically using the `group` value. If you want to bundle notifications, read the `group` key and implement your own grouping logic.
+
+In a `FirebaseMessagingService`, read the values from `remoteMessage.data`:
+
+```kotlin
+class MyFirebaseMessagingService : FirebaseMessagingService() {
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        val link = remoteMessage.data["link"]
+        val group = remoteMessage.data["group"]
+
+        // Use link for navigation when the user taps the notification
+        // Use group for custom notification bundling
+    }
+}
+```
+
+When a user taps a notification that cold-starts the app, read the values from the launching intent:
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    val link = intent.getStringExtra("link")
+    val group = intent.getStringExtra("group")
+
+    if (link != null) {
+        // Navigate to the destination
+    }
+}
+```
+
+For a tap while the app is running, read from `onNewIntent`:
+
+```kotlin
+override fun onNewIntent(intent: Intent) {
+    super.onNewIntent(intent)
+    PostHogAndroid.capturePushNotificationOpened(intent)
+
+    val link = intent.getStringExtra("link")
+    if (link != null) {
+        // Navigate to the destination
+    }
+}
+```
+
 ## Troubleshooting
 
-| Issue | Check |
-| --- | --- |
-| Token never registers | Confirm `firebase-messaging` is on the classpath and your Firebase setup (`google-services.json`) is in place, and that you forward rotated tokens from `onNewToken`. |
-| Push doesn't arrive | Confirm the Firebase project on your Workflows channel matches your app, and the user granted the `POST_NOTIFICATIONS` permission. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |
+| Issue                                       | Check                                                                                                                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Token never registers                       | Confirm `firebase-messaging` is on the classpath and your Firebase setup (`google-services.json`) is in place, and that you forward rotated tokens from `onNewToken`. |
+| Push doesn't arrive                         | Confirm the Firebase project on your Workflows channel matches your app, and the user granted the `POST_NOTIFICATIONS` permission.                                    |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification).             |
