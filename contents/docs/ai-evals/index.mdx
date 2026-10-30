@@ -180,24 +180,18 @@ Existing evaluations without an explicit method selection continue using automat
 
 ### Setting a reasoning level
 
-When using **LLM with explanation** with an Anthropic or OpenAI reasoning model, a brain button appears next to the model selector. Click it to set how much the judge reasons before delivering a verdict.
+When you use **LLM with explanation** with an Anthropic or OpenAI reasoning model, a brain button appears next to the model selector. Select it to choose how much the judge reasons before it gives a verdict: **Minimal**, **Low**, **Medium**, or **High**.
 
-The available levels are:
+**Model default** sends no level, so the model uses its own default. Many current models already reason at about a medium level by default, so choosing **Medium** may not change anything.
 
-- **Model default** – Uses the model's built-in reasoning behavior. No reasoning level is sent.
-- **Minimal** – Least reasoning effort.
-- **Low** – Light reasoning.
-- **Medium** – Moderate reasoning.
-- **High** – Most reasoning effort.
+Higher levels cost more and take longer, and they don't always change the verdict. Try a level on a sample of your data before you switch an evaluation over.
 
-Higher levels give the judge more room to think through complex criteria, but cost more and take longer. Use lower levels for faster, simpler evaluations.
+Each provider applies the level differently:
 
-**How it works per provider:**
+- **Anthropic:** Claude models before 4.6 get a thinking budget of 1,024 to 8,192 tokens, depending on the level. Newer models get adaptive thinking at that effort. Claude has no minimal level, so **Minimal** becomes **Low**.
+- **OpenAI:** PostHog sets `reasoning_effort`. Only the original GPT-5 models accept **Minimal**. Other models use **Low** instead.
 
-- **Anthropic** – Claude models before version 4.6 receive a thinking budget in tokens (1,024 to 8,192 depending on the level). Newer models use adaptive thinking with the specified effort, and `minimal` maps to `low` because Claude has no minimal effort level.
-- **OpenAI** – Sets `reasoning_effort` on the request. Only the original GPT-5 models accept `minimal`; other reasoning models map it to `low`.
-
-The button only appears for supported reasoning models. Selecting a model without reasoning support clears the level, and the API rejects a reasoning level for unsupported models or decision model judges.
+The button only appears for models that support a reasoning level. If you switch to a model without support, the level is cleared. The API rejects a reasoning level for those models and for the **Decision model** judge method.
 
 ### Creating an LLM judge evaluation
 
