@@ -33,13 +33,9 @@ Marketers asked PostHog AI about revenue more than founders did (1.42% of prompt
 
 In aggregate, Tuesday is the busiest prompting day of the week, and the peak hour to prompt is 11 AM local time. Conclusion(?): PostHog AI pairs nicely with your second coffee. 
 
-![219 prompts by one user in a single day. A record, surprisingly, not held by a PostHog employee. We hope they took a coffee break.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_by_one_user_in_one_day_56d7f323b1.png)
-
 ## Prompters mind their manners (mostly) 
 
 People treat PostHog AI like a new coworker. That is to say, formal at first, then friendly, then a bit rude. 15% of people said "please" at least once. Only 2.7% of prompters ever said thanks (including thanks, thank you, thx, ty). Month to month, politeness stays flat. But people loosen up the more they use PostHog AI: by their 101st to 500th prompt, they say please twice as often as in their first prompt, and they swear four times as often.
-
-![Sales folks are the most polite: 4.4% of their prompts include "please", compared with 3.0% for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/polite_by_role_88a3d38e5a.png)
 
 In fact, founders seem a bit stressed. They swear at PostHog AI the most (3x the rate of product managers). In the past 12 months, there were 6,716 apologies to the AI, 2,887 f-bombs, 1,037 "wtf"s and 4,324 all-caps rants.
 
@@ -59,13 +55,13 @@ Even though more than 4 in 10 prompts have no capital letters, and sometimes con
 
 One prompt in four was a question. 8% started with a specific request ("show me", "create"), and 6% with "can you" or "could you". 56,548 prompts were a greenlight to whatever PostHog AI suggested, saying only "yes", "ok" or "go ahead". 
 
-![2.8 prompts per conversation on average. The longest conversation had 259 prompts, and we hope it ended well.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_per_conversation_d974ecc20a.png)
-
 A lot of people asked about PostHog Dashboards (more than 53,600). Next were session replay (45.1k), funnels (40.0k) and general web traffic (31.5k). Other popular topics included feature flags, retention, surveys, experiments, and error tracking. 
 
 ## All roles ask data questions
 
 People with a data role are the heaviest PostHog AI users: an average of 29 prompts per person. When digging into the data, people asked about drops in their metrics 2.3x more than spikes. 
+
+![2.8 prompts per conversation on average. The longest conversation had 259 prompts, and we hope it ended well.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_per_conversation_d974ecc20a.png)
 
 Founders ask about "the last 24 hours" or "right now" 2.5x more often than data people do. Marketers ask for "all time" and "top 10" more than anyone else.
 
@@ -83,6 +79,8 @@ People prompted PostHog AI every single day of the year. The longest streak of c
 
 Compared with a normal day, New Year's Day 2026 was the quietest day of the year, with only 29% of the people of a normal Thursday. Plenty of people were still prompting, though. Over the past year, 1,218 people sent the exact same prompt 5 or more times in one day. It wasn’t Groundhog Day (or maybe it was?).
 
+![219 prompts by one user in a single day. A record, surprisingly, not held by a PostHog employee. We hope they took a coffee break.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_by_one_user_in_one_day_56d7f323b1.png)
+
 ## What each role actually asks
 
 * **Founders:** "Is anyone real, and are they paying?" Their signature phrases are *hard paywall, RevenueCat, Lovable app, running ads, exclude myself, real people, users yesterday, week growth*. They ask about retention and churn more than any other role.  
@@ -92,6 +90,8 @@ Compared with a normal day, New Year's Day 2026 was the quietest day of the year
 * **Sales:** customer research. *Top users, most active, power users, company name, email domain, find recordings.* They use session replay more than any other role, and experiments the least.  
 * **Product managers:** *adoption rate, NPS survey, test group, entry points, details page.*  
 * **Leadership:** *traffic sources, website visitors, total revenue, conversion rates, stacked bar.*
+
+![Sales folks are the most polite: 4.4% of their prompts include "please", compared with 3.0% for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/polite_by_role_88a3d38e5a.png)
 
 ## How we pulled this data
 
