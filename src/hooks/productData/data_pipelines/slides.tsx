@@ -34,7 +34,7 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Configure sources, transformations, and destinations from the Data pipelines page, then watch logs
+                    Configure sources, transformations, and destinations, then watch logs
                     and metrics for each one.
                 </p>
                 {list([
@@ -134,7 +134,7 @@ export const topFeatures: CarouselSlide[] = [
         icon: <IconDownload className="size-5" />,
         progressBar: 'bg-purple',
         layout: 'stack',
-        heading: 'Sync data in from hundreds of tools and databases',
+        heading: 'Import data from hundreds of tools and databases',
         description: (
             <>
                 <p>
