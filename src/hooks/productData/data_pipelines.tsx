@@ -57,11 +57,11 @@ export const dataPipelines = {
     overview: {
         title: 'Move your data anywhere',
         description:
-            'Sync data from hundreds of tools and databases, clean it up as it arrives, and send it wherever it needs to go. In real time or on a schedule.',
+            'Sync data from hundreds of tools and databases, clean it up as it arrives, and send it wherever it needs to go. In real time, or on a schedule.',
         eli5: (
             <>
                 <p>
-                    Data pipelines is how you move data from one place to another. Bring revenue and CRM data from tools
+                    Data Pipelines moves data from one place to another seamlessly. Bring revenue and CRM data from tools
                     like Stripe and HubSpot into PostHog, change events as they arrive, and send them to Slack, your
                     CRM, or your warehouse.
                 </p>
@@ -199,15 +199,15 @@ export const dataPipelines = {
             ['Data Engineers', 'Replace a separate ELT, CDP, and reverse ETL vendor with a single tool'],
             [
                 'Product Engineers',
-                'Send key events to Slack, Intercom, or an internal service over webhooks, without a queue',
+                'Send events to Slack, Intercom, or an internal service over webhooks, without a queue',
             ],
             [
                 'Growth & Marketing',
-                'Send conversions to ad platforms and keep CRM contacts up to date with product usage as it happens',
+                'Send conversions to ad platforms and keep CRM contacts up to date with product usage',
             ],
             [
                 'Finance & RevOps',
-                "Sync Stripe and CRM data next to product data, and use PostHog's BI tools to build dashboards",
+                "Sync Stripe and CRM data with product data. Use PostHog to build dashboards",
             ],
             [
                 'Security & Compliance',
