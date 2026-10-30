@@ -104,15 +104,18 @@ WITH
 SELECT e.issue, a.name, e.hits, e.distinct_users,
        f.all_events,
        round(e.issue_share, 3) AS issue_share,
-       round(f.fleet_share, 4) AS fleet_share
+       round(f.fleet_share, 4) AS fleet_share,
+       round(e.issue_share / f.fleet_share, 1) AS concentration
 FROM errs e
 INNER JOIN fleet f ON f.gk = e.gk
 INNER JOIN system.accounts a ON a.external_id = e.gk
 WHERE JSONExtractString(a.properties, 'stripe_customer_id') != ''
-ORDER BY e.issue, issue_share DESC
+-- Most concentrated pairs first, with an explicit limit so the default of 100 rows can't cut them off.
+ORDER BY concentration DESC
+LIMIT 500
 ```
 
-`issue_share` well above `fleet_share` is the finding. Equal is noise.
+`issue_share` well above `fleet_share`, so a `concentration` well above 1, is the finding. Equal is noise.
 
 ## What a good report says
 
