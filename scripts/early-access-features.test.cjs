@@ -74,10 +74,8 @@ function mount(t, sdk) {
         })
         return exports
     }
-    const usePostHog = load('src/hooks/usePostHog.ts', {})
     const { useEarlyAccessFeatures } = load('src/hooks/useEarlyAccessFeatures.ts', {
         react: React,
-        './usePostHog': usePostHog,
         gatsby: { graphql: () => '', useStaticQuery: () => ({ allEarlyAccessFeature: { nodes: [] } }) },
     })
     let state

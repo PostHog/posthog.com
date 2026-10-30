@@ -17,6 +17,9 @@ export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 const GATSBY_SOURCE_GIT_CACHE_DIR = path.resolve(__dirname, '../.cache/gatsby-source-git')
 const BRANCH_MANIFEST_FILE = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, '.branch-manifest.json')
 
+// Download the region-independent release artifact. Runtime regions and proxies come from data-asset-host.
+const POSTHOG_BOOTSTRAP_URL = 'https://us-assets.i.posthog.com/static/1/loader-bootstrap.js'
+
 /**
  * Invalidates the gatsby-source-git cache if the configured branch has changed.
  * This prevents stale docs from being served when switching GATSBY_POSTHOG_BRANCH.
@@ -86,7 +89,7 @@ async function downloadPostHogBootstrap(): Promise<string> {
         try {
             // A Request bypasses the URL-only development cache for this mutable asset.
             const response = await fetch(
-                new Request('https://us-assets.i.posthog.com/static/1/loader-bootstrap.js', {
+                new Request(POSTHOG_BOOTSTRAP_URL, {
                     cache: 'no-store',
                     signal: AbortSignal.timeout(30000),
                 })
