@@ -6688,6 +6688,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Is PostHog warehouse native?',
+                    url: '/docs/data-warehouse/warehouse-native',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                },
+                {
                     name: 'Setup',
                 },
                 {
