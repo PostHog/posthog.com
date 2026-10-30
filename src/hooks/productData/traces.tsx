@@ -101,6 +101,7 @@ export const traces = {
     ],
     overview: {
         title: 'Find the span that broke, then fix it',
+        description: '"Find spans with a duration over 2 seconds since the last deploy"',
         eli5: 'A trace times one request through every service it touches. Open the waterfall and there’s the slow query six services deep, or the async job a stack trace gives up on. Traces come in over the same OpenTelemetry setup as Logs, so one install covers both. Traces get you to where a request went wrong, and the logs from that span tell you why.',
     },
     screenshots: {
