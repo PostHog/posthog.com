@@ -128,6 +128,7 @@ export const webAnalytics = {
     ],
     overview: {
         title: 'Privacy-focused web analytics',
+        description: '"Show me the most visited landing pages in the last 30 days"',
         eli5: 'Web Analytics is a pre-built dashboard for website traffic – visitors, pageviews, sessions, bounce rate, referrers, UTMs, and Core Web Vitals – without the GA4 maze. Drop in a snippet (or use a no-code install), get real-time data, and optionally skip cookies entirely. Same events power product analytics and session replay when you want to go deeper.',
         textColor: 'text-[#063619]', // tw
     },
