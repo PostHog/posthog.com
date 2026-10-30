@@ -258,15 +258,15 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'PostHog Slack',
-            link: '/slack',
-            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
-        },
-        {
-            type: 'item',
             label: 'PostHog MCP',
             link: '/mcp',
             icon: <Icons.IconPlug className="size-4 text-gray" />,
+        },
+        {
+            type: 'item',
+            label: 'PostHog Slack',
+            link: '/slack',
+            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
         },
         ...PRODUCT_CATEGORIES.flatMap(({ label, handles }) => [
             { type: 'separator' },
