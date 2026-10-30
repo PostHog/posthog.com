@@ -111,6 +111,8 @@ You can set properties and options in several places. When the same key is set i
 
 Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
 
+**Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. To change a setting in the hook, edit `options`: a legacy option property the hook adds doesn't replace an option that's already set.
+
 A few details:
 
 - A value from a lower layer only fills keys you didn't set higher up. This is a change: before v1, some SDKs let global values overwrite the ones you passed on the call.
