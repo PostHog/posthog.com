@@ -120,11 +120,46 @@ config.pushIdentityProvider = (distinctId, appId) async {
 
 `pushIdentityProvider` is a Dart callback with no `Info.plist` or manifest equivalent. If your app uses `com.posthog.posthog.AUTO_INIT`, set it to `false` and call `Posthog().setup()` explicitly, otherwise the provider is never installed.
 
+## Reading link and group from the payload
+
+When you configure **Link** or **Group** on a push step, those values arrive in the notification payload under the `link` and `group` keys. Your app reads them and handles navigation or grouping.
+
+On iOS, the `group` value also sets the thread ID, so notifications with the same group stack together automatically. On Android, your app implements grouping if needed.
+
+Read the values from the notification payload using Firebase Messaging:
+
+```dart
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+// Handle tap when the app is in the background
+FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  final link = message.data['link'];
+  final group = message.data['group'];
+
+  if (link != null) {
+    // Navigate to the destination
+  }
+});
+
+// Handle tap when the app was closed
+final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+if (initialMessage != null) {
+  final link = initialMessage.data['link'];
+  final group = initialMessage.data['group'];
+
+  if (link != null) {
+    // Navigate to the destination
+  }
+}
+```
+
+The `link` and `group` values are strings. If the fields are empty on the push step, these keys aren't present in the payload.
+
 ## Troubleshooting
 
-| Issue | Check |
-| --- | --- |
-| Token never registers | Confirm push is set up in your app and the user granted notification permission. On Android, confirm `firebase-messaging` is on the classpath (`firebase_messaging` sets this up). Any manual `registerPushNotificationToken` call must come after `setup()` completes. |
-| Push doesn't arrive | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app. |
-| `$push_notification_opened` never fires | On iOS, confirm your `AppDelegate` sets `UNUserNotificationCenter.current().delegate`. On Android, confirm the notification is sent through FCM (detection keys on the `google.message_id` intent extra), and that your launcher activity still has `android:launchMode="singleTop"`, without which the system resumes the task instead of delivering the tap. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |
+| Issue                                       | Check                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Token never registers                       | Confirm push is set up in your app and the user granted notification permission. On Android, confirm `firebase-messaging` is on the classpath (`firebase_messaging` sets this up). Any manual `registerPushNotificationToken` call must come after `setup()` completes.                                                                                        |
+| Push doesn't arrive                         | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app.                                                                                                                                                                                                                                                       |
+| `$push_notification_opened` never fires     | On iOS, confirm your `AppDelegate` sets `UNUserNotificationCenter.current().delegate`. On Android, confirm the notification is sent through FCM (detection keys on the `google.message_id` intent extra), and that your launcher activity still has `android:launchMode="singleTop"`, without which the system resumes the task instead of delivering the tap. |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification).                                                                                                                                                                                                      |
