@@ -117,4 +117,4 @@ The **Logs** tab on an endpoint's page shows one log entry per execution. Each e
 
 Both successful (`INFO`) and failed (`ERROR`) runs appear in the logs, including rejected requests that fail validation (for example, an invalid `refresh` value). Filter by log level or search by free text to find specific entries.
 
-Each log entry's instance ID matches the `execution_id` returned in the [run response](#response-format), so you can trace a specific API response back to its log entry.
+For a successful run, the log entry's instance ID matches the `execution_id` in the [run response](#response-format). Use this ID to find the log entry for a result.
