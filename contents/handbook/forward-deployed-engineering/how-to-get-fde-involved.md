@@ -6,7 +6,7 @@ showTitle: true
 
 This page is for customer success managers, technical account managers (TAM), and anyone sitting on a customer who needs hands-on help setting up PostHog. It covers how to pull in a forward deployed engineer (FDE), and, just as often, how to sort the problem out without us. 
 
-New to FDE? Start with the [overview](/handbook/forward-deployed-engineering/overview). For our engagement lifecycle, see [how we work](/handbook/forward-deployed-engineering/how-we-work).
+New to FDE? Start with the [overview](/handbook/forward-deployed-engineering/overview). For our engagement lifecycle, see [engagement lifecycle](/handbook/forward-deployed-engineering/fde-engagement-lifecycle).
 
 ## First, try to self-serve
 
@@ -24,7 +24,7 @@ We also have a growing library of **[PostHog skills](https://github.com/PostHog/
 
 For the smaller questions that come up along the way, **PostHog AI** and the **PostHog Slack app** handle most of them without needing to pull in a person.
 
-## Self-serve and price our standard FDE packages
+## Self-serve and price our standard packages
 
 For certain types of FDE engagements, TAEs / TAMs can self-serve and price standard packages without needing to wait for FDE to scope it out manually. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
 
