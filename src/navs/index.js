@@ -8317,6 +8317,10 @@ export const docsMenu = {
                             name: 'Flutter',
                             url: '/docs/workflows/push-notifications/flutter',
                         },
+                        {
+                            name: 'Push step settings',
+                            url: '/docs/workflows/push-notifications/push-step-options',
+                        },
                     ],
                 },
                 {
