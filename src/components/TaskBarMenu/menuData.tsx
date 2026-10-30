@@ -19,7 +19,7 @@ import {
 import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
-import { buildProductMenuItems } from 'constants/productNavigation'
+import { PRODUCT_CATEGORIES, buildProductMenuItems } from 'constants/productNavigation'
 import { TWIG_URL } from '../../constants'
 import Stickers from 'components/Stickers/Index'
 
@@ -236,19 +236,15 @@ const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuIte
         }
     })
 
-// Products menu groups, in display order. Labels and icons come from product data.
-const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
-    // MCP Analytics belongs in Analyze – add it here once its product page ships
-    { label: 'Analyze', handles: ['product_analytics', 'web_analytics', 'ai_observability'] },
-    { label: 'Observe', handles: ['session_replay', 'replay_vision', 'error_tracking', 'logs', 'traces'] },
-    { label: 'Deploy', handles: ['feature_flags', 'experiments'] },
-    { label: 'Manage', handles: ['surveys', 'support', 'workflows_emails'] },
-    { label: 'Sync', handles: ['data_warehouse', 'data_pipelines', 'endpoints'] },
-]
-
 // Build Products menu items
 const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
+        ...PRODUCT_CATEGORIES.flatMap(({ label, handles }, index) => [
+            ...(index > 0 ? [{ type: 'separator' }] : []),
+            { type: 'label', label },
+            ...buildProductMenuItems(handles, allProducts),
+        ]),
+        { type: 'separator' },
         { type: 'label', label: 'Apps' },
         {
             type: 'item',
@@ -258,21 +254,16 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'PostHog MCP',
+            label: 'MCP',
             link: '/mcp',
             icon: <Icons.IconPlug className="size-4 text-gray" />,
         },
         {
             type: 'item',
-            label: 'PostHog Slack',
+            label: 'Slack',
             link: '/slack',
             icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
         },
-        ...PRODUCT_CATEGORIES.flatMap(({ label, handles }) => [
-            { type: 'separator' },
-            { type: 'label', label },
-            ...buildProductMenuItems(handles, allProducts),
-        ]),
     ]
 
     return items
@@ -419,7 +410,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'PostHog Research',
+                    label: 'Research',
                     link: '/research',
                     icon: <Icons.IconBrain className="size-4 text-purple" />,
                 },
