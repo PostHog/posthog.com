@@ -35,7 +35,7 @@ We hit other bottlenecks too, like fetching lots of data from S3 without async f
 
 ## DuckLake is built for compatibility, not scale
 
-[DuckLake](https://ducklake.select/2025/05/27/ducklake-01/) follows the same principles as DuckDB: keep things simple and run on almost any setup. That works well up to a point, but at PostHog's scale, we needed something designed for distributed scale from the start.
+To use DuckDB as a fully-fledged data warehouse, we installed the [DuckLake](https://ducklake.select/2025/05/27/ducklake-01/) extension by default. It is a new lakehouse format from the same creators and follows the same principles as DuckDB: keep things simple and run on almost any setup. That works well up to a point, but at PostHog's scale, we needed something designed for distributed scale from the start.
 
 DuckLake's catalog schema has to stay portable across many SQL databases, which limits engine-specific optimizations. At our scale, a single-table write could take more than three minutes. Every commit re-read the statistics for the entire catalog.
 
