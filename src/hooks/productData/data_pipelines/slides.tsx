@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconBolt, IconBrowser, IconCode, IconDownload, IconPlug, IconUpload } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
+import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import useProduct from 'hooks/useProduct'
 import PlatformInstall from 'components/PlatformInstall'
@@ -144,7 +145,19 @@ export const topFeatures: CarouselSlide[] = [
                 {list([
                     {
                         label: 'Managed sources',
-                        description: 'Stripe, HubSpot, Salesforce, Zendesk, Postgres, MySQL, BigQuery, and many more.',
+                        description: (
+                            <>
+                                Stripe, HubSpot, Salesforce, Zendesk, Postgres, MySQL, BigQuery, and{' '}
+                                <Link
+                                    to="/docs/data-pipelines/sources"
+                                    className="font-bold underline"
+                                    state={{ newWindow: true }}
+                                >
+                                    many more
+                                </Link>
+                                .
+                            </>
+                        ),
                     },
                     {
                         label: 'Incremental and CDC',
