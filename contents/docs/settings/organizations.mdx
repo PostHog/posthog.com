@@ -64,6 +64,18 @@ This setting is particularly useful for organizations with GDPR compliance requi
 
 Individual projects can override this organization default by configuring their own IP data capture setting in **Settings** > **Project** > **General** under the **IP data capture configuration** setting.
 
+### Events retention
+
+Organization admins can set a default events retention window (in months) that applies to every project in the organization that doesn't have its own window. Find this under [**Settings** > **Organization** > **General** > **Events retention**](https://app.posthog.com/settings/organization-details#organization-events-retention).
+
+The window must fall between 1 month and the maximum your plan allows (1 year on the free plan, 7 years on paid plans). Only organization admins can change this setting – other members can view it but not edit.
+
+> **Warning:** Events older than the configured window are permanently deleted during the monthly cleanup and can't be restored. Saving a shorter window shows a confirmation dialog because the deletion is irreversible.
+
+If you remove the organization's window, projects without their own window fall back to your plan's maximum retention period.
+
+Individual projects can override the organization's window in [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). For more details, see [events data retention](/docs/data/events-retention).
+
 ### Notifications
 
 By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
