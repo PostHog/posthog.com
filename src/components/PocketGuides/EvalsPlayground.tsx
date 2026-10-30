@@ -42,7 +42,7 @@ const SCORERS: Record<Scorer, { label: string; criterion: string; caption: strin
     code: {
         label: 'Code',
         criterion: 'Does the answer mention “30 days”?',
-        caption: 'A narrow rule: both can pass even when one answer is wrong.',
+        caption: 'A narrow rule: can pass even when answer is wrong.',
     },
     sentiment: {
         label: 'Sentiment',
@@ -74,7 +74,7 @@ const SCORE_LABEL: Record<string, string> = {
 }
 
 const ACTIONS: Record<Lane, string[]> = {
-    offline: ['Run your agent on this case', 'Send to your test runner', 'Report scores to PostHog'],
+    offline: ['Run your agent on this case', 'Send to your evaluator runner', 'Report scores to PostHog'],
     online: ['Let your agent respond', 'Trace it into PostHog', 'Record scores in PostHog'],
 }
 
@@ -145,7 +145,7 @@ function StepNumber({ n, current = false }: { n: number; current?: boolean }): J
 /** Where a step runs. Shown inside each step, so the steps need no wrapper box. */
 const WHERE = {
     local: { icon: <IconLaptop />, label: 'Your local machine / CI' },
-    runner: { icon: <IconTerminal />, label: 'Your test runner' },
+    runner: { icon: <IconTerminal />, label: 'Your evaluator runner' },
     app: { icon: <IconServer />, label: 'Your application' },
     posthog: { icon: <IconLogomark />, label: 'PostHog' },
 }
@@ -531,8 +531,8 @@ export default function EvalsPlayground(): JSX.Element {
                                 <div className="mt-3">
                                     <Note>
                                         {state.origin === 'real'
-                                            ? 'This is a saved test case.'
-                                            : 'This is a synthetic test case.'}{' '}
+                                            ? 'This is a test case you got from a real user input.'
+                                            : 'This is a test case that you made up.'}{' '}
                                         {state.store === 'posthog'
                                             ? 'It’s stored as a PostHog dataset and fetched by your local / CI runner.'
                                             : 'It’s defined in your code and loaded by your test runner.'}
