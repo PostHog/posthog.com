@@ -220,3 +220,69 @@ test('workflow scan steps report findings but preserve execution failures', (t) 
         }
     }
 })
+
+test('moving snippet findings to another importing page blocks the PR', (t) => {
+    const old = {
+        file: 'contents/docs/_snippets/shared.mdx',
+        page: 'https://posthog.com/docs/first',
+        brokenLink: './missing#section',
+        brokenUrl: 'https://posthog.com/docs/missing#section',
+        line: 5,
+    }
+    const moved = { ...old, page: 'https://posthog.com/docs/second' }
+    const unchanged = { ...old, page: 'https://posthog.com/docs/third' }
+    for (const kind of ['page', 'anchor']) {
+        const baseline = scan(t, kind === 'page' ? [old, unchanged] : [], kind === 'anchor' ? [old, unchanged] : [])
+        const shifted = { ...unchanged, line: 50 }
+        const directory = scan(t, kind === 'page' ? [moved, shifted] : [], kind === 'anchor' ? [moved, shifted] : [])
+        const result = compareReports(directory, baseline)
+        assert.deepEqual(
+            result.newFindings.map((item) => item.page),
+            [moved.page]
+        )
+        assert.deepEqual(
+            result.resolvedFindings.map((item) => item.page),
+            [old.page]
+        )
+        assert.deepEqual(
+            result.existingFindings.map((item) => item.page),
+            [unchanged.page]
+        )
+        const cli = spawnSync(
+            process.execPath,
+            [path.join(__dirname, 'link-check-report.js'), directory, `--compare-base=${baseline}`],
+            { encoding: 'utf8' }
+        )
+        assert.equal(cli.status, 1, cli.stdout + cli.stderr)
+    }
+})
+
+test('workflow concurrency cancels only superseded runs of the same PR', () => {
+    const workflow = fs.readFileSync(path.join(__dirname, '../.github/workflows/internal-links-check.yml'), 'utf8')
+    const block = workflow.match(/^concurrency:\n((?: {4}[^\n]*\n)+)/m)?.[1]
+    assert.ok(block, 'Workflow concurrency must be configured')
+    const group = block.match(/group: (.*)/)[1]
+    const cancel = block.match(/cancel-in-progress: (.*)/)[1]
+    const evaluate = (template, github) =>
+        template.replace(/\$\{\{(.*?)\}\}/g, (_, expression) =>
+            require('node:vm').runInNewContext(expression, { github })
+        )
+    const context = (event, number, run) => ({
+        workflow: 'Check internal links',
+        event_name: event,
+        event: { pull_request: number ? { number } : undefined },
+        run_id: run,
+    })
+    const first = context('pull_request', 10, 100)
+    const next = context('pull_request', 10, 101)
+    const other = context('pull_request', 11, 102)
+    assert.equal(evaluate(group, first), evaluate(group, next))
+    assert.notEqual(evaluate(group, first), evaluate(group, other))
+    assert.equal(evaluate(cancel, first), 'true')
+    for (const event of ['schedule', 'workflow_dispatch']) {
+        const manual = context(event, undefined, 100)
+        assert.equal(evaluate(cancel, manual), 'false')
+        assert.notEqual(evaluate(group, manual), evaluate(group, first))
+        assert.notEqual(evaluate(group, manual), evaluate(group, context(event, undefined, 101)))
+    }
+})

@@ -115,7 +115,7 @@ function compareReports(directory, baseline, summaryFile) {
             ),
         ]
     }
-    const key = (item) => JSON.stringify([item.kind, item.file, item.brokenLink])
+    const key = (item) => JSON.stringify([item.kind, item.file, item.brokenLink, item.page || null])
     const base = findings(baseline)
     const remaining = new Map()
     for (const item of base) remaining.set(key(item), [...(remaining.get(key(item)) || []), item])
