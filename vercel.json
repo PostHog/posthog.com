@@ -6586,19 +6586,19 @@
         },
         {
             "source": "/customer-data-infrastructure/:path*",
-            "destination": "/data-stack"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-warehouse",
-            "destination": "/data-stack"
+            "destination": "/warehouse"
         },
         {
             "source": "/sql",
-            "destination": "/data-stack/sql-editor"
+            "destination": "/warehouse"
         },
         {
             "source": "/bi",
-            "destination": "/data-stack/business-intelligence"
+            "destination": "/warehouse"
         },
         {
             "source": "/docs/error-tracking/common-questions:ext(\\.md)?",
@@ -6904,7 +6904,7 @@
         },
         {
             "source": "/data-stack",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-stack/managed-warehouse",
@@ -6935,6 +6935,51 @@
             "destination": "/data-pipelines"
         },
         {
+            "source": "/context-warehouse",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/use-cases",
+            "destination": "/learn/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/the-context-gap-report",
+            "destination": "/blog/mind-the-context-gap",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/posthog-ai",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/data-modeling",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/sql-editor",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/business-intelligence",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/integrations-library",
+            "destination": "/docs/data-pipelines",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/:path*",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
             "destination": "/docs/data-warehouse/warehouse:ext?"
         },
@@ -6944,19 +6989,19 @@
         },
         {
             "source": "/customer-data-infrastructure/:path*",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-warehouse",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/sql",
-            "destination": "/context-warehouse/sql-editor"
+            "destination": "/warehouse"
         },
         {
             "source": "/bi",
-            "destination": "/context-warehouse/business-intelligence"
+            "destination": "/warehouse"
         },
         {
             "source": "/docs/experiments/create-experiments-mcp:ext(\\.md)?",
