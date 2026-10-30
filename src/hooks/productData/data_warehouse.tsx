@@ -44,7 +44,7 @@ export const dataWarehouse = {
     },
     overview: {
         title: 'All your data, one warehouse',
-        description: '"Which features do our highest paying customers use the most?"',
+        description: '"Show me which features paying customers use the most"',
         eli5: (
             <>
                 <p>
