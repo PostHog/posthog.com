@@ -85,6 +85,9 @@ jobs:
             - name: Check Twig guide integrations
               run: pnpm test:twig-integration
 
+            - name: Check shared window paths
+              run: pnpm test:internal-path
+
             - name: Build site
               run: pnpm build
               env:

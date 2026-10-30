@@ -7,10 +7,8 @@ import {
     IconDownload,
     IconGraph,
     IconNotebook,
-    IconShuffle,
     IconSparkles,
     IconTerminal,
-    IconUpload,
 } from '@posthog/icons'
 
 type IconComponent = React.ComponentType<{ className?: string }>
@@ -23,10 +21,10 @@ const catalogSections: {
         title: 'Data Sources',
         items: [
             {
-                name: 'Sources & Import (ELT)',
+                name: 'Data pipelines',
                 description:
-                    'Regularly sync or bulk import data into your warehouse from databases, ad platforms, SaaS tools, and more.',
-                url: '/context-warehouse/sources',
+                    'Sync data in from your tools and databases, transform events as they arrive, and send data to the rest of your stack.',
+                url: '/data-pipelines',
                 Icon: IconDownload,
                 iconColor: 'text-blue',
             },
@@ -37,21 +35,6 @@ const catalogSections: {
                 url: '/warehouse',
                 Icon: IconDatabase,
                 iconColor: 'text-purple',
-            },
-            {
-                name: 'CDP',
-                description:
-                    'Ingest, transform, and route data between PostHog and the rest of your stack in real time.',
-                url: '/cdp',
-                Icon: IconShuffle,
-                iconColor: 'text-red',
-            },
-            {
-                name: 'Batch Exports',
-                description: 'Send PostHog data to your existing warehouse or data lake on a schedule you control.',
-                url: '/context-warehouse/reverse-etl-export',
-                Icon: IconUpload,
-                iconColor: 'text-green',
             },
         ],
     },
@@ -101,14 +84,6 @@ const catalogSections: {
                 url: '/docs/notebooks',
                 Icon: IconNotebook,
                 iconColor: 'text-blue',
-            },
-            {
-                name: 'Reverse ETL',
-                description:
-                    'Send data back to the tools that need it. Keep your CRM, support tools, and marketing platforms in sync.',
-                url: '/context-warehouse/reverse-etl-export',
-                Icon: IconShuffle,
-                iconColor: 'text-purple',
             },
             {
                 name: 'Business Intelligence',
