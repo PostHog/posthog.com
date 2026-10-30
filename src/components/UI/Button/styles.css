@@ -10,6 +10,10 @@
     transition-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
+.ui-button-flat:not([data-disabled]):active {
+    transition-duration: 0ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .ui-button-face,
     .ui-button-flat {
