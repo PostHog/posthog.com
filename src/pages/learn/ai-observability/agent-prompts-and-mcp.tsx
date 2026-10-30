@@ -1,5 +1,5 @@
 import React from 'react'
-import AgentPromptsPage from 'components/PocketGuides/AgentPromptsPage'
+import AgentPromptsPage from 'components/Learn/AgentPromptsPage'
 
 const chapterPrompts = [
     {

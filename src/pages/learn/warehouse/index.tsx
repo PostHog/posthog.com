@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LearnPage from 'components/PocketGuides/LearnPage'
+import LearnPage from 'components/Learn/LearnPage'
 
 /** The Warehouse Learn tab opens on the first "Ask a quick question" chapter of the Data Stack guide. */
 export default function WarehouseLearn(): JSX.Element {

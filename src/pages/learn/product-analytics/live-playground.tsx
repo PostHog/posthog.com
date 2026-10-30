@@ -1,8 +1,8 @@
 import React from 'react'
-import LivePlaygroundPage, { SectionIntro } from 'components/PocketGuides/LivePlaygroundPage'
-import { SessionReplayLinkFigure } from 'components/PocketGuides/ProductAnalyticsIdentityExhibits'
-import { BookingStepsFigure } from 'components/PocketGuides/ProductAnalyticsTrendsFunnelsExhibits'
-import TwigEventFigure from 'components/PocketGuides/TwigEventFigure'
+import LivePlaygroundPage, { SectionIntro } from 'components/Learn/LivePlaygroundPage'
+import { SessionReplayLinkFigure } from 'components/Learn/TwigExhibits/ProductAnalyticsIdentityExhibits'
+import { BookingStepsFigure } from 'components/Learn/TwigExhibits/ProductAnalyticsTrendsFunnelsExhibits'
+import TwigEventFigure from 'components/Learn/TwigExhibits/TwigEventFigure'
 
 export default function ProductAnalyticsLearnByDoing(): JSX.Element {
     return (
