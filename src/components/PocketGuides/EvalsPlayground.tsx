@@ -6,10 +6,11 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 /**
- * Offline and online evals, side by side. Each lane walks Input (0) → Output (1) → Evaluator (2) → reported (3).
- * The box at a lane's step is current, earlier boxes are done, and later ones are locked.
- * Step 4 then closes the loop in two passes: the failing live request becomes an offline test case and passes there,
- * then the fix ships and the online lane passes on the next similar request.
+ * Offline and online evals, side by side and in lockstep. Both lanes walk Input (0) → Output (1) → Evaluator (2) →
+ * reported (3), moved on by one shared button under the current row.
+ * The boxes at the step are current, earlier boxes are done, and later ones are locked.
+ * Step 4 then closes the loop: the failing live request becomes an offline test case and the fix ships, so a second
+ * pass shows the saved case passing offline and the next similar request passing online.
  */
 
 type Lane = 'offline' | 'online'
@@ -96,10 +97,11 @@ const SCORE_LABEL: Record<string, string> = {
     neutral: 'Neutral',
 }
 
-const ACTIONS: Record<Lane, string[]> = {
-    offline: ['Run your agent on this case', 'Send to your evaluator runner', 'Report scores to PostHog'],
-    online: ['Let your agent respond', 'Trace it into PostHog', 'Record scores in PostHog'],
-}
+// The shared button under each row, by step.
+const ACTIONS = ['Run both agents', 'Evaluate both outputs', 'Report results to PostHog']
+
+// Names each box in narrow windows, where the lanes interleave row by row.
+const LANE_NAME: Record<Lane, string> = { offline: 'Offline', online: 'Online' }
 
 const TOOL_CALL = { name: 'lookup_policy()', result: 'returns: 30 days; defects: one-year warranty' }
 
@@ -115,38 +117,43 @@ const SCORE_STYLES: Record<ScoreKind | 'waiting', string> = {
 const PANEL = 'rounded border border-primary bg-accent dark:bg-accent-dark'
 // The eyebrow used by figure captions.
 const EYEBROW = 'text-xs font-bold uppercase tracking-wide'
+// Slow enough to notice after a scroll, for text the reader should not miss.
+const FADE_IN = 'animate-slide-up-fade-in [animation-duration:900ms] [animation-fill-mode:both]'
+// Step 4's conclusion and its button fade in together, a beat after the results open.
+const CONCLUSION_FADE = `${FADE_IN} [animation-delay:700ms]`
 
 const initialState = {
-    steps: { offline: 0, online: 0 } as Record<Lane, number>,
+    step: 0,
     origin: 'real' as 'real' | 'synthetic',
     store: 'code' as 'code' | 'posthog',
     scorers: { offline: 'judge', online: 'judge' } as Record<Lane, Scorer>,
-    /** The live request was saved as an offline test case ("Close the loop" in step 4). */
-    saved: false,
-    /** The fix shipped, so the online lane handles the next similar request. */
-    shipped: false,
+    /**
+     * Step 4 closed the loop: the live request is saved as an offline test case, and the fix shipped,
+     * so the online lane handles the next similar request.
+     */
+    fixed: false,
 }
 type State = typeof initialState
 
 function score(lane: Lane, state: State): { label: string; kind: ScoreKind } {
     const scorer = state.scorers[lane]
-    if (lane === 'online') return (state.shipped ? SHIPPED_RESULTS : ONLINE_RESULTS)[scorer]
+    if (lane === 'online') return (state.fixed ? SHIPPED_RESULTS : ONLINE_RESULTS)[scorer]
     // The saved case still carries the frustrated user's message.
     if (scorer === 'sentiment')
-        return state.saved ? ONLINE_RESULTS.sentiment : { label: SCORE_LABEL.neutral, kind: 'tone' }
+        return state.fixed ? ONLINE_RESULTS.sentiment : { label: SCORE_LABEL.neutral, kind: 'tone' }
     return { label: scorer === 'code' ? SCORE_LABEL.true : SCORE_LABEL.pass, kind: 'pass' }
 }
 
 function caption(lane: Lane, state: State): string {
     const scorer = state.scorers[lane]
-    const step = state.steps[lane]
+    const { step } = state
     if (step < 2 && scorer === 'judge')
         return lane === 'offline'
             ? 'Scores the answer using the input, output, tool call, and reference answer.'
             : 'Scores the answer using the input, output, and tool call. Production requests have no reference answer.'
-    if (lane === 'online' && step >= 2) return (state.shipped ? SHIPPED_RESULTS : ONLINE_RESULTS)[scorer].caption
+    if (lane === 'online' && step >= 2) return (state.fixed ? SHIPPED_RESULTS : ONLINE_RESULTS)[scorer].caption
     if (lane === 'online' && scorer === 'judge') return 'It ignores the defect and applies the ordinary return rule.'
-    if (state.saved && step >= 2 && scorer === 'judge')
+    if (state.fixed && step >= 2 && scorer === 'judge')
         return 'Pass: the fixed prompt applies the warranty to the defect, not the return window.'
     return SCORERS[scorer].caption
 }
@@ -186,7 +193,6 @@ function Stage({
     step,
     where,
     title,
-    onAdvance,
     children,
 }: {
     lane: Lane
@@ -194,15 +200,13 @@ function Stage({
     step: number
     where: Where
     title: string
-    onAdvance: () => void
     children: React.ReactNode
 }): JSX.Element {
     const current = index === step
     const { className: lockedClass = '', ...locked } = lockedProps(index > step)
     return (
         <article
-            data-current={current || undefined}
-            className={`flex h-full min-w-0 scroll-m-6 flex-col rounded border bg-primary p-4 ${
+            className={`h-full min-w-0 scroll-m-6 rounded border bg-primary p-4 ${
                 current ? 'border-orange' : 'border-primary'
             } ${lockedClass}`}
             {...locked}
@@ -210,24 +214,12 @@ function Stage({
             <EnvironmentLabel {...WHERE[where]} />
             <div className="mb-3 flex items-center gap-2">
                 <StepNumber n={index + 1} current={current} />
-                <h3 className="m-0 text-base font-bold">{title}</h3>
+                <h3 className="m-0 text-base font-bold">
+                    <span className="font-normal text-secondary @2xl:hidden">{LANE_NAME[lane]} · </span>
+                    {title}
+                </h3>
             </div>
             {children}
-            {current && (
-                // Pinned to the bottom, so the next action sits level across the two lanes.
-                <div className="mt-auto pt-4">
-                    <OSButton
-                        variant="primary"
-                        size="md"
-                        icon={<IconArrowRight />}
-                        iconPosition="right"
-                        onClick={onAdvance}
-                        data-action={lane}
-                    >
-                        {ACTIONS[lane][index]}
-                    </OSButton>
-                </div>
-            )}
         </article>
     )
 }
@@ -271,23 +263,37 @@ function Evidence({ label, children }: { label: string; children: React.ReactNod
 }
 
 /**
- * Both lanes share one set of rows (via subgrid), so Input, Output and Evaluator line up side by side.
- * Rows: 1 heading, 2 intro, 3 input, 4 arrow, 5 output, 6 arrow, 7 evaluator.
+ * In wide windows both lanes share one grid, so Input, Output and Evaluator line up side by side.
+ * Rows: 1 heading, 2 input, 3 button, 4 arrow, 5 output, 6 button, 7 arrow, 8 evaluator, 9 button.
+ * In narrow windows the cells stack in source order, so each row's offline box, online box, then button.
  * Literal classes, so Tailwind can see them.
  */
 const ROW = {
-    1: 'row-start-[1]',
-    2: 'row-start-[2]',
-    3: 'row-start-[3]',
-    4: 'row-start-[4]',
-    5: 'row-start-[5]',
-    6: 'row-start-[6]',
-    7: 'row-start-[7]',
+    1: '@2xl:row-start-[1]',
+    2: '@2xl:row-start-[2]',
+    3: '@2xl:row-start-[3]',
+    4: '@2xl:row-start-[4]',
+    5: '@2xl:row-start-[5]',
+    6: '@2xl:row-start-[6]',
+    7: '@2xl:row-start-[7]',
+    8: '@2xl:row-start-[8]',
+    9: '@2xl:row-start-[9]',
 }
 
 /** One row of a lane. */
-function Cell({ row, children }: { row: keyof typeof ROW; children: React.ReactNode }): JSX.Element {
-    return <div className={`col-start-1 min-w-0 ${ROW[row]}`}>{children}</div>
+function Cell({
+    lane,
+    row,
+    className = '',
+    children,
+}: {
+    lane: Lane
+    row: keyof typeof ROW
+    className?: string
+    children: React.ReactNode
+}): JSX.Element {
+    const column = lane === 'offline' ? '@2xl:col-start-1' : '@2xl:col-start-2'
+    return <div className={`min-w-0 ${column} ${ROW[row]} ${className}`}>{children}</div>
 }
 
 function EnvironmentLabel({ icon, label, color }: { icon: React.ReactNode; label: string; color: string }) {
@@ -300,7 +306,7 @@ function EnvironmentLabel({ icon, label, color }: { icon: React.ReactNode; label
 }
 
 function Result({ lane, state }: { lane: Lane; state: State }): JSX.Element {
-    const scored = state.steps[lane] >= 2
+    const scored = state.step >= 2
     const result = score(lane, state)
     return (
         <div
@@ -355,16 +361,14 @@ function Evaluator({
     where,
     state,
     onScorer,
-    onAdvance,
 }: {
     lane: Lane
     where: Where
     state: State
     onScorer: (scorer: Scorer) => void
-    onAdvance: () => void
 }): JSX.Element {
     return (
-        <Stage lane={lane} index={2} step={state.steps[lane]} where={where} title="Evaluator" onAdvance={onAdvance}>
+        <Stage lane={lane} index={2} step={state.step} where={where} title="Evaluator">
             <Choice
                 label="Type"
                 title={`${lane} evaluator`}
@@ -415,24 +419,20 @@ function Output({
 function Report({
     title,
     lane,
-    stepLocked,
     state,
     waiting,
     done,
 }: {
     title: string
     lane: Lane
-    /** The whole step is locked, so this result doesn't fade on its own as well. */
-    stepLocked: boolean
     state: State
     waiting: string
     done: string
 }): JSX.Element {
-    const reported = state.steps[lane] === 3
+    const reported = state.step === 3
     const result = score(lane, state)
-    const { className: lockedClass = '', ...locked } = lockedProps(!reported && !stepLocked)
     return (
-        <article className={`min-w-0 p-4 ${PANEL} ${lockedClass}`} {...locked}>
+        <article className={`min-w-0 p-4 ${PANEL}`}>
             <div className="flex items-center justify-between gap-2.5">
                 <h3 className="m-0 text-sm font-bold">{title}</h3>
                 <span
@@ -461,106 +461,76 @@ function LaneHeading({ id, title, tag }: { id: string; title: string; tag: strin
 
 export default function EvalsPlayground(): JSX.Element {
     const [state, setState] = useState(initialState)
-    // Bumped once the scroll back up a lane ends, to play the fade-in of its new request.
-    const [reveal, setReveal] = useState<Record<Lane, number>>({ offline: 0, online: 0 })
+    // Bumped once the scroll back up ends, to play the fade-in of the new requests.
+    const [reveal, setReveal] = useState(0)
     const root = useRef<HTMLDivElement>(null)
-    const { steps } = state
+    const { step } = state
 
-    const advance = (lane: Lane) => {
-        setState((s) => ({ ...s, steps: { ...s.steps, [lane]: Math.min(s.steps[lane] + 1, 3) } }))
-        // After the click, lead to the next thing to click.
+    const advance = () => {
+        setState((s) => ({ ...s, step: Math.min(s.step + 1, 3) }))
+        // After the click, lead to the next thing to click: the button under the next row, or under the results.
         requestAnimationFrame(() => {
             const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-            const action = root.current?.querySelector<HTMLElement>(`[data-current] [data-action="${lane}"]`)
+            const action = root.current?.querySelector<HTMLElement>('[data-action]')
             action?.focus({ preventScroll: true })
-            const view = action?.closest('article') ?? root.current?.querySelector('#reporting')
-            view?.scrollIntoView({ behavior, block: 'nearest' })
+            // The last button sits under the results box, so center it to keep the results in view above it.
+            action?.scrollIntoView({ behavior, block: action.dataset.action === 'loop' ? 'center' : 'nearest' })
         })
     }
-    const resetOffline = (patch: Partial<State>) =>
-        setState((s) => ({ ...s, ...patch, steps: { ...s.steps, offline: 0 } }))
+    // Both evaluators keep the same step, so a new type rescores in place.
     const setScorer = (lane: Lane, scorer: Scorer) =>
-        setState((s) => ({
-            ...s,
-            scorers: { ...s.scorers, [lane]: scorer },
-            steps: { ...s.steps, [lane]: Math.min(s.steps[lane], 2) },
-        }))
+        setState((s) => ({ ...s, scorers: { ...s.scorers, [lane]: scorer } }))
     const startOver = () => {
-        setState((s) => ({
-            ...s,
-            steps: initialState.steps,
-            origin: 'real',
-            store: 'code',
-            saved: false,
-            shipped: false,
-        }))
-        setReveal({ offline: 0, online: 0 })
+        setState((s) => ({ ...s, step: 0, origin: 'real', store: 'code', fixed: false }))
+        setReveal(0)
         root.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
-    // Restarts a lane with a new request, scrolls up to it, and fades the request in.
-    const loopBack = (lane: Lane, patch: Partial<State>) => {
-        setState((s) => ({ ...s, ...patch, steps: { ...s.steps, [lane]: 0 } }))
-        setReveal((r) => ({ ...r, [lane]: 0 }))
+    // The live request becomes a test case in a PostHog dataset and the fix ships. Both lanes go back to Input
+    // for a second pass, the page scrolls up to them, and the new requests fade in.
+    const closeLoop = () => {
+        setState((s) => ({ ...s, step: 0, origin: 'real', store: 'posthog', fixed: true }))
+        setReveal(0)
         requestAnimationFrame(() => {
-            const action = root.current?.querySelector<HTMLElement>(`[data-current] [data-action="${lane}"]`)
+            const action = root.current?.querySelector<HTMLElement>('[data-action="advance"]')
             action?.focus({ preventScroll: true })
-            action?.closest('article')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            root.current?.querySelector('#inputs')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             // Fade in when the scroll stops, so the change happens in view. Some browsers lack scrollend.
             let played = false
             const play = () => {
                 if (played) return
                 played = true
                 document.removeEventListener('scrollend', play, true)
-                setReveal((r) => ({ ...r, [lane]: r[lane] + 1 }))
+                setReveal((r) => r + 1)
             }
             document.addEventListener('scrollend', play, true)
             setTimeout(play, 1200)
         })
     }
-    // The live request becomes a test case in a PostHog dataset, and the offline lane reruns it.
-    const saveCase = () => loopBack('offline', { origin: 'real', store: 'posthog', saved: true })
-    // The fix ships, and the online lane handles the next similar request.
-    const shipFix = () => loopBack('online', { shipped: true })
 
-    const offlineCase = state.saved ? { ...CASES.live, ...CASES.saved } : CASES[state.origin]
-    // A new request stays hidden until the scroll up ends, then fades in.
-    const fadeIn = (active: boolean, lane: Lane) =>
-        !active
-            ? ''
-            : reveal[lane]
-            ? 'animate-slide-up-fade-in [animation-delay:300ms] [animation-duration:900ms] [animation-fill-mode:both]'
-            : 'opacity-0'
-    const savedFade = fadeIn(state.saved, 'offline')
-    const shippedFade = fadeIn(state.shipped, 'online')
+    const offlineCase = state.fixed ? { ...CASES.live, ...CASES.saved } : CASES[state.origin]
+    // The new requests stay hidden until the scroll up ends, then fade in one part at a time:
+    // offline input, its reference answer, then online input and its note. Delays are literal so Tailwind sees them.
+    const fixedFade = (delay: string) => (!state.fixed ? '' : reveal ? `${FADE_IN} ${delay}` : 'opacity-0')
 
-    // Where the loop stands, shown under the results.
-    const loop = !state.saved
-        ? {
-              title: 'Strengthen your offline tests.',
-              note: 'Bring this unexpected production request into your test suite. Save it as a test case, fix your prompt, and rerun it offline. That closes the loop, so the same failure can’t ship again.',
-          }
-        : steps.offline < 3
-        ? {
-              title: 'Strengthen your offline tests.',
-              note: 'Saved to your test suite as a PostHog dataset. Rerun the offline track above with your fixed prompt.',
-          }
-        : !state.shipped
-        ? {
-              title: 'Your offline tests are stronger.',
-              note: 'Saved and passing, so this case now guards against regressions. Ship the fix, and let online evals check it on real traffic.',
-          }
-        : steps.online < 3
-        ? {
-              title: 'Shipped to production.',
-              note: 'Run the online track above to see how your fixed agent handles the next similar request.',
-          }
-        : {
-              title: 'Both tracks pass.',
-              note: 'Offline evals guard against regressions before you ship. Online evals confirm the fix holds up in production.',
-          }
+    // The shared button under a row, shown while that row is current.
+    const advanceRow = (index: number, row: keyof typeof ROW) =>
+        step === index && (
+            <div className={`flex justify-center pt-4 @2xl:col-span-2 ${ROW[row]}`}>
+                <OSButton
+                    variant="primary"
+                    size="md"
+                    icon={<IconArrowRight className="rotate-90" />}
+                    iconPosition="right"
+                    onClick={advance}
+                    data-action="advance"
+                >
+                    {ACTIONS[index]}
+                </OSButton>
+            </div>
+        )
 
-    // Step 4 unlocks once either lane reports, and fades like any locked step until then.
-    const resultsLocked = steps.offline < 3 && steps.online < 3
+    // Step 4 unlocks once both lanes report, and fades like any locked step until then.
+    const resultsLocked = step < 3
     const { className: resultsLockedClass = '', ...resultsLockedAttrs } = lockedProps(resultsLocked)
 
     return (
@@ -577,28 +547,19 @@ export default function EvalsPlayground(): JSX.Element {
                 </div>
             </CalloutBox>
 
-            {/* Two lanes on shared rows; stacked in narrow windows. */}
+            {/* Both lanes in one grid: side by side in wide windows, interleaved row by row in narrow ones. */}
             <div className="grid gap-x-6 @2xl:grid-cols-2">
-                <section className="row-span-7 grid min-w-0 grid-rows-subgrid" aria-labelledby="offline-title">
-                    <Cell row={1}>
-                        <LaneHeading id="offline-title" title="Offline evals" tag="Test known cases" />
-                    </Cell>
-                    <Cell row={2}>
-                        <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
-                            Like unit / integration tests for your AI.{' '}
-                            <b className="text-primary">Run a test suite on your laptop or in your CI.</b>
-                        </p>
-                    </Cell>
-                    <Cell row={3}>
-                        <Stage
-                            lane="offline"
-                            index={0}
-                            step={steps.offline}
-                            where="local"
-                            title="Input"
-                            onAdvance={() => advance('offline')}
-                        >
-                            <div key={reveal.offline} className={savedFade}>
+                <Cell lane="offline" row={1}>
+                    <LaneHeading id="offline-title" title="Offline evals" tag="Test known cases" />
+                    <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
+                        Like unit / integration tests for your AI.{' '}
+                        <b className="text-primary">Run a test suite on your laptop or in your CI.</b>
+                    </p>
+                </Cell>
+                <Cell lane="offline" row={2}>
+                    <div id="inputs" className="h-full scroll-m-6">
+                        <Stage lane="offline" index={0} step={step} where="local" title="Input">
+                            <div key={reveal} className={fixedFade('[animation-delay:300ms]')}>
                                 <Message role="user">{offlineCase.input}</Message>
                             </div>
                             <div className="mt-4 border-t border-primary pt-4">
@@ -610,12 +571,10 @@ export default function EvalsPlayground(): JSX.Element {
                                         { value: 'real', label: 'Real examples' },
                                         { value: 'synthetic', label: 'Synthetic' },
                                     ]}
+                                    // Both cases get the same answer, so only the input changes. A saved case goes
+                                    // back to the start of the loop.
                                     onChange={(origin) =>
-                                        resetOffline({
-                                            origin: origin as State['origin'],
-                                            saved: false,
-                                            shipped: false,
-                                        })
+                                        setState((s) => ({ ...s, origin: origin as State['origin'], fixed: false }))
                                     }
                                 />
                                 <Choice
@@ -626,12 +585,12 @@ export default function EvalsPlayground(): JSX.Element {
                                         { value: 'code', label: 'Your code' },
                                         { value: 'posthog', label: 'PostHog' },
                                     ]}
-                                    onChange={(store) => resetOffline({ store: store as State['store'] })}
+                                    onChange={(store) => setState((s) => ({ ...s, store: store as State['store'] }))}
                                 />
                                 {/* Commentary goes after toggles, before data boxes. */}
                                 <div className="mt-3">
                                     <Note>
-                                        {state.saved
+                                        {state.fixed
                                             ? 'This is the production request that failed, now saved as a test case.'
                                             : state.origin === 'real'
                                             ? 'This is a test case you got from a real user input.'
@@ -641,130 +600,105 @@ export default function EvalsPlayground(): JSX.Element {
                                             : 'It’s defined in your code and loaded by your test runner.'}
                                     </Note>
                                 </div>
-                                <div key={reveal.offline} className={savedFade}>
+                                <div key={reveal} className={fixedFade('[animation-delay:800ms]')}>
                                     <Evidence label="Reference answer">{offlineCase.expected}</Evidence>
                                 </div>
                             </div>
                         </Stage>
-                    </Cell>
-                    <Cell row={4}>
-                        <Connector locked={steps.offline < 1}>
-                            {state.saved
-                                ? 'Prompt fixed · your agent reruns this test case'
-                                : 'Your agent runs on this test case'}
-                        </Connector>
-                    </Cell>
-                    <Cell row={5}>
-                        <Stage
-                            lane="offline"
-                            index={1}
-                            step={steps.offline}
-                            where="local"
-                            title="Output"
-                            onAdvance={() => advance('offline')}
-                        >
-                            <Output
-                                waiting={steps.offline === 0}
-                                placeholder="Waiting for a new test run…"
-                                note={state.saved ? 'Generated with your fixed prompt.' : 'Generated for this test.'}
-                            >
-                                {offlineCase.output}
-                            </Output>
-                        </Stage>
-                    </Cell>
-                    <Cell row={6}>
-                        <Connector locked={steps.offline < 2}>Pass input, output + tool call</Connector>
-                    </Cell>
-                    <Cell row={7}>
-                        <Evaluator
-                            lane="offline"
-                            where="runner"
-                            state={state}
-                            onScorer={(scorer) => setScorer('offline', scorer)}
-                            onAdvance={() => advance('offline')}
-                        />
-                    </Cell>
-                </section>
+                    </div>
+                </Cell>
 
-                <section
-                    className="row-span-7 mt-8 grid min-w-0 grid-rows-subgrid @2xl:mt-0"
-                    aria-labelledby="online-title"
-                >
-                    <Cell row={1}>
-                        <LaneHeading id="online-title" title="Online evals" tag="Discover missed cases" />
-                    </Cell>
-                    <Cell row={2}>
-                        <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
-                            Real users go beyond your finite test suite.{' '}
-                            <b className="text-primary">Monitor their interactions in PostHog.</b>
-                        </p>
-                    </Cell>
-                    <Cell row={3}>
-                        <Stage
-                            lane="online"
-                            index={0}
-                            step={steps.online}
-                            where="app"
-                            title="Input"
-                            onAdvance={() => advance('online')}
-                        >
-                            <div key={reveal.online} className={shippedFade}>
-                                <Message role="user">{state.shipped ? CASES.next.input : CASES.live.input}</Message>
-                                <div className="mt-4 border-t border-primary pt-4">
-                                    <Note>
-                                        {state.shipped
-                                            ? 'This is the next similar request from a real user, after you shipped the fix. It’s another defect with no receipt.'
-                                            : 'This is an unexpected request from a real user in prod. This user is asking about a defective product, but your test suite only covers late returns.'}
-                                    </Note>
-                                </div>
+                <Cell lane="online" row={1} className="mt-8 @2xl:mt-0">
+                    <LaneHeading id="online-title" title="Online evals" tag="Discover missed cases" />
+                    <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
+                        Real users go beyond your finite test suite.{' '}
+                        <b className="text-primary">Monitor their interactions in PostHog.</b>
+                    </p>
+                </Cell>
+                <Cell lane="online" row={2}>
+                    <Stage lane="online" index={0} step={step} where="app" title="Input">
+                        <div key={reveal} className={fixedFade('[animation-delay:1300ms]')}>
+                            <Message role="user">{state.fixed ? CASES.next.input : CASES.live.input}</Message>
+                        </div>
+                        <div className="mt-4 border-t border-primary pt-4">
+                            <div key={reveal} className={fixedFade('[animation-delay:1800ms]')}>
+                                <Note>
+                                    {state.fixed
+                                        ? 'Another user submits a similar request about a product defect. This time, you have an offline test for it.'
+                                        : 'This is an unexpected request from a real user in prod. This user is asking about a defective product, but your test suite only covers late returns.'}
+                                </Note>
                             </div>
-                        </Stage>
-                    </Cell>
-                    <Cell row={4}>
-                        <Connector locked={steps.online < 1}>
-                            {state.shipped
-                                ? 'Your fixed agent responds to the user'
-                                : 'Your agent responds to the user'}
-                        </Connector>
-                    </Cell>
-                    <Cell row={5}>
-                        <Stage
-                            lane="online"
-                            index={1}
-                            step={steps.online}
-                            where="app"
-                            title="Output"
-                            onAdvance={() => advance('online')}
+                        </div>
+                    </Stage>
+                </Cell>
+                {advanceRow(0, 3)}
+
+                <Cell lane="offline" row={4}>
+                    <Connector locked={step < 1}>
+                        {state.fixed
+                            ? 'Prompt fixed · your agent reruns this test case'
+                            : 'Your agent runs on this test case'}
+                    </Connector>
+                </Cell>
+                <Cell lane="offline" row={5}>
+                    <Stage lane="offline" index={1} step={step} where="local" title="Output">
+                        <Output
+                            waiting={step === 0}
+                            placeholder="Waiting for a new test run…"
+                            note={state.fixed ? 'Generated with your fixed prompt.' : 'Generated for this test.'}
                         >
-                            <Output
-                                waiting={steps.online === 0}
-                                placeholder="Waiting for the app’s response…"
-                                note="Captured from production."
-                            >
-                                {state.shipped ? CASES.saved.output : CASES.live.output}
-                            </Output>
-                        </Stage>
-                    </Cell>
-                    <Cell row={6}>
-                        <Connector locked={steps.online < 2}>
-                            AI Observability tracing captures input, output + tool calls in PostHog
-                        </Connector>
-                    </Cell>
-                    <Cell row={7}>
-                        <Evaluator
-                            lane="online"
-                            where="posthog"
-                            state={state}
-                            onScorer={(scorer) => setScorer('online', scorer)}
-                            onAdvance={() => advance('online')}
-                        />
-                    </Cell>
-                </section>
+                            {offlineCase.output}
+                        </Output>
+                    </Stage>
+                </Cell>
+                <Cell lane="online" row={4}>
+                    <Connector locked={step < 1}>
+                        {state.fixed ? 'Your fixed agent responds to the user' : 'Your agent responds to the user'}
+                    </Connector>
+                </Cell>
+                <Cell lane="online" row={5}>
+                    <Stage lane="online" index={1} step={step} where="app" title="Output">
+                        <Output
+                            waiting={step === 0}
+                            placeholder="Waiting for the app’s response…"
+                            note="Captured from production."
+                        >
+                            {state.fixed ? CASES.saved.output : CASES.live.output}
+                        </Output>
+                    </Stage>
+                </Cell>
+                {advanceRow(1, 6)}
+
+                <Cell lane="offline" row={7}>
+                    <Connector locked={step < 2}>Pass input, output + tool call</Connector>
+                </Cell>
+                <Cell lane="offline" row={8}>
+                    <Evaluator
+                        lane="offline"
+                        where="runner"
+                        state={state}
+                        onScorer={(scorer) => setScorer('offline', scorer)}
+                    />
+                </Cell>
+                <Cell lane="online" row={7}>
+                    <Connector locked={step < 2}>
+                        AI Observability tracing captures input, output + tool calls in PostHog
+                    </Connector>
+                </Cell>
+                <Cell lane="online" row={8}>
+                    <Evaluator
+                        lane="online"
+                        where="posthog"
+                        state={state}
+                        onScorer={(scorer) => setScorer('online', scorer)}
+                    />
+                </Cell>
+                {advanceRow(2, 9)}
             </div>
 
             <div className="grid grid-cols-2 gap-6" aria-hidden="true">
-                <Connector locked={steps.offline < 3}>Your runner reports the scores</Connector>
-                <Connector locked={steps.online < 3}>PostHog records the scores</Connector>
+                <Connector locked={resultsLocked}>Your runner reports the scores</Connector>
+                <Connector locked={resultsLocked}>PostHog records the scores</Connector>
             </div>
             <section
                 id="reporting"
@@ -788,11 +722,10 @@ export default function EvalsPlayground(): JSX.Element {
                     <Report
                         title="Offline evals"
                         lane="offline"
-                        stepLocked={resultsLocked}
                         state={state}
                         waiting="Waiting for your runner to report its results."
                         done={
-                            state.saved
+                            state.fixed
                                 ? 'Reported by your runner. The fix passes, and this case now guards against regressions.'
                                 : 'Reported by your runner. Compare test runs and catch regressions.'
                         }
@@ -800,64 +733,62 @@ export default function EvalsPlayground(): JSX.Element {
                     <Report
                         title="Online evals"
                         lane="online"
-                        stepLocked={resultsLocked}
                         state={state}
                         waiting="Waiting for the evaluation results."
                         done={
-                            state.shipped
+                            state.fixed
                                 ? 'Recorded in PostHog. The fix holds up on real traffic.'
                                 : 'Recorded in PostHog. Inspect the trace and track real-world patterns.'
                         }
                     />
                 </div>
-                {/* Close the loop: the live request becomes an offline test, then the fix ships. */}
-                {(steps.online === 3 || state.saved) && (
-                    <div className="mt-4">
+                {/* Close the loop: the live request becomes an offline test, the fix ships, and both lanes rerun. */}
+                {/* Fades in a beat after step 4 opens, so the conclusion gets read. */}
+                {step === 3 && (
+                    <div className={`mt-4 ${CONCLUSION_FADE}`}>
                         {/* The page's main takeaway, so it leads in bold. */}
-                        <p className="m-0 mb-1 text-base font-bold">{loop.title}</p>
-                        <Note>{loop.note}</Note>
-                        {!state.saved ? (
-                            <div className="mt-4">
-                                <OSButton
-                                    variant="primary"
-                                    size="md"
-                                    // Loops back: the request returns to the top of the offline lane.
-                                    icon={<IconRefresh />}
-                                    iconPosition="right"
-                                    onClick={saveCase}
-                                >
-                                    Add the live request to your test suite
-                                </OSButton>
-                            </div>
-                        ) : steps.offline === 3 && !state.shipped ? (
-                            <div className="mt-4">
-                                <OSButton
-                                    variant="primary"
-                                    size="md"
-                                    // Loops back: the next request arrives at the top of the online lane.
-                                    icon={<IconRefresh />}
-                                    iconPosition="right"
-                                    onClick={shipFix}
-                                >
-                                    Ship the fix to production
-                                </OSButton>
-                            </div>
-                        ) : (
-                            state.shipped &&
-                            steps.online === 3 && (
-                                <div className="mt-4">
-                                    <OSButton variant="secondary" size="md" icon={<IconRefresh />} onClick={startOver}>
-                                        Start over
-                                    </OSButton>
-                                </div>
-                            )
-                        )}
+                        <p className="m-0 mb-1 text-base font-bold">
+                            {state.fixed ? 'Both tracks pass.' : 'Strengthen your offline tests.'}
+                        </p>
+                        <Note>
+                            {state.fixed
+                                ? 'Offline evals guard against regressions before you ship. Online evals confirm the fix holds up in production.'
+                                : 'Turn a failed production request into an offline eval. Add it to your test suite and ship the fix to close the loop.'}
+                        </Note>
                     </div>
                 )}
             </section>
+            {/* Outside the box and centered, like the shared button under each row. */}
+            {step === 3 && (
+                <div className={`flex justify-center pt-4 ${CONCLUSION_FADE}`}>
+                    {state.fixed ? (
+                        <OSButton
+                            variant="secondary"
+                            size="md"
+                            icon={<IconRefresh />}
+                            onClick={startOver}
+                            data-action="loop"
+                        >
+                            Start over
+                        </OSButton>
+                    ) : (
+                        <OSButton
+                            variant="primary"
+                            size="md"
+                            // Matches the shared buttons under each row.
+                            icon={<IconArrowRight className="rotate-90" />}
+                            iconPosition="right"
+                            onClick={closeLoop}
+                            data-action="loop"
+                        >
+                            Add to offline evals
+                        </OSButton>
+                    )}
+                </div>
+            )}
 
             {/* Same cream as the "Test instructions" callout (CalloutBox type="action"). */}
-            <div className="mt-6 flex flex-col gap-2 rounded border border-yellow bg-yellow/15 p-6 @xl:flex-row @xl:items-center @xl:gap-6">
+            <div className="mt-16 flex flex-col gap-2 rounded border border-yellow bg-yellow/15 p-6 @xl:flex-row @xl:items-center @xl:gap-6">
                 <HedgehogResearch size={128} className="h-auto w-20 shrink-0 @xl:order-last @xl:w-32" />
                 <div className="min-w-0 flex-1">
                     <h2 className="m-0 mb-1.5 text-xl font-bold">
