@@ -47,6 +47,11 @@ export const doc: ComponentDoc = {
                     description: 'The meaning and color: brand orange, neutral, or destructive red.',
                 },
                 { name: 'onCopy', type: '() => void', description: 'Runs after a successful clipboard write.' },
+                {
+                    name: 'actionsRef',
+                    type: 'React.Ref<{ copy(): void }>',
+                    description: 'Gives a ref whose copy() copies the text without a click.',
+                },
             ],
         },
     ],

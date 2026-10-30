@@ -3,7 +3,7 @@ import { Drawer as BaseDrawer } from '@base-ui/react/drawer'
 import { cn } from '../../../utils'
 import { Dialog, scrollBodyRoot, scrollBodyViewport } from '../Dialog'
 import { ScrollArea } from '../ScrollArea'
-import { dialogBackdrop, dialogSurface } from '../styles'
+import { dialogBackdrop, dialogSurface, overlayLayer } from '../styles'
 
 type DrawerSwipeDirection = BaseDrawer.Popup.State['swipeDirection']
 
@@ -25,7 +25,7 @@ const drawerBackdrop = cn(
     `opacity-[calc(1_-_var(--drawer-swipe-progress))] data-[swiping]:duration-0 ${drawerTiming}`
 )
 
-const drawerViewport = 'fixed inset-0 z-50'
+const drawerViewport = `fixed inset-0 ${overlayLayer}`
 
 const drawerPopup = `${dialogSurface} absolute flex flex-col overflow-hidden transition-transform data-[swiping]:select-none ${drawerTiming}`
 

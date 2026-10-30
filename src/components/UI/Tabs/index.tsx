@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import { cn } from '../../../utils'
-import { focusRing, surfaceDivider } from '../styles'
+import { focusRing, scrollbarHidden, surfaceDivider } from '../styles'
 import {
     HEIGHT_CHANGE_MS,
     assignRef,
@@ -64,7 +64,7 @@ const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> &
 
 const Indicator = withClassName(
     BaseTabs.Indicator,
-    'pointer-events-none absolute -bottom-px left-0 h-0.5 w-[var(--active-tab-width)] bg-orange [transform:translateX(var(--active-tab-left))] transition-[transform,width,height] duration-200 ease-out data-[orientation=vertical]:-left-px data-[orientation=vertical]:top-0 data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:h-[var(--active-tab-height)] data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:[transform:translateY(var(--active-tab-top))] motion-reduce:transition-none'
+    'pointer-events-none absolute bottom-0 left-0 h-0.5 w-[var(--active-tab-width)] bg-orange [transform:translateX(var(--active-tab-left))] transition-[transform,width,height] duration-200 ease-out data-[orientation=vertical]:-left-px data-[orientation=vertical]:top-0 data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:h-[var(--active-tab-height)] data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:[transform:translateY(var(--active-tab-top))] motion-reduce:transition-none'
 )
 
 const List = React.forwardRef<HTMLDivElement, Omit<BaseTabs.List.Props, 'ref'>>(function TabsList(
@@ -77,10 +77,10 @@ const List = React.forwardRef<HTMLDivElement, Omit<BaseTabs.List.Props, 'ref'>>(
             ref={ref}
             className={mergeClassName(
                 cn(
-                    'relative flex shrink-0 gap-0.5 data-[orientation=vertical]:flex-col',
+                    `relative flex shrink-0 gap-0.5 data-[orientation=horizontal]:max-w-full data-[orientation=horizontal]:overflow-x-auto data-[orientation=vertical]:flex-col ${scrollbarHidden}`,
                     appearance === 'pane'
                         ? 'p-1'
-                        : `border-b data-[orientation=vertical]:border-b-0 data-[orientation=vertical]:border-l ${surfaceDivider}`
+                        : `shadow-[inset_0_-1px_0_rgb(var(--text-primary)/0.14)] data-[orientation=vertical]:border-l data-[orientation=vertical]:shadow-none ${surfaceDivider}`
                 ),
                 className
             )}
@@ -101,7 +101,8 @@ const tab = cn(
 
 const paneTab =
     'hover:bg-[rgb(var(--text-primary)/0.06)] data-[active]:bg-white/60 data-[active]:shadow-[inset_0_0_0_1px_rgb(var(--text-primary)/0.12),0_1px_0_rgb(var(--text-primary)/0.12),0_1px_2px_rgb(0_0_0/0.06)] dark:data-[active]:bg-white/[0.1]'
-const underlineTab = 'rounded-none bg-transparent text-secondary hover:text-primary data-[active]:text-primary'
+const underlineTab =
+    'rounded-none bg-transparent focus-visible:-outline-offset-2 text-secondary hover:text-primary data-[active]:text-primary'
 
 const label = 'col-start-1 row-start-1 flex items-center gap-2'
 

@@ -81,8 +81,14 @@ const Root = React.forwardRef<HTMLTableElement, TableRootProps>(function TableRo
     return (
         <TableContext.Provider value={context}>
             <div
+                tabIndex={0}
                 {...scrollProps}
-                className={cn(surfaceAppearances[appearance], 'overflow-auto text-primary', containerClassName)}
+                className={cn(
+                    surfaceAppearances[appearance],
+                    'overflow-auto text-primary',
+                    insetFocusRing,
+                    containerClassName
+                )}
             >
                 <table
                     {...props}

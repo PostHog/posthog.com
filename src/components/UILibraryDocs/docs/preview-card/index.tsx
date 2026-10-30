@@ -24,7 +24,8 @@ export const doc: ComponentDoc = {
         {
             id: 'delay',
             title: 'Open delay',
-            description: 'Cards open 600 ms after hover. Pass delay to PreviewCard.Trigger to change it.',
+            description:
+                'Pass delay to PreviewCard.Trigger to set how long the hover lasts before the card opens. This demo uses 200 ms.',
             Component: Delay,
             source: delaySource,
         },

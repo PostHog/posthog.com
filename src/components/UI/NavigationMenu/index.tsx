@@ -100,11 +100,12 @@ const Link = React.forwardRef<HTMLAnchorElement, BaseNavigationMenu.Link.Props>(
     )
 })
 
-const navigationPositioner = `${positionerLayer} h-[var(--positioner-height)] w-[var(--positioner-width)] max-w-[var(--available-width)] transition-[top,left,right,bottom] ${morphTiming} data-[instant]:transition-none`
+const navigationPositioner = `${positionerLayer} h-[var(--positioner-height)] max-h-[var(--available-height)] w-[var(--positioner-width)] max-w-[var(--available-width)] transition-[top,left,right,bottom] ${morphTiming} data-[instant]:transition-none`
 
-const navigationPopup = `${popupSurface} ${popupTransition} h-[var(--popup-height)] w-[var(--popup-width)] transition-[transform,opacity,width,height] ${morphTiming} data-[ending-style]:duration-150 data-[ending-style]:ease-out`
+const navigationPopup = `${popupSurface} ${popupTransition} h-[var(--popup-height)] max-h-[var(--available-height)] w-[var(--popup-width)] transition-[transform,opacity,width,height] ${morphTiming} data-[ending-style]:duration-150 data-[ending-style]:ease-out`
 
-const navigationViewport = 'relative h-full w-full overflow-hidden'
+const navigationViewport =
+    'relative h-full max-h-[calc(var(--available-height)-2px)] w-full overflow-y-auto overflow-x-hidden overscroll-contain'
 
 const keepPreferredSide: BaseNavigationMenu.Positioner.Props['collisionAvoidance'] = { side: 'none' }
 

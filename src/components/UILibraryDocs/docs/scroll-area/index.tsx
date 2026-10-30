@@ -56,7 +56,7 @@ export const doc: ComponentDoc = {
                     name: 'edgeFades',
                     type: 'boolean',
                     defaultValue: 'false',
-                    description: 'Adds 16px CSS masks at edges with more content. Supports both axes and RTL.',
+                    description: 'Adds 24px CSS masks at edges with more content. Supports both axes and RTL.',
                 },
             ],
         },

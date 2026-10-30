@@ -111,7 +111,7 @@ export function RoughAnnotation({
         const element = elementRef.current
         if (!element) return
 
-        const shouldShow = show ?? isVisible
+        const shouldShow = show ?? (animateOnScroll ? isVisible : true)
 
         let cancelled = false
         clearTimeout(showTimeoutRef.current ?? undefined)
@@ -184,6 +184,7 @@ export function RoughAnnotation({
         iterations,
         multiline,
         isVisible,
+        animateOnScroll,
         show,
         delay,
         prefersReducedMotion,

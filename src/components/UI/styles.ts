@@ -68,7 +68,9 @@ export const surfacePaddings = {
     lg: 'gap-4 p-6',
 } as const
 
-export const positionerLayer = 'z-50 outline-none'
+export const overlayLayer = 'z-[9999999999]'
+
+export const positionerLayer = `${overlayLayer} outline-none`
 
 export const popupArrow =
     "relative block h-1.5 w-3 overflow-clip data-[side=bottom]:top-[-6px] data-[side=left]:right-[-9px] data-[side=left]:rotate-90 data-[side=right]:left-[-9px] data-[side=right]:-rotate-90 data-[side=top]:bottom-[-6px] data-[side=top]:rotate-180 before:absolute before:bottom-0 before:left-1/2 before:h-[calc(6px*1.4142)] before:w-[calc(6px*1.4142)] before:border before:border-primary before:bg-primary before:content-[''] before:[transform:translate(-50%,50%)_rotate(45deg)]"
@@ -204,10 +206,9 @@ export const listItem =
 
 export const checkListItem = `grid grid-cols-[1rem_minmax(0,1fr)] pl-2 pr-4 data-[selected]:font-medium ${listItem}`
 
-export const dialogBackdrop =
-    'fixed inset-0 z-50 bg-black/25 transition-opacity duration-200 ease-[ease] data-[ending-style]:duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 motion-reduce:transition-none'
+export const dialogBackdrop = `fixed inset-0 ${overlayLayer} bg-black/25 transition-opacity duration-200 ease-[ease] data-[ending-style]:duration-150 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 motion-reduce:transition-none`
 
-export const dialogViewport = 'fixed inset-0 z-50 flex items-center justify-center p-4'
+export const dialogViewport = `fixed inset-0 ${overlayLayer} flex items-center justify-center p-4`
 
 export const dialogSurface = `${grainSurface} rounded-lg border border-primary bg-primary/80 backdrop-blur-3xl transform-gpu reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none text-primary outline-none ${overlayShadowLg}`
 

@@ -69,6 +69,13 @@ export const doc: ComponentDoc = {
                     defaultValue: "'md'",
                     description: 'Sets the text size, padding, and control height.',
                 },
+                {
+                    name: 'appearance',
+                    type: "'inset' | 'line'",
+                    defaultValue: "'inset'",
+                    description:
+                        'Sets the field shape. Keep inset for forms. Use line for light or inline editing, such as renaming in place, filters, and quick settings.',
+                },
             ],
         },
         {

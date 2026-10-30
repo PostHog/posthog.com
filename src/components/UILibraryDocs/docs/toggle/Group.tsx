@@ -16,11 +16,8 @@ function ViewSwitcher({ appearance, variant }: { appearance: ToggleAppearance; v
             appearance={appearance}
             variant={variant}
             value={view}
-            onValueChange={(next) => {
-                if (next.length > 0) {
-                    setView(next)
-                }
-            }}
+            onValueChange={setView}
+            required
             aria-label="View"
         >
             <Toggle value="list">List</Toggle>

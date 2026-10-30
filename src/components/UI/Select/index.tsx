@@ -25,16 +25,23 @@ const selectPositionerPropNames = [...positionerPropNames, 'alignItemWithTrigger
 const SizeContext = React.createContext<FieldSize>('md')
 const AppearanceContext = React.createContext<FieldAppearance>('inset')
 
-export type SelectRootProps = React.ComponentProps<typeof BaseSelect.Root> & {
+export type SelectRootProps<Value, Multiple extends boolean | undefined = false> = BaseSelect.Root.Props<
+    Value,
+    Multiple
+> & {
     size?: FieldSize
     appearance?: FieldAppearance
 }
 
-function Root({ size = 'md', appearance = 'inset', ...props }: SelectRootProps): JSX.Element {
+function Root<Value, Multiple extends boolean | undefined = false>({
+    size = 'md',
+    appearance = 'inset',
+    ...props
+}: SelectRootProps<Value, Multiple>): JSX.Element {
     return (
         <SizeContext.Provider value={size}>
             <AppearanceContext.Provider value={appearance}>
-                <BaseSelect.Root {...props} />
+                <BaseSelect.Root<Value, Multiple> {...props} />
             </AppearanceContext.Provider>
         </SizeContext.Provider>
     )

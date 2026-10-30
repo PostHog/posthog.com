@@ -66,7 +66,7 @@ const busyCursor = '[&[data-disabled][aria-busy=true]]:cursor-progress'
 
 const disabledFade = '[&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:opacity-50'
 
-const flatBase = `relative inline-flex min-w-0 max-w-full items-center justify-center rounded border border-transparent bg-transparent text-primary ui-button-flat hover:bg-[rgb(var(--text-primary)/0.06)] [&:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent skin-classic:border-b-3 ${busyCursor} ${focusRing}`
+const flatBase = `relative inline-flex min-w-0 max-w-full items-center justify-center rounded border border-transparent bg-transparent text-primary ui-button-flat hover:bg-[rgb(var(--text-primary)/0.06)] [&:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent ${busyCursor} ${focusRing}`
 
 const flatPadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-1 text-xs leading-4',
@@ -106,7 +106,7 @@ const flatGroupTones: Record<ButtonVariant, string> = {
 const flatSquarePadding: Record<ButtonSize, string> = { sm: 'p-[5px]', md: 'p-[9px]', lg: 'p-[11px]' }
 
 const flatSegment =
-    'rounded-none border-0 hover:bg-[rgb(var(--text-primary)/0.07)] data-[disabled]:hover:bg-transparent focus-visible:-outline-offset-2 skin-classic:border-b-0'
+    'rounded-none border-0 hover:bg-[rgb(var(--text-primary)/0.07)] data-[disabled]:hover:bg-transparent focus-visible:-outline-offset-2'
 
 const flatSegmentPadding: Record<ButtonSize, string> = { sm: 'px-2', md: 'px-2.5', lg: 'px-3' }
 
@@ -444,7 +444,7 @@ export function ButtonLink({
         <Link
             {...props}
             data-segment={shape.isSegment ? '' : undefined}
-            externalNoIcon={external}
+            externalNoIcon={external || props.target === '_blank'}
             contextMenu={contextMenu ?? !shape.isSegment}
             className={cn(frameClassName(shape), 'no-underline', className)}
         >

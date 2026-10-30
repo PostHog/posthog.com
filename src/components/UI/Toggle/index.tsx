@@ -22,7 +22,7 @@ export type ToggleProps = Omit<BaseToggle.Props, 'ref' | 'render' | 'className'>
 }
 
 export const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(function Toggle(
-    { appearance: ownAppearance = 'flat', variant: ownVariant = 'secondary', size = 'md', className, ...props },
+    { appearance: ownAppearance = 'raised', variant: ownVariant = 'secondary', size = 'md', className, ...props },
     ref
 ) {
     const group = React.useContext(ToggleGroupLookContext)

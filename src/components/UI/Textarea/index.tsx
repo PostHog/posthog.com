@@ -4,7 +4,13 @@ import { fieldAppearanceShape, textareaSizes, textInputFor } from '../styles'
 import type { FieldAppearance, FieldSize } from '../styles'
 import { assignRef, mergeClassName, useSmoothHeight } from '../utils'
 
-export type TextareaProps = Omit<BaseInput.Props, 'ref' | 'render' | 'type' | 'size'> &
+type TextareaEvents = Pick<
+    React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+    keyof React.DOMAttributes<HTMLTextAreaElement>
+>
+
+export type TextareaProps = Omit<BaseInput.Props, 'ref' | 'render' | 'type' | 'size' | keyof TextareaEvents> &
+    TextareaEvents &
     Pick<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'rows' | 'cols' | 'wrap'> & {
         size?: FieldSize
         appearance?: FieldAppearance
@@ -37,7 +43,7 @@ export const Textarea = React.forwardRef<HTMLElement, TextareaProps>(function Te
                 } ${fieldAppearanceShape[appearance]}`,
                 className
             )}
-            {...props}
+            {...(props as Omit<BaseInput.Props, 'ref'>)}
         />
     )
 })

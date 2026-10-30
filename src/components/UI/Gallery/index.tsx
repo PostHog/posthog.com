@@ -49,7 +49,7 @@ function Image({ item, enlarged = false }: { item: GalleryItem; enlarged?: boole
                 alt={item.alt}
                 width={item.width}
                 height={item.height}
-                loading={enlarged ? 'eager' : 'lazy'}
+                loading="lazy"
                 decoding="async"
                 className={cn(classes, item.imageDark && 'dark:hidden')}
             />
@@ -59,7 +59,7 @@ function Image({ item, enlarged = false }: { item: GalleryItem; enlarged?: boole
                     alt={item.alt}
                     width={item.width}
                     height={item.height}
-                    loading={enlarged ? 'eager' : 'lazy'}
+                    loading="lazy"
                     decoding="async"
                     className={cn(classes, 'hidden dark:block')}
                 />
