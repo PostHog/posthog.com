@@ -623,13 +623,13 @@ export const ProfessionalServices = () => {
                     <Deliverables
                         items={[
                             <>
-                                <Link to="/context-warehouse/sources" state={{ newWindow: true }}>
+                                <Link to="/data-pipelines" state={{ newWindow: true }}>
                                     <strong>Data sources</strong>
                                 </Link>{' '}
                                 pulled in and joined to your product data
                             </>,
                             <>
-                                <Link to="/cdp" state={{ newWindow: true }}>
+                                <Link to="/data-pipelines" state={{ newWindow: true }}>
                                     <strong>Pipeline destinations</strong>
                                 </Link>{' '}
                                 pushing to your CRM, data warehouse, or anywhere else
