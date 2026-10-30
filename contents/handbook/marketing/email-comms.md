@@ -4,13 +4,16 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Our email comms fall into broadcasts (one-off emails to specific lists, like a newsletter), campaigns (repeatable workflows that users move through), and API triggered emails (self-explanatory).
+We send emails in two ways: **broadcasts** (one-off email to an audience, once or on a schedule, like a newsletter) and workflows (automated, multi-step flows that people move through, triggered by an event, a schedule, or an API call).
 
 This page doesn't deal with [our build mode newsletter](https://newsletter.posthog.com/), which is sent through Substack and managed by the Content & Docs team. 
 
 ## We send email with PostHog Workflows
 
 We've moved all our email marketing out of Customer.io and into [PostHog Workflows](/docs/workflows). Workflows reads the product data we already have in PostHog, so we no longer send data to a third party before we can use it. That gives us much more data to target and personalize emails with, and more ways to combine email with the rest of PostHog.
+
+Before creating new transactional emails, check our Template library or ask `@PostHog` to confirm if there aren't any active workflows that serve a similar purpose. We try to avoid spamming users whenever possible, so keep in mind: 
+*updating an existing email >>>> adding another email*. 
 
 ## Treat emails as code
 
@@ -35,7 +38,17 @@ All new broadcasts and automations should use these defaults:
 
 - **Messaging limit:** Enable the default messaging limit, which ensures each user gets no more than one email every two days. Apply this limit to all campaigns and broadcasts, unless the message is urgent.
 - **UTM tracking:** Enable UTM tracking on all new broadcasts and automations, so we can measure what each email does. We have setup default UTM parameters in PostHog that should be applied automatically.
+### Conversion goals
 
+A good thing about using Workflows is that we can be very intentional about the goal we want that email to achieve. 
+
+Besides tracking open and click rates, having access to all of the PostHog data means we can track the thing that users do after they read your email. Workflows use [conversion goals](/docs/workflows/workflow-builder#conversion-goals) to measure it.
+
+Don’t treat it like a mandatory rule, but when creating a new email, it's helpful to ask yourself:
+
+> "What do I want customers to do after they read this?"
+
+Possibilities are endless. 
 ## Addressing emails
 
 We prefer marketing emails to come from a named person where possible, so users can reply with feedback. Only use generic addresses, such as hey@posthog.com, for very broad comms.
@@ -46,19 +59,25 @@ If you're sending the email and are happy to receive replies, feel free to set y
 
 ## Targeting emails
 
+A couple of changes that impact who we send our emails to:
 Since we started moving to Workflows, Workflows has automatically paused some broadcasts for loud comms, such as SDK update notices. Those broadcasts targeted huge numbers of users, and many of the email addresses are no longer in use. If this keeps happening, it harms our [sending reputation](/docs/workflows/sending-reputation) and our emails end up in spam.
 
 
-We solve this using the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, loading the toolbar, or creating a feature flag.
+
+The way users interact with PostHog is also changing. Previously, we relied on a `user has logged in` property to check if they were active. Now, users don't need to login at all to interact with their PostHog data, if they use our MCP, for example.
+
+We solve both of these issues by using the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, interacting with `@PostHog` in Slack, loading the toolbar, or creating a feature flag. 
 
 **Add this cohort to all broadcasts by default.**
-
+If you want to notify a specific group of users about a breaking change, incident, or other one-off scenario, you can create the cohort yourself and add it to the [Github issue](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md). It really helps the Developer Marketing team and speeds up the process to get comms out. 
 ## Before you send
 
 - **Send yourself a test.** Check it on mobile and in dark mode, click every link, and make sure every Liquid variable has a fallback.
 - **Get a review.** Again: we treat emails as code. 
 - **Pick the right message category.** Every email needs the correct category so unsubscribes work. Never label a marketing email as transactional or `Service updates` to get around opt-outs.
 - **Add alt text to every image.** Some email clients block images, so never put important information only in an image.
+- **Do a test run of your workflow**: a test run pushes one made-up person through the workflow, one step at a time. This lets you know if it's working as you planned, and logs any errors you need to fix. Pro tip: ask PostHog AI to run it for you, and flag any edits needed. 
+
 
 ## After you send
 
@@ -95,6 +114,7 @@ The changelog email is part of [the new release process](/handbook/marketing/pro
 Every two weeks, we use PostHog Workflows to send a broadcast with the highlights from [the weekly changelog](/changelog). We pick three or four of the most impactful changes, and the top spot usually goes to a new beta feature. We share a test with the team before we send it to users. 
 
 We categorize these emails as `Changelog updates` in Workflows, so users can manage their subscriptions. To keep deliverability high, we target users in the [active users cohort](#targeting-emails). 
+If you have suggestions for topics to highlight or experiments to try in the changelog, loop Juliana in `#team-developer-marketing`. 
 
 ### PostHog for Startups
 Each month, we send an email to users in our PostHog for Startups program. We share a test with the team before we send it to users.
