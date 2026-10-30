@@ -1,6 +1,8 @@
 ---
-title: Why we completely rebuilt our warehouse
+title: Why we're moving our warehouse off DuckDB
 date: 2026-10-29
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/moving_off_duckdb_4c95538aac.png
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -13,21 +15,21 @@ tags:
     - Infrastructure
     - Engineering
 seo:
-    metaTitle: Why we completely rebuilt our warehouse
+    metaTitle: Why we're moving our warehouse off DuckDB
     metaDescription: "We moved our data warehouse off DuckDB and DuckLake onto our own flavor of Trino and a new open table format, HogLake. Here's what broke at scale and why."
 ---
 
-Five months ago, we explained [why we built our warehouse on DuckDB](/blog/why-we-rebuilt-our-data-warehouse) instead of ClickHouse. We've since rebuilt it without DuckDB. Our shared ClickHouse cluster couldn't handle hours-long modeling queries, and it lacked a cost-based query optimizer. DuckDB gave every customer their own instance, and tools like dbt could connect over Postgres. We're still fans.
+Five months ago, [we rebuilt our warehouse on DuckDB](/blog/why-we-rebuilt-our-data-warehouse) instead of ClickHouse. We did it because a shared ClickHouse cluster couldn't handle hours-long modeling queries, and it lacked a cost-based query optimizer. DuckDB gave every customer their own instance, and tools like dbt could connect over Postgres. We're still fans.
 
-We underestimated how big and complex our customers' workloads would get. We didn't want them to have just a good experience. We wanted the best experience you can get when you pay someone else to run your warehouse. It should work at any scale, at a fair price.
+But we underestimated how big and complex our customers' workloads would get. We didn't want them to have just a good experience, we wanted the best experience you can get when you pay someone else to run your warehouse. It should work at any scale, at a fair price.
 
-So we spent the last three months re-architecting it.
+So we spent the last three months re-architecting it, this time without DuckDB. 
 
 ## DuckDB is brilliant on one machine
 
 We love DuckDB. It's probably the best single-node tool for analyzing heaps of data, and that node can be your laptop. It's robust and reliable. It almost always finishes your query, and if it runs out of memory, it spills to disk.
 
-What's great locally gave us problems in the cloud. Customers ran more complex queries than we expected, so we had to add huge instances. Adding disks was an option, but queries would have been too slow and expensive to be viable.
+The same features that are great locally gave us problems in the cloud. Customers ran more complex queries than we expected, so we had to add huge instances. Adding disks was an option, but queries would have been too slow and expensive to be viable.
 
 We hit other bottlenecks too, like fetching lots of data from S3 without async fetching. DuckDB only added that recently.
 
@@ -45,7 +47,7 @@ We also spent a lot of time on the number of connections DuckLake opens to metad
 
 ## 1 trillion rows was a challenge
 
-We like to move fast, I've never worked in a more driven and dedicated team. We didn't start small and ramp up. We fully committed and put all of PostHog in a DuckLake to dogfood.
+DuckLake at PostHog didn't start small and ramp up. We fully committed and put all of PostHog in a DuckLake to dogfood as the first customer.
 
 When we moved off it, it held about 2 PB: roughly 1 trillion rows and 15.3 million snapshots. It broke in lots of ways that were hard to fix within DuckLake's scope.
 
@@ -67,7 +69,7 @@ Missing reconnects and managing TTLs and idle connections at scale is hard, and 
 
 There's an endless list of Postgres clients, and each expects its own niche Postgres behavior. Customers kept asking us to fix their client or library. We spent a lot of time shipping many of those fixes, but coverage never got good enough. We'd rather spend our time building an excellent warehouse than chasing the long tail of Postgres compatibility.
 
-## What's next: Trino and HogLake
+## We're rebuilding on Trino with HogLake
 
 We've learned not to hype the tech behind a warehouse so much. What counts is the experience it gives you.
 
