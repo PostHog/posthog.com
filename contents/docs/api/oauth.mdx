@@ -202,8 +202,8 @@ PostHog couldn't fetch your metadata document, or your document breaks a rule. T
 | -------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `Metadata document fetch failed: could not connect`            | Make sure your server accepts HTTPS connections from the internet.          |
 | `Metadata document host name does not resolve`                 | Make sure the DNS record for your `client_id` host exists.                  |
-| `Metadata document endpoint returned HTTP 404`                 | Serve the document at the exact `client_id` URL, with no redirect.          |
-| `client_id in metadata (...) does not match URL (...)`         | Set the `client_id` field to the URL of the document.                       |
+| `Metadata document endpoint did not return HTTP 200`                 | Serve the document at the exact `client_id` URL, with no redirect.          |
+| `client_id in the metadata document does not match the URL it was fetched from`         | Set the `client_id` field to the URL of the document.                       |
 | `client_name is not allowed: ...`                              | Change `client_name`. See [why PostHog rejects your client name](#why-does-posthog-reject-my-client_name). |
 | `com.posthog.scopes has no scope a CIMD client can be granted` | Use scopes from `scopes_supported`. See [declare your scopes](#declare-your-scopes). |
 
