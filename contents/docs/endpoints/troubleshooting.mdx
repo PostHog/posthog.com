@@ -16,14 +16,14 @@ This page covers troubleshooting for Endpoints. For setup, see the [installation
 
 The **Logs** tab on each endpoint's page shows one entry per execution, including both successful and failed runs. Each entry includes metadata like the execution path (inline or materialized), cache outcome, duration, and row count.
 
-Rejected requests that fail validation — such as an invalid `refresh` value or a missing `limit` for pagination — also appear as `ERROR` entries. Filter by log level or search by free text to find specific entries.
+Rejected requests that fail validation – such as an invalid `refresh` value or a missing `limit` for pagination – also appear as `ERROR` entries. Filter by log level or search by free text to find specific entries.
 
 Each run returns an `execution_id` in the API response. This matches the log entry's instance ID, so you can trace a specific API response back to its log. See [execution logs](/docs/endpoints/execution#execution-logs) for more details.
 
 ## Endpoint not found (404)
 
 - Verify the endpoint name is correct
-- Check that the endpoint is **active** - inactive endpoints return 404
+- Check that the endpoint is **active** – inactive endpoints return 404
 - Ensure you're using the correct project ID
 
 ## Authentication errors (401/403)
@@ -79,68 +79,39 @@ The `filters_override` parameter has been removed. Requests using `filters_overr
 
 ## Query performance errors (400)
 
-When a query exceeds ClickHouse resource limits, the API returns HTTP 400 with a machine-readable `code` field. These are deterministic failures — retrying the same query won't help.
+The following query performance errors return HTTP 400 with a `code` field. Change the query before you retry these errors.
 
-| Code                       | Description                                 | Solution                                                                                                          |
-| -------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| `query_timeout`            | The query exceeded the execution time limit | Narrow the query scope (e.g. a smaller date range) or [materialize the endpoint](/docs/endpoints/materialization) |
-| `query_memory_limit`       | The query exceeded the memory limit         | Narrow the query scope or [materialize the endpoint](/docs/endpoints/materialization)                             |
-| `query_too_large`          | The query text is too large to execute      | Simplify the query by reducing its complexity                                                                     |
-| `query_estimated_too_slow` | The query is estimated to run too long      | Narrow the time range or [materialize the endpoint](/docs/endpoints/materialization)                              |
-
-**Example error response:**
-
-```json
-{
-  "type": "server_error",
-  "code": "query_timeout",
-  "detail": "This query exceeded the execution time limit. Narrow its scope (e.g. a smaller date range) or materialize the endpoint for dedicated compute."
-## Query performance errors (400)
-
-These errors mean your query hit a ClickHouse resource guardrail. They return HTTP 400 with a machine-readable `code` you can branch on.
-
-| Code | Cause | Fix |
+| Code | Cause | Recommended action |
 | --- | --- | --- |
-| `query_timeout` | Query exceeded the execution time limit | Narrow the date range or add filters to reduce the data scanned |
-| `query_memory_limit` | Query exceeded the memory limit | Reduce the query scope or simplify aggregations |
-| `query_too_large` | Query text is too large to execute | Simplify the query |
-| `query_estimated_too_slow` | Query is estimated to run too long | Narrow the time range or reduce the data scanned |
+| `query_timeout` | The query exceeded the execution time limit | Narrow the date range or add filters to reduce the data scanned |
+| `query_memory_limit` | The query exceeded the memory limit | Reduce the query scope or simplify aggregations |
+| `query_too_large` | The query text is too large to execute | Reduce the size of the query text |
+| `query_estimated_too_slow` | The estimated execution time exceeds the limit | Narrow the time range or reduce the data scanned |
 
-For `query_timeout`, `query_memory_limit`, and `query_estimated_too_slow`, [materializing the endpoint](/docs/endpoints/materialization) moves execution to dedicated compute and is the durable fix for consistently heavy queries.
+For repeated timeout, memory, or estimated execution time errors, consider [materializing the endpoint](/docs/endpoints/materialization). Materialization serves precomputed results on dedicated endpoint compute. Results are only as fresh as the last successful materialization.
 
-See [error responses](/docs/endpoints/execution#error-responses) for the full response format.
+Materialization does not reduce the query text size. For `query_too_large`, simplify the query.
 
-## Capacity errors (503)
-
-**`code`: `query_capacity`**
-
-- The shared ClickHouse query pool is momentarily at capacity
-- This is transient — retry after a short delay
-- For consistently heavy endpoints, [materialize the endpoint](/docs/endpoints/materialization) to run on dedicated compute that isn't affected by shared query load
-
-
-}
-```
-
-Branch on the `code` field in your application to handle specific error cases programmatically.
+See [error responses](/docs/endpoints/execution#error-responses) for the response format and an example.
 
 ## Capacity errors (503)
 
-**"Queries are momentarily at capacity — please retry shortly."**
+When the shared ClickHouse query pool reaches capacity, the API returns HTTP 503 with `code: "query_capacity"`.
 
-The shared ClickHouse query pool is temporarily overloaded. This is transient — the same query may succeed after a short delay.
-
-For endpoints that consistently hit capacity limits, [materialize the endpoint](/docs/endpoints/materialization). Materialized endpoints run on dedicated compute that isn't affected by shared query pool load.
-
-**Example error response:**
+Example response:
 
 ```json
 {
   "type": "server_error",
   "code": "query_capacity",
-  "detail": "Queries are momentarily at capacity — please retry shortly. For consistently heavy endpoints, materialize to run on dedicated endpoint compute that isn't affected by shared query load."
+  "detail": "Queries are momentarily at capacity — please retry shortly. For consistently heavy endpoints, materialize to run on dedicated endpoint compute that isn't affected by shared query load.",
+  "attr": null
 }
 ```
+
+This error is temporary. Wait for the duration in the `Retry-After` response header before you retry. Limit the number of retries in your client.
+
+For repeated capacity errors, consider [materializing the endpoint](/docs/endpoints/materialization) to serve precomputed results on dedicated endpoint compute. Check that materialization completes before you use the stored results. Requests with `refresh: "direct"` still run the query against raw data.
 
 ## Materialization errors
 
@@ -172,12 +143,12 @@ If endpoints are slow:
 
 ## Further reading
 
-- [Endpoints overview](/docs/endpoints) - Learn what endpoints are and when to use them
-- [Getting started](/docs/endpoints/start-here) - Create your first endpoint
-- [API reference](/docs/api/endpoints) - Complete API documentation
-- [API queries](/docs/api/queries) - Learn about standard API queries
-- [SQL documentation](/docs/sql) - Write SQL queries for your endpoints
-- [Insights](/docs/product-analytics/insights) - Create insights to use as endpoints
+- [Endpoints overview](/docs/endpoints) – Learn what endpoints are and when to use them
+- [Getting started](/docs/endpoints/start-here) – Create your first endpoint
+- [API reference](/docs/api/endpoints) – Complete API documentation
+- [API queries](/docs/api/queries) – Learn about standard API queries
+- [SQL documentation](/docs/sql) – Write SQL queries for your endpoints
+- [Insights](/docs/product-analytics/insights) – Create insights to use as endpoints
 
 ## Solved community questions
 

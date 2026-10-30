@@ -63,27 +63,23 @@ A successful response (HTTP 200) includes:
 }
 ```
 
-- `results` - Array of rows, each row is an array of values
-- `columns` - Column names matching the order of values in each row
-- `execution_id` - Unique identifier for this execution, useful for tracing results to their [log entries](#execution-logs)
+- `results` – Array of rows, each row is an array of values
+- `columns` – Column names matching the order of values in each row
+- `execution_id` – Unique identifier for this execution, useful for tracing results to their [log entries](#execution-logs)
 - Additional metadata fields for materialization status, endpoint version, etc
 
 ## Error responses
 
-When execution fails due to query cost or capacity limits, the API returns a structured error with a machine-readable `code` field you can use for programmatic error handling.
+Query timeouts, memory limits, oversized query text, and estimated execution time limits return HTTP 400. When the shared ClickHouse query pool reaches capacity, it returns HTTP 503.
 
-### Query performance errors (400)
+These responses include:
 
-Returned when a query hits a ClickHouse guardrail — execution time, memory, query size, or estimated duration. These are deterministic: the same query won't succeed on a blind retry. Narrow the query's scope (for example, a smaller date range) or [materialize the endpoint](/docs/endpoints/materialization) to run on dedicated compute.
+- `type` – Error category, which is `server_error` for these errors, including HTTP 400 responses
+- `code` – Error code that your client can use to choose an action
+- `detail` – Error description and recommended action
+- `attr` – Request field that caused the error, or `null` when the error does not refer to a field
 
-| Code                       | Meaning                                 |
-| -------------------------- | --------------------------------------- |
-| `query_timeout`            | Query exceeded the execution time limit |
-| `query_memory_limit`       | Query exceeded the memory limit         |
-| `query_too_large`          | Query text is too large to execute      |
-| `query_estimated_too_slow` | Query is estimated to run too long      |
-
-Example response:
+For example, a query that exceeds the execution time limit returns HTTP 400:
 
 ```json
 {
@@ -94,38 +90,12 @@ Example response:
 }
 ```
 
-### Capacity errors (503)
+Use the HTTP status and `code` to handle these errors in your client. Do not use the `detail` text to identify an error.
 
-Returned when the shared ClickHouse query pool is momentarily at capacity. This is transient — retrying shortly may succeed. For consistently heavy endpoints, [materialize the endpoint](/docs/endpoints/materialization) to run on dedicated compute that isn't affected by shared query load.
+- For HTTP 400 query performance errors, change the query before you retry
+- For HTTP 503 with `code: "query_capacity"`, wait for the duration in the `Retry-After` response header before you retry
 
-The error `code` is `query_capacity`.
-
-### Handling error codes
-
-Branch on the `code` field, not `type`, to handle specific error conditions in your client:
-
-```python
-import requests
-
-response = requests.post(
-    "<ph_app_host>/api/projects/{project_id}/endpoints/{endpoint_name}/run",
-    headers={"Authorization": "Bearer <ph_personal_api_key>"},
-)
-
-if response.status_code == 400:
-    error = response.json()
-    if error["code"] in ("query_timeout", "query_memory_limit", "query_estimated_too_slow"):
-        # Query is too expensive — narrow the date range or materialize
-        pass
-    elif error["code"] == "query_too_large":
-        # Query text is too large — simplify the query
-        pass
-elif response.status_code == 503:
-    error = response.json()
-    if error["code"] == "query_capacity":
-        # Transient capacity issue — retry after a short delay
-        pass
-```
+See [query performance errors](/docs/endpoints/troubleshooting#query-performance-errors-400) for the error codes and recommended actions. See [capacity errors](/docs/endpoints/troubleshooting#capacity-errors-503) for retry guidance.
 
 ## Debugging
 
