@@ -249,25 +249,12 @@ const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
 // Build Products menu items
 const buildProductsMenuItems = (allProducts: any[]) => {
     const items: any[] = [
-        ...PRODUCT_CATEGORIES.flatMap(({ label, handles }, index) => [
-            ...(index > 0 ? [{ type: 'separator' }] : []),
-            { type: 'label', label },
-            ...buildProductMenuItems(handles, allProducts),
-        ]),
-        {
-            type: 'separator',
-        },
+        { type: 'label', label: 'Apps' },
         {
             type: 'item',
-            label: 'PostHog MCP',
-            link: '/mcp',
-            icon: <Icons.IconPlug className="size-4 text-gray" />,
-        },
-        {
-            type: 'item',
-            label: 'PostHog Desktop',
-            link: '/desktop',
-            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
+            label: 'Self-driving',
+            link: '/self-driving',
+            icon: <Icons.IconFlag className="size-4 text-red" />,
         },
         {
             type: 'item',
@@ -276,20 +263,16 @@ const buildProductsMenuItems = (allProducts: any[]) => {
             icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
         },
         {
-            type: 'separator',
-        },
-        {
             type: 'item',
-            label: 'Context Warehouse',
-            link: '/context-warehouse',
-            icon: <Icons.IconDatabase className="size-4 text-blue" />,
+            label: 'PostHog MCP',
+            link: '/mcp',
+            icon: <Icons.IconPlug className="size-4 text-gray" />,
         },
-        {
-            type: 'item',
-            label: 'PostHog Research',
-            link: '/research',
-            icon: <Icons.IconBrain className="size-4 text-purple" />,
-        },
+        ...PRODUCT_CATEGORIES.flatMap(({ label, handles }) => [
+            { type: 'separator' },
+            { type: 'label', label },
+            ...buildProductMenuItems(handles, allProducts),
+        ]),
     ]
 
     return items
@@ -433,6 +416,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Media',
                     link: '/media',
                     icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
+                },
+                {
+                    type: 'item',
+                    label: 'PostHog Research',
+                    link: '/research',
+                    icon: <Icons.IconBrain className="size-4 text-purple" />,
                 },
                 {
                     type: 'separator',
