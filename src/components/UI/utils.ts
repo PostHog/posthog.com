@@ -81,6 +81,8 @@ export function assignRef<Element>(ref: React.ForwardedRef<Element>, element: El
     else if (ref) ref.current = element
 }
 
+export const useIsomorphicLayoutEffect = typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
+
 export const HEIGHT_CHANGE_MS = 200
 export const heightChangeEasing = 'cubic-bezier(0.23, 1, 0.32, 1)'
 
@@ -96,28 +98,61 @@ export function useSmoothHeight(shouldAnimate?: () => boolean): (element: HTMLEl
         stopObserving.current?.()
         stopObserving.current = undefined
         if (!element || typeof ResizeObserver === 'undefined') return
-        let settledHeight = element.offsetHeight
+        let startHeight = element.offsetHeight
+        let targetHeight = startHeight
         let running: Animation | null = null
-        const observer = new ResizeObserver(() => {
-            if (running) return
-            const nextHeight = element.offsetHeight
-            if (nextHeight === settledHeight) return
-            const startHeight = settledHeight
-            settledHeight = nextHeight
-            if (prefersReducedMotion()) return
-            if (shouldAnimateRef.current && !shouldAnimateRef.current()) return
-            running = element.animate(
+        const animateHeight = (from: number, to: number): Animation => {
+            const animation = element.animate(
                 [
-                    { height: `${startHeight}px`, overflow: 'hidden' },
-                    { height: `${nextHeight}px`, overflow: 'hidden' },
+                    { height: `${from}px`, overflow: 'hidden' },
+                    { height: `${to}px`, overflow: 'hidden' },
                 ],
                 { duration: HEIGHT_CHANGE_MS, easing: heightChangeEasing }
             )
             const release = () => {
-                running = null
+                if (running === animation) running = null
             }
-            running.onfinish = release
-            running.oncancel = release
+            animation.onfinish = release
+            animation.oncancel = release
+            return animation
+        }
+        const animationAllowed = () =>
+            !prefersReducedMotion() && (!shouldAnimateRef.current || shouldAnimateRef.current())
+        const retarget = (animation: Animation) => {
+            const elapsed = animation.currentTime
+            const shownHeight = element.getBoundingClientRect().height
+            running = null
+            animation.cancel()
+            const naturalHeight = element.offsetHeight
+            if (prefersReducedMotion()) {
+                startHeight = naturalHeight
+                targetHeight = naturalHeight
+                return
+            }
+            if (naturalHeight === targetHeight) {
+                running = animateHeight(startHeight, targetHeight)
+                running.currentTime = elapsed
+                return
+            }
+            startHeight = shownHeight
+            targetHeight = naturalHeight
+            if (!animationAllowed()) {
+                startHeight = naturalHeight
+                return
+            }
+            running = animateHeight(shownHeight, naturalHeight)
+        }
+        const observer = new ResizeObserver(() => {
+            if (running) {
+                retarget(running)
+                return
+            }
+            const nextHeight = element.offsetHeight
+            if (nextHeight === targetHeight) return
+            startHeight = targetHeight
+            targetHeight = nextHeight
+            if (!animationAllowed()) return
+            running = animateHeight(startHeight, targetHeight)
         })
         observer.observe(element)
         stopObserving.current = () => observer.disconnect()

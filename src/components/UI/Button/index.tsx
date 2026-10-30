@@ -46,14 +46,19 @@ export type ButtonLinkProps = Pick<LinkProps, 'to' | 'state' | 'event' | 'contex
         children?: React.ReactNode
     }
 
+export type ButtonGroupOrientation = 'horizontal' | 'vertical'
+
 export type ButtonGroupProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'className'> &
     ButtonLook & {
         className?: string
         disabled?: boolean
+        orientation?: ButtonGroupOrientation
         children?: React.ReactNode
     }
 
-const ButtonGroupContext = React.createContext<(Required<ButtonLook> & { disabled: boolean }) | null>(null)
+const ButtonGroupContext = React.createContext<
+    (Required<ButtonLook> & { disabled: boolean; orientation: ButtonGroupOrientation }) | null
+>(null)
 
 const iconSizes: Record<ButtonSize, string> = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' }
 
@@ -105,8 +110,14 @@ const flatSegment =
 
 const flatSegmentPadding: Record<ButtonSize, string> = { sm: 'px-2', md: 'px-2.5', lg: 'px-3' }
 
-const flatGroup =
-    'inline-grid max-w-full grid-flow-col auto-cols-[minmax(0,max-content)] [&>[data-segment]~[data-segment]]:border-l [&>[data-segment]~[data-segment]]:border-primary data-[disabled]:opacity-50 overflow-hidden rounded border border-primary'
+const flatGroupBase = 'inline-grid max-w-full data-[disabled]:opacity-50 overflow-hidden rounded border border-primary'
+
+const flatGroupOrientations: Record<ButtonGroupOrientation, string> = {
+    horizontal:
+        'grid-flow-col auto-cols-[minmax(0,max-content)] [&>[data-segment]~[data-segment]]:border-l [&>[data-segment]~[data-segment]]:border-primary',
+    vertical:
+        'grid-flow-row [&>[data-segment]~[data-segment]]:border-t [&>[data-segment]~[data-segment]]:border-primary',
+}
 
 const raisedUnderside =
     "before:absolute before:inset-x-0 before:bottom-0 before:top-1/2 before:border-t-0 before:bg-[repeating-linear-gradient(45deg,rgb(0_0_0/0.15)_0_1px,transparent_1px_5.6569px)] before:bg-[length:8px_8px] before:content-['']"
@@ -152,7 +163,7 @@ const raisedFaces: Record<ButtonVariant, string> = {
     primary:
         'border-button bg-orange text-black [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:border-button-dark',
     secondary:
-        'border-gray bg-white text-primary [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] dark:bg-dark dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)]',
+        'border-gray bg-white text-primary dark:[--shade-color:rgb(255_255_255/0.16)] [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] dark:bg-dark dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)]',
 }
 
 const raisedFaceBorder: Record<ButtonSize, string> = {
@@ -177,8 +188,12 @@ const raisedFacePadding: Record<ButtonSize, string> = {
 
 const raisedFaceSquarePadding: Record<ButtonSize, string> = { sm: 'p-1', md: 'p-2', lg: 'p-2.5' }
 
-const raisedGroupBase =
-    'relative inline-grid max-w-full grid-flow-col auto-cols-[minmax(0,max-content)] p-px data-[disabled]:opacity-50'
+const raisedGroupBase = 'relative inline-grid max-w-full p-px data-[disabled]:opacity-50'
+
+const raisedGroupOrientations: Record<ButtonGroupOrientation, string> = {
+    horizontal: 'grid-flow-col auto-cols-[minmax(0,max-content)]',
+    vertical: 'grid-flow-row',
+}
 
 const raisedSegment = `relative flex min-w-0 focus-visible:z-10 data-[disabled]:cursor-not-allowed ${busyCursor} ${focusRing}`
 
@@ -187,6 +202,27 @@ const raisedSegmentUnderside: Record<ButtonSize, string> = {
     md: 'before:-bottom-px before:-left-px before:border [&:not([data-segment]~[data-segment])]:before:rounded-bl-[6px] [&:not(:has(~[data-segment]))]:before:-right-px [&:not(:has(~[data-segment]))]:before:rounded-br-[6px]',
     lg: 'before:-bottom-px before:-left-px before:border [&:not([data-segment]~[data-segment])]:before:rounded-bl-[6px] [&:not(:has(~[data-segment]))]:before:-right-px [&:not(:has(~[data-segment]))]:before:rounded-br-[6px]',
 }
+
+const raisedStackedSegmentUnderside: Record<ButtonSize, string> = {
+    sm: 'before:-inset-x-px before:-bottom-px before:border [&:not(:has(~[data-segment]))]:before:rounded-b-[4px]',
+    md: 'before:-inset-x-px before:-bottom-px before:border [&:not(:has(~[data-segment]))]:before:rounded-b-[6px]',
+    lg: 'before:-inset-x-px before:-bottom-px before:border [&:not(:has(~[data-segment]))]:before:rounded-b-[6px]',
+}
+
+const raisedStackedSegmentFace: Record<ButtonSize, string> = {
+    sm: '-mx-px flex-1 rounded-none [[data-segment]:has(~[data-segment])>&]:border-b-0 [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-t-[4px] [[data-segment]:not(:has(~[data-segment]))>&]:rounded-b-[4px]',
+    md: '-mx-px flex-1 rounded-none [[data-segment]:has(~[data-segment])>&]:border-b-0 [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-t-[6px] [[data-segment]:not(:has(~[data-segment]))>&]:rounded-b-[6px]',
+    lg: '-mx-px flex-1 rounded-none [[data-segment]:has(~[data-segment])>&]:border-b-0 [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-t-[6px] [[data-segment]:not(:has(~[data-segment]))>&]:rounded-b-[6px]',
+}
+
+const pressedSegmentShade =
+    "[--shade-color:rgb(0_0_0/0.22)] after:pointer-events-none after:absolute after:inset-0 after:rounded-[inherit] after:opacity-0 after:transition-opacity after:duration-100 after:content-[''] after:[box-shadow:var(--shade-start,0_0_#0000),var(--shade-end,0_0_#0000)] motion-reduce:after:transition-none [[data-pressed]>&]:after:opacity-100 [[data-popup-open]>&]:after:opacity-100 [:not([data-disabled]):active>&]:after:opacity-100"
+
+const sideBySideShade =
+    '[[data-segment]~[data-segment]>&]:[--shade-start:inset_4px_0_4px_-3px_var(--shade-color)] [[data-segment]:has(~[data-segment])>&]:[--shade-end:inset_-4px_0_4px_-3px_var(--shade-color)]'
+
+const stackedShade =
+    '[[data-segment]~[data-segment]>&]:[--shade-start:inset_0_4px_4px_-3px_var(--shade-color)] [[data-segment]:has(~[data-segment])>&]:[--shade-end:inset_0_-4px_4px_-3px_var(--shade-color)]'
 
 const raisedSegmentFace: Record<ButtonSize, string> = {
     sm: '-ml-px rounded-none [[data-segment]:not([data-segment]~[data-segment])>&]:rounded-l-[4px] [[data-segment]:not(:has(~[data-segment]))>&]:-mr-px [[data-segment]:not(:has(~[data-segment]))>&]:rounded-r-[4px]',
@@ -197,6 +233,7 @@ const raisedSegmentFace: Record<ButtonSize, string> = {
 type ButtonShape = Required<ButtonLook> & {
     square: boolean
     isSegment: boolean
+    stacked: boolean
 }
 
 function useButtonShape(
@@ -212,10 +249,11 @@ function useButtonShape(
         size: group?.size ?? ownSize,
         square,
         isSegment: group !== null,
+        stacked: group?.orientation === 'vertical',
     }
 }
 
-function frameClassName({ appearance, variant, size, square, isSegment }: ButtonShape): string {
+function frameClassName({ appearance, variant, size, square, isSegment, stacked }: ButtonShape): string {
     if (appearance === 'raised') {
         return isSegment
             ? cn(
@@ -223,7 +261,7 @@ function frameClassName({ appearance, variant, size, square, isSegment }: Button
                   raisedUnderside,
                   raisedFrames[variant],
                   raisedHatchMotion[size],
-                  raisedSegmentUnderside[size]
+                  stacked ? raisedStackedSegmentUnderside[size] : raisedSegmentUnderside[size]
               )
             : cn(
                   raisedFrameBase,
@@ -254,7 +292,7 @@ type ButtonContentProps = {
 }
 
 function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }: ButtonContentProps): JSX.Element {
-    const { appearance, variant, size, square, isSegment } = shape
+    const { appearance, variant, size, square, isSegment, stacked } = shape
     const iconSlot = cn('flex shrink-0 items-center justify-center [&>svg]:size-full', iconSizes[size])
     const leadingIcon = square || iconPosition === 'start' ? icon : null
     const trailingIcon = square || iconPosition === 'start' ? null : icon
@@ -318,7 +356,14 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
                 raisedFaceBorder[size],
                 raisedFaceMotion[size],
                 square ? raisedFaceSquarePadding[size] : raisedFacePadding[size],
-                isSegment ? raisedSegmentFace[size] : cn(raisedFaceInset[size], raisedRadius[size])
+                isSegment
+                    ? cn(
+                          pressedSegmentShade,
+                          stacked
+                              ? cn(raisedStackedSegmentFace[size], stackedShade)
+                              : cn(raisedSegmentFace[size], sideBySideShade)
+                      )
+                    : cn(raisedFaceInset[size], raisedRadius[size])
             )}
         >
             {content}
@@ -411,20 +456,34 @@ export function ButtonLink({
 }
 
 export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(function ButtonGroup(
-    { appearance = 'raised', variant = 'secondary', size = 'md', className, disabled = false, children, ...props },
+    {
+        appearance = 'raised',
+        variant = 'secondary',
+        size = 'md',
+        orientation = 'horizontal',
+        className,
+        disabled = false,
+        children,
+        ...props
+    },
     ref
 ) {
-    const look = React.useMemo(() => ({ appearance, variant, size, disabled }), [appearance, variant, size, disabled])
+    const look = React.useMemo(
+        () => ({ appearance, variant, size, disabled, orientation }),
+        [appearance, variant, size, disabled, orientation]
+    )
     return (
         <ButtonGroupContext.Provider value={look}>
             <div
                 ref={ref}
                 role="group"
                 data-disabled={disabled ? '' : undefined}
+                data-orientation={orientation}
+                aria-orientation={orientation}
                 className={cn(
                     appearance === 'raised'
-                        ? cn(raisedGroupBase, raisedRadius[size])
-                        : cn(flatGroup, flatGroupTones[variant]),
+                        ? cn(raisedGroupBase, raisedGroupOrientations[orientation], raisedRadius[size])
+                        : cn(flatGroupBase, flatGroupOrientations[orientation], flatGroupTones[variant]),
                     className
                 )}
                 {...props}

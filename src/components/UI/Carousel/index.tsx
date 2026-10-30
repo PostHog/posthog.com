@@ -1,10 +1,10 @@
-import React, { Children, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { Children, useCallback, useEffect, useRef, useState } from 'react'
 import type { CSSProperties, FocusEvent, ReactNode } from 'react'
 import { IconArrowLeft, IconArrowRight, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import { IconButton } from '../Button'
 import { FloatingIconButton } from '../FloatingButton'
 import { focusRing, scrollbarHidden } from '../styles'
-import { useId } from '../utils'
+import { useId, useIsomorphicLayoutEffect } from '../utils'
 import { cn } from '../../../utils'
 import './styles.css'
 
@@ -25,8 +25,6 @@ const MIN_AUTOPLAY_MS = 1000
 const SLIDE_GAP = '1rem'
 const PEEK_WIDTH = 'clamp(2rem, 10%, 5rem)'
 const SETTLE_MS = 120
-
-const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 const slidesPerViewClasses = {
     1: '',

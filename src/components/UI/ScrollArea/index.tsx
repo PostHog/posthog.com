@@ -35,7 +35,7 @@ const Scrollbar = withClassName(
 
 const Thumb = withClassName(
     BaseScrollArea.Thumb,
-    `${grainSurface} rounded-full bg-[rgb(var(--text-primary)/0.28)] hover:bg-[rgb(var(--text-primary)/0.4)] active:bg-[rgb(var(--text-primary)/0.5)] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full`
+    `${grainSurface} rounded-full bg-[rgb(var(--text-primary)/0.28)] forced-colors:border-[3px] forced-colors:border-[color:CanvasText] hover:bg-[rgb(var(--text-primary)/0.4)] active:bg-[rgb(var(--text-primary)/0.5)] data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full`
 )
 
 const Corner = withClassName(BaseScrollArea.Corner, 'bg-transparent')

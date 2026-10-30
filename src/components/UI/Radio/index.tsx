@@ -20,7 +20,7 @@ const Root = withClassName(
 const Indicator = withClassName(
     BaseRadio.Indicator,
     cn(
-        'block size-3 scale-50 rounded-full bg-orange opacity-0',
+        'block size-3 scale-50 rounded-full bg-orange opacity-0 forced-colors:border-[6px] forced-colors:border-solid forced-colors:border-[color:Highlight]',
         'transition-[transform,opacity] duration-100 ease-out motion-reduce:transition-none',
         'group-data-[checked]:scale-100 group-data-[checked]:opacity-100 group-data-[checked]:duration-200 group-data-[checked]:ease-[cubic-bezier(0.34,1.56,0.64,1)]'
     ),

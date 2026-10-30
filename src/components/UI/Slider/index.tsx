@@ -5,7 +5,10 @@ import { mergeClassName, withClassName } from '../utils'
 
 const RANGE_SEPARATOR = ' – '
 
-const Root = withClassName(BaseSlider.Root, 'flex w-full touch-none select-none flex-col gap-1.5')
+const Root = withClassName(
+    BaseSlider.Root,
+    'flex w-full touch-none select-none flex-col gap-1.5 data-[orientation=vertical]:w-auto data-[orientation=vertical]:items-center'
+)
 
 const Label = withClassName(BaseSlider.Label, controlLabel)
 
@@ -63,10 +66,13 @@ const Value = React.forwardRef<HTMLOutputElement, Omit<BaseSlider.Value.Props, '
 
 const Control = withClassName(
     BaseSlider.Control,
-    'flex w-full items-center py-1.5 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
+    'flex w-full items-center py-1.5 data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-1.5 data-[orientation=vertical]:py-0 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
 )
 
-const Track = withClassName(BaseSlider.Track, `relative h-2 w-full rounded-full ${trackSurface}`)
+const Track = withClassName(
+    BaseSlider.Track,
+    `relative h-2 w-full rounded-full data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-32 data-[orientation=vertical]:w-2 ${trackSurface}`
+)
 
 const Indicator = withClassName(BaseSlider.Indicator, 'rounded-full bg-orange')
 

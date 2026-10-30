@@ -220,10 +220,10 @@ export const controlLabel = 'text-sm font-semibold text-primary data-[disabled]:
 export const barValue = 'col-start-2 text-right text-sm tabular-nums text-secondary'
 
 export const barTrack =
-    'col-span-2 h-2 overflow-hidden rounded-full bg-[rgb(var(--text-primary)/0.08)] shadow-[inset_0_1px_0_rgb(0_0_0/0.06)] dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)]'
+    'col-span-2 h-2 overflow-hidden rounded-full bg-[rgb(var(--text-primary)/0.08)] forced-colors:border forced-colors:border-[color:CanvasText] shadow-[inset_0_1px_0_rgb(0_0_0/0.06)] dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)]'
 
 export const barIndicator =
-    'block h-full rounded-full bg-orange transition-[width] duration-500 ease-out motion-reduce:transition-none'
+    'block h-full rounded-full bg-orange forced-colors:bg-[color:Highlight] forced-colors:[forced-color-adjust:none] transition-[width] duration-500 ease-out motion-reduce:transition-none'
 
 export type Tone = 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'
 

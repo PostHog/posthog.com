@@ -36,7 +36,7 @@ const Indicator = React.forwardRef<HTMLDivElement, Omit<BaseProgress.Indicator.P
                         barIndicator,
                         fill,
                         colorShimmer[color],
-                        'data-[indeterminate]:w-full data-[indeterminate]:animate-[shimmer_1.5s_linear_infinite] data-[indeterminate]:bg-transparent data-[indeterminate]:bg-gradient-to-r data-[indeterminate]:bg-[length:200%_100%] motion-reduce:data-[indeterminate]:animate-none'
+                        'data-[indeterminate]:w-full data-[indeterminate]:animate-[shimmer_1.5s_linear_infinite] data-[indeterminate]:bg-transparent data-[indeterminate]:bg-gradient-to-r data-[indeterminate]:bg-[length:200%_100%] motion-reduce:data-[indeterminate]:animate-none forced-colors:data-[indeterminate]:bg-[color:Highlight] forced-colors:data-[indeterminate]:bg-none'
                     ),
                     className
                 )}

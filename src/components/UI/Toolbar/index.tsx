@@ -28,7 +28,7 @@ const Button = withClassName(BaseToolbar.Button, toolbarControl)
 
 const Link = withClassName(BaseToolbar.Link, `${toolbarControl} no-underline`)
 
-const Group = withClassName(BaseToolbar.Group, 'flex items-center gap-1')
+const Group = withClassName(BaseToolbar.Group, 'flex items-center gap-1 data-[orientation=vertical]:flex-col')
 
 const Separator = withClassName(
     BaseToolbar.Separator,

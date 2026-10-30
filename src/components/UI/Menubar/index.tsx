@@ -19,9 +19,9 @@ const Root = React.forwardRef<HTMLDivElement, MenubarRootProps>(function Menubar
         <BaseMenubar
             ref={ref}
             className={mergeClassName(
-                `flex items-center gap-px py-0.5 ${appearance === 'plain' ? '' : 'w-fit px-1'} ${
-                    surfaceAppearances[appearance]
-                }`,
+                `flex items-center gap-px py-0.5 aria-[orientation=vertical]:flex-col aria-[orientation=vertical]:items-stretch aria-[orientation=vertical]:px-0.5 ${
+                    appearance === 'plain' ? '' : 'w-fit px-1'
+                } ${surfaceAppearances[appearance]}`,
                 className
             )}
             {...props}

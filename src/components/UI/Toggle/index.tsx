@@ -60,6 +60,7 @@ export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(fu
         className,
         required = false,
         multiple = false,
+        orientation = 'horizontal',
         disabled,
         onValueChange,
         ...props
@@ -77,11 +78,13 @@ export const ToggleGroup = React.forwardRef<HTMLDivElement, ToggleGroupProps>(fu
                         variant={variant}
                         size={size}
                         disabled={disabled}
+                        orientation={orientation}
                         className={className}
                     />
                 }
                 {...props}
                 disabled={disabled}
+                orientation={orientation}
                 multiple={multiple}
                 onValueChange={(value, details) => {
                     if (required && value.length === 0) {

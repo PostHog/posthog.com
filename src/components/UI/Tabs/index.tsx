@@ -2,7 +2,16 @@ import React from 'react'
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import { cn } from '../../../utils'
 import { focusRing, surfaceDivider } from '../styles'
-import { assignRef, mergeClassName, useSmoothHeight, withClassName } from '../utils'
+import {
+    HEIGHT_CHANGE_MS,
+    assignRef,
+    mergeClassName,
+    useIsomorphicLayoutEffect,
+    useSmoothHeight,
+    withClassName,
+} from '../utils'
+
+const TAB_CHANGE_WINDOW_MS = HEIGHT_CHANGE_MS * 2
 
 type Appearance = 'pane' | 'underline'
 const AppearanceContext = React.createContext<Appearance>('pane')
@@ -12,11 +21,23 @@ const root =
 const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> & { appearance?: Appearance }>(
     function TabsRoot({ appearance = 'pane', className, onValueChange, ...props }, ref) {
         const tabChanged = React.useRef(false)
-        const smoothHeight = useSmoothHeight(() => {
-            const changed = tabChanged.current
-            tabChanged.current = false
-            return changed
-        })
+        const clearTabChange = React.useRef<ReturnType<typeof setTimeout>>()
+        const smoothHeight = useSmoothHeight(() => tabChanged.current)
+        const markTabChange = React.useCallback(() => {
+            tabChanged.current = true
+            clearTimeout(clearTabChange.current)
+            clearTabChange.current = setTimeout(() => {
+                tabChanged.current = false
+            }, TAB_CHANGE_WINDOW_MS)
+        }, [])
+        React.useEffect(() => () => clearTimeout(clearTabChange.current), [])
+        const controlledValue = props.value
+        const previousValue = React.useRef(controlledValue)
+        useIsomorphicLayoutEffect(() => {
+            if (controlledValue === previousValue.current) return
+            previousValue.current = controlledValue
+            markTabChange()
+        }, [controlledValue, markTabChange])
         const setRef = React.useCallback(
             (element: HTMLDivElement | null) => {
                 smoothHeight(element)
@@ -25,7 +46,7 @@ const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> &
             [ref, smoothHeight]
         )
         const changeTab: BaseTabs.Root.Props['onValueChange'] = (...args) => {
-            tabChanged.current = true
+            markTabChange()
             onValueChange?.(...args)
         }
         return (

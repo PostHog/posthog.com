@@ -15,6 +15,21 @@ import { mergeClassName, positionerPropNames, splitProps, withClassName } from '
 import type { PositionerPropName } from '../utils'
 import { wrapText } from '../truncation'
 
+type NavigationMenuOrientation = NonNullable<BaseNavigationMenu.Root.Props['orientation']>
+
+const OrientationContext = React.createContext<NavigationMenuOrientation>('horizontal')
+
+const Root = React.forwardRef(function NavigationMenuRoot(
+    { orientation = 'horizontal', ...props }: BaseNavigationMenu.Root.Props,
+    ref: React.ForwardedRef<HTMLElement>
+) {
+    return (
+        <OrientationContext.Provider value={orientation}>
+            <BaseNavigationMenu.Root ref={ref} orientation={orientation} {...props} />
+        </OrientationContext.Provider>
+    )
+}) as typeof BaseNavigationMenu.Root
+
 export type NavigationMenuAppearance = SurfaceAppearance
 
 export type NavigationMenuListProps = BaseNavigationMenu.List.Props & {
@@ -25,13 +40,14 @@ const List = React.forwardRef<HTMLUListElement, NavigationMenuListProps>(functio
     { appearance = 'raised', className, ...props },
     ref
 ) {
+    const vertical = React.useContext(OrientationContext) === 'vertical'
     return (
         <BaseNavigationMenu.List
             ref={ref}
             className={mergeClassName(
-                `m-0 flex list-none items-center gap-px py-0.5 ${appearance === 'plain' ? 'px-0' : 'w-fit px-1'} ${
-                    surfaceAppearances[appearance]
-                }`,
+                `m-0 flex list-none gap-px py-0.5 ${vertical ? 'flex-col items-stretch' : 'items-center'} ${
+                    appearance === 'plain' ? 'px-0' : 'w-fit px-1'
+                } ${surfaceAppearances[appearance]}`,
                 className
             )}
             {...props}
@@ -102,10 +118,12 @@ const Popup = React.forwardRef<HTMLElement, NavigationMenuPopupProps>(function N
     ref
 ) {
     const [positionerProps, popupProps] = splitProps(props, positionerPropNames)
+    const vertical = React.useContext(OrientationContext) === 'vertical'
 
     return (
         <BaseNavigationMenu.Portal container={container}>
             <BaseNavigationMenu.Positioner
+                side={vertical ? 'inline-end' : 'bottom'}
                 sideOffset={4}
                 align="start"
                 collisionAvoidance={keepPreferredSide}
@@ -129,7 +147,7 @@ const Popup = React.forwardRef<HTMLElement, NavigationMenuPopupProps>(function N
 const Arrow = withClassName(BaseNavigationMenu.Arrow, `${popupArrow} transition-[left,right] ${morphTiming}`)
 
 export const NavigationMenu = {
-    Root: BaseNavigationMenu.Root,
+    Root,
     List,
     Item: BaseNavigationMenu.Item,
     Trigger,
