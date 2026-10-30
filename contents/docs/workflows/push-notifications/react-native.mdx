@@ -63,9 +63,7 @@ If you use the `posthog-react-native/expo` config plugin, `expo prebuild` writes
 ```json
 {
   "expo": {
-    "plugins": [
-      ["posthog-react-native/expo", { "patchMainActivityNewIntent": false }]
-    ]
+    "plugins": [["posthog-react-native/expo", { "patchMainActivityNewIntent": false }]]
   }
 }
 ```
@@ -160,11 +158,49 @@ If your push channel requires [identity verification](/docs/workflows/push-notif
 </PostHogProvider>
 ```
 
+## Reading link and group from the payload
+
+When you configure **Link** or **Group** on a push step, those values arrive in the notification payload under the `link` and `group` keys. Your app reads them and handles navigation or grouping.
+
+On iOS, the `group` value also sets the thread ID, so notifications with the same group stack together automatically. On Android, your app implements grouping if needed.
+
+Read the values from the notification payload using your Firebase Messaging handlers:
+
+```react-native
+import messaging from '@react-native-firebase/messaging'
+
+// Handle tap when the app is in the background
+messaging().onNotificationOpenedApp((remoteMessage) => {
+    const link = remoteMessage.data?.link
+    const group = remoteMessage.data?.group
+
+    if (link) {
+        // Navigate to the destination
+    }
+})
+
+// Handle tap when the app was closed
+messaging()
+    .getInitialNotification()
+    .then((remoteMessage) => {
+        if (remoteMessage) {
+            const link = remoteMessage.data?.link
+            const group = remoteMessage.data?.group
+
+            if (link) {
+                // Navigate to the destination
+            }
+        }
+    })
+```
+
+The `link` and `group` values are strings. If the fields are empty on the push step, these keys aren't present in the payload.
+
 ## Troubleshooting
 
-| Issue | Check |
-| --- | --- |
-| Token never registers | Confirm `@posthog/react-native-plugin` is installed, push is set up in your app, and the user granted notification permission. On Android, confirm Firebase Messaging is on the classpath (`@react-native-firebase/messaging` sets this up). |
-| Push doesn't arrive | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app. |
-| `$push_notification_opened` never fires | On iOS, confirm something in your app sets `UNUserNotificationCenter.current().delegate`, that the device runs iOS 14 or newer, and, for a tap that cold-launches the app, that you're on `@posthog/react-native-plugin` 2.9.2 or newer. On Android, confirm the notification is sent through FCM (detection keys on the `google.message_id` intent extra), that you're on `@posthog/react-native-plugin` 2.6.0 or newer for taps that arrive while the app is already running, and that your `MainActivity` [overrides `onNewIntent`](#android-taps-after-the-process-is-killed) for taps after the process was killed. |
-| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification). |
+| Issue                                       | Check                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Token never registers                       | Confirm `@posthog/react-native-plugin` is installed, push is set up in your app, and the user granted notification permission. On Android, confirm Firebase Messaging is on the classpath (`@react-native-firebase/messaging` sets this up).                                                                                                                                                                                                                                                                                                                                                                             |
+| Push doesn't arrive                         | Confirm the channel's Firebase project (Android) or APNs environment and bundle id (iOS) match your app.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `$push_notification_opened` never fires     | On iOS, confirm something in your app sets `UNUserNotificationCenter.current().delegate`, that the device runs iOS 14 or newer, and, for a tap that cold-launches the app, that you're on `@posthog/react-native-plugin` 2.9.2 or newer. On Android, confirm the notification is sent through FCM (detection keys on the `google.message_id` intent extra), that you're on `@posthog/react-native-plugin` 2.6.0 or newer for taps that arrive while the app is already running, and that your `MainActivity` [overrides `onNewIntent`](#android-taps-after-the-process-is-killed) for taps after the process was killed. |
+| Registration rejected on a Required channel | Your `pushIdentityProvider` isn't returning a valid token in time. See [Identity verification](/docs/workflows/push-notifications#identity-verification).                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
