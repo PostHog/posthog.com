@@ -36,7 +36,7 @@ The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `instru
 npm install @posthog/mcp posthog-node
 ```
 
-`@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle.
+`@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle. `@posthog/mcp` re-exports `PostHog`, so one import covers both. `posthog-node` is still a peer dependency, so install it too.
 
 </Step>
 
@@ -48,8 +48,7 @@ Call `instrument(server, posthog)` once, before the server accepts requests. Pas
 
 ```ts file=SDK-v1
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
@@ -66,8 +65,7 @@ server.tool("search_events", { /* ... */ }, async (args) => {
 
 ```ts file=SDK-v2
 import { McpServer } from "@modelcontextprotocol/server"
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const server = new McpServer({ name: "my-mcp-server", version: "1.0.0" })
 
