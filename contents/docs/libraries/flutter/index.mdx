@@ -579,9 +579,7 @@ config.onFeatureFlags = (loaded) {
 
 `beforeSend` callbacks, including `logsConfig.beforeSend`, are now synchronous. An `async` callback is a compile error, so load anything it needs ahead of time and read it synchronously.
 
-The event goes to the SDK in the same call as `capture()`, `screen()` or `captureException()`, so a `reset()` or `identify()` made straight after an un-awaited call no longer applies to that event first.
-
-On iOS, macOS and Android, if you set `beforeSend`, a `capture()` followed straight away by `optOut()`, `close()` or `setup()` drops that event. Await the `capture()` first if the event must be sent.
+A `reset()`, `identify()` or `optOut()` made straight after an un-awaited `capture()`, `screen()` or `captureException()` no longer applies to that event first.
 
 ### Events go to capture v1
 
