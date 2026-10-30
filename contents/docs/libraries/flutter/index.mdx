@@ -73,6 +73,70 @@ import FlutterSendEvents from '../../integrate/send-events/_snippets/send-events
 
 <FlutterSendEvents />
 
+## Event options
+
+`capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, `captureException` and `captureAi` take an optional `options` map. Options tell PostHog how to process the event and are sent apart from its properties.
+
+```dart
+await Posthog().capture(
+  eventName: 'signed_up',
+  options: {'process_person_profile': false},
+);
+```
+
+| Option | Type | What it does | Legacy property |
+| --- | --- | --- | --- |
+| `process_person_profile` | `bool` | Whether PostHog creates or updates a person profile for this event | `$process_person_profile` |
+| `cookieless_mode` | `bool` | Whether PostHog processes this event in cookieless mode | `$cookieless_mode` |
+| `disable_skew_correction` | `bool` | Whether PostHog keeps the event timestamp as sent instead of correcting it for device clock skew | `$ignore_sent_at` |
+| `product_tour_id` | `String` | The product tour the event belongs to | `$product_tour_id` |
+
+- An option wins over its legacy property. A `null` option counts as unset.
+- `beforeSend` can read and change the options of the events it receives through `PostHogEvent.options`:
+
+  ```dart
+  final config = PostHogConfig('<ph_project_token>');
+  config.beforeSend = [
+    (event) {
+      event.options = {...?event.options, 'cookieless_mode': true};
+      return event;
+    },
+  ];
+  ```
+
+- On iOS, macOS, Android, Windows and Linux, other option keys are sent unchanged.
+- On web, the known options are sent as their legacy properties and other keys are dropped. `posthog-js` sets `$process_person_profile` itself, so `process_person_profile` has no effect on web, and the options of `identify`, `setPersonProperties`, `alias` and `group` are dropped.
+
+## Capturing AI events
+
+`captureAi` sends AI events such as `$ai_generation`, `$ai_span`, `$ai_trace` and `$ai_embedding` to PostHog's AI endpoint, which accepts much larger events than `capture`. It takes the same arguments as `capture` and goes through the same `beforeSend` callbacks.
+
+```dart
+final uuid = await Posthog().captureAi(
+  eventName: r'$ai_generation',
+  properties: {
+    r'$ai_trace_id': traceId,
+    r'$ai_model': 'gpt-4o',
+    r'$ai_provider': 'openai',
+  },
+);
+```
+
+- `captureAi` returns the event's UUID, or `null` when the event isn't queued and won't be sent: `beforeSend` dropped it, it's over `captureAiMaxEventBytes`, the SDK is disabled, not set up or opted out, or the app is running on web.
+- On web, `captureAi` is a no-op: it sends nothing and returns `null`.
+- PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint, even ones named `$ai_*`.
+- The SDK sends AI events unchanged. It doesn't redact or truncate prompts, outputs or media, so use `beforeSend` to remove anything you don't want to send.
+- AI events are queued separately from other events. `flush()` and `close()` send both queues.
+
+These `PostHogConfig` settings control the AI queue and its requests. They have no effect on web.
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `captureAiCompression` | `PostHogCompression.gzip` | How AI request bodies are compressed, separately from `compression` |
+| `captureAiMaxQueueSize` | 100 | Maximum number of AI events kept in the queue before the oldest are dropped. The queue also keeps at most 50 MiB of AI events, whatever this is set to. A value of `0` or less uses the default |
+| `captureAiTimeout` | 60 seconds | How long an AI request can go without network activity before it fails. `Duration.zero` or less uses the default. iOS, macOS and Android use whole seconds |
+| `captureAiMaxEventBytes` | 8 MiB + 64 KiB | Maximum size of an AI event, measured before compression. Use it to lower the limit: a larger value, or a value of `0` or less, uses the default |
+
 ## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
@@ -540,7 +604,7 @@ In version 5, the SDK's own values won over the properties you registered or pas
 
 `beforeSend` runs after the merge, so it sees and can change every property and option the SDK adds. In version 5, on iOS, macOS and Android, it ran before the native SDK added its properties and saw only the properties you passed.
 
-### Event options
+### Per-event options
 
 Capture v1 reads processing settings from an `options` map sent next to the event's properties. `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group` and `captureException` take a new `options` argument, and `beforeSend` can read and change `PostHogEvent.options`.
 
@@ -558,36 +622,11 @@ await Posthog().capture(
 );
 ```
 
-| Legacy property | Option |
-| --- | --- |
-| `$process_person_profile` | `process_person_profile` |
-| `$cookieless_mode` | `cookieless_mode` |
-| `$ignore_sent_at` | `disable_skew_correction` |
-| `$product_tour_id` | `product_tour_id` |
-
-- The legacy properties still work. An option you pass, or set in `beforeSend`, wins over its legacy property. A `null` option counts as unset.
-- On iOS, macOS, Android, Windows and Linux, other option keys are sent unchanged.
-- On web, the known options are sent as their legacy properties and other keys are dropped. `posthog-js` sets `$process_person_profile` itself, so `process_person_profile` has no effect on web, and the options of `identify`, `setPersonProperties`, `alias` and `group` are dropped.
+The legacy properties still work, but an option wins over its legacy property. See [Event options](#event-options) for the known options, their legacy properties and the limits on web.
 
 ### AI events
 
-Version 6 adds `captureAi`, which sends AI events such as `$ai_generation` to PostHog's AI endpoint instead of the events endpoint. It takes the same arguments as `capture` and goes through the same `beforeSend` callbacks.
-
-```dart
-await Posthog().captureAi(
-  eventName: r'$ai_generation',
-  properties: {
-    r'$ai_trace_id': traceId,
-    r'$ai_model': 'gpt-4o',
-  },
-);
-```
-
-- `captureAi` returns the event's UUID, or `null` when the event isn't queued: `beforeSend` dropped it, it's over `captureAiMaxEventBytes`, or the SDK is disabled or opted out.
-- PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint, even ones named `$ai_*`.
-- AI events are queued separately from other events. `PostHogConfig.captureAiCompression`, `captureAiMaxQueueSize`, `captureAiTimeout` and `captureAiMaxEventBytes` configure that queue and its requests.
-- The SDK sends AI events unchanged. It doesn't redact or truncate prompts, outputs or media, so use `beforeSend` to remove anything you don't want to send.
-- On web, `captureAi` is a no-op: it sends nothing and returns `null`.
+Version 6 adds `captureAi`, which sends AI events to `/i/v1/ai/events`, and the `captureAiCompression`, `captureAiMaxQueueSize`, `captureAiTimeout` and `captureAiMaxEventBytes` settings. On web, `captureAi` is a no-op and the settings have no effect. See [Capturing AI events](#capturing-ai-events).
 
 ### Retries
 
