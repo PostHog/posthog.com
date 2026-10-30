@@ -282,12 +282,6 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'Context Warehouse',
-            link: '/warehouse',
-            icon: <Icons.IconDatabase className="size-4 text-blue" />,
-        },
-        {
-            type: 'item',
             label: 'PostHog Research',
             link: '/research',
             icon: <Icons.IconBrain className="size-4 text-purple" />,
