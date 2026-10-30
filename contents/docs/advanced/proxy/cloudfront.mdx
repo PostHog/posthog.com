@@ -102,7 +102,7 @@ Unless a policy forwards them, CloudFront drops custom headers and replaces `Use
 
 <Step title="Create a function that keeps only the project token">
 
-The origin request policy forwards every `Authorization` value. Capture v1 SDKs send the project token as `Authorization: Bearer phc_...`, but your app may add its own session token to requests on the same domain. A CloudFront Function removes any other value before the request leaves CloudFront.
+The origin request policy forwards every `Authorization` value. PostHog SDKs send their keys as `Authorization: Bearer phc_...` (or `phs_` and `phx_` for feature flag definitions), but your app may add its own session token to requests on the same domain. A CloudFront Function removes any other value before the request leaves CloudFront.
 
 In the CloudFront console, follow AWS's guide to [create a function](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/create-function.html) named `posthog-authorization` with the `cloudfront-js-2.0` runtime and this code:
 
@@ -110,9 +110,9 @@ In the CloudFront console, follow AWS's guide to [create a function](https://doc
 function handler(event) {
   var request = event.request
   var authorization = request.headers.authorization
-  // Keep the SDK's project token (Bearer phc_...). Strip any other credentials.
-  // If your project token doesn't start with phc_, keep only exactly 'Bearer <your project token>' instead.
-  if (authorization && authorization.value.indexOf('Bearer phc_') !== 0) {
+  // Keep PostHog keys (Bearer phc_, phs_ or phx_). Strip any other credentials.
+  // To allow an older key without one of these prefixes, also keep its exact 'Bearer <key>' value.
+  if (authorization && !/^Bearer ph[csx]_/.test(authorization.value)) {
     delete request.headers.authorization
   }
   return request
@@ -251,7 +251,7 @@ If capture v1 SDKs get `400` with `missing_required_headers` or `401` with `miss
 1. Confirm your default behavior uses your custom `posthog-origin-request-policy`
 2. Verify that policy forwards all viewer headers except `Host`
 3. Verify your cache policy includes the `Authorization` header
-4. If your project token doesn't start with `phc_`, edit the `posthog-authorization` function to keep only the exact value `Bearer <your project token>`
+4. If your key was created before the `phc_`, `phs_` and `phx_` prefixes, edit the `posthog-authorization` function to also keep its exact `Bearer <key>` value
 
 Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, along with `PostHog-*` headers that PostHog requires. If CloudFront drops any of them, PostHog rejects the request.
 

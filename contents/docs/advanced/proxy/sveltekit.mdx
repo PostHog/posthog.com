@@ -76,9 +76,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     headers.set('host', hostname)
     // Remove cookies before forwarding to PostHog
     headers.delete('cookie')
-    // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    if (!headers.get('authorization')?.startsWith('Bearer phc_')) {
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    if (!/^Bearer ph[csx]_/.test(headers.get('authorization') ?? '')) {
       headers.delete('authorization')
     }
     headers.set('accept-encoding', '')
@@ -126,9 +126,9 @@ export const handle: Handle = async ({ event, resolve }) => {
     headers.set('host', hostname)
     // Remove cookies before forwarding to PostHog
     headers.delete('cookie')
-    // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    if (!headers.get('authorization')?.startsWith('Bearer phc_')) {
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    if (!/^Bearer ph[csx]_/.test(headers.get('authorization') ?? '')) {
       headers.delete('authorization')
     }
     headers.set('accept-encoding', '')
