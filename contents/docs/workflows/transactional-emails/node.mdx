@@ -1,0 +1,105 @@
+---
+title: Send transactional emails with Node.js
+sidebar: Docs
+showTitle: true
+---
+
+The [Node.js SDK](/docs/libraries/node) sends transactional emails from version 5.61.0. Before you start, [create a transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+
+## Install
+
+```bash
+npm install posthog-node
+```
+
+## Set up the client
+
+Reuse the PostHog client your application already creates, and set `secretKey` to your project secret API key. The client still captures events with your project token. Shut the client down when your application exits, not after each send.
+
+```js
+import { PostHog } from "posthog-node"
+
+const posthog = new PostHog("<ph_project_api_key>", {
+    host: "https://us.i.posthog.com",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    // This client only sends email, so it doesn't poll flag definitions with the secret key
+    enableLocalEvaluation: false,
+})
+```
+
+- **Local evaluation:** The client starts polling flag definitions with the secret key when it starts. A key with only the **Workflow** scope can't do that, so a client that only sends email needs `enableLocalEvaluation: false`. If your application [evaluates flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too, and leave local evaluation on.
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `appHost` to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
+
+## Send an email
+
+```js
+export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateId: "<template_id>",
+        templateData: { first_name: firstName, reset_link: resetLink },
+        distinctId: userId,
+        // Identifies this one email, so a retry never sends it twice
+        idempotencyKey: `password-reset-${resetRequestId}`,
+    })
+    if (error) {
+        // An EmailError. Branch on error.code
+        throw error
+    }
+    return data.id
+}
+```
+
+`send` returns `{ data, error }` and doesn't throw. `data.id` is the message ID. `error` is an `EmailError` with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). After a `network_error` or a `503`, PostHog might have queued the email. Retry with the same idempotency key rather than sending the email through another provider, or the recipient can get it twice.
+
+### Timeouts and retries
+
+Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds returns the error at once.
+
+To change this, set `emailRequestTimeoutMs` and `emailRequestMaxRetries` on the client, or `maxRetries` on one send. When a job queue already retries the send, set the retries to `0` and pass an `idempotencyKey` that identifies the email.
+
+## Check an email's status
+
+```js
+export async function emailBounced(messageId) {
+    const { data: status, error } = await posthog.emails.get(messageId)
+    if (error) {
+        if (error.code === "not_found") {
+            // The first status can take a few seconds to arrive. Try again later.
+            return null
+        }
+        throw error
+    }
+    return status.status === "bounced"
+}
+```
+
+`get` returns `{ data, error }`. `data` has `id`, `status`, `createdAt`, `statusAt`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.
+
+## Test without sending email
+
+Pass your own `fetch` to check what your code sends, without a network call. This checks your integration, not delivery. To check delivery, send a real email to your own address.
+
+```js
+import assert from "node:assert/strict"
+import { PostHog } from "posthog-node"
+
+const requests = []
+const posthog = new PostHog("phc_test", {
+    secretKey: "phs_test",
+    enableLocalEvaluation: false,
+    fetch: async (url, options) => {
+        requests.push({ url, options })
+        return new Response(JSON.stringify({ message_id: "msg_1", replayed: false }), { status: 202 })
+    },
+})
+
+const { data } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateId: "<template_id>",
+    idempotencyKey: "password-reset-1",
+})
+
+assert.equal(data.id, "msg_1")
+assert.equal(requests[0].options.headers["Idempotency-Key"], "password-reset-1")
+```

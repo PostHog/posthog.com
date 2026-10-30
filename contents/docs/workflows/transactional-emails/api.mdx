@@ -1,0 +1,112 @@
+---
+title: Send transactional emails with the API
+sidebar: Docs
+showTitle: true
+---
+
+Use the API to send transactional emails from any language. For Node.js and Python, the [Node.js SDK](/docs/workflows/transactional-emails/node) and the [Python SDK](/docs/workflows/transactional-emails/python) handle retries and idempotency keys for you.
+
+Before you start, [create a transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+
+## Send an email
+
+```
+POST https://us.posthog.com/api/projects/@current/messaging/send/email/
+```
+
+- **Host:** Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
+- **Project:** `@current` is the project that the key belongs to. You can use your project ID instead.
+
+### Request
+
+Send these headers:
+
+| Header | Value |
+| --- | --- |
+| `Authorization` | `Bearer` followed by your project secret API key |
+| `Content-Type` | `application/json` |
+| `Idempotency-Key` | Optional. A unique key for this email. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key). |
+
+Send a JSON body with these fields:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `template_id` | Yes | The ID of the transactional template to send. |
+| `to` | Yes | The email address of the recipient. One address for each request. |
+| `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
+| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. If you leave it out, PostHog uses the email address as the distinct ID, which might not match the person in your product. We recommend that you always send it. |
+
+In the template, use the same names that you send in `message_data`:
+
+```liquid
+Hi {{ variables.first_name }}, use this link to reset your password: {{ variables.reset_link }}
+```
+
+### Response
+
+A successful request returns `202 Accepted`:
+
+```json
+{
+  "message_id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
+  "replayed": false
+}
+```
+
+A `202` means that PostHog queued the email. It doesn't mean that the email was delivered. To see what happened to the email, [check its status](#check-an-emails-status) with its `message_id`, or open the template's **Sends** tab.
+
+`replayed` is `true` when an earlier request with the same `Idempotency-Key` already queued this email. In that case, PostHog sent no new email, and `message_id` is the ID of the first send.
+
+### Example
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: password-reset-8f14e45f" \
+  -d '{
+    "template_id": "<template_id>",
+    "to": "jane@example.com",
+    "distinct_id": "user_123",
+    "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
+  }'
+```
+
+The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
+
+When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors). After a `503`, PostHog might have queued the email. Retry with the same `Idempotency-Key` rather than sending the email through another provider, or the recipient can get it twice.
+
+## Check an email's status
+
+To find out what happened to an email, read its status with the `message_id` from the send:
+
+```
+GET https://us.posthog.com/api/projects/@current/messaging/emails/:message_id/
+```
+
+Send the same `Authorization` header as for a send. The key needs the `hog_flow:read` or `hog_flow:write` scope. Only a project secret API key can read a status.
+
+A found email returns `200`:
+
+```json
+{
+  "id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
+  "status": "delivered",
+  "created_at": "2026-10-28T16:27:44.364000Z",
+  "status_at": "2026-10-28T16:27:49.625000Z",
+  "reason": null
+}
+```
+
+See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means.
+
+A `404` with the code `not_found` means the status isn't there yet, is older than 30 days, or the ID is wrong. See [when a status isn't found](/docs/workflows/transactional-emails#when-a-status-isnt-found). It returns `401` when the request has no project secret API key, `403` when the key doesn't have a Workflow scope, and `429` when you read too often.
+
+Each project secret API key can read 600 statuses per minute and 20,000 per hour. All the keys of one project share the same limits in total. Reads have their own limits, so they don't use up the limits for sends.
+
+### Example
+
+```bash
+curl "https://us.posthog.com/api/projects/@current/messaging/emails/<message_id>/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
+```
