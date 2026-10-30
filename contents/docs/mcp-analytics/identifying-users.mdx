@@ -129,7 +129,7 @@ No SDK sets `$anon_distinct_id`, so PostHog doesn't merge these earlier events i
 ## When *not* to call identify
 
 - **Internal tools without per-user auth.** If your MCP server doesn't authenticate end users (e.g. a single-tenant internal server behind a VPN), leave `identify` unset. Session-scoped attribution is fine.
-- **Bots and crawlers.** Returning a junk identity for unauthenticated traffic dilutes your person count. Return `null` for traffic you can't identify. Those events stay session-scoped, unless an earlier request on the same session was identified. Except in Go, the cached identity then still applies.
+- **Bots and crawlers.** Returning a junk identity for unauthenticated traffic dilutes your person count. Return `null` for traffic you can't identify. Those events stay session-scoped. In every SDK except Go, if an earlier request in the same session was identified, the SDK keeps that identity.
 
 ## Querying by identified user
 
