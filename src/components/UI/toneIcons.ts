@@ -12,8 +12,5 @@ export const toneIcons: Record<Tone, typeof IconInfo> = {
     brand: IconSparkles,
 }
 
-export const isTone = (value: unknown): value is Tone =>
-    typeof value === 'string' && Object.prototype.hasOwnProperty.call(toneIcons, value)
-
 export const statusIcon = (value: ColorOrStatus): typeof IconInfo =>
     isStatusAlias(value) ? toneIcons[value] : IconInfo

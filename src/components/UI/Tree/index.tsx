@@ -501,8 +501,6 @@ function collectCheckStates(items: TreeNode[], checkedIds: Set<string>, strict: 
     return states
 }
 
-const checkboxSizes: Record<TreeSize, string> = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' }
-
 export type CheckboxTreeProps<Data extends NoData = NoData> = Omit<
     TreeProps<Data>,
     'selectionMode' | 'selected' | 'defaultSelected' | 'onSelectedChange' | 'onAction' | 'renderRow'
@@ -558,7 +556,7 @@ export function CheckboxTree<Data extends NoData = NoData>({
                             checked={isChecked}
                             indeterminate={indeterminate}
                             disabled={state.disabled}
-                            className={checkboxSizes[state.size]}
+                            className={treeSizes[state.size].icon}
                         />
                         {renderItem ? (
                             renderItem(item, state)

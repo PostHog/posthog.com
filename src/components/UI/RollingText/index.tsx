@@ -32,14 +32,16 @@ export function RollingText({
     const enabled = animate && options.length > 1
     const { ref, active } = useTextAnimation(enabled)
     const animationName = `ui-rolling-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
-    const frames = options
-        .map((_, index) => {
-            const position = -(index * 100) / (options.length + 1)
-            const start = (index * 100) / options.length
-            const hold = ((index + 0.8) * 100) / options.length
-            return `${start}%,${hold}%{transform:translateY(${position}%)}`
-        })
-        .join('')
+    const frames = enabled
+        ? options
+              .map((_, index) => {
+                  const position = -(index * 100) / (options.length + 1)
+                  const start = (index * 100) / options.length
+                  const hold = ((index + 0.8) * 100) / options.length
+                  return `${start}%,${hold}%{transform:translateY(${position}%)}`
+              })
+              .join('')
+        : ''
     return (
         <span
             ref={ref}

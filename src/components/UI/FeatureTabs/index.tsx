@@ -4,6 +4,7 @@ import { Tabs } from 'radix-ui'
 import { IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import Tooltip from '../../RadixUI/Tooltip'
 import { scrollbarHidden } from '../styles'
+import { usePageVisible, usePrefersReducedMotion } from '../utils'
 
 const DEFAULT_SLIDE_DURATION = 5000
 
@@ -83,7 +84,8 @@ export default function FeatureTabs({
     const [isHovering, setIsHovering] = useState(false)
     const [isOffscreen, setIsOffscreen] = useState(false)
     const [isWaitingToStart, setIsWaitingToStart] = useState(autoplayStartDelay > 0)
-    const [isMotionBlocked, setIsMotionBlocked] = useState(false)
+    const reducedMotion = usePrefersReducedMotion()
+    const pageVisible = usePageVisible()
     const [progressKey, setProgressKey] = useState(0)
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -97,7 +99,7 @@ export default function FeatureTabs({
         const el = containerRef.current
         if (!el || typeof IntersectionObserver === 'undefined') return
 
-        const scrollRoot = (el.closest('[data-radix-scroll-area-viewport]') as Element | null) ?? null
+        const scrollRoot = el.closest('[data-radix-scroll-area-viewport]')
 
         const observer = new IntersectionObserver(([entry]) => setIsOffscreen(!entry.isIntersecting), {
             root: scrollRoot,
@@ -108,19 +110,8 @@ export default function FeatureTabs({
         return () => observer.disconnect()
     }, [])
 
-    useEffect(() => {
-        const motion = window.matchMedia('(prefers-reduced-motion: reduce)')
-        const update = () => setIsMotionBlocked(motion.matches || document.hidden)
-        update()
-        motion.addEventListener('change', update)
-        document.addEventListener('visibilitychange', update)
-        return () => {
-            motion.removeEventListener('change', update)
-            document.removeEventListener('visibilitychange', update)
-        }
-    }, [])
-
-    const effectivelyPaused = isPaused || isHovering || isOffscreen || isWaitingToStart || isMotionBlocked
+    const effectivelyPaused = isPaused || isHovering || isOffscreen || isWaitingToStart || reducedMotion || !pageVisible
+    const pauseLabel = isPaused ? 'Resume carousel' : 'Pause carousel'
 
     const advance = useCallback(() => {
         setActiveTab((prev) => {
@@ -235,7 +226,7 @@ export default function FeatureTabs({
                                     <button
                                         onClick={() => setIsPaused((p) => !p)}
                                         className="shrink-0 p-2 text-secondary hover:text-primary cursor-pointer border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur"
-                                        aria-label={isPaused ? 'Resume carousel' : 'Pause carousel'}
+                                        aria-label={pauseLabel}
                                     >
                                         {isPaused ? (
                                             <IconPlayFilled className="size-3.5" />
@@ -246,7 +237,7 @@ export default function FeatureTabs({
                                 }
                                 delay={0}
                             >
-                                <span>{isPaused ? 'Resume carousel' : 'Pause carousel'}</span>
+                                <span>{pauseLabel}</span>
                             </Tooltip>
                         </span>
                         {tabs.map((tab) => (

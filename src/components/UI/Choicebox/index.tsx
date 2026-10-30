@@ -5,7 +5,7 @@ import { cn } from '../../../utils'
 import { Radio } from '../Radio'
 import { Checkbox } from '../Checkbox'
 import { cardLevels, fieldState } from '../styles'
-import { mergeClassName } from '../utils'
+import { mergeClassName, withClassName } from '../utils'
 
 const MultipleContext = React.createContext<boolean | null>(null)
 
@@ -87,17 +87,8 @@ const Item = React.forwardRef<HTMLLabelElement, ChoiceboxItemProps>(function Cho
     )
 })
 
-const Title = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function ChoiceboxTitle(
-    { className, ...props },
-    ref
-) {
-    return <span ref={ref} className={cn('text-sm font-semibold', className)} {...props} />
-})
+const Title = withClassName('span', 'text-sm font-semibold')
 
-const Description = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(
-    function ChoiceboxDescription({ className, ...props }, ref) {
-        return <span ref={ref} className={cn('text-sm text-secondary', className)} {...props} />
-    }
-)
+const Description = withClassName('span', 'text-sm text-secondary')
 
 export const Choicebox = { Group, Item, Title, Description }

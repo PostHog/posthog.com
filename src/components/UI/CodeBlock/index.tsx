@@ -16,6 +16,7 @@ import {
     plainCode,
     scrollbarHidden,
 } from '../styles'
+import { wrapText } from '../truncation'
 import { useId } from '../utils'
 
 export type CodeSnippet = {
@@ -97,10 +98,11 @@ function SnippetContent({
     const regionId = useId()
     const [expanded, setExpanded] = React.useState(false)
     const heightLimit = maxHeight === undefined ? undefined : Math.max(1, maxHeight)
-    const contentHeight = codeHeight(snippet.code)
+    const contentHeight = heightLimit === undefined ? 0 : codeHeight(snippet.code)
     const canExpand = heightLimit !== undefined && contentHeight > heightLimit
     const hasDiff = Boolean(snippet.addedLines?.length || snippet.removedLines?.length)
     const language = snippet.language?.toLowerCase() || 'text'
+    const prismLanguage = languageMap[language]?.language || language
 
     return (
         <>
@@ -118,7 +120,7 @@ function SnippetContent({
                 <Highlight
                     {...defaultProps}
                     code={snippet.code}
-                    language={(languageMap[language]?.language || language) as Language}
+                    language={prismLanguage as Language}
                     theme={tokenTheme}
                 >
                     {({ tokens, getTokenProps }) => (
@@ -184,12 +186,12 @@ function SnippetContent({
                                                             {
                                                                 '--syntax-light': syntaxColor(
                                                                     token.types,
-                                                                    languageMap[language]?.language || language,
+                                                                    prismLanguage,
                                                                     lightTheme
                                                                 ),
                                                                 '--syntax-dark': syntaxColor(
                                                                     token.types,
-                                                                    languageMap[language]?.language || language,
+                                                                    prismLanguage,
                                                                     darkTheme
                                                                 ),
                                                             } as React.CSSProperties
@@ -309,7 +311,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                             ))}
                         </Tabs.List>
                     ) : (
-                        <div className="min-w-0 px-2.5 text-[13px] font-semibold [overflow-wrap:anywhere]">
+                        <div className={cn(wrapText, 'px-2.5 text-[13px] font-semibold')}>
                             {snippetLabel(activeSnippet)}
                             {activeSnippet.fileName && activeSnippet.language && (
                                 <span className="ml-2 font-code font-normal text-secondary">

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Slider as BaseSlider } from '@base-ui/react/slider'
-import { controlLabel, grainSurface, trackSurface } from '../styles'
+import { controlLabel, disabledControl, grainSurface, trackSurface } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const RANGE_SEPARATOR = ' – '
@@ -66,7 +66,7 @@ const Value = React.forwardRef<HTMLOutputElement, Omit<BaseSlider.Value.Props, '
 
 const Control = withClassName(
     BaseSlider.Control,
-    'flex w-full items-center py-1.5 data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-1.5 data-[orientation=vertical]:py-0 data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
+    `flex w-full items-center py-1.5 data-[orientation=vertical]:h-full data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col data-[orientation=vertical]:px-1.5 data-[orientation=vertical]:py-0 ${disabledControl}`
 )
 
 const Track = withClassName(

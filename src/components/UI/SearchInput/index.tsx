@@ -11,13 +11,12 @@ import {
     fieldIconButtonSizes,
     fieldSizes,
     fieldAppearanceShape,
+    iconSizes,
     searchGroupFor,
     searchRoundPadding,
 } from '../styles'
 import type { SearchAppearance } from '../styles'
 import { cn } from '../../../utils'
-
-const searchIconSizes = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' } as const
 
 const clearButtonEdge = {
     box: { sm: '-mr-[6px]', md: '-mr-[7px]', lg: '-mr-[9px]' },
@@ -103,7 +102,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             {loading ? (
                 <Spinner size={size} label={loadingLabel} className="text-secondary" />
             ) : (
-                <IconSearch aria-hidden="true" className={cn('shrink-0 text-secondary', searchIconSizes[size])} />
+                <IconSearch aria-hidden="true" className={cn('shrink-0 text-secondary', iconSizes[size])} />
             )}
             <Input
                 {...props}

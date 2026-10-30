@@ -4,7 +4,7 @@ import { IconArrowLeft, IconArrowRight, IconPauseFilled, IconPlayFilled } from '
 import { IconButton } from '../Button'
 import { FloatingIconButton } from '../FloatingButton'
 import { focusRing, scrollbarHidden } from '../styles'
-import { useId, useIsomorphicLayoutEffect } from '../utils'
+import { useId, useIsomorphicLayoutEffect, usePageVisible, usePrefersReducedMotion } from '../utils'
 import { cn } from '../../../utils'
 import './styles.css'
 
@@ -81,8 +81,8 @@ export function Carousel({
     const [hovered, setHovered] = useState(false)
     const [focused, setFocused] = useState(false)
     const [visible, setVisible] = useState(false)
-    const [hidden, setHidden] = useState(true)
-    const [reduced, setReduced] = useState(true)
+    const hidden = !usePageVisible()
+    const reduced = usePrefersReducedMotion()
     const callback = useRef(onActiveIndexChange)
     callback.current = onActiveIndexChange
     const interval = Number.isFinite(autoplay) && autoplay > 0 ? Math.max(MIN_AUTOPLAY_MS, autoplay) : 0
@@ -153,11 +153,10 @@ export function Carousel({
             scrollToPosition(position.current, false)
         })
         observer.observe(viewport)
-        const onScrollEnd = () => recenter()
-        viewport.addEventListener('scrollend', onScrollEnd)
+        viewport.addEventListener('scrollend', recenter)
         return () => {
             observer.disconnect()
-            viewport.removeEventListener('scrollend', onScrollEnd)
+            viewport.removeEventListener('scrollend', recenter)
         }
     }, [cloned, measure, recenter, scrollToPosition, slidesPerView, peek])
 
@@ -166,20 +165,9 @@ export function Carousel({
     useEffect(() => {
         const element = root.current
         if (!element) return
-        const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-        const updateMotion = () => setReduced(media.matches)
-        const updateVisibility = () => setHidden(document.hidden)
-        updateMotion()
-        updateVisibility()
-        media.addEventListener('change', updateMotion)
-        document.addEventListener('visibilitychange', updateVisibility)
         const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.1 })
         observer.observe(element)
-        return () => {
-            media.removeEventListener('change', updateMotion)
-            document.removeEventListener('visibilitychange', updateVisibility)
-            observer.disconnect()
-        }
+        return () => observer.disconnect()
     }, [count > 0])
 
     useEffect(() => callback.current?.(active), [active])

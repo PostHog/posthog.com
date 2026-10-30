@@ -1,7 +1,7 @@
 import { Radio as BaseRadio } from '@base-ui/react/radio'
 import { RadioGroup as BaseRadioGroup } from '@base-ui/react/radio-group'
 import { cn } from '../../../utils'
-import { controlSurface, focusRing } from '../styles'
+import { controlSurface, disabledControl, focusRing } from '../styles'
 import { withClassName } from '../utils'
 
 export const RadioGroup = withClassName(BaseRadioGroup, 'flex flex-col gap-2')
@@ -12,7 +12,8 @@ const Root = withClassName(
         'group flex size-5 shrink-0 items-center justify-center rounded-full',
         controlSurface,
         'transition-[border-color] duration-150 ease-out hover:border-orange data-[checked]:border-orange motion-reduce:transition-none',
-        'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[disabled]:hover:border-primary',
+        disabledControl,
+        'data-[disabled]:hover:border-primary',
         focusRing
     )
 )

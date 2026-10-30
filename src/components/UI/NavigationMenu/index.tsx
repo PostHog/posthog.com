@@ -55,7 +55,7 @@ const List = React.forwardRef<HTMLUListElement, NavigationMenuListProps>(functio
     )
 })
 
-const Trigger = withClassName(BaseNavigationMenu.Trigger, `${menubarTrigger} active:bg-[rgb(var(--text-primary)/0.1)]`)
+const Trigger = withClassName(BaseNavigationMenu.Trigger, menubarTrigger)
 
 const Icon = withClassName(
     BaseNavigationMenu.Icon,
@@ -82,7 +82,7 @@ const Content = React.forwardRef<HTMLDivElement, BaseNavigationMenu.Content.Prop
 
 const contentLink = `${menuItem} ${wrapText} h-auto min-h-[25px] flex-col items-start justify-center gap-1 py-1.5 no-underline hover:bg-[rgb(var(--text-primary)/0.07)] focus-visible:bg-[rgb(var(--text-primary)/0.07)] data-[highlighted]:bg-[rgb(var(--text-primary)/0.07)]`
 
-const listLink = `${menubarTrigger} no-underline active:bg-[rgb(var(--text-primary)/0.1)]`
+const listLink = `${menubarTrigger} no-underline`
 
 const Link = React.forwardRef<HTMLAnchorElement, BaseNavigationMenu.Link.Props>(function NavigationMenuLink(
     { className, closeOnClick = true, ...props },

@@ -4,7 +4,15 @@ import { IconX } from '@posthog/icons'
 import { cn } from '../../../utils'
 import { IconButton } from '../Button'
 import { ScrollArea } from '../ScrollArea'
-import { dialogBackdrop, dialogPopup, dialogViewport, surfacePaddings, surfaceDivider } from '../styles'
+import {
+    dialogBackdrop,
+    dialogDescription,
+    dialogPopup,
+    dialogTitle,
+    dialogViewport,
+    surfacePaddings,
+    surfaceDivider,
+} from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 export type DialogPopupProps = BaseDialog.Popup.Props & {
@@ -53,9 +61,9 @@ const Header = ({ children, className, showCloseButton = true }: DialogHeaderPro
     </div>
 )
 
-const Title = withClassName(BaseDialog.Title, 'my-0 text-base font-bold text-primary')
+const Title = withClassName(BaseDialog.Title, dialogTitle)
 
-const Description = withClassName(BaseDialog.Description, 'my-0 text-sm text-secondary')
+const Description = withClassName(BaseDialog.Description, dialogDescription)
 
 export const scrollBodyRoot = 'flex min-h-0 grow flex-col'
 export const scrollBodyViewport = 'h-auto min-h-0 grow'

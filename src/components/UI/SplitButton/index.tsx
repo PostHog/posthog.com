@@ -1,22 +1,19 @@
 import React from 'react'
 import { IconChevronDown } from '@posthog/icons'
-import { cn } from '../../../utils'
 import { Button, ButtonGroup, IconButton } from '../Button'
-import type { ButtonAppearance, ButtonGroupProps, ButtonProps, ButtonSize, ButtonVariant } from '../Button'
+import type { ButtonAppearance, ButtonGroupProps, ButtonProps, ButtonSize } from '../Button'
 import { Menu } from '../Menu'
 import type { MenuPopupProps } from '../Menu'
 
 type SplitButtonContextValue = {
     disabled: boolean
     appearance: ButtonAppearance
-    variant: ButtonVariant
     size: ButtonSize
 }
 
 const SplitButtonContext = React.createContext<SplitButtonContextValue>({
     disabled: false,
     appearance: 'flat',
-    variant: 'secondary',
     size: 'md',
 })
 
@@ -43,10 +40,7 @@ function Root({
     'aria-label': label,
     ...props
 }: SplitButtonRootProps): JSX.Element {
-    const context = React.useMemo(
-        () => ({ disabled, appearance, variant, size }),
-        [disabled, appearance, variant, size]
-    )
+    const context = React.useMemo(() => ({ disabled, appearance, size }), [disabled, appearance, size])
     return (
         <SplitButtonContext.Provider value={context}>
             <Menu.Root {...props}>
@@ -86,7 +80,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, SplitButtonTriggerProps>(fun
                 <IconButton
                     icon={<IconChevronDown className="scale-125" />}
                     aria-label={label}
-                    className={cn(appearance === 'raised' ? raisedTriggerPadding[size] : flatTriggerPadding[size])}
+                    className={appearance === 'raised' ? raisedTriggerPadding[size] : flatTriggerPadding[size]}
                 />
             }
         />

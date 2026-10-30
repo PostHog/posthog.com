@@ -2,6 +2,7 @@ import React from 'react'
 import { Select as BaseSelect } from '@base-ui/react/select'
 import { IconCheck, IconChevronDown } from '@posthog/icons'
 import {
+    anchoredFieldPopup,
     fieldChevronSizes,
     fieldListItemSizes,
     fieldSizes,
@@ -11,8 +12,6 @@ import {
     fieldTriggerSurface,
     menuGroupLabel,
     menuSeparator,
-    popupSurface,
-    popupTransition,
     positionerLayer,
 } from '../styles'
 import type { FieldAppearance, FieldSize } from '../styles'
@@ -88,7 +87,7 @@ const Icon = React.forwardRef<HTMLSpanElement, BaseSelect.Icon.Props>(function S
     )
 })
 
-const selectPopup = `${popupSurface} ${popupTransition} group min-w-[var(--anchor-width)] max-w-[min(var(--available-width),max(var(--anchor-width),24rem))] bg-clip-padding data-[side=none]:min-w-[calc(var(--anchor-width)+2rem)]`
+const selectPopup = `${anchoredFieldPopup} group data-[side=none]:min-w-[calc(var(--anchor-width)+2rem)]`
 
 const scrollArrow =
     'z-[1] flex h-4 w-full cursor-default items-center justify-center rounded-md bg-primary text-secondary'

@@ -84,10 +84,35 @@ export function assignRef<Element>(ref: React.ForwardedRef<Element>, element: El
 export const useIsomorphicLayoutEffect = typeof window === 'undefined' ? React.useEffect : React.useLayoutEffect
 
 export const HEIGHT_CHANGE_MS = 200
-export const heightChangeEasing = 'cubic-bezier(0.23, 1, 0.32, 1)'
+export const motionEasing = 'cubic-bezier(0.23, 1, 0.32, 1)'
+
+const reducedMotionQuery = '(prefers-reduced-motion: reduce)'
 
 export function prefersReducedMotion(): boolean {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    return window.matchMedia(reducedMotionQuery).matches
+}
+
+function subscribeToReducedMotion(onChange: () => void): () => void {
+    const query = window.matchMedia(reducedMotionQuery)
+    query.addEventListener('change', onChange)
+    return () => query.removeEventListener('change', onChange)
+}
+
+export function usePrefersReducedMotion(): boolean {
+    return useSyncExternalStore(subscribeToReducedMotion, prefersReducedMotion, () => true)
+}
+
+function subscribeToPageVisibility(onChange: () => void): () => void {
+    document.addEventListener('visibilitychange', onChange)
+    return () => document.removeEventListener('visibilitychange', onChange)
+}
+
+export function usePageVisible(): boolean {
+    return useSyncExternalStore(
+        subscribeToPageVisibility,
+        () => !document.hidden,
+        () => false
+    )
 }
 
 export function useSmoothHeight(shouldAnimate?: () => boolean): (element: HTMLElement | null) => void {
@@ -107,7 +132,7 @@ export function useSmoothHeight(shouldAnimate?: () => boolean): (element: HTMLEl
                     { height: `${from}px`, overflow: 'hidden' },
                     { height: `${to}px`, overflow: 'hidden' },
                 ],
-                { duration: HEIGHT_CHANGE_MS, easing: heightChangeEasing }
+                { duration: HEIGHT_CHANGE_MS, easing: motionEasing }
             )
             const release = () => {
                 if (running === animation) running = null
@@ -162,8 +187,9 @@ export function useSmoothHeight(shouldAnimate?: () => boolean): (element: HTMLEl
 export function flattenFragments(children: React.ReactNode, fragmentKeys: React.Key[] = []): React.ReactNode[] {
     return React.Children.toArray(children).flatMap((child) => {
         if (!React.isValidElement<{ children?: React.ReactNode }>(child)) return [child]
+        if (child.type !== React.Fragment && fragmentKeys.length === 0) return [child]
         const keys = [...fragmentKeys, child.key ?? '']
         if (child.type === React.Fragment) return flattenFragments(child.props.children, keys)
-        return fragmentKeys.length > 0 ? [React.cloneElement(child, { key: JSON.stringify(keys) })] : [child]
+        return [React.cloneElement(child, { key: JSON.stringify(keys) })]
     })
 }

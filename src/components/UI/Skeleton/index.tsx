@@ -38,25 +38,6 @@ export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(function
     { shape = 'text', width, height, lines = 1, loading = true, children, className, style, ...props },
     ref
 ) {
-    const placeholder =
-        shape === 'text' ? (
-            <div aria-hidden="true" className={cn('flex flex-col', className)} style={{ width, ...style }}>
-                {Array.from({ length: Math.max(1, lines) }, (_, index) => (
-                    <TextLine
-                        key={index}
-                        height={height}
-                        width={lines > 1 && index === lines - 1 ? lastLineWidth : undefined}
-                    />
-                ))}
-            </div>
-        ) : (
-            <div
-                aria-hidden="true"
-                className={cn(blockShapes[shape], shimmer, className)}
-                style={{ width, height, ...style }}
-            />
-        )
-
     if (children !== undefined) {
         const measured = shape === 'text' ? measuredText : cn(measuredBlock, measuredShapes[shape])
         return (
@@ -73,5 +54,29 @@ export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(function
         )
     }
 
-    return React.cloneElement(placeholder, { ...props, ref, 'aria-hidden': true })
+    return shape === 'text' ? (
+        <div
+            {...props}
+            ref={ref}
+            aria-hidden="true"
+            className={cn('flex flex-col', className)}
+            style={{ width, ...style }}
+        >
+            {Array.from({ length: Math.max(1, lines) }, (_, index) => (
+                <TextLine
+                    key={index}
+                    height={height}
+                    width={lines > 1 && index === lines - 1 ? lastLineWidth : undefined}
+                />
+            ))}
+        </div>
+    ) : (
+        <div
+            {...props}
+            ref={ref}
+            aria-hidden="true"
+            className={cn(blockShapes[shape], shimmer, className)}
+            style={{ width, height, ...style }}
+        />
+    )
 })

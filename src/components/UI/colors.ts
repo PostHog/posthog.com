@@ -230,22 +230,7 @@ export const colorHighlight: Record<ColorName, string> = {
     yellow: 'text-brand-yellow/30',
 }
 
-export const colorInk: Record<ColorName, string> = {
-    gray: 'text-secondary',
-    brand: 'text-orange-dark dark:text-orange',
-    blue: 'text-brand-blue-darker dark:text-brand-blue-lighter',
-    cobalt: 'text-brand-cobalt-darker dark:text-brand-cobalt-lighter',
-    coral: 'text-brand-coral-darker dark:text-brand-coral-lighter',
-    'corn-blue': 'text-brand-corn-blue-darker dark:text-brand-corn-blue-lighter',
-    green: 'text-brand-green-darker dark:text-brand-green',
-    lemon: 'text-brand-lemon-darker dark:text-brand-lemon',
-    lime: 'text-brand-lime-darker dark:text-brand-lime',
-    purple: 'text-brand-purple-darker dark:text-brand-purple-lighter',
-    tangerine: 'text-brand-tangerine-darker dark:text-brand-tangerine-lighter',
-    teal: 'text-brand-teal-darker dark:text-brand-teal',
-    violet: 'text-brand-violet-darker dark:text-brand-violet-lighter',
-    yellow: 'text-brand-yellow-darker dark:text-brand-yellow',
-}
+export const colorInk: Record<ColorName, string> = { ...colorIcon }
 
 export type StatusAlias = 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'
 

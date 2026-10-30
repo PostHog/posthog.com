@@ -43,15 +43,6 @@ export type DrawerPopupProps = BaseDrawer.Popup.Props & {
     container?: BaseDrawer.Portal.Props['container']
 }
 
-function drawerPopupClassName(className: DrawerPopupProps['className']) {
-    return (state: BaseDrawer.Popup.State): string =>
-        cn(
-            drawerPopup,
-            drawerPopupSides[state.swipeDirection],
-            typeof className === 'function' ? className(state) : className
-        )
-}
-
 const Popup = React.forwardRef<HTMLDivElement, DrawerPopupProps>(function DrawerPopup(
     { className, container, children, ...props },
     ref
@@ -64,9 +55,14 @@ const Popup = React.forwardRef<HTMLDivElement, DrawerPopupProps>(function Drawer
                 <BaseDrawer.Popup
                     ref={ref}
                     data-scheme="primary"
-                    className={drawerPopupClassName((state) =>
-                        cn('pointer-events-auto', typeof className === 'function' ? className(state) : className)
-                    )}
+                    className={(state) =>
+                        cn(
+                            drawerPopup,
+                            drawerPopupSides[state.swipeDirection],
+                            'pointer-events-auto',
+                            typeof className === 'function' ? className(state) : className
+                        )
+                    }
                     {...props}
                 >
                     <div aria-hidden className={drawerGrabHandle} />

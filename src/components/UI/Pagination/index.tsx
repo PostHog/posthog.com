@@ -41,7 +41,6 @@ export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(functio
 
     const currentPage = Number.isFinite(page) ? Math.min(count, Math.max(1, Math.floor(page))) : 1
     const siblings = Number.isFinite(siblingCount) ? Math.max(0, Math.floor(siblingCount)) : 1
-    const pages = visiblePages(currentPage, count, siblings)
     const previousDisabled = currentPage === 1
     const nextDisabled = currentPage === count
 
@@ -82,7 +81,7 @@ export const Pagination = React.forwardRef<HTMLElement, PaginationProps>(functio
                     Page {currentPage} of {count}
                 </span>
             ) : (
-                pages.map((number, index) => {
+                visiblePages(currentPage, count, siblings).map((number, index, pages) => {
                     const isCurrent = number === currentPage
                     const previousPage = pages[index - 1]
                     return (

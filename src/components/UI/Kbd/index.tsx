@@ -1,5 +1,5 @@
 import React from 'react'
-import { cn } from '../../../utils'
+import { capitalizeFirstLetter, cn } from '../../../utils'
 
 type KeySize = 'sm' | 'md'
 type Platform = 'mac' | 'other'
@@ -63,7 +63,7 @@ const symbolKeys = new Set(Object.values(macKeys).map(([symbol]) => symbol))
 function keyLabel(key: string, platform: Platform): KeyLabel {
     const known = (platform === 'mac' ? macKeys : otherKeys)[key.toLowerCase()]
     if (known) return known
-    const display = key.length === 1 ? key.toUpperCase() : key.charAt(0).toUpperCase() + key.slice(1)
+    const display = capitalizeFirstLetter(key)
     return [display, display]
 }
 

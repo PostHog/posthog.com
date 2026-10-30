@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch as BaseSwitch } from '@base-ui/react/switch'
 import { cn } from '../../../utils'
-import { fieldDivider, focusRing, grainSurface, trackSurface } from '../styles'
+import { disabledControl, fieldDivider, focusRing, grainSurface, trackSurface } from '../styles'
 import { withClassName } from '../utils'
 
 const Root = withClassName(
@@ -12,7 +12,7 @@ const Root = withClassName(
         trackSurface,
         'transition-[background-color,border-color] duration-200 ease-out motion-reduce:transition-none',
         'data-[checked]:border-button data-[checked]:bg-orange data-[checked]:shadow-[inset_0_1px_2px_rgb(0_0_0/0.2)] dark:data-[checked]:border-button-dark dark:data-[checked]:bg-orange dark:data-[checked]:shadow-[inset_0_1px_2px_rgb(0_0_0/0.2)]',
-        'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50',
+        disabledControl,
         focusRing
     )
 )

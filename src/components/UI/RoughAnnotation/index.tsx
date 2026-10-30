@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import type { annotate } from 'rough-notation'
 import { colorHighlight, colorStroke } from '../colors'
 import type { ColorName } from '../colors'
-import { usePrefersReducedMotion } from './usePrefersReducedMotion'
+import { usePrefersReducedMotion } from '../utils'
 
 export type AnnotationType = 'underline' | 'box' | 'circle' | 'highlight' | 'strike-through' | 'crossed-off' | 'bracket'
 
@@ -112,24 +112,18 @@ export function RoughAnnotation({
         if (!element) return
 
         const shouldShow = show ?? (animateOnScroll ? isVisible : true)
+        const duration = prefersReducedMotion ? 0 : animationDuration
 
         let cancelled = false
-        clearTimeout(showTimeoutRef.current ?? undefined)
-        clearTimeout(animationEndTimerRef.current ?? undefined)
         import('rough-notation').then(({ annotate }) => {
             if (cancelled) return
-
-            if (annotationRef.current) {
-                annotationRef.current.remove()
-                annotationRef.current = null
-            }
 
             annotationRef.current = annotate(element, {
                 type,
                 color: 'currentColor',
                 strokeWidth,
                 animate: !prefersReducedMotion,
-                animationDuration: prefersReducedMotion ? 0 : animationDuration,
+                animationDuration: duration,
                 padding: shapeOptions.current.padding,
                 brackets: shapeOptions.current.brackets,
                 iterations,
@@ -137,7 +131,7 @@ export function RoughAnnotation({
             })
 
             const svg = type === 'highlight' ? element.previousElementSibling : element.nextElementSibling
-            if (svg?.matches('svg.rough-annotation')) {
+            if (svg?.matches(annotationSelector)) {
                 svg.classList.add(...(type === 'highlight' ? colorHighlight[color] : colorStroke[color]).split(' '))
                 svg.setAttribute('aria-hidden', 'true')
                 svg.setAttribute('focusable', 'false')
@@ -150,12 +144,11 @@ export function RoughAnnotation({
                         if (!annotationRef.current) return
                         isAnimatingRef.current = true
                         annotationRef.current.show()
-                        const aniDuration = prefersReducedMotion ? 0 : animationDuration
                         animationEndTimerRef.current = setTimeout(() => {
                             isAnimatingRef.current = false
                             animationEndTimerRef.current = null
                             onCompleteRef.current?.()
-                        }, aniDuration)
+                        }, duration)
                     },
                     prefersReducedMotion ? 0 : delay
                 )

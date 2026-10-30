@@ -2,7 +2,7 @@ import React from 'react'
 import { Checkbox as BaseCheckbox } from '@base-ui/react/checkbox'
 import { CheckboxGroup as BaseCheckboxGroup } from '@base-ui/react/checkbox-group'
 import { cn } from '../../../utils'
-import { controlSurface, focusRing } from '../styles'
+import { controlSurface, disabledControl, focusRing } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const checkboxBox = cn(
@@ -12,7 +12,7 @@ const checkboxBox = cn(
     'data-[checked]:shadow-none data-[indeterminate]:shadow-none dark:data-[checked]:shadow-none dark:data-[indeterminate]:shadow-none',
     'data-[checked]:border-button data-[checked]:bg-orange dark:data-[checked]:border-button-dark dark:data-[checked]:bg-orange',
     'data-[indeterminate]:border-button data-[indeterminate]:bg-orange dark:data-[indeterminate]:border-button-dark dark:data-[indeterminate]:bg-orange',
-    'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
+    disabledControl
 )
 
 const Root = withClassName(BaseCheckbox.Root, cn(checkboxBox, focusRing))

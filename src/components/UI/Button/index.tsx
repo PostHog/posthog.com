@@ -3,7 +3,7 @@ import { Button as BaseButton } from '@base-ui/react/button'
 import { cn } from '../../../utils'
 import Link from '../../Link'
 import type { Props as LinkProps } from '../../Link'
-import { disabledHatch, focusRing, toneSolid, toneText } from '../styles'
+import { disabledHatch, focusRing, iconSizes, toneSolid, toneText } from '../styles'
 import { mergeClassName } from '../utils'
 import { Spinner } from '../Spinner'
 import { truncateTextChildren } from '../truncation'
@@ -59,8 +59,6 @@ export type ButtonGroupProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'class
 const ButtonGroupContext = React.createContext<
     (Required<ButtonLook> & { disabled: boolean; orientation: ButtonGroupOrientation }) | null
 >(null)
-
-const iconSizes: Record<ButtonSize, string> = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' }
 
 const busyCursor = '[&[data-disabled][aria-busy=true]]:cursor-progress'
 
@@ -122,11 +120,7 @@ const flatGroupOrientations: Record<ButtonGroupOrientation, string> = {
 const raisedUnderside =
     "before:absolute before:inset-x-0 before:bottom-0 before:top-1/2 before:border-t-0 before:bg-[repeating-linear-gradient(45deg,rgb(0_0_0/0.15)_0_1px,transparent_1px_5.6569px)] before:bg-[length:8px_8px] before:content-['']"
 
-const raisedUndersideWidth: Record<ButtonSize, string> = {
-    sm: 'p-px before:border',
-    md: 'p-px before:border',
-    lg: 'p-px before:border',
-}
+const raisedUndersideWidth = 'p-px before:border'
 
 const raisedFrameBase = `relative inline-block min-w-0 max-w-full text-center ${raisedUnderside} data-[disabled]:cursor-not-allowed ${disabledFade} ${busyCursor} ${focusRing}`
 
@@ -166,13 +160,9 @@ const raisedFaces: Record<ButtonVariant, string> = {
         'border-gray bg-white text-primary dark:[--shade-color:rgb(255_255_255/0.16)] [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.08)] dark:bg-dark dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(255_255_255/0.1)]',
 }
 
-const raisedFaceBorder: Record<ButtonSize, string> = {
-    sm: 'border',
-    md: 'border',
-    lg: 'border',
-}
+const raisedFaceBorder = 'border'
 
-const raisedFaceInset: Record<ButtonSize, string> = { sm: 'mx-[-1px]', md: 'mx-[-1px]', lg: 'mx-[-1px]' }
+const raisedFaceInset = 'mx-[-1px]'
 
 const raisedFaceMotion: Record<ButtonSize, string> = {
     sm: 'translate-y-[-1.5px] [:not([data-disabled]):active>&]:translate-y-0 [[data-disabled]>&]:translate-y-[-1.5px] [[data-pressed]>&]:translate-y-0 [[data-popup-open]>&]:translate-y-[-0.5px]',
@@ -266,7 +256,7 @@ function frameClassName({ appearance, variant, size, square, isSegment, stacked 
             : cn(
                   raisedFrameBase,
                   raisedHatchMotion[size],
-                  raisedUndersideWidth[size],
+                  raisedUndersideWidth,
                   raisedFrames[variant],
                   raisedRadius[size],
                   raisedUndersideRadius[size]
@@ -353,7 +343,7 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
             className={cn(
                 raisedFaceBase,
                 raisedFaces[variant],
-                raisedFaceBorder[size],
+                raisedFaceBorder,
                 raisedFaceMotion[size],
                 square ? raisedFaceSquarePadding[size] : raisedFacePadding[size],
                 isSegment
@@ -363,7 +353,7 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
                               ? cn(raisedStackedSegmentFace[size], stackedShade)
                               : cn(raisedSegmentFace[size], sideBySideShade)
                       )
-                    : cn(raisedFaceInset[size], raisedRadius[size])
+                    : cn(raisedFaceInset, raisedRadius[size])
             )}
         >
             {content}
@@ -371,14 +361,9 @@ function ButtonContent({ shape, icon, iconPosition, iconEnd, loading, children }
     )
 }
 
-type ButtonRootProps = BaseButton.Props &
-    ButtonLook & {
-        icon?: React.ReactNode
-        iconPosition?: ButtonIconPosition
-        square?: boolean
-        iconEnd?: React.ReactNode
-        loading?: boolean
-    }
+type ButtonRootProps = ButtonProps & {
+    square?: boolean
+}
 
 const ButtonRoot = React.forwardRef<HTMLElement, ButtonRootProps>(function ButtonRoot(
     {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button as BaseButton } from '@base-ui/react/button'
 import { cn } from '../../../utils'
-import { focusRing, grainSurface, liquidGlassSurface } from '../styles'
+import { focusRing, grainSurface, iconSizes, liquidGlassSurface } from '../styles'
 import { mergeClassName } from '../utils'
 import { Spinner } from '../Spinner'
 
@@ -51,8 +51,6 @@ const groupedLabelSizes: Record<FloatingButtonSize, string> = {
 const squareSizes: Record<FloatingButtonSize, string> = { sm: 'size-8', md: 'size-10', lg: 'size-12' }
 
 const groupedSquareSizes: Record<FloatingButtonSize, string> = { sm: 'size-6', md: 'size-8', lg: 'size-10' }
-
-const iconSizes: Record<FloatingButtonSize, string> = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' }
 
 function useFloatingSize(ownSize: FloatingButtonSize): { size: FloatingButtonSize; grouped: boolean } {
     const groupSize = React.useContext(GroupSizeContext)

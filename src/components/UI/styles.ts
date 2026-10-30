@@ -14,9 +14,6 @@ export const insetFocusRing =
 export const overlayShadowSm =
     'shadow-[0_1px_2px_rgb(0_0_0/0.08),0_4px_12px_-2px_rgb(0_0_0/0.14)] dark:shadow-[0_1px_2px_rgb(0_0_0/0.4),0_4px_12px_-2px_rgb(0_0_0/0.5)]'
 
-export const overlayShadowMd =
-    'shadow-[0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] dark:shadow-[0_10px_38px_-10px_rgb(0_0_0/0.7),0_10px_20px_-15px_rgb(0_0_0/0.5)]'
-
 export const raisedOverlayShadowMd =
     'shadow-[0_1px_0_rgb(var(--border)),0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] dark:shadow-[0_1px_0_rgb(var(--border)),0_10px_38px_-10px_rgb(0_0_0/0.7),0_10px_20px_-15px_rgb(0_0_0/0.5)]'
 
@@ -28,12 +25,26 @@ export const popupSurface = `${grainSurface} relative rounded-md border border-p
 export const popupTransition =
     'origin-[var(--transform-origin)] transition-[transform,opacity] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] data-[ending-style]:duration-100 data-[starting-style]:scale-95 data-[starting-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:opacity-0 motion-reduce:transition-none data-[instant=group]:transition-none data-[instant=trigger-change]:transition-none'
 
+export const anchoredFieldPopup = `${popupSurface} ${popupTransition} min-w-[var(--anchor-width)] max-w-[min(var(--available-width),max(var(--anchor-width),24rem))] bg-clip-padding`
+
+export const contentPopup = `max-w-[var(--available-width)] p-3 ${popupSurface} ${popupTransition}`
+
+export const dialogTitle = 'my-0 text-base font-bold text-primary'
+
+export const dialogDescription = 'my-0 text-sm text-secondary'
+
+export const iconSizes: Record<'sm' | 'md' | 'lg', string> = { sm: 'size-3.5', md: 'size-4', lg: 'size-5' }
+
+export const disabledControl = 'data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50'
+
+export const heightReveal =
+    'overflow-hidden transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0 motion-reduce:transition-none'
+
 export const surfaceDivider = 'border-[rgb(var(--text-primary)/0.14)]'
 
 export const sectionSurface = `rounded-[8px] border ${surfaceDivider}`
 
-export const heightRevealPanel =
-    'h-[var(--collapsible-panel-height)] overflow-hidden transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0 motion-reduce:transition-none'
+export const heightRevealPanel = `h-[var(--collapsible-panel-height)] ${heightReveal}`
 
 export const cardBarSurface =
     'border-[rgb(var(--text-primary)/0.12)] bg-[rgb(var(--text-primary)/0.045)] dark:bg-white/[0.035]'
@@ -93,7 +104,7 @@ export const menubarAppearances = {
 } as const
 
 export const menubarTrigger =
-    'flex select-none items-center gap-0.5 rounded px-1.5 py-0.5 text-[13px] font-medium leading-none text-primary outline-none transition-colors duration-150 hover:bg-[rgb(var(--text-primary)/0.07)] focus-visible:bg-[rgb(var(--text-primary)/0.07)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:text-muted motion-reduce:transition-none'
+    'flex select-none items-center gap-0.5 rounded px-1.5 py-0.5 text-[13px] font-medium leading-none text-primary outline-none transition-colors duration-150 hover:bg-[rgb(var(--text-primary)/0.07)] focus-visible:bg-[rgb(var(--text-primary)/0.07)] active:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:text-muted motion-reduce:transition-none'
 
 export const menuSeparator = 'm-[5px] h-px bg-border'
 
@@ -169,8 +180,6 @@ export const textInputFor = (appearance: FieldAppearance): string =>
 export const bareInput = `${formsPluginReset} min-w-0 flex-1 self-stretch border-0 bg-transparent p-0 text-sm text-primary shadow-none outline-none ${placeholderText} focus:border-0 focus:shadow-none ${touchFieldText}`
 
 const inputGroupBase = `${fieldState} flex min-h-8 w-full cursor-text items-center gap-0.5 px-1 text-sm text-primary`
-
-export const inputGroup = `${fieldSurface} ${fieldFocusWithin} ${inputGroupBase}`
 
 export const inputGroupFor = (appearance: FieldAppearance): string =>
     `${fieldAppearanceSurfaces[appearance]} ${fieldAppearanceFocusWithin[appearance]} ${inputGroupBase}`

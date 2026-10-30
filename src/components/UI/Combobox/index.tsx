@@ -7,6 +7,7 @@ import {
     fieldIconButtonIconSize,
     fieldIconButtonSizes,
     fieldChipRemoveSizes,
+    anchoredFieldPopup,
     fieldChipSizes,
     fieldChipsSizes,
     bareInput,
@@ -19,14 +20,13 @@ import {
     insetFocusRing,
     menuGroupLabel,
     menuSeparator,
-    popupSurface,
-    popupTransition,
     positionerLayer,
 } from '../styles'
 import {
     assignRef,
     HEIGHT_CHANGE_MS,
     mergeClassName,
+    motionEasing,
     positionerPropNames,
     prefersReducedMotion,
     splitProps,
@@ -201,7 +201,6 @@ const Clear = React.forwardRef<HTMLButtonElement, BaseCombobox.Clear.Props>(func
     )
 })
 
-const chipMotionEasing = 'cubic-bezier(0.23, 1, 0.32, 1)'
 const CHIP_ENTER_MS = 220
 const CHIP_EXIT_MS = 180
 
@@ -249,9 +248,8 @@ type ChipBox = { left: number; top: number; width: number; height: number }
 
 function animateChipChanges(container: HTMLElement): () => void {
     if (typeof MutationObserver === 'undefined') return () => undefined
-    const isGhost = (node: Node) => node instanceof HTMLElement && node.dataset.leaving !== undefined
     const isChip = (node: Node): node is HTMLElement =>
-        node instanceof HTMLElement && !isGhost(node) && node.tagName !== 'INPUT'
+        node instanceof HTMLElement && node.dataset.leaving === undefined && node.tagName !== 'INPUT'
     const gap = () => parseFloat(getComputedStyle(container).columnGap) || 0
     const rowCenter = (element: HTMLElement) => element.offsetTop + element.offsetHeight / 2
     const inputRow = () => {
@@ -290,7 +288,7 @@ function animateChipChanges(container: HTMLElement): () => void {
         container.insertBefore(ghost, nextSibling?.parentNode === container ? nextSibling : null)
         const exit = ghost.animate([openChip(ghost), collapsedChip(gap())], {
             duration: CHIP_EXIT_MS,
-            easing: chipMotionEasing,
+            easing: motionEasing,
         })
         clipWhileAnimating(ghost, exit, () => ghost.remove())
     }
@@ -311,7 +309,7 @@ function animateChipChanges(container: HTMLElement): () => void {
                 { clipPath: fullyShown, opacity: 1 },
                 { clipPath: hiddenToRight, opacity: 0 },
             ],
-            { duration: CHIP_EXIT_MS, easing: chipMotionEasing }
+            { duration: CHIP_EXIT_MS, easing: motionEasing }
         )
         exit.onfinish = () => ghost.remove()
     }
@@ -319,7 +317,7 @@ function animateChipChanges(container: HTMLElement): () => void {
     const growInRow = (chip: HTMLElement) => {
         const enter = chip.animate([collapsedChip(gap()), openChip(chip)], {
             duration: CHIP_ENTER_MS,
-            easing: chipMotionEasing,
+            easing: motionEasing,
         })
         clipWhileAnimating(chip, enter)
     }
@@ -330,7 +328,7 @@ function animateChipChanges(container: HTMLElement): () => void {
                 { clipPath: hiddenToRight, opacity: 0 },
                 { clipPath: fullyShown, opacity: 1 },
             ],
-            { duration: CHIP_ENTER_MS, easing: chipMotionEasing }
+            { duration: CHIP_ENTER_MS, easing: motionEasing }
         )
     }
 
@@ -415,7 +413,7 @@ const ChipRemove = withGroupSize(BaseCombobox.ChipRemove, chipRemove, fieldChipR
     'aria-label': 'Remove',
 })
 
-const comboboxPopup = `${popupSurface} ${popupTransition} min-w-[var(--anchor-width)] max-w-[min(var(--available-width),max(var(--anchor-width),24rem))] bg-clip-padding`
+const comboboxPopup = anchoredFieldPopup
 
 export type ComboboxPopupProps = BaseCombobox.Popup.Props &
     Pick<BaseCombobox.Positioner.Props, PositionerPropName> & {

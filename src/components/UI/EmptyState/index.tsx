@@ -2,6 +2,7 @@ import React from 'react'
 import { cn } from '../../../utils'
 import { Section } from '../Section'
 import { wrapText } from '../truncation'
+import { withClassName } from '../utils'
 
 export type EmptyStateRootProps = React.HTMLAttributes<HTMLDivElement> & {
     size?: 'sm' | 'md'
@@ -44,36 +45,13 @@ const Icon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
     )
 })
 
-const Title = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(function EmptyStateTitle(
-    { className, ...props },
-    ref
-) {
-    return (
-        <h3
-            ref={ref}
-            className={cn(
-                'm-0 max-w-prose text-lg font-semibold group-data-[size=sm]/empty:text-base',
-                wrapText,
-                className
-            )}
-            {...props}
-        />
-    )
-})
-
-const Description = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-    function EmptyStateDescription({ className, ...props }, ref) {
-        return <p ref={ref} className={cn('m-0 max-w-[48ch] text-sm text-secondary', wrapText, className)} {...props} />
-    }
+const Title = withClassName(
+    'h3',
+    cn('m-0 max-w-prose text-lg font-semibold group-data-[size=sm]/empty:text-base', wrapText)
 )
 
-const Actions = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function EmptyStateActions(
-    { className, ...props },
-    ref
-) {
-    return (
-        <div ref={ref} className={cn('mt-1 flex flex-wrap items-center justify-center gap-2', className)} {...props} />
-    )
-})
+const Description = withClassName('p', cn('m-0 max-w-[48ch] text-sm text-secondary', wrapText))
+
+const Actions = withClassName('div', 'mt-1 flex flex-wrap items-center justify-center gap-2')
 
 export const EmptyState = { Root, Icon, Title, Description, Actions }

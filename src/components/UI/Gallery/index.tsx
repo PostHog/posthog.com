@@ -97,11 +97,11 @@ export function Gallery({
                 <div
                     role="group"
                     aria-label={label}
-                    className={cn(
+                    className={
                         layout === 'grid'
                             ? cn('grid grid-cols-1 items-start gap-4', gridColumns[columnCount])
                             : cn('columns-1 gap-4', masonryColumns[columnCount])
-                    )}
+                    }
                 >
                     {items.map((item, index) => (
                         <figure

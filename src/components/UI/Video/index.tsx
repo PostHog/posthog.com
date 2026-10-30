@@ -5,7 +5,7 @@ import { IconPause, IconPlay } from '@posthog/icons'
 import { FloatingIconButton } from '../FloatingButton'
 import { cn } from '../../../utils'
 import { cardLevels, insetFocusRing } from '../styles'
-import { useId } from '../utils'
+import { useId, usePageVisible, usePrefersReducedMotion } from '../utils'
 
 export type VideoProps = Omit<VideoHTMLAttributes<HTMLVideoElement>, 'src' | 'aria-label'> & {
     src: string
@@ -50,10 +50,10 @@ export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(function Vid
     const videoRef = useRef<HTMLVideoElement>(null)
     React.useImperativeHandle(ref, () => videoRef.current as HTMLVideoElement)
     const captionId = useId()
-    const [reducedMotion, setReducedMotion] = useState(true)
+    const reducedMotion = usePrefersReducedMotion()
     const [entered, setEntered] = useState(false)
     const [nearViewport, setNearViewport] = useState(false)
-    const [pageVisible, setPageVisible] = useState(true)
+    const pageVisible = usePageVisible()
     const [isPlaying, setIsPlaying] = useState(false)
     const [pausedByUser, setPausedByUser] = useState(false)
     const pausedByUserRef = useRef(false)
@@ -83,21 +83,6 @@ export const Video = React.forwardRef<HTMLVideoElement, VideoProps>(function Vid
             video.pause()
         }
     }
-
-    useEffect(() => {
-        const preference = window.matchMedia('(prefers-reduced-motion: reduce)')
-        const update = () => setReducedMotion(preference.matches)
-        update()
-        preference.addEventListener('change', update)
-        return () => preference.removeEventListener('change', update)
-    }, [])
-
-    useEffect(() => {
-        const update = () => setPageVisible(document.visibilityState !== 'hidden')
-        update()
-        document.addEventListener('visibilitychange', update)
-        return () => document.removeEventListener('visibilitychange', update)
-    }, [])
 
     useEffect(() => {
         const video = videoRef.current

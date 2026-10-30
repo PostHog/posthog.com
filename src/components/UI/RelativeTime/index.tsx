@@ -93,7 +93,7 @@ export const RelativeTime = React.forwardRef<HTMLTimeElement, RelativeTimeProps>
         new Intl.DateTimeFormat(locale, { timeStyle: timeZone ? 'medium' : 'long', timeZone }).format(timestamp)
     const rows: [string, string, string][] = [
         ...(now === null ? [] : ([['Local', exactDate(), exactTime()]] as [string, string, string][])),
-        ['UTC', exactDate('UTC'), exactTime('UTC')],
+        ['UTC', absolute, exactTime('UTC')],
     ]
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Accordion as BaseAccordion } from '@base-ui/react/accordion'
 import { IconChevronRight } from '@posthog/icons'
-import { disclosureChevron, focusRing } from '../styles'
+import { disclosureChevron, focusRing, heightReveal } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 import { wrapText } from '../truncation'
 
@@ -25,8 +25,7 @@ const Trigger = React.forwardRef<HTMLButtonElement, BaseAccordion.Trigger.Props>
     )
 })
 
-const accordionPanel =
-    'h-[var(--accordion-panel-height)] overflow-hidden text-base text-primary transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0 motion-reduce:transition-none'
+const accordionPanel = `h-[var(--accordion-panel-height)] ${heightReveal} text-base text-primary`
 
 const Panel = React.forwardRef<HTMLDivElement, BaseAccordion.Panel.Props>(function AccordionPanel(
     { className, children, ...props },

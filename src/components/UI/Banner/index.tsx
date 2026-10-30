@@ -4,10 +4,11 @@ import { cn } from '../../../utils'
 import { IconButton } from '../Button'
 import type { IconButtonProps } from '../Button'
 import { cardLevels, tintedHeaderEdge } from '../styles'
+import { wrapText } from '../truncation'
 import { colorHeader, colorIcon, colorText, resolveColor } from '../colors'
 import type { ColorOrStatus } from '../colors'
 import { statusIcon } from '../toneIcons'
-import { HEIGHT_CHANGE_MS, flattenFragments, heightChangeEasing, mergeClassName, prefersReducedMotion } from '../utils'
+import { HEIGHT_CHANGE_MS, flattenFragments, motionEasing, mergeClassName, prefersReducedMotion } from '../utils'
 
 export type BannerRootProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> & { color?: ColorOrStatus }
 export type BannerCloseProps = Omit<IconButtonProps, 'icon' | 'onClick' | 'aria-label'> & {
@@ -53,7 +54,7 @@ const Root = React.forwardRef<HTMLDivElement, BannerRootProps>(function BannerRo
                 { height: `${element.offsetHeight}px`, opacity: 1, overflow: 'hidden' },
                 { height: '0px', opacity: 0, overflow: 'hidden' },
             ],
-            { duration: HEIGHT_CHANGE_MS, easing: heightChangeEasing, fill: 'forwards' }
+            { duration: HEIGHT_CHANGE_MS, easing: motionEasing, fill: 'forwards' }
         ))
         animation.onfinish = onCollapsed
     }, [])
@@ -131,11 +132,7 @@ const Title = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEleme
         <div
             ref={ref}
             {...props}
-            className={cn(
-                'min-w-0 flex-1 font-semibold [overflow-wrap:anywhere]',
-                colorText[resolveColor(color)],
-                className
-            )}
+            className={cn(wrapText, 'flex-1 font-semibold', colorText[resolveColor(color)], className)}
         />
     )
 })
@@ -144,11 +141,7 @@ const Content = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEle
     ref
 ) {
     return (
-        <div
-            ref={ref}
-            {...props}
-            className={cn('min-w-0 [overflow-wrap:anywhere] [&>*:first-child]:mt-0 [&>*:last-child]:mb-0', className)}
-        />
+        <div ref={ref} {...props} className={cn(wrapText, '[&>*:first-child]:mt-0 [&>*:last-child]:mb-0', className)} />
     )
 })
 const Action = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HTMLSpanElement>>(function BannerAction(

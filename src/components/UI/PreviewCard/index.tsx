@@ -1,12 +1,12 @@
 import React from 'react'
 import { PreviewCard as BasePreviewCard } from '@base-ui/react/preview-card'
-import { focusRing, popupArrow, popupSurface, popupTransition, positionerLayer } from '../styles'
+import { contentPopup, focusRing, popupArrow, positionerLayer } from '../styles'
 import { mergeClassName, positionerPropNames, splitProps, withClassName } from '../utils'
 import type { PositionerPropName } from '../utils'
 
 const previewCardTrigger = `font-semibold text-red hover:underline data-[popup-open]:underline dark:text-yellow ${focusRing}`
 
-const previewCardPopup = `max-w-[var(--available-width)] p-3 ${popupSurface} ${popupTransition}`
+const previewCardPopup = contentPopup
 
 export type PreviewCardPopupProps = BasePreviewCard.Popup.Props &
     Pick<BasePreviewCard.Positioner.Props, PositionerPropName> & {

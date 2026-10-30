@@ -1,10 +1,10 @@
 import React from 'react'
 import { Popover as BasePopover } from '@base-ui/react/popover'
-import { popupArrow, popupSurface, popupTransition, positionerLayer } from '../styles'
+import { contentPopup, popupArrow, positionerLayer } from '../styles'
 import { mergeClassName, positionerPropNames, splitProps, withClassName } from '../utils'
 import type { PositionerPropName } from '../utils'
 
-const popoverPopup = `max-w-[var(--available-width)] p-3 ${popupSurface} ${popupTransition}`
+const popoverPopup = contentPopup
 
 export type PopoverPopupProps = BasePopover.Popup.Props &
     Pick<BasePopover.Positioner.Props, PositionerPropName> & {

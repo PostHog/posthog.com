@@ -5,6 +5,7 @@ import { colorHeader, colorIcon, colorText, resolveColor } from '../colors'
 import type { ColorOrStatus } from '../colors'
 import { statusIcon } from '../toneIcons'
 import { flattenFragments } from '../utils'
+import { wrapText } from '../truncation'
 
 export type NoteRootProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> & {
     color?: ColorOrStatus
@@ -22,14 +23,13 @@ const Root = React.forwardRef<HTMLDivElement, NoteRootProps>(function NoteRoot(
     { color = 'info', size = 'md', children, className, ...props },
     ref
 ) {
-    const noteColor = color
     const parts = flattenFragments(children)
     const icon = parts.find((child) => React.isValidElement(child) && child.type === Icon)
     const title = parts.find((child) => React.isValidElement(child) && child.type === Title)
     const action = parts.find((child) => React.isValidElement(child) && child.type === Action)
     const body = parts.filter((child) => child !== icon && child !== title && child !== action)
     return (
-        <NoteColor.Provider value={noteColor}>
+        <NoteColor.Provider value={color}>
             <div
                 ref={ref}
                 {...props}
@@ -47,7 +47,7 @@ const Root = React.forwardRef<HTMLDivElement, NoteRootProps>(function NoteRoot(
                             className={cn(
                                 'flex min-w-0 items-start gap-2 px-[var(--note-x)] py-[var(--note-title-y)]',
                                 tintedHeaderEdge,
-                                colorHeader[resolveColor(noteColor)]
+                                colorHeader[resolveColor(color)]
                             )}
                         >
                             {icon}
@@ -102,11 +102,7 @@ const Title = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEleme
         <div
             ref={ref}
             {...props}
-            className={cn(
-                'min-w-0 flex-1 font-semibold [overflow-wrap:anywhere]',
-                colorText[resolveColor(noteColor)],
-                className
-            )}
+            className={cn(wrapText, 'flex-1 font-semibold', colorText[resolveColor(noteColor)], className)}
         />
     )
 })
@@ -115,11 +111,7 @@ const Content = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEle
     ref
 ) {
     return (
-        <div
-            ref={ref}
-            {...props}
-            className={cn('min-w-0 [overflow-wrap:anywhere] [&>*:first-child]:mt-0 [&>*:last-child]:mb-0', className)}
-        />
+        <div ref={ref} {...props} className={cn(wrapText, '[&>*:first-child]:mt-0 [&>*:last-child]:mb-0', className)} />
     )
 })
 const Action = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(function NoteAction(

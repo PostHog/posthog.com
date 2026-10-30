@@ -2,7 +2,7 @@ import React from 'react'
 import { AlertDialog as BaseAlertDialog } from '@base-ui/react/alert-dialog'
 import { Dialog } from '../Dialog'
 import type { DialogHeaderProps } from '../Dialog'
-import { dialogBackdrop, dialogPopup, dialogViewport } from '../styles'
+import { dialogBackdrop, dialogDescription, dialogPopup, dialogTitle, dialogViewport } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 export type AlertDialogPopupProps = BaseAlertDialog.Popup.Props & {
@@ -30,9 +30,9 @@ const Popup = React.forwardRef<HTMLDivElement, AlertDialogPopupProps>(function A
     )
 })
 
-const Title = withClassName(BaseAlertDialog.Title, 'my-0 text-base font-bold text-primary')
+const Title = withClassName(BaseAlertDialog.Title, dialogTitle)
 
-const Description = withClassName(BaseAlertDialog.Description, 'my-0 text-sm text-secondary')
+const Description = withClassName(BaseAlertDialog.Description, dialogDescription)
 
 const Header = ({ showCloseButton = false, ...props }: DialogHeaderProps): JSX.Element => (
     <Dialog.Header {...props} showCloseButton={showCloseButton} />

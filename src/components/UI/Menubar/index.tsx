@@ -29,6 +29,6 @@ const Root = React.forwardRef<HTMLDivElement, MenubarRootProps>(function Menubar
     )
 })
 
-const Trigger = withClassName(BaseMenu.Trigger, `${menubarTrigger} active:bg-[rgb(var(--text-primary)/0.1)]`)
+const Trigger = withClassName(BaseMenu.Trigger, menubarTrigger)
 
 export const Menubar = { Root, Trigger }
