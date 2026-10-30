@@ -58,10 +58,14 @@ PostHog fetches your metadata document the first time someone authorizes your ap
 - The document is 5 KB or smaller, and your server responds in less than 5 seconds.
 - The `client_id` field in the document is the same as the URL, character for character.
 - `token_endpoint_auth_method` is `none` (the default) or `private_key_jwt`. `private_key_jwt` also requires an HTTPS `jwks_uri`.
-- `client_name` doesn't start with "posthog" and doesn't contain "official", "verified", or "trusted". If your name breaks this rule, the authorization screen shows **CIMD Client** instead.
+- `client_name` doesn't contain "PostHog" anywhere, also with spaces or punctuation between the words, as in "Post Hog". This rule doesn't apply to documents served from `posthog.com`, `posthog.net`, `posthog.dev`, or their subdomains. `client_name` also doesn't contain "official", "verified", or "trusted".
 - `com.posthog.scopes` keeps at least one scope after PostHog drops the scopes it can't grant. See [declare your scopes](#declare-your-scopes).
 
-If your document breaks one of the other rules, the authorization request fails with the same error for every cause: "PostHog could not read the client metadata document at this client_id." The error doesn't tell you which rule failed, so check your document against each rule above.
+If your document breaks one of the other rules, the authorization request fails. The `error_description` names the rule, for example:
+
+```text
+PostHog could not use the client metadata document at this client_id: client_name is not allowed: Client name cannot contain 'PostHog' unless the metadata document is served from posthog.com, posthog.net, posthog.dev, or a subdomain of one of them.
+```
 
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
 
@@ -170,7 +174,17 @@ Both lists form the scope ceiling, which is the maximum set of scopes a token fo
 
 `optional_scopes` requires a non-empty `scopes` list. PostHog drops scopes that people can't grant to CIMD clients. If PostHog drops every entry in `scopes`, it rejects the metadata document. An `optional_scopes` list that becomes empty remains valid.
 
-The OpenID Connect scopes `openid`, `profile`, and `email` aren't resource scopes, so PostHog drops them from `scopes`. PostHog always allows them, so you don't need to declare them. If `scopes` contains only these scopes, PostHog drops every entry and rejects the document. If your app only signs people in, declare the narrowest resource scope, for example `["user:read"]`, and request only `openid profile email` in your authorization request.
+The OpenID Connect scopes `openid`, `profile`, and `email` aren't resource scopes. PostHog always allows them, so it drops them from a `scopes` list that also has resource scopes. If your app only signs people in, declare only these scopes:
+
+```json
+{
+  "com.posthog": {
+    "scopes": ["openid", "profile", "email"]
+  }
+}
+```
+
+Your app then can't get any resource scope. You can't declare `optional_scopes` with a list of only these scopes.
 
 When PostHog first reads your metadata document, omitting `scopes` lets your app request any scope people can grant. During a metadata refresh, omitting either field keeps its stored value. Publish `"optional_scopes": []` to remove all optional scopes.
 
@@ -180,13 +194,24 @@ Have a question while integrating? [Reach out to us](/talk-to-a-human).
 
 ## FAQ
 
-### What does "PostHog could not read the client metadata document" mean?
+### What does "PostHog could not use the client metadata document" mean?
 
-PostHog shows this error for every problem with your metadata document, not only for a URL it can't reach. Possible causes include a network error, a redirect, a response that isn't `200`, invalid JSON, a document larger than 5 KB, a `client_id` that doesn't match the URL, invalid `redirect_uris`, an unsupported `token_endpoint_auth_method`, or a `scopes` list that PostHog drops completely. Check your document against [how PostHog reads your document](#how-posthog-reads-your-document).
+PostHog couldn't fetch your metadata document, or your document breaks a rule. The text after the colon tells you which. Some examples:
+
+| Text after the colon                                           | What to fix                                                                 |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `Metadata document fetch failed: could not connect`            | Make sure your server accepts HTTPS connections from the internet.          |
+| `Metadata document host name does not resolve`                 | Make sure the DNS record for your `client_id` host exists.                  |
+| `Metadata document endpoint returned HTTP 404`                 | Serve the document at the exact `client_id` URL, with no redirect.          |
+| `client_id in metadata (...) does not match URL (...)`         | Set the `client_id` field to the URL of the document.                       |
+| `client_name is not allowed: ...`                              | Change `client_name`. See [why PostHog rejects your client name](#why-does-posthog-reject-my-client_name). |
+| `com.posthog.scopes has no scope a CIMD client can be granted` | Use scopes from `scopes_supported`. See [declare your scopes](#declare-your-scopes). |
+
+Check your document against [how PostHog reads your document](#how-posthog-reads-your-document).
 
 ### My app only signs people in. Which scopes do I declare?
 
-Don't put `openid`, `profile`, or `email` in `com.posthog.scopes`. PostHog always allows them, and a `scopes` list that contains only these scopes makes PostHog reject your document. Declare the narrowest resource scope, for example `["user:read"]`, and request `openid profile email` in your authorization request.
+Declare `["openid", "profile", "email"]` in `com.posthog.scopes`, and request `openid profile email` in your authorization request. Your app then can't get any resource scope.
 
 If you omit `scopes`, your app can request any scope people can grant. This is more access than a sign-in app needs.
 
@@ -198,9 +223,11 @@ Not necessarily. If nobody is signed in, PostHog redirects to the login page bef
 
 Not if PostHog hasn't accepted your document yet. Until it does, PostHog fetches your document again on each authorization request, so you can try again immediately. After PostHog accepts your document, it uses the cached copy until the `Cache-Control: max-age` you return expires.
 
-### Why does the authorization screen show "CIMD Client"?
+### Why does PostHog reject my client_name?
 
-Your `client_name` is missing, starts with "posthog", or contains "official", "verified", or "trusted". PostHog blocks these names so that apps can't impersonate PostHog, and shows **CIMD Client** instead. Change `client_name` in your document. If PostHog already accepted your document with a valid name, it keeps that name and ignores an invalid new one.
+Your `client_name` contains "PostHog", "official", "verified", or "trusted". PostHog blocks these names so that apps can't impersonate PostHog. Only documents served from `posthog.com`, `posthog.net`, `posthog.dev`, or their subdomains can use "PostHog" in the name. Change `client_name` in your document.
+
+If PostHog already accepted your document, it keeps the stored name and ignores a new name that breaks these rules. If your document has no `client_name`, the authorization screen shows **CIMD Client**.
 
 ## Token types
 
