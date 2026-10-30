@@ -34,10 +34,7 @@ export const applications: CarouselSlide[] = [
         heading: 'Build and monitor pipelines in PostHog',
         description: (
             <>
-                <p>
-                    Configure sources, transformations, and destinations, then watch logs
-                    and metrics for each one.
-                </p>
+                <p>Configure sources, transformations, and destinations, then watch logs and metrics for each one.</p>
                 {list([
                     {
                         label: 'Start from a template',

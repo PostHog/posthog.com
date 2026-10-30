@@ -61,9 +61,9 @@ export const dataPipelines = {
         eli5: (
             <>
                 <p>
-                    Data Pipelines moves data from one place to another seamlessly. Bring revenue and CRM data from tools
-                    like Stripe and HubSpot into PostHog, change events as they arrive, and send them to Slack, your
-                    CRM, or your warehouse.
+                    Data Pipelines moves data from one place to another seamlessly. Bring revenue and CRM data from
+                    tools like Stripe and HubSpot into PostHog, change events as they arrive, and send them to Slack,
+                    your CRM, or your warehouse.
                 </p>
                 <p>
                     Export your PostHog data (events, persons, sessions, and groups) to an external tool. Use your data
@@ -205,10 +205,7 @@ export const dataPipelines = {
                 'Growth & Marketing',
                 'Send conversions to ad platforms and keep CRM contacts up to date with product usage',
             ],
-            [
-                'Finance & RevOps',
-                "Sync Stripe and CRM data with product data. Use PostHog to build dashboards",
-            ],
+            ['Finance & RevOps', 'Sync Stripe and CRM data with product data. Use PostHog to build dashboards'],
             [
                 'Security & Compliance',
                 'Remove PII, hash IDs, and drop junk events at ingestion, before they are stored',
