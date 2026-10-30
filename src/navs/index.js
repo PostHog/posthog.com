@@ -1670,6 +1670,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
+                        name: 'Onboarding skills',
+                        url: '/handbook/onboarding/onboarding-skills',
+                    },
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
@@ -6687,6 +6691,12 @@ export const docsMenu = {
                     url: '/docs/data-warehouse',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Is PostHog warehouse native?',
+                    url: '/docs/data-warehouse/warehouse-native',
+                    icon: 'IconQuestion',
+                    color: 'purple',
                 },
                 {
                     name: 'Setup',

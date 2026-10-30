@@ -43,7 +43,7 @@ Note that the PostHog app in Zapier only supports receiving events from [actions
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/zapier/template_zapier.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/zapier/template_zapier.py) is available on GitHub.
 
 <PostHogMaintained />
 

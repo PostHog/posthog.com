@@ -63,7 +63,7 @@ config.surveys = false; // Disable surveys
 - Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`.
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
-- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#step-two-install-posthogobserver).
+- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation/flutter#install-posthogobserver).
   - Using [navigatorObservers](/docs/libraries/flutter#using-navigatorobservers)
   - Using [go_router](/docs/libraries/flutter#using-go_router)
 - If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

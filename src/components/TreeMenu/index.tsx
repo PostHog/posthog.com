@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import * as Collapsible from '@radix-ui/react-collapsible'
-import { IconChevronRight, IconPlus, IconArrowUpRight } from '@posthog/icons'
+import { IconChevronDown, IconChevronRight, IconArrowUpRight } from '@posthog/icons'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
 import { replacePath } from '../../../gatsby/utils'
@@ -53,7 +53,7 @@ interface TreeMenuProps {
     /**
      * `listed` (default) renders every section header as a muted label with all
      * its links always visible. `grouped` renders each section header as a
-     * `+`→`×` toggle that expands/collapses its links; only the section
+     * chevron toggle that expands/collapses its links; only the section
      * containing the active item starts open.
      */
     variant?: TreeMenuVariant
@@ -257,11 +257,51 @@ const SidebarSectionLabel = ({ children }: { children: React.ReactNode }) => (
     </div>
 )
 
+const heightCollapseMotion = {
+    initial: { height: 0, opacity: 0 },
+    animate: { height: 'auto', opacity: 1 },
+    exit: { height: 0, opacity: 0 },
+    transition: { duration: 0.2, ease: 'easeInOut' },
+} as const
+
+const ToggleCaret = ({ open }: { open: boolean }) => (
+    <motion.span
+        animate={{ rotate: open ? 180 : 0 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+        className="block"
+    >
+        <IconChevronDown className="size-4" />
+    </motion.span>
+)
+
+const CollapsibleRows = ({
+    items,
+    activeItem,
+    showAll,
+    renderItem,
+}: {
+    items: MenuItem[]
+    activeItem: MenuItem | undefined
+    showAll: boolean
+    renderItem: (item: MenuItem) => React.ReactNode
+}) => (
+    <AnimatePresence initial={false}>
+        {items.map((item, i) =>
+            showAll || isOpen(item, activeItem) ? (
+                <motion.div key={`${item.name}-${i}-${item.url}`} {...heightCollapseMotion} className="overflow-hidden">
+                    {renderItem(item)}
+                </motion.div>
+            ) : null
+        )}
+    </AnimatePresence>
+)
+
 const renderSidebarItems = (
     items: MenuItem[],
     activeItem: MenuItem | undefined,
     onClick: (item: MenuItem) => void,
-    index = 0
+    index = 0,
+    collapsedToActive = false
 ): React.ReactNode =>
     items.map((item, i) => {
         const key = `${item.name}-${i}-${item.url}`
@@ -270,7 +310,14 @@ const renderSidebarItems = (
         // A link that also has children (e.g. "Install") renders as an expandable submenu.
         if (hasChildren && item.url) {
             return (
-                <SidebarCollapsibleItem key={key} item={item} index={index} activeItem={activeItem} onClick={onClick} />
+                <SidebarCollapsibleItem
+                    key={key}
+                    item={item}
+                    index={index}
+                    activeItem={activeItem}
+                    onClick={onClick}
+                    collapsedToActive={collapsedToActive}
+                />
             )
         }
 
@@ -281,7 +328,16 @@ const renderSidebarItems = (
                 ) : (
                     <SidebarSectionLabel>{item.name}</SidebarSectionLabel>
                 )}
-                {hasChildren && renderSidebarItems(item.children as MenuItem[], activeItem, onClick, index + 1)}
+                {hasChildren &&
+                    renderSidebarItems(
+                        collapsedToActive
+                            ? (item.children as MenuItem[]).filter((child) => isOpen(child, activeItem))
+                            : (item.children as MenuItem[]),
+                        activeItem,
+                        onClick,
+                        index + 1,
+                        collapsedToActive
+                    )}
             </React.Fragment>
         )
     })
@@ -296,11 +352,13 @@ function SidebarCollapsibleItem({
     index,
     activeItem,
     onClick,
+    collapsedToActive,
 }: {
     item: MenuItem
     index: number
     activeItem: MenuItem | undefined
     onClick: (item: MenuItem) => void
+    collapsedToActive: boolean
 }) {
     const active = item === activeItem
     // Only auto-expand when a child page is active (e.g. a specific language).
@@ -315,9 +373,19 @@ function SidebarCollapsibleItem({
         if (childActive) setOpen(true)
     }, [childActive])
 
+    const [expandedWhileParentCollapsed, setExpandedWhileParentCollapsed] = useState(false)
+
+    useEffect(() => {
+        setExpandedWhileParentCollapsed(false)
+    }, [collapsedToActive])
+
+    const expanded = collapsedToActive ? expandedWhileParentCollapsed : open
+    const toggleExpanded = () =>
+        collapsedToActive ? setExpandedWhileParentCollapsed((prev) => !prev) : setOpen((prev) => !prev)
+
     return (
-        <div className={open ? 'mb-1' : ''}>
-            <div className={`flex items-center gap-px ${open ? 'rounded bg-accent/50' : ''}`}>
+        <div className={expanded || childActive ? 'mb-1' : ''}>
+            <div className={`flex items-center gap-px ${expanded ? 'rounded bg-accent/50' : ''}`}>
                 <Link
                     to={item.url || ''}
                     onClick={() => onClick(item)}
@@ -339,33 +407,27 @@ function SidebarCollapsibleItem({
                 </Link>
                 <button
                     type="button"
-                    aria-expanded={open}
-                    aria-label={`${open ? 'Collapse' : 'Expand'} ${item.name}`}
-                    onClick={() => setOpen((prev) => !prev)}
+                    aria-expanded={expanded}
+                    aria-label={`${expanded ? 'Collapse' : 'Expand'} ${item.name}`}
+                    onClick={toggleExpanded}
                     className="ml-auto shrink-0 p-1 rounded text-primary hover:bg-accent"
                 >
-                    <motion.span
-                        animate={{ rotate: open ? 45 : 0 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-                        className="block"
-                    >
-                        <IconPlus className="size-4" />
-                    </motion.span>
+                    <ToggleCaret open={expanded} />
                 </button>
             </div>
 
             <AnimatePresence initial={false}>
-                {open && (
-                    <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: 'easeInOut' }}
-                        className="overflow-hidden"
-                    >
+                {(expanded || childActive) && (
+                    <motion.div key="content" {...heightCollapseMotion} className="overflow-hidden">
                         <div className="ml-2 mt-px flex flex-col gap-px border-l border-primary/30 pl-1">
-                            {renderSidebarItems(item.children || [], activeItem, onClick, index + 1)}
+                            <CollapsibleRows
+                                items={item.children || []}
+                                activeItem={activeItem}
+                                showAll={expanded}
+                                renderItem={(child) =>
+                                    renderSidebarItems([child], activeItem, onClick, index + 1, !expanded)
+                                }
+                            />
                         </div>
                     </motion.div>
                 )}
@@ -373,6 +435,19 @@ function SidebarCollapsibleItem({
         </div>
     )
 }
+
+const findItem = (items: MenuItem[], matches: (item: MenuItem) => boolean): MenuItem | undefined => {
+    for (const item of items) {
+        if (matches(item)) return item
+        const match = findItem(item.children || [], matches)
+        if (match) return match
+    }
+    return undefined
+}
+
+const findMatchingItem = (items: MenuItem[], target: MenuItem): MenuItem | undefined =>
+    findItem(items, (item) => item === target) ??
+    findItem(items, (item) => item.url === target.url && item.name === target.name)
 
 const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
     const url = currentUrl.replace(/\/$/, '')
@@ -442,21 +517,30 @@ export function TreeMenu(props: TreeMenuProps) {
     } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
-    const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
+    const [selectedItem, setSelectedItem] = useState<MenuItem | undefined>(
         props.activeItem || getActiveItem(props.items || [], activeUrl ?? pathname)
     )
 
     const handleClick = (item: MenuItem) => {
-        setActiveItem(item)
+        setSelectedItem(item)
         props.onItemClick?.(item)
     }
 
     const items = props.items
     const sections = useMemo(() => buildSections(items || []), [items])
+    const activeItem = useMemo(
+        () => (selectedItem ? findMatchingItem(items || [], selectedItem) : undefined),
+        [items, selectedItem]
+    )
+    const syncedPathRef = useRef<string>()
 
     useEffect(() => {
-        if (watchPath) {
-            setActiveItem(getActiveItem(items || [], activeUrl ?? appWindow?.path ?? pathname))
+        if (!watchPath) return
+        const currentPath = activeUrl ?? appWindow?.path ?? pathname
+        const pathChanged = currentPath !== syncedPathRef.current
+        syncedPathRef.current = currentPath
+        if (pathChanged || !activeItem) {
+            setSelectedItem(getActiveItem(items || [], currentPath))
         }
     }, [items, watchPath, activeUrl, appWindow?.path, pathname])
 
@@ -584,7 +668,8 @@ function CollapsibleSection({
     // Sidebar groups use a highlighted heading and an inset guide line rather
     // than enclosing a potentially long branch in a card. The elevated
     // treatment remains for the default OS-style TreeMenu elsewhere.
-    const openSectionClassName = open
+    const revealed = open || containsActive
+    const openSectionClassName = revealed
         ? appearance === 'sidebar'
             ? 'mb-1'
             : 'rounded bg-white dark:bg-dark p-px shadow-lg'
@@ -603,34 +688,29 @@ function CollapsibleSection({
                 <span data-sidebar-label className="text-sm truncate">
                     {section.heading}
                 </span>
-                <motion.span
-                    animate={{ rotate: open ? 45 : 0 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 22 }}
-                    className="shrink-0 text-primary"
-                    data-sidebar-label
-                >
-                    <IconPlus className="size-4" />
-                </motion.span>
+                <span className="shrink-0 text-primary" data-sidebar-label>
+                    <ToggleCaret open={open} />
+                </span>
             </button>
 
             <AnimatePresence initial={false}>
-                {open && (
-                    <motion.div
-                        key="content"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2, ease: 'easeInOut' }}
-                        className="overflow-hidden"
-                    >
+                {revealed && (
+                    <motion.div key="content" {...heightCollapseMotion} className="overflow-hidden">
                         <div
                             className={`flex flex-col gap-px pb-px ${
                                 appearance === 'sidebar' ? 'ml-2 mt-px border-l border-primary/30 pl-1' : ''
                             }`}
                         >
-                            {appearance === 'sidebar'
-                                ? renderSidebarItems(section.items, activeItem, onClick)
-                                : renderSectionItems(section.items, activeItem, onClick)}
+                            <CollapsibleRows
+                                items={section.items}
+                                activeItem={activeItem}
+                                showAll={open}
+                                renderItem={(item) =>
+                                    appearance === 'sidebar'
+                                        ? renderSidebarItems([item], activeItem, onClick, 0, !open)
+                                        : renderSectionItems([item], activeItem, onClick)
+                                }
+                            />
                         </div>
                     </motion.div>
                 )}

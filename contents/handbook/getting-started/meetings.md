@@ -14,7 +14,7 @@ You should have been invited to any relevant meetings as part of your [onboardin
 
 ## Weekly schedule
 
-- **Monday** - [PostHog all-hands meeting](https://posthog.com/handbook/exec/all-hands-topics). Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the notes and recording are shared weekly in the [#general](https://posthog.slack.com/archives/CSPHFDZH8) Slack channel. We protect time for Q&As and demos at the end. _The content of these meetings is always confidential._ 
+- **Monday** - [PostHog all-hands meeting](https://posthog.com/handbook/exec/all-hands-topics). Members of the team share company-wide updates about things like recruitment, product metrics and commercial performance - the notes and recording are shared weekly in the <PrivateLink url="https://posthog.slack.com/archives/CSPHFDZH8">#general</PrivateLink> Slack channel. We protect time for Q&As and demos at the end. _The content of these meetings is always confidential._
 - **Tuesday** - Meeting-free - no planned internal meetings allowed. [Learn more](#no-recurring-meeting-days-tuesdaysthursdays).
 - **Wednesday** - A few things happen on wednesdays:
     - some teams do sprint planning here as well
@@ -25,7 +25,7 @@ You should have been invited to any relevant meetings as part of your [onboardin
 
 ## The all-hands
 
-The Monday all-hands features a few regular sections and is recorded in [this document](https://docs.google.com/document/d/1JbA2W1CP2sA5vRVnS0UgyDgRz88mKpEVeinW6SYjO74/edit?usp=sharing).
+The Monday all-hands features a few regular sections and is recorded in <PrivateLink url="https://docs.google.com/document/d/1JbA2W1CP2sA5vRVnS0UgyDgRz88mKpEVeinW6SYjO74/edit?usp=sharing">this document</PrivateLink>.
 
 - **Announcements:** Revenue and churn updates, plus other major news
 - **Hiring & anniversaries:** Updates about headcount, who is starting soon, new hiring roles, and who is celebrating a PostHog anniversary
