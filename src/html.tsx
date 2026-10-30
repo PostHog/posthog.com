@@ -32,10 +32,6 @@ export default function HTML(props: HTMLProps): JSX.Element {
                     href="/fonts/squeak-bold-webfont.woff"
                     crossOrigin="anonymous"
                 />
-                {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
-                    <script src="/scripts/posthog-init.js" />
-                )}
-
                 {/* WebMCP is an origin trial in Chrome 149-156. Without this token, document.modelContext
                     is undefined for visitors and the tools in components/WebMCP register nothing. */}
                 {process.env.GATSBY_WEBMCP_ORIGIN_TRIAL_TOKEN && (
@@ -48,6 +44,19 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 {props.preBodyComponents}
                 {/* nosemgrep: typescript.react.security.audit.react-dangerouslysetinnerhtml.react-dangerouslysetinnerhtml - Gatsby body content from build, not user input */}
                 <div key={`body`} id="___gatsby" dangerouslySetInnerHTML={{ __html: props.body }} />
+                {/* Create the local queue before Gatsby starts without waiting for the analytics host. */}
+                {process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST && (
+                    <>
+                        <script
+                            src="/scripts/posthog-bootstrap.js"
+                            data-asset-host={
+                                process.env.GATSBY_POSTHOG_ASSET_HOST || process.env.GATSBY_POSTHOG_API_HOST
+                            }
+                            data-sdk-version="1"
+                        />
+                        <script src="/scripts/posthog-init.js" />
+                    </>
+                )}
                 {props.postBodyComponents}
             </body>
         </html>

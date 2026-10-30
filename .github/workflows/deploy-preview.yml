@@ -85,6 +85,11 @@ jobs:
             - name: Check Twig guide integrations
               run: pnpm test:twig-integration
 
+            - name: Check analytics bootstrap
+              run: pnpm test:posthog-loader
+              env:
+                  PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
+
             - name: Build site
               run: pnpm build
               env:
