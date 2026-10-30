@@ -17,7 +17,7 @@ Marketers believe onboarding emails are a powerful tool for driving engagement. 
 
 People, and developers in particular, hate onboarding campaigns because the bad ones are so memorable. And how would you know what "good" looks like without signing up and risking a flood of tedious outreach emails from sales reps?
 
-We don’t do those sort of outreach emails. This is what we do instead, and how we got there over 7 major iterations. We think it works and we've included performance data so you can judge for yourself.
+We don’t do those sorts of outreach emails. This is what we do instead, and how we got there over 7 major iterations. We think it works and we've included performance data so you can judge for yourself.
 
 ## Onboarding 1.0: The one where it started costing lots
 
@@ -73,7 +73,7 @@ Based on this high open rate and low unsubscribe rate we felt that users didn't 
 
 Data is important, but I strongly believe it doesn’t tell the whole story. You also need feedback and intuition. Most of the feedback on our emails came in [3.1](https://github.com/PostHog/meta/issues/127), when we started sending personalized recommendations to users from [my personal email](mailto:joe@posthog.com).
 
-How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` we trigger an email from me telling them about [our Product for Engineers newsletter](https://newsletter.posthog.com/). 
+How this works is simple: when a user signs up, they can optionally tell us what their role is. If their `role_at_organization` = `engineer` we trigger an email from me telling them about our newsletter, [build mode](https://newsletter.posthog.com/). 
 
 ![Onboarding 3.1](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/onboarding/onboarding_31.png)
 <Caption>Onboarding 3.1 was when we really started tailoring emails based on what we knew about users</Caption>

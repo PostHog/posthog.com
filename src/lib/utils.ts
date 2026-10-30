@@ -59,26 +59,6 @@ export const scrollWithOffset = (id: string, offset: number): void => {
     }
 }
 
-export interface HubSpotUser {
-    firstName: string
-    lastName: string
-    email: string
-}
-
-export const createHubSpotContact = ({ firstName, lastName, email }: HubSpotUser): Promise<Response> => {
-    return fetch('/api/hubspot', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            firstName,
-            lastName,
-            email,
-        }),
-    })
-}
-
 export const kebabCase = (s: string): string =>
     s
         .replace(/([a-z])([A-Z])/g, '$1-$2')
@@ -89,6 +69,21 @@ export const isURL = (s: string): boolean => {
     try {
         new URL(s)
         return true
+    } catch {
+        return false
+    }
+}
+
+// Guard for `navigate()` targets that arrive from cross-window postMessage. Only
+// same-origin absolute paths like "/docs/foo" are allowed. This blocks "javascript:"
+// and "data:" URLs (which Gatsby's navigate() would run via window.location, giving
+// XSS) as well as "//" and "/\" host paths (open redirect) from an untrusted sender.
+export const isSafeInternalPath = (path: unknown): path is string => {
+    if (typeof path !== 'string' || !path.startsWith('/') || /^\/[/\\]/.test(path)) {
+        return false
+    }
+    try {
+        return new URL(path, 'https://posthog.com').origin === 'https://posthog.com'
     } catch {
         return false
     }
@@ -114,3 +109,5 @@ export const slugifyTeamName = (name: string): string => {
         remove: /and/,
     })
 }
+
+export const formatTeamName = (name: string): string => `${name.trim().replace(/\s+team$/i, '')} Team`

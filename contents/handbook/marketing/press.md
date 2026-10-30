@@ -59,7 +59,7 @@ News
 
 ## About PostHog
 
-PostHog is an open source developer platform. PostHog enables software teams to understand user behavior – auto-capturing events, performing product analytics and dashboarding, enabling video replays, and rolling out new features behind feature flags, all based on their single open source platform. The product’s open source approach enables companies to self-host, removing the need to send data externally.
+PostHog is an open source platform for self-driving products. It pairs the full context of a product's data – events, errors, logs, replays, and more – with agents that find opportunities and ship improvements, so software teams can build better products, faster. Teams get product analytics, session replay, feature flags, experiments, and more in one platform, and PostHog's open source approach lets companies self-host, removing the need to send data externally.
 
 Founded in 2020 by James Hawkins and Tim Glaser, PostHog was a member of Y Combinator’s Winter 2020 batch, and has subsequent raised $12m in funding from GV, Y Combinator and notable angel investors including Jason Warner (CTO, GitHub), Solomon Hykes (Founder, Docker).
 

@@ -98,9 +98,9 @@ const getUnitySteps = (ctx: any) => {
                     <CalloutBox type="fyi" title="How it works">
                         <Markdown>
                             The Unity SDK captures screenshots using `AsyncGPUReadback` to avoid blocking the main
-                            thread. It also records touch/mouse input and console logs alongside each screenshot. You can
-                            manually record network request metadata with `PostHogSDK.RecordNetworkRequest`. Session replay requires `AsyncGPUReadback` support and is automatically disabled
-                            on WebGL.
+                            thread. It also records touch/mouse input and console logs alongside each screenshot. You
+                            can manually record network request metadata with `PostHogSDK.RecordNetworkRequest`. Session
+                            replay requires `AsyncGPUReadback` support and is automatically disabled on WebGL.
                         </Markdown>
                     </CalloutBox>
                     <CalloutBox type="caution" title="No masking support">
@@ -114,8 +114,8 @@ const getUnitySteps = (ctx: any) => {
                     <CalloutBox type="info" title="Limitations">
                         <Markdown>
                             Unity Session Replay is controlled by local SDK configuration. Options like
-                            `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are **not** remotely configurable
-                            and must be set locally in code at initialization time.
+                            `CaptureNetworkTelemetry`, `CaptureLogs`, and sampling are **not** remotely configurable and
+                            must be set locally in code at initialization time.
                         </Markdown>
                     </CalloutBox>
                 </>

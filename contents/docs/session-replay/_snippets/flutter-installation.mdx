@@ -1,6 +1,6 @@
 ## Step one: Add PostHog to your app
 
-> Session replay requires PostHog Flutter SDK version >= [4.7.0](https://github.com/PostHog/posthog-flutter/releases), and it's recommended to always use [the latest version](/docs/sdk-doctor).
+> Session replay requires PostHog Flutter SDK version >= [4.7.0](https://github.com/PostHog/posthog-flutter/releases), and it's recommended to always use [the latest version](/docs/health-checks/sdk-health).
 
 import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
 
@@ -66,7 +66,7 @@ Setting `config.sessionReplay = true` in your PostHog configuration will start s
 
 ### Manually control session recordings
 
-You can programmatically start and stop session recordings. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings) for details.
+You can programmatically start and stop session recordings, and check whether one is active with `isSessionReplayActive()`. See [how to control which sessions you record](/docs/session-replay/how-to-control-which-sessions-you-record#programmatic-start-and-stop-controls) for details.
 
 ### Configuration options
 
@@ -108,10 +108,10 @@ config.sessionReplayConfig.sampleRate = 1.0;
 ## Troubleshooting
 
 - Update your SDK and iOS Pods.
-- Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
+- Make sure to set the minimum platform version to iOS 13.0 in your `Podfile`, or, for Swift Package Manager projects, in the `Runner` target's **Minimum Deployments** in Xcode.
 - Make sure you have disabled automatic SDK initialization.
 - Run a clean build if you experience issues.
-- For blank recordings for mobile session replay, be sure to set up the [Widget and observer](/docs/session-replay/installation/flutter#widget-and-observer-setup).
+- For blank recordings for mobile session replay, be sure to set up the [Widget and observer](/docs/session-replay/installation/flutter#wrap-your-app-with-posthogwidget).
 - For blank recordings for Flutter Web session replay, be sure to enable [Canvas capture](/docs/session-replay/canvas-recording).
 - If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
     - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).

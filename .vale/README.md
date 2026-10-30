@@ -4,7 +4,7 @@
 
 It catches spelling mistakes and style inconsistencies, like the unforgivable use of em dashes, based on rules we define.
 
-It's managed by the Docs & Wizard team. See the [handbook](https://posthog.com/handbook/docs-and-wizard/vale) on how to update.
+It's managed by the Wizard & Docs team. See the [handbook](https://posthog.com/handbook/wizard-and-docs/vale) on how to update.
 
 ## Getting started
 

@@ -12,7 +12,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import Mermaid from 'components/Mermaid'
 import Tooltip from 'components/Tooltip'
 import usePostHog from 'hooks/usePostHog'
-import { useApp } from '../../context/App'
+import { useAppSettings, useAppActions } from '../../context/App'
 import { useWindow } from '../../context/Window'
 import { IconArrowUpRight, IconSparkles } from '@posthog/icons'
 import { useLocation } from '@reach/router'
@@ -35,6 +35,8 @@ type CodeBlockProps = {
     showAskAI?: boolean
     focusOnLines?: string
     tooltips?: { lineNumber: number; content: string }[]
+    /** Fired after the code reaches the clipboard, for callers that want to react to a copy. */
+    onCopy?: () => void
 
     onChange?: (language: LanguageOption) => void
     currentLanguage: LanguageOption
@@ -50,6 +52,8 @@ type SingleCodeBlockProps = {
     showAskAI?: boolean
     language: string
     children: string
+    /** Fired after the code reaches the clipboard, for callers that want to react to a copy. */
+    onCopy?: () => void
 }
 
 type MdxCodeBlock = {
@@ -187,13 +191,15 @@ export const CodeBlock = ({
     onChange,
     lineNumberStart = 1,
     tooltips,
+    onCopy,
 }: CodeBlockProps): JSX.Element | null => {
     if (languages.length < 0 || !currentLanguage) {
         return null
     }
 
     const codeBlockId = generateRandomHtmlId()
-    const { siteSettings, openNewChat } = useApp()
+    const { siteSettings } = useAppSettings()
+    const { openNewChat } = useAppActions()
     const { appWindow } = useWindow()
     const location = useLocation()
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
@@ -237,15 +243,20 @@ export const CodeBlock = ({
             .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
             .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
             .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
-            .replace(/<ph_posthog_js_defaults>/g, '2026-01-30')
+            .replace(/<ph_posthog_js_defaults>/g, '2026-08-30')
             .replace(
                 /<ph_proxy_path>/g,
                 projectToken ? `relay-${removeQuotes(projectToken)?.slice(-4)}` : '<ph_proxy_path>'
             )
     }
 
-    const copyToClipboard = (code: string): void => {
-        navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+    const copyToClipboard = async (code: string): Promise<void> => {
+        try {
+            await navigator.clipboard.writeText(replaceProjectInfo(stripAnnotationComments(code)))
+        } catch {
+            return
+        }
+        onCopy?.()
         setTooltipVisible(true)
         setTimeout(() => setTooltipVisible(false), 500)
     }
@@ -327,7 +338,10 @@ export const CodeBlock = ({
                             </Tab.List>
                         </Tab.Group>
                     ) : showLabel ? (
-                        <div className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50">
+                        <div
+                            className="min-w-0 mr-8 px-3 py-2 font-bold opacity-50"
+                            data-md-export={currentLanguage.file || label ? undefined : 'skip'}
+                        >
                             {currentLanguage.file ? (
                                 <div className="flex items-center space-x-1.5">
                                     <svg
@@ -394,7 +408,10 @@ export const CodeBlock = ({
                             return (
                                 <>
                                     {activeLanguage.runInPostHog !== 'false' && activeLanguage.language === 'sql' && (
-                                        <div className="relative flex items-center justify-center px-1">
+                                        <div
+                                            className="relative flex items-center justify-center px-1"
+                                            data-md-export="skip"
+                                        >
                                             <a
                                                 href={`${generateSQLEditorLink(activeLanguage.code)}`}
                                                 target="_blank"
@@ -496,7 +513,7 @@ export const CodeBlock = ({
                                     }`}
                                 >
                                     <ScrollArea>
-                                        <div className="flex whitespace-pre min-w-fit relative pb-2" id={languageId}>
+                                        <div className="flex whitespace-pre min-w-fit relative" id={languageId}>
                                             {showLineNumbers && (
                                                 <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent">
                                                     <span
@@ -577,7 +594,14 @@ export const CodeBlock = ({
                                                     ) {
                                                         return
                                                     }
-                                                    const { className, ...props } = getLineProps({ line, key: i })
+                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                    const {
+                                                        key: _lineKey,
+                                                        className,
+                                                        ...props
+                                                    } = getLineProps({
+                                                        line,
+                                                    }) as any
                                                     const tooltipContent =
                                                         tooltips?.find(
                                                             (tooltip) => tooltip.lineNumber === i + lineNumberStart
@@ -621,11 +645,13 @@ export const CodeBlock = ({
                                                                     (token) => !token.content.startsWith(tooltipKey)
                                                                 )
                                                                 .map((token, key) => {
-                                                                    const { className, children, ...props } =
-                                                                        getTokenProps({
-                                                                            token,
-                                                                            key,
-                                                                        })
+                                                                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                                                                    const {
+                                                                        key: _tokenKey,
+                                                                        className,
+                                                                        children,
+                                                                        ...props
+                                                                    } = getTokenProps({ token }) as any
                                                                     return (
                                                                         <span className="relative" key={key}>
                                                                             {firstContentIndex === key &&

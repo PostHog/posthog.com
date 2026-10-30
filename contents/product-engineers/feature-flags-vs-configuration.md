@@ -8,7 +8,6 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Feature flags
-  - Feature management
   - Product engineers
 crosspost:
   - Blog
@@ -42,7 +41,7 @@ Remote config is especially relied on for mobile apps. This is because mobile ap
 
 [Feature flags](/blog/what-is-a-feature-flag) function nearly the same as configurations. They are a key that returns a value when called with a service, but they often include detail on the user as well.
 
-> **Note:** For simplicity, we assume you are using an [external feature flag service](/blog/feature-flags-as-a-service). Of course, you could (and many do) build your own feature flag tool. This might include some of the functionality below.
+> **Note:** For simplicity, we assume you are using an [external feature flag service](/blog/feature-flags-as-a-service). Of course, you could (and many do) [build your own feature flag tool](/blog/build-or-buy-feature-flags). This might include some of the functionality below.
 
 The big difference compared to configurations is feature flags’ expanded functionality:
 
@@ -50,7 +49,7 @@ The big difference compared to configurations is feature flags’ expanded funct
 - Connects to usage and user data.
 - Provides simplified creation UI and permissioning.
 
-To access these, [feature flag services](/blog/best-open-source-feature-flag-tools) often connect to external services like CDPs, product analytics, and data warehouses. They get data from these sources to customize which users get specific values when calling the flag.
+To access these, [feature flag services](/compare/best-open-source-feature-flag-tools) often connect to external services like CDPs, product analytics, and data warehouses. They get data from these sources to customize which users get specific values when calling the flag.
 
 [Feature flags](/docs/feature-flags) are almost always remotely configurable, and because they use an external service, developers can modify them at run time. No need to reset or recompile, just call the external service again. These services also provide a simplified UI, creating a centralized location for modifying feature flags and enabling quick rollouts and rollbacks.
 
@@ -125,7 +124,7 @@ Another key part of the decision is figuring out what works well with the stack 
 
 - If you are relying on many Google-related products, [Firebase Remote Config](https://firebase.google.com/docs/remote-config) might be best.
 
-- If you implemented the modern data stack with a data warehouse, you might use a feature flag tool like [LaunchDarkly](/blog/best-launchdarkly-alternatives).
+- If you implemented the modern data stack with a data warehouse, you might use a feature flag tool like [LaunchDarkly](/compare/best-launchdarkly-alternatives).
 
 - If you’re just starting up and want an all-in-one platform with analytics, A/B tests, and session replays, [PostHog](https://app.posthog.com/signup) is your choice.
 

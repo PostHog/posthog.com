@@ -1,140 +1,68 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { HedgehogCowboyLasso } from '@posthog/brand/hoggies'
 import {
     IconAI,
     IconArrowUpRight,
-    IconBolt,
     IconCheck,
     IconCode,
-    IconCursor,
     IconDatabase,
     IconFlask,
-    IconStack,
     IconGraph,
     IconHandMoney,
-    IconLaptop,
     IconMessage,
     IconPieChart,
-    IconPlug,
     IconRewindPlay,
-    IconTerminal,
     IconToggle,
     IconWarning,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
-import Editor from 'components/Editor'
 import SEO from 'components/seo'
-import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
-import WizardCommand from 'components/WizardCommand'
-import WistiaVideo from 'components/WistiaVideo'
 import TeamMember from 'components/TeamMember'
-import { Bang } from 'components/Icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { IconPostHog } from 'components/OSIcons'
-import PlatformInstall from 'components/PlatformInstall'
+import ReaderView from 'components/ReaderView'
+import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
+import MCPInstallCTA from 'components/MCPInstallCTA'
+import mcpToolsData from '../../data/mcp-tools.json'
 
-function Q({ text }: { text?: string }): JSX.Element {
-    const heading = text || ''
-    return <h2 className="!mt-12 !mb-4 first:!mt-6">{heading}</h2>
-}
+// The tool schema is fetched from the main repo at build time, so the exact totals move
+// between builds. Round down to the nearest hundred to keep the claim true either way.
+const { categories: toolCategories } = mcpToolsData as { categories: { tools: unknown[] }[] | null }
+const toolCount = toolCategories?.reduce((total, category) => total + category.tools.length, 0) ?? 0
+const categoryCount = toolCategories?.length ?? 0
+const toolCountLabel = toolCount >= 100 ? `${Math.floor(toolCount / 100) * 100}+ tools` : 'Hundreds of tools'
 
 function MCPHeader(): JSX.Element {
     return (
-        <header
-            className="relative not-prose mb-8 overflow-hidden rounded-t-sm"
-            style={{
-                width: '100cqw',
-                marginLeft: 'calc(50% - 50cqw)',
-            }}
-        >
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_9608fcca70.png"
-                className="dark:hidden absolute inset-0"
-                imgClassName="h-full w-full"
-            />
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/texture_tan_dark_a92b0e022d.png"
-                className="hidden dark:block absolute inset-0"
-                imgClassName="h-full w-full"
-            />
-            <div className="relative flex flex-col-reverse @lg:flex-row items-center px-5 pt-6 pb-12 max-w-[900px] mx-auto gap-4 @lg:gap-2">
-                <div className="flex-1 text-center @lg:text-left">
-                    <div className="flex gap-1.5 justify-center @lg:justify-start items-center mb-3">
-                        <span className="w-4 h-4 text-purple">
-                            <IconPlug />
-                        </span>
-                        <span className="text-[12px] font-semibold uppercase tracking-wider opacity-60">MCP</span>
-                    </div>
-                    <h1 className="text-3xl @sm:text-4xl @lg:text-5xl font-bold !leading-[1.05] !mb-3 !mt-0 tracking-tight">
+        <section id="overview" className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-5xl mx-auto w-full">
+            <header className="relative flex flex-col-reverse @3xl/reader-content:flex-row items-center gap-4 @3xl/reader-content:gap-8">
+                <div className="flex-1 text-center @3xl/reader-content:text-left">
+                    <h1 className="text-4xl @3xl/reader-content:text-5xl font-bold !leading-[1.12] !mb-3 !mt-0 tracking-tight">
                         Ask questions.
                         <br />
-                        <span className="text-red dark:text-yellow">Get answers.</span>
+                        <span className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow rounded-md px-1 whitespace-nowrap">
+                            Get answers.
+                        </span>
                     </h1>
-                    <p className="!mt-0 !mb-5 text-base @sm:text-lg italic opacity-80">
-                        We don't think the future has a UI. So we built one without one.
+                    <p className="!mt-0 !mb-5 text-base @sm:text-lg opacity-80">
+                        We don't think the future has a UI.
+                        <br />
+                        So we built one without one.
                     </p>
-                    <WizardCommand command="mcp add" slim />
-                    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 justify-center @lg:justify-start text-[13px] font-medium opacity-70">
-                        <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3.5" />
-                            50+ tools
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3.5" />
-                            Open source
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                            <IconCheck className="size-3.5" />
-                            Certified no-UI
-                        </span>
-                    </div>
-                </div>
-                <div className="shrink-0">
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/mcp_hog_05867b6214.png"
-                        alt="PostHog hedgehog with a wand"
-                        className="w-36 @lg:w-52"
+                    <MCPInstallCTA
+                        className="max-w-md mx-auto @3xl/reader-content:mx-0 text-left"
+                        showDesktopLink={false}
                     />
                 </div>
-            </div>
-        </header>
-    )
-}
-
-function ExplainerVideo(): JSX.Element {
-    return (
-        <div className="not-prose my-6">
-            <p className="text-sm text-secondary mb-3">
-                Here&apos;s <TeamMember name="Matt Brooker" photo /> explaining the PostHog MCP server.
-            </p>
-
-            <div className="aspect-video">
-                <WistiaVideo videoId="tjc4o4lldr" className="!aspect-video" autoPlay={false} />
-            </div>
-        </div>
-    )
-}
-
-function DemoVideo(): JSX.Element {
-    return (
-        <div className="not-prose my-6">
-            <div className="rounded-md overflow-hidden border border-primary shadow-md">
-                <div className="aspect-video bg-black">
-                    <video
-                        src="https://res.cloudinary.com/dmukukwp6/video/upload/mcp_error_tracking_debugging30_6e25828d88.mp4"
-                        className="w-full h-full"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
+                <div className="shrink-0 flex justify-center">
+                    <HedgehogCowboyLasso
+                        title="PostHog hedgehog cowboy swinging a lasso"
+                        className="h-auto w-52 @3xl/reader-content:w-72 scale-x-[-1]"
                     />
                 </div>
-            </div>
-            <p className="text-center text-xs opacity-60 mt-2 mb-0 italic">
-                Paste the error. Type `debug`. That&apos;s it.
-            </p>
-        </div>
+            </header>
+        </section>
     )
 }
 
@@ -148,26 +76,26 @@ interface SubfeatureItem {
 function Subfeatures(): JSX.Element {
     const items: SubfeatureItem[] = [
         {
-            title: 'Lives in your editor',
-            description: 'Cursor, Claude, Codex, Zed, VS Code, PostHog Code. Wherever you already work.',
+            title: 'Works where you work',
+            description: 'Use it in PostHog Desktop, Claude, Cursor, Codex, VS Code, Windsurf, Zed, or any MCP client.',
             icon: <IconCode />,
             color: 'blue',
         },
         {
-            title: 'Speaks plain English',
-            description: 'You ask the question. The MCP figures out the query and answers it.',
+            title: 'Reads and writes',
+            description: 'Query analytics, investigate errors, manage flags, and take action across PostHog.',
             icon: <IconMessage />,
             color: 'purple',
         },
         {
-            title: 'Costs nothing to use',
-            description: "It doesn't show up on your PostHog bill. Not even on the free plan.",
+            title: 'Free to connect',
+            description: 'Connections and tool calls are free. Tools that use PostHog AI can add AI spend.',
             icon: <IconHandMoney />,
             color: 'seagreen',
         },
     ]
     return (
-        <ul className="list-none p-0 my-6 grid grid-cols-1 @sm:grid-cols-3 gap-3 not-prose">
+        <ul className="list-none p-0 my-6 grid grid-cols-1 @lg:grid-cols-3 gap-3 not-prose">
             {items.map((item) => (
                 <li
                     key={item.title}
@@ -186,17 +114,33 @@ function Subfeatures(): JSX.Element {
     )
 }
 
+function WhatIsMCP(): JSX.Element {
+    return (
+        <section id="what-is-mcp" className="scroll-mt-20 not-prose">
+            <SectionHeading>What is the PostHog MCP?</SectionHeading>
+            <div className="max-w-3xl text-lg leading-relaxed">
+                <p className="m-0">
+                    The PostHog MCP is a free, hosted server that lets your AI agent use PostHog. Ask in plain English.
+                    Your agent ships a feature flag from a prompt, digs into a stack trace without leaving your editor,
+                    runs a HogQL query, or triages a support ticket – and answers where you already work.
+                </p>
+            </div>
+            <Subfeatures />
+        </section>
+    )
+}
+
 const checklist = [
     'Run funnels',
     'Pull errors by occurrence',
     'Write the SQL',
     'Spin up an experiment',
     'Toggle a feature flag',
-    'Create a cohort',
+    'Triage a support ticket',
+    'Set up a CDP destination',
+    'Query governed metrics',
     'Build a survey',
-    'Check your logs',
     'Find that one weird replay',
-    'Remembers your event taxonomy better than you',
 ]
 
 function MCPChecklist(): JSX.Element {
@@ -211,6 +155,28 @@ function MCPChecklist(): JSX.Element {
                 ))}
             </ul>
         </div>
+    )
+}
+
+function MCPUseCases(): JSX.Element {
+    return (
+        <section id="use-cases" className="scroll-mt-20 not-prose">
+            <SectionHeading
+                lede={`Your agent selects from ${toolCountLabel} across ${categoryCount} categories, then reads or updates your PostHog project for you.`}
+            >
+                What can you do with it?
+            </SectionHeading>
+            <MCPChecklist />
+            <Capabilities />
+            <p className="text-sm text-secondary leading-relaxed mt-4 mb-0">
+                The semantic layer is also available, so agents can query governed metrics such as MRR with the same
+                definition in every session.{' '}
+                <Link to="/docs/semantic-layer" className="font-semibold underline">
+                    Learn about the semantic layer
+                </Link>
+                .
+            </p>
+        </section>
     )
 }
 
@@ -507,7 +473,7 @@ const complaintList: SocialCardProps[] = [
     },
     {
         username: 'Dan',
-        handle: 'dashboardregret',
+        handle: 'toomanymenus',
         quote: 'The PostHog UI has, conservatively, 14,000 menus.',
         platform: 'reddit',
         avatarColor: 'blue',
@@ -548,7 +514,7 @@ function ComplaintCard({ c, rotation }: { c: SocialCardProps; rotation: string }
                 <span
                     className={`ml-auto ${
                         c.platform === 'twitter' ? 'text-base' : 'text-[10px]'
-                    } text-secondary opacity-60 uppercase tracking-wider`}
+                    } text-secondary opacity-60 uppercase tracking-wider self-start`}
                 >
                     {c.platform === 'twitter' ? '𝕏' : 'Reddit'}
                 </span>
@@ -574,19 +540,15 @@ function FutureNoUI(): JSX.Element {
                     UI is overwhelming, and most people only use a fraction of what's actually there.
                 </p>
                 <p>
-                    Even our own marketing team can&apos;t{' '}
-                    <Link to="/newsletter/hidden-danger-of-shipping-fast" state={{ newWindow: true }}>
-                        keep up with how fast we ship
-                    </Link>
-                    .
-                </p>
-                <p>
                     We could have run a campaign telling you the UI is fine. We could have A/B tested a new sidebar
                     every week. We did neither, because we don&apos;t think the future has a UI at all.
                 </p>
                 <p className="font-semibold">That&apos;s where the MCP comes in.</p>
                 <div className="mt-5 bg-accent dark:bg-accent-dark border border-primary rounded-md p-4">
-                    <p className="font-bold text-[15px] m-0 mb-1">"But I like the PostHog UI."</p>
+                    <p className="font-bold text-[15px] m-0 mb-1">
+                        &ldquo;But I <span className="bg-green/20 text-green rounded-sm px-0.5">like</span> the PostHog
+                        UI&rdquo;
+                    </p>
                     <p className="text-[13px] m-0 text-secondary leading-snug">
                         Then carry on. It&apos;s not going anywhere. And while you&apos;re in there, tell{' '}
                         <TeamMember name="Adam Leith" photo /> &mdash; he&apos;ll be thrilled.
@@ -602,52 +564,126 @@ function FutureNoUI(): JSX.Element {
     )
 }
 
-/* SupportedClients + PostHogCodeBoxout removed — replaced by <PlatformInstall /> for the
-   "Where does the MCP run?" section. */
+function WhyMCP(): JSX.Element {
+    return (
+        <section id="why-mcp" className="scroll-mt-20 not-prose">
+            <SectionHeading>
+                You don&apos;t need to use PostHog to{' '}
+                <span className="bg-blue/10 dark:bg-blue/20 text-blue rounded-md px-1 whitespace-nowrap">
+                    use PostHog
+                </span>
+            </SectionHeading>
+            <FutureNoUI />
+        </section>
+    )
+}
+
+function MCPInstallation(): JSX.Element {
+    return (
+        <section id="installation" className="scroll-mt-20 not-prose">
+            <SectionHeading lede="The PostHog Wizard installs the MCP in supported clients. You can also connect any MCP-compatible client manually.">
+                Where does the MCP run?
+            </SectionHeading>
+            <div className="bg-primary rounded shadow-2xl p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
+                <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3">
+                    <div className="border border-primary rounded p-4">
+                        <h3 className="text-base font-bold text-primary mt-0 mb-1">Hosted endpoint</h3>
+                        <p className="text-sm text-secondary leading-relaxed m-0">
+                            Connect to <InlineCode>https://mcp.posthog.com/mcp</InlineCode>. You do not need to host a
+                            server yourself.
+                        </p>
+                    </div>
+                    <div className="border border-primary rounded p-4">
+                        <h3 className="text-base font-bold text-primary mt-0 mb-1">Automatic region routing</h3>
+                        <p className="text-sm text-secondary leading-relaxed m-0">
+                            Sign in with PostHog OAuth. The authentication server routes you to the correct US or EU
+                            data region.
+                        </p>
+                    </div>
+                    <div className="border border-primary rounded p-4">
+                        <h3 className="text-base font-bold text-primary mt-0 mb-1">Light on context</h3>
+                        <p className="text-sm text-secondary leading-relaxed m-0">
+                            Most clients get a single <InlineCode>exec</InlineCode> tool and look up the others on
+                            demand, so a large tool list does not fill the context window.
+                        </p>
+                    </div>
+                    <div className="border border-primary rounded p-4">
+                        <h3 className="text-base font-bold text-primary mt-0 mb-1">Read-only if you want it</h3>
+                        <p className="text-sm text-secondary leading-relaxed m-0">
+                            Add <InlineCode>?readonly=true</InlineCode> to remove every write tool. You can also filter
+                            the tool list or pin the agent to one project.
+                        </p>
+                    </div>
+                </div>
+                <p className="text-sm text-secondary leading-relaxed mt-4 mb-0">
+                    Connecting and calling MCP tools is free. Some tools use LLMs internally and can add PostHog AI
+                    spend. These tools require{' '}
+                    <Link to="/docs/posthog-ai/allow-access" className="font-semibold underline">
+                        AI data processing
+                    </Link>{' '}
+                    to be enabled. Enterprise plans can control access through their identity provider with{' '}
+                    <Link
+                        to="/docs/model-context-protocol/enterprise-managed-authorization"
+                        className="font-semibold underline"
+                    >
+                        enterprise-managed authorization
+                    </Link>
+                    .
+                </p>
+            </div>
+        </section>
+    )
+}
+
+const resources = [
+    {
+        title: 'Use cases',
+        description: 'Explore 20+ example prompts and multi-step recipes.',
+        to: '/docs/model-context-protocol/use-cases',
+    },
+    {
+        title: 'MCP tools reference',
+        description: 'See every tool the server exposes, grouped by product area.',
+        to: '/docs/model-context-protocol/tools',
+    },
+    {
+        title: 'FAQ and advanced setup',
+        description: 'Learn about auth, scoping, filtering, and safety.',
+        to: '/docs/model-context-protocol/faq',
+    },
+]
+
+function MCPResources(): JSX.Element {
+    return (
+        <section id="resources" className="scroll-mt-20 not-prose">
+            <SectionHeading>Go deeper</SectionHeading>
+            <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-3 gap-3">
+                {resources.map((resource) => (
+                    <Link
+                        key={resource.title}
+                        to={resource.to}
+                        className="group block border border-primary rounded p-4 bg-primary !no-underline hover:bg-accent transition-colors"
+                    >
+                        <span className="flex items-center justify-between gap-3 font-bold text-primary">
+                            {resource.title}
+                            <IconArrowUpRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                        </span>
+                        <span className="block text-sm text-secondary leading-relaxed mt-2">
+                            {resource.description}
+                        </span>
+                    </Link>
+                ))}
+            </div>
+        </section>
+    )
+}
 
 function MCPCTA(): JSX.Element {
     return (
-        <div className="not-prose my-6 mt-12">
-            <div className="grid grid-cols-1 @sm:grid-cols-[auto,1fr] gap-5 @sm:gap-6 items-center bg-accent dark:bg-accent-dark border border-primary rounded p-4">
-                <div className="relative flex justify-center shrink-0">
-                    <img
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/w_500,c_limit,q_auto,f_auto/mcp_hog_05867b6214.png"
-                        alt="PostHog hedgehog"
-                        className="w-32 @sm:w-40"
-                    />
-                </div>
-                <div>
-                    <p className="text-xl @sm:text-2xl font-bold m-0 mb-1">Install the MCP</p>
-                    <p className="text-secondary m-0 mb-4 text-[13px]">
-                        One command. Thirty seconds. Works in Cursor, Claude, Codex, PostHog Code, and friends.
-                    </p>
-                    <div className="mb-4">
-                        <WizardCommand command="mcp add" slim />
-                    </div>
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px]">
-                        <Link
-                            to="/docs/model-context-protocol"
-                            className="font-semibold underline hover:opacity-75 !text-inherit"
-                        >
-                            Read the docs
-                        </Link>
-                        <Link
-                            to="https://github.com/PostHog/posthog/tree/master/services/mcp"
-                            external
-                            className="!text-inherit !no-underline"
-                        >
-                            View on GitHub
-                        </Link>
-                        <Link
-                            to="/blog/machine-copy-paste-mcp-intro"
-                            className="font-semibold underline hover:opacity-75 !text-inherit"
-                        >
-                            Why we built it
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <section id="get-started" className="scroll-mt-20 not-prose mb-20">
+            <SectionHeading>Get started &ndash; free</SectionHeading>
+            <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
+        </section>
     )
 }
 
@@ -665,63 +701,30 @@ export default function MCPPage(): JSX.Element {
         <>
             <SEO
                 title="PostHog MCP – Ask questions. Get answers."
-                description="The PostHog Model Context Protocol lets your coding agent query your real product data in plain English. No SQL, no dashboards, no tabs. Free forever."
+                description="The PostHog Model Context Protocol lets your AI agent query data and take action across PostHog from any MCP-compatible client."
                 image="/images/og/default.png"
             />
-            <Editor type="mdx" hasPadding={false}>
-                <div className="px-4 @xl:px-8 pb-4 max-w-[900px] mx-auto">
+            <ReaderView
+                title="MCP"
+                hideTitle
+                hideLeftSidebar
+                hideRightSidebar
+                hideMarkdownActions
+                proseSize="lg"
+                showQuestions={false}
+            >
+                <div className="flex flex-col gap-12 max-w-5xl mx-auto w-full">
                     <MCPHeader />
-
-                    <Q text="What is the PostHog MCP?" />
-                    <p>
-                        The MCP is a server your coding agent talks to. Ask a question in English. It runs the query
-                        against your PostHog data. The answer lands in your editor. No SQL. No dashboards. No tabs full
-                        of charts you forgot you opened.
-                    </p>
-                    <p>Try things like:</p>
-                    <ul>
-                        <li>
-                            <em>"How many unique users signed up in the last 7 days, broken down by day?"</em>
-                        </li>
-                        <li>
-                            <em>"Create an A/B test for our pricing page that measures conversion to checkout."</em>
-                        </li>
-                        <li>
-                            <em>"What are the top 5 errors in my project this week?"</em>
-                        </li>
-                    </ul>
-
-                    <ExplainerVideo />
-                    <Subfeatures />
-
-                    <Q text="What does the MCP actually do?" />
-                    <p>
-                        Your agent picks the right tool from more than 50 available options, and runs it. You don't even
-                        need to know what's setup; the MCP does it for you (and asks for help if needed).
-                    </p>
-
-                    <MCPChecklist />
-
-                    <Capabilities />
-
-                    <Q text="You don't need to use PostHog to use PostHog" />
-                    <FutureNoUI />
-
-                    <Q text="Where does the MCP run?" />
-                    <p>
-                        We know{' '}
-                        <Link to="/code" state={{ newWindow: true }}>
-                            which code editor we prefer
-                        </Link>
-                        , but the MCP is flexible to most common tools.
-                    </p>
-
-                    <PlatformInstall />
-                    <DemoVideo />
-
+                    <div className="not-prose flex flex-col divide-y divide-primary [&>*]:py-8 [&>*:first-child]:pt-0 [&>*:last-child]:pb-0">
+                        <WhatIsMCP />
+                        <MCPUseCases />
+                        <WhyMCP />
+                        <MCPInstallation />
+                        <MCPResources />
+                    </div>
                     <MCPCTA />
                 </div>
-            </Editor>
+            </ReaderView>
         </>
     )
 }

@@ -6,25 +6,25 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort across several teams. There are six distinct teams that handle different aspects of marketing:
+Marketing at PostHog is a collaborative effort across several teams. There are seven distinct teams that handle different aspects of marketing:
 
-- **Graphics** – Leads all art, design, illustration, and brand work for PostHog
-- **Website** – Leads all matters related to posthog.com and handles some product design aspects
-- **Marketing** – A multidisciplinary team that handles Product Marketing, Influencers & Partnerships, and other unowned marketing tasks
-- **Editorial** – Leads content, newsletters, and social
-- **YouTube** – Leads video
-- **Docs & Wizard** – Leads on documentation and the wizard
+- <SmallTeam slug="graphics" /> – Leads all art, design, illustration, and brand work for PostHog
+- <SmallTeam slug="website" /> – Leads all matters related to posthog.com and handles some product design aspects
+- <SmallTeam slug="developer-marketing" /> – A multidisciplinary team that handles Product Marketing, partnerships, and other unowned marketing tasks
+- <SmallTeam slug="editorial" /> – Leads content, newsletters, and social
+- <SmallTeam slug="youtube" /> – Leads video
+- <SmallTeam slug="wizard-and-docs" /> – Leads on documentation and the wizard
+- <SmallTeam slug="builder-relations" /> – Leads in-person events, the forum, and Discord
 
 If you're not sure who to talk to, check [Who can help me?](/handbook/marketing/ownership).
 
 ## Slack channels to know
 
-To keep up with what's shipped and what's about to ship across the company, join:
+To keep up with what's shipped across the company, join <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT"><code>#changelog</code></PrivateLink> – what's just shipped. Owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updated constantly as PRs merge.
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) – what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard) and updated constantly as PRs merge.
-- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) – what's shipping soon. **Owned by the Marketing team** and posted as a daily digest.
+The channel is populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into it. PRs that are still behind a feature flag stay out, based on the *Release status* section of the `posthog/posthog` PR template. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for the full flow.
 
-Both channels are populated by agentic workflows that scan merged PRs and feature flag changes in the `posthog/posthog` repo and summarize them into the relevant channel. Engineers can also opt their PR in (or out) manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for the full flow.
+> **Tip:** The [`@posthog` Slack app](/docs/slack-app) can also answer questions about our own product data. `@PostHog` it in any channel to pull metrics or PR something to the website.
 
 ## Marketing values
 
@@ -34,14 +34,12 @@ Both channels are populated by agentic workflows that scan merged PRs and featur
 
 ### 1. Be opinionated
 
-PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. We're more than just product analytics now, but the principles are the same.
+PostHog makes your product self-driving – that's the vision our marketing and content needs to reflect, and not dilute it with boring corporate-speak. (For the canonical positioning, see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).)
 
-We need to reflect this vision in our marketing and content, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
- 
-We communicate clearly, directly, and honestly.
- 
-It's ok to have a sense of humor. We are more likely to die because we are forgettable, not because we made a lame joke once. We have a very distinctive and weird company culture, and we should share that with customers instead of putting on a fake corporate persona when we talk to them. PostHog should not look like a generic software company.
- 
+When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us.
+
+How we say it – clear, direct, honest, and with room for genuine humor – lives in the [voice & tone guide](/handbook/brand/tone). The short version: we have a distinctive, weird company culture and we share it with customers rather than putting on a fake corporate persona. PostHog should not look like a generic software company.
+
 (Sometimes we use terminology like 'value propositions' because that is the standard marketing term for a well-understood concept. That's allowed.)
 
 ### 2. Pull, don't push
@@ -94,36 +92,26 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-build-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
 
-- **Launches:** Our team ships a lot of products and features. We need launches to break through the noise and get noticed. This helps create the momentum products need to succeed.
+- **Launches:** Our team ships a lot of products and features. We need [launches](/handbook/marketing/product-announcements) to break through the noise and get noticed. This helps create the momentum products need to succeed.
 
 - **World-class documentation:** We work with product teams to maintain up-to-date, high quality docs. We work with Website & Docs to ensure users can discover them. Doing this enables users to "self-serve," discover what they need, and get the most out of PostHog.
 
 - **Supporting YC founders:** Lots of PostHog's DNA comes from Y Combinator. Their companies and founders are our ideal customers. We've done a great job being valuable to them (50%+ of batches using us) and want to continue to do so.
 
 - **Merch:** We make the coolest tech company merch. Let's keep it this way. 
- 
-### Things we want to be good at
 
-- **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
+- **Events:** We don't just want to be a name on the sponsor list. We want to create superfans. The <SmallTeam slug="builder-relations" /> is figuring out "the PostHog way" to do events and conferences.
 
-- **Social media:** Specifically Twitter, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We have been posting more on [LinkedIn](/handbook/content/linkedin) to promote the newsletter. We don't use any other social media channels. 
+- **Social media:** Specifically X, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We have been posting more on [LinkedIn](/handbook/content/linkedin) to promote the newsletter, and to [YouTube](/handbook/content/youtube) with original content. We don't use any other social media channels. 
 
-- **Paid ads:** We run a lot of paid ads on Google and others. It is fuel for everything else we are doing. We want to be good at this, but do it in a way unique to PostHog. We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit.
+- **Paid ads:** The <SmallTeam slug="demand-gen" /> splits the budget about 50/50 between conversion (mostly Google Search) and awareness (Reddit, LinkedIn, X, YouTube, and more). We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit. See [how we run paid ads](/handbook/marketing/paid).
 
-- **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros (Cory, Lottie) to help.
+- **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros on the <SmallTeam slug="graphics" /> to help.
 
 - **Developer influencers:** We [sponsor creators](/handbook/marketing/influencers) like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
 
-- **Billboards:** Billboards are a way to get our brand in front of a lot of people.
+- **OOH:** Billboards are a way to get our brand in front of a lot of people. So are blimps, buses, and ads on the tube.
 
-- **Doing sales without salespeople:** Rather than care a lot about "capturing every lead" or "marketing qualified leads," we'd rather work with sales to create content that helps potential customers, ideally without a salesperson.
-
-### Things we might want to be good at but haven't tested yet
-
-- **Broader partnerships:** PostHog is a complement to a bunch of types of companies, from vibe coding tools to infrastructure platforms. Our data warehouse and CDP are built to enable integrations. How can we leverage this?
-
-- **Video essays:** Video essay style content is a natural extension of what we are doing in our newsletter. When done well, it is what "great video content" looks like.
- 
 ### Things we don't want to spend time on
 
 - **Optimizing marketing spend:** We're more concerned about growing fast than being the most efficient marketing team. Go fast, run experiments, look for upside.
@@ -132,8 +120,10 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 
 - **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch.
 
-- **Being cool and interesting people in online communities:** There are a bunch of communities we *could* be more active in like Reddit and Discord, but we'd prefer to focus on our own community first.
+- **Being cool and interesting people in online communities:** There are a bunch of communities we *could* be more active in like Reddit, but we'd prefer to focus on our own [community](/handbook/community) first.
 
-- **Conferences.** We're not a natural fit for conferences and being a small fish in a big pond isn't really our style. 
+- **Webinars:** Instead, we host cool events where PostHog employees and others can talk about what they're building.
+ 
+- **Conferences.** We're not a natural fit for conferences and being a small fish in a big pond isn't really our style. If we *do* do a conference, it's either to test the waters of a new market (like promoting the Data Warehouse at Big Data London), or in our own weird way (like our LLM Analytics hot dog stand at the AI Engineer Europe Conference).
 
-- **Short-form video.** We tried it, but it didn't work. Our audience *might* be there, but we're not flashy or dedicated enough to reach them.  
+- **Short-form video.** We tried it, but it didn't work. We might try this one again.  

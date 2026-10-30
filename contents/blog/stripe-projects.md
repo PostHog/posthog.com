@@ -6,7 +6,7 @@ author:
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_features_12f2008503.jpg
 featuredImageType: full
 tags:
-    - Blog
+    - Product updates
 ---
 
 No, it’s not coming up with a company name. 

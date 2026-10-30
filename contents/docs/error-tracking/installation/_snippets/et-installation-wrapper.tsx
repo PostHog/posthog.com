@@ -19,6 +19,7 @@ import {
     // Mobile SDK installations
     IOSInstallation,
     AndroidInstallation,
+    KMPErrorTrackingInstallation,
     FlutterInstallation,
     ReactNativeInstallation,
 } from 'onboarding/error-tracking'
@@ -26,6 +27,15 @@ import { JSEventCapture, PythonEventCapture } from 'onboarding/product-analytics
 import { OnboardingContentWrapper } from 'components/Docs/OnboardingContentWrapper'
 import { addNextStepsStep } from './shared-helpers'
 import { WebsiteJSHtmlSnippet, WebsiteJSInitSnippet } from 'product-analytics/installation/_snippets/js-web-snippets'
+
+// Languages without source maps get a release step in place of the upload step
+const linkReleasesStep = (platformSlug: string): Parameters<typeof addNextStepsStep>[2] => ({
+    mappingsUrl: `/docs/error-tracking/link-releases/${platformSlug}`,
+    mappingsLabel: 'Link releases',
+    mappingsDescription:
+        "Great, you're capturing exceptions! To see which release each exception comes from, give your app the release ID when you deploy.",
+    mappingsBadge: 'optional',
+})
 
 // Web SDK wrappers
 export const ErrorTrackingJSWebInstallationWrapper = () => (
@@ -85,24 +95,20 @@ export const ErrorTrackingNodeJSInstallationWrapper = () => (
 
 export const ErrorTrackingPythonInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={{ PythonEventCapture }}>
-        <PythonInstallation
-            modifySteps={(steps) => addNextStepsStep(steps).filter((s) => s.title !== 'Upload source maps')}
-        />
+        <PythonInstallation modifySteps={(steps) => addNextStepsStep(steps, undefined, linkReleasesStep('python'))} />
     </OnboardingContentWrapper>
 )
 
 export const ErrorTrackingRubyInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={{}}>
-        <RubyInstallation
-            modifySteps={(steps) => addNextStepsStep(steps).filter((s) => s.title !== 'Upload source maps')}
-        />
+        <RubyInstallation modifySteps={(steps) => addNextStepsStep(steps, undefined, linkReleasesStep('ruby'))} />
     </OnboardingContentWrapper>
 )
 
 export const ErrorTrackingRubyOnRailsInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={{ JSEventCapture }}>
         <RubyOnRailsInstallation
-            modifySteps={(steps) => addNextStepsStep(steps).filter((s) => s.title !== 'Upload source maps')}
+            modifySteps={(steps) => addNextStepsStep(steps, undefined, linkReleasesStep('ruby'))}
         />
     </OnboardingContentWrapper>
 )
@@ -146,6 +152,22 @@ export const ErrorTrackingAndroidInstallationWrapper = () => (
                     mappingsLabel: 'Upload mapping files',
                     mappingsDescription:
                         "Great, you're capturing exceptions! The next step is to upload ProGuard/R8 mapping files so PostHog can deobfuscate your stack traces.",
+                })
+            }
+        />
+    </OnboardingContentWrapper>
+)
+
+export const ErrorTrackingKMPInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={{}}>
+        <KMPErrorTrackingInstallation
+            modifySteps={(steps) =>
+                addNextStepsStep(steps, undefined, {
+                    mappingsUrl: '/docs/error-tracking/upload-debug-symbols/kmp',
+                    mappingsLabel: 'Upload debug symbols',
+                    mappingsDescription:
+                        "If you ship minified or native code on a supported KMP target, upload that target's debug symbols so PostHog can generate accurate stack traces.",
+                    mappingsBadge: 'optional',
                 })
             }
         />

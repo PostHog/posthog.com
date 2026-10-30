@@ -1,4 +1,5 @@
 import { kea } from 'kea'
+import { calculatePrice } from '../PricingCalculator/calculatorLogic'
 import { inverseCurve, sliderCurve } from './Slider'
 import {
     MAX_FEATURE_FLAGS,
@@ -26,31 +27,8 @@ export const formatUSD = (number, trailingZeros = false) => {
     return usd.format(number).replace('.00', trailingZeros ? '.00' : '')
 }
 
-export const calculatePrice = (eventNumber: number, tiers): { total: number; costByTier: any } => {
-    let finalCost = 0
-    let alreadyCountedEvents = 0
-
-    if (!tiers) {
-        return 0
-    }
-    const costByTier = []
-    for (const { up_to, unit_amount_usd, ...rest } of tiers) {
-        const remainingEvents = Math.max(eventNumber - alreadyCountedEvents, 0)
-        const eventsInThisTier = up_to
-            ? remainingEvents < up_to - alreadyCountedEvents
-                ? remainingEvents
-                : up_to - alreadyCountedEvents
-            : remainingEvents
-        const tierCost = eventsInThisTier * parseFloat(unit_amount_usd)
-        finalCost = finalCost + tierCost
-        // the last tier has null up_to so we set it to an arbitrarily high number
-        alreadyCountedEvents = up_to ?? 10000000000
-
-        costByTier.push({ ...rest, up_to, unit_amount_usd, tierCost, eventsInThisTier })
-    }
-
-    return { total: Math.round(finalCost), costByTier }
-}
+// Lives in calculatorLogic so the pricing math can be unit tested without pulling in kea
+export { calculatePrice }
 
 export type PricingOptionType = 'product_analytics' | 'session_replay' | 'feature_flags' | 'surveys'
 

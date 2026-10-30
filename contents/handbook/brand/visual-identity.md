@@ -29,7 +29,7 @@ Find logos on our [brand assets](/handbook/brand/assets) page.
 | Stacked logo                                      | When horizontal space is limited but the full name is important. |
 | 4-color logo                                      | Print version, when gradients can't be printed. Only use the 4-color logo for this case. |
 
-Download all variants at [/handbook/company/brand-assets.md](/handbook/company/brand-assets). SVG is always preferred.
+Download all variants from [brand assets](/handbook/brand/assets). SVG is always preferred.
 
 ### Rules
 
@@ -72,7 +72,7 @@ PostHog uses a deliberately limited palette. Fewer colors, used consistently, cr
 
 PostHog uses three typefaces, each with a specific role. Using them correctly is one of the fastest ways to make something feel on-brand.
 
-### Open Runde
+### RoundHog
 
 Our primary typeface. Used for all text on posthog.com and in most contexts.
 
@@ -82,7 +82,7 @@ Our primary typeface. Used for all text on posthog.com and in most contexts.
 - **Semibold** – Paragraphs with large headers, paragraph links
 - **Regular & Regular Italic** – Body text
 
-Unfortunately there are no italic variants at this time, but Cory is trying to convince the font creator to make them...
+Italic variants are available for Regular, Medium, Semibold, and Bold.
 
 ### Squeak
 
@@ -126,7 +126,7 @@ Max is our hedgehog mascot. He's a core part of the PostHog visual identity. He'
 - Use competitor hedgehog styles or derivative designs.
 - Use our artwork on a personal website or for anything that isn't PostHog-related. While our code is open source, our brand assets are property of PostHog. (The exception is for assets explicitly intended for community use like desktop or mobile background images.)
 
-**Artwork library:** Team members can find all hedgehogs under the Account menu -> Art library.
+**Artwork library:** All approved hedgehogs are at [brand.posthog.com](https://brand.posthog.com/hoggies). The Account menu links there as Art library.
 
 ### Illustration style (general)
 
@@ -174,7 +174,7 @@ PostHog uses three icon styles for different purposes:
 | icons8 sticker pack                         | Stickers and casual contexts |
 | OS-style icons                              | Website desktop              |
 
-Cory cares a little too much about icon glyphs. Icons should be intentional.
+We care a little too much about icon glyphs. Icons should be intentional.
 
 - When an icon is accompanies by a label, the icon should be complimentary.
 - When an icon is used without text, they should be clear enough to stand on their own.
@@ -217,7 +217,7 @@ When photography is used:
 
 Use [html2design](https://www.figma.com/community/plugin/1159123024924461424) to capture real webpages and import them directly into Figma. This makes sanitizing data much easier than working from flat image exports.
 
-All screenshots are stored in a [private Figma file](https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&t=ODxST4bS2pHBADwU-1) (private because source data may contain PII).
+All screenshots are stored in a <PrivateLink url="https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&amp;t=ODxST4bS2pHBADwU-1">private Figma file</PrivateLink> (private because source data may contain PII).
 
 **Using synthetic data**
 

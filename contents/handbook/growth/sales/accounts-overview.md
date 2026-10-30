@@ -14,7 +14,7 @@ flowchart TB
     A@{ label: "<b>New business leads<br></b>- Booked a demo (organic, paid ads)<br>- Emailed sales@<br>- Used &gt;50% startup credits + invoice &gt;$5k<br>- 'Cool company' in ocean.io<br>- Using PostHog, $0 spend, trigger for hiring increase, web/social increase, fundraise" } --> C["TECHNICAL ACCOUNT EXECUTIVE"]
     B["<b>Expansion leads</b><br>-MRR $500-1,667, &gt; 50 employees, &gt; 7 users, ICP country, paying &gt; 3 months<br>- High ICP score + Scale plan<br>- Off startup plan in next 2 months + last invoice &gt;$1500<br>- &gt;$1k MRR + &gt;50% change"] --> D["TECHNICAL ACCOUNT MANAGER"]
     n1["<b>Manual leads</b><br>- Anyone can create - use your discretion"] --> C
-    n2@{ label: "<span style=\"color:\"><b>Onboarding leads</b><br>- F</span>irst bill of $100 + business email<br>- Not otherwise a lead" } --> n8["ONBOARDING SPECIALIST"]
+    n2@{ label: "<b>Onboarding leads<br></b>- First bill of $100 + business email<br>- Not otherwise a lead" } --> n8["ONBOARDING SPECIALIST"]
     C --> n4["$20k+ potential? (TAE decides)"]
     n4 -- No --> n3["SELF SERVE"]
     n4 -- Yes --> n5["Close then nurture for 12 months"]

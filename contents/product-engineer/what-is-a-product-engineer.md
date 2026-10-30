@@ -19,7 +19,7 @@ Reading this handbook will help you understand how to adapt your thinking, the b
 
 Just like our [company handbook](/handbook), where we publicly document our strategy and how we work, the Product Engineer Handbook is a living document. One we will grow, fine-tune, and iterate like any other software product. Consider this version a minimum lovable product.
 
-If you enjoy it, you should sign up to our newsletter, [Product for Engineers](https://newsletter.posthog.com/), so you don't miss out on new chapters. 
+If you enjoy it, you should sign up to our newsletter, [build mode](https://newsletter.posthog.com/), so you don't miss out on new chapters. 
 
 Got a request for something we should add to the handbook? Leave a comment on this page, or in our [community](/questions).
 
@@ -80,7 +80,7 @@ Embracing the product engineer mindset requires a complete reset of how organiza
 
 For individuals, being a [product engineer is just plain fun](/blog/why-product-engineering-is-so-fun). When you truly understand and engage with the impact of your work on real users, every line of code you write is more meaningful.
 
-For companies, embracing product engineers and the [culture they need to flourish](/product-engineer/culture), unlocks the kind of speed and agency that allows small companies to out flank larger incumbents. To spark joy in users and build products they truly love. It's a competitive advantage.
+For companies, embracing product engineers and the [culture they need to flourish](/product-engineer/culture), unlocks the kind of speed and agency that allows small companies to outflank larger incumbents. To spark joy in users and build products they truly love. It's a competitive advantage.
 
 In our experience, nothing is more motivating than working with other talented product engineers. The speed, scale, and ambition of problems you can tackle when product engineers work together is on a different level.
 

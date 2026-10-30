@@ -26,7 +26,8 @@ import useProducts from 'hooks/useProducts'
 export default function ProductAnalyticsFeatures(): JSX.Element {
     const { products } = useProducts()
     const productAnalytics = products.find((product) => product.type === 'product_analytics')
-    const featuresContent = productAnalytics?.features || []
+    const rawFeatures = productAnalytics?.features
+    const featuresContent = Array.isArray(rawFeatures) ? rawFeatures : Object.values(rawFeatures || {})
 
     const [currentTab, setCurrentTab] = useState(0)
     const totalTabs = featuresContent.length

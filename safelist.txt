@@ -325,6 +325,7 @@ lg:my-0
 line-clamp-1
 line-clamp-2
 line-clamp-3
+max-h-14
 max-w-2xl
 max-w-3xl
 max-w-4xl
@@ -350,6 +351,7 @@ opacity-60
 opacity-75
 pb-48
 pb-72
+pl-7
 pl-[calc(1rem_+_0rem)]
 pl-[calc(1rem_+_1rem)]
 pl-[calc(1rem_+_2rem)]
@@ -457,6 +459,7 @@ text-black
 text-blue
 text-blue
 text-brown
+text-brown-dark
 text-burnt-orange
 text-burnt-orange-dark
 text-creamsicle

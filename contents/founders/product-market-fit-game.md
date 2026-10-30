@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Product
-  - Product-market fit
+  - Finding product-market fit
 crosspost:
   - Blog
 seo: {
@@ -20,7 +19,7 @@ seo: {
 
 In a startup, the _only_ objective that matters _before_ you have product-market fit, is _finding_ product-market fit. 
 
-Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit, or [how to measure product-market fit](/blog/measure-product-market-fit). _How_ you find it is much harder, hence this guide.
+Knowing when you've found it is easy – there's no shortage of descriptions of how it _feels_ to have product-market fit, or [how to measure product-market fit](/founders/measure-product-market-fit). _How_ you find it is much harder, hence this guide.
 
 To me, finding product-market fit is a bit like playing [snakes and ladders](https://en.wikipedia.org/wiki/Snakes_and_ladders). There are numerous traps, winning takes a little luck, and the only certainty is it's never a straight line to the finish.  
 
@@ -216,9 +215,9 @@ Do not just assume one or two things like "engineers in startups with over 100 s
 
 Feel free to include some anti-needs and haves too – i.e. things your Ideal Customer Profile _doesn't_ need or have.
 
-List out all the potential users you could sell down the first column in a spreadsheet, and score them against all of these attributes. Color-code the spreadsheet so you can spot patterns easily. As you start to see if people are happy to pay.
+List out all the potential users you could sell down the first column in a spreadsheet, and score them against all of these attributes. Color-code the spreadsheet so you can spot patterns easily as you start to see if people are happy to pay.
 
-Be upfront with customers. This step may prove tricky if you never set any commercial expectation with them early on. If so, you may find it easier to sell to newer users with clearer expectations. Use your website to make clear that your service is a paid one, or will be once you're of beta. 
+Be upfront with customers. This step may prove tricky if you never set any commercial expectation with them early on. If so, you may find it easier to sell to newer users with clearer expectations. Use your website to make clear that your service is a paid one, or will be once you're out of beta. 
 
 You will also need some pricing. You are likely to change this numerous times:
 - **Step 1** is to create some kind of internal table for you to use and iterate with each handful of sales calls.
@@ -227,9 +226,9 @@ You will also need some pricing. You are likely to change this numerous times:
 
 - **Step 3**, for companies focusing on self-serve, is to enable people to pay without talking to you. Do this only after step 2, and only if it suits your go to market. If you're enterprise focused and selling from the top down, it's a bad idea. If you're product-led then go for it.
 
-> **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learn. I (with hindsight, correctly) felt it was very important to talk to our early users about what they're prepared to pay.
+> **Important:** Don't leap straight to self-serve. Remember that, at this stage, you're optimizing for learning, not revenue. Jumping too soon to self-serve will reduce your opportunities for learning. I (with hindsight, correctly) felt it was very important to talk to our early users about what they're prepared to pay.
 
-Now it's to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. If you manage this five times – congratulations, you've completed the product-market fit game.
+Now it's time to get your first reference customer. This means a customer that pays full list price, is using the product as you expect, and would happily recommend you to others. If you manage this five times – congratulations, you've completed the product-market fit game.
 
 Once you get 5 reference customers, you are _well_ on your way to product market fit. After this:
 
@@ -237,7 +236,7 @@ Once you get 5 reference customers, you are _well_ on your way to product market
 
 * Then see if other people are successful at following your playbook. Try with two other people to reduce the chance it's a person problem, not a product market fit problem.
 
-Now you're likely at product market fit - it should just feel easy to grow. If not, [talk to me](https://twitter.com/james406).
+Now you're likely at product market fit – it should just feel easy to grow. If not, [talk to me](https://twitter.com/james406).
 
 #### Failure modes
 

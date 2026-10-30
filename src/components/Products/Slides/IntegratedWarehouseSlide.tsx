@@ -14,7 +14,7 @@ export default function IntegratedWarehouseSlide({ variant = 'default' }: Integr
 
             <div className="grid grid-cols-1 @2xl:grid-cols-2 gap-4 @2xl:gap-6 max-w-4xl mx-auto w-full">
                 <Link
-                    to="/data-stack"
+                    to="/context-warehouse"
                     state={{ newWindow: true }}
                     className="border border-primary rounded p-6 bg-primary hover:bg-accent transition-colors flex flex-col group"
                 >
@@ -25,7 +25,7 @@ export default function IntegratedWarehouseSlide({ variant = 'default' }: Integr
                         <h3 className="text-xl font-bold text-primary mb-0">Use our integrated data warehouse</h3>
                     </div>
                     <p className="text-[15px] text-secondary flex-1 mb-3">
-                        Tired of maintaining ETL pipelines? Keep data in our managed warehouse and use it across a
+                        Tired of maintaining ETL pipelines? Keep data in our warehouse and use it across a
                         variety of PostHog tools. Queries run on our compute, and you can send data externally if
                         needed.
                     </p>

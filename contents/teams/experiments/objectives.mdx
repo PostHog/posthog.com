@@ -1,25 +1,49 @@
-### Q2 2026 Objectives
-This quarter we're making experiments work great with AI agents, removing feature flag friction, and improving the results experience.
+### Q4 2026 Objectives
 
-#### AI
+#### Self-driving experiment loop (TBD)
+We start with the health layer (below) so self-driving has good inputs. The self-driving offsite may bring architectural changes, so we wait for that context before we pick the self-driving feature to build in Q4.
 
-##### API layer <TeamMember name="Marcel Poelker" photo />
-Get the API layer ready for AI agents. All experiment operations should be covered, well tested and work the same way whether the caller is our frontend or an agent.
+#### Feature flags v2 <TeamMember name="Anders Asheim Hennum" photo />
+Continue the rollout of the new config format (v2).
+- Stretch goal: everything specced in the RFC rolled out for internal testing.
 
-##### Skills <TeamMember name="Marcel Poelker" photo />
-Create experiment skills so PostHog AI knows how to use our MCP tools effectively.
+#### Health layer <TeamMember name="Marcel Poelker" photo />
+Experiments can be complex to configure, especially since since we serve a wide audience from humans to agents with varying degree of familiarity. Understanding issues an experiment has in one central layer is the foundation needed to proactively fix issues, and feeding good inputs into the creation workflow.
 
-##### MCP <TeamMember name="Rodrigo Iloro" photo />
-External callers like PostHog Code or any other agent can connect via MCP and run experiment operations reliably.
+#### MCP as the primary surface <TeamMember name="Ruby Childs" photo />
+Treat MCP as the main way people use experiments:
+- Interview customers who use experiments through agents. Learn why they still come to the UI. (Ruby)
+- Roast the MCP experience: run through it ourselves and fix what is broken or awkward. (Ruby)
+- Build MCP apps that show experiment results, config, and summaries in a rich way inside the agent. (Rodrigo)
 
-##### Signals <TeamMember name="Juraj Majerik" photo />
-Ship our first signal - notifying users when an experiment reaches significance.
+#### Replay vision in experiment results <TeamMember name="Marcel Poelker" photo />
+Replay vision can watch the recordings from an experiment and describe how users behaved. Show what the AI sees per variant in the experiment UI, so users can compare behavior between variants, not just the numbers.
 
-#### Feature flags <TeamMember name="Anders Asheim Hennum" photo />
-Make it possible to run multiple Experiments per Feature Flag. Rollout configurations will be more flexible and it will be easier to understand how Feature Flags and Experiments are related.
+#### Warehouse-native experiments <TeamMember name="Juraj Majerik" photo />
+Let customers run experiments on data in their own warehouse.
+- Talk to the customers who asked for this.
+- Build a working prototype against one warehouse.
+- Add simple pricing for it.
+- Use AI to help the user write the metric query.
 
-#### Query performance <TeamMember name="Juraj Majerik" photo />
-Extend precomputation to the main subquery for all metric types. Make precomputation observable - see where it kicked in, how it ran and compare results against direct-scan queries.
+#### Optimize compute costs <TeamMember name="Rodrigo Iloro" photo />
+- Stop recomputing results daily for every experiment. (Juraj)
+- Add a cooldown period before manual refreshes. (Rodrigo)
 
-#### Loading experience <TeamMember name="Rodrigo Iloro" photo />
-Loading is painful for our high-volume users. Consolidate query fetching, only re-query when the user asks and set better expectations around loading states.
+#### Prompts <TeamMember name="Juraj Majerik" photo />
+- Keep adding the most requested features. Make sure power users have a great experience.
+- Improve the Playground. Get it to feature parity with relevant competitors.
+
+#### Prompt experiments: find out why traction is low <TeamMember name="Ruby Childs" photo />
+Prompts are growing fast, but few users run experiments on them. Research what is blocking adoption before we build more.
+
+#### Positioning: sell experiments better <TeamMember name="Ruby Childs" photo />
+We build a lot but we do not tell the story well. Improve how we present experiments to the outside world:
+- Improve the experiments pages on our website.
+- Explore a dedicated surface for experiments to capture direct demand, since AEO changes take months to show effect.
+
+#### Onboarding experience <TeamMember name="Ruby Childs" photo />
+Make it appealing and easy to set up your first experiment, with a strongly AI-driven wizard. This could drive growth.
+
+#### Results reading <TeamMember name="Juraj Majerik" photo />
+Summarize results during recomputation and show the summary proactively, instead of waiting for the user to ask for it.

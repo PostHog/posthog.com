@@ -1,6 +1,6 @@
 extends: capitalization
 message: "'%s' heading should be in sentence case, and product names should be capitalized."
-link: https://posthog.com/handbook/docs-and-wizard/docs-style-guide
+link: https://posthog.com/handbook/wizard-and-docs/docs-style-guide
 level: warning
 threshold: 1 # Fail all instances of improper casing
 scope: heading
@@ -13,6 +13,7 @@ prefix: '^[^:]+:\s+|^[\w\s]+[.)]\s+'
 # All entries in vocabularies/BrandsAndTechnologies/accept.txt are exempt from this rule
 exceptions:
     # For product names: The strings in this list are enforced with exact casing
+    - Business Knowledge
     - Customer Analytics
     - Data Pipelines
     - Data Warehouse

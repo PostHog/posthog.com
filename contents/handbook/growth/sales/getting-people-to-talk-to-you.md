@@ -34,7 +34,12 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 - Adding the contact on LinkedIn and sending a very human video or audio message can work really well - even for technical people (use the LinkedIn mobile app).  
 - Figure out what the non-technical people in their team need and then go out and talk to them - get someone who isn’t an engineer to talk to us given engineers don’t want to.
 - If they submit a support request, jump in and respond yourself to try and build a relationship. 
+- Subscribe to your customers' newsletters, set up Google Alerts, use their products and follow their X or Reddit communities. This lets you time your outreach for when they've just shipped something - making it about them, not you. For example, if they just launched an AI feature, you can reach out the next day to the PM or engineer and congratulate them whilst they are energized and then connect it to a PostHog product they might not be using yet that helps them make their new product better. 
 - Ask the wider team for help - we have to get creative here! You'd be surprised how often somebody knows someone...
+- If you're not succeeding getting through with your champions, engage with "new users" instead – colleagues recently invited into PostHog. Monitor for them via the "new user" segment in Vitally and reach out immediately with an email and Slack invite. New users often accept because they assume the Slack channel is part of their company's PostHog setup. Be helpful, send merch, and when it lands at their office, the rest of the team is much more likely to join the Slack channel (especially when the new user refers them to how helpful you've been).
+- Find your customer's GitHub – company open source repos or individual engineers' personal projects. Review any open bugs, issues, etc. and submit a real pull request. Extra points if you fix an open bug on their company repo. The customer will see your name somewhere other than their inbox and engage. For important customers, ask our engineering team for help with more complex fixes.
+- If you're reaching out to a non-English speaking team and getting no response, try writing your message in their language. Use Claude to draft it, or ideally – get a native speaker on your team to help you craft it.
+- Guest-list your customer to a cool event – a PostHog event, industry meetup, hackathon, etc. – where they can meet potential customers, partners, or peers in their space. You're putting them in front of people who can help their business – and that's a reason to talk to you.
 
 > Before you do any of this stuff, [get to know](/handbook/onboarding/onboarding-team#account-analysis) your customer as well as you possibly can. Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
@@ -45,7 +50,7 @@ Despite the organization using PostHog, they may not recognize you/PostHog, or m
 
 When crafting a message, consider the following:
 
-1. Your initial outreach isn't about you, it is about them. Lead with customer-centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. [Tim has some great thoughts on this subject](https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549).
+1. Your initial outreach isn't about you, it is about them. Lead with customer-centered comms. Avoid leading with being attached to their account or telling them how you are there to help them. <PrivateLink url="https://posthog.slack.com/archives/C01MGUHFH6G/p1740674855616549">Tim has some great thoughts on this subject</PrivateLink>.
 2. Avoid fluff. "I'm just reaching out to", "I just wanted to" etc. are empty phrases that take longer to get to the point. Before you hit send, reread and see if there is anything you can cut out.
 3. Lead with value within the first sentence. If it takes a paragraph to get there, you won't get responses.
 4. Ask yourself, if I got this email to the sales@ email box, would I engage it? Would I even give it a second look?

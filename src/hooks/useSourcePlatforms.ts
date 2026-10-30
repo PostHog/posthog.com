@@ -1,4 +1,6 @@
+import { useMemo } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
+import { getSourceDocsPath } from '../lib/sourceDocs'
 
 export default function useSourcePlatforms() {
     const { allPostHogSource } = useStaticQuery(graphql`
@@ -7,15 +9,24 @@ export default function useSourcePlatforms() {
                 nodes {
                     name
                     slug
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                     icon_url
                 }
             }
         }
     `)
 
-    return allPostHogSource.nodes.map((node: any) => ({
-        label: node.name,
-        url: `/docs/data-warehouse/sources/${node.slug}`,
-        image: node.icon_url,
-    }))
+    return useMemo(
+        () =>
+            allPostHogSource.nodes.map((node: any) => ({
+                label: node.name,
+                url: getSourceDocsPath(node),
+                image: node.icon_url,
+            })),
+        [allPostHogSource]
+    )
 }

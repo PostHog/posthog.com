@@ -20,7 +20,7 @@ This is also useful if your releases fall outside normal working hours. For exam
 
 ## Timezones
 
-All scheduled times use your **project's timezone** (configured in [project settings](/docs/settings#general)). If no timezone is set, UTC is used as the default. Times are stored internally as UTC but displayed in the project timezone throughout the UI.
+All scheduled times use your **project's timezone** (configured in [project settings](/docs/settings/projects)). If no timezone is set, UTC is used as the default. Times are stored internally as UTC but displayed in the project timezone throughout the UI.
 
 This means if your project is set to `America/New_York` and you schedule a change for 9:00 AM, the flag will change at 9:00 AM Eastern Time. Make sure your project timezone is correct before creating schedules.
 
@@ -104,7 +104,7 @@ Here are some common examples:
 
 ## Schedule changes with MCP
 
-You can also schedule flag changes programmatically using the [PostHog MCP server](/docs/feature-flags/create-flags-mcp#scheduled-change-tools). This enables AI coding agents to create, list, update, and delete scheduled changes directly from your code editor.
+You can also schedule flag changes programmatically using the [PostHog MCP server](/docs/feature-flags/surfaces/mcp#scheduled-change-tools). This enables AI coding agents to create, list, update, and delete scheduled changes directly from your code editor.
 
 The MCP server provides five tools for scheduled changes:
 

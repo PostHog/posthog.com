@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
-import { IconCheck, IconWarning } from '@posthog/icons'
+import { IconWarning } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useApp } from '../../../../context/App'
 import Tooltip from 'components/RadixUI/Tooltip'
 import OSButton from 'components/OSButton'
 
-export default function ReportSpamButton({ type, id }: { type: 'reply' | 'question'; id: number }): JSX.Element {
+export default function ReportSpamButton({
+    type,
+    id,
+    label,
+}: {
+    type: 'reply' | 'question'
+    id: number
+    label?: string
+}): JSX.Element {
     const { user, reportSpam } = useUser()
     const { openSignIn } = useApp()
     const [showConfirmation, setShowConfirmation] = useState(false)
@@ -55,11 +63,21 @@ export default function ReportSpamButton({ type, id }: { type: 'reply' | 'questi
         )
     }
 
-    return (
-        <Tooltip
-            trigger={<OSButton onClick={handleClick} className="" hover="border" size="md" icon={<IconWarning />} />}
-            delay={0}
+    const button = (
+        <OSButton
+            onClick={handleClick}
+            hover={label ? 'background' : 'border'}
+            size={label ? 'sm' : 'md'}
+            icon={<IconWarning />}
         >
+            {label}
+        </OSButton>
+    )
+
+    if (label) return button
+
+    return (
+        <Tooltip trigger={button} delay={0}>
             Report spam
         </Tooltip>
     )

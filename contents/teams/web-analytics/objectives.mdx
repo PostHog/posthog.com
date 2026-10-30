@@ -1,87 +1,102 @@
-## Q2 2026 objectives
+## Q4 2026 objectives
 
-### Signals, Skills & MCP
+Last quarter we kept every product alive but moved none of them to a new level. This quarter we focus on fewer bets, pair on shared surfaces, and take what we have to GA – live, priced, and out of beta. We build MCP-first – if an agent can't use it, it isn't done – but keep the UI for users who still need it.
 
-The whole team will contribute to making Web Analytics a first-class citizen in PostHog's AI and automation ecosystem.
+<details>
+<summary>Take AEO and SEO to GA – <TeamMember name="Jordan Mryyan" photo /></summary>
 
-**Motivation:** PostHog is going all-in on AI agents and MCP. Web Analytics needs to ensure questions are routed to the right insight types, signals are comprehensive, and the team is dogfooding MCP daily.
+- Show the full crawled → cited → converted funnel per page and page group
+- Get more crawler data in: one-click log drains (Vercel, Cloudflare, Netlify) to capture non-JS AI crawlers
+- Alert on crawl and citation spikes or cliffs, and on pages that agents read but that error or load slowly for them
+- Self-driving: turn content gaps and crawl errors into concrete fixes (FAQ, `llms.txt`, structured data, robots rules)
+- Price it and ship it to everyone
 
-* Route questions to web analytics insight types and queries natively via skills
-* Double down on having all web analytics signals (web vitals, heatmaps, bot activity, anomalies)
-* Have an MCP hero on the team who uses it daily and dogfoods the integration
-* Ship Marketing Analytics skills so PostHog AI can answer marketing questions natively
+</details>
 
-**We'll know we're successful when:** PostHog AI reliably answers web analytics questions, and the team is using MCP in daily workflows.
+<details>
+<summary>Take agent experience to GA – <TeamMember name="Lucas Ricoy" photo /></summary>
 
-### Agent & Bot Analytics + AEO
+AI browsers (ChatGPT, Claude) now use customers' websites on behalf of people. Customers need to see how that goes:
 
-<TeamMember name="Lucas Ricoy" photo /> will be focusing on launching agent analytics and building some AEO (Answer Engine Optimization) and SEO tooling.
+- Detect agent sessions by default in `posthog-js`, so every customer gets agent vs. human traffic with zero config
+- Compare agents and humans on the same pages: paths, conversion, and where agents get stuck
+- Self-driving: flag flows that agents fail to complete (forms, sign-up, checkout) and suggest fixes
+- Price it and ship it to everyone
 
-**Motivation:** Users want to distinguish and understand what bot/agent traffic is driving on their sites. Some because they need to prevent unwanted bots from scraping site content, others want to ensure their pages are seen by the right bots. 
+</details>
 
-* Launch agent/bot analytics with full segmentation across web analytics, product analytics, SQL/HogQL and MCP.
-* Build AEO tooling that works for founders
-* Ship activity signals: anomaly detection for drops/spikes on tracked pages (bots or not)
+<details>
+<summary>Make web analytics agent-native – <TeamMember name="Lucas Ricoy" photo /></summary>
 
-**We'll know we're successful when:** customers can segment agent vs human traffic end-to-end, and the AEO dashboard is adopted by early-access users.
+If agents become the main way people use PostHog, web analytics has to work great without our UI:
 
-### Marketing Analytics
+- Let the wizard set up web analytics end to end, including a conversion goal
+- Measure MCP answers to web, marketing, and AEO questions with evals, and fix what's weak
+- Ship ready-made prompts: a web analytics dashboard as an artifact, and a scheduled agent task that watches your site and flags problems
 
-<TeamMember name="Javier Bahamondes" photo /> will be focusing on finding Marketing Analytics' product-market fit and expanding beyond paid ads.
+</details>
 
-**Motivation:** We're getting many feature requests for Marketing Analytics: a direct revenue signal. Expanding beyond paid ads to social, SEO, and other channels makes PostHog more central to how technical marketing teams work. Adding actionability (pausing campaigns, changing budgets) turns MA into a control surface, not just a BI tool. Integrating with Workflows for campaign management increases stickiness and daily usage.
+<details>
+<summary>Take ad performance to GA – <TeamMember name="Javier Bahamondes" photo /></summary>
 
-* Expand channel support beyond paid ads: organic, social, referral, email
-* Explore workflow actions for closing the loop (campaign actions, budget controls, Workflows integration)
-* Run competitor research and customer interviews to define the MA differentiator
+Ad spend is business data, and PostHog should be the best place to correlate it with everything else customers send us:
 
-**We'll know we're successful when:** Marketing Analytics supports the top organic/social channels and we have a clear, validated positioning for what makes MA different from competitors.
+- Attribute from start to finish: connect every source – paid ads, SEO, AEO, and agents – to revenue and new customers, using conversion goals and revenue events
+- Give customers a clear view of their ad optimization data that they can use from their own agents through the MCP, including write tools to set up sources and conversion goals
+- Self-driving: spot underperforming campaigns and suggest budget and setup changes that the customer's agent can apply
+- Finish the pricing review and remove the beta label – customers and agencies are waiting on it before they commit
 
-### Live View & Heatmaps
+</details>
 
-<TeamMember name="Jordan Mryyan" photo /> will be focusing on making live view a compelling real-time experience and improving heatmaps.
+<details>
+<summary>Cancel Vitally – <TeamMember name="Arthur Moreira de Deus" photo /></summary>
 
-**Motivation:** Live view can become a flywheel for PostHog: connecting it to experiments, error tracking, and session replays gives users reasons to come more often. Not to mention that the dopamine hit is so good. 
+- CS, onboarding, and sales run 100% on Customer Analytics and we cancel Vitally in October
+- Improve reliability and monitoring for Account creation, property syncs and data ingestion
+- Built at least one self-driving loop: from signal triage to surfacing it for the user
 
-* Improve live view and ship stable and feature complete real-time dashboard with use cases in mind (campaign launches, AB test tracking, milestone celebrations)
-* Cross-product integration: connect live view to experiments, error tracking, and session replay
-* Integrate real time capabilities into heatmaps
-* (Strecth) Fix heatmaps reliability and UX issues, define pricing strategy for premium features (comparisons, time snapshots)
+</details>
 
-**We'll know we're successful when:** live view is stable and integrated with other PostHog products, and heatmaps reliability issues are resolved.
+### House cleanup
 
-### Activation
+- Heatmaps and the main web analytics dashboard: no new features this quarter. Ship the remaining heatmaps SDK change and the paywall comms, then remove the heatmaps beta label.
+- Performance: roll out Sessions v3 to fix one-off queries for the largest teams
 
-The whole team will contribute on reversing the decline in Web Analytics activation.
+## Q3 2026 recap
 
-**Motivation:** Web Analytics activation has been declining and we don't fully understand why. Reversing this trend is critical to growth since users who don't activate never retain.
+- Marketing Analytics: organic insights, setup fixes, and MCP suggestions for sources and conversion goals shipped behind flags – not self-serve, priced, or GA yet
+- Customer Analytics: on track to replace Vitally in October, with performance parity and team workflows migrated one by one
+- Heatmaps: paywall, toolbar gating, and page-specific monitoring shipped
+- Self-driving: scouts produce concrete code changes in dogfood (bot definitions, web vitals with Lighthouse, CSP), but not for customers yet
+- Agent and bot analytics not fully released – non-JS crawler capture still blocked on server-side ingestion
+- Precomputed improvements released to everyone: 85%+ of queries under 200ms
+- Accounts list load fixed; Marketing Analytics dashboard p95 not improved
 
-* Investigate activation metric decline and identify what drives retention
-* Ship improved onboarding flows to get new users to value faster
+## Q2 2026 recap
 
-**We'll know we're successful when:** we've identified the root causes of activation decline and shipped onboarding changes that stabilize or reverse the trend.
-
-### Stretch
-
-* Synthetic monitoring: revive the hackathon project for uptime and performance monitoring
-* Globe visualization: ship the beta globe view as a polished live view feature
-* Comparison date ranges: period vs period and YoY picker across web analytics
+- Activation: reversed the decline in Web Analytics activation
+- Signals, Skills & MCP: Marketing Analytics AI and MCP integration shipped, but read-only and lightly used so far
+- Agent and bot analytics: building blocks and docs merged, working everywhere HogQL works (12 teams and ~15M events over 21 days organically) – full release pending
+- Marketing Analytics: PMF investigation nearly wrapped, performance improved (p95 ~23s to ~15s), drill-down navigation shipped (channels to sources to campaigns, UTM and ad group breakdowns)
+- Precomputed improvements ready to release to everyone (3–30x speedups)
+- Arthur joined the team to lead the Customer Analytics / Vitally replacement effort
+- Virtual HogQL properties and Google Search Console integration shipped
 
 ## Q1 2026 recap
 
-* Pre-aggregated tables shipped to 50% of teams
-* Session explorer performance improvements
-* Filters and UX revamp across Web Analytics
-* Heatmaps inherited and stabilized with many fixes
-* Marketing Analytics: improved ROAS, added new sources, ongoing support post-GA
-* Agent/bot basic segmentation shipped, browser detection deferred to Q2
-* Installation Health v2 partially shipped
+- Pre-aggregated tables shipped to 50% of teams
+- Session explorer performance improvements
+- Filters and UX revamp across Web Analytics
+- Heatmaps inherited and stabilized with many fixes
+- Marketing Analytics: improved ROAS, added new sources, ongoing support post-GA
+- Agent/bot basic segmentation shipped, browser detection deferred to Q2
+- Installation Health v2 partially shipped
 
 ## Q4 2025 recap
 
-* Marketing Analytics launched as GA with strong user feedback
-* Web Analytics integrated with Posthog AI
-* Shipped Web Analytics components as insights
-* Pre-aggregated tables made available for selected teams
-* Query concurrency and performance improved
-* Many bug fixes and UX improvements across Web Analytics
+- Marketing Analytics launched as GA with strong user feedback
+- Web Analytics integrated with PostHog AI
+- Shipped Web Analytics components as insights
+- Pre-aggregated tables made available for selected teams
+- Query concurrency and performance improved
+- Many bug fixes and UX improvements across Web Analytics

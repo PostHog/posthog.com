@@ -1,0 +1,40 @@
+## Q4 2026 objectives
+
+Last quarter we launched and started building self-driving on our own server. This quarter is about closing the loop: turning what agents and customers tell us into fixes, getting more teams onto the product, and getting ready for GA. We're moving fast, so expect these to change as we learn.
+
+### Turn agent feedback into fixes (Driver: <TeamMember name="Georgis Andonis" />)
+
+**Motivation:** Agents tell us what's broken and what's missing, but today that feedback is hard to see and harder to act on. Customers fix things with coding agents, so errors and feedback should turn into fixes their coding agent can ship, without us in the middle.
+
+* Build agent feedback into the product: the UI, insights, and sessions
+* Expose MCP tools so agents can explore agent feedback too
+* Find sessions with errors or feedback, and make them easy for customers to find (<TeamMember name="Lucas Faria" />)
+* Turn agent feedback into PRs, giving the coding agent the context it needs to ship the fix
+* Deprecate missing capabilities, since agent feedback covers it
+* Migrate our own MCP server to agent feedback
+* Check whether customers ship a fix and come back to use the handoff again (<TeamMember name="Lucas Faria" />)
+
+**We'll know it worked when** agent feedback and errors regularly turn into merged fixes, on our own MCP server and for customers.
+
+### Prepare MCP analytics for GA (Driver: <TeamMember name="Georgis Andonis" />)
+
+**Motivation:** To go GA we need numbers customers can trust and a pricing model we're ready to bill on. This one is a stretch for the quarter.
+
+* Count events properly, so usage and billing line up
+* Track how MCP analytics is doing as a business
+* Pick up the rest of the work on our GA checklist
+* Evaluate whether MCP analytics is ready for GA (<TeamMember name="Mike Warren" />)
+* Prepare MCP analytics pricing for GA (<TeamMember name="Mike Warren" />)
+
+**We'll know it worked when** we have a clear yes or no on GA readiness, and pricing and billing are ready to switch on.
+
+### Help more teams start using MCP analytics (Driver: <TeamMember name="Lucas Faria" />)
+
+**Motivation:** Plenty of teams run MCP servers, but many don't know what MCP analytics can do for them, or get stuck setting it up.
+
+* Publish an engineering post showing a concrete use case
+* Help teams connect servers that don't have an official SDK
+* Fix setup blockers, and check whether new teams keep using the product
+* Check whether the PostHog wizard's onboarding detects MCP servers
+
+**We'll know it worked when** more new teams send MCP events and are still using the product a few weeks later.

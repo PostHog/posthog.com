@@ -1,137 +1,68 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { useRoadmaps } from 'hooks/useRoadmaps'
 import Link from 'components/Link'
+import useRoadmapEarlyAccessFeatures, { RoadmapEarlyAccessFeature } from 'hooks/useRoadmapEarlyAccessFeatures'
 
-interface RoadmapItem {
-    id: string
-    strapiID: string
-    title: string
-    description: string
-    projectedCompletion?: string
-    complete?: boolean
-}
+type RoadmapStage = Extract<RoadmapEarlyAccessFeature['stage'], 'concept' | 'alpha' | 'beta'>
+
+const STAGES: Array<{ stage: RoadmapStage; title: string; headerClassName: string }> = [
+    { stage: 'concept', title: '[?] CONCEPT', headerClassName: 'text-[#F1A82C] border-[#F1A82C]' },
+    { stage: 'alpha', title: '[→] ALPHA', headerClassName: 'text-[#1D4AFF] border-[#1D4AFF]' },
+    { stage: 'beta', title: '[✓] BETA', headerClassName: 'text-[#00FF00] border-[#00FF00]' },
+]
+
+const featureUrl = (flagKey: string): string => `/roadmap?feature=${encodeURIComponent(flagKey)}`
+
+const stripMarkdown = (text: string): string => text.replace(/[*_~`#]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
 
 export default function TerminalRoadmap(): JSX.Element {
-    const { roadmaps: clientRoadmaps } = useRoadmaps({
-        params: {
-            filters: {
-                $or: [
-                    {
-                        teams: {
-                            name: {
-                                $eq: 'PostHog AI',
-                            },
-                        },
-                    },
-                ],
-            },
-        },
-    })
-
-    const { roadmaps } = useStaticQuery(graphql`
-        {
-            roadmaps: allRoadmap(
-                filter: { teams: { data: { elemMatch: { attributes: { name: { eq: "PostHog AI" } } } } } }
-            ) {
-                nodes {
-                    id
-                    strapiID
-                    title
-                    description
-                    projectedCompletion
-                    complete
-                }
-            }
-        }
-    `)
-
-    const underConsideration = roadmaps.nodes.filter(
-        (roadmap: RoadmapItem) => !roadmap.projectedCompletion && !roadmap.complete
-    )
-    const inProgress = roadmaps.nodes.filter((roadmap: RoadmapItem) => roadmap.projectedCompletion && !roadmap.complete)
-    const shipped = roadmaps.nodes.filter((roadmap: RoadmapItem) => roadmap.complete)
-
-    const stripMarkdown = (text: string): string => {
-        return text.replace(/[*_~`#]/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    }
+    const { features, loading } = useRoadmapEarlyAccessFeatures({ teamSlug: 'self-driving' })
 
     return (
         <div className="space-y-6">
             <div className="grid grid-cols-1 @2xl:grid-cols-3 gap-6">
-                {/* Under Consideration */}
-                <div className="space-y-3">
-                    <div className="text-[#F1A82C] text-sm font-bold border-b border-[#F1A82C] pb-2">
-                        [?] UNDER CONSIDERATION
-                    </div>
-                    {underConsideration
-                        .filter((r: RoadmapItem) => !!r.description?.trim())
-                        .slice(0, 3)
-                        .map((roadmap: RoadmapItem) => {
-                            const clientRoadmap = clientRoadmaps.find((r: any) => r.id === roadmap.strapiID)
-                            const likeCount = clientRoadmap?.attributes?.likes?.data?.length || 0
-                            return (
-                                <div key={roadmap.id} className="space-y-1">
+                {STAGES.map(({ stage, title, headerClassName }) => {
+                    const stageFeatures = features.filter((feature) => feature.stage === stage).slice(0, 3)
+
+                    return (
+                        <section key={stage} className="space-y-3">
+                            <div className={`border-b pb-2 text-sm font-bold ${headerClassName}`}>{title}</div>
+                            {stageFeatures.map((feature) => (
+                                <Link
+                                    key={feature.flagKey}
+                                    to={featureUrl(feature.flagKey)}
+                                    state={{ newWindow: true }}
+                                    className="block space-y-1 hover:opacity-75"
+                                >
                                     <div className="flex items-start gap-2">
-                                        {clientRoadmaps?.length > 0 && likeCount > 0 && (
-                                            <span className="text-[#F1A82C] text-[12px] bg-[#F1A82C]/20 px-2 py-0.5 rounded shrink-0">
-                                                {likeCount}★
+                                        {typeof feature.waitlistCount === 'number' && feature.waitlistCount > 0 && (
+                                            <span className="shrink-0 rounded bg-[#F1A82C]/20 px-2 py-0.5 text-[12px] text-[#F1A82C]">
+                                                {feature.waitlistCount}★
                                             </span>
                                         )}
-                                        <div className="flex-1">
-                                            <div className="text-[rgba(238,239,233,0.9)] text-sm font-bold leading-tight">
-                                                {roadmap.title.substring(0, 60)}
-                                                {roadmap.title.length > 60 ? '...' : ''}
+                                        <div className="min-w-0 flex-1">
+                                            <div className="text-sm font-bold leading-tight text-[rgba(238,239,233,0.9)]">
+                                                {feature.name.substring(0, 60)}
+                                                {feature.name.length > 60 ? '...' : ''}
                                             </div>
-                                            {roadmap.description && (
-                                                <div className="text-[#666] text-[12px] leading-tight mt-1">
-                                                    {stripMarkdown(roadmap.description).substring(0, 80)}...
+                                            {feature.description && (
+                                                <div className="mt-1 text-[12px] leading-tight text-[#666]">
+                                                    {stripMarkdown(feature.description).substring(0, 80)}
+                                                    {stripMarkdown(feature.description).length > 80 ? '...' : ''}
                                                 </div>
                                             )}
                                         </div>
                                     </div>
-                                </div>
-                            )
-                        })}
-                </div>
-
-                {/* In Progress */}
-                <div className="space-y-3">
-                    <div className="text-[#F54E00] text-sm font-bold border-b border-[#F54E00] pb-2">
-                        [→] IN PROGRESS
-                    </div>
-                    {inProgress.slice(0, 3).map((roadmap: RoadmapItem) => (
-                        <div key={roadmap.id} className="space-y-1">
-                            <div className="text-[rgba(238,239,233,0.9)] text-sm font-bold leading-tight">
-                                {roadmap.title.substring(0, 60)}
-                                {roadmap.title.length > 60 ? '...' : ''}
-                            </div>
-                            {roadmap.description && (
-                                <div className="text-[#666] text-[12px] leading-tight">
-                                    {stripMarkdown(roadmap.description).substring(0, 80)}...
-                                </div>
+                                </Link>
+                            ))}
+                            {!loading && stageFeatures.length === 0 && (
+                                <div className="text-[12px] text-[#666]">No items in this stage.</div>
                             )}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Shipped */}
-                <div className="space-y-3">
-                    <div className="text-[#00FF00] text-sm font-bold border-b border-[#00FF00] pb-2">[✓] SHIPPED</div>
-                    {shipped.slice(0, 3).map((roadmap: RoadmapItem) => (
-                        <div key={roadmap.id} className="space-y-1">
-                            <div className="text-[rgba(238,239,233,0.9)] text-sm font-bold leading-tight">
-                                {roadmap.title.substring(0, 60)}
-                                {roadmap.title.length > 60 ? '...' : ''}
-                            </div>
-                            {roadmap.description && (
-                                <div className="text-[#666] text-[12px] leading-tight">
-                                    {stripMarkdown(roadmap.description).substring(0, 80)}...
-                                </div>
+                            {loading && stageFeatures.length === 0 && (
+                                <div className="text-[12px] text-[#666]">Loading roadmap...</div>
                             )}
-                        </div>
-                    ))}
-                </div>
+                        </section>
+                    )
+                })}
             </div>
 
             {/* Footer */}

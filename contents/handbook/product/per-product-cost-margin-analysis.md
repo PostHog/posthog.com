@@ -62,7 +62,7 @@ Direct costs are easy. Shared costs require estimating your product's share of u
 
 ### 3. Work with infra on tagging
 
-Reach out to #team-infrastructure to kick off the process – they can help you estimate your product's traffic share and navigate the tooling.
+Reach out to #support-infrastructure to kick off the process – they can help you estimate your product's traffic share and navigate the tooling.
 
 We use a FinOps tool for cost allocation. The infrastructure team sets up allocation tags that group AWS resources by product/function.
 
@@ -208,11 +208,11 @@ Review your cost model quarterly at minimum, or whenever you ship significant in
 
 ## Worked example
 
-See the [Session Replay unit economics RFC](https://github.com/PostHog/requests-for-comments-internal/pull/964) for a complete example of this process applied to a real product.
+See the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/pull/964">Session Replay unit economics RFC</PrivateLink> for a complete example of this process applied to a real product.
 
 ## Contacts
 
-- **Infrastructure / cost tooling:** #team-infrastructure
+- **Infrastructure / cost tooling:** #support-infrastructure
 - **ClickHouse cost attribution:** #team-clickhouse
 - **Billing data:** Billing team
 

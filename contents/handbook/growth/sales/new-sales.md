@@ -20,7 +20,7 @@ Selling software, especially to larger companies, can be a complex process with 
   * Is it painful enough right now that they are willing to adopt a new solution to solve it?  
   * Will PostHog solve this problem for them?
 * Timeline - When do they want to have a contract signed/solution in place?
-* Pricing - We should know the rough size of the opportunity, and that that is in line with expectations and budget of the customer.
+* Pricing - We should know the rough size of the opportunity, and that is in line with expectations and budget of the customer.
 * Champion - Are you working with a champion who is going to sell internally?
   * Are they the buyer (see below) or do they know who the buyer is?
 * Decision - How are they evaluating us?  
@@ -81,7 +81,7 @@ It's also totally fine to ask a customer questions over email in advance of the 
 > - Who owns that data stack? Do you have a data team or data engineers?
 > - Who will be the consumers of PostHog data? How are they currently answering their questions, and how easy is it for them to do so with existing tooling?
 
-If you're pretty sure that they should be qualified out of our sales process, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.) There is a [Claude skill](https://drive.google.com/file/d/1tGuKDf6nbG5vPVWkQRntkYkXBsRpKSLr/view?usp=drive_link) that can help draft genuinely helpful responses to folks like these - it will put together helpful resources from our docs and blog posts that can help customers get started, even if they don't qualify for a call with a salesperson.
+If you're pretty sure that they should be qualified out of our sales process, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.) There is a <PrivateLink url="https://drive.google.com/file/d/1tGuKDf6nbG5vPVWkQRntkYkXBsRpKSLr/view?usp=drive_link">Claude skill</PrivateLink> that can help draft genuinely helpful responses to folks like these - it will put together helpful resources from our docs and blog posts that can help customers get started, even if they don't qualify for a call with a salesperson.
 
 #### Requests for Proposals (RFPs)
 
@@ -144,7 +144,7 @@ When you have engineers on the call from a qualified company (ICP fit or otherwi
 2. **Technical Demo** (15 min)
    - Highly tailored to their use case
    - Light on pitching, heavy on showing docs and GitHub
-   - Use our [Demo Project](https://eu.posthog.com/project/30021/) linked to [Hogflix](https://hogflix.dev/)
+   - Use our <PrivateLink url="https://eu.posthog.com/project/30021/">Demo Project</PrivateLink> linked to [Hogflix](https://hogflix.dev/)
    - Start with their biggest problem first, stay there until they're happy
 
 3. **Call Close** (5-10 min)
@@ -189,7 +189,7 @@ When engineers aren't on the call, your goal is to earn a second call with their
 
 We have various slide templates - ask someone on the Sales team for an invite to our Pitch account. Use the deck as scaffolding, pulling out relevant slides. **Do not spend the demo presenting a deck with an engineering team** - most people at PostHog spend 90% of the demo call actually in product or talking to the customer about their needs. But sometimes, there is a legitimate need for a deck.
 
-Before you demo, make sure there is enough data to properly showcase our features. If needed, you can use [Hogbot](https://github.com/PostHog/hogbot) to generate more synthetic data. This is built by the sales team for the sales team, so if you see anything you want to improve, don't hesitate to submit a PR!
+Before you demo, make sure there is enough data to properly showcase our features. If needed, you can use <PrivateLink url="https://github.com/PostHog/hogbot">Hogbot</PrivateLink> to generate more synthetic data. This is built by the sales team for the sales team, so if you see anything you want to improve, don't hesitate to submit a PR!
 
 You should give a relevant and pointed demo - don't just throw everything in, as the customer will get overwhelmed. If you don't show what's important first, people on the call will become distracted.
 
@@ -256,9 +256,9 @@ By the end of either the 1st or 2nd call with a customer, you should have a defi
 
 ### 5. Product evaluation
 
-Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. Generally it's better to seek forgiveness than ask permission for adding people to a Slack channel - use your judgement. 
+Once qualified, and if you think they are a good prospect for our sales-led process, your first priority is to try and get them into trial of PostHog with [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, a shared Slack channel will also be their primary channel for support. [Invite SupportHog to the channel](/handbook/growth/sales/slack-channels) so tickets can be created from Slack. React with a 🎫 to customer messages or mention `@SupportHog` to create a ticket in a thread. Generally it's better to seek forgiveness than ask permission for adding people to a Slack channel - use your judgement. 
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up [a Slack channel](/handbook/growth/sales/slack-channels). Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - SupportHog works in Teams too. See [Using MS Teams](/handbook/growth/sales/slack-channels#using-ms-teams) on the shared Slack channels page for how to get set up. Before adding the customer into the channel, remember to test it to ensure ticket creation is working correctly.
 
 You should then follow up with a standard email/Slack message that:
 
@@ -280,7 +280,7 @@ If the customer isn't super clear on how to articulate the success criteria then
 
 1. Guide them on how to set up tracking depending on their app paying attention to common points of friction such as:
    * [Anonymous vs Identified](/docs/data/anonymous-vs-identified-events) events.
-   * Tracking pageviews in [single page apps](/docs/libraries/js/features#manually-capturing-pageviews-and-pageleaves-in-single-page-apps).
+   * Tracking pageviews in [single page apps](/tutorials/single-page-app-pageviews).
    * Deploying a [reverse proxy](/docs/advanced/proxy).
 2. Guide them on creating insights either based on:
    * Metrics they've shared that they need to see or;

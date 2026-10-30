@@ -5,6 +5,9 @@ import React from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { Link } from 'gatsby'
 
+const PHOTO_AVATAR_SIZE = 'size-4 [:is(h1,h2,h3,h4,h5,h6)_&]:size-6'
+const PHOTO_NAME_SIZE = '!text-[13px] !leading-none [:is(h1,h2,h3,h4,h5,h6)_&]:!text-sm'
+
 export const TeamMemberLink = ({
     firstName,
     lastName,
@@ -44,44 +47,55 @@ export const TeamMemberLink = ({
             <Link to={href || (squeakId ? `/community/profiles/${squeakId}` : '')} state={{ newWindow: true }}>
                 {photo && (
                     <span className="invisible max-h-4 inline-flex items-center gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full">
-                        <span className="h-6 shrink-0 rounded-full overflow-hidden">
+                        <span className={`${PHOTO_AVATAR_SIZE} shrink-0 rounded-full overflow-hidden`}>
                             {avatarUrl ? (
-                                <img src={avatarUrl} alt="" className={`w-6 bg-${color ? color : 'red'}`} />
+                                <img
+                                    src={avatarUrl}
+                                    alt=""
+                                    className={`${PHOTO_AVATAR_SIZE} bg-${color ? color : 'red'}`}
+                                />
                             ) : (
                                 <CloudinaryImage
                                     alt=""
                                     width={40}
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                    className="w-6 bg-red"
+                                    className={`${PHOTO_AVATAR_SIZE} bg-red`}
+                                    imgClassName={PHOTO_AVATAR_SIZE}
                                 />
                             )}
                         </span>
-                        <span className="!text-sm hover:underline font-semibold inline-block truncate">
+                        <span className={`${PHOTO_NAME_SIZE} hover:underline font-semibold inline-block truncate`}>
                             {children ? children : displayName}
                         </span>
                     </span>
                 )}
                 <span
-                    className={`inline-flex items-center ${photo
-                        ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
-                        : 'border-b border-primary border-dashed'
-                        } ${className}`}
+                    className={`inline-flex items-center ${
+                        photo
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full bg-light text-dark'
+                            : 'border-b border-primary border-dashed'
+                    } ${className}`}
                 >
                     {photo ? (
                         <>
-                            <span className="h-6 shrink-0 rounded-full overflow-hidden">
+                            <span className={`${PHOTO_AVATAR_SIZE} shrink-0 rounded-full overflow-hidden`}>
                                 {avatarUrl ? (
-                                    <img src={avatarUrl} alt="" className={`w-6 bg-${color ? color : 'red'}`} />
+                                    <img
+                                        src={avatarUrl}
+                                        alt=""
+                                        className={`${PHOTO_AVATAR_SIZE} bg-${color ? color : 'red'}`}
+                                    />
                                 ) : (
                                     <CloudinaryImage
                                         alt=""
                                         width={40}
                                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
-                                        className="w-6 bg-red"
+                                        className={`${PHOTO_AVATAR_SIZE} bg-red`}
+                                        imgClassName={PHOTO_AVATAR_SIZE}
                                     />
                                 )}
                             </span>
-                            <span className="!text-sm hover:underline font-semibold inline-block truncate">
+                            <span className={`${PHOTO_NAME_SIZE} hover:underline font-semibold inline-block truncate`}>
                                 {children ? children : displayName}
                             </span>
                         </>
@@ -92,8 +106,9 @@ export const TeamMemberLink = ({
                                     {avatarUrl ? (
                                         <div className="inline-block size-24 rounded-full p-[2px] bg-white dark:bg-dark border border-primary">
                                             <div
-                                                className={`bg-${color ? color : 'red'
-                                                    } rounded-full overflow-hidden w-full aspect-square`}
+                                                className={`bg-${
+                                                    color ? color : 'red'
+                                                } rounded-full overflow-hidden w-full aspect-square`}
                                             >
                                                 <img
                                                     src={avatarUrl}
@@ -143,12 +158,14 @@ export const FutureTeamMember = ({ href }: { href: string }): JSX.Element => (
 
 export default function TeamMember({
     name,
+    squeakId: id,
     photo,
     className,
     showOnlyFirstName = false,
     children,
 }: {
     name: string
+    squeakId?: number
     photo?: boolean
     className?: string
     showOnlyFirstName?: boolean
@@ -180,8 +197,8 @@ export default function TeamMember({
     `)
 
     const person = nodes.find(
-        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
-            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
+        ({ firstName, lastName, squeakId }: { firstName: string; lastName: string; squeakId: number }) =>
+            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase() && (!id || squeakId === id)
     )
 
     return person ? (

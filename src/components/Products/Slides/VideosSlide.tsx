@@ -34,7 +34,7 @@ interface VideosSlideProps {
 const VideoPlayerWindow = ({ video, startTime = 0 }: any) => {
     return (
         <div className="h-full w-full bg-black">
-            <WistiaCustomPlayer theme="dark" mediaId={video.wistia} autoPlay={true} startTime={startTime} />
+            <WistiaCustomPlayer mediaId={video.wistia} autoPlay={true} startTime={startTime} />
         </div>
     )
 }
@@ -225,7 +225,6 @@ export default function VideosSlide({
                     <div className={`@2xl:flex-1 flex flex-col ${isMaximized ? 'fixed inset-0 z-50 p-16 pt-20' : ''}`}>
                         <WistiaCustomPlayer
                             key={selectedVideo?.wistia}
-                            theme="dark"
                             mediaId={selectedVideo?.wistia || ''}
                             onMaximize={handleMaximize}
                             onPopOut={handlePopOut}

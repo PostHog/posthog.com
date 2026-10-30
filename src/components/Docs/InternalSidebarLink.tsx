@@ -6,8 +6,7 @@ import { useBreakpoint } from 'gatsby-plugin-breakpoints'
 import { useLayoutData } from 'components/Layout/hooks'
 
 export default function InternalSidebarLink({ url, name, depth, onClick, className = '', style = {} }) {
-    const key = typeof window !== 'undefined' ? window.location.pathname : 'gatsby-ssr-context'
-    const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key }))
+    const { reportScrollUpdated } = useActions(scrollspyCaptureLogic({ key: 'scrollspy' }))
     const breakpoints = useBreakpoint()
     const { compact } = useLayoutData()
 

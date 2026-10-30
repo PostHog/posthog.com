@@ -16,11 +16,11 @@ const Title = ({ pipeline }: { pipeline: any }) => {
         (pipeline.status !== 'coming_soon' &&
             pipeline.type === 'source' &&
             pipeline.slug &&
-            `/docs/data-warehouse/sources/${pipeline.slug}`) ||
+            `/docs/data-pipelines/sources/${pipeline.slug}`) ||
         (pipeline.status !== 'coming_soon' &&
             pipeline.type &&
             pipeline.slug &&
-            `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
+            `/docs/data-pipelines/${pipeline.type}s/${pipeline.slug}`)
 
     return (
         <div className="flex items-center space-x-2">
@@ -65,6 +65,11 @@ export default function IntegrationsLibrary(): JSX.Element {
                 nodes {
                     name
                     slug
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                     icon_url
                     unreleased
                 }
@@ -150,33 +155,26 @@ export default function IntegrationsLibrary(): JSX.Element {
         { name: 'Status', width: '100px', align: 'center' as const },
     ]
 
-    // Parse URL query parameters on initial load
-    const getInitialFilterValues = () => {
-        if (typeof window === 'undefined') return { type: null, status: null, category: null }
+    // State for managing filters - hydrated from URL after mount
+    const [typeFilter, setTypeFilter] = useState<string | null>(null)
+    const [statusFilter, setStatusFilter] = useState<string | null>(null)
+    const [categoryFilter, setCategoryFilter] = useState<string | null>(null)
 
+    // Hydrate filters from URL on mount
+    useEffect(() => {
         const params = new URLSearchParams(window.location.search)
         const type = params.get('type')
         const status = params.get('status')
         const categorySlug = params.get('category')
 
-        // Validate type
         const validType = type && ['source', 'destination', 'transformation'].includes(type) ? type : null
-
-        // Validate status (convert "roadmap" to "coming_soon" for internal use)
         const validStatus = status === 'roadmap' ? 'coming_soon' : status === 'live' ? 'live' : null
-
-        // Unslugify category
         const validCategory = categorySlug ? unslugifyCategory(categorySlug, allCategories) : null
 
-        return { type: validType, status: validStatus, category: validCategory }
-    }
-
-    const initialFilters = getInitialFilterValues()
-
-    // State for managing filters
-    const [typeFilter, setTypeFilter] = useState<string | null>(initialFilters.type)
-    const [statusFilter, setStatusFilter] = useState<string | null>(initialFilters.status)
-    const [categoryFilter, setCategoryFilter] = useState<string | null>(initialFilters.category)
+        if (validType) setTypeFilter(validType)
+        if (validStatus) setStatusFilter(validStatus)
+        if (validCategory) setCategoryFilter(validCategory)
+    }, [])
 
     // Update URL when filters change
     useEffect(() => {

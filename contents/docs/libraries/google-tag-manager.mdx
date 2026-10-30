@@ -33,4 +33,15 @@ Some of these do require calling PostHog, which you can do by checking for the w
 </script>
 ```
 
-You can find the full list of methods in our [JavaScript Web docs](/docs/libraries/js/features).
+You can find the full list of methods in our [JavaScript Web docs](/docs/libraries/js/usage).
+
+## Tag templates
+
+PostHog maintains two Google Tag Manager templates. Both are in the Community Template Gallery. In your container, go to **Templates > Tag Templates > Search Gallery**, then search for PostHog.
+
+- The web template loads the JavaScript Web SDK and adds tag types for capture, identify, alias, reset, and opt in or opt out. Source: [posthog-gtm-template](https://github.com/PostHog/posthog-gtm-template).
+- The server template sends events from a server container to the [capture API](/docs/api/capture). Source: [posthog-gtm-template-server](https://github.com/PostHog/posthog-gtm-template-server).
+
+Use the web template to configure PostHog from Google Tag Manager without a custom HTML tag. The custom HTML method above also continues to work.
+
+The web template loads the SDK from PostHog Cloud only. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host, load the SDK with a custom HTML tag, then set the region of the template to **Custom host**.

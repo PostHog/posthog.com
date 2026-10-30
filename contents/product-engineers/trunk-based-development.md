@@ -9,7 +9,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Engineering
-  - Feature management
+  - Feature flags
 ---
 
 What do trees, elephants, and successful software all have in common? They rely on their trunks to help them grow big and strong. In the case of software, the trunk is the main codebase engineers make changes to and that deploys to users.
@@ -65,7 +65,7 @@ It also enables engineers to be more confident in continuously deploying it. Thi
 
 Large feature branches can often have hundreds or thousands of lines of changes. Developers dread massive pull requests (PRs AKA merge requests) for a reason. Reviewing these requires a significant amount of overhead to get up to speed with the code.
 
-The smaller branches of trunk-based development create more reviewable pull requests. They require less overhead for someone to review. Merging regularly also creates opportunities for teams to collaborate. Every PR is a chance to interact with each other, get feedback earlier, and see what others are working on. 
+The smaller branches of trunk-based development create [more reviewable pull requests](/newsletter/code-review-tips#4-verify-by-observation-not-reasoning). They require less overhead for someone to review. Merging regularly also creates opportunities for teams to collaborate. Every PR is a chance to interact with each other, get feedback earlier, and see what others are working on. 
 
 ## The philosophy behind trunk-based development at PostHog
 
@@ -85,7 +85,7 @@ Implementing this philosophy (and trunk-based development) means:
 
 5. Pushing code out early. PRs are better than issues, even if they are half-done. This enables more concrete feedback on the approach.
 
-6. Merging whenever. Our testing, reviewing, and build processes should be good enough that we are confident doing this.
+6. Merging whenever. Our testing, reviewing, and [build processes](/blog/10k-prs-a-month) should be good enough that we are confident doing this.
 
 As proof we take this seriously, our median pull request is **just under 8 hours** old when merged. On an average day, our team merges around 20 pull requests in our main repo.
 

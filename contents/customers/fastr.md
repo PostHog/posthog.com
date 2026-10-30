@@ -2,7 +2,7 @@
 title: How Fastr ships a custom experimentation dashboard to every customer with PostHog Endpoints
 customer: Fastr
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/FASTR_afcc31057f.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/fastr_1920x1080_f33d8949ec.png
 date: 2026-06-15
 ---
 

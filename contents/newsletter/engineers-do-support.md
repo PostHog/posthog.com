@@ -4,7 +4,7 @@ date: 2024-08-29
 author:
  - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/v1713888662/posthog.com/contents/images/newsletter/talk-to-users/talk-to-users-big.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/talk-to-users/talk-to-users-big.png
 featuredImageType: full
 tags:
   - Engineering

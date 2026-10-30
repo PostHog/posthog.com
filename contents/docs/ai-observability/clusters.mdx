@@ -10,6 +10,7 @@ import { ProductVideo } from 'components/ProductVideo'
 
 - **Traces or generations captured** – Set up LLM event capture using the [installation guide](/docs/ai-observability/installation).
 - **AI data processing enabled** – Your organization must have AI data processing consent enabled, the same requirement as [trace summarization](/docs/ai-observability/summarization).
+- **Minimum weekly volume** – Clustering runs only for projects with at least 1,000 traces or 1,000 generations captured in the past 7 days. The two thresholds are checked independently, so reaching 1,000 of either level is enough to qualify. Projects below this volume won't generate clusters, since small datasets tend to produce noisy, low-value groupings.
 - **Automatic daily runs** – Clustering runs automatically based on your configured [clustering jobs](#managing-clustering-jobs). No manual setup is needed.
 
 </details>
@@ -25,7 +26,7 @@ Clusters automatically group similar LLM [traces](/docs/ai-observability/traces)
 
 ## How clusters work
 
-1. PostHog analyzes your recent traces or generations from the past 7 days.
+1. PostHog analyzes your recent traces or generations from the past 7 days. This requires at least 1,000 traces or 1,000 generations in that window (see the requirements above); projects below this volume won't generate clusters.
 2. Similar items are grouped together based on their content.
 3. AI generates a title and description for each cluster.
 4. Metrics like average cost, latency, token usage, and error rate are computed per cluster.

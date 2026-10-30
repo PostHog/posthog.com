@@ -8,7 +8,7 @@ If you're actively thinking about churn prevention in response to a customer chu
 
 Churn prevention is best done from early, and often, risk mitigation practices.
 
-We should default to flagging "at risk" accounts using the "Churn Risk" segment in Vitally well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
+We should default to flagging "at risk" accounts by adding the "Churn Risk" tag in PostHog Customer Analytics well before the customer has told you they are exploring alternatives. If you have the slightest inkling that something may look off or something has you feeling a bit uncomfortable, flag it. This could be anything from not taking action on a recommendation you gave them for too long, down-trending volume with no apparent seasonality cause, only one or two core users of the platform, or no Slack activity for an extended period. To name a few.
 
 There are a few risk-mitigation strategies you'll want to incorporate that serve as early detection and proactive mitigation, as well as a process for what to do when an account is actively at risk.
 
@@ -20,58 +20,35 @@ Risk mitigation is about building habits that surface problems before they becom
 
 ### Quarterly account planning
 
-Every AM Managed account should have an Account Plan note created in Vitally once per quarter. You should also review this weekly with your manager.  This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+Every managed account should have an Account Plan note created in PostHog Customer Analytics, on the account's profile, once per quarter. You should also review this regularly with your manager and update it as needed. This forces you to step back and evaluate the account holistically rather than just reacting to whatever's in front of you.
+
+The plan can be broken into two parts: the quarterly plan and ongoing updates.
+
+#### Quarterly plan
 
 **Title format:** `Q[X] Account Plan - [Company Name]`
 
-Use the Account Plan template in Vitally, which auto-populates key fields from the account record. The template covers:
+Add the plan as an account note in PostHog Customer Analytics on the account's profile. For each account, work through these seven questions:
 
-**Account overview**
+1. **What type of opportunities (opps) are there this quarter?** Name each one – conversion (moving a pay-as-you-go plan onto a discounted credit plan), renewal (securing an existing contract for another term), or cross-sell (getting them onto a product they aren't using yet) – so you're clear on what you're actually driving toward.
+2. **What are the customer's business objectives?** Capture what they're trying to achieve with PostHog and how it connects to their broader goals so it's clear what they are – and if you don't know, say so, so the gap is visible.
+3. **What's the desired outcome for the account by the end of the quarter?** State the concrete result you want (renewal signed, in with a new team, Error Tracking adopted) so success is measurable rather than vague.
+4. **Does the customer know about this plan?** Note whether you've aligned with them, because a plan they haven't bought into is just a guess.
+5. **Is it blocked on anything right now, and are there any other risks?** Call out current blockers and any other risks so you can get ahead of them before they derail the outcome.
+6. **Link to the SFDC opp.** Drop in the Salesforce opportunity link so anyone reviewing can jump straight to the deal.
+7. **Who are the key players?** List the stakeholders – champions, budget holders, technical evaluators, and end-users – and where you stand with each.
 
-- ARR, business description, website, HQ location
-- Business type (B2B SaaS, E-commerce, Marketplace, Developer Tools, Fintech, Healthcare, etc.)
-- Key metrics relevant to their business model
-- Business stage and funding
+#### Ongoing updates
+1. What did you do with them last week.
+2. Any risks to flag or opportunities you are working
+3. Who are you talking to
+4. What are you working on with them this week
 
-**Business objectives**
-
-- What they're trying to achieve with PostHog (specific goals, not vague "analytics")
-- How PostHog connects to their larger business objectives
-- Whether value aligns with their expectations
-- Obstacles they're facing, both in using PostHog and in their broader goals
-- Upcoming constraints (budget freezes, code freezes, migrations, seasonality)
-- Future needs over 6-18 months
-
-**Stakeholders and users**
-
-- Admin emails and total user count
-- Percentage of active users (30 days)
-- Key contacts with their priorities, goals, and preferred communication
-- Multithreading status: do we have two-way dialogue with technical stakeholders, budget holders, and end-users?
-- Record of multithreading attempts and progress
-
-**Current usage and cross-sell**
-
-- Products adopted (Product Analytics, Feature Flags, Group Analytics, Error Tracking, Session Replay, Surveys, Data Warehouse)
-- Usage notes on how they're actually using each product
-- Cross-sell opportunities with specific use cases, next steps, and relevant content to share
-- Optimization opportunities for existing products (underused features, configuration improvements)
-
-**Risks**
-
-- Document each risk with: the challenge, what's at stake, plan of action, and next key date
-
-**Action items**
-
-- Multithreading: who, why, progress, anyone at PostHog who can help
-- Finding new opportunity: what are you doing to find new revenue?
-- Mitigating risk: what are you doing to uncover and mitigate risk?
-
-If you can't fill out most of this template, that's a signal you need to dig deeper into the account. An incomplete account plan usually means incomplete understanding of the customer.
+This can largely mirror what goes in our sprint planning, and shouldn't be duplicate work.
 
 ### Early warning signals
 
-These aren't emergencies yet, but they should make you pay closer attention. Many of these are also tracked automatically as [risk indicators in Vitally](/handbook/cs-and-onboarding/health-tracking#risk-indicators).
+These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics. Some of these signals automatically create a Customer Analytics task for the account owner. See [managed customer scouts](/handbook/customer-success/how-we-use-automation#managed-customer-scouts).
 
 | Signal | Why it matters |
 |--------|----------------|
@@ -80,6 +57,8 @@ These aren't emergencies yet, but they should make you pay closer attention. Man
 | Only 1-2 active users | Single point of failure, low organizational buy-in |
 | No Slack activity for 14+ days | Relationship is going cold |
 | Billing page visits without context | They're evaluating costs, possibly shopping around |
+| Low survey score or a complaint in a survey | They told us that something is wrong |
+| Product turned off because of cost | Contraction often comes before churn |
 | Champion changed roles or left | Your internal advocate is gone |
 | Support tickets spiking | Something is broken or frustrating |
 | Single product usage | Low switching cost, easy to replace |
@@ -116,11 +95,23 @@ If they're doing all their analysis in Looker or Mode, ask why. Sometimes it's h
 
 A lot of customers self-serve without ever talking to a PostHog human. This means they can implement PostHog in ways that cause problems down the road: inflated bills, inaccurate data, or features that don't work as expected. Left unchecked, these issues lead to avoidable churn.
 
-Proactively check for common implementation issues, especially for newer accounts or accounts that haven't had a technical review. See [checking the health of a customer's deployment](/handbook/cs-and-onboarding/health-checks) for the full checklist.
+Proactively check for common implementation issues, especially for newer accounts or accounts that haven't had a technical review. See [checking the health of a customer's deployment](/handbook/customer-success/health-checks) for the full checklist.
+
+**When a customer wants to cut costs**
+
+If a customer expresses interest in reducing their PostHog spend, view it as an opportunity to act in their interest, help them optimize, and stabilize the relationship. The fact that they're telling you is a signal of trust. Deepen that trust by helping them save money (which is a totally reasonable goal to support).
+
+Tag the account `cost optimizing` in PostHog Customer Analytics while you work on it – see [cost optimization](/handbook/customer-success/cost-optimization) for what the tag is for and how we share these with the team.
+
+- **First, help them do what they asked, fast.** At this point, the customer already decided that they need to cut costs, so don't lead with discovery questions that may suggest an effort to talk them out of that decision. Take action on their request first. Gather context along the way or after.
+- **Give them actionable ways to reduce spend.** This is where your product expertise comes into play - what are the concrete levers they can pull to reduce spend? [Customer health check](/handbook/customer-success/health-checks#are-they-paying-for-things-they-dont-need) is a good starting point to identify opportunities to reduce billing waste.
+- **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#ask-max</PrivateLink>, PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/customer-success/how-we-work#working-with-engineering-teams) so they can better assist you).
+- **Consider proposing a target spend.** Once you've acted on their initial request, consider aligning on a target monthly spend. You can then work backwards from that goal to improve their implementation and shape how you support them going forward.
+- **Pause any cross-selling or expansion work until they're at their target monthly spend.** You make the call on when the relationship is stable enough to recommend increased adoption of our products, but it's a safe bet to pause on this while they're in the process of lowering their spend.
 
 **Billing waste:**
 
-- **Group Analytics enabled but not implemented.** We have a Vitally risk indicator for this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
+- **Group Analytics enabled but not implemented.** The [health check](/handbook/customer-success/health-checks) covers how to spot this. If they're B2B and could benefit, help them implement it. If not, tell them to remove the add-on.
 - **Autocapture noise.** If >50% of events are autocapture and they haven't defined any autocapture actions, they're likely paying for events they don't use. Help them tune or disable it.
 - **Session replay capturing everything.** Default settings capture all sessions. At minimum, recommend setting minimum duration to 2+ seconds to filter out low-value recordings.
 
@@ -128,7 +119,7 @@ Proactively check for common implementation issues, especially for newer account
 
 - **Calling identify() on every page.** Inflates event volume dramatically. They only need to call it [once per session](/docs/product-analytics/identify#best-practices-when-using-identify).
 - **Calling group() on every page.** Same problem. Once per group per session is enough, or [when the group changes](/docs/product-analytics/group-analytics#how-to-create-groups).
-- **Calling posthog.reset() before identify.** Creates unlinked anonymous users. Common culprit when web-to-app tracking seems broken. See guidance in the [JavaScript library features guide](/docs/libraries/js/features#resetting-a-user).
+- **Calling posthog.reset() before identify.** Creates unlinked anonymous users. Common culprit when web-to-app tracking seems broken. See guidance in the [JavaScript Web SDK usage guide](/docs/libraries/js/usage#resetting-a-user).
 - **No reverse proxy.** Best practice is to use PostHog's [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) or configure their own. Events from their own domain improve reliability and ad-blocker resistance.
 
 **Feature flag resilience:**
@@ -140,18 +131,18 @@ When you find implementation issues, don't just tell them what's wrong. Help the
 
 ### De-risking common churn scenarios
 
-Most churn follows predictable patterns. See [common churn reasons](/handbook/cs-and-onboarding/churn-reasons) for the full list. Here's how to de-risk the scenarios we have some control over:
+Most churn follows predictable patterns. See [common churn reasons](/handbook/customer-success/churn-reasons) for the full list. Here's how to de-risk the scenarios we have some control over:
 
 | Churn scenario | De-risking strategy |
 |----------------|---------------------|
 | **Champion leaves** | Multi-thread relationships across teams. The more users actively in PostHog, the less one departure matters. |
-| **Champion isn't the decision maker** | Identify and build relationships with actual decision makers. Your champion can help with introductions. |
+| **Your contact is a coach, not a champion** | Identify and build a relationship with a [champion](/handbook/growth/sales/customer-journey#champions-and-coaches) who can make change happen. Your coach can help with introductions. |
 | **Customer builds internally or switches to competitor** | Drive multi-product adoption. Harder to replace five products than one. |
 | **Poor customer experience** | Stay on top of open issues proactively. Circle back before they have to follow up. Rebuild trust through responsiveness. |
 | **Customer can't extract value** | Offer workshops, training, or hands-on help building specific insights. Don't wait for them to ask. |
-| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Vitally](/handbook/cs-and-onboarding/feature-requests) |
+| **Missing critical feature** | Loop in the relevant PM and engineering team. Be transparent about what we can and can't do. Make sure the request is also [tracked in Customer Analytics](/handbook/customer-success/feature-requests) |
 | **PostHog isn't trusted as source of truth** | Dig into data discrepancies. Often an implementation issue. If they're exporting everything to another tool, they're one step from leaving. |
-| **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](https://posthog.com/docs/cdp/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
+| **Privacy/compliance concerns** | Help them understand [data controls](/docs/privacy/data-collection), [masking](https://posthog.com/docs/data-pipelines/transformations/template-url-masking), [privacy controls](/docs/session-replay/privacy), [cookieless tracking](/tutorials/cookieless-tracking), and [data deletion](/docs/privacy/data-storage#data-deletion) options. Often they assume they can't use features when they actually can. |
 
 For scenarios outside our control (acquisition, company shuts down, not ICP fit), document what happened and share learnings with the team. There's usually something we can learn even when we couldn't have changed the outcome.
 
@@ -163,7 +154,7 @@ When an account is actively at risk (they've told you they're evaluating alterna
 
 ### When to flag an account as at risk
 
-Add the account to the **Churn Risk** segment in Vitally if any of the following are true:
+Add the **Churn Risk** tag to the account in PostHog Customer Analytics if any of the following are true:
 
 - Customer explicitly mentions evaluating alternatives or considering churning
 - Usage has dropped 30%+ with no seasonal explanation
@@ -178,9 +169,9 @@ Add the account to the **Churn Risk** segment in Vitally if any of the following
 
 ### Internal process
 
-**1. Add churn risk segment in Vitally**
+**1. Add the Churn Risk tag in PostHog Customer Analytics**
 
-When you flag an account as at risk, add a note in vitally  with:
+When you flag an account as at risk, add the **Churn Risk** tag to the account in PostHog Customer Analytics, and add a note on the account with:
 
 - Account name and ARR
 - What triggered the risk flag
@@ -188,11 +179,11 @@ When you flag an account as at risk, add a note in vitally  with:
 - What help you need (if any)
 - What you are doing to mitigate the churn
 
-The churn risk bot should automatically post this in the #customer-churn slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
+Adding the tag triggers a PostHog workflow that automatically posts to the #customer-churn Slack channel. This keeps the team informed and surfaces accounts that might need additional support or visibility.
 
 **2. Weekly at-risk account review**
 
-We hold a weekly team meeting to review all accounts in the Churn Risk segment in Vitally. Come prepared to:
+We hold a weekly team meeting to review all accounts tagged **Churn Risk** in PostHog Customer Analytics. Come prepared to:
 
 - Give a 60-second status update on each at-risk account you own
 - Share what you've tried and what's working or not
@@ -228,7 +219,7 @@ Once flagged, your job is to diagnose and act:
 
 ### When churn happens
 
-Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn as soon as possible while the details are fresh. See [learn from churn](/handbook/cs-and-onboarding/customer-churn-retros) for the template and guidance.
+Not every at-risk account can be saved. When a customer churns, write a retro and share it in #customer-churn as soon as possible while the details are fresh. See [learn from churn](/handbook/customer-success/customer-churn-retros) for the template and guidance.
 
 ---
 
@@ -236,7 +227,7 @@ Not every at-risk account can be saved. When a customer churns, write a retro an
 
 | Activity | Cadence |
 |----------|---------|
-| Account Plan note in Vitally | Quarterly |
+| Account Plan note in PostHog Customer Analytics | Quarterly |
 | Implementation health check | At onboarding + annually |
 | Early warning signal monitoring | Ongoing |
 | Behavioral product adoption push | Ongoing (especially for warehouse-heavy accounts) |

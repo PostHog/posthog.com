@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Product
-  - Being a founder
+  - Building the team
 crosspost:
   - Blog
 ---

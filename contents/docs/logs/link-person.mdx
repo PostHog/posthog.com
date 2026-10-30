@@ -35,24 +35,24 @@ When you emit logs directly via OpenTelemetry from a backend — Python, Go, Nod
 <MultiLanguage>
 
 ```javascript file=JavaScript
-import { logs } from '@opentelemetry/api-logs'
+import { logs } from "@opentelemetry/api-logs";
 
-const logger = logs.getLogger('my-app')
+const logger = logs.getLogger("my-app");
 
-app.post('/api/checkout', async (req, res) => {
-  const userId = req.userId  // ... get your user ID
+app.post("/api/checkout", async (req, res) => {
+  const userId = req.userId; // ... get your user ID
 
   logger.emit({
-    severityText: 'info',
-    body: 'Checkout completed',
+    severityText: "info",
+    body: "Checkout completed",
     attributes: {
-      posthogDistinctId: userId,    // Links to PostHog person
-      orderId: 'A-123',
+      posthogDistinctId: userId, // Links to PostHog person
+      orderId: "A-123",
     },
-  })
+  });
 
-  res.json({ success: true })
-})
+  res.json({ success: true });
+});
 ```
 
 ```python file=Python
@@ -105,7 +105,11 @@ If the log does not appear, check:
 
 ## Customizing the attribute key
 
-If your pipeline emits the person identifier under a different key (for example `user.id`, `customerId`, or a legacy `distinct_id`), point PostHog at that key with the `logs_config` endpoint:
+If your pipeline emits the person identifier under a different key (for example `user.id`, `customerId`, or a legacy `distinct_id`), you can change it in [**Settings** > **Logs**](https://app.posthog.com/settings/environment-logs#logs-distinct-id-attribute-key) under **Link to person**. This setting requires admin access.
+
+You can also reach this setting from the gear icon on any person's **Logs** tab.
+
+Alternatively, update it via the API:
 
 ```bash
 curl -X PATCH "https://app.posthog.com/api/projects/<PROJECT_ID>/logs_config/" \

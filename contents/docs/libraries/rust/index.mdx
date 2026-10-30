@@ -12,6 +12,10 @@ features:
   errorTracking: true
 ---
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Rust" />
+
 ## Installation
 
 import RustInstall from '../../integrate/_snippets/install-rust.mdx'
@@ -29,6 +33,18 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 import RustSendEvents from '../../integrate/send-events/_snippets/send-events-rust.mdx'
 
 <RustSendEvents />
+
+## Flushing on shutdown
+
+`capture` is fire-and-forget – it queues the event and returns, and a background worker delivers it. Events still queued when the process exits are lost.
+
+Call `flush` and then `shutdown` before your process ends, where your server future resolves – after `run().await` in an actix or axum `main`. If your app has no shutdown path today, that line is still the place – add the calls rather than skipping the flush.
+
+```rust
+server.run().await?;
+client.flush().await;
+client.shutdown().await;
+```
 
 ## Person profiles and properties
 
@@ -54,7 +70,7 @@ import RustFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/f
 
 For improved performance, you can evaluate feature flags locally by enabling local evaluation. This caches flag definitions and evaluates them without making API requests for each flag check.
 
-To enable local evaluation, you need a [personal API key](/docs/api#how-to-obtain-a-personal-api-key) and to configure the client:
+To enable local evaluation, you need a [personal API key](/docs/api/personal-api-keys) and to configure the client:
 
 ```rust
 use posthog_rs::ClientOptionsBuilder;
@@ -95,7 +111,7 @@ client.capture_exception_with(
 ).await.unwrap();
 ```
 
-For the full setup guide, see the [Rust error tracking installation docs](/docs/error-tracking/installation/rust).
+To also capture unhandled panics, enable `capture_panics` and initialize the global client with `init_global`. For that and the full setup guide, see the [Rust error tracking installation docs](/docs/error-tracking/installation/rust).
 
 ## Observability
 

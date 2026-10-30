@@ -18,7 +18,7 @@ We think JS snippets are a potentially useful feature for things such as display
 
 Pineapple Mode requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.41.0](https://posthog.com/blog/the-posthog-array-1-41-0#one-more-thing-site-apps) or later.
 
-Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/runbook/upgrading-posthog)!
+Not running 1.41.0? Find out [how to update your self-hosted PostHog deployment](/docs/self-host#upgrading)!
 
 You'll also need to manually opt in to the JS snippets feature, as it's currently in beta.
 

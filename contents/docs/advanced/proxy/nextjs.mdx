@@ -6,13 +6,14 @@ platformLogo: nextjs
 ---
 
 import ProxyCallout from "../_snippets/proxy-callout.mdx"
+import ProxyCookies from "../_snippets/proxy-cookies.mdx"
 import { Steps, Step } from 'components/Docs/Steps'
 
 <ProxyCallout />
 
 <CalloutBox icon="IconInfo" title="Data transfer costs" type="fyi">
 
-Rewrites route all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – through your Next.js server. On Vercel, this counts toward [Fast Data Transfer and Edge Requests](https://vercel.com/docs/pricing); on other hosts it counts against their bandwidth and compute quotas. Session recordings are the biggest driver (often 1–5 MB per session) and can consume a plan quickly on high-traffic sites.
+Rewrites route all PostHog traffic – events, session recordings, feature flag polls, and SDK assets – through your Next.js server. On Vercel, this counts toward [Fast Data Transfer and Edge Requests](https://vercel.com/docs/pricing); on other hosts it counts against their bandwidth and compute quotas. Session recordings are the biggest driver (often 1 to 5 MB per session) and can consume a plan quickly on high-traffic sites.
 
 To avoid these costs, use the [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) (free for PostHog Cloud users) or a provider without egress fees like [Cloudflare Workers](/docs/advanced/proxy/cloudflare).
 
@@ -91,11 +92,27 @@ Here's what each part does:
 - The first rewrite routes static asset requests to PostHog's asset server. This serves the JavaScript SDK and other static files.
 - The second rewrite routes remote config requests (`/array/{token}/config.js`) to the asset server. The asset server returns proper `cache-control` headers for these responses, while the main API server strips them.
 - The third rewrite routes all other requests to PostHog's main API. This handles event capture, Feature flags, and session recordings.
-- `skipTrailingSlashRedirect` prevents Next.js from redirecting URLs with trailing slashes. PostHog's API uses trailing slashes (like `/e/`), and without this setting, Next.js would redirect them and break event capture.
+- `skipTrailingSlashRedirect` stops Next.js from redirecting URLs that end with a slash. PostHog API paths end with a slash, such as `/e/` and `/flags/`. Without this setting, Next.js answers each of these requests with a `308` redirect. Browsers follow it, so events still arrive, but each request takes an extra round trip.
 
 The static and array rewrites must come before the catch-all. Next.js evaluates rewrites in order, so if the catch-all rule came first, it would match `/yourpath/static/*` and `/yourpath/array/*` before the specific rules.
 
 See [Next.js rewrites documentation](https://nextjs.org/docs/app/api-reference/next-config-js/rewrites) for more details.
+
+<CalloutBox icon="IconWarning" title="Using middleware? Exclude your proxy path" type="fyi">
+
+If your app already has a `middleware.ts` (or `proxy.ts` in Next.js 16) – common with [next-intl](https://next-intl.dev), [NextAuth](https://authjs.dev), or your own logic – its `matcher` can grab the proxy path before the rewrite runs and break ingestion.
+
+A catch-all matcher matches the capture endpoints (`/yourpath/e`, `/yourpath/flags`, `/yourpath/s`) and rewrites or redirects them, so events, feature flags, and recordings never reach PostHog. The static assets at `/yourpath/static/*.js` have a file extension, so a matcher like next-intl's default `'/((?!api|_next|_vercel|.*\\..*).*)'` skips them and they still load, which makes PostHog look connected even though nothing is sending.
+
+Add your proxy path to the matcher's negative lookahead:
+
+```js
+export const config = {
+  matcher: ['/((?!api|yourpath|_next|_vercel|.*\\..*).*)'],
+}
+```
+
+</CalloutBox>
 
 </Step>
 
@@ -147,6 +164,8 @@ If you see errors, check [troubleshooting](#troubleshooting) below.
 
 </Steps>
 
+<ProxyCookies />
+
 ## Troubleshooting
 
 ### 503 or 400 errors
@@ -166,16 +185,18 @@ If requests to your proxy path return 404:
 1. Verify your `next.config.js` is in the project root
 2. Restart your dev server after changing the config
 3. Check the rewrite order: static and array rules must come before the catch-all
+4. If you have middleware (`middleware.ts` or `proxy.ts`), check its `matcher` doesn't catch your proxy path. A catch-all matcher redirects the capture endpoints – you'll see something like `POST /yourpath/s` become a 307 to `/en/yourpath/s` that 404s, while `/yourpath/static/*.js` still loads. Add your proxy path to the matcher: `matcher: ['/((?!api|yourpath|_next|_vercel|.*\\..*).*)']`
 
 ### Trailing slash conflicts with SEO
 
-The `skipTrailingSlashRedirect` setting is required for PostHog API requests but can cause SEO issues if pages become accessible at both `/page` and `/page/`.
+The `skipTrailingSlashRedirect` setting removes a redirect from each PostHog API request, but it can cause SEO issues if pages become accessible at both `/page` and `/page/`.
 
 Solutions:
 
 1. Handle trailing slash redirects in [Next.js middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) for non-PostHog routes
 2. Use `<link rel="canonical">` to specify the preferred URL for search engines
 3. Ensure your sitemap only includes one URL format
+4. Leave `skipTrailingSlashRedirect` out. PostHog requests still work, with one extra redirect each
 
 ### 401 errors or "No project token provided"
 

@@ -6,7 +6,7 @@ showTitle: true
 
 Logs comes with a generous free tier and transparent, usage-based pricing. Our large free tier means more than 90% of companies *use PostHog for free*.
 
-No credit card is required to get started. You can also set billing limits to avoid any surprise charges.
+No credit card is required to get started. You can set a billing limit on Logs to avoid surprise ingestion charges. It doesn't cap custom retention (see below).
 
 Logs is billed by the number of GB ingested. The price per GB changes based on your usage. You can estimate your costs using our pricing calculator below or by visiting our [pricing page](/pricing) for a more detailed breakdown.
 
@@ -14,7 +14,19 @@ import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
 <Pricing productType="logs" />
 
-Retention is 14 days by default (30 and 90 day options soon).
+## Retention
+
+Retention is 14 days by default. To keep logs for longer, set a custom retention period. Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires. For example, 1 month costs $0.05/GB and 3 months cost $0.15/GB. You also pay the usual ingestion price for these logs.
+
+Custom retention applies to newly ingested logs, so shortening retention doesn't lower the charge for logs you already keep.
+
+You can set retention per service or per source in your [logs](https://app.posthog.com/settings/environment-logs) and traces settings. This gives you fine-grained control: keep critical services for longer, and keep noisy ones at the 14-day default.
+
+### Billing limits
+
+Custom retention can't have a billing limit. Your Logs billing limit stops ingestion only. See [billing limits and alerts](/docs/billing/limits-alerts#products-without-a-billing-limit) for more.
+
+## Reduce your costs
 
 We aim to be significantly cheaper than our competitors. Below are tips to reduce your logs costs.
 
@@ -22,6 +34,8 @@ We aim to be significantly cheaper than our competitors. Below are tips to reduc
 - **Use structured JSON logs.** Easier to query, so you log less "just in case." ([Structured logging](/docs/logs/best-practices#use-structured-logging))
 - **Get log levels right.** Keep INFO for outcomes, push verbose detail to DEBUG (off by default). ([Log levels](/docs/logs/best-practices#use-log-levels-correctly))
 - **Filter noisy endpoints.** Drop or downsample health checks and load balancer pings. ([What not to log](/docs/logs/best-practices#what-not-to-log))
+- **Drop or rate-limit logs in PostHog.** Remove or cap noisy services during ingestion, no code change required. ([Drop rules](/docs/logs/best-practices#drop-and-rate-limit-logs-in-posthog))
+- **Turn noisy logs into a metric, then drop them.** Count the lines you only need a trend for, and stop paying to store them. ([Log-based metrics](/docs/logs/metrics))
 - **Sample successful traffic.** Keep 100% of errors/slow requests; sample the boring stuff. ([Sampling](/docs/logs/best-practices#sample-strategically))
 - **Don't log payloads.** Skip request/response bodies and large objects — log metadata instead. ([What not to log](/docs/logs/best-practices#what-not-to-log), [Context bloat](/docs/logs/best-practices#build-events-throughout-the-request-lifecycle))
 - **Avoid duplicate logging across services.** Log the outcome once; don't replay the same event everywhere. ([What not to log](/docs/logs/best-practices#what-not-to-log))

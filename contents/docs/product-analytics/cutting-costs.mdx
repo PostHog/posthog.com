@@ -19,19 +19,13 @@ See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identif
 
 ## Configure autocapture
 
-[Autocapture](/docs/product-analytics/autocapture) is a powerful feature that captures many events automatically. It can also capture more than you need. To reduce which events are captured, you can [set an allow or ignore list](/docs/product-analytics/autocapture#reducing-events-with-an-allow-and-ignorelist).
+[Autocapture](/docs/product-analytics/autocapture) is a powerful feature that captures many events automatically. It can also capture more than you need. To reduce which events are captured, you can [set an allow or ignore list](/docs/product-analytics/autocapture#configuring-interaction-autocapture).
 
-Alternatively, you can [disable autocapture](/docs/product-analytics/autocapture#disabling-autocapture) completely.
+Alternatively, you can [disable autocapture](/docs/product-analytics/autocapture#disabling-interaction-autocapture) completely.
 
 ## Only call `identify()` once per session
 
-It's only necessary to [identify](/docs/product-analytics/identify) a user once per session. To prevent sending unnecessary events, check `posthog._isIdentified()` before calling `identify()`:
-
-```js
-if (!posthog._isIdentified()) {
-    posthog.identify('distinct_id') // Replace 'distinct_id' with your user's unique identifier
-}
-```
+It's only necessary to [identify](/docs/product-analytics/identify) a user once per session, and you don't need to add your own checks to prevent duplicate calls. If the user is already identified, calling `identify()` again with the same distinct ID doesn't capture another `$identify` event. Instead, it captures a `$set` event only when the person properties you pass have changed. 
 
 ## Only call `group()` once per session
 

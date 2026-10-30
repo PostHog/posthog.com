@@ -1,0 +1,51 @@
+---
+title: Product analytics in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+The [PostHog web app](https://app.posthog.com) is home base for product analytics. It's where you build insights, save them to dashboards, share them with your team, and get alerted when a number moves. Every insight sits on the same events, persons, and properties as the rest of PostHog, so you can jump from a funnel drop-off straight to the [session replays](/docs/session-replay) of the people who dropped.
+
+Open **Product analytics** in [PostHog](https://app.posthog.com) to start a new insight, or **Dashboards** to see what your team has already built.
+
+## Before you start
+
+1. **Set up Product Analytics** – [install a PostHog SDK](/docs/product-analytics/installation) so events are captured.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+- **[Create insights](/docs/product-analytics/insights)** – start from an insight type, pick your events and filters, and save the result.
+- **[Build dashboards](/docs/product-analytics/dashboards)** – group related insights, add filters that apply to the whole board, and pin what your team checks daily.
+- **[Share and embed](/docs/product-analytics/sharing)** – publish a dashboard or insight publicly, or embed it in your own tools.
+- **[Set up subscriptions](/docs/product-analytics/subscriptions)** – get an insight or dashboard delivered on a schedule over email or Slack.
+- **[Get alerts](/docs/alerts)** – get notified when a metric crosses a threshold you set.
+- **[Apply color themes](/docs/product-analytics/color-themes)** – customize the colors your charts use.
+- **Analyze with [PostHog AI](/docs/product-analytics/analyze-data-ai)** – describe the question in plain English and PostHog AI builds and runs the insight for you, right here in the web app. It's an interaction mode inside the web app, not a separate surface.
+
+## Insight types
+
+Every insight starts by picking a question shape. The [insight types](/docs/product-analytics/insights) are [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), [user paths](/docs/product-analytics/paths), [stickiness](/docs/product-analytics/stickiness), [lifecycle](/docs/product-analytics/lifecycle), and [SQL](/docs/data-warehouse/sql) when you want to write the query yourself.
+
+## Self-driving reports
+
+A [scout](/docs/self-driving/scouts) watches the funnel, retention, lifecycle, stickiness, and paths insights you've saved, and looks at the rates they produce rather than raw volume. Traffic being down is not a signal. A conversion step that used to convert at 40% and now converts at 22% is. To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+When it finds one, it files a [report](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox) with the insight, the drop, and the events and [session replays](/docs/session-replay) behind it.
+
+### Why there is no automatic pull request
+
+The scout stops at the report. A conversion drop rarely has one obvious cause: it can be a bug, a pricing change, a bad release, a shift in traffic mix, or plain seasonality. Deciding which of those it is takes someone who knows what shipped and what the number is supposed to do, so these reports are routed to a person rather than handed to a coding agent.
+
+That's the difference from [error tracking](/docs/error-tracking), where a stack trace usually names a specific file and the fix really is mechanical.
+
+### What you can do with a report
+
+- **Read the report** – the insight that regressed, when it started, and the evidence behind it.
+- **Ask questions** – start a discussion with an agent about the report to dig further before you act.
+- **Decide what happens next** – resolve it, dismiss it, or start the fix yourself.
+
+## Related
+
+- Get your events flowing first with [capturing events](/docs/product-analytics/capture-events).
+- Query the same data from your editor over [MCP](/docs/product-analytics/surfaces/mcp).

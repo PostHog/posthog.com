@@ -25,7 +25,7 @@ PostHog 1.29.0 includes a fully revamped Paths experience which enables you to b
 
 ## PostHog 1.29.0 release notes
 
-> For a better experience and new features, remember to [update your PostHog instance](/docs/runbook/upgrading-posthog).
+> For a better experience and new features, remember to [update your PostHog instance](/docs/self-host).
 
 **Release highlights:**
 

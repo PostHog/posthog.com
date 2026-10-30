@@ -10,39 +10,11 @@ interface LottieAnimationProps {
 
 export const LottieAnimation = ({ variant, className = '' }: LottieAnimationProps) => {
     const { elementRef, isInView } = useIntersectionObserver()
-    const [fallbackInView, setFallbackInView] = useState(false)
     const [lottieReady, setLottieReady] = useState(false)
     const lottieRef = useRef<any>(null)
 
-    // Fallback scroll-based approach in case intersection observer doesn't work
-    useEffect(() => {
-        const checkScrollPosition = () => {
-            if (elementRef.current) {
-                const rect = elementRef.current.getBoundingClientRect()
-                const windowHeight = window.innerHeight
-                const isVisible = rect.top < windowHeight * 0.8 && rect.bottom > 0
-
-                if (isVisible && !fallbackInView) {
-                    setFallbackInView(true)
-                }
-            }
-        }
-
-        // Check immediately
-        checkScrollPosition()
-
-        // Check on scroll
-        window.addEventListener('scroll', checkScrollPosition)
-        window.addEventListener('resize', checkScrollPosition)
-
-        return () => {
-            window.removeEventListener('scroll', checkScrollPosition)
-            window.removeEventListener('resize', checkScrollPosition)
-        }
-    }, [elementRef.current, fallbackInView])
-
-    // Use intersection observer result, fallback to scroll detection
-    const shouldAutoplay = isInView || fallbackInView
+    // Visibility is handled by IntersectionObserver, which doesn't force layout.
+    const shouldAutoplay = isInView
 
     // Manually control Lottie playback when visibility changes
     useEffect(() => {
@@ -71,13 +43,14 @@ export const LottieAnimation = ({ variant, className = '' }: LottieAnimationProp
             src: '/lotties/kendrick.lottie',
             caption: (
                 <>
-                    There are other dev tool companies, <br />
+                    There are other AI companies, <br />
                     but <em>they not like us</em> <IconMusicEighthNote className="inline-block size-4" />
                 </>
             ),
             className: '@lg:float-right w-72 mx-auto @lg:mt-8',
             containerClasses: 'relative',
-            backgroundClasses: 'absolute inset-4 bg-gradient-to-b from-[#AAD4F2] to-[#F2D8AA] rounded-full size-56 mx-auto',
+            backgroundClasses:
+                'absolute inset-4 bg-gradient-to-b from-[#AAD4F2] to-[#F2D8AA] rounded-full size-56 mx-auto',
             lottieClasses: 'size-64 mx-auto relative top-[8px] right-[-6px]',
             captionClasses: 'text-primary text-center text-[15px] -mt-2 text-balance',
         },

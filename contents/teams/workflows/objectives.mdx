@@ -1,24 +1,24 @@
-### Q2 2026 Objectives
+### Q4 2026 Objectives
 
-- **Fit into product autonomy** (Champion: Dan)
-  - Solve the blockers for autonomous workflows by ensuring compatibility with LLM agents.
-  - What we’ll ship:
-    - PostHog AI can reliably create and iterate on workflows and email designs via multi-turn agent threads
-    - Integration with PostHog Signals
-    - LLM workflow node with bring-your-own credentials
-- **Workflows engine scaling** (Champion: Myke)
-  - Strengthen our infrastructure so we can maintain high product velocity going forward.
-  - What we’ll ship:
-    - A job queue we feel confident iterating on
-    - Reduced data throughput to support continued scaling
-    - Product guardrails to protect reliability
-    - Dead letter queue and invocation outcomes store
-    - Message sending rate throttling (follow-up to cron/batch workflows)
-- **Messaging feature depth** (Champion: Haven)
-  - Fill the remaining gaps in our messaging capabilities and polish the end-to-end experience.
-  - What we’ll ship:
-    1. Realtime "wait for event" listeners (wait until event performed, exit early on conversion)
-    2. Behavioral cohort triggers (batch workflows for entire cohorts, trigger on membership changes)
-    3. Additional native channels (push notifications, SMTP relay)
-    4. UX improvements for large workflows (goto/early exit nodes, full-screen mode, general papercuts)
-    5. Iteration on table-stakes features (message previewing, email editor)
+- **Run all of PostHog's messaging on Workflows** (Champion: Harley)
+  - Motivation: We use Workflows for much of our own messaging, but there are still gaps. Closing them makes the product better for everyone.
+  - What we'll ship:
+    - Move the rest of PostHog's messaging onto Workflows
+    - Rebuild the remaining campaigns by hand first
+    - Bring over everything else with the importer
+- **Grow Workflows** (Champions: Mike & Michael)
+  - Motivation: The product is in a solid state. Now we want more teams to start using it and to get value from it quickly.
+  - What we'll ship:
+    - Onboarding flow for Workflows (UI and MCP)
+    - Workflows suggested from your own product data when you start
+    - Deeper integration with the rest of PostHog
+    - Route existing marketing and messaging destinations into Workflows
+    - Behavioural cohorts
+    - Importers so teams can bring their existing campaigns
+    - Hands-on help for teams moving to Workflows
+- **Self-driving v1 in GA** (Champion: Daniel)
+  - Motivation: Customers get good suggestions to improve each campaign and their whole set of campaigns. This is the first step towards messaging that runs itself.
+  - What we'll ship:
+    - Suggest changes to a single workflow or broadcast based on customer data
+    - Suggest changes across workflows and broadcasts based on customer data, e.g. make sure the same cohort doesn't get messages from several campaigns at once
+    - Suggest new workflows and broadcasts based on customer data

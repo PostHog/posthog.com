@@ -9,24 +9,32 @@ const repoRoot = path.resolve(__dirname, '..', '..')
 const graphPath = path.join(repoRoot, 'bundle-report', 'webpack-graph.json')
 const reportPath = path.join(repoRoot, 'bundle-report', 'eager-graph-report.json')
 
-// The eager graph is everything reachable from an entrypoint through STATIC imports
-// only — the JS a browser must download and decode before that surface is interactive,
-// regardless of how the bytes are split across chunks. Total dist size can't see
-// regressions here (a fake-lazy require() moves no bytes but makes them eager), which is
-// why this check exists alongside the compressed bundle-size check.
+// The eager graph is everything an entrypoint actually SHIPS on first load — the JS a
+// browser must download and decode before that surface is interactive, regardless of how
+// the bytes are split across chunks. Total dist size can't see regressions here (a
+// fake-lazy require() moves no bytes but makes them eager), which is why this check exists
+// alongside the compressed bundle-size check.
+//
+// It is measured from the modules webpack placed into the entrypoint's INITIAL
+// (synchronously loaded) chunks — the `eager` set emitted per entrypoint by the
+// EMIT_WEBPACK_STATS plugin. That set is post-tree-shaking: a module whose used exports
+// were all eliminated is never assigned to a chunk, so a side-effect-free re-export barrel
+// only costs the sub-modules that survive into the output, not every module it statically
+// names. Walking the raw static import graph (what this check used to do) counted the whole
+// barrel and mistook reachability for shipped weight.
 //
 // posthog.com is Gatsby + webpack, page-split: every page lazily loads its own chunk.
 // What is loaded on EVERY page is the `app` entrypoint — Gatsby's runtime plus whatever
 // gatsby-browser.tsx statically pulls in (global providers, layout, global CSS-in-JS).
-// A heavy static import that creeps into that graph inflates first-load for every single
-// page on the site, so `app` is the root we budget. The measurement input is
+// A heavy import that creeps into that eager set inflates first-load for every single page
+// on the site, so `app` is the root we budget. The measurement input is
 // bundle-report/webpack-graph.json, emitted by the EMIT_WEBPACK_STATS plugin in
 // gatsby-node.ts.
 //
-// Budgets are module source bytes (webpack module.size(), pre-minification): stable
-// across builds and proportional to decoded-script cost. Ratchet policy: when a
-// splitting win lands, lower the budget to lock it in; raise one only as a conscious,
-// reviewed decision in the PR that needs it.
+// Budgets are module source bytes (webpack module.size(), pre-minification): stable across
+// builds and proportional to decoded-script cost. Ratchet policy: when a splitting win
+// lands, lower the budget to lock it in; raise one only as a conscious, reviewed decision
+// in the PR that needs it.
 const ROOTS = [
     {
         entrypoint: 'app',
@@ -79,30 +87,40 @@ export function measure(graph, roots = ROOTS) {
     const report = { roots: [], errors: [] }
     for (const { entrypoint, label, budgetBytes, forbidden } of roots) {
         const ep = graph.entrypoints?.[entrypoint]
-        if (!ep || !ep.roots?.length) {
+        if (!ep || !ep.eager?.length) {
             const known = Object.keys(graph.entrypoints ?? {}).join(', ') || '(none)'
             report.errors.push(
-                `Entrypoint '${entrypoint}' not found in webpack graph. Known entrypoints: ${known}`
+                `Entrypoint '${entrypoint}' not found in webpack graph (or has no eager modules). Known entrypoints: ${known}`
             )
             continue
         }
 
-        const { seen, parentOf } = eagerClosure(graph.modules, ep.roots)
+        // The shipped, tree-shaken set: modules webpack actually placed into this
+        // entrypoint's initial chunks. Measuring these instead of walking the static import
+        // closure means a module whose used exports were all tree-shaken away costs nothing.
+        const shipped = ep.eager
         let totalBytes = 0
-        for (const id of seen) {
+        for (const id of shipped) {
             totalBytes += graph.modules[id]?.size ?? 0
         }
-        const largest = [...seen]
+        const largest = shipped
             .map((id) => ({ file: graph.modules[id]?.name ?? id, bytes: graph.modules[id]?.size ?? 0 }))
             .sort((a, b) => b.bytes - a.bytes)
             .slice(0, 15)
 
         const overBudget = budgetBytes != null && totalBytes > budgetBytes
+
+        // A forbidden module is a violation only when it actually ships in the eager set.
+        // The import chain is a best-effort trace through the static input graph (what a
+        // human reads); it can be short if the shipped edge has no source-level counterpart.
         const forbiddenHits = []
-        for (const substr of forbidden ?? []) {
-            const hit = [...seen].find((id) => (graph.modules[id]?.name ?? '').includes(substr))
-            if (hit) {
-                forbiddenHits.push({ module: substr, chain: chainTo(parentOf, graph.modules, hit) })
+        if (forbidden?.length) {
+            const { parentOf } = eagerClosure(graph.modules, ep.roots)
+            for (const substr of forbidden) {
+                const hit = shipped.find((id) => (graph.modules[id]?.name ?? '').includes(substr))
+                if (hit != null) {
+                    forbiddenHits.push({ module: substr, chain: chainTo(parentOf, graph.modules, hit) })
+                }
             }
         }
 
@@ -110,7 +128,7 @@ export function measure(graph, roots = ROOTS) {
             entrypoint,
             label,
             bytes: totalBytes,
-            files: seen.size,
+            files: shipped.length,
             budgetBytes,
             overBudget,
             forbidden: forbidden ?? [],
@@ -136,8 +154,8 @@ function printAndEnforce(report) {
         const budget = r.budgetBytes == null ? 'unset (report-only)' : formatMiB(r.budgetBytes)
         console.info(`${status} ${r.label}`)
         console.info(`   entrypoint: ${r.entrypoint}`)
-        console.info(`   eager closure: ${r.files} modules, ${formatMiB(r.bytes)} (budget ${budget})`)
-        console.info('   largest modules in the closure:')
+        console.info(`   eager (shipped): ${r.files} modules, ${formatMiB(r.bytes)} (budget ${budget})`)
+        console.info('   largest modules shipped eagerly:')
         for (const { file, bytes } of r.largest.slice(0, 10)) {
             console.info(`   ${formatMiB(bytes).padStart(10)}  ${file}`)
         }
@@ -146,7 +164,7 @@ function printAndEnforce(report) {
         if (r.overBudget) {
             fail(
                 `Eager graph for '${r.entrypoint}' is ${formatMiB(r.bytes)}, over the ${formatMiB(r.budgetBytes)} budget.\n` +
-                    `Something newly reachable through static imports is inflating it. Largest modules:\n` +
+                    `Something newly shipped in the eager chunks is inflating it. Largest modules:\n` +
                     r.largest.map(({ file, bytes }) => `   ${formatMiB(bytes).padStart(10)}  ${file}`).join('\n') +
                     `\nMake the offending import lazy (loadable / dynamic import()), or raise the budget in ` +
                     `scripts/bundle/check-eager-graph.mjs as a conscious decision in this PR.`
@@ -154,7 +172,7 @@ function printAndEnforce(report) {
         }
         for (const hit of r.forbiddenHits) {
             fail(
-                `'${hit.module}' is statically reachable from '${r.entrypoint}' — it must stay behind a dynamic import.\n` +
+                `'${hit.module}' ships eagerly from '${r.entrypoint}' — it must stay behind a dynamic import.\n` +
                     `Import chain:\n   ${hit.chain.join('\n   -> ')}`
             )
         }

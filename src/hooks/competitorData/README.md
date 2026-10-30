@@ -35,6 +35,18 @@ export const competitorName = {
 }
 ```
 
+## Partial products
+
+A product-level `available: false` next to a sub-feature `available: true` is intentional, not a
+contradiction. It means the competitor ships that one feature but not the product. Microsoft Clarity
+and Hotjar both keep `product_analytics.available: false` while their `funnels` sub-product is
+`available: true`, because each offers funnels without the rest of a product analytics suite. Set the
+sub-feature from what the competitor documents, and set the product level from whether the suite
+exists.
+
+A sub-product can sit either directly under the product or inside its `features` object. Both work,
+because `ProductComparisonTable` falls back from `<product>.<sub>` to `<product>.features.<sub>`.
+
 ## Product Handles
 
 -   `error_tracking`

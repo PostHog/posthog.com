@@ -11,3 +11,31 @@ You can manually control when to start and stop session recordings using the fol
   - Stops/pauses the current session recording.
 
 > **Note:** Calling these methods will have no effect if session recordings are disabled in your PostHog [Project Settings](https://app.posthog.com/project/settings).
+
+#### Record or ignore specific screens
+
+You can combine these methods with your navigation to record only certain screens, or to pause recording on sensitive ones. For example, registering `ActivityLifecycleCallbacks`, stop recording when a sensitive activity resumes and resume otherwise:
+
+```kotlin
+val ignoredScreens = setOf("PaymentActivity", "SettingsActivity")
+
+application.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
+    override fun onActivityResumed(activity: Activity) {
+        if (activity::class.simpleName in ignoredScreens) {
+            PostHog.stopSessionReplay()
+        } else {
+            PostHog.startSessionReplay()
+        }
+    }
+
+    // Other lifecycle callbacks can be left empty
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+    override fun onActivityStarted(activity: Activity) {}
+    override fun onActivityPaused(activity: Activity) {}
+    override fun onActivityStopped(activity: Activity) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+    override fun onActivityDestroyed(activity: Activity) {}
+})
+```
+
+Invert the check (`startSessionReplay` only for screens in an allowlist, `stopSessionReplay` otherwise) if you'd rather record just a specific set of screens.

@@ -22,6 +22,13 @@ export const elastic = {
                     live_tail_real_time_logs: false,
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
+                    high_cardinality_indexing: 'Partial',
+                },
+            },
+            search: {
+                features: {
+                    full_text_search: true,
+                    no_proprietary_query_language: 'Partial',
                 },
             },
             investigation_workflow: {
@@ -46,11 +53,17 @@ export const elastic = {
                     infra_monitoring: true,
                 },
             },
+            security_and_compliance: {
+                features: {
+                    siem: true,
+                    enterprise_scale_compliance: true,
+                },
+            },
             pricing: {
                 features: {
                     ingest_only_pricing: false,
                     no_query_compute_fees: false,
-                    predictable_at_scale: false,
+                    predictable_at_scale: 'Tiered',
                 },
             },
         },
@@ -61,9 +74,13 @@ export const elastic = {
     platform: {
         deployment: {
             self_host: true,
+            open_source: 'AGPL / source available',
+            managed_cloud: 'Elastic Cloud',
         },
         pricing: {
-            transparent_pricing: false,
+            self_serve: true,
+            free_tier: false,
+            transparent_pricing: true,
         },
         tools: {
             ai_assistant: true,

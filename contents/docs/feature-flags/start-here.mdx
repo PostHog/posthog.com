@@ -25,6 +25,8 @@ import OSButton from 'components/OSButton'
 
   > **New to feature flags?** Check the [overview page](/docs/feature-flags) for a primer on use cases like phased rollouts, kill switches, targeting, and remote config.
 
+  > **Frontend, mobile, or CLI app?** Use a [client-side SDK](/docs/libraries) or the public [`/flags` endpoint](/docs/api/flags) with your public [project API key](/docs/feature-flags/installation#where-to-find-your-project-api-key). Save [local evaluation](/docs/feature-flags/local-evaluation) and the secret feature flags secure API key for server-side code only.
+
   <OSButton variant="primary" asLink to="/docs/feature-flags/installation">
     Install PostHog SDK
   </OSButton>
@@ -52,7 +54,7 @@ import OSButton from 'components/OSButton'
   }
   ```
 
-  You can also use [payloads](/docs/feature-flags/remote-config) to send JSON configuration alongside your flags, and [multivariate flags](/docs/feature-flags/creating-feature-flags#multivariate-feature-flags) to test multiple variants.
+  You can also use [payloads](/docs/feature-flags/remote-config) to send JSON configuration alongside your flags, and [multivariate flags](/docs/feature-flags/creating-feature-flags#step-3-choose-a-feature-flag-type-required) to test multiple variants.
 
   <OSButton variant="primary" asLink to="/docs/feature-flags/adding-feature-flag-code">
     See all SDKs and code examples

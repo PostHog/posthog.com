@@ -1,0 +1,38 @@
+---
+title: Send PostHog person data to Mailjet
+templateId:
+    - template-mailjet-create-contact
+    - template-mailjet-update-contact-list
+---
+
+import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
+import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+
+
+You'll also need access to the relevant Mailjet account.
+
+## Installation
+
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=mailjet) tab.
+3. Search for **Mailjet** and click **+ Create**.
+4. Add your Mailjet API Key at the configuration step.
+5. Press **Create & Enable** and watch your 'Contacts' list get populated in Mailjet!
+
+<HideOnCDPIndex>
+
+## Configuration
+
+<TemplateParameters />
+
+## FAQ
+
+### Is the source code for this destination available?
+
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/mailjet/template_mailjet.py) is available on GitHub.
+
+<PostHogMaintained />
+
+<FeedbackQuestions />
+
+</HideOnCDPIndex>

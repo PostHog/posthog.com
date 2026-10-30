@@ -1,14 +1,22 @@
 import path from 'path'
 import fs from 'fs'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference'
-import { getLanguageFromSdkId } from '../src/components/SdkReferences/utils'
 import {
-    createTurndownService,
-    extractTitleFromHtml,
-    extractMainContent,
-    postProcessMarkdown,
-    preprocessHtmlForTabs,
-} from './turndownService'
+    getLanguageFromSdkId,
+    hasConcreteVersion,
+    isLatestVersion,
+    typeHasPage,
+} from '../src/components/SdkReferences/utils'
+import { convertHtmlToAgentMarkdown, extractTitleFromHtml } from './turndownService'
+import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
+import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
+
+// Prepended to every generated .md file so LLM crawlers landing on a single page
+// still see the pointer to the full index. Pairs with <link rel="llms.txt"> in seo.tsx.
+const AGENT_SIGNPOST =
+    "> AI agents: this is one page from PostHog's docs. Full index of Markdown docs for LLMs: https://posthog.com/llms.txt\n\n"
+
+const withAgentSignpost = (markdown: string): string => `${AGENT_SIGNPOST}${markdown}`
 
 export const generateRawMarkdownPages = async (
     docsNodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }>
@@ -48,12 +56,7 @@ export const generateRawMarkdownPages = async (
 
             const html = fs.readFileSync(htmlFilePath, 'utf8')
             const title = extractTitleFromHtml(html) || node.frontmatter.title || 'Untitled'
-            const mainContent = extractMainContent(html)
-            const preprocessedContent = preprocessHtmlForTabs(mainContent)
-
-            const turndownService = createTurndownService(title)
-            let markdown = turndownService.turndown(preprocessedContent)
-            markdown = postProcessMarkdown(markdown, title)
+            const markdown = convertHtmlToAgentMarkdown(html, title, slug)
 
             const outputPath = path.join(publicPath, `${slug}.md`)
             const dirPath = path.dirname(outputPath)
@@ -62,7 +65,7 @@ export const generateRawMarkdownPages = async (
                 fs.mkdirSync(dirPath, { recursive: true })
             }
 
-            fs.writeFileSync(outputPath, markdown, 'utf8')
+            fs.writeFileSync(outputPath, withAgentSignpost(markdown), 'utf8')
             console.log(`Generated: ${slug}.md`)
             processedPages.push({ slug, title })
         } catch (error) {
@@ -74,6 +77,17 @@ export const generateRawMarkdownPages = async (
         fields: { slug: page.slug },
         frontmatter: { title: page.title },
     }))
+}
+
+// Publish the OpenAPI document itself, alongside the per-operation markdown below.
+// The markdown is for LLMs reading prose; this is the machine-readable artifact that
+// API clients, codegen and function-calling tools expect to find at a stable URL.
+export const generateOpenApiSpec = (spec: any) => {
+    console.log('Writing openapi.json...')
+
+    const filePath = path.join(process.cwd(), 'public', 'openapi.json')
+    fs.writeFileSync(filePath, JSON.stringify(spec), 'utf8')
+    console.log(`✅ Wrote openapi.json (${Object.keys(spec.paths || {}).length} paths)`)
 }
 
 // Function to generate individual API endpoint markdown files from the OpenAPI spec
@@ -172,13 +186,65 @@ ${jsonContent}
 `
 
                 // Write the file
-                fs.writeFileSync(filePath, markdownContent, 'utf8')
+                fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
                 console.log(`Generated: open-api-spec/${filename}`)
             }
         })
     })
 
     console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/open-api-spec/`)
+}
+
+const renderTypeAsText = (type: string): string => {
+    return type
+}
+
+const renderParameters = (params: any[], title = 'Parameters'): string => {
+    if (!params || params.length === 0) return ''
+
+    const paramLines = params.map((param) => {
+        const name = param.isOptional ? `${param.name}?` : param.name
+        const type = renderTypeAsText(param.type)
+        let paramLine = `- **\`${name}\`** (\`${type}\`)`
+
+        if (param.description) {
+            paramLine += ` - ${param.description}`
+        }
+        return paramLine
+    })
+
+    return `### ${title}\n\n${paramLines.join('\n')}`
+}
+
+const renderReturnType = (returnType: any): string => {
+    if (!returnType) return ''
+
+    const typeString = returnType.name
+    const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
+
+    if (isUnionOrIntersection) {
+        const separator = typeString.includes('|') ? '|' : '&'
+        const types = typeString.split(separator).map((t: string) => t.trim())
+        const label = separator === '|' ? 'Union of' : 'Intersection of'
+
+        const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
+        return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
+    } else {
+        return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
+    }
+}
+
+const renderExamples = (examples: any[], language: string, title = 'Examples'): string => {
+    if (!examples || examples.length === 0) return ''
+
+    if (examples.length === 1) {
+        return `### ${title}\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
+    } else {
+        const exampleBlocks = examples.map(
+            (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
+        )
+        return `### ${title}\n\n${exampleBlocks.join('\n\n')}`
+    }
 }
 
 export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) => {
@@ -191,7 +257,7 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     // Follow the same path logic as createPages.ts
     let fileName: string
-    if (sdkReferences.version.includes('latest')) {
+    if (isLatestVersion(sdkReferences.version)) {
         fileName = `${sdkReferences.referenceId}.md`
     } else {
         fileName = `${sdkReferences.id}.md`
@@ -199,62 +265,12 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const filePath = path.join(sdkSpecDir, fileName)
 
-    const renderTypeAsText = (type: string): string => {
-        return type
-    }
-
-    const renderParameters = (params: any[]): string => {
-        if (!params || params.length === 0) return ''
-
-        const paramLines = params.map((param) => {
-            const name = param.isOptional ? `${param.name}?` : param.name
-            const type = renderTypeAsText(param.type)
-            let paramLine = `- **\`${name}\`** (\`${type}\`)`
-
-            if (param.description) {
-                paramLine += ` - ${param.description}`
-            }
-            return paramLine
-        })
-
-        return `### Parameters\n\n${paramLines.join('\n')}`
-    }
-
-    const renderReturnType = (returnType: any): string => {
-        if (!returnType) return ''
-
-        const typeString = returnType.name
-        const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
-
-        if (isUnionOrIntersection) {
-            const separator = typeString.includes('|') ? '|' : '&'
-            const types = typeString.split(separator).map((t: string) => t.trim())
-            const label = separator === '|' ? 'Union of' : 'Intersection of'
-
-            const typeLines = types.map((type) => `- \`${renderTypeAsText(type)}\``)
-            return `### Returns\n\n**${label}:**\n${typeLines.join('\n')}`
-        } else {
-            return `### Returns\n\n- \`${renderTypeAsText(typeString)}\``
-        }
-    }
-
-    const renderExamples = (examples: any[], language: string): string => {
-        if (!examples || examples.length === 0) return ''
-
-        if (examples.length === 1) {
-            return `### Examples\n\n\`\`\`${language}\n${examples[0].code.trim()}\n\`\`\``
-        } else {
-            const exampleBlocks = examples.map(
-                (example) => `#### ${example.name}\n\n\`\`\`${language}\n${example.code.trim()}\n\`\`\``
-            )
-            return `### Examples\n\n${exampleBlocks.join('\n\n')}`
-        }
-    }
-
     const markdownNodes: string[] = []
 
     markdownNodes.push(`# ${sdkReferences.info.title}`)
-    markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    if (hasConcreteVersion(sdkReferences.info.version)) {
+        markdownNodes.push(`**SDK Version:** ${sdkReferences.info.version}`)
+    }
     markdownNodes.push(sdkReferences.info.description)
 
     if (sdkReferences.categories && sdkReferences.categories.length > 0) {
@@ -324,10 +340,453 @@ export const generateSdkReferencesMarkdown = (sdkReferences: SdkReferenceData) =
 
     const markdownContent = markdownNodes.join('\n\n')
 
-    fs.writeFileSync(filePath, markdownContent, 'utf8')
+    fs.writeFileSync(filePath, withAgentSignpost(markdownContent), 'utf8')
+}
+
+/** Writes the `.md` sibling of each SDK type page, mirroring the paths built by createPages.ts. */
+export const generateSdkTypeMarkdown = (sdkReferences: SdkReferenceData) => {
+    if (!isLatestVersion(sdkReferences.version)) {
+        return
+    }
+
+    const typesDir = path.join(process.cwd(), 'public', 'docs', 'references', sdkReferences.referenceId, 'types')
+    fs.mkdirSync(typesDir, { recursive: true })
+
+    const sdkLanguage = getLanguageFromSdkId(sdkReferences.referenceId)
+
+    sdkReferences.types?.forEach((type) => {
+        if (!typeHasPage(type)) {
+            return
+        }
+
+        const markdownNodes: string[] = [`# ${type.name}`, `**SDK:** ${sdkReferences.info.title}`]
+
+        if (type.description) {
+            markdownNodes.push(type.description)
+        }
+
+        const propertiesMarkdown = renderParameters(type.properties, 'Properties')
+        if (propertiesMarkdown) {
+            markdownNodes.push(propertiesMarkdown)
+        }
+
+        const exampleMarkdown = type.example
+            ? renderExamples([{ code: type.example }], sdkLanguage, 'Example values')
+            : ''
+        if (exampleMarkdown) {
+            markdownNodes.push(exampleMarkdown)
+        }
+
+        fs.writeFileSync(path.join(typesDir, `${type.id}.md`), markdownNodes.join('\n\n'), 'utf8')
+    })
 }
 
 // Function to generate llms.txt file according to spec
+// Canonical self-driving taxonomy used to generate /platform.md, the per-product .md files,
+// and the "Products and tools" section of llms.txt. Single source so they stay in sync.
+// Copy mirrors the handbook canonical vocabulary: products = the surfaces you adopt;
+// tools = the functional capabilities; context = the data; context warehouse = warehouse + ingestion.
+type PlatformItem = { name: string; slug?: string; layer: 'product' | 'tool'; oneLiner: string; link?: string }
+
+const PLATFORM_ITEMS: PlatformItem[] = [
+    // Products — the surfaces a customer adopts to access self-driving
+    {
+        name: 'Web (app.posthog.com)',
+        layer: 'product',
+        link: 'https://app.posthog.com',
+        oneLiner: 'Get simple or complex work done without installing anything — the full surface, next to your data.',
+    },
+    {
+        name: 'PostHog Slack app',
+        slug: 'slack-app',
+        layer: 'product',
+        oneLiner:
+            'Tag @PostHog in any Slack thread to ship a fix, answer a data question, or edit content – without leaving the conversation.',
+    },
+    {
+        name: 'PostHog Desktop',
+        slug: 'desktop',
+        layer: 'product',
+        oneLiner:
+            "The desktop app that uses signals from production data to diagnose issues and generate pull requests, before you know there's a problem.",
+    },
+    {
+        name: 'PostHog MCP',
+        layer: 'product',
+        link: 'https://posthog.com/docs/model-context-protocol',
+        oneLiner: 'A product analyst that lives in your editor, via MCP.',
+    },
+    // Tools — the functional capabilities that produce and act on your product's context
+    {
+        name: 'Product analytics',
+        slug: 'product-analytics',
+        layer: 'tool',
+        oneLiner: 'The measurement agents use to see what works.',
+    },
+    {
+        name: 'Web analytics',
+        slug: 'web-analytics',
+        layer: 'tool',
+        oneLiner: 'The lightweight measurement layer feeding the loop.',
+    },
+    {
+        name: 'Session replay',
+        slug: 'session-replay',
+        layer: 'tool',
+        oneLiner: 'A proactive signal — watch exactly why something happened.',
+    },
+    {
+        name: 'Feature flags',
+        slug: 'feature-flags',
+        layer: 'tool',
+        oneLiner: 'How agents roll a change out and roll it back.',
+    },
+    {
+        name: 'Experiments',
+        slug: 'experiments',
+        layer: 'tool',
+        oneLiner: 'The evaluation that proves a change worked.',
+    },
+    {
+        name: 'Error tracking',
+        slug: 'error-tracking',
+        layer: 'tool',
+        oneLiner: 'The signal that triggers a fix — every error tied to the user who hit it.',
+    },
+    {
+        name: 'Surveys',
+        slug: 'surveys',
+        layer: 'tool',
+        oneLiner: 'The qualitative signal — what users say, not just what they do.',
+    },
+    {
+        name: 'AI observability',
+        slug: 'ai-observability',
+        layer: 'tool',
+        oneLiner: 'Observability for your AI features — the context agents use to fix LLM behavior.',
+    },
+    {
+        name: 'Logs',
+        slug: 'logs',
+        layer: 'tool',
+        oneLiner: 'Backend signal that triggers fixes, tied to the user who hit it.',
+    },
+    {
+        name: 'Data warehouse',
+        slug: 'data-warehouse',
+        layer: 'tool',
+        oneLiner: "Where your product's context lives so agents can use all of it.",
+    },
+    {
+        name: 'CDP',
+        slug: 'cdp',
+        layer: 'tool',
+        oneLiner: 'How agents move and act on your data across 50+ destinations.',
+    },
+    {
+        name: 'Endpoints',
+        slug: 'endpoints',
+        layer: 'tool',
+        oneLiner: "How your product's context flows out to agents and tools.",
+    },
+    {
+        name: 'Workflows',
+        slug: 'workflows',
+        layer: 'tool',
+        oneLiner: 'How agents act — automated actions in the loop.',
+    },
+    {
+        name: 'PostHog AI',
+        slug: 'ai',
+        layer: 'tool',
+        oneLiner: 'The interface humans and agents use to understand the product.',
+    },
+    {
+        name: 'Support',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/support',
+        oneLiner: 'Tickets triaged with full product context — agents draft replies and fixes from the same data.',
+    },
+    {
+        name: 'Customer analytics',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/customer-analytics/start-here',
+        oneLiner: 'Accounts, usage metrics, and customer journeys — the account-level context behind every signal.',
+    },
+    {
+        name: 'Replay Vision',
+        layer: 'tool',
+        link: 'https://posthog.com/docs/replay-vision',
+        oneLiner: 'Agents that watch session recordings at scale and turn what users hit into observations.',
+    },
+]
+
+const CONTEXT_BLURB =
+    'Events, recordings, errors, and logs — the data that feeds the self-driving loop. This is the fuel.'
+const CONTEXT_WAREHOUSE_BLURB =
+    'The data warehouse plus the full context-ingestion pipeline for your product — where context lives and a significant part of how we bill.'
+
+const PRODUCT_DESCRIPTOR = "one of PostHog's products — the surfaces you adopt to access self-driving"
+const TOOL_DESCRIPTOR = "one of PostHog's tools — the functional capabilities that make your product self-driving"
+
+// Pages in the Product nav that need the same .md twin as the taxonomy entries above, but that the
+// taxonomy can't generate one for: Support and Replay Vision are entries whose canonical link points
+// at docs instead of a slug, context warehouse and self-driving are layers of their own rather than
+// tools, and tracing and heatmaps have no entry. Listing them here writes the identical .md without
+// touching /platform.md or llms.txt — where each belongs in the taxonomy is a separate question.
+type MdOnlyPage = { name: string; slug: string; oneLiner: string; descriptor: string }
+
+const MD_ONLY_PAGES: MdOnlyPage[] = [
+    {
+        name: 'Tracing',
+        slug: 'tracing',
+        oneLiner: 'The span-level signal that shows agents where a request broke.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Heatmaps',
+        slug: 'heatmaps',
+        oneLiner: 'The visual signal — where people click, scroll, and rage-click.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Replay Vision',
+        slug: 'replay-vision',
+        oneLiner: 'Agents that watch session recordings at scale and turn what users hit into observations.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Support',
+        slug: 'support',
+        oneLiner: 'Tickets triaged with full product context — agents draft replies and fixes from the same data.',
+        descriptor: TOOL_DESCRIPTOR,
+    },
+    {
+        name: 'Context warehouse',
+        slug: 'context-warehouse',
+        oneLiner: CONTEXT_WAREHOUSE_BLURB,
+        descriptor: "one of the four layers of PostHog — where your product's context lives",
+    },
+    {
+        name: 'Self-driving',
+        slug: 'self-driving',
+        oneLiner: 'The loop itself — agents find problems and opportunities in your product and ship the fix.',
+        descriptor: "PostHog's umbrella story — the loop every product and tool serves",
+    },
+]
+
+const pageLinkFor = (item: PlatformItem): string => item.link || `https://posthog.com/${item.slug}`
+const mdLinkFor = (item: PlatformItem): string =>
+    item.slug ? `https://posthog.com/${item.slug}.md` : item.link || 'https://posthog.com'
+
+// Generate /platform.md — a machine-readable four-layer overview for LLMs/agents.
+export const generatePlatformMd = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+    if (!fs.existsSync(publicPath)) fs.mkdirSync(publicPath, { recursive: true })
+
+    const list = (layer: 'product' | 'tool') =>
+        PLATFORM_ITEMS.filter((i) => i.layer === layer)
+            .map((i) => `- [${i.name}](${pageLinkFor(i)}) — ${i.oneLiner}`)
+            .join('\n')
+
+    const content = `# PostHog: the platform for self-driving products
+
+PostHog makes your product self-driving. It pairs the full context of your data (events, errors, logs, replays, and more) with agents that find problems and opportunities and ship the fix — reactively (e.g. prompted via Slack) or proactively. Everything PostHog offers is one of four layers.
+
+## Products — how you access self-driving
+
+The surfaces a customer adopts. Each has a distinct job.
+
+${list('product')}
+
+## Tools — the functional capabilities
+
+The tools produce and act on your product's context. They sit below the products, but this is where the work happens.
+
+${list('tool')}
+
+## Context — the fuel
+
+${CONTEXT_BLURB}
+
+## Context warehouse — where context lives
+
+${CONTEXT_WAREHOUSE_BLURB}
+
+---
+
+Self-driving in depth — signals, Inbox, scouts, and the PR loop: https://posthog.com/docs/self-driving.md
+Pricing: every tool has a generous free tier, then usage-based pricing. Exact numbers: https://posthog.com/pricing.md
+All docs are available as Markdown (append \`.md\` to any docs URL). Full index: https://posthog.com/llms.txt
+`
+
+    fs.writeFileSync(path.join(publicPath, 'platform.md'), withAgentSignpost(content), 'utf8')
+    console.log('Generated: platform.md')
+}
+
+// Generate a clean .md for each product/tool page (built from the curated taxonomy, not HTML-scraped,
+// since the slide-based pages don't convert to useful markdown).
+export const generateProductPagesMarkdown = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+
+    const pages = [
+        // Web / MCP point at existing pages, no bespoke .md
+        ...PLATFORM_ITEMS.filter((item) => item.slug).map((item) => ({
+            name: item.name,
+            slug: item.slug as string,
+            oneLiner: item.oneLiner,
+            descriptor: item.layer === 'product' ? PRODUCT_DESCRIPTOR : TOOL_DESCRIPTOR,
+            pageLink: pageLinkFor(item),
+        })),
+        ...MD_ONLY_PAGES.map((page) => ({ ...page, pageLink: `https://posthog.com/${page.slug}` })),
+    ]
+
+    for (const page of pages) {
+        const content = `# ${page.name}
+
+${page.oneLiner}
+
+${page.name} is ${page.descriptor}.
+
+PostHog is the platform for self-driving products: it pairs the full context of your data (events, errors, logs, replays, and more) with agents that ship better products, faster.
+
+- Full page: ${page.pageLink}
+- All products and tools: https://posthog.com/platform.md
+- Pricing: https://posthog.com/pricing.md
+
+For features, screenshots, and details, see ${page.pageLink}.
+`
+
+        const outputPath = path.join(publicPath, `${page.slug}.md`)
+        const dirPath = path.dirname(outputPath)
+        if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath, { recursive: true })
+        fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
+        console.log(`Generated: ${page.slug}.md`)
+    }
+}
+
+type ChangelogRoadmapNode = {
+    strapiID?: number | string
+    title: string
+    description?: string
+    date: string
+    cta?: { label?: string; url?: string }
+    teams?: { data?: Array<{ attributes?: { name?: string } }> }
+    topic?: { data?: { attributes?: { label?: string; slug?: string } } }
+}
+
+type ChangelogVideoNode = {
+    videoId: string
+    publishedAt: string
+    title: string
+}
+
+// How many months of entries the top-level changelog.md covers. Full history is
+// available in the per-year archives (public/changelog/{year}.md).
+const CHANGELOG_MD_MONTHS = 12
+
+// Generates /changelog.md (and per-year archives) directly from the build-time Roadmap
+// nodes, like generatePricingMd/generatePlatformMd. The /changelog page itself renders a
+// virtualized UI, so the HTML-scrape path used for docs pages can't produce useful
+// markdown for it — this is the canonical machine-readable changelog for LLMs/agents.
+export const generateChangelogMd = (roadmaps: ChangelogRoadmapNode[], videos: ChangelogVideoNode[] = []) => {
+    console.log('Generating changelog markdown files...')
+
+    const publicPath = path.resolve(__dirname, '../public')
+
+    const monthKey = (date: string) => date.slice(0, 7) // YYYY-MM
+    const monthTitle = (key: string) =>
+        new Date(`${key}-15T00:00:00Z`).toLocaleString('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' })
+    const dayTitle = (date: string) =>
+        new Date(date).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+
+    const cleanDescription = (md?: string) =>
+        (md || '')
+            .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip images
+            .replace(/\]\(\//g, '](https://posthog.com/') // absolutize relative links
+            .trim()
+
+    const absoluteUrl = (url?: string) => (url && url.startsWith('/') ? `https://posthog.com${url}` : url)
+
+    const entryMarkdown = (roadmap: ChangelogRoadmapNode) => {
+        const team = roadmap.teams?.data?.[0]?.attributes?.name
+        const topic = roadmap.topic?.data?.attributes?.label
+        const meta = [dayTitle(roadmap.date), team && `${team} Team`, topic].filter(Boolean).join(' · ')
+        const description = cleanDescription(roadmap.description)
+        const cta = roadmap.cta?.url ? `[${roadmap.cta.label || 'Learn more'}](${absoluteUrl(roadmap.cta.url)})` : ''
+        const docsPath = getChangelogDocsPath(roadmap)
+        const docs =
+            docsPath && docsPath !== stripPostHogOrigin(roadmap.cta?.url || '')
+                ? `[Docs](${absoluteUrl(docsPath)})`
+                : ''
+        const links = [docs, cta].filter(Boolean).join(' · ')
+        const title = roadmap.strapiID
+            ? `### [${roadmap.title}](https://posthog.com/changelog?id=${roadmap.strapiID})`
+            : `### ${roadmap.title}`
+
+        return [title, `_${meta}_`, description, links].filter(Boolean).join('\n\n')
+    }
+
+    // Group entries and videos by YYYY-MM, newest first (input is sorted date DESC)
+    const months = new Map<string, { roadmaps: ChangelogRoadmapNode[]; videos: ChangelogVideoNode[] }>()
+    const getMonth = (key: string) => {
+        if (!months.has(key)) months.set(key, { roadmaps: [], videos: [] })
+        return months.get(key) as { roadmaps: ChangelogRoadmapNode[]; videos: ChangelogVideoNode[] }
+    }
+    roadmaps
+        .filter((roadmap) => roadmap?.title && roadmap?.date)
+        .forEach((roadmap) => getMonth(monthKey(roadmap.date)).roadmaps.push(roadmap))
+    videos
+        .filter((video) => video?.videoId && video?.publishedAt)
+        .forEach((video) => getMonth(monthKey(video.publishedAt)).videos.push(video))
+
+    const sortedMonthKeys = [...months.keys()].sort().reverse()
+    if (sortedMonthKeys.length === 0) {
+        console.warn('No changelog entries found; skipping changelog markdown generation')
+        return
+    }
+
+    const monthMarkdown = (key: string) => {
+        const { roadmaps: monthRoadmaps, videos: monthVideos } = getMonth(key)
+        const videoLines = monthVideos
+            .map((video) => `- 📺 [${video.title}](https://www.youtube.com/watch?v=${video.videoId})`)
+            .join('\n')
+        return [`## ${monthTitle(key)}`, videoLines, ...monthRoadmaps.map(entryMarkdown)].filter(Boolean).join('\n\n')
+    }
+
+    const years = [...new Set(sortedMonthKeys.map((key) => key.slice(0, 4)))].sort().reverse()
+    const yearArchiveLinks = years.map((year) => `[${year}](https://posthog.com/changelog/${year}.md)`).join(' · ')
+
+    const header = (scope: string) => `# PostHog changelog
+
+New features, improvements, and fixes shipped in PostHog. ${scope} Regenerated on every deploy.
+
+- Canonical page: https://posthog.com/changelog
+- RSS feed: https://posthog.com/changelog.rss
+- Full history by year: ${yearArchiveLinks}
+
+`
+
+    // Top-level changelog.md: the most recent CHANGELOG_MD_MONTHS months
+    const recentMonthKeys = sortedMonthKeys.slice(0, CHANGELOG_MD_MONTHS)
+    const changelogMd =
+        header(`This file covers the last ${recentMonthKeys.length} months.`) +
+        recentMonthKeys.map(monthMarkdown).join('\n\n') +
+        '\n'
+    fs.writeFileSync(path.join(publicPath, 'changelog.md'), withAgentSignpost(changelogMd), 'utf8')
+    console.log('Generated: changelog.md')
+
+    // Per-year archives: public/changelog/{year}.md
+    const changelogDir = path.join(publicPath, 'changelog')
+    if (!fs.existsSync(changelogDir)) fs.mkdirSync(changelogDir, { recursive: true })
+    for (const year of years) {
+        const yearMonthKeys = sortedMonthKeys.filter((key) => key.startsWith(year))
+        const yearMd = header(`This file covers ${year}.`) + yearMonthKeys.map(monthMarkdown).join('\n\n') + '\n'
+        fs.writeFileSync(path.join(changelogDir, `${year}.md`), withAgentSignpost(yearMd), 'utf8')
+        console.log(`Generated: changelog/${year}.md`)
+    }
+}
+
 export const generateLlmsTxt = (pages) => {
     console.log('Generating llms.txt file...')
 
@@ -393,6 +852,7 @@ export const generateLlmsTxt = (pages) => {
         'docs-hog': 'Hog (Query Language)',
         'docs-model-context-protocol': 'Model Context Protocol (MCP)',
         'docs-ai-engineering': 'AI Engineering',
+        templates: 'Self-driving scout templates',
     }
 
     const formatSectionTitle = (section: string): string => {
@@ -426,7 +886,7 @@ export const generateLlmsTxt = (pages) => {
     // Build llms.txt content
     let llmsTxtContent = `# PostHog
 
-> PostHog is an open-source product and data tools platform. It provides product analytics, session replay, feature flags, A/B testing, error tracking, surveys, LLM observability, web analytics, data warehouse, and more - all in one platform. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
+> PostHog is the platform for self-driving products. It pairs the full context of your product's data (events, errors, logs, replays, and more) with agents that find problems and ship changes with you. It includes tools for product analytics, session replay, feature flags, A/B testing, error tracking, surveys, AI observability, web analytics, a data warehouse, and more. The fastest way to integrate PostHog is with the setup wizard: \`npx @posthog/wizard@latest\`
 
 PostHog can be added to any web, mobile, or backend application. All docs pages below are available as raw Markdown by appending \`.md\` to any URL.
 
@@ -452,6 +912,37 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
 
 **MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`.
+
+`
+
+    // Products and tools overview (self-driving taxonomy) — kept in sync with /platform.md via PLATFORM_ITEMS.
+    llmsTxtContent += `## Products and tools
+
+PostHog has one umbrella story — self-driving — and four layers. Full machine-readable overview: https://posthog.com/platform.md
+
+**Products** (the surfaces you adopt to access self-driving):
+${PLATFORM_ITEMS.filter((i) => i.layer === 'product')
+    .map((i) => `- [${i.name}](${mdLinkFor(i)}) — ${i.oneLiner}`)
+    .join('\n')}
+
+**Tools** (the functional capabilities):
+${PLATFORM_ITEMS.filter((i) => i.layer === 'tool')
+    .map((i) => `- [${i.name}](${mdLinkFor(i)}) — ${i.oneLiner}`)
+    .join('\n')}
+
+**Context** — ${CONTEXT_BLURB}
+
+**Context warehouse** — ${CONTEXT_WAREHOUSE_BLURB}
+
+`
+
+    // Changelog — high-value for agents deciding what PostHog can do today
+    llmsTxtContent += `## Changelog
+
+What's new in PostHog — new features, products, and tools, updated with every deploy. Check this before assuming a capability doesn't exist.
+
+- [Changelog (last 12 months, Markdown)](https://posthog.com/changelog.md)
+- [Changelog RSS feed](https://posthog.com/changelog.rss)
 
 `
 
@@ -511,8 +1002,10 @@ export const generatePricingMd = (products: any[]) => {
     const tierTable = (tiers: any[], unit: string): string => {
         if (!tiers || tiers.length === 0) return ''
 
+        // A GB-month already includes the months, and one unbounded tier has no volume bands
+        const singleTier = tiers.length === 1 && tiers[0].up_to === null
         const rows: string[] = []
-        rows.push(`| Monthly volume | Price per ${unit} |`)
+        rows.push(`| ${singleTier || unit.endsWith('-month') ? 'Volume' : 'Monthly volume'} | Price per ${unit} |`)
         rows.push('|---|---|')
 
         for (let i = 0; i < tiers.length; i++) {
@@ -520,7 +1013,9 @@ export const generatePricingMd = (products: any[]) => {
             const price = formatPrice(tier.unit_amount_usd)
             const prevUpTo = i > 0 ? tiers[i - 1].up_to : 0
 
-            if (tier.up_to === null) {
+            if (singleTier) {
+                rows.push(`| Every ${unit} | ${price} |`)
+            } else if (tier.up_to === null) {
                 // Last tier (unlimited)
                 rows.push(`| Above ${formatVolume(prevUpTo)} | ${price} |`)
             } else if (parseFloat(tier.unit_amount_usd) === 0) {
@@ -567,6 +1062,13 @@ export const generatePricingMd = (products: any[]) => {
         },
     }
 
+    // Add-on notes the billing API doesn't carry
+    const addonMeta: Record<string, { note: string }> = {
+        logs_retention_custom: {
+            note: "Custom retention bills for the data you keep, not this month's usage: each GB costs $0.05 for every month you keep it, until it expires.",
+        },
+    }
+
     const productDisplayOrder = [
         'product_analytics',
         'session_replay',
@@ -579,8 +1081,9 @@ export const generatePricingMd = (products: any[]) => {
 
     // Separate products from the platform product
     const platformProduct = products.find((p) => p.type === 'platform_and_support')
+    // Companion products are listed with their parent's add-ons below
     const billedProducts = products.filter(
-        (p) => p.type !== 'platform_and_support' && !p.legacy_product && !p.inclusion_only
+        (p) => p.type !== 'platform_and_support' && !p.legacy_product && !p.inclusion_only && !p.companion_of
     )
 
     // Sort products: known order first, then any new ones from the API
@@ -616,11 +1119,10 @@ export const generatePricingMd = (products: any[]) => {
     // Build product add-ons section
     const productAddons: any[] = []
     for (const product of orderedProducts) {
-        if (product.addons) {
-            for (const addon of product.addons) {
-                if (addon.legacy_product) continue
-                productAddons.push({ ...addon, parentName: product.name })
-            }
+        for (const addon of withCompanionAddons(product, products).addons || []) {
+            // Custom retention replaced the 30-day add-on, but billing doesn't mark it `legacy_product`
+            if (addon.legacy_product || addon.type === 'logs_retention_30d') continue
+            productAddons.push({ ...addon, parentName: product.name })
         }
     }
 
@@ -633,6 +1135,12 @@ export const generatePricingMd = (products: any[]) => {
             addonsSection += `### ${addon.name}\n\n`
             addonsSection += `*Extends ${addon.parentName}*\n\n`
             addonsSection += `${addon.description}\n\n`
+            if (addonMeta[addon.type]) {
+                addonsSection += `${addonMeta[addon.type].note}\n\n`
+            }
+            if (addon.no_billing_limit) {
+                addonsSection += `Billing limits don't apply. Your ${addon.parentName} billing limit doesn't cap it.\n\n`
+            }
 
             const paidPlan = addon.plans?.find((plan: any) => plan.tiers)
             if (paidPlan?.tiers) {
@@ -735,6 +1243,7 @@ For full details on how discounts work, see our transparent contract rules: http
 - **Exception**: A single error or exception captured
 - **Row**: A single row synced from an external data source
 - **Trigger event**: A single event sent to a realtime destination
+- **GB-month**: One GB kept for 30 days, counted by the day
 
 All prices are in USD, excluding taxes.
 `
@@ -745,6 +1254,6 @@ All prices are in USD, excluding taxes.
         fs.mkdirSync(publicPath, { recursive: true })
     }
 
-    fs.writeFileSync(pricingMdPath, content, 'utf8')
+    fs.writeFileSync(pricingMdPath, withAgentSignpost(content), 'utf8')
     console.log('Generated: pricing.md')
 }

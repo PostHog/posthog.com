@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
-import algoliasearch from 'algoliasearch/lite'
 import { InstantSearch, useRefinementList } from 'react-instantsearch-hooks-web'
 import { useSearchBox, useHits } from 'react-instantsearch-hooks-web'
 import { Combobox } from '@headlessui/react'
@@ -11,21 +10,13 @@ import { capitalizeFirstLetter } from '../../utils'
 import { Hit } from 'instantsearch.js'
 import OSButton from 'components/OSButton'
 import Input from 'components/OSForm/input'
-
-const searchClient = algoliasearch(
-    process.env.GATSBY_ALGOLIA_APP_ID as string,
-    process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
-)
+import SpotlightSearch from 'components/SpotlightSearch'
+import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 
 const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: string }) => {
-    const { websiteMode } = useApp()
     const { refine, items } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
     return (
-        <ul
-            className={`list-none m-0 p-0 flex space-x-2 snap-x snap-mandatory overflow-x-auto ${
-                websiteMode ? 'mb-2 px-2 border-t border-primary pt-2' : 'mt-2'
-            }`}
-        >
+        <ul className="list-none m-0 p-0 flex space-x-2 snap-x snap-mandatory overflow-x-auto mt-2">
             {items.map((item) => (
                 <li className="snap-center" key={item.value}>
                     <button
@@ -64,9 +55,8 @@ const Search = ({
     onEscape?: () => void
 }) => {
     const [query, setQuery] = useState('')
-    const [isFocused, setIsFocused] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
-    const { openNewChat, websiteMode, setSearchOpen } = useApp()
+    const { openNewChat, setSearchOpen } = useApp()
     const { dragControls, appWindow } = useWindow()
     const { refine } = useSearchBox()
     const { hits } = useHits()
@@ -74,7 +64,7 @@ const Search = ({
 
     const openChat = () => {
         if (query) {
-            openNewChat({ path: `ask-max${websiteMode ? '' : `-${appWindow?.path}`}`, initialQuestion: query })
+            openNewChat({ path: `ask-max-${appWindow?.path}`, initialQuestion: query })
         }
     }
 
@@ -105,7 +95,6 @@ const Search = ({
     }
 
     const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (websiteMode) return
         dragControls?.start(e)
     }
 
@@ -119,38 +108,16 @@ const Search = ({
         }
     }, [initialFilter])
 
-    useEffect(() => {
-        if (!websiteMode) return
-        const handleClickOutside = (e: MouseEvent) => {
-            if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-                setIsFocused(false)
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [websiteMode])
-
     return (
-        <div
-            ref={containerRef}
-            onFocus={() => setIsFocused(true)}
-            className={`flex flex-col ${className}`}
-            onMouseDown={handleMouseDown}
-        >
+        <div ref={containerRef} className={`flex flex-col ${className}`} onMouseDown={handleMouseDown}>
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
-                    <div
-                        className={`bg-accent !border-primary overflow-hidden relative ${
-                            websiteMode ? '' : 'border rounded'
-                        }`}
-                    >
+                    <div className="relative">
                         <Combobox.Input
                             as={Input}
                             label=""
                             showLabel={false}
-                            className={`w-full text-primary border-0 bg-transparent focus:ring-0 ${
-                                websiteMode ? 'rounded-none' : ''
-                            }`}
+                            className="w-full text-primary border border-primary bg-transparent focus:ring-0"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
                             onKeyDown={handleKeyDown}
                             placeholder={`Search ${initialFilter ? 'the ' + initialFilter : 'PostHog.com'}...`}
@@ -159,7 +126,11 @@ const Search = ({
                             containerClassName="m-0"
                         />
 
-                        <div data-scheme="primary" className="absolute right-1 top-1/2 -translate-y-1/2">
+                        <div
+                            data-scheme="primary"
+                            className="absolute right-1 top-1/2 -translate-y-1/2"
+                            onMouseDown={(e) => e.stopPropagation()}
+                        >
                             <OSButton
                                 disabled={!query}
                                 size="md"
@@ -176,17 +147,13 @@ const Search = ({
                             </OSButton>
                         </div>
                     </div>
-                    {!hideFilters && hits.length > 0 && query && (!websiteMode || isFocused) && (
-                        <Filters isRefinedClassName={isRefinedClassName} />
-                    )}
+                    {!hideFilters && hits.length > 0 && query && <Filters isRefinedClassName={isRefinedClassName} />}
 
-                    {hits.length > 0 && query && (!websiteMode || isFocused) && (
+                    {hits.length > 0 && query && (
                         <Combobox.Options
                             static
                             hold
-                            className={`w-full border-primary list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl ${
-                                websiteMode ? 'border-t' : 'mt-2 rounded-md border'
-                            }`}
+                            className="w-full border-primary list-none m-0 p-0 overflow-auto z-10 max-h-[calc(80vh_-_100px)] h-full bg-primary shadow-2xl mt-2 rounded-md border"
                             onMouseDown={(e: React.MouseEvent) => e.stopPropagation()}
                         >
                             {hits.length === 0 && query !== '' ? (
@@ -223,77 +190,44 @@ const Search = ({
     )
 }
 
-export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) => {
-    const { setWindowTitle, closeWindow } = useApp()
-    const { appWindow } = useWindow()
-    const ref = useRef<HTMLDivElement>(null)
-
-    const close = () => {
-        if (appWindow) {
-            closeWindow(appWindow)
-        }
-    }
-
-    useEffect(() => {
-        if (appWindow) {
-            setWindowTitle(appWindow, 'Search')
-        }
-    }, [])
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node) && appWindow) {
-                close()
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [closeWindow])
-
-    return (
-        <InstantSearch
-            searchClient={searchClient}
-            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
-            stalledSearchDelay={750}
-        >
-            <div ref={ref}>
-                <Search
-                    initialFilter={initialFilter}
-                    className="cursor-grab active:cursor-grabbing p-2 rounded bg-white/25 backdrop-blur shadow-2xl border border-primary"
-                    onChange={close}
-                    onEscape={close}
-                />
-            </div>
-        </InstantSearch>
-    )
-}
-
 export const SearchUI = ({
     initialFilter = '',
     className = '',
     isRefinedClassName = 'bg-primary',
     hideFilters = false,
     autoFocus = true,
+    onChange,
+    onEscape,
 }: {
     initialFilter?: string
     className?: string
     isRefinedClassName?: string
     hideFilters?: boolean
     autoFocus?: boolean
+    onChange?: () => void
+    onEscape?: () => void
 }) => {
     return (
-        <InstantSearch
-            searchClient={searchClient}
-            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
-            stalledSearchDelay={750}
-        >
+        <InstantSearch searchClient={algoliaSearchClient} indexName={algoliaIndexName} stalledSearchDelay={750}>
             <Search
                 initialFilter={initialFilter}
                 className={className}
                 isRefinedClassName={isRefinedClassName}
                 hideFilters={hideFilters}
                 autoFocus={autoFocus}
+                onChange={onChange}
+                onEscape={onEscape}
             />
         </InstantSearch>
     )
+}
+
+// Global search overlay. Rendered once (in the desktop wrapper) and toggled via
+// the app-level `searchOpen` flag instead of being managed as a draggable window.
+export const SearchOverlay = () => {
+    const { searchOpen, setSearchOpen, searchInitialFilter } = useApp()
+
+    const close = () => setSearchOpen(false)
+
+    return <SpotlightSearch open={searchOpen} onClose={close} initialFilter={searchInitialFilter || undefined} />
 }

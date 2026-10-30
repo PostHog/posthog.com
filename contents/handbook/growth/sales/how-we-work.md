@@ -15,17 +15,17 @@ We have three types of roles:
 
 ### Technical Account Managers
 
-Each TAM is assigned up to 15 existing customer accounts to work with. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
+Each TAM is assigned 15 existing customer accounts representing $1.5M to $2M. See [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance) for the full composition targets. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
 
-We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Ben), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+We use the TAM field in Customer Analytics to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Ben), but can add themselves as the Account Executive in Customer Analytics to make it easier to track things you're working on.
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
 At the end of each quarter we will review your accounts and look to hand off some to bring your focus account list back down to 10.  Simon and Ben will also review everyone's accounts each month proactively to make sure that the balance of accounts across the team makes sense.
 
-#### TAM Territory Review
+#### TAM At-Risk Accounts review meeting
 
-In addition to the weekly sprint planning meeting on a Monday, we do a weekly territory review standup on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
+In addition to the weekly sprint planning meeting on a Monday, we do a [weekly territory review standup](/blog/customer-success-at-posthog#200-pm-team-account-review) on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Customer Analytics:
 
 1. Rate your relationship with them (no connection yet/made contact/answering their questions in Slack/trusted advisor)
 2. What's your next step with that customer (annual plan, cross-sell etc).
@@ -33,98 +33,69 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
 
 > The objective of the meeting is to hold each other to account, provide direct feedback, and also support each other. It is a great place to ask for help from the team with thorny problems - you should not let your teammates fail.
 
-### Handing off customers to Technical CSMs
+### Coming off an account
 
-We want to ensure the expansion potential of a customer has been thoroughly exhausted before moving to a Technical CSM for more steady-state retention.  When you want to move a customer off your book you should talk it through with Simon. Here are the things we will be looking at:
+The CSM stays on every $20k+ account, so there's no handoff when a TAM's work is done. The account just moves to CSM-only coverage. When and how to come off, and what context needs to land with the CSM first, is covered in [Removing a TAM from an account](/handbook/growth/sales/account-allocation#removing-a-tam-from-an-account). Use the [saturation checks](/handbook/growth/sales/evaluating-growth-potential#the-saturation-checks) to make the case, and talk it through with your team lead.
 
-1. Have you tried multiple times to [make contact](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) with all of the active users in an account?
-   - An _Active User_ is someone who has been seen in Vitally in the past month
-   - When you reach out, demonstrate how you can help that person out, be specific to their role/usage of PostHog.
-2. Are they using all PostHog products?
-   - If they have been customers for a while they may not be aware of new products like Surveys and Data Warehouse.  Look at their usage and see if there are any obvious cross-sell opportunities.
-   - Could they benefit from some of the advanced capabilities and training/support available in Teams/Enterprise?
-3. Is there an opportunity to cross-sell to a different team?
-   - Have a look at what they are tracking with PostHog.  If it's an app then maybe get in touch with the marketing team to talk about Web Analytics or No Code Testing
-   - Are they a multi-product company?  Find out if there are other teams who aren't using us who could benefit from PostHog today, and then use your current users as an internal reference.
-
-If the answer to any of the above questions is 'no' then it's likely that there is more work to be done with a customer, but we will use a common sense approach here.
-
-> A customer being negative/difficult to work with isn't a reason to remove them from your book.  It's your job to turn them around to being a happy customer (AKA be their favorite).
+> A customer being negative/difficult to work with isn't a reason to come off an account.  It's your job to turn them around to being a happy customer (AKA be their favorite).
 
 ## How commission works - Technical Account Managers
 
 **General principles**
+- We want to align incentives - TAMs get paid when PostHog gets paid
+- 100% quota attainment leads to a 50/50 of OTE and Commission split
+- TAMs cover 5x their OTE with their quota
 
-- When thinking about commission, we want to particularly incentivize:
-  - Cross-selling new products - all-in-one is how we will beat the competition.
-- We aim for a 50/50 split between base/commission when calculating OTE by default.
+> This plan, including the OTE to quota ratio, is likely to change as we scale up the size and complexity of our sales machine! For example, the rate plan will be reviewed when median book cash exceeds 5x OTE. This is completely normal - we will ensure everyone is treated fairly. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. 
 
-> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
+**How we calculate**
+- Quota is calculated annually, and is paid out quarterly
+- A deal counts toward quota in the quarter of its **effective date**. For annual deals, the effective date is the contract start date or the signature date, whichever is later. For monthly accounts, each payment counts toward the quarter it falls in.
+- Because the signature date sets the floor, a deal can never be credited to a quarter that has already closed, even if its contract start was backdated to align with the customer's current billing period.
+- The Commission rate is 10% flat and uncapped on annual agreements. The commission rate is 5% on monthly contracts
+	- There is also an additional 6.7% incentive on growth in annual renewals
+	- There is no additional incentive on monthly payments
+ - An account counts toward your quota only from the date it is added to your book (when the TAM field is set in Customer Analytics). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
 
-**Variables**
+**Examples**
+Ator, the TAM, has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500, totaling $6,800. The quota realized and paid out to Ator on this account is 5% of the total for that quarter: $340.
 
-- Your quota is set as _the additional $ on a usage basis you are expected to add to your book of business_ - ie. any new product usage counts. This is different from TAEs, because here we care about the invoiced usage _not_ the actual $ amount.
-  - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure based on amounts invoiced.
-  - We measure the change in annualised quarterly ARR. Take Q1's usage ARR x4, compare it to Q2's usage ARR x4 - the difference in these numbers is your attainment towards quota.
-     - Where a customer is new and has <3 periods in the previous quarter, we will use the number of periods to calculate the ARR. eg if it has one month it is that month multiplied by 12, if it has two invoices, then its the total of those two months multiplied by 6.
-     - When a customer has churned eg they have no revenue in the final period of the month and/or they have cancelled their subscription, then that quarter will count as $0 ARR.
-- This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that.
-  - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
-- We apply a multiplier to each invoice in the calculation based on how many of our primary products they are paying for, to incentivise cross-sell.
-  - Primary products are: Product Analytics, Session Replay, Feature Flags, Surveys, Error Tracking, AI Observability, Data Warehouse, CDP Destinations, Workflows, Logs, and PostHog AI.
-  - We start off at a base of 0.7x for customers with only 1 paid product, as it represents a bigger churn risk.
-  - We then apply an additional 0.2x for each paid product above 1 (ie, 3 paid products = 1.1x)
-  - A product is counted as paid if the invoice amount for that product is greater than $200
-- Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
-  - Increase ARR for your monthly customers
-  - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
-  - Your quota will depend on your OTE
-- Commission is paid out quarterly, and in any case after an invoice is paid
-  - We don't want TAMs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
-  - For monthly customers, commission is only paid after the first 2 invoices have been paid (ie. you don't get commission due to a random spike)
-    - To clarify, this means the first 2 invoices the customer has ever paid, ie. you still get commission from 'your' month 1 if you inherit a paying monthly customer
-    - Commission is still paid out quarterly even if the customer pays monthly
-  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
-  - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commission into the above 4 buckets and how you did.
-- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either a [cross-sell opportunity](/handbook/growth/cross-selling/tracking-cross-sells) or a prepaid credit conversion) - you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+Ator has another book account that he lands on an annual credit purchase that quarter. In the first month of the quarter, they paid $8,000 on their monthly plan, and then they signed an annual credit purchase for $142,857.15 in credits. After discount, they paid PostHog $100,000. Ator realizes:
 
-> Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
->
-> If you have a customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
+- $10,000 in quota from the 10% on the annual cash paid
+- $400 in quota from the 5% on their single monthly payment that quarter
 
-If you believe there is a justifiable reason to vary these rules, then in the first instance talk them through with your team lead.  Simon (Ben as backup) will be the decider here.
+Ator is paid a total of $10,400 for that account that quarter.
 
-You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
+Ator has (yet) another book account coming up for renewal. Last year, that account spent $100,000 with PostHog. This year, they are increasing their annual credit purchase to $171,428.57. After discount, they pay PostHog $120,000. Ator realizes:
 
-Here is an illustrative example of how quota calculation works. Let's look at a customer's invoice history:
+- $12,000 in quota from the 10% on the annual cash paid
+- $1,340 in quota from the 6.7% incentive on the $20,000 increase over last year
 
-| | Month | Jan | Feb | Mar | Apr | May | Jun |
-|---|---|---|---|---|---|---|---|
-| (A) | Invoice Amount | 2300 | 2200 | 2500 | 2700 | 2800 | 3000 |
-| | Number of Products | 1 | 1 | 1 | 2 | 1 | 3 |
-| (B) | Multiplier | 0.7 | 0.7 | 0.7 | 0.9 | 0.7 | 1.1 |
-| (A × B) | Quota Invoice Amt | 1610 | 1540 | 1750 | 2430 | 1960 | 3300 |
+Ator is paid a total of $13,340 for this account.
 
-For your Q2 quota calculation:
+**Effective date example**
+A customer's billing period runs June 23 to July 23. The TAM signs the annual deal on July 20 and the contract start is set to June 23. The effective date is July 20, the later of the two, so the deal counts toward Q3 rather than the already-closed Q2.
 
-| Metric | Calculation | Result |
-|---|---|---|
-| Q2 Starting ARR | 4 × (1610 + 1540 + 1750) | 19600 |
-| Q2 Ending ARR | 4 × (2430 + 1960 + 3300) | 30760 |
-| Q2 Quota ARR Diff | 30760 − 19600 | 11160 |
+Situations where PostHog credits a customer due to circumstances outside of the TAM's control will be handled on a case by case basis.
 
-In this example, this customer increases your attainment towards your Q2 quota by $11,160. We do this same calculation for every customer in your book of business to determine the overall attainment towards your quota in a quarter.
+**During ramp**
+
+For your first three months you carry a full quota, not a reduced ramp quota. You are guaranteed 100% of your OTE as a floor, so a slow start won't cost you. In each ramp period you are paid the higher of that floor or the commission you earn on net new business you personally close. You do not get the floor and commission on top of it.
+
+Deals a previous owner signed (including ones with a future-dated start that lands in your ramp quarter) do not count toward ramp commission. The floor already covers you while you build. See the [new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions) for how the floor is prorated by start date.
 
 ### TAM book of business rules
 
-1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you and your team lead.
-2. All accounts in the `AM Managed` segment need an account plan in Vitally, which is updated and reviewed with your manager regularly.
-3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
-4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.  It may be that we need you to work on the account regardless but will treat it as a lead with the same rules as point 3 above.
-5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
-6. Nominally, you should have 15 accounts/around $1.5m in ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so you should be prepared to hand some over to another team member.
+1. Only accounts with the TAM field set in Customer Analytics will be counted towards your quota. Ben adds this manually after reviewing with you and your team lead.
+2. All accounts with the TAM field set need an account plan in Customer Analytics, which is updated and reviewed with your manager regularly.
+3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the TAM field to be set until you're happy that there is growth potential there.
+4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Ben will be the tie breaker.  It may be that we need you to work on the account regardless but will treat it as a lead with the same rules as point 3 above.
+5. Accounts which you've previously been paid quota on need to stay in your TAM-managed book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep the TAM field set for quota calculation purposes and then remove it after the quarterly calculations are complete.
+6. Nominally, you should have around 15 accounts/around $1.5m to $2m ARR in your TAM-managed book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so be prepared to rebalance with your team lead. (see [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance)). 
 7. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
-8. If you actively work to reduce a customer's spend with us by optimizing their usage, we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Simon.  To make the process easier, drop the details of your optimizations as a note on the customer record in Vitally.
+8. If you actively work to [reduce a customer's spend with us by optimizing their usage](/blog/customer-success-at-posthog#900-am-the-part-where-we-try-to-reduce-a-customers-bill), we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Ben.  To make the process easier, drop the details of your optimizations as a note on the customer record in Customer Analytics.
+9. We want you to ensure the customer has paid, and we don't want AMs to throw invoice chasing to a finance person. This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay. You should make the [failed/late payment process](/handbook/growth/sales/billing#failedlate-payments) clear to your customer, especially in the case of a severely delayed payment.
 
 > We have a bunch of accounts where they are declining for reasons that have nothing to do with a TAM’s actions. We also have a bunch where they are growing in the same way. These even each other out in the bigger picture of hundreds of accounts, if anything in favor of the latter.  If they fit the criteria for having a TAM assigned, you should be prepared to continue to manage both types of customers in your book, as churn prevention is a key part of the TAM role too.
 
@@ -175,13 +146,13 @@ You will run into questions that you don't know the answer to from time to time 
 
 - Try to solve your own problems. Deep dive the docs, ask PostHog AI, ask the rest of the sales team first - a bit of digging is a valuable opportunity for you to learn.
 - Similar to the above, don't just copy and paste questions from Slack with no context. Add some commentary - 'they have asked X, their use case is generally Y, I think the answer might be Z - is that right?'. Do some of the lifting here, rather than putting all the mental load on an engineering team.
-- If you open a ticket in Zendesk and know which team the ticket needs to go to, make sure to select "escalated" on the ticket so that it will bypass support and go straight to that team.
+- If you open a ticket in PostHog Support and know which team the ticket needs to go to, [assign the ticket to that team](/handbook/support/posthog-support#escalating-a-ticket) so that it bypasses support and goes straight to them.
 
 ## Working with customers in Slack
 
 Most of our customers use Slack, and it's a great way for us to be responsive to them. Qualifying customers and prospects can get a [shared Slack channel](/handbook/growth/sales/slack-channels), and you should set one up as early as it makes sense in your relationship with them.
 
-We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into Zendesk so our Support and Engineering teams can work on customer issues in a familiar context.
+We share channels via [Slack Connect](https://slack.com/resources/using-slack/getting-started-with-slack-connect) and add SupportHog so that both PostHog and the customer can raise support tickets directly from a Slack thread — react with the :ticket: emoji or mention `@SupportHog`. This syncs the conversation into [PostHog Support](/handbook/support/posthog-support) so our Support and Engineering teams can work on customer issues in a familiar context.
 
 See [Shared Slack channels with customers](/handbook/growth/sales/slack-channels) for the full setup steps, including channel naming, who to invite, and how to support customers who use MS Teams instead.
 

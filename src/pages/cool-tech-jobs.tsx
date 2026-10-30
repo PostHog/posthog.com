@@ -40,7 +40,6 @@ import Spinner from 'components/Spinner'
 import { useUser } from 'hooks/useUser'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { debounce } from 'lodash'
-import { Authentication } from 'components/Squeak'
 import OSTable from 'components/OSTable'
 import Editor from 'components/Editor'
 import { slugifyTeamName } from 'lib/utils'
@@ -82,6 +81,26 @@ interface ToggleFilter {
     label: string
     key: string
     appliesTo: 'company' | 'job'
+}
+
+const isPostHogCompany = (company: Company): boolean => company.attributes.name.trim().toLowerCase() === 'posthog'
+
+const getCompanyLogoUrl = (company: Company, isDark: boolean): string | undefined => {
+    if (isPostHogCompany(company)) {
+        return isDark ? '/brand/posthog-logo-white.svg' : '/brand/posthog-logo.svg'
+    }
+
+    const logoLight = company.attributes.logoLight?.data?.attributes?.url
+    const logoDark = company.attributes.logoDark?.data?.attributes?.url
+
+    return isDark && logoDark ? logoDark : logoLight || logoDark
+}
+
+const renderCompanyLogo = (company: Company, isDark: boolean, className: string): React.ReactNode => {
+    const { name } = company.attributes
+    const logo = getCompanyLogoUrl(company, isDark)
+
+    return logo ? <img className={className} src={logo} alt={name} /> : null
 }
 
 const toggleFilters: ToggleFilter[] = [
@@ -238,8 +257,7 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
                     .filter((company) => company.attributes.jobs.data.length > 0)
                     .map((company) => {
                         const { name } = company.attributes
-                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                        const logo = renderCompanyLogo(company, isDark, 'min-h-4 max-h-6 object-contain')
 
                         return (
                             <OSButton
@@ -248,13 +266,7 @@ const CompanyNavigation = ({ companies, isLoading }: { companies: Company[]; isL
                                 hover="border"
                                 className=""
                             >
-                                {logoLight || logoDark ? (
-                                    <img
-                                        className="min-h-4 max-h-6 object-contain"
-                                        src={logoDark && isDark ? logoDark : logoLight}
-                                        alt={name}
-                                    />
-                                ) : (
+                                {logo || (
                                     <div className="bg-accent rounded flex items-center justify-center">
                                         <span className="text-sm font-semibold text-muted">
                                             {name.charAt(0).toUpperCase()}
@@ -341,8 +353,7 @@ const CompanyRows = ({
             {/* Companies with jobs */}
             {companiesWithJobs.map((company, index) => {
                 const { name } = company.attributes
-                const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                const logo = renderCompanyLogo(company, isDark, 'max-w-40 mb-3 w-full')
                 const hasJobs = company.attributes.jobs.data.length > 0
 
                 const jobRows = company.attributes.jobs.data.map((job) => {
@@ -399,22 +410,14 @@ const CompanyRows = ({
                     >
                         <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
                             <div title={name} className="flex-shrink-0">
-                                {(logoLight || logoDark) && (
+                                {logo && (
                                     <>
                                         {company.attributes.url ? (
                                             <Link to={`${company.attributes.url}?utm_source=posthog`} externalNoIcon>
-                                                <img
-                                                    className="max-w-40 mb-3 w-full"
-                                                    src={logoDark && isDark ? logoDark : logoLight}
-                                                    alt={name}
-                                                />
+                                                {logo}
                                             </Link>
                                         ) : (
-                                            <img
-                                                className="max-w-40 mb-3 w-full"
-                                                src={logoDark && isDark ? logoDark : logoLight}
-                                                alt={name}
-                                            />
+                                            logo
                                         )}
                                     </>
                                 )}
@@ -497,8 +500,7 @@ const CompanyRows = ({
                     <p className="text-secondary">(Only visible to moderators)</p>
                     {companiesWithoutJobs.map((company, index) => {
                         const { name } = company.attributes
-                        const logoLight = company.attributes.logoLight?.data?.attributes?.url
-                        const logoDark = company.attributes.logoDark?.data?.attributes?.url
+                        const logo = renderCompanyLogo(company, isDark, 'max-w-40 mb-3 w-full')
 
                         return (
                             <div
@@ -508,25 +510,17 @@ const CompanyRows = ({
                             >
                                 <div className="@4xl:basis-72 flex flex-col gap-4 pt-4 px-4 @2xl:pb-4">
                                     <div title={name} className="flex-shrink-0">
-                                        {(logoLight || logoDark) && (
+                                        {logo && (
                                             <>
                                                 {company.attributes.url ? (
                                                     <Link
                                                         to={`${company.attributes.url}?utm_source=posthog`}
                                                         externalNoIcon
                                                     >
-                                                        <img
-                                                            className="max-w-40 mb-3 w-full"
-                                                            src={logoDark && isDark ? logoDark : logoLight}
-                                                            alt={name}
-                                                        />
+                                                        {logo}
                                                     </Link>
                                                 ) : (
-                                                    <img
-                                                        className="max-w-40 mb-3 w-full"
-                                                        src={logoDark && isDark ? logoDark : logoLight}
-                                                        alt={name}
-                                                    />
+                                                    logo
                                                 )}
                                             </>
                                         )}
@@ -974,28 +968,6 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     )
 }
 
-const Auth = () => {
-    return (
-        <div className="-m-4">
-            <div className="p-4">
-                <div className="bg-accent p-4 mt-0 mb-2 rounded-md border border-primary">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-            </div>
-            <div className="">
-                <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
-            </div>
-        </div>
-    )
-}
-
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt, isModerator } = useUser()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
@@ -1304,9 +1276,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         }
     }, [companyId])
 
-    return !user ? (
-        <Auth />
-    ) : !isModerator && !disclaimerConfirmed ? (
+    return !user ? null : !isModerator && !disclaimerConfirmed ? (
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
         <div>
@@ -1605,34 +1575,17 @@ const IssueWindow = () => {
     )
 }
 
-const AddAJobWindow = ({
-    companyId,
-    onSuccess,
-    onClose,
-}: {
-    companyId?: number
-    onSuccess?: () => void
-    onClose?: () => void
-}) => {
-    const { setWindowTitle, siteSettings } = useApp()
+const AddAJobWindow = ({ companyId, onSuccess }: { companyId?: number; onSuccess?: () => void }) => {
+    const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
 
     useEffect(() => {
         setWindowTitle(appWindow, 'Add a company')
-
-        return () => {
-            onClose?.()
-        }
     }, [])
 
     return (
         <ScrollArea className="min-h-0 h-full [&>div>div]:h-full">
-            <div
-                data-scheme="secondary"
-                className={`bg-primary text-primary ${
-                    siteSettings.experience === 'boring' ? 'size-full' : 'min-h-full'
-                }`}
-            >
+            <div data-scheme="secondary" className="bg-primary text-primary min-h-full">
                 <div className="p-4">
                     <CompanyForm companyId={companyId} onSuccess={onSuccess} />
                 </div>
@@ -1642,15 +1595,15 @@ const AddAJobWindow = ({
 }
 
 export default function JobsPage() {
-    const [companyId, setCompanyId] = useState<number>()
     const [filteredCompanies, setFilteredCompanies] = useState<Company[]>()
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [search, setSearch] = useState('')
     const [pendingCompaniesCount, setPendingCompaniesCount] = useState<number>(0)
-    const { addWindow } = useApp()
+    const [pendingCompanyWindow, setPendingCompanyWindow] = useState<{ companyId?: number } | null>(null)
+    const { addWindow, openSignIn, windows } = useApp()
     const { appWindow } = useWindow()
-    const { getJwt, isModerator } = useUser()
+    const { user, getJwt, isModerator } = useUser()
 
     const {
         companies: initialCompanies,
@@ -1688,23 +1641,38 @@ export default function JobsPage() {
         )
     }
 
-    const openAddAJobWindow = (companyId?: number) => {
-        addWindow(
-            <AddAJobWindow
-                newWindow
-                location={{ pathname: `cool-tech-jobs-add-a-job` }}
-                key={`cool-tech-jobs-add-a-job`}
-                companyId={companyId}
-                onSuccess={() => {
-                    mutate()
-                    fetchPendingCompaniesCount()
-                }}
-                onClose={() => {
-                    setCompanyId(undefined)
-                }}
-            />
-        )
-    }
+    const openAddAJobWindow = useCallback(
+        (companyId?: number) => {
+            if (!user) {
+                setPendingCompanyWindow({ companyId })
+                openSignIn()
+                return
+            }
+
+            addWindow(
+                <AddAJobWindow
+                    newWindow
+                    location={{ pathname: `cool-tech-jobs-add-a-job` }}
+                    key={`cool-tech-jobs-add-a-job`}
+                    companyId={companyId}
+                    onSuccess={() => {
+                        mutate()
+                        fetchPendingCompaniesCount()
+                    }}
+                />
+            )
+        },
+        [user, openSignIn, addWindow, mutate, fetchPendingCompaniesCount]
+    )
+
+    useEffect(() => {
+        if (!pendingCompanyWindow || windows.some(({ path }) => path.startsWith('community-auth-'))) return
+
+        setPendingCompanyWindow(null)
+        if (user) {
+            openAddAJobWindow(pendingCompanyWindow.companyId)
+        }
+    }, [user, windows, pendingCompanyWindow, openAddAJobWindow])
 
     return (
         <>
@@ -1785,7 +1753,7 @@ export default function JobsPage() {
                             Work at a company with great perks?{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
-                                onClick={() => openAddAJobWindow(companyId)}
+                                onClick={() => openAddAJobWindow()}
                             >
                                 Apply to get your jobs listed.
                             </button>

@@ -6,7 +6,7 @@ import Intro from "./intro.mdx"
 
 ```rust
 let mut event = Event::new("user_signed_up", "distinct_id_of_the_user");
-client.capture(event).await.unwrap();
+client.capture(event);
 ```
 
 <NamingTip />
@@ -19,7 +19,7 @@ let mut event = Event::new("user_signed_up", "distinct_id_of_the_user");
 event.insert_prop("login_type", "email").unwrap();
 event.insert_prop("is_free_trial", true).unwrap();
 
-client.capture(event).await.unwrap();
+client.capture(event);
 ```
 
 ### Batching events
@@ -30,5 +30,19 @@ To capture multiple events at once, use `capture_batch()`:
 let event1 = posthog_rs::Event::new("event 1", "distinct_id_of_user_A");
 let event2 = posthog_rs::Event::new("event 2", "distinct_id_of_user_B");
 
-client.capture_batch(vec![event1, event2], false).await.unwrap();
+client.capture_batch(vec![event1, event2], false);
 ```
+
+### Flushing events
+
+`capture` and `capture_batch` return as soon as the event is queued. A background worker batches and sends events for you, so capturing never blocks on the network. Because delivery happens in the background, flush before your program exits or buffered events may be lost:
+
+```rust
+// Send queued events now (one delivery attempt per pending batch)
+client.flush().await;
+
+// Or flush, stop the background worker, and wait for it to finish (for example, on shutdown)
+client.shutdown().await;
+```
+
+With the blocking client (`default-features = false`), call `flush()` and `shutdown()` without `.await`.

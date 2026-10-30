@@ -6,19 +6,14 @@ sidebar: Docs
 
 import { CalloutBox } from "components/Docs/CalloutBox"
 
-<CalloutBox icon="IconWarning" title="Beta feature" type="action">
-
-Device bucketing is currently in beta. JavaScript web supports it automatically. Other SDKs support it when you send the device ID as `$device_id` in person properties when evaluating flags, including with local evaluation.
-
-</CalloutBox>
-
 Device bucketing keeps feature flag values stable for anonymous and pre-login users. Instead of hashing on the user's `distinct_id`, PostHog hashes on `$device_id`, which stays the same when someone signs up, logs in, or logs out on the same browser or device.
+
 
 Use it when a flag is shown before `identify()` runs, such as signup flows, landing page experiments, and onboarding that starts before authentication. If you need the same user to get the same value across multiple devices, keep the default user bucketing instead.
 
 ## Why device bucketing exists
 
-By default, release conditions **match by user**. That means PostHog uses `distinct_id` to decide which rollout bucket or variant someone gets.
+By default, release conditions use **Properties** targeting with each condition set to **Users**. That means PostHog uses `distinct_id` to decide which rollout bucket or variant someone gets.
 
 That works well for identified users, but it can change during the transition from anonymous to identified:
 
@@ -54,7 +49,7 @@ Don't use device bucketing when you need cross-device consistency for the same i
 
 ## How to enable it
 
-When creating or editing a feature flag, change the **Match by** dropdown under **Release conditions** from **User** to **Device**.
+When creating or editing a feature flag, select **Device** under **Release conditions** instead of the default **Properties** mode.
 
 This is configured in PostHog, not in SDK code. Once the release condition matches by device, the SDK just needs access to the correct `$device_id`.
 

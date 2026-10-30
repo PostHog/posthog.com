@@ -1,0 +1,80 @@
+---
+title: OpenFeature (Python)
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+PostHog provides an official [OpenFeature](https://openfeature.dev) provider for Python, so you can evaluate PostHog feature flags through the standard OpenFeature API.
+
+- **Package:** `openfeature-provider-posthog`
+- **Import path:** `openfeature.contrib.provider.posthog`
+
+## Installation
+
+```bash
+pip install openfeature-provider-posthog
+```
+
+This installs `posthog` and `openfeature-sdk` as dependencies.
+
+## Usage
+
+Construct and configure a PostHog client, then register the provider with the OpenFeature SDK:
+
+```python
+import posthog
+from openfeature import api
+from openfeature.evaluation_context import EvaluationContext
+from openfeature.contrib.provider.posthog import PostHogProvider
+
+client = posthog.Posthog("<ph_project_api_key>", host="<ph_client_api_host>")
+
+# personal_api_key="<ph_personal_api_key>" enables local evaluation
+api.set_provider(PostHogProvider(client, default_distinct_id="anonymous"))
+
+of_client = api.get_client()
+
+context = EvaluationContext(
+    targeting_key="user_distinct_id",
+    attributes={"plan": "pro"},
+)
+
+is_enabled = of_client.get_boolean_value("my-flag", False, context)
+```
+
+You own the PostHog client lifecycle — call `client.shutdown()` when your app exits.
+
+## Evaluation context
+
+The OpenFeature evaluation context maps to PostHog's flag evaluation inputs:
+
+| OpenFeature context | PostHog |
+| --- | --- |
+| `targeting_key` | `distinct_id` (required unless `default_distinct_id` is set) |
+| `groups` attribute | groups |
+| `group_properties` attribute | group properties |
+| any other attribute | person properties |
+
+If no `targeting_key` is present and no `default_distinct_id` is configured, the provider returns your default value with `error_code = TARGETING_KEY_MISSING`.
+
+## Supported flag types
+
+| OpenFeature method | Resolves to |
+| --- | --- |
+| `get_boolean_value` | whether the flag is enabled |
+| `get_string_value` | the multivariate variant key |
+| `get_integer_value` / `get_float_value` | the variant parsed as a number |
+| `get_object_value` | the flag's JSON payload |
+
+Calling a typed getter on an incompatible flag (for example `get_string_value` on a boolean flag) returns your default value with `error_code = TYPE_MISMATCH`, per the OpenFeature spec.
+
+## Options
+
+`PostHogProvider(client, *, default_distinct_id=None, send_feature_flag_events=True)`
+
+- `default_distinct_id` — distinct ID used when the context has no `targeting_key`. Defaults to `None` (raise `TARGETING_KEY_MISSING`).
+- `send_feature_flag_events` — whether to emit `$feature_flag_called` events on each evaluation. Defaults to `True`.

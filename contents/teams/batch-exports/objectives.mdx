@@ -1,33 +1,32 @@
-# Q2 2026
+# Q4 2026
 
-## Objective 1: Unify batch exports and real-time destinations
+## Objective 1: 10% usage comes from HogQL-modeled batch exports
 
 ### Motivation
-* Different UX between batch exports and real-time destinations is confusing.
-* Single API enables better integration with other tools.
+* Understand how far can we get with HogQL as an interface for batch exports.
+* Take ownership of parts of PostHog that could be better served by batch exports.
 
 ### What we’ll ship
-* Single API for real-time destinations and batch exports.
-* Real-time destinations powered by batch exports.
+* Complete support for HogQL in scheduled and on demand batch exports.
+* Skill/MCP improvements to better direct agents to use HogQL batch exports.
 
-## Objective 2: Reduce pipeline architecture technical debt
+## Objective 2: Understand and optimize our product's growth
 
 ### Motivation
-* Each destination has different support for different features
-* Useful abstractions not implemented across destinations
+* Without knowing what's costing us:
+  * We can't optimize effectively.
+  * We can't know how to improve our pricing strategy.
 
 ### What we’ll ship
-* Scalable consumers for all destinations
-* Complexity handling across all batch export destinations (metrics, tracing, and alerting).
-* Support for new models: Split up persons into person properties and person distinct ids.
-* Shared abstractions over destination-specific types implemented everywhere.
+* Understand which areas of batch exports cost us the most.
+  * Ideally: Cost breakdown per team, batch export, and even individual runs.
+* Act on the findings to deliver cost savings.
 
-## Objective 3: Self-serve debugging
+## Objective 3: Scaling batch exports to many more customers
 
 ### Motivation
-* We want to empower users to resolve their own issues faster, without needing support from PostHog.
+* Increase confidence that our pipeline can handle 10x our current volume.
 
 ### What we'll ship
-* Exposing better metrics and logs to users.
-* MCP destinations skills.
-* More access via API to debugging tools and metrics.
+* Experiment and apply new architectures.
+* Test different file formats and/or compression algorithms.

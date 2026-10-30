@@ -14,7 +14,6 @@ author:
 category: Engineering
 tags:
   - Product updates
-  - Launch week
 ---
 
 When PostHog was born in 2020, it was a simple Python application (Django + Celery) backed by a PostgreSQL datastore. Troubleshooting was easy, while the low barrier of entry meant fast adoption and more feedback on where to take the product.

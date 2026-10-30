@@ -13,7 +13,12 @@ import { CallToAction } from 'components/CallToAction'
 export const addNextStepsStep = (
     steps: StepDefinition[],
     platformSlug?: string,
-    options?: { mappingsUrl?: string; mappingsLabel?: string; mappingsDescription?: string }
+    options?: {
+        mappingsUrl?: string
+        mappingsLabel?: string
+        mappingsDescription?: string
+        mappingsBadge?: StepDefinition['badge']
+    }
 ): StepDefinition[] => {
     // Filter out any existing verify steps from onboarding content
     const filteredSteps = steps.filter(
@@ -56,7 +61,7 @@ export const addNextStepsStep = (
         },
         {
             title: options?.mappingsLabel || 'Upload source maps',
-            badge: 'required' as const,
+            badge: options?.mappingsBadge || ('required' as const),
             content: (
                 <>
                     <p>

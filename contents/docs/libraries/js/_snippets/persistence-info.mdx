@@ -1,4 +1,4 @@
-For PostHog to work optimally, we store a small amount of information about the user on the user's browser. This ensures we identify users properly if they navigate away from your site and come back later. 
+For PostHog to work optimally, we store a small amount of information about the user on the user's browser. This ensures we identify users properly if they navigate away from your site and come back later.
 
 The information we store includes:
 
@@ -8,4 +8,4 @@ The information we store includes:
 -   Any super properties you have defined
 -   Some PostHog configuration options (e.g. whether session recording is enabled)
 
-By default, we store all this information in both a `cookie` and `localStorage`, which means PostHog can identify your users across subdomains. By default, the name of the cookie PostHog sets is `ph_<project_api_key>_posthog` and it expires after `365` days. 
+By default, PostHog uses `localStorage+cookie` persistence. It stores the full state in `localStorage` and a smaller identity and session subset in a first-party cookie. This enables PostHog to identify visitors across sibling subdomains that can access the cookie. The cookie name is `ph_<project_token>_posthog`, and it expires after `365` days.

@@ -1,6 +1,6 @@
 import React from 'react'
 import OSTable from 'components/OSTable'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import Link from 'components/Link'
 import { IconArrowUpRight } from '@posthog/icons'
 import { useApp } from '../../context/App'
@@ -13,8 +13,10 @@ import { airbrake } from '../../hooks/competitorData/airbrake'
 import { amplitude } from '../../hooks/competitorData/amplitude'
 import { appcues } from '../../hooks/competitorData/appcues'
 import { appsignal } from '../../hooks/competitorData/appsignal'
+import { arize_phoenix } from '../../hooks/competitorData/arize_phoenix'
 import { baremetrics } from '../../hooks/competitorData/baremetrics'
 import { better_stack } from '../../hooks/competitorData/better_stack'
+import { bigquery } from '../../hooks/competitorData/bigquery'
 import { braintrust } from '../../hooks/competitorData/braintrust'
 import { bugsnag } from '../../hooks/competitorData/bugsnag'
 import { chartmogul } from '../../hooks/competitorData/chartmogul'
@@ -22,6 +24,7 @@ import { chameleon } from '../../hooks/competitorData/chameleon'
 import { clarity } from '../../hooks/competitorData/clarity'
 import { clickhouse_cloud } from '../../hooks/competitorData/clickhouse_cloud'
 import { cloudflare } from '../../hooks/competitorData/cloudflare'
+import { confidentai } from '../../hooks/competitorData/confident_ai'
 import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
@@ -55,6 +58,7 @@ import { langsmith } from '../../hooks/competitorData/langsmith'
 import { launchdarkly } from '../../hooks/competitorData/launchdarkly'
 import { logrocket } from '../../hooks/competitorData/logrocket'
 import { lucky_orange } from '../../hooks/competitorData/lucky_orange'
+import { lunary } from '../../hooks/competitorData/lunary'
 import { mailerlite } from 'hooks/competitorData/mailerlite'
 import { matomo } from '../../hooks/competitorData/matomo'
 import { mixpanel } from '../../hooks/competitorData/mixpanel'
@@ -65,13 +69,17 @@ import { mutiny } from '../../hooks/competitorData/mutiny'
 import { newrelic } from '../../hooks/competitorData/newrelic'
 import { omnisend } from 'hooks/competitorData/omnisend'
 import { openreplay } from '../../hooks/competitorData/openreplay'
+import { opensearch } from '../../hooks/competitorData/opensearch'
+import { opik } from '../../hooks/competitorData/opik'
 import { optimizely } from '../../hooks/competitorData/optimizely'
 import { pendo } from '../../hooks/competitorData/pendo'
 import { piwik_pro } from '../../hooks/competitorData/piwik_pro'
 import { plausible } from '../../hooks/competitorData/plausible'
 import { posthog } from '../../hooks/competitorData/posthog'
+import { portkey } from '../../hooks/competitorData/portkey'
 import { quantum_metric } from '../../hooks/competitorData/quantum_metric'
 import { raygun } from '../../hooks/competitorData/raygun'
+import { redshift } from '../../hooks/competitorData/redshift'
 import { replay_io } from '../../hooks/competitorData/replay_io'
 import { rollbar } from '../../hooks/competitorData/rollbar'
 import { rudderstack } from '../../hooks/competitorData/rudderstack'
@@ -79,8 +87,10 @@ import { segment } from '../../hooks/competitorData/segment'
 import { sentry } from '../../hooks/competitorData/sentry'
 import { signoz } from '../../hooks/competitorData/signoz'
 import { smartlook } from '../../hooks/competitorData/smartlook'
+import { snowflake } from '../../hooks/competitorData/snowflake'
 import { split } from '../../hooks/competitorData/split'
 import { sprig } from '../../hooks/competitorData/sprig'
+import { splunk } from '../../hooks/competitorData/splunk'
 import { statsig } from '../../hooks/competitorData/statsig'
 import { stripe } from '../../hooks/competitorData/stripe'
 import { survicate } from '../../hooks/competitorData/survicate'
@@ -94,10 +104,14 @@ import { userpilot } from '../../hooks/competitorData/userpilot'
 import { userflow } from '../../hooks/competitorData/userflow'
 import { uxcam } from '../../hooks/competitorData/uxcam'
 import { vercel_analytics } from 'hooks/competitorData/vercel_analytics'
+import { victorialogs } from 'hooks/competitorData/victorialogs'
 import { vwo } from '../../hooks/competitorData/vwo'
 import { walkme } from '../../hooks/competitorData/walkme'
 import { whatfix } from '../../hooks/competitorData/whatfix'
+import { weave } from '../../hooks/competitorData/weave'
 import { zapier } from '../../hooks/competitorData/zapier'
+import { zendesk } from '../../hooks/competitorData/zendesk'
+import { intercom } from '../../hooks/competitorData/intercom'
 import { make } from '../../hooks/competitorData/make'
 import { customer_io } from '../../hooks/competitorData/customer_io'
 import { brevo } from '../../hooks/competitorData/brevo'
@@ -122,6 +136,8 @@ import { surveysFeatures } from '../../hooks/featureDefinitions/surveys'
 import { webAnalyticsFeatures } from '../../hooks/featureDefinitions/web_analytics'
 import { workflowsFeatures } from '../../hooks/featureDefinitions/workflows'
 import { logsFeatures } from 'hooks/featureDefinitions/logs'
+import { supportFeatures } from 'hooks/featureDefinitions/support'
+import { tracesFeatures } from 'hooks/featureDefinitions/traces'
 import { logs } from 'hooks/productData/logs'
 interface RowConfig {
     // Shorthand: e.g., "error_tracking.core" or "platform.deployment.self_host" or "product_analytics"
@@ -152,7 +168,10 @@ interface ProductComparisonTableProps {
 export default function ProductComparisonTable({
     competitors,
     rows,
-    width = 'auto',
+    // Fill the available width by default so small tables (e.g. two-column blog
+    // comparisons) don't collapse to their minimum content width. Wide tables
+    // still overflow and scroll, with an edge fade hinting there's more to see.
+    width = 'full',
     autoExpand = false,
     excludedSections = [],
     requireCompleteData = false,
@@ -177,6 +196,8 @@ export default function ProductComparisonTable({
         web_analytics: webAnalyticsFeatures,
         workflows: workflowsFeatures,
         logs: logsFeatures,
+        support: supportFeatures,
+        traces: tracesFeatures,
     }
 
     // Resolve nested nodes by dot-path
@@ -301,9 +322,13 @@ export default function ProductComparisonTable({
                         const section = defs[sectionKey]
                         if (!section || typeof section !== 'object') continue
 
-                        // Store both the key and description for rendering (with header)
+                        // Store both the key and description for rendering (with header).
+                        // Prefer the section's own `name` – deriving the label from the key
+                        // cannot produce an acronym or a hyphen ("ai_and_self_driving" would
+                        // read "Ai and self driving"). Every other section's name matches its
+                        // derived label, so this changes no existing table.
                         expanded.push({
-                            label: sentenceCase(sectionKey.replace(/_/g, ' ')),
+                            label: section.name || sentenceCase(sectionKey.replace(/_/g, ' ')),
                             description: section.description,
                             type: 'header',
                         })
@@ -614,8 +639,10 @@ export default function ProductComparisonTable({
         amplitude,
         appcues,
         appsignal,
+        arize_phoenix,
         baremetrics,
         better_stack,
+        bigquery,
         braintrust,
         bugsnag,
         chartmogul,
@@ -623,6 +650,7 @@ export default function ProductComparisonTable({
         clarity,
         clickhouse_cloud,
         cloudflare,
+        confidentai,
         contentsquare,
         counter,
         crazy_egg,
@@ -656,6 +684,7 @@ export default function ProductComparisonTable({
         launchdarkly,
         logrocket,
         lucky_orange,
+        lunary,
         mailerlite,
         matomo,
         mixpanel,
@@ -666,13 +695,17 @@ export default function ProductComparisonTable({
         newrelic,
         omnisend,
         openreplay,
+        opensearch,
+        opik,
         optimizely,
         pendo,
         piwik_pro,
         plausible,
         posthog,
+        portkey,
         quantum_metric,
         raygun,
+        redshift,
         replay_io,
         rollbar,
         rudderstack,
@@ -680,8 +713,10 @@ export default function ProductComparisonTable({
         sentry,
         signoz,
         smartlook,
+        snowflake,
         split,
         sprig,
+        splunk,
         statsig,
         stripe,
         survicate,
@@ -695,10 +730,14 @@ export default function ProductComparisonTable({
         userflow,
         uxcam,
         vercel_analytics,
+        victorialogs,
         vwo,
         walkme,
         whatfix,
+        weave,
         zapier,
+        zendesk,
+        intercom,
         make,
         customer_io,
         brevo,
@@ -986,12 +1025,9 @@ export default function ProductComparisonTable({
         return null
     }
 
-    const { siteSettings } = useApp()
-    const isDark = siteSettings.theme === 'dark'
+    const { location: appLocation } = useApp()
 
-    // Get current pathname - safely handle SSR
-    const currentPathname = typeof window !== 'undefined' ? window.location.pathname : ''
-
+    const currentPathname = appLocation?.pathname || ''
     // Build columns
     const columns = [
         { name: '', width: 'auto', align: 'left' as const },
@@ -1003,7 +1039,15 @@ export default function ProductComparisonTable({
                 name: (
                     <>
                         {key === 'posthog' ? (
-                            <Logo className="h-5 mx-auto w-auto max-w-full" fill={isDark ? 'white' : ''} />
+                            <>
+                                <Logo className="h-5 mx-auto w-auto max-w-full dark:hidden" width="auto" />
+                                <Logo
+                                    className="hidden h-5 mx-auto w-auto max-w-full dark:block"
+                                    variant="mono"
+                                    color="white"
+                                    width="auto"
+                                />
+                            </>
                         ) : competitorData[key]?.name ? (
                             competitorData[key].name
                         ) : (
@@ -1072,8 +1116,12 @@ export default function ProductComparisonTable({
                     </div>
                 ),
             },
+            // Cells are flex containers (OSTable rowAlignment="center"), so the column's
+            // text-center is inert on the rendered span and values pack left. Center them on
+            // the main axis so string values and ✓/✗ glyphs align the same way as the headers.
             ...competitors.map((key, index) => ({
                 content: renderCell(key, row, index),
+                className: 'justify-center',
             })),
         ]
 
@@ -1120,5 +1168,9 @@ export default function ProductComparisonTable({
         return false
     })
 
-    return <OSTable columns={columns} rows={tableRows} width={width} />
+    return (
+        <div>
+            <OSTable columns={columns} rows={tableRows} width={width} />
+        </div>
+    )
 }

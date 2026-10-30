@@ -18,10 +18,10 @@ export const themeOptions: ThemeOption[] = [
         value: 'keyboard-garden',
         background: {
             thumb: {
-                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_keyboard_garden_light_272a92dc4c.png',
-                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_keyboard_garden_dark_d8b80b34db.png',
+                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_fill,g_south_east/l_9000_hedge_light_42c729131e/c_scale,w_480/fl_layer_apply,g_south_east/9000_bg_light_07316896be.jpg',
+                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_fill,g_south_east/l_9000_hedge_dark_b36706e924/c_scale,w_480/fl_layer_apply,g_south_east/9000_bg_dark_9a32796f77.jpg',
             },
-            classes: 'wallpaper-keyboard-garden:bg-[#E1D7C2] dark:wallpaper-keyboard-garden:bg-[#333733]',
+            classes: '',
         },
     },
     {
@@ -29,9 +29,11 @@ export const themeOptions: ThemeOption[] = [
         value: 'hogzilla',
         background: {
             thumb: {
-                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_light_1b27bcadcf.png',
-                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_dark_7f240e0422.png',
+                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_pad,b_rgb:E3E1E4/9000_hogzilla_359a450fb3.png',
+                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_pad,b_rgb:2A1F5C/9000_hogzilla_359a450fb3.png',
             },
+            // Semi-transparent scrim behind labels — Hogzilla's busy artwork washes out plain white text.
+            classes: 'wallpaper-hogzilla:bg-black/50 dark:wallpaper-hogzilla:bg-black/60',
         },
     },
     {
@@ -39,10 +41,10 @@ export const themeOptions: ThemeOption[] = [
         value: 'startup-monopoly',
         background: {
             thumb: {
-                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_light_b38ca0c4e5.png',
-                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_dark_699c375497.png',
+                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_fill,g_east/9000_monopoly_light_6614a8a5d5.jpg',
+                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_fill,g_east/9000_monopoly_dark_26c85ccad8.jpg',
             },
-            classes: 'wallpaper-startup-monopoly:bg-[#FEFCED] dark:wallpaper-startup-monopoly:bg-[#1d1f27]',
+            classes: 'wallpaper-startup-monopoly:bg-black/50 dark:wallpaper-startup-monopoly:bg-black/60',
         },
     },
     {
@@ -50,40 +52,9 @@ export const themeOptions: ThemeOption[] = [
         value: 'office-party',
         background: {
             thumb: {
-                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_office_party_light_192b0c000f.png',
-                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_office_party_dark_1d95807317.png',
+                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_fill/l_office_cc4ae8675f/c_scale,w_420/fl_layer_apply,g_south_west,x_48,y_40/carpet_light_27d74f73b5.png',
+                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,h_500,c_fill/l_office_cc4ae8675f/c_scale,w_420/fl_layer_apply,g_south_west,x_48,y_40/carpet_dark_f1c9f5ce39.png',
             },
-        },
-    },
-    {
-        label: '2001 bliss',
-        value: '2001-bliss',
-        background: {
-            thumb: {
-                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_light_0b2e4ef53c.jpg',
-                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_dark_703ec033d6.jpg',
-            },
-        },
-    },
-    {
-        label: 'Parade',
-        value: 'parade',
-        background: {
-            thumb: {
-                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_parade_light_7e7662c9dd.png',
-                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_parade_dark_cc5b24c520.png',
-            },
-        },
-    },
-    {
-        label: 'Coding at night',
-        value: 'coding-at-night',
-        background: {
-            thumb: {
-                light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_coding_at_night_2df33d2f3d.png',
-                dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_coding_at_night_2df33d2f3d.png',
-            },
-            classes: 'wallpaper-coding-at-night:bg-[#54618E] dark:wallpaper-coding-at-night:bg-[#54618E]',
         },
     },
 ]

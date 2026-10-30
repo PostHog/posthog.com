@@ -4,7 +4,7 @@ date: 2025-02-20
 author:
  - ian-vanagas
 tags:
- - AI Observability
+ - ai observability
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'

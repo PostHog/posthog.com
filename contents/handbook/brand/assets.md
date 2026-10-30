@@ -5,7 +5,11 @@ showTitle: true
 hideAnchor: false
 ---
 
-> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
+<CalloutBox icon="IconInfo" title="brand.posthog.com is the source of truth" type="fyi">
+
+All approved brand assets — logos, colors, fonts, hedgehogs, and crests — live at [brand.posthog.com](https://brand.posthog.com). Download them there, or import them from the [`@posthog/brand`](https://github.com/PostHog/brand) package. This page covers usage rules and guidance. Please don't use AI art. We're quite particular about our illustrations and AI just doesn't get it right.
+
+</CalloutBox>
 
 ## Logo and brand usage for third-parties
 
@@ -34,27 +38,25 @@ Avoid pairing the logomark with the "PostHog" wordmark in regular text that isn'
 
 ## Logo
 
-If you're looking for the PostHog logo, you came to the right place. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
+Download every version of the logo from [brand.posthog.com/logo](https://brand.posthog.com/logo) — landscape, stacked, logomark, and wordmark, in gradient, print (4-color/CMYK), and mono treatments, plus padded square and circle-safe exports for avatars. Please keep the logo intact. SVG is always preferred as it will infinitely scale with no quality loss.
 
-(Images shown below have transparent backgrounds but appear here with a solid background color.)
+If you're building a PostHog UI, import the parametric `<Logo>` component from the [`@posthog/brand`](https://github.com/PostHog/brand) library rather than downloading a file.
 
-| Preview                                                                                                                             | Name           | Vector                                                     | PNG                                                                                                                             | PNG w/ padding\*                                                                                                                              |
-| ----------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| <div style="background:#EEEFE9;padding:5px 5px 0;margin-left:-5px;"><img src="/brand/posthog-logo@2x.png" width="157" /></div>      | Standard logo  | <a href="/brand/posthog-logo.svg" download>SVG</a>         | <a href="/brand/posthog-logo.png" download>PNG</a> \| <a href="/brand/posthog-logo@2x.png" download>PNG @2x</a>                 | <a href="/brand/posthog-logo-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-padded@2x.png" download>PNG @2x</a>                 |
-| <div style="background:#EEEFE9;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-black.svg)</div>                        | Dark logo      | <a href="/brand/posthog-logo-black.svg" download>SVG</a>   | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a>     | <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a>     |
-| <div style="background:#111;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-white.svg)</div>                           | Light logo     | <a href="/brand/posthog-logo-white.svg" download>SVG</a>   | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a>     | <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a>     |
-| <div style="background:#EEEFE9;display:inline-block;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logomark.svg)</div>     | Logomark       | <a href="/brand/posthog-logomark.svg" download>SVG</a>     | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a>         | <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a>         |
-| <div style="background:#EEEFE9;display:inline-block;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-stacked.svg)</div> | Logo (stacked) | <a href="/brand/posthog-logo-stacked.svg" download>SVG</a> | <a href="/brand/posthog-logo-stacked.png" download>PNG</a> \| <a href="/brand/posthog-logo-stacked@2x.png" download>PNG @2x</a> | <a href="/brand/posthog-logo-stacked-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-stacked-padded@2x.png" download>PNG @2x</a> |
+### When to use each logo
 
-\*PNGs with padding are useful when uploading the logo to a third-party service where there is limited control over padding/margin around the logo.
+-   The **standard logo** — the full-color one, with gradients — is the primary logo. Use it by default.
+-   On **dark backgrounds, always use the light logo** (the white version) — never the standard/full-color one.
+-   On **light backgrounds, prefer the standard logo**, and only reach for the **dark logo** (solid black) when a single-color mark is required.
+-   Use the **print (4-color)** version only for print or other limited-palette contexts where the gradients can't be reproduced.
+-   Use the **logomark** on its own only at small sizes — favicons, app icons — where the full lockup won't fit and the overlapping gradients would get too busy.
+-   Use a **square logomark** for avatars and integrations that require a square image. Its transparent square canvas keeps the logomark's proportions intact — never stretch the standard logomark to fill a square. Use the standard gradient version on light backgrounds, or the light solid-white version on dark backgrounds.
+-   Use the **stacked** logo for portrait or square placements where the standard (landscape) lockup is too wide.
 
-When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's face color to white when using on a dark background).
+_Never_ modify the colors in the logomark (for example, don't recolor the hedgehog's face white on a dark background — use the light logo instead).
 
-The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x logo as it will appear crisper on newer devices, tablets, and high resolution mobile devices.
+The padded square and circle-safe exports help when uploading to a third-party service that crops to a square or circle and gives no control over the margin around the logo — G2, X, LinkedIn, or Reddit profiles, for example.
 
-> **Important:** We updated our logo in 2021. (Note the square font and sharp edges on the logomark in the old version.) Please be sure to use the _correct_ version. 👇🏼
-
-![Logo usage examples](/brand/logo-usage.png)
+> **Using an older version?** The logos on [brand.posthog.com](https://brand.posthog.com/logo) come straight from the [`@posthog/brand`](https://github.com/PostHog/brand) library, so they always reflect the current mark. If you have an older PostHog logo saved locally (e.g. a square font or sharp-edged logomark), please replace it with the current version.
 
 ### Squeak
 
@@ -149,14 +151,12 @@ He should be outlined with a strong, black monoline with consistent thickness. H
 
 ## Hedgehog library
 
-For team members we keep all our currently approved hedgehogs <PrivateLink url="https://www.figma.com/file/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?type=design&node-id=0-1&mode=design&t=H3ElmuzbLMFp4qP7-0">in this Figma file</PrivateLink>. This enables us to look through the library of approved hogs, and to export them at required sizes without relying on the design team.
+All our currently approved hedgehogs are on [brand.posthog.com/hoggies](https://brand.posthog.com/hoggies). Anyone — team member or not — can browse the library and download any hog as SVG or PNG, without Figma access and without relying on the design team.
 
-Here's how:
+Team members can fall back to <PrivateLink url="https://www.figma.com/design/EqKxlSFoOCkRXCnHi4C3eE/PostHog-Brand-Book?node-id=553-1533&amp;t=pCzspik0QSSbaemg-1">the Figma brand book</PrivateLink> to export a hog at a custom size, or to grab one that hasn't synced to the library yet:
 
 1. Open the Figma file. You can manually browse, or use `Cmd + F` to search based on keywords such as 'happy', 'sad', or 'will smith'.
 2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar.
 3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
 If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests).
-
-> Non-team members can find some of the most-used hogs to download on [our press page](/media).

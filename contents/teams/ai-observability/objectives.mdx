@@ -1,50 +1,67 @@
-### Q2 2026 objectives
+### Q4 2026 objectives
 
-#### Goal 1: Agent-first AI Observability
+#### Objective 1: Finish the UI redesign <TeamMember name="Carlos Marchal" photo />
 
-*Description*: Make AI Observability usable directly from agents and developer workflows, not just through the product UI.
+**Motivation:** Every tab in the core tracing product should help users find issues with their AI agents and features. The redesign will make these tabs more useful and provide a consistent experience across the product.
 
-*What we will ship*:
-- **MCP tools and skills** - expose core AI Observability workflows through MCP tools and reusable skills
-- **PostHog AI integration** - bring AI Observability capabilities directly into PostHog AI workflows
+**What we'll ship:**
 
-#### Goal 2: Eval experience and reliability
+- **UI redesign** – redesign all tabs in the core tracing product around finding issues with AI agents and features, with consistent navigation and interactions
+- **Matching MCP tools and skills** – add tools and skills that mirror the new UI pages, so coding agents can find the same high-priority issues with AI agents and features through MCP
 
-*Description*: Make evaluations easier to run and give teams clearer visibility into where their AI systems fail.
+#### Objective 2: Roll out offline evals <TeamMember name="Radu Raicea" photo />
 
-*What we will ship*:
-- **Trace-level evaluations** - run evaluations directly against traces
-- **Session-level evaluations** - extend evaluations to broader user and agent sessions where it makes sense
-- **Improve observability of failures** - show errors more transparently
+**Motivation:** Offline evals shipped internally in Q3. We now need to roll them out to external users, iterate on their feedback, and reach general availability.
 
-#### Goal 3: Prompt management improvements
+**What we'll ship:**
 
-*Description*: Make prompts easier to organize, scope, and connect to experimentation.
+- **External rollout and iteration** – roll out offline evals to external users and improve the experience based on their feedback
+- **Billing and data retention** – add billing support and apply data retention policies to offline evaluation data
+- **General availability** – bring offline evals to general availability after the external rollout and iteration
 
-*What we will ship*:
-- **Prompts and experiments integration** - tighter connections between prompt workflows and experimentation
-- **Prompt tags** - tag prompts and fetch them by tag for better organization
-- **Private project API keys** - switch prompt management from personal API keys to scoped, private project API keys so prompts aren't tied to an individual user's account
+#### Objective 3: Multimodal general availability <TeamMember name="Carlos Marchal" photo />
 
-#### Goal 4: Reliability and performance
+**Motivation:** Multimodal ingestion and trace views are available. We need to make them generally available with clear limits and pricing, and support large text content too.
 
-*Description*: Continue improving the speed, resilience, and overall quality of AI Observability, with a particular focus on trace-heavy workflows.
+**What we'll ship:**
 
-*What we will ship*:
-- **Trace and platform improvements** - ongoing improvements to the speed, resilience, and overall quality of core AI Observability workflows
+- **General availability** – finalize the cap and pricing for multimodal content
+- **Large text content** – extend multimodal storage and ingestion support to large text inputs and outputs
 
-#### Goal 5: Trace and session UI
+#### Objective 4: Query and loading optimization
 
-*Description*: Revamp the single trace and session experience for modern agentic use cases.
+**Motivation:** Slow queries and loading times make investigations frustrating. We need improvements in both the UI and the underlying queries.
 
-*What we will ship*:
-- **Single trace UI refresh** - modernize the trace experience for agent-first workflows
-- **Session UI improvements** - bring the same quality bar to session-level investigation
-- **Custom message parsers** - define parsers for different agent and LLM message structures
+**What we'll ship:**
 
-#### Goal 6: Cluster migration
+- **UI optimizations** – improve loading performance in the UI <TeamMember name="Carlos Marchal" photo />
+- **Query performance investigation** – investigate lower-level speedups for slow queries <TeamMember name="Radu Raicea" photo />
 
-*Description*: Finish migrating to the new `ai_events` cluster architecture.
+#### Objective 5: Useful clusters <TeamMember name="Radu Raicea" photo />
 
-*What we will ship*:
-- **`ai_events` cluster migration** - migrate to new architecture, which is optimized for point lookups of traces
+**Motivation:** Clusters need to surface useful, actionable findings, and their cost needs to make sense for the product.
+
+**What we'll ship:**
+
+- **Opt-in clusters** – make clustering opt-in
+- **Customizable summarization prompts** – give teams control over how their traces are summarized for clustering
+- **Richer cluster centroids** – enrich centroids with evaluation results and show how they evolve over time
+- **Pricing exploration** – explore pricing that makes clustering sustainable
+
+#### Objective 6: Online evals improvements <TeamMember name="Bernat Torres" photo />
+
+**Motivation:** Teams need evaluations that go beyond boolean results, work with multimodal content, and make the results easy to understand.
+
+**What we'll ship:**
+
+- **More output types** – support categorical, multi-categorical, and numerical evaluation results
+- **Multimodal evaluations** – evaluate multimodal content
+- **Results reporting** – improve the UI for reporting evaluation results
+
+#### Objective 7: Use case / agent primitive <TeamMember name="Bernat Torres" photo />
+
+**Motivation:** Teams need to distinguish between the different use cases and agents in their product to understand their behavior.
+
+**What we'll ship:**
+
+- **Use case / agent primitive** – introduce a way to organize AI Observability data by use case or agent

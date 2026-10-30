@@ -4,6 +4,8 @@ import SEO from 'components/seo'
 import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
 import SourceConfiguration from 'components/Product/Sources/Configuration'
+import SourceTables from 'components/Product/Sources/Tables'
+import WarehouseWizardHint from 'components/WarehouseWizardHint'
 import { getProseClasses } from '../constants'
 
 interface SourceField {
@@ -13,6 +15,15 @@ interface SourceField {
     required: boolean
     placeholder: string
     caption: string
+}
+
+interface SourceTable {
+    name: string
+    label: string
+    description: string
+    sync_methods: string[]
+    incremental_fields: string[]
+    primary_keys: string[]
 }
 
 export default function DataWarehouseSource({
@@ -25,12 +36,12 @@ export default function DataWarehouseSource({
             icon_url: string
             caption: string
             permissionsCaption: string
-            beta: boolean
             sourceFields: SourceField[]
+            tables: SourceTable[]
         }
     }
 }): JSX.Element {
-    const { sourceId, name, icon_url, caption, permissionsCaption, beta, sourceFields } = data.postHogSource
+    const { sourceId, name, icon_url, caption, permissionsCaption, sourceFields, tables } = data.postHogSource
 
     return (
         <>
@@ -39,10 +50,8 @@ export default function DataWarehouseSource({
                 <div className="flex items-center space-x-2">
                     <img src={icon_url} alt={name} className="w-10 h-10" />
                     <h1 className="m-0">{name}</h1>
-                    {beta && (
-                        <span className="text-xs font-semibold px-2 py-0.5 rounded bg-blue/10 text-blue">Beta</span>
-                    )}
                 </div>
+                <WarehouseWizardHint className="my-4" />
                 <div className={getProseClasses('base')}>
                     <p>
                         Connect {name} to PostHog to sync your data into the PostHog data warehouse for analysis and
@@ -80,6 +89,9 @@ export default function DataWarehouseSource({
                             <strong>Import</strong>
                         </li>
                     </ol>
+
+                    <h2>Supported tables</h2>
+                    <SourceTables tables={tables} />
                 </div>
             </ReaderView>
         </>
@@ -94,7 +106,6 @@ export const query = graphql`
             icon_url
             caption
             permissionsCaption
-            beta
             sourceFields {
                 name
                 label
@@ -102,6 +113,14 @@ export const query = graphql`
                 required
                 placeholder
                 caption
+            }
+            tables {
+                name
+                label
+                description
+                sync_methods
+                incremental_fields
+                primary_keys
             }
         }
     }

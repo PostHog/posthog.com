@@ -39,7 +39,7 @@ We have two repos to centralize and document private internal communication. The
 
 ### Company Internal
 
-Repository can be found in https://github.com/PostHog/company-internal
+Repository can be found in <PrivateLink url="https://github.com/PostHog/company-internal">https&#58;//github.com/PostHog/company-internal</PrivateLink>
 
 Documents any company-wide information that can't be shared publicly within People, Ops, Legal, Finance or Strategy.
 
@@ -67,11 +67,11 @@ For company-related issues that _can_ be discussed publicly, these should go in 
 
 ### Product Internal
 
-Repository can be found in https://github.com/PostHog/product-internal
+Repository can be found in <PrivateLink url="https://github.com/PostHog/product-internal">https&#58;//github.com/PostHog/product-internal</PrivateLink>
 
 Contains internal information related to the PostHog product. Documents any non-public information (as established in these guidelines) that specifically relates to engineering, product, growth or design.
 
-This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldy. More context on [this decision](https://github.com/PostHog/company-internal/issues/262).
+This repository was introduced to aid maintenance and day-to-day usage of internal repositories. Having these discussions together with the company-wide information proved unwieldy. More context on <PrivateLink url="https://github.com/PostHog/company-internal/issues/262">this decision</PrivateLink>.
 
 <blockquote>
 Please be sure to read the README of the repo for guidelines on how to file specific issues.
@@ -158,12 +158,9 @@ Also keep in mind that, as an open source platform, PostHog has contributors who
 
 **Keeping up with what we ship**
 
-We recommend everyone at PostHog joins these two channels to stay current on what's shipped and what's coming:
+We recommend everyone at PostHog joins <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT"><code>#changelog</code></PrivateLink> to stay current on what's shipped. It's owned by the [Wizard & Docs team](/teams/wizard-and-docs) and updates constantly as PRs merge.
 
-- [`#changelog`](https://posthog.slack.com/archives/C099B0YCULT) — what's just shipped. Owned by the [Docs & Wizard team](/teams/docs-wizard). Updates constantly as PRs merge.
-- [`#coming-soon`](https://posthog.slack.com/archives/C0B5QBS29QU) — what's shipping soon. Owned by the [Marketing team](/teams/marketing). Posts a daily digest.
-
-Both channels are powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into the relevant channel. PR authors can opt in or out manually via the *Publish to changelog?* and *Alert Sales and Marketing teams?* checkboxes on the `posthog/posthog` PR template, or via the `@posthog` Slack app. See [how to publish changelog](/handbook/docs-and-wizard/how-to-publish-changelog) for more detail.
+The channel is powered by agentic workflows that scan merged PRs and feature flag changes and summarize them into it. PRs that are still behind a feature flag stay out, based on the *Release status* section of the `posthog/posthog` PR template. See [how to publish changelog](/handbook/wizard-and-docs/how-to-publish-changelog) for more detail.
 
 **Slack etiquette**
 
@@ -198,9 +195,9 @@ We mainly use Google Docs to capture internal information like meeting notes or 
 
 Please avoid using presentations for internal use. They are a poor substitute for a discussion on an issue. They lack the depth, and don't add enough context to enable asynchronous work.
 
-When giving a talk which requires a presentation, use [Pitch](https://pitch.com) to build your slides. (It offers more control over design than Google Slides.) They also have a [desktop app](https://pitch.com/download). We don't (yet) have templates configured, but you can draw from existing slides in other presentations - just copy/paste into your own presentation and modify accordingly. If you'd like assistance with slide design (or using Pitch), talk to Cory.
+When giving a talk which requires a presentation, use [Pitch](https://pitch.com) to build your slides. (It offers more control over design than Google Slides.) They also have a [desktop app](https://pitch.com/download). We don't (yet) have templates configured, but you can draw from existing slides in other presentations - just copy/paste into your own presentation and modify accordingly. If you'd like assistance with slide design (or using Pitch), ask in the `#team-graphics` Slack channel.
 
-James (H) and Cory are admins on the Pitch account. Because Pitch charges per seat, we remove users who only need periodic access but can easily re-add when needed.
+James (H) is an admin on the Pitch account. Because Pitch charges per seat, we remove users who only need periodic access but can easily re-add when needed.
 
 ### Email
 
@@ -227,7 +224,7 @@ We use RFCs to communicate and gather feedback on a decision. RFCs are useful be
 Here are the steps for an RFC:
 
 1. Identify a problem and a decision to be made
-2. Create an RFC as a pull request using one of the [RFC templates](https://github.com/PostHog/requests-for-comments-internal/tree/main/_TEMPLATES).
+2. Create an RFC as a pull request using one of the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/tree/main/_TEMPLATES">RFC templates</PrivateLink>.
     - Using a template isn't a requirement, though it is a helpful and recommended starting place if you haven't written many RFCs here before. You can also get inspiration from other RFCs, as many have different sections and styles depending on the type of thing being discussed.
 3. Share the RFC:
     - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.

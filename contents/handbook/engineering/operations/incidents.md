@@ -111,17 +111,17 @@ Examples
 
 When an incident is declared, the person who raised the incident is the incident lead. It’s their responsibility to:
 
-- Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a [workflow](https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51) which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
+- Make sure the right people join the call. This includes the current on-call person (@on-call-global in Slack) and the team responsible for the alert (we have a <PrivateLink url="https://app.incident.io/posthog/settings/workflows/01K7PVWXBB1EWRJB24BBEHYA51">workflow</PrivateLink> which will try to add these people automatically). Optionally, add people from Infra and [the feature owner](/handbook/engineering/feature-ownership) and Support. Product Marketers can assist in running communications if required.
 - Take notes in the incident channel. This should include timestamps, and is a brain dump of everything that we know, and everything that we are or have tried. This will give us much more of an opportunity to learn from the incident afterwards.
 - Update the [status page](#the-posthog-status-page). If the incident happens during business hours, the incident should have a <SmallTeam slug="support" /> [watcher](https://posthog.com/handbook/support/support-incident-response#when-an-incident-is-declared). Support can help review the messaging for clarity. The status page can be updated from:
     - (recommended) the incident Slack channel using `/incident statuspage` (`/inc sp`)
-    - the [status page area](https://app.incident.io/posthog/status-pages/01K71VKZT2KS9HHRMKVX7X1ZP4/overview/now) of the incident.io dashboard (only recommended for corrections/modifications - Slack tooling provides better context)
+    - the <PrivateLink url="https://app.incident.io/posthog/status-pages/01K71VKZT2KS9HHRMKVX7X1ZP4/overview/now">status page area</PrivateLink> of the incident.io dashboard (only recommended for corrections/modifications - Slack tooling provides better context)
 
 The incident lead role is not responsible for fixing the incident, they're responsible for managing it. Sometimes that will be the same person. But if it is too much work for one person, hand over the incident lead role to someone else not actively working on the fix.
 
 Sometimes, customer communication is required. In this case, the incident lead can [ask for a comms lead to support the responding team](/handbook/marketing/incident-comms). The best way to do this is to ask for support in the incident channel and use the `@all-marketers` group tag. Don't be shy. 
 
-[You can find further production runbooks + specific strategies for debugging outages here (internal)](https://runbooks.posthog.com)
+<PrivateLink url="https://runbooks.posthog.com">You can find further production runbooks + specific strategies for debugging outages here (internal)</PrivateLink>
 
 ### Force-merging a fix
 
@@ -155,23 +155,15 @@ In the case that we need to update a _specific_ customer, such as when an indivi
 
 - Look up the customer's org in Vitally to see if the org has an Account Exec assigned (`PostHog Default Dashboard` / righthand column, scroll down to `Key Roles`.) If so, let the AE know about the situation early.
 - Ensure you are always contacting the admins of the impacted organization
-- Communication is best done through Zendesk. It's usually best for the customer's assigned person (check Vitally), or the Support team, to create tickets and handle the communication for you, but don't wait if it's really urgent. 
+- Communication is best done through PostHog Support. It's usually best for the customer's assigned person (check Vitally), or the Support team, to create tickets and handle the communication for you, but don't wait if it's really urgent. 
 - Before sending any comms, check with the incident lead. Then, share a ticket link in the incident channel. 
 - If action is needed, it's better to take that action and inform the user than to ask the user to do it.
 - If you're not able to take the required action, give the user deadlines for the changes they need to do and explain what will happen if they don't meet the deadline.
 - Try to keep all communication on a single ticket, with all relevant parties.
 
-In the case that we need to temporarily limit a _specific_ customer's access to any functionality (e.g. temporarily prevent them from using an endpoint) as a result of certain usage resulting in an incident, we need to make sure we put an alert on their Zendesk tickets.  This will make sure that anyone working on a ticket from the org will know what's happening with the org before replying (even if we've already reached out to the org, some folks at the org may not be aware, and so may open a support ticket.)
+In the case that we need to temporarily limit a _specific_ customer's access to any functionality (e.g. temporarily prevent them from using an endpoint) as a result of certain usage resulting in an incident, we need to make sure that anyone working on a ticket from the org will know what's happening with the org before replying (even if we've already reached out to the org, some folks at the org may not be aware, and so may open a support ticket.)
 
-You'll just need to set the name of the org in an existing trigger in Zendesk, then reverse that change when the org's full access has been restored:
-
-1. After Logging into Zendesk, go to the [admin center](https://posthoghelp.zendesk.com/admin/home)
-2. In the left column, expand `Objects and rules` and click on `Triggers` (under "Business rules")
-3. On the Triggers page, expand `Housekeeping` and click on `Add alert for org with special-handling`
-4. Under `Conditions`, the last condition is: `Organization > Organization` `Is` `PostHog`. Change `PostHog` to the name of organization who has had their access limited as a result of the incident. (Click on "PostHog" and then start typing to filter and find the org name, then click on it)
-5. Scroll to the bottom of the page and click the `Save` button
-
-Once the org has had their full access restored, repeat the steps above, but this time put `PostHog` back in the last condition, and remember to `Save` the change.
+Post in #team-support with the org name and what's been limited — the support team will make sure tickets from that org are flagged so anyone replying is aware. Once the org's full access has been restored, let #team-support know so the flag can be removed.
 
 ## When does an incident end?
 

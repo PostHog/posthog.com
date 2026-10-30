@@ -27,13 +27,13 @@ The answer? A lot.
 
 Let's start with a big one.
 
-You could use [Amplitude](/blog/best-amplitude-alternatives) for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, [Optimizely](/blog/best-optimizely-alternatives) for testing, and Redshift for your data warehouse – these are sensible choices.
+You could use [Amplitude](/compare/best-amplitude-alternatives) for product analytics, Hotjar for session recording, Flagsmith for feature control, Segment as your customer data platform, [Optimizely](/compare/best-optimizely-alternatives) for testing, and Redshift for your data warehouse – these are sensible choices.
 
 But you can replace some (or even all) of them with just PostHog.
 
 We've built PostHog so companies don't have to run multiple services to get the insights they need. 
 
-[PostHog Cloud](/pricing) delivers a complete set a tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
+[PostHog Cloud](/pricing) delivers a complete set of tools to help you build better products, while our integration with numerous data platforms means many of our customers end up ditching products like Segment for organizing and syncing customer data. 
 
 And if you [self-host PostHog](/docs/self-host), you get a built-in data warehouse based on ClickHouse into the bargain. 
 
@@ -183,7 +183,7 @@ This guy gets it.
 
 PostHog is an open source platform and one of the key benefits is you don't have to wait for us to build a specific integration you need. You can build it yourself. 
 
-[The PostHog App Store](/apps) has numerous examples of useful apps built by our community, such as [URL Normalizer](/apps/url-normalizer) (thanks to Mark Bennett), the [Property Filter](/apps/property-filter) app (thanks to Lukas Kahwe Smith and Christian), and the [User Agent Populator](/apps/user-agent-populator) (thanks to Weyert).
+[The PostHog App Store](/apps) has numerous examples of useful apps built by our community, such as [URL Normalizer](/docs/data-pipelines/transformations/template-url-normalization) (thanks to Mark Bennett), the [Property Filter](/docs/data-pipelines/transformations/template-filter-properties) app (thanks to Lukas Kahwe Smith and Christian), and the [User Agent Populator](/docs/data-pipelines/transformations/template-user-agent) (thanks to Weyert).
 
 There's no shortage of official PostHog apps, too. We've built over 40 apps and integrations so far, including import and export apps for most of the popular data warehouses on the market. 
 
@@ -193,7 +193,7 @@ Don't fancy building your own? Don't hesitate to suggest one on the [PostHog rep
 
 ![posthog insight subscriptions](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/subscriptions.png)
 
-You don't need to login to PostHog everyday to get insights. Instead, setup your most valuable insights and dashboards, and then get them sent to your inbox on any schedule and time to suit you. You can also send updates to multiple addresses, which is ideal for keeping stakeholders up-to-date.
+You don't need to log in to PostHog every day to get insights. Instead, setup your most valuable insights and dashboards, and then get them sent to your inbox on any schedule and time to suit you. You can also send updates to multiple addresses, which is ideal for keeping stakeholders up-to-date.
 
 Coming soon: Slack channel subscriptions!
 
@@ -223,7 +223,7 @@ We created the [GeoIP Enricher](/apps/geoip-enrichment) app to enhance events an
 
 But what if you want geographic data, but don't want to collect more personally identifiable IP data? 
 
-Enter the [Property Filter](/apps/property-filter) app, which was built by PostHog users Witty Works so they [could collect country data in a privacy-friendly way](/tutorials/property-filter).
+Enter the [Property Filter](/docs/data-pipelines/transformations/template-filter-properties) app, which was built by PostHog users Witty Works so they [could collect country data in a privacy-friendly way](/tutorials/property-filter).
 
 ## 21. Visualize user behavior using the PostHog Toolbar
 

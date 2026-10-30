@@ -1,0 +1,7 @@
+extends: existence
+message: "Don't put a comma after '%s'. Write 'i.e.' or 'e.g.' with no comma after it."
+link: https://posthog.com/handbook/content/posthog-style-guide
+level: warning
+nonword: true
+tokens:
+    - '\b(?:i\.e|e\.g)\.,'

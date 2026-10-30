@@ -1,28 +1,253 @@
 import React from 'react'
-import { IconDatabase } from '@posthog/icons'
+import {
+    IconChat,
+    IconConfetti,
+    IconCursorClick,
+    IconDatabase,
+    IconEye,
+    IconInfo,
+    IconList,
+    IconMagic,
+    IconMessage,
+    IconRocket,
+    IconSparkles,
+} from '@posthog/icons'
 import Link from 'components/Link'
+import { getTool } from '../../data/tools'
+import { applications, GetAccess, topFeatures } from './data_warehouse/slides'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.
 
+const YES = true
+const NO = false
+
 export const dataWarehouse = {
-    parentIcon: 'dataWarehouse',
+    ...getTool('data_warehouse'),
     Icon: IconDatabase,
-    name: 'Managed warehouse', // Query & visualize data
-    handle: 'data_warehouse',
     type: 'data_warehouse',
-    slug: 'data-stack/managed-warehouse',
+    categoryName: 'Sources',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'data',
-    status: 'beta',
+    // The product lives at /warehouse, but its docs live at /docs/data-warehouse.
+    docsSlug: 'data-warehouse',
+    forumTag: 'data-warehouse',
+    teamSlug: 'warehouse',
+    // The Learn tab shows only the "Ask a quick question" part of the Data Stack pocket guide.
+    pocketGuideVolume: 'data-stack',
+    pocketGuideSection: 'Ask a quick question',
+    // Each of those chapters is a question, so the full title says more than the short label.
+    learnNavFullTitles: true,
     seo: {
-        title: 'Managed DuckDB warehouse - PostHog',
-        description: 'Fast, scalable, and easy-to-use data warehouse managed by PostHog.',
+        title: 'Warehouse – All your data, one warehouse',
+        description:
+            'A fully managed warehouse next to your PostHog data. Sync Stripe, your CRM, and Postgres, then query everything with SQL, plain English, or your agent.',
     },
     overview: {
-        title: 'Query & visualize product and third party data together',
-        description: 'Unify and query data from any source and analyze it alongside your product data.',
+        title: 'All your data, one warehouse',
+        description:
+            "Your own database for product and business data, with its own hostname, credentials, and storage. It's in beta – get in touch and we'll get you set up.",
+        eli5: (
+            <>
+                <p>
+                    PostHog already syncs Stripe, HubSpot, Postgres, and the rest of your stack, so you can query it
+                    next to your events. The Warehouse goes one step further: it's an actual database, with its own
+                    hostname, credentials, and storage, holding your product data and business data side by side.
+                </p>
+                <p>
+                    Point Metabase, a notebook, or a scheduled job at it, build your own tables in it, and run heavy
+                    queries without slowing down PostHog. It's the warehouse you'd otherwise set up in Snowflake or
+                    BigQuery, without the pipeline to get your product data into it.
+                </p>
+                <p>
+                    PostHog’s AI features can use it as context, so asking "why did conversion drop?" comes back with
+                    the revenue impact, the cohorts affected, and what those users have in common.
+                </p>
+            </>
+        ),
         textColor: 'text-white', // tw
+    },
+    // The warehouse is a sales-led beta, so the hero sends people to sales instead of signup.
+    ctaButtons: {
+        primary: { label: 'Contact sales', to: '/talk-to-a-human' },
+        secondary: { label: 'Read the docs', to: '/docs/data-warehouse/warehouse' },
+    },
+    productMenu: [
+        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'eli5',
+            name: 'What does it do?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconInfo className="size-4" />,
+        },
+        {
+            slug: 'use-cases',
+            name: 'Who is it for?',
+            hideFromNav: true,
+            group: 'divided',
+            icon: <IconMagic className="size-4" />,
+        },
+        {
+            slug: 'applications',
+            name: 'How do I use it?',
+            group: 'divided',
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
+        },
+        {
+            slug: 'top-features',
+            name: 'Top features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures },
+        },
+        { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },
+        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        {
+            slug: 'feature-comparison',
+            name: 'Feature comparison',
+            group: 'divided',
+            icon: <IconList className="size-4" />,
+        },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        {
+            slug: 'get-access',
+            name: 'Get access',
+            group: 'divided',
+            icon: <IconRocket className="size-4" />,
+            component: GetAccess,
+        },
+    ],
+    hogs: {
+        default: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
+            alt: 'A hedgehog tending the warehouse',
+        },
+        mobileHog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
+            alt: 'A hedgehog tending the warehouse',
+        },
+    },
+    useCases: {
+        rows: [
+            [
+                'Product Engineers',
+                'Join product events to production tables without building a pipeline, and answer "who\'s actually using this?" in one query',
+            ],
+            [
+                'Data Engineers',
+                'Get Stripe, CRM, and Postgres data landed and kept in sync with incremental syncs and Postgres CDC',
+            ],
+            [
+                'PMs',
+                'See which features correlate with expansion and churn, and which experiment wins turned into revenue',
+            ],
+            [
+                'Finance & RevOps',
+                'Break MRR, churn, and expansion down by product behavior, plan, and acquisition channel',
+            ],
+            [
+                'Growth & Marketing',
+                'Follow a signup from first touch to CRM deal stage to paid, and see where the funnel leaks',
+            ],
+        ],
+    },
+    ai: {
+        intro: 'Ask PostHog AI any question you want about your data.',
+        copyPrompts: true,
+        groups: [
+            {
+                title: 'Revenue',
+                prompts: [
+                    'Which features do our highest-MRR customers use most?',
+                    'Which behaviors in the first 14 days predict a customer upgrading?',
+                ],
+            },
+            {
+                title: 'Experiments',
+                prompts: [
+                    "Did the winning variant of last month's pricing experiment increase revenue?",
+                    'Why does this variant perform better in Europe than in the US?',
+                ],
+            },
+            {
+                title: 'Retention',
+                prompts: [
+                    'Did the users who completed onboarding in September still have an active subscription 60 days later?',
+                    'Which accounts have usage dropping and a renewal in the next 30 days?',
+                ],
+            },
+            {
+                title: 'Funnels & CRM',
+                prompts: [
+                    'Where does the funnel from signup to closed-won deal lose the most people?',
+                    'Which HubSpot lead sources turn into accounts that stick around?',
+                ],
+            },
+        ],
+    },
+    /**
+     * Honest comparison against mature cloud warehouses. Every cell was checked against
+     * vendor docs in October 2026 – re-check before changing a value.
+     * Values are in column order: PostHog, BigQuery, Snowflake, Redshift.
+     */
+    comparison: {
+        companies: [
+            { name: 'PostHog', key: 'posthog' },
+            { name: 'BigQuery', key: 'bigquery' },
+            { name: 'Snowflake', key: 'snowflake' },
+            { name: 'Redshift', key: 'redshift' },
+        ],
+        rows: [
+            { label: 'Setup', description: 'Getting data in and keeping it there' },
+            {
+                label: 'Product analytics data included',
+                description: 'Events and persons land automatically',
+                values: [YES, 'GA4 export', NO, NO],
+            },
+            {
+                label: 'Events in near real time',
+                description: 'New events land within minutes of capture',
+                values: ['US Cloud', 'GA4 streaming export', NO, NO],
+            },
+            {
+                label: 'Serverless compute',
+                description: 'Compute starts on demand, with no cluster to manage',
+                values: [YES, YES, 'You size warehouses', 'Serverless option'],
+            },
+            { label: 'Built-in connectors', description: 'Native sources, without a third-party ELT tool' },
+            { label: 'Stripe', values: [YES, 'Preview', NO, NO] },
+            { label: 'HubSpot', values: [YES, 'Preview', YES, NO] },
+            { label: 'Salesforce', values: [YES, YES, YES, YES] },
+            {
+                label: 'Postgres CDC',
+                description: 'Row-level changes in near real time',
+                values: ['Alpha', YES, YES, YES],
+            },
+            { label: 'Querying', description: 'Asking questions of your data' },
+            { label: 'SQL editor', values: [YES, YES, YES, YES] },
+            {
+                label: 'Plain-English questions',
+                description: 'Ask in natural language, get SQL back',
+                values: [YES, YES, YES, YES],
+            },
+            {
+                label: 'Machine learning in the warehouse',
+                description: 'Train or run models where the data lives',
+                values: [NO, YES, YES, YES],
+            },
+            { label: 'In the product', description: 'Using warehouse data without writing SQL' },
+            {
+                label: 'Filter and break down insights by warehouse data',
+                description: 'For example by Stripe plan or CRM deal stage',
+                values: [YES, NO, NO, NO],
+            },
+            {
+                label: 'Experiments measured on warehouse data',
+                description: 'For example revenue from Stripe',
+                values: [YES, NO, NO, NO],
+            },
+        ],
     },
     screenshots: {
         overview: {
@@ -44,7 +269,7 @@ export const dataWarehouse = {
         classes: 'absolute bottom-0 right-0 max-w-[140px]',
     },
     slider: {
-        marks: [1000000, 10000000, 100000000, 1000000000],
+        marks: [1000000, 100000000, 1000000000],
         min: 1000000,
         max: 1000000000,
     },
@@ -53,9 +278,9 @@ export const dataWarehouse = {
     addonSliders: [
         {
             key: 'data_warehouse_historical',
-            label: 'Data warehouse historical syncs',
+            label: 'Historical syncs',
             sliderConfig: {
-                marks: [1000000, 10000000, 100000000, 1000000000, 10000000000],
+                marks: [1000000, 1000000000, 10000000000],
                 min: 1000000,
                 max: 10000000000,
             },
@@ -299,7 +524,8 @@ export const dataWarehouse = {
         {
             title: 'External data sources',
             headline: 'Query PostHog alongside business data',
-            description: 'Join events with data from Stripe, HubSpot, databases, and more in a single query.',
+            description:
+                'Join events with data from Stripe, HubSpot, databases, and more in a single query – so agents have all your context in one place to act on.',
             features: [
                 {
                     title: 'Data warehouse',
@@ -461,19 +687,19 @@ export const dataWarehouse = {
     pairsWith: [
         {
             slug: 'product-analytics',
-            description: 'Analyze data from any source independently, or alongside product data.',
-        },
-        {
-            slug: 'feature-flags',
-            description: 'Use synced data to toggle feature flags, trigger A/B experiments, and more.',
+            description: 'Break down funnels, trends, and retention by plan, MRR, or deal stage',
         },
         {
             slug: 'experiments',
-            description: 'You can use data warehouse data as primary or secondary metrics in experiments.',
+            description: 'Measure experiments on revenue, not just clicks',
         },
         {
-            slug: 'docs/sql',
-            description: 'Create entirely custom queries, join sources, and get the answers you need.',
+            slug: 'context-warehouse/reverse-etl-export',
+            description: 'Send warehouse-enriched data to the rest of your stack',
+        },
+        {
+            slug: 'endpoints',
+            description: 'Turn any warehouse query into an API',
         },
     ],
     presenterNotes: {
@@ -488,7 +714,7 @@ export const dataWarehouse = {
         pricing:
             "1 million rows sync free every month, then it's simple per-row pricing. Compare that to Fivetran who charges thousands per month! We're 10x cheaper because we built for product teams, not enterprise IT. We grow with you vs. trying to lock you in with value-based pricing.",
         'comparison-summary':
-            'Traditional data warehouses (Snowflake, BigQuery) require data teams. ETL tools (Fivetran, Stitch) just move data around. We do both - sync and analyze in one place. Perfect for product teams who need answers, not infrastructure.',
+            "Traditional data warehouses (Snowflake, BigQuery) require data teams. ETL tools (Fivetran, Stitch) just move data around. We do both – sync and analyze in one place. And because all your product data lives together, agents can query it and act on it – it's the context that makes your product self-driving. Perfect for product teams who need answers, not infrastructure.",
         'feature-comparison':
             "We don't have every connector Fivetran has. We don't need Snowflake's scale. What we have: dead-simple setup, built-in analytics, and it works with all your PostHog data. For most teams, that's exactly enough.",
         docs: "Step-by-step guides for each integration. Common query patterns documented. Real examples like 'revenue per feature' and 'support ticket impact on churn.' No data engineering degree required.",

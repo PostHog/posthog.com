@@ -29,21 +29,19 @@ export const Content = ({ quickLinks = true }) => {
                 description="Track and analyze your revenue metrics to understand your business performance and growth."
                 buttonText="Setup guide"
                 buttonLink="/docs/revenue-analytics/start-here"
-                imageClasses="max-h-48 md:max-h-64"
-                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/hog_coin_a6fb991e80.png"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/money_dollars_rich_5a7f1bf7ce.png"
             />
 
-            <CalloutBox icon="IconWarning" title="Revenue analytics is being deprecated" type="caution">
+            <CalloutBox icon="IconInfo" title="The Revenue analytics dashboard has been removed" type="info">
                 <p>
-                    We'll remove the Revenue analytics dashboard on or after <strong>June 30th, 2026</strong>.
-                </p>
-                <p>
-                    We're not stepping away from revenue in PostHog — we're rethinking how it should work. Instead of
-                    maintaining a single, opinionated Revenue analytics dashboard, we're focusing on exposing revenue
-                    properties on persons and groups so you can use them everywhere: insights, SQL, and persons/groups
-                    profiles. Each use case (ecommerce, SaaS, recurring revenue, one-off, services, multi-tenant) can
-                    then build the dashboard it actually needs — or have PostHog AI and agents via our MCP build it for
-                    you.
+                    We've removed the dedicated Revenue analytics dashboard. We're not stepping away from revenue in
+                    PostHog. Instead of maintaining a single, opinionated dashboard, we expose revenue properties on
+                    persons and groups so you can use them everywhere: insights, SQL,{' '}
+                    <Link to="/docs/revenue-analytics/managed-views">managed views</Link>, and persons/groups profiles.
+                    Each use case (ecommerce, SaaS, recurring revenue, one-off, services, multi-tenant) can build the
+                    view it actually needs, or have{' '}
+                    <Link to="/docs/revenue-analytics/analyze-revenue-ai">PostHog AI</Link> and agents via{' '}
+                    <Link to="/docs/revenue-analytics/query-revenue-mcp">MCP</Link> build it for you.
                 </p>
             </CalloutBox>
 
@@ -67,11 +65,16 @@ export const Content = ({ quickLinks = true }) => {
 
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4">
                     <li>
+                        <Link to="/docs/revenue-analytics/revenue-metrics">
+                            What happened to the Revenue analytics dashboard?
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/docs/revenue-analytics/deferred-revenue">What's deferred revenue?</Link>
                     </li>
                     <li>
-                        <Link to="/docs/revenue-analytics/dashboard">
-                            What are the key metrics available in Revenue analytics?
+                        <Link to="/docs/revenue-analytics/revenue-metrics">
+                            What are the key revenue metrics available in PostHog?
                         </Link>
                     </li>
                     <li>
@@ -80,12 +83,12 @@ export const Content = ({ quickLinks = true }) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/docs/revenue-analytics/revenue-breakdowns">
+                        <Link to="/docs/revenue-analytics/managed-views">
                             How can I see how much money I'm making per country/product/etc?
                         </Link>
                     </li>
                     <li>
-                        <Link to="/docs/revenue-analytics/common-questions">Other questions</Link>
+                        <Link to="/docs/revenue-analytics/troubleshooting">Other questions</Link>
                     </li>
                 </ul>
             </section>

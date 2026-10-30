@@ -4,40 +4,11 @@ import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../../../context/App'
 import { useWindow } from '../../../../context/Window'
 import Wizard from 'components/Wizard'
+import { SQUEAK_HOST } from 'lib/strapi'
 
-import SecurityHog from '../../../../images/security-hog.png'
+import TrafficPoliceHog from '../../../../images/traffic-police-hog.png'
 import { IconSpinner } from '@posthog/icons'
-
-const Input = ({
-    label,
-    type = 'text',
-    touched,
-    error,
-    ...props
-}: {
-    label: string
-    type?: string
-    touched: boolean
-    error?: string
-    [key: string]: any
-}) => {
-    return (
-        <div className="flex items-center space-x-2">
-            <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
-                {label}
-            </label>
-            <div>
-                <input
-                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
-                    type={type}
-                    id={props.name}
-                    placeholder={label}
-                    {...props}
-                />
-            </div>
-        </div>
-    )
-}
+import Input from 'components/OSForm/input'
 
 const ForgotPasswordForm: React.FC = () => {
     const { setWindowTitle, openSignIn } = useApp()
@@ -66,7 +37,7 @@ const ForgotPasswordForm: React.FC = () => {
                     email: values.email,
                 }
 
-                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/auth/forgot-password`, {
+                const response = await fetch(`${SQUEAK_HOST}/api/auth/forgot-password`, {
                     method: 'POST',
                     body: JSON.stringify(body),
                     headers: {
@@ -120,9 +91,9 @@ const ForgotPasswordForm: React.FC = () => {
                     </div>
                 }
             >
-                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
-                        <img src={SecurityHog} className="w-20" />
+                        <img src={TrafficPoliceHog} alt="" className="w-20" />
                     </div>
                     <div data-scheme="primary" className="flex-1">
                         <h3 className="text-base font-semibold leading-tight mb-4">
@@ -137,6 +108,8 @@ const ForgotPasswordForm: React.FC = () => {
                                 <Input
                                     label="Email"
                                     type="email"
+                                    size="sm"
+                                    direction="row"
                                     touched={!!touched.email}
                                     error={errors.email}
                                     {...getFieldProps('email')}

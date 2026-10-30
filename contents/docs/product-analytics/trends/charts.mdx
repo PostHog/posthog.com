@@ -44,7 +44,7 @@ export const areaLight =
 export const areaDark =
   "https://res.cloudinary.com/dmukukwp6/image/upload/v1715099340/posthog.com/contents/docs/product-analytics/trends/area-chart-dark.png";
 
-There are ten charts and visualization options in trends. They're split into two categories:
+There are fifteen charts and visualization options in trends. They're split into two categories:
 
 - **Time series**, which show you how tracked events and data points fluctuate over a time period.
 - **Total value**, which show the total number of tracked events or data points in any given time period.
@@ -79,22 +79,26 @@ This is useful for understanding how quickly an event or data point is growing, 
 
 ### Bar chart
 
+Displays the value of a series over time as vertical bars placed side-by-side. Unlike the stacked bar chart, each series or breakdown appears as a separate bar next to others at each time interval, making it easier to compare individual values.
+
+### Stacked bar chart
+
 <ProductScreenshot
   imageLight={timeBarchartLight}
   imageDark={timeBarchartDark}
   classes="rounded"
-  alt="Time bar chart"
+  alt="Stacked time bar chart"
 />
 
-The **time series** bar chart displays the value of a series over time. This plot shows the exact same information as the [linear chart](#line-chart-linear), but in a slightly different visual manner.
+The **time series** stacked bar chart displays the value of a series over time. This plot shows the exact same information as the [linear chart](#line-chart-linear), but in a slightly different visual manner.
 
-Additional series or breakdowns you add to a bar chart will appear stacked, so you can see how much each property or series contributes to the total number.
+Additional series or breakdowns you add will appear stacked on top of each other, so you can see how much each property or series contributes to the total number.
 
 ### Area chart
 
 <ProductScreenshot imageLight={areaLight} imageDark={areaDark} classes="rounded" alt="Area chart" />
 
-Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stacked bar chart, but render the data in a line chart showing how each data point contributes to the total.
+Area charts are a twist on the line chart. When you add a breakdown, or multiple series, area charts behave like a stacked bar chart, but render the data in a line chart showing how each data point contributes to the total. Like line charts, smoothing (7-day or 28-day rolling average) is available when data is grouped by day, hour, or minute.
 
 ### Box plot
 
@@ -122,6 +126,18 @@ When enabled, whiskers are clipped using the standard 1.5× IQR (interquartile r
 
 This option is enabled by default. Disable it to show the full data range including outliers.
 
+#### Detailed results
+
+Expand the results below the chart to see a detailed results table. For each time interval and series, the table displays the distribution statistics (min, Q1, median, mean, Q3, max) along with a **Count** column.
+
+The **Count** column shows the number of observations used to calculate the distribution for that time interval. Missing numeric values are excluded from the count, but outliers are included.
+
+> **Note:** Cached results generated before this column was added display `-` for the count. Refresh the insight to populate the value.
+
+### Slope graph
+
+The slope graph shows the change from the start to the end of your selected date range. Each series appears as a line connecting its starting value to its ending value, making it easy to see the direction and magnitude of change over the period. This is useful for comparing how different metrics or breakdown values changed relative to each other.
+
 ## Total value
 
 ### Number
@@ -133,9 +149,20 @@ This option is enabled by default. Disable it to show the full data range includ
   alt="Total value"
 />
 
-Shows the total of events or data points during the given period. Tick the "Compared to previous period" option to add a percentage comparison.
+Shows a single value for the selected event or data point during the given period. Use the **Headline value** setting in display options to choose what value to show:
 
-This option is only available when there's just one series (or [formula](/docs/product-analytics/trends/formulas) and no breakdowns added to the insight.
+- **Total** - The sum of all values in the period (default)
+- **Average** - The mean of all values in the period
+- **Latest** - The most recent value in the period
+
+Enable **Compare to previous period** to show a percentage change pill. How the change is calculated depends on your headline value setting:
+
+- **Total** or **Average** - Compares against the previous period when "compare to previous" is enabled, otherwise shows the change from first to last point
+- **Latest** - Always shows the change from first to last point in the current period
+
+Hover over the sparkline to see individual data point values and point-to-point changes.
+
+This chart type is only available when there's a single series (or [formula](/docs/product-analytics/trends/formulas)) and no breakdowns added to the insight.
 
 ### Bar Chart
 
@@ -171,7 +198,21 @@ When you enable **Compare to previous period**, comparison values appear in a de
 
 The pie chart shows the relative distribution of the values of different series or breakdowns over the _entire date range_.
 
-To hide the total value displayed below the chart, untick **Show total below chart** in the display settings.
+You can customize the pie chart appearance in the display settings:
+
+- **Slice content** – Choose what to display on each slice: **labels** (default), **values**, or **none**.
+- **Value format** – When showing values on slices, display them as **absolute** amounts or as **percentages** of the total.
+- **Show total** – Toggle the aggregation total displayed below the chart (on by default).
+
+### Donut
+
+The donut chart is similar to a pie chart but displays values as a ring with a hollow center. It shows the relative distribution of values of different series or breakdowns over the entire date range. The hollow center can make it easier to compare segment sizes and provides space for displaying additional information.
+
+### Proportion bar
+
+The proportion bar displays the relative distribution of values as a single horizontal bar divided into segments. Each segment represents the proportion of a series or breakdown value relative to the total, and the legend shows each segment's percentage share and absolute value. This compact visualization is useful when you want to see how parts contribute to a whole without taking up as much vertical space as a pie or donut chart.
+
+> **Note:** This chart type doesn't support comparing to a previous period.
 
 ### World map
 

@@ -9,7 +9,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 There are three key principles here:
 
-1. Anyone can propose a change by [creating an issue](https://github.com/PostHog/company-internal/issues/new?template=team-change-proposal.md) suggesting the change.
+1. Anyone can propose a change by <PrivateLink url="https://github.com/PostHog/company-internal/issues/new?template=team-change-proposal.md">creating an issue</PrivateLink> suggesting the change.
 2. Decisions should be made quickly – i.e. less than a week.
 3. Team Blitzscale ultimately own the decision to make a change or not.
 
@@ -23,7 +23,7 @@ Follow this process whether you're proposing creating a new team, splitting up a
 
 ### 1. Create a team change proposal issue
 
-You can use the [team change proposal template](https://github.com/PostHog/company-internal/issues/new?template=team-change-proposal.md) in company internal to do so. A good proposal should:
+You can use the <PrivateLink url="https://github.com/PostHog/company-internal/issues/new?template=team-change-proposal.md">team change proposal template</PrivateLink> in company internal to do so. A good proposal should:
 
 - Tag all those **directly** affected by the change, and the Blitzscale Team member directly responsible for this area of the business.
 
@@ -59,7 +59,7 @@ Once made, they should share their decision in #tell-posthog-anything and the re
 
 ### 4. Execute the change
 
-Once the decision is shared, the team lead kicks off execution by running `/org-change` in Slack and selecting the relevant change type. This creates a tracked issue with the right checklist, assigned to those involved.
+Once the decision is shared, the team lead searches Slack for **Org Change**, selects the workflow, and chooses the relevant change type. This creates a tracked issue with the right checklist, assigned to those involved.
 
 ## FAQ
 

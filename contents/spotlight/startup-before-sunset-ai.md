@@ -66,7 +66,7 @@ With Product Hunt, you only have a short amount of time in order to get traction
 
 ### 4. If at first you don’t succeed, try again
 
-BeforeSunset AI's latest Product Hunt launch wasn't its first attempt to succeed on the platform. An earlier Product Hunt launch for the AI-less version of the tool had failed to breakthrough because it hadn't yet reached [product-market fit](/blog/product-market-fit-game).
+BeforeSunset AI's latest Product Hunt launch wasn't its first attempt to succeed on the platform. An earlier Product Hunt launch for the AI-less version of the tool had failed to breakthrough because it hadn't yet reached [product-market fit](/founders/product-market-fit-game).
 
 "That initial launch was still a milestone for us," says Elif. "It enabled us to get product feedback and led us to discover the real need in the market, which nobody was serving...It’s always important to bear in mind that success is rarely straightforward and that setbacks are a normal part of being an entrepreneur."
 

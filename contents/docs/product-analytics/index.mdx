@@ -1,0 +1,94 @@
+---
+title: Product analytics
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconPlug, IconBrackets, IconBolt, IconSend, IconPerson, IconProfile } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+Product analytics helps you understand how people use your product. Use the events you capture to explore adoption, conversion, and retention with trends, funnels, paths, stickiness, and lifecycle insights. Save insights to dashboards, share them, and set alerts when metrics change.
+
+Product analytics uses the same events, persons, and properties as the rest of PostHog. You can investigate a change in an insight with related [session replays](/docs/session-replay), see which [feature flags](/docs/feature-flags) users saw, or measure the results of an [experiment](/docs/experiments).
+
+<OSButton variant="primary" asLink to="/docs/product-analytics/start-here">Get started</OSButton>
+
+## Where you can use it
+
+Build and explore insights in the PostHog web app, query the same data from an MCP client, or use the API in your own tools.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog Web</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Build insights, assemble dashboards, share them, and set alerts on the numbers that matter.</p>
+      <a href="/docs/product-analytics/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Build insights →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconPlug className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Run trends, funnels, retention, and SQL queries from any MCP client or AI editor.</p>
+      <a href="/docs/product-analytics/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Run queries →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Create and read insights, and run any analytics query, from your own systems.</p>
+      <a href="/docs/product-analytics/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Product analytics runs on the events your product sends to PostHog and the persons and properties attached to them. Get those right and every insight downstream gets easier.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconSend className="size-6 shrink-0 text-orange mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Events</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Custom events you capture from any SDK, each with the properties you attach to them.</p>
+      <a href="/docs/product-analytics/capture-events" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Capture events →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBolt className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Autocapture</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Pageviews, clicks, and form submissions captured for you, so you have data before you instrument.</p>
+      <a href="/docs/product-analytics/autocapture" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Set up autocapture →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconPerson className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Persons and identity</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Link anonymous and logged-in activity to one person so funnels and retention count real users.</p>
+      <a href="/docs/product-analytics/identify" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Identify users →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconProfile className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Person and group properties</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Plan, role, company, and anything else you set – the dimensions you break every insight down by.</p>
+      <a href="/docs/product-analytics/person-properties" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Set person properties →</a>
+    </div>
+  </div>
+
+</div>

@@ -8,10 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Product engineers
-  - Product
-  - Revenue
-  - Growth Engineering
+  - Sales and pricing
 crosspost:
   - Product engineers
   - Blog

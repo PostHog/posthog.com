@@ -1,0 +1,83 @@
+---
+title: Linking Redshift as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: Redshift
+---
+
+import { CalloutBox } from "components/Docs/CalloutBox";
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+
+The Redshift connector can link your database tables to PostHog.
+
+To link Redshift:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select Redshift
+3. Enter your database connection details:
+   - **Host:** The hostname or IP of your Redshift cluster like `my-cluster.abc123.us-east-1.redshift.amazonaws.com`.
+   - **Port:** The port your Redshift cluster is listening on. The default is `5439`.
+   - **Database:** The name of the database you want like `analytics_db`.
+   - **User:** The username with the necessary permissions to access the database.
+   - **Password:** The password for the user.
+   - **Schema:** (Optional) The schema for your database. Leave blank to browse and sync tables from all schemas, or specify one to limit the selection. The default is `public`.
+   - **TLS fields:** (Optional) Verify the server certificate, or add a certificate authority. See [Verify the server certificate](#verify-the-server-certificate).
+4. Click **Next**
+
+The data warehouse then starts syncing your Redshift data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
+
+> **Permissions:** The Redshift source only requires read permissions on the schemas and tables you intend to sync.
+
+## Configuration
+
+<SourceParameters />
+
+## Verify the server certificate
+
+By default, PostHog encrypts the connection to your database but does not check its certificate. To make sure PostHog connects to your real database, set these fields when you link the source:
+
+- **Verify the server certificate?** Checks that your database's TLS certificate comes from a trusted authority and matches the host you entered. Off by default.
+- **Certificate authority (optional):** The PEM certificate of the authority that signed your database's certificate. Add it when your database uses a private authority or a self-signed certificate. Adding one turns on verification, even when the toggle above is off. Without it, PostHog checks against a standard set of public authorities.
+
+Through an SSH tunnel, PostHog checks that the certificate comes from a trusted authority, but not that it matches the host. The tunnel presents your database on a local address, so the host name can't match.
+
+If you leave all of these fields empty, the connection is encrypted but the certificate is not checked.
+
+### Certificate errors
+
+PostHog stops syncing on these errors, because retrying fails the same way until you change the source:
+
+- "PostHog could not verify your database's TLS certificate. Either an authority PostHog trusts did not sign it, or it does not match the host. Add the authority that signed it, check the host, or turn off certificate verification and remove the certificate authority."
+- "Your database's TLS certificate does not match the host you entered. Use the hostname the certificate was issued for, or turn off certificate verification and remove the certificate authority."
+
+After you fix the certificate or the source settings, re-enable the sync.
+
+
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your Redshift source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
+
+<InboundIpAddresses />

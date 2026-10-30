@@ -1,0 +1,94 @@
+---
+title: Developing the wizard
+sidebar: Handbook
+showTitle: true
+---
+
+This page covers running the wizard locally and testing a change.
+
+## Running it locally
+
+Pick the smallest setup your change needs.
+
+- **Wizard only.** Run your wizard branch against production PostHog. Reach for this for most wizard changes.
+- **Workbench.** Test new wizard code together with a context mill branch, on the workbench's test apps.
+- **Fully local.** Run PostHog, the AI gateway, the wizard, and the MCP server all on your machine. Reach for this only when a change sweeps across the whole stack.
+
+## Wizard only
+
+```bash
+git clone https://github.com/PostHog/wizard && cd wizard
+pnpm install
+node scripts/generate-version.cjs
+pnpm try --install-dir=/path/to/app
+```
+
+`pnpm try` runs from source and logs in with OAuth against production. Any app works. The [workbench apps](https://github.com/PostHog/wizard-workbench/tree/main/apps) are known to work, so copy one out and run `git init` in it first.
+
+## Workbench
+
+Hand this prompt to Claude Code or Codex to set it up:
+
+```
+Set up the PostHog wizard workbench so I can test a wizard branch against a context mill branch.
+
+1. Clone https://github.com/PostHog/wizard-workbench and run `bash fresh-setup --skip-posthog`
+   from it. It clones the wizard and the context mill next to it and writes .env.
+   Skip posthog: the workbench only needs it for the MCP server, which runs from the
+   posthog hogli stack now.
+2. Check out my branches: wizard on <wizard branch>, context-mill on <context mill branch>.
+   Run `pnpm install` in the wizard and `npm install` in the context mill.
+3. Fill in .env. Ask me for each value, never invent one, and don't print keys back to me:
+   - WIZARD_PATH, CONTEXT_MILL_PATH, COMMANDMENTS_PATH: the clone paths. fresh-setup writes these.
+   - POSTHOG_PERSONAL_API_KEY: a phx_ personal API key for my test project.
+   - POSTHOG_WIZARD_PROJECT_ID: the project that key is scoped to.
+   - POSTHOG_GATEWAY_TOKEN: a phs_ project secret key with the llm_gateway:read scope.
+     An op:// reference works if I run things with `op run`.
+   - POSTHOG_REGION: us or eu. It defaults to us.
+4. Start the stack with `phrocs` from the workbench root. Install it with `brew install phrocs`
+   if it's missing. Confirm the context-mill and wizard-build panes are healthy.
+5. Run the wizard on basic-integration/javascript-node/express-todo from the wizard-run pane.
+   Show me the outro and the tail of /tmp/posthog-wizard.log.
+```
+
+If you need to wrangle a run by hand, for artisanal reasons, these `phrocs` panes are useful:
+
+- **context-mill** serves your context mill branch on port 8765, and rebuilds when you edit a skill.
+- **wizard-build** builds your wizard branch and rebuilds on every change.
+- **wizard-run** runs the wizard on a test app you pick. **wizard-tail-run** follows its log.
+- **wizard-ci-local-run** runs a CI run and grades it, without opening a PR.
+- **wizard-ci-snapshots** captures every screen of a real TUI run.
+- **wizard-run-proxy** and **mitmproxy** show every request the wizard makes.
+- **wizard-build-dev** builds against a local PostHog, for the fully local setup.
+
+## Fully local
+
+Run everything on your machine when one change sweeps across PostHog, the AI gateway, the wizard, and the MCP server. The [full stack recipe](https://github.com/PostHog/wizard/blob/main/docs/local-dev.md#run-the-full-stack-locally) in the wizard repo has the steps.
+
+| Service | Port |
+|---|---|
+| PostHog | 8010 |
+| AI gateway | 8080 |
+| Context mill | 8765 |
+| MCP server | 8787 |
+| mitmproxy | 8888 |
+
+## Testing your change
+
+| Test | Command | What it proves | Runs in CI |
+|---|---|---|---|
+| Unit and snapshot | `pnpm test` | Logic and TUI frames | Every wizard PR |
+| Smoke | `./scripts/smoke-test-ci.sh` | A real run on a test app | Every merge to main |
+| End to end | `/wizard-ci <app>` PR comment | A real agent run, optionally against a context mill branch | On demand and weekly |
+| Benchmarks | See benchmarking docs | Compares models and harnesses | Manual |
+
+## Releasing
+
+See [releasing the wizard](/handbook/wizard-and-docs/wizard-releases) for how the wizard and the context mill ship, and what to test before you release.
+
+## Go deeper
+
+- [Local dev flags and credentials](https://github.com/PostHog/wizard/blob/main/docs/local-dev.md)
+- [Workbench README](https://github.com/PostHog/wizard-workbench)
+- [E2E harness](https://github.com/PostHog/wizard/blob/main/e2e-harness/ARCHITECTURE.md)
+- [Benchmarking](https://github.com/PostHog/wizard/blob/main/docs/benchmarking.md)

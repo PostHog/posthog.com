@@ -1,6 +1,6 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
-import Logo from 'components/Logo'
+import { Logo } from '@posthog/brand/logo'
 import { useValues } from 'kea'
 import { layoutLogic } from '../../logic/layoutLogic'
 import {
@@ -433,7 +433,6 @@ export const Main = () => {
         compact,
     } = useLayoutData()
     const { pathname } = useLocation()
-    const { websiteTheme } = useValues(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [mediaModalOpen, setMediaModalOpen] = useState(false)
     const [authModalOpen, setAuthModalOpen] = useState(false)
@@ -503,10 +502,15 @@ export const Main = () => {
                                     className="h-5 mx-6 relative"
                                 />
                             ) : (
-                                <Logo
-                                    color={websiteTheme === 'dark' && 'white'}
-                                    className="h-[24px] fill-current relative px-2 box-content"
-                                />
+                                <>
+                                    <Logo className="h-[24px] relative px-2 box-content dark:hidden" width="auto" />
+                                    <Logo
+                                        variant="mono"
+                                        color="white"
+                                        className="hidden h-[24px] relative px-2 box-content dark:block"
+                                        width="auto"
+                                    />
+                                </>
                             )}
                         </Link>
                     </div>
@@ -594,7 +598,7 @@ export const Main = () => {
                                         <li className="px-1">
                                             <Link
                                                 className="group/item text-sm px-2 py-2 rounded-sm hover:bg-border dark:hover:bg-border-dark block"
-                                                to="/questions"
+                                                to="/forum"
                                             >
                                                 <IconMessage className="opacity-50 group-hover/item:opacity-75 inline-block mr-2 w-6" />
                                                 Forums

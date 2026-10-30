@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Fundraising
-  - Being a founder
+  - Raising money
 crosspost:
   - Blog
 ---

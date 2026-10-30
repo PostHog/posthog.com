@@ -1,53 +1,71 @@
-### Q2 2026 objectives
+### Q4 2026 objectives
 
-1. Make product analytics AI-ready
-   - Clean charts in the component library
-   - MCP works with insights
-   - Investigate metric skill
+This quarter, our goals are split. We don't have enough certainty to predict a whole three months of direction. We could carry on as the money-engine. Improving charts, visualisations, and feature parity. But we want to take a moment and learn more about how people's behaviour is changing. We want to take a moment to look up and around and orient ourselves better.
 
-2. Long lasting quality improvements (mostly UI, UX, bugs)
+We will focus on what we'll explore rather than what we'll ship. For a long time, our challenge was building everything customers asked for. Now it's building the right things. We think what our team needs most is to step back and understand our users' broader goals and pain points, so we can refocus on what matters most.
 
-3. Keep building the things people need
-   - Data warehouse in insights
-   - Period over period comparison in funnels
-   - Inline events in all charts
+For each area below, we'll interview users, dig into our metrics, and share findings with the team at our offsite. Meanwhile, we'll keep shipping based on what we learn and maintaining the features we own.
 
-### What we’ll ship
+**Focus areas:**
+1. Large customer needs: What are our large customers struggling with? Where are the limits getting pushed?
+2. Startup needs: What needs are we missing with small organizations and startups trying to build and scale their business?
+3. User retention: Why are individual users stopping using PostHog?
+4. MCP-first users: Where are we not meeting the needs of MCP-first or MCP-only users?
+5. Market trends: Where is the market heading, and how will our customers work differently in the next 1-3 years?
+6. Generative AI: Why do people use generative AI instead of dashboards, and what would get dashboard users to switch?
 
-#### <TeamMember name="Thomas Obermüller" />
+### What we’ll explore
 
-- Follow up work on data warehouse insights (#3)
-  - Desired outcome: Data warehouse events "just work" in insights; adopted by customers
-- MCP is a complete alternative to the UI
-  - Expose dashboard tiles in HogQL for MCP v2
-  - Fix schema drift of assistant queries
-  - Discover + fix gaps through manual exploration and MCP evals
-- Period over period comparison in funnels (#3)
-  - Desired outcome: Adopted by customers
+#### Large customer needs: <TeamMember name="Mike Warren" />
 
-#### <TeamMember name="Georgis Andonis" />
+- **Who we'll speak to:** Large customer users; our sales team
+- **Questions to explore:**
+  - Why are larger, managed accounts churning?
+  - Why are we losing competitive deals?
+  - Why aren't large orgs switching to PostHog?
 
-- Inline events adoption in retention, stickiness, and lifecycle (#3)
-  - Desired outcome: Establish a mature inline events feature across all insight types, enabling us to replace Actions and eliminate the back-and-forth associated with them. Support all common actions (rename, duplicate, in a separate popover menu)
-- Add missing MCP data retrieval queries: paths, lifecycle, stickiness, actors queriers, enterprise queriers (#1)
-  - Desired outcome: We want to enable other AI agents to interact with the above queries
-- Implement "Investigate metric" skill (#1)
-  - Desired outcome: Allow agents to analyze a metric and find the root cause behind it
+#### Startup needs: <TeamMember name="Matt Pua" />
 
-#### <TeamMember name="Sam Pennington" />
+- **Who we'll speak to:** Small orgs that churned early; small orgs that signed up but didn't finish setup or invite teammates
+- **Questions to explore:**
+  - Why do early-stage orgs churn?
+  - Why don't teams invite their teammates?
+  - Where do orgs get stuck during setup?
+  - What are people saying about PostHog on Reddit, G2, X, etc.?
+  - What does marketing see as the reasons we win or lose?
+  -  Are smaller/younger orgs more AI-pilled, more MCP first, less likely to use web? How is web use changing?
+  
 
-- Create analytics components (charts, tooltips, etc.) in the UI library and use them (#2)
-  - Desired outcome: We have clearer boundaries between insight logic/UI code and less duplication. Makes things easier to reason with, more testable, reduces bugs/papercuts, and brings consistency across PostHog products
-- Add skills to product analytics: insight CRUD, autocapture events, persons... (#1)
-  - Desired outcome: An agent can reliably perform core product analytics tasks
-- Reduce complexity of insights UI (#2)
-  - Desired outcome: Increase conversion of insight created/saved, activation rate
+#### User retention: <TeamMember name="Daniel Parker" />
 
-#### <TeamMember name="Mike Warren" />
+- **Who we'll speak to:** Users invited to an org who stopped using PostHog after setup (in both existing and new orgs); people new to PostHog (spilt by new to analytics vs used to a different analytics solution),
+- **Questions to explore:**
+  - Why do new orgs stop using PostHog after setup?
+  - Why do existing org users stop using PostHog?
+  - What trips up someone seeing PostHog with fresh eyes? (Existing and new orgs)
 
-- Improve our methodology for prioritizing feature requests/ideas and tracking outcomes (#3)
-  - Desired outcome: In next quarterly planning, our team has more metric-based outcomes in our "last quarter reflections" than we did this quarter. And the team feels like it's more clear what to work on next.
-- UI/UX review + improvements for the new insight page (including tab switching) (#2)
-  - Desired outcome: This should improve conversion rate of insight create -> insight save. It should also improve avg. # of insight views within 30 days after creating an insight
-- Fix our internal product analytics event tracking (N/A)
-  - Desired outcome: We have a comprehensive, accurate view of insight creates and saves across sources, and we can tie those to where they were created from
+#### MCP-first users: <TeamMember name="Sam Pennington" />
+
+- **Who we'll speak to** (across Codex, Claude, Slack, etc.): Hybrid users (MCP + Web); MCP-only users; users who stopped using our MCP
+- **Questions to explore:**
+  - Does the experience differ across harnesses?
+  - What challenges are they running into?
+  - How well do they understand PostHog?
+  - What leads users to stop using our MCP?
+  - (How much/do they) navigate between MCP and web?
+
+#### Market trends: <TeamMember name="Thomas Obermüller" />
+
+- **Who we'll speak to:** PostHog's CSM team; champions at companies across industries; AI-native startups not using PostHog
+- **Questions to explore:**
+  - Where is the overall market landscape heading? How will our customers be working differently in the next 1-3 years?
+  - Are there any other technologies (outside of AI) that may disrupt our industry?
+  - What are competitors doing that we are not?
+  - What are new startups in our space doing that we are not?
+
+#### Generative AI: <TeamMember name="Thomas Obermüller" />
+
+- **Who we'll speak to:** People using generative AI (canvases, for us); people using dashboards but not canvases
+- **Questions to explore:**
+  - Why are they using generative AI vs. dashboards? What do they like / not like?
+  - For people using dashboards but not canvases, why not? What would get them to switch?

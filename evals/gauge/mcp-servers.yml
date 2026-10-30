@@ -1,0 +1,5 @@
+# attach_mcp name (from shared/run-config.yml) → the Gauge MCP server that serves it,
+# pinned as handle@version (`gauge mcp list --hosted`). Until the eval PostHog project
+# exists and its login is added to Gauge as a new version, posthog has no version, and
+# checks that attach it are skipped.
+posthog: null

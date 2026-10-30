@@ -1,0 +1,96 @@
+---
+title: Session Replay
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import { IconLaptop, IconMagic, IconBrackets, IconRewindPlay, IconToggle, IconDashboard, IconShield } from '@posthog/icons'
+import OSButton from 'components/OSButton'
+
+Session replay records what real users do in your product and plays it back like a DVR, with a synced DevTools panel showing console logs, network requests, and errors at the exact moment they happened. Because PostHog already captures your events, every replay is enriched with the person, their properties, and the feature flags they had, so you can jump from a funnel drop-off or an exception straight to the session behind it.
+
+You can watch replays yourself, ask PostHog AI to find and summarize them, or pull them into your editor over MCP.
+
+<OSButton variant="primary" asLink to="/docs/session-replay/start-here">Get started</OSButton>
+
+## Where you can use it
+
+You watch, filter, and share replays in the PostHog web app. The other surfaces let you investigate sessions and act on them without leaving your existing tools.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconLaptop className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog Web</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Watch recordings with synced DevTools, build collections, and share them with your team.</p>
+      <a href="/docs/session-replay/surfaces/web-app" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Watch replays →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconMagic className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">PostHog MCP</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Search sessions and manage playlists from any MCP client or AI editor.</p>
+      <a href="/docs/session-replay/surfaces/mcp" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Search replays →</a>
+    </div>
+  </div>
+
+
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconBrackets className="size-6 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">List, filter, update, and delete recordings and playlists from your own systems.</p>
+      <a href="/docs/session-replay/surfaces/api" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Use the API →</a>
+    </div>
+  </div>
+
+</div>
+
+## Where its data comes from
+
+Session replay runs on recordings captured by your PostHog SDKs. What ends up in a replay depends on how you configure capture: which sessions you record, what the browser panels collect, and what you mask before it ever leaves the device.
+
+<div className="not-prose grid grid-cols-1 @md:grid-cols-2 gap-x-6 gap-y-6 my-6">
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconRewindPlay className="size-6 shrink-0 text-yellow mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">SDKs</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Record sessions from web, React Native, iOS, Android, Flutter, and more.</p>
+      <a href="/docs/session-replay/installation" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Install an SDK →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconToggle className="size-6 shrink-0 text-red mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Recording rules</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Sample, gate by URL or feature flag, and record only the sessions worth keeping.</p>
+      <a href="/docs/session-replay/how-to-control-which-sessions-you-record" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Set recording rules →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconDashboard className="size-6 shrink-0 text-blue mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Console and network</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Capture console logs and the network waterfall so the DevTools panel has something to show.</p>
+      <a href="/docs/session-replay/network-recording" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Capture performance data →</a>
+    </div>
+  </div>
+
+  <div className="flex items-start gap-3 rounded border border-primary p-5 bg-primary">
+    <IconShield className="size-6 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 font-bold text-primary">Privacy and retention</p>
+      <p className="m-0 mt-0.5 text-sm text-secondary">Mask text, inputs, and whole elements before capture, and control how long replays are kept.</p>
+      <a href="/docs/session-replay/privacy" className="inline-flex items-center gap-1 mt-1.5 text-sm font-semibold">Configure privacy →</a>
+    </div>
+  </div>
+
+</div>

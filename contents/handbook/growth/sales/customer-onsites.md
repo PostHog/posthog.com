@@ -30,7 +30,7 @@ Audience:
 Users of PostHog, the more the better, armed with laptops and logged in
 
 Purpose:
-To level-up how users engage with our platform, spark new ideas and inspiration for customer teams, and expand usage and impact by enabling the audience on our tools.
+To level-up how users engage with our platform, spark new ideas and inspiration for customer teams, and expand usage and impact by enabling the audience on our products.
 
 Content:
 Set an explicit goal that you think is achievable within the session for you to work towards with the users. Invite ideas and suggestions to get the jam going, but make sure you have some solid ideas in your back pocket to get things started. Building a compound score (i.e Customer effort score, time to value, onboarding friction) can be a good one if the customer has no ideas. Do not start demoing, but do show users useful shortcuts (PostHogAI, Actions, Cohorts, Workflows, Realtime destinations etc) if relevant. Conclude by summarising progress, and suggesting some follow-up and continuation tasks to take it to the next level.

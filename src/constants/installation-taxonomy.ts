@@ -94,6 +94,17 @@ export const TAXONOMY: InstallCategory[] = [
                 wizardLogoKey: 'tanstack',
             },
             {
+                // No `/docs/libraries/tanstack-router` page yet — the install grid hides
+                // items without a docs page, so this stays wizard-only until one exists.
+                slug: 'tanstack-router',
+                name: 'TanStack Router',
+                librarySlug: 'tanstack-router',
+                wizard: true,
+                wizardOrder: 27,
+                wizardDocsUrl: WIZARD_GITHUB_REPO_URL,
+                wizardLogoKey: 'tanstack',
+            },
+            {
                 slug: 'vue',
                 name: 'Vue.js',
                 librarySlug: 'vue-js',
@@ -138,7 +149,13 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'flutter',
                 wizard: true,
                 wizardOrder: 21,
-                status: 'wip',
+            },
+            {
+                slug: 'kmp',
+                name: 'Kotlin Multiplatform',
+                librarySlug: 'kmp',
+                wizard: true,
+                wizardOrder: 25,
             },
         ],
     },
@@ -147,7 +164,15 @@ export const TAXONOMY: InstallCategory[] = [
         title: 'Backend languages',
         splitPopular: true,
         items: [
-            { slug: 'nodejs', name: 'Node.js', librarySlug: 'node', popular: true },
+            {
+                slug: 'nodejs',
+                name: 'Node.js',
+                librarySlug: 'node',
+                popular: true,
+                wizard: true,
+                wizardOrder: 26,
+                wizardLogoKey: 'nodejs',
+            },
             {
                 slug: 'python',
                 name: 'Python',
@@ -170,7 +195,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'elixir',
                 wizard: true,
                 wizardOrder: 20,
-                status: 'wip',
             },
             {
                 slug: 'go',
@@ -178,7 +202,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'go',
                 wizard: true,
                 wizardOrder: 22,
-                status: 'wip',
             },
             {
                 slug: 'java',
@@ -186,7 +209,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'java',
                 wizard: true,
                 wizardOrder: 23,
-                status: 'wip',
             },
             { slug: 'php', name: 'PHP', librarySlug: 'php' },
             {
@@ -195,7 +217,6 @@ export const TAXONOMY: InstallCategory[] = [
                 librarySlug: 'rust',
                 wizard: true,
                 wizardOrder: 24,
-                status: 'wip',
             },
         ],
     },

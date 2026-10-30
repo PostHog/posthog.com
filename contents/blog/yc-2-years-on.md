@@ -13,6 +13,10 @@ featuredImageType: full
 category: CEO diaries
 tags:
   - Y Combinator
+  - Founders
+  - CEO diaries
+crosspost:
+  - Founders
 ---
 
 [Y Combinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, three-month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.
@@ -90,6 +94,6 @@ Most importantly, and as cheesy a conclusion as this is, it has changed how we s
 
 Being part of YC means we see people we know very well go on to build very successful companies, sharing what they're up to along the way. 
 
-Before YC, we felt like outsiders. After YC, we have the confidence to build a impactful product, and that's hugely valuable.
+Before YC, we felt like outsiders. After YC, we have the confidence to build an impactful product, and that's hugely valuable.
 
 <NewsletterForm />

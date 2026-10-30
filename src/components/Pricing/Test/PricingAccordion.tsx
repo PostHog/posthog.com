@@ -80,12 +80,16 @@ const AccordionItem = ({
 
     const addonData =
         includeAddonRates && billingData?.addons
-            ? billingData.addons.map((addon: any) => ({
-                  name: addon.name,
-                  billingData: addon,
-                  type: addon.type,
-              }))
+            ? billingData.addons
+                  // Custom retention replaced the 30-day add-on, but billing doesn't mark it `legacy_product`
+                  .filter((addon: any) => addon.type !== 'logs_retention_30d')
+                  .map((addon: any) => ({
+                      name: addon.name,
+                      billingData: addon,
+                      type: addon.type,
+                  }))
             : []
+    const hasAddonRates = addonData.length > 0
 
     const Container = useMemo(() => (billedWith ? 'div' : 'button'), [billedWith])
 
@@ -131,7 +135,7 @@ const AccordionItem = ({
                             <em className="font-normal text-secondary text-sm">
                                 Billed with <span className="lowercase">{billedWith}</span>
                             </em>
-                        ) : includeAddonRates ? (
+                        ) : hasAddonRates ? (
                             <em className="font-normal text-secondary text-sm">Multiple resources</em>
                         ) : (
                             startsAt && (
@@ -165,11 +169,13 @@ const AccordionItem = ({
                     className={isOpen ? '' : 'overflow-hidden'}
                 >
                     <div className="px-3 pb-4">
-                        {includeAddonRates && addonData.length > 0 ? (
+                        {hasAddonRates ? (
                             <div className="space-y-6">
                                 {/* Main product pricing */}
                                 <div>
-                                    <h5 className="text-sm font-semibold mb-3">{productVariantName || name}</h5>
+                                    <h5 className="text-sm font-semibold mb-3">
+                                        {productVariantName || categoryName || name}
+                                    </h5>
                                     <PricingTiers plans={billingData?.plans} type={type} unit={unit} />
                                 </div>
                                 {/* Addon products pricing */}

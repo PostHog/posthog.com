@@ -1,0 +1,100 @@
+---
+title: MCP Analytics in PostHog Web
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Open beta" type="fyi">
+
+The MCP Analytics views are in beta.
+
+</CalloutBox>
+
+Use the [PostHog web app](https://app.posthog.com) to explore MCP tool usage. After your server [sends events](/docs/mcp-analytics/installation), open **MCP Analytics**. The views use `$mcp_tool_call` events to show dashboards, sessions, tool quality, and intent clusters.
+
+## Before you start
+
+1. **Install MCP Analytics** – [install the SDK in your MCP server](/docs/mcp-analytics/installation) so tool calls are captured.
+2. **Open the web app** – no install needed, just sign in to [PostHog](https://app.posthog.com).
+
+## What you can do here
+
+Each tab answers a different question.
+
+### Dashboard
+
+The dashboard shows session counts, tool calls, error rates, and p95 latency. It also shows clients, harnesses, tool usage, and errors over time. The **Sessions flagged for review** card picks out sessions such as the worst error rate, sessions where every call failed, the most exploratory or busiest sessions, and an example session. It can be short or empty.
+
+### Activity
+
+The activity feed shows tool calls as they arrive. Use it to check instrumentation or observe a release.
+
+### Sessions
+
+The sessions view lists MCP sessions, newest first by default. Open a session to read its tool calls, intents, and errors in order. This is similar to [Session Replay](/docs/session-replay) for agents. Apply filters to create a playlist, then move between sessions in the detail view.
+
+### Tool quality
+
+Per-tool stats: call volume, error rate, latency, and the failure modes behind them. Select a tool to inspect its failed calls and error details.
+
+Select **Create fix task** to start a coding agent for a failing tool. Choose the repository where the agent works. The agent opens a pull request. This uses the same process as a [Self-driving](/docs/self-driving) report for a server you own.
+
+The button requires a connected GitHub integration. See [Self-driving reports](#self-driving-reports) for the full process.
+
+### Intent clustering
+
+Groups what agents said they were trying to do into themes, so you can see the jobs your server actually gets used for. Includes a journey view of how agents move between tools within a cluster. Intent comes from [`$mcp_intent`](/docs/mcp-analytics/intent) plus generated session summaries. Intent clustering is still rolling out, so this tab may not appear in your project yet.
+
+### Missing capabilities
+
+Lists what agents asked your server for and could not get, in their own words, newest first. The reports come from the [`get_more_tools` tool](/docs/mcp-analytics/missing-capability).
+
+### Notifications
+
+Set up recurring summaries of what agents do with your server, and instant alerts for events you need to know about right away.
+
+## Ask PostHog AI
+
+[PostHog AI](/docs/posthog-ai) can query this data in the web app. Ask it to explore sessions, inspect tool quality, analyze intent clusters, or suggest tool improvements. Select **Ask PostHog AI** in a view to open it with a relevant question.
+
+## Build your own views
+
+Every signal is a normal PostHog event, so you aren't limited to these tabs. Query `$mcp_*` events in [product analytics](/docs/product-analytics), the [SQL editor](/docs/data-warehouse/sql), and [dashboards](/docs/product-analytics/dashboards). See [sample queries](/docs/mcp-analytics/queries) for recipes.
+
+## Self-driving reports
+
+A [scout](/docs/self-driving/scouts) analyzes tool calls, finds problems, and creates [reports](/docs/self-driving/reports) in the [Self-driving inbox](https://app.posthog.com/inbox). Reports can include a pull request when you own the server. To get these reports, [set up Self-driving](/docs/self-driving/setup).
+
+### Whether you get a pull request depends on who owns the server
+
+The scout can only propose a code fix for code you control, so the same finding takes one of two paths:
+
+- **You own the server.** Your own MCP server, instrumented with the [`@posthog/mcp` SDK](/docs/mcp-analytics/installation). The report carries a **fix loop metric** – the number the fix is supposed to move – and auto-starts an implementation task. The coding agent works in a sandbox against your connected repo, pushes a branch, and opens a draft pull request.
+- **You don't own the server.** You're analyzing PostHog's hosted MCP server, which is what most projects are doing. The report is filed for human review with no repository attached, and nothing opens a pull request. Read it as an upstream bug report and decide what to do with it.
+
+Reports with unrelated fixes across several tools require human review, even when you own the server. Automatic fixes must address a specific schema, description, or handler problem.
+
+### What the scout watches
+
+A scout reads `$mcp_tool_call` events for tools that need attention:
+
+- **High failure rates** – a tool erroring far more than the rest
+- **Repeated calls** – agents calling the same tool over and over to get what they need
+- **Slow or large responses** – calls that take too long or return so much that they crowd the agent's context
+
+It weighs each of these by volume and reach, so a tool failing for one developer in one session doesn't earn a report. What clears the bar gets grouped by the team that owns the tools and filed as a single report.
+
+### What you can do with a report
+
+- **Read the report** – the failing tool, the pattern behind it, and the evidence from real calls.
+- **Ask questions** – start a discussion with an agent about the report to dig further before you act.
+- **Watch the agent work** – when there's an implementation task, follow the live transcript and review the files it changed.
+- **Merge** – the pull request opens on GitHub, and PostHog reflects the merged state back.
+
+Nothing ships without you. The merge happens on GitHub, so a human is always the last step.
+
+## Related
+
+- Query the same data from your editor over [MCP](/docs/mcp-analytics/surfaces/mcp).
+- Pull it into your own systems with the [API](/docs/mcp-analytics/surfaces/api).
+- Find the properties for each event in the [event reference](/docs/mcp-analytics/events).

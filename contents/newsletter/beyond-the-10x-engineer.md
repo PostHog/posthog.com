@@ -22,7 +22,7 @@ At PostHog, we rely on engineers to make product decisions. They set their roadm
 
 **This week’s theme:** What we look for in (product) engineers.
 
-> This post was first published in our Substack newsletter, [Product for Engineers](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
+> This post was first published in our Substack newsletter, [build mode](https://newsletter.posthog.com/). It's all about helping engineers and founders build better products by learning product skills. We send it (roughly) every two weeks. [Subscribe here](https://newsletter.posthog.com/subscribe).
 
 ## 1. Always prototyping and experimenting
 
@@ -148,6 +148,6 @@ Because we believe talent compounds, it is worth the extra work to find someone 
 
 - **[What Distinguishes Great Software Engineers?](https://newsletter.getdx.com/p/great-engineers) – Abi Noda:** Beyond being a component coder, maximizing the current value of work, making good decisions, and learning continuously set great engineers apart.
 
-- **[What startup recruiters actually see when you apply for a job](/founders/what-recruiters-see) - Charles Cook:** We had 9,000 people apply for roles at PostHog in the last 12 months. Charles goes over how we evaluate them and how to set yourself apart.
+- **[What startup recruiters actually see when you apply for a job](/blog/what-recruiters-see) - Charles Cook:** We had 9,000 people apply for roles at PostHog in the last 12 months. Charles goes over how we evaluate them and how to set yourself apart.
 
 <NewsletterForm />

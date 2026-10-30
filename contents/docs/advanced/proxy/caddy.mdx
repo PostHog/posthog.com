@@ -6,8 +6,8 @@ showStepsToc: true
 platformLogo: caddy
 ---
 
-import ProxyCallout from "../_snippets/proxy-callout.mdx"
-import { Steps, Step } from 'components/Docs/Steps'
+import ProxyCallout from "../_snippets/proxy-callout.mdx";
+import { Steps, Step } from "components/Docs/Steps";
 
 <ProxyCallout />
 
@@ -46,18 +46,27 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -69,18 +78,27 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -92,6 +110,10 @@ e.yourdomain.com {
 Replace `e.yourdomain.com` with your chosen subdomain.
 
 The `header_up Host` directive tells PostHog which domain the request is for. Without this, PostHog won't know how to route your request and you'll get 401 errors.
+
+The `header_up -Cookie` directive removes the browser's cookies before the request goes to PostHog. PostHog does not need them.
+
+The `@non_bearer` matcher and `request_header` directive forward the `Authorization` header only when its value starts with `Bearer phc_`, and remove any other value, such as session tokens your app adds to its own requests. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, match `"Bearer <your project token>"` instead, which is an exact match. The asset routes always remove the header with `header_up -Authorization`, because asset requests don't need it.
 
 The `header_down -Access-Control-Allow-Origin` directive removes CORS headers from PostHog's response. This prevents conflicts with your own CORS configuration.
 
@@ -118,17 +140,17 @@ In your application code, update your PostHog initialization to use your trackin
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_token>', {
-  api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://e.yourdomain.com",
+  ui_host: "https://us.posthog.com",
+});
 ```
 
 ```js file=EU
-posthog.init('<ph_project_token>', {
-  api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://eu.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://e.yourdomain.com",
+  ui_host: "https://eu.posthog.com",
+});
 ```
 
 </MultiLanguage>
@@ -173,6 +195,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /static/{path}
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -181,14 +205,21 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /array/{path}
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
 
   handle_path /yourpath-proxy* {
     rewrite * {path}
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -203,6 +234,8 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /static/{path}
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -211,14 +244,21 @@ In your working directory, create a file named `Caddyfile`:
     rewrite * /array/{path}
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
 
   handle_path /yourpath-proxy* {
     rewrite * {path}
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -248,21 +288,72 @@ If you want to test your proxy locally, create a file named `home.html` in the s
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Test PostHog Proxy</title>
-</head>
-<body>
-  <h1>Test home page</h1>
+  <head>
+    <title>Test PostHog Proxy</title>
+  </head>
+  <body>
+    <h1>Test home page</h1>
 
-  <script>
-    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    <script>
+      !(function (t, e) {
+        var o, n, p, r;
+        e.__SV ||
+          ((window.posthog = e),
+          (e._i = []),
+          (e.init = function (i, s, a) {
+            function g(t, e) {
+              var o = e.split(".");
+              (2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                (t[e] = function () {
+                  t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                }));
+            }
+            (((p = t.createElement("script")).type = "text/javascript"),
+              (p.crossOrigin = "anonymous"),
+              (p.async = !0),
+              (p.src = s.api_host + "/static/array.js"),
+              (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r));
+            var u = e;
+            for (
+              void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
+                u.people = u.people || [],
+                Object.defineProperty(u, "toString", {
+                  configurable: !0,
+                  enumerable: !0,
+                  writable: !0,
+                  value: function (t) {
+                    var e = "posthog";
+                    return ("posthog" !== a && (e += "." + a), t || (e += " (stub)"), e);
+                  },
+                }),
+                Object.defineProperty(u.people, "toString", {
+                  configurable: !0,
+                  enumerable: !0,
+                  writable: !0,
+                  value: function () {
+                    return u.toString(1) + ".people (stub)";
+                  },
+                }),
+                o =
+                  "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(
+                    " ",
+                  ),
+                n = 0;
+              n < o.length;
+              n++
+            )
+              g(u, o[n]);
+            e._i.push([i, s, a]);
+          }),
+          (e.__SV = 1));
+      })(document, window.posthog || []);
 
-    posthog.init('<ph_project_token>', {
-      api_host: 'http://localhost:2015/yourpath-proxy',
-      ui_host: 'https://us.posthog.com' // US, or https://eu.posthog.com for EU
-    })
-  </script>
-</body>
+      posthog.init("<ph_project_token>", {
+        api_host: "http://localhost:2015/yourpath-proxy",
+        ui_host: "https://us.posthog.com", // US, or https://eu.posthog.com for EU
+      });
+    </script>
+  </body>
 </html>
 ```
 
@@ -289,17 +380,17 @@ For production deployment, update your application code to use your proxy path:
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/yourpath-proxy',
-  ui_host: 'https://us.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://yourdomain.com/yourpath-proxy",
+  ui_host: "https://us.posthog.com",
+});
 ```
 
 ```js file=EU
-posthog.init('<ph_project_token>', {
-  api_host: 'https://yourdomain.com/yourpath-proxy',
-  ui_host: 'https://eu.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://yourdomain.com/yourpath-proxy",
+  ui_host: "https://eu.posthog.com",
+});
 ```
 
 </MultiLanguage>
@@ -345,18 +436,27 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -372,18 +472,27 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -427,17 +536,17 @@ In your application code, update your PostHog initialization to use your trackin
 <MultiLanguage>
 
 ```js file=US
-posthog.init('<ph_project_token>', {
-  api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://us.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://e.yourdomain.com",
+  ui_host: "https://us.posthog.com",
+});
 ```
 
 ```js file=EU
-posthog.init('<ph_project_token>', {
-  api_host: 'https://e.yourdomain.com',
-  ui_host: 'https://eu.posthog.com'
-})
+posthog.init("<ph_project_token>", {
+  api_host: "https://e.yourdomain.com",
+  ui_host: "https://eu.posthog.com",
+});
 ```
 
 </MultiLanguage>
@@ -514,18 +623,27 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://us-assets.i.posthog.com:443 {
       header_up Host us-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }
@@ -551,18 +669,27 @@ e.yourdomain.com {
   handle /static/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle /array/* {
     reverse_proxy https://eu-assets.i.posthog.com:443 {
       header_up Host eu-assets.i.posthog.com
+      header_up -Cookie
+      header_up -Authorization
       header_down -Access-Control-Allow-Origin
     }
   }
   handle {
+    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+    @non_bearer not header Authorization "Bearer phc_*"
+    request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
+      header_up -Cookie
       header_down -Access-Control-Allow-Origin
     }
   }

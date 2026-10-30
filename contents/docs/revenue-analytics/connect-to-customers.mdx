@@ -4,10 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import RevAnalyticsBetaWarning from './_snippets/rev-analytics-beta-warning.mdx'
 import WizardCommand from 'components/WizardCommand'
-
-<RevAnalyticsBetaWarning />
 
 PostHog automatically connects revenue data to persons and groups when you use revenue events. For data warehouse sources, you need to map the connection manually.
 
@@ -413,7 +410,7 @@ var session = await sessionService.CreateAsync(options);
 
 > **How does this work?** PostHog looks for `posthog_person_distinct_id` in the metadata of subscriptions, charges, and invoices tied to each Stripe customer. If the customer object doesn't have the metadata directly, PostHog uses the value from the most recently created child object.
 
-Once this is connected you'll be able to properly see who your top customers are in the [Top customers dashboard](https://app.posthog.com/revenue_analytics#top-customers).
+Once this is connected you'll be able to properly identify who your [top customers](/docs/revenue-analytics/revenue-metrics#top-customers) are and how much revenue they're generating.
 
 You'll also get access to the `persons_revenue_analytics` and `groups_revenue_analytics` tables in the [data warehouse](https://app.posthog.com/data-warehouse). This is a simple map of `person_id`/`group_key` to what their all-time revenue is.
 

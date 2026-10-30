@@ -39,13 +39,13 @@ export default function Intro({
             </div>
 
             {imageUrl && (
-                <figure className="m-0 mt-auto p-0 md:pr-8 flex items-end">
+                <figure className="m-0 mt-auto px-4 pb-4 md:px-8 md:pb-6 flex items-end justify-center">
                     <CloudinaryImage
                         alt=""
                         placeholder="none"
                         quality={100}
                         className={imageColumnClasses}
-                        imgClassName={imageClasses}
+                        imgClassName={imageClasses ?? 'max-h-40 md:max-h-52'}
                         src={imageUrl}
                     />
                 </figure>

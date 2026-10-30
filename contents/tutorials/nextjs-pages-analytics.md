@@ -295,7 +295,7 @@ import posthog from 'posthog-js'
 
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN, {
   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-  defaults: '2026-01-30'
+  defaults: '<ph_posthog_js_defaults>'
 });
 ```
 
@@ -308,7 +308,7 @@ Once saved, restart your app and click around, you should see pageviews and even
   classes="rounded"
 />
 
-PostHog autocaptures clicks, inputs, session recordings (if enabled), pageviews, exceptions, and more. You can also use all the features of [`posthog-js`](/docs/integrate/client/js) which we will set up during the rest of this tutorial.
+PostHog autocaptures clicks, inputs, session recordings (if enabled), pageviews, exceptions, and more. You can also use all the features of [`posthog-js`](/docs/libraries/js) which we will set up during the rest of this tutorial.
 
 ## Capturing custom events
 

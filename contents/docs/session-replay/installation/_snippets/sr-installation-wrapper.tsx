@@ -15,6 +15,7 @@ import {
     IOSInstallation,
     AndroidInstallation,
     FlutterInstallation,
+    KMPInstallation,
     ReactNativeInstallation,
     // No-code installations
     WebflowInstallation,
@@ -116,6 +117,12 @@ export const SRAndroidInstallationWrapper = () => (
 export const SRFlutterInstallationWrapper = () => (
     <OnboardingContentWrapper snippets={SNIPPETS}>
         <FlutterInstallation modifySteps={addNextStepsStep} />
+    </OnboardingContentWrapper>
+)
+
+export const SRKMPInstallationWrapper = () => (
+    <OnboardingContentWrapper snippets={SNIPPETS}>
+        <KMPInstallation modifySteps={addNextStepsStep} />
     </OnboardingContentWrapper>
 )
 

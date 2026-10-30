@@ -14,19 +14,16 @@ import {
     IconPlug,
 } from '@posthog/icons'
 import { StickerPath } from 'components/Stickers/Stickers'
+import { getTool } from '../../data/tools'
 
 export const posthog_ai = {
-    name: 'PostHog AI',
+    ...getTool('posthog_ai'),
     parentIcon: 'aiMax',
     Icon: IconSparkles,
-    description: 'Your AI-powered product analyst and product manager',
     role: 'Helpful chatbot',
-    handle: 'posthog_ai',
     type: 'posthog_ai',
     color: 'blue',
     colorSecondary: 'lilac',
-    category: 'automation',
-    slug: 'ai',
     slider: {
         marks: [500, 3000, 10000, 50000, 100000],
         min: 500,
@@ -63,12 +60,12 @@ export const posthog_ai = {
     seo: {
         title: 'PostHog AI – Your copilot for PostHog data and insights',
         description:
-            'Your AI-powered product analyst. Write natural language to query and analyze PostHog data instantly, find insights, and speed up product decisions with PostHog AI.',
+            'The interface humans and agents use to understand your product – the brain of self-driving. Ask in plain English; PostHog AI queries your data and acts on it.',
     },
     overview: {
         title: 'Ask questions about how people use your product',
         description:
-            'PostHog AI builds insights, automates manual tasks, and routes more complex tasks to other AI agents for specialized work.',
+            'PostHog AI builds insights, automates manual tasks, and routes more complex work to specialized agents. It is the interface humans and agents use to understand your product – the brain of self-driving.',
         layout: 'ai',
         textColor: 'text-white',
     },
@@ -92,8 +89,8 @@ export const posthog_ai = {
             imgClasses: 'max-w-[444px]',
         },
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_light_f654818fb0.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_dark_35c03e330c.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/posthog_ai_light_7b9d11232e.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/posthog_ai_dark_f98f323528.png',
             alt: 'PostHog AI screenshot',
             classes: 'justify-center items-center',
             imgClasses: 'rounded shadow-2xl border border-primary',
@@ -262,7 +259,7 @@ export const posthog_ai = {
             icon: <IconRewindPlay className="size-5" />,
             color: 'yellow',
             description:
-                "Don't scrub through hours of recordings — let a robot suffer instead. Ask PostHog AI for the bloopers, sizzle reel, or directors cut of user behavior.",
+                "Don't scrub through hours of recordings – let a robot suffer instead. Ask PostHog AI for the bloopers, sizzle reel, or directors cut of user behavior.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/session_reply_6846989ead.png',
@@ -308,7 +305,7 @@ export const posthog_ai = {
             icon: <IconToggle className="size-5" />,
             color: 'green',
             description:
-                'PostHog AI sets up, monitors, manages, and rolls out your feature flags — making releases safe by default.',
+                'PostHog AI sets up, monitors, manages, and rolls out your feature flags – making releases safe by default.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_ce422c1e73.png',
@@ -352,7 +349,7 @@ export const posthog_ai = {
             icon: <IconFlask className="size-5" />,
             color: 'purple',
             description:
-                'Ship ideas like a mad scientist. PostHog AI handles setup, flags, and metrics — you decide what deploys (and which experiments never leave the lab).',
+                'Ship ideas like a mad scientist. PostHog AI handles setup, flags, and metrics – you decide what deploys (and which experiments never leave the lab).',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/experiments_f90ed26268.png',
@@ -399,7 +396,7 @@ export const posthog_ai = {
             icon: <IconWarning className="size-5" />,
             color: 'orange',
             description:
-                'Find out what broke before your users tweet about it. PostHog AI connects exceptions to user sessions, revenue impact, and business context—not just stack traces.',
+                'Find out what broke before your users tweet about it. PostHog AI connects exceptions to user sessions, revenue impact, and business context – not just stack traces.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_53fc0bc180.png',
@@ -867,7 +864,7 @@ export const posthog_ai = {
         pricing:
             "We charge for AI based on the actual token usage from the underlying LLM providers, with a 20% markup. One PostHog AI credit equals $0.008333 of raw inference cost, so 500 credits is $5. Simple queries like 'what were my daily active users in October?' use very few credits, maybe 50-100 credits. More complex tasks like analyzing hundreds of session recordings or rewriting SQL queries multiple times will consume more, but you see the cost in real-time so there are no surprises.<br /><br />Everyone starts with 500 free credits per month. After that, you pay for what you use. The more credits you need, the cheaper they get (volume pricing). We automatically route to the most efficient model for each task, so you're not stuck paying GPT-4 prices when a smaller model works fine.<br /><br />The thing is, even complex queries are usually cheaper than the time you'd spend building them manually. A 500-credit task that saves you 20 minutes is still a good deal. And unlike seat-based pricing, your whole team can use it without multiplying costs.",
         'comparison-summary':
-            "Most analytics platforms either (a) don't have AI, (b) slapped ChatGPT onto their dashboard and called it 'AI-powered,' or (c) have AI that only does one thing like anomaly detection. PostHog AI is different because it's deeply integrated into every product and actually understands your data model. It can write valid HogQL, knows your event names, understands your feature flags—it's not just a general-purpose LLM trying to help.<br /><br />The closest comparison is probably Amplitude's AI, but that only works inside Amplitude. We're open source, so you can see exactly how it works and even self-host if you want. Our pricing is also transparent and usage-based instead of requiring an enterprise contract.",
+            "Most analytics platforms either (a) don't have AI, (b) slapped ChatGPT onto their dashboard and called it 'AI-powered,' or (c) have AI that only does one thing like anomaly detection. PostHog AI is different because it's deeply integrated into every product and actually understands your data model. It can write valid HogQL, knows your event names, understands your feature flags—it's not just a general-purpose LLM trying to help. Because it sits on that context and can act on it, it's the brain that makes your product self-driving, not just another chatbot.<br /><br />The closest comparison is probably Amplitude's AI, but that only works inside Amplitude. We're open source, so you can see exactly how it works and even self-host if you want. Our pricing is also transparent and usage-based instead of requiring an enterprise contract.",
         docs: "The docs for PostHog AI explain how it works under the hood—what models we use, how we handle context, what each AI agent specializes in. We're upfront about limitations too: it's not perfect, it can make mistakes, and you should verify important queries before acting on them. That said, it's getting better fast. We're constantly training it on more examples and improving the prompts.<br /><br />If you run into issues or have ideas for how AI could be more useful in specific workflows, tell us. The team actively monitors feedback because this is still early days and we're trying to build something that's actually useful, not just a checkbox feature.",
         'pairs-with':
             "PostHog AI works across the entire platform, so it pairs with everything. But it's especially powerful when you combine products. For example: ask AI to find session replays of users who hit a specific error, then have it create a feature flag to roll out the fix to just those affected users, then build an experiment to test if it actually solved the problem. All of that without leaving PostHog or manually matching user IDs across tools.<br /><br />It also works with our data warehouse, so you can query external data from Stripe, HubSpot, etc. alongside your product data. Ask 'show me users who churned in the last 30 days and their LTV from Stripe' and it writes the join for you.",

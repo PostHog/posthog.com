@@ -1,10 +1,8 @@
 import React from 'react'
 import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
-import { useApp } from '../../../context/App'
 
 export default function HedgehogModeGame(): JSX.Element {
-    const { websiteMode } = useApp()
     return (
         <>
             <SEO
@@ -20,12 +18,11 @@ export default function HedgehogModeGame(): JSX.Element {
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
+                showAddressBar={false}
+                headerBarOptions={[]}
                 fullScreen
             >
-                <iframe
-                    src="https://hedgehog-mode-playground.vercel.app/"
-                    className={`w-full h-full border-0 ${websiteMode ? 'min-h-[calc(100vh-103px)]' : ''}`}
-                />
+                <iframe src="https://hedgehog-mode-playground.vercel.app/" className="w-full h-full border-0" />
             </Explorer>
         </>
     )

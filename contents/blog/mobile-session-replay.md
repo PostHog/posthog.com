@@ -135,7 +135,7 @@ There are more challenges to solve, specifically around [SwiftUI](https://github
 
 We solved the testing problem in 3 key ways:
 
-1. **Building testing tools:** <TeamMember name="Paul D'Ambra" /> and <TeamMember name="Manoel Aranda Neto"/> wanted to keep the rrweb schema for mobile replay to ensure the fewest changes possible to our API and player. To do this, they wrote a [validation and testing tool](https://github.com/PostHog/mobile-replay-data-transformer) to rapidly test the transformations before deploying it in our main app.
+1. **Building testing tools:** <TeamMember name="Paul D'Ambra" /> and <TeamMember name="Manoel Aranda Neto"/> wanted to keep the rrweb schema for mobile replay to ensure the fewest changes possible to our API and player. To do this, they wrote a <PrivateLink url="https://github.com/PostHog/mobile-replay-data-transformer">validation and testing tool</PrivateLink> to rapidly test the transformations before deploying it in our main app.
 
 2. **Using open source apps:** The team found a [list of open source apps](https://github.com/pcqpcq/open-source-android-apps) they could test with. This helped find issues, support more edge cases, and build test coverage.
 
@@ -158,6 +158,6 @@ This enables us to help more developers have the tools they need to build succes
 
 ## Further reading
 
-- [What's the best Hotjar for mobile apps?](/blog/hotjar-for-mobile-ios-android-react-native-flutter)
+- [What's the best Hotjar for mobile apps?](/compare/hotjar-for-mobile-ios-android-react-native-flutter)
 - [We decided to make session replay cheaper](/blog/session-replay-pricing)
 - How to set up [Android](/tutorials/android-session-replay), [iOS](/tutorials/ios-session-replay), and [React Native](/docs/session-replay/react-native) session replay

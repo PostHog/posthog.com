@@ -40,8 +40,8 @@ We'll need them to be able to demo their product to us, as well as attend two or
 
 Ideally we will also have them in Slack Connect channel so that we can provide responsive support and expose them to the wider PostHog team.
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, follow the instructions on [the link here](https://docs.usepylon.com/bridges/microsoft-teams/setup) to get set up.
-Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - SupportHog works in Teams too. See [Using MS Teams](/handbook/growth/sales/slack-channels#using-ms-teams) on the shared channels page for how to get set up.
+Before adding the customer into the channel, remember to test it to ensure ticket creation is working correctly.
 
 ## Day 0 - Session: Kick off
 
@@ -53,7 +53,7 @@ By the end of the call we should have a plan for event capture/opt-out capture a
 
 The customer should come prepared to demo their product to us, where we can help figure out the key tracking events needed for the evaluation to be successful.
 
-If they don't already know about AARRR we should share our [AARRR blog post](/blog/aarrr-pirate-funnel) and [Tracking Plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) and ask them to review it before the call.
+If they don't already know about AARRR we should share our [AARRR blog post](/blog/aarrr-pirate-funnel) and <PrivateLink url="https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0">Tracking Plan</PrivateLink> and ask them to review it before the call.
 
 ### Structure
 

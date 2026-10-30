@@ -35,6 +35,11 @@ export default function Partnerships(): JSX.Element {
                     programs. If you're unsure which category fits best, just pick "Other" and tell us more.
                 </p>
 
+                <p>
+                    Want us to sponsor or speak at your event? Head to our{' '}
+                    <a href="/handbook/marketing/events#event-submission-form">event form</a> instead.
+                </p>
+
                 <PartnershipsSurvey />
             </Editor>
         </>

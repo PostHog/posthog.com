@@ -31,7 +31,7 @@ Funnel experiments compare conversion rates. For example, if you want to measure
 
 We use Monte Carlo simulations to determine the probability of each variant being the best. 
 
-Each variant can be modeled as a beta distribution, with the alpha parameter equal to the number of conversions and the beta parameter equal to the number of failures for that variant. For each variant, we sample from their respective distributions to get a conversion rate. We perform 100,000 simulation runs in our calculations.
+Each variant can be modeled as a beta distribution, with the alpha parameter equal to the number of conversions and the beta parameter equal to the number of failures for that variant. For each variant, we sample from their respective distributions to get a conversion rate. We perform 10,000 simulation runs in our calculations.
 
 The probability of a variant being the best is given by:
 
@@ -65,7 +65,7 @@ Trend experiments capture count data. For example, if you want to measure the ch
 
 We use Monte Carlo simulations to determine the probability of each variant being the best. 
 
-Each variant can be modeled as a gamma distribution, with the shape parameter equal to the trend count and the exposure parameter equal to the relative exposure for that variant. For each variant, we sample from their respective distributions to get a count value. We perform 100,000 simulation runs in our calculations.
+Each variant can be modeled as a gamma distribution, with the shape parameter equal to the trend count and the exposure parameter equal to the relative exposure for that variant. For each variant, we sample from their respective distributions to get a count value. We perform 10,000 simulation runs in our calculations.
 
 The probability of a variant being the best is given by:
 
@@ -84,7 +84,7 @@ The probability of a variant being the best is given by:
 
 ### 2. Statistical significance
 
-To calculate significance, we measure p-values using a [Poisson means test](https://www.evanmiller.org/statistical-formulas-for-programmers.html#count_test). Results are significant when the p-value is less than 0.05
+As with funnel experiments, we measure the expected loss from a Monte Carlo simulation. Results are significant when a variant's probability of being the best reaches at least 90% and the expected loss is below 1%.
 
 ## How does PostHog determine final significance?
 
@@ -96,6 +96,6 @@ Therefore, we have additional criteria to determine what we call **final signifi
 
 - Each variant has more than 100 unique users.
 - The statistical significance calculations confirm significance.
-- The combined probability of all test variants being the best is greater than 90%.
+- The highest probability of being the best across variants reaches at least 90%.
 
 

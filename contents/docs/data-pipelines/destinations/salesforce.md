@@ -1,0 +1,40 @@
+---
+title: Send PostHog event data to Salesforce
+templateId:
+    - template-salesforce-create
+    - template-salesforce-update
+---
+
+import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
+import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+
+This destination connects to your Salesforce instance, sending events from PostHog to Salesforce as they are ingested.
+
+
+You'll also need access to the relevant Salesforce account.
+
+## Installation
+
+1. In PostHog, click the [Data pipeline](https://app.posthog.com/data-management/destinations) tab in the left sidebar.
+2. Click the [Destinations](https://app.posthog.com/data-management/destinations?search=salesforce) tab.
+3. Search for 'Salesforce' and click **+ Create**.
+4. Connect your Salesforce account at the configuration step.
+5. Press **Create & Enable** and watch your 'Objects' get populated in Salesforce!
+
+<HideOnCDPIndex>
+
+## Configuration
+
+<TemplateParameters />
+
+## FAQ
+
+### Is the source code for this destination available?
+
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/salesforce/template_salesforce.py) is available on GitHub.
+
+<PostHogMaintained />
+
+<FeedbackQuestions />
+
+</HideOnCDPIndex>

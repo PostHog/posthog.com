@@ -36,7 +36,7 @@ const Thread = ({ title, status, url, state }: { title: string; status: string; 
         <>
             <div>
                 <Link
-                    to={`/questions/${url}`}
+                    to={`/forum/p/${url}`}
                     className="font-medium hover:underline text-sm @2xs:py-1 leading-tight line-clamp-3"
                     state={state}
                 >
@@ -106,7 +106,7 @@ export default function Questions(): JSX.Element {
                             </h3>
                             <div>
                                 <Link
-                                    to="/community/dashboard"
+                                    to="/forum/following"
                                     className="text-[13px] font-bold flex items-center bg-accent rounded-lg px-2 py-1"
                                 >
                                     View all
@@ -137,7 +137,7 @@ export default function Questions(): JSX.Element {
                         </h3>
                         <div>
                             <Link
-                                to="/questions"
+                                to="/forum"
                                 className="text-[13px] font-bold flex items-center bg-accent rounded-lg px-2 py-1"
                                 state={{ newWindow: true }}
                             >

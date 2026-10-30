@@ -103,27 +103,36 @@ const statusLabels = {
     complete: 'Complete (Changelog)',
 }
 
+const codingOriginTags = ['human-coded', 'ai-coded']
+
 const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any) => void }) => {
     const [profiles, setProfiles] = useState<any[]>([])
     useEffect(() => {
-        const query = qs.stringify({
-            populate: ['avatar', 'teams'],
-            pagination: {
-                limit: 100,
-            },
-            filters: {
-                teams: {
-                    id: {
-                        $notNull: true,
+        const fetchPage = (page: number) =>
+            fetch(
+                `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${qs.stringify({
+                    populate: ['avatar', 'teams'],
+                    pagination: {
+                        page,
+                        pageSize: 100,
                     },
-                },
-            },
-        })
-        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles?${query}`)
-            .then((res) => res.json())
-            .then(({ data }) => {
-                setProfiles(data)
-            })
+                    filters: {
+                        teams: {
+                            id: {
+                                $notNull: true,
+                            },
+                        },
+                    },
+                })}`
+            ).then((res) => res.json())
+
+        const fetchProfiles = async () => {
+            const first = await fetchPage(1)
+            const pageCount = first?.meta?.pagination?.pageCount || 1
+            const rest = await Promise.all(Array.from({ length: pageCount - 1 }, (_, i) => fetchPage(i + 2)))
+            setProfiles([first, ...rest].flatMap((page) => page?.data || []))
+        }
+        fetchProfiles()
     }, [])
 
     const sortedProfiles = useMemo(() => {
@@ -545,6 +554,7 @@ export default function RoadmapForm({
             betaAvailable: false,
             milestone: false,
             category: undefined,
+            tags: [],
             githubUrls: [''],
             dateCompleted: dayjs().format('YYYY-MM-DD'),
             author: undefined,
@@ -561,6 +571,7 @@ export default function RoadmapForm({
             milestone,
             githubUrls,
             category,
+            tags,
             dateCompleted,
             author,
             social,
@@ -614,6 +625,7 @@ export default function RoadmapForm({
                         milestone,
                         githubUrls: githubUrls.filter((url) => !!url),
                         category,
+                        tags,
                         socialSharing: JSON.stringify(social),
                         ...(author?.id ? { profiles: { connect: [author.id] } } : null),
                     },
@@ -637,6 +649,7 @@ export default function RoadmapForm({
             }
         },
     })
+    const selectedCodingOriginTags = codingOriginTags.filter((tag) => values.tags?.includes(tag))
 
     return (
         <form onSubmit={handleSubmit} className="">
@@ -715,6 +728,26 @@ export default function RoadmapForm({
                         ]}
                         onChange={(type) => setFieldValue('category', type)}
                         value={values.category}
+                        searchable={false}
+                    />
+                )}
+                {status === 'complete' && (
+                    <OSSelect
+                        label="Coding origin tag"
+                        direction="column"
+                        options={[
+                            { label: 'Untagged', value: '' },
+                            { label: 'Human-coded', value: 'human-coded' },
+                            { label: 'AI-coded', value: 'ai-coded' },
+                        ]}
+                        value={selectedCodingOriginTags.length === 1 ? selectedCodingOriginTags[0] : ''}
+                        onChange={(tag) =>
+                            setFieldValue('tags', [
+                                ...(values.tags || []).filter((value) => !codingOriginTags.includes(value)),
+                                ...(tag ? [tag] : []),
+                            ])
+                        }
+                        description="Leave untagged if the PR's coding origin is uncertain."
                         searchable={false}
                     />
                 )}

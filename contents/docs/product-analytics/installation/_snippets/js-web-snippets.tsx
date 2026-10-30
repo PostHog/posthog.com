@@ -10,7 +10,7 @@ const posthogSnippetMethods = [
     'unregister',
     'unregister_for_session',
     'getFeatureFlag',
-    'getFeatureFlagPayload',
+    'getFeatureFlagResult',
     'isFeatureEnabled',
     'reloadFeatureFlags',
     'updateEarlyAccessFeatureEnrollment',

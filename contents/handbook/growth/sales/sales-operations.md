@@ -34,7 +34,7 @@ For customers that sign up themselves, and begin using the product, we provide a
 1. [Pre-recorded demo](/demo)
 1. [Community page](/posts)
 
-Additionally, all users can contact us for support/bugs/feedback using the `?` icon in the top right of the PostHog app. This is routed to the appropriate team in Zendesk.
+Additionally, all users can contact us for support/bugs/feedback using the support panel in the PostHog app (bottom-left **More** menu → **Support**). This is routed to the appropriate team in PostHog Support.
 
 
 ## Ensuring customers see value quickly
@@ -46,7 +46,7 @@ getting live **production** data through our pipeline and available for analysis
    1. JavaScript / Autocapture is the easiest - also make sure to turn on Session Replay.
 1. If people aren't sure what they want to track, AARRR is a great framework to use and will give people a good taster on the types on insight they can see.  We have a number of supporting resources:
    1. A [blog post](/blog/aarrr-pirate-funnel) on getting started with the framework.
-   2. A sample AARRR [tracking plan](https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0) which we can give to customers to fill in.  It shows how we do things at PostHog and may help inspire people who don't know how to get started.
+   2. A sample AARRR <PrivateLink url="https://docs.google.com/spreadsheets/d/12uV5aKAhU_wygUQl3YXZU2J_QN_AZi4nPFj-9WIKhlY/edit#gid=0">tracking plan</PrivateLink> which we can give to customers to fill in.  It shows how we do things at PostHog and may help inspire people who don't know how to get started.
 1. Encourage them to create dashboards for them to show off PostHog in the wider organization.
 1. Keep on top of any [support](/handbook/support/customer-support) requests / blockers they may have.
 

@@ -6,4 +6,10 @@ Whenever possible, we recommend passing in all person properties you have availa
 
 Person properties can also be set being adding a `$set` property to a event `capture` call. 
 
+<CalloutBox icon="IconInfo" title="`$set` and `$set_once` aren't stored on events" type="fyi">
+
+These properties only tell PostHog how to update person data during ingestion — they aren't kept on the stored event, so you can't filter, break down, or query events by them. To query the values you set, use [person properties](/docs/product-analytics/person-properties) instead.
+
+</CalloutBox>
+
 See our [person properties docs](/docs/product-analytics/person-properties) for more details on how to work with them and best practices.

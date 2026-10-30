@@ -155,7 +155,6 @@ export default function FeatureMatrix(): JSX.Element {
                 title="Feature matrix"
                 leftSidebar={<TreeMenu items={internalToolsNav} />}
                 tableOfContents={tableOfContents}
-                description="Complete comparison of PostHog against all competitors across all products, features, and platform capabilities"
                 showQuestions={false}
             >
                 <div className="@container text-primary">

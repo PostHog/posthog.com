@@ -9,7 +9,7 @@ PostHog complements a lot of other software companies. Since we’re active in t
 ### Who takes the lead with co-marketing?
 Sales, engineering, or support will sometimes tag marketing into customer Slack channels where someone mentions co-marketing. There’s no obligation to say yes just because a partner is enthusiastic. If you’re unsure whether something is worth pursuing, ask in the **#team-marketing** Slack channel. 
 
-> The list of partners we are currently doing or planning co-marketing partnerships with is maintained [in this canvas](https://posthog.slack.com/docs/TSS5W8YQZ/F09FD1DS2CD). 
+> The list of partners we are currently doing or planning co-marketing partnerships with is maintained <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F09FD1DS2CD">in this canvas</PrivateLink>.
 
 If it does seem promising, a product marketer will take the lead and loop in events or other teams as needed.
 
@@ -55,7 +55,6 @@ If a customer is a logo we’d proudly show on the site, represents [who we buil
 
 Examples:
 - [PostHog + Supabase](/customers/supabase)
-- [PostHog + Mintlify](/customers/mintlify)
 - [PostHog + Lovable](/customers/lovable)
 
 Social media co-marketing for case studies naturally follows since most companies are excited to have their story featured. It's usually worth raising an [art request](/handbook/brand/art-requests) for these opportunities.
@@ -70,7 +69,6 @@ However, we are very selective about which teams we partner with here because th
 Examples:
 - Easier incidents with [Incident.io](https://incident.io) ($1,500 off a teams plan)
 - Better SDKs with [Speakeasy](https://www.speakeasy.com/) (50% off for 6 months)
-- Better search with [Chroma](https://www.trychroma.com/) ($5,000 of credit for their search and retrieval service)
 
 If we're signing anything with legal commitments, that needs to go via <PrivateLink url="https://posthog.slack.com/archives/C08MYQX74KH">#legal</PrivateLink>. If it's an informal exchange of perks, you can usually just coordinate directly with the partner company.
 
@@ -95,7 +93,6 @@ We maintain a <PrivateLink url="https://docs.google.com/spreadsheets/d/1LSk0J6TW
 [Events](/handbook/marketing/events) are a great place to co-market and vary from intimate gatherings to large scale meetups. These are higher effort and don’t usually sit under product marketing alone. Tag [Daniel](/community/profiles/34023) early – he’s the best judge of what events and co-sponsorships will actually land.
 
 Examples:
-- [We buy AI YC](https://luma.com/ztg6sjun) pitch event with Chroma, Mintlify (and others)
 - [MCP Builder breakfast](https://luma.com/f9vnfsii) with Fiberplane
 - [Building with (and for) AI](https://luma.com/hxn3j38l) event with Vercel and Profound
 

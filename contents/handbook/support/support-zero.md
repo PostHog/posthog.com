@@ -16,7 +16,7 @@ At times we can really struggle to pull ourselves away from tickets and focus on
 
 Each support team member is given an allocation of *2 support zero weeks in each quarter* (i.e. 10 working days). These are weeks that each team member can book.
 
-Team members are encouraged to consider taking the same zero weeks as someone else working on the same quarterly goal (so it can be done hackathon-style, you can consider using your meetup budget, etc)
+Team members are encouraged to consider taking the same zero weeks as someone else working on the same quarterly goal (so it can be done hackathon-style, you can consider using your monthly [`User Limit`](/handbook/people/spending-money#how-it-works) to meet up, etc)
 
 ### Before the quarter starts
 - [ ] During quarterly goal planning we scope out goals that we think are achievable in our zero time each quarter.
@@ -26,24 +26,22 @@ Team members are encouraged to consider taking the same zero weeks as someone el
 - [ ] Each team member should create a [meta GitHub issue](https://github.com/PostHog/meta) for their quarterly goal work.
 
 ### Before your zero week
-- [ ] Hand over all of your in-progress tickets (including any in a pending state that you believe are ongoing / going to come back). Do this as a message into [#team-support](https://posthog.slack.com/archives/C075D3C5HST).
-- [ ] Set yourself as unavailable in Zendesk [using the Out of Office app](https://posthoghelp.zendesk.com/agent/apps/out-of-office).
+- [ ] Hand over all of your in-progress tickets (including any in a pending state that you believe are ongoing / going to come back). Do this as a message into <PrivateLink url="https://posthog.slack.com/archives/C075D3C5HST">#team-support</PrivateLink>.
 - [ ] Set a status in Slack so it's clear to the rest of the team that you're on a zero week 
 
 ### During your zero week
 - [ ] Try your best to avoid the ticket queue (i.e. generally don't pick up new tickets or respond on tickets you were previously working on, except in exceptional circumstances).
 - [ ] Do reassign tickets back to the main ticket group if they accidentally come back assigned to you directly for some reason.
-- [ ] Do respond to any questions the team ask in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) about tickets you were previously working on.
+- [ ] Do respond to any questions the team ask in <PrivateLink url="https://posthog.slack.com/archives/C075D3C5HST">#team-support</PrivateLink> about tickets you were previously working on.
 - [ ] Do consider that you may get pulled back onto tickets on a particular day if absolutely necessary (to be avoided as much as possible).
 - [ ] Make sure to keep notes and design choices publicly available on your meta GitHub issue.
 
 > :warning:
-> Team members who are working on tickets need to be aware of ticket queue and highlight in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) if the workload is getting too high
+> Team members who are working on tickets need to be aware of ticket queue and highlight in <PrivateLink url="https://posthog.slack.com/archives/C075D3C5HST">#team-support</PrivateLink> if the workload is getting too high
 
 ### After your zero week
-- [ ] Set yourself as available in Zendesk [using the Out of Office app](https://posthoghelp.zendesk.com/agent/apps/out-of-office).
-- [ ] Ask in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) if there are any tickets that the team would like to return to you that you were previously handling.
-- [ ] Ask in [#team-support](https://posthog.slack.com/archives/C075D3C5HST) for any feedback that the team has for you based on any of your tickets they have handled during your zero week.
+- [ ] Ask in <PrivateLink url="https://posthog.slack.com/archives/C075D3C5HST">#team-support</PrivateLink> if there are any tickets that the team would like to return to you that you were previously handling.
+- [ ] Ask in <PrivateLink url="https://posthog.slack.com/archives/C075D3C5HST">#team-support</PrivateLink> for any feedback that the team has for you based on any of your tickets they have handled during your zero week.
 - [ ] Consider if this is a good stage in your goal to seek feedback from the team (likely via your meta GitHub issue or a different RFC). Please do consider if it's worth the team's time at this stage.
 - [ ] Get stuck into tickets!
 

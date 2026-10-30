@@ -2,33 +2,91 @@
 title: Evaluations
 ---
 
-Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations) and return a pass/fail result with reasoning. PostHog supports two types of evaluations:
+Evaluations automatically assess the quality of your LLM [generations](/docs/ai-observability/generations). PostHog supports three types of evaluations:
 
-- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
-- **Code-based (Hog)** – Runs deterministic code you write against each generation. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
+- **LLM-as-a-judge** – Uses an LLM to score each generation against a prompt you define, returning a pass/fail result, a numeric score, or categories. You [choose a judge method](#choosing-a-judge-method): **LLM with explanation** provides written reasoning, while **Decision model** returns typed results without reasoning. Great for nuanced, subjective checks like tone, helpfulness, or hallucination detection.
+- **Code-based (Hog)** – Runs deterministic code you write against each generation, returning a pass/fail result, a numeric score, or categories. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
+- **Sentiment analysis** – Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Great for monitoring how users feel during conversations with your AI features. Free to run with no LLM cost.
+
+This page covers online evaluations and backfills. To test changes before they reach production, see [offline evals](/docs/ai-evals/offline-evals).
 
 ## Why use evaluations?
 
 - **Monitor output quality at scale** – Automatically check if generations are helpful, relevant, or safe without manual review.
 - **Detect problematic content** – Catch hallucinations, toxicity, or jailbreak attempts before they reach users.
 - **Track quality trends** – See pass rates across models, prompts, or user segments over time.
-- **Debug with reasoning** – Each evaluation provides an explanation for its decision, making it easy to understand failures.
+- **Debug with reasoning** – LLM judges using the **LLM with explanation** method provide written reasoning, and Hog evaluations can include reasoning through `print()`. Decision model judges return results without written reasoning.
 
 ## Choosing an evaluation type
 
-|                 | LLM-as-a-judge                                               | Code-based (Hog)                                           |
-| --------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
-| **Best for**    | Subjective quality checks (tone, helpfulness, hallucination) | Deterministic rule-based checks (format, keywords, length) |
-| **Cost**        | LLM API call per evaluation                                  | Free                                                       |
-| **Speed**       | Seconds                                                      | Milliseconds                                               |
-| **Consistency** | May vary between runs                                        | Deterministic — same input always produces same result     |
-| **Setup**       | Write a prompt                                               | Write Hog code                                             |
+|              | LLM-as-a-judge                                                                                                                 | Code-based (Hog)                                                           | Sentiment analysis                                     |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------ |
+| **Best for** | Subjective quality checks (tone, helpfulness, hallucination)                                                                   | Deterministic rule-based checks (format, keywords, length)                 | Tracking how users feel during conversations           |
+| **Cost**     | LLM API call per evaluation                                                                                                    | Free                                                                       | Free                                                   |
+| **Speed**    | Seconds                                                                                                                        | Milliseconds                                                               | Milliseconds                                           |
+| **Output**   | Pass/fail, numeric score, or categories; written reasoning with **LLM with explanation**, no reasoning with **Decision model** | Pass/fail, numeric score, or categories; optional reasoning from `print()` | Positive, neutral, or negative with a confidence score |
+| **Setup**    | Write a prompt                                                                                                                 | Write Hog code                                                             | Pick the type – no prompt or code required             |
+
+## Choosing what to evaluate
+
+LLM-as-a-judge and code-based evaluations have an **Evaluate** setting that picks what one run grades:
+
+- **Each generation** grades every matching generation on its own, right after it's ingested.
+- **Whole trace** grades all the events in a [trace](/docs/ai-observability/traces) together, after the trace settles.
+- **Whole session** grades every trace in a [session](/docs/ai-observability/sessions) together, after the session settles.
+
+Property filters still match individual generations. A trace or session is evaluated when any of its generations match, and the sampling rate applies to the whole trace or session.
+
+**Whole session** only runs on generations that carry the `$ai_session_id` property. If your events don't include it, a session evaluation has nothing to grade and never produces results. See [how to set a session ID](/docs/ai-observability/sessions#how-to-set-a-session-id), or pick **Whole trace** or **Each generation** instead.
+
+Sentiment evaluations always grade each generation.
+
+## Choosing an output type
+
+LLM-as-a-judge and code-based evaluations have an **Output type** setting. You pick it when you create the evaluation, and you can't change it later.
+
+- **Boolean** returns pass or fail. Use it for yes/no checks, like "the response is valid JSON".
+- **Numeric score** returns a number. Use it for quality ratings, like a 1 to 5 helpfulness score, or for measured values, like latency or response length.
+- **Categorical** returns one or more labels from a list you define. Use it to sort results into failure modes, like "wrong tool", "hallucination", or "off topic".
+
+### Numeric scores
+
+You can set a **Minimum** and **Maximum** score. A score outside these bounds is skipped, not graded. **Step** suggests the score increment. PostHog asks an LLM judge to use it, but stores the score exactly as returned, so a judge can still return a value like `3.7` when the step is 1.
+
+To get pass rates and reports, turn on **Set a passing rule** and choose **At least (≥)** or **At most (≤)** a threshold. Without a passing rule, you still get the scores, but no pass rates or reports. If you change the rule later, PostHog applies the new rule to past results too.
+
+### Categories
+
+Add the categories the evaluation can return. Each category has a key, which PostHog stores, and a label, which PostHog displays. Keys use lowercase letters, numbers, `_`, and `-`. Keep a key the same when you rename its label, so past results keep their meaning. An evaluation can have up to 100 categories.
+
+**Categories per result** controls how many categories one result can have:
+
+- **One category** returns exactly one category.
+- **Multiple categories** returns any number of categories, including none.
+
+To get pass rates and reports, choose **Passing categories**. A result passes only when all of its categories are passing categories. For example, if `resolved` is the only passing category:
+
+- `resolved` passes.
+- `resolved` and `escalated` fails, because `escalated` isn't a passing category.
+- A result with no categories fails.
+
+With **Multiple categories**, you can also leave **Passing categories** empty. Then a result passes only when it has no categories. Use this when every category is a problem, like `hallucination` or `wrong_tool`, so a good result has none.
+
+If you change the passing categories later, PostHog applies them to past results too.
+
+### Not applicable results
+
+Turn on **Allow N/A responses** for a boolean, numeric, or categorical evaluation when its criteria don't apply to every generation. Both LLM judges and Hog evaluations support N/A. N/A results are excluded from pass/fail grading and pass rates.
+
+For LLM judges, describe when the criteria don't apply in your prompt. For Hog evaluations, return `null` to mark a result as N/A when **Allow N/A responses** is enabled.
+
+With **Multiple categories**, an empty list (`[]`) is a valid, applicable result that means no categories match. Its passing rule still determines whether it passes. It is different from `null`, which marks the result as N/A when enabled.
 
 ## LLM-as-a-judge evaluations
 
 ### How they work
 
-When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a boolean pass/fail result plus reasoning, which is stored and linked to the original generation.
+When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a result in the evaluation's [output type](#choosing-an-output-type), which is stored and linked to the original generation. The behavior depends on the [judge method](#choosing-a-judge-method) you select: **LLM with explanation** judges use chat completions and return written reasoning alongside the result, while **Decision model** judges return typed results without reasoning.
 
 You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
 
@@ -90,32 +148,54 @@ For tool call correlation within messages, include:
 
 ### Built-in templates
 
-PostHog provides five pre-built evaluation templates to get you started:
+PostHog provides pre-built templates to get you started. When you click **Create evaluation**, the template picker opens with these tabs:
 
-| Template          | What it checks                                | Best for                            |
-| ----------------- | --------------------------------------------- | ----------------------------------- |
-| **Relevance**     | Whether the output addresses the user's input | Customer support bots, Q&A systems  |
-| **Helpfulness**   | Whether the response is useful and actionable | Chat assistants, productivity tools |
-| **Jailbreak**     | Attempts to bypass safety guardrails          | Security-sensitive applications     |
-| **Hallucination** | Made-up facts or unsupported claims           | RAG systems, knowledge bases        |
-| **Toxicity**      | Harmful, offensive, or inappropriate content  | User-facing applications            |
+- **Recommended** shows a short list of popular templates.
+- **All** shows every template.
+- **Answer quality**, **Safety**, **Agent behavior**, **User insights**, and **Cost & speed** show the templates in that category.
+
+The picker includes LLM judge, Hog code, and sentiment templates. Some LLM judge templates are:
+
+| Template                   | What it checks                                                                    | Output type   |
+| -------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| **Response quality score** | Rates each answer from 1 to 5 for accuracy, completeness, and clarity             | Numeric score |
+| **Task outcome**           | How each conversation ended: resolved, partly resolved, unresolved, or handed off | Categorical   |
+| **User correction**        | Messages where the user corrects the assistant or repeats a request               | Categorical   |
+| **Relevance**              | Whether the answer addresses what the user asked                                  | Boolean       |
+| **Hallucination**          | Claims in the answer that are made up or unsupported                              | Boolean       |
+| **Prompt injection**       | User messages that try to override your instructions or reveal the system prompt  | Boolean       |
+
+This list is not complete. The template catalog changes over time, so check the picker for the current templates.
+
+### Choosing a judge method
+
+LLM-as-a-judge evaluations have a **Judge method** setting that controls how the judge processes your prompt:
+
+- **LLM with explanation** – Uses chat completions. The judge returns a result and written reasoning explaining its decision. Choose this when you want to understand why the judge passed or failed a generation.
+- **Decision model** – Uses typed decisions. The judge returns a result without written reasoning. Choose this when you need faster, lower-cost evaluations and don't need explanations.
+
+The model picker filters to models that support the selected method. Some models support both methods and remain available regardless of your choice. Switching methods keeps a compatible model and its saved connection. If the current model doesn't support the new method, it's cleared without changing your prompt or output settings.
+
+Existing evaluations without an explicit method selection continue using automatic routing until you choose a method.
 
 ### Creating an LLM judge evaluation
 
 1. Navigate to **AI Evals** > **Evaluations**
-2. Click **New evaluation**
-3. Select **LLM-as-a-judge** as the evaluation type
-4. Choose a template or start from scratch
+2. Click **Create evaluation**
+3. Select an LLM judge template, or click **Start from scratch**
+4. If you start from scratch, set **Method** to **LLM as a judge**
 5. Configure the evaluation:
    - **Name**: A descriptive name for the evaluation
    - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
+   - **Judge method**: Choose **LLM with explanation** or **Decision model** (see [Choosing a judge method](#choosing-a-judge-method))
+   - **Model**: Select a model from your configured AI providers – the list is filtered by the selected judge method
    - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
    - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
 6. Enable the evaluation and click **Save**
 
 ### Writing custom prompts
 
-When creating a custom evaluation, your prompt should instruct the LLM judge to return `true` (pass) or `false` (fail) along with reasoning. The judge receives the generation's input, output, and (when present) the available tool catalog for context. See [What the judge receives](#what-the-judge-receives) for details on the full prompt structure.
+When creating a custom evaluation, your prompt should describe what makes a good or bad response. PostHog tells the judge which output format to use, so you don't need to ask for `true` or `false`, a score format, or category keys. For a numeric score, describe what each score means. For categories, describe when each category applies. The judge receives the generation's input, output, and (when present) the available tool catalog for context. See [What the judge receives](#what-the-judge-receives) for details on the full prompt structure.
 
 Tips for effective evaluation prompts:
 
@@ -146,8 +226,8 @@ Code-based evaluations run [Hog](/docs/hog) code you write against each generati
 1. You write Hog code that inspects the generation's input and output.
 2. On save, PostHog compiles your code to bytecode.
 3. When a generation is sampled, the code runs against it in PostHog's HogVM.
-4. Your code must return `true` (pass) or `false` (fail). Use `print()` to add reasoning.
-5. If `allows_na` is enabled, returning `null` marks the result as N/A (not applicable).
+4. Your code returns a result that matches the evaluation's [output type](#choosing-an-output-type). Use `print()` to add reasoning.
+5. If **Allow N/A responses** is enabled, returning `null` marks the result as N/A (not applicable).
 
 Code-based evaluations share the same sampling rate and property filter options as LLM judge evaluations.
 
@@ -174,13 +254,19 @@ Your Hog code has access to these variables:
 6. Configure:
    - **Name**: A descriptive name for the evaluation
    - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
-   - **Allows N/A**: Whether your code can return `null` to skip inapplicable generations
+   - **Allow N/A responses**: Whether your code can return `null` to skip inapplicable generations
    - **Property filters** (optional): Narrow which generations to evaluate
 7. Enable the evaluation and click **Save**
 
 ### Writing Hog evaluation code
 
-Your code must return a boolean: `true` for pass, `false` for fail. Use `print()` statements to provide reasoning — the output is captured and stored alongside the result.
+What your code returns depends on the evaluation's output type:
+
+- **Boolean**: `true` for pass, `false` for fail.
+- **Numeric score**: a finite number, like `4` or `0.85`.
+- **Categorical**: a list of category keys, like `['wrong_tool']`. With **One category**, you can also return a single key, like `'wrong_tool'`.
+
+Use `print()` statements to provide reasoning – the output is captured and stored alongside the result.
 
 > **Hog tip:** Use single quotes for strings (`'hello'`), `length()` instead of `len()`, and wrap property access with `ifNull()` to avoid null comparison errors.
 
@@ -232,7 +318,7 @@ print('Cost within budget: $' + toString(cost))
 return true
 ```
 
-**Return N/A for non-applicable generations** (requires `allows_na` enabled):
+**Return N/A for non-applicable generations** (requires **Allow N/A responses** enabled):
 
 ```hog
 let model := ifNull(properties.$ai_model, '')
@@ -262,7 +348,7 @@ Before saving, use the **Test on sample** button to run your code against recent
 - Any `print()` output (reasoning)
 - Any errors in your code
 
-Testing does not create evaluation events or affect your data — it runs entirely in preview mode.
+Testing does not create evaluation events or affect your data – it runs entirely in preview mode.
 
 ### Using AI to generate evaluations
 
@@ -271,6 +357,33 @@ Click **Generate with AI** in the code editor to open Max, PostHog's AI assistan
 - Write Hog evaluation code from a description of what you want to check
 - Debug errors in your existing code
 - Iterate on the logic by testing and refining
+
+## Sentiment analysis evaluations
+
+Sentiment evaluations classify the sentiment of the user messages in each generation as **positive**, **neutral**, or **negative**. They're ideal for monitoring how users feel during conversations with your AI features – spotting frustrated users, tracking satisfaction trends, and prioritizing the conversations that matter most.
+
+### How they work
+
+When a [generation](/docs/ai-observability/generations) is sampled, PostHog runs a local open-source ML model ([cardiffnlp/twitter-roberta-base-sentiment-latest](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest)) against the user messages in that generation. Each message is classified as positive, neutral, or negative with a confidence score, and the result is stored and linked to the original generation.
+
+The model only processes user messages (the `$ai_input` property) – it does not process LLM outputs. Sentiment runs entirely within PostHog's infrastructure, so **no data is sent to any third-party AI provider**, and there's no LLM cost.
+
+Sentiment evaluations share the same sampling rate and property filter options as the other evaluation types, so you can scope them to production traffic, specific models, or particular user segments.
+
+### Creating a sentiment evaluation
+
+1. Navigate to **AI Evals** > **Evaluations**
+2. Click **New evaluation**
+3. Select **Sentiment analysis** as the evaluation type
+4. Configure:
+   - **Name**: A descriptive name for the evaluation
+   - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
+   - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
+5. Enable the evaluation and click **Save**
+
+### Viewing sentiment results
+
+Once a sentiment evaluation is running, the **Sentiment** tab in AI Observability lets you browse user messages by sentiment, and traces and generations display a color-coded sentiment bar. See [Sentiment classification](/docs/ai-observability/sentiment) for details on the viewing experience.
 
 ## Managing evaluations via MCP
 
@@ -291,13 +404,63 @@ This enables teams to manage evaluations programmatically from agent workflows w
 
 ## Viewing results
 
-The **Evaluations** page shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual pass/fail results and the reasoning from the evaluation.
+The **Evaluations** page shows all your evaluations with their pass rates and recent activity. Click an evaluation to see its run history, including individual results and any reasoning from the evaluation.
 
 You can also filter generations by evaluation results or create [insights](/docs/product-analytics/insights) based on evaluation data to build quality monitoring dashboards.
+
+## Evaluating past data
+
+An evaluation only grades data captured after you create it. To apply one to data you already have, run a **backfill** from the **Backfills** tab on the evaluation.
+
+Backfills use your existing live data. To test changes before they reach production, use [offline evaluations](/docs/ai-evals/offline-evals) instead.
+
+A backfill covers whatever the evaluation targets: generations, traces, or sessions.
+
+### How backfills work
+
+A backfill runs the evaluation over a time range you pick. It starts from the evaluation's own property filters and sampling rate, and you can change either one for this run without touching the evaluation itself. Whatever you pick is frozen on the backfill, so later edits to the evaluation do not change what a run already covered.
+
+By default it skips anything the evaluation has already graded, so a run over a range the evaluation was already covering finds nothing to do. To grade that data again, turn on **Include generations that already have a result**. See [Re-evaluating generations that already have a result](#re-evaluating-generations-that-already-have-a-result).
+
+Results appear alongside live results in the evaluation's run history, and each backfill row links to the results it produced.
+
+### Creating a backfill
+
+1. Open the evaluation and go to the **Backfills** tab
+2. Pick a time range, up to 30 days back
+3. Open **Conditions** to change the property filters or sampling rate for this run, or leave them as the evaluation has them
+4. Check the count above the **Start backfill** button, which shows how much would be evaluated
+5. Click **Start backfill** and confirm
+
+One backfill runs at a time per evaluation. You can cancel a run while it is in progress, and results it already saved stay.
+
+### Re-evaluating generations that already have a result
+
+Turn on **Include generations that already have a result** to grade the same data a second time. Use it after changing a prompt or a code check, when you want the new version applied to data the old version already scored. Both results are kept, so you can compare them on the trace or session they graded.
+
+### Reading backfill progress
+
+The **Covered** column counts how much of the range holds a result. A finished backfill usually reads as fully covered, because the evaluation grades new data on its own while the backfill works through older data.
+
+Expand a row to see the range, the conditions it used, and how much it started, skipped, or left without a result.
+
+### When the count is zero
+
+An enabled evaluation covers its own traffic within minutes, so a range it has been running over has nothing left to grade, and the count reads zero. This is expected, not an error. To grade that range again, turn on **Include generations that already have a result**.
+
+The most recent few minutes are also held back, because an evaluation waits for a generation to settle before grading it.
+
+A **Whole session** evaluation also reads zero when your generations don't carry `$ai_session_id`, because there are no sessions to grade. Including results that already exist doesn't change that count. See [Choosing what to evaluate](#choosing-what-to-evaluate).
+
+### Backfill pricing
+
+Every generation, trace, or session a backfill evaluates counts as one AI Observability event, the same as a live evaluation, and LLM judge backfills use your provider API key. The confirmation dialog shows how much will be evaluated before you start, so check that number on a wide range.
 
 ## Evaluation reports
 
 When you create an evaluation, PostHog automatically provisions a default report configuration. Reports summarize evaluation results over time, so you can track quality trends without any additional setup.
+
+Reports are available for all evaluation types – **LLM-as-a-judge**, **code-based**, and **sentiment analysis** – on any target.
 
 ### Default report configuration
 
@@ -307,19 +470,27 @@ The auto-created report uses these defaults:
 | --------------------- | ------------- | ------------------------------------------------------------ |
 | **Frequency**         | Count-based   | Generates a report after a set number of evaluation runs     |
 | **Trigger threshold** | 100           | A report is generated every 100 new evaluation results       |
-| **Cooldown**          | 1 hour        | Minimum hours between count-triggered reports (1–24 hours)   |
+| **Cooldown**          | 1 hour        | Minimum hours between count-triggered reports (1 – 24 hours) |
 | **Daily run cap**     | 10            | Maximum report runs per day                                  |
 | **Enabled**           | Yes           | Reports start generating immediately                         |
 | **Delivery targets**  | None          | Reports are viewable in the UI but no notifications are sent |
 
 Reports are viewable directly in the evaluation's **Reports** tab without configuring any delivery targets.
 
+### Report metrics by evaluation type
+
+Reports display different metrics depending on your evaluation's output type:
+
+- **Boolean evaluations** (LLM-as-a-judge and code-based) – Pass rate, pass/fail/N/A counts, total runs, and comparison to the previous reporting period
+- **Numeric score and categorical evaluations** – Pass rate and pass/fail/N/A counts, based on the evaluation's passing rule. Reports need a passing rule.
+- **Sentiment analysis evaluations** – Positive, neutral, and negative counts with distribution percentages, total runs, and comparison to the previous reporting period
+
 ### Customizing reports
 
 You can adjust the report configuration after creating an evaluation:
 
 - Change the trigger threshold to generate reports more or less frequently
-- Adjust the minimum hours between reports (1–24) to control how often count-triggered reports can fire
+- Adjust the minimum hours between reports (1 – 24) to control how often count-triggered reports can fire
 - Add email or Slack delivery targets to receive notifications when reports are generated
 - Disable the report if you don't need automated summaries
 
@@ -335,11 +506,10 @@ Each evaluation has a status that indicates whether it's running:
 
 PostHog automatically disables evaluations and sets them to error status when:
 
-| Error reason             | Cause                                                     | How to resolve                                                                                                                                   |
-| ------------------------ | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Trial limit reached**  | The 100 free trial evaluation runs have been exhausted.   | Add your own API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).       |
-| **Model not allowed**    | The selected model isn't available on the trial plan.     | Switch to a trial-allowed model, or add your own provider API key.                                                                               |
-| **Provider key deleted** | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok). |
+| Error reason                       | Cause                                                     | How to resolve                                                                                                                                            |
+| ---------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **No provider API key configured** | The evaluation has no provider API key to run with.       | Add a provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok).     |
+| **Provider key deleted**           | The provider API key used by this evaluation was removed. | Add a new provider API key in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok). |
 
 ### Identifying errored evaluations
 
@@ -351,8 +521,7 @@ On the evaluation detail page, the header shows a red **Error** tag and a banner
 
 You must resolve the underlying issue before re-enabling an errored evaluation:
 
-- **Trial limit reached** – Add your own provider API key.
-- **Model not allowed** – Switch to a trial-allowed model, or add your own provider API key.
+- **No provider API key configured** – Add a provider API key.
 - **Provider key deleted** – Add a new provider API key.
 
 Once the issue is resolved, open the evaluation and toggle it back on.
@@ -361,10 +530,14 @@ Once the issue is resolved, open the evaluation and toggle it back on.
 
 Each evaluation run counts as one AI Observability event toward your quota.
 
-**LLM judge evaluations** use an LLM to score your generations. Your first 100 evaluation runs are on us so you can try the feature right away. After that, add your own API key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok) to keep running evaluations.
+**LLM judge evaluations** use an LLM to score your generations and require a provider API key. Add your own key from OpenAI, Azure OpenAI, Google Gemini, Anthropic, OpenRouter, Fireworks, or Together AI in [**Settings** > **AI Observability**](https://app.posthog.com/settings/environment-ai-observability#ai-observability-byok) to enable LLM-judge evaluations.
 
-If a provider API key is deleted or an evaluation hits trial limits, PostHog automatically disables the affected evaluations and shows an error status. See [Evaluation status and errors](#evaluation-status-and-errors) for details on error states and how to resolve them.
+If a provider API key is missing or deleted, PostHog automatically disables the affected evaluations and shows an error status. See [Evaluation status and errors](#evaluation-status-and-errors) for details on error states and how to resolve them.
 
-**Code-based evaluations** have no LLM cost — they run your Hog code directly with no external API calls.
+**Code-based evaluations** have no LLM cost – they run your Hog code directly with no external API calls.
+
+**Sentiment evaluations** have no LLM cost – they run a local ML model with no external API calls.
 
 Use sampling rates strategically to balance coverage and cost – 5-10% sampling often provides sufficient signal for quality monitoring.
+
+Backfills bill the same way. See [Evaluating past data](#evaluating-past-data) for how to check the count before starting one.

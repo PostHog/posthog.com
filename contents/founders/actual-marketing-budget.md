@@ -8,10 +8,12 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Marketing
+  - Brand and marketing
 crosspost:
   - Blog
 ---
+
+> We updated this article for 2026 - [see what's changed here!](/founders/actual-marketing-budget-2026)
 
 It really annoys me that no one is willing to talk about how much they _actually_ spend on marketing in startup-land. 
 

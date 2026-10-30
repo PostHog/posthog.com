@@ -66,7 +66,7 @@ export const FlurryMigration = () => {
                             <li>Complete the form below</li>
                             <li>
                                 <Link to="https://app.posthog.com/signup" external>
-                                    Sign up for PostHog Cloud
+                                    Sign up for PostHog Web
                                 </Link>
                             </li>
                             <li>

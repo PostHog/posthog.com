@@ -10,16 +10,17 @@ author:
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/ai_models_blog_8cc6ccc808.png
 featuredImageType: full
 tags:
- - CEO diaries
+  - CEO diaries
+  - Research
 ---
 
 I really think we're on the verge of some of our best work through the next six months.
 
 Over the past year, we've started building more AI-powered features into PostHog, like our [AI installation wizard](/wizard), [PostHog AI](/docs/posthog-ai), and our [MCP](/docs/model-context-protocol). They're all wildly popular, but they're only the start.
 
-[PostHog's next chapter](/blog/posthogs-next-chapter) is about building more proactive, self-driving products. Products that surface answers and solutions for you, act on them, and improve over time. 
+[PostHog's next chapter](/blog/posthogs-next-chapter) is about building more proactive, self-driving products. Products that surface answers and solutions for you, act on them, and improve over time.
 
-This is the vision for [PostHog Code](/code), which is now in beta. To enable this and more products like it, we want to try something new. 
+This is the vision for [PostHog Desktop](/desktop), which is now in beta. To enable this and more products like it, we want to try something new.
 
 We want to train models on data in PostHog.
 
@@ -28,9 +29,9 @@ We want to train models on data in PostHog.
 We have two goals here:
 
 1. Make our existing products smarter, more proactive, and useful to you
-2. Build entirely new products, like PostHog Code, that help teams build better products, faster
+2. Build entirely new products, like PostHog Desktop, that help teams build better products, faster
 
-The first area we're interested in is **session replay analysis**. PostHog AI can already detect issues in replays, but it's expensive and doesn't scale well. We want replays to be as powerful at scale as they are for diagnosing the problems of individual users, and we think a model trained on the underlying data that powers replays will help us achieve this. 
+The first area we're interested in is **session replay analysis**. PostHog AI can already detect issues in replays, but it's expensive and doesn't scale well. We want replays to be as powerful at scale as they are for diagnosing the problems of individual users, and we think a model trained on the underlying data that powers replays will help us achieve this.
 
 Another idea I'm especially excited about is **synthetic user testing** – i.e. using our knowledge of user behavior to identify when users might get confused, or what flows might break, _before you ship_ to production. As coding models improve, many people are seeing test and review workload increase hugely. We want to automate this, so you can focus on your product.
 
@@ -44,11 +45,11 @@ We've spent a lot of time thinking about this from a user perspective, especiall
 
 The upside is the kinds of improvements described above.
 
-Most tools are focused on providing you with the best code; we want to focus our energy into making your product the best it can be. This is why we describe [PostHog Code](/code) as a product editor.
+Most tools are focused on providing you with the best code; we want to focus our energy into making your product the best it can be. This is why we describe [PostHog Desktop](/desktop) as a product editor.
 
 The downside is that this involves using data in PostHog to train models.
 
-Most companies would bury this change in a deceptively boring T&Cs update, but we value transparency, so here's what you need to know in an internet-friendly numbered list: 
+Most companies would bury this change in a deceptively boring T&Cs update, but we value transparency, so here's what you need to know in an internet-friendly numbered list:
 
 1. Users on our EU cloud instance are opted out by default
 2. So too users with agreements that prevent training (e.g. BAA, MSA, or similar)
@@ -72,7 +73,7 @@ I want to stress that our goal here is to improve PostHog as a product for our c
 
 Put simply, because otherwise we will not have enough data to train a model that's actually useful.
 
-If you choose to opt out, the new features that we're building with these models won't be available to you, as they'll depend on this data. 
+If you choose to opt out, the new features that we're building with these models won't be available to you, as they'll depend on this data.
 
 If you're opted out by default (e.g. because you're on our EU cloud instance), you can choose to opt in manually provided any legal agreements you have with us don't exclude this option.
 

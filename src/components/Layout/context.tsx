@@ -1,8 +1,9 @@
-import React, { createContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import menu, { docsMenu } from '../../navs'
 import { IMenu } from 'components/PostLayout/types'
 import { useLocation } from '@reach/router'
 import { navigate } from 'gatsby'
+import { isSafeInternalPath } from 'lib/utils'
 import { useActions } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 
@@ -36,25 +37,25 @@ export interface IProps {
 export const LayoutProvider = ({ children, ...other }: IProps) => {
     const { pathname, search } = useLocation()
     const { setWebsiteTheme } = useActions(layoutLogic)
-    const compact = typeof window !== 'undefined' && window !== window.parent
-    const [fullWidthContent, setFullWidthContent] = useState<boolean>(
-        compact || (typeof window !== 'undefined' && localStorage.getItem('full-width-content') === 'true')
-    )
+    const [compact, setCompact] = useState(false)
+    const [fullWidthContent, setFullWidthContent] = useState<boolean>(false)
+    const [hedgehogModeEnabled, _setHedgehogModeEnabled] = useState<boolean>(false)
 
-    const hedgehogModeLocalStorage = useMemo(() => {
-        // Only default it to be on if it's April 1st but still respect if they turned it off
+    // Hydrate client-only state after mount
+    useEffect(() => {
+        const compactValue = window !== window.parent
+        setCompact(compactValue)
+        setFullWidthContent(compactValue || localStorage.getItem('full-width-content') === 'true')
+
         const today = new Date()
         const isAprilFirst = today.getMonth() === 3 && today.getDate() === 1
-        let hedgehogModeLocalStorage = typeof window !== 'undefined' && localStorage.getItem('hedgehog-mode-enabled')
-
-        if (isAprilFirst && typeof hedgehogModeLocalStorage !== 'string') {
-            hedgehogModeLocalStorage = 'true'
+        let hedgehogMode = localStorage.getItem('hedgehog-mode-enabled')
+        if (isAprilFirst && typeof hedgehogMode !== 'string') {
+            hedgehogMode = 'true'
         }
-
-        return hedgehogModeLocalStorage
+        _setHedgehogModeEnabled(hedgehogMode === 'true')
     }, [])
 
-    const [hedgehogModeEnabled, _setHedgehogModeEnabled] = useState<boolean>(hedgehogModeLocalStorage === 'true')
     const [enterpriseMode, setEnterpriseMode] = useState(false)
     const [theoMode, setTheoMode] = useState(false)
     const [post, setPost] = useState<boolean>(false)
@@ -140,7 +141,7 @@ export const LayoutProvider = ({ children, ...other }: IProps) => {
                 window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
                 return
             }
-            if (e.data.type === 'navigate') {
+            if (e.data.type === 'navigate' && isSafeInternalPath(e.data.url)) {
                 navigate(e.data.url)
             }
         }

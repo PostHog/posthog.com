@@ -172,22 +172,19 @@ function DpaGenerator() {
                         <Link to={APP_LEGAL_URL} external className="font-semibold underline">
                             app.posthog.com/legal
                         </Link>{' '}
-                        inside your PostHog organization. That's where you generate, sign, and download a real, valid
-                        DPA — countersigned by us.
+                        inside your PostHog organization. That's where you generate a real, valid DPA — countersigned by
+                        us.
+                    </p>
+                    <p className="text-sm">
+                        It's self-serve and takes a couple of minutes. Nobody at PostHog has to approve it — you add
+                        your company details, we generate the agreement with our signature already on it, and PandaDoc
+                        emails it to you to sign. It's effective the moment you do. Any plan, including the free one.
                     </p>
                     <p className="text-sm">
                         The version below is the exact same agreement, just rendered here for your reading pleasure (and
                         choice of font). It's not binding on its own — only the one you generate and countersign through
                         the app counts.
                     </p>
-                    <p className="text-sm">
-                        Need changes to this DPA?{' '}
-                        <Link to="/talk-to-a-human" state={{ newWindow: true }} className="font-semibold underline">
-                            Contact us
-                        </Link>{' '}
-                        first.
-                    </p>
-
                     <Link
                         to={APP_LEGAL_URL}
                         external
@@ -299,7 +296,8 @@ function DpaGenerator() {
 
                     <div className="bg-yellow/25 py-3 px-4 text-sm text-center -mx-4 @3xl:-mx-8 mt-0 border-b border-light dark:text-black">
                         <strong>Heads up:</strong> This is a preview. To get a countersigned, valid DPA, generate it
-                        inside your PostHog organization at{' '}
+                        inside your PostHog organization. It's self-serve, and we've already signed it before it reaches
+                        you, so all that's left is your signature. Go to{' '}
                         <a
                             href={APP_LEGAL_URL}
                             target="_blank"
@@ -787,7 +785,7 @@ function DpaGenerator() {
                                 mode === 'lawyer' && 'hidden'
                             }`}
                         >
-                            <img width={157} src="/brand/posthog-logo.svg" />
+                            <img src="/brand/posthog-logo.svg" alt="PostHog" />
                         </div>
                         <h2 className="!text-2xl">Data Processing Agreement — PostHog Inc.</h2>
                         <p>
@@ -824,7 +822,8 @@ function DpaGenerator() {
                         </p>
                         <p>
                             In the event of a conflict between this Agreement and the provisions of related agreements,
-                            including the Principal Agreement, the terms of this Agreement shall prevail.
+                            including the Principal Agreement, with respect to the Processing of Company Personal Data,
+                            the terms of this Agreement shall prevail.
                         </p>
                         <p>WHEREAS</p>
                         <p>(A) The Company acts as a Controller.</p>
@@ -1224,7 +1223,7 @@ function DpaGenerator() {
                             <p>
                                 10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
                                 in the EU-US Data Privacy Framework, the UK Extension to this Framework and the
-                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Supplier
+                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Processor
                                 undertakes to maintain its self-certification to the DPF; to notify Company without
                                 undue delay if Processor determines that it will cease to self-certify to the DPF; and
                                 to notify Company immediately if Processor's participation in the DPF is otherwise
@@ -1285,7 +1284,7 @@ function DpaGenerator() {
                             <p>
                                 10.7. In relation to Swiss Personal Data that is transferred outside of the Protected
                                 Area, the Parties agree that such transfers shall be subject to the EU Standard
-                                Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
+                                Contractual Clauses as compiled and completed in Sections 10.4 and 10.5 above, with the
                                 following amendments: (a) any references to the GDPR shall be interpreted as references
                                 to the FADP; (b) references to the EU and EU Member States shall be interpreted to mean
                                 Switzerland; (c) the competent supervisory authority according to Clause 13(a) and Part
@@ -1543,10 +1542,6 @@ function DpaGenerator() {
                             </p>
                             <p>N/A</p>
 
-                            <p>
-                                If sensitive data are transferred, see Annex C, Part B for applicable restrictions and
-                                safeguards
-                            </p>
                             <p>
                                 <em>
                                     Frequency of transfer (e.g. whether on a one-off or continuous basis) (EU Standard

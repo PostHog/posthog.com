@@ -70,6 +70,13 @@ const posthogProxy = async (request: Request) => {
 
   const headers = new Headers(request.headers)
   headers.set("host", hostname)
+  // Remove cookies before forwarding to PostHog
+  headers.delete("cookie")
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+  if (!headers.get("authorization")?.startsWith("Bearer phc_")) {
+    headers.delete("authorization")
+  }
   headers.delete("accept-encoding")
 
   const response = await fetch(newUrl, {
@@ -120,6 +127,13 @@ const posthogProxy = async (request: Request) => {
 
   const headers = new Headers(request.headers)
   headers.set("host", hostname)
+  // Remove cookies before forwarding to PostHog
+  headers.delete("cookie")
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+  if (!headers.get("authorization")?.startsWith("Bearer phc_")) {
+    headers.delete("authorization")
+  }
   headers.delete("accept-encoding")
 
   const response = await fetch(newUrl, {
