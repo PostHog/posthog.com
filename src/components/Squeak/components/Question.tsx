@@ -188,7 +188,7 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
             tooltip={
                 <>
                     <IconShieldLock className="size-5 relative -top-px inline-block text-secondary" />{' '}
-                    {alreadyAsked ? 'Max has already been asked in this thread' : 'Ask Max'}
+                    {alreadyAsked ? 'PostHog AI has already been asked in this thread' : 'Ask PostHog AI'}
                 </>
             }
         />
