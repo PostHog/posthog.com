@@ -149,6 +149,6 @@ Zapier and Make have triggers but can't see product data. Customer.io and Braze 
 
 **Follow-up:** Is the concern reliable execution, feature completeness, or vendor lock-in?
 
-**Answer:** Reliable execution is solid – Workflows runs on the same engine that powers PostHog's CDP destinations and data pipelines. GA'd in December 2025 after a public alpha and beta with hundreds of teams. Feature completeness is honestly still growing (batch triggers are in beta, WhatsApp templates are rolling out) and we publish the roadmap. Vendor lock-in isn't a concern: PostHog is open source, OpenTelemetry-compatible, and workflows can be managed via REST API and OAuth scopes for portability.
+**Answer:** Reliable execution is solid – Workflows runs on the same engine that powers PostHog's CDP destinations and data pipelines. GA'd in December 2025 after a public alpha and beta with hundreds of teams. Feature completeness is honestly still growing (WhatsApp templates are rolling out) and we publish the roadmap. Vendor lock-in isn't a concern: PostHog is open source, OpenTelemetry-compatible, and workflows can be managed via REST API and OAuth scopes for portability.
 
 **Proof point:** Grantable's onboarding email flow ran 179 times in 7 sessions without issues. PostHog runs part of its flows on Workflows and is planning full migration.
