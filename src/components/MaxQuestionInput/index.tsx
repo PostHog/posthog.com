@@ -51,7 +51,7 @@ export const PostHogAIQuestionInput = ({
                 <div className="w-full md:w-1/3 flex-shrink-0 flex items-center justify-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/robot_f2dfddda15.png"
-                        alt="Max AI Robot"
+                        alt="PostHog AI robot"
                         className="w-full max-w-[180px] animate-[wobble_3s_ease-in-out_infinite]"
                         placeholder="none"
                     />
