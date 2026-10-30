@@ -21,19 +21,29 @@ You must be seeing as you clicked on this post. In that case, let’s take a pee
 
 > See how we aggregated this data [at the end](#how-we-pulled-this-data). 
 
-## Prompters mind their manners (mostly) 
-
-People treat PostHog AI like a new coworker. That is to say, formal at first, then friendly, then a bit rude. 15% of people said "please" at least once. Only 2.7% of prompters ever said thanks (including thanks, thank you, thx, ty). Month to month, politeness stays flat. But people loosen up the more they use PostHog AI: by their 101st to 500th prompt, they say please twice as often as in their first prompt, and they swear four times as often.
-
-In fact, founders seem a bit stressed. They swear at PostHog AI the most (3x the rate of product managers). In the past 12 months, there were 6,716 apologies to the AI, 2,887 f-bombs, 1,037 "wtf"s and 4,324 all-caps rants.
-
 ## Shareholder value never sleeps
 
 In local time, founders sent 20% of their prompts on weekends and 6.8% between midnight and 5 AM. For comparison, sales people sent 6.3% of prompts on Saturday/Sunday and 2.6% around the witching hour. 
 
+![Weekdays get more prompts: Tuesday is the busiest day, and Saturday is the quietest](https://res.cloudinary.com/dmukukwp6/image/upload/Prompts_by_day_of_week_11b58021e7.png)
+
 Marketers asked PostHog AI about revenue more than founders did (1.42% of prompts vs 0.88%), but founders made up for it by working later hours. More than a quarter of founder prompts (28%) arrived after 6 PM.
 
+![Peak prompting hour is 11 AM local time, and prompts continue late into the night](https://res.cloudinary.com/dmukukwp6/image/upload/Prompts_by_hour_347d34158d.png)
+
 In aggregate, Tuesday is the busiest prompting day of the week, and the peak hour to prompt is 11 AM local time. Conclusion(?): PostHog AI pairs nicely with your second coffee. 
+
+![219 prompts by one user in a single day. A record, surprisingly, not held by a PostHog employee. We hope they took a coffee break.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_by_one_user_in_one_day_56d7f323b1.png)
+
+## Prompters mind their manners (mostly) 
+
+People treat PostHog AI like a new coworker. That is to say, formal at first, then friendly, then a bit rude. 15% of people said "please" at least once. Only 2.7% of prompters ever said thanks (including thanks, thank you, thx, ty). Month to month, politeness stays flat. But people loosen up the more they use PostHog AI: by their 101st to 500th prompt, they say please twice as often as in their first prompt, and they swear four times as often.
+
+![Sales folks are the most polite: 4.4% of their prompts include "please", compared with 3.0% for engineers](https://res.cloudinary.com/dmukukwp6/image/upload/polite_by_role_88a3d38e5a.png)
+
+In fact, founders seem a bit stressed. They swear at PostHog AI the most (3x the rate of product managers). In the past 12 months, there were 6,716 apologies to the AI, 2,887 f-bombs, 1,037 "wtf"s and 4,324 all-caps rants.
+
+![Swearing peaks on Saturday](https://res.cloudinary.com/dmukukwp6/image/upload/Swearing_by_day_of_week_b3eda4908f.png)
 
 ## PostHog AI: data analyst, career coach, therapist?
 
@@ -43,15 +53,15 @@ Prompters put their trust in PostHog AI, asking things like "what should be my g
 
 Even though more than 4 in 10 prompts have no capital letters, and sometimes contain a mild crash out like “I NEED A F\*CKING USER FUNNEL CHART AAAAH”, PostHog AI was happy to help with ([almost](/blog/how-to-benchmark-ai-agents)) every query.
 
+![214 characters in the average prompt. Just a few sentences, though one person pasted in a 118,583-character sci-fi manuscript and asked PostHog AI to continue the story.](https://res.cloudinary.com/dmukukwp6/image/upload/average_prompt_length_4cad0d1a22.png)
+
 ## Yes, and?
 
 One prompt in four was a question. 8% started with a specific request ("show me", "create"), and 6% with "can you" or "could you". 56,548 prompts were a greenlight to whatever PostHog AI suggested, saying only "yes", "ok" or "go ahead". 
 
-A lot of people asked about PostHog Dashboards (more than 53,600). Next were session replay (45.1k), funnels (40.0k) and general web traffic (31.5k). Other popular topics included feature flags, retention, surveys, experiments, and error tracking. 
-
-![214 characters in the average prompt. Just a few sentences, though one person pasted in a 118,583-character sci-fi manuscript and asked PostHog AI to continue the story.](https://res.cloudinary.com/dmukukwp6/image/upload/average_prompt_length_4cad0d1a22.png)
-
 ![2.8 prompts per conversation on average. The longest conversation had 259 prompts, and we hope it ended well.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_per_conversation_d974ecc20a.png)
+
+A lot of people asked about PostHog Dashboards (more than 53,600). Next were session replay (45.1k), funnels (40.0k) and general web traffic (31.5k). Other popular topics included feature flags, retention, surveys, experiments, and error tracking. 
 
 ## All roles ask data questions
 
@@ -72,8 +82,6 @@ When asking PostHog AI about other tools, Claude was the most named (by 7.2k peo
 People prompted PostHog AI every single day of the year. The longest streak of consecutive days with prompts from a single person was 49. 
 
 Compared with a normal day, New Year's Day 2026 was the quietest day of the year, with only 29% of the people of a normal Thursday. Plenty of people were still prompting, though. Over the past year, 1,218 people sent the exact same prompt 5 or more times in one day. It wasn’t Groundhog Day (or maybe it was?).
-
-![219 prompts by one user in a single day. A record, surprisingly, not held by a PostHog employee. We hope they took a coffee break.](https://res.cloudinary.com/dmukukwp6/image/upload/prompts_by_one_user_in_one_day_56d7f323b1.png)
 
 ## What each role actually asks
 
