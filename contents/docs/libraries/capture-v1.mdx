@@ -276,7 +276,7 @@ If you send events through a [reverse proxy](/docs/advanced/proxy), make sure it
 - Returns PostHog's status code and response body unchanged, so your SDK sees the result for each event
 - Accepts request bodies up to 20MB. AI requests are often larger than 1MB, the default limit in nginx and ingress-nginx, and a `413` from your proxy drops the events in that request
 
-Capture v1 SDKs send your project token in the `Authorization` header, as `Bearer <token>`. Without it, PostHog returns `401` and the SDK drops the events. Some older versions of our proxy guides removed this header and kept the 1MB default request limit, so check your proxy against the current [proxy guides](/docs/advanced/proxy) and the [proxy reference](/docs/advanced/proxy/proxy-reference). The [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) already serves both capture v1 endpoints and passes these headers through.
+Capture v1 SDKs send your project token in the `Authorization` header, as `Bearer <token>`. Without it, PostHog returns `401` and the SDK drops the events. If your proxy removes other credentials, keep an `Authorization` value that starts with `Bearer phc_`. If your project token doesn't start with `phc_`, keep only the exact value `Bearer <your project token>`. Some older versions of our proxy guides removed this header and kept the 1MB default request limit, so check your proxy against the current [proxy guides](/docs/advanced/proxy) and the [proxy reference](/docs/advanced/proxy/proxy-reference). The [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) already serves both capture v1 endpoints and passes these headers through.
 
 ## Learn more
 
