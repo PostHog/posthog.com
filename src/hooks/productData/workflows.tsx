@@ -113,6 +113,7 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
+        description: '"Create an onboarding email series for trial users"',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>

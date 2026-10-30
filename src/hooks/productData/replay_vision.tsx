@@ -295,6 +295,7 @@ export const replayVision = {
     ],
     overview: {
         title: 'Your product, watching itself',
+        description: '"Summarize sessions on the settings page where users experience friction"',
         eli5: 'Replay Vision watches your session recordings for you. Describe what to look for once, and a scanner reads every matching session, video and events, and turns what it sees into structured observations you can query, chart, and alert on.',
         textColor: 'text-black', // tw
     },
