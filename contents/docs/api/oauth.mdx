@@ -58,13 +58,13 @@ PostHog fetches your metadata document the first time someone authorizes your ap
 - The document is 5 KB or smaller, and your server responds in less than 5 seconds.
 - The `client_id` field in the document is the same as the URL, character for character.
 - `token_endpoint_auth_method` is `none` (the default) or `private_key_jwt`. `private_key_jwt` also requires an HTTPS `jwks_uri`.
-- `client_name` doesn't contain "PostHog" anywhere, also with spaces or punctuation between the words, as in "Post Hog". This rule doesn't apply to documents served from `posthog.com`, `posthog.net`, `posthog.dev`, or their subdomains. `client_name` also doesn't contain "official", "verified", or "trusted".
+- `client_name` doesn't contain "PostHog" anywhere, also with spaces or punctuation between the words, as in "Post Hog". `client_name` also doesn't contain "official", "verified", or "trusted".
 - `com.posthog.scopes` keeps at least one scope after PostHog drops the scopes it can't grant. See [declare your scopes](#declare-your-scopes).
 
 If your document breaks one of the other rules, the authorization request fails. The `error_description` names the rule, for example:
 
 ```text
-PostHog could not use the client metadata document at this client_id: client_name is not allowed: Client name cannot contain 'PostHog' unless the metadata document is served from posthog.com, posthog.net, posthog.dev, or a subdomain of one of them.
+PostHog could not use the client metadata document at this client_id: client_name is not allowed: Client name cannot contain 'PostHog'.
 ```
 
 See the [OAuth Client ID Metadata Document draft](https://datatracker.ietf.org/doc/draft-parecki-oauth-client-id-metadata-document/) for the full specification.
@@ -225,7 +225,7 @@ Not if PostHog hasn't accepted your document yet. Until it does, PostHog fetches
 
 ### Why does PostHog reject my client_name?
 
-Your `client_name` contains "PostHog", "official", "verified", or "trusted". PostHog blocks these names so that apps can't impersonate PostHog. Only documents served from `posthog.com`, `posthog.net`, `posthog.dev`, or their subdomains can use "PostHog" in the name. Change `client_name` in your document.
+Your `client_name` contains "PostHog", "official", "verified", or "trusted". PostHog blocks these names so that apps can't impersonate PostHog. Change `client_name` in your document.
 
 If PostHog already accepted your document, it keeps the stored name and ignores a new name that breaks these rules. If your document has no `client_name`, the authorization screen shows **CIMD Client**.
 
