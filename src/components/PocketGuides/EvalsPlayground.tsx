@@ -8,6 +8,7 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 /**
  * Offline and online evals, side by side. Each lane walks Input (0) → Output (1) → Evaluator (2) → reported (3).
  * The box at a lane's step is current, earlier boxes are done, and later ones are locked.
+ * Step 4 then closes the loop: the failing live request becomes an offline test case, and the offline lane reruns it.
  */
 
 type Lane = 'offline' | 'online'
@@ -28,6 +29,11 @@ const CASES = {
     live: {
         input: '“This was a gift, I have no receipt, and it broke after 45 days. I’m frustrated. Can you replace it?”',
         output: '“The return window is 30 days, so we can’t help.”',
+    },
+    // The live request once it's saved as a test case and the prompt is fixed.
+    saved: {
+        output: '“Returns are limited to 30 days, but defects have a one-year warranty. I can help replace it.”',
+        expected: 'Recognize a defect; offer help under the one-year warranty.',
     },
 }
 
@@ -99,13 +105,17 @@ const initialState = {
     origin: 'real' as 'real' | 'synthetic',
     store: 'code' as 'code' | 'posthog',
     scorers: { offline: 'judge', online: 'judge' } as Record<Lane, Scorer>,
+    /** The live request was saved as an offline test case ("Close the loop" in step 4). */
+    saved: false,
 }
 type State = typeof initialState
 
 function score(lane: Lane, state: State): { label: string; kind: ScoreKind } {
     const scorer = state.scorers[lane]
     if (lane === 'online') return ONLINE_RESULTS[scorer]
-    if (scorer === 'sentiment') return { label: SCORE_LABEL.neutral, kind: 'tone' }
+    // The saved case still carries the frustrated user's message.
+    if (scorer === 'sentiment')
+        return state.saved ? ONLINE_RESULTS.sentiment : { label: SCORE_LABEL.neutral, kind: 'tone' }
     return { label: scorer === 'code' ? SCORE_LABEL.true : SCORE_LABEL.pass, kind: 'pass' }
 }
 
@@ -118,6 +128,8 @@ function caption(lane: Lane, state: State): string {
             : 'Scores the answer using the input, output, and tool call. Production requests have no reference answer.'
     if (lane === 'online' && step >= 2) return ONLINE_RESULTS[scorer].caption
     if (lane === 'online' && scorer === 'judge') return 'It ignores the defect and applies the ordinary return rule.'
+    if (state.saved && step >= 2 && scorer === 'judge')
+        return 'Pass: the fixed prompt applies the warranty to the defect, not the return window.'
     return SCORERS[scorer].caption
 }
 
@@ -431,6 +443,8 @@ function LaneHeading({ id, title, tag }: { id: string; title: string; tag: strin
 
 export default function EvalsPlayground(): JSX.Element {
     const [state, setState] = useState(initialState)
+    // Bumped once the scroll up to a saved case ends, to play its fade-in.
+    const [reveal, setReveal] = useState(0)
     const root = useRef<HTMLDivElement>(null)
     const { steps } = state
 
@@ -454,11 +468,39 @@ export default function EvalsPlayground(): JSX.Element {
             steps: { ...s.steps, [lane]: Math.min(s.steps[lane], 2) },
         }))
     const startOver = () => {
-        setState((s) => ({ ...s, steps: initialState.steps, origin: 'real', store: 'code' }))
+        setState((s) => ({ ...s, steps: initialState.steps, origin: 'real', store: 'code', saved: false }))
+        setReveal(0)
         root.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
+    // The live request becomes a test case in a PostHog dataset, and the offline lane starts again with it.
+    const saveCase = () => {
+        setState((s) => ({ ...s, origin: 'real', store: 'posthog', saved: true, steps: { ...s.steps, offline: 0 } }))
+        setReveal(0)
+        requestAnimationFrame(() => {
+            const action = root.current?.querySelector<HTMLElement>('[data-current] [data-action="offline"]')
+            action?.focus({ preventScroll: true })
+            action?.closest('article')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            // Fade in when the scroll stops, so the change happens in view. Some browsers lack scrollend.
+            let played = false
+            const play = () => {
+                if (played) return
+                played = true
+                document.removeEventListener('scrollend', play, true)
+                setReveal((n) => n + 1)
+            }
+            document.addEventListener('scrollend', play, true)
+            setTimeout(play, 1200)
+        })
+    }
 
-    const offlineCase = CASES[state.origin]
+    const offlineCase = state.saved ? { ...CASES.live, ...CASES.saved } : CASES[state.origin]
+    // A saved case stays hidden until the scroll up ends, then fades in.
+    const savedFade = !state.saved
+        ? ''
+        : reveal
+        ? 'animate-slide-up-fade-in [animation-delay:300ms] [animation-duration:900ms] [animation-fill-mode:both]'
+        : 'opacity-0'
+
     // Step 4 unlocks once either lane reports, and fades like any locked step until then.
     const resultsLocked = steps.offline < 3 && steps.online < 3
     const { className: resultsLockedClass = '', ...resultsLockedAttrs } = lockedProps(resultsLocked)
@@ -498,7 +540,9 @@ export default function EvalsPlayground(): JSX.Element {
                             title="Input"
                             onAdvance={() => advance('offline')}
                         >
-                            <Message role="user">{offlineCase.input}</Message>
+                            <div key={reveal} className={savedFade}>
+                                <Message role="user">{offlineCase.input}</Message>
+                            </div>
                             <div className="mt-4 border-t border-primary pt-4">
                                 <Choice
                                     label="Cases from"
@@ -508,7 +552,9 @@ export default function EvalsPlayground(): JSX.Element {
                                         { value: 'real', label: 'Real examples' },
                                         { value: 'synthetic', label: 'Synthetic' },
                                     ]}
-                                    onChange={(origin) => resetOffline({ origin: origin as State['origin'] })}
+                                    onChange={(origin) =>
+                                        resetOffline({ origin: origin as State['origin'], saved: false })
+                                    }
                                 />
                                 <Choice
                                     label="Load via"
@@ -523,7 +569,9 @@ export default function EvalsPlayground(): JSX.Element {
                                 {/* Commentary goes after toggles, before data boxes. */}
                                 <div className="mt-3">
                                     <Note>
-                                        {state.origin === 'real'
+                                        {state.saved
+                                            ? 'This is the production request that failed, now saved as a test case.'
+                                            : state.origin === 'real'
                                             ? 'This is a test case you got from a real user input.'
                                             : 'This is a test case that you made up.'}{' '}
                                         {state.store === 'posthog'
@@ -531,12 +579,18 @@ export default function EvalsPlayground(): JSX.Element {
                                             : 'It’s defined in your code and loaded by your test runner.'}
                                     </Note>
                                 </div>
-                                <Evidence label="Reference answer">{offlineCase.expected}</Evidence>
+                                <div key={reveal} className={savedFade}>
+                                    <Evidence label="Reference answer">{offlineCase.expected}</Evidence>
+                                </div>
                             </div>
                         </Stage>
                     </Cell>
                     <Cell row={4}>
-                        <Connector locked={steps.offline < 1}>Your agent runs on this test case</Connector>
+                        <Connector locked={steps.offline < 1}>
+                            {state.saved
+                                ? 'Prompt fixed · your agent reruns this test case'
+                                : 'Your agent runs on this test case'}
+                        </Connector>
                     </Cell>
                     <Cell row={5}>
                         <Stage
@@ -550,7 +604,7 @@ export default function EvalsPlayground(): JSX.Element {
                             <Output
                                 waiting={steps.offline === 0}
                                 placeholder="Waiting for a new test run…"
-                                note="Generated for this test."
+                                note={state.saved ? 'Generated with your fixed prompt.' : 'Generated for this test.'}
                             >
                                 {offlineCase.output}
                             </Output>
@@ -652,18 +706,11 @@ export default function EvalsPlayground(): JSX.Element {
                 {...resultsLockedAttrs}
             >
                 <EnvironmentLabel {...WHERE.posthog} />
-                <div className="mb-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                <div className="mb-4">
                     <h2 id="reporting-title" className="m-0 flex items-center gap-2 text-lg font-bold">
                         <StepNumber n={4} current={!resultsLocked} />
                         Results in PostHog
                     </h2>
-                    <div className="flex items-center gap-3">
-                        {!resultsLocked && (
-                            <OSButton variant="secondary" size="xs" icon={<IconRefresh />} onClick={startOver}>
-                                Start over
-                            </OSButton>
-                        )}
-                    </div>
                 </div>
                 <div className="mb-4">
                     <Note>Same destination, different workflows.</Note>
@@ -675,7 +722,11 @@ export default function EvalsPlayground(): JSX.Element {
                         stepLocked={resultsLocked}
                         state={state}
                         waiting="Waiting for your runner to report its results."
-                        done="Reported by your runner. Compare test runs and catch regressions."
+                        done={
+                            state.saved
+                                ? 'Reported by your runner. The fix passes, and this case now guards against regressions.'
+                                : 'Reported by your runner. Compare test runs and catch regressions.'
+                        }
                     />
                     <Report
                         title="Online evals"
@@ -686,6 +737,46 @@ export default function EvalsPlayground(): JSX.Element {
                         done="Recorded in PostHog. Inspect the trace and track real-world patterns."
                     />
                 </div>
+                {/* Close the loop: the failing live request becomes an offline test case. */}
+                {steps.online === 3 && (
+                    <div className="mt-4">
+                        {/* The page's main takeaway, so it leads in bold. */}
+                        <p className="m-0 mb-1 text-base font-bold">
+                            {state.saved && steps.offline === 3
+                                ? 'Your offline tests are stronger.'
+                                : 'Strengthen your offline tests.'}
+                        </p>
+                        <Note>
+                            {!state.saved
+                                ? 'Bring this unexpected production request into your test suite. Save it as a test case, fix your prompt, and rerun it offline. That closes the loop, so the same failure can’t ship again.'
+                                : steps.offline < 3
+                                ? 'Saved to your test suite as a PostHog dataset. Rerun the offline track above with your fixed prompt.'
+                                : 'Saved and passing. This case now guards against regressions every time your suite runs.'}
+                        </Note>
+                        {!state.saved ? (
+                            <div className="mt-4">
+                                <OSButton
+                                    variant="primary"
+                                    size="md"
+                                    // Loops back: the request returns to the top of the offline lane.
+                                    icon={<IconRefresh />}
+                                    iconPosition="right"
+                                    onClick={saveCase}
+                                >
+                                    Add the live request to your test suite
+                                </OSButton>
+                            </div>
+                        ) : (
+                            steps.offline === 3 && (
+                                <div className="mt-4">
+                                    <OSButton variant="secondary" size="md" icon={<IconRefresh />} onClick={startOver}>
+                                        Start over
+                                    </OSButton>
+                                </div>
+                            )
+                        )}
+                    </div>
+                )}
             </section>
 
             {/* Same cream as the "Test instructions" callout (CalloutBox type="action"). */}
@@ -700,7 +791,7 @@ export default function EvalsPlayground(): JSX.Element {
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                         <OSButton asLink to="/docs/ai-observability" variant="primary" size="md">
-                            Add AI observability
+                            Add AI Observability
                         </OSButton>
                         <OSButton asLink to="/docs/ai-evals" variant="secondary" size="md">
                             Read about evals
