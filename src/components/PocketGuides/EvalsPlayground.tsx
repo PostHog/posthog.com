@@ -3,7 +3,6 @@ import { IconArrowRight, IconLaptop, IconLogomark, IconRefresh, IconServer, Icon
 import { HedgehogJudge, HedgehogResearch } from '@posthog/brand/hoggies'
 import OSButton from 'components/OSButton'
 import { CalloutBox } from 'components/Docs/CalloutBox'
-import { badgeClasses } from 'components/Docs/Steps'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 /**
@@ -141,11 +140,13 @@ function StepNumber({ n, current = false }: { n: number; current?: boolean }): J
 }
 
 /** Where a step runs. Shown inside each step, so the steps need no wrapper box. */
+// Blue for steps in the user's environment, purple for steps in PostHog.
+const YOURS = 'bg-blue/10 text-blue'
 const WHERE = {
-    local: { icon: <IconLaptop />, label: 'Your local machine / CI' },
-    runner: { icon: <IconTerminal />, label: 'Your evaluator runner' },
-    app: { icon: <IconServer />, label: 'Your application' },
-    posthog: { icon: <IconLogomark />, label: 'PostHog' },
+    local: { icon: <IconLaptop />, label: 'Your local machine / CI', color: YOURS },
+    runner: { icon: <IconTerminal />, label: 'Your evaluator runner', color: YOURS },
+    app: { icon: <IconServer />, label: 'Your application', color: YOURS },
+    posthog: { icon: <IconLogomark />, label: 'PostHog', color: 'bg-purple/10 text-purple' },
 }
 type Where = keyof typeof WHERE
 
@@ -259,9 +260,9 @@ function Cell({ row, children }: { row: keyof typeof ROW; children: React.ReactN
     return <div className={`col-start-1 min-w-0 ${ROW[row]}`}>{children}</div>
 }
 
-function EnvironmentLabel({ icon, label }: { icon: React.ReactNode; label: string }) {
+function EnvironmentLabel({ icon, label, color }: { icon: React.ReactNode; label: string; color: string }) {
     return (
-        <div className={`mb-4 flex items-center gap-2 text-secondary opacity-60 ${EYEBROW}`}>
+        <div className={`mb-4 flex w-fit items-center gap-2 rounded px-2 py-1 ${color} ${EYEBROW}`}>
             <span className="size-4 shrink-0">{icon}</span>
             {label}
         </div>
@@ -417,13 +418,13 @@ function Report({
     )
 }
 
-function LaneHeading({ id, title, tag, color }: { id: string; title: string; tag: string; color: string }) {
+function LaneHeading({ id, title, tag }: { id: string; title: string; tag: string }) {
     return (
         <div className="mb-2 flex items-center gap-3">
             <h2 id={id} className="m-0 text-xl font-bold">
                 {title}
             </h2>
-            <span className={badgeClasses(color)}>{tag}</span>
+            <span className="mt-0.5 text-sm text-secondary">{tag}</span>
         </div>
     )
 }
@@ -480,7 +481,7 @@ export default function EvalsPlayground(): JSX.Element {
             <div className="grid gap-x-6 @2xl:grid-cols-2">
                 <section className="row-span-7 grid min-w-0 grid-rows-subgrid" aria-labelledby="offline-title">
                     <Cell row={1}>
-                        <LaneHeading id="offline-title" title="Offline evals" tag="Test known cases" color="green" />
+                        <LaneHeading id="offline-title" title="Offline evals" tag="Test known cases" />
                     </Cell>
                     <Cell row={2}>
                         <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
@@ -574,12 +575,7 @@ export default function EvalsPlayground(): JSX.Element {
                     aria-labelledby="online-title"
                 >
                     <Cell row={1}>
-                        <LaneHeading
-                            id="online-title"
-                            title="Online evals"
-                            tag="Discover missed cases"
-                            color="purple"
-                        />
+                        <LaneHeading id="online-title" title="Online evals" tag="Discover missed cases" />
                     </Cell>
                     <Cell row={2}>
                         <p className="m-0 mb-4 text-sm leading-relaxed text-secondary">
