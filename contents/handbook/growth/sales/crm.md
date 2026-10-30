@@ -299,8 +299,7 @@ Exit criteria:
 
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
-The Credit Top Up record type uses a simplified 4-stage process instead, since these are typically faster deals within an existing relationship:
-
+The Credit Top Up record type uses a 4-stage process:
 1. Identified
 2. Commercial Agreement
 3. Closed Won (100%)
