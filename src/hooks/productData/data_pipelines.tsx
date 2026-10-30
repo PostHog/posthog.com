@@ -56,8 +56,7 @@ export const dataPipelines = {
     },
     overview: {
         title: 'Move your data anywhere',
-        description:
-            'Sync data from hundreds of tools and databases, clean it up as it arrives, and send it wherever it needs to go. In real time, or on a schedule.',
+        description: '"Connect our Stripe account and sync invoices every hour"',
         eli5: (
             <>
                 <p>
