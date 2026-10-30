@@ -40,17 +40,17 @@ The MCP server provides these tools for running SQL:
 
 The MCP server also provides tools for managing [data warehouse views](/docs/data-warehouse/views):
 
-| Tool                 | Description                                                                                                              |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `view-list`          | List all saved views in your project with their materialization status, sync frequency, column schema, and descriptions. |
-| `view-get`           | Get full details of a specific view by ID, including its HogQL query, run history, and descriptions.                     |
-| `view-create`        | Create a new view from a HogQL query with an optional description. Upserts by name if a view with the same name exists.  |
-| `view-update`        | Update a view's name, HogQL query, sync frequency, or description.                                                       |
-| `view-delete`        | Delete a view (soft delete).                                                                                             |
-| `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                                       |
-| `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                                      |
-| `view-run`           | Trigger a manual refresh of a materialized view.                                                                         |
-| `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                                  |
+| Tool                 | Description                                                                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `view-list`          | List all saved views in your project with their materialization status, sync frequency, column schema, and descriptions.                     |
+| `view-get`           | Get full details of a specific view by ID, including its HogQL query, run history, and descriptions.                                         |
+| `view-create`        | Create a new view from a HogQL query with an optional description. Upserts by name if a view with the same name exists.                      |
+| `view-update`        | Update a view's name, HogQL query, sync frequency, or description.                                                                           |
+| `view-delete`        | Delete a view (soft delete).                                                                                                                 |
+| `view-materialize`   | Enable materialization for a view with a 24-hour refresh schedule.                                                                           |
+| `view-unmaterialize` | Revert a materialized view back to a virtual query.                                                                                          |
+| `view-run`           | Trigger a manual refresh of a materialized view. Set `direction` to `upstream` or `downstream` to include related views in dependency order. |
+| `view-run-history`   | Get the last 5 materialization run statuses for a view.                                                                                      |
 
 ## Source management tools
 
@@ -119,7 +119,7 @@ For querying alerts:
 - `Show me alerts that check hourly and their last check results.`
 - `Write a HogQL query to find alerts that fired in the last week.`
 
-For schema discovery using [`system.information_schema`](/docs/data-warehouse/sources/posthog#schema-discovery-with-information_schema):
+For schema discovery using [`system.information_schema`](/docs/data-pipelines/sources/posthog#schema-discovery-with-information_schema):
 
 - `Query system.information_schema.columns to find all columns in the events table with their types and descriptions.`
 - `Use system.information_schema.relationships to show me how the events table joins to other tables.`
@@ -133,6 +133,8 @@ For view management:
 - `Trigger a refresh of my 'user_metrics' materialized view.`
 - `Show me the run history for my 'sales_data' view.`
 - `Set the description for my 'daily_active_users' view to explain what it calculates.`
+- `Refresh my 'user_metrics' view and all its upstream dependencies.`
+- `Run my 'sales_data' view and all downstream views that depend on it.`
 
 For source management:
 
@@ -165,7 +167,7 @@ See the [MCP server docs](/docs/model-context-protocol) for full setup instructi
 
 - [Use the data warehouse in the web app](/docs/data-warehouse/surfaces/web-app) for the SQL editor, source setup, and insights.
 - [Use the data warehouse over the API](/docs/data-warehouse/surfaces/api) for the same operations from your own scripts.
-- [Use the data warehouse in PostHog Desktop](/docs/data-warehouse/surfaces/desktop) to work through failing models and syncs.
+- [Self-driving reports in the web app](/docs/data-warehouse/surfaces/web-app#self-driving-reports) to work through failing models and syncs.
 - [Manage data quality over MCP and SQL](/docs/data-warehouse/data-quality/mcp) to create checks, start runs, and inspect results.
 - [Views](/docs/data-warehouse/views) and [materialized views](/docs/data-warehouse/views/materialize) for what the view tools manage.
-- [Sources](/docs/data-warehouse/sources) for what the source and schema tools configure.
+- [Sources](/docs/data-pipelines/sources) for what the source and schema tools configure.

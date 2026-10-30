@@ -83,6 +83,11 @@ describe('pocket guide volumes', () => {
             .filter((file) => file.endsWith('.tsx'))
             .map((file) => readRepoFile(`src/hooks/productData/${file}`))
             .join('\n')
+        // The Learn tab lives at /learn/<product slug>, which differs from the docs slug for some
+        // products (Warehouse docs are /docs/data-warehouse, its product page is /warehouse).
+        const tools = readRepoFile('src/data/tools.ts')
+        const productSlug = (handle: string) =>
+            tools.match(new RegExp(`handle: '${handle}',[\\s\\S]*?slug: '([^']+)'`))?.[1]
         // Chapter pages are generated from the volume's learnPath, so there is no route file to check.
         const volumesWithoutLearnTab = POCKET_GUIDE_VOLUMES.filter(
             (volume) => volume.productHandle && !volume.comingSoon
@@ -90,7 +95,7 @@ describe('pocket guide volumes', () => {
             .filter(
                 (volume) =>
                     !productData.includes(`pocketGuideVolume: '${volume.id}'`) ||
-                    !volume.learnPath?.startsWith(`/learn/${volume.docsProduct}`)
+                    !volume.learnPath?.startsWith(`/learn/${productSlug(volume.productHandle as string)}/`)
             )
             .map((volume) => volume.id)
         assert.deepEqual(volumesWithoutLearnTab, [])

@@ -59,26 +59,6 @@ export const scrollWithOffset = (id: string, offset: number): void => {
     }
 }
 
-export interface HubSpotUser {
-    firstName: string
-    lastName: string
-    email: string
-}
-
-export const createHubSpotContact = ({ firstName, lastName, email }: HubSpotUser): Promise<Response> => {
-    return fetch('/api/hubspot', {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-        },
-        body: JSON.stringify({
-            firstName,
-            lastName,
-            email,
-        }),
-    })
-}
-
 export const kebabCase = (s: string): string =>
     s
         .replace(/([a-z])([A-Z])/g, '$1-$2')

@@ -73,15 +73,16 @@ export default function BusinessIntelligence(): JSX.Element {
                 </div>
                 <div className="dark:bg-dark bg-accent border border-input p-4 rounded">
                     <p className="!mt-0">
-                        <strong>Note:</strong> PostHog business intelligence is great for product teams and analysts who
-                        have light visualization needs today, with support for advanced use-cases in active development.
+                        <strong>Note:</strong> PostHog business intelligence is in beta. It covers many BI use cases
+                        today, including some advanced features, and we add more all the time.
                     </p>
                     <p className="!mb-0">
-                        If you have advanced BI needs, we recommend you connect your favorite BI tooling such as{' '}
+                        For deeper analysis, use <Link to="/docs/notebooks">Notebooks</Link>, which cover most
+                        industry use cases. You can also connect your favorite BI tooling, such as{' '}
                         <Link to="https://hex.tech/" external>
                             Hex
-                        </Link>{' '}
-                        directly to your PostHog Trino warehouse.
+                        </Link>
+                        , directly to your PostHog Trino warehouse.
                     </p>
                 </div>
 

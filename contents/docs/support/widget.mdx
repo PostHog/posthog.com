@@ -6,11 +6,10 @@ showTitle: true
 
 The Support widget is a chat interface that appears on your website so your customers can start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
-
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_18_51_fb4157c892.png"
-    alt="The Support widget channel"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_18_51_fb4157c892.png"
+  alt="The Support widget channel"
+  classes="rounded"
 />
 
 ## Enable the widget
@@ -27,35 +26,35 @@ The widget appears as a floating button on your site. By default it appears in t
 
 Configure these settings in the **In-app widget** section of Support settings:
 
-| Setting | Description | Options | Default |
-|---------|-------------|---------|--------|
-| **Enable widget** | Show the chat widget on your site | `true`, `false` | `false` |
-| **Button color** | Primary color for the widget (hex) | Any hex color | `#5375ff` |
-| **Widget position** | Position of the widget on screen | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right` |
-| **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
-| **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
+| Setting              | Description                                | Options                                                | Default                  |
+| -------------------- | ------------------------------------------ | ------------------------------------------------------ | ------------------------ |
+| **Enable widget**    | Show the chat widget on your site          | `true`, `false`                                        | `false`                  |
+| **Button color**     | Primary color for the widget (hex)         | Any hex color                                          | `#5375ff`                |
+| **Widget position**  | Position of the widget on screen           | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right`           |
+| **Greeting message** | Welcome text shown when widget opens       | Any string                                             | `"Hi! How can we help?"` |
+| **Allowed domains**  | Restrict which domains can show the widget | Array of domain strings                                | `[]` (all domains)       |
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_09_56_ac25e5a9fc.png"
-    alt="The Support widget: Configuration options"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_09_56_ac25e5a9fc.png"
+  alt="The Support widget: Configuration options"
+  classes="rounded"
 />
 
 ### Identification form
 
 You can optionally require users to identify themselves before starting a conversation:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Require email** | Users must enter their email to start chatting | `false` |
-| **Collect name** | Additionally collect a name | `false` |
-| **Form title** | Heading shown on the identification form | `"Before we start..."` |
-| **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+| Setting              | Description                                    | Default                                                    |
+| -------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
+| **Require email**    | Users must enter their email to start chatting | `false`                                                    |
+| **Collect name**     | Additionally collect a name                    | `false`                                                    |
+| **Form title**       | Heading shown on the identification form       | `"Before we start..."`                                     |
+| **Form description** | Subtext shown below the title                  | `"Please provide your details so we can help you better."` |
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_10_03_e1531a421e.png"
-    alt="The Support widget: Identification form"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_10_03_e1531a421e.png"
+  alt="The Support widget: Identification form"
+  classes="rounded"
 />
 
 When enabled, the form appears before they can send their first message. PostHog uses this information to link the ticket to a person.
@@ -71,16 +70,16 @@ You can restrict which domains the widget appears on for security:
 ```javascript
 // Configured in PostHog settings
 domains: [
-  "example.com",              // Exact match
-  "*.example.com",            // Wildcard: matches sub.example.com
-  "https://app.example.com"   // With protocol (protocol is stripped)
-]
+  "example.com", // Exact match
+  "*.example.com", // Wildcard: matches sub.example.com
+  "https://app.example.com", // With protocol (protocol is stripped)
+];
 ```
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_15_02_b890db240b.png"
-    alt="The Support widget: Allowed domains"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_15_02_b890db240b.png"
+  alt="The Support widget: Allowed domains"
+  classes="rounded"
 />
 
 If `domains` is empty or not set, the widget shows on all domains.
@@ -91,16 +90,17 @@ Use the [JavaScript API](/docs/support/javascript-api) to programmatically show 
 
 ```javascript
 // Show the widget (renders it if not already rendered)
-posthog.conversations.show()
+posthog.conversations.show();
 
 // Hide and remove the widget from DOM
-posthog.conversations.hide()
+posthog.conversations.hide();
 
 // Check if widget is currently visible
-const isVisible = posthog.conversations.isVisible()
+const isVisible = posthog.conversations.isVisible();
 ```
 
 This is useful for:
+
 - Showing the widget only on certain pages
 - Triggering the widget from a custom button
 - Hiding the widget during specific user flows
@@ -110,9 +110,9 @@ This is useful for:
 You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-posthog.init('<ph_project_token>', {
-  disable_conversations: true  // Prevents loading the conversations module
-})
+posthog.init("<ph_project_token>", {
+  disable_conversations: true, // Prevents loading the conversations module
+});
 ```
 
 This is different from hiding the widget – it completely disables the feature.
@@ -145,27 +145,27 @@ You typically call both: `identify()` for analytics tracking, and `setIdentity()
 
 ### How it works
 
-1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your **Secret API key** from Support settings
+1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your **Identity verification secret** from Support settings
 2. You pass this hash along with the `distinct_id` to the widget
 3. The widget API verifies the signature and uses the `distinct_id` for ticket lookup instead of the browser session
 
 With identity verification enabled, users see all their tickets on any browser or device.
 
-### Find your secret API key
+### Find your identity verification secret
 
 1. Go to **Support** > **Settings**
-2. Open the **Secret API key** section. If it is empty, click the button next to it to generate a key
+2. Open the **Identity verification secret** section. If it is empty, click the button next to it to generate a secret
 3. Copy the key. Use it only on your server
 
-The key lives at [**Support** > **Settings**](https://app.posthog.com/support/settings).
+The secret lives at [**Support** > **Settings**](https://app.posthog.com/support/settings).
 
 If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first. See [troubleshooting](/docs/support/troubleshooting#identity-verification-returns-403).
 
-When you rotate the key, PostHog keeps the previous key as a backup, and hashes signed with the backup keep working. Delete the backup key after all your servers use the new key.
+When you rotate the key, PostHog keeps the previous key verifying for 48 hours. Update your server-side code within that window. After 48 hours, the previous key expires on its own. No manual deletion is needed. If the previous key may be compromised, click **Expire now** in the settings banner to stop it verifying immediately.
 
 ### Server-side implementation
 
-Generate the identity hash on your backend. Never expose the secret API key in client-side code.
+Generate the identity hash on your backend. Never expose the identity verification secret in client-side code.
 
 <MultiLanguage>
 
@@ -182,13 +182,10 @@ def compute_identity_hash(distinct_id: str, secret_api_key: str) -> str:
 ```
 
 ```node
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 function computeIdentityHash(distinctId, secretApiKey) {
-  return crypto
-    .createHmac('sha256', secretApiKey)
-    .update(distinctId)
-    .digest('hex');
+  return crypto.createHmac("sha256", secretApiKey).update(distinctId).digest("hex");
 }
 ```
 
@@ -231,11 +228,11 @@ Once you've computed the hash on your server, pass it to your frontend and set i
 If you know the user's identity when PostHog initializes, such as on a server-rendered page, pass it in the init config:
 
 ```javascript
-posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
-  identity_distinct_id: 'user_123',       // From your auth system
-  identity_hash: 'a1b2c3d4e5f6...',       // HMAC hash from your server
-})
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  identity_distinct_id: "user_123", // From your auth system
+  identity_hash: "a1b2c3d4e5f6...", // HMAC hash from your server
+});
 ```
 
 **Option 2: Set identity after login**
@@ -244,10 +241,10 @@ For single-page apps – or when the user logs in after page load – call `setI
 
 ```javascript
 // After user logs in, your server returns the hash
-const identityHash = await fetchIdentityHashFromServer(userId)
+const identityHash = await fetchIdentityHashFromServer(userId);
 
 // Pass it to the SDK
-posthog.setIdentity('user_123', identityHash)
+posthog.setIdentity("user_123", identityHash);
 ```
 
 **Clear identity on logout**
@@ -255,24 +252,24 @@ posthog.setIdentity('user_123', identityHash)
 When a user logs out, clear their identity so the widget falls back to session-based access:
 
 ```javascript
-posthog.clearIdentity()
+posthog.clearIdentity();
 ```
 
-<CalloutBox icon="IconWarning" title="Keep your secret API key secure" type="caution">
+<CalloutBox icon="IconWarning" title="Keep your identity verification secret secure" type="caution">
 
-Your secret API key must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
+Your identity verification secret must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
 
 </CalloutBox>
 
 ### When to use identity verification
 
-| Scenario | Recommended approach |
-|----------|---------------------|
-| **Logged-in users** | Use identity verification for seamless cross-device access |
-| **Anonymous visitors** | Use the default widget session (no setup required) |
-| **Mixed audience** | Use identity verification when users are logged in, fall back to widget session for anonymous users |
+| Scenario               | Recommended approach                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| **Logged-in users**    | Use identity verification for seamless cross-device access                                          |
+| **Anonymous visitors** | Use the default widget session (no setup required)                                                  |
+| **Mixed audience**     | Use identity verification when users are logged in, fall back to widget session for anonymous users |
 
-If your project has no secret API key, requests that carry identity fields get `403 Forbidden`. Generate a key in Support settings. Requests without identity fields keep using the browser session.
+If your project has no identity verification secret, requests that carry identity fields get `403 Forbidden`. Generate one in Support settings. Requests without identity fields keep using the browser session.
 
 ## Notifications
 
@@ -309,9 +306,9 @@ Individual team members can enable browser notifications for new ticket activity
 2. Enable **Browser notifications** in the notification settings
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_17_08_692dad5608.png"
-    alt="Email and browser notification settings"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_17_08_692dad5608.png"
+  alt="Email and browser notification settings"
+  classes="rounded"
 />
 
 When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications – you can use one or both.

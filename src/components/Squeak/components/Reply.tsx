@@ -470,7 +470,7 @@ export default function Reply({ reply, badgeText, isInForum = false }: ReplyProp
                         />
                     )}
 
-                    {isReplyAuthor && (
+                    {(isReplyAuthor || isModerator) && (
                         <OSButton
                             size="sm"
                             tooltip="Edit reply"

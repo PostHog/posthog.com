@@ -24,7 +24,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 4. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
 5. Customers set to roll off startup plan in the next ~100 days with last invoice between $2k–$5k
 6. Customers who are set to roll off the startup plan in the next two months and had a last invoice greater than $1500
-7. [AE named lists](https://posthog.slack.com/docs/TSS5W8YQZ/F0A9W1BVCKE)
+7. <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0A9W1BVCKE">AE named lists</PrivateLink>
 8. Emailed sales@ 
 
 **Customer success team**
@@ -32,7 +32,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 
 **BDR team**
 
-Campaigns are all [tracked in Lemlist](https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next) - these change week-to-week. 
+Campaigns are all <PrivateLink url="https://app.lemlist.com/teams/tea_kvdy3nLu9KEA4QPiD/campaigns-next">tracked in Lemlist</PrivateLink> - these change week-to-week.
 
 Team focus:
 
@@ -51,7 +51,7 @@ Backlog:
 
 Automated (Abhischek):
 1. Requests for Trust Center access that require an NDA
-2. Paused - [Warmbound](https://app.clay.com/workspaces/268768/workbooks/wb_0t9mfmifwKAqEGkwFC8/tables/t_0ta1652W6yS8tnSyUQF/views/gv_0ta1652BJM69kS4G3P2) - $100-499 MRR at some point in the account's history (need to filter more) 
+2. Paused - <PrivateLink url="https://app.clay.com/workspaces/268768/workbooks/wb_0t9mfmifwKAqEGkwFC8/tables/t_0ta1652W6yS8tnSyUQF/views/gv_0ta1652BJM69kS4G3P2">Warmbound</PrivateLink> - $100-499 MRR at some point in the account's history (need to filter more)
 
 Anyone at PostHog can also manually flag an account as a high potential lead. This includes new or low spend accounts with strong net new potential or existing paying customers with credible expansion potential. To create a lead, go to the customer's Vitally record and add a Segment for `AM referral` (product-led sales) or `AE referral` (new business). 
 

@@ -317,7 +317,7 @@ function TaskBarMenu() {
                     }}
                     className={`${TASKBAR_BG} ${
                         isAnimating ? MOTION_LAYER : ''
-                    } skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 border-secondary rounded px-2 shadow-2xl`}
+                    } border-secondary rounded px-2 shadow-2xl`}
                 >
                     {/* Top and bottom edges of the 3D box — visible during rotation */}
                     <div

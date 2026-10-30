@@ -10,11 +10,12 @@ import { useWindow } from '../../context/Window'
 
 import { pocketGuideDestination, volumeById, type PocketGuideVolume } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
+import BookClubCallout from './BookClubCallout'
 import Cover from './Cover'
 import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
 import { useEntry } from './bookContext'
-import { learnChapterPath, learnChapterSlug, normalizeUrl, useBookPages } from './bookModel'
+import { learnChapterPath, learnChapterSlug, normalizeUrl, sectionPages, useBookPages } from './bookModel'
 import { isReaderWindowActive } from './learnTracking'
 
 interface LearnBodyNode {
@@ -135,6 +136,11 @@ interface LearnSurfaceProps {
     chapter?: string
     /** This surface's route root, so in-page links stay in the Learn tab. */
     basePath: string
+    /**
+     * Limits the Learn tab to the pages with this `section:` frontmatter. The Learn root (no
+     * `chapter`) opens the section's first page, and its pages link to each other.
+     */
+    section?: string
 }
 
 /** Count a chapter only after ten visible seconds and reaching its end. */
@@ -203,19 +209,27 @@ function ChapterEngagement({ volume, chapter }: { volume: string; chapter: strin
 }
 
 /** One chapter of a volume, rendered in the docs reader. */
-export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfaceProps): JSX.Element | null {
-    const pages = useBookPages(volumeId)
+export default function LearnSurface({ volumeId, chapter, basePath, section }: LearnSurfaceProps): JSX.Element | null {
+    const bookPages = useBookPages(volumeId)
     const bodies = useBookBodies()
     const counts = usePocketGuideCounts()
     const coverRef = React.useRef<HTMLDivElement>(null)
 
     const entry = React.useMemo(() => {
-        if (pages.length === 0) {
+        if (bookPages.length === 0) {
             return undefined
         }
+        if (chapter === undefined && section) {
+            return sectionPages(bookPages, section)[0] || bookPages[0]
+        }
         // A wrong url costs a click, not a dead end.
-        return (chapter && pages.find((p) => learnChapterSlug(p) === chapter)) || pages[0]
-    }, [pages, chapter])
+        return (chapter && bookPages.find((p) => learnChapterSlug(p) === chapter)) || bookPages[0]
+    }, [bookPages, chapter, section])
+    // A page in the section moves only between the section's pages; any other page keeps the whole book.
+    const pages = React.useMemo(
+        () => (section && entry?.section === section ? sectionPages(bookPages, section) : bookPages),
+        [bookPages, entry, section]
+    )
 
     const body = entry && bodies.get(normalizeUrl(entry.url))
     if (!entry || !body) {
@@ -287,6 +301,8 @@ export default function LearnSurface({ volumeId, chapter, basePath }: LearnSurfa
             onClickCapture={entry.isFrontMatter ? openBook : undefined}
         >
             <EntryProvider value={{ entry, pages, basePath }}>
+                {/* TODO: Remove after the Product Book Club on Nov 4, 2026. */}
+                {volumeId === 'product-analytics' && <BookClubCallout />}
                 <IntroContext.Provider value={intro}>
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>

@@ -358,7 +358,6 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -446,7 +445,6 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -499,6 +497,7 @@ export interface AppSetting {
         type: 'standard' | 'side' | 'floating'
     }
     toolbar?: boolean
+    toolbarFade?: boolean
     hideTitle?: boolean
 }
 
@@ -1611,6 +1610,11 @@ const appSettings: AppSettings = {
     '/changelog': {
         toolbar: true,
     },
+    '/roadmap': {
+        toolbar: true,
+        toolbarFade: true,
+        hideTitle: true,
+    },
     '/feet-pics': {
         toolbar: true,
     },
@@ -1623,7 +1627,6 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
     scrollbars?: 'system' | 'show' | 'auto'
@@ -1639,7 +1642,12 @@ const readStoredSiteSettings = (): Partial<SiteSettings> => {
     }
     try {
         const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
-        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {}
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+            return {}
+        }
+        // Retired setting. Drop it so a later save does not write it back.
+        delete parsed.reduceTransparency
+        return parsed
     } catch (error) {
         console.error('Failed to read site settings:', error)
         return {}
@@ -1656,7 +1664,6 @@ const getInitialSiteSettings = (): SiteSettings => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         ...readStoredSiteSettings(),
     }
@@ -1687,7 +1694,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
@@ -1748,18 +1754,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
     const sourceWebhooksNav = useDataPipelinesNav({ type: 'source_webhook' })
-    const cdpSourcesNav = useSourcesNav('/docs/cdp/sources')
-    const dwSourcesNav = useSourcesNav('/docs/data-warehouse/sources')
+    const sourcesNav = useSourcesNav('/docs/data-pipelines/sources')
 
     const dynamicMenus = useMemo(
         () => ({
             'data-pipeline-destinations': destinationNav,
             'data-pipeline-transformations': transformationNav,
             'data-pipeline-source-webhooks': sourceWebhooksNav,
-            'data-pipeline-sources': cdpSourcesNav,
-            'data-warehouse-sources': dwSourcesNav,
+            'data-pipeline-sources': sourcesNav,
         }),
-        [destinationNav, transformationNav, sourceWebhooksNav, cdpSourcesNav, dwSourcesNav]
+        [destinationNav, transformationNav, sourceWebhooksNav, sourcesNav]
     )
 
     const desktopParams = useMemo(() => {
@@ -2202,7 +2206,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 newWindow.snapped = focusedWindow.snapped
                 newWindow.expanded = false
                 newWindow.windowed = false
-            } else if (focusedWindow) {
+            } else if (focusedWindow && !focusedWindow.fixedSize) {
                 // Navigating in place: keep the focused window's current display mode
                 // (windowed vs. expanded) so pages don't jump between sizes.
                 newWindow.expanded = focusedWindow.expanded ?? false
@@ -2239,6 +2243,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             setWindows([...windows.map((w) => (w === focusedWindow ? snappedFocused : w)), newWindow])
         } else if (newWindow.appSettings?.size?.fixed) {
             setWindows([...windows.filter((w) => !w.appSettings?.size?.fixed), newWindow])
+        } else if (focusedWindow?.fixedSize) {
+            setWindows([...windows.filter((w) => w !== focusedWindow), { ...newWindow, zIndex: focusedWindow.zIndex }])
         } else {
             replaceFocusedWindow(newWindow)
         }
@@ -2721,7 +2727,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
-        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {

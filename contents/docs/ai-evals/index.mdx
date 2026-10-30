@@ -8,6 +8,8 @@ Evaluations automatically assess the quality of your LLM [generations](/docs/ai-
 - **Code-based (Hog)** – Runs deterministic code you write against each generation, returning a pass/fail result, a numeric score, or categories. Great for rule-based checks like format validation, keyword detection, or length limits. Free to run with no LLM cost.
 - **Sentiment analysis** – Classifies the sentiment of user messages as positive, neutral, or negative using a local ML model. Great for monitoring how users feel during conversations with your AI features. Free to run with no LLM cost.
 
+This page covers online evaluations and backfills. To test changes before they reach production, see [offline evals](/docs/ai-evals/offline-evals).
+
 ## Why use evaluations?
 
 - **Monitor output quality at scale** – Automatically check if generations are helpful, relevant, or safe without manual review.
@@ -175,6 +177,21 @@ LLM-as-a-judge evaluations have a **Judge method** setting that controls how the
 The model picker filters to models that support the selected method. Some models support both methods and remain available regardless of your choice. Switching methods keeps a compatible model and its saved connection. If the current model doesn't support the new method, it's cleared without changing your prompt or output settings.
 
 Existing evaluations without an explicit method selection continue using automatic routing until you choose a method.
+
+### Setting a reasoning level
+
+When you use **LLM with explanation** with an Anthropic or OpenAI reasoning model, a brain button appears next to the model selector. Select it to choose how much the judge reasons before it gives a verdict: **Minimal**, **Low**, **Medium**, or **High**.
+
+**Model default** sends no level, so the model uses its own default. Many current models already reason at about a medium level by default, so choosing **Medium** may not change anything.
+
+Higher levels cost more and take longer, and they don't always change the verdict. Try a level on a sample of your data before you switch an evaluation over.
+
+Each provider applies the level differently:
+
+- **Anthropic:** Claude models before 4.6 get a thinking budget of 1,024 to 8,192 tokens, depending on the level. Newer models get adaptive thinking at that effort. Claude has no minimal level, so **Minimal** becomes **Low**.
+- **OpenAI:** PostHog sets `reasoning_effort`. Only the original GPT-5 models accept **Minimal**. Other models use **Low** instead.
+
+The button only appears for models that support a reasoning level. If you switch to a model without support, the level is cleared. The API rejects a reasoning level for those models and for the **Decision model** judge method.
 
 ### Creating an LLM judge evaluation
 
@@ -409,6 +426,8 @@ You can also filter generations by evaluation results or create [insights](/docs
 ## Evaluating past data
 
 An evaluation only grades data captured after you create it. To apply one to data you already have, run a **backfill** from the **Backfills** tab on the evaluation.
+
+Backfills use your existing live data. To test changes before they reach production, use [offline evaluations](/docs/ai-evals/offline-evals) instead.
 
 A backfill covers whatever the evaluation targets: generations, traces, or sessions.
 

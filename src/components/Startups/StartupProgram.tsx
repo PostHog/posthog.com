@@ -209,7 +209,7 @@ const toolkit: {
     { Icon: IconRewindPlay, color: 'text-yellow', product: 'Session replay', prefix: 'like ', linkText: 'FullStory', href: '/compare/posthog-vs-fullstory' }, // prettier-ignore
     { Icon: IconToggle, color: 'text-seagreen', product: 'Feature flags', prefix: 'like ', linkText: 'LaunchDarkly', href: '/compare/posthog-vs-launchdarkly' }, // prettier-ignore
     { Icon: IconFlask, color: 'text-purple', product: 'Experiments', prefix: 'like ', linkText: 'Optimizely', href: '/compare/posthog-vs-optimizely' }, // prettier-ignore
-    { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/blog/posthog-vs-sentry' }, // prettier-ignore
+    { Icon: IconWarning, color: 'text-orange', product: 'Error tracking', prefix: 'like ', linkText: 'Sentry', href: '/compare/posthog-vs-sentry' }, // prettier-ignore
     { Icon: IconLlmAnalytics, color: 'text-purple', product: 'AI observability', prefix: 'like ', linkText: 'Langfuse', href: '/compare/best-langfuse-alternatives' }, // prettier-ignore
     { Icon: IconDatabase, color: 'text-purple', product: 'Context warehouse', prefix: '', linkText: "What's that?", href: '/context-warehouse' }, // prettier-ignore
     { Icon: IconMessage, color: 'text-salmon', product: 'Surveys', prefix: 'like ', linkText: 'Sprig', href: '/compare/best-sprig-alternatives' }, // prettier-ignore
@@ -277,6 +277,17 @@ const faqItems = [
                 Your company needs to be less than 2 years old and have raised less than $5m funding. You need to have
                 signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company's email
                 domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Can I get credits more than once?',
+        content: (
+            <p>
+                No. We issue startup credits only once per founder and once per organization, whichever comes first. For
+                example, if you already got credits for one startup, you can't claim them again for a new company or a
+                new PostHog organization. We always issue credits at PostHog's discretion, and we can decline an
+                application or remove credits if it doesn't meet these rules.
             </p>
         ),
     },
@@ -419,6 +430,10 @@ const faqStructuredData = [
     {
         question: 'Who is eligible for PostHog for Startups?',
         answer: 'Your company needs to be less than 2 years old and have raised less than $5m in funding, you need to have signed up any time from Jan 1st 2023 onwards, and your PostHog account needs to use your company email domain. Applications from personal email addresses, like gmail.com or outlook.com, are not accepted.',
+    },
+    {
+        question: 'Can I get PostHog for Startups credits more than once?',
+        answer: "No. We issue startup credits only once per founder and once per organization, whichever comes first. For example, if you already got credits for one startup, you can't claim them again for a new company or a new PostHog organization. We always issue credits at PostHog's discretion, and we can decline an application or remove credits if it doesn't meet these rules.",
     },
     {
         question: 'What if my startup does not have a company email domain yet?',

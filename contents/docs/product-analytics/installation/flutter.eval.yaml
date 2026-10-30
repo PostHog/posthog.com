@@ -1,0 +1,23 @@
+owner: wizard-and-docs
+tags: [install, flutter]
+status: draft
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Flutter app from a one-line
+          request? The prompt names only the stack; the agent gets no docs, so docs-read
+          shows which pages it finds on its own.
+      codebase_to_test: flutter-app
+      prompt: >-
+          Set up PostHog in the Flutter app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/pubspec.yaml lists `posthog_flutter`.
+              initialized: >-
+                  Each platform the app targets is set up with the project token and the
+                  PostHog host, as the Flutter page describes: AndroidManifest.xml on
+                  Android, Info.plist on iOS, the web snippet on web. Cite the file and
+                  line(s).

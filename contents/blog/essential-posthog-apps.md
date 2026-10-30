@@ -40,7 +40,7 @@ Zapier enables you to easily and codelessly connect PostHog to over 4,000 other 
 
 > 💡**PostHog Tip:** Looking for inspiration on what to do with Zapier? Check out these tutorials on how to use Zapier to [connect PostHog with Discord](/tutorials/how-to-connect-discord-to-posthog-with-zapier) or [Notion](/tutorials/how-to-connect-posthog-and-notion-with-zapier)!
 
-## 3. [URL normalizer](/apps/url-normalizer)
+## 3. [URL normalizer](/docs/data-pipelines/transformations/template-url-normalization)
 ![PostHog url normalizer](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/activation-checklist-images/url-normalizer.png)
 
 OK, so this app isn’t truly essential for all teams — but if you’re fussy about trailing slashes (or if other tools in your stack are case sensitive), the URL normalizer is a lifesaver. It enables you to customize how URLs are formatted, converting them all to lower case and stripping all trailing slashes by default. 

@@ -14,7 +14,7 @@ The Go SDK is in beta. It has the same defaults as the other SDKs, but captures 
 
 `posthogmcpsdk` instruments servers built on the official [Go MCP SDK](https://github.com/modelcontextprotocol/go-sdk) (`github.com/modelcontextprotocol/go-sdk`) v1.6.1 or later. Use go-sdk v1.8.0 or later in your own `go.mod` to serve protocol `2026-07-28` and `input_required` rounds. It ships in the [`posthog-go`](/docs/libraries/go) repository as its own module, so your app only depends on the MCP SDK if it uses this package.
 
-You need Go 1.25+, `posthogmcpsdk` v1.33.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a server that isn't built on go-sdk? See [Custom dispatchers](#custom-dispatchers).
+You need Go 1.25+, `posthogmcpsdk` v1.34.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a server that isn't built on go-sdk? See [Custom dispatchers](#custom-dispatchers).
 
 <Steps>
 
@@ -126,6 +126,7 @@ A valid conversation handle also takes priority over the transport session, so a
 | `WithContextParameter(bool)` | `true` | Adds a required `context` argument to capture [agent intent](/docs/mcp-analytics/intent). The SDK removes it before your handler and go-sdk's input validation run. |
 | `WithCaptureModel(bool)` | `true` | Captures the [calling model](/docs/mcp-analytics/events#model-capture) from client metadata, or from a required `llm_model` argument the SDK adds. |
 | `WithConversationID(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. When it mints a handle, it appends a last `{"conversation_id": ...}` text block to the result. For plain object output schemas, it also mirrors the handle into `_mcp_instructions` in `structuredContent`. |
+| `WithIntentFallback(fallback)` | – | `func(ctx, req) (string, error)`. Supplies intent, with `$mcp_intent_source` `"inferred"`, when the agent sends no `context`. The agent's own `context` always wins. It runs on the tool call's response path. |
 | `WithIdentity(resolver)` | – | Maps a call to a person and groups. See [Identify the caller](#identify-the-caller). |
 | `WithProperties(resolver)` | – | Adds properties to each `$mcp_tool_call` and its `$exception`. The resolver also receives the result and the handler's error. |
 | `WithMissingCapabilityTool(name)` | off | Adds the [`get_more_tools` virtual tool](/docs/mcp-analytics/missing-capability). Agents call it to report a capability your server lacks. The call sends `$mcp_missing_capability`, not `$mcp_tool_call`. An empty name uses `get_more_tools`. |
@@ -215,7 +216,7 @@ A call with neither `SessionID` nor `ConversationID` gets a new `ses_` plus UUID
 
 This path has no prepare steps. You strip any injected arguments and manage sessions and conversation handles yourself. If `Intent` comes from an argument, remove it from `Parameters`. An `Intent` of `{}` is omitted. `SetProperties` becomes `$set` only with an explicit `DistinctID`.
 
-Two more methods capture calls that are not tool calls. See [Calls that are not tool calls](#calls-that-are-not-tool-calls):
+Three more methods capture calls that are not tool calls. See [Calls that are not tool calls](#calls-that-are-not-tool-calls):
 
 ```go
 err = analytics.CaptureUnknownTool(ctx, posthogmcp.UnknownTool{
@@ -228,6 +229,12 @@ err = analytics.CaptureInputRequired(ctx, posthogmcp.InputRequired{
 	ToolName:     "search_docs",
 	Duration:     time.Since(started),
 	Methods:      []string{"elicitation/create"}, // the method of each request, never its content
+})
+
+err = analytics.CaptureMissingCapability(ctx, posthogmcp.MissingCapability{
+	EventContext: posthogmcp.EventContext{SessionID: sessionID},
+	ToolName:     "get_more_tools",
+	Intent:       report, // the agent's description of what it needed
 })
 ```
 
@@ -255,11 +262,9 @@ A client on an older revision never sees a round. go-sdk answers the requests it
 
 The Go SDK doesn't yet have:
 
-- An intent fallback callback. With `WithContextParameter(false)`, the SDK captures no intent
 - `$mcp_tools_list`, `$mcp_initialize`, resource, and prompt events
 - Task handling
 - Client name and version on legacy `2025-11-25` stateless servers. The protocol version is still present
-- `$identify` and the merge of anonymous events into a user
 - Wizard support
 
 Some behavior to know about:

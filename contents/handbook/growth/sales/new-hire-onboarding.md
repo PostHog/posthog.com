@@ -62,7 +62,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail.
 - Make sure you're comfortable with the Shared Processes section of the Handbook
-- Once you start getting leads / accounts, ping [Simon](/community/profiles/28895) to be added to the [TAM quota tracker](https://us.posthog.com/project/2/dashboard/498582).
+- Once you start getting leads / accounts, ping [Simon](/community/profiles/28895) to be added to the <PrivateLink url="https://us.posthog.com/project/2/dashboard/498582">TAM quota tracker</PrivateLink>.
 
 ### In-person onboarding
 
@@ -201,7 +201,7 @@ Your first three months of commission are paid at 100% fixed OTE. This will be c
 ### Can I login as a customer?
 
 - Visit the /admin/ endpoint on the cloud they are on.  You can then search for them via email and log in.  Be careful clicking around here as you can accidentally delete a person/organization! You need to get their permission first unless it's an emergency, i.e. to resolve an incident.
-- If you need to connect the PostHog MCP server while logged in as them, follow the [MCP impersonation steps](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating). See our [impersonation policy](/handbook/company/security#impersonating-users) for the thorough version.
+- If you need to connect the PostHog MCP server while logged in as them, follow the [MCP impersonation steps](/handbook/customer-success/handling-customer-issues#using-the-mcp-server-while-impersonating). See our [impersonation policy](/handbook/company/security#impersonating-users) for the thorough version.
 
 ### Are there any influential folks in our space I should read/listen to?
 

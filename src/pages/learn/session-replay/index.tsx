@@ -6,7 +6,7 @@ import LearnPage from 'components/PocketGuides/LearnPage'
 import type { LearnLandingProps } from 'components/PocketGuides/LearnPage'
 
 const Landing = (props: LearnLandingProps): JSX.Element => (
-    <LearnLanding {...props} playground={{ figure: <SessionReplayLinkFigure /> }} />
+    <LearnLanding {...props} playground={{ figure: <SessionReplayLinkFigure />, fullWidth: true }} />
 )
 
 export default function SessionReplayLearn(): JSX.Element {

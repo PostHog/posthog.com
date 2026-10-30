@@ -68,7 +68,7 @@ const sections = [
                 label: 'Understand product usage',
                 colSpan: 2,
                 columns: [
-                    ['web_analytics', 'product_analytics', 'trends'],
+                    ['web_analytics', 'marketing_analytics', 'product_analytics', 'trends'],
                     ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
                     ['ai_observability', 'llm_evals', 'activity'],
                 ],
@@ -276,7 +276,7 @@ const ProductRow = ({ product }: { product: any }) => {
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault()
         if (isWIP) return
-        navigate(`/${product.slug}`, { state: { newWindow: true } })
+        navigate(product.url || `/${product.slug}`, { state: { newWindow: true } })
     }
 
     return (

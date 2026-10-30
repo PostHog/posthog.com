@@ -42,7 +42,7 @@ Adopting new technologies is hard and expensive, so "nice to have" is not enough
 
 2. **Scaling challenges.** When we reach scaling limits for our current infrastructure, and adding "more boxes" won't fix the issue, it's time to look for another solution.
 
-3. **Customer needs.** When customers demand a new feature, like reliable and resumable [data exports](/docs/cdp/batch-exports), we need to consider whether we build or buy.
+3. **Customer needs.** When customers demand a new feature, like reliable and resumable [data exports](/docs/data-pipelines/batch-exports), we need to consider whether we build or buy.
 
 ![Hair-on-fire problems](https://res.cloudinary.com/dmukukwp6/image/upload/14x9_833f0bb10b.png)
 

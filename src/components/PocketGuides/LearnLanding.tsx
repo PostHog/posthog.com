@@ -45,16 +45,23 @@ interface LearnLandingPlayground {
     /** A Twig view for the preview. */
     figure: React.ReactNode
     caption?: string
+    /** Place the figure below the introduction so both replay panels have room. */
+    fullWidth?: boolean
 }
 
 /** Short Twig preview for the Learn overview. */
 function LearnByDoingPreview({
     figure,
     caption,
+    fullWidth = false,
     onExploreTwig,
 }: LearnLandingPlayground & { onExploreTwig: (event: React.MouseEvent) => void }): JSX.Element {
     return (
-        <div className="not-prose grid min-w-0 items-start gap-6 @2xl/reader-content:grid-cols-2 @2xl/reader-content:gap-8">
+        <div
+            className={`not-prose grid min-w-0 items-start gap-6 @2xl/reader-content:gap-8 ${
+                fullWidth ? '' : '@2xl/reader-content:grid-cols-2'
+            }`}
+        >
             <div>
                 <div className="mb-5 flex items-center gap-3">
                     <IconPlay className="size-6 shrink-0 text-orange" />

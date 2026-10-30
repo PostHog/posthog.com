@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { PrivateLink } from '../components/PrivateLink'
 import TeamMember from '../components/TeamMember'
+import Link from '../components/Link'
 
 export interface Feature {
     slug: string
@@ -71,7 +72,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     alerts: {
         feature: 'Alerts',
-        owner: ['product-analytics'],
+        owner: ['apm'],
     },
     annotations: {
         feature: 'Annotations',
@@ -120,7 +121,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking', 'context-and-mcp'],
+        owner: ['growth', 'error-tracking'],
         notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
     'client-libraries': {
@@ -376,6 +377,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Platform (US + EU)',
         owner: ['cloud-foundations', 'cloud-platform'],
         label: 'feature/platform',
+    },
+    'platform-add-ons': {
+        feature: 'Platform add-ons',
+        owner: ['platform-features'],
+        notes: <>Boost, Scale, and Enterprise, including their adoption and growth</>,
+        label: false,
     },
     'PostHog.com': {
         feature: 'PostHog.com',
@@ -648,6 +655,46 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     wizard: {
         feature: 'Wizard',
         owner: ['wizard-and-docs'],
+        notes: (
+            <>
+                Wizard and docs owns the wizard platform, agent library, and TUI wizard. Product teams own the programs
+                for their products. See <Link to="/handbook/wizard-and-docs/wizard#who-owns-what">who owns what</Link>.
+            </>
+        ),
+    },
+    'wizard-app-handoffs': {
+        feature: 'Wizard (app handoffs)',
+        owner: ['wizard-and-docs', 'growth'],
+        notes: (
+            <>
+                Moving a task between the wizard and the PostHog app, so users can start in one and finish in the other.
+                For example, the wizard finds a data warehouse source and the user finishes creating it in the app.
+            </>
+        ),
+        label: false,
+    },
+    'wizard-cloud': {
+        feature: 'Wizard (cloud in-app)',
+        owner: ['growth'],
+        notes: (
+            <>
+                The wizard running in our cloud, started from inside the PostHog app. It does point implementations,
+                such as adding a new product, and shows cross-sell and upgrade opportunities.
+            </>
+        ),
+        label: false,
+    },
+    'wizard-headless-cli': {
+        feature: 'Wizard (headless CLI)',
+        owner: ['growth'],
+        notes: <>A version of the wizard without the TUI, so any coding agent can run it.</>,
+        label: false,
+    },
+    'wizard-migration': {
+        feature: 'Wizard (migration)',
+        owner: ['forward-deployed-engineering'],
+        notes: <>A wizard program that moves a customer to PostHog from a competitor.</>,
+        label: false,
     },
 }
 

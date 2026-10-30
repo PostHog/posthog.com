@@ -135,6 +135,11 @@ export function learnChapterSlug(entry: BookPageEntry): string {
     return entry.order === 0 ? '' : normalizeUrl(entry.url).split('/').pop() || ''
 }
 
+/** The pages of one `section:`, for a Learn tab that teaches only part of a book. */
+export function sectionPages(pages: BookPageEntry[], section?: string): BookPageEntry[] {
+    return section ? pages.filter((page) => page.section === section) : pages
+}
+
 export function learnChapterPath(basePath: string, entry: BookPageEntry): string {
     const slug = learnChapterSlug(entry)
     return slug ? `${basePath}/${slug}` : basePath

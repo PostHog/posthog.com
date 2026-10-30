@@ -46,7 +46,7 @@ PostHog is a product development platform that includes:
 - **[Web analytics](/web-analytics):** Traffic sources, pageviews, UTM tracking, and conversion goals.
 - **[LLM observability](/docs/ai-observability):** Track token usage, latency, costs, and user feedback across your AI pipelines.
 - **[Data warehouse](/data-warehouse):** Query your external data sources alongside PostHog data in one place.
-- **[CDP](/cdp):** Send data to and from PostHog with a library of integrations and transformations.
+- **[CDP](/data-pipelines):** Send data to and from PostHog with a library of integrations and transformations.
 - **[Logs](/logs):** Capture and search log data alongside your analytics and session replays.
 - **[Workflows](/workflows):** Automate actions and notifications based on product events.
  
@@ -152,7 +152,7 @@ Keep reading to explore the alternatives.
 
 ### Key differences
 
-1. **Marketing vs. engineering focus:** Amplitude offers multi-touch attribution, predictive forecasting, and AI Visibility (which tracks how your brand appears in LLMs), which PostHog doesn't have. PostHog is designed for engineers and product teams: both have [CDPs](/cdp) and MCP servers, but PostHog adds SQL access, open-source code, error tracking, and logs. It also [ships relentlessly](/changelog) – new features land every week, which tends to matter to engineering teams who want their tools to keep up.
+1. **Marketing vs. engineering focus:** Amplitude offers multi-touch attribution, predictive forecasting, and AI Visibility (which tracks how your brand appears in LLMs), which PostHog doesn't have. PostHog is designed for engineers and product teams: both have [CDPs](/data-pipelines) and MCP servers, but PostHog adds SQL access, open-source code, error tracking, and logs. It also [ships relentlessly](/changelog) – new features land every week, which tends to matter to engineering teams who want their tools to keep up.
 
 2. **AI capabilities:** Both have AI assistants and MCP servers for querying data from tools like Claude and Cursor. Amplitude's AI Feedback stands out for marketing teams – it aggregates and synthesizes user signals from Zendesk, G2, Reddit, app store reviews, and more into prioritized product insights. PostHog has first-class [LLM observability](/docs/ai-observability) for AI product teams – tracking token usage, latency, costs, and user feedback across AI pipelines – something Amplitude doesn't have.
 
@@ -365,7 +365,7 @@ Keep reading to explore the alternatives.
 
 ### What is LogRocket?
  
-[LogRocket](/compare/posthog-vs-logrocket) positions itself between FullStory and [Sentry](/blog/posthog-vs-sentry) – it combines session replay with front-end error monitoring and some product analytics. 
+[LogRocket](/compare/posthog-vs-logrocket) positions itself between FullStory and [Sentry](/compare/posthog-vs-sentry) – it combines session replay with front-end error monitoring and some product analytics. 
 
 It's popular with engineering teams who want a developer-focused session replay tool with performance monitoring built in. [LogRocket](/compare/best-logrocket-alternatives) has also added Galileo, an AI layer that surfaces issues and recommendations proactively. 
 
@@ -439,7 +439,7 @@ These tools didn't make the main list but are worth knowing about depending on y
  
 **[Pendo](/compare/posthog-vs-pendo)** is the go-to if you need no-code in-app guidance – tooltips, walkthroughs, banners, and onboarding checklists your CS or product team can build without engineering. PostHog has no equivalent. Pricing is enterprise-only and requires a sales call.
  
-**[Sentry](/blog/posthog-vs-sentry)** is the standard for application error monitoring – detailed stack traces, source maps, performance profiling, release tracking, and AI-powered Autofix that suggests code fixes. PostHog also has [error tracking](/error-tracking), but Sentry is an undeniable option when it comes to deep engineering observability.
+**[Sentry](/compare/posthog-vs-sentry)** is the standard for application error monitoring – detailed stack traces, source maps, performance profiling, release tracking, and AI-powered Autofix that suggests code fixes. PostHog also has [error tracking](/error-tracking), but Sentry is an undeniable option when it comes to deep engineering observability.
  
 **[Hotjar](/compare/posthog-vs-hotjar)** (acquired by ContentSquare) is a lightweight session replay and heatmap tool popular with marketing and UX teams. Good entry point if you just need replay and heatmaps.
  

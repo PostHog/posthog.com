@@ -14,17 +14,17 @@ export const BROWSE_TOOLS_HANDLES = [
     'ai_observability',
     'session_replay',
     'replay_vision',
+    'data_pipelines',
     'feature_flags',
     'experiments',
     'error_tracking',
     'logs',
     'traces',
+    'data_warehouse',
     'endpoints',
     'workflows_emails',
     'surveys',
     'support',
-    'heatmaps',
-    'group_analytics',
 ] as const
 
 // Non-product pages that appear in the product navigation

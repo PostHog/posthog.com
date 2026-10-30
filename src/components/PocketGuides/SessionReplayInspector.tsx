@@ -16,11 +16,28 @@ export default function SessionReplayInspector({
     events: SessionReplayInspectorEvent[]
     activeIndex: number
 }): JSX.Element {
+    const activeEventRef = React.useRef<HTMLLIElement>(null)
     const clickCount = events.filter((event) => event.kind === 'Click').length
     const pageCount = events.filter((event) => event.kind === 'Pageview').length
 
+    React.useEffect(() => {
+        const row = activeEventRef.current
+        const viewport = row?.closest<HTMLElement>('[aria-live]')
+        if (!row || !viewport) return
+
+        const rowBounds = row.getBoundingClientRect()
+        const viewportBounds = viewport.getBoundingClientRect()
+
+        // Scroll only the inspector. scrollIntoView would also move the surrounding page.
+        if (rowBounds.top < viewportBounds.top || rowBounds.height > viewport.clientHeight) {
+            viewport.scrollTop += rowBounds.top - viewportBounds.top
+        } else if (rowBounds.bottom > viewportBounds.bottom) {
+            viewport.scrollTop += rowBounds.bottom - viewportBounds.bottom
+        }
+    }, [activeIndex])
+
     return (
-        <PostHogInspector>
+        <PostHogInspector className="flex max-h-96 min-h-0 flex-col [&>div:last-child]:min-h-0 [&>div:last-child]:overflow-y-auto">
             <div className="border-b border-[#d3d0c8] bg-[#faf8f3] px-3 text-xs font-semibold">
                 <span className="inline-block border-b-2 border-orange py-2">Events</span>
             </div>
@@ -34,6 +51,7 @@ export default function SessionReplayInspector({
                 {events.map((item, index) => (
                     <li
                         key={`${item.timeMs}-${item.title}`}
+                        ref={activeIndex === index ? activeEventRef : null}
                         aria-current={activeIndex === index ? 'true' : undefined}
                         className={`m-0 grid grid-cols-[2.2rem_minmax(0,1fr)] gap-1.5 px-2.5 py-2.5 ${
                             activeIndex === index ? 'bg-orange/10' : ''
