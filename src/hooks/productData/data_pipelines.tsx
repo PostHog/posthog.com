@@ -38,7 +38,7 @@ const HedgehogCarryingPipe = (props: React.ComponentProps<typeof HedgehogConstru
 export const dataPipelines = {
     ...getTool('cdp'),
     handle: 'data_pipelines',
-    name: 'Data pipelines',
+    name: 'Data Pipelines',
     slug: 'data-pipelines',
     Icon: IconDecisionTree,
     type: 'data_pipelines',

@@ -27,6 +27,18 @@ export const BROWSE_TOOLS_HANDLES = [
     'support',
 ] as const
 
+// Job-based groups for the taskbar Products menu, in display order. The product-page
+// switcher uses the same order without the group labels.
+export const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
+    // MCP Analytics belongs in Analyze – add it here once its product page ships
+    { label: 'Analyze', handles: ['product_analytics', 'web_analytics'] },
+    { label: 'Observe', handles: ['ai_observability', 'session_replay', 'replay_vision', 'error_tracking'] },
+    { label: 'Sync', handles: ['data_warehouse', 'data_pipelines', 'endpoints'] },
+    { label: 'Monitor', handles: ['logs', 'traces'] },
+    { label: 'Deploy', handles: ['feature_flags', 'experiments'] },
+    { label: 'Manage', handles: ['surveys', 'support', 'workflows_emails'] },
+]
+
 // Non-product pages that appear in the product navigation
 // These need manual icon and link configuration
 export const nonProductPages = {

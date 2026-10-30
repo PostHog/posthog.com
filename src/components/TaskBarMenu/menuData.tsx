@@ -19,7 +19,7 @@ import {
 import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
-import { BROWSE_TOOLS_HANDLES, buildProductMenuItems } from 'constants/productNavigation'
+import { PRODUCT_CATEGORIES, buildProductMenuItems } from 'constants/productNavigation'
 import { TWIG_URL } from '../../constants'
 import Stickers from 'components/Stickers/Index'
 
@@ -236,28 +236,20 @@ const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuIte
         }
     })
 
-// Tools listed first in the Products menu, in display order.
-// Everything else in BROWSE_TOOLS_HANDLES follows them.
-const PRIMARY_TOOL_HANDLES: string[] = [
-    'product_analytics',
-    'ai_observability',
-    'session_replay',
-    'replay_vision',
-    'data_pipelines',
-    'feature_flags',
-    'experiments',
-    'error_tracking',
-    'logs',
-]
-
 // Build Products menu items
 const buildProductsMenuItems = (allProducts: any[]) => {
-    const moreToolHandles = BROWSE_TOOLS_HANDLES.filter((handle) => !PRIMARY_TOOL_HANDLES.includes(handle))
-
     const items: any[] = [
-        ...buildProductMenuItems([...PRIMARY_TOOL_HANDLES, ...moreToolHandles], allProducts),
+        ...PRODUCT_CATEGORIES.flatMap(({ label, handles }, index) => [
+            ...(index > 0 ? [{ type: 'separator' }] : []),
+            { type: 'label', label },
+            ...buildProductMenuItems(handles, allProducts),
+        ]),
+        { type: 'separator' },
         {
-            type: 'separator',
+            type: 'item',
+            label: 'PostHog Self-driving',
+            link: '/self-driving',
+            icon: <Icons.IconFlag className="size-4 text-red" />,
         },
         {
             type: 'item',
@@ -267,30 +259,9 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'PostHog Desktop',
-            link: '/desktop',
-            icon: <Icons.IconCoffee className="size-4 text-brown dark:text-brown-dark" />,
-        },
-        {
-            type: 'item',
             label: 'PostHog Slack',
             link: '/slack',
             icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
-        },
-        {
-            type: 'separator',
-        },
-        {
-            type: 'item',
-            label: 'Context Warehouse',
-            link: '/context-warehouse',
-            icon: <Icons.IconDatabase className="size-4 text-blue" />,
-        },
-        {
-            type: 'item',
-            label: 'PostHog Research',
-            link: '/research',
-            icon: <Icons.IconBrain className="size-4 text-purple" />,
         },
     ]
 
@@ -435,6 +406,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Media',
                     link: '/media',
                     icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
+                },
+                {
+                    type: 'item',
+                    label: 'Research',
+                    link: '/research',
+                    icon: <Icons.IconBrain className="size-4 text-purple" />,
                 },
                 {
                     type: 'separator',
