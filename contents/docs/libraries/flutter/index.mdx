@@ -13,7 +13,7 @@ features:
   featureFlags: true
   groupAnalytics: true
   surveys: true
-  aiObservability: false
+  aiObservability: true
   errorTracking: true
   logs: true
 ---
@@ -22,7 +22,7 @@ import FlutterIdentify from './_snippets/identify.mdx'
 
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
-PostHog supports the iOS, macOS, Android, and Web platforms.
+PostHog supports the iOS, macOS, Android, Web, Windows, and Linux platforms.
 
 ## Installation
 
@@ -559,6 +559,30 @@ If you implement or mock `PosthogFlutterPlatformInterface`, `PosthogFlutterIO` o
 
 Calls to `Posthog()` aren't affected by these.
 
+### Feature flag callbacks
+
+`PostHogConfig.onFeatureFlags` now receives a `PostHogFeatureFlagsLoaded` with the enabled flags, their values and whether loading failed, and `reloadFeatureFlags()` returns a `Future<PostHogFeatureFlagsLoaded>`. Callbacks written as `() { ... }` no longer compile:
+
+```dart
+// Version 5
+config.onFeatureFlags = () {
+  // ...
+};
+
+// Version 6
+config.onFeatureFlags = (loaded) {
+  // ...
+};
+```
+
+### Synchronous `beforeSend`
+
+`beforeSend` callbacks, including `logsConfig.beforeSend`, are now synchronous. An `async` callback is a compile error, so load anything it needs ahead of time and read it synchronously.
+
+The event goes to the SDK in the same call as `capture()`, `screen()` or `captureException()`, so a `reset()` or `identify()` made straight after an un-awaited call no longer applies to that event first.
+
+On iOS, macOS and Android, if you set `beforeSend`, a `capture()` followed straight away by `optOut()`, `close()` or `setup()` drops that event. Await the `capture()` first if the event must be sent.
+
 ### Events go to capture v1
 
 On iOS, macOS, Android, Windows and Linux, version 6 sends events to capture v1 instead of `/batch/`. iOS and macOS do this through `posthog-ios` 4.0, Android through `posthog-android` 4.0, and Windows and Linux in the SDK's Dart client.
@@ -578,10 +602,11 @@ If you send events through your own reverse proxy, update it before you upgrade:
 
 - Forward `/i/v1/analytics/events` and `/i/v1/ai/events` to PostHog.
 - Pass `Authorization` (the project token, sent as `Bearer <token>`), every `PostHog-*` header, `Content-Type`, `Content-Encoding` and `User-Agent` through unchanged.
+- If your proxy strips other credentials, keep `Authorization` values that start with `Bearer phc_`. If your project token doesn't start with `phc_`, keep the exact value `Bearer <your project token>`.
 - Accept request bodies up to 20 MB. AI requests are often larger than 1 MB, the default limit in NGINX.
 - If your app also runs on web, keep the routes the proxy already forwards for `posthog-js`. One proxy that serves every platform needs both sets of routes.
 
-PostHog's [managed reverse proxy](/docs/advanced/proxy) already does this.
+PostHog's [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) already does this.
 
 The SDK doesn't fall back to `/batch/`. A 404 is retried, so events stay queued until the path is served.
 
@@ -638,6 +663,19 @@ On iOS, macOS, Android, Windows and Linux:
 - After a failed send, the wait before the next one doubles from 1 second up to 30 seconds, with up to 25% random jitter.
 - A `Retry-After` header pauses sending for at most 30 seconds.
 - Retries have no limit. Queued events stay until they're delivered or a full queue evicts the oldest.
+
+### Behavior changes on Windows and Linux
+
+These changes are on top of the capture v1 changes above:
+
+- **Backoff:** a failed send used to retry 3 times, 3 seconds apart, within the same flush. It now waits for the backoff described in [Retries](#retries).
+- **Request timeout:** a request fails after 10 seconds without progress, not 10 seconds in total.
+- **Redirects:** a redirect that isn't followed drops the batch. Version 5 retried it.
+- **`Retry-After`:** capped at 30 seconds. Version 5 had no cap.
+- **Batch size:** a batch closes at `maxBatchSize` events or 5 MiB of serialized events, whichever comes first.
+- **Non-finite numbers:** `NaN` and infinite property values are dropped instead of being sent as `null`. In a list, they become `null` so the other elements keep their positions.
+- **Empty event names:** an event with an empty name is dropped on the device.
+- **Logs:** the count of events PostHog dropped only appears in debug mode. A one-time warning about a 404 prints without debug mode, because events stay queued and nothing else reports the missing route.
 
 ### Behavior changes on iOS and macOS
 
