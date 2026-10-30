@@ -96,7 +96,7 @@ const jobs: {
         tools: [
             { Icon: IconSparkles, name: 'PostHog AI', slug: 'ai' },
             { Icon: IconDatabase, name: 'Data warehouse', slug: 'data-warehouse' },
-            { Icon: IconStack, name: 'CDP', slug: 'cdp' },
+            { Icon: IconStack, name: 'Data pipelines', slug: 'data-pipelines' },
         ],
     },
 ]

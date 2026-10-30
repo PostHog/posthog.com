@@ -847,7 +847,7 @@ export const DataPipeline = () => {
             }}
             contentOffset="mdlg:pb-6 lg:pb-8 lg:pr-8 xl:pb-12 2xl:pb-8"
             buttonLabel="Browse connectors"
-            buttonUrl="/cdp"
+            buttonUrl="/context-warehouse/integrations-library"
             buttonClasses="group !border-black/25 !bg-black/10 md:!w-auto !w-full"
             buttonChildClasses="!bg-[#43B6E7] border-black !text-black group-hover:text-black"
         />

@@ -68,7 +68,7 @@ The difference isn't the storage engine, it's what's allowed to touch the data w
 
 Your context warehouse starts with data that's already there. Once enabled, PostHog mirrors your product event data to S3, partitioned by organization, as it's captured with no pipeline to build.
 
-Everything else comes in through [Warehouse Sources](/context-warehouse/sources): 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more. Connecting each source is no-code and takes under two minutes, or even more hands-off with the PostHog Wizard. 
+Everything else comes in through [Warehouse Sources](/data-pipelines): 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more. Connecting each source is no-code and takes under two minutes, or even more hands-off with the PostHog Wizard. 
 
 Compare that to an ETL pipeline: writing and maintaining extraction jobs, hosting them somewhere, wiring up a destination, and debugging it every time a schema changes upstream. Warehouse Sources allows you to skip all of that.
 
@@ -100,7 +100,7 @@ The context warehouse today is deliberately not a full data stack: land your eve
 | :---- | :---- |
 | Making our Warehouse generally available | Right now, we're in a closed beta that will be open very soon, you can [get on the waitlist](/warehouse) and be the first to hear about it. |
 | Deeper modeling | Closing the gap with dbt-style transformation maturity for teams with more advanced modeling needs. |
-| More sources | Expanding [Warehouse Sources](/context-warehouse/sources) coverage so fewer teams need a custom sync to get their systems in. |
+| More sources | Expanding [Warehouse Sources](/data-pipelines) coverage so fewer teams need a custom sync to get their systems in. |
 | More of the loop exposed to agents | As the [self-driving product](/blog/self-driving-product) loop matures, more of what an agent can see in the context warehouse becomes something it can act on directly, not just read. |
 
 ## Try it yourself
