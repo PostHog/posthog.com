@@ -63,7 +63,7 @@ Below are the main configurations. Each one outlines how the Stripe customers ar
    - **Option B: one Stripe customer for all the organizations**
      - The organizations share one Stripe customer, one subscription, one invoice, and one credit pool.
      - Usage from all the organizations is added together and reported against the shared subscription.
-     - The customer pays for each add-on one time. No override is necessary.
+     - The customer pays for each add-on one time. Each organization's plans map still needs the add-on, so the billing team syncs it on every linked organization (**Sync plans map from Stripe** in Billing admin).
      - The customer cannot see a spend breakdown for each organization.
      - Shared billing has limitations around usage displays, forecasting, and billing limits. Before recommending this setup, <PrivateLink url="https://github.com/PostHog/billing/blob/main/notes/shared-stripe-customers.md#limitations">review the limitations</PrivateLink> (PostHog team only) and explain the relevant limitations to the customer.
      - Internally, MRR and invoices attach to the canonical organization, which is the organization with the lowest customer ID. The other organizations show no MRR in our own tools, which include flags, campaigns, and Vitally.
