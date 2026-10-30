@@ -474,11 +474,11 @@ export default function EvalsPlayground(): JSX.Element {
             <h1 className="m-0 mb-2 text-2xl font-bold">AI evaluations, explained side by side.</h1>
             <p className="m-0 text-base text-secondary">Play with the two eval types to see what changes</p>
 
-            <CalloutBox type="action" icon="IconCursorClick" title="Test instructions">
+            <CalloutBox type="action" icon="IconCursorClick" title="Before you ship, or after?">
                 <div className="flex items-start gap-4 pt-3">
                     <p className="m-0 flex-1">
-                        Learn how offline and online evals work and the different results they can deliver. Select how
-                        you want to run your tests by clicking the buttons and progressing through the flow.
+                        Offline evals test your changes on saved cases before they go live. Online evals grade the real thing as it happens."
+                        Pick a path below and see what each one catches.
                     </p>
                     <HedgehogJudge size={112} className="hidden h-auto shrink-0 -mt-10 @md:block" />
                 </div>
@@ -715,13 +715,13 @@ export default function EvalsPlayground(): JSX.Element {
             <div className="mt-6 flex flex-col gap-2 rounded border border-yellow bg-yellow/15 p-6 @xl:flex-row @xl:items-center @xl:gap-6">
                 <HedgehogResearch size={128} className="h-auto w-20 shrink-0 @xl:order-last @xl:w-32" />
                 <div className="min-w-0 flex-1">
-                    <h2 className="m-0 mb-1.5 text-xl font-bold">Know what your AI is actually up to</h2>
+                    <h2 className="m-0 mb-1.5 text-xl font-bold">'It works on my computer' doesn’t apply to your agent</h2>
                     <p className="m-0 text-base text-secondary">
-                        Bring this unexpected production request into your test suite.
+                        Don’t let your agent run wild without running evals first.
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
                         <OSButton asLink to="/docs/ai-observability" variant="primary" size="md">
-                            Implement AIO in your stack
+                            Add AI observability
                         </OSButton>
                         <OSButton asLink to="/docs/ai-evals" variant="secondary" size="md">
                             Read about evals
