@@ -21,9 +21,9 @@ Your retention period comes from your plan:
 | Pay-as-you-go with Scale | 5 years
 | Pay-as-you-go with Enterprise | 7 years
 
-An organization already on a paid plan before November 1, 2026 keeps 7 years while it stays on its plan and [platform package](/platform-packages), or moves to a bigger package. If it moves to the free plan or to a smaller package, it gets the retention in the table. An organization that starts a paid plan on or after that date gets the retention in the table, even if it was on the free plan before.
+An organization already on a paid plan before November 5, 2026 keeps 7 years while it stays on its plan and [platform package](/platform-packages), or moves to a bigger package. If it moves to the free plan or to a smaller package, it gets the retention in the table. An organization that starts a paid plan on or after that date gets the retention in the table, even if it was on the free plan before.
 
-Your organization gets the longest window your plan allows. To use a shorter window for every project in it, change it in your organization settings. A shorter window hides older events from queries. It does not delete them.
+Your organization gets the longest window your plan allows. To use a shorter window for every project in it, change it in your organization settings. A shorter window hides older events from queries, and PostHog deletes them once they're older than it.
 
 Two read-only fields on the [projects API](/docs/api/projects) report it:
 
@@ -46,9 +46,9 @@ When retention applies to your project:
 - An insight whose date range goes past the window shows a banner, so that you do not read a smaller number as a drop in your product.
 - Tables in the [Data Warehouse](/docs/data-warehouse) keep all of their rows, because retention applies to the events table only.
 
-## Retention is not a deletion tool
+## Removing data sooner
 
-A shorter window in organization settings does not remove data. To remove data, use the tools in [controlling data storage](/docs/privacy/data-storage#data-deletion):
+Retention deletes events only after they pass the window. To remove data sooner, use the tools in [controlling data storage](/docs/privacy/data-storage#data-deletion):
 
 - Delete a person, together with their events and recordings, to answer a [right to be forgotten](/docs/privacy/data-storage#right-to-be-forgotten) request.
 - Delete a project or an organization to remove all of the events in it.

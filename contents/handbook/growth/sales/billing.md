@@ -211,7 +211,7 @@ You can manually change the plan for a customer by updating the `plans_map` in t
 
 ### Extending a customer's events retention
 
-A customer that starts a paid plan on or after November 1, 2026 gets 2 years of events retention. Customers already on a paid plan before that date keep 7 years until they drop to the free plan.
+A customer that starts a paid plan on or after November 5, 2026 gets 2 years of events retention. Customers already on a paid plan before that date keep 7 years until they drop to the free plan.
 
 A customer on a platform package (Boost, Scale, or Enterprise) can ask for a longer window, up to 7 years. The longer window applies to every project in their organization. To grant one, open the customer in the billing admin and add an entry to `feature_overrides`:
 

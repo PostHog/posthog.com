@@ -27,7 +27,7 @@ On the free plan, events older than 1 year are hidden first and deleted later:
 
 On paid plans, events are deleted once they're older than your plan's window (2, 3, 5, or 7 years).
 
-A shorter window in organization settings hides older events but doesn't delete them. To remove events, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention).
+A shorter window in organization settings also deletes events once they're older than it. To remove events right away, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention).
 
 ## If you need a longer window
 
