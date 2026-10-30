@@ -186,5 +186,5 @@ The lookup returns `404` with the code `not_found` when:
 - **Suppression still applies.** PostHog doesn't send to an address on your suppression list.
 - **Billing and quotas.** Transactional emails are billed and quota limited like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
 - **Sending allowance.** Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its hourly or daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
-- **Engagement events.** If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails against the person in `identifiers.distinct_id`.
+- **Engagement events.** If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails against the person whose distinct ID you send.
 - **Where to see sends.** [Read the status](#check-an-emails-status) of an email with its `message_id`. The template's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.

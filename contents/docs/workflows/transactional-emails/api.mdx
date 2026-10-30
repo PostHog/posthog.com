@@ -31,10 +31,10 @@ Send a JSON body with these fields:
 
 | Field | Required | Description |
 | --- | --- | --- |
-| `template.id` | Yes | The ID of the transactional template to send. |
+| `template_id` | Yes | The ID of the transactional template to send. |
 | `to` | Yes | The email address of the recipient. One address for each request. |
 | `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
-| `identifiers.distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. If you leave it out, PostHog uses the email address as the distinct ID, which might not match the person in your product. We recommend that you always send it. |
+| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. If you leave it out, PostHog uses the email address as the distinct ID, which might not match the person in your product. We recommend that you always send it. |
 
 In the template, use the same names that you send in `message_data`:
 
@@ -65,14 +65,14 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: password-reset-8f14e45f" \
   -d '{
-    "template": { "id": "<template_id>" },
+    "template_id": "<template_id>",
     "to": "jane@example.com",
-    "identifiers": { "distinct_id": "user_123" },
+    "distinct_id": "user_123",
     "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
   }'
 ```
 
-The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, takes the same body without `template` and still works.
+The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
 
 When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors). After a `503`, PostHog might have queued the email. Retry with the same `Idempotency-Key` rather than sending the email through another provider, or the recipient can get it twice.
 
