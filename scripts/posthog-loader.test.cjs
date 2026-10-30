@@ -99,20 +99,88 @@ test('each build downloads the current bootstrap and replaces an existing genera
     assert.equal(requests.length, 2)
 })
 
-for (const [name, download, message] of [
-    ['HTTP failure', async () => new Response('unavailable', { status: 503 }), /503/],
-    ['empty response', async () => new Response('  \n'), /empty/i],
+for (const [name, failure] of [
+    ...[408, 429, 503].map((status) => [`HTTP ${status}`, () => new Response('unavailable', { status })]),
+    [
+        'connection reset',
+        () => {
+            throw new TypeError('fetch failed: connection reset')
+        },
+    ],
+    [
+        'timeout',
+        () => {
+            throw new DOMException('The operation timed out', 'TimeoutError')
+        },
+    ],
+    [
+        'response body failure',
+        () =>
+            new Response(
+                new ReadableStream({
+                    start(controller) {
+                        controller.error(new TypeError('connection reset while reading body'))
+                    },
+                })
+            ),
+    ],
+]) {
+    test(`a build retries ${name} with bounded backoff and publishes only a fresh bootstrap`, async () => {
+        const writes = new Map([['posthog-bootstrap.js', 'stale bootstrap']])
+        const requests = []
+        const waits = []
+        await generatedInit(
+            env,
+            async (request) => {
+                requests.push(request)
+                assert.equal(request.cache, 'no-store')
+                assert.equal(request.signal.aborted, false)
+                assert.equal(writes.get('posthog-bootstrap.js'), 'stale bootstrap')
+                assert.equal(writes.has('posthog-init.js'), false)
+                return requests.length < 3 ? failure() : new Response('window.bootstrapVersion = "fresh";')
+            },
+            writes,
+            waits
+        )
+        assert.equal(requests.length, 3)
+        assert.equal(new Set(requests.map((request) => request.signal)).size, 3)
+        assert.deepEqual(waits, [500, 1000])
+        assert.equal(writes.get('posthog-bootstrap.js'), 'window.bootstrapVersion = "fresh";')
+        assert.equal(writes.has('posthog-init.js'), true)
+    })
+}
+
+for (const [name, download, message, attempts] of [
+    ['HTTP failure', async () => new Response('unavailable', { status: 503 }), /503/, 3],
+    ['permanent HTTP failure', async () => new Response('not found', { status: 404 }), /404/, 1],
+    ['empty response', async () => new Response('  \n'), /empty/i, 1],
     [
         'network failure',
         async () => {
             throw new Error('network unavailable')
         },
         /network unavailable/,
+        3,
     ],
 ]) {
     test(`a build fails instead of keeping a stale bootstrap after ${name}`, async () => {
         const writes = new Map([['posthog-bootstrap.js', 'stale bootstrap']])
-        await assert.rejects(generatedInit(env, download, writes), message)
+        const waits = []
+        let requests = 0
+        await assert.rejects(
+            generatedInit(
+                env,
+                async () => {
+                    requests++
+                    return download()
+                },
+                writes,
+                waits
+            ),
+            message
+        )
+        assert.equal(requests, attempts)
+        assert.deepEqual(waits, attempts === 3 ? [500, 1000] : [])
         assert.equal(writes.get('posthog-bootstrap.js'), 'stale bootstrap')
         assert.equal(writes.has('posthog-init.js'), false)
     })
@@ -139,7 +207,8 @@ for (const missing of ['GATSBY_POSTHOG_API_KEY', 'GATSBY_POSTHOG_API_HOST']) {
 async function generatedInit(
     environment = env,
     download = async () => new Response('window.bootstrapVersion = 1;'),
-    writes = new Map()
+    writes = new Map(),
+    waits = []
 ) {
     const { onPreBootstrap } = load(
         'gatsby/onPreBootstrap.ts',
@@ -151,6 +220,7 @@ async function generatedInit(
                 writeFileSync: (file, value) => writes.set(path.basename(file), value),
                 cpSync: () => {},
             },
+            'timers/promises': { setTimeout: async (delay) => waits.push(delay) },
             './devFetchCache': { cacheFetchResponsesInDevelopment: () => {} },
             './enrichVideos': { enrichVideos: async () => {} },
             './utils/fetchMCPTools': {

@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import { execFile } from 'child_process'
 import { promisify } from 'util'
+import { setTimeout as delay } from 'timers/promises'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
@@ -79,6 +80,35 @@ async function sparseCloneGitSource(store): Promise<void> {
     }
 }
 
+async function downloadPostHogBootstrap(): Promise<string> {
+    for (let attempt = 0; ; attempt++) {
+        let retryable = true
+        try {
+            // A Request bypasses the URL-only development cache for this mutable asset.
+            const response = await fetch(
+                new Request('https://us-assets.i.posthog.com/static/1/loader-bootstrap.js', {
+                    cache: 'no-store',
+                    signal: AbortSignal.timeout(30000),
+                })
+            )
+            if (!response.ok) {
+                retryable = response.status === 408 || response.status === 429 || response.status >= 500
+                await response.body?.cancel()
+                throw new Error(`Unable to download PostHog bootstrap: HTTP ${response.status}`)
+            }
+            const bootstrap = (await response.text()).replace(/\n\/\/# sourceMappingURL=.*\s*$/, '\n')
+            retryable = false
+            if (!bootstrap.trim()) {
+                throw new Error('Downloaded PostHog bootstrap is empty')
+            }
+            return bootstrap
+        } catch (error) {
+            if (!retryable || attempt === 2) throw error
+            await delay(500 * 2 ** attempt)
+        }
+    }
+}
+
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
     cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
@@ -87,20 +117,7 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
-        // A Request bypasses the URL-only development cache for this mutable asset.
-        const bootstrapResponse = await fetch(
-            new Request('https://us-assets.i.posthog.com/static/1/loader-bootstrap.js', {
-                cache: 'no-store',
-                signal: AbortSignal.timeout(30000),
-            })
-        )
-        if (!bootstrapResponse.ok) {
-            throw new Error(`Unable to download PostHog bootstrap: HTTP ${bootstrapResponse.status}`)
-        }
-        const bootstrap = (await bootstrapResponse.text()).replace(/\n\/\/# sourceMappingURL=.*\s*$/, '\n')
-        if (!bootstrap.trim()) {
-            throw new Error('Downloaded PostHog bootstrap is empty')
-        }
+        const bootstrap = await downloadPostHogBootstrap()
         const assetHost = process.env.GATSBY_POSTHOG_ASSET_HOST
         const assetHostConfig = assetHost
             ? `asset_host: "${assetHost}",\n    strict_script_versioning: true,\n    `
