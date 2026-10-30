@@ -86,18 +86,31 @@ Events can have multiple property groups, and each group's properties will be in
 
 ## Downloading your schema with the CLI
 
-The PostHog CLI generates language definitions from your configured schemas.
+The PostHog CLI generates typed language definitions from your configured schemas. Two CLIs support schema management:
+
+- **`posthog-cli`** — the current stable CLI (schema commands use the `exp` prefix)
+- **`hog`** — the new PostHog CLI (schema commands are top-level, no `exp` prefix)
+
+Both CLIs read and write the same `posthog.json` format, so you can switch between them or use either in CI.
 
 ### Install the CLI
+
+Install `posthog-cli`:
 
 ```bash
 npm install -g @posthog/cli
 ```
 
+Or see the [PostHog CLI docs](/docs/cli) for other installation methods, including `hog`.
+
 ### Authenticate
 
 ```bash
+# posthog-cli
 posthog-cli login
+
+# hog
+hog auth login
 ```
 
 This opens your browser to authorize the CLI with your PostHog account. Select your organization, project, and the API scopes to grant.
@@ -106,18 +119,28 @@ This opens your browser to authorize the CLI with your PostHog account. Select y
 
 ### Download your schema
 
-> **Note:** Schema management is currently an experimental feature. The `exp` prefix will be removed once the feature is stable.
+```bash
+# posthog-cli (uses the exp prefix)
+posthog-cli exp schema pull
+
+# hog (no exp prefix)
+hog schema pull
+```
+
+With `hog`, you can also specify a language and output path:
 
 ```bash
-posthog-cli exp schema pull
+hog schema pull --language typescript --file src/lib/posthog-typed.ts
 ```
 
 The CLI will:
 
 1. Fetch your event schemas
-2. Prompt you for the output file path
+2. Prompt you for the output file path (if not specified with `--file`)
 3. Generate typed definitions and save them to the specified file
 4. Update `posthog.json` with the schema hash
+
+Without `--language`, `hog` regenerates every language already listed in `posthog.json`, which makes it ideal for CI or agent workflows.
 
 When prompted for the output path, choose a location that's accessible from your application code (e.g., `src/lib/posthog-typed.ts` or `app/lib/posthog-typed.ts` for TypeScript).
 
@@ -128,10 +151,14 @@ On subsequent runs, the CLI only updates the file if your schema has changed.
 ### Check schema status
 
 ```bash
+# posthog-cli
 posthog-cli exp schema status
+
+# hog
+hog schema status
 ```
 
-This shows your current sync status, including the schema hash, last updated time, and number of events.
+This shows your current sync status, including the schema hash, last updated time, and number of events. Both commands exit with code 1 when a module is missing or out of date, so you can use them as a CI gate.
 
 ## Using typed events in your app
 
