@@ -131,6 +131,7 @@ export const experiments = {
     ],
     overview: {
         title: 'Test changes with statistical significance',
+        description: '"A/B test three variants of new onboarding against control"',
         eli5: 'Experiments let you run A/B, A/B/n, holdout, fake door, and redirect tests with statistical significance. Create an experiment (which creates a feature flag), pick primary and secondary metrics, target cohorts or geographies, then launch variants. Bayesian and frequentist engines tell you what won – and you can watch session replays for each variant when you need the why.',
         textColor: 'text-white', // tw
     },

@@ -44,8 +44,7 @@ export const dataWarehouse = {
     },
     overview: {
         title: 'All your data, one warehouse',
-        description:
-            "Your own database for product and business data, with its own hostname, credentials, and storage. It's in beta – get in touch and we'll get you set up.",
+        description: '"Which features do our highest paying customers use the most?"',
         eli5: (
             <>
                 <p>

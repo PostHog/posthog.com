@@ -121,6 +121,7 @@ export const support = {
     ],
     overview: {
         title: 'One place for every user conversation',
+        description: '"Which feature generates the most support tickets?"',
         eli5: 'Support is a helpdesk for solving customer tickets, which arrive from an in-app chat widget, email, Slack, or GitHub. Tickets arrive with full context from other PostHog tools, like session replays, recent events, and errors. Recurring problems get picked up by agents as signal, so PostHog can draft pull requests to ship improvements.',
         textColor: 'text-black', // tw
     },
