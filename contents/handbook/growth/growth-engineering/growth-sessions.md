@@ -65,4 +65,4 @@ Why aren't we growing faster?
 
 ## Relevant docs
 
-- [Growth review recurring doc](https://docs.google.com/document/d/1fb6XzDNSOK0G4ICuEQhFtkfDczCIeK6ZNh1dtTA-vU4/edit#) (Internal only)
+- <PrivateLink url="https://docs.google.com/document/d/1fb6XzDNSOK0G4ICuEQhFtkfDczCIeK6ZNh1dtTA-vU4/edit#">Growth review recurring doc</PrivateLink> (Internal only)

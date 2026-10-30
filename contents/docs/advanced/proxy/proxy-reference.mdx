@@ -20,6 +20,9 @@ Check your project URL in the [PostHog app](https://app.posthog.com) to confirm 
 ### Checklist
 
 - Set the `Host` header to the PostHog domain (e.g., `Host: us.i.posthog.com`). Without this, you'll get 401 errors.
+- Forward the `Authorization` header when its value starts with `Bearer phc_`. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. Strip any other `Authorization` value, such as session tokens your app adds to its own requests. If your project token doesn't start with `phc_`, forward only the exact value `Bearer <your project token>` instead.
+- Forward every `PostHog-*` header, plus `Content-Type`, `Content-Encoding`, and `User-Agent`, unchanged. Capture v1 SDKs need them, and their request bodies can be compressed with `gzip`, `deflate`, `br`, or `zstd`.
+- Route `/i/v1/*` paths to the regional ingestion host, `us.i.posthog.com` or `eu.i.posthog.com`.
 - Allow `GET` and `POST`** on all paths.
 - Support 64MB request bodies, session recordings can be large.
 - Forward `X-Forwarded-For` to preserve client IPs for geolocation.
@@ -63,7 +66,11 @@ PostHog rejected the request. Check:
 
 1. **Host header**: Must match the PostHog domain you're proxying to
 2. **Region**: Proxy must point to same region as your project
-3. **Request body**: Some platforms strip it, removing your API key
+3. **Project token**: Legacy SDKs send it in the request body, which some platforms strip. Capture v1 SDKs send it as `Authorization: Bearer <token>`. If the response's `error` field is `missing_authorization`, your proxy dropped that header. A proxy that keeps only `Bearer phc_` values drops a project token that doesn't start with `phc_`.
+
+### 400 Bad Request
+
+If a capture v1 SDK gets a `400` response whose `error` field is `missing_required_headers`, your proxy dropped a header that capture v1 requires. Forward `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id`, `PostHog-Request-Timestamp`, `Content-Type`, and `User-Agent` unchanged.
 
 ### 405 Method Not Allowed
 

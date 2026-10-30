@@ -18,7 +18,7 @@ If the answer is **yes**, it is likely the expense is in the best interest of th
 If not, think again.
 
 **The goal here is to empower you. However, when in doubt, ask your team lead for context, not permission.** 
-- Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+- Still in doubt? Ask [Janani](https://posthog.com/community/profiles/34497) in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink>.
 
 
 ## How it works
@@ -87,7 +87,7 @@ We're not going to police your spending with hard limits but we will continue to
   - This covers all co-working/collaboration costs, training, individual software subscription, etc.
   - For subscriptions and other recurring monthly expenses, we recommend using the virtual card under your User Limit to ensure it gets categorized to the correct budget by default
 
-Joining an offsite? _Only use the offsite budget_, not your User Limit - it helps the People & Ops track travel spend accurately against budgets. Let Kendal know in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+Joining an offsite? _Only use the offsite budget_, not your User Limit - it helps the People & Ops track travel spend accurately against budgets. Let Kendal know in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink>.
 
 
 ## High-value & ongoing vendor contracts
@@ -98,13 +98,13 @@ This section is about _living with_ a contract we've already got. Deciding wheth
 
 **Who owns it?** The team that operates the vendor owns its quota and spend - in practice, the person with the most context about the contract, usually whoever proposed or operates the tool. That includes keeping an eye on usage against the contract's limits (the usage terms and limits you agreed when you signed it) so nobody is surprised by the bill. The easiest way to stay on top of this is to fold it into the vendor's own periodic review (e.g. a quarterly business review), so quota and spend get looked at on a regular cadence rather than only when something goes wrong. Loop in your exec early - they should have enough context to support and guide you.
 
-Need help getting at the financial data or the tools to track your spend? Ask in [#project-infra-tools](https://posthog.slack.com/archives/C085ZJ43HDW). We want everyone to be able to work with their spend easily, so this doesn't get in the way of shipping.
+Need help getting at the financial data or the tools to track your spend? Ask in <PrivateLink url="https://posthog.slack.com/archives/C085ZJ43HDW">#project-infra-tools</PrivateLink>. We want everyone to be able to work with their spend easily, so this doesn't get in the way of shipping.
 
 **If a contract is running into overages or about to induce extra spend, flag it early.** Act as soon as it's clear an overage is likely to persist over a longer time, or to have significant consequences on the bill - don't wait for it to land repeatedly first. The whole point of watching usage is to catch it before the money is spent. Concretely:
 - The person with the most context on the contract drives this. Keep your team lead and the responsible exec aware - they own the area and help decide whether the extra spend is worth it or whether we right-size.
 - Ping `@finance-folks` in Slack as soon as the overage looks material, and take it from there. That's usually enough - it keeps Finance in the loop so they can forecast it accurately.
-- Pull in [#legal](https://posthog.slack.com/archives/C08MYQX74KH) if this is a _new_ contract, or if the legal details have changed and need a second look. Straight re-commits or renewals usually don't need legal, but a new contract always does (see [Adding tools](/handbook/company/adding-tools)).
-- For company-level tool billing, [Janani](https://posthog.com/community/profiles/34497) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) is the default admin, so billing stays owned and categorized correctly. The billing email for any vendor contract is finance@posthog.com.
+- Pull in <PrivateLink url="https://posthog.slack.com/archives/C08MYQX74KH">#legal</PrivateLink> if this is a _new_ contract, or if the legal details have changed and need a second look. Straight re-commits or renewals usually don't need legal, but a new contract always does (see [Adding tools](/handbook/company/adding-tools)).
+- For company-level tool billing, [Janani](https://posthog.com/community/profiles/34497) in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> is the default admin, so billing stays owned and categorized correctly. The billing email for any vendor contract is finance@posthog.com.
 
 There's no fixed dollar amount that trips a formal approval - we stay trust-based and lead with context, not permission. Use your judgement for what counts as material. But spend at this scale isn't comparable to a personal subscription, so be proactive and transparent about it _early_ rather than once the overage has already landed.
 
@@ -139,10 +139,10 @@ Past a certain spend, it's worth challenging the tool or contract itself, if fea
 - What if I accidentally used the company card for a personal expense?
   - Login to Brex > find the charge > click on 'Repay'.
     - **US and Canada:** Brex's auto repay function works, so it'll pull the money from your connected bank account for you.
-    - **International:** auto repay isn't available, so the 'Repay' button only tracks the expense. You need to manually transfer the amount **from your personal bank account to PostHog's bank account**, using the details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md).
-  - For Revolut charges, repay to the bank account details provided in [our banking runbook](https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md#repayments-to-revolut)
+    - **International:** auto repay isn't available, so the 'Repay' button only tracks the expense. You need to manually transfer the amount **from your personal bank account to PostHog's bank account**, using the details provided in <PrivateLink url="https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md">our banking runbook</PrivateLink>.
+  - For Revolut charges, repay to the bank account details provided in <PrivateLink url="https://github.com/PostHog/company-internal/blob/37179f74a66e8b779f8e6f116172511709646157/finance/banking.md#repayments-to-revolut">our banking runbook</PrivateLink>
 - How do I get access to WeWork?
-  - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+  - We have a company All Access account - ask [Kendal](https://posthog.com/community/profiles/28628) in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink>.
 - What if I've received a bill I need Finance to pay?
   - Submit the bill using the ['Bill Pay' feature on Brex](https://www.brex.com/support/bill-pay-overview#pay-a-bill), with context on what it is for, and which budget the bill should be coming out of, once you have verified it.
   - Finance processes all bill payments on Wednesdays.
@@ -165,7 +165,7 @@ If the inappropriate spend was due to a misunderstanding, e.g. you genuinely tho
 ## Expense guidelines
 ### Equipment
 #### Laptop & monitor
-Talk to [Tara](https://posthog.com/community/profiles/34526) who handles Macbook and Apple Studio Display purchases - ping her on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ).
+Talk to [Tara](https://posthog.com/community/profiles/34526) who handles Macbook and Apple Studio Display purchases - ping her on <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink>.
   - Having equipment purchases centralized helps ensure accurate accounting and tracking of fixed assets for the audit.
   - We expect you to ship the Macbook and Apple Studio Display back when you leave PostHog.
   - Apple Studio Displays are only for Product Engineers (high density screen), PM's and Sales/CS/Onboarding teams (built-in high quality webcam and microphone). For all other teams that feel they could benefit from an enhanced monitor, there are some really great competitors to the Studio Display at a fraction of the price - like the [Clarity Pro 27"](https://alogic.co.uk/products/clarity-pro-27-uhd-4k-monitor-with-65w-pd-and-webcam) or another solid option is this [LG screen](https://www.amazon.co.uk/LG-UltraFine-Monitor-27U730A-B-Built/dp/B0F7M27H6F/ref=asc_df_B0F7M27H6F?mcid=d91fd0cc5e06349887121f1ba2c4d6b6&tag=googshopuk-21&linkCode=df0&hvadid=696386561242&hvpos=&hvnetw=g&hvrand=11057029523976072922&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9045888&hvtargid=pla-2442615442699&psc=1&hvocijid=11057029523976072922-B0F7M27H6F-&hvexpln=0&gad_source=1)  You can purchase these using your personal limit.
@@ -199,7 +199,7 @@ We are _strongly opposed_ to introducing new software that is designed for colla
 The cost of introducing new collaborative software is that it creates another place where todo items/comments/communication can exist. This creates a disproportionate amount of complexity.
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
-- There are some tools used by team members individually - if they become more widely adopted, it makes sense to have a company account. Talk to [Tara](https://posthog.com/community/profiles/34526) on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ)
+- There are some tools used by team members individually - if they become more widely adopted, it makes sense to have a company account. Talk to [Tara](https://posthog.com/community/profiles/34526) on <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink>
 
 You can ask for access to team/company tools by submitted a request in Slack. Find the Zluri app in Slack. type: /accessrequest and press enter. You'll get a pop up that allows you to search for the app you'd like access to. Add any specific information about license level/type if necessary. The request will then be sent to the team member who owns/manages access to the plaftorm. Once they have provided access to the platform, they'll confirm via the Zluri task and you'll also receive confirmation. You should then receive an email invite, or be able to login via SSO depending on the tool. If you do not see a tool in the app that you believe is centrally managed, drop a line in the [#team-people-and-ops] channel
 
@@ -210,12 +210,12 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
   - [Granola](https://granola.ai): It’s absolutely okay to use AI note-takers so you can stay engaged in meetings without writing everything down. Feel free to choose your own but please be aware of who the sub-processors are to ensure they do not use a competitor for analytics.
 - IDEs: Visual Studio, VIM and PyCharm are the most popular within our team. IDEs range widely in cost; best in class IDE suites can cost up to $700, which is not a great value proposition for most engineers.
 
-- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you're unsure.
+- AI coding tools (Cursor, Claude Code, etc.) are encouraged, but usage-based pricing can climb fast. Most engineers' monthly spend lands around a single max-tier subscription (~$200/month). If yours is running several times higher, that's usually a misconfiguration or inefficient workflow rather than a genuine need – compare setups with your teammates and ask in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> if you're unsure.
   - [Claude](https://claude.ai) (including Claude Code): you need to be invited to our team plan – logging in with SSO doesn't add you automatically. Request an invite yourself with the `/accessrequest` command in Slack.
-  - [ChatGPT](https://chatgpt.com) (including Codex): use the company workspace instead of a personal account, and ask in [#chat-gpt-team](https://posthog.slack.com/archives/C08U0ERMESF) for a seat. Each seat has a small weekly allowance and then runs on workspace credits – see your usage in [Codex analytics](https://chatgpt.com/codex/cloud/settings/analytics), and ask in the channel if you need a higher limit.
+  - [ChatGPT](https://chatgpt.com) (including Codex): use the company workspace instead of a personal account, and ask in <PrivateLink url="https://posthog.slack.com/archives/C08U0ERMESF">#chat-gpt-team</PrivateLink> for a seat. Each seat has a small weekly allowance and then runs on workspace credits – see your usage in [Codex analytics](https://chatgpt.com/codex/cloud/settings/analytics), and ask in the channel if you need a higher limit.
 
 ### Coworking
-- If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) for access.
+- If there's a WeWork where you are, use it – we have a company All Access account, so default to that rather than paying for another coworking space. Ask [Kendal](https://posthog.com/community/profiles/28628) in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> for access.
 
 ### Travel
 - We travel in economy by default and do not pay for business class
@@ -228,11 +228,11 @@ You can ask for access to team/company tools by submitted a request in Slack. Fi
 - PostHog has international insurance for our work trips, so do not buy travel insurance when traveling on behalf of PostHog.
 - It's fine to book your outbound / return flights for a different day to when you are required to be there as long as the flight is a similar price or less.
  - Any other costs outside of the days you are required to be at an event are of course _not_ covered.
-> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Ask on [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
+> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Ask on <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 - We strongly encourage team members to try and work together in person when practical. This isn't limited to just working with people in your team, but we expect that you have a reasonable reason you need to work together. You should default to doing this in SF/London, so you'll run into other PostHog people too.
 - If you're in the same place as other team members, even if you aren't directly working together, PostHog will cover the cost of a dinner or a fun activity
 - When visiting customers (or potential customers), we should look for opportunities to connect with them over a meal. These don't need to be extravagant, but they should be appropriate to the size and expectations of the customer. If you would be comfortable justifying the spend publicly in All Hands, you're probably fine.
-  - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in [#team-people-and-ops](https://posthog.slack.com/archives/C017WDX3BFZ) and tag Kendal so she can create a separate budget for it.
+  - For a normal customer visit (yourself or a couple of people), just use your personal budget and request an increase through Brex if you need more. If the visit grows into something offsite-like (the whole team, multiple days, etc.), post in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3BFZ">#team-people-and-ops</PrivateLink> and tag Kendal so she can create a separate budget for it.
 
 #### Hub travel budget
 

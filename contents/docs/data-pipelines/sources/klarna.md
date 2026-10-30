@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Alpha:** This source is in alpha. Please share feedback in the [PostHog community](/community).
-
 The Klarna connector syncs your settlement data – payouts and transactions – into PostHog, so you can reconcile payments and analyze revenue alongside your product data.
 
 ## Prerequisites

@@ -16,6 +16,8 @@ Before you can design a workflow, you need to configure a workflows channel. Cha
 
 To create a new channel, go to workflows > [**Channels** tab](https://app.posthog.com/workflows/channels) > click **+ New channel**, and select the channel you want to configure:
 
+Only project admins and higher can create a channel. If your access level is member, ask a project admin to add the channel for you.
+
 <CalloutBox icon="IconInfo" title="CDP channels" type="fyi">
 
 Other than the channels shown below, you can also dispatch to any [realtime destination](/docs/data-pipelines/destinations) in CDP. If you plan to use a CDP destination, you can configure them directly when you [design a workflow](/docs/workflows/workflow-builder).
@@ -125,7 +127,7 @@ A device token says *where* to deliver a notification, not *who* the device belo
 | **Optional** | Tokens are verified and recorded, but devices can still register without one. Use this to confirm your app sends valid tokens before you require them. |
 | **Required** | Devices without a valid token can't register or unregister. Switch to this only once your app sends tokens, otherwise registration stops working. |
 
-When you enable Optional or Required, paste your backend's EC (P-256) **public key** into the field below the mode. Your backend signs each token with the matching private key (ES256), and PostHog verifies it with the public key you paste here, so the private key never leaves your control. Leave the field blank to verify against your project's Feature flags secure API key instead. Either way, you implement the signing in the mobile SDK ([iOS](/docs/workflows/push-notifications/ios#identity-verification), [Android](/docs/libraries/android#identity-verification)).
+When you enable Optional or Required, paste your backend's EC (P-256) **public key** into the field below the mode. Your backend signs each token with the matching private key (ES256), and PostHog verifies it with the public key you paste here, so the private key never leaves your control. Leave the field blank to verify against your project's Feature flags secure API key instead. Either way, you implement the signing in the mobile SDK ([iOS](/docs/workflows/push-notifications/ios#identity-verification), [Android](/docs/workflows/push-notifications/android#identity-verification)).
 
 Once configured, add a **Push** step in the [workflow builder](/docs/workflows/workflow-builder), set the notification title and body (with variables like `{{ person.name }}`), and optionally set platform-specific overrides.
 
@@ -165,7 +167,7 @@ Once your channel is created, you can use it in a workflow to deliver messages t
 
 | Issue | Solution |
 | --- | --- |
-| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. |
+| No address in the **From** dropdown? | The step can only use a sender that exists in the project. Add one on the [**Channels** tab](https://app.posthog.com/workflows/channels), then select it in the step. Only project admins and higher can add a sender. |
 | Emails not sending? | Check that your domain is verified and you've added the DNS records correctly. |
 | Spam folder issues? | Ensure SPF/DKIM are valid, and consider setting up DMARC. |
 | Variables not populating? | Confirm the property exists on the person profile (e.g. `person.name`). |

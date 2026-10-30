@@ -1669,6 +1669,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
+                        name: 'Onboarding skills',
+                        url: '/handbook/onboarding/onboarding-skills',
+                    },
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
@@ -1919,6 +1923,10 @@ export const handbookSidebar = [
                             {
                                 name: 'Data foundations',
                                 url: '/handbook/growth/sales/data-foundations',
+                            },
+                            {
+                                name: 'Data stack positioning',
+                                url: '/handbook/growth/sales/data-stack-positioning',
                             },
                         ],
                     },
@@ -7650,8 +7658,16 @@ export const docsMenu = {
                             url: '/docs/mcp-analytics/installation/ruby',
                         },
                         {
+                            name: 'Rust',
+                            url: '/docs/mcp-analytics/installation/rust',
+                        },
+                        {
                             name: 'WebMCP',
                             url: '/docs/mcp-analytics/installation/webmcp',
+                        },
+                        {
+                            name: 'Other languages',
+                            url: '/docs/mcp-analytics/installation/other-languages',
                         },
                     ],
                 },

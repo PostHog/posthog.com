@@ -161,6 +161,14 @@ Always use the Oxford comma.
 
 > **Don't**: "PostHog offers analytics, session replay and feature flags."
 
+### No comma after "i.e." or "e.g."
+
+Write "i.e." and "e.g." with periods, but don't add a comma after them.
+
+> **Do**: "Use a short title (i.e. under 60 characters)."
+
+> **Don't**: "Use a short title (i.e., under 60 characters)."
+
 ### Numbers
 
 - Spell out numbers zero through nine
@@ -449,6 +457,22 @@ Link directly to PostHog in-app pages using `https://app.posthog.com/`. Users ar
 > **Don't**: "Go to the [**Insights** tab](https://us.posthog.com/insights) and click **New insight**."
 
 > **Don't**: "Go to the [**Insights** tab](https://eu.posthog.com/insights) and click **New insight**."
+
+#### Links to staff-only resources
+
+Use `PrivateLink` for resources that require membership in PostHog's organization, such as internal dashboards, Slack channels, private repositories, and staff tools. The component adds a lock icon and an access notice. It does not grant access.
+
+```mdx
+<PrivateLink url="https://us.posthog.com/project/2/dashboard/1631977">Finance Updates dashboard</PrivateLink>
+```
+
+Use normal links for public resources and project-independent app routes such as `https://app.posthog.com/insights`. A public tutorial must direct readers to their own project, rather than an internal PostHog project.
+
+Keep heading text plain. Put a private link in the following paragraph so the component markup does not change the heading's generated anchor.
+
+The `private-links` Markdown lint rule checks known private destinations and malformed nested link URLs. Update `scripts/markdownlint/private-link-policy.cjs` when a new staff-only host or private repository needs enforcement. Check individual Google Drive and Figma files before adding the access notice; those services also host public files.
+
+Only add repository names and resource identifiers that already appear in public content. Do not use a private repository inventory to populate the policy.
 
 #### Link text
 

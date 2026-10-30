@@ -26,7 +26,7 @@ Use the customer's PostHog usage data to understand what they're actually doing 
 
 For example, if a customer is creating and viewing insights with titles around "funnel conversions," they almost certainly care about improving funnel conversion rates. Lead with that.
 
-**Where to look:** Customer engagement dashboard in PostHog — filter by the customer's org/team and check insight creation and viewing activity. Use PostHog AI or the PostHog MCP ([with CS Skills like User Deep Dive](https://github.com/PostHog/skills/tree/main/skills/team/customer-success)) to pull additional details and summaries.
+**Where to look:** The <PrivateLink url="https://us.posthog.com/project/2/dashboard/557459">Engagement metrics dashboard</PrivateLink> breaks down each user's activity across products, from insights and dashboards to flags, replay, experiments, surveys and the MCP. Open it from the `Engagement metrics dashboard` property on the account in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>, or set the `organization_id` variable on the dashboard yourself. Use PostHog AI or the PostHog MCP ([with CS Skills like User Deep Dive](https://github.com/PostHog/skills/tree/main/skills/team/customer-success)) to pull additional details and summaries.
 
 ### Walk through their site with debug mode
 
@@ -96,7 +96,7 @@ For customers who rarely reply, keep sending value anyway. Session replays will 
 >
 > Wanted to be upfront here! :pray:
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777971362108529?thread_ts=1777971362.108529&cid=C093XHYMGBE)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C093XHYMGBE/p1777971362108529?thread_ts=1777971362.108529&amp;cid=C093XHYMGBE">Slack discussion</PrivateLink>
 
 ### 1:1 individualized outreach to revive a dead channel
 
@@ -115,7 +115,7 @@ When a customer channel goes completely silent, don't mass-ping — it gets igno
 > lovely meeting you all - excited to keep working together :hog-offers-heart:
 > cc @[people who showed interest on the call] - tagging you since you were esp excited about the merch :slightly_smiling_face:
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&cid=C08M011SBCM)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C08M011SBCM/p1779489719678409?thread_ts=1779489719.678409&amp;cid=C08M011SBCM">Slack discussion</PrivateLink>
 
 ### Post-event outbound to long-silent customers
 
@@ -125,7 +125,7 @@ After events (Stripe Sessions, conferences, meetups), sweep through post-event o
 
 **Why it works:** Event-tied context lowers the social bar to engage. The customer doesn't have to explain the silence — they just have to reply to "great to see you at X."
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C090RCG671C/p1778497201155889?thread_ts=1778497201.155889&cid=C090RCG671C)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C090RCG671C/p1778497201155889?thread_ts=1778497201.155889&amp;cid=C090RCG671C">Slack discussion</PrivateLink>
 
 ### Use a competitor pricing change (or market news) as a value-based reason
 
@@ -145,7 +145,7 @@ When something happens in the wider market that could cost the customer money �
 - If they push back on a gap, close the loop publicly: *"Let's put a pin in it for now. I'll keep an eye on this from our side, and if we can support [X] cleanly sooner, I'll come back with something then!"*
 - Loop in engineering in the customer channel when relevant — turns the conversation into a product input loop and shows the feedback is being taken seriously.
 
-**Source:** [Slack discussion](https://posthog.slack.com/archives/C093XHYMGBE/p1777914846235949?thread_ts=1777914846.235949&cid=C093XHYMGBE)
+**Source:** <PrivateLink url="https://posthog.slack.com/archives/C093XHYMGBE/p1777914846235949?thread_ts=1777914846.235949&amp;cid=C093XHYMGBE">Slack discussion</PrivateLink>
 
 ## Meta-tactics
 
@@ -203,3 +203,17 @@ Our MCP can be a great tool for understanding silent user frustation. Below are 
 **Product adoption:** A quick way to see product adoption changes is to ask MCP for this info. Rather than only look at event volume increasing or decreasing, MCP has been able to surface when customers were testing a new product, sample events, reduce product usage, etc. These are all perfect opportunities for reaching out to specific users who are working on these with specifics such as "I see you recently are tested our data warehouse briefly but have discontinued sending data. Was there anything specific you were looking to do with data warehouse that I could help with or answer questions around. Curious on how your team is thinking about using data warehouse and what goals you have in adopting PostHog's data warehouse as a solution."
 
 _Note:_ It can be helpful to request MCP ignore weekend events when doing these analysis as weekend events often dips and can create false positive signals in your analysis.
+
+### Use MCP Analytics to understand usage intent and friction points
+
+Many customers will often use PostHog via our MCP rather than the UI, so it's a good idea to factor in these sessions in your engagement strategy.
+
+While the <PrivateLink url="https://us.posthog.com/project/2/dashboard/2201038">Account health dashboard</PrivateLink> and the <PrivateLink url="https://us.posthog.com/project/2/dashboard/557459">Engagement metrics dashboard</PrivateLink> give you a solid glimpse into UI usage and MCP tool calls, <PrivateLink url="https://us.posthog.com/project/2/mcp-analytics/sessions">MCP Analytics</PrivateLink> goes even deeper and shows you specific users' sessions and their intents behind each tool call. In other words, this clearly articulates what they were trying to accomplish via the MCP, which gives you a strong starting point for a wider look at their usage.
+
+**Recommended approach:**
+
+- **Find their intent:** In MCP Analytics, open **Sessions**, filter by the person's email, and open a recent session. Read the tool calls and their intents, and build your own understanding of what they were trying to do, and whether they accomplished it. You can also generate a summary of session intent - just look for the `Summarize session intent` button.
+- **Find the friction points:** Now that you know what they were trying to do, use other telemetry to deduce whether they got stuck along the way. Start with the session's own errors, then see whether you can find anything they did in the UI at the same time via [session replay](/docs/session-replay).
+  - The intent can also reveal gaps in their instrumentation (e.g. investigating a slow-loading page without [logs](/docs/logs) or [tracing](/docs/distributed-tracing/basics) configured).
+  - The intent is a starting point, so you still need to use your judgement and other available telemetry to shape your opinion on what their goal was and where you can unblock them or provide concrete value.
+- **Reach out:** You'll likely have a clear picture of what they were trying to do, so use that to your advantage and show up with a specific observation and a question to get further context. For example, ask whether they found what they were looking for or ask for feedback, and be ready with your recommendation on what would be most useful for them.

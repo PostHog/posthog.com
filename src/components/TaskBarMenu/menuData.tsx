@@ -3,7 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { HedgehogGardener } from '@posthog/brand/hoggies'
+import { HedgehogGardener, HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -236,8 +236,8 @@ const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuIte
         }
     })
 
-// Tools promoted to the top level of the Products menu, in display order.
-// Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
+// Tools listed first in the Products menu, in display order.
+// Everything else in BROWSE_TOOLS_HANDLES follows them.
 const PRIMARY_TOOL_HANDLES: string[] = [
     'product_analytics',
     'ai_observability',
@@ -254,13 +254,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const moreToolHandles = BROWSE_TOOLS_HANDLES.filter((handle) => !PRIMARY_TOOL_HANDLES.includes(handle))
 
     const items: any[] = [
-        ...buildProductMenuItems(PRIMARY_TOOL_HANDLES, allProducts),
-        {
-            type: 'expandable' as const,
-            label: 'More',
-            expandedLabel: 'Less',
-            items: buildProductMenuItems(moreToolHandles, allProducts),
-        },
+        ...buildProductMenuItems([...PRIMARY_TOOL_HANDLES, ...moreToolHandles], allProducts),
         {
             type: 'separator',
         },
@@ -851,6 +845,13 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
                     className="size-12 [image-rendering:pixelated]"
                 />
             ),
+            external: true,
+        },
+        {
+            label: 'GuessHog',
+            link: 'https://guesshog.posthog.com',
+            iconName: null,
+            customIcon: <HedgehogMagnifyingGlass className="size-12" />,
             external: true,
         },
     ],

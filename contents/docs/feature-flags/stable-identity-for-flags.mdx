@@ -61,7 +61,7 @@ See [Creating Feature Flags – persisting across authentication](/docs/feature-
 Use experience continuity only when device bucketing and the stable ID approaches aren't feasible. It comes at a cost: a database read and write on every evaluation, no support for [local evaluation](/docs/feature-flags/local-evaluation), and a [known issue](https://github.com/PostHog/posthog-js/issues/2623) where values can still change after `identify()`.
 
 <details>
-<summary>How "persist flags across authentication" works internally</summary>
+<summary id="how-persist-flags-across-authentication-works-internally">How "persist flags across authentication" works internally</summary>
 
 When a flag has this setting enabled (the `ensure_experience_continuity` API field), the flags service uses the original anonymous hash key for evaluations even after the `distinct_id` changes:
 

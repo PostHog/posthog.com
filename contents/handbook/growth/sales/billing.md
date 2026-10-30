@@ -9,7 +9,7 @@ showTitle: true
 
 > This section explains how PostHog's billing system works. Most billing operations described below are handled exclusively by the <SmallTeam slug="billing" /> and are not self serve. Sales should coordinate with the billing team for any billing modifications, pricing changes, or technical billing tasks rather than attempting to implement these directly.
 >
-> Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA).
+> Upfront invoices and prepurchase credits for signed order forms (new contracts, renewals, and early renewals) are different. The <SmallTeam slug="revops" /> handles them. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
 All PostHog instances talk to a common external **Billing Service**. This service is the single point for managing billing across PostHog Cloud US, PostHog Cloud EU (and ,formerly, self-hosted customers). 
 
@@ -20,7 +20,7 @@ The Billing Service is the source of truth for product information, what plans a
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
-The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, and applies the credits after the customer pays. Ask in [#team-revops](https://posthog.slack.com/archives/C0BSAUQENEA) if you have a question about a deal.
+The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, and applies the credits after the customer pays. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> if you have a question about a deal.
 
 For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
 
@@ -47,7 +47,7 @@ If this is a new contract for an existing customer, you will need to add their e
 
 **Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
-> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on [Stripe](https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU) which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
+> For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on <PrivateLink url="https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU">Stripe</PrivateLink> which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
 > **How do I know if a customer is using Bill.com for payment?** You should try and get ahead of this by asking your customer whether they use Bill.com or ask to be connected to their finance team if unsure. Bill.com invoice notifications are sent to sales@posthog.com from account-services@inform.bill.com. The [sales Google group](https://groups.google.com/a/posthog.com/g/sales) archives them, so you can search the archive directly for subject lines like "Acme Inc sent you a payment" or "A payment from Acme Inc should arrive shortly". Note any that match accounts in your book.
 
 ###### Step 4: Apply credits
@@ -70,15 +70,26 @@ If this is a new contract for an existing customer, you will need to add their e
 We define late payments as follows:
 
 1. For credit-based customers, that have not made payment on an invoice and their due date has passed.  The first invoice is usually 30 days from the contract start date (Net 30) although can differ based on other contractual terms. This rule applies to all payment terms, including and not limited to annual and quarterly, regardless whether there are still credits available or not.
-2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  Each failed payment sends an alert to the #sales-alerts Slack channel.  After 4 failed payments we will stop attempting to take further payments.
+2. For pay-as-you-go usage-based customers, we will attempt 4 automated payments using the card we have on file.  After 4 failed payments we will stop attempting to take further payments.
 
-In either of the above scenarios the account owner as defined in Vitally needs to take action to ensure that payment is made. If there is no owner in Vitally, Simon will handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
+In either of the above scenarios the account owner needs to take action to ensure that payment is made. The account owners are the AE, CSM, and TAM in <PrivateLink url='https://us.posthog.com/project/2/customer_analytics/accounts'>Customer Analytics</PrivateLink>. If the account has no owner, <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> handle this process. If you are an AE, remember this also has impact on your commission, as we don't pay out until the customer has paid their invoice.
 
 You can find a list of failed and overdue payments <PrivateLink url='https://us.posthog.com/project/2/insights/qEt5N1xg'>in PostHog</PrivateLink>
 
+#### Automated reminders and alerts
+
+PostHog Workflows send these messages for you. Do not send the same reminder yourself.
+
+- **Payment reminders:** For an open invoice that the customer pays by bank transfer, the customer gets an email 7 days and 3 days before the due date. The email comes from collections@posthog.com and goes to the billing contacts in Stripe. The account owners are in CC.
+- **Overdue alerts:** An alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink> tags the account owners at 09:00 UTC on days 1, 6, 7, 13, and 14. These are steps 1 to 5 below. Each alert tells you what to do, and links to this process, the Stripe invoice, and the customer payment page. If the customer already paid or agreed a different date, reply in the alert thread so the team knows.
+  - For an invoice that the customer pays by bank transfer, day 0 is the due date.
+  - For a card payment, day 0 is the first failed payment. We send this alert only if the account has an owner.
+
+The reminders and alerts stop when the customer pays. They only go to accounts that are tracked in Customer Analytics, not ignored.
+
 #### Step 1 - On the day their payment becomes late
 
-As the account owner you will be assigned a risk indicator in Vitally, as well as being tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>.  For unmanaged accounts with a failed payment of $1500 or more Simon and Dana are tagged instead.
+As the account owner, you are tagged in an alert in <PrivateLink url='https://posthog.slack.com/archives/C071PGWKBQS'>#sales-alerts</PrivateLink>. If the account has no owner, the alert tags <TeamMember name="Simon Fisher" showOnlyFirstName photo /> and <TeamMember name="Ben Bradley" showOnlyFirstName photo /> instead.
 
 You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For credit-based customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
@@ -139,7 +150,7 @@ RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) s
 PostHog Inc is a US incorporated company and a US tax resident and we do not claim benefits under any Double Taxation Avoidance Agreements (DTAA). To support this, we provide:
 - Our Tax Residency Certificate
 - Our no PE (Permanent Establishment) Certificate
-These documents are available in the [shared Finance drive](https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing). You can share them with the customer on request.
+These documents are available in the <PrivateLink url="https://drive.google.com/drive/folders/17GjgGr-vJO_azV2yx4PWHaKO0PgdztLN?usp=sharing">shared Finance drive</PrivateLink>. You can share them with the customer on request.
  
 The full invoice amount is due. Any tax withheld is exclusive of the invoice, which will be treated as outstanding.
 

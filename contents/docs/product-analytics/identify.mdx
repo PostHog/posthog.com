@@ -598,7 +598,7 @@ PostHogSDK.shared.identify("distinct_id_two",
 
 #### How are properties managed when merging users?
 
-When a `User B` is merged into another `User A`, all the properties of the `User B` are added to `User A`, following the [property conflict rule](#person-properties) above. For example:
+When a `User B` is merged into another `User A`, all the properties of the `User B` are added to `User A`, following the [property conflict rule](#setting-person-properties) above. For example:
 
 ```node
 /* Assume User A has the properties:
@@ -635,7 +635,7 @@ client.capture({
 
 #### How are properties managed when identifying anonymous users?
 
-When an anonymous user is identified as `User A`, all the properties of the anonymous user are added to `User A`, following the [property conflict rule](#person-properties) above. For example:
+When an anonymous user is identified as `User A`, all the properties of the anonymous user are added to `User A`, following the [property conflict rule](#setting-person-properties) above. For example:
 
 ```js-web
 /* Assume existing User A has the properties:

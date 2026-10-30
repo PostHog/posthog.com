@@ -25,7 +25,7 @@ We do this by:
 
 Content is the main pillar of our marketing strategy. Our strategy is to go _deeper_ and create better content as we grow. We don't rely on AI. We don't take content in exchange for links. We don't have arbitrary volume goals.
 
-Our latest goals can be found on the <SmallTeam slug="marketing" /> page. You can share ad-hoc ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y).
+Our latest goals can be found on the <SmallTeam slug="marketing" /> page. You can share ad-hoc ideas in our <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y">#content-ideas Slack channel</PrivateLink>.
 
 ## Who is our audience?
 
@@ -55,7 +55,7 @@ It should be the same as [who we are building for](/handbook/who-we-build-for). 
 
 We work autonomously. You don't need permission or approval to write something or make a change. You're the driver.
 
-It is often helpful to share ideas in our [#content-ideas Slack channel](https://posthog.slack.com/archives/C015CRUQR7Y) or as [a GitHub issue](https://github.com/PostHog/posthog.com/issues/new?template=content-idea-template.md). The GitHub issue template provides a structure to help you think through your idea.
+It is often helpful to share ideas in our <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y">#content-ideas Slack channel</PrivateLink> or as [a GitHub issue](https://github.com/PostHog/posthog.com/issues/new?template=content-idea-template.md). The GitHub issue template provides a structure to help you think through your idea.
 
 You can ask for feedback whenever, but it's often better when it's:
 
