@@ -193,6 +193,29 @@ A line pays $0 if:
 
 > Quill has a monthly quota of 3, so the quarterly quota is 9. Quill books 12 SQOs, which is 133%. Quill dug deep into the outbound list.
 
+## Quarter end
+
+At the end of each quarter, RevOps freezes the numbers. We pay from the frozen copy. A later change in Salesforce, Stripe, or the quota sheet cannot change a number that we already paid.
+
+| Step | When | Who |
+|---|---|---|
+| Quarter ends | Last day of the quarter | |
+| Data checks | Before the cutoff | RevOps fixes the records on the "Data checks" tile |
+| Cutoff | The 14th of the next month | Payment status at the end of that day is final |
+| Snapshot | The 15th of the next month | RevOps takes a snapshot of the data and pushes it into a Google Sheet. The Google Sheet pushes the rows into the snapshot tables in the warehouse. |
+| Lock | After the snapshot | RevOps stops all changes to the snapshot rows |
+| Payment | [PAYOUT DATE] | |
+
+The snapshot is the source of truth for the quarter. The dashboards read live data, so they can change after the snapshot. The snapshot does not change.
+
+### What the snapshot does not include
+
+The snapshot does not include deal changes after the snapshot date. If a number is wrong after the lock, ask RevOps in [#CHANNEL]. [How RevOps records a fix after the lock is still being decided.]
+
+### How CSM data carries into the next quarter
+
+The CSM snapshot is the base for the next quarter. The Q3 snapshot is the base for Q4. We compare Q4 ARR against the Q3 snapshot to measure growth. A late change in live Q3 data cannot move the Q4 base.
+
 ## Where to find your numbers
 
 ### Dashboards
@@ -332,6 +355,144 @@ ORDER BY month_start
 - "Outbound lead task": by the rule
 - "Manual credit": by RevOps
 
+### Look up past quarters
+
+Use the frozen snapshot views to look up a past quarter. Do not use the live views for this. Live views can change when the source data changes.
+
+**Snapshots start in Q3 2026.** There is no snapshot for Q2 2026 or earlier. The queries in this section return no rows for those quarters. Q4 2026 is the first quarter that can compare against a snapshot. RevOps adds one frozen quarter after each cutoff, so the queries return more rows over time.
+
+| View | One row per | Use it for |
+|---|---|---|
+| `comp_account_snapshots` | Account line per quarter, all quarters | The reason behind a total |
+| `comp_quota_snapshots` | Person per quarter, all quarters | The quota that applied at that time |
+| `comp_account_snapshot_2026_q3` | Account line for one quarter | The same rows as `comp_account_snapshots`, for Q3 2026 only |
+
+Each frozen quarter has its own view, named `comp_account_snapshot_<year>_q<n>`. The all-quarters views combine them.
+
+Three rules:
+- `quarter_start` is the first day of the quarter. Q3 2026 is `toDate('2026-07-01')`.
+- `comp_amount` has a different unit for each team: USD for TAE and TAM, SQOs for BDR, and ARR for CSM. Never add `comp_amount` across teams.
+- The `details` column holds JSON. Read one key with `JSONExtractString(details, 'rule_applied')`.
+
+Change the email in each query to your own.
+
+#### TAE: my attainment by quarter
+
+```sql
+SELECT c.quarter_start AS quarter_start,
+       c.credit AS credit,
+       q.quarter_quota AS quota,
+       c.credit / q.quarter_quota AS attainment
+FROM (
+    SELECT quarter_start, person_email, sum(comp_amount) AS credit
+    FROM comp_account_snapshots
+    WHERE team = 'TAE' AND person_email = 'you@posthog.com'
+    GROUP BY quarter_start, person_email
+) AS c
+INNER JOIN (
+    SELECT quarter_start, person_email, quarter_quota
+    FROM comp_quota_snapshots
+    WHERE team = 'TAE'
+) AS q
+    ON q.quarter_start = c.quarter_start AND q.person_email = c.person_email
+ORDER BY c.quarter_start
+```
+
+`attainment` is a ratio: 1.2 means 120%. A person with no quota row does not appear.
+
+#### TAM: my payout by quarter
+
+```sql
+SELECT quarter_start, count() AS lines, sum(comp_amount) AS payout
+FROM comp_account_snapshots
+WHERE team = 'TAM' AND person_email = 'you@posthog.com'
+GROUP BY quarter_start
+ORDER BY quarter_start
+```
+
+The TAM total is a dollar payout. Do not divide it by quota.
+
+#### Why did a line pay what it paid
+
+```sql
+SELECT account_name, line_type, status, base_amount, comp_amount,
+       JSONExtractString(details, 'rule_applied') AS rule_applied
+FROM comp_account_snapshots
+WHERE quarter_start = toDate('2026-07-01')
+  AND person_email = 'you@posthog.com'
+ORDER BY comp_amount DESC
+```
+
+For a TAM line, read `exclusion_reason` from `details` the same way.
+
+#### Which lines were at risk at the cutoff
+
+```sql
+SELECT team, person_email, account_name, line_type, comp_amount
+FROM comp_account_snapshots
+WHERE quarter_start = toDate('2026-07-01')
+  AND lower(replace(status, ' ', '_')) = 'at_risk'
+ORDER BY comp_amount DESC
+```
+
+These are the lines that can be clawed back at the next cutoff. Check them again after the next cutoff.
+
+#### One row per account in a quarter
+
+```sql
+SELECT account_id,
+       any(account_name) AS account_name,
+       groupUniqArray(team) AS teams,
+       count() AS lines,
+       sumIf(comp_amount, team = 'CSM') AS csm_counted_arr,
+       sumIf(comp_amount, team = 'TAE') AS tae_credit,
+       sumIf(comp_amount, team = 'TAM') AS tam_payout
+FROM comp_account_snapshot_2026_q3
+WHERE account_id != ''
+GROUP BY account_id
+ORDER BY csm_counted_arr DESC
+```
+
+A NULL value means that team has no line on the account. One account can have many TAM lines, because each monthly invoice is a line.
+
+#### CSM: performance by quarter
+
+```sql
+SELECT quarter_start,
+       count() AS accounts,
+       sum(base_amount) AS base_arr,
+       sum(comp_amount) AS counted_arr,
+       counted_arr / base_arr AS nrr
+FROM comp_account_snapshots
+WHERE team = 'CSM' AND person_email = 'you@posthog.com'
+GROUP BY quarter_start
+ORDER BY quarter_start
+```
+
+- `base_arr` is the starting ARR of your accounts. `counted_arr` is the ARR that counts for the quarter.
+- `nrr` of 1.1 means 110%. CSMs have no quota, so CSM performance uses NRR.
+- Status "Counted" means the account counts at its current ARR. Status "Grace" means a drop in ARR does not count. A churned account counts as $0.
+
+#### CSM: growth against the previous quarter snapshot
+
+After RevOps freezes Q4, use this query. Q4 growth uses the Q3 snapshot as the base. The query matches accounts by `account_id`.
+
+```sql
+SELECT cur.person_email AS person_email,
+       count() AS accounts,
+       sum(prev.comp_amount) AS q3_counted_arr,
+       sum(cur.comp_amount) AS q4_counted_arr,
+       q4_counted_arr / q3_counted_arr AS growth_ratio
+FROM comp_account_snapshot_2026_q4 AS cur
+INNER JOIN comp_account_snapshot_2026_q3 AS prev
+    ON prev.account_id = cur.account_id AND prev.team = 'CSM'
+WHERE cur.team = 'CSM'
+GROUP BY cur.person_email
+ORDER BY growth_ratio DESC
+```
+
+The Q4 view does not exist until RevOps freezes Q4, so this query fails before that date. A new account has no Q3 row, so it does not appear.
+
 ### Sources and refresh times
 
 | Input | Source | Refresh |
@@ -341,7 +502,7 @@ ORDER BY month_start
 | Quotas and teams | Quota sheet | Every 6 hours |
 | TAM books | TAM assignment history | Every hour |
 
-The dashboards are live, so a past quarter can change when the source data changes. After each cutoff, RevOps saves a frozen copy of the quarter. The frozen copy is what we pay from.
+The dashboards are live, so a past quarter can change when the source data changes. After each cutoff, RevOps saves a frozen copy of the quarter. The frozen copy is what we pay from. See [quarter end](#quarter-end).
 
 ## Questions
 
