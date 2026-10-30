@@ -131,7 +131,14 @@ const LearnNav = ({
                   children: chapters.filter((_, index) => !pages[index].isFrontMatter),
               },
               // Only the hub pages this volume has, so a smaller hub has no dead links.
-              ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
+              ...(hub.pages ?? []).map((page) => {
+                  const children = hub.subpages?.[page]?.map(({ slug, name }) => ({
+                      name,
+                      url: `${basePath}/${page}/${slug}`,
+                  }))
+                  // A hub page with subpages has no page of its own, so it opens the first one.
+                  return { ...HUB_PAGES[page], url: children?.[0]?.url ?? `${basePath}/${page}`, children }
+              }),
           ]
         : chapters
 
@@ -149,7 +156,7 @@ const LearnNav = ({
         } else if (url === basePath) {
             posthog?.capture('learn_section_selected', { volume: volumeId, section: 'overview', placement: 'sidebar' })
         } else {
-            const section = hub?.pages?.find((page) => url === `${basePath}/${page}`)
+            const section = hub?.pages?.find((page) => url?.startsWith(`${basePath}/${page}`))
             if (section) posthog?.capture('learn_section_selected', { volume: volumeId, section, placement: 'sidebar' })
         }
     }
