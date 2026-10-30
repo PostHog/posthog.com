@@ -74,9 +74,9 @@ Large account requests
 Before doing a refund, review customer's usage. Some useful sources:
 
 -   Find the customer's Metabase usage dashboard (the [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) shows how). The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
--   [This dashboard](https://us.posthog.com/project/2/dashboard/259114) for an overview with usage reports and invoice history.
--   [This dashboard](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=) to help identify issues for customers with many projects
--   You can also make a copy of [this PostHog insight](https://us.posthog.com/project/2/insights/8nLWTLHu) and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.
+-   <PrivateLink url="https://us.posthog.com/project/2/dashboard/259114">This dashboard</PrivateLink> for an overview with usage reports and invoice history.
+-   <PrivateLink url="https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&amp;project_id=">This dashboard</PrivateLink> to help identify issues for customers with many projects
+-   You can also make a copy of <PrivateLink url="https://us.posthog.com/project/2/insights/8nLWTLHu">this PostHog insight</PrivateLink> and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.
 
 What's "normal" vs "weird" usage:
 
@@ -104,7 +104,7 @@ If you want more precision when a single event type is inflated, use the 'Event 
 ### Calculate the amount to refund/credit
 
 -   Use the [pricing calculator](https://posthog.com/pricing) to calculate the total price for baseline and overage volumes. The difference between the two will be the refund amount.
--   Alternatively, you can use [QuoteHog](https://quote.posthog.com) - go to the usage history tab, build a price option from a specific month's usage, and subtract the inflated volume to see what the bill would have been without the spike.
+-   Alternatively, you can use <PrivateLink url="https://quote.posthog.com">QuoteHog</PrivateLink> - go to the usage history tab, build a price option from a specific month's usage, and subtract the inflated volume to see what the bill would have been without the spike.
 -   Don't just put in the overage amount in the calculator - doing this would give you the wrong amount because of our tiered pricing structure. Calculating the difference between regular usage and usage with overage is the accurate way to calculate actual amount.
 -   Add a [private note](/handbook/support/posthog-support#private-notes) on the support ticket with a breakdown of calculations, the baseline average, and the overage. This transparency can be helpful if the customer has questions.
 
@@ -118,7 +118,7 @@ If you want more precision when a single event type is inflated, use the 'Event 
 
 ### Issuing credits
 
-1. Go to [billing admin](https://billing.posthog.com/admin/)
+1. Go to <PrivateLink url="https://billing.posthog.com/admin/">billing admin</PrivateLink>
 2. Next to 'Credits', click on 'Add'
 3. In the 'Customer' field, use the drop-down menu to find your customer
 4. In the 'Amount' field, set an amount of credits you wish to issue for this customer

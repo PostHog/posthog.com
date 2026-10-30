@@ -1673,6 +1673,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
+                        name: 'Onboarding skills',
+                        url: '/handbook/onboarding/onboarding-skills',
+                    },
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },

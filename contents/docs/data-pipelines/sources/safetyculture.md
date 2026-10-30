@@ -27,7 +27,7 @@ When linking SafetyCulture, you'll need:
 
 - **API token** – generate one under **Account settings → Integrations → Manage API tokens** in [SafetyCulture](https://app.safetyculture.com).
 
-API tokens expire after 30 days of inactivity, so SafetyCulture recommends a [service user](https://help.safetyculture.com/en-US/1064186-service-users) token for long-term integrations.
+API tokens expire after 30 days of inactivity, so SafetyCulture recommends a service user token for long-term integrations.
 
 ## Sync modes
 

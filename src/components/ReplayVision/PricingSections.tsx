@@ -128,12 +128,15 @@ const PlanValueCell = ({ value }: { value: PlanValue }) => {
     return <span className="text-sm text-primary">{value}</span>
 }
 
-export const PricingPlans = ({ id }: SectionComponentProps) => (
+// `intro` renders above the plans in the left column, so a page can put the TL;DR
+// there and the sidebar starts level with it (as in the shared `Plans` template).
+export const PricingPlans = ({ id, intro }: SectionComponentProps & { intro?: React.ReactNode }) => (
     <section
         id={id}
         className="scroll-mt-20 not-prose @container grid grid-cols-1 gap-10 @4xl:gap-x-16 @4xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]"
     >
         <div className="@container">
+            {intro && <div className="mb-12">{intro}</div>}
             <h2 className="text-3xl font-bold text-primary mt-0 mb-4">Plans</h2>
             <div className="divide-y divide-primary">
                 {/* Column headers */}

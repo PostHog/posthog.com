@@ -52,7 +52,7 @@ The idea behind the flagship: **it's intent-aware and activation-aware** — it 
 
 ## The Waitlist, Alpha, Beta onboarding flow
 
-Every early access feature gets lifecycle emails automatically. When someone joins a waitlist or opts in to a feature preview — in the app, or via a waitlist form on posthog.com — posthog-js fires a `$feature_enrollment_update` event carrying `$early_access_feature_name` and `$feature_enrollment_stage`. These events reach Customer.io through the "Send events to Customer.io" [data pipeline destination](https://us.posthog.com/project/2/pipeline/destinations), and any `$feature_enrollment_update` with both properties present triggers the flow.
+Every early access feature gets lifecycle emails automatically. When someone joins a waitlist or opts in to a feature preview — in the app, or via a waitlist form on posthog.com — posthog-js fires a `$feature_enrollment_update` event carrying `$early_access_feature_name` and `$feature_enrollment_stage`. These events reach Customer.io through the "Send events to Customer.io" <PrivateLink url="https://us.posthog.com/project/2/pipeline/destinations">data pipeline destination</PrivateLink>, and any `$feature_enrollment_update` with both properties present triggers the flow.
 
 The flow immediately segments on `$feature_enrollment_stage`:
 
@@ -62,7 +62,7 @@ The flow immediately segments on `$feature_enrollment_stage`:
 
 When a feature's stage changes from `concept` to `alpha` or `beta`, everyone who registered interest is automatically opted in to the new stage and PostHog fires a `user moved feature preview stage` event (with `from` and `to` properties) for each enrolled person. When `from` is `concept` and `to` is `alpha` or `beta`, we send an email letting them know the feature is enabled and now available, and asking for feedback.
 
-All beta feedback is centralized to the `beta-feedback@posthog.com` Google Group. Replies to this address are relayed into the [#posthog-feedback Slack channel](https://posthog.slack.com/archives/C011L071P8U) for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
+All beta feedback is centralized to the `beta-feedback@posthog.com` Google Group. Replies to this address are relayed into the <PrivateLink url="https://posthog.slack.com/archives/C011L071P8U">#posthog-feedback Slack channel</PrivateLink> for everyone to see. PMs and team leads are encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
 
 ## The personalized "next steps" block
 

@@ -46,7 +46,7 @@ Once you’ve configured your June destination, click **Start testing** to verif
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/june/template_june.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/june/template_june.py) is available on GitHub.
 
 <PostHogMaintained />
 
