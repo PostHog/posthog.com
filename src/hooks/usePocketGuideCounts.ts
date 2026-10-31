@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import { volumeById } from '../constants/pocketGuides'
+import { isSelfDrivingPage, volumeById } from '../constants/pocketGuides'
 
 /** Numbered guides per volume, with an explicit opt-in for orientation-only volumes. */
 export default function usePocketGuideCounts(): Record<string, number> {
@@ -14,6 +14,7 @@ export default function usePocketGuideCounts(): Record<string, number> {
                         title
                         pocketGuideOrder
                         isPrimer
+                        section
                     }
                 }
             }
@@ -34,7 +35,8 @@ export default function usePocketGuideCounts(): Record<string, number> {
             ? typeof order === 'number' && order >= 0
             : Boolean(guide && typeof order === 'number' && order > 0 && !node.frontmatter.isPrimer)
 
-        if (shouldCount) {
+        // Self-driving pages aren't chapters, so they don't count toward the volume's chapters.
+        if (shouldCount && !isSelfDrivingPage(volume, node.frontmatter)) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }

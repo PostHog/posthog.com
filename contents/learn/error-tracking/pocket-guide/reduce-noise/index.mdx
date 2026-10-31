@@ -1,0 +1,154 @@
+---
+title: Reduce noise
+shortTitle: Reduce noise
+subtitle: Cap or drop exceptions before PostHog stores them.
+pocketGuideOrder: 4
+section: Capture
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="suppression-rule"
+    caption="This suppression rule drops two exception types from now on."
+    annotations={[
+        {
+            x: 42,
+            y: 27,
+            title: 'Any or all filters',
+            description: 'Any drops an exception that matches at least one filter. All drops it only when every filter matches.',
+        },
+        {
+            x: 74,
+            y: 49,
+            title: 'Exception type',
+            description: 'Rules on the type or message can also run in some SDKs, which drop the exception before sending it.',
+        },
+        {
+            x: 72,
+            y: 62,
+            title: 'The values to drop',
+            description: 'Exceptions with these types are dropped from now on. Exceptions already stored stay.',
+        },
+    ]}
+/>
+
+
+<SkillFigure n={2} caption="The skill Twig's engineers use to find noisy issues and pick a control for each. Copy it and give it to your agent." />
+
+</LeftPage>
+
+<RightPage>
+
+# Reduce noise
+
+Twig is growing, and the engineers are starting to notice issues they'll never fix, like browser extensions failing or `ResizeObserver loop` errors from the browser.
+
+PostHog bills by events ingested, so these noisy events also cost money.
+
+Here's how Twig's engineers use various tools to silence different types of noisy exceptions:
+
+| Tool | How Twig uses it |
+| --- | --- |
+| [Production builds only](#skip-local-development-with-production-builds) | Local development never sends exceptions |
+| [`before_send`](#drop-browser-errors-with-before_send) | Drops `ResizeObserver loop` errors before they leave the browser |
+| [Burst protection](#stop-looping-browsers-with-burst-protection) | Keeps one looping browser from flooding the project |
+| [Suppression rules](#drop-extension-errors-with-a-suppression-rule) | Drops errors from browser extensions at ingestion |
+| [Rate limits](#cap-outages-with-rate-limits) | Caps volume during an outage |
+
+## Skip local development with production builds
+
+Twig only starts PostHog in production builds. Local development builds don't capture events or exceptions:
+
+```js
+if (process.env.NODE_ENV === 'production') {
+    posthog.init('<ph_project_token>', { capture_exceptions: true })
+}
+```
+
+Local development environments are especially noisy, and many of the exceptions that happen in local development don't manifest in production at all.
+
+## Drop browser errors with before_send
+
+The engineers drop the browser's `ResizeObserver loop` errors in Twig with the SDK's `before_send` hook, which runs before the SDK sends anything. It returns `null` to drop an exception, or edits its properties to redact sensitive data:
+
+```js
+posthog.init('<ph_project_token>', {
+    before_send: (event) => {
+        const exception = event.properties.$exception_list?.[0]
+        if (exception?.value?.includes('ResizeObserver loop')) {
+            return null
+        }
+        return event
+    },
+})
+```
+
+Nothing dropped here reaches PostHog, so it's the cheapest place to filter.
+
+The <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/error-tracking/installation/web), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Node.js](/docs/error-tracking/installation/node), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="" className="inline-block size-4 align-text-bottom" /> [React Native](/docs/error-tracking/installation/react-native), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg" alt="" className="inline-block size-4 align-text-bottom dark:invert" /> [iOS](/docs/error-tracking/installation/ios), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Android](/docs/error-tracking/installation/android), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Flutter](/docs/error-tracking/installation/flutter), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/kmp.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Kotlin](/docs/error-tracking/installation/kmp), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/python.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Python](/docs/error-tracking/installation/python), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ruby.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Ruby](/docs/error-tracking/installation/ruby), and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Roblox_Corporation_2025_logo_svg_301751b47c.png" alt="" className="inline-block size-4 align-text-bottom" /> [Roblox](/docs/error-tracking/installation/roblox) SDKs all have a similar hook, and some name it `beforeSend`. [Suppressing exceptions](/docs/error-tracking/capture#suppressing-exceptions) shows it for web and React Native.
+
+## Stop looping browsers with burst protection
+
+Burst protection in the <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/libraries/js) and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Node.js](/docs/libraries/node) SDKs keeps a bug that loops in one guest's browser from flooding the project: a client sends 10 autocaptured exceptions of one type, then 1 every 10 seconds. It's on by default.
+
+Burst protection only runs in those two SDKs, in the client. To cap volume from every SDK, the engineers use [rate limits](#cap-outages-with-rate-limits).
+
+## Drop extension errors with a suppression rule
+
+The engineers add a suppression rule in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-suppression-rules) for errors from guests' browser extensions. It drops future exceptions that match its filters, like the exception type or message <SeeFig n={1} />. PostHog applies rules at ingestion, and some SDKs apply them in the app too.
+
+## Cap outages with rate limits
+
+Rate limits cap how many exceptions PostHog ingests during an outage, in a window of 15 minutes, 30 minutes, or an hour. The engineers set a per-issue limit, so one noisy issue can't use up the whole project's limit. A project-wide limit caps the project's total volume.
+
+Bypass rules let critical exceptions skip both limits. PostHog still bills the exceptions they let through.
+
+## Triage noisy issues
+
+When an issue gets noisy, Twig's engineers decide what to do with it like this:
+
+```mermaid
+%%{init: {"block": {"padding": 22}, "themeCSS": ".edgeLabel foreignObject { overflow: visible; } span.edgeLabel { background: transparent !important; } .yes, .no { background: white; padding: 0 3px; } .no { position: relative; left: 30px; }"}}%%
+block-beta
+    columns 3
+    issue["Noisy issue"] space space
+    sensitive("Sensitive data?") space redact["Redact in before_send"]
+    fix("Will you fix it?") space assign["Keep active and assign"]
+    key("Hits key customers?") space flag["Flag for a human"]
+    loop("One client looping?") space burst["Tune burst protection"]
+    known("Known type or message?") space rule["Add a suppression rule"]
+    outage("Outage flooding it?") space limit["Set a per-issue rate limit"]
+    suppress["Suppress the issue"] space space
+
+    issue --> sensitive
+    sensitive -- "<span class='yes'>yes</span>" --> redact
+    sensitive -- "<span class='no'>no</span>" --> fix
+    fix -- "<span class='yes'>yes</span>" --> assign
+    fix -- "<span class='no'>no</span>" --> key
+    key -- "<span class='yes'>yes</span>" --> flag
+    key -- "<span class='no'>no</span>" --> loop
+    loop -- "<span class='yes'>yes</span>" --> burst
+    loop -- "<span class='no'>no</span>" --> known
+    known -- "<span class='yes'>yes</span>" --> rule
+    known -- "<span class='no'>no</span>" --> outage
+    outage -- "<span class='yes'>yes</span>" --> limit
+    outage -- "<span class='no'>no</span>" --> suppress
+
+    classDef check fill:#f59e0b26,stroke:#f59e0b,stroke-width:1.5px
+    classDef act fill:#3b82f626,stroke:#3b82f6,stroke-width:1.5px
+    class sensitive,fix,key,loop,known,outage check
+    class redact,assign,flag,burst,rule,limit,suppress act
+```
+
+We turned this into a skill for you to triage your noisy issues <SeeFig n={2} />. It asks for approval before it changes anything.
+
+<LessonFooter nextLabel="Querying exceptions" nextHref="/learn/error-tracking/pocket-guide/querying-exceptions">
+
+[Rate limiting](/docs/error-tracking/rate-limiting)
+
+</LessonFooter>
+
+</RightPage>

@@ -3,7 +3,7 @@ import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { describe, test } from 'node:test'
 
-import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides.ts'
+import { isSelfDrivingPage, POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides.ts'
 
 const repoRoot = path.resolve(import.meta.dirname, '../../..')
 // Each volume's guide lives at contents/learn/<id>/pocket-guide/.
@@ -99,5 +99,60 @@ describe('pocket guide volumes', () => {
             )
             .map((volume) => volume.id)
         assert.deepEqual(volumesWithoutLearnTab, [])
+    })
+})
+
+function frontmatterSection(page: string): string | undefined {
+    return readFileSync(page, 'utf8')
+        .match(/^section:\s*(.+)$/m)?.[1]
+        .trim()
+}
+
+describe('self-driving sections', () => {
+    test('each selfDrivingSection names a section that pages use', () => {
+        const unused = POCKET_GUIDE_VOLUMES.filter((volume) => volume.learnHub?.selfDrivingSection)
+            .filter(
+                (volume) =>
+                    !listGuidePages(path.join(guidesDir, volume.id, 'pocket-guide')).some(
+                        (page) => frontmatterSection(page) === volume.learnHub?.selfDrivingSection
+                    )
+            )
+            .map((volume) => volume.id)
+        assert.deepEqual(unused, [])
+    })
+
+    test('only pages in the section are self-driving, so the story keeps its chapters', () => {
+        assert.equal(isSelfDrivingPage('error-tracking', { section: 'Self-drive' }), true)
+        assert.equal(isSelfDrivingPage('error-tracking', { section: 'Capture' }), false)
+        assert.equal(isSelfDrivingPage('error-tracking', {}), false)
+        // A volume without a Self-driving section never splits, even for a page with no section.
+        assert.equal(isSelfDrivingPage('product-analytics', {}), false)
+    })
+})
+
+describe('pocket guide figures', () => {
+    test('every figure a guide page uses is registered for MDX', () => {
+        const registry = readRepoFile('src/components/PocketGuides/bookComponents.tsx')
+        const figures = new Set(
+            guidePages.flatMap((page) =>
+                [...readFileSync(page, 'utf8').matchAll(/<([A-Z]\w*Figure)\b/g)].map((m) => m[1])
+            )
+        )
+        const unregistered = [...figures].filter((name) => !new RegExp(`^\\s+${name},?$`, 'm').test(registry))
+        assert.deepEqual(unregistered, [])
+    })
+})
+
+describe('agent prompt actions', () => {
+    test('Error Tracking chapter prompts open PostHog AI unsent', () => {
+        const action = readRepoFile('src/components/PocketGuides/Action.tsx')
+        const prefillOnly = action.match(/PREFILL_ONLY_VOLUMES = new Set\(\[([^\]]*)\]\)/)?.[1]
+        assert.ok(prefillOnly, 'PREFILL_ONLY_VOLUMES not found')
+        const ids = [...prefillOnly.matchAll(/'([^']+)'/g)].map((m) => m[1])
+        assert.ok(ids.includes('error-tracking'))
+        assert.deepEqual(
+            ids.filter((id) => !volumeIds.has(id)),
+            []
+        )
     })
 })

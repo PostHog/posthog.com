@@ -24,6 +24,7 @@ export const errorTracking = {
     Icon: IconWarning,
     type: 'error_tracking',
     teamSlug: 'error-tracking',
+    pocketGuideVolume: 'error-tracking',
     forumTag: 'error-tracking',
     color: 'orange',
     colorSecondary: 'red',
@@ -123,6 +124,23 @@ export const errorTracking = {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png',
             alt: 'Screenshot of the PostHog error tracking',
             classes: '',
+        },
+        'issue-anatomy': {
+            // The issue page whole, for the pocket guide's anatomy figure. 3663x2676 at source;
+            // the resize is carried inline, which is safe because `<ScreenshotFigure>` puts the
+            // dark/light toggle on a wrapper rather than on the image.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/issue_light_ff97a284e7.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/issue_dark_b2245fed4f.png',
+            alt: 'An error tracking issue: its title, how many people it hit, the exceptions grouped into it, what self-driving is doing about it, and its stack trace',
+            // Both variants are the same screen at the same size, so one set of coordinates holds.
+            // The pocket guide annotates this inline – see contents/learn/error-tracking/pocket-guide/101.
+        },
+        'suppression-rule': {
+            // The suppression rule editor, reused from /docs/error-tracking/pricing. 1338x646 at source.
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_light_8db44eb6b1.png',
+            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_dark_5972d57398.png',
+            alt: 'The suppression rule editor: a match mode, a filter on exception type, and the types to drop',
         },
         home: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_light_93bfa1393d.png',

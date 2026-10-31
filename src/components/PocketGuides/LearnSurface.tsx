@@ -8,7 +8,12 @@ import OSButton from 'components/OSButton'
 import { useAppWindows } from '../../context/App'
 import { useWindow } from '../../context/Window'
 
-import { pocketGuideDestination, volumeById, type PocketGuideVolume } from '../../constants/pocketGuides'
+import {
+    isSelfDrivingPage,
+    pocketGuideDestination,
+    volumeById,
+    type PocketGuideVolume,
+} from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import BookClubCallout from './BookClubCallout'
 import Cover from './Cover'
@@ -61,13 +66,17 @@ const IntroContext = React.createContext<IntroContextValue | null>(null)
 // Defined once, outside the render. New component functions on every render would remount the
 // intro and reset the chapter list's scroll position.
 
-/** `align="center"` lines the button up under a centered cover. */
-function StartReading({ align }: { align?: 'center' }): JSX.Element | null {
+/**
+ * `align="center"` lines the button up under a centered cover. `to` opens a given page instead of the
+ * guide's first chapter, for a section's introduction page that has no cover.
+ */
+function StartReading({ align, to }: { align?: 'center'; to?: string }): JSX.Element | null {
     const intro = React.useContext(IntroContext)
-    if (!intro?.coverVolume || !intro.firstChapterPath) return null
+    const destination = to ?? (intro?.coverVolume ? intro.firstChapterPath : undefined)
+    if (!destination) return null
     return (
         <div className={`not-prose my-6 ${align === 'center' ? 'flex justify-center' : ''}`}>
-            <OSButton asLink to={intro.firstChapterPath} variant="primary" size="md">
+            <OSButton asLink to={destination} variant="primary" size="md">
                 Start reading <span aria-hidden="true">→</span>
             </OSButton>
         </div>
@@ -237,7 +246,7 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
     }
 
     const coverVolume = entry.isFrontMatter ? volumeById(volumeId) : undefined
-    const chapters = pages.filter((page) => !page.isFrontMatter)
+    const chapters = pages.filter((page) => !page.isFrontMatter && !isSelfDrivingPage(volumeId, page))
     const firstChapter = chapters[0]
     const firstChapterPath = firstChapter ? learnChapterPath(basePath, firstChapter) : undefined
     const chapterPaths = new Set(chapters.map((page) => learnChapterPath(basePath, page)))

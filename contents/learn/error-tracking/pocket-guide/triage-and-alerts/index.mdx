@@ -1,0 +1,75 @@
+---
+title: Triage and alerts
+shortTitle: Triage and alerts
+subtitle: Route each issue to the team that owns it, and alert on regressions and spikes.
+pocketGuideOrder: 6
+section: Automate
+pocketGuideCta:
+  kind: prompt
+  label: Suggest rules with PostHog AI
+  note: It suggests rules from your recent exceptions. You add them under Assignment rules in Error Tracking settings.
+  prompt: >-
+    Group my $exception events from the last 30 days by the source files in $exception_sources and the path of
+    $current_url, and leave out third-party code. Name each group by the part of my product it covers, like
+    trips or bookings. Suggest one error tracking assignment rule per group, with the property, operator, and
+    value it filters on. List the rules most specific first, because the first rule that matches assigns the issue.
+---
+
+<LeftPage>
+
+<AssignmentRuleFigure
+    n={1}
+    caption="This rule assigns issues from source files under src/trips/ to the Trips role. Before you save it, you can test how many exceptions it would have matched in the last 7 days."
+/>
+
+<ExternalIssueFigure
+    n={2}
+    caption="A GitHub issue created from PostHog. PostHog fills in the link back to the issue, and you can edit the body to add the impact and a suggested fix before you create it."
+/>
+
+<IssueSpikeFigure
+    n={3}
+    caption="Twig's Trip details issue gets 720 occurrences in the latest 5-minute window, about 12 times its baseline from the past hour."
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Triage and alerts
+
+Twig's issue list now shows which issues matter most. As the team grows, the engineers split into teams, and each issue needs to reach the team that owns it.
+
+## Route issues to their owners with assignment rules
+
+The Trips team owns everything under `src/trips/`, including **Trip details**. The engineers create a Trips role in the organization settings, then add an assignment rule that sends issues from `src/trips/` to it <SeeFig n={1} />.
+
+Rules run at ingestion, after <Term name="source map">source maps</Term> are applied, so they match Twig's unminified <Term name="stack trace" />. The first rule that matches assigns the issue, so specific rules go first.
+
+<Action />
+
+## Track fixes in GitHub
+
+The Trips team plans its work in GitHub. From the issue page, the engineers create a GitHub issue that links back to PostHog, with every exception and the guests the issue impacts <SeeFig n={2} />. The [GitLab, Linear, and Jira integrations](/docs/error-tracking/integrations) work the same way.
+
+## Get alerted when an issue spikes
+
+The engineers set up alerts to hear when an issue like **Trip details** spikes. Each alert pairs one trigger with one destination, like a [Slack](/docs/data-pipelines/destinations/slack) channel or a [webhook](/docs/data-pipelines/destinations/webhook):
+
+- **Issue created** fires for every new issue, which can mean many messages a day.
+- **Issue reopened** fires when a resolved issue comes back, which catches regressions.
+- **Issue spiking** fires when an issue gets far more exceptions than usual. PostHog compares each 5-minute window with the issue's baseline from the past hour <SeeFig n={3} />.
+
+The engineers add two alerts in [alerting settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting), for reopened issues and for spikes. Both go to the Trips team's Slack channel.
+
+## Self-driving
+
+But that's not the end of the story. As Twig grows with more users, checking alerts and dashboards and getting issues auto-assigned still leaves many exceptions unresolved. So Twig's engineers turn to self-driving to help resolve these issues.
+
+<LessonFooter nextLabel="Self-driving" nextHref="/learn/error-tracking/pocket-guide/self-driving">
+
+[Assign issues to teammates](/docs/error-tracking/assigning-issues) · [Set up integrations](/docs/error-tracking/integrations) · [Send error tracking alerts](/docs/error-tracking/alerts) · [Detect spikes](/docs/error-tracking/spikes)
+
+</LessonFooter>
+
+</RightPage>

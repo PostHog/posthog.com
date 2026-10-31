@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import {
+    IconBolt,
     IconBook,
     IconCursorClick,
     IconEye,
@@ -10,7 +11,7 @@ import {
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
 import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/PocketGuides/bookModel'
-import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
+import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
 import usePostHog from 'hooks/usePostHog'
@@ -121,6 +122,9 @@ const LearnNav = ({
         wrap: fullTitles,
     }))
     const hub = volume?.learnHub
+    const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
+    // Self-driving pages have no chapter number, so their names come through unnumbered.
+    const scoutChapters = chapters.filter((_, index) => isSelfDriving(index))
     const items = hub
         ? [
               { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
@@ -128,8 +132,21 @@ const LearnNav = ({
                   name: 'Pocket guide',
                   url: guideBasePath,
                   icon: <IconBook className="size-4" />,
-                  children: chapters.filter((_, index) => !pages[index].isFrontMatter),
+                  children: chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
               },
+              // The story continues into Self-driving, so it follows the pocket guide.
+              ...(scoutChapters.length
+                  ? [
+                        {
+                            // The section's first page is its introduction, so the label opens it
+                            // and the chevron lists the scout pages after it.
+                            name: 'Self-driving',
+                            url: scoutChapters[0].url,
+                            icon: <IconBolt className="size-4" />,
+                            children: scoutChapters.slice(1),
+                        },
+                    ]
+                  : []),
               // Only the hub pages this volume has, so a smaller hub has no dead links.
               ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
           ]

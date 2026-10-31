@@ -429,6 +429,36 @@ export const TERMS = {
             'Protected Health Information: health data tied to an identifiable person. HIPAA governs how it is stored, transmitted, and who may process it.',
         slug: '/docs/privacy/hipaa-compliance',
     },
+    issue: {
+        title: 'Issue',
+        description:
+            'A group of exceptions PostHog considers the same problem. Assigning, resolving, and alerting all happen on the issue, not on the individual throws inside it.',
+        slug: '/docs/error-tracking/issues-and-exceptions',
+    },
+    fingerprint: {
+        title: 'Fingerprint',
+        description:
+            'The value that decides which issue an exception joins. PostHog builds one from the exception type, message, and stack frames, and you can override it when the default groups too coarsely or too finely.',
+        slug: '/docs/error-tracking/fingerprints',
+    },
+    'grouping rule': {
+        title: 'Grouping rule',
+        description:
+            'A set of filters on exception properties, saved in PostHog. Every exception that matches the filters joins the same issue. PostHog checks rules at ingestion, so changing one needs no deploy.',
+        slug: '/docs/error-tracking/grouping-issues#option-1-custom-grouping-rule',
+    },
+    'stack trace': {
+        title: 'Stack trace',
+        description:
+            'The chain of calls that led to the throw, innermost frame first. It is only readable if the code it points at was not minified, or if you uploaded something that maps it back.',
+        slug: '/docs/error-tracking/stack-traces',
+    },
+    'source map': {
+        title: 'Source map',
+        description:
+            'A file mapping minified code back to the source you wrote. Without one, a stack trace names a column in a bundle rather than a line in your repository.',
+        slug: '/docs/error-tracking/upload-source-maps',
+    },
 } satisfies Record<string, TermDefinition>
 
 export type TermName = keyof typeof TERMS

@@ -1,0 +1,217 @@
+---
+# Scope: how Twig captures exceptions three ways, with each SDK's version beside it, and how
+# exceptions become issues.
+title: Exceptions and issues
+shortTitle: Exceptions and issues
+subtitle: See how Twig captures a broken trip page, and how PostHog groups its exceptions into issues.
+pocketGuideOrder: 1
+section: Capture
+---
+
+<LeftPage>
+
+<ScreenshotFigure
+    n={1}
+    product="error_tracking"
+    screenshot="issue-anatomy"
+    caption="An issue page shows the error, when it happened, who it affected, and what agents are doing about it."
+    annotations={[
+        {
+            x: 24.4,
+            y: 7.4,
+            title: 'The issue, named by the exception it groups',
+            description:
+                'PostHog names it from the exception type unless you set one, and the pencil renames it. Assigning, resolving, and alerting all happen here rather than on the individual throws.',
+        },
+        {
+            x: 28.8,
+            y: 25.7,
+            title: 'When it started, and whether it still happens',
+            description:
+                'Exception volume over the range, marked first seen and last seen. Bars that restart after a quiet week mean the issue regressed.',
+        },
+        {
+            x: 77.2,
+            y: 12.1,
+            title: 'What self-driving is already doing about it',
+            description:
+                'Agents that picked the issue up, what they are researching, and which ones have a fix ready for you to review.',
+        },
+        {
+            x: 86.2,
+            y: 39,
+            title: 'Stack trace, properties, timeline, and the recording',
+            description:
+                'Four tabs show the same exception. The recording is the session it was thrown in, so you can watch what the person did to reach it.',
+        },
+        {
+            x: 80,
+            y: 54.2,
+            title: 'The stack trace, with your code beside it',
+            description:
+                'The frames that led to the throw, innermost first, with the source around the failing line. For bundled code, the frames are readable only if PostHog can get a source map. You can upload it, host it publicly, or embed it in the bundle.',
+        },
+    ]}
+/>
+
+</LeftPage>
+
+<RightPage>
+
+# Exceptions and issues
+
+In an app like [Twig](https://twig.com), guests browse stays, pick their dates, book a stay, and then check the trip from their account. The engineers want to know when any part of that funnel breaks.
+
+When something breaks, Twig's code throws an <Term name="exception" />, such as a `TypeError`. Its <Term name="stack trace" /> shows what led up to it.
+
+To see them, the team uses Error Tracking. It captures each exception and its stack trace as a queryable PostHog event.
+
+## Autocapture exceptions
+
+The engineers run the Error Tracking Wizard on Twig. It installs PostHog and sets up source map uploads for Twig's bundle:
+
+<Setup />
+
+Then they switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) in the project settings.
+
+Once the SDK loads, it captures uncaught exceptions in Twig.
+
+For example, the **Trip details** button calls `readTripHost` without a `try`/`catch`. This error is uncaught, and the SDK catches it through `window.onerror`.
+
+Click **Trip details** to see what it records:
+
+<AutocapturedExceptionFigure />
+
+On each platform, autocapture catches:
+
+- **Web:** errors that reach `window.onerror`, and unhandled promise rejections
+- **Server:** exceptions the process doesn't catch
+- **Mobile:** uncaught exceptions and crashes
+
+## Exceptions are just events
+
+Everything in PostHog is an event, including exceptions. The exception event sits alongside Twig's other PostHog events, so we can answer questions like these:
+
+- [Which customers are impacted?](/learn/error-tracking/pocket-guide/querying-exceptions#start-from-one-hosts-errors)
+- [Does it impact conversion and retention?](/learn/error-tracking/pocket-guide/querying-exceptions#check-whether-an-error-makes-guests-leave)
+- [Can this error be tied to loss in revenue?](/learn/error-tracking/pocket-guide/querying-exceptions#rank-issues-by-bookings-at-risk)
+- [Were they part of any feature flag or experiment rollouts?](/learn/error-tracking/pocket-guide/querying-exceptions#catch-new-errors-in-experiments)
+- [What's shown on the user's page before and after the exception is thrown?](/learn/error-tracking/pocket-guide/querying-exceptions#watch-what-guests-saw)
+
+See [Querying exceptions](/learn/error-tracking/pocket-guide/querying-exceptions).
+
+## Manual exception capture
+
+Autocapture misses exceptions that Twig catches itself. Catching an exception keeps the app from crashing, but something still went wrong. The engineers want to know, so they send it with `captureException`.
+
+In **Trip details**, they catch the error and add the stay that failed:
+
+<MultiLanguage>
+
+```js file=Web
+try {
+  setHost(readTripHost(hosts, booking.stay.hostId));
+} catch (error) {
+  setError("Try to load details again.");
+  posthog.captureException(error, {
+    surface: "trip_details",
+    stay_id: booking.stay.id,
+  });
+}
+```
+
+```js file=Node.js
+try {
+  host = readTripHost(hosts, stay.hostId);
+} catch (error) {
+  posthog.captureException(error, distinctId, {
+    surface: "trip_details",
+    stay_id: stay.id,
+  });
+}
+```
+
+```python
+try:
+    host = read_trip_host(hosts, stay.host_id)
+except Exception as e:
+    posthog.capture_exception(
+        e,
+        distinct_id=distinct_id,
+        properties={"surface": "trip_details", "stay_id": stay.id},
+    )
+```
+
+```ruby
+begin
+  host = read_trip_host(hosts, stay.host_id)
+rescue => e
+  posthog.capture_exception(e, distinct_id, { surface: "trip_details", stay_id: stay.id })
+end
+```
+
+</MultiLanguage>
+
+Some frameworks offer error boundaries as a last resort, to keep the app from visibly crashing. In these cases, capture the exception in the error boundary:
+
+<MultiLanguage>
+
+```tsx file=Next.js
+export default function Error({ error, reset }) {
+  useEffect(() => {
+    posthog.captureException(error, { surface: "vacation_route" });
+  }, [error]);
+  // Twig shows "Something went wrong" with a Try again button
+}
+```
+
+```tsx file=React
+import { PostHogErrorBoundary } from "@posthog/react";
+
+<PostHogErrorBoundary>
+  <App />
+</PostHogErrorBoundary>;
+```
+
+```tsx file=React&nbsp;Native
+<PostHogErrorBoundary fallback={ErrorScreen} additionalProperties={{ screen: "trip_details" }}>
+  <App />
+</PostHogErrorBoundary>
+```
+
+```js file=Fastify
+app.setErrorHandler((error, request, reply) => {
+  posthog.captureException(error, undefined, {
+    $request_path: request.routeOptions.url,
+  });
+  reply.code(500).send(error);
+});
+```
+
+```python file=Flask
+from posthog.integrations.flask import PosthogFlaskIntegration
+
+PosthogFlaskIntegration(app, client=posthog, capture_exceptions=True)
+```
+
+</MultiLanguage>
+
+Click **Try again** in Twig:
+
+<TripDetailsErrorFigure />
+
+## Exceptions are grouped into issues
+
+Individual exceptions are numerous and noisy, so PostHog groups similar ones into <Term name="issue">issues</Term> <SeeFig n={1} />.
+
+The Twig engineers work through these issues to diagnose, triage, assign, and fix them, not individual exceptions.
+
+Every **Try again** on **Trip details** adds to the same issue.
+
+<LessonFooter nextLabel="Stack traces" nextHref="/learn/error-tracking/pocket-guide/stack-traces">
+
+<a href="/docs/error-tracking">Error Tracking</a> · <a href="/docs/error-tracking/capture">Capture exceptions</a> · <a href="/docs/error-tracking/issues-and-exceptions">Issues and exceptions</a> · <a href="/docs/error-tracking/installation">Installation</a>
+
+</LessonFooter>
+
+</RightPage>

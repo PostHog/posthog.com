@@ -7,6 +7,7 @@ import {
     pocketGuideSourceVolume,
     POCKET_GUIDE_VOLUMES,
     pocketGuideUrl,
+    isSelfDrivingPage,
 } from '../../constants/pocketGuides'
 import { InboxTemplate } from 'components/SelfDrivingInbox/types'
 
@@ -124,9 +125,12 @@ export function useBookPages(volumeId: string): BookPageEntry[] {
             })
             .sort((a: BookPageEntry, b: BookPageEntry) => a.order - b.order)
 
-        // Numbering runs after the front matter, so inserting a chapter renumbers the rest.
+        // Numbering runs after the front matter, so inserting a chapter renumbers the rest. Self-driving
+        // pages aren't chapters of the story, so they get no number.
         let page = 0
-        return pages.map((entry: BookPageEntry) => (entry.isFrontMatter ? entry : { ...entry, page: ++page }))
+        return pages.map((entry: BookPageEntry) =>
+            entry.isFrontMatter || isSelfDrivingPage(volumeId, entry) ? entry : { ...entry, page: ++page }
+        )
     }, [data, templates, volumeId])
 }
 
