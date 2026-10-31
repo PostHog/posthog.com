@@ -74,6 +74,82 @@ You can learn more about configuring method swizzling in the [configuration page
 
 The iOS SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
+## Upgrading from version 3 to version 4
+
+This section covers what most apps need. The [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) lists every removed API, including the Objective-C names.
+
+React Native, Flutter, and Kotlin Multiplatform apps get this SDK through their PostHog package. Upgrade that package instead of adding `posthog-ios` 4.0 yourself.
+
+### Requirements
+
+| | Version 3 | Version 4 |
+| --- | --- | --- |
+| Xcode | Swift tools 5.3 or later | 26 or later (`swift-tools-version` 6.2) |
+| iOS and Mac Catalyst | 13.0 | 15.0 |
+| macOS | 10.15 | 11.0 |
+| tvOS | 13.0 | 15.0 |
+| watchOS | 6.0 | 10.0 |
+| visionOS | 1.0 | 1.0 |
+| Installation | Swift Package Manager or CocoaPods | Swift Package Manager only |
+
+To move from CocoaPods, remove `pod 'PostHog'` from your `Podfile`, run `pod install`, and [add the Swift package](#installation). If a Run Script phase [uploads dSYMs](/docs/error-tracking/upload-source-maps/ios), change its path to the Swift Package Manager one, or symbol uploads fail. Version 3 stays available on CocoaPods.
+
+### Changes the compiler won't flag
+
+These change behavior without a build error, so check them even if your app builds cleanly.
+
+**Session replay records screenshots.** Wireframe recording is gone, so [recordings show real pixels](/docs/session-replay/mobile#how-it-works) for everything that isn't masked. If you didn't already set `screenshotMode = true`:
+
+- Custom-drawn views, maps, video, and charts are now visible. Mask anything sensitive with `.postHogMask()` in SwiftUI, or add `ph-no-capture` to a UIKit view's `accessibilityIdentifier`.
+- A `WKWebView` is masked whole when `maskAllTextInputs` or `maskAllImages` is on, but recorded in full when both are off.
+- Apps with a SwiftUI window root recorded nothing before and now start recording, which counts against your replay quota and may need a consent or privacy update.
+- Each frame uses more bandwidth and CPU.
+- `$sdk_debug_replay_capture_mode` is always `screenshot`.
+
+**Replay screen names.** The name comes from the visible screen, and SwiftUI screens report their view name. A plain `UIViewController`'s `title` is no longer used. `$screen` events are unchanged.
+
+**Feature flag payloads.** A malformed, empty, or whitespace-only payload now reads as `nil` instead of the raw string. The flag's value isn't affected. A bootstrapped string payload such as `"123"` stays a string instead of being decoded again.
+
+**Lifecycle events.** `Application Installed`, `Application Updated`, and `Application Opened` no longer send `version` and `build`. Use `$app_version` and `$app_build` in insights, cohorts, and actions. To find cold launches, filter on `from_background = false`.
+
+**Network detection.** A connection that needs user action, such as a VPN waiting for a password, counts as reachable. Queues pause while cellular data is off for your app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
+
+**Queued 2.x events.** If an app updates straight from a 2.x SDK, events still queued on disk are deleted. Distinct ID, anonymous ID, groups, and cached flags carry over.
+
+**Capture v1.** Analytics events now go to `/i/v1/analytics/events` instead of `/batch`. If you use a reverse proxy or self-host PostHog, forward that path before you upgrade. See the [capture v1 upgrade guide](/docs/libraries/capture-v1) for what else changes.
+
+### Compile errors
+
+| Version 3 | Version 4 |
+| --- | --- |
+| `PostHogConfig(apiKey:)`, `PostHogConfig(apiKey:host:)`, `config.apiKey` | `PostHogConfig(projectToken:)`, `PostHogConfig(projectToken:host:)`, `config.projectToken` |
+| `config.evaluationEnvironments` | `config.evaluationContexts` |
+| `config.propertiesSanitizer`, `PostHogPropertiesSanitizer` | `config.setBeforeSend(_:)` |
+| `config.remoteConfig` | Delete it. Remote config is always loaded. |
+| `config.dataMode = .cellular` | `.any` |
+| `config.maxRetries` | `config.pushNotificationSubscriptionMaxRetries` |
+| `sessionReplayConfig.screenshotMode`, `screenshotModeBackgroundCapture`, `maskPhotoLibraryImages` | Delete them. |
+| `sessionReplayConfig.debouncerDelay` | `sessionReplayConfig.throttleDelay` |
+| `PostHogLogLevel`, `PostHogLogEntry` | `PostHogConsoleLogLevel`, `PostHogConsoleLogEntry` |
+| `getFeatureFlagPayload(key)` | `getFeatureFlagResult(key, sendFeatureFlagEvent: false)?.payload` |
+| `reloadFeatureFlags { ... }` | `reloadFeatureFlags { result in ... }`, where `result.errorsLoading` is `true` if the reload failed |
+| `PostHogSDK.didReceiveFeatureFlags` | [`onFeatureFlags(_:)`](/docs/libraries/ios/usage) |
+| `PostHogSessionManager` | `getSessionId()`, `startSession()`, and `endSession()` on `PostHogSDK` |
+| `PostHogStorageManager`, `config.storageManager` | `identify(_:)`, `getDistinctId()`, and `reset()` on `PostHogSDK` |
+
+Callbacks the SDK can call off the main thread are now `@Sendable`: `reloadFeatureFlags(_:)`, `setBeforeSend(_:)`, `getAnonymousId`, `pushIdentityProvider`, and `logSanitizer`. In Swift 6 mode, a closure that touches main-actor state no longer compiles. In `reloadFeatureFlags(_:)` and `pushIdentityProvider`, hop with `Task { @MainActor in ... }`. The others must return right away, so don't read main-actor state in them.
+
+### Optional: leave out features
+
+Swift Package Manager apps can leave out session replay, crash reporting, or surveys with the new `SessionReplay`, `CrashReporting`, and `Surveys` package traits. All three are on by default, so nothing changes unless you list traits. Listing traits replaces the defaults, and a trait's public API is removed when it's off:
+
+```swift file=Package.swift
+dependencies: [
+  // Keep crash reporting, leave out session replay and surveys
+  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0", traits: ["CrashReporting"])
+],
+```
+
 ## Next steps
 
 Now that you've installed the SDK, explore the configuration and usage options:

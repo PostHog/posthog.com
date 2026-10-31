@@ -2,13 +2,9 @@ import Tab from "components/Tab"
 import IOSUIKit from "./code-variants/ios-uikit.mdx"
 import IOSSwiftUI from "./code-variants/ios-swiftui.mdx"
 
-PostHog is available through [CocoaPods](http://cocoapods.org) or you can add it as a Swift Package Manager based dependency.
+PostHog is available as a Swift Package Manager based dependency. It requires Xcode 26 or later, and iOS 15, macOS 11, tvOS 15, watchOS 10, or visionOS 1 or later.
 
-### CocoaPods
-
-```ruby file=Podfile
-pod "PostHog", "~> 3.59.3"
-```
+Version 4 isn't published to CocoaPods. Version 3 stays available there with `pod "PostHog", "~> 3.0"`, and supports iOS 13 and older toolchains.
 
 ### Swift Package Manager
 
@@ -18,7 +14,7 @@ For a Swift Package Manager based project, add PostHog as a dependency in your `
 
 ```swift file=Package.swift
 dependencies: [
-  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "3.59.3")
+  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0")
 ],
 ```
 
