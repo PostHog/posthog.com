@@ -74,7 +74,66 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
 
 The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
 
-When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors). After a `503`, PostHog might have queued the email. Retry with the same `Idempotency-Key` rather than sending the email through another provider, or the recipient can get it twice.
+When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors) and the [checks for content from your code](#checks-for-content-from-your-code).
+
+### `delivery_unavailable`
+
+A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm that it queued the email. PostHog might still send it. Retry with the same `Idempotency-Key` rather than sending the email through another provider, or the recipient can get it twice. The SDKs retry this on their own.
+
+## Send content from your code
+
+You can also send the subject and the body from your code, without a template in PostHog. Use this when your email templates live in your codebase. Name the email with `template_key`, and send the content in the body. Use the same `POST` route and headers as for a [template send](#send-an-email).
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `template_key` | Yes | A name for this email, such as `password-reset`. It has at most 400 letters, digits, hyphens (`-`), and underscores (`_`). Use the same key every time you send this email. |
+| `to` | Yes | The email address of the recipient. |
+| `distinct_id` | No | The distinct ID of the recipient's person, as for a template send. We recommend that you always send it. |
+| `subject` | Yes | The subject of the email. |
+| `html` | One of `html` and `text` | The HTML body. PostHog sends it as you wrote it and renders no placeholders. |
+| `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
+| `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
+| `reply_to` | No | A list of up to 10 addresses that replies go to. |
+| `cc`, `bcc` | No | Lists of up to 10 addresses each, without a display name. |
+| `headers` | No | An object of up to 10 custom headers, such as `{ "X-Entity-Ref-ID": "order-123" }`. |
+| `tags` | No | A list of up to 10 `{ "name", "value" }` objects. PostHog adds them to the email's engagement events as `$email_tags`. |
+| `attachments` | No | A list of up to 10 `{ "filename", "content", "content_type", "content_id" }` objects, with `content` in Base64. The files can have at most 512 KB in total after decoding. |
+| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). For content from your code, the default is `true`. Send `false` to turn capture off for this email. |
+
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of the fields from `from` to `attachments`, because the template uses its own settings.
+
+- **Headers.** PostHog sets some headers itself and refuses them in `headers`: `From`, `To`, `Cc`, `Bcc`, `Reply-To`, `Subject`, `Date`, `Message-ID`, `MIME-Version`, `Sender`, `Return-Path`, `Auto-Submitted`, and all `Content-*`, `X-PostHog-*`, and `X-SES-*` headers. Header names ignore case, so set each name one time.
+- **Tags.** A tag name and its value use only ASCII letters, numbers, `_`, and `-`. Names that start with `ph_` belong to PostHog.
+- **Attachments.** PostHog refuses file types that mailbox providers block, such as `.exe`. To show a file in the HTML, give it a `content_id`, such as `logo`, and use `<img src="cid:logo">`. For a larger file, send a link.
+- **Suppressed addresses.** If `to`, a `cc`, or a `bcc` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
+
+The response is the same `202` as for a template send.
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: password-reset-8f14e45f" \
+  -d '{
+    "template_key": "password-reset",
+    "to": "jane@example.com",
+    "distinct_id": "user_123",
+    "subject": "Reset your password",
+    "html": "<p>Hi Jane,</p><p><a href=\"https://example.com/reset?token=abc123\">Reset your password</a>.</p>",
+    "from": "Hedgebox <security@example.com>"
+  }'
+```
+
+### Checks for content from your code
+
+These checks apply to content from your code, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. PostHog sends nothing when a check fails.
+
+| Status | Code | Cause | What to do |
+| --- | --- | --- | --- |
+| `400` | `invalid_request` | A field is missing or breaks a rule above, or PostHog doesn't take the field. `attr` names the field, such as `tags__0__name`. | Fix the field. If the field comes from a newer SDK, update PostHog or leave the field out. |
+| `400` | `sender_not_verified` | The request has no `from`, and the project has no verified default sender. | Send `from` with an address on a verified domain, or [set a default sender](/docs/workflows/configure-channels). |
+| `400` | `sender_not_allowed` | No verified sender of the project can send from the `from` address. `attr` is `from`. | Send from an address on a verified domain, or leave out `from` to use the default sender. |
+
 
 ## Check an email's status
 
