@@ -14,7 +14,7 @@ Use steering instructions to tell Self-driving agents what matters to your proje
 3. Choose **Research**, **Implementation**, or **Scouts**.
 4. Write your instructions in plain text or Markdown, then select **Save**.
 
-You must be a project admin to save instructions. Each role has its own field, with a limit of 20,000 characters. Saving one role keeps the other roles' instructions unchanged.
+You must be a project member to save instructions. Each role has its own field, with a limit of 20,000 characters. Saving one role keeps the other roles' instructions unchanged.
 
 | Role               | What these agents do                                                                                        | What to put in their instructions                                                   |
 | ------------------ | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
@@ -79,7 +79,7 @@ An assistant connected to the [PostHog MCP server](/docs/model-context-protocol)
 
 When you use `inbox-steering-instructions-update`:
 
-- You must be a project admin.
+- You must be a project member. Task agents can't change steering instructions.
 - Send the full text for each role that you change. The tool replaces that role's instructions. It doesn't apply a diff.
 - Roles that you don't send keep their current instructions.
 - Send an empty string to clear a role.
