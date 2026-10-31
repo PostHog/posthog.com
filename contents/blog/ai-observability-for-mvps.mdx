@@ -102,7 +102,7 @@ LLM calls fail in more interesting ways than regular API calls. Beyond the usual
 
 You want all of these surfaced. If you already have error tracking set up for the rest of your app, make sure LLM errors are flowing into it.
 
-If you don't, [add it](/blog/best-error-tracking-tools-for-developers).
+If you don't, [add it](/compare/best-error-tracking-tools).
 
 The combination of traces + errors + [logs](/compare/best-log-monitoring-tools) is how you debug AI features without losing your mind. Errors tell you something broke; traces tell you what the agent was doing when it broke; logs (tool calls, intermediate state, decisions) tell you why.
 
@@ -178,7 +178,7 @@ As your product matures, the bar for observability rises. Here's the rough order
 
 **Start a trace review ritual.** The PostHog teams working on AI features run a weekly [Traces Hour](/blog/testing-ai-agents#building-evaluations-by-manually-reviewing-traces) where they look at flagged traces (low feedback scores, error spikes, support tickets, outlier clusters) and turn the patterns into new evals. This is where the next generation of evaluators comes from.
 
-**Connect LLM data to product analytics.** "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/blog/best-analytics-stack-vibe-coded-apps) tend to win at this stage.
+**Connect LLM data to product analytics.** "Users who hit our AI feature retain at 2x" is the kind of insight that justifies the whole investment. To do this, your LLM observability needs to share a user model with your [product analytics](/product-analytics) – which is one reason [bundled tools](/compare/best-analytics-stack-for-vibe-coded-apps) tend to win at this stage.
 
 **Consider prompt management (if it fits).** Once more than one person edits prompts, or you want non-engineers to iterate without a deploy, [prompt management](/docs/prompt-management) starts earning its keep. Many teams never need this – a `prompts.py` file in your repo is fine if you're shipping prompt changes through code anyway.
 
@@ -199,7 +199,7 @@ The right tool for "day one" should also support most of "later" without needing
 
 For a deeper comparison of tools available, see our roundup of [the best open source LLM observability tools](/blog/best-open-source-llm-observability-tools).
 
-And if you're earlier in your product journey, our guide to [the best analytics stack for vibe-coded apps](/blog/best-analytics-stack-vibe-coded-apps) covers the whole analytics stack, not just the AI parts.
+And if you're earlier in your product journey, our guide to [the best analytics stack for vibe-coded apps](/compare/best-analytics-stack-for-vibe-coded-apps) covers the whole analytics stack, not just the AI parts.
 
 ## Why PostHog works well for this
 

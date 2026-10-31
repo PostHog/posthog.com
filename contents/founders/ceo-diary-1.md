@@ -54,11 +54,11 @@ Weirdly enough, at the time, we felt we provided a _worse_ experience to paying 
 
 Larger companies have a broader range of users than just developers, and these other user profiles (like product managers or growth managers) tend to want more detailed analytics views and lack the same willingness to tolerate bugs.
 
-We wanted to try selling to companies like this so we could complete the [open core business model](open-source-business-models). We would use this to double down on improvements to our free project, knowing we could delight paid customers when they came our way.
+We wanted to try selling to companies like this so we could complete the [open core business model](/blog/open-source-business-models). We would use this to double down on improvements to our free project, knowing we could delight paid customers when they came our way.
 
 So we decided to get [Five Reference Customers](../handbook/strategy/overview), despite having >100 subscribers (on top of thousands of open source deployments). 'Reference customers' are genuinely delighted, use PostHog meaningfully, and pay full price.
 
-From this exercise, we learned we had to level up our UX around funnels - so we [nailed funnels](new-vp-nailing-funnels). Next up, we're working on [nailing diagnoses](../handbook/strategy/roadmap). This is particularly cool as we're starting to see how our broad approach with analytics, session recording, and feature flags uniquely lets users visualize their funnels, understand _why_ funnel performance is bad, and release changes to safely improve it.
+From this exercise, we learned we had to level up our UX around funnels - so we [nailed funnels](/blog/new-vp-nailing-funnels). Next up, we're working on [nailing diagnoses](../handbook/strategy/roadmap). This is particularly cool as we're starting to see how our broad approach with analytics, session recording, and feature flags uniquely lets users visualize their funnels, understand _why_ funnel performance is bad, and release changes to safely improve it.
 
 ## A board meeting happened
 

@@ -38,7 +38,7 @@ Because of this, we take a more holistic view at social media performance: we pr
 
 ## How to run social media for PostHog
 
-There are two places to check a few times a day for opportunities to interact and repost: one is via each app's notifications. The other is the `#brand-mentions` Slack channel, where [Octolens](octolens.com) pulls in brand mentions from across several platforms. This channel is especially useful as it picks up mentions where we are not explicitly tagged.
+There are two places to check a few times a day for opportunities to interact and repost: one is via each app's notifications. The other is the `#brand-mentions` Slack channel, where [Octolens](https://octolens.com) pulls in brand mentions from across several platforms. This channel is especially useful as it picks up mentions where we are not explicitly tagged.
 
 On weekends at 11am PT, `#weekend-brand-mentions` has a summary of the 10 most relevant mentions we've received in the past 24 hours posted by a friendly bot.
 
