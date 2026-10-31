@@ -63,7 +63,7 @@ PostHogSDK.shared.setup(config)
 ```
 
 ```kotlin
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>")
+val config = PostHogAndroidConfig(projectToken = "<ph_project_token>", host = "<ph_client_api_host>")
 config.bootstrap = PostHogBootstrapConfig(
     featureFlags = mapOf(
         "new-checkout" to true,

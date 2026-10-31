@@ -28,7 +28,7 @@ Configure Logs through `config.logs` before calling `PostHogAndroid.setup(...)`.
 
 ```kotlin
 val config = PostHogAndroidConfig(
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     host = "<ph_client_api_host>",
 ).apply {
     logs.serviceName = "my-app"        // OTLP service.name – shown in the Logs UI
@@ -117,7 +117,7 @@ View your Logs in PostHog
 The `logs` config has knobs for high-volume apps:
 
 ```kotlin
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
+val config = PostHogAndroidConfig(projectToken = "<ph_project_token>").apply {
     logs.serviceName = "my-app"
     logs.flushIntervalSeconds = 5            // default 30
     logs.maxBufferSize = 200                 // default 1000

@@ -49,23 +49,38 @@ To handle this, you can use the `onFeatureFlags` callback to wait for the featur
 ```kotlin
 import com.posthog.PostHog
 import com.posthog.android.PostHogAndroidConfig
-import com.posthog.PostHogOnFeatureFlags
+import com.posthog.PostHogFeatureFlagsCallback
 
 // During SDK initialization
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
-    onFeatureFlags = PostHogOnFeatureFlags {
-        if (PostHog.isFeatureEnabled("flag-key")) {
+val config = PostHogAndroidConfig(projectToken = "<ph_project_token>").apply {
+    onFeatureFlags = PostHogFeatureFlagsCallback { loaded ->
+        if (!loaded.errorsLoading && PostHog.isFeatureEnabled("flag-key")) {
             // do something
         }
     }
 }
 
 // And/or after the SDK is initialized
-PostHog.reloadFeatureFlags {
-    if (PostHog.isFeatureEnabled("flag-key")) {
+PostHog.reloadFeatureFlags { loaded ->
+    if (!loaded.errorsLoading && PostHog.isFeatureEnabled("flag-key")) {
         // do something
     }
 }
+```
+
+The callback also runs when loading fails. `loaded` is a `PostHogFeatureFlagsLoaded` with `flags` (the keys of the enabled flags), `variants` (their values), and `errorsLoading` (whether the load failed, in which case the values are the last known ones). These callbacks run on a background thread, so switch to the main thread before touching UI.
+
+To hear about every flag load from a screen or a library, register a listener. It runs on the main thread, and it also gets the current values if flags have already loaded. This requires version 4.0 or later:
+
+```kotlin
+val subscription = PostHog.onFeatureFlags { loaded ->
+    if (loaded.variants["flag-key"] == "test") {
+        // do something
+    }
+}
+
+// Later, stop listening
+subscription.unsubscribe()
 ```
 
 ### Reloading feature flags
