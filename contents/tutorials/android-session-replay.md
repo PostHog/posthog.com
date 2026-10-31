@@ -174,7 +174,7 @@ First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in
 
 ```gradle_kotlin file=app/build.gradle
 dependencies {
-    implementation("com.posthog:posthog-android:3.+")
+    implementation("com.posthog:posthog-android:4.+")
     //... other dependencies
 }
 ```
@@ -199,12 +199,11 @@ class MySessionReplaysApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
-            apiKey = POSTHOG_API_KEY,
+            projectToken = POSTHOG_API_KEY,
             host = POSTHOG_HOST 
         ).apply {
             sessionReplay = true
             sessionReplayConfig.maskAllTextInputs = false // Whether all text and text input fields are masked or redacted (default is enabled)
-            sessionReplayConfig.screenshot = true
         }
         PostHogAndroid.setup(this, config)
     }

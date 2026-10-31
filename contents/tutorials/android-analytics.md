@@ -210,7 +210,7 @@ First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in
 
 ```gradle_kotlin file=app/build.gradle
 dependencies {
-    implementation("com.posthog:posthog-android:3.+")
+    implementation("com.posthog:posthog-android:4.+")
     //... other dependencies
 }
 ```
@@ -236,7 +236,7 @@ class MyAndroidAnalyticsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
-            apiKey = POSTHOG_API_KEY,
+            projectToken = POSTHOG_API_KEY,
             host = POSTHOG_HOST
         )
         PostHogAndroid.setup(this, config)

@@ -59,7 +59,7 @@ import com.posthog.android.PostHogAndroidConfig
 import okhttp3.OkHttpClient
 
 val config = PostHogAndroidConfig(
-    apiKey = POSTHOG_API_KEY,
+    projectToken = POSTHOG_API_KEY,
     host = POSTHOG_HOST,
 ).apply {
     tracingHeaders = listOf("api.example.com")
@@ -182,7 +182,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 
 ```kotlin
 val config = PostHogAndroidConfig(
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     host = "<ph_client_api_host>"
 )
 config.optOut = true
@@ -218,7 +218,7 @@ You can also configure the flush interval with `flushIntervalSeconds` (default `
 ```kotlin
 import com.posthog.android.PostHogAndroidConfig
 
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
     flushAt = 20
     flushIntervalSeconds = 30
 }
@@ -270,7 +270,7 @@ Set `config.bootstrap` before calling `setup()` to seed identity and flag values
 ```kotlin
 import com.posthog.PostHogBootstrapConfig
 
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
+val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST)
 config.bootstrap = PostHogBootstrapConfig(
     distinctId = "distinct_id_of_your_user",
     isIdentifiedId = true,
@@ -366,7 +366,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode by setting the `debug` option to `true` in the `PostHogAndroidConfig` object. This will enable verbose logs about the inner workings of the SDK.
 
 ```kotlin
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
     debug = true
     // ... other config options
 }
@@ -381,7 +381,7 @@ import com.posthog.PersonProfiles
 import com.posthog.android.PostHogAndroidConfig
 
 val config = PostHogAndroidConfig(
-    apiKey = POSTHOG_API_KEY,
+    projectToken = POSTHOG_API_KEY,
     host = POSTHOG_HOST
 ).apply {
     captureApplicationLifecycleEvents = true
@@ -391,7 +391,7 @@ val config = PostHogAndroidConfig(
     flushAt = 20
     maxQueueSize = 1000
     maxBatchSize = 50
-    maxRetries = 3
+    pushNotificationSubscriptionMaxRetries = 3
     flushIntervalSeconds = 30
 
     debug = false
@@ -428,7 +428,7 @@ val config = PostHogAndroidConfig(
 | `flushAt` | `20` | Number of queued events that triggers a flush. |
 | `maxQueueSize` | `1000` | Maximum number of events kept across memory and disk before FIFO eviction. |
 | `maxBatchSize` | `50` | Maximum number of events sent in one batch request. |
-| `maxRetries` | `3` | Maximum retry attempts for push-subscription registration failures. It does not apply to event, session recording, or log ingestion. |
+| `pushNotificationSubscriptionMaxRetries` | `3` | Maximum retry attempts for push-subscription registration failures. It does not apply to event, session recording, or log ingestion. |
 | `flushIntervalSeconds` | `30` | Maximum delay before queued data is flushed. |
 | `encryption` | `null` | Optional `PostHogEncryption` implementation for encrypting persisted queued events. |
 | `proxy` | `null` | Optional `java.net.Proxy` for PostHog API requests. |
@@ -446,8 +446,8 @@ val config = PostHogAndroidConfig(
 | `sendFeatureFlagEvent` | `true` | Sends `$feature_flag_called` when a feature flag is evaluated. |
 | `featureFlagCalledCacheSize` | `1000` | Number of feature flag calls cached for deduplicating `$feature_flag_called` events. |
 | `preloadFeatureFlags` | `true` | Fetches feature flags automatically during setup. |
-| `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.29.1+. The legacy `evaluationEnvironments` option is available in version 3.24.0+. |
-| `onFeatureFlags` | `null` | Callback invoked when feature flags are loaded. |
+| `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.29.1+. The legacy `evaluationEnvironments` option was available in version 3.24.0+ and removed in 4.0. |
+| `onFeatureFlags` | `null` | `PostHogFeatureFlagsCallback` invoked when a feature flags load finishes, whether it succeeded or failed. |
 
 ### Product configuration objects
 
@@ -499,6 +499,69 @@ config.addBeforeSend { event ->
 # Push notifications
 
 The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
+
+## Upgrading from version 3 to version 4
+
+Version 4.0 removes APIs deprecated in 3.x, sends events to capture v1, and always records session replay as screenshots. For every change, with before and after code, see the [migration guide](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md).
+
+### Requirements
+
+Update `posthog-android` to `4.+`. If you use `posthog-android-surveys-compose` or depend on core `posthog` directly, update them in the same change: core is now 7.0 and isn't binary compatible with SDKs built against 6.x. If the same project also uses `posthog-server`, update it too.
+
+The minimum Android API level (23), Java bytecode target (Java 8), and Kotlin compatibility (2.0) are unchanged.
+
+### Removed APIs
+
+These are compile errors:
+
+| Removed | Use instead |
+| --- | --- |
+| `apiKey`, `PostHogAndroidConfig(apiKey = …)` | `projectToken` |
+| `propertiesSanitizer`, `PostHogPropertiesSanitizer` | `addBeforeSend` |
+| `evaluationEnvironments` | `evaluationContexts` |
+| `getFeatureFlagPayload()` | `getFeatureFlagResult(key, sendFeatureFlagEvent = false)?.payload` |
+| `PostHogOnFeatureFlags` | `PostHogFeatureFlagsCallback` |
+| `PostHogSessionReplayConfig.debouncerDelayMs` | `throttleDelayMs` |
+| `PostHogSessionReplayConfig.screenshot`, `drawableConverter`, `PostHogDrawableConverter` | Nothing – replay always records screenshots |
+| `remoteConfig` | Nothing – remote config always loads |
+| `maxRetries` | `pushNotificationSubscriptionMaxRetries` |
+
+`getFeatureFlagResult()` sends `$feature_flag_called` by default and `getFeatureFlagPayload()` never did, so pass `sendFeatureFlagEvent = false` to keep your event volume and experiment exposures unchanged. It also has no default value parameter, so add `?: yourDefault` if you need one.
+
+Classes that implement `PostHogInterface`, such as test fakes, need updating. The migration guide lists the changed methods.
+
+### Feature flag callbacks
+
+`PostHogConfig.onFeatureFlags` and `reloadFeatureFlags()` now receive a `PostHogFeatureFlagsLoaded`:
+
+```kotlin
+// Version 3
+config.onFeatureFlags = PostHogOnFeatureFlags {
+    refreshUi()
+}
+
+// Version 4
+config.onFeatureFlags = PostHogFeatureFlagsCallback { loaded ->
+    if (!loaded.errorsLoading) {
+        refreshUi()
+    }
+}
+```
+
+A trailing lambda such as `PostHog.reloadFeatureFlags { refreshUi() }` still compiles, so check whether it should read `errorsLoading`. The callback also runs after a failed load.
+
+### Behavior changes
+
+These don't fail the build:
+
+- **Session replay records screenshots.** Apps that used the default wireframe mode now upload masked screenshots. Custom-drawn views and other content the SDK doesn't recognize can be visible unless you mask them, so review [masking](/docs/session-replay/mobile) before you upgrade.
+- **Events go to capture v1.** Analytics events go to `/i/v1/analytics/events` instead of `/batch`. If you self-host PostHog or send events through your own proxy, make sure that path is served first. Capture v1 also changes event validation, property precedence, and retries. See the [capture v1 upgrade guide](/docs/libraries/capture-v1).
+- **Feature flag payloads must be valid JSON.** A malformed, empty, or whitespace-only payload, or one only valid in lenient mode such as unquoted `hello`, now reads as `null` instead of a string. A JSON `null` payload reads as `null` instead of the string `"null"`. If you store plain text in a payload, change it to valid JSON such as `"hello"` before you upgrade. The flag's value isn't affected.
+- **`remoteConfig = false` no longer skips `/config`.** Apps that set it now request `/config` at setup and apply its session replay, surveys, error tracking, and push settings. `/flags` is then requested only if the project has feature flags, and if it has none, the cached flags are cleared.
+
+### New `onFeatureFlags()` listener
+
+`PostHog.onFeatureFlags { loaded -> … }` gets every feature flags load on the main thread and returns a subscription you can `unsubscribe()`. See [ensuring flags are loaded before usage](/docs/feature-flags/adding-feature-flag-code?tab=Android#ensuring-flags-are-loaded-before-usage).
 
 # FAQ
 
