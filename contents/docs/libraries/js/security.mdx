@@ -1,0 +1,135 @@
+---
+title: Securely install the JavaScript SDK
+sidebarTitle: Security
+sidebar: Docs
+showTitle: true
+---
+
+The [JavaScript SDK](/docs/libraries/js) runs with the same access to your page as your own application code. Use version controls, Subresource Integrity (SRI), Content Security Policy (CSP), and nonces to control how you load it. These controls protect different boundaries; none makes untrusted code safe to run.
+
+## Pin and update SDK versions
+
+If you need to review SDK changes before deployment, use an exact version:
+
+-   For the HTML snippet, follow [snippet versioning](/docs/libraries/js/snippet-versioning). A major-version pin still receives updates; an exact pin selects one release.
+-   For a package-manager installation, install an exact version without `^` or `~`, commit the lockfile, and enforce frozen installs in CI. For example:
+
+```bash
+pnpm add --save-exact posthog-js@1.444.0
+pnpm install --frozen-lockfile
+```
+
+`1.444.0` is a reproducible example, not a recommendation to stay on that version. Review and deploy updates regularly so pins don't prevent security fixes from reaching your users. See [keeping SDKs current](/docs/health-checks/keeping-sdks-current).
+
+Some features load additional scripts at runtime. Use [`strict_script_versioning: true`](/docs/libraries/js/snippet-versioning#versioned-external-scripts) to request matching, exact-version feature scripts without falling back to legacy paths. Versioned URLs select a release; they don't verify the bytes returned by a CDN or proxy. The token-specific `/array/<token>/config.js` script isn't pinned by this option.
+
+## Use Subresource Integrity with a pinned script
+
+[Subresource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) enables the browser to check a downloaded script against an expected cryptographic hash before executing it. Use it with an exact-version URL, not a moving URL such as `/static/array.js` or `/static/1/array.js`.
+
+### Generate and review the hash
+
+Download the exact asset you intend to deploy and calculate its SHA-384 digest:
+
+```bash
+curl --fail --show-error --silent --location \
+  "https://us-assets.i.posthog.com/static/1.444.0/array.js" \
+  --output posthog-array.js
+
+printf 'sha384-'
+openssl dgst -sha384 -binary posthog-array.js | openssl base64 -A
+printf '\n'
+```
+
+Use your actual regional asset host or reverse-proxy URL. Review the downloaded artifact through your normal dependency approval process, then store the expected hash in your application code. Calculating a hash from a compromised download doesn't establish that the code is trustworthy. Don't fetch the expected hash dynamically from the same server at page load.
+
+### Add the hash to the SDK script
+
+In the [HTML snippet](/docs/libraries/js#installation), replace the `p.src` assignment with these comma-separated assignments, before the script is inserted into the DOM:
+
+<!-- prettier-ignore -->
+```js
+p.integrity = "sha384-<SHA384_BASE64_DIGEST>",
+p.crossOrigin = "anonymous",
+p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/1.444.0/array.js"
+```
+
+Replace `<SHA384_BASE64_DIGEST>` with the digest from the previous step, and keep the rest of the snippet unchanged. The URL must serve the exact bytes you hashed. Cross-origin SRI requires a CORS response header such as `Access-Control-Allow-Origin: *`; PostHog's asset hosts provide this. Preserve it if you serve assets through a cross-origin proxy.
+
+Adding `integrity` to the outer inline `<script>` that contains the snippet doesn't protect the SDK it downloads. Set it on the generated `p` script element as shown above. When upgrading, update the version and hash together. If the hash doesn't match, the browser blocks execution; don't retry without integrity to work around the error.
+
+### Understand the coverage
+
+SRI protects only the resource carrying the hash. Hashing `array.js` doesn't protect additional scripts it loads, including the recorder, surveys, toolbar, or `config.js`.
+
+The [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives) can set `integrity` on SDK-created dependency script elements when you maintain reviewed hashes for their exact URLs. It doesn't protect the initial `array.js` download or guarantee coverage of scripts created by other code. Don't apply one hash to every dependency, and don't use a fixed release hash for mutable project configuration.
+
+If your requirement is to avoid runtime executable downloads altogether, use the bundled approach below instead of treating SRI on the initial script as complete coverage.
+
+## Configure Content Security Policy
+
+CSP limits which resources the browser can load and which scripts it can execute. Follow the [CSP directives guide](/docs/advanced/content-security-policy#content-security-policy-directives-needed) for SDK scripts, API connections, workers, and optional toolbar resources.
+
+Keep `script-src` and `connect-src` separate in your review: permitting event ingestion doesn't require permitting remote JavaScript. Bundling the SDK doesn't remove the need to permit its API requests. Test the features you enable before enforcing your policy, and use browser console reports to find blocked resources rather than broadly adding `unsafe-inline` or `unsafe-eval`.
+
+Use [CSP tracking](/docs/csp-tracking) to test your policy in report-only mode before enforcement and monitor violations after deployment.
+
+A [reverse proxy](/docs/advanced/proxy) changes where requests go. It doesn't verify script contents or reduce the privileges of code running on your page.
+
+## Use nonces for authorized scripts and styles
+
+A CSP nonce is an unpredictable value generated by your server for each HTML response. The value in the CSP header must match the nonce on the script or style element. Don't hard-code a reusable nonce.
+
+Follow [supporting nonce directives](/docs/advanced/content-security-policy#supporting-nonce-directives) to configure `prepare_external_dependency_script` and `prepare_external_dependency_stylesheet`. Return the element from each hook so the SDK can insert it.
+
+Those hooks don't authorize the initial installation code. With the HTML snippet, authorize both the outer inline script and the generated SDK script element. With a package-manager installation, authorize your application bundle using your framework's CSP integration.
+
+Nonces authorize execution; they don't check script contents. A valid nonce, including a policy that delegates trust with `strict-dynamic`, isn't a replacement for SRI or a reviewed local bundle.
+
+## Bundle the SDK without external scripts
+
+To avoid downloading additional executable code at runtime, [install the SDK from npm with a package manager](/docs/libraries/js#option-2-install-via-package-manager) and bundle it with your application. The default `posthog-js` import still downloads some dependencies on demand. Pin the package and use a no-external build instead:
+
+| Import                        | Trade-off                                                                                                                                                                                                                      |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `posthog-js/no-external`      | Omits the external script loader. Features that need separate bundles are unavailable unless you bundle them yourself.                                                                                                         |
+| `posthog-js/full/no-external` | Also bundles replay, surveys, logs, exception autocapture, tracing headers, web vitals, and dead clicks. Increases your application bundle size. Product tours, conversations, toolbar, and chat integrations aren't included. |
+
+Use one import path consistently throughout your application. Don't also install the snippet, a tag-manager integration, or another permissively configured SDK copy. No-external builds don't remove a shared loader or renderer already registered by another bundle.
+
+Apply local restrictions at the first initialization, not after requests have started:
+
+```js
+import posthog from "posthog-js/no-external"
+
+posthog.init("<ph_project_token>", {
+    api_host: "<ph_client_api_host>",
+    defaults: "<ph_posthog_js_defaults>",
+    disable_external_dependency_loading: true,
+    opt_in_site_apps: false,
+    disable_web_experiments: true,
+    disable_surveys: true,
+    disable_product_tours: true,
+    disable_conversations: true,
+    disable_session_recording: true,
+})
+```
+
+`disable_external_dependency_loading` blocks the standard SDK script loader, including executable `config.js`. Without preloaded configuration, the SDK requests project configuration as JSON instead. Event capture and feature flag requests still use the network. Avoid token-specific configuration scripts in your page bootstrap, and apply the restrictions to every SDK instance.
+
+The example also disables remotely configured UI and recording. Preventing script downloads doesn't sanitize remote HTML or disable a renderer that's already bundled. If you need replay or another bundled feature, review its data capture, consent, and configuration before enabling it. See [bundling extensions](/docs/libraries/js#bundle-extensions) for installation details and [SDK configuration](/docs/libraries/js/config) for the individual controls.
+
+This approach isn't a sandbox: it doesn't protect against a compromised approved package, build pipeline, or another script with access to your page.
+
+## Review data access and verify your installation
+
+Use only your public project token in browser code, never a [personal API key](/docs/api/personal-api-keys). Client-side feature flags aren't authorization checks; enforce access control on your server.
+
+Code-loading controls don't replace [privacy settings](/docs/privacy), [session replay masking](/docs/session-replay/privacy), or consent requirements. If you require no SDK activity before consent, defer loading and initialization until consent. `opt_out_capturing_by_default` isn't a guarantee of no network requests or script downloads.
+
+Before deployment and after each upgrade:
+
+-   Use a clean browser profile to check the Network panel during initialization, event capture, feature flag evaluation, and optional features.
+-   Check for duplicate SDK installations, unexpected executable downloads, CSP violations, and integrity failures.
+-   For the no-external setup, verify that JSON configuration, flags, and events work without vendor script downloads. Test without CSP first, then with CSP, so blocked requests don't hide unwanted loading attempts.
+-   For SRI, test that an incorrect hash blocks execution and that the correct hash loads the SDK. Check any proxy or CDN transformations that could change the bytes.
