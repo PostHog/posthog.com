@@ -135,6 +135,7 @@ When a TAM joins an account, or a CSM gets added to one that already has a TAM, 
 - [ ] TAM creates an account plan note in Customer Analytics once they have a read on priorities
 - [ ] Two shared artifacts accessible to everyone: a light org map of users you're actively pursuing or working with, and a running task list. These can live anywhere as long as there's an easy link in the channel: Slack canvas, Customer Analytics note, Google Doc
 - [ ] Any important dates (renewal, 6 month discount expiry, projected credit depletion) shared in the internal channel
+- [ ] Decide whether an [FDE engagement](/handbook/forward-deployed-engineering/working-with-sales-and-cs#where-fde-fits-in-the-customer-lifecycle) would help set the account up for success, and raise it with the customer if so
 
 The internal channel replaces DMs about the account, and you're both responsible for making sure the other has enough context to be useful. Working in the open there also ensures that it's easy for anyone to look up historical context around decisions in the future.
 
