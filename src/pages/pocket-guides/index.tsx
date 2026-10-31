@@ -1,6 +1,6 @@
 import Explorer from 'components/Explorer'
-import Cover from 'components/PocketGuides/Cover'
-import { useBookPages } from 'components/PocketGuides/bookModel'
+import Cover from 'components/Learn/PocketGuides/Cover'
+import { useBookPages } from 'components/Learn/PocketGuides/bookModel'
 import SEO from 'components/seo'
 import React from 'react'
 
