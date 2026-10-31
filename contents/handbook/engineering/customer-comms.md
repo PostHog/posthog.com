@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Got a service change you need to email customers about — an API deprecation, a new quota limit, a breaking SDK change, a migration deadline? **Loop in Joe.** He owns customer comms and will handle the copy and the send via Customer.io.
+Got a service change you need to email customers about — an API deprecation, a new quota limit, a breaking SDK change, a migration deadline? **Loop in <SmallTeam slug="developer-marketing" />.** They own customer comms and will handle the copy and the send via PostHog Workflows.
 
 All you need to bring:
 
@@ -13,7 +13,7 @@ All you need to bring:
 
 Prior art to mirror: the feature-flags quota-limit rollout in <PrivateLink url="https://github.com/PostHog/product-internal/pull/720"><code>product-internal#720</code></PrivateLink>.
 
-For the underlying email infrastructure (Customer.io tags, categories, unsubscribe behavior), see the [email comms handbook page](/handbook/marketing/email-comms). For incidents specifically, see [engineering incidents](/handbook/engineering/operations/incidents) — Marketing handles those comms too.
+For how we review, target, and categorize emails in PostHog Workflows, see the [email comms handbook page](/handbook/marketing/email-comms). For incidents specifically, see [engineering incidents](/handbook/engineering/operations/incidents) — Developer Marketing handles those comms too.
 
 ## Staying on top of what ships
 
