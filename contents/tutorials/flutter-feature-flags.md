@@ -110,7 +110,7 @@ To start, install [PostHog’s Flutter SDK](/docs/libraries/flutter) by adding `
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^4.0.1
+  posthog_flutter: ^6.0.0
 
 # rest of your code
 ```
@@ -125,7 +125,7 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
     <application>
         <!-- ... other configuration ... -->
-        <meta-data android:name="com.posthog.posthog.API_KEY" android:value="<ph_project_token>" />
+        <meta-data android:name="com.posthog.posthog.PROJECT_TOKEN" android:value="<ph_project_token>" />
         <meta-data android:name="com.posthog.posthog.POSTHOG_HOST" android:value="<ph_client_api_host>" /> <!-- usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com' -->
         <meta-data android:name="com.posthog.posthog.TRACK_APPLICATION_LIFECYCLE_EVENTS" android:value="true" />
         <meta-data android:name="com.posthog.posthog.DEBUG" android:value="true" />
@@ -133,13 +133,13 @@ For Android, add your PostHog configuration to your `AndroidManifest.xml` file l
 </manifest>
 ```
 
-You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
+You'll also need to update the minimum Android SDK version to `23` in `android/app/build.gradle`:
 
 ```gradle_kotlin file=android/app/build.gradle
 // rest of your config
 
     defaultConfig {
-      minSdkVersion 21
+      minSdkVersion 23
       // rest of your config
     }
 
@@ -148,7 +148,7 @@ You'll also need to update the minimum Android SDK version to `21` in `android/a
 
 ### iOS setup
 
-For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
+For iOS, `posthog_flutter` version 6 needs Flutter 3.41 or later with [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers) turned on, which is the default from Flutter 3.44. Add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -156,7 +156,7 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
 <plist version="1.0">
 <dict>
 <!-- rest of your configuration -->
-  <key>com.posthog.posthog.API_KEY</key>
+  <key>com.posthog.posthog.PROJECT_TOKEN</key>
   <string><ph_project_token></string>
   <key>com.posthog.posthog.POSTHOG_HOST</key>
   <string><ph_client_api_host></string>  <!--  https://us.i.posthog.com or https://eu.i.posthog.com -->
@@ -168,13 +168,7 @@ For iOS, you need to have [Cocoapods](https://guides.cocoapods.org/using/getting
 </plist>
 ```
 
-Then you need to set the minimum platform version to iOS 13.0 in your Podfile:
-
-```yaml file=ios/Podfile
-platform :ios, '13.0'
-
-# rest of your config
-```
+Then set the minimum platform version to iOS 15.0 in Xcode (**Runner > General > Minimum Deployments**).
 
 ### Web setup
 
