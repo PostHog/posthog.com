@@ -492,6 +492,8 @@ Version 6 moves iOS and macOS to `posthog-ios` 4.0 and Android to `posthog-andro
 
 If you send events through a reverse proxy or to a self-hosted PostHog instance, read [Events go to capture v1](#events-go-to-capture-v1) before you upgrade.
 
+For the full list of changes with before and after code, see the [migration guide](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md).
+
 Before you upgrade, update to the latest version 5 release and fix its deprecation warnings. The replacements below work in both versions, with one exception: the parameter of `getFeatureFlagResult()` that controls the `$feature_flag_called` event is named `sendEvent` in version 5 and `sendFeatureFlagEvent` in version 6. Version 6 also removes a few members that version 5 never marked as deprecated: the `sendEvent` parameter itself, the `toMap()` and `fromMap()` helpers, and some members of the platform interface classes.
 
 ### Platform requirements
@@ -503,7 +505,9 @@ Before you upgrade, update to the latest version 5 release and fix its deprecati
 | Xcode | – | 26 or later |
 | Android | API 23 | API 23 (unchanged) |
 
-For CocoaPods projects, raise the platform version in your `Podfile`:
+{/* BLOCKER before release: posthog-ios 4.0 is not published to CocoaPods, and posthog-flutter#673 still declares s.dependency 'PostHog', '>= 4.0.0'. State here how version 6 installs in CocoaPods projects once that is resolved. */}
+
+If your project has a `Podfile`, raise the platform version there:
 
 ```ruby file=ios/Podfile
 platform :ios, '15.0'
@@ -528,7 +532,7 @@ flutter build macos --config-only
 | Removed in version 6 | Use instead |
 | --- | --- |
 | `PostHogConfig.apiKey` | `PostHogConfig.projectToken` |
-| `com.posthog.posthog.API_KEY` in `AndroidManifest.xml` or `Info.plist` | `com.posthog.posthog.PROJECT_TOKEN` |
+| `com.posthog.posthog.API_KEY` in `AndroidManifest.xml` or `Info.plist` | `com.posthog.posthog.PROJECT_TOKEN`. This doesn't fail the build: with only the old key, the SDK logs an error and doesn't start, so the app sends no data |
 | `Posthog().disable()` and `Posthog().enable()` | `Posthog().optOut()` and `Posthog().optIn()` |
 | `Posthog().getFeatureFlagPayload(key)` | `Posthog().getFeatureFlagResult(key, sendFeatureFlagEvent: false)`, then read `payload` (`sendEvent: false` in version 5) |
 | The `sendEvent` parameter of `getFeatureFlagResult()` | `sendFeatureFlagEvent` |
@@ -537,7 +541,7 @@ flutter build macos --config-only
 | `PostHogDataMode.cellular` | `PostHogDataMode.any`, which `cellular` always behaved like |
 | `toMap()` on the config classes, and `PostHogFeatureFlagResult.fromMap()` | None. They serialize the SDK's internal format and aren't meant for app code |
 
-For example, to read a flag payload. Pass `false` to keep the old behavior: `getFeatureFlagResult()` captures a `$feature_flag_called` event by default, and `getFeatureFlagPayload()` didn't.
+For example, to read a flag payload. Pass `false` to keep the old behavior: `getFeatureFlagPayload()` didn't capture a `$feature_flag_called` event on iOS, macOS, Android, Windows or Linux, and without `false` `getFeatureFlagResult()` captures one when your config allows it.
 
 ```dart
 // Version 5
@@ -555,9 +559,21 @@ If you implement or mock `PosthogFlutterPlatformInterface`, `PosthogFlutterIO` o
 
 - Rename `enable()` and `disable()` to `optIn()` and `optOut()`.
 - Remove `getFeatureFlagPayload()`.
-- Rename the `sendEvent` parameter of `getFeatureFlagResult()` to `sendFeatureFlagEvent`.
+- Change the `bool sendEvent = true` parameter of `getFeatureFlagResult()` to `bool? sendFeatureFlagEvent`.
 
 Calls to `Posthog()` aren't affected by these.
+
+### `getFeatureFlagResult()` follows your config
+
+This change has no compile error. When you omit `sendFeatureFlagEvent`, `getFeatureFlagResult()` now uses `PostHogConfig.sendFeatureFlagEvent` instead of always capturing `$feature_flag_called`, like `getFeatureFlag()` and `isFeatureEnabled()`.
+
+If you set `config.sendFeatureFlagEvent = false`, `getFeatureFlagResult()` stops sending the event, so insights and experiments that rely on it can receive less data. To keep the event for a call:
+
+```dart
+await Posthog().getFeatureFlagResult('my-flag', sendFeatureFlagEvent: true);
+```
+
+On web, `PostHogConfig.sendFeatureFlagEvent` isn't applied to `posthog-js`, so omitting the argument keeps the `posthog-js` default, which captures the event. Pass `sendFeatureFlagEvent: false` to suppress it on web.
 
 ### Feature flag callbacks
 
@@ -682,3 +698,11 @@ These changes come from `posthog-ios` 4.0 and need no code changes, but they can
 - **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. PostHog rejects malformed payloads when you save a flag, so this rarely comes up.
 - **Bootstrapped payloads:** string values in `PostHogBootstrapConfig.featureFlagPayloads`, such as `"123"` or `"true"`, now stay strings instead of being decoded to numbers or booleans. This matches Android.
 - **Lifecycle events:** `Application Installed`, `Application Updated` and `Application Opened` no longer include the legacy `version` and `build` properties. Update any insights, cohorts or filters that use them to `$app_version` and `$app_build`. Android still sends `version` and `build` for now.
+- **Network reachability:** a path that needs user action, such as a VPN waiting for a password, counts as reachable, and queues pause while cellular data is off for the app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
+- **Events queued by very old versions:** events still on disk from a `posthog-ios` 2.x SDK are deleted instead of sent. Distinct ID, anonymous ID, groups and cached feature flags carry over.
+
+### Behavior changes on Android
+
+This change comes from `posthog-android` 4.0 and needs no code changes:
+
+- **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. A JSON `null` payload also reads as `null` instead of the string `"null"`.
