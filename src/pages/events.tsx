@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useMemo, useRef } from 'react'
 import SEO from 'components/seo'
 import Explorer from 'components/Explorer'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -18,6 +18,12 @@ import EventGraphic, { type EventGraphicProps, type EventGraphicSpeaker } from '
 import { eventGraphicStyleIndex } from 'constants/eventGraphicPalette'
 import MobileDrawer from 'components/MobileDrawer'
 import { useApp } from '../context/App'
+import RetroTV, { LiveBadge } from 'components/EventsOnline/RetroTV'
+import OnlineRoom from 'components/EventsOnline/OnlineRoom'
+import EventPassport, { Stamp, useEventPassport } from 'components/EventsOnline/EventPassport'
+import { AddToCalendar, EventTime } from 'components/EventsOnline/EventDetailExtras'
+import { buildDemoEvents } from 'components/EventsOnline/demoEvents'
+import { isEventLive } from 'components/EventsOnline/utils'
 
 export type Event = {
     date: string // YYYY-MM-DD
@@ -46,6 +52,10 @@ export type Event = {
     link?: string
     startTime?: string // HH:mm format
     online?: boolean
+    end_date?: string
+    // Demo events only for now – Strapi doesn't store these yet
+    timezone?: string // IANA, e.g. "Europe/London"
+    endTime?: string // HH:mm, in `timezone`
     id: number
 }
 
@@ -198,6 +208,8 @@ export const useEvents = (): { events: Event[]; refreshEvents: () => void; delet
     return { events, refreshEvents, deleteEvent }
 }
 
+type EventsView = 'map' | 'online' | 'passport'
+
 const EventCard = ({
     children,
     onClose,
@@ -255,6 +267,28 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
         initialSelectedEvent?.id ?? initialSelectedId ?? null
     )
     const [isInitialized, setIsInitialized] = useState(false)
+    const { isMobile } = useApp()
+    const [view, setView] = useState<EventsView>('map')
+    const [playing, setPlaying] = useState<Event | null>(null)
+    const { stamps, hasStamp, toggleStamp } = useEventPassport()
+
+    // DEMO: mixes in fake online, live and recorded events so the online features have something to
+    // show. On by default for this prototype branch; /events?demo=0 turns it off. Read after mount so
+    // the static build never includes them.
+    // TODO: default this to off (opt in with ?demo=1) before any of this goes to a real PR.
+    const [demo, setDemo] = useState(false)
+    useEffect(() => {
+        setDemo(new URLSearchParams(window.location.search).get('demo') !== '0')
+    }, [])
+    const demoEvents = useMemo(() => (demo ? buildDemoEvents() : []), [demo])
+    const allEvents = useMemo(() => [...demoEvents, ...eventsData], [demoEvents, eventsData])
+
+    // Re-render every minute so "live" badges turn on and off without a refresh
+    const [, setTick] = useState(0)
+    useEffect(() => {
+        const interval = setInterval(() => setTick((t) => t + 1), 60_000)
+        return () => clearInterval(interval)
+    }, [])
 
     // Generate unique event key
     const getEventKey = (event: Event) => {
@@ -263,23 +297,48 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
     }
 
     const today = new Date()
-    const pastEvents = eventsData
-        .filter((event) => new Date(event.date) < today)
+    // A live event has already started, but it belongs with upcoming events, not past ones
+    const pastEvents = allEvents
+        .filter((event) => new Date(event.date) < today && !isEventLive(event))
         .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-    const upcomingEvents = eventsData
-        .filter((event) => new Date(event.date) >= today)
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+    const upcomingEvents = allEvents
+        .filter((event) => new Date(event.date) >= today || isEventLive(event))
+        .sort(
+            (a, b) =>
+                Number(isEventLive(b)) - Number(isEventLive(a)) ||
+                new Date(a.date).getTime() - new Date(b.date).getTime()
+        )
 
+    const liveEvents = upcomingEvents.filter((event) => isEventLive(event))
     const displayEvents = activeTab === 'past' ? pastEvents : upcomingEvents
+
+    // When something is on air at page load, open straight into the online room
+    const autoTunedRef = useRef(false)
+    useEffect(() => {
+        if (!autoTunedRef.current && liveEvents.length > 0) {
+            autoTunedRef.current = true
+            setView('online')
+        }
+    }, [liveEvents.length])
+
+    // Small TV in the map corner: the selected online event, else whatever is live, else static
+    const onTv = (selectedEvent?.online ? selectedEvent : null) || liveEvents[0] || null
+
+    const playRecording = (event: Event | null) => {
+        setPlaying(event)
+        if (event) setView('online')
+    }
 
     const handleEventClick = (event: Event, updateUrl = true) => {
         setSelectedEvent(event)
         setEditingEvent(false)
         setCreatingEvent(false)
 
-        if (updateUrl) {
-            window.history.replaceState(null, '', `/events/${event.id}`)
+        // Demo events have no page of their own
+        if (updateUrl && event.id > 0) {
+            // Keep the query string so ?demo=0 survives opening an event
+            window.history.replaceState(null, '', `/events/${event.id}${window.location.search}`)
         }
     }
     const handleMapEventClick = (eventOrId: number) => {
@@ -294,7 +353,7 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
 
     const handleCloseEvent = () => {
         setSelectedEvent(null)
-        window.history.replaceState(null, '', '/events')
+        window.history.replaceState(null, '', `/events${window.location.search}`)
     }
 
     // Handle ESC key to close detail panel
@@ -431,12 +490,21 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                                     />
                                                 )}
                                             </div>
-                                            <div className="text-secondary text-[13px]">
+                                            <div className="flex items-center gap-1.5 text-secondary text-[13px]">
+                                                {isEventLive(event) && <LiveBadge />}
                                                 {new Date(event.date).toLocaleDateString('en-US', {
                                                     month: 'short',
                                                     day: 'numeric',
                                                     year: 'numeric',
                                                 })}
+                                                {hasStamp(event.id) && (
+                                                    <span
+                                                        className="-rotate-6 rounded-sm border border-green px-1 text-[10px] font-bold uppercase text-green"
+                                                        title="In your passport"
+                                                    >
+                                                        Stamped
+                                                    </span>
+                                                )}
                                             </div>
                                             <div className="font-semibold text-sm line-clamp-2">{event.name}</div>
                                             <div className="text-[13px] text-secondary">
@@ -495,7 +563,8 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                         <h2 className="text-xl font-bold mb-1 pr-12 @3xl:block hidden">
                                             {selectedEvent.name}
                                         </h2>
-                                        <div className="mb-2 text-secondary">
+                                        <div className="mb-2 flex items-center gap-2 text-secondary">
+                                            {isEventLive(selectedEvent) && <LiveBadge />}
                                             {dayjs(selectedEvent.date).format('MMMM D, YYYY')}
                                         </div>
 
@@ -511,16 +580,9 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                                 </div>
                                             )}
 
-                                            {selectedEvent.startTime && (
-                                                <div>
-                                                    <div className="text-secondary text-[13px] mb-1">Start time</div>
-                                                    <div>
-                                                        {dayjs(
-                                                            `${selectedEvent.date} ${selectedEvent.startTime}`
-                                                        ).format('h:mm A')}
-                                                    </div>
-                                                </div>
-                                            )}
+                                            {selectedEvent.startTime && <EventTime event={selectedEvent} />}
+
+                                            <AddToCalendar event={selectedEvent} />
 
                                             <div>
                                                 <div className="text-secondary text-[13px] mb-1">Location</div>
@@ -655,6 +717,13 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                             {selectedEvent.video && (
                                                 <div>
                                                     <div className="text-secondary text-[13px] mb-1">Video</div>
+                                                    <OSButton
+                                                        size="md"
+                                                        className="mb-1"
+                                                        onClick={() => playRecording(selectedEvent)}
+                                                    >
+                                                        📼 Watch on the TV
+                                                    </OSButton>
                                                     <a
                                                         href={selectedEvent.video}
                                                         target="_blank"
@@ -663,6 +732,26 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                                                     >
                                                         Watch video →
                                                     </a>
+                                                </div>
+                                            )}
+
+                                            {/* Passport stamps are for events that have started */}
+                                            {(new Date(selectedEvent.date) < today || isEventLive(selectedEvent)) && (
+                                                <div className="flex items-center gap-3">
+                                                    <OSButton
+                                                        size="md"
+                                                        variant={hasStamp(selectedEvent.id) ? 'secondary' : 'primary'}
+                                                        onClick={() => toggleStamp(selectedEvent.id)}
+                                                    >
+                                                        {hasStamp(selectedEvent.id)
+                                                            ? '✓ In your passport'
+                                                            : '🛂 I was there'}
+                                                    </OSButton>
+                                                    {hasStamp(selectedEvent.id) && (
+                                                        <div className="w-28">
+                                                            <Stamp event={selectedEvent} animate />
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
 
@@ -713,11 +802,83 @@ export const EventsContent = ({ initialSelectedId, initialSelectedEvent }: Event
                         )}
                     </AnimatePresence>
 
-                    <EventsMap
-                        layers={activeTab === 'upcoming' ? [LAYER_EVENTS_UPCOMING] : [LAYER_EVENTS_PAST]}
-                        onEventClick={handleMapEventClick}
-                        selectedEventId={selectedEvent?.id || null}
-                    />
+                    <div
+                        className={`absolute top-4 z-20 w-80 max-w-[calc(100%-4.5rem)] rounded bg-primary shadow-lg ${
+                            view === 'map' ? 'right-14' : 'right-4'
+                        }`}
+                    >
+                        <ToggleGroup
+                            title="View"
+                            hideTitle
+                            options={[
+                                { label: '🌍 Map', value: 'map' },
+                                { label: '📺 Online', value: 'online' },
+                                { label: '🛂 Passport', value: 'passport' },
+                            ]}
+                            onValueChange={(value) => setView(value as EventsView)}
+                            value={view}
+                        />
+                        {demo && (
+                            <div
+                                className="border-t border-primary px-2 py-1 text-center text-[11px] text-secondary"
+                                title="Fake online, live, and recorded events are mixed in. Add ?demo=0 to the URL to hide them."
+                            >
+                                🧪 Demo data
+                            </div>
+                        )}
+                    </div>
+
+                    {view === 'online' && (
+                        <OnlineRoom
+                            events={allEvents}
+                            selectedEvent={selectedEvent}
+                            playing={playing}
+                            onPlay={playRecording}
+                            onSelectEvent={handleEventClick}
+                            graphicPropsFor={eventGraphicProps}
+                            // Leave room for the detail panel, which floats over the left side
+                            className={`pt-24 ${
+                                !isMobile && (selectedEvent || editingEvent || creatingEvent) ? '@3xl:pl-[25rem]' : ''
+                            }`}
+                        />
+                    )}
+
+                    {view === 'passport' && (
+                        <div
+                            className={`absolute inset-0 overflow-y-auto pt-24 ${
+                                !isMobile && (selectedEvent || editingEvent || creatingEvent) ? '@3xl:pl-[25rem]' : ''
+                            }`}
+                        >
+                            <EventPassport events={allEvents} stamps={stamps} onSelectEvent={handleEventClick} />
+                        </div>
+                    )}
+
+                    {/* The map stays mounted in the other views so switching back doesn't reload it */}
+                    <div className={`h-full ${view !== 'map' ? 'invisible absolute inset-0' : ''}`}>
+                        <EventsMap
+                            layers={activeTab === 'upcoming' ? [LAYER_EVENTS_UPCOMING] : [LAYER_EVENTS_PAST]}
+                            onEventClick={handleMapEventClick}
+                            selectedEventId={selectedEvent?.id || null}
+                        />
+                    </div>
+
+                    {/* Online events have no place on the map, so they live on the TV in the corner */}
+                    {view === 'map' && (
+                        <div className="absolute bottom-8 right-3 z-10 w-36 @2xl:w-44">
+                            <RetroTV
+                                size="sm"
+                                event={onTv}
+                                graphicProps={onTv ? eventGraphicProps(onTv) : undefined}
+                                live={onTv ? isEventLive(onTv) : false}
+                                onClick={() => setView('online')}
+                            />
+                            <div className="mt-1 text-center text-[13px] font-semibold text-primary">
+                                <span className="rounded bg-primary px-1.5 py-0.5 shadow">
+                                    {liveEvents.length > 0 ? 'On air now' : 'Online events'}
+                                </span>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </Explorer>
