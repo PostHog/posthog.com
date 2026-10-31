@@ -16,6 +16,8 @@ The SDK takes a screenshot of the screen when it changes and masks sensitive vie
 
 Screenshots show everything on screen that isn't masked, including custom-drawn views, maps, and video, so make sure you're masking all relevant views.
 
+On iOS, a `WKWebView` is masked whole when `maskAllTextInputs` or `maskAllImages` is on, and recorded in full when both are off.
+
 All SDKs record in screenshot mode: [Android](/docs/session-replay/installation/android) and [iOS](/docs/session-replay/installation/ios) from version 4.0, and [React Native](/docs/session-replay/installation/react-native) and [Flutter](/docs/session-replay/installation/flutter) in every version. This isn't configurable.
 
 Below is an example of a screen captured in screenshot mode in Android:
