@@ -57,6 +57,18 @@ PostHog connected to MongoDB but reports no collections in the selected database
 
 - **Missing read permissions** – Collection listing is filtered by authorization. Ensure your database user has a read role (such as `read` or `readAnyDatabase`) on the target database.
 
+### Sync fails with a timeout
+
+PostHog waits up to 10 minutes for each batch of documents from MongoDB, not for the whole sync. A view with a slow pipeline can take longer than that to return a batch.
+
+To increase the limit, add the `socketTimeoutMS` option (in milliseconds) to your connection string. A value in the connection string replaces the PostHog default. If your connection string already has options after a `?`, add it with `&` instead. For example, this sets the limit to 30 minutes:
+
+```text
+mongodb+srv://user:pass@cluster.mongodb.net/my_database?retryWrites=true&socketTimeoutMS=1800000
+```
+
+To apply it, edit the source and enter the full connection string again.
+
 import InboundIpAddresses from '../\_snippets/inbound-ip-addresses.mdx'
 
 <InboundIpAddresses />
