@@ -83,9 +83,9 @@ async function forwardRequest(request, pathWithSearch) {
   const ip = request.headers.get("CF-Connecting-IP") || ""
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
-  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-  if (!originHeaders.get("authorization")?.startsWith("Bearer phc_")) {
+  // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+  // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+  if (!/^Bearer ph[csx]_/.test(originHeaders.get("authorization") ?? "")) {
     originHeaders.delete("authorization")
   }
   originHeaders.set("X-Forwarded-For", ip)
@@ -137,9 +137,9 @@ async function forwardRequest(request, pathWithSearch) {
   const ip = request.headers.get("CF-Connecting-IP") || ""
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
-  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-  if (!originHeaders.get("authorization")?.startsWith("Bearer phc_")) {
+  // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+  // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+  if (!/^Bearer ph[csx]_/.test(originHeaders.get("authorization") ?? "")) {
     originHeaders.delete("authorization")
   }
   originHeaders.set("X-Forwarded-For", ip)
