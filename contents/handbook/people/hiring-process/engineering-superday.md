@@ -9,7 +9,9 @@ If you've been invited to a PostHog SuperDay, here's what to expect and how to s
 
 ## What the SuperDay looks like
 
-The SuperDay is a paid full day of work ($1,000 USD). You'll receive a project task at the start of your day and submit your work at the end. The project is the main focus -- you'll build something from scratch, tailored to the role you're applying for. Expect to spend the majority of your day on it.
+The SuperDay is a paid full day of work ($1,000 USD). You'll receive a project task at the start of your day and submit your work when you wrap up. The project is the main focus -- you'll build something from scratch, tailored to the role you're applying for. Expect to spend the majority of your day on it.
+
+Treat it as a day of work, at a pace that works for you. There's no hard cutoff time. Most candidates spend around 8–10 hours working on the challenge before submitting, but that's a guide, not a requirement.
 
 Scheduled throughout the day, you'll also have:
 
