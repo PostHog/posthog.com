@@ -13,7 +13,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './endpoints/features'
-import { applications, topFeatures } from './endpoints/slides'
+import { applications, keyFeatures } from './endpoints/slides'
 import { getTool } from '../../data/tools'
 
 export const endpoints = {
@@ -74,11 +74,11 @@ export const endpoints = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

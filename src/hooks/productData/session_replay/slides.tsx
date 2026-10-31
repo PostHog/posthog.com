@@ -138,7 +138,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'event-timeline',
         label: 'Event timeline',

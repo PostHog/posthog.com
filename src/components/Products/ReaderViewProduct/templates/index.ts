@@ -4,7 +4,7 @@ import Overview from './Overview'
 import Eli5 from './Eli5'
 import UseCases from './UseCases'
 import Applications from './Applications'
-import TopFeatures from './TopFeatures'
+import KeyFeatures from './KeyFeatures'
 import Features from './Features'
 import AI from './AI'
 import AskAnything from './AskAnything'
@@ -32,7 +32,7 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     eli5: Eli5,
     'use-cases': UseCases,
     applications: Applications,
-    'top-features': TopFeatures,
+    'key-features': KeyFeatures,
     features: Features,
     ai: AI,
     'ask-anything': AskAnything,
@@ -55,7 +55,7 @@ export {
     Eli5,
     UseCases,
     Applications,
-    TopFeatures,
+    KeyFeatures,
     Features,
     AI,
     AskAnything,

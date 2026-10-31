@@ -16,7 +16,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './session_replay/features'
-import { applications, topFeatures } from './session_replay/slides'
+import { applications, keyFeatures } from './session_replay/slides'
 import { getTool } from '../../data/tools'
 import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
 
@@ -77,11 +77,11 @@ export const sessionReplay = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

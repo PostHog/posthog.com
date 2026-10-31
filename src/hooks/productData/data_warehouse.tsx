@@ -14,7 +14,7 @@ import {
 } from '@posthog/icons'
 import Link from 'components/Link'
 import { getTool } from '../../data/tools'
-import { applications, GetAccess, topFeatures } from './data_warehouse/slides'
+import { applications, GetAccess, keyFeatures } from './data_warehouse/slides'
 
 // this data powers the data warehouse page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts.
 
@@ -94,11 +94,11 @@ export const dataWarehouse = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },

@@ -164,7 +164,7 @@ const { messages } = await posthog.conversations.getMessages(response.ticket_id)
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'channels',
         label: 'Every channel',

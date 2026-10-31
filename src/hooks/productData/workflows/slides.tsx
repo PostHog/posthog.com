@@ -166,9 +166,9 @@ export const applications: CarouselSlide[] = [
 ]
 
 /**
- * Top features carousel — restructured from the previous features array only.
+ * Key features carousel — restructured from the previous features array only.
  */
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'workflow-builder',
         label: 'Builder',

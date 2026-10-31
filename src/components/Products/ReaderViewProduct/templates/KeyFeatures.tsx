@@ -4,16 +4,16 @@ import CarouselSlide from '../CarouselSlide'
 import { SECTION_H2 } from '../helpers'
 import type { CarouselSlide as CarouselSlideType, SectionComponentProps } from '../types'
 
-interface TopFeaturesProps extends SectionComponentProps {
+interface KeyFeaturesProps extends SectionComponentProps {
     slides?: CarouselSlideType[]
 }
 
-const TopFeatures = ({ id, productData, slides = [] }: TopFeaturesProps) => {
+const KeyFeatures = ({ id, productData, slides = [] }: KeyFeaturesProps) => {
     if (!slides.length) return null
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className={SECTION_H2}>Top features</h2>
+            <h2 className={SECTION_H2}>Key features</h2>
             <TabbedCarousel
                 tabs={slides.map((s) => ({
                     value: s.slug,
@@ -33,4 +33,4 @@ const TopFeatures = ({ id, productData, slides = [] }: TopFeaturesProps) => {
     )
 }
 
-export default TopFeatures
+export default KeyFeatures

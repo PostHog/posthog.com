@@ -42,8 +42,8 @@ export const applications: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Warehouse is a database with its own hostname and credentials. Connect the tools your team
-                    already uses to query the Warehouse directly, separate from the queries that power PostHog.
+                    Warehouse is a database with its own hostname and credentials. Connect the tools your team already
+                    uses to query the Warehouse directly, separate from the queries that power PostHog.
                 </p>
                 {list([
                     {
@@ -138,7 +138,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         ...slideStyle,
         slug: 'sources',
@@ -180,8 +180,8 @@ export const topFeatures: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Incremental syncs only move new or updated rows. For Postgres, change data capture
-                    streams inserts, updates, and deletes in near real time instead of rescanning whole tables.
+                    Incremental syncs only move new or updated rows. For Postgres, change data capture streams inserts,
+                    updates, and deletes in near real time instead of rescanning whole tables.
                 </p>
                 {list([
                     {
@@ -281,7 +281,7 @@ export const GetAccess = ({ id }: SectionComponentProps) => (
     <section id={id} className="scroll-mt-20 not-prose mb-20">
         <h2 className="text-3xl font-bold text-primary mt-0 mb-3">Get access</h2>
         <p className="text-base leading-relaxed m-0 mb-4">
-           Warehouse is in <strong>beta</strong>. Access is set up by our team, so the first step is a conversation
+            Warehouse is in <strong>beta</strong>. Access is set up by our team, so the first step is a conversation
             about your stack and what you want to query.
         </p>
         <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4">
