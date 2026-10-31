@@ -1,0 +1,50 @@
+diff --git a/node_modules/gatsby-plugin-mdx/mdx-renderer.js b/node_modules/gatsby-plugin-mdx/mdx-renderer.js
+index 7e94e1d0b7..948668ac46 100644
+--- a/node_modules/gatsby-plugin-mdx/mdx-renderer.js
++++ b/node_modules/gatsby-plugin-mdx/mdx-renderer.js
+@@ -2,12 +2,25 @@ const React = require(`react`)
+ const { mdx } = require(`@mdx-js/react`)
+ const { useMDXScope } = require(`./context`)
+ 
++// PATCHED (posthog.com): load the scope registry from this module, not from
++// wrapRootElement. Webpack then puts it in the chunks that actually render
++// MDX, instead of the app shell loaded on every page. The require stays
++// synchronous so the first client render matches the server HTML.
++let allScopes
++const getAllScopes = () => {
++  if (!allScopes) {
++    const loaded = require(`./loaders/mdx-scopes`)
++    allScopes = loaded.default || loaded
++  }
++  return allScopes
++}
++
+ module.exports = function MDXRenderer({
+   scope,
+   children,
+   ...props
+ }) {
+-  const mdxScope = useMDXScope(scope)
++  const mdxScope = useMDXScope(scope || getAllScopes())
+ 
+   // Memoize the compiled component
+   const End = React.useMemo(() => {
+diff --git a/node_modules/gatsby-plugin-mdx/wrap-root-element.js b/node_modules/gatsby-plugin-mdx/wrap-root-element.js
+index 10a4ededb4..1abbe97e06 100644
+--- a/node_modules/gatsby-plugin-mdx/wrap-root-element.js
++++ b/node_modules/gatsby-plugin-mdx/wrap-root-element.js
+@@ -24,7 +24,13 @@ import { MDXScopeProvider } from "./context"
+  * Submit a PR
+  */
+ import { plugins as mdxPlugins } from "./loaders/mdx-components"
+-import scopeContexts from "./loaders/mdx-scopes"
++
++// PATCHED (posthog.com): this file used to import ./loaders/mdx-scopes, which
++// synchronously require()s every MDX scope. Gatsby loads this wrapRootElement
++// in the app entry, so that registry shipped on every page (about 2 MB of
++// docs snippets the homepage never renders). MDXRenderer loads the registry
++// itself, and only pages that import MDXRenderer pay for it.
++const scopeContexts = {}
+ 
+ const componentsAndGuards = {}
+ 
