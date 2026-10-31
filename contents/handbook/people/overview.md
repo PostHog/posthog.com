@@ -27,6 +27,10 @@ These are some things that Ops is _not_ responsible for which you might see at o
 - Company wide [goal setting](/handbook/company/goal-setting) - the Exec team ensure this happens, and small teams run their own planning
 - Training - this is [self serve](/handbook/people/training) 
 
+## Employment letters and verification
+
+To request an employment letter in a specific format, such as an NHG mortgage employer statement (*werkgeversverklaring*), go to **Documents → Custom Request** in Deel. Describe the required format and attach the official template. Once the request is complete, the letter appears under **Documents** in Deel.
+
 ## Ops team values
 
 - Take ownership 
