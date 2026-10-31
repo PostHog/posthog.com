@@ -8325,6 +8325,16 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Supabase auth emails',
+                    url: '/docs/workflows/supabase-auth-emails',
+                    icon: 'IconLock',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'Workflow events',
                     url: '/docs/workflows/engagement-events',
                     icon: 'IconGraph',
