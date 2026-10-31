@@ -89,8 +89,10 @@ const faqs = [
         a: (
             <>
                 <p>
-                    Events and metadata are guaranteed to be retained for 7 years on any paid plan and 1 year on a free
-                    plan. After 1 year, data may be moved into cold storage so queries may run more slowly.
+                    Events are retained for 1 year on free plans and at least 2 years on pay-as-you-go plans. Platform
+                    packages extend this to 3 years on Boost, 5 years on Scale, and 7 years on Enterprise. For more
+                    information on data retention, see the{' '}
+                    <Link to="/docs/data/events-retention">events data retention docs</Link>.
                 </p>
                 <p>
                     Recordings on the free plan are retained for 1 month. On the pay-as-you-go plan, recordings are
