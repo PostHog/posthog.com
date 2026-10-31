@@ -737,6 +737,8 @@ On iOS, native uploads (session replay and native crash reports) pause while cel
 
 The experimental iOS session replay option `sessionReplayConfig.screenshotModeBackgroundCapture` no longer has an effect, because `posthog-ios` 4.0 removes it.
 
+Session replay records only masked screenshots on iOS and Android, because `posthog-ios` 4.0 and `posthog-android` 4.0 remove wireframe capture. The plugin already forced screenshot mode, so your recordings don't change. If native code in your app sets `screenshotMode` (iOS) or `screenshot` (Android), remove it, because it no longer compiles.
+
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
