@@ -1381,6 +1381,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/revops/icp-fit-score',
             },
             {
+                name: 'Commissions',
+                url: '/handbook/growth/revops/commissions',
+            },
+            {
                 name: 'SalesOps',
                 url: '',
                 children: [
