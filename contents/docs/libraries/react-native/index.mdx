@@ -34,13 +34,17 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 
 ### Choose an iOS dependency path for the native plugin
 
-The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use. Then choose one iOS dependency path:
+The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use.
+
+`@posthog/react-native-plugin` 3.0 and later requires React Native 0.75 or later and, on every iOS dependency path, Xcode 26 or later and an iOS 15 or later deployment target (macOS 11 or later for React Native macOS apps). See [Upgrading to `@posthog/react-native-plugin` 3.0](#upgrading-to-posthogreact-native-plugin-30).
+
+Then choose one iOS dependency path:
 
 | Path | Requirements | What it resolves |
 | --- | --- | --- |
-| CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin and `posthog-ios`. This remains the default path. |
-| CocoaPods with `posthog-ios` through Swift Package Manager | React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. |
-| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later, and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
+| CocoaPods | A React Native project that uses CocoaPods | CocoaPods resolves the plugin. From `@posthog/react-native-plugin` 3.0, Swift Package Manager resolves `posthog-ios`. In earlier versions, CocoaPods resolves it. This remains the default path. |
+| CocoaPods with `posthog-ios` through Swift Package Manager | `@posthog/react-native-plugin` 2.x only. React Native 0.75 or later and a CocoaPods project with dynamic frameworks | CocoaPods resolves the plugin. Swift Package Manager resolves `posthog-ios`. From 3.0, the CocoaPods path does this by default. |
+| Full Swift Package Manager | Verified with an iOS-only React Native 0.87.1 app and React Native Community CLI 20.2.0.<br/><br/>Requires `@posthog/react-native-plugin` 2.4.0 or later, Xcode 16 or later (Xcode 26 or later for plugin 3.0 and later), and an iOS 15.1 or later app deployment target. | React Native's experimental Swift Package Manager integration resolves the plugin and `posthog-ios`. This path does not use CocoaPods. |
 
 This verification does not cover Expo or other React Native versions. Use CocoaPods or the hybrid path unless you validate the full Swift Package Manager path for your configuration.
 
@@ -53,9 +57,11 @@ cd ios
 pod install
 ```
 
-The plugin podspec adds `posthog-ios` as a CocoaPods dependency. You do not need to add `posthog-ios` separately.
+The plugin podspec adds `posthog-ios` for you. You do not need to add `posthog-ios` separately. From `@posthog/react-native-plugin` 3.0, the podspec adds it through Swift Package Manager with React Native's `spm_dependency` helper. Static libraries, static frameworks and dynamic frameworks all work. Earlier versions add it as a CocoaPods dependency.
 
 #### CocoaPods with `posthog-ios` through Swift Package Manager
+
+This path applies to `@posthog/react-native-plugin` 2.x only. From 3.0, the CocoaPods path already resolves `posthog-ios` through Swift Package Manager and the plugin ignores `posthog.useSpm`.
 
 Add the following property to `ios/Podfile.properties.json`:
 
@@ -92,7 +98,7 @@ npx react-native spm add --deintegrate --yes
 
 The `--deintegrate` option removes the complete CocoaPods integration from the iOS project. React Native then finds the plugin's `ios/Package.swift` manifest. Swift Package Manager resolves the plugin and `posthog-ios`. Do not run `pod install` for this path.
 
-PostHog CI verifies this path with the configuration in the requirements table. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. The CocoaPods and hybrid paths keep the plugin podspec's iOS 13 minimum.
+PostHog CI verifies this path with the configuration in the requirements table. The verified app sets its deployment target to iOS 15.1. The plugin package manifest has a separate iOS 15 minimum. On the CocoaPods and hybrid paths, the plugin podspec's minimum is iOS 15 from `@posthog/react-native-plugin` 3.0, and iOS 13 in earlier versions.
 
 <DetailSetUpReverseProxy />
 
@@ -696,6 +702,46 @@ const MyComponent = () => {
     }, [])
 }
 ```
+
+## Upgrading to `@posthog/react-native-plugin` 3.0
+
+`@posthog/react-native-plugin` 3.0 uses `posthog-ios` 4.0. For before-and-after examples and a checklist, see the [migration guide](https://github.com/PostHog/posthog-js/blob/main/packages/react-native-plugin/MIGRATION.md). The plugin requires:
+
+- React Native 0.75 or later
+- Xcode 26 or later, on every iOS dependency path
+- An iOS 15 or later deployment target, and macOS 11 or later for React Native macOS apps
+
+On iOS, the plugin now always resolves `posthog-ios` through Swift Package Manager:
+
+- Remove `"posthog.useSpm"` from `ios/Podfile.properties.json` if you set it. The plugin no longer reads it.
+- The plugin no longer needs `use_frameworks! :linkage => :dynamic`. Keep it only if another dependency needs it.
+- Remove the legacy `posthog-react-native-session-replay` package if your app still depends on it. It pulls in `posthog-ios` 3.x, and the plugin uses 4.x.
+- Remove these Podfile settings if you use them, because `pod install` now fails with them: `:generate_multiple_pod_projects => true`, `:deduplicate_targets => false`, and targets that use the plugin with different `platform` or `use_frameworks!` settings.
+- Make sure build machines can reach `https://github.com/PostHog/posthog-ios.git`, because Xcode now fetches `posthog-ios` from there.
+- If your app target has `import PostHog`, check that it still compiles. React Native's helper adds the package only to the plugin's pod target. This case isn't tested, but if the import no longer resolves, add `posthog-ios` to your app target as a Swift package with a compatible version.
+- If a custom dSYM upload script calls `${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh`, change it to `${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh`. The `uploadNativeSymbols` build phase from the Expo config plugin already checks both paths.
+
+Apps that use the plugin only through `posthog-react-native` need no code changes. If your code calls the plugin directly:
+
+- Call `setup()` instead of the removed `start()` method. `setup()` takes three arguments and reads the replay settings from `pluginConfig.sessionReplay`. Replay starts only when `sessionReplay.enabled` is `true`, which defaults to `false`:
+
+  ```ts
+  // Before
+  start(sessionId, sdkOptions, sdkReplayConfig, decideReplayConfig)
+
+  // After
+  setup(sessionId, sdkOptions, {
+    sessionReplay: { enabled: true, sdkReplayConfig, decideReplayConfig },
+  })
+  ```
+
+- Pass `throttleDelayMs` instead of `iOSdebouncerDelayMs` or `androidDebouncerDelayMs`, which the plugin no longer reads. `posthog-react-native` still maps these deprecated options to `throttleDelayMs`.
+
+On iOS, native uploads (session replay and native crash reports) pause while cellular data is turned off for your app, instead of sending requests that fail.
+
+The experimental iOS session replay option `sessionReplayConfig.screenshotModeBackgroundCapture` no longer has an effect, because `posthog-ios` 4.0 removes it.
+
+Session replay records only masked screenshots on iOS and Android, because `posthog-ios` 4.0 and `posthog-android` 4.0 remove wireframe capture. The plugin already forced screenshot mode, so your recordings don't change. If native code in your app sets `screenshotMode` (iOS) or `screenshot` (Android), remove it, because it no longer compiles.
 
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
