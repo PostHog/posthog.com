@@ -1583,6 +1583,10 @@ export const handbookSidebar = [
                         name: 'Analyzing customer issues',
                         url: '/handbook/customer-success/using-ai-to-analyze-customer-issues',
                     },
+                    {
+                        name: 'Team lead tooling',
+                        url: '/handbook/customer-success/team-lead-tooling',
+                    },
                 ],
             },
             {
