@@ -88,6 +88,9 @@ export const langfuse = {
         },
         product_analytics: {
             available: false,
+            features: {
+                autocapture: false,
+            },
         },
         web_analytics: {
             available: false,
@@ -110,11 +113,25 @@ export const langfuse = {
         cdp: {
             available: false,
         },
+        logs: {
+            available: false,
+        },
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
             eu_hosting: true,
             open_source: true,
+        },
+        pricing: {
+            // https://langfuse.com/pricing
+            transparent_pricing: true,
+        },
+        tools: {
+            // Halo in-app agent: https://langfuse.com/security/ai-features
+            ai_assistant: true,
         },
     },
 }

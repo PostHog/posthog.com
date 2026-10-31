@@ -380,6 +380,10 @@
             "destination": "/compare/best-sentry-alternatives"
         },
         {
+            "source": "/blog/posthog-alternatives",
+            "destination": "/compare/best-posthog-alternatives"
+        },
+        {
             "source": "/blog/posthog-vs-growthbook",
             "destination": "/compare/posthog-vs-growthbook"
         },
