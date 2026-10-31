@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   PostHog 1.34.0 focuses on supporting collaboration. New features include a new
   default homepage for projects, smart names for all insights, an entire Data

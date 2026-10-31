@@ -12,6 +12,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/harinezumi_943e9cc56e.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Explainers

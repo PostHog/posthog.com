@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/haha3_c997bbaf98.png
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
   - Inside PostHog

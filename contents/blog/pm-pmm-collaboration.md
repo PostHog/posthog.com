@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Template_cover_15_8cf985674a.jpg
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
     - Marketing

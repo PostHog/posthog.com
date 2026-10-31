@@ -13,6 +13,8 @@ featuredVideo: 'https://www.youtube-nocookie.com/embed/TCyCryTiTbQ'
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-array-blog.png
 featuredImageType: full
+ogImage: generated
+
 ---
 
 Want to know more about what we're up to? [Subscribe to our new newsletter](https://newsletter.posthog.com/subscribe), which we send once every two weeks!

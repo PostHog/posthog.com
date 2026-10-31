@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/f_webp,h_2040,w_3627,c_fill,g_auto,q_auto/math_meme_8b0013533e
 featuredImageType: full
+ogImage: generated
 tags:
     - Engineering
     - AI

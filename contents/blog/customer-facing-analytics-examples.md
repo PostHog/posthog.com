@@ -9,6 +9,7 @@ author:
     - lizzie-epton
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/steal_86ee6fe7e4.png
+ogImage: generated
 category: General
 tags:
     - Endpoints

@@ -2,6 +2,7 @@
 date: "2026-07-31"
 title: "Replay Vision watches the session recordings you never will"
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/Frame_144166_1_661eb2706f.png
+ogImage: generated
 author:
   - sara-miteva
 rootPage: /blog

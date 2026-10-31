@@ -12,6 +12,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/cookieless-analytics.png
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
   - Privacy

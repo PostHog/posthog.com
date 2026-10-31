@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
+ogImage: generated
 tags:
   - Product analytics
   - Product engineers

@@ -5,6 +5,7 @@ author:
   - sara-miteva
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/this_is_fine_6336efb0ae.jpg
+ogImage: generated
 rootPage: /blog
 sidebar: Blog
 showTitle: true

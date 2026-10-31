@@ -288,6 +288,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         title
+                        ogImage
                         featuredImage {
                             publicURL
                         }
@@ -344,22 +345,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         featuredImage {
                             publicURL
                         }
-                    }
-                }
-            }
-            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        featuredImage {
-                            publicURL
-                        }
-                        logo {
-                            publicURL
-                        }
-                        title
                     }
                 }
             }

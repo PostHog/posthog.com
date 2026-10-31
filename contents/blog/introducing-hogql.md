@@ -15,6 +15,8 @@ tags:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
 featuredImageType: full
+ogImage: generated
+
 ---
 
 Today, we're releasing a major new feature as a public beta: the ability to directly query your PostHog data [using SQL](/blog/sql-for-analytics). We call this [HogQL](/docs/product-analytics/hogql) because... hedgehogs love SQL, probably?

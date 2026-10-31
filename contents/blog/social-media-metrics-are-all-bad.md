@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/social_article_d1fa9195ee.png
 featuredImageType: full
+ogImage: generated
 category: Blog
 tags:
   - Marketing

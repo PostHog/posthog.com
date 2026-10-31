@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-28-0.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   Fully revamped Paths experience enables you to better explore what actions
   your users take. New features include multivariate feature flags, private

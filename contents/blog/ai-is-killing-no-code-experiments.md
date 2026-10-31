@@ -4,6 +4,7 @@ date: 2026-03-27
 author: ["leonhard-prinz"]
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/robocop_8939115965.png
+ogImage: generated
 tags:
   - Experiments
   - Growth

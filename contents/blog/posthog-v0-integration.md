@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/v0_cover_62a4b51598.png
 featuredImageType: full
+ogImage: generated
 category: Product
 tags:
     - Product

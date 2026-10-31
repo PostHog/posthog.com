@@ -8,6 +8,7 @@ sidebar: Blog
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/stop_being_the_code_review_bottleneck_hero_a734a37558.png
 featuredImageType: full
+ogImage: generated
 showTitle: true
 hideAnchor: true
 category: Engineering

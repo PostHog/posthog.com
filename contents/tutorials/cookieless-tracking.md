@@ -4,6 +4,7 @@ sidebar: Docs
 showTitle: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/cookieless-tracking.png
+ogImage: generated
 featuredTutorial: false
 date: 2025-08-27
 author:

@@ -6,7 +6,7 @@ showTitle: true
 
 ## Overview
 
-Blog post images are created in <PrivateLink url="https://www.figma.com/file/nG3Iil1pLraQ6VTqhsk2FT/Blog?node-id=470%3A2064">Figma</PrivateLink>. The image appears at the top of each blog post, above the headline. It's also used as the [Open Graph image](/blog/dynamic-open-graph-images).
+Blog post images are created in <PrivateLink url="https://www.figma.com/file/nG3Iil1pLraQ6VTqhsk2FT/Blog?node-id=470%3A2064">Figma</PrivateLink>. The image appears at the top of each blog post, above the headline. It's also the Open Graph image. If the art has no headline, set `ogImage: generated` in the post frontmatter so the site draws the title on top.
 
 ### Dimensions
 

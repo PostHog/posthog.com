@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/using-posthog/posthog-features.jpg
 featuredImageType: full
+ogImage: generated
 author:
   - andy-vandervell
 category: Using PostHog

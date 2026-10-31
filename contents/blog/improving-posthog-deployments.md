@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/simpler-self-deployments.png
 featuredImageType: full
+ogImage: generated
 author:
   - harry-waye
   - guido-iaquinti

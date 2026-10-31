@@ -8,6 +8,8 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/blog_onboarding.jpg
 featuredImageType: full
+ogImage: generated
+
 ---
 
 > **Updated July 26, 2024:** Added information about Onboarding 6.0

@@ -3,6 +3,7 @@ date: 2025-01-26
 title: 'Why you should use a data warehouse'
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Session_Summaries_escher_draft_ff034af63d.png
+ogImage: generated
 author:
     - joe-martin
 featuredImageType: full
