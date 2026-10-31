@@ -1,0 +1,10 @@
+{
+    "client_id": "https://posthog.com/.well-known/oauth/hog/client-metadata.json",
+    "client_name": "hog CLI for PostHog",
+    "logo_uri": "https://posthog.com/.well-known/oauth/hog/logo.png",
+    "grant_types": ["urn:ietf:params:oauth:grant-type:device_code", "refresh_token"],
+    "token_endpoint_auth_method": "none",
+    "com.posthog": {
+        "step_up_authorization": true
+    }
+}
