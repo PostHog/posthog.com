@@ -46,37 +46,36 @@ const noteStyles = [
 export default function Testimonials(): JSX.Element {
     return (
         <section id="testimonials" className="my-12">
-            <div className="grid items-center gap-4 @3xl/reader-content:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] @3xl/reader-content:gap-8">
-                <div className="flex flex-col items-start gap-4">
-                    <header className="mb-2">
-                        <h2 className="m-0 w-full text-2xl font-bold leading-tight">
-                            Real things real people really said about PostHog AI{' '}
-                            <span className="text-secondary">(really!)</span>
-                        </h2>
-                    </header>
-
-                    <div className="w-24 shrink-0 @3xl/reader-content:w-36">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/trenchcoat_hog_a3b8775b73.png"
-                            alt=""
-                            loading="lazy"
-                            width={320}
-                            imgClassName="w-full"
-                        />
+            <div className="grid items-center gap-8 @3xl/reader-content:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] @3xl/reader-content:gap-12">
+                <div className="flex flex-col items-start gap-5">
+                    <h2 className="m-0 w-full text-2xl font-bold leading-tight">
+                        Real things real people really said about PostHog AI{' '}
+                        <span className="text-secondary">(really!)</span>
+                    </h2>
+                    <div className="flex items-end gap-4">
+                        <div className="w-28 shrink-0 @3xl/reader-content:w-36">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/trenchcoat_hog_a3b8775b73.png"
+                                alt=""
+                                loading="lazy"
+                                width={320}
+                                imgClassName="w-full"
+                            />
+                        </div>
+                        <p className="mb-3 font-comic text-sm italic leading-snug text-secondary">
+                            Pssst, are you Post-It{' '}
+                            <Link
+                                to="/academy"
+                                state={{ newWindow: true }}
+                                className="font-normal underline decoration-dotted underline-offset-2 hover:opacity-100"
+                            >
+                                certified
+                            </Link>
+                            ?
+                        </p>
                     </div>
-                    <p className="m-0 text-left text-xs leading-snug text-secondary">
-                        Pssst, are you Post-It{' '}
-                        <Link
-                            to="/academy"
-                            state={{ newWindow: true }}
-                            className="font-normal underline decoration-dotted underline-offset-2 opacity-70 hover:opacity-100"
-                        >
-                            certified
-                        </Link>
-                        ?
-                    </p>
                 </div>
-                <div className="min-w-0">
+                <div className="mx-auto w-full min-w-0">
                     <CardStackCarousel
                         count={quotes.length}
                         ariaLabel="What people say about PostHog AI"
@@ -89,7 +88,7 @@ export default function Testimonials(): JSX.Element {
                                     className={`m-0 flex aspect-square w-full flex-col justify-between gap-3 p-5 text-black shadow-md ${style.color}`}
                                 >
                                     <blockquote
-                                        className={`m-0 flex flex-1 items-center border-0 p-0 text-sm font-normal not-italic leading-snug ${style.copy}`}
+                                        className={`m-0 flex flex-1 items-center border-0 p-0 font-comic text-base font-normal not-italic leading-snug ${style.copy}`}
                                     >
                                         “{quotes[index].text}”
                                     </blockquote>

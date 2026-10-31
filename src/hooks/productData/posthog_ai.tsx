@@ -60,7 +60,7 @@ export const posthog_ai = {
     seo: {
         title: 'PostHog AI – The AI agent for your product data',
         description:
-            'PostHog AI answers questions and does the work with your events, recordings, errors, logs, and warehouse data. Use it in PostHog, Slack, your coding agent, or your terminal.',
+            'PostHog AI answers questions and does the work with your events, recordings, errors, logs, and warehouse data. Use it in PostHog and Slack, or connect your coding agent through MCP.',
     },
     overview: {
         title: 'Ask questions about how people use your product',

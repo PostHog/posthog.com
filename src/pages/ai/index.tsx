@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { graphql } from 'gatsby'
-import { useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import ReaderView from 'components/ReaderView'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import { Accordion } from 'components/RadixUI/Accordion'
 import TabbedCarousel from 'components/TabbedCarousel'
-import Tabs from 'components/RadixUI/Tabs'
 import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import SlicedHog from 'components/SlicedHog'
+import SlotMachineText from 'components/SlotMachineText'
 import ContextDiagram from 'components/PostHogAI/ContextDiagram'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
@@ -29,18 +28,24 @@ import { SlidePausedContext } from 'components/Home/HeroCarousel/autoAdvanceGate
 import AskMax from 'components/AskMax'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import PlatformInstall, { cliInstallSchema } from 'components/PlatformInstall'
-import { useSelfDrivingTemplates } from 'components/SelfDrivingInbox'
-import { buildScoutDeepLink } from 'components/SelfDrivingInbox/scoutDeepLink'
-import { displayLabel, formatWeek, getPeriods, weekShares, type LeaderboardRow } from 'components/MCPLeaderboard/data'
 import useProduct from 'hooks/useProduct'
 import usePostHog from 'hooks/usePostHog'
 import { LOGOS, type LogoKey } from 'constants/logos'
-import { IconArrowRight, IconCheck, IconCursorClick, IconEye, IconPencil, IconSparkles } from '@posthog/icons'
+import {
+    IconArrowRight,
+    IconCheck,
+    IconCursorClick,
+    IconEye,
+    IconNotification,
+    IconPencil,
+    IconSparkles,
+    IconTelescope,
+} from '@posthog/icons'
+import posthogIcon from '../../images/posthog-icon-white.svg'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const APP_AI_URL = 'https://app.posthog.com/ai'
 const CONNECT_SLACK_URL = 'https://app.posthog.com/integrations/slack'
-const SCOUTS_URL = 'https://app.posthog.com/inbox/scouts'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -48,7 +53,7 @@ type IconComponent = React.ComponentType<{ className?: string }>
 const askUrl = (prompt: string) => `https://app.posthog.com/#panel=max:!${encodeURIComponent(prompt)}`
 
 const Highlight = ({ children }: { children: React.ReactNode }) => (
-    <span className="whitespace-nowrap bg-highlight p-0.5 font-bold text-red dark:text-yellow">{children}</span>
+    <span className="whitespace-nowrap bg-blue/10 p-0.5 font-bold text-blue">{children}</span>
 )
 
 type IconItem = {
@@ -99,35 +104,78 @@ const SignupCTAs = () => (
 
 const heroBullets = [
     'Query product behavior and connected business data',
-    'Create insights, investigate issues, and prepare changes',
-    'Give your coding agents the same product context',
+    'Create flags, dashboards, surveys, and alerts',
+    'Investigate errors and summarize session replays',
 ]
 
-const HeroSection = () => (
-    <section className="not-prose w-full border-b border-primary pb-8">
-        <div className="grid items-center gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-10">
-            <div className="order-2 min-w-0 @3xl/reader-content:order-1">
-                <h1 className="!mt-0 mb-4 text-3xl font-bold leading-tight @xl/reader-content:text-4xl">
-                    The AI agent that already has <Highlight>your data</Highlight>
-                </h1>
-                <p className="mt-0 mb-4 text-lg">
-                    Your events, replays, errors, and connected business data already live in PostHog. Ask a product
-                    question, inspect the evidence, and use the answer to decide what to build. Skip the schema
-                    briefing.
-                </p>
-                <CheckList items={heroBullets} className="mb-6 space-y-0.5 text-base" />
-                <SignupCTAs />
+const HeroSection = () => {
+    const reducedMotion = useReducedMotion()
+    return (
+        <section className="not-prose w-full border-b border-primary pb-8">
+            <div className="grid items-start gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-10">
+                <div className="order-2 min-w-0 @3xl/reader-content:order-1">
+                    <div className="mb-4 border-b border-primary pb-3">
+                        <SlotMachineText
+                            className="text-xl font-bold tracking-tight @xl/reader-content:text-2xl"
+                            words={[
+                                'analyze',
+                                'replay',
+                                'debug',
+                                'instrument',
+                                'flag',
+                                'experiment',
+                                'survey',
+                                'query',
+                                'automate',
+                                'monitor',
+                                'support',
+                                'ship',
+                                'code',
+                            ]}
+                            holdDuration={1200}
+                            wordClassName="text-red dark:text-yellow"
+                            prefix={
+                                <span className="inline-flex items-center gap-2">
+                                    <span>Let</span>
+                                    <img
+                                        src={posthogIcon}
+                                        alt=""
+                                        aria-hidden
+                                        className="size-5 rounded-md @xl/reader-content:size-6"
+                                    />
+                                    <span>PostHog</span>
+                                </span>
+                            }
+                        />
+                    </div>
+                    <h1 className="!mt-0 mb-4 text-3xl font-bold leading-tight @xl/reader-content:text-4xl">
+                        The agent that already understands <Highlight>your context</Highlight>
+                    </h1>
+                    <p className="mt-0 mb-4 text-lg">
+                        PostHog AI answers product questions from your own events, replays, errors, logs, and warehouse
+                        tables (and shows the evidence). It lives in PostHog and Slack. Your coding agent gets the same
+                        data through MCP.
+                    </p>
+                    <CheckList items={heroBullets} className="mb-6 space-y-0.5 text-base" />
+                    <SignupCTAs />
+                </div>
+                <motion.div
+                    className="order-1 mx-auto w-full max-w-72 self-center @3xl/reader-content:order-2 @3xl/reader-content:max-w-[400px]"
+                    animate={reducedMotion ? undefined : { y: [0, -6, 0] }}
+                    transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
+                >
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/context_hog_32f1181f4a.png"
+                        alt="A hedgehog floating in a ring of dashboards, charts, maps, and logs"
+                        width={800}
+                        className="w-full"
+                        imgClassName="w-full"
+                    />
+                </motion.div>
             </div>
-            <CloudinaryImage
-                src="https://res.cloudinary.com/dmukukwp6/image/upload/context_hog_32f1181f4a.png"
-                alt="A hedgehog floating in a ring of dashboards, charts, maps, and logs"
-                width={800}
-                className="order-1 mx-auto w-full max-w-72 @3xl/reader-content:order-2 @3xl/reader-content:max-w-[400px]"
-                imgClassName="w-full"
-            />
-        </div>
-    </section>
-)
+        </section>
+    )
+}
 
 const contextProducts = [
     'product_analytics',
@@ -144,14 +192,27 @@ const contextProducts = [
     'support',
 ]
 
-const syncedSources: { key: LogoKey; name: string }[] = [
-    { key: 'stripe', name: 'Stripe' },
-    { key: 'hubspot', name: 'HubSpot' },
-    { key: 'salesforce', name: 'Salesforce' },
-    { key: 'zendesk', name: 'Zendesk' },
-    { key: 'postgres', name: 'Postgres' },
-    { key: 'snowflake', name: 'Snowflake' },
+const syncedSources: { key: LogoKey; name: string; to: string }[] = [
+    { key: 'stripe', name: 'Stripe', to: '/docs/data-pipelines/sources/stripe' },
+    { key: 'hubspot', name: 'HubSpot', to: '/docs/data-pipelines/sources/hubspot' },
+    { key: 'salesforce', name: 'Salesforce', to: '/docs/data-pipelines/sources/salesforce' },
+    { key: 'zendesk', name: 'Zendesk', to: '/docs/data-pipelines/sources/zendesk' },
+    { key: 'postgres', name: 'Postgres', to: '/docs/data-pipelines/sources/postgres' },
+    { key: 'snowflake', name: 'Snowflake', to: '/docs/data-pipelines/sources/snowflake' },
 ]
+
+const semanticDefinitions = [
+    'MRR',
+    'Active users',
+    'Activation rate',
+    'Churn',
+    'Conversion rate',
+    'Net revenue retention',
+    'Certified tables',
+    'Reviewed joins',
+]
+
+const subtleLinkClass = 'flex items-center gap-2 text-inherit !no-underline hover:!underline'
 
 const ContextLayerSection = () => {
     const products = useProduct()
@@ -166,11 +227,11 @@ const ContextLayerSection = () => {
             <SectionHeader>
                 <div className="relative">
                     <h2 className="m-0 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                        The answers rarely live in one table
+                        More data in, better answers out
                     </h2>
-                    <p className="mb-0 mt-3 max-w-2xl text-base text-secondary @3xl/reader-content:mr-36">
-                        Each tool adds a different part of the picture. Connect more of your stack, and PostHog AI has
-                        more evidence for each answer.
+                    <p className="mb-0 mt-3 text-base text-secondary @3xl/reader-content:mr-36">
+                        Events show what people did. Errors and logs show what broke. Payments and tickets show what it
+                        meant for the customer. Connect more of your stack to capture more context to query.
                     </p>
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/curious_hog_d91b1a8b89.png"
@@ -187,9 +248,15 @@ const ContextLayerSection = () => {
                         <h3 className="mb-3 mt-0 text-base font-bold">Already in PostHog</h3>
                         <ul className="m-0 grid list-none gap-x-3 gap-y-2 p-0 text-sm @sm/reader-content:grid-cols-2">
                             {sources.map((product) => (
-                                <li key={product.handle} className="flex items-center gap-2">
-                                    <ProductIcon product={product} className="size-5 shrink-0" />
-                                    {product.name}
+                                <li key={product.handle}>
+                                    <Link
+                                        to={`/${product.slug}`}
+                                        state={{ newWindow: true }}
+                                        className={subtleLinkClass}
+                                    >
+                                        <ProductIcon product={product} className="size-5 shrink-0" />
+                                        {product.name}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -197,13 +264,15 @@ const ContextLayerSection = () => {
                     <div className="border-t border-primary pt-4">
                         <h3 className="mb-2 mt-0 text-base font-bold">Plus your warehouse sources</h3>
                         <p className="mb-3 mt-0 text-sm text-secondary">
-                            Connect payments, CRM, support, and database tables. Query them alongside user behavior.
+                            Connect payments, CRM, support, and database tables.
                         </p>
                         <ul className="m-0 grid list-none grid-cols-2 gap-x-3 gap-y-2 p-0 text-sm @sm/reader-content:grid-cols-3">
-                            {syncedSources.map(({ key, name }) => (
-                                <li key={key} className="flex items-center gap-2">
-                                    <img src={LOGOS[key]} alt="" className="size-4 object-contain" />
-                                    {name}
+                            {syncedSources.map(({ key, name, to }) => (
+                                <li key={key}>
+                                    <Link to={to} state={{ newWindow: true }} className={subtleLinkClass}>
+                                        <img src={LOGOS[key]} alt="" className="size-4 object-contain" />
+                                        {name}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -221,8 +290,8 @@ const ContextLayerSection = () => {
                             And your code
                         </h3>
                         <p className="mb-3 mt-0 text-sm text-secondary">
-                            Connect GitHub so coding tasks can inspect your code alongside product data and user
-                            behavior. The stack trace has somewhere to go.
+                            Connect GitHub, and context can become a pull request. The agent works from your repo and
+                            the product data behind it.
                         </p>
                         <Link
                             to="/docs/libraries/github"
@@ -233,9 +302,11 @@ const ContextLayerSection = () => {
                         </Link>
                     </div>
                 </div>
-                <ContextDiagram />
+                <div className="min-w-0">
+                    <ContextDiagram />
+                    <Capabilities />
+                </div>
             </div>
-            <Capabilities />
             <div
                 id="semantic-layer"
                 className="relative mt-8 grid items-center gap-6 rounded-md border border-blue bg-blue/10 p-5 shadow-xl @xl/reader-content:p-7 @2xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] @3xl/reader-content:gap-8"
@@ -243,40 +314,22 @@ const ContextLayerSection = () => {
                 <div className="min-w-0">
                     <h3 className="m-0 flex items-center gap-2 text-xl font-bold @xl/reader-content:text-2xl">
                         <StickerServers className="size-8 shrink-0 -rotate-3" />
-                        Same question, same definition
+                        Semantics actually do matter
                     </h3>
                     <p className="my-3 text-sm text-secondary">
                         The semantic layer gives agents your approved metrics, trusted tables, and reviewed joins. Fewer
                         creative interpretations of “active user.”
                     </p>
-                    <dl className="my-5 grid gap-4 @lg/reader-content:grid-cols-3">
-                        <div className="min-w-0 border-t border-blue/30 pt-3">
-                            <dt className="text-sm font-bold">An approved metric</dt>
-                            <dd className="mb-0 ml-0 mt-1 text-xs text-secondary">
-                                First project within 7 days of signup
-                            </dd>
-                        </div>
-                        <div className="min-w-0 border-t border-blue/30 pt-3">
-                            <dt className="text-sm font-bold">A certified source</dt>
-                            <dd className="mb-0 ml-0 mt-1 text-xs text-secondary">
-                                <code className="break-words !bg-transparent !p-0 !text-xs">
-                                    stripe_
-                                    <wbr />
-                                    subscriptions
-                                </code>
-                            </dd>
-                        </div>
-                        <div className="min-w-0 border-t border-blue/30 pt-3">
-                            <dt className="text-sm font-bold">A reviewed join</dt>
-                            <dd className="mb-0 ml-0 mt-1 break-words text-xs text-secondary">
-                                <code className="break-words !bg-transparent !p-0 !text-xs">
-                                    orders.customer_id → <wbr />
-                                    stripe_customers.id
-                                </code>
-                            </dd>
-                        </div>
-                    </dl>
-                    <p className="mb-3 mt-0 text-xs text-secondary">Example definitions. Your team approves its own.</p>
+                    <ul className="my-5 flex list-none flex-wrap gap-2 p-0">
+                        {semanticDefinitions.map((name) => (
+                            <li
+                                key={name}
+                                className="rounded-full border border-blue/30 bg-primary/40 px-3 py-1 text-sm font-semibold"
+                            >
+                                {name}
+                            </li>
+                        ))}
+                    </ul>
                     <Link
                         to="/docs/semantic-layer"
                         state={{ newWindow: true }}
@@ -288,33 +341,7 @@ const ContextLayerSection = () => {
                 <div className="min-w-0">
                     <SlicedHog label="A hedgehog that opens into slices of product data" />
                     <p className="mb-0 mt-4 text-center text-xs text-secondary">
-                        Product context, with the lid off. Click to inspect.
-                    </p>
-                </div>
-            </div>
-            <div className="mt-6 grid gap-6 rounded-md border border-purple bg-purple/10 p-5 @xl/reader-content:grid-cols-2 @xl/reader-content:p-6">
-                <div>
-                    <h3 className="m-0 flex items-center gap-2 text-base font-bold">
-                        <StickerMindMap className="size-6 shrink-0 rotate-3" />
-                        <Link to="/docs/posthog-ai/edit-memory" state={{ newWindow: true }}>
-                            Memory
-                        </Link>
-                    </h3>
-                    <p className="mb-0 mt-1 text-sm text-secondary">
-                        Save product background across conversations. Explain what "activated" means once. It was a long
-                        meeting.
-                    </p>
-                </div>
-                <div>
-                    <h3 className="m-0 flex items-center gap-2 text-base font-bold">
-                        <StickerRobot className="size-6 shrink-0 -rotate-3" />
-                        <Link to="/docs/skills" state={{ newWindow: true }}>
-                            Skills
-                        </Link>
-                    </h3>
-                    <p className="mb-0 mt-1 text-sm text-secondary">
-                        Give repeat tasks reusable instructions: what to check, which tools to use, and what the result
-                        must contain.
+                        Slice it any way you like. MRR still means one thing.
                     </p>
                 </div>
             </div>
@@ -322,16 +349,45 @@ const ContextLayerSection = () => {
     )
 }
 
+const SkillsAndMemory = () => (
+    <div className="my-12 grid gap-6 rounded-md border border-purple bg-purple/10 p-5 @xl/reader-content:grid-cols-2 @xl/reader-content:p-6">
+        <div>
+            <h3 className="m-0 flex items-center gap-2 text-base font-bold">
+                <StickerRobot className="size-6 shrink-0 -rotate-3" />
+                <Link to="/docs/skills" state={{ newWindow: true }}>
+                    Skills
+                </Link>
+            </h3>
+            <p className="mb-0 mt-1 text-sm text-secondary">
+                Give repeat tasks reusable instructions: what to check, which tools to use, and what the result must
+                contain.
+            </p>
+        </div>
+        <div>
+            <h3 className="m-0 flex items-center gap-2 text-base font-bold">
+                <StickerMindMap className="size-6 shrink-0 rotate-3" />
+                <Link to="/docs/posthog-ai/edit-memory" state={{ newWindow: true }}>
+                    Memory
+                </Link>
+            </h3>
+            <p className="mb-0 mt-1 text-sm text-secondary">
+                Save product background across conversations. Explain what "activated" means once. It was a long
+                meeting.
+            </p>
+        </div>
+    </div>
+)
+
 const useCases = [
     {
         title: 'Explain the graph everyone is staring at',
         handle: 'product_analytics',
-        prompt: 'Why did checkout conversion drop on Tuesday? Check the funnel, errors, and replays.',
+        prompt: 'How did usage change this week compared to last week? Check errors and replays for a cause.',
     },
     {
         title: 'Skip to the part where they got stuck',
         handle: 'session_replay',
-        prompt: 'Find sessions where users got stuck during onboarding.',
+        prompt: 'Find sessions with rage clicks or errors, and summarize what the users were trying to do.',
     },
     {
         title: 'Find bugs with an audience',
@@ -341,17 +397,17 @@ const useCases = [
     {
         title: 'Read the feedback pile',
         handle: 'surveys',
-        prompt: "Group this month's survey feedback into themes. Show the source responses.",
+        prompt: 'Summarize my survey responses from the last 30 days by theme, with example quotes.',
     },
     {
         title: 'Make an opinion testable',
         handle: 'experiments',
-        prompt: 'Prepare an onboarding experiment with a conversion metric and a flag.',
+        prompt: 'Find a high-traffic page and suggest an A/B test for it. Then draft the experiment.',
     },
     {
         title: 'Retire the dashboard request',
         handle: 'dashboards',
-        prompt: 'Build a dashboard for onboarding retention.',
+        prompt: 'Build a dashboard with daily active users, top pages, and retention.',
     },
 ]
 
@@ -366,37 +422,51 @@ const PromptsSection = (): JSX.Element => {
                         <StickerMicroscope className="size-8 shrink-0 -rotate-6" />
                         Actual jobs for your AI
                     </h2>
-                    <p className="mb-0 mt-2 text-base text-secondary">Start with the work. The prompt is included.</p>
+                    <p className="mb-0 mt-2 text-base text-secondary">
+                        Prompts for the work PostHog AI can take off your plate.
+                    </p>
                 </div>
             </SectionHeader>
-            <div className="grid gap-x-7 @xl/reader-content:grid-cols-2">
+            <div className="grid gap-x-7 @xl/reader-content:grid-cols-2 [&>div:last-child]:border-b-0 @xl/reader-content:[&>div:nth-last-child(2)]:border-b-0">
                 {useCases.map(({ title, handle, prompt }) => {
                     const product = Array.isArray(products) ? products.find((item) => item.handle === handle) : null
                     return (
-                        <Link
-                            key={title}
-                            to={askUrl(prompt)}
-                            externalNoIcon
-                            contextMenu={false}
-                            className="group flex min-w-0 flex-col border-b border-primary py-5 !no-underline"
-                            onClick={() =>
-                                posthog?.capture('ai_prompt_selected', { group: title, prompt, placement: 'ai_page' })
-                            }
-                        >
+                        <div key={title} className="flex min-w-0 flex-col border-b border-primary py-5">
                             <div className="flex items-start gap-3">
                                 <ProductIcon product={product} className="mt-0.5 size-6 shrink-0" />
-                                <h3 className="m-0 text-lg font-bold group-hover:underline">{title}</h3>
+                                <h3 className="m-0 text-lg font-bold">{title}</h3>
                             </div>
                             <p className="mb-0 mt-2 text-sm font-normal text-secondary">
                                 “{prompt}”{' '}
-                                <span className="inline-flex items-center gap-1 whitespace-nowrap text-xs font-semibold text-primary">
+                                <Link
+                                    to={askUrl(prompt)}
+                                    externalNoIcon
+                                    contextMenu={false}
+                                    className="inline-flex items-center gap-1 whitespace-nowrap text-xs font-semibold text-primary underline"
+                                    onClick={() =>
+                                        posthog?.capture('ai_prompt_selected', {
+                                            group: title,
+                                            prompt,
+                                            placement: 'ai_page',
+                                        })
+                                    }
+                                >
                                     Try this prompt <IconArrowRight className="size-3" />
-                                </span>
+                                </Link>
                             </p>
-                        </Link>
+                        </div>
                     )
                 })}
             </div>
+            <p className="mb-0 mt-4 text-sm">
+                <Link
+                    to="/docs/posthog-ai/example-prompts"
+                    state={{ newWindow: true }}
+                    className="font-semibold underline"
+                >
+                    More example prompts in the docs →
+                </Link>
+            </p>
         </section>
     )
 }
@@ -447,7 +517,20 @@ const inAppChips: IconItem[] = [
     { Icon: IconCursorClick, color: 'text-green', name: 'Preview before writes' },
 ]
 
-const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoPause): TabbedCarouselTab[] => [
+const SurfaceFacts = ({ agent, controls }: { agent: string; controls: string }) => (
+    <dl className="my-4 space-y-1 text-sm">
+        <div>
+            <dt className="inline font-bold">Agent: </dt>
+            <dd className="m-0 inline text-secondary">{agent}</dd>
+        </div>
+        <div>
+            <dt className="inline font-bold">We control: </dt>
+            <dd className="m-0 inline text-secondary">{controls}</dd>
+        </div>
+    </dl>
+)
+
+const buildSurfaceTabs = (demo: DemoPause): TabbedCarouselTab[] => [
     {
         value: 'web',
         label: 'Web',
@@ -457,7 +540,7 @@ const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoP
         content: (
             <div className="grid items-center gap-6 rounded bg-primary p-4 pt-14 @3xl:grid-cols-2 @3xl:gap-8 @3xl:p-6 @3xl:pt-14">
                 <div className="@container min-w-0">
-                    <h2 className="mt-0 mb-3 text-2xl font-bold">A side panel on every page</h2>
+                    <h2 className="mt-0 mb-3 text-2xl font-bold">Ask about the page you are looking at</h2>
                     <div className="flow-root">
                         <div className="float-right ml-4 mb-3 w-24 @sm:w-28">
                             <CloudinaryImage
@@ -477,6 +560,10 @@ const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoP
                             code changes. The answer comes with evidence. You are allowed to be suspicious.
                         </p>
                     </div>
+                    <SurfaceFacts
+                        agent="PostHog AI."
+                        controls="All of it: the model, prompts, tools, and memory. We pick the model for each task."
+                    />
                     <IconChipRow items={inAppChips} />
                     <OSButton
                         asLink
@@ -502,13 +589,17 @@ const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoP
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
         content: (
             <div className="rounded p-4 pb-6 bg-primary">
-                <h2 className="mt-0 mb-2 pr-12 text-2xl font-bold">Give your coding agent a conscience</h2>
-                <div className="grid items-start gap-4 @lg:grid-cols-[minmax(0,1fr)_176px]">
+                <h2 className="mt-0 mb-2 pr-12 text-2xl font-bold">Headless PostHog use</h2>
+                <div className="grid items-center gap-4 @lg:grid-cols-[minmax(0,1fr)_16rem]">
                     <div className="min-w-0">
                         <p className="text-secondary text-sm">
                             Plug PostHog into Claude Code, Cursor, or Codex, so it asks "is anyone still on this flag?"
                             before it deletes the flag.
                         </p>
+                        <SurfaceFacts
+                            agent="Yours: Claude Code, Cursor, Codex, or any other MCP client."
+                            controls="The tools and the data they return. Your client picks the model and writes the prompts. A few tools call an LLM inside PostHog, and that usage bills as PostHog AI."
+                        />
                         <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
                         <p className="text-sm mt-4 mb-0">
                             <Link
@@ -524,10 +615,9 @@ const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoP
                         src="https://brand.posthog.com/hoggies/ichabod.svg"
                         alt=""
                         loading="lazy"
-                        className="mx-auto w-32 @lg:mt-3 @lg:w-full"
+                        className="mx-auto w-40 @lg:w-full"
                     />
                 </div>
-                <MCPWork data={data} />
             </div>
         ),
     },
@@ -544,6 +634,10 @@ const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoP
                     <code>posthog-cli api</code> puts the same tools in a shell command, for anything that has no MCP
                     client (including that cron job nobody talks about).
                 </p>
+                <SurfaceFacts
+                    agent="None. You run the commands, or your script or coding agent does."
+                    controls="The commands and the tools behind them."
+                />
                 <PlatformInstall schema={cliInstallSchema} />
                 <p className="text-sm mt-4 mb-0">
                     <Link to="/docs/cli" state={{ newWindow: true }} className="font-semibold">
@@ -566,6 +660,10 @@ const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoP
                     Tag <code>@PostHog</code> with a data question. Continue the investigation in the thread, with the
                     context of the conversation.
                 </p>
+                <SurfaceFacts
+                    agent="PostHog AI, in beta."
+                    controls="The same as the web app: the model, prompts, and tools. Slack supplies the thread as context."
+                />
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                     <CallToAction to={CONNECT_SLACK_URL} size="sm" externalNoIcon>
                         Connect Slack
@@ -586,269 +684,83 @@ const buildSurfaceTabs = (data: PageProps['data']['mcpLeaderboard'], demo: DemoP
     },
 ]
 
-const BackgroundWork = (): JSX.Element => {
-    const posthog = usePostHog()
-    const templates = useSelfDrivingTemplates()
-        .filter((template) => template.scout)
-        .slice(0, 3)
-    const tabs = [
-        {
-            value: 'scouts',
-            label: 'Scouts',
-            image: 'https://brand.posthog.com/hoggies/explorer.svg',
-            content: (
-                <>
-                    <h3 className="m-0 text-2xl font-bold leading-tight">
-                        A scout <span className="bg-yellow/20 px-0.5">remembers to ask</span>
-                    </h3>
-                    <p className="my-3 text-base text-secondary">
-                        Give it a question and a schedule. It investigates your product data and sends findings to Inbox
-                        or Slack.
-                    </p>
-                    <p className="my-4 text-sm text-secondary">
-                        Every morning: compare activation with the previous week. If it falls, inspect errors and
-                        replays. Send a report when there is something to investigate.
-                    </p>
-                    <p className="my-4 text-sm">The question you ask every Monday can stop being your Monday.</p>
-                    <div className="flex flex-wrap items-center gap-4 text-sm font-semibold">
-                        <OSButton asLink to={SCOUTS_URL} external size="sm" variant="primary">
-                            Build a scout
-                        </OSButton>
-                        <Link to="/docs/self-driving/scouts" state={{ newWindow: true }} className="underline">
-                            How scouts work
+const backgroundTools = [
+    {
+        label: 'Scouts',
+        Icon: IconTelescope,
+        color: 'text-red',
+        description: 'Agents that investigate your product on a schedule and file a report when something needs you.',
+        to: '/docs/self-driving/scouts',
+        cta: 'How scouts work',
+    },
+    {
+        label: 'Inbox',
+        Icon: IconNotification,
+        color: 'text-blue',
+        description: 'Reports ranked by impact, each with the evidence and a pull request ready to review.',
+        to: '/docs/self-driving/inbox',
+        cta: 'Reports and pull requests',
+    },
+    {
+        label: 'Replay Vision',
+        Icon: IconEye,
+        color: 'text-yellow',
+        description: 'Scanners that watch your session replays for you and turn what they see into data you can query.',
+        to: '/docs/replay-vision',
+        cta: 'How Replay Vision works',
+    },
+]
+
+const BackgroundWork = (): JSX.Element => (
+    <section id="background-work" className="my-12">
+        <header>
+            <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
+                <StickerCoffee className="size-8 shrink-0 rotate-6" />
+                Useful while you're doing something else
+            </h2>
+            <p className="mb-0 mt-2 text-base text-secondary">
+                Agents that keep working when the chat window is closed.
+            </p>
+        </header>
+        <div className="not-prose mt-6 grid gap-4 @3xl/reader-content:grid-cols-3">
+            {backgroundTools.map(({ label, Icon, color, description, to, cta }) => (
+                <div
+                    key={label}
+                    className="flex min-w-0 flex-col overflow-hidden rounded-md border border-primary bg-primary"
+                >
+                    <div className="flex flex-1 flex-col p-5">
+                        <h3 className="m-0 flex items-center gap-2 text-lg font-bold leading-tight">
+                            <Icon className={`size-6 shrink-0 ${color}`} />
+                            {label}
+                        </h3>
+                        <p className="mb-4 mt-2 text-sm text-secondary">{description}</p>
+                        <Link to={to} state={{ newWindow: true }} className="mt-auto text-sm font-semibold underline">
+                            {cta} →
                         </Link>
                     </div>
-                    {templates.length > 0 && (
-                        <div className="mt-5 border-t border-yellow/30 pt-3">
-                            <p className="mb-2 mt-0 text-sm font-semibold">Or borrow one of ours</p>
-                            <ul className="m-0 list-none space-y-2 p-0 text-sm">
-                                {templates.map(({ url, templateTitle, templateShortTitle, scout }) => (
-                                    <li key={url}>
-                                        <Link
-                                            to={buildScoutDeepLink(scout)}
-                                            externalNoIcon
-                                            onClick={() =>
-                                                posthog?.capture('pocket_guide_interaction', {
-                                                    kind: 'add_scout_click',
-                                                    scout: scout?.name,
-                                                    placement: 'ai_page',
-                                                })
-                                            }
-                                        >
-                                            {templateShortTitle || templateTitle}{' '}
-                                            <IconArrowRight className="inline size-4" />
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                </>
-            ),
-        },
-        {
-            value: 'inbox',
-            label: 'Inbox',
-            image: 'https://brand.posthog.com/hoggies/reading.svg',
-            content: (
-                <>
-                    <h3 className="m-0 text-2xl font-bold leading-tight">
-                        Evidence arrives. <span className="bg-yellow/20 px-0.5">You decide what ships</span>
-                    </h3>
-                    <p className="my-3 text-base text-secondary">
-                        Related findings become reports, ranked by user impact and severity. Review the evidence and
-                        proposed pull requests in one place.
-                    </p>
-                    <ul className="my-4 list-none space-y-2 p-0 text-sm text-secondary">
-                        <li>Follow findings back to errors, replays, and product data</li>
-                        <li>Inspect the proposed code change</li>
-                        <li>Review and merge through your usual process</li>
-                    </ul>
-                    <p className="my-4 text-sm">The hedgehog can open the PR. It does not get your merge button.</p>
-                    <Link
-                        to="/docs/self-driving/inbox"
-                        state={{ newWindow: true }}
-                        className="text-sm font-semibold underline"
-                    >
-                        Follow work in Inbox →
-                    </Link>
-                </>
-            ),
-        },
-        {
-            value: 'replay-vision',
-            label: 'Replay Vision',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/binoculars_de6c3b3595.png',
-            content: (
-                <>
-                    <h3 className="m-0 text-2xl font-bold leading-tight">
-                        Replays, now with a <span className="bg-yellow/20 px-0.5">WHERE clause</span>
-                    </h3>
-                    <p className="my-3 text-base text-secondary">
-                        Tell a scanner what to look for. It turns recordings into structured observations you can query,
-                        chart, or use in an alert.
-                    </p>
-                    <p className="my-4 font-mono text-xs leading-relaxed">
-                        recording + events
-                        <br />
-                        → scanner
-                        <br />→ $recording_observed
-                    </p>
-                    <p className="my-4 text-sm text-secondary">
-                        Find repeated failed clicks on signup, group the observations by browser, then open the
-                        recordings to check them.
-                    </p>
-                    <Link
-                        to="/docs/replay-vision/observations"
-                        state={{ newWindow: true }}
-                        className="text-sm font-semibold underline"
-                    >
-                        Inspect an observation →
-                    </Link>
-                </>
-            ),
-        },
-        {
-            value: 'workflows',
-            label: 'Workflows',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png',
-            content: (
-                <>
-                    <h3 className="m-0 text-2xl font-bold leading-tight">
-                        Give the next step <span className="bg-yellow/20 px-0.5">an answer</span>
-                    </h3>
-                    <p className="my-3 text-base text-secondary">
-                        Start an AI task from an event, webhook, or schedule. Give it tools and skills, then pass its
-                        structured result to the next step.
-                    </p>
-                    <p className="my-4 font-mono text-xs leading-relaxed">
-                        event / webhook / schedule
-                        <br />
-                        → AI task + tools + skills
-                        <br />
-                        → structured result
-                        <br />→ next workflow step
-                    </p>
-                    <p className="my-4 text-sm text-secondary">
-                        PostHog access starts read-only. Full access is configurable.
-                    </p>
-                    <Link
-                        to="/docs/workflows/ai-tasks"
-                        state={{ newWindow: true }}
-                        className="text-sm font-semibold underline"
-                    >
-                        Build an AI workflow →
-                    </Link>
-                </>
-            ),
-        },
-    ]
-    return (
-        <section id="background-work" className="my-12">
-            <header>
-                <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                    <StickerCoffee className="size-8 shrink-0 rotate-6" />
-                    Useful while you're doing something else
-                </h2>
-                <p className="mb-0 mt-2 text-base text-secondary">
-                    Schedule an investigation, scan replays, or put an AI task in a workflow.
-                </p>
-            </header>
-            <Tabs.Root defaultValue="scouts" orientation="horizontal" className="not-prose mb-0 mt-6">
-                <Tabs.List
-                    aria-label="Background AI tools"
-                    className="grid w-full grid-cols-2 !p-0 !gap-1 @xl/reader-content:grid-cols-4"
-                >
-                    {tabs.map(({ value, label }) => (
-                        <Tabs.Trigger
-                            key={value}
-                            value={value}
-                            className="justify-center !rounded-b-none data-[state=active]:!bg-yellow/20"
-                        >
-                            {label}
-                        </Tabs.Trigger>
-                    ))}
-                </Tabs.List>
-                {tabs.map(({ value, content, image }) => (
-                    <Tabs.Content
-                        key={value}
-                        value={value}
-                        className="w-full overflow-hidden rounded-b-md border border-yellow bg-yellow/10"
-                    >
-                        <div className="grid items-center gap-5 p-5 @xl/reader-content:p-7 @3xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
-                            <div className="min-w-0">{content}</div>
-                            <div className="mx-auto aspect-square w-full max-w-64 @3xl/reader-content:max-w-xs">
-                                <img src={image} alt="" loading="lazy" className="h-full w-full object-contain" />
-                            </div>
-                        </div>
-                    </Tabs.Content>
-                ))}
-            </Tabs.Root>
-        </section>
-    )
-}
+                </div>
+            ))}
+        </div>
+    </section>
+)
 
-const MCPWork = ({ data }: { data: PageProps['data']['mcpLeaderboard'] }) => {
-    const rows = data?.rows ?? []
-    const week = getPeriods(rows, 'tool_category').pop()
-    const categories = week ? weekShares(rows, 'tool_category', week, 'calls_pct', { dropOther: true, limit: 6 }) : []
-    return (
-        <details className="mt-4 border-t border-primary pt-3 text-sm">
-            <summary className="cursor-pointer font-semibold">What are agents doing with PostHog?</summary>
-            {categories.length > 0 ? (
-                <>
-                    <p className="mb-3 text-xs text-secondary">
-                        Share of MCP tool calls · week of {week && formatWeek(week)}
-                    </p>
-                    <ul className="m-0 list-none space-y-3 p-0">
-                        {categories.map(({ label, value }) => (
-                            <li key={label}>
-                                <div className="mb-1 flex justify-between gap-2 text-sm">
-                                    <span title={label}>{displayLabel('tool_category', label)}</span>
-                                    <span className="tabular-nums">{value.toFixed(1)}%</span>
-                                </div>
-                                <div className="h-2 overflow-hidden rounded-sm bg-accent">
-                                    <div className="h-full bg-purple" style={{ width: `${value}%` }} />
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                    <p className="mb-2 mt-4 text-xs text-secondary">
-                        Top six categories, without the combined small groups. Shares cover all categories, so these
-                        rows may not add up to 100%. Excludes internal traffic.
-                    </p>
-                    <p className="my-2 text-xs text-secondary">
-                        Fetched at website build time
-                        {data?.fetchedAt ? `: ${new Date(data.fetchedAt).toISOString().slice(0, 10)}` : ''}. Tool calls
-                        are not completed tasks.
-                    </p>
-                </>
-            ) : (
-                <p className="text-sm text-secondary">Usage data is unavailable in this build.</p>
-            )}
-            <Link to="/mcp/leaderboard" state={{ newWindow: true }} className="text-sm font-semibold">
-                Inspect the full MCP leaderboard <IconArrowRight className="inline size-4" />
-            </Link>
-        </details>
-    )
-}
-
-const AccessSection = ({ data }: { data: PageProps['data']['mcpLeaderboard'] }): JSX.Element => {
+const AccessSection = (): JSX.Element => {
     const [demoPaused, setDemoPaused] = useState(false)
     const reducedMotion = useReducedMotion()
     return (
         <section id="access" className="my-12">
             <header className="mb-6">
                 <h2 className="m-0 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                    Your product context, where you work
+                    Your product data wherever you work
                 </h2>
                 <p className="mb-0 mt-2 text-base text-secondary">
-                    In PostHog, your terminal, your editor, or the thread that should have been a query.
+                    PostHog AI runs in PostHog and Slack. In your editor or terminal, your own agent reaches the same
+                    data through MCP and the CLI.
                 </p>
             </header>
             {/* 25 seconds, so the 20-second web demo can finish before the next slide */}
             <TabbedCarousel
-                tabs={buildSurfaceTabs(data, { paused: demoPaused, setPaused: setDemoPaused })}
+                tabs={buildSurfaceTabs({ paused: demoPaused, setPaused: setDemoPaused })}
                 slideDuration={25000}
                 paused={demoPaused || !!reducedMotion}
                 pauseOnFocus
@@ -927,16 +839,7 @@ const toAccordionItems = (faq: FaqEntry[]) =>
         ),
     }))
 
-type PageProps = {
-    data: {
-        mcpLeaderboard: {
-            rows: LeaderboardRow[]
-            fetchedAt: string | null
-        } | null
-    }
-}
-
-export default function PostHogAIPage({ data }: PageProps): JSX.Element {
+export default function PostHogAIPage(): JSX.Element {
     const posthogAI = useProduct({ handle: 'posthog_ai' }) as {
         seo: { title: string; description: string }
         freeLimit?: number
@@ -975,7 +878,11 @@ export default function PostHogAIPage({ data }: PageProps): JSX.Element {
                     <ContextLayerSection />
                     <PromptsSection />
 
-                    <AccessSection data={data?.mcpLeaderboard ?? null} />
+                    <SkillsAndMemory />
+
+                    <div className="border-t border-primary" />
+
+                    <AccessSection />
 
                     <BackgroundWork />
 
@@ -991,12 +898,12 @@ export default function PostHogAIPage({ data }: PageProps): JSX.Element {
                                     It's not magic (but it feels like it)
                                 </h2>
                                 <p className="mt-0 mb-4">
-                                    It comes with every PostHog account, plus{' '}
+                                    PostHog AI comes with every PostHog account, plus{' '}
                                     {pricing
                                         ? `${pricing.freeCredits.toLocaleString()} free credits a month`
                                         : 'free credits every month'}
-                                    . Ask here, or connect Claude, Cursor, or Codex through MCP. Your product data can
-                                    join the conversation. We are comfortable sharing the chat window.
+                                    . Sign up, open the chat, and ask it a question about your own data. Or connect your
+                                    coding agent through MCP.
                                 </p>
                                 <SignupCTAs />
                             </div>
@@ -1011,8 +918,6 @@ export default function PostHogAIPage({ data }: PageProps): JSX.Element {
                         </div>
                     </div>
 
-                    <AIEngineering />
-
                     <SectionHeader>
                         <h2 className="mb-0 mt-10 text-2xl font-bold">The sensible questions</h2>
                     </SectionHeader>
@@ -1024,23 +929,10 @@ export default function PostHogAIPage({ data }: PageProps): JSX.Element {
                             items={toAccordionItems(faq)}
                         />
                     </div>
+
+                    <AIEngineering />
                 </div>
             </ReaderView>
         </>
     )
 }
-
-export const query = graphql`
-    {
-        mcpLeaderboard {
-            rows {
-                week
-                facet
-                grp
-                label
-                calls_pct
-            }
-            fetchedAt
-        }
-    }
-`

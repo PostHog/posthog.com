@@ -1,187 +1,159 @@
 import React from 'react'
 import { useReducedMotion } from 'framer-motion'
-import { IconCheck } from '@posthog/icons'
 import TabbedCarousel from 'components/TabbedCarousel'
-import ProductIcon from 'components/PostHogAI/ProductIcon'
-import useProduct from 'hooks/useProduct'
-import { LOGOS } from 'constants/logos'
+import AskAnythingDemo, { type DemoScenario } from 'components/Home/HeroCarousel/AskAnythingDemo'
 
-const workflows = [
+const scenarios: { value: string; label: string; scenario: DemoScenario }[] = [
     {
-        value: 'checkout',
-        label: 'Checkout',
-        question: 'Why are people leaving checkout?',
-        definition: 'Completed checkout = payment within 24 hours of starting',
-        steps: [
-            {
-                handle: 'product_analytics',
-                evidence: 'checkout_started → order_completed · by browser',
+        value: 'conversion',
+        label: 'Conversion',
+        scenario: {
+            question: 'Why are people leaving checkout?',
+            intro: 'I’ll compare the funnel, errors, and replays, then check the code.',
+            tools: [
+                {
+                    handle: 'product_analytics',
+                    label: 'Product analytics',
+                    action: 'Compare checkout_started to order_completed',
+                    result: 'Drop-off on mobile Safari',
+                },
+                {
+                    handle: 'error_tracking',
+                    label: 'Error tracking',
+                    action: 'Find errors in the payment form',
+                    result: 'Exceptions on submit, mobile Safari',
+                },
+                {
+                    handle: 'session_replay',
+                    label: 'Session replay',
+                    action: 'Watch the affected sessions',
+                    result: 'Repeated submit clicks, no confirmation',
+                },
+                {
+                    slug: 'github',
+                    label: 'GitHub',
+                    action: 'Review recent checkout changes',
+                    result: 'The submit handler changed last week',
+                },
+            ],
+            conclusion: {
+                title: 'Mobile Safari users cannot submit payment.',
+                body: 'A recent change to the submit handler throws an error on mobile Safari.',
+                next: 'Fix the submit handler.',
             },
-            {
-                handle: 'error_tracking',
-                evidence: 'Payment form exceptions · mobile Safari',
-            },
-            {
-                handle: 'session_replay',
-                evidence: 'Repeated submit clicks, with no order confirmation',
-            },
-            {
-                handle: 'github',
-                evidence: 'CheckoutForm.tsx · submit handler and recent changes',
-            },
-        ],
-        query: `SELECT properties.$browser AS browser,
-    uniq(person_id) AS affected_users
-FROM events
-WHERE event = 'checkout_error'
-  AND timestamp >= now() - INTERVAL 7 DAY
-GROUP BY browser
-ORDER BY affected_users DESC`,
-        action: 'Review the error and replay evidence. Prepare a fix for review if the code confirms the cause.',
+            summary:
+                'Illustrative demo: PostHog AI investigates checkout drop-off using funnels, errors, session replays, and GitHub changes. It finds that a recent submit handler change fails on mobile Safari. All findings are sample data.',
+        },
     },
     {
-        value: 'renewals',
-        label: 'Renewals',
-        question: 'Which renewing accounts need a closer look?',
-        definition: 'Active team = at least 3 members using the product each week',
-        steps: [
-            {
-                handle: 'data_warehouse',
-                evidence: 'Stripe subscriptions + HubSpot account records',
+        value: 'activation',
+        label: 'Activation',
+        scenario: {
+            question: 'Is the new onboarding ready for more users?',
+            intro: 'I’ll check the flag, the experiment, and errors in the new variant.',
+            tools: [
+                {
+                    handle: 'feature_flags',
+                    label: 'Feature flags',
+                    action: 'Check the new_onboarding rollout',
+                    result: 'Live for 20% of new users',
+                },
+                {
+                    handle: 'experiments',
+                    label: 'Experiments',
+                    action: 'Read the experiment results',
+                    result: 'More signups reach a first project',
+                },
+                {
+                    handle: 'error_tracking',
+                    label: 'Error tracking',
+                    action: 'Look for errors in the new variant',
+                    result: 'No new exceptions',
+                },
+                {
+                    slug: 'github',
+                    label: 'GitHub',
+                    action: 'Review the flag checks in code',
+                    result: 'The flag guards every new step',
+                },
+            ],
+            conclusion: {
+                title: 'The new onboarding looks ready for more users.',
+                body: 'Activation is up, and the variant adds no new errors.',
+                next: 'Raise the rollout to 50%.',
             },
-            {
-                handle: 'product_analytics',
-                evidence: 'Weekly active members · this month vs. last month',
-            },
-            {
-                handle: 'surveys',
-                evidence: 'Survey responses linked to the same accounts',
-            },
-            {
-                handle: 'notebooks',
-                evidence: 'Account list + usage trends + source responses',
-            },
-        ],
-        query: `SELECT properties.account_id AS account,
-    uniq(person_id) AS active_members
-FROM events
-WHERE timestamp >= now() - INTERVAL 7 DAY
-GROUP BY account
-HAVING active_members < 3
-ORDER BY active_members ASC`,
-        action: 'Review accounts with falling usage and their feedback. A quiet account is a reason to ask, not a churn prediction.',
+            summary:
+                'Illustrative demo: PostHog AI checks a feature flag rollout using the flag, experiment results, error tracking, and GitHub code. It finds higher activation with no new errors. All findings are sample data.',
+        },
     },
     {
-        value: 'rollout',
-        label: 'Rollouts',
-        question: 'Is the new onboarding ready for more users?',
-        definition: 'Activated = first project created within 7 days of signup',
-        steps: [
-            {
-                handle: 'feature_flags',
-                evidence: 'new_onboarding · variants and rollout conditions',
+        value: 'churn',
+        label: 'Churn',
+        scenario: {
+            question: 'Which renewing accounts need a closer look?',
+            intro: 'I’ll join billing, usage, and support data by account.',
+            tools: [
+                {
+                    slug: 'stripe',
+                    label: 'Stripe',
+                    action: 'Find subscriptions that renew in 30 days',
+                    result: '14 accounts renew this month',
+                },
+                {
+                    handle: 'product_analytics',
+                    label: 'Product analytics',
+                    action: 'Compare weekly active members',
+                    result: '5 use it less than last month',
+                },
+                {
+                    slug: 'zendesk',
+                    label: 'Zendesk',
+                    action: 'Check open support tickets',
+                    result: '3 have unresolved tickets',
+                },
+                {
+                    slug: 'hubspot',
+                    label: 'HubSpot',
+                    action: 'Check the last contact date',
+                    result: '2 have had no contact in 60 days',
+                },
+            ],
+            conclusion: {
+                title: 'Three accounts need attention before renewal.',
+                body: 'Their usage is down and they have open support tickets.',
+                next: 'Send the list to the account owners.',
             },
-            {
-                handle: 'experiments',
-                evidence: 'Signup → first project · uncertainty included',
-            },
-            {
-                handle: 'error_tracking',
-                evidence: 'Exceptions linked to the new onboarding variant',
-            },
-            {
-                handle: 'github',
-                evidence: 'Onboarding.tsx · flag checks and changed paths',
-            },
-        ],
-        query: `SELECT properties.$feature_flag_response AS variant,
-    uniq(person_id) AS exposed_users
-FROM events
-WHERE event = '$feature_flag_called'
-  AND properties.$feature_flag = 'new_onboarding'
-  AND timestamp >= now() - INTERVAL 7 DAY
-GROUP BY variant`,
-        action: 'Review the experiment results and affected sessions before changing exposure. The flag stays in your hands.',
+            summary:
+                'Illustrative demo: PostHog AI reviews renewing accounts using Stripe subscriptions, product usage, Zendesk tickets, and HubSpot contact dates. It finds three accounts with falling usage and open tickets. All findings are sample data.',
+        },
     },
 ]
 
 export default function ContextDiagram(): JSX.Element {
-    const products = useProduct()
     const reducedMotion = useReducedMotion()
-    const tabs = workflows.map(({ value, label, question, definition, steps, query, action }) => ({
+    const tabs = scenarios.map(({ value, label, scenario }) => ({
         value,
         label,
         color: 'bg-accent',
         activeText: 'text-primary',
         progressBar: 'bg-red dark:bg-yellow',
         triggerClassName: '!min-w-0 !order-none !px-2',
-        content: (
-            <div className="flex h-full flex-col">
-                <div className="border-b border-primary px-5 py-4 pr-14">
-                    <h3 className="m-0 text-xl font-bold leading-snug">“{question}”</h3>
-                </div>
-                <div className="flex flex-1 flex-col px-5 pb-4 pt-3">
-                    <div className="flex items-start gap-2 border-b border-primary pb-3 text-sm">
-                        <IconCheck className="mt-0.5 size-4 shrink-0 text-green" />
-                        <p className="m-0">{definition}</p>
-                    </div>
-                    <ol className="my-4 list-none p-0">
-                        {steps.map(({ handle, evidence }, index) => {
-                            const product = Array.isArray(products)
-                                ? products.find((item) => item.handle === handle)
-                                : null
-                            return (
-                                <li key={handle} className="relative flex gap-3 pb-3 last:pb-0">
-                                    {index < steps.length - 1 && (
-                                        <span
-                                            aria-hidden="true"
-                                            className="absolute bottom-0 left-4 top-8 border-l border-dashed border-primary"
-                                        />
-                                    )}
-                                    <span className="relative flex size-8 shrink-0 items-center justify-center rounded border border-primary bg-primary">
-                                        {handle === 'github' ? (
-                                            <img src={LOGOS.github} alt="" className="size-5 dark:invert" />
-                                        ) : (
-                                            <ProductIcon product={product} className="size-5" />
-                                        )}
-                                    </span>
-                                    <div className="min-w-0">
-                                        <p className="m-0 text-sm font-semibold">
-                                            {handle === 'github' ? 'GitHub' : product?.name}
-                                        </p>
-                                        <p className="mb-0 mt-0.5 text-xs text-secondary">{evidence}</p>
-                                    </div>
-                                </li>
-                            )
-                        })}
-                    </ol>
-                    <details className="border-t border-primary py-2 text-xs">
-                        <summary className="cursor-pointer font-semibold">
-                            Show SQL <span className="font-normal text-secondary">· sample data</span>
-                        </summary>
-                        <pre className="mb-0 overflow-x-auto text-xs">
-                            <code>{query}</code>
-                        </pre>
-                    </details>
-                    <p className="mb-0 mt-auto border-t border-primary pt-3 text-sm text-secondary">{action}</p>
-                </div>
-            </div>
-        ),
+        content: <AskAnythingDemo scenario={scenario} />,
     }))
 
     return (
         <figure
             aria-label="Product context workflows"
-            className="m-0 flex h-full min-w-0 flex-col rounded-md border border-primary bg-primary"
+            className="m-0 min-w-0 [&_.ai-demo-chat-heading>span:last-child]:!mr-[9cqw]"
         >
             <figcaption className="sr-only">Three sample workflows · illustrative data</figcaption>
+            {/* The demo runs 20 seconds, so each slide stays up for 22 */}
             <TabbedCarousel
                 tabs={tabs}
-                slideDuration={10000}
+                slideDuration={22000}
                 paused={!!reducedMotion}
                 pauseOnFocus
                 showActiveBg={false}
-                className="flex-1 [&>div]:h-full [&>div>div:last-child]:flex-1"
                 slideClassName="!min-h-0 !p-0 [&>div]:!shadow-none"
             />
         </figure>

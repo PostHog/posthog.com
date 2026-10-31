@@ -19,44 +19,73 @@ import {
 import { useInView } from 'react-intersection-observer'
 import { usePrefersReducedMotion } from 'components/Code/usePrefersReducedMotion'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
+import useProduct from 'hooks/useProduct'
+import ProductIcon from 'components/PostHogAI/ProductIcon'
 import { usePauseAutoAdvance, useSlideActive, useSlidePaused } from '../autoAdvanceGate'
 import './animations.css'
 
-const QUESTION = 'Why are signups growing, but paid conversions falling?'
 const DURATION = 20000
 const CONVERSATION_START = 4800
 const FINDING_START = 15500
+const TOOL_START = 5800
+const TOOL_INTERVAL = 2400
 
-const TOOLS = [
-    {
-        slug: 'google-ads',
-        label: 'Google Ads',
-        action: 'Compare campaign traffic',
-        result: 'More visitors, same audience',
-        start: 5800,
+export interface DemoTool {
+    /** A connected source, matched against the source platform pages (for example "stripe"). */
+    slug?: string
+    /** A PostHog product handle (for example "error_tracking"). Takes the product icon. */
+    handle?: string
+    label: string
+    action: string
+    result: string
+}
+
+export interface DemoScenario {
+    question: string
+    intro: string
+    tools: DemoTool[]
+    conclusion: { title: string; body: string; next: string }
+    /** Screen reader summary of the whole run. */
+    summary: string
+}
+
+const DEFAULT_SCENARIO: DemoScenario = {
+    question: 'Why are signups growing, but paid conversions falling?',
+    intro: 'I’ll trace the path from ad click to paying customer.',
+    tools: [
+        {
+            slug: 'google-ads',
+            label: 'Google Ads',
+            action: 'Compare campaign traffic',
+            result: 'More visitors, same audience',
+        },
+        {
+            slug: 'posthog',
+            label: 'PostHog',
+            action: 'Analyze the signup → payment funnel',
+            result: 'Drop-off at mobile checkout',
+        },
+        {
+            slug: 'stripe',
+            label: 'Stripe',
+            action: 'Check payments and declines',
+            result: 'Payment declines are unchanged',
+        },
+        {
+            slug: 'github',
+            label: 'GitHub',
+            action: 'Review recent checkout changes',
+            result: 'A required field was added',
+        },
+    ],
+    conclusion: {
+        title: 'The drop starts before payment.',
+        body: 'A new required field is losing customers at mobile checkout.',
+        next: 'Test a shorter mobile checkout.',
     },
-    {
-        slug: 'posthog',
-        label: 'PostHog',
-        action: 'Analyze the signup → payment funnel',
-        result: 'Drop-off at mobile checkout',
-        start: 8200,
-    },
-    {
-        slug: 'stripe',
-        label: 'Stripe',
-        action: 'Check payments and declines',
-        result: 'Payment declines are unchanged',
-        start: 10600,
-    },
-    {
-        slug: 'github',
-        label: 'GitHub',
-        action: 'Review recent checkout changes',
-        result: 'A required field was added',
-        start: 13000,
-    },
-]
+    summary:
+        'Illustrative demo: PostHog AI investigates falling paid conversion using Google Ads traffic, PostHog funnels, Stripe payments, and GitHub changes. It finds an extra required field at mobile checkout and recommends testing a shorter checkout. All findings are sample data.',
+}
 
 const CAPABILITIES = [
     { label: 'Coding', Icon: IconCode2 },
@@ -80,7 +109,9 @@ function PostHogMark({ className = '' }: { className?: string }) {
 }
 
 /** A scripted illustration. The composer and service calls never submit real requests. */
-export default function AskAnythingDemo() {
+export default function AskAnythingDemo({ scenario = DEFAULT_SCENARIO }: { scenario?: DemoScenario }) {
+    const products = useProduct()
+    const { question, intro, tools, conclusion, summary } = scenario
     const sources: { label: string; url: string; image: string }[] = useSourcePlatforms()
     const active = useSlideActive()
     const carouselPaused = useSlidePaused()
@@ -120,7 +151,7 @@ export default function AskAnythingDemo() {
     const time = reducedMotion ? DURATION : elapsed
     const conversation = time >= CONVERSATION_START
     const finding = time >= FINDING_START
-    const typedQuestion = QUESTION.slice(0, Math.floor(Math.max(0, time - 1500) / 45))
+    const typedQuestion = question.slice(0, Math.floor(Math.max(0, time - 1500) / 45))
 
     return (
         <div
@@ -131,11 +162,7 @@ export default function AskAnythingDemo() {
             role="group"
             aria-label="PostHog AI demonstration"
         >
-            <p className="sr-only">
-                Illustrative demo: PostHog AI investigates falling paid conversion using Google Ads traffic, PostHog
-                funnels, Stripe payments, and GitHub changes. It finds an extra required field at mobile checkout and
-                recommends testing a shorter checkout. All findings are sample data.
-            </p>
+            <p className="sr-only">{summary}</p>
 
             <div
                 className="ai-demo-welcome absolute inset-0 flex flex-col items-center justify-center gap-[3cqw] px-[2.6%] py-[6cqw] text-[2.8cqw] leading-[1.4]"
@@ -196,25 +223,32 @@ export default function AskAnythingDemo() {
                     <span>Sample data</span>
                 </div>
                 <div className="ai-demo-question border border-primary bg-accent mt-[2.2cqw] mr-0 mb-[2.4cqw] ml-auto py-[1.6cqw] px-[2cqw] w-[85%] rounded-[1.5cqw] font-semibold text-[2.7cqw]">
-                    {QUESTION}
+                    {question}
                 </div>
-                <p className="ai-demo-intro m-0 mb-[2cqw] text-[2.6cqw]">
-                    I’ll trace the path from ad click to paying customer.
-                </p>
+                <p className="ai-demo-intro m-0 mb-[2cqw] text-[2.6cqw]">{intro}</p>
                 <div className="ai-demo-tools grid gap-[0.8cqw]">
-                    {TOOLS.map((tool) => {
-                        const started = time >= tool.start
-                        const done = time >= tool.start + 1800
+                    {tools.map((tool, index) => {
+                        const start = TOOL_START + index * TOOL_INTERVAL
+                        const started = time >= start
+                        const done = time >= start + 1800
                         const source = sources.find(({ url }) => url.endsWith(`/${tool.slug}`))
                         return (
                             <div
                                 className="ai-demo-tool border-b border-primary flex items-center gap-[1.6cqw] min-h-[7.4cqw] p-[0.4cqw] leading-tight"
-                                key={tool.slug}
+                                key={tool.label}
                                 data-visible={started}
                                 data-done={done}
                             >
                                 <span className="ai-demo-service-logo flex items-center justify-center size-[4cqw] shrink-0 [&_img]:block [&_img]:size-full [&_img]:object-contain [&>span]:w-full [&_svg]:!w-full [&_svg]:!h-auto">
-                                    {tool.slug === 'posthog' ? (
+                                    {tool.handle ? (
+                                        <ProductIcon
+                                            product={
+                                                Array.isArray(products)
+                                                    ? products.find((item) => item.handle === tool.handle)
+                                                    : null
+                                            }
+                                        />
+                                    ) : tool.slug === 'posthog' ? (
                                         <PostHogMark />
                                     ) : (
                                         <img
@@ -243,10 +277,10 @@ export default function AskAnythingDemo() {
                     className="ai-demo-finding bg-light dark:bg-dark border border-primary mt-[2.4cqw] py-[1.7cqw] px-[2cqw] rounded-[1.5cqw] [&>strong]:text-[2.8cqw] [&_p]:text-secondary [&_p]:text-[2.3cqw] [&_p]:mt-[0.7cqw] [&_p]:mx-0 [&_p]:mb-[1.1cqw] [&>span]:flex [&>span]:items-center [&>span]:gap-[0.8cqw] [&>span]:text-[2.4cqw] [&>span]:font-semibold"
                     data-visible={finding}
                 >
-                    <strong>The drop starts before payment.</strong>
-                    <p>A new required field is losing customers at mobile checkout.</p>
+                    <strong>{conclusion.title}</strong>
+                    <p>{conclusion.body}</p>
                     <span>
-                        <IconFlask /> Test a shorter mobile checkout.
+                        <IconFlask /> {conclusion.next}
                     </span>
                 </div>
             </div>

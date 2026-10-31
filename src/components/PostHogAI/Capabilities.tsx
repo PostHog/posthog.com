@@ -3,6 +3,7 @@ import Link from 'components/Link'
 import useProduct from 'hooks/useProduct'
 import { StickerAi } from 'components/Stickers/Stickers'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const groups = [
     {
@@ -158,34 +159,42 @@ export function AIEngineering(): JSX.Element | null {
             id="building-ai"
             className="my-12 rounded-md border border-green bg-green/10 p-5 shadow-xl @xl/reader-content:p-7"
         >
-            <h2 className="m-0 flex items-center gap-3 text-2xl font-bold @xl/reader-content:text-3xl">
-                <StickerAi className="size-10 shrink-0 -rotate-6" />
-                Building your own AI?
-            </h2>
-            <p className="mb-5 mt-3 max-w-2xl text-base text-secondary">
-                Give your agent product data. Then find out what it does with it. “It worked in my chat” is a small test
-                suite.
-            </p>
-            <div className="grid gap-3 @xl/reader-content:grid-cols-2">
-                {engineeringTools.map(({ handle, to, task }) => {
-                    const product = products.find((item) => item.handle === handle)
-                    if (!product) return null
-                    return (
-                        <Link
-                            key={handle}
-                            to={to}
-                            state={{ newWindow: true }}
-                            wrapperClassName="h-full"
-                            className="group block h-full rounded border border-primary bg-primary p-4 !no-underline"
-                        >
-                            <h3 className="m-0 flex items-center gap-2 text-base font-bold group-hover:underline">
-                                <ProductIcon product={product} className="size-5 shrink-0" />
-                                {product.name} →
-                            </h3>
-                            <p className="mb-0 mt-2 text-sm font-normal text-secondary">{task}</p>
-                        </Link>
-                    )
-                })}
+            <div className="grid items-center gap-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_14rem]">
+                <div className="min-w-0">
+                    <h2 className="m-0 flex items-center gap-3 text-2xl font-bold @xl/reader-content:text-3xl">
+                        <StickerAi className="size-10 shrink-0 -rotate-6" />
+                        Building your own AI?
+                    </h2>
+                    <p className="mb-5 mt-3 max-w-2xl text-base text-secondary">
+                        See what your agents are actually up to: each prompt, tool call, cost, and failure, next to the
+                        product data they use.
+                    </p>
+                    <ul className="m-0 grid list-none gap-x-6 gap-y-4 p-0 @xl/reader-content:grid-cols-2">
+                        {engineeringTools.map(({ handle, to, task }) => {
+                            const product = products.find((item) => item.handle === handle)
+                            if (!product) return null
+                            return (
+                                <li key={handle} className="border-t border-green/30 pt-3">
+                                    <Link to={to} state={{ newWindow: true }} className="group block !no-underline">
+                                        <h3 className="m-0 flex items-center gap-2 text-base font-bold group-hover:underline">
+                                            <ProductIcon product={product} className="size-5 shrink-0" />
+                                            {product.name} →
+                                        </h3>
+                                        <p className="mb-0 mt-1 text-sm font-normal text-secondary">{task}</p>
+                                    </Link>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/transformer_hedgehog_2a379334d7.png"
+                    alt=""
+                    loading="lazy"
+                    width={360}
+                    className="hidden @3xl/reader-content:block"
+                    imgClassName="mx-auto max-h-56 w-auto"
+                />
             </div>
         </section>
     )
@@ -197,8 +206,8 @@ export default function Capabilities(): JSX.Element | null {
     if (!Array.isArray(products)) return null
 
     return (
-        <div id="ai-tools" className="not-prose mt-6">
-            <p className="mb-0 text-sm text-secondary">
+        <div id="ai-tools" className="not-prose mt-4">
+            <p className="mb-0 text-center text-sm text-secondary">
                 AI across the tools you use.{' '}
                 <button
                     type="button"
@@ -211,7 +220,7 @@ export default function Capabilities(): JSX.Element | null {
                 </button>
             </p>
             <div id="ai-tool-list" hidden={!open} className="mt-4 border-t border-primary pt-5">
-                <div className="grid gap-x-7 gap-y-5 @xl/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-3">
+                <div className="grid gap-x-7 gap-y-5 @xl/reader-content:grid-cols-2 @4xl/reader-content:grid-cols-1">
                     {groups.map(({ name, tools }) => (
                         <div key={name}>
                             <h4 className="mb-0 mt-0 border-b border-primary pb-3 text-sm font-bold">{name}</h4>
@@ -240,7 +249,7 @@ export default function Capabilities(): JSX.Element | null {
                         </div>
                     ))}
                 </div>
-                <div className="mt-3 grid gap-4 rounded border border-primary bg-accent/30 p-4 @2xl/reader-content:grid-cols-3">
+                <div className="mt-3 grid gap-4 rounded border border-primary bg-accent/30 p-4 @xl/reader-content:grid-cols-3 @4xl/reader-content:grid-cols-1">
                     {embeddedTools.map(({ name, task, to }) => (
                         <div key={name}>
                             <Link to={to} state={{ newWindow: true }} className="text-sm font-semibold">

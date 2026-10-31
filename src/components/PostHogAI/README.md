@@ -8,21 +8,23 @@ All product names, icons, and colors come from `useProduct`. Do not hard-code th
 
 ### `ContextDiagram`
 
-A `TabbedCarousel` of three sample workflows: checkout, renewals, and rollouts. Each workflow has:
+A `TabbedCarousel` of three scripted PostHog AI conversations, named for the metric people check: conversion, activation, and churn. Each tab renders the shared `AskAnythingDemo` (`components/Home/HeroCarousel/AskAnythingDemo`) with its own `scenario`. With no `scenario`, that component plays the default conversation, so the Home page and the Web tab on this page do not change.
 
-- `question` – the tab heading
-- `definition` – the approved definition the agent uses
-- `steps` – four `{ handle, evidence }` rows. `handle` is a product handle, or `github`.
-- `query` – sample SQL, shown in a `details` disclosure. It must match `definition`.
-- `action` – the next step for a person to take
+A `DemoScenario` has:
 
-To add a workflow, add an entry to `workflows`. All data is illustrative. The figure has a screen-reader caption that says so.
+- `question` – the prompt that is typed, then sent
+- `intro` – the first line of the agent's reply
+- `tools` – four rows. Each has a `label`, an `action` (shown while it runs), and a `result` (shown with a check when it finishes). Use `handle` for a PostHog product icon, or `slug` for a connected source logo, such as `stripe`.
+- `conclusion` – a `title`, a `body`, and a `next` step
+- `summary` – the screen reader description of the whole run
+
+The demo runs for 20 seconds, so the carousel holds each slide for 22. To add a scenario, add an entry to `scenarios`. All data is illustrative, and the demo labels it "Sample data".
 
 ### `Capabilities` and `AIEngineering`
 
-`Capabilities` (default export) is the full tool list, collapsed behind a text button below the context diagram. Tools are in three `groups`. Each tool has a product `handle`, a `task`, and a docs link (`to`). Add `availability` (for example, `'Private beta'`) to show a label next to a feature that needs early access.
+`Capabilities` (default export) is the full tool list, collapsed behind a text button under the context diagram, in the same column. When the page is wide enough to put the column beside the text, the open list is one column. When the page stacks, it is two. Tools are in three `groups`. Each tool has a product `handle`, a `task`, and a docs link (`to`). Add `availability` (for example, `'Private beta'`) to show a label next to a feature that needs early access.
 
-`AIEngineering` is the green "Building your own AI?" panel above the FAQ. Edit `engineeringTools` to change it.
+`AIEngineering` is the green "Building your own AI?" panel at the end of the page, under the FAQ. It lists `engineeringTools` as plain rows beside a hedgehog, with no inner cards. Edit `engineeringTools` to change the rows.
 
 ### `Testimonials`
 
