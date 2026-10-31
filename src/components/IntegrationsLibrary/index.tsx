@@ -72,6 +72,11 @@ export default function IntegrationsLibrary(): JSX.Element {
                     }
                     icon_url
                     unreleased
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                 }
             }
             destinations: allPostHogPipeline(filter: { type: { eq: "destination" } }) {
