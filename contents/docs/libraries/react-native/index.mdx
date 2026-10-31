@@ -701,7 +701,7 @@ const MyComponent = () => {
 
 ## Upgrading to `@posthog/react-native-plugin` 3.0
 
-`@posthog/react-native-plugin` 3.0 uses `posthog-ios` 4.0 and requires:
+`@posthog/react-native-plugin` 3.0 uses `posthog-ios` 4.0. For before-and-after examples and a checklist, see the [migration guide](https://github.com/PostHog/posthog-js/blob/main/packages/react-native-plugin/MIGRATION.md). The plugin requires:
 
 - React Native 0.75 or later
 - Xcode 26 or later, on every iOS dependency path
@@ -712,6 +712,10 @@ On iOS, the plugin now always resolves `posthog-ios` through Swift Package Manag
 - Remove `"posthog.useSpm"` from `ios/Podfile.properties.json` if you set it. The plugin no longer reads it.
 - The plugin no longer needs `use_frameworks! :linkage => :dynamic`. Keep it only if another dependency needs it.
 - Remove the legacy `posthog-react-native-session-replay` package if your app still depends on it. It pulls in `posthog-ios` 3.x, and the plugin uses 4.x.
+- Remove these Podfile settings if you use them, because `pod install` now fails with them: `:generate_multiple_pod_projects => true`, `:deduplicate_targets => false`, and targets that use the plugin with different `platform` or `use_frameworks!` settings.
+- Make sure build machines can reach `https://github.com/PostHog/posthog-ios.git`, because Xcode now fetches `posthog-ios` from there.
+- If your app target has `import PostHog`, check that it still compiles. React Native's helper adds the package only to the plugin's pod target. This case isn't tested, but if the import no longer resolves, add `posthog-ios` to your app target as a Swift package with a compatible version.
+- If a custom dSYM upload script calls `${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh`, change it to `${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh`. The `uploadNativeSymbols` build phase from the Expo config plugin already checks both paths.
 
 Apps that use the plugin only through `posthog-react-native` need no code changes. If your code calls the plugin directly:
 
