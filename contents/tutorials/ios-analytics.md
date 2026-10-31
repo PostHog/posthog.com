@@ -140,7 +140,7 @@ struct ios_analyticsApp: App {
     init() {
         let POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
         let POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-        let configuration = PostHogConfig(apiKey: POSTHOG_PROJECT_TOKEN, host: POSTHOG_HOST)
+        let configuration = PostHogConfig(projectToken: POSTHOG_PROJECT_TOKEN, host: POSTHOG_HOST)
         PostHogSDK.shared.setup(configuration)
     }
     

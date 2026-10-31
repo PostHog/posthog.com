@@ -78,7 +78,7 @@ Add a **Run Script** build phase:
 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
 ```
 
-```bash file=CocoaPods
+```bash file=CocoaPods (version 3)
 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 
@@ -107,7 +107,7 @@ By default, only debug symbols are uploaded. To include source code snippets in 
 POSTHOG_INCLUDE_SOURCE=1 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
 ```
 
-```bash file=CocoaPods
+```bash file=CocoaPods (version 3)
 POSTHOG_INCLUDE_SOURCE=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 
@@ -127,7 +127,7 @@ If PostHog already has a dSYM with the same UUID but different content, the uplo
 POSTHOG_SKIP_ON_CONFLICT=1 ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh
 ```
 
-```bash file=CocoaPods
+```bash file=CocoaPods (version 3)
 POSTHOG_SKIP_ON_CONFLICT=1 ${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh
 ```
 

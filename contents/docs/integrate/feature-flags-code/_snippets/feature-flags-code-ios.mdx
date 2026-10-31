@@ -89,7 +89,7 @@ The callback receives a `PostHogFeatureFlagsLoaded` object with the following pr
 
 - `errorsLoading: Bool`: `true` if the latest attempt to load feature flags failed, for example because the device is offline. The flags and variants then hold the last known values, which can be empty – for example, on a fresh install with no [bootstrap values](/docs/feature-flags/bootstrapping). In that case, `isFeatureEnabled` returns `false` because the flag is unknown, not because PostHog evaluated it as disabled.
 
-On versions earlier than 3.89.0, observe the `PostHogSDK.didReceiveFeatureFlags` notification instead. Register the observer before calling `setup()`:
+On versions earlier than 3.89.0, observe the `PostHogSDK.didReceiveFeatureFlags` notification instead. Version 4.0 removes this notification. Register the observer before calling `setup()`:
 
 ```swift
 let observer = NotificationCenter.default.addObserver(
@@ -110,12 +110,15 @@ Alternatively, you can use the completion block of the `reloadFeatureFlags(_:)` 
 
 ```swift
 // Reload feature flags and check if a specific feature is enabled
-PostHogSDK.shared.reloadFeatureFlags {
+PostHogSDK.shared.reloadFeatureFlags { result in
+    // result.errorsLoading is true if the reload failed
     if PostHogSDK.shared.isFeatureEnabled("flag-key") {
         // do something
     }
 }
 ```
+
+The block can run on a background thread. To update UI, hop with `Task { @MainActor in ... }`. On versions before 4.0, the block takes no argument.
 
 ### Tracking feature usage
 

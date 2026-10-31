@@ -30,7 +30,7 @@ config.sessionReplayConfig.captureLogsConfig.logSanitizer = { output in
     }
 
     // Determine log level based on message content
-    let level: PostHogLogLevel = {
+    let level: PostHogConsoleLogLevel = {
         if output.contains("CRITICAL") { return .error }
         if output.contains("WARN") { return .warn }
         return .info
@@ -43,7 +43,7 @@ config.sessionReplayConfig.captureLogsConfig.logSanitizer = { output in
         options: .regularExpression
     )
     
-    return PostHogLogEntry(level: level, message: sanitizedMessage)
+    return PostHogConsoleLogEntry(level: level, message: sanitizedMessage)
 }
 
 PostHogSDK.shared.setup(config)
