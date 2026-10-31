@@ -48,7 +48,7 @@ You can now view changes to feature flags and persons made in the UI and see who
 ### New: World map
 ![PostHog - World Map](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/array/1_35_0_map.png)
 
-A staple request of every PostHog hackathon has finally been realized, with the introduction of **world map** – a new Trends chart type which visualizes breakdowns by country (based on [GeoIP](https://posthog.com/integrations/geoip) data). Intuitively compare how your traffic and usage differ across countries of the world!
+A staple request of every PostHog hackathon has finally been realized, with the introduction of **world map** – a new Trends chart type which visualizes breakdowns by country (based on [GeoIP](/docs/data-pipelines/transformations/template-geoip) data). Intuitively compare how your traffic and usage differ across countries of the world!
 
 ### New: Multi-tenant SAML
 

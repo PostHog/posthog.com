@@ -345,7 +345,7 @@ class MainActivity : AppCompatActivity() {
 
 Any past or future events captured after calling `identify` will now be associated with the email you provided. 
 
-To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab]((https://us.posthog.com/events)).
+To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={IdentifyLight} 

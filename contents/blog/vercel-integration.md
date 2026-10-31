@@ -45,7 +45,7 @@ This means no copying values between dashboards and no wondering if prod and sta
 
 In addition, thanks to the Vercel Marketplace, billing and account management are now both managed in a single location.
 
-The integration also works with [v0 – Vercel's AI agent](v0.app) that helps users create real code and full-stack apps.
+The integration also works with [v0 – Vercel's AI agent](https://v0.app) that helps users create real code and full-stack apps.
 
 ## Get started
 
