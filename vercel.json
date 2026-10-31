@@ -1066,11 +1066,6 @@
             "statusCode": 301
         },
         {
-            "source": "/mcp-analytics",
-            "destination": "/docs/mcp-analytics",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/data-warehouse/run-sql-mcp:ext(\\.md)?",
             "destination": "/docs/data-warehouse/surfaces/mcp:ext?",
             "statusCode": 301
