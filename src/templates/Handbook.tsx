@@ -53,7 +53,7 @@ const DestinationsLibraryCallout = () => {
             <p className="m-0 !mb-3 !mt-1.5">
                 We're building new destinations and want your input on what to build next.
             </p>
-            <CallToAction to="/context-warehouse/integrations-library" size="sm">
+            <CallToAction to="/docs/data-pipelines" size="sm">
                 Browse the library
             </CallToAction>
         </div>
@@ -128,7 +128,7 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                         <p className="text-sm m-0 mb-3 mt-1.5">
                             We're building more destinations and prioritzing them based on your feedback.
                         </p>
-                        <CallToAction size="sm" to="/context-warehouse/integrations-library">
+                        <CallToAction size="sm" to="/docs/data-pipelines">
                             Browse the library
                         </CallToAction>
                     </div>
