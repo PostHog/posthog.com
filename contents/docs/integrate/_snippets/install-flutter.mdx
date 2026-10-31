@@ -73,7 +73,7 @@ In both cases, you'll also need to update the minimum Android SDK version to `23
 
 There are 2 ways of initializing the SDK, automatically and manually.
 
-The SDK supports both [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) and [Swift Package Manager (SPM)](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers). Flutter 3.44 and later enable SPM by default. On earlier versions, or if you disabled SPM, enable it with `flutter config --enable-swift-package-manager`.
+Version 6 and later install on iOS and macOS only through [Swift Package Manager (SPM)](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers), which needs Flutter 3.41 or later. Flutter 3.44 and later enable SPM by default. On earlier versions, or if you disabled SPM, enable it with `flutter config --enable-swift-package-manager`. Version 5 also supports [CocoaPods](https://guides.cocoapods.org/using/getting-started.html). Flutter add-to-app modules can't use SPM yet, so they need version 5.
 
 Automatically:
 
@@ -114,14 +114,14 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 
 In both cases, you'll need to set the minimum platform version to iOS 15.0. Building for iOS requires Xcode 26 or later.
 
-For CocoaPods projects, set it in your `Podfile`:
+If your project has a `Podfile`, because another plugin uses CocoaPods or you're on version 5, set it there:
 
 ```yaml file=ios/Podfile
 platform :ios, '15.0'
 # rest of your config
 ```
 
-For Swift Package Manager projects without a `Podfile`, set the **Minimum Deployments** version to iOS 15.0 for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**). After you change **Minimum Deployments**, regenerate the iOS project's configuration files:
+In Xcode, set the **Minimum Deployments** version to iOS 15.0 for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**). After you change **Minimum Deployments**, regenerate the iOS project's configuration files:
 
 ```bash
 flutter build ios --config-only

@@ -488,7 +488,7 @@ await Posthog().debug(false);
 
 ## Upgrading from version 5 to version 6
 
-Version 6 moves iOS and macOS to `posthog-ios` 4.0 and Android to `posthog-android` 4.0, sends events to PostHog's capture v1 API on every platform except web, raises the minimum iOS and macOS versions, and removes the APIs that version 5 deprecated.
+Version 6 moves iOS and macOS to `posthog-ios` 4.0 and Android to `posthog-android` 4.0, sends events to PostHog's capture v1 API on every platform except web, raises the minimum iOS and macOS versions, moves iOS and macOS to Swift Package Manager only, and removes the APIs that version 5 deprecated.
 
 If you send events through a reverse proxy or to a self-hosted PostHog instance, read [Events go to capture v1](#events-go-to-capture-v1) before you upgrade.
 
@@ -503,11 +503,11 @@ Before you upgrade, update to the latest version 5 release and fix its deprecati
 | iOS | 13.0 | 15.0 |
 | macOS | 10.15 | 11.0 |
 | Xcode | – | 26 or later |
+| Flutter, for iOS and macOS builds | 3.27 | 3.41 or later |
+| iOS and macOS dependency manager | CocoaPods or Swift Package Manager | Swift Package Manager only |
 | Android | API 23 | API 23 (unchanged) |
 
-{/* BLOCKER before release: posthog-ios 4.0 is not published to CocoaPods, and posthog-flutter#673 still declares s.dependency 'PostHog', '>= 4.0.0'. State here how version 6 installs in CocoaPods projects once that is resolved. */}
-
-If your project has a `Podfile`, raise the platform version there:
+If you keep a `Podfile` for other plugins, raise the platform version there:
 
 ```ruby file=ios/Podfile
 platform :ios, '15.0'
@@ -519,13 +519,25 @@ If your app also targets macOS, do the same in `macos/Podfile`:
 platform :osx, '11.0'
 ```
 
-For Swift Package Manager projects without a `Podfile`, set **Minimum Deployments** for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**), then regenerate the project's configuration files:
+In all projects, set **Minimum Deployments** for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**), then regenerate the project's configuration files:
 
 ```bash
 flutter build ios --config-only
 # If your app also targets macOS
 flutter build macos --config-only
 ```
+
+### Move from CocoaPods to Swift Package Manager
+
+Version 6 has no podspec, so on iOS and macOS it installs only through Swift Package Manager. With Swift Package Manager turned off, `flutter build` stops with `Plugin posthog_flutter is only compatible with Swift Package Manager`.
+
+1. Use Flutter 3.41 or later. The plugin depends on a package that Flutter generates starting with 3.41.
+2. Flutter 3.44 and later turn Swift Package Manager on by default. On 3.41 to 3.43, or if you turned it off, run `flutter config --enable-swift-package-manager`.
+3. Run your app. Flutter adds Swift Package Manager to the Xcode project on its own.
+
+Plugins that only support CocoaPods keep working: Flutter installs them through your `Podfile`, so keep it in that case. If every plugin supports Swift Package Manager, you can [remove CocoaPods](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers#how-to-remove-cocoapods-integration). This is optional.
+
+Flutter doesn't support Swift Package Manager in add-to-app modules yet ([flutter/flutter#146957](https://github.com/flutter/flutter/issues/146957)). If you embed Flutter as a module in an iOS or macOS app, stay on version 5 until it does.
 
 ### Removed APIs
 

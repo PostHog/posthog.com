@@ -152,7 +152,7 @@ You'll also need to update the minimum Android SDK version to `23` in `android/a
 
 ### iOS setup
 
-For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/getting-started.html) installed. Then add your PostHog configuration with your project token and instance address to the `Info.plist` file located in the `ios/Runner` directory:
+For iOS, `posthog_flutter` version 6 needs Flutter 3.41 or later with [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers) turned on, which is the default from Flutter 3.44. Add your PostHog configuration with your project token and instance address to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml file=ios/Runner/Info.plist
 <?xml version="1.0" encoding="UTF-8"?>
@@ -172,13 +172,7 @@ For iOS, you'll need to have [Cocoapods](https://guides.cocoapods.org/using/gett
 </plist>
 ```
 
-Then you need to set the minimum platform version to iOS 15.0 in your Podfile:
-
-```yaml file=ios/Podfile
-platform :ios, '15.0'
-
-# rest of your config
-```
+Then set the minimum platform version to iOS 15.0 in Xcode (**Runner > General > Minimum Deployments**).
 
 ### Web setup
 
