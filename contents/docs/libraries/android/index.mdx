@@ -506,7 +506,7 @@ Version 4.0 removes APIs deprecated in 3.x, sends events to capture v1, and alwa
 
 ### Requirements
 
-Update `posthog-android` to `4.+`. If you use `posthog-android-surveys-compose` or depend on core `posthog` directly, update them in the same change: core is now 7.0 and isn't binary compatible with SDKs built against 6.x. If the same project also uses `posthog-server`, update it too.
+Update `posthog-android` to `4.+`. If you only depend on `posthog-android-surveys-compose`, declare `com.posthog:posthog-android:4.+` in your build so Gradle resolves 4.0. If you depend on core `posthog` directly, update it in the same change: core is now 7.0 and isn't binary compatible with SDKs built against 6.x. If the same project also uses `posthog-server`, update it too.
 
 The minimum Android API level (23), Java bytecode target (Java 8), and Kotlin compatibility (2.0) are unchanged.
 
