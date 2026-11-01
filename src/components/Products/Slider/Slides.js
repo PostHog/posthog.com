@@ -272,51 +272,6 @@ export const UserPaths = () => {
     )
 }
 
-export const CorrelationAnalysis = () => {
-    const subfeatures = [
-        {
-            name: 'Feature 1',
-            description: 'Description 1',
-        },
-        {
-            name: 'Feature 2',
-            description: 'Description 2',
-        },
-        {
-            name: 'Feature 3',
-            description: 'Description 3',
-        },
-        {
-            name: 'Feature 4',
-            description: 'Description 4',
-        },
-    ]
-    return (
-        <div className="md:bg-accent dark:md:bg-accent-dark rounded-md text-primary dark:text-primary-dark p-4 md:p-8 space-y-6">
-            <div className="text-center">
-                <h2 className="text-3xl md:text-4xl mb-2">Correlation analysis</h2>
-                <p className="opacity-75 mb-2 max-w-2xl mx-auto">
-                    When analyzing funnels, correlation analysis highlights significant events or properties that may be
-                    useful in determining how likely someone is to converting or churning.
-                </p>
-            </div>
-
-            <div className="md:!-mb-20">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-correlation-analysis.png"
-                    className="w-full"
-                />
-            </div>
-
-            <ul className="hidden grid grid-cols-3 xl:grid-cols-5 gap-8 list-none p-0">
-                {subfeatures.map((subfeature, index) => {
-                    return <Subfeature {...subfeature} key={index} />
-                })}
-            </ul>
-        </div>
-    )
-}
-
 export const Retention = () => {
     const subfeatures = []
     return (

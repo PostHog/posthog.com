@@ -10,7 +10,6 @@ import {
     IconFunnels,
     IconLifecycle,
     IconUserPaths,
-    IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
     IconDashboard,

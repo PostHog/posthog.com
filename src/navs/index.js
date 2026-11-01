@@ -4341,7 +4341,7 @@ export const docsMenu = {
             icon: 'IconGraph',
             color: 'blue',
             url: '/docs/product-analytics',
-            description: 'Funnels, graphs, user paths, correlation analysis, retention, stickiness, lifecycle, SQL',
+            description: 'Funnels, graphs, user paths, retention, stickiness, lifecycle, SQL',
             children: [
                 {
                     name: 'Product Analytics',
@@ -4532,12 +4532,6 @@ export const docsMenu = {
                     url: '/docs/product-analytics/lifecycle',
                     icon: 'IconLifecycle',
                     color: 'yellow',
-                },
-                {
-                    name: 'Correlation analysis',
-                    url: '/docs/product-analytics/correlation',
-                    icon: 'IconArrowUpRight',
-                    color: 'blue',
                 },
                 {
                     name: 'SQL',

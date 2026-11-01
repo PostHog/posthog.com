@@ -247,7 +247,6 @@ const Toolkits = () => {
                 'trends',
                 'funnels',
                 'user_paths',
-                'correlation_analysis',
                 'retention',
                 'stickiness',
                 'lifecycle',

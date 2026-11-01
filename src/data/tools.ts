@@ -255,13 +255,6 @@ export const tools = [
         category: 'dataviz',
     },
     {
-        handle: 'correlation_analysis',
-        name: 'Correlation Analysis',
-        searchDescription: 'Discover which events correlate with conversion or churn.',
-        slug: 'correlation-analysis',
-        category: 'dataviz',
-    },
-    {
         handle: 'retention',
         name: 'Retention',
         searchDescription: 'See how many users return over time.',

@@ -166,16 +166,10 @@ export const topFeatures: CarouselSlide[] = [
                 </p>
                 <div className="@container">
                     <LabeledList
-                        items={[
-                            ...f.funnels.features.slice(0, 3).map((item) => ({
-                                label: item.title,
-                                description: item.description,
-                            })),
-                            {
-                                label: f.correlation_analysis.title,
-                                description: f.correlation_analysis.description,
-                            },
-                        ]}
+                        items={f.funnels.features.slice(0, 4).map((item) => ({
+                            label: item.title,
+                            description: item.description,
+                        }))}
                     />
                 </div>
             </>
