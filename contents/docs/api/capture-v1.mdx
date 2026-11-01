@@ -100,7 +100,7 @@ Each event in `batch`:
 | `event` | Yes | The event name, up to 200 bytes. See [limits](#limits-and-validation). |
 | `uuid` | Yes | A unique ID for this event. Use a UUIDv7. See [event UUIDs](#event-uuids). |
 | `distinct_id` | Yes | Who did it, up to 200 bytes. See [choosing a distinct ID](#choosing-a-distinct-id). |
-| `timestamp` | Yes | When the event happened, in RFC 3339 format with at least millisecond precision. You can send more precise values. |
+| `timestamp` | Yes | When the event happened, in RFC 3339 format with at least millisecond precision, like `2026-10-19T12:00:00.000Z`. You can send more precise values. |
 | `session_id` | No | The [session](/docs/data/sessions) ID, as a string. Same as the `$session_id` property. |
 | `window_id` | No | The window ID, as a string. Same as the `$window_id` property. |
 | `options` | No | Settings for how PostHog processes this event. See [event options](#event-options). |
@@ -135,7 +135,7 @@ Options control how PostHog processes an event. They replace the legacy option p
 |---|---|---|---|
 | `process_person_profile` | Boolean | `false` sends an [anonymous event](/docs/data/anonymous-vs-identified-events) that doesn't create or update a person profile | `$process_person_profile` |
 | `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
-| `disable_skew_correction` | Boolean | `true` keeps your `timestamp` exactly as sent instead of [correcting for clock skew](#timestamps-and-clock-skew) | `$ignore_sent_at` |
+| `disable_skew_correction` | Boolean | `true` keeps your `timestamp` as sent instead of [correcting for clock skew](#timestamps-and-clock-skew), unless it's more than 23 hours in the future | `$ignore_sent_at` |
 | `product_tour_id` | String | Links the event to a product tour. PostHog's web SDK sets it on product tour events, so you rarely need it | `$product_tour_id` |
 
 - Booleans also accept common forms like `"true"`, `"false"`, `1`, and `0`. `null` means "not set".
@@ -260,7 +260,7 @@ Errors from capture use this body. `error` is a stable tag you can match on. A r
 
 ### Per-event results
 
-A `200` response has one result for every event, keyed by the event's `uuid`:
+A `200` response always has a `results` object, with one result for every event, keyed by the event's `uuid`. PostHog SDKs treat a `2xx` response without a `results` object as a failed request and don't resend it.
 
 ```json
 {
@@ -329,9 +329,9 @@ PostHog SDKs that use v1 do all of this for you. If you use one, don't wrap its 
 
 ## Timestamps and clock skew
 
-PostHog corrects for a wrong client clock using `PostHog-Request-Timestamp`. It compares that header with the time it received the request, then moves each event's `timestamp` by the difference. Set `disable_skew_correction` to keep your timestamps exactly as sent.
+PostHog corrects for a wrong client clock using `PostHog-Request-Timestamp`. It compares that header with the time it received the request, then moves each event's `timestamp` by the difference. Set `disable_skew_correction` to skip this correction and keep your timestamps as sent.
 
-An event whose corrected timestamp is more than 23 hours in the future is stored with the time PostHog received it. See [how PostHog computes timestamps](/docs/data/timestamps).
+An event whose timestamp, after any correction, is more than 23 hours in the future is stored with the time PostHog received it. This also applies when `disable_skew_correction` is set. See [how PostHog computes timestamps](/docs/data/timestamps).
 
 ## Examples
 
