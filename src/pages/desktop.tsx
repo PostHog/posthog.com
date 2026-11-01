@@ -1861,7 +1861,7 @@ const CloudAgentsCallout = () => {
 
                 <OSButton
                     asLink
-                    to="/docs/posthog-desktop/environments"
+                    to="/docs/self-driving"
                     state={{ newWindow: true }}
                     variant="primary"
                     size="md"
@@ -2109,7 +2109,7 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     PostHog Desktop is a{' '}
-                    <a href="/docs/posthog-desktop" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         desktop coding agent
                     </a>{' '}
                     that understands your product and business, not just your source code. It picks up work from product
@@ -2118,15 +2118,15 @@ const FAQ_ITEMS = [
                 </p>
                 <p>
                     You can also drive it manually like a regular coding agent: open a{' '}
-                    <a href="/docs/posthog-desktop/tasks" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         task
                     </a>
                     , describe what you want, and watch it work. Run tasks locally, in an isolated{' '}
-                    <a href="/docs/posthog-desktop/worktrees" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         worktree
                     </a>
                     , or in a{' '}
-                    <a href="/docs/posthog-desktop/cloud-runs" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         PostHog-managed cloud sandbox
                     </a>
                     .
@@ -2152,7 +2152,7 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     A{' '}
-                    <a href="/docs/posthog-desktop/spaces" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         space
                     </a>{' '}
                     is where a project lives. It holds the agent sessions, the canvases, and a <code>CONTEXT.md</code>{' '}
@@ -2226,7 +2226,7 @@ const FAQ_ITEMS = [
             <div className="space-y-3">
                 <p>
                     You pick a{' '}
-                    <a href="/docs/posthog-desktop/use-any-model-and-harness" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         harness
                     </a>
                     , a model, and a reasoning effort for every task. The harness options are Pi, which is PostHog's
@@ -2249,7 +2249,7 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    <a href="/docs/posthog-desktop/skills" className="underline">
+                    <a href="/docs/skills" className="underline">
                         Skills
                     </a>{' '}
                     give the agent a repeatable process for one specific job, so you stop explaining the same steps
@@ -2326,19 +2326,19 @@ const FAQ_ITEMS = [
         content: (
             <div className="space-y-3">
                 <p>
-                    <a href="/docs/posthog-desktop/tasks" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         Three modes
                     </a>
                     , picked per task:
                 </p>
                 <p>
                     <strong>Local</strong> runs in your current branch and working directory.{' '}
-                    <a href="/docs/posthog-desktop/worktrees" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         <strong>Worktree</strong>
                     </a>{' '}
                     creates an isolated git worktree per task, so you can run several agents in parallel without
                     stepping on each other.{' '}
-                    <a href="/docs/posthog-desktop/cloud-runs" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         <strong>Cloud</strong>
                     </a>{' '}
                     runs in a PostHog-managed sandbox that survives app restarts, sleeps, and network changes.
@@ -2359,7 +2359,7 @@ const FAQ_ITEMS = [
                     integration.
                 </p>
                 <p>
-                    <a href="/docs/posthog-desktop/posthog-integration" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         Live product context
                     </a>{' '}
                     is worked out on your machine. PostHog Desktop spots event capture, feature flag checks, and SDK
@@ -2367,7 +2367,7 @@ const FAQ_ITEMS = [
                     code is uploaded for that.
                 </p>
                 <p>
-                    <a href="/docs/posthog-desktop/cloud-runs" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         Cloud tasks
                     </a>{' '}
                     run in a PostHog-managed sandbox, and you set the network rules: a trusted allowlist, the whole
@@ -2387,7 +2387,7 @@ const FAQ_ITEMS = [
                 </p>
                 <p>
                     The first time an agent reaches for an unapproved{' '}
-                    <a href="/docs/posthog-desktop/mcp-servers" className="underline">
+                    <a href="/docs/model-context-protocol" className="underline">
                         MCP tool
                     </a>
                     , it asks. Allow it once, allow it for the session, or block it, and set a standing rule per server
@@ -2422,7 +2422,7 @@ const FAQ_ITEMS = [
                 <p>
                     Every organization gets a $20/month free tier to explore. Set a billing limit to control additional
                     use. Simple tasks use very few credits; larger, multi-file work uses more. See the{' '}
-                    <a href="/docs/posthog-desktop/pricing" className="underline">
+                    <a href="/docs/self-driving" className="underline">
                         pricing docs
                     </a>{' '}
                     for the full breakdown.
@@ -2437,7 +2437,7 @@ const FAQ_ITEMS = [
         trigger: 'Is it open source?',
         content: (
             <p>
-                <a href="/docs/posthog-desktop/open-source" className="underline">
+                <a href="/docs/self-driving" className="underline">
                     Yes, MIT licensed
                 </a>
                 . The source lives in{' '}

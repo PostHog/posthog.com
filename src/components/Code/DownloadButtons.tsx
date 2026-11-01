@@ -30,7 +30,7 @@ export function DownloadButtons({ className = '', align = 'start', size = 'md' }
         return (
             <div className={className}>
                 <div className={`flex flex-wrap items-center gap-2 ${justify}`}>
-                    <CallToAction type="primary" size={size} to="/docs/posthog-desktop" state={{ newWindow: true }}>
+                    <CallToAction type="primary" size={size} to="/docs/self-driving" state={{ newWindow: true }}>
                         Read the docs
                     </CallToAction>
                 </div>
@@ -99,7 +99,7 @@ export function DownloadButtons({ className = '', align = 'start', size = 'md' }
                 </div>
             </div>
 
-            <CallToAction type="secondary" size={size} to="/docs/posthog-desktop" state={{ newWindow: true }}>
+            <CallToAction type="secondary" size={size} to="/docs/self-driving" state={{ newWindow: true }}>
                 Read the docs
             </CallToAction>
         </div>

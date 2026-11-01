@@ -186,7 +186,7 @@ In flight with a PR, newest report first
 ```
 
 
-The skill bundles Python scripts to do the boring parts: `render_table.py` builds the table from the API and `gh`, `pr_candidates.py` ranks reports that are ready for a Create PR press, `merge_intent.py` finds PRs I've approved that need agent work to get merged, and `draft_task.py` writes the payload to launch a PostHog [task](/docs/posthog-desktop/tasks) for a stalled row. So "get these three PRs green on CI" turns into three async tasks I can check on later.
+The skill bundles Python scripts to do the boring parts: `render_table.py` builds the table from the API and `gh`, `pr_candidates.py` ranks reports that are ready for a Create PR press, `merge_intent.py` finds PRs I've approved that need agent work to get merged, and `draft_task.py` writes the payload to launch a PostHog [task](/docs/self-driving) for a stalled row. So "get these three PRs green on CI" turns into three async tasks I can check on later.
 
 It also has a `working-set.md` that records only what I've personally chosen to own, with four rules to guide it:
 

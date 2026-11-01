@@ -50,7 +50,7 @@ There’s no reason to *not* have a shared context system since it can be as sim
 
 In chat-based systems, shared context is basically free since you can infer what’s in scope from the root conversation. When the PostHog in Slack bot gets tagged in a thread, it can just read what people have said in chat so far. It also has context from the relevant PostHog project for that organization via [our MCP](/mcp).
 
-But our approach to multiplayer in PostHog Desktop is built on [Spaces](/docs/posthog-desktop/spaces), not conversations. Spaces are like “rooms” that hold people, agents, and work objects in a shared container. They’re entirely user-defined, so there’s no way to automatically identify and initialize shared context.
+But our approach to multiplayer in PostHog Desktop is built on [Spaces](/docs/self-driving), not conversations. Spaces are like “rooms” that hold people, agents, and work objects in a shared container. They’re entirely user-defined, so there’s no way to automatically identify and initialize shared context.
 
 We first tried to solve this by asking users to write down the purpose of a Space in a `CONTEXT.md` at creation time and update it regularly. As you’d expect, that never actually happened. Over 90 days, only 64 users ever started a shared context file, and only 14 users ever edited it.
 
@@ -92,7 +92,7 @@ We’re still talking to users to figure out what this means for how we design s
 
 One area we *are* certain about is that collaborative tasks that happen *before* writing any code are ripe for better AI tooling.
 
-We think artifacts are the answer here. Artifacts are agent-generated web apps that are rendered next to your agent conversation. You might know them as Claude Artifacts, ChatGPT Canvas, or [PostHog Canvases](/docs/posthog-desktop/canvases). For simplicity, we’ll refer to them broadly as “artifacts.”
+We think artifacts are the answer here. Artifacts are agent-generated web apps that are rendered next to your agent conversation. You might know them as Claude Artifacts, ChatGPT Canvas, or [PostHog Canvases](/docs/self-driving). For simplicity, we’ll refer to them broadly as “artifacts.”
 
 Most people think of artifacts as just another way for agents to display their answers to humans, like when you ask Claude to walk you through a codebase with illustrations rather than text. But it’s also useful as a medium for human-to-human communication.
 

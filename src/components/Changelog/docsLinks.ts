@@ -10,7 +10,7 @@ export const CHANGELOG_TOPIC_DOCS: Record<string, string> = {
     dashboards: '/docs/product-analytics/dashboards',
     'data-pipelines': '/docs/data-pipelines',
     'data-warehouse': '/docs/data-warehouse',
-    desktop: '/docs/posthog-desktop',
+    desktop: '/docs/self-driving',
     endpoints: '/docs/endpoints',
     'error-tracking': '/docs/error-tracking',
     'events-actions': '/docs/data/events',
