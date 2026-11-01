@@ -32,7 +32,7 @@ Next, we'll implement the A/B/n test in our app.
 
 Implementing our test requires checking the feature flag to see which experiment variant our user has been assigned to. We then add code to handle each variant. 
 
-We will use a [Next.js](/docs/libraries/next-js) app where we already set up the `[PostHogProvider](/docs/libraries/next-js#app-router)` for this.
+We will use a [Next.js](/docs/libraries/next-js) app where we already set up the `[PostHogProvider](/docs/libraries/next-js#router-specific-instructions)` for this.
 
 > Using a different library or framework? See our [experiment docs](/docs/experiments/adding-experiment-code) on how to add your code using our different SDKs.
 
