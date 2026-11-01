@@ -535,20 +535,24 @@ Classes that implement `PostHogInterface`, such as test fakes, need updating. Th
 `PostHogConfig.onFeatureFlags` and `reloadFeatureFlags()` now receive a `PostHogFeatureFlagsLoaded`:
 
 ```kotlin
+val mainHandler = Handler(Looper.getMainLooper())
+
 // Version 3
 config.onFeatureFlags = PostHogOnFeatureFlags {
-    refreshUi()
+    mainHandler.post { refreshUi() }
 }
 
 // Version 4
 config.onFeatureFlags = PostHogFeatureFlagsCallback { loaded ->
     if (!loaded.errorsLoading) {
-        refreshUi()
+        mainHandler.post { refreshUi() }
     }
 }
 ```
 
-A trailing lambda such as `PostHog.reloadFeatureFlags { refreshUi() }` still compiles, so check whether it should read `errorsLoading`. The callback also runs after a failed load.
+These callbacks run on a background thread, so switch to the main thread before touching UI.
+
+A trailing lambda such as `PostHog.reloadFeatureFlags { mainHandler.post { refreshUi() } }` still compiles, so check whether it should read `errorsLoading`. The callback also runs after a failed load.
 
 ### Behavior changes
 
