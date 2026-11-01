@@ -35,6 +35,7 @@ Send a JSON body with these fields:
 | `to` | Yes | The email address of the recipient. One address for each request. |
 | `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
 | `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. If you leave it out, PostHog uses the email address as the distinct ID, which might not match the person in your product. We recommend that you always send it. |
+| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is the project's **Capture email engagement events** setting. Send `false` to turn capture off for this email. On a retry with the same `Idempotency-Key`, send this field as you did the first time, or PostHog returns `idempotency_key_reused`. |
 
 In the template, use the same names that you send in `message_data`:
 
@@ -98,12 +99,12 @@ You can also send the subject and the body from your code, without a template in
 | `headers` | No | An object of up to 10 custom headers, such as `{ "X-Entity-Ref-ID": "order-123" }`. |
 | `tags` | No | A list of up to 10 `{ "name", "value" }` objects. PostHog adds them to the email's engagement events as `$email_tags`. |
 | `attachments` | No | A list of up to 10 `{ "filename", "content", "content_type", "content_id" }` objects, with `content` in Base64. The files can have at most 512 KB in total after decoding. |
-| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). For content from your code, the default is `true`. For a template send, the default is the project's **Capture email engagement events** setting. Send `false` to turn capture off for this email. |
+| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). For content from your code, the default is `true`. Send `false` to turn capture off for this email. |
 
 A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of the fields from `from` to `attachments`, because the template uses its own settings.
 
 - **Headers.** PostHog sets some headers itself and refuses them in `headers`: `From`, `To`, `Cc`, `Bcc`, `Reply-To`, `Subject`, `Date`, `Message-ID`, `MIME-Version`, `Sender`, `Return-Path`, `Auto-Submitted`, `DKIM-Signature`, `Received`, and all `Content-*`, `X-PostHog-*`, and `X-SES-*` headers. Header names ignore case, so set each name one time. A name has 1 to 126 visible ASCII characters, with no spaces and no colon (`:`). A value has at most 870 printable ASCII characters, and it can have spaces.
-- **Tags.** A tag name and its value use only ASCII letters, numbers, `_`, and `-`, with at most 256 characters each. PostHog refuses a name that starts with `ph_`, in any case, because those names are PostHog's.
+- **Tags.** A tag name and its value use only ASCII letters, numbers, `_`, and `-`, with at most 256 characters each. PostHog refuses a name that starts with `ph_` in uppercase or lowercase, such as `PH_` or `Ph_`, because those names are PostHog's.
 - **Attachments.** PostHog refuses file types that mailbox providers block, such as `.exe`. To show a file in the HTML, give it a `content_id`, such as `logo`, and use `<img src="cid:logo">`. For a larger file, send a link.
 - **Suppressed addresses.** If `to`, a `cc`, or a `bcc` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
