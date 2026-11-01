@@ -93,7 +93,7 @@ You can also send the subject and the body from your code, without a template in
 | `html` | One of `html` and `text` | The HTML body. PostHog sends it as you wrote it and renders no placeholders. |
 | `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
 | `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
-| `reply_to` | No | A list of up to 10 addresses that replies go to. |
+| `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
 | `cc`, `bcc` | No | Lists of up to 10 addresses each, without a display name. |
 | `headers` | No | An object of up to 10 custom headers, such as `{ "X-Entity-Ref-ID": "order-123" }`. |
 | `tags` | No | A list of up to 10 `{ "name", "value" }` objects. PostHog adds them to the email's engagement events as `$email_tags`. |
@@ -102,8 +102,8 @@ You can also send the subject and the body from your code, without a template in
 
 A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of the fields from `from` to `attachments`, because the template uses its own settings.
 
-- **Headers.** PostHog sets some headers itself and refuses them in `headers`: `From`, `To`, `Cc`, `Bcc`, `Reply-To`, `Subject`, `Date`, `Message-ID`, `MIME-Version`, `Sender`, `Return-Path`, `Auto-Submitted`, and all `Content-*`, `X-PostHog-*`, and `X-SES-*` headers. Header names ignore case, so set each name one time.
-- **Tags.** A tag name and its value use only ASCII letters, numbers, `_`, and `-`. Names that start with `ph_` belong to PostHog.
+- **Headers.** PostHog sets some headers itself and refuses them in `headers`: `From`, `To`, `Cc`, `Bcc`, `Reply-To`, `Subject`, `Date`, `Message-ID`, `MIME-Version`, `Sender`, `Return-Path`, `Auto-Submitted`, `DKIM-Signature`, `Received`, and all `Content-*`, `X-PostHog-*`, and `X-SES-*` headers. Header names ignore case, so set each name one time. A name has at most 126 printable ASCII characters and no colon (`:`). A value has at most 870 printable ASCII characters.
+- **Tags.** A tag name and its value use only ASCII letters, numbers, `_`, and `-`, with at most 256 characters each. Names that start with `ph_` belong to PostHog.
 - **Attachments.** PostHog refuses file types that mailbox providers block, such as `.exe`. To show a file in the HTML, give it a `content_id`, such as `logo`, and use `<img src="cid:logo">`. For a larger file, send a link.
 - **Suppressed addresses.** If `to`, a `cc`, or a `bcc` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
