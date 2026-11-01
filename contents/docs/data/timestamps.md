@@ -22,7 +22,7 @@ PostHog automatically computes timestamps for captured events, but you can also 
 
 - Every event must have a `timestamp`, in RFC 3339 format with at least millisecond precision.
 - The `PostHog-Request-Timestamp` header replaces `sent_at`. PostHog compares it with the time it received the request and adjusts each event's `timestamp` by the difference.
-- The `disable_skew_correction` [event option](/docs/api/capture-v1#event-options) replaces `$ignore_sent_at`.
+- The `disable_skew_correction` [event option](/docs/api/capture-v1#event-options) replaces `$ignore_sent_at`. Like `$ignore_sent_at`, it keeps your `timestamp` as sent, except that a timestamp more than 23 hours in the future is still replaced with the time PostHog received it.
 - `offset` isn't used.
 
 ## Timestamp format
