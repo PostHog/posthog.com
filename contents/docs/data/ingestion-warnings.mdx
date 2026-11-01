@@ -228,7 +228,7 @@ These warnings apply to [AI Observability](/docs/llm-analytics) events.
 
 ### Capture v1 validation warnings
 
-[Capture v1](/docs/api/capture-v1) checks each event on its own and drops only the events with a problem. It also tells your SDK which events it dropped, and why, in the [result details](/docs/api/capture-v1#result-details). A few problems still reject the whole request with a `400`.
+[Capture v1](/docs/api/capture-v1) checks each event on its own and drops only the events with a problem. It also tells your SDK which events it dropped, and why, in the [result details](/docs/api/capture-v1#result-details). A few problems still reject the whole request with a `400`. A request PostHog can't parse, such as one with a missing field or a field of the wrong type, gets a `400` [`request_parsing_error`](/docs/api/capture-v1#field-types) and raises no warning.
 
 | Warning | Cause |
 | --- | --- |
@@ -238,8 +238,8 @@ These warnings apply to [AI Observability](/docs/llm-analytics) events.
 | Discarded event with malformed properties | `properties` isn't a JSON object. |
 | Discarded event with invalid capture options | `options` isn't a JSON object, or an [option](/docs/api/capture-v1#event-options) value can't be read. The warning names the options. |
 | Rejected a request containing no events | The `batch` was empty. |
-| Rejected a batch with invalid metadata | A batch field, such as `created_at`, was missing or invalid. Nothing in the request was stored. |
-| Rejected a batch containing an event with no UUID | An event had no `uuid`. Nothing in the request was stored. |
+| Rejected a batch with invalid metadata | `created_at` wasn't in RFC 3339 format. Nothing in the request was stored. |
+| Rejected a batch containing an event with no UUID | An event's `uuid` was empty. Nothing in the request was stored. |
 | Rejected a batch containing an event with an invalid UUID | An event's `uuid` wasn't a valid UUID. Nothing in the request was stored. |
 | Discarded events that reused another event's UUID in the same request | Two or more events in one request had the same `uuid`. PostHog kept the first and dropped the rest. Give every event its own [UUID](/docs/api/capture-v1#event-uuids). |
 
