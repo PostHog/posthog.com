@@ -73,8 +73,8 @@ The callback also runs when loading fails. `loaded` is a `PostHogFeatureFlagsLoa
 To hear about every flag load from a screen or a library, register a listener. It runs on the main thread, and it also gets the current values if flags have already loaded. This requires version 4.0 or later:
 
 ```kotlin
-val subscription = PostHog.onFeatureFlags { loaded ->
-    if (loaded.variants["flag-key"] == "test") {
+val subscription = PostHog.onFeatureFlags {
+    if (PostHog.getFeatureFlag("flag-key") == "test") {
         // do something
     }
 }
@@ -82,6 +82,8 @@ val subscription = PostHog.onFeatureFlags { loaded ->
 // Later, stop listening
 subscription.unsubscribe()
 ```
+
+Read the value with `getFeatureFlag` when you act on it. It captures `$feature_flag_called`, which experiments use to record exposure, and reading `loaded.variants` doesn't.
 
 ### Reloading feature flags
 
