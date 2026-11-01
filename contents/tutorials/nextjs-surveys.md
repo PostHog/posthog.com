@@ -54,7 +54,7 @@ Finally, run `npm run dev` and go to `http://localhost:3000` to see our new home
 
 We'll use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup).
 
-First, set up PostHog for use on the [client-side](/docs/libraries/next-js#router-specific-instructions) by installing the [JavaScript React SDK](/docs/libraries/react):
+First, set up PostHog for use on the [client-side](/docs/libraries/next-js#client-side-setup) by installing the [JavaScript React SDK](/docs/libraries/react):
 
 ```bash
 npm install posthog-js @posthog/react

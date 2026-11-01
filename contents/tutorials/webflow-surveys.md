@@ -30,7 +30,7 @@ Go to the "Custom code" tab in site settings. In the "Head code" section, paste 
 
 ## Create your survey
 
-Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." There are a variety of [survey types](/docs/surveys/creating-surveys#steps) to choose from, or you can create your own by clicking "Create blank survey".
+Create a survey in PostHog by going to the [surveys tab](https://app.posthog.com/surveys) and clicking "New survey." There are a variety of [survey types](/docs/surveys/creating-surveys#creating-a-new-survey) to choose from, or you can create your own by clicking "Create blank survey".
 
 ![PostHog survey templates](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/webflow-surveys/survey-templates.png)
 
