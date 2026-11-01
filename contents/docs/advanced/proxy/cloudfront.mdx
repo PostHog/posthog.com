@@ -100,9 +100,9 @@ Unless a policy forwards them, CloudFront drops custom headers and replaces `Use
 
 </Step>
 
-<Step title="Create a function that keeps only the project token">
+<Step title="Create a function that keeps only PostHog keys">
 
-The origin request policy forwards every `Authorization` value. PostHog SDKs send their keys as `Authorization: Bearer phc_...` (or `phs_` and `phx_` for feature flag definitions), but your app may add its own session token to requests on the same domain. A CloudFront Function removes any other value before the request leaves CloudFront.
+The origin request policy forwards every `Authorization` value. Capture v1 SDKs send the project token as `Authorization: Bearer phc_...`, and server SDKs send a project secret key (`phs_`) or personal API key (`phx_`) for local feature flag evaluation and remote config. Your app may also add its own session token to requests on the same domain. A CloudFront Function removes any other value before the request leaves CloudFront.
 
 In the CloudFront console, follow AWS's guide to [create a function](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/create-function.html) named `posthog-authorization` with the `cloudfront-js-2.0` runtime and this code:
 
