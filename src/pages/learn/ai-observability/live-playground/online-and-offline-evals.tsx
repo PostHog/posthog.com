@@ -1,6 +1,6 @@
 import React from 'react'
-import LearnPage from 'components/PocketGuides/LearnPage'
-import EvalsPlayground from 'components/PocketGuides/EvalsPlayground'
+import LearnPage from 'components/Learn/LearnPage'
+import EvalsPlayground from 'components/Learn/EvalsPlayground'
 
 export default function AiObservabilityEvalsPlayground(): JSX.Element {
     return (

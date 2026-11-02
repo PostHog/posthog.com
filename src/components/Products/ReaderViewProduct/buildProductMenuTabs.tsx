@@ -9,7 +9,7 @@ import {
     IconTerminal,
 } from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/PocketGuides/bookModel'
+import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
 import { pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
 import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
