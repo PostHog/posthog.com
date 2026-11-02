@@ -303,15 +303,14 @@ Second is `cookieless_mode: "on_reject"`:
 
 ### What each mode does by consent state
 
-|  | `always` | `on_reject`, no choice yet | `on_reject`, opted in | `on_reject`, opted out |
-| --- | --- | --- | --- | --- |
-| Events sent | Yes, cookieless | No | Yes, with a persistent distinct ID | Yes, cookieless |
-| Stored in the browser | Nothing | Nothing | PostHog cookie and local storage | Only the consent choice |
-| Session replay and surveys | Off | Off | On | Off |
-| Heatmaps | On | Off | On | On |
-| `get_explicit_consent_status()` | – | `"pending"` | `"granted"` | `"denied"` |
+| Mode and visitor choice | Events sent | Browser storage | Session replay and surveys | Heatmaps | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `always` | Yes | No | No | Yes | Events use an anonymous ID from PostHog's servers. |
+| `on_reject`, no answer yet | No | No | No | No | PostHog sends nothing until the visitor answers. |
+| `on_reject`, accepted | Yes | Yes | Yes | Yes | PostHog stores a cookie and a persistent distinct ID. |
+| `on_reject`, declined | Yes | Yes | No | Yes | Events use an anonymous ID. The browser stores only the consent choice. |
 
-In this table, "cookieless" means PostHog's servers calculate the distinct ID from a privacy-preserving hash, so the browser stores no ID. With `opt_out_capturing_by_default: true`, or with `respect_dnt: true` and Do Not Track, a visitor with no choice gets the "opted out" column for events, session replay and surveys, and heatmaps.
+With `opt_out_capturing_by_default: true`, or with `respect_dnt: true` and Do Not Track, a visitor with no answer gets the "declined" row. PostHog stores nothing in the browser for that visitor.
 
 <CalloutBox type="info" title="More to do">
 
