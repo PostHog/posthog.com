@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/series-b/series-b-baby.png
+ogImage: generated
 author:
   - joe-martin
 category: PostHog news
