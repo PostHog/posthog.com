@@ -10,35 +10,35 @@ pocketGuideOrder: 4
 
 # Prompts
 
-The updated instructions help Twig’s support agent recognize the broken-amenity exception. Now Twig’s engineers need to save those instructions, get them into the application, and verify which version produced each answer.
+The updated instructions help Twig's support agent recognize the broken-amenity exception. Now Twig's engineers need to save those instructions, get them into the application, and verify which version produced each answer.
 
 ## Save the corrected instructions
 
-Twig’s engineers use PostHog’s <Term name="prompt management">prompt management</Term> to store instructions the application can fetch. They name the support prompt `support-refunds`.
+Twig's engineers use PostHog's <Term name="prompt management">prompt management</Term> to store instructions the application can fetch. They name the support prompt `support-refunds`.
 
-The original cancellation instructions are `v1`. Twig’s engineers publish the corrected instructions as `v2`. PostHog numbers each <Term name="prompt version">prompt version</Term> automatically and preserves its instructions and configuration, so the engineers can compare changes or return to earlier content.
+The original cancellation instructions are `v1`. Twig's engineers publish the corrected instructions as `v2`. PostHog numbers each <Term name="prompt version">prompt version</Term> automatically and preserves its instructions and configuration, so the engineers can compare changes or return to earlier content.
 
 ## Verify the version reaches the model
 
-Twig’s application is pinned to `v1`. Publishing `v2` doesn’t update that setting, so the support agent continues refusing the heating refund.
+Twig's application is pinned to `v1`. Publishing `v2` doesn't update that setting, so the support agent continues refusing the heating refund.
 
 Send the complaint, then switch the application to fetch `v2` and send it again. Inspect the version and instructions recorded with each answer:
 
 <AioPromptVersionFigure />
 
-Twig’s engineers attach `$ai_prompt_name` and `$ai_prompt_version` to each generation. They also capture the instructions sent to the model. Together, those records connect an answer to the prompt that produced it.
+Twig's engineers attach `$ai_prompt_name` and `$ai_prompt_version` to each generation. They also capture the instructions sent to the model. Together, those records connect an answer to the prompt that produced it.
 
-PostHog’s **Usage** tab shows which versions the application fetched by name. A fetch alone doesn’t prove those instructions reached the model: if the generation still contains the old instructions, the engineers investigate the application’s prompt fetch and cache.
+PostHog's **Usage** tab shows which versions the application fetched by name. A fetch alone doesn't prove those instructions reached the model: if the generation still contains the old instructions, the engineers investigate the application's prompt fetch and cache.
 
 ## Reuse a prompt with different inputs
 
-The cancellation cases use the same instructions but different notice periods. Twig’s engineers add `{{days_before_arrival}}`, a <Term name="template variable">template variable</Term>: a placeholder filled with a value for each request.
+The cancellation cases use the same instructions but different notice periods. Twig's engineers add `{{days_before_arrival}}`, a <Term name="template variable">template variable</Term>: a placeholder filled with a value for each request.
 
 Change the notice period to see what the application sends to the model:
 
 <AioPromptTemplateFigure />
 
-The engineers also save their refund policy as `refund-policy` and include it through a <Term name="prompt reference">prompt reference</Term>, which inserts another managed prompt’s content. They keep that policy version fixed while comparing instructions, so a policy change can’t explain a different answer.
+The engineers also save their refund policy as `refund-policy` and include it through a <Term name="prompt reference">prompt reference</Term>, which inserts another managed prompt's content. They keep that policy version fixed while comparing instructions, so a policy change can't explain a different answer.
 
 They record the prompt and application-code versions with each offline experiment so another engineer can reproduce the comparison.
 

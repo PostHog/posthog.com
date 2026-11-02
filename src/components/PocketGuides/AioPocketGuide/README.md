@@ -32,6 +32,6 @@ Prompt comparison figures show their prompt instructions directly, without a Sys
 
 AIO figures load through a client-only asynchronous boundary in `bookComponents.tsx`, so other guide readers do not download their Twig styles or images. Stay photos use local 320px JPEG derivatives of the package catalog assets. The recommendation activity log retains a recorded save event when the visitor later removes the bookmark; Reset clears that history.
 
-Each lazy-loaded figure has a local `FigureErrorBoundary`. A failed import or render replaces only that figure with a short refresh message, leaving the chapter and other figures readable. Suspense still handles pending imports without showing an error. `FigureErrorBoundary.test.ts` covers both resolved and rejected lazy imports.
+Each lazy-loaded figure has a local `FigureErrorBoundary`. A failed import or render replaces only that figure with a short refresh message, leaving the chapter and other figures readable. Suspense still handles pending imports without showing an error. `FigureErrorBoundary.test.ts` covers resolved and rejected lazy imports, exception reporting, and render failures when PostHog is unavailable. Caught failures use the existing optional `window.posthog.captureException` integration.
 
 The current local preview archive is built from twig-components commit `34f6feb473ecf3ba6cbd0bbeda0e3a666c49742c` (PR #43). It includes compact response bubbles and matching composer typography. It remains an unpublished review package and must be replaced with the published release before merge.

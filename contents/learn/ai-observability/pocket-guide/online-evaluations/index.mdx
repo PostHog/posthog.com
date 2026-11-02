@@ -10,11 +10,11 @@ pocketGuideOrder: 2
 
 # Online evaluations
 
-Twig's AI support agent helps visitors with questions and problems during their stays. For an ordinary cancellation, Twig requires seven days' notice for a full refund. The cancellation policy has an exception for broken essential amenities (heating, cooling, hot water, all the human luxuries): if an amenity can't be repaired promptly, the visitor qualifies for relocation or a refund at any time.
+Twig's AI support agent helps visitors with questions and problems during their stays. For an ordinary cancellation, Twig requires at least seven days' notice before arrival for a full refund. The cancellation policy has an exception for broken essential amenities (heating, cooling, hot water, all the human luxuries): if an amenity can't be repaired promptly, the visitor qualifies for relocation or a refund at any time.
 
 <AioSupportConversationPreview />
 
-The support agent refuses a full refund because the request falls inside the typical seven-day window. The support agent applied the wrong refund policy to the situation.
+The support agent refuses a full refund, applying the ordinary seven-day notice rule instead of the broken-amenity exception.
 
 Twig's engineers configure <Term name="online evaluations">online evaluations</Term> to flag incorrect support answers without waiting for bug reports.
 
@@ -32,31 +32,31 @@ An <Term name="LLM-as-a-judge">LLM judge</Term> uses another model to assess a r
 
 ## Give evals facts
 
-Twig’s engineers name their LLM judge evaluation “Policy correctness” and give it three things:
+Twig's engineers name their LLM judge evaluation “Policy correctness” and give it three things:
 
-- **The visitor’s request:** the heating is broken and can’t be repaired.
-- **The support answer:** no refund within seven days of arrival.
+- **The visitor's request:** the heating is broken and can't be repaired.
+- **The support answer:** a full refund requires at least seven days' notice before arrival.
 - **The policy:** a broken essential amenity that can't be repaired promptly qualifies for relocation or a refund at any time.
 
-The judge needs all three to assess this answer. The refusal alone sounds consistent with the ordinary cancellation policy. The visitor’s message and the broken-amenity exception explain why that policy doesn’t apply.
+The judge needs all three to assess this answer. The refusal alone sounds consistent with the ordinary cancellation policy. The visitor's message and the broken-amenity exception explain why that policy doesn't apply.
 
-In PostHog, the engineers choose **each generation** as the evaluation’s scope because this model call contains the request, answer, and policy. They choose **LLM with explanation** to receive a pass or fail with a written reason. For this answer, the judge explains that the support agent ignored the broken-amenity exception.
+In PostHog, the engineers choose **each generation** as the evaluation's scope because this model call contains the request, answer, and policy. They choose **LLM with explanation** to receive a pass or fail with a written reason. For this answer, the judge explains that the support agent ignored the broken-amenity exception.
 
-Before enabling the evaluation, Twig’s engineers review sample results for both ordinary cancellations and heating complaints. They confirm that the judge accepts a refusal when the seven-day rule applies and rejects it when the visitor qualifies for the exception.
+Before enabling the evaluation, Twig's engineers review sample results for both ordinary cancellations and heating complaints. They confirm that the judge accepts a refusal when the seven-day rule applies and rejects it when the visitor qualifies for the exception.
 
 ## Use code evals for exact comparisons
 
-Twig’s engineers use a code evaluation to catch recommendations like a two-person studio for a group of four. The rule is simple: the stay’s capacity must be at least the requested guest count.
+Twig's engineers use a code evaluation to catch recommendations like a two-person studio for a group of four. The rule is simple: the stay's capacity must be at least the requested guest count.
 
-They record `requested_guests` and `stay_capacity`, custom properties they’ve named, and write the comparison in <Term name="hog">Hog</Term>, PostHog’s evaluation scripting language.
+They record `requested_guests` and `stay_capacity`, custom properties they've named, and write the comparison in <Term name="hog">Hog</Term>, PostHog's evaluation scripting language.
 
 Change the capacity to see how the same rule handles each sample:
 
 <AioCodeEvaluationFigure />
 
-Missing capacity needs a third outcome. Twig’s engineers enable **allow N/A responses** and make the rule return `null` when either value is missing. PostHog records `N/A`: there isn’t enough information to judge whether the stay fits.
+Missing capacity needs a third outcome. Twig's engineers enable **allow N/A responses** and make the rule return `null` when either value is missing. PostHog records `N/A`: there isn't enough information to judge whether the stay fits.
 
-They monitor `N/A` results alongside passes and failures. A missing capacity mustn’t count as a suitable recommendation.
+They monitor `N/A` results alongside passes and failures. A missing capacity must not count as a suitable recommendation.
 
 ## Apply checks to the right requests
 

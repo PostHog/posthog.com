@@ -8,6 +8,10 @@ export default class FigureErrorBoundary extends React.Component<{ children: Rea
         return { failed: true }
     }
 
+    componentDidCatch(error: Error): void {
+        window.posthog?.captureException?.(error)
+    }
+
     render(): React.ReactNode {
         return this.state.failed ? (
             <p role="status" className="not-prose my-6 text-sm text-secondary">

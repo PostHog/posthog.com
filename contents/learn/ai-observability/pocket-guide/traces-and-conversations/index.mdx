@@ -26,7 +26,7 @@ Just inspecting the output from a conversation with the trip planner won't tell 
 
 - Which request produced each answer
 - What information the planner used to produce each answer
-- Whether the planner remembers visitor's requests from one message to another
+- Whether the planner remembers a visitor's requests from one message to another
 
 So they start with the visitor's first request: a forest stay for four. They open the request's <Term name="trace">trace</Term>, which groups all the elements of that request.
 
@@ -54,7 +54,7 @@ For the kitchen question, the input identifies Flamingo's Envy and includes "Ful
 
 ## Find the cause of an incorrect answer
 
-Now Twig's engineers have a pretty good understanding of how to understand an AI conversation that results in correct answers. But another visitor uses the trip planner, and reports a bug: they asked for a city stay for four, and were recommended Le Nid Chic, a studio that fits two.
+Then another visitor reports a bug: they asked the trip planner for a city stay for four, and it recommended Le Nid Chic, a studio that fits two.
 
 Twig's engineers find the request in AIO and open its trace. A <Term name="span">span</Term> records an operation within a trace. They inspect the span for Twig's catalog-search function called `search_stays`.
 
@@ -62,9 +62,9 @@ Compare the search input with the returned listing, then inspect the same reques
 
 <AioSearchFixFigure />
 
-Twig's engineers update the catalog-search code to filter by the requested guest count. They rerun the request and use the new trace to verify the change. The prompt stays the same, but now search supplies the right result. They weren't filtering by guest count.
+The span shows the cause: the catalog-search code wasn't filtering by guest count. Twig's engineers add the filter, rerun the request, and use the new trace to verify the change. The prompt stays the same, but now search supplies the right result.
 
-Notice the request has `$ai_is_error: false` because the model call _completed_, even if it return the wrong answer. Twig's engineers use the recorded input and output to investigate correctness separately from call failures.
+Notice the request has `$ai_is_error: false` because the model call _completed_, even if it returned the wrong answer. Twig's engineers use the recorded input and output to investigate correctness separately from call failures.
 
 ## Keep context to investigate later
 
@@ -73,13 +73,13 @@ The city bug shows Twig's engineers what they need to retain:
 - The visitor's request for four people
 - The search input that omitted the guest count
 - The returned studio's capacity
-- The incorrect recommendation.
+- The incorrect recommendation
 
 Without those records, the engineers couldn't tell whether the search or the model caused the problem.
 
 Twig's engineers choose to capture that information for trip planner requests. They configure Twig to remove names, email addresses, and booking references before sending the content to PostHog. They leave <Term name="privacy mode">Privacy mode</Term> off for these calls because it would omit the inputs and answers they need to investigate. Privacy mode prevents that content from being captured – it doesn't selectively redact personal details.
 
-PostHog retains large AI properties, included recorded inputs and answers for [30 days](/docs/ai-observability/data-retention). Before that window expires, Twig's engineers save the city request and its catalog facts as a test case, with the expected outcome: explain that no city stay fits four people. That gives the engineers a lasting way to check whether the same bug returns.
+PostHog retains large AI properties, including recorded inputs and answers, for a [limited time](/docs/ai-observability/data-retention). Before that window expires, Twig's engineers save the city request and its catalog facts as a test case, with the expected outcome: explain that no city stay fits four people. That gives the engineers a lasting way to check whether the same bug returns.
 
 ## Investigate a request in your project
 

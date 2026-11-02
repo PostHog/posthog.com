@@ -50,7 +50,7 @@ The support agent needs the same distinction between an answer and an outcome. T
 
 ## Review an answer that passes but still isn't useful
 
-Twig’s engineers add this answer to a <Term name="review queue">review queue</Term>, a collection of AI responses set aside for human review. The answer avoids recommending an undersized stay, but Twig’s engineers still need to judge whether it helps the visitor find a trip for four.
+Twig's engineers return to the city request for four and add its corrected answer to a <Term name="review queue">review queue</Term>, a collection of AI responses set aside for human review. The answer avoids recommending an undersized stay, but Twig's engineers still need to judge whether it helps the visitor find a trip for four.
 
 One of Twig's engineers reads the visitor's request, the empty search result, and the answer together. That engineer records two separate judgments:
 
@@ -59,7 +59,7 @@ One of Twig's engineers reads the visitor's request, the empty search result, an
 
 The engineers define these questions as review <Term name="scorers">scorers</Term>, reusable fields for recording a person's judgment. These aren't automatic evaluations; an engineer reads the trace and supplies the scores.
 
-Here’s how one of Twig’s engineers reviews the answer:
+Here's how one of Twig's engineers reviews the answer:
 
 <AioHumanReviewFigure />
 
@@ -69,18 +69,16 @@ The improvement is specific: explain that no city stay fits four and ask whether
 
 ## Decide what to fix next
 
-Twig’s engineers need to know which problems affect the most visitors – and which cause the most harm.
+Twig's engineers need to know which problems affect the most visitors – and which cause the most harm.
 
 They start with the undersized recommendation: how many other groups received Le Nid Chic when they needed room for more than two? The engineers filter for those requests and inspect the search inputs to confirm the guest filter was missing.
 
 For broader investigations, PostHog offers:
 
-- <Term name="clusters">Clusters</Term>, which group similar traces or generations. Twig’s engineers inspect a cluster of city requests that found no matching stay to see how often the planner leaves visitors without a useful alternative.
+- <Term name="clusters">Clusters</Term>, which group similar traces or generations. Twig's engineers inspect a cluster of city requests that found no matching stay to see how often the planner leaves visitors without a useful alternative.
 - <Term name="scout">Scouts</Term>, which run scheduled AI investigations. The engineers ask a scout to find those no-match answers with negative feedback and return example traces for review.
 
-A large cluster isn’t necessarily a problem: successful beach recommendations can be common too. Twig’s engineers prioritize by **frequency, impact on visitors, and effort to fix**. An incorrect refund refusal is more serious than an awkward follow-up.
-
-The engineers still investigate the cause, test the fix, and measure whether visitors benefit.
+A large cluster isn't necessarily a problem: successful beach recommendations can be common too. Twig's engineers prioritize by **frequency, impact on visitors, and effort to fix**. An incorrect refund refusal is more serious than an awkward follow-up.
 
 ## Find the next investigation in your project
 

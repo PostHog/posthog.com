@@ -10,7 +10,7 @@ pocketGuideOrder: 3
 
 # Offline evaluations
 
-Before releasing the support agent, Twig's engineers test an ordinary cancellation: a visitor wants a full refund one day before arrival. The support agent explains the seven-day notice rule, and the policy evaluation passes.
+Before releasing the support agent, Twig's engineers had tested an ordinary cancellation: a visitor wants a full refund one day before arrival. The support agent explained the seven-day notice rule, and the policy evaluation passed.
 
 That answer is correct. But the heating complaint reveals a gap in the engineers' testing: a broken essential amenity that qualifies for an exception to the cancellation policy.
 
@@ -18,7 +18,7 @@ Twig's engineers need to fix the support agent's refund refusal without breaking
 
 ## Save the request and expected outcome
 
-Twig’s engineers create a <Term name="dataset">dataset</Term>, a collection of test cases they can rerun. In PostHog, they open the recorded heating conversation and add it to the dataset to save it as a test case alongside the ordinary cancellation request.
+Twig's engineers create a <Term name="dataset">dataset</Term>, a collection of test cases they can rerun. In PostHog, they open the recorded heating conversation and add it to the dataset to save it as a test case alongside the ordinary cancellation request.
 
 For the heating complaint, they save two different things:
 
@@ -57,7 +57,7 @@ The code evaluation passes for both heating answers because both mention `"7 day
 
 ## Run the evaluations before release
 
-Twig’s engineers automate both saved cases with a <Term name="test runner">test runner</Term>. It runs the requests through the support agent and its tools, evaluates the answers with the LLM judge, and reports the results to PostHog through the SDK.
+Twig's engineers automate both saved cases with a <Term name="test runner">test runner</Term>. It runs the requests through the support agent and its tools, evaluates the answers with the LLM judge, and reports the results to PostHog through the SDK.
 
 They run it locally while editing the prompt, then in continuous integration (CI), the automated tests that run with each application change.
 
@@ -65,13 +65,13 @@ PostHog records each run as an <Term name="offline experiment">experiment</Term>
 
 - <Term name="dataset revision">Dataset revision</Term>, a fixed version of the saved cases.
 - Model, policy, and LLM judge criteria.
-- <Term name="scorer">Scorer</Term>, which defines the result’s type and passing rule. Their “Policy correctness” scorer records `true` as a pass and `false` as a failure.
+- <Term name="scorer">Scorer</Term>, which defines the result's type and passing rule. Their “Policy correctness” scorer records `true` as a pass and `false` as a failure.
 
 The runner performs the evaluation; the scorer tells PostHog how to interpret the reported result.
 
 The cancellation case is a <Term name="regression test">regression test</Term>: it catches the heating fix breaking an answer that already worked. The engineers add more cases as new failures appear.
 
-Errors and `N/A` results stay separate from passes. If the runner couldn’t load the policy, it hasn’t verified the answer.
+Errors and `N/A` results stay separate from passes. If the runner couldn't load the policy, it hasn't verified the answer.
 
 ## Prepare a test in your project
 

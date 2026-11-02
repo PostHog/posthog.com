@@ -35,13 +35,17 @@ function chapter(Figure: React.ComponentType): React.ReactElement {
 afterEach(() => {
     act(() => root?.unmount())
     root = undefined
+    Reflect.deleteProperty(window, 'posthog')
 })
 after(() => dom.window.close())
 
 test('a rejected figure import leaves chapter prose and other figures mounted', async (context) => {
     // React reports caught render failures to the console in development.
     context.mock.method(console, 'error', () => {})
-    const Figure = lazy(() => Promise.reject(new Error('Chunk download failed')))
+    const error = new Error('Chunk download failed')
+    const captureException = context.mock.fn()
+    Object.defineProperty(window, 'posthog', { configurable: true, value: { captureException } })
+    const Figure = lazy(() => Promise.reject(error))
     await act(async () => {
         root = createRoot(container)
         root.render(chapter(Figure))
@@ -53,6 +57,8 @@ test('a rejected figure import leaves chapter prose and other figures mounted', 
     )
     assert.match(container.textContent!, /The chapter continues\./)
     assert.match(container.textContent!, /Another figure/)
+    assert.equal(captureException.mock.callCount(), 1)
+    assert.equal(captureException.mock.calls[0].arguments[0], error)
 })
 
 test('a successful lazy import renders the figure without an error message', async () => {
@@ -63,4 +69,17 @@ test('a successful lazy import renders the figure without an error message', asy
     })
     assert.match(container.textContent!, /Loaded example/)
     assert.equal(container.querySelector('[role="status"]'), null)
+})
+
+test('a render failure keeps the fallback usable when PostHog is unavailable', async (context) => {
+    context.mock.method(console, 'error', () => {})
+    function BrokenFigure(): React.ReactElement {
+        throw new Error('Figure render failed')
+    }
+    await act(async () => {
+        root = createRoot(container)
+        root.render(chapter(BrokenFigure))
+    })
+    assert.match(container.querySelector('[role="status"]')!.textContent!, /couldn’t load/)
+    assert.match(container.textContent!, /The chapter continues\./)
 })
