@@ -310,7 +310,7 @@ PostHog's [AI observability](/ai-observability) goes deeper into the pipeline it
 
 <details>
 <summary>What are the main differences & similarities between FullStory and PostHog?</summary>
- 
+
 1. **Session replay depth:** FullStory's replay tooling – frustration signals, retroactive search over everything it captured, and StoryAI summaries – is more mature than PostHog's for dedicated UX research. 
 
 PostHog's replay is built for product and engineering use, and [Replay Vision](/replay-vision) closes some of the gap: AI scanners review many sessions at once, flag dead ends and frustration, and log each finding as an event you can chart and alert on.
@@ -385,7 +385,7 @@ PostHog's replay is built for product and engineering use, and [Replay Vision](/
 
 <details>
 <summary>What are the main differences & similarities between Heap and PostHog?</summary>
- 
+
 1. **Retroactive event definition:** Heap's visual labeling is genuinely powerful – you can define and retroactively apply event definitions without code or engineering support. PostHog's autocapture captures everything too, but labeling events requires more technical involvement.
 
 2. **Feature breadth:** Heap covers session replay, web analytics, and heatmaps alongside its analytics core – but PostHog goes further with feature flags, experiments, error tracking, surveys, logs, and more. The Contentsquare merger may also eventually give Heap users access to an even broader feature set as the platforms converge.
@@ -457,7 +457,7 @@ It's popular with engineering teams who want a developer-focused session replay 
 
 <details>
 <summary>What are the main differences & similarities between LogRocket and PostHog?</summary>
- 
+
 1. **Session replay focus:** LogRocket's replay tooling includes Redux/state management capture and Galileo AI proactive issue detection – features aimed squarely at front-end engineers. PostHog's replay is broader, connecting sessions directly to feature flags, experiments, errors, and funnel analysis, and [Replay Vision](/replay-vision) scans recordings in bulk so you don't have to watch them one at a time.
 
 2. **Product analytics:** PostHog's product analytics are significantly deeper – cohorts, retention, paths, SQL access, and group analytics. LogRocket's analytics are basic and supplementary to its replay core.
@@ -530,7 +530,7 @@ The main web app is source-available under the Functional Source License (it con
 
 <details>
 <summary>What are the main differences & similarities between Sentry and PostHog?</summary>
- 
+
 1. **Depth vs. context:** Sentry's tracing, profiling, and SDK coverage (Unreal Engine, Godot, consoles) are more mature than PostHog's, and its triage workflow is built for teams managing many services. PostHog ties every error to the session replay, the feature flags the user was in, the logs your server wrote, and who the user is, and [Replay Vision](/replay-vision) can scan every session that hit an error instead of making you watch them one at a time.
 
 2. **Breadth and data:** PostHog adds product analytics, feature flags, experiments, surveys, a [data warehouse](/context-warehouse) you can query with SQL, and a [CDP](/data-pipelines) that moves data in and out. Sentry's data forwarding covers error events only and is a Business-plan feature. Both have free MCP servers, but Sentry's AI agent is a paid add-on while [PostHog AI](/ai) includes 500 credits a month.
@@ -602,7 +602,7 @@ It's the deepest tool on this page for the model layer itself, and it has nothin
 
 <details>
 <summary>What are the main differences & similarities between Langfuse and PostHog?</summary>
- 
+
 1. **Model layer vs. product layer:** Langfuse goes deeper on prompt management, playgrounds, and eval tooling. PostHog's [AI observability](/ai-observability) captures the same generations, traces, cost, latency, and errors, then links each one to the user's [session replay](/session-replay), turns failed calls into [error tracking](/error-tracking) issues, and lets you A/B test prompts or models behind a [feature flag](/feature-flags). If you want both, PostHog ingests Langfuse traces.
 
 2. **Open source and hosting:** Both are MIT-licensed open core and free to self-host, and both have MCP servers. Langfuse offers EU, US, Japan, and a dedicated HIPAA region; PostHog offers US and EU, with HIPAA BAAs on paid plans. PostHog's free tier is 100k AI events a month; Langfuse's Hobby plan is 50k units with 30-day retention and two users.
