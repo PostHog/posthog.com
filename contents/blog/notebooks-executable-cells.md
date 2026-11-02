@@ -24,7 +24,7 @@ So we rebuilt Notebooks around cells you can run. SQL, Python, and markdown cell
 
 Notebooks are in beta now. [Open one in your project](https://app.posthog.com/notebooks).
 
-![A SQL cell pulling errors per 10-minute bucket, followed by a Python cell charting them with matplotlib](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/notebooks-executable-cells/sql-to-python-errors.png)
+![A SQL cell pulling errors per 10-minute bucket, followed by a Python cell charting them with matplotlib](https://res.cloudinary.com/dmukukwp6/image/upload/Notbooks_1_2f07cf42ea.png)
 
 ## What's in a Notebook now
 
@@ -38,13 +38,13 @@ Cells share data, so they can work together to tell the story you want. Every ce
 
 So if a Python cell reshapes data, the next SQL cell can query the result directly. PostHog spots the reference and runs that query locally instead of in the warehouse. You can bounce between SQL and Python as many times as the analysis needs.
 
-![A SQL cell pulling execute-sql MCP calls, followed by a Python cell charting the daily error rate by error type](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/notebooks-executable-cells/mcp-execute-sql-errors.png)
+![A SQL cell pulling execute-sql MCP calls, followed by a Python cell charting the daily error rate by error type](https://res.cloudinary.com/dmukukwp6/image/upload/notbooks_2_a373539c83.png)
 
 Here I pulled errors for one MCP tool with SQL, broke them down in Python, and charted them with matplotlib.
 
 PostHog also tracks which cells depend on which. Change an upstream cell and everything downstream is marked stale, so you know what to re-run.
 
-![An upstream SQL cell warning that a downstream cell may be showing outdated data, and the downstream Python cell flagged as out of date](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/notebooks-executable-cells/stale-downstream-cells.png)
+![An upstream SQL cell warning that a downstream cell may be showing outdated data, and the downstream Python cell flagged as out of date](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_3_5e230758cf.png)
 
 ## The decisions behind it
 
@@ -72,19 +72,19 @@ Does company size predict how much a customer spends with us? We joined our bill
 
 The answer: firmographics barely matter. All 68 company fields together explain far less of spending than four usage numbers do.
 
-![A markdown cell summarizing which firmographic fields have signal for predicting spend, and which have none](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/notebooks-executable-cells/firmographics-verdict.png)
+![A markdown cell summarizing which firmographic fields have signal for predicting spend, and which have none](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_4_9f48cbf9bf.png)
 
 ### Write up an incident so it stays accurate
 
 After an outage, we want a record of what happened, when, and who it impacted. Each incident gets a notebook with a write-up, timeline, diagram, and a live query counting the errors. Because the query is live, if you reopen the notebook next week it shows the real numbers instead of a screenshot that's now out of date.
 
-![An investigation notebook with a verdict, a live SQL cell charting CI failure rate, and hypotheses written in markdown](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/notebooks-executable-cells/incident-investigation.png)
+![An investigation notebook with a verdict, a live SQL cell charting CI failure rate, and hypotheses written in markdown](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_5_4b0a0d7562.png)
 
 ### Build a monthly growth report that updates itself
 
 Every month we review how our data products are growing. That used to mean rebuilding a slide deck. Now it's a notebook with live charts. We add commentary each month, so data insights and our own take live side by side as the data changes.
 
-![A monthly report notebook with commentary on a spike in endpoints created, above a live insight charting endpoints created per day](https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/notebooks-executable-cells/monthly-growth-report.png)
+![A monthly report notebook with commentary on a spike in endpoints created, above a live insight charting endpoints created per day](https://res.cloudinary.com/dmukukwp6/image/upload/notebooks_6_aeee57a07e.png)
 
 ## Where this is going
 
