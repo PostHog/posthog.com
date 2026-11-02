@@ -208,7 +208,7 @@ const IntegrationGrid = () => (
 /**
  * Applications = the interfaces you reach the product through (editor/MCP, the
  * app UI, queries and alerts), ending with Self-driving – where the product
- * comes to you instead. The features and flows themselves live in `topFeatures`;
+ * comes to you instead. The features and flows themselves live in `keyFeatures`;
  * nothing here should repeat them.
  */
 export const applications: CarouselSlide[] = [
@@ -366,10 +366,10 @@ export const applications: CarouselSlide[] = [
 ]
 
 /**
- * Top features = the flows people buy the product for: tracing, cost analysis,
+ * Key features = the flows people buy the product for: tracing, cost analysis,
  * evaluations, error analysis, alerting. Interfaces live in `applications`.
  */
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'tracing',
         label: 'Tracing',
