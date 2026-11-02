@@ -46,7 +46,7 @@ PostHog bills every event it stores, except the events marked No below.
 | `$web_vitals` | Yes | |
 | `$identify`, `$create_alias`, and `$groupidentify` | Yes | |
 | [Personless events](/docs/data/anonymous-vs-identified-events) | Yes | Billed as anonymous, unless the distinct ID already belongs to a person. |
-| Heatmap data | No | Heatmap clicks, mouse moves, and scroll depth are stored outside events. |
+| Heatmap data | No | Heatmap data never becomes events, and heatmaps aren't billed today. |
 | Session recordings | No | [Session replay](/docs/session-replay) bills recordings. |
 | `$exception` | No | [Error tracking](/docs/error-tracking) bills exceptions. |
 | `$ai_` events | No | [LLM analytics](/docs/ai-observability) bills these. |
