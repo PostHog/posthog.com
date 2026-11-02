@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import { execFile } from 'child_process'
 import { promisify } from 'util'
+import { setTimeout as delay } from 'timers/promises'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
@@ -15,6 +16,9 @@ export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
 const GATSBY_SOURCE_GIT_CACHE_DIR = path.resolve(__dirname, '../.cache/gatsby-source-git')
 const BRANCH_MANIFEST_FILE = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, '.branch-manifest.json')
+
+// Download the region-independent release artifact. Runtime regions and proxies come from data-asset-host.
+const POSTHOG_BOOTSTRAP_URL = 'https://us-assets.i.posthog.com/static/1/loader-bootstrap.js'
 
 /**
  * Invalidates the gatsby-source-git cache if the configured branch has changed.
@@ -79,6 +83,35 @@ async function sparseCloneGitSource(store): Promise<void> {
     }
 }
 
+async function downloadPostHogBootstrap(): Promise<string> {
+    for (let attempt = 0; ; attempt++) {
+        let retryable = true
+        try {
+            // A Request bypasses the URL-only development cache for this mutable asset.
+            const response = await fetch(
+                new Request(POSTHOG_BOOTSTRAP_URL, {
+                    cache: 'no-store',
+                    signal: AbortSignal.timeout(30000),
+                })
+            )
+            if (!response.ok) {
+                retryable = response.status === 408 || response.status === 429 || response.status >= 500
+                await response.body?.cancel()
+                throw new Error(`Unable to download PostHog bootstrap: HTTP ${response.status}`)
+            }
+            const bootstrap = (await response.text()).replace(/\n\/\/# sourceMappingURL=.*\s*$/, '\n')
+            retryable = false
+            if (!bootstrap.trim()) {
+                throw new Error('Downloaded PostHog bootstrap is empty')
+            }
+            return bootstrap
+        } catch (error) {
+            if (!retryable || attempt === 2) throw error
+            await delay(500 * 2 ** attempt)
+        }
+    }
+}
+
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
     cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
@@ -87,17 +120,12 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
+        const bootstrap = await downloadPostHogBootstrap()
         const assetHost = process.env.GATSBY_POSTHOG_ASSET_HOST
-        // The "1" pins the array.js major version; strict_script_versioning makes the
-        // SDK load its lazy chunks from matching versioned paths on the asset host.
-        const arrayRoute = assetHost
-            ? `${assetHost}/static/1/array.js`
-            : `${process.env.GATSBY_POSTHOG_API_HOST}/static/array.js`
         const assetHostConfig = assetHost
             ? `asset_host: "${assetHost}",\n    strict_script_versioning: true,\n    `
             : ''
-        const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src="${arrayRoute}",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
+        const posthogScript = `posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
     ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
     defaults: 'latest',
@@ -148,6 +176,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     },
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
+        fs.writeFileSync(path.join(scriptsDir, 'posthog-bootstrap.js'), bootstrap)
         fs.writeFileSync(path.join(scriptsDir, 'posthog-init.js'), posthogScript)
     }
 

@@ -46,7 +46,7 @@ If the numbers are stale but nothing shows as failed, scheduled runs are probabl
 
 **The cadence is set to never.** The panel says scheduled refreshes are paused. Pick a cadence to start them again, or use **Sync now** for a one-off refresh.
 
-**Runs were paused after repeated failures.** After a view fails five times in a row, PostHog stops scheduling it rather than retrying a query that isn't going to succeed. The panel shows a banner with when it paused, the error that paused it, and a **Resume** button. Fix the cause first, then resume. Resuming without fixing the query just fails again.
+**Runs were paused after repeated failures.** After a view fails five times in a row, PostHog stops scheduling it rather than retrying a query that isn't going to succeed. When this happens, PostHog sends an email and an in-app notification to let the team know. The panel also shows a banner with when it paused, the error that paused it, and a **Resume** button. Fix the cause first, then resume. Resuming without fixing the query just fails again.
 
 ## The data is older than the refresh interval
 
@@ -77,7 +77,7 @@ Two different things produce this.
 
 **The query isn't eligible.** The panel says the view is always refreshed in full and names a reason. See [which queries can be incremental](/docs/data-warehouse/views/materialize#which-queries-can-be-incremental) for the full list and what to use instead.
 
-**The query changed.** Editing a view's SQL, incremental column, or unique key makes the stored rows unsafe to build on, so the next run rebuilds everything. This is expected and one-off. If a view rebuilds in full on *every* run, check whether something is rewriting the query between runs.
+**The query changed.** Editing a view's SQL, incremental column, or unique key makes the stored rows unsafe to build on, so the next run rebuilds everything. This is expected and one-off. If a view rebuilds in full on _every_ run, check whether something is rewriting the query between runs.
 
 ## Incremental is on but runs aren't any faster
 
