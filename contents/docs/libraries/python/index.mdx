@@ -638,7 +638,7 @@ client = posthog.Client(
 )
 ```
 
-If your callback raises an exception, the SDK logs the error and continues with the original unmodified event.
+If your callback raises an exception, the SDK logs the error and drops the event.
 
 ## Historical migrations
 

@@ -266,7 +266,7 @@ posthog.withContext(
     // Overrides to "next-session"
     posthog.capture({
       event: 'image_uploaded',
-      properties: { $sessionId: 'next-session' }
+      properties: { $session_id: 'next-session' }
     })
   }
 )
@@ -276,7 +276,7 @@ posthog.withContext(
 
 ```node
 posthog.withContext(
-  { flightNumber: 'TAC313' },
+  { properties: { flightNumber: 'TAC313' } },
   () => {
     // Associated with flightNumber TAC313
     posthog.capture({ event: 'flight_cancelled' })
@@ -696,7 +696,7 @@ You can also explicitly chose to enable or disable GeoIP for a single capture re
 client.capture({
   distinctId: distinctId,
   event: 'your_event',
-  disableGeoip: `true`,
+  disableGeoip: true,
 })
 ```
 
