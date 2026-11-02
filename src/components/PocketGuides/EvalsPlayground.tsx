@@ -98,7 +98,7 @@ const SCORE_LABEL: Record<string, string> = {
 }
 
 // The shared button under each row, by step.
-const ACTIONS = ['Run both agents', 'Evaluate both outputs', 'Report results to PostHog']
+const ACTIONS = ['Generate agent outputs', 'Evaluate both outputs', 'Report results to PostHog']
 
 // Names each box in narrow windows, where the lanes interleave row by row.
 const LANE_NAME: Record<Lane, string> = { offline: 'Offline', online: 'Online' }
@@ -182,7 +182,7 @@ const YOURS = 'bg-blue/10 text-blue'
 const WHERE = {
     local: { icon: <IconLaptop />, label: 'Your local machine / CI', color: YOURS },
     runner: { icon: <IconTerminal />, label: 'Your evaluator runner', color: YOURS },
-    app: { icon: <IconServer />, label: 'Your application', color: YOURS },
+    app: { icon: <IconServer />, label: 'Your app in production', color: YOURS },
     posthog: { icon: <IconLogomark />, label: 'PostHog', color: 'bg-purple/10 text-purple' },
 }
 type Where = keyof typeof WHERE
