@@ -34,6 +34,20 @@ Yes, you can set a billing limit for most of PostHog's products in your organiza
 
 Yes, PostHog drops data after you go over your billing limit. To capture more during the current billing period, you need to raise your billing limits. For future billing periods, you can tune your PostHog implementation to limit the number of [events](/tutorials/fewer-unwanted-events) or [session replays](/tutorials/limit-session-recordings) you capture.
 
+## What counts toward my event bill?
+
+PostHog bills the events it stores. This table covers the most common cases.
+
+| Event | Counts toward the event bill | Notes |
+| --- | --- | --- |
+| Dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) | No | PostHog drops it before storage. |
+| Dropped after you reach a [billing limit](/docs/billing/limits-alerts) | No | |
+| [Personless event](/docs/data/anonymous-vs-identified-events) | Yes | Billed as anonymous, unless the distinct ID already belongs to a person. |
+| `$groupidentify` | Yes | |
+| `$feature_flag_called` and `$experiment_exposure` | No | |
+| `$exception` | No | [Error tracking](/docs/error-tracking) bills exceptions instead. |
+| `survey sent`, `survey shown`, and `survey dismissed` | No | [Surveys](/docs/surveys) bill responses instead. |
+
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
 Yes, early-stage startups can get $50,000 in credits, merch, and exclusive events. Find out more and apply on our [startup program page](/startups).
