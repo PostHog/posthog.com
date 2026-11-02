@@ -548,8 +548,17 @@ const Menu = (props: { parent: MenuItem }) => {
     const visibleChildren = filterMenuByFlags(parent.children, activeFlags)
     const activeInternalMenu = windowActiveInternalMenu || visibleChildren?.[0]
     const visibleActiveChildren = filterMenuByFlags(activeInternalMenu?.children, activeFlags)
+    // Docs sections set `navAppearance: 'sidebar'` in `src/navs` to match the product docs sidebar.
+    const sidebarAppearance =
+        (activeInternalMenu as MenuItem & { navAppearance?: 'sidebar' })?.navAppearance === 'sidebar'
 
-    return <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(visibleActiveChildren)} />
+    return (
+        <TreeMenu
+            key={activeInternalMenu?.url}
+            items={resolveMenuIcons(visibleActiveChildren)}
+            {...(sidebarAppearance ? { appearance: 'sidebar' as const, rootHeading: activeInternalMenu?.name } : {})}
+        />
+    )
 }
 
 /**

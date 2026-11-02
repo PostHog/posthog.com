@@ -115,6 +115,7 @@ export const surveys = {
     ],
     overview: {
         title: 'Ask anything with no-code surveys',
+        description: '"Build a product satisfaction survey with rating questions"',
         eli5: 'Surveys let you ask users anything right inside your product – freeform text, multiple choice, NPS, ratings, emoji reactions – as a no-code popup or via the API. Target by URL, person properties, events, or Feature Flags so you ask the right people at the right moment. Responses connect to Product Analytics and Session Replay, so you can see who answered and what they were doing.',
         textColor: 'text-white', // tw
     },
