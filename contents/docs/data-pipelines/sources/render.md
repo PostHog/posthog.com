@@ -9,11 +9,11 @@ availability:
 sourceId: Render
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Render connector syncs your services, deploys, one-off jobs, service events, and managed databases into the PostHog Data warehouse, so you can analyze deploy frequency, job outcomes, and infrastructure changes alongside your product data.
+The Render connector syncs your services, deploys, one-off jobs, service events, managed databases, blueprints, disk snapshots, Postgres query insights, and service metrics into the PostHog Data warehouse, so you can analyze deploy frequency, job outcomes, database performance, and infrastructure changes alongside your product data.
 
 ## Prerequisites
 
@@ -34,6 +34,8 @@ When linking Render, you'll need:
 
 Deploys, jobs, and events are fetched per service, so syncs make one or more requests for each service in your workspace. Use incremental sync for these tables to keep ongoing syncs fast.
 
+Metrics tables (CPU, memory, HTTP requests, HTTP latency, instance count, and bandwidth) are opt-in and not synced by default. Enable them individually after connecting the source. These tables use incremental sync and merge on timestamp.
+
 ## Configuration
 
 <SourceParameters />
@@ -46,5 +48,6 @@ Deploys, jobs, and events are fetched per service, so syncs make one or more req
 
 - If you see an authentication error, your API key is invalid or has been revoked. Create a new key in your Render account settings, then reconnect.
 - Render rate limits API requests per user. Syncs back off and retry automatically, but very large workspaces may sync slowly on the first run.
+- Postgres query insights (top queries and table scans) may be unavailable for some database instances, such as suspended ones. These tables skip unavailable databases and continue syncing the rest.
 
 <TroubleshootingLink />
