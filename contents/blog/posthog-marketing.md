@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
+ogImage: generated
 featuredVideo: 'https://www.youtube-nocookie.com/embed/xWyDI4R-JR4'
 category: Using PostHog
 tags:

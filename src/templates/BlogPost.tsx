@@ -292,6 +292,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         featuredImageCaption,
         featuredVideo,
         featuredImageType,
+        ogImage,
         contributors,
         tags,
         seo,
@@ -384,13 +385,18 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         setParams(getParams(root, tag, sort.sort))
     }, [root, tag, sort])
 
+    const ogImageUrl =
+        featuredImage?.publicURL && ogImage !== 'generated'
+            ? featuredImage.publicURL
+            : `${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`
+
     return (
         <>
             <SEO
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={ogImageUrl}
                 imageType="absolute"
                 // Standard.site document rkey (only for /blog posts; this template is shared with other sections)
                 documentRkey={
@@ -492,6 +498,7 @@ export const query = graphql`
                 hideAnchor
                 description
                 featuredImageType
+                ogImage
                 featuredVideo
                 featuredImage {
                     publicURL
