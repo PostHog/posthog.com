@@ -34,28 +34,20 @@ Yes, you can set a billing limit for most of PostHog's products in your organiza
 
 Yes, PostHog drops data after you go over your billing limit. To capture more during the current billing period, you need to raise your billing limits. For future billing periods, you can tune your PostHog implementation to limit the number of [events](/tutorials/fewer-unwanted-events) or [session replays](/tutorials/limit-session-recordings) you capture.
 
-## What counts toward my event bill?
+## What does each product bill for?
 
-PostHog bills every event it stores, except the events marked No below.
-
-| Event | Counts toward the event bill | Notes |
+| Product | Bills for | Free |
 | --- | --- | --- |
-| Custom events | Yes | |
-| `$pageview`, `$pageleave`, and `$autocapture` | Yes | |
-| `$dead_click` | Yes | |
-| `$web_vitals` | Yes | |
-| `$identify`, `$create_alias`, and `$groupidentify` | Yes | |
-| [Personless events](/docs/data/anonymous-vs-identified-events) | Yes | Billed as anonymous, unless the distinct ID already belongs to a person. |
-| Heatmap data | No | Heatmap data never becomes events, and heatmaps aren't billed today. |
-| Session recordings | No | [Session replay](/docs/session-replay) bills recordings. |
-| `$exception` | No | [Error tracking](/docs/error-tracking) bills exceptions. |
-| `$ai_` events | No | [LLM analytics](/docs/ai-observability) bills these. |
-| `$feature_flag_called` and `$experiment_exposure` | No | Flag and experiment analysis adds nothing to your event bill. |
-| `survey sent`, `survey shown`, and `survey dismissed` | No | [Surveys](/docs/surveys) bill responses. |
-| Events dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) | No | PostHog drops them before storage. |
-| Events dropped after you reach a [billing limit](/docs/billing/limits-alerts) | No | PostHog drops them before storage. |
+| Product analytics | Every event not listed in this table, such as `$pageview`, `$autocapture`, and `$identify` | |
+| Session replay | Recordings | |
+| Feature flags | [Flag requests](/docs/feature-flags/cutting-costs#billing) | `$feature_flag_called` events, and local evaluation polls that return `304` |
+| Experiments | Flag requests, through feature flags | `$experiment_exposure` events |
+| Error tracking | `$exception` events | |
+| LLM analytics | `$ai_` events | |
+| Surveys | `survey sent` events, as responses | `survey shown` and `survey dismissed` events |
+| Heatmaps | | Heatmap data |
 
-Other usage is billed by its own product. See how [feature flag requests are billed](/docs/feature-flags/cutting-costs#billing), and how [file download exports are billed](/docs/data-pipelines/file-download-exports#billing). For everything else, see [pricing](/pricing).
+[Personless events](/docs/data/anonymous-vs-identified-events) bill at the anonymous event price. Events dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) or after a [billing limit](/docs/billing/limits-alerts) are free. For prices, see [pricing](/pricing).
 
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
