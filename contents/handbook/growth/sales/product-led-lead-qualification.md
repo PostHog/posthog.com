@@ -8,7 +8,7 @@ Most product-led leads land in your queue because they crossed an [automated thr
 
 This covers the things TAMs look at to make an informed decision. Note: Disqualification can happen really quickly, but often it takes a bit more time to decide if it's qualified. Some accounts will have immediate opportunities and be ready to engage, and some may require more nurturing.
 
-> **A note on existing resources:** Several handbook pages cover the diagnostic tools you'll use during qualification. The [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) walks through event composition, billing breakdowns, and project mapping. [Checking the health of a customer's deployment](/handbook/cs-and-onboarding/health-checks) covers $identify/$groupidentify patterns, autocapture noise, and implementation quality. Those pages answer "how healthy is this account's implementation?" This page answers a different question: "given what I see, should I invest my time here?"
+> **A note on existing resources:** Several handbook pages cover the diagnostic tools you'll use during qualification. The [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) walks through event composition, billing breakdowns, and project mapping. [Checking the health of a customer's deployment](/handbook/customer-success/health-checks) covers $identify/$groupidentify patterns, autocapture noise, and implementation quality. Those pages answer "how healthy is this account's implementation?" This page answers a different question: "given what I see, should I invest my time here?"
 
 ## What you're actually deciding
 
@@ -45,7 +45,7 @@ Open the account in Vitally. You need three things:
 
 ## Step 3: Check the implementation
 
-The [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) and [deployment health checks](/handbook/cs-and-onboarding/health-checks) cover the mechanics of each diagnostic in detail. Here, the question is different: you're reading these signals to decide whether to invest your time, not to diagnose a support issue. If the high spend is a result of a poor configuration with too much unnecessary volume, you're likely to invest time where there isn't future growth. Helping customers is never a bad thing, but it won't be a high ROI activity for you as a TAM. Though, there are potential opportunities to offer them FDE services (for a cost).
+The [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) and [deployment health checks](/handbook/customer-success/health-checks) cover the mechanics of each diagnostic in detail. Here, the question is different: you're reading these signals to decide whether to invest your time, not to diagnose a support issue. If the high spend is a result of a poor configuration with too much unnecessary volume, you're likely to invest time where there isn't future growth. Helping customers is never a bad thing, but it won't be a high ROI activity for you as a TAM. Though, there are potential opportunities to offer them FDE services (for a cost).
 
 **Event composition.** High autocapture percentage with zero Actions means they haven't invested in instrumentation. That's both a risk (they might not be getting value) and an opportunity (optimization advice is the strongest opening message you can send). High custom event percentage often means they are more serious, and more importantly, have engineering resources available to invest into PostHog.
 

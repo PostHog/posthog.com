@@ -83,7 +83,11 @@ async function forwardRequest(request, pathWithSearch) {
   const ip = request.headers.get("CF-Connecting-IP") || ""
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
-  originHeaders.delete("authorization")
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+  if (!originHeaders.get("authorization")?.startsWith("Bearer phc_")) {
+    originHeaders.delete("authorization")
+  }
   originHeaders.set("X-Forwarded-For", ip)
 
   const originRequest = new Request(`https://${API_HOST}${pathWithSearch}`, {
@@ -133,7 +137,11 @@ async function forwardRequest(request, pathWithSearch) {
   const ip = request.headers.get("CF-Connecting-IP") || ""
   const originHeaders = new Headers(request.headers)
   originHeaders.delete("cookie")
-  originHeaders.delete("authorization")
+  // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
+  // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
+  if (!originHeaders.get("authorization")?.startsWith("Bearer phc_")) {
+    originHeaders.delete("authorization")
+  }
   originHeaders.set("X-Forwarded-For", ip)
 
   const originRequest = new Request(`https://${API_HOST}${pathWithSearch}`, {
@@ -159,7 +167,7 @@ This code does three things:
 
 - **Routes requests:** The `handleRequest` function checks if the request is for static assets (`/static/*`) or remote config (`/array/*`), routing them to PostHog's asset server. Everything else goes to the main API.
 - **Caches assets:** The `retrieveAsset` function caches PostHog's JavaScript SDK, remote config, and other static files in Cloudflare's cache. This improves performance and preserves correct `cache-control` headers that the asset server provides.
-- **Preserves user location:** The `forwardRequest` function captures the real user IP from Cloudflare's `CF-Connecting-IP` header and sets it as `X-Forwarded-For`. This ensures PostHog records accurate user locations instead of showing all users at Cloudflare's data center locations. It also removes cookies and auth headers for privacy.
+- **Preserves user location:** The `forwardRequest` function captures the real user IP from Cloudflare's `CF-Connecting-IP` header and sets it as `X-Forwarded-For`. This ensures PostHog records accurate user locations instead of showing all users at Cloudflare's data center locations. For privacy, it also removes cookies and any `Authorization` header that isn't a `Bearer` token. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, so the worker forwards that header.
 
 </Step>
 
@@ -234,7 +242,7 @@ Configure the record:
 
 The CNAME points your subdomain to PostHog's proxy endpoint. The orange cloud means Cloudflare will proxy the traffic instead of just doing DNS resolution.
 
-Avoid obvious terms like `tracking`, `analytics`, `posthog`, `telemetry`, or `ph` in your subdomain. Use something neutral like `e`, `t`, or `ingest` instead.
+Avoid obvious terms like `tracking`, `analytics`, `posthog`, `telemetry`, or `ph` in your subdomain. Use something unique to your app instead.
 
 </Step>
 
@@ -319,7 +327,7 @@ Cloudflare Workers have request and response size limits:
 - **Free plan:** 10MB request, 50MB response
 - **Paid plans:** Higher limits available
 
-PostHog events can be up to 1MB and session recordings up to 64MB per message. On the free plan, very large recordings might hit the response limit.
+PostHog events can be up to 1MB, AI events up to 8MB, and session recordings up to 64MB per message. On the free plan, very large recordings might hit the response limit.
 
 If you see errors about size limits, upgrade to a paid Cloudflare plan or contact Cloudflare support about increasing limits.
 

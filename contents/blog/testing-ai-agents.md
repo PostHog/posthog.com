@@ -112,7 +112,7 @@ LLM-as-a-Judge evaluators have a higher cost than deterministic code-based evalu
 
 After learning about the types of evaluators that can help you test your agent, similar to how you used to write integration tests, you now write multiple evaluation suites, with a mix of code-based and LLM-as-a-Judge evaluators. You cover your happy paths as well as edge cases and some of the bugs you've been fixing over the past little while.
 
-Now, every time you make a change to your agent, you can run the agentic loop and regenerate all the outputs with instances of your database and everything else running locally. This feeds into the code-based and LLM-as-a-Judge evaluators and gives you a report of the evaluation results.
+Now, every time you make a change to your agent, you can run the agentic loop and regenerate all the outputs with [instances of your database](/blog/how-to-benchmark-ai-agents#level-3-restored-real-data-slices) and everything else running locally. This feeds into the code-based and LLM-as-a-Judge evaluators and gives you a report of the evaluation results.
 
 You then realize that running these locally means trusting that everyone to do that before shipping changes, but as with unit tests, we don't leave it to chance. You add a pipeline step in your CI to run all of these evaluation suites. You can, and probably should, limit which PRs these evaluations are run for. If there are no changes in the agent code it's not worth spending money on LLM tokens to run the evaluations.
 

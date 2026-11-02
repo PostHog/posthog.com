@@ -47,7 +47,7 @@ Send event data from PostHog into the Microsoft Teams server and channel of your
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/microsoft_teams/template_microsoft_teams.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/microsoft_teams/template_microsoft_teams.py) is available on GitHub.
 
 <PostHogMaintained />
 

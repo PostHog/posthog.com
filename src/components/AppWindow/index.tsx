@@ -29,6 +29,7 @@ import Forum from 'components/Forum'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
+import LearnShell from 'components/PocketGuides/LearnShell'
 import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
@@ -36,8 +37,7 @@ import usePostHog from '../../hooks/usePostHog'
 import Modal from 'components/RadixUI/Modal'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import FloatingModal from 'components/FloatingModal'
-import FrostedBackdrop from 'components/FrostedBackdrop'
-import { MOTION_LAYER, WINDOW_SCHEME, WINDOW_TINT } from '../../constants/frostedSurfaces'
+import { WINDOW_SCHEME } from '../../constants/frostedSurfaces'
 
 import { containsURL, getActiveMenuSection } from '../../navs/activeMenu'
 
@@ -73,6 +73,10 @@ const Router = (props) => {
     }
     if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
         return <Handbook {...props} />
+    }
+    // Learn pages share one shell, so the sidebar stays mounted between them.
+    if (/^\/learn\/[^/]+/.test(path)) {
+        return <LearnShell path={path}>{children}</LearnShell>
     }
     if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
         return <BlogPost {...props} />
@@ -190,7 +194,6 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
     const [hasDeveloperMode, setHasDeveloperMode] = useState(false)
     const hasToolbar = item.appSettings?.toolbar
     const hideTitle = item.appSettings?.hideTitle
-    const isCompositorActive = animating || dragging || leftDragResizing || closing
     const inView = useMemo(() => {
         if (item.expanded) return true
 
@@ -728,7 +731,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : item.windowed
                             ? 'h-[95%] w-[80%]'
                             : 'size-full'
-                    } !select-auto flex flex-col border-primary ${isCompositorActive ? MOTION_LAYER : ''} rounded-lg ${
+                    } !select-auto flex flex-col border-primary bg-primary rounded-lg ${
                         item.appSettings?.size?.fixed ? 'border' : item.expanded ? 'border-t' : ''
                     } ${item.expanded ? 'shadow-none' : 'shadow-md'} ${
                         item.expanded
@@ -750,10 +753,13 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                             : undefined
                     }
                 >
-                    <FrostedBackdrop tintClassName={WINDOW_TINT} />
                     <div
                         className={`relative print:hidden ${
                             hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''
+                        } ${
+                            hasToolbar && item.appSettings?.toolbarFade
+                                ? "z-20 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-4 after:bg-primary after:[mask-image:linear-gradient(to_bottom,black,transparent)] after:content-['']"
+                                : ''
                         }`}
                     >
                         {hasToolbar && (
@@ -823,7 +829,7 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                         data-app="AppWindowContent"
                         // With a toolbar above it, the content must be able to shrink below its content's minimum
                         // height, or it overflows the bottom of the window by the toolbar's height.
-                        className={`relative isolate size-full flex-grow ${hasToolbar ? 'min-h-0' : ''} ${
+                        className={`relative size-full flex-grow ${hasToolbar ? 'min-h-0' : ''} ${
                             chrome
                                 ? `${
                                       // A modal's auto height makes percentage heights inside it resolve to

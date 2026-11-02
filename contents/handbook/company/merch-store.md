@@ -45,7 +45,15 @@ Shipping is also done through Micromerch (in partnership with Shiphero) - they c
 
 ### Customers
 
-The quickest way is to ask JokerHog in Slack – tag `@.JokerHog` in any channel and ask it for a merch code (e.g. "can you make me a merch code for $50 for a contributor?"). It creates the discount code in Shopify and replies with the code, so you don't need to log in yourself.
+Give a code when someone outside PostHog goes out of their way to help us: a merged PR, a clear bug report, useful feedback, or a forum answer that saves someone else time. There's no checklist, so use your judgment. If you're debating whether something counts, it probably does.
+
+As a rough guide, we give $30 for feedback, bug reports, and general thanks (enough for a t-shirt) and $50 for code contributions. Feedback calls have their own amounts in [talking to users](/handbook/product/user-feedback). We don't put expiration dates on codes.
+
+Send the code privately, by email or DM. Codes are single use, so one posted in a forum reply or GitHub comment goes to whoever spots it first. On the forum, thank the person in your reply and ask them to email you for the code.
+
+For smaller forum contributions, moderators can [gift community points](/handbook/community/points#gifting-points) instead, which members redeem for stickers and merch credit.
+
+The quickest way to make a code is the `/merchrequest` command in Slack. Type `/merchrequest code` (or type `/merchrequest` and select **Generate discount code**). Then give the amount (the default is $30) and the number of codes. The bot creates the codes in Shopify and gives you share links, so you don't need to log in yourself. It posts each request in <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> and records each code, so we can see when someone uses it. JokerHog does not make codes now. If you ask it for a code, it tells you to use `/merchrequest`.
 
 If you'd rather do it manually, create a discount code in <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify admin</PrivateLink>. You don't need to be invited to Shopify, instead the login details are stored in [1Password](https://start.1password.com/signin?l=en).
 
@@ -63,15 +71,13 @@ If you aren't prompted for the passkey, use the password and authentication code
 4. On the "Use your passkey" screen, click "Use the authentication app" — you can then use 1Password to enter the authentication code
 5. You're logged in!
 
-When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount - usually we do fixed amounts of $30, $50, or $100 depending on the purpose. The you can choose "specific collections" and choose "All Products". 
+When creating the discount, select "amount off products" then choose if it is a percentage off or a fixed amount. Then you can choose "specific collections" and choose "All Products". 
 
 > Limit the use to one use only (_not_ one use per customer), otherwise it's unlimited free stuff for them, unlimited high cost for us! 
 
-For feedback or general rewards we typically give users $30, which is enough for a t-shirt. For code contributions we tend to do $50, which is enough for a bigger selection of things. We don't put expiration dates on the codes, typically.
-
 If you need any help just send a message to the <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink> channel and somebody will be happy to help.
 
-If you want to send physical merch to a customer instead of a merch code, this can be done in Shopify by creating an order, selecting the chosen merch and applying a discount for the whole price of the item (don't forget to do this step otherwise it'll try and charge the customer!)
+If you want to send physical merch to a customer or for an event instead of a merch code, type `/merchrequest` and select **Sales** or **Event**. The bot creates the order in Shopify with a 100% discount, posts it in #merch, and adds shipping updates to that thread. You can also do this manually in Shopify by creating an order, selecting the chosen merch and applying a discount for the whole price of the item (don't forget to do this step otherwise it'll try and charge the customer!)
 
 ### PostHog team
 

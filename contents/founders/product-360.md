@@ -85,7 +85,7 @@ We created a Nail X framework. You tell the company "Nail X" where X is a thing 
 
 "Nail Funnels" was the first thing we did when Marcus (VP Product) joined last year. And we did. We made [Funnels](/product/funnels) in PostHog awesome.
 
-Get X reference customers was another useful framework. This came out of [a board meeting](ceo-diary-3#so-the-board-meeting). We realized that we had product market fit with our free open-source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group. Our product team made sure everyone was on track to achieve this.
+Get X reference customers was another useful framework. This came out of [a board meeting](/blog/ceo-diary-3#so-the-board-meeting). We realized that we had product market fit with our free open-source product, but we'd not yet worked on it for our PostHog Scale (paid product). We defined these as "genuinely delighted customers, using the product a lot, paying full price". We listed a few customers out we felt could achieve these three things to become a reference. Then we told the company to drop everything if needed to get it right with this group. Our product team made sure everyone was on track to achieve this.
 
 ### 5. We wrote stuff down
 

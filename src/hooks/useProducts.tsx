@@ -18,6 +18,7 @@ import { experiments } from './productData/experiments'
 import { posthog_ai } from './productData/posthog_ai'
 import { aiObservability } from './productData/ai_observability'
 import { aiEvals } from './productData/ai_evals'
+import { marketingAnalytics } from './productData/marketing_analytics'
 import { workflows } from './productData/workflows'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
@@ -32,6 +33,7 @@ const initialProducts = [
     featureFlags,
     surveys,
     dataWarehouse,
+    marketingAnalytics,
     realtimeDestinations,
     errorTracking,
     cdp,

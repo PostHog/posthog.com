@@ -4,6 +4,8 @@ import { StayCardContent } from '@posthog/twig-components/stay-card'
 import { stays } from '@posthog/twig-components/catalog'
 import cabin from '@posthog/twig-components/assets/cabin.jpg'
 import '@posthog/twig-components/catalog.css'
+import '@posthog/twig-components/compact.css'
+import { TwigWordmark } from '@posthog/twig-components/compact'
 
 import PostHogInspector, {
     COMPACT_INSPECTOR_CLASSES,
@@ -214,17 +216,15 @@ export function BookingStepsFigure(): JSX.Element {
                 className="min-w-0 snap-x snap-proximity overflow-x-auto"
             >
                 <div className="grid min-w-[38rem] grid-cols-2 items-start gap-2 @md:gap-4">
-                    <section
-                        aria-label="Twig booking example"
-                        className="twig-browser min-w-0 snap-start overflow-hidden rounded border border-[#d7c8b6] bg-[#f7eddf] text-[#2d2b29]"
-                    >
-                        <div className="flex items-center justify-between gap-2 border-b border-[#d7c8b6] px-3 py-2 font-rounded text-sm font-semibold">
-                            <span>Twig</span>
-                            <span className="text-xs font-normal text-[#6d6258]">{example.visitor}</span>
+                    <section aria-label="Twig booking example" className="twig-compact snap-start">
+                        <div className="twig-compact-header">
+                            <TwigWordmark />
+                            <span className="text-xs font-normal twig-compact-muted">{example.visitor}</span>
                         </div>
                         <div className="p-3 pb-4 @md:p-4 @md:pb-5">
-                            <article className="vac-card grid grid-cols-1 items-center gap-3 rounded border border-[#d7c8b6] bg-[#fff8ee] p-3 @sm:grid-cols-[6rem_minmax(0,1fr)] [&_.vac-card-body]:p-0 [&_.vac-card-body_h3]:text-base [&_.vac-card-body_p]:text-xs [&_.vac-card-body>p:nth-of-type(2)]:hidden [&_.vac-card-body>p:last-child]:!mb-0 [&_.vac-image]:aspect-[16/7] @sm:[&_.vac-image]:aspect-[4/3]">
+                            <article className="twig-compact-stay">
                                 <StayCardContent
+                                    compact
                                     stay={exampleStay}
                                     image={
                                         <div className="vac-image">

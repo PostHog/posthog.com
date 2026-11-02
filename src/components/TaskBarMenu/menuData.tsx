@@ -3,7 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import { HedgehogGardener } from '@posthog/brand/hoggies'
+import { HedgehogGardener, HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import useProduct from '../../hooks/useProduct'
 import {
     IconXNotTwitter,
@@ -123,12 +123,6 @@ const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'item',
-        label: 'PostHog Desktop',
-        link: '/docs/posthog-desktop',
-        icon: <Icons.IconCoffee className="size-4 text-yellow" />,
-    },
-    {
-        type: 'item',
         label: 'PostHog Slack',
         link: '/docs/slack',
         icon: <Icons.IconAtSign className="size-4 text-purple" />,
@@ -242,13 +236,14 @@ const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuIte
         }
     })
 
-// Tools promoted to the top level of the Products menu, in display order.
-// Everything else in BROWSE_TOOLS_HANDLES falls through to the "More" group.
+// Tools listed first in the Products menu, in display order.
+// Everything else in BROWSE_TOOLS_HANDLES follows them.
 const PRIMARY_TOOL_HANDLES: string[] = [
     'product_analytics',
     'ai_observability',
     'session_replay',
     'replay_vision',
+    'data_pipelines',
     'feature_flags',
     'experiments',
     'error_tracking',
@@ -260,13 +255,7 @@ const buildProductsMenuItems = (allProducts: any[]) => {
     const moreToolHandles = BROWSE_TOOLS_HANDLES.filter((handle) => !PRIMARY_TOOL_HANDLES.includes(handle))
 
     const items: any[] = [
-        ...buildProductMenuItems(PRIMARY_TOOL_HANDLES, allProducts),
-        {
-            type: 'expandable' as const,
-            label: 'More',
-            expandedLabel: 'Less',
-            items: buildProductMenuItems(moreToolHandles, allProducts),
-        },
+        ...buildProductMenuItems([...PRIMARY_TOOL_HANDLES, ...moreToolHandles], allProducts),
         {
             type: 'separator',
         },
@@ -290,12 +279,6 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'separator',
-        },
-        {
-            type: 'item',
-            label: 'Context Warehouse',
-            link: '/context-warehouse',
-            icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
             type: 'item',
@@ -859,6 +842,13 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             ),
             external: true,
         },
+        {
+            label: 'GuessHog',
+            link: 'https://guesshog.posthog.com',
+            iconName: null,
+            customIcon: <HedgehogMagnifyingGlass className="size-12" />,
+            external: true,
+        },
     ],
     notGames: [
         {
@@ -894,6 +884,14 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
             customIcon: null,
         },
         {
+            label: 'Hoggie tier list',
+            link: '/tier-list',
+            iconName: null,
+            customIcon: (
+                <img src="https://brand.posthog.com/hoggies/judge.png" alt="" className="size-12 object-contain" />
+            ),
+        },
+        {
             label: 'HogPaint',
             link: '/paint',
             iconName: 'hogpaint' as AppIconName,
@@ -924,16 +922,6 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
 export function useMenuSelectOptions() {
     // Build the select groups
     const selectGroups = [
-        {
-            label: 'Context warehouse',
-            items: [
-                {
-                    value: 'products',
-                    label: 'Context warehouse',
-                    icon: <Icons.IconApps className="size-4 text-red" />,
-                },
-            ],
-        },
         {
             label: 'Pricing',
             items: [

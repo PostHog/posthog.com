@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We use [PostHog Support](https://us.posthog.com/project/2/support/tickets) as our support ticketing system. This ensures that we don't miss anyone, especially when their request is passed from one team to another at PostHog, or if they message us out of hours or over the weekend. PostHog Support allows us to manage all our customer conversations (email, widget, Slack, MS Teams) in one place and reply back on the same medium.
+We use <PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink> as our support ticketing system. This ensures that we don't miss anyone, especially when their request is passed from one team to another at PostHog, or if they message us out of hours or over the weekend. PostHog Support allows us to manage all our customer conversations (email, widget, Slack, MS Teams) in one place and reply back on the same medium.
 
 This page covers the practical, day-to-day mechanics of working tickets: where to find yours, how to prioritize them, what each status means, and how to escalate or hand a ticket off cleanly.
 
@@ -12,26 +12,26 @@ This page covers the practical, day-to-day mechanics of working tickets: where t
 
 Customers can reach us through several channels, and every one of them lands as a ticket in PostHog Support.
 
-**Email.** Customers can email any of the addresses we've set up in our [email channel settings](https://us.posthog.com/project/2/support/settings#channel=email).
+**Email.** Customers can email any of the addresses we've set up in our <PrivateLink url="https://us.posthog.com/project/2/support/settings#channel=email">email channel settings</PrivateLink>.
 
 **Support widget.** Customers can open the support side panel by opening the bottom-left **More** menu and clicking **Support** ([direct link](https://us.posthog.com/home#panel=support)). This raises a widget channel ticket. Widget tickets are also raised when a customer gives feedback on a feature, or whenever they hit an error in the app.
 
-**Slack.** Enterprise and high-paying customers may have a shared Slack channel with us. Any channel listed as a support channel in our [Slack settings](https://us.posthog.com/project/2/support/settings#channel=slack) will automatically raise a ticket every time a message is posted. For any other channel that has `@SupportHog` in it, anyone can either react to a message with a `:ticket:` emoji **or** mention `@SupportHog`, and a ticket will be raised in PostHog Support. In shared channels, `@SupportHog` also watches for messages that look like potential support cases. When it spots one, it replies on the thread asking the customer whether they'd like to open a ticket (**Open ticket** or **No thanks**), and reminds them they can always raise one with the `:ticket:` emoji or by mentioning `@SupportHog`.
+**Slack.** Enterprise and high-paying customers may have a shared Slack channel with us. Any channel listed as a support channel in our <PrivateLink url="https://us.posthog.com/project/2/support/settings#channel=slack">Slack settings</PrivateLink> will automatically raise a ticket every time a message is posted. For any other channel that has `@SupportHog` in it, anyone can either react to a message with a `:ticket:` emoji **or** mention `@SupportHog`, and a ticket will be raised in PostHog Support. In shared channels, `@SupportHog` also watches for messages that look like potential support cases. When it spots one, it replies on the thread asking the customer whether they'd like to open a ticket (**Open ticket** or **No thanks**), and reminds them they can always raise one with the `:ticket:` emoji or by mentioning `@SupportHog`.
 
-**MS Teams.** Enterprise and high-paying customers may also have a shared MS Teams channel with us. Any channel listed as a support channel in our [Teams settings](https://us.posthog.com/project/2/support/settings#channel=teams) will automatically raise a ticket every time a message is posted. For any other channel that has `@SupportHog` in it, anyone can `@mention` SupportHog to raise a ticket. **Note:** unlike Slack, reacting with a `:ticket:` emoji in MS Teams does **not** raise a ticket.
+**MS Teams.** Enterprise and high-paying customers may also have a shared MS Teams channel with us. Any channel listed as a support channel in our <PrivateLink url="https://us.posthog.com/project/2/support/settings#channel=teams">Teams settings</PrivateLink> will automatically raise a ticket every time a message is posted. For any other channel that has `@SupportHog` in it, anyone can `@mention` SupportHog to raise a ticket. **Note:** unlike Slack, reacting with a `:ticket:` emoji in MS Teams does **not** raise a ticket.
 
 To set up `@SupportHog` in customer channels, see [the sales/CS handbook page on customer channels](/handbook/growth/sales/slack-channels).
 
 ### How does a customer know their ticket was created?
 
-- For **email and widget** channel tickets, we use a [workflow](https://us.posthog.com/project/2/workflows/019d9050-b1d1-0000-edd7-cf9697ad56d9/workflow) to send the customer an email letting them know we've got their ticket.
+- For **email and widget** channel tickets, we use a <PrivateLink url="https://us.posthog.com/project/2/workflows/019d9050-b1d1-0000-edd7-cf9697ad56d9/workflow">workflow</PrivateLink> to send the customer an email letting them know we've got their ticket.
 - For **Slack and MS Teams** customers, the `@SupportHog` bot replies on the thread with a message confirming that a ticket has been created.
 
 ## Creating tickets on behalf of customers
 
 Sometimes a user will reach us somewhere that isn't a proper channel — a reply to an old, already-solved ticket thread, a question over Twitter, or an email that spirals into several separate issues. In these cases it's best to create a fresh ticket for them, so the correct SLAs apply and each issue stays distinct and easy to assign.
 
-You can ask a user to open a new ticket themselves, but it's better if we do it for them. At the top of the [PostHog Support](https://us.posthog.com/project/2/support/tickets) page you can create a new ticket and fill in their details — this makes sure the right tags, SLAs, and so on are applied automatically.
+You can ask a user to open a new ticket themselves, but it's better if we do it for them. At the top of the <PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink> page you can create a new ticket and fill in their details — this makes sure the right tags, SLAs, and so on are applied automatically.
 
 A couple of things worth doing depending on where the issue came from:
 
@@ -40,7 +40,7 @@ A couple of things worth doing depending on where the issue came from:
 
 ### Forwarding customer emails
 
-If a customer has emailed you directly and the conversation should live in support, you don't need to copy anything over manually — forward the email to one of the support addresses in our [email channel settings](https://us.posthog.com/project/2/support/settings#channel=email) and a ticket will be created. Default to the address set as **primary** unless you have a reason to use another.
+If a customer has emailed you directly and the conversation should live in support, you don't need to copy anything over manually — forward the email to one of the support addresses in our <PrivateLink url="https://us.posthog.com/project/2/support/settings#channel=email">email channel settings</PrivateLink> and a ticket will be created. Default to the address set as **primary** unless you have a reason to use another.
 
 **Make sure the customer's email address is included as a cc on the forward.** This is how the ticket gets associated with the customer, so that they receive our replies and the right tags and SLAs are applied.
 
@@ -51,7 +51,7 @@ It depends on your role:
 - **Support team members** work from their **SME view**. This is available to you as a bookmark in your SME Slack channel.
 - **Support heroes** work from their **team view**. This is available to you in your team's `#support-<team-name>` channel.
 
-If you ever forget where your view is, or you want to look at another team's view, click the **Saved views** button in [PostHog Support](https://us.posthog.com/project/2/support/tickets) to see every available view.
+If you ever forget where your view is, or you want to look at another team's view, click the **Saved views** button in <PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink> to see every available view.
 
 ## Tags and what they mean
 
@@ -121,7 +121,7 @@ If you're a support hero and you ever have trouble responding to a customer — 
 
 - For **Slack and MS Teams** tickets, your reply is posted directly on the thread.
 - For **email** channel tickets, your full response is sent to the customer via email.
-- For **widget** channel tickets, we use a [workflow](https://us.posthog.com/project/2/workflows/019d903d-d7e6-0000-5c1d-1d184ed0da2a/workflow) to send the customer an email letting them know we've responded and that they can see the full response in the support sidebar.
+- For **widget** channel tickets, we use a <PrivateLink url="https://us.posthog.com/project/2/workflows/019d903d-d7e6-0000-5c1d-1d184ed0da2a/workflow">workflow</PrivateLink> to send the customer an email letting them know we've responded and that they can see the full response in the support sidebar.
 
 ### AI private notes
 
@@ -141,7 +141,7 @@ Don't use private notes to communicate internally about a ticket — it's far to
 
 To escalate a ticket to an engineering team, **assign the ticket to that team**. That's it.
 
-Most tickets are [default assigned](https://us.posthog.com/project/2/workflows/019f5ae1-273d-0000-0f78-6d4b55c8c042/workflow) to the support team, and are [automatically tagged](https://us.posthog.com/project/2/workflows/019f46e8-6374-0000-60a1-79b42c416535/workflow) with the engineering team and SME grouping that best fit. To escalate to the relevant engineering team, all you need to do is assign the ticket to them.
+Most tickets are <PrivateLink url="https://us.posthog.com/project/2/workflows/019f5ae1-273d-0000-0f78-6d4b55c8c042/workflow">default assigned</PrivateLink> to the support team, and are <PrivateLink url="https://us.posthog.com/project/2/workflows/019f46e8-6374-0000-60a1-79b42c416535/workflow">automatically tagged</PrivateLink> with the engineering team and SME grouping that best fit. To escalate to the relevant engineering team, all you need to do is assign the ticket to them.
 
 If a ticket has been mis-categorized and is heading to a different team than the one it's tagged with, update the team and SME tags as needed.
 
@@ -167,52 +167,52 @@ A lot of the ticket flow runs automatically through PostHog workflows and realti
 
 ### Categorization
 
-- A [classification workflow](https://us.posthog.com/project/2/workflows/019f46e8-6374-0000-60a1-79b42c416535/workflow) classifies tickets via a PostHog Desktop task. It sets the `team_` and `support_sme_` tags by looking at the current versions of the [teams](/teams), [feature ownership](/handbook/engineering/feature-ownership), and [support SME](/handbook/support/support-smes) handbook pages — so the tags are always derived from the current team names and SME groupings. The task then creates a `support_ticket_classified` PostHog event with the interpreted team's support Slack channel as a property. That event is consumed by a [realtime destination](https://us.posthog.com/project/2/functions/019f46e6-c08f-0000-51df-a95e57711a7f) which posts the ticket notification into the team's `#support-<team-name>` channel.
+- A <PrivateLink url="https://us.posthog.com/project/2/workflows/019f46e8-6374-0000-60a1-79b42c416535/workflow">classification workflow</PrivateLink> classifies tickets via a PostHog Desktop task. It sets the `team_` and `support_sme_` tags by looking at the current versions of the [teams](/teams), [feature ownership](/handbook/engineering/feature-ownership), and [support SME](/handbook/support/support-smes) handbook pages — so the tags are always derived from the current team names and SME groupings. The task then creates a `support_ticket_classified` PostHog event with the interpreted team's support Slack channel as a property. That event is consumed by a <PrivateLink url="https://us.posthog.com/project/2/functions/019f46e6-c08f-0000-51df-a95e57711a7f">realtime destination</PrivateLink> which posts the ticket notification into the team's `#support-<team-name>` channel.
 
 ### Assignment notifications
 
-- When a ticket is **assigned to an engineering team's role** — for example when support routes a ticket to Team Ingestion, or one team passes a ticket to another — a [realtime destination](https://us.posthog.com/project/2/functions/019f83db-d0fe-0000-1f47-4134c9d318cc) posts a notification into the team's `#support-<team-name>` channel with the customer, the latest message, and a link to the ticket. The channel is derived from the assignee role's name, so it always matches the current [teams page](/teams) naming — this is one of the reasons role names, team names, and `#support-*` channel names need to [stay in sync](/handbook/engineering/operations/support-hero#setting-your-team-up-for-support).
+- When a ticket is **assigned to an engineering team's role** — for example when support routes a ticket to Team Ingestion, or one team passes a ticket to another — a <PrivateLink url="https://us.posthog.com/project/2/functions/019f83db-d0fe-0000-1f47-4134c9d318cc">realtime destination</PrivateLink> posts a notification into the team's `#support-<team-name>` channel with the customer, the latest message, and a link to the ticket. The channel is derived from the assignee role's name, so it always matches the current [teams page](/teams) naming — this is one of the reasons role names, team names, and `#support-*` channel names need to [stay in sync](/handbook/engineering/operations/support-hero#setting-your-team-up-for-support).
 - Assignments to the support, security, People & Ops (merch), and sales/CS teams are excluded — those have their own notification flows (see below). Assignments to individual people don't notify either: the ping is for "your team's queue just got a ticket", not for tickets someone has already picked up.
 - The same ticket and assignee combination notifies at most once per hour, so repeated or bulk re-assignments don't spam the channel. If a message can't be delivered to the team's channel (usually because the channel doesn't exist under the expected name, or the PostHog Slack app isn't in it), it's posted to `#alerts-support` instead with a warning.
 
 ### Ticket lifecycle
 
-- When a ticket receives a response from the customer, we [reopen it](https://us.posthog.com/project/2/workflows/019f5ae3-545f-0000-5b22-2d87ddb1da8a/workflow). If the responding customer is a `top_20` or `churn_risk` customer, we also notify `#support-top20`.
-- When a ticket is in **pending** (i.e. we're expecting a response from the customer), we use [this workflow](https://us.posthog.com/project/2/workflows/019c5746-a12b-0000-3145-a62dca023f64/workflow?node) to send the customer a reminder email after 5 days, and then resolve the ticket if it's still in pending after a total of 7 days.
-- When a PostHog team member responds on a ticket, we [set the ticket status to open](https://us.posthog.com/project/2/workflows/019c51aa-631b-0000-266f-def63de34f90/workflow?node) so the ticket is no longer marked as new.
+- When a ticket receives a response from the customer, we <PrivateLink url="https://us.posthog.com/project/2/workflows/019f5ae3-545f-0000-5b22-2d87ddb1da8a/workflow">reopen it</PrivateLink>. If the responding customer is a `top_20` or `churn_risk` customer, we also notify `#support-top20`.
+- When a ticket is in **pending** (i.e. we're expecting a response from the customer), we use <PrivateLink url="https://us.posthog.com/project/2/workflows/019c5746-a12b-0000-3145-a62dca023f64/workflow?node">this workflow</PrivateLink> to send the customer a reminder email after 5 days, and then resolve the ticket if it's still in pending after a total of 7 days.
+- When a PostHog team member responds on a ticket, we <PrivateLink url="https://us.posthog.com/project/2/workflows/019c51aa-631b-0000-266f-def63de34f90/workflow?node">set the ticket status to open</PrivateLink> so the ticket is no longer marked as new.
 
 ### SLAs / target response times
 
-- When a **new ticket is created**, [this workflow](https://us.posthog.com/project/2/workflows/019f5ae1-273d-0000-0f78-6d4b55c8c042/workflow) identifies the customer's plan / account type and sets the relevant **First Response Time (FRT)** SLA deadline on the ticket. If the ticket is from a `top_20` or `churn_risk` customer, we notify `#support-top20`. This workflow also assigns most tickets to the support team by default.
-- When a **response is received from a customer**, [this workflow](https://us.posthog.com/project/2/workflows/019f5ac5-5f0f-0000-7038-e480e5fb0d07/workflow) uses similar logic to the FRT workflow to identify the plan / account type — we redo these checks in case the customer's plan has changed since the ticket was created — and sets the relevant **Next Response Time (NRT)** SLA deadline. The NRT is not applied if the ticket already has an SLA set that is shorter than the NRT the workflow would apply.
-- After a **PostHog team member responds**, [this workflow](https://us.posthog.com/project/2/workflows/019eac53-1b80-0000-e2ff-106649acce49/workflow) sets the **update** SLA deadline — the time within which the customer should receive an update from us about the progress of our investigation.
-- If a ticket is **reopened by a team member** (e.g. they change the status from resolved back to open because it was resolved by mistake), [this workflow](https://us.posthog.com/project/2/workflows/019eacc1-94cf-0000-d40d-8f93f16b3fe5/workflow) sets the NRT SLA deadline.
-- If a ticket is set to **on hold**, **pending**, or **resolved**, the SLA deadline on the ticket is cleared (via the [on hold](https://us.posthog.com/project/2/workflows/019eacb9-159e-0000-f228-d0d4db904444/workflow), [pending](https://us.posthog.com/project/2/workflows/019eac17-7ba7-0000-6074-0427dcb05940/workflow), and [resolved](https://us.posthog.com/project/2/workflows/019eac13-34dd-0000-cbed-eb0e3963b855/workflow) workflows).
+- When a **new ticket is created**, <PrivateLink url="https://us.posthog.com/project/2/workflows/019f5ae1-273d-0000-0f78-6d4b55c8c042/workflow">this workflow</PrivateLink> identifies the customer's plan / account type and sets the relevant **First Response Time (FRT)** SLA deadline on the ticket. If the ticket is from a `top_20` or `churn_risk` customer, we notify `#support-top20`. This workflow also assigns most tickets to the support team by default.
+- When a **response is received from a customer**, <PrivateLink url="https://us.posthog.com/project/2/workflows/019f5ac5-5f0f-0000-7038-e480e5fb0d07/workflow">this workflow</PrivateLink> uses similar logic to the FRT workflow to identify the plan / account type — we redo these checks in case the customer's plan has changed since the ticket was created — and sets the relevant **Next Response Time (NRT)** SLA deadline. The NRT is not applied if the ticket already has an SLA set that is shorter than the NRT the workflow would apply.
+- After a **PostHog team member responds**, <PrivateLink url="https://us.posthog.com/project/2/workflows/019eac53-1b80-0000-e2ff-106649acce49/workflow">this workflow</PrivateLink> sets the **update** SLA deadline — the time within which the customer should receive an update from us about the progress of our investigation.
+- If a ticket is **reopened by a team member** (e.g. they change the status from resolved back to open because it was resolved by mistake), <PrivateLink url="https://us.posthog.com/project/2/workflows/019eacc1-94cf-0000-d40d-8f93f16b3fe5/workflow">this workflow</PrivateLink> sets the NRT SLA deadline.
+- If a ticket is set to **on hold**, **pending**, or **resolved**, the SLA deadline on the ticket is cleared (via the <PrivateLink url="https://us.posthog.com/project/2/workflows/019eacb9-159e-0000-f228-d0d4db904444/workflow">on hold</PrivateLink>, <PrivateLink url="https://us.posthog.com/project/2/workflows/019eac17-7ba7-0000-6074-0427dcb05940/workflow">pending</PrivateLink>, and <PrivateLink url="https://us.posthog.com/project/2/workflows/019eac13-34dd-0000-cbed-eb0e3963b855/workflow">resolved</PrivateLink> workflows).
 - If any of the SLA workflows can't set an SLA deadline, they alert `#alerts-support` — see [Alerts](#alerts).
 
 ### CSAT
 
-- If we've **auto-resolved** a ticket that was left in pending, a CSAT email is sent to the customer from [this workflow](https://us.posthog.com/project/2/workflows/019c5746-a12b-0000-3145-a62dca023f64/workflow?node).
-- If we've **changed a ticket's status to resolved**, [this workflow](https://us.posthog.com/project/2/workflows/019f3834-8dbd-0000-4b19-073031109b21/workflow) sends the customer a CSAT email one day later. We don't send CSAT emails for security or merch tickets.
-- We post some CSAT responses into `#team-support` using [this workflow](https://us.posthog.com/project/2/workflows/019f3cc1-e893-0000-06c0-e1ac27b075fb/workflow). If a comment is provided we always post the response. If there's no comment but the customer has given a low support or low product score, we also post the response into `#team-support` so we can investigate.
+- If we've **auto-resolved** a ticket that was left in pending, a CSAT email is sent to the customer from <PrivateLink url="https://us.posthog.com/project/2/workflows/019c5746-a12b-0000-3145-a62dca023f64/workflow?node">this workflow</PrivateLink>.
+- If we've **changed a ticket's status to resolved**, <PrivateLink url="https://us.posthog.com/project/2/workflows/019f3834-8dbd-0000-4b19-073031109b21/workflow">this workflow</PrivateLink> sends the customer a CSAT email one day later. We don't send CSAT emails for security or merch tickets.
+- We post some CSAT responses into `#team-support` using <PrivateLink url="https://us.posthog.com/project/2/workflows/019f3cc1-e893-0000-06c0-e1ac27b075fb/workflow">this workflow</PrivateLink>. If a comment is provided we always post the response. If there's no comment but the customer has given a low support or low product score, we also post the response into `#team-support` so we can investigate.
 
 ### Sales / CS
 
-- When a new ticket comes in, [this workflow](https://us.posthog.com/project/2/workflows/019eee77-511f-0000-b0fa-a29acb514f74/workflow) checks the ticket's account in customer analytics for any assigned AE or CSM. If the account has an AE, it adds the `ae_*` tag; if it has a CSM, it adds the `csm_*` tag. If at least one of those tags is set, the workflow notifies the relevant account owner(s) in `#support-managed-customers`.
+- When a new ticket comes in, <PrivateLink url="https://us.posthog.com/project/2/workflows/019eee77-511f-0000-b0fa-a29acb514f74/workflow">this workflow</PrivateLink> checks the ticket's account in customer analytics for any assigned AE or CSM. If the account has an AE, it adds the `ae_*` tag; if it has a CSM, it adds the `csm_*` tag. If at least one of those tags is set, the workflow notifies the relevant account owner(s) in `#support-managed-customers`.
 
 ### Security tickets
 
-- When a new security ticket is received, [this workflow](https://us.posthog.com/project/2/workflows/019d9146-223a-0000-8165-1a3489e88b3d/workflow) auto-closes some known spam. If the ticket isn't known spam, we tag it with `team_security`, assign it to the security team, auto-respond to the customer letting them know about our disclosure program, and then notify `#security-reports`.
-- We use [this workflow](https://us.posthog.com/project/2/workflows/019db5af-0548-0000-0075-af3c956357ad/workflow) to notify `#security-reports` when a customer responds on a security ticket.
+- When a new security ticket is received, <PrivateLink url="https://us.posthog.com/project/2/workflows/019d9146-223a-0000-8165-1a3489e88b3d/workflow">this workflow</PrivateLink> auto-closes some known spam. If the ticket isn't known spam, we tag it with `team_security`, assign it to the security team, auto-respond to the customer letting them know about our disclosure program, and then notify `#security-reports`.
+- We use <PrivateLink url="https://us.posthog.com/project/2/workflows/019db5af-0548-0000-0075-af3c956357ad/workflow">this workflow</PrivateLink> to notify `#security-reports` when a customer responds on a security ticket.
 
 ### Merch tickets
 
-- When a new merch ticket is received, [this workflow](https://us.posthog.com/project/2/workflows/019d90a4-4865-0000-4d50-6608b74f5fc6/workflow) auto-closes some known spam. If the ticket isn't known spam, we assign the ticket to the merch team and notify `#merch-alerts`.
-- We use [this workflow](https://us.posthog.com/project/2/workflows/019dba6b-1574-0000-329f-24ddd0fe7417/workflow) to notify `#merch-alerts` when a customer responds on a merch ticket.
+- When a new merch ticket is received, <PrivateLink url="https://us.posthog.com/project/2/workflows/019d90a4-4865-0000-4d50-6608b74f5fc6/workflow">this workflow</PrivateLink> auto-closes some known spam. If the ticket isn't known spam, we assign the ticket to the merch team and notify `#merch-alerts`.
+- We use <PrivateLink url="https://us.posthog.com/project/2/workflows/019dba6b-1574-0000-329f-24ddd0fe7417/workflow">this workflow</PrivateLink> to notify `#merch-alerts` when a customer responds on a merch ticket.
 
 ### Alerts
 
 Alerts about tickets needing attention are posted into `#alerts-support`:
 
-- If any of the SLA workflows can't identify a customer's plan / account type, no SLA deadline gets set. When that happens, the workflow posts an alert so we can investigate and set one manually. This applies to the [FRT](https://us.posthog.com/project/2/workflows/019f5ae1-273d-0000-0f78-6d4b55c8c042/workflow), [NRT](https://us.posthog.com/project/2/workflows/019f5ac5-5f0f-0000-7038-e480e5fb0d07/workflow), [update](https://us.posthog.com/project/2/workflows/019eac53-1b80-0000-e2ff-106649acce49/workflow), and [reopened ticket](https://us.posthog.com/project/2/workflows/019eacc1-94cf-0000-d40d-8f93f16b3fe5/workflow) SLA workflows.
-- If a new email ticket arrives **from** one of our own addresses (merch@, security@, billing@, or support@posthog.com), [this workflow](https://us.posthog.com/project/2/workflows/019dddb1-cd7f-0000-04bd-b59086b5e666/workflow) posts an alert so we can check that nothing is misbehaving. Tickets tagged `exclude_from_reporting` are skipped.
+- If any of the SLA workflows can't identify a customer's plan / account type, no SLA deadline gets set. When that happens, the workflow posts an alert so we can investigate and set one manually. This applies to the <PrivateLink url="https://us.posthog.com/project/2/workflows/019f5ae1-273d-0000-0f78-6d4b55c8c042/workflow">FRT</PrivateLink>, <PrivateLink url="https://us.posthog.com/project/2/workflows/019f5ac5-5f0f-0000-7038-e480e5fb0d07/workflow">NRT</PrivateLink>, <PrivateLink url="https://us.posthog.com/project/2/workflows/019eac53-1b80-0000-e2ff-106649acce49/workflow">update</PrivateLink>, and <PrivateLink url="https://us.posthog.com/project/2/workflows/019eacc1-94cf-0000-d40d-8f93f16b3fe5/workflow">reopened ticket</PrivateLink> SLA workflows.
+- If a new email ticket arrives **from** one of our own addresses (merch@, security@, billing@, or support@posthog.com), <PrivateLink url="https://us.posthog.com/project/2/workflows/019dddb1-cd7f-0000-04bd-b59086b5e666/workflow">this workflow</PrivateLink> posts an alert so we can check that nothing is misbehaving. Tickets tagged `exclude_from_reporting` are skipped.

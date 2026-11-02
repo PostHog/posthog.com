@@ -2,7 +2,7 @@ export const cdpFeatures = {
     summary: {
         name: 'CDP',
         description: 'Ingest, transform, and send data between 145+ tools',
-        url: '/cdp',
+        url: '/data-pipelines',
         docsUrl: '/docs/data-pipelines',
     },
     features: {

@@ -192,7 +192,7 @@ Tailor the email to their likely concerns:
 
 A small, human touch can help here! Use what’s publicly obvious or clearly relevant (their product category, their website messaging, their goals). If you genuinely relate (e.g., you’re learning a language and they build a language app), one sentence can be enough to build rapport. That’s also a great tip for the first outreach. 
 
-You can also draw inspiration from the [Customer Success team's tactics](https://posthog.com/handbook/cs-and-onboarding/engaging-unengaged-customers), such as flagging outdated SDKs.
+You can also draw inspiration from the [Customer Success team's tactics](https://posthog.com/handbook/customer-success/engaging-unengaged-customers), such as flagging outdated SDKs.
 
 ## Preparing for the call
 
@@ -200,7 +200,7 @@ You can also draw inspiration from the [Customer Success team's tactics](https:/
 
 Use Customer Analytics and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) to understand the customer’s current setup. For easier access, you can pin the "Engagement Metric Dashboard" custom trait in Customer Analytics, where you can take a closer look at power users in the organization, the usage of AI or error tracking, and more. 
 
-You can supplement Metabase analysis with the [HogSpy extension](https://github.com/PostHog/hogspy/releases/tag/v1.0.0) to audit the implementation of identify, flags, and experiments.
+You can supplement Metabase analysis with the <PrivateLink url="https://github.com/PostHog/hogspy/releases/tag/v1.0.0">HogSpy extension</PrivateLink> to audit the implementation of identify, flags, and experiments.
 
 Then zoom out to learn about their business, their product, and the rest of their stack. The better your context, the faster you’ll get to relevant recommendations.
 

@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Teamtailor connector syncs your recruiting data — candidates, jobs, job applications, users, and departments — into PostHog, so you can analyze it alongside your product data.
+The Teamtailor connector syncs your recruiting data — candidates, jobs, job applications, users, departments, and interview kits — into PostHog, so you can analyze it alongside your product data.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ You need a Teamtailor account with access to create an API key that has read acc
 
 When linking Teamtailor, you'll need:
 
-- **API key** – create an API key in your Teamtailor account under **Settings → API keys**. The key grants read access to your candidates, jobs, job applications, users, and departments.
+- **API key** – create an API key in your Teamtailor account under **Settings → API keys**. The key grants read access to your candidates, jobs, job applications, users, departments, and interview kits.
 
 ## Sync modes
 
