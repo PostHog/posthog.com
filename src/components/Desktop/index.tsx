@@ -50,15 +50,15 @@ export const useProductLinks = () => {
                 source: 'desktop',
             },
             {
-                label: 'Self-driving',
-                Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
-                url: '/self-driving',
-                source: 'desktop',
-            },
-            {
                 label: 'MCP',
                 Icon: <GlassIcon path={MCP_SILHOUETTE} viewBox={MCP_VIEWBOX} />,
                 url: '/docs/model-context-protocol',
+                source: 'desktop',
+            },
+            {
+                label: 'Self-driving',
+                Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
+                url: '/self-driving',
                 source: 'desktop',
             },
             {
