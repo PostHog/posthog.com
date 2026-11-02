@@ -13,7 +13,7 @@ Our examples use Spike (TAE), Bramble (TAM), Thistle (TAM lead) and Quill (BDR).
 | Term | What it means |
 |---|---|
 | Annual contract | A customer who pre-purchases credits for 1 year or more of anticipated usage. |
-| Monthly-paying customer | A customer with no annual contract, who pays a monthly invoice. |
+| Monthly-paying customer | A customer with no annual pre-purchased credits, who pays a monthly invoice. |
 | Close date | The date the deal is closed-won in Salesforce. |
 | Effective date | The later of the signature date and the contract start date. See [which quarter an annual contract counts in](#which-quarter-an-annual-contract-counts-in). |
 | Cutoff | The 14th of the month after the quarter ends: January 14, April 14, July 14 or October 14. Payment status at the end of that day is final for the quarter. |
