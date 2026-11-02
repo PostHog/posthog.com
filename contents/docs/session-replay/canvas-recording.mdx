@@ -14,7 +14,7 @@ PostHog can capture canvas elements from your application. It works in both 2D a
 
 As canvas elements can contain sensitive information and are **not covered by DOM-based masking**, we do not capture these automatically. Once you are sure they are free of PII (or you have set up [canvas masking](#masking-canvas-content)), you can enable this feature globally from your [replay settings](https://us.posthog.com/settings/project-replay#replay), or in code with `session_recording.captureCanvas.recordCanvas: true`.
 
-Canvas elements are recorded at a rate of **4 frames per second** which may lead to some perceptual differences during playback.
+Canvas elements are recorded at a rate of **3 frames per second** which may lead to some perceptual differences during playback.
 
 ## Masking canvas content
 
@@ -43,7 +43,7 @@ posthog.init('<ph_project_token>', {
   session_recording: {
     captureCanvas: {
       // accepts a number between 0 and 12
-      // if not set locally, when canvas recording is enabled, remote config sets this to 4
+      // if not set locally, when canvas recording is enabled, remote config sets this to 3
       canvasFps: 2,
       // accepts a decimal number between 0 and 1 as a string
       // if not set locally, when canvas recording is enabled, remote config sets this to "0.4"
