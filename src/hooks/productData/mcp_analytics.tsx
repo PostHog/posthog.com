@@ -23,7 +23,7 @@ export const mcpAnalytics = {
     ...getTool('mcp_analytics'),
     Icon: IconMCP,
     type: 'mcp_analytics',
-    color: 'blue',
+    color: 'purple',
     colorSecondary: 'sky-blue',
     wizardSupport: true,
     seo: {
