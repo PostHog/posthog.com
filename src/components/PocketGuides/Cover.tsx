@@ -27,24 +27,31 @@ function Frame({ token, children }: { token: string; children: React.ReactNode }
     return (
         <article className="relative flex aspect-[3/4] overflow-hidden rounded-sm border border-light bg-white shadow-lg dark:border-dark">
             <span aria-hidden="true" className={`w-3 shrink-0 bg-${token}`} />
-            <div className="flex min-w-0 flex-1 flex-col px-4 py-3">{children}</div>
+            <div className="@container flex min-w-0 flex-1 flex-col px-4 py-3">{children}</div>
         </article>
     )
 }
 
+// Bold sans averages about 0.62em per letter. The title also scales with the cover (13cqi),
+// so a small cover keeps room for its art, and never exceeds 1.875rem (text-3xl).
+const TITLE_EM_PER_CHAR = 0.62
+const TITLE_MAX = 'min(1.875rem, 13cqi)'
+
 function Masthead({ title }: { title: string }): JSX.Element {
-    // A long word can't wrap, so it breaks mid-word at the display size. Step the scale down
-    // instead – the cover is only ~230px wide and "AI Observability" is one 13-letter word.
-    const long = title.length > 12
+    // Size the title from its longest word and the cover's width, so no word breaks mid-word
+    // ("Observabili / ty") at any cover size or title length.
+    const longestWord = Math.max(...title.split(/\s+/).map((word) => word.length))
+    const fit = `${(100 / (longestWord * TITLE_EM_PER_CHAR)).toFixed(2)}cqi`
     return (
         <header>
             {/* Wordmark only, pinned black: the cover is white stock in both themes. */}
-            <Logo.Wordmark color="black" className="h-5 w-auto @[240px]:h-6" />
-            <p className="m-0 mt-1.5 text-[11px] uppercase tracking-[0.14em] text-gray">Pocket guide to</p>
+            <Logo.Wordmark color="black" className="h-5 w-auto @[200px]:h-6" />
+            <p className="m-0 mt-1.5 whitespace-nowrap text-[11px] uppercase tracking-[0.14em] text-gray">
+                Pocket guide to
+            </p>
             <h3
-                className={`m-0 mt-1.5 font-bold leading-tight text-black ${
-                    long ? 'text-xl @[240px]:text-2xl' : 'text-2xl @[240px]:text-3xl'
-                }`}
+                className="m-0 mt-1.5 font-bold leading-tight text-black [hyphens:none] [overflow-wrap:normal]"
+                style={{ fontSize: `min(${TITLE_MAX}, ${fit})` }}
             >
                 {title}
             </h3>
