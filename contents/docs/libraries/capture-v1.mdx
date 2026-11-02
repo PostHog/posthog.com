@@ -171,8 +171,6 @@ Some defaults changed in the new major versions. These are the capture settings 
 | Modify or drop events | – | `before_send` | `BeforeSend` | `before_send` | `before_send` |
 | Historical migration | Off | `historical_migration` | `HistoricalMigration` | `capture_batch(events, true)` | `historicalMigration` |
 
-<!-- TODO(capture-v1): re-check every name and default against the released packages. -->
-
 Historical migration marks every event in a request, so SDKs never send historical and live events together. In Python, Go, and Node.js, a client with it on sends only historical events, so use a separate client for live events. In Rust, it applies to that `capture_batch` call only.
 
 SDKs split large batches into requests of 5MB or less (Go: about 500KB by default), and send any single event that's bigger than that in its own request. Your SDK's migration guide lists every new and changed setting. Mobile SDKs keep a persistent queue and retry differently; the iOS, Android, and Flutter migration guides list their settings.
@@ -198,9 +196,18 @@ posthog = Posthog("<ph_project_token>", host="<ph_client_api_host>", on_error=on
 ```
 
 ```go
+type captureCallback struct{}
+
+func (captureCallback) Success(posthog.APIMessage) {}
+
+func (captureCallback) Failure(msg posthog.APIMessage, err error) {
+    // err is a *CaptureEventError, *CaptureRequestError, or *CaptureLocalError
+    log.Printf("PostHog capture failed: %v", err)
+}
+
 client, err := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
     Endpoint: "<ph_client_api_host>",
-    Callback: myCallback, // Failure receives CaptureEventError, CaptureRequestError, or CaptureLocalError
+    Callback: captureCallback{},
 })
 ```
 
@@ -221,8 +228,6 @@ posthog.on('error', (error) => {
 ```
 
 </MultiLanguage>
-
-<!-- TODO(capture-v1): compile and run each snippet against the released SDKs; confirm Rust on_error signature and Go Callback usage. -->
 
 If your project hits a [billing limit](/docs/billing/limits-alerts), PostHog stops storing events and answers with `402` when nothing in a request can be stored. The SDK reports this as a failure on each send until the limit resets or you raise it. If only some events in a request are over a product's quota, PostHog answers with `200` and drops only those events, with the quota named in their result details.
 
