@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import ReaderView from 'components/ReaderView'
 import SEO, { buildProductStructuredData } from 'components/seo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { CallToAction } from 'components/CallToAction'
 import { Accordion } from 'components/RadixUI/Accordion'
-import TabbedCarousel from 'components/TabbedCarousel'
-import type { TabbedCarouselTab } from 'components/TabbedCarousel'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import SlicedHog from 'components/SlicedHog'
@@ -14,30 +12,24 @@ import SlotMachineText from 'components/SlotMachineText'
 import ContextDiagram from 'components/PostHogAI/ContextDiagram'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
-import {
-    StickerCoffee,
-    StickerMicroscope,
-    StickerMindMap,
-    StickerRobot,
-    StickerServers,
-} from 'components/Stickers/Stickers'
+import { StickerCoffee, StickerMicroscope, StickerServers } from 'components/Stickers/Stickers'
 import Capabilities, { AIEngineering } from 'components/PostHogAI/Capabilities'
 import Testimonials from 'components/PostHogAI/Testimonials'
-import AskAnythingDemo from 'components/Home/HeroCarousel/AskAnythingDemo'
-import { SlidePausedContext } from 'components/Home/HeroCarousel/autoAdvanceGate'
-import AskMax from 'components/AskMax'
 import MCPInstallCTA from 'components/MCPInstallCTA'
-import PlatformInstall, { cliInstallSchema } from 'components/PlatformInstall'
 import useProduct from 'hooks/useProduct'
 import usePostHog from 'hooks/usePostHog'
 import { LOGOS, type LogoKey } from 'constants/logos'
 import {
     IconArrowRight,
     IconCheck,
-    IconCursorClick,
+    IconBrain,
+    IconCheckCircle,
     IconEye,
     IconNotification,
-    IconPencil,
+    IconFilter,
+    IconNotebook,
+    IconGraph,
+    IconRocket,
     IconSparkles,
     IconTelescope,
 } from '@posthog/icons'
@@ -45,7 +37,6 @@ import posthogIcon from '../../images/posthog-icon-white.svg'
 
 const SIGNUP_URL = 'https://app.posthog.com/signup'
 const APP_AI_URL = 'https://app.posthog.com/ai'
-const CONNECT_SLACK_URL = 'https://app.posthog.com/integrations/slack'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -60,19 +51,32 @@ type IconItem = {
     Icon: IconComponent
     color: string
     name: string
+    description?: string
+    to?: string
 }
 
 const IconChipRow = ({ items }: { items: IconItem[] }) => (
-    <div className="grid grid-cols-1 @sm:grid-cols-2 @2xl:grid-cols-4 gap-x-1">
-        {items.map(({ Icon, color, name }) => (
-            <span
-                key={name}
-                className="inline-flex items-center gap-1.5 text-primary text-sm whitespace-nowrap font-semibold p-2"
-            >
-                <Icon className={`size-4 shrink-0 ${color}`} />
-                {name}
-            </span>
-        ))}
+    <div className="grid grid-cols-1 gap-x-6 gap-y-4 @sm:grid-cols-2">
+        {items.map(({ Icon, color, name, description, to }) => {
+            const title = (
+                <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    <Icon className={`size-4 shrink-0 ${color}`} />
+                    <span className={to ? 'group-hover:underline' : undefined}>{name}</span>
+                </div>
+            )
+            return (
+                <div key={name}>
+                    {to ? (
+                        <Link to={to} state={{ newWindow: true }} className="group block !no-underline">
+                            {title}
+                        </Link>
+                    ) : (
+                        title
+                    )}
+                    {description && <p className="mb-0 mt-0.5 text-sm text-secondary">{description}</p>}
+                </div>
+            )
+        })}
     </div>
 )
 
@@ -152,9 +156,8 @@ const HeroSection = () => {
                         The agent that already understands <Highlight>your context</Highlight>
                     </h1>
                     <p className="mt-0 mb-4 text-lg">
-                        PostHog AI answers product questions from your own events, replays, errors, logs, and warehouse
-                        tables (and shows the evidence). It lives in PostHog and Slack. Your coding agent gets the same
-                        data through MCP.
+                        The answers are already in your data. PostHog AI finds them across your events, replays, errors,
+                        logs, and warehouse tables. Ask in Web or Slack. Your coding agent gets it through MCP.
                     </p>
                     <CheckList items={heroBullets} className="mb-6 space-y-0.5 text-base" />
                     <SignupCTAs />
@@ -230,8 +233,8 @@ const ContextLayerSection = () => {
                         More data in, better answers out
                     </h2>
                     <p className="mb-0 mt-3 text-base text-secondary @3xl/reader-content:mr-36">
-                        Events show what people did. Errors and logs show what broke. Payments and tickets show what it
-                        meant for the customer. Connect more of your stack to capture more context to query.
+                        Events and replays show what people did. Errors and logs show what broke. Feed PostHog AI the
+                        rest of your stack too. Every source you add is more context to answer from.
                     </p>
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/curious_hog_d91b1a8b89.png"
@@ -313,7 +316,7 @@ const ContextLayerSection = () => {
             >
                 <div className="min-w-0">
                     <h3 className="m-0 flex items-center gap-2 text-xl font-bold @xl/reader-content:text-2xl">
-                        <StickerServers className="size-8 shrink-0 -rotate-3" />
+                        <StickerMicroscope className="size-8 shrink-0 -rotate-6" />
                         Semantics actually do matter
                     </h3>
                     <p className="my-3 text-sm text-secondary">
@@ -349,35 +352,6 @@ const ContextLayerSection = () => {
     )
 }
 
-const SkillsAndMemory = () => (
-    <div className="my-12 grid gap-6 rounded-md border border-purple bg-purple/10 p-5 @xl/reader-content:grid-cols-2 @xl/reader-content:p-6">
-        <div>
-            <h3 className="m-0 flex items-center gap-2 text-base font-bold">
-                <StickerRobot className="size-6 shrink-0 -rotate-3" />
-                <Link to="/docs/skills" state={{ newWindow: true }}>
-                    Skills
-                </Link>
-            </h3>
-            <p className="mb-0 mt-1 text-sm text-secondary">
-                Give repeat tasks reusable instructions: what to check, which tools to use, and what the result must
-                contain.
-            </p>
-        </div>
-        <div>
-            <h3 className="m-0 flex items-center gap-2 text-base font-bold">
-                <StickerMindMap className="size-6 shrink-0 rotate-3" />
-                <Link to="/docs/posthog-ai/edit-memory" state={{ newWindow: true }}>
-                    Memory
-                </Link>
-            </h3>
-            <p className="mb-0 mt-1 text-sm text-secondary">
-                Save product background across conversations. Explain what "activated" means once. It was a long
-                meeting.
-            </p>
-        </div>
-    </div>
-)
-
 const useCases = [
     {
         title: 'Explain the graph everyone is staring at',
@@ -390,14 +364,14 @@ const useCases = [
         prompt: 'Find sessions with rage clicks or errors, and summarize what the users were trying to do.',
     },
     {
-        title: 'Find bugs with an audience',
+        title: 'Find the errors that hit the most users',
         handle: 'error_tracking',
         prompt: 'Which errors affected the most users this week?',
     },
     {
         title: 'Read the feedback pile',
         handle: 'surveys',
-        prompt: 'Summarize my survey responses from the last 30 days by theme, with example quotes.',
+        prompt: 'Summarize survey responses from the last 30 days.',
     },
     {
         title: 'Make an opinion testable',
@@ -405,7 +379,7 @@ const useCases = [
         prompt: 'Find a high-traffic page and suggest an A/B test for it. Then draft the experiment.',
     },
     {
-        title: 'Retire the dashboard request',
+        title: 'Build a dashboard by describing it',
         handle: 'dashboards',
         prompt: 'Build a dashboard with daily active users, top pages, and retention.',
     },
@@ -419,7 +393,7 @@ const PromptsSection = (): JSX.Element => {
             <SectionHeader>
                 <div>
                     <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                        <StickerMicroscope className="size-8 shrink-0 -rotate-6" />
+                        <StickerServers className="size-8 shrink-0 -rotate-3" />
                         Actual jobs for your AI
                     </h2>
                     <p className="mb-0 mt-2 text-base text-secondary">
@@ -471,216 +445,55 @@ const PromptsSection = (): JSX.Element => {
     )
 }
 
-type DemoPause = { paused: boolean; setPaused: (paused: boolean) => void }
-
-// The demo's pause also holds the access carousel, so the paused demo stays on screen
-const WebDemo = ({ paused, setPaused }: DemoPause): JSX.Element => {
-    const [run, setRun] = useState(0)
-    // Changing tabs unmounts the demo, so drop its hold on the carousel
-    useEffect(() => () => setPaused(false), [setPaused])
-    return (
-        <div className="mx-auto w-full min-w-0 max-w-md">
-            <div className="mb-2 flex flex-wrap items-center justify-between gap-2 text-xs text-secondary">
-                <span>Scripted sample · connected tools</span>
-                <div className="flex gap-2">
-                    <OSButton size="sm" onClick={() => setPaused(!paused)}>
-                        {paused ? 'Play' : 'Pause'}
-                    </OSButton>
-                    <OSButton
-                        size="sm"
-                        onClick={() => {
-                            setRun((value) => value + 1)
-                            setPaused(false)
-                        }}
-                    >
-                        Replay
-                    </OSButton>
-                </div>
-            </div>
-            <SlidePausedContext.Provider value={paused}>
-                <AskAnythingDemo key={run} />
-            </SlidePausedContext.Provider>
-            <p className="mb-0 mt-3 text-xs text-secondary">
-                Questions about these tools?{' '}
-                <AskMax linkOnly className="font-semibold underline">
-                    Ask the documentation chat.
-                </AskMax>
-            </p>
-        </div>
-    )
-}
-
 const inAppChips: IconItem[] = [
-    { Icon: IconEye, color: 'text-blue', name: 'Knows the open page' },
-    { Icon: IconPencil, color: 'text-purple', name: 'Edits forms live' },
-    { Icon: IconSparkles, color: 'text-yellow', name: 'Real insight widgets' },
-    { Icon: IconCursorClick, color: 'text-green', name: 'Preview before writes' },
+    {
+        Icon: IconSparkles,
+        color: 'text-blue',
+        name: 'Knows what you’re looking at',
+        description: 'It sees the page you’re on. No need to explain which chart you mean.',
+        to: '/docs/posthog-ai/context-and-commands',
+    },
+    {
+        Icon: IconBrain,
+        color: 'text-green',
+        name: 'Remembers your business',
+        description: 'Save what you sell and who your customers are with /remember.',
+        to: '/docs/posthog-ai/edit-memory',
+    },
+    {
+        Icon: IconFilter,
+        color: 'text-purple',
+        name: 'Edits the filters on the page',
+        description: 'It edits the filters on your open insight. Tweak a chart by asking.',
+        to: '/docs/posthog-ai/surfaces/web-app',
+    },
+    {
+        Icon: IconNotebook,
+        color: 'text-yellow',
+        name: 'Writes up notebooks',
+        description: 'Notebooks mix text, charts, and replays in one doc. PostHog AI writes them for you.',
+        to: '/docs/posthog-ai/tools',
+    },
 ]
 
-const SurfaceFacts = ({ agent, controls }: { agent: string; controls: string }) => (
-    <dl className="my-4 space-y-1 text-sm">
-        <div>
-            <dt className="inline font-bold">Agent: </dt>
-            <dd className="m-0 inline text-secondary">{agent}</dd>
-        </div>
-        <div>
-            <dt className="inline font-bold">We control: </dt>
-            <dd className="m-0 inline text-secondary">{controls}</dd>
-        </div>
-    </dl>
-)
-
-const buildSurfaceTabs = (demo: DemoPause): TabbedCarouselTab[] => [
+const agentChips: IconItem[] = [
     {
-        value: 'web',
-        label: 'Web',
-        color: 'bg-blue',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <div className="grid items-center gap-6 rounded bg-primary p-4 pt-14 @3xl:grid-cols-2 @3xl:gap-8 @3xl:p-6 @3xl:pt-14">
-                <div className="@container min-w-0">
-                    <h2 className="mt-0 mb-3 text-2xl font-bold">Ask about the page you are looking at</h2>
-                    <div className="flow-root">
-                        <div className="float-right ml-4 mb-3 w-24 @sm:w-28">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/highlighter_hog_86b1a1f873.png"
-                                alt=""
-                                loading="lazy"
-                                width={288}
-                                imgClassName="w-full"
-                            />
-                        </div>
-                        <p className="mt-0 text-secondary text-sm">
-                            It knows what you have open, so "why did this drop?" on a dashboard is about that dashboard.
-                            Ask it to change a flag, and the form in front of you updates.
-                        </p>
-                        <p className="mb-3 text-secondary text-sm">
-                            Watch it investigate falling paid conversions, from product behavior to payments and recent
-                            code changes. The answer comes with evidence. You are allowed to be suspicious.
-                        </p>
-                    </div>
-                    <SurfaceFacts
-                        agent="PostHog AI."
-                        controls="All of it: the model, prompts, tools, and memory. We pick the model for each task."
-                    />
-                    <IconChipRow items={inAppChips} />
-                    <OSButton
-                        asLink
-                        to={askUrl('Why are signups growing, but paid conversions falling?')}
-                        external
-                        variant="primary"
-                        size="md"
-                        className="mt-4"
-                    >
-                        Try with your data
-                    </OSButton>
-                    <p className="mb-0 mt-2 text-xs text-secondary">Opens in your signed-in project.</p>
-                </div>
-                <WebDemo {...demo} />
-            </div>
-        ),
+        Icon: IconCheckCircle,
+        color: 'text-green',
+        name: 'Check before you change',
+        description: 'Ask "how often is this endpoint hit?" before you rewrite it.',
     },
     {
-        value: 'mcp',
-        label: 'MCP',
-        color: 'bg-red',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <div className="rounded p-4 pb-6 bg-primary">
-                <h2 className="mt-0 mb-2 pr-12 text-2xl font-bold">Headless PostHog use</h2>
-                <div className="grid items-center gap-4 @lg:grid-cols-[minmax(0,1fr)_16rem]">
-                    <div className="min-w-0">
-                        <p className="text-secondary text-sm">
-                            Plug PostHog into Claude Code, Cursor, or Codex, so it asks "is anyone still on this flag?"
-                            before it deletes the flag.
-                        </p>
-                        <SurfaceFacts
-                            agent="Yours: Claude Code, Cursor, Codex, or any other MCP client."
-                            controls="The tools and the data they return. Your client picks the model and writes the prompts. A few tools call an LLM inside PostHog, and that usage bills as PostHog AI."
-                        />
-                        <MCPInstallCTA className="max-w-md" showDesktopLink={false} />
-                        <p className="text-sm mt-4 mb-0">
-                            <Link
-                                to="/docs/model-context-protocol/tools"
-                                state={{ newWindow: true }}
-                                className="font-semibold"
-                            >
-                                Inspect the MCP tools
-                            </Link>
-                        </p>
-                    </div>
-                    <img
-                        src="https://brand.posthog.com/hoggies/ichabod.svg"
-                        alt=""
-                        loading="lazy"
-                        className="mx-auto w-40 @lg:w-full"
-                    />
-                </div>
-            </div>
-        ),
+        Icon: IconGraph,
+        color: 'text-purple',
+        name: 'Size the impact',
+        description: 'See how an experiment is trending before you ramp, hold, or roll back.',
     },
     {
-        value: 'cli',
-        label: 'CLI',
-        color: 'bg-green',
-        activeText: 'text-white',
-        progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
-        content: (
-            <div className="rounded p-4 pb-6 bg-primary">
-                <h2 className="mt-0 mb-2 text-2xl font-bold">SQL from your terminal, scripts, and CI</h2>
-                <p className="text-secondary text-sm">
-                    <code>posthog-cli api</code> puts the same tools in a shell command, for anything that has no MCP
-                    client (including that cron job nobody talks about).
-                </p>
-                <SurfaceFacts
-                    agent="None. You run the commands, or your script or coding agent does."
-                    controls="The commands and the tools behind them."
-                />
-                <PlatformInstall schema={cliInstallSchema} />
-                <p className="text-sm mt-4 mb-0">
-                    <Link to="/docs/cli" state={{ newWindow: true }} className="font-semibold">
-                        Read the CLI docs
-                    </Link>
-                </p>
-            </div>
-        ),
-    },
-    {
-        value: 'slack',
-        label: 'Slack',
-        color: 'bg-yellow',
-        activeText: 'text-black',
-        progressBar: 'bg-black/70 shadow-[0_0_6px_2px_rgba(255,255,255,0.4)]',
-        content: (
-            <div className="rounded pt-4 px-4 bg-primary">
-                <h2 className="mt-0 mb-2 text-2xl font-bold">Answer the question in the thread that asked it</h2>
-                <p className="text-secondary text-sm">
-                    Tag <code>@PostHog</code> with a data question. Continue the investigation in the thread, with the
-                    context of the conversation.
-                </p>
-                <SurfaceFacts
-                    agent="PostHog AI, in beta."
-                    controls="The same as the web app: the model, prompts, and tools. Slack supplies the thread as context."
-                />
-                <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <CallToAction to={CONNECT_SLACK_URL} size="sm" externalNoIcon>
-                        Connect Slack
-                    </CallToAction>
-                    <Link to="/slack" state={{ newWindow: true }} className="text-sm font-semibold">
-                        More about the Slack app
-                    </Link>
-                </div>
-                <div className="-mx-4 leading-[0]">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/subscription_insights_50ce62125e.png"
-                        alt="A PostHog insight subscription posted to a Slack channel"
-                        imgClassName="w-full"
-                    />
-                </div>
-            </div>
-        ),
+        Icon: IconRocket,
+        color: 'text-blue',
+        name: 'Verify the deploy',
+        description: 'See whether latency or conversion moved before you ship the next thing.',
     },
 ]
 
@@ -745,26 +558,94 @@ const BackgroundWork = (): JSX.Element => (
 )
 
 const AccessSection = (): JSX.Element => {
-    const [demoPaused, setDemoPaused] = useState(false)
-    const reducedMotion = useReducedMotion()
     return (
         <section id="access" className="my-12">
             <header className="mb-6">
                 <h2 className="m-0 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                    Your product data wherever you work
+                    Your product data <Highlight>wherever you work</Highlight>
                 </h2>
-                <p className="mb-0 mt-2 text-base text-secondary">
-                    PostHog AI runs in PostHog and Slack. In your editor or terminal, your own agent reaches the same
-                    data through MCP and the CLI.
-                </p>
             </header>
-            {/* 25 seconds, so the 20-second web demo can finish before the next slide */}
-            <TabbedCarousel
-                tabs={buildSurfaceTabs({ paused: demoPaused, setPaused: setDemoPaused })}
-                slideDuration={25000}
-                paused={demoPaused || !!reducedMotion}
-                pauseOnFocus
-            />
+            <div className="grid gap-4 @3xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+                <div className="@container flex min-w-0 flex-col overflow-hidden rounded border border-primary bg-primary p-4 @xl:p-6">
+                    <div className="flow-root">
+                        <div className="float-right mb-3 ml-4 w-20 @sm:w-24">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_ai_42392777d8.png"
+                                alt=""
+                                loading="lazy"
+                                width={288}
+                                imgClassName="w-full"
+                            />
+                        </div>
+                        <h3 className="mb-3 mt-0 text-2xl font-bold">
+                            PostHog AI in <Highlight>PostHog Web</Highlight>
+                        </h3>
+                        <p className="mb-3 mt-0 text-sm text-secondary">
+                            Start with a trend, then ask for the SQL behind it, the replays that match, or a survey to
+                            learn why. PostHog AI switches modes as you go and keeps the whole thread.
+                        </p>
+                    </div>
+                    <IconChipRow items={inAppChips} />
+                    <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+                        <OSButton
+                            asLink
+                            to={askUrl('Why are signups growing, but paid conversions falling?')}
+                            external
+                            variant="primary"
+                            size="md"
+                        >
+                            Try with your data
+                        </OSButton>
+                        <p className="m-0 text-xs text-secondary">Opens in your signed-in project.</p>
+                    </div>
+                    <div className="mt-6 border-t border-primary pt-4">
+                        <h4 className="m-0 text-base font-bold">Also in Slack</h4>
+                        <p className="mb-0 mt-0.5 text-sm text-secondary">
+                            Product discussions happen in Slack, so PostHog goes there too. Mention{' '}
+                            <code>@PostHog</code> in a thread to analyze your data, or to hand a fix to a coding agent.
+                        </p>
+                        <Link
+                            to="/slack"
+                            state={{ newWindow: true }}
+                            className="mt-4 inline-block text-sm font-semibold underline"
+                        >
+                            More about the Slack app →
+                        </Link>
+                    </div>
+                    <div className="-mx-4 -mb-4 mt-auto pt-4 leading-[0] @xl:-mx-6 @xl:-mb-6">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Inbox_in_slack_229d1d3693.png"
+                            alt="PostHog Inbox reports posted to a Slack channel, with buttons to review the pull request"
+                            loading="lazy"
+                            imgClassName="w-full"
+                        />
+                    </div>
+                </div>
+                <div className="@container min-w-0 rounded border border-primary bg-primary p-4 @xl:p-6">
+                    <h3 className="mb-3 mt-0 text-2xl font-bold">
+                        PostHog in your <Highlight>coding agent</Highlight>
+                    </h3>
+                    <p className="mb-3 mt-0 text-sm text-secondary">
+                        Plug PostHog into Claude Code, Cursor, or wherever you're building.
+                    </p>
+                    <IconChipRow items={agentChips} />
+                    <MCPInstallCTA className="mt-4 max-w-md" showDesktopLink={false} />
+                    <div className="mt-6 border-t border-primary pt-4">
+                        <h4 className="m-0 text-base font-bold">Also in your terminal and CI</h4>
+                        <p className="mb-0 mt-0.5 text-sm text-secondary">
+                            <code>posthog-cli api</code> gives you the MCP tool catalog as shell commands, including SQL
+                            queries.
+                        </p>
+                        <Link
+                            to="/docs/cli"
+                            state={{ newWindow: true }}
+                            className="mt-4 inline-block text-sm font-semibold underline"
+                        >
+                            Read the CLI docs →
+                        </Link>
+                    </div>
+                </div>
+            </div>
         </section>
     )
 }
@@ -795,26 +676,32 @@ const buildFaq = (pricing: Pricing | null): FaqEntry[] => [
     },
     {
         question: 'Can I cap what I spend?',
-        answer: 'Yes. PostHog sets a default billing limit of $150, and you can set your own. When you reach it, AI features pause until your credits reset at the start of the next billing period.',
+        answer: 'Yes. PostHog sets a $150 billing limit by default, and you can set your own. When you hit it, AI features pause until your credits reset at the start of the next billing period.',
         link: { label: 'Billing limits', to: '/docs/posthog-ai/pricing' },
     },
     {
-        question: 'What can it read and change?',
-        answer: 'Access depends on the app and its configured tools. PostHog AI can query project data and create supported objects. Desktop and Inbox can prepare code changes for review. Workflow AI tasks start read-only; full access is configurable.',
+        question: 'Do I need to turn anything on first?',
+        answer: 'Yes, once. PostHog AI uses outside model providers, so an organization admin has to approve it. The first time you send a chat message, PostHog AI asks the admin to approve. Admins can also switch it on in Settings > Organization > General.',
+        link: { label: 'Allow PostHog AI access', to: '/docs/posthog-ai/allow-access' },
+    },
+    {
+        question: 'What can it see and change?',
+        answer: 'It can read your events, persons, sessions, groups, actions, cohorts, data warehouse schema, and saved insights and dashboards. It follows your access controls, so it only sees what you can see. It can also create dashboards, surveys, alerts, and feature flags. For changes in code, it starts a coding task on a repository you connected and tells you when a pull request is ready to review.',
         link: { label: 'Access control', to: '/docs/settings/access-control' },
     },
     {
         question: 'Where does my data go?',
-        answer: 'PostHog AI runs on models from Anthropic, OpenAI, and Google, so your messages and the data the agent reads pass through them. Azure powers semantic search and can see actions and cohorts. Our DPA prohibits providers from training on your data. PostHog’s own anonymized model training has a separate opt-out setting.',
+        answer: 'PostHog AI runs on models from Anthropic, OpenAI, and Google, so your messages and the data it reads pass through them. Azure handles semantic search and can see your actions and cohorts. We can’t promise zero data retention yet, because not every model provider offers it.',
         link: { label: 'Subprocessors', to: '/subprocessors' },
     },
     {
-        question: 'How do I turn PostHog AI off?',
-        answer: 'An organization admin can turn off PostHog AI data analysis in Settings > Organization > General. When it is off, no data goes to AI providers. You can turn it back on at any time, and your chat history stays.',
+        question: 'Does anyone train on my data?',
+        answer: 'Model providers don’t. Our DPA bans them from using your data to train or fine-tune their models. PostHog does train its own models on anonymized data, and you can opt out with the “Enable AI training on anonymized data” setting.',
+        link: { label: 'AI data FAQ', to: '/docs/posthog-ai/faq' },
     },
     {
-        question: 'Can I self-host PostHog AI or use my own models?',
-        answer: 'No. PostHog AI only runs in PostHog Cloud, and PostHog picks the most efficient model for each task.',
+        question: 'How do I turn PostHog AI off?',
+        answer: 'An organization admin can switch off PostHog AI data analysis in Settings > Organization > General. While it is off, no data goes to AI providers. You can turn it back on any time, and your chat history stays.',
     },
 ]
 
@@ -876,37 +763,20 @@ export default function PostHogAIPage(): JSX.Element {
                 <div className="@container/reader-content not-prose max-w-5xl mx-auto font-rounded">
                     <HeroSection />
                     <ContextLayerSection />
-                    <PromptsSection />
-
-                    <SkillsAndMemory />
-
-                    <div className="border-t border-primary" />
 
                     <AccessSection />
 
                     <BackgroundWork />
 
+                    <PromptsSection />
+
                     <Testimonials />
 
                     <div
                         id="try"
-                        className="not-prose bg-blue/10 border border-blue rounded-md p-5 shadow-xl @md/reader-content:p-7 my-6"
+                        className="not-prose bg-purple/10 border border-purple rounded-md p-5 shadow-xl @md/reader-content:p-7 my-6"
                     >
-                        <div className="grid @lg/reader-content:grid-cols-[minmax(0,1fr)_180px] gap-6 items-center">
-                            <div>
-                                <h2 className="mt-0 mb-3 text-2xl font-bold @xl/reader-content:text-3xl">
-                                    It's not magic (but it feels like it)
-                                </h2>
-                                <p className="mt-0 mb-4">
-                                    PostHog AI comes with every PostHog account, plus{' '}
-                                    {pricing
-                                        ? `${pricing.freeCredits.toLocaleString()} free credits a month`
-                                        : 'free credits every month'}
-                                    . Sign up, open the chat, and ask it a question about your own data. Or connect your
-                                    coding agent through MCP.
-                                </p>
-                                <SignupCTAs />
-                            </div>
+                        <div className="grid @lg/reader-content:grid-cols-[180px_minmax(0,1fr)] gap-6 items-center">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/wizard_indigo_hog_d7099863ad.png"
                                 alt=""
@@ -915,6 +785,20 @@ export default function PostHogAIPage(): JSX.Element {
                                 className="hidden @lg/reader-content:block"
                                 imgClassName="mx-auto hidden max-h-56 w-auto @lg/reader-content:block"
                             />
+                            <div>
+                                <h2 className="mt-0 mb-3 text-2xl font-bold @xl/reader-content:text-3xl">
+                                    It's not magic (but it feels like it)
+                                </h2>
+                                <p className="mt-0 mb-4">
+                                    PostHog AI knows when things break, what users love, and what to build next. Every
+                                    organization gets{' '}
+                                    {pricing
+                                        ? `${pricing.freeCredits.toLocaleString()} free credits a month`
+                                        : 'free credits every month'}{' '}
+                                    to ask harder questions that help you build a better product.
+                                </p>
+                                <SignupCTAs />
+                            </div>
                         </div>
                     </div>
 
