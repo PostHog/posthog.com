@@ -84,15 +84,13 @@ Individual projects can override organization defaults to meet specific privacy 
 
 #### Events retention
 
-Organization admins can set a project-specific events retention window under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). This overrides the organization's default retention window for that project.
+Organization admins can set how many months PostHog keeps events for one project, under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). This window replaces the [organization's window](/docs/settings/organizations#events-retention) for that project. Project admins and members can see the setting but not change it.
 
-The settings page shows the organization's current window and the maximum window your plan allows. The window you choose must fall between 1 month and the smaller of your plan's maximum and any limit set by your organization.
+The setting shows the organization's window and the range of months you can choose from.
 
-Only organization admins can change this setting. Project admins and members can view it but not edit it.
+> **Warning:** PostHog deletes events older than the window at the next monthly cleanup. Deleted events can't be restored.
 
-> **Warning:** Events older than the configured window are permanently deleted during the monthly cleanup and can't be restored.
-
-Clearing the project-specific window causes the project to fall back to the [organization's default](/docs/settings/organizations#events-retention). See [events data retention](/docs/data/events-retention) for more details.
+If you remove the project's window, the project uses the organization's window. See [events data retention](/docs/data/events-retention#custom-retention) for more details.
 
 It's best to use separate projects for:
 

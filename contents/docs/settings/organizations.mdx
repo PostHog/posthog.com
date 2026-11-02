@@ -66,15 +66,13 @@ Individual projects can override this organization default by configuring their 
 
 ### Events retention
 
-Organization admins can set a default events retention window (in months) that applies to every project in the organization that doesn't have its own window. Find this under [**Settings** > **Organization** > **General** > **Events retention**](https://app.posthog.com/settings/organization-details#organization-events-retention).
+Organization admins can set how many months PostHog keeps events, for every project that doesn't have its own window. Find it under [**Settings** > **Organization** > **General** > **Events retention**](https://app.posthog.com/settings/organization-details#organization-events-retention). Other members can see the setting but not change it.
 
-The window must fall between 1 month and the maximum your plan allows (1 year on the free plan, 7 years on paid plans). Only organization admins can change this setting – other members can view it but not edit.
+The setting shows the range of months you can choose from. A window can't be longer than your plan's.
 
-> **Warning:** Events older than the configured window are permanently deleted during the monthly cleanup and can't be restored. Saving a shorter window shows a confirmation dialog because the deletion is irreversible.
+> **Warning:** PostHog deletes events older than the window at the next monthly cleanup. Deleted events can't be restored, so PostHog asks you to confirm before it saves.
 
-If you remove the organization's window, projects without their own window fall back to your plan's maximum retention period.
-
-Individual projects can override the organization's window in [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). For more details, see [events data retention](/docs/data/events-retention).
+Each project can use its own window instead, under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). For more details, see [events data retention](/docs/data/events-retention#custom-retention).
 
 ### Notifications
 
