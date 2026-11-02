@@ -303,32 +303,32 @@
         },
         {
             "source": "/learn/ai-observability/pocket-guide/throw-away-answers",
-            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
             "permanent": true
         },
         {
             "source": "/learn/ai-observability/pocket-guide/throw-away-answers.md",
-            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
             "permanent": true
         },
         {
             "source": "/pocket-guides/ai-observability/throw-away-answers",
-            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
             "permanent": true
         },
         {
             "source": "/pocket-guides/ai-observability/throw-away-answers.md",
-            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
             "permanent": true
         },
         {
             "source": "/docs/ai-observability/learn/throw-away-answers",
-            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
             "permanent": true
         },
         {
             "source": "/docs/ai-observability/learn/throw-away-answers.md",
-            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
             "permanent": true
         },
         {

@@ -11,9 +11,9 @@ import { supportPolicy } from '@posthog/twig-components/support-evals'
 import { EvidenceTabs } from '@posthog/twig-components/evidence-tabs'
 import { PlaygroundStatus } from '@posthog/twig-components/status'
 import { PlaygroundCodeBlock } from '@posthog/twig-components/code-block'
-import cabin from '@posthog/twig-components/assets/cabin.jpg'
-import coast from '@posthog/twig-components/assets/coast.jpg'
-import cityPhoto from '@posthog/twig-components/assets/city.jpg'
+import cabin from './assets/cabin.jpg'
+import coast from './assets/coast.jpg'
+import cityPhoto from './assets/city.jpg'
 import type { Stay } from '@posthog/twig-components/catalog'
 import catalogCss from '!!css-loader!@posthog/twig-components/catalog.css'
 import compactCss from '!!css-loader!@posthog/twig-components/compact.css'
@@ -1000,6 +1000,7 @@ export function AioRecommendationFigure(): JSX.Element {
 function Recommendation(): JSX.Element {
     const [opened, setOpened] = useState(false)
     const [saved, setSaved] = useState(false)
+    const [saveRecorded, setSaveRecorded] = useState(false)
     return (
         <Pair>
             {!opened ? (
@@ -1009,7 +1010,10 @@ function Recommendation(): JSX.Element {
                     stay={data.beach}
                     image={image(data.beach)}
                     saved={saved}
-                    onSavedChange={setSaved}
+                    onSavedChange={(next) => {
+                        setSaved(next)
+                        if (next) setSaveRecorded(true)
+                    }}
                 />
             )}
             <Inspector title="Activity">
@@ -1018,7 +1022,7 @@ function Recommendation(): JSX.Element {
                 ) : (
                     <InspectionResults
                         label="Recommendation events"
-                        rows={data.recommendationEvents(saved).map((item) => ({
+                        rows={data.recommendationEvents(saveRecorded).map((item) => ({
                             label: item.event,
                             code: true,
                             result: item.time,

@@ -101,7 +101,7 @@ test('only retired AIO chapters redirect under Learn; current chapters stay gene
         ['unexplained-answers', 'traces-and-conversations'],
         ['quality-output', 'online-evaluations'],
         ['invented-functions', 'online-evaluations'],
-        ['throw-away-answers', 'offline-evaluations'],
+        ['throw-away-answers', 'product-outcomes'],
         ['prompts-and-offline-evaluations', 'offline-evaluations'],
         ['ai-cost', 'cost-and-performance'],
     ])

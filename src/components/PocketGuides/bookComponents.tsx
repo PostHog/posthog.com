@@ -1,21 +1,5 @@
-import {
-    AioConversationPreview,
-    AioSupportConversationPreview,
-    AioRequestFigure,
-    AioConversationFigure,
-    AioSearchFixFigure,
-    AioOnlineEvaluationFigure,
-    AioCodeEvaluationFigure,
-    AioDatasetFigure,
-    AioPromptComparisonFigure,
-    AioPromptVersionFigure,
-    AioPromptTemplateFigure,
-    AioUsageFigure,
-    AioLatencyFigure,
-    AioRecommendationFigure,
-    AioOutcomeFunnelFigure,
-    AioHumanReviewFigure,
-} from './AioPocketGuide/figures'
+import React, { lazy, Suspense } from 'react'
+import { RenderInClient } from '../RenderInClient'
 import AioChapterFooter from './AioPocketGuide/ChapterFooter'
 import { ProductVideo } from '../ProductVideo'
 
@@ -75,6 +59,40 @@ import {
 } from './figures'
 import { Enable, Eyebrow, Frontispiece, SeeAlso, SeeFig, Watches, proseComponents } from './bookPieces'
 import { AskAI, CTA, ScannerStarter, ViewRecording, ViewRecordings } from './UIButton'
+
+// Keep AIO's Twig code, styles, and photos out of other guide downloads.
+function aioFigure(name: keyof typeof import('./AioPocketGuide/figures')): () => JSX.Element {
+    const Component = lazy(() => import('./AioPocketGuide/figures').then((figures) => ({ default: figures[name] })))
+    return function AioFigure(): JSX.Element {
+        return (
+            <RenderInClient
+                waitForFlags={false}
+                render={() => (
+                    <Suspense fallback={null}>
+                        <Component />
+                    </Suspense>
+                )}
+            />
+        )
+    }
+}
+
+const AioConversationPreview = aioFigure('AioConversationPreview')
+const AioSupportConversationPreview = aioFigure('AioSupportConversationPreview')
+const AioRequestFigure = aioFigure('AioRequestFigure')
+const AioConversationFigure = aioFigure('AioConversationFigure')
+const AioSearchFixFigure = aioFigure('AioSearchFixFigure')
+const AioOnlineEvaluationFigure = aioFigure('AioOnlineEvaluationFigure')
+const AioCodeEvaluationFigure = aioFigure('AioCodeEvaluationFigure')
+const AioDatasetFigure = aioFigure('AioDatasetFigure')
+const AioPromptComparisonFigure = aioFigure('AioPromptComparisonFigure')
+const AioPromptVersionFigure = aioFigure('AioPromptVersionFigure')
+const AioPromptTemplateFigure = aioFigure('AioPromptTemplateFigure')
+const AioUsageFigure = aioFigure('AioUsageFigure')
+const AioLatencyFigure = aioFigure('AioLatencyFigure')
+const AioRecommendationFigure = aioFigure('AioRecommendationFigure')
+const AioOutcomeFunnelFigure = aioFigure('AioOutcomeFunnelFigure')
+const AioHumanReviewFigure = aioFigure('AioHumanReviewFigure')
 
 export { EntryProvider } from './bookContext'
 
