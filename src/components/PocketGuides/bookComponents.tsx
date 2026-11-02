@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { RenderInClient } from '../RenderInClient'
 import AioChapterFooter from './AioPocketGuide/ChapterFooter'
+import FigureErrorBoundary from './AioPocketGuide/FigureErrorBoundary'
 import { ProductVideo } from '../ProductVideo'
 
 import Term from './terms'
@@ -68,9 +69,11 @@ function aioFigure(name: keyof typeof import('./AioPocketGuide/figures')): () =>
             <RenderInClient
                 waitForFlags={false}
                 render={() => (
-                    <Suspense fallback={null}>
-                        <Component />
-                    </Suspense>
+                    <FigureErrorBoundary>
+                        <Suspense fallback={null}>
+                            <Component />
+                        </Suspense>
+                    </FigureErrorBoundary>
                 )}
             />
         )

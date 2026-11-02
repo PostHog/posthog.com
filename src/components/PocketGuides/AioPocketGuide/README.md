@@ -31,3 +31,5 @@ Prompt comparison figures show their prompt instructions directly, without a Sys
 **Default for guide figures: show captured evidence directly.** Do not hide messages, context, inputs, outputs, or instructions behind caret disclosures. Only add a disclosure when Sarah explicitly requests that specific interaction. Evaluation and saved-case row expansions were explicitly requested; never nest another disclosure inside them.
 
 AIO figures load through a client-only asynchronous boundary in `bookComponents.tsx`, so other guide readers do not download their Twig styles or images. Stay photos use local 320px JPEG derivatives of the package catalog assets. The recommendation activity log retains a recorded save event when the visitor later removes the bookmark; Reset clears that history.
+
+Each lazy-loaded figure has a local `FigureErrorBoundary`. A failed import or render replaces only that figure with a short refresh message, leaving the chapter and other figures readable. Suspense still handles pending imports without showing an error. `FigureErrorBoundary.test.ts` covers both resolved and rejected lazy imports.
