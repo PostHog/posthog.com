@@ -156,7 +156,7 @@ When you choose **Delete and stop ingesting**, PostHog:
 2. Hides the event definition.
 3. Deletes the definition about two hours later. Before it deletes the definition, PostHog checks that each filter still drops the event and that no event with this name arrived in the last 90 minutes. If either check fails, PostHog tries again an hour later. After seven days, it stops trying and the definition stays hidden.
 
-To cancel the delete, unhide or verify the definition. To ingest the event again, remove its condition from the [event ingestion filter](https://app.posthog.com/data-management/event-filtering).
+To cancel the delete, change the definition's status to **Visible** or **Verified**. To ingest the event again, remove its condition from the [event ingestion filter](https://app.posthog.com/data-management/event-filtering).
 
 PostHog doesn't change the filter, and shows the reason, when:
 
