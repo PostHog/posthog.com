@@ -90,6 +90,9 @@ jobs:
               env:
                   PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome
 
+            - name: Check shared window paths
+              run: pnpm test:internal-path
+
             - name: Build site
               run: pnpm build
               env:

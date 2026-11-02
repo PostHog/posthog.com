@@ -102,7 +102,7 @@ PostHog's data pipeline provides full CDP capabilities through three core compon
 - [**Transformations**](/docs/data-pipelines/transformations): Clean and transform event data in real-time before it's stored – including GeoIP enrichment, PII scrubbing, bot filtering, property standardization, and custom transformations written in Hog. Transformations are completely free with no volume limits.
 - [**Destinations**](/docs/data-pipelines/destinations): Send data to dozens of tools in real-time or schedule batch exports to warehouses like Snowflake, BigQuery, Redshift, Postgres, and Databricks.
 
-Beyond data pipelines, [PostHog's CDP](/cdp) also handles event capture from [client-side SDKs](/docs/libraries) and [server-side APIs](/docs/api) and, unlike standalone CDPs, all that data is immediately available for analysis – no export required. Every event, user, and session [can be queried with SQL](/docs/data-warehouse/sql), [visualized in funnels](/docs/product-analytics/funnels) and [retention charts](/docs/product-analytics/retention), or connected to a specific [session recording](/docs/session-replay). You can [build cohorts based on behavior](/docs/data/cohorts), [run experiments on segments](/docs/experiments), and see exactly what users did before churning – all in one place.
+Beyond data pipelines, [PostHog's CDP](/data-pipelines) also handles event capture from [client-side SDKs](/docs/libraries) and [server-side APIs](/docs/api) and, unlike standalone CDPs, all that data is immediately available for analysis – no export required. Every event, user, and session [can be queried with SQL](/docs/data-warehouse/sql), [visualized in funnels](/docs/product-analytics/funnels) and [retention charts](/docs/product-analytics/retention), or connected to a specific [session recording](/docs/session-replay). You can [build cohorts based on behavior](/docs/data/cohorts), [run experiments on segments](/docs/experiments), and see exactly what users did before churning – all in one place.
 
 PostHog uses simple usage-based pricing with a [generous free tier](/pricing), so you can start collecting and analyzing data before committing to a long-term contract.
 
@@ -292,7 +292,7 @@ Mid-to-large enterprise teams with complex martech stacks who need comprehensive
 
 #### For startups and small teams
 
-- **PostHog** if you want everything in one place – [analytics](/product-analytics), [replay](/session-replay), [flags](/feature-flags), [error tracking](/error-tracking), and [data pipelines](/cdp) – without managing multiple vendors
+- **PostHog** if you want everything in one place – [analytics](/product-analytics), [replay](/session-replay), [flags](/feature-flags), [error tracking](/error-tracking), and [data pipelines](/data-pipelines) – without managing multiple vendors
 - **Segment** (free tier) if you're building a data layer and want maximum flexibility in tool choice
 
 #### For developer-first teams

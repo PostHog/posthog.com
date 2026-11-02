@@ -118,6 +118,7 @@ export const productAnalytics = {
     ],
     overview: {
         title: 'Product analytics with autocapture',
+        description: '"Show me retention for users who completed onboarding"',
         eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },

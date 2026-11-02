@@ -55,7 +55,7 @@ PostHog acts as your product's context layer: an error shows up with the replay,
 
 - **AI observability:** Capture every LLM generation and trace with its cost, latency, tokens, and errors, tied to the user and session that triggered it. Run evals on production traffic and A/B test prompts or models behind a flag. 
 
-- **Data warehouse and CDP:** Sync Stripe, HubSpot, Postgres, and other sources into the [data warehouse](/context-warehouse) and query them alongside your product data, then push events back out to your tools with [CDP destinations](/cdp) or batch exports. 
+- **Data warehouse and CDP:** Sync Stripe, HubSpot, Postgres, and other sources into the [data warehouse](/context-warehouse) and query them alongside your product data, then push events back out to your tools with [CDP destinations](/data-pipelines) or batch exports. 
 
 ### How does PostHog compare to Sentry?
 
@@ -750,7 +750,7 @@ It's completely free to get started – no credit card required. Our [AI setup w
 
 Most Sentry alternatives give you a better or cheaper view of the same thing: the error. PostHog stores the error next to everything else your product generates, so [error tracking](/error-tracking), [session replay](/session-replay), [logs](/logs), [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), and [AI observability](/ai-observability) share one model of users and sessions.
  
-The [data warehouse](/context-warehouse) and [CDP](/cdp) extend that to business data from Stripe, HubSpot, Postgres, and other sources, synced in and pushed back out. The upshot for debugging: "which errors hit paying customers this week" is one query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the whole product, not just its exceptions.
+The [data warehouse](/context-warehouse) and [CDP](/data-pipelines) extend that to business data from Stripe, HubSpot, Postgres, and other sources, synced in and pushed back out. The upshot for debugging: "which errors hit paying customers this week" is one query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the whole product, not just its exceptions.
  
 </details>
 

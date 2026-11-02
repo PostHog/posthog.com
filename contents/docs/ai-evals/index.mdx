@@ -178,6 +178,21 @@ The model picker filters to models that support the selected method. Some models
 
 Existing evaluations without an explicit method selection continue using automatic routing until you choose a method.
 
+### Setting a reasoning level
+
+When you use **LLM with explanation** with an Anthropic or OpenAI reasoning model, a brain button appears next to the model selector. Select it to choose how much the judge reasons before it gives a verdict: **Minimal**, **Low**, **Medium**, or **High**.
+
+**Model default** sends no level, so the model uses its own default. Many current models already reason at about a medium level by default, so choosing **Medium** may not change anything.
+
+Higher levels cost more and take longer, and they don't always change the verdict. Try a level on a sample of your data before you switch an evaluation over.
+
+Each provider applies the level differently:
+
+- **Anthropic:** Claude models before 4.6 get a thinking budget of 1,024 to 8,192 tokens, depending on the level. Newer models get adaptive thinking at that effort. Claude has no minimal level, so **Minimal** becomes **Low**.
+- **OpenAI:** PostHog sets `reasoning_effort`. Only the original GPT-5 models accept **Minimal**. Other models use **Low** instead.
+
+The button only appears for models that support a reasoning level. If you switch to a model without support, the level is cleared. The API rejects a reasoning level for those models and for the **Decision model** judge method.
+
 ### Creating an LLM judge evaluation
 
 1. Navigate to **AI Evals** > **Evaluations**

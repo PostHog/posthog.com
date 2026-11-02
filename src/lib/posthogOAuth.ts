@@ -1,5 +1,5 @@
 import { SQUEAK_HOST } from 'lib/strapi'
-import { isSafeInternalPath } from 'lib/utils'
+import { isSafeInternalPath } from 'lib/internalPath'
 
 const POSTHOG_OAUTH_REDIRECT_PATH = '/connect/posthog/redirect'
 const RETURN_PATH_KEY = 'posthog_oauth_return_path'

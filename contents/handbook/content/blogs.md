@@ -51,20 +51,26 @@ Decide who the post is for and how it'll reach them *before* you write it, not a
 
 ### Drafting
 
+- **Don't let AI write for you.** We encourage using AI for research, outlining, and finding the weak spots in an argument, but avoid using it to actually write the sentences, even to clean up, polish, or make fixes for you as a non-native English speaker. Readers can tell, and some even block content that's too heavily AI written. We will ask you to rewrite it if it's too obvious.
+
 - **Preview as you write.** Draft in this <PrivateLink url="https://docs.google.com/document/d/1Jc9p_L79mo3atAikl9LmJY6FXMe2H-hocyTbvxI74PE/edit">Google Docs template</PrivateLink> to see roughly how the post will look on posthog.com.
-- **Don't let AI write the whole thing.** We encourage using AI for research, outlining, and finding the weak spots in an argument, but avoid using it to actually write the sentences. Readers can tell, and we will ask you to rewrite it if it's too obvious.
-- **Consider adding internal links for SEO.** The [SEO guide](/handbook/content/seo-guide) covers how many to add and what anchor text to use.
-- **Don't sweat the mechanics.** En dashes, sentence case, image sizes – we'll fix anything you miss during review.
+
+- **Consider adding internal links for SEO.** The [SEO guide](/handbook/content/seo-guide) covers how many to add and what anchor text to use. We have a `/suggest-links` skill in the `posthog.com` repo to help with this. 
+
+- **Don't sweat the mechanics.** En dashes, typos, sentence case, image sizes – we'll fix anything you miss during review.
 
 ## Submitting for review
 
 All blogs must be reviewed by someone on the Editorial Team before publishing.
 
 Before you submit, make sure you have:
-1. A **hero image** (grab a template from the <PrivateLink url="https://www.figma.com/file/tNuNQ0STmx0ve4f1sAv4Ka?node-id=0-1&amp;type=design&amp;mode=design">blog graphics Figma</PrivateLink>, or [request art](/handbook/brand/art-requests) for something custom – request it as early as possible, even before the details are set), correct [frontmatter](/handbook/content/metadata), and a post that follows the [style guide](/handbook/content/posthog-style-guide). Check the deployment preview on your PR to see how it renders.
+
+1. A **hero image**. The Editorial team can do this for you. 
 2. An author entry in [`src/data/authors.json`](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json). The `handle` you add there is what goes in the `author` field of your frontmatter – see [metadata](/handbook/content/metadata) for the format.
 
 To submit, simply create **a pull request.** Add your `.md` file to [`/contents/blog`](https://github.com/PostHog/posthog.com/tree/master/contents/blog) in the [posthog.com repo](https://github.com/PostHog/posthog.com). It will automatically add the Editorial Team as reviewers.
+
+Please tell us if/how much you used AI to write and how much AI writing made it into your final draft.
 
 If you're already talking to an editor about this blog post, add them individually as a reviewer, too. Otherwise, someone will pick it up shortly. Expect one or two rounds of feedback. If you don't hear back from us within a day, ping the <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C09GU689J1X"><code>#team-editorial</code></PrivateLink> channel in slack.
 
