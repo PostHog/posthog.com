@@ -391,8 +391,8 @@ export const filledCategories = (categories: readonly DocCategory[]): DocCategor
 
 export const libraryNav = [
     { name: 'Overview', url: libraryRootUrl },
-    ...filledCategories(docCategories).flatMap((category) => [
-        { name: category },
-        ...entriesIn(category).map((entry) => ({ name: entry.name, url: docUrl(entry.slug) })),
-    ]),
+    ...filledCategories(docCategories).map((category) => ({
+        name: category,
+        children: entriesIn(category).map((entry) => ({ name: entry.name, url: docUrl(entry.slug) })),
+    })),
 ]

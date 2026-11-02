@@ -11,7 +11,7 @@ import { proseLinks } from './styles'
 
 const categoryId = (category: string): string => category.toLowerCase().replace(/\s+/g, '-')
 
-export default function Overview(): JSX.Element {
+export function renderOverview(): JSX.Element {
     const tableOfContents = docSections.flatMap((section) => [
         { value: section.name, url: categoryId(section.name), depth: 0 },
         ...filledCategories(section.categories).map((category) => ({
@@ -26,7 +26,7 @@ export default function Overview(): JSX.Element {
             <SEO title="UI library - PostHog" description="Base UI components styled for PostHog.com" noindex />
             <ReaderView
                 title="UI library"
-                leftSidebar={<TreeMenu items={libraryNav} />}
+                leftSidebar={<TreeMenu items={libraryNav} expandOnly />}
                 tableOfContents={tableOfContents}
                 showQuestions={false}
                 hideMobileTableOfContents

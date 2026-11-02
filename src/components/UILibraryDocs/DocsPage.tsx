@@ -33,7 +33,7 @@ function sourceLinks({ sourcePath, sourcePaths = [] }: ComponentDoc): { label: s
     }))
 }
 
-export default function DocsPage({ doc }: { doc: ComponentDoc }): JSX.Element {
+export function renderDocsPage(doc: ComponentDoc): JSX.Element {
     const entry = catalogEntry(doc.slug)
     const statements = importStatements(doc)
     const sources = sourceLinks(doc)
@@ -48,7 +48,7 @@ export default function DocsPage({ doc }: { doc: ComponentDoc }): JSX.Element {
             <SEO title={`${entry.name} - UI library - PostHog`} description={entry.description} noindex />
             <ReaderView
                 title={entry.name}
-                leftSidebar={<TreeMenu items={libraryNav} />}
+                leftSidebar={<TreeMenu items={libraryNav} expandOnly />}
                 tableOfContents={tableOfContents}
                 showQuestions={false}
                 hideMobileTableOfContents
