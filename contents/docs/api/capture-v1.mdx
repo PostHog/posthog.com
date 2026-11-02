@@ -238,7 +238,7 @@ The request body limits above are for PostHog Cloud. On a self-hosted instance, 
 |---|---|---|
 | `200` | PostHog read the batch. Check the [result for each event](#per-event-results). | Only events with result `retry` |
 | `400` | The whole request is invalid, for example a missing header, bad JSON, an empty batch, or an invalid `uuid`. Nothing was stored. | No – fix the request |
-| `401` | The project token is missing or malformed, or you used a personal API key. A well-formed token that doesn't match a project still gets `200`, but its events aren't stored. | No |
+| `401` | The project token is missing or malformed, or you used a personal API key. A well-formed token that doesn't match a project still gets `200`, with `ok` for every event, but nothing is stored. | No |
 | `402` | Your project hit a [billing limit](/docs/billing/limits-alerts), so nothing in this request is stored. The response has no per-event results. If only some events in a request are over a product's quota, you get `200` instead, and only those events are dropped. | No – raise or remove the limit |
 | `404` | Nothing serves this path, for example a self-hosted instance that predates capture v1 or a proxy that doesn't forward it | Yes. If it keeps failing, check the host, your proxy, and your instance version. |
 | `408` | The request timed out while PostHog read it | Yes |
@@ -280,7 +280,7 @@ PostHog writes each key as a lowercase UUID with hyphens, whatever form you sent
 
 | Result | Meaning | What to do |
 |---|---|---|
-| `ok` | Stored | Nothing |
+| `ok` | Stored, if your token matches a project (see [`401`](#status-codes)) | Nothing |
 | `warning` | Stored, with a change you should know about, named in `details` | Don't resend. Fix the cause. |
 | `drop` | Not stored | Don't resend. Fix the cause named in `details`. |
 | `retry` | Not stored because of a temporary problem | Resend this event (and only this one) |
@@ -396,15 +396,19 @@ response = requests.post(
     },
 )
 
+response.raise_for_status()
 for event_uuid, result in response.json()["results"].items():
     if result["result"] != "ok":
         print(event_uuid, result["result"], result.get("details"))
 ```
 
 ```node
+// Save this as a .mjs file, or set "type": "module" in package.json, to use top-level await.
+import { v7 as uuidv7 } from 'uuid'
+
 const now = () => new Date().toISOString()
 
-// crypto.randomUUID() makes a UUIDv4. Use a UUIDv7 library for event UUIDs.
+// crypto.randomUUID() makes a UUIDv4, which works for the request ID. Event UUIDs use UUIDv7 from the uuid package.
 const response = await fetch('<ph_client_api_host>/i/v1/analytics/events', {
     method: 'POST',
     headers: {
@@ -421,7 +425,7 @@ const response = await fetch('<ph_client_api_host>/i/v1/analytics/events', {
         batch: [
             {
                 event: 'signed_up',
-                uuid: '019a0000-0000-7000-8000-000000000001',
+                uuid: uuidv7(),
                 distinct_id: 'user_123',
                 timestamp: now(),
                 options: { process_person_profile: true },
@@ -431,6 +435,7 @@ const response = await fetch('<ph_client_api_host>/i/v1/analytics/events', {
     }),
 })
 
+if (!response.ok) throw new Error(`${response.status} ${await response.text()}`)
 const { results } = await response.json()
 for (const [eventUuid, result] of Object.entries(results)) {
     if (result.result !== 'ok') {
@@ -441,4 +446,12 @@ for (const [eventUuid, result] of Object.entries(results)) {
 
 </MultiLanguage>
 
-<!-- TODO(capture-v1): run every example against US, EU, and a local stack before merge, and paste a real response. -->
+The curl example sends `PostHog-Request-Timestamp` in whole seconds, so [skew correction](#timestamps-and-clock-skew) can move the event's timestamp by up to about a second. With GNU `date`, use `%3N` for milliseconds. Real clients should send milliseconds.
+
+A request that PostHog stores returns `200` with a result for each event:
+
+```json
+{"results":{"019a0000-0000-7000-8000-000000000001":{"result":"ok"}}}
+```
+
+<!-- TODO(capture-v1): run the examples against a local stack (hobby) before merge. -->
