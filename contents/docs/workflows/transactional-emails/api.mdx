@@ -96,11 +96,11 @@ You can also send the subject and the body from your code, without a template in
 | `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
 | `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is `true`. Send `false` to turn capture off for this email. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
 
-A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns `invalid_request` for each of them.
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
 
 If the `to` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
-The response is the same `202` as for a template send. A retry with the same `Idempotency-Key` is the [same request](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) when every field in the table above has the same value as in the first request.
+The response is the same `202` as for a template send. A retry with the same `Idempotency-Key` is the [same request](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) when every field in the table above has the same value as in the first request. PostHog also compares the sender that it chose: if you leave out `from` and the project's default sender changes before the retry, PostHog returns `idempotency_key_reused`.
 
 ```bash
 curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
@@ -123,7 +123,7 @@ These checks apply to content from your code, in addition to the [errors](/docs/
 
 | Status | Code | Cause | What to do |
 | --- | --- | --- | --- |
-| `400` | `invalid_request` | A field is missing or breaks a rule above, or PostHog doesn't take the field. `attr` names the field, such as `subject`. | Fix the field. If the field comes from a newer SDK, update PostHog or leave the field out. |
+| `400` | A code for the field, such as `required` or `invalid` | A field is missing or breaks a rule above, or PostHog doesn't take the field. The `type` is `validation_error`, and `attr` names the field, such as `subject`. | Fix the field. If the field comes from a newer SDK, update PostHog or leave the field out. |
 | `400` | `sender_not_verified` | No verified sender of the project can send from the `from` address. Or the request has no `from`, and the project has no verified default sender. | Send from an address on a verified domain, or [set a default sender](/docs/workflows/configure-channels) and leave out `from`. |
 
 ## Check an email's status
