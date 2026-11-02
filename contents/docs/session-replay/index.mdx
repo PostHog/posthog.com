@@ -94,3 +94,16 @@ Session replay runs on recordings captured by your PostHog SDKs. What ends up in
   </div>
 
 </div>
+
+## What replay captures
+
+| Data | Captured by default | Notes |
+| --- | --- | --- |
+| Page content, clicks, and scrolls | Yes | Mask sensitive elements with [privacy controls](/docs/session-replay/privacy). |
+| Text typed into inputs | No | PostHog records masked characters instead. You can unmask inputs in privacy controls. |
+| [Console logs](/docs/session-replay/console-log-recording) | Yes | On for new projects. Turn off in your replay settings. |
+| [Network requests](/docs/session-replay/network-recording) | Yes | On for new projects. Records the URL and timing of each request. |
+| [Request headers and bodies](/docs/session-replay/network-recording) | No | Turn on in your replay settings or SDK config. |
+| [Canvas and WebGL](/docs/session-replay/canvas-recording) | No | Turn on in your replay settings or SDK config. DOM masking doesn't cover canvas. |
+
+To lower replay's load on the browser, record fewer sessions with [recording rules](/docs/session-replay/how-to-control-which-sessions-you-record), and lower the [canvas frame rate and resolution](/docs/session-replay/canvas-recording#canvas-recording-performance).
