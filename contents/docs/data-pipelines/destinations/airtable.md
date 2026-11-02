@@ -41,7 +41,7 @@ Now we can plug in the above values.
 
 ![Airtable field mapping](https://res.cloudinary.com/dmukukwp6/image/upload/airtable_fields_597f303a7a.png)
 
-The **Fields** editor enables you to map whatever PostHog [values](/docs/data-pipelines/destinations#input-formatting) you like to columns in your Airtable base. The keys on the left should match the names you’ve already set for columns in Airtable. Values on the right can be any property on a `person` or `event` instance.
+The **Fields** editor enables you to map whatever PostHog [values](/docs/data-pipelines/destinations/customizing-destinations#global-object) you like to columns in your Airtable base. The keys on the left should match the names you’ve already set for columns in Airtable. Values on the right can be any property on a `person` or `event` instance.
 
 <HideOnCDPIndex>
 
@@ -67,7 +67,7 @@ Where possible, Airtable will convert values into native datatypes set in your c
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/airtable/template_airtable.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/airtable/template_airtable.py) is available on GitHub.
 
 <PostHogMaintained />
 

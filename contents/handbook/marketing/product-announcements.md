@@ -72,7 +72,7 @@ Here are some activities your Tier 1 launch could include:
 - Demo video
 - Email announcement (or multiple, if you want to segment users and personalize your message)
 - Custom designs for blog covers, social posts, etc. 
-- [Memes](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoglitos?node-id=3962-6)
+- <PrivateLink url="https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoglitos?node-id=3962-6">Memes</PrivateLink>
 
 #### Some other things we've done for launches 
 
@@ -99,7 +99,7 @@ _Note: All of these are suggestions, not must-haves. It's likely that not all of
 - Ensure launch activities (such as changelog) link clearly to the docs.
 - Ensure the product is added to email and in-app onboarding flows.
 - Ensure the product is added to the [pricing page](/pricing) (this is typically owned by the product team's PM and the <SmallTeam slug="billing" /> as part of the product's release)
-- Add an 🚀 annotation in [our PostHog project](https://us.posthog.com/project/2/data-management/annotations) on the launch date, so the launch's impact is visible on dashboards.
+- Add an 🚀 annotation in <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">our PostHog project</PrivateLink> on the launch date, so the launch's impact is visible on dashboards.
 - Submit an [art request](/handbook/brand/art-requests) for any creative assets needed for the email campaign, blog post, social media posts etc...
 
 *Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.*

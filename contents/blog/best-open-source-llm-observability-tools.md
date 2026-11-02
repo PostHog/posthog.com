@@ -55,9 +55,9 @@ PostHog’s AI Observability app works with the rest of our dev tool suite. This
 
 Two features worth highlighting for teams iterating on LLM apps:
 
-- **[Prompt management](/docs/ai-observability/prompt-management):** Create and version prompts directly in PostHog. Prompts are fetched at runtime via the SDK with caching and fallback support, so you can update them without code deploys. Non-engineers can iterate on prompts from the UI, and every change creates an immutable version you can compare, restore, or link to traces to see which prompt versions drive which outputs.
+- **[Prompt management](/docs/prompt-management):** Create and version prompts directly in PostHog. Prompts are fetched at runtime via the SDK with caching and fallback support, so you can update them without code deploys. Non-engineers can iterate on prompts from the UI, and every change creates an immutable version you can compare, restore, or link to traces to see which prompt versions drive which outputs.
 
-- **[Evaluations](/docs/ai-observability/evals) (beta):** Score LLM outputs automatically or with human review to track quality over time – not just whether API calls succeed, but [whether they're actually good](/blog/stop-ai-slop).
+- **[Evaluations](/docs/ai-evals) (beta):** Score LLM outputs automatically or with human review to track quality over time – not just whether API calls succeed, but [whether they're actually good](/blog/stop-ai-slop).
 
 PostHog’s hosted Cloud version and all of its AI Observability features are free to use. It comes with 100k LLM observability events for free every month with 30 day retention. Beyond this, pricing is usage-based and [totally transparent](/pricing).
 

@@ -14,6 +14,7 @@ export const BROWSE_TOOLS_HANDLES = [
     'ai_observability',
     'session_replay',
     'replay_vision',
+    'data_pipelines',
     'feature_flags',
     'experiments',
     'error_tracking',

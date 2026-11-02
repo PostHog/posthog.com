@@ -13,7 +13,7 @@ tags:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-[Customer data platform](/cdp) (CDP) vs [data warehouse](/data-warehouse) is sort of like Batman vs Superman for people [who know SQL](/product-engineers/sql-for-analytics). They are seen as rivals and rely on different tools but often end up working together.
+[Customer data platform](/data-pipelines) (CDP) vs [data warehouse](/data-warehouse) is sort of like Batman vs Superman for people [who know SQL](/product-engineers/sql-for-analytics). They are seen as rivals and rely on different tools but often end up working together.
 
 There are dozens of articles trying to convince you one or the other is the "right" choice, but, in reality, both (or neither) might be right for you. This article will help you understand what they do and decide whether a CDP and/or data warehouse is right for you.
 
@@ -215,4 +215,4 @@ When compared with either of the stacks mentioned above, PostHog enables teams t
 
 Rather than the data spaghetti created by separate CDPs, data warehouses, and other tools, PostHog provides them all in a unified platform. This means teams have more of the tools they need as they grow and there is less need for migration or reimplementation. We can fulfill the use cases teams need whatever stage they are at, whether it is marketing campaign enrichment early or complex analysis from consolidated datasets later. 
 
-If you’re curious, see the [product pages](/cdp) or [just sign up and get started](https://us.posthog.com/signup); both our CDP and data warehouse come with a generous free tier. 
+If you’re curious, see the [product pages](/data-pipelines) or [just sign up and get started](https://us.posthog.com/signup); both our CDP and data warehouse come with a generous free tier. 

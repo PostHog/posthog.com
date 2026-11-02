@@ -164,7 +164,7 @@ A lot of valuable context lives in past conversations:
 
 - **BuildBetter** — recordings of customer success, sales, and onboarding calls. Use <PrivateLink url="https://app.buildbetter.app/people">People</PrivateLink> to search companies or contacts and see call history, or use direct search / AI chat.
 - **[SupportHog](/handbook/growth/sales/slack-channels)** — Slack channel history. Our own tool links [shared Slack (and MS Teams) channels](/handbook/growth/sales/slack-channels) to Salesforce accounts so you can view Slack/Teams interactions for your accounts.
-- **[PostHog Support](https://us.posthog.com/project/2/support/tickets)** — filter tickets on your own `ae_*` or `csm_*` [tag](/handbook/support/posthog-support#customer-and-account-tags) to see every ticket raised for the accounts you own. You can also open a person's profile in PostHog to see any support tickets they've raised. See who the key contacts have been, who's supported them in the past, and how frequently they raise tickets.
+- **<PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink>** — filter tickets on your own `ae_*` or `csm_*` [tag](/handbook/support/posthog-support#customer-and-account-tags) to see every ticket raised for the accounts you own. You can also open a person's profile in PostHog to see any support tickets they've raised. See who the key contacts have been, who's supported them in the past, and how frequently they raise tickets.
 
 ### Product usage analysis
 

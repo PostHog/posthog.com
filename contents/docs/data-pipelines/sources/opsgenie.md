@@ -17,7 +17,7 @@ The Opsgenie connector pulls your Opsgenie alerting and on-call data – alerts,
 
 <CalloutBox icon="IconWarning" title="Opsgenie end of support" type="caution">
 
-Atlassian has announced [end of support for Opsgenie](https://support.atlassian.com/opsgenie/docs/important-update-opsgenie-end-of-support-announcement/). Opsgenie APIs are scheduled to shut down on April 5, 2027, after which this source will stop syncing.
+Atlassian has announced end of support for Opsgenie. Opsgenie APIs are scheduled to shut down on April 5, 2027, after which this source will stop syncing.
 
 </CalloutBox>
 

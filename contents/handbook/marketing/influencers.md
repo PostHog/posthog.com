@@ -108,7 +108,7 @@ For launches, we generally need:
   - There's a generous free tier for every product – you can sign up and start using all of them for free right away, and 90% of users stay on PostHog's free tier.
   - Setup is simple: install an SDK or paste a snippet into your site header, and we autocapture data like pageviews, clicks, and sessions. There are SDKs for all the popular backend languages too – Python, Node, Go, and so on.
 
-- There are a handful of video assets for them to [use here](https://drive.google.com/drive/folders/1RFTEb4E1D71wYuQm9smZ9eK79glmHp1m?usp=sharing). Feel free to add more, but also suggest the website and in-app as sources.
+- There are a handful of video assets for them to <PrivateLink url="https://drive.google.com/drive/folders/1RFTEb4E1D71wYuQm9smZ9eK79glmHp1m?usp=sharing">use here</PrivateLink>. Feel free to add more, but also suggest the website and in-app as sources.
 
 - Ideally, a placement should relate to ongoing marketing efforts, like a new product launch, product push, or pricing change.
 

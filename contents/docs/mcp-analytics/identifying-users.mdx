@@ -89,15 +89,22 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 PostHog::MCP.instrument(
   server, posthog,
   identify: lambda do |_request, extra|
-    user = lookup_user_for_session(extra["session_id"])
-    user && { distinct_id: user.id, properties: { plan: user.plan }, groups: { organization: user.org_id } }
+    token = extra["headers"]["authorization"]
+    user = token && resolve_user_from_token(token)
+    next nil unless user
+
+    {
+      distinct_id: user.id,                             # becomes distinct_id
+      properties: { name: user.name, plan: user.plan }, # written to $set
+      groups: { organization: user.org_id }             # becomes $groups on every event
+    }
   end
 )
 ```
 
 </MultiLanguage>
 
-In TypeScript, read headers with `getRequestHeaders`. The two MCP SDK majors store them in different locations, and reading `extra` directly can return `undefined` and cause anonymous attribution. See [reading request headers](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors). Python has the same helper, `get_request_headers`. In Go, go-sdk gives you `req.Extra.Header` and `req.Extra.TokenInfo`. In Ruby, `extra["headers"]` holds only `user-agent`, `x-anthropic-client`, `mcp-session-id`, and `mcp-protocol-version`, so `identify` can't read an `Authorization` header. Look the user up from the session your app authenticated, or use a [custom dispatcher](/docs/mcp-analytics/installation/ruby#custom-dispatchers), which takes `distinct_id:`, `set_properties:`, and `groups:` on each capture.
+In TypeScript, read headers with `getRequestHeaders`. The two MCP SDK majors store them in different locations, and reading `extra` directly can return `undefined` and cause anonymous attribution. See [reading request headers](/docs/mcp-analytics/installation/typescript#read-request-headers-on-both-sdk-majors). Python has the same helper, `get_request_headers`. In Go, go-sdk gives you `req.Extra.Header` and `req.Extra.TokenInfo`. In Ruby (`posthog-ruby` 3.29.0 and later), `extra["headers"]` holds every HTTP request header, with lowercase keys. On stdio, it's an empty Hash.
 
 An identity has three fields, named in each language's style:
 

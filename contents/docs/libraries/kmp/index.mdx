@@ -392,7 +392,7 @@ if (PostHog.isFeatureEnabled("new_dashboard")) {
 }
 ```
 
-Get the value of a [multivariate flag](/docs/feature-flags/creating-feature-flags#multivariate-feature-flags):
+Get the value of a [multivariate flag](/docs/feature-flags/creating-feature-flags#step-3-choose-a-feature-flag-type-required):
 
 ```kotlin
 when (PostHog.getFeatureFlag("pricing_experiment")) {
@@ -472,7 +472,7 @@ The `name` is a special property used in the PostHog UI for the group's name. If
 
 ## Screen views
 
-Capture a [screen view](/docs/product-analytics/capture-events#screen-views) with `screen`:
+Capture a [screen view](/docs/product-analytics/capture-events#capturing-screen-views) with `screen`:
 
 ```kotlin
 PostHog.screen("Home")

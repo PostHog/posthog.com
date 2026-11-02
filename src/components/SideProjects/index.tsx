@@ -147,11 +147,14 @@ export const useCreatorProfiles = (): CreatorProfile[] => {
     return nodes
 }
 
-const normalizeGitHub = (github?: string): string | undefined =>
+export const toGitHubUsername = (github: string): string =>
     github
-        ?.replace(/^https?:\/\/github\.com\//, '')
+        .trim()
+        .replace(/^(https?:\/\/)?(www\.)?github\.com\//i, '')
+        .replace(/^@/, '')
         .replace(/\/$/, '')
-        .toLowerCase()
+
+const normalizeGitHub = (github?: string): string | undefined => github && toGitHubUsername(github).toLowerCase()
 
 // Match a project's creator to a community profile by GitHub username first, then by full name
 export const findCreatorProfile = (
@@ -522,7 +525,7 @@ export const SideProjectForm = ({
                     // legacy entries deliberately sort last
                     date: project ? project.date || null : new Date().toISOString().slice(0, 10),
                     projectAuthor: values.projectAuthor.trim(),
-                    authorGitHub: values.authorGitHub.trim() || null,
+                    authorGitHub: toGitHubUsername(values.authorGitHub) || null,
                     // null preserves automatic alumni detection; a boolean is an explicit override
                     alumni: values.alumni ?? null,
                     // Not editable in the form, but must survive an edit

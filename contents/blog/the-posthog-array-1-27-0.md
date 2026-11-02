@@ -110,7 +110,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs to imp
 - [`PostHog/posthog`](https://github.com/PostHog/posthog/commits/master)
 - [`PostHog/plugin-server`](https://github.com/PostHog/plugin-server/commits/master)
 - [`PostHog/posthog-python`](https://github.com/PostHog/posthog-python/commits/master)
-- [`PostHog/posthog-cloud`](https://github.com/PostHog/posthog-cloud/commits/master)
+- <PrivateLink url="https://github.com/PostHog/posthog-cloud/commits/master"><code>PostHog/posthog-cloud</code></PrivateLink>
 - [`PostHog/posthog-js`](https://github.com/PostHog/posthog-js/commits/master)
 - [`PostHog/plugin-repository`](https://github.com/PostHog/plugin-repository/commits/master)
 

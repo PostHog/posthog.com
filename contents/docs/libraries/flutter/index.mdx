@@ -137,7 +137,7 @@ await Posthog().register("team_id", 22);
 
 The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `Posthog().register` call, since they all include the specified super property.
 
-However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `Posthog().identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `Posthog().identify`. More information on this can be found on the [Sending User Information section](#identifying-users).
 
 ### Removing stored super properties
 
