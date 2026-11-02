@@ -1,3 +1,22 @@
+import {
+    AioConversationPreview,
+    AioSupportConversationPreview,
+    AioRequestFigure,
+    AioConversationFigure,
+    AioSearchFixFigure,
+    AioOnlineEvaluationFigure,
+    AioCodeEvaluationFigure,
+    AioDatasetFigure,
+    AioPromptComparisonFigure,
+    AioPromptVersionFigure,
+    AioPromptTemplateFigure,
+    AioUsageFigure,
+    AioLatencyFigure,
+    AioRecommendationFigure,
+    AioOutcomeFunnelFigure,
+    AioHumanReviewFigure,
+} from './AioPocketGuide/figures'
+import AioChapterFooter from './AioPocketGuide/ChapterFooter'
 import { ProductVideo } from '../ProductVideo'
 
 import Term from './terms'
@@ -93,6 +112,24 @@ export const bookMdxComponents = {
     ReturningGuestsDashboardFigure,
     ProductAnalyticsDashboardNextSteps,
     LessonFooter,
+    AioChapterFooter,
+    AioConversationPreview,
+    AioSupportConversationPreview,
+    AioRequestFigure,
+    AioConversationFigure,
+    AioSearchFixFigure,
+    AioOnlineEvaluationFigure,
+    AioCodeEvaluationFigure,
+    AioDatasetFigure,
+    AioPromptComparisonFigure,
+    AioPromptVersionFigure,
+    AioPromptTemplateFigure,
+    AioUsageFigure,
+    AioLatencyFigure,
+    AioRecommendationFigure,
+    AioOutcomeFunnelFigure,
+    AioHumanReviewFigure,
+
     ReportFigure,
     AnatomyFigure,
     DetailFigure,

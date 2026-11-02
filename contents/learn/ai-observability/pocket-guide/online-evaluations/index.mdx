@@ -1,0 +1,85 @@
+---
+title: Online evaluations
+shortTitle: Online evaluations
+subtitle: Use online AI evaluations to detect incorrect answers, compare LLM judges with code evaluations, and handle missing evidence in PostHog.
+description: Use online AI evaluations to detect incorrect answers, compare LLM judges with code evaluations, and handle missing evidence in PostHog.
+pocketGuideOrder: 2
+---
+
+<RightPage>
+
+# Online evaluations
+
+Twig's AI support agent helps visitors with questions and problems during their stays. For an ordinary cancellation, Twig requires seven days' notice for a full refund. The cancellation policy has an exception for broken essential amenities (heating, cooling, hot water, all the human luxuries): if an amenity can't be repaired promptly, the visitor qualifies for relocation or a refund at any time.
+
+<AioSupportConversationPreview />
+
+The support agent refuses a full refund because the request falls inside the typical seven-day window. The support agent applied the wrong refund policy to the situation.
+
+Twig's engineers configure <Term name="online evaluations">online evaluations</Term> to flag incorrect support answers without waiting for bug reports.
+
+## Check what each score measures
+
+Twig's engineers enable three checks for support responses: a code check, sentiment analysis, and LLM judge. Send the heating complaint, then select each result in the inspector:
+
+<AioOnlineEvaluationFigure />
+
+A <Term name="code-based evaluation">code-based evaluation</Term> runs a rule written in code. Twig's engineers use a rule that looks for `"7 days"` in the support agent's response. The evaluation passes because those words are present, but that doesn't establish whether the agent applied the right refund policy.
+
+<Term name="sentiment analysis">Sentiment analysis</Term> classifies the tone of a message. Here, it evaluates the visitor's message and returns negative because the visitor is freezing and frustrated. A correct refund offer wouldn't change the tone of that original message: this result describes the visitor's frustration, not the support response's correctness.
+
+An <Term name="LLM-as-a-judge">LLM judge</Term> uses another model to assess a response against criteria the engineers provide. Twig's engineers ask whether the support agent followed the refund policy, including the exception for broken essential amenities that can't be repaired promptly. The evaluation fails because the response refuses a refund despite that exception.
+
+## Give evals facts
+
+Twig’s engineers name their LLM judge evaluation “Policy correctness” and give it three things:
+
+- **The visitor’s request:** the heating is broken and can’t be repaired.
+- **The support answer:** no refund within seven days of arrival.
+- **The policy:** a broken essential amenity that can't be repaired promptly qualifies for relocation or a refund at any time.
+
+The judge needs all three to assess this answer. The refusal alone sounds consistent with the ordinary cancellation policy. The visitor’s message and the broken-amenity exception explain why that policy doesn’t apply.
+
+In PostHog, the engineers choose **each generation** as the evaluation’s scope because this model call contains the request, answer, and policy. They choose **LLM with explanation** to receive a pass or fail with a written reason. For this answer, the judge explains that the support agent ignored the broken-amenity exception.
+
+Before enabling the evaluation, Twig’s engineers review sample results for both ordinary cancellations and heating complaints. They confirm that the judge accepts a refusal when the seven-day rule applies and rejects it when the visitor qualifies for the exception.
+
+## Use code evals for exact comparisons
+
+Twig’s engineers use a code evaluation to catch recommendations like a two-person studio for a group of four. The rule is simple: the stay’s capacity must be at least the requested guest count.
+
+They record `requested_guests` and `stay_capacity`, custom properties they’ve named, and write the comparison in <Term name="hog">Hog</Term>, PostHog’s evaluation scripting language.
+
+Change the capacity to see how the same rule handles each sample:
+
+<AioCodeEvaluationFigure />
+
+Missing capacity needs a third outcome. Twig’s engineers enable **allow N/A responses** and make the rule return `null` when either value is missing. PostHog records `N/A`: there isn’t enough information to judge whether the stay fits.
+
+They monitor `N/A` results alongside passes and failures. A missing capacity mustn’t count as a suitable recommendation.
+
+## Apply checks to the right requests
+
+Twig's engineers filter the policy evaluation to the support feature, then choose how much matching traffic to sample. The policy judge makes another model call, so the engineers consider its cost as well as the coverage they need. The wording check and sentiment analysis don't incur that LLM judge cost.
+
+After reviewing the criteria, Twig's engineers use a <Term name="backfill">backfill</Term> to apply the policy check to eligible historical requests. They check that those requests still contain the policy and messages needed for a judgment, and review the filters, sampling, and expected cost before starting it.
+
+## Design an online eval for your project
+
+Copy this prompt into [PostHog AI](https://app.posthog.com/#panel=max:Help%20me%20define%20an%20online%20evaluation%20for%20my%20AI%20feature.%20Inspect%20a%20few%20recent%20captured%20requests%2C%20then%20ask%20me%20which%20behavior%20a%20correct%20answer%20must%20satisfy.%20Identify%20the%20reference%20facts%20needed%20to%20judge%20that%20behavior.%20Recommend%20a%20code-based%20check%20or%20an%20LLM%20judge%2C%20define%20the%20output%20and%20passing%20rule%2C%20and%20explain%20when%20to%20return%20N%2FA.%20Keep%20sentiment%20separate%20from%20answer%20correctness.%20Suggest%20whether%20the%20check%20needs%20a%20generation%2C%20trace%2C%20or%20session%2C%20and%20propose%20filters%20and%20sampling.%20Show%20how%20to%20review%20sample%20judgments%20before%20enabling%20it%20or%20backfilling%20older%20traffic.%20Don't%20enable%20anything%20without%20my%20confirmation.):
+
+<div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+
+```text
+Help me define an online evaluation for my AI feature. Inspect a few recent captured requests, then ask me which behavior a correct answer must satisfy. Identify the reference facts needed to judge that behavior. Recommend a code-based check or an LLM judge, define the output and passing rule, and explain when to return N/A. Keep sentiment separate from answer correctness. Suggest whether the check needs a generation, trace, or session, and propose filters and sampling. Show how to review sample judgments before enabling it or backfilling older traffic. Don't enable anything without my confirmation.
+```
+
+</div>
+
+<AioChapterFooter nextLabel="Offline evaluations" nextHref="/learn/ai-observability/pocket-guide/offline-evaluations">
+
+[Evaluations and evaluation types](/docs/ai-evals) · [Code-based evaluations](/docs/ai-evals#code-based-evaluations) · [Testing on sample data](/docs/ai-evals#testing-on-sample-data)
+
+</AioChapterFooter>
+
+</RightPage>

@@ -25,26 +25,31 @@ interface CoverProps {
 /** The series frame: colored spine, series name above the subject, specimen on empty ground. */
 function Frame({ token, children }: { token: string; children: React.ReactNode }): JSX.Element {
     return (
-        <article className="relative flex aspect-[3/4] overflow-hidden rounded-sm border border-light bg-white shadow-lg dark:border-dark">
-            <span aria-hidden="true" className={`w-3 shrink-0 bg-${token}`} />
-            <div className="flex min-w-0 flex-1 flex-col px-4 py-3">{children}</div>
-        </article>
+        <div style={{ containerType: 'inline-size' }}>
+            <article
+                className="relative flex aspect-[3/4] overflow-hidden rounded-sm border border-light bg-white shadow-lg dark:border-dark"
+                style={{ fontSize: '4.347826cqw' }}
+            >
+                <span aria-hidden="true" className={`w-[1.2em] shrink-0 bg-${token}`} />
+                <div className="flex min-w-0 flex-1 flex-col px-[1.6em] py-[1.2em]">{children}</div>
+            </article>
+        </div>
     )
 }
 
 function Masthead({ title }: { title: string }): JSX.Element {
-    // A long word can't wrap, so it breaks mid-word at the display size. Step the scale down
-    // instead – the cover is only ~230px wide and "AI Observability" is one 13-letter word.
+    // All dimensions share the cover's scale, independent of the surrounding page's type size.
     const long = title.length > 12
     return (
         <header>
             {/* Wordmark only, pinned black: the cover is white stock in both themes. */}
-            <Logo.Wordmark color="black" className="h-5 w-auto @[240px]:h-6" />
-            <p className="m-0 mt-1.5 text-[11px] uppercase tracking-[0.14em] text-gray">Pocket guide to</p>
+            <Logo.Wordmark color="black" className="w-auto" style={{ height: '2.4em' }} />
+            <p className="uppercase tracking-[0.14em] text-gray" style={{ margin: '0.55em 0 0', fontSize: '1.1em' }}>
+                Pocket guide to
+            </p>
             <h3
-                className={`m-0 mt-1.5 font-bold leading-tight text-black ${
-                    long ? 'text-xl @[240px]:text-2xl' : 'text-2xl @[240px]:text-3xl'
-                }`}
+                className="font-bold leading-tight text-black"
+                style={{ margin: '0.25em 0 0', fontSize: long ? '2.4em' : '3em', overflowWrap: 'normal' }}
             >
                 {title}
             </h3>
@@ -74,14 +79,17 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
                 // min-h-0 lets the art shrink when a long title wraps, instead of clipping the footer.
                 <div
                     aria-hidden="true"
-                    className={`flex min-h-0 flex-1 items-center justify-center py-2 ${
+                    className={`flex min-h-0 flex-1 items-center justify-center py-[0.8em] ${
                         volume.comingSoon ? 'opacity-40 grayscale' : ''
                     }`}
                 >
-                    <Art size={140} className="h-full max-h-[140px] w-auto max-w-full" />
+                    <Art size={140} className="h-[14em] max-h-full w-auto max-w-full" />
                 </div>
             )}
-            <footer className="flex shrink-0 items-baseline justify-end gap-2 text-[11px] uppercase tracking-wider text-gray">
+            <footer
+                className="flex shrink-0 items-baseline justify-end gap-2 uppercase tracking-wider text-gray"
+                style={{ fontSize: '1.1em' }}
+            >
                 {!volume.comingSoon && (
                     <span className="tabular-nums">
                         {count} {count === 1 ? 'guide' : 'guides'}

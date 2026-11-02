@@ -1,0 +1,97 @@
+---
+title: Cost and performance
+shortTitle: Cost and performance
+subtitle: Understand AI token usage, model costs, and latency. Use PostHog AI Observability to investigate expensive conversations and slow requests.
+description: Understand AI token usage, model costs, and latency. Use PostHog AI Observability to investigate expensive conversations and slow requests.
+pocketGuideOrder: 5
+---
+
+<RightPage>
+
+# Cost and performance
+
+An AI conversation can be deceiving. “Does it have a full kitchen?” is a short question. But answering it involves more than sending those six words to the model.
+
+The trip planner also receives instructions, listing information, and the earlier forest and beach exchanges. Twig's engineers want to see what the model processes, what the conversation costs, and where the visitor spends time waiting.
+
+## What goes into a model call
+
+Twig's engineers open the kitchen generation and inspect its input. They can see the visitor's question alongside the information the trip planner received about Flamingo's Envy.
+
+Models process text in units called <Term name="token">tokens</Term>. The question, instructions, listing information, and conversation history all contribute <Term name="input token">input tokens</Term>. The model's answer contributes <Term name="output token">output tokens</Term>.
+
+Select the forest, beach, and kitchen requests to compare their inputs and recorded usage:
+
+<AioUsageFigure />
+
+The kitchen question depends on the earlier conversation: “it” refers to the beach stay. But that doesn't mean the model needs every fact about every stay in Twig's catalog.
+
+The engineers compare the recorded input before deciding what to remove. They need to preserve the information that makes the answer correct, rather than shortening the prompt and hoping for the best.
+
+They also verify that the generations contain model and usage data. PostHog calculates cost using supported model pricing or costs supplied by the application. Missing cost information shouldn't make a request look free.
+
+## Separate an expensive request from an expensive conversation
+
+Twig's engineers look at the forest request on its own, then add the beach and kitchen requests.
+
+<Term name="cost per trace">Cost per trace</Term> measures the recorded cost of one request. <Term name="cost per ai session">Cost per AI session</Term> measures the conversation containing those related requests. A visitor who asks three questions can generate more model work than someone who accepts the first recommendation.
+
+The engineers add the underlying generation costs once. They don't add a trace's total cost to the cost of the generations already included in that total.
+
+They also compare how many requests Twig receives. A bigger total bill could mean more visitors are using the trip planner, rather than each answer becoming more expensive.
+
+To investigate, the engineers put request counts beside cost per request and conversation cost. They separate the trip planner from the support agent, and keep LLM judge usage identifiable too. Evaluating an answer can involve another model call, even though that call doesn't produce a new reply for the visitor.
+
+## Find latency
+
+Cost doesn't explain how long the visitor waits for a recommendation. Twig's engineers inspect <Term name="latency">latency</Term>, the time spent on a recorded operation.
+
+For the city request, they compare the `search_stays` span with the generation in the trace. This separates the time spent looking up stays from the time spent producing the answer.
+
+Compare the operation durations in the trace:
+
+<AioLatencyFigure />
+
+This gives the engineers somewhere specific to investigate. A slow catalog lookup needs investigation in Twig's search code – choosing a faster model wouldn't speed up that lookup.
+
+The engineers also look for repeated generations within the request. The visitor might have sent one message while the application made several attempts to answer it. Those attempts can add both waiting time and cost.
+
+They inspect how the operations overlap before calculating total request time. Adding every operation's duration would overstate the wait if some work happened at the same time.
+
+## Increase efficiency
+
+Twig's engineers test a smaller input for the kitchen question. Instead of supplying the whole catalog, they supply Flamingo's Envy's listing facts and the conversation context needed to identify the stay.
+
+Then they replay the conversation. They inspect two things: whether the input uses fewer tokens, and whether the trip planner still gives the right answers.
+
+The beach recommendation must still fit four guests. The kitchen answer must still refer to Flamingo's Envy and its full kitchen. Removing the group size or selected stay would make the input shorter while taking away information the model needs.
+
+The engineers compare recorded <Term name="cache">cache</Term> usage too. A provider can reuse previously processed input, which may reduce the cost of repeated context. The engineers use that recorded usage to understand the bill rather than assuming every repeated token costs the same.
+
+They keep request volume, cost per request, conversation cost, and latency on a dashboard alongside the relevant evaluation results. After releasing a tested change, they can see whether the production requests use less model work while still producing suitable recommendations.
+
+## Investigate cost and performance in your project
+
+Copy this prompt into [PostHog AI](https://app.posthog.com/#panel=max:Compare%20my%20project's%20AI%20cost%20and%20latency%20over%20the%20last%20seven%20days%20with%20the%20previous%20seven.%20First%20identify%20missing%20model%2C%20usage%2C%20cost%2C%20or%20timing%20data.%0A%0ASeparate%20changes%20in%20request%20volume%20from%20changes%20in%20cost%20per%20request%20and%2C%20where%20session%20IDs%20exist%2C%20per%20conversation.%20Break%20down%20the%20difference%20by%20available%20feature%20and%20model%20fields.%0A%0AShow%20representative%20traces%20behind%20the%20change.%20Inspect%20their%20inputs%2C%20tool%20durations%2C%20repeated%20generations%2C%20and%20recorded%20cache%20usage.%20Avoid%20counting%20generation%20costs%20twice%20or%20adding%20durations%20for%20operations%20that%20overlap.%0A%0ARecommend%20one%20change%20to%20test.%20Identify%20the%20evaluation%20results%20needed%20to%20verify%20that%20the%20change%20preserves%20answer%20quality%2C%20and%20explain%20what%20evidence%20is%20still%20missing.):
+
+<div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+
+```text
+Compare my project's AI cost and latency over the last seven days with the previous seven. First identify missing model, usage, cost, or timing data.
+
+Separate changes in request volume from changes in cost per request and, where session IDs exist, per conversation. Break down the difference by available feature and model fields.
+
+Show representative traces behind the change. Inspect their inputs, tool durations, repeated generations, and recorded cache usage. Avoid counting generation costs twice or adding durations for operations that overlap.
+
+Recommend one change to test. Identify the evaluation results needed to verify that the change preserves answer quality, and explain what evidence is still missing.
+```
+
+</div>
+
+<AioChapterFooter nextLabel="Product outcomes" nextHref="/learn/ai-observability/pocket-guide/product-outcomes">
+
+[Calculating costs](/docs/ai-observability/calculating-costs) · [Traces](/docs/ai-observability/traces) · [Custom properties](/docs/ai-observability/custom-properties)
+
+</AioChapterFooter>
+
+</RightPage>

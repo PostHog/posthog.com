@@ -1,0 +1,109 @@
+---
+title: Product outcomes
+shortTitle: Product outcomes
+subtitle: Connect AI recommendations to product outcomes in PostHog. Inspect saves, funnels, human reviews, and recurring AI failures.
+description: Connect AI recommendations to product outcomes in PostHog. Inspect saves, funnels, human reviews, and recurring AI failures.
+pocketGuideOrder: 6
+---
+
+<RightPage>
+
+# Product outcomes
+
+The visitor opens Flamingo's Envy from the trip planner and saves it. The recommendation fits four people and has the kitchen the visitor asked about.
+
+But Twig's engineers also want to understand what happens after recommendations: do visitors open the stays, save them, or book anything?
+
+The conversation alone won't tell them. They need to connect the answer to what the visitor does in Twig.
+
+## Follow the recommendation into the product
+
+When the visitor opens Flamingo's Envy from the chat, Twig records the action with the stay's identifier and the recommendation's trace, generation, and session identifiers.
+
+Those details let Twig's engineers distinguish opening this recommendation from finding the same listing through ordinary browsing.
+
+Open the recommended stay, then save it and inspect the recorded actions:
+
+<AioRecommendationFigure />
+
+Twig's engineers choose an <Term name="attribution">attribution</Term> rule: the conditions under which they connect a later action to a recommendation. A save counts toward this recommendation when the visitor saves Flamingo's Envy within 30 minutes of opening it from that answer.
+
+They record separate product events for opening a recommendation, viewing a stay, saving it, and completing a booking. These are events Twig's engineers define, not built-in AIO events. The separate events let them see how far the visitor gets.
+
+## Measure how often recommendations lead to saves
+
+Twig's engineers build a <Term name="funnel">funnel</Term>, which measures how often people complete a sequence of actions.
+
+Their first funnel starts with opening a recommendation and ends with saving the recommended stay. For the beach conversation, the engineers can inspect the opening and save records to confirm that both refer to Flamingo's Envy and the same recommendation.
+
+In this example, 120 visitors open a recommendation and 48 save the stay within 30 minutes: a 40% conversion rate. Select a step to inspect one matching event:
+
+<AioOutcomeFunnelFigure />
+
+The engineers use the funnel to find where visitors stop. Someone who opens Flamingo's Envy but doesn't save it has taken a different path from someone who saves it and later completes a booking.
+
+That doesn't explain why either visitor acted that way. And it doesn't prove the trip planner caused a booking.
+
+To test whether offering the trip planner increases bookings, Twig's engineers need a controlled <Term name="experiment">experiment</Term>: compare outcomes for visitors assigned to different product variants. Comparing people who chose to use the trip planner with people who didn't could reflect differences that already existed between those groups.
+
+The support agent needs the same distinction between an answer and an outcome. The policy evaluation can establish that the heating reply offers a refund. It can't establish that the visitor actually received one. Twig's engineers need the refund record to answer that question.
+
+## Review an answer that passes but still isn't useful
+
+Twig’s engineers add this answer to a <Term name="review queue">review queue</Term>, a collection of AI responses set aside for human review. The answer avoids recommending an undersized stay, but Twig’s engineers still need to judge whether it helps the visitor find a trip for four.
+
+One of Twig's engineers reads the visitor's request, the empty search result, and the answer together. That engineer records two separate judgments:
+
+- The answer avoids recommending an undersized stay.
+- The answer doesn't ask a useful follow-up question.
+
+The engineers define these questions as review <Term name="scorers">scorers</Term>, reusable fields for recording a person's judgment. These aren't automatic evaluations; an engineer reads the trace and supplies the scores.
+
+Here’s how one of Twig’s engineers reviews the answer:
+
+<AioHumanReviewFigure />
+
+Saving the review removes the trace from the pending queue. PostHog keeps the scorer version used for that review, so changing a review question later doesn't rewrite what the engineer originally assessed.
+
+The improvement is specific: explain that no city stay fits four and ask whether the visitor wants a forest or beach stay instead. Twig's engineers save that expected behavior with the city request before testing a prompt change.
+
+## Decide what to fix next
+
+Twig’s engineers need to know which problems affect the most visitors—and which cause the most harm.
+
+They start with the undersized recommendation: how many other groups received Le Nid Chic when they needed room for more than two? The engineers filter for those requests and inspect the search inputs to confirm the guest filter was missing.
+
+For broader investigations, PostHog offers:
+
+- <Term name="clusters">Clusters</Term>, which group similar traces or generations. Twig’s engineers inspect a cluster of city requests that found no matching stay to see how often the planner leaves visitors without a useful alternative.
+- <Term name="scout">Scouts</Term>, which run scheduled AI investigations. The engineers ask a scout to find those no-match answers with negative feedback and return example traces for review.
+
+A large cluster isn’t necessarily a problem: successful beach recommendations can be common too. Twig’s engineers prioritize by **frequency, impact on visitors, and effort to fix**. An incorrect refund refusal is more serious than an awkward follow-up.
+
+The engineers still investigate the cause, test the fix, and measure whether visitors benefit.
+
+## Find the next investigation in your project
+
+Copy this prompt into [PostHog AI](https://app.posthog.com/#panel=max:Help%20me%20choose%20an%20AI%20problem%20to%20investigate.%20Ask%20which%20product%20outcome%20matters%2C%20then%20inspect%20my%20project's%20available%20traces%2C%20evaluation%20results%2C%20feedback%2C%20and%20product%20events.%0A%0AIdentify%20whether%20existing%20events%20and%20identifiers%20can%20connect%20an%20AI%20answer%20to%20that%20outcome.%20Define%20the%20matching%20rule%20and%20time%20window%20before%20proposing%20a%20funnel.%20If%20those%20links%20are%20missing%2C%20propose%20instrumentation%20using%20my%20existing%20events.%0A%0AKeep%20call%20errors%2C%20evaluation%20failures%2C%20visitor%20sentiment%2C%20and%20product%20outcomes%20separate.%20Find%20recurring%20problems%20using%20available%20filters%20or%20clusters%2C%20and%20show%20representative%20traces%2C%20affected%20volume%2C%20and%20gaps%20in%20the%20evidence.%0A%0ARecommend%20one%20investigation%20and%20identify%20any%20requests%20that%20need%20human%20review.%20Don't%20invent%20conversion%20results%2C%20create%20a%20review%20queue%2C%20or%20schedule%20a%20scout.):
+
+<div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+
+```text
+Help me choose an AI problem to investigate. Ask which product outcome matters, then inspect my project's available traces, evaluation results, feedback, and product events.
+
+Identify whether existing events and identifiers can connect an AI answer to that outcome. Define the matching rule and time window before proposing a funnel. If those links are missing, propose instrumentation using my existing events.
+
+Keep call errors, evaluation failures, visitor sentiment, and product outcomes separate. Find recurring problems using available filters or clusters, and show representative traces, affected volume, and gaps in the evidence.
+
+Recommend one investigation and identify any requests that need human review. Don't invent conversion results, create a review queue, or schedule a scout.
+```
+
+</div>
+
+<AioChapterFooter>
+
+[Funnels](/docs/product-analytics/funnels) · [Collecting feedback](/docs/ai-observability/collect-user-feedback) · [Trace reviews](/docs/ai-observability/trace-reviews) · [Clusters](/docs/ai-observability/clusters) · [Scouts](/docs/self-driving/scouts)
+
+</AioChapterFooter>
+
+</RightPage>
