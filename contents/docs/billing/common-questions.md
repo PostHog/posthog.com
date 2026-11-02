@@ -36,17 +36,26 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 ## What counts toward my event bill?
 
-PostHog bills the events it stores. This table covers the most common cases.
+PostHog bills every event it stores, except the events marked No below.
 
 | Event | Counts toward the event bill | Notes |
 | --- | --- | --- |
-| Dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) | No | PostHog drops it before storage. |
-| Dropped after you reach a [billing limit](/docs/billing/limits-alerts) | No | |
-| [Personless event](/docs/data/anonymous-vs-identified-events) | Yes | Billed as anonymous, unless the distinct ID already belongs to a person. |
-| `$groupidentify` | Yes | |
-| `$feature_flag_called` and `$experiment_exposure` | No | |
-| `$exception` | No | [Error tracking](/docs/error-tracking) bills exceptions instead. |
-| `survey sent`, `survey shown`, and `survey dismissed` | No | [Surveys](/docs/surveys) bill responses instead. |
+| Custom events | Yes | |
+| `$pageview`, `$pageleave`, and `$autocapture` | Yes | |
+| `$dead_click` | Yes | |
+| `$web_vitals` | Yes | |
+| `$identify`, `$create_alias`, and `$groupidentify` | Yes | |
+| [Personless events](/docs/data/anonymous-vs-identified-events) | Yes | Billed as anonymous, unless the distinct ID already belongs to a person. |
+| Heatmap data | No | Heatmap clicks, mouse moves, and scroll depth are stored outside events. |
+| Session recordings | No | [Session replay](/docs/session-replay) bills recordings. |
+| `$exception` | No | [Error tracking](/docs/error-tracking) bills exceptions. |
+| `$ai_` events | No | [LLM analytics](/docs/ai-observability) bills these. |
+| `$feature_flag_called` and `$experiment_exposure` | No | Flag and experiment analysis adds nothing to your event bill. |
+| `survey sent`, `survey shown`, and `survey dismissed` | No | [Surveys](/docs/surveys) bill responses. |
+| Events dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) | No | PostHog drops them before storage. |
+| Events dropped after you reach a [billing limit](/docs/billing/limits-alerts) | No | PostHog drops them before storage. |
+
+Other usage is billed by its own product. See how [feature flag requests are billed](/docs/feature-flags/cutting-costs#billing), and how [file download exports are billed](/docs/data-pipelines/file-download-exports#billing). For everything else, see [pricing](/pricing).
 
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
