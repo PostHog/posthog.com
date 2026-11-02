@@ -131,8 +131,9 @@ The TAE and TAM math is different. See [TAE](#tae) and [TAM](#tam).
 
 **Monthly-paying customers** *(rule being finalized with the TAE leads)*
 
-- The customer has a closed-won monthly contract that you own, and has the "AE managed" flag.
-- You hold the customer for **[X months]** after close, or until they sign an annual contract.
+- The customer has a closed-won monthly contract that you own.
+- The customer is held by you only while the "AE managed account" field in customer analytics is set to true.
+- You hold the customer for up to 12 months after close or until they sign an annual contract.
 - Credit = (this quarter's real cash × 4) − (last quarter's real cash × 4). It can be negative.
 - From Q4 2026, the customer needs 3 paid monthly invoices in the quarter. With fewer, the credit is $0.
 
@@ -204,13 +205,13 @@ At the end of each quarter, RevOps freezes the numbers. We pay from the frozen c
 | Cutoff | The 14th of the next month | Payment status at the end of that day is final |
 | Snapshot | The 15th of the next month | RevOps takes a snapshot of the data and pushes it into a Google Sheet. The Google Sheet pushes the rows into the snapshot tables in the warehouse. |
 | Lock | After the snapshot | RevOps stops all changes to the snapshot rows |
-| Payment | [PAYOUT DATE] | |
+| Payment | The month after the quarter ends, for example October for Q3 | |
 
 The snapshot is the source of truth for the quarter. The dashboards read live data, so they can change after the snapshot. The snapshot does not change.
 
 ### What the snapshot does not include
 
-The snapshot does not include deal changes after the snapshot date. If a number is wrong after the lock, ask RevOps in [#CHANNEL]. [How RevOps records a fix after the lock is still being decided.]
+The snapshot does not include deal changes after the snapshot date. If a number is wrong after the lock, ask RevOps in #team-revops. [How RevOps records a fix after the lock is still being decided.]
 
 ### How CSM data carries into the next quarter
 
@@ -506,4 +507,4 @@ The dashboards are live, so a past quarter can change when the source data chang
 
 ## Questions
 
-If your number looks wrong, ask RevOps in [#CHANNEL] and send the opportunity link. Most issues are data issues in Salesforce or Stripe. Each dashboard has a "Data checks" tile that lists them.
+If your number looks wrong, ask RevOps in #team-revops and send the opportunity link. Most issues are data issues in Salesforce or Stripe. Each dashboard has a "Data checks" tile that lists them.
