@@ -9,7 +9,7 @@ availability:
 sourceId: Kustomer
 ---
 
-Enter your Kustomer credentials to pull your customer service data – customers, conversations, companies, users, teams, tags, brands, sub-statuses, and satisfaction forms – into the PostHog data warehouse.
+Enter your Kustomer credentials to pull your customer service data – customers, conversations, companies, users, teams, tags, brands, sub-statuses, satisfaction forms, klasses, kobjects, routing statuses, and audit logs – into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -28,17 +28,21 @@ Once the syncs are complete, you can start using Kustomer data in PostHog.
 
 ## Available tables
 
-| Table                | Description                                             | Sync method  |
-| -------------------- | ------------------------------------------------------- | ------------ |
-| `customers`          | Customers                                               | Full refresh |
-| `conversations`      | Conversations                                           | Full refresh |
-| `companies`          | Companies (business accounts) that customers belong to  | Full refresh |
-| `users`              | Helpdesk users (agents)                                 | Full refresh |
-| `teams`              | Teams                                                   | Full refresh |
-| `tags`               | Tags                                                    | Full refresh |
-| `brands`             | Brands                                                  | Full refresh |
-| `sub_statuses`       | Conversation sub-statuses (finer-grained status states) | Full refresh |
-| `satisfaction_forms` | CSAT survey form definitions                            | Full refresh |
+| Table                | Description                                                       | Sync method  |
+| -------------------- | ----------------------------------------------------------------- | ------------ |
+| `audit_logs`         | Audit log events for organizational changes                       | Full refresh |
+| `brands`             | Brands                                                            | Full refresh |
+| `companies`          | Companies (business accounts) that customers belong to            | Full refresh |
+| `conversations`      | Conversations                                                     | Full refresh |
+| `customers`          | Customers                                                         | Full refresh |
+| `klasses`            | Klass definitions for custom objects (KObjects)                   | Full refresh |
+| `kobjects`           | Custom objects belonging to a Klass (e.g., orders, subscriptions) | Full refresh |
+| `routing_statuses`   | Routing status definitions (available, offline, custom away)      | Full refresh |
+| `satisfaction_forms` | CSAT survey form definitions                                      | Full refresh |
+| `sub_statuses`       | Conversation sub-statuses (finer-grained status states)           | Full refresh |
+| `tags`               | Tags                                                              | Full refresh |
+| `teams`              | Teams                                                             | Full refresh |
+| `users`              | Helpdesk users (agents)                                           | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

@@ -1,12 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useContext } from 'react'
 import { useLocation } from '@reach/router'
 
-import { ProductSwitcher, buildProductMenuTabs, surfaceBasePath } from 'components/Products/ReaderViewProduct'
-import ReaderView from 'components/ReaderView'
+import { surfaceBasePath } from 'components/Products/ReaderViewProduct'
 import SEO from 'components/seo'
 import useProduct from 'hooks/useProduct'
 import { pocketGuideUrl, volumeById } from '../../constants/pocketGuides'
 
+import LearnShell, { LearnShellContext } from './LearnShell'
 import LearnSurface from './LearnSurface'
 
 interface LearnPageProps {
@@ -31,7 +31,7 @@ export interface LearnLandingProps {
     volumeId: string
 }
 
-/** Page shell shared by the index and per-chapter routes. */
+/** Page content shared by the index and per-chapter routes. */
 export default function LearnPage({
     productHandle,
     chapter,
@@ -40,8 +40,8 @@ export default function LearnPage({
     landing: Landing,
     children,
 }: LearnPageProps): JSX.Element {
+    const inShell = useContext(LearnShellContext)
     const productData = useProduct({ handle: productHandle }) as any
-    const contentRef = useRef<HTMLElement>(null)
     const location = useLocation()
     const volumeId = productData?.pocketGuideVolume
     const isLearnLanding = Boolean(volumeId && Landing && !chapter)
@@ -59,12 +59,6 @@ export default function LearnPage({
         learnUrl: productData ? surfaceBasePath(productData.slug, 'learn') : '',
         volumeId,
     } as LearnLandingProps
-    const productMenuTabs = buildProductMenuTabs({
-        productData,
-        contentRef,
-        activeSurface: 'learn',
-        currentPath: location?.pathname,
-    })
 
     const guide = volumeId ? (
         <LearnSurface
@@ -75,23 +69,22 @@ export default function LearnPage({
         />
     ) : null
 
-    return (
+    const content = (
         <>
             <SEO title={title} description={description} image="/images/og/default.png" />
-            <ReaderView
-                // Learn navigation already lives in the product sidebar.
-                hideRightSidebar
-                hideTitle
-                hideMarkdownActions={isLearnLanding}
-                showQuestions={false}
-                menuTabs={productMenuTabs}
-                productSelect={<ProductSwitcher activeHandle={productHandle} />}
-            >
-                <article ref={contentRef}>
-                    {isLearnLanding && Landing ? <Landing {...landingProps} /> : null}
-                    {!isLearnLanding ? children ?? guide : null}
-                </article>
-            </ReaderView>
+            <article>
+                {isLearnLanding && Landing ? <Landing {...landingProps} /> : null}
+                {!isLearnLanding ? children ?? guide : null}
+            </article>
         </>
+    )
+
+    // No shell from AppWindow (the path matched no product), so supply one by handle.
+    return inShell ? (
+        content
+    ) : (
+        <LearnShell path={location.pathname} productHandle={productHandle}>
+            {content}
+        </LearnShell>
     )
 }

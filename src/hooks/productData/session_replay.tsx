@@ -118,6 +118,7 @@ export const sessionReplay = {
     ],
     overview: {
         title: 'See how people use your product',
+        description: '"Show me sessions where users quit onboarding"',
         eli5: "Session Replay records what happens in a user's session – clicks, scrolls, form inputs, page views, network requests, console logs – and plays it back like video. It's like watching a user's screen over their shoulder – it gives the nuance context you only get when you're actually watching them experience your product.",
         textColor: 'text-black', // tw
     },

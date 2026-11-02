@@ -46,6 +46,8 @@ If a materialized view reads from another materialized view, PostHog refreshes t
 
 This also means an upstream view refreshes at least as often as anything downstream of it. Setting a view to refresh every 15 minutes pulls everything it reads from onto that cadence too.
 
+To manually trigger a view along with its dependencies or dependents, use the [MCP `view-run` tool](/docs/data-warehouse/surfaces/mcp#view-management-tools) with the `direction` parameter set to `upstream` or `downstream`.
+
 ## Incremental materialization
 
 Every run of a materialized view rebuilds the whole table by default. With incremental materialization, each run reads only the rows that are new since the last run. It then updates the table in place.

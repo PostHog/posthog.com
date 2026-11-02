@@ -12,7 +12,7 @@ Once a scanner is **enabled**, PostHog runs a background sweep for it every five
 
 1. Looks for new recordings that match the scanner's filters and that the scanner hasn't already observed. A recording becomes a candidate about 35 minutes after its session's last activity, so the session has ended before it's scanned.
 2. Skips recordings that can't be scanned: shorter than 15 seconds, fewer than 10 seconds of activity, or more than an hour of activity.
-3. Applies the [session coverage](/docs/replay-vision/creating-scanners#session-coverage-filtering-by-quality) setting to drop low-activity recordings (**All recordings** keeps everything).
+3. Applies the [session coverage](/docs/replay-vision/creating-scanners#session-coverage-filtering-by-activity) setting to drop low-activity recordings (**All recordings** keeps everything).
 4. Applies the sampling rate to what's left, so a 10% rate means roughly one in ten remaining recordings get queued.
 5. Queues an observation per recording for the model to process.
 6. Records the result – succeeded, failed, or [ineligible](#ineligible-sessions) – and emits a `$recording_observed` event for successes.

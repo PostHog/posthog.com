@@ -548,8 +548,17 @@ const Menu = (props: { parent: MenuItem }) => {
     const visibleChildren = filterMenuByFlags(parent.children, activeFlags)
     const activeInternalMenu = windowActiveInternalMenu || visibleChildren?.[0]
     const visibleActiveChildren = filterMenuByFlags(activeInternalMenu?.children, activeFlags)
+    // Docs sections set `navAppearance: 'sidebar'` in `src/navs` to match the product docs sidebar.
+    const sidebarAppearance =
+        (activeInternalMenu as MenuItem & { navAppearance?: 'sidebar' })?.navAppearance === 'sidebar'
 
-    return <TreeMenu key={activeInternalMenu?.url} items={resolveMenuIcons(visibleActiveChildren)} />
+    return (
+        <TreeMenu
+            key={activeInternalMenu?.url}
+            items={resolveMenuIcons(visibleActiveChildren)}
+            {...(sidebarAppearance ? { appearance: 'sidebar' as const, rootHeading: activeInternalMenu?.name } : {})}
+        />
+    )
 }
 
 /**
@@ -669,7 +678,7 @@ const SidebarSearchResults = ({
         }
         const matches = extractOnPageMatches(contentRef.current, searchQuery)
         setOnPageMatches(matches.slice(0, 20))
-    }, [searchQuery])
+    }, [searchQuery, currentPath])
 
     useEffect(() => {
         if (!searchQuery || searchQuery.length < 2) {
@@ -1700,7 +1709,11 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch contentRef={onSearch ? undefined : contentRef} onSearch={onSearch} />
+                            <InlineSearch
+                                contentRef={onSearch ? undefined : contentRef}
+                                onSearch={onSearch}
+                                currentPath={appWindow?.path}
+                            />
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}

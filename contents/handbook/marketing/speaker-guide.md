@@ -6,7 +6,7 @@ showTitle: true
 
 You volunteered or have been asked  to speak at a dev meetup, give a demo at a conference, or present PostHog to a virtual or in-person audience. Maybe you said yes before you thought too hard about it. That's fine — good talks happen this way. This guide is for preparing and delivering your talk.
 
->**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
+>**Want slide examples from other speakers?** See [recent talks](#slides-from-recent-talks). **Have questions?** Ask in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> or ping whoever put you up to this. **Still need demo tips?** [Here are 24 more](https://newsletter.posthog.com/p/how-to-demo).
 
 ## **1. Know your room before you write a word**
 
@@ -73,20 +73,20 @@ Pick one real scenario — something that happened at PostHog related to your wo
 * \[ \] Zoom your browser to 125–150% so the back row can read it  
 * \[ \] Test the projector before anyone arrives
 
-If you’re pre-recording your demo, [\#team-youtube](https://posthog.slack.com/archives/C01R387F6H5), has created [this helpful guide](https://docs.google.com/document/d/1gmfeiL9ARsBQVPzvIl9gL-HnkxxzNqRkeTY3HCLZmus/edit?tab=t.0).
+If you’re pre-recording your demo, <PrivateLink url="https://posthog.slack.com/archives/C01R387F6H5">#team-youtube</PrivateLink>, has created <PrivateLink url="https://docs.google.com/document/d/1gmfeiL9ARsBQVPzvIl9gL-HnkxxzNqRkeTY3HCLZmus/edit?tab=t.0">this helpful guide</PrivateLink>.
 
 ## **5. Building your slides**
 
 A few principles for building out slides:
 
 * Before the slides, start on paper or in a notes app and build out your talk outline  
-* PostHog talks use our [standard slide template](https://www.figma.com/slides/buiAgxPjrzpuZyvilFJadI/PH-slide-deck-template?node-id=1-20157&t=ZtCfzbtzRzwfVTry-0) in Figma. [Here’s a guide](https://share.zight.com/kpu21RG9) on how to use it.   
+* PostHog talks use our <PrivateLink url="https://www.figma.com/slides/buiAgxPjrzpuZyvilFJadI/PH-slide-deck-template?node-id=1-20157&amp;t=ZtCfzbtzRzwfVTry-0">standard slide template</PrivateLink> in Figma. [Here’s a guide](https://share.zight.com/kpu21RG9) on how to use it. <br />
 * Code on slides: use a large font (24pt minimum), a dark background, and only show the lines that matter. If you're pasting a full file, you've already lost.  
 * One idea per slide. If you're writing full sentences, you're writing speaker notes, not a slide. If applicable, allow memes to replace text.   
 * If a slide doesn't support the one true thing you identified in step 3, cut it.  
 * Speaking of speaker notes, you will save yourself time and head space if you always have notes.
 
-For feedback on design or help with navigating the [PostHog brand assets](/handbook/brand/assets) ([Hoggies](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1) included), stop by [\#team-graphics](https://posthog.slack.com/archives/C0AU440KS6P)
+For feedback on design or help with navigating the [PostHog brand assets](/handbook/brand/assets) (<PrivateLink url="https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&amp;t=1sj1GezTKuCfaybF-1">Hoggies</PrivateLink> included), stop by <PrivateLink url="https://posthog.slack.com/archives/C0AU440KS6P">#team-graphics</PrivateLink>
 
 ## **6. Practice out loud. Twice minimum.**
 
@@ -116,7 +116,7 @@ If you receive a question that you believe is off-topic or unfitting for the set
 
 * **Express an willingness to keep the conversation going** - by letting the audience know that you (and any other team members in the room) are sticking around to chat more.
 * **Write down the questions you couldn't answer** — do this right away so you don't forget and can focus on interacting with attendees the remainder of the event.
-* **Tell the marketing team** — a 2-line Slack in [#team-builder-relations](https://posthog.slack.com/archives/C0AB78YBCNA) with the event recap, approximate audience size, and any interesting take-aways.   
+* **Tell the marketing team** — a 2-line Slack in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> with the event recap, approximate audience size, and any interesting take-aways. <br />
 * **Share your slides** — Share them on social, QR code, email, path of least resistance. Don't make people hunt.
 
 ---

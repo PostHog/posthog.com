@@ -10,6 +10,7 @@ import { useWindow } from '../../context/Window'
 
 import { pocketGuideDestination, volumeById, type PocketGuideVolume } from '../../constants/pocketGuides'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
+import BookClubCallout from './BookClubCallout'
 import Cover from './Cover'
 import { openPocketGuide } from './bookOpening'
 import { EntryProvider, bookMdxComponents } from './bookComponents'
@@ -300,6 +301,8 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
             onClickCapture={entry.isFrontMatter ? openBook : undefined}
         >
             <EntryProvider value={{ entry, pages, basePath }}>
+                {/* TODO: Remove after the Product Book Club on Nov 4, 2026. */}
+                {volumeId === 'product-analytics' && <BookClubCallout />}
                 <IntroContext.Provider value={intro}>
                     <MDXProvider components={components}>
                         <MDXRenderer>{body}</MDXRenderer>

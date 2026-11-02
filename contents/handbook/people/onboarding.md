@@ -24,7 +24,7 @@ The onboarding email is sent by the People team directly. We want to strike a ba
 
 ## Onboarding checklist
 
-Once your accounts are set up, you'll get a welcome message in your onboarding channel with a link to the [Ops Platform](https://ops.posthog.dev/welcome) to get started. Everything you need to do, including the role-specific tasks your team adds, is tracked there in one place. When you first log in, you'll land on a welcome page with a short set of preboarding tasks, and your full checklist lives on your employee profile.
+Once your accounts are set up, you'll get a welcome message in your onboarding channel with a link to the <PrivateLink url="https://ops.posthog.dev/welcome">Ops Platform</PrivateLink> to get started. Everything you need to do, including the role-specific tasks your team adds, is tracked there in one place. When you first log in, you'll land on a welcome page with a short set of preboarding tasks, and your full checklist lives on your employee profile.
 
 ## Onboarding buddy
 
@@ -182,8 +182,8 @@ Our most active repositories (aka 'repos') are:
 
 -   [PostHog](https://github.com/PostHog/posthog) - main app
 -   [PostHog.com](https://github.com/PostHog/posthog.com) - website
--   [Product Internal](https://github.com/PostHog/product-internal) - product-related issues that need to be kept internal, e.g. security issues, customer-specific issues (private)
--   [Company Internal](https://github.com/PostHog/company-internal) - company-facing issues, e.g. internal processes, hiring planning (private)
+-   <PrivateLink url="https://github.com/PostHog/product-internal">Product Internal</PrivateLink> - product-related issues that need to be kept internal, e.g. security issues, customer-specific issues (private)
+-   <PrivateLink url="https://github.com/PostHog/company-internal">Company Internal</PrivateLink> - company-facing issues, e.g. internal processes, hiring planning (private)
 
 When you have a new Issue or want to submit a Pull Request, you do that in the relevant repo.
 
@@ -251,32 +251,32 @@ Below are a list of Slack channels you may find helpful:
 ### Work-related channels
 
 -   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   [#ask-posthog-anything](https://posthog.slack.com/archives/C02E3BKC78F) - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
--   [#tell-posthog-anything](https://posthog.slack.com/archives/C0351B1DMUY) - company-wide announcements about our people, products, policies, and projects
--   [#at-posthog-anything](https://posthog.slack.com/archives/C07TQR0V16U) - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
--   [#general](https://posthog.slack.com/archives/CSPHFDZH8) - see new starters, work anniversaries, birthdays and all-hands recordings
--   [#changelog](https://posthog.slack.com/archives/C099B0YCULT) - keep up with all the cool things we're shipping across the team
+-   <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
+-   <PrivateLink url="https://posthog.slack.com/archives/C0351B1DMUY">#tell-posthog-anything</PrivateLink> - company-wide announcements about our people, products, policies, and projects
+-   <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#at-posthog-anything</PrivateLink> - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
+-   <PrivateLink url="https://posthog.slack.com/archives/CSPHFDZH8">#general</PrivateLink> - see new starters, work anniversaries, birthdays and all-hands recordings
+-   <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelog</PrivateLink> - keep up with all the cool things we're shipping across the team
 -   `#today-i-learned` - where we share what we learn
 -   `#demo-posthog-anything` - show the team something you built, or see what others are building
 -   `#phishing-attempts` - report suspicious emails, texts, and messages here
--   [#content-and-video-ideas](https://posthog.slack.com/archives/C015CRUQR7Y) - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
--   [#newsletters](https://posthog.slack.com/archives/C01RJ7T212S)
--   [#brand-mentions](https://posthog.slack.com/archives/C03C60FT1J7)
--   [#do-more-weird](https://posthog.slack.com/archives/C04JN5NNMPF)
--   [#industry-news](https://posthog.slack.com/archives/C01NWR6F58F)
--   [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4)
+-   <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y">#content-and-video-ideas</PrivateLink> - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+-   <PrivateLink url="https://posthog.slack.com/archives/C01RJ7T212S">#newsletters</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C03C60FT1J7">#brand-mentions</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C04JN5NNMPF">#do-more-weird</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01NWR6F58F">#industry-news</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C06LMMS3YP4">#team-blitzscale</PrivateLink>
 
 ### Engineering channels
 
 If you are an engineer, join these in addition to the work-related channels above:
 
--   [#dev](https://posthog.slack.com/archives/C0113360FFV) - general engineering discussion
+-   <PrivateLink url="https://posthog.slack.com/archives/C0113360FFV">#dev</PrivateLink> - general engineering discussion
 -   `#dev-ai` - how we use AI tools and coding agents in our own work
 -   `#dev-stamp-exchange` - ask for a quick review when nobody on your team is free. See [how we review](/handbook/engineering/how-we-review)
 -   `#github-rfcs` - all of our [RFCs](/handbook/company/communication#requests-for-comment-rfcs) are posted here
 -   `#flakey-tests` - reports of tests that fail intermittently in CI
 -   `#incidents` - incident declarations and post-mortem summaries. Set this channel to notify you about every message
--   [#alerts](https://posthog.slack.com/archives/C0185UNBSJZ) - company-wide alerts. Teams also have their own `#alerts-[team-name]` channels
+-   <PrivateLink url="https://posthog.slack.com/archives/C0185UNBSJZ">#alerts</PrivateLink> - company-wide alerts. Teams also have their own `#alerts-[team-name]` channels
 -   `#support-infrastructure` - deployment problems, infrastructure questions, and requests for cloud access
 -   `#aws-access` - use the `/awsaccess` command here to get temporary AWS permissions. See [cloud providers](/handbook/engineering/cloud-providers)
 -   `#papercuts` - small product annoyances that anyone at PostHog can report. Your team's [support hero](/handbook/engineering/support-hero) picks up the ones in your area
@@ -289,53 +289,53 @@ We encourage you to join and create channels focused around different types of h
 
 #### Daily chit-chat
 
--   [#casual-ask-posthog-anything](https://posthog.slack.com/archives/C0B5F648MDE)
--   [#design-inspiration](https://posthog.slack.com/archives/C01KEAGD601)
--   [#devel-random](https://posthog.slack.com/archives/C02EJABQ39R)
--   [#hoglife](https://posthog.slack.com/archives/C033D5NTA22)
--   [#memespo](https://posthog.slack.com/archives/C0AD19VV7MH)
--   [#no-context-posthog](https://posthog.slack.com/archives/C0790T52ZHT)
--   [#random](https://posthog.slack.com/archives/CT2BU33N1)
--   [#whereintheworld](https://posthog.slack.com/archives/C01D3U32PUN)
+-   <PrivateLink url="https://posthog.slack.com/archives/C0B5F648MDE">#casual-ask-posthog-anything</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01KEAGD601">#design-inspiration</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C02EJABQ39R">#devel-random</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C033D5NTA22">#hoglife</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C0AD19VV7MH">#memespo</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C0790T52ZHT">#no-context-posthog</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/CT2BU33N1">#random</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01D3U32PUN">#whereintheworld</PrivateLink>
 
 #### Hobbies and interests
 
--   [#aviation](https://posthog.slack.com/archives/C076ZQFM42U)
--   [#books-and-films](https://posthog.slack.com/archives/C01HEH7FXRN)
--   [#cars-and-driving](https://posthog.slack.com/archives/C068GE7G8BB)
--   [#climbing](https://posthog.slack.com/archives/C08QQ4HGV8R)
--   [#coffee-snobs](https://posthog.slack.com/archives/C0732DWLUA0)
--   [#cycling](https://posthog.slack.com/archives/C01P1NBUZDY)
--   [#dad-jokes](https://posthog.slack.com/archives/C03RJRD1GKE)
--   [#food](https://posthog.slack.com/archives/C02EYG134RW)
--   [#fitness](https://posthog.slack.com/archives/C03PH4UTD9V)
--   [#gaming](https://posthog.slack.com/archives/C01HBHP6BRA)
--   [#golf](https://posthog.slack.com/archives/C09LN9LAR3M)
--   [#homelab](https://posthog.slack.com/archives/C03PJA57E3V)
--   [#kids](https://posthog.slack.com/archives/C076X3C284D)
--   [#listening-to](https://posthog.slack.com/archives/C01EJ20SK42)
+-   <PrivateLink url="https://posthog.slack.com/archives/C076ZQFM42U">#aviation</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01HEH7FXRN">#books-and-films</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C068GE7G8BB">#cars-and-driving</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C08QQ4HGV8R">#climbing</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C0732DWLUA0">#coffee-snobs</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01P1NBUZDY">#cycling</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C03RJRD1GKE">#dad-jokes</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C02EYG134RW">#food</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C03PH4UTD9V">#fitness</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01HBHP6BRA">#gaming</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C09LN9LAR3M">#golf</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C03PJA57E3V">#homelab</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C076X3C284D">#kids</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01EJ20SK42">#listening-to</PrivateLink>
 -   `#merch`
--   [#pets](https://posthog.slack.com/archives/C02G88X9R2R)
--   [#rockets](https://posthog.slack.com/archives/C01LREJ3NPL)
--   [#running](https://posthog.slack.com/archives/C08HBBYT9DW)
+-   <PrivateLink url="https://posthog.slack.com/archives/C02G88X9R2R">#pets</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C01LREJ3NPL">#rockets</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C08HBBYT9DW">#running</PrivateLink>
 -   `#shitposters-unite`
 -   `#skiing`
--   [#stonks](https://posthog.slack.com/archives/C01L9FZBRPD)
--   [#wedding-planners](https://posthog.slack.com/archives/C082AS81RD0)
+-   <PrivateLink url="https://posthog.slack.com/archives/C01L9FZBRPD">#stonks</PrivateLink>
+-   <PrivateLink url="https://posthog.slack.com/archives/C082AS81RD0">#wedding-planners</PrivateLink>
 
 ### Location specific channels
 
 Join wherever you're based, plus anywhere you travel often - posting in these channels is the easiest way to find teammates for a coffee, a coworking day, or dinner while you're in town.
 
--   **Austria:** [#vienna](https://posthog.slack.com/archives/C09GE5B5AQ2)
--   **Canada:** [#canada](https://posthog.slack.com/archives/C09GRQL9FUN)
--   **France:** [#france](https://posthog.slack.com/archives/C04DDUWSH29)
--   **Germany:** [#germany](https://posthog.slack.com/archives/C06GGF6AAHG)
--   **Hungary:** [#budapest](https://posthog.slack.com/archives/C09K36PQY73)
--   **Ireland:** [#ireland](https://posthog.slack.com/archives/C09LM32PB25)
--   **Latin America:** [#latam](https://posthog.slack.com/archives/C085FD96WAK)
--   **Netherlands:** [#amsterdam](https://posthog.slack.com/archives/C096RNZF75H)
--   **Portugal:** [#lisbon](https://posthog.slack.com/archives/C097A897XP1)
--   **Spain:** [#spain](https://posthog.slack.com/archives/C090ADXGJGH), [#barcelona](https://posthog.slack.com/archives/C09E9Q37YCA)
--   **United Kingdom:** [#london](https://posthog.slack.com/archives/C028MN3UUP5), [#uk-north](https://posthog.slack.com/archives/C0BSCKLMY12)
--   **United States:** [#united-states](https://posthog.slack.com/archives/C02J5E678LF),  [#austin-area](https://posthog.slack.com/archives/C0AF8M87ZRC), [#nyc](https://posthog.slack.com/archives/C036JMK2065), [#seattle-area](https://posthog.slack.com/archives/C080RPNHHL1), [#sf-bay-area](https://posthog.slack.com/archives/C034FCE7RCG)
+-   **Austria:** <PrivateLink url="https://posthog.slack.com/archives/C09GE5B5AQ2">#vienna</PrivateLink>
+-   **Canada:** <PrivateLink url="https://posthog.slack.com/archives/C09GRQL9FUN">#canada</PrivateLink>
+-   **France:** <PrivateLink url="https://posthog.slack.com/archives/C04DDUWSH29">#france</PrivateLink>
+-   **Germany:** <PrivateLink url="https://posthog.slack.com/archives/C06GGF6AAHG">#germany</PrivateLink>
+-   **Hungary:** <PrivateLink url="https://posthog.slack.com/archives/C09K36PQY73">#budapest</PrivateLink>
+-   **Ireland:** <PrivateLink url="https://posthog.slack.com/archives/C09LM32PB25">#ireland</PrivateLink>
+-   **Latin America:** <PrivateLink url="https://posthog.slack.com/archives/C085FD96WAK">#latam</PrivateLink>
+-   **Netherlands:** <PrivateLink url="https://posthog.slack.com/archives/C096RNZF75H">#amsterdam</PrivateLink>
+-   **Portugal:** <PrivateLink url="https://posthog.slack.com/archives/C097A897XP1">#lisbon</PrivateLink>
+-   **Spain:** <PrivateLink url="https://posthog.slack.com/archives/C090ADXGJGH">#spain</PrivateLink>, <PrivateLink url="https://posthog.slack.com/archives/C09E9Q37YCA">#barcelona</PrivateLink>
+-   **United Kingdom:** <PrivateLink url="https://posthog.slack.com/archives/C028MN3UUP5">#london</PrivateLink>, <PrivateLink url="https://posthog.slack.com/archives/C0BSCKLMY12">#uk-north</PrivateLink>
+-   **United States:** <PrivateLink url="https://posthog.slack.com/archives/C02J5E678LF">#united-states</PrivateLink>,  <PrivateLink url="https://posthog.slack.com/archives/C0AF8M87ZRC">#austin-area</PrivateLink>, <PrivateLink url="https://posthog.slack.com/archives/C036JMK2065">#nyc</PrivateLink>, <PrivateLink url="https://posthog.slack.com/archives/C080RPNHHL1">#seattle-area</PrivateLink>, <PrivateLink url="https://posthog.slack.com/archives/C034FCE7RCG">#sf-bay-area</PrivateLink>

@@ -23,7 +23,7 @@ Each tab answers a different question.
 
 ### Dashboard
 
-The dashboard shows session counts, tool calls, error rates, and p95 latency. It also shows clients, harnesses, tool usage, and errors over time.
+The dashboard shows session counts, tool calls, error rates, and p95 latency. It also shows clients, harnesses, tool usage, and errors over time. The **Sessions flagged for review** card picks out sessions such as the worst error rate, sessions where every call failed, the most exploratory or busiest sessions, and an example session. It can be short or empty.
 
 ### Activity
 
@@ -31,7 +31,7 @@ The activity feed shows tool calls as they arrive. Use it to check instrumentati
 
 ### Sessions
 
-The sessions view lists MCP sessions, with notable sessions first. Open a session to read its tool calls, intents, and errors in order. This is similar to [Session Replay](/docs/session-replay) for agents. Apply filters to create a playlist, then move between sessions in the detail view.
+The sessions view lists MCP sessions, newest first by default. Open a session to read its tool calls, intents, and errors in order. This is similar to [Session Replay](/docs/session-replay) for agents. Apply filters to create a playlist, then move between sessions in the detail view.
 
 ### Tool quality
 
@@ -43,7 +43,15 @@ The button requires a connected GitHub integration. See [Self-driving reports](#
 
 ### Intent clustering
 
-Groups what agents said they were trying to do into themes, so you can see the jobs your server actually gets used for. Includes a journey view of how agents move between tools within a cluster. Intent comes from [`$mcp_intent`](/docs/mcp-analytics/intent) plus generated session summaries.
+Groups what agents said they were trying to do into themes, so you can see the jobs your server actually gets used for. Includes a journey view of how agents move between tools within a cluster. Intent comes from [`$mcp_intent`](/docs/mcp-analytics/intent) plus generated session summaries. Intent clustering is still rolling out, so this tab may not appear in your project yet.
+
+### Missing capabilities
+
+Lists what agents asked your server for and could not get, in their own words, newest first. The reports come from the [`get_more_tools` tool](/docs/mcp-analytics/missing-capability).
+
+### Notifications
+
+Set up recurring summaries of what agents do with your server, and instant alerts for events you need to know about right away.
 
 ## Ask PostHog AI
 

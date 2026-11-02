@@ -115,7 +115,7 @@ export default function TwigEventFlow({
         <div ref={rootRef} className="twig-click-demo @container">
             <ExhibitResetButton onReset={reset} />
             <div className="grid items-start gap-3 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
-                <div ref={twigRef} className="relative overflow-hidden rounded border border-primary bg-primary">
+                <div ref={twigRef} className="relative">
                     <TwigBrowseFigure
                         key={resetKey}
                         id={`guide-event-${withDestination ? 'destination' : 'bare'}`}

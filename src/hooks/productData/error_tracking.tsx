@@ -113,6 +113,7 @@ export const errorTracking = {
     ],
     overview: {
         title: 'Track errors and resolve issues',
+        description: '"Show me new errors since the last deploy, ranked by users affected"',
         eli5: "Error Tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's session replay, events, and properties attached – so you can see what went wrong instead of trying to reproduce it.",
         textColor: 'text-black', // tw
     },
@@ -327,7 +328,7 @@ export const errorTracking = {
             {
                 name: 'Sentry',
                 key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
+                link: '/compare/posthog-vs-sentry',
             },
             {
                 name: 'Signoz',

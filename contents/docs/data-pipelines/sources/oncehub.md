@@ -9,7 +9,7 @@ availability:
 sourceId: Oncehub
 ---
 
-The OnceHub connector syncs your scheduling and booking data – bookings, booking calendars, contacts, users, and teams – from the OnceHub Booking Calendars API into PostHog.
+The OnceHub connector syncs your scheduling and booking data – bookings, booking calendars, contacts, users, teams, event types, booking pages, master pages, and user scheduling availability – from the OnceHub Booking Calendars and Booking Pages APIs into PostHog.
 
 ## Adding a data source
 
@@ -27,13 +27,17 @@ Once the syncs are complete, you can start using OnceHub data in PostHog.
 
 ## Available tables
 
-| Table               | Description                                                           | Sync method  |
-| ------------------- | --------------------------------------------------------------------- | ------------ |
-| `bookings`          | Scheduled meetings including status, timing, and customer information | Full refresh |
-| `booking_calendars` | Scheduling links that accept bookings for users or teams              | Full refresh |
-| `contacts`          | Customers who have interacted with OnceHub scheduling pages           | Full refresh |
-| `users`             | Team members in your OnceHub account                                  | Full refresh |
-| `teams`             | Teams of users in your OnceHub account                                | Full refresh |
+| Table                          | Description                                                               | Sync method  |
+| ------------------------------ | ------------------------------------------------------------------------- | ------------ |
+| `bookings`                     | Scheduled meetings including status, timing, and customer information     | Full refresh |
+| `booking_calendars`            | Scheduling links that accept bookings for users or teams                  | Full refresh |
+| `contacts`                     | Customers who have interacted with OnceHub scheduling pages               | Full refresh |
+| `users`                        | Team members in your OnceHub account                                      | Full refresh |
+| `teams`                        | Teams of users in your OnceHub account                                    | Full refresh |
+| `event_types`                  | Event types (services) from classic Booking Pages, referenced by bookings | Full refresh |
+| `booking_pages`                | Classic Booking Pages used to schedule meetings                           | Full refresh |
+| `master_pages`                 | Master pages grouping several booking pages behind one entry point        | Full refresh |
+| `user_scheduling_availability` | Per-user scheduling availability with weekly hours and date overrides     | Full refresh |
 
 All tables use **full refresh** – all data is reloaded on each sync.
 

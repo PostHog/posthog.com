@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Partnerize connector syncs your partnership and affiliate marketing data – campaigns, conversions, clicks, and reference catalogs – into PostHog, so you can join partner-driven revenue with your product analytics.
+The Partnerize connector syncs your partnership and affiliate marketing data – campaigns, conversions, conversion items, clicks, advertisers, commissions, and reference catalogs – into PostHog, so you can join partner-driven revenue with your product analytics.
 
 ## Prerequisites
 
@@ -33,8 +33,8 @@ The connector needs three values:
 
 <SyncModes />
 
-The `conversions` and `clicks` tables support incremental syncs using Partnerize's report date filters.
-For `conversions`, choosing `last_modified` as the incremental field also picks up status changes (for example pending to approved) on previously synced conversions, so it is the recommended cursor.
+The `conversions`, `conversion_items`, and `clicks` tables support incremental syncs using Partnerize's report date filters.
+For `conversions` and `conversion_items`, choosing `last_modified` as the incremental field also picks up status changes (for example pending to approved) on previously synced records, so it is the recommended cursor.
 
 ## Configuration
 

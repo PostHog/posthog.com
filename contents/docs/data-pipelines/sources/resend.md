@@ -9,7 +9,7 @@ availability:
 sourceId: Resend
 ---
 
-The Resend connector pulls your Resend data – audiences, broadcasts, contacts, domains, emails, suppressions, email metrics, and broadcast clicked links – into the PostHog data warehouse.
+The Resend connector pulls your Resend data – audiences, broadcasts, contacts, domains, emails, suppressions, email metrics, broadcast clicked links, and usage – into the PostHog data warehouse.
 
 ## Adding a data source
 
@@ -33,6 +33,7 @@ Once the syncs are complete, you can start using Resend data in PostHog.
 | `emails`                  | Sent emails                                                      | Full refresh |
 | `email_metrics`           | Daily email delivery, bounce, open, click, and complaint metrics | Full refresh |
 | `suppressions`            | Suppressed email addresses with suppression origin               | Full refresh |
+| `usage`                   | A snapshot of the account's current usage and plan limits        | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

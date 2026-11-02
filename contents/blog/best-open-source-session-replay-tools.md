@@ -18,7 +18,7 @@ tags:
   - Comparisons
 ---
 
-[Open-source analytics](/blog/best-open-source-analytics-tools) is great when you need hard numbers, but hard numbers don't give you the full picture. 
+[Open-source analytics](/compare/best-open-source-analytics-tools) is great when you need hard numbers, but hard numbers don't give you the full picture. 
 
 What else do you need to do? [Talk to users](/blog/10x-engineers-do-user-interviews)? Sure. Gather feedback? That's useful, too. But, for us, there's nothing better than watching session replays for understanding a user's pain points.
 
@@ -103,7 +103,7 @@ OpenReplay offers three ways to deploy, plus a custom enterprise option:
 
 ![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_03_12_T19_18_34_436_Z_d79ea5531f.png)
 
-[Sentry](/blog/posthog-vs-sentry) is a source-available application monitoring platform primarily known for error tracking and performance monitoring. 
+[Sentry](/compare/posthog-vs-sentry) is a source-available application monitoring platform primarily known for error tracking and performance monitoring. 
 
 Session replay was added in 2023 and is tightly integrated with Sentry's error data: when an exception fires, the session replay for the affected user is automatically linked, giving you the full interaction context without any additional investigation.
 
@@ -204,7 +204,7 @@ Self-hosted lifetime licenses start at **$200 one-time** (Startup – up to 3 we
 
 ### Who is Matomo for?
 
-[Matomo](blog/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
+[Matomo](/compare/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
 
 To learn more, read our [PostHog vs Matomo comparison](/compare/posthog-vs-matomo).
 
@@ -325,9 +325,9 @@ The top session replay tools in 2026 include:
  
 - **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
 - **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option with unlimited recordings
-- **[Smartlook](/compare/smartlook-alternatives)** – Best for mobile-first apps with crash reports
 - **[LogRocket](/compare/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
 - **[FullStory](/compare/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
+- **[Smartlook](/compare/smartlook-alternatives)** – Strong for mobile-first apps with crash reports, but it no longer sells paid plans and closes on September 30, 2027
  
 See our full guide to the [best session replay tools](/compare/best-session-replay-tools) for more options.
  

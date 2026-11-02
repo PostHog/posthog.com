@@ -9,15 +9,15 @@ availability:
 sourceId: Stytch
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Stytch connector syncs your authentication data into the PostHog Data warehouse, so you can analyze signup cohorts, authentication method adoption (MFA, OAuth, passkeys), and account security signals alongside your product data.
 
 ## Prerequisites
 
-You need a Stytch project and its API credentials: a project ID and a secret. Consumer (B2C) projects sync the `users` and `sessions` tables; B2B projects also sync `organizations` and `members`.
+You need a Stytch project and its API credentials: a project ID and a secret. Consumer (B2C) projects sync the `users`, `sessions`, and `rbac_policy` tables; B2B projects also sync `organizations`, `members`, `sso_connections`, `organization_connected_apps`, and `member_connected_apps`.
 
 Stytch's event logs are not available through its API, so they cannot be synced.
 
@@ -38,7 +38,19 @@ Stytch's live and test environments are separate: live credentials (`project-liv
 
 The `users` table supports incremental sync on `created_at`. Stytch exposes no updated-at filter, so incremental syncs only pick up newly created users; run a periodic full refresh to capture changes to existing users. All other tables are full refresh only.
 
-The `sessions` table only contains currently active sessions (Stytch's API doesn't return expired ones) and is fetched one request per user, so it's off by default – enable it only if the per-user API cost is acceptable for your project size.
+Several tables are off by default because of their API cost or because they only apply to certain project types:
+
+| Table                         | Reason                                 | When to enable                                                        |
+| ----------------------------- | -------------------------------------- | --------------------------------------------------------------------- |
+| `sessions`                    | One API request per user               | When you need active session data and the per-user cost is acceptable |
+| `organizations`               | B2B-only                               | When your Stytch project is a B2B project                             |
+| `members`                     | B2B-only                               | When your Stytch project is a B2B project                             |
+| `rbac_policy`                 | Off by default                         | When you need to resolve role IDs on members or users                 |
+| `sso_connections`             | B2B-only; one request per organization | When you need to analyze SSO connection setup across organizations    |
+| `organization_connected_apps` | B2B-only; one request per organization | When you need organization-level connected app data                   |
+| `member_connected_apps`       | B2B-only; one request per member       | When you need member-level connected app data with granted scopes     |
+
+> **Note:** The `sso_connections` table filters out OIDC client secrets and SAML encryption private keys for security.
 
 ## Configuration
 
@@ -51,6 +63,6 @@ The `sessions` table only contains currently active sessions (Stytch's API doesn
 ## Troubleshooting
 
 - If you get an authorization error, your Stytch project ID or secret is invalid. Create a new secret under API keys in your Stytch dashboard, then reconnect.
-- If the `organizations` or `members` tables fail to sync, your project is likely a consumer (B2C) project – those tables are only available for Stytch B2B projects.
+- If the `organizations`, `members`, `sso_connections`, `organization_connected_apps`, or `member_connected_apps` tables fail to sync, your project is likely a consumer (B2C) project – those tables are only available for Stytch B2B projects.
 
 <TroubleshootingLink />

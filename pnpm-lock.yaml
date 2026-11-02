@@ -18,7 +18,7 @@ importers:
         specifier: ^5.1.5
         version: 5.1.5
       '@base-ui/react':
-        specifier: ^1.8.0
+        specifier: 1.8.0
         version: 1.8.0(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@dnd-kit/core':
         specifier: ^6.3.1
@@ -87,8 +87,8 @@ importers:
         specifier: 0.3.0-beta.31
         version: 0.3.0-beta.31(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@posthog/twig-components':
-        specifier: 0.1.3
-        version: 0.1.3(react@18.3.1)
+        specifier: 0.2.3
+        version: 0.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-accordion':
         specifier: ^1.2.3
         version: 1.2.12(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -582,6 +582,9 @@ importers:
       '@babel/core':
         specifier: ^7.15.5
         version: 7.28.4
+      '@babel/preset-typescript':
+        specifier: 7.27.1
+        version: 7.27.1(@babel/core@7.28.4)
       '@pmmmwh/react-refresh-webpack-plugin':
         specifier: ^0.5.5
         version: 0.5.17(@types/webpack@4.41.40)(react-refresh@0.14.2)(type-fest@4.41.0)(webpack-hot-middleware@2.26.1)(webpack@5.101.3)
@@ -696,6 +699,9 @@ importers:
       node-gyp:
         specifier: ^12.2.0
         version: 12.2.0
+      path-to-regexp:
+        specifier: 6.3.0
+        version: 6.3.0
       postcss:
         specifier: ^8.4.14
         version: 8.5.6
@@ -738,6 +744,9 @@ importers:
       wrangler:
         specifier: ^4.67.0
         version: 4.67.0
+      yaml:
+        specifier: ^2.8.1
+        version: 2.8.1
 
   plugins/gasby-remark-lazy-imgix: {}
 
@@ -2390,6 +2399,9 @@ packages:
   '@floating-ui/utils@0.1.6':
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
 
+  '@floating-ui/utils@0.2.10':
+    resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
@@ -3686,10 +3698,11 @@ packages:
       react: ^18.3.1 || ^19.0.0
       react-dom: ^18.3.1 || ^19.0.0
 
-  '@posthog/twig-components@0.1.3':
-    resolution: {integrity: sha512-k3yRoTjL5kyPbblPCY+2lIGYV/dHYpa9qSsWeDp1YWRgMC/tTZ0ysbS6SZZtoEaL9oZtHs95M192r4uNatsyrw==}
+  '@posthog/twig-components@0.2.3':
+    resolution: {integrity: sha512-ekl1td3EqVxFiZagYRDEC5XFjFhL3kda3O56fXqUkDCQp5JuKmFtUo1a9QS56Bxnynf9P48JWi4J/c1+5dvBng==}
     peerDependencies:
       react: ^18.3.0 || ^19.0.0
+      react-dom: ^18.3.0 || ^19.0.0
 
   '@preact/signals-core@1.12.1':
     resolution: {integrity: sha512-BwbTXpj+9QutoZLQvbttRg5x3l5468qaV2kufh+51yha1c53ep5dY4kTuZR35+3pAZxpfQerGJiQqg34ZNZ6uA==}
@@ -19753,7 +19766,7 @@ snapshots:
 
   '@floating-ui/core@1.7.3':
     dependencies:
-      '@floating-ui/utils': 0.2.12
+      '@floating-ui/utils': 0.2.10
 
   '@floating-ui/core@1.8.0':
     dependencies:
@@ -19772,7 +19785,7 @@ snapshots:
   '@floating-ui/dom@1.7.4':
     dependencies:
       '@floating-ui/core': 1.7.3
-      '@floating-ui/utils': 0.2.12
+      '@floating-ui/utils': 0.2.10
 
   '@floating-ui/dom@1.8.0':
     dependencies:
@@ -19793,8 +19806,8 @@ snapshots:
 
   '@floating-ui/react@0.27.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@floating-ui/react-dom': 2.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@floating-ui/utils': 0.2.12
+      '@floating-ui/react-dom': 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@floating-ui/utils': 0.2.10
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       tabbable: 6.2.0
@@ -19808,6 +19821,8 @@ snapshots:
       tabbable: 6.2.0
 
   '@floating-ui/utils@0.1.6': {}
+
+  '@floating-ui/utils@0.2.10': {}
 
   '@floating-ui/utils@0.2.12': {}
 
@@ -21773,12 +21788,14 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       simple-statistics: 7.12.1
 
-  '@posthog/twig-components@0.1.3(react@18.3.1)':
+  '@posthog/twig-components@0.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@rrweb/record': 2.1.6
       '@rrweb/replay': 2.1.6
       '@rrweb/types': 2.1.6
+      canvas-confetti: 1.9.4
       react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   '@preact/signals-core@1.12.1': {}
 
@@ -22321,7 +22338,7 @@ snapshots:
 
   '@radix-ui/react-popper@1.2.1(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@floating-ui/react-dom': 2.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@floating-ui/react-dom': 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-arrow': 1.1.1(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-compose-refs': 1.1.1(@types/react@16.14.66)(react@18.3.1)
       '@radix-ui/react-context': 1.1.1(@types/react@16.14.66)(react@18.3.1)
@@ -22339,7 +22356,7 @@ snapshots:
 
   '@radix-ui/react-popper@1.2.2(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@floating-ui/react-dom': 2.1.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@floating-ui/react-dom': 2.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-arrow': 1.1.2(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-compose-refs': 1.1.1(@types/react@16.14.66)(react@18.3.1)
       '@radix-ui/react-context': 1.1.1(@types/react@16.14.66)(react@18.3.1)
@@ -26656,7 +26673,7 @@ snapshots:
 
   babel-plugin-macros@3.1.0:
     dependencies:
-      '@babel/runtime': 7.29.7
+      '@babel/runtime': 7.28.4
       cosmiconfig: 7.1.0
       resolve: 1.22.10
 
@@ -33225,7 +33242,7 @@ snapshots:
 
   lazy-universal-dotenv@3.0.1:
     dependencies:
-      '@babel/runtime': 7.29.7
+      '@babel/runtime': 7.28.4
       app-root-dir: 1.0.2
       core-js: 3.45.1
       dotenv: 8.6.0

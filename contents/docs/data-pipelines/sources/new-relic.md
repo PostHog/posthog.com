@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The New Relic connector syncs your observability data – APM transactions, transaction errors, page views, logs, distributed tracing spans, monitored entities, and alert configuration – into PostHog, so you can query it alongside your product analytics.
+The New Relic connector syncs your observability data – APM transactions, transaction errors, page views, JavaScript errors, logs, distributed tracing spans, monitored entities, alert configuration, alert incidents, and alert issues – into PostHog, so you can query it alongside your product analytics.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ When linking New Relic, you'll need:
 
 <SyncModes />
 
-Event tables (`transactions`, `transaction_errors`, `page_views`, `logs`, and `spans`) are append-only, since New Relic events are immutable. On the initial sync, only the last 30 days of events are imported, and New Relic's own data retention limits how far back data is available on your plan. The `logs` and `spans` tables can be very high volume, so they're disabled by default – toggle them on in the schema configuration if you want them.
+Event tables (`transactions`, `transaction_errors`, `page_views`, `javascript_errors`, `alert_incidents`, `alert_issues`, `logs`, and `spans`) are append-only, since New Relic events are immutable. On the initial sync, only the last 30 days of events are imported, and New Relic's own data retention limits how far back data is available on your plan. The `logs` and `spans` tables can be very high volume, so they're disabled by default – toggle them on in the schema configuration if you want them.
 
 Entity and alert configuration tables (`entities`, `alert_policies`, and `alert_conditions`) are synced with a full refresh, since New Relic doesn't expose updated-since filters for them.
 
