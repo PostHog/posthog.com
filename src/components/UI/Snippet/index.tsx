@@ -33,6 +33,10 @@ function showCopiedToast(): void {
     globalToastManager.add({ title: 'Copied to clipboard', type: 'success', timeout: COPIED_TOAST_MS })
 }
 
+function showCopyFailedToast(): void {
+    globalToastManager.add({ title: 'Copy failed', type: 'error', timeout: COPIED_TOAST_MS })
+}
+
 function surfaceFor(color: SnippetColor): string {
     if (color === 'gray') return graySurface
     if (color === 'white') return colorOpaque.gray
@@ -125,6 +129,7 @@ const Inline = React.forwardRef<HTMLElement, SnippetInlineProps>(function Snippe
         try {
             await navigator.clipboard.writeText(element.textContent ?? '')
         } catch {
+            showCopyFailedToast()
             return
         }
         showCopiedToast()

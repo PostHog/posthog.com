@@ -121,7 +121,7 @@ Components animate with CSS where possible: transitions on `transform`, `opacity
 - Every animated part has a reduced-motion rule, such as `motion-reduce:transition-none`. Decorative loops stop; spinners keep turning slowly. Use `usePrefersReducedMotion` from `utils.ts` for JavaScript-driven motion.
 - Popups animate with Base UI's `data-[starting-style]` and `data-[ending-style]` attributes. Animations skip only when Base UI reports `data-instant="group"` (switching between menubar menus) or `"trigger-change"`. Do not skip on every `data-instant`: Base UI also sets it for keyboard and right-click opens.
 - Popups that contain an arrow must be `relative`. Otherwise the arrow measures from the positioner when the opening transform ends, and moves by the popup's border width.
-- `Slider.Value` rolls each digit as a column of 0–9 that CSS draws with `content`, so the digits are not DOM text. Each step is one line height, so keep that line height a whole number of pixels. The default `text-sm` gives 20px.
+- `Slider.Value` rolls each digit as a column of 0 to 9 that CSS draws with `content`, so the digits are not DOM text. Each step is one line height, so keep that line height a whole number of pixels. The default `text-sm` gives 20px.
 
 ### Imports
 
