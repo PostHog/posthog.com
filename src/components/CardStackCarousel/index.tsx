@@ -18,8 +18,21 @@ export type CardStackCarouselProps = {
     className?: string
     /** Optional accessible label */
     ariaLabel?: string
-    /** Format the one-based current index and total for the live counter. */
-    formatCounter?: (current: number, total: number) => React.ReactNode
+    /** When false, the "1 of 6" counter is read by screen readers only. Default true. */
+    showCounter?: boolean
+    /** When false, drops the tan background, border, rounding, and margin. Default true. */
+    framed?: boolean
+    /** 'sm' narrows the cards to 280px and shrinks the chevrons. Default 'md'. */
+    size?: CardStackSize
+    /** Replaces the stage height. The default suits `SignupQuoteCard`. */
+    stageClassName?: string
+}
+
+export type CardStackSize = 'sm' | 'md'
+
+const SIZE_CLASSES: Record<CardStackSize, { card: string; chevron: string }> = {
+    sm: { card: 'w-[min(90%,240px)]', chevron: 'size-5' },
+    md: { card: 'w-[min(90%,368px)]', chevron: 'size-8 @md:size-9' },
 }
 
 const STACK_OFFSETS = [-1, 0, 1] as const
@@ -101,6 +114,7 @@ function StackCardShell({
     transitionEnabled,
     entrance,
     renderCard,
+    widthClassName,
 }: {
     index: number
     position: StackPosition
@@ -109,6 +123,7 @@ function StackCardShell({
     transitionEnabled: boolean
     entrance: Entrance | null
     renderCard: (index: number, meta: CardStackRenderMeta) => React.ReactNode
+    widthClassName: string
 }) {
     const enteringThis = isEnteringSide(entrance, index, position)
 
@@ -150,14 +165,14 @@ function StackCardShell({
     // Side cards: CSS @container query controls visibility (opacity-0 → @lg:opacity-[0.75]).
     // @lg in @tailwindcss/container-queries = 32rem = 512px, which is where the stack layout fits.
     // The inline `transition` already covers opacity, so the enter/exit animations play naturally.
-    // Center card: opacity always 1 (or set via inline style during drag/transition).
+    // Center card: opacity always 1 (or set via inline style during a transition).
     const sideOpacityClass = isSideCard ? 'opacity-0 @lg:opacity-[0.75]' : ''
 
     return (
         <div
             data-card-stack-position={position}
             aria-hidden={position !== 0}
-            className={`absolute top-0 left-1/2 w-[min(90%,368px)] pointer-events-none ${sideOpacityClass}`}
+            className={`absolute top-0 left-1/2 ${widthClassName} pointer-events-none ${sideOpacityClass}`}
             style={{
                 zIndex: pose.zIndex,
                 transform: `translate(calc(-50% + ${pose.baseX}px), ${pose.baseY}px) scale(${pose.scale}) rotate(${pose.rotate}deg)`,
@@ -181,8 +196,12 @@ export function CardStackCarousel({
     loop = true,
     className = '',
     ariaLabel = 'Card carousel',
-    formatCounter,
+    showCounter = true,
+    framed = true,
+    size = 'md',
+    stageClassName = 'h-[285px] @md:h-[325px]',
 }: CardStackCarouselProps) {
+    const sizeClasses = SIZE_CLASSES[size]
     const stageRef = useRef<HTMLDivElement>(null)
     const cardWidthRef = useRef(0)
     const pendingNavRef = useRef<0 | 1 | -1>(0)
@@ -336,16 +355,20 @@ export function CardStackCarousel({
             aria-roledescription="carousel"
             aria-label={ariaLabel}
             onKeyDown={onKeyDown}
-            className={`@container relative bg-tan dark:bg-accent rounded border border-primary overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-yellow my-6 not-prose ${className}`}
+            className={`@container relative overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-yellow not-prose ${
+                framed ? 'bg-tan dark:bg-accent rounded border border-primary my-6' : ''
+            } ${className}`}
         >
             <div
-                className="text-center text-sm text-secondary pt-3 pb-5 select-none relative z-[60]"
+                className={
+                    showCounter ? 'text-center text-sm text-secondary pt-3 pb-5 select-none relative z-[60]' : 'sr-only'
+                }
                 aria-live="polite"
             >
-                {formatCounter ? formatCounter(current + 1, count) : `${current + 1} of ${count}`}
+                {current + 1} of {count}
             </div>
 
-            <div ref={stageRef} className="relative h-[285px] @md:h-[325px]">
+            <div ref={stageRef} className={`relative ${stageClassName}`}>
                 {visibleCards.map(({ index, position }) => {
                     const cardWidth = cardWidthRef.current || 320
                     return (
@@ -358,6 +381,7 @@ export function CardStackCarousel({
                             transitionEnabled={true}
                             entrance={entrance}
                             renderCard={renderCard}
+                            widthClassName={sizeClasses.card}
                         />
                     )
                 })}
@@ -369,7 +393,7 @@ export function CardStackCarousel({
                     aria-label="Previous slide"
                     className="absolute left-1 @md:left-2 top-1/2 -translate-y-1/2 z-[50] p-1 text-primary bg-transparent border-0 rounded-none shadow-none hover:opacity-70 disabled:opacity-25 disabled:cursor-not-allowed transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow"
                 >
-                    <IconChevronLeft className="size-8 @md:size-9" />
+                    <IconChevronLeft className={sizeClasses.chevron} />
                 </button>
                 <button
                     type="button"
@@ -378,7 +402,7 @@ export function CardStackCarousel({
                     aria-label="Next slide"
                     className="absolute right-1 @md:right-2 top-1/2 -translate-y-1/2 z-[50] p-1 text-primary bg-transparent border-0 rounded-none shadow-none hover:opacity-70 disabled:opacity-25 disabled:cursor-not-allowed transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow"
                 >
-                    <IconChevronRight className="size-8 @md:size-9" />
+                    <IconChevronRight className={sizeClasses.chevron} />
                 </button>
             </div>
         </div>

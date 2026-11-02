@@ -1,7 +1,7 @@
 import React from 'react'
 import { useReducedMotion } from 'framer-motion'
 import TabbedCarousel from 'components/TabbedCarousel'
-import AskAnythingDemo, { type DemoScenario } from 'components/Home/HeroCarousel/AskAnythingDemo'
+import AskAnythingDemo, { DURATION, type DemoScenario } from 'components/Home/HeroCarousel/AskAnythingDemo'
 
 const scenarios: { value: string; label: string; scenario: DemoScenario }[] = [
     {
@@ -137,24 +137,20 @@ export default function ContextDiagram(): JSX.Element {
         color: 'bg-accent',
         activeText: 'text-primary',
         progressBar: 'bg-red dark:bg-yellow',
-        triggerClassName: '!min-w-0 !order-none !px-2',
-        content: <AskAnythingDemo scenario={scenario} />,
+        content: <AskAnythingDemo scenario={scenario} flush />,
     }))
 
     return (
-        <figure
-            aria-label="Product context workflows"
-            className="m-0 min-w-0 [&_.ai-demo-chat-heading>span:last-child]:!mr-[9cqw]"
-        >
+        <figure className="m-0 min-w-0">
             <figcaption className="sr-only">Three sample workflows · illustrative data</figcaption>
-            {/* The demo runs 20 seconds, so each slide stays up for 22 */}
+            {/* Each slide stays up a little longer than its demo runs */}
             <TabbedCarousel
                 tabs={tabs}
-                slideDuration={22000}
+                slideDuration={DURATION + 2000}
                 paused={!!reducedMotion}
                 pauseOnFocus
+                variant="flush"
                 showActiveBg={false}
-                slideClassName="!min-h-0 !p-0 [&>div]:!shadow-none"
             />
         </figure>
     )

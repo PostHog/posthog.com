@@ -12,7 +12,7 @@ import SlotMachineText from 'components/SlotMachineText'
 import ContextDiagram from 'components/PostHogAI/ContextDiagram'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
-import { StickerCoffee, StickerMicroscope, StickerServers } from 'components/Stickers/Stickers'
+import { StickerCoffee, StickerMicroscope, StickerRobot } from 'components/Stickers/Stickers'
 import Capabilities, { AIEngineering } from 'components/PostHogAI/Capabilities'
 import Testimonials from 'components/PostHogAI/Testimonials'
 import MCPInstallCTA from 'components/MCPInstallCTA'
@@ -157,13 +157,13 @@ const HeroSection = () => {
                     </h1>
                     <p className="mt-0 mb-4 text-lg">
                         The answers are already in your data. PostHog AI finds them across your events, replays, errors,
-                        logs, and warehouse tables. Ask in Web or Slack. Your coding agent gets it through MCP.
+                        logs, and warehouse tables. Ask in PostHog or Slack, or connect your coding agent through MCP.
                     </p>
                     <CheckList items={heroBullets} className="mb-6 space-y-0.5 text-base" />
                     <SignupCTAs />
                 </div>
                 <motion.div
-                    className="order-1 mx-auto w-full max-w-72 self-center @3xl/reader-content:order-2 @3xl/reader-content:max-w-[400px]"
+                    className="order-1 mx-auto w-full max-w-72 self-center @3xl/reader-content:order-2 @3xl/reader-content:max-w-sm"
                     animate={reducedMotion ? undefined : { y: [0, -6, 0] }}
                     transition={{ duration: 4, ease: 'easeInOut', repeat: Infinity }}
                 >
@@ -280,7 +280,7 @@ const ContextLayerSection = () => {
                             ))}
                         </ul>
                         <Link
-                            to="/context-warehouse/sources"
+                            to="/docs/data-pipelines/sources"
                             state={{ newWindow: true }}
                             className="mt-4 inline-block text-sm font-semibold underline"
                         >
@@ -393,7 +393,7 @@ const PromptsSection = (): JSX.Element => {
             <SectionHeader>
                 <div>
                     <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                        <StickerServers className="size-8 shrink-0 -rotate-3" />
+                        <StickerRobot className="size-8 shrink-0 -rotate-3" />
                         Actual jobs for your AI
                     </h2>
                     <p className="mb-0 mt-2 text-base text-secondary">
@@ -481,7 +481,7 @@ const agentChips: IconItem[] = [
         Icon: IconCheckCircle,
         color: 'text-green',
         name: 'Check before you change',
-        description: 'Ask "how often is this endpoint hit?" before you rewrite it.',
+        description: 'Ask “how often is this endpoint hit?” before you rewrite it.',
     },
     {
         Icon: IconGraph,
@@ -510,7 +510,7 @@ const backgroundTools = [
         label: 'Inbox',
         Icon: IconNotification,
         color: 'text-blue',
-        description: 'Reports ranked by impact, each with the evidence and a pull request ready to review.',
+        description: 'Reports ranked by priority, each with its evidence, plus a pull request when there is a fix.',
         to: '/docs/self-driving/inbox',
         cta: 'Reports and pull requests',
     },
@@ -529,7 +529,7 @@ const BackgroundWork = (): JSX.Element => (
         <header>
             <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
                 <StickerCoffee className="size-8 shrink-0 rotate-6" />
-                Useful while you're doing something else
+                Useful while you’re doing something else
             </h2>
             <p className="mb-0 mt-2 text-base text-secondary">
                 Agents that keep working when the chat window is closed.
@@ -626,7 +626,7 @@ const AccessSection = (): JSX.Element => {
                         PostHog in your <Highlight>coding agent</Highlight>
                     </h3>
                     <p className="mb-3 mt-0 text-sm text-secondary">
-                        Plug PostHog into Claude Code, Cursor, or wherever you're building.
+                        Plug PostHog into Claude Code, Cursor, or wherever you’re building.
                     </p>
                     <IconChipRow items={agentChips} />
                     <MCPInstallCTA className="mt-4 max-w-md" showDesktopLink={false} />
@@ -671,7 +671,7 @@ const buildFaq = (pricing: Pricing | null): FaqEntry[] => [
         question: 'How much does PostHog AI cost?',
         answer: `${costAnswer(
             pricing
-        )}We charge the LLM provider's cost plus 20%, and you see the cost live as you work. Questions about how to use PostHog are free.`,
+        )}We charge the LLM provider’s cost plus 20%, and you see the cost live as you work. Questions about how to use PostHog are free.`,
         link: { label: 'PostHog AI pricing', to: '/docs/posthog-ai/pricing' },
     },
     {
@@ -787,7 +787,7 @@ export default function PostHogAIPage(): JSX.Element {
                             />
                             <div>
                                 <h2 className="mt-0 mb-3 text-2xl font-bold @xl/reader-content:text-3xl">
-                                    It's not magic (but it feels like it)
+                                    It’s not magic (but it feels like it)
                                 </h2>
                                 <p className="mt-0 mb-4">
                                     PostHog AI knows when things break, what users love, and what to build next. Every

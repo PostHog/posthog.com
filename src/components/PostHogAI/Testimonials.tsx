@@ -29,7 +29,7 @@ const quotes = [
     },
     {
         author: 'Alan Y',
-        text: 'PostHog AI helps our product engineers build dashboards without needing to understand PostHog in depth',
+        text: 'PostHog AI helps our product engineers build dashboards without needing to understand PostHog in depth.',
     },
 ]
 
@@ -124,8 +124,7 @@ const personas = [
         features: [
             {
                 title: 'See what your LLM calls cost',
-                description:
-                    'Ask which features drive the most LLM spend, or how costs compare between GPT-4 and Claude.',
+                description: 'Ask which features drive the most LLM spend, or how costs compare between models.',
             },
             {
                 title: 'Track down slow and failing calls',
@@ -197,12 +196,7 @@ const noteStyles = [
     { color: 'bg-light-purple', tilt: 'rotate-3', copy: 'text-center', name: 'self-center' },
     { color: 'bg-lime-green', tilt: '-rotate-1', copy: 'text-left', name: 'self-end' },
     { color: 'bg-creamsicle', tilt: 'rotate-2', copy: 'text-center', name: 'self-start' },
-    {
-        color: 'bg-[color-mix(in_srgb,theme(colors.pink)_40%,theme(colors.white))]',
-        tilt: '-rotate-3',
-        copy: 'text-center',
-        name: 'self-end',
-    },
+    { color: 'bg-light-blue', tilt: '-rotate-3', copy: 'text-center', name: 'self-end' },
 ]
 
 export default function Testimonials(): JSX.Element {
@@ -255,28 +249,30 @@ export default function Testimonials(): JSX.Element {
                     <CardStackCarousel
                         count={notes.length}
                         ariaLabel="What people say about PostHog AI"
-                        formatCounter={(current, total) => <span className="sr-only">{`${current} of ${total}`}</span>}
-                        className="!my-0 !flex !flex-col !rounded-none !border-0 !bg-transparent [&_[data-card-stack-position]]:!w-[min(90%,280px)] [&>div:last-child]:!h-[calc(min(90cqw,280px)_+_20px)] [&>div:last-child]:!mt-4 [&_button_svg]:!size-5 [&>div:first-child]:order-last [&>div:first-child]:!py-0"
+                        size="sm"
+                        framed={false}
+                        showCounter={false}
+                        stageClassName="mt-4 h-[calc(min(90cqw,240px)_+_20px)]"
                         renderCard={(index, { isActive }) => {
                             const style = noteStyles[index % noteStyles.length]
                             const note = notes[index]
                             return (
                                 <figure
-                                    className={`m-0 flex aspect-square w-full flex-col justify-between gap-3 p-5 text-black shadow-md ${style.tilt} ${style.color}`}
+                                    className={`m-0 flex aspect-square w-full flex-col justify-between gap-2 p-4 text-black shadow-md ${style.tilt} ${style.color}`}
                                 >
                                     <blockquote
-                                        className={`m-0 flex flex-1 items-center border-0 p-0 font-comic text-base font-normal not-italic leading-snug ${style.copy}`}
+                                        className={`m-0 flex flex-1 items-center border-0 p-0 font-comic text-sm font-normal not-italic leading-snug ${style.copy}`}
                                     >
                                         “{note.text}”
                                     </blockquote>
-                                    <figcaption className={`font-comic text-base italic ${style.name}`}>
+                                    <figcaption className={`font-comic text-sm italic ${style.name}`}>
                                         {note.author}
                                         {'customer' in note && (
                                             <Link
                                                 to={`/customers/${note.slug}`}
                                                 state={{ newWindow: true }}
                                                 tabIndex={isActive ? 0 : -1}
-                                                className="mt-1 block text-sm not-italic underline underline-offset-2"
+                                                className="mt-1 block text-xs not-italic underline underline-offset-2"
                                             >
                                                 Read the {note.customer} story →
                                             </Link>

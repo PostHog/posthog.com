@@ -1,71 +1,45 @@
 # PostHog AI page components
 
-Sections for the `/ai` product page (`src/pages/ai/index.tsx`). The page renders inside `ReaderView`, and every layout uses `@container/reader-content` queries.
+Sections for the `/ai` page (`src/pages/ai/index.tsx`). The page renders in `ReaderView`, so layouts use `@container/reader-content` queries, not media queries.
 
-All product names, icons, and colors come from `useProduct`. Do not hard-code them. If a handle has no product, the row does not show.
+Product names, icons, and colors come from `useProduct`. Refer to a product by its `handle`. If no product has that handle, its row does not show, so check the page after you add one.
 
-## Components
+## `ContextDiagram`
 
-### `ContextDiagram`
+Three scripted PostHog AI runs (conversion, activation, churn) in a `TabbedCarousel` with `variant="flush"`. Each tab renders `AskAnythingDemo` from `components/Home/HeroCarousel` with a `scenario`. Home uses the same component with its default scenario.
 
-A `TabbedCarousel` of three scripted PostHog AI conversations, named for the metric people check: conversion, activation, and churn. Each tab renders the shared `AskAnythingDemo` (`components/Home/HeroCarousel/AskAnythingDemo`) with its own `scenario`. With no `scenario`, that component plays the default conversation, so the Home page does not change.
+To add a run, add an entry to `scenarios`. A `DemoScenario` has:
 
-A `DemoScenario` has:
+- `question`, `intro`: the typed prompt and the first line of the reply
+- `tools`: four rows of `label`, `action`, and `result`. Set `handle` for a PostHog product icon, or `slug` for a source logo (for example, `stripe`). The timing has space for four rows only.
+- `conclusion`: `title`, `body`, and `next`
+- `summary`: what a screen reader announces in place of the animation
 
-- `question` – the prompt that is typed, then sent
-- `intro` – the first line of the agent's reply
-- `tools` – four rows. Each has a `label`, an `action` (shown while it runs), and a `result` (shown with a check when it finishes). Use `handle` for a PostHog product icon, or `slug` for a connected source logo, such as `stripe`.
-- `conclusion` – a `title`, a `body`, and a `next` step
-- `summary` – the screen reader description of the whole run
+All data is sample data. Each slide stays up for the demo's `DURATION` plus 2 seconds. Auto-advance pauses while focus is in the carousel, and does not run with reduced motion.
 
-The demo runs for 20 seconds, so the carousel holds each slide for 22. To add a scenario, add an entry to `scenarios`. All data is illustrative, and the demo labels it "Sample data".
+## `Capabilities`
 
-### `Capabilities` and `AIEngineering`
+The tool list under the diagram, closed until you click its button. Tools are in three `groups`. Each tool has a `handle`, a `task`, and a docs link (`to`). Add `availability: 'Private beta'` to show a label.
 
-`Capabilities` (default export) is the full tool list, collapsed behind a text button under the context diagram, in the same column. When the page is wide enough to put the column beside the text, the open list is one column. When the page stacks, it is two. Tools are in three `groups`. Each tool has a product `handle`, a `task`, and a docs link (`to`). Add `availability` (for example, `'Private beta'`) to show a label next to a feature that needs early access.
+## `AIEngineering`
 
-`AIEngineering` is the blue "Building your own AI?" panel at the end of the page, under the FAQ. It lists `engineeringTools` as plain rows beside a hedgehog, with no inner cards. Edit `engineeringTools` to change the rows. A row has either a product `handle` or an inline `product` (`name`, `Icon`, `color`) for something without a product page, like Skills.
+The "Building your own AI?" panel at the end of the page. To change it, edit `engineeringTools`. A row with no product page (for example, Skills) has an inline `product` (`name`, `Icon`, `color`) in place of a `handle`.
 
-### `Testimonials`
+## `Testimonials`
 
-Two columns. The left column is an accordion with one item per role in `personas` (all closed by default). Each role has a description and two features. The right column is the quotes: paper notes in the shared `CardStackCarousel`, with the trenchcoat hedgehog and the heading under them. Each role description is one short, irreverent line. The heading names PostHog AI and the audience, and each feature title and description stands alone.
+The role accordion (`personas`) and the sticky-note quotes. Each persona has a one-line description and two features.
 
-Each quote in `quotes` gets the style at the same index in `noteStyles`. If there are more quotes than styles, the styles repeat. Keep the quotes verbatim, with the abbreviated names as supplied. Do not add roles, companies, or photos. Between the quotes, `stories` are notes that link to a customer story at `/customers/<slug>`. Each one needs a story that really covers PostHog AI or the MCP, and a verbatim quote from that story. Set the order in `notes`.
+The notes show in the order of `notes`. `quotes` are verbatim, with names as supplied. Do not add roles, companies, or photos. `stories` link to `/customers/<slug>`. Use only stories that cover PostHog AI or the MCP, and copy the quote from the story. Each note takes the `noteStyles` entry at its index. The styles repeat after six notes.
 
-### `ProductIcon`
+## `ProductIcon`
 
-Shows a product's `Icon` in its `color`, plus `colorDark` in dark mode when the product has one. Pass a product from `useProduct` and the size classes:
+A product's `Icon` in its `color`, and in `colorDark` in dark mode when the product has one. It shows nothing when the product is missing.
 
 ```tsx
 <ProductIcon product={product} className="size-5 shrink-0" />
 ```
 
-It shows nothing when the product or its icon is missing.
+## Data and analytics
 
-## Access section
-
-`AccessSection` in `src/pages/ai/index.tsx` has two columns. The left column is two thirds of the width. When the page is too narrow, they stack.
-
-- **Left, "PostHog AI in PostHog Web":** PostHog AI in the web app (text, four feature items taken from the docs, "Try with your data" button), then a short Slack block with a Slack screenshot flush to the bottom of the card. Both cards share one height.
-- **Right, "PostHog in your coding agent":** headless use of PostHog data through MCP and the CLI.
-
-Both columns use the same pattern: heading, short intro, icon feature items (`IconChipRow`), one action, and an "Also in" block under a divider. The MCP items come from the "PostHog AI everywhere" slide of the earlier slideshow version of this page.
-
-Each part has one job. The section does not repeat copy from other sections: the roles list covers the AI engineer use case. Context and memory are two of the four web feature items. Keep new copy in this section short and specific to where PostHog AI runs.
-
-## Carousel motion
-
-The carousel on the page uses the `TabbedCarousel` opt-in props:
-
-- `pauseOnFocus` – auto-advance stops while focus is inside the carousel.
-- `paused` – set from `useReducedMotion()`, so auto-advance does not run with reduced motion.
-
-## Data on the page
-
-- **MCP categories:** the MCP tab reads the build-time `mcpLeaderboard` node through the helpers in `components/MCPLeaderboard/data.ts`, so its labels match `/mcp/leaderboard`. The data shows shares of tool calls for one complete week. Do not describe it as completed tasks.
-- **Pricing:** free credits and the credit price come from the `posthog_ai` product data. The FAQ links to `/docs/posthog-ai/pricing` for the rest.
-- **Scout templates:** the background-work tabs read `useSelfDrivingTemplates` and link with `buildScoutDeepLink`.
-
-## Verification
-
-Check `/ai` in narrow and wide windows, in light and dark mode. Check keyboard access to the carousel, reduced motion, and the `SlicedHog` animation.
+- **Pricing:** the free credits and the credit price come from the `posthog_ai` product data. If that data is missing, the copy does not show numbers.
+- **Prompts:** "Try this prompt" opens the PostHog AI side panel with the prompt filled in (`askUrl`). A click captures `ai_prompt_selected` with `group` (the card title), `prompt`, and `placement: 'ai_page'`.

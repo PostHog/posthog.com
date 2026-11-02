@@ -24,7 +24,7 @@ import ProductIcon from 'components/PostHogAI/ProductIcon'
 import { usePauseAutoAdvance, useSlideActive, useSlidePaused } from '../autoAdvanceGate'
 import './animations.css'
 
-const DURATION = 20000
+export const DURATION = 20000
 const CONVERSATION_START = 4800
 const FINDING_START = 15500
 const TOOL_START = 5800
@@ -109,7 +109,14 @@ function PostHogMark({ className = '' }: { className?: string }) {
 }
 
 /** A scripted illustration. The composer and service calls never submit real requests. */
-export default function AskAnythingDemo({ scenario = DEFAULT_SCENARIO }: { scenario?: DemoScenario }) {
+export default function AskAnythingDemo({
+    scenario = DEFAULT_SCENARIO,
+    flush = false,
+}: {
+    scenario?: DemoScenario
+    /** Set when the demo sits flush with a carousel slide, so the label clears the larger overlap of its pause button. */
+    flush?: boolean
+}): JSX.Element {
     const products = useProduct()
     const { question, intro, tools, conclusion, summary } = scenario
     const sources: { label: string; url: string; image: string }[] = useSourcePlatforms()
@@ -218,7 +225,11 @@ export default function AskAnythingDemo({ scenario = DEFAULT_SCENARIO }: { scena
                 aria-hidden="true"
                 data-visible={conversation}
             >
-                <div className="ai-demo-chat-heading flex items-center gap-[1.1cqw] h-[3.6cqw] text-[2.5cqw] [&>span:first-child]:w-[4.8cqw] [&_svg]:!w-full [&_svg]:!h-auto [&>span:last-child]:text-secondary [&>span:last-child]:ml-auto [&>span:last-child]:mr-[4.8cqw] [&>span:last-child]:text-[1.9cqw]">
+                <div
+                    className={`ai-demo-chat-heading flex items-center gap-[1.1cqw] h-[3.6cqw] text-[2.5cqw] [&>span:first-child]:w-[4.8cqw] [&_svg]:!w-full [&_svg]:!h-auto [&>span:last-child]:text-secondary [&>span:last-child]:ml-auto [&>span:last-child]:text-[1.9cqw] ${
+                        flush ? '[&>span:last-child]:mr-[9cqw]' : '[&>span:last-child]:mr-[4.8cqw]'
+                    }`}
+                >
                     <PostHogMark /> <strong>PostHog AI</strong>
                     <span>Sample data</span>
                 </div>
