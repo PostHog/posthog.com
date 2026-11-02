@@ -45,7 +45,7 @@ These rules apply to TAE, TAM and TAM lead credit.
 1. Take the effective date: the later of the signature date and the contract start date.
 2. The contract counts in the quarter of the effective date. We pay it in that quarter too.
 3. **Backdated contracts:** if the effective date is in an earlier quarter than the close date, we use the close date.
-   - A customer can backdate a contract to line up with their billing. That date can fall in a quarter that is already closed. The close date keeps the contract in a quarter that is still open.
+   - A customer can backdate a contract start date to line up with their billing date. The contract start date can fall in a quarter that is already closed. The signature date keeps the contract in a quarter that is still open.
    - This applies to contracts that close on or after July 1, 2026.
 
 | Customer | Close date | Signature / start date | Date we use | Quarter |
