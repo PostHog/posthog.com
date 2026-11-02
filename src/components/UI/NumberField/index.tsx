@@ -9,6 +9,8 @@ import {
     fieldAppearanceShape,
     fieldDivider,
     fieldGroupSurface,
+    neutralHover,
+    neutralPress,
 } from '../styles'
 import type { FieldAppearance, FieldSize } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
@@ -66,8 +68,7 @@ const Input = React.forwardRef<HTMLInputElement, Omit<BaseNumberField.Input.Prop
     )
 })
 
-const stepButton =
-    'flex min-h-0 flex-1 select-none items-center justify-center text-secondary transition-colors duration-100 ease-out hover:bg-[rgb(var(--text-primary)/0.07)] hover:text-primary active:bg-[rgb(var(--text-primary)/0.1)] motion-reduce:transition-none data-[disabled]:cursor-not-allowed data-[disabled]:text-muted data-[disabled]:hover:bg-transparent'
+const stepButton = `flex min-h-0 flex-1 select-none items-center justify-center text-secondary transition-colors duration-100 ease-out ${neutralHover} hover:text-primary ${neutralPress} motion-reduce:transition-none data-[disabled]:cursor-not-allowed data-[disabled]:text-muted data-[disabled]:hover:bg-transparent`
 
 const Increment = React.forwardRef<HTMLButtonElement, BaseNumberField.Increment.Props>(function NumberFieldIncrement(
     { className, children = <IconChevronDown aria-hidden className="size-3 rotate-180" />, ...props },

@@ -1,6 +1,6 @@
 import React from 'react'
 import { cn } from '../../../utils'
-import { insetFocusRing, surfaceAppearances } from '../styles'
+import { insetFocusRing, neutralHover, neutralPress, surfaceAppearances } from '../styles'
 import type { SurfaceAppearance } from '../styles'
 import { withClassName } from '../utils'
 
@@ -61,7 +61,7 @@ const stickyHeaderTints: Record<SurfaceAppearance, string> = {
     raised: 'bg-[image:linear-gradient(rgb(255_255_255/0.6),rgb(255_255_255/0.6))] dark:bg-[image:linear-gradient(rgb(255_255_255/0.06),rgb(255_255_255/0.06))]',
 }
 
-const sortButton = `group/sort -mx-1.5 -my-1 inline-flex max-w-[calc(100%+0.75rem)] items-center gap-1 rounded px-1.5 py-1 hover:bg-[rgb(var(--text-primary)/0.07)] hover:text-primary active:bg-[rgb(var(--text-primary)/0.1)] ${insetFocusRing}`
+const sortButton = `group/sort -mx-1.5 -my-1 inline-flex max-w-[calc(100%+0.75rem)] items-center gap-1 rounded px-1.5 py-1 ${neutralHover} hover:text-primary ${neutralPress} ${insetFocusRing}`
 
 const Root = React.forwardRef<HTMLTableElement, TableRootProps>(function TableRoot(
     {

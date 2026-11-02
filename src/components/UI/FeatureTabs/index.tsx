@@ -60,7 +60,7 @@ const APPEARANCE_CONFIG: Record<FeatureTabsAppearance, AppearanceConfig> = {
         triggerBaseClassName: 'py-1.5 @3xl:py-2.5 border border-b-0',
         triggerActiveClassName: 'border-black/10 dark:border-white/60 @md:transition-background-color',
         triggerInactiveClassName:
-            '@lg:hover:text-primary @lg:hover:bg-white/30 @lg:hover:backdrop-blur border-transparent @lg:hover:border-black/10 dark:@lg:hover:border-white/60 z-20 @lg:hover:-top-px',
+            '@lg:hover:text-primary @lg:hover:bg-white/30 @lg:hover:backdrop-blur reduce-transparency:!bg-primary reduce-transparency:!backdrop-blur-none border-transparent @lg:hover:border-black/10 dark:@lg:hover:border-white/60 z-20 @lg:hover:-top-px',
         showActiveTabHalo: true,
         slideContainerClassName:
             '@md:rounded-b-md @md:rounded-t-md border border-black/10 dark:border-white/60 -mt-px @md:transition-colors',
@@ -225,7 +225,7 @@ export default function FeatureTabs({
                                 trigger={
                                     <button
                                         onClick={() => setIsPaused((p) => !p)}
-                                        className="shrink-0 p-2 text-secondary hover:text-primary cursor-pointer border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur"
+                                        className="shrink-0 p-2 text-secondary hover:text-primary cursor-pointer border border-secondary hover:bg-accent rounded bg-light/25 dark:bg-dark/25 backdrop-blur reduce-transparency:!bg-primary reduce-transparency:backdrop-blur-none"
                                         aria-label={pauseLabel}
                                     >
                                         {isPaused ? (
@@ -244,7 +244,7 @@ export default function FeatureTabs({
                             <Tabs.Content
                                 key={tab.value}
                                 value={tab.value}
-                                className="data-[state=active]:animate-[carousel-fade-in_300ms_ease-out] flex-1"
+                                className="data-[state=active]:animate-[carousel-fade-in_300ms_ease-out] data-[state=active]:motion-reduce:animate-none flex-1"
                             >
                                 {tab.content}
                             </Tabs.Content>

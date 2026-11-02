@@ -3,7 +3,17 @@ import { Button as BaseButton } from '@base-ui/react/button'
 import { cn } from '../../../utils'
 import Link from '../../Link'
 import type { Props as LinkProps } from '../../Link'
-import { disabledHatch, focusRing, iconSizes, toneSolid, toneText } from '../styles'
+import {
+    controlRadius,
+    disabledHatch,
+    focusRing,
+    iconSizes,
+    neutralHover,
+    neutralPress,
+    neutralLatched,
+    toneSolid,
+    toneText,
+} from '../styles'
 import { mergeClassName } from '../utils'
 import { Spinner } from '../Spinner'
 import { truncateTextChildren } from '../truncation'
@@ -64,24 +74,23 @@ const busyCursor = '[&[data-disabled][aria-busy=true]]:cursor-progress'
 
 const disabledFade = '[&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:opacity-50'
 
-const flatBase = `relative inline-flex min-w-0 max-w-full items-center justify-center rounded border border-transparent bg-transparent text-primary ui-button-flat hover:bg-[rgb(var(--text-primary)/0.06)] [&:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent ${busyCursor} ${focusRing}`
+const flatBase = `relative inline-flex min-w-0 max-w-full items-center justify-center border border-transparent bg-transparent text-primary ui-button-flat data-[disabled]:cursor-not-allowed [&[data-disabled]:not([aria-busy=true]):not([data-group-disabled])]:text-muted data-[disabled]:hover:bg-transparent ${busyCursor} ${focusRing}`
 
 const flatPadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-1 text-xs leading-4',
     md: 'gap-1 px-2.5 py-1.5 text-[13px] leading-[22px]',
-    lg: 'gap-1 rounded-[6px] px-3 py-2 text-[15px] leading-[26px]',
+    lg: 'gap-1 px-3 py-2 text-[15px] leading-[26px]',
 }
 
 const flatTones: Record<ButtonVariant, string> = {
-    secondary: '',
+    secondary: `${neutralHover} ${neutralPress} ${neutralLatched}`,
     primary:
         'text-red hover:bg-orange/10 [&:not([data-disabled]):active]:bg-orange/25 data-[pressed]:bg-orange/15 data-[popup-open]:bg-orange/15 dark:text-yellow',
     danger: `${toneText.error} hover:bg-salmon/10 [&:not([data-disabled]):active]:bg-salmon/25 data-[pressed]:bg-salmon/15 data-[popup-open]:bg-salmon/15`,
 }
 
 const outlineTones: Record<ButtonVariant, string> = {
-    secondary:
-        'border-[rgb(var(--text-primary)/0.22)] hover:border-[rgb(var(--text-primary)/0.4)] hover:bg-[rgb(var(--text-primary)/0.05)] [&:not([data-disabled]):active]:border-[rgb(var(--text-primary)/0.5)] [&:not([data-disabled]):active]:bg-[rgb(var(--text-primary)/0.12)] data-[disabled]:hover:border-[rgb(var(--text-primary)/0.22)]',
+    secondary: `border-[rgb(var(--text-primary)/0.22)] hover:border-[rgb(var(--text-primary)/0.4)] ${neutralHover} ${neutralPress} ${neutralLatched} [&:not([data-disabled]):active]:border-[rgb(var(--text-primary)/0.5)] data-[disabled]:hover:border-[rgb(var(--text-primary)/0.22)]`,
     primary:
         'border-orange text-red hover:border-orange hover:bg-orange/10 [&:not([data-disabled]):active]:border-orange [&:not([data-disabled]):active]:bg-orange/25 data-[pressed]:border-orange data-[pressed]:bg-orange/15 data-[popup-open]:border-orange data-[popup-open]:bg-orange/15 data-[disabled]:hover:border-orange dark:text-yellow',
     danger: `border-salmon/70 ${toneText.error} hover:border-salmon hover:bg-salmon/10 [&:not([data-disabled]):active]:border-salmon [&:not([data-disabled]):active]:bg-salmon/25 data-[pressed]:border-salmon data-[pressed]:bg-salmon/15 data-[popup-open]:border-salmon data-[popup-open]:bg-salmon/15 data-[disabled]:hover:border-salmon/70`,
@@ -103,20 +112,22 @@ const flatGroupTones: Record<ButtonVariant, string> = {
 
 const flatSquarePadding: Record<ButtonSize, string> = { sm: 'p-[5px]', md: 'p-[9px]', lg: 'p-[11px]' }
 
-const flatSegment =
-    'rounded-none border-0 hover:bg-[rgb(var(--text-primary)/0.07)] data-[disabled]:hover:bg-transparent focus-visible:-outline-offset-2'
+const flatSegment = `rounded-none border-0 ${neutralHover} data-[disabled]:hover:bg-transparent focus-visible:-outline-offset-2`
 
 const flatSegmentPadding: Record<ButtonSize, string> = { sm: 'px-2', md: 'px-2.5', lg: 'px-3' }
 
-const flatGroupBase = 'inline-grid max-w-full data-[disabled]:opacity-50 overflow-hidden rounded'
+const flatGroupBase = 'inline-grid max-w-full data-[disabled]:opacity-50 overflow-hidden'
 
 const outlineGroupBorder = 'border border-primary'
 
 const flatGroupOrientations: Record<ButtonGroupOrientation, string> = {
-    horizontal:
-        'grid-flow-col auto-cols-[minmax(0,max-content)] [&>[data-segment]~[data-segment]]:border-l [&>[data-segment]~[data-segment]]:border-primary',
-    vertical:
-        'grid-flow-row [&>[data-segment]~[data-segment]]:border-t [&>[data-segment]~[data-segment]]:border-primary',
+    horizontal: 'grid-flow-col auto-cols-[minmax(0,max-content)]',
+    vertical: 'grid-flow-row',
+}
+
+const outlineGroupDividers: Record<ButtonGroupOrientation, string> = {
+    horizontal: '[&>[data-segment]~[data-segment]]:border-l [&>[data-segment]~[data-segment]]:border-primary',
+    vertical: '[&>[data-segment]~[data-segment]]:border-t [&>[data-segment]~[data-segment]]:border-primary',
 }
 
 const raisedUnderside =
@@ -152,7 +163,7 @@ const raisedUndersideRadius: Record<ButtonSize, string> = {
 }
 
 const raisedFaceBase =
-    'ui-button-face relative flex min-w-0 select-none items-center justify-center font-bold [[data-disabled]:not([aria-busy=true])>&]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
+    'ui-button-face relative flex min-w-0 select-none items-center justify-center font-bold [[data-disabled]:not([aria-busy=true])>&]:bg-hatch'
 
 const raisedFaces: Record<ButtonVariant, string> = {
     danger: `border-[color:color-mix(in_srgb,color-mix(in_srgb,theme(colors.salmon)_85%,theme(colors.red))_62%,black)] ${toneSolid.error} [[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] [[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-pressed]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[aria-pressed]:not([data-disabled]):active>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)] dark:[[data-popup-open]>&]:shadow-[inset_0_0_0_999px_rgb(0_0_0/0.1)]`,
@@ -266,6 +277,7 @@ function frameClassName({ appearance, variant, size, square, isSegment, stacked 
     }
     return cn(
         flatBase,
+        controlRadius[size],
         appearance === 'outline' ? cn(outlineTones[variant], outlineDisabled) : flatTones[variant],
         square ? flatSquarePadding[size] : flatPadding[size],
         isSegment && flatSegment,
@@ -472,9 +484,10 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(fu
                         ? cn(raisedGroupBase, raisedGroupOrientations[orientation], raisedRadius[size])
                         : cn(
                               flatGroupBase,
-                              appearance === 'outline' && outlineGroupBorder,
+                              controlRadius[size],
                               flatGroupOrientations[orientation],
-                              flatGroupTones[variant]
+                              appearance === 'outline' &&
+                                  cn(outlineGroupBorder, outlineGroupDividers[orientation], flatGroupTones[variant])
                           ),
                     className
                 )}

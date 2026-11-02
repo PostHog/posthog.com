@@ -30,7 +30,7 @@ const Viewport = React.forwardRef<HTMLDivElement, ScrollAreaViewportProps>(funct
 
 const Scrollbar = withClassName(
     BaseScrollArea.Scrollbar,
-    'pointer-events-none m-0.5 flex touch-none select-none rounded-full opacity-0 transition-opacity delay-300 duration-200 data-[hovering]:pointer-events-auto data-[scrolling]:pointer-events-auto data-[hovering]:opacity-100 data-[scrolling]:opacity-100 data-[hovering]:delay-0 data-[scrolling]:delay-0 data-[scrolling]:duration-0 data-[orientation=horizontal]:h-1.5 data-[orientation=vertical]:w-1.5 data-[orientation=horizontal]:flex-col'
+    'pointer-events-none m-0.5 flex touch-none select-none rounded-full opacity-0 transition-opacity delay-300 duration-200 motion-reduce:transition-none data-[hovering]:pointer-events-auto data-[scrolling]:pointer-events-auto data-[hovering]:opacity-100 data-[scrolling]:opacity-100 data-[hovering]:delay-0 data-[scrolling]:delay-0 data-[scrolling]:duration-0 data-[orientation=horizontal]:h-1.5 data-[orientation=vertical]:w-1.5 data-[orientation=horizontal]:flex-col'
 )
 
 const Thumb = withClassName(

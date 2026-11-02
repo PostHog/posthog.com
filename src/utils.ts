@@ -17,7 +17,7 @@ const typeRoleSizes = [
 ]
 
 const twMerge = extendTailwindMerge({
-    extend: { classGroups: { 'font-size': [{ text: typeRoleSizes }] } },
+    extend: { classGroups: { 'font-size': [{ text: typeRoleSizes }], 'bg-image': [{ bg: ['hatch'] }] } },
 })
 
 export function cn(...inputs: ClassValue[]): string {

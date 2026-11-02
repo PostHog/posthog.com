@@ -115,10 +115,10 @@ Site windows are frosted glass, so the color behind a field changes with the wal
 
 ### Animation
 
-Components animate with CSS only: transitions on `transform`, `opacity`, colors, SVG strokes, panel heights (Accordion, Collapsible), and popup size (NavigationMenu, when the user moves between panels), and one keyframe animation (the site's `shimmer`) for an indeterminate progress bar. No JavaScript runs per frame, so the components stay cheap on pages that use many of them.
+Components animate with CSS where possible: transitions on `transform`, `opacity`, colors, SVG strokes, panel heights (Accordion, Collapsible), and popup size (NavigationMenu, when the user moves between panels), and one keyframe animation (the site's `shimmer`) for an indeterminate progress bar. Content height changes (`useSmoothHeight`, used by Tabs, Combobox, and Textarea), Banner dismissal, and Combobox chip movement use the Web Animations API. Only an open Combobox runs a short frame loop while its field grows, and it skips that loop under reduced motion. Everything else stays cheap on pages that use many components. The shared patterns (depth, states, focus, motion, grain, glass, color, size, radius, and long text) are documented on the [Foundations](/components/ui/foundations) page.
 
 - Checkbox and radio indicators stay mounted (`keepMounted`), so a toggle changes one attribute and the DOM does not change.
-- Every animated part has `motion-reduce:transition-none`.
+- Every animated part has a reduced-motion rule, such as `motion-reduce:transition-none`. Decorative loops stop; spinners keep turning slowly. Use `usePrefersReducedMotion` from `utils.ts` for JavaScript-driven motion.
 - Popups animate with Base UI's `data-[starting-style]` and `data-[ending-style]` attributes. Animations skip only when Base UI reports `data-instant="group"` (switching between menubar menus) or `"trigger-change"`. Do not skip on every `data-instant`: Base UI also sets it for keyboard and right-click opens.
 - Popups that contain an arrow must be `relative`. Otherwise the arrow measures from the positioner when the opening transform ends, and moves by the popup's border width.
 - `Slider.Value` rolls each digit as a column of 0–9 that CSS draws with `content`, so the digits are not DOM text. Each step is one line height, so keep that line height a whole number of pixels. The default `text-sm` gives 20px.

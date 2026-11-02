@@ -13,6 +13,7 @@ import {
     cardInnerTopRadius,
     cardLevels,
     insetFocusRing,
+    flatPressable,
     plainCode,
     scrollbarHidden,
 } from '../styles'
@@ -216,7 +217,8 @@ function SnippetContent({
                     aria-expanded={expanded}
                     onClick={() => setExpanded(!expanded)}
                     className={cn(
-                        'flex min-h-10 w-full items-center justify-between gap-3 border-0 border-t px-4 py-1.5 text-left text-[13px] text-secondary transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] hover:text-primary active:bg-[rgb(var(--text-primary)/0.1)] motion-reduce:transition-none',
+                        'flex min-h-10 w-full items-center justify-between gap-3 border-0 border-t px-4 py-1.5 text-left text-[13px] text-secondary hover:text-primary',
+                        flatPressable,
                         cardInnerBottomRadius,
                         cardBarSurface,
                         insetFocusRing

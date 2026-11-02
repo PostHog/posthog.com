@@ -1,6 +1,13 @@
 import React from 'react'
 import { Slider as BaseSlider } from '@base-ui/react/slider'
-import { controlLabel, disabledControl, grainSurface, trackSurface } from '../styles'
+import {
+    barForcedIndicator,
+    barForcedTrack,
+    controlLabel,
+    disabledControl,
+    grainSurface,
+    trackSurface,
+} from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
 const RANGE_SEPARATOR = ' – '
@@ -71,10 +78,10 @@ const Control = withClassName(
 
 const Track = withClassName(
     BaseSlider.Track,
-    `relative h-2 w-full rounded-full data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-32 data-[orientation=vertical]:w-2 ${trackSurface}`
+    `relative h-2 w-full rounded-full data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-32 data-[orientation=vertical]:w-2 ${trackSurface} ${barForcedTrack}`
 )
 
-const Indicator = withClassName(BaseSlider.Indicator, 'rounded-full bg-orange')
+const Indicator = withClassName(BaseSlider.Indicator, `rounded-full bg-orange ${barForcedIndicator}`)
 
 const Thumb = withClassName(
     BaseSlider.Thumb,

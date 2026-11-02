@@ -3,7 +3,7 @@ import { Toast as BaseToast } from '@base-ui/react/toast'
 import { IconX } from '@posthog/icons'
 import { cn } from '../../../utils'
 import { Button, IconButton } from '../Button'
-import { raisedOverlayShadowMd } from '../styles'
+import { grainSurface, raisedOverlayShadowMd } from '../styles'
 import { colorIcon, isColorOrStatus, resolveColor } from '../colors'
 import { statusIcon } from '../toneIcons'
 import { Spinner } from '../Spinner'
@@ -21,9 +21,9 @@ const toastViewport =
     'pointer-events-none fixed bottom-4 right-0 top-auto z-50 m-0 h-[min(75vh,720px)] w-[calc(390px+1rem)] max-w-[calc(100vw-1rem)] outline-none [mask-image:linear-gradient(to_top,#000_calc(100%-8rem),transparent)]'
 
 const toastMotion =
-    "pointer-events-auto touch-pan-y absolute bottom-0 right-4 z-[calc(1000-var(--toast-index))] w-[calc(100%-1rem)] [--gap:0.5rem] [--stack-y:calc(var(--toast-offset-y,0px)*-1-var(--toast-index,0)*var(--gap))] [transform:translateX(var(--toast-swipe-movement-x,0px))_translateY(var(--stack-y))] transition-[transform,opacity] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] after:absolute after:left-0 after:top-full after:h-[calc(var(--gap)+1px)] after:w-full after:content-[''] data-[starting-style]:[transform:translateX(calc(100%+1rem))_translateY(var(--stack-y))] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 [&[data-ending-style]:not([data-swipe-direction])]:[transform:translateX(calc(100%+1rem))_translateY(var(--stack-y))] data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+100%+1rem))_translateY(var(--stack-y))] data-[limited]:pointer-events-none data-[limited]:opacity-0 motion-reduce:transition-[opacity]"
+    "pointer-events-auto touch-pan-y absolute bottom-0 right-4 z-[calc(1000-var(--toast-index))] w-[calc(100%-1rem)] [--gap:0.5rem] [--stack-y:calc(var(--toast-offset-y,0px)*-1-var(--toast-index,0)*var(--gap))] [transform:translateX(var(--toast-swipe-movement-x,0px))_translateY(var(--stack-y))] transition-[transform,opacity] duration-[400ms] ease-[cubic-bezier(0.22,1,0.36,1)] before:absolute before:left-0 before:top-full before:h-[calc(var(--gap)+1px)] before:w-full before:content-[''] data-[starting-style]:[transform:translateX(calc(100%+1rem))_translateY(var(--stack-y))] data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 [&[data-ending-style]:not([data-swipe-direction])]:[transform:translateX(calc(100%+1rem))_translateY(var(--stack-y))] data-[ending-style]:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+100%+1rem))_translateY(var(--stack-y))] data-[limited]:pointer-events-none data-[limited]:opacity-0 motion-reduce:transition-[opacity]"
 
-const toastSurface = `rounded-md border border-primary bg-primary text-primary ${raisedOverlayShadowMd}`
+const toastSurface = `${grainSurface} rounded-md border border-primary bg-primary text-primary ${raisedOverlayShadowMd}`
 
 export const globalToastManager = BaseToast.createToastManager<ToastData>()
 
@@ -52,9 +52,7 @@ const ToastList = (): JSX.Element => {
                     >
                         <StatusIcon type={toast.type} />
                         <div className="flex min-w-0 flex-1 flex-col gap-1">
-                            <BaseToast.Title
-                                className={`my-0 text-[15px] font-semibold leading-5 text-primary ${wrapText}`}
-                            />
+                            <BaseToast.Title className={`my-0 text-heading-sm text-primary ${wrapText}`} />
                             <BaseToast.Description className={`my-0 text-sm text-secondary ${wrapText}`} />
                         </div>
                         <div className="-my-[3px] flex min-w-0 max-w-[50%] items-center gap-1">

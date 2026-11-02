@@ -2,8 +2,17 @@ import './grain.css'
 
 export const grainSurface = 'ui-grain'
 
-export const flatPressable =
-    'transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.06)] [&:not([data-disabled]):not([aria-disabled=true]):active]:bg-[rgb(var(--text-primary)/0.12)] motion-reduce:transition-none'
+export const neutralHover = 'hover:bg-[rgb(var(--text-primary)/0.06)]'
+
+export const neutralPress =
+    '[&:not([data-disabled]):not([aria-disabled=true]):active]:bg-[rgb(var(--text-primary)/0.12)] active:duration-0'
+
+export const neutralLatched =
+    'data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)]'
+
+export const controlRadius = { sm: 'rounded-[4px]', md: 'rounded-[6px]', lg: 'rounded-[6px]' } as const
+
+export const flatPressable = `transition-colors duration-150 ease-out ${neutralHover} ${neutralPress} motion-reduce:transition-none`
 
 export const focusRing =
     'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--text-primary))]'
@@ -16,8 +25,7 @@ export const insetFocusRing =
 export const overlayShadowSm =
     'shadow-[0_1px_2px_rgb(0_0_0/0.08),0_4px_12px_-2px_rgb(0_0_0/0.14)] dark:shadow-[0_1px_2px_rgb(0_0_0/0.4),0_4px_12px_-2px_rgb(0_0_0/0.5)]'
 
-export const raisedOverlayShadowMd =
-    'shadow-[0_1px_0_rgb(var(--border)),0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] dark:shadow-[0_1px_0_rgb(var(--border)),0_10px_38px_-10px_rgb(0_0_0/0.7),0_10px_20px_-15px_rgb(0_0_0/0.5)]'
+export const raisedOverlayShadowMd = `${edgeSpace} shadow-[0_1px_0_rgb(0_0_0/0.25),0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] dark:shadow-[0_1px_0_rgb(0_0_0/0.3),0_10px_38px_-10px_rgb(0_0_0/0.7),0_10px_20px_-15px_rgb(0_0_0/0.5)]`
 
 export const overlayShadowLg =
     'shadow-[0_24px_64px_-12px_rgb(0_0_0/0.35),0_12px_24px_-12px_rgb(0_0_0/0.25)] dark:shadow-[0_24px_64px_-12px_rgb(0_0_0/0.7),0_12px_24px_-12px_rgb(0_0_0/0.5)]'
@@ -52,8 +60,8 @@ export const cardBarSurface =
     'border-[rgb(var(--text-primary)/0.12)] bg-[rgb(var(--text-primary)/0.045)] dark:bg-white/[0.035]'
 
 export const cardLevels = {
-    1: `${grainSurface} ${edgeSpace} [--ui-card-radius:8px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.13)] bg-white/60 shadow-[0_1px_0_rgb(0_0_0/0.05),0_1px_2px_-1px_rgb(0_0_0/0.08)] dark:border-[rgb(var(--text-primary)/0.12)] dark:bg-white/[0.06] dark:shadow-[0_1px_0_rgb(0_0_0/0.3)]`,
-    2: `${grainSurface} [--ui-card-radius:6px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.1)] bg-[rgb(var(--text-primary)/0.035)] shadow-[inset_0_1px_0_rgb(0_0_0/0.08)] dark:bg-black/20 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]`,
+    1: `${grainSurface} ${edgeSpace} [--ui-card-radius:8px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.13)] bg-white/60 shadow-[0_1px_0_rgb(0_0_0/0.25),0_1px_2px_-1px_rgb(0_0_0/0.08)] dark:border-[rgb(var(--text-primary)/0.12)] dark:bg-white/[0.06] reduce-transparency:bg-white dark:reduce-transparency:bg-accent-dark dark:shadow-[0_1px_0_rgb(0_0_0/0.3)]`,
+    2: `${grainSurface} [--ui-card-radius:6px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.1)] bg-[rgb(var(--text-primary)/0.035)] shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-black/20 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]`,
 } as const
 
 export const cardInnerTopRadius = 'rounded-t-[calc(var(--ui-card-radius)_-_1px)]'
@@ -63,7 +71,7 @@ export const cardInnerBottomRadius = 'rounded-b-[calc(var(--ui-card-radius)_-_1p
 export const cardAppearances = {
     glass: '',
     solid: 'bg-white dark:bg-accent-dark dark:[background-image:linear-gradient(rgb(255_255_255/0.025),rgb(255_255_255/0.025))]',
-    dashed: 'border-dashed border-[rgb(var(--text-primary)/0.28)] dark:border-[rgb(var(--text-primary)/0.28)]',
+    dashed: 'border-dashed border-[rgb(var(--text-primary)/0.28)] shadow-none dark:border-[rgb(var(--text-primary)/0.28)] dark:shadow-none',
 } as const
 
 export const surfaceAppearances = {
@@ -105,8 +113,7 @@ export const menubarAppearances = {
     plain: 'flex items-center gap-px py-0.5',
 } as const
 
-export const menubarTrigger =
-    'flex select-none items-center gap-0.5 rounded px-1.5 py-0.5 text-[13px] font-medium leading-none text-primary outline-none transition-colors duration-150 hover:bg-[rgb(var(--text-primary)/0.07)] focus-visible:bg-[rgb(var(--text-primary)/0.07)] active:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:text-muted motion-reduce:transition-none'
+export const menubarTrigger = `flex select-none items-center gap-0.5 rounded px-1.5 py-0.5 text-[13px] font-medium leading-none text-primary outline-none transition-colors duration-150 ${neutralHover} focus-visible:bg-[rgb(var(--text-primary)/0.06)] ${neutralPress} ${neutralLatched} data-[disabled]:text-muted motion-reduce:transition-none`
 
 export const menuSeparator = 'm-[5px] h-px bg-border'
 
@@ -116,18 +123,17 @@ export const menuGroupLabel =
 export const fieldDivider = 'border-[rgb(var(--text-primary)/0.16)]'
 
 export const controlSurface =
-    'border border-[rgb(var(--text-primary)/0.16)] bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.2)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]'
+    'border border-[rgb(var(--text-primary)/0.16)] bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]'
 
 export const fieldSurface = `${controlSurface} rounded-md transition-[border-color,box-shadow,background-color] duration-150 ease-out hover:border-[rgb(var(--text-primary)/0.36)] motion-reduce:transition-none`
 
 export const fieldFocusVisible =
-    'focus-visible:border-orange focus-visible:bg-white/70 focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.2),0_0_0_3px_rgb(235_157_42/0.28)] dark:focus-visible:bg-white/[0.11] dark:focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
+    'focus-visible:border-orange focus-visible:bg-white/70 focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.25),0_0_0_3px_rgb(235_157_42/0.28)] dark:focus-visible:bg-white/[0.11] dark:focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
 
 export const fieldFocusWithin =
-    'has-[:focus-visible]:border-orange has-[:focus-visible]:bg-white/70 has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.2),0_0_0_3px_rgb(235_157_42/0.28)] dark:has-[:focus-visible]:bg-white/[0.11] dark:has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
+    'has-[:focus-visible]:border-orange has-[:focus-visible]:bg-white/70 has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.25),0_0_0_3px_rgb(235_157_42/0.28)] dark:has-[:focus-visible]:bg-white/[0.11] dark:has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
 
-export const disabledHatch =
-    '[&[data-disabled]:not([aria-busy=true])]:bg-[repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.08)_0_1px,transparent_1px_6px)]'
+export const disabledHatch = '[&[data-disabled]:not([aria-busy=true])]:bg-hatch'
 
 export const fieldState = `data-[disabled]:cursor-not-allowed data-[disabled]:border-dashed data-[disabled]:border-[rgb(var(--text-primary)/0.3)] data-[disabled]:bg-transparent ${disabledHatch} data-[disabled]:opacity-70 data-[disabled]:shadow-none dark:data-[disabled]:bg-transparent dark:data-[disabled]:shadow-none data-[invalid]:border-red dark:data-[invalid]:border-yellow`
 
@@ -186,13 +192,13 @@ const inputGroupBase = `${fieldState} flex min-h-8 w-full cursor-text items-cent
 export const inputGroupFor = (appearance: FieldAppearance): string =>
     `${fieldAppearanceSurfaces[appearance]} ${fieldAppearanceFocusWithin[appearance]} ${inputGroupBase}`
 
-export const liquidGlassSurface = `bg-white/45 text-black backdrop-blur-xl backdrop-saturate-[1.8] shadow-[inset_0_1px_0_rgb(255_255_255/0.75),inset_0_0_0_1px_rgb(255_255_255/0.4),0_6px_18px_-6px_rgb(0_0_0/0.25)] dark:bg-black/30 dark:text-white dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.22),inset_0_0_0_1px_rgb(255_255_255/0.12),0_6px_18px_-6px_rgb(0_0_0/0.6)]`
+export const liquidGlassSurface = `bg-white/45 text-black backdrop-blur-xl backdrop-saturate-[1.8] shadow-[inset_0_1px_0_rgb(255_255_255/0.75),inset_0_0_0_1px_rgb(255_255_255/0.4),0_6px_18px_-6px_rgb(0_0_0/0.25)] dark:bg-black/30 dark:text-white dark:shadow-[inset_0_1px_0_rgb(255_255_255/0.22),inset_0_0_0_1px_rgb(255_255_255/0.12),0_6px_18px_-6px_rgb(0_0_0/0.6)] reduce-transparency:!bg-primary reduce-transparency:!text-primary reduce-transparency:backdrop-blur-none reduce-transparency:backdrop-saturate-100`
 
 export type SearchAppearance = FieldAppearance | 'pill' | 'floating'
 
 const searchRoundSurfaces: Record<'pill' | 'floating', string> = {
     pill: `rounded-full border border-[rgb(var(--text-primary)/0.14)] bg-white/60 shadow-[0_1px_2px_rgb(0_0_0/0.05)] hover:border-[rgb(var(--text-primary)/0.28)] dark:bg-white/[0.08] dark:shadow-none ${fieldTransition} has-[:focus-visible]:border-orange has-[:focus-visible]:bg-white/80 has-[:focus-visible]:shadow-[0_1px_2px_rgb(0_0_0/0.05),0_0_0_3px_rgb(235_157_42/0.22)] dark:has-[:focus-visible]:bg-white/[0.11] dark:has-[:focus-visible]:shadow-[0_0_0_3px_rgb(235_157_42/0.3)]`,
-    floating: `rounded-full border-0 ${liquidGlassSurface} transition-[background-color,box-shadow] duration-150 ease-out hover:bg-white/55 has-[:focus-visible]:bg-white/65 has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(255_255_255/0.75),inset_0_0_0_1px_rgb(255_255_255/0.4),0_6px_18px_-6px_rgb(0_0_0/0.25),0_0_0_3px_rgb(235_157_42/0.35)] dark:hover:bg-black/40 dark:has-[:focus-visible]:bg-black/45 dark:has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22),inset_0_0_0_1px_rgb(255_255_255/0.12),0_6px_18px_-6px_rgb(0_0_0/0.6),0_0_0_3px_rgb(235_157_42/0.4)] motion-reduce:transition-none`,
+    floating: `${grainSurface} rounded-full border-0 ${liquidGlassSurface} transition-[background-color,box-shadow] duration-150 ease-out hover:bg-white/55 has-[:focus-visible]:bg-white/65 has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(255_255_255/0.75),inset_0_0_0_1px_rgb(255_255_255/0.4),0_6px_18px_-6px_rgb(0_0_0/0.25),0_0_0_3px_rgb(235_157_42/0.35)] dark:hover:bg-black/40 dark:has-[:focus-visible]:bg-black/45 dark:has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22),inset_0_0_0_1px_rgb(255_255_255/0.12),0_6px_18px_-6px_rgb(0_0_0/0.6),0_0_0_3px_rgb(235_157_42/0.4)] motion-reduce:transition-none`,
 }
 
 export const searchGroupFor = (appearance: SearchAppearance): string =>
@@ -201,7 +207,7 @@ export const searchGroupFor = (appearance: SearchAppearance): string =>
         : inputGroupFor(appearance)
 
 export const trackSurface =
-    'bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.12)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.45)]'
+    'bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.45)]'
 
 export const chip =
     'inline-flex h-6 min-w-0 max-w-full shrink-0 items-center gap-1 rounded-full border border-[rgb(var(--text-primary)/0.1)] bg-white/60 px-2 text-[13px] font-medium leading-4 text-primary has-[button]:pr-px dark:bg-white/[0.1]'
@@ -210,7 +216,7 @@ export const chipImage = '-ml-1 size-4 shrink-0 rounded-full object-cover'
 
 export const chipIcon = 'flex size-3.5 shrink-0 items-center justify-center text-secondary [&>svg]:size-full'
 
-export const chipRemove = `flex size-5 shrink-0 items-center justify-center rounded-full text-secondary hover:bg-[rgb(var(--text-primary)/0.07)] hover:text-primary ${insetFocusRing}`
+export const chipRemove = `flex size-5 shrink-0 items-center justify-center rounded-full text-secondary ${neutralHover} hover:text-primary ${insetFocusRing}`
 
 export const listItem =
     'min-h-[25px] cursor-default select-none items-center gap-2 rounded py-1 text-sm leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'
@@ -231,11 +237,13 @@ export const controlLabel = 'text-sm font-semibold text-primary data-[disabled]:
 
 export const barValue = 'col-start-2 text-right text-sm tabular-nums text-secondary'
 
-export const barTrack =
-    'col-span-2 h-2 overflow-hidden rounded-full bg-[rgb(var(--text-primary)/0.08)] forced-colors:border forced-colors:border-[color:CanvasText] shadow-[inset_0_1px_0_rgb(0_0_0/0.06)] dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)]'
+export const barForcedTrack = 'forced-colors:border forced-colors:border-[color:CanvasText]'
 
-export const barIndicator =
-    'block h-full rounded-full bg-orange forced-colors:bg-[color:Highlight] forced-colors:[forced-color-adjust:none] transition-[width] duration-500 ease-out motion-reduce:transition-none'
+export const barForcedIndicator = 'forced-colors:bg-[color:Highlight] forced-colors:[forced-color-adjust:none]'
+
+export const barTrack = `col-span-2 h-2 overflow-hidden rounded-full bg-[rgb(var(--text-primary)/0.08)] ${barForcedTrack} shadow-[inset_0_1px_0_rgb(0_0_0/0.06)] dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)]`
+
+export const barIndicator = `block h-full rounded-full bg-orange ${barForcedIndicator} transition-[width] duration-500 ease-out motion-reduce:transition-none`
 
 export type Tone = 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'brand'
 

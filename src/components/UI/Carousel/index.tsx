@@ -37,7 +37,7 @@ const slideBasis =
     'calc((100% - var(--carousel-peek) - (var(--carousel-n) - 1 + var(--carousel-peek-gaps)) * var(--carousel-gap)) / var(--carousel-n))'
 
 const sideArrow =
-    'absolute top-1/2 z-[1] -translate-y-1/2 scale-90 opacity-0 transition-[opacity,transform,background-color] duration-300 ease-out group-hover/carousel:scale-100 group-hover/carousel:opacity-100 group-focus-within/carousel:scale-100 group-focus-within/carousel:opacity-100 [@media(hover:none)]:scale-100 [@media(hover:none)]:opacity-100'
+    'absolute top-1/2 z-[1] -translate-y-1/2 motion-safe:scale-90 opacity-0 transition-[opacity,transform,background-color] duration-300 ease-out motion-reduce:transition-none motion-safe:group-hover/carousel:scale-100 group-hover/carousel:opacity-100 motion-safe:group-focus-within/carousel:scale-100 group-focus-within/carousel:opacity-100 motion-safe:[@media(hover:none)]:scale-100 [@media(hover:none)]:opacity-100'
 
 const isKeyboardFocus = (event: FocusEvent<HTMLElement>): boolean => {
     try {

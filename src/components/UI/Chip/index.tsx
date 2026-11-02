@@ -2,6 +2,7 @@ import React from 'react'
 import { IconX } from '@posthog/icons'
 import SiteLink from 'components/Link'
 import type { Props as SiteLinkProps } from 'components/Link'
+import { TruncatedText } from '../truncation'
 import { cn } from '../../../utils'
 import { chip, chipIcon, chipImage, chipRemove, focusRing } from '../styles'
 
@@ -64,7 +65,7 @@ function ChipContent({ children, icon, image, size = 'md' }: ChipContentProps): 
     return (
         <>
             {leading}
-            {isInline ? children : <span className="truncate">{children}</span>}
+            {isInline ? children : <TruncatedText>{children}</TruncatedText>}
         </>
     )
 }

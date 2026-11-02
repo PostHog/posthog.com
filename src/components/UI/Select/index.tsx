@@ -73,7 +73,10 @@ const Trigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(function
     )
 })
 
-const Value = withClassName(BaseSelect.Value, 'truncate data-[placeholder]:text-muted')
+const Value = withClassName(
+    BaseSelect.Value,
+    'truncate data-[placeholder]:text-muted dark:data-[placeholder]:text-[rgb(var(--text-primary)/0.5)]'
+)
 
 const Icon = React.forwardRef<HTMLSpanElement, BaseSelect.Icon.Props>(function SelectIcon(
     { className, children, ...props },

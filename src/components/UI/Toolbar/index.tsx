@@ -1,6 +1,6 @@
 import React from 'react'
 import { Toolbar as BaseToolbar } from '@base-ui/react/toolbar'
-import { focusRing, surfaceAppearances, textInput } from '../styles'
+import { focusRing, neutralHover, neutralLatched, surfaceAppearances, textInput } from '../styles'
 import type { SurfaceAppearance } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
@@ -22,7 +22,7 @@ const Root = React.forwardRef<HTMLDivElement, ToolbarRootProps>(function Toolbar
     )
 })
 
-const toolbarControl = `inline-flex h-7 min-w-7 shrink-0 select-none items-center justify-center gap-1 rounded border border-transparent px-1.5 text-sm text-primary transition-colors duration-150 ease-out hover:bg-[rgb(var(--text-primary)/0.07)] data-[pressed]:bg-[rgb(var(--text-primary)/0.1)] data-[popup-open]:bg-[rgb(var(--text-primary)/0.1)] data-[disabled]:pointer-events-none data-[disabled]:text-muted motion-reduce:transition-none ${focusRing}`
+const toolbarControl = `inline-flex h-7 min-w-7 shrink-0 select-none items-center justify-center gap-1 rounded border border-transparent px-1.5 text-sm text-primary transition-colors duration-150 ease-out ${neutralHover} ${neutralLatched} data-[disabled]:pointer-events-none data-[disabled]:text-muted motion-reduce:transition-none ${focusRing}`
 
 const Button = withClassName(BaseToolbar.Button, toolbarControl)
 

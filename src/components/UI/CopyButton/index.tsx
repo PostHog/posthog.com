@@ -3,6 +3,7 @@ import { IconCheck, IconCopy, IconX } from '@posthog/icons'
 import { IconButton } from '../Button'
 import type { IconButtonProps } from '../Button'
 import { toneIcon } from '../styles'
+import { colorIcon, resolveColor } from '../colors'
 import { cn } from '../../../utils'
 
 export type CopyButtonActions = { copy: () => void }
@@ -85,7 +86,7 @@ export const CopyButton = React.forwardRef<HTMLElement, CopyButtonProps>(functio
                         <IconX
                             className={cn(
                                 iconTransition,
-                                tintResult && toneIcon.error,
+                                tintResult && colorIcon[resolveColor('error')],
                                 status === 'error' ? 'scale-100 opacity-100' : 'scale-75 opacity-0'
                             )}
                         />

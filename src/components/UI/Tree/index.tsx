@@ -2,6 +2,7 @@ import React from 'react'
 import { Collapsible as BaseCollapsible } from '@base-ui/react/collapsible'
 import { IconChevronRight, IconDocument, IconFolder, IconFolderOpen } from '@posthog/icons'
 import SiteLink from 'components/Link'
+import { TruncatedText } from '../truncation'
 import { cn } from '../../../utils'
 import { Checkbox } from '../Checkbox'
 import { Collapsible } from '../Collapsible'
@@ -213,7 +214,7 @@ function TreeItemLabel({
                     {icon}
                 </span>
             )}
-            <span className="min-w-0 truncate">{children}</span>
+            <TruncatedText>{children}</TruncatedText>
         </>
     )
 }

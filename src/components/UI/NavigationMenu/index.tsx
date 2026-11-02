@@ -80,7 +80,7 @@ const Content = React.forwardRef<HTMLDivElement, BaseNavigationMenu.Content.Prop
     )
 })
 
-const contentLink = `${menuItem} ${wrapText} h-auto min-h-[25px] flex-col items-start justify-center gap-1 py-1.5 no-underline hover:bg-[rgb(var(--text-primary)/0.07)] focus-visible:bg-[rgb(var(--text-primary)/0.07)] data-[highlighted]:bg-[rgb(var(--text-primary)/0.07)]`
+const contentLink = `${menuItem} ${wrapText} h-auto min-h-[25px] flex-col items-start justify-center gap-1 py-1.5 no-underline hover:bg-accent focus-visible:bg-accent data-[highlighted]:bg-accent`
 
 const listLink = `${menubarTrigger} no-underline`
 

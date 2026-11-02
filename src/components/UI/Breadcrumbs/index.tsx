@@ -21,16 +21,18 @@ const Item = React.forwardRef<HTMLLIElement, React.ComponentPropsWithoutRef<'li'
     return <li ref={ref} className={cn('min-w-0 shrink', className)} {...props} />
 })
 
-function Link({ className, contextMenu = false, ...props }: SiteLinkProps): JSX.Element {
+function Link({ className, children, contextMenu = false, ...props }: SiteLinkProps): JSX.Element {
     return (
         <SiteLink
             contextMenu={contextMenu}
             className={cn(
-                `block truncate text-secondary hover:text-primary no-underline hover:underline underline-offset-4 ${focusRing}`,
+                `block text-secondary hover:text-primary no-underline hover:underline underline-offset-4 ${focusRing}`,
                 className
             )}
             {...props}
-        />
+        >
+            <TruncatedText>{children}</TruncatedText>
+        </SiteLink>
     )
 }
 
@@ -52,10 +54,14 @@ const Separator = React.forwardRef<HTMLLIElement, React.ComponentPropsWithoutRef
 })
 
 const Page = React.forwardRef<HTMLSpanElement, React.ComponentPropsWithoutRef<'span'>>(function BreadcrumbsPage(
-    { className, ...props },
+    { className, children, ...props },
     ref
 ) {
-    return <span ref={ref} {...props} aria-current="page" className={cn('block truncate text-primary', className)} />
+    return (
+        <span ref={ref} {...props} aria-current="page" className={cn('block text-primary', className)}>
+            <TruncatedText>{children}</TruncatedText>
+        </span>
+    )
 })
 
 function CollapsedItems({ items }: { items: React.ReactElement<{ children?: React.ReactNode }>[] }): JSX.Element {

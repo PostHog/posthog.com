@@ -1,4 +1,5 @@
 import React from 'react'
+import { TruncatedText } from '../truncation'
 import { cn } from '../../../utils'
 import {
     cardBarSurface,
@@ -122,7 +123,9 @@ const TitleBar = ({ icon, meta, actions, className, children, ...props }: CardTi
                     {icon}
                 </span>
             )}
-            <h3 className="m-0 min-w-0 flex-1 truncate text-[15px] font-semibold leading-5 text-primary">{children}</h3>
+            <h3 className="m-0 min-w-0 flex-1 text-heading-sm text-primary">
+                <TruncatedText>{children}</TruncatedText>
+            </h3>
             {meta && <span className="shrink-0 font-code text-[13px] text-secondary">{meta}</span>}
             {actions && <span className="-my-1 -mr-1.5 flex shrink-0 items-center gap-1">{actions}</span>}
         </div>

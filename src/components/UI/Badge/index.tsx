@@ -1,6 +1,7 @@
 import React from 'react'
 import SiteLink from 'components/Link'
 import type { Props as SiteLinkProps } from 'components/Link'
+import { TruncatedText } from '../truncation'
 import { cn } from '../../../utils'
 import { colorSoft, colorSolid } from '../colors'
 import type { ColorName } from '../colors'
@@ -111,7 +112,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(function Badg
                     {icon}
                 </span>
             )}
-            {size === 'inline' ? children : <span className="min-w-0 truncate leading-4">{children}</span>}
+            {size === 'inline' ? children : <TruncatedText className="leading-4">{children}</TruncatedText>}
         </>
     )
 
