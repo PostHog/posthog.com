@@ -38,6 +38,7 @@ All new broadcasts and automations should use these defaults:
 
 - **Messaging limit:** Enable the default messaging limit, which ensures each user gets no more than one email every two days. Apply this limit to all campaigns and broadcasts, unless the message is urgent.
 - **UTM tracking:** Enable UTM tracking on all new broadcasts and automations, so we can measure what each email does. We have setup default UTM parameters in PostHog that should be applied automatically.
+
 ### Conversion goals
 
 A good thing about using Workflows is that we can be very intentional about the goal we want that email to achieve. 
@@ -64,6 +65,8 @@ For example, the <SmallTeam slug="developer-marketing" />:
 - Adds the `[EMAIL ONBOARDING]` prefix to the titles of its onboarding automations. This makes them different from the workflows that the <SmallTeam slug="growth" /> and the <SmallTeam slug="onboarding" /> run.
 - Adds the `[EMAIL ONBOARDING]` prefix to the titles of the dynamic cohorts that those automations use.
 
+Before you edit, pause, or delete a workflow or cohort that has the tag or prefix of a different team, ask that team first. A change to a cohort can change who gets a different team's emails.
+
 ## Addressing emails
 
 We prefer marketing emails to come from a named person where possible, so users can reply with feedback. Only use generic addresses, such as hey@posthog.com, for very broad comms.
@@ -74,17 +77,18 @@ If you're sending the email and are happy to receive replies, feel free to set y
 
 ## Targeting emails
 
-A couple of changes that impact who we send our emails to:
+A couple of changes that impact who we send our emails to.
+
 Since we started moving to Workflows, Workflows has automatically paused some broadcasts for loud comms, such as SDK update notices. Those broadcasts targeted huge numbers of users, and many of the email addresses are no longer in use. If this keeps happening, it harms our [sending reputation](/docs/workflows/sending-reputation) and our emails end up in spam.
-
-
 
 The way users interact with PostHog is also changing. Previously, we relied on a `user has logged in` property to check if they were active. Now, users don't need to login at all to interact with their PostHog data, if they use our MCP, for example.
 
 We solve both of these issues by using the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, interacting with `@PostHog` in Slack, loading the toolbar, or creating a feature flag. 
 
 **Add this cohort to all broadcasts by default.**
-If you want to notify a specific group of users about a breaking change, incident, or other one-off scenario, you can create the cohort yourself and add it to the [Github issue](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md). It really helps the Developer Marketing team and speeds up the process to get comms out. 
+
+If you want to notify a specific group of users about a breaking change, incident, or other one-off scenario, you can create the cohort yourself and add it to the [Github issue](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md). It really helps the Developer Marketing team and speeds up the process to get comms out. Give the cohort the same title prefix as the workflow that uses it. See [naming and tagging workflows](#naming-and-tagging-workflows).
+
 ## Before you send
 
 - **Send yourself a test.** Check it on mobile and in dark mode, click every link, and make sure every Liquid variable has a fallback.
@@ -92,7 +96,7 @@ If you want to notify a specific group of users about a breaking change, inciden
 - **Pick the right message category.** Every email needs the correct category so unsubscribes work. Never label a marketing email as transactional or `Service updates` to get around opt-outs.
 - **Add alt text to every image.** Some email clients block images, so never put important information only in an image.
 - **Do a test run of your workflow**: a test run pushes one made-up person through the workflow, one step at a time. This lets you know if it's working as you planned, and logs any errors you need to fix. Pro tip: ask PostHog AI to run it for you, and flag any edits needed. 
-
+- **Take care when you edit a live workflow.** Your changes also reach people who are already in the workflow. Read [editing a live workflow](/docs/workflows/editing-live-workflows) before you publish a change.
 
 ## After you send
 
@@ -129,6 +133,7 @@ The changelog email is part of [the new release process](/handbook/marketing/pro
 Every two weeks, we use PostHog Workflows to send a broadcast with the highlights from [the weekly changelog](/changelog). We pick three or four of the most impactful changes, and the top spot usually goes to a new beta feature. We share a test with the team before we send it to users. 
 
 We categorize these emails as `Changelog updates` in Workflows, so users can manage their subscriptions. To keep deliverability high, we target users in the [active users cohort](#targeting-emails). 
+
 If you have suggestions for topics to highlight or experiments to try in the changelog, loop Juliana in `#team-developer-marketing`. 
 
 ### PostHog for Startups
@@ -200,7 +205,7 @@ A user can join a waitlist or opt in to a feature preview through [the feature p
 
 When a feature moves from concept to alpha or beta, users who registered interest are automatically opted in to the new stage and a `user moved feature preview stage` event fires. We then email them to say the feature is enabled, and ask for feedback.
 
-> **Launching a beta?** Let the Brand team know in <PrivateLink url="https://posthog.slack.com/archives/C083V7C6GKE">the team Slack</PrivateLink>. The team can then add your beta to the beta onboarding flow and plan any marketing announcements.
+> **Launching a beta?** Let the <SmallTeam slug="developer-marketing" /> know in #team-developer-marketing. The team can then add your beta to the beta onboarding flow and plan any marketing announcements.
 
 
 #### Onboarding - new hires
@@ -208,7 +213,7 @@ This is an internal email flow for new hires, which triggers whenever a new user
 
 This campaign runs for a new hire's first 30 days and sends them 7 emails with information to help them get set up at PostHog. 
 
-There's no way to unsubscribe from these emails, but if you're triggering them with test accounts then let the Brand team know and they can exclude you from the campaign. 
+There's no way to unsubscribe from these emails, but if you're triggering them with test accounts then let the <SmallTeam slug="developer-marketing" /> know and they can exclude you from the campaign. 
 
 ### Other email campaigns
 We also run several smaller campaigns. These include:
