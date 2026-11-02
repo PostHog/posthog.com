@@ -9,6 +9,7 @@ import {
     IconGraph,
 } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import { IconMCP } from 'components/OSIcons'
 import { getTool } from '../../data/tools'
 
 // MCP Analytics is a beta product (@posthog/mcp on npm) with a dedicated scene in the app
@@ -20,7 +21,7 @@ import { getTool } from '../../data/tools'
 
 export const mcpAnalytics = {
     ...getTool('mcp_analytics'),
-    Icon: IconPlug,
+    Icon: IconMCP,
     type: 'mcp_analytics',
     color: 'blue',
     colorSecondary: 'sky-blue',
