@@ -356,8 +356,35 @@ export const amplitude = {
         error_tracking: {
             available: false,
         },
+        // Agent Analytics
         ai_observability: {
             available: true,
+            tracing: {
+                features: {
+                    hierarchical_traces: true,
+                    tool_call_tracking: true,
+                    session_replay_link: true,
+                    user_profile_context: true,
+                    // Queryable in charts and via the export API, not SQL.
+                    sql_queries_on_traces: false,
+                },
+            },
+            costs: {
+                features: {
+                    token_counting: true,
+                    cost_calculation: true,
+                    // Agent events carry user_id and [Agent] Cost USD, so charts can group cost by user.
+                    cost_by_user: true,
+                },
+            },
+            evaluations: {
+                features: {
+                    llm_as_a_judge: true,
+                    datasets: true,
+                    // [Agent] Experiment Variant on agent events, in the same project as product events.
+                    ab_experiments_on_product_metrics: true,
+                },
+            },
         },
         logs: {
             available: false,
