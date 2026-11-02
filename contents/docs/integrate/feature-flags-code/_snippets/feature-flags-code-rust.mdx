@@ -43,8 +43,6 @@ match flags.get_flag("flag-key") {
 
 `flags.get_flag()` returns `Some(FlagValue::String(...))` for multivariate flags, `Some(FlagValue::Boolean(true))` for enabled boolean flags, `Some(FlagValue::Boolean(false))` for disabled flags, and `None` when the flag wasn't returned by the evaluation.
 
-> **Note:** `client.is_feature_enabled()`, `client.get_feature_flag()`, `client.get_feature_flag_payload()`, and `client.get_feature_flags()` still work during the migration period, but they're deprecated. Prefer `evaluate_flags()` for new code.
-
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
 <IncludePropertyInEvents />
@@ -109,13 +107,10 @@ By default, `evaluate_flags()` evaluates every flag for the user. If you only ne
 ```rust
 use posthog_rs::EvaluateFlagsOptions;
 
-let flags = client.evaluate_flags(
-    "distinct_id_of_your_user",
-    EvaluateFlagsOptions {
-        flag_keys: Some(vec!["checkout-flow".to_string(), "new-dashboard".to_string()]),
-        ..Default::default()
-    },
-).await.unwrap();
+let mut options = EvaluateFlagsOptions::default();
+options.flag_keys = Some(vec!["checkout-flow".to_string(), "new-dashboard".to_string()]);
+
+let flags = client.evaluate_flags("distinct_id_of_your_user", options).await.unwrap();
 ```
 
 ### Sending `$feature_flag_called` events
