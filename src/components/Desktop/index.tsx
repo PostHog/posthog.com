@@ -52,7 +52,7 @@ export const useProductLinks = () => {
             {
                 label: 'MCP',
                 Icon: <GlassIcon path={MCP_SILHOUETTE} viewBox={MCP_VIEWBOX} />,
-                url: '/docs/model-context-protocol',
+                url: '/mcp',
                 source: 'desktop',
             },
             {
