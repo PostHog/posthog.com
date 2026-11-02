@@ -50,7 +50,7 @@ These rules apply to TAE, TAM and TAM lead credit.
 
 | Customer | Close date | Signature / start date | Date we use | Quarter |
 |---|---|---|---|---|
-| Hoglet Labs | July 15 | June 27 | July 15 (close date) | Q3 |
+| Hoglet Labs | July 15 | June 27 | July 15 (signature date) | Q3 |
 | Beetle Box | September 29 | October 20 | October 20 (effective date) | Q4 |
 
 > Hoglet Labs closes on July 15 but wants its contract to start June 27 to match its billing. June is in Q2, which is closed, so the contract counts in Q3. Beetle Box closes on September 29 but isn't ready to leave its burrow until October 20, so it counts in Q4.
