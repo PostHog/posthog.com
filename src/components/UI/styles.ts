@@ -8,6 +8,8 @@ export const flatPressable =
 export const focusRing =
     'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[rgb(var(--text-primary))]'
 
+export const edgeSpace = 'mb-px'
+
 export const insetFocusRing =
     'outline-none focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[rgb(var(--text-primary))]'
 
@@ -50,7 +52,7 @@ export const cardBarSurface =
     'border-[rgb(var(--text-primary)/0.12)] bg-[rgb(var(--text-primary)/0.045)] dark:bg-white/[0.035]'
 
 export const cardLevels = {
-    1: `${grainSurface} [--ui-card-radius:8px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.13)] bg-white/60 shadow-[0_1px_0_rgb(0_0_0/0.05),0_1px_2px_-1px_rgb(0_0_0/0.08)] dark:border-[rgb(var(--text-primary)/0.12)] dark:bg-white/[0.06] dark:shadow-[0_1px_0_rgb(0_0_0/0.3)]`,
+    1: `${grainSurface} ${edgeSpace} [--ui-card-radius:8px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.13)] bg-white/60 shadow-[0_1px_0_rgb(0_0_0/0.05),0_1px_2px_-1px_rgb(0_0_0/0.08)] dark:border-[rgb(var(--text-primary)/0.12)] dark:bg-white/[0.06] dark:shadow-[0_1px_0_rgb(0_0_0/0.3)]`,
     2: `${grainSurface} [--ui-card-radius:6px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.1)] bg-[rgb(var(--text-primary)/0.035)] shadow-[inset_0_1px_0_rgb(0_0_0/0.08)] dark:bg-black/20 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]`,
 } as const
 
