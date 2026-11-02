@@ -3,7 +3,7 @@ export const amplitude = {
     key: 'amplitude',
     assets: {
         icon: '/images/competitors/amplitude.svg',
-        comparisonArticle: '/blog/posthog-vs-amplitude',
+        comparisonArticle: '/compare/posthog-vs-amplitude',
     },
     products: {
         product_analytics: {
