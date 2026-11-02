@@ -21,7 +21,7 @@ Workflows are composed of the following components:
 | [Audience splits](#audience-splits)            | Target and split your users so you can automate some action for them or send a message with more specificity.                                                   |
 | [PostHog actions](#posthog-actions)            | Change a person's properties, or trigger other events, once a person reaches a specific point in your workflow.                                                 |
 | [Output variables](#output-variables)          | Store data from step results in workflow variables for use in later steps.                                                                                      |
-| [AI tasks](/docs/workflows/ai-tasks)           | Start an AI agent with instructions, a repository, and connectors, then continue with its result.                                                               |
+| [AI tasks](/docs/workflows/ai-tasks)           | Start an AI agent with instructions, repositories, and connectors, then continue with its result.                                                               |
 | [Replay Vision](/docs/workflows/replay-vision) | Have Replay Vision watch the triggering event's session recording, then continue with its answer.                                                               |
 
 ## Draft and enabled workflows
@@ -268,13 +268,13 @@ This limit is separate from your project's [sending allowance](/docs/workflows/s
 
 Dispatches are the messages you send, mail, slack, SMS, push, webhook, or any PostHog real time destinations. There are 5 main types of dispatches:
 
-| Dispatch type    | Description                                                                                                                     |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.               |
-| Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.                    |
-| Push             | Send a native mobile push notification (iOS/Android). Configured in the [channels](/docs/workflows/configure-channels) section. |
-| Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                                |
-| CDP destinations | Use any [realtime destination](/docs/data-pipelines/destinations) as an dispatch step to deliver messages to users or other services.      |
+| Dispatch type    | Description                                                                                                                           |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Email            | Send an email natively through PostHog. Configured in the [channels](/docs/workflows/configure-channels) section.                     |
+| Slack            | Send a message to a slack channel. Configured in the [channels](/docs/workflows/configure-channels) section.                          |
+| Push             | Send a native mobile push notification (iOS/Android). Configured in the [channels](/docs/workflows/configure-channels) section.       |
+| Webhook          | Call external systems. Configured in the [channels](/docs/workflows/configure-channels) section.                                      |
+| CDP destinations | Use any [realtime destination](/docs/data-pipelines/destinations) as an dispatch step to deliver messages to users or other services. |
 
 ### Email dispatch options
 
