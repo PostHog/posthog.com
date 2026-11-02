@@ -6,7 +6,7 @@ import { shouldNavigateMenuTab } from './tabNavigation.ts'
 test('an inactive tab with an href navigates', () => {
     assert.equal(
         shouldNavigateMenuTab({
-            href: '/docs/product-analytics/learn',
+            href: '/learn/product-analytics',
             tabValue: 'learn',
             activeTab: 'docs',
             currentPath: '/docs/product-analytics',
@@ -18,10 +18,10 @@ test('an inactive tab with an href navigates', () => {
 test('an active tab stays put unless active navigation is enabled', () => {
     assert.equal(
         shouldNavigateMenuTab({
-            href: '/docs/product-analytics/learn',
+            href: '/learn/product-analytics',
             tabValue: 'learn',
             activeTab: 'learn',
-            currentPath: '/docs/product-analytics/learn/introduction',
+            currentPath: '/learn/product-analytics/pocket-guide',
         }),
         false
     )
@@ -30,11 +30,11 @@ test('an active tab stays put unless active navigation is enabled', () => {
 test('the active Learn tab returns a guide reader to the Learn landing', () => {
     assert.equal(
         shouldNavigateMenuTab({
-            href: '/docs/product-analytics/learn',
+            href: '/learn/product-analytics',
             tabValue: 'learn',
             activeTab: 'learn',
             navigateOnActiveClick: true,
-            currentPath: '/docs/product-analytics/learn/introduction/',
+            currentPath: '/learn/product-analytics/pocket-guide/',
         }),
         true
     )
@@ -43,11 +43,11 @@ test('the active Learn tab returns a guide reader to the Learn landing', () => {
 test('the active Learn tab does not reload its landing', () => {
     assert.equal(
         shouldNavigateMenuTab({
-            href: '/docs/product-analytics/learn',
+            href: '/learn/product-analytics',
             tabValue: 'learn',
             activeTab: 'learn',
             navigateOnActiveClick: true,
-            currentPath: '/docs/product-analytics/learn/',
+            currentPath: '/learn/product-analytics/',
         }),
         false
     )

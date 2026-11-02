@@ -33,7 +33,10 @@ export const containsURL = (items: MenuNode[] | undefined, value: string | undef
     return false
 }
 
-export function getActiveMenuSection<T extends MenuNode>(sections: T[] | undefined, url: string | undefined): T | undefined {
+export function getActiveMenuSection<T extends MenuNode>(
+    sections: T[] | undefined,
+    url: string | undefined
+): T | undefined {
     // First section that lists the page in its sidebar wins
     const listed = sections?.find((section) => containsURL(section.children, url))
     if (listed) return listed

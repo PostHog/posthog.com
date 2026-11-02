@@ -7,7 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/math_meme_8b0013533e.jpg
 featuredImageType: full
 tags:
-  - Growth
+  - Founders
+  - Finding product-market fit
 crosspost:
   - Blog
   - Newsletter

@@ -9,8 +9,6 @@ featuredImageType: full
 tags:
  - People
  - Culture
-crosspost:
- - Founders
 ---
 
 I never thought it would happen to me.

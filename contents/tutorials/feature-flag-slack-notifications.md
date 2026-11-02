@@ -10,7 +10,7 @@ tags:
   - cdp
 ---
 
-When you're managing Feature Flags across a team, it's important to know when flags are created, updated, or deleted. PostHog's [Activity Logs](/docs/settings/activity-logs) track these changes, and you can use a custom [Data Pipelines](/docs/cdp/destinations) destination to forward them to Slack in real time.
+When you're managing Feature Flags across a team, it's important to know when flags are created, updated, or deleted. PostHog's [Activity Logs](/docs/settings/activity-logs) track these changes, and you can use a custom [Data Pipelines](/docs/data-pipelines/destinations) destination to forward them to Slack in real time.
 
 This tutorial walks through setting up a custom Hog function via the API that listens for feature flag changes and posts rich Slack notifications – including release conditions, variant rollouts, payloads, and who made the change.
 
@@ -20,8 +20,8 @@ This tutorial walks through setting up a custom Hog function via the API that li
 
 You need:
 
-- A PostHog account with [Data Pipelines](/docs/cdp) enabled
-- A Slack workspace connected to PostHog (see [Slack destination docs](/docs/cdp/destinations/slack) for setup)
+- A PostHog account with [Data Pipelines](/docs/data-pipelines) enabled
+- A Slack workspace connected to PostHog (see [Slack destination docs](/docs/data-pipelines/destinations/slack) for setup)
 - A [personal API key](https://us.posthog.com/settings/user-api-keys) with write access
 - Your PostHog project ID (found in [project settings](https://us.posthog.com/settings/project))
 
@@ -189,7 +189,7 @@ Common customizations:
 ## Further reading
 
 - [Activity Logs](/docs/settings/activity-logs)
-- [Customizing destinations](/docs/cdp/destinations/customizing-destinations)
+- [Customizing destinations](/docs/data-pipelines/destinations/customizing-destinations)
 - [How to send survey responses to Slack](/tutorials/slack-surveys)
 
 <NewsletterForm />

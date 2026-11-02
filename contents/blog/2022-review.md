@@ -11,6 +11,11 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Being CEO
 ---
 
 It's always helpful to look back on the year just gone, and 2022 was an exceptionally good year for PostHog. Here's my personal perspective on how it went.

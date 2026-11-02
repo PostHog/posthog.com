@@ -8,10 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Product analytics
-  - Product metrics
-  - Product-market fit
-  - Product engineers
+  - Finding product-market fit
 crosspost:
   - Product engineers
   - Blog

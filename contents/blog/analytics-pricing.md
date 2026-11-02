@@ -7,6 +7,11 @@ author:
     - james-hawkins
 featuredImageType: full
 category: PostHog news
+crosspost:
+    - Founders
+tags:
+    - Founders
+    - Sales and pricing
 ---
 
 ## TL;DR

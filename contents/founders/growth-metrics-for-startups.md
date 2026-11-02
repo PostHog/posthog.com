@@ -8,8 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
     - Founders
-    - Growth
-    - Ops & finance
+    - Finding product-market fit
 crosspost:
     - Blog
 ---

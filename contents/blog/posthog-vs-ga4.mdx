@@ -219,9 +219,9 @@ It's hard to import data into Google Analytics because:
 1. The data type and format you're allowed to [import](https://support.google.com/analytics/answer/10071301) is restrictive.
 2. You either need to constantly upload CSV files manually, or set up an SFTP server to automatically do this for you.
 
-In contrast, PostHog is built to be your single source of truth, so it's simple to import data from other sources using our [built-in data warehouse](/docs/data-warehouse), or send PostHog data to other tools using our [realtime destinations](/docs/cdp/destinations).
+In contrast, PostHog is built to be your single source of truth, so it's simple to import data from other sources using our [built-in data warehouse](/docs/data-warehouse), or send PostHog data to other tools using our [realtime destinations](/docs/data-pipelines/destinations).
 
-Below is a comparison of some of the most popular apps – see our [data pipeline](/docs/cdp) and [warehouse docs](/docs/data-warehouse) for a complete list of integrations.
+Below is a comparison of some of the most popular apps – see our [data pipeline](/docs/data-pipelines) and [warehouse docs](/docs/data-warehouse) for a complete list of integrations.
 
 <p>
 <ProductComparisonTable
@@ -306,7 +306,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 
@@ -378,7 +378,7 @@ Yes. PostHog includes both [feature flags](/feature-flags) and [experiments](/ex
 
 Yes – as of recent updates, GA4 includes a free native BigQuery export, capped at 1 million events per day. This is a significant improvement over the historical restriction that required GA360. If you exceed 1 million events/day, you'll need GA360, which removes the daily cap.
 
-Not that you asked, but PostHog also has a [BigQuery batch export](/docs/cdp/batch-exports/bigquery). 
+Not that you asked, but PostHog also has a [BigQuery batch export](/docs/data-pipelines/batch-exports/bigquery). 
 
 </details>
 

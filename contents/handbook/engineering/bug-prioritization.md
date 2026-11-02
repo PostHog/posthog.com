@@ -40,7 +40,7 @@ When bugs are reported it's critical to properly gauge the extent and impact to 
 
 ## Security issues
 
-Security issues, due to their nature, have a different prioritization schema. This schema is also in line with our internal SOC 2 related policies (Vulnerability Management Policy). When filing security-related GitHub issues, remember to attach label `security` and the appropriate priority label. More details on filing can be found in the [README](https://github.com/PostHog/product-internal#README) of the `product-internal` repo.
+Security issues, due to their nature, have a different prioritization schema. This schema is also in line with our internal SOC 2 related policies (Vulnerability Management Policy). When filing security-related GitHub issues, remember to attach label `security` and the appropriate priority label. More details on filing can be found in the <PrivateLink url="https://github.com/PostHog/product-internal#README">README</PrivateLink> of the `product-internal` repo.
 
 <blockquote class="warning-note">
 Security issue information should not be made public until a fix is live and sufficiently (ideally completely) adopted.

@@ -10,7 +10,7 @@ Prerequisites
 - You need access to the billing admin (billing.posthog.com).  Ask Raquel or Simon for access.
 
 Process for giving a customer a free trial:
-1. Log in to [Billing](https://billing.posthog.com/admin/) with your Google SSO login.
+1. Log in to <PrivateLink url="https://billing.posthog.com/admin/">Billing</PrivateLink> with your Google SSO login.
 2. Click the `Trials` link on the left sidebar.
 3. Click the `Add Trial` button (top right).
 4. Fill out the trial form
@@ -37,7 +37,7 @@ For customers with existing paid subscriptions we need to complete additional st
    
 If they need a shared Slack channel as part of the trial, [follow these instructions.](/handbook/growth/sales/slack-channels)
 
-Consider framing a collaborative method for progressing in the trial period with timed objectives. If it's new and depending on the level of engagement, we can use a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan).
+Consider framing a collaborative method for progressing in the trial period with timed objectives. If it's new and depending on the level of engagement, we can use a detailed [success plan](/handbook/customer-success/onboarding-success-plan).
 
 ## Spend caps during a trial
 

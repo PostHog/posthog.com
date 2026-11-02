@@ -7,9 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
 tags:
-  - Culture
   - Founders
-  - People
+  - Building the team
 crosspost:
   - Blog
 ---

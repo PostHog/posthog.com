@@ -5,8 +5,8 @@ author:
   - charles-cook
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/v1713344206/posthog.com/contents/blog/cracked_engineer_blog.jpg
 tags:
-  - Culture
-  - People
+  - Founders
+  - Building the team
 crosspost:
   - Blog
   - Newsletter      

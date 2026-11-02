@@ -1,0 +1,42 @@
+---
+title: WebMCP installation for MCP Analytics
+platformLogo: javascript
+platformLabel: WebMCP
+---
+
+If your web app registers tools with [WebMCP](https://webmachinelearning.github.io/webmcp/), [`posthog-js`](/docs/libraries/js) captures each tool call as a `$mcp_tool_call` event.
+
+## Enable capture
+
+```js-web
+posthog.init("<ph_project_token>", {
+    api_host: "<ph_client_api_host>",
+    capture_webmcp: true,
+})
+```
+
+Initialize PostHog before your app registers its tools. The SDK does not instrument tools that register earlier.
+
+## Intent and model
+
+By default, the SDK adds a `context` field (the agent's reason for the call) and an `llm_model` field to your tool schemas. It removes them before it calls your tool. To turn off either field:
+
+```js-web
+posthog.init("<ph_project_token>", {
+    api_host: "<ph_client_api_host>",
+    capture_webmcp: {
+        intent: true,
+        model: false,
+    },
+})
+```
+
+If you change these settings, register your tools again.
+
+## Failed calls in Error Tracking
+
+If [exception autocapture](/docs/error-tracking/installation/web) is enabled, a failed tool call also sends an `$exception` event. With the [slim bundle](/docs/libraries/js#tree-shaking), add `ErrorTrackingExtensions` next to `WebMCPExtensions`.
+
+## Privacy
+
+The SDK does not capture tool arguments or tool results. It redacts credentials and personal data in `context` and in error messages. Your consent, opt-out, and `before_send` settings still apply.

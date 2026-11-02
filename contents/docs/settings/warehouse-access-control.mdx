@@ -9,7 +9,7 @@ availability:
   enterprise: full
 ---
 
-You can restrict who can query synced or self-managed warehouse tables, views, and [materialized views](/docs/data-warehouse/views/materialize). Denied tables and views are removed from the [HogQL](/docs/hogql) schema and can't be queried from any surface, including the SQL editor, [PostHog AI](/docs/posthog-ai), and MCP.
+You can restrict who can query synced or self-managed warehouse tables, views, and [materialized views](/docs/data-warehouse/views/materialize). Denied tables and views are removed from the [HogQL](/docs/sql) schema and can't be queried from any surface, including the SQL editor, [PostHog AI](/docs/posthog-ai), and MCP.
 
 ## Access levels
 
@@ -69,7 +69,7 @@ This lets a source-level rule apply to every table it syncs while still allowing
 
 For example, you can set a Stripe source to **No access**, then give an analyst role **Viewer** access to `stripe_customers`. Analysts can query `stripe_customers`, but the rest of the Stripe tables stay hidden.
 
-Source-level rules only apply to tables synced from [external sources](/docs/data-warehouse/sources).
+Source-level rules only apply to tables synced from [external sources](/docs/data-pipelines/sources).
 
 ## Give access to selected data with a materialized view
 

@@ -11,6 +11,10 @@ featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/classic_blog_1_
 featuredImageType: full
 tags: 
  - CEO diaries
+ - Founders
+ - Big decisions
+crosspost:
+  - Founders
 ---
 
 Building PostHog has been living the dream. We got into YC. We pivoted a bunch. We found product-market fit, onboarded hundreds of thousands of customers, and revenue grew fast.

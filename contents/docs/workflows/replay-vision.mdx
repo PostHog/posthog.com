@@ -1,0 +1,140 @@
+---
+title: Watch sessions with Replay Vision in a workflow
+---
+
+import { ProductScreenshot } from "components/ProductScreenshot";
+
+The **Replay Vision** step has [Replay Vision](/docs/replay-vision) watch the session recording behind the event that started a [workflow](/docs/workflows). It answers a question about the session, categorizes it, scores it, or summarizes it. The workflow waits for the answer, then continues with it.
+
+Use it when the next step depends on what happened in the session, which event properties alone can't tell you. Add what a customer did before a support ticket to the Slack alert, score how smoothly a new signup got started and reach out to the ones who struggled, or route a low survey rating by what went wrong.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_canvas_edb58a27f2.png"
+  classes="rounded"
+  alt="A workflow that scores each signup's first session with Replay Vision, then branches on the score"
+/>
+
+## Add the step
+
+1. Open a workflow in the [workflow builder](/docs/workflows/workflow-builder) and add a step.
+2. Choose **Replay Vision** from the **AI** section of the step list.
+3. Under **What should Replay Vision do?**, pick what you want back, and fill in its fields:
+
+| Option | What you get back | Fields |
+| --- | --- | --- |
+| **Ask a question** | A yes or no verdict on your question | Question |
+| **Categorize** | The categories from your list that fit the session | Question, categories |
+| **Score** | A score on a scale you set | Question, from and to |
+| **Summarize** | A title, a summary, and chapters | What to focus on |
+| **Use a saved scanner** | The answer of a [scanner](/docs/replay-vision/creating-scanners) you already have, with its own type, prompt, and model | Scanner |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/rv_workflow_step_setup_87b6e71093.png"
+  classes="rounded"
+  alt="The Replay Vision step's settings, with the five options for what Replay Vision should do"
+/>
+
+Write the question the way you would for a scanner: one visible thing to look for, and what counts as proof. [Scanner prompts](/docs/replay-vision/scanner-prompts) has worked examples. The question is fixed text, so it can't include `{event...}` or `{person...}` values.
+
+The step has two more settings:
+
+- **Session ID** – the recording to analyze. It defaults to the triggering event's `$session_id`. Change it only if your events keep the session ID in another property.
+- **Wait for the session to end** – on by default. Replay Vision waits until the session has been quiet for 35 minutes, then watches the whole recording. Turn it off when the triggering event comes after the session is over, so the scan starts right away.
+
+## What happens while Replay Vision watches
+
+The workflow parks on the step until the answer is ready: up to 6 hours for the session to end, then the few minutes the scan takes. The step gives up after 8 hours, and its **On error** setting decides what happens next.
+
+If Replay Vision already answered the same question about the same session, the step gets that answer at once, at no charge. A saved scanner's earlier observation of the session counts the same way.
+
+## Use the result
+
+The step's result has three fields:
+
+| Field | What it holds |
+| --- | --- |
+| `state` | `succeeded`, `skipped`, `ineligible`, `failed`, or `lost` |
+| `output` | The answer, when `state` is `succeeded` |
+| `warnings` | Why there is no answer, when there isn't one |
+
+What `output` holds depends on the option:
+
+| Option | `output` fields |
+| --- | --- |
+| Ask a question | `verdict`, `reasoning`, `confidence` |
+| Categorize | `tags`, `reasoning`, `confidence` |
+| Score | `score`, `reasoning`, `confidence` |
+| Summarize | `title`, `summary`, `chapters`, `confidence` |
+
+Keep the parts you need with [output variables](/docs/workflows/workflow-builder#output-variables). For example, store `output.score` in a `friction_score` variable and `output.reasoning` in `friction_reasoning`. A [conditional branch](/docs/workflows/workflow-builder#audience-splits) on `friction_score` can then send scores of 2 or lower one way, and a Slack message can include `{variables.friction_reasoning}`.
+
+When there is no answer, `state` says why, and `warnings` says it in words:
+
+| `state` | What happened |
+| --- | --- |
+| `skipped` | The scan never started because a limit was reached: the workflow's or project's daily scan limit, your organization's Replay Vision credits, or the scanner's own credit limit |
+| `ineligible` | Replay Vision can't scan this session, for example because it has no recording or is too short. See [ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions) |
+| `failed` | The scan failed. See [failed observations](/docs/replay-vision/troubleshooting#failed-observations) |
+| `lost` | The scan ran out of time before it finished |
+
+In all of these cases the workflow continues to the next step, so branch on `state` if a missing answer should take a different path.
+
+## Requirements
+
+- The project records sessions with [Session Replay](/docs/session-replay).
+- The triggering event carries a `$session_id`. Events the [JavaScript Web SDK](/docs/libraries/js) captures do. For events you send from your server, pass the session ID along.
+- Your organization has allowed AI data processing.
+- The workflow is in your project's main environment, not a child environment.
+- You need access to session recordings to add or change the step. For the first four options you also need edit access to the project's scanners, and for **Use a saved scanner**, edit access to that scanner.
+
+The workflow scans as its owner, so the owner needs the same access when the step runs. That stops anyone who can edit a workflow from forwarding recordings they can't view themselves.
+
+Experiment scanners can't run from a workflow. They sample an experiment's variants evenly, which one triggered session can't do.
+
+## Limits and credits
+
+Each scan spends [Replay Vision credits](/docs/replay-vision/quota-and-limits), the same as a scan you start yourself. A question, category, score, or summary set up in the step costs 5 credits. A saved scanner costs whatever its model costs.
+
+To stop a busy trigger from spending your budget, workflows have daily scan limits in a rolling 24 hours:
+
+- **Per workflow** – 100 scans by default.
+- **Across the project** – 500 scans by default, shared by every workflow.
+
+Change them in [**Settings > Workflows > Replay Vision scan limits**](https://app.posthog.com/settings/project-workflows#workflows-replay-vision-limits). You can raise them to 500 per workflow and 2,500 per project. Contact support to go above that, or set a limit to zero to pause scans.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_scan_limits_1ffeb5db08.png"
+  classes="rounded"
+  alt="The Replay Vision scan limits in the project's workflow settings"
+/>
+
+When a limit is reached, the step returns `skipped` and the workflow continues. The trigger's volume estimate in the builder shows how many scans a day your trigger would start, so you can check before you enable the workflow.
+
+## Templates
+
+Three [workflow templates](/docs/workflows/library#workflow-templates) start with a Replay Vision step. Each one has a question written for its job, so you only need to pick a Slack channel:
+
+| Template | Trigger | What Replay Vision does | Then |
+| --- | --- | --- | --- |
+| **Negative survey feedback with session context** | A survey response with a rating of 2 or lower | Summarizes what the person did before the survey and what likely led to the low rating | Posts the rating and summary to Slack |
+| **Support tickets with session context** | A new [support](/docs/support) ticket that has a session | Summarizes what the customer tried, where they got stuck, and any errors, before they asked for help | Posts the ticket and summary to Slack |
+| **Onboarding friction alerts** | `user signed up` | Scores from 1 to 5 how smoothly they got started | Posts scores of 2 or lower, with the reasoning, to Slack |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_templates_1039fd7269.png"
+  classes="rounded"
+  alt="The three Replay Vision workflow templates"
+/>
+
+Change the trigger event to the one your product sends before you enable a template.
+
+## Build it over MCP
+
+Agents can add the step for you. Over the [PostHog MCP](/docs/workflows/surfaces/mcp), ask for something like "When someone creates a support ticket, summarize their session with Replay Vision and post it to #support". The agent builds the workflow as a draft, with the step set up, for you to check before you enable it.
+
+## Tips for better results
+
+- **Ask one question per step.** Two questions in one prompt get a muddier answer than two steps.
+- **Say what counts as proof.** "Answer yes only if you can see an error message on screen" beats "Did they hit an error?".
+- **Leave room for no.** A question that allows "no clear problem" gets fewer made-up findings.
+- **Reuse a saved scanner** when you already have one tuned for the question. Its [ratings](/docs/replay-vision/calibration) carry over to the workflow.

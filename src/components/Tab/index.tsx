@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import { classNames } from 'lib/utils'
 import Slider from 'components/Slider'
@@ -16,7 +16,7 @@ export const Tab: React.FC & {
                 classNames(
                     selected
                         ? 'text-red h-full pb-2 dark:text-yellow font-bold after:h-[2px] after:bg-red dark:after:bg-yellow after:-bottom-px after:content-[""] after:absolute after:left-0 after:right-0 focus:ring-transparent focus:outline-none focus-visible:ring-transparent'
-                        : 'flex text-secondary items-center relative my-1 rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all',
+                        : 'flex text-secondary items-center relative my-1 rounded border border-b-3 border-transparent hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all',
                     'px-2 py-1 text-sm font-semibold whitespace-nowrap rounded relative hover:scale-[1.01] active:scale-[.99] group'
                 )
             }
@@ -31,9 +31,13 @@ export const Tab: React.FC & {
     )
 }
 
+const InsideTabGroupContext = createContext(false)
+
 const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const hasTabs = tabs?.length > 0
+    const isNested = useContext(InsideTabGroupContext)
+    // A nested group would overwrite the `tab` param that selects the outer group's tab.
+    const hasTabs = tabs?.length > 0 && !isNested
 
     const handleChange = (index: number) => {
         if (hasTabs && typeof window !== 'undefined') {
@@ -54,7 +58,7 @@ const TabGroup: typeof HeadlessTab.Group = ({ children, tabs }) => {
 
     return (
         <HeadlessTab.Group selectedIndex={selectedIndex} onChange={handleChange} as="div" className="my-4">
-            {children}
+            <InsideTabGroupContext.Provider value={true}>{children}</InsideTabGroupContext.Provider>
         </HeadlessTab.Group>
     )
 }

@@ -33,9 +33,9 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Workflows – Automate workflows with product data',
+        title: 'Workflows – Automate emails and messages from user behavior',
         description:
-            'Automations that act on live user behavior – send Slack messages, emails, or events. The actions agents take to close the loop and make your product self-driving.',
+            'Trigger emails, push notifications, Slack messages, and webhooks from live user behavior. Build automations in PostHog with 10K emails free monthly.',
     },
     /**
      * Sections rendered on the Product surface (`/workflows`). Each entry
@@ -113,6 +113,7 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
+        description: '"Create an onboarding email series for trial users"',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>

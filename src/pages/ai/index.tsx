@@ -121,6 +121,7 @@ export default function PostHogAI(): JSX.Element {
                 slug: 'demos',
                 name: 'Demos',
                 component: Demos,
+                props: { headingTag: 'h2' },
             },
             {
                 slug: 'roadmap',

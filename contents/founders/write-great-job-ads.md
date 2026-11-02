@@ -7,8 +7,8 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/transparency.jpeg
 featuredImageType: full
 tags:
-  - Culture
-  - People
+  - Founders
+  - Building the team
 crosspost:
   - Blog   
 ---
@@ -135,7 +135,7 @@ And just to reiterate – Apple can get away with this because they are one of t
 
 ## Moar reading
 
-- What startup recruiters [actually see](/founders/what-recruiters-see) when people apply for a job
+- What startup recruiters [actually see](/blog/what-recruiters-see) when people apply for a job
 - [Literally everything](/newsletter/hiring-at-posthog-lessons) we've learned about hiring at PostHog
 - A bunch of [myths and truths](/founders/early-stage-startup-hiring-strategy) I've learned about startup hiring in the last 10 years
 - How do you make your [first ops hire](/founders/first-ops-hire)?

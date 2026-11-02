@@ -40,7 +40,7 @@ You can create a new dashboard from scratch, but we also offer numerous [dashboa
 1. Click on **Dashboards** in the left hand navigation and then **New Dashboard**.
 1. You can create a dashboard from a list of [available templates](/templates), or select **Blank Dashboard** to start from scratch.
 1. Name your dashboard, add some optional details if desired.
-1. Your dashboard will be empty – click **+New insight** to create an insight to add. Dashboards support all the core [product analytics insights](/docs/product-analytics/insights).
+1. Your dashboard will be empty – click **Add a chart** to browse your chart library, or click **Build it myself** to open a menu with options for charts, text cards, images, buttons, and widgets. Dashboards support all the core [product analytics insights](/docs/product-analytics/insights).
 1. Click **Save & add to dashboard** when you've created your insight.
 
 If you already have some insights set up, an alternative approach is to click **Add to dashboard** in any insight.
@@ -108,6 +108,17 @@ You can organize dashboards into folders for easier navigation. There are two wa
 The dashboards list page includes a **Folder** column that shows which folder each dashboard belongs to. Dashboards that haven't been filed into a folder display a dash (`—`).
 
 Click a folder name in the **Folder** column to filter the list to dashboards in that folder. The active filter appears as a clearable chip in the filters bar. The folder filter is saved to the URL as a `?folder=` query parameter, so filtered views persist across page reloads and can be shared with teammates.
+
+## Bulk deleting dashboards
+
+You can select multiple dashboards from the list and delete them all at once.
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard) and select the dashboards you want to delete using the checkboxes.
+2. Click **Delete selected** in the bulk action bar.
+3. In the confirmation dialog, optionally check **Delete the selected dashboards' insights** to also remove insights that don't appear on any remaining dashboard.
+4. Click **Delete dashboards** to confirm.
+
+Dashboards you don't have edit access to are skipped automatically. You can select up to 100 dashboards per request.
 
 ## Copying dashboards and templates between projects
 

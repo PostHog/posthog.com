@@ -9,7 +9,7 @@ featuredImageType: full
 featuredVideo: 'https://www.youtube-nocookie.com/embed/KVMZgY2KNto'
 tags:
   - Founders
-  - People
+  - Building the team
 crosspost:
   - Blog
 ---

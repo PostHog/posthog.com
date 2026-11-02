@@ -66,7 +66,7 @@ Complete every item below, then record what you did in the PR description:
 - Sentence casing for headings
 - American English
 - Oxford comma
-- Use relative URLs for internal links (e.g., `/docs/feature-flags` not `https://posthog.com/docs/feature-flags`)
+- Use relative URLs for internal links (e.g. `/docs/feature-flags` not `https://posthog.com/docs/feature-flags`)
 - When writing copy, follow our [writing style guide](@contents/handbook/content/posthog-style-guide.md) and [docs style guide](@contents/handbook/wizard-and-docs/docs-style-guide.md)
 
 ## Detailed guides
@@ -85,6 +85,7 @@ Reference these when working on specific areas:
 
 ### Always
 
+- Commits must have signatures that GitHub can verify. See [signing setup](README.md#sign-your-commits). If you cannot sign a commit, tell the user that the signature check will fail and the PR cannot merge.
 - For any non-trivial change, present a plan and get confirmation from your user before you build.
 - Confirm that your change is a PR and not an issue before you build. See [Issue or PR?](#issue-or-pr).
 - When using a component, check for a `README.md` inside the component's folder for detailed documentation.

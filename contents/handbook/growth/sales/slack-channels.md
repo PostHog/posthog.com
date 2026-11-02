@@ -38,7 +38,7 @@ Some customers may wish to use MS Teams rather than Slack. SupportHog works in T
 First you will need an MS Teams licence - ask Simon, or Dana for one. Then follow these steps:
 
 1. In Teams go to "See all your teams" and then "Create team". When naming the team the expected syntax is `[CustomerName-PostHog]`. Make sure to set the team type to Public and name the first channel "Shared" then finish creating the team.
-2. If the channel is a shared channel (for example, a channel shared with the customer's own Teams tenant), Teams does not send SupportHog events for it. Add the channel to the polling list in [SupportHog Teams settings](https://us.posthog.com/project/2/support/settings#channel=teams) so that SupportHog polls it for new messages. If you do not do this, `@SupportHog` mentions in the channel do not create tickets.
+2. If the channel is a shared channel (for example, a channel shared with the customer's own Teams tenant), Teams does not send SupportHog events for it. Add the channel to the polling list in <PrivateLink url="https://us.posthog.com/project/2/support/settings#channel=teams">SupportHog Teams settings</PrivateLink> so that SupportHog polls it for new messages. If you do not do this, `@SupportHog` mentions in the channel do not create tickets.
 3. Test that mentioning `@SupportHog` in the channel raises a ticket correctly before adding the customer.
 4. Once you've confirmed it's working, invite the relevant customer folks by adding them as members to the team!
 
@@ -54,4 +54,4 @@ A message like this one does wonders to help them understand how to open a ticke
 
 >We also have an app here that will open a support ticket if I'm sleeping. You only have to add the :ticket: emoji to the thread and it will open a ticket automatically, and capture the back and forth in the specific Slack thread that received that emoji. You can also mention `@SupportHog` in a thread to open a ticket as well. It's a good habit to get into in order to make sure our distributed team can help.
 
-The [New sales playbook has more](https://posthog.com/handbook/growth/sales/new-sales#4-product-evaluation) on ensuring that the customer is set up for success.
+The [New sales playbook has more](https://posthog.com/handbook/growth/sales/new-sales#5-product-evaluation) on ensuring that the customer is set up for success.

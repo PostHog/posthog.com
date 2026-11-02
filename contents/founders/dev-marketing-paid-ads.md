@@ -8,7 +8,7 @@ featuredImage: >-
 featuredImageType: full
 tags:
   - Founders
-  - Marketing
+  - Brand and marketing
 crosspost:
   - Blog
 ---

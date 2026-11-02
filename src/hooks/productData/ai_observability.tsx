@@ -47,9 +47,9 @@ export const aiObservability = {
     pricingDescription:
         'Generations, spans, and traces are captured as regular PostHog events and billed like them – no per-seat pricing, and no markup on the tokens you already pay your model provider for.',
     seo: {
-        title: 'AI Observability – Observe and optimize AI products in PostHog',
+        title: 'AI Observability – LLM tracing, evals, and costs | PostHog',
         description:
-            'Monitor and optimize AI products with AI Observability. Trace every generation, score quality with evals, alert on anomalies, and turn findings into PRs.',
+            'LLM observability for AI products. Trace every generation, track cost and latency, score quality with evals, and alert on anomalies in PostHog.',
     },
     /**
      * Sections rendered on the Product surface (`/ai-observability`). Each entry
@@ -126,6 +126,7 @@ export const aiObservability = {
     ],
     overview: {
         title: 'Observe and fix AI in production',
+        description: '"Show me LLM costs this week broken down by model"',
         eli5: 'AI Observability captures the full context of each trace and connects it to other PostHog products (like Session Replay). Evals score your live traffic and anomaly alerts tell you when things are not normal, so regressions in tool calling, response quality, or latency automatically turn into signals.',
         textColor: 'text-white',
         layout: 'overlay',

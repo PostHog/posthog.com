@@ -26,7 +26,7 @@ The metric was created from an insight, and that insight's query has changed sin
 - **Keep the new definition:** re-snapshot the insight's current query into the metric with `data-catalog-metrics-refresh-from-insight-create`, then re-approve.
 - **Keep the old definition:** unlink the metric from the insight (set `source_insight_short_id` to null) so it stands on its own definition, then re-approve.
 
-Compare the metric's `compiled_query` (from a run) with the insight's current query to see what changed. Until it's re-approved, results are labeled noncanonical.
+Compare the metric's `compiled_query` (from a run) with the insight's current query to see what changed. Until it's re-approved, agents don't present its results as canonical.
 
 ## I renamed or deleted a metric and references to it broke
 
