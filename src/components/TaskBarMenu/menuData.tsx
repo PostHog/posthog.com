@@ -282,12 +282,6 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
-            label: 'Context Warehouse',
-            link: '/context-warehouse',
-            icon: <Icons.IconDatabase className="size-4 text-blue" />,
-        },
-        {
-            type: 'item',
             label: 'PostHog Research',
             link: '/research',
             icon: <Icons.IconBrain className="size-4 text-purple" />,
@@ -928,16 +922,6 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
 export function useMenuSelectOptions() {
     // Build the select groups
     const selectGroups = [
-        {
-            label: 'Context warehouse',
-            items: [
-                {
-                    value: 'products',
-                    label: 'Context warehouse',
-                    icon: <Icons.IconApps className="size-4 text-red" />,
-                },
-            ],
-        },
         {
             label: 'Pricing',
             items: [

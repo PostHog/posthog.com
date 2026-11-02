@@ -242,7 +242,7 @@ export const features = {
                 description: (
                     <>
                         {'Browse our '}
-                        <Link to="/context-warehouse/integrations-library" state={{ newWindow: true }}>
+                        <Link to="/docs/data-pipelines" state={{ newWindow: true }}>
                             {'destination library'}
                         </Link>
                         {' to explore the possibilities'}
