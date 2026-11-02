@@ -35,7 +35,8 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 
 - Complete all your onboarding tasks in Deel (and BambooHR if you're in the US) during your first week. If anything is missing, you may not be included in your first payroll.
 - In the UK, send us your P45 from your previous employer, or fill in the [HMRC starter checklist](https://www.gov.uk/government/publications/paye-starter-checklist) if you don't have one. Without it, you may be put on an emergency tax code.
-
+- If you start after the payroll cutoff, you'll get your first payment in the next payroll cycle.
+  
 ## Keeping your details up to date
 
 **Bank details**
