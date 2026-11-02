@@ -108,7 +108,9 @@ const flatSegment =
 
 const flatSegmentPadding: Record<ButtonSize, string> = { sm: 'px-2', md: 'px-2.5', lg: 'px-3' }
 
-const flatGroupBase = 'inline-grid max-w-full data-[disabled]:opacity-50 overflow-hidden rounded border border-primary'
+const flatGroupBase = 'inline-grid max-w-full data-[disabled]:opacity-50 overflow-hidden rounded'
+
+const outlineGroupBorder = 'border border-primary'
 
 const flatGroupOrientations: Record<ButtonGroupOrientation, string> = {
     horizontal:
@@ -468,7 +470,12 @@ export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(fu
                 className={cn(
                     appearance === 'raised'
                         ? cn(raisedGroupBase, raisedGroupOrientations[orientation], raisedRadius[size])
-                        : cn(flatGroupBase, flatGroupOrientations[orientation], flatGroupTones[variant]),
+                        : cn(
+                              flatGroupBase,
+                              appearance === 'outline' && outlineGroupBorder,
+                              flatGroupOrientations[orientation],
+                              flatGroupTones[variant]
+                          ),
                     className
                 )}
                 {...props}

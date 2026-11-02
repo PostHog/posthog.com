@@ -5,10 +5,8 @@ import Horizontal from './Horizontal'
 import horizontalSource from '!!../../rawSourceLoader!./Horizontal.tsx?raw'
 import Vertical from './Vertical'
 import verticalSource from '!!../../rawSourceLoader!./Vertical.tsx?raw'
-import Underline from './Underline'
-import underlineSource from '!!../../rawSourceLoader!./Underline.tsx?raw'
-import UnderlineVertical from './UnderlineVertical'
-import underlineVerticalSource from '!!../../rawSourceLoader!./UnderlineVertical.tsx?raw'
+import Appearances from './Appearances'
+import appearancesSource from '!!../../rawSourceLoader!./Appearances.tsx?raw'
 
 export const doc: ComponentDoc = {
     slug: 'tabs',
@@ -28,23 +26,17 @@ export const doc: ComponentDoc = {
             id: 'vertical',
             title: 'Vertical',
             description:
-                'Set orientation="vertical" on Root. The list shows to the left of the panels. A disabled tab is muted, and the user cannot select it.',
+                'Set orientation="vertical" on Root. The list shows to the left of the panels. A disabled tab shows the disabled button style, and the user cannot select it.',
             Component: Vertical,
             source: verticalSource,
         },
         {
-            id: 'underline',
-            title: 'Underline',
-            description: 'An orange underline moves to the selected tab. The tabs have no fill.',
-            Component: Underline,
-            source: underlineSource,
-        },
-        {
-            id: 'underline-vertical',
-            title: 'Vertical underline',
-            description: 'The indicator moves along the left edge when orientation is vertical.',
-            Component: UnderlineVertical,
-            source: underlineVerticalSource,
+            id: 'appearances',
+            title: 'Appearances',
+            description:
+                'Tabs use the same looks as a ButtonGroup. The selected tab shows the pressed state. Set appearance, variant, and size on Root.',
+            Component: Appearances,
+            source: appearancesSource,
         },
     ],
     notes: [
@@ -60,9 +52,21 @@ export const doc: ComponentDoc = {
             rows: [
                 {
                     name: 'appearance',
-                    type: "'pane' | 'underline'",
-                    defaultValue: "'pane'",
-                    description: 'Show a raised pane or an orange underline on the selected tab.',
+                    type: "'flat' | 'raised' | 'outline'",
+                    defaultValue: "'flat'",
+                    description: 'Sets the look of the tab list. It matches the ButtonGroup appearance.',
+                },
+                {
+                    name: 'variant',
+                    type: "'primary' | 'secondary' | 'danger'",
+                    defaultValue: "'secondary'",
+                    description: 'Sets the color of the tabs. It matches the ButtonGroup variant.',
+                },
+                {
+                    name: 'size',
+                    type: "'sm' | 'md' | 'lg'",
+                    defaultValue: "'md'",
+                    description: 'Sets the height, padding, and text size of the tabs.',
                 },
             ],
         },

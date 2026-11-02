@@ -285,7 +285,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
             >
                 <div
                     className={cn(
-                        'flex min-h-11 min-w-0 items-center gap-2 border-b py-1.5 pl-1.5 pr-2',
+                        'flex min-h-11 min-w-0 items-center gap-2 border-b pb-1 pl-1.5 pr-2 pt-[5px]',
                         cardInnerTopRadius,
                         cardBarSurface
                     )}
@@ -298,14 +298,10 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                                 const tab = (event.target as HTMLElement).closest<HTMLElement>('[role="tab"]')
                                 if (tab) revealTab(event.currentTarget, tab)
                             }}
-                            className={`min-w-0 shrink overflow-x-auto overflow-y-hidden p-0 ${scrollbarHidden}`}
+                            className={`min-w-0 shrink overflow-x-auto ${scrollbarHidden}`}
                         >
                             {snippets.map((snippet) => (
-                                <Tabs.Tab
-                                    key={snippet.id}
-                                    value={snippet.id}
-                                    className="px-2.5 py-1.5 font-code text-[13px]"
-                                >
+                                <Tabs.Tab key={snippet.id} value={snippet.id} className="font-code">
                                     {snippetLabel(snippet)}
                                 </Tabs.Tab>
                             ))}

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
-import { cn } from '../../../utils'
-import { focusRing, scrollbarHidden, surfaceDivider } from '../styles'
+import { Button, ButtonGroup } from '../Button'
+import type { ButtonAppearance, ButtonSize, ButtonVariant } from '../Button'
+import { focusRing } from '../styles'
 import {
     HEIGHT_CHANGE_MS,
     assignRef,
@@ -13,117 +14,117 @@ import {
 
 const TAB_CHANGE_WINDOW_MS = HEIGHT_CHANGE_MS * 2
 
-type Appearance = 'pane' | 'underline'
-const AppearanceContext = React.createContext<Appearance>('pane')
+type TabsLook = {
+    appearance: ButtonAppearance
+    variant: ButtonVariant
+    size: ButtonSize
+    orientation: 'horizontal' | 'vertical'
+}
+
+const LookContext = React.createContext<TabsLook>({
+    appearance: 'flat',
+    variant: 'secondary',
+    size: 'md',
+    orientation: 'horizontal',
+})
+
 const root =
-    'flex w-full flex-col gap-2 [&[data-orientation=horizontal]>*]:shrink-0 data-[orientation=vertical]:flex-row data-[orientation=vertical]:items-start'
+    'flex w-full flex-col gap-2 [&[data-orientation=horizontal]>*]:shrink-0 [&[data-orientation=horizontal]>[role=tablist]]:self-start data-[orientation=vertical]:flex-row data-[orientation=vertical]:items-start'
 
-const Root = React.forwardRef<HTMLDivElement, Omit<BaseTabs.Root.Props, 'ref'> & { appearance?: Appearance }>(
-    function TabsRoot({ appearance = 'pane', className, onValueChange, ...props }, ref) {
-        const tabChanged = React.useRef(false)
-        const clearTabChange = React.useRef<ReturnType<typeof setTimeout>>()
-        const smoothHeight = useSmoothHeight(() => tabChanged.current)
-        const markTabChange = React.useCallback(() => {
-            tabChanged.current = true
-            clearTimeout(clearTabChange.current)
-            clearTabChange.current = setTimeout(() => {
-                tabChanged.current = false
-            }, TAB_CHANGE_WINDOW_MS)
-        }, [])
-        React.useEffect(() => () => clearTimeout(clearTabChange.current), [])
-        const controlledValue = props.value
-        const previousValue = React.useRef(controlledValue)
-        useIsomorphicLayoutEffect(() => {
-            if (controlledValue === previousValue.current) return
-            previousValue.current = controlledValue
-            markTabChange()
-        }, [controlledValue, markTabChange])
-        const setRef = React.useCallback(
-            (element: HTMLDivElement | null) => {
-                smoothHeight(element)
-                assignRef(ref, element)
-            },
-            [ref, smoothHeight]
-        )
-        const changeTab: BaseTabs.Root.Props['onValueChange'] = (...args) => {
-            markTabChange()
-            onValueChange?.(...args)
-        }
-        return (
-            <AppearanceContext.Provider value={appearance}>
-                <BaseTabs.Root
-                    ref={setRef}
-                    className={mergeClassName(root, className)}
-                    onValueChange={changeTab}
-                    {...props}
-                />
-            </AppearanceContext.Provider>
-        )
-    }
-)
+export type TabsRootProps = Omit<BaseTabs.Root.Props, 'ref'> & {
+    appearance?: ButtonAppearance
+    variant?: ButtonVariant
+    size?: ButtonSize
+}
 
-const Indicator = withClassName(
-    BaseTabs.Indicator,
-    'pointer-events-none absolute bottom-0 left-0 h-0.5 w-[var(--active-tab-width)] bg-orange [transform:translateX(var(--active-tab-left))] transition-[transform,width,height] duration-200 ease-out data-[orientation=vertical]:-left-px data-[orientation=vertical]:top-0 data-[orientation=vertical]:bottom-auto data-[orientation=vertical]:h-[var(--active-tab-height)] data-[orientation=vertical]:w-0.5 data-[orientation=vertical]:[transform:translateY(var(--active-tab-top))] motion-reduce:transition-none'
-)
-
-const List = React.forwardRef<HTMLDivElement, Omit<BaseTabs.List.Props, 'ref'>>(function TabsList(
-    { className, children, ...props },
+const Root = React.forwardRef<HTMLDivElement, TabsRootProps>(function TabsRoot(
+    {
+        appearance = 'flat',
+        variant = 'secondary',
+        size = 'md',
+        orientation = 'horizontal',
+        className,
+        onValueChange,
+        ...props
+    },
     ref
 ) {
-    const appearance = React.useContext(AppearanceContext)
+    const tabChanged = React.useRef(false)
+    const clearTabChange = React.useRef<ReturnType<typeof setTimeout>>()
+    const smoothHeight = useSmoothHeight(() => tabChanged.current)
+    const markTabChange = React.useCallback(() => {
+        tabChanged.current = true
+        clearTimeout(clearTabChange.current)
+        clearTabChange.current = setTimeout(() => {
+            tabChanged.current = false
+        }, TAB_CHANGE_WINDOW_MS)
+    }, [])
+    React.useEffect(() => () => clearTimeout(clearTabChange.current), [])
+    const controlledValue = props.value
+    const previousValue = React.useRef(controlledValue)
+    useIsomorphicLayoutEffect(() => {
+        if (controlledValue === previousValue.current) return
+        previousValue.current = controlledValue
+        markTabChange()
+    }, [controlledValue, markTabChange])
+    const setRef = React.useCallback(
+        (element: HTMLDivElement | null) => {
+            smoothHeight(element)
+            assignRef(ref, element)
+        },
+        [ref, smoothHeight]
+    )
+    const changeTab: BaseTabs.Root.Props['onValueChange'] = (...args) => {
+        markTabChange()
+        onValueChange?.(...args)
+    }
+    const look = React.useMemo(
+        () => ({ appearance, variant, size, orientation }),
+        [appearance, variant, size, orientation]
+    )
     return (
-        <BaseTabs.List
-            ref={ref}
-            className={mergeClassName(
-                cn(
-                    `relative flex shrink-0 gap-0.5 data-[orientation=horizontal]:max-w-full data-[orientation=horizontal]:overflow-x-auto data-[orientation=vertical]:flex-col ${scrollbarHidden}`,
-                    appearance === 'pane'
-                        ? 'p-1'
-                        : `shadow-[inset_0_-1px_0_rgb(var(--text-primary)/0.14)] data-[orientation=vertical]:border-l data-[orientation=vertical]:shadow-none ${surfaceDivider}`
-                ),
-                className
-            )}
-            {...props}
-        >
-            {children}
-            {appearance === 'underline' && <Indicator />}
-        </BaseTabs.List>
+        <LookContext.Provider value={look}>
+            <BaseTabs.Root
+                ref={setRef}
+                className={mergeClassName(root, className)}
+                orientation={orientation}
+                onValueChange={changeTab}
+                {...props}
+            />
+        </LookContext.Provider>
     )
 })
 
-const tab = cn(
-    'group flex cursor-default select-none items-center whitespace-nowrap rounded px-3 py-2 text-[15px] leading-tight text-primary',
-    'transition-[background-color,color] duration-200 ease-out motion-reduce:transition-none',
-    'data-[disabled]:pointer-events-none data-[disabled]:text-muted',
-    focusRing
-)
-
-const paneTab =
-    'hover:bg-[rgb(var(--text-primary)/0.06)] data-[active]:bg-white/60 data-[active]:shadow-[inset_0_0_0_1px_rgb(var(--text-primary)/0.12),0_1px_0_rgb(var(--text-primary)/0.12),0_1px_2px_rgb(0_0_0/0.06)] dark:data-[active]:bg-white/[0.1]'
-const underlineTab =
-    'rounded-none bg-transparent focus-visible:-outline-offset-2 text-secondary hover:text-primary data-[active]:text-primary'
-
-const label = 'col-start-1 row-start-1 flex items-center gap-2'
-
-const Tab = React.forwardRef<HTMLElement, Omit<BaseTabs.Tab.Props, 'ref'>>(function TabsTab(
-    { className, children, ...props },
+const List = React.forwardRef<HTMLDivElement, Omit<BaseTabs.List.Props, 'ref' | 'render'>>(function TabsList(
+    props,
     ref
 ) {
-    const appearance = React.useContext(AppearanceContext)
+    const { appearance, variant, size, orientation } = React.useContext(LookContext)
+    return (
+        <BaseTabs.List
+            ref={ref}
+            render={<ButtonGroup appearance={appearance} variant={variant} size={size} orientation={orientation} />}
+            {...props}
+        />
+    )
+})
+
+const Tab = React.forwardRef<HTMLElement, Omit<BaseTabs.Tab.Props, 'ref' | 'render'>>(function TabsTab(props, ref) {
+    const { appearance, variant, size } = React.useContext(LookContext)
     return (
         <BaseTabs.Tab
             ref={ref}
-            className={mergeClassName(cn(tab, appearance === 'pane' ? paneTab : underlineTab), className)}
+            render={(tabProps, state) => (
+                <Button
+                    {...tabProps}
+                    appearance={appearance}
+                    variant={variant}
+                    size={size}
+                    data-pressed={state.active ? '' : undefined}
+                />
+            )}
             {...props}
-        >
-            <span className="grid">
-                <span aria-hidden className={cn(label, 'invisible font-bold')}>
-                    {children}
-                </span>
-                <span className={cn(label, 'group-data-[active]:font-bold')}>{children}</span>
-            </span>
-        </BaseTabs.Tab>
+        />
     )
 })
 
