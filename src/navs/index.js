@@ -2862,6 +2862,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
+                                    name: "Security",
+                                    url: "/docs/libraries/js/security",
+                                },
+                                {
                                     name: 'Persistence',
                                     url: '/docs/libraries/js/persistence',
                                 },
@@ -8287,6 +8291,33 @@ export const docsMenu = {
                     url: '/docs/workflows/broadcasts',
                     icon: 'IconSend',
                     color: 'orange',
+                },
+                {
+                    name: 'Transactional emails',
+                },
+                {
+                    name: 'Send transactional emails',
+                    url: '/docs/workflows/transactional-emails',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows/transactional-emails',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/workflows/transactional-emails/node',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/workflows/transactional-emails/python',
+                        },
+                        {
+                            name: 'API',
+                            url: '/docs/workflows/transactional-emails/api',
+                        },
+                    ],
                 },
                 {
                     name: 'Channels',

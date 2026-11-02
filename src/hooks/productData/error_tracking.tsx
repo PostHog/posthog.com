@@ -16,7 +16,7 @@ import {
     IconWarning,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
-import { applications, topFeatures } from './error_tracking/slides'
+import { applications, keyFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
 
 export const errorTracking = {
@@ -72,11 +72,11 @@ export const errorTracking = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

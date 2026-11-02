@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Planhat connector syncs your customer success data – companies, end users, users, licenses, assets, and NPS responses – into the PostHog Data warehouse, so you can analyze your customer success metrics alongside your product data.
+The Planhat connector syncs your customer success data – including companies, contacts, products, tasks, revenue, and custom fields – into the PostHog data warehouse, so you can analyze your customer success metrics alongside your product data.
 
 ## Prerequisites
 
@@ -40,6 +40,8 @@ All Planhat tables use full refresh sync mode.
 ## Supported tables
 
 <SourceTables />
+
+> **Note:** The `tasks` table syncs open tasks only. Planhat archives a task once it is completed, and the list endpoint returns only unarchived tasks by default.
 
 ## Troubleshooting
 

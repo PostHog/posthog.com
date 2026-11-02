@@ -113,7 +113,7 @@ struct App: App {
 
 To get your PostHog API key and host, [sign up to PostHog](https://app.posthog.com/signup). Then, you can find your API key and host in your [project settings](https://app.posthog.com/settings/project). Replace the strings `<ph_project_token>` and `<ph_client_api_host>` with your API key and host.
 
-Finally, [capture a custom event](/docs/libraries/ios#capturing-events) when the button on `FeatureScreenView` is clicked. We'll use this event as our goal metric in our A/B test.
+Finally, [capture a custom event](/docs/libraries/ios/usage#capturing-events) when the button on `FeatureScreenView` is clicked. We'll use this event as our goal metric in our A/B test.
 
 ```swift
 // in FeatureScreenView.swift
@@ -202,7 +202,7 @@ That's it! Your A/B test is now ready. When you run your app, you see either gre
 
 If you want to test both variants of your experiment to make sure they are working correctly, you can add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag.
 
-Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
+Lastly, you can [view your test results](/docs/experiments/analyzing-results) on the experiment page.
 
 ## Further reading
 

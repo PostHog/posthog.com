@@ -259,7 +259,7 @@ That's it! Your A/B test is now ready. When you run your app, you see either gre
 
 If you want to test both variants of your experiment to make sure they are working correctly, you can add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag.
 
-Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
+Lastly, you can [view your test results](/docs/experiments/analyzing-results) on the experiment page.
 
 ## Further reading
 

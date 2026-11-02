@@ -9,7 +9,7 @@ availability:
 sourceId: Ramp
 ---
 
-The Ramp connector syncs your corporate spend data into PostHog, including transactions, reimbursements, users, cards, and departments.
+The Ramp connector syncs your corporate spend data into PostHog, including transactions, reimbursements, billing statements, users, cards, and departments.
 
 ## Adding a data source
 
@@ -41,10 +41,11 @@ To connect Ramp to PostHog, you need to create a developer app with the correct 
 - `users:read`
 - `cards:read`
 - `departments:read`
+- `billing_statements:read`
 
 <CalloutBox icon="IconWarning" title="Scopes are fixed at app creation" type="caution">
 
-Ramp locks scopes when the developer app is created. You can't add scopes later – make sure all five read scopes are granted before creating the app.
+Ramp locks scopes when the developer app is created. You can't add scopes later – make sure all six read scopes are granted before creating the app.
 
 </CalloutBox>
 
@@ -63,13 +64,14 @@ Ramp locks scopes when the developer app is created. You can't add scopes later 
 
 The transactions table supports incremental syncing using the `user_transaction_time` field. All other tables use full refresh.
 
-| Table            | Sync method  | Notes                                      |
-| ---------------- | ------------ | ------------------------------------------ |
-| `transactions`   | Incremental  | Uses `user_transaction_time` as the cursor |
-| `reimbursements` | Full refresh |                                            |
-| `users`          | Full refresh |                                            |
-| `cards`          | Full refresh |                                            |
-| `departments`    | Full refresh |                                            |
+| Table                | Sync method  | Notes                                      |
+| -------------------- | ------------ | ------------------------------------------ |
+| `transactions`       | Incremental  | Uses `user_transaction_time` as the cursor |
+| `reimbursements`     | Full refresh |                                            |
+| `users`              | Full refresh |                                            |
+| `cards`              | Full refresh |                                            |
+| `departments`        | Full refresh |                                            |
+| `billing_statements` | Full refresh |                                            |
 
 **Incremental** syncs only fetch records with a `user_transaction_time` at or after the last synced value. **Full refresh** syncs reload all data on each run.
 
@@ -81,10 +83,11 @@ Ramp's API doesn't support an `updated_after` filter on transactions. This means
 
 ## Available tables
 
-| Table            | Description                                   |
-| ---------------- | --------------------------------------------- |
-| `transactions`   | Corporate card transactions and spend data    |
-| `reimbursements` | Employee reimbursement requests and payouts   |
-| `users`          | Ramp users in your organization               |
-| `cards`          | Corporate cards issued to employees           |
-| `departments`    | Department structure within your organization |
+| Table                | Description                                              |
+| -------------------- | -------------------------------------------------------- |
+| `transactions`       | Corporate card transactions and spend data               |
+| `reimbursements`     | Employee reimbursement requests and payouts              |
+| `users`              | Ramp users in your organization                          |
+| `cards`              | Corporate cards issued to employees                      |
+| `departments`        | Department structure within your organization            |
+| `billing_statements` | Billing statements with amount due and period date range |

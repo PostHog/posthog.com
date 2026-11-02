@@ -16,7 +16,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './surveys/features'
-import { applications, topFeatures } from './surveys/slides'
+import { applications, keyFeatures } from './surveys/slides'
 
 export const surveys = {
     ...getTool('surveys'),
@@ -74,11 +74,11 @@ export const surveys = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

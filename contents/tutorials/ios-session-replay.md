@@ -9,7 +9,7 @@ tags:
 
 [Session replay](/session-replay) is a useful support tool for understanding how users are interacting with your iOS app. It also helps you debug and recreate issues. 
 
-To show how you to set it up with PostHog, in this tutorial we create a basic UIKit app, add PostHog, and [enable session recordings](/docs/session-replay/mobile#ios).
+To show how you to set it up with PostHog, in this tutorial we create a basic UIKit app, add PostHog, and [enable session recordings](/docs/session-replay/installation/ios).
 
 > **Note:** While this tutorial uses UIKit, similar concepts apply to SwiftUI. See our [docs](/docs/session-replay/ios) for more details.
 
