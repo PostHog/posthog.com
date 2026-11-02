@@ -545,6 +545,7 @@ export const handbookSidebar = [
         url: '',
         children: [
             { name: 'Compensation', url: '/handbook/people/compensation' },
+            { name: 'Payroll', url: '/handbook/people/payroll' },
             { name: 'Share options', url: '/handbook/people/share-options' },
             { name: 'Benefits', url: '/handbook/people/benefits' },
             { name: 'Time off', url: '/handbook/people/time-off' },
