@@ -49,7 +49,7 @@ Overnight (after [our Hacker News launch](https://news.ycombinator.com/item?id=2
 
 So, we had a lot of hype. But we hadn't focused on revenue yet.
 
-Last summer, we got a lot of requests for a paid product (extra features or people wanting us to host it for them). At the same time, lots of investors were interested _and_ my [daughter was very ill](ceo-diary-3). Since I had to look after her, we felt we had to choose _either_ revenue _or_ fundraising.
+Last summer, we got a lot of requests for a paid product (extra features or people wanting us to host it for them). At the same time, lots of investors were interested _and_ my [daughter was very ill](/blog/ceo-diary-3). Since I had to look after her, we felt we had to choose _either_ revenue _or_ fundraising.
 
 We picked revenue.
 

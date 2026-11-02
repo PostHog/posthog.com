@@ -6,6 +6,12 @@ export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow'
 /** Optional pages under a Learn hub, at /learn/<product>/<page>. */
 export type LearnHubPage = 'agent-prompts-and-mcp' | 'live-playground'
 
+/** A page nested under a hub page, at /learn/<product>/<page>/<slug>. Its src/pages file must exist. The hub page link opens the first one. */
+export interface LearnHubSubpage {
+    slug: string
+    name: string
+}
+
 export interface PocketGuideVolume {
     /** Topic directory: contents/learn/<id>/pocket-guide/. Independent of the public route. */
     id: string
@@ -23,7 +29,7 @@ export interface PocketGuideVolume {
     /** Route where Pocket Guide touchpoints should open this volume. */
     learnPath?: string
     /** Show an Overview page at /learn/<product> and list the extra hub pages that exist. Omit for a flat chapter list. */
-    learnHub?: { pages?: LearnHubPage[] }
+    learnHub?: { pages?: LearnHubPage[]; subpages?: Partial<Record<LearnHubPage, LearnHubSubpage[]>> }
     /** Count the front matter and primer while this volume consists of those two learning pages. */
     countOrientationPages?: boolean
     /** A hand-written src/pages file owns this route, so don't generate one. */
@@ -60,7 +66,15 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         docsProduct: 'ai-observability',
         productHandle: 'ai_observability',
         learnPath: '/learn/ai-observability/pocket-guide',
-        learnHub: { pages: ['agent-prompts-and-mcp', 'live-playground'] },
+        learnHub: {
+            pages: ['agent-prompts-and-mcp', 'live-playground'],
+            subpages: {
+                'live-playground': [
+                    { slug: 'twig', name: 'Twig.com' },
+                    { slug: 'online-and-offline-evals', name: 'Online and offline evals' },
+                ],
+            },
+        },
     },
     {
         id: 'data-stack',
