@@ -345,7 +345,7 @@ class MainActivity : AppCompatActivity() {
 
 Any past or future events captured after calling `identify` will now be associated with the email you provided. 
 
-To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab]((https://us.posthog.com/events)).
+To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={IdentifyLight} 
@@ -412,7 +412,7 @@ In this tutorial, we create a simple trend insight:
 2. Under the **Series** header select the `home_button_clicked` event. 
 3. Click the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
-For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggled is enabed:
+For example, in the image below we set our insight to show the number of unique users that captured the `home_button_clicked` event where the toggle is enabled:
 
 <ProductScreenshot
   imageLight={InsightLight} 

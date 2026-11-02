@@ -55,7 +55,7 @@ A product without an owner is as good as dead. Put someone – or a team of some
 
 At PostHog, the <SmallTeam slug="growth" /> (hi! 👋) owns pricing, and I’d estimate it encompasses more than half of our overall responsibility.
 
-> Edit: The above is not longer true - pricing is [now handled](content/newsletter/pricing-advice) by the <SmallTeam slug="billing" /> but the reasoning still applies!
+> Edit: The above is not longer true - pricing is [now handled](/newsletter/pricing-advice) by the <SmallTeam slug="billing" /> but the reasoning still applies!
 
 ### 2. Understand who your customers are and their needs
 Every product has customers, and your pricing product is no different. Who the customer is varies by business, but it essentially comes down to one question: which people need the pricing (and its tooling) to serve their specific needs?
