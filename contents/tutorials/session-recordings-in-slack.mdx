@@ -38,7 +38,7 @@ posthog.init('<ph_project_token>', {
     loaded: (ph) => {
       let checkInterval
 
-      // this will be called every time a new sesson starts
+      // this will be called every time a new session starts
       ph.onSessionId((sessionId) => {
         clearInterval(checkInterval)
 
