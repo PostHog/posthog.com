@@ -20,7 +20,7 @@ The Billing Service is the source of truth for product information, what plans a
 
 To ensure consistency in the setup of credit-based plans we have [Zapier Automation](https://zapier.com/app/zaps/folder/1809976) to take care of all of the Stripe-related object setup.
 
-The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, and applies the credits after the customer pays. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> if you have a question about a deal.
+The <SmallTeam slug="revops" /> does the steps in this section. If you are in sales, do not do them yourself. When the order form closes, RevOps sends the upfront invoice, then applies the credits. Ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> if you have a question about a deal.
 
 For a standard annual contract, the row fill and the draft invoice are now automated. Read [closed-won deal desk automation](/handbook/growth/revops/closed-won-deal-desk) for what runs on its own and what you still do. The steps below are the manual path.
 
@@ -43,16 +43,16 @@ If this is a new contract for an existing customer, you will need to add their e
 - Click the invoice link in the table to open it in Stripe, or use the Invoice ID to locate the invoice in Stripe. 
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
 - If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
-- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
+- Send the invoice to the customer. Ensure that the customer is aware that payment is via bank transfer only (no credit cards and no checks). See [payment method](/handbook/growth/sales/contract-rules#payment-method).
 
-**Do not proceed to the next steps until invoice is finalized.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
+**Do not proceed to the next steps until the invoice is sent.** Stripe pays an invoice from the customer's credit balance when the invoice is finalized. If you add credits before sending, they pay the purchase invoice itself, and the customer has nothing to pay. You don't need to wait for the customer to pay.
 
 > For customers using Bill.com for payment, when they submit the invoice to the Bill platform it strips out the Stripe virtual account details.  You'll need to ask them to follow the instructions in this [help article](https://help.bill.com/direct/s/article/360000009246) to set the correct bank details for us in the Bill.com platform. The account details is provided in the invoice sent over. They'll need to make sure they use the original contact information and not your email if you're set as signer on the contract so we can process payments in the right account.  In case they don't do this, we have a default customer account on <PrivateLink url="https://dashboard.stripe.com/customers/cus_Rqm805zKTuxdqU">Stripe</PrivateLink> which the money will go to.  If this happens, mark their invoice as paid manually and then generate a new one against our default customer account to use the funds.
 > **How do I know if a customer is using Bill.com for payment?** You should try and get ahead of this by asking your customer whether they use Bill.com or ask to be connected to their finance team if unsure. Bill.com invoice notifications are sent to sales@posthog.com from account-services@inform.bill.com. The [sales Google group](https://groups.google.com/a/posthog.com/g/sales) archives them, so you can search the archive directly for subject lines like "Acme Inc sent you a payment" or "A payment from Acme Inc should arrive shortly". Note any that match accounts in your book.
 
 ###### Step 4: Apply credits
-- Make sure that the payment is fully processed to avoid any automatic deductions.
-- **If customer wishes to begin using credits immediately:** return to the Zapier table after you’ve verified payment completion and click the "Apply Credit" button.
+- Make sure the invoice has been sent, so the credits don't pay it.
+- **If customer wishes to begin using credits immediately:** return to the Zapier table and click the "Apply Credit" button.
 - **If customer wishes to begin using credits  in the next billing cycle:** apply the credits at the end of the current billing cycle.
 
 ###### Step 5: Schedule subscription

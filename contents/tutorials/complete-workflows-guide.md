@@ -35,7 +35,7 @@ The cool thing is that workflows can be built independently of your code. Only t
 ## Getting started
 ### Sending emails 
 
-Email sending is very easy to [configure and set up](/docs/workflows/configure-channels#quest-item-create-a-channel). Four DNS entries need to be made, which are displayed directly in the setup window. Once the entries are verified, the email address is marked as verified and can be used for email sending.
+Email sending is very easy to [configure and set up](/docs/workflows/configure-channels#create-a-new-workflows-channel). Four DNS entries need to be made, which are displayed directly in the setup window. Once the entries are verified, the email address is marked as verified and can be used for email sending.
 
 ![email setup screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/b42_workflows_scr1_c1a2a6db00.webp)
 
@@ -77,7 +77,7 @@ As a prerequisite, you need to sync the language code of the user with PostHog. 
 
 ### Sending push notifications
 
-Workflows can send native mobile push notifications directly. Add a **Push notification** step to a workflow, the same way you add an email step. Push is in open beta.
+Workflows can send native mobile push notifications directly. Add a **Push notification** step to a workflow, the same way you add an email step.
 
 Two things have to be in place first:
 

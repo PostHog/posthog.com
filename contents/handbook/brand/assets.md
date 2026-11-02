@@ -15,7 +15,7 @@ All approved brand assets — logos, colors, fonts, hedgehogs, and crests — li
 
 We’re really happy people want to build on top of PostHog, but we want to keep it clear when something is made by us or made by someone else. If you've built a third-party app on top of PostHog or want to partner with us in some way, here is some high-level guidance for you to bear in mind.
 
--   We're _generally OK_ with people using the PostHog name to describe compatibility. For example, you can say your product "works with PostHog," is "built for PostHog" or "built on PostHog".
+-   We're _generally OK_ with people using the PostHog name to describe compatibility. For example, you can say your product "works with PostHog" or is "built with PostHog," "built for PostHog," or "built on PostHog." To show it on your website, add a [Built with PostHog badge](https://brand.posthog.com/badges).
 
 -   We're _not OK_ with people using the PostHog name to make it look like your project is made by, endorsed by, or is officially partnered with PostHog if it isn't. So for example, while "Desktop Studio for PostHog" would be fine, "Official PostHog Desktop Studio" or "PostHog Desktop Studio" would not be.
 

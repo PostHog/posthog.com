@@ -243,6 +243,7 @@ const PRIMARY_TOOL_HANDLES: string[] = [
     'ai_observability',
     'session_replay',
     'replay_vision',
+    'data_pipelines',
     'feature_flags',
     'experiments',
     'error_tracking',
@@ -278,12 +279,6 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'separator',
-        },
-        {
-            type: 'item',
-            label: 'Context Warehouse',
-            link: '/context-warehouse',
-            icon: <Icons.IconDatabase className="size-4 text-blue" />,
         },
         {
             type: 'item',
@@ -927,16 +922,6 @@ export const SparksJoyItems: Record<'games' | 'notGames', SparksJoyItem[]> = {
 export function useMenuSelectOptions() {
     // Build the select groups
     const selectGroups = [
-        {
-            label: 'Context warehouse',
-            items: [
-                {
-                    value: 'products',
-                    label: 'Context warehouse',
-                    icon: <Icons.IconApps className="size-4 text-red" />,
-                },
-            ],
-        },
         {
             label: 'Pricing',
             items: [

@@ -11,15 +11,19 @@ sourceId: Personio
 
 The Personio connector syncs your HR and recruiting data from Personio to PostHog. The following tables are supported:
 
-| Table                 | Description                            | Sync mode                    |
-| --------------------- | -------------------------------------- | ---------------------------- |
-| persons               | Employee profiles and HR data          | Full refresh and incremental |
-| absence_periods       | Employee absences and time-off records | Full refresh and incremental |
-| attendance_periods    | Employee attendance records            | Full refresh and incremental |
-| salary_bands          | Salary band definitions                | Full refresh only            |
-| cost_centers          | Cost center definitions                | Full refresh only            |
-| recruiting_jobs       | Recruiting job postings                | Full refresh only            |
-| recruiting_categories | Recruiting job categories              | Full refresh only            |
+| Table                 | Description                                        | Sync mode                    |
+| --------------------- | -------------------------------------------------- | ---------------------------- |
+| persons               | Employee profiles and HR data                      | Full refresh and incremental |
+| employments           | Employment records per person (position, contract) | Full refresh and incremental |
+| absence_periods       | Employee absences and time-off records             | Full refresh and incremental |
+| attendance_periods    | Employee attendance records                        | Full refresh and incremental |
+| compensations         | Payroll compensation data per employee per month   | Full refresh only            |
+| org_units             | Department and team hierarchy with parent chain    | Full refresh only            |
+| absence_types         | Absence type definitions                           | Full refresh only            |
+| salary_bands          | Salary band definitions                            | Full refresh only            |
+| cost_centers          | Cost center definitions                            | Full refresh only            |
+| recruiting_jobs       | Recruiting job postings                            | Full refresh only            |
+| recruiting_categories | Recruiting job categories                          | Full refresh only            |
 
 ## Prerequisites
 
@@ -30,8 +34,10 @@ Before linking Personio, create API credentials in your Personio account:
    - `personio:persons:read`
    - `personio:absences:read`
    - `personio:attendances:read`
+   - `personio:compensations:read`
    - `personio:salary-bands:read`
    - `personio:cost-centers:read`
+   - `personio:org-units:read`
    - `personio:recruiting:read`
 3. Note down your **Client ID** and **Client secret**
 
@@ -57,7 +63,7 @@ The data warehouse then starts syncing your Personio data. You can see details, 
 Personio tables support full refresh syncing, and some tables also support incremental syncing:
 
 - **Full refresh** – Re-imports all records from Personio on every sync
-- **Incremental** – Only imports records modified since the last sync using `updated_at` filtering (available for persons, absence_periods, and attendance_periods)
+- **Incremental** – Only imports records modified since the last sync using `updated_at` filtering (available for persons, employments, absence_periods, and attendance_periods)
 
 When you enable incremental sync for a supported table:
 
@@ -66,7 +72,7 @@ When you enable incremental sync for a supported table:
 
 Incremental syncing is more efficient for large Personio accounts, reducing sync time and API usage. If a sync is interrupted, it resumes from where it left off.
 
-Tables without incremental support (salary_bands, cost_centers, recruiting_jobs, recruiting_categories) always perform a full refresh.
+Tables without incremental support (compensations, org_units, absence_types, salary_bands, cost_centers, recruiting_jobs, recruiting_categories) always perform a full refresh.
 
 ## Configuration
 
