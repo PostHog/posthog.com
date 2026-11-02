@@ -49,8 +49,10 @@ const isKeyboardFocus = (event: FocusEvent<HTMLElement>): boolean => {
 
 const wrapIndex = (value: number, count: number): number => ((value % count) + count) % count
 
-const makeInert = (element: HTMLElement | null): void => {
-    element?.setAttribute('inert', '')
+const focusableSelector = 'a[href], button, input, select, textarea, summary, [tabindex]'
+
+const removeFromTabOrder = (element: HTMLElement | null): void => {
+    element?.querySelectorAll(focusableSelector).forEach((node) => node.setAttribute('tabindex', '-1'))
 }
 
 export function Carousel({
@@ -208,7 +210,7 @@ export function Carousel({
     const renderSlide = (slide: ReactNode, index: number, copy: 'before' | 'real' | 'after') => (
         <div
             key={`${copy}-${(slide as React.ReactElement)?.key ?? index}`}
-            ref={copy === 'real' ? undefined : makeInert}
+            ref={copy === 'real' ? undefined : removeFromTabOrder}
             role={copy === 'real' ? 'group' : undefined}
             aria-roledescription={copy === 'real' ? 'slide' : undefined}
             aria-label={copy === 'real' ? `${index + 1} of ${count}` : undefined}

@@ -341,7 +341,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                     />
                 ) : (
                     snippets.map((snippet) => (
-                        <Tabs.Panel key={snippet.id} value={snippet.id} keepMounted className="rounded-none text-sm">
+                        <Tabs.Panel key={snippet.id} value={snippet.id} className="rounded-none text-sm">
                             <SnippetContent
                                 snippet={snippet}
                                 lineNumbers={lineNumbers}
