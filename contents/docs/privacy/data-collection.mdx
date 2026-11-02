@@ -138,7 +138,7 @@ function onConsentChange(hasConsented) {
 
 Every CMP (OneTrust, Cookiebot, and others) exposes some kind of callback or event that fires when consent changes. Call `opt_in_capturing()` and `opt_out_capturing()` from that callback, using whatever consent-change hook your CMP provides.
 
-Alternatively, use [cookieless tracking](#cookieless-tracking) with `cookieless_mode: "on_reject"`. PostHog still loads and counts users with a privacy-preserving hash, and only starts storing cookies once the user opts in – without you needing to wire up the opt in and out calls yourself.
+Alternatively, use [cookieless tracking](#cookieless-tracking) with `cookieless_mode: "on_reject"`. PostHog uses a privacy-preserving hash to count users who opt out, and only starts storing cookies once the user opts in. You still call `opt_in_capturing()` and `opt_out_capturing()` from your CMP. Until one of them runs, PostHog sends no events. Don't combine this with `opt_out_capturing_by_default: true`: PostHog then treats a visitor with no choice as opted out and sends cookieless events right away.
 
 ## IP data capture
 
@@ -283,22 +283,35 @@ PostHog can be configured to do cookieless tracking by setting `cookieless_mode`
 
 <CalloutBox type="info" title="Enable cookieless tracking">
 
-Before configuring cookieless tracking, go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**.
+Before configuring cookieless tracking, go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**. If this setting is off, PostHog discards cookieless events and shows an [ingestion warning](/docs/data/ingestion-warnings#discarded-cookieless-event-because-cookieless-tracking-is-disabled).
 
 </CalloutBox>
 
 First is `cookieless_mode: "always"`:
 - Doesn't require a cookie banner (unless something else on your website uses cookies)
 - Never stores PostHog data in cookies or local/session storage
+- Ignores `opt_in_capturing()` and `opt_out_capturing()`, so capture continues regardless of the user's choice
 - Doesn't block `identify()`, but you should avoid identifying users in this mode: a persistent distinct ID is considered Personal Data under GDPR and other similar privacy regulations, which undoes the privacy benefit of cookieless tracking. Set [`person_profiles: 'never'`](/docs/data/anonymous-vs-identified-events) to turn `identify()` calls into no-ops
 - Doesn't support `alias()`: alias events are dropped during ingestion
 - Counts the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers
 
 Second is `cookieless_mode: "on_reject"`:
 - Is useful if you do want to show a cookie banner and only enable cookies when the user consents with `posthog.opt_in_capturing()` or similar method
-- Never stores PostHog data in cookies or local/session storage until the user opts in
-- **No events are captured** until after consent is either given or denied
+- Stores no PostHog data in cookies or local/session storage until the user opts in or out. If the user opts out, PostHog stores only that choice in local storage
+- **No events are captured** until after consent is either given or denied, unless you set `opt_out_capturing_by_default: true`, or set `respect_dnt: true` and the browser sends Do Not Track. In either case, PostHog treats a visitor with no choice as opted out and captures cookieless events right away
 - If consent is denied, still counts those users, using a privacy-preserving hash calculated on PostHog's servers
+
+### What each mode does by consent state
+
+|  | `always` | `on_reject`, no choice yet | `on_reject`, opted in | `on_reject`, opted out |
+| --- | --- | --- | --- | --- |
+| Events sent | Yes, cookieless | No | Yes, with a persistent distinct ID | Yes, cookieless |
+| Stored in the browser | Nothing | Nothing | PostHog cookie and local storage | Only the consent choice |
+| Session replay and surveys | Off | Off | On | Off |
+| Heatmaps | On | Off | On | On |
+| `get_explicit_consent_status()` | – | `"pending"` | `"granted"` | `"denied"` |
+
+In this table, "cookieless" means PostHog's servers calculate the distinct ID from a privacy-preserving hash, so the browser stores no ID. With `opt_out_capturing_by_default: true`, or with `respect_dnt: true` and Do Not Track, a visitor with no choice gets the "opted out" column for events, session replay and surveys, and heatmaps.
 
 <CalloutBox type="info" title="More to do">
 
