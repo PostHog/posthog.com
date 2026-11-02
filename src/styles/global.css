@@ -53,7 +53,7 @@
             @apply no-underline;
         }
 
-        h4 {
+        h4:not(.font-heading) {
             @apply text-lg;
 
             code {
