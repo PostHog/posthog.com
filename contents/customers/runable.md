@@ -40,7 +40,7 @@ At his last company, Eshaan worked with 40 to 50 people whose whole job was tyin
 
 Eshaan is a power user of both AI and UI. He might actually be the heaviest [dashboard](/docs/product-analytics/dashboards) user we've met, with over 500 insight tiles and about 100 he checks four or five times a day. "I'm the guy who's just refreshing all the dashboards every hour," he says. "I'm using it like people use Databricks plus Tableau."
 
-He didn't build them by hand. First, he connected 13 sources to Runable's [Context Warehouse](/context-warehouse), including Stripe, six ad platforms, AppsFlyer, Dub, and the Google Sheets where he logs influencer campaigns. Then he pointed the Runable agent at the PostHog API, with his own config and skills, and had it build the insights.
+He didn't build them by hand. First, he connected 13 sources to Runable's [Context Warehouse](/warehouse), including Stripe, six ad platforms, AppsFlyer, Dub, and the Google Sheets where he logs influencer campaigns. Then he pointed the Runable agent at the PostHog API, with his own config and skills, and had it build the insights.
 
 The result is the whole [funnel](/docs/product-analytics/funnels) in one place: impression → page view → sign-up → first prompt → first artifact → free credit limit → paid, broken down by source, country, and device. PostHog also sends his conversion events straight to Google Ads and Meta, so he no longer needs Google Tag Manager.
 

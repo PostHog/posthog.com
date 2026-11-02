@@ -29,7 +29,7 @@ A Hacker News Pre-Mortem is a term I just made it up, for when you do your best 
 
 > This is _not_ a 'how to go viral' guide. If you want to do that, ironically don't focus on it. Instead, create unusually helpful content and share it. I mainly write about topics other founders ask me, or interesting things I observe first hand about our company), since I am in a unique position to write about those topics.
 
-We've had our [repo](https://github.com/posthog/posthog), [side projects](https://isgoogleanalyticsillegal.com/) and [several](what-to-ask-in-interviews) [blog](story-about-pivots) [posts](moving-to-sf/) all get to the front page.
+We've had our [repo](https://github.com/posthog/posthog), [side projects](https://isgoogleanalyticsillegal.com/) and [several](what-to-ask-in-interviews) [blog](story-about-pivots) [posts](/blog/moving-to-sf) all get to the front page.
 
 So, what are the basic criticisms that come up over and over for projects posted there?
 
@@ -67,7 +67,7 @@ Hey, at least they liked the website.
 
 We had a handful of friends using PostHog first, then we ran some Twitter ads to get a further 20 ish companies using the product, then we put it on Hacker News.
 
-Do not let this slow you down though (just optimize for "does anyone care" early on) - it took us just [a month of intense work](pivot-to-posthog) to do this, as one example. See some other [things that are fast](https://patrickcollison.com/fast).
+Do not let this slow you down though (just optimize for "does anyone care" early on) - it took us just [a month of intense work](/blog/pivot-to-posthog) to do this, as one example. See some other [things that are fast](https://patrickcollison.com/fast).
 
 [Example](https://news.ycombinator.com/item?id=30698771) | [Example 2](https://news.ycombinator.com/item?id=29892909) | [Example 3](https://news.ycombinator.com/item?id=29629604) | [Example 4](https://news.ycombinator.com/item?id=27885861)
 
