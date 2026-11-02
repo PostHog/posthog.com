@@ -113,6 +113,7 @@ The response says how many devices would be stored, and why each other row would
     "dry_run": true,
     "failed": [
         {
+            "index": 1,
             "distinct_id": "user_456",
             "device_token_suffix": "f6a1b2",
             "reason": "unknown_person",
@@ -123,7 +124,9 @@ The response says how many devices would be stored, and why each other row would
 }
 ```
 
-`reason` is one of `unknown_person`, `token_mismatch`, `not_stored` or `person_processing_disabled`. See [Rows that don't import](#rows-that-dont-import). Fix the failed rows, then send the same request without `dry_run` to import.
+`index` is the row's position in `subscriptions`, counting from 0. `reason` is one of `unknown_person`, `token_mismatch`, `not_stored` or `person_processing_disabled`. See [Rows that don't import](#rows-that-dont-import). Fix the failed rows, then send the same request without `dry_run` to import.
+
+Give each import request an `import_id`, a new UUID per batch. If a request times out and you send the batch again, use the same `import_id`, so a batch that was stored before the timeout isn't stored twice.
 
 To import rows whose `distinct_id` has no person yet, set `create_missing_persons` to `true`. Only do this for IDs you're sure your app identifies.
 
@@ -141,6 +144,7 @@ The Python script below reads a CSV with `distinct_id` and `device_token` column
 import csv
 import sys
 import time
+import uuid
 from collections import Counter
 
 import requests
@@ -158,11 +162,10 @@ headers = {"Authorization": f"Bearer {PERSONAL_API_KEY}"}
 
 
 def post(batch, dry_run):
+    body = {"subscriptions": batch, "dry_run": dry_run, "import_id": str(uuid.uuid4())}
     for attempt in range(ATTEMPTS):
         try:
-            response = requests.post(
-                url, headers=headers, json={"subscriptions": batch, "dry_run": dry_run}, timeout=(10, 60)
-            )
+            response = requests.post(url, headers=headers, json=body, timeout=(10, 60))
         except requests.RequestException:
             time.sleep(2**attempt)
             continue
@@ -178,10 +181,10 @@ def post(batch, dry_run):
 
 
 def split(batch, failed):
-    reasons = {(f["distinct_id"], f["device_token_suffix"]): f["reason"] for f in failed}
+    reasons = {f["index"]: f["reason"] for f in failed}
     passed, rejected = [], []
-    for row in batch:
-        reason = reasons.get((row["distinct_id"], row["device_token"][-6:]))
+    for index, row in enumerate(batch):
+        reason = reasons.get(index)
         if reason:
             rejected.append({**row, "reason": reason})
         else:
