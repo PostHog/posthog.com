@@ -21,7 +21,7 @@ PostHog and [Sentry](/compare/best-sentry-alternatives) are multi-product platfo
 
 1. **Sentry** is an application monitoring tool with error and performance monitoring, session replay, logs, metrics, uptime and cron monitoring, and Seer, a paid AI debugging agent. It's built for engineers and devops teams.
 
-2. **PostHog** is your product's context layer. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/feature-flags), [distributed tracing](/docs/distributed-tracing), [AI observability](/ai-observability), [logs](/logs), [metrics](/docs/metrics), an [AI assistant](/ai), and more; a [data warehouse](/context-warehouse) and [CDP](/data-pipelines) tie it all together, unifying that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
+2. **PostHog** is your product's context layer. On top of [error tracking](/error-tracking), it includes [product analytics](/product-analytics), [experiments](/experiments), [session replays](/session-replay), [feature flags](/feature-flags), [distributed tracing](/docs/distributed-tracing), [AI observability](/ai-observability), [logs](/logs), [metrics](/docs/metrics), an [AI assistant](/ai), and more; a [data warehouse](/warehouse) and [CDP](/data-pipelines) tie it all together, unifying that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
 
 ## How is PostHog different?
 
@@ -297,7 +297,7 @@ The difference is scope. Seer works from the error outward. PostHog's agents wor
 
 Choosing the right error tracking tool depends on what problem you're solving. Here's a quick guide:
 
-- Want one platform where every error arrives with the [session replay](/session-replay), [feature flags](/feature-flags), [logs](/logs), and user context behind it, feeds [analytics](/product-analytics), [experiments](/experiments), and a [data warehouse](/context-warehouse) you can query with SQL, and works from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp), all on a free tier most teams never outgrow? Go with **PostHog**.
+- Want one platform where every error arrives with the [session replay](/session-replay), [feature flags](/feature-flags), [logs](/logs), and user context behind it, feeds [analytics](/product-analytics), [experiments](/experiments), and a [data warehouse](/warehouse) you can query with SQL, and works from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp), all on a free tier most teams never outgrow? Go with **PostHog**.
 
 - Need deep stack traces, distributed tracing, and mature error triage workflows? **Sentry** is probably the right choice.
 
@@ -316,7 +316,7 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 - **PostHog** – AI features fail twice over: the exception your code throws when a provider times out, and the generation that returns fine but gives the user a bad answer. [Error tracking](/error-tracking) catches the first and [AI observability](/ai-observability) catches the second, capturing every LLM generation and trace with its cost, latency, and output, and both land in the same session next to the [replay](/session-replay), so you can see which prompts fail, who they fail for, and what they cost.
 
 **For privacy-conscious and regulated organizations**
-- Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/context-warehouse). **Sentry** provides BAA agreements and enterprise compliance packages.
+- Both are SOC 2 certified and GDPR-ready with EU data residency options. **PostHog** is HIPAA-ready and offers raw data access via its [data warehouse](/warehouse). **Sentry** provides BAA agreements and enterprise compliance packages.
 
 **For early-stage startups**
 - **PostHog** – A single platform that scales from landing pages to product analytics without rebuilding your stack as you grow. The generous free tier means you won't outgrow it quickly. [Startups can also qualify for free credits](/startups). For all the details about how much PostHog might cost, see [our pricing page](/pricing).
@@ -340,7 +340,7 @@ Choosing the right error tracking tool depends on what problem you're solving. H
 
 It means the data an agent needs to diagnose a problem, spot an opportunity, and ship a fix all exits in one place. [Error tracking](/error-tracking), [session replay](/session-replay), [logs](/logs), [product analytics](/product-analytics), [feature flags](/feature-flags), [experiments](/experiments), and [AI observability](/ai-observability) all write to the same place and share one model of users and sessions, so a stack trace arrives with the replay of what the user did, the flags they were in, and the logs your server wrote at the same moment.
 
-The [data warehouse](/context-warehouse) and [CDP](/data-pipelines) close the loop: business data from Stripe, HubSpot, Postgres, and other sources is synced in alongside your product data, and anything can be pushed back out to the tools you already use. 
+The [data warehouse](/warehouse) and [CDP](/data-pipelines) close the loop: business data from Stripe, HubSpot, Postgres, and other sources is synced in alongside your product data, and anything can be pushed back out to the tools you already use. 
 
 And you don't have to be in PostHog to use it. Ask a question or hand off a fix from [Slack](/slack), the [web app](/ai), [PostHog Desktop](/desktop), or your own editor via [the MCP](/mcp), and the agent sees your whole product, not just its errors.
 
