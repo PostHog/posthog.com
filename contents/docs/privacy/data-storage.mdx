@@ -16,6 +16,7 @@ This guide covers the following features:
 | ----------------------------------------------------------------- | ---------------------------------------------------------------- |
 | [Data storage location](#data-storage-location)                   | Control where your data is physically stored for GDPR compliance |
 | [Processing data before storage](#processing-data-before-storage) | Redact or filter data before it's stored in PostHog              |
+| [Data retention](#data-retention)                                 | How long PostHog keeps each type of data                         |
 | [Data deletion](#data-deletion)                                   | Tools to help comply with data deletion requests                 |
 | [Data access control](#data-access-control)                       | Manage who can access what data in PostHog                       |
 
@@ -96,6 +97,21 @@ This allows you to enrich your events with location data or filter out bot traff
 | IP Address                  | `$ip`                   | `192.168.1.1`              |
 
 </details>
+
+## Data retention
+
+How long PostHog Cloud keeps your data depends on the product and your plan. Use this table when you write a privacy policy or a data processing agreement.
+
+| Data | Free plan | Paid plans | Can you change it? |
+| --- | --- | --- | --- |
+| [Events](/docs/data/events-retention) | 1 year | 7 years | No. To keep events for longer, send them to your own storage with a [batch export](/docs/data-pipelines/batch-exports). |
+| [Session recordings](/docs/session-replay/recording-retention) | Up to 30 days | Pay-as-you-go: up to 90 days. Boost and Scale: up to 1 year. Enterprise: up to 5 years. | Yes, in your replay settings. A change applies to new recordings only. |
+| [Large properties on AI events](/docs/ai-observability/data-retention) such as `$ai_input` and `$ai_output` | 30 days | 30 days | No. The rest of each AI event follows events retention. |
+| [Logs](/docs/logs/pricing#retention) | 14 days | 14 days, or a longer paid custom period | Yes, per service or source. A change applies to new logs only. |
+| [File download exports](/docs/data-pipelines/file-download-exports) | 1 week | 1 week | No. |
+| [Data warehouse tables](/docs/data-warehouse) | No time limit | No time limit | Not applicable. Events retention does not apply to these tables. |
+
+A self-hosted instance keeps your events until you remove them.
 
 ## Data deletion
 
