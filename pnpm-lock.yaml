@@ -3636,7 +3636,7 @@ packages:
       react-dom: '>=16.14.0'
 
   '@posthog/twig-components@file:vendor/posthog-twig-components-aio-preview.tgz':
-    resolution: {integrity: sha512-Zg7y/gMfCAXFG+QNY8RojcoNTj4fAdvPRqc3L2jZh8FX+WWpc8gTUzUP130iDcBg30boAsetpOi7j49bFMuOmg==, tarball: file:vendor/posthog-twig-components-aio-preview.tgz}
+    resolution: {integrity: sha512-XU16ubtm5xJhXE4enJviUBrLUMAEPI6zHthTW+zM3chTGkN4pFuAF8LHd+zrambKb/o1VzjVXqopMArt0d6O0w==, tarball: file:vendor/posthog-twig-components-aio-preview.tgz}
     version: 0.2.3
     peerDependencies:
       react: ^18.3.0 || ^19.0.0
