@@ -23,6 +23,20 @@ To preload a prompt for PostHog AI, use this format:
 For example:
 `https://app.posthog.com/#panel=max:!What's%20my%20churn%20rate?`
 
+## Naming and tagging workflows
+
+More than one team sends emails through [PostHog Workflows](/docs/workflows). To help other teams see what a workflow does and which team owns it, follow these rules:
+
+- **Give each workflow a descriptive title.** The title must tell what the workflow does and who gets it. For example, `[EMAIL ONBOARDING] Feature flags – not activated after 7 days` is better than `FF flow v2`.
+- **Tag each workflow with your team or project name.** Apply the tag to all of your automations and broadcasts, so that other people can filter for them.
+- **Give cohorts the same prefix as the workflow.** If a workflow uses a dynamic cohort, put the workflow's prefix at the start of the cohort title. Then it is immediately clear where the cohort is used, and other people know that a change to it will change who gets the emails.
+
+For example, the <SmallTeam slug="developer-marketing" />:
+
+- Applies the `developer_marketing` tag to all of its automations and broadcasts.
+- Adds the `[EMAIL ONBOARDING]` prefix to the titles of its onboarding automations. This makes them different from the workflows that the <SmallTeam slug="growth" /> and the <SmallTeam slug="onboarding" /> run.
+- Adds the `[EMAIL ONBOARDING]` prefix to the titles of the dynamic cohorts that those automations use.
+
 ## Email broadcasts
 We regularly send three types of email broadcasts. 
 
