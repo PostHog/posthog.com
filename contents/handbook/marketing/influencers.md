@@ -14,6 +14,30 @@ Influencer marketing at PostHog is relationship building. We look for long-term 
 
 We also optimize for recurring collaborations over one-off sponsorships. When a creator works with us across several launches, PostHog becomes a natural part of their story, which beats any single ad read.
 
+## Who we work with
+
+Creators who partner with us represent PostHog, so they need to share [our values](/handbook/values). In practice, this mostly means treating people with respect.
+
+We don't work with creators who promote racism or other discrimination, harass people, or make threats. This includes attacks based on race, nationality, religion, sex, sexual orientation, gender identity, or disability.
+
+This applies to everything they do in public, including personal accounts and content we don't pay for. A big audience or strong campaign results don't earn anyone an exception.
+
+### Before you sign anyone
+
+Whoever owns the creator relationship does these checks before the first agreement and again before every renewal. This includes creators who came through an agency or a recommendation.
+
+1. Review their main public accounts, including X. Check posts, replies, and reposts.
+2. Check recent content and older public history.
+3. If you find a concern, check the original post and its context.
+4. Ask someone else in Builder Relations or Marketing to review the concern, if in doubt.
+
+### If someone raises a concern
+
+1. Pause new commitments and any scheduled promotions we control while you review the concern.
+2. Decide whether the evidence confirms a breach.
+3. If it does – end the partnership on the terms in the contract. If it doesn't, carry on.
+4. Tell the person who raised the concern what we did.
+
 ## Creator lifecycle
 
 A sponsorship is the start of a relationship. The ideal lifecycle looks something like:
