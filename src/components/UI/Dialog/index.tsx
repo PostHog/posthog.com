@@ -15,6 +15,16 @@ import {
 } from '../styles'
 import { mergeClassName, withClassName } from '../utils'
 
+const ModalContext = React.createContext<BaseDialog.Root.Props['modal']>(true)
+
+function Root<Payload>({ modal = true, ...props }: BaseDialog.Root.Props<Payload>): JSX.Element {
+    return (
+        <ModalContext.Provider value={modal}>
+            <BaseDialog.Root<Payload> modal={modal} {...props} />
+        </ModalContext.Provider>
+    )
+}
+
 export type DialogPopupProps = BaseDialog.Popup.Props & {
     container?: BaseDialog.Portal.Props['container']
 }
@@ -23,14 +33,18 @@ const Popup = React.forwardRef<HTMLDivElement, DialogPopupProps>(function Dialog
     { className, container, children, ...props },
     ref
 ) {
+    const blocksPage = React.useContext(ModalContext) === true
     return (
         <BaseDialog.Portal container={container}>
-            <BaseDialog.Backdrop className={dialogBackdrop} />
-            <BaseDialog.Viewport className={dialogViewport}>
+            {blocksPage && <BaseDialog.Backdrop className={dialogBackdrop} />}
+            <BaseDialog.Viewport className={cn(dialogViewport, !blocksPage && 'pointer-events-none')}>
                 <BaseDialog.Popup
                     ref={ref}
                     data-scheme="primary"
-                    className={mergeClassName(`${dialogPopup} max-w-lg`, className)}
+                    className={mergeClassName(
+                        cn(dialogPopup, 'max-w-lg', !blocksPage && 'pointer-events-auto'),
+                        className
+                    )}
                     {...props}
                 >
                     {children}
@@ -107,7 +121,7 @@ const Footer = React.forwardRef<HTMLDivElement, DialogFooterProps>(function Dial
 })
 
 export const Dialog = {
-    Root: BaseDialog.Root,
+    Root,
     Trigger: BaseDialog.Trigger,
     Popup,
     Header,

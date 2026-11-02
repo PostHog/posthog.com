@@ -95,11 +95,11 @@ function withSiteTheme<Props extends ThemedProps>(
     return SiteChart
 }
 
-export const LineChart = withSiteTheme(QuillLineChart, 'LineChart')
-export const BarChart = withSiteTheme(QuillBarChart, 'BarChart')
-export const ComboChart = withSiteTheme(QuillComboChart, 'ComboChart')
-export const TimeSeriesLineChart = withSiteTheme(QuillTimeSeriesLineChart, 'TimeSeriesLineChart')
-export const TimeSeriesBarChart = withSiteTheme(QuillTimeSeriesBarChart, 'TimeSeriesBarChart')
-export const Sparkline = withSiteTheme(QuillSparkline, 'Sparkline')
-export const PieChart = withSiteTheme(QuillPieChart, 'PieChart')
-export const BarList = withSiteTheme(QuillBarList, 'BarList')
+export const LineChart = /*#__PURE__*/ withSiteTheme(QuillLineChart, 'LineChart')
+export const BarChart = /*#__PURE__*/ withSiteTheme(QuillBarChart, 'BarChart')
+export const ComboChart = /*#__PURE__*/ withSiteTheme(QuillComboChart, 'ComboChart')
+export const TimeSeriesLineChart = /*#__PURE__*/ withSiteTheme(QuillTimeSeriesLineChart, 'TimeSeriesLineChart')
+export const TimeSeriesBarChart = /*#__PURE__*/ withSiteTheme(QuillTimeSeriesBarChart, 'TimeSeriesBarChart')
+export const Sparkline = /*#__PURE__*/ withSiteTheme(QuillSparkline, 'Sparkline')
+export const PieChart = /*#__PURE__*/ withSiteTheme(QuillPieChart, 'PieChart')
+export const BarList = /*#__PURE__*/ withSiteTheme(QuillBarList, 'BarList')

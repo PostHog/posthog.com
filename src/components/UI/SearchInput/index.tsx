@@ -77,6 +77,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
     const round = appearance === 'pill' || appearance === 'floating'
 
     function clear() {
+        if (inputRef.current?.disabled) return
         changeValue('')
         inputRef.current?.focus()
     }
@@ -87,7 +88,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
                 searchGroupFor(appearance),
                 fieldSizes[size],
                 round && searchRoundPadding[size],
-                'min-h-0 gap-2',
+                'group/search min-h-0 gap-2',
                 !round && fieldAppearanceShape[appearance],
                 className
             )}
@@ -148,7 +149,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
                     icon={<IconX />}
                     className={cn(
                         fieldIconButtonSizes[size],
-                        'mt-0 self-center',
+                        'mt-0 self-center group-has-[input:disabled]/search:hidden',
                         clearButtonEdge[round ? 'round' : appearance === 'line' ? 'line' : 'box'][size]
                     )}
                     onClick={clear}

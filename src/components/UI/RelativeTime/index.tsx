@@ -25,13 +25,35 @@ const relativeUnits: [Intl.RelativeTimeFormatUnit, number][] = [
     ['second', 1000],
 ]
 
+const dateFormats = new Map<string, Intl.DateTimeFormat>()
+const relativeFormats = new Map<string, Intl.RelativeTimeFormat>()
+
+function dateFormat(locale: string, options: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
+    const key = `${locale}|${JSON.stringify(options)}`
+    let formatter = dateFormats.get(key)
+    if (!formatter) {
+        formatter = new Intl.DateTimeFormat(locale, options)
+        dateFormats.set(key, formatter)
+    }
+    return formatter
+}
+
+function relativeFormat(locale: string): Intl.RelativeTimeFormat {
+    let formatter = relativeFormats.get(locale)
+    if (!formatter) {
+        formatter = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' })
+        relativeFormats.set(locale, formatter)
+    }
+    return formatter
+}
+
 function formatRelative(timestamp: number, now: number, locale: string): string {
     const difference = timestamp - now
     const [unit, duration] =
         relativeUnits.find(([, duration]) => Math.abs(difference) >= duration) ??
         relativeUnits[relativeUnits.length - 1]
     const value = Math.round(difference / duration)
-    return new Intl.RelativeTimeFormat(locale, { numeric: 'auto' }).format(value === 0 ? 0 : value, unit)
+    return relativeFormat(locale).format(value === 0 ? 0 : value, unit)
 }
 
 const STALE_CLOCK_MS = 1000
@@ -75,7 +97,7 @@ export const RelativeTime = React.forwardRef<HTMLTimeElement, RelativeTimeProps>
 
     if (!valid) return <span className={className}>Invalid date</span>
 
-    const absolute = new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(timestamp)
+    const absolute = dateFormat(locale, { dateStyle: 'medium', timeZone: 'UTC' }).format(timestamp)
     const label = format === 'relative' && now !== null ? formatRelative(timestamp, now, locale) : absolute
     const dateTime = new Date(timestamp).toISOString()
 
@@ -87,10 +109,9 @@ export const RelativeTime = React.forwardRef<HTMLTimeElement, RelativeTimeProps>
         )
     }
 
-    const exactDate = (timeZone?: string) =>
-        new Intl.DateTimeFormat(locale, { dateStyle: 'medium', timeZone }).format(timestamp)
+    const exactDate = (timeZone?: string) => dateFormat(locale, { dateStyle: 'medium', timeZone }).format(timestamp)
     const exactTime = (timeZone?: string) =>
-        new Intl.DateTimeFormat(locale, { timeStyle: timeZone ? 'medium' : 'long', timeZone }).format(timestamp)
+        dateFormat(locale, { timeStyle: timeZone ? 'medium' : 'long', timeZone }).format(timestamp)
     const rows: [string, string, string][] = [
         ...(now === null ? [] : ([['Local', exactDate(), exactTime()]] as [string, string, string][])),
         ['UTC', absolute, exactTime('UTC')],
