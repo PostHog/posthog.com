@@ -92,6 +92,50 @@ Each request times out after 15 seconds. The client retries network errors, rate
 
 To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client, or `max_retries` on one send. When a job queue already retries the send, set the retries to `0` and pass an `idempotency_key` that identifies the email.
 
+## Send content from your code
+
+From version 7.83.0, `send` also takes content that your code rendered, without a template in PostHog. Name the email with `template_key`, and pass `subject` and `html`, `text`, or both. PostHog sends the content as you wrote it, so render it with your template engine first, such as Jinja or Django templates.
+
+<MultiLanguage selector="tabs">
+
+```python file=Sync
+def send_password_reset(user_id: str, email: str, html: str, reset_request_id: str) -> str:
+    result = posthog.emails.send(
+        to=email,
+        template_key="password-reset",
+        subject="Reset your password",
+        html=html,
+        from_="Hedgebox <security@example.com>",
+        distinct_id=user_id,
+        idempotency_key=f"password-reset-{reset_request_id}",
+    )
+    return result.id
+```
+
+```python file=Async
+async def send_password_reset(user_id: str, email: str, html: str, reset_request_id: str) -> str:
+    result = await posthog.emails.send(
+        to=email,
+        template_key="password-reset",
+        subject="Reset your password",
+        html=html,
+        from_="Hedgebox <security@example.com>",
+        distinct_id=user_id,
+        idempotency_key=f"password-reset-{reset_request_id}",
+    )
+    return result.id
+```
+
+</MultiLanguage>
+
+- **Key:** `template_key` names the email, such as `password-reset`. PostHog groups the email's metrics and sends under it, so use the same key every time you send this email.
+- **Text:** If you leave out `text`, PostHog makes it from `html`.
+- **Sender:** The sender is `from_`, because `from` is a Python keyword. It needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
+- **Engagement:** PostHog captures the email's engagement events unless you pass `capture_engagement=False`.
+- **One form per send:** A send has `template_id` or `template_key`, not both, or it raises `TypeError`. Content from your code takes no `template_data`, because PostHog renders nothing.
+
+See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
 ## Check an email's status
 
 ```python
