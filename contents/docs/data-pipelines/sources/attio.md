@@ -9,7 +9,7 @@ availability:
 sourceId: Attio
 ---
 
-The Attio connector can link companies, people, deals, lists, users, workspaces, notes, tasks, and workspace members to PostHog.
+The Attio connector can link companies, people, deals, lists, users, workspaces, notes, tasks, workspace members, and activities to PostHog.
 
 To link Attio:
 

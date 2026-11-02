@@ -9,9 +9,9 @@ availability:
 sourceId: Cloudbeds
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Cloudbeds connector syncs hotels, reservations, guests, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -42,6 +42,18 @@ All Cloudbeds tables are full refresh. Each sync replaces the contents of the ta
 ## Configuration
 
 <SourceParameters />
+
+<CalloutBox icon="IconWarning" title="The transactions table schema has changed" type="warning">
+
+As of November 2026, the `transactions` table reads from the Cloudbeds Accounting API instead of the retired `getTransactions` endpoint. This changes the table schema:
+
+- The primary key is now `id` (not `transactionID`). These IDs are unrelated.
+- The table contains posted transactions only.
+- `reservationID` is replaced by `sourceIdentifier` (the reservation identifier) and `sourceId` (the reservation ID).
+
+If you have existing queries that reference `transactionID` or `reservationID`, update them to use the new column names. Your API key may also need the `read:payment` permission scope.
+
+</CalloutBox>
 
 ## Supported tables
 
