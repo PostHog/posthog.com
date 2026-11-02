@@ -1,6 +1,6 @@
 ---
 title: Why we're moving our warehouse off DuckDB
-date: 2026-10-30
+date: 2026-11-02
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/moving_off_duckdb_4c95538aac.png
 rootPage: /blog
