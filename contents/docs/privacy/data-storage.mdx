@@ -100,18 +100,13 @@ This allows you to enrich your events with location data or filter out bot traff
 
 ## Data retention
 
-How long PostHog Cloud keeps your data depends on the product and your plan. Use this table when you write a privacy policy or a data processing agreement.
+How long PostHog keeps your data depends on the product. See the retention docs for each one:
 
-| Data | Free plan | Paid plans | Can you change it? | Notes |
-| --- | --- | --- | --- | --- |
-| [Events](/docs/data/events-retention) | 1 year | 7 years | No | To keep events longer, send them to storage with a [batch export](/docs/data-pipelines/batch-exports). |
-| [Session recordings](/docs/session-replay/recording-retention) | 30 days | 90 days to 5 years | Yes | Pay-as-you-go 90 days, Boost and Scale 1 year, Enterprise 5 years. |
-| [Large properties on AI events](/docs/ai-observability/data-retention) | 30 days | 30 days | No | Covers `$ai_input`, `$ai_output`, and other large properties. Other properties follow events retention. |
-| [Logs](/docs/logs/pricing#retention) | 14 days | 14 days or longer | Yes | Longer retention costs extra. Set it per service or source. |
-| [File download exports](/docs/data-pipelines/file-download-exports) | 1 week | 1 week | No | |
-| [Data warehouse tables](/docs/data-warehouse) | No limit | No limit | No | Events retention does not apply to these tables. |
-
-A self-hosted instance keeps your events until you remove them.
+- [Events](/docs/data/events-retention)
+- [Session recordings](/docs/session-replay/recording-retention)
+- [AI events](/docs/ai-observability/data-retention)
+- [Logs](/docs/logs/pricing#retention)
+- [File download exports](/docs/data-pipelines/file-download-exports)
 
 ## Data deletion
 
