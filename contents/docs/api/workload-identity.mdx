@@ -1,0 +1,136 @@
+---
+title: Workload identity federation
+sidebar: Docs
+showTitle: true
+---
+
+> **Note:** PostHog doesn't support any CI provider for workload identity federation yet. This page describes how the feature works so you can plan for it. Until a provider is supported, use a [personal API key](/docs/api/personal-api-keys) in CI.
+
+Workload identity federation lets a workload you trust, such as the CI jobs of one repository, get a short-lived PostHog token without storing an API key as a secret. The workload proves who it is with the OIDC token its provider issues for each run, and PostHog swaps that for a token that works for about 10 minutes.
+
+Other platforms have the same idea under different names. Azure calls it a federated identity credential, AWS a role trust policy, Google Cloud a workload identity provider, and PyPI and npm call it trusted publishing.
+
+## How it works
+
+1. An organization admin adds a **trusted workload** to a project. This creates a trust policy that names the CI provider, the repository, and the branch or environment that may get tokens, plus the scopes those tokens carry.
+2. A CI job asks its provider for an OIDC token whose audience is your PostHog instance.
+3. The job sends that token to PostHog's token endpoint, naming the project.
+4. PostHog checks the token's signature, issuer, audience and expiry, finds the project's trust policy that matches the token's claims, and returns a PostHog access token.
+5. The job calls the PostHog API with that token until it expires, then exchanges a new OIDC token.
+
+Workload tokens act as the oldest owner of the project's organization, limited to the project and to the scopes in the policy. Changes they make show up in the activity log under the workload, for example the repository, workflow and run, with a link to the run and the trust policy.
+
+## Trusted workloads
+
+Find trusted workloads in your project settings, under **Trusted workloads**. Only organization admins and owners can see them, and changing one asks you to log in again if you haven't recently.
+
+Each trust policy has:
+
+- **CI provider**: the issuer PostHog trusts for this policy.
+- **Repository** and **repository ID**: both must match. The ID never changes, so a repository that is deleted and created again with the same name doesn't match.
+- **Ref** and **environment**: set at least one. A policy that leaves one empty matches any value for it. Values are matched exactly, without wildcards.
+- **Scopes**: every token from the policy gets all of these scopes, and no others.
+
+When more than one policy matches a token, the most specific one wins: a policy that pins both a ref and an environment beats one that pins only one of them. If two are equally specific, the older one wins.
+
+Turning a policy off, editing it or deleting it stops its tokens from working within about 10 seconds. Every change emails the organization's admins and owners and appears in the activity log.
+
+### Scopes that need care
+
+A policy can grant almost any scope. Some scopes let a token do things that reach beyond the project, last longer than the token, or touch credentials. PostHog shows a warning next to these scopes when you pick them for a trusted workload or a personal API key, and on the approval page. Add them only when the workload needs them.
+
+A few scopes can never be granted to a workload, because they would let a token outlive itself or change its own policy:
+
+- `workload_trust_policy` and `workload_trust_policy_request`
+- `project:write`, which can rotate the project's secret token
+- `task:write`, `conversation:write`, `signal_scout:write` and `business_knowledge:write`, which start agent runs with their own longer-lived tokens
+- `streamlit_app`, which hands out a one-hour token for a running app
+- `webhook:write` and `batch_export:write`, which set up data feeds that keep sending after the token expires
+
+## Asking an admin for a trusted workload
+
+Any project member can ask for a trusted workload, for example from a terminal. Send a request with an OAuth token that has the `workload_trust_policy_request:write` scope:
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/<project_id>/workload_trust_policy_requests/" \
+  -H "Authorization: Bearer <oauth_access_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Production deploys",
+    "issuer": "<provider issuer>",
+    "repository": "acme/web",
+    "repository_id": "123456789",
+    "ref": "refs/heads/main",
+    "scopes": ["annotation:write"]
+  }'
+```
+
+The response includes an `approval_url` to send to an admin. A request grants nothing on its own. An organization admin or owner opens the link, reviews the policy, who asked for it and through which app, and approves or rejects it. Approving creates the trust policy. Requests expire after 7 days and can't be edited.
+
+## Exchanging a token
+
+Send the OIDC token to the token endpoint as a form-encoded [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693) token exchange:
+
+```bash
+curl -X POST "https://us.posthog.com/oauth/token/" \
+  -d grant_type=urn:ietf:params:oauth:grant-type:token-exchange \
+  -d subject_token_type=urn:ietf:params:oauth:token-type:jwt \
+  -d subject_token="$OIDC_TOKEN" \
+  -d resource=https://us.posthog.com/api/projects/<project_id>
+```
+
+`resource` names the project: your PostHog host followed by `/api/projects/<project_id>`. Use the project's ID, not the ID of one of its environments.
+
+A successful response looks like this:
+
+```json
+{
+  "access_token": "<token>",
+  "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
+  "token_type": "Bearer",
+  "expires_in": 600,
+  "scope": "annotation:write"
+}
+```
+
+The token never outlives the OIDC token it came from, and there is no refresh token. When a call needs a scope the policy doesn't have, the API answers with a `403` and a `WWW-Authenticate` header naming the missing scope. Ask an admin to add it to the policy.
+
+## Errors
+
+A refused exchange returns an OAuth error body with an `error_code` and an `error_uri` that links to the matching entry below.
+
+<h3 id="workload_invalid_request">workload_invalid_request</h3>
+
+The request is missing `subject_token`, uses an unsupported `subject_token_type`, or `resource` isn't a project URL on this PostHog instance.
+
+<h3 id="workload_issuer_not_allowed">workload_issuer_not_allowed</h3>
+
+The OIDC token comes from an issuer PostHog doesn't trust. Only the supported CI providers are trusted.
+
+<h3 id="workload_token_invalid">workload_token_invalid</h3>
+
+PostHog couldn't verify the OIDC token: it expired, its audience isn't your PostHog instance, its signature doesn't verify, or it lacks a claim PostHog needs, such as the repository.
+
+<h3 id="workload_provider_unavailable">workload_provider_unavailable</h3>
+
+PostHog couldn't fetch the provider's signing keys. Try again in a minute.
+
+<h3 id="workload_no_matching_policy">workload_no_matching_policy</h3>
+
+No enabled trust policy in the project matches the token's repository, repository ID, ref and environment. The same error covers a project or environment ID that doesn't exist, so the exchange can't be used to find out which projects exist.
+
+<h3 id="workload_policy_request_pending">workload_policy_request_pending</h3>
+
+No policy matches yet, but a request for one is waiting for an admin. The error includes the request's approval link.
+
+<h3 id="workload_no_usable_scopes">workload_no_usable_scopes</h3>
+
+The matching policy only grants scopes a workload token can't use. Ask an admin to edit the policy.
+
+<h3 id="workload_no_owner">workload_no_owner</h3>
+
+The project's organization has no active owner for workload tokens to act as.
+
+<h3 id="workload_not_configured">workload_not_configured</h3>
+
+This PostHog instance isn't set up to issue workload tokens.
