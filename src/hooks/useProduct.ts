@@ -32,6 +32,7 @@ import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
 import { support } from './productData/support'
 import { groupAnalytics } from './productData/group_analytics'
+import { dataPipelines } from './productData/data_pipelines'
 import { getTool } from '../data/tools'
 
 const dedupe = (products) => {
@@ -125,6 +126,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
         },
         groupAnalytics,
+        dataPipelines,
         {
             handle: 'platform_packages',
             name: 'Platform packages',
