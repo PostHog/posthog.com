@@ -241,6 +241,14 @@ The analysis window is timezone-aware and uses your [project timezone](/docs/dat
 
 For period-over-period comparisons (like week-over-week trends), the AI automatically compares against the equivalent previous period based on your window selection.
 
+### Chart placement in Slack
+
+By default, Slack deliveries for prompt subscriptions post the AI summary in the main message and move chart images to the first thread reply. The main message includes a note: "See thread for the rest of the report."
+
+To keep charts in the main message instead, enable **Post all charts in the main message** under **Advanced delivery options**. This toggle only appears for Slack subscriptions and is disabled when chart images are turned off.
+
+Unlike dashboard subscriptions, prompt subscriptions don't require the `files:write` Slack permission for this option because chart images are linked rather than uploaded.
+
 ## Next delivery date
 
 Each subscription displays its next scheduled delivery date, so you can see exactly when the next report is sent. This date updates automatically after each delivery.
