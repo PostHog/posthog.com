@@ -90,7 +90,7 @@ POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" pnpm start
 
 ### Want Ashby job listings or GitHub contributors to load?
 
-You’ll need to set environment variables for these. <PrivateLink>[See (private) instructions](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md)</PrivateLink> for this.
+You’ll need to set environment variables for these. <PrivateLink url="https://github.com/PostHog/company-internal/blob/master/website-api-keys.md">See our (private) website API keys file</PrivateLink> for this.
 
 ### Developing the posts section
 To see your local version of the posts section, `/posts` needs to be visited directly (`http://localhost:8001/posts`)
