@@ -271,7 +271,6 @@ Below are a list of Slack channels you may find helpful:
 If you are an engineer, join these in addition to the work-related channels above:
 
 -   <PrivateLink url="https://posthog.slack.com/archives/C0113360FFV">#dev</PrivateLink> - general engineering discussion
--   `#dev-ai` - how we use AI tools and coding agents in our own work
 -   <PrivateLink url="https://posthog.slack.com/archives/C0AEM55RJ77">#dev-stamp-exchange</PrivateLink> - ask for a quick review when nobody on your team is free. See [how we review](/handbook/engineering/how-we-review)
 -   <PrivateLink url="https://posthog.slack.com/archives/C04B5C39X36">#github-rfcs</PrivateLink> - all of our [RFCs](/handbook/company/communication#requests-for-comment-rfcs) are posted here
 -   <PrivateLink url="https://posthog.slack.com/archives/C09ADEV3AJD">#flakey-tests</PrivateLink> - reports of tests that fail intermittently in CI
