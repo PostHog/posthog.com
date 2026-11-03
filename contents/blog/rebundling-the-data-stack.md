@@ -7,6 +7,9 @@ showTitle: true
 hideAnchor: true
 author:
     - lizzie-epton
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/the_modern_data_stack_had_a_good_run_40910e3f33.png
+featuredImageType: full
 ogImage: generated
 category: General
 tags:
