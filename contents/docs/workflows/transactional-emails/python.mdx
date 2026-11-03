@@ -92,6 +92,13 @@ Each request times out after 15 seconds. The client retries network errors, rate
 
 To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client, or `max_retries` on one send. When a job queue already retries the send, set the retries to `0` and pass an `idempotency_key` that identifies the email.
 
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()`, usually the user's ID in your app, as `distinct_id`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened and clicked, against that user's person, next to their product events.
+
+- **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
+- **For someone who isn't a user yet,** such as an invite or a check during signup, there's no distinct ID to pass. Leave `distinct_id` out.
+
 ## Send content from your code
 
 From version 7.83.0, `send` also takes content that your code rendered, without a template in PostHog. Name the email with `template_key`, and pass `subject` and `html`, `text`, or both. PostHog sends the content as you wrote it, so render it with your template engine first, such as Jinja or Django templates.

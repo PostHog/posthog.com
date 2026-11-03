@@ -76,7 +76,7 @@ Your backend sends each email with one call. A send needs:
 - **The template ID.** The template's **API** tab shows it.
 - **The recipient.** One email address for each send.
 - **The template data.** The values for the template's `{{ variables.* }}` placeholders. The template can't read person properties, so pass all the data that the email needs.
-- **The recipient's distinct ID.** PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. Without it, PostHog uses the email address as the distinct ID, which might not match the person in your product. We recommend that you always send it.
+- **The recipient's distinct ID.** The distinct ID that you pass to `identify()`. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. Without it, PostHog records the email against a person whose distinct ID is the email address, which is a separate person from your user unless you identify users by their email address. Leave it out for someone who isn't a user yet, such as an invite.
 - **An idempotency key.** It makes a retry safe. See [retry safely](#retry-safely-with-an-idempotency-key).
 
 In the template, use the same names that you send in the template data:

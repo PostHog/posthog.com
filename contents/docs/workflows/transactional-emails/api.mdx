@@ -34,7 +34,7 @@ Send a JSON body with these fields:
 | `template_id` | Yes | The ID of the transactional template to send. |
 | `to` | Yes | The email address of the recipient. One address for each request. |
 | `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
-| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. If you leave it out, PostHog uses the email address as the distinct ID, which might not match the person in your product. We recommend that you always send it. |
+| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. Pass the distinct ID that you pass to `identify()`. See [link emails to your users](#link-emails-to-your-users). |
 
 In the template, use the same names that you send in `message_data`:
 
@@ -80,6 +80,13 @@ When a send fails, the response carries a `code`. See [errors](/docs/workflows/t
 
 A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm that it queued the email. PostHog might still send it. Retry with the same `Idempotency-Key` rather than sending the email through another provider, or the recipient can get it twice. The SDKs retry this on their own.
 
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()`, usually the user's ID in your app, as `distinct_id`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened and clicked, against that user's person, next to their product events.
+
+- **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
+- **For someone who isn't a user yet,** such as an invite or a check during signup, there's no distinct ID to pass. Leave `distinct_id` out.
+
 ## Send content from your code
 
 You can also send the subject and the body from your code, without a template in PostHog. Use this when your code renders the email. For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and send the result as `html`. Name the email with `template_key`, and send the content in the body. Use the same `POST` route and headers as for a [template send](#send-an-email).
@@ -88,7 +95,7 @@ You can also send the subject and the body from your code, without a template in
 | --- | --- | --- |
 | `template_key` | Yes | A name for this email, such as `password-reset`. It has at most 400 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time you send this email. |
 | `to` | Yes | The email address of the recipient. |
-| `distinct_id` | No | The distinct ID of the recipient's person, as for a template send. We recommend that you always send it. |
+| `distinct_id` | No | The distinct ID of the recipient's person, as for a template send. See [link emails to your users](#link-emails-to-your-users). |
 | `subject` | Yes | The subject of the email. |
 | `html` | One of `html` and `text` | The HTML body. PostHog sends it as you wrote it and renders no placeholders. |
 | `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
