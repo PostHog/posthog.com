@@ -1,6 +1,4 @@
-<p align="center">
-  <img alt="posthoglogo" src="https://user-images.githubusercontent.com/65415371/205059737-c8a4f836-4889-4654-902e-f302b187b6a0.png">
-</p>
+[![PostHog: your product's context layer. PostHog automatically diagnoses problems, fixes bugs and generates pull requests, all without prompts.](https://github.com/user-attachments/assets/52390696-2a65-45ee-b34e-7b5d285ac58c)](https://posthog.com/?utm_source=github&utm_medium=org_profile)
 
 # PostHog.com - Website, docs, blog, and handbook
 
@@ -92,7 +90,7 @@ POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" pnpm start
 
 ### Want Ashby job listings or GitHub contributors to load?
 
-You’ll need to set environment variables for these. [See (private) instructions](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md) for this.
+You’ll need to set environment variables for these. <PrivateLink>[See (private) instructions](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md)</PrivateLink> for this.
 
 ### Developing the posts section
 To see your local version of the posts section, `/posts` needs to be visited directly (`http://localhost:8001/posts`)
