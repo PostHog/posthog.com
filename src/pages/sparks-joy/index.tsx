@@ -3,7 +3,7 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { explorerGridColumns } from '../../constants'
-import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
+import { SparksJoyItems } from '../../data/sparksJoyItems'
 import { AppLink } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
 import {
