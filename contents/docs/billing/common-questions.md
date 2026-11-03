@@ -36,18 +36,67 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 ## What does each product bill for?
 
-| Product | Bills for | Free |
-| --- | --- | --- |
-| Product analytics | Every event not listed in this table, such as `$pageview`, `$autocapture`, and `$identify` | |
-| Session replay | Recordings | |
-| Feature flags | [Flag requests](/docs/feature-flags/cutting-costs#billing) | `$feature_flag_called` events, and local evaluation polls that return `304` |
-| Experiments | Flag requests, through feature flags | `$experiment_exposure` events |
-| Error tracking | `$exception` events | |
-| LLM analytics | `$ai_` events | |
-| Surveys | `survey sent` events, as responses | `survey shown` and `survey dismissed` events |
-| Heatmaps | | Heatmap data |
+Each product bills its own usage. Events dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) or after a [billing limit](/docs/billing/limits-alerts) are free. For prices, see [pricing](/pricing).
 
-[Personless events](/docs/data/anonymous-vs-identified-events) bill at the anonymous event price. Events dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) or after a [billing limit](/docs/billing/limits-alerts) are free. For prices, see [pricing](/pricing).
+### Product analytics
+
+| What you send | Billed |
+| --- | --- |
+| Custom events | Yes |
+| `$pageview`, `$pageleave`, and `$autocapture` events | Yes |
+| `$identify`, `$create_alias`, and `$groupidentify` events | Yes |
+
+[Personless events](/docs/data/anonymous-vs-identified-events) bill at the anonymous event price.
+
+### Session replay
+
+| What you send | Billed |
+| --- | --- |
+| Recordings | Yes |
+
+### Feature flags
+
+| What you send | Billed |
+| --- | --- |
+| [Flag requests](/docs/feature-flags/cutting-costs#billing) | Yes |
+| Local evaluation polls that return `304` | No |
+| `$feature_flag_called` events | No |
+
+### Experiments
+
+| What you send | Billed |
+| --- | --- |
+| Flag requests | Yes |
+| `$experiment_exposure` events | No |
+
+Experiments use feature flags, so their flag requests bill as feature flag requests.
+
+### Error tracking
+
+| What you send | Billed |
+| --- | --- |
+| `$exception` events | Yes |
+
+### LLM analytics
+
+| What you send | Billed |
+| --- | --- |
+| `$ai_` events | Yes |
+
+### Surveys
+
+| What you send | Billed |
+| --- | --- |
+| `survey sent` events | Yes |
+| `survey shown` and `survey dismissed` events | No |
+
+Each `survey sent` event bills as one survey response.
+
+### Heatmaps
+
+| What you send | Billed |
+| --- | --- |
+| Heatmap data | No |
 
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
