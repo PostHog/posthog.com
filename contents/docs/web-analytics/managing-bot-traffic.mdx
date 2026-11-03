@@ -8,12 +8,12 @@ Bots, crawlers, and AI agents make up a growing share of web traffic, and not al
 
 The right move depends on the kind of automated traffic. A useful starting point:
 
-| Traffic | Examples | Typical decision |
-| --- | --- | --- |
-| **AI agents** | GPTBot, ClaudeBot, PerplexityBot, ChatGPT-User | Increasingly worth measuring – these visits are how AI tools find and cite your content. Often you want to *see* them, not drop them. |
-| **Search crawlers** | Googlebot, Bingbot | Keep out of human metrics, but worth tracking for SEO. |
-| **SEO and monitoring tools** | AhrefsBot, SemrushBot, Pingdom, UptimeRobot | Usually noise – exclude from analytics. |
-| **HTTP clients and headless browsers** | curl, Python requests, Puppeteer, Selenium | Usually noise – exclude from analytics. |
+| Traffic                                | Examples                                       | Typical decision                                                                                                                      |
+| -------------------------------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **AI agents**                          | GPTBot, ClaudeBot, PerplexityBot, ChatGPT-User | Increasingly worth measuring – these visits are how AI tools find and cite your content. Often you want to _see_ them, not drop them. |
+| **Search crawlers**                    | Googlebot, Bingbot                             | Keep out of human metrics, but worth tracking for SEO.                                                                                |
+| **SEO and monitoring tools**           | AhrefsBot, SemrushBot, Pingdom, UptimeRobot    | Usually noise – exclude from analytics.                                                                                               |
+| **HTTP clients and headless browsers** | curl, Python requests, Puppeteer, Selenium     | Usually noise – exclude from analytics.                                                                                               |
 
 You don't have to treat every bot the same. Because classification happens at query time, you can exclude monitoring tools from a dashboard while still breaking down AI agent traffic in a separate insight.
 
@@ -33,7 +33,7 @@ The **Bots** tab in [Web Analytics](/docs/web-analytics/dashboard) is a dedicate
 - **Crawlers** – every bot that hit you in the selected period, with its category, request count, and when it was last seen.
 - **Most crawled paths** – the pages bots request most, and how many different crawlers hit each one.
 
-The tab reads `$pageview`, `$screen`, and [`$http_log`](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) events, so forwarded server logs show up alongside anything the JavaScript SDK captured. Classification is based on the user agent, and events without one are excluded from this tab – so when forwarding logs, make sure each event sets `$raw_user_agent`.
+The tab reads `$pageview`, `$screen`, and [`$http_log`](/docs/web-analytics/bot-detection#capturing-server-side-traffic-with-http_log) events, so forwarded server logs show up alongside anything the JavaScript SDK captured. Classification is based on the user agent. Events from known server and mobile SDKs (like `posthog-node`, `posthog-python`, or `posthog-react-native`) with no user agent are classified as regular traffic rather than automation, so they won't appear here. When forwarding logs, make sure each event sets `$raw_user_agent` for accurate bot detection.
 
 > **Note:** The Bots tab is in alpha and rolling out gradually – it may not be enabled for your project yet. The `$virt_*` properties and classification functions are available to everyone today.
 
