@@ -95,9 +95,56 @@ test('all published chapters have unique static public routes and source identit
     }
 })
 
-test('nothing under the new Learn routes is redirected or rewritten', () => {
-    for (const { source } of [...vercelConfig.redirects, ...vercelConfig.rewrites] as Array<{ source: string }>) {
-        assert.equal(/^\/learn(?:\/|$)/.test(source), false, `${source} must not redirect or rewrite a Learn route`)
+test('only retired AIO chapters redirect under Learn; current chapters stay generated', () => {
+    const retired = new Map([
+        ['101', 'traces-and-conversations'],
+        ['unexplained-answers', 'traces-and-conversations'],
+        ['quality-output', 'online-evaluations'],
+        ['invented-functions', 'online-evaluations'],
+        ['throw-away-answers', 'product-outcomes'],
+        ['prompts-and-offline-evaluations', 'offline-evaluations'],
+        ['ai-cost', 'cost-and-performance'],
+    ])
+    for (const { source, destination } of [...vercelConfig.redirects, ...vercelConfig.rewrites]) {
+        if (!/^\/learn(?:\/|$)/.test(source)) continue
+        const oldChapter = source.replace('/learn/ai-observability/pocket-guide/', '').replace(/\.md$/, '')
+        assert.ok(retired.has(oldChapter), `${source} must not redirect a current Learn route`)
+        assert.equal(
+            destination,
+            `/learn/ai-observability/pocket-guide/${retired.get(oldChapter)}${source.endsWith('.md') ? '.md' : ''}`
+        )
+    }
+    for (const [oldChapter, newChapter] of retired) {
+        assert.equal(
+            existsSync(
+                new URL(
+                    `../../../contents/learn/ai-observability/pocket-guide/${oldChapter}/index.mdx`,
+                    import.meta.url
+                )
+            ),
+            false
+        )
+        assert.ok(
+            existsSync(
+                new URL(
+                    `../../../contents/learn/ai-observability/pocket-guide/${newChapter}/index.mdx`,
+                    import.meta.url
+                )
+            )
+        )
+        for (const prefix of [
+            '/learn/ai-observability/pocket-guide',
+            '/pocket-guides/ai-observability',
+            '/docs/ai-observability/learn',
+        ]) {
+            for (const extension of ['', '.md']) {
+                const redirect = vercelConfig.redirects.find(
+                    ({ source }: { source: string }) => source === `${prefix}/${oldChapter}${extension}`
+                )
+                assert.equal(redirect?.destination, `/learn/ai-observability/pocket-guide/${newChapter}${extension}`)
+                assert.equal(redirect?.permanent, true)
+            }
+        }
     }
 })
 

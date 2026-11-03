@@ -1,4 +1,7 @@
 import React from 'react'
+import ReactMarkdown from 'react-markdown'
+
+import { InlineCode } from 'components/InlineCode'
 
 import Link from 'components/Link'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -10,13 +13,169 @@ import usePostHog from '../../../hooks/usePostHog'
 export interface TermDefinition {
     /** Display title in the hover card. */
     title: string
-    /** A concise definition grounded in the owning docs page. */
+    /** A concise definition grounded in the owning docs page. Backticks render inline code. */
     description: string
     /** The docs page that owns this concept; the term itself links there. */
     slug: string
 }
 
 export const TERMS = {
+    'privacy mode': {
+        title: 'Privacy mode',
+        description:
+            'Omits captured AI message content while retaining usage and timing. Redact personal information in your application when you need to preserve selected input and output content.',
+        slug: '/docs/ai-observability/privacy-mode',
+    },
+    'online evaluations': {
+        title: 'Online evaluations',
+        description:
+            'Evaluations of captured production requests after the AI responds. They score recorded behavior; they do not block delivery of the original answer.',
+        slug: '/docs/ai-evals',
+    },
+    backfill: {
+        title: 'Evaluation backfill',
+        description:
+            'Runs an evaluation against eligible historical requests using its configured filters and sampling. Requests still need the captured information required for a judgment.',
+        slug: '/docs/ai-evals#evaluating-past-data',
+    },
+    dataset: {
+        title: 'Dataset',
+        description:
+            'A collection of saved inputs, expected outcomes, and reference facts that can be reused to test an AI application.',
+        slug: '/docs/ai-evals/datasets',
+    },
+    'offline evaluations': {
+        title: 'Offline evaluations',
+        description:
+            'Run an AI application against saved test cases and evaluate the new answers before release. The application runner executes the requests and reports results to PostHog.',
+        slug: '/docs/ai-evals/offline-evals',
+    },
+    'offline experiment': {
+        title: 'Offline evaluation experiment',
+        description:
+            'A recorded run of an AI application against a dataset revision, with its outputs and evaluation results. This is distinct from a product A/B experiment.',
+        slug: '/docs/ai-evals/offline-evals',
+    },
+    baseline: {
+        title: 'Baseline',
+        description:
+            'The original prompt or application configuration whose outputs are compared with the proposed change.',
+        slug: '/docs/ai-evals/offline-evals',
+    },
+    scorer: {
+        title: 'Scorer',
+        description:
+            'Defines an evaluation result\u2019s data type and passing rule. The runner performs the evaluation and reports a result using that scorer.',
+        slug: '/docs/ai-evals/offline-evals',
+    },
+    scorers: {
+        title: 'Review scorers',
+        description:
+            'Reusable questions and result fields for human trace reviews. A reviewer supplies these judgments; they are not automatic evaluations.',
+        slug: '/docs/ai-observability/trace-reviews',
+    },
+    'dataset revision': {
+        title: 'Dataset revision',
+        description:
+            'A preserved version of a dataset\u2019s test cases. Use the same revision when comparing runs so changed test data cannot explain a different result.',
+        slug: '/docs/ai-evals/datasets',
+    },
+    playground: {
+        title: 'Playground',
+        description:
+            'A PostHog workspace for trying prompt and model changes with captured inputs and comparing the resulting answers.',
+        slug: '/docs/ai-observability/playground',
+    },
+    'regression test': {
+        title: 'Regression test',
+        description: 'A saved test that verifies previously working behavior still works after a change.',
+        slug: '/docs/ai-evals/offline-evals',
+    },
+    'prompt version': {
+        title: 'Prompt version',
+        description:
+            'A preserved revision of a managed prompt and its configuration. Verify the version used by the application, not only the version saved in PostHog.',
+        slug: '/docs/prompt-management',
+    },
+    'prompt reference': {
+        title: 'Prompt reference',
+        description: 'Includes the content of another managed prompt, such as a shared policy, inside a prompt.',
+        slug: '/docs/prompt-management',
+    },
+    'template variable': {
+        title: 'Template variable',
+        description: 'A named placeholder filled with a supplied value when a prompt is rendered.',
+        slug: '/docs/prompt-management',
+    },
+    'input token': {
+        title: 'Input tokens',
+        description:
+            'Units of model input, including the question, instructions, tool results, and conversation history.',
+        slug: '/docs/ai-observability/generations',
+    },
+    'output token': {
+        title: 'Output tokens',
+        description: 'Units of output generated by a model while producing its answer.',
+        slug: '/docs/ai-observability/generations',
+    },
+    'cost per trace': {
+        title: 'Cost per trace',
+        description:
+            'Recorded cost of the model calls within one request. Sum underlying generation costs once, without also adding a trace total that includes them.',
+        slug: '/docs/ai-observability/calculating-costs',
+    },
+    'cost per ai session': {
+        title: 'Cost per AI session',
+        description: 'Recorded model-call cost across the related requests in one AI conversation.',
+        slug: '/docs/ai-observability/calculating-costs',
+    },
+    latency: {
+        title: 'Latency',
+        description:
+            'Elapsed time for a recorded operation. A trace separates time in tool work from time in model calls.',
+        slug: '/docs/ai-observability/traces',
+    },
+    cache: {
+        title: 'Prompt cache',
+        description:
+            'A provider\u2019s reuse of previously processed model input. Recorded cache usage helps explain input processing and cost.',
+        slug: '/docs/ai-observability/calculating-costs',
+    },
+    attribution: {
+        title: 'Attribution',
+        description:
+            'The matching conditions and time window used to connect an outcome to an earlier recommendation or interaction.',
+        slug: '/docs/product-analytics/funnels',
+    },
+    'review queue': {
+        title: 'Review queue',
+        description: 'A collection of captured traces set aside for human review using defined review questions.',
+        slug: '/docs/ai-observability/trace-reviews',
+    },
+    clusters: {
+        title: 'Clusters',
+        description:
+            'Groups of similar AI traces or generations, with volume, cost, and latency to help find recurring patterns.',
+        slug: '/docs/ai-observability/clusters',
+    },
+    'test runner': {
+        title: 'Test runner',
+        description:
+            'A program that runs saved inputs through the AI application and its tools, evaluates new outputs, and reports results.',
+        slug: '/docs/ai-evals/offline-evals',
+    },
+    'prompt injection': {
+        title: 'Prompt injection',
+        description:
+            'Untrusted content that tries to override the instructions an AI application is supposed to follow.',
+        slug: '/docs/ai-evals',
+    },
+    token: {
+        title: 'Token',
+        description: 'A unit a model uses to process or generate text. Tokens are not the same as words.',
+        slug: '/docs/ai-observability/generations',
+    },
+
     insight: {
         title: 'Insight',
         description: 'An analysis of events and user behavior, such as a trend or funnel.',
@@ -127,7 +286,7 @@ export const TERMS = {
     'ai session': {
         title: 'AI session',
         description:
-            'Sessions group related traces together through the $ai_session_id property, so a multi-turn conversation reads as one thread. This is separate from the PostHog session behind a session replay, and you set it yourself when you capture.',
+            'Sessions group related traces together through the `$ai_session_id` property, so a multi-turn conversation reads as one thread. This is separate from the PostHog session behind a session replay, and you set it yourself when you capture.',
         slug: '/docs/ai-observability/sessions',
     },
     trace: {
@@ -484,7 +643,12 @@ export default function Term({ name, children, className = '' }: TermProps): JSX
             contentClassName="max-w-72 select-text px-3 py-2 text-left leading-normal"
         >
             <p className="m-0 text-[0.8125rem] font-bold text-primary">{definition.title}</p>
-            <p className="m-0 mt-0.5 text-[0.8125rem] leading-snug text-secondary">{definition.description}</p>
+            <ReactMarkdown
+                className="m-0 mt-0.5 text-[0.8125rem] leading-snug text-secondary [&_p]:m-0"
+                components={{ code: ({ children }) => <InlineCode>{children}</InlineCode> }}
+            >
+                {definition.description}
+            </ReactMarkdown>
         </Tooltip>
     )
 }
