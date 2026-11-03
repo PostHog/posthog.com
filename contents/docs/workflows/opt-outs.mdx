@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Before a workflow sends anything, PostHog checks two lists: the recipient's **opt-out preferences** and the project's **suppression list**. Both live under **Workflows** in [PostHog](https://app.posthog.com), and neither is something a workflow can override.
+Before a workflow sends anything, PostHog checks three things: the recipient's **opt-out preferences**, the project's **suppression list**, and the project's **frequency cap**. All three live under **Workflows** in [project settings](https://app.posthog.com), and none is something a workflow can override.
 
 The difference matters. An opt-out is a choice the recipient made – they don't want this kind of message. A suppression is a delivery fact – mail to this address bounced, or you added it by hand, so PostHog stops trying.
 
@@ -27,6 +27,16 @@ Coming from Customer.io? [Import your opt-out lists](/docs/workflows/import-cust
 The suppression list is address-level and category-independent – a suppressed recipient receives nothing. Each entry records the recipient, how it got there (**bounces** or **manual**), the reason or last bounce diagnostic, and when it was suppressed.
 
 PostHog adds addresses automatically when mail to them hard-bounces, which is what protects your sending domain's reputation. You can add an address by hand, and you can remove an entry if you believe the bounce was a one-off – but removing a genuine hard bounce means you'll bounce again.
+
+## Frequency cap
+
+The frequency cap limits how many marketing messages one person can receive in a rolling number of days, across all workflows and broadcasts in your project. Find it under **Project settings** > **Workflows** > **Frequency cap**.
+
+Set two values: the maximum number of messages (up to 1,000) and the window in days (up to 30). For example, "at most 5 messages in 7 days" means any person who has already received five marketing messages in the past week is skipped until older messages fall outside the window. Both fields must be set together, or both must be empty to turn the cap off.
+
+The cap only applies to **marketing** messages. Transactional messages never count toward the cap and are never skipped by it. Runs without a person – for example, a run triggered by an event without a person profile – are also not capped.
+
+The frequency cap check runs after opt-out, suppression, and bounce checks. A send that is already skipped for one of those reasons does not use a slot against the cap. When a send is skipped because of the frequency cap, the workflow logs the reason and continues to the next step. The workflow metrics tab shows a **frequency capped** chip on each email step with the count of skipped sends.
 
 ## Managing the lists over the API
 
