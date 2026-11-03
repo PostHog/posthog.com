@@ -22,17 +22,25 @@ export type CardStackCarouselProps = {
     showCounter?: boolean
     /** When false, drops the tan background, border, rounding, and margin. Default true. */
     framed?: boolean
-    /** 'sm' narrows the cards to 280px and shrinks the chevrons. Default 'md'. */
+    /** 'sm' narrows the cards to 240px and shrinks the chevrons. Default 'md'. */
     size?: CardStackSize
     /** Replaces the stage height. The default suits `SignupQuoteCard`. */
     stageClassName?: string
+    /** Shrinks the cards so the whole stack and both chevrons fit inside the container, and keeps the side cards visible at any width. Default false. */
+    contained?: boolean
 }
 
 export type CardStackSize = 'sm' | 'md'
 
-const SIZE_CLASSES: Record<CardStackSize, { card: string; chevron: string }> = {
-    sm: { card: 'w-[min(90%,240px)]', chevron: 'size-5' },
-    md: { card: 'w-[min(90%,368px)]', chevron: 'size-8 @md:size-9' },
+// With the side cards, the stack is about 1.72 card widths wide (INNER_TRANSLATE_RATIO and INNER_SCALE).
+// `containedCard` keeps it under 58% of the container, less room for the chevrons.
+const SIZE_CLASSES: Record<CardStackSize, { card: string; containedCard: string; chevron: string }> = {
+    sm: { card: 'w-[min(90%,240px)]', containedCard: 'w-[min(calc(58%_-_2.25rem),240px)]', chevron: 'size-5' },
+    md: {
+        card: 'w-[min(90%,368px)]',
+        containedCard: 'w-[min(calc(58%_-_3.25rem),368px)]',
+        chevron: 'size-8 @md:size-9',
+    },
 }
 
 const STACK_OFFSETS = [-1, 0, 1] as const
@@ -115,6 +123,7 @@ function StackCardShell({
     entrance,
     renderCard,
     widthClassName,
+    alwaysShowSides,
 }: {
     index: number
     position: StackPosition
@@ -124,6 +133,7 @@ function StackCardShell({
     entrance: Entrance | null
     renderCard: (index: number, meta: CardStackRenderMeta) => React.ReactNode
     widthClassName: string
+    alwaysShowSides: boolean
 }) {
     const enteringThis = isEnteringSide(entrance, index, position)
 
@@ -164,9 +174,10 @@ function StackCardShell({
 
     // Side cards: CSS @container query controls visibility (opacity-0 → @lg:opacity-[0.75]).
     // @lg in @tailwindcss/container-queries = 32rem = 512px, which is where the stack layout fits.
+    // `contained` cards are sized to fit at any width, so their side cards always show.
     // The inline `transition` already covers opacity, so the enter/exit animations play naturally.
     // Center card: opacity always 1 (or set via inline style during a transition).
-    const sideOpacityClass = isSideCard ? 'opacity-0 @lg:opacity-[0.75]' : ''
+    const sideOpacityClass = isSideCard ? (alwaysShowSides ? 'opacity-[0.75]' : 'opacity-0 @lg:opacity-[0.75]') : ''
 
     return (
         <div
@@ -200,6 +211,7 @@ export function CardStackCarousel({
     framed = true,
     size = 'md',
     stageClassName = 'h-[285px] @md:h-[325px]',
+    contained = false,
 }: CardStackCarouselProps) {
     const sizeClasses = SIZE_CLASSES[size]
     const stageRef = useRef<HTMLDivElement>(null)
@@ -381,7 +393,8 @@ export function CardStackCarousel({
                             transitionEnabled={true}
                             entrance={entrance}
                             renderCard={renderCard}
-                            widthClassName={sizeClasses.card}
+                            widthClassName={contained ? sizeClasses.containedCard : sizeClasses.card}
+                            alwaysShowSides={contained}
                         />
                     )
                 })}

@@ -6,20 +6,25 @@ Product names, icons, and colors come from `useProduct`. Refer to a product by i
 
 ## `ContextDiagram`
 
-Three scripted PostHog AI runs (conversion, activation, churn) in a `TabbedCarousel` with `variant="flush"`. Each tab renders `AskAnythingDemo` from `components/Home/HeroCarousel` with a `scenario`. Home uses the same component with its default scenario.
+Three sample PostHog AI conversations (conversion, activation, churn) in a `TabbedCarousel` with `variant="flush"`. Each tab renders `ThreadMockup` with a `scenario`. The slides are static, and each stays up for 15 seconds. On wide windows the slide is no taller than the column beside it, so keep new conversations short.
 
-To add a run, add an entry to `scenarios`. A `DemoScenario` has:
+To add a conversation, add an entry to `scenarios`. A `ThreadScenario` has:
 
-- `question`, `intro`: the typed prompt and the first line of the reply
-- `tools`: four rows of `label`, `action`, and `result`. Set `handle` for a PostHog product icon, or `slug` for a source logo (for example, `stripe`). The timing has space for four rows only.
-- `conclusion`: `title`, `body`, and `next`
-- `summary`: what a screen reader announces in place of the animation
+- `question`: the user message
+- `toolCalls`: the count shown on the "N tool calls" row
+- `calls`: collapsed "Call ..." rows. Each has a real MCP tool name (for example, `execute-sql` or `experiment-results-get`) and a `detail`. Pick tools that fit the question.
+- `table`: optional. `head` and `rows` for a result card, and an optional `source` for the footer label (default `SQL`). Keep headers short, because they truncate in narrow windows.
+- `insight`: optional. A line chart card with a `title`, a `legend`, and `series` (number arrays, the first muted and the second in the accent color).
+- `intro` and `bullets`: the reply. Each bullet has a bold `lead` and a `text`.
+- `ending`: how the conversation finishes. Use a different type in each conversation:
+  - `notebook`: a `recommendation` and the "Save this conversation as a notebook" card
+  - `offer`: a `recommendation` and a follow-up the assistant offers to do
+  - `ask`: the assistant needs more information. The bullets show as a numbered list of questions, and `closing` asks for a reply.
+- `summary`: what a screen reader announces in place of the picture
 
-All data is sample data. Each slide stays up for the demo's `DURATION` plus 2 seconds. Auto-advance pauses while focus is in the carousel, and does not run with reduced motion.
+The slide has a minimum height, so the tabs stay the same size. Keep a slide short enough that it does not pass the "Connect GitHub" link.
 
-## `Capabilities`
-
-The tool list under the diagram, closed until you click its button. Tools are in three `groups`. Each tool has a `handle`, a `task`, and a docs link (`to`). Add `availability: 'Private beta'` to show a label.
+All data is sample data. The home page uses `AskAnythingDemo`, which is a separate, animated component.
 
 ## `AIEngineering`
 
@@ -27,7 +32,7 @@ The "Building your own AI?" panel at the end of the page. To change it, edit `en
 
 ## `Testimonials`
 
-The role accordion (`personas`) and the sticky-note quotes. Each persona has a one-line description and two features.
+The heading and hedgehog take the left third, and a `CardStackCarousel` of sticky notes takes the right two thirds (centered, no wider than `max-w-lg`, so the arrows stay close to the notes). Under the `3xl` reader width, the heading and hedgehog sit above the carousel, with the hedgehog on the left.
 
 The notes show in the order of `notes`. `quotes` are verbatim, with names as supplied. Do not add roles, companies, or photos. `stories` link to `/customers/<slug>`. Use only stories that cover PostHog AI or the MCP, and copy the quote from the story. Each note takes the `noteStyles` entry at its index. The styles repeat after six notes.
 

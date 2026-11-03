@@ -13,7 +13,7 @@ import ContextDiagram from 'components/PostHogAI/ContextDiagram'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
 import { StickerCoffee, StickerMicroscope, StickerRobot } from 'components/Stickers/Stickers'
-import Capabilities, { AIEngineering } from 'components/PostHogAI/Capabilities'
+import { AIEngineering } from 'components/PostHogAI/Capabilities'
 import Testimonials from 'components/PostHogAI/Testimonials'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import useProduct from 'hooks/useProduct'
@@ -115,7 +115,7 @@ const heroBullets = [
 const HeroSection = () => {
     const reducedMotion = useReducedMotion()
     return (
-        <section className="not-prose w-full border-b border-primary pb-8">
+        <section className="w-full border-b border-primary pb-8">
             <div className="grid items-start gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-10">
                 <div className="order-2 min-w-0 @3xl/reader-content:order-1">
                     <div className="mb-4 border-b border-primary pb-3">
@@ -204,17 +204,6 @@ const syncedSources: { key: LogoKey; name: string; to: string }[] = [
     { key: 'snowflake', name: 'Snowflake', to: '/docs/data-pipelines/sources/snowflake' },
 ]
 
-const semanticDefinitions = [
-    'MRR',
-    'Active users',
-    'Activation rate',
-    'Churn',
-    'Conversion rate',
-    'Net revenue retention',
-    'Certified tables',
-    'Reviewed joins',
-]
-
 const subtleLinkClass = 'flex items-center gap-2 text-inherit !no-underline hover:!underline'
 
 const ContextLayerSection = () => {
@@ -227,24 +216,15 @@ const ContextLayerSection = () => {
         : []
     return (
         <section id="context" className="my-12">
-            <SectionHeader>
-                <div className="relative">
-                    <h2 className="m-0 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                        More data in, better answers out
-                    </h2>
-                    <p className="mb-0 mt-3 text-base text-secondary @3xl/reader-content:mr-36">
-                        Events and replays show what people did. Errors and logs show what broke. Feed PostHog AI the
-                        rest of your stack too. Every source you add is more context to answer from.
-                    </p>
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/curious_hog_d91b1a8b89.png"
-                        alt=""
-                        loading="lazy"
-                        width={224}
-                        imgClassName="pointer-events-none absolute -bottom-2 right-0 hidden w-28 @3xl/reader-content:block"
-                    />
-                </div>
-            </SectionHeader>
+            <header className="mb-4 @3xl/reader-content:mb-6">
+                <h2 className="m-0 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
+                    More data in, better answers out
+                </h2>
+                <p className="mb-0 mt-3 text-base text-secondary">
+                    Events and replays show what people did. Errors and logs show what broke. Feed PostHog AI the rest
+                    of your stack too. Every source you add is more context to answer from.
+                </p>
+            </header>
             <div className="grid items-stretch gap-6 @4xl/reader-content:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
                 <div className="flex flex-col gap-4">
                     <div>
@@ -307,7 +287,6 @@ const ContextLayerSection = () => {
                 </div>
                 <div className="min-w-0">
                     <ContextDiagram />
-                    <Capabilities />
                 </div>
             </div>
             <div
@@ -317,32 +296,30 @@ const ContextLayerSection = () => {
                 <div className="min-w-0">
                     <h3 className="m-0 flex items-center gap-2 text-xl font-bold @xl/reader-content:text-2xl">
                         <StickerMicroscope className="size-8 shrink-0 -rotate-6" />
-                        Semantics actually do matter
+                        Answers you can trust
                     </h3>
-                    <p className="my-3 text-sm text-secondary">
-                        The semantic layer gives agents your approved metrics, trusted tables, and reviewed joins. Fewer
-                        creative interpretations of “active user.”
+                    <p className="mb-0 mt-3 text-sm text-secondary">
+                        Every company counts differently. Without a definition of “active user” or MRR, an AI picks its
+                        own, so the same question can give different answers.
                     </p>
-                    <ul className="my-5 flex list-none flex-wrap gap-2 p-0">
-                        {semanticDefinitions.map((name) => (
-                            <li
-                                key={name}
-                                className="rounded-full border border-blue/30 bg-primary/40 px-3 py-1 text-sm font-semibold"
-                            >
-                                {name}
-                            </li>
-                        ))}
-                    </ul>
+                    <p className="mb-5 mt-3 text-sm text-secondary">
+                        With the <strong className="font-bold text-primary">semantic layer</strong>, you define these
+                        once (no more re-explaining your data model), and PostHog AI uses your definition every time.
+                        Your team signs off on each one, and answers using it are marked as approved.
+                    </p>
                     <Link
                         to="/docs/semantic-layer"
                         state={{ newWindow: true }}
                         className="text-sm font-semibold underline"
                     >
-                        How the semantic layer works →
+                        Set up your definitions →
                     </Link>
                 </div>
                 <div className="min-w-0">
-                    <SlicedHog label="A hedgehog that opens into slices of product data" />
+                    <SlicedHog
+                        label="A hedgehog that opens into slices of product data"
+                        title="Turns out semantics do matter"
+                    />
                     <p className="mb-0 mt-4 text-center text-xs text-secondary">
                         Slice it any way you like. MRR still means one thing.
                     </p>
@@ -391,14 +368,21 @@ const PromptsSection = (): JSX.Element => {
     return (
         <section id="use-cases" className="my-12">
             <SectionHeader>
-                <div>
+                <div className="relative">
                     <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
                         <StickerRobot className="size-8 shrink-0 -rotate-3" />
                         Actual jobs for your AI
                     </h2>
-                    <p className="mb-0 mt-2 text-base text-secondary">
+                    <p className="mb-0 mt-2 text-base text-secondary @3xl/reader-content:mr-36">
                         Prompts for the work PostHog AI can take off your plate.
                     </p>
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/curious_hog_d91b1a8b89.png"
+                        alt=""
+                        loading="lazy"
+                        width={224}
+                        imgClassName="pointer-events-none absolute -bottom-2 right-0 hidden w-28 @3xl/reader-content:block"
+                    />
                 </div>
             </SectionHeader>
             <div className="grid gap-x-7 @xl/reader-content:grid-cols-2 [&>div:last-child]:border-b-0 @xl/reader-content:[&>div:nth-last-child(2)]:border-b-0">
@@ -529,13 +513,10 @@ const BackgroundWork = (): JSX.Element => (
         <header>
             <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
                 <StickerCoffee className="size-8 shrink-0 rotate-6" />
-                Useful while you’re doing something else
+                Agents that keep working when the chat window is closed
             </h2>
-            <p className="mb-0 mt-2 text-base text-secondary">
-                Agents that keep working when the chat window is closed.
-            </p>
         </header>
-        <div className="not-prose mt-6 grid gap-4 @3xl/reader-content:grid-cols-3">
+        <div className="mt-6 grid gap-4 @3xl/reader-content:grid-cols-3">
             {backgroundTools.map(({ label, Icon, color, description, to, cta }) => (
                 <div
                     key={label}
@@ -582,7 +563,7 @@ const AccessSection = (): JSX.Element => {
                         </h3>
                         <p className="mb-3 mt-0 text-sm text-secondary">
                             Start with a trend, then ask for the SQL behind it, the replays that match, or a survey to
-                            learn why. PostHog AI switches modes as you go and keeps the whole thread.
+                            learn why. It’s all one conversation, so each question builds on the last.
                         </p>
                     </div>
                     <IconChipRow items={inAppChips} />
@@ -770,11 +751,9 @@ export default function PostHogAIPage(): JSX.Element {
 
                     <PromptsSection />
 
-                    <Testimonials />
-
                     <div
                         id="try"
-                        className="not-prose bg-purple/10 border border-purple rounded-md p-5 shadow-xl @md/reader-content:p-7 my-6"
+                        className="bg-purple/10 border border-purple rounded-md p-5 shadow-xl @md/reader-content:p-7 my-6"
                     >
                         <div className="grid @lg/reader-content:grid-cols-[180px_minmax(0,1fr)] gap-6 items-center">
                             <CloudinaryImage
@@ -783,7 +762,7 @@ export default function PostHogAIPage(): JSX.Element {
                                 loading="lazy"
                                 width={360}
                                 className="hidden @lg/reader-content:block"
-                                imgClassName="mx-auto hidden max-h-56 w-auto @lg/reader-content:block"
+                                imgClassName="mx-auto max-h-56 w-auto"
                             />
                             <div>
                                 <h2 className="mt-0 mb-3 text-2xl font-bold @xl/reader-content:text-3xl">
@@ -802,17 +781,23 @@ export default function PostHogAIPage(): JSX.Element {
                         </div>
                     </div>
 
-                    <SectionHeader>
-                        <h2 className="mb-0 mt-10 text-2xl font-bold">The sensible questions</h2>
-                    </SectionHeader>
-                    <div className="not-prose mt-4">
+                    <section id="faq" className="my-12">
+                        <SectionHeader>
+                            <h2 className="m-0 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
+                                The sensible questions
+                            </h2>
+                        </SectionHeader>
                         <Accordion
                             type="single"
                             triggerClassName="!px-3 !py-2"
                             contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed"
                             items={toAccordionItems(faq)}
                         />
-                    </div>
+                    </section>
+
+                    <hr className="my-0 border-0 border-t border-primary" />
+
+                    <Testimonials />
 
                     <AIEngineering />
                 </div>

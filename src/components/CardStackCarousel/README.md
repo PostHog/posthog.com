@@ -46,6 +46,7 @@ To put the stack straight on the page, with no frame:
 | `framed` | `boolean` | `true` | The tan background, border, rounded corners, and vertical margin. |
 | `showCounter` | `boolean` | `true` | Shows "1 of 6" above the stack. When false, only screen readers announce it. |
 | `stageClassName` | `string` | `'h-[285px] @md:h-[325px]'` | Replaces the stage height. The cards are absolutely positioned, so set a height that fits your card. |
+| `contained` | `boolean` | `false` | Shrinks the cards so the stack and both chevrons fit inside the container, and shows the side cards at any width. Set `stageClassName` to a height that matches, for example `h-[calc(min(58cqw_-_2.25rem,240px)_+_20px)]` for `sm`. |
 | `className` | `string` | `''` | Classes for the outer container. |
 
 ## Behavior

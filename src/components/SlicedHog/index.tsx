@@ -64,8 +64,10 @@ const LAYERS: Layer[] = [
 const FRONT_WIDTH = 34.5
 const SCALE = FRONT_WIDTH / LAYERS[LAYERS.length - 1].naturalWidth
 const FRONT_CLOSED_LEFT = (100 - FRONT_WIDTH) / 2
+// Widens the gaps in the closed stack, so a sliver of each slice stays visible
+const CLOSED_SPREAD = 1.5
 // Shifts the closed stack right by half its spread, so it sits in the middle of the container
-const CLOSED_CENTERING = Math.max(...LAYERS.map(({ tuck }) => tuck)) / 2
+const CLOSED_CENTERING = (Math.max(...LAYERS.map(({ tuck }) => tuck)) * CLOSED_SPREAD) / 2
 // Requested from Cloudinary in place of the ~1,100px originals. Enough for a 2x screen at max-w-3xl.
 const IMAGE_WIDTH = 600
 // How far each step from the middle moves when it breathes, as a percent of the layer's width
@@ -77,6 +79,8 @@ interface SlicedHogProps {
     className?: string
     /** Read by assistive tech in place of the images. */
     label?: string
+    /** Shown as a tooltip on hover. */
+    title?: string
 }
 
 /**
@@ -86,6 +90,7 @@ interface SlicedHogProps {
 export default function SlicedHog({
     className = '',
     label = 'A hedgehog cut into slices, each one a different kind of data',
+    title,
 }: SlicedHogProps): JSX.Element {
     const shouldReduceMotion = useReducedMotion()
     const [revealRef, inView] = useInView({ threshold: 0.5, triggerOnce: true })
@@ -117,12 +122,13 @@ export default function SlicedHog({
             onClick={() => setOpen((value) => !value)}
             aria-pressed={open}
             aria-label={label}
+            title={title}
             className={`relative block w-full cursor-pointer select-none ${className}`}
             style={{ aspectRatio: ASPECT_RATIO }}
         >
             {LAYERS.map(({ src, naturalWidth, openLeft, tuck }, index) => {
                 const width = naturalWidth * SCALE
-                const closedLeft = FRONT_CLOSED_LEFT + CLOSED_CENTERING - tuck
+                const closedLeft = FRONT_CLOSED_LEFT + CLOSED_CENTERING - tuck * CLOSED_SPREAD
                 // Percent of the layer's own width, which is what a translateX percentage resolves against
                 const closedOffset = ((closedLeft - openLeft) / width) * 100
                 // Signed distance from the middle of the stack: the outer layers lead the reveal and move most when it breathes

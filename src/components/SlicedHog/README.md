@@ -12,6 +12,7 @@ import SlicedHog from 'components/SlicedHog'
 | --- | --- | --- | --- |
 | `className` | `string` | `''` | Classes for the button. Set the width here. The height follows from the aspect ratio. |
 | `label` | `string` | A general description | The accessible name. The images are decorative. |
+| `title` | `string` | None | A tooltip that shows on hover. |
 
 ## Changing the layers
 
@@ -19,7 +20,7 @@ import SlicedHog from 'components/SlicedHog'
 
 - `naturalWidth`, `naturalHeight`: the pixel size of the image. These keep the relative scale of the art.
 - `openLeft`: the left edge when open, as a percent of the container width.
-- `tuck`: the distance to the left of the front hog when closed. The small gaps make the closed stack look sliced.
+- `tuck`: the distance to the left of the front hog when closed. The small gaps make the closed stack look sliced. `CLOSED_SPREAD` scales all of them, so a sliver of each slice stays visible.
 
 Each image comes from Cloudinary at 600px wide (`IMAGE_WIDTH`). If you show the hog wider than `max-w-3xl`, increase this value.
 

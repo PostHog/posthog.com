@@ -1,48 +1,42 @@
 import React from 'react'
 import { useReducedMotion } from 'framer-motion'
 import TabbedCarousel from 'components/TabbedCarousel'
-import AskAnythingDemo, { DURATION, type DemoScenario } from 'components/Home/HeroCarousel/AskAnythingDemo'
+import ThreadMockup, { type ThreadScenario } from 'components/PostHogAI/ThreadMockup'
 
-const scenarios: { value: string; label: string; scenario: DemoScenario }[] = [
+const scenarios: { value: string; label: string; scenario: ThreadScenario }[] = [
     {
         value: 'conversion',
         label: 'Conversion',
         scenario: {
-            question: 'Why are people leaving checkout?',
-            intro: 'I’ll compare the funnel, errors, and replays, then check the code.',
-            tools: [
+            question: 'Why did upgrades drop after the billing redesign?',
+            toolCalls: 7,
+            calls: [
                 {
-                    handle: 'product_analytics',
-                    label: 'Product analytics',
-                    action: 'Compare checkout_started to order_completed',
-                    result: 'Drop-off on mobile Safari',
-                },
-                {
-                    handle: 'error_tracking',
-                    label: 'Error tracking',
-                    action: 'Find errors in the payment form',
-                    result: 'Exceptions on submit, mobile Safari',
-                },
-                {
-                    handle: 'session_replay',
-                    label: 'Session replay',
-                    action: 'Watch the affected sessions',
-                    result: 'Repeated submit clicks, no confirmation',
-                },
-                {
-                    slug: 'github',
-                    label: 'GitHub',
-                    action: 'Review recent checkout changes',
-                    result: 'The submit handler changed last week',
+                    tool: 'execute-sql',
+                    detail: 'Comparing upgrade rate by billing page layout and plan toggle',
                 },
             ],
-            conclusion: {
-                title: 'Mobile Safari users cannot submit payment.',
-                body: 'A recent change to the submit handler throws an error on mobile Safari.',
-                next: 'Fix the submit handler.',
+            table: {
+                head: ['Layout', 'Viewed', 'Upgraded', 'Rate'],
+                rows: [
+                    ['Old page', '5,120', '410', '8.0%'],
+                    ['New, annual first', '3,980', '175', '4.4%'],
+                    ['New, monthly', '1,280', '117', '9.1%'],
+                ],
+            },
+            intro: 'The redesign cost you about a quarter of upgrades. Here’s what I found:',
+            bullets: [
+                { lead: 'Upgrades fell from 8.0% to 5.9%.', text: 'The drop starts with the new page.' },
+                { lead: 'Annual is the new default.', text: 'Switchers to monthly convert at 9.1%.' },
+                { lead: 'Replays show price shock.', text: '9 of 12 left within 20 seconds.' },
+            ],
+            ending: {
+                type: 'notebook',
+                recommendation: 'Default to monthly, then test annual as a toggle.',
+                notebook: 'Billing page upgrade drop after the annual-first redesign',
             },
             summary:
-                'Illustrative demo: PostHog AI investigates checkout drop-off using funnels, errors, session replays, and GitHub changes. It finds that a recent submit handler change fails on mobile Safari. All findings are sample data.',
+                'Illustrative conversation: PostHog AI investigates a drop in billing page upgrades using SQL, the data schema, and session replays. It finds that an annual-first default hurts conversion, recommends a change, and offers to save the work as a notebook. All findings are sample data.',
         },
     },
     {
@@ -50,40 +44,42 @@ const scenarios: { value: string; label: string; scenario: DemoScenario }[] = [
         label: 'Activation',
         scenario: {
             question: 'Is the new onboarding ready for more users?',
-            intro: 'I’ll check the flag, the experiment, and errors in the new variant.',
-            tools: [
+            toolCalls: 5,
+            calls: [
+                { tool: 'experiment-results-get', detail: 'Reading results for the new_onboarding experiment' },
+                { tool: 'query-error-tracking-issues', detail: 'Comparing errors between control and test' },
+                { tool: 'feature-flag-get-definition', detail: 'Checking the rollout of new-onboarding' },
+            ],
+            insight: {
+                title: 'Created a first project, by variant',
+                legend: [
+                    { label: 'Control', value: '31.2%' },
+                    { label: 'Test', value: '34.1%' },
+                ],
+                series: [
+                    [29.1, 30.4, 29.8, 30.9, 30.2, 31.0, 30.7, 31.4, 30.9, 31.5, 31.0, 31.3, 31.1, 31.2],
+                    [29.6, 31.2, 31.0, 32.4, 32.1, 33.0, 32.6, 33.5, 33.1, 33.9, 33.6, 34.0, 33.8, 34.1],
+                ],
+            },
+            intro: 'The test variant looks ready. Here’s what I found:',
+            bullets: [
                 {
-                    handle: 'feature_flags',
-                    label: 'Feature flags',
-                    action: 'Check the new_onboarding rollout',
-                    result: 'Live for 20% of new users',
+                    lead: 'Activation is up.',
+                    text: '34.1% made a first project, up from 31.2%.',
                 },
+                { lead: 'The variant adds no errors.', text: 'The error rate matches control.' },
                 {
-                    handle: 'experiments',
-                    label: 'Experiments',
-                    action: 'Read the experiment results',
-                    result: 'More signups reach a first project',
-                },
-                {
-                    handle: 'error_tracking',
-                    label: 'Error tracking',
-                    action: 'Look for errors in the new variant',
-                    result: 'No new exceptions',
-                },
-                {
-                    slug: 'github',
-                    label: 'GitHub',
-                    action: 'Review the flag checks in code',
-                    result: 'The flag guards every new step',
+                    lead: 'The rollout is small.',
+                    text: 'The flag is live for 20% of new users.',
                 },
             ],
-            conclusion: {
-                title: 'The new onboarding looks ready for more users.',
-                body: 'Activation is up, and the variant adds no new errors.',
-                next: 'Raise the rollout to 50%.',
+            ending: {
+                type: 'offer',
+                recommendation: 'Raise the rollout to 50%.',
+                offer: 'Should I schedule that for Monday, with an error rate alert?',
             },
             summary:
-                'Illustrative demo: PostHog AI checks a feature flag rollout using the flag, experiment results, error tracking, and GitHub code. It finds higher activation with no new errors. All findings are sample data.',
+                'Illustrative conversation: PostHog AI checks a feature flag rollout using experiment results, error tracking, and the flag definition. It finds higher activation with no new errors, recommends a larger rollout, and offers to schedule it with an alert. All findings are sample data.',
         },
     },
     {
@@ -91,40 +87,31 @@ const scenarios: { value: string; label: string; scenario: DemoScenario }[] = [
         label: 'Churn',
         scenario: {
             question: 'Which renewing accounts need a closer look?',
-            intro: 'I’ll join billing, usage, and support data by account.',
-            tools: [
-                {
-                    slug: 'stripe',
-                    label: 'Stripe',
-                    action: 'Find subscriptions that renew in 30 days',
-                    result: '14 accounts renew this month',
-                },
-                {
-                    handle: 'product_analytics',
-                    label: 'Product analytics',
-                    action: 'Compare weekly active members',
-                    result: '5 use it less than last month',
-                },
-                {
-                    slug: 'zendesk',
-                    label: 'Zendesk',
-                    action: 'Check open support tickets',
-                    result: '3 have unresolved tickets',
-                },
-                {
-                    slug: 'hubspot',
-                    label: 'HubSpot',
-                    action: 'Check the last contact date',
-                    result: '2 have had no contact in 60 days',
-                },
+            toolCalls: 3,
+            calls: [
+                { tool: 'read-data-warehouse-schema', detail: 'Listing Stripe and Zendesk tables' },
+                { tool: 'read-data-schema', detail: 'Checking usage events by account' },
             ],
-            conclusion: {
-                title: 'Three accounts need attention before renewal.',
-                body: 'Their usage is down and they have open support tickets.',
-                next: 'Send the list to the account owners.',
+            table: {
+                source: 'Schema',
+                head: ['Source', 'Field', 'Holds'],
+                rows: [
+                    ['Stripe', 'current_period_end', 'Plan renewal'],
+                    ['Stripe', 'cancel_at', 'Set cancellation'],
+                    ['Zendesk', 'status', 'Ticket state'],
+                    ['Zendesk', 'updated_at', 'Last contact'],
+                ],
             },
+            intro: 'The data’s here, but “closer look” is open. I need four details:',
+            bullets: [
+                { lead: 'Which renewal date?', text: 'Stripe has two to pick from.' },
+                { lead: 'What’s a risk signal?', text: 'Falling usage, open tickets, or both.' },
+                { lead: 'Which accounts?', text: 'All of them, or only plans above a set price.' },
+                { lead: 'How far ahead?', text: 'Renewals in the next 30, 60, or 90 days.' },
+            ],
+            ending: { type: 'ask', closing: 'Reply with these and I’ll build the list.' },
             summary:
-                'Illustrative demo: PostHog AI reviews renewing accounts using Stripe subscriptions, product usage, Zendesk tickets, and HubSpot contact dates. It finds three accounts with falling usage and open tickets. All findings are sample data.',
+                'Illustrative conversation: PostHog AI looks at the Stripe, Zendesk, and usage data it can reach. The question is open, so it asks which renewal date, which risk signal, which accounts, and how far ahead to look before it runs a query.',
         },
     },
 ]
@@ -137,16 +124,16 @@ export default function ContextDiagram(): JSX.Element {
         color: 'bg-accent',
         activeText: 'text-primary',
         progressBar: 'bg-red dark:bg-yellow',
-        content: <AskAnythingDemo scenario={scenario} flush />,
+        content: <ThreadMockup scenario={scenario} />,
     }))
 
     return (
         <figure className="m-0 min-w-0">
-            <figcaption className="sr-only">Three sample workflows · illustrative data</figcaption>
-            {/* Each slide stays up a little longer than its demo runs */}
+            <figcaption className="sr-only">Three sample conversations · illustrative data</figcaption>
+            {/* Long enough to read a whole conversation before the next one appears */}
             <TabbedCarousel
                 tabs={tabs}
-                slideDuration={DURATION + 2000}
+                slideDuration={15000}
                 paused={!!reducedMotion}
                 pauseOnFocus
                 variant="flush"
