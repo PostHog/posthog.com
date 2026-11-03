@@ -37,7 +37,7 @@ export const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
         handles: ['ai_observability', 'session_replay', 'replay_vision', 'error_tracking', 'logs', 'traces'],
     },
     { label: 'Sync', handles: ['data_warehouse', 'data_pipelines'] },
-    { label: 'Deploy', handles: ['endpoints', 'feature_flags', 'experiments'] },
+    { label: 'Deploy', handles: ['feature_flags', 'experiments', 'endpoints'] },
     { label: 'Manage', handles: ['surveys', 'support', 'workflows_emails'] },
 ]
 
