@@ -139,6 +139,7 @@ export const amplitude = {
             ai: {
                 features: {
                     ai_summaries: true,
+                    replay_vision: 'Growth and Enterprise add-on',
                 },
             },
         },
