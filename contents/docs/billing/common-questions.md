@@ -36,7 +36,9 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 ## What does each product bill for?
 
-PostHog bills only what it ingests, which means data it receives and stores. Events that a [transformation](/docs/data-pipelines/transformations/drop-events) drops, or that arrive after you reach a [billing limit](/docs/billing/limits-alerts), are not stored, so they are free. Events that another product bills, like `$exception`, don't also bill as Product Analytics events.
+PostHog bills only what it ingests, which means data it **receives** and **stores**. 
+
+Events that a [transformation](/docs/data-pipelines/transformations/drop-events) drops, or that arrive after you reach a [billing limit](/docs/billing/limits-alerts), are not stored, so they are free. Events that another product bills, like `$exception`, don't also bill as Product Analytics events.
 
 | [Product Analytics](/product-analytics/pricing), billed per event | Billed |
 | --- | --- |
