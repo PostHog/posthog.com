@@ -240,7 +240,7 @@ If you have any issues or any feedback on how to improve a specific intro just p
 
 ## Finding answers at PostHog
 
-Need help finding something? We have a strong culture of self-sourcing answers - it helps you get unblocked faster and builds your intuition for where things live. Start with #ask-max, our AI that's read every handbook and documentation page. It'll point you to relevant docs instantly and is available 24/7.
+Need help finding something? We have a strong culture of self-sourcing answers - it helps you get unblocked faster and builds your intuition for where things live. Start in #at-posthog-anything - tag `@posthog` and it'll search every handbook and documentation page for you. It'll point you to relevant docs instantly and is available 24/7.
 
 Of course, if you're stuck or need context beyond what's documented, just ask in the relevant channel - people are always happy to help. The goal isn't to make you figure everything out alone, it's to give you the fastest path to answers.
 
@@ -250,14 +250,14 @@ Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
--   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
--   <PrivateLink url="https://posthog.slack.com/archives/C0351B1DMUY">#tell-posthog-anything</PrivateLink> - company-wide announcements about our people, products, policies, and projects
 -   <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#at-posthog-anything</PrivateLink> - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
+-   <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> - ask the team when you cannot find an answer in the handbook, the docs, or `#at-posthog-anything`
+-   <PrivateLink url="https://posthog.slack.com/archives/C0351B1DMUY">#tell-posthog-anything</PrivateLink> - company-wide announcements about our people, products, policies, and projects
 -   <PrivateLink url="https://posthog.slack.com/archives/CSPHFDZH8">#general</PrivateLink> - see new starters, work anniversaries, birthdays and all-hands recordings
 -   <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelog</PrivateLink> - keep up with all the cool things we're shipping across the team
 -   `#today-i-learned` - where we share what we learn
 -   `#demo-posthog-anything` - show the team something you built, or see what others are building
+-   <PrivateLink url="https://posthog.slack.com/archives/C0A4UC0H5AB">#shitposters-unite</PrivateLink> - the place to share earnest and shitposts alike
 -   `#phishing-attempts` - report suspicious emails, texts, and messages here
 -   <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y">#content-and-video-ideas</PrivateLink> - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
 -   <PrivateLink url="https://posthog.slack.com/archives/C01RJ7T212S">#newsletters</PrivateLink>
@@ -318,7 +318,6 @@ We encourage you to join and create channels focused around different types of h
 -   <PrivateLink url="https://posthog.slack.com/archives/C02G88X9R2R">#pets</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C01LREJ3NPL">#rockets</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C08HBBYT9DW">#running</PrivateLink>
--   `#shitposters-unite`
 -   `#skiing`
 -   <PrivateLink url="https://posthog.slack.com/archives/C01L9FZBRPD">#stonks</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C082AS81RD0">#wedding-planners</PrivateLink>
