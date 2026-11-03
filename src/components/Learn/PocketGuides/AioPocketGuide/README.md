@@ -34,4 +34,4 @@ AIO figures load through a client-only asynchronous boundary in `bookComponents.
 
 Each lazy-loaded figure has a local `FigureErrorBoundary`. A failed import or render replaces only that figure with a short refresh message, leaving the chapter and other figures readable. Suspense still handles pending imports without showing an error. `FigureErrorBoundary.test.ts` covers resolved and rejected lazy imports, exception reporting, and render failures when PostHog is unavailable. Caught failures use the existing optional `window.posthog.captureException` integration.
 
-The current local preview archive is built from twig-components commit `34f6feb473ecf3ba6cbd0bbeda0e3a666c49742c` (PR #43). It includes compact response bubbles and matching composer typography. It remains an unpublished review package and must be replaced with the published release before merge.
+The guide uses the published `@posthog/twig-components` package, pinned to `0.2.5`. The lockfile records the npm integrity hash. No local package archive is required.
