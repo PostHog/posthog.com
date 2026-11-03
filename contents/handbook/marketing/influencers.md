@@ -29,7 +29,7 @@ Whoever owns the creator relationship does these checks before the first agreeme
 1. Review their main public accounts, including X. Check posts, replies, and reposts.
 2. Check recent content and older public history.
 3. If you find a concern, check the original post and its context.
-4. Ask someone else in Builder Relations or Marketing to review the concern, if in doubt.
+4. Ask someone else in Builder Relations or Developer Marketing to review the concern, if in doubt.
 
 ### If someone raises a concern
 
