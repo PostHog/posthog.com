@@ -59,6 +59,8 @@ PostHog connects to Linear using a [third-party app](https://linear.app/docs/thi
 - Create issues for your workspace
 - Read access to your workspace
 
+Once connected, linked issues automatically sync their status. When all linked Linear tickets are closed (with at least one marked done), the PostHog issue resolves. When a linked ticket reopens, the PostHog issue reopens.
+
 ### Automatic status sync
 
 When you link an error tracking issue to a Linear ticket, PostHog automatically syncs their status. If you close the Linear ticket, the PostHog issue resolves. If you reopen the Linear ticket, the PostHog issue reopens.
