@@ -36,15 +36,11 @@ It also lets us save on storage costs, which helps us keep our prices low for ou
 
 ## What happens to my data after the retention period ends?
 
-On the Free plan, events older than 1 year are hidden first and deleted after a grace period, typically 1–3 months.
+Events older than your retention period are hidden from queries, and may be deleted at any point after the period ends. We may store them longer than your retention period, but that isn't guaranteed.
 
-For the first 3 months after this starts, nothing is deleted. If you upgrade to pay-as-you-go during that time, you get back all your events from the last 2 years.
+If you've set up a custom retention policy, we'll delete any events past your retention period during our monthly data cleanup.
 
-After that, events are deleted once they're 1–3 months past the 1-year retention period. Upgrading still brings back hidden events that haven't been deleted yet.
-
-On paid plans, events are hidden once they're older than your default retention period (2 years, or 7 years if you kept it), and deleted after the same grace period.
-
-A custom retention policy that's shorter than your default deletes events older than it at the next monthly cleanup. To remove events right away, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention).
+To remove events right away, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention). 
 
 ## How can I extend my data retention in PostHog?
 
