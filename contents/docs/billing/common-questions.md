@@ -38,7 +38,7 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 Each product bills its own usage. Events dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) or after a [billing limit](/docs/billing/limits-alerts) are free. For prices, see [pricing](/pricing).
 
-### Product analytics
+### Product Analytics
 
 | What you send | Billed |
 | --- | --- |
@@ -48,13 +48,13 @@ Each product bills its own usage. Events dropped by a [transformation](/docs/dat
 
 [Personless events](/docs/data/anonymous-vs-identified-events) bill at the anonymous event price.
 
-### Session replay
+### Session Replay
 
 | What you send | Billed |
 | --- | --- |
 | Recordings | Yes |
 
-### Feature flags
+### Feature Flags
 
 | What you send | Billed |
 | --- | --- |
@@ -69,15 +69,15 @@ Each product bills its own usage. Events dropped by a [transformation](/docs/dat
 | Flag requests | Yes |
 | `$experiment_exposure` events | No |
 
-Experiments use feature flags, so their flag requests bill as feature flag requests.
+Experiments use Feature Flags, so their flag requests bill under Feature Flags.
 
-### Error tracking
+### Error Tracking
 
 | What you send | Billed |
 | --- | --- |
 | `$exception` events | Yes |
 
-### LLM analytics
+### LLM Analytics
 
 | What you send | Billed |
 | --- | --- |
