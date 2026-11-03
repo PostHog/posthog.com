@@ -8,11 +8,11 @@ MCP Analytics captures how agents use your MCP server. Add the SDK for your serv
 
 ## Install with the wizard
 
-The wizard detects your server, installs the SDK, and adds the instrumentation. It supports TypeScript, Python, Go, and Ruby servers, and [LLM coding agents](/blog/envoy-wizard-llm-agent) such as Cursor:
+The wizard detects your server, installs the SDK, and adds the instrumentation. It supports TypeScript, Python, Go, Ruby, and Rust servers, and [LLM coding agents](/blog/envoy-wizard-llm-agent) such as Cursor:
 
 <WizardCommand command="mcp-analytics" />
 
-For a Rust server, follow the Rust page below. For a language without an SDK, ask your coding agent to follow [`/docs/mcp-analytics/installation/other-languages.md`](/docs/mcp-analytics/installation/other-languages.md).
+For a language without an SDK, ask your coding agent to follow [`/docs/mcp-analytics/installation/other-languages.md`](/docs/mcp-analytics/installation/other-languages.md).
 
 ## Install by hand
 
@@ -41,7 +41,7 @@ Every server SDK sends the core events, `$mcp_tool_call` for each tool call and 
 | [Missing capabilities](/docs/mcp-analytics/missing-capability) (`get_more_tools`) | Yes | Yes | Yes | Yes | Yes |
 | Stateless session token | Yes | Yes | No | Yes | No |
 | Custom dispatchers | Yes | Yes | Yes | Yes | Yes |
-| Wizard | Yes | Yes | Yes | Yes | No |
+| Wizard | Yes | Yes | Yes | Yes | Yes |
 | Support | Beta | Beta | Beta | Experimental | Experimental |
 
 All SDKs remove credentials and binary content from captured payloads. See [Privacy](/docs/mcp-analytics/privacy).
