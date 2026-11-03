@@ -1055,6 +1055,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/growth-engineering/per-product-activation',
             },
             {
+                name: 'Per-product setup',
+                url: '/handbook/growth/growth-engineering/per-product-setup',
+            },
+            {
                 name: 'Dashboard templates',
                 url: '/handbook/marketing/templates',
             },
