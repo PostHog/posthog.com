@@ -117,8 +117,6 @@ This joins exceptions to hosts on `$groups`:
 | `$exception` | The hosts each issue hit |
 | `groups` | What each host pays, from its `mrr` property |
 
-To build a version of this, give an agent the revenue skill <SeeFig n={5} />.
-
 The [Errors in paying hosts](/learn/error-tracking/pocket-guide/errors-in-paying-hosts) scout runs a related check every day. It reports issues concentrated in paying hosts.
 
 ## Check whether an error makes guests leave
@@ -247,6 +245,8 @@ This joins sessions to unhandled exceptions on `$session_id`:
 | --- | --- |
 | `sessions` | Every session |
 | `$exception` with `$exception_handled` set to `false` | Which sessions hit an unhandled exception |
+
+To rank your issues by the revenue they put at risk, give an agent the revenue skill <SeeFig n={5} />.
 
 <LessonFooter nextLabel="Triage and alerts" nextHref="/learn/error-tracking/pocket-guide/triage-and-alerts">
 

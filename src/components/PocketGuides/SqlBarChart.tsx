@@ -1,11 +1,9 @@
 import React from 'react'
 
-import AnatomyFrame from './AnatomyFrame'
-
 /**
- * The SQL editor's Visualization tab in miniature, set to a horizontal bar chart: the label column
- * on the left, one bar per row sized against the largest value. Drawn rather than screenshotted so
- * the example rows can match the chapter.
+ * A static horizontal bar chart of a SQL result: one bar per row sized against the largest value.
+ * Drawn rather than screenshotted so the example rows can match the chapter. Text sizes and the
+ * label column follow Divergence and LeakFunnel, so the guide's charts read at one scale.
  */
 
 interface SqlBarChartRow {
@@ -30,31 +28,17 @@ export default function SqlBarChart({ rows, series, format = 'number' }: SqlBarC
     const max = Math.max(...rows.map((row) => row.value))
 
     return (
-        <AnatomyFrame className="rounded border border-primary bg-accent p-3 dark:bg-accent-dark @md:p-4">
-            <div className="flex items-center justify-between gap-2 border-b border-primary pb-2 text-[0.7em] leading-none">
-                <span className="flex items-center gap-3">
-                    <span className="text-secondary">Results</span>
-                    <span className="font-bold text-primary underline decoration-orange decoration-2 underline-offset-[6px]">
-                        Visualization
-                    </span>
-                </span>
-                <span className="rounded border border-primary bg-primary px-2 py-1 text-primary">
-                    Horizontal bar chart
-                </span>
-            </div>
-
-            <div className="mt-3 space-y-2 rounded border border-primary bg-primary p-3">
+        <div className="@container">
+            <div className="space-y-3">
                 {rows.map((row) => (
-                    <div key={row.label} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center gap-2">
-                        <span className="truncate text-right font-code text-[0.62em] leading-snug text-secondary">
-                            {row.label}
-                        </span>
+                    <div key={row.label} className="grid grid-cols-1 items-center gap-1 @sm:grid-cols-[12rem_1fr]">
+                        <p className="m-0 text-[0.8em] leading-tight text-primary">{row.label}</p>
                         <span className="flex items-center gap-1.5">
                             <span
                                 className="h-3 shrink-0 rounded-sm bg-blue"
                                 style={{ width: `${Math.max(2, (row.value / max) * 80)}%` }}
                             />
-                            <span className="shrink-0 text-[0.62em] leading-none text-primary">
+                            <span className="shrink-0 text-[0.7em] leading-none text-primary">
                                 {formatValue(row.value, format)}
                             </span>
                         </span>
@@ -62,10 +46,10 @@ export default function SqlBarChart({ rows, series, format = 'number' }: SqlBarC
                 ))}
             </div>
 
-            <div className="mt-2 flex items-center gap-1.5 text-[0.62em] leading-none text-secondary">
-                <span className="size-2 rounded-full bg-blue" />
+            <p className="m-0 mt-2 flex items-center gap-1.5 text-[0.7em] leading-snug text-secondary">
+                <span aria-hidden="true" className="inline-block size-2 shrink-0 rounded-full bg-blue" />
                 <span className="font-code">{series}</span>
-            </div>
-        </AnatomyFrame>
+            </p>
+        </div>
     )
 }

@@ -128,7 +128,7 @@ As software grows and the organization changes, how you think about grouping wil
 When issues are misgrouped, Twig's engineers debug like this:
 
 ```mermaid
-%%{init: {"block": {"padding": 22}, "themeCSS": ".edgeLabel foreignObject { overflow: visible; } span.edgeLabel { background: transparent !important; } .yes, .no { background: white; padding: 0 3px; } .no { position: relative; left: 30px; }"}}%%
+%%{init: {"block": {"padding": 22}}}%%
 block-beta
     columns 3
     issue["Misgrouped issue"] space space
@@ -151,8 +151,6 @@ block-beta
     percase -- "<span class='yes'>yes</span>" --> fingerprint
     percase -- "<span class='no'>no</span>" --> add
 
-    classDef check fill:#f59e0b26,stroke:#f59e0b,stroke-width:1.5px
-    classDef act fill:#3b82f626,stroke:#3b82f6,stroke-width:1.5px
     class frames,right,mixed,shared,percase check
     class maps,leave,narrow,rule,fingerprint,add act
 ```

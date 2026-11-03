@@ -23,7 +23,7 @@ const examplePrompts = [
     },
     {
         title: 'Session drop-off',
-        prompt: `Build me a funnel over the last 7 days, counted by unique sessions, with a 1-minute conversion window. Step 1 is $exception where $lib is web. Step 2 is either a $pageview or an $autocapture event. Break it down by $exception_issue_id. Then tell me which issues have the highest drop-off among issues with at least 100 sessions.`,
+        prompt: `Build me a funnel over the last 7 days, counted by unique sessions, with a 1-minute conversion window. Step 1 is $exception where $lib is web. Step 2 is any event that shows the person kept going: a $pageview, an $autocapture event, or one of my app's named events, like stay_viewed. If autocapture is off, the named events are the main signal. Break it down by $exception_issue_id. Then tell me which issues have the highest drop-off among issues with at least 100 sessions.`,
     },
     {
         title: 'Session replays',
@@ -47,7 +47,7 @@ const examplePrompts = [
     },
     {
         title: 'Crash-free sessions',
-        prompt: `Build a trend over the last 30 days, counted by unique sessions. Series A is all events. Series B is $exception where $exception_level is fatal. Set the formula to (A - B) / A * 100 to show the share of sessions that didn't crash, and tell me which days were lowest.`,
+        prompt: `Build a trend over the last 30 days, counted by unique sessions. Series A is all events. Keep web and mobile apart. For web, series B is $exception where $exception_handled is false. For mobile, series B is $exception where $exception_level is fatal. Set the formula to (A - B) / A * 100 to show the share of sessions without an unhandled exception or crash, and tell me which days were lowest.`,
     },
 ]
 

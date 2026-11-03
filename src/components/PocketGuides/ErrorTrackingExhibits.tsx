@@ -142,7 +142,15 @@ export function TripDetailsErrorFigure(): JSX.Element {
     const [occurrences, setOccurrences] = useState(1)
 
     return (
-        <Exhibit stacked onReset={() => setOccurrences(1)}>
+        <Exhibit
+            stacked
+            onReset={() => setOccurrences(1)}
+            caption={
+                occurrences === 1
+                    ? 'Twig caught the error, showed a retry, and sent it with the stay. Click Try again in Twig.'
+                    : `Each retry throws the same TypeError, so all ${occurrences} exceptions are in one issue.`
+            }
+        >
             <div className="grid items-start gap-4 @lg:grid-cols-[minmax(0,1.05fr)_minmax(14rem,0.95fr)]">
                 <TwigFrame>
                     <TripDetailsView
@@ -182,11 +190,6 @@ export function TripDetailsErrorFigure(): JSX.Element {
                             },
                         }}
                     />
-                    <InspectorStatus tone="error">
-                        {occurrences === 1
-                            ? 'Twig caught the error, showed a retry, and sent it with the stay. Click Try again in Twig.'
-                            : `Each retry throws the same TypeError, so all ${occurrences} exceptions are in one issue.`}
-                    </InspectorStatus>
                 </PostHogInspector>
             </div>
         </Exhibit>

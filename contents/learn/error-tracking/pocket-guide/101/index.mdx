@@ -64,7 +64,7 @@ In an app like [Twig](https://twig.com), guests browse stays, pick their dates, 
 
 When something breaks, Twig's code throws an <Term name="exception" />, such as a `TypeError`. Its <Term name="stack trace" /> shows what led up to it.
 
-To see them, the team uses Error Tracking. It captures each exception and its stack trace as a queryable PostHog event.
+To see them, the team uses PostHog Error Tracking. It captures each exception and its stack trace as a queryable event.
 
 ## Autocapture exceptions
 
@@ -92,11 +92,11 @@ On each platform, autocapture catches:
 
 Everything in PostHog is an event, including exceptions. The exception event sits alongside Twig's other PostHog events, so we can answer questions like these:
 
-- [Which customers are impacted?](/learn/error-tracking/pocket-guide/querying-exceptions#start-from-one-hosts-errors)
-- [Does it impact conversion and retention?](/learn/error-tracking/pocket-guide/querying-exceptions#check-whether-an-error-makes-guests-leave)
-- [Can this error be tied to loss in revenue?](/learn/error-tracking/pocket-guide/querying-exceptions#rank-issues-by-bookings-at-risk)
-- [Were they part of any feature flag or experiment rollouts?](/learn/error-tracking/pocket-guide/querying-exceptions#catch-new-errors-in-experiments)
-- [What's shown on the user's page before and after the exception is thrown?](/learn/error-tracking/pocket-guide/querying-exceptions#watch-what-guests-saw)
+- Which customers are impacted?
+- Does it impact conversion and retention?
+- Can this error be tied to loss in revenue?
+- Were they part of any feature flag or experiment rollouts?
+- What's shown on the user's page before and after the exception is thrown?
 
 See [Querying exceptions](/learn/error-tracking/pocket-guide/querying-exceptions).
 

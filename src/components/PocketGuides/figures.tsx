@@ -626,7 +626,7 @@ export function LoopFigure({ n = 1, caption }: { n?: number; caption: string }):
     )
 }
 
-/** A SQL editor result drawn as its horizontal bar chart, the way the Visualization tab shows it. */
+/** A SQL result drawn as a static horizontal bar chart. */
 export function SqlBarChartFigure({
     n = 1,
     caption,

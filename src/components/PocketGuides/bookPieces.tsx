@@ -1,4 +1,5 @@
 import React from 'react'
+import { colors } from '@posthog/brand/colors'
 
 import usePostHog from '../../hooks/usePostHog'
 
@@ -128,6 +129,34 @@ function BookLink({ href: authoredHref, ...props }: any): JSX.Element {
 const CODE_WRAP =
     'my-[0.8em] [&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words'
 
+/**
+ * Diagrams in the brand palette and the book's RoundHog type. Colors that follow light and dark mode
+ * use the site's CSS variables in themeCSS, because themeVariables only take fixed colors. Tag
+ * decision nodes `check` and outcome nodes `act`, and wrap edge labels in a `yes` or `no` span.
+ */
+const MERMAID_THEME = {
+    theme: 'base',
+    fontFamily: 'RoundHog, sans-serif',
+    themeVariables: {
+        fontFamily: 'RoundHog, sans-serif',
+        primaryColor: colors.yellow.lighter,
+        primaryBorderColor: colors.yellow.core,
+        lineColor: colors.blue.core,
+    },
+    themeCSS: [
+        '.node rect, .node polygon { fill: rgb(var(--accent)); stroke: rgb(var(--border)); stroke-width: 1.5px; }',
+        `.node.check rect, .node.check polygon { fill: ${colors.yellow.core}26; stroke: ${colors.yellow.core}; }`,
+        `.node.act rect, .node.act polygon { fill: ${colors.blue.core}26; stroke: ${colors.blue.core}; }`,
+        '.nodeLabel, .edgeLabel { color: rgb(var(--text-primary)); }',
+        '.flowchart-link { stroke: rgb(var(--text-secondary)) !important; }',
+        '.marker { fill: rgb(var(--text-secondary)) !important; stroke: rgb(var(--text-secondary)) !important; }',
+        '.edgeLabel foreignObject { overflow: visible; }',
+        'span.edgeLabel { background: transparent !important; }',
+        '.yes, .no { background: rgb(var(--bg)); color: rgb(var(--text-primary)); padding: 0 3px; }',
+        '.no { position: relative; left: 30px; }',
+    ].join(' '),
+}
+
 /** The parent reader supplies docs prose styles; only book-specific behavior is mapped here. */
 export const proseComponents = {
     // Fenced code. MDX v1 sends the block through `code` and inline spans through `inlineCode`.
@@ -135,7 +164,7 @@ export const proseComponents = {
     code: ({ className, children }: any) =>
         String(className ?? '').includes('language-mermaid') ? (
             <div className="my-[0.8em]">
-                <Mermaid>{String(children)}</Mermaid>
+                <Mermaid config={MERMAID_THEME}>{String(children)}</Mermaid>
             </div>
         ) : (
             <div className={CODE_WRAP}>
