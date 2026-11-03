@@ -46,6 +46,7 @@ A few scopes can never be granted to a workload, because they would let a token 
 - `task:write`, `conversation:write`, `signal_scout:write` and `business_knowledge:write`, which start agent runs with their own longer-lived tokens
 - `streamlit_app`, which hands out a one-hour token for a running app
 - `webhook:write`, `batch_export:write` and `subscription:write`, which set up data feeds or emails that keep sending after the token expires
+- `sharing_configuration`, because a public sharing link keeps working after the token expires
 - `conversation:read` and `task:read`, because a workload token acts as an organization owner, and these read that person's private PostHog AI conversations and tasks
 
 ## Asking an admin for a trusted workload
