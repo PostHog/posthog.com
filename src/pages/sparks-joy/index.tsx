@@ -4,7 +4,7 @@ import SEO from 'components/seo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { explorerGridColumns } from '../../constants'
 import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
-import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
+import { AppLink } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
 import {
     HedgehogBackToTheFuture,
@@ -38,36 +38,22 @@ export default function SparkJoy(): JSX.Element {
                         items={[
                             {
                                 value: 'games',
-                                trigger: (
-                                    <span>
-                                        Games (
-                                        {SparksJoyItems.games.filter((item) => item.iconName || item.customIcon).length}
-                                        )
-                                    </span>
-                                ),
+                                trigger: <span>Games ({SparksJoyItems.games.length})</span>,
                                 content: (
                                     <div
                                         className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                     >
-                                        {SparksJoyItems.games
-                                            .filter((item) => item.iconName || item.customIcon)
-                                            .map((item) => (
-                                                <ZoomHover key={item.link} className="w-28 justify-center">
-                                                    <AppLink
-                                                        label={item.label}
-                                                        url={item.link}
-                                                        external={item.external}
-                                                        Icon={
-                                                            item.iconName ? (
-                                                                <AppIcon name={item.iconName} />
-                                                            ) : (
-                                                                item.customIcon
-                                                            )
-                                                        }
-                                                        className="size-12"
-                                                    />
-                                                </ZoomHover>
-                                            ))}
+                                        {SparksJoyItems.games.map((item) => (
+                                            <ZoomHover key={item.link} className="w-28 justify-center">
+                                                <AppLink
+                                                    label={item.label}
+                                                    url={item.link}
+                                                    external={item.external}
+                                                    Icon={item.icon}
+                                                    className="size-12"
+                                                />
+                                            </ZoomHover>
+                                        ))}
                                     </div>
                                 ),
                             },
@@ -81,39 +67,22 @@ export default function SparkJoy(): JSX.Element {
                         items={[
                             {
                                 value: 'grab-bag',
-                                trigger: (
-                                    <span>
-                                        Grab bag (
-                                        {
-                                            SparksJoyItems.notGames.filter((item) => item.iconName || item.customIcon)
-                                                .length
-                                        }
-                                        )
-                                    </span>
-                                ),
+                                trigger: <span>Grab bag ({SparksJoyItems.notGames.length})</span>,
                                 content: (
                                     <div
                                         className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                     >
-                                        {SparksJoyItems.notGames
-                                            .filter((item) => item.iconName || item.customIcon)
-                                            .map((item) => (
-                                                <ZoomHover key={item.link} className="w-28 justify-center">
-                                                    <AppLink
-                                                        label={item.label}
-                                                        url={item.link}
-                                                        external={item.external}
-                                                        Icon={
-                                                            item.iconName ? (
-                                                                <AppIcon name={item.iconName} />
-                                                            ) : (
-                                                                item.customIcon
-                                                            )
-                                                        }
-                                                        className="size-12"
-                                                    />
-                                                </ZoomHover>
-                                            ))}
+                                        {SparksJoyItems.notGames.map((item) => (
+                                            <ZoomHover key={item.link} className="w-28 justify-center">
+                                                <AppLink
+                                                    label={item.label}
+                                                    url={item.link}
+                                                    external={item.external}
+                                                    Icon={item.icon}
+                                                    className="size-12"
+                                                />
+                                            </ZoomHover>
+                                        ))}
                                     </div>
                                 ),
                             },
