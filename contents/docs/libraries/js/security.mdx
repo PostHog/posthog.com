@@ -51,6 +51,8 @@ Use this loader instead of the inline snippet. Set `integrity` to `files["loader
 ></script>
 ```
 
+If you serve the loader through a reverse proxy, set `data-api-host` to your ingestion URL. Move existing initialization options into `data-config` as JSON. For function-valued options, set `data-defer-init="true"` and call `posthog.init(...)` explicitly.
+
 Replace both complete hash placeholders and the project token. When upgrading, update the version and both hashes together. If a hash doesn't match, the browser blocks execution; don't retry without integrity.
 
 Cross-origin SRI requires CORS response headers. PostHog's asset hosts provide these; preserve them if you use a cross-origin proxy.
