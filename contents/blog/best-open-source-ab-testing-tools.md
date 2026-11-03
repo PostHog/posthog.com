@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-testing-tools/testinghog.png
 featuredImageType: full
+ogImage: generated
 author:
   - hanna-crombie
   - andy-vandervell

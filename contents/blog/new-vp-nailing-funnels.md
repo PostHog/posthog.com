@@ -9,6 +9,7 @@ author:
   - marcus-hyett
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/new-vp-nailing-funnels/new-vp-nailing-funnels.png
+ogImage: generated
 category: Product growth
 ---
 
