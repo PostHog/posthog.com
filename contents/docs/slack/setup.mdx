@@ -37,7 +37,7 @@ Link the accounts instead. When email matching fails, the bot replies in the thr
 
 <CalloutBox icon="IconInfo" title="Slack Connect channels require one-time approval" type="fyi">
 
-In externally-shared (Slack Connect) channels, the bot asks for one-time approval before answering. The first time someone mentions `@PostHog` in a shared channel, the bot posts an ephemeral prompt visible only to the mentioner, with **Allow PostHog in this channel** and **Not here** buttons. Only a member of your PostHog organization can approve, so a member needs to send that first mention. The bot then posts the outcome in the thread. After approval, mentions in the channel work normally without further prompts.
+In externally-shared (Slack Connect) channels, the bot asks for one-time approval before answering. The first time someone mentions `@PostHog` in a shared channel, the bot replies with a message that only the person who mentioned it can see, with **Allow PostHog in this channel** and **Not here** buttons. Only a member of your PostHog organization can approve, so a member needs to send that first mention. The bot then posts the outcome in the thread. After approval, mentions in the channel work normally without further prompts.
 
 This prevents the bot from accidentally surfacing data to external members of the channel. Links are never unfurled in these channels, even after approval.
 
