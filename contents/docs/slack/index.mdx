@@ -151,11 +151,20 @@ A model named as the subject of the work doesn't switch anything. "Add Fable to 
 
 To change the model for everything you run, set your default in the [App Home tab](#the-app-home-tab) under **AI model**. You can also set it in PostHog Web under **Settings → Environment → Task agents**. They are the same setting: the Home tab edits your PostHog task agent default, which applies to Slack, the task composer, and PostHog Desktop alike. Project admins set a project-wide default in the same place.
 
-You can also turn on **Use auto model choice** in the same Home tab card. PostHog then picks the model for each new task you start. A model you name in your message still wins, and follow-ups keep the model of their task. It's off by default.
-
-The precedence is: model named in the message → auto model choice (if you turned it on) → your PostHog default → the project default → **Claude Opus 5.5**.
+The precedence is: model named in the message → [auto model choice](#auto-model-choice) (if you turned it on) → your PostHog default → the project default → **Claude Opus 5.5**.
 
 You can also switch models mid-run from a follow-up message, with one constraint: the runtime (Claude or Codex) is fixed once an agent starts, so moving to a model from the other family requires starting a new thread. For example, you can go from Opus to Fable mid-run, but not from a Claude model to a Codex one. Each reply's footer shows the model and reasoning effort actually used.
+
+### Auto model choice
+
+Turn on **Use auto model choice** in the [App Home tab](#the-app-home-tab) under **AI model** and PostHog picks the model for each new task. It's off by default.
+
+A fast model reads your first message and picks the cheapest model likely to get it right on the first try:
+
+- **Stronger model:** new features, refactors, bugs to track down, unclear asks that need digging, plans, and reviews.
+- **Faster model:** quick questions, single queries or summaries, and small edits like a typo or a version bump.
+
+It judges the work, not the message length. It stays on your usual runtime, and when two models fit equally well it picks your default. A model you name in your message always wins. If the pick fails, the task runs on your default, and follow-ups keep their task's model.
 
 ## Pick a project
 
