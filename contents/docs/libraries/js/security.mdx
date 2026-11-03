@@ -23,11 +23,11 @@ Review and deploy updates regularly so pins don't prevent security fixes from re
 
 Release integrity manifests and the loader's `data-core-integrity` attribute require `posthog-js` [1.445.0 or later](https://github.com/PostHog/posthog-js/releases/tag/posthog-js%401.445.0). Use the release manifest's SHA-384 hashes instead of calculating them manually.
 
-Download the manifest during your dependency approval or deployment process. Version `1.445.0` below is an example; choose a release you have reviewed.
+Download the manifest during your dependency approval or deployment process. Replace `<SDK_VERSION>` in all examples with the same exact release you have reviewed.
 
 ```bash
 curl --fail --show-error --silent --location \
-  "https://us-assets.i.posthog.com/static/1.445.0/integrity.json" \
+  "https://us-assets.i.posthog.com/static/<SDK_VERSION>/integrity.json" \
   --output posthog-integrity.json
 ```
 
@@ -45,7 +45,7 @@ In the [HTML snippet](/docs/libraries/js#installation), replace the `p.src` assi
 ```js
 p.integrity = "sha384-<SHA384_BASE64_DIGEST>",
 p.crossOrigin = "anonymous",
-p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/1.445.0/array.js"
+p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/<SDK_VERSION>/array.js"
 ```
 
 Replace the entire `sha384-<SHA384_BASE64_DIGEST>` value with `files["array.js"]` from your approved manifest, and keep the rest of the snippet unchanged. The URL must serve the exact bytes covered by that hash. Cross-origin SRI requires a CORS response header such as `Access-Control-Allow-Origin: *`; PostHog's asset hosts provide this. Preserve it if you serve assets through a cross-origin proxy.
@@ -58,7 +58,7 @@ If you use `loader.js` instead of the inline snippet, set `integrity` to the app
 
 ```html
 <script
-    src="https://us-assets.i.posthog.com/static/1.445.0/loader.js"
+    src="https://us-assets.i.posthog.com/static/<SDK_VERSION>/loader.js"
     integrity="sha384-<LOADER_SHA384_BASE64_DIGEST>"
     data-core-integrity="sha384-<ARRAY_SHA384_BASE64_DIGEST>"
     data-project-token="<ph_project_token>"
