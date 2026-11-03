@@ -44,9 +44,37 @@ For example, if you sync your billing data to Postgres using a cron job daily an
 
 If a materialized view reads from another materialized view, PostHog refreshes them in dependency order, so a view never reads a half-written table.
 
-This also means an upstream view refreshes at least as often as anything downstream of it. Setting a view to refresh every 15 minutes pulls everything it reads from onto that cadence too.
+This also means an upstream view refreshes at least as often as anything downstream of it, unless you [pin its cadence](#pinning-cadences). Setting a view to refresh every 15 minutes pulls everything it reads from onto that cadence too, unless those upstream views are pinned to a slower rate.
 
 To manually trigger a view along with its dependencies or dependents, use the [MCP `view-run` tool](/docs/data-warehouse/surfaces/mcp#view-management-tools) with the `direction` parameter set to `upstream` or `downstream`.
+
+### Pinning cadences
+
+By default, an upstream view refreshes at least as often as its fastest downstream consumer. This keeps data fresh but can be wasteful when a slow-changing enrichment table is read by a fast-refreshing view.
+
+You can **pin** a view's cadence to prevent it from being sped up by downstream demand. When you pin a view to a slower cadence, PostHog names the downstream views that will read older data, so you can decide whether the tradeoff is acceptable.
+
+#### How to pin a cadence
+
+1. Open the view in the [SQL editor](https://app.posthog.com/sql) and select the **Materialization** tab.
+2. In the refresh frequency picker, select a cadence slower than what downstream views demand.
+3. PostHog shows which downstream views are affected and lets you confirm the pin.
+4. Click **Save** to apply the pinned cadence.
+
+A pinned view displays a pin icon next to its refresh frequency. Hover over the pinned cadence to see an unpin button and a preview of the cadence the view returns to if unpinned.
+
+#### When pins are refused
+
+PostHog refuses to pin a view when doing so would leave a downstream view with no input fresh enough to meet its own cadence. The picker disables those options and explains why they can't be selected.
+
+For example, if a downstream view refreshes every 15 minutes and reads data only from this view, you can't pin this view to refresh less often than every 15 minutes.
+
+#### Things to know about pins
+
+- A pin only affects how often a view refreshes – it doesn't change the view's query or the data it produces.
+- The summary card for a pinned view shows the actual refresh cadence (the pinned rate), not what downstream consumers would prefer.
+- Unpinning a view returns it to consumer-driven scheduling, where it refreshes as often as its fastest downstream consumer needs.
+- Pins are view-specific. If multiple views in a lineage need different refresh rates, you can pin each one independently.
 
 ## Incremental materialization
 
