@@ -494,7 +494,7 @@ If you send events through a reverse proxy or to a self-hosted PostHog instance,
 
 For the full list of changes with before and after code, see the [migration guide](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md).
 
-Before you upgrade, update to the latest version 5 release and fix its deprecation warnings. The replacements below work in both versions, with one exception: the parameter of `getFeatureFlagResult()` that controls the `$feature_flag_called` event is named `sendEvent` in version 5 and `sendFeatureFlagEvent` in version 6. Version 6 also removes a few members that version 5 never marked as deprecated: the `sendEvent` parameter itself, the `toMap()` and `fromMap()` helpers, and some members of the platform interface classes.
+Before you upgrade, update to the latest version 5 release and fix its deprecation warnings. The replacements below work in both versions, with two exceptions: `Posthog().onFeatureFlags()` is new in version 6, and the parameter of `getFeatureFlagResult()` that controls the `$feature_flag_called` event is named `sendEvent` in version 5 and `sendFeatureFlagEvent` in version 6. Version 6 also removes a few members that version 5 never marked as deprecated: the `sendEvent` parameter itself, `PostHogConfig.onFeatureFlags`, the `toMap()` and `fromMap()` helpers, and some members of the platform interface classes.
 
 ### Platform requirements
 
@@ -549,6 +549,7 @@ Flutter doesn't support Swift Package Manager in add-to-app modules yet ([flutte
 | `Posthog().getFeatureFlagPayload(key)` | `Posthog().getFeatureFlagResult(key, sendFeatureFlagEvent: false)`, then read `payload` (`sendEvent: false` in version 5) |
 | The `sendEvent` parameter of `getFeatureFlagResult()` | `sendFeatureFlagEvent` |
 | `PostHogConfig.sendFeatureFlagEvents` | `PostHogConfig.sendFeatureFlagEvent` |
+| `PostHogConfig.onFeatureFlags` | `Posthog().onFeatureFlags()`, called before `setup()`. See [Feature flag callbacks](#feature-flag-callbacks) |
 | `PostHogSessionReplayConfig.debouncerDelay` | `PostHogSessionReplayConfig.throttleDelay` |
 | `PostHogDataMode.cellular` | `PostHogDataMode.any`, which `cellular` always behaved like |
 | `toMap()` on the config classes, and `PostHogFeatureFlagResult.fromMap()` | None. They serialize the SDK's internal format and aren't meant for app code |
@@ -589,18 +590,20 @@ On web, `PostHogConfig.sendFeatureFlagEvent` isn't applied to `posthog-js`, so o
 
 ### Feature flag callbacks
 
-`PostHogConfig.onFeatureFlags` now receives a `PostHogFeatureFlagsLoaded` with the enabled flags, their values and whether loading failed, and `reloadFeatureFlags()` returns a `Future<PostHogFeatureFlagsLoaded>`. Callbacks written as `() { ... }` no longer compile:
+Version 6 removes `PostHogConfig.onFeatureFlags`. Call `Posthog().onFeatureFlags()` before `setup()`, which also covers the first load. The callback receives a `PostHogFeatureFlagsLoaded` with the enabled flags, their values and whether loading failed, and `reloadFeatureFlags()` returns a `Future<PostHogFeatureFlagsLoaded>`:
 
 ```dart
 // Version 5
 config.onFeatureFlags = () {
   // ...
 };
+await Posthog().setup(config);
 
 // Version 6
-config.onFeatureFlags = (loaded) {
+Posthog().onFeatureFlags((loaded) {
   // ...
-};
+});
+await Posthog().setup(config);
 ```
 
 ### Synchronous `beforeSend`
