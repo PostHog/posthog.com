@@ -85,7 +85,7 @@ A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm
 Pass the distinct ID that you pass to `identify()`, usually the user's ID in your app, as `distinct_id`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened and clicked, against that user's person, next to their product events.
 
 - **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
-- **For someone who isn't a user yet,** such as an invite or a check during signup, there's no distinct ID to pass. Leave `distinct_id` out.
+- **For someone who isn't a user yet,** such as an invite or an email address check before the account exists, there's no distinct ID to pass. Leave `distinct_id` out.
 
 ## Send content from your code
 
