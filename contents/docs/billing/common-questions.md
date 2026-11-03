@@ -36,61 +36,44 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 ## What does each product bill for?
 
-Each product bills only the data it ingests. PostHog ingests data when it receives the data and stores it. Events that a [transformation](/docs/data-pipelines/transformations/drop-events) drops, or that arrive after you reach a [billing limit](/docs/billing/limits-alerts), are not stored, so they are free. For prices, see [pricing](/pricing).
+PostHog bills only what it ingests, which means data it receives and stores. Events that a [transformation](/docs/data-pipelines/transformations/drop-events) drops, or that arrive after you reach a [billing limit](/docs/billing/limits-alerts), are not stored, so they are free. Events that another product bills, like `$exception`, don't also bill as Product Analytics events.
 
-Product Analytics is billed based on:
-
-| What you send | Billed |
+| [Product Analytics](/product-analytics/pricing), billed per event | Billed |
 | --- | --- |
 | Custom events | Yes |
-| `$pageview`, `$pageleave`, and `$autocapture` events | Yes |
-| `$identify`, `$create_alias`, and `$groupidentify` events | Yes |
+| `$pageview`, `$pageleave`, `$autocapture` | Yes |
+| `$identify`, `$create_alias`, `$groupidentify` | Yes |
 
-[Personless events](/docs/data/anonymous-vs-identified-events) bill at the anonymous event price.
-
-Session Replay is billed based on:
-
-| What you send | Billed |
+| [Session Replay](/session-replay/pricing), billed per recording | Billed |
 | --- | --- |
 | Recordings | Yes |
+| Heatmap data | No |
 
-Feature Flags is billed based on:
-
-| What you send | Billed |
+| [Feature Flags](/feature-flags/pricing), billed per request | Billed |
 | --- | --- |
-| [Flag requests](/docs/feature-flags/cutting-costs#billing) | Yes |
+| `/flags` requests | Yes |
+| Local evaluation polls that return new definitions, 10 requests each | Yes |
 | Local evaluation polls that return `304` | No |
-| `$feature_flag_called` events | No |
+| `$feature_flag_called` | No |
 
-Experiments are billed based on:
-
-| What you send | Billed |
+| [Experiments](/experiments/pricing), billed through Feature Flags | Billed |
 | --- | --- |
-| Flag requests | Yes |
-| `$experiment_exposure` events | No |
+| `/flags` requests | Yes |
+| `$experiment_exposure` | No |
 
-Experiment flag requests bill under Feature Flags.
-
-Error Tracking is billed based on:
-
-| What you send | Billed |
+| [Error Tracking](/error-tracking/pricing), billed per exception | Billed |
 | --- | --- |
-| `$exception` events | Yes |
+| `$exception` | Yes |
 
-LLM Analytics is billed based on:
-
-| What you send | Billed |
+| [LLM Analytics](/ai-observability/pricing), billed per event | Billed |
 | --- | --- |
-| `$ai_` events | Yes |
+| `$ai_generation`, `$ai_trace`, `$ai_span`, `$ai_embedding` | Yes |
+| Every other `$ai_` event | Yes |
 
-Surveys are billed based on:
-
-| What you send | Billed |
+| [Surveys](/surveys/pricing), billed per response | Billed |
 | --- | --- |
-| `survey sent` events | Yes |
-| `survey shown` and `survey dismissed` events | No |
-
-Heatmaps aren't billed today.
+| `survey sent` | Yes |
+| `survey shown`, `survey dismissed` | No |
 
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
