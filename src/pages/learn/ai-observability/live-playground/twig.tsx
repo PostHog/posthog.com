@@ -1,11 +1,11 @@
 import React from 'react'
-import LivePlaygroundPage, { SectionIntro } from 'components/PocketGuides/LivePlaygroundPage'
-import { SessionReplayLinkFigure } from 'components/PocketGuides/ProductAnalyticsIdentityExhibits'
+import LivePlaygroundPage, { SectionIntro } from 'components/Learn/LivePlaygroundPage'
+import { SessionReplayLinkFigure } from 'components/Learn/TwigExhibits/ProductAnalyticsIdentityExhibits'
 import {
     TwigAiCaptureFigure,
     TwigAiEventFigure,
     TwigTripTracesFigure,
-} from 'components/PocketGuides/AiObservabilityPlaygroundExhibits'
+} from 'components/Learn/TwigExhibits/AiObservabilityPlaygroundExhibits'
 
 export default function AiObservabilityLearnByDoing(): JSX.Element {
     return (

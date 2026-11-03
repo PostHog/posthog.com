@@ -4,6 +4,7 @@ title: Hiring (and managing) cracked engineers
 author:
   - charles-cook
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/v1713344206/posthog.com/contents/blog/cracked_engineer_blog.jpg
+ogImage: generated
 tags:
   - Founders
   - Building the team

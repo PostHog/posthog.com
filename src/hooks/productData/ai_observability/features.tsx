@@ -90,7 +90,7 @@ export const features = {
                 alt: 'An LLM trace with its timeline, tree, and generation detail',
             },
         ],
-        // Merged tracing + generations flow – the two were separate top features
+        // Merged tracing + generations flow – the two were separate key features
         // saying the same thing.
         features: [
             {

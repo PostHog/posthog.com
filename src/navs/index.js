@@ -2862,6 +2862,10 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
+                                    name: "Security",
+                                    url: "/docs/libraries/js/security",
+                                },
+                                {
                                     name: 'Persistence',
                                     url: '/docs/libraries/js/persistence',
                                 },
@@ -5188,7 +5192,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'What to watch',
+                    name: 'Highlights',
                     url: '/docs/replay-vision/what-to-watch',
                     icon: 'IconEye',
                     color: 'yellow',

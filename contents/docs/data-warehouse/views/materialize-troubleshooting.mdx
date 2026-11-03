@@ -48,6 +48,8 @@ If the numbers are stale but nothing shows as failed, scheduled runs are probabl
 
 **Runs were paused after repeated failures.** After a view fails five times in a row, PostHog stops scheduling it rather than retrying a query that isn't going to succeed. When this happens, PostHog sends an email and an in-app notification to let the team know. The panel also shows a banner with when it paused, the error that paused it, and a **Resume** button. Fix the cause first, then resume. Resuming without fixing the query just fails again.
 
+Views can be suspended separately on ClickHouse and Trino (the managed warehouse). The web UI **Resume** button resumes both engines. To resume only one engine, use the [`view-resume`](/docs/data-warehouse/surfaces/mcp#view-management-tools) MCP tool with the `engine` parameter set to `clickhouse` or `trino`.
+
 ## The data is older than the refresh interval
 
 A view is only as fresh as its last completed run, and a run takes time. A view on a 15-minute cadence whose query takes 20 minutes effectively refreshes every 30 minutes, because the next tick is skipped while the previous run is still going.
