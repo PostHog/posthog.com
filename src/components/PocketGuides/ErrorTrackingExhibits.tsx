@@ -8,6 +8,7 @@ import '@posthog/twig-components/compact.css'
 import { TwigWordmark } from '@posthog/twig-components/compact'
 
 import PostHogInspector, {
+    COMPACT_INSPECTOR_CLASSES,
     InspectorCode,
     InspectorDetails,
     InspectorJavaScript,
@@ -103,7 +104,7 @@ export function AutocapturedExceptionFigure(): JSX.Element {
                         </span>
                     </div>
                 </TwigFrame>
-                <PostHogInspector>
+                <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                     {clicks > 0 && (
                         <InspectorCode
                             label="Event payload · selected properties"
@@ -159,7 +160,7 @@ export function TripDetailsErrorFigure(): JSX.Element {
                         onRetry={() => setOccurrences((count) => count + 1)}
                     />
                 </TwigFrame>
-                <PostHogInspector>
+                <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                     <InspectorDetails
                         tab="Issue"
                         title="Trip host name is missing"
@@ -200,7 +201,7 @@ export function TripDetailsErrorFigure(): JSX.Element {
 export function FingerprintCaptureFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
     return (
         <Fig n={n} caption={caption}>
-            <PostHogInspector>
+            <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>
                 <InspectorJavaScript
                     meta="captureException"
                     highlightedLine={4}
