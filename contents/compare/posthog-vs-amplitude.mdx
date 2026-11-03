@@ -26,7 +26,7 @@ PostHog and [Amplitude](/compare/best-amplitude-alternatives) are multi-product 
 
 1. **Amplitude** is a product analytics platform that has grown into a marketing and growth suite: session replay, feature flags and experiments, guides and surveys, a CDP (Activation), multi-touch attribution and forecasting, and a growing set of AI agents. It's built for product, growth, and marketing teams.
 
-2. **PostHog** is your product's context layer. On top of [product analytics](/product-analytics), it includes [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [surveys](/surveys), an [AI assistant](/ai), and more; a [data warehouse](/context-warehouse) and [CDP](/cdp) tie it all together, unifying that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
+2. **PostHog** is your product's context layer. On top of [product analytics](/product-analytics), it includes [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [surveys](/surveys), an [AI assistant](/ai), and more; a [data warehouse](/warehouse) and [CDP](/cdp) tie it all together, unifying that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
 
 In this post, we'll cover these differences in more detail, comparing features, pricing, reporting, integrations, and the best fit for different use cases.
 
@@ -45,7 +45,7 @@ PostHog is the ultimate developer platform because it puts all your customer dat
 -   [Surveys](/surveys) to capture user feedback, track NPS, and book interviews
 -   [Logs](/logs) for searching what your servers wrote, next to the replay and error they relate to
 -   [AI observability](/ai-observability) for tracing LLM generations with their cost, latency, and errors
--   A [data warehouse](/context-warehouse) and [CDP](/cdp) to sync in your external data ([Stripe](/docs/data-pipelines/sources/stripe), [HubSpot](/docs/data-pipelines/sources/hubspot), or [Postgres](/docs/data-pipelines/sources/postgres), for example) and push it back out
+-   A [data warehouse](/warehouse) and [CDP](/cdp) to sync in your external data ([Stripe](/docs/data-pipelines/sources/stripe), [HubSpot](/docs/data-pipelines/sources/hubspot), or [Postgres](/docs/data-pipelines/sources/postgres), for example) and push it back out
 
 In other words, it's everything you need in one app with a single login and contract. A _genuine_ single source of truth for your product and customer data.
 
@@ -55,7 +55,7 @@ This means you get support from the engineers who _actually build the product_, 
 
 It also means your agents get the same access you do: a free [MCP server](/mcp), a [Slack app](/slack), and a [CLI](/docs/cli) let Claude, Cursor, or [PostHog AI](/ai) query your product data and ship fixes from wherever you work. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and in our [public handbook](/handbook).
 
-And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/data-pipelines) or [data warehouse](/context-warehouse) are ready to switch on whenever you need them.
+And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/data-pipelines) or [data warehouse](/warehouse) are ready to switch on whenever you need them.
 
 Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale.
 
@@ -388,7 +388,7 @@ We offer a Business Associate Agreement (BAA) for any customer on our platform p
 
 Choosing the right analytics platform depends on your team's priorities and technical needs. Here's a quick guide:
  
-- Want one platform where every event, replay, error, flag, and LLM trace is tied to the same user, with a [data warehouse](/context-warehouse) for your business data, agents that can work from [Slack](/slack) or [the MCP](/mcp), and transparent usage-based [pricing](/pricing)? Go with **PostHog**.
+- Want one platform where every event, replay, error, flag, and LLM trace is tied to the same user, with a [data warehouse](/warehouse) for your business data, agents that can work from [Slack](/slack) or [the MCP](/mcp), and transparent usage-based [pricing](/pricing)? Go with **PostHog**.
 
 - Need a platform optimized for marketing analytics, campaign attribution, and growth experimentation with a UI built for non-technical teams? **Amplitude** is probably the right choice.
 
@@ -401,7 +401,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 - **Amplitude** – Purpose-built for growth analytics with a UI designed for non-technical users. Tighter integrations with ad platforms and marketing tools, plus dedicated web experimentation features.
 
 **For data teams**
-- **PostHog** – The [data warehouse](/context-warehouse) syncs Stripe, HubSpot, Salesforce, Postgres, Snowflake, BigQuery, and dozens of other sources into PostHog (1M rows a month free), where you query them with SQL alongside product data and use them in cohorts, insights, and experiments. [Batch exports](/docs/cdp/batch-exports) push everything back to Snowflake, BigQuery, S3, and others on every plan. 
+- **PostHog** – The [data warehouse](/warehouse) syncs Stripe, HubSpot, Salesforce, Postgres, Snowflake, BigQuery, and dozens of other sources into PostHog (1M rows a month free), where you query them with SQL alongside product data and use them in cohorts, insights, and experiments. [Batch exports](/docs/cdp/batch-exports) push everything back to Snowflake, BigQuery, S3, and others on every plan. 
 
 **Amplitude** imports from Snowflake, BigQuery, and Databricks and exports to the major warehouses, but exports are a paid-plan feature, and its warehouse-native mode (querying your Snowflake directly) is now a legacy feature that isn't available to new customers.
 
@@ -409,7 +409,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 - **PostHog** – [AI observability](/ai-observability) traces every LLM generation with its cost, latency, tokens, and errors, tied to the user's session replay and any exception it caused, with 100k AI events a month free. You can run evals on production traffic and A/B test prompts or models behind a feature flag. **Amplitude**'s Agent Analytics scores AI agent traces for task success and ties them to retention and conversion, which is useful for product questions but doesn't replace pipeline-level tracing.
 
 **For privacy-conscious and regulated organizations**
-- Both are SOC 2 Type 2 certified and GDPR-ready with EU data residency options, and both sign HIPAA BAAs: **PostHog** on its Boost, Scale, and Enterprise packages, **Amplitude** on request. **PostHog** also offers raw data access via its [data warehouse](/context-warehouse); **Amplitude**'s SSO is Growth and Enterprise only.
+- Both are SOC 2 Type 2 certified and GDPR-ready with EU data residency options, and both sign HIPAA BAAs: **PostHog** on its Boost, Scale, and Enterprise packages, **Amplitude** on request. **PostHog** also offers raw data access via its [data warehouse](/warehouse); **Amplitude**'s SSO is Growth and Enterprise only.
 
 **For early-stage startups**
 - **PostHog** – Generous free tiers across every product, transparent pricing you can model in advance, and no features locked behind sales calls. [Startups can qualify for $50k in free credits](/startups). Amplitude for Startups gives companies under 20 employees and $10M raised a year of Growth free, which is a strong offer; after that year you're on a sales-led plan, where PostHog's usage-based model keeps costs predictable.
@@ -425,7 +425,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 <summary>What does it mean for PostHog to be your product's context layer?</summary>
 Amplitude knows what users did. PostHog knows what users did, what they saw, what broke, which flags they were in, what the model answered them, and what they pay you, because [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), and [AI observability](/ai-observability) all write to the same database with one model of users and sessions.
  
-The [data warehouse](/context-warehouse) and [CDP](/cdp) extend that to the business data that lives elsewhere – Stripe, HubSpot, Postgres, Salesforce – synced in and pushed back out. The practical result is that "did the users who hit this error last week churn, and what were they paying us" is one SQL query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the whole product rather than the events one tool happens to hold.
+The [data warehouse](/warehouse) and [CDP](/cdp) extend that to the business data that lives elsewhere – Stripe, HubSpot, Postgres, Salesforce – synced in and pushed back out. The practical result is that "did the users who hit this error last week churn, and what were they paying us" is one SQL query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the whole product rather than the events one tool happens to hold.
  
 </details>
 
@@ -544,7 +544,7 @@ Partly. Amplitude launched Agent Analytics in 2026, which scores AI agent traces
 <details>
 <summary>Which should I choose if my data lives in a warehouse?</summary>
 
-**PostHog**, for most teams. Its [data warehouse](/context-warehouse) syncs tables from Snowflake, BigQuery, Postgres, and other sources into PostHog, where you query them with SQL alongside product data and use them in cohorts and experiments, and [batch exports](/docs/cdp/batch-exports) push everything back out on every plan.
+**PostHog**, for most teams. Its [data warehouse](/warehouse) syncs tables from Snowflake, BigQuery, Postgres, and other sources into PostHog, where you query them with SQL alongside product data and use them in cohorts and experiments, and [batch exports](/docs/cdp/batch-exports) push everything back out on every plan.
  
 **Amplitude** imports from Snowflake, BigQuery, and Databricks too, and exports to the major warehouses on paid plans. Its warehouse-native mode, which ran analytics directly on your Snowflake without ingesting events, is now a legacy feature that isn't available to new customers, so it's no longer a reason to pick Amplitude.
  
