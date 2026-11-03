@@ -250,8 +250,8 @@ Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
--   <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#at-posthog-anything</PrivateLink> - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
--   <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> - ask the team when you cannot find an answer in the handbook, the docs, or `#at-posthog-anything`
+-   <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#at-posthog-anything</PrivateLink> - tag @posthog to draft PRs, pull usage info, or surface content from the handbook
+-   <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> - ask the team when you cannot find an answer in the handbook, the docs, or #at-posthog-anything
 -   <PrivateLink url="https://posthog.slack.com/archives/C0351B1DMUY">#tell-posthog-anything</PrivateLink> - company-wide announcements about our people, products, policies, and projects
 -   <PrivateLink url="https://posthog.slack.com/archives/CSPHFDZH8">#general</PrivateLink> - see new starters, work anniversaries, birthdays and all-hands recordings
 -   <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelog</PrivateLink> - keep up with all the cool things we're shipping across the team
