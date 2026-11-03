@@ -45,6 +45,22 @@ If you already have an account, pending invites for your email appear in the pro
 
 Newly-joined users get the basic Member access level.
 
+### Removing members
+
+Organization admins and owners can remove members from the organization in the [Members section](https://app.posthog.com/settings/organization-members) of organization settings.
+
+When removing a member who has publicly shared resources, PostHog shows a preview of all active public links associated with that member. This includes dashboards, insights, notebooks, and session recordings shared via public link or embed.
+
+From this preview, you can:
+
+- **Disable individual links** – Toggle off specific public links before removing the member.
+- **Disable selected links** – Use bulk selection to disable multiple public links at once.
+- **Keep links active** – Leave public links unchanged if the content should remain accessible.
+
+Public links that remain enabled after member removal continue to work. Removing a member does not automatically disable their public links — only the links you explicitly disable are affected.
+
+> If the preview fails to load, you can still proceed with removal. Public links remain unchanged unless you explicitly disabled them beforehand.
+
 ### Deleting an organization
 
 An organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your [organization settings](https://app.posthog.com/settings/organization) for more information.
