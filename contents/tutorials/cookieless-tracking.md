@@ -32,6 +32,7 @@ This tutorial shows how to configure PostHog's [JavaScript Web SDK](/docs/librar
 If you never want to show a cookie banner, you can set the cookieless mode to `"always"`. In this mode:
 
 - PostHog never stores data in cookies or local/session storage.
+- PostHog ignores `opt_in_capturing()` and `opt_out_capturing()`, so capture continues regardless of the user's choice.
 - You should avoid calling `identify()`. The call still works and sends an `$identify` event, but a persistent distinct ID is considered Personal Data under GDPR and other similar privacy regulations, which undoes the privacy benefit of this mode. To prevent identification entirely, set [`person_profiles: 'never'`](/docs/data/anonymous-vs-identified-events), which turns `identify()` calls into no-ops.
 - You cannot use `alias()`, as alias events are dropped during ingestion in cookieless mode.
 - PostHog will measure the number of users on your site using a privacy-preserving hash, calculated on PostHog's servers.
@@ -54,9 +55,11 @@ If you want to maintain the full tracking capability of PostHog, you'll need to 
 
 With this:
 
-- PostHog never stores data in cookies or local/session storage until the user opts in
+- PostHog stores no data in cookies or local/session storage until the user opts in or out. If the user opts out, PostHog stores only that choice in local storage.
 - PostHog doesn't capture any events until after consent is either given or denied.
 - If consent is denied, PostHog will still be able to count those users with a privacy-preserving hash.
+
+For what each mode sends and stores, see [what each mode does by consent state](/docs/privacy/data-collection#what-each-mode-does-by-consent-state).
 
 To enable this mode, add the following config option to your PostHog initialization:
 
