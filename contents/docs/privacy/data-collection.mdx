@@ -154,7 +154,7 @@ To configure the organization default:
 2. Find the **IP data capture default** setting
 3. Choose whether new projects should capture or discard client IP data by default
 
-**EU organizations**: Automatically default to IP data capture disabled for GDPR compliance. This ensures that all new projects created in EU organizations are configured with appropriate privacy settings from the start.
+**PostHog EU organizations**: Automatically default to IP data capture disabled for GDPR compliance. This ensures that all new projects created in these organizations are configured with appropriate privacy settings from the start.
 
 ### Project-level configuration
 
@@ -171,7 +171,19 @@ To configure at the project level:
 - **New projects**: Automatically inherit the organization's IP data capture default setting
 - **Existing projects**: Are not affected by organization-level changes - they retain their current configuration
 - **Project-level override**: Individual projects can override the organization default if needed
-- **Privacy compliance**: Disabling IP capture helps with GDPR and other privacy regulations by preventing collection of identifiable network information
+- **Privacy compliance**: Discarding IP data helps with GDPR and other privacy regulations because PostHog does not store client IP addresses with your events
+
+### Location data when IPs are discarded
+
+Discarding IP data does not remove location data. PostHog still receives the client IP address with each event. [Transformations](/docs/data-pipelines/transformations) run before PostHog discards the IP:
+
+- The [GeoIP enrichment transformation](/docs/data-pipelines/transformations/template-geoip) still adds location properties such as `$geoip_country_name` and `$geoip_city_name` to events and persons
+- The [bot detection transformation](/docs/data-pipelines/transformations/template-bot-detection) still uses the IP address
+- PostHog removes the `$ip` property before it stores the event
+
+To stop location enrichment too, disable the GeoIP transformation in your project's [transformations](/docs/data-pipelines/transformations). To skip it for a single event, set the `$geoip_disable` property to `true` on that event.
+
+> **Note:** Events sent with [cookieless tracking](#cookieless-tracking) lose their IP address before transformations run, so they get no GeoIP or bot detection enrichment.
 
 ## Autocapture
 
