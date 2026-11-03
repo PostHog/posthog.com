@@ -266,6 +266,8 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
 | `collectFeedback` | `false` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `reportMissing` reports. Pass `{ toolName, description, extraProperties, onFeedback }` to customize it. |
 | `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
+| `sendInitializeEvent` | `true` | Emit `$mcp_initialize` for each `initialize` handshake. Set to `false` to stop it. Other events keep their sessions and client names. MCP onboarding and the default dashboard's users and sessions tiles then show no data. |
+| `sendToolsListEvent` | `true` | Emit `$mcp_tools_list` for each `tools/list`. Set to `false` to stop it. Tools keep their injected arguments. |
 | `beforeSend` | – | `(event) => event \| null`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | – | `(request, extra) => Record<string, unknown>`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
 | `serverBuild` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |

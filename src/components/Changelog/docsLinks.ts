@@ -37,7 +37,7 @@ export const CHANGELOG_TOPIC_DOCS: Record<string, string> = {
     slack: '/docs/slack',
     surveys: '/docs/surveys',
     toolbar: '/docs/toolbar',
-    trends: '/docs/product-analytics/trends',
+    trends: '/docs/product-analytics/trends/overview',
     'web-analytics': '/docs/web-analytics',
     workflows: '/docs/workflows',
 }

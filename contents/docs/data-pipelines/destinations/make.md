@@ -33,7 +33,7 @@ You'll also need access to the relevant Make account.
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/make/template_make.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/make/template_make.py) is available on GitHub.
 
 <PostHogMaintained />
 

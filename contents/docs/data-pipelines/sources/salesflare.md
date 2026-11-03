@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Salesflare connector syncs your CRM data into the PostHog Data warehouse, so you can analyze your sales pipeline alongside your product data. It imports contacts, accounts, opportunities, pipelines, tasks, tags, and workflows.
+The Salesflare connector syncs your CRM data into the PostHog Data warehouse, so you can analyze your sales pipeline alongside your product data. It imports contacts, accounts, opportunities, pipelines, stages, tasks, tags, users, and workflows.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ You need a Salesflare account with permission to create an API key.
 
 When linking Salesflare, you'll need:
 
-- **API key** – create one under **Settings → API keys** in [Salesflare](https://app.salesflare.com/#/settings/apikeys). The key grants read access to your contacts, accounts, opportunities, pipelines, tasks, tags, and workflows.
+- **API key** – create one under **Settings → API keys** in [Salesflare](https://app.salesflare.com/#/settings/apikeys). The key grants read access to your contacts, accounts, opportunities, pipelines, stages, tasks, tags, users, and workflows.
 
 ## Sync modes
 

@@ -27,7 +27,7 @@ import { Link, navigate } from 'gatsby'
 import LegacyQuestionsRedirect from 'components/Forum/LegacyQuestionsRedirect'
 import Forum from 'components/Forum'
 import Legal from 'components/Legal'
-const LearnShell = React.lazy(() => import('components/PocketGuides/LearnShell'))
+const LearnShell = React.lazy(() => import('components/Learn/LearnShell'))
 import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
