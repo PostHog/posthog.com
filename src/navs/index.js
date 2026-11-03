@@ -7643,10 +7643,6 @@ export const docsMenu = {
             colorDark: '[#C170E8]',
             icon: 'IconPlug',
             description: 'Analytics for the MCP servers you ship to AI agents',
-            badge: {
-                title: 'Beta',
-                className: 'uppercase !bg-yellow/10 !text-yellow !dark:text-white !dark:bg-yellow/50',
-            },
             children: [
                 {
                     name: 'MCP Analytics',
