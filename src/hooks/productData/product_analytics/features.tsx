@@ -381,7 +381,6 @@ export const features = {
         ],
         children: (
             <p className="mb-0">
-                MCP Analytics is in beta.{' '}
                 <Link to="/docs/mcp-analytics" state={{ newWindow: true }}>
                     Read the docs
                 </Link>{' '}

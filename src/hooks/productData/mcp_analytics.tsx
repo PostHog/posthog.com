@@ -12,12 +12,10 @@ import OSButton from 'components/OSButton'
 import { IconMCP } from 'components/OSIcons'
 import { getTool } from '../../data/tools'
 
-// MCP Analytics is a beta product (@posthog/mcp on npm) with a dedicated scene in the app
-// gated behind the `mcp-analytics` early access feature. Copy here is sourced from the docs in
-// contents/docs/mcp-analytics/. There are no marketing screenshots yet, so the slides are
-// text/icon-driven — drop Cloudinary image URLs into `screenshots.overview` and the per-feature
-// `images` arrays when they exist. See src/components/EarlyAccessOptIn/README.md for how the
-// opt-in links to the early access feature in the app (identity isn't shared with the website).
+// MCP Analytics (@posthog/mcp on npm) has a dedicated scene in the app. Copy here is sourced from
+// the docs in contents/docs/mcp-analytics/. There are no marketing screenshots yet, so the slides
+// are text/icon-driven — drop Cloudinary image URLs into `screenshots.overview` and the per-feature
+// `images` arrays when they exist.
 
 export const mcpAnalytics = {
     ...getTool('mcp_analytics'),
@@ -225,7 +223,7 @@ export const mcpAnalytics = {
     ],
     presenterNotes: {
         overview:
-            'MCP Analytics is beta (<code>@posthog/mcp</code> on npm). Lead with the one-line wrap and "it\'s all just PostHog events." No new tooling to learn.',
+            'MCP Analytics ships as <code>@posthog/mcp</code> on npm. Lead with the one-line wrap and "it\'s all just PostHog events." No new tooling to learn.',
     },
 }
 
