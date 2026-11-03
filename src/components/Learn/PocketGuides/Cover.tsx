@@ -25,33 +25,36 @@ interface CoverProps {
 /** The series frame: colored spine, series name above the subject, specimen on empty ground. */
 function Frame({ token, children }: { token: string; children: React.ReactNode }): JSX.Element {
     return (
-        <article className="relative flex aspect-[3/4] overflow-hidden rounded-sm border border-light bg-white shadow-lg dark:border-dark">
-            <span aria-hidden="true" className={`w-3 shrink-0 bg-${token}`} />
-            <div className="@container flex min-w-0 flex-1 flex-col px-4 py-3">{children}</div>
-        </article>
+        <div style={{ containerType: 'inline-size' }}>
+            <article
+                className="relative flex aspect-[3/4] overflow-hidden rounded-sm border border-light bg-white shadow-lg dark:border-dark"
+                style={{ fontSize: '4.347826cqw' }}
+            >
+                <span aria-hidden="true" className={`w-[1.2em] shrink-0 bg-${token}`} />
+                <div className="@container flex min-w-0 flex-1 flex-col px-[1.6em] py-[1.2em]">{children}</div>
+            </article>
+        </div>
     )
 }
 
-// Bold sans averages about 0.62em per letter. The title also scales with the cover (13cqi),
-// so a small cover keeps room for its art, and never exceeds 1.875rem (text-3xl).
+// Fit the longest word without losing the cover’s proportional type scale.
 const TITLE_EM_PER_CHAR = 0.62
-const TITLE_MAX = 'min(1.875rem, 13cqi)'
 
 function Masthead({ title }: { title: string }): JSX.Element {
-    // Size the title from its longest word and the cover's width, so no word breaks mid-word
-    // ("Observabili / ty") at any cover size or title length.
+    // All dimensions share the cover's scale, independent of the surrounding page's type size.
+    const long = title.length > 12
     const longestWord = Math.max(...title.split(/\s+/).map((word) => word.length))
     const fit = `${(100 / (longestWord * TITLE_EM_PER_CHAR)).toFixed(2)}cqi`
     return (
         <header>
             {/* Wordmark only, pinned black: the cover is white stock in both themes. */}
-            <Logo.Wordmark color="black" className="h-5 w-auto @[200px]:h-6" />
-            <p className="m-0 mt-1.5 whitespace-nowrap text-[11px] uppercase tracking-[0.14em] text-gray">
+            <Logo.Wordmark color="black" className="w-auto" style={{ height: '2.4em' }} />
+            <p className="uppercase tracking-[0.14em] text-gray" style={{ margin: '0.55em 0 0', fontSize: '1.1em' }}>
                 Pocket guide to
             </p>
             <h3
-                className="m-0 mt-1.5 font-bold leading-tight text-black [hyphens:none] [overflow-wrap:normal]"
-                style={{ fontSize: `min(${TITLE_MAX}, ${fit})` }}
+                className="font-bold leading-tight text-black [hyphens:none] [overflow-wrap:normal]"
+                style={{ margin: '0.25em 0 0', fontSize: `min(${long ? '2.4em' : '3em'}, ${fit})` }}
             >
                 {title}
             </h3>
@@ -81,14 +84,17 @@ function CoverBody({ volume, count }: Omit<CoverProps, 'placement'>): JSX.Elemen
                 // min-h-0 lets the art shrink when a long title wraps, instead of clipping the footer.
                 <div
                     aria-hidden="true"
-                    className={`flex min-h-0 flex-1 items-center justify-center py-2 ${
+                    className={`flex min-h-0 flex-1 items-center justify-center py-[0.8em] ${
                         volume.comingSoon ? 'opacity-40 grayscale' : ''
                     }`}
                 >
-                    <Art size={140} className="h-full max-h-[140px] w-auto max-w-full" />
+                    <Art size={140} className="h-[14em] max-h-full w-auto max-w-full" />
                 </div>
             )}
-            <footer className="flex shrink-0 items-baseline justify-end gap-2 text-[11px] uppercase tracking-wider text-gray">
+            <footer
+                className="flex shrink-0 items-baseline justify-end gap-2 uppercase tracking-wider text-gray"
+                style={{ fontSize: '1.1em' }}
+            >
                 {!volume.comingSoon && (
                     <span className="tabular-nums">
                         {count} {count === 1 ? 'guide' : 'guides'}
