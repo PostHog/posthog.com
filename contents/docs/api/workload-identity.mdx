@@ -39,13 +39,14 @@ Turning a policy off, editing it or deleting it stops its tokens from working wi
 
 A policy can grant almost any scope. Some scopes let a token do things that reach beyond the project, last longer than the token, or touch credentials. PostHog shows a warning next to these scopes when you pick them for a trusted workload or a personal API key, and on the approval page. Add them only when the workload needs them.
 
-A few scopes can never be granted to a workload, because they would let a token outlive itself or change its own policy:
+A few scopes can never be granted to a workload, because they would let a token outlive itself, change its own policy, or read one person's private data:
 
 - `workload_trust_policy` and `workload_trust_policy_request`
 - `project:write`, which can rotate the project's secret token
 - `task:write`, `conversation:write`, `signal_scout:write` and `business_knowledge:write`, which start agent runs with their own longer-lived tokens
 - `streamlit_app`, which hands out a one-hour token for a running app
-- `webhook:write` and `batch_export:write`, which set up data feeds that keep sending after the token expires
+- `webhook:write`, `batch_export:write` and `subscription:write`, which set up data feeds or emails that keep sending after the token expires
+- `conversation:read` and `task:read`, because a workload token acts as an organization owner, and these read that person's private PostHog AI conversations and tasks
 
 ## Asking an admin for a trusted workload
 
