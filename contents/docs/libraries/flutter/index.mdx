@@ -658,6 +658,8 @@ In version 5, the SDK's own values won over the properties you registered or pas
 
 `beforeSend` runs after the merge, so it sees and can change every property and option the SDK adds. In version 5, on iOS, macOS and Android, it ran before the native SDK added its properties and saw only the properties you passed.
 
+Review your `beforeSend` hooks for the new event shape. In version 5, the SDK marked person processing with the `$process_person_profile` property. In version 6, it's the `process_person_profile` option, and the property isn't set. A hook that returns a new `PostHogEvent` without copying `options` turns person processing on for anonymous users, overriding `personProfiles`. To keep it, pass `options: event.options`.
+
 ### Per-event options
 
 Capture v1 reads processing settings from an `options` map sent next to the event's properties. `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group` and `captureException` take a new `options` argument, and `beforeSend` can read and change `PostHogEvent.options`.
