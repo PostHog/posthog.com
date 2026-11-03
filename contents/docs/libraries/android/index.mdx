@@ -447,7 +447,6 @@ val config = PostHogAndroidConfig(
 | `featureFlagCalledCacheSize` | `1000` | Number of feature flag calls cached for deduplicating `$feature_flag_called` events. |
 | `preloadFeatureFlags` | `true` | Fetches feature flags automatically during setup. |
 | `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.29.1+. The legacy `evaluationEnvironments` option was available in version 3.24.0+ and removed in 4.0. |
-| `onFeatureFlags` | `null` | `PostHogFeatureFlagsCallback` invoked when a feature flags load finishes, whether it succeeded or failed. |
 
 ### Product configuration objects
 
@@ -520,6 +519,8 @@ These are compile errors:
 | `propertiesSanitizer`, `PostHogPropertiesSanitizer` | `addBeforeSend` |
 | `evaluationEnvironments` | `evaluationContexts` |
 | `getFeatureFlagPayload()` | `getFeatureFlagResult(key, sendFeatureFlagEvent = false)?.payload` |
+| `defaultValue` on `getFeatureFlag()` | `getFeatureFlag(key) ?: default` |
+| `PostHogConfig.onFeatureFlags` | `PostHog.onFeatureFlags()` before `setup()` |
 | `PostHogOnFeatureFlags` | `PostHogFeatureFlagsCallback` |
 | `PostHogSessionReplayConfig.debouncerDelayMs` | `throttleDelayMs` |
 | `PostHogSessionReplayConfig.screenshot`, `drawableConverter`, `PostHogDrawableConverter` | Nothing – replay always records screenshots |
@@ -532,7 +533,7 @@ Classes that implement `PostHogInterface`, such as test fakes, need updating. Th
 
 ### Feature flag callbacks
 
-`PostHogConfig.onFeatureFlags` and `reloadFeatureFlags()` now receive a `PostHogFeatureFlagsLoaded`:
+`PostHogConfig.onFeatureFlags` is removed, so call `PostHog.onFeatureFlags()` before `setup()` instead. The listener and `reloadFeatureFlags()` now receive a `PostHogFeatureFlagsLoaded`:
 
 ```kotlin
 val mainHandler = Handler(Looper.getMainLooper())
@@ -542,15 +543,21 @@ config.onFeatureFlags = PostHogOnFeatureFlags {
     mainHandler.post { refreshUi() }
 }
 
-// Version 4
-config.onFeatureFlags = PostHogFeatureFlagsCallback { loaded ->
+// Version 4, before PostHogAndroid.setup()
+PostHog.onFeatureFlags { loaded ->
     if (!loaded.errorsLoading) {
-        mainHandler.post { refreshUi() }
+        refreshUi()
     }
 }
 ```
 
-These callbacks run on a background thread, so switch to the main thread before touching UI.
+The listener returns a subscription you can `unsubscribe()`, and it differs from the removed option in three ways:
+
+- It runs on the main thread. The option ran on a background thread.
+- Bootstrapped flags arrive just after `setup()` is called, not synchronously inside it.
+- A reload on a disabled SDK doesn't call listeners. `reloadFeatureFlags(callback)` still gets `errorsLoading = true` in that case.
+
+The `reloadFeatureFlags()` callback still runs on a background thread, so switch to the main thread before touching UI. See [ensuring flags are loaded before usage](/docs/feature-flags/adding-feature-flag-code?tab=Android#ensuring-flags-are-loaded-before-usage).
 
 A trailing lambda such as `PostHog.reloadFeatureFlags { mainHandler.post { refreshUi() } }` still compiles, so check whether it should read `errorsLoading`. The callback also runs after a failed load.
 
@@ -558,14 +565,11 @@ A trailing lambda such as `PostHog.reloadFeatureFlags { mainHandler.post { refre
 
 These don't fail the build:
 
+- **`getFeatureFlag()`'s second parameter is now `sendFeatureFlagEvent`.** `getFeatureFlag("flag-key", true)` still compiles, but `true` no longer means the default value. A disabled SDK returns `null` instead of your default, and `$feature_flag_called` no longer reports a fallback as the flag's value.
 - **Session replay records screenshots.** Apps that used the default wireframe mode now upload masked screenshots. Custom-drawn views and other content the SDK doesn't recognize can be visible unless you mask them, so review [masking](/docs/session-replay/mobile) before you upgrade.
 - **Events go to capture v1.** Analytics events go to `/i/v1/analytics/events` instead of `/batch`. If you self-host PostHog or send events through your own proxy, make sure that path is served first. Capture v1 also changes event validation, property precedence, and retries. See the [capture v1 upgrade guide](/docs/libraries/capture-v1).
 - **Feature flag payloads must be valid JSON.** A malformed, empty, or whitespace-only payload, or one only valid in lenient mode such as unquoted `hello`, now reads as `null` instead of a string. A JSON `null` payload reads as `null` instead of the string `"null"`. If you store plain text in a payload, change it to valid JSON such as `"hello"` before you upgrade. The flag's value isn't affected.
 - **`remoteConfig = false` no longer skips `/config`.** Apps that set it now request `/config` at setup and apply its session replay, surveys, error tracking, and push settings. `/flags` is then requested only if the project has feature flags, and if it has none, the cached flags are cleared.
-
-### New `onFeatureFlags()` listener
-
-`PostHog.onFeatureFlags { loaded -> … }` gets every feature flags load on the main thread and returns a subscription you can `unsubscribe()`. See [ensuring flags are loaded before usage](/docs/feature-flags/adding-feature-flag-code?tab=Android#ensuring-flags-are-loaded-before-usage).
 
 # FAQ
 
