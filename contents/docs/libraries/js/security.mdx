@@ -37,24 +37,9 @@ Use the CDN manifest from the regional asset host you serve; regional toolbar as
 
 A manifest from a compromised server doesn't establish that the code is trustworthy. Don't fetch expected hashes dynamically at page load.
 
-### Add the hash to the SDK script
+### Add the hashes to the SDK loader
 
-In the [HTML snippet](/docs/libraries/js#installation), replace the `p.src` assignment with these comma-separated assignments, before the script is inserted into the DOM:
-
-<!-- prettier-ignore -->
-```js
-p.integrity = "sha384-<SHA384_BASE64_DIGEST>",
-p.crossOrigin = "anonymous",
-p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/<SDK_VERSION>/array.js"
-```
-
-Replace the entire `sha384-<SHA384_BASE64_DIGEST>` value with `files["array.js"]` from your approved manifest, and keep the rest of the snippet unchanged. The URL must serve the exact bytes covered by that hash. Cross-origin SRI requires a CORS response header such as `Access-Control-Allow-Origin: *`; PostHog's asset hosts provide this. Preserve it if you serve assets through a cross-origin proxy.
-
-Adding `integrity` to the outer inline `<script>` that contains the snippet doesn't protect the SDK it downloads. Set it on the generated `p` script element as shown above. When upgrading, update the version and hash together. If the hash doesn't match, the browser blocks execution; don't retry without integrity to work around the error.
-
-### Protect both the static loader and the core SDK
-
-If you use `loader.js` instead of the inline snippet, set `integrity` to the approved `loader.js` hash and `data-core-integrity` to the separate `array.js` hash:
+Use this loader instead of the inline snippet. Set `integrity` to `files["loader.js"]` and `data-core-integrity` to `files["array.js"]` from your approved manifest:
 
 ```html
 <script
@@ -66,19 +51,13 @@ If you use `loader.js` instead of the inline snippet, set `integrity` to the app
 ></script>
 ```
 
-Replace both complete hash placeholders with their values from the approved manifest, and replace the project token with your own. Pin the loader to the same exact version as the approved core hash, not a mutable alias.
+Replace both complete hash placeholders and the project token. When upgrading, update the version and both hashes together. If a hash doesn't match, the browser blocks execution; don't retry without integrity.
 
-The outer `integrity` attribute protects only `loader.js`. The `data-core-integrity` attribute protects the `array.js` it downloads. Omitting `data-core-integrity` leaves the core download without SRI protection. An empty or malformed value stops loading; this attribute accepts exactly one `sha384-` value with a 64-character base64 digest.
+Cross-origin SRI requires CORS response headers. PostHog's asset hosts provide these; preserve them if you use a cross-origin proxy.
 
 ### Understand the coverage
 
-SRI protects only the resource carrying the hash. Protecting the loader and `array.js` doesn't protect additional scripts they load, including the recorder, surveys, toolbar, or `config.js`.
-
-Use `strict_script_versioning: true` and the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives) to set `integrity` and `crossOrigin = "anonymous"` on optional SDK scripts. Maintain an allowlist of exact absolute URLs and their hashes from the approved manifest, and return `null` for unapproved URLs. Use `true`, not `"fallback"`: fallback can retry a mutable URL after an integrity failure. For this function-valued hook, use npm, the inline snippet, or the static loader with `data-defer-init="true"` and an explicit `posthog.init(...)` call.
-
-The hook doesn't protect the initial `array.js` download or guarantee coverage of scripts created by other code. Don't apply one hash to every dependency, and don't use a fixed release hash for mutable project configuration. Rejecting executable `/array/<token>/config.js` through the hook makes the SDK fall back to JSON configuration. Keep site apps and the toolbar disabled under this policy: site apps load separately configured code, and the toolbar's code-split imports aren't protected by SRI on its initial script.
-
-If your requirement is to avoid runtime executable downloads altogether, use the bundled approach below instead of treating SRI on the initial script as complete coverage.
+These hashes protect only `loader.js` and `array.js`, not additional scripts such as the recorder, surveys, toolbar, or `config.js`. For controls on optional SDK scripts, see the [`prepare_external_dependency_script` hook](/docs/advanced/content-security-policy#supporting-nonce-directives). To avoid runtime executable downloads altogether, [bundle the SDK without external scripts](#bundle-the-sdk-without-external-scripts).
 
 ## Configure Content Security Policy
 
