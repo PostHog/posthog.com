@@ -36,9 +36,9 @@ Yes, PostHog drops data after you go over your billing limit. To capture more du
 
 ## What does each product bill for?
 
-Each product bills its own usage. Events dropped by a [transformation](/docs/data-pipelines/transformations/drop-events) or after a [billing limit](/docs/billing/limits-alerts) are free. For prices, see [pricing](/pricing).
+Each product bills only the data it ingests. PostHog ingests data when it receives the data and stores it. Events that a [transformation](/docs/data-pipelines/transformations/drop-events) drops, or that arrive after you reach a [billing limit](/docs/billing/limits-alerts), are not stored, so they are free. For prices, see [pricing](/pricing).
 
-### Product Analytics
+Product Analytics is billed based on:
 
 | What you send | Billed |
 | --- | --- |
@@ -48,13 +48,13 @@ Each product bills its own usage. Events dropped by a [transformation](/docs/dat
 
 [Personless events](/docs/data/anonymous-vs-identified-events) bill at the anonymous event price.
 
-### Session Replay
+Session Replay is billed based on:
 
 | What you send | Billed |
 | --- | --- |
 | Recordings | Yes |
 
-### Feature Flags
+Feature Flags is billed based on:
 
 | What you send | Billed |
 | --- | --- |
@@ -62,41 +62,35 @@ Each product bills its own usage. Events dropped by a [transformation](/docs/dat
 | Local evaluation polls that return `304` | No |
 | `$feature_flag_called` events | No |
 
-### Experiments
+Experiments are billed based on:
 
 | What you send | Billed |
 | --- | --- |
 | Flag requests | Yes |
 | `$experiment_exposure` events | No |
 
-Experiments use Feature Flags, so their flag requests bill under Feature Flags.
+Experiment flag requests bill under Feature Flags.
 
-### Error Tracking
+Error Tracking is billed based on:
 
 | What you send | Billed |
 | --- | --- |
 | `$exception` events | Yes |
 
-### LLM Analytics
+LLM Analytics is billed based on:
 
 | What you send | Billed |
 | --- | --- |
 | `$ai_` events | Yes |
 
-### Surveys
+Surveys are billed based on:
 
 | What you send | Billed |
 | --- | --- |
 | `survey sent` events | Yes |
 | `survey shown` and `survey dismissed` events | No |
 
-Each `survey sent` event bills as one survey response.
-
-### Heatmaps
-
-| What you send | Billed |
-| --- | --- |
-| Heatmap data | No |
+Heatmaps aren't billed today.
 
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
