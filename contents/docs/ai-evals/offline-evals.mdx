@@ -343,7 +343,7 @@ All offline evals SDK operations are also available through the [PostHog MCP ser
 
 ## Data retention
 
-Item and result payloads expire 30 days after PostHog first accepts them.
+PostHog deletes evaluation inputs, actual outputs, expected outputs, and other payload fields 30 days after first accepting them. Scores, statuses, summaries, and trends are kept.
 
 | Data                                                                                    | Retention             |
 | --------------------------------------------------------------------------------------- | --------------------- |
@@ -351,9 +351,7 @@ Item and result payloads expire 30 days after PostHog first accepts them.
 | Result reasoning, error messages, and payload metadata                                  | Deleted after 30 days |
 | Experiment, item, and result records, including scores, statuses, summaries, and trends | Kept                  |
 
-Keep your own copy of payloads you need after 30 days.
-
-Keeping scores does not prevent the source dataset or revision from expiring. See [dataset retention](/docs/ai-evals/datasets#data-retention).
+Keep your own copy of inputs, outputs, and other payload fields you need after 30 days. Keeping scores does not prevent the source dataset or revision from expiring. See [dataset retention](/docs/ai-evals/datasets#data-retention).
 
 ## Pricing
 
