@@ -69,7 +69,7 @@ curl -X POST "https://us.posthog.com/api/projects/<project_id>/workload_trust_po
 
 The keys in `conditions` are claim names from the provider's OIDC token, and only the claims the provider lists are allowed.
 
-The response includes an `approval_url` to send to an admin. A request grants nothing on its own. An organization admin or owner opens the link, reviews the policy, who asked for it and through which app, and approves or rejects it. Approving creates the trust policy. Requests expire after 7 days and can't be edited.
+The response includes an `approval_url` to send to an admin. A request grants nothing on its own. An organization admin or owner opens the link, reviews the policy, who asked for it and, for an OAuth token, through which app, and approves or rejects it. Approving creates the trust policy. Requests expire after 24 hours and can't be edited.
 
 ## Exchanging a token
 
