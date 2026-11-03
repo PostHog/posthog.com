@@ -610,6 +610,10 @@ await Posthog().setup(config);
 
 `beforeSend` callbacks, including `logsConfig.beforeSend`, are now synchronous. An `async` callback is a compile error, so load anything it needs ahead of time and read it synchronously.
 
+- Callbacks run on the isolate that captured the event, so a slow callback blocks the UI.
+- A change made after the callback returns, such as one from a `Future` the callback started, isn't sent.
+- A callback that captures the event it's handling never finishes.
+
 A `reset()`, `identify()` or `optOut()` made straight after an un-awaited `capture()`, `screen()` or `captureException()` no longer applies to that event first.
 
 ### Events go to capture v1
