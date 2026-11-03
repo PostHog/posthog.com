@@ -8,6 +8,12 @@ Missing-capability reports show what agents need but your server does not suppor
 
 Turn on missing-capability reports to capture them. They're off by default.
 
+<CalloutBox icon="IconInfo" title="Agent feedback in TypeScript and Python" type="fyi">
+
+In TypeScript and Python, `collectFeedback` (`collect_feedback`) adds a `send_feedback` tool. It reports missing capabilities as `feedback_type: "missing_capability"`, plus broken tools and praise, as [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties) events. The **Missing capabilities** tab, API, and MCP tool read only `$mcp_missing_capability`, so query `$mcp_feedback` with SQL or insights.
+
+</CalloutBox>
+
 ## Enabling
 
 <MultiLanguage>
@@ -37,6 +43,8 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 </MultiLanguage>
 
 The SDK registers a virtual tool named `get_more_tools`. It advertises this tool through `tools/list`. The description asks the agent to call it when the available tools cannot satisfy a request.
+
+In TypeScript and Python, the SDK adds the tool to the first page of `tools/list` only. A real tool with the same name on that page wins. A real tool with that name on a later page is still listed, but the SDK intercepts its calls, so rename the virtual tool with `missingCapabilityToolName` if your server uses the name.
 
 In Go, `WithMissingCapabilityTool` turns the feature on. Pass a different name to rename the tool. An empty name uses `get_more_tools`. The SDK adds the tool to the last page of `tools/list`. If your server registers a tool with the same name, the SDK keeps your tool and does not add its own. A server that registers no tools must set `HasTools` in go-sdk's `ServerOptions`. Without it, clients never list tools and never see `get_more_tools`.
 

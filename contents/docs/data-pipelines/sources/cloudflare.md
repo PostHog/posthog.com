@@ -31,7 +31,8 @@ Before linking Cloudflare, create an API token with the required permissions:
 | ------------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
 | Account Settings          | Read       | Required for accounts, billing, and audit data                                                  |
 | Zone                      | Read       | Required for zones and zone-scoped configuration                                                |
-| DNS                       | Read       | Required for dns_records and dns_analytics_report                                               |
+| Zone Analytics            | Read       | Required for dns_analytics_report                                                               |
+| DNS                       | Read       | Required for dns_records                                                                        |
 | Firewall Services         | Read       | Required for firewall_rules, filters, rulesets, rate_limits, bot_management, page_shield tables |
 | Logs                      | Read       | Required for audit_logs and logpush_jobs                                                        |
 | Workers Routes            | Read       | Required for workers_routes and workers_scripts                                                 |

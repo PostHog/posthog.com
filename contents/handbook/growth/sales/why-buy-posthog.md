@@ -66,7 +66,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 
 ### Summary
 
-Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
+Using PostHog's [CDP](/data-pipelines) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
 
 ### Use cases
 - Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/docs/data-pipelines/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
@@ -82,8 +82,15 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 
 ## Per-product sales enablement
 
-The Developer Marketing team has created sales enablement materials, covering some product information and general objection handling for specific products. These exist as Google Docs as they are living documents, but are listed below. 
+Product marketers on the [Developer Marketing team](/teams/developer-marketing) make sales enablement material for the products they own. Some examples:
 
-- [Managed data warehouse (Trino)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
+- [Data foundations](/handbook/growth/sales/data-foundations) – how to sell the data warehouse and the rest of the data stack, with a recording of the training session
+- <PrivateLink url="https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit">Data foundations training deck</PrivateLink> – by Lizzie Epton
+- <PrivateLink url="https://www.figma.com/deck/yHjzK2vmjWdbkcNA9Ee4ph">Sales training deck</PrivateLink> – by Sara Miteva
+- <PrivateLink url="https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing">Managed data warehouse (Trino)</PrivateLink>
 
-If there are additional products you'd like to see this sort of material for, let the team know in the **#team-marketing** Slack channel.  
+This is not a full list. Each product marketer keeps the material for their own product current in the handbook.
+
+If you want material for a different product, ask in the **#team-developer-marketing** Slack channel.
+
+Product marketers: to make new material, follow the [sales enablement guide](/handbook/marketing/sales-enablement).

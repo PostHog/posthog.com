@@ -27,7 +27,7 @@ When linking WordPress, you'll need:
 
 - **Site URL** – your WordPress site URL, for example `https://example.com`.
 - **Username** – optional. Required only to authenticate or sync private content.
-- **Application password** – optional. Create one under **Users > Profile > Application Passwords** ([application password docs](https://wordpress.org/documentation/article/application-passwords/)). Required only to authenticate or sync private content, and requires WordPress 5.6+ on an HTTPS site.
+- **Application password** – optional. Create one under **Users > Profile > Application Passwords**. Required only to authenticate or sync private content, and requires WordPress 5.6+ on an HTTPS site.
 
 ## Sync modes
 

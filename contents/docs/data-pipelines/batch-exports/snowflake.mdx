@@ -222,7 +222,7 @@ This error occurs when an existing Snowflake table has one or more columns defin
 
 > A Snowflake table 'your_table' was found, but one or more fields are defined with incompatible types.
 
-PostHog batch exports support the following Snowflake column types: `STRING`, `TEXT`, `BINARY`, `INTEGER` (and aliases like `INT`, `BIGINT`, `SMALLINT`, `TINYINT`, `BYTEINT`, `FIXED`), `FLOAT` (and aliases like `FLOAT4`, `FLOAT8`, `DOUBLE PRECISION`, `REAL`), `BOOLEAN`, `VARIANT`, `TIMESTAMP` (including `TIMESTAMP_NTZ`, `TIMESTAMP_LTZ`, `TIMESTAMP_TZ`), and `ARRAY`. Any other type (for example, `DATE`, `TIME`, `OBJECT`, or `GEOGRAPHY`) causes this error.
+PostHog batch exports support the following Snowflake column types: `STRING`, `TEXT`, `BINARY`, `INTEGER` (and aliases like `INT`, `BIGINT`, `SMALLINT`, `TINYINT`, `BYTEINT`, `FIXED`), `FLOAT` (and aliases like `FLOAT4`, `FLOAT8`, `DOUBLE PRECISION`, `REAL`), `BOOLEAN`, `VARIANT`, `DATE`, `TIMESTAMP` (including `TIMESTAMP_NTZ`, `TIMESTAMP_LTZ`, `TIMESTAMP_TZ`), and `ARRAY`. Any other type (for example, `TIME`, `OBJECT`, or `GEOGRAPHY`) causes this error.
 
 This error won't resolve on its own, so retrying the export won't help. To fix it, either:
 

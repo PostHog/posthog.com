@@ -19,7 +19,7 @@ You need a Stripe account and either a restricted API key or an OAuth connection
 
 Stripe tables can be synced in one of three modes, and the one you pick has a big impact on cost, freshness, and correctness. We **strongly recommend using webhook syncs** for any Stripe source you care about keeping accurate:
 
-- **Webhook sync (recommended).** Stripe pushes events to PostHog in real time, so inserts, updates, and deletes all land within seconds. This is the only mode that reliably captures mutations to existing rows, and because PostHog only ingests what Stripe sends you, it's also the cheapest to run on an ongoing basis. See [Setting up webhooks for real-time syncing](#setting-up-webhooks-for-real-time-syncing) below.
+- **Webhook sync (recommended).** Stripe pushes events to PostHog in real time, where the data is cached. Inserts, updates, and deletes all land during the next scheduled sync. This is the only mode that reliably captures mutations to existing rows, and because PostHog only ingests what Stripe sends you, it's also the cheapest to run on an ongoing basis. See [Setting up webhooks for real-time syncing](#setting-up-webhooks-for-real-time-syncing) below.
 - **Append-only (incremental) sync.** PostHog periodically asks Stripe for new rows using Stripe's `created` cursor. This is cheap, but the Stripe API does not expose an "updated since" filter for most resources, so any change to an existing row – a subscription being cancelled, an invoice being marked paid, a customer's email being corrected – is silently missed. Fine for append-only tables you never mutate, dangerous for anything else.
 - **Full refresh sync.** PostHog re-downloads every row every sync. This is the only non-webhook mode that will eventually reflect updates, but it's expensive on both sides (lots of Stripe API calls, lots of warehouse writes) and the larger your Stripe account gets, the slower and more costly it becomes. Treat it as a fallback, not a default.
 
@@ -165,3 +165,7 @@ If you have existing subscription data that was synced before this feature was a
 If your Stripe sync fails with an account access error, your API key isn't authorized for the configured account or your OAuth access has been revoked. Check the **Account id** in your source settings – it's only needed for Stripe Connect platform accounts. If you connected via OAuth, try reconnecting your Stripe account.
 
 For more help, see the [Data Warehouse troubleshooting guide](/docs/data-warehouse/troubleshooting).
+
+### The webhook sync method only shows changes after sync
+
+The webhook sync method sends data to PostHog in realtime, but the events land in the table after a sync. The sync doesn't pull data from Stripe directly in this sync mode, instead it uses the data sent from Stripe via the webhook, creating, updating, and deleting at the scheduled sync interval. Webhook events do not update the source table immediately.

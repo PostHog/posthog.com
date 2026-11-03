@@ -125,6 +125,19 @@ You can then select any channel the app has access to and set a frequency. **Pri
   alt="Slack channel selection"
 />
 
+### How Slack reports are formatted
+
+Slack subscription reports use native Slack formatting to preserve the structure of your data:
+
+- **Tables** - Data tables render with proper column alignment and spacing
+- **Headings and lists** - Structured content maintains its hierarchy and readability
+- **Code blocks** - Any code in your report preserves its formatting
+- **Charts** - Insight charts appear in a compact image gallery with direct links to each insight in PostHog
+
+For large reports, PostHog automatically splits the content across multiple messages while keeping tables and code blocks intact.
+
+AI-generated summaries also render with full formatting, including clickable links to relevant insights and dashboards.
+
 ## Asking @PostHog about subscription reports
 
 When you receive a Slack subscription, you can reply in the message thread and mention [`@PostHog`](/docs/slack) to ask follow-up questions about the delivered report. If the [PostHog Slack app](/docs/slack) is fully configured with the required scopes, a hint appears at the bottom of each subscription message encouraging you to do this.

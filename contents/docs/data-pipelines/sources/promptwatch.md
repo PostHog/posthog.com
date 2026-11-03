@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: Promptwatch
+sourceId: PromptWatch
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"

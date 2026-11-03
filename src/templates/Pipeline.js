@@ -27,7 +27,7 @@ const PipelineSidebar = ({ filters: { type, maintainer } }) => {
                         topics={[
                             {
                                 name: capitalizeFirstLetter(maintainer),
-                                url: `/cdp?filter=maintainer&value=${maintainer}`,
+                                url: '/data-pipelines',
                             },
                         ]}
                     />
@@ -38,7 +38,7 @@ const PipelineSidebar = ({ filters: { type, maintainer } }) => {
                     <Topics
                         topics={type?.map((type) => ({
                             name: capitalizeFirstLetter(type),
-                            url: `/cdp?filter=type&value=${type}`,
+                            url: '/data-pipelines',
                         }))}
                     />
                 </SidebarSection>
@@ -96,30 +96,30 @@ export default function Pipeline({ data, pageContext: { next, previous } }) {
                     },
                     {
                         name: 'All',
-                        url: '/cdp',
+                        url: '/data-pipelines',
                     },
                     {
                         name: 'Data-in',
-                        url: '/cdp?filter=type&value=data-in',
+                        url: '/data-pipelines',
                     },
                     {
                         name: 'Data-out',
-                        url: '/cdp?filter=type&value=data-out',
+                        url: '/data-pipelines',
                     },
                     {
                         name: 'Ingestion-filtering',
-                        url: '/cdp?filter=type&value=ingestion-filtering',
+                        url: '/data-pipelines',
                     },
                     {
                         name: 'Official',
-                        url: '/cdp?filter=maintainer&value=official',
+                        url: '/data-pipelines',
                     },
                     {
                         name: 'Community',
-                        url: '/cdp?filter=maintainer&value=community',
+                        url: '/data-pipelines',
                     },
                 ]}
-                breadcrumb={[{ name: 'CDP', url: '/cdp' }, { name: title }]}
+                breadcrumb={[{ name: 'Data pipelines', url: '/data-pipelines' }, { name: title }]}
             >
                 {thumbnail?.publicURL && (
                     <figure className="m-0 text-center">

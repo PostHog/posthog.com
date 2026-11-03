@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Alpha:** This source is in alpha. If you run into issues, reach out to [our support team](/docs/support).
-
 The [Umami](https://umami.is/) connector syncs websites, sessions, and events into the PostHog data warehouse, so you can analyze them alongside your product data. Both Umami Cloud and self-hosted Umami deployments are supported.
 
 ## Prerequisites

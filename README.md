@@ -134,7 +134,7 @@ Check that GitHub shows **Verified** on each commit. A `Signed-off-by` line (`gi
 
 Enabling signing only affects future commits. You must also sign any existing unsigned commits.
 
-The **Commit signatures** check runs when you open a PR, after each push, and after PR edits, including base-branch changes and draft PRs. Fork PR workflows require approval from a maintainer. The check reports affected commits and repair instructions in the workflow summary. It does not post PR comments. GitHub's organization rule enforces the signature requirement independently of this workflow.
+The `signed-commit-check` GitHub App checks signatures when you open or update a PR, including fork PRs and drafts. It posts one comment when GitHub cannot verify a signature, then updates that comment when you fix the commits. This feedback does not wait for GitHub Actions approval on fork PRs. GitHub's organization rule enforces the signature requirement independently of this app.
 
 ### Ways to contribute
 

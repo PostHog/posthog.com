@@ -1,10 +1,10 @@
 # CarouselSlide
 
-Renders the body of a `TabbedCarousel` tab from a structured `CarouselSlide` config. Designed so per-product carousel content (Applications, TopFeatures, etc.) can live alongside product-data hook files like [`session_replay.tsx`](../../../hooks/productData/session_replay.tsx) (typically in a `session_replay/slides.tsx` sibling) instead of being inlined as JSX in templates — making the templates themselves product-agnostic and reusable across products.
+Renders the body of a `TabbedCarousel` tab from a structured `CarouselSlide` config. Designed so per-product carousel content (Applications, KeyFeatures, etc.) can live alongside product-data hook files like [`session_replay.tsx`](../../../hooks/productData/session_replay.tsx) (typically in a `session_replay/slides.tsx` sibling) instead of being inlined as JSX in templates — making the templates themselves product-agnostic and reusable across products.
 
 ## What this component is for
 
-The two product-page templates that use `TabbedCarousel` ([Applications](templates/Applications.tsx) and [TopFeatures](templates/TopFeatures.tsx)) used to define their tab content inline as ~125 lines of JSX. Each new product would have to fork the templates to swap copy, screenshots, and styling.
+The two product-page templates that use `TabbedCarousel` ([Applications](templates/Applications.tsx) and [KeyFeatures](templates/KeyFeatures.tsx)) used to define their tab content inline as ~125 lines of JSX. Each new product would have to fork the templates to swap copy, screenshots, and styling.
 
 `<CarouselSlide>` lifts that content into a structured schema so every per-product detail (heading, description, screenshot, layout) lives in a `CarouselSlide[]` array on the page. The template receives `slides` as a prop, maps the array to `<TabbedCarousel>` tabs, and hands each one to `<CarouselSlide>`.
 
@@ -301,7 +301,7 @@ image: {
 
 ## Trailing prose pattern
 
-The renderer's body order is `heading → description → bullets`. There's no built-in `afterBullets` slot. If you need prose **after** the bullets (e.g. the TopFeatures Event timeline pattern), put the entire body inside `description` as a Fragment and skip the `bullets` field:
+The renderer's body order is `heading → description → bullets`. There's no built-in `afterBullets` slot. If you need prose **after** the bullets (e.g. the KeyFeatures Event timeline pattern), put the entire body inside `description` as a Fragment and skip the `bullets` field:
 
 ```tsx
 {
@@ -339,7 +339,7 @@ Slide arrays live in the **page file** alongside the rest of the page-owned menu
 // src/pages/session-replay/index.tsx
 import { IconTarget, IconBolt, IconCursorClick, IconSparkles /* ... */ } from '@posthog/icons'
 import type { CarouselSlide, ProductNavItem } from 'components/Products/ReaderViewProduct/types'
-import { Applications, TopFeatures /* ... */ } from 'components/Products/ReaderViewProduct/templates'
+import { Applications, KeyFeatures /* ... */ } from 'components/Products/ReaderViewProduct/templates'
 
 const applications: CarouselSlide[] = [
     {
@@ -351,7 +351,7 @@ const applications: CarouselSlide[] = [
     // ...
 ]
 
-const topFeatures: CarouselSlide[] = [/* ... */]
+const keyFeatures: CarouselSlide[] = [/* ... */]
 
 export const productMenu: ProductNavItem[] = [
     // ... other items ...
@@ -364,12 +364,12 @@ export const productMenu: ProductNavItem[] = [
         props: { slides: applications },
     },
     {
-        slug: 'top-features',
-        name: 'Top features',
+        slug: 'key-features',
+        name: 'Key features',
         group: 'divided',
         icon: <IconSparkles className="size-4" />,
-        component: TopFeatures,
-        props: { slides: topFeatures },
+        component: KeyFeatures,
+        props: { slides: keyFeatures },
     },
 ]
 ```
@@ -382,9 +382,9 @@ If a future product genuinely needs to share identical slide content across mult
 
 ## Adding the same carousel to a new product
 
-1. Define `applications: CarouselSlide[]` and/or `topFeatures: CarouselSlide[]` in the new product's page file.
+1. Define `applications: CarouselSlide[]` and/or `keyFeatures: CarouselSlide[]` in the new product's page file.
 2. If using the `image: 'key'` shorthand or `image: { ref: 'key', ... }`, make sure those keys exist in `productData.screenshots` on the hook file.
-3. Add a menu item to the product's `productMenu` with `component: Applications` (or `TopFeatures`) and `props: { slides: applications }` (or `topFeatures`). The `slug` is just the section anchor — it can be anything.
+3. Add a menu item to the product's `productMenu` with `component: Applications` (or `KeyFeatures`) and `props: { slides: applications }` (or `keyFeatures`). The `slug` is just the section anchor — it can be anything.
 4. No template/component code changes needed.
 
 ## Out of scope

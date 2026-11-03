@@ -15,7 +15,7 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Qonto connector syncs your business banking data into the PostHog data warehouse, so you can analyze transactions, transfers, and account activity alongside your product data.
 
-[Qonto](https://qonto.com) is a European business finance platform. This source syncs bank accounts, transactions, labels, memberships, and SEPA transfers. The `transactions` and `transfers` tables support incremental sync using the `updated_at` field, so only new or updated rows are fetched after the initial sync.
+[Qonto](https://qonto.com) is a European business finance platform. This source syncs bank accounts, transactions, labels, memberships, SEPA transfers, beneficiaries, client invoices, supplier invoices, and credit notes. The `transactions`, `transfers`, and `supplier_invoices` tables support incremental sync using the `updated_at` field, so only new or updated rows are fetched after the initial sync.
 
 ## Prerequisites
 

@@ -17,7 +17,7 @@ The Doppler connector syncs your secrets management metadata into the PostHog Da
 
 ## Prerequisites
 
-You need a Doppler API token with read access to your workplace and the projects you want to sync. A [personal token](https://docs.doppler.com/docs/personal-tokens) or a [service account token](https://docs.doppler.com/docs/service-accounts) both work. Service tokens scoped to a single config are too narrow for this connector.
+You need a Doppler API token with read access to your workplace and the projects you want to sync. A personal token or a [service account token](https://docs.doppler.com/docs/service-accounts) both work. Service tokens scoped to a single config are too narrow for this connector.
 
 ## Adding a data source
 

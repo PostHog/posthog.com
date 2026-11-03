@@ -15,7 +15,7 @@ The Recharge connector automatically pulls your Recharge subscription data into 
 
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click **+ New source** and then click **Link** next to Recharge.
-3. You need a Recharge API token. In your [Recharge admin](https://docs.getrecharge.com/docs/recharge-api-and-developer-tools), go to **Apps & integrations > API tokens** and create a token. Grant **read** access to the resources you want to sync, e.g. Customers, Subscriptions, Orders, Charges, Addresses, Discounts, and Products. Some resources (such as Payment methods) are only available on Recharge Pro or Custom plans.
+3. You need a Recharge API token. In your Recharge admin, go to **Apps & integrations > API tokens** and create a token. Grant **read** access to the resources you want to sync, e.g. Customers, Subscriptions, Orders, Charges, Addresses, Discounts, and Products. Some resources (such as Payment methods) are only available on Recharge Pro or Custom plans.
 4. Back in PostHog, enter the token in the `API token` field and click **Next**.
 5. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
 
