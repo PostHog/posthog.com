@@ -25,7 +25,7 @@ There are three ways in:
 
 - **Mention `@PostHog` in a channel.** PostHog AI picks up the message and the surrounding thread, and replies in that thread.
 - **DM the PostHog app.** Good for investigating something that doesn't belong in a channel. The app suggests a few starting prompts when you open the DM.
-- **Reply in an existing thread.** Once PostHog AI is working in a thread, you can keep replying without mentioning it again.
+- **Reply in an existing thread.** Once PostHog AI is working in a thread, it can pick up replies that don't mention it. By default it asks the replier first. The person who started the thread can change this in the app's Home tab. See [Reply without tagging the bot](/docs/slack#reply-without-tagging-the-bot).
 
 While it's working, PostHog AI reacts to your message so you can see the state at a glance: an hourglass when your message is queued behind another, and eyes when it's actively working.
 
@@ -34,10 +34,10 @@ While it's working, PostHog AI reacts to your message so you can see the state a
 - **Investigate a problem** – ask why an insight looks wrong, what changed this week, or what's behind a spike, and get an answer grounded in your project's data.
 - **Dig into a report** – reply in the thread of an insight or dashboard [subscription](/docs/libraries/slack#subscribing-to-insights-and-dashboards) and mention `@PostHog` to ask about it.
 - **Discuss an inbox item** – talk through a [Self-driving](/docs/self-driving) signals report and kick off the fix from the thread.
-- **Start a code change** – when the fix belongs in a connected repo, PostHog AI creates a coding task from the thread. A coding agent writes the code in a sandbox and opens a draft pull request for you to review.
+- **Start a code change** – when the fix belongs in a connected repo, PostHog AI creates a coding task from the thread. A coding agent writes the code in a sandbox and opens a draft pull request for you to review. The pull request is opened as you if you've [connected your personal GitHub](/docs/slack/setup#connect-your-personal-github). If you haven't, it's opened as the PostHog bot through your project's GitHub App installation.
 - **Show it a file** – attach images, PDFs, and text files to your message, and PostHog AI reads them as part of the question.
 - **Follow up** – keep replying in the thread to refine, redirect, or ask for more detail.
-- **Approve or deny an action** – when PostHog AI needs sign-off on something sensitive, it posts approve and deny buttons in the thread.
+- **Answer a question from the agent** – when PostHog AI needs you to pick an option or approve a next step, it asks in the thread and can add one-click reply buttons under its answer.
 
 If a run fails or stalls, reply `retry` in the thread to pick up from the last checkpoint.
 
@@ -49,9 +49,9 @@ The reverse isn't true today: you can't move a web app conversation into Slack. 
 
 ## Requirements and limits
 
-To use PostHog AI in Slack, install the [PostHog Slack app](/docs/slack) in your workspace. Your Slack email needs to match your PostHog account so PostHog AI knows which project and permissions to work with, and opening pull requests requires a connected repository.
+To use PostHog AI in Slack, install the [PostHog Slack app](/docs/slack) in your workspace. Your Slack email needs to match your PostHog account so PostHog AI knows which project and permissions to work with, and opening pull requests requires GitHub: a personal connection, or your project's GitHub App installation.
 
-A few things to know. Slack answers are mostly text, but PostHog AI can also send charts, and it can send canvas or file artifacts when your Slack app has the necessary canvas and file permissions. Slack doesn't add new permissions to an install that already exists, so if you get text where you expected a canvas or a file, a project admin can [reconnect the Slack app](/docs/slack/setup#connect-slack-to-your-project) to approve them. Open the [web app](/docs/posthog-ai/surfaces/web-app) for the full visual output and interactive notebooks. Long replies are split into chunks, and replies in a thread that aren't clearly aimed at PostHog AI may be ignored, so mention it directly if you want a response.
+A few things to know. Slack answers are mostly text, but PostHog AI can also send charts, and it can send canvas or file artifacts when your Slack app has the necessary canvas and file permissions. Slack doesn't add new permissions to an install that already exists, so if you get text where you expected a canvas or a file, a project admin can [reconnect the Slack app](/docs/slack/setup#connect-slack-to-your-project) to approve them. Open the [web app](/docs/posthog-ai/surfaces/web-app) for the full visual output and interactive notebooks. Long replies are split into chunks, and replies in a thread that aren't clearly aimed at PostHog AI may be ignored, so mention it directly if you want a response. Group DMs also need a mention.
 
 ## Related
 

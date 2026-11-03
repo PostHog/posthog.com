@@ -11,7 +11,7 @@ tableOfContents:
   ]
 ---
 
-You need two integrations to use `@PostHog` in Slack: one workspace-wide Slack connection per PostHog project (set up by a project admin), and a personal GitHub connection per teammate who wants to ship code.
+To use `@PostHog` in Slack, a project admin connects your Slack workspace to each PostHog project. To ship code, connect GitHub too. Each teammate connects a personal GitHub account so pull requests are opened as them. A project-level GitHub App installation covers teammates who haven't connected one yet.
 
 <Steps>
 
@@ -31,15 +31,15 @@ The first time the bot sees a mention, it matches your Slack email to your PostH
 
 <CalloutBox icon="IconInfo" title="Slack email doesn't match your PostHog email?" type="fyi">
 
-Link the accounts instead. When email matching fails, the bot replies with a **Link my PostHog account** button – click it and sign in with Slack to connect the two. You can also link (or unlink) anytime from the App Home tab under **Linked accounts**, or from [Settings → Personal integrations](https://app.posthog.com/settings/user-personal-integrations) in PostHog. A linked account always wins over email matching.
+Link the accounts instead. When email matching fails, the bot replies in the thread, and sends you a **Link my PostHog account** button that only you can see – click it and sign in with Slack to connect the two. You can also link (or unlink) anytime from the App Home tab under **Linked accounts**, or from [Settings → Personal integrations](https://app.posthog.com/settings/user-personal-integrations) in PostHog. A linked account always wins over email matching.
 
 </CalloutBox>
 
 <CalloutBox icon="IconInfo" title="Slack Connect channels require one-time approval" type="fyi">
 
-In externally-shared (Slack Connect) channels, the bot asks for one-time approval before answering. The first time someone mentions `@PostHog` in a shared channel, the bot posts an ephemeral prompt visible only to the mentioner. An org member clicks **Allow PostHog in this channel** to enable it – after that, mentions in the channel work normally without further prompts.
+In externally-shared (Slack Connect) channels, the bot asks for one-time approval before answering. The first time someone mentions `@PostHog` in a shared channel, the bot posts an ephemeral prompt visible only to the mentioner, with **Allow PostHog in this channel** and **Not here** buttons. Only a member of your PostHog organization can approve, so a member needs to send that first mention. The bot then posts the outcome in the thread. After approval, mentions in the channel work normally without further prompts.
 
-This prevents the bot from accidentally surfacing data to external members of the channel.
+This prevents the bot from accidentally surfacing data to external members of the channel. Links are never unfurled in these channels, even after approval.
 
 </CalloutBox>
 
@@ -47,19 +47,26 @@ This prevents the bot from accidentally surfacing data to external members of th
 
 The bot picked up new OAuth scopes on 2026-05-04 (`app_mentions:read`, `users:read`, `users:read.email`, `chat:write`, `channels:history`, `groups:history`, `reactions:write`). If your workspace was connected before that date, head back to **Add to Slack** and re-approve – otherwise the bot will fail with a missing-scope error on the next mention.
 
+Some features need extra scopes that older installs may not have: DMs (`assistant:write`, `im:history`), attachments (`files:read`), canvases and file uploads (`canvases:write`, `files:write`), and the channel welcome (`channels:read`, `groups:read`). Reconnect the same way to pick them up.
+
 </CalloutBox>
 
 </Step>
 
-<Step title="Connect your personal GitHub" badge="required">
+<Step title="Connect your personal GitHub" badge="recommended">
 
-A personal GitHub integration is **required** for the coding agent to run. Without one, the bot refuses to start any repo-bound task and replies in-thread:
+The coding agent needs GitHub access to clone a repo, push a branch, and open a pull request. It gets that access in one of two ways:
 
-> I can't start this task yet – you haven't connected your personal GitHub. Connect it so I can open the pull request as you, then mention me again.
+- **Your personal GitHub connection.** The agent commits and opens pull requests as you. Each teammate connects their own account at [**Settings → Personal integrations**](https://app.posthog.com/settings/user-personal-integrations) and clicks **Connect GitHub**. You can connect multiple accounts or organizations. The agent uses them for repo access, commit attribution, and pull request authorship.
+- **Your project's GitHub App installation.** If you start a task without a usable personal connection, and a project admin has [connected GitHub to the project](/docs/libraries/github), the task can still run. The agent uses the project's installation, so the commits and the pull request come from the PostHog bot, not from you. The **Pull request opened** message in the thread then says "Opened by the PostHog bot" and links to the page where you connect your GitHub.
 
-This is a hard block on the whole task, not just the PR step – the agent doesn't plan, edit, or run anything until you've connected GitHub. Each teammate who wants to ship code connects their own account at [**Settings → Personal integrations**](https://app.posthog.com/settings/user-personal-integrations) and clicks **Connect GitHub**. You can connect multiple accounts or organizations – the agent uses them for repo access, commit attribution, and pull request authorship.
+If neither is connected, the agent can't do work that needs a repo, and it tells you in the thread how to connect GitHub. Questions about your product data don't need GitHub.
 
-PRs can't be authored under the bot itself – the agent always commits and opens PRs as whichever teammate triggered the task.
+<CalloutBox icon="IconWarning" title="Anyone who can mention the bot can use the project installation" type="caution">
+
+Any teammate whose Slack account resolves to a member of your PostHog organization can start a coding task, even if they have no GitHub access of their own. When your project has a GitHub App installation, that task can push branches and open pull requests through it, with the installation's repository access. To limit what these runs can reach, choose which repositories the PostHog GitHub App can access in your GitHub organization settings.
+
+</CalloutBox>
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto,w_800/personal_github_integration_5e2b3142ba.png"
@@ -73,22 +80,19 @@ If GitHub's **Save** button is greyed out at the end of the install flow, toggle
 
 </CalloutBox>
 
-If you start a task before connecting, the agent stops and posts a **Connect GitHub** button in the thread. Click it, finish the OAuth flow, and re-mention the bot – the task picks up where it left off.
+If you started a thread before you connected, connect your GitHub and then reply in the thread. Your next turn runs as you, so later commits and pull requests in that thread carry your name. A pull request the bot already opened stays under the bot. This only applies to the person who started the thread. A teammate who connects GitHub later doesn't change who a thread they joined runs as.
 
 </Step>
 
 <Step title="Pick a project" badge="optional">
 
-A single Slack workspace can be connected to more than one PostHog project. When that happens, the bot won't guess which project your mention belongs to – it asks you to pick one first:
+A single Slack workspace can be connected to more than one PostHog project. When that happens and you haven't set a default, the bot won't guess which project your mention belongs to. It asks you to pick one first, with a prompt only you can see:
 
-> This Slack workspace is connected to multiple PostHog projects:
->
-> • `42` – Acme · Production
-> • `7` – Acme · Staging
->
-> Pick one on the app's Home tab, or set your default with `/posthog project <id>`.
+> This Slack workspace is connected to more than one PostHog project. Which one should I use?
 
-Pick a project once and the bot remembers it for you across channels and threads in this workspace. The Home tab has a dropdown under **Project routing**. The commands do the same thing from wherever you are:
+Click a project (or choose one from the **Choose a project** dropdown when there are more than five). The bot runs your mention there and saves your choice as your personal default for future mentions. If the bot can't show the picker, for example in a DM, it lists the projects instead and asks you to pick one on the Home tab or with `/posthog project <id>`.
+
+Your default applies across channels and threads in this workspace. The Home tab has a dropdown under **Project routing**. The commands do the same thing from wherever you are:
 
 | Command                           | What it does                                                                                   |
 | --------------------------------- | ---------------------------------------------------------------------------------------------- |
@@ -98,7 +102,9 @@ Pick a project once and the bot remembers it for you across channels and threads
 
 A slash command is visible only to you, so you can change your routing without posting a message everyone in the channel sees. It reads the same in a DM.
 
-The bot resolves a target with this precedence: [the project your message names](/docs/slack#pick-a-project) → thread context (continuing an existing task) → your personal default → workspace-wide default (set by a Slack admin) → the only connected project → the list above. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
+The bot resolves a target with this precedence: thread context (continuing an existing task) → your personal default → workspace-wide default (set by a Slack admin) → the only project you can access → the picker above. Personal defaults always win over the workspace fallback, so each teammate can route their own mentions independently.
+
+When a mention opens a new thread and resolves to a project, the bot also reads the message for a [project name](/docs/slack#pick-a-project). If you name a different project you can access, the thread moves there. A project named in a follow-up is ignored.
 
 If your workspace is only connected to a single PostHog project, you can skip this step – the bot routes there automatically.
 
