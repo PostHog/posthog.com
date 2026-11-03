@@ -132,21 +132,22 @@ const LearnNav = ({
                   name: 'Pocket guide',
                   url: guideBasePath,
                   icon: <IconBook className="size-4" />,
-                  children: chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
+                  children: [
+                      ...chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
+                      // The story ends in Self-driving, so it's the guide's last chapter. Its first
+                      // page is the introduction, so the label opens it and the chevron lists the scouts.
+                      ...(scoutChapters.length
+                          ? [
+                                {
+                                    name: 'Self-driving',
+                                    url: scoutChapters[0].url,
+                                    icon: <IconBolt className="size-4" />,
+                                    children: scoutChapters.slice(1),
+                                },
+                            ]
+                          : []),
+                  ],
               },
-              // The story continues into Self-driving, so it follows the pocket guide.
-              ...(scoutChapters.length
-                  ? [
-                        {
-                            // The section's first page is its introduction, so the label opens it
-                            // and the chevron lists the scout pages after it.
-                            name: 'Self-driving',
-                            url: scoutChapters[0].url,
-                            icon: <IconBolt className="size-4" />,
-                            children: scoutChapters.slice(1),
-                        },
-                    ]
-                  : []),
               // Only the hub pages this volume has, so a smaller hub has no dead links.
               ...(hub.pages ?? []).map((page) => ({ ...HUB_PAGES[page], url: `${basePath}/${page}` })),
           ]
