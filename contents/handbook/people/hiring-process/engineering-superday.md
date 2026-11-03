@@ -15,7 +15,7 @@ Treat it as a day of work, at a pace that works for you. There's no hard cutoff 
 
 Scheduled throughout the day, you'll also have:
 
-- **A debugging session (45 min, optional)** -- a separate pairing session where you'll work through bugs and features in an existing codebase with an interviewer. This is a different codebase from your project.
+- **A debugging session (45 min, not all roles)** -- a separate pairing session where you'll work through bugs and features in an existing codebase with an interviewer. This is a different codebase from your project.
 - **A check-in call** -- your SuperDay buddy (the same engineer available to help you in Slack) will review your project progress partway through the day, ask about your decisions, and offer feedback.
 - **A short chat with a co-founder or exec** -- a brief conversation about culture and motivation.
 
@@ -64,7 +64,7 @@ We notice when someone asks "what would actually help a user here?" and lets tha
 
 ## The debugging session
 
-_This session is optional – not every SuperDay includes it. If yours includes one, we'll tell you clearly in your SuperDay invite._
+_Not every SuperDay includes it. If yours includes one, we'll tell you clearly in your SuperDay invite._
 
 ### What to expect
 
