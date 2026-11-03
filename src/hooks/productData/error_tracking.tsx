@@ -32,9 +32,9 @@ export const errorTracking = {
     pricingDescription:
         'Error Tracking is billed on $exception events ingested. You get 100k free every month, then pay for what you use – no per-seat charges.',
     seo: {
-        title: 'Error Tracking – Catch and fix issues faster with PostHog',
+        title: 'Error Tracking – Error monitoring and alerts | PostHog',
         description:
-            'Capture exceptions with stack traces, group them into issues, and get alerts. See the session replay behind every error. 100K exceptions free monthly.',
+            'Error monitoring with stack traces, issue grouping, and alerts. See the session replay behind every error. 100K exceptions free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     /**

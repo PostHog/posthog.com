@@ -214,7 +214,7 @@ Deleting a single person with `DELETE /api/projects/:project_id/persons/:id` sti
 
 #### Checking deletion status
 
-Event deletions run asynchronously during non-peak hours. To check the status of queued event deletions, use the deletion status endpoint:
+Event deletions run [asynchronously](#asynchronous-data-deletion) during non-peak hours. To check the status of queued event deletions, use the deletion status endpoint:
 
 <MultiLanguage>
 
@@ -276,7 +276,7 @@ You can manually delete persons and their events in the PostHog UI:
 
 ### Asynchronous data deletion
 
-While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
+While most data in PostHog is deleted instantly, event data is not. Instead, event data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud). The request cutoff time for each batch deletion is two days before the batch runs. Deletion requests that miss the cutoff time will be included in the batch after next.
 
 This is done because data deletion in [ClickHouse](/docs/how-posthog-works/clickhouse) is expensive and it can impact performance for other users.
 
