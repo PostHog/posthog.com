@@ -70,9 +70,9 @@ But what's the cost? Your stack might be getting simpler by getting harder to le
 
 You should be able to cut tools without signing up to someone's whole platform and paying for features that you didn't want to be included in the deal. Simplicity you can't walk away from is just lock-in with a bigger dashboard.
 
-That's the philosophy we built our ELT tool with. It syncs your data into whichever warehouse you already run. If you'd rather not run one, it syncs into PostHog's warehouse instead, and if you change your mind we have a batch export tool. You don't need any other PostHog product to use it, it just does what it says on the tin.
+That's the philosophy we built our ELT tool with. It syncs your data into whichever warehouse you already run. If you'd rather not run one, it syncs into PostHog's warehouse instead, and if you change your mind, you can add an [ELT destination](/docs/data-pipelines/destinations/elt-destinations) to send the same tables to your own warehouse. Adding one starts a full resync that's billed per row, so check your row counts first. You don't need any other PostHog product to use it, it just does what it says on the tin.
 
-The pricing doesn't trap you either. You get seven days of free historical syncs for each new tool you connect, and the [first 1M rows each month are free](/data-pipelines/pricing), then it's $0.000015 a row, dropping to $0.000001 at volume. There's no per-connection minimum.
+The pricing doesn't trap you either. Historical syncs are free for the first seven days after you connect a new source (up to 100M rows on the free plan, unlimited on paid), and the [first 1M rows each month are free](/data-pipelines/pricing), then it's $0.000015 a row, dropping to $0.000001 at volume. There's no per-connection minimum.
 
 ## To bundle or not to bundle: how to keep your options open
 
@@ -88,4 +88,4 @@ You're probably being bundled whether you planned for it or not; there are pros 
 
 With the market moving in the direction of rebundling, you can't opt out, but you can choose whose bundle you sit in.
 
-If you want yours to stay swappable, [here's how our ELT tool works](/data-pipelines) and [what it costs](/data-pipelines/pricing). You can try it alongside your current tooling too for 7 days before it costs you anything.
+If you want yours to stay swappable, [here's how our ELT tool works](/data-pipelines) and [what it costs](/data-pipelines/pricing). You can backfill your history alongside your current tooling for 7 days without paying for those historical rows.
