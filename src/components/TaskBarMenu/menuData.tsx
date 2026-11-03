@@ -3,7 +3,7 @@ import React from 'react'
 import { companyMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import { Logo } from '@posthog/brand/logo'
-import useProduct from '../../hooks/useProduct'
+import { taskbarProducts } from './taskbarProducts'
 import {
     IconXNotTwitter,
     IconSubstack,
@@ -265,14 +265,13 @@ const buildProductsMenuItems = (allProducts: any[]) => {
 }
 
 export function useMenuData(): MenuType[] {
-    const allProducts = useProduct() as any[]
     const { isMobile } = useAppSettings()
 
     // Define main navigation items (excluding logo menu)
     const mainNavItems: MenuType[] = [
         {
             trigger: 'Products',
-            items: buildProductsMenuItems(allProducts),
+            items: buildProductsMenuItems(taskbarProducts),
         },
         {
             trigger: 'Pricing',
@@ -284,7 +283,7 @@ export function useMenuData(): MenuType[] {
             trigger: 'Docs',
             // The docs tree is too deep to browse inside a hamburger; mobile goes to the homepage instead
             mobileLink: '/docs',
-            items: addDocsProductIcons(docsMenuItems, allProducts),
+            items: addDocsProductIcons(docsMenuItems, taskbarProducts),
         },
         {
             trigger: 'Community',
