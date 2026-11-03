@@ -6,14 +6,6 @@ showStepsToc: true
 
 import { Steps, Step } from 'components/Docs/Steps'
 
-<CalloutBox icon="IconFlask" title="The Ruby SDK is experimental and unsupported" type="caution">
-
-`PostHog::MCP` is **experimental and not officially supported**. The MCP Analytics team doesn't maintain it. Its API, its options, and the `$mcp_*` events it captures may change in a minor `posthog-ruby` release, and the gem logs a warning when you require it.
-
-Try it, and report bugs or send patches to [posthog-ruby](https://github.com/PostHog/posthog-ruby/issues). Don't build production reporting on it yet.
-
-</CalloutBox>
-
 `PostHog::MCP` ships inside the [`posthog-ruby`](/docs/libraries/ruby) gem. It instruments an `MCP::Server` from the official [Ruby MCP SDK](https://github.com/modelcontextprotocol/ruby-sdk) (`mcp` gem `>= 1.4`), whether you register tools as `MCP::Tool` classes or with `define_tool`. It works over stdio and Streamable HTTP, and serves both the `2025-11-25` and `2026-07-28` protocol revisions.
 
 You need Ruby 3.0+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `MCP::Server`? See [Custom dispatchers](#custom-dispatchers).
@@ -76,7 +68,7 @@ Connect an agent to your server and call a tool. Then open the [activity feed](h
 
 ## Log to stderr on stdio servers
 
-A stdio MCP server uses `$stdout` for the protocol. The SDK's own messages go only to the `logger:` you pass. The experimental notice and configuration warnings go to stderr. Point the core SDK's logger away from stdout too:
+A stdio MCP server uses `$stdout` for the protocol. The SDK's own messages go only to the `logger:` you pass. Configuration warnings go to stderr. Point the core SDK's logger away from stdout too:
 
 ```ruby
 PostHog::Logging.logger = Logger.new($stderr)
