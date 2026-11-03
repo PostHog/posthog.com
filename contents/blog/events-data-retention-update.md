@@ -10,8 +10,6 @@ category: PostHog news
 
 From November 5, 2026, new paid plans on PostHog Cloud will have a 2-year events data retention period, instead of our previous default of 7 years. The Free plan stays at 1 year, and organizations already on a paid plan keep 7 years.
 
-We've also recently added custom retention policies. With a platform package, you can set a policy to keep events for longer than the default: up to 3 years on Boost, 5 years on Scale, and 7 years on Enterprise. See the [events data retention docs](/docs/data/events-retention) for how to set one.
-
 The table below shows how retention is changing by plan:
 
 | Plan | Retention before November 5, 2026 | Default retention from November 5, 2026 | Custom retention policy range |  
@@ -55,3 +53,7 @@ Add a [platform package](/platform-packages), then set a custom retention policy
 ## Can I export data out of PostHog?
 
 Yes, if you'd prefer not to upgrade your package, or you need to keep data for longer than 7 years, you can send it to your own data warehouse with a [batch export](/docs/data-pipelines/batch-exports). 
+
+## Can I set up a custom retention policy for my organization or project?
+
+Yes! We've recently added custom retention policies. See the [events data retention docs](/docs/data/events-retention) for more information on how to set one.
