@@ -631,7 +631,7 @@ If you send events through your own reverse proxy, update it before you upgrade:
 
 - Forward `/i/v1/analytics/events` and `/i/v1/ai/events` to PostHog.
 - Pass `Authorization` (the project token, sent as `Bearer <token>`), every `PostHog-*` header, `Content-Type`, `Content-Encoding` and `User-Agent` through unchanged.
-- If your proxy strips other credentials, keep `Authorization` values that start with `Bearer phc_`. If your project token doesn't start with `phc_`, keep the exact value `Bearer <your project token>`.
+- If your proxy strips other credentials, keep `Authorization` values that start with `Bearer phc_`, `Bearer phs_` or `Bearer phx_`. Keys created before these prefixes need their exact `Bearer <key>` value allowed too.
 - Accept request bodies up to 20 MB. AI requests are often larger than 1 MB, the default limit in NGINX.
 - If your app also runs on web, keep the routes the proxy already forwards for `posthog-js`. One proxy that serves every platform needs both sets of routes.
 
