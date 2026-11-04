@@ -100,7 +100,7 @@ It only sets a new SLA deadline if the ticket has no SLA deadline set, or the ne
 
 The same SLA is applied when someone reopens a ticket, for example if it was set to pending or resolved by mistake. That workflow keys off the plan or segment tag already on the ticket.
 
-#### Update
+#### Setting the update time
 
 When we send a reply, the workflow checks the ticket's status. If the team member set it to pending, resolved, or on hold, there's nothing to do. If it's still new or open, it sets an update SLA based on the plan tag. We don't want to just go quiet on a customer while we investigate.
 
