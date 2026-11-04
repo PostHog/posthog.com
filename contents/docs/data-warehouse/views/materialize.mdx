@@ -25,7 +25,12 @@ The [**Models** page](https://app.posthog.com/models) shows every materialized v
 
 Click a view to open it. Its **Materialization** tab has the refresh cadence, **Sync now**, and the run history.
 
-{/* Screenshot: the Overview tab of the Models page. */}
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/models-overview-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/models-overview-dark-mode.png"
+  alt="The Overview tab of the Models page"
+  classes="rounded"
+/>
 
 ## Materializing a view
 
@@ -52,7 +57,12 @@ For example, if you sync your billing data to Postgres using a cron job daily an
 
 The cadence a view can use depends on the sources it reads and the views that read it. See [freshness and refresh cadence](/docs/data-warehouse/views/freshness).
 
-{/* Screenshot: the "Refresh every" picker. The previous screenshot showed the retired sync interval selector. */}
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/picker-pinned-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/picker-pinned-dark-mode.png"
+  alt="The Refresh every picker"
+  classes="rounded"
+/>
 
 ### Views that depend on other views
 

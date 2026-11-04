@@ -12,8 +12,6 @@ Every materialized view has a refresh cadence: how often PostHog runs its query 
 
 The cadence is the freshness you're asking for. Each run picks up whatever its inputs hold at that moment, so the data in a view can be as old as its cadence plus the age of the data it reads. A view that refreshes every hour over an hourly source can hold data close to 2 hours old, even when every run succeeds.
 
-{/* Screenshot: the "Refresh every" picker on a view's Materialization tab, with one option disabled and the explanation line below it. */}
-
 ## Choosing a cadence
 
 **Refresh every** offers eight options:
@@ -70,13 +68,41 @@ The upstream view keeps its own setting. When the downstream view slows down aga
 
 For example, `orders_clean` is set to refresh every day. You then set `revenue_by_hour`, which reads `orders_clean`, to refresh every hour. From then on, `orders_clean` refreshes every hour too, and its picker says it refreshes every hour to keep up with `revenue_by_hour`. If you later set `revenue_by_hour` back to every day, `orders_clean` returns to every day.
 
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/inherit-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/inherit-dark-mode.png"
+  alt="Lineage graph: orders_clean set to 1 day but refreshing every hour for revenue_by_hour"
+  classes="rounded"
+/>
+
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/picker-inherited-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/picker-inherited-dark-mode.png"
+  alt="orders_clean's picker highlights the hourly cadence it inherits from revenue_by_hour"
+  classes="rounded"
+/>
+
 ## Pinning a slower cadence
 
 Sometimes a downstream view reads several inputs, and only some of them need to be fresh. Say `signups` refreshes every 15 minutes. It reads `trial_events`, which must be fresh, and joins in `org_details`, an expensive enrichment that only changes a few times a day. Without a pin, `org_details` refreshes every 15 minutes too, to keep up with `signups`.
 
 A pin lets an upstream view keep a slower cadence anyway. On the upstream view's **Refresh every** picker, cadences slower than its downstream views need are still available. Hover over one to see who it affects, for example **Pin this view to every 6 hours. Downstream view signups refreshes more often and will read older data from it.** Pick it and save.
 
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/pin-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/pin-dark-mode.png"
+  alt="Lineage graph: signups reads trial_events and org_details, which is pinned to 6 hours"
+  classes="rounded"
+/>
+
 A pinned view shows a pin icon on its cadence, and the line under the picker says which downstream views read older data from it. In the example, `signups` still refreshes every 15 minutes with fresh `trial_events`, but the `org_details` columns can be up to about 6 hours old. [Endpoints](/docs/endpoints) downstream of a pinned view work the same way: they serve data that can be as old as the pin.
+
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/picker-pinned-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/picker-pinned-dark-mode.png"
+  alt="The picker on org_details, pinned to 6 hours, naming signups as the downstream view that reads older data"
+  classes="rounded"
+/>
 
 ### When you can't pin
 
@@ -96,7 +122,12 @@ The cadence is a target, not a guarantee. The data in a view can be older than i
 
 The **Overview** tab of the [**Models** page](https://app.posthog.com/models) lists **Models behind schedule**. A view appears there when its last successful run is more than twice its cadence old. **Behind by** shows how far past its cadence it is. Paused views never appear there, because you stopped them on purpose.
 
-{/* Screenshot: "Models behind schedule" table on the **Overview** tab of the Models page. */}
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/behind-schedule-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/behind-schedule-dark-mode.png"
+  alt="Models behind schedule table on the Models page"
+  classes="rounded"
+/>
 
 ## Further reading
 

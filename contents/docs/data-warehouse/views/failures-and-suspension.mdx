@@ -20,7 +20,12 @@ Views that read the failed view don't run in that cycle, because they would read
 
 To see the error, open the view from the [**Models** page](https://app.posthog.com/models) and go to its **Materialization** tab. **Run history** lists every run with its status, the number of rows it wrote and the error, if any.
 
-{/* Screenshot: Run history on a view's Materialization tab, with a failed run and its error. */}
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/run-history-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/run-history-dark-mode.png"
+  alt="Run history with a failed run and its error"
+  classes="rounded"
+/>
 
 ## Suspension after repeated failures
 
@@ -34,7 +39,12 @@ While a view is suspended:
 
 Some failures don't count toward the 5. Skipped runs never count, because the view didn't run. Failures caused by problems on PostHog's side, such as a database connection that drops mid-run, also don't count. They don't suspend a view that would otherwise succeed.
 
-{/* Screenshot: the suspended banner on a view's Materialization tab, with the Resume schedule button. */}
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/suspended-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/suspended-dark-mode.png"
+  alt="A suspended view, with the error that stopped it and what to do next"
+  classes="rounded"
+/>
 
 ### Suspended and paused are different
 
@@ -67,7 +77,12 @@ The **Overview** tab of the [**Models** page](https://app.posthog.com/models) li
 
 Suspended views are listed first, because nothing retries them. The **Models** tab also tags suspended views as **Suspended**.
 
-{/* Screenshot: "Models needing attention" on the **Overview** tab of the Models page, with one suspended and one failed view. */}
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/needing-attention-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/needing-attention-dark-mode.png"
+  alt="Models needing attention, with one suspended and one failed view"
+  classes="rounded"
+/>
 
 To find views by their run status, type `status:failed`, `status:running` or `status:completed` in the search field of the **Models** tab or the SQL editor sidebar.
 
