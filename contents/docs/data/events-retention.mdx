@@ -6,11 +6,11 @@ PostHog Cloud keeps your events for a retention period, then deletes them. This 
 
 Some data follows different retention rules:
 
-- [Session recordings](http:///docs/session-replay/recording-retention)  
-- [AI events](http:///docs/ai-observability/data-retention)  
-- [Logs](http:///docs/logs/pricing#retention)  
-- [Data warehouse](http:///docs/data-warehouse) tables, which keep all of their rows  
-- Person profiles and properties, which are stored indefinitely until you [delete them](http:///docs/privacy/data-storage#data-deletion)  
+- [Session recordings](/docs/session-replay/recording-retention)  
+- [AI events](/docs/ai-observability/data-retention)  
+- [Logs](/docs/logs/pricing#retention)  
+- [Data warehouse](/docs/data-warehouse) tables, which keep all of their rows  
+- Person profiles and properties, which are stored indefinitely until you [delete them](/docs/privacy/data-storage#data-deletion)  
 - Self-hosted instances, which keep events until you delete them
 
 ## Retention by plan
@@ -56,7 +56,7 @@ Retention applies to every project on PostHog Cloud. Each project uses its own c
 - You can only query events whose timestamp is inside your retention period.  
 - Events that are older than the retention period may be deleted at any point. If you have a custom retention policy in place, they will be deleted during the next monhtly cleanup.
 
-Retention uses each event's `timestamp`, so events you bring in through a [migration](http:///docs/migrate) are deleted at the next cleanup if they're older than your retention period, even though you only just migrated them. Check your retention period before you migrate.
+Retention uses each event's `timestamp`, so events you bring in through a [migration](/docs/migrate) are deleted at the next cleanup if they're older than your retention period, even though you only just migrated them. Check your retention period before you migrate.
 
 ## FAQ
 
@@ -66,7 +66,7 @@ Every event in the events table, including error tracking exceptions, feature fl
 
 #### Does retention delete person profiles?
 
-No. Person profiles and their properties are stored indefinitely. To remove them, use the [data deletion tools](http:///docs/privacy/data-storage#data-deletion).
+No. Person profiles and their properties are stored indefinitely. To remove them, use the [data deletion tools](/docs/privacy/data-storage#data-deletion).
 
 #### What happens to my retention period if I move to the Free plan?
 
@@ -78,9 +78,9 @@ On default retention, events may be deleted at any point after your retention pe
 
 ## Other ways to manage your data
 
-Retention only deletes events once they expire. To delete data sooner, use the [data deletion tools](http:///docs/privacy/data-storage#data-deletion):
+Retention only deletes events once they expire. To delete data sooner, use the [data deletion tools](/docs/privacy/data-storage#data-deletion):
 
-- Delete a person, along with their events and recordings, to handle a [right to be forgotten](http:///docs/privacy/data-storage#right-to-be-forgotten) request.  
+- Delete a person, along with their events and recordings, to handle a [right to be forgotten](/docs/privacy/data-storage#right-to-be-forgotten) request.  
 - Delete a project or an organization to remove all of its events.
 
-You may also send events to your own storage with a [batch export](/docs/cdp/batch-exports). Batch exports can only export events PostHog still has, so set one up before your events expire.
+You may also send events to your own storage with a [batch export](/docs/data-pipelines/batch-exports). Batch exports can only export events PostHog still has, so set one up before your events expire.
