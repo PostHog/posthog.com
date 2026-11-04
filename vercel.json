@@ -822,6 +822,10 @@
             "destination": "/compare/best-mcp-servers-for-startups"
         },
         {
+            "source": "/blog/best-mobile-app-analytics-tools",
+            "destination": "/compare/best-mobile-app-analytics-tools"
+        },
+        {
             "source": "/blog/best-mobile-app-ab-testing-tools",
             "destination": "/compare/best-mobile-app-ab-testing-tools"
         },
