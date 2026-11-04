@@ -4,8 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[Full deck for sales training](https://docs.google.com/presentation/d/1CnXlVhrxDJ146p6PzNNt94RmYjR1Jr7V6Vsg1g-aIMk/edit?usp=sharing)
-[Recorded sales training session]
+<PrivateLink url="https://docs.google.com/presentation/d/19jVn8Zth5XCYT48c6Yxxe1d1s1h-n9_C/edit?usp=sharing&amp;ouid=111249669219449939298&amp;rtpof=true&amp;sd=true">Full deck for sales training</PrivateLink>
+<PrivateLink url="https://drive.google.com/file/d/1MsaeBU94nEBUQz-wid297RdU-o6tyznD/view?usp=sharing">Recorded sales training session</PrivateLink>
 
 ## Why do companies need data tools?
 
@@ -74,7 +74,7 @@ The context warehouse = your events and your business data, together and queryab
 |------|---------|
 | Sources | Autocapture + SDKs |
 | Ingestion | Warehouse Sources |
-| Storage | Managed Warehouse |
+| Storage | Warehouse |
 | Modeling | Data modeling + SQL editor |
 | Orchestration | Scheduled syncs & materialization |
 | Analysis & BI | Notebooks, Insights & dashboards |

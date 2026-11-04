@@ -804,6 +804,44 @@
         "profile_id": 45795
     },
     {
+        "handle": "alessandro-pogliaghi",
+        "name": "Alessandro Pogliaghi",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/tatoalo",
+        "profile_id": 34600
+    },
+    {
+        "handle": "raul-negron-otero",
+        "name": "Raúl Negrón-Otero",
+        "role": "DevEx Engineer",
+        "profile_id": 43265
+    },
+    {
+        "handle": "ryan-mccrary",
+        "name": "Ryan McCrary",
+        "role": "Technical Account Manager",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/ryanmccrary/",
+        "profile_id": 35044
+    },
+    {
+        "handle": "julia-esteban-edo",
+        "name": "Júlia Esteban Edo",
+        "role": "Talent Partner",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/juliaestebanedo/",
+        "profile_id": 33236
+    },
+    {
+        "handle": "benjamin-knofe-vider",
+        "name": "Benjamin Knofe-Vider",
+        "role": "Infrastructure Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/bknofevider/",
+        "profile_id": 43006
+    },
+    {
         "handle": "juraj-majerik",
         "name": "Juraj Majerik",
         "role": "Product Engineer",

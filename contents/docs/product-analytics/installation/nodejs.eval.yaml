@@ -1,0 +1,22 @@
+owner: wizard-and-docs
+tags: [install, javascript, node, server]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Node.js app from a one-line
+          request? The prompt names only the stack; the agent gets no docs, so docs-read
+          shows which pages it finds on its own.
+      codebase_to_test: node-express
+      prompt: >-
+          Set up PostHog in the Node.js app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-node`.
+              initialized: >-
+                  The app creates a client with new PostHog(token, { host }) from
+                  posthog-node, passing the project token and a host option. Cite the
+                  file and line(s).

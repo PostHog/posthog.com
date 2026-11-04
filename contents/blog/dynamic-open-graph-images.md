@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/actual-post-open-graph-image.png
 featuredImageType: full
+ogImage: generated
 excerpt: >-
   The image preview you see when sharing a link is a great opportunity to get
   your brand’s message in front of people without them even clicking through to

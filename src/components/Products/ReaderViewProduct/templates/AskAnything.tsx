@@ -112,19 +112,21 @@ const AskAnything = ({ id, productData }: SectionComponentProps) => {
                         : 'Already signed in? Click a prompt to try it.'}
                 </p>
             )}
-            <ToggleGroup
-                title="View"
-                hideTitle
-                value={tab}
-                onValueChange={(value) => {
-                    if (value === 'prompts' || value === 'tools') setTab(value)
-                }}
-                options={[
-                    { label: 'Example prompts', value: 'prompts', default: true },
-                    { label: 'MCP tools', value: 'tools' },
-                ]}
-                className="mb-4 max-w-sm"
-            />
+            {productTools.length > 0 && (
+                <ToggleGroup
+                    title="View"
+                    hideTitle
+                    value={tab}
+                    onValueChange={(value) => {
+                        if (value === 'prompts' || value === 'tools') setTab(value)
+                    }}
+                    options={[
+                        { label: 'Example prompts', value: 'prompts', default: true },
+                        { label: 'MCP tools', value: 'tools' },
+                    ]}
+                    className="mb-4 max-w-sm"
+                />
+            )}
             <div className="@container bg-primary rounded shadow-2xl p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
                 <div className="flex-1 min-w-0 w-full">
                     {tab === 'prompts' && (

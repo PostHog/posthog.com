@@ -117,6 +117,8 @@ export default function RichText({
     cta = React.ReactNode,
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
+    const previewPane = useRef<HTMLDivElement>(null)
+    const [editorHeight, setEditorHeight] = useState<number>()
     const [value, setValue] = useState(initialValue ?? '')
     const [imageLoading, setImageLoading] = useState(false)
     const [showPreview, setShowPreview] = useState(false)
@@ -138,6 +140,13 @@ export default function RichText({
         '@': mentions || references || inForumPost,
         '#': references || inForumPost,
         ':': true,
+    }
+
+    const changePreview = (nextPreview: boolean) => {
+        if (nextPreview === showPreview) return
+        const activePane = showPreview ? previewPane.current : textarea.current
+        if (activePane) setEditorHeight(activePane.offsetHeight)
+        setShowPreview(nextPreview)
     }
 
     const onDrop = useCallback(
@@ -359,7 +368,7 @@ export default function RichText({
                                         icon={<Edit />}
                                         iconClassName="size-5 justify-center items-center flex"
                                         tooltip="Edit"
-                                        onClick={() => setShowPreview(false)}
+                                        onClick={() => changePreview(false)}
                                         active={!showPreview}
                                     />
                                 </li>
@@ -390,7 +399,7 @@ export default function RichText({
                                             </svg>
                                         }
                                         tooltip="Preview"
-                                        onClick={() => setShowPreview(true)}
+                                        onClick={() => changePreview(true)}
                                         active={showPreview}
                                         iconClassName="size-5 justify-center items-center flex"
                                     />
@@ -400,20 +409,30 @@ export default function RichText({
                     </ul>
                 </div>
                 {showPreview ? (
-                    <div className="bg-primary text-primary text-base h-[200px] px-3 py-2 resize-none w-full outline-none focus:ring-0 overflow-auto border border-primary border-t-0">
-                        <Markdown
-                            transformImageUri={(fakeImagePath) => {
-                                const objectURL = values.images.find(
-                                    (image) => image.fakeImagePath === fakeImagePath
-                                )?.objectURL
-                                return objectURL || fakeImagePath
-                            }}
+                    <div key="preview" className="border border-primary border-t-0 rounded-b">
+                        <div
+                            ref={previewPane}
+                            style={{ height: editorHeight }}
+                            className="bg-primary text-primary text-base h-[200px] min-h-40 px-3 py-2 resize-y w-full outline-none focus:ring-0 overflow-auto rounded-b"
                         >
-                            {value}
-                        </Markdown>
+                            <Markdown
+                                transformImageUri={(fakeImagePath) => {
+                                    const objectURL = values.images.find(
+                                        (image) => image.fakeImagePath === fakeImagePath
+                                    )?.objectURL
+                                    return objectURL || fakeImagePath
+                                }}
+                            >
+                                {value}
+                            </Markdown>
+                        </div>
                     </div>
                 ) : (
-                    <div ref={suggestionContainerRef} className="relative border border-primary border-t-0 rounded-b">
+                    <div
+                        key="edit"
+                        ref={suggestionContainerRef}
+                        className="relative border border-primary border-t-0 rounded-b"
+                    >
                         <AnimatePresence>
                             {trigger && (
                                 <SuggestionMenu
@@ -431,6 +450,7 @@ export default function RichText({
                             <label className="text-sm opacity-60 block font-medium mb-1">{label}</label>
                         )}
                         <OSTextarea
+                            style={editorHeight === undefined ? undefined : { height: editorHeight, maxHeight: 'none' }}
                             onPaste={handlePaste}
                             disabled={imageLoading}
                             autoFocus={autoFocus}

@@ -6,12 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-to-measure-product-market-fit/pmf-guide.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
-  - Product analytics
-  - Product metrics
-  - Product-market fit
-  - Product engineers
+  - Finding product-market fit
 crosspost:
   - Product engineers
   - Blog

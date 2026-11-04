@@ -638,6 +638,7 @@ const DrawerAction = ({ feature }: { feature: EarlyAccessFeature }): JSX.Element
     const isAlpha = feature.stage === 'alpha'
     return (
         <SurveySignup
+            key={surveyId}
             surveyId={surveyId}
             surveyQuestionId={surveyQuestionId}
             flagKey={feature.stage === 'concept' ? feature.flagKey : undefined}

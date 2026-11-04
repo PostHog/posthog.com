@@ -1,0 +1,184 @@
+---
+title: Winston Logs installation
+platformLogo: nodejs
+showStepsToc: true
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import LogsNextSteps from './_snippets/logs-next-steps.mdx'
+
+Send your existing [Winston](https://github.com/winstonjs/winston) logs to PostHog with the OpenTelemetry Winston instrumentation. You don't need to change your logger calls. Requires Winston v3.
+
+<Steps>
+
+<Step title="Install OpenTelemetry packages" badge="required">
+
+```bash
+npm install @opentelemetry/sdk-node @opentelemetry/exporter-logs-otlp-http @opentelemetry/sdk-logs @opentelemetry/resources @opentelemetry/instrumentation-winston @opentelemetry/winston-transport
+```
+
+The instrumentation only sends logs when `@opentelemetry/winston-transport` is installed.
+
+</Step>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal API key (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings).
+
+</Step>
+
+<Step title="Create an instrumentation file" badge="required">
+
+Create an `instrumentation.js` file. It starts the OpenTelemetry SDK and tells it to send every Winston log to PostHog.
+
+```javascript file=instrumentation.js
+const { NodeSDK } = require('@opentelemetry/sdk-node');
+const { OTLPLogExporter } = require('@opentelemetry/exporter-logs-otlp-http');
+const { BatchLogRecordProcessor } = require('@opentelemetry/sdk-logs');
+const { resourceFromAttributes } = require('@opentelemetry/resources');
+const { WinstonInstrumentation } = require('@opentelemetry/instrumentation-winston');
+
+const sdk = new NodeSDK({
+  resource: resourceFromAttributes({
+    'service.name': 'my-node-service',
+  }),
+  logRecordProcessors: [
+    new BatchLogRecordProcessor({
+      exporter: new OTLPLogExporter({
+        url: '<ph_client_api_host>/i/v1/logs',
+        headers: {
+          'Authorization': 'Bearer <ph_project_token>'
+        }
+      })
+    })
+  ],
+  instrumentations: [new WinstonInstrumentation()]
+});
+
+sdk.start();
+
+// Send buffered logs before the process exits
+process.on('SIGTERM', () => {
+  sdk.shutdown().finally(() => process.exit(0));
+});
+```
+
+If your app already handles `SIGTERM` (for example, to drain open requests), don't add a second handler. Export `sdk` and call `await sdk.shutdown()` at the end of your existing shutdown code instead.
+
+</Step>
+
+<Step title="Load the instrumentation before your app" badge="required">
+
+The instrumentation must load before your app imports `winston`. Otherwise it can't patch Winston and no logs are sent. Use the `--require` flag when you start your app:
+
+```bash
+node --require ./instrumentation.js app.js
+```
+
+If you can't change the start command (for example, on a hosting platform), set `NODE_OPTIONS` instead:
+
+```bash
+NODE_OPTIONS="--require ./instrumentation.js" npm start
+```
+
+**If your app uses ES modules**
+
+`--require` doesn't patch `import` statements. Install the OpenTelemetry instrumentation package:
+
+```bash
+npm install @opentelemetry/instrumentation
+```
+
+Name the file `instrumentation.mjs`, change the `require` calls to `import` statements, and register the OpenTelemetry loader hook before you start the SDK:
+
+```javascript file=instrumentation.mjs
+import { register } from 'node:module';
+// ...the same imports as instrumentation.js
+
+register('@opentelemetry/instrumentation/hook.mjs', import.meta.url);
+
+// ...the same SDK setup as instrumentation.js
+```
+
+Then start your app with `--import`:
+
+```bash
+node --import ./instrumentation.mjs app.js
+```
+
+</Step>
+
+<Step title="Use your Winston logger" badge="required">
+
+Keep using Winston as before. Your existing transports still work, and a copy of each log goes to PostHog:
+
+```javascript
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  defaultMeta: { service: 'checkout' },
+  transports: [new winston.transports.Console()],
+});
+
+logger.info('Server started');
+logger.warn('Payment retry', { userId: 'user_123', retries: 3 });
+logger.error('Query failed', new Error('Database connection failed'));
+```
+
+PostHog receives each Winston record like this:
+
+| Winston | PostHog Logs |
+| --- | --- |
+| Message | Log body |
+| Level (`info`, `warn`, `error`, etc.) | Severity |
+| Metadata, `defaultMeta`, and child logger fields | Log attributes |
+| `Error` objects | Error message appended to the body, a `stack` attribute, and `exception.type`, `exception.message`, and `exception.stacktrace` attributes |
+
+Logs below the logger's `level` are not sent. In the example above, `logger.debug()` calls don't reach PostHog.
+
+To [link logs to a person and their session replay](/docs/logs/link-session-replay), add the `posthogDistinctId` and `sessionId` fields. A child logger adds them to every log in a request:
+
+```javascript
+const requestLogger = logger.child({
+  posthogDistinctId: userId,
+  sessionId: sessionId,
+});
+
+requestLogger.info('Checkout completed');
+```
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once everything is configured, test that logs are flowing into PostHog:
+
+1. Start your app with the instrumentation loaded and trigger a log
+2. Check the PostHog Logs interface for your log entries
+3. Verify the logs appear in your project
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
+
+## Troubleshooting
+
+**Logs not appearing in PostHog**
+
+1. Check that `@opentelemetry/winston-transport` is installed. Without it, the instrumentation doesn't send logs.
+2. Make sure the instrumentation file loads before `winston`. If your app uses ES modules, you need the `--import` flag and the loader hook.
+3. Check your Winston version. Log sending requires Winston v3.
+4. The SDK sends logs in batches, so a short-lived script that ends on its own loses the last batch. Add `module.exports = sdk;` to `instrumentation.js` and call `await require('./instrumentation').shutdown()` before the script ends.
+
+For general Logs troubleshooting (authentication, connection issues, format problems), see the [Logs troubleshooting guide](/docs/logs/troubleshooting).

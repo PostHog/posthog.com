@@ -2,7 +2,7 @@
 title: How Qred Bank ditched four separate tools for one source of truth
 customer: Qred
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/dimension_56cccccb2c.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/Qred_1920x1080_a69826a6de.png
 date: 2025-08-26
 ---
 

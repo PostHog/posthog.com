@@ -9,6 +9,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/mr_potato_hog_83221a5307.png
 featuredImageType: full
+ogImage: generated
 category: Blog
 tags:
   - AI

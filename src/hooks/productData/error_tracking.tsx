@@ -16,7 +16,7 @@ import {
     IconWarning,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
-import { applications, topFeatures } from './error_tracking/slides'
+import { applications, keyFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
 
 export const errorTracking = {
@@ -32,9 +32,9 @@ export const errorTracking = {
     pricingDescription:
         'Error Tracking is billed on $exception events ingested. You get 100k free every month, then pay for what you use – no per-seat charges.',
     seo: {
-        title: 'Error Tracking – Catch and fix issues faster with PostHog',
+        title: 'Error Tracking – Error monitoring and alerts | PostHog',
         description:
-            'Capture, monitor, and resolve exceptions with error tracking. Connect Product Analytics and Session Replay to ship confidently with full context.',
+            'Error monitoring with stack traces, issue grouping, and alerts. See the session replay behind every error. 100K exceptions free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     /**
@@ -72,11 +72,11 @@ export const errorTracking = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -113,6 +113,7 @@ export const errorTracking = {
     ],
     overview: {
         title: 'Track errors and resolve issues',
+        description: '"Show me new errors since the last deploy, ranked by users affected"',
         eli5: "Error Tracking captures exceptions from across your stack and turns them into issues you can prioritize, assign, and resolve. Because PostHog already knows what's happening in your product, every issue comes with the affected user's session replay, events, and properties attached – so you can see what went wrong instead of trying to reproduce it.",
         textColor: 'text-black', // tw
     },
@@ -327,7 +328,7 @@ export const errorTracking = {
             {
                 name: 'Sentry',
                 key: 'sentry',
-                link: '/blog/posthog-vs-sentry',
+                link: '/compare/posthog-vs-sentry',
             },
             {
                 name: 'Signoz',

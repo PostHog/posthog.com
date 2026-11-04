@@ -19,6 +19,14 @@ There are a few reasons why you might not be seeing any LLM events:
 - There might be a delay in the events being processed. You can check the status of our ingestion on the [PostHog status page](https://status.posthog.com/).
 - If you are in a serverless environment make sure you are calling `posthog.shutdown()` before ending the request.
 
+## Why can't I see traces from the Claude Platform?
+
+If you [export traces from the Claude Platform](/docs/ai-observability/installation/anthropic?tab=Claude+Platform), check the destination's **Delivery** column in the Claude Console:
+
+- **Failing with a 401:** the token is a personal API key. Use your project token, which starts with `phc_`.
+- **Healthy, but PostHog is empty:** check that the token comes from this project and that the destination's region matches your PostHog cloud. PostHog accepts any project token, so a mismatch doesn't show up as an error.
+- **Traces have no prompts or responses:** the destination uses **Metadata only**. Switch it to **Full content**. Organizations with a data-handling restriction, such as HIPAA, always export metadata only.
+
 ## Why does my generation show no output?
 
 The trace view shows **No output** when a generation event has no response content to render. When the event carries enough signal to explain the gap, a sentence appears under the box. Each sentence points at a different cause:

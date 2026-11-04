@@ -351,6 +351,7 @@ opacity-60
 opacity-75
 pb-48
 pb-72
+pl-7
 pl-[calc(1rem_+_0rem)]
 pl-[calc(1rem_+_1rem)]
 pl-[calc(1rem_+_2rem)]

@@ -138,7 +138,7 @@ export const logrocket = {
             available: false,
         },
         surveys: {
-            available: false,
+            available: true,
         },
         experiments: {
             available: false,
@@ -256,7 +256,7 @@ export const logrocket = {
             data_anonymization: true,
             gdpr_ready: true,
             hipaa_ready: true,
-            history_audit_logs: 'Professional plan',
+            history_audit_logs: 'Pro plan',
             role_based_access_control: true,
             saml_sso: true,
             soc2_certified: true,

@@ -1,0 +1,24 @@
+owner: product-analytics
+tags: [instrumentation, nodejs, identity]
+status: active
+
+checks:
+    - id: server-events-without-users
+      description: >-
+          Baseline: does an agent avoid a catch-all distinct ID and person processing
+          for events that aren't about a person? The agent gets no docs, so docs-read
+          shows which pages it finds on its own.
+      codebase_to_test: node-express
+      prompt: >-
+          Capture a PostHog event when a todo is created in the API in {folder}/. The
+          API has no user accounts.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              no-catch-all-distinct-id: >-
+                  Each capture uses a generated distinct ID, such as
+                  crypto.randomUUID(), not one shared constant such as "system",
+                  "backend", "server" or "anonymous".
+              no-person-processing: >-
+                  Every capture call sets $process_person_profile: false in its
+                  properties. Cite the file and line(s).
