@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/v1727786448/posthog.com/contents/header-mobile-app-metrics.jpg
 featuredImageType: full
+ogImage: generated
 tags:
   - Guides
   - Product metrics

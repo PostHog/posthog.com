@@ -32,13 +32,13 @@ In this comparison, we break down how PostHog and Hotjar stack up so you can dec
 
 ### 1. We're an all-in-one platform
 
-PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web analytics](/web-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM observability](/ai-observability), [workflows](/workflows), a [data warehouse](/data-warehouse), [data pipelines](/cdp), and more. It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
+PostHog goes beyond [replays](/session-replay) and [user surveys](/surveys) by integrating them with [product](/product-analytics) and [web analytics](/web-analytics), [feature flags](/feature-flags), [A/B testing](/experiments), [error tracking](/error-tracking), [LLM observability](/ai-observability), [workflows](/workflows), a [data warehouse](/data-warehouse), [data pipelines](/data-pipelines), and more. It's everything you need from a single app with a single contract. A _genuine_ single source of truth for your product and customer data.
 
 ### 2. It's a platform built for developers
 
 This means you get support from the engineers who _actually build the product_, [extensively documented APIs](/docs/api), and a [SQL query builder](/docs/data-warehouse/sql), so you can analyze data how you want. Our code, culture, and strategy are public [on GitHub](https://github.com/PostHog/posthog) and in our [public handbook](/handbook).
 
-And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/cdp) or [data warehouse](/data-warehouse) are ready to switch on whenever you need them.
+And as your needs grow, PostHog grows with you – advanced capabilities such as [a CDP](/data-pipelines) or [data warehouse](/data-warehouse) are ready to switch on whenever you need them.
 
 > Development teams at [Supabase](/customers/supabase), [Lovable](/customers/lovable), and [ElevenLabs](/customers/elevenlabs), and many more trust PostHog as they scale.
 
@@ -235,7 +235,7 @@ With PostHog, everything is on one bill with one pricing calculator. You can see
 
 ### Data sources
 
-PostHog has a [built-in data warehouse](/context-warehouse), so you can import, combine, and analyze data from multiple sources, and combine it with analytics events. This means you can [monitor deal counts](/tutorials/hubspot-reports) using data from Hubspot, [analyze gross revenue](/tutorials/stripe-reports) using Stripe data, and [track support ticket SLAs](/tutorials/zendesk-reports) using Zendesk data, all from within PostHog.
+PostHog has a [built-in data warehouse](/warehouse), so you can import, combine, and analyze data from multiple sources, and combine it with analytics events. This means you can [monitor deal counts](/tutorials/hubspot-reports) using data from Hubspot, [analyze gross revenue](/tutorials/stripe-reports) using Stripe data, and [track support ticket SLAs](/tutorials/zendesk-reports) using Zendesk data, all from within PostHog.
 
 <p>
 <ProductComparisonTable
@@ -321,7 +321,7 @@ Choosing between PostHog and Hotjar (now Contentsquare) depends on what you need
 - **PostHog** – Native [LLM observability](/ai-observability) for tracking model performance, token costs, and debugging AI interactions. Contentsquare doesn't offer AI observability.
 
 **For privacy-conscious and regulated organizations**
-- Both are SOC 2 certified, GDPR-ready, and CCPA-ready. **PostHog** is HIPAA-ready and offers EU hosting with raw data access via its [data warehouse](/context-warehouse). Contentsquare/Hotjar is not HIPAA-compliant, but they do offer EU hosting.
+- Both are SOC 2 certified, GDPR-ready, and CCPA-ready. **PostHog** is HIPAA-ready and offers EU hosting with raw data access via its [data warehouse](/warehouse). Contentsquare/Hotjar is not HIPAA-compliant, but they do offer EU hosting.
 
 **For early-stage startups**
 - **PostHog** – A single platform that scales from MVP to growth stage. The generous free tier includes 1 million analytics events, 5,000 web and 2,500 mobile replays, and 1,500 survey responses per month. [Startups can also qualify for $50k in free credits](/startups).
@@ -419,7 +419,7 @@ The top Hotjar alternatives in 2026 include:
 <details>
     <summary>Which is better for B2B SaaS – PostHog or Contentsquare?</summary>
 
-**PostHog** is generally better for B2B SaaS teams. It includes [group analytics](/docs/product-analytics/group-analytics) for account-level analysis, feature flags for enterprise rollouts, and a built-in [data warehouse](/context-warehouse) for connecting CRM data from Stripe, HubSpot, and Zendesk. Contentsquare is more oriented toward B2C e-commerce and high-traffic consumer websites.
+**PostHog** is generally better for B2B SaaS teams. It includes [group analytics](/docs/product-analytics/group-analytics) for account-level analysis, feature flags for enterprise rollouts, and a built-in [data warehouse](/warehouse) for connecting CRM data from Stripe, HubSpot, and Zendesk. Contentsquare is more oriented toward B2C e-commerce and high-traffic consumer websites.
 
 </details>
 

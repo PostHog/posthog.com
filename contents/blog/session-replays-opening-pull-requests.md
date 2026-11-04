@@ -2,6 +2,7 @@
 date: "2026-07-10"
 title: "Our session replays are opening their own pull requests"
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/Frame_144166_ae3d5191ba.png
+ogImage: generated
 author:
   - sara-miteva
 rootPage: /blog

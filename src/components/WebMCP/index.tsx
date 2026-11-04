@@ -9,7 +9,7 @@ import { algoliaIndexName, algoliaSearchClient } from 'lib/algoliaSearch'
 import { getMarkdownUrl } from 'components/MarkdownActions'
 import { buildWizardCommand } from 'components/PlatformInstall/buildCommand'
 import { MARKDOWN_CONTENT_PATHS, MCP_SERVER_URL, isMarkdownContentPath } from '../../constants'
-import { isSafeInternalPath } from 'lib/utils'
+import { isSafeInternalPath } from 'lib/internalPath'
 
 /**
  * Registers WebMCP tools on every page so a browser agent (Gemini in Chrome, and others as they

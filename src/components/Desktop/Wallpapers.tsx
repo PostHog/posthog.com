@@ -36,22 +36,45 @@ interface SceneImageProps {
     height: number
     className?: string
     imgClassName?: string
+    loading?: 'eager' | 'lazy'
+    fetchPriority?: 'high' | 'low' | 'auto'
+    /** Display slot. The browser uses this with `widths` to skip the full-size file. */
+    sizes?: string
+    widths?: number[]
 }
 
-const SceneImage = ({ src, width, height, className = '', imgClassName = '' }: SceneImageProps) => (
-    <div className={`inline-block ${className}`}>
-        <img
-            loading="lazy"
-            src={toResizedImageUrl(src, width)}
-            alt=""
-            width={width}
-            height={height}
-            draggable={false}
-            className={imgClassName}
-            style={{ aspectRatio: `${width} / ${height}` }}
-        />
-    </div>
-)
+const SceneImage = ({
+    src,
+    width,
+    height,
+    className = '',
+    imgClassName = '',
+    loading = 'lazy',
+    fetchPriority,
+    sizes,
+    widths,
+}: SceneImageProps) => {
+    const srcSet = widths?.map((w) => `${toResizedImageUrl(src, w)} ${w}w`).join(', ')
+    const fallbackWidth = widths ? widths[Math.floor(widths.length / 2)] : width
+
+    return (
+        <div className={`inline-block ${className}`}>
+            <img
+                loading={loading}
+                fetchPriority={fetchPriority}
+                src={toResizedImageUrl(src, fallbackWidth)}
+                srcSet={srcSet}
+                sizes={srcSet ? sizes : undefined}
+                alt=""
+                width={width}
+                height={height}
+                draggable={false}
+                className={imgClassName}
+                style={{ aspectRatio: `${width} / ${height}` }}
+            />
+        </div>
+    )
+}
 
 const Hogzilla = () => (
     <>
@@ -162,12 +185,18 @@ const KeyboardGarden = () => (
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_hedge_light_42c729131e.png"
                 width={1555}
                 height={1262}
+                loading="eager"
+                fetchPriority="high"
+                sizes="(min-width: 768px) 777px, 100vw"
+                widths={[480, 800, 1555]}
                 className={`col-start-1 row-start-1 opacity-100 dark:opacity-0 w-full max-w-full md:w-[777px] ${FADE_OPACITY}`}
             />
             <SceneImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_hedge_dark_b36706e924.png"
                 width={1555}
                 height={1262}
+                sizes="(min-width: 768px) 777px, 100vw"
+                widths={[480, 800, 1555]}
                 className={`col-start-1 row-start-1 opacity-0 dark:opacity-100 w-full max-w-full md:w-[777px] ${FADE_OPACITY}`}
             />
         </div>
