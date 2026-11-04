@@ -1,5 +1,5 @@
 ---
-title: "Events data retention is changing for new paid plans"
+title: "Updated data retention for new paid plans"
 date: 2026-11-05
 rootPage: /blog
 sidebar: Blog
