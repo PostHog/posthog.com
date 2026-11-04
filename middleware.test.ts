@@ -82,10 +82,18 @@ test('logs the served format and the Accept header for the log drain', async (t)
     for (const [url, headers, expected] of [
         [
             page,
-            { 'user-agent': 'Claude-User/1.0', 'x-vercel-ja4-digest': 't13d_test' },
-            { served_format: 'markdown', accept: '', ja4: 't13d_test' },
+            {
+                'user-agent': 'Claude-User/1.0',
+                'x-vercel-ja4-digest': 't13d_test',
+                'signature-agent': '"https://example.com"',
+            },
+            { served_format: 'markdown', accept: '', ja4: 't13d_test', signature_agent: '"https://example.com"' },
         ],
-        [page, { accept: 'text/html' }, { served_format: 'html', accept: 'text/html' }],
+        [
+            page,
+            { accept: 'text/html', 'sec-fetch-site': 'none' },
+            { served_format: 'html', accept: 'text/html', sec_fetch_site: 'none' },
+        ],
         [`${page}.md`, {}, { served_format: 'markdown', accept: '' }],
     ] as const) {
         log.mock.resetCalls()

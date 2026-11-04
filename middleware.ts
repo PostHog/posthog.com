@@ -35,6 +35,9 @@ export default async function middleware(request: Request): Promise<Response | u
             served_format: servedMarkdown ? 'markdown' : 'html',
             accept: request.headers.get('accept') || '',
             ja4: request.headers.get('x-vercel-ja4-digest') || undefined,
+            // Browsers send Sec-Fetch-Site; most HTTP clients do not, even with a browser user agent.
+            sec_fetch_site: request.headers.get('sec-fetch-site') || undefined,
+            signature_agent: request.headers.get('signature-agent') || undefined,
         })
     )
     return response

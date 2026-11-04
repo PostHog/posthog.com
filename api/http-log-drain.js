@@ -97,8 +97,8 @@ function servedFormatOf(message) {
         return {}
     }
     try {
-        const { served_format, accept, ja4 } = JSON.parse(text)
-        return { served_format, accept, ja4 }
+        const { served_format, accept, ja4, sec_fetch_site, signature_agent } = JSON.parse(text)
+        return { served_format, accept, ja4, sec_fetch_site, signature_agent }
     } catch {
         return {}
     }
@@ -144,6 +144,8 @@ function toEvent(log, salt) {
         vercel_timestamp_ms: log.timestamp,
         served_format: marker.served_format,
         accept: marker.accept,
+        sec_fetch_site: marker.sec_fetch_site,
+        signature_agent: marker.signature_agent,
 
         host: log.host,
         path: log.path,
