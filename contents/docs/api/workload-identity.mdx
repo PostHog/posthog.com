@@ -44,7 +44,7 @@ A few scopes can never be granted to a workload, because they would let a token 
 - `workload_trust_policy` and `workload_trust_policy_request`
 - `project:write`, which can rotate the project's secret token
 - `user:write`, which changes the account of the organization owner the token acts as
-- `task:write`, `conversation:write`, `signal_scout:write`, `business_knowledge:write` and `autoresearch:write`, which start agent runs with their own longer-lived tokens
+- `task:write`, `conversation:write`, `signal_scout:write`, `business_knowledge:write`, `autoresearch:write` and `hog_flow:write`, which start agent runs with their own longer-lived tokens (a workflow can create a task)
 - `streamlit_app`, which hands out a one-hour token for a running app
 - `webhook:write`, `batch_export:write` and `subscription:write`, which set up data feeds or emails that keep sending after the token expires
 - `sharing_configuration`, because a public sharing link keeps working after the token expires
