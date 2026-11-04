@@ -114,6 +114,7 @@ Requirements:
 - **`token_endpoint_auth_method`** must be `"private_key_jwt"` with an HTTPS `jwks_uri` if your app creates accounts. Your app then authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits). Publish your keys at the `jwks_uri` before you register. See [sign requests with a key](#sign-requests-with-a-key).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
+- The URL must be on a domain you control. PostHog doesn't accept metadata documents on throwaway hosts, and registration fails in the `metadata_document` check before PostHog fetches anything.
 
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
@@ -484,7 +485,7 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 | Field                             | Type   | Required | Description                                                                              |
 | --------------------------------- | ------ | -------- | ---------------------------------------------------------------------------------------- |
 | `id`                              | string | Yes      | Your unique request ID (for idempotency)                                                 |
-| `email`                           | string | Yes      | User's email address                                                                     |
+| `email`                           | string | Yes      | User's email address. Must be a valid address of at most 254 characters                  |
 | `name`                            | string | No       | User's full name                                                                         |
 | `client_id`                       | string | No       | Your CIMD metadata URL. PostHog reads it from the assertion's `sub` if you leave it out. If you send it, it must match. An unsigned request must include it. |
 | `client_assertion_type`           | string | Yes      | Always `urn:ietf:params:oauth:client-assertion-type:jwt-bearer`. See [when signing is required](#when-signing-is-required). |
@@ -508,6 +509,8 @@ curl -X POST https://us.posthog.com/api/agentic/provisioning/account_requests \
 ```
 
 The user receives a welcome email with a link to set their password and access their dashboard.
+
+PostHog runs the same risk checks on every new account as on its own signup form. If the checks block the email, the request returns a 403 `suspicious_attempt_blocked` and PostHog doesn't create the account.
 
 **Existing user response** (HTTP 200):
 
@@ -802,6 +805,7 @@ Common error codes:
 | `registration_failed` | 400 | [Registration](#register-your-app) did not complete. The `checks` array in the same response says which step failed |
 | `forbidden` | 403 | Partner not authorized for this action |
 | `access_blocked` | 403 | PostHog blocked this account |
+| `suspicious_attempt_blocked` | 403 | PostHog's signup risk checks blocked this email, so no account was created |
 | `expired` | 400 | Account request has expired |
 | `invalid_grant` | 400 | Authorization code is invalid or expired (token endpoint) |
 | `invalid_client` | 401 | Client authentication failed (token endpoint). See [assertion errors](#troubleshoot-assertion-errors) |
