@@ -1,5 +1,5 @@
 ---
-title: We made experiments queries 4x faster at 3x the volume
+title: We made Experiments queries 4x faster at 3x the volume
 date: 2026-11-04
 author:
   - juraj-majerik
