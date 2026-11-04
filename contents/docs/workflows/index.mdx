@@ -8,9 +8,13 @@ contentMaxWidthClass: max-w-5xl
 import { IconLaptop, IconMagic, IconBrackets, IconMegaphone, IconPalette, IconShieldLock } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
-Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to your users. You decide when a workflow is triggered, who it reaches, and what happens at each step – triggers, delays, audience splits, message sends, and PostHog actions.
+Workflows is how PostHog sends email and messages. It covers three jobs:
 
-Because workflows run on the same events and person properties you already send to PostHog, you can act on real product behavior instead of a separate marketing dataset. Any [real-time destination](/docs/data-pipelines/destinations) in PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and automation.
+- **[Transactional emails](/docs/workflows/transactional-emails):** password resets, receipts, and sign-in codes, sent from your code with one SDK call.
+- **[Broadcasts](/docs/workflows/broadcasts) and [drip campaigns](/docs/workflows/email-drip-campaign):** one email to an audience, or a sequence that starts when a person does something and follows up based on what they do next.
+- **Automations:** delays, branches, Slack posts, webhooks, and any [real-time destination](/docs/data-pipelines/destinations) as steps in the same [workflow builder](/docs/workflows/workflow-builder).
+
+Everything runs on the events and person properties you already send to PostHog, so there is no separate marketing dataset to sync. Every send lands on the person who received it, next to their events, replays, and flags.
 
 <OSButton variant="primary" asLink to="/docs/workflows/start-here">Get started</OSButton>
 
