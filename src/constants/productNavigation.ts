@@ -35,7 +35,7 @@ export const nonProductPages = {
         slug: 'mcp-analytics',
         url: '/docs/mcp-analytics',
         icon: 'IconPlug',
-        color: 'blue',
+        color: 'purple',
     },
 }
 
