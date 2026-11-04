@@ -154,8 +154,6 @@ These documents are available in the <PrivateLink url="https://drive.google.com/
  
 The full invoice amount is due. Our terms say that taxes shall not be deducted from or set off against the fees owed to PostHog.
 
-Do not add a tax line item to the invoice for a customer who withholds tax, and do not issue a credit memo to reverse one. The invoice shows only the amount that the customer owes us.
-
 If a customer withholds tax, we treat it as a short payment. The unpaid balance stays open on the invoice and goes through the [failed/late payments process](#failedlate-payments).
 
 
