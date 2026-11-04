@@ -80,7 +80,11 @@ test('logs the served format and the Accept header for the log drain', async (t)
     const log = t.mock.method(console, 'log', () => {})
 
     for (const [url, headers, expected] of [
-        [page, { 'user-agent': 'Claude-User/1.0' }, { served_format: 'markdown', accept: '' }],
+        [
+            page,
+            { 'user-agent': 'Claude-User/1.0', 'x-vercel-ja4-digest': 't13d_test' },
+            { served_format: 'markdown', accept: '', ja4: 't13d_test' },
+        ],
         [page, { accept: 'text/html' }, { served_format: 'html', accept: 'text/html' }],
         [`${page}.md`, {}, { served_format: 'markdown', accept: '' }],
     ] as const) {

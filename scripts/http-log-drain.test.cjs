@@ -62,14 +62,18 @@ test('maps a line to the same $http_log shape as the source webhook template', (
 })
 
 test('reads the served format and Accept header the middleware logs', () => {
-    const marker = JSON.stringify({ served_format: 'markdown', accept: 'text/markdown' })
+    const marker = JSON.stringify({ served_format: 'markdown', accept: 'text/markdown', ja4: 't13d_test' })
     for (const [message, expected] of [
-        [`${marker}\n`, { served_format: 'markdown', accept: 'text/markdown' }],
-        ['{"served_format": oops', { served_format: undefined, accept: undefined }],
-        ['GET /docs 200', { served_format: undefined, accept: undefined }],
+        [`${marker}\n`, { served_format: 'markdown', accept: 'text/markdown', ja4_digest: 't13d_test' }],
+        ['{"served_format": oops', { served_format: undefined, accept: undefined, ja4_digest: undefined }],
+        ['GET /docs 200', { served_format: undefined, accept: undefined, ja4_digest: undefined }],
     ]) {
         const { properties } = toEvent({ ...log('a'), source: 'edge-middleware', message }, 'salt')
-        assert.deepEqual({ served_format: properties.served_format, accept: properties.accept }, expected, message)
+        assert.deepEqual(
+            { served_format: properties.served_format, accept: properties.accept, ja4_digest: properties.ja4_digest },
+            expected,
+            message
+        )
     }
 })
 

@@ -97,8 +97,8 @@ function servedFormatOf(message) {
         return {}
     }
     try {
-        const { served_format, accept } = JSON.parse(text)
-        return { served_format, accept }
+        const { served_format, accept, ja4 } = JSON.parse(text)
+        return { served_format, accept, ja4 }
     } catch {
         return {}
     }
@@ -113,6 +113,7 @@ function toEvent(log, salt) {
     const path = proxy.path ?? log.path ?? ''
     const query = queryParamsOf(path)
     const message = log.message
+    const marker = servedFormatOf(message)
 
     const properties = {
         $process_person_profile: false,
@@ -141,7 +142,8 @@ function toEvent(log, salt) {
         message: typeof message === 'string' ? message.slice(0, MAX_MESSAGE_LENGTH) : message,
         message_truncated: typeof message === 'string' && message.length > MAX_MESSAGE_LENGTH,
         vercel_timestamp_ms: log.timestamp,
-        ...servedFormatOf(message),
+        served_format: marker.served_format,
+        accept: marker.accept,
 
         host: log.host,
         path: log.path,
@@ -159,7 +161,7 @@ function toEvent(log, salt) {
         trace_id: log.traceId ?? log['trace.id'],
         span_id: log.spanId ?? log['span.id'],
         ja3_digest: log.ja3Digest,
-        ja4_digest: log.ja4Digest,
+        ja4_digest: log.ja4Digest ?? marker.ja4,
 
         proxy_timestamp_ms: proxy.timestamp,
         proxy_method: proxy.method,

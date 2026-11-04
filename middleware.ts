@@ -27,13 +27,14 @@ const USER_AGENT_FETCHERS_REGEX = new RegExp(`\\b(?:${USER_AGENT_FETCHERS.join('
 
 export default async function middleware(request: Request): Promise<Response | undefined> {
     const response = await negotiate(request)
-    // The log drain carries no request headers, so this line is the only record of the Accept
-    // header and of the format the request got. `api/http-log-drain.js` reads it back.
+    // The log drain carries no request headers, and middleware lines have no TLS fingerprint, so
+    // this line is the only record of the Accept header, the JA4 digest and the format served. `api/http-log-drain.js` reads it back.
     const servedMarkdown = response !== undefined || new URL(request.url).pathname.endsWith('.md')
     console.log(
         JSON.stringify({
             served_format: servedMarkdown ? 'markdown' : 'html',
             accept: request.headers.get('accept') || '',
+            ja4: request.headers.get('x-vercel-ja4-digest') || undefined,
         })
     )
     return response
