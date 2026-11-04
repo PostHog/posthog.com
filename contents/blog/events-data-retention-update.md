@@ -26,7 +26,6 @@ The table below shows how retention is changing by plan:
 
 We’ve heard from many of you who want to reduce your data retention period for compliance reasons. Others were surprised to learn we keep your data for 7 years. That prompted us to take a closer look at our policy, and we found that:
 - 2 years is the industry standard. Most non-enterprise plans keep event data for 2 years.
-- Compliance requirements are usually shorter. The retention periods required by the compliance standards that apply to many of you are typically well under 7 years.
 - Old data rarely gets queried. The vast majority of queries run on data less than a year old.
 - Storing 7 years of data is expensive. We’ve been paying to store data that most of you weren’t using and didn’t need us to keep.
 
