@@ -19,33 +19,34 @@ const toolSection = (categories: BriefToolCategory[] | null): string => {
         return 'Full list: https://posthog.com/docs/model-context-protocol/tools'
     }
     const total = categories.reduce((sum, category) => sum + category.tools.length, 0)
-    const lines = categories.map((category) => `- ${category.name} (${category.tools.length})`).join('\n')
-    return `${total} tools in ${categories.length} categories:
-
-${lines}
+    const names = categories.map((category) => category.name).join(', ')
+    return `${total} tools in ${categories.length} categories: ${names}.
 
 Every tool, with its description: https://posthog.com/docs/model-context-protocol/tools`
 }
 
 export const buildMcpBrief = (categories: BriefToolCategory[] | null, builtOn?: string): string => `# PostHog MCP server
 
-> For AI agents that act for a user. This is the plain version of https://posthog.com/mcp. No adjectives.${
+> For AI agents that act for a user. This is the plain version of https://posthog.com/mcp.${
     builtOn ? ` Built ${builtOn}` : ' Built'
 } from the PostHog docs and the live tool schema. If a detail here conflicts with https://posthog.com/docs/model-context-protocol/faq.md, the FAQ is correct.
 
 ## What to do for your user
 
-- **They want PostHog connected to this client:** use the install commands below, or the page for their client under Clients. The user must log in to PostHog to approve OAuth. You cannot do that step for them. If the client does not support OAuth, ask the user for a personal API key (https://app.posthog.com/settings/user-api-keys?preset=mcp_server, "MCP Server" preset).
+- **They want PostHog connected to this client:** use the install commands below, or the page for their client under Clients. Ask the user before you run a command on their machine. The user must log in to PostHog to approve OAuth. You cannot do that step for them. If the client does not support OAuth, ask the user for a personal API key (https://app.posthog.com/settings/user-api-keys?preset=mcp_server, "MCP Server" preset).
 - **They want an answer from PostHog, or a change in it:** connect first, then use the tools. In CLI mode, call \`exec\` to list, search, inspect, and call the other tools. Example prompts: https://posthog.com/docs/model-context-protocol/use-cases.md
+- **They want PostHog installed in their codebase:** connect first, then use the tools in the Wizard category. In CLI mode, find them with \`exec\`. A cloud wizard run makes the code changes and opens a pull request. Steps and example prompts: https://posthog.com/docs/model-context-protocol/use-cases.md
+- **They want their team's PostHog skills:** the server exposes a skills store. \`skill-list\` returns the name and description of each skill. \`skill-get\` loads one skill when the task needs it. Details: https://posthog.com/docs/skills.md
 - **They want to know if this server fits:** read Summary, When it fits, When it does not fit, and Limits.
 - **A call failed:** \`429\` means the rate limit. Read Limits. Other setup problems are in https://posthog.com/docs/model-context-protocol/faq.md
 
 ## Summary
 
-- **What it is:** A hosted MCP server. It gives an agent read and write access to a PostHog project: product analytics, web analytics, session replay, feature flags, experiments, error tracking, logs, surveys, SQL, the data warehouse, CDP destinations, support tickets, and more.
+- **What it is:** A hosted MCP server. It gives an agent read and write access to a PostHog project: product analytics, web analytics, session replay, feature flags, experiments, error tracking, logs, surveys, SQL, the data warehouse, data pipeline destinations, support tickets, and more.
 - **Endpoint:** \`https://mcp.posthog.com/mcp\` (streamable HTTP). You do not host anything.
-- **Auth:** OAuth (recommended), or a personal API key with the "MCP Server" preset as a bearer token. Enterprise plans can use enterprise-managed authorization (ID-JAG) through Okta, Entra ID, or another IdP.
+- **Auth:** OAuth (recommended), or a personal API key with the "MCP Server" preset as a bearer token. The Scale or Enterprise platform add-on can use enterprise-managed authorization (ID-JAG) through Okta, Entra ID, or another IdP.
 - **Price:** Connecting and calling tools is free. The PostHog usage that a query consumes is billed as normal. Some tools run LLMs internally and count as PostHog AI spend. Those tools appear only when the organization enables AI data processing.
+- **Interactive results:** On clients that support MCP apps, CLI mode also ships a \`render-ui\` tool that renders interactive visualizations on demand.
 - **Source code:** https://github.com/PostHog/posthog/tree/master/services/mcp
 
 ## When it fits
@@ -97,8 +98,10 @@ It shows the share of calls, error rates, and p50 and p95 latency, by client, mo
 
 Any client that speaks MCP works. Setup steps for each:
 
+- PostHog Desktop: use the wizard below. About the app: https://posthog.com/desktop.md
 - Claude Code: https://posthog.com/docs/model-context-protocol/claude-code.md
-- Claude Desktop: https://posthog.com/docs/model-context-protocol/claude-desktop.md
+- Claude Desktop: https://posthog.com/docs/model-context-protocol/claude-desktop.md (also in the Claude connector directory: https://claude.ai/directory/connectors/posthog)
+- ChatGPT: https://chatgpt.com/plugins/plugin_asdk_app_699caef2d680819188727b0ddbb349dd
 - Cursor: https://posthog.com/docs/model-context-protocol/cursor.md
 - Codex: https://posthog.com/docs/model-context-protocol/codex.md
 - VS Code: https://posthog.com/docs/model-context-protocol/vscode.md
@@ -106,9 +109,17 @@ Any client that speaks MCP works. Setup steps for each:
 - Zed: https://posthog.com/docs/model-context-protocol/zed.md
 - Other clients: https://posthog.com/docs/model-context-protocol.md
 
+Plugin: the PostHog AI plugin adds the MCP server and PostHog skills to Claude Code, Codex, Cursor, and Gemini CLI: https://github.com/PostHog/ai-plugin
+
+Platforms that connect to PostHog through the MCP server:
+
+- Lovable: https://posthog.com/docs/integrations/lovable.md
+- Replit: https://posthog.com/docs/integrations/replit.md
+- v0: https://posthog.com/docs/integrations/v0.md
+
 ## Install
 
-Wizard (supported clients):
+Wizard. It adds the server to PostHog Desktop, Cursor, Claude Code, Claude Desktop, Codex, VS Code, and Zed. It can stop for input. If you cannot answer prompts in a terminal, ask the user to run it, or use the command for their client.
 
 \`\`\`bash
 npx @posthog/wizard mcp add
@@ -120,7 +131,7 @@ Claude Code:
 claude mcp add --transport http posthog https://mcp.posthog.com/mcp -s user
 \`\`\`
 
-Manual config with an API key:
+Manual config with an API key. This is the Cursor format (\`.cursor/mcp.json\`). Other clients use a different format: see the page for the client under Clients.
 
 \`\`\`json
 {

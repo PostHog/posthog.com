@@ -15,7 +15,6 @@ A component for mentioning PostHog small teams in MDX/Markdown content.
 -   `className` (string, optional): Additional CSS classes
 -   `variant` (`'pill' | 'crest'`, optional, default `'pill'`): See "Crest variant" below
 -   `crestClassName` (string, optional): Sizing for the large crest when `variant="crest"`
--   `crestOnly` (boolean, optional, default `false`): With `variant="crest"`, show only the crest. The team name stays for screen readers
 
 ## Features
 

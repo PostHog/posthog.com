@@ -4,14 +4,14 @@ import { motion, useReducedMotion } from 'framer-motion'
 import {
     IconAI,
     IconCheck,
+    IconArrowRight,
     IconDatabase,
-    IconEye,
     IconFlask,
     IconGraph,
     IconLightBulb,
-    IconLock,
     IconPieChart,
-    IconPulse,
+    IconShieldPeople,
+    IconPlug,
     IconQuestion,
     IconRewindPlay,
     IconSparkles,
@@ -26,14 +26,23 @@ import Link from 'components/Link'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import ReaderView from 'components/ReaderView'
-import { InlineCode, SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
+import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SlotMachineText from 'components/SlotMachineText'
 import SmallTeam from 'components/SmallTeam'
-import TeamMember from 'components/TeamMember'
-import { StickerCrown } from 'components/Stickers/Stickers'
+import { StickerAi } from 'components/Stickers/Stickers'
+import {
+    IconClaudeCode,
+    IconGemini,
+    IconOpenAI,
+    LogomarkCodex,
+    LogomarkCursor,
+    LogomarkVSCode,
+    LogomarkWindsurf,
+    LogomarkZed,
+} from 'components/OSIcons/Icons'
 import posthogIcon from '../../images/posthog-icon-white.svg'
 import { buildMcpBrief } from './agentBrief'
 import WaitingRoom from './WaitingRoom'
@@ -95,7 +104,7 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
     )
     return (
         <section id="overview" className="scroll-mt-20 not-prose w-full border-b border-primary pb-8">
-            <div className="grid grid-cols-[minmax(0,1fr)_8rem] items-center gap-x-4 gap-y-4 @lg/reader-content:grid-cols-[minmax(0,1fr)_10rem] @lg/reader-content:gap-x-6 @xl/reader-content:grid-cols-[minmax(0,1fr)_12rem] @xl/reader-content:gap-x-8 @2xl/reader-content:grid-cols-[minmax(0,1fr)_16rem] @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-x-10">
+            <div className="grid grid-cols-[minmax(0,1fr)_6rem] items-center gap-x-4 gap-y-4 @lg/reader-content:grid-cols-[minmax(0,1fr)_8rem] @lg/reader-content:gap-x-6 @xl/reader-content:grid-cols-[minmax(0,1fr)_10rem] @xl/reader-content:gap-x-8 @2xl/reader-content:grid-cols-[minmax(0,1fr)_12rem] @3xl/reader-content:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] @3xl/reader-content:gap-x-10">
                 <div className="col-span-full min-w-0 border-b border-primary pb-3 @lg/reader-content:col-span-1">
                     <SlotMachineText
                         className="text-lg font-bold tracking-tight @sm/reader-content:text-xl @xl/reader-content:text-2xl"
@@ -138,8 +147,8 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
                     PostHog, <span className="whitespace-nowrap bg-blue/10 p-0.5 font-bold text-blue">headless</span>
                 </h1>
                 <p className="col-span-full m-0 text-base @lg/reader-content:col-span-1 @xl/reader-content:text-lg">
-                    Your PostHog data, wherever your agent works. Query analytics, debug errors, roll out flags, and run
-                    experiments from any MCP-compatible client, without opening a browser tab.
+                    The PostHog MCP pulls your product data into wherever your agents work. Query analytics, debug
+                    errors, roll out flags, and run experiments from any MCP-compatible client.
                 </p>
                 <MCPInstallCTA className="hidden max-w-md @lg/reader-content:flex" showDesktopLink={false} />
                 <div className="col-span-full @lg/reader-content:hidden">
@@ -153,8 +162,10 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
     )
 }
 
-const Highlight = ({ children }: { children: React.ReactNode }) => (
-    <span className="whitespace-nowrap bg-blue/10 p-0.5 font-bold text-blue">{children}</span>
+const Highlight = ({ children, red }: { children: React.ReactNode; red?: boolean }) => (
+    <span className={`whitespace-nowrap p-0.5 font-bold ${red ? 'bg-red/10 text-red' : 'bg-blue/10 text-blue'}`}>
+        {children}
+    </span>
 )
 
 type IconItem = {
@@ -165,15 +176,23 @@ type IconItem = {
 }
 
 function IconChipRow({ items }: { items: IconItem[] }): JSX.Element {
+    const rows = Array.from({ length: Math.ceil(items.length / 2) }, (_, i) => items.slice(i * 2, i * 2 + 2))
     return (
-        <div className="grid grid-cols-1 gap-x-6 gap-y-4 @sm:grid-cols-2">
-            {items.map(({ Icon, color, name, description }) => (
-                <div key={name}>
-                    <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-                        <Icon className={`size-4 shrink-0 ${color}`} />
-                        <span>{name}</span>
-                    </div>
-                    <p className="mb-0 mt-0.5 text-sm text-secondary">{description}</p>
+        <div className="divide-y divide-primary">
+            {rows.map((row) => (
+                <div
+                    key={row[0].name}
+                    className="grid grid-cols-1 divide-y divide-primary py-5 first:pt-0 last:pb-0 @sm:grid-cols-2 @sm:gap-x-10 @sm:divide-y-0"
+                >
+                    {row.map(({ Icon, color, name, description }) => (
+                        <div key={name} className="py-5 first:pt-0 last:pb-0 @sm:py-0">
+                            <div className="flex items-center gap-2 text-base font-semibold text-primary">
+                                <Icon className={`size-5 shrink-0 ${color}`} />
+                                <span>{name}</span>
+                            </div>
+                            <p className="mb-0 mt-1 text-sm leading-relaxed text-secondary">{description}</p>
+                        </div>
+                    ))}
                 </div>
             ))}
         </div>
@@ -182,123 +201,84 @@ function IconChipRow({ items }: { items: IconItem[] }): JSX.Element {
 
 const whatItIs: IconItem[] = [
     {
+        Icon: IconToggle,
+        color: 'text-green',
+        name: 'Every product, read and write',
+        description:
+            'One server covers every PostHog product, and your agent can ship changes, like a feature flag, from a prompt.',
+    },
+    {
+        Icon: IconShieldPeople,
+        color: 'text-purple',
+        name: 'Scale and Enterprise add-on',
+        description: (
+            <>
+                Approve change requests from your agent, and manage access with{' '}
+                <Link
+                    to="/docs/model-context-protocol/enterprise-managed-authorization"
+                    state={{ newWindow: true }}
+                    className="font-semibold underline"
+                >
+                    enterprise-managed authorization
+                </Link>
+                .
+            </>
+        ),
+    },
+    {
+        Icon: IconGraph,
+        color: 'text-orange',
+        name: 'Uses your metric definitions',
+        description: (
+            <>
+                Ask for MRR, and get the real thing from your{' '}
+                <Link to="/docs/semantic-layer" state={{ newWindow: true }} className="font-semibold underline">
+                    semantic layer
+                </Link>
+                . Every session gets the same answer.
+            </>
+        ),
+    },
+    {
         Icon: IconSparkles,
         color: 'text-blue',
         name: 'Light on context',
-        description: (
-            <>
-                Most clients get one <InlineCode>exec</InlineCode> tool and look up the rest on demand, so the tool list
-                stays out of the context window.
-            </>
-        ),
-    },
-    {
-        Icon: IconEye,
-        color: 'text-green',
-        name: 'Read-only if you want it',
-        description: (
-            <>
-                Add <InlineCode>?readonly=true</InlineCode> and every write tool goes away.
-            </>
-        ),
-    },
-    {
-        Icon: IconCheck,
-        color: 'text-yellow',
-        name: 'Free to connect',
-        description: (
-            <>
-                Connecting and calling tools costs nothing. The few tools that run LLMs need{' '}
-                <Link to="/docs/posthog-ai/allow-access" className="font-semibold underline">
-                    AI data processing
-                </Link>{' '}
-                and add PostHog AI spend.
-            </>
-        ),
-    },
-    {
-        Icon: IconLock,
-        color: 'text-purple',
-        name: 'Pin it to a project',
-        description: "Lock a connection to one organization or project, so the agent can't switch.",
+        description: 'In most clients, the agent only looks tools up as it needs them (tokenminning is tokenwinning).',
     },
 ]
 
 function WhatIsMCP(): JSX.Element {
     return (
         <section id="what-is-mcp" className="scroll-mt-20 not-prose">
-            <div className="grid gap-4 @3xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-                <div className="@container flex min-w-0 flex-col rounded border border-primary bg-primary p-4 @xl:p-6">
-                    <div className="mb-5 flex items-start gap-4">
-                        <div className="min-w-0 flex-1">
-                            <h2 className="mb-3 mt-0 text-2xl font-bold leading-tight">
-                                What is the <Highlight>PostHog MCP</Highlight>?
-                            </h2>
-                            <p className="m-0 text-sm text-secondary @xl:text-base">
-                                Your PostHog data, wherever your agent works. Analytics, errors, flags, experiments,
-                                surveys, and SQL sit behind one hosted MCP endpoint, so any MCP client can read and
-                                change them: Claude, Cursor, Codex, VS Code, Windsurf, Zed, and more.
-                            </p>
-                        </div>
-                        <SmallTeam
-                            slug="context-and-mcp"
-                            variant="crest"
-                            crestOnly
-                            className="shrink-0"
-                            crestClassName="size-24 @xl:size-32"
-                        />
-                    </div>
-                    <IconChipRow items={whatItIs} />
-                    <figure className="m-0 mt-6 flex flex-col items-center">
+            <div className="@container rounded border border-primary bg-primary p-6 @xl:p-8">
+                <div className="grid items-center gap-x-10 gap-y-8 @3xl:grid-cols-[minmax(0,1fr)_18rem]">
+                    <figure className="m-0 flex flex-col items-center @3xl:col-start-2 @3xl:row-start-1">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_bottle_4ba0223072.png"
-                            alt=""
-                            width={500}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog_toast_hog_a271b970dd.png"
+                            alt="ToastHog"
+                            title="ToastHog"
                             loading="lazy"
-                            className="w-full max-w-xs"
-                            imgClassName="block w-full"
+                            width={800}
+                            className="w-56 @xl:w-72 @3xl:w-full"
                         />
-                        <figcaption className="mt-2 text-center text-sm text-secondary">
-                            PostHog, bottled for any MCP client.
-                        </figcaption>
-                    </figure>
-                </div>
-                <div
-                    id="installation"
-                    className="@container flex min-w-0 scroll-mt-20 flex-col rounded border border-primary bg-primary p-4 @xl:p-6"
-                >
-                    <h2 className="mb-3 mt-0 text-2xl font-bold leading-tight">
-                        Where does it <Highlight>run</Highlight>?
-                    </h2>
-                    <p className="m-0 text-sm text-secondary">
-                        On our servers. Connect to <InlineCode>https://mcp.posthog.com/mcp</InlineCode>. You do not need
-                        to host anything. Sign in with PostHog OAuth, and it routes you to your US or EU data region.
-                    </p>
-                    <div className="mt-6 border-t border-primary pt-4">
-                        <h3 className="m-0 flex items-center gap-2 text-base font-bold">
-                            <StickerCrown className="size-8 shrink-0 -rotate-6" />
-                            See who uses it
-                        </h3>
-                        <p className="mb-0 mt-1 text-sm text-secondary">
-                            The{' '}
-                            <Link to="/mcp/leaderboard" state={{ newWindow: true }} className="font-semibold underline">
-                                MCP leaderboard
-                            </Link>{' '}
-                            ranks the models and clients pinging the PostHog MCP server.
-                        </p>
-                    </div>
-                    <div className="mt-6 border-t border-primary pt-4">
-                        <h3 className="m-0 text-base font-bold">On an enterprise plan?</h3>
-                        <p className="mb-0 mt-0.5 text-sm text-secondary">
-                            Control access through your identity provider with{' '}
+                        <figcaption className="mt-3 text-center text-sm text-secondary">
+                            PostHog. Part of the agentic breakfast of champions. See the{' '}
                             <Link
-                                to="/docs/model-context-protocol/enterprise-managed-authorization"
+                                to="/mcp/leaderboard"
+                                state={{ newWindow: true }}
+                                title="MCP leaderboard"
                                 className="font-semibold underline"
                             >
-                                enterprise-managed authorization
+                                leaderboard
                             </Link>
                             .
-                        </p>
+                        </figcaption>
+                    </figure>
+                    <div className="min-w-0 @3xl:col-start-1 @3xl:row-start-1">
+                        <h2 className="mb-6 mt-0 text-3xl font-bold leading-tight">
+                            Your agent gets the <Highlight red>full spread</Highlight>
+                        </h2>
+                        <IconChipRow items={whatItIs} />
                     </div>
                 </div>
             </div>
@@ -306,27 +286,102 @@ function WhatIsMCP(): JSX.Element {
     )
 }
 
+const connectors: { name: string; how: string; Icon: React.ComponentType<{ className?: string }>; to: string }[] = [
+    {
+        name: 'ChatGPT',
+        how: 'Plugin',
+        Icon: IconOpenAI,
+        to: 'https://chatgpt.com/plugins/plugin_asdk_app_699caef2d680819188727b0ddbb349dd',
+    },
+    {
+        name: 'Claude',
+        how: 'Connector directory',
+        Icon: IconClaudeCode,
+        to: 'https://claude.ai/directory/connectors/posthog',
+    },
+    { name: 'Cursor', how: 'Setup guide', Icon: LogomarkCursor, to: '/docs/model-context-protocol/cursor' },
+    { name: 'Codex', how: 'Setup guide', Icon: LogomarkCodex, to: '/docs/model-context-protocol/codex' },
+    { name: 'VS Code', how: 'Setup guide', Icon: LogomarkVSCode, to: '/docs/model-context-protocol/vscode' },
+    { name: 'Windsurf', how: 'Setup guide', Icon: LogomarkWindsurf, to: '/docs/model-context-protocol/windsurf' },
+    { name: 'Zed', how: 'Setup guide', Icon: LogomarkZed, to: '/docs/model-context-protocol/zed' },
+    { name: 'Gemini CLI', how: 'AI plugin', Icon: IconGemini, to: 'https://github.com/PostHog/ai-plugin' },
+]
+
+function MCPConnectors(): JSX.Element {
+    return (
+        <section id="installation" className="scroll-mt-20 not-prose">
+            <header className="mb-4">
+                <h2 className="mb-3 mt-0 text-balance text-2xl font-bold leading-tight text-primary">
+                    Which agents can use it?
+                </h2>
+                <p className="m-0 mb-6 max-w-prose text-balance text-lg leading-relaxed text-secondary">
+                    Any MCP client can connect. PostHog hosts the server, so you run nothing. Sign in with your PostHog
+                    account, and it sends you to your US or EU data region.
+                </p>
+            </header>
+            <ul className="m-0 grid list-none grid-cols-2 gap-3 p-0 @3xl/reader-content:grid-cols-4">
+                {connectors.map(({ name, how, Icon, to }) => (
+                    <li key={name} className="min-w-0">
+                        <Link
+                            to={to}
+                            state={to.startsWith('/') ? { newWindow: true } : undefined}
+                            className="flex items-center gap-3 rounded-md border border-primary bg-primary p-3 text-primary hover:border-blue hover:text-primary"
+                        >
+                            <Icon className="size-8 shrink-0" />
+                            <span className="min-w-0">
+                                <span className="block truncate text-base font-bold leading-tight">{name}</span>
+                                <span className="flex items-center gap-1 text-sm text-secondary">
+                                    <span className="truncate">{how}</span>
+                                    <IconArrowRight className="size-4 shrink-0" />
+                                </span>
+                            </span>
+                        </Link>
+                    </li>
+                ))}
+            </ul>
+            <div className="mt-6 flex items-start gap-3">
+                <IconPlug className="mt-0.5 size-5 shrink-0 text-blue" />
+                <p className="m-0 text-sm leading-relaxed text-secondary">
+                    <span className="font-semibold text-primary">Want skills too?</span> The{' '}
+                    <Link to="https://github.com/PostHog/ai-plugin" className="font-semibold underline">
+                        PostHog AI plugin
+                    </Link>{' '}
+                    installs the same MCP server plus more than 30 PostHog skills in one step. It works in Claude Code,
+                    Codex, Cursor, and Gemini CLI. If you connect the server by hand, you get the same tools without the
+                    bundled skills.
+                </p>
+            </div>
+        </section>
+    )
+}
+
 const checklist = [
-    'Run funnels',
-    'Pull errors by occurrence',
-    'Write the SQL',
-    'Spin up an experiment',
-    'Toggle a feature flag',
-    'Triage a support ticket',
-    'Set up a CDP destination',
-    'Query governed metrics',
-    'Build a survey',
-    'Find that one weird replay',
+    { label: 'Find where users drop off', to: '/docs/product-analytics/funnels' },
+    { label: 'See which errors hit most users', to: '/docs/error-tracking' },
+    { label: 'Answer a question with SQL', to: '/docs/sql' },
+    { label: 'Set up an A/B test', to: '/docs/experiments' },
+    { label: 'Turn a feature flag on or off', to: '/docs/feature-flags' },
+    { label: 'Triage a support ticket', to: '/docs/support' },
+    { label: 'Send events to another tool', to: '/docs/data-pipelines' },
+    { label: 'Restore a deleted feature flag', to: '/docs/feature-flags/creating-feature-flags' },
+    { label: 'Ask users with a survey', to: '/docs/surveys' },
+    { label: 'Find the replay of a bug report', to: '/docs/session-replay' },
 ]
 
 function MCPChecklist(): JSX.Element {
     return (
         <div className="not-prose">
             <ul className="list-none p-0 m-0 grid w-fit grid-cols-1 @xs:grid-cols-2 gap-x-6 gap-y-1.5">
-                {checklist.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-[14px]">
+                {checklist.map(({ label, to }) => (
+                    <li key={label} className="flex items-start gap-2 text-sm">
                         <IconCheck className="size-4 text-green shrink-0 mt-0.5" />
-                        <span className="font-semibold">{item}</span>
+                        <Link
+                            to={to}
+                            state={{ newWindow: true }}
+                            className="font-semibold text-primary hover:underline"
+                        >
+                            {label}
+                        </Link>
                     </li>
                 ))}
             </ul>
@@ -334,21 +389,7 @@ function MCPChecklist(): JSX.Element {
     )
 }
 
-const potatoHogs: `https://res.cloudinary.com/${string}`[] = [
-    'https://res.cloudinary.com/dmukukwp6/image/upload/potato_hog_1_a786204242.png',
-    'https://res.cloudinary.com/dmukukwp6/image/upload/potato_hog_3_35d1b32e18.png',
-]
-
 function MCPUseCases(): JSX.Element {
-    const reducedMotion = useReducedMotion()
-    const [visibleHog, setVisibleHog] = useState(0)
-
-    useEffect(() => {
-        if (reducedMotion) return
-        const timer = setInterval(() => setVisibleHog((current) => (current + 1) % potatoHogs.length), 3500)
-        return () => clearInterval(timer)
-    }, [reducedMotion])
-
     return (
         <section id="use-cases" className="scroll-mt-20 not-prose">
             <div className="grid gap-6 @4xl/reader-content:grid-cols-[minmax(0,1fr)_28rem] @4xl/reader-content:gap-10">
@@ -356,40 +397,25 @@ function MCPUseCases(): JSX.Element {
                     <SectionHeading
                         lede={`Your agent selects from ${toolCountLabel} across ${categoryCount} categories, then reads or updates your PostHog project for you.`}
                     >
-                        What can you do with it?
+                        What can you do with the PostHog MCP?
                     </SectionHeading>
                     <MCPChecklist />
                 </div>
-                <figure className="m-0 flex flex-col justify-center">
-                    <div className="relative min-h-72 flex-1">
-                        {potatoHogs.map((src, index) => (
-                            <CloudinaryImage
-                                key={src}
-                                src={src}
-                                alt=""
-                                loading="lazy"
-                                width={800}
-                                className={`absolute inset-0 transition-opacity duration-1000 motion-reduce:transition-none ${
-                                    index === visibleHog ? 'opacity-100' : 'opacity-0'
-                                }`}
-                                imgClassName="size-full object-contain"
-                            />
-                        ))}
-                    </div>
+                <figure className="m-0 flex flex-col items-center justify-center">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_bottle_4ba0223072.png"
+                        alt=""
+                        width={900}
+                        loading="lazy"
+                        className="w-full max-w-lg"
+                        imgClassName="block w-full"
+                    />
                     <figcaption className="mt-2 text-center text-sm text-secondary">
-                        Some assembly required, and the agent does the assembling.
+                        All your product context, bottled up for agents
                     </figcaption>
                 </figure>
             </div>
             <Capabilities />
-            <p className="text-sm text-secondary leading-relaxed mt-4 mb-0">
-                The semantic layer is also available, so agents can query governed metrics such as MRR with the same
-                definition in every session.{' '}
-                <Link to="/docs/semantic-layer" className="font-semibold underline">
-                    Learn about the semantic layer
-                </Link>
-                .
-            </p>
         </section>
     )
 }
@@ -403,25 +429,25 @@ interface CapabilityItem {
 
 const capabilityList: CapabilityItem[] = [
     {
-        title: 'Product analytics',
+        title: 'Product Analytics',
         prompt: "What's our 30-day user retention?",
         icon: <IconGraph />,
         color: 'blue',
     },
     {
-        title: 'Error tracking',
+        title: 'Error Tracking',
         prompt: 'Show me the top 5 errors this week.',
         icon: <IconWarning />,
         color: 'orange',
     },
     {
-        title: 'Session replay',
+        title: 'Session Replay',
         prompt: 'Find a recording where a user got frustrated.',
         icon: <IconRewindPlay />,
         color: 'yellow',
     },
     {
-        title: 'Feature flags',
+        title: 'Feature Flags',
         prompt: 'List all my feature flags and their rollout percentages.',
         icon: <IconToggle />,
         color: 'seagreen',
@@ -433,19 +459,19 @@ const capabilityList: CapabilityItem[] = [
         color: 'purple',
     },
     {
-        title: 'SQL & warehouse',
+        title: 'SQL & Warehouse',
         prompt: 'Run a HogQL query to count events from the last 24 hours.',
         icon: <IconDatabase />,
         color: 'purple',
     },
     {
-        title: 'Web analytics',
+        title: 'Web Analytics',
         prompt: 'Which referrers drove the most traffic last week?',
         icon: <IconPieChart />,
         color: 'green-2',
     },
     {
-        title: 'LLM analytics',
+        title: 'AI Observability',
         prompt: "What's the average tokens per trace today?",
         icon: <IconAI />,
         color: 'purple',
@@ -457,12 +483,12 @@ const PAUSE_BEFORE_RESPONSE = 400
 const CYCLE_INTERVAL = 5000
 
 const fakeResponses: Record<string, string[]> = {
-    'Product analytics': [
+    'Product Analytics': [
         'Running retention query for the last 30 days...',
         'Day 0: 100% → Day 1: 42% → Day 7: 28% → Day 30: 14%',
         'Retention is trending up 3% from last month.',
     ],
-    'Error tracking': [
+    'Error Tracking': [
         'Fetching top errors by occurrence...',
         '1. TypeError: Cannot read property "id" of undefined (1,247)',
         '2. 504 Gateway Timeout on /api/batch (892)',
@@ -470,34 +496,34 @@ const fakeResponses: Record<string, string[]> = {
         '4. SyntaxError: Unexpected token in JSON at position 0 (327)',
         '5. Error: ECONNREFUSED 127.0.0.1:5432 (219)',
     ],
-    'Session replay': [
+    'Session Replay': [
         'Searching for rage-click sessions...',
         'Found 23 sessions with rage clicks in the last 7 days.',
         'Top page: /checkout (9 sessions, avg 6 clicks)',
     ],
-    'Feature flags': [
+    'Feature Flags': [
         'Listing active feature flags...',
         'new-onboarding: 50% rollout | beta-dashboard: 100%',
         '12 flags active, 3 stale (no evaluations in 30d)',
     ],
     Experiments: [
         'Fetching running experiments...',
-        'pricing-page-v2: +12% conversion (p=0.03) — significant',
-        'onboarding-flow: +4% activation (p=0.21) — not yet',
+        'pricing-page-v2: +12% conversion (p=0.03) – significant',
+        'onboarding-flow: +4% activation (p=0.21) – not yet',
     ],
-    'SQL & warehouse': [
+    'SQL & Warehouse': [
         'Executing HogQL query...',
         'SELECT count() FROM events WHERE timestamp > now() - interval 1 day',
         'Result: 1,847,293 events in the last 24 hours',
     ],
-    'Web analytics': [
+    'Web Analytics': [
         'Querying referrer data for last 7 days...',
         '1. google.com (12,847)',
         '2. twitter.com (3,291)',
         '3. github.com (2,103)',
         '4. (direct) (1,987)',
     ],
-    'LLM analytics': [
+    'AI Observability': [
         'Querying LLM trace metrics...',
         'Avg tokens/trace today: 2,847 (input: 1,203 / output: 1,644)',
         'Total cost: $14.29 across 892 traces',
@@ -828,11 +854,12 @@ function NoUISection(): JSX.Element {
         >
             <div className="min-w-0">
                 <SectionHeading>
-                    You don't need to use PostHog to <Highlight>use PostHog</Highlight>
+                    You don't need to use PostHog to <Highlight red>use PostHog</Highlight>
                 </SectionHeading>
                 <p className="m-0 text-base text-secondary">
-                    PostHog has a lot of tools. We know, we built them. We also kept hearing the same thing: the UI is
-                    overwhelming, and most people only use a fraction of what's there.
+                    PostHog has a lot of tools for product engineers. We know, we built them. We also kept hearing the
+                    same thing: the UI is overwhelming, and with agents it's better to pull context into where you're
+                    already building.
                 </p>
                 <p className="mb-0 mt-3 text-base font-bold text-primary">That's where the MCP comes in.</p>
                 <div className="mt-5 rounded-md border border-primary bg-primary p-4">
@@ -840,8 +867,15 @@ function NoUISection(): JSX.Element {
                         "But I <span className="rounded-sm bg-green/10 px-0.5 text-green">like</span> the PostHog UI"
                     </p>
                     <p className="mb-0 mt-1 text-sm text-secondary">
-                        Then carry on. It's not going anywhere. And while you're in there, tell{' '}
-                        <TeamMember name="Adam Leith" photo />. He'll be thrilled.
+                        Then carry on. Try the{' '}
+                        <Link
+                            to="/roadmap?feature=today-rail-nav"
+                            state={{ newWindow: true }}
+                            className="font-semibold underline"
+                        >
+                            new navigation beta
+                        </Link>{' '}
+                        and tell <SmallTeam slug="surfaces" /> (they'll be thrilled).
                     </p>
                 </div>
             </div>
@@ -850,36 +884,6 @@ function NoUISection(): JSX.Element {
                     <ComplaintCard key={complaint.handle} complaint={complaint} />
                 ))}
             </div>
-        </section>
-    )
-}
-
-function MCPAnalyticsStrip(): JSX.Element {
-    return (
-        <section
-            id="mcp-analytics"
-            className="not-prose grid scroll-mt-20 gap-4 rounded-md border border-blue bg-blue/10 p-4 @xl/reader-content:p-5 @3xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] @3xl/reader-content:items-center"
-        >
-            <div className="min-w-0">
-                <h2 className="m-0 text-base font-bold leading-tight @xl/reader-content:text-lg">
-                    Running an MCP server of your own?
-                </h2>
-                <p className="mb-0 mt-1 text-sm text-secondary">
-                    MCP Analytics is product analytics for MCP servers. It shows which tools agents call, what they try
-                    to do, and where calls fail.
-                </p>
-            </div>
-            <Link
-                to="/docs/mcp-analytics"
-                state={{ newWindow: true }}
-                className="group flex min-w-0 items-center gap-3 text-primary no-underline"
-            >
-                <IconPulse className="size-8 shrink-0 text-blue" />
-                <span className="min-w-0">
-                    <strong className="block text-sm group-hover:underline">MCP Analytics →</strong>
-                    <span className="block text-sm text-secondary">Read the docs.</span>
-                </span>
-            </Link>
         </section>
     )
 }
@@ -924,11 +928,13 @@ function MCPCTA(): JSX.Element {
         >
             <div className="grid items-center gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-8">
                 <div>
-                    <h2 className="mb-2 mt-0 text-xl font-bold @xl/reader-content:text-2xl">
+                    <h2 className="mb-2 mt-0 flex items-center gap-2 text-xl font-bold @xl/reader-content:text-2xl">
                         Connect your agent in one command
+                        <StickerAi className="size-8 shrink-0 -rotate-3 @xl/reader-content:size-10" />
                     </h2>
-                    <p className="m-0">
-                        <strong>Get started – free.</strong> Run the wizard, sign in, and your agent can use PostHog.
+                    <p className="m-0 text-sm @xl/reader-content:text-base">
+                        <strong>Get started – free.</strong> Run the wizard and it adds the PostHog MCP to the agents on
+                        your machine, like Claude Code, Codex, Cursor, VS Code, and Zed.
                     </p>
                 </div>
                 <MCPInstallCTA className="w-full" showDesktopLink={false} />
@@ -973,10 +979,10 @@ export default function MCPPage(): JSX.Element {
                     ) : (
                         <>
                             <MCPHeader onReadAsAgent={() => setReader('agent')} />
-                            <WhatIsMCP />
-                            <MCPAnalyticsStrip />
-                            <MCPUseCases />
                             <NoUISection />
+                            <MCPUseCases />
+                            <MCPConnectors />
+                            <WhatIsMCP />
                             <MCPCTA />
                             <MCPResources />
                             <MCPFaq />

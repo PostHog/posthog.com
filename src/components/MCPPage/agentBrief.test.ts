@@ -56,7 +56,6 @@ describe('MCP agent brief', () => {
     })
 
     test('lists the live tool categories', () => {
-        assert.match(brief, /2 tools in 1 categories/)
-        assert.match(brief, /- Feature flags \(2\)/)
+        assert.match(brief, /2 tools in 1 categories: Feature flags\./)
     })
 })

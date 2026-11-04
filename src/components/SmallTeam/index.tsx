@@ -18,8 +18,6 @@ export interface SmallTeamProps {
     variant?: 'pill' | 'crest'
     /** Sizing for the large crest in `variant="crest"`. */
     crestClassName?: string
-    /** In `variant="crest"`, show only the crest. The team name stays for screen readers. */
-    crestOnly?: boolean
 }
 
 export default function SmallTeam({
@@ -30,7 +28,6 @@ export default function SmallTeam({
     className = '',
     variant = 'pill',
     crestClassName = '',
-    crestOnly = false,
 }: SmallTeamProps): JSX.Element | null {
     const {
         allSqueakTeam: { nodes },
@@ -103,7 +100,7 @@ export default function SmallTeam({
                         />
                     )
                 )}
-                <span className={`min-w-0 ${crestOnly ? 'sr-only' : ''}`}>
+                <span className="min-w-0">
                     <strong className="block text-[15px] text-primary group-hover:underline">{team.name} Team</strong>
                     {team.tagline && (
                         <em className="block text-sm text-secondary text-balance mt-0.5">{team.tagline}</em>
