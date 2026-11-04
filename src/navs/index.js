@@ -2979,8 +2979,12 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Reference',
+                                    name: 'Setup and usage',
                                     url: '/docs/libraries/python',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/libraries/python/reference',
                                 },
                                 {
                                     name: 'Migration guides',

@@ -153,22 +153,22 @@
     "redirects": [
         {
             "source": "/docs/references/posthog-python:ext(\\.md)?",
-            "destination": "/docs/libraries/python:ext?",
+            "destination": "/docs/libraries/python/reference:ext?",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-python/:path*",
-            "destination": "/docs/libraries/python",
+            "destination": "/docs/libraries/python/reference",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-python-:version",
-            "destination": "/docs/libraries/python",
+            "destination": "/docs/libraries/python/reference",
             "statusCode": 301
         },
         {
             "source": "/docs/references/posthog-python-:version/:path*",
-            "destination": "/docs/libraries/python",
+            "destination": "/docs/libraries/python/reference",
             "statusCode": 301
         },
         {
