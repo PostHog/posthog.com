@@ -50,6 +50,17 @@ Another scout compared merge rates across the models our agents can use to write
 
 We can't fix the model, but we can steer users away from it before it gives them a bad experience, so that's what we do now. Without the scout we might not have noticed for weeks.
 
+<iframe
+    width="560"
+    height="315"
+    src="https://www.youtube-nocookie.com/embed/QefP1WAXhc0"
+    title="You're about to fall in love with PostHog Scouts"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+></iframe>
+<Caption>You're about to fall in love with PostHog Scouts</Caption>
+
 ## Higgsfield merges self-driving PRs without opening PostHog
 
 Self-driving PRs go straight to GitHub, and the Inbox is accessible over MCP and other surfaces. If your team works AI-native and rarely logs in to PostHog's web interface, it still fits your workflow.
