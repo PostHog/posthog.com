@@ -74,3 +74,18 @@ test('falls through when no Markdown sibling exists', async (t) => {
 
     assert.equal(await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User' } })), undefined)
 })
+
+test('logs the served format and the Accept header for the log drain', async (t) => {
+    t.mock.method(globalThis, 'fetch', async () => new Response('# Product analytics'))
+    const log = t.mock.method(console, 'log', () => {})
+
+    for (const [url, headers, expected] of [
+        [page, { 'user-agent': 'Claude-User/1.0' }, { served_format: 'markdown', accept: '' }],
+        [page, { accept: 'text/html' }, { served_format: 'html', accept: 'text/html' }],
+        [`${page}.md`, {}, { served_format: 'markdown', accept: '' }],
+    ] as const) {
+        log.mock.resetCalls()
+        await middleware(new Request(url, { headers }))
+        assert.deepEqual(JSON.parse(log.mock.calls[0].arguments[0]), expected, url)
+    }
+})

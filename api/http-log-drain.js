@@ -89,6 +89,21 @@ function isSelfLog(log) {
     return pathnameOf(proxy.path || log.path || '').startsWith(SELF_PATH)
 }
 
+// The site middleware logs the format it served and the request's Accept header, because the
+// drain carries no request headers.
+function servedFormatOf(message) {
+    const text = typeof message === 'string' ? message.trim() : ''
+    if (!text.startsWith('{"served_format"')) {
+        return {}
+    }
+    try {
+        const { served_format, accept } = JSON.parse(text)
+        return { served_format, accept }
+    } catch {
+        return {}
+    }
+}
+
 function toEvent(log, salt) {
     const proxy = log.proxy || {}
     const host = proxy.host ?? log.host ?? ''
@@ -126,6 +141,7 @@ function toEvent(log, salt) {
         message: typeof message === 'string' ? message.slice(0, MAX_MESSAGE_LENGTH) : message,
         message_truncated: typeof message === 'string' && message.length > MAX_MESSAGE_LENGTH,
         vercel_timestamp_ms: log.timestamp,
+        ...servedFormatOf(message),
 
         host: log.host,
         path: log.path,
