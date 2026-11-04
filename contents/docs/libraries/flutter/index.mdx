@@ -250,6 +250,41 @@ On Flutter Web, masking (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) a
 
 The Flutter SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
+## AI events
+
+To send [AI observability](/docs/ai-observability) events you build yourself, such as `$ai_generation`, `$ai_span`, or `$ai_embedding`, call `captureAi` instead of `capture`. It's available from version `6.0.0` on iOS, macOS, Android, Windows, and Linux. It takes the same arguments as `capture` and runs the same `beforeSend` callbacks, then sends the event to PostHog's [AI endpoint](/docs/ai-observability/large-events), which accepts much larger events than `capture`.
+
+```dart
+final uuid = await Posthog().captureAi(
+  eventName: r'$ai_generation',
+  properties: {
+    r'$ai_trace_id': traceId,
+    r'$ai_model': 'gpt-5',
+    r'$ai_provider': 'openai',
+    r'$ai_input_tokens': 120,
+    r'$ai_output_tokens': 45,
+  },
+);
+```
+
+`captureAi` returns the event's UUID once the event is queued. It returns `null` when the event isn't queued: the SDK is disabled, not set up, or opted out, a `beforeSend` callback dropped the event, the event is over `captureAiMaxEventBytes`, or the app is running on the web.
+
+- **Separate queue.** AI events have their own on-disk queue, so large events don't push your other events out. It keeps up to `captureAiMaxQueueSize` events and at most 50 MiB. Past either limit, the oldest events are dropped. `flush()` and `close()` send both queues.
+- **Size limit.** The SDK drops an AI event that's over 8 MiB plus 64 KiB once serialized: PostHog's 8 MiB limit on an AI event's properties, plus room for the rest of the event. Everything you pass is sent as is. The SDK doesn't truncate or redact prompts, outputs, or media.
+- **`capture` doesn't reroute AI events.** `capture` never sends `$ai_` events to the AI endpoint, so use `captureAi` for them. PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`, and the SDK logs a debug message when you pass one.
+- **No-op on Flutter web.** On the web, `captureAi` sends nothing, logs a debug message, and returns `null`. The AI settings below aren't applied there.
+
+These `PostHogConfig` settings apply only to `captureAi`. Leave a setting `null` to keep the SDK default:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `captureAiCompression` | `PostHogCompression.gzip` | How `captureAi` request bodies are compressed, separately from `compression`. |
+| `captureAiMaxQueueSize` | `100` | Maximum number of AI events kept on disk before the oldest are dropped. The 50 MiB limit applies too. |
+| `captureAiTimeout` | `Duration(seconds: 60)` | How long an AI request can go without network activity before it times out. On iOS, macOS, and Android, the native SDK gets it in whole seconds, and a positive value under one second becomes one second. |
+| `captureAiMaxEventBytes` | `8454144` (8 MiB + 64 KiB) | Maximum size of a serialized AI event. You can only lower it: a larger value uses the default. |
+
+A value of `0` or less (`Duration.zero` or less for `captureAiTimeout`) uses the default.
+
 ## Flush
 
 import FlushIntro from '../_snippets/flush-intro.mdx'
