@@ -116,7 +116,9 @@ These change behavior without a build error, so check them even if your app buil
 
 **Queued 2.x events.** If an app updates straight from a 2.x SDK, events still queued on disk are deleted. Distinct ID, anonymous ID, groups, and cached flags carry over.
 
-**Capture v1.** Analytics events now go to `/i/v1/analytics/events` instead of `/batch`. If you use a reverse proxy or self-host PostHog, forward that path before you upgrade. See the [capture v1 upgrade guide](/docs/libraries/capture-v1) for what else changes.
+**Capture v1.** Analytics events now go to `/i/v1/analytics/events` instead of `/batch`. If you use a reverse proxy or self-host PostHog, forward that path before you upgrade. A reverse proxy must serve `/i/v1/*` and pass the `Authorization` header (`Bearer phc_…`) through unchanged, because the project token now travels there instead of in the request body. See the [proxy reference](/docs/advanced/proxy/proxy-reference#checklist) for the full list, and the [capture v1 upgrade guide](/docs/libraries/capture-v1) for what else changes.
+
+**`$locale` and `$app_language`.** `$locale` is now the device's preferred language with its region, such as `de-CH` instead of `de`. The new `$app_language` property is the language your app shows, such as `de` or `pt-BR`. Update cohorts, insights, and actions that match `$locale`: to filter on your app's language, use `$app_language`. If your app sets its language itself instead of using iOS localizations, call `PostHogSDK.shared.setAppLanguage("de")` at startup and whenever it changes.
 
 ### Compile errors
 
@@ -138,6 +140,16 @@ These change behavior without a build error, so check them even if your app buil
 | `PostHogStorageManager`, `config.storageManager` | `identify(_:)`, `getDistinctId()`, and `reset()` on `PostHogSDK` |
 
 Callbacks the SDK can call off the main thread are now `@Sendable`: `reloadFeatureFlags(_:)`, `setBeforeSend(_:)`, `getAnonymousId`, `pushIdentityProvider`, and `logSanitizer`. In Swift 6 mode, a closure that touches main-actor state no longer compiles. In `reloadFeatureFlags(_:)` and `pushIdentityProvider`, hop with `Task { @MainActor in ... }`. The others must return right away, so don't read main-actor state in them.
+
+### New: AI events
+
+`captureAi` sends AI events, such as `$ai_generation`, to PostHog's AI endpoint (`/i/v1/ai/events`). It takes the same arguments as `capture`, and the events go through the same `beforeSend` hooks:
+
+```swift
+PostHogSDK.shared.captureAi("$ai_generation", properties: ["$ai_model": "gpt-5", "$ai_trace_id": traceId])
+```
+
+PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint.
 
 ### Optional: leave out features
 
