@@ -228,7 +228,7 @@ export const transactionalEmails = {
             },
             { label: 'Templates', description: 'Where the email lives' },
             { label: 'Template editor in the dashboard', values: [YES, YES, YES, YES] },
-            { label: 'Render in code (React Email, HTML)', values: [YES, YES, 'HTML only', 'HTML only'] },
+            { label: 'Render in code (React Email, HTML)', values: [YES, YES, YES, YES] },
             { label: 'After delivery', description: 'What the email did' },
             {
                 label: 'Sends on the person timeline',
