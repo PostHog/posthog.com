@@ -42,9 +42,10 @@ You cannot export the image from the generator. The author does these steps:
 
 1. Examines the card that the generator makes.
 2. Changes the card until it is correct.
-3. Exports the card as a 1200x630 PNG and adds it to the post. Read [exporting a blog post image](../contents/handbook/marketing/exporting-blog-post-image.md).
+3. Exports the card as a 1200x630 PNG.
+4. Uploads the PNG to Cloudinary with the posthog.com uploader (**Moderator tools** > **Upload media**), and copies the URL. Read [uploading assets with Cloudinary](../contents/handbook/engineering/posthog-com/assets.mdx). Do not put blog images in the repo.
 
 ### Set the frontmatter
 
-- Set `featuredImage` to the image URL, and set `featuredImageType: full`.
+- Set `featuredImage` to the Cloudinary URL (`https://res.cloudinary.com/dmukukwp6/image/upload/...`), and set `featuredImageType: full`.
 - If the card shows the headline, do not set `ogImage: generated`. That setting draws the title on top of the image, so the title shows two times.
