@@ -2,128 +2,110 @@
 title: Events data retention
 ---
 
-PostHog Cloud keeps your events for a retention period, then deletes them. This page covers the default retention period, how to set a custom retention policy, and how to check which period applies to your project.
+This page covers the events retention periods available on each plan, how to set yours, and how deletion works.
 
-Some data follows different retention rules:
+Other data hosted in PostHog may have different data retention processes:
 
-- [Session recordings](/docs/session-replay/recording-retention)  
-- [AI events](/docs/ai-observability/data-retention)  
-- [Logs](/docs/logs/pricing#retention)  
-- [Data warehouse](/docs/data-warehouse) tables, which keep all of their rows  
-- Person profiles and properties, which are stored indefinitely until you [delete them](/docs/privacy/data-storage#data-deletion)  
-- Self-hosted instances, which keep events until you delete them
+- [Session recordings](/docs/session-replay/recording-retention)
+- [AI events](/docs/ai-observability/data-retention)
+- [Logs](/docs/logs/pricing#retention)
+- [Data warehouse](/docs/data-warehouse) tables, which keep all of their rows
+- Person profiles and properties, which are stored until you [delete them](/docs/privacy/data-storage#data-deletion)
 
-## Retention by plan
+Self-hosted instances are not subject to events retention and keep events until you delete them.
 
-The Free plan has a default retention period of 1 year. Paid plans have a default retention period of 2 years. Your plan and [platform package](/platform-packages) set how far you can change it with a custom retention policy.
+## Events retention by plan
 
-| Plan | Default retention period | Custom retention range |  
-| :--- | :--- | :--- |  
-| Free | 1 year | Not available |  
-| Pay-as-you-go | 2 years | Up to 24 months (2 years) |  
-| Pay-as-you-go with Boost | 2 years | Up to 36 months (3 years) |  
-| Pay-as-you-go with Scale | 2 years | Up to 60 months (5 years) |  
-| Pay-as-you-go with Enterprise | 2 years | Up to 84 months (7 years) |
+| Plan | Default retention period | Maximum retention period |
+| :--- | :--- | :--- |
+| Free | 1 year | 1 year |
+| Pay-as-you-go | 2 years | 2 years |
+| Pay-as-you-go with Boost | 2 years | 3 years |
+| Pay-as-you-go with Scale | 2 years | 5 years |
+| Pay-as-you-go with Enterprise | 2 years | 7 years |
 
-After your default retention period ends, PostHog may keep events for a grace period (typically 1–3 months) before deleting them. Don't count on this grace period to recover expired data.
+These retention periods apply to organizations that start a paid plan on or after November 5, 2026, including organizations that upgrade from the Free plan.
 
 ### Organizations on a paid plan before November 5, 2026
 
-If your organization was on a paid plan before November 5, 2026, it keeps a 7-year default retention period and a custom retention range of up to 84 months. This lasts while it stays on the same plan and platform package, or moves to a bigger package. If it moves to the Free plan or to a smaller package, it gets the retention in the table above.
-
-Organizations that start a paid plan on or after November 5, 2026 get the retention in the table, even if they were on the Free plan before.
-
-## Custom retention
-
-Custom retention isn't available on the Free plan. On paid plans, you can set a custom retention policy that's shorter or longer than your plan's default, up to the range for your plan. Common reasons to set a shorter policy include:
-
-- Meeting compliance requirements  
-- Data minimization, so you keep only the data you need  
-- Faster dashboards, because queries scan less data
-
-To keep events longer than 2 years, set a longer policy, up to your plan's range.
-
-<CalloutBox type="caution" title="Deleted events can't be restored">
-
-PostHog deletes events older than your custom retention policy at the next monthly cleanup.
-
-</CalloutBox>
-
-### To set a custom retention policy for your organization
-
-Go to [**Settings > Organization > General > Events retention**](https://app.posthog.com/settings/organization-details#organization-events-retention). This policy applies to every project that doesn't have its own.
-
-### To set a custom retention policy for one project
-
-Go to [**Settings > Project > Product analytics > Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). This policy overrides the organization's.
-
-If you remove a project's policy, the project uses the organization's policy. If the organization doesn't have one, the project uses your plan's default retention period.
-
-### Who can change a retention policy
-
-- Only organization admins can set or remove a custom retention policy. Project admins and members can view it but not change it.  
-- Each setting shows the range of months your plan allows.  
-- PostHog asks you to confirm before it saves or removes a custom retention policy.
-
-## Check your retention period
-
-Two read-only fields on the [projects API](/docs/api/projects) show your project's retention:
-
-- `event_retention_months`: the length of the retention period in months. For example, `84` is 7 years.  
-- `events_retention_enforced`: whether retention applies to your project yet.
-
-<CalloutBox type="fyi" title="Enforcement is rolling out gradually">
-
-PostHog is turning on retention project by project. While `events_retention_enforced` is `false`, retention doesn't remove any events from your project, whatever `event_retention_months` shows.
-
-</CalloutBox>
+If your organization was on a paid plan before November 5, 2026, it keeps its 7-year retention period while it stays on its current plan and [platform package](/platform-packages), or moves to a higher platform package. If it downgrades to the Free plan or to a lower platform package, it moves to the default retention period for its new plan.
 
 ## How retention works
 
-Each project uses its own custom retention policy if it has one. If not, it uses the organization's policy, and if there isn't one, your plan's default retention period.
+Retention applies to every project on PostHog Cloud, and it affects any events that are stored in our events table. This includes autocapture events, pageviews, custom events, exceptions, survey responses, web vitals, and more.
 
-Once retention is enforced on your project:
+When an event's `timestamp` goes past your retention period, it is considered expired. Expired events may be deleted at any point, and **we can't restore deleted events**.
 
-- PostHog checks each event's `timestamp` against the retention period, not the time PostHog received the event. This way the event's real age decides when it expires.  
-- Queries on the events table only return events inside your retention period.  
-- If an insight's date range goes back further than your retention period, the insight shows a banner. That way you won't mistake missing data for a drop in your product.  
-- Expired events are deleted after a grace period if you're on default retention, or at the next monthly cleanup if you've set a custom policy.
+#### Events are not automatically deleted as soon as they expire
 
-<CalloutBox type="caution" title="Migrating historical data">
+We may hold onto expired events for one of two reasons:
 
-Retention uses each event's `timestamp`, so events you bring in through a [migration](/docs/migrate) are deleted at the next cleanup if they're older than your retention period, even though you only just migrated them. Check your retention period before you migrate.
+- Not all customers are aware that their retention period has ended, and we want to give them time to extend it
+- We delete events in batches, so there is a delay between when an event expires and when it is deleted
 
-</CalloutBox>
+If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).
+
+#### Migrated events may expire as soon as they are uploaded
+
+Because retention uses each event's `timestamp`, events you bring in through a [migration](/docs/migrate) with a `timestamp` that is already older than your retention period expire as soon as they arrive. They may be deleted, even though you just migrated them. Please consider your retention period when you are migrating data to PostHog.
+
+## How to customize your retention period
+
+For customers on paid plans, retention periods can be adjusted in your organization's settings, up to the maximum for your plan. You may also set a project-level override if you would like a project to have a retention period that is shorter or longer than your organization's retention period.
+
+To set a retention period longer than 2 years, add a [platform package](/platform-packages), then increase your retention period in your settings. Adding a package doesn't change your retention period automatically.
+
+Customizable data retention is not available on the Free plan. All projects on the Free plan have a 1-year retention period.
+
+### To set your organization's retention period
+
+Go to [**Settings > Organization > General > Events retention**](https://app.posthog.com/settings/organization-details#organization-events-retention). This retention period applies to every project that does not have a project override.
+
+### To set a project override
+
+Go to [**Settings > Project > Product analytics > Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). This retention period overrides your organization's retention period.
+
+If you remove a project override, the project uses your organization's retention period.
+
+If you shorten your retention period, it applies to all of your historical events, not just events ingested after your retention period is changed. This means that a large batch of historical events may be deleted at any point after your retention period is changed.
+
+### Who can change the retention period
+
+Only organization admins and owners can change your retention period. Project admins and members can view it but not change it. PostHog asks you to confirm before it saves a change.
 
 ## FAQ
 
 #### Which events does retention apply to?
 
-Every event in the events table, including error tracking exceptions, feature flag evaluations, survey responses and MCP analytics events.
+Retention applies to every event in the events table, including error tracking exceptions, feature flag evaluations, survey responses, and MCP analytics events.
 
-#### Does retention delete person profiles?
+#### Does the events retention period apply to person profiles?
 
-No. Person profiles and their properties are stored indefinitely. To remove them, use the [data deletion tools](/docs/privacy/data-storage#data-deletion).
+No. Person profiles and their properties are stored until you delete them. To remove them, use the [data deletion tools](/docs/privacy/data-storage#data-deletion).
 
-#### What happens to my retention period if I change plans?
+#### What happens to my retention period if I move to the Free plan?
 
-If your custom retention policy is longer than your new plan allows, PostHog lowers it to the new plan's maximum. For example, a 60-month policy on Scale becomes 24 months on pay-as-you-go. Events older than the new period are deleted at the next monthly cleanup.
+Your retention period changes to 1 year, the only period the Free plan offers.
 
-If you move to the Free plan, which doesn't offer custom retention, your projects go back to the 1-year default. If your organization kept 7-year retention from before November 5, 2026, moving to the Free plan or to a smaller package moves you to the default in the table. When you go back to a default retention period, events older than it are deleted after the usual grace period.
+#### What happens to my retention period if I downgrade my platform package?
 
-#### Do hidden events come back if I lengthen my retention period?
+If your retention period is longer than your new package allows, PostHog lowers it to your new package's maximum. This applies to your organization's retention period and to any project overrides. For example, a 5-year retention period on Scale becomes 3 years on Boost. Events older than your new retention period expire and may be deleted at any point.
 
-Yes, as long as PostHog hasn't deleted them yet. Events older than your retention period are hidden from queries until they're deleted. If you upgrade your plan or package, or set a longer custom retention policy, PostHog includes those events in queries again. Events that have already been deleted can't be restored.
+If your organization was on a paid plan before November 5, 2026, see [Organizations on a paid plan before November 5, 2026](#organizations-on-a-paid-plan-before-november-5-2026).
 
 #### When are expired events deleted?
 
-On default retention, within a grace period of 1–3 months after the retention period ends. On a custom retention policy, at the next monthly cleanup. Deleted events can't be restored.
+Expired events may be deleted at any point, and once they are deleted, they can't be restored. However, we do not automatically delete events as soon as they expire, so they may be stored longer than your retention period. If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).
+
+#### If I extend my retention period, will I get my events back?
+
+Any expired events that are still in our database are kept when you extend your retention period. Events that have already been deleted can't be restored.
 
 ## Other ways to manage your data
 
-Retention only deletes events once they expire. To delete data sooner, use the [data deletion tools](/docs/privacy/data-storage#data-deletion):
+Use the [data deletion tools](/docs/privacy/data-storage#data-deletion) if you are looking to:
 
-- Delete a person, along with their events and recordings, to handle a [right to be forgotten](/docs/privacy/data-storage#right-to-be-forgotten) request.  
-- Delete a project or an organization to remove all of its events.
+- Delete a person, along with their events and recordings
+- Delete a project or an organization to remove all of its events
 
-To keep events longer than your retention period, send them to your own storage with a [batch export](/docs/cdp/batch-exports). Batch exports can only export events PostHog still has, so set one up before your events expire.
+You can also send events to your own storage with a [batch export](/docs/data-pipelines/batch-exports). Batch exports can only export events PostHog still has, so set one up before your events expire.
