@@ -44,6 +44,8 @@ Events older than your retention period are hidden from queries, and may be dele
 
 If you've set up a custom retention policy, we'll delete any events past your retention period during our monthly data cleanup.
 
+If you upgrade, hidden events come back as long as we haven't deleted them from our systems yet.
+
 To remove events right away, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention). 
 
 ## How can I extend my data retention in PostHog?
@@ -52,7 +54,7 @@ Add a [platform package](/platform-packages), then set a custom retention policy
 
 ## Can I export data out of PostHog?
 
-Yes, if you'd prefer not to upgrade your package, or you need to keep data for longer than 7 years, you can send it to your own data warehouse with a [batch export](/docs/data-pipelines/batch-exports). 
+Yes, if you'd prefer not to upgrade your package, or you need to keep data for longer than 7 years, you can send it to your own data warehouse with a [batch export](/docs/cdp/batch-exports). 
 
 ## Can I set up a custom retention policy for my organization or project?
 
