@@ -44,7 +44,7 @@ Events older than your retention period are hidden from queries, and may be dele
 
 If you've set up a custom retention policy, we'll delete any events past your retention period during our monthly data cleanup.
 
-If you upgrade, hidden events come back as long as we haven't deleted them from our systems yet.
+If you upgrade or extend your custom retention policy, hidden events come back as long as we haven't deleted them from our systems yet.
 
 To remove events right away, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention). 
 
