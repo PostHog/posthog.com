@@ -44,7 +44,7 @@ export const taskbarProducts = [
     { ...getTool('support'), Icon: IconSupport, color: 'blue' },
     { ...getTool('heatmaps'), Icon: IconCursorClick, color: 'green' },
     { ...getTool('group_analytics'), Icon: IconPeople, color: 'teal' },
-    { ...getTool('mcp_analytics'), Icon: IconPlug, color: 'blue' },
+    { ...getTool('mcp_analytics'), Icon: IconPlug, color: 'purple' },
     { ...getTool('posthog_ai'), Icon: IconSparkles, color: 'blue' },
     { ...getTool('metrics'), Icon: IconTrends, color: 'green' },
 ]
