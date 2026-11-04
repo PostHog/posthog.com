@@ -16,7 +16,7 @@ There are three ways to import:
 ## Before you start
 
 - Connect an **APNs** or **FCM** channel. See [Configure a workflows channel](/docs/workflows/configure-channels?tab=Push).
-- You need to be an admin of the project.
+- You need to be an admin of the project, with edit access to persons.
 - For each device, you need its token and the person's `distinct_id` in PostHog. Use the same `distinct_id` your app passes to `identify`, so the device lands on the right person.
 
 ### Which token goes to which channel
@@ -39,6 +39,7 @@ PostHog checks every row and tells you why a row wasn't imported:
 | The token doesn't fit this channel | For example an Expo token, an APNs token in an FCM channel, or an FCM token in an APNs channel | Import it into the right channel, or drop it |
 | Not stored | PostHog didn't save the device | Import the row again |
 | Person processing is off for this person | PostHog didn't update the person, so the device wasn't saved | Check that [person profiles](/docs/data/persons) are processed for these people, then import again |
+| The line can't be used (CSV only) | For example the line has no token or no distinct ID, or the distinct ID is longer than 200 bytes | Fix the line and upload it again |
 
 Rows with an unknown `distinct_id` are rejected by default. If they were imported, PostHog would create a new person for each one, and a person your app never identifies never gets a push.
 
@@ -56,12 +57,11 @@ A person with several devices gets one row per device. Importing the same row tw
    user_456,a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2
    ```
 
-4. Check the preview. It shows how many devices are ready to import, leaves out repeated lines, and lists lines it will skip, such as a line with no token.
-5. Click **Import**. Keep the page open until the import finishes. You can click **Stop import** at any time. Devices sent before you stop stay imported.
-6. When it's done, you see how many devices were imported and a table of every line that wasn't, with the reason.
-7. If some lines failed because no person has the distinct ID, and you're sure the IDs are right, click **Import anyway and create new persons** to import just those lines.
+4. Click **Import**. PostHog imports the file in the background, so you can close the window once the upload is done. Click **Import devices** again to see the progress. You can click **Stop import** at any time. Devices sent before you stop stay imported.
+5. When it's done, you see how many devices were imported, how many repeated lines were left out, and a table of the lines that weren't imported, with the reason. The table shows the first 1,000 lines.
+6. If some lines failed because no person has the distinct ID, and you're sure the IDs are right, click **Import anyway and create new persons** to import just those lines. This option is available for 24 hours after the import. After that, upload the file again.
 
-Files can be up to 20 MB. For a larger list, split it into several files or [use the API](#use-the-api).
+Files can be up to 20 MB and 400,000 lines. For a larger list, split it into several files and import them one at a time, or [use the API](#use-the-api). Each channel runs one import at a time.
 
 ## Ask your AI agent
 
@@ -75,7 +75,7 @@ The agent uses the `integrations-push-tokens-create` tool and the `importing-pus
 
 ## Use the API
 
-You need a [personal API key](/docs/api/personal-api-keys) with the `integration:write` scope. The key's user must be an admin of the project.
+You need a [personal API key](/docs/api/personal-api-keys) with the `integration:write` and `person:write` scopes. The key's user must be an admin of the project.
 
 ### Find your channel's ID
 
