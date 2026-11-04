@@ -6,7 +6,7 @@
 import assert from 'node:assert/strict'
 import { describe, test } from 'node:test'
 
-import { getActiveMenuSection } from './activeMenu.ts'
+import { containsURL, getActiveMenuSection, navURL } from './activeMenu.ts'
 import type { MenuNode } from './activeMenu.ts'
 import { docsMenu } from './index.js'
 
@@ -64,6 +64,20 @@ describe('getActiveMenuSection', () => {
 })
 
 describe('the real docs nav', () => {
+    test('every nav lookup treats an SDK reference major as its library page', () => {
+        assert.equal(navURL('/docs/libraries/python/7'), '/docs/libraries/python')
+        assert.equal(navURL('/docs/libraries/python/8/'), '/docs/libraries/python')
+        assert.equal(navURL('/docs/libraries/python/migration'), '/docs/libraries/python/migration')
+        assert.ok(containsURL(docsSections, '/docs/libraries/python/7'))
+    })
+
+    test('an SDK reference major keeps its library sidebar', () => {
+        const expected = sectionFor('/docs/libraries/python')
+        assert.ok(expected)
+        for (const path of ['/docs/libraries/python/7', '/docs/libraries/python/8/']) {
+            assert.equal(sectionFor(path), expected)
+        }
+    })
     // Self-driving is the single home for its products (Slack, MCP, CLI, Web) — the
     // standalone sections for those products are flat drop-down links with no sidebar of their own.
     test('product pages always use the Self-driving sidebar', () => {

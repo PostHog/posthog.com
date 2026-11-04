@@ -1,6 +1,7 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
 const qs = require('qs')
 const pLimit = require('p-limit')
+const { isVersionedReferencePath } = require('./scripts/sdk-references-markdown.cjs')
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}.local`,
@@ -240,7 +241,7 @@ module.exports = {
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
                     const transformedPages = allPages
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isVersionedReferencePath(path))
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,

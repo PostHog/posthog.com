@@ -1174,7 +1174,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 },
                 { encodeValuesOnly: true }
             )
-            const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
+            const apiHost = process.env.SDK_REFERENCES_API_HOST || process.env.GATSBY_SQUEAK_API_HOST
+            const url = `${apiHost}/api/sdk-references?${referenceQuery}`
             const { data } = await fetch(url).then((res) => res.json())
             return (data ?? []) as Array<{ attributes?: { data?: Record<string, unknown> } }>
         }

@@ -11,9 +11,17 @@ export interface MenuNode {
     children?: MenuNode[]
 }
 
+/**
+ * The URL a page shares its sidebar position with. An SDK reference's explicit major, like
+ * /docs/libraries/python/7, sits where the library page /docs/libraries/python does.
+ */
+export const navURL = (url: string | undefined): string | undefined =>
+    url?.replace(/^(\/docs\/libraries\/[a-z0-9-]+)\/\d+\/?$/, '$1')
+
 // query strings are ignored when comparing URLs
-export const containsURL = (items: MenuNode[] | undefined, value: string | undefined): boolean => {
+export const containsURL = (items: MenuNode[] | undefined, url: string | undefined): boolean => {
     if (!items) return false
+    const value = navURL(url)
 
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
@@ -37,10 +45,11 @@ export function getActiveMenuSection<T extends MenuNode>(
     sections: T[] | undefined,
     url: string | undefined
 ): T | undefined {
+    const lookupURL = navURL(url)
     // First section that lists the page in its sidebar wins
-    const listed = sections?.find((section) => containsURL(section.children, url))
+    const listed = sections?.find((section) => containsURL(section.children, lookupURL))
     if (listed) return listed
 
     // Last resort: a section whose own URL is the page, even with no sidebar to show
-    return sections?.find((section) => url === section.url?.split('?')[0])
+    return sections?.find((section) => lookupURL === section.url?.split('?')[0])
 }

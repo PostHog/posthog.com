@@ -1,4 +1,5 @@
 import { GatsbyNode } from 'gatsby'
+import { materializeSdkReferences } from '../scripts/sdk-references-markdown.cjs'
 
 import path from 'path'
 import fs from 'fs'
@@ -113,6 +114,10 @@ async function downloadPostHogBootstrap(): Promise<string> {
 }
 
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
+    // Before sourcing, so the generated reference pages are read like any other docs file.
+    await materializeSdkReferences({
+        apiHost: process.env.SDK_REFERENCES_API_HOST || process.env.GATSBY_SQUEAK_API_HOST,
+    })
     cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()

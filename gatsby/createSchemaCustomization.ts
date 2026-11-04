@@ -169,6 +169,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       didYouKnow: String
     }
     type Frontmatter {
+      sdkReferenceSdk: String
+      sdkReferenceMajor: String
+      sdkReferenceMajors: String
+      sdkReferenceLatest: String
+      sdkReferenceExperimental: String
       authorData: [AuthorsJson] @link(by: "handle", from: "author")
       badge: String
       report: FrontmatterReport

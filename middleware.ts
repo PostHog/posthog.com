@@ -50,6 +50,7 @@ export default async function middleware(request: Request): Promise<Response | u
         headers: {
             'content-type': 'text/markdown; charset=utf-8',
             'cache-control': markdown.headers.get('cache-control') || 'public, max-age=0, must-revalidate',
+            ...(markdown.headers.has('x-robots-tag') ? { 'x-robots-tag': markdown.headers.get('x-robots-tag')! } : {}),
             vary: 'Accept, User-Agent',
         },
     })
