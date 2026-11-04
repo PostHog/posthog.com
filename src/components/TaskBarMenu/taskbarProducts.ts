@@ -38,6 +38,7 @@ export const taskbarProducts = [
     { ...getTool('logs'), Icon: IconActivity, color: 'red' },
     { ...getTool('traces'), Icon: IconGanttChart, color: 'blue', docsSlug: 'distributed-tracing' },
     { ...getTool('data_warehouse'), Icon: IconDatabase, color: 'purple', docsSlug: 'data-warehouse' },
+    { ...getTool('cdp'), handle: 'data_pipelines', name: 'Data Pipelines', Icon: IconDecisionTree, color: 'blue' },
     { ...getTool('endpoints'), Icon: IconEndpoints, color: 'teal' },
     { ...getTool('workflows_emails'), Icon: IconDecisionTree, color: 'teal' },
     { ...getTool('surveys'), Icon: IconMessage, color: 'salmon' },
