@@ -30,7 +30,7 @@ On pay-as-you-go, you can set a custom retention period that's shorter than the 
 - Data minimization, so you keep only the data you need  
 - Faster dashboards, since “all-time” queries scan less data
 
-PostHog deletes events older than your custom retention period at the next monthly cleanup.
+PostHog deletes events that are older than your custom retention period during a monthly deletion process.
 
 ### To set a custom retention policy for your organization
 
@@ -54,7 +54,7 @@ Retention applies to every project on PostHog Cloud. Each project uses its own c
 
 - PostHog checks each event's `timestamp` against the retention period, not the time PostHog received the event. This way the event's real age decides when it expires.  
 - You can only query events whose timestamp is inside your retention period.  
-- Events that are older than the retention period may be deleted at any point. If you have a custom retention policy in place, they will be deleted during the next monhtly cleanup.
+- Events that are older than the retention period may be deleted at any point. If you have a custom retention policy in place, they will be deleted during the next monhtly deletion process.
 
 Retention uses each event's `timestamp`, so events you bring in through a [migration](/docs/migrate) are deleted at the next cleanup if they're older than your retention period, even though you only just migrated them. Check your retention period before you migrate.
 
