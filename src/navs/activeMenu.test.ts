@@ -64,10 +64,15 @@ describe('getActiveMenuSection', () => {
 })
 
 describe('the real docs nav', () => {
-    test('the Python reference and migration guides use the Python sidebar', () => {
+    test('the Python reference pages use the Python sidebar', () => {
         const expected = sectionFor('/docs/libraries/python')
         assert.ok(expected)
-        for (const path of ['/docs/libraries/python/reference', '/docs/libraries/python/migration']) {
+        for (const path of [
+            '/docs/libraries/python/reference',
+            '/docs/libraries/python/7',
+            '/docs/libraries/python/8',
+            '/docs/libraries/python/migration',
+        ]) {
             assert.equal(sectionFor(path), expected)
         }
     })
