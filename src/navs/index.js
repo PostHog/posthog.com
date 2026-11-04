@@ -2080,6 +2080,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/product-comparisons',
             },
             {
+                name: 'Running experiments',
+                url: '/handbook/engineering/posthog-com/running-experiments',
+            },
+            {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },
