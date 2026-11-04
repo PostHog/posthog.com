@@ -18,7 +18,7 @@ By September, p95 was down to 4 seconds and those failures were 14 times rarer, 
 
 ![Monthly experiment query volume against p95 and p99 latency, February to September 2026](https://res.cloudinary.com/dmukukwp6/image/upload/experiments_4_dd471e72e9.png)
 
-<Caption>3.5x the queries, one fifth the latency: monthly query volume more than tripled while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91 to 13.5 seconds. The latency axis is square-root scaled. The spike in August was a production incident.</Caption>
+<Caption>3.5x the queries, one fifth the latency: monthly query volume more than tripled while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91 to 13.5 seconds. The spike in August was a production incident.</Caption>
 
 ## Some context about Experiments in PostHog
 
@@ -106,7 +106,7 @@ The payoff of all this work is visible in how much data a query needs to touch:
 
 **Author** <TeamMember name="Anders Asheim Hennum" photo />
 
-Experiment queries need to work out who was exposed to a variant and what those people did afterwards. Both sets of data come from the events table, and combining them per user adds to the cost of reading billions of rows. 
+Experiment queries need to work out who was exposed to a variant and what those people did afterward. Both sets of data come from the events table, and combining them per user adds to the cost of reading billions of rows. 
 
 Our funnel query used to scan the table twice, once for exposures and once for metric events. We [rewrote it to collect both in a single scan](https://github.com/PostHog/posthog/pull/54258), keeping the timestamps needed to evaluate the funnel in the right order. As a result, an example production query we tested went from 16 seconds to 8 seconds.
 
@@ -125,7 +125,7 @@ We also found an expensive read that the metric calculation didn't need. Clickin
 
 ## 4. Use a dedicated exposure event
 
-**Author **<TeamMember name="Anders Asheim Hennum" photo />
+**Author** <TeamMember name="Anders Asheim Hennum" photo />
 
 For a long time, we used an event called `$feature_flag_called` to track experiment exposure. This event also records evaluations of flags unrelated to experiments, so most of that traffic wasn't useful to an experiment query. 
 
@@ -137,11 +137,11 @@ These exposure events are roughly a tenth of the volume of flag events, giving e
 
 ## 5. Move recalculation to Temporal
 
-**Author:** <TeamMember name="Rodrigo Iloro" photo />
+**Author** <TeamMember name="Rodrigo Iloro" photo />
 
 Until recently, when you opened an experiment with 30 metrics, your browser issued API calls for all 30 results at once. This is a problem, as we only allow a team 10 concurrent queries – a limitation designed to protect our ClickHouse cluster.
 
-The remaining 20 would keep retrying until slots freed up, but that waiting counted towards their timeouts. Refreshing the page could then submit the same 30 queries again while the first batch was still running.
+The remaining 20 would keep retrying until slots freed up, but that waiting counted toward their timeouts. Refreshing the page could then submit the same 30 queries again while the first batch was still running.
 
 We [moved recalculation](https://github.com/PostHog/posthog/pull/60600) to [Temporal](https://temporal.io/), a system for running long tasks reliably. It records the progress of each recalculation, so after a crash or restart we can continue with the unfinished work. 
 
@@ -179,7 +179,7 @@ The agent doesn't fix anything for us. What it changes is the feedback loop: the
 
 We avoided precomputation for a long time, and that was deliberate. We had worked on query performance before, but incrementally, mostly through SQL optimization.
 
-As a small team competing against companies with hundreds of engineers, it was convenient to have just one simple, direct path that always calculates the entire time range. Caching is a hard problem of programming, and it made sense to keep our mental model simple for as long as possible.
+As a small team competing against companies with hundreds of engineers, it was convenient to have just one simple, direct path that always calculates the entire time range. Caching is notoriously hard, and it made sense to keep our mental model simple for as long as possible.
 
 Only when our customers started clearly struggling did we accept that we couldn't wait any longer. We also learned that an impressive integration test suite is not enough for a system like this. If something can break in production in ways your tests don't cover, it eventually will.
 
