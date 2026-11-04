@@ -1,0 +1,563 @@
+---
+date: 2026-11-04
+title: The 7 best mobile app analytics tools
+rootPage: /compare
+Sidebar: Compare
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/Group_144684_a1b7ca92da.png
+featuredImageType: full
+ogImage: generated
+author:
+    - natalia-amorim
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: The 7 best mobile app analytics tools
+    metaDescription: 'Compare 7 mobile app analytics tools on free plans, iOS, Android, React Native and Flutter SDKs, session replay, and crash reporting.'
+---
+
+import { ComparisonTable } from 'components/ComparisonTable'
+import { ComparisonRow } from 'components/ComparisonTable/row'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+export const ImgFunnelLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/product-analytics/funnel-light.png"
+export const ImgFunnelDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/product-analytics/funnel-dark.png"
+
+Mobile app analytics tools help you understand how users interact with your app, but the right tool depends on what you're trying to do. 
+
+Debugging user issues? You'll want session replays. Optimizing conversion funnels? You need retention charts and path analysis. Measuring ad spend? Attribution and ROI tracking are essential.
+
+Some tools try to do it all. Others specialize. Choosing the wrong one means either paying for features you don't need, or stitching together integrations that create a messy workflow.
+
+In this guide, we compare 7 of the best mobile app analytics tools available today – from all-in-one platforms to specialized solutions – so you can find the right fit for your team.
+
+<details>
+<summary>What features do you need in a mobile app analytics tool?</summary>
+
+A good mobile app analytics tool gives you visibility into how users actually experience your app – what they tap, where they drop off, and what keeps them coming back.
+
+Most solid tools include:
+
+- Event tracking for key user actions (sign-ups, purchases, feature usage)
+- Funnels and conversion analysis to identify drop-off points
+- Retention charts to measure how well you keep users over time
+- User segmentation and cohorts for targeted analysis
+- Native SDKs for iOS and Android, plus React Native and Flutter if that's your stack, with offline event queuing so you don't lose data on a flaky connection
+
+More advanced tools go further with:
+
+- **Session replay** so you can watch exactly how users navigate your app and where they get stuck, with text and input masking so you don't record what you shouldn't
+- **Heatmaps and touch tracking** to see which UI elements get the most attention, including rage taps
+- **A/B testing and feature flags** to experiment safely and roll out changes incrementally
+- **Crash and error monitoring** to connect technical issues to user impact
+- **Marketing attribution** to measure which campaigns and channels drive installs and revenue, within the limits of Apple's App Tracking Transparency rules
+
+One more thing to weigh: how many SDKs you end up shipping. Every tool is another SDK in the binary, another set of user IDs to reconcile, and another place your data lives. The all-in-one tools below win on that; the specialists win on depth.
+
+</details>
+
+<details>
+<summary>Which mobile app analytics tool is best? The short version</summary>
+
+If you want everything from one SDK, **PostHog** is the only tool here with analytics, session replay (iOS, Android, React Native, Flutter), crash and error tracking, feature flags, and experiments together, with 1M events, 2,500 mobile replays, and 100k errors free a month, and it's the only one besides Countly you can self-host. 
+
+**[Mixpanel](/blog/posthog-vs-mixpanel)** and **[Amplitude](/blog/posthog-vs-amplitude)** are the analytics-first picks: both record mobile replays on the same four platforms and give you 10,000 a month free, Amplitude with 2M free events to Mixpanel's 1M, Mixpanel with 10 feature flags on its free plan, and neither does crash reporting or self-hosting. 
+
+**UXCam** is the mobile specialist, with replay on the widest set of frameworks (including Kotlin Multiplatform and .NET MAUI, plus web), crash and UI-freeze analytics, and a 3,000-session free plan, but no self-hosting and no public pricing beyond that. 
+
+**Firebase** gives you analytics with no event cap and free Crashlytics, but no session replay. 
+
+**AppsFlyer** measures where installs came from, not what users do in the app, with 12,000 attributed conversions free in your first year. 
+
+**Countly** is the one to self-host in a regulated environment: free Lite tier, crash analytics, and deliberately no session replay.
+
+If self-hosting matters more to you than mobile specifically, our guide to the [best open source analytics tools](/blog/best-open-source-analytics-tools) covers the wider field.
+
+</details>
+
+## 1. PostHog
+
+- **Who it's for:** engineering and product teams, and anyone building an AI feature, who want analytics, replay, flags, experiments, and error tracking from one mobile SDK, with every event tied to the same user.
+
+- **Who it isn't for:** marketing teams who need install attribution (pair it with an MMP), or teams who want mobile heatmaps today.
+
+<ProductScreenshot
+  imageLight={ImgFunnelLight} 
+  imageDark={ImgFunnelDark} 
+  alt="Funnels insight" 
+  classes="rounded"
+/>
+
+### What is PostHog?
+
+[PostHog](/) (that's us 👋) is your product's context layer. It includes product analytics and a whole bunch more, such as [A/B testing](/experiments), [feature flags](/feature-flags), [error tracking](/error-tracking), [AI observability](/ai-observability), [web analytics](/web-analytics), [surveys](/surveys), [logs](/logs), and [session replays](/session-replay), all writing to the same database and tied to the same users, so a crash arrives with the replay and the flags behind it. 
+
+A [data warehouse](/warehouse) syncs in your external data alongside, and you can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your editor via [the MCP](/mcp).
+
+It's designed for product-minded engineers, AI builders, and technical product managers who need to move fast and iterate based on reliable, actionable insights.
+
+#### Key features
+
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/data-warehouse/sql) for power users.
+
+- **Session replays:** View exactly how users are using your app on iOS, Android, React Native, and Flutter, with event timelines, console logs, network activity, and [retention from 30 days free to a year on Boost and Scale](/docs/session-replay/recording-retention). [Replay Vision](/replay-vision) runs AI scanners across recordings so you don't have to watch them one by one.
+
+- **A/B tests:** Experiment in your app with up to 20 variants and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+
+- **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
+
+- **Data warehouse:** Sync [Stripe](/docs/data-pipelines/sources/stripe), [HubSpot](/docs/data-pipelines/sources/hubspot), [Postgres](/docs/data-pipelines/sources/postgres), and dozens of other sources next to your app data and query all of it with SQL, with 1M rows a month free.
+
+### How much does PostHog cost?
+
+PostHog has [transparent pricing](/pricing) based on usage. It's free to get started and completely free for the first 1 million analytics events. After this free monthly allowance, pricing starts at $0.00005/event (or $5 for 100k events), and events cost progressively less the more you use. You can also set billing limits to ensure you don't get surprise bills.
+
+Startups less than 2 years old and with under $5 million in funding can apply for [PostHog for Startups](/startups), which includes $50,000 in additional free credits.
+
+### How good is PostHog's mobile support?
+ 
+- **SDKs:** iOS, Android, React Native, Flutter, Kotlin Multiplatform, and Unity, with Roblox in beta and a community Capacitor plugin. All [mobile SDKs](/docs/libraries) queue events offline and flush when the connection returns.
+
+- **Session replay:** Generally available on iOS, Android, React Native, and Flutter, with text and input masking, 2,500 mobile recordings a month free, and rage-tap detection on iOS.
+
+- **Crash and error tracking:** [Error tracking](/error-tracking) SDKs for iOS, Android, Flutter, React Native, Kotlin Multiplatform, and Unity, with stack traces, issue grouping, and the replay attached; 100k exceptions a month free.
+
+- **Not yet:** Mobile heatmaps.
+
+> #### Bottom line
+>
+> For teams looking for all the tools they need to improve their products from one SDK, PostHog makes for a great choice. This is especially true for startups and scaleups thanks to its generous free tier, and for AI builders who want LLM traces in the same place as the rest of their product data.
+
+<WizardCTA />
+
+## 2. Mixpanel
+
+- **Who it's for:** product managers, designers, and marketing teams who want polished, approachable analytics with session replay and experiments on the free plan.
+- **Who it isn't for:** teams who need crash reporting, error tracking, mobile heatmaps, or a self-hosted option.
+
+![mixpanel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/heap-alternatives/mixpanel.png)
+
+### What is Mixpanel?
+
+[Mixpanel](/blog/posthog-vs-mixpanel) is one of the most popular product analytics tools on the market. Founded in 2009, it's expanded beyond pure analytics to include session replay (web and mobile), experiments and feature flags (on the free plan since 2026), warehouse connectors, an MCP server, and an AI analyst, Mixpanel Agent.
+
+#### Key features
+
+- **Product analytics:** Track user behavior, KPIs, and core metrics with trends, retention, and flows.
+
+- **Experiments and feature flags:** A/B tests with feature flags, cohort targeting, and primary, secondary, and guardrail metrics; 10 flags and 1,000 experiment users a month on the free plan.
+
+- **Collaborative boards:** Build analysis in collaborative boards that can include reports, text, videos, and GIFs. Embed these boards in other tools.
+
+- **Alerts:** Get automated notifications when there are anomalies in metrics or if they fall outside a positive or negative range.
+
+- **Session replay:** Watch real user sessions on web, iOS, Android, React Native, and Flutter, with 10,000 replays a month free. Includes server-side stitching to view replays for backend and warehouse events. Heatmaps are web-only.
+
+### How much does Mixpanel cost?
+
+Mixpanel's free plan covers 1M events and 10,000 replays a month. The Growth plan starts at $0 (the first 1M events are free with a card on file) and scales with events: 2M events cost $185 a month billed annually, or $259 billed monthly. Enterprise is via sales. Startups under five years old with under $8M raised get their first year free, with 1B events and 1M replays.
+
+### How good is Mixpanel's mobile support?
+ 
+- **SDKs:** iOS, Android, React Native, Flutter, and Unity.
+
+- **Session replay:** iOS, Android, React Native, and Flutter, with 10,000 replays a month free and 30-day retention; mobile tap autocapture and rage-tap signals are in beta.
+
+- **Crash reporting:** None. Mixpanel's own docs recommend against enabling its legacy crash event.
+
+- **Heatmaps:** Web only.
+
+> #### Bottom line
+>
+> Mixpanel is great for teams who want powerful yet easy-to-use analytics with replay and experiments in one focused tool, and don't need crash reporting, error tracking, or a self-hosted option.
+
+## 3. UXCam
+
+- **Who it's for:** product managers and UX teams at mobile-first companies who want gesture-level replays, rage-tap detection, and crash context, and have budget for a sales-led contract.
+
+- **Who it isn't for:** teams who want feature flags, experiments, a public price list, or anything beyond 3,000 sessions a month for free.
+
+![UXCam](https://res.cloudinary.com/dmukukwp6/image/upload/v1720771924/posthog.com/contents/Funnel_analytics.png)
+
+### What is UXCam?
+
+[UXCam](/compare/best-uxcam-alternatives) started as a platform built solely for mobile apps and still leads with that, though it added a web SDK along the way. It includes a full suite of analytics features as well as session replays and heatmaps, and in 2026 it rebuilt the product around Tara, an AI analyst, with an MCP server alongside.
+ 
+It's designed to provide deep insights into user behavior, helping product managers understand how users interact with their apps.
+
+#### Key features
+
+- **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts.
+
+- **Session replays:** Watch sessions with the event timeline, gestures, and automatically detected rage taps, with crashes and UI freezes marked where they happened.
+
+- **Heatmaps:** See where users tap, where they scroll to, and the areas that get the most attention, and compare them across releases.
+
+- **Crash and UI freeze analytics:** Crashes and frozen frames grouped and tied to the sessions that hit them.
+
+- **Tara AI:** Ask questions about user behavior in plain English and get analysis, with an MCP server for your own agents.
+
+### How much does UXCam cost?
+
+UXCam has a free plan with 3,000 monthly sessions and unlimited users, with heatmaps, funnels, and exports excluded. Paid plans are quoted per monthly sessions after a conversation with sales; UXCam dropped its public Starter, Growth, and Enterprise tiers in mid-2026. There's a 14-day free trial with all features and 100,000 sessions.
+
+### How good is UXCam's mobile support?
+ 
+- **SDKs:** iOS (including SwiftUI), Android, React Native, Flutter, Kotlin Multiplatform, .NET MAUI, Cordova and Ionic, NativeScript, and web.
+
+- **Session replay:** All of the above, with gesture capture, rage taps, and masking; 3,000 sessions a month free.
+
+- **Crash reporting:** Crashes and UI freezes grouped and linked to the sessions that hit them.
+
+- **Heatmaps:** Tap and scroll heatmaps on mobile, comparable across releases.
+
+> #### Bottom line
+>
+> UXCam is ideal for product managers who need in-depth insights into user behavior. Despite opaque pricing, its ease of use and actionable insights make it a valuable tool.
+
+## 4. Amplitude
+
+- **Who it's for:** product, growth, and marketing teams who want the most generous free event allowance here plus replay, experiments, attribution, and AI agents from one vendor.
+
+- **Who it isn't for:** teams who need crash reporting or error tracking, mobile heatmaps, or a published price once they outgrow the Plus plan.
+
+![Amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_11_04_T18_06_05_176_Z_7c5f97e580.png)
+
+### What is Amplitude?
+
+[Amplitude](/blog/posthog-vs-amplitude) was one of the original product analytics tools. Many large enterprise customers, like Ford, NBCUniversal, and Walmart rely on it. In recent years it's added A/B testing and feature flags, session replay, guides and surveys, and a set of AI agents, and since May 2026 it has also operated [Statsig](/compare/posthog-vs-statsig).
+
+#### Key features
+
+- **Product analytics:** Funnel and retention analysis, user paths, behavioral cohorts, custom dashboards, and more.
+
+- **A/B testing:** Test new features on specific targets and analyze with primary, secondary, and counter metrics.
+
+- **Amplitude Activation:** The built-in customer data platform for identity resolution, governance, and syncing audiences to ad and marketing tools.
+
+- **AI insight builder:** Generate insights based on natural language requests, like "What is my purchase conversion rate?"
+
+### How much does Amplitude cost?
+
+Amplitude has a free plan with 2 million events per month, 10,000 session replays, unlimited feature flags, and one active experiment. The Plus plan is pay-as-you-go, with the first 2 million events free and no published rate card beyond an estimate calculator. Growth and Enterprise plans have custom, event-based pricing via sales. Startups under 20 employees with under $10M raised get the first year of Growth free.
+
+### How good is Amplitude's mobile support?
+ 
+- **SDKs:** iOS, Android, React Native, Flutter, Unity, and Unreal for analytics; replay SDKs for iOS, Android, React Native, and Flutter (the React Native unified SDK is in beta).
+
+- **Session replay:** Included on every plan, 10,000 a month free with one month of retention.
+
+- **Crash reporting:** None; replays surface JavaScript errors and failed requests on web, but there's no crash product.
+
+- **Heatmaps:** Web only, Plus plan and up.
+
+> #### Bottom line
+>
+> Amplitude is a good choice for product and marketing teams who want powerful analytics with session replay and experimentation. Note that heatmaps are web-only and start on the Plus plan, and that experiment results are a Growth and Enterprise feature.
+
+## 5. Firebase (Google Analytics)
+
+- **Who it's for:** apps already on Firebase for auth, messaging, or Crashlytics, and anyone who wants free event analytics with no volume cap and a BigQuery export.
+
+- **Who it isn't for:** teams who need session replay, more than 500 distinct event names per app, or analysis that doesn't live in the GA4 interface.
+
+![Firebase](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/pasted_image_2026_11_04_T18_22_34_841_Z_37c38315a5.png)
+
+### What is Firebase?
+
+Firebase is Google's mobile app development platform. It includes analytics, realtime databases, push notifications, in-app messaging, and more. Its analytics feature is powered by [Google Analytics](/blog/posthog-vs-ga4).
+
+#### Key features
+
+- **Google Analytics for Firebase:** Event-based analytics with audiences, funnels, and retention in the GA4 interface, plus a free BigQuery export for anything the UI can't answer. Capped at 500 distinct event names per app.
+
+- **Crashlytics:** Free crash reporting with stack traces, grouping, and alerts, the reason many apps install Firebase in the first place.
+
+- **Remote Config and A/B Testing:** Change app behavior without a release and test variants against analytics metrics; A/B Testing was folded into Remote Config in September 2026.
+
+- **Cloud Messaging and in-app messaging:** Push notifications and in-app messages targeted on behavior.
+
+### How much does Firebase cost?
+
+Firebase follows a two-tier model: the Spark plan (free) includes generous quotas for most services, while the Blaze plan (pay-as-you-go) charges only for usage beyond free limits. Analytics, Crashlytics, and Cloud Messaging are free with no usage caps. Remote Config stopped being unlimited in September 2026: 100,000 fetches a day are free, then it's usage-based on Blaze.
+
+### How good is Firebase's mobile support?
+ 
+- **SDKs:** iOS, Android, Flutter, Unity, C++, and web; React Native via a community-maintained library.
+
+- **Session replay:** None.
+
+- **Crash reporting:** Crashlytics, free with no caps, with stack traces, grouping, and velocity alerts.
+
+- **Also free:** Analytics with no event cap (500 distinct event names per app), Cloud Messaging, and a BigQuery export.
+
+> #### Bottom line
+>
+> Firebase analytics is a great choice for companies already leveraging its other features or any of Google's other products.
+
+## 6. Appsflyer
+
+- **Who it's for:** marketing and growth teams running paid acquisition who need to know which networks, campaigns, and creatives drive installs, within Apple's privacy rules.
+
+- **Who it isn't for:** anyone looking for in-app product analytics, replay, or crash reporting; it's a measurement partner, not a product analytics tool.
+
+![Appsflyer](https://res.cloudinary.com/dmukukwp6/image/upload/v1720788891/posthog.com/contents/apps-flyer.png)
+
+### What is Appsflyer?
+
+Appsflyer is a platform that focuses on marketing attribution rather than product analytics. It helps marketing teams understand which campaigns, channels, and ad creatives drive app installs and conversions, with built-in support for iOS privacy frameworks.
+
+#### Key features
+
+- **Attribution:** Appsflyer provides detailed attribution data, allowing marketers to see which campaigns, channels, and touchpoints are driving installs and conversions.
+
+- **Marketing analytics:** Turn insights on campaign performance into actionable strategies to improve your marketing.
+
+- **ROI measurement:** Understand your true mobile marketing ROI, enabling you to optimize your spend effectively.
+
+- **Fraud protection:** Advanced mobile app fraud detection and prevention tools help protect your ad spend.
+
+### How much does Appsflyer cost?
+
+AppsFlyer has three pricing tiers based on attributed conversions (non-organic installs and re-engagements). The Zero and Growth plans both include 12,000 free conversions for the first year:
+ 
+- **Zero plan:** Free, with core marketing analytics and SKAdNetwork support. AppsFlyer does not recommend it for apps that run paid campaigns.
+- **Growth plan:** $0.07 per conversion after the 12,000. Includes attribution for all major ad networks.
+- **Enterprise plan:** Custom pricing, with premium add-ons like Protect360 fraud protection, Data Locker raw data access, and dedicated support.
+
+### How good is AppsFlyer's mobile support?
+ 
+- **SDKs:** Native iOS and Android SDKs plus plugins for the major cross-platform frameworks.
+
+- **Attribution:** Install and re-engagement attribution across ad networks, SKAdNetwork and AdAttributionKit support on iOS, and Protect360 fraud detection as a premium add-on.
+
+- **Session replay and crash reporting:** None; AppsFlyer measures acquisition, not in-app behavior.
+
+> #### Bottom line
+>
+> Appsflyer is the top choice for marketing teams looking to optimize their ad spend and gain deep insights into their campaigns.
+
+## 7. Countly
+
+- **Who it's for:** teams in regulated industries who need to run analytics on their own servers or in a private cloud, with crash analytics and push notifications in the same box.
+
+- **Who it isn't for:** anyone who wants session replay (Countly doesn't offer it, on principle) or funnels and retention on the free self-hosted tier.
+
+![Countly](https://res.cloudinary.com/dmukukwp6/image/upload/v1720790258/posthog.com/contents/Countly-31.png)
+
+### What is Countly?
+
+Countly is privacy-focused product analytics platform. It emphasizes 100% data ownership and privacy compliance, supporting regulations like GDPR, HIPAA, and CCPA. Users have full control over their data, which can be self-hosted or managed in a private cloud.
+
+#### Key features
+
+- **Product analytics:** Track user behavior, application performance, and key metrics with customizable dashboards.
+
+- **Privacy compliance:** Ensure compliance with GDPR, HIPAA, CCPA, and other privacy regulations.
+
+- **Push notifications:** Engage users with personalized push notifications based on their behavior and preferences.
+
+- **Crash analytics:** Monitor and resolve app crashes with detailed reports and real-time alerts.
+
+### How much does Countly cost?
+
+Countly offers three deployment options:
+
+- **Lite (self-hosted):** Free forever, open-source. Includes core analytics but limited features (no funnels, retention, cohorts, or heatmaps).
+- **Flex (private cloud):** Starts at $175/month with usage-based pricing and a 14-day free trial. Funnels, retention, and A/B testing are paid add-ons.
+- **Enterprise:** Custom pricing based on data points. Includes all features, SSO, white-labeling, SLA support, and professional services.
+
+### How good is Countly's mobile support?
+ 
+- **SDKs:** Native iOS and Android SDKs plus the major cross-platform frameworks, with self-hosted or private-cloud ingestion so data never leaves your infrastructure.
+
+- **Session replay:** None, by design; Countly argues against recording sessions on privacy grounds.
+
+- **Crash reporting:** Crash analytics with grouping and alerts on every tier, including Lite.
+
+- **Also included:** Push notifications on every tier; funnels, retention, A/B testing, and surveys are Flex add-ons or Enterprise.
+
+> #### Bottom line
+>
+> Countly is a great choice if you're building in a strict regulatory environment and want to own the whole stack. It has no session replay by design, so pair it with another tool if you need to watch sessions.
+
+## Which mobile app analytics tool should you choose?
+
+- Want one SDK that gives you analytics, session replay, feature flags, A/B tests, and error tracking, all tied to the same user, with a free tier most apps never outgrow? Go with **PostHog**.
+- Already using Firebase for backend services and need free, unlimited analytics? Stick with **Firebase**.
+- Product or growth team that wants powerful analytics without needing a data team to set it up, with replay and experiments on the free plan? Choose **Mixpanel**.
+- Mobile-first team that needs gesture tracking, crash context, and rage tap detection? **UXCam** is built for you.
+- Enterprise team that needs polished dashboards, CDP capabilities, and Google/ad network integrations? Consider **Amplitude**.
+- Marketing team focused on attribution, ad spend optimization, and campaign ROI? **AppsFlyer** is the industry standard.
+- Require self-hosting, private cloud, or strict regulatory compliance (HIPAA, GDPR)? **Countly** gives you full data ownership.
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but we think you'll love PostHog if:
+
+-   You value transparency (we're open source and open core)
+-   You want tools to ship, track, and analyze new features – like A/B testing, feature flags, and session replays
+-   You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
+-   You're building with AI, whether that's an AI feature you need to observe or agents that work from Slack, the CLI, or your editor via the MCP
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out [our docs](/docs) to do it yourself.
+
+<WizardCTA />
+
+## FAQ
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>\
+
+On mobile, context is usually what's missing: the crash report is in one tool, the replay in another, the funnel in a third, and the user ID is slightly different in each. PostHog stores [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [experiments](/experiments), and [AI observability](/ai-observability) in one database with one model of users and sessions, from one SDK, so a crash arrives with the replay of what the user did and the flags they were in.
+ 
+The [data warehouse](/warehouse) and [CDP](/cdp) extend that to the business data that lives elsewhere – Stripe, HubSpot, Postgres – synced in and pushed back out, so "did the users who hit this crash on Android 15 keep paying" is one query. And an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the whole product, not the slice one SDK happens to hold.
+ 
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+  <summary>What is mobile app analytics?</summary>
+
+**Mobile app analytics** is the process of collecting, measuring, and analyzing user behavior data from iOS and Android applications. It helps product teams understand how users interact with their app – from which features get the most engagement to where users drop off in key flows. 
+
+Most mobile analytics platforms track events (like button taps, screen views, and purchases), user properties (like device type, OS version, and location), and session data (like session length and frequency). Advanced platforms also include [session replay](/session-replay), [A/B testing](/experiments), and crash analytics to give teams a complete picture of the mobile experience.
+
+</details>
+
+<details>
+  <summary>Which mobile analytics tools support React Native and Flutter?</summary>
+
+**PostHog**, **Mixpanel**, **Amplitude**, and **UXCam** all have first-party React Native and Flutter SDKs, and all four record session replays on both. **PostHog** also covers Kotlin Multiplatform and Unity, **UXCam** adds .NET MAUI, Cordova, and NativeScript, and **Amplitude** adds Unity and Unreal for analytics (not replay). **Firebase**'s official SDKs cover iOS, Android, Flutter, Unity, and C++; React Native uses a community-maintained library.
+ 
+</details>
+
+<details>
+  <summary>What's the difference between mobile analytics and web analytics?</summary>
+
+While both track user behavior, **mobile analytics** deals with unique challenges that web analytics doesn't face. Mobile apps run on diverse devices with different screen sizes, OS versions, and hardware capabilities. They also work offline, have app store distribution, and use different tracking mechanisms (SDKs vs. JavaScript snippets).
+
+Mobile analytics platforms typically track app-specific metrics like crash-free sessions, app installs, push notification engagement, and gesture interactions (swipes, pinches, rage taps) that don't exist on the web. Some platforms like **PostHog** and **Mixpanel** support both web and mobile, while others like **UXCam** focus exclusively on mobile.
+
+</details>
+
+<details>
+  <summary>What's the difference between product analytics and marketing analytics for mobile apps?</summary>
+
+Product analytics focuses on what users do *inside* your app – which features they use, where they get stuck, how often they return, and what drives retention. Tools like **PostHog**, **Mixpanel**, and **Amplitude** excel here. 
+
+Marketing analytics (also called attribution or mobile measurement) focuses on how users *found* your app – which ad campaigns drove installs, what the cost per acquisition was, and which channels have the best ROI. **AppsFlyer** is the leading tool for this. 
+
+Most teams need both: marketing analytics to optimize acquisition spend, and product analytics to understand and improve the in-app experience.
+
+</details>
+
+<details>
+  <summary>Do I need a mobile measurement partner (MMP) like AppsFlyer?</summary>
+
+You need an MMP if you're running paid user acquisition campaigns and want to know which ads, networks, and creatives are driving installs and conversions. MMPs like **AppsFlyer** handle the complex work of attributing installs to specific campaigns across dozens of ad networks (Meta, Google, TikTok, etc.) while navigating iOS privacy restrictions like SKAdNetwork. 
+
+If you're not running paid campaigns or are relying primarily on organic growth, you can skip the MMP and focus on product analytics instead. Many teams use both – an MMP for acquisition data and a product analytics tool like **PostHog** for in-app behavior.
+
+</details>
+
+<details>
+  <summary>How do I choose between self-hosted and cloud-hosted analytics?</summary>
+
+Cloud-hosted analytics (like **Mixpanel**, **Amplitude**, or **PostHog** Cloud) is easier to set up and maintain – you just integrate the SDK and start tracking. Self-hosted analytics gives you complete control over your data, which matters for companies in regulated industries (healthcare, finance, government) or those with strict data residency requirements. 
+
+**Countly** specializes in self-hosted deployments. The trade-off is that self-hosting requires infrastructure management and ongoing maintenance. For more options, see our guide to the [best GDPR-compliant analytics tools](/compare/best-gdpr-compliant-analytics-tools).
+
+</details>
+
+<details>
+  <summary>What mobile analytics features should I prioritize?</summary>
+
+It depends on your team's biggest questions:
+
+- **Understanding user flows and drop-offs:** Prioritize [funnels](/docs/product-analytics/funnels), [retention analysis](/docs/product-analytics/retention), and user paths
+- **Debugging UX issues:** Look for [session replay for mobile apps](/compare/best-mobile-app-session-replay-tools) with gesture tracking
+- **Optimizing features:** Look for [A/B testing](/compare/best-mobile-app-ab-testing-tools) capabilities
+- **App stability concerns:** Crash analytics with stack traces is essential
+
+For most teams, starting with core product analytics (events, funnels, retention) and adding session replay provides the best foundation before expanding to more advanced features.
+
+</details>
+
+<details>
+  <summary>How do iOS privacy changes (ATT, SKAdNetwork) affect mobile analytics?</summary>
+
+Apple's App Tracking Transparency (ATT) framework requires apps to ask permission before tracking users across other apps and websites. Most users opt out, which significantly impacts marketing attribution – you can no longer reliably track which ad drove an install for users who decline. 
+
+SKAdNetwork is Apple's privacy-preserving alternative that provides aggregate attribution data with limited granularity and delayed reporting. Product analytics (tracking behavior within your own app) is less affected since it relies on first-party data. However, cross-app user identification and some cohort analysis capabilities are limited. Tools like **AppsFlyer** and **Mixpanel** have built SKAdNetwork support to help marketers adapt to these restrictions.
+
+</details>
+
+<details>
+  <summary>Can I use multiple analytics tools together?</summary>
+
+Yes, and many teams do. A common setup is using an MMP like **AppsFlyer** for attribution alongside a product analytics tool like **PostHog** or **Mixpanel** for in-app behavior. Some teams add a dedicated crash reporting tool like **Firebase Crashlytics** or [Sentry](/compare/posthog-vs-sentry) on top of their analytics stack. 
+
+The main considerations are SDK bloat (each SDK adds to your app size and can impact performance), data consistency (making sure user IDs match across tools), and cost (paying for multiple platforms). All-in-one platforms like **PostHog** reduce this complexity by combining [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [A/B testing](/ab-testing), and [error tracking](/error-tracking) in a single SDK.
+
+</details>
+
+<details>
+  <summary>What's the best free mobile analytics tool?</summary>
+
+**Firebase** offers the most generous free tier – its analytics is completely free with no event limits, though you're capped at 500 distinct event names and there's no session replay. **Amplitude** gives you 2 million events and 10,000 replays a month. **PostHog**'s free tier includes 1 million events, 2,500 mobile session recordings, 100k errors, and 1 million feature flag requests per month. **Mixpanel** offers 1 million events per month free, including 10,000 session replays and 10 feature flags. **UXCam**'s free plan covers 3,000 sessions. **Countly** Lite is free and open source if you self-host, though it lacks funnels and retention. For pure marketing attribution, **AppsFlyer**'s Zero plan includes 12,000 free conversions for the first year, and **Adjust**'s Base plan 1,500 a month.
+
+The best choice depends on which features matter most to your team.
+
+</details>
+
+<details>
+  <summary>Which mobile app analytics tool has the best session replay?</summary>
+
+**PostHog** and **UXCam** both offer strong mobile session replay. **UXCam** is purpose-built for mobile and captures gestures like swipes, pinches, and rage taps with dedicated heatmaps. **PostHog** offers session replay as part of a broader platform that includes analytics, feature flags, and A/B testing – so you can jump from a funnel drop-off directly into the replays that show why users are leaving.
+
+**Mixpanel** added session replay in 2024 with a server-side stitching feature that lets you view replays for backend events. **Amplitude** also added replay but it's limited to Growth and Enterprise plans.
+
+For a detailed comparison, see our guide to the [best mobile app session replay tools](/compare/best-mobile-app-session-replay-tools).
+
+</details>
+
+<details>
+  <summary>How is PostHog different from other mobile analytics tools?</summary>
+
+
+**PostHog** is more than a mobile analytics tool. It's your product's context layer: every tool you need to build a successful product, in one platform, from a single SDK for mobile.
+ 
+- **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [workflows](/workflows), and more.
+- **Built for mobile:** Native iOS and Android SDKs plus React Native, Flutter, Kotlin Multiplatform, and Unity, with offline event queuing, mobile session replay with masking, and rage-tap detection on iOS
+- **Agent-ready:** A free [MCP server](/mcp), a [Slack app](/slack), and a [CLI](/docs/cli), so your coding agent sees your product data without leaving the editor
+- **Developer-first:** Transparent APIs, [SQL query builder](/docs/data-warehouse/sql), open source, and a [public roadmap](/roadmap)
+- **Transparent pricing:** Generous free tiers and [usage-based billing](/pricing)
+- **Trusted by teams:** Used by [500,000+ teams](/customers), from Y Combinator startups to enterprises
+
+</details>
+
+<details>
+  <summary>What should I use instead of Smartlook, Flurry, or App Center?</summary>
+Three mobile analytics tools have gone or are going away. **Flurry** (Yahoo) sunset in March 2024. **Smartlook** is being wound down by Cisco: end of sale was May 2026, support ends August 2027, and Cisco's migration path is Splunk, with no historical data carried over. **App Center** (Microsoft) retired most services in March 2025 and is keeping Analytics and Diagnostics running only until March 2027. **Embrace**, the mobile observability tool, was acquired by Palo Alto Networks in 2026 and is now Cortex XCOR.
+ 
+If you're migrating from Smartlook, **PostHog** and **UXCam** are the closest fits (replay plus analytics, mobile-first SDKs); if you're leaving App Center or Flurry for analytics and crashes, **PostHog** covers both, and **Firebase** covers both for free.
+ 
+</details>
+
+<NewsletterForm />
