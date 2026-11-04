@@ -25,7 +25,7 @@ Leave the first two fields empty to turn the cap off.
 
 ## Messages over the cap
 
-By default, PostHog skips a message over the cap, and the workflow moves on to the next step. The workflow's logs show the skip, and its metrics count the message as **Frequency capped**.
+By default, PostHog skips a message over the cap and doesn't send it later. The workflow moves on to the next step. The workflow's logs show the skip, and its metrics count the message as **Frequency capped**. To keep these messages instead, set a [hold time](#holding-messages-over-the-cap).
 
 ## Holding messages over the cap
 
