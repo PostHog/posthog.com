@@ -7,6 +7,7 @@ showTitle: true
 sidebar: Docs
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-14.png
+ogImage: generated
 tags:
   - configuration
   - feature flags

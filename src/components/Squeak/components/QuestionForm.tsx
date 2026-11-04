@@ -6,7 +6,6 @@ import Authentication from './Authentication'
 import Avatar from './Avatar'
 import RichText from './RichText'
 import getAvatarURL from '../util/getAvatar'
-import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
@@ -44,19 +43,17 @@ export type ForumFormOptions = {
 
 const DEFAULT_FORUM_TOPIC_SLUG = 'questions'
 
-const COMMENT_THREAD_SECTIONS = [
-    'blog',
-    'newsletter',
-    'founders',
-    'product-engineers',
-    'data-stack',
-    'posts',
-    'customers',
-    'spotlight',
-]
-
-const isCommentThreadPage = (pageSlug?: string) =>
-    COMMENT_THREAD_SECTIONS.includes(pageSlug?.split('/').filter(Boolean)[0] ?? '')
+const FORUM_TOPIC_MAPPING: Map<string, number | null> = new Map([
+    ['blog', null],
+    ['newsletter', null],
+    ['founders', null],
+    ['product-engineers', null],
+    ['data-stack', null],
+    ['posts', null],
+    ['customers', null],
+    ['community', null],
+    ['spotlight', null],
+])
 
 interface Topic {
     id: number
@@ -453,8 +450,10 @@ export const QuestionForm = ({
     const createQuestion = async ({ subject, body }: QuestionFormValues) => {
         const token = await getJwt()
         const pageSlugs = slug ? [{ slug }] : []
-        const forumTopicId = isCommentThreadPage(slug)
-            ? null
+
+        const forumTopicSlug = slug?.split('/').filter(Boolean)[0] ?? ''
+        const forumTopicId = FORUM_TOPIC_MAPPING.has(forumTopicSlug)
+            ? FORUM_TOPIC_MAPPING.get(forumTopicSlug)
             : (await suggestedForumTopicId(subject, body)) ?? (await defaultForumTopicId())
         const data = forumTopicId
             ? { subject, body, permalink: '', forumTopic: forumTopicId, slugs: pageSlugs }

@@ -16,14 +16,12 @@ import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
-import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import useSourcesNav from '../navs/useSourcesNav'
 import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
-import ContactSales from 'components/ContactSales'
 import qs from 'qs'
 import usePostHog from '../hooks/usePostHog'
 
@@ -131,7 +129,6 @@ interface AppContextType {
     isMobile: boolean
     compact: boolean
     menu: Menu
-    openStart: ({ subdomain, initialTab }: { subdomain?: string; initialTab?: string }) => void
     animateClosingAllWindows: () => void
     closingAllWindowsAnimation: boolean
     closeAllWindows: () => void
@@ -181,7 +178,6 @@ type AppActionKeys =
     | 'openNewChat'
     | 'setIsNotificationsPanelOpen'
     | 'setIsActiveWindowsPanelOpen'
-    | 'openStart'
     | 'animateClosingAllWindows'
     | 'closeAllWindows'
     | 'setClosingAllWindowsAnimation'
@@ -371,7 +367,6 @@ export const Context = createContext<AppContextType>({
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => {},
     animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
     closeAllWindows: () => {},
@@ -421,7 +416,6 @@ export const ActionsContext = createContext<AppActionsContextType>({
     openNewChat: () => {},
     setIsNotificationsPanelOpen: () => {},
     setIsActiveWindowsPanelOpen: () => {},
-    openStart: () => {},
     animateClosingAllWindows: () => {},
     closeAllWindows: () => {},
     setClosingAllWindowsAnimation: () => {},
@@ -2034,42 +2028,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getInitialWindows(element: any) {
-        if (isSSR) {
-            return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
-        }
-        const urlObj = new URL(location.href)
-        const contact = urlObj.searchParams.get('contact')
-        if (contact) {
-            const initialWindowSize = { width: window.innerWidth * 0.58, height: window.innerHeight * 0.8 }
-            const formWindowWidth = window.innerWidth * 0.4
-            const formWindowSize = {
-                width: formWindowWidth,
-                height: formWindowWidth <= 545 ? 732 : 568,
-            }
-            const padding = [65, 20]
-
-            const initialWindow = createNewWindow(element, [], location, isSSR, taskbarHeight, {
-                size: initialWindowSize,
-                position: { x: padding[0], y: padding[1] },
-                zIndex: 2,
-            })
-            const formWindow = createNewWindow(
-                <ContactSales location={{ pathname: `/talk-to-a-human` }} key="/talk-to-a-human" />,
-                [],
-                { pathname: `talk-to-a-human` },
-                isSSR,
-                taskbarHeight,
-                {
-                    size: formWindowSize,
-                    position: {
-                        x: window.innerWidth - formWindowSize.width - padding[0],
-                        y: window.innerHeight - formWindowSize.height - padding[1] - taskbarHeight,
-                    },
-                    zIndex: 0,
-                }
-            )
-            return [initialWindow, formWindow]
-        }
         return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
     }
 
@@ -2327,18 +2285,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             <ForgotPassword
                 location={{ pathname: `community-auth-forgot-password` }}
                 key="community-auth-forgot-password"
-                newWindow
-            />
-        )
-    }
-
-    const openStart = ({ subdomain, initialTab }: { subdomain?: string; initialTab?: string }) => {
-        addWindow(
-            <Start
-                subdomain={subdomain}
-                initialTab={initialTab}
-                location={{ pathname: `start` }}
-                key="start"
                 newWindow
             />
         )
@@ -2932,7 +2878,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         openNewChat,
         setIsNotificationsPanelOpen,
         setIsActiveWindowsPanelOpen,
-        openStart,
         animateClosingAllWindows,
         closeAllWindows,
         setClosingAllWindowsAnimation,
@@ -2969,7 +2914,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             openForgotPassword: (...args) => latestActionsRef.current!.openForgotPassword(...args),
             updateSiteSettings: (...args) => latestActionsRef.current!.updateSiteSettings(...args),
             openNewChat: (...args) => latestActionsRef.current!.openNewChat(...args),
-            openStart: (...args) => latestActionsRef.current!.openStart(...args),
             animateClosingAllWindows: (...args) => latestActionsRef.current!.animateClosingAllWindows(...args),
             closeAllWindows: (...args) => latestActionsRef.current!.closeAllWindows(...args),
             copyDesktopParams: (...args) => latestActionsRef.current!.copyDesktopParams(...args),
@@ -3063,7 +3007,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                 isMobile,
                                 compact,
                                 menu,
-                                openStart,
                                 animateClosingAllWindows,
                                 closingAllWindowsAnimation,
                                 setClosingAllWindowsAnimation,
