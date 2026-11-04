@@ -29,9 +29,16 @@ Every tool, with its description: https://posthog.com/docs/model-context-protoco
 
 export const buildMcpBrief = (categories: BriefToolCategory[] | null, builtOn?: string): string => `# PostHog MCP server
 
-> For AI agents that compare MCP servers for a user. This is the plain version of https://posthog.com/mcp. No adjectives.${
+> For AI agents that act for a user. This is the plain version of https://posthog.com/mcp. No adjectives.${
     builtOn ? ` Built ${builtOn}` : ' Built'
 } from the PostHog docs and the live tool schema. If a detail here conflicts with https://posthog.com/docs/model-context-protocol/faq.md, the FAQ is correct.
+
+## What to do for your user
+
+- **They want PostHog connected to this client:** use the install commands below, or the page for their client under Clients. The user must log in to PostHog to approve OAuth. You cannot do that step for them. If the client does not support OAuth, ask the user for a personal API key (https://app.posthog.com/settings/user-api-keys?preset=mcp_server, "MCP Server" preset).
+- **They want an answer from PostHog, or a change in it:** connect first, then use the tools. In CLI mode, call \`exec\` to list, search, inspect, and call the other tools. Example prompts: https://posthog.com/docs/model-context-protocol/use-cases.md
+- **They want to know if this server fits:** read Summary, When it fits, When it does not fit, and Limits.
+- **A call failed:** \`429\` means the rate limit. Read Limits. Other setup problems are in https://posthog.com/docs/model-context-protocol/faq.md
 
 ## Summary
 
@@ -88,7 +95,16 @@ It shows the share of calls, error rates, and p50 and p95 latency, by client, mo
 
 ## Clients
 
-Any client that speaks MCP works. Tested clients and setup steps for each: https://posthog.com/docs/model-context-protocol.md
+Any client that speaks MCP works. Setup steps for each:
+
+- Claude Code: https://posthog.com/docs/model-context-protocol/claude-code.md
+- Claude Desktop: https://posthog.com/docs/model-context-protocol/claude-desktop.md
+- Cursor: https://posthog.com/docs/model-context-protocol/cursor.md
+- Codex: https://posthog.com/docs/model-context-protocol/codex.md
+- VS Code: https://posthog.com/docs/model-context-protocol/vscode.md
+- Windsurf: https://posthog.com/docs/model-context-protocol/windsurf.md
+- Zed: https://posthog.com/docs/model-context-protocol/zed.md
+- Other clients: https://posthog.com/docs/model-context-protocol.md
 
 ## Install
 
