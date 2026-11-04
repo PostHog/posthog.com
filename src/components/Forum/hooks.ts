@@ -10,7 +10,7 @@ import { ForumSubscription, ForumTagData, ForumTopicData, StrapiRecord } from 'l
 
 const API = `${process.env.GATSBY_SQUEAK_API_HOST}/api`
 
-export type ForumSort = 'latest' | 'active' | 'popular'
+export type ForumSort = 'latest' | 'active' | 'popular' | 'upvotes'
 export type ForumTopic = StrapiRecord<ForumTopicData>
 export type ForumTag = StrapiRecord<ForumTagData>
 export type DeliveryMode = ForumSubscription['deliveryMode']
@@ -342,6 +342,7 @@ const sorts: Record<ForumSort, string[]> = {
     latest: ['publishedAt:desc', 'id:desc'],
     active: ['activeScore:desc', 'id:desc'],
     popular: ['popularScore:desc', 'id:desc'],
+    upvotes: ['numUpvotes:desc', 'id:desc'],
 }
 
 export type AlertTeam = {
@@ -447,9 +448,10 @@ export type FeedOptions = {
     unanswered?: boolean
     // Following: posts in any subscribed topic or with any subscribed tag.
     following?: { topicIds: number[]; tagIds: number[] }
+    authorId?: number
 }
 
-export const useForumFeed = ({ sort, topicId, tagIds = [], unanswered, following }: FeedOptions) => {
+export const useForumFeed = ({ sort, topicId, tagIds = [], unanswered, following, authorId }: FeedOptions) => {
     const conditions = useMemo(() => {
         const all: any[] = [{ forumTopic: { id: { $notNull: true } } }]
         if (topicId) all.push({ forumTopic: { id: { $eq: topicId } } })
@@ -464,8 +466,9 @@ export const useForumFeed = ({ sort, topicId, tagIds = [], unanswered, following
                 ],
             })
         }
+        if (authorId) all.push({ profile: { id: { $eq: authorId } } })
         return all
-    }, [topicId, tagIds.join(','), unanswered, following?.topicIds.join(','), following?.tagIds.join(',')])
+    }, [topicId, tagIds.join(','), unanswered, following?.topicIds.join(','), following?.tagIds.join(','), authorId])
 
     return useQuestions({
         limit: 20,
