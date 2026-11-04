@@ -10,7 +10,7 @@ availability:
 
 import { CalloutBox } from "components/Docs/CalloutBox";
 
-A materialized view is a [view](/docs/data-warehouse/views) that PostHog materializes: it runs the view's query on a schedule and stores the result as a table in the data warehouse. Queries then read the stored table instead of running the query again, which is much faster. This is useful for expensive and frequently used queries like KPI dashboards or [embedded analytics](/tutorials/embedded-analytics) queries.
+A materialized view is a [view](/docs/data-warehouse/views) that PostHog materializes: it runs the view's query on a schedule and stores the result as a table in the data warehouse. Queries then read the stored table instead of running the query again, which is much faster. This is useful for expensive and frequently used queries like KPI dashboards or queries behind [customer-facing analytics](/docs/endpoints/customer-facing-analytics).
 
 Materialized views can read other views, so you can build data in layers: clean raw source data in one view, then aggregate it in another.
 
@@ -36,14 +36,14 @@ Click a view to open it. Its **Materialization** tab has the refresh cadence, **
 
 There are two ways to materialize a view:
 
-1. **At creation time:** When saving a query as a view in the [SQL editor](https://app.posthog.com/sql), check the **Materialize this view** checkbox in the "Save as view" dialog. This materializes the view immediately with a daily sync by default. You can adjust the sync frequency later in the materialization settings.
+1. **At creation time:** When saving a query as a view in the [SQL editor](https://app.posthog.com/sql), check **Materialize this view** in the save dialog. This materializes the view immediately with a daily sync by default. You can adjust the sync frequency later in the materialization settings.
 
-2. **After creation:** For an existing view, go to the [SQL editor](https://app.posthog.com/sql), select the **Materialization** tab below the query, click **Save and materialize**, and give it a name without spaces.
+2. **After creation:** Open the view from the [Models](https://app.posthog.com/models) page, go to its **Materialization** tab, pick how often it should refresh, and click **Materialize**.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
-  alt="Materialize view"
+  imageLight="/images/docs/data-warehouse/views/materialize-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/materialize-dark-mode.png"
+  alt="A view's Materialization tab with the refresh picker and the Materialize button"
   classes="rounded"
 />
 

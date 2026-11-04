@@ -66,7 +66,7 @@ A paused view has no cadence, so you have to pick one before you can resume it.
 
 Resuming starts a fresh count. Failures from before you resumed no longer count toward the next suspension. If you resume without fixing anything, the view fails again and is suspended after 5 more failures.
 
-You can also resume a view through the [API](/docs/api) with the saved query `resume` action. Like **Resume schedule**, it lets the view run on its next scheduled cycle and doesn't start a run.
+You can also resume a view through the [API](/docs/api) with the saved query `resume` action, or ask an AI agent connected to the [PostHog MCP server](/docs/model-context-protocol) to resume it. Both work like **Resume schedule**: the view runs on its next scheduled cycle, not right away.
 
 ## Finding failing views
 
