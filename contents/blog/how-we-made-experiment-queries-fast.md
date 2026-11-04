@@ -14,7 +14,7 @@ tags:
 
 > In February, the p95 latency of our experiment queries was 19 seconds, and the slowest 1% took over a minute and a half. Queries regularly died because they timed out, ran out of memory, or scanned more data than our cluster allowed. By September, p95 was down to 4 seconds and those failures were 14 times rarer, while monthly query volume more than tripled. This post is about what we did to make this happen.
 
-![Monthly experiment query volume against p95 and p99 latency, February to September 2026](/images/experiment-queries/latency-volume.png)
+![Monthly experiment query volume against p95 and p99 latency, February to September 2026](https://res.cloudinary.com/dmukukwp6/image/upload/experiments_4_dd471e72e9.png)
 
 <Caption>3.5x the queries, one fifth the latency: monthly query volume more than tripled while p95 latency fell from 18.9 to 4.3 seconds and p99 from 91 to 13.5 seconds. The latency axis is square-root scaled. The spike in August was a production incident.</Caption>
 
@@ -36,13 +36,13 @@ There are different kinds of queries, but the kind this applies to best is a tim
 
 Here's how precomputation works. Suppose you start your experiment. It's day 1 and you load your first results. Instead of throwing away the data that query computed, we persist it in the database. Then on day 2, you ask for results for the entire time range (now 2 days). Instead of querying day 1 + day 2, we retrieve the stored data for day 1, query only day 2, and combine the two. This avoids double work: each query only scans the latest increment. Repeat this every day: by day 7, we read six cached buckets and scan only one.
 
-![The direct query path compared with the precomputed path](/images/experiment-queries/direct-vs-precomputed.png)
+![The direct query path compared with the precomputed path](https://res.cloudinary.com/dmukukwp6/image/upload/experiments_3_79e1ec7822.png)
 
 <Caption>The direct path computes the whole time range on every refresh. The precomputed path reuses cached day buckets, scans only the newest increment, and combines everything at read time.</Caption>
 
 In practice, this is more involved than the example above. Because in analytics we have events arriving late (perhaps from a mobile app that was offline for some time), we need to drop cached data after some time and re-query, to make sure our results are up to date. The refresh schedule backs off with age: the older the bucket, the less likely it is that late events will still arrive for it, so it can stay cached for longer. Roughly, it works like this:
 
-![Cache refresh schedule by bucket age](/images/experiment-queries/bucket-lifecycle.png)
+![Cache refresh schedule by bucket age](https://res.cloudinary.com/dmukukwp6/image/upload/experiments_1_219d7115a6.png)
 
 <Caption>Refreshes back off with bucket age until the bucket freezes. A late event is picked up the next time its bucket is recomputed.</Caption>
 
@@ -78,7 +78,7 @@ To solve this uncertainty for good, we built a comprehensive [canary testing sui
 
 The payoff of all this work is visible in how much data a query needs to touch:
 
-![Average data scanned per experiment metric query by month, February to September 2026](/images/experiment-queries/gb-per-query.png)
+![Average data scanned per experiment metric query by month, February to September 2026](https://res.cloudinary.com/dmukukwp6/image/upload/experiments_2_5b1edad552.png)
 
 <Caption>Average data scanned to answer one experiment metric query: from 207 GB in February to 7.6 GB in September, a 27x reduction.</Caption>
 
