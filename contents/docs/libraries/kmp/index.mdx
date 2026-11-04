@@ -706,12 +706,24 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | --- | --- | --- |
 | Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
 | iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM) |
+| macOS (Apple silicon) | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM). Version 0.11.0 and later requires macOS 11 or later. |
 | Web | ✅ | [PostHog.js](/docs/libraries/js) |
 | JVM (desktop) | ✅ | `com.posthog:posthog`, the [JVM core library](/docs/libraries/java) the Android SDK is built on |
 
 Because the SDK delegates to the native library on each platform, feature availability and behavior follow the underlying SDK. Session replay is available on Android and iOS; the web target inherits PostHog.js behavior.
 
 On the JVM, event capture, identification, feature flags, groups, error tracking, and super properties are all supported. Mobile and browser-only concepts don't apply, so `sessionRecording`, `captureApplicationLifecycleEvents`, `captureScreenViews`, `captureDeepLinks`, and `autocapture` are ignored. The JVM also has no standard app-manifest source, so `$app_version`, `$app_build`, and `$app_namespace` person properties aren't set – feature flags targeting those won't match desktop users.
+
+## Upgrade to 0.11.0
+
+Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. These changes apply on Android, iOS, macOS, and the JVM. They don't apply to the web target.
+
+- **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path.
+- **SDK name:** PostHog sets `$lib` and `$lib_version` from the request. A value that you set in event properties, with `register`, or in `beforeSend` doesn't get to PostHog.
+- **Project token:** if `projectToken` is a personal API key (`phx_...`), the SDK disables itself at setup. Use your project token (`phc_...`).
+- **Super properties:** values that you set with `register` replace the properties that the SDK sets, such as `$os_name`.
+- **macOS:** the minimum version is macOS 11.
+- **Session replay:** recordings are always masked screenshots. Refer to [Session replay](#session-replay).
 
 ## FAQ
 
