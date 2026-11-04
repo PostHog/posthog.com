@@ -1,5 +1,5 @@
 ---
-title: Running experiments on posthog.com
+title: Running experiments on PostHog.com
 ---
 
 These are the defaults for any A/B test on the website. Most of an experiment's validity lives in the PR, not in the PostHog UI, so get the code right first.
@@ -11,7 +11,7 @@ If you use an agent, point it at the <PrivateLink url="https://us.posthog.com/pr
 Settle these before any code ships.
 
 1. **Hypothesis in the description:** the change, why it should work, the primary metric, and the PR link.
-2. **Audience:** posthog.com shares project 2 and the person record with the app, so exclude existing app users in code.
+2. **Audience:** PostHog.com shares project 2 and the person record with the app, so exclude existing app users in code.
 3. **Exposure point:** if the change is below the fold, expose on scroll, not page load.
 
 ## Implementing the flag
