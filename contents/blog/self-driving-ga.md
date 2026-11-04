@@ -1,6 +1,6 @@
 ---
 title: "Self-driving is out of beta, and we finally fixed the pricing too"
-date: 2026-10-29
+date: 2026-11-09
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -40,7 +40,9 @@ The diagnosis was fast because Berkan tracks every button and feature as an [act
 
 ## Our self-driving team let self-driving drive itself
 
-We run self-driving on PostHog itself, because obviously. One [scout](/docs/self-driving/scouts) noticed we were skipping thousands of potential self-driving PRs a day and had nothing measuring why. So it wrote a query, broke the skips down by reason, checked the numbers, and added a chart to the team dashboard.
+We run self-driving on PostHog itself, because obviously. One [scout](/docs/self-driving/scouts) noticed our agents passed on thousands of chances to open a PR each day, and no chart showed why. So it wrote a query, broke the skips down by reason, checked the numbers, and added a chart to the team dashboard.
+
+![A scout's report on why our agents skipped PRs](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_11_03_at_10_05_19_27f74b08da.png)
 
 The chart got <TeamMember name="Andy Maguire" />, a product engineer on the team, digging into why the work was failing. That investigation is a big part of why self-driving is out of beta today. It also taught us that a report can be worth as much as a PR.
 
@@ -52,7 +54,7 @@ We can't fix the model, but we can steer users away from it before it gives them
 
 Self-driving PRs go straight to GitHub, and the Inbox is accessible over MCP and other surfaces. If your team works AI-native and rarely logs in to PostHog's web interface, it still fits your workflow.
 
-[Higgsfield](https://higgsfield.ai/), an AI creative suite, works this way. They has merged over 120 self-driving PRs, all of them from GitHub. The team set up a handful of scouts to watch error tracking [signals](/docs/self-driving/signals) and reviews the output alongside their daily work. Fixes so far include broken Stripe tracking and noisy exceptions that showed up as errors when they weren't.
+[Higgsfield](https://higgsfield.ai/), an AI creative suite, works this way. The team has merged over 120 self-driving PRs, all of them from GitHub. It set up a handful of scouts to watch error tracking [signals](/docs/self-driving/signals) and reviews the output alongside their daily work. Fixes so far include broken Stripe tracking and noisy exceptions that showed up as errors when they weren't.
 
 ## "All I want to know about is the pricing"
 
@@ -68,12 +70,12 @@ In the beta we charged $15 per PR and gave the reports away for free. That turne
 
 ### If you used the beta
 
-Your org stays on beta pricing until November 28, 2026. After that you move to per-run pricing like everyone else.
+Your org stays on beta pricing until December 9, 2026. From that day you move to per-run pricing like everyone else.
 
 For some of you that means a bigger bill. We'll email every org whose monthly cost goes up by more than $200, or more than doubles past $50 (about 300 of you), and offer a call with one of our engineers to tune your setup, so you're not paying for scouts and sources that aren't earning their keep.
 
 <!-- TODO: restore this sentence at the end of the paragraph above once PostHog/posthog#124825 is merged:
-We've also built a skill to help you manage spend. Ask your agent to run the `managing-self-driving-spend` skill to get started. -->
+We've also built a skill to help you manage spend. Ask your agent to run the `managing-self-driving-spend` skill through the [PostHog MCP](/mcp) to get started. -->
 
 Two more things to know:
 
