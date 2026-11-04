@@ -15,12 +15,11 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { getTool } from '../../data/tools'
+import { cloudinary } from './messagingScreenshots'
 import { applications, keyFeatures } from './messaging/slides'
 
 // This data powers the messaging page: broadcasts and drip campaigns, both built and billed through Workflows.
 // One Emails meter, one free tier (`sharesFreeTier`), so no rate on this page is hard-coded.
-
-const cloudinary = (name: string) => `https://res.cloudinary.com/dmukukwp6/image/upload/${name}.png`
 
 const YES = true
 const NO = false
