@@ -490,10 +490,24 @@ const PLATFORM_ITEMS: PlatformItem[] = [
         oneLiner: "How your product's context flows out to agents and tools.",
     },
     {
+        name: 'Transactional emails',
+        slug: 'transactional-emails',
+        layer: 'tool',
+        oneLiner:
+            'Password resets, receipts, and sign-in codes sent from your code with one SDK call, each landing on the person who triggered it.',
+    },
+    {
+        name: 'Email & Messaging',
+        slug: 'messaging',
+        layer: 'tool',
+        oneLiner:
+            'Marketing automation on your own product data: broadcasts and drip campaigns triggered by what people do, with the conversion rate next to each one.',
+    },
+    {
         name: 'Workflows',
         slug: 'workflows',
         layer: 'tool',
-        oneLiner: 'How agents act — automated actions in the loop.',
+        oneLiner: 'Multi-step automations on product events: delays, branches, Slack, webhooks, and destinations.',
     },
     {
         name: 'PostHog AI',
