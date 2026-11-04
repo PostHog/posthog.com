@@ -19,11 +19,11 @@ Three principles apply at every stage:
 2. Scoping
 3. Pending acceptance
 4. Active engagement
-5. Closed: completed, partial scope, canceled, assisted, or lost
+5. Closed: completed, partial delivery, canceled, assisted, or lost
 
 ```mermaid
 flowchart LR
-    O["1. Opportunity"] --> S["2. Scoping"] --> P["3. Pending acceptance"] --> A["4. Active engagement"] --> C["5. Closed<br>Completed · Partial scope · Canceled<br>Assisted · Lost"]
+    O["1. Opportunity"] --> S["2. Scoping"] --> P["3. Pending acceptance"] --> A["4. Active engagement"] --> C["5. Closed<br>Completed · Partial delivery · Canceled<br>Assisted · Lost"]
     O -. "Standard package" .-> P
     A -. "Paused or stalled" .-> A
     O -. "Didn't go ahead" .-> C
@@ -82,7 +82,7 @@ The customer has signed, and the engagement is in flight.
 - **Add scope through the engagement.** If the customer wants more work after the engagement starts, add it to this engagement instead of opening a new one. Added scope is a new quote, not an informal extension: scope it, price it per milestone, and get the customer's sign-off before we start it. See [what it costs](/handbook/forward-deployed-engineering/how-we-work#what-it-costs).
 - **Hand over.** Complete the [handover](/handbook/forward-deployed-engineering/working-with-customers#handover) and give the relationship back to the account owner.
 
-Once the customer's named owner approves the final deliverable and the handover is done, the engagement moves to **closed**. If the customer stops early, close it as [partial scope](#partial-scope) or [canceled](#canceled).
+Once the customer's named owner approves the final deliverable and the handover is done, the engagement moves to **closed**. If the customer stops early, close it as [partial delivery](#partial-delivery) or [canceled](#canceled).
 
 ### Paused or stalled
 
@@ -113,7 +113,7 @@ We delivered all the agreed milestones, and the customer approved them.
 
 ##### Retro
 
-Every engagement that closes as completed, partial scope, or canceled gets an internal retro. The purpose is:
+Every engagement that closes as completed, partial delivery, or canceled gets an internal retro. The purpose is:
 
 - **Measurable outcome.** Every engagement is tied to a clear outcome that we agreed during scoping, such as a finished migration, data the customer trusts, or higher adoption of a product. The retro checks the results against that outcome. The impact of FDE work often takes weeks or months to show, for example in adoption, usage, or the renewal, so set reminders to check in on the account with the account owner one, two, and three months after the engagement ends.
 - **Learning from what went well and what didn't.** Understand why, so we repeat the wins and avoid the same problems on the next engagement.
@@ -128,7 +128,7 @@ The retro covers:
 - **Commercial gaps.** For example, a pricing, packaging, or contract problem we hit.
 - **Product gaps.** What gaps we found, and what we did about each one: we shipped a fix, found a workaround, or raised it with the product team.
 
-#### Partial scope
+#### Partial delivery
 
 The customer chose to stop after some of the milestones, and stopping there made sense for them. For example, the first milestones solved their main problem.
 
@@ -160,4 +160,4 @@ The formal engagement didn't go ahead, and we didn't deliver any work.
 
 A [retro](#retro) on a lost engagement is optional. Consider one when the reason it was lost could teach us something, for example if pricing, scoping, legal, or a product gap blocked the engagement.
 
-At the end of each quarter, we may also run a wider retro across all closed engagements from that quarter (completed, partial scope, canceled, assisted, and lost), to help set objectives and improvements for the next one.
+At the end of each quarter, we may also run a wider retro across all closed engagements from that quarter (completed, partial delivery, canceled, assisted, and lost), to help set objectives and improvements for the next one.
