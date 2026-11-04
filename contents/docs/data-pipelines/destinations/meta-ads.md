@@ -31,7 +31,9 @@ You'll also need access to the relevant Meta Ads account.
 
 6. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing required data.
 
-7. Press **Create & enable**, test your destination, and then watch your conversions get sent to Meta Ads.
+7. If your Meta Pixel also sends any of these conversions, set **Event ID** to an ID that the Pixel sends too. Otherwise, Meta counts the conversion twice. See [how to stop Meta from counting a conversion twice](#how-do-i-stop-meta-from-counting-a-conversion-twice).
+
+8. Press **Create & enable**, test your destination, and then watch your conversions get sent to Meta Ads.
 
 <HideOnCDPIndex>
 
@@ -42,6 +44,28 @@ You'll also need access to the relevant Meta Ads account.
 ## FAQ
 
 <AdDestinationPersonDataFaq />
+
+### How do I stop Meta from counting a conversion twice?
+
+When your Meta Pixel and this destination both send the same conversion, Meta keeps one copy only if:
+
+- Both copies have the same event name, for example `Purchase`.
+- The Pixel's `eventID` is the same as the destination's **Event ID**.
+- Both copies go to the same Pixel ID, and Meta receives them within 48 hours of the first copy.
+
+**Event ID** defaults to `{event.uuid}`, the ID of the PostHog event. Your Pixel doesn't know this ID, so Meta keeps both copies. Use an ID that the browser and your server both have. For a purchase, use the order ID. In the Pixel, `eventID` is the fourth argument of the `fbq` call:
+
+```js
+fbq("track", "Purchase", { value: 49.0, currency: "EUR" }, { eventID: "order_10482" })
+```
+
+Then set **Event ID** in the destination to the property that holds the same order ID, for example `{event.properties.order_id}`. Use a different ID for each new conversion. To confirm that Meta merged the two copies, check the event's deduplication details in Events Manager.
+
+For example values for each input of this destination, including `fbc` and `fbp`, see the [PostHog Meta Ads integration guide from 99Ways](https://99ways.io/how-to-send-posthog-conversion-events-to-meta-ads/#common-fields).
+
+### Does Meta discard events sent with a test event code?
+
+No. Meta [keeps events that you send with a test event code](https://developers.facebook.com/docs/marketing-api/conversions-api/using-the-api#testEvents) and uses them for targeting and ads measurement. Use the **Test Event Code** input only while you test, and remove the code before you send real traffic.
 
 ### Is the source code for this destination available?
 
