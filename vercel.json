@@ -166,18 +166,18 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-python/:path*",
-            "destination": "/docs/libraries/python/reference",
+            "source": "/docs/references/posthog-python/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-python-:version",
-            "destination": "/docs/libraries/python/reference",
+            "source": "/docs/references/posthog-python-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
             "statusCode": 301
         },
         {
-            "source": "/docs/references/posthog-python-:version/:path*",
-            "destination": "/docs/libraries/python/reference",
+            "source": "/docs/references/posthog-python-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
             "statusCode": 301
         },
         {
