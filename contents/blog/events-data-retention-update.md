@@ -46,7 +46,7 @@ We do not automatically delete events as soon as they expire, so they may be sto
 - Not all customers are aware that their retention period has ended, and we want to give them time to extend it
 - We delete events in batches, so there is a delay between when an event expires and when it is deleted
 
-To remove events right away, use the [data deletion tools](/docs/privacy/data-storage#data-deletion). For more details, see the [events data retention docs](/docs/data/events-retention). 
+For more details, see the [events data retention docs](/docs/data/events-retention). 
 
 ## How can I extend my events data retention period in PostHog?
 
