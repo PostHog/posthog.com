@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Icons from '@posthog/icons'
+import { IconMCP } from 'components/OSIcons'
 
 /**
  * Curated product/tool handles shown in the taskbar "Browse tools" menu and
@@ -48,7 +48,7 @@ export const nonProductPages = {
     mcpAnalytics: {
         slug: 'mcp-analytics',
         url: '/docs/mcp-analytics',
-        icon: 'IconPlug',
+        icon: IconMCP,
         color: 'purple',
     },
 }
@@ -67,7 +67,7 @@ export function buildProductMenuItems(handles: string[], allProducts: any[]): an
                 // Handle icon for non-product pages
                 let iconElement = null
                 if (nonProductPage.icon) {
-                    const IconComponent = Icons[nonProductPage.icon as keyof typeof Icons]
+                    const IconComponent = nonProductPage.icon
                     if (IconComponent) {
                         iconElement = React.createElement(IconComponent, {
                             className: `text-${nonProductPage.color || product.color || 'gray'} size-4`,
@@ -140,7 +140,7 @@ export function buildAllProductsMenuItems(allProducts: any[]): any[] {
             // Handle icon for non-product pages
             let iconElement = null
             if (nonProductPage.icon) {
-                const IconComponent = Icons[nonProductPage.icon as keyof typeof Icons]
+                const IconComponent = nonProductPage.icon
                 if (IconComponent) {
                     iconElement = React.createElement(IconComponent, {
                         className: `text-${nonProductPage.color || product.color || 'gray'} size-4`,
