@@ -41,7 +41,7 @@ Moving to our new world, I was adamant that I didn't want a branch per team that
     1. Applies a team tag and an SME tag in a format I've defined
     2. Sets the ticket's priority, based on the examples in our handbook
     3. Captures a custom PostHog event to say the ticket has been classified and which tags were applied
-    4. Investigates the ticket and pulls useful context onto it before a human picks it up (including events, replays, customer analytics, errors, past tickets, etc)
+    4. Investigates the ticket and pulls useful context onto it for the support engineer (including events, replays, customer analytics, errors, past tickets, etc)
 
 I don't need to worry about team changes anymore. The task uses what's currently in our [teams page](/teams), the [feature ownership page](/handbook/engineering/feature-ownership), and the [support SME page](/handbook/support/support-smes) to decide which team owns it.
 
