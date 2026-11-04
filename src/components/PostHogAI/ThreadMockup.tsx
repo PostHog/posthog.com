@@ -73,7 +73,7 @@ export default function ThreadMockup({ scenario }: { scenario: ThreadScenario })
 
     return (
         <div
-            className="@container not-prose relative w-full overflow-hidden rounded border border-primary text-primary shadow-2xl [background-color:color-mix(in_srgb,rgb(var(--bg))_60%,rgb(var(--accent)))]"
+            className="@container not-prose relative w-full overflow-hidden rounded-b border border-primary text-primary shadow-2xl [background-color:color-mix(in_srgb,rgb(var(--bg))_60%,rgb(var(--accent)))]"
             role="group"
             aria-label="PostHog AI conversation"
         >

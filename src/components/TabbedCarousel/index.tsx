@@ -98,7 +98,7 @@ const VARIANT_CONFIG: Record<TabbedCarouselVariant, VariantConfig> = {
         slideContainerClassName: 'rounded-b-md rounded-t-md transition-colors',
         slideSizeClassName: SLIDE_SIZE,
         showSlideHalo: false,
-        contentWrapperClassName: 'overflow-hidden shadow-2xl',
+        contentWrapperClassName: 'overflow-hidden rounded shadow-2xl',
         alwaysShowActiveBg: false,
     },
     hero: {
@@ -113,20 +113,20 @@ const VARIANT_CONFIG: Record<TabbedCarouselVariant, VariantConfig> = {
             '@md:rounded-b-md @md:rounded-t-md border border-black/10 dark:border-white/60 -mt-px @md:transition-colors',
         slideSizeClassName: SLIDE_SIZE,
         showSlideHalo: true,
-        contentWrapperClassName: 'relative shadow-2xl',
+        contentWrapperClassName: 'relative rounded shadow-2xl',
         alwaysShowActiveBg: true,
     },
     flush: {
         tabsRowClassName: '',
         wrapTabs: false,
-        triggerBaseClassName: 'px-2 py-2.5 transition-colors',
-        triggerActiveClassName: '',
-        triggerInactiveClassName: '',
+        triggerBaseClassName: 'px-2 py-2.5 transition-colors border border-b-0 -mb-px',
+        triggerActiveClassName: 'border-primary',
+        triggerInactiveClassName: 'border-transparent',
         showActiveTabHalo: false,
         slideContainerClassName: 'rounded-b-md rounded-t-md transition-colors',
         slideSizeClassName: '',
         showSlideHalo: false,
-        contentWrapperClassName: 'overflow-hidden',
+        contentWrapperClassName: 'overflow-hidden rounded-b',
         alwaysShowActiveBg: false,
     },
 }
@@ -305,7 +305,7 @@ export default function TabbedCarousel({
                         />
                     )}
                     <div
-                        className={`flex flex-col bg-light dark:bg-dark flex-1 w-full rounded ${config.contentWrapperClassName}`}
+                        className={`flex flex-col bg-light dark:bg-dark flex-1 w-full ${config.contentWrapperClassName}`}
                     >
                         <span className="absolute top-4 right-4 z-10">
                             <Tooltip
