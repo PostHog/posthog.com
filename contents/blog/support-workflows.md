@@ -58,7 +58,7 @@ Workflows also knows which email address a ticket was sent to or what channel wa
 
 ## Updating the ticket lifecycle
 
-These are the workflows that keep tickets moving:
+We have several workflows to keep tickets moving:
 
 - **Acknowledge new tickets** - email and widget tickets get an email so they know we've got their ticket. Slack and MS Teams tickets already get a post in the thread.
 - **Tell widget customers we've replied** - emails them so they don't have to keep checking in-app.
