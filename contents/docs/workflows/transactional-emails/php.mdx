@@ -121,4 +121,4 @@ function emailBounced(string $messageId): ?bool
 }
 ```
 
-`get()` returns an `EmailStatus` with `getId()`, `getStatus()`, `getCreatedAt()`, `getStatusAt()`, and `getReason()`. The two times are `DateTimeImmutable` objects. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.
+`get()` returns an `EmailStatus` with `getId()`, `getStatus()`, `getCreatedAt()`, `getStatusAt()`, and `getReason()`. The two times are `DateTimeImmutable` objects. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). The helper returns `null` while the status isn't there yet, so check for `null` before you read the result as "not bounced". The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.

@@ -127,7 +127,7 @@ See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and
 ## Check an email's status
 
 ```elixir
-def email_bounced?(message_id) do
+def email_bounced(message_id) do
   case PostHog.Emails.get(message_id) do
     {:ok, %PostHog.Emails.Status{status: status}} ->
       {:ok, status == "bounced"}

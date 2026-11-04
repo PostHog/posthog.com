@@ -22,7 +22,7 @@ Reuse the PostHog client your application already creates, and set `SecretKey` t
 
 ```csharp file=ASP.NET
 // Program.cs
-using PostHog.AspNetCore;
+using PostHog;
 
 // Set PostHog:ProjectToken and PostHog:SecretKey in your configuration,
 // such as user secrets or environment variables
@@ -52,7 +52,7 @@ var emails = posthog.Emails;
 
 </MultiLanguage>
 
-- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `HostUrl` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `AppHost` to your PostHog app URL. `AppHost` must use `https`. Email requests never go to a host that might be a proxy. Flag definitions for local evaluation still load from `HostUrl` with the secret key when you evaluate a flag.
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `HostUrl` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `AppHost` to your PostHog app URL. `AppHost` must use `https`. Email requests never go to a host that might be a proxy. Flag definitions for local evaluation still load from `HostUrl` with the secret key when you evaluate a flag. So when that host is a proxy that must not see the key, leave `SecretKey` off that client. Send email from a second `PostHogClient` whose `HostUrl` is your PostHog host.
 - **Local evaluation:** The client loads flag definitions only when it evaluates a flag. If your application [evaluates flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too.
 
 ## Send an email

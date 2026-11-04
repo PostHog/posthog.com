@@ -101,7 +101,7 @@ Copies (cc and bcc) and attachments aren't in the Ruby SDK yet. They will come i
 ## Check an email's status
 
 ```ruby
-def email_bounced?(message_id)
+def email_bounced(message_id)
   status = $posthog.emails.get(message_id)
   status.status == 'bounced'
 rescue PostHog::EmailError => e
@@ -112,4 +112,4 @@ rescue PostHog::EmailError => e
 end
 ```
 
-`get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.
+`get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). The helper returns `nil` while the status isn't there yet, so check for `nil` before you read the result as "not bounced". The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.
