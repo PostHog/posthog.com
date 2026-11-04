@@ -8381,6 +8381,12 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
+                    name: 'Frequency cap',
+                    url: '/docs/workflows/frequency-cap',
+                    icon: 'IconClock',
+                    color: 'purple',
+                },
+                {
                     name: 'Sending reputation and allowance',
                     url: '/docs/workflows/sending-reputation',
                     icon: 'IconShield',
