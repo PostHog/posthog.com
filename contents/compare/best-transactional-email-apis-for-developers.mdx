@@ -1,0 +1,143 @@
+---
+title: The best transactional email APIs for developers, compared
+date: 2026-11-04
+rootPage: /compare
+sidebar: Compare
+showTitle: true
+hideAnchor: true
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/best_tools_blog_post_template_2_7f907727eb.png
+featuredImageType: full
+category: General
+tags:
+    - Comparisons
+seo:
+    {
+        metaTitle: 'The best transactional email APIs for developers, compared',
+        metaDescription: 'The best transactional email APIs for developers: PostHog for sends that land on the person, Resend for React Email, Postmark for deliverability, and SendGrid for volume.',
+    }
+---
+
+A transactional email API has one job: when your code says "send the password reset", the reset arrives. Every tool on this list does that. The differences are in what happens around the send - retries, status, templates, and whether you can see what the person did after the email landed.
+
+This list is for developers picking the API they will call from a backend, ranked by how the tools fit product and engineering work.
+
+The right pick comes down to what you care about most:
+
+-   **If you already run the PostHog SDK and want the send on the person's timeline:** [PostHog](/transactional-emails)
+-   **If you write React and want React Email as a first-class input:** Resend
+-   **If deliverability and a clean separation of transactional and bulk streams matter most:** Postmark
+-   **If you send at very high volume inside the Twilio ecosystem:** SendGrid
+
+### What's the best transactional email API for product teams?
+
+For teams that already track their product in PostHog, it's **[PostHog transactional emails](/transactional-emails)**.
+
+You design the email in PostHog, or render it in code, then send it with one call from the PostHog SDK for Node.js or Python, or the REST API from anything else. The call takes an idempotency key, so a retry after a timeout never sends the reset twice, and it returns a message ID you can read the status of for 30 days.
+
+The part no other tool on this list does: the send lands on the person who triggered it, next to their events, replays, and flags. So instead of a delivery rate, you see whether the reset email got them back in, and you can put sent, delivered, opened, and clicked in a funnel with what the person did next.
+
+**What makes PostHog good for developers:**
+
+-   **Send API:** `posthog.emails.send()` in the Node.js and Python SDKs, plus a REST endpoint. Idempotency keys, typed error codes, and a status lookup by message ID.
+-   **Templates:** Design in the PostHog editor and send by template ID, or render the email yourself (React Email, MJML, a string) and send the HTML.
+-   **Delivery:** Your own verified sending domain, a suppression list built from hard bounces, and per-domain bounce and complaint rates. Transactional sends ignore marketing opt-outs and have their own queue.
+-   **Sensitive data:** Turn on **Protect sensitive data** and PostHog keeps no copy of the body and never rewrites links, so a sign-in code or reset token never passes through a tracking redirect.
+-   **Observability:** Every send on the person's timeline, delivery webhooks, and engagement events you can query like any other PostHog event.
+-   **Agents:** Ask PostHog AI or the [MCP server](/mcp) to create the email and write the code that sends it.
+-   **Pricing:** 10,000 emails free every month, then from $0.003 per email. The free tier is shared with [Email & Messaging](/messaging), so marketing and product email are on one bill.
+
+**Not ideal if:** you need dedicated IPs, inbound email parsing, or an SMTP relay, or you only want an email API and nothing else from PostHog.
+
+**Alternatives to consider:** **Resend** for the React Email workflow, **Postmark** when deliverability is the whole brief.
+
+### What's the best transactional email API for React and Next.js teams?
+
+**Resend** is the pick if you want to write emails as React components and ship them without a template editor.
+
+![Resend](https://res.cloudinary.com/dmukukwp6/image/upload/best_tools_blog_post_template_2_7f907727eb.png)
+
+The Node.js SDK takes a `react` parameter and renders the component for you. Sends accept an `Idempotency-Key` header, and `GET /emails/{id}` returns the last event for a message.
+
+**What makes Resend good for developers:**
+
+-   **Send API:** Official SDKs, idempotency keys stored for 24 hours, and a retrieve endpoint for message status.
+-   **Templates:** React Email in code, or a no-code editor in the dashboard.
+-   **Marketing in the same product:** Broadcasts for one-off sends to an audience.
+-   **Observability:** A per-contact timeline of email events such as opened and clicked. No product events, so you cannot see what a person did after the email.
+-   **Pricing:** 3,000 emails per month free, with a 100 per day cap. Paid plans scale by volume.
+
+**Not ideal if:** you want the send next to product analytics, or you need a marketing automation builder with branching.
+
+**Alternatives to consider:** **PostHog** when the question is "did the email work", not "did the email send".
+
+### What's the best transactional email API for deliverability?
+
+**Postmark** is the pick when getting into the inbox is the whole job and you want transactional traffic kept apart from bulk mail.
+
+Message streams separate transactional and broadcast sending with their own reputation, and the Messages API returns the status and event history for any message ID.
+
+**What makes Postmark good for developers:**
+
+-   **Send API:** Official SDKs for Node.js, Python, Ruby, .NET, Java, PHP, and more. A message details endpoint for status. No idempotency keys, so your code has to guard against double sends.
+-   **Templates:** A code and HTML template editor in the dashboard, or send raw HTML.
+-   **Marketing in the same product:** Broadcast message streams, subject to bulk sending approval.
+-   **Observability:** Delivery, open, and click events per message. No per-user product timeline.
+-   **Pricing:** 100 emails per month free with no overages. Paid plans scale by volume.
+
+**Not ideal if:** you rely on idempotent retries, or you want marketing and product email on one bill.
+
+**Alternatives to consider:** **PostHog** or **Resend** for idempotency keys and a cheaper free tier.
+
+### What's the best transactional email API for high volume?
+
+**SendGrid** (Twilio SendGrid) is the pick for very large senders that want one vendor for email, SMS, and voice.
+
+**What makes SendGrid good for developers:**
+
+-   **Send API:** Official SDKs for C#, Go, Java, Node.js, PHP, Python, and Ruby. No idempotency keys in the Mail Send API.
+-   **Templates:** Dynamic templates with a design editor and a code editor.
+-   **Marketing in the same product:** Marketing Campaigns, with automations on the Advanced plan.
+-   **Observability:** Event webhooks. Looking up a message by ID needs the Email Activity history add-on.
+-   **Pricing:** No free plan since March 2025. New accounts get a 60-day trial of 100 emails per day.
+
+**Not ideal if:** you are a small team that wants a free tier, or you want message status without a paid add-on.
+
+**Alternatives to consider:** **Postmark** for deliverability at a smaller scale, **PostHog** for a 10,000 email free tier.
+
+## Other frequently asked questions
+
+<details>
+<summary>How is PostHog different from a transactional email API like Resend or Postmark?</summary>
+
+The send API is the same shape: one call, a message ID, a status you can read back. The difference is where the send ends up. In PostHog, every email lands on the person who triggered it, next to their product events, replays, and flags, so you can put the email in a funnel with what the person did next. A transactional email API tells you the email was delivered. PostHog tells you whether it worked.
+
+</details>
+
+<details>
+<summary>Which transactional email APIs have free tiers?</summary>
+
+**PostHog** includes 10,000 emails per month. **Resend** includes 3,000 per month with a 100 per day cap. **Postmark** includes 100 per month. **SendGrid** retired its free plan in 2025 and offers a 60-day trial instead.
+
+</details>
+
+<details>
+<summary>Which transactional email APIs support idempotency keys?</summary>
+
+**PostHog** and **Resend** accept an idempotency key on every send, so a retry after a timeout replays the first send instead of sending again. **Postmark** states it does not support idempotency keys. **SendGrid** does not document them for the Mail Send API.
+
+</details>
+
+<details>
+<summary>Can I send marketing email from the same tool?</summary>
+
+Yes, on all four. PostHog has [Email & Messaging](/messaging) for broadcasts and drip campaigns on the same senders and the same free tier as transactional email. Resend has Broadcasts, Postmark has broadcast message streams, and SendGrid has Marketing Campaigns.
+
+</details>
+
+<details>
+<summary>Can I use React Email with each of these?</summary>
+
+Yes. React Email renders to HTML, and every API on this list accepts HTML. Resend goes one step further and takes the React component directly in its Node.js SDK.
+
+</details>
