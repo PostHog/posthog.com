@@ -840,5 +840,13 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/bknofevider/",
         "profile_id": 43006
+    },
+    {
+        "handle": "jon-su",
+        "name": "Jon Su",
+        "role": "Forward Deployed Engineer",
+        "link_type": "linkedin",
+        "link_url": "https://www.linkedin.com/in/jon-su/",
+        "profile_id": 47545
     }
 ]
