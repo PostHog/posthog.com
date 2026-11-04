@@ -28,7 +28,6 @@ import {
     IconAtSign,
 } from '@posthog/icons'
 import useProducts from './useProducts'
-import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
 import { support } from './productData/support'
 import { groupAnalytics } from './productData/group_analytics'
@@ -1636,7 +1635,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             ],
             worksWith: ['feature_flags', 'surveys', 'product_analytics', 'session_replay'],
         },
-        mcpAnalytics,
         {
             ...getTool('api'),
             Icon: IconTerminal,
