@@ -39,6 +39,8 @@ List of ingestion warnings:
 - [Ingested event after shortening its distinct ID to the 200 character limit](#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit)
 - [Replay event timestamp is invalid](#replay-event-timestamp-is-invalid)
 - [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
+- [Message window ID too long](#message-window-id-too-long)
+- [Message has too many events](#message-has-too-many-events)
 - [$set or $set_once is ignored on exception events and should not be sent](#invalid-set-operations-on-exception-events)
 - [Invalid heatmap data](#invalid-heatmap-data)
 - [Discarded $groupidentify event with invalid $group_set](#discarded-groupidentify-event-with-invalid-group_set)
@@ -109,6 +111,22 @@ The replay event timestamp is not valid and the session replay event is dropped.
 ## Replay event timestamp was too far in the future
 
 The replay event timestamp is more than 7 days in the future and the session replay event is dropped.
+
+## Message window ID too long
+
+A session replay message was dropped because its window ID exceeded the configured byte limit. The default limit is 1024 bytes.
+
+This typically happens with custom SDKs or transports that generate window IDs differently from the standard PostHog web SDK, which uses short UUID-based window identifiers.
+
+To fix this, use a current PostHog SDK which sends UUID window IDs. If you're using a custom SDK or transport, ensure window IDs stay under 1024 bytes.
+
+## Message has too many events
+
+A session replay message was dropped because it contained more events than the configured limit. The default limit is 100,000 events per message.
+
+This can occur when a custom SDK or transport batches too many snapshot events into a single message instead of splitting them into smaller chunks.
+
+To fix this, use a current PostHog SDK which sends small batches. If you're using a custom SDK or transport, split large recordings into multiple smaller messages.
 
 ## Invalid set operations on exception events
 
