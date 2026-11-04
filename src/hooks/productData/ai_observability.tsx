@@ -16,7 +16,7 @@ import {
 } from '@posthog/icons'
 import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
-import { applications, topFeatures, wizardSupports } from './ai_observability/slides'
+import { applications, keyFeatures, wizardSupports } from './ai_observability/slides'
 
 export const aiObservability = {
     ...getTool('ai_observability'),
@@ -86,11 +86,11 @@ export const aiObservability = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -109,7 +109,7 @@ export const aiObservability = {
         // No `installation` section: the shared install taxonomy has no LLM provider
         // category, so it would list generic web/backend SDKs instead of the
         // per-provider guides. The provider grid lives in the Integrations slide of
-        // `top-features` until the taxonomy gains an LLM category.
+        // `key-features` until the taxonomy gains an LLM category.
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     /**
@@ -126,6 +126,7 @@ export const aiObservability = {
     ],
     overview: {
         title: 'Observe and fix AI in production',
+        description: '"Show me LLM costs this week broken down by model"',
         eli5: 'AI Observability captures the full context of each trace and connects it to other PostHog products (like Session Replay). Evals score your live traffic and anomaly alerts tell you when things are not normal, so regressions in tool calling, response quality, or latency automatically turn into signals.',
         textColor: 'text-white',
         layout: 'overlay',

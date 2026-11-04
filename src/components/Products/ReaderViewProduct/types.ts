@@ -159,7 +159,7 @@ export interface SlideBullet {
 
 /**
  * Single carousel slide config. Combines tab-strip styling with body content.
- * Templates (`Applications`, `TopFeatures`, etc.) read arrays of these from
+ * Templates (`Applications`, `KeyFeatures`, etc.) read arrays of these from
  * productData hook files and pass them through `<CarouselSlide>` for rendering.
  */
 export type CarouselSlide = CarouselSlideStyle & {
