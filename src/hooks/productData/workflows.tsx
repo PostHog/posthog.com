@@ -21,6 +21,8 @@ import { getTool } from '../../data/tools'
 
 export const workflows = {
     ...getTool('workflows_emails'),
+    // Email & Messaging is the calculator row for the Emails meter; this product stays registered for the billing data it owns.
+    hideFromCalculator: true,
     productVariantName: 'Emails',
     Icon: IconDecisionTree,
     type: 'workflows_emails',

@@ -9,7 +9,7 @@ import {
     IconToggle,
     IconFlask,
     IconMessage,
-    IconDecisionTree,
+    IconMegaphone,
     IconSupport,
     IconDatabase,
     IconStack,
@@ -74,7 +74,7 @@ const jobs: {
         tools: [
             { Icon: IconToggle, name: 'Feature flags', slug: 'feature-flags' },
             { Icon: IconFlask, name: 'Experiments', slug: 'experiments' },
-            { Icon: IconDecisionTree, name: 'Workflows', slug: 'workflows' },
+            { Icon: IconMegaphone, name: 'Email & Messaging', slug: 'messaging' },
         ],
     },
     {

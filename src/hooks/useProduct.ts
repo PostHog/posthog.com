@@ -33,6 +33,8 @@ import { traces } from './productData/traces'
 import { support } from './productData/support'
 import { groupAnalytics } from './productData/group_analytics'
 import { dataPipelines } from './productData/data_pipelines'
+import { transactionalEmails } from './productData/transactional_emails'
+import { messaging } from './productData/messaging'
 import { getTool } from '../data/tools'
 
 const dedupe = (products) => {
@@ -127,6 +129,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         groupAnalytics,
         dataPipelines,
+        transactionalEmails,
+        messaging,
         {
             handle: 'platform_packages',
             name: 'Platform packages',
