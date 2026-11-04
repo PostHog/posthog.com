@@ -42,6 +42,7 @@
   },
   "ignores": [
     "**/fixtures/**",
-    ".vale/test/**"
+    ".vale/test/**",
+    "**/README.md"
   ]
 }
