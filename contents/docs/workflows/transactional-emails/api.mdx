@@ -323,13 +323,7 @@ $result = PostHog::emails()->send([
 
 ### Copies and attachments
 
-<CalloutBox icon="IconInfo" title="Coming soon" type="fyi">
-
-Copies and attachments aren't available yet. This section shows how they will work. A send with these fields gets a `400` that names the field until then, and PostHog sends nothing.
-
-</CalloutBox>
-
-Content from your code will also take these fields. A template send takes none of them, because the template uses its own settings.
+Content from your code also takes these fields. A template send takes none of them, because the template uses its own settings.
 
 | Field | Required | Description |
 | --- | --- | --- |
@@ -339,7 +333,8 @@ Content from your code will also take these fields. A template send takes none o
 
 - **Inline images:** Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
 - **Blocked files:** PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
-- **SDKs:** The SDKs encode the file's bytes to Base64 for you. Support comes in a later version of each SDK.
+- **SDKs:** The SDKs encode the file's bytes to Base64 for you.
+- **Older PostHog versions:** A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
 
 ### Checks for content from your code
 

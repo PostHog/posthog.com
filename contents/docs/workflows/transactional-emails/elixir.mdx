@@ -100,13 +100,7 @@ See [content from your code](/docs/workflows/transactional-emails/api#send-conte
 
 ### Copies and attachments
 
-<CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
-
-Copies and attachments aren't in a released version of the Elixir SDK yet. This section shows how they will work.
-
-</CalloutBox>
-
-Content from your code will take `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is a map with `filename` and the file's bytes as `content`, and optionally `content_type`. The SDK encodes the bytes for you.
+Content from your code takes `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is a map with `filename` and the file's bytes as `content`, and optionally `content_type`. The SDK encodes the bytes for you.
 
 ```elixir
 PostHog.Emails.send(

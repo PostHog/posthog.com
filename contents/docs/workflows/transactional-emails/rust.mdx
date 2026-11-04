@@ -110,13 +110,7 @@ See [content from your code](/docs/workflows/transactional-emails/api#send-conte
 
 ### Copies and attachments
 
-<CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
-
-Copies and attachments aren't in a released version of the Rust SDK yet. This section shows how they will work.
-
-</CalloutBox>
-
-A `CodeEmail` will take copies and files. Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes, and the client encodes the bytes for you. Add `content_type` to set the file type, or `content_id` to show the file inline. A `TemplateEmail` takes none of them, because the template uses its own settings.
+A `CodeEmail` takes copies and files. Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes, and the client encodes the bytes for you. Add `content_type` to set the file type, or `content_id` to show the file inline. A `TemplateEmail` takes none of them, because the template uses its own settings.
 
 ```rust
 use posthog_rs::{CodeEmail, EmailAttachment};

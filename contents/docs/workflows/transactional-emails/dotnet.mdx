@@ -126,11 +126,30 @@ See [content from your code](/docs/workflows/transactional-emails/api#send-conte
 
 ### Copies and attachments
 
-<CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
+`SendCodeEmailOptions` takes `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is an `EmailAttachment` with a `Filename` and the file's bytes as `Content`, and optionally `ContentType` and `ContentId`. The client encodes the bytes for you. A template send takes none of them, because the template uses its own settings.
 
-Copies (cc and bcc) and attachments aren't in the .NET SDK yet. They will come in a later version. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for how they will work.
+```csharp
+var result = await emails.SendAsync(new SendCodeEmailOptions
+{
+    To = user.Email,
+    TemplateKey = "receipt",
+    Subject = "Your receipt",
+    Html = html,
+    Cc = ["billing@example.com"],
+    Attachments =
+    [
+        new EmailAttachment
+        {
+            Filename = "receipt.pdf",
+            Content = await File.ReadAllBytesAsync(pdfPath),
+            ContentType = "application/pdf",
+        },
+    ],
+    DistinctId = user.Id,
+});
+```
 
-</CalloutBox>
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
 
 ## Check an email's status
 

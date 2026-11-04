@@ -94,13 +94,7 @@ See [content from your code](/docs/workflows/transactional-emails/api#send-conte
 
 ### Copies and attachments
 
-<CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
-
-Copies and attachments aren't in a released version of the PHP SDK yet. This section shows how they will work.
-
-</CalloutBox>
-
-Content from your code will take `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is an array with `filename` and the file's bytes as `content`, such as `file_get_contents()` returns, and optionally `content_type` and `content_id`. The client encodes the bytes for you, so don't pass Base64. If you have Base64, pass `base64_decode($content)`. A file that the client can't send throws `PostHog\EmailError` with the code `invalid_attachment` before any request.
+Content from your code takes `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is an array with `filename` and the file's bytes as `content`, such as `file_get_contents()` returns, and optionally `content_type` and `content_id`. The client encodes the bytes for you, so don't pass Base64. If you have Base64, pass `base64_decode($content)`. A file that the client can't send throws `PostHog\EmailError` with the code `invalid_attachment` before any request.
 
 ```php
 PostHog::emails()->send([

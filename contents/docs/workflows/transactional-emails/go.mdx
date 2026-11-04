@@ -104,13 +104,7 @@ See [content from your code](/docs/workflows/transactional-emails/api#send-conte
 
 ### Copies and attachments
 
-<CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
-
-Copies and attachments aren't in a released version of the Go SDK yet. This section shows how they will work.
-
-</CalloutBox>
-
-A `CodeEmail` will take `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is a `posthog.EmailAttachment` with a `Filename` and the file's bytes as `Content`. The client encodes the bytes for you.
+A `CodeEmail` takes `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is a `posthog.EmailAttachment` with a `Filename` and the file's bytes as `Content`. The client encodes the bytes for you.
 
 ```go
 _, err := client.Emails().Send(ctx, posthog.CodeEmail{
