@@ -16,15 +16,6 @@
             ]
         },
         {
-            "source": "/docs/libraries/python/reference:ext(\\.md)?",
-            "headers": [
-                {
-                    "key": "X-Robots-Tag",
-                    "value": "noindex"
-                }
-            ]
-        },
-        {
             "source": "/docs/:path*",
             "headers": [
                 {
