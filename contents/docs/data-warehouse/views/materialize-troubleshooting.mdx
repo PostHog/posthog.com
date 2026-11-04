@@ -16,7 +16,7 @@ A run is one of:
 - **Running.** The run is in progress. The previous result is still being served until it finishes.
 - **Failed.** The run stopped on an error. The stored table still holds the last successful result, so queries keep working, but the data is as old as that run.
 - **Skipped.** The view never ran, because a view it depends on failed or is suspended. The error names that upstream view. Fix the upstream one and this view refreshes on its next run.
-- **Cancelled.** The run was stopped before it finished, usually because a newer run of the same view started first. The next scheduled run picks it back up.
+- **Canceled.** The run was stopped before it finished, usually because a newer run of the same view started first. The next scheduled run picks it back up.
 
 ## A run failed
 

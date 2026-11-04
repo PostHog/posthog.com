@@ -10,7 +10,7 @@ availability:
 
 Every materialized view has a refresh cadence: how often PostHog runs its query and replaces the stored table. You set it with **Refresh every** on the view's **Materialization** tab.
 
-The cadence is the freshness you're asking for. A view set to refresh every hour holds data that is about an hour old at most, as long as its runs succeed and the data it reads is itself that fresh.
+The cadence is the freshness you're asking for. Each run picks up whatever its inputs hold at that moment, so the data in a view can be as old as its cadence plus the age of the data it reads. A view that refreshes every hour over an hourly source can hold data close to 2 hours old, even when every run succeeds.
 
 {/* Screenshot: the "Refresh every" picker on a view's Materialization tab, with one option disabled and the explanation line below it. */}
 
@@ -41,7 +41,9 @@ A view can't be fresher than the data it reads, and it can't be staler than the 
 
 ### Upstream sources set the fastest cadence
 
-A view can't refresh more often than its upstream [sources](/docs/data-warehouse/sources) sync. If a view reads a Stripe source that syncs every 6 hours, refreshing the view every 15 minutes would only read the same data again. The options faster than 6 hours show **More often than upstream source ... syncs**.
+A view can't refresh more often than its freshest input. If a view reads only a Stripe [source](/docs/data-warehouse/sources) that syncs every 6 hours, refreshing it every 15 minutes would only read the same data again, so the options faster than 6 hours show **More often than upstream source ... syncs**.
+
+When a view reads several inputs, the freshest one sets the limit. A view that joins that 6-hour Stripe source with events can still refresh every 15 minutes: the event data is new on each run, while the Stripe columns change every 6 hours.
 
 PostHog data, like events and persons, has no sync schedule to wait for, so it doesn't limit the cadence.
 
@@ -49,7 +51,7 @@ Some sources have no sync schedule at all. The picker says so, because refreshin
 
 ### Downstream views set the slowest cadence
 
-A view can't refresh less often than the views and [endpoints](/docs/endpoints) built on it need. If a downstream view refreshes every hour, the upstream view it reads can't be set to once a day. The slower options show **Too slow for downstream view ...**, unless you [pin](#pinning-a-slower-cadence) the view.
+A view can't refresh less often than the views and [Endpoints](/docs/endpoints) built on it need. If a downstream view refreshes every hour, the upstream view it reads can't be set to once a day. The slower options show **Too slow for downstream view ...**, unless you [pin](#pinning-a-slower-cadence) the view.
 
 ### When no cadence works
 
@@ -89,7 +91,7 @@ Hover over the pinned cadence and click the **×** to unpin. Before you save, th
 The cadence is a target, not a guarantee. The data in a view can be older than its cadence when:
 
 - **A run fails.** The table keeps the last successful result. See [failures and suspension](/docs/data-warehouse/views/failures-and-suspension).
-- **The data it reads is older.** A view that refreshes every 15 minutes over a source that syncs every 6 hours holds data up to about 6 hours old. The same goes for a view that reads a [pinned](#pinning-a-slower-cadence) upstream view.
+- **The data it reads is older.** Ages add up along the chain. A view that refreshes every 15 minutes over a source that syncs every 6 hours can hold data up to about 6 hours and 15 minutes old. The same goes for a view that reads a [pinned](#pinning-a-slower-cadence) upstream view.
 - **A run takes longer than the cadence.** A view on a 15-minute cadence whose query takes 20 minutes can't finish a run every 15 minutes. Make each run faster before you make the cadence shorter. [Incremental materialization](/docs/data-warehouse/views/materialize#incremental-materialization) often helps.
 
 The **Overview** tab of the [**Models** page](https://app.posthog.com/models) lists **Models behind schedule**. A view appears there when its last successful run is more than twice its cadence old. **Behind by** shows how far past its cadence it is. Paused views never appear there, because you stopped them on purpose.
