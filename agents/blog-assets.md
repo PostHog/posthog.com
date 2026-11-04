@@ -29,11 +29,18 @@ This command makes the link:
 node -e 'const [title, description] = process.argv.slice(1); console.log("https://claude.ai/artifact/S4HMrMHA8g5SmmwewkKQbm#new-" + Buffer.from(JSON.stringify({ title, description }), "utf8").toString("hex"))' "Post title" "One sentence about the post"
 ```
 
-### Give the link to the author
+### Open the link for the author
 
-You cannot export the image from the generator. Give the link to the author in your reply, and put it in the PR description. The author then:
+Open the link for the author. Use the method that you prefer:
 
-1. Opens the link. The generator makes the card.
+- Run `open "<link>"` (macOS) or `xdg-open "<link>"` (Linux) to open it in the author's default browser.
+- Open it in your integrated browser, if you have one.
+
+If you cannot open a browser (for example, in a cloud session), give the link to the author in your reply. Also put the link in the PR description.
+
+You cannot export the image from the generator. The author does these steps:
+
+1. Examines the card that the generator makes.
 2. Changes the card until it is correct.
 3. Exports the card as a 1200x630 PNG and adds it to the post. Read [exporting a blog post image](../contents/handbook/marketing/exporting-blog-post-image.md).
 
