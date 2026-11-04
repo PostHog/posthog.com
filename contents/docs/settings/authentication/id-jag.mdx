@@ -7,17 +7,17 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-ID-JAG (Identity Assertion JWT Authorization Grant, also called [XAA](https://xaa.dev)) lets your organization's identity provider (IdP) — like Okta, Microsoft Entra ID, or any OIDC-compliant SSO — issue short-lived tokens that grant programmatic access to PostHog. Instead of each user creating a [personal API key](/docs/api#authentication) or running an [OAuth](/docs/api/oauth) flow, your IdP issues an **ID-JAG** that's exchanged with PostHog for a short-lived access token. Access is granted, scoped, and revoked centrally in your IdP.
+ID-JAG (Identity Assertion JWT Authorization Grant, also called [XAA](https://xaa.dev)) lets your organization's identity provider (IdP), such as Okta, Microsoft Entra ID, or any OIDC-compliant SSO, grant programmatic access to PostHog. Instead of each user creating a [personal API key](/docs/api#authentication) or running an [OAuth](/docs/api/oauth) flow, your IdP issues an **ID-JAG** that a client exchanges with PostHog for a short-lived access token. You grant, scope, and revoke access centrally in your IdP.
 
 <CalloutBox icon="IconFlask" title="ID-JAG/XAA is in beta" type="action">
 
-ID-JAG/XAA is currently in `beta`. This means the flow and configuration are subject to change, and the underlying ID-JAG spec is still evolving.
+ID-JAG/XAA is currently in `beta`. The flow and configuration can change, and the underlying ID-JAG spec is still evolving.
 
 </CalloutBox>
 
-<CalloutBox icon="IconStar" title="Enterprise plan only" type="action">
+<CalloutBox icon="IconStar" title="Scale and Enterprise add-ons" type="action">
 
-ID-JAG (XAA) is only available on the Enterprise plan, and isn't enabled for every Enterprise customer yet. If you're interested, reach out to your technical account manager (TAM) or the <SmallTeam slug="platform-features" /> team to get access.
+ID-JAG (XAA) is available to organizations on the Scale or Enterprise [platform add-on](/platform-packages). Without one of them, PostHog shows an upgrade prompt in the XAA settings and rejects token requests with `access_denied`.
 
 </CalloutBox>
 
@@ -25,10 +25,10 @@ ID-JAG (XAA) is only available on the Enterprise plan, and isn't enabled for eve
 
 ID-JAG keeps authorization decisions in your IdP instead of spreading them across personal keys and per-user OAuth grants:
 
-- **No personal API keys to manage** — users authenticate with their existing corporate SSO, and tokens are minted on demand.
-- **Centralized policy** — your IdP evaluates its own access policies (group membership, conditional access, etc.) before issuing an ID-JAG.
-- **Centralized revocation** — once your IdP stops issuing ID-JAGs for a user, they can no longer obtain new access tokens. Existing tokens expire on their own within a short lifetime.
-- **Scoped tokens** — the issued access token carries only the scopes your IdP granted, intersected with what the client requested.
+- **No personal API keys to manage:** users authenticate with their existing corporate SSO, and clients get tokens on demand.
+- **Centralized policy:** your IdP evaluates its own access policies (group membership, conditional access, etc.) before it issues an ID-JAG.
+- **Centralized revocation:** once your IdP stops issuing ID-JAGs for a user, clients can no longer get new access tokens for them.
+- **Scoped tokens:** the access token carries only the scopes your IdP granted, intersected with what the client requested.
 
 The most common use is connecting AI agents to the [PostHog MCP server](/docs/model-context-protocol) under central control. See [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization) for the MCP-specific setup.
 
@@ -50,8 +50,8 @@ sequenceDiagram
     Note over IdP: Evaluate access policy
     IdP-->>Client: ID-JAG (JWT)
 
-    Client->>AS: Token request with ID-JAG<br/>(JWT Bearer grant)
-    Note over AS: Validate ID-JAG signature,<br/>audience, resource, scopes
+    Client->>AS: Token request with ID-JAG<br/>and client credentials (JWT Bearer grant)
+    Note over AS: Authenticate client, validate ID-JAG,<br/>match user, intersect scopes
     AS-->>Client: PostHog access token
 
     loop API calls
@@ -60,53 +60,106 @@ sequenceDiagram
     end
 ```
 
-PostHog validates each ID-JAG against the trusted IdP's public keys (via OIDC discovery or a JWKS URL), checks its audience, resource, issuer, and expiration, confirms the user is an active member of the organization that owns the verified domain, then mints a short-lived access token.
+When a client presents an ID-JAG, PostHog:
+
+1. Authenticates the client with its client secret or `private_key_jwt` assertion.
+2. Finds the XAA configuration whose issuer URL matches the ID-JAG's `iss` and whose verified domains include the user's email domain.
+3. Verifies the ID-JAG signature with your IdP's public keys, then checks its claims (see [what PostHog checks](#what-posthog-checks-in-an-id-jag)).
+4. Matches the ID-JAG to an active member of the organization that owns the configuration (see [how PostHog matches users](#how-posthog-matches-users)).
+5. Issues a short-lived access token for that member.
 
 ## Requirements
 
-- An **Enterprise plan with the XAA authentication feature** enabled on your PostHog organization. [Contact us](/talk-to-a-human) if you're not sure whether your plan includes it.
+- The **Scale or Enterprise platform add-on** on your PostHog organization.
 - A **verified domain** in PostHog for the email domain your users sign in with.
-- An **IdP that can issue ID-JAG tokens** and publishes an OIDC discovery document (or JWKS endpoint) that PostHog can reach.
+- An **IdP that can issue ID-JAGs** and publishes an OIDC discovery document or a JWKS endpoint that PostHog can reach over the internet.
+- A **client registered with PostHog** that can authenticate with a client secret or `private_key_jwt`. Your IdP must put that client's PostHog client ID in the ID-JAG's `client_id` claim.
 
 ## Setup
 
 ### 1. Verify your domain in PostHog
 
-Go to [**Organization settings → Authentication domains & SSO**](https://app.posthog.com/settings/organization-authentication) and add and verify the domain your users authenticate with (e.g. `example.com`). See the [SSO docs](/docs/settings/authentication/sso) for domain verification steps.
+Go to [**Organization settings → Authentication**](https://app.posthog.com/settings/organization-authentication) and add and verify the domain your users authenticate with (e.g. `example.com`) under **Authentication domains**. See the [SSO docs](/docs/settings/authentication/sso) for domain verification steps.
 
-ID-JAG only accepts tokens for users who are **active members of the organization that owns the verified domain**, so the user's email domain must match.
+PostHog only accepts ID-JAGs for users whose email domain is a verified domain of the XAA configuration.
 
 ### 2. Configure the trusted IdP
 
-On the verified domain, open the **Configure XAA (ID-JAG)** modal and fill in:
+On the same settings page, find **XAA authentication** and click **Configure**. You need to be an organization admin. Fill in:
 
 | Field | Required | Description |
 | --- | --- | --- |
-| **IdP issuer URL** | Yes | Your IdP's issuer URL. Must exactly match the `iss` claim on the ID-JAG tokens it issues (e.g. `https://idp.example.com`). Setting this enables ID-JAG for the domain. |
-| **JWKS URL** | No | Override the key set location. Defaults to OIDC discovery at `{issuer}/.well-known/openid-configuration`. |
-| **Allowed client IDs** | No | Restrict which OAuth `client_id` values are accepted. Leave empty to allow any client. |
+| **Identity provider issuer URL** | Yes | Your IdP's issuer URL, e.g. `https://idp.example.com`. It must match the `iss` claim on the ID-JAGs your IdP issues. A trailing slash makes no difference. |
+| **JWKS URL (optional)** | No | Where PostHog fetches your IdP's public keys. Leave it empty to use OIDC discovery at `{issuer}/.well-known/openid-configuration`. |
+| **Allowed client IDs (optional)** | No | The `client_id` values PostHog accepts from this IdP. Leave it empty to accept any registered client. |
 
-PostHog uses the issuer URL to fetch your IdP's public keys and verify every ID-JAG signature. Internal, loopback, and metadata-host URLs are rejected.
+Under **Domains**, choose **All domains** to cover every verified domain in your organization, or **Selected domains** to pick specific ones. Then click **Save configuration**.
 
-### 3. Grant the required scopes in your IdP
+PostHog rejects issuer and JWKS URLs that point at internal, loopback, or cloud metadata addresses. Use one XAA configuration per issuer and domain. If two configurations match the same issuer and email domain, PostHog rejects the ID-JAG.
+
+### 3. Register the client
+
+The app or agent that exchanges ID-JAGs must authenticate to PostHog as an OAuth client. It can be:
+
+- An [OAuth app](/docs/api/oauth) registered with PostHog that authenticates with its client secret.
+- A client that identifies itself with a Client ID Metadata Document (a URL as its client ID) and authenticates with `private_key_jwt`, using a key from the JWKS its document publishes.
+
+Configure your IdP so the ID-JAG's `client_id` claim is the client ID that client uses with PostHog. PostHog rejects an ID-JAG whose `client_id` differs from the client that presents it.
+
+### 4. Grant the required scopes in your IdP
 
 Configure your IdP to include the scopes each integration needs when it issues ID-JAGs. At minimum, all tokens need `user:read`. For the [MCP server](/docs/model-context-protocol/enterprise-managed-authorization), also include `organization:read` and `project:read`. Add any additional [API scopes](/docs/api/personal-api-keys) for what you want to do (for example, `feature_flag:write` to manage flags).
 
-PostHog issues the access token with the **intersection** of the scopes your IdP granted and the scopes the client requested.
+PostHog issues the access token with the **intersection** of the scopes your IdP granted and the scopes the client requested:
+
+- If the client sends no `scope`, the token gets every scope the ID-JAG grants.
+- PostHog ignores scopes it doesn't know.
+- If the intersection is empty, PostHog still issues a token, and API requests with it fail with `403 insufficient_scope`.
+
+## What PostHog checks in an ID-JAG
+
+| Part | Requirement |
+| --- | --- |
+| Header `typ` | `oauth-id-jag+jwt` |
+| Signature | RS256, RS384, RS512, PS256, PS384, PS512, ES256, ES384, or ES512, with a key from your IdP's JWKS |
+| `iss` | Matches the issuer URL of the XAA configuration |
+| `aud` | The PostHog authorization server the client uses: `https://oauth.posthog.com` on Cloud, or `https://us.posthog.com` / `https://eu.posthog.com` when the client calls a region directly. On self-hosted, your instance URL. |
+| `resource` | The PostHog resource the token is for: `https://us.posthog.com` or `https://eu.posthog.com` for the API, or `https://mcp.posthog.com/mcp` for the MCP server. On self-hosted, your instance URL. |
+| `client_id` | The client ID of the client that presents the ID-JAG |
+| `sub` | A stable identifier for the user at your IdP |
+| `email` | The user's email address. If it's missing, `sub` must be the email address. If `email_verified` is present, it must not be `false`. |
+| `iat`, `exp` | The ID-JAG must be valid at most 10 minutes. PostHog allows 30 seconds of clock skew. |
+| `jti` | A unique ID. Each ID-JAG works once. |
+| `scope` | Optional. Space-separated PostHog scopes. |
+| `tenant` | Optional. Set it when your IdP issues ID-JAGs for several tenants under one issuer. |
+
+## How PostHog matches users
+
+PostHog does not create users from ID-JAGs. Each user must already be an active member of the organization that owns the XAA configuration. Use [SCIM](/docs/settings/authentication/scim) or SSO to provision them.
+
+- The first time PostHog sees a user's IdP subject, it matches the `email` claim to an organization member. PostHog then links that subject (issuer, tenant, and `sub`) to the member.
+- Later ID-JAGs for that subject resolve to the same member, even if the email address changes at your IdP or in PostHog.
+- If a member is already linked to a different subject from the same IdP, PostHog rejects the ID-JAG. This stops an email address that your IdP reassigns from reaching the previous owner's account.
 
 ## Exchanging an ID-JAG for an access token
 
 Clients exchange an ID-JAG at PostHog's OAuth token endpoint using the [RFC 7523](https://www.rfc-editor.org/rfc/rfc7523) JWT Bearer grant:
 
-- **Cloud:** `https://oauth.posthog.com/oauth/token/`
+- **Cloud:** `https://oauth.posthog.com/oauth/token/`. It routes the request to your organization's region.
 - **Self-hosted:** `{your-instance-url}/oauth/token/`
+
+The request must include client authentication. With a client secret:
 
 ```bash
 curl -X POST https://oauth.posthog.com/oauth/token/ \
   -d grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer \
   -d assertion=<the ID-JAG JWT from your IdP> \
+  -d client_id=<your PostHog client ID> \
+  -d client_secret=<your client secret> \
   -d scope="user:read organization:read project:read"
 ```
+
+With `private_key_jwt`, replace `client_secret` with `client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer` and `client_assertion=<a JWT signed with your client's key>`.
 
 A successful response returns a short-lived access token:
 
@@ -119,22 +172,25 @@ A successful response returns a short-lived access token:
 }
 ```
 
-Use it as a bearer token on PostHog API requests: `Authorization: Bearer <access_token>`.
+Use it as a bearer token on API requests to your organization's region (`https://us.posthog.com` or `https://eu.posthog.com`): `Authorization: Bearer <access_token>`.
 
-Most enterprise MCP clients perform this exchange automatically — you usually don't call the token endpoint by hand. See [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization) for the MCP flow.
+Most enterprise MCP clients perform this exchange automatically, so you usually don't call the token endpoint by hand. See [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization) for the MCP flow.
 
 ## Tokens
 
-The access token PostHog mints from a valid ID-JAG is:
+The access token PostHog issues from a valid ID-JAG is:
 
-- **Short-lived** — 2 hours by default. The client repeats the ID-JAG exchange to get a fresh token; there's no refresh token.
-- **Audience-restricted** — bound to the resource the ID-JAG targeted, so it can't be replayed against other audiences.
-- **Organization-scoped** — bound to the organization that owns the verified domain and the IdP config.
-- **Single-use per assertion** — each ID-JAG's `jti` is recorded, so a captured ID-JAG can't be replayed.
+- **Short-lived:** 2 hours by default. The client repeats the ID-JAG exchange to get a fresh token. There is no refresh token.
+- **Bound to the user:** requests act as the matched member, with that member's permissions, limited to the granted scopes.
+- **Organization-scoped:** bound to the organization that owns the XAA configuration.
+- **Audience-restricted:** its `aud` is the ID-JAG's `resource`, and PostHog accepts it only for its own resources.
+- **Checked on every request:** PostHog confirms on each request that the user is still an active member and that the organization still has the Scale or Enterprise add-on.
 
 ## Revoking access
 
-Because authorization lives in your IdP, **revoking a user's access there takes effect immediately** — once your IdP stops issuing ID-JAGs for a user, the client can no longer obtain new access tokens, and existing tokens expire within the short token lifetime. There's nothing to revoke per-client or per-device in PostHog.
+- **At your IdP:** once your IdP stops issuing ID-JAGs for a user, the client can no longer get new access tokens. Existing tokens expire within the token lifetime.
+- **In PostHog:** removing the user from the organization, or deactivating them, stops their tokens working on the next request.
+- **The whole integration:** deleting the XAA configuration stops new exchanges. Tokens already issued stay valid until they expire.
 
 ## Troubleshooting
 
@@ -142,12 +198,18 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 
 | Error | What it means |
 | --- | --- |
-| `access_denied` | The organization doesn't have the XAA authentication feature enabled. |
-| `invalid_grant` (`ID-JAG could not be verified`) | No verified domain matches the token's email/issuer, the issuer doesn't match the configured IdP, the email isn't verified, or the user isn't an active member of the organization. The message is intentionally generic — check PostHog logs and your IdP config. |
-| `invalid_grant` (`ID-JAG has expired` / `not yet valid`) | Clock skew between your IdP and PostHog (tolerance is 30 seconds by default), or an expired assertion. |
-| `invalid_target` | The token's `resource` claim doesn't match an allowed resource. Confirm the client derived the resource from PostHog's discovery metadata. |
-| `invalid_client` | The token's `client_id` isn't in the domain's allowed client IDs list. |
-| `insufficient_scope` (from the resource server) | The granted scopes don't cover what the request needs. Add the missing scopes in your IdP. |
+| `invalid_request` (`assertion is required`) | The request has no `assertion` parameter. |
+| `invalid_client` | Client authentication failed: the client ID, secret, or `private_key_jwt` assertion is missing or wrong. It also appears when the ID-JAG's `client_id` isn't in the configuration's allowed client IDs. |
+| `invalid_grant` (`ID-JAG could not be verified`) | No XAA configuration matches the ID-JAG's issuer and email domain, or more than one does. It also covers an `iss` that doesn't match after signature verification, an `email_verified` of `false`, and a member already linked to a different IdP subject. The message is intentionally generic, so check your XAA configuration and IdP claims. |
+| `invalid_grant` (`ID-JAG sub is not an active member…`) | The email doesn't match an active member of the organization that owns the XAA configuration. |
+| `invalid_grant` (`ID-JAG client_id doesn't match the authenticating client`) | The ID-JAG's `client_id` differs from the client that sent the request. |
+| `invalid_grant` (`ID-JAG has expired` / `is not yet valid`) | The assertion expired, or the clocks of your IdP and PostHog differ by more than 30 seconds. |
+| `invalid_grant` (`ID-JAG lifetime exceeds 600 seconds`) | `exp` is more than 10 minutes after `iat`. |
+| `invalid_grant` (`ID-JAG assertion has already been used`) | The client sent an ID-JAG with a `jti` PostHog already accepted. Request a new ID-JAG from your IdP. |
+| `invalid_grant` (`ID-JAG is missing required claim…`) | A required claim, such as `jti` or `client_id`, is missing. |
+| `invalid_target` | The `resource` claim isn't one of the PostHog resources listed under [what PostHog checks](#what-posthog-checks-in-an-id-jag). |
+| `access_denied` | The organization doesn't have the Scale or Enterprise add-on. |
+| `insufficient_scope` (from the API) | The granted scopes don't cover the request. Add the missing scopes in your IdP. |
 
 ## Further reading
 
