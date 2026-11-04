@@ -183,7 +183,7 @@ The rest of the support team have also built workflows for the things they wante
 
 Christian started with the basics: when a customer replies, the person the ticket is assigned to gets an email. He also made it so that when someone escalates a ticket to an engineering team, they follow it automatically, so they can see what the engineering team says. Luke then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily be into a Slack channel.
 
-**Try it yourself:** the **notify the assignee when the customer replies** template.
+**Try it yourself:** With the **notify the assignee when the customer replies** template.
 
 ### Personal SLA warnings
 
