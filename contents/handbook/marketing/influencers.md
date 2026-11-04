@@ -33,7 +33,7 @@ Whoever owns the creator relationship does these checks before the first agreeme
 
 ### If someone raises a concern
 
-1. Pause new commitments and any scheduled promotions we control while you review the concern.
+1. Pause commitments and any scheduled promotions we control while you review the concern.
 2. Decide whether the evidence confirms a breach.
 3. If it does – end the partnership on the terms in the contract. If it doesn't, carry on.
 4. Tell the person who raised the concern what we did.
