@@ -45,6 +45,6 @@ export default function CloudinaryImage({
             </Image>
         </div>
     ) : (
-        <img src={src} width={width} className={`inline-block ${imgClassName}`} {...other} />
+        <img src={src} width={width} className={`inline-block ${className} ${imgClassName}`} {...other} />
     )
 }
