@@ -24,8 +24,8 @@ import (
     "github.com/posthog/posthog-go"
 )
 
-client, err := posthog.NewWithConfig("<ph_project_api_key>", posthog.Config{
-    Endpoint:  "https://us.i.posthog.com",
+client, err := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
+    Endpoint:  "<ph_client_api_host>",
     SecretKey: os.Getenv("POSTHOG_PROJECT_SECRET_API_KEY"),
 })
 if err != nil {
@@ -35,12 +35,12 @@ defer client.Close()
 ```
 
 - **Local evaluation:** When `SecretKey` is set, the client also polls flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation). Give the key the **Feature flag** read scope too, or the client logs a failed poll each time it polls.
-- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `AppHost` to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `AppHost` to your PostHog app URL. Email requests never go to a host that might be a proxy. Flag definitions for local evaluation still load from `Endpoint` with the secret key, so when that host is a proxy that must not see the key, leave `SecretKey` off that client. Send email from a second client whose `Endpoint` is your PostHog host.
 
 ## Send an email
 
 ```go
-func sendPasswordReset(ctx context.Context, userID, email, firstName, resetLink, resetRequestID string) (string, error) {
+func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email, firstName, resetLink, resetRequestID string) (string, error) {
     result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
         To:           email,
         TemplateID:   "<template_id>",
@@ -77,7 +77,7 @@ Pass the distinct ID that you pass to `identify()`, usually the ID your app give
 `Send` also takes content that your code rendered, without a template in PostHog. Pass a `CodeEmail`: name the email with `TemplateKey`, and set `Subject` and `HTML`, `Text`, or both. PostHog sends the content as you wrote it, so render it with your template engine first, such as `html/template`.
 
 ```go
-func sendPasswordReset(ctx context.Context, userID, email, html, resetRequestID string) (string, error) {
+func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email, html, resetRequestID string) (string, error) {
     result, err := client.Emails().Send(ctx, posthog.CodeEmail{
         To:             email,
         TemplateKey:    "password-reset",
@@ -131,17 +131,17 @@ See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and
 ## Check an email's status
 
 ```go
-func emailBounced(ctx context.Context, messageID string) (bool, error) {
+func emailBounced(ctx context.Context, client posthog.Client, messageID string) (bounced bool, known bool, err error) {
     status, err := client.Emails().Get(ctx, messageID)
     var emailErr *posthog.EmailError
     if errors.As(err, &emailErr) && emailErr.Code == "not_found" {
         // The first status can take a few seconds to arrive. Try again later.
-        return false, nil
+        return false, false, nil
     }
     if err != nil {
-        return false, err
+        return false, false, err
     }
-    return status.Status == "bounced", nil
+    return status.Status == "bounced", true, nil
 }
 ```
 

@@ -9,7 +9,7 @@ The [Rust SDK](/docs/libraries/rust) sends transactional emails from version 0.3
 ## Install
 
 ```bash
-cargo add posthog-rs
+cargo add posthog-rs serde_json
 ```
 
 ## Set up the client
@@ -20,14 +20,14 @@ Reuse the PostHog client your application already creates, and set `secret_key` 
 use posthog_rs::ClientOptionsBuilder;
 
 let options = ClientOptionsBuilder::default()
-    .api_key("<ph_project_api_key>".to_string())
-    .host("https://us.i.posthog.com")
+    .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
     .secret_key(std::env::var("POSTHOG_PROJECT_SECRET_API_KEY")?)
     .build()?;
 let posthog = posthog_rs::client(options).await;
 ```
 
-- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` to your PostHog app URL. Email requests never go to a host that might be a proxy. With `enable_local_evaluation` on, flag definitions still load from `host` with the secret key.
 - **Local evaluation:** The client loads flag definitions only when you turn on `enable_local_evaluation`. If you do, give the key the **Feature flag** read scope too.
 - **Blocking client:** Without the default `async-client` feature, the client and `emails()` are blocking, and you call them without `.await`.
 

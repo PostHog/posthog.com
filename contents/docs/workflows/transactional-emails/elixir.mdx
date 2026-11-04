@@ -24,13 +24,13 @@ Set `secret_key` to your project secret API key in the PostHog config your appli
 
 ```elixir file=config/runtime.exs
 config :posthog,
-  api_host: "https://us.i.posthog.com",
-  api_key: "<ph_project_api_key>",
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_token>",
   secret_key: System.fetch_env!("POSTHOG_PROJECT_SECRET_API_KEY")
 ```
 
 - **Local evaluation:** When `secret_key` is set, the SDK also loads flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation) when it starts. Give the key the **Feature flag** read scope too, or set `enable_local_evaluation: false`.
-- **Host:** On PostHog Cloud, the SDK sends email to the app host of your region, even when `api_host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` to your PostHog app URL. The SDK refuses to send the secret key to a host that might be a proxy.
+- **Host:** On PostHog Cloud, the SDK sends email to the app host of your region, even when `api_host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` to your PostHog app URL. Email requests never go to a host that might be a proxy. Flag definitions for local evaluation still load from `api_host` with the secret key, so set `enable_local_evaluation: false` when the proxy must not see the key.
 
 ## Send an email
 

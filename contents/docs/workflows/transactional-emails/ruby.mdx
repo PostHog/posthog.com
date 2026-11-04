@@ -21,22 +21,22 @@ Reuse the PostHog client your application already creates, and set `secret_key` 
 ```ruby
 require 'posthog'
 
-posthog = PostHog::Client.new({
-  api_key: '<ph_project_api_key>',
-  host: 'https://us.i.posthog.com',
+$posthog = PostHog::Client.new({
+  api_key: '<ph_project_token>',
+  host: '<ph_client_api_host>',
   secret_key: ENV.fetch('POSTHOG_PROJECT_SECRET_API_KEY')
 })
 ```
 
 - **Local evaluation:** When `secret_key` is set, the client also loads flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation) when it starts. Give the key the **Feature flag** read scope too, or the client logs a failed load each time it polls.
-- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` to your PostHog app URL. Email requests never go to a host that might be a proxy. Flag definitions for local evaluation still load from `host` with the secret key, so when that host is a proxy that must not see the key, leave `secret_key` off that client. Send email from a second client whose `host` is your PostHog host.
 
 ## Send an email
 
 ```ruby
 def send_password_reset(user, reset_link, reset_request_id)
   # Raises PostHog::EmailError when PostHog doesn't queue the email. Branch on error.code.
-  result = posthog.emails.send(
+  result = $posthog.emails.send(
     to: user.email,
     template_id: '<template_id>',
     template_data: { first_name: user.first_name, reset_link: reset_link },
@@ -52,7 +52,7 @@ end
 
 ### Timeouts and retries
 
-Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds raises the error at once.
+Each request waits up to 15 seconds to connect, and up to 15 seconds for each read or write. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds raises the error at once.
 
 To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client, or `max_retries` on one send. When a job queue such as Sidekiq already retries the send, set the retries to `0` and pass an `idempotency_key` that identifies the email.
 
@@ -69,7 +69,7 @@ Pass the distinct ID that you pass to `identify()`, usually the ID your app give
 
 ```ruby
 def send_password_reset(user, html, reset_request_id)
-  result = posthog.emails.send(
+  result = $posthog.emails.send(
     to: user.email,
     template_key: 'password-reset',
     subject: 'Reset your password',
@@ -102,7 +102,7 @@ Copies (cc and bcc) and attachments aren't in the Ruby SDK yet. They will come i
 
 ```ruby
 def email_bounced?(message_id)
-  status = posthog.emails.get(message_id)
+  status = $posthog.emails.get(message_id)
   status.status == 'bounced'
 rescue PostHog::EmailError => e
   # The first status can take a few seconds to arrive. Try again later.
