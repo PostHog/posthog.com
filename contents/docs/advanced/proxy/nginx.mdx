@@ -95,6 +95,7 @@ server {
         proxy_ssl_server_name on;
         proxy_ssl_name $posthog_assets_host;
         proxy_ssl_verify on;
+        proxy_ssl_verify_depth 3;
         proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
     }
 
@@ -106,6 +107,7 @@ server {
         proxy_ssl_server_name on;
         proxy_ssl_name $posthog_assets_host;
         proxy_ssl_verify on;
+        proxy_ssl_verify_depth 3;
         proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
     }
 
@@ -117,6 +119,7 @@ server {
         proxy_ssl_server_name on;
         proxy_ssl_name $posthog_api_host;
         proxy_ssl_verify on;
+        proxy_ssl_verify_depth 3;
         proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
     }
 }
@@ -135,6 +138,7 @@ Here's what each directive does:
 - `proxy_ssl_server_name on`: Enables Server Name Indication (SNI) for the upstream SSL connection. Required because PostHog uses virtual hosting.
 - `proxy_ssl_name`: The hostname to use for SNI. Must match the upstream domain.
 - `proxy_ssl_verify on`: Verifies that the upstream certificate is valid for the hostname in `proxy_ssl_name`.
+- `proxy_ssl_verify_depth`: Sets how many intermediate certificates nginx accepts in the upstream chain. The default of 1 is too short for the certificate chain served by the assets domains, which makes nginx return `502 Bad Gateway`.
 - `proxy_ssl_trusted_certificate`: Points nginx to the operating system's trusted certificate authorities. Change this path if your distribution stores its CA bundle elsewhere.
 
 Enable the site by creating a symlink:
@@ -286,6 +290,7 @@ http {
             proxy_ssl_server_name on;
             proxy_ssl_name $posthog_assets_host;
             proxy_ssl_verify on;
+            proxy_ssl_verify_depth 3;
             proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
 
             proxy_hide_header 'Access-Control-Allow-Origin';
@@ -300,6 +305,7 @@ http {
             proxy_ssl_server_name on;
             proxy_ssl_name $posthog_assets_host;
             proxy_ssl_verify on;
+            proxy_ssl_verify_depth 3;
             proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
 
             proxy_hide_header 'Access-Control-Allow-Origin';
@@ -314,6 +320,7 @@ http {
             proxy_ssl_server_name on;
             proxy_ssl_name $posthog_api_host;
             proxy_ssl_verify on;
+            proxy_ssl_verify_depth 3;
             proxy_ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
 
             proxy_hide_header 'Access-Control-Allow-Origin';
@@ -413,6 +420,7 @@ If you see SSL errors in nginx logs:
 1. Verify `proxy_ssl_name` matches the upstream domain exactly
 2. Check that your server's CA certificates are up to date
 3. For Docker, the alpine image may need CA certificates installed: `apk add ca-certificates`
+4. If nginx logs `upstream SSL certificate verify error: (20:unable to get local issuer certificate)` for `/static/` and `/array/` only, set `proxy_ssl_verify_depth 3;`
 
 ### CORS errors
 
