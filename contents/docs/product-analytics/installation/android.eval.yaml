@@ -19,5 +19,5 @@ checks:
                   directly or through an entry in {folder}/gradle/libs.versions.toml.
               initialized: >-
                   An Application subclass's onCreate builds PostHogAndroidConfig with
-                  apiKey (the project token) and host (the PostHog host) and calls
+                  projectToken (the project token) and host (the PostHog host) and calls
                   PostHogAndroid.setup. Cite the file and line(s).

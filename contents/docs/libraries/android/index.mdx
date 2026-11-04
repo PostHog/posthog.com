@@ -427,11 +427,12 @@ val config = PostHogAndroidConfig(
 | `optOut` | `false` | Prevents data capture when enabled. You can also call `PostHog.optOut()` and `PostHog.optIn()`. |
 | `flushAt` | `20` | Number of queued events that triggers a flush. |
 | `maxQueueSize` | `1000` | Maximum number of events kept across memory and disk before FIFO eviction. |
-| `maxBatchSize` | `50` | Maximum number of events sent in one batch request. |
+| `maxBatchSize` | `50` | Maximum number of events sent in one batch request. In version 4.0+, a request also carries at most about 5 MiB of events, and the SDK sends as soon as that much is queued. |
 | `pushNotificationSubscriptionMaxRetries` | `3` | Maximum retry attempts for push-subscription registration failures. It does not apply to event, session recording, or log ingestion. |
 | `flushIntervalSeconds` | `30` | Maximum delay before queued data is flushed. |
 | `encryption` | `null` | Optional `PostHogEncryption` implementation for encrypting persisted queued events. |
 | `proxy` | `null` | Optional `java.net.Proxy` for PostHog API requests. |
+| `compression` | `PostHogCompression.GZIP` | Compresses request bodies sent to PostHog. Set it to `PostHogCompression.NONE` if something between the app and PostHog alters compressed bodies. `captureAi` requests use `captureAiCompression` instead. Has no effect when you set your own `httpClient`. |
 | `getAnonymousId` | generated UUID | Optional hook to customize anonymous ID generation. |
 | `reuseAnonymousId` | `false` | Reuses one anonymous ID across user changes on the same device. |
 | `personProfiles` | `PersonProfiles.IDENTIFIED_ONLY` | Controls when person profiles are processed: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
@@ -453,7 +454,7 @@ val config = PostHogAndroidConfig(
 | Option | Default | Description |
 | --- | --- | --- |
 | `sessionReplay` | `false` | Enables session replay when project settings also allow recording. |
-| `sessionReplayConfig` | `PostHogSessionReplayConfig()` | Configures masking, screenshots, Logcat capture, sampling, and custom drawable conversion. |
+| `sessionReplayConfig` | `PostHogSessionReplayConfig()` | Configures masking, screenshot settings, Logcat capture, and sampling. |
 | `logs` | `PostHogLogsConfig()` | Configures [Android logs](/docs/logs/installation/android). |
 | `errorTrackingConfig` | `PostHogErrorTrackingConfig()` | Configures error tracking. `autoCapture` defaults to `false`; set it to `true` to autocapture uncaught exceptions when project settings also enable error tracking. |
 | `surveys` | `false` | Internal/experimental native Android survey support. Native Android survey UI is not fully supported or documented yet. |
@@ -509,6 +510,8 @@ Update `posthog-android` to `4.+`. If you only depend on `posthog-android-survey
 
 The minimum Android API level (23), Java bytecode target (Java 8), and Kotlin compatibility (2.0) are unchanged.
 
+React Native, Flutter, and Kotlin Multiplatform apps get this SDK through their PostHog package. Upgrade that package instead of adding `posthog-android` 4.0 yourself.
+
 ### Removed APIs
 
 These are compile errors:
@@ -530,6 +533,8 @@ These are compile errors:
 `getFeatureFlagResult()` sends `$feature_flag_called` by default and `getFeatureFlagPayload()` never did, so pass `sendFeatureFlagEvent = false` to keep your event volume and experiment exposures unchanged. It also has no default value parameter, so add `?: yourDefault` if you need one.
 
 Classes that implement `PostHogInterface`, such as test fakes, need updating. The migration guide lists the changed methods.
+
+Helpers in `com.posthog.internal`, `com.posthog.android.internal`, and `com.posthog.android.replay.internal` that were marked `@PostHogInternal` are no longer public. Apps that don't use `@PostHogInternal` APIs aren't affected.
 
 ### Feature flag callbacks
 
@@ -561,12 +566,41 @@ The `reloadFeatureFlags()` callback still runs on a background thread, so switch
 
 A trailing lambda such as `PostHog.reloadFeatureFlags { mainHandler.post { refreshUi() } }` still compiles, so check whether it should read `errorsLoading`. The callback also runs after a failed load.
 
+### Event options and AI events
+
+`capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, and `captureException` take a new `options` argument as their last parameter. Use it for capture settings such as `process_person_profile` and `cookieless_mode`, which 3.x read from `$`-prefixed properties. The legacy properties still work.
+
+```kotlin
+// Version 3
+PostHog.capture("signed_up", properties = mapOf("\$process_person_profile" to false))
+
+// Version 4
+PostHog.capture("signed_up", options = mapOf("process_person_profile" to false))
+```
+
+Java callers pass the new trailing `options` argument, or `null`. In `beforeSend`, read and edit options through `event.options`.
+
+`captureAi` sends AI events such as `$ai_generation` to PostHog's AI endpoint, on their own queue. It takes the same arguments as `capture` and returns the event's UUID, or `null` if the event isn't queued.
+
+```kotlin
+PostHog.captureAi(
+    "\$ai_generation",
+    properties = mapOf("\$ai_model" to "gpt-5", "\$ai_trace_id" to traceId),
+)
+```
+
+If you self-host PostHog or use your own proxy, make sure `/i/v1/ai/events` is served before you use `captureAi`.
+
 ### Behavior changes
 
 These don't fail the build:
 
 - **`getFeatureFlag()`'s second parameter is now `sendFeatureFlagEvent`.** `getFeatureFlag("flag-key", true)` still compiles, but `true` no longer means the default value. A disabled SDK returns `null` instead of your default, and `$feature_flag_called` no longer reports a fallback as the flag's value.
-- **Session replay records screenshots.** Apps that used the default wireframe mode now upload masked screenshots. Custom-drawn views and other content the SDK doesn't recognize can be visible unless you mask them, so review [masking](/docs/session-replay/mobile) before you upgrade.
+- **Session replay records screenshots.** Apps that used the default wireframe mode now upload masked screenshots. Custom-drawn views and other content the SDK doesn't recognize, such as maps or video, can be visible unless you mask them. Jetpack Compose screens, which wireframe recorded as empty boxes, now show their content, so check that your consent or privacy notice covers them. Review [masking](/docs/session-replay/privacy?tab=Android) before you upgrade.
+- **Compose masking changed.** This also applies to apps that already set `screenshot = true`. `Modifier.postHogMask()` and `Modifier.postHogUnmask()` apply only to the element and its children, not to siblings merged into the same clickable row. Text that draws past its layout box is masked in full. Nodes using `Modifier.clearAndSetSemantics` are masked while text or image masking is on, so use `Modifier.postHogUnmask()` to show them.
+- **`$locale` is the device language.** It's now the first language in the device settings, as a full language tag such as `zh-Hant-TW`, instead of `Locale.getDefault()`, which your app can change. Hebrew, Indonesian, and Yiddish values on older Android versions change from the legacy codes `iw`, `in`, and `ji`, so update filters that match those. The new `$app_language` property is the language your app shows, sent on Android 13+ when it can be read. Call `PostHog.setAppLanguage("de")` to send it on every version.
+- **Super properties win over the SDK's values.** A registered super property with the same key as one the SDK sets, such as `$os_name`, now overrides the SDK's value. A registered `$session_id` overrides the SDK's session ID, which can detach events from their session replay.
+- **Some events and values are dropped or replaced.** Events with an empty name are dropped, including ones `beforeSend` renames to `""`. Deep link query parameters whose name starts with `$` are left out of `Deep Link Opened`. A uuid you set in `beforeSend`, for example with `copy(uuid = …)`, is replaced with the uuid of the original capture.
 - **Events go to capture v1.** Analytics events go to `/i/v1/analytics/events` instead of `/batch`. If you self-host PostHog or send events through your own proxy, make sure that path is served first. Capture v1 also changes event validation, property precedence, and retries. See the [capture v1 upgrade guide](/docs/libraries/capture-v1).
 - **Feature flag payloads must be valid JSON.** A malformed, empty, or whitespace-only payload, or one only valid in lenient mode such as unquoted `hello`, now reads as `null` instead of a string. A JSON `null` payload reads as `null` instead of the string `"null"`. If you store plain text in a payload, change it to valid JSON such as `"hello"` before you upgrade. The flag's value isn't affected.
 - **`remoteConfig = false` no longer skips `/config`.** Apps that set it now request `/config` at setup and apply its session replay, surveys, error tracking, and push settings. `/flags` is then requested only if the project has feature flags, and if it has none, the cached flags are cleared.
