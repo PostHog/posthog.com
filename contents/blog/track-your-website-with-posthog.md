@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/orange-blog-image.jpg
 featuredImageType: full
+ogImage: generated
 category: Using PostHog
 tags:
   - Guides
@@ -60,6 +61,6 @@ If you’re on board and want to move ahead with tracking your marketing site wi
 </script>
 ```
 
-It’s worth noting that you’ll need to add this snippet to all pages you want to track, and that the snippet above uses Javascript. Don’t want to use Javascript? [There are plenty of other options](/docs/integrate)!
+It’s worth noting that you’ll need to add this snippet to all pages you want to track, and that the snippet above uses Javascript. Don’t want to use Javascript? [There are plenty of other options](/docs/getting-started/install)!
 
 <NewsletterForm />

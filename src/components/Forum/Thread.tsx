@@ -321,7 +321,7 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
         ...(isModerator
             ? [
                   {
-                      label: 'Ask Max to reply',
+                      label: 'Ask PostHog AI to reply',
                       icon: <IconSparkles />,
                       onClick: () => setMaxRequests([...maxRequests, { manual: true, withContext: true }]),
                   },
@@ -439,7 +439,7 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                             aria-label="Delete post"
                                         />
                                     )}
-                                    {isAuthor && !editing && !locked && (
+                                    {(isModerator || (isAuthor && !locked)) && !editing && (
                                         <OSButton
                                             onClick={() => setEditing(true)}
                                             icon={<IconPencil />}

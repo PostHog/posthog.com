@@ -44,7 +44,7 @@ A fast way to confirm the scanner itself works: run it [on demand](/docs/replay-
 
 In the **Run** tab's recording list, **Skipped** means the recording can't pass the scan-time checks, so the background sweep passed it over and an on-demand scan would come back ineligible. Hover the tag to see why, with the recording's own duration or active time next to the limit it misses. Recordings that are still in progress are only skipped for being too long, since they can still grow past the minimums.
 
-Below the player, the same check shows as **Skipped:** next to **Summarize this recording**, and the scan buttons are disabled with the reason.
+Below the player, the same check shows as **Skipped:** next to the summarize button (**Summarize this recording** or **Summarize with** a scanner's name), and the scan buttons are disabled with the reason.
 
 ## A scan started nothing
 
@@ -134,7 +134,7 @@ A failed observation shows **Scan failed** on its page with the failure's label,
 
 ### AI provider unavailable
 
-The AI provider stayed unreachable across every automatic retry. PostHog retries the provider call up to four times, spaced out over a couple of minutes, before an observation lands here.
+The AI provider stayed unreachable across every automatic retry. PostHog tries the provider call up to four times in total, spaced out over a couple of minutes, before an observation lands here.
 
 **What to do:** retry the scan. If you see a burst across many recordings, the provider is likely having availability issues – wait it out before triggering more on-demand work.
 

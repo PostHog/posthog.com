@@ -213,6 +213,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      # "generated" draws the post title onto the featured image for the social card.
+      # Absent: the featured image is the social card.
+      ogImage: String
       sourceId: String
     }
     type TeamData {
@@ -540,8 +543,6 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       icon_url: String
       docsUrl: String
       unreleased: Boolean
-      releaseStatus: String
-      beta: Boolean
       featured: Boolean
       caption: String
       sourceFields: [PostHogSourceField]
@@ -639,9 +640,12 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type ProductDataProductsAddons {
       legacy_product: Boolean
+      no_billing_limit: Boolean
     }
     type ProductDataProducts {
       legacy_product: Boolean
+      companion_of: String
+      no_billing_limit: Boolean
     }
     type ProductDataProductsAddonsFeatures {
         category: String

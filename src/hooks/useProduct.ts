@@ -22,7 +22,7 @@ import {
     IconAsterisk,
     IconAI,
     IconTestTube,
-    IconArrowUpRight,
+    IconShuffle,
     IconTrends,
     IconCursorClick,
     IconAtSign,
@@ -32,6 +32,7 @@ import { mcpAnalytics } from './productData/mcp_analytics'
 import { traces } from './productData/traces'
 import { support } from './productData/support'
 import { groupAnalytics } from './productData/group_analytics'
+import { dataPipelines } from './productData/data_pipelines'
 import { getTool } from '../data/tools'
 
 const dedupe = (products) => {
@@ -125,6 +126,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'blue',
         },
         groupAnalytics,
+        dataPipelines,
         {
             handle: 'platform_packages',
             name: 'Platform packages',
@@ -2582,8 +2584,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             ...getTool('data_out'),
-            parentIcon: 'dataOut',
-            Icon: IconArrowUpRight,
+            Icon: IconShuffle,
             color: 'orange',
             colorSecondary: 'orange',
             seo: {

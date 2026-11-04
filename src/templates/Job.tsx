@@ -10,6 +10,7 @@ import { sfBenchmark } from 'components/CompensationCalculator/compensation_data
 import { benefits } from 'components/Careers/Benefits'
 import { Department, Location, Timezone } from 'components/NotProductIcons'
 import { MDXProvider } from '@mdx-js/react'
+import { PrivateLink } from 'components/PrivateLink'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { companyMenu } from '../navs'
 import TeamMember from 'components/TeamMember'
@@ -754,7 +755,11 @@ export default function Job({
                                                             </MDXProvider>
                                                         )}
                                                         <MDXProvider
-                                                            components={{ HideFromJobPosting: () => null, TeamMember }}
+                                                            components={{
+                                                                HideFromJobPosting: () => null,
+                                                                PrivateLink,
+                                                                TeamMember,
+                                                            }}
                                                         >
                                                             <MDXRenderer>{objectives.body}</MDXRenderer>
                                                         </MDXProvider>

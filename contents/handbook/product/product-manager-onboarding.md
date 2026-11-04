@@ -32,7 +32,7 @@ We have two artifacts that can be reused and adjusted for each PM onboarding. We
 In addition to the two artifacts above, there are a couple of other items to set up, including:
 - Invite PM to relevant Slack channels (#pm, team channels, ...)
 - Invite PM to PM brownbag, PM standup, PM book club & the PM Google group
-- Add the PM to the [PM sprint planning](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-pm-sprint.md) and [monthly growth review](https://github.com/PostHog/requests-for-comments-internal/blob/main/.github/ISSUE_TEMPLATE/growth-review-summary-template.md) templates
+- Add the PM to the <PrivateLink url="https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-pm-sprint.md">PM sprint planning</PrivateLink> and <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/blob/main/.github/ISSUE_TEMPLATE/growth-review-summary-template.md">monthly growth review</PrivateLink> templates
 - Invite PM to their teams standups & sprint plannings
 
 The main focus of the onboarding week should be on those three topics:

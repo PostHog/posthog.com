@@ -53,7 +53,14 @@ export function ScrollSpyProvider({ children }: { children: React.ReactNode }): 
     )
 }
 
-export default function ElementScrollLink({ id, label, element, className = '', ...buttonProps }: Props): JSX.Element {
+export default function ElementScrollLink({
+    id,
+    label,
+    element,
+    className = '',
+    onClick,
+    ...buttonProps
+}: Props): JSX.Element {
     const { setSectionData, activeSection } = useContext(ScrollSpyContext)
     const isActive = activeSection === id
 
@@ -88,7 +95,9 @@ export default function ElementScrollLink({ id, label, element, className = '', 
         return () => observer.disconnect()
     }, [id, element, setSectionData])
 
-    const handleClick = () => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        onClick?.(event)
+        if (event.defaultPrevented) return
         if (!element.current) return
 
         const targetElement = element.current.querySelector(`#${CSS.escape(id)}`)

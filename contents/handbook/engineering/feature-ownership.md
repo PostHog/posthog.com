@@ -12,7 +12,7 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 
 ## Who can contribute to owned features?
 
-Feature ownership does **not** mean that the owner is the **only** person/team who can contribute to the feature. If another team requires something from an existing feature that isn't supported, that non-owning team should build it. The owner team is responsible for reviewing PRs to make sure the code patterns and UX makes sense for the feature overall. After the change is merged, the owner team then owns it (assuming no major bugs from the initial implementation).
+Feature ownership does **not** mean that the owner is the **only** person/team who can contribute to the feature. If another team requires something from an existing feature that isn't supported, that non-owning team builds it. How you start depends on the size of the change (see [PR or context?](#pr-or-context)). The owner team is responsible for reviewing PRs to make sure the code patterns and UX makes sense for the feature overall. After the change is merged, the owner team then owns it (assuming no major bugs from the initial implementation).
 
 For example, web analytics wanted a heatmap insight type to see what times of day people were active. <TeamMember name="Javier Bahamondes" photo /> from web analytics opened up the necessary PRs to build this feature. It was reviewed by the <SmallTeam slug="product-analytics" />, owner of all insight types, who then took responsibility for it after it was merged.
 
@@ -22,6 +22,36 @@ This process does four things:
 -   It ensures that features built by another team get proper review, because reviewers know they will have to own it eventually.
 -   It makes sure no feature is left "orphaned" with no real owner.
 -   It embraces our value of [Why not now?](https://posthog.com/handbook/values#why-not-now).
+
+### PR or context?
+
+"Context" means a Slack message or issue to the owning team that explains the problem and why it matters, without code.
+
+| Change                                          | Suggested path                                                                                                                                          |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Typo or small bug                               | Open a PR, then tell the owning team.                                                                                                                   |
+| Small improvement (one screen, no new behavior) | Open a PR, then tell the owning team. If you don't know that code well, check with them first.                                                          |
+| New feature, or a change in how something works | Give the owning team context first. Once they agree on the approach, you build it. A draft PR can come with the context, and they are free to close it. |
+
+The bigger the change, the more it shapes the owning team's direction, and they maintain it after it merges, so they get a say before the code exists.
+
+Not sure which row fits your change? If all else fails, ask the owning team. Not sure who owns it? See [Fuzzy ownership](/handbook/company/fuzzy-ownership).
+
+### If you open the PR, you own it
+
+The owning team maintains your code after it merges, so they review it as their own. Generating a PR takes minutes, so the PR itself isn't the work. Before you ask the owning team for a review, understand the change well enough to explain it and its tradeoffs without the diff open. "I pointed an agent at this" is not a description. Then follow [Before requesting a review](/handbook/engineering/how-we-review#before-requesting-a-review).
+
+### What the owning team does
+
+-   Say what you prefer. If a PR doesn't meet your bar, or you'd rather get an issue than a PR, tell the author.
+-   Close an outside PR that conflicts with your team's direction, and say why. The author then gives you context instead.
+-   Write your preferences down where agents read them. Many outside PRs start with an agent, so put your conventions, your bar, and when you'd rather get an issue in an `AGENTS.md` file next to the code you own. For an example, see the [Issue or PR?](https://github.com/PostHog/posthog.com/blob/master/AGENTS.md#issue-or-pr) section of the posthog.com `AGENTS.md`.
+
+Expect that the owning team may close your PR and build the change their own way. That's a normal outcome, not a judgment of your work.
+
+### If you don't usually write code
+
+The same tiers and the same ownership bar apply to you. If you aren't sure how the code you're changing works, ask the owning team before you open the PR, not after.
 
 ## Feature list
 

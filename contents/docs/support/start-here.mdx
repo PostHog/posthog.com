@@ -6,13 +6,13 @@ contentMaxWidthClass: max-w-5xl
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import OSButton from 'components/OSButton'
-import { IconChat, IconAtSign, IconMessage, IconGithub, IconMagic } from '@posthog/icons'
+import { IconChat, IconAtSign, IconMessage, IconGithub, IconMagic, IconBrackets } from '@posthog/icons'
 
 <QuestLog firstSpeechBubble="Let's set up customer support!" lastSpeechBubble="You're ready to help your users!">
 
 <QuestLogItem title="Enable Support and add the widget" subtitle="Where tickets begin" icon="IconToggle">
 
-The first step is to enable Support and add the in-app widget to your site, so customer conversations start arriving as tickets. Every widget ticket automatically attaches the sender's [session replay](/session-replay), [events](/docs/product-analytics/capture-events), and [identity](/docs/product-analytics/identify), so you always have the full story.
+The first step is to enable Support and add the in-app widget to your site, so customer conversations start arriving as tickets. Every widget ticket automatically attaches the sender's [session replay](/docs/session-replay), [events](/docs/product-analytics/capture-events), and [identity](/docs/product-analytics/identify), so you always have the full story.
 
 Building your own interface instead? The [JavaScript API](/docs/support/javascript-api) gives you the same backend without the default widget.
 
@@ -20,9 +20,9 @@ Building your own interface instead? The [JavaScript API](/docs/support/javascri
 
 </QuestLogItem>
 
-<QuestLogItem title="Connect your other channels" subtitle="Email, Slack, and GitHub" icon="IconMessage">
+<QuestLogItem title="Connect your other channels" subtitle="Email, Slack, Teams, GitHub, and the API" icon="IconMessage">
 
-Meet customers wherever they are. Beyond the widget, conversations can arrive from [email](/docs/support/email), [Slack](/docs/support/slack), and [GitHub](/docs/support/github), and every channel syncs both ways so you answer from a single inbox.
+Meet customers wherever they are. Beyond the widget, conversations can arrive from [email](/docs/support/email), [Slack](/docs/support/slack), [Microsoft Teams](/docs/support/teams) (beta), and [GitHub](/docs/support/github). You can also start tickets from your own code with the [JavaScript API](/docs/support/javascript-api) or the [email compose API](/docs/support/email#start-a-ticket-with-the-api). Every channel syncs both ways so you answer from a single inbox.
 
 <div className="not-prose grid grid-cols-1 @sm:grid-cols-2 gap-3 my-4">
   <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
@@ -42,8 +42,15 @@ Meet customers wherever they are. Beyond the widget, conversations can arrive fr
   <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
     <IconMessage className="size-5 shrink-0 text-red mt-0.5" />
     <div>
-      <p className="m-0 text-sm font-bold text-primary">Slack</p>
-      <p className="m-0 mt-0.5 text-xs text-secondary">SupportHog turns messages and reactions into tickets</p>
+      <p className="m-0 text-sm font-bold text-primary">SupportHog (Slack)</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Mentions and reactions become tickets</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconMessage className="size-5 shrink-0 text-purple mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">SupportHog (Teams)</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Beta. Channel messages and mentions become tickets</p>
     </div>
   </div>
   <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
@@ -51,6 +58,13 @@ Meet customers wherever they are. Beyond the widget, conversations can arrive fr
     <div>
       <p className="m-0 text-sm font-bold text-primary">GitHub</p>
       <p className="m-0 mt-0.5 text-xs text-secondary">Issues become tickets and replies post back</p>
+    </div>
+  </div>
+  <div className="flex items-start gap-2.5 rounded border border-primary bg-accent p-3">
+    <IconBrackets className="size-5 shrink-0 text-seagreen mt-0.5" />
+    <div>
+      <p className="m-0 text-sm font-bold text-primary">API</p>
+      <p className="m-0 mt-0.5 text-xs text-secondary">Create widget or email tickets from your code</p>
     </div>
   </div>
 </div>
@@ -63,14 +77,11 @@ Meet customers wherever they are. Beyond the widget, conversations can arrive fr
 
 The [Support inbox](/docs/support/inbox) is where your team lives. Open any ticket and the customer's replay, recent events, exceptions, and past conversations are right there, so you resolve issues without the back-and-forth. Assign, tag, snooze, and track SLAs from one view.
 
-<!-- TODO(sarah): replace with a Support inbox screenshot – capture at 1000-1400px wide, light + dark, no PII.
 <ProductScreenshot
-    imageLight="TODO_CLOUDINARY_URL_LIGHT"
-    imageDark="TODO_CLOUDINARY_URL_DARK"
-    alt="The Support inbox with a ticket open, showing the customer's session replay and events alongside the conversation"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_9_54_30_12dbeefeb3.png"
+    alt="Support ticket with status, SLA, assignee, and channel for each ticket"
     classes="rounded"
 />
--->
 
 <OSButton variant="primary" asLink to="/docs/support/inbox">Explore the inbox</OSButton>
 
@@ -114,6 +125,22 @@ Support isn't just an inbox – it's a signal source. Recurring issues in your c
 
 </QuestLogItem>
 
+<QuestLogItem title="Let the AI agent draft replies" subtitle="Beta, and opt-in" icon="IconMagic">
+
+The [AI agent](/docs/support/ai-agent) drafts a reply when a ticket arrives. You choose, per channel and ticket type, whether that draft stays a private note or goes to the customer. Diagnostic and billing replies always stay private. Turn it on only if you want it.
+
+<OSButton variant="primary" asLink to="/docs/support/ai-agent">Set up the AI agent</OSButton>
+
+</QuestLogItem>
+
+<QuestLogItem title="Learn by use case" subtitle="Pick the setup that matches your customers" icon="IconBook">
+
+The same product covers shared Slack channels, in-app chat, a `support@` inbox, GitHub issues, and a move off another help desk. Start from the [use case](/docs/support/use-cases) that matches how your customers already reach you.
+
+<OSButton variant="primary" asLink to="/docs/support/use-cases">Browse use cases</OSButton>
+
+</QuestLogItem>
+
 <QuestLogItem title="Migrating from another tool?" subtitle="Bring your tickets with you" icon="IconUpload">
 
 Bring your history with you so the inbox starts with context instead of an empty slate. The [Zendesk](/docs/support/imports/zendesk) import (beta) brings over:
@@ -129,7 +156,7 @@ Bring your history with you so the inbox starts with context instead of an empty
 
 <QuestLogItem title="Know what's free" subtitle="Opt-in AI agent" icon="IconPiggyBank">
 
-Support's core features – the widget, inbox, and integrations – are free. An AI agent that drafts replies to your customers is coming soon and will be opt-in: only teams who turn it on are billed, and we'll give you plenty of notice first.
+Support's core features are free. That includes the widget, the inbox, every channel, workflow automation, and historical imports. There is no ticket cap and no per-seat charge. The [AI agent](/docs/support/ai-agent) is free while it is in beta. We will set a price later, and we will tell you before any charge starts. See [pricing](/docs/support/pricing) for the limits.
 
 <OSButton variant="primary" asLink to="/docs/support/pricing">See pricing</OSButton>
 

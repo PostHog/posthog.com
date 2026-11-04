@@ -111,7 +111,7 @@ PostHogSDK.shared.register(["team_id": 22])
 
 The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `PostHogSDK.shared.register` call, since they all include the specified Super Property.
 
-However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `PostHogSDK.shared.identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `PostHogSDK.shared.identify`. More information on this can be found on the [Sending User Information section](#identifying-users).
 
 ### Removing stored super properties
 
@@ -127,7 +127,7 @@ If you are doing this as part of a user logging out, you can instead simply use 
 
 ## Reset after logout
 
-To reset the user's ID and anonymous ID after logout, call `reset`. See [Identifying users](/docs/product-analytics/identify#reset) for the shared reset guidance and iOS example.
+To reset the user's ID and anonymous ID after logout, call `reset`. See [Identifying users](/docs/product-analytics/identify#reset-on-logout) for the shared reset guidance and iOS example.
 
 ## Group analytics
 
