@@ -32,7 +32,7 @@ The "Building your own AI?" panel at the end of the page. To change it, edit `en
 
 ## `Testimonials`
 
-The heading and hedgehog take the left third, and a `CardStackCarousel` of sticky notes takes the right two thirds (centered, no wider than `max-w-lg`, so the arrows stay close to the notes). Under the `3xl` reader width, the heading and hedgehog sit above the carousel, with the hedgehog on the left.
+A small hedgehog sits beside the heading. Under it, a `CardStackCarousel` with `row` shows the sticky notes. From the `2xl` reader width up, three square notes sit in a row, and the middle note sits a little lower. Below that width, the notes show as a stack (centered, no wider than `max-w-lg`). The chevrons move one note at a time, and the carousel loops in both directions.
 
 The notes show in the order of `notes`. `quotes` are verbatim, with names as supplied. Do not add roles, companies, or photos. `stories` link to `/customers/<slug>`. Use only stories that cover PostHog AI or the MCP, and copy the quote from the story. Each note takes the `noteStyles` entry at its index. The styles repeat after six notes.
 

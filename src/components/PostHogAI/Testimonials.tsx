@@ -77,83 +77,85 @@ const notes = [
 ]
 
 const noteStyles = [
-    { color: 'bg-light-yellow', tilt: '-rotate-2', copy: 'text-center', name: 'self-end' },
-    { color: 'bg-pale-blue', tilt: 'rotate-1', copy: 'text-left', name: 'self-start' },
-    { color: 'bg-light-purple', tilt: 'rotate-3', copy: 'text-center', name: 'self-center' },
-    { color: 'bg-lime-green', tilt: '-rotate-1', copy: 'text-left', name: 'self-end' },
-    { color: 'bg-creamsicle', tilt: 'rotate-2', copy: 'text-center', name: 'self-start' },
-    { color: 'bg-light-blue', tilt: '-rotate-3', copy: 'text-center', name: 'self-end' },
+    { color: 'bg-light-yellow', tilt: '-rotate-2' },
+    { color: 'bg-pale-blue', tilt: 'rotate-1' },
+    { color: 'bg-light-purple', tilt: 'rotate-3' },
+    { color: 'bg-lime-green', tilt: '-rotate-1' },
+    { color: 'bg-creamsicle', tilt: 'rotate-2' },
+    { color: 'bg-light-blue', tilt: '-rotate-3' },
 ]
 
 export default function Testimonials(): JSX.Element {
     return (
         <section id="testimonials" className="my-12">
-            <div className="grid items-center gap-6 @3xl/reader-content:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] @3xl/reader-content:gap-8">
-                <div className="relative z-10 grid grid-cols-[8rem_minmax(0,1fr)] items-center gap-x-4 @3xl/reader-content:flex @3xl/reader-content:flex-col @3xl/reader-content:items-start @3xl/reader-content:gap-2">
-                    <h2 className="col-start-2 row-start-1 m-0 self-end text-xl font-bold leading-tight">
-                        Real things real people really said about PostHog AI{' '}
+            <div className="flex items-center gap-4 @2xl/reader-content:gap-5">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/trenchcoat_hog_a3b8775b73.png"
+                    alt=""
+                    loading="lazy"
+                    width={200}
+                    className="pointer-events-none w-28 shrink-0 @4xl/reader-content:w-32"
+                    imgClassName="w-full"
+                />
+                <div>
+                    <h2 className="m-0 text-xl font-bold leading-tight @2xl/reader-content:text-3xl @4xl/reader-content:text-4xl">
+                        Real things real people really said
+                        <br className="hidden @2xl/reader-content:inline" /> about PostHog AI{' '}
                         <span className="text-secondary">(really!)</span>
                     </h2>
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/trenchcoat_hog_a3b8775b73.png"
-                        alt=""
-                        loading="lazy"
-                        width={320}
-                        className="pointer-events-none col-start-1 row-span-2 row-start-1 w-32 shrink-0 @3xl/reader-content:w-48"
-                        imgClassName="w-full"
-                    />
-                    <p className="col-start-2 row-start-2 mb-0 mt-2 self-start text-xs text-secondary">
+                    <p className="mb-0 mt-2 text-xs text-secondary @4xl/reader-content:text-sm">
                         Pssst, are you Post-It{' '}
                         <Link
                             to="/academy"
                             state={{ newWindow: true }}
-                            className="font-normal underline decoration-dotted underline-offset-2"
+                            className="font-semibold text-primary underline decoration-dotted underline-offset-2"
                         >
                             certified
                         </Link>
                         ?
                     </p>
                 </div>
-                {/* The notes are square, so the stage is one `sm` contained card width plus room for the lower side cards */}
-                <CardStackCarousel
-                    count={notes.length}
-                    ariaLabel="What people say about PostHog AI"
-                    size="sm"
-                    contained
-                    className="mx-auto w-full max-w-lg"
-                    framed={false}
-                    showCounter={false}
-                    stageClassName="h-[calc(min(58cqw_-_2.25rem,240px)_+_20px)]"
-                    renderCard={(index, { isActive }) => {
-                        const style = noteStyles[index % noteStyles.length]
-                        const note = notes[index]
-                        return (
-                            <figure
-                                className={`m-0 flex aspect-square w-full flex-col justify-between gap-2 p-4 text-black shadow-md ${style.tilt} ${style.color}`}
-                            >
-                                <blockquote
-                                    className={`m-0 flex flex-1 items-center border-0 p-0 font-comic text-sm font-normal not-italic leading-snug ${style.copy}`}
-                                >
-                                    “{note.text}”
-                                </blockquote>
-                                <figcaption className={`font-comic text-sm italic ${style.name}`}>
-                                    {note.author}
-                                    {'customer' in note && (
-                                        <Link
-                                            to={`/customers/${note.slug}`}
-                                            state={{ newWindow: true }}
-                                            tabIndex={isActive ? 0 : -1}
-                                            className="mt-1 block text-xs not-italic underline underline-offset-2"
-                                        >
-                                            Read the {note.customer} story →
-                                        </Link>
-                                    )}
-                                </figcaption>
-                            </figure>
-                        )
-                    }}
-                />
             </div>
+            {/* The notes are square. The stage fits one note, plus the lower side cards in a stack or the lower front card and tilt in a row. */}
+            <CardStackCarousel
+                count={notes.length}
+                ariaLabel="What people say about PostHog AI"
+                size="sm"
+                contained
+                row
+                className="mx-auto mt-6 w-full max-w-lg @2xl/reader-content:mt-8 @2xl/reader-content:max-w-none"
+                framed={false}
+                showCounter={false}
+                stageClassName="h-[calc(min(58cqw_-_2.25rem,240px)_+_20px)] @2xl:h-[calc((100cqw_-_7.5rem)/3_+_2rem)]"
+                renderCard={(index, { isActive }) => {
+                    const { color, tilt } = noteStyles[index % noteStyles.length]
+                    const note = notes[index]
+                    return (
+                        <figure
+                            className={`m-0 flex aspect-square w-full flex-col justify-between gap-3 p-4 text-black shadow-md ${tilt} ${color}`}
+                        >
+                            <blockquote className="m-0 border-0 p-0 text-left font-comic text-sm font-normal not-italic leading-snug @2xl/reader-content:text-base @5xl/reader-content:text-lg">
+                                “{note.text}”
+                            </blockquote>
+                            <figcaption className="flex items-end justify-between gap-3">
+                                <span className="whitespace-nowrap font-comic text-sm @2xl/reader-content:text-base">
+                                    {note.author}
+                                </span>
+                                {'customer' in note && (
+                                    <Link
+                                        to={`/customers/${note.slug}`}
+                                        state={{ newWindow: true }}
+                                        tabIndex={isActive ? 0 : -1}
+                                        className="text-right text-xs font-semibold text-black underline underline-offset-2"
+                                    >
+                                        Read the {note.customer} story
+                                    </Link>
+                                )}
+                            </figcaption>
+                        </figure>
+                    )
+                }}
+            />
         </section>
     )
 }

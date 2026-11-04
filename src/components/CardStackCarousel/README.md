@@ -47,6 +47,7 @@ To put the stack straight on the page, with no frame:
 | `showCounter` | `boolean` | `true` | Shows "1 of 6" above the stack. When false, only screen readers announce it. |
 | `stageClassName` | `string` | `'h-[285px] @md:h-[325px]'` | Replaces the stage height. The cards are absolutely positioned, so set a height that fits your card. |
 | `contained` | `boolean` | `false` | Shrinks the cards so the stack and both chevrons fit inside the container, and shows the side cards at any width. Set `stageClassName` to a height that matches, for example `h-[calc(min(58cqw_-_2.25rem,240px)_+_20px)]` for `sm`. |
+| `row` | `boolean` | `false` | From a 672px (`@2xl`) container width, shows the front card and both side cards side by side at full size, with the front card a little lower. Below that width, the stack shows. Set a `stageClassName` height for each layout, for example `@2xl:h-[calc((100cqw_-_7.5rem)/3_+_2rem)]` for square cards. |
 | `className` | `string` | `''` | Classes for the outer container. |
 
 ## Behavior
@@ -55,7 +56,7 @@ To put the stack straight on the page, with no frame:
 - **Motion:** CSS transitions on `transform` and `opacity` (420ms). On mount and on each move, the new side card comes in from the edge.
 - **Reduced motion:** with `prefers-reduced-motion`, all moves are instant.
 - **Narrow containers:** the side cards are transparent below the `@lg` container width (512px), so only the front card shows.
-- **Focus:** side cards are `aria-hidden`. Give focusable elements in a card `tabIndex={isActive ? 0 : -1}`.
+- **Focus:** side cards are `aria-hidden`. Give focusable elements in a card `tabIndex={isActive ? 0 : -1}`. In a `row`, the three cards in view are all active.
 
 ## `<SignupQuoteCard />`
 

@@ -28,6 +28,8 @@ export type CardStackCarouselProps = {
     stageClassName?: string
     /** Shrinks the cards so the whole stack and both chevrons fit inside the container, and keeps the side cards visible at any width. Default false. */
     contained?: boolean
+    /** From a 672px (`@2xl`) container width, shows the front card and both side cards side by side at full size. Default false. */
+    row?: boolean
 }
 
 export type CardStackSize = 'sm' | 'md'
@@ -44,7 +46,13 @@ const SIZE_CLASSES: Record<CardStackSize, { card: string; containedCard: string;
 }
 
 const STACK_OFFSETS = [-1, 0, 1] as const
-type StackPosition = (typeof STACK_OFFSETS)[number]
+// A row also keeps a hidden card at each end, so cards slide out of view instead of disappearing.
+const ROW_OFFSETS = [-2, -1, 0, 1, 2] as const
+type StackPosition = (typeof ROW_OFFSETS)[number]
+
+// Must match the `@2xl` container query in the row classes below.
+const ROW_MIN_WIDTH_PX = 672
+const ROW_WIDTH_CLASS = '@2xl:w-[calc((100%_-_7.5rem)/3)]'
 
 type Layout = {
     baseX: number
@@ -73,6 +81,9 @@ function layoutForPosition(position: StackPosition, cardWidth: number): Layout {
     const w = cardWidth || 320
     if (position === 0) {
         return { baseX: 0, baseY: 0, scale: 1, rotate: 0, opacity: 1, zIndex: 30 }
+    }
+    if (Math.abs(position) === 2) {
+        return { ...entryPose(position > 0 ? 'right' : 'left', w), zIndex: 10 }
     }
     const sign = position as 1 | -1
     return {
@@ -124,6 +135,8 @@ function StackCardShell({
     renderCard,
     widthClassName,
     alwaysShowSides,
+    row,
+    isRow,
 }: {
     index: number
     position: StackPosition
@@ -134,11 +147,14 @@ function StackCardShell({
     renderCard: (index: number, meta: CardStackRenderMeta) => React.ReactNode
     widthClassName: string
     alwaysShowSides: boolean
+    row: boolean
+    isRow: boolean
 }) {
     const enteringThis = isEnteringSide(entrance, index, position)
+    const entryFrom = enteringThis && entrance ? entryPoseForEntrance(entrance, position) : null
 
     const settled = layoutForPosition(position, cardWidth)
-    const entry = enteringThis && entrance ? entryPose(entryPoseForEntrance(entrance, position), cardWidth) : settled
+    const entry = entryFrom ? entryPose(entryFrom, cardWidth) : settled
 
     const [useSettledLayout, setUseSettledLayout] = useState(!enteringThis || prefersReducedMotion)
     // Suppresses the CSS transition while jumping to the entry pose so the card doesn't animate backwards.
@@ -171,22 +187,43 @@ function StackCardShell({
     const transitionStyle = !transitionEnabled || suppressTransition || prefersReducedMotion ? 'none' : TRANSITION
 
     const isSideCard = position !== 0
+    const isActive = position === 0 || (isRow && Math.abs(position) === 1)
 
     // Side cards: CSS @container query controls visibility (opacity-0 → @lg:opacity-[0.75]).
     // @lg in @tailwindcss/container-queries = 32rem = 512px, which is where the stack layout fits.
     // `contained` cards are sized to fit at any width, so their side cards always show.
     // The inline `transition` already covers opacity, so the enter/exit animations play naturally.
     // Center card: opacity always 1 (or set via inline style during a transition).
-    const sideOpacityClass = isSideCard ? (alwaysShowSides ? 'opacity-[0.75]' : 'opacity-0 @lg:opacity-[0.75]') : ''
+    // The cards at the ends of a row stay hidden.
+    const sideOpacityClass =
+        Math.abs(position) === 2
+            ? 'opacity-0'
+            : isSideCard
+            ? `${alwaysShowSides ? 'opacity-[0.75]' : 'opacity-0 @lg:opacity-[0.75]'} ${row ? '@2xl:opacity-100' : ''}`
+            : ''
+
+    const stackTransform = `translate(calc(-50% + ${pose.baseX}px), ${pose.baseY}px) scale(${pose.scale}) rotate(${pose.rotate}deg)`
+    // In a row, each card is one card width plus a 1.25rem gap from the next, and the front card sits a little lower.
+    const rowPosition = entryFrom && !useSettledLayout ? (entryFrom === 'right' ? 2 : -2) : position
+    const rowTransform = `translate(calc(-50% + ${rowPosition} * (100% + 1.25rem)), ${
+        rowPosition === 0 ? '0.75rem' : '0px'
+    })`
 
     return (
         <div
             data-card-stack-position={position}
-            aria-hidden={position !== 0}
-            className={`absolute top-0 left-1/2 ${widthClassName} pointer-events-none ${sideOpacityClass}`}
+            aria-hidden={!isActive}
+            className={`absolute top-0 left-1/2 ${widthClassName} pointer-events-none ${sideOpacityClass} ${
+                row ? `${ROW_WIDTH_CLASS} [transform:var(--stack-transform)] @2xl:[transform:var(--row-transform)]` : ''
+            }`}
             style={{
                 zIndex: pose.zIndex,
-                transform: `translate(calc(-50% + ${pose.baseX}px), ${pose.baseY}px) scale(${pose.scale}) rotate(${pose.rotate}deg)`,
+                ...(row
+                    ? ({
+                          '--stack-transform': stackTransform,
+                          '--row-transform': rowTransform,
+                      } as React.CSSProperties)
+                    : { transform: stackTransform }),
                 transformOrigin: 'top center',
                 // Side card opacity is controlled by CSS container query class above.
                 // Only the center card needs an inline opacity (1).
@@ -194,8 +231,8 @@ function StackCardShell({
                 transition: transitionStyle,
             }}
         >
-            <div className={`w-full select-none ${position === 0 ? 'pointer-events-auto' : ''}`}>
-                {renderCard(index, { isActive: position === 0 })}
+            <div className={`w-full select-none ${isActive ? 'pointer-events-auto' : ''}`}>
+                {renderCard(index, { isActive })}
             </div>
         </div>
     )
@@ -212,6 +249,7 @@ export function CardStackCarousel({
     size = 'md',
     stageClassName = 'h-[285px] @md:h-[325px]',
     contained = false,
+    row = false,
 }: CardStackCarouselProps) {
     const sizeClasses = SIZE_CLASSES[size]
     const stageRef = useRef<HTMLDivElement>(null)
@@ -222,6 +260,7 @@ export function CardStackCarousel({
 
     const [current, setCurrent] = useState(0)
     const [entrance, setEntrance] = useState<Entrance | null>(null)
+    const [isRow, setIsRow] = useState(false)
     const prefersReducedMotion = usePrefersReducedMotion()
 
     const wrap = useCallback(
@@ -309,7 +348,7 @@ export function CardStackCarousel({
         if (count === 1) return [{ index: 0, position: 0 as StackPosition }]
 
         const raw: Entry[] = []
-        for (const offset of STACK_OFFSETS) {
+        for (const offset of row ? ROW_OFFSETS : STACK_OFFSETS) {
             let index: number
             if (loop) {
                 index = wrap(current + offset)
@@ -332,7 +371,7 @@ export function CardStackCarousel({
             }
         }
         return Array.from(best.values()).sort((a, b) => a.position - b.position)
-    }, [count, current, loop, wrap])
+    }, [count, current, loop, wrap, row])
 
     useEffect(() => {
         const measure = () => {
@@ -340,13 +379,14 @@ export function CardStackCarousel({
             if (!stage) return
             const active = stage.querySelector<HTMLDivElement>('[data-card-stack-position="0"]')
             if (active) cardWidthRef.current = active.offsetWidth
+            setIsRow(row && stage.offsetWidth >= ROW_MIN_WIDTH_PX)
         }
         measure()
         if (!stageRef.current) return
         const observer = new ResizeObserver(measure)
         observer.observe(stageRef.current)
         return () => observer.disconnect()
-    }, [count, visibleCards.length])
+    }, [count, visibleCards.length, row])
 
     const onKeyDown = (e: React.KeyboardEvent) => {
         if (e.key === 'ArrowLeft') {
@@ -395,6 +435,8 @@ export function CardStackCarousel({
                             renderCard={renderCard}
                             widthClassName={contained ? sizeClasses.containedCard : sizeClasses.card}
                             alwaysShowSides={contained}
+                            row={row}
+                            isRow={isRow}
                         />
                     )
                 })}
