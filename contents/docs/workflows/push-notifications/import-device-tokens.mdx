@@ -21,10 +21,10 @@ There are three ways to import:
 
 ### Which token goes to which channel
 
-| Channel | Token it takes | Looks like |
-| --- | --- | --- |
-| APNs | The APNs device token, hex encoded | 64 hex characters |
-| FCM | The FCM registration token | Around 150 letters, digits, `-` and `_`, often with a `:` |
+| Channel | Token it takes                     | Looks like                                                |
+| ------- | ---------------------------------- | --------------------------------------------------------- |
+| APNs    | The APNs device token, hex encoded | 64 hex characters                                         |
+| FCM     | The FCM registration token         | Around 150 letters, digits, `-` and `_`, often with a `:` |
 
 - An iOS app that sends through Firebase has FCM tokens. Import those into the FCM channel.
 - Expo push tokens (`ExponentPushToken[...]`) can't be imported. They only work through Expo's own push service. Your app needs to read the native APNs or FCM token with `getDevicePushTokenAsync` and register it with the PostHog SDK instead.
@@ -33,12 +33,12 @@ There are three ways to import:
 
 PostHog checks every row and tells you why a row wasn't imported:
 
-| Reason | What it means | What to do |
-| --- | --- | --- |
-| No person has this distinct ID | No person in PostHog has this `distinct_id` | Check that it's the ID your app passes to `identify`. If the IDs are right and these people just haven't opened the app since you added PostHog, import them anyway and create new persons |
-| The token doesn't fit this channel | For example an Expo token, an APNs token in an FCM channel, or an FCM token in an APNs channel | Import it into the right channel, or drop it |
-| Not stored | PostHog didn't save the device | Import the row again |
-| Person processing is off for this person | PostHog didn't update the person, so the device wasn't saved | Check that [person profiles](/docs/data/persons) are processed for these people, then import again |
+| Reason                                   | What it means                                                                                  | What to do                                                                                                                                                                                 |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| No person has this distinct ID           | No person in PostHog has this `distinct_id`                                                    | Check that it's the ID your app passes to `identify`. If the IDs are right and these people just haven't opened the app since you added PostHog, import them anyway and create new persons |
+| The token doesn't fit this channel       | For example an Expo token, an APNs token in an FCM channel, or an FCM token in an APNs channel | Import it into the right channel, or drop it                                                                                                                                               |
+| Not stored                               | PostHog didn't save the device                                                                 | Import the row again                                                                                                                                                                       |
+| Person processing is off for this person | PostHog didn't update the person, so the device wasn't saved                                   | Check that [person profiles](/docs/data/persons) are processed for these people, then import again                                                                                         |
 
 Rows with an unknown `distinct_id` are rejected by default. If they were imported, PostHog would create a new person for each one, and a person your app never identifies never gets a push.
 
@@ -75,7 +75,7 @@ The agent uses the `integrations-push-tokens-create` tool and the `importing-pus
 
 ## Use the API
 
-You need a [personal API key](/docs/api/personal-api-keys) with the `integration:write` scope. The key's user must be an admin of the project.
+You need a [personal API key](/docs/api/personal-api-keys) with the `integration:write` and `person:write` scopes. The key's user must be an admin of the project.
 
 ### Find your channel's ID
 
@@ -109,18 +109,18 @@ The response says how many devices would be stored, and why each other row would
 
 ```json
 {
-    "imported": 1,
-    "dry_run": true,
-    "failed": [
-        {
-            "index": 1,
-            "distinct_id": "user_456",
-            "device_token_suffix": "f6a1b2",
-            "reason": "unknown_person",
-            "detail": "No person has this distinct ID. Use the ID your app passes to identify, or import with create_missing_persons."
-        }
-    ],
-    "failed_distinct_ids": ["user_456"]
+  "imported": 1,
+  "dry_run": true,
+  "failed": [
+    {
+      "index": 1,
+      "distinct_id": "user_456",
+      "device_token_suffix": "f6a1b2",
+      "reason": "unknown_person",
+      "detail": "No person has this distinct ID. Use the ID your app passes to identify, or import with create_missing_persons."
+    }
+  ],
+  "failed_distinct_ids": ["user_456"]
 }
 ```
 
