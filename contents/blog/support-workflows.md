@@ -17,7 +17,7 @@ How were we going to achieve all of that? Did we build it into the product ourse
 
 Actually, the whole move was made a lot easier by Workflows. Almost everything we needed, I built with [Workflows](/docs/workflows). I now have 27 active workflows related to support, and I think the result is better than if we'd built it all natively.
 
-## Why we built it with workflows instead
+## Why we built workflows instead
 
 Building these features natively means one of two things. Either we build them for our exact use case, or we generalize them to suit every customer. Generalizing tends to end up gray and mushy: you try to please everyone and end up pleasing no one.
 
