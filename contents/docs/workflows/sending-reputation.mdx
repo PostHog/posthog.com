@@ -39,7 +39,7 @@ Tier 0 is a probation tier for a domain with no sending record. Its caps sit far
 
 <CalloutBox icon="IconInfo" title="Emails above the cap wait, they are not lost" type="fyi">
 
-An email that does not fit in the current hour or day stays queued. The worker sends it once the allowance frees up. The workflow's invocations show the delay.
+An email that does not fit in the current hour or day stays queued. The worker sends it once the allowance frees up. The workflow's invocations show the delay. This is different from the per-person [frequency cap](/docs/workflows/opt-outs#frequency-cap), which skips marketing messages over the cap unless you set a hold time.
 
 A batch send is different. When the audience is larger than the tier allows, the trigger button blocks the launch and shows the current limit. Add filters to narrow the audience, or wait for the next tier. This batch cap only applies to workflows with an email step.
 
