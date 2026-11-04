@@ -112,7 +112,31 @@ async function downloadPostHogBootstrap(): Promise<string> {
     }
 }
 
+/**
+ * Writes each SDK reference that Strapi stores as Markdown to contents/docs/libraries/<sdk>/<version>.md,
+ * so it builds like any other docs page. The SDK repo writes the page, front matter included.
+ */
+async function writeSdkMarkdownReferences(): Promise<void> {
+    const host = process.env.GATSBY_SQUEAK_API_HOST
+    if (!host) return
+    const query = 'filters[markdown][$notNull]=true&fields[0]=referenceId&fields[1]=version&fields[2]=markdown'
+    // Strapi answers 400 with no data until its sdk-reference type has the `markdown` field.
+    const { data } = await fetch(`${host}/api/sdk-references?${query}&pagination[pageSize]=100`).then((res) =>
+        res.json()
+    )
+    for (const { attributes } of data ?? []) {
+        const dir = path.resolve(
+            __dirname,
+            '../contents/docs/libraries',
+            attributes.referenceId.replace(/^posthog-/, '')
+        )
+        fs.mkdirSync(dir, { recursive: true })
+        fs.writeFileSync(path.join(dir, `${attributes.version}.md`), attributes.markdown)
+    }
+}
+
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
+    await writeSdkMarkdownReferences()
     cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()
