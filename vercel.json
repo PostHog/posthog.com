@@ -5828,7 +5828,7 @@
         },
         {
             "source": "/teams/data-warehouse",
-            "destination": "/teams/managed-warehouse"
+            "destination": "/teams/warehouse"
         },
         {
             "source": "/handbook/small-teams/infrastructure",
@@ -7280,11 +7280,19 @@
         },
         {
             "source": "/teams/data-stack",
-            "destination": "/teams/managed-warehouse"
+            "destination": "/teams/warehouse"
         },
         {
             "source": "/teams/data-stack/:path*",
-            "destination": "/teams/managed-warehouse/:path*"
+            "destination": "/teams/warehouse/:path*"
+        },
+        {
+            "source": "/teams/managed-warehouse",
+            "destination": "/teams/warehouse"
+        },
+        {
+            "source": "/teams/managed-warehouse/:path*",
+            "destination": "/teams/warehouse/:path*"
         },
         {
             "source": "/teams/signals/:path*",
