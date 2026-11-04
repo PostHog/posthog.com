@@ -26,8 +26,8 @@ import os
 from posthog import Posthog
 
 posthog = Posthog(
-    "<ph_project_api_key>",
-    host="https://us.i.posthog.com",
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
     secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
 )
 ```
@@ -38,8 +38,8 @@ import os
 from posthog import AsyncPosthog
 
 posthog = AsyncPosthog(
-    "<ph_project_api_key>",
-    host="https://us.i.posthog.com",
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
     secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
 )
 ```
