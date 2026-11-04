@@ -10,6 +10,8 @@ availability:
 
 When a materialized view fails to refresh, its stored table keeps the last successful result. Queries, insights, and Endpoints that read the view keep working, but the data gets older until a run succeeds again.
 
+One error is the exception. If a run fails because the query reads a table that no longer exists (`Unknown table`), for example after an upstream view was renamed or deleted, PostHog stops materializing the view. Queries then run the view's SQL directly, which fails until the query is fixed. Fix the query, then materialize the view again from its **Materialization** tab.
+
 This page covers what happens after a failure, when PostHog stops retrying, how you find out, and how to get the view running again. For specific errors, see [troubleshooting](/docs/data-warehouse/views/materialize-troubleshooting).
 
 ## What happens when a run fails
@@ -92,9 +94,9 @@ PostHog tells you about failures in two ways.
 
 ### In-app notifications
 
-PostHog sends an in-app notification when a view starts failing and when it's suspended. A scheduled run doesn't notify again while the same view keeps failing. A run you start yourself, such as **Sync now**, notifies on every failure, so you can tell whether your fix worked.
+PostHog sends an in-app notification when a view starts failing and when it's suspended. A scheduled run doesn't notify again while the same view keeps failing. A run you start yourself, such as **Sync now**, notifies on every failure, so you can tell whether your fix worked. That notification goes only to you.
 
-The notification goes to every project member who can open that view, unless they've turned it off. To turn it off, go to your [in-app notification settings](https://app.posthog.com/settings/user-notifications) and switch off **Materialized view failures** for that project. The setting is per project, so muting one project doesn't mute the others.
+Other notifications go to every project member who can open that view, unless they've turned it off. To turn it off, go to your [in-app notification settings](https://app.posthog.com/settings/user-notifications) and switch off **Materialized view failures** for that project. The setting is per project, so muting one project doesn't mute the others.
 
 When a scheduled run fails several views, PostHog sends one notification that lists them together. It links to the view, or to the **Models** page when several failed.
 
