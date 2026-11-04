@@ -22,6 +22,8 @@ To add a conversation, add an entry to `scenarios`. A `ThreadScenario` has:
   - `ask`: the assistant needs more information. The bullets show as a numbered list of questions, and `closing` asks for a reply.
 - `summary`: what a screen reader announces in place of the picture
 
+At the bottom of each slide, "Ask next" shows the `question` of each other conversation. A click on one opens its tab, the same as a click on the tab. A disabled "Ask PostHog AI anything..." input sits under them.
+
 The slide has a minimum height, so the tabs stay the same size. Keep a slide short enough that it does not pass the "Connect GitHub" link.
 
 All data is sample data. The home page uses `AskAnythingDemo`, which is a separate, animated component.

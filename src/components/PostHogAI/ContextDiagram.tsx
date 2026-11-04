@@ -124,7 +124,14 @@ export default function ContextDiagram(): JSX.Element {
         color: 'bg-accent',
         activeText: 'text-primary',
         progressBar: 'bg-red dark:bg-yellow',
-        content: <ThreadMockup scenario={scenario} />,
+        content: (selectTab: (value: string) => void) => (
+            <ThreadMockup
+                scenario={scenario}
+                followUps={scenarios
+                    .filter((other) => other.value !== value)
+                    .map((other) => ({ question: other.scenario.question, onClick: () => selectTab(other.value) }))}
+            />
+        ),
     }))
 
     return (

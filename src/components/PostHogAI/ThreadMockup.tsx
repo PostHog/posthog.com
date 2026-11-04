@@ -1,4 +1,5 @@
 import React from 'react'
+import { Logo } from '@posthog/brand/logo'
 import { IconChevronDown, IconExternal, IconGraph, IconHide, IconNotebook, IconPin, IconSort } from '@posthog/icons'
 
 export interface ThreadScenario {
@@ -68,7 +69,14 @@ const SeriesChart = ({ series }: { series: number[][] }): JSX.Element => {
 }
 
 /** A static picture of a PostHog Code conversation. It shows sample data and never submits a request. */
-export default function ThreadMockup({ scenario }: { scenario: ThreadScenario }): JSX.Element {
+export default function ThreadMockup({
+    scenario,
+    followUps,
+}: {
+    scenario: ThreadScenario
+    /** The other conversations' questions, shown under "Ask next". A click opens that conversation. */
+    followUps: { question: string; onClick: () => void }[]
+}): JSX.Element {
     const { question, toolCalls, calls, table, insight, intro, bullets, ending, summary } = scenario
 
     return (
@@ -198,6 +206,36 @@ export default function ThreadMockup({ scenario }: { scenario: ThreadScenario })
                     </>
                 )}
                 {ending.type === 'ask' && <p className="m-0">{ending.closing}</p>}
+
+                <div className="mt-auto flex flex-col items-start gap-2 border-t border-primary pt-3">
+                    <p className="m-0 text-xs font-semibold uppercase tracking-wide text-secondary">Ask next</p>
+                    {/* The tabs are the accessible way to switch slides, so these stay out of the tab order */}
+                    {followUps.map(({ question, onClick }) => (
+                        <button
+                            key={question}
+                            type="button"
+                            tabIndex={-1}
+                            onClick={onClick}
+                            className="rounded-full border border-primary bg-accent px-3 py-1 text-left hover:bg-light dark:hover:bg-dark"
+                        >
+                            {question}
+                        </button>
+                    ))}
+                    <div className="mt-1 flex w-full cursor-not-allowed items-center gap-2 rounded-md border border-primary bg-accent px-3 py-2">
+                        <Logo
+                            layout="logomark"
+                            variant="mono"
+                            className="h-3.5 w-auto shrink-0 text-secondary opacity-60"
+                        />
+                        <input
+                            type="text"
+                            disabled
+                            tabIndex={-1}
+                            placeholder="Ask PostHog AI anything..."
+                            className="min-w-0 flex-1 cursor-not-allowed border-0 bg-transparent p-0 text-sm placeholder:text-secondary"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     )

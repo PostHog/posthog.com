@@ -9,7 +9,8 @@ export interface TabbedCarouselTab {
     value: string
     label: React.ReactNode
     icon?: React.ReactNode
-    content: React.ReactNode
+    /** Pass a function to get `selectTab`, so the slide can switch to another tab. */
+    content: React.ReactNode | ((selectTab: (value: string) => void) => React.ReactNode)
     color: string
     activeText: string
     progressBar: string
@@ -333,7 +334,7 @@ export default function TabbedCarousel({
                                 value={tab.value}
                                 className="data-[state=active]:animate-[carousel-fade-in_300ms_ease-out] flex-1"
                             >
-                                {tab.content}
+                                {typeof tab.content === 'function' ? tab.content(handleTabChange) : tab.content}
                             </Tabs.Content>
                         ))}
                     </div>
