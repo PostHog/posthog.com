@@ -28,6 +28,35 @@ The suppression list is address-level and category-independent – a suppressed 
 
 PostHog adds addresses automatically when mail to them hard-bounces, which is what protects your sending domain's reputation. You can add an address by hand, and you can remove an entry if you believe the bounce was a one-off – but removing a genuine hard bounce means you'll bounce again.
 
+## Frequency cap
+
+The frequency cap limits how many marketing messages one person gets in a rolling number of days. It counts email, SMS, and push messages from all workflows and broadcasts together. With a cap of 2 messages in 7 days, a person who got 2 marketing messages gets no more until the older of the two is 7 days old.
+
+Set the cap in PostHog under **Workflows** > **Messaging** > [**Settings**](https://app.posthog.com/workflows/settings):
+
+- **Messages per person**: The most marketing messages one person can get in the window, from 1 to 1,000.
+- **Within this many days**: The length of the window, from 1 to 30 days.
+- **Hold capped messages for up to (hours)**: Optional. How long a message over the cap waits for a free slot, from 1 to 168 hours. See [holding messages over the cap](#holding-messages-over-the-cap).
+
+Leave the first two fields empty to turn the cap off.
+
+The cap applies with these rules:
+
+- Transactional messages are never capped, and they don't count toward a person's cap.
+- A message counts when PostHog sends it. A message that PostHog skips for an opt-out or a suppression doesn't use up the cap.
+- A workflow run without a person isn't capped, for example a run that an event without a person profile triggered.
+- Test sends aren't capped.
+
+By default, PostHog skips a message over the cap, and the workflow moves on to the next step. The workflow's logs show the skip, and its metrics count the message as **Frequency capped**.
+
+### Holding messages over the cap
+
+When you set a hold time, a message over the cap waits instead. The workflow run stays on that step, and PostHog tries the send again when one of the person's earlier messages leaves the window. If no slot opens before the hold ends, PostHog skips the message and the workflow moves on. Later steps, including delays, start only after the held message sends or is skipped.
+
+When more than one message waits for the same person, each free slot sends one of them. The others keep waiting for the next free slot. Held messages don't send in a fixed order.
+
+A hold helps most when it is close to the window length. With a cap of 1 message in 7 days and a 24-hour hold, a held message only sends if the person's last message is more than 6 days old.
+
 ## Managing the lists over the API
 
 Both lists are available over the [REST API](/docs/api), so your own product can honor an unsubscribe or a resubscribe without anyone opening PostHog.
