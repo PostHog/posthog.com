@@ -1,0 +1,66 @@
+---
+title: ClickFunnels
+---
+
+import Snippet from "../integrate/snippet.mdx"
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
+
+PostHog makes it easy to get data about traffic and usage of your [ClickFunnels](https://www.clickfunnels.com/) funnels. Integrating PostHog into your funnels enables analytics about visitor behavior, custom events capture, session recordings, feature flags, and more.
+
+This guide walks you through adding PostHog to ClickFunnels using the [JavaScript Web SDK](/docs/libraries/js).
+
+## Installation
+
+Go to your [project settings](https://app.posthog.com/settings/project#snippet) and copy your web snippet. It looks like this:
+
+<Snippet />
+
+In ClickFunnels, you can add header code for your whole site, for one funnel, or for one page. Choose the location that covers the pages you want to track, and paste the full snippet, including the `<script>` tags:
+
+| Location | Where to paste the snippet | Pages it covers |
+| --- | --- | --- |
+| Site | **Site & Blog** > **Site Settings** > **Header Code** | Every page on your site, including funnel pages, courses, blogs, and store pages |
+| Funnel | The funnel's settings > **Head Code** | Every page in that funnel |
+| Page | Page editor > **Settings** > **Show Code** > **Header Code** | Only that page. On a funnel page, **Settings** is under the **Customize** (gear) icon. |
+
+Add the snippet in one location only, so that each page loads PostHog once. Then save your changes and publish your funnel.
+
+To check the installation, open each step of your funnel, including the checkout and thank-you pages. Then look for the `$pageview` events in the [activity tab](https://app.posthog.com/activity/explore).
+
+### ClickFunnels Classic
+
+In ClickFunnels Classic, open the funnel's **Settings**, paste the snippet in **Head Tracking Code**, and save the settings.
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
+
+<DetailPostHogIPs />
+
+## Capture custom events
+
+To capture a custom event on one page, add a script that calls `posthog.capture()` in the **Footer Code** of that page (page editor > **Settings** > **Show Code** > **Footer Code**). Keep the snippet in the header, so that PostHog loads before your script runs.
+
+For example, this script captures a lead on the thank-you page that visitors see after they submit a form:
+
+```html
+<script>
+    if (window.posthog) {
+        posthog.capture("lead_form_submitted", {
+            funnel_name: "main_offer_funnel",
+        })
+    }
+</script>
+```
+
+A page script runs each time the page loads, so a visitor who refreshes the thank-you page sends the event again. For purchases and other events that must be exact, send the event from your server after you confirm the payment. The [ClickFunnels guide from 99Ways](https://99ways.io/how-we-installed-posthog-on-clickfunnels/#confirmed-payment) shows how to do this with ClickFunnels webhooks.
+
+## Track visitors across domains
+
+If your funnel steps are on subdomains of one domain, for example `offer.example.com` and `checkout.example.com`, the PostHog cookie follows the visitor between them. If a step is on a different domain, PostHog gives the visitor a new ID unless you pass the IDs between the sites. See [how to set up cross-domain tracking](/tutorials/cross-domain-tracking).
+
+## Next steps
+
+For any technical questions for how to integrate specific PostHog features into ClickFunnels (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/usage).

@@ -2862,8 +2862,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
@@ -3175,6 +3175,10 @@ export const docsMenu = {
                         {
                             name: 'Bubble',
                             url: '/docs/libraries/bubble',
+                        },
+                        {
+                            name: 'ClickFunnels',
+                            url: '/docs/libraries/clickfunnels',
                         },
                         {
                             name: 'Discord',
