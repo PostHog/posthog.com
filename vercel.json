@@ -7283,6 +7283,14 @@
             "destination": "/teams/warehouse/:path*"
         },
         {
+            "source": "/teams/onboarding",
+            "destination": "/teams/scaled-customer-success"
+        },
+        {
+            "source": "/teams/onboarding/:path*",
+            "destination": "/teams/scaled-customer-success/:path*"
+        },
+        {
             "source": "/teams/managed-warehouse",
             "destination": "/teams/warehouse"
         },
