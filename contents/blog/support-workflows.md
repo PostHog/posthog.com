@@ -150,7 +150,7 @@ This workflow runs on every customer reply. A conditional branch splits by the t
 
 The date range is the important part: it only applies while you're away, so you don't have to remember to switch it off when you're back!
 
-**Try it yourself:** the **reassign while an agent is out of office** template.
+**Try it yourself:** With the **reassign while an agent is out of office** template.
 
 ### CSAT
 
