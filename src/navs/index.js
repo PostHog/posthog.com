@@ -2979,12 +2979,12 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Setup and usage',
+                                    name: 'Reference',
                                     url: '/docs/libraries/python',
                                 },
                                 {
-                                    name: 'Reference',
-                                    url: '/docs/references/posthog-python',
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/python/migration',
                                 },
                             ],
                         },

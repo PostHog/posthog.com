@@ -152,6 +152,26 @@
     ],
     "redirects": [
         {
+            "source": "/docs/references/posthog-python:ext(\\.md)?",
+            "destination": "/docs/libraries/python:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python/:path*",
+            "destination": "/docs/libraries/python",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version",
+            "destination": "/docs/libraries/python",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version/:path*",
+            "destination": "/docs/libraries/python",
+            "statusCode": 301
+        },
+        {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true
