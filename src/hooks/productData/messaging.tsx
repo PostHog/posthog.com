@@ -195,7 +195,7 @@ export const messaging = {
         ],
     },
     /**
-     * MOCKUP: the competitor columns are not checked against vendor docs yet - check them before this ships.
+     * Competitor columns checked against official vendor docs on 2026-11-04 (Customer.io, Braze, Brevo help centers and pricing pages).
      * Values are in column order: PostHog, Customer.io, Braze, Brevo.
      */
     comparison: {
@@ -224,11 +224,11 @@ export const messaging = {
             { label: 'Drip campaigns with branching', values: [YES, YES, YES, YES] },
             { label: 'Trigger on a product event', values: [YES, YES, YES, YES] },
             { label: 'Random split for A/B tests', values: [YES, YES, YES, YES] },
-            { label: 'Build with an AI agent over MCP', values: [YES, NO, NO, NO] },
+            { label: 'Build with an AI agent over MCP', values: [YES, YES, 'Beta', 'Email only'] },
             { label: 'Data', description: 'Who you can target' },
             {
-                label: 'Trigger on product events without a sync',
-                description: 'The analytics events are the trigger',
+                label: 'Same events as your analytics',
+                description: 'No second SDK or sync to keep in step',
                 values: [YES, NO, NO, NO],
             },
             { label: 'Cohorts from your analytics', values: [YES, 'Via sync', 'Via sync', NO] },
@@ -241,11 +241,11 @@ export const messaging = {
                 values: [YES, NO, NO, NO],
             },
             { label: 'Channels', description: 'Where it goes' },
-            { label: 'Email and push', values: [YES, YES, YES, YES] },
-            { label: 'Slack and webhooks', values: [YES, YES, YES, NO] },
-            { label: 'Transactional email on the same senders', values: [YES, YES, YES, YES] },
-            { label: 'Public pricing', values: [YES, YES, 'Enterprise contract', YES] },
-            { label: 'Free tier', values: ['10K emails/month', 'Trial only', NO, '300 emails/day'] },
+            { label: 'Email and push', values: [YES, YES, YES, 'Paid plans'] },
+            { label: 'Slack and webhooks', values: [YES, YES, 'Webhooks only', 'Webhooks only'] },
+            { label: 'Transactional email on the same senders', values: [YES, YES, 'Add-on', YES] },
+            { label: 'Public pricing', values: [YES, YES, NO, YES] },
+            { label: 'Free tier', values: ['10K emails/month', 'Trial only', 'Trial only', '300 emails/day'] },
         ],
     },
     pairsWith: [

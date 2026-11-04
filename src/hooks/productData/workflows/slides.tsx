@@ -1,13 +1,47 @@
 import React from 'react'
-import { IconBrackets, IconBrowser, IconClock, IconDecisionTree, IconLaptop, IconPlug, IconSend } from '@posthog/icons'
+import {
+    IconBrackets,
+    IconBrowser,
+    IconClock,
+    IconDecisionTree,
+    IconInfo,
+    IconLaptop,
+    IconPlug,
+    IconSend,
+} from '@posthog/icons'
 import { IconEnvelope } from 'components/OSIcons'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Glow from 'components/Glow'
 import Link from 'components/Link'
-import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
+import OSButton from 'components/OSButton'
+import type { CarouselSlide, SectionComponentProps } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
 import PlatformInstall from 'components/PlatformInstall'
+
+/** Points visitors who came here for email at the two product pages that replaced Workflows in the menu. */
+export const LookingForEmail = ({ id }: SectionComponentProps) => (
+    <aside id={id} aria-label="Looking for email?" className="not-prose scroll-mt-20">
+        <div className="border border-primary rounded bg-accent p-5 @2xl/reader-content:p-6">
+            <div className="flex items-center gap-2 text-blue mb-2">
+                <IconInfo className="size-6" />
+                <span className="font-bold">Looking for email?</span>
+            </div>
+            <p className="text-base text-secondary m-0 mb-4 max-w-2xl">
+                Workflows is the automation side of PostHog. Password resets and receipts sent from your code are on
+                Transactional emails. Broadcasts and drip campaigns are on Email & Messaging.
+            </p>
+            <div className="flex flex-wrap gap-2">
+                <OSButton asLink to="/transactional-emails" variant="secondary" size="md">
+                    Transactional emails
+                </OSButton>
+                <OSButton asLink to="/messaging" variant="secondary" size="md">
+                    Email & Messaging
+                </OSButton>
+            </div>
+        </div>
+    </aside>
+)
 
 /**
  * Applications = ways you show up to the product.

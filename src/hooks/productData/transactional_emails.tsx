@@ -190,7 +190,7 @@ export const transactionalEmails = {
         ],
     },
     /**
-     * MOCKUP: the competitor columns are not checked against vendor docs yet - check them before this ships.
+     * Competitor columns checked against official vendor docs on 2026-11-04 (Resend, Postmark, SendGrid pricing and API references).
      * Values are in column order: PostHog, Resend, Postmark, SendGrid.
      */
     comparison: {
@@ -227,8 +227,8 @@ export const transactionalEmails = {
                 values: [YES, YES, YES, 'Paid add-on'],
             },
             { label: 'Templates', description: 'Where the email lives' },
-            { label: 'Template editor in the dashboard', values: [YES, 'Beta', YES, YES] },
-            { label: 'Render in code (React Email, HTML)', values: [YES, YES, YES, YES] },
+            { label: 'Template editor in the dashboard', values: [YES, YES, YES, YES] },
+            { label: 'Render in code (React Email, HTML)', values: [YES, YES, 'HTML only', 'HTML only'] },
             { label: 'After delivery', description: 'What the email did' },
             {
                 label: 'Sends on the person timeline',
@@ -243,7 +243,7 @@ export const transactionalEmails = {
             {
                 label: 'Marketing email in the same tool',
                 description: 'Separate queue and opt-out rules',
-                values: [YES, 'Broadcasts', NO, YES],
+                values: [YES, YES, YES, YES],
             },
             { label: 'Free tier', values: ['10K/month', '3K/month', '100/month', 'Trial only'] },
         ],
