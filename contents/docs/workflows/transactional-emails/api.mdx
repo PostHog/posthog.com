@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Use the API to send transactional emails from any language. For Node.js and Python, the [Node.js SDK](/docs/workflows/transactional-emails/node) and the [Python SDK](/docs/workflows/transactional-emails/python) handle retries and idempotency keys for you.
+Use the API to send transactional emails from any language. The SDKs for [Node.js](/docs/workflows/transactional-emails/node), [Python](/docs/workflows/transactional-emails/python), [Go](/docs/workflows/transactional-emails/go), [.NET](/docs/workflows/transactional-emails/dotnet), [Rust](/docs/workflows/transactional-emails/rust), [Ruby](/docs/workflows/transactional-emails/ruby), [Elixir](/docs/workflows/transactional-emails/elixir), and [PHP](/docs/workflows/transactional-emails/php) call this API and handle retries and idempotency keys for you. The examples on this page show each of them.
 
 Before you start, [create a transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
 
@@ -59,7 +59,9 @@ A `202` means that PostHog queued the email. It doesn't mean that the email was 
 
 ### Example
 
-```bash
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
 curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
@@ -71,6 +73,98 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
     "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
   }'
 ```
+
+```js file=Node.js
+const { data, error } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateId: "<template_id>",
+    templateData: { first_name: "Jane", reset_link: "https://example.com/reset?token=abc123" },
+    distinctId: "user_123",
+    idempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```python file=Python
+result = posthog.emails.send(
+    to="jane@example.com",
+    template_id="<template_id>",
+    template_data={"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    distinct_id="user_123",
+    idempotency_key="password-reset-8f14e45f",
+)
+```
+
+```go file=Go
+result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+    To:             "jane@example.com",
+    TemplateID:     "<template_id>",
+    TemplateData:   map[string]interface{}{"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    DistinctID:     "user_123",
+    IdempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```csharp file=.NET
+var result = await posthog.Emails.SendAsync(new SendTemplateEmailOptions
+{
+    To = "jane@example.com",
+    TemplateId = Guid.Parse("<template_id>"),
+    TemplateData = new Dictionary<string, object>
+    {
+        ["first_name"] = "Jane",
+        ["reset_link"] = "https://example.com/reset?token=abc123",
+    },
+    DistinctId = "user_123",
+    IdempotencyKey = "password-reset-8f14e45f",
+});
+```
+
+```rust file=Rust
+let result = posthog
+    .emails()
+    .send(
+        TemplateEmail::new("jane@example.com", "<template_id>")
+            .template_data(json!({ "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }))
+            .distinct_id("user_123")
+            .idempotency_key("password-reset-8f14e45f"),
+    )
+    .await?;
+```
+
+```ruby file=Ruby
+result = posthog.emails.send(
+  to: 'jane@example.com',
+  template_id: '<template_id>',
+  template_data: { first_name: 'Jane', reset_link: 'https://example.com/reset?token=abc123' },
+  distinct_id: 'user_123',
+  idempotency_key: 'password-reset-8f14e45f'
+)
+```
+
+```elixir file=Elixir
+{:ok, result} =
+  PostHog.Emails.send(
+    to: "jane@example.com",
+    template_id: "<template_id>",
+    template_data: %{first_name: "Jane", reset_link: "https://example.com/reset?token=abc123"},
+    distinct_id: "user_123",
+    idempotency_key: "password-reset-8f14e45f"
+  )
+```
+
+```php file=PHP
+$result = PostHog::emails()->send([
+    'to' => 'jane@example.com',
+    'template_id' => '<template_id>',
+    'template_data' => ['first_name' => 'Jane', 'reset_link' => 'https://example.com/reset?token=abc123'],
+    'distinct_id' => 'user_123',
+    'idempotency_key' => 'password-reset-8f14e45f',
+]);
+```
+
+</MultiLanguage>
+
+Each SDK page shows how to set up the client and handle errors.
 
 The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
 
@@ -109,7 +203,9 @@ If the `to` address is on the [suppression list](/docs/workflows/opt-outs#the-su
 
 The response is the same `202` as for a template send. A retry with the same `Idempotency-Key` is the [same request](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) when every field in the table above has the same value as in the first request. PostHog also compares the sender that it chose: if you leave out `from` and the project's default sender changes before the retry, PostHog returns `idempotency_key_reused`.
 
-```bash
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
 curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
@@ -123,6 +219,127 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
     "from": "Hedgebox <security@example.com>"
   }'
 ```
+
+```js file=Node.js
+const { data, error } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateKey: "password-reset",
+    subject: "Reset your password",
+    html,
+    from: "Hedgebox <security@example.com>",
+    distinctId: "user_123",
+    idempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```python file=Python
+result = posthog.emails.send(
+    to="jane@example.com",
+    template_key="password-reset",
+    subject="Reset your password",
+    html=html,
+    from_="Hedgebox <security@example.com>",
+    distinct_id="user_123",
+    idempotency_key="password-reset-8f14e45f",
+)
+```
+
+```go file=Go
+result, err := client.Emails().Send(ctx, posthog.CodeEmail{
+    To:             "jane@example.com",
+    TemplateKey:    "password-reset",
+    Subject:        "Reset your password",
+    HTML:           html,
+    From:           "Hedgebox <security@example.com>",
+    DistinctID:     "user_123",
+    IdempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```csharp file=.NET
+var result = await posthog.Emails.SendAsync(new SendCodeEmailOptions
+{
+    To = "jane@example.com",
+    TemplateKey = "password-reset",
+    Subject = "Reset your password",
+    Html = html,
+    From = "Hedgebox <security@example.com>",
+    DistinctId = "user_123",
+    IdempotencyKey = "password-reset-8f14e45f",
+});
+```
+
+```rust file=Rust
+let result = posthog
+    .emails()
+    .send(
+        CodeEmail::new("jane@example.com", "password-reset", "Reset your password")
+            .html(html)
+            .from("Hedgebox <security@example.com>")
+            .distinct_id("user_123")
+            .idempotency_key("password-reset-8f14e45f"),
+    )
+    .await?;
+```
+
+```ruby file=Ruby
+result = posthog.emails.send(
+  to: 'jane@example.com',
+  template_key: 'password-reset',
+  subject: 'Reset your password',
+  html: html,
+  from: 'Hedgebox <security@example.com>',
+  distinct_id: 'user_123',
+  idempotency_key: 'password-reset-8f14e45f'
+)
+```
+
+```elixir file=Elixir
+{:ok, result} =
+  PostHog.Emails.send(
+    to: "jane@example.com",
+    template_key: "password-reset",
+    subject: "Reset your password",
+    html: html,
+    from: "Hedgebox <security@example.com>",
+    distinct_id: "user_123",
+    idempotency_key: "password-reset-8f14e45f"
+  )
+```
+
+```php file=PHP
+$result = PostHog::emails()->send([
+    'to' => 'jane@example.com',
+    'template_key' => 'password-reset',
+    'subject' => 'Reset your password',
+    'html' => $html,
+    'from' => 'Hedgebox <security@example.com>',
+    'distinct_id' => 'user_123',
+    'idempotency_key' => 'password-reset-8f14e45f',
+]);
+```
+
+</MultiLanguage>
+
+### Copies and attachments
+
+<CalloutBox icon="IconInfo" title="Coming soon" type="fyi">
+
+Copies and attachments aren't available yet. This section shows how they will work. A send with these fields gets a `400` that names the field until then, and PostHog sends nothing.
+
+</CalloutBox>
+
+Content from your code will also take these fields. A template send takes none of them, because the template uses its own settings.
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `cc` | No | A list of up to 10 addresses that get a copy, without a display name. |
+| `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
+| `attachments` | No | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
+
+- **Inline images:** Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
+- **Blocked files:** PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
+- **SDKs:** The SDKs encode the file's bytes to Base64 for you. Support comes in a later version of each SDK.
 
 ### Checks for content from your code
 
@@ -163,7 +380,43 @@ Each project secret API key can read 600 statuses per minute and 20,000 per hour
 
 ### Example
 
-```bash
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
 curl "https://us.posthog.com/api/projects/@current/messaging/emails/<message_id>/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
 ```
+
+```js file=Node.js
+const { data: status, error } = await posthog.emails.get("<message_id>")
+```
+
+```python file=Python
+status = posthog.emails.get("<message_id>")
+```
+
+```go file=Go
+status, err := client.Emails().Get(ctx, "<message_id>")
+```
+
+```csharp file=.NET
+var status = await posthog.Emails.GetAsync("<message_id>");
+```
+
+```rust file=Rust
+let status = posthog.emails().get("<message_id>").await?;
+```
+
+```ruby file=Ruby
+status = posthog.emails.get('<message_id>')
+```
+
+```elixir file=Elixir
+{:ok, status} = PostHog.Emails.get("<message_id>")
+```
+
+```php file=PHP
+$status = PostHog::emails()->get('<message_id>');
+```
+
+</MultiLanguage>

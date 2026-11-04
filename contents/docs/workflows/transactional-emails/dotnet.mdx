@@ -1,0 +1,149 @@
+---
+title: Send transactional emails with .NET
+sidebar: Docs
+showTitle: true
+---
+
+The [.NET SDK](/docs/libraries/dotnet) sends transactional emails from version 2.19.0. Before you start, [create a transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+
+## Install
+
+```bash
+dotnet add package PostHog
+```
+
+For ASP.NET Core, install `PostHog.AspNetCore` instead.
+
+## Set up the client
+
+Reuse the PostHog client your application already creates, and set `SecretKey` to your project secret API key. The client still captures events with your project token. Dispose of the client when your application exits, not after each send.
+
+<MultiLanguage selector="tabs">
+
+```csharp file=ASP.NET Core
+// Program.cs
+// Set PostHog:ProjectToken and PostHog:SecretKey in your configuration,
+// such as user secrets or environment variables
+builder.AddPostHog();
+
+// Inject IPostHogEmails where you send email
+public class PasswordResetService(IPostHogEmails emails)
+{
+    // ...
+}
+```
+
+```csharp file=Console
+using PostHog;
+
+await using var posthog = new PostHogClient(new PostHogOptions
+{
+    ProjectToken = "<ph_project_api_key>",
+    HostUrl = new Uri("https://us.i.posthog.com"),
+    SecretKey = Environment.GetEnvironmentVariable("POSTHOG_PROJECT_SECRET_API_KEY"),
+});
+
+var emails = posthog.Emails;
+```
+
+</MultiLanguage>
+
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `HostUrl` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `AppHost` to your PostHog app URL. `AppHost` must use `https`. The client refuses to send the secret key to a host that might be a proxy.
+- **Local evaluation:** The client loads flag definitions only when it evaluates a flag. If your application [evaluates flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too.
+
+## Send an email
+
+```csharp
+using PostHog.Emails;
+
+public async Task<string> SendPasswordResetAsync(User user, string resetLink, string resetRequestId)
+{
+    // Throws EmailException when PostHog doesn't queue the email. Branch on its Code
+    var result = await emails.SendAsync(new SendTemplateEmailOptions
+    {
+        To = user.Email,
+        TemplateId = Guid.Parse("<template_id>"),
+        TemplateData = new Dictionary<string, object>
+        {
+            ["first_name"] = user.FirstName,
+            ["reset_link"] = resetLink,
+        },
+        DistinctId = user.Id,
+        // Identifies this one email, so a retry never sends it twice
+        IdempotencyKey = $"password-reset-{resetRequestId}",
+    });
+    return result.Id;
+}
+```
+
+`SendAsync` returns a `SendEmailResult`, and `result.Id` is the message ID. A send that PostHog doesn't queue throws `EmailException`, with the `Code` from the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument throws `ArgumentException` before any request. After a `network_error` or a `503`, PostHog might have queued the email. Retry with the same idempotency key rather than sending the email through another provider, or the recipient can get it twice.
+
+### Timeouts and retries
+
+Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds throws at once.
+
+To change this, set `EmailRequestTimeout` and `EmailRequestMaxRetries` in `PostHogOptions`, or `MaxRetries` on one send. When a job queue already retries the send, set the retries to `0` and pass an `IdempotencyKey` that identifies the email.
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()`, usually the ID your app gives that user, as `DistinctId`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened, and clicked, against that user's person, next to their product events.
+
+- **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
+- **For someone who isn't a user yet,** such as an invite or an email address check before the account exists, there's no distinct ID to pass. Leave `DistinctId` out.
+
+## Send content from your code
+
+`SendAsync` also takes content that your code rendered, without a template in PostHog. Pass `SendCodeEmailOptions`: name the email with `TemplateKey`, and set `Subject` and `Html`, `Text`, or both. PostHog sends the content as you wrote it, so render it with your template engine first, such as Razor.
+
+```csharp
+public async Task<string> SendPasswordResetAsync(User user, string html, string resetRequestId)
+{
+    var result = await emails.SendAsync(new SendCodeEmailOptions
+    {
+        To = user.Email,
+        TemplateKey = "password-reset",
+        Subject = "Reset your password",
+        Html = html,
+        From = "Hedgebox <security@example.com>",
+        DistinctId = user.Id,
+        IdempotencyKey = $"password-reset-{resetRequestId}",
+    });
+    return result.Id;
+}
+```
+
+- **Key:** `TemplateKey` names the email, such as `password-reset`. PostHog groups the email's metrics and sends under it, so use the same key every time you send this email.
+- **Text:** If you leave out `Text`, PostHog makes it from `Html`.
+- **Sender:** `From` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `ReplyTo` takes a list of addresses.
+- **Engagement:** PostHog captures the email's engagement events unless you set `CaptureEngagement = false`.
+- **One form per send:** `SendTemplateEmailOptions` sends a template made in PostHog, and `SendCodeEmailOptions` sends your content. Content from your code takes no template data, because PostHog renders nothing.
+
+See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+### Copies and attachments
+
+<CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
+
+Copies (cc and bcc) and attachments aren't in the .NET SDK yet. They will come in a later version. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for how they will work.
+
+</CalloutBox>
+
+## Check an email's status
+
+```csharp
+public async Task<bool?> EmailBouncedAsync(string messageId)
+{
+    try
+    {
+        var status = await emails.GetAsync(messageId);
+        return status.Status == "bounced";
+    }
+    catch (EmailException error) when (error.Code == "not_found")
+    {
+        // The first status can take a few seconds to arrive. Try again later.
+        return null;
+    }
+}
+```
+
+`GetAsync` returns an `EmailStatus` with `Id`, `Status`, `CreatedAt`, `StatusAt`, and `Reason`. The two times are `DateTimeOffset` values. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.

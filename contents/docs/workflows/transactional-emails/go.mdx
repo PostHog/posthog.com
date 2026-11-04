@@ -1,0 +1,148 @@
+---
+title: Send transactional emails with Go
+sidebar: Docs
+showTitle: true
+---
+
+The [Go SDK](/docs/libraries/go) sends transactional emails from version 1.40.0. Before you start, [create a transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+
+## Install
+
+```bash
+go get github.com/posthog/posthog-go
+```
+
+## Set up the client
+
+Reuse the PostHog client your application already creates, and set `SecretKey` to your project secret API key. The client still captures events with your project token. Close the client when your application exits, not after each send.
+
+```go
+import (
+    "log"
+    "os"
+
+    "github.com/posthog/posthog-go"
+)
+
+client, err := posthog.NewWithConfig("<ph_project_api_key>", posthog.Config{
+    Endpoint:  "https://us.i.posthog.com",
+    SecretKey: os.Getenv("POSTHOG_PROJECT_SECRET_API_KEY"),
+})
+if err != nil {
+    log.Fatal(err)
+}
+defer client.Close()
+```
+
+- **Local evaluation:** When `SecretKey` is set, the client also polls flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation). Give the key the **Feature flag** read scope too, or the client logs a failed poll each time it polls.
+- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `AppHost` to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
+
+## Send an email
+
+```go
+func sendPasswordReset(ctx context.Context, userID, email, firstName, resetLink, resetRequestID string) (string, error) {
+    result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+        To:           email,
+        TemplateID:   "<template_id>",
+        TemplateData: map[string]interface{}{"first_name": firstName, "reset_link": resetLink},
+        DistinctID:   userID,
+        // Identifies this one email, so a retry never sends it twice
+        IdempotencyKey: "password-reset-" + resetRequestID,
+    })
+    if err != nil {
+        // A *posthog.EmailError. Branch on its Code
+        return "", err
+    }
+    return result.ID, nil
+}
+```
+
+`Send` returns a `*SendEmailResult`, and `result.ID` is the message ID. A send that PostHog doesn't queue returns a `*posthog.EmailError`, with the `Code` from the [errors table](/docs/workflows/transactional-emails#errors). Use `errors.As` to read it. A wrong argument returns an `EmailError` before any request. After a `network_error` or a `503`, PostHog might have queued the email. Retry with the same idempotency key rather than sending the email through another provider, or the recipient can get it twice.
+
+### Timeouts and retries
+
+Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds returns the error at once.
+
+To change this, set `EmailRequestTimeout` and `EmailRequestMaxRetries` in `posthog.Config`, or `MaxRetries` on one send. When a job queue already retries the send, set the retries to `posthog.Ptr(0)` and pass an `IdempotencyKey` that identifies the email.
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()`, usually the ID your app gives that user, as `DistinctID`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened, and clicked, against that user's person, next to their product events.
+
+- **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
+- **For someone who isn't a user yet,** such as an invite or an email address check before the account exists, there's no distinct ID to pass. Leave `DistinctID` out.
+
+## Send content from your code
+
+`Send` also takes content that your code rendered, without a template in PostHog. Pass a `CodeEmail`: name the email with `TemplateKey`, and set `Subject` and `HTML`, `Text`, or both. PostHog sends the content as you wrote it, so render it with your template engine first, such as `html/template`.
+
+```go
+func sendPasswordReset(ctx context.Context, userID, email, html, resetRequestID string) (string, error) {
+    result, err := client.Emails().Send(ctx, posthog.CodeEmail{
+        To:             email,
+        TemplateKey:    "password-reset",
+        Subject:        "Reset your password",
+        HTML:           html,
+        From:           "Hedgebox <security@example.com>",
+        DistinctID:     userID,
+        IdempotencyKey: "password-reset-" + resetRequestID,
+    })
+    if err != nil {
+        return "", err
+    }
+    return result.ID, nil
+}
+```
+
+- **Key:** `TemplateKey` names the email, such as `password-reset`. PostHog groups the email's metrics and sends under it, so use the same key every time you send this email.
+- **Text:** If you leave out `Text`, PostHog makes it from `HTML`.
+- **Sender:** `From` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `ReplyTo` takes a list of addresses.
+- **Engagement:** PostHog captures the email's engagement events unless you set `CaptureEngagement` to `posthog.Ptr(false)`.
+- **One form per send:** A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing.
+
+See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+### Copies and attachments
+
+<CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
+
+Copies and attachments aren't in a released version of the Go SDK yet. This section shows how they will work.
+
+</CalloutBox>
+
+A `CodeEmail` will take `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is a `posthog.EmailAttachment` with a `Filename` and the file's bytes as `Content`. The client encodes the bytes for you.
+
+```go
+_, err := client.Emails().Send(ctx, posthog.CodeEmail{
+    To:          email,
+    TemplateKey: "receipt",
+    Subject:     "Your receipt",
+    HTML:        html,
+    Cc:          []string{"billing@example.com"},
+    Attachments: []posthog.EmailAttachment{
+        {Filename: "receipt.pdf", Content: pdfBytes, ContentType: "application/pdf"},
+    },
+    DistinctID: userID,
+})
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
+## Check an email's status
+
+```go
+func emailBounced(ctx context.Context, messageID string) (bool, error) {
+    status, err := client.Emails().Get(ctx, messageID)
+    var emailErr *posthog.EmailError
+    if errors.As(err, &emailErr) && emailErr.Code == "not_found" {
+        // The first status can take a few seconds to arrive. Try again later.
+        return false, nil
+    }
+    if err != nil {
+        return false, err
+    }
+    return status.Status == "bounced", nil
+}
+```
+
+`Get` returns an `*EmailStatus` with `ID`, `Status`, `CreatedAt`, `StatusAt`, and `Reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.
