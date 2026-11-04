@@ -1,4 +1,3 @@
-import { navURL } from '../../navs/activeMenu'
 import React, { useEffect, useState, useMemo, useRef } from 'react'
 import * as Collapsible from '@radix-ui/react-collapsible'
 import { IconChevronDown, IconChevronRight, IconArrowUpRight } from '@posthog/icons'
@@ -451,7 +450,7 @@ const findMatchingItem = (items: MenuItem[], target: MenuItem): MenuItem | undef
     findItem(items, (item) => item.url === target.url && item.name === target.name)
 
 const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefined => {
-    const url = (navURL(currentUrl) ?? currentUrl).replace(/\/$/, '')
+    const url = currentUrl.replace(/\/$/, '')
     for (const item of items) {
         if (item.url?.split('?')[0].replace(/\/$/, '') === url && !getActiveItem(item.children || [], url)) {
             return item

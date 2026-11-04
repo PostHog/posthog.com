@@ -74,15 +74,3 @@ test('falls through when no Markdown sibling exists', async (t) => {
 
     assert.equal(await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User' } })), undefined)
 })
-
-test('preserves a raw reference noindex directive on negotiated Markdown', async (t) => {
-    t.mock.method(
-        globalThis,
-        'fetch',
-        async () => new Response('# Python 8', { headers: { 'x-robots-tag': 'noindex' } })
-    )
-    const response = await middleware(
-        new Request('http://localhost/docs/libraries/python/8', { headers: { accept: 'text/markdown' } })
-    )
-    assert.equal(response?.headers.get('x-robots-tag'), 'noindex')
-})

@@ -61,15 +61,6 @@
             ]
         },
         {
-            "source": "/docs/libraries/:sdk/:major(\\d+).md",
-            "headers": [
-                {
-                    "key": "X-Robots-Tag",
-                    "value": "noindex"
-                }
-            ]
-        },
-        {
             "source": "/.well-known/oauth/:app/client-metadata.json",
             "headers": [
                 {

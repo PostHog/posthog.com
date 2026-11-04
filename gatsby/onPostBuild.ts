@@ -18,7 +18,6 @@ import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { pocketGuideDestination } from '../src/constants/pocketGuides'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import { syncStandardSiteDocuments } from './standardSite'
-import { publishRawReferences } from '../scripts/sdk-references-markdown.cjs'
 
 const generateMarkdownArtifacts = async (graphql: any) => {
     // Generate API spec markdown files first
@@ -209,13 +208,9 @@ const generateMarkdownArtifacts = async (graphql: any) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    if (process.env.GATSBY_MINIMAL === 'true') {
-        publishRawReferences()
-        return
-    }
+    if (process.env.GATSBY_MINIMAL === 'true') return
 
     await generateMarkdownArtifacts(graphql)
-    publishRawReferences()
 
     // Publish/update Standard.site document records for blog posts.
     // Self-gates on env (STANDARD_SITE_SYNC) and BSKY_APP_PASSWORD; safe no-op otherwise.

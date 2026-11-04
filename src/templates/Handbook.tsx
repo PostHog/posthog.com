@@ -45,7 +45,6 @@ import slugify from 'slugify'
 import usePostHog from 'hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import NotFoundPage from 'components/NotFoundPage'
-import SdkReferenceVersionSelector from 'components/SdkReferences/VersionSelector'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -349,11 +348,6 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             showByline,
             featureFlag,
             noindex,
-            sdkReferenceSdk,
-            sdkReferenceMajor,
-            sdkReferenceMajors,
-            sdkReferenceLatest,
-            sdkReferenceExperimental,
         },
         fields: { slug, appConfig, templateConfigs, commits },
         excerpt,
@@ -386,21 +380,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
         (showAIObservabilityWizardHint && <AIObservabilityWizardHint />) ||
         null
     // `undefined` when there is nothing to show, so ReaderView skips the wrapper's margin.
-    const belowTitle =
-        wizardHint || sdkReferenceSdk ? (
-            <>
-                {sdkReferenceSdk && (
-                    <SdkReferenceVersionSelector
-                        sdk={sdkReferenceSdk}
-                        major={sdkReferenceMajor}
-                        majors={sdkReferenceMajors.split(',')}
-                        latest={sdkReferenceLatest}
-                        experimental={sdkReferenceExperimental ? sdkReferenceExperimental.split(',') : []}
-                    />
-                )}
-                {wizardHint}
-            </>
-        ) : undefined
+    const belowTitle = wizardHint || undefined
 
     // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
     // Gated on the MDX slug (not `pathname`). Scoped to /docs so the
@@ -640,11 +620,6 @@ export const query = graphql`
                 showByline
                 featureFlag
                 noindex
-                sdkReferenceSdk
-                sdkReferenceMajor
-                sdkReferenceMajors
-                sdkReferenceLatest
-                sdkReferenceExperimental
                 tableOfContents {
                     depth
                     url
