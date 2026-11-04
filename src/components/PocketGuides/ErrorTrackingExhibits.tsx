@@ -83,25 +83,13 @@ export function AutocapturedExceptionFigure(): JSX.Element {
                         />
                     </article>
                     <div className="mt-4 flex">
-                        <span className="relative inline-flex">
-                            <button
-                                type="button"
-                                className="vac-button vac-primary"
-                                onClick={() => setClicks((count) => count + 1)}
-                            >
-                                Trip details
-                            </button>
-                            {clicks === 0 && (
-                                // The pulsing dot from ImageAnnotations, so the control reads as the thing to try.
-                                <span
-                                    aria-hidden="true"
-                                    className="pointer-events-none absolute -right-1.5 -top-1.5 flex size-4 items-center justify-center"
-                                >
-                                    <span className="absolute inline-flex size-5 animate-ping rounded-full bg-yellow opacity-60 motion-reduce:hidden" />
-                                    <span className="relative inline-flex size-3 rounded-full bg-yellow ring-2 ring-white" />
-                                </span>
-                            )}
-                        </span>
+                        <button
+                            type="button"
+                            className="vac-button vac-primary"
+                            onClick={() => setClicks((count) => count + 1)}
+                        >
+                            Trip details
+                        </button>
                     </div>
                 </TwigFrame>
                 <PostHogInspector className={COMPACT_INSPECTOR_CLASSES}>

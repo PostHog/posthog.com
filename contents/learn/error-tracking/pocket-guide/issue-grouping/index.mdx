@@ -1,7 +1,7 @@
 ---
 title: Issue grouping
 shortTitle: Issue grouping
-subtitle: PostHog groups exceptions into issues by code. Sometimes exceptions that appear different in code share similar semantics to the engineers, like every exception from a missing host record.
+subtitle: Group exceptions that share a cause, even when they throw from different code.
 pocketGuideOrder: 3
 section: Capture
 ---
@@ -98,6 +98,25 @@ PostHog decides how to group exceptions into issues by going through these rules
 1. **A custom <Term name="fingerprint" /> set in source code.** If that's not set:
 2. **A <Term name="grouping rule" /> in PostHog.** If that's not set:
 3. **A default fingerprint PostHog generates.**
+
+```mermaid
+%%{init: {"block": {"padding": 22}}}%%
+block-beta
+    columns 3
+    exception["New exception"] space space
+    custom("Custom fingerprint in source code?") space useCustom["Group by that fingerprint"]
+    rule("Grouping rule matches?") space useRule["Group by the rule"]
+    generated["Group by a generated fingerprint"] space space
+
+    exception --> custom
+    custom -- "<span class='yes'>yes</span>" --> useCustom
+    custom -- "<span class='no'>no</span>" --> rule
+    rule -- "<span class='yes'>yes</span>" --> useRule
+    rule -- "<span class='no'>no</span>" --> generated
+
+    class custom,rule check
+    class useCustom,useRule,generated act
+```
 
 ## Default generated fingerprints
 

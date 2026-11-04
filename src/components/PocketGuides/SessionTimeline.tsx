@@ -42,20 +42,6 @@ export interface TimelineRow {
 export default function SessionTimeline({ rows }: { rows: TimelineRow[] }): JSX.Element {
     return (
         <div className="@container group/anatomy overflow-hidden rounded border border-primary bg-primary">
-            {/* The filter bar. Not interactive here – it is in the figure because the categories
-                are the point: steps arrive alongside everything else the session recorded. */}
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-primary px-3 py-1.5 text-[0.7em] font-bold">
-                {(['exception', 'exception step', 'pageview', 'custom event', 'console log'] as const).map((key) => {
-                    const { Icon, classes } = CATEGORY[key]
-                    return (
-                        <span key={key} className={`flex items-center gap-1 capitalize ${classes}`}>
-                            <Icon className="size-[1.1em]" />
-                            {key}s
-                        </span>
-                    )
-                })}
-            </div>
-
             <ul className="m-0 list-none divide-y divide-primary p-0">
                 {rows.map((row, index) => {
                     const { Icon, classes } = CATEGORY[row.category]
@@ -83,6 +69,21 @@ export default function SessionTimeline({ rows }: { rows: TimelineRow[] }): JSX.
                     )
                 })}
             </ul>
+
+            {/* A legend for the row icons, only for the categories the figure draws. */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-primary px-3 py-1.5 text-[0.65em] text-secondary">
+                {(Object.keys(CATEGORY) as TimelineCategory[])
+                    .filter((key) => rows.some((row) => row.category === key))
+                    .map((key) => {
+                        const { Icon, classes } = CATEGORY[key]
+                        return (
+                            <span key={key} className="flex items-center gap-1">
+                                <Icon className={`size-[1.1em] ${classes}`} aria-hidden="true" />
+                                {key}
+                            </span>
+                        )
+                    })}
+            </div>
         </div>
     )
 }

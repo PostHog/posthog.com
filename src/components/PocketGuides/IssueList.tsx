@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { IconChevronDown } from '@posthog/icons'
-
 import AnatomyFrame from './AnatomyFrame'
 import { FigureMarker } from './FigureMarker'
 
@@ -33,22 +31,7 @@ const issues = [
 ]
 
 const COLUMNS =
-    'grid grid-cols-[1rem_minmax(0,1fr)_5.5rem] gap-3 @xl:grid-cols-[1rem_minmax(0,1fr)_6rem_5.5rem] @2xl:grid-cols-[1rem_minmax(0,1fr)_6rem_5.5rem_4.5rem_3.5rem]'
-
-/** One select in the row's outlined button group: status, severity, then assignee. */
-function Chip({ children }: { children: React.ReactNode }): JSX.Element {
-    return (
-        <span className="inline-flex items-center gap-1 border-r border-primary px-1.5 py-1 last:border-r-0">
-            {children}
-            <IconChevronDown className="size-2.5 text-secondary" aria-hidden="true" />
-        </span>
-    )
-}
-
-/** The row and header checkbox, unchecked. */
-function Checkbox(): JSX.Element {
-    return <span className="mt-0.5 block size-3.5 self-start rounded-sm border border-primary bg-primary" />
-}
+    'grid grid-cols-[minmax(0,1fr)_5.5rem] gap-3 @xl:grid-cols-[minmax(0,1fr)_6rem_5.5rem] @2xl:grid-cols-[minmax(0,1fr)_6rem_5.5rem_4.5rem_3.5rem]'
 
 /** Volume over the last 7 days, in 12-hour bars, with when the issue was last seen. */
 function Volume({ volume, lastSeen }: { volume: number[]; lastSeen: string }): JSX.Element {
@@ -76,7 +59,6 @@ export default function IssueList(): JSX.Element {
             <div
                 className={`${COLUMNS} border-b border-primary whitespace-nowrap px-3 py-2 text-[0.6em] font-bold uppercase tracking-wide text-secondary`}
             >
-                <Checkbox />
                 <span>Issue</span>
                 <span className="hidden text-center @xl:block">Volume</span>
                 <span className="text-center">Occurrences</span>
@@ -88,7 +70,6 @@ export default function IssueList(): JSX.Element {
                     key={frame}
                     className={`${COLUMNS} items-center px-3 py-3 ${index > 0 ? 'border-t border-primary' : ''}`}
                 >
-                    <Checkbox />
                     <div className="min-w-0">
                         <p className="m-0 flex items-center gap-1.5 text-[0.85em] font-semibold leading-snug">
                             <img src={JS_ICON} alt="" className="size-3.5" />
@@ -108,16 +89,10 @@ export default function IssueList(): JSX.Element {
                                 />
                             )}
                         </p>
-                        <div className="mt-1.5 inline-flex max-w-full flex-wrap rounded border border-primary text-[0.65em] leading-none">
-                            <Chip>
-                                <span className="size-1.5 rounded-full bg-orange" />
-                                Active
-                            </Chip>
-                            <Chip>
-                                <span className="font-semibold text-orange">High</span>
-                            </Chip>
-                            <Chip>Unassigned</Chip>
-                        </div>
+                        <p className="m-0 mt-1 flex items-center gap-1.5 text-[0.65em] leading-none text-secondary">
+                            <span className="size-1.5 rounded-full bg-orange" />
+                            Active · Unassigned
+                        </p>
                     </div>
                     <Volume volume={volume} lastSeen={lastSeen} />
                     <span className="text-center text-[0.9em]">{occurrences.toLocaleString('en-US')}</span>
