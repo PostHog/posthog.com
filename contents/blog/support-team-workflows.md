@@ -1,5 +1,5 @@
 ---
-title: How our support team uses Workflows
+title: How we run support through Workflows in PostHog
 date: 2026-10-22
 author:
   - abigail-richardson
