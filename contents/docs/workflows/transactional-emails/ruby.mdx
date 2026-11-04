@@ -94,9 +94,27 @@ See [content from your code](/docs/workflows/transactional-emails/api#send-conte
 
 <CalloutBox icon="IconInfo" title="Coming in a later SDK version" type="fyi">
 
-Copies (cc and bcc) and attachments aren't in the Ruby SDK yet. They will come in a later version. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for how they will work.
+Copies and attachments aren't in a released version of the Ruby SDK yet. This section shows how they will work.
 
 </CalloutBox>
+
+Content from your code will take `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is a Hash with `filename` and the file's bytes as `content`, and optionally `content_type` and `content_id`. Read the file with `File.binread`, not `File.read`, and the client encodes the bytes for you. The client takes any other String as content that is already Base64. A file that the client can't send raises `PostHog::EmailError` with the code `invalid_attachment` before any request.
+
+```ruby
+$posthog.emails.send(
+  to: user.email,
+  template_key: 'receipt',
+  subject: 'Your receipt',
+  html: html,
+  cc: 'billing@example.com',
+  attachments: [
+    { filename: 'receipt.pdf', content: File.binread(pdf_path), content_type: 'application/pdf' }
+  ],
+  distinct_id: user.id.to_s
+)
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
 
 ## Check an email's status
 
