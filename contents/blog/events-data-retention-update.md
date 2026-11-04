@@ -5,6 +5,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+author:
+  - mike-warren
 category: PostHog news
 ---
 
