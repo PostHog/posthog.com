@@ -49,7 +49,7 @@ Some sources have no sync schedule at all. The picker says so, because refreshin
 
 ### Downstream views set the slowest cadence
 
-A view can't refresh less often than the views and [endpoints](/docs/endpoints) built on it need. If a downstream view refreshes every hour, the upstream view it reads can't be set to once a day. The slower options show **Too slow for downstream view ...**.
+A view can't refresh less often than the views and [endpoints](/docs/endpoints) built on it need. If a downstream view refreshes every hour, the upstream view it reads can't be set to once a day. The slower options show **Too slow for downstream view ...**, unless you [pin](#pinning-a-slower-cadence) the view.
 
 ### When no cadence works
 
@@ -68,12 +68,28 @@ The upstream view keeps its own setting. When the downstream view slows down aga
 
 For example, `orders_clean` is set to refresh every day. You then set `revenue_by_hour`, which reads `orders_clean`, to refresh every hour. From then on, `orders_clean` refreshes every hour too, and its picker says it refreshes every hour to keep up with `revenue_by_hour`. If you later set `revenue_by_hour` back to every day, `orders_clean` returns to every day.
 
+## Pinning a slower cadence
+
+Sometimes a downstream view reads several inputs, and only some of them need to be fresh. Say `signups` refreshes every 15 minutes. It reads `trial_events`, which must be fresh, and joins in `org_details`, an expensive enrichment that only changes a few times a day. Without a pin, `org_details` refreshes every 15 minutes too, to keep up with `signups`.
+
+A pin lets an upstream view keep a slower cadence anyway. On the upstream view's **Refresh every** picker, cadences slower than its downstream views need are still available. Hover over one to see who it affects, for example **Pin this view to every 6 hours. Downstream view signups refreshes more often and will read older data from it.** Pick it and save.
+
+A pinned view shows a pin icon on its cadence, and the line under the picker says which downstream views read older data from it. In the example, `signups` still refreshes every 15 minutes with fresh `trial_events`, but the `org_details` columns can be up to about 6 hours old. [Endpoints](/docs/endpoints) downstream of a pinned view work the same way: they serve data that can be as old as the pin.
+
+### When you can't pin
+
+A pin can't leave a downstream view with nothing fresh to read. If a downstream view reads fresh data only through this view, pinning slower than that view's cadence would make it rerun the same data. Those options are unavailable and say **Can't pin: downstream view ... reads fresh data only through this view**. Slow down that downstream view first, or pin a faster cadence.
+
+### Unpinning
+
+Hover over the pinned cadence and click the **×** to unpin. Before you save, the picker shows the cadence the view will run at once unpinned, usually the cadence its fastest downstream view needs. Save to apply it.
+
 ## How fresh is the data, really
 
 The cadence is a target, not a guarantee. The data in a view can be older than its cadence when:
 
 - **A run fails.** The table keeps the last successful result. See [failures and suspension](/docs/data-warehouse/views/failures-and-suspension).
-- **The data it reads is older.** A view that refreshes every 15 minutes over a source that syncs every 6 hours holds data up to about 6 hours old.
+- **The data it reads is older.** A view that refreshes every 15 minutes over a source that syncs every 6 hours holds data up to about 6 hours old. The same goes for a view that reads a [pinned](#pinning-a-slower-cadence) upstream view.
 - **A run takes longer than the cadence.** A view on a 15-minute cadence whose query takes 20 minutes can't finish a run every 15 minutes. Make each run faster before you make the cadence shorter. [Incremental materialization](/docs/data-warehouse/views/materialize#incremental-materialization) often helps.
 
 The **Overview** tab of the [**Models** page](https://app.posthog.com/models) lists **Models behind schedule**. A view appears there when its last successful run is more than twice its cadence old. **Behind by** shows how far past its cadence it is. Paused views never appear there, because you stopped them on purpose.
