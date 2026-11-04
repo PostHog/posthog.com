@@ -80,7 +80,7 @@ By default, PostHog fetches these definitions every 30 seconds (or 5 minutes in 
 >
 > This is because one of these requests can compute feature flags for hundreds or thousands of users. It ensures local evaluation is priced fairly while remaining the most cost-effective option (by far!).
 >
-> Most polls don't return the definitions. The SDK sends the ETag of the definitions it already holds, and when nothing changed PostHog replies `304 Not Modified` with an empty body. That poll is charged as 1 flag request. See [reducing local evaluation costs](/docs/feature-flags/cutting-costs#reducing-local-evaluation-costs) for the SDK versions that send ETags.
+> Most polls don't return the definitions. The SDK sends the ETag of the definitions it already holds, and when nothing changed PostHog replies `304 Not Modified` with an empty body. That poll is free. See [reducing local evaluation costs](/docs/feature-flags/cutting-costs#reducing-local-evaluation-costs) for the SDK versions that send ETags.
 
 import ConfigureSecretAPIKey from "../../integrate/_snippets/configure-secret-api-key.mdx";
 

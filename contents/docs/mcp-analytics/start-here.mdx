@@ -67,8 +67,7 @@ Set `POSTHOG_PROJECT_TOKEN` in your environment. Wrap your existing server once,
 <MultiLanguage>
 
 ```ts file=TypeScript
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
