@@ -840,5 +840,11 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/bknofevider/",
         "profile_id": 43006
+    },
+    {
+        "handle": "sinan-kucukkoseler",
+        "name": "Sinan Kucukkoseler",
+        "role": "Product Engineer",
+        "profile_id": 44760
     }
 ]
