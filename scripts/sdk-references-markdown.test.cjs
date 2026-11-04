@@ -52,7 +52,7 @@ test('only Markdown records are requested from Strapi', async () => {
     )
 })
 
-test('the newest current major serves the stable URL and replaces the hand-written page', async () => {
+test('the current major serves the stable reference URL and the hand-written page stays', async () => {
     const dir = site()
     const manifest = await materializeSdkReferences({
         apiHost: 'x',
@@ -69,14 +69,15 @@ test('the newest current major serves the stable URL and replaces the hand-writt
             migration: true,
         },
     ])
-    const index = fs.readFileSync(path.join(dir, 'contents/docs/libraries/python/index.md'), 'utf8')
+    const index = fs.readFileSync(path.join(dir, 'contents/docs/libraries/python/reference.md'), 'utf8')
     assert.match(
         index,
         /sdkReferenceMajor: "7"\nsdkReferenceMajors: "8,7"\nsdkReferenceLatest: "7"\nsdkReferenceExperimental: "8"\ntableOfContents:/
     )
     assert.doesNotMatch(index, /noindex/)
     assert.match(index, /^contentMaxWidthClass: max-w-full$/m)
-    assert.equal(fs.existsSync(path.join(dir, 'contents/docs/libraries/python/index.mdx')), false)
+    // The hand-written library page stays.
+    assert.equal(fs.existsSync(path.join(dir, 'contents/docs/libraries/python/index.mdx')), true)
 })
 
 test('explicit majors are noindex and keep their own body', async () => {
@@ -89,7 +90,7 @@ test('explicit majors are noindex and keep their own body', async () => {
 test('the ToC lists only H2 headings, ignoring code fences', async () => {
     const dir = site()
     await materializeSdkReferences({ apiHost: 'x', siteDir: dir, fetchImpl: strapi(records).fetchImpl })
-    const index = fs.readFileSync(path.join(dir, 'contents/docs/libraries/python/index.md'), 'utf8')
+    const index = fs.readFileSync(path.join(dir, 'contents/docs/libraries/python/reference.md'), 'utf8')
     const toc = index.match(/tableOfContents:\n([\s\S]*?)\n---/)[1]
     assert.equal(
         toc,
@@ -101,9 +102,9 @@ test('raw siblings are the stored bytes, restored after the generic export', asy
     const dir = site()
     await materializeSdkReferences({ apiHost: 'x', siteDir: dir, fetchImpl: strapi(records).fetchImpl })
     fs.mkdirSync(path.join(dir, 'public/docs/libraries/python'), { recursive: true })
-    fs.writeFileSync(path.join(dir, 'public/docs/libraries/python.md'), 'exported from HTML')
+    fs.writeFileSync(path.join(dir, 'public/docs/libraries/python/reference.md'), 'exported from HTML')
     publishRawReferences(dir)
-    assert.equal(fs.readFileSync(path.join(dir, 'public/docs/libraries/python.md'), 'utf8'), doc(7))
+    assert.equal(fs.readFileSync(path.join(dir, 'public/docs/libraries/python/reference.md'), 'utf8'), doc(7))
     assert.equal(fs.readFileSync(path.join(dir, 'public/docs/libraries/python/7.md'), 'utf8'), doc(7))
 })
 
@@ -130,7 +131,7 @@ test('only explicit major pages are versioned paths', () => {
     const manifest = [{ sdk: 'python', majors: ['8', '7'] }]
     assert.equal(isVersionedReferencePath('/docs/libraries/python/7', manifest), true)
     assert.equal(isVersionedReferencePath('/docs/libraries/python/8/', manifest), true)
-    assert.equal(isVersionedReferencePath('/docs/libraries/python', manifest), false)
+    assert.equal(isVersionedReferencePath('/docs/libraries/python/reference', manifest), false)
     assert.equal(isVersionedReferencePath('/docs/libraries/node/7', manifest), false)
 })
 
@@ -143,7 +144,7 @@ test('migration guides get their own page and raw sibling', async () => {
         /^---\ntitle: "PostHog Python SDK migration guides"\nsidebar: Docs\nshowTitle: true\n---\n\n## Migrating from posthog 7\.x to 8\.0/
     )
     assert.doesNotMatch(
-        fs.readFileSync(path.join(dir, 'contents/docs/libraries/python/index.md'), 'utf8'),
+        fs.readFileSync(path.join(dir, 'contents/docs/libraries/python/reference.md'), 'utf8'),
         /sdkReferenceMajors: ".*migration/
     )
     fs.mkdirSync(path.join(dir, 'public/docs/libraries/python'), { recursive: true })

@@ -1,9 +1,10 @@
 // Turns the SDK reference Markdown stored in Strapi into ordinary docs pages.
 //
-// An SDK with Markdown records gets /docs/libraries/<sdk> for its newest major, an explicit
-// noindex page per major, and raw .md siblings that are byte-for-byte the stored Markdown.
-// SDKs without records keep their HogRef pages. The site stores no rollout state: whatever
-// Strapi holds is what gets built.
+// An SDK with Markdown records gets /docs/libraries/<sdk>/reference for its current major, an
+// explicit noindex page per major, and raw .md siblings that are byte-for-byte the stored
+// Markdown. The hand-written library page at /docs/libraries/<sdk> stays as it is. SDKs without
+// records keep their HogRef pages. The site stores no rollout state: whatever Strapi holds is
+// what gets built.
 const fs = require('node:fs')
 const path = require('node:path')
 const Slugger = require('github-slugger')
@@ -116,12 +117,10 @@ async function materializeSdkReferences({ apiHost, siteDir = process.cwd(), fetc
             writeFile(path.join(raw, `${ref.version}.md`), ref.markdown)
         }
         writeFile(
-            path.join(contents, 'index.md'),
+            path.join(contents, 'reference.md'),
             page(current.parsed, { sdk, major: latest, majors, latest, experimental, noindex: false })
         )
-        writeFile(`${raw}.md`, current.markdown)
-        // The generated index replaces the hand-written library page on the same route.
-        fs.rmSync(path.join(contents, 'index.mdx'), { force: true })
+        writeFile(path.join(raw, 'reference.md'), current.markdown)
         const migration = migrations.get(sdk)
         if (migration) {
             const head = [
@@ -155,7 +154,7 @@ function readManifest(siteDir = process.cwd()) {
 /** Puts the stored Markdown back after the site's general HTML-to-Markdown export overwrote it. */
 function publishRawReferences(siteDir = process.cwd()) {
     for (const { sdk, majors, migration } of readManifest(siteDir)) {
-        for (const route of [sdk, ...majors.map((m) => `${sdk}/${m}`), ...(migration ? [`${sdk}/migration`] : [])]) {
+        for (const route of ['reference', ...majors, ...(migration ? ['migration'] : [])].map((r) => `${sdk}/${r}`)) {
             const source = path.join(siteDir, 'static/docs/libraries', `${route}.md`)
             writeFile(path.join(siteDir, 'public/docs/libraries', `${route}.md`), fs.readFileSync(source, 'utf8'))
         }

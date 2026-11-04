@@ -13,10 +13,10 @@ export interface MenuNode {
 
 /**
  * The URL a page shares its sidebar position with. An SDK reference's explicit major, like
- * /docs/libraries/python/7, sits where the library page /docs/libraries/python does.
+ * /docs/libraries/python/7, sits where its current reference /docs/libraries/python/reference does.
  */
 export const navURL = (url: string | undefined): string | undefined =>
-    url?.replace(/^(\/docs\/libraries\/[a-z0-9-]+)\/\d+\/?$/, '$1')
+    url?.replace(/^(\/docs\/libraries\/[a-z0-9-]+)\/\d+\/?$/, '$1/reference')
 
 // query strings are ignored when comparing URLs
 export const containsURL = (items: MenuNode[] | undefined, url: string | undefined): boolean => {

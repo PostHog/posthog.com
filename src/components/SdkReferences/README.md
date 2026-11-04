@@ -2,7 +2,7 @@
 
 SDK references are Markdown pages generated in each SDK repo and stored in Strapi's `sdk-reference` collection. `scripts/sdk-references-markdown.cjs` runs in `onPreBootstrap`. It fetches every record with `markdown` set, then writes these files:
 
-- `contents/docs/libraries/<sdk>/index.md` for the newest major.
+- `contents/docs/libraries/<sdk>/reference.md` for the current major. The hand-written library page at `/docs/libraries/<sdk>` stays.
 - `contents/docs/libraries/<sdk>/<major>.md` for each major, with `noindex: true`.
 - The raw stored bytes in `static/docs/libraries/`.
 
