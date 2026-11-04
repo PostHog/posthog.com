@@ -4,7 +4,7 @@ date: 2026-11-04
 author:
   - juraj-majerik
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/eq_edda1ae71a.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/4x_faster_queries_at_3x_the_volume_45afd84a05.png
 featuredImageType: full
 category: Engineering
 tags:
