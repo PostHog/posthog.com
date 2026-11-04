@@ -56,7 +56,7 @@ A paused view has no cadence, so you have to pick one before you can resume it.
 
 Resuming starts a fresh count. Failures from before you resumed no longer count toward the next suspension. If you resume without fixing anything, the view fails again and is suspended after 5 more failures.
 
-You can also resume a view through the [API](/docs/api) with the saved query `resume` action, or resume several at once with `resume_schedules`.
+You can also resume a view through the [API](/docs/api) with the saved query `resume` action. Like **Resume schedule**, it lets the view run on its next scheduled cycle and doesn't start a run.
 
 ## Finding failing views
 
@@ -77,7 +77,11 @@ PostHog tells you about failures in two ways.
 
 ### In-app notifications
 
-When a view starts failing, or when it's suspended, PostHog sends an in-app notification to project members who can open that view. A notification about a scheduled run that failed several views lists them together. A notification links to the view, or to the **Models** page when several failed.
+PostHog sends an in-app notification when a view starts failing and when it's suspended. A scheduled run doesn't notify again while the same view keeps failing. A run you start yourself, such as **Sync now**, notifies on every failure, so you can tell whether your fix worked.
+
+The notification goes to every project member who can open that view, unless they've turned it off. To turn it off, go to your [in-app notification settings](https://app.posthog.com/settings/user-notifications) and switch off **Materialized view failures** for that project. The setting is per project, so muting one project doesn't mute the others.
+
+When a scheduled run fails several views, PostHog sends one notification that lists them together. It links to the view, or to the **Models** page when several failed.
 
 ### Email
 
