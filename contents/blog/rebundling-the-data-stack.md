@@ -1,5 +1,5 @@
 ---
-title: "We unbundled the data stack. Now everyone's rebundling it."
+title: "Rebundling your data stack is inevitable. Pick your bundle carefully."
 date: 2026-11-03
 rootPage: /blog
 sidebar: Blog
@@ -15,7 +15,7 @@ category: General
 tags:
     - Data warehouse
 seo:
-    metaTitle: "We unbundled the data stack. Now everyone's rebundling it."
+    metaTitle: "Rebundling your data stack is inevitable. Pick your bundle carefully."
     metaDescription: "Fivetran and dbt Labs merged, and Snowflake and Databricks are buying up the stack. Here's how to keep your options open as the data stack rebundles."
 ---
 
