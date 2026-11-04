@@ -36,8 +36,6 @@ const docsLink = (to: string, children: React.ReactNode) => (
     </Link>
 )
 
-const cloudinary = (name: string) => `https://res.cloudinary.com/dmukukwp6/image/upload/${name}.png`
-
 export const applications: CarouselSlide[] = [
     {
         ...slideStyle,
@@ -72,11 +70,7 @@ export const applications: CarouselSlide[] = [
                 ])}
             </>
         ),
-        image: {
-            src: cloudinary('broadcasts_docs_schedule_light_d4b64d361c'),
-            srcDark: cloudinary('broadcasts_docs_schedule_dark_92d125a904'),
-            alt: 'The Schedule step of a broadcast with a weekly recurring schedule',
-        },
+        image: { ref: 'broadcasts' },
     },
     {
         ...slideStyle,
@@ -111,11 +105,7 @@ export const applications: CarouselSlide[] = [
                 ])}
             </>
         ),
-        image: {
-            src: cloudinary('email_drip_overview_light_a84567a8f9'),
-            srcDark: cloudinary('email_drip_overview_dark_2bb57406d6'),
-            alt: 'A drip campaign on the workflow canvas',
-        },
+        image: { ref: 'dripCampaign' },
     },
     {
         ...slideStyle,
@@ -193,6 +183,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'trigger' },
     },
     {
         ...slideStyle,
@@ -228,11 +219,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
-        image: {
-            src: cloudinary('broadcasts_docs_content_light_44734105fd'),
-            srcDark: cloudinary('broadcasts_docs_content_dark_a59e59442c'),
-            alt: 'The email editor inside a broadcast',
-        },
+        image: { ref: 'emailEditor' },
     },
     {
         ...slideStyle,
@@ -264,6 +251,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'channels' },
     },
     {
         ...slideStyle,
@@ -308,6 +296,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'optOuts' },
     },
     {
         ...slideStyle,
@@ -347,11 +336,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
-        image: {
-            src: cloudinary('broadcasts_docs_results_light_9a00756ef5'),
-            srcDark: cloudinary('broadcasts_docs_results_dark_5aba53c8ef'),
-            alt: 'A sent broadcast with delivery, open, click, and conversion numbers',
-        },
+        image: { ref: 'results' },
     },
     {
         ...slideStyle,
@@ -386,5 +371,6 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'audience' },
     },
 ]

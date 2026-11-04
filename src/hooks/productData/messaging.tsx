@@ -20,6 +20,8 @@ import { applications, keyFeatures } from './messaging/slides'
 // This data powers the messaging page: broadcasts and drip campaigns, both built and billed through Workflows.
 // One Emails meter, one free tier (`sharesFreeTier`), so no rate on this page is hard-coded.
 
+const cloudinary = (name: string) => `https://res.cloudinary.com/dmukukwp6/image/upload/${name}.png`
+
 const YES = true
 const NO = false
 
@@ -134,13 +136,54 @@ export const messaging = {
             alt: 'A hedgehog sending a message',
         },
     },
+    // Slides point at these entries by key.
     screenshots: {
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_screenshot_light_a9f00e201e.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflows_screenshot_dark_83291e0b1c.png',
-            alt: 'A drip campaign on the workflow canvas',
+            src: cloudinary('messaging_hero_light'),
+            srcDark: cloudinary('messaging_hero_dark'),
+            alt: 'An onboarding drip campaign on the workflow canvas, with how many people reached each step',
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
+        },
+        dripCampaign: {
+            src: cloudinary('messaging_drip_campaign_light'),
+            srcDark: cloudinary('messaging_drip_campaign_dark'),
+            alt: 'A wait step that branches on whether the person uploaded a file',
+        },
+        trigger: {
+            src: cloudinary('messaging_trigger_light'),
+            srcDark: cloudinary('messaging_trigger_dark'),
+            alt: 'A workflow trigger on the signed_up event with a volume estimate',
+        },
+        broadcasts: {
+            src: cloudinary('messaging_broadcasts_light'),
+            srcDark: cloudinary('messaging_broadcasts_dark'),
+            alt: 'Sent and scheduled broadcasts with delivery, open, click, and conversion counts',
+        },
+        results: {
+            src: cloudinary('messaging_broadcast_results_light'),
+            srcDark: cloudinary('messaging_broadcast_results_dark'),
+            alt: 'A sent broadcast with delivery, open, click, and conversion rates',
+        },
+        audience: {
+            src: cloudinary('messaging_audience_light'),
+            srcDark: cloudinary('messaging_audience_dark'),
+            alt: 'A broadcast audience filtered by person properties, with its estimated reach',
+        },
+        emailEditor: {
+            src: cloudinary('messaging_email_editor_light'),
+            srcDark: cloudinary('messaging_email_editor_dark'),
+            alt: 'A product launch email in the PostHog email editor',
+        },
+        optOuts: {
+            src: cloudinary('messaging_opt_outs_light'),
+            srcDark: cloudinary('messaging_opt_outs_dark'),
+            alt: 'Message categories and the marketing opt-out list',
+        },
+        channels: {
+            src: cloudinary('messaging_channels_light'),
+            srcDark: cloudinary('messaging_channels_dark'),
+            alt: 'Email, Slack, and push channels connected in PostHog',
         },
     },
     useCases: {

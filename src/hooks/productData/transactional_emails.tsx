@@ -20,6 +20,8 @@ import { applications, keyFeatures } from './transactional_emails/slides'
 // This data powers the transactional emails page. The product is sent and billed through Workflows:
 // one Emails meter, one free tier (`sharesFreeTier`), so no rate on this page is hard-coded.
 
+const cloudinary = (name: string) => `https://res.cloudinary.com/dmukukwp6/image/upload/${name}.png`
+
 const YES = true
 const NO = false
 
@@ -135,14 +137,44 @@ export const transactionalEmails = {
             alt: 'A hedgehog sending an email',
         },
     },
-    // PLACEHOLDER: reuses the Workflows builder screenshot until the Transactional page is captured.
+    // Slides point at these entries by key.
     screenshots: {
         home: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_light_1_7afd43fd88.png',
-            srcDark: 'https://res.cloudinary.com/dmukukwp6/image/upload/workflow_dark_1_9ebe26d46e.png',
-            alt: 'Transactional emails screenshot',
+            src: cloudinary('transactional_emails_hero_light'),
+            srcDark: cloudinary('transactional_emails_hero_dark'),
+            alt: 'Transactional emails in PostHog, each with its sends over the last 7 days',
             classes: 'justify-center px-4 @lg:px-6',
             imgClasses: 'rounded-tl-md rounded-tr-md shadow-2xl',
+        },
+        design: {
+            src: cloudinary('transactional_emails_design_light'),
+            srcDark: cloudinary('transactional_emails_design_dark'),
+            alt: 'A password reset email in the PostHog email editor',
+        },
+        sends: {
+            src: cloudinary('transactional_emails_sends_light'),
+            srcDark: cloudinary('transactional_emails_sends_dark'),
+            alt: 'Every send of a transactional email with its status and recipient',
+        },
+        reputation: {
+            src: cloudinary('transactional_emails_reputation_light'),
+            srcDark: cloudinary('transactional_emails_reputation_dark'),
+            alt: 'Bounce and complaint rates for each email PostHog sends',
+        },
+        personEvents: {
+            src: cloudinary('transactional_emails_person_events_light'),
+            srcDark: cloudinary('transactional_emails_person_events_dark'),
+            alt: "A person's events: the email was sent, opened, and clicked, then they uploaded a file and upgraded",
+        },
+        sensitive: {
+            src: cloudinary('transactional_emails_sensitive_light'),
+            srcDark: cloudinary('transactional_emails_sensitive_dark'),
+            alt: 'The Protect sensitive data setting and the send API example for a sign-in code email',
+        },
+        messaging: {
+            src: cloudinary('messaging_hero_light'),
+            srcDark: cloudinary('messaging_hero_dark'),
+            alt: 'An onboarding drip campaign on the workflow canvas',
         },
     },
     useCases: {

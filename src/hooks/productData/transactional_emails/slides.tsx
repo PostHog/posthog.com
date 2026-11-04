@@ -157,6 +157,7 @@ export const applications: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'design' },
     },
     {
         ...slideStyle,
@@ -238,6 +239,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'sends' },
     },
     {
         ...slideStyle,
@@ -280,6 +282,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'reputation' },
     },
     {
         ...slideStyle,
@@ -313,6 +316,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'personEvents' },
     },
     {
         ...slideStyle,
@@ -346,6 +350,7 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'sensitive' },
     },
     {
         ...slideStyle,
@@ -380,5 +385,6 @@ export const keyFeatures: CarouselSlide[] = [
                 ])}
             </>
         ),
+        image: { ref: 'messaging' },
     },
 ]
