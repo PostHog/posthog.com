@@ -1,23 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
-    IconAI,
     IconCheck,
     IconArrowRight,
     IconArrowUpRight,
-    IconDatabase,
-    IconFlask,
     IconGraph,
     IconLightBulb,
-    IconPieChart,
     IconShieldPeople,
     IconPlug,
     IconQuestion,
-    IconRewindPlay,
     IconSparkles,
     IconToggle,
-    IconWarning,
     IconWrench,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
@@ -25,7 +19,6 @@ import { useWindow } from '../../context/Window'
 import SEO from 'components/seo'
 import Link from 'components/Link'
 import { Accordion } from 'components/RadixUI/Accordion'
-import ScrollArea from 'components/RadixUI/ScrollArea'
 import ReaderView from 'components/ReaderView'
 import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import MCPInstallCTA from 'components/MCPInstallCTA'
@@ -49,6 +42,8 @@ import {
 import posthogIcon from '../../images/posthog-icon-white.svg'
 import { buildMcpBrief } from './agentBrief'
 import WaitingRoom from './WaitingRoom'
+import PromptDemo from './PromptDemo'
+import Highlight from './Highlight'
 import mcpToolsData from '../../data/mcp-tools.json'
 
 // The tool schema is fetched from the main repo at build time, so the exact totals move
@@ -165,12 +160,6 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
     )
 }
 
-const Highlight = ({ children, red }: { children: React.ReactNode; red?: boolean }) => (
-    <span className={`whitespace-nowrap p-0.5 font-bold ${red ? 'bg-red/10 text-red' : 'bg-blue/10 text-blue'}`}>
-        {children}
-    </span>
-)
-
 type IconItem = {
     Icon: React.ComponentType<{ className?: string }>
     color: string
@@ -265,16 +254,15 @@ function WhatIsMCP(): JSX.Element {
                             className="w-56 @xl:w-72 @3xl:w-full"
                         />
                         <figcaption className="mt-3 text-center text-sm text-secondary">
-                            PostHog. Part of the agentic breakfast of champions. See the{' '}
+                            Part of a balanced agent's{' '}
                             <Link
                                 to="/mcp/leaderboard"
                                 state={{ newWindow: true }}
                                 title="MCP leaderboard"
                                 className="font-semibold underline"
                             >
-                                leaderboard
+                                diet
                             </Link>
-                            .
                         </figcaption>
                     </figure>
                     <div className="min-w-0 @3xl:col-start-1 @3xl:row-start-1">
@@ -359,32 +347,24 @@ function MCPConnectors(): JSX.Element {
 }
 
 const checklist = [
-    { label: 'Find where users drop off', to: '/docs/product-analytics/funnels' },
-    { label: 'See which errors hit most users', to: '/docs/error-tracking' },
-    { label: 'Answer a question with SQL', to: '/docs/sql' },
-    { label: 'Set up an A/B test', to: '/docs/experiments' },
-    { label: 'Turn a feature flag on or off', to: '/docs/feature-flags' },
-    { label: 'Triage a support ticket', to: '/docs/support' },
-    { label: 'Send events to another tool', to: '/docs/data-pipelines' },
-    { label: 'Restore a deleted feature flag', to: '/docs/feature-flags/creating-feature-flags' },
-    { label: 'Ask users with a survey', to: '/docs/surveys' },
-    { label: 'Find the replay of a bug report', to: '/docs/session-replay' },
+    'Find where users drop off',
+    'Answer a question with SQL',
+    'Set up an A/B test',
+    'Turn a feature flag on or off',
+    'Triage a support ticket',
+    'Send events to another tool',
+    'Ask users with a survey',
+    'Find the replay of a bug report',
 ]
 
 function MCPChecklist(): JSX.Element {
     return (
         <div className="not-prose">
-            <ul className="list-none p-0 m-0 grid w-fit grid-cols-1 @xs:grid-cols-2 gap-x-6 gap-y-1.5">
-                {checklist.map(({ label, to }) => (
+            <ul className="list-none p-0 m-0 grid w-fit grid-cols-1 @xs:grid-cols-2 gap-x-6 gap-y-3">
+                {checklist.map((label) => (
                     <li key={label} className="flex items-start gap-2 text-sm">
                         <IconCheck className="size-4 text-green shrink-0 mt-0.5" />
-                        <Link
-                            to={to}
-                            state={{ newWindow: true }}
-                            className="font-semibold text-primary hover:underline"
-                        >
-                            {label}
-                        </Link>
+                        <span className="font-semibold text-primary">{label}</span>
                     </li>
                 ))}
             </ul>
@@ -404,7 +384,7 @@ function MCPUseCases(): JSX.Element {
                     </SectionHeading>
                     <MCPChecklist />
                 </div>
-                <figure className="m-0 flex flex-col items-center justify-center">
+                <figure className="m-0 flex flex-col items-center justify-end">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_bottle_4ba0223072.png"
                         alt=""
@@ -418,283 +398,8 @@ function MCPUseCases(): JSX.Element {
                     </figcaption>
                 </figure>
             </div>
-            <Capabilities />
+            <PromptDemo />
         </section>
-    )
-}
-
-interface CapabilityItem {
-    title: string
-    prompt: string
-    icon: React.ReactNode
-    color: string
-}
-
-const capabilityList: CapabilityItem[] = [
-    {
-        title: 'Product Analytics',
-        prompt: "What's our 30-day user retention?",
-        icon: <IconGraph />,
-        color: 'blue',
-    },
-    {
-        title: 'Error Tracking',
-        prompt: 'Show me the top 5 errors this week.',
-        icon: <IconWarning />,
-        color: 'orange',
-    },
-    {
-        title: 'Session Replay',
-        prompt: 'Find a recording where a user got frustrated.',
-        icon: <IconRewindPlay />,
-        color: 'yellow',
-    },
-    {
-        title: 'Feature Flags',
-        prompt: 'List all my feature flags and their rollout percentages.',
-        icon: <IconToggle />,
-        color: 'seagreen',
-    },
-    {
-        title: 'Experiments',
-        prompt: 'Summarize the results of my running experiments.',
-        icon: <IconFlask />,
-        color: 'purple',
-    },
-    {
-        title: 'SQL & Warehouse',
-        prompt: 'Run a HogQL query to count events from the last 24 hours.',
-        icon: <IconDatabase />,
-        color: 'purple',
-    },
-    {
-        title: 'Web Analytics',
-        prompt: 'Which referrers drove the most traffic last week?',
-        icon: <IconPieChart />,
-        color: 'green-2',
-    },
-    {
-        title: 'AI Observability',
-        prompt: "What's the average tokens per trace today?",
-        icon: <IconAI />,
-        color: 'purple',
-    },
-]
-
-const TYPING_SPEED = 30
-const PAUSE_BEFORE_RESPONSE = 400
-const CYCLE_INTERVAL = 5000
-
-const fakeResponses: Record<string, string[]> = {
-    'Product Analytics': [
-        'Running retention query for the last 30 days...',
-        'Day 0: 100% → Day 1: 42% → Day 7: 28% → Day 30: 14%',
-        'Retention is trending up 3% from last month.',
-    ],
-    'Error Tracking': [
-        'Fetching top errors by occurrence...',
-        '1. TypeError: Cannot read property "id" of undefined (1,247)',
-        '2. 504 Gateway Timeout on /api/batch (892)',
-        '3. RangeError: Maximum call stack size exceeded (541)',
-        '4. SyntaxError: Unexpected token in JSON at position 0 (327)',
-        '5. Error: ECONNREFUSED 127.0.0.1:5432 (219)',
-    ],
-    'Session Replay': [
-        'Searching for rage-click sessions...',
-        'Found 23 sessions with rage clicks in the last 7 days.',
-        'Top page: /checkout (9 sessions, avg 6 clicks)',
-    ],
-    'Feature Flags': [
-        'Listing active feature flags...',
-        'new-onboarding: 50% rollout | beta-dashboard: 100%',
-        '12 flags active, 3 stale (no evaluations in 30d)',
-    ],
-    Experiments: [
-        'Fetching running experiments...',
-        'pricing-page-v2: +12% conversion (p=0.03) – significant',
-        'onboarding-flow: +4% activation (p=0.21) – not yet',
-    ],
-    'SQL & Warehouse': [
-        'Executing HogQL query...',
-        'SELECT count() FROM events WHERE timestamp > now() - interval 1 day',
-        'Result: 1,847,293 events in the last 24 hours',
-    ],
-    'Web Analytics': [
-        'Querying referrer data for last 7 days...',
-        '1. google.com (12,847)',
-        '2. twitter.com (3,291)',
-        '3. github.com (2,103)',
-        '4. (direct) (1,987)',
-    ],
-    'AI Observability': [
-        'Querying LLM trace metrics...',
-        'Avg tokens/trace today: 2,847 (input: 1,203 / output: 1,644)',
-        'Total cost: $14.29 across 892 traces',
-    ],
-}
-
-function useTypewriter(text: string, speed: number, startTyping: boolean) {
-    const [displayed, setDisplayed] = useState('')
-    const [done, setDone] = useState(false)
-
-    useEffect(() => {
-        setDisplayed('')
-        setDone(false)
-        if (!startTyping) return
-
-        let i = 0
-        const timer = setInterval(() => {
-            i++
-            setDisplayed(text.slice(0, i))
-            if (i >= text.length) {
-                clearInterval(timer)
-                setDone(true)
-            }
-        }, speed)
-        return () => clearInterval(timer)
-    }, [text, speed, startTyping])
-
-    return { displayed, done }
-}
-
-function TerminalResponse({ lines, show }: { lines: string[]; show: boolean }) {
-    const [visibleCount, setVisibleCount] = useState(0)
-
-    useEffect(() => {
-        setVisibleCount(0)
-        if (!show) return
-        let i = 0
-        const timer = setInterval(() => {
-            i++
-            setVisibleCount(i)
-            if (i >= lines.length) clearInterval(timer)
-        }, 300)
-        return () => clearInterval(timer)
-    }, [lines, show])
-
-    if (!show) return null
-
-    return (
-        <div className="mt-3 space-y-1">
-            {lines.slice(0, visibleCount).map((line, i) => (
-                <p key={i} className="m-0 text-[12px] @sm:text-[13px] font-mono text-green/90 leading-relaxed">
-                    {line}
-                </p>
-            ))}
-        </div>
-    )
-}
-
-function Capabilities(): JSX.Element {
-    const [activeIndex, setActiveIndex] = useState(0)
-    const [startTyping, setStartTyping] = useState(true)
-    const cycleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-    const isPaused = useRef(false)
-
-    const cap = capabilityList[activeIndex]
-    const { displayed, done } = useTypewriter(cap.prompt, TYPING_SPEED, startTyping)
-    const [showResponse, setShowResponse] = useState(false)
-
-    useEffect(() => {
-        if (done) {
-            const t = setTimeout(() => setShowResponse(true), PAUSE_BEFORE_RESPONSE)
-            return () => clearTimeout(t)
-        }
-        setShowResponse(false)
-    }, [done])
-
-    const goTo = useCallback(
-        (index: number) => {
-            if (index === activeIndex && startTyping) return
-            isPaused.current = false
-            setShowResponse(false)
-            setStartTyping(false)
-            setActiveIndex(index)
-            requestAnimationFrame(() => setStartTyping(true))
-        },
-        [activeIndex, startTyping]
-    )
-
-    useEffect(() => {
-        if (cycleTimer.current) clearTimeout(cycleTimer.current)
-        if (!showResponse || isPaused.current) return
-
-        cycleTimer.current = setTimeout(() => {
-            goTo((activeIndex + 1) % capabilityList.length)
-        }, CYCLE_INTERVAL)
-
-        return () => {
-            if (cycleTimer.current) clearTimeout(cycleTimer.current)
-        }
-    }, [showResponse, activeIndex, goTo])
-
-    const handleChipClick = (index: number) => {
-        isPaused.current = true
-        if (cycleTimer.current) clearTimeout(cycleTimer.current)
-        goTo(index)
-    }
-
-    return (
-        <div className="not-prose mt-6">
-            <div className="rounded-md overflow-hidden border border-primary shadow-md">
-                <div className="bg-[#1e1e2e] dark:bg-[#11111b] border-b border-white/10 px-3 py-2 flex items-center gap-2">
-                    <div className="flex gap-1.5">
-                        <span className="size-2.5 rounded-full bg-red/60" />
-                        <span className="size-2.5 rounded-full bg-yellow/80" />
-                        <span className="size-2.5 rounded-full bg-green/70" />
-                    </div>
-                    <span className="text-[11px] font-mono text-white/40 ml-2 truncate">posthog-mcp</span>
-                    <span className="ml-auto text-[9px] uppercase tracking-wider font-semibold text-white/30 inline-flex items-center gap-1">
-                        <span className="size-1.5 rounded-full bg-green animate-pulse" />
-                        Live
-                    </span>
-                </div>
-
-                <div className="bg-[#1e1e2e] dark:bg-[#11111b] h-[200px] [&_[data-radix-scroll-area-scrollbar]]:bg-white/5 [&_[data-radix-scroll-area-scrollbar]:hover]:bg-white/10 [&_[data-radix-scroll-area-thumb]]:!bg-white/30 [&_[data-radix-scroll-area-thumb]:hover]:!bg-white/50">
-                    <ScrollArea className="h-full">
-                        <div className="px-4 py-4">
-                            <div className="flex items-center gap-2 mb-1">
-                                <span className={`inline-flex size-4 shrink-0 text-${cap.color}`}>{cap.icon}</span>
-                                <span className="text-[10px] uppercase tracking-wider font-semibold text-white/40">
-                                    {cap.title}
-                                </span>
-                            </div>
-                            <p className="m-0 text-[13px] @sm:text-[15px] font-mono text-white/90 leading-relaxed">
-                                <span className="text-yellow mr-1.5">{'>'}</span>
-                                {displayed}
-                                {!done && (
-                                    <span className="inline-block w-[2px] h-[14px] bg-yellow ml-0.5 align-middle animate-[pulse_1s_steps(1)_infinite]" />
-                                )}
-                            </p>
-
-                            <TerminalResponse lines={fakeResponses[cap.title] || []} show={showResponse} />
-                        </div>
-                    </ScrollArea>
-                </div>
-
-                <div
-                    className="bg-[#16161e] dark:bg-[#0a0a12] border-t border-white/10 px-3 py-2.5 overflow-x-auto"
-                    style={{ scrollbarWidth: 'none' }}
-                >
-                    <div className="flex items-center gap-1.5 w-max">
-                        {capabilityList.map((c, i) => (
-                            <button
-                                key={c.title}
-                                onClick={() => handleChipClick(i)}
-                                className={`inline-flex items-center gap-1 px-2 py-1 rounded text-[11px] font-semibold transition-colors cursor-pointer border-0 whitespace-nowrap shrink-0 ${
-                                    i === activeIndex
-                                        ? 'bg-white/15 text-white'
-                                        : 'bg-white/5 text-white/40 hover:bg-white/10 hover:text-white/70'
-                                }`}
-                            >
-                                <span className={`inline-flex size-3 shrink-0 text-${c.color}`}>{c.icon}</span>
-                                {c.title}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </div>
     )
 }
 
@@ -727,8 +432,7 @@ const resources = [
 
 function MCPResources(): JSX.Element {
     return (
-        <section id="resources" className="scroll-mt-20 not-prose">
-            <h2 className="mb-6 mt-0 text-balance text-2xl font-bold leading-tight text-primary">Go deeper</h2>
+        <section id="resources" className="-mt-8 scroll-mt-20 not-prose">
             <div className="grid gap-4 @3xl/reader-content:grid-cols-3">
                 {resources.map(({ title, Icon, color, description, cta, to }) => (
                     <div
