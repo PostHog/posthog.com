@@ -68,7 +68,11 @@ To see them, the team uses PostHog Error Tracking. It captures each exception an
 
 ## Autocapture exceptions
 
-The engineers run the Error Tracking Wizard on Twig. It installs PostHog and sets up source map uploads for Twig's bundle. Then they switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) in the project settings.
+The engineers run the Error Tracking Wizard on Twig. It installs PostHog and sets up source map uploads for Twig's bundle:
+
+<Setup />
+
+Then they switch on [exception autocapture](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-exception-autocapture) in the project settings.
 
 Once the SDK loads, it captures uncaught exceptions in Twig.
 
@@ -203,10 +207,6 @@ Individual exceptions are numerous and noisy, so PostHog groups similar ones int
 The Twig engineers work through these issues to diagnose, triage, assign, and fix them, not individual exceptions.
 
 Every **Try again** on **Trip details** adds to the same issue.
-
-To capture exceptions in your own app, run the Error Tracking Wizard, or [install it yourself](/docs/error-tracking/installation):
-
-<Setup />
 
 <LessonFooter nextLabel="Stack traces" nextHref="/learn/error-tracking/pocket-guide/stack-traces">
 

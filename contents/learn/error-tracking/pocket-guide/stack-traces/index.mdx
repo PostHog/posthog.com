@@ -46,8 +46,49 @@ import UploadSymbolSetsPlatforms from '../../../../docs/error-tracking/_snippets
     ]}
 />
 
-<TimelineFigure
+<StackTraceFigure
     n={2}
+    caption="With source maps, Twig's own frames show at the top of the trace, and dependency frames carry a box icon."
+    type="TypeError"
+    message="Cannot read properties of undefined (reading 'name')"
+    frames={[
+        {
+            fn: 'readTripHost',
+            source: 'src/trips/trip-details.ts@12:20',
+            inApp: true,
+            marker: {
+                n: 1,
+                label: 'Your own code',
+                gloss: 'Click it to open the source around the failing line.',
+            },
+            context: {
+                startLine: 10,
+                failingLine: 12,
+                lines: [
+                    'export function readTripHost(hosts: Record<string, Host>, hostId: string) {',
+                    '  const host = hosts[hostId]',
+                    '  const hostName = host.name',
+                    '  return hostName',
+                    '}',
+                ],
+            },
+        },
+        { fn: 'openTripDetails', source: 'src/account/AccountPages.tsx@42:18', inApp: true },
+        {
+            fn: 'renderWithHooks',
+            source: 'node_modules/react-dom/client.js@5654:24',
+            marker: {
+                n: 2,
+                label: 'A dependency',
+                gloss: 'A dependency frame. PostHog only fingerprints dependency frames when a trace has none of Twig\'s own.',
+            },
+        },
+        { fn: 'performUnitOfWork', source: 'node_modules/react-dom/client.js@12561:98' },
+    ]}
+/>
+
+<TimelineFigure
+    n={3}
     caption="The Timeline tab shows your recorded steps in order, next to everything else in the session."
     rows={[
         {
@@ -107,7 +148,7 @@ Twig's web app is a minified React bundle. An app that uses one of these framewo
 
 ## Source map uploads
 
-To get full stack traces, the engineers need to upload a <Term name="source map" /> to map minified code back to Twig's source code. PostHog can get the maps three ways:
+To get full stack traces, the engineers need to upload a <Term name="source map" /> to map minified code to source code <SeeFig n={2} />. PostHog can get the maps three ways:
 
 | Option | Trade-off |
 | --- | --- |
@@ -117,11 +158,17 @@ To get full stack traces, the engineers need to upload a <Term name="source map"
 
 The engineers link each upload to a [release](/docs/error-tracking/releases). PostHog then shows the version and commit on every trace. With a [GitHub or GitLab integration](/docs/error-tracking/integrations), it also links each frame to the file and line in `PostHog/twig.com`.
 
-Twig uploads in CI, so its source stays private. The Error Tracking Wizard added the upload step when the engineers installed PostHog, so every build uploads its own maps. Now the **Trip details** trace points at `readTripHost` in `src/trips/trip-details.ts`, the line that failed.
+The Wizard's Error Tracking setup already adds uploads where the platform needs them. To add them to an existing setup:
+
+<Setup subcommand="upload-source-maps" />
+
+After uploading, the engineers check the [symbol sets](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets) in PostHog, which show any failed uploads or missing bundles.
+
+<Action />
 
 ## Breadcrumbs
 
-Breadcrumbs, which PostHog calls exception steps, hold context that only matters if something breaks. The engineers call `addExceptionStep` at checkpoints like a retry or a fallback path. The SDK attaches the steps to the next exception, and they show up in the issue's **Timeline** tab <SeeFig n={2} />.
+Breadcrumbs, which PostHog calls exception steps, hold context that only matters if something breaks. The engineers call `addExceptionStep` at checkpoints like a retry or a fallback path. The SDK attaches the steps to the next exception, and they show up in the issue's **Timeline** tab <SeeFig n={3} />.
 
 If no exception happens, the SDK discards the steps, so successful runs cost nothing.
 
@@ -135,8 +182,6 @@ The engineers pick where context goes by when they'll need it:
 | An event | The team wants to count the action on its own |
 
 Steps work in the <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/error-tracking/installation/web), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="" className="inline-block size-4 align-text-bottom" /> [React Native](/docs/error-tracking/installation/react-native), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg" alt="" className="inline-block size-4 align-text-bottom dark:invert" /> [iOS](/docs/error-tracking/installation/ios), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Android](/docs/error-tracking/installation/android), and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Flutter](/docs/error-tracking/installation/flutter) SDKs.
-
-<Action />
 
 <LessonFooter nextLabel="Issue grouping" nextHref="/learn/error-tracking/pocket-guide/issue-grouping">
 
