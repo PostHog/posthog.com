@@ -17,7 +17,7 @@ export const DEFAULT_HANDLES = [
     'surveys',
     'data_warehouse',
     'cdp',
-    'workflows_emails',
+    'messaging',
     'logs',
     'ai_observability',
     'endpoints',

@@ -159,6 +159,22 @@ export const tools = [
         aliases: ['Customer messaging'],
     },
     {
+        handle: 'transactional_emails',
+        name: 'Transactional emails',
+        description: 'Send password resets, receipts, and sign-in codes from your code',
+        slug: 'transactional-emails',
+        category: 'automation',
+        aliases: ['Transactional email', 'Email API'],
+    },
+    {
+        handle: 'messaging',
+        name: 'Email & Messaging',
+        description: 'Broadcasts and drip campaigns triggered by what people do in your product',
+        slug: 'messaging',
+        category: 'automation',
+        aliases: ['Broadcasts', 'Drip campaigns', 'Email marketing'],
+    },
+    {
         handle: 'user_interviews',
         name: 'User interviews',
         description: 'Get feedback from users.',

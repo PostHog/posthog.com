@@ -16,11 +16,13 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
-import { applications, keyFeatures } from './workflows/slides'
+import { applications, keyFeatures, LookingForEmail } from './workflows/slides'
 import { getTool } from '../../data/tools'
 
 export const workflows = {
     ...getTool('workflows_emails'),
+    // Email & Messaging is the calculator row for the Emails meter; this product stays registered for the billing data it owns.
+    hideFromCalculator: true,
     productVariantName: 'Emails',
     Icon: IconDecisionTree,
     type: 'workflows_emails',
@@ -45,6 +47,7 @@ export const workflows = {
      * feed the carousel templates their slide arrays).
      */
     productMenu: [
+        { slug: 'looking-for-email', name: 'Looking for email?', hideFromNav: true, component: LookingForEmail },
         {
             slug: 'overview',
             name: 'Overview',

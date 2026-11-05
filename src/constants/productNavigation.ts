@@ -23,6 +23,8 @@ export const BROWSE_TOOLS_HANDLES = [
     'data_warehouse',
     'endpoints',
     'workflows_emails',
+    'transactional_emails',
+    'messaging',
     'surveys',
     'support',
 ] as const
@@ -37,8 +39,8 @@ export const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
         handles: ['ai_observability', 'session_replay', 'replay_vision', 'error_tracking', 'logs', 'traces'],
     },
     { label: 'Sync', handles: ['data_warehouse', 'data_pipelines'] },
-    { label: 'Deploy', handles: ['feature_flags', 'experiments', 'endpoints'] },
-    { label: 'Manage', handles: ['surveys', 'support', 'workflows_emails'] },
+    { label: 'Deploy', handles: ['feature_flags', 'experiments', 'endpoints', 'transactional_emails'] },
+    { label: 'Manage', handles: ['surveys', 'support', 'messaging'] },
 ]
 
 // Non-product pages that appear in the product navigation

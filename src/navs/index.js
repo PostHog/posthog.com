@@ -2874,8 +2874,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
@@ -8220,7 +8220,7 @@ export const docsMenu = {
             icon: 'IconMegaphone',
             color: 'red',
             url: '/docs/workflows',
-            description: 'Create automations or campaigns to send messages to your users.',
+            description: 'Send transactional emails, broadcasts, and drip campaigns from your product data.',
             children: [
                 {
                     name: 'Workflows',

@@ -20,6 +20,8 @@ import { aiObservability } from './productData/ai_observability'
 import { aiEvals } from './productData/ai_evals'
 import { marketingAnalytics } from './productData/marketing_analytics'
 import { workflows } from './productData/workflows'
+import { messaging } from './productData/messaging'
+import { transactionalEmails } from './productData/transactional_emails'
 import { logs } from './productData/logs'
 import { realtimeDestinations } from './productData/realtime_destinations'
 import { endpoints } from './productData/endpoints'
@@ -44,6 +46,8 @@ const initialProducts = [
     aiEvals,
     logs,
     workflows,
+    messaging,
+    transactionalEmails,
     inbox,
     posthogDesktop,
     endpoints,

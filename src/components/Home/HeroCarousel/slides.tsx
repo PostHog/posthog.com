@@ -62,7 +62,7 @@ const rolloutGroups = [
     },
     {
         title: 'Data APIs & automation',
-        handles: ['endpoints', 'webhooks', 'workflows_emails'] as const,
+        handles: ['endpoints', 'webhooks', 'transactional_emails'] as const,
     },
     {
         title: 'Feedback & training',

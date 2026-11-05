@@ -122,10 +122,10 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-blue',
     },
     {
-        name: 'Workflows',
-        allocation: '10K messages per channel',
-        icon: Icons.IconDecisionTree,
-        iconColor: 'text-teal',
+        name: 'Email & Messaging',
+        allocation: '10K emails',
+        icon: Icons.IconMegaphone,
+        iconColor: 'text-blue',
     },
     {
         name: 'Logs',
