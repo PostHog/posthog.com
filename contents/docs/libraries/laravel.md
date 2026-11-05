@@ -7,8 +7,6 @@ You can integrate PostHog with Laravel using the [experimental Laravel SDK](#lar
 
 import AgentIntegrationSection from "../components/AgentIntegrationSection.mdx"
 
-<AgentIntegrationSection framework="Laravel" />
-
 ## Laravel SDK (experimental)
 
 > **Experimental:** The Laravel SDK is under active development, and its API may change. If you prefer to instrument your application yourself, the [manual PHP SDK setup](#manual-setup-with-the-php-sdk) remains supported.
@@ -29,7 +27,6 @@ Add your project token and ingestion host to your server's `.env`:
 ```bash file=.env
 POSTHOG_API_KEY=<ph_project_token>
 POSTHOG_HOST=<ph_client_api_host>
-POSTHOG_ENABLED=true
 ```
 
 Laravel's package discovery registers the service provider and facade automatically. If your application disables discovery, register `PostHog\Laravel\PostHogServiceProvider` manually. You don't need to initialize the PHP SDK or add the manual middleware below.
@@ -150,6 +147,10 @@ Run `php artisan posthog:doctor` to validate local configuration without sending
 ## Manual setup with the PHP SDK
 
 Using the [PHP SDK](/docs/libraries/php) directly remains supported. Use this approach if you want to manage initialization, request context, exception reporting, and flushing yourself. The examples below use `PostHog\PostHog`, not the Laravel facade. Don't combine this setup with the Laravel SDK's automatic integration.
+
+The wizard installs the PHP SDK, not the experimental Laravel SDK.
+
+<AgentIntegrationSection framework="Laravel" />
 
 ### Initialize the PHP SDK
 
