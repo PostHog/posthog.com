@@ -44,7 +44,7 @@ To send an email template you already have, open it in the **Templates** tab, op
 
 With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to set up a transactional email. It can design the email from your brand, make it transactional, and write the code that sends it. It asks you to confirm before it makes a template transactional, and you create the API key yourself.
 
-You can also make a template transactional with the API: call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:write` scope.
+You can also make a template transactional with the API: call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `transactional_email:write` scope. Keys with `hog_flow:write` still work.
 
 ### Edit a transactional email
 
