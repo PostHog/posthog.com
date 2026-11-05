@@ -5,6 +5,10 @@ platformLogo: laravel
 
 PostHog integrates with Laravel through the [PostHog PHP SDK](/docs/libraries/php). This page covers Laravel-specific setup. For SDK features such as event capture, identifying users, feature flags, group analytics, and configuration options, see the [PHP SDK docs](/docs/libraries/php).
 
+import AgentIntegrationSection from "../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Laravel" />
+
 ## Installation
 
 Install the PHP SDK as described in the [PHP installation guide](/docs/libraries/php#installation), then add your project token and host to `.env`:

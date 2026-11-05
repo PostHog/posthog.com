@@ -47,7 +47,7 @@ Newly-joined users get the basic Member access level.
 
 ### Deleting an organization
 
-An organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your [organization settings](https://app.posthog.com/settings/organization) for more information.
+An organization can be deleted by any organization Owner. This action is irreversible. See the **Delete organization** section in your [organization settings](https://app.posthog.com/settings/organization) for more information.
 
 Deletion is processed asynchronously in the background. While it completes, all organization members are redirected to a blocking screen – this typically takes a couple of minutes. From this screen, you can switch to another organization (if you belong to one) or contact support.
 
@@ -63,6 +63,16 @@ This setting is particularly useful for organizations with GDPR compliance requi
 **Note**: EU organizations automatically default to IP data capture disabled for GDPR compliance. Existing projects are not affected by this setting - only newly created projects will inherit the organization's default.
 
 Individual projects can override this organization default by configuring their own IP data capture setting in **Settings** > **Project** > **General** under the **IP data capture configuration** setting.
+
+### Events retention
+
+Organization admins can set how many months PostHog keeps events, for every project that doesn't have its own window. Find it under [**Settings** > **Organization** > **General** > **Events retention**](https://app.posthog.com/settings/organization-details#organization-events-retention). Other members can see the setting but not change it.
+
+The setting shows the range of months you can choose from. A window can't be longer than your plan's.
+
+> **Warning:** PostHog deletes events older than the window at the next monthly cleanup. Deleted events can't be restored, so PostHog asks you to confirm before it saves.
+
+Each project can use its own window instead, under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). For more details, see [events data retention](/docs/data/events-retention#how-to-customize-your-retention-period).
 
 ### Notifications
 

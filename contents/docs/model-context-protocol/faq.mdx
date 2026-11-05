@@ -31,7 +31,7 @@ MCP tool calls also run against the PostHog API, so [API rate limits](/docs/api#
 
 Some [AI-powered MCP tools](#how-much-does-it-cost) (for example, sentiment analysis and trace summarization) have their own additional, lower limits because they run LLMs internally.
 
-If you regularly hit these limits, consider pulling data through [batch exports](/docs/cdp/batch-exports) or [endpoints](/docs/endpoints) instead.
+If you regularly hit these limits, consider pulling data through [batch exports](/docs/data-pipelines/batch-exports) or [endpoints](/docs/endpoints) instead.
 
 ### Which AI clients and editors are supported?
 
@@ -47,7 +47,7 @@ Yes, but add one MCP connection for each. A single connection signs in as one ac
 
 ### Can my organization manage MCP access centrally through our IdP?
 
-Yes. If you're on an enterprise plan, you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
+Yes. If your organization has the Scale or Enterprise [platform add-on](/platform-packages), you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
 
 ### Where is my data sent?
 
@@ -242,7 +242,7 @@ Available features:
 | `events`                 | Event and property definitions                                                         |
 | `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
 | `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
-| `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
+| `hog_functions`          | [CDP function management](/docs/data-pipelines)                                                   |
 | `hog_function_templates` | CDP function template browsing                                                         |
 | `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
 | `ai_observability`          | [AI observability evaluations](/docs/ai-observability)                                      |
@@ -263,7 +263,7 @@ Available features:
 | `customer_analytics`     | [Customer analytics](/docs/customer-analytics/start-here)                              |
 | `conversations`          | [Support tickets](/docs/support)                                                       |
 | `signals`                | [Self-driving signals and inbox](/docs/self-driving)                                   |
-| `tasks`                  | [Tasks](/docs/posthog-desktop/tasks)                                                   |
+| `tasks`                  | [Tasks](/docs/tasks)                                                                   |
 | `tracing`                | [Distributed tracing](/docs/distributed-tracing/start-here)                            |
 
 > **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).

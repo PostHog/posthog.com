@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+ogImage: generated
 featuredVideo: 'https://www.youtube-nocookie.com/embed/rooOi7rxi8Y'
 category: General
 tags:
@@ -41,7 +42,7 @@ PostHog supports A/B and multivariate experiments that target by geography, devi
 
 As an all-in-one platform, PostHog simplifies your data and analytics stack by replacing multiple tools. This makes it easy to quickly create experiments using existing data and cohorts in your product analytics, rather than connecting an external data source.
 
-PostHog has a range of [libraries and SDKs](/docs/integrate), from [JavaScript](/docs/libraries/js) to [Python](/docs/integrate/server/python) to [iOS](/docs/integrate/client/ios), to help integrate into your website or apps' codebase. It has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), [Carrd](/tutorials/carrd-analytics), and more.
+PostHog has a range of [libraries and SDKs](/docs/getting-started/install), from [JavaScript](/docs/libraries/js) to [Python](/docs/libraries/python) to [iOS](/docs/libraries/ios), to help integrate into your website or apps' codebase. It has an HTML snippet for easy setup with basic sites, [Shopify](/docs/libraries/shopify), [Wordpress](/docs/libraries/wordpress), [Webflow](/tutorials/webflow), [Carrd](/tutorials/carrd-analytics), and more.
 
 ### How much does PostHog cost?
 

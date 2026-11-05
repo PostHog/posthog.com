@@ -22,6 +22,45 @@ if (posthog.conversations.isAvailable()) {
 - Support is enabled in your project settings
 - The conversations module has loaded successfully
 
+## Control the widget
+
+```javascript
+posthog.conversations.show()
+posthog.conversations.hide()
+posthog.conversations.open()
+posthog.conversations.close()
+```
+
+- `show()` renders the widget, including the launcher button. It does nothing until the widget bundle has loaded.
+- `hide()` removes the widget, including the launcher.
+- `open()` opens the chat panel. It renders the widget first when it is not on the page.
+- `close()` closes the chat panel and leaves the launcher in place.
+- `isVisible()` returns `true` when the widget is rendered.
+
+`open()` and `close()` need `posthog-js` 1.442.0 or later. If you call them before the widget bundle has loaded, the last call runs once the bundle loads. `open()` does nothing on a domain that is not in **Allowed domains**.
+
+See [Set up the widget](/docs/support/widget#show-and-hide-the-widget) for when to use each method.
+
+## Theme the widget
+
+Pass `conversations.theme` to `posthog.init()`, or call `setTheme()` later. `setTheme()` merges over the current theme, including the `dark` object, and it is safe to call before the widget loads. Top-level colors apply to the light scheme. Set dark mode colors under `dark`. `posthog.reset()` keeps the theme.
+
+Theming needs `posthog-js` 1.444.0 or later. The option list, CSS variables, and precedence are in [Theme the widget](/docs/support/widget#theme-the-widget).
+
+```javascript
+posthog.init('<ph_project_token>', {
+  conversations: {
+    theme: {
+      colorScheme: 'auto',
+      primary: '#111827',
+      dark: { primary: '#f9fafb' },
+    },
+  },
+})
+
+posthog.conversations.setTheme({ colorScheme: 'dark' })
+```
+
 ## Send a message
 
 ```javascript
@@ -315,6 +354,8 @@ This data is cleared when:
 - `posthog.reset()` is called
 - Browser storage is cleared
 
+The widget theme is separate. `posthog.reset()` keeps the theme from `posthog.init()` and from `setTheme()`.
+
 ## Error handling
 
 API methods return `null` if conversations are not available yet. Always check availability or handle null returns:
@@ -353,9 +394,12 @@ try {
 | Method | Description | Returns |
 |--------|-------------|---------|
 | `isAvailable()` | Check if conversations API is ready | `boolean` |
-| `isVisible()` | Check if widget is rendered | `boolean` |
-| `show()` | Show/render the widget | `void` |
-| `hide()` | Hide/remove the widget | `void` |
+| `isVisible()` | Check if the widget is rendered | `boolean` |
+| `show()` | Render the widget, including the launcher | `void` |
+| `hide()` | Remove the widget, including the launcher | `void` |
+| `open()` | Open the chat panel. Renders the widget first if it is not on the page | `void` |
+| `close()` | Close the chat panel. The launcher stays on the page | `void` |
+| `setTheme(theme)` | Merge a theme patch over the current widget theme | `void` |
 | `sendMessage(message, userTraits?, newTicket?)` | Send a message | `Promise<SendMessageResponse \| null>` |
 | `getMessages(ticketId?, after?)` | Fetch messages | `Promise<GetMessagesResponse \| null>` |
 | `markAsRead(ticketId?)` | Mark messages as read | `Promise<MarkAsReadResponse \| null>` |

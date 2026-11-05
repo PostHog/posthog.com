@@ -5,7 +5,7 @@ Stacked, prose-first product pages rendered inside `ReaderView`. This is the rep
 - **Product surface:** `/<product-slug>` → `<ProductReaderView productHandle="…" />` stacks one `<section>` per `productMenu` item.
 - **Pricing surface:** `/<product-slug>/pricing` → `<ProductReaderView productHandle="…" surface="pricing" />` stacks one `<section>` per `pricingMenu` item.
 - **Docs surface:** `/docs/<product-slug>` → a normal `<ReaderView>` that shares the same tabbed sidebar via `buildProductMenuTabs({ productData, activeSurface: 'docs' })`.
-- **Learn surface:** `/learn/<product-slug>` → `LearnPage` shares the product sidebar and renders the learning overview or guide chapters.
+- **Learn surface:** `/learn/<product-slug>` → `LearnShell` (rendered by `AppWindow`) holds the product sidebar, and `LearnPage` renders the learning overview or guide chapters inside it.
 
 Tabs with an `href` navigate when they are not already active. Clicking the active Learn tab
 keeps the current page open. Its Overview link returns to the learning hub.
@@ -77,7 +77,7 @@ productData.<surface>Menu        →   sections rendered in the article column
 
 ### `props` (optional)
 
-- Object passed straight through to the section component as extra props (alongside the standard `SectionComponentProps`). Used to feed slot-specific data into reusable templates – e.g. handing the `applications` and `top-features` carousel templates their slide arrays.
+- Object passed straight through to the section component as extra props (alongside the standard `SectionComponentProps`). Used to feed slot-specific data into reusable templates – e.g. handing the `applications` and `key-features` carousel templates their slide arrays.
 
 ---
 
@@ -101,7 +101,7 @@ Cross-product JSX primitives shared between slide content and templates (e.g. `L
 
 ```tsx
 // src/hooks/productData/session_replay.tsx
-import { applications, topFeatures } from './session_replay/slides'
+import { applications, keyFeatures } from './session_replay/slides'
 import { features } from './session_replay/features'
 
 export const sessionReplay = {
@@ -119,11 +119,11 @@ export const sessionReplay = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         { slug: 'getting-started', name: 'Get started', group: 'divided' },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true },
@@ -232,6 +232,15 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 
 If a template finds nothing to render, it returns `null` – the section disappears but the menu item stays.
 
+The `plans` template also accepts optional props through a menu item's `props`, for a product that shows Plans once per billing meter (see `src/hooks/productData/data_pipelines.tsx`):
+
+- `meterName` – prefixes the TL;DR title, as in "Sources TL;DR:".
+- `hidePricingDetails` – hides the "Things you should know about our pricing" column, so a second Plans block doesn't repeat it.
+- `intro` – content above the TL;DR in the left column, so the pricing notes column starts level with it.
+- `calculatorId` – the section that the "or less!" link scrolls to. It defaults to `calculator`.
+
+A menu item's `props.productData` replaces the page's product data for that one section, which points it at a different billing product.
+
 ### Adding a new template
 
 1. Create a component in `templates/` that accepts `SectionComponentProps` and wraps its output in `<section id={id} className="scroll-mt-20 not-prose">…</section>`.
@@ -268,6 +277,7 @@ Both `ProductReaderView` and the docs page set this up automatically; pass it ma
 Props:
 - `activeHandle: string` – the currently selected product's `handle`.
 - `excludeHandles?: string[]` – handles to hide from the dropdown.
+- `surface?: ProductSurface` – the tab of the current page (`'product'`, `'pricing'`, `'docs'`, or `'learn'`). Defaults to `'product'`.
 
 ### Sizing and styling
 
@@ -282,7 +292,7 @@ What's still hard-coded inside `OSSelect` (not exposed as props): the search inp
 
 ### Navigation
 
-Switching products always navigates to the product root (`/<newSlug>`). Surface-preserving navigation (e.g. staying on `/pricing`) is deferred until every product has those pages. [`getProductSurfaceUrl`](./getProductSurfaceUrl.ts) still exists for that future use.
+Switching products opens the new product's tab for the current `surface`, using the `href` that `buildProductMenuTabs` gives that tab. If the new product has no such tab, for example no Learn hub, the switcher opens the product root (`/<newSlug>`).
 
 ---
 
@@ -294,8 +304,7 @@ Switching products always navigates to the product root (`/<newSlug>`). Surface-
 | `types.ts`                 | `ProductNavItem`, `SectionComponentProps`, `resolveTemplate(item)`. |
 | `buildProductMenuTabs.tsx` | Returns the `[Product, Pricing, Docs]` tabs for `<ReaderView menuTabs={…}>`. Tabs whose menus are empty are omitted. |
 | `ProductNav.tsx`           | The single product nav. When given a `contentRef` it scrolls in-page (radix viewport + ScrollSpy active highlighting via `ElementScrollLink`); without one it emits Gatsby `<Link>`s to `${basePath}#${slug}` for cross-page jumps. The `'overview'` slug is special-cased to land at the top of the surface in both modes. |
-| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `BROWSE_TOOLS_HANDLES` + `useProduct()`; always navigates to `/<slug>`. |
-| `getProductSurfaceUrl.ts`  | Helper for surface-preserving product switches (not currently used by the switcher). |
+| `ProductSwitcher.tsx`      | Searchable product dropdown rendered above the menu. Driven by `BROWSE_TOOLS_HANDLES` + `useProduct()`; keeps the current `surface` tab when the new product has it. |
 | `templates/`               | One file per section template + the `templateRegistry`.            |
 
 ---

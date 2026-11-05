@@ -115,7 +115,7 @@ As for more character traits, a good way to summarize is that great TAMs are [lo
 
 Because TAMs are special at PostHog, we also have special requirements for them. Generally, we look for two types of people:
 
-- Account executives who have owned longer term customer relationships and are technical enough to hold their own. They won't be bringing engineers to their demos for example. We look for salespeople who have built their own [vibe coded tools](/blog/best-analytics-stack-for-vibe-coded-apps) and side projects.
+- Account executives who have owned longer term customer relationships and are [technical enough to hold their own](/blog/hiring-technical-csms). They won't be bringing engineers to their demos for example. We look for salespeople who have built their own [vibe coded tools](/blog/best-analytics-stack-for-vibe-coded-apps) and side projects.
 - Sales engineers or product specialists who are tired of letting the sales team get all the credit. Some of our TAMs are literally ex-[product engineers](/product-engineer/what-is-a-product-engineer).
 
 We then empower these people to really make our customers successful, even if that means smaller renewals. We count our anti-revenue wins as wins too. 

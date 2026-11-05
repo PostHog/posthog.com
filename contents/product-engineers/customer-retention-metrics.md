@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/lovehog_be749b577f.jpg
 featuredImageType: full
+ogImage: generated
 tags:
   - Product analytics
   - Product metrics

@@ -8,19 +8,21 @@ import PrivateBeta from './_snippets/private-beta.mdx'
 
 <PrivateBeta />
 
-GitHub repositories let Business Knowledge read repositories you select as context when it answers a question. It searches file names and the README, then reads a file. It doesn't index the code, and it doesn't search inside file contents.
+<CalloutBox icon="IconLock" title="PostHog does not index your repositories" type="fyi">
+
+Your code is **not** indexed, and PostHog doesn't search inside files. Business Knowledge searches file names and README text, then reads the matching file from GitHub when an answer needs it.
+
+</CalloutBox>
+
+GitHub repositories let Business Knowledge read repositories you select as context when it answers a question.
 
 Connect a repository in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings). The setting is shown when GitHub repositories are enabled for your project.
 
-The list belongs to the environment where you save it. An environment is a separate data space in a project, such as production or development. Each environment keeps its own repository list.
+Each environment keeps its own repository list.
 
 ## How repositories are referenced
 
-Document search runs first. If that search returns nothing, Business Knowledge searches the file names and README text of the repositories you saved.
-
-It matches file names and identifiers, not a full sentence. Each result includes the GitHub description. When that description says the repository holds a handbook or docs, Business Knowledge searches that repository for those words, then reads the file.
-
-The read returns the file text and a permalink. The Playground shows this as **Searched repositories** and **Read file**.
+Business Knowledge searches your repositories only when document search finds nothing. It matches file names and identifiers, not full sentences, then reads the file and returns its text with a permalink.
 
 ## Connect
 

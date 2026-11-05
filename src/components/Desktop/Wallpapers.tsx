@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react'
+import React from 'react'
 
 /**
  * Wallpapers
@@ -15,15 +15,10 @@ import React, { createContext, useContext } from 'react'
 const FADE_OPACITY = 'transition-opacity duration-700 ease-in-out'
 const FADE_COLORS = 'transition-colors duration-700 ease-in-out'
 
-export const BlurredWallpaperContext = createContext(false)
-
-const BLURRED_IMAGE_WIDTH_PX = 32
 const CLOUDINARY_UPLOAD_PATH = '/image/upload/'
 
 const toResizedImageUrl = (url: string, widthPx: number): string =>
     url.replace(CLOUDINARY_UPLOAD_PATH, `${CLOUDINARY_UPLOAD_PATH}w_${widthPx},q_auto,f_auto/`)
-
-const toBlurredImageUrl = (url: string): string => toResizedImageUrl(url, BLURRED_IMAGE_WIDTH_PX)
 
 interface SceneBackgroundProps {
     url: `https://res.cloudinary.com/${string}`
@@ -31,15 +26,9 @@ interface SceneBackgroundProps {
     style: React.CSSProperties
 }
 
-const SceneBackground = ({ url, className, style }: SceneBackgroundProps) => {
-    const isBlurred = useContext(BlurredWallpaperContext)
-    return (
-        <div
-            className={className}
-            style={{ ...style, backgroundImage: `url('${isBlurred ? toBlurredImageUrl(url) : url}')` }}
-        />
-    )
-}
+const SceneBackground = ({ url, className, style }: SceneBackgroundProps) => (
+    <div className={className} style={{ ...style, backgroundImage: `url('${url}')` }} />
+)
 
 interface SceneImageProps {
     src: `https://res.cloudinary.com/${string}`
@@ -47,15 +36,35 @@ interface SceneImageProps {
     height: number
     className?: string
     imgClassName?: string
+    loading?: 'eager' | 'lazy'
+    fetchPriority?: 'high' | 'low' | 'auto'
+    /** Display slot. The browser uses this with `widths` to skip the full-size file. */
+    sizes?: string
+    widths?: number[]
 }
 
-const SceneImage = ({ src, width, height, className = '', imgClassName = '' }: SceneImageProps) => {
-    const isBlurred = useContext(BlurredWallpaperContext)
+const SceneImage = ({
+    src,
+    width,
+    height,
+    className = '',
+    imgClassName = '',
+    loading = 'lazy',
+    fetchPriority,
+    sizes,
+    widths,
+}: SceneImageProps) => {
+    const srcSet = widths?.map((w) => `${toResizedImageUrl(src, w)} ${w}w`).join(', ')
+    const fallbackWidth = widths ? widths[Math.floor(widths.length / 2)] : width
+
     return (
         <div className={`inline-block ${className}`}>
             <img
-                loading="lazy"
-                src={isBlurred ? toBlurredImageUrl(src) : toResizedImageUrl(src, width)}
+                loading={loading}
+                fetchPriority={fetchPriority}
+                src={toResizedImageUrl(src, fallbackWidth)}
+                srcSet={srcSet}
+                sizes={srcSet ? sizes : undefined}
                 alt=""
                 width={width}
                 height={height}
@@ -176,12 +185,18 @@ const KeyboardGarden = () => (
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_hedge_light_42c729131e.png"
                 width={1555}
                 height={1262}
+                loading="eager"
+                fetchPriority="high"
+                sizes="(min-width: 768px) 777px, 100vw"
+                widths={[480, 800, 1555]}
                 className={`col-start-1 row-start-1 opacity-100 dark:opacity-0 w-full max-w-full md:w-[777px] ${FADE_OPACITY}`}
             />
             <SceneImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/9000_hedge_dark_b36706e924.png"
                 width={1555}
                 height={1262}
+                sizes="(min-width: 768px) 777px, 100vw"
+                widths={[480, 800, 1555]}
                 className={`col-start-1 row-start-1 opacity-0 dark:opacity-100 w-full max-w-full md:w-[777px] ${FADE_OPACITY}`}
             />
         </div>

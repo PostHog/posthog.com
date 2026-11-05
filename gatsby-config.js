@@ -132,7 +132,8 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+                // Eval files sit beside their pages but are read only by evals/, never by the site.
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`, `**/*.eval.yaml`],
             },
         },
         {
@@ -209,7 +210,7 @@ module.exports = {
                 background_color: '#E5E7E0',
                 theme_color: '#E5E7E0',
                 display: 'minimal-ui',
-                icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
+                icon: 'src/images/posthog-icon-white.svg',
             },
         },
         `gatsby-plugin-postcss`,

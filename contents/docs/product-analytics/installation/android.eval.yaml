@@ -1,0 +1,23 @@
+owner: wizard-and-docs
+tags: [install, android]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Android app from a one-line
+          request? The prompt names only the stack; the agent gets no docs, so docs-read
+          shows which pages it finds on its own.
+      codebase_to_test: android-app
+      prompt: >-
+          Set up PostHog in the Android app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/app/build.gradle.kts declares com.posthog:posthog-android,
+                  directly or through an entry in {folder}/gradle/libs.versions.toml.
+              initialized: >-
+                  An Application subclass's onCreate builds PostHogAndroidConfig with
+                  apiKey (the project token) and host (the PostHog host) and calls
+                  PostHogAndroid.setup. Cite the file and line(s).

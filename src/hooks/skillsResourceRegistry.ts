@@ -122,6 +122,7 @@ const MCP_TOOL_PRODUCT_RULES: Array<[RegExp, string]> = [
     [/^persons/, 'profiles'],
     [/^conversations|^inbox/, 'support'],
     [/^web-analytics/, 'web_analytics'],
+    [/^marketing-analytics/, 'marketing_analytics'],
     [/^accounts|^usage-metrics/, 'group_analytics'],
     [/^sdk-doctor/, 'session_replay'],
     [/^user-interview/, 'user_interviews'],

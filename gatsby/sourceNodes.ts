@@ -11,6 +11,7 @@ import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
+import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
 
@@ -557,7 +558,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const statsFor = async (forumTag: string | null) => {
             const questionTagFilter = forumTag
-                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: 'questions' } } } }
+                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } } }
                 : {}
             const replyTagFilter = forumTag ? { question: questionTagFilter } : {}
 
@@ -579,7 +580,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         try {
             const tagsQuery = qs.stringify(
                 {
-                    filters: { topic: { slug: { $eq: 'questions' } } },
+                    filters: { topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } },
                     fields: ['slug'],
                     pagination: { pageSize: 100 },
                 },
@@ -1322,7 +1323,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 // Prefer the slug from the source's own posthog.com docsUrl so the listing link always
                 // matches the committed doc file (e.g. `active-campaign`, not the label-derived
                 // `activecampaign`). Fall back to the label for sources without a posthog docs URL.
-                const docsSlug = config.docsUrl?.match(/\/docs\/cdp\/sources\/([^/?#]+)/)?.[1]
+                const docsSlug = config.docsUrl?.match(
+                    /\/docs\/(?:cdp|data-pipelines|data-warehouse)\/sources\/([^/?#]+)/
+                )?.[1]
                 const labelSlug = displayName
                     .toLowerCase()
                     .replace(/\./g, '')
@@ -1342,8 +1345,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
                     docsUrl: config.docsUrl || null,
                     unreleased: config.unreleasedSource || false,
-                    releaseStatus: config.releaseStatus || null,
-                    beta: config.betaSource || config.releaseStatus === 'beta' || false,
                     featured: config.featured || false,
                     caption: config.caption || null,
                     sourceFields: config.fields || [],

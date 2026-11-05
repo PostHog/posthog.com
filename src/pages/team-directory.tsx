@@ -298,24 +298,6 @@ export default function Team(): JSX.Element {
                     title: 'Team',
                     description: 'Internal team directory',
                 }}
-                extraMenuOptions={
-                    isModerator ? (
-                        <>
-                            <Tooltip
-                                trigger={<OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />}
-                                delay={0}
-                            >
-                                Download CSV
-                            </Tooltip>
-                            <OSButton
-                                size="md"
-                                active={isEditing}
-                                icon={<IconPencil />}
-                                onClick={() => setIsEditing(!isEditing)}
-                            />
-                        </>
-                    ) : null
-                }
                 availableFilters={[
                     {
                         label: 'team',
@@ -380,12 +362,32 @@ export default function Team(): JSX.Element {
                     <p className="text-muted">No team members found. Make sure you're logged in as a moderator.</p>
                 ) : (
                     <>
-                        <p className="!mt-0 mb-2 text-sm text-muted">
-                            {displayMembers.length} team member{displayMembers.length !== 1 ? 's' : ''}
-                            {' · '}
-                            Data is loaded at build time. Edits save to Strapi but won't appear here until the next
-                            build.
-                        </p>
+                        <div className="flex items-center justify-between">
+                            <p className="!mt-0 mb-2 text-sm text-muted">
+                                {displayMembers.length} team member{displayMembers.length !== 1 ? 's' : ''}
+                                {' · '}
+                                Data is loaded at build time. Edits save to Strapi but won't appear here until the next
+                                build.
+                            </p>
+                            {isModerator ? (
+                                <div>
+                                    <Tooltip
+                                        trigger={
+                                            <OSButton size="md" icon={<IconDownload />} onClick={handleDownloadCSV} />
+                                        }
+                                        delay={0}
+                                    >
+                                        Download CSV
+                                    </Tooltip>
+                                    <OSButton
+                                        size="md"
+                                        active={isEditing}
+                                        icon={<IconPencil />}
+                                        onClick={() => setIsEditing(!isEditing)}
+                                    />
+                                </div>
+                            ) : null}
+                        </div>
                         <OSTable
                             columns={columns}
                             size="sm"

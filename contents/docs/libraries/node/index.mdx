@@ -18,6 +18,10 @@ features:
 
 If you're working with Node.js (versions 20+), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Node.js" />
+
 ## Installation
 
 import NodeInstall from '../../integrate/_snippets/install-node.mdx'
@@ -671,6 +675,10 @@ The list of properties that this overrides:
 5. `$geoip_continent_code`
 6. `$geoip_postal_code`
 7. `$geoip_time_zone`
+8. `$geoip_subdivision_1_code`
+9. `$geoip_subdivision_1_name`
+10. `$geoip_subdivision_2_code`
+11. `$geoip_subdivision_2_name`
 
 
 You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
