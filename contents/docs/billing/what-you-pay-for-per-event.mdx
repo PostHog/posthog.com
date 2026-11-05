@@ -8,13 +8,13 @@ When you pay for an event in PostHog, you pay for more than a row in a database.
 
 This page explains each of those jobs, so you know what the price includes. It's also useful if you're thinking about building your own pipeline, for example on ClickHouse. AI agents make the first version much faster to build than it used to be, so that's a fair option to consider. This page helps you compare the two like with like.
 
-You don't need to be an engineer to follow it. Every section starts in plain English and ends with the technical detail, so stop reading whenever you've seen enough.
+You don't need to be an engineer to follow it. It helps, but every section starts in plain English and ends with the technical detail so it can help users at all levels.
 
-> **No bill yet?** Every PostHog product has a free tier, and they're big enough that 97% of users never pay us a penny. If you're inside the free tier, your events cost nothing, so this page is background reading for later.
+> **No bill yet?** Every PostHog product has a free tier, and they're big enough that 97% of users never pay us a penny. If you're inside the free tier, your events cost nothing.
 
 ## The price
 
-An event is one thing that happens in your product: someone views a page, clicks a button, signs up, or pays you. [Product Analytics](/product-analytics) bills per event. The first 1 million events each month are free, and the price per event drops as you send more. These are the live rates for [anonymous events](/docs/data/anonymous-vs-identified-events), which don't carry a person profile. Drag the slider to your volume.
+An event is one thing that happens in your product: someone views a page, clicks a button, signs up, or pays you. [Product Analytics](/product-analytics) bills per event. The first 1 million events each month are free, and the price per event drops as you send more. Below are the live rates for [anonymous events](/docs/data/anonymous-vs-identified-events), which don't carry a person profile. 
 
 <Pricing productType="product_analytics" />
 
@@ -24,29 +24,33 @@ Those are the only line items for events. We don't charge to store them, to quer
 
 ## What happens to one event
 
-Every analytics setup, bought or built, has the same job. You have to get data in from your product, and often from other tools too. You have to keep it safe for as long as anyone might need it, and nobody knows when that'll be. Then you have to keep it available to whoever wants to use it, or send it off to whatever tool they'd rather use it in.
+Every analytics setup, bought or built, has the same job. 
 
-That sounds like three jobs. In practice it's six, and each one has its own way to go wrong.
+- You have to get data in from your product, and often from other tools too. 
+- You have to keep it safe for as long as anyone might need it, and nobody knows when that'll be. 
+- You have to keep it available for when you want to use it, or send it off wherever you want it to go.
+
+That sounds like three jobs. In practice it's six, and each one has its own ways in can go wrong.
 
 ### Step 1: Getting it in
 
-Say you ship a mobile app. Someone opens it on a train, taps through a few screens, loses signal, and closes it. Those taps still need to reach you once the phone is back online, in the right order and with the right time on them. Your website has a different problem, because some of your visitors run ad blockers that strip out tracking scripts. Your backend records the events that matter most, like signups and payments, straight from your servers.
+Say you ship a mobile app. Someone opens it on a train, taps through a few screens, loses signal, and closes it. Those taps still need to reach you once the phone is back online, in the right order and with the right time on them. Meanwhile your website has a different problem: some of your visitors run ad blockers that strip out tracking scripts. Finally, your backend records the events that matter most, like signups and payments, straight from your servers.
 
-It's rarely just your product, either. Sooner or later someone wants Stripe payments or HubSpot deals next to product usage, so they can see which features your paying customers actually use.
+It's rarely just your product, either. Sooner or later someone wants Stripe payments or HubSpot deals next to product usage, so they can see which features your paying customers actually use. So you need to pull in data from those places too, maintain the pipeline, and handle the associated costs.
 
-**How it works:** [Our SDKs](/docs/libraries) batch, compress, and retry. The capture service decompresses the payload, validates it, and corrects the timestamp using the time your client says it sent the batch, so a phone that was offline for an hour still lands its events in the right minute. It also adds a UUID if the SDK didn't.
+**How it works at PostHog:** [Our SDKs](/docs/libraries) batch, compress, and retry. The capture service decompresses the payload, validates it, and corrects the timestamp using the time your client says it sent the batch, so a phone that was offline for an hour still lands its events in the right minute. It also adds a UUID if the SDK didn't.
 
-If capture can't write to the queue, it returns an error and the SDK tries again, so a short outage on our side doesn't lose your data. A [reverse proxy](/docs/advanced/proxy) lets you send events from your own domain, past ad blockers.
+If capture can't write to the queue, it returns an error and the SDK tries again, so a short outage on our side doesn't lose your data. Finally, a [reverse proxy](/docs/advanced/proxy) lets you send events from your own domain, past ad blockers.
 
 For data from other tools, [sources](/docs/data-pipelines/sources) sync [Stripe](/docs/data-pipelines/sources/stripe), HubSpot, Postgres, S3, and more on a schedule, so you can query them next to your events with SQL. Synced rows have their own free tier and bill per row, separately from events.
 
-Without it, events from a phone with the wrong clock land on the wrong day, retries count twice, and ad blockers quietly remove traffic you never knew you had.
+Without it, events from a phone with the wrong clock land on the wrong day, retries count twice, and ad blockers quietly create a blindspot in your data.
 
 ### Step 2: Not losing it
 
-Data has a habit of arriving all at once. You hit the front page of Hacker News, a bot finds your signup form, or a buggy release fires the same event in a loop. Meanwhile, the database at the end of the line needs a restart now and then for upgrades. None of that should lose you data.
+Data, like taxes, has a habit of arriving all at once. You hit the front page of Hacker News, a spam bot finds your signup form, or a buggy release fires the same event in a loop. Meanwhile, the database at the end of the line needs a restart now and then for upgrades. None of that should lose you data, but any of them could.
 
-**How it works:** Every event goes into [Kafka](/docs/how-posthog-works/ingestion-pipeline) before anything else touches it, and capture doesn't reply to your SDK until Kafka has acknowledged the write on every in-sync replica. The queue absorbs launch-day spikes and bots, and waits out database outages. Events from the same user stay in order.
+**How it works at PostHog:** Every event goes into [Kafka](/docs/how-posthog-works/ingestion-pipeline) before anything else touches it, and capture doesn't reply to your SDK until Kafka has acknowledged the write on every in-sync replica. The queue absorbs launch-day spikes and bots, and waits out database outages. Events from the same user stay in order.
 
 If a single ID sends more than about 5,000 events a minute, it moves to an overflow lane so it can't slow anyone else down. Nothing gets dropped, but while that ID is in the overflow lane, its events can process out of order and skip person profile creation and updates. You'll get an [ingestion warning](/docs/data/ingestion-warnings) when it happens.
 
@@ -58,7 +62,7 @@ Without it, a traffic spike or a database restart can mean you lose your preciou
 
 Raw events are messy. Your iOS app sends `Signed Up`, your web app sends `signup_completed`, and last week's release misspelled a property name. Someone reads your blog on their phone at lunch and signs up on their laptop that evening, and as far as the raw data knows, that's two strangers. Before anyone can trust a chart, the data needs checking and joining up.
 
-**How it works:** Ingestion validates each event, drops anything older than a limit you set, and runs your [transformations](/docs/data-pipelines/transformations). It adds country and city from GeoIP, gives [cookieless](/tutorials/cookieless-tracking) events a daily-rotating hash instead of a cookie, and attaches UTM and referrer data to the [session](/docs/data/sessions). Every event and property name goes into a catalog, which is how the UI, SQL autocomplete, and [PostHog AI](/docs/posthog-ai) know what exists. If something's wrong with an event, an [ingestion warning](/docs/data/ingestion-warnings) tells you which one. When two names mean the same thing, you can combine them into one [action](/docs/data/actions) or rename one with a transformation.
+**How it works at PostHog:** Ingestion validates each event, drops anything older than a limit you set, and runs your [transformations](/docs/data-pipelines/transformations). It adds country and city from GeoIP, gives [cookieless](/tutorials/cookieless-tracking) events a daily-rotating hash instead of a cookie, and attaches UTM and referrer data to the [session](/docs/data/sessions). Every event and property name goes into a catalog, which is how the UI, SQL autocomplete, and [PostHog AI](/docs/posthog-ai) know what exists. If something's wrong with an event, an [ingestion warning](/docs/data/ingestion-warnings) tells you which one. When two names mean the same thing, you can combine them into one [action](/docs/data/actions) or rename one with a transformation.
 
 Identified events also go through [identity resolution](/docs/product-analytics/identity-resolution). We create the person, merge their anonymous history when they identify, and update their properties in order. That's what the person profile charge pays for, and it's the hardest part to build yourself. Until something merges the phone and the laptop, every funnel that crosses signup is wrong.
 
@@ -66,19 +70,21 @@ Without it, one platform renames a property, one metric quietly splits in two, a
 
 ### Step 4: Storing it for years
 
-You don't know which questions you'll ask next year. Your board wants to see how this year's signups compare with your first cohort. A new PM wants to know whether the redesign two years ago actually worked. You can only answer those if the data from back then is still there and still fast to query.
+Simply put: you don't know which questions you'll need to ask next year. Your board wants to see how this year's signups compare with your first cohort. A new PM wants to know whether the redesign two years ago actually worked. You can only answer those sorts of questions if the data from back then is still there and still fast to query.
 
-**How it works:** Events land in a sharded, replicated ClickHouse cluster, with properties compressed using ZSTD. Hot data sits on local NVMe and [moves to cheaper tiers](/handbook/engineering/clickhouse/clusters#storage-tiers) as it ages. Every week we look at slow queries and materialize the columns that would make them fast.
+**How it works:** Events land in a sharded, replicated ClickHouse cluster, with properties compressed using ZSTD. Hot data (that which you use regularly) sits on local NVMe and [moves to cheaper tiers](/handbook/engineering/clickhouse/clusters#storage-tiers) as it ages. Every week we look at slow queries and materialize the columns that would make them fast.
 
 We're also [rebuilding the storage format](/blog/changing-event-storage) so each property is stored once, with its real type, which makes common queries up to 2x faster. GDPR deletions run as batched jobs, because deleting anything from ClickHouse means rewriting whole partitions.
 
-Paid plans [keep events for many years](/docs/data/events-retention) and free plans for one. You can set a shorter window.
+Paid plans [keep events for many years](/docs/data/events-retention) and free plans for one. You can set a shorter window if you need it, however.
 
-Without it, a database that keeps only one copy of your data can lose it when a disk fails, and queries get slower as the data grows.
+Without all this, a database that keeps only one copy of your data can lose it when a disk fails, and queries get slower as the data grows – a problem that's small when you're handling a few thousand events for your hobby project, but colossal when you're handling millions and billions of events for your business.
 
 ### Step 5: Querying it as often as you like
 
-Data is only worth keeping if people use it. Your PM builds a funnel for the new checkout. Your CEO opens the same dashboard every Monday morning. An engineer writes SQL to chase a bug, and someone in customer success asks PostHog AI which accounts stopped using a feature last week. They're all reading the same events at the same time, and none of them should have to wait for the others.
+Data is only worth keeping if people actually use it. Your PM builds a funnel for the new checkout. Your CEO opens the same dashboard every Monday morning. An engineer writes SQL to chase a bug, and someone in customer success asks PostHog AI which accounts stopped using a feature last week. They're all reading the same events at the same time, and none of them should have to wait for the others.
+
+(Well, maybe the PM.)
 
 **How it works:** Funnels, retention, paths, lifecycle, [dashboards](/docs/product-analytics/dashboards), [SQL](/docs/data-warehouse/sql), and [PostHog AI](/docs/posthog-ai) all run on the same events, and the compute for those queries is in the event price.
 
@@ -112,7 +118,7 @@ It assumes your build runs in production for the long term, and that someone on 
 
 ## Costs that arrive later
 
-A build estimate usually covers the first version of the system: the servers, the storage, and the setup. The costs below arrive later, so estimates often leave them out, whether a person or an agent writes them.
+A build estimate from an agent usually covers the first version of the system: the servers, the storage, and the setup. The costs below arrive later, so estimates often leave them out, whether a person or an agent writes them.
 
 ### Storage for years, not months
 
@@ -135,6 +141,8 @@ Every hour someone spends upgrading ClickHouse or fixing an SDK is an hour not s
 ### The features you'll be asked for next
 
 Your first build gives you an events table and a dashboard. A week later, someone asks for a [funnel](/docs/product-analytics/funnels). Then retention, then [cohorts](/docs/data/cohorts), then a way to target a feature flag at one of those cohorts. Every request is reasonable, and every one is another system to build and maintain.
+
+This adds a lot of work and scope over time. You can trust us on that. 
 
 In PostHog, the same events already power [feature flag targeting](/docs/feature-flags), [experiment metrics](/docs/experiments), and the filters in [Session Replay](/docs/session-replay). You pay for an event once, and every product can use it. An event store you build talks to nothing until you write the connection yourself. Our post on [building your own feature flags](/blog/build-or-buy-feature-flags) covers the same trade-off.
 
@@ -169,7 +177,7 @@ monthly total        = storage + compute + queue + (engineer hours × loaded rat
 your cost per event  = monthly total ÷ events per month
 ```
 
-Compare the last line to a PostHog bill at the same volume. Take the monthly total from the [pricing calculator](/pricing), with any add-ons you need, and divide it by your monthly events. The free million and the falling tiers mean that average comes out lower than the rates at the top of this page. Run it for month 1, then again for month 36. If an agent is doing the math, point it at our [pricing guide for agents](/pricing/agent-estimates) for the PostHog side.
+Compare the last line to [a PostHog bill](/pricing) at the same volume. Take the monthly total from the [pricing calculator](/pricing), with any add-ons you need, and divide it by your monthly events. The free million and the falling tiers mean that average comes out lower than the rates at the top of this page. Run it for month 1, then again for month 36. If an agent is doing the math, point it at our [pricing guide for agents](/pricing/agent-estimates) for the PostHog side.
 
 The ledger only counts the costs you can put a price on. It leaves out trust, correct data, time away from your product, and the features you'll be asked to build next. Those are real costs too, so weigh them when you compare the two totals.
 
