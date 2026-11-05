@@ -38,7 +38,7 @@ Without it, events from a client with the wrong clock land on the wrong day, a r
 
 Every event goes into [Kafka](/docs/how-posthog-works/ingestion-pipeline) before anything else touches it. Capture only replies to your SDK once Kafka has acknowledged the write on every in-sync replica. The queue absorbs launch-day spikes and bots, and waits out database outages. Events from the same user stay in order.
 
-Any single ID sending more than about 5,000 events a minute moves to an overflow lane, so it can't slow anyone else down. The overflow lane doesn't drop events. If an ingestion worker crashes partway through a batch, Kafka redelivers it. Any event we can't process goes to a dead letter queue instead of disappearing.
+Any single ID sending more than about 5,000 events a minute moves to an overflow lane, so it can't slow anyone else down. The overflow lane doesn't drop events, but while it's active that ID gives up two guarantees: its events can process out of order, and they skip person profile creation and updates. You get an [ingestion warning](/docs/data/ingestion-warnings) when it happens. If an ingestion worker crashes partway through a batch, Kafka redelivers it. Any event we can't process goes to a dead letter queue instead of disappearing.
 
 Without it, a traffic spike or a database restart is data you never get back.
 
