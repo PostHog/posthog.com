@@ -94,7 +94,7 @@ export function Combobox({
                 {description && <p className="text-sm text-secondary m-0 mt-0.5">{description}</p>}
             </div>
             <div
-                className={`bg-primary border border-primary rounded ring-0 px-2.5 py-2 ${
+                className={`relative bg-primary border border-primary rounded ring-0 px-2.5 py-2 ${
                     touched && error ? 'border-red dark:border-yellow' : 'border-primary'
                 }`}
                 onMouseDown={(e) => {
@@ -185,7 +185,8 @@ export function Combobox({
                     <div
                         ref={listRef}
                         role="listbox"
-                        className="mt-1 max-h-40 overflow-auto rounded border border-primary bg-primary focus:outline-none"
+                        // Floats under the field, so opening it does not push the content below down.
+                        className="absolute left-0 right-0 top-full z-20 mt-1 max-h-40 overflow-auto rounded border border-primary bg-primary shadow-lg focus:outline-none"
                     >
                         {filtered.map((opt, idx) => (
                             <button

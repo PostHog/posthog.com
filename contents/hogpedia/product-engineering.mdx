@@ -1,0 +1,70 @@
+---
+title: Product engineering
+description: Product engineering is the practice of an engineer owning what to build as well as how to build it. A product engineer instruments a change, measures it, and decides what to do next, rather than receiving a specification.
+hogpedia:
+    categories: ['Concepts']
+    aliases: ['Product engineer']
+    infobox:
+        title: Product engineering
+        hog: HedgehogCodingGroup
+        rows:
+            - label: Type
+              value: Engineering practice
+            - label: Held by
+              value: The product engineer
+            - label: Contrasts with
+              value: Specification-driven development
+            - label: Reference
+              value: '[/for/product-engineers](/for/product-engineers)'
+    seeAlso:
+        - 'PostHog|/hogpedia/posthog'
+        - 'Feature flags|/hogpedia/feature-flags'
+        - 'A/B testing|/hogpedia/a-b-testing'
+        - 'The PostHog Handbook|/hogpedia/the-posthog-handbook'
+    references:
+        - id: 1
+          text: 'PostHog handbook, "Why does PostHog exist?"'
+          url: /handbook/why-does-posthog-exist
+        - id: 2
+          text: 'PostHog handbook, "Small teams"'
+          url: /handbook/company/small-teams
+        - id: 3
+          text: 'PostHog, for product engineers'
+          url: /for/product-engineers
+    external:
+        - title: 'PostHog for product engineers'
+          url: /for/product-engineers
+        - title: 'The PostHog Handbook'
+          url: /handbook
+---
+
+**Product engineering** is the practice of an engineer owning what to build as well as how to build it. A **product engineer** decides which change is worth making, ships it, measures whether it worked, and decides what follows – rather than receiving a specification and returning an implementation.
+
+The term describes a division of responsibility, not a technology. An engineer can practice it with any tools.
+
+## Background
+
+The conventional division puts the decision with a product manager and the implementation with an engineer. It has a real justification: it lets each person become expert at one thing.
+
+It also has a cost. The person who knows what is cheap to build is not the person deciding what to build, and the person who wanted the feature is not the person who finds out whether anyone used it. Information is lost at the boundary, in both directions.
+
+Product engineering removes the boundary for small decisions. It does not remove the need for product management on large ones; it moves the many small choices to the person already holding the context for them.
+
+## What the practice requires
+
+The practice only works when an engineer can act without waiting for someone else. That implies specific tooling:
+
+- **Measurement they can read themselves.** [Product analytics](/hogpedia/product-analytics) has to be available to the person who wrote the code, not delivered as a monthly report.
+- **Release control they hold.** [Feature flags](/hogpedia/feature-flags) let an engineer ship to a few people and undo without a deployment.
+- **A way to attribute a result.** [Experiments](/hogpedia/experiments) turn "the number moved" into "the change moved the number".
+- **Observation, not just numbers.** [Session replay](/hogpedia/session-replay) shows the failure a metric only counts.
+
+This list is also the argument for putting those tools in one place. An engineer who must ask three teams for three logins will not use them mid-task.
+
+## PostHog's position
+
+PostHog states its mission as equipping every developer to build successful products.<Ref id="1" /> The company builds for the product engineer explicitly, and describes the role on a dedicated page.<Ref id="3" />
+
+PostHog also organizes itself this way. The handbook defines a small team as strictly two to six people who own a product area, which puts the decision about what to build inside the team that builds it.<Ref id="2" />
+
+This is a case where a company's product and its internal structure make the same argument, and a reader should weigh it accordingly: PostHog has a commercial interest in the practice it advocates.

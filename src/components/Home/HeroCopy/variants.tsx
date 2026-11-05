@@ -31,44 +31,12 @@ const Paragraph = ({ children }: { children: React.ReactNode }) => (
     <p className="text-balance @xl:text-wrap text-[17px]">{children}</p>
 )
 
-const BodyControl = (): JSX.Element => (
+/** The emphasis clause is the one that gets the blue highlight treatment. */
+export const HERO_HEADLINE = { lead: "Your product's", emphasis: 'context layer' }
+
+export const HeroBodyCopy = (): JSX.Element => (
     <Paragraph>
-        PostHog already has your <Highlight>analytics and errors</Highlight>. Now it{' '}
-        <Underline delay={900}>ships&nbsp;code</Underline> to help you build a better product.
+        PostHog ingests and stores your <Highlight>analytics, errors, replays, and business data</Highlight> so you and
+        your <Underline delay={900}>agents</Underline> can query and act on it.
     </Paragraph>
 )
-
-const BodyTest = (): JSX.Element => (
-    <Paragraph>
-        PostHog combines and stores your <Highlight>analytics, errors, replays, and business data</Highlight> so you and
-        your <Underline delay={900}>agents</Underline> can understand and act on it.
-    </Paragraph>
-)
-
-export type HeroCopyVariant = {
-    id: string
-    /** The emphasis clause is the one that gets the blue highlight treatment. */
-    headline: { lead: string; emphasis: string }
-    Body: () => JSX.Element
-}
-
-export const HERO_COPY_VARIANTS: HeroCopyVariant[] = [
-    {
-        id: 'control',
-        headline: { lead: 'Make your product', emphasis: 'self-driving' },
-        Body: BodyControl,
-    },
-    {
-        id: 'test',
-        headline: { lead: 'Give your agents', emphasis: 'product context' },
-        Body: BodyTest,
-    },
-]
-
-export const DEFAULT_HERO_COPY_VARIANT = HERO_COPY_VARIANTS[0]
-
-export function resolveHeroCopyVariant(value: string | null | undefined): HeroCopyVariant | null {
-    if (!value) return null
-    const normalized = value.trim().toLowerCase()
-    return HERO_COPY_VARIANTS.find(({ id }) => id === normalized) ?? null
-}

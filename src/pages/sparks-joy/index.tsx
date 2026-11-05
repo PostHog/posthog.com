@@ -3,9 +3,18 @@ import ReaderView from 'components/ReaderView'
 import SEO from 'components/seo'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { explorerGridColumns } from '../../constants'
-import { SparksJoyItems } from '../../components/TaskBarMenu/menuData'
-import { AppLink, AppIcon } from 'components/OSIcons/AppIcon'
+import { SparksJoyItems } from '../../data/sparksJoyItems'
+import { AppLink } from 'components/OSIcons/AppIcon'
 import ZoomHover from 'components/ZoomHover'
+import {
+    HedgehogBackToTheFuture,
+    HedgehogCodingGroup,
+    HedgehogDj,
+    HedgehogReading,
+    HedgehogReadingIsMagic,
+    HedgehogRose,
+    HedgehogSurfer,
+} from '@posthog/brand/hoggies'
 
 export default function SparkJoy(): JSX.Element {
     return (
@@ -29,36 +38,22 @@ export default function SparkJoy(): JSX.Element {
                         items={[
                             {
                                 value: 'games',
-                                trigger: (
-                                    <span>
-                                        Games (
-                                        {SparksJoyItems.games.filter((item) => item.iconName || item.customIcon).length}
-                                        )
-                                    </span>
-                                ),
+                                trigger: <span>Games ({SparksJoyItems.games.length})</span>,
                                 content: (
                                     <div
                                         className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                     >
-                                        {SparksJoyItems.games
-                                            .filter((item) => item.iconName || item.customIcon)
-                                            .map((item) => (
-                                                <ZoomHover key={item.link} className="w-28 justify-center">
-                                                    <AppLink
-                                                        label={item.label}
-                                                        url={item.link}
-                                                        external={item.external}
-                                                        Icon={
-                                                            item.iconName ? (
-                                                                <AppIcon name={item.iconName} />
-                                                            ) : (
-                                                                item.customIcon
-                                                            )
-                                                        }
-                                                        className="size-12"
-                                                    />
-                                                </ZoomHover>
-                                            ))}
+                                        {SparksJoyItems.games.map((item) => (
+                                            <ZoomHover key={item.link} className="w-28 justify-center">
+                                                <AppLink
+                                                    label={item.label}
+                                                    url={item.link}
+                                                    external={item.external}
+                                                    Icon={item.icon}
+                                                    className="size-12"
+                                                />
+                                            </ZoomHover>
+                                        ))}
                                     </div>
                                 ),
                             },
@@ -72,44 +67,99 @@ export default function SparkJoy(): JSX.Element {
                         items={[
                             {
                                 value: 'grab-bag',
-                                trigger: (
-                                    <span>
-                                        Grab bag (
-                                        {
-                                            SparksJoyItems.notGames.filter((item) => item.iconName || item.customIcon)
-                                                .length
-                                        }
-                                        )
-                                    </span>
-                                ),
+                                trigger: <span>Grab bag ({SparksJoyItems.notGames.length})</span>,
                                 content: (
                                     <div
                                         className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                     >
-                                        {SparksJoyItems.notGames
-                                            .filter((item) => item.iconName || item.customIcon)
-                                            .map((item) => (
-                                                <ZoomHover key={item.link} className="w-28 justify-center">
-                                                    <AppLink
-                                                        label={item.label}
-                                                        url={item.link}
-                                                        external={item.external}
-                                                        Icon={
-                                                            item.iconName ? (
-                                                                <AppIcon name={item.iconName} />
-                                                            ) : (
-                                                                item.customIcon
-                                                            )
-                                                        }
-                                                        className="size-12"
-                                                    />
-                                                </ZoomHover>
-                                            ))}
+                                        {SparksJoyItems.notGames.map((item) => (
+                                            <ZoomHover key={item.link} className="w-28 justify-center">
+                                                <AppLink
+                                                    label={item.label}
+                                                    url={item.link}
+                                                    external={item.external}
+                                                    Icon={item.icon}
+                                                    className="size-12"
+                                                />
+                                            </ZoomHover>
+                                        ))}
                                     </div>
                                 ),
                             },
                         ]}
                         defaultValue="grab-bag"
+                    />
+                    <Accordion
+                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:gap-2 [&>span]:after:h-0.5 [&>span]:after:flex-1 [&>span]:after:bg-border [&>span]:after:content-['']"
+                        items={[
+                            {
+                                value: 'time-machine',
+                                trigger: <span>Time machine (7)</span>,
+                                content: (
+                                    <div
+                                        className={`@md:pl-4 grid ${explorerGridColumns} gap-y-4 items-start justify-items-center gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                    >
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogpedia"
+                                                url="/hogpedia"
+                                                Icon={<HedgehogReading className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogspace"
+                                                url="/hogspace"
+                                                Icon={<HedgehogDj className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogbook"
+                                                url="/hogbook"
+                                                Icon={<HedgehogBackToTheFuture className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hogreads"
+                                                url="/hogreads"
+                                                Icon={<HedgehogReadingIsMagic className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="Hoglr"
+                                                url="/sparks-joy/hoglr"
+                                                Icon={<HedgehogSurfer className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="OnlyHogs"
+                                                url="/sparks-joy/onlyhogs"
+                                                Icon={<HedgehogRose className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                        <ZoomHover className="w-28 justify-center">
+                                            <AppLink
+                                                label="hogBB"
+                                                url="/hogbb"
+                                                Icon={<HedgehogCodingGroup className="size-12" />}
+                                                className="size-12"
+                                            />
+                                        </ZoomHover>
+                                    </div>
+                                ),
+                            },
+                        ]}
+                        defaultValue="time-machine"
                     />
                 </div>
             </ReaderView>

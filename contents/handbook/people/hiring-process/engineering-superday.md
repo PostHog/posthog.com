@@ -9,11 +9,13 @@ If you've been invited to a PostHog SuperDay, here's what to expect and how to s
 
 ## What the SuperDay looks like
 
-The SuperDay is a paid full day of work ($1,000 USD). You'll receive a project task at the start of your day and submit your work at the end. The project is the main focus -- you'll build something from scratch, tailored to the role you're applying for. Expect to spend the majority of your day on it.
+The SuperDay is a paid full day of work ($1,000 USD). You'll receive a project task at the start of your day and submit your work when you wrap up. The project is the main focus -- you'll build something from scratch, tailored to the role you're applying for. Expect to spend the majority of your day on it.
+
+Treat it as a day of work, at a pace that works for you. There's no hard cutoff time. Most candidates spend around 8–10 hours working on the challenge before submitting, but that's a guide, not a requirement.
 
 Scheduled throughout the day, you'll also have:
 
-- **A debugging session (45 min)** -- a separate pairing session where you'll work through bugs and features in an existing codebase with an interviewer. This is a different codebase from your project.
+- **A debugging session (45 min, not all roles)** -- a separate pairing session where you'll work through bugs and features in an existing codebase with an interviewer. This is a different codebase from your project.
 - **A check-in call** -- your SuperDay buddy (the same engineer available to help you in Slack) will review your project progress partway through the day, ask about your decisions, and offer feedback.
 - **A short chat with a co-founder or exec** -- a brief conversation about culture and motivation.
 
@@ -62,6 +64,8 @@ We notice when someone asks "what would actually help a user here?" and lets tha
 
 ## The debugging session
 
+_Not every SuperDay includes it. If yours includes one, we'll tell you clearly in your SuperDay invite._
+
 ### What to expect
 
 You'll join a live coding environment with an interviewer and work through a series of problems in an unfamiliar codebase. The problems range from fixing bugs to improving performance to implementing a small feature. You won't know the codebase in advance -- that's the point.
@@ -91,7 +95,7 @@ You're allowed to use Google for reference, but we ask that you don't use AI too
 
 You can use AI tools during the project portion of the day -- we know this is how many engineers work. But you need to *understand* what you've built. During the check-in, we'll ask you to walk through your architecture, explain your decisions, and reason about your code. If you can't defend and explain your solution, it won't matter how polished it looks.
 
-For the debugging session, we ask that you don't use AI tools beyond basic autocomplete. We want to see how you reason about code.
+For the debugging session, we ask that you don't use AI tools. We want to see how you reason about code.
 
 ## What comes next
 

@@ -3,7 +3,7 @@ import { Blockquote } from 'components/BlockQuote'
 import { InlineCode } from 'components/InlineCode'
 import Link from 'components/Link'
 import { Contributor } from 'components/PostLayout/Contributors'
-import { SEO, type LanguageAlternate } from 'components/seo'
+import { SEO } from 'components/seo'
 import { ZoomImage } from 'components/ZoomImage'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
@@ -292,10 +292,10 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         featuredImageCaption,
         featuredVideo,
         featuredImageType,
+        ogImage,
         contributors,
         tags,
         seo,
-        lang,
     } = postData?.frontmatter
     const lastUpdated = postData?.parent?.fields?.gitLogLatestDate
     const filePath = postData?.parent?.relativePath
@@ -328,18 +328,16 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         ...shortcodes,
     }
     const initialTag = undefined
-    const { tableOfContents, askMax, localizedRoot } = pageContext
-    const languageAlternates = pageContext.languageAlternates as LanguageAlternate[] | undefined
+    const { tableOfContents, askMax } = pageContext
     const { fullWidthContent, theoMode } = useLayoutData()
     const { pathname } = useLocation()
     const [postID, setPostID] = useState()
     const [posthogInstance, setPosthogInstance] = useState()
 
-    const initialRoot = localizedRoot || (pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
     const activeMenu = useMemo(() => {
-        return menu.find(({ url }) => url?.split('/')[1] === initialRoot)
-    }, [initialRoot])
-    const [root, setRoot] = useState(initialRoot)
+        return menu.find(({ url }) => url?.split('/')[1] === pathname.split('/')[1])
+    }, [])
+    const [root, setRoot] = useState(pathname.split('/')[1] !== 'posts' ? pathname.split('/')[1] : undefined)
     const [sort, setSort] = useState(getSortOption(root))
     const [tag, setTag] = useState(initialTag)
 
@@ -387,16 +385,19 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         setParams(getParams(root, tag, sort.sort))
     }, [root, tag, sort])
 
+    const ogImageUrl =
+        featuredImage?.publicURL && ogImage !== 'generated'
+            ? featuredImage.publicURL
+            : `${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`
+
     return (
         <>
             <SEO
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={ogImageUrl}
                 imageType="absolute"
-                lang={lang || (languageAlternates ? 'en' : undefined)}
-                languageAlternates={languageAlternates}
                 // Standard.site document rkey (only for /blog posts; this template is shared with other sections)
                 documentRkey={
                     fields?.slug?.startsWith('/blog/')
@@ -420,11 +421,6 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         ) : (
                             <TreeMenu
                                 key={`posts-${posts?.length}`}
-                                activeUrl={
-                                    localizedRoot
-                                        ? languageAlternates?.find((alt) => alt.hrefLang === 'en')?.href
-                                        : undefined
-                                }
                                 items={posts?.map((post) => {
                                     return {
                                         name: post.attributes.title,
@@ -459,7 +455,8 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={title}
                 tableOfContents={tableOfContents}
                 mdxComponents={components}
-                homeURL={localizedRoot ? '/newsletter' : `/${root}`}
+                renderMdx={(content) => <MDXRenderer>{content}</MDXRenderer>}
+                homeURL={`/${root}`}
             />
         </>
     )
@@ -502,6 +499,7 @@ export const query = graphql`
                 hideAnchor
                 description
                 featuredImageType
+                ogImage
                 featuredVideo
                 featuredImage {
                     publicURL
@@ -510,7 +508,6 @@ export const query = graphql`
                     }
                 }
                 featuredImageCaption
-                lang
                 contributors: authorData {
                     id
                     name

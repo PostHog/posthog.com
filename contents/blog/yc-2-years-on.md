@@ -10,9 +10,14 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+ogImage: generated
 category: CEO diaries
 tags:
   - Y Combinator
+  - Founders
+  - CEO diaries
+crosspost:
+  - Founders
 ---
 
 [Y Combinator](https://www.ycombinator.com/) (YC) is seen as the world's best, and most prolific, three-month accelerator program. Upwards of 7,000 founders have taken part. Yet, no one really talks about what happens afterwards.

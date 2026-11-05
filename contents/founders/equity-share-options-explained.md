@@ -6,10 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/equity.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
-  - Ops & finance
-  - People
+  - Running the company
 crosspost:
   - Blog
 ---

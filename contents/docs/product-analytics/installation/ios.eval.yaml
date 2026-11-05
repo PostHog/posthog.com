@@ -1,0 +1,23 @@
+owner: wizard-and-docs
+tags: [install, ios]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a iOS app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: ios-app
+      prompt: >-
+          Set up PostHog in the iOS app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  The PostHog iOS SDK is a dependency: a Swift Package reference to
+                  https://github.com/PostHog/posthog-ios.git, or a PostHog pod.
+              initialized: >-
+                  The app imports PostHog, creates PostHogConfig(projectToken:host:)
+                  with the project token and PostHog host, and calls
+                  PostHogSDK.shared.setup(config) at launch. Cite the file and line(s).

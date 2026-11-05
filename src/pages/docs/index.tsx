@@ -5,9 +5,10 @@ import * as Icons from '@posthog/icons'
 import ReaderView from 'components/ReaderView'
 import OSButton from 'components/OSButton'
 import { AppsList } from 'components/Docs/AppsList'
-import Book, { BookShelf } from 'components/PocketGuides/Book'
+import Book, { BookShelf } from 'components/Learn/PocketGuides/Book'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
+import { TWIG_URL } from '../../constants'
 import usePostHog from '../../hooks/usePostHog'
 import { useApp } from '../../context/App'
 
@@ -44,7 +45,11 @@ const IconLink = ({
 }) => {
     const Icon = (Icons[icon as keyof typeof Icons] as any) || Icons.IconBook
     return (
-        <Link to={to} className="flex items-start gap-2 text-sm font-medium text-primary hover:underline">
+        <Link
+            to={to}
+            externalNoIcon={to.startsWith('http')}
+            className="flex items-start gap-2 text-sm font-medium text-primary hover:underline"
+        >
             <Icon className={`mt-0.5 size-4 shrink-0 text-${color}`} />
             <span className="leading-snug">{children}</span>
         </Link>
@@ -66,6 +71,13 @@ const pathCards = [
         url: '/docs/self-driving',
         icon: 'IconStack',
         color: 'red',
+    },
+    {
+        name: 'Try PostHog interactively',
+        description: 'Build an event and see what PostHog captures.',
+        url: TWIG_URL,
+        icon: 'IconPlay',
+        color: 'orange',
     },
 ]
 
@@ -98,13 +110,6 @@ const surfaces = [
         icon: 'IconTerminal',
         color: 'green',
         description: 'Query your data and ship work from your terminal.',
-    },
-    {
-        name: 'Desktop',
-        url: '/docs/posthog-desktop',
-        icon: 'IconCoffee',
-        color: 'burnt-orange',
-        description: 'Run tasks, review code, and use any model from your desktop.',
     },
 ]
 const sdkSections = [

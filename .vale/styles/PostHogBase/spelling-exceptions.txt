@@ -102,6 +102,7 @@ fanbase
 favicon
 faq
 frontend
+frontmatter
 fullstack
 fundraise
 fuzzer
@@ -120,9 +121,10 @@ hotfixes
 hotspots
 idempotency
 impactful
+infobox
+infoboxes
 innersource
 kanban
-ko
 linter
 lockfile
 lockfiles
@@ -130,6 +132,7 @@ lookups
 loopback
 matcher
 matchers
+meep
 memoization
 memoize
 memoized
@@ -146,6 +149,7 @@ misconfigure
 misconfigured
 mockup
 mockups
+monoline
 monorepo
 monorepos
 monospace
@@ -154,8 +158,10 @@ mutex
 namespace
 namespaced
 namespaces
+nightmarishly
 noob
 noobs
+oauth
 offboard
 offboarded
 offboarding
@@ -197,6 +203,7 @@ regex
 regexes
 repo
 repos
+resizable
 roadmap
 roadmaps
 rollout
@@ -209,6 +216,7 @@ runtime
 runtimes
 semver
 serverless
+shortcodes
 sidepanel
 sidepanels
 signup
@@ -220,6 +228,7 @@ sparklines
 standup
 stylesheet
 stylesheets
+submenu
 subprocessor
 subprocessers
 subreddit
@@ -231,6 +240,7 @@ syslog
 symbolify
 symbolifcation
 stonks
+taskbar
 teardown
 timebox
 timeboxed
@@ -244,6 +254,7 @@ tooltips
 toolchain
 toolkit
 truthy
+unarchived
 unminify
 unminified
 uptime

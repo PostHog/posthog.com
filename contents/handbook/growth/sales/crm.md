@@ -6,14 +6,14 @@ showTitle: true
 
 ## Overview
 
-We use [Salesforce](https://posthog.lightning.force.com/lightning/page/home) as our customer relationship management ('CRM') platform. If you need access, you can ask <TeamMember name="Mine Kansu" photo /> for an invite.
+We use <PrivateLink url="https://posthog.lightning.force.com/lightning/page/home">Salesforce</PrivateLink> as our customer relationship management ('CRM') platform. If you need access, you can ask <TeamMember name="Mine Kansu" photo /> for an invite.
 
 As a first step, make sure you connect your Gmail account under your Salesforce settings. Go to Settings → Connected Accounts → Gmail and connect it. This ensures all your customer emails sync automatically with Salesforce. 
 Next, make sure your Gmail account is connected in <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally</PrivateLink>. This is essential so that we capture the full customer context and avoid duplicate or conflicting outreach.
 
 As a general principle, we try to make sure as much customer communication as possible is captured in Salesforce rather than in individual email inboxes so that we make sure our users are getting a great experience (and not confusing or duplicate messages from different team members!). You should use the channel that suits the user, not us. Just make sure you keep Salesforce up to date with your interactions. We’ve found Slack messages usually get better response rates than email.
 
-For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the [personal settings page](https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home) in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
+For existing customers, you'll sometimes send emails directly from <PrivateLink url="https://posthog.vitally-eu.io/">Vitally</PrivateLink>. To ensure these also make it to Salesforce, first look up your _Email to Salesforce Address_ from the <PrivateLink url="https://posthog.lightning.force.com/lightning/settings/personal/EmailToSalesforceUserSetup/home">personal settings page</PrivateLink> in Salesforce, and then add it to your <PrivateLink url="https://posthog.vitally-eu.io/settings/profile/gmail">Vitally gmail settings</PrivateLink>.
 
 All Slack messages sync up with the corresponding account in Salesforce. We use [SupportHog](/handbook/growth/sales/slack-channels) for this sync, so make sure SupportHog is [added to the customer Slack channel](/handbook/growth/sales/slack-channels) and the channel's name is recorded on the relevant Salesforce account record for the sync to work smoothly.
 
@@ -46,9 +46,9 @@ When a `user signed up` (Cloud signup) event is ingested into PostHog, a <Privat
 
 ### Completed contact form
 
-We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to [#sales-leads](https://posthog.slack.com/archives/C054BJSHG82) in Slack when one of these forms is submitted.
+We have a [contact us form](/talk-to-a-human) on posthog.com where we ask users can get in touch with us. The sales@ alias gets an email notification and a notification is also sent to <PrivateLink url="https://posthog.slack.com/archives/C054BJSHG82">#sales-leads</PrivateLink> in Slack when one of these forms is submitted.
 
-Each submission sends a server-side PostHog event and a webhook into our lead routing pipeline (Default). The [lead-gateway](https://github.com/PostHog/lead-gateway) then creates or updates the Salesforce contact, links it to the account, and creates a Lead Task. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
+Each submission sends a server-side PostHog event and a webhook into our lead routing pipeline (Default). The <PrivateLink url="https://github.com/PostHog/lead-gateway">lead-gateway</PrivateLink> then creates or updates the Salesforce contact, links it to the account, and creates a Lead Task. Tasks are then automatically assigned to the right team member based on account ownership and territory (see below).
 
 If the submission is clearly a support or billing request, you don’t need to reach out manually:
 - On the task, select the disqualification reason **Billing Support Request** or **Support Request**.
@@ -71,6 +71,8 @@ When a new task is created, we first check whether the associated account alread
 
 - If the account has an owner, task is automatically assigned to that person.
 - If the account is unowned, account and task are assigned to a salesperson via round robin within their territory.
+
+A round robin assignment makes you a temporary owner only. It does not count toward your quota. See [account ownership in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics).
 
 This ensures we avoid double assignments and maintain clear ownership.
 
@@ -153,19 +155,19 @@ If you meet a potential customer elsewhere (e.g., events, introductions, referra
 
 For support or billing questions submitted via the sales channel, disqualify with **Support Request** or **Billing Support Request** as in [Completed contact form](#completed-contact-form) (Zendesk ticket automation). If you still see legacy lead records from older flows, the same reasons apply; ticket creation may use [this Zapier path](https://zapier.com/editor/274433115/published) for some automations.
 
-#### Billing vs. finance: who owns what
+#### Billing vs. finance vs. RevOps: who owns what
 
-Billing and finance questions look similar but go to different teams. Route by what the customer is actually asking for:
+Billing, finance, and RevOps questions look similar but go to different teams. Route by what the customer is actually asking for:
 
-- **Invoices → billing team** Questions about what an invoice says or what information goes on it — line items, amounts, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="billing" /> owns the invoice itself.
+- **Invoices → revops team** Questions about what an invoice says or what information goes on it — line items, amounts, dates, the entity we bill under, or adding a PO number to an invoice. The <SmallTeam slug="revops" /> owns the invoice itself.
 
 - **Collections → finance team** Anything about getting paid or where an invoice needs to go — requests to upload an invoice to a customer's payment portal (e.g. Zip, Coupa, Ariba), supplier-onboarding or vendor-setup forms, requests for extra documentation or information from us, and chasing overdue payments.
 
-A quick test: if the question can be answered by reading or correcting the invoice, it's **billing**. If it asks us to send the invoice somewhere specific, complete a form, or provide extra information, it's **finance**.
+- **Contracts and credits → RevOps team** Anything about how a prepaid contract turns into credits and invoices — which invoices a credit balance pays, when credits start and expire, how much [rolls over at renewal](/handbook/growth/sales/contract-rules#when-they-will-end-the-contract-term-with-credit-remaining), contract start and end dates, upfront invoices for signed order forms, credit notes, and refunds that need an invoice change. The <SmallTeam slug="revops" /> sets up the subscription after an order form closes, so ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
-Tax is owned by finance, who handle tax determination and compliance via Anrok. Billing only gets involved when a specific tax amount has to appear as an explicit line item on an invoice. For anything about tax rates, treatment, or whether tax applies, ask finance.
+Tax is owned by finance, who handle tax determination and compliance via Anrok. RevOps only gets involved when a specific tax amount has to appear as an explicit line item on an invoice. For anything about tax rates, treatment, or whether tax applies, ask finance.
 
-This comes up most with managed customers, where POs and payment notices sit at the intersection of sales, billing, and finance. These often arrive via the sales channel (the contact form or sales@) even though they belong to billing or finance — disqualify and re-route them using the split above rather than working them as leads.
+This comes up most with managed customers, where POs, payment notices, and renewal credit questions sit at the intersection of sales, billing, finance, and RevOps. 
 
 ### Below Threshold – Auto (Customer.io)
 
@@ -209,7 +211,9 @@ Opportunities track potential deals in Salesforce. Managing opportunities effect
 
 New Revenue: Select this type when engaging with a customer who has never paid us before. This includes new customers and startup customers transitioning to a paid plan for the first time.
 
-New Revenue – Existing Customer: Choose this type for additional credits to a customer who is already paying us. This includes upsells, cross sells, or expansion within the same account.
+New Revenue – Existing Customer: Choose this type for upsells, cross sells, or expansion within the same account.
+
+Credit Top Up: Choose this type for a mid-contract credit purchase from an existing annual contract customer (for example, they bought $50k in credits, then later want an additional $30k before the term ends). Only annual contract Types apply to this record type; see [Opportunity stages](#opportunity-stages) below for its simplified stages.
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
@@ -295,6 +299,12 @@ Exit criteria:
 
 Bolded exit criteria indicate the minimum standard for the opportunity to advance stages (for typically smaller, more transational deals). More detail is available on the stages and the exit criteria for each state <PrivateLink url='https://docs.google.com/spreadsheets/d/1BpLMHZ52iE1Ni0-Hf0Y68RSq0ohNNnJv7Jd90lgSI6s/edit?usp=sharing'>in this spreadsheet</PrivateLink>
 
+The Credit Top Up record type uses a 4-stage process:
+1. Identified
+2. Commercial Agreement
+3. Closed Won (100%)
+4. Closed Lost (0%) - The Loss Reason field is required for any opportunity marked as Closed Lost.
+
 ### Forecast categories
 
 **Commit:** PostHog is integrated and the buyer has stated an intent to purchase within the Close Date quarter.
@@ -309,13 +319,13 @@ Forecast categories should be re-evaluated on an ongoing basis. While it is not 
 
 ### Renewal pipeline
 
-When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](https://posthog.lightning.force.com/builder_platform_interaction/flowBuilder.app?flowId=301Hp0000019zhnIAA) will create an opportunity associated with the contact and account from the original opportunity. The following fields will also be set:
+When an opportunity with Annual Plan type is Closed Won, a Salesforce <PrivateLink url="https://posthog.lightning.force.com/builder_platform_interaction/flowBuilder.app?flowId=301Hp0000019zhnIAA">flow</PrivateLink> will create an opportunity associated with the contact and account from the original opportunity. The following fields will also be set:
 
 -   **Amount** - Copied over from the original opportunity
 -   **ARR up for renewal** - Copied over from the original amount; so that we can track expansion/churn
 -   **Close date** - 4 weeks in the future (may need adjusting if the opportunity record isn't closed on the contract start date)
 
-Keep the renewal opportunity dates in line with the dates we actually invoice against. If the contract dates and the dates in Stripe disagree, the account owner must add a comment on the opportunity that records both dates and the confirmed one, and then correct the opportunity dates. See [when the contract dates and the billing dates don't match](/handbook/cs-and-onboarding/renewals#when-the-contract-dates-and-the-billing-dates-dont-match).
+Keep the renewal opportunity dates in line with the dates we actually invoice against. If the contract dates and the dates in Stripe disagree, the account owner must add a comment on the opportunity that records both dates and the confirmed one, and then correct the opportunity dates. See [when the contract dates and the billing dates don't match](/handbook/customer-success/renewals#when-the-contract-dates-and-the-billing-dates-dont-match).
 
 The renewal pipeline stages are:
 
@@ -382,7 +392,7 @@ Important notes:
 -   Guided Evaluation Help: If they need help with a guided evaluation and their potential value is high enough, create a Slack Connect channel to assist them during the evaluation and keep them in the hands-on pipeline.
 -   None of the Above: If none of the above apply, move them to self-serve.
 
-When moving someone to self-serve we should set them up for success by using the [Post Demo route to self-serve](https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vNpqMAE/view). This encourages them to sign up to PostHog Cloud and provides some helpful getting started pointers. If there were any follow-up questions from initial meeting we should answer those in this email as well.
+When moving someone to self-serve we should set them up for success by using the <PrivateLink url="https://posthog.lightning.force.com/lightning/r/EmailTemplate/00XHp000001vNpqMAE/view">Post Demo route to self-serve</PrivateLink>. This encourages them to sign up to PostHog Cloud and provides some helpful getting started pointers. If there were any follow-up questions from initial meeting we should answer those in this email as well.
 
 > If you move an opportunity to self-serve then it won't be included in your quota retirement/commission calculation (as you aren't working on it).
 

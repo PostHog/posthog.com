@@ -26,6 +26,8 @@ npm install posthog-node
 yarn add posthog-node
 # or
 pnpm add posthog-node
+# or
+bun add posthog-node
 ```
 
 ## Setting up the interceptor
@@ -138,6 +140,16 @@ The interceptor uses an RxJS `catchError` operator to observe exceptions without
 </CalloutBox>
 
 For more details on Error Tracking setup, see the [NestJS Error Tracking installation guide](/docs/error-tracking/installation/nestjs).
+
+## Trace context
+
+Register the [optional Node context processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) on your existing OpenTelemetry provider before requests start. Use the same client passed to `PostHogInterceptor`. Keep your provider, exporter, and sampler.
+
+The interceptor adds missing `sessionId` and `posthogDistinctId` attributes to an active request span after reading the request headers. The processor adds them to child spans when they start. Existing canonical attributes take precedence. Missing IDs stay absent.
+
+With the Express and Fastify HTTP adapters, the context stays active for work that the request starts, including work that continues after the response ends. Existing spans keep their IDs. A background job that needs its own IDs needs an explicit context.
+
+This setup was verified for HTTP on both adapters. WebSocket, GraphQL, and custom adapters need separate verification.
 
 ## Next steps
 

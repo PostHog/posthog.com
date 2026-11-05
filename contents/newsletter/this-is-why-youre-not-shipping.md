@@ -95,7 +95,7 @@ Whenever a team gets too big, or it makes sense to form a new one to achieve a g
 
 ![team changes at posthog](https://res.cloudinary.com/dmukukwp6/image/upload/team_change_91f7a8c7dc.png)
 
-A few months ago, for example, we created one team to own both event ingestion and building [our customer data platform](/docs/cdp) and [realtime destinations](/docs/cdp/destinations). This made sense because the two systems needed to work well together.
+A few months ago, for example, we created one team to own both event ingestion and building [our customer data platform](/docs/data-pipelines) and [realtime destinations](/docs/data-pipelines/destinations). This made sense because the two systems needed to work well together.
 
 Recently, however, we've split them into two separate teams again: Ingestion and CDP. Why? Because the problem has moved from "how do we make this work?" to "we need to build more integrations".
 
@@ -115,7 +115,7 @@ PostHog currently comprises 91 people, the vast majority of whom have "engineer"
 
 * Mainly hire technical people into content and marketing roles.
 
-* Hire customer success and sales people with a technical background.
+* Hire customer success and [sales people with a technical background](/blog/technical-account-manager).
 
 * Hire [support engineers who have software development experience](/newsletter/engineeringification-of-everything).
 

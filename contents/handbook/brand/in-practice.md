@@ -75,7 +75,7 @@ PostHog uses Figma Slides for polished presentations. See the [communication gui
 - Don't use slide templates that look like every other B2B SaaS deck.
 - Use the templates supplied by the Graphics Team. Use of the Squeak font is fine for punchy visual moments.
 - PostHog color palette throughout.
-- Hedgehogs can appear – use the art library.
+- Hedgehogs can appear – use the [hedgehog library](https://brand.posthog.com/hoggies).
 
 ### Informal decks (internal, demos)
 

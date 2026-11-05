@@ -8,8 +8,10 @@ A manager at PostHog has a short list of responsibilities:
 1. Setting the right [context](#how-do-i-set-context) for your direct reports to do their jobs
 2. Making sure your direct reports are happy and productive
 3. Acting as the [hiring manager](/handbook/people/hiring-process#the-role-of-the-hiring-manager) for new roles in your team
-4. Creating good plans for new person [onboarding](https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110) and [small team offsites](/handbook/company/offsites#small-team-offsites)
+4. Creating good plans for new person <PrivateLink url="https://github.com/PostHog/company-internal/issues/1517#issuecomment-2411532110">onboarding</PrivateLink> and [small team offsites](/handbook/company/offsites#small-team-offsites)
 5. Collaborating with execs on team performance concerns that need early intervention
+6. [Communicating downstream impact to other teams](#working-with-other-teams) as needed
+7. Leading [quarterly goal setting](/handbook/company/goal-setting) for your team and ensuring goals are published
 
 That's it.
 
@@ -24,6 +26,16 @@ A manager at PostHog is _not_ responsible for:
 8. Deciding to hire or fire people - the exec team do this
 
 This guidance applies to all teams, irrespective of whether you manage an engineering or non-engineering team. 
+
+## Working with other teams
+
+Everything above is about your own team. If you are a [team lead](/handbook/company/small-teams#what-is-the-role-of-the-team-lead), you also owe a few things to other teams and are responsible for communicating downstream impact to them. 
+
+This includes...
+
+1. Making sure downstream teams are told before your team ships something that affects them. If you don't, Marketing, Sales, and Support hear about it from customers first. This covers [launches](/handbook/company/small-teams#launching-new-products-and-features), but also pricing changes, deprecations, and infrastructure changes. If in doubt, try to overcommunicate.
+2. Put your [quarterly goals](/handbook/company/goal-setting#publishing-and-viewing-goals) on your team page, so other teams can see them on the [WIP page](/wip) without asking you.
+3. If you manage other team leads, clarifying to them where you will set goals and track work so that they have appropriate context. 
 
 ### Part-time managers
 
@@ -133,7 +145,7 @@ We have compared statistics in Weave against other (imperfect!) metrics that can
 
 Two things:
 - You will conduct the technical interview by default. You'll also kick off the SuperDay with candidates, and be their main point of contact in Slack. Please help us keep hiring moving by giving feedback quickly!
-- If you think your team needs someone, make a [new hire request](https://github.com/PostHog/company-internal/issues/new/choose). The exec and people team are generally on top of hiring for all teams, but this is a good approach if you think something has been missed. You'll also be asked to do one of these anyway if we're hiring for a new type of role.
+- If you think your team needs someone, make a <PrivateLink url="https://github.com/PostHog/company-internal/issues/new/choose">new hire request</PrivateLink>. The exec and people team are generally on top of hiring for all teams, but this is a good approach if you think something has been missed. You'll also be asked to do one of these anyway if we're hiring for a new type of role.
 
 See the `#technical-interviewers` channel for more info here. 
 
@@ -146,6 +158,25 @@ As such, management roles are paid on the same pay scale as other ICs. Becoming 
 Management is a skill of its own, and it's not any more important than any other skills that make someone a great IC. It's possible that you may be a manager for a short time, but it becomes clear that your strengths lie primarily in the other skills that are involved with being an IC. In this case we might move you back to a pure IC position, where your skills can really shine, and move someone else from your team or from around the company into the manager / team lead role.
 
 Additionally, managers who are excelling with their teams may have limited interaction with their own manager. This is because, as discussed [above](#part-time-managers), management is intentionally spread thin. If you feel like your manager is mostly ignoring you, this isn't necessarily a bad thing and usually means you and your team are doing a fine job!
+
+## What to expect from your Blitzscale team member if they are your manager
+
+The Blitzscale team's mission is to enable all other PostHog small teams to be successful. If you report into a Blitzscale team member here is what you can expect from them:- 
+
+- They will make sure you know what our mission is and how you and your team contribute to that
+- They will make sure you know what our strategy is and how you and your team contribute to that
+- They will share context with you from outside of your team
+- they will be responsible for balancing people and work amongst their teams - this also involves hiring and firing decisions, although they will rely on you to gather insights into these areas
+- They will reinforce good cultural behaviour & our values
+- They will help you prioritize when time or resources are limited aka unblock you 
+- They will re-orient you in the right direction if needed
+
+Here is a list of things you should not expect from them
+- micromanaging
+- lots of 1-1s
+- a detailed plan of how to do your job or be a manager
+- regularly work through problems live.... it's "you're the driver" not "blitzscale team member is the driver" it's not as catchy 
+
 
 ## Recommended reading
 

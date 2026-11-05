@@ -10,7 +10,7 @@ Prerequisites
 - You need access to the billing admin (billing.posthog.com).  Ask Raquel or Simon for access.
 
 Process for giving a customer a free trial:
-1. Log in to [Billing](https://billing.posthog.com/admin/) with your Google SSO login.
+1. Log in to <PrivateLink url="https://billing.posthog.com/admin/">Billing</PrivateLink> with your Google SSO login.
 2. Click the `Trials` link on the left sidebar.
 3. Click the `Add Trial` button (top right).
 4. Fill out the trial form
@@ -37,13 +37,13 @@ For customers with existing paid subscriptions we need to complete additional st
    
 If they need a shared Slack channel as part of the trial, [follow these instructions.](/handbook/growth/sales/slack-channels)
 
-Consider framing a collaborative method for progressing in the trial period with timed objectives. If it's new and depending on the level of engagement, we can use a detailed [success plan](/handbook/cs-and-onboarding/onboarding-success-plan).
+Consider framing a collaborative method for progressing in the trial period with timed objectives. If it's new and depending on the level of engagement, we can use a detailed [success plan](/handbook/customer-success/onboarding-success-plan).
 
 ## Spend caps during a trial
 
-A trial lifts the free tier on every product except four: Replay Vision, Desktop, PostHog AI, and Inbox. These meter model tokens, so a trial leaves a spend cap on them rather than making them unlimited.
+A trial lifts the free tier so a customer can try what they do not pay for. It leaves a spend limit they set exactly as it stands outside the trial, on every product.
 
-On those four, a limit the customer set stands, including a limit of $0. Where they set none, the trial caps the product:
+Four products also get a cap where the customer set no limit: Replay Vision, Desktop, PostHog AI, and Inbox. These meter model tokens, so an unlimited trial on them is expensive for us. Every other product the customer set no limit on runs unlimited for the length of the trial, which is what a trial is for.
 
 | Product | On a paid plan | No subscription |
 | --- | --- | --- |
@@ -54,6 +54,6 @@ On those four, a limit the customer set stands, including a limit of $0. Where t
 
 A customer on a paid plan pays for what they use, so their own limit is the figure that governs. A customer with no subscription pays nothing, so the cap is what the trial lends them.
 
-On every other product, a trial removes the limit, including one the customer set. Someone who capped session replay at $500 records without a cap for the length of the trial. Their invoice still stops at $500, so we absorb the difference rather than charging them for it.
+An addon reads the limit on its parent. For example, Mobile Session Replay follows the Session Replay limit, and Batch Exports follows Realtime Destinations.
 
 If a prospect needs more than this, raise their spend limit rather than removing it.

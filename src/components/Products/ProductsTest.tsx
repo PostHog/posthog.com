@@ -26,12 +26,12 @@ const sections = [
         title: 'Context warehouse',
         description:
             'Having all your product data in one place means you can make more informed decisions. Push all your data to PostHog, then send it anywhere else you need, too.',
-        link: { label: 'Data stack README', url: '/context-warehouse' },
+        link: { label: 'Data stack README', url: '/warehouse' },
         groups: [
             {
                 label: 'Data I/O',
                 handles: ['data_in', 'data_out'],
-                afterLink: { label: 'View all integrations', url: '/context-warehouse/integrations-library' },
+                afterLink: { label: 'View all integrations', url: '/docs/data-pipelines' },
             },
             {
                 label: 'Manage & query',
@@ -68,14 +68,14 @@ const sections = [
                 label: 'Understand product usage',
                 colSpan: 2,
                 columns: [
-                    ['web_analytics', 'product_analytics', 'trends'],
+                    ['web_analytics', 'marketing_analytics', 'product_analytics', 'trends'],
                     ['funnels', 'user_paths', 'lifecycle', 'heatmaps'],
                     ['ai_observability', 'llm_evals', 'activity'],
                 ],
             },
             {
                 label: 'Debug & fix issues',
-                handles: ['error_tracking', 'logs', 'traces', 'session_replay', 'profiles'],
+                handles: ['error_tracking', 'logs', 'traces', 'metrics', 'session_replay', 'profiles'],
             },
             {
                 label: 'Ship features & get feedback',
@@ -276,7 +276,7 @@ const ProductRow = ({ product }: { product: any }) => {
     const handleClick = (e: React.MouseEvent) => {
         e.preventDefault()
         if (isWIP) return
-        navigate(`/${product.slug}`, { state: { newWindow: true } })
+        navigate(product.url || `/${product.slug}`, { state: { newWindow: true } })
     }
 
     return (

@@ -46,7 +46,7 @@ export default function BlueScreenOfDeath(): JSX.Element {
             const keyURLs: Record<string, string | null> = {
                 escape: null,
                 '1': '/docs',
-                '2': '/questions',
+                '2': '/forum',
                 '3': '/blog',
                 '4': '/tutorials',
             }
@@ -104,7 +104,7 @@ export default function BlueScreenOfDeath(): JSX.Element {
                         <Link to="/docs" className="text-white hover:text-gray-300">
                             [1] Documentation
                         </Link>
-                        <Link to="/questions" className="text-white hover:text-gray-300">
+                        <Link to="/forum" className="text-white hover:text-gray-300">
                             [2] Community Support
                         </Link>
                         <Link to="/blog" className="text-white hover:text-gray-300">

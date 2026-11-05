@@ -35,7 +35,7 @@ While similar in some respects to the EU's General Data Protection Regulation (G
 
 There are two ways to be HIPAA-compliant while using analytics tools:
 
-1. [Self-host your analytics](/best-open-source-analytics-tools), so data remains totally within your control.
+1. [Self-host your analytics](/compare/best-open-source-analytics-tools), so data remains totally within your control.
 2. Sign a Business Associate Agreement (BAA) with a third-party analytics tool.
 
 ## What is a Business Associate Agreement (BAA)?
@@ -58,7 +58,7 @@ It gives you every tool you need to understand user behavior and, unlike typical
 
 Being an all-in-one platform has two further benefits:
 
-1. PostHog can replace multiple products – e.g. [Mixpanel](/compare/best-mixpanel-alternatives) for product analytics, [LaunchDarkly](/compare/best-launchdarkly-alternatives) for feature management, [Sentry](/blog/best-sentry-alternatives) for error tracking, etc.
+1. PostHog can replace multiple products – e.g. [Mixpanel](/compare/best-mixpanel-alternatives) for product analytics, [LaunchDarkly](/compare/best-launchdarkly-alternatives) for feature management, [Sentry](/compare/best-sentry-alternatives) for error tracking, etc.
 2. You only need to sign one BAA to get all these tools, reducing legal complexity and risk.
 
 #### PostHog and HIPAA compliance
@@ -68,6 +68,8 @@ Being an all-in-one platform has two further benefits:
 -   **BAA plan:** [Platform packages](/platform-packages) – $250/mo
 
 A BAA is available on PostHog's [platform packages](/platform-packages), which also includes priority support and generous free usage limits for all tools – e.g. 1 million free analytics events every month. You can also self-host the open-source edition of PostHog, but this isn't recommended as it's provided without guarantee or support.
+
+Health tech companies like [Juno](/customers/juno), an AI health assistant for people with chronic illness, use PostHog to find and fix bugs while user data stays masked and private.
 
 <WizardCTA />
 
@@ -105,7 +107,7 @@ Countly is a privacy-first platform that supports both BAA-based and full data-c
 1. Hosted cloud (managed by Countly).
 2. On-premise (self-hosted on your own infrastructure).
 
-This makes Countly a flexible option whether you want a managed BAA-backed deployment or prefer to [self-host your analytics](/blog/best-open-source-analytics-tools) for full data control.
+This makes Countly a flexible option whether you want a managed BAA-backed deployment or prefer to [self-host your analytics](/compare/best-open-source-analytics-tools) for full data control.
 
 ### 4. Freshpaint
 

@@ -6,9 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-release-notes-blog.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
-  - Ops & finance
+  - Running the company
 crosspost:
   - Blog
 ---

@@ -92,7 +92,7 @@ sendPosthogEvent()
 
 ### Anonymous event capture
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`.
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events), add the `$process_person_profile` property to the event and set it to `false`. Use a random distinct ID that isn't linked to a person profile, such as a UUID, and reuse it for the rest of the visit or session. If the ID already belongs to a person, the event is still linked to that person and counts as an identified event. Anonymous events are stored without person properties and don't link to [groups](/docs/product-analytics/group-analytics), so group analytics doesn't count them.
 
 <MultiLanguage>
 
@@ -337,7 +337,7 @@ print(response.text)
 
 ## Groups
 
-Captures event with a group. In this case, `company` is a [group type](/docs/product-analytics/group-analytics#groups-vs-group-types). You can set it to the value you want such as `organization`, `project`, or `channel`. Read more in our [group analytics docs](/docs/product-analytics/group-analytics).
+Captures event with a group. In this case, `company` is a [group type](/docs/product-analytics/group-analytics#key-concepts). You can set it to the value you want such as `organization`, `project`, or `channel`. Read more in our [group analytics docs](/docs/product-analytics/group-analytics).
 
 > **Note:** This event will **not** create a new group if a new key being used. To create a group, see the [group identify](#group-identify) event.
 

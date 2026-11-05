@@ -72,6 +72,39 @@ When you reply to an email ticket in PostHog:
 
 Email threads are tracked automatically. Replies from the customer land on the same ticket, and your replies appear in the customer's email thread. This works across email clients (Gmail, Outlook, Apple Mail, etc.).
 
+## Start a new email ticket
+
+You can email a customer first, without an incoming email or chat. PostHog creates a ticket and sends your message as the first email.
+
+1. Go to **Support** > **Tickets**.
+2. Click **New ticket**.
+3. In **From**, select the address to send from. Only addresses with a verified domain show. Your primary address is selected by default.
+4. In **To**, enter the customer's email address.
+5. Add a **Subject** (optional) and your **Message**.
+6. Click **Send**.
+
+PostHog opens the new ticket with the status `open`. When the customer replies, the reply goes to the same ticket.
+
+<CalloutBox icon="IconInfo" title="Before you start" type="fyi">
+
+You need at least one connected email address with a verified domain, and editor access to tickets.
+
+</CalloutBox>
+
+### Start a ticket with the API
+
+To start tickets from your own systems, send a request to `POST /api/projects/:project_id/conversations/tickets/compose/`. Use a personal API key with the `ticket:write` scope.
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `recipient_email` | Yes | The customer's email address |
+| `email_config_id` | Yes | The ID of the connected email address to send from |
+| `message` | Yes | The message, in Markdown |
+| `email_subject` | No | The email subject |
+| `recipient_distinct_id` | No | Links the ticket to a person in PostHog |
+
+See the [Conversations API reference](/docs/api/conversations-2) for the full request and response.
+
 ## View email tickets
 
 Email-sourced tickets appear in your [inbox](/docs/support/inbox) alongside widget and Slack tickets. Each email ticket shows:

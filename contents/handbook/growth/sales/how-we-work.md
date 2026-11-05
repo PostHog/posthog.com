@@ -17,7 +17,7 @@ We have three types of roles:
 
 Each TAM is assigned 15 existing customer accounts representing $1.5M to $2M. See [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance) for the full composition targets. Additionally, you will manage inbound leads as they are assigned to you in your territory. Overall, the hard cap on existing book + new leads is 25 accounts, so staying extremely focused is important.
 
-We use the "AM Managed" Segment in Vitally to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Simon or Ben), but can add themselves as the Account Executive in Vitally to make it easier to track things you're working on.
+We use the TAM field in Customer Analytics to show that an account is part of somebody's book of business and therefore included in individual and team quota calculations.  AMs should not assign this themselves (that's up to Ben), but can add themselves as the Account Executive in Customer Analytics to make it easier to track things you're working on.
 
 For Product-led leads we will only add them to your book for quota purposes if you have a solid plan in place for conversion to prepaid credit or cross-product adoption. Account Owners can use the "Leads" Segment in Vitally to separately track these from the main managed book. 
 
@@ -25,7 +25,7 @@ At the end of each quarter we will review your accounts and look to hand off som
 
 #### TAM At-Risk Accounts review meeting
 
-In addition to the weekly sprint planning meeting on a Monday, we do a [weekly territory review standup](/blog/customer-success-at-posthog#200-pm-team-account-review) on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Vitally:
+In addition to the weekly sprint planning meeting on a Monday, we do a [weekly territory review standup](/blog/customer-success-at-posthog#200-pm-team-account-review) on Wednesday. A Technical AM is picked at random and runs through the following for each customer in their book of business in Customer Analytics:
 
 1. Rate your relationship with them (no connection yet/made contact/answering their questions in Slack/trusted advisor)
 2. What's your next step with that customer (annual plan, cross-sell etc).
@@ -52,24 +52,26 @@ The CSM stays on every $20k+ account, so there's no handoff when a TAM's work is
 - Quota is calculated annually, and is paid out quarterly
 - A deal counts toward quota in the quarter of its **effective date**. For annual deals, the effective date is the contract start date or the signature date, whichever is later. For monthly accounts, each payment counts toward the quarter it falls in.
 - Because the signature date sets the floor, a deal can never be credited to a quarter that has already closed, even if its contract start was backdated to align with the customer's current billing period.
-- The Commission rate is 10% flat and uncapped, regardless of whether it is monthly or annual
-	- There is an additional 6.7% incentive on net-new annual contracts 
+- The Commission rate is 10% flat and uncapped on annual agreements. The commission rate is 5% on monthly contracts
 	- There is also an additional 6.7% incentive on growth in annual renewals
 	- There is no additional incentive on monthly payments
- - An account counts toward your quota only from the date it is added to your book (when the `AM Managed` segment is applied). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
+ - An account counts toward your quota only from the date it is added to your book (when the TAM field is set in Customer Analytics). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
 
 **Examples**
-Ator, the TAM has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500 totaling $6,800. The quota realized and paid out to Ator on this account is 10% of the total for that quarter, $680.
+Ator, the TAM, has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500, totaling $6,800. The quota realized and paid out to Ator on this account is 5% of the total for that quarter: $340.
 
-Ator has another book account that he lands on an annual credit purchase that quarter. The first month of the quarter, they paid $8,000 and then they signed an annual credit purchase for $142,857.15 in credits. After discount, they paid PostHog $100,000. Ator realizes: 
-- $10,000 in quota from the 10% on the cash paid
-- $6,700 in quota from the 6.7% incentive to balance out the annual discount
-- $800 from their single monthly payment that quarter
-Ator is paid a total of $17,500 for that account that quarter.
+Ator has another book account that he lands on an annual credit purchase that quarter. In the first month of the quarter, they paid $8,000 on their monthly plan, and then they signed an annual credit purchase for $142,857.15 in credits. After discount, they paid PostHog $100,000. Ator realizes:
+
+- $10,000 in quota from the 10% on the annual cash paid
+- $400 in quota from the 5% on their single monthly payment that quarter
+
+Ator is paid a total of $10,400 for that account that quarter.
 
 Ator has (yet) another book account coming up for renewal. Last year, that account spent $100,000 with PostHog. This year, they are increasing their annual credit purchase to $171,428.57. After discount, they pay PostHog $120,000. Ator realizes:
-- $12,000 in quota from the 10% on the cash paid
-- $1,340 in quota from the 6.7% incentive on the increase over last year
+
+- $12,000 in quota from the 10% on the annual cash paid
+- $1,340 in quota from the 6.7% incentive on the $20,000 increase over last year
+
 Ator is paid a total of $13,340 for this account.
 
 **Effective date example**
@@ -85,14 +87,14 @@ Deals a previous owner signed (including ones with a future-dated start that lan
 
 ### TAM book of business rules
 
-1. Only accounts with the `AM Managed` segment in Vitally will be counted towards your quota.  Simon adds this manually after reviewing with you and your team lead.
-2. All accounts in the `AM Managed` segment need an account plan in Vitally, which is updated and reviewed with your manager regularly.
-3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the `AM Managed` segment to be added until you're happy that there is growth potential there.
-4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Simon will be the tie breaker.  It may be that we need you to work on the account regardless but will treat it as a lead with the same rules as point 3 above.
-5. Accounts which you've previously been paid quota on need to stay in your `AM Managed` book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep them in the `AM Managed` segment for quota calculation purposes and then remove them after the quarterly calculations are complete.
-6. Nominally, you should have around 15 accounts/around $1.5m to $2m ARR in your `AM Managed` book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so be prepared to rebalance with your team lead. (see [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance)). 
+1. Only accounts with the TAM field set in Customer Analytics will be counted towards your quota. Ben adds this manually after reviewing with you and your team lead.
+2. All accounts with the TAM field set need an account plan in Customer Analytics, which is updated and reviewed with your manager regularly.
+3. If you are assigned an account with no previous owner, you have up to 3 months to figure out whether they should be in your book or not. Don't ask for the TAM field to be set until you're happy that there is growth potential there.
+4. If you are assigned an account with a previous owner, work with them on the handover process.  If the customer isn't in a healthy state usage and engagement-wise, feel free to push back and ask for the previous owner's help in getting them to a good state before taking ownership.  If you really can't resolve this, then talk first to your team lead. If you can't resolve it, Ben will be the tie breaker.  It may be that we need you to work on the account regardless but will treat it as a lead with the same rules as point 3 above.
+5. Accounts which you've previously been paid quota on need to stay in your TAM-managed book until they are handed over as per 3 above, or until they churn/fall below $20K ARR.  In this case, we will keep the TAM field set for quota calculation purposes and then remove it after the quarterly calculations are complete.
+6. Nominally, you should have around 15 accounts/around $1.5m to $2m ARR in your TAM-managed book.  There is some wiggle room here, but if you find yourself with 25+ accounts, it's unlikely that you'll be able to give them the level of focus we expect from a TAM, so be prepared to rebalance with your team lead. (see [TAM book balance](/handbook/growth/sales/account-allocation#tam-book-balance)). 
 7. You can have accounts added to your book at any time, if you are comfortable that there is growth potential there.  Removal of accounts should only happen at the end of the quarter so that quota can be calculated.
-8. If you actively work to [reduce a customer's spend with us by optimizing their usage](/blog/customer-success-at-posthog#900-am-the-part-where-we-try-to-reduce-a-customers-bill), we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Simon.  To make the process easier, drop the details of your optimizations as a note on the customer record in Vitally.
+8. If you actively work to [reduce a customer's spend with us by optimizing their usage](/blog/customer-success-at-posthog#900-am-the-part-where-we-try-to-reduce-a-customers-bill), we may exclude that usage drop from quota calculation.  We will review this on a case by case basis but at the very minimum you'll need documented evidence of the work you did to optimize their usage before it dropped.  This should first be reviewed with your team lead who will then ask for approval from Ben.  To make the process easier, drop the details of your optimizations as a note on the customer record in Customer Analytics.
 9. We want you to ensure the customer has paid, and we don't want AMs to throw invoice chasing to a finance person. This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay. You should make the [failed/late payment process](/handbook/growth/sales/billing#failedlate-payments) clear to your customer, especially in the case of a severely delayed payment.
 
 > We have a bunch of accounts where they are declining for reasons that have nothing to do with a TAM’s actions. We also have a bunch where they are growing in the same way. These even each other out in the bigger picture of hundreds of accounts, if anything in favor of the latter.  If they fit the criteria for having a TAM assigned, you should be prepared to continue to manage both types of customers in your book, as churn prevention is a key part of the TAM role too.

@@ -47,7 +47,7 @@ export const posthog = {
             available: true,
             features: {
                 point_scanner: true,
-                configurable_types: 'Monitor, classifier, scorer, summarizer',
+                configurable_types: 'Monitor, classifier, scorer, summarizer, experiment',
                 custom_prompt: true,
                 yes_no_monitors: true,
                 classify_tag: true,
@@ -79,7 +79,7 @@ export const posthog = {
             available: true,
             features: {
                 clickmaps: true,
-                dead_taps: false,
+                dead_taps: true,
                 heatmaps: true,
                 scrollmaps: true,
                 movement_maps: true,
@@ -101,7 +101,7 @@ export const posthog = {
                 error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
-                log_management: 'Beta',
+                log_management: true,
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
@@ -130,7 +130,7 @@ export const posthog = {
                 free_tier: '5,000 web recordings, 2,500 mobile recordings',
             },
             features: {
-                ai_summaries: 'Beta',
+                ai_summaries: true,
                 canvas_recording: true,
                 chat_with_recordings: true,
                 conditional_recording: true,
@@ -138,7 +138,7 @@ export const posthog = {
                 event_timeline: true,
                 export_to_json: true,
                 filter_by_user_or_event: true,
-                highlights: 'Beta',
+                highlights: true,
                 identity_detection: true,
                 iframe_recording: true,
                 minimum_duration: true,
@@ -161,8 +161,8 @@ export const posthog = {
             export: {
                 features: {
                     export_to_json: true,
-                    export_to_video: 'Beta',
-                    retention_policy: 'Up to 3 months',
+                    export_to_video: true,
+                    retention_policy: 'Up to 5 years',
                 },
             },
             platform_support: {
@@ -184,6 +184,13 @@ export const posthog = {
                     heatmaps: true,
                 },
             },
+            ai: {
+                features: {
+                    ai_summaries: true,
+                    replay_vision: true,
+                    ai_observations_as_events: true,
+                },
+            },
         },
         logs: {
             available: true,
@@ -194,12 +201,12 @@ export const posthog = {
                     native_open_telemetry_ingest: true,
                     vendor_agnostic_sdks: true,
                     high_cardinality_indexing: true,
-                    retention: '14 days (custom retention add-on)',
+                    retention: '14 days (custom retention available)',
                 },
             },
             search: {
                 features: {
-                    full_text_search: 'Attribute search',
+                    full_text_search: 'Message and attribute search',
                     no_proprietary_query_language: true,
                 },
             },
@@ -242,6 +249,7 @@ export const posthog = {
                     ingest_only_pricing: true,
                     no_query_compute_fees: true,
                     predictable_at_scale: true,
+                    free_tier: '10 GB',
                 },
             },
         },
@@ -712,7 +720,7 @@ export const posthog = {
                 features: {
                     email: true,
                     sms: true,
-                    push: false,
+                    push: true,
                     webhooks: true,
                     whatsapp: false,
                 },
@@ -843,6 +851,9 @@ export const posthog = {
                 react: true,
                 ruby: true,
                 rust: true,
+                roblox: true,
+                unity: true,
+                kotlin_multiplatform: true,
             },
         },
         pricing: {

@@ -5,10 +5,12 @@ title with a one-line description, then the tool names as minimal pills (hover s
 tool's summary).
 
 Data comes from `McpTool` GraphQL nodes sourced at build time in `gatsby/sourceNodes.ts`,
-which fetches `services/mcp/schema/tool-definitions-all.json` from the
+which fetches `tool-definitions.json` (hand-written tools) and `generated-tool-definitions.json`
+(tools generated from YAML) from `services/mcp/schema/` in the
 [PostHog monorepo](https://github.com/PostHog/posthog) (branch `GATSBY_POSTHOG_BRANCH`,
-default `master`). That schema file is kept in sync with the MCP source by a CI drift
-check, so the list updates automatically on every site build – nothing is hand-maintained
+default `master`) and merges them in `fetchMCPToolDefinitions` (`gatsby/utils/fetchMCPTools.ts`).
+Generated entries win over hand-written ones with the same name, like in the MCP server.
+The list updates automatically on every site build – nothing is hand-maintained
 except the family grouping below.
 
 ## Usage
@@ -34,7 +36,7 @@ exact names; the first matching family wins. Tools matching no family render in 
 shows up, add a proper family for it in `AIO_FAMILIES`.
 
 If no tools were sourced (e.g. a build without network access), it renders a fallback
-link to the schema file on GitHub instead of an empty section.
+link to the schema folder on GitHub instead of an empty section.
 
 ## Used by
 

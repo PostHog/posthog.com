@@ -1,8 +1,7 @@
 import path from 'path'
 import fs from 'fs'
 
-const MCP_TOOLS_URL =
-    'https://raw.githubusercontent.com/PostHog/posthog/refs/heads/master/services/mcp/schema/tool-definitions-all.json'
+const MCP_SCHEMA_BASE_URL = 'https://raw.githubusercontent.com/PostHog/posthog'
 
 // Generated in the main repo by services/mcp/scripts/generate-exec-docs.ts from the same
 // templates the MCP server serves to agents at runtime.
@@ -16,7 +15,8 @@ function truncateDescription(text: string): string {
     return text.slice(0, MAX_DESCRIPTION_LENGTH - 1).trimEnd() + '…'
 }
 
-interface MCPTool {
+export interface MCPTool {
+    title?: string
     category?: string
     feature?: string
     summary: string
@@ -55,6 +55,32 @@ export interface MCPToolsData {
     error: boolean
 }
 
+async function fetchJson<T>(url: string): Promise<T> {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 15000)
+    try {
+        const response = await fetch(url, { signal: controller.signal as any })
+        if (response.status !== 200) {
+            throw new Error(`Failed to fetch ${url}: ${response.status}`)
+        }
+        return (await response.json()) as T
+    } finally {
+        clearTimeout(timeoutId)
+    }
+}
+
+// PostHog/posthog keeps the hand-written and the generated tool definitions in two files and
+// merges them at runtime: generated entries overwrite hand-written ones with the same name
+// (same rule as services/mcp/src/tools/toolDefinitions.ts). Throws if either fetch fails.
+export async function fetchMCPToolDefinitions(branch: string = 'master'): Promise<Record<string, MCPTool>> {
+    const schemaUrl = `${MCP_SCHEMA_BASE_URL}/${branch}/services/mcp/schema`
+    const [handwritten, generated] = await Promise.all([
+        fetchJson<Record<string, MCPTool>>(`${schemaUrl}/tool-definitions.json`),
+        fetchJson<Record<string, MCPTool>>(`${schemaUrl}/generated-tool-definitions.json`),
+    ])
+    return { ...handwritten, ...generated }
+}
+
 async function fetchExecCommandsMarkdown(): Promise<string | null> {
     try {
         const controller = new AbortController()
@@ -81,16 +107,7 @@ async function fetchExecCommandsMarkdown(): Promise<string | null> {
 export async function fetchAndProcessMCPTools(): Promise<MCPToolsData> {
     const execCommands = await fetchExecCommandsMarkdown()
     try {
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 15000)
-        const response = await fetch(MCP_TOOLS_URL, { signal: controller.signal as any })
-        clearTimeout(timeoutId)
-
-        if (response.status !== 200) {
-            throw new Error(`Failed to fetch MCP tools: ${response.status}`)
-        }
-
-        const mcpTools = (await response.json()) as Record<string, MCPTool>
+        const mcpTools = await fetchMCPToolDefinitions()
 
         const toolCategories: Record<string, { feature?: string; tools: ToolCategoryTool[] }> = {}
         const byName: Record<string, ToolByName> = {}

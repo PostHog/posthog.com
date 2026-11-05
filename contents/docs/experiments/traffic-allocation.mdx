@@ -11,7 +11,7 @@ Both are configured in the **Variant rollout** step of the experiment creation w
 
 ## How variants work
 
-Each experiment is backed by a multivariate [feature flag](/docs/feature-flags) (unless you [run without Feature Flags](/docs/experiments/running-experiments-without-feature-flags)). Experiments support one control variant and up to nine test variants. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even across different sessions and devices.
+Each experiment is backed by a multivariate [feature flag](/docs/feature-flags) (unless you [run without Feature Flags](/docs/experiments/running-experiments-without-feature-flags)). Experiments support 2 to 20 variants: a baseline plus up to 19 test variants. Each user is randomly assigned to one of these groups based on their `distinctId`. This assignment is stable, meaning the same user will remain in the same group even across different sessions and devices.
 
 By default, users are split evenly across all variants. You can customize the split by clicking the edit icon next to the **Split** column.
 

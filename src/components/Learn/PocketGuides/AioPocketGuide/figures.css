@@ -1,0 +1,360 @@
+:host {
+    display: block;
+    container-type: inline-size;
+    container-name: aio-figure;
+}
+.aio-root {
+    min-width: 0;
+}
+.aio-root *,
+.aio-root *::before,
+.aio-root *::after {
+    box-sizing: border-box;
+}
+.aio-pair {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+.aio-pair > * {
+    min-width: 0;
+}
+.aio-root .aio-inspector {
+    background: var(--ph-neutral-white);
+    border: 1px solid var(--ph-neutral-border);
+    border-radius: var(--ph-radius-sm);
+    overflow: hidden;
+    color: var(--ph-neutral-ink);
+    font: 400 12px/1.7 PlaygroundRoundHog, sans-serif;
+}
+.aio-root .aio-inspector > h3,
+.aio-root .aio-toolbar h3 {
+    margin: 0;
+    padding: 12px;
+    color: inherit;
+    font: 600 14px/1.45 PlaygroundRoundHog, sans-serif;
+}
+.aio-root .aio-section {
+    margin: 0;
+    padding: 12px;
+    color: inherit;
+    font: 600 14px/1.45 PlaygroundRoundHog, sans-serif;
+}
+.aio-root .aio-note {
+    margin: 0;
+    padding: 12px;
+    font: inherit;
+}
+.aio-root .aio-footnote {
+    margin: 0;
+    padding: 12px;
+    color: var(--ph-neutral-muted);
+    font-size: 11px;
+    font-style: italic;
+    text-align: right;
+}
+.aio-root .aio-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font: inherit;
+}
+.aio-root .aio-table :is(th, td) {
+    padding: 8px 12px;
+    border: 0;
+    color: inherit;
+    text-align: left;
+    vertical-align: top;
+    overflow-wrap: anywhere;
+}
+.aio-root .aio-table th {
+    background: var(--ph-neutral-background);
+    font-weight: 600;
+}
+.aio-root .aio-table td:first-child {
+    width: 55%;
+}
+/* Evidence rows use white by default and the same yellow for selection or emphasis. */
+.aio-root [data-highlighted='false'],
+.aio-root .vac-developer-theme .vac-support-result-row[data-highlighted='false'] {
+    background: var(--ph-neutral-white);
+}
+.aio-root [data-highlighted='true'],
+.aio-root .vac-developer-theme .vac-support-result-row[data-highlighted='true'] {
+    background: var(--ph-code-line-highlight);
+}
+.aio-root .aio-table button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    font: inherit;
+    cursor: pointer;
+}
+.aio-root .aio-table .vac-playground-status {
+    font-size: 12px;
+}
+.aio-root :is(code, pre) {
+    font-family: var(--ph-font-code);
+    font-size: 12px;
+}
+.aio-root code {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+}
+.aio-root .aio-input {
+    margin: 0;
+    padding: 12px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.aio-root .aio-choices {
+    margin: 0;
+}
+.aio-root .vac-developer-theme .vac-request-tabs,
+.aio-root .vac-developer-theme .vac-ai-generation .vac-request-tabs {
+    display: flex;
+    margin: 0;
+    border: 1px solid var(--ph-neutral-border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.aio-root .vac-request-tabs [aria-selected='true'] {
+    background: var(--ph-neutral-white);
+    color: var(--ph-neutral-ink);
+}
+.aio-root .aio-choices + .aio-pair {
+    margin-top: 16px;
+}
+.aio-root .aio-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+}
+.aio-root .aio-toolbar h3 {
+    padding: 0;
+}
+.aio-root .vac-button {
+    font-size: 13px;
+}
+.aio-root .aio-code-pair {
+    padding: 12px;
+}
+.aio-root .aio-reference {
+    border: 1px solid var(--ph-neutral-border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+.aio-root .aio-code-result {
+    margin-top: 16px;
+    padding: 12px;
+}
+.aio-root .aio-code-result .aio-section {
+    padding: 12px 0;
+}
+.aio-root .aio-code-result pre {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.aio-root .vac-code-block {
+    margin: 0;
+}
+.aio-root .vac-code-block pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-size: 12px;
+}
+.aio-root .aio-timeline {
+    padding: 12px;
+}
+.aio-root .aio-timeline-operation {
+    padding: 8px;
+    margin-bottom: 8px;
+}
+.aio-root .aio-track {
+    display: block;
+    height: 10px;
+    margin-top: 6px;
+    background: var(--ph-neutral-background);
+}
+.aio-root .aio-track > span {
+    display: block;
+    height: 100%;
+    background: var(--ph-brand-yellow);
+}
+.aio-root .aio-search-duration {
+    width: 28.571%;
+}
+.aio-root .aio-generation-duration {
+    width: 71.429%;
+    margin-left: 28.571%;
+}
+.aio-root .aio-funnel button {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+.aio-root .aio-funnel-bar {
+    display: block;
+    width: 100%;
+    height: 12px;
+    background: var(--ph-brand-yellow);
+}
+.aio-root .twig-compact-body {
+    padding: 16px;
+}
+.aio-root button:focus-visible,
+.aio-root textarea:focus-visible {
+    outline: 2px solid var(--ph-brand-cobalt);
+    outline-offset: -2px;
+}
+@container aio-figure (min-width: 512px) {
+    .aio-pair {
+        grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+    }
+    .aio-code-pair {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+}
+/* The operation tree establishes scope; message roles identify captured content. */
+.aio-root .aio-trace-step {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+    margin: 0;
+    padding: 16px;
+    border: 0;
+    color: inherit;
+    background: var(--ph-neutral-white);
+    font: inherit;
+    text-align: left;
+}
+.aio-root button.aio-trace-step {
+    cursor: pointer;
+}
+.aio-root .aio-trace-step:is([data-selected='true'], [aria-pressed='true']) {
+    background: var(--ph-code-line-highlight);
+}
+.aio-root .aio-trace-step strong {
+    flex: 1;
+    min-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+}
+.aio-root .aio-trace-step small {
+    color: var(--ph-neutral-muted);
+    font-size: 11px;
+}
+.aio-root .aio-branch {
+    font: 14px/20px var(--ph-font-code);
+}
+.aio-root .aio-messages {
+    display: grid;
+    gap: 8px;
+    padding: 16px;
+}
+.aio-root .aio-message {
+    min-width: 0;
+}
+.aio-root .aio-message > h4 {
+    margin: 0;
+    font: inherit;
+    font-weight: 600;
+    line-height: 18px;
+}
+.aio-root .aio-message p {
+    margin: 8px 0 0;
+    font-size: 13px;
+    line-height: 18px;
+}
+.aio-root .aio-json {
+    margin: 8px 0 0;
+    padding: 0;
+    border: 1px solid var(--ph-neutral-border);
+    border-radius: var(--ph-radius-sm);
+    overflow: hidden;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.aio-root .aio-json code {
+    display: block;
+}
+.aio-root .aio-json code > span {
+    display: block;
+    padding: 4px 12px;
+    line-height: 18px;
+}
+.aio-root .vac-request-panel > .aio-json {
+    margin: 16px;
+}
+.aio-root .aio-inspector:has(> .aio-trace-step) > h3 {
+    padding: 16px;
+}
+/* The selected operation and its content tabs form one connected surface. */
+.aio-root .aio-inspector .vac-ai-generation {
+    margin: 0;
+}
+.aio-root .aio-conversation-preview {
+    width: 100%;
+}
+.aio-root .aio-conversation-preview :is(.twig-compact-chat, .twig-support-agent-compact) {
+    display: flex;
+    flex-direction: column;
+    height: 320px;
+}
+.aio-root .aio-conversation-preview :is(.twig-compact-chat-header, .twig-trip-planner-header) {
+    flex-shrink: 0;
+}
+.aio-root .aio-conversation-preview :is(.twig-compact-chat-log, .twig-trip-planner-history) {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.aio-root .aio-choices + .vac-developer-theme {
+    margin-top: 16px;
+}
+/* Keep the code comparison evenly inset within its shared surface. */
+.aio-root .aio-template-pair {
+    padding: 16px;
+}
+.aio-root .aio-template-pair .vac-code-block {
+    margin: 0;
+}
+@container aio-figure (min-width: 512px) {
+    .aio-template-pair {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+}
+
+/* Event names need more room than their short timestamps. */
+.aio-root .aio-table[aria-label='Recommendation events'] > colgroup > col:first-child {
+    width: calc(100% - 96px);
+}
+.aio-root .aio-table[aria-label='Recommendation events'] > colgroup > col:nth-child(2) {
+    width: 56px;
+}
+
+.aio-root .aio-conversation-preview :is(.twig-compact-chat-form, .twig-trip-planner-bottom) {
+    flex-shrink: 0;
+    margin-top: auto;
+}

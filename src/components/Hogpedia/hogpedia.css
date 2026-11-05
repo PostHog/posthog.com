@@ -1,0 +1,840 @@
+/*
+ * Hogpedia – a recreation of the MonoBook skin that English Wikipedia used in 2007.
+ *
+ * Every value here is a period color, border or metric. None of them exist as a project
+ * Tailwind token, and none of them should: they belong to this one surface only. The whole
+ * sheet is scoped under `.hogpedia`, so nothing leaks into the rest of the site.
+ *
+ * Hogpedia is deliberately light in both site themes. MonoBook had no dark variant in
+ * 2007, and a dark one would break the illusion. The sidebar says so, in character.
+ */
+
+.hogpedia {
+    /* Chrome */
+    --hp-page-bg: #f9f9f9;
+    --hp-content-bg: #ffffff;
+    --hp-box-bg: #f9f9f9;
+    --hp-tab-bg: #fbfbfb;
+    --hp-rule: #aaaaaa;
+    --hp-rule-soft: #c8ccd1;
+    --hp-accent: #fabd23; /* MonoBook's gold */
+    --hp-field-border: #2f6fab;
+
+    /* Type */
+    --hp-text: #000000;
+    --hp-text-soft: #4d4d4d;
+    --hp-link: #002bb8;
+    --hp-link-visited: #5a3696;
+    --hp-link-active: #faa700;
+    --hp-link-external: #3366bb;
+
+    --hp-serif: Georgia, 'Times New Roman', Times, serif;
+    --hp-sans: 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif;
+
+    background: var(--hp-page-bg);
+    color: var(--hp-text);
+    font-family: var(--hp-sans);
+    font-size: 13px;
+    line-height: 1.5;
+    /* A definite height, or the root grows to fit its content and the scroll container
+       inside it inherits that height - which leaves it nothing to scroll while the app
+       window clips the overflow. */
+    height: 100%;
+    min-height: 0;
+    /* The window is resizable, so the skin is a container-query layout, not a media-query
+       one. `inline-size` lets the children respond to the window width. */
+    container-type: inline-size;
+    container-name: hogpedia;
+}
+
+/* Undo the Tailwind preflight inside the skin. MonoBook predates any reset. */
+.hogpedia :where(ul, ol) {
+    list-style: revert;
+    margin: 0.3em 0 0 1.6em;
+    padding: 0;
+}
+.hogpedia :where(p) {
+    margin: 0.4em 0 0.5em 0;
+    line-height: 1.5;
+}
+.hogpedia :where(table) {
+    border-collapse: collapse;
+    font-size: inherit;
+}
+.hogpedia :where(img) {
+    display: inline-block;
+}
+
+/* ---------------------------------------------------------------- links --- */
+
+.hogpedia a {
+    color: var(--hp-link);
+    text-decoration: none;
+    background: none;
+}
+.hogpedia a:visited {
+    color: var(--hp-link-visited);
+}
+.hogpedia a:hover,
+.hogpedia a:focus {
+    text-decoration: underline;
+}
+.hogpedia a:active {
+    color: var(--hp-link-active);
+}
+/* Article prose underlines its links, the way the default 2007 preference did. */
+.hogpedia .hp-prose a {
+    text-decoration: underline;
+}
+.hogpedia .hp-external::after {
+    content: '';
+    display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    margin-left: 0.25em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%233366bb' stroke-width='1.3' d='M4.5 1.5h-3v9h9v-3M7 1.5h4v4M11 1.5 5.5 7'/%3E%3C/svg%3E")
+        no-repeat center / contain;
+}
+
+/* --------------------------------------------------------------- layout --- */
+
+.hogpedia-scroll {
+    height: 100%;
+}
+
+.hogpedia-frame {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+/* Narrow window: the sidebar stacks above the article. Wide window: it sits on the
+   left, the way MonoBook placed it. 60rem is the container width, not the viewport. */
+@container hogpedia (min-width: 60rem) {
+    .hogpedia-frame {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .hogpedia-nav-column {
+        width: 12.6em;
+        flex: 0 0 12.6em;
+        position: sticky;
+        top: 0;
+    }
+    .hogpedia-body {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    /* Flush to the right edge with the border only on the left, the way MonoBook joined the
+       content column to the sidebar. No max-width: MonoBook never capped the line length,
+       and a centered column is the single thing that most reads as a modern site. */
+    .hp-content {
+        border-right: none;
+        border-top: none;
+    }
+}
+
+/* Narrow window: only the logo and the search box stay above the article. The nav
+   portlets move below it, so a reader is not made to scroll past a full sidebar to reach
+   the text. `display: contents` lifts the two blocks into the frame's flex order. */
+@container hogpedia (max-width: 59.99rem) {
+    .hogpedia-nav-column {
+        display: contents;
+    }
+    .hogpedia-nav-head {
+        order: 1;
+    }
+    .hogpedia-body {
+        order: 2;
+        padding: 0 0.6em;
+    }
+    .hogpedia-nav-tail {
+        order: 3;
+    }
+    .hp-tabs {
+        overflow-x: auto;
+    }
+    .hogpedia .hp-tabs ul {
+        flex-wrap: nowrap;
+    }
+    .hp-content {
+        padding: 0.8em 0.7em 1.2em 0.7em;
+    }
+}
+
+/* ------------------------------------------------------------- sidebar --- */
+
+.hogpedia-nav-head {
+    padding: 0.5em 0.6em 0 0.6em;
+}
+.hogpedia-nav-tail {
+    padding: 0 0.6em 1em 0.6em;
+}
+
+.hp-logo {
+    display: block;
+    text-align: center;
+    padding: 0.4em 0 0.8em 0;
+}
+.hp-logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 92px;
+    height: 92px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: var(--hp-content-bg);
+    border: 1px solid var(--hp-rule);
+    box-shadow: inset 0 0 0 2px var(--hp-accent);
+}
+.hp-logo-mark svg {
+    display: block;
+}
+.hp-logo-word {
+    display: block;
+    font-family: var(--hp-serif);
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: var(--hp-text);
+    margin-top: 0.2em;
+}
+.hp-logo-tag {
+    display: block;
+    font-family: var(--hp-serif);
+    font-size: 10px;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    color: var(--hp-text-soft);
+}
+.hp-logo:hover .hp-logo-word {
+    text-decoration: none;
+}
+
+/* A MonoBook "portlet": a small caps heading over a bordered white box. */
+.hp-portlet {
+    margin: 0 0 0.9em 0;
+}
+.hp-portlet-title {
+    font-family: var(--hp-sans);
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    color: var(--hp-text-soft);
+    white-space: nowrap;
+    margin: 0 0 0 0.6em;
+    padding: 0;
+}
+.hp-portlet-body {
+    background: var(--hp-content-bg);
+    border: 1px solid var(--hp-rule);
+    padding: 0.2em 0;
+    font-size: 11px;
+}
+.hogpedia .hp-portlet-body ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.hp-portlet-body li {
+    padding: 0.1em 0;
+    margin: 0;
+    line-height: 1.35;
+}
+.hp-portlet-body li a {
+    display: block;
+    padding: 0.1em 0.6em;
+}
+.hp-portlet-body li.hp-current a {
+    font-weight: bold;
+}
+/* A sidebar item with no destination is plain text, never a dead link. */
+.hp-portlet-body li span {
+    display: block;
+    padding: 0.1em 0.6em;
+    color: var(--hp-text-soft);
+}
+.hp-portlet-note {
+    padding: 0.35em 0.6em;
+    font-size: 10px;
+    color: var(--hp-text-soft);
+    line-height: 1.4;
+}
+
+/* -------------------------------------------------------------- search --- */
+
+.hp-search {
+    padding: 0.3em 0.5em 0.5em 0.5em;
+}
+.hogpedia .hp-search-input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--hp-field-border);
+    background: var(--hp-content-bg);
+    color: var(--hp-text);
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    padding: 2px 3px;
+    border-radius: 0;
+}
+.hp-search-buttons {
+    margin-top: 0.4em;
+    display: flex;
+    gap: 0.35em;
+}
+/* A 2007 form button: a bevel, square corners, no transition. */
+.hogpedia .hp-button {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    padding: 1px 6px 2px 6px;
+    color: var(--hp-text);
+    background: #ddd;
+    border: 1px solid;
+    border-color: #fff #888 #888 #fff;
+    border-radius: 0;
+    cursor: pointer;
+}
+.hogpedia .hp-button:active {
+    border-color: #888 #fff #fff #888;
+}
+.hp-suggestions {
+    list-style: none;
+    margin: 0.4em 0 0 0;
+    padding: 0.3em 0;
+    background: var(--hp-content-bg);
+    border: 1px solid var(--hp-rule);
+    font-size: 11px;
+}
+.hogpedia .hp-suggestions {
+    list-style: none;
+    margin: 0.4em 0 0 0;
+}
+.hp-suggestions li a {
+    display: block;
+    padding: 0.15em 0.6em;
+}
+.hp-suggestions-empty {
+    padding: 0.3em 0.6em;
+    color: var(--hp-text-soft);
+}
+
+/* ---------------------------------------------------------------- tabs --- */
+
+.hp-tabs {
+    padding-left: 1em;
+    font-size: 11px;
+    line-height: 1.125em;
+    white-space: nowrap;
+    background: var(--hp-page-bg);
+}
+.hogpedia .hp-tabs ul {
+    list-style: none;
+    display: flex;
+    align-items: flex-end;
+    margin: 0;
+    padding: 0;
+}
+.hp-tabs li {
+    background: var(--hp-tab-bg);
+    border: 1px solid var(--hp-rule);
+    border-bottom: none;
+    margin: 0 0 0 -1px;
+    padding: 0;
+    position: relative;
+    top: 1px;
+}
+.hp-tabs li a,
+.hp-tabs li span {
+    display: block;
+    padding: 0.35em 0.8em 0.25em 0.8em;
+    text-transform: lowercase;
+}
+.hp-tabs li span {
+    /* A tab with nothing behind it reads as disabled text, not as a link. */
+    color: var(--hp-text-soft);
+    cursor: default;
+}
+.hp-tabs li.hp-tab-selected {
+    background: var(--hp-content-bg);
+    border-bottom: 1px solid var(--hp-content-bg);
+    z-index: 1;
+}
+.hp-tabs li.hp-tab-selected a {
+    font-weight: bold;
+    color: var(--hp-text);
+}
+
+/* ------------------------------------------------------------- content --- */
+
+.hp-content {
+    background: var(--hp-content-bg);
+    border: 1px solid var(--hp-rule);
+    padding: 0.8em 1em 1.2em 1em;
+    position: relative;
+}
+
+.hogpedia .hp-title {
+    font-family: var(--hp-serif);
+    font-size: 26px;
+    font-weight: normal;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0 0 0.1em 0;
+    border-bottom: 1px solid var(--hp-rule);
+    color: var(--hp-text);
+}
+.hp-tagline {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    color: var(--hp-text-soft);
+    margin: 0.25em 0 0.8em 0;
+    font-style: italic;
+}
+
+/* Article prose: small serif, dense, the way a 2007 encyclopedia read. */
+.hp-prose {
+    font-family: var(--hp-serif);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--hp-text);
+}
+.hogpedia .hp-prose h2,
+.hogpedia .hp-prose h3,
+.hogpedia .hp-prose h4 {
+    font-family: var(--hp-serif);
+    font-weight: normal;
+    color: var(--hp-text);
+    margin: 1em 0 0.25em 0;
+    padding: 0;
+    clear: none;
+}
+.hogpedia .hp-prose h2 {
+    font-size: 20px;
+    border-bottom: 1px solid var(--hp-rule);
+    padding-bottom: 0.17em;
+}
+.hogpedia .hp-prose h3 {
+    font-size: 16px;
+    font-weight: bold;
+}
+.hogpedia .hp-prose h4 {
+    font-size: 13px;
+    font-weight: bold;
+}
+.hogpedia .hp-prose ul,
+.hogpedia .hp-prose ol {
+    margin: 0.3em 0 0.6em 1.8em;
+}
+.hp-prose li {
+    margin-bottom: 0.1em;
+}
+.hogpedia .hp-prose blockquote {
+    margin: 0.6em 0 0.6em 1.6em;
+    padding: 0;
+    border: none;
+    font-style: italic;
+}
+.hogpedia .hp-prose code {
+    font-family: monospace, monospace;
+    font-size: 12px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 0 2px;
+}
+.hogpedia .hp-prose hr {
+    border: none;
+    border-top: 1px solid var(--hp-rule);
+    margin: 1em 0;
+}
+.hogpedia .hp-prose b,
+.hogpedia .hp-prose strong {
+    font-weight: bold;
+}
+
+/* The bracketed section-edit link MonoBook put beside every heading. */
+.hp-editsection {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    font-weight: normal;
+    font-style: normal;
+    margin-left: 0.4em;
+    white-space: nowrap;
+}
+.hp-editsection,
+.hp-editsection a {
+    color: var(--hp-link);
+}
+
+/* --------------------------------------------------- tables of contents --- */
+
+.hp-toc {
+    display: table;
+    background: var(--hp-box-bg);
+    border: 1px solid var(--hp-rule-soft);
+    padding: 7px;
+    margin: 1em 0;
+    font-family: var(--hp-sans);
+    font-size: 11px;
+}
+.hp-toc-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 12px;
+    margin-bottom: 0.3em;
+}
+.hp-toc-toggle {
+    font-weight: normal;
+    font-size: 11px;
+    margin-left: 0.4em;
+}
+.hogpedia .hp-toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.hogpedia .hp-toc ol ol {
+    margin-left: 1.9em;
+}
+.hp-toc li {
+    margin: 0.12em 0;
+}
+.hp-toc-number {
+    color: var(--hp-text);
+    padding-right: 0.5em;
+}
+
+/* --------------------------------------------------------- featured hog --- */
+
+.hp-featured-hog {
+    margin: 0;
+    text-align: center;
+}
+.hp-featured-hog img,
+.hp-featured-hog svg {
+    max-width: 150px;
+    height: auto;
+    /* Tailwind's preflight makes these `display: block`, so auto margins are what centre
+       them. `text-align` on the figure has no effect on a block box. */
+    margin: 0 auto 0.5em auto;
+}
+.hp-featured-hog figcaption {
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* The date beside a blog headline in "In the news". */
+.hp-news-date {
+    color: var(--hp-text-soft);
+    white-space: nowrap;
+}
+
+/* ------------------------------------------------------------ infoboxes --- */
+
+.hp-infobox {
+    float: right;
+    clear: right;
+    width: 22em;
+    max-width: 100%;
+    margin: 0.4em 0 1em 1.4em;
+    border: 1px solid var(--hp-rule);
+    background: var(--hp-box-bg);
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    line-height: 1.4;
+}
+/* A narrow window has no room to float 22em beside the prose. */
+@container hogpedia (max-width: 44rem) {
+    .hp-infobox {
+        float: none;
+        width: auto;
+        margin: 0.6em 0 1em 0;
+    }
+}
+.hp-infobox-title {
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0.35em 0.4em;
+    background: #dedede;
+    border-bottom: 1px solid var(--hp-rule);
+}
+.hp-infobox-image {
+    text-align: center;
+    padding: 0.5em 0.4em;
+}
+.hp-infobox-image img,
+.hp-infobox-image svg {
+    max-width: 150px;
+    height: auto;
+    /* Tailwind's preflight makes images and SVGs `display: block`, which ignores the
+       `text-align: center` above. Auto margins are what actually centres them. */
+    margin-left: auto;
+    margin-right: auto;
+}
+.hp-infobox-caption {
+    display: block;
+    font-size: 10px;
+    color: var(--hp-text-soft);
+    margin-top: 0.3em;
+    line-height: 1.35;
+}
+.hogpedia .hp-infobox table {
+    width: 100%;
+}
+.hp-infobox th {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.2em 0.5em;
+    white-space: nowrap;
+    font-weight: bold;
+    width: 7.5em;
+}
+.hp-infobox td {
+    vertical-align: top;
+    padding: 0.2em 0.5em;
+}
+.hp-infobox tr + tr th,
+.hp-infobox tr + tr td {
+    border-top: 1px solid #dedede;
+}
+
+/* ---------------------------------------------------- article notices --- */
+
+/* MonoBook's "ambox": a thin box with a thick colored left edge. */
+.hp-notice {
+    display: flex;
+    gap: 0.7em;
+    align-items: flex-start;
+    margin: 0 0 0.8em 0;
+    padding: 0.4em 0.6em;
+    background: var(--hp-tab-bg);
+    border: 1px solid var(--hp-rule-soft);
+    border-left: 10px solid #1e90ff;
+    font-family: var(--hp-sans);
+    font-size: 11.5px;
+    line-height: 1.45;
+}
+.hp-notice-style {
+    border-left-color: #f28500;
+}
+.hp-notice-content {
+    border-left-color: #b22222;
+}
+.hp-notice-icon {
+    flex: 0 0 auto;
+    font-size: 17px;
+    line-height: 1.1;
+}
+.hp-notice-text {
+    flex: 1 1 auto;
+}
+.hp-notice-text b {
+    font-weight: bold;
+}
+
+/* ------------------------------------------------- references and marks --- */
+
+/* Explicit offset rather than `vertical-align: super`, which the Tailwind preflight in
+   global.css interferes with. `line-height: 0` keeps the mark from stretching the line. */
+.hp-ref,
+.hp-citation-needed {
+    position: relative;
+    top: -0.45em;
+    font-size: 9.5px;
+    line-height: 0;
+    vertical-align: baseline;
+    font-family: var(--hp-sans);
+    white-space: nowrap;
+}
+.hogpedia .hp-references {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    line-height: 1.5;
+    margin: 0.3em 0 0.6em 1.8em;
+}
+.hp-references li {
+    margin-bottom: 0.25em;
+}
+.hp-references li:target {
+    background: #def;
+}
+.hp-backlink {
+    font-style: italic;
+    font-weight: bold;
+    margin-right: 0.3em;
+}
+.hp-citation-needed {
+    color: var(--hp-text-soft);
+}
+
+/* ------------------------------------------------- footers and catlinks --- */
+
+.hp-seealso ul {
+    margin-left: 1.8em;
+}
+.hp-catlinks {
+    margin-top: 1.2em;
+    padding: 5px;
+    border: 1px solid var(--hp-rule);
+    background: var(--hp-box-bg);
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    clear: both;
+}
+.hogpedia .hp-catlinks ul {
+    display: inline;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.hp-catlinks li {
+    display: inline-block;
+    margin: 0;
+    padding: 0 0.4em;
+    border-left: 1px solid var(--hp-rule);
+}
+.hp-catlinks li:first-child {
+    border-left: none;
+    padding-left: 0.3em;
+}
+
+.hp-footer {
+    margin-top: 1em;
+    padding: 0.6em 0.4em 1.2em 0.4em;
+    border-top: 1px solid var(--hp-accent);
+    font-family: var(--hp-sans);
+    font-size: 10.5px;
+    color: var(--hp-text-soft);
+    line-height: 1.6;
+    text-align: center;
+}
+.hp-footer p {
+    margin: 0.15em 0;
+}
+
+/* -------------------------------------------------------- main page ----- */
+
+.hp-mainpage-banner {
+    border: 1px solid var(--hp-rule-soft);
+    background: var(--hp-box-bg);
+    padding: 0.7em 1em;
+    text-align: center;
+    margin-bottom: 1em;
+}
+.hogpedia .hp-mainpage-title {
+    font-family: var(--hp-serif);
+    font-size: 23px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+.hp-mainpage-sub {
+    font-family: var(--hp-serif);
+    font-size: 13px;
+    font-style: italic;
+    margin: 0.2em 0 0 0;
+}
+.hp-mainpage-count {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    color: var(--hp-text-soft);
+    margin-top: 0.4em;
+}
+
+.hp-modules {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9em;
+}
+@container hogpedia (min-width: 52rem) {
+    .hp-modules {
+        grid-template-columns: 1fr 1fr;
+    }
+    .hp-module-wide {
+        grid-column: 1 / -1;
+    }
+}
+
+.hp-module {
+    border: 1px solid var(--hp-rule-soft);
+    background: var(--hp-content-bg);
+    padding: 0.55em 0.8em 0.8em 0.8em;
+}
+.hp-module-tinted {
+    background: #f5faff;
+}
+.hp-module-warm {
+    background: #fffaf5;
+}
+.hogpedia .hp-module-title {
+    font-family: var(--hp-serif);
+    font-size: 15px;
+    font-weight: normal;
+    margin: 0 0 0.35em 0;
+    padding: 0 0 0.15em 0;
+    border-bottom: 1px solid var(--hp-rule-soft);
+}
+.hp-module-body {
+    font-family: var(--hp-serif);
+    font-size: 12.5px;
+    line-height: 1.5;
+}
+.hogpedia .hp-module-body ul {
+    margin: 0.2em 0 0 1.5em;
+}
+.hp-module-body li {
+    margin-bottom: 0.25em;
+}
+.hp-module-more {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    margin-top: 0.5em;
+}
+
+.hp-explore {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5em 1.2em;
+}
+@container hogpedia (min-width: 34rem) {
+    .hp-explore {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@container hogpedia (min-width: 52rem) {
+    .hp-explore {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+.hp-explore-group-title {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--hp-text-soft);
+    margin-bottom: 0.1em;
+}
+
+/* --------------------------------------------------------- list pages --- */
+
+.hogpedia .hp-changes {
+    font-family: var(--hp-sans);
+    font-size: 11.5px;
+    line-height: 1.6;
+    margin-left: 1.6em;
+}
+.hp-changes-date {
+    font-family: var(--hp-sans);
+    font-size: 11px;
+    color: var(--hp-text-soft);
+}
+.hp-changes-diff {
+    font-size: 10.5px;
+}
+.hp-minor {
+    font-weight: bold;
+}

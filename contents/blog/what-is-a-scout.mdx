@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/scouts_84b3669c0f.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
     - Explainers
@@ -43,6 +44,8 @@ Scouts don't live on their own, they feed our self-driving product pipeline:
 2. **If it is, the scout emits a [signal](/docs/self-driving/signals)** – a semi-structured finding with evidence, and a suggested action.
 3. **Signals get picked up by the [self-driving pipeline](/docs/self-driving/self-improving-loop)**, grouped, and turned into **[reports](/docs/self-driving/reports)** that land in your PostHog [Inbox](/docs/self-driving/inbox).
 4. **Reports get actioned** – by you, or automatically by a [self-driving](/docs/self-driving) task that picks up the report and ships a fix or improvement.
+
+This loop is how [SoundBoost](/customers/soundboost) caught a domain migration that had cut its Google clicks to zero – the team rolled back and recovered the traffic.
 
 A report can be made up of many signals from many sources. Scouts are just one of those sources. 
 

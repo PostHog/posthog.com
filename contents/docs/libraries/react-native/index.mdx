@@ -18,9 +18,14 @@ features:
   logs: true
 ---
 
+import ReactNativeCocoaPodsNotice from "../../_snippets/react-native-cocoapods-notice.mdx"
 import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../../integrate/_snippets/details/posthog-ips.mdx"
+
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="React Native" />
 
 ## Installation
 
@@ -29,6 +34,10 @@ import ReactNativeInstall from '../../integrate/_snippets/install-react-native.m
 <ReactNativeInstall />
 
 ### Choose an iOS dependency path for the native plugin
+
+<ReactNativeCocoaPodsNotice>
+
+</ReactNativeCocoaPodsNotice>
 
 The optional `@posthog/react-native-plugin` package adds native features such as session replay and native crash capture. Install it as described in the guide for the feature that you use. Then choose one iOS dependency path:
 
@@ -131,7 +140,7 @@ You can further customize how PostHog works through its configuration on initial
 | `before_send`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                              | A callback function that is called before each event is sent to PostHog. You can use it to modify, filter, or suppress events. Return `null` to drop the event, or return the modified event to send it. See [customizing exception capture](#customizing-exception-capture-with-before_send) for details. |
 | `capturePushNotificationSubscriptions`<br/><br/>**Type:** Boolean<br/>**Default:** `true`           | Whether to automatically register this device's push token so [Workflows](/docs/workflows) can target it. Requires `@posthog/react-native-plugin`. See [push notifications](#push-notifications). Available in version 4.62.0+.                                                                            |
 | `capturePushNotificationOpened`<br/><br/>**Type:** Boolean<br/>**Default:** `true`                  | Whether to automatically capture `$push_notification_opened` when the user taps a push notification. Requires `@posthog/react-native-plugin`. See [push notifications](#push-notifications). Available in version 4.62.0+.                                                                                 |
-| `pushIdentityProvider`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                     | Supplies a signed identity-verification token for push subscription requests. Only needed when your push channel requires identity verification. See [identity verification](#identity-verification). Available in version 4.62.0+.                                                                        |
+| `pushIdentityProvider`<br/><br/>**Type:** Function<br/>**Default:** `undefined`                     | Supplies a signed identity-verification token for push subscription requests. Only needed when your push channel requires identity verification. See [identity verification](/docs/workflows/push-notifications/react-native#identity-verification). Available in version 4.62.0+.                                                                        |
 
 ### Tracing headers
 
@@ -312,7 +321,7 @@ We strongly recommend reading our docs on [alias](/docs/product-analytics/identi
 
 ## Setting person properties
 
-Person properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends#filtering-events-based-on-properties) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more.
+Person properties enable you to capture, manage, and analyze specific data about a user. You can use them to create [filters](/docs/product-analytics/trends/filters) or [cohorts](/docs/data/cohorts), which can then be used in [insights](/docs/product-analytics/insights), [feature flags](/docs/feature-flags), and more.
 
 To set a user's properties, include the `$set` or `$set_once` property when capturing any event:
 
@@ -349,7 +358,7 @@ posthog.register({
 
 The call above ensures that every event sent by the user will include `"icecream pref": "vanilla"` and `"team_id": 22`. This way, if you filtered events by property using `icecream_pref = vanilla`, it would display all events captured on that user after the `posthog.register` call, since they all include the specified Super Property.
 
-This does **not** set the user's properties. This only sets the properties for their events. To store person properties, see the [setting person properties section](#setting-user-properties).
+This does **not** set the user's properties. This only sets the properties for their events. To store person properties, see the [setting person properties section](#setting-person-properties).
 
 ### Removing stored super properties
 
@@ -426,7 +435,7 @@ posthog.optIn() // opt in
 posthog.optOut() // opt out
 ```
 
-If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/docs/user-guides/cohorts#differentiating-team-vs-users-traffic).
+If you still wish capture these events but want to create a distinction between users and team in PostHog, you should look into [Cohorts](/tutorials/filter-internal-users).
 
 ## Feature Flags
 
@@ -518,7 +527,30 @@ To set up error tracking in your project, see the [error tracking docs](/docs/er
 
 ### Native crash autocapture
 
-The JavaScript-level autocapture only covers exceptions thrown in your JS/TS code. To also capture native iOS and Android crashes – for example, a crash inside a native module or the platform runtime – install the optional `@posthog/react-native-plugin` package and enable `errorTracking.autocapture.nativeCrashes`. Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+JavaScript autocapture only covers exceptions thrown in your JS/TS code. To capture crashes in native code – a native module, the React Native runtime, or a C/C++ library – install the optional `@posthog/react-native-plugin` package and enable one or both of these options. What each option covers depends on the platform:
+
+| Option | iOS | Android |
+| --- | --- | --- |
+| `nativeCrashes` | Every native crash: uncaught Objective-C exceptions, Mach exceptions, and signals such as `SIGSEGV` and `SIGABRT`, including crashes in C/C++ code | Java/Kotlin crashes only |
+| `androidNdkCrashes` | Ignored | C/C++ (NDK) crashes, on Android 12 (API 31) or later. Requires `posthog-react-native` 4.78.0 and `@posthog/react-native-plugin` 2.12.0 or later |
+
+To capture every native crash on both platforms, enable both:
+
+```react-native
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  errorTracking: {
+    autocapture: {
+      nativeCrashes: true,
+      androidNdkCrashes: true,
+    },
+  },
+})
+```
+
+Native capture is gated by your project's **Enable exception autocapture** setting, and crash reports need native debug symbols uploaded at build time to produce readable stack traces.
+
+An Android NDK crash kills the process immediately, so PostHog captures it on the next app launch from the records the OS kept. Properties such as `$app_version` and the identity describe that launch, not the crash. The first launch after you enable `androidNdkCrashes` also captures NDK crashes the OS still holds from before.
 
 Follow the [React Native installation guide](/docs/error-tracking/installation/react-native) for the full setup, and [native crash symbolication](/docs/error-tracking/upload-source-maps/react-native#native-crash-symbolication) to upload symbols.
 

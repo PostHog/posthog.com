@@ -108,7 +108,7 @@ For information about current and past security advisories and CVEs, see our [ad
 
 We import security findings in our own code from the AI pentesting services we use, currently Veria Labs and Parameter. Findings are triaged automatically, and true positives are forwarded to the product team that owns the code. They are collected in <PrivateLink url="https://security.posthog.dev">SecurityHog</PrivateLink>, and each team gets a weekly post in its Slack channel that lists the vulnerabilities found in the code it owns.
 
-Each team fixes the findings for the code it owns. The team's [support hero](/handbook/engineering/operations/support-hero#security-findings) picks these up alongside the normal support workload. Critical and high severity findings must be fixed as soon as possible.
+Each team fixes the findings for the code it owns. By default, the team's [support hero](/handbook/engineering/operations/support-hero#security-findings) picks these up alongside the normal support workload, but each team decides how to split the work. Critical and high severity findings must be fixed as soon as possible.
 
 ## Reporting phishing
 
@@ -137,4 +137,4 @@ To provide a great customer experience, PostHog employees may occasionally need 
 
 ### Impersonating users via MCP
 
-The same rules apply when you connect the PostHog MCP server while logged in as a customer. Treat the OAuth connection and every MCP tool call as actions taken while impersonating them. Use read-only mode unless the customer has explicitly agreed to changes, only authorize the organization and project you need, and log out when you're finished. See [handling customer issues](/handbook/cs-and-onboarding/handling-customer-issues#using-the-mcp-server-while-impersonating) for the steps.
+The same rules apply when you connect the PostHog MCP server while logged in as a customer. Treat the OAuth connection and every MCP tool call as actions taken while impersonating them. Use read-only mode unless the customer has explicitly agreed to changes, only authorize the organization and project you need, and log out when you're finished. See [handling customer issues](/handbook/customer-success/handling-customer-issues#using-the-mcp-server-while-impersonating) for the steps.

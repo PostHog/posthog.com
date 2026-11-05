@@ -29,7 +29,7 @@ export default function CommunityPage() {
                     fetchMore={fetchMore}
                     isLoading={isLoading}
                 />
-                <CallToAction className="mt-4" type="secondary" width="full" to="/questions">
+                <CallToAction className="mt-4" type="secondary" width="full" to="/forum">
                     Browse topics
                 </CallToAction>
             </div>

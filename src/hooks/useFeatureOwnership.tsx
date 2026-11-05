@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { PrivateLink } from '../components/PrivateLink'
 import TeamMember from '../components/TeamMember'
+import Link from '../components/Link'
 
 export interface Feature {
     slug: string
@@ -61,7 +62,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'ai-playground': {
         feature: 'AI playground',
-        owner: ['ai-gateway'],
+        owner: ['agent-infrastructure'],
         label: false,
     },
     'ai-plugin': {
@@ -71,7 +72,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     alerts: {
         feature: 'Alerts',
-        owner: ['product-analytics'],
+        owner: ['apm'],
     },
     annotations: {
         feature: 'Annotations',
@@ -113,9 +114,14 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Cache warming',
         owner: ['query-performance'],
     },
+    canvases: {
+        feature: 'Canvases',
+        owner: ['product-analytics'],
+        label: false,
+    },
     cli: {
         feature: 'CLI',
-        owner: ['error-tracking', 'context-and-mcp'],
+        owner: ['growth', 'error-tracking'],
         notes: <>Error tracking owns the symbolication/upload pipeline and symbol/sourcemap upload internals.</>,
     },
     'client-libraries': {
@@ -170,6 +176,17 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['product-analytics'],
         notes: <>Owns Actions, Event definitons, Property definitions</>,
     },
+    'data-modeling': {
+        feature: 'Data models',
+        owner: ['data-modeling'],
+        notes: 'Views, materialized views, orchestration, and lineage.',
+        label: 'feature/data-modeling',
+    },
+    'data-quality': {
+        feature: 'Data quality checks',
+        owner: ['data-modeling'],
+        label: false,
+    },
     'data-table': {
         feature: 'Data table',
         owner: ['product-analytics'],
@@ -184,7 +201,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         label: 'feature/pipeline',
     },
     'data-warehouse': {
-        feature: 'Managed warehouse',
+        feature: 'Warehouse',
         owner: ['managed-warehouse'],
         label: 'feature/data-warehouse',
     },
@@ -244,7 +261,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     hogql: {
         feature: 'HogQL',
-        owner: ['data-stack'],
+        owner: ['data-tools'],
         label: 'feature/dashboards',
     },
     ingestion: {
@@ -297,6 +314,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'mcp-store': {
         feature: 'MCP store',
         owner: ['context-and-mcp'],
+        label: false,
+    },
+    'mobile-app': {
+        feature: 'Mobile app',
+        owner: ['mobile-app'],
         label: false,
     },
     notebooks: {
@@ -358,13 +380,25 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     platform: {
         feature: 'Platform (US + EU)',
-        owner: ['infrastructure'],
+        owner: ['cloud-foundations', 'cloud-platform'],
         label: 'feature/platform',
+    },
+    'platform-add-ons': {
+        feature: 'Platform add-ons',
+        owner: ['platform-features'],
+        notes: <>Boost, Scale, and Enterprise, including their adoption and growth</>,
+        label: false,
     },
     'PostHog.com': {
         feature: 'PostHog.com',
         owner: ['website'],
         label: false,
+        notes: (
+            <>
+                Website owns conversion from PostHog.com visits to the signup page. Growth can make suggestions and
+                requests here, and those get more weight than requests from other teams.
+            </>
+        ),
     },
     'posthog-ai': {
         feature: 'PostHog AI platform',
@@ -468,7 +502,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'self-hosting': {
         feature: 'Self-hosting',
-        owner: ['infrastructure'],
+        owner: ['cloud-foundations', 'cloud-platform'],
         label: false,
     },
     'sentry-integration': {
@@ -500,6 +534,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Signup',
         owner: ['growth'],
         label: 'feature/signup',
+        notes: (
+            <>
+                Growth owns everything from the moment someone lands on the signup page, plus every path to signup from
+                any surface other than PostHog.com (for example partner integrations and agents). Website owns
+                conversion from PostHog.com visits to the signup page.
+            </>
+        ),
     },
     'skills-store': {
         feature: 'Skills store',
@@ -510,6 +551,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'Slack app',
         owner: ['surfaces'],
         label: 'feature/slack-app',
+    },
+    'semantic-layer': {
+        feature: 'Semantic layer and data catalog',
+        owner: ['data-modeling'],
+        label: false,
     },
     settings: {
         feature: 'Settings structure (personal & project)',
@@ -578,6 +624,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['billing', 'platform-features'],
         label: false,
     },
+    'warehouse-properties': {
+        feature: 'Warehouse properties',
+        owner: ['data-modeling'],
+        notes: 'Syncs tables and materialized views to person or group properties.',
+        label: false,
+    },
     variables: {
         feature: 'Variables',
         owner: ['product-analytics'],
@@ -608,6 +660,46 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     wizard: {
         feature: 'Wizard',
         owner: ['wizard-and-docs'],
+        notes: (
+            <>
+                Wizard and docs owns the wizard platform, agent library, and TUI wizard. Product teams own the programs
+                for their products. See <Link to="/handbook/wizard-and-docs/wizard#who-owns-what">who owns what</Link>.
+            </>
+        ),
+    },
+    'wizard-app-handoffs': {
+        feature: 'Wizard (app handoffs)',
+        owner: ['wizard-and-docs', 'growth'],
+        notes: (
+            <>
+                Moving a task between the wizard and the PostHog app, so users can start in one and finish in the other.
+                For example, the wizard finds a data warehouse source and the user finishes creating it in the app.
+            </>
+        ),
+        label: false,
+    },
+    'wizard-cloud': {
+        feature: 'Wizard (cloud in-app)',
+        owner: ['growth'],
+        notes: (
+            <>
+                The wizard running in our cloud, started from inside the PostHog app. It does point implementations,
+                such as adding a new product, and shows cross-sell and upgrade opportunities.
+            </>
+        ),
+        label: false,
+    },
+    'wizard-headless-cli': {
+        feature: 'Wizard (headless CLI)',
+        owner: ['growth'],
+        notes: <>A version of the wizard without the TUI, so any coding agent can run it.</>,
+        label: false,
+    },
+    'wizard-migration': {
+        feature: 'Wizard (migration)',
+        owner: ['forward-deployed-engineering'],
+        notes: <>A wizard program that moves a customer to PostHog from a competitor.</>,
+        label: false,
     },
 }
 

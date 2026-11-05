@@ -27,6 +27,7 @@ A report is enriched and ranked:
 - **Priority** – how urgent it is, so the most important work rises to the top.
 - **State** – whether it's **actionable**, so an agent can open a pull request, or **needs input** before anything can be worked on.
 - **Charts** – where a finding is about something that moved, the report can carry the chart that shows it, so you can see the shape of the problem without rebuilding the query yourself.
+- **Tags** – a few short labels for the product area, feature, or entity the report is about, such as `session-replay`, `billing`, or `ingestion`. The investigating agent sets them and reuses your project's existing tags before it makes new ones, so related reports share a label. Read them through the [PostHog MCP](/docs/model-context-protocol) or the API.
 
 A report also accumulates a history as work happens on it: the commits and pull requests opened against it, the code the investigating agent referenced, CI status and review comments on its PR, related reports, and any notes people left while triaging. You're reading the whole trail, not just the original finding.
 

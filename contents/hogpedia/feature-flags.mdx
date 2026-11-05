@@ -1,0 +1,73 @@
+---
+title: Feature flags
+description: A feature flag is a condition in code that turns a feature on or off for a chosen set of users, without a new deployment. PostHog Feature Flags resolves those conditions from user properties, cohorts, and percentage rollouts.
+hogpedia:
+    categories: ['Products', 'Concepts']
+    aliases: ['Feature toggle', 'Feature flagging']
+    infobox:
+        title: Feature flags
+        hog: HedgehogCodeBubble
+        rows:
+            - label: Type
+              value: Release control tool
+            - label: Answers
+              value: Who can see this feature?
+            - label: Also called
+              value: Feature toggle
+            - label: Documentation
+              value: '[/docs/feature-flags](/docs/feature-flags)'
+    seeAlso:
+        - 'Experiments|/hogpedia/experiments'
+        - 'A/B testing|/hogpedia/a-b-testing'
+        - 'Product engineering|/hogpedia/product-engineering'
+    references:
+        - id: 1
+          text: 'PostHog glossary, "Feature flag"'
+          url: /docs/glossary
+        - id: 2
+          text: 'PostHog documentation, Feature flags'
+          url: /docs/feature-flags
+    external:
+        - title: 'PostHog Feature Flags'
+          url: /feature-flags
+        - title: 'Feature flags documentation'
+          url: /docs/feature-flags
+---
+
+A **feature flag** is a condition in code that decides whether a person sees a feature. PostHog's glossary describes a flag as a way of dividing users into two groups: those for whom the flag is enabled, and those for whom it is disabled.<Ref id="1" />
+
+The point of a flag is that the decision is made at run time and held outside the code. The feature ships to production switched off, and who sees it becomes a setting rather than a release.
+
+## What problem it solves
+
+Without flags, releasing a feature and deploying code are the same action. That creates three difficulties:
+
+- **A mistake is expensive.** Undoing the release means another deployment.
+- **Nothing can be partial.** Either everybody gets the feature or nobody does.
+- **Long-lived branches.** Work that is not ready cannot be merged, so branches diverge.
+
+A flag separates the two actions. Code merges continuously; the release is a switch. The same switch is also the undo, which is why the pattern is often adopted for safety before it is adopted for testing.
+
+## How it works in PostHog
+
+Code asks PostHog whether a flag is enabled for the current person, and branches on the answer.<Ref id="2" /> PostHog resolves the answer from the rules set on the flag:
+
+- **A percentage rollout.** A stable share of users, held steady per person so nobody flickers between states.
+- **A property condition.** For example, an account on a specific plan, or in a specific country.
+- **A cohort.** Any group defined in [product analytics](/hogpedia/product-analytics).
+- **A variant.** A flag may return one of several named values instead of true or false, which is what makes it usable for testing.
+
+Flags also carry payloads, so a flag can return a configuration value and not only a state.<Ref id="2" />
+
+## How it relates to other PostHog products
+
+A flag is the mechanism the rest of the platform uses to control and measure a change.
+
+- **[Experiments](/hogpedia/experiments)** are feature flags with a metric attached. An experiment uses a multi-variant flag to assign people, then measures each variant.
+- **[Product analytics](/hogpedia/product-analytics)** can break any insight down by the flag a person was served.
+- **[Session replay](/hogpedia/session-replay)** can be filtered to the people who saw one variant.
+- **Early access features** let a person enable a flag for themselves, which turns a flag into an opt-in beta.
+
+## Flag debt
+
+A flag that outlives its purpose is a branch nobody removes. Both paths stay in the code and both must keep working. PostHog marks a flag as stale when it has been fully rolled out or unused for a long period, so that the cleanup is visible work rather than a thing to remember.<Ref id="2" />

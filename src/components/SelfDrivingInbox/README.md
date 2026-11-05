@@ -8,8 +8,8 @@ compose into figures and CTAs.
 The point is teaching by recognition. Nobody has to imagine what a self-driving report looks
 like, because they're already reading one.
 
-Guides render as book spreads (`components/PocketGuides/BookPage.tsx`); the report appears as a
-figure via `components/PocketGuides/InboxFigure.tsx`, which composes this folder's `ReportCard`.
+Guides render in the shared docs reader (`components/Learn/PocketGuides/LearnSurface.tsx`); the report appears as a
+figure via `components/Learn/PocketGuides/InboxFigure.tsx`, which composes this folder's `ReportCard`.
 The old standalone master-detail inbox view was deleted when the pocket guides became the whole
 direction – if a browse-all surface returns, build it on the hook, not from git archaeology.
 
@@ -17,14 +17,14 @@ direction – if a browse-all surface returns, build it on the hook, not from gi
 
 ## Adding a template
 
-**Copy `contents/pocket-guides/self-driving/_starter/` and rename it.** It's a commented skeleton of both files,
+**Copy `contents/learn/self-driving/pocket-guide/_starter/` and rename it.** It's a commented skeleton of both files,
 kept out of every gallery and given no URL by the `_` prefix. That's the whole workflow – you
 should not need to reverse-engineer an existing template.
 
 A template is two files:
 
 ```
-contents/pocket-guides/<volume>/<slug>/
+contents/learn/<volume>/pocket-guide/<slug>/
 ├── index.mdx    everything a human reads
 └── SKILL.md     the scout itself
 ```
@@ -56,7 +56,7 @@ Two things follow from that one line:
 - **The scout file is fetched from the monorepo at build time**, by
   `gatsby/utils/fetchScoutSkills.ts` (same shape as `fetchMCPTools.ts`: raw from `refs/heads/master`,
   15s timeout, written to a gitignored `src/data/scout-skills.json`). The monorepo file at
-  `products/ai_observability/backend/scouts/<name>.md` is the only copy — the app imports it too.
+  `products/ai_observability/backend/scouts/<name>.md` is the only copy – the app imports it too.
 
 This is what stops a guide describing a scout the button doesn't create. Hand-writing a second copy
 here was tried and drifted within one sitting: different headings, a dropped section, and invented
@@ -72,7 +72,7 @@ query in `index.tsx` here filters the same way.
 ## Authoring a template's report
 
 The report lives in the template's **frontmatter**, not its MDX body. Add a `report` block to
-`contents/pocket-guides/<volume>/<slug>/index.mdx`:
+`contents/learn/<volume>/pocket-guide/<slug>/index.mdx`:
 
 ```yaml
 ---
@@ -160,11 +160,12 @@ elsewhere on the site (see `suppressHydrationWarning` in `src/pages/self-driving
 ## These files are agent context too
 
 A scout template is read by two audiences from one source. Humans get the inbox UI; agents get a
-markdown mirror of the same page at `https://posthog.com/pocket-guides/<volume>/<slug>.md`.
+markdown mirror of the same page at the public reader URL with `.md` appended (for example,
+`https://posthog.com/docs/self-driving/pocket-guide/flag-debt.md`).
 
 That mirror is produced by the site's existing pipeline, not a bespoke exporter:
 `generateRawMarkdownPages()` in `gatsby/rawMarkdownUtils.ts` converts the **built HTML** of every
-page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which now includes `/pocket-guides`)
+page under `MARKDOWN_CONTENT_PATHS` (`src/constants/index.ts`, which includes `/learn` and `/docs`)
 with turndown, and `generateLlmsTxt()` indexes the self-driving ones. `static/robots.txt` blocks
 `/*.md$` from search crawlers, so the mirror exists for agents specifically.
 `context-mill/context/docs.yaml` already consumes posthog.com `.md` URLs this way to feed the
@@ -181,6 +182,36 @@ The scout block is rendered in the canonical `SKILL.md` shape the monorepo uses
 `authoring-scouts/references/scout-anatomy.md`) – `name` must match `signals-scout-<kebab>` or
 the harness never runs it, and `description` doubles as the description on the config API. An
 agent reading the mirror can create the scout verbatim instead of translating it.
+
+## From our inbox
+
+`FromOurInbox.tsx` is the one browse-all surface, and it is built on real data rather than
+templates. It renders on `/docs/self-driving/from-our-inbox` as a read-only mock of the inbox:
+a list of collapsed reports, each of which opens under its row on click and closes on a second
+click. Collapsed reports stay in the built HTML, so the `.md` mirror and search still see them. Every report came from PostHog's own project and ended in real work: a merged public pull
+request, or a change that needed no code. The page carries no `receivedAgo` and shows real dates
+instead.
+
+Each example is one **frontmatter-only** file:
+
+```
+contents/docs/self-driving/from-our-inbox/
+├── index.mdx          the page
+├── _curator/SKILL.md  the scout that proposes new examples
+└── _examples/<date>-<slug>.md
+```
+
+An example reuses `report` and `category` from the template contract, plus an `inboxExample`
+block (`reportId`, `publishedAt`, `outcome`, and exactly one of `pullRequest { url, title, mergedAt }`
+or `resolution { label, resolvedAt }`). The
+`_curator/SKILL.md` has the full file shape. `reportId` is the curator's dedupe key, so never
+change it on a published example.
+
+New examples arrive as content-only pull requests. The curator scout runs daily in PostHog's
+project, picks one to three safe reports, and files each as an actionable report against this
+repository. Self-driving opens the pull request, and the self-driving team decides whether to
+merge it. To remove an example, delete its file. The curator reads the closed or deleted state
+and does not propose it again.
 
 ## Rendering contract
 
@@ -202,8 +233,9 @@ agent reading the mirror can create the scout verbatim instead of translating it
 | `EnableScout.tsx` | The "add this scout" CTA, plus the book's pinned bottom bar |
 | `scoutDeepLink.ts` | Builds the CTA target: a `#createScout=` deep link, or an `appTemplate` link |
 | `sources.ts` | Product-source metadata: icons, color tokens, install and docs links |
-| _(terms moved)_ | `<Term>` and its definitions now live in `components/PocketGuides/terms.tsx` – the vocabulary spans every volume, not just self-driving |
-| `types.ts` | `SelfDrivingReport`, `InboxTemplate` |
+| _(terms moved)_ | `<Term>` and its definitions now live in `components/Learn/PocketGuides/terms.tsx` – the vocabulary spans every volume, not just self-driving |
+| `FromOurInbox.tsx` | `useInboxExamples()` and the read-only inbox on `/docs/self-driving/from-our-inbox` |
+| `types.ts` | `SelfDrivingReport`, `InboxTemplate`, `InboxExample` |
 
 The frontmatter type is declared in `gatsby/createSchemaCustomization.ts` (`FrontmatterReport`).
 It's explicit rather than inferred because the field exists on only a handful of the ~30

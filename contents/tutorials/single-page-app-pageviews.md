@@ -29,6 +29,8 @@ This tutorial shows you how to follow the recommended approach for the most popu
 > npm install --save posthog-js @posthog/react
 > # or
 > pnpm add posthog-js @posthog/react
+> # or
+> bun add posthog-js @posthog/react
 > ```
 
 ## Tracking pageviews in Next.js (app router)

@@ -7,6 +7,7 @@ showTitle: true
 sidebar: Docs
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+ogImage: generated
 tags:
   - surveys
 ---
@@ -54,7 +55,7 @@ Finally, run `npm run dev` and go to `http://localhost:3000` to see our new home
 
 We'll use PostHog to create and control our survey as well as monitor results. If you don't have a PostHog instance, you can [sign up for free here](https://app.posthog.com/signup).
 
-First, set up PostHog for use on the [client-side](/docs/libraries/next-js#app-router) by installing the [JavaScript React SDK](/docs/libraries/react):
+First, set up PostHog for use on the [client-side](/docs/libraries/next-js#client-side-setup) by installing the [JavaScript React SDK](/docs/libraries/react):
 
 ```bash
 npm install posthog-js @posthog/react
@@ -111,7 +112,7 @@ This tutorial will cover how to implement both options:
 
 ### Option 1: Use PostHog's prebuilt survey UI
 
-This is the simplest option. PostHog has a variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and handles all the display logic and event capture for you.
+This is the simplest option. PostHog has a variety of [survey types](/docs/surveys/creating-surveys#steps) to choose from, and handles all the display logic and event capture for you.
 
 To create a survey with a prebuilt UI, go to the [surveys tab](https://app.posthog.com/surveys), click "New survey," and then set up your survey with the following settings:
 

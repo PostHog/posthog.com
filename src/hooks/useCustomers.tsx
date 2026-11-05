@@ -29,6 +29,7 @@ import CounterPressLogoDark from '../images/customers/counterpress-dark.svg'
 import CroissantLogo from '../images/customers/croissant-light.png'
 import CroissantLogoDark from '../images/customers/croissant-dark.png'
 import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
+import JunoLogo from '../components/CustomerLogos/JunoLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -47,7 +48,11 @@ import RayfitLogoLight from '../images/customers/rayfitLogolight.png'
 import RebtelLogo from '../components/CustomerLogos/RebtelLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import ResendLogo from '../components/CustomerLogos/ResendLogo'
+import RunableLogo from '../images/customers/runable-light.svg'
+import RunableLogoDark from '../images/customers/runable-dark.svg'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import SoundBoostLogo from '../images/customers/soundboost-light.svg'
+import SoundBoostLogoDark from '../images/customers/soundboost-dark.svg'
 import SupedLogo from '../images/customers/suped-light.png'
 import SupedLogoDark from '../images/customers/suped-dark.png'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
@@ -65,6 +70,7 @@ import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
 import useProducts from './useProducts'
 import JaxxonLogo from 'components/CustomerLogos/JaxxonLogo'
+import LegoraLogo from 'components/CustomerLogos/LegoraLogo'
 
 export type CustomerLogo =
     | React.ComponentType<{ className?: string }>
@@ -96,6 +102,7 @@ export interface Customer {
             quotes?: string[]
         }
     >
+    yc?: string
     featured: boolean
     hasCaseStudy: boolean // Now always populated dynamically
 }
@@ -123,6 +130,8 @@ interface BaseCustomer {
             quotes?: string[]
         }
     >
+    // YC batch, eg 'W20'. Only set when verified on ycombinator.com/companies
+    yc?: string
     featured: boolean
 }
 
@@ -233,6 +242,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     assemblyai: {
         name: 'AssemblyAI',
+        yc: 'S17',
         toolsUsed: ['experiments', 'product_analytics'],
         industries: ['API Platform'],
         users: ['Leadership', 'Marketing', 'Engineering'],
@@ -303,6 +313,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     brainboard: {
         name: 'Brainboard',
+        yc: 'W22',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'experiments', 'ai_observability'],
         industries: ['SaaS', 'Devtool'],
         users: ['Product', 'Engineering', 'Growth', 'Marketing'],
@@ -590,6 +601,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     exa: {
         name: 'Exa',
+        yc: 'S21',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -752,6 +764,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         ],
         industries: ['AI'],
         users: ['Engineering', 'Product', 'Growth', 'Marketing'],
+        notes: 'Open source AI coding platform',
         featured: false,
         logo: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/e_trim,q_auto,f_auto/kilocodelogo_93f0668287.png',
@@ -804,6 +817,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     greptile: {
         name: 'Greptile',
+        yc: 'W24',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -900,6 +914,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hostai: {
         name: 'HostAI',
+        yc: 'W24',
         toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'ai_observability'],
         industries: ['AI'],
         users: ['Engineering', 'Leadership', 'Founders'],
@@ -927,12 +942,13 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         industries: ['Fashion'],
         // users: ['Engineering', 'Leadership', 'Founders'],
         notes: "Men's chains & accessories",
-        featured: true,
+        featured: false,
         logo: JaxxonLogo,
         height: 12,
     },
     juicebox: {
         name: 'Juicebox',
+        yc: 'S22',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -961,6 +977,29 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 products: {
                     ai_observability:
                         'Speed is crucial to our user experience. We now have the ability to see which specific prompt has biggest impact on latency.',
+                },
+            },
+        },
+    },
+    juno: {
+        name: 'Juno',
+        toolsUsed: ['error_tracking', 'product_analytics'],
+        industries: ['Healthcare', 'AI'],
+        users: ['Engineering', 'Product'],
+        notes: 'AI health assistant for chronic illness',
+        featured: false,
+        logo: JunoLogo,
+        height: 10,
+        quotes: {
+            marshall_gould: {
+                name: 'Marshall Gould',
+                role: 'CEO',
+                image: {
+                    thumb: '/images/customers/marshall-gould.jpeg',
+                },
+                products: {
+                    self_driving:
+                        "It's incredible that these agents can run autonomously to identify these things. You wake up in the morning and there are PRs waiting for you. All you have to do is review and merge.",
                 },
             },
         },
@@ -1005,8 +1044,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         },
     },
+    legora: {
+        name: 'Legora',
+        toolsUsed: ['product_analytics', 'cdp', 'posthog_ai'],
+        industries: ['AI', 'Legal'],
+        notes: 'AI platform for lawyers',
+        featured: false,
+        logo: LegoraLogo,
+        height: 8,
+    },
     mintlify: {
         name: 'Mintlify',
+        yc: 'W22',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1158,6 +1207,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     pry: {
         name: 'Pry',
+        yc: 'W21',
         toolsUsed: ['product_analytics', 'session_replay'],
         industries: ['Financial planning software'],
         users: ['Leadership', 'Product', 'Engineering'],
@@ -1181,6 +1231,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     posthog: {
         name: 'PostHog',
+        yc: 'W20',
         toolsUsed: [
             'web_analytics',
             'product_analytics',
@@ -1300,6 +1351,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     raycast: {
         name: 'Raycast',
+        yc: 'W20',
         toolsUsed: ['product_analytics', 'feature_flags', 'data_warehouse', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
@@ -1352,6 +1404,52 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
         height: 8,
     },
+    runable: {
+        name: 'Runable',
+        toolsUsed: [
+            'product_analytics',
+            'session_replay',
+            'feature_flags',
+            'error_tracking',
+            'logs',
+            'ai_observability',
+            'data_warehouse',
+            'cdp',
+        ],
+        industries: ['AI'],
+        users: ['Engineering', 'Growth'],
+        notes: 'AI agent platform for small business owners',
+        featured: false,
+        logo: {
+            light: RunableLogo,
+            dark: RunableLogoDark,
+        },
+        height: 8,
+        quotes: {
+            ankit_kumar: {
+                // This is the author handle used in OSQuote
+                name: 'Ankit Kumar',
+                role: 'Software Development Engineer',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Ankit_caa4201fc2.png',
+                },
+                quotes: [
+                    'All decisions are driven by PostHog metrics. It gives us the direction when something is failing or impacts a specific event that really helps us a lot.',
+                ],
+            },
+            eshaan_pawan: {
+                name: 'Eshaan Pawan',
+                role: 'Head of Growth',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/Eshaan_dfad398910.png',
+                },
+                quotes: [
+                    "I don't need to leave the PostHog ecosystem often. I get almost everything I need on PostHog, which makes it easy for me to make a lot of decisions very fast.",
+                    'Instead of using 10 different data layers, data providers, and data collectors, you can just use PostHog.',
+                ],
+            },
+        },
+    },
     rebtel: {
         name: 'Rebtel',
         toolsUsed: ['product_analytics', 'web_analytics', 'feature_flags', 'experiments', 'cdp', 'data_warehouse'],
@@ -1403,6 +1501,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     resend: {
         name: 'Resend',
+        yc: 'W23',
         toolsUsed: [
             'product_analytics',
             'web_analytics',
@@ -1438,6 +1537,32 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     web_analytics:
                         "PostHog gives me all the same information Plausible used to give us, and a lot more. It's way more powerful and insightful than Plausible.",
                 },
+            },
+        },
+    },
+    soundboost: {
+        name: 'SoundBoost',
+        toolsUsed: ['session_replay', 'feature_flags', 'error_tracking', 'surveys', 'inbox'],
+        industries: ['AI', 'Music'],
+        users: ['Founders', 'Engineering'],
+        notes: 'AI music mastering',
+        featured: false,
+        logo: {
+            light: SoundBoostLogo,
+            dark: SoundBoostLogoDark,
+        },
+        height: 8,
+        quotes: {
+            berkan_cesur: {
+                name: 'Berkan Cesur',
+                role: 'Founder',
+                image: {
+                    thumb: '/images/customers/berkan-cesur.jpg',
+                },
+                quotes: [
+                    "We're a small team and we can't find everything that's going on across different browsers, operating systems, and device types. PostHog just finds it for us now.",
+                    "PostHog was always a good analytics tool, but it needed a human to understand, analyze, and combine everything to get something valuable from it. Now it's just on autopilot.",
+                ],
             },
         },
     },
@@ -1495,6 +1620,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     supabase: {
         name: 'Supabase',
+        yc: 'S20',
         toolsUsed: [
             'product_analytics',
             'feature_flags',
@@ -1585,7 +1711,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ukgovt: {
         name: 'UK Government',
-        toolsUsed: [], // TODO: Add toolsUsed
+        toolsUsed: ['product_analytics', 'session_replay', 'feature_flags', 'error_tracking', 'posthog_ai'],
         // industries: [], // TODO: Add industries
         // users: [], // TODO: Add users
         notes: 'Most popular country with a King',

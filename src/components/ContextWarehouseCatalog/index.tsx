@@ -7,10 +7,8 @@ import {
     IconDownload,
     IconGraph,
     IconNotebook,
-    IconShuffle,
     IconSparkles,
     IconTerminal,
-    IconUpload,
 } from '@posthog/icons'
 
 type IconComponent = React.ComponentType<{ className?: string }>
@@ -23,35 +21,20 @@ const catalogSections: {
         title: 'Data Sources',
         items: [
             {
-                name: 'Sources & Import (ELT)',
+                name: 'Data pipelines',
                 description:
-                    'Regularly sync or bulk import data into your warehouse from databases, ad platforms, SaaS tools, and more.',
-                url: '/context-warehouse/sources',
+                    'Sync data in from your tools and databases, transform events as they arrive, and send data to the rest of your stack.',
+                url: '/data-pipelines',
                 Icon: IconDownload,
                 iconColor: 'text-blue',
             },
             {
-                name: 'Managed Warehouse',
+                name: 'Warehouse',
                 description:
                     'Store, query, and join your product and business data in one place without maintaining any infrastructure.',
-                url: '/context-warehouse/managed-warehouse',
+                url: '/warehouse',
                 Icon: IconDatabase,
                 iconColor: 'text-purple',
-            },
-            {
-                name: 'CDP',
-                description:
-                    'Ingest, transform, and route data between PostHog and the rest of your stack in real time.',
-                url: '/cdp',
-                Icon: IconShuffle,
-                iconColor: 'text-red',
-            },
-            {
-                name: 'Batch Exports',
-                description: 'Send PostHog data to your existing warehouse or data lake on a schedule you control.',
-                url: '/context-warehouse/reverse-etl-export',
-                Icon: IconUpload,
-                iconColor: 'text-green',
             },
         ],
     },
@@ -62,7 +45,7 @@ const catalogSections: {
                 name: 'Models',
                 description:
                     'Define your metrics to keep them consistent across PostHog products, update them on a schedule.',
-                url: '/context-warehouse/data-modeling',
+                url: '/warehouse',
                 Icon: IconDecisionTree,
                 iconColor: 'text-blue',
             },
@@ -82,7 +65,7 @@ const catalogSections: {
                 name: 'PostHog AI',
                 description:
                     'Ask questions about your data in plain English. Generates SQL, builds dashboards, and surfaces insights.',
-                url: '/context-warehouse/posthog-ai',
+                url: '/warehouse',
                 Icon: IconSparkles,
                 iconColor: 'text-red',
             },
@@ -90,7 +73,7 @@ const catalogSections: {
                 name: 'SQL Editor',
                 description:
                     'Write and run HogQL or standard SQL directly against your data. For when you know exactly what you want and just need to ask for it properly.',
-                url: '/context-warehouse/sql-editor',
+                url: '/warehouse',
                 Icon: IconTerminal,
                 iconColor: 'text-green',
             },
@@ -103,17 +86,9 @@ const catalogSections: {
                 iconColor: 'text-blue',
             },
             {
-                name: 'Reverse ETL',
-                description:
-                    'Send data back to the tools that need it. Keep your CRM, support tools, and marketing platforms in sync.',
-                url: '/context-warehouse/reverse-etl-export',
-                Icon: IconShuffle,
-                iconColor: 'text-purple',
-            },
-            {
                 name: 'Business Intelligence',
                 description: 'Visualize your data with interactive dashboards and ad-hoc analyses right in PostHog.',
-                url: '/context-warehouse/business-intelligence',
+                url: '/warehouse',
                 Icon: IconGraph,
                 iconColor: 'text-orange',
             },

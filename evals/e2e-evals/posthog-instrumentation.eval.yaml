@@ -1,0 +1,34 @@
+# An end-to-end eval across several pages: no single page owns it, so it lives here and
+# names its own owner. Every check reads the pages listed below.
+owner: product-analytics
+tags: [instrumentation, e2e, javascript, nextjs]
+status: active
+pages:
+    - docs/libraries/next-js
+    - docs/product-analytics/identify
+    - docs/product-analytics/best-practices
+
+checks:
+    - id: instrument-app
+      description: >-
+          Baseline: given a plain setup request in an app with sign-in, does an agent
+          set up the client, identify users and reset on sign-out? The agent gets no
+          docs, so docs-read shows which pages it finds on its own.
+      codebase_to_test: acme-dispatch-nextjs
+      prompt: >-
+          Set up PostHog product analytics in the Next.js app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              client-setup: >-
+                  {folder}/package.json lists `posthog-js`, and posthog-js is
+                  initialized in {folder}/src/instrumentation-client.ts (or .js) with
+                  the project token and host from NEXT_PUBLIC_ environment variables.
+                  Cite the file and line(s).
+              identify-signed-in-user: >-
+                  The code calls posthog.identify with the signed-in user's database id
+                  after a successful sign-in in {folder}/src/app/login/page.tsx. Cite
+                  the line(s).
+              reset-on-sign-out: >-
+                  {folder}/src/components/SignOutButton.tsx, or the code it calls, calls
+                  posthog.reset() when the user signs out.

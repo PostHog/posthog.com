@@ -6,7 +6,7 @@ showTitle: true
 
 Use the API when experiments need to be created or read by something other than a person – a release pipeline that opens an experiment with every feature branch, an internal dashboard that shows what's currently running, or a script that ends tests once they reach significance.
 
-Reading requires the `experiment:read` scope and writing requires `experiment:write`, both on a [personal API key](/docs/api#authentication).
+Each resource has its own scopes on a [personal API key](/docs/api#authentication): `experiment:read` and `experiment:write` for experiments, `experiment_holdout:read` and `experiment_holdout:write` for holdouts, `experiment_saved_metric:read` and `experiment_saved_metric:write` for shared metrics, and `activity_log:read` for the change history.
 
 ## Before you start
 
@@ -17,7 +17,7 @@ Reading requires the `experiment:read` scope and writing requires `experiment:wr
 
 **Experiments**
 
-List, create, retrieve, update, and delete experiments under `/api/projects/:project_id/experiments/`. Creating an experiment also creates its backing [feature flag](/docs/feature-flags). Lifecycle actions – launching, pausing, ending, shipping a variant, archiving, and freezing exposures – are available as sub-actions on an individual experiment, and there are endpoints for results, a results timeseries, and the change history.
+List, create, retrieve, and update experiments under `/api/projects/:project_id/experiments/`. Creating an experiment also creates its backing [feature flag](/docs/feature-flags). To delete an experiment, send a `PATCH` with `{"deleted": true}`. Hard `DELETE` requests are rejected. Lifecycle actions – launching, pausing, ending, shipping a variant, archiving, and freezing exposures – are available as sub-actions on an individual experiment, and there are endpoints for results, a results timeseries, and the change history.
 
 **Holdouts**
 

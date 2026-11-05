@@ -53,6 +53,10 @@ The property picker lists these under their display names rather than their raw 
 
 To exclude a narrower set – say, only automation and HTTP clients while keeping AI agents – filter on **Traffic type** or **Traffic category** instead.
 
+## Add bots PostHog doesn't detect
+
+If a crawler, load test, or scraper isn't caught by the built-in lists, add a [custom bot rule](/docs/web-analytics/bot-detection#custom-bot-rules) in your [project settings](https://app.posthog.com/settings/environment-customization#custom-bot-definitions). A rule can match on the user agent, an IP range, or a combination of properties like the library, host, or screen size, so it also catches scrapers that send a normal browser user agent. Matching events count as bots everywhere **Is bot** is used, including events you've already captured.
+
 ## See which bots are hitting you
 
 - **Right now** – open the [Live tab](/docs/web-analytics/live#bot-traffic) and check the bot traffic tile to see which bots are crawling you in real time.

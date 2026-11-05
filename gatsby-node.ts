@@ -80,9 +80,9 @@ export const onCreateBabelConfig: GatsbyNode['onCreateBabelConfig'] = ({ actions
     })
 }
 
-export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions }) => {
+export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ stage, actions, plugins, getConfig }) => {
     actions.setWebpackConfig({
-        ...(process.env.GATSBY_MINIMAL === 'true'
+        ...(process.env.GATSBY_MINIMAL === 'true' || stage === 'develop-html'
             ? {
                   devtool: false,
               }
@@ -131,6 +131,31 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         const { EmitWebpackGraphPlugin } = require('./gatsby/emitWebpackGraphPlugin')
         actions.setWebpackConfig({
             plugins: [new EmitWebpackGraphPlugin(path.resolve(__dirname, 'bundle-report', 'webpack-graph.json'))],
+        })
+    }
+
+    if (stage === 'develop' && process.env.GATSBY_MINIMAL !== 'true') {
+        actions.setWebpackConfig({
+            devtool: false,
+            plugins: [
+                plugins.evalSourceMapDevTool({
+                    module: true,
+                    columns: false,
+                    exclude: /node_modules/,
+                    moduleFilenameTemplate: getConfig().output.devtoolModuleFilenameTemplate,
+                }),
+            ],
+        })
+    }
+
+    if (stage === 'develop-html') {
+        actions.setWebpackConfig({
+            plugins: [
+                plugins.normalModuleReplacement(
+                    /^\$virtual\/async-requires$/,
+                    path.resolve(__dirname, 'gatsby', 'developHtmlAsyncRequires.js')
+                ),
+            ],
         })
     }
 }

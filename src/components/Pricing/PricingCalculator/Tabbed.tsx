@@ -3,7 +3,13 @@ import Tooltip from 'components/Tooltip'
 import { IconInfo, IconPlus, IconSearch, IconStack, IconX } from '@posthog/icons'
 import Toggle from 'components/Toggle'
 import { formatUSD } from '../PricingSlider/pricingSliderLogic'
-import { buildProductAddons, calculatePrice, getAddonsCostForProduct, getCalculatorTotal } from './calculatorLogic'
+import {
+    buildProductAddons,
+    calculatePrice,
+    getAddonsCostForProduct,
+    getCalculatorTotal,
+    readLegacyRetention,
+} from './calculatorLogic'
 import { Link, useStaticQuery } from 'gatsby'
 import { allProductsData } from '../Pricing'
 import useProducts from 'hooks/useProducts'
@@ -143,6 +149,7 @@ export const TabContent = ({
     const [showBreakdown, setShowBreakdown] = useState(false)
     const freeAmount = freeLimit || slider?.min
     const unitLabel = pluralizeUnit(billingData.unit, 2)
+    const isAIObservability = type === 'ai_observability'
 
     return (
         <>
@@ -158,10 +165,14 @@ export const TabContent = ({
                 }) ||
                     (activeProduct.billedWith ? (
                         <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-2 text-sm">
-                            {activeProduct.name} is currently bundled with {activeProduct.billedWith} and shares a free
-                            tier and volume pricing.
+                            {activeProduct.billingDescription || (
+                                <>
+                                    {activeProduct.name} is currently bundled with {activeProduct.billedWith} and shares
+                                    a free tier and volume pricing.
+                                </>
+                            )}
                         </div>
-                    ) : activeProduct.addonSliders ? (
+                    ) : activeProduct.addonSliders || activeProduct.retention ? (
                         <StandaloneAddonsTab
                             activeProduct={activeProduct}
                             setVolume={setVolume}
@@ -176,7 +187,9 @@ export const TabContent = ({
                                         <UsageSliderRow
                                             label={unitLabel}
                                             subtitle={
-                                                startsAt
+                                                isAIObservability
+                                                    ? 'Includes online evaluations and offline evaluation metric results'
+                                                    : startsAt
                                                     ? `$${startsAt} each${afterFirstFree(
                                                           freeAmount,
                                                           billingData.unit,
@@ -321,7 +334,11 @@ const CopyURLButton = ({ onClick }: { onClick: () => string }) => {
     )
 }
 
-export default function Tabbed() {
+export interface TabbedProps {
+    defaultProducts?: string[]
+}
+
+export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: TabbedProps = {}) {
     const {
         allProductData: {
             nodes: [{ products: billingProducts }],
@@ -329,8 +346,8 @@ export default function Tabbed() {
     } = useStaticQuery(allProductsData)
     const [analyticsData, setAnalyticsData] = useState<Record<string, any>>(getDefaultAnalyticsData)
     const platform = billingProducts.find((product) => product.type === 'platform_and_support')
-    const [activeType, setActiveType] = useState<string | null>(DEFAULT_PRODUCT_TYPES[0])
-    const [selectedTypes, setSelectedTypes] = useState<string[]>(DEFAULT_PRODUCT_TYPES)
+    const [activeType, setActiveType] = useState<string | null>(defaultProducts[0] ?? null)
+    const [selectedTypes, setSelectedTypes] = useState<string[]>(() => Array.from(new Set(defaultProducts)))
     const [addingProduct, setAddingProduct] = useState(false)
     const [productSearch, setProductSearch] = useState('')
     const addProductRef = useRef(null)
@@ -445,7 +462,7 @@ export default function Tabbed() {
                           params.products.split(',').filter((type) => products.some((product) => product.type === type))
                       )
                   )
-                : selectedTypes
+                : selectedTypes.filter((type) => products.some((product) => product.type === type))
         setSelectedTypes(selected)
         setActiveType(
             params.calculator === PLATFORM_PACKAGES_TYPE
@@ -456,7 +473,18 @@ export default function Tabbed() {
         )
         let restoredAnalytics = analyticsData
         const restoredProducts = products.map((product) => {
-            const inputs = readProductInputs(params[product.type], getProductInputs(product, analyticsData))
+            const productParams: any = params[product.type]
+            let inputs = readProductInputs(productParams, getProductInputs(product, analyticsData))
+            // Links from the old two-input calculator carry retained GB as an add-on volume
+            const legacyRetention =
+                product.retention && productParams?.retentionMonths === undefined
+                    ? readLegacyRetention(
+                          product.retention,
+                          inputs.volume,
+                          productParams?.addons?.[product.retention.key]
+                      )
+                    : null
+            if (legacyRetention) inputs = { ...inputs, ...legacyRetention }
             if (product.type === 'product_analytics') {
                 restoredAnalytics = Object.fromEntries(
                     Object.entries(analyticsData).map(([key, value]) => [
@@ -563,6 +591,7 @@ export default function Tabbed() {
             setVolume(product.handle, 0)
             setProduct(product.handle, {
                 addons: undefined,
+                retentionMonths: undefined,
                 model: undefined,
                 observations: undefined,
                 hours: undefined,
@@ -597,13 +626,13 @@ export default function Tabbed() {
         // Keyboard is covered separately: slider handles move on arrow keys without firing either
         // of the other two.
         <div
-            className="w-full flex-1"
+            className="@container w-full flex-1"
             onClickCapture={trackInteraction('click')}
             onChangeCapture={trackInteraction('change')}
             onKeyDownCapture={trackInteraction('keyboard')}
         >
             <div className="grid grid-cols-12 mb-1">
-                <div className="col-span-12 @2xl:col-span-4 md:pr-6 mb-4 md:mb-0">
+                <div className="col-span-12 @2xl:col-span-4 @3xl:pr-6 mb-4 @3xl:mb-0">
                     <div className="mb-2">
                         <p className="m-0 text-sm flex gap-1 items-baseline">
                             <strong>Your estimate</strong>{' '}
@@ -612,7 +641,7 @@ export default function Tabbed() {
                             </span>
                         </p>
                     </div>
-                    <ul className="list-none m-0 p-0 flex flex-row md:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
+                    <ul className="list-none m-0 p-0 flex flex-row @3xl:flex-col gap-px overflow-x-auto @md:w-auto -mx-4 px-4 @md:px-0 @md:mx-0">
                         {selectedProducts.map(
                             ({
                                 name,
@@ -633,7 +662,7 @@ export default function Tabbed() {
                                         <button
                                             type="button"
                                             onClick={() => setActiveType(type)}
-                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
+                                            className={`p-2 rounded-md font-semibold text-sm flex flex-col @3xl:flex-row space-x-2 whitespace-nowrap items-start @3xl:items-center justify-between w-full click ${
                                                 active ? 'font-bold bg-accent' : 'hover:bg-accent'
                                             }`}
                                         >
@@ -659,7 +688,7 @@ export default function Tabbed() {
                                             {billedWith ? (
                                                 <span className="opacity-25">--</span>
                                             ) : (
-                                                <div className="opacity-70 pl-5 md:pl-0">
+                                                <div className="opacity-70 pl-5 @3xl:pl-0">
                                                     {formatUSD(cost + addonsPrice)}
                                                 </div>
                                             )}
@@ -783,7 +812,7 @@ export default function Tabbed() {
                         </button>
                     </div>
                 </div>
-                <div className="col-span-12 @2xl:col-span-8 md:pl-0 flex flex-col">
+                <div className="col-span-12 @2xl:col-span-8 @3xl:pl-0 flex flex-col">
                     {selectedProducts.length === 0 && !platformPackagesActive && (
                         <EmptyEstimate products={products} onAdd={addProduct} />
                     )}
@@ -857,7 +886,9 @@ export default function Tabbed() {
                                 <div className="w-full">
                                     <div className="flex items-center gap-2.5 justify-between">
                                         <h3 className="m-0 leading-none">
-                                            {activeProduct.categoryName || activeProduct.name}
+                                            {activeProduct.type === 'ai_observability'
+                                                ? 'AI observability'
+                                                : activeProduct.categoryName || activeProduct.name}
                                         </h3>
                                         <button
                                             type="button"

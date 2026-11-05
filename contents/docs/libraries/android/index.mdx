@@ -24,6 +24,10 @@ import AndroidInstall from '../../integrate/_snippets/install-android.mdx'
 import AndroidSendEvents from '../../integrate/send-events/_snippets/send-events-android.mdx'
 import AndroidIdentify from './_snippets/identify.mdx'
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Android" />
+
 ## Installation
 
 <AndroidInstall />
@@ -154,7 +158,7 @@ PostHog.register("team_id", 22)
 
 The call above ensures that every event sent by the user will include `"team_id": 22`. This way, if you filtered events by property using `team_id = 22`, it would display all events captured on that user after the `PostHog.register` call, since they all include the specified Super Property.
 
-However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `PostHog.identify`. More information on this can be found on the [Sending User Information section](#sending-user-information).
+However, please note that this does not store properties against the User, only against their events. To store properties against the User object, you should use `PostHog.identify`. More information on this can be found on the [Sending User Information section](#identifying-users).
 
 ### Removing stored Super Properties
 
@@ -424,7 +428,7 @@ val config = PostHogAndroidConfig(
 | `flushAt` | `20` | Number of queued events that triggers a flush. |
 | `maxQueueSize` | `1000` | Maximum number of events kept across memory and disk before FIFO eviction. |
 | `maxBatchSize` | `50` | Maximum number of events sent in one batch request. |
-| `maxRetries` | `3` | Maximum retry attempts for failed requests. |
+| `maxRetries` | `3` | Maximum retry attempts for push-subscription registration failures. It does not apply to event, session recording, or log ingestion. |
 | `flushIntervalSeconds` | `30` | Maximum delay before queued data is flushed. |
 | `encryption` | `null` | Optional `PostHogEncryption` implementation for encrypting persisted queued events. |
 | `proxy` | `null` | Optional `java.net.Proxy` for PostHog API requests. |
