@@ -27,7 +27,7 @@ Here's how PMMs are currently assigned.
 These are some other areas that PMMs own outside of specific products. 
 
 - **Incident comms** – distributed, ask in `#team-developer-marketing` if you need help
-- **Lifecycle (i.e. email) & aligning with eng** – Joe
+- **[Lifecycle (i.e. email)](/handbook/marketing/email-comms) & aligning with eng** – Joe
 - **Startups & partnerships** – Joe
 
 <details>

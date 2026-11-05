@@ -10,6 +10,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/startup_bugprove.png
 featuredImageType: full
+ogImage: generated
 category: Startups
 ---
 

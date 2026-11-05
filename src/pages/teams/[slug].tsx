@@ -955,7 +955,9 @@ export default function TeamPage(props: TeamPageProps) {
                 {objectives && (
                     <>
                         <h2>Goals</h2>
-                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}>
+                        <MDXProvider
+                            components={{ PrivateLink, TeamMember: TeamMemberComponent, FutureTeamMember, SmallTeam }}
+                        >
                             <MDXRenderer>{objectives}</MDXRenderer>
                         </MDXProvider>
                     </>

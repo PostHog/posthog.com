@@ -12,7 +12,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 - [Think in layers](#the-identity-layer-model) – stable IDs, authentication IDs, and device IDs serve different purposes. Know which layer you're operating at.
 - [The golden path: assign a stable ID early and never change it](#choosing-your-identity-strategy) – mint it in one place, pass it to every environment. This eliminates an entire class of problems across Feature Flags, Experiments, Session Replay, and Product Analytics.
 - [Pass the ID across transitions explicitly](#golden-path-stable-id-from-first-touch) – web to mobile, marketing site to product, client to server. If two environments generate IDs independently, they will diverge.
-- [Link IDs explicitly](#linking-ids) – PostHog can merge what you tell it to merge. It can't infer that two IDs belong to the same person.
+- [Link IDs explicitly](#server-side-linking-with-alias) – PostHog can merge what you tell it to merge. It can't infer that two IDs belong to the same person.
 - [Verify your implementation](#how-to-verify-identity-is-correct) – check person profiles, not assumptions.
 
 ---

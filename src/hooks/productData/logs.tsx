@@ -16,7 +16,7 @@ import {
 } from '@posthog/icons'
 import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import { features } from './logs/features'
-import { applications, topFeatures } from './logs/slides'
+import { applications, keyFeatures } from './logs/slides'
 import { getTool } from '../../data/tools'
 
 const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
@@ -78,11 +78,11 @@ export const logs = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -120,6 +120,7 @@ export const logs = {
     ],
     overview: {
         title: 'Logs that already know your users',
+        description: '"Show me logs behind the spike in 500 errors since the last deploy"',
         eli5: 'Logs stores the records your services emit at runtime – requests handled, errors hit, decisions made – so you can search by service, severity, and attribute instead of grepping text files. Point any OpenTelemetry (OTLP) client at PostHog (no proprietary SDK), group similar lines into patterns to see what changed, and open any record to have PostHog AI explain it.',
         textColor: 'text-white',
         layout: 'overlay',

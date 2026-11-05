@@ -103,7 +103,7 @@ const EventsTable = React.memo(function EventsTable({
                 <span className="text-right">When</span>
             </div>
             <div
-                className="min-h-0 flex-1 overflow-hidden [mask-image:linear-gradient(black_65%,transparent)]"
+                className="min-h-0 flex-1 overflow-hidden [overflow-anchor:none] [mask-image:linear-gradient(black_65%,transparent)]"
                 aria-hidden="true"
             >
                 <AnimatePresence initial={false}>

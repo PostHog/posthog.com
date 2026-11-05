@@ -148,7 +148,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'funnels',
         label: 'Funnels',

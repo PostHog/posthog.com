@@ -71,7 +71,7 @@ When reviewing accounts, ask:
 * **Incomplete implementations**: Are there any products a customer started to configure but didn't finish? Understanding why can highlight pain points Error Tracking could address.
 * **Product churn**: Are there any products a customer used and then stopped? Understanding why can help identify if Error Tracking could solve the underlying issues.
 * **Decision-making timeline**: Are they doing annual engineering roadmaps or quarterly goals? This helps you time cross-sell conversations appropriately.
-* **Competitive landscape**: Use the [SDK scanner](https://sdk-scanner.posthog.dev/) to check if they're using a competitor for error tracking, which can help you position PostHog's integrated approach.
+* **Competitive landscape**: Use the <PrivateLink url="https://sdk-scanner.posthog.dev/">SDK scanner</PrivateLink> to check if they're using a competitor for error tracking, which can help you position PostHog's integrated approach.
 
 ## Demonstrate the value
 

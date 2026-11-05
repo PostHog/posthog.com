@@ -543,7 +543,7 @@ const ApplicationSuccess = ({ isInUnitedStates }: { isInUnitedStates?: boolean }
                                 </button>
                             </div>
                             <CallToAction
-                                to="/merch?product=posthog-sticker"
+                                to={`/merch?product=posthog-sticker&coupon=${code}`}
                                 size="sm"
                                 className="!w-full"
                                 state={{ newWindow: true }}

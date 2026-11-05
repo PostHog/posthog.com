@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/wrangling_57e979b936.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Inside PostHog

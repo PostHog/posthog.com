@@ -7,6 +7,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/array/1-26-0.png
+ogImage: generated
 excerpt: >-
   PostHog 1.26.0 is here! Read about our Series B raise, our new features, and
   find out who are the 4 new team members we've onboarded.
@@ -174,7 +175,7 @@ In addition to the highlights listed above, we also merged a bunch of PRs improv
 - [`PostHog/posthog`](https://github.com/PostHog/posthog/commits/master)
 - [`PostHog/plugin-server`](https://github.com/PostHog/plugin-server/commits/master)
 - [`PostHog/posthog-python`](https://github.com/PostHog/posthog-python/commits/master)
-- [`PostHog/posthog-cloud`](https://github.com/PostHog/posthog-cloud/commits/master)
+- <PrivateLink url="https://github.com/PostHog/posthog-cloud/commits/master"><code>PostHog/posthog-cloud</code></PrivateLink>
 - [`PostHog/posthog-js`](https://github.com/PostHog/posthog-js/commits/master)
 - [`PostHog/plugin-repository`](https://github.com/PostHog/plugin-repository/commits/master)
 
