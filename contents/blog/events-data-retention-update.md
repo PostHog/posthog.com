@@ -7,6 +7,9 @@ showTitle: true
 hideAnchor: true
 author:
   - mike-warren
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/data_retention_in_posthog_613218b147.png
+featuredImageType: full
 category: PostHog news
 ---
 
@@ -34,7 +37,7 @@ For these reasons, we've decided to change our retention periods and give you mo
 
 ## How does this impact existing customers?
 
-**Existing paid organizations:** You keep 7 year events retention while you stay on your current plan and platform package, or move to an upgraded platform package. If you downgrade to the Free plan, or downgrade your platform package, you'll move to the new default retention period for your plan.
+**Existing paid organizations:** You keep 7-year events retention while you stay on your current plan and platform package, or move to an upgraded platform package. If you downgrade to the Free plan, or downgrade your platform package, you'll move to the new default retention period for your plan.
 
 **Existing free organizations:** You'll keep 1-year retention. If you upgrade to pay-as-you-go on or after November 5, you'll get the 2-year default. With a platform package, you get access to longer retention periods.
 
