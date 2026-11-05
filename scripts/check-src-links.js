@@ -4,9 +4,6 @@
 
 const fs = require('fs')
 const path = require('path')
-const ts = require('typescript')
-const { internalUrl, resolveUrl, changedFiles, cliOptions, builtUrlExists } = require('./link-check-utils')
-const { validateAnchor } = require('./check-links-post-build')
 
 const CONFIG = {
     SITEMAP_URL: 'https://posthog.com/sitemap/sitemap-0.xml',
@@ -43,16 +40,13 @@ const CONFIG = {
         '/api/', // Vercel serverless functions
     ],
     SOURCE_EXTENSIONS: /\.(tsx|ts|jsx|js)$/,
+    LINK_PATTERNS: [/\b(?:to|href)=["'](\/[^"'\s]*)["']/g, /\b(?:to|href|url|link):\s*["'](\/[^"'\s]*)["']/g],
 }
 
 async function getSitemapXml() {
     if (fs.existsSync(CONFIG.LOCAL_SITEMAP_PATH)) {
         console.log(`Using built sitemap at ${path.relative(process.cwd(), CONFIG.LOCAL_SITEMAP_PATH)}`)
-        return fs
-            .readdirSync(path.dirname(CONFIG.LOCAL_SITEMAP_PATH))
-            .filter((name) => /^sitemap-\d+\.xml$/.test(name))
-            .map((name) => fs.readFileSync(path.join(path.dirname(CONFIG.LOCAL_SITEMAP_PATH), name), 'utf8'))
-            .join('\n')
+        return fs.readFileSync(CONFIG.LOCAL_SITEMAP_PATH, 'utf8')
     }
     console.log(`Fetching ${CONFIG.SITEMAP_URL}`)
     const response = await fetch(CONFIG.SITEMAP_URL)
@@ -79,10 +73,18 @@ async function getSitemapPages() {
 
 function getRedirectSources() {
     const vercelConfig = JSON.parse(fs.readFileSync('vercel.json', 'utf8'))
-    return [
-        ...(vercelConfig.redirects || []),
-        ...(vercelConfig.rewrites || []).map((entry) => ({ ...entry, rewrite: true })),
-    ]
+    return [...(vercelConfig.redirects || []), ...(vercelConfig.rewrites || [])].map((entry) => entry.source)
+}
+
+function matchesRedirect(url, sources) {
+    return sources.some((source) => {
+        const dynamicStart = Math.min(...[source.indexOf('/:'), source.indexOf('(')].filter((index) => index !== -1))
+        if (dynamicStart !== Infinity) {
+            const prefix = source.slice(0, dynamicStart)
+            return prefix !== '' && (url === prefix || url.startsWith(prefix.endsWith('/') ? prefix : prefix + '/'))
+        }
+        return url === source
+    })
 }
 
 function findSourceFiles(dir) {
@@ -90,9 +92,8 @@ function findSourceFiles(dir) {
     for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
         const fullPath = path.join(dir, entry.name)
         if (entry.isDirectory()) {
-            if (!['__tests__', '__fixtures__', 'fixtures'].includes(entry.name))
-                files.push(...findSourceFiles(fullPath))
-        } else if (CONFIG.SOURCE_EXTENSIONS.test(entry.name) && !/\.(test|spec)\.[cm]?[jt]sx?$/.test(entry.name)) {
+            files.push(...findSourceFiles(fullPath))
+        } else if (CONFIG.SOURCE_EXTENSIONS.test(entry.name)) {
             files.push(fullPath)
         }
     }
@@ -100,45 +101,26 @@ function findSourceFiles(dir) {
 }
 
 function extractLinks(filePath) {
-    const content = fs.readFileSync(filePath, 'utf8')
-    const kind = filePath.endsWith('.ts') ? ts.ScriptKind.TS : ts.ScriptKind.TSX
-    const source = ts.createSourceFile(filePath, content, ts.ScriptTarget.Latest, true, kind)
+    const lines = fs.readFileSync(filePath, 'utf8').split('\n')
     const links = []
-    function visit(node) {
-        let value
-        if (ts.isJsxAttribute(node) && ['to', 'href'].includes(node.name.getText(source))) {
-            value = node.initializer
-            if (value && ts.isJsxExpression(value)) value = value.expression
-        } else if (
-            ts.isPropertyAssignment(node) &&
-            ['to', 'href', 'url', 'link'].includes(node.name.getText(source).replace(/^["']|["']$/g, ''))
-        ) {
-            value = node.initializer
+    lines.forEach((line, index) => {
+        for (const pattern of CONFIG.LINK_PATTERNS) {
+            pattern.lastIndex = 0
+            let match
+            while ((match = pattern.exec(line)) !== null) {
+                links.push({ url: match[1], line: index + 1, text: line.trim().slice(0, 160) })
+            }
         }
-        if (
-            value &&
-            (ts.isStringLiteral(value) || ts.isNoSubstitutionTemplateLiteral(value)) &&
-            /^(?:\/|https?:\/\/)/.test(value.text)
-        ) {
-            const start = value.getStart(source)
-            links.push({
-                url: value.text,
-                line: source.getLineAndCharacterOfPosition(start).line + 1,
-                text: content.slice(Math.max(0, start - 75), value.end + 75).replace(/\n/g, ' '),
-            })
-        }
-        ts.forEachChild(node, visit)
-    }
-    visit(source)
+    })
     return links
 }
 
 function normalizeUrl(url) {
-    return internalUrl(url)?.pathname.replace(/\/$/, '') || '/'
+    return url.split(/[?#]/)[0].replace(/\/$/, '') || '/'
 }
 
 function shouldExclude(url) {
-    if (!internalUrl(url)) {
+    if (url.startsWith('//')) {
         return true
     }
     const base = normalizeUrl(url)
@@ -159,15 +141,14 @@ function checkLinks(pages, redirectSources, files) {
                 stats.excludedLinks++
                 continue
             }
-            const resolved = resolveUrl(url, null, redirectSources, (pathname) => builtUrlExists(pathname, pages))
-            if (resolved.excluded || shouldExclude(resolved.url.pathname)) {
-                stats.excludedLinks++
+            const base = normalizeUrl(url)
+            if (pages.has(base)) {
                 continue
             }
-            const target = normalizeUrl(resolved.url.pathname)
-            if (resolved.redirected) stats.redirectedLinks++
-            if (!resolved.error && builtUrlExists(target, pages) && validateAnchor(target, resolved.url.hash)) continue
-            const base = normalizeUrl(url) + internalUrl(url).hash
+            if (matchesRedirect(base, redirectSources)) {
+                stats.redirectedLinks++
+                continue
+            }
             if (!brokenByUrl.has(base)) {
                 brokenByUrl.set(base, [])
             }
@@ -243,7 +224,7 @@ function writeMarkdownReport(brokenByUrl, pages, resultsDir) {
         '',
         '## Instructions',
         '',
-        'You are fixing broken internal links in the posthog.com repository. These links have missing page targets or element anchors after redirect resolution. Confirm live behavior before changing content. For each item:',
+        'You are fixing broken internal links in the posthog.com repository. Every URL below returns a 404: it is not in the sitemap and no redirect covers it. For each item:',
         '',
         '1. Open every listed location and read the link in context.',
         '2. Pick the fix:',
@@ -286,7 +267,7 @@ function writeResultsToFile(brokenByUrl, stats, filesScanned, outputPath, pages)
         return
     }
 
-    const resultsDir = path.resolve(process.cwd(), outputPath)
+    const resultsDir = path.join(process.cwd(), outputPath)
     if (!fs.existsSync(resultsDir)) {
         fs.mkdirSync(resultsDir, { recursive: true })
     }
@@ -310,7 +291,8 @@ function writeResultsToFile(brokenByUrl, stats, filesScanned, outputPath, pages)
             })),
     }
 
-    const resultsFile = path.join(resultsDir, 'src-link-check.json')
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+    const resultsFile = path.join(resultsDir, `src-link-check-${timestamp}.json`)
     fs.writeFileSync(resultsFile, JSON.stringify(results, null, 2))
     console.log(`\nResults saved to: ${resultsFile}`)
 }
@@ -318,7 +300,7 @@ function writeResultsToFile(brokenByUrl, stats, filesScanned, outputPath, pages)
 async function main() {
     console.log('Starting source code link validation...')
 
-    const { outputPath, base } = cliOptions(process.argv.slice(2))
+    const outputPath = process.argv[2] || null
 
     const pages = await getSitemapPages()
     console.log(`Found ${pages.size} pages in sitemap`)
@@ -326,7 +308,7 @@ async function main() {
     const redirectSources = getRedirectSources()
     console.log(`Found ${redirectSources.length} redirect/rewrite patterns`)
 
-    const files = changedFiles(findSourceFiles(CONFIG.SRC_DIR), base)
+    const files = findSourceFiles(CONFIG.SRC_DIR)
     const { brokenByUrl, stats } = checkLinks(pages, redirectSources, files)
 
     displayResults(brokenByUrl)
@@ -334,7 +316,7 @@ async function main() {
     console.log(`\nScanned ${files.length} source files`)
     console.log(`Processed ${stats.totalLinks} internal links`)
     console.log(`Found ${stats.excludedLinks} excluded links (skipped)`)
-    console.log(`Found ${stats.redirectedLinks} redirected links (targets checked)`)
+    console.log(`Found ${stats.redirectedLinks} redirected links (skipped)`)
     console.log(`Found ${brokenByUrl.size} broken links`)
 
     writeResultsToFile(brokenByUrl, stats, files.length, outputPath, pages)
@@ -342,10 +324,7 @@ async function main() {
     process.exit(brokenByUrl.size > 0 ? 1 : 0)
 }
 
-if (require.main === module) {
-    main().catch((error) => {
-        console.error(`Error: ${error.message}`)
-        process.exitCode = 2
-    })
-}
-module.exports = { checkLinks, extractLinks, shouldExclude, findSourceFiles }
+main().catch((error) => {
+    console.error(`Error: ${error.message}`)
+    process.exit(2)
+})
