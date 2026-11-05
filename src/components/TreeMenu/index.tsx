@@ -759,7 +759,9 @@ function TreeMenuItem({
                 <OSButton
                     align="left"
                     width="full"
-                    className={`${index === 0 ? '' : `pl-${2 + index * 4}`} ${
+                    // Inline, so any depth works: Tailwind only builds pl-* classes that appear in the source.
+                    style={index === 0 ? undefined : { paddingLeft: (2 + index * 4) * 4 }}
+                    className={`${
                         activeItem === item
                             ? '!bg-dark/15 dark:!bg-light/15 hover:!bg-dark/15 dark:hover:!bg-light/15'
                             : 'hover:!bg-dark/10 dark:hover:!bg-light/10'
