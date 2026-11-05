@@ -174,20 +174,27 @@ You can also configure collectors under `autocapture` in `config/posthog.php`. S
 
 Collectors add the following properties, plus SDK metadata, identity, session correlation, and groups. They don't copy arbitrary context properties. `duration_ms` is a nonnegative float, not a trace or span.
 
-| Event | Properties |
-| --- | --- |
-| `laravel_request` | `route` (string), `method` (string), `status_code` (integer), `duration_ms` |
-| `$pageview` | Request properties plus `$current_url` (string) and `$pathname` (string) |
-| `laravel_auth_registered` | No collector-specific properties |
-| `laravel_auth_login` | `guard` (string), when supplied |
-| `laravel_auth_logout` | `guard` (string), when supplied |
-| `laravel_auth_failed` | `guard` (string), when supplied; no credentials or attempted user ID |
-| `laravel_auth_lockout` | No collector-specific properties or attempted user ID |
-| `laravel_model_created`, `laravel_model_updated`, `laravel_model_deleted` | `model` (exact class name), `attributes` (only allowlisted JSON-safe values) |
-| Your configured domain event name | Only explicitly mapped property names and JSON-safe values |
-| `laravel_job` | `name` (queued job class), `outcome` (`success` or `failed`), `attempts` (integer), `duration_ms` |
-| `laravel_command` | `name` (first command token), `outcome` (`success` or `failed`), `exit_code` (integer), `duration_ms` |
-| `laravel_scheduled_task` | `name` (task PHP class), `outcome` (`success`, `failed`, or `background_started`), `exit_code` (integer or `null`), `duration_ms` |
+- `laravel_request` - `route` (string), `method` (string), `status_code` (integer), and `duration_ms`
+
+- `$pageview` - Request properties plus `$current_url` (string) and `$pathname` (string)
+
+- `laravel_auth_registered` - No collector-specific properties
+
+- `laravel_auth_login` and `laravel_auth_logout` - `guard` (string), when supplied
+
+- `laravel_auth_failed` - `guard` (string), when supplied, but no credentials or attempted user ID
+
+- `laravel_auth_lockout` - No collector-specific properties or attempted user ID
+
+- `laravel_model_created`, `laravel_model_updated`, and `laravel_model_deleted` - `model` (exact class name) and `attributes` (only allowlisted JSON-safe values)
+
+- Your configured domain event name - Only explicitly mapped property names and JSON-safe values
+
+- `laravel_job` - `name` (queued job class), `outcome` (`success` or `failed`), `attempts` (integer), and `duration_ms`
+
+- `laravel_command` - `name` (first command token), `outcome` (`success` or `failed`), `exit_code` (integer), and `duration_ms`
+
+- `laravel_scheduled_task` - `name` (task PHP class), `outcome` (`success`, `failed`, or `background_started`), `exit_code` (integer or `null`), and `duration_ms`
 
 Collectors don't read request bodies, query values, cookies, credentials, email, IP addresses, job arguments, or full model/event payloads. Authentication uses `getAuthIdentifier()`, so configure an opaque identifier if your application uses email as its auth identifier. Allowlisted attributes and mapped properties can contain sensitive data. Select only fields you intend to send and use `sdk.before_send` for additional redaction.
 
