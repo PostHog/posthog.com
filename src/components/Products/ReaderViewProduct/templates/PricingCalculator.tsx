@@ -4,6 +4,13 @@ import useProducts from 'hooks/useProducts'
 import useProduct from 'hooks/useProduct'
 import { LogSlider, sliderCurve, inverseCurve } from 'components/Pricing/PricingSlider/Slider'
 import { calculatePrice, formatUSD } from 'components/Pricing/PricingSlider/pricingSliderLogic'
+import { getRetentionVolume } from 'components/Pricing/PricingCalculator/calculatorLogic'
+import {
+    RetentionMonthsInput,
+    RetentionSlider,
+    retentionInputUnit,
+} from 'components/Pricing/PricingCalculator/RetentionControls'
+import { pluralizeUnit } from 'components/Pricing/utils'
 import { NumericFormat } from 'react-number-format'
 import AutosizeInput from 'react-input-autosize'
 import { SectionComponentProps } from '../types'
@@ -37,23 +44,34 @@ const ProductRateBlock = ({
     description,
     billingTiers,
     sliderConfig,
-    initialVolume,
+    initialVolume = 0,
     unit,
-    multiplier,
+    freeAllocation,
+    volume: pricedVolume,
+    controls,
+    slider,
+    note,
     onCostChange,
+    onVolumeChange,
 }: {
     name: string
     description?: string
     billingTiers: any[]
-    sliderConfig: { min: number; max: number; marks: number[] }
-    initialVolume: number
+    sliderConfig?: { min: number; max: number; marks: number[] }
+    initialVolume?: number
     unit: string
-    // Adds a second input that multiplies the cost, e.g. months of retention
-    multiplier?: { unit: string; initial: number; max?: number }
+    freeAllocation?: number
+    // Prices a volume set elsewhere, like GB-months of retention, with `controls` and `slider` in place of the
+    // volume input and its slider
+    volume?: number
+    controls?: React.ReactNode
+    slider?: React.ReactNode
+    note?: React.ReactNode
     onCostChange: (cost: number) => void
+    onVolumeChange?: (volume: number) => void
 }) => {
-    const [volume, setVolume] = useState(initialVolume)
-    const [multiplierValue, setMultiplierValue] = useState(multiplier?.initial ?? 1)
+    const [ownVolume, setVolume] = useState(initialVolume)
+    const volume = pricedVolume ?? ownVolume
     const dp = useMemo(() => getMaxDecimalPlaces(billingTiers), [billingTiers])
 
     const { total: cost, costByTier } = useMemo(
@@ -65,14 +83,14 @@ const ProductRateBlock = ({
     )
 
     const hasFractionalSubtotal = costByTier?.some((t) => t.tierCost % 1 !== 0) ?? false
-    // calculatePrice rounds its total, so multiply the unrounded tier costs
-    const totalCost = multiplier
-        ? Math.round(costByTier.reduce((sum, tier) => sum + tier.tierCost, 0) * multiplierValue)
-        : cost
 
     useEffect(() => {
-        onCostChange(totalCost)
-    }, [totalCost])
+        onCostChange(cost)
+    }, [cost])
+
+    useEffect(() => {
+        onVolumeChange?.(volume)
+    }, [volume])
 
     const getActiveTierIndex = () => {
         for (let i = 0; i < billingTiers.length; i++) {
@@ -125,7 +143,8 @@ const ProductRateBlock = ({
                             const isLast = !tier.up_to
 
                             let label = ''
-                            if (i === 0) label = `First ${formatCompactNumber(tier.up_to)} ${unit}s/mo`
+                            if (i === 0 && isLast) label = `All ${pluralizeUnit(unit, 2)}`
+                            else if (i === 0) label = `First ${formatCompactNumber(tier.up_to)} ${unit}s/mo`
                             else if (isLast) label = `${formatCompactNumber(prev?.up_to)}+`
                             else label = `${formatCompactNumber(prev?.up_to)}-${formatCompactNumber(tier.up_to)}`
 
@@ -194,57 +213,46 @@ const ProductRateBlock = ({
                     <div className="pl-4 pr-1">
                         <div className="flex items-center justify-between gap-2 mb-2">
                             <div className="flex flex-wrap items-center gap-1.5">
-                                <NumericFormat
-                                    inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
-                                    value={volume}
-                                    thousandSeparator=","
-                                    onValueChange={({ floatValue }) => {
-                                        if (floatValue !== undefined) setVolume(Math.round(floatValue))
-                                    }}
-                                    customInput={AutosizeInput}
-                                />
-                                <span className="text-sm text-primary/60">{unit}s/mo</span>
-                                {multiplier && (
+                                {controls ?? (
                                     <>
-                                        <span className="text-sm text-primary/60 px-1">×</span>
                                         <NumericFormat
                                             inputClassName="bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1 min-w-[30px] max-w-[150px]"
-                                            value={multiplierValue}
-                                            decimalScale={0}
-                                            allowNegative={false}
-                                            isAllowed={({ floatValue }) =>
-                                                !multiplier.max ||
-                                                floatValue === undefined ||
-                                                floatValue <= multiplier.max
-                                            }
+                                            value={volume}
+                                            thousandSeparator=","
                                             onValueChange={({ floatValue }) => {
-                                                if (floatValue !== undefined)
-                                                    setMultiplierValue(Math.max(1, floatValue))
+                                                if (floatValue !== undefined) setVolume(Math.round(floatValue))
                                             }}
                                             customInput={AutosizeInput}
                                         />
-                                        <span className="text-sm text-primary/60">
-                                            {multiplier.unit}
-                                            {multiplierValue === 1 ? '' : 's'}
-                                        </span>
+                                        <span className="text-sm text-primary/60">{unit}s/mo</span>
                                     </>
                                 )}
                             </div>
-                            <span className="text-base font-bold text-primary tabular-nums">
-                                {formatUSD(totalCost)}
-                            </span>
+                            <span className="text-base font-bold text-primary tabular-nums">{formatUSD(cost)}</span>
                         </div>
-                        <LogSlider
-                            stepsInRange={100}
-                            marks={sliderConfig.marks}
-                            min={sliderConfig.min}
-                            max={sliderConfig.max}
-                            onChange={(value) => setVolume(Math.round(sliderCurve(value)))}
-                            value={inverseCurve(volume)}
-                        />
-                        <p className="text-sm text-green font-semibold mt-8 mb-0">
-                            First {sliderConfig.min.toLocaleString()} {unit}s free –&nbsp;<em>every month!</em>
-                        </p>
+                        {controls
+                            ? slider
+                            : sliderConfig && (
+                                  <LogSlider
+                                      stepsInRange={100}
+                                      marks={sliderConfig.marks}
+                                      min={sliderConfig.min}
+                                      max={sliderConfig.max}
+                                      onChange={(value) => setVolume(Math.round(sliderCurve(value)))}
+                                      value={inverseCurve(volume)}
+                                  />
+                              )}
+                        {(note || !!freeAllocation) && (
+                            <div className={`${controls && !slider ? 'mt-2' : 'mt-8'} space-y-1`}>
+                                {note && <p className="text-sm text-primary/60 m-0">{note}</p>}
+                                {!!freeAllocation && (
+                                    <p className="text-sm text-green font-semibold m-0">
+                                        First {freeAllocation.toLocaleString()} {pluralizeUnit(unit, freeAllocation)}{' '}
+                                        free –&nbsp;<em>every month!</em>
+                                    </p>
+                                )}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -270,6 +278,9 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
 
     const [mainCost, setMainCost] = useState(0)
     const [addonCosts, setAddonCosts] = useState<number[]>([])
+    const [mainVolume, setMainVolume] = useState(0)
+    const [retentionMonths, setRetentionMonths] = useState(0)
+    const [retentionCost, setRetentionCost] = useState(0)
 
     if (!billing?.plans?.length || !activeProduct) return null
 
@@ -284,7 +295,16 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
         return { ...addon, billingData: ba, tiers: ba?.plans?.find((p: any) => p.tiers)?.tiers }
     })
 
-    const totalCost = mainCost + addonCosts.reduce((sum: number, c: number) => sum + c, 0)
+    // Retention (Logs) bills every GB ingested above again for each month kept, as on the /pricing calculator
+    const retention = activeProduct.retention
+    const retentionBilling = retention && billing.addons?.find((a: any) => a.type === retention.key)
+    const retentionTiers = retentionBilling?.plans?.find((p: any) => p.tiers)?.tiers
+    const retentionUnit = retentionBilling?.unit || `${unit}-month`
+    const retentionVolume = getRetentionVolume(mainVolume, retentionMonths)
+    const showRetention = !!retentionTiers?.length
+
+    const totalCost =
+        mainCost + (showRetention ? retentionCost : 0) + addonCosts.reduce((sum: number, c: number) => sum + c, 0)
 
     const handleAddonCostChange = (index: number) => (cost: number) => {
         setAddonCosts((prev) => {
@@ -322,8 +342,62 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                     }
                     initialVolume={activeProduct.volume || freePlan?.free_allocation || 0}
                     unit={unit}
+                    freeAllocation={freePlan?.free_allocation}
                     onCostChange={setMainCost}
+                    onVolumeChange={setMainVolume}
                 />
+            )}
+
+            {showRetention && (
+                <div className="mt-8">
+                    <ProductRateBlock
+                        name={retention.label}
+                        description={
+                            // Billing sets `no_billing_limit` when billing limits stop capping retention
+                            [
+                                retention.pricingDescription,
+                                retentionBilling.no_billing_limit === true && retention.noBillingLimitNote,
+                            ]
+                                .filter(Boolean)
+                                .join(' ') || undefined
+                        }
+                        billingTiers={retentionTiers}
+                        unit={retentionUnit}
+                        volume={retentionVolume}
+                        controls={
+                            <>
+                                <RetentionMonthsInput
+                                    retention={retention}
+                                    value={retentionMonths}
+                                    onChange={setRetentionMonths}
+                                    className="w-12 bg-primary text-center text-lg font-bold border border-primary hover:border-button dark:border-dark rounded-sm py-1 px-1"
+                                />
+                                <span className="text-sm text-primary/60">
+                                    {retentionInputUnit(retention, retentionMonths)}
+                                </span>
+                            </>
+                        }
+                        slider={
+                            <RetentionSlider
+                                retention={retention}
+                                value={retentionMonths}
+                                onChange={setRetentionMonths}
+                            />
+                        }
+                        note={
+                            retentionMonths > 0 ? (
+                                <>
+                                    {mainVolume.toLocaleString()} {pluralizeUnit(unit, mainVolume)} × {retentionMonths}{' '}
+                                    {retentionMonths === 1 ? 'month' : 'months'} = {retentionVolume.toLocaleString()}{' '}
+                                    {pluralizeUnit(retentionUnit, retentionVolume)}
+                                </>
+                            ) : (
+                                retention.includedNote
+                            )
+                        }
+                        onCostChange={setRetentionCost}
+                    />
+                </div>
             )}
 
             {/* Add-on rate blocks */}
@@ -338,7 +412,7 @@ const PricingCalculator = ({ id, productData }: SectionComponentProps) => {
                             sliderConfig={addon.sliderConfig}
                             initialVolume={addon.volume || addon.sliderConfig?.min || 0}
                             unit={addon.unit || unit}
-                            multiplier={addon.multiplier}
+                            freeAllocation={addon.freeAllocation ?? addon.sliderConfig?.min}
                             onCostChange={handleAddonCostChange(i)}
                         />
                     </div>

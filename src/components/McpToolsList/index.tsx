@@ -16,7 +16,7 @@ type Family = {
     match: string[]
 }
 
-const SCHEMA_SOURCE = 'https://github.com/PostHog/posthog/blob/master/services/mcp/schema/tool-definitions-all.json'
+const SCHEMA_SOURCE = 'https://github.com/PostHog/posthog/tree/master/services/mcp/schema'
 
 // Families for AI Observability (feature "llm_analytics"). Tools matching no family
 // land in an "Other" bucket so new tool groups surface instead of silently disappearing.

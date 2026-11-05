@@ -60,7 +60,7 @@ In the US, our 401k plan is managed by [Vestwell](https://connect-b.vestwell.com
 
 #### Health care
 
-In the US, you'll enroll in benefits through [BambooHR](https://posthog.bamboohr.com/login.php) and manage your coverage through [UnitedHealthcare](https://member.uhc.com/) for medical and [Guardian](https://www.guardiananytime.com/) for dental and vision. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
+In the US, you'll enroll in benefits through <PrivateLink url="https://posthog.bamboohr.com/login.php">BambooHR</PrivateLink> and manage your coverage through [UnitedHealthcare](https://member.uhc.com/) for medical and [Guardian](https://www.guardiananytime.com/) for dental and vision. PostHog pays 100% of the premium of the Platinum plan for team members, and 75% for dependents.
 
 We offer the option to opt in to a [Flexible Savings Account (FSA)](https://www.healthcare.gov/have-job-based-coverage/flexible-spending-accounts/), which is a tax-advantaged account that allows you to contribute pre-tax dollars up to $3,400 per year to be used on out-of-pocket medical expenses. The FSA is a "use it or lose it" benefit, so any dollars that are not spent by the end of the year return to the company.  
 

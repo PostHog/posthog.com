@@ -15,7 +15,6 @@ export { default as buildProductMenuTabs, surfaceBasePath } from './buildProduct
 export type { ProductSurface } from './buildProductMenuTabs'
 export { default as ProductNav } from './ProductNav'
 export { default as ProductSwitcher } from './ProductSwitcher'
-export { getProductSurfaceUrl } from './getProductSurfaceUrl'
 export { templateRegistry } from './templates'
 export { resolveTemplate } from './types'
 export type { ProductNavItem, SectionComponentProps } from './types'
@@ -116,7 +115,7 @@ export default function ProductReaderView({
                 proseSize="lg"
                 showQuestions={false}
                 menuTabs={menuTabs}
-                productSelect={<ProductSwitcher activeHandle={productData.handle} />}
+                productSelect={<ProductSwitcher activeHandle={productData.handle} surface={surface} />}
             >
                 <div ref={sectionsRef} className="flex flex-col gap-12">
                     {groupSurfaceMenu(surfaceMenu).map((group, groupIndex) => {

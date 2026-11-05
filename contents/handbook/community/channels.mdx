@@ -8,23 +8,46 @@ We run more than one community channel, and they are not interchangeable. Each o
 
 ## Two channels, two jobs
 
-Discord and the forum are our two homes. They work differently on purpose.
+The forum and Discord are our two homes. They work differently on purpose.
 
-**Discord is for real-time chat.** Conversational and hands-on. It's where people show what they're building, react to each other, and where superfans hang out. The value is in the conversation happening at all – not in it being findable six months later.
+**The forum is our primary channel.** It's where people introduce themselves, show what they've built, start discussions, and ask questions. It's asynchronous and searchable, so a good thread keeps paying out to everyone who finds it afterwards.
 
-**The forum is for lasting answers.** Asynchronous and searchable. A question, discussion, or article posted there keeps paying out to everyone who finds it afterwards. It should be _owned by builders_, not staffed by PostHog.
+We put the most into the forum because it's the channel we control. We can see what's happening, shape the experience, and connect it to the rest of the site, like blog posts and product features. When we changed what the forum invites, people changed how they used it, so we know iterating here works.
 
-The behavior we see in each channel is channel-shaped, not user-shaped. The same person banters in Discord and writes a careful question in the forum, because that's what each space invites.
+**Discord is a group chat with PostHog people.** It's quick, real-time, and gone by next week. People hang out, share what they're working on, and talk to the team directly. The value is in the conversation happening at all – not in it being findable six months later.
+
+What works in Discord:
+
+- Events, like book club and coworking sessions
+- Polls and feedback requests – people are happy to tell us what they want
+- Sharing and trying out each other's projects
+- Showing off merch
+
+What doesn't:
+
+- Dedicated topic channels – they stay empty
+- Bug and feature request channels – things got lost, so we removed them
+- Forced prompts to share or shout out a product
+
+Discord stays alive because the team is in it. If we stopped showing up, it would go quiet.
+
+### Two audiences, not one
+
+The same conversations happen in both places, but mostly with different people. Very few members are active in both, and those who are still have one home.
+
+So we treat them as two audiences. We don't try to move people from one to the other, or get everyone into every channel. We meet people where they are, and share things where they fit the format.
+
+The behavior we see in each channel is channel-shaped, not user-shaped. The same person writes a careful question in the forum and banters in Discord, because that's what each space invites.
 
 ## Channels we maintain but don't grow (for now)
 
-- **GitHub.** The public workbench – claimed and routed, not staffed. Issues get triaged to an owning team. We don't try to turn it into a discussion venue, and we're not driving community members to contribute PRs or issues right now.
+- **GitHub.** The public workbench. External contributors open real PRs and issues, and they deserve an answer. Whoever is [covering the community](/handbook/community/coverage#external-pull-requests) routes external pull requests to the owning team. If one is routed to you, all we ask is a reply: "useful, here's why", "not a fit, here's why", or "leaving it open to see if others want it". [Support heroes](/handbook/engineering/operations/support-hero) help here too. We don't try to turn GitHub into a discussion venue.
 
-- **Reddit.** A reputation surface, not a home. We show up and reply when needed, but we don't try to move our community there.
+- **Reddit.** A reputation surface, not a home. It's quiet, and most people who post there only post once. Whoever is [covering the community](/handbook/community/coverage#reddit) watches it, replies, and flags threads to the right team when needed. We don't try to grow it or move our community there.
 
 ## Pull support out
 
-Neither Discord nor the forum is a support channel, and the single most valuable thing we can do for both is stop letting support define them.
+Neither the forum nor Discord is a support channel, and the single most valuable thing we can do for both is stop letting support define them.
 
 Being blocked is a support problem. It deserves a support response, and it should be routed as one rather than absorbed into whichever channel it landed in:
 
@@ -60,6 +83,23 @@ When you ban someone, always tell them why and how to appeal. Posting the reason
 - **Discord:** use the reason field in the ban dialog. Choose "Other" to write a freeform reason, and include `community@posthog.com` for appeals. The person sees it if they try to rejoin.
 - **A PostHog organization:** the suspension reason and an appeal address show on login.
 
+### When to ban, and when to warn
+
+Ban on sight when a person acts in bad faith:
+
+- **Hateful content of any kind.** Remove it and ban. Do not warn, and do not argue with it in the channel. This is not the same as a person who is rude or angry – a rude person gets the ladder below, hateful content does not.
+- **Abuse aimed at a person**, in the channel or by direct message.
+- **Spam and unsolicited promotion.**
+- **A person who says they abused a PostHog endpoint, account, or credit allowance.** Tell <SmallTeam slug="support" /> too, because the account side may need action.
+
+For everything else, use the four steps in the [code of conduct](/docs/contribute/code-of-conduct#enforcement-guidelines): correction, warning, temporary ban, permanent ban. A first mistake that looks careless starts at correction. A first mistake that looks hostile does not.
+
+### You do not have to absorb it
+
+No one is expected to read abuse, argue with it, or make the call alone. Remove the content first, then send it to [community@posthog.com](mailto:community@posthog.com) and move on. Support has the same rule for tickets – see [dealing with difficult or abusive users](/handbook/support/customer-support#dealing-with-difficult-or-abusive-users).
+
+When assigned, follow the guide on [covering the community](/handbook/community/coverage).
+
 ## For PostHog team members
 
 ### Joining Discord
@@ -68,11 +108,21 @@ When you ban someone, always tell them why and how to appeal. Posting the reason
 2. Post in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> so we can give you the teammate role.
 3. Once you have the role, you'll show up as a PostHog teammate in the server.
 
+### Subscribing to the events calendar
+
+The PostHog Events calendar has our IRL and online events, so you can see what's coming up and join in.
+
+1. Sign in to your `@posthog.com` Google account.
+2. Open the <PrivateLink url="https://calendar.google.com/calendar/u/0?cid=ZGI5OWQ2NGZkZTk5YjQyODVmYmU3ZDYxODkwMDJhMmE4MWFkN2YyZWVjY2YyMjI5M2QyNTMwNzgyMDkzMjYxNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t">PostHog Events calendar</PrivateLink>.
+3. Click **Add** when Google Calendar asks if you want to add it.
+
+For public events, see the [events page](/events). For how we plan and run events, see [marketing events](/handbook/marketing/events).
+
 ### How to show up
 
-- **In Discord**, be a person, not a support desk. React to things so people know they've been seen. Share what you're working on, and ask what other people are working on.
-
 - **In the forum**, follow the [guidelines for answering community questions](/handbook/community/questions). Use the moderation tools to escalate to support, delete posts, or flag feedback to the right team.
+
+- **In Discord**, be a person, not a support desk. React to things so people know they've been seen. Share what you're working on, and ask what other people are working on. Join the events, too – you can see what's coming up in Discord and on the [events page](/events).
 
 - **Route, don't absorb.** If something belongs in support or on the roadmap, send it there rather than answering it in-channel.
 

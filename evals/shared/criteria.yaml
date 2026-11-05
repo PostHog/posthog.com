@@ -1,0 +1,11 @@
+# Shared rubrics. A check pulls one in with `criteria.shared: [<name>]`, so the same
+# rubric reads the same way on every page and results line up across pages.
+
+builds: >-
+    The trace shows the app building, starting, or compiling without errors
+    after the PostHog changes were made.
+
+docs-read: >-
+    The trace shows the agent read at least one posthog.com page. In your
+    reasoning, list every posthog.com URL the agent read, in the order it read
+    them, or say that it read none.

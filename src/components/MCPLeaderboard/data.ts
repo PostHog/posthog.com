@@ -32,25 +32,16 @@ export interface Share {
     color?: string
     errorRate?: number | null
     p95?: number | null
+    change?: number | null
 }
 
 // Labels that mean "we don't know", which the charts drop before they renormalize.
 const UNKNOWN_LABELS = new Set(['Unknown', 'unknown', 'Unidentified', 'Not reported', 'None', 'Unspecified'])
 
-// Hex values of the Tailwind tokens named in the comments. Chart.js paints a canvas, so it needs
-// the values, not the classes. These are for single-series charts and bars. Labs and categories use
-// the OKLCH palettes below.
-export const PALETTE = {
-    blue: '#2F80FA',
-    green: '#6AA84F',
-    yellow: '#F7A501',
-    red: '#F54E00',
-    gray: '#8F8F8C',
-}
-
 // OKLCH is a perceptual color space: equal steps in lightness, chroma, or hue look equally different,
-// which HSL does not give (a yellow and a blue with the same HSL lightness look very different). The
-// lab and category colors are built in OKLCH and converted to hex for Chart.js.
+// which HSL does not give (a yellow and a blue with the same HSL lightness look very different). Every
+// color on the page is built in OKLCH and converted to hex, because Chart.js paints a canvas and needs
+// values, not Tailwind classes.
 const toSrgb = (x: number): number => (x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055)
 
 const oklchToLinearRgb = (l: number, c: number, h: number): [number, number, number] => {
@@ -83,10 +74,25 @@ export const oklch = (l: number, c: number, h: number): string => {
         .join('')}`
 }
 
-// The base lightness and the chroma for every lab and category. Labs shift their lightness from the
-// base (see LAB_LIGHTNESS). Dark mode is a little lighter, so colors stay clear of the dark background.
+// The base lightness and the chroma for every color. Labs shift their lightness from the base (see
+// LAB_LIGHTNESS). Dark mode is a little lighter, so colors stay clear of the dark background.
 const LIGHTNESS: Record<Theme, number> = { light: 0.68, dark: 0.76 }
 const CHROMA = 0.12
+
+// A color at a hue, shifted darker (below 0) or lighter (above 0) from the theme's lightness. Without a
+// hue, it's gray.
+const shade = (hue: number | undefined, theme: Theme, lightnessOffset = 0): string => {
+    const lightness = Math.min(0.95, Math.max(0.3, LIGHTNESS[theme] + lightnessOffset))
+    return hue === undefined ? oklch(lightness, 0, 0) : oklch(lightness, CHROMA, hue)
+}
+
+// Color means one of three things on this page: a lab (LAB_HUES), a failure (ERROR_HUE), or anything
+// else (DATA_HUE): tool categories, spec versions, latency, growth. A chart with several labels that
+// aren't labs uses shades of one hue, so it never looks like it's about a lab.
+const DATA_HUE = 265
+const ERROR_HUE = 20
+export const dataColor = (theme: Theme, lightnessOffset = 0): string => shade(DATA_HUE, theme, lightnessOffset)
+export const errorColor = (theme: Theme, lightnessOffset = 0): string => shade(ERROR_HUE, theme, lightnessOffset)
 
 // Lab hues, spread around the wheel from two anchors: Anthropic's orange (39 degrees) and OpenAI's
 // blue-green (175 degrees, set to 180 to stay clear of green). The other labs fill the gaps 50 to 80
@@ -121,27 +127,35 @@ const LAB_LIGHTNESS: Record<string, number> = {
 
 // A lab's or maker's color. `lightnessOffset` shades it darker (below 0) or lighter (above 0) at the
 // same hue. "Other" and anything without a hue are gray.
-export const vendorColor = (vendor: string, theme: Theme, lightnessOffset = 0): string => {
-    const hue = LAB_HUES[vendor]
-    const lightness = Math.min(0.95, Math.max(0.3, LIGHTNESS[theme] + (LAB_LIGHTNESS[vendor] ?? 0) + lightnessOffset))
-    return hue === undefined ? oklch(lightness, 0, 0) : oklch(lightness, CHROMA, hue)
-}
+export const vendorColor = (vendor: string, theme: Theme, lightnessOffset = 0): string =>
+    shade(LAB_HUES[vendor], theme, (LAB_LIGHTNESS[vendor] ?? 0) + lightnessOffset)
 
-// Colors for a set of labels without a lab, such as spec versions or sign-in methods. The hues are
-// spread evenly over the labels, starting at blue, and each label keeps its color however a chart
-// orders it. Unknown labels and "Other" are gray. Pass every label the bar and the chart show, so
-// both use the same color for a label.
-export const categoricalColors = (labels: string[], theme: Theme): Map<string, string> => {
+// The one color a lab or maker gets wherever it is a single fill: the scoreboard, the lab chart, and
+// the harness bars. It's a little darker than the base, so the bands read as strongly as the model
+// chart, whose leading models start at the dark end of each lab's shades.
+export const labColor = (vendor: string, theme: Theme): string => vendorColor(vendor, theme, -0.08)
+
+// The lightness offset of item `i` out of `count`, from dark to light in even steps. The steps are
+// wide, so neighbors stay apart even at the light end, where chroma has to drop.
+const rampOffset = (i: number, count: number): number => -0.18 + (count > 1 ? i / (count - 1) : 0.5) * 0.38
+
+// Shades of one hue for labels that aren't labs, such as spec versions or sign-in methods, darkest
+// first, in the order given. Unknown labels and "Other" are gray. Pass every label the bar and the
+// chart show, so both use the same color for a label.
+export const rampColors = (labels: string[], theme: Theme, hue = DATA_HUE): Map<string, string> => {
     const named = Array.from(new Set(labels)).filter((label) => !UNKNOWN_LABELS.has(label) && label !== 'Other')
     const colors = new Map<string, string>()
-    named.forEach((label, i) => colors.set(label, oklch(LIGHTNESS[theme], CHROMA, 250 + (360 / named.length) * i)))
-    labels.forEach((label) => colors.has(label) || colors.set(label, oklch(LIGHTNESS[theme], 0, 0)))
+    named.forEach((label, i) => colors.set(label, shade(hue, theme, rampOffset(i, named.length))))
+    labels.forEach((label) => colors.has(label) || colors.set(label, shade(undefined, theme)))
     return colors
 }
 
-// Gives each series a shade of its lab's color, from darker to lighter in even OKLCH lightness steps
-// (wide ones, so neighbors stay apart even at the light end, where chroma has to drop) at the lab's hue, so a lab's models read as one family, each model stays distinguishable, and no
-// shade drifts into another lab's color or into gray. Pass entries in display order.
+export const errorRampColors = (labels: string[], theme: Theme): Map<string, string> =>
+    rampColors(labels, theme, ERROR_HUE)
+
+// Gives each series a shade of its lab's color, in the same steps as `rampColors`, so a lab's models
+// read as one family, each model stays distinguishable, and no shade drifts into another lab's color
+// or into gray. Pass entries in display order.
 export const labShades = (entries: { label: string; vendor: string }[], theme: Theme): Map<string, string> => {
     const byVendor = new Map<string, string[]>()
     entries.forEach(({ label, vendor }) => {
@@ -150,10 +164,7 @@ export const labShades = (entries: { label: string; vendor: string }[], theme: T
     })
     const colors = new Map<string, string>()
     byVendor.forEach((labels, vendor) => {
-        labels.forEach((label, i) => {
-            const step = labels.length > 1 ? i / (labels.length - 1) : 0.5
-            colors.set(label, vendorColor(vendor, theme, -0.18 + step * 0.38))
-        })
+        labels.forEach((label, i) => colors.set(label, vendorColor(vendor, theme, rampOffset(i, labels.length))))
     })
     return colors
 }
@@ -169,6 +180,7 @@ const CLIENT_MAKER: Record<string, string> = {
     'Anthropic API': 'Anthropic',
     Cowork: 'Anthropic',
     'Claude Design': 'Anthropic',
+    'Claude artifacts': 'Anthropic',
     ChatGPT: 'OpenAI',
     OpenAI: 'OpenAI',
     'OpenAI Codex': 'OpenAI',
@@ -192,7 +204,19 @@ const CLIENT_MAKER: Record<string, string> = {
 const DISPLAY_LABELS: Record<string, Record<string, string>> = {
     auth_method: { oauth: 'OAuth', personal_api_key: 'Personal API key' },
     model_source: { self_reported: 'Agent said so', client_metadata: 'Client metadata' },
-    client: { Other: 'Other agents' },
+    // "OpenAI" is OpenAI's MCP connector when it doesn't say which OpenAI app it runs in.
+    client: { Other: 'Other agents', OpenAI: 'OpenAI (app not named)' },
+    error_type: {
+        validation: 'Bad arguments',
+        internal: 'Tool failed',
+        api_4xx: 'API said no (4xx)',
+        api_5xx: 'API error (5xx)',
+        permission: 'No permission',
+        rate_limited: 'Rate limited',
+        missing_context: 'Missing context',
+        memory_limit: 'Memory limit',
+        timeout: 'Timed out',
+    },
     // Short enough to fit the narrowest bar list. The full name shows on hover.
     tool_category: { 'Organization & project management': 'Project management' },
 }
@@ -204,7 +228,7 @@ export const clientMaker = (client: string): string => {
     return CLIENT_MAKER[client] ?? 'Other apps'
 }
 
-export const clientColor = (client: string, theme: Theme): string => vendorColor(clientMaker(client), theme)
+export const clientColor = (client: string, theme: Theme): string => labColor(clientMaker(client), theme)
 
 // Mirrors the vendor `multiIf` in the endpoint query.
 export const modelVendor = (model: string): string => {
@@ -346,8 +370,38 @@ export const topSeries = (
 export const delta = (values: number[]): number | null =>
     values.length >= 2 ? values[values.length - 1] - values[values.length - 2] : null
 
+// Share of a period's calls where we know the model: everything except the unknown labels.
+export const modelCoverage = (
+    rows: LeaderboardRow[],
+    facet: 'model_vendor' | 'model_vendor_daily',
+    period: string
+): number =>
+    100 -
+    facetRows(rows, facet)
+        .filter((row) => row.week === period && UNKNOWN_LABELS.has(row.label))
+        .reduce((sum, row) => sum + (row.calls_pct ?? 0), 0)
+
+// One value of the `total` facet for each week, for the growth chart.
+export const growthSeries = (
+    rows: LeaderboardRow[],
+    weeks: string[],
+    key: 'calls_index' | 'users_index'
+): (number | null)[] => {
+    const byWeek = new Map(facetRows(rows, 'total').map((row) => [row.week, row[key]]))
+    return weeks.map((week) => byWeek.get(week) ?? null)
+}
+
+export const addDays = (day: string, days: number): string =>
+    new Date(Date.parse(`${day}T00:00:00Z`) + days * 24 * 60 * 60 * 1000).toISOString().slice(0, 10)
+
 export const formatDay = (day: string): string =>
     new Date(`${day}T00:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' })
+
+// A week as "Oct 5–11", or "Sep 28–Oct 4" when it crosses a month.
+export const formatWeek = (week: string): string => {
+    const [start, end] = [formatDay(week), formatDay(addDays(week, 6))]
+    return start.split(' ')[0] === end.split(' ')[0] ? `${start}–${end.split(' ')[1]}` : `${start}–${end}`
+}
 
 export const formatPct = (value: number | null | undefined, digits = 1): string =>
     value === null || value === undefined ? '–' : `${value < 0.1 && value > 0 ? '<0.1' : value.toFixed(digits)}%`

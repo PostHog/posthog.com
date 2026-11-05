@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/google-analytics-gdpr.png
 featuredImageType: full
+ogImage: generated
 author:
   - andy-vandervell
 category: General

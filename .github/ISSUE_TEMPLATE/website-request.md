@@ -23,7 +23,7 @@ _Link to your Google Doc with the full draft copy. The website team will work fr
 
 ## References & examples
 
-_Any pages, designs, or examples that are useful context. Don't be too prescriptive — Cory & Eli will handle the design._
+_Any pages, designs, or examples that are useful context. Don't be too prescriptive — the Website Team will handle the design._
 
 ## Deadline
 

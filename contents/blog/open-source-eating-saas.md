@@ -8,6 +8,10 @@ hideAnchor: true
 category: General
 tags:
   - Open source
+  - Founders
+  - Big decisions
+crosspost:
+  - Founders
 ---
 
 Software-as-a-Service (SaaS) fatigue is real.

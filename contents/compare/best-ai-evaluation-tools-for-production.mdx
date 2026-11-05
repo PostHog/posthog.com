@@ -22,7 +22,7 @@ seo:
 
 Your unit tests prove the code runs; they say nothing about whether your LLM handed the user something useful or hallucinated a weird answer instead.
 
-[This is where evals come in](/pocket-guides/ai-observability/quality-output): they score the output itself. 
+[This is where evals come in](/learn/ai-observability/pocket-guide/quality-output): they score the output itself.
 
 The tools below all do that, but the best ones judge with both LLM-as-judge and code-based checks, gate your CI/CD on a pass/fail threshold, score offline datasets and live production traffic, and sit next to your traces so a quality dip in production points at what caused it. 
 
@@ -185,7 +185,7 @@ Every other tool stops at the trace. PostHog stores eval scores as the same even
 
 It's also the direction PostHog is built around: a **self-driving product** that acts on its own data. [Scouts](/blog/what-is-a-scout) read across your traces, evals, and product data, sort signal from noise, and an agent picks up what's worth fixing and opens a PR for you to review and merge. 
 
-You can steer it all from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it all from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 
@@ -194,7 +194,7 @@ You can steer it all from [Slack](/slack), the [web app](/ai), the [desktop app]
 
 **Observability** captures what your app did – traces, spans, latency, token cost, and the exact input and output of each generation. **Evals** score whether those outputs were actually good, using judges or code-based checks that return a pass or fail. 
 
-Learn more with our [AI Observability pocket guides](/pocket-guides/ai-observability).
+Learn more with our [AI Observability pocket guides](/learn/ai-observability).
 
 </details>
 

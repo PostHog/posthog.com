@@ -12,6 +12,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/first-10-customers.png
 featuredImageType: full
+ogImage: generated
 category: Product growth
 tags:
   - Guides

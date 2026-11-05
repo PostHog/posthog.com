@@ -149,11 +149,11 @@ export default function Points({ wallet: walletProp, readOnly = false, firstName
                                                     ) : null}
                                                     <span
                                                         className={`font-mono font-bold text-base text-right whitespace-nowrap ${
-                                                            amount > 0 ? 'text-green' : 'text-red'
+                                                            (amount ?? 0) > 0 ? 'text-green' : 'text-red'
                                                         }`}
                                                     >
-                                                        {amount > 0 ? '+' : ''}
-                                                        {amount.toLocaleString()}
+                                                        {(amount ?? 0) > 0 ? '+' : ''}
+                                                        {(amount ?? 0).toLocaleString()}
                                                     </span>
                                                 </div>
                                             </div>

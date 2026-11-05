@@ -1,0 +1,38 @@
+---
+title: GitHub repositories as a knowledge source
+sidebar: Docs
+showTitle: true
+---
+
+import PrivateBeta from './_snippets/private-beta.mdx'
+
+<PrivateBeta />
+
+<CalloutBox icon="IconLock" title="PostHog does not index your repositories" type="fyi">
+
+Your code is **not** indexed, and PostHog doesn't search inside files. Business Knowledge searches file names and README text, then reads the matching file from GitHub when an answer needs it.
+
+</CalloutBox>
+
+GitHub repositories let Business Knowledge read repositories you select as context when it answers a question.
+
+Connect a repository in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings). The setting is shown when GitHub repositories are enabled for your project.
+
+Each environment keeps its own repository list.
+
+## How repositories are referenced
+
+Business Knowledge searches your repositories only when document search finds nothing. It matches file names and identifiers, not full sentences, then reads the file and returns its text with a permalink.
+
+## Connect
+
+1. [Install the PostHog GitHub App](https://app.posthog.com/settings/project-integrations) if it isn't installed yet.
+2. Open [**Business Knowledge** settings](https://app.posthog.com/business-knowledge/settings).
+3. Under **GitHub repositories**, connect the installation.
+4. Add repositories and choose **Save repositories**.
+
+You can select up to 100 repositories.
+
+## Disconnect
+
+**Disconnect** stops Business Knowledge from reading those repositories. The GitHub App stays installed.

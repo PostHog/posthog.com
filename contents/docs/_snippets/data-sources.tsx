@@ -6,7 +6,7 @@ import { SELF_HOSTED_SOURCES } from 'constants/sources'
 
 const selfHostedPlatforms = SELF_HOSTED_SOURCES.map((s) => ({
     label: s.name,
-    url: `/docs/data-warehouse/sources/${s.slug}`,
+    url: `/docs/data-pipelines/sources/${s.slug}`,
     image: getLogo(s.logo),
 }))
 

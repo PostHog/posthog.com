@@ -7,6 +7,7 @@ interface ReaderViewContextType {
     isNavVisible: boolean
     isTocVisible: boolean
     isNarrow: boolean
+    isWidthMeasured: boolean
     setContainerWidth: (width: number | null) => void
     fullWidthContent: boolean
     setFullWidthContent: (value: boolean) => void
@@ -61,6 +62,7 @@ export function ReaderViewProvider({
     // is actually known so SSR/first paint defaults to the desktop layout.
     const isNarrow =
         measuredNarrow !== null ? measuredNarrow : !!appWindowWidth && appWindowWidth < NARROW_READER_BREAKPOINT
+    const isWidthMeasured = measuredNarrow !== null
     const [isNavVisible, setIsNavVisible] = useState<boolean>(defaultNavVisible ?? persistedPinnedMemory ?? true)
     const [navUserToggled, setNavUserToggled] = useState(persistedPinnedMemory !== null)
     // @6xl breakpoint is 72rem = 1152px
@@ -160,6 +162,7 @@ export function ReaderViewProvider({
         isNavVisible,
         isTocVisible,
         isNarrow,
+        isWidthMeasured,
         setContainerWidth,
         fullWidthContent,
         setFullWidthContent,

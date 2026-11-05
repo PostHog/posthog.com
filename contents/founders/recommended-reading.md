@@ -6,9 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
-  - Growth
+  - Lessons from others
 crosspost:
   - Blog
 ---

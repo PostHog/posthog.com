@@ -6,11 +6,10 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/super-hog-pink.png
 featuredImageType: full
+ogImage: generated
 tags:
     - Founders
-    - Product engineers
-    - Engineering
-    - Culture
+    - Building the team
 crosspost:
     - Product engineers
     - Blog
@@ -27,7 +26,7 @@ Our first line of code was January 22nd, 2020, after a pivot during a YC batch. 
 -   [User surveys](/docs/surveys)
 -   [Heatmaps](/docs/toolbar/heatmaps)
 -   [SDKs](/docs/libraries) for all the above
--   A basic [CDP](/docs/cdp) to stream data to warehouses
+-   A basic [CDP](/docs/data-pipelines) to stream data to warehouses
 -   [Data warehouse](/docs/data-warehouse) MVP
 -   A wildly extensive website
 

@@ -3,6 +3,26 @@ const request = require('request')
 const multiparty = require('multiparty')
 const fs = require('fs')
 
+const readAshbyErrorCode = (body) => {
+    try {
+        return JSON.parse(body)?.errorInfo?.code
+    } catch {
+        return undefined
+    }
+}
+
+class AshbyResponseError extends Error {
+    constructor(response) {
+        super(`Ashby responded with status ${response.statusCode}`)
+        this.ashbyStatus = response.statusCode
+        this.details = {
+            contentType: response.headers['content-type'],
+            cfRay: response.headers['cf-ray'],
+            ashbyErrorCode: readAshbyErrorCode(response.body),
+        }
+    }
+}
+
 const submitApplication = async (req) => {
     const form = new multiparty.Form()
     const formData = await new Promise((resolve, reject) => {
@@ -54,10 +74,9 @@ const submitApplication = async (req) => {
 
             // request() only reports transport failures through err; an Ashby HTTP 4xx/5xx
             // arrives as a normal response. Reject on those so the handler logs and answers a
-            // matching status, instead of passing an error body through as a 200. The status
-            // alone is enough — the body can quote candidate input, so it is left out.
+            // matching status, instead of passing an error body through as a 200.
             if (response.statusCode < 200 || response.statusCode >= 300) {
-                return reject(new Error(`Ashby responded with status ${response.statusCode}`))
+                return reject(new AshbyResponseError(response))
             }
 
             try {
@@ -76,7 +95,7 @@ const handler = async (req, res) => {
         res.status(200).json(await submitApplication(req))
     } catch (error) {
         console.error('Job application submission failed:', error)
-        res.status(500).json({ success: false, error: 'Failed to submit application' })
+        res.status(500).json({ success: false, error: 'Failed to submit application', ashbyStatus: error.ashbyStatus })
     }
 }
 

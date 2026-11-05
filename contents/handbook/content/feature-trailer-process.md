@@ -23,7 +23,7 @@ There are two types of feature trailer, depending on how much time you have and 
 
 ### 1. Message the video team
 
-Drop a message in [Team YouTube on Slack](https://posthog.slack.com/archives/C01R387F6H5) explaining what you want to create and why. There's no official request process – just start the conversation.
+Drop a message in <PrivateLink url="https://posthog.slack.com/archives/C01R387F6H5">Team YouTube on Slack</PrivateLink> explaining what you want to create and why. There's no official request process – just start the conversation.
 
 > **Important:** Videos typically take two weeks to make, but a minimum of four weeks is necessary if you want to hit a specific date. This is because we need to fit things around existing video work, and leave time to agree a creative direction before production can start.
 
@@ -43,7 +43,7 @@ Product marketer should lead this and collaborate with product manager / product
 
 As the requester, you'll put together a short storyboard of what you want the video to cover, built around the example you agreed on. This is especially useful for 30–90 second feature trailers.
 
-Use [this storyboard template](https://docs.google.com/document/d/1ONoytWmzDFMTN61KhVdtLCVA6_0SYuUf_eSmkj33mhU/edit?tab=t.3a3la71j8gql) as a starting point – copy it and adapt it for your video.
+Use <PrivateLink url="https://docs.google.com/document/d/1ONoytWmzDFMTN61KhVdtLCVA6_0SYuUf_eSmkj33mhU/edit?tab=t.3a3la71j8gql">this storyboard template</PrivateLink> as a starting point – copy it and adapt it for your video.
 
 Also note any existing assets for the product – webpage, blog post, social post, artwork, custom hoggies, etc – and provide URLs if you have them. The team can reuse these rather than starting from scratch.
 
