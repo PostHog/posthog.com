@@ -14,9 +14,9 @@ You can check our doc on [estimating usage and costs](/docs/billing/estimating-u
 
 ## What does the price of an event include?
 
-Collecting it, processing it, storing it, and every query you run on it in PostHog. [How much does an event cost anyway?](/docs/billing/what-you-pay-for-per-event) explains each step.
+Collecting it, processing it, storing it, and every query you run on it in PostHog. [What you actually get when you pay for an event](/docs/billing/what-you-pay-for-per-event) explains each step.
 
-It's also confidence that your data is safe, that there's a team of on-call engineers responsible for maintaining it, and that it's been stored correctly. Those things are harder to quantify, but they're still part of the value. 
+It's also confidence that your data is safe, that there's a team of on-call engineers responsible for maintaining it, and that it's been stored correctly. Those things are harder to quantify, but they're still part of the value.
 
 ## Do projects share usage and free allowances?
 

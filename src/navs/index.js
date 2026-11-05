@@ -3857,7 +3857,7 @@ export const docsMenu = {
                             url: '/docs/billing/estimating-usage-costs',
                         },
                         {
-                            name: 'What you pay for per event',
+                            name: 'What you actually get when you pay for an event',
                             url: '/docs/billing/what-you-pay-for-per-event',
                         },
                         {
