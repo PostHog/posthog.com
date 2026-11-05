@@ -13,6 +13,7 @@ import {
     findCreatorProfile,
     isAlumniProject,
     normalizeTags,
+    toGitHubUsername,
     useCreatorProfiles,
     useSideProjects,
     type CreatorProfile,
@@ -89,7 +90,7 @@ const ProjectCard = ({
         avatarUrl:
             profile?.avatar?.formats?.thumbnail?.url ||
             profile?.avatar?.url ||
-            (authorGitHub ? `https://github.com/${authorGitHub}.png?size=256` : undefined),
+            (authorGitHub ? `https://github.com/${toGitHubUsername(authorGitHub)}.png?size=256` : undefined),
     }
 
     return (

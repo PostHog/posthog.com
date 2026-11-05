@@ -1,5 +1,5 @@
 ---
-title: Creating materialized views
+title: Materialized views
 sidebar: Docs
 showTitle: true
 availability:
@@ -10,41 +10,65 @@ availability:
 
 import { CalloutBox } from "components/Docs/CalloutBox";
 
-Views can be materialized and stored in the PostHog data warehouse. This means that the view is precomputed, which can significantly improve query performance. This is useful for expensive and frequently used queries like KPI dashboards or [embedded analytics](/tutorials/embedded-analytics) queries.
+A materialized view is a [view](/docs/data-warehouse/views) that PostHog materializes: it runs the view's query on a schedule and stores the result as a table in the data warehouse. Queries then read the stored table instead of running the query again, which is much faster. This is useful for expensive and frequently used queries like KPI dashboards or queries behind [customer-facing analytics](/docs/endpoints/customer-facing-analytics).
+
+Materialized views can read other views, so you can build data in layers: clean raw source data in one view, then aggregate it in another.
+
+## The Models page
+
+The [**Models** page](https://app.posthog.com/models) shows every materialized view in your project. It has these tabs:
+
+- **Overview.** The health of your materialized views: **Models needing attention** lists failed and suspended views, and **Models behind schedule** lists views whose data is older than it should be.
+- **Models.** Every view, with its status.
+- **Lineage.** A graph of which views read which sources and other views.
+- **Data quality.** The results of your [data quality checks](/docs/data-warehouse/data-quality).
+
+Click a view to open it. Its **Materialization** tab has the refresh cadence, **Sync now**, and the run history.
+
+<ProductScreenshot
+  imageLight="/images/docs/data-warehouse/views/models-overview-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/models-overview-dark-mode.png"
+  alt="The Overview tab of the Models page"
+  classes="rounded"
+/>
+
+## Materializing a view
 
 There are two ways to materialize a view:
 
-1. **At creation time:** When saving a query as a view in the [SQL editor](https://app.posthog.com/sql), check the **Materialize this view** checkbox in the "Save as view" dialog. This materializes the view immediately with a daily sync by default. You can adjust the sync frequency later in the materialization settings.
+1. **At creation time:** When saving a query as a view in the [SQL editor](https://app.posthog.com/sql), check **Materialize this view** in the save dialog. The view materializes right away and refreshes once a day. You can change that later with **Refresh every** on its **Materialization** tab.
 
-2. **After creation:** For an existing view, go to the [SQL editor](https://app.posthog.com/sql), select the **Materialization** tab below the query, click **Save and materialize**, and give it a name without spaces.
+2. **After creation:** Open the view from the [Models](https://app.posthog.com/models) page, go to its **Materialization** tab, pick how often it should refresh, and click **Materialize**.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_10_2x_88dc4ae252.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_48_31_2x_16e9dbe683.png"
-  alt="Materialize view"
+  imageLight="/images/docs/data-warehouse/views/materialize-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/materialize-dark-mode.png"
+  alt="A view's Materialization tab with the refresh picker and the Materialize button"
   classes="rounded"
 />
 
 Once materialized, you can query the view like any other table.
 
-## Scheduling a materialized view
+## Refresh cadence
 
-After you create a view, you can also schedule it to be updated at a specific interval, anywhere from never to every 15 minutes to every month. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence.
+Each view refreshes on its own cadence, from every 15 minutes to every 30 days. Set it with **Refresh every** on the view's **Materialization** tab. A new materialized view refreshes once a day.
 
-For example, if you sync your billing data to Postgres using a cron job daily and link Postgres as a source in PostHog, you could set up a materialized view with that billing data to resync daily as well.
+For example, if you sync your billing data to Postgres using a cron job daily and link Postgres as a source in PostHog, you could set the view built on that billing data to refresh daily as well.
+
+The cadence a view can use depends on the sources it reads and the views that read it. See [freshness and refresh cadence](/docs/data-warehouse/views/freshness).
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_13_2x_b0087e4228.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/Clean_Shot_2025_08_26_at_13_52_28_2x_3b0febbf29.png"
-  alt="Materialize view"
+  imageLight="/images/docs/data-warehouse/views/picker-pinned-light-mode.png"
+  imageDark="/images/docs/data-warehouse/views/picker-pinned-dark-mode.png"
+  alt="The Refresh every picker"
   classes="rounded"
 />
 
 ### Views that depend on other views
 
-If a materialized view reads from another materialized view, PostHog refreshes them in dependency order, so a view never reads a half-written table.
+If a view reads from another view, PostHog refreshes them in dependency order, so a view never reads a half-written table. An upstream view refreshes at least as often as the fastest view downstream of it. See [upstream views keep up with downstream ones](/docs/data-warehouse/views/freshness#upstream-views-keep-up-with-downstream-ones).
 
-This also means an upstream view refreshes at least as often as anything downstream of it. Setting a view to refresh every 15 minutes pulls everything it reads from onto that cadence too.
+To manually trigger a view along with its dependencies or dependents, use the [MCP `view-run` tool](/docs/data-warehouse/surfaces/mcp#view-management-tools) with the `direction` parameter set to `upstream` or `downstream`.
 
 ## Incremental materialization
 
@@ -65,7 +89,7 @@ You can turn it on when you save a view, or later on an existing one.
 1. Open the view in the [SQL editor](https://app.posthog.com/sql).
 2. Select the **Materialization** tab below the query.
 3. Under **Refresh mode**, select **Incremental**.
-4. Fill in the settings below, then click **Save refresh mode**.
+4. Fill in the settings below, then save.
 
 The same settings appear in the **Save as view** dialog when you check **Materialize this view**.
 
@@ -85,13 +109,13 @@ Some runs rebuild the table from scratch, even on an incremental view:
 
 - The first run after you materialize the view.
 - Any run after you change the query, the incremental column, or the unique key.
-- A run you start with the **Rebuild** button.
+- A run you start with **Run full refresh**, in the menu next to **Sync now**.
 
 A change to **Re-read recent data** does not cause a rebuild. It applies from the next run.
 
 Each run in the runs table carries a tag that says `incremental` or `full refresh`. The row count of an incremental run counts the rows it wrote, including the rows it re-read.
 
-Use **Rebuild** after you correct data upstream. It takes as long as the first materialization did.
+Use **Run full refresh** after you correct data upstream. It takes as long as the first materialization did.
 
 ### Which queries can be incremental
 
@@ -127,13 +151,13 @@ The editor also shows warnings that do not block the save:
 
 ## Watching runs
 
-The **Materialization** panel lists every run of the view with its status, row count, and any error. Use it to confirm a view is refreshing on schedule and to read the error when one isn't.
+**Run history** on a view's **Materialization** tab lists every run with its status, row count, and any error. Use it to confirm a view is refreshing on schedule and to read the error when one isn't.
 
 To quickly find views by their run status, type `status:failed`, `status:running`, or `status:completed` in the search field of the SQL editor sidebar or the **Models** tab. You can combine status tokens with a name search, for example `revenue status:failed`.
 
 To test new data before PostHog publishes it, [block materialization on failing data quality checks](/docs/data-warehouse/data-quality/block-materialization).
 
-If runs are failing or the data looks out of date, see [materialization troubleshooting](/docs/data-warehouse/views/materialize-troubleshooting).
+A view that fails 5 times in a row is suspended and stops refreshing until you resume it. See [failures and suspension](/docs/data-warehouse/views/failures-and-suspension). For specific errors, see [troubleshooting](/docs/data-warehouse/views/materialize-troubleshooting).
 
 ## Tips for materializing views
 
@@ -141,6 +165,6 @@ If runs are failing or the data looks out of date, see [materialization troubles
 
 - You can materialize only the slow part of a larger query, like a `with` expression or a subquery. Often times, materializing a subset is a good way to create a resource that's reusable, including insights and other data warehouse views.
 
-- Datasets generated from materialized views are only updated at the specified intervals and not in real-time. This means that if you have a view that is used in a dashboard or relied upon for another query, the dashboard will not update until the materialized view is updated. We offer a 15-minute refresh interval, but if the query takes longer than that to execute, it will only be updated once the query is finished and rerun at the next 15-minute interval.
+- Views update on their cadence, not in real time. A dashboard that reads a view shows new data only after the view refreshes. See [how fresh is the data, really](/docs/data-warehouse/views/freshness#how-fresh-is-the-data-really).
 
-- Materialization runs have more compute and memory resources allocated to them than standard queries, but they still can timeout for inefficient queries. We time out after 1 hour of processing time.
+- Materialization queries get more time than standard queries, but an inefficient query can still time out. A run's query stops after 10 minutes. PostHog tries a run up to 3 times before it marks the run as failed. A run that runs out of memory is not retried. See [a run timed out](/docs/data-warehouse/views/materialize-troubleshooting#a-run-timed-out).

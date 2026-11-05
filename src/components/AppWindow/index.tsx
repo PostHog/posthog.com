@@ -26,10 +26,8 @@ import { IMenu } from 'components/PostLayout/types'
 import { Link, navigate } from 'gatsby'
 import LegacyQuestionsRedirect from 'components/Forum/LegacyQuestionsRedirect'
 import Forum from 'components/Forum'
-import Handbook from '../../templates/Handbook'
-import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
-import LearnShell from 'components/PocketGuides/LearnShell'
+const LearnShell = React.lazy(() => import('components/Learn/LearnShell'))
 import { getProseClasses } from '../../constants'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useToast } from '../../context/Toast'
@@ -71,15 +69,13 @@ const Router = (props) => {
     if (/^\/forum(\/|$)/.test(path)) {
         return <Forum {...props} />
     }
-    if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
-        return <Handbook {...props} />
-    }
     // Learn pages share one shell, so the sidebar stays mounted between them.
     if (/^\/learn\/[^/]+/.test(path)) {
-        return <LearnShell path={path}>{children}</LearnShell>
-    }
-    if ((props.pageContext?.post || /^posts/.test(path)) && props.data) {
-        return <BlogPost {...props} />
+        return (
+            <React.Suspense fallback={<>{children}</>}>
+                <LearnShell path={path}>{children}</LearnShell>
+            </React.Suspense>
+        )
     }
     if (['/terms', '/privacy', '/dpa', '/baa', '/subprocessors'].includes(path)) {
         return <Legal defaultTab={path}>{children}</Legal>
@@ -756,6 +752,10 @@ export default function AppWindow({ item, chrome = true }: { item: AppWindowType
                     <div
                         className={`relative print:hidden ${
                             hasToolbar ? 'bg-primary flex items-center py-0.5 px-1' : ''
+                        } ${
+                            hasToolbar && item.appSettings?.toolbarFade
+                                ? "z-20 after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-4 after:bg-primary after:[mask-image:linear-gradient(to_bottom,black,transparent)] after:content-['']"
+                                : ''
                         }`}
                     >
                         {hasToolbar && (

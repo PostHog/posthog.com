@@ -66,7 +66,7 @@ By deploying our simple JavaScript snippet on your website you’ll capture all 
 
 ### Summary
 
-Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
+Using PostHog's [CDP](/data-pipelines) lets you aggregate data from multiple technologies and platforms.  It takes a few clicks to set up exports of that data to your data warehouse, and your product and engineering teams can self-serve their own analytics from within PostHog.
 
 ### Use cases
 - Aggregate your user and error data from web and mobile apps, backend systems, ad platforms and others into your data warehouse via our simple to set up [batch exports](/docs/data-pipelines/batch-exports).  Avoid needing to set up ETL jobs from disparate sources and figuring out APIs.
@@ -85,9 +85,9 @@ Using PostHog's [CDP](/cdp) lets you aggregate data from multiple technologies a
 Product marketers on the [Developer Marketing team](/teams/developer-marketing) make sales enablement material for the products they own. Some examples:
 
 - [Data foundations](/handbook/growth/sales/data-foundations) – how to sell the data warehouse and the rest of the data stack, with a recording of the training session
-- [Data foundations training deck](https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit) – by Lizzie Epton
-- [Sales training deck](https://www.figma.com/deck/yHjzK2vmjWdbkcNA9Ee4ph) – by Sara Miteva
-- [Managed data warehouse (Trino)](https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing)
+- <PrivateLink url="https://docs.google.com/presentation/d/1gi2CBYtw-z8eYemp9ad5laMC33Ee84D63hUqrYDCOP8/edit">Data foundations training deck</PrivateLink> – by Lizzie Epton
+- <PrivateLink url="https://www.figma.com/deck/yHjzK2vmjWdbkcNA9Ee4ph">Sales training deck</PrivateLink> – by Sara Miteva
+- <PrivateLink url="https://docs.google.com/document/d/19P0SajrkCf7IS0jJEh08y5kqKANEGPq5S6ZqTpyFKts/edit?usp=sharing">Managed data warehouse (Trino)</PrivateLink>
 
 This is not a full list. Each product marketer keeps the material for their own product current in the handbook.
 

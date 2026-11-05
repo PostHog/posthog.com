@@ -19,7 +19,7 @@ import Link from 'components/Link'
 import MCPInstall from 'components/Products/MCPInstall'
 import { getTool } from '../../data/tools'
 import { features } from './web_analytics/features'
-import { applications, topFeatures } from './web_analytics/slides'
+import { applications, keyFeatures } from './web_analytics/slides'
 
 export const webAnalytics = {
     ...getTool('web_analytics'),
@@ -86,11 +86,11 @@ export const webAnalytics = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -128,6 +128,7 @@ export const webAnalytics = {
     ],
     overview: {
         title: 'Privacy-focused web analytics',
+        description: '"Show me the most visited landing pages in the last 30 days"',
         eli5: 'Web Analytics is a pre-built dashboard for website traffic – visitors, pageviews, sessions, bounce rate, referrers, UTMs, and Core Web Vitals – without the GA4 maze. Drop in a snippet (or use a no-code install), get real-time data, and optionally skip cookies entirely. Same events power product analytics and session replay when you want to go deeper.',
         textColor: 'text-[#063619]', // tw
     },

@@ -48,7 +48,7 @@ This can largely mirror what goes in our sprint planning, and shouldn't be dupli
 
 ### Early warning signals
 
-These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics.
+These aren't emergencies yet, but they should make you pay closer attention. Many of these also show up in the [account health score](/handbook/customer-success/health-tracking) in Customer Analytics. Some of these signals automatically create a Customer Analytics task for the account owner. See [managed customer scouts](/handbook/customer-success/how-we-use-automation#managed-customer-scouts).
 
 | Signal | Why it matters |
 |--------|----------------|
@@ -57,6 +57,8 @@ These aren't emergencies yet, but they should make you pay closer attention. Man
 | Only 1-2 active users | Single point of failure, low organizational buy-in |
 | No Slack activity for 14+ days | Relationship is going cold |
 | Billing page visits without context | They're evaluating costs, possibly shopping around |
+| Low survey score or a complaint in a survey | They told us that something is wrong |
+| Product turned off because of cost | Contraction often comes before churn |
 | Champion changed roles or left | Your internal advocate is gone |
 | Support tickets spiking | Something is broken or frustrating |
 | Single product usage | Low switching cost, easy to replace |
@@ -103,7 +105,7 @@ Tag the account `cost optimizing` in PostHog Customer Analytics while you work o
 
 - **First, help them do what they asked, fast.** At this point, the customer already decided that they need to cut costs, so don't lead with discovery questions that may suggest an effort to talk them out of that decision. Take action on their request first. Gather context along the way or after.
 - **Give them actionable ways to reduce spend.** This is where your product expertise comes into play - what are the concrete levers they can pull to reduce spend? [Customer health check](/handbook/customer-success/health-checks#are-they-paying-for-things-they-dont-need) is a good starting point to identify opportunities to reduce billing waste.
-- **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use [#ask-max](https://posthog.slack.com/archives/C07TQR0V16U), PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/customer-success/how-we-work#working-with-engineering-teams) so they can better assist you).
+- **Be transparent about trade-offs, but frame them as information, not as warnings.** The goal is to help them make an informed decision, not to reopen the question. For example, if they don't want to pay for Product Analytics, let them know we'll stop ingesting events past the free tier. Frame this as "here's what to expect" rather than "are you sure?" Proactively flag non-obvious dependencies between products too; if you’re not sure, do some digging - use <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#ask-max</PrivateLink>, PostHog AI, ask the rest of the sales team, or ask the relevant product team in Slack (and [add some commentary](/handbook/customer-success/how-we-work#working-with-engineering-teams) so they can better assist you).
 - **Consider proposing a target spend.** Once you've acted on their initial request, consider aligning on a target monthly spend. You can then work backwards from that goal to improve their implementation and shape how you support them going forward.
 - **Pause any cross-selling or expansion work until they're at their target monthly spend.** You make the call on when the relationship is stable enough to recommend increased adoption of our products, but it's a safe bet to pause on this while they're in the process of lowering their spend.
 

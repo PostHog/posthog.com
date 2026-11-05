@@ -49,7 +49,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 ### Which accounts count toward your NRR
 
-Your book is the set of accounts where you're the CSM in [PostHog Customer Analytics]([link](https://us.posthog.com/project/2/customer_analytics/accounts)). We use the account relationship history there, so changes can be made at any time and we can still see who held what, and when.
+Your book is the set of accounts where you're the CSM in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">PostHog Customer Analytics</PrivateLink>. We use the account relationship history there, so changes can be made at any time and we can still see who held what, and when.
 
 An account counts toward your NRR for a quarter if **all** of these are true:
 
@@ -94,7 +94,7 @@ These never count toward CSM NRR:
 - Accounts in the YC program, including accounts that have received YC credits.
 - Accounts that churned or were recorded as churned in a previous quarter.
 - Accounts in a grace period, or approved as an at-risk exception, for the quarter they apply to.
-- Manual exclusions approved by Simon or Ben B. These are recorded in the [NRR exclusions sheet](https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975) so there's a record of every one.
+- Manual exclusions approved by Simon or Ben B. These are recorded in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975">NRR exclusions sheet</PrivateLink> so there's a record of every one.
 
 ## Working with engineering teams
 

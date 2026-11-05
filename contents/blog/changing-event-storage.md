@@ -23,7 +23,7 @@ seo:
 
 - We're rebuilding how PostHog stores events making queries about a third faster on average, and up to 2x faster for common queries.
 - `$set`, `$set_once` and other short-lived debugging properties on events are now kept for 60 days instead of forever.
-- `$feature_flag_called` events and `$feature/*` properties move to dedicated storage built for them.
+- `$feature_flag_called` events and `$feature/*` properties move to dedicated storage built for them. Most queries on flag calls keep working, but [a few need a change](#do-you-need-to-change-anything-for-flag-calls).
 - We're removing some deprecated properties, mostly flag payloads and internal SDK state.
 - Other person and event properties are unaffected. They stay on your persons and on every event, queryable as before.
 - All of this takes effect on November 30.
@@ -61,9 +61,20 @@ Here's more details on what this means:
 
 | What | Before | After | Do you need to do anything? |
 | --- | --- | --- | --- |
-| `$feature_flag_called` events | Stored in the events table | Stored in a dedicated flag evaluations table, kept for 90 days | Only if you query these events directly in SQL |
+| `$feature_flag_called` events | Stored in the events table | Stored in a dedicated flag evaluations table, kept for 90 days | Only in a few cases. See [below](#do-you-need-to-change-anything-for-flag-calls) |
 | `$feature/<flag>` properties | One property per flag on each event | One feature flags map per event | No. Existing insights and HogQL queries keep working |
 | `null` property values | Stored as `null` | Stored as "not set". Exports and event details still show `null` | No. Queries already treat `null` and "not set" the same |
+
+### Do you need to change anything for flag calls?
+
+Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Destinations and workflows that explicitly set `$feature_flag_called` as a trigger will continue to work. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
+
+Two exceptions:
+
+- **SQL with `SELECT *`, `SAMPLE`, or `FINAL`:** a query that reads `$feature_flag_called` with any of these returns an error. List the columns you need instead of `*`, and remove `SAMPLE` and `FINAL`.
+- **Batch exports and Destinations:** from November 30, exports of the `events` table or `all events` will not include `$feature_flag_called` events. [Tell us](/support) if you need them.
+
+We'll email you before your organization moves. For details, see [Where does PostHog store flag calls?](/docs/feature-flags/troubleshooting#where-does-posthog-store-flag-calls)
 
 ## What properties expire after 60 days
 

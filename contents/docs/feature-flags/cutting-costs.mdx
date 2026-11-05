@@ -83,9 +83,9 @@ If you're using [local evaluation](/docs/feature-flags/local-evaluation), your b
 A poll is charged in one of two ways:
 
 - **The definitions changed**, or the instance just started: PostHog returns the full definitions. This is charged as 10 requests.
-- **Nothing changed**: the SDK sends the ETag of the definitions it already holds, PostHog replies `304 Not Modified` with no body, and the poll is charged as 1 request.
+- **Nothing changed**: the SDK sends the ETag of the definitions it already holds, PostHog replies `304 Not Modified` with no body, and the poll is free.
 
-For a single server that runs all month at the default interval, the unchanged polls add up to `2 * 60 * 24 * 30 = 86,400 requests`, plus 10 requests for every poll that returns new definitions. Older SDK versions without ETag support are charged 10 requests for every poll, so the same server costs `10 * 2 * 60 * 24 * 30 = 864,000 requests`.
+For a single server that runs all month at the default interval, you pay only for polls that return new definitions, at 10 requests each. Older SDK versions without ETag support are charged 10 requests for every poll, so the same server costs `10 * 2 * 60 * 24 * 30 = 864,000 requests`.
 
 To keep this cost down:
 

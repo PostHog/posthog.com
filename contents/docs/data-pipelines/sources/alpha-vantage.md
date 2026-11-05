@@ -9,11 +9,11 @@ availability:
 sourceId: AlphaVantage
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Alpha Vantage connector syncs time series daily, time series daily adjusted, time series weekly, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The Alpha Vantage connector syncs stock market data, company fundamentals, and US macroeconomic indicators into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
@@ -23,11 +23,11 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Enter your Alpha Vantage API key and the stock symbols you want to track to pull market data and company fundamentals.
+Enter your Alpha Vantage API key and the stock symbols you want to track. Stock and company tables sync data for your configured symbols, while US macroeconomic tables (GDP, CPI, treasury yields, and more) sync independently without requiring symbols.
 
 You can claim a free API key on the [Alpha Vantage support page](https://www.alphavantage.co/support/#api-key).
 
-Note: the free tier is limited to roughly 25 requests per day, and each selected table costs one request per symbol on every sync. Some datasets require a paid plan.
+Note: the free tier is limited to roughly 25 requests per day. Stock and company tables cost one request per symbol on every sync. Macroeconomic tables cost one request each, except `treasury_yield` which uses six (one per maturity). Most tables are disabled by default to help manage quota. Some datasets require a paid plan.
 
 You'll be asked for:
 
