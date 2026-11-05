@@ -26,7 +26,7 @@ If pricing is all you came for, skip to [the pricing section](#all-i-want-to-kno
 
 [Juno](/customers/juno) is an AI health assistant for people living with chronic illness. It came out of YC's Spring 2026 batch and already has 250,000 users, but it's a hard product to debug. It has to strip PII everywhere, it runs on multiple platforms, its users vary wildly, and the team behind it is small.
 
-Self-driving doesn't need to see the personal data, and it doesn't care how many platforms or engineers you have. It pieces the story together from rage clicks, error reports, and analytics, writes it up as a [report](/docs/self-driving/reports), and turns actionable reports into PRs if you want them.
+Self-driving doesn't need to see the personal data, and it doesn't care how many platforms or engineers you have. It pieces the story together from error tracking and analytics, writes it up as a [report](/docs/self-driving/reports), and turns actionable reports into PRs if you want them.
 
 Juno's team merged 26 of the agents' last 30 PRs straight away. Some fixed bugs, like chat boxes that hung. Others added features, like a "Log all" button that makes medication tracking quicker for people juggling several prescriptions. All of them made health tracking a bit less tiring for Juno's users.
 
