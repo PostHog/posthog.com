@@ -8,9 +8,9 @@ So, you looked at a recent PostHog bill, and an agent told you it could build th
 
 So, why doesn't everyone switch to a vibe-coded version? What's the catch?
 
-The catch is that the agent's estimate and our price aren't measuring the same thing. One covers a weekend. The other covers seven years of storage, every query you'll ever run on those events, and the person who gets paged when it breaks. So before you compare the two bills, you need to know what the per-event price pays for. This page itemizes it.
+The catch is that the agent's estimate and our price aren't measuring the same thing. One covers a weekend. The other covers seven years of storage, every query you'll ever run on those events, and the person who gets paged when it breaks. So before you compare the two bills, you need to know what the per-event price pays for.
 
-Is this page biased? Obviously. We sell the thing. But every claim links to a page you can check, and the ledger at the bottom only works with your numbers, not ours.
+Is this page biased? Obviously. We sell the thing. But most claims link to a page you can check, and the ledger at the bottom only works with your numbers, not ours.
 
 ## The price
 
@@ -18,13 +18,13 @@ Is this page biased? Obviously. We sell the thing. But every claim links to a pa
 
 <Pricing productType="product_analytics" />
 
-Is the anonymous price really that low? Yes. Anonymous events skip person processing, which is [the most expensive step in our pipeline](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper), so we charge less for them. Identified events add a person profile charge on top. The [pricing page](/pricing) has the full tables for both event types and a calculator.
+Anonymous events cost less because they skip person processing, which is [the most expensive step in our pipeline](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper). Identified events add a person profile charge on top. The [pricing page](/pricing) has the full tables for both event types and a calculator.
 
-That's every line item for events. We don't charge for storing them. We don't charge for querying them in PostHog. We don't charge per seat either, so invite the whole company. The rest of this page is what that one price covers.
+That's every line item for events. We don't charge to store them, to query them in PostHog, or per seat, so invite the whole company.
 
 ## What happens to one event
 
-Between your SDK and a chart, an event goes through six jobs. Each one exists because something broke without it.
+Between your SDK and a chart, an event goes through six jobs.
 
 ### Getting it in
 
@@ -36,9 +36,9 @@ Without it, events from a client with the wrong clock land on the wrong day, a r
 
 ### Not losing it
 
-Every event goes into Kafka before anything else touches it. Capture only replies to your SDK once Kafka has acknowledged the write on every in-sync replica. The queue absorbs launch-day spikes and bots, and waits out database outages. Events from the same user stay in order.
+Every event goes into [Kafka](/docs/how-posthog-works/ingestion-pipeline) before anything else touches it. Capture only replies to your SDK once Kafka has acknowledged the write on every in-sync replica. The queue absorbs launch-day spikes and bots, and waits out database outages. Events from the same user stay in order.
 
-Any single ID sending more than about 5,000 events a minute moves to an overflow lane, so it can't slow anyone else down. Nothing is dropped. If an ingestion worker crashes partway through a batch, Kafka redelivers it. Any event we can't process goes to a dead letter queue instead of disappearing.
+Any single ID sending more than about 5,000 events a minute moves to an overflow lane, so it can't slow anyone else down. The overflow lane doesn't drop events. If an ingestion worker crashes partway through a batch, Kafka redelivers it. Any event we can't process goes to a dead letter queue instead of disappearing.
 
 Without it, a traffic spike or a database restart is data you never get back.
 
@@ -59,13 +59,13 @@ Without it, one platform renames a property, one metric quietly splits into two,
 
 ### Storing it for seven years
 
-Events land in a sharded, replicated ClickHouse cluster, with properties compressed using ZSTD. Hot data sits on local NVMe and moves to cheaper tiers as it ages. Every week we analyze slow queries and materialize the columns that would make them fast.
+Events land in a sharded, replicated ClickHouse cluster, with properties compressed using ZSTD. Hot data sits on local NVMe and [moves to cheaper tiers](/handbook/engineering/clickhouse/clusters#storage-tiers) as it ages. Every week we analyze slow queries and materialize the columns that would make them fast.
 
 We're also [rebuilding the storage format](/blog/changing-event-storage) so each property is stored once with its real type, which makes common queries up to 2x faster. GDPR deletions run as batched jobs, because deleting from ClickHouse rewrites whole partitions.
 
 Paid plans [keep events for seven years](/docs/data/events-retention) and free plans for one year. You can set a shorter window.
 
-Without it, a single-node ClickHouse with no replica is one disk failure away from losing everything, and nobody tunes it until a query starts timing out.
+Without it, a single-node ClickHouse with no replica loses everything when its disk fails, and nobody tunes it until a query starts timing out.
 
 ### Querying it as often as you like
 
@@ -73,15 +73,13 @@ Funnels, retention, paths, lifecycle, [SQL](/docs/data-warehouse/sql), and [Post
 
 We run guard rails so one query can't take a cluster down. A query gets 60 seconds by default and 10 minutes in the background, and each organization has a concurrency limit. Inside those limits, queries aren't metered.
 
-Without it, a cluster you run yourself bills per node-hour whether anyone queries it or not, and one teammate's heavy query slows everyone else down.
-
 ### Getting it out
 
 [Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet. The first 1 million rows you export each month are free. Past that, exports bill per row under [Data pipelines pricing](/pricing), not the event price. The [query API](/docs/api/query) returns anything SQL can express. If you leave, your data leaves with you.
 
 ## What you own if you build it
 
-This is the honest version of the build-it-yourself plan. Not the weekend version. The version where it's still running in 18 months and someone has to own it.
+This table assumes the build still runs in 18 months and someone owns it.
 
 | Job | What PostHog runs | What you run instead | Who gets paged |
 |---|---|---|---|
@@ -98,9 +96,9 @@ Agents are good at estimating the parts of a system they can see in a code sampl
 
 ### Storage for years, not months
 
-An agent's estimate covers the first month of storage. The per-event price covers 84. Your own storage cost compounds: in month 12 you're storing 12 months of events, and in month 84 you're storing 84. Your ledger below shows what that adds up to at your volume, your cloud's price per GB-month, and a replica or two.
+An agent's estimate covers the first month of storage. The per-event price covers 84. Your own storage cost compounds: in month 12 you're storing 12 months of events, and in month 84 you're storing 84. Your ledger below shows what that adds up to at your volume, your cloud's price per GB-month, and at least two replicas.
 
-### Compute, forever
+### Compute for as long as you keep the data
 
 Every event gets read many times over its life. Every dashboard refresh, funnel, cohort recalculation, and SQL query reads it again. That's in the price. Asking [PostHog AI](/docs/posthog-ai) spends [AI credits](/docs/posthog-ai/pricing) on top, but the queries it runs are covered. A cluster you run bills by the hour whether anyone is looking or not.
 
@@ -154,18 +152,21 @@ Compare the last line to a PostHog bill at the same volume. Take the monthly tot
 We'd be lying if we said never. There are three cases where we'd build it too.
 
 - **You sell analytics infrastructure.** The pipeline is your product, so the engineering time is the business, not overhead.
+
 - **You already run ClickHouse for something else.** You have a data team that treats it like a product, with on-call, upgrades, and tested backups. Adding an events table to a cluster you already operate is a different decision from standing one up.
+
 - **Your data doesn't fit an events table.** Wide logs, sensor-rate time series, or rows you need to update in place. Our pipeline is built for append-only events, and we'd rather tell you that now.
 
 If none of those apply, paying per event is cheaper. And if you're not sure, the ledger above will tell you faster than we can.
 
 ## How to control costs without vibe-coding
 
-Every PostHog product includes a large free tier that's specifically designed to get early-stage teams to product-market fit. If you're past that and still struggling with costs, there are ways to cut your bill that don't involve running a database.
+Every PostHog product includes a large free tier that's designed to get early-stage teams to product-market fit. If you're past that and still struggling with costs, there are ways to cut your bill that don't involve running a database.
 
 - [Capture fewer events](/docs/product-analytics/cutting-costs) in total. Autocapture noise and an `identify()` call on every page are the two we see most.
+
 - Send [anonymous events](/docs/data/anonymous-vs-identified-events) where you don't need person data. Marketing site traffic and backend events rarely do.
+
 - Set a [billing limit](/docs/billing/limits-alerts) so you know the most you'll pay in a month.
-- Set a [shorter retention window](/docs/data/events-retention#custom-retention) if seven years is more data than you want around. It doesn't lower the bill, because you pay when an event is ingested, not while it's stored, and deleted events don't come back.
 
 If none of that gets you where you need to be, [talk to us](/talk-to-a-human). We'd rather help you tune it than watch you rebuild it.
