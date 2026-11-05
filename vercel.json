@@ -6762,12 +6762,12 @@
             "destination": "/docs/libraries/js/usage:ext?"
         },
         {
-            "source": "/handbook/engineering/on-call-rotation",
-            "destination": "/handbook/engineering/operations/on-call-rotation"
+            "source": "/handbook/engineering/on-call-rotation:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/on-call-rotation:ext?"
         },
         {
-            "source": "/handbook/engineering/incidents",
-            "destination": "/handbook/engineering/operations/incidents"
+            "source": "/handbook/engineering/incidents:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/incidents:ext?"
         },
         {
             "source": "/handbook/engineering/support-hero",
@@ -7281,6 +7281,14 @@
         {
             "source": "/teams/data-stack/:path*",
             "destination": "/teams/warehouse/:path*"
+        },
+        {
+            "source": "/teams/onboarding",
+            "destination": "/teams/scaled-customer-success"
+        },
+        {
+            "source": "/teams/onboarding/:path*",
+            "destination": "/teams/scaled-customer-success/:path*"
         },
         {
             "source": "/teams/managed-warehouse",
