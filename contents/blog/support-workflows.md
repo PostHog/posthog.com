@@ -181,11 +181,11 @@ Turning this feedback into tickets means we can reply to customers who are missi
 
 Individual support engineers have also customized their own workflows.
 
-Christian set up a workflow so that when a customer replies, the ticket assignee gets an email. He also built one so that anyone who escalates a ticket to an engineering team automatically follows that ticket, so they can see what the engineering team says. Luke then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily go to a Slack channel.
-
 Christiaan built a workflow to keep track of his own SLA deadlines. It posts a Slack warning 15 minutes before the SLA deadline on any ticket assigned to him that's still unresolved.
 
 Chris built two workflows that connect tickets to our incident.io incidents. When an incident is declared, an AI task finds open tickets about it and tags them, so they're all in one place. New tickets about an open or recently closed incident get the same tag.
+
+Christian set up a workflow so that when a customer replies, the ticket assignee gets an email. He also built one so that anyone who escalates a ticket to an engineering team automatically follows that ticket, so they can see what the engineering team says. Luke then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily go to a Slack channel.
 
 > **Try it yourself:** With the **notify the assignee when the customer replies** template.
 
