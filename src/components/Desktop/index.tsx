@@ -14,7 +14,8 @@ import {
     STORE_SILHOUETTE,
     WORK_HERE_SILHOUETTE,
     TRASH_SILHOUETTE,
-    CONTEXT_WAREHOUSE_SILHOUETTE,
+    MCP_SILHOUETTE,
+    MCP_VIEWBOX,
 } from 'components/OSIcons/glyphs'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
@@ -49,15 +50,15 @@ export const useProductLinks = () => {
                 source: 'desktop',
             },
             {
-                label: 'Self-driving product',
-                Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
-                url: '/self-driving',
+                label: 'MCP',
+                Icon: <GlassIcon path={MCP_SILHOUETTE} viewBox={MCP_VIEWBOX} />,
+                url: '/mcp',
                 source: 'desktop',
             },
             {
-                label: 'Context warehouse',
-                Icon: <GlassIcon path={CONTEXT_WAREHOUSE_SILHOUETTE} />,
-                url: '/context-warehouse',
+                label: 'Self-driving',
+                Icon: <GlassIcon path={SELF_DRIVING_SILHOUETTE} />,
+                url: '/self-driving',
                 source: 'desktop',
             },
             {

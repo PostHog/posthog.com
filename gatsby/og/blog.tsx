@@ -22,6 +22,7 @@ type BlogPost = {
     fields: { slug: string }
     frontmatter: {
         title?: string
+        ogImage?: string
         featuredImage?: { publicURL?: string }
         authorData?: BlogAuthorNode[]
     }
@@ -39,9 +40,10 @@ const firstAuthor = (authors?: BlogAuthorNode[]): BlogAuthor | undefined => {
 
 export async function createBlogOgImages(renderer: Renderer, posts: BlogPost[], dir: string) {
     await Promise.all(
-        posts.map((post) =>
-            ogRenderLimit(async () => {
-                const { title, authorData, featuredImage } = post.frontmatter
+        posts.map((post) => {
+            const { title, authorData, featuredImage, ogImage } = post.frontmatter
+            if (featuredImage?.publicURL && ogImage !== 'generated') return
+            return ogRenderLimit(async () => {
                 const bytes = await renderOgJpeg(
                     renderer,
                     <BlogOg title={title || ''} image={featuredImage?.publicURL} author={firstAuthor(authorData)} />,
@@ -49,6 +51,6 @@ export async function createBlogOgImages(renderer: Renderer, posts: BlogPost[], 
                 )
                 writeOgJpeg(dir, post.fields.slug, bytes)
             })
-        )
+        })
     )
 }

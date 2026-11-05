@@ -1,4 +1,4 @@
-export const QUESTIONS_TOPIC_SLUG = 'questions'
+export const QUESTIONS_TOPIC_SLUG = 'ask-the-hogs'
 
 const TAG_FOR_DOCS_TOPIC_LABEL: Record<string, string> = {
     'ai observability': 'ai-observability',

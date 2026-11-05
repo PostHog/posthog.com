@@ -11,19 +11,17 @@ import React, {
 } from 'react'
 import { AppWindow } from './Window'
 import { navigate } from 'gatsby'
-import { isSafeInternalPath } from 'lib/utils'
+import { getSharedWindows, isSafeInternalPath } from 'lib/internalPath'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
-import Start from 'components/Start'
 import useDataPipelinesNav from '../navs/useDataPipelinesNav'
 import useSourcesNav from '../navs/useSourcesNav'
 import initialMenu from '../navs'
 import { useToast } from './Toast'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { themeOptions } from '../hooks/useTheme'
-import ContactSales from 'components/ContactSales'
 import qs from 'qs'
 import usePostHog from '../hooks/usePostHog'
 
@@ -131,7 +129,6 @@ interface AppContextType {
     isMobile: boolean
     compact: boolean
     menu: Menu
-    openStart: ({ subdomain, initialTab }: { subdomain?: string; initialTab?: string }) => void
     animateClosingAllWindows: () => void
     closingAllWindowsAnimation: boolean
     closeAllWindows: () => void
@@ -181,7 +178,6 @@ type AppActionKeys =
     | 'openNewChat'
     | 'setIsNotificationsPanelOpen'
     | 'setIsActiveWindowsPanelOpen'
-    | 'openStart'
     | 'animateClosingAllWindows'
     | 'closeAllWindows'
     | 'setClosingAllWindowsAnimation'
@@ -358,7 +354,6 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -372,7 +367,6 @@ export const Context = createContext<AppContextType>({
     isMobile: false,
     compact: false,
     menu: [],
-    openStart: () => {},
     animateClosingAllWindows: () => {},
     closingAllWindowsAnimation: false,
     closeAllWindows: () => {},
@@ -422,7 +416,6 @@ export const ActionsContext = createContext<AppActionsContextType>({
     openNewChat: () => {},
     setIsNotificationsPanelOpen: () => {},
     setIsActiveWindowsPanelOpen: () => {},
-    openStart: () => {},
     animateClosingAllWindows: () => {},
     closeAllWindows: () => {},
     setClosingAllWindowsAnimation: () => {},
@@ -446,7 +439,6 @@ export const SettingsContext = createContext<AppSettingsContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         clickBehavior: 'double',
         performanceBoost: false,
@@ -499,6 +491,7 @@ export interface AppSetting {
         type: 'standard' | 'side' | 'floating'
     }
     toolbar?: boolean
+    toolbarFade?: boolean
     hideTitle?: boolean
 }
 
@@ -1611,6 +1604,11 @@ const appSettings: AppSettings = {
     '/changelog': {
         toolbar: true,
     },
+    '/roadmap': {
+        toolbar: true,
+        toolbarFade: true,
+        hideTitle: true,
+    },
     '/feet-pics': {
         toolbar: true,
     },
@@ -1623,7 +1621,6 @@ export interface SiteSettings {
     cursor: 'default' | 'xl' | 'james'
     wallpaper: 'keyboard-garden' | 'hogzilla' | 'startup-monopoly' | 'office-party'
     screensaverDisabled?: boolean
-    reduceTransparency?: boolean
     clickBehavior?: 'single' | 'double'
     performanceBoost?: boolean
     scrollbars?: 'system' | 'show' | 'auto'
@@ -1639,7 +1636,12 @@ const readStoredSiteSettings = (): Partial<SiteSettings> => {
     }
     try {
         const parsed = JSON.parse(localStorage.getItem('siteSettings') || '{}')
-        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {}
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+            return {}
+        }
+        // Retired setting. Drop it so a later save does not write it back.
+        delete parsed.reduceTransparency
+        return parsed
     } catch (error) {
         console.error('Failed to read site settings:', error)
         return {}
@@ -1656,7 +1658,6 @@ const getInitialSiteSettings = (): SiteSettings => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
         ...readStoredSiteSettings(),
     }
@@ -1687,7 +1688,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         clickBehavior: 'double',
         performanceBoost: false,
         screensaverDisabled: true,
-        reduceTransparency: false,
         scrollbars: 'system',
     })
     const [taskbarHeight, setTaskbarHeight] = useState(59)
@@ -1711,7 +1711,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const queryString = urlObj?.search.substring(1)
         const parsed = qs.parse(queryString)
-        if (parsed?.windows) return []
+        if (getSharedWindows(parsed?.windows).length > 0) return []
         return getInitialWindows(element)
     })
     const windowsRef = useRef(windows)
@@ -2028,42 +2028,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     function getInitialWindows(element: any) {
-        if (isSSR) {
-            return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
-        }
-        const urlObj = new URL(location.href)
-        const contact = urlObj.searchParams.get('contact')
-        if (contact) {
-            const initialWindowSize = { width: window.innerWidth * 0.58, height: window.innerHeight * 0.8 }
-            const formWindowWidth = window.innerWidth * 0.4
-            const formWindowSize = {
-                width: formWindowWidth,
-                height: formWindowWidth <= 545 ? 732 : 568,
-            }
-            const padding = [65, 20]
-
-            const initialWindow = createNewWindow(element, [], location, isSSR, taskbarHeight, {
-                size: initialWindowSize,
-                position: { x: padding[0], y: padding[1] },
-                zIndex: 2,
-            })
-            const formWindow = createNewWindow(
-                <ContactSales location={{ pathname: `/talk-to-a-human` }} key="/talk-to-a-human" />,
-                [],
-                { pathname: `talk-to-a-human` },
-                isSSR,
-                taskbarHeight,
-                {
-                    size: formWindowSize,
-                    position: {
-                        x: window.innerWidth - formWindowSize.width - padding[0],
-                        y: window.innerHeight - formWindowSize.height - padding[1] - taskbarHeight,
-                    },
-                    zIndex: 0,
-                }
-            )
-            return [initialWindow, formWindow]
-        }
         return [createNewWindow(element, [], location, isSSR, taskbarHeight)]
     }
 
@@ -2200,7 +2164,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 newWindow.snapped = focusedWindow.snapped
                 newWindow.expanded = false
                 newWindow.windowed = false
-            } else if (focusedWindow) {
+            } else if (focusedWindow && !focusedWindow.fixedSize) {
                 // Navigating in place: keep the focused window's current display mode
                 // (windowed vs. expanded) so pages don't jump between sizes.
                 newWindow.expanded = focusedWindow.expanded ?? false
@@ -2237,6 +2201,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             setWindows([...windows.map((w) => (w === focusedWindow ? snappedFocused : w)), newWindow])
         } else if (newWindow.appSettings?.size?.fixed) {
             setWindows([...windows.filter((w) => !w.appSettings?.size?.fixed), newWindow])
+        } else if (focusedWindow?.fixedSize) {
+            setWindows([...windows.filter((w) => w !== focusedWindow), { ...newWindow, zIndex: focusedWindow.zIndex }])
         } else {
             replaceFocusedWindow(newWindow)
         }
@@ -2319,18 +2285,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             <ForgotPassword
                 location={{ pathname: `community-auth-forgot-password` }}
                 key="community-auth-forgot-password"
-                newWindow
-            />
-        )
-    }
-
-    const openStart = ({ subdomain, initialTab }: { subdomain?: string; initialTab?: string }) => {
-        addWindow(
-            <Start
-                subdomain={subdomain}
-                initialTab={initialTab}
-                location={{ pathname: `start` }}
-                key="start"
                 newWindow
             />
         )
@@ -2472,7 +2426,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const queryString = urlObj?.search.substring(1)
         const parsed = qs.parse(queryString)
-        if (parsed?.windows || location.state?.skipPageUpdate) {
+        if (getSharedWindows(parsed?.windows).length > 0 || location.state?.skipPageUpdate) {
             return
         }
         updatePages(element)
@@ -2719,7 +2673,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (siteSettings.wallpaper) {
             document.body.setAttribute('data-wallpaper', siteSettings.wallpaper)
         }
-        document.body.setAttribute('data-reduce-transparency', siteSettings.reduceTransparency ? 'true' : 'false')
     }, [siteSettings])
 
     useEffect(() => {
@@ -2823,10 +2776,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const urlObj = new URL(location.href)
         const queryString = urlObj?.search.substring(1)
         const parsed = qs.parse(queryString)
-        const paramsWindows = parsed?.windows
+        const paramsWindows = getSharedWindows(parsed?.windows)
 
-        if (paramsWindows) {
-            const [initialWindow, ...rest] = convertWindowsToPixels(parsed.windows)
+        if (paramsWindows.length > 0) {
+            const [initialWindow, ...rest] = convertWindowsToPixels(paramsWindows)
 
             // Preserve non-windows query parameters when navigating
             const nonWindowsParams = { ...parsed }
@@ -2925,7 +2878,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         openNewChat,
         setIsNotificationsPanelOpen,
         setIsActiveWindowsPanelOpen,
-        openStart,
         animateClosingAllWindows,
         closeAllWindows,
         setClosingAllWindowsAnimation,
@@ -2962,7 +2914,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             openForgotPassword: (...args) => latestActionsRef.current!.openForgotPassword(...args),
             updateSiteSettings: (...args) => latestActionsRef.current!.updateSiteSettings(...args),
             openNewChat: (...args) => latestActionsRef.current!.openNewChat(...args),
-            openStart: (...args) => latestActionsRef.current!.openStart(...args),
             animateClosingAllWindows: (...args) => latestActionsRef.current!.animateClosingAllWindows(...args),
             closeAllWindows: (...args) => latestActionsRef.current!.closeAllWindows(...args),
             copyDesktopParams: (...args) => latestActionsRef.current!.copyDesktopParams(...args),
@@ -3056,7 +3007,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                                 isMobile,
                                 compact,
                                 menu,
-                                openStart,
                                 animateClosingAllWindows,
                                 closingAllWindowsAnimation,
                                 setClosingAllWindowsAnimation,

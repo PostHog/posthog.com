@@ -11,13 +11,7 @@ sourceId: Supabase
 
 The Supabase connector can link your Supabase database tables to PostHog. Supabase is built on top of Postgres, so this connector uses the same underlying integration as the [Postgres source](/docs/data-pipelines/sources/postgres).
 
-<CalloutBox icon="IconFlask" title="CDC sync is in alpha" type="action">
-
-Because Supabase uses the Postgres integration, you can also enable change data capture (CDC) sync. See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#sync-methods) for details. CDC sync is currently in **alpha**.
-
-We'd love to [hear your feedback](https://app.posthog.com/home#panel=support%3Afeedback%3A%3Alow%3Atrue).
-
-</CalloutBox>
+Because Supabase uses the Postgres integration, you can also enable change data capture (CDC) sync. See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#sync-methods) for details.
 
 To link Supabase:
 
@@ -64,6 +58,8 @@ See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#se
 <CalloutBox icon="IconWarning" title="SSL/TLS required for new sources" type="caution">
 
 Supabase sources created after February 18, 2026 require SSL/TLS encryption for database connections. Supabase enforces SSL/TLS by default, so this is typically already in place. If you're connecting through an SSH tunnel, you can optionally disable TLS using the **Require TLS through tunnel?** toggle since the tunnel already encrypts the connection.
+
+To verify your database's TLS certificate or use a client certificate, see [Verify the server certificate](/docs/data-pipelines/sources/postgres#verify-the-server-certificate) on the Postgres page. The same fields and errors apply.
 
 </CalloutBox>
 

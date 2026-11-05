@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/using-posthog/posthog-features.jpg
 featuredImageType: full
+ogImage: generated
 author:
   - andy-vandervell
 category: Using PostHog
@@ -231,6 +232,6 @@ Want to see where people are clicking on any page on your website or web app, ju
 
 ![heatmap](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/using-posthog/docs-heatmap.png)
 
-Try the [PostHog Toolbar](/tutorials/toolbar).
+Try the [PostHog Toolbar](/docs/toolbar).
 
 <ArrayCTA />

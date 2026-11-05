@@ -84,14 +84,57 @@ export default {
 
 You'll notice two different usage patterns here:
 
-1. We use `ctx.waitUntil()` with `captureImmediate()` to capture an event. This doesn't block the **response**, but does ensure data is captured before the worker shuts down. 
-2. We `await` flags which blocks the response until we get the [feature flag](/docs/feature-flags) data we need. 
+1. We use `ctx.waitUntil()` with `captureImmediate()` to capture an event. This doesn't block the **response**, but does ensure data is captured before the worker shuts down.
+2. We `await` flags which blocks the response until we get the [feature flag](/docs/feature-flags) data we need.
 
 ### Error tracking
 
 You can capture errors in Cloudflare Workers like you would in other Node applications using `posthog.captureException()`.
 
 For more details and a method for automatically capturing errors, see our [error tracking installation docs](/docs/error-tracking/installation).
+
+### Request and span context
+
+The standard `workerd` export uses the edge client. It has no implicit request context: `withContext()` runs the callback, and `getContext()` returns `undefined`. Enabling `nodejs_compat` does not add context support to this entrypoint. Node request middleware and `PostHogContextSpanProcessor` cannot supply automatic request IDs here.
+
+Pass the IDs explicitly to each capture. Use a verified application ID when your app has one. Browser tracing headers are untrusted analytics data and must not authorize access. This example reads the headers only for analytics, removes control characters, trims whitespace, omits blanks, and limits each ID to 1,000 characters:
+
+```js file=src/index.js
+import { createPostHogClient } from './posthog.js';
+
+function tracingId(value) {
+  return value?.replace(/[\x00-\x1F\x7F-\x9F]/g, '').trim().slice(0, 1000) || undefined;
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    const posthog = createPostHogClient(env);
+    const distinctId = tracingId(request.headers.get('x-posthog-distinct-id'));
+    const sessionId = tracingId(request.headers.get('x-posthog-session-id'));
+    const properties = sessionId ? { $session_id: sessionId } : {};
+
+    ctx.waitUntil((async () => {
+      try {
+        await posthog.captureImmediate({
+          distinctId,
+          event: 'request_received',
+          properties,
+        });
+      } finally {
+        await posthog.shutdown();
+      }
+    })());
+
+    return new Response('OK');
+  },
+};
+```
+
+Without a distinct ID, each capture gets a new SDK-generated anonymous ID. Those captures do not share person context. Without a session ID, they have no browser session link. Use a verified application ID when you need related captures to share a person.
+
+For an error, pass the same explicit values to `posthog.captureException(error, distinctId, properties)` and keep the flush or shutdown promise in `ctx.waitUntil()`. Values in these callbacks come from the current request's local variables. Keep request IDs out of global variables. [waitUntil](https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil) extends execution for the registered promise; it does not add identity context to other work.
+
+Cloudflare has its own [native custom spans API](https://developers.cloudflare.com/workers/observability/traces/custom-spans/). The shared Node processor does not connect to it. The native span API has no documented attribute reader for filling only missing IDs. Automatic missing-attribute enrichment, preservation of pre-existing native attributes, and SDK exception links to native trace IDs are therefore outside this setup. An application can set `posthogDistinctId` and `sessionId` when it creates its own custom spans, using explicit IDs on each span that needs them. Platform-created child spans receive no automatic PostHog ID propagation from the edge client.
 
 ## Node.js compatibility
 

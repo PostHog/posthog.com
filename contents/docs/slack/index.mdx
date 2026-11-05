@@ -20,9 +20,9 @@ classes="rounded"
 alt="A PostHog Desktop task running in a Slack thread"
 />
 
-Before you can mention the bot you'll need to [connect the integrations](/docs/slack/setup). You'll need to connect:
-- A Slack workspace connection for each project
-- A personal GitHub connection for each teammate who wants to ship PRs.
+Before you can mention the bot you'll need to [connect the integrations](/docs/slack/setup):
+- A Slack workspace connection for each project.
+- GitHub, to ship code. A personal GitHub connection lets the agent open PRs as you. Without one, a task can fall back to your project's GitHub App installation and open the PR as the PostHog bot.
 
 ## Ask about your product data
 
@@ -69,11 +69,13 @@ to everyone with an @example.com email address
 to the onboarding flow to lift the drop-off between step 2 and step 3
 ```
 
-If you have a single repo connected, the task runs against it immediately. If you have several, the bot opens a repo picker in-thread. Pick one and the task starts. The picker times out after 15 minutes; after that, re-mention the bot to try again.
+If you have a single repo connected, the task runs against it immediately. If you have several, name the repo (`org/repo` or a GitHub link) in your message or the thread, or let the agent pick one. Your [routing rules](/docs/slack/commands#routing-rules) guide that pick. If the pick fails, the bot opens a repo picker in-thread, with a **No repo needed** option. The picker times out after 15 minutes. After that, re-mention the bot to try again. See [how the agent picks a repo](/docs/slack/commands#how-the-agent-picks-a-repo) for the full order.
 
-Once the agent finishes, it posts a final summary of its work to the thread.
+While the agent works, the thread shows a progress message with a link to the agent logs. When it opens a pull request, it posts a **Pull request opened** card, and later a card when the PR is merged or closed. If the PR was opened as the PostHog bot, the card says so. See [Connect your personal GitHub](/docs/slack/setup#connect-your-personal-github). Once the agent finishes, it posts a final summary of its work to the thread. If a run fails, the bot posts a **Task Failed** message. Reply `retry` in the thread to continue from the last checkpoint.
 
-Replies from the agent carry a footer. It links to the session in PostHog, names the model used and its reasoning effort, and offers a **Configure** link into the [App Home tab](#the-app-home-tab). The footer also names the project the run belongs to, when your workspace connects more than one. There are also thumb icons to [rate the answer](#rate-an-answer).
+Replies from the agent carry a footer. It links to the session in PostHog, names the model used and its reasoning effort, and offers a **Configure** link into the [App Home tab](#the-app-home-tab). The footer also names the project the run belongs to, when the person who started the thread can access more than one project connected to the workspace. There are also thumb icons to [rate the answer](#rate-an-answer).
+
+When the agent's answer asks you to pick an option or approve a next step, it can add up to three reply buttons under the answer. Click one to send that reply in the thread as yourself.
 
 ## Follow-ups in a thread
 
@@ -81,11 +83,21 @@ Reply in the thread to send a follow-up to the running agent. Anything you say w
 
 Once the agent finishes, you can reply to it by sending a new message in the thread with `@PostHog` to continue the existing conversation.
 
-Anyone in the thread can send follow-ups. Each message is forwarded to the running agent as a new turn in the same conversation, so teammates can steer the run together, drop in extra context, or answer a question the agent asked.
+Teammates can send follow-ups too. Each message is forwarded to the running agent as a new turn in the same conversation, so teammates can steer the run together, drop in extra context, or answer a question the agent asked.
 
-Follow-ups are properly multiplayer: each turn runs under the identity of whoever sent it. The agent switches to the sender's own GitHub and PostHog integrations before the turn runs, so commits and PRs land under the name of the person who actually asked for them – not the person who started the thread.
+Who can join is up to whoever started the thread. Set it in the [App Home tab](#the-app-home-tab) under **Multiplayer**:
 
-If a teammate sends a follow-up without a [personal GitHub connection](/docs/slack/setup), the agent can't fetch, push, or open PRs on their turn. It replies with a link to connect GitHub, and the rest of the conversation carries on as normal.
+| Option | What happens |
+|---|---|
+| **Let anyone join** (default) | Anyone who mentions `@PostHog` in the thread is picked up |
+| **Ask me once per thread** | The first time someone else joins, you get a prompt only you can see. Approve once and anyone can join that thread |
+| **Ask me for each person** | You approve each new person separately |
+| **Ignore them** | Only you can talk to the agent in your threads |
+
+Follow-ups are multiplayer: each turn runs as the PostHog user who sent it. For GitHub, it depends on how the run started:
+
+- **Runs that started with a personal GitHub connection.** Before each turn, the agent switches to the sender's own GitHub connection. Commits on that turn carry their name, not the name of the person who started the thread. If the sender has no [personal GitHub connection](/docs/slack/setup#connect-your-personal-github), the agent can't fetch, push, or open PRs on their turn, and the rest of the conversation carries on as normal.
+- **Runs that fell back to the project's GitHub App installation.** Every turn uses the installation, whoever sends it. Commits and PRs come from the PostHog bot. If the person who started the thread connects their GitHub later, their next turn switches the run to their identity.
 
 ### Reply without tagging the bot
 
@@ -93,19 +105,23 @@ Once a task is running in a thread, the bot can also pick up replies that don't 
 
 | Option | What happens |
 |---|---|
-| **Leave them alone** (default) | Untagged replies are ignored – mention `@PostHog` to reach the agent |
-| **Ask them first** | If the bot thinks a reply is meant for it, it asks first with a prompt only the replier can see |
+| **Ask them first** (default) | If the bot thinks a reply is meant for it, it asks first with a prompt only the replier can see |
 | **Pick them up automatically** | If the bot thinks a reply is meant for it, it answers without asking |
+| **Leave them alone** | Untagged replies are ignored – mention `@PostHog` to reach the agent |
 
 The setting applies to every reply in threads you started, including your own. The bot is deliberately conservative about what counts as "meant for it" – teammates talking to each other are left alone.
 
+### Questions in channels
+
+The bot can also offer to answer a question you post in a channel without tagging it, when your PostHog data can answer it. By default it asks first, with a prompt only you can see: click **Yes, answer it** and it replies in a thread. Change this in the [App Home tab](#the-app-home-tab) under **Questions in channels** (**Answer automatically**, **Ask me first**, or **Never answer**). The setting only covers your own top-level posts in channels.
+
 ## Rate an answer
 
-Every response the agent posts carries a thumbs up and a thumbs down. Click one to rate it. A thumbs down opens a short **What went wrong?** box where you can tell us what you expected instead.
+Agent replies carry a thumbs up and a thumbs down. Click one to rate it. A thumbs down opens a short **What went wrong?** box where you can tell us what you expected instead.
 
 Reacting with a 👍 or 👎 emoji on the agent response also counts as rating, but it won't open the **What went wrong?** box.
 
-A rating is feedback for us, not an instruction for the agent. It changes nothing about the run in flight. The reply is left as it is, so the rest of the thread can't see how you voted. Anyone who can read the reply can rate it, and a later rating replaces an earlier one. The click itself is what records the rating, so closing the box without typing still counts.
+A rating is feedback for us, not an instruction for the agent. It changes nothing about the run in flight. The reply is left as it is, so the rest of the thread can't see how you voted. Anyone who can read the reply can rate it. The click itself is what records the rating, so closing the box without typing still counts.
 
 Ratings from Slack sit beside the ones from PostHog AI in the app and from PostHog Desktop. A thumbs down reads the same wherever you leave it.
 
@@ -117,13 +133,13 @@ A new DM opens as a Slack AI assistant panel, with a short greeting and a few su
 
 The bot introduces itself by DM: once to whoever installs it, and once to each new teammate who joins your Slack workspace.
 
-Group DMs work too – start one with the bot and your teammates as members. What you can't do is mention the bot in an existing DM it isn't part of: it can't see or join those conversations.
+Group DMs work too – start one with the bot and your teammates as members, and mention `@PostHog` to reach it. What you can't do is mention the bot in an existing DM it isn't part of: it can't see or join those conversations.
 
 Commands read the same in a DM as in a channel: `/posthog project <id>`. See the [command reference](/docs/slack/commands).
 
 ## Pick a model
 
-Tasks run on **Claude Opus 5** by default. To use a different model, just ask for it as part of your message:
+Tasks run on **Claude Opus 5.5** by default. To use a different model, just ask for it as part of your message:
 
 ```
 @PostHog investigate the checkout drop-off and use fable for it
@@ -135,9 +151,20 @@ A model named as the subject of the work doesn't switch anything. "Add Fable to 
 
 To change the model for everything you run, set your default in the [App Home tab](#the-app-home-tab) under **AI model**. You can also set it in PostHog Web under **Settings → Environment → Task agents**. They are the same setting: the Home tab edits your PostHog task agent default, which applies to Slack, the task composer, and PostHog Desktop alike. Project admins set a project-wide default in the same place.
 
-The precedence is: model named in the message → your PostHog default → the project default → **Claude Opus 5**.
+The precedence is: model named in the message → [auto model choice](#auto-model-choice) (if you turned it on) → your PostHog default → the project default → **Claude Opus 5.5**.
 
 You can also switch models mid-run from a follow-up message, with one constraint: the runtime (Claude or Codex) is fixed once an agent starts, so moving to a model from the other family requires starting a new thread. For example, you can go from Opus to Fable mid-run, but not from a Claude model to a Codex one. Each reply's footer shows the model and reasoning effort actually used.
+
+### Auto model choice
+
+Turn on **Use auto model choice** in the [App Home tab](#the-app-home-tab) under **AI model** and PostHog picks the model for each new task. It's off by default.
+
+A fast model reads your first message and picks the cheapest model likely to get it right on the first try:
+
+- **Stronger model:** new features, refactors, bugs to track down, unclear asks that need digging, plans, and reviews.
+- **Faster model:** quick questions, single queries or summaries, and small edits like a typo or a version bump.
+
+It judges the work, not the message length. It stays on your usual runtime, and when two models fit equally well it picks your default. A model you name in your message always wins. If the pick fails, the task runs on your default, and follow-ups keep their task's model.
 
 ## Pick a project
 
@@ -149,13 +176,13 @@ When your Slack workspace is connected to more than one PostHog project, the bot
 
 Only the first message of a thread can pick a project. A task, its thread, and its run all belong to one project, so a follow-up can't move it – start a new thread instead.
 
-Everything else is a default you set once: your personal project in the [App Home tab](#the-app-home-tab) under **Project routing** or with `/posthog project <id>`, and the workspace-wide fallback by a Slack admin. [Pick a project](/docs/slack/setup#pick-a-project) covers the full precedence.
-
-Reading the project out of a message is rolling out during the beta. Until it reaches your workspace, mentions run against your saved default.
+Everything else is a default you set once: your personal project in the [App Home tab](#the-app-home-tab) under **Project routing** or with `/posthog project <id>`, and the workspace-wide fallback by a Slack admin. If you have no default yet, the bot asks you to pick a project and remembers your choice. [Pick a project](/docs/slack/setup#pick-a-project) covers the full precedence.
 
 ## Attachments, files, and canvases
 
-Attach files to your message and the agent reads them: images (PNG, JPG, GIF, WebP), PDFs, and plain-text files like logs, markdown, CSV, JSON, and YAML. Up to five attachments per message, 10 MB each.
+Attach files to your message and the agent reads them: images, PDFs, logs, CSV exports, and other files. Up to 15 attachments per message, 30 MB each (10 MB for PDFs). Files posted earlier in the thread come along too, up to 15 more, with 50 MB in total per turn. Files over a limit are skipped, and the bot tells you which ones.
+
+Reading attachments needs the `files:read` Slack scope. If the bot says it's missing, ask a project admin to [reconnect the Slack app](/docs/slack/setup#connect-slack-to-your-project).
 
 Paste a screenshot of a broken page, a design, or a chart, then tell the agent what to do with it:
 
@@ -184,16 +211,15 @@ Canvases and files need the `canvases:write` and `files:write` Slack scopes. Sla
 
 Open the PostHog app's **Home** tab in Slack (or click **Configure** in the footer of any bot reply) to manage your setup in one place:
 
-- **Workspace activity** – tasks, PRs opened and merged, merge rate, and most active teammates. Visible to Slack workspace admins and owners only.
+- **Workspace activity** – tasks, PRs opened and merged, merge rate, median run time, models used, and most active teammates, over the last 7, 30, or 90 days. Visible to Slack workspace admins and owners only.
 - **Project routing** – your personal default project, plus the workspace-wide default (editable by Slack admins).
-- **AI model** – which model and reasoning effort your mentions run on, and where that comes from. Editing it here edits your PostHog task agent default, so the change also applies in the task composer and PostHog Desktop.
+- **AI model** – which model and reasoning effort your mentions run on, and where that comes from, plus the **Use auto model choice** option. Editing it here edits your PostHog task agent default, so the change also applies in the task composer and PostHog Desktop.
 - **Thread follow-ups** – how the bot treats [untagged replies](#reply-without-tagging-the-bot) in threads you started.
+- **Questions in channels** – whether the bot offers to answer [your untagged channel questions](#questions-in-channels).
+- **Multiplayer** – who can [join threads you started](#follow-ups-in-a-thread).
+- **Channel welcome** – where the greeting goes when someone adds the bot to a channel. Visible to Slack workspace admins and owners only.
 - **Linked accounts** – your PostHog account link and personal GitHub connections.
-- **Tasks** – the tasks you've started from Slack, filterable by repo and status, with links to the thread, web, and desktop.
-
-## See Slack tasks in PostHog Desktop
-
-Tasks you kick off from Slack show up in [PostHog Desktop](/docs/posthog-desktop) alongside the ones you started in the app. They're marked with a Slack icon (instead of the usual chat bubble) so you can tell where each task came from at a glance. Open one to read the full conversation, take over locally, or keep steering the run from your desktop.
+- **Tasks** – the tasks you've started from Slack with thread activity in the last 14 days, filterable by repo and status, with links to the web, desktop, and PR.
 
 ## Emoji cues
 
@@ -201,14 +227,16 @@ The bot reacts to your `@PostHog` message as it works through your request, so y
 
 | Emoji | What it means |
 |---|---|
+| ⏳ `:hourglass:` | Your message is queued behind another one in the same conversation |
 | 🔍 `:mag:` | Picking which repo to run the task against |
-| 👀 `:eyes:` | Forwarding a follow-up to the running agent, or resuming a previous run |
-| 🦔 `:hedgehog:` | The agent finished and posted its reply in the thread |
+| 👀 `:eyes:` | The agent is working on your message |
 | ❌ `:x:` | Something went wrong |
 
 ## Link unfurling
 
-When you paste a PostHog insight or dashboard URL in a channel the bot is invited to, Slack shows a rich preview with the title, type, and description. Unfurling respects PostHog access permissions. Only teammates with at least viewer access on the item will see the preview. See [Slack link unfurling](/docs/libraries/slack#link-unfurling) for details.
+When you paste a PostHog link in a channel the bot is invited to, Slack shows a rich preview with the title, type, and description. This works for insights (with a chart image), dashboards, notebooks, feature flags, experiments, surveys, cohorts, error tracking issues, Self-driving reports, support tickets, and tasks.
+
+The bot checks that the person who pasted the link can access the item. If they can, the preview is posted to the channel, so everyone in the channel sees it. Links are never unfurled in Slack Connect channels. See [Slack link unfurling](/docs/libraries/slack#link-unfurling) for details.
 
 ## Related
 

@@ -6,7 +6,6 @@ import ReaderView from 'components/ReaderView'
 import SourceConfiguration from 'components/Product/Sources/Configuration'
 import SourceTables from 'components/Product/Sources/Tables'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
-import SourceReleaseCallout from 'components/Docs/SourceReleaseCallout'
 import { getProseClasses } from '../constants'
 
 interface SourceField {
@@ -37,15 +36,12 @@ export default function DataWarehouseSource({
             icon_url: string
             caption: string
             permissionsCaption: string
-            beta: boolean
-            releaseStatus: string | null
             sourceFields: SourceField[]
             tables: SourceTable[]
         }
     }
 }): JSX.Element {
-    const { sourceId, name, icon_url, caption, permissionsCaption, beta, releaseStatus, sourceFields, tables } =
-        data.postHogSource
+    const { sourceId, name, icon_url, caption, permissionsCaption, sourceFields, tables } = data.postHogSource
 
     return (
         <>
@@ -54,11 +50,7 @@ export default function DataWarehouseSource({
                 <div className="flex items-center space-x-2">
                     <img src={icon_url} alt={name} className="w-10 h-10" />
                     <h1 className="m-0">{name}</h1>
-                    {beta && (
-                        <span className="text-xs font-semibold px-2 py-0.5 rounded bg-blue/10 text-blue">Beta</span>
-                    )}
                 </div>
-                <SourceReleaseCallout releaseStatus={releaseStatus} />
                 <WarehouseWizardHint className="my-4" />
                 <div className={getProseClasses('base')}>
                     <p>
@@ -114,8 +106,6 @@ export const query = graphql`
             icon_url
             caption
             permissionsCaption
-            beta
-            releaseStatus
             sourceFields {
                 name
                 label
