@@ -162,7 +162,8 @@ export const workflows = {
     ],
     overview: {
         title: 'Email for product engineers',
-        description: '"Set up a password reset email and write the code that sends it"',
+        description:
+            'Send the password reset, the product update, and the onboarding drip from one SDK, then see what people did after they opened it.',
         eli5: (
             <>
                 <p>
