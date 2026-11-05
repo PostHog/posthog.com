@@ -329,13 +329,15 @@ const response = await openai.chat.completions.create({
 
 `config` is `None` (Python) or `null` (JavaScript) when the version has no config, and it's missing entirely on fallback results, so read it defensively with defaults as above. The config is cached together with the prompt, including the stale-cache fallback.
 
-## Using prompts in code
-
 ### Prerequisites
 
-- **API key for authentication** – One of:
-  - **[Personal API key](/docs/api/personal-api-keys) (`phx_...`)** – Allows prompt fetches and all management actions
-  - **[Project secret API key](/docs/api/project-secret-api-keys/overview) (`phs_...`)** – Allows prompt fetches only (requires `llm_prompt:read` scope). Not tied to a specific person's account
+- **Personal API key (`phx_...`) or [project secret API key](/docs/api/project-secret-api-keys) (`phs_...`)** – Used as Bearer auth for prompt fetches. A project secret API key with the `llm_prompt:read` scope is recommended for services, since it isn't tied to a person's account.
+- **Project token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
+- **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
+
+When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys.
+Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
+
 - **Project token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
 - **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
 
