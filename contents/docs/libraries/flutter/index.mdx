@@ -647,7 +647,6 @@ Other changes that come with capture v1, on every platform except web:
 
 - **Redirects:** the SDK only follows a 307 or 308 redirect to the same origin as `host`. Any other redirect drops the batch. If your proxy redirects capture requests to another host, point `host` at the final host.
 - **Event validation:** PostHog checks each event on its own and drops only the invalid ones, so the rest of the batch is delivered. It drops an event with an empty name, an empty distinct ID, or a name or distinct ID over 200 UTF-8 bytes. Version 5 shortened a long distinct ID and kept the event. If you identify users with a long ID, such as a JWT, shorten or hash it before you upgrade.
-- **`$lib` and `$lib_version`:** PostHog sets them from the SDK's `PostHog-Sdk-Info` request header. A value you set in properties or in `beforeSend` doesn't reach PostHog.
 - **Personal API keys:** a personal API key (`phx_...`) in `projectToken` disables the SDK at setup. Use your project token (`phc_...`).
 - **Billing limit:** a 402 (over your billing limit) drops the whole request.
 - **Session and window IDs:** a `$session_id` or `$window_id` that isn't a string is removed before sending.
@@ -721,6 +720,7 @@ These changes come from `posthog-ios` 4.0 and need no code changes, but they can
 - **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. PostHog rejects malformed payloads when you save a flag, so this rarely comes up.
 - **Bootstrapped payloads:** string values in `PostHogBootstrapConfig.featureFlagPayloads`, such as `"123"` or `"true"`, now stay strings instead of being decoded to numbers or booleans. This matches Android.
 - **Lifecycle events:** `Application Installed`, `Application Updated` and `Application Opened` no longer include the legacy `version` and `build` properties. Update any insights, cohorts or filters that use them to `$app_version` and `$app_build`. Android still sends `version` and `build` for now.
+- **`$locale` and `$app_language`:** `$locale` is now the device's preferred language with its region, such as `en-US` instead of `en`. If a user picks a language for your app in iOS Settings, `$locale` follows it. The new `$app_language` property is the language your app shows, using your app's localization name, such as `de`, `pt-BR` or `zh-Hans`. Update cohorts, insights and actions that match `$locale`: a filter on `$locale = de` stops matching `de-CH`. Use `$app_language` for the language your app shows, or a regex on `$locale` such as `^de(-|$)` for the device language. Events already stored keep the old `$locale` and have no `$app_language`.
 - **Network reachability:** a path that needs user action, such as a VPN waiting for a password, counts as reachable, and queues pause while cellular data is off for the app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
 - **Events queued by very old versions:** events still on disk from a `posthog-ios` 2.x SDK are deleted instead of sent. Distinct ID, anonymous ID, groups and cached feature flags carry over.
 
