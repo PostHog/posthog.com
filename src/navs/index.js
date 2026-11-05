@@ -8306,6 +8306,10 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/node',
                         },
                         {
+                            name: 'Nodemailer',
+                            url: '/docs/workflows/transactional-emails/nodemailer',
+                        },
+                        {
                             name: 'Python',
                             url: '/docs/workflows/transactional-emails/python',
                         },

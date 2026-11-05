@@ -1,0 +1,123 @@
+---
+title: Send transactional emails with Nodemailer
+sidebar: Docs
+showTitle: true
+---
+
+If your app sends email with [Nodemailer](https://nodemailer.com), you can send that email through PostHog. Change the transport, and keep every `sendMail` call. Each message becomes one [email sent from your code](/docs/workflows/transactional-emails/node#send-content-from-your-code), so PostHog shows its sends, metrics, and engagement events.
+
+Before you start, [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key) with the **Transactional email** scope, and [configure a channel](/docs/workflows/configure-channels) with a verified sender.
+
+## Install
+
+```bash
+npm install posthog-node nodemailer
+```
+
+## Create the transport
+
+Pass a PostHog client with your secret key to `createPostHogTransport`, and give the result to Nodemailer:
+
+```js
+import nodemailer from "nodemailer"
+import { PostHog } from "posthog-node"
+import { createPostHogTransport } from "posthog-node/nodemailer"
+
+const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    // This client only sends email, so it doesn't poll flag definitions with the secret key
+    enableLocalEvaluation: false,
+})
+
+export const transporter = nodemailer.createTransport(createPostHogTransport({ client: posthog }))
+```
+
+The client sends email to the app host of your PostHog Cloud region. For a reverse proxy or a self-hosted instance, set `appHost` on the client. See [set up the client](/docs/workflows/transactional-emails/node#set-up-the-client) for the key scopes and hosts.
+
+## Send an email
+
+Your `sendMail` calls stay the same:
+
+```js
+const info = await transporter.sendMail({
+    from: "Hedgebox <orders@example.com>",
+    to: "jane@example.com",
+    subject: "Your order shipped",
+    html: "<p>Your order is on its way.</p>",
+    text: "Your order is on its way.",
+})
+```
+
+`info.messageId` is PostHog's message ID. Use it with [`posthog.emails.get`](/docs/workflows/transactional-emails/node#check-an-emails-status) to check the email's status.
+
+- **Sender:** `from` needs an address on a domain that your project verified. Without `from`, PostHog uses the project's default sender.
+- **Recipients:** A message has one `to` address. `cc`, `bcc`, and `replyTo` take a list. PostHog keeps the display name of `from` and sends the other addresses without their names.
+- **Attachments:** You can attach files, and inline images that have a `cid`.
+
+## Set PostHog options
+
+Put PostHog's options for one message in `posthog`:
+
+```js
+await transporter.sendMail({
+    from: "Hedgebox <orders@example.com>",
+    to: "jane@example.com",
+    subject: "Your order shipped",
+    html: "<p>Your order is on its way.</p>",
+    posthog: {
+        template_key: "order-shipped",
+        distinct_id: user.id,
+        idempotency_key: `order-shipped-${order.id}`,
+        capture_engagement: true,
+    },
+})
+```
+
+- **`template_key`** names the email, such as `order-shipped`. PostHog groups the email's metrics and sends under it. Without it, the transport uses `defaultTemplateKey` from `createPostHogTransport`, or `nodemailer`. Use letters, digits, hyphens, and underscores.
+- **`distinct_id`** records the email against the person with this distinct ID. Without it, PostHog uses a person whose distinct ID is the `to` address. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
+- **`idempotency_key`** identifies this one email. PostHog sends an email only once for each key.
+- **`capture_engagement`** turns the email's [engagement events](/docs/workflows/engagement-events) on or off. It defaults to `true`.
+
+In TypeScript, importing `posthog-node/nodemailer` adds `posthog` to Nodemailer's message type.
+
+## Send mail from a queue
+
+The client retries network errors, rate limits, and a `503` up to two times, with the same idempotency key. When a job queue retries a failed send, each retry is a new `sendMail` call. Without an `idempotency_key`, each call gets a new random key, and the recipient can get the email twice.
+
+So when you queue mail, set `idempotency_key` from a stable ID of the email, such as the order ID and the email's name:
+
+```js
+posthog: { idempotency_key: `order-shipped-${order.id}` }
+```
+
+A failed `sendMail` rejects with an error that tells you if a retry can succeed:
+
+- `error.retryable` is `true` when a retry with the same `idempotency_key` can succeed. After a network error or a `503`, PostHog might have queued the email, so retry with the same key, not through another provider.
+- `error.retry_after` is the number of seconds that PostHog asked you to wait, when it sent one.
+- `error.code`, `error.status`, `error.detail`, and `error.attr` come from the [errors table](/docs/workflows/transactional-emails#errors).
+
+## Messages PostHog can't send
+
+PostHog never drops part of a message. If PostHog can't send part of a message, `sendMail` rejects before PostHog gets a request, and sends nothing. The error has `code: "EPOSTHOGUNSUPPORTED"`, and `error.refusal` tells you why:
+
+| `refusal` | The message has |
+| --- | --- |
+| `multiple_to` | no `to` address, or more than one. Send one message for each recipient. |
+| `unsupported_header` | a custom header, `inReplyTo`, `references`, `list`, or a `sender` that isn't the `from` address. |
+| `unsupported_part` | an `amp`, `icalEvent`, `watchHtml`, `alternatives`, or `raw` part. |
+| `unsupported_priority` | a `priority` other than `normal`. |
+| `envelope_mismatch` | an `envelope` with a different sender or other recipients than the message. |
+| `inline_without_cid` | an inline attachment with no `cid`. |
+| `invalid_template_key` | a `posthog.template_key` with characters other than letters, digits, hyphens, and underscores. |
+
+```js
+try {
+    await transporter.sendMail(message)
+} catch (error) {
+    if (error.code === "EPOSTHOGUNSUPPORTED") {
+        console.error(`PostHog can't send this email: ${error.refusal}`)
+    }
+    throw error
+}
+```
