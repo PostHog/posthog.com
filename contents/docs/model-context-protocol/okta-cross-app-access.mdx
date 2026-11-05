@@ -17,7 +17,7 @@ PostHog isn't in the Okta Integration Network yet, so you use the PostHog app yo
 
 - **In Okta:** an org with SSO and Cross App Access, and the super admin role.
 - **A PostHog app in Okta for SSO.** Cross App Access builds on SSO, so set up [SAML](/docs/settings/authentication/saml) or [OIDC](/docs/settings/authentication/oidc) with Okta first.
-- **In Claude:** a Team or Enterprise plan that signs in through Okta, and permission to manage connectors.
+- **In Claude:** a Team or Enterprise plan that signs in through Okta, and the **Owner** role in your Claude organization.
 - **In PostHog:** the Scale or Enterprise [platform add-on](/platform-packages), admin access, and members whose Okta email matches their PostHog email. PostHog does not create accounts.
 
 ## 1. Turn on Cross App Access for your PostHog app in Okta
@@ -37,6 +37,8 @@ Start Claude's setup first, because it gives you the values Okta needs:
 1. In Claude, go to **Organization settings → Connectors**, select the **PostHog** connector, and click **Set up** next to **Managed authorization** on the **Configuration** tab.
 2. Under **Identity source**, choose **IdP-managed**, confirm your Okta connection, and follow Claude's setup guide.
 
+If the PostHog connector has no **Managed authorization** option, it isn't available for PostHog in your Claude organization yet. [Contact us](/talk-to-a-human).
+
 In Okta, Claude's guide has you go to **Directory → AI agents**, click **Register AI agent**, link it to the app your members use to sign in to Claude, and enter the client ID Claude shows on the **Client registration** tab. Activate the agent when you're done.
 
 ## 3. Connect Claude to PostHog in Okta
@@ -46,7 +48,7 @@ In Okta, Claude's guide has you go to **Directory → AI agents**, click **Regis
    - **Application instance:** your PostHog app.
    - **Claude client ID registered in PostHog:** the client ID Claude uses with PostHog, which Claude's setup guide shows.
    - **Resource identifier:** `https://mcp.posthog.com/mcp`, or `https://mcp-eu.posthog.com/mcp` if you pin the EU region.
-   - **Scopes:** **Allow specific scopes**, and select at least `user:read`, `organization:read`, and `project:read`.
+   - **Scopes:** **Allow specific scopes**, and select the scopes from step 1. See [choosing scopes](#choosing-scopes).
 3. Click **Add**.
 4. On the agent's **User access** tab, assign the users or groups who should get PostHog in Claude.
 
@@ -72,12 +74,9 @@ PostHog offers more than 100 scopes, so you can't list all of them in Okta. Pick
 
 </CalloutBox>
 
-- Always include `user:read`, `organization:read`, and `project:read`. The MCP server needs them to list your organizations and projects.
-- A `:write` scope also grants the matching `:read`, so list only the `:write` scope for products where members need to make changes.
-- A read-only start covers most analysis: `insight:read`, `dashboard:read`, `query:read`, `event_definition:read`, `property_definition:read`, `person:read`, `cohort:read`, `session_recording:read`, `error_tracking:read`, `experiment:read`, `feature_flag:read`, `survey:read`, and `logs:read`.
-- The full list is in `scopes_supported` at `https://oauth.posthog.com/.well-known/oauth-authorization-server`.
+Start with the [recommended scopes](/docs/settings/authentication/id-jag#which-scopes-should-i-grant). They're the ones the PostHog MCP server grants by default when someone connects with OAuth, and there are fewer than 100 of them. Enter them on the PostHog app in step 1, and allow them in the resource connection in step 3.
 
-The access token gets only the scopes that both Okta granted and Claude asked for.
+The access token gets only the scopes that both Okta granted and Claude asked for. To add a scope later, add it on the PostHog app and in the resource connection. Members get it with their next token, within 2 hours.
 
 ## Limits
 

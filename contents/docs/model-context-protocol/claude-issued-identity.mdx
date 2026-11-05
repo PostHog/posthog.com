@@ -11,17 +11,17 @@ With Claude-issued identity, Claude tells PostHog which member of your Claude or
 
 This is one of the identity sources for [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization). If your organization signs in to Claude through Okta, use [Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access) instead.
 
-<CalloutBox icon="IconInfo" title="Claude-issued identity is in beta in Claude" type="action">
+<CalloutBox icon="IconStar" title="Scale and Enterprise add-ons" type="action">
 
-Anthropic labels Claude-issued identity as beta. The PostHog side is generally available on the Scale and Enterprise [platform add-ons](/platform-packages).
+Enterprise-managed authorization is available to organizations on the Scale or Enterprise [platform add-on](/platform-packages).
 
 </CalloutBox>
 
 ## Before you start
 
-- A Claude Team or Enterprise plan, and permission to manage connectors in Claude.
-- The Scale or Enterprise platform add-on on your PostHog organization, and admin access to it.
-- Members whose Claude email address matches their PostHog email address. PostHog matches users by email and does not create accounts.
+- **In Claude:** a Team or Enterprise plan, and the **Owner** role in your Claude organization. Only owners can set up managed authorization for a connector.
+- **In PostHog:** the Scale or Enterprise platform add-on, and admin access to your PostHog organization.
+- **Matching email addresses.** PostHog connects each Claude member to the PostHog user with the same email address. A member works only if they already have a PostHog account in your organization under the email they use in Claude. PostHog does not create accounts, so [invite members](/docs/settings/organizations#adding-new-members) or provision them with SSO or [SCIM](/docs/settings/authentication/scim) first.
 
 ## 1. Copy the issuer URL from Claude
 
@@ -31,6 +31,8 @@ Anthropic labels Claude-issued identity as beta. The PostHog side is generally a
 4. Copy the **Issuer URL**. It looks like `https://identity.anthropic.com/issuers/<id>` and is unique to your Claude organization.
 
 Leave this screen open. You come back to it in step 3.
+
+If the PostHog connector has no **Managed authorization** option, it isn't available for PostHog in your Claude organization yet. [Contact us](/talk-to-a-human).
 
 ## 2. Trust the issuer in PostHog
 
@@ -49,7 +51,7 @@ Leave this screen open. You come back to it in step 3.
 3. Click **Enable and continue**.
 4. Choose which roles get the PostHog connector. All roles get it by default.
 
-If Claude lets you choose scopes for the connection, include at least `user:read`, `organization:read`, and `project:read`, plus the scopes for the tools you want. A `:write` scope also grants the matching `:read`.
+If Claude lets you choose scopes for the connection, start with the [recommended scopes](/docs/settings/authentication/id-jag#which-scopes-should-i-grant). They're the ones the PostHog MCP server grants by default when someone connects with OAuth.
 
 ## What members see
 

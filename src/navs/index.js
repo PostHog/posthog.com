@@ -2525,10 +2525,10 @@ const posthogMcpNav = [
         url: '/docs/model-context-protocol/faq',
     },
     {
-        name: 'Enterprise auth',
+        name: 'Enterprise Managed Authorization (EMA)',
     },
     {
-        name: 'Overview (ID-JAG)',
+        name: 'Overview',
         url: '/docs/model-context-protocol/enterprise-managed-authorization',
     },
     {

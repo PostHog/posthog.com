@@ -97,7 +97,7 @@ The client app needs a client ID that PostHog recognizes, and your IdP must issu
 
 Configure your IdP to include the scopes each integration needs when it issues ID-JAGs. At minimum, all tokens need `user:read`. For the [MCP server](/docs/model-context-protocol/enterprise-managed-authorization), also include `organization:read` and `project:read`. Add any additional [API scopes](/docs/api/personal-api-keys) for what you want to do (for example, `feature_flag:write` to manage flags).
 
-The access token gets only the scopes that both your IdP granted and the client asked for.
+The access token gets only the scopes that both your IdP granted and the client asked for. For a starting list, see [which scopes to grant](#which-scopes-should-i-grant).
 
 ## Revoking access
 
@@ -201,6 +201,27 @@ Use the token on API requests to your organization's region (`https://us.posthog
 - **It is bound to one organization:** the one that owns the XAA configuration.
 - **It works only for PostHog's own resources.** Its `aud` is the ID-JAG's `resource`.
 - **PostHog checks it on every request.** The user must still be an active member, and the organization must still have the Scale or Enterprise add-on. If the granted scopes are empty, PostHog still issues the token, and API requests with it fail with `403 insufficient_scope`.
+
+</details>
+
+<details>
+<summary id="which-scopes-should-i-grant">Which scopes should I grant?</summary>
+
+Start with the scopes the PostHog MCP server grants by default when someone connects with OAuth. PostHog chose them from the tools people use most, and there are fewer than 100, so they fit identity providers that cap scopes per app, such as Okta.
+
+Write scopes, each of which also grants the matching read:
+
+`action:write`, `alert:write`, `annotation:write`, `cohort:write`, `dashboard:write`, `data_catalog:write`, `endpoint:write`, `error_tracking:write`, `event_definition:write`, `experiment:write`, `external_data_source:write`, `feature_flag:write`, `heatmap:write`, `hog_flow:write`, `hog_function:write`, `insight:write`, `insight_variable:write`, `llm_skill:write`, `marketing_analytics:write`, `notebook:write`, `person:write`, `product_enablement:write`, `project:write`, `property_definition:write`, `replay_scanner:write`, `session_recording_playlist:write`, `signal_scout:write`, `subscription:write`, `survey:write`, `task:write`, `warehouse_view:write`
+
+Read scopes:
+
+`activity_log:read`, `batch_export:read`, `billing:read`, `business_knowledge:read`, `dashboard_template:read`, `early_access_feature:read`, `evaluation:read`, `experiment_saved_metric:read`, `group:read`, `health_issue:read`, `integration:read`, `llm_prompt:read`, `logs:read`, `mcp_analytics:read`, `organization:read`, `organization_member:read`, `query:read`, `session_recording:read`, `ticket:read`, `tracing:read`, `user:read`, `warehouse_table:read`, `web_analytics:read`
+
+- Every connection needs at least `user:read`, `organization:read`, and `project:read` (or `project:write`).
+- For read-only access, replace each `:write` scope with its `:read` scope.
+- The full list is in `scopes_supported` at `https://oauth.posthog.com/.well-known/oauth-authorization-server`.
+
+The scopes you grant in your identity provider are the most a token can carry. PostHog can't ask for more later. To add a scope, add it in your identity provider, and members get it with their next token, within 2 hours.
 
 </details>
 
