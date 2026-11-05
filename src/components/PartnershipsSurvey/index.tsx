@@ -42,6 +42,7 @@ export default function PartnershipsSurvey(): JSX.Element {
         if (posthog) {
             posthog.capture('survey sent', {
                 $survey_id: SURVEY_ID,
+                $survey_completed: true,
                 $survey_response: email,
                 $survey_response_1: partnershipType,
                 $survey_response_2: tellUsMore || undefined,

@@ -21,7 +21,7 @@ To add a notification directly from your survey:
 5. Customize the message template. Use the **quick insert** buttons to add the survey name, respondent details, or individual question responses.
 6. Click **Add notification**.
 
-Notifications created this way are automatically scoped to the current survey and filter for completed submissions by default. If your survey has partial responses enabled, you can toggle **Only notify for full responses** off to receive notifications for partial submissions too.
+Notifications created this way are automatically scoped to the current survey and filter for completed submissions by default. If your survey has partial responses enabled, you can toggle **Only notify for full responses** off to receive notifications for partial submissions too. An [API survey](/docs/surveys/implementing-custom-surveys) must send `$survey_completed: true` itself on the final `survey sent` event, because PostHog does not set it for you (see the [event properties](/docs/surveys/implementing-custom-surveys#event-properties)).
 
 For Slack notifications, you can also include buttons to view the survey and the respondent's person profile.
 

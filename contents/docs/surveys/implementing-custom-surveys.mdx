@@ -367,6 +367,7 @@ export default function Feedback() {
     const responseKey = `$survey_response_${survey.questions[0].id}`; // $survey_response_7ce5b831-dc71-4648-b6b0-b583d48a0c11
     posthog.capture("survey sent", {
       $survey_id: survey.id,
+      $survey_name: survey.name,
       $survey_iteration: survey.current_iteration,
       $survey_submission_id: crypto.randomUUID(),
       $survey_completed: true,
@@ -439,6 +440,7 @@ const responseProperties = Object.fromEntries(
 
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
+    $survey_name: survey.name,
     $survey_iteration: survey.current_iteration,
     $survey_submission_id: crypto.randomUUID(),
     $survey_completed: true,
@@ -462,6 +464,7 @@ posthog.capture("survey sent", {
 | Property | Description |
 | --- | --- |
 | `$survey_id` | Required. The ID of the survey. |
+| `$survey_name` | The survey's `name`. `posthog-js` adds it only when it renders the survey itself, so send it when you capture responses yourself. |
 | `$survey_iteration` | The survey's `current_iteration`. Send it on `survey shown`, `survey sent`, and `survey dismissed` so repeating surveys track each iteration separately. |
 | `$survey_response_<question_id>` | One property per answered question. Send ratings as strings and multiple choice answers as an array of strings. |
 | `$survey_submission_id` | A unique ID for each submission, for example from `crypto.randomUUID()`. Reuse the same ID for the partial and final sends of one submission. PostHog deduplicates responses and counts them for billing by this ID, so events without it each count as a separate response. |
@@ -524,6 +527,7 @@ const responseProperties = Object.fromEntries(
 
 posthog.capture("survey sent", {
     $survey_id: survey.id, // required
+    $survey_name: survey.name,
     $survey_iteration: survey.current_iteration,
     $survey_submission_id: crypto.randomUUID(),
     $survey_completed: true,

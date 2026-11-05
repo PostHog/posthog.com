@@ -97,7 +97,11 @@ export function SurveySignup({
             return
         }
         if (surveyId) {
-            const props: Record<string, any> = { $survey_id: surveyId, $survey_response: email }
+            const props: Record<string, any> = {
+                $survey_id: surveyId,
+                $survey_completed: true,
+                $survey_response: email,
+            }
             if (surveyQuestionId) {
                 props[`$survey_response_${surveyQuestionId}`] = email
             }

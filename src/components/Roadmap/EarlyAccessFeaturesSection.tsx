@@ -327,6 +327,7 @@ const PitchIdeaPanel = (): JSX.Element => {
         }
         posthog?.capture('survey sent', {
             $survey_id: PITCH_SURVEY_ID,
+            $survey_completed: true,
             $survey_response: idea.trim(),
             [`$survey_response_${PITCH_QUESTION_ID}`]: idea.trim(),
             [`$survey_response_${PITCH_EMAIL_QUESTION_ID}`]: email.trim(),
