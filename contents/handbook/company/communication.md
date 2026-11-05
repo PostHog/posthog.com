@@ -232,6 +232,7 @@ Here are the steps for an RFC:
     - The aim is not to get one person to mark the RFC as approved, but to get the right people involved and commenting. It's a request for _comments_ not a request for _approval_. That means you might need to chase them to make sure it happens - tag the people, present at all hands, use offsites or other sync time - **it's your responsibility to nudge the relevant people for their input**
 4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
 5. Once a decision is made, include the decision in the pull request, merge it in and share this in the relevant channel and `#github-rfcs` again.
+    - Before merging, work the discussion from the comments back into the RFC so the final document is a true reflection of the discussion and the responses to it. Future readers (humans and agents) will see the committed text, not the PR comments. This doesn't need to be word-for-word, and not every comment needs to go in, but anything that materially adds to the discussion should be incorporated – especially the context for why the decision was made, and alternatives that were considered and rejected (and why).
 
 ### When does it work best to write an RFC?
 
