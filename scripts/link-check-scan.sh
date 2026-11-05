@@ -6,6 +6,7 @@ FINDINGS_EXIT=1
 mkdir -p "$RESULTS_DIR"
 
 if [ "${2:-}" = "--minimal-build" ]; then
+    export LINK_CHECK_MINIMAL_BUILD=true
     export LINK_CHECK_FULL_SITEMAP="$RESULTS_DIR/production-sitemap.xml"
     curl -fsSL --retry 3 --max-time 60 "$PRODUCTION_SITEMAP_URL" -o "$LINK_CHECK_FULL_SITEMAP" || exit 2
 fi

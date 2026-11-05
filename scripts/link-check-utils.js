@@ -89,7 +89,13 @@ function resolveUrl(value, file, redirects, isKnown = () => false) {
     return { url, redirected, error: 'Too many redirects' }
 }
 
+const MARKDOWN_EXPORT_SUFFIX = '.md'
+const markdownExportsSkipped = process.env.LINK_CHECK_MINIMAL_BUILD === 'true'
+
 function builtUrlExists(pathname, pages) {
+    if (markdownExportsSkipped && pathname.endsWith(MARKDOWN_EXPORT_SUFFIX)) {
+        return builtUrlExists(pathname.slice(0, -MARKDOWN_EXPORT_SUFFIX.length), pages)
+    }
     const normalized = pathname.replace(/\/$/, '') || '/'
     const canonical = normalized.replace(/\/index\.html$/, '') || '/'
     const contains = (value) =>
