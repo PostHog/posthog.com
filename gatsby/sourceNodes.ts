@@ -1358,6 +1358,50 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // The API scopes a person can grant to a personal API key or OAuth app, with what each one
+    // covers, for /docs/api/scopes. PostHog builds the list from the scope declarations in its repo
+    // (posthog/scope_docs.py) and oauth.posthog.com caches it. Fails soft: without it the page shows
+    // its empty state and the build still passes.
+    const fetchScopeReference = async () => {
+        try {
+            const response = await fetch('https://oauth.posthog.com/oauth/scopes')
+            if (!response.ok) {
+                console.warn('Failed to fetch API scopes:', response.status)
+                return
+            }
+            const data = await response.json()
+            const groups: string[] = Array.isArray(data?.groups) ? data.groups : []
+            const objects = Array.isArray(data?.objects) ? data.objects : []
+
+            for (const scopeObject of objects) {
+                createNode({
+                    id: createNodeId(`posthog-scope-object-${scopeObject.object}`),
+                    internal: {
+                        type: 'PostHogScopeObject',
+                        contentDigest: createContentDigest(scopeObject),
+                    },
+                    scopeObject: scopeObject.object,
+                    name: scopeObject.name,
+                    plural: scopeObject.plural,
+                    description: scopeObject.description,
+                    group: scopeObject.group,
+                    groupOrder: groups.indexOf(scopeObject.group),
+                    docsUrl: scopeObject.docs_url || null,
+                    organizationWide: Boolean(scopeObject.organization_wide),
+                    actions: (scopeObject.actions || []).map((action) => ({
+                        action: action.action,
+                        scope: action.scope,
+                        oauth: Boolean(action.oauth),
+                        warning: action.warning || null,
+                    })),
+                    writeRequires: scopeObject.write_requires || null,
+                })
+            }
+        } catch (error) {
+            console.warn('Failed to fetch API scopes:', error)
+        }
+    }
+
     // Early Access Features ("Coming Soon" / betas) from PostHog's public EAF endpoint,
     // sourced at build time so /roadmap server-renders instantly and is indexable.
     // Each feature's waitlist survey is joined in from the public surveys endpoint by
@@ -1580,5 +1624,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         fetchAchievementGroups(),
         fetchRewards(),
         fetchDataWarehouseSources(),
+        fetchScopeReference(),
     ])
 }
