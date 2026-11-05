@@ -20,7 +20,7 @@ Read https://posthog.com/docs/workflows/transactional-emails/node.md first. Foll
 - Send only from server code. Never import the secret key into code that runs in the browser.
 - Build each idempotencyKey from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
 - send returns { data, error } and doesn't throw. Branch on error.code, never on error.message.
-- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotencyKey. Never resend the email through another email provider.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotencyKey. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
 - Pass the distinctId that the app passes to identify(). Leave it out for people without an account, such as invitees.
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
 - Add a test that passes a fake fetch to the client and checks the request.
@@ -91,9 +91,24 @@ Send from a job queue when the email shouldn't slow down the request, such as an
 
 - Set `maxRetries: 0`, so that the client doesn't retry inside the job.
 - Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
 - Retry only the errors that a later attempt can fix. Every other code fails the same way again.
 
-This example uses [BullMQ](https://docs.bullmq.io). Add the job with `attempts` and a `backoff`, so that BullMQ retries it.
+This example uses [BullMQ](https://docs.bullmq.io). Add the job with `attempts` and a `backoff`, so that BullMQ retries it. Five attempts with this backoff finish within minutes.
+
+```js
+import { Queue } from "bullmq"
+
+const emails = new Queue("emails", { connection: { host: "localhost", port: 6379 } })
+
+await emails.add(
+    "password-reset",
+    { userId, email, firstName, resetLink, resetRequestId },
+    { attempts: 5, backoff: { type: "exponential", delay: 10_000 } }
+)
+```
+
+The worker sends the email:
 
 ```js
 import { UnrecoverableError, Worker } from "bullmq"

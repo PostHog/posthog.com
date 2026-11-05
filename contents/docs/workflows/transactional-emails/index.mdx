@@ -22,7 +22,7 @@ You need a verified sending domain first. If your project doesn't have one yet, 
 
 <Step title="Create the email">
 
-Open [**Transactional**](https://app.posthog.com/transactional), click **New transactional email**, and choose your sender. Write a subject, and a body that uses one variable:
+Open [**Transactional**](https://app.posthog.com/transactional), click **New transactional email**, and choose your sender. Turn on [**Protect sensitive data**](#protect-sensitive-data), because this email carries a reset link. Write a subject, and a body that uses one variable:
 
 ```liquid
 Hi {{ variables.first_name }}, use this link to reset your password: {{ variables.reset_link }}

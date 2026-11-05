@@ -20,7 +20,7 @@ Read https://posthog.com/docs/workflows/transactional-emails/dotnet.md first. Fo
 - Keep the secret key in server configuration. Never commit it, and never send it to a browser or a mobile app.
 - Build each IdempotencyKey from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
 - SendAsync throws EmailException when PostHog doesn't queue the email. Branch on its Code, never on its Message.
-- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same IdempotencyKey. Never resend the email through another email provider.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same IdempotencyKey. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
 - Pass the DistinctId that the app passes to IdentifyAsync. Leave it out for people without an account, such as invitees.
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
 - Add an xUnit test that gives PostHogClient an IHttpClientFactory with a fake HttpMessageHandler and checks the request.
@@ -121,6 +121,7 @@ Send from a job queue when the email shouldn't slow down the request, such as an
 
 - Set `MaxRetries = 0`, so that the client doesn't retry inside the job.
 - Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
 - Retry only the errors that a later attempt can fix. Every other code fails the same way again.
 
 This example uses [Hangfire](https://www.hangfire.io). `AutomaticRetry` retries the job when it throws, except on the exception types in `ExceptOn`. A job that throws one of those goes straight to the failed state.

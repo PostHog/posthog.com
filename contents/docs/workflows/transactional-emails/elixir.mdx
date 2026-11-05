@@ -20,7 +20,7 @@ Read https://posthog.com/docs/workflows/transactional-emails/elixir.md first. Fo
 - Send only from server code. Never put the secret key in source code or in anything sent to the browser.
 - Build each idempotency_key from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
 - PostHog.Emails.send/2 returns {:ok, %PostHog.Emails.SendResult{id: id}} or {:error, %PostHog.Emails.Error{}} and doesn't raise. Branch on error.code, never on error.message.
-- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. Never resend the email through another email provider.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
 - In an Oban worker, pass max_retries: 0. Return {:error, reason} for the four codes above and {:cancel, reason} for every other code.
 - Pass the distinct_id that the app passes to identify(), as a string. Leave it out for people without an account, such as invitees.
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
@@ -100,6 +100,7 @@ Send from a job queue when the email shouldn't slow down the request, such as an
 
 - Set `max_retries: 0`, so that the SDK doesn't retry inside the job.
 - Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
 - Retry only the errors that a later attempt can fix. Every other code fails the same way again.
 
 This example uses [Oban](https://hexdocs.pm/oban). `{:error, reason}` tells Oban to retry the job, up to `max_attempts`. `{:cancel, reason}` stops it for good.

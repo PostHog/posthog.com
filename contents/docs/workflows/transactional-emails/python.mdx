@@ -20,7 +20,7 @@ Read https://posthog.com/docs/workflows/transactional-emails/python.md first. Fo
 - Send only from server code. Never put the secret key in code or config that reaches the browser.
 - Build each idempotency_key from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
 - send returns a SendEmailResult and raises posthog.emails.EmailError when PostHog doesn't queue the email. Branch on error.code, never on the message.
-- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. In a Celery task, pass max_retries=0 to send and let Celery retry. Never resend the email through another email provider.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. In a Celery task, pass max_retries=0 to send and let Celery retry. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
 - Pass the distinct_id that the app passes to identify(). Leave it out for people without an account, such as invitees.
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
 - Add a test that fakes HTTP: pass an httpx.AsyncClient with an httpx.MockTransport as http_client to AsyncEmails, or a requests.Session with a test adapter as session to Emails, and check the request.
@@ -126,6 +126,7 @@ Send from a job queue when the email shouldn't slow down the request, such as an
 
 - Pass `max_retries=0` to `send`, so that the client doesn't retry inside the task.
 - Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
 - Retry only the errors that a later attempt can fix. Every other code fails the same way again.
 
 This example uses [Celery](https://docs.celeryq.dev). The task retries itself with `self.retry` for the codes that can pass later, and fails for good on every other code.

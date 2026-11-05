@@ -20,7 +20,7 @@ Read https://posthog.com/docs/workflows/transactional-emails/go.md first. Follow
 - Never hard-code the secret key, log it, or put it in config that reaches the browser.
 - Build each IdempotencyKey from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
 - Emails().Send returns (*posthog.SendEmailResult, error). Every error is a *posthog.EmailError. Read it with errors.As and branch on its Code, never on its Message.
-- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same IdempotencyKey. In a River job, set MaxRetries: posthog.Ptr(0) on the send and return river.JobCancel for every other code. Never resend the email through another email provider.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same IdempotencyKey. In a River job, set MaxRetries: posthog.Ptr(0) on the send and return river.JobCancel for every other code. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
 - Pass the DistinctID that the app passes to identify(). Leave it out for people without an account, such as invitees.
 - Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
 - Add a test that starts an httptest.Server, sets its URL as both Endpoint and AppHost in posthog.Config, and checks the request.
@@ -98,6 +98,7 @@ Send from a job queue when the email shouldn't slow down the request, such as an
 
 - Set `MaxRetries: posthog.Ptr(0)`, so that the client doesn't retry inside the job.
 - Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
 - Retry only the errors that a later attempt can fix. Every other code fails the same way again.
 
 This example uses [River](https://riverqueue.com/docs), which keeps its jobs in Postgres. River retries a job when `Work` returns an error. `river.JobCancel` stops the job for good, even when it has attempts left.
@@ -124,6 +125,9 @@ type PasswordResetArgs struct {
 }
 
 func (PasswordResetArgs) Kind() string { return "password_reset_email" }
+
+// Five attempts finish within minutes, well inside the 24 hours that PostHog keeps an idempotency key
+func (PasswordResetArgs) InsertOpts() river.InsertOpts { return river.InsertOpts{MaxAttempts: 5} }
 
 type PasswordResetWorker struct {
     river.WorkerDefaults[PasswordResetArgs]
