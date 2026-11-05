@@ -39,7 +39,7 @@ This is our usual first-round interview with a member of the Talent team.
 
 #### Technical interview
 
-The technical interview with Abigail (team lead) usually lasts 45 minutes. There is no live coding.
+The technical interview with [Abigail](/community/profiles/31138) (team lead) usually lasts 45 minutes. There is no live coding.
 
 The interview checks how you work as a technical person in a customer-facing role. We talk about how you investigate problems, how you learn new things, how you decide when to ask for help, how you prioritize, and how you use AI. We also want to understand why you want a support role.
 
@@ -49,9 +49,9 @@ In this 30-minute interview, you will meet one of our execs. They will try to an
 
 #### Technical Support Engineer SuperDay
 
-The final stage of our interview process is what we call a PostHog SuperDay. This is a paid full day of work (1,000 USD), which we can flexibly arrange around your schedule.
+The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work (1,000 USD), which we can flexibly arrange around your schedule.
 
-If you've been invited to a PostHog SuperDay, here's what to expect and how to set yourself up for success.
+If you've been invited to a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday), here's what to expect and how to set yourself up for success.
 
 ##### What the SuperDay looks like
 
@@ -70,13 +70,15 @@ Spend most of your time on the challenge and less on meeting people, because we 
 
 *   Dig into the product. You will be expected to know PostHog well when you start, so install it and use it before the day.
 *   Create some test data and try the main products, such as product analytics, session replay, feature flags, and experiments.
-*   Read the Support section of the handbook and our docs.
+*   Read the [Support section of the handbook](/handbook/support/support-team) and our [docs](/docs).
 
 ##### During the day
 
 *   Communicate early. Share your progress and your blockers in Slack, and ask questions when something is not clear.
 *   Divide your time across the whole challenge.
 *   Work as you would on a normal day with real customers.
+
+> In line with our [values](/handbook/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
 
 ##### A note on AI tools
 
