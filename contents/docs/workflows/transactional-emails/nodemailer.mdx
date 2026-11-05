@@ -76,7 +76,7 @@ await transporter.sendMail({
 
 - **`template_key`** names the email, such as `order-shipped`. PostHog groups the email's metrics and sends under it. Without it, the transport uses `defaultTemplateKey` from `createPostHogTransport`, or `nodemailer`. Use letters, digits, hyphens, and underscores.
 - **`distinct_id`** records the email against the person with this distinct ID. Without it, PostHog uses a person whose distinct ID is the `to` address. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
-- **`idempotency_key`** identifies this one email. PostHog sends an email only once for each key.
+- **`idempotency_key`** identifies this one email. PostHog sends an email only once for each key, for 24 hours after it queues the email. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
 - **`capture_engagement`** turns the email's [engagement events](/docs/workflows/engagement-events) on or off. It defaults to `true`.
 
 In TypeScript, importing `posthog-node/nodemailer` adds `posthog` to Nodemailer's message type.
@@ -91,6 +91,8 @@ So when you queue mail, set `idempotency_key` from a stable ID of the email, suc
 posthog: { idempotency_key: `order-shipped-${order.id}` }
 ```
 
+PostHog remembers a key for 24 hours after it queues the email. If a queue retries a job later than that, the same key doesn't stop a second email, so stop retrying a send after 24 hours.
+
 A failed `sendMail` rejects with an error that tells you if a retry can succeed:
 
 - `error.retryable` is `true` when a retry with the same `idempotency_key` can succeed. After a network error or a `503`, PostHog might have queued the email, so retry with the same key, not through another provider.
@@ -104,8 +106,8 @@ PostHog never drops part of a message. If PostHog can't send part of a message, 
 | `refusal` | The message has |
 | --- | --- |
 | `multiple_to` | no `to` address, or more than one. Send one message for each recipient. |
-| `unsupported_header` | a custom header, `inReplyTo`, `references`, `list`, or a `sender` that isn't the `from` address. |
-| `unsupported_part` | an `amp`, `icalEvent`, `watchHtml`, `alternatives`, or `raw` part. |
+| `unsupported_header` | a custom header, an attachment with its own `headers`, `inReplyTo`, `references`, `list`, or a `sender` that isn't the `from` address. |
+| `unsupported_part` | an `amp`, `icalEvent`, `watchHtml`, `alternatives`, or `raw` part, or an attachment with a `raw` source. |
 | `unsupported_priority` | a `priority` other than `normal`. |
 | `envelope_mismatch` | an `envelope` with a different sender or other recipients than the message. |
 | `inline_without_cid` | an inline attachment with no `cid`. |
