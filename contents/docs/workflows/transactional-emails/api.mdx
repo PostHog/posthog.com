@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-Use the API to send transactional emails from any language. The SDKs for [Node.js](/docs/workflows/transactional-emails/node), [Python](/docs/workflows/transactional-emails/python), [Go](/docs/workflows/transactional-emails/go), [.NET](/docs/workflows/transactional-emails/dotnet), [Rust](/docs/workflows/transactional-emails/rust), [Ruby](/docs/workflows/transactional-emails/ruby), [Elixir](/docs/workflows/transactional-emails/elixir), and [PHP](/docs/workflows/transactional-emails/php) call this API and handle retries and idempotency keys for you. The examples on this page show each of them.
+Use the API to send transactional emails from any language. The SDKs for [Node.js](/docs/workflows/transactional-emails/node), [Python](/docs/workflows/transactional-emails/python), [Go](/docs/workflows/transactional-emails/go), [.NET](/docs/workflows/transactional-emails/dotnet), [Rust](/docs/workflows/transactional-emails/rust), [Ruby](/docs/workflows/transactional-emails/ruby), [Elixir](/docs/workflows/transactional-emails/elixir), and [PHP](/docs/workflows/transactional-emails/php) call this API, and retry with idempotency keys for you. If your language has an SDK, start there. The examples on this page show each SDK next to cURL.
 
-Before you start, [create a transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
 
 ## Send an email
 
@@ -14,8 +14,8 @@ Before you start, [create a transactional email](/docs/workflows/transactional-e
 POST https://us.posthog.com/api/projects/@current/messaging/send/email/
 ```
 
-- **Host:** Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
-- **Project:** `@current` is the project that the key belongs to. You can use your project ID instead.
+- **Host** - Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
+- **Project** - `@current` is the project that the key belongs to. You can use your project ID instead.
 
 ### Request
 
@@ -172,14 +172,14 @@ When a send fails, the response carries a `code`. See [errors](/docs/workflows/t
 
 ### `delivery_unavailable`
 
-A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm that it queued the email. PostHog might still send it. Retry with the same `Idempotency-Key` rather than sending the email through another provider, or the recipient can get it twice. The SDKs retry this on their own.
+A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm that it queued the email. It doesn't mean that the email failed, because PostHog can still send it. Retry with the same `Idempotency-Key`. If you resend the email through another email provider, the recipient can get it twice. The SDKs retry a `503` for you.
 
 ## Link emails to your users
 
-Pass the distinct ID that you pass to `identify()`, usually the ID your app gives that user, as `distinct_id`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened, and clicked, against that user's person, next to their product events.
+Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
-- **For someone who isn't a user yet,** such as an invite or an email address check before the account exists, there's no distinct ID to pass. Leave `distinct_id` out.
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
 
 ## Send content from your code
 
@@ -331,10 +331,10 @@ Content from your code also takes these fields. A template send takes none of th
 | `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
 | `attachments` | No | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
 
-- **Inline images:** Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
-- **Blocked files:** PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
-- **SDKs:** The SDKs encode the file's bytes to Base64 for you.
-- **Older PostHog versions:** A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+- **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
+- **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
+- **SDKs** - The SDKs encode the file's bytes to Base64 for you.
+- **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
 
 ### Checks for content from your code
 

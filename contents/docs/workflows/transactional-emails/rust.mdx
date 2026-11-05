@@ -4,7 +4,31 @@ sidebar: Docs
 showTitle: true
 ---
 
-The [Rust SDK](/docs/libraries/rust) sends transactional emails from version 0.31.0. Before you start, [create a transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+The [Rust SDK](/docs/libraries/rust) sends transactional emails from version 0.31.0. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
+
+<details>
+<summary>Prompt for your coding agent</summary>
+
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+
+```text
+Add PostHog transactional email to this Rust app with the posthog-rs crate.
+
+Read https://posthog.com/docs/workflows/transactional-emails/rust.md first. Follow it over anything you remember about PostHog.
+
+- Reuse the app's posthog_rs::Client. Set secret_key on ClientOptionsBuilder from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. Leave enable_local_evaluation off unless the app evaluates feature flags locally with this client.
+- Never hard-code the secret key, log it, or put it in config that reaches the browser.
+- Build each idempotency_key from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
+- emails().send returns Result<SendEmailResult, EmailError>. Branch on error.code(), never on error.message().
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. In a job queue, call max_retries(0) on the email and let the queue retry. Never resend the email through another email provider.
+- Pass the distinct_id that the app passes to identify(). Leave it out for people without an account, such as invitees.
+- Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
+- Add a test that starts an httpmock MockServer, sets its base_url() as app_host, and checks the request.
+
+Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+```
+
+</details>
 
 ## Install
 
@@ -14,7 +38,7 @@ cargo add posthog-rs serde_json
 
 ## Set up the client
 
-Reuse the PostHog client your application already creates, and set `secret_key` to your project secret API key. The client still captures events with your project token. Shut the client down when your application exits, not after each send.
+Add your project secret API key to the PostHog client that your app already has. The project token keeps capturing events. The secret key sends email, so keep it on your server.
 
 ```rust
 use posthog_rs::ClientOptionsBuilder;
@@ -27,9 +51,11 @@ let options = ClientOptionsBuilder::default()
 let posthog = posthog_rs::client(options).await;
 ```
 
-- **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `app_host` to your PostHog app URL. Email requests never go to a host that might be a proxy. With `enable_local_evaluation` on, flag definitions still load from `host` with the secret key.
-- **Local evaluation:** The client loads flag definitions only when you turn on `enable_local_evaluation`. If you do, give the key the **Feature flag** read scope too.
-- **Blocking client:** Without the default `async-client` feature, the client and `emails()` are blocking, and you call them without `.await`.
+The client loads flag definitions only when you turn on `enable_local_evaluation`. If you do, give the key the **Feature flag** read scope too.
+
+Without the default `async-client` feature, the client and `emails()` are blocking, and you call them without `.await`.
+
+Shut the client down when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
 
 ## Send an email
 
@@ -43,7 +69,6 @@ async fn send_password_reset(
     reset_link: &str,
     reset_request_id: &str,
 ) -> Result<String, posthog_rs::EmailError> {
-    // Returns an EmailError when PostHog doesn't queue the email. Branch on error.code()
     let result = posthog
         .emails()
         .send(
@@ -53,29 +78,83 @@ async fn send_password_reset(
                 // Identifies this one email, so a retry never sends it twice
                 .idempotency_key(format!("password-reset-{reset_request_id}")),
         )
+        // An EmailError. Branch on error.code()
         .await?;
     Ok(result.id)
 }
 ```
 
-`send` returns a `SendEmailResult`, and `result.id` is the message ID. A send that PostHog doesn't queue returns an `EmailError`, with the `code()` from the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument returns an `EmailError` before any request. After a `network_error` or a `503`, PostHog might have queued the email. Retry with the same idempotency key rather than sending the email through another provider, or the recipient can get it twice.
+`send` returns `Result<SendEmailResult, EmailError>`. `result.id` is the message ID. Branch on `error.code()`, one of the codes in the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
+
+A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
 ### Timeouts and retries
 
-Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds returns the error at once.
+The client retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or longer if the server's `Retry-After` asks for it. When `Retry-After` asks for more than 30 seconds, the client returns the error at once. Each request times out after 15 seconds.
 
-To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client options, or `max_retries` on one send. When a job queue already retries the send, set the retries to `0` and pass an `idempotency_key` that identifies the email.
+To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on `ClientOptionsBuilder`, or call `max_retries` on one email.
+
+## Send from a background job
+
+Send from a job queue when the email shouldn't slow down the request, such as an email address check after a signup. Let the queue own the retries:
+
+- Call `max_retries(0)` on the email, so that the client doesn't retry inside the job.
+- Keep the idempotency key the same on every attempt.
+- Retry only the errors that a later attempt can fix. Every other code fails the same way again.
+
+Rust has no job queue that most apps use, so this sketch shows the pattern without one. The job function sorts each error into a retry or a permanent failure. Map the two to your queue's own ways to run a job again later and to fail it for good.
+
+```rust
+use posthog_rs::{EmailError, TemplateEmail};
+use serde_json::json;
+
+// A later attempt can fix these. Any other code fails the same way again.
+const RETRYABLE_CODES: [&str; 4] = ["network_error", "idempotency_key_in_flight", "throttled", "delivery_unavailable"];
+
+pub enum JobError {
+    // Run the job again later, with the same arguments
+    Retry(EmailError),
+    // Fail the job for good
+    Permanent(EmailError),
+}
+
+pub struct PasswordResetJob {
+    pub user_id: String,
+    pub email: String,
+    pub first_name: String,
+    pub reset_link: String,
+    pub reset_request_id: String,
+}
+
+pub async fn run_password_reset_job(
+    posthog: &posthog_rs::Client,
+    job: &PasswordResetJob,
+) -> Result<String, JobError> {
+    let email = TemplateEmail::new(&job.email, "<template_id>")
+        .template_data(json!({ "first_name": job.first_name, "reset_link": job.reset_link }))
+        .distinct_id(&job.user_id)
+        // The same key on every attempt, so a retried job never sends the email twice
+        .idempotency_key(format!("password-reset-{}", job.reset_request_id))
+        // The queue retries the job, so the client doesn't retry on its own
+        .max_retries(0);
+    match posthog.emails().send(email).await {
+        Ok(result) => Ok(result.id),
+        Err(error) if RETRYABLE_CODES.contains(&error.code()) => Err(JobError::Retry(error)),
+        Err(error) => Err(JobError::Permanent(error)),
+    }
+}
+```
 
 ## Link emails to your users
 
-Pass the distinct ID that you pass to `identify()`, usually the ID your app gives that user, as `distinct_id`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened, and clicked, against that user's person, next to their product events.
+Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
-- **For someone who isn't a user yet,** such as an invite or an email address check before the account exists, there's no distinct ID to pass. Leave `distinct_id` out.
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
 
 ## Send content from your code
 
-`send` also takes content that your code rendered, without a template in PostHog. Pass a `CodeEmail`: `CodeEmail::new` takes the recipient, a template key that names the email, and the subject. Add `html`, `text`, or both. PostHog sends the content as you wrote it, so render it with your template engine first, such as Askama or Tera.
+`send` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Pass a `CodeEmail`. `CodeEmail::new` takes the recipient, a template key that names the email, and the subject. Add `html`, `text`, or both. PostHog sends the content as you wrote it, so render it first with your template engine, such as Askama or Tera.
 
 ```rust
 use posthog_rs::CodeEmail;
@@ -100,13 +179,12 @@ async fn send_password_reset(
 }
 ```
 
-- **Key:** The template key names the email, such as `password-reset`. PostHog groups the email's metrics and sends under it, so use the same key every time you send this email.
-- **Text:** If you leave out `text`, PostHog makes it from `html`.
-- **Sender:** `from` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. Call `reply_to` once for each reply-to address.
-- **Engagement:** PostHog captures the email's engagement events unless you call `capture_engagement(false)`.
-- **One form per send:** A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing.
+- **Template key** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`text`** - If you leave it out, PostHog makes it from `html`.
+- **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. Call `reply_to` once for each reply-to address.
+- **`capture_engagement`** - PostHog captures the email's engagement events unless you call `capture_engagement(false)`.
 
-See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
 ### Copies and attachments
 
@@ -148,4 +226,62 @@ async fn email_bounced(
 }
 ```
 
-`get` returns an `EmailStatus` with `id`, `status`, `created_at`, `status_at`, and `reason`. `status` is an `EmailDeliveryStatus`, and `as_str()` gives the value from [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). A status that this SDK version doesn't know arrives as `EmailDeliveryStatus::Other`. The client doesn't retry a `not_found`, so retry it yourself a few times, with a wait in between, before you treat the email as missing. A status that isn't there yet doesn't mean the email failed.
+`get` returns an `EmailStatus` with `id`, `status`, `created_at`, `status_at`, and `reason`. `status` is an `EmailDeliveryStatus`, and `as_str()` gives the value from [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status). A status that this SDK version doesn't know arrives as `EmailDeliveryStatus::Other`.
+
+A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
+
+## Test without sending email
+
+Start a local stub server with [httpmock](https://docs.rs/httpmock) and set its URL as `app_host`, to see exactly what your code sends with no request to PostHog. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
+
+```bash
+cargo add --dev httpmock
+cargo add --dev tokio --features macros,rt
+```
+
+```rust
+use httpmock::prelude::*;
+use posthog_rs::{ClientOptionsBuilder, TemplateEmail};
+use serde_json::json;
+
+#[tokio::test]
+async fn sends_password_reset() {
+    let server = MockServer::start_async().await;
+    let send = server
+        .mock_async(|when, then| {
+            when.method(POST)
+                .path("/api/projects/@current/messaging/send/email/")
+                .header("idempotency-key", "password-reset-1");
+            then.status(202)
+                .json_body(json!({ "message_id": "msg_1", "replayed": false }));
+        })
+        .await;
+
+    let options = ClientOptionsBuilder::default()
+        .api_key("phc_test".to_string())
+        .secret_key("phs_test")
+        .app_host(server.base_url())
+        .build()
+        .unwrap();
+    let posthog = posthog_rs::client(options).await;
+
+    let result = posthog
+        .emails()
+        .send(
+            // The client checks that this is a UUID before it sends, so use any UUID
+            TemplateEmail::new("jane@example.com", "0190f6d2-7c1e-7b3a-9f5e-1c2d3e4f5a6b")
+                .idempotency_key("password-reset-1"),
+        )
+        .await
+        .unwrap();
+
+    assert_eq!(result.id, "msg_1");
+    send.assert_async().await;
+}
+```
+
+## Use a proxy or self-hosted PostHog
+
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send the secret key to a host that might be a proxy.
+
+With `enable_local_evaluation` on, flag definitions still load from `host` with the secret key.

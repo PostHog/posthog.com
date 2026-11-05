@@ -8337,6 +8337,10 @@ export const docsMenu = {
                             name: 'API',
                             url: '/docs/workflows/transactional-emails/api',
                         },
+                        {
+                            name: 'Examples',
+                            url: '/docs/workflows/transactional-emails/examples',
+                        },
                     ],
                 },
                 {
