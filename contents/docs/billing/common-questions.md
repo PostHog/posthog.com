@@ -12,6 +12,10 @@ If you have special circumstances where this doesn't work for you, contact our [
 
 You can check our doc on [estimating usage and costs](/docs/billing/estimating-usage-costs), or use the [pricing calculator](/pricing) to estimate costs. However, often the best way to estimate costs is to signup for free and go from there.
 
+## What does the price of an event include?
+
+Collecting it, processing it, storing it, and every query you run on it in PostHog. [How much does an event cost anyway?](/docs/billing/what-you-pay-for-per-event) explains each step.
+
 ## Do projects share usage and free allowances?
 
 Yes. Billing is organization-wide, so usage from all projects in an organization is combined into one bill with one free allowance. For example, if your development, staging, and production projects each send 400,000 events in a month, that counts as 1.2 million events, not three separate free tiers.

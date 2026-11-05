@@ -2866,8 +2866,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
@@ -3855,6 +3855,10 @@ export const docsMenu = {
                         {
                             name: 'Estimating usage and costs',
                             url: '/docs/billing/estimating-usage-costs',
+                        },
+                        {
+                            name: 'What you pay for per event',
+                            url: '/docs/billing/what-you-pay-for-per-event',
                         },
                         {
                             name: 'Pre-paid plans',
