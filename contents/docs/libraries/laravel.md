@@ -29,11 +29,11 @@ POSTHOG_API_KEY=<ph_project_token>
 POSTHOG_HOST=<ph_client_api_host>
 ```
 
-Laravel's package discovery registers the service provider and facade automatically. If your application disables discovery, register `PostHog\Laravel\PostHogServiceProvider` manually. You don't need to initialize the PHP SDK or add the manual middleware below.
+Laravel's package discovery registers the service provider and facade automatically. If discovery is disabled, register `PostHog\Laravel\PostHogServiceProvider` manually. No PHP SDK initialization or custom middleware is needed.
 
-The published `config/posthog.php` controls the integration. Set `POSTHOG_ENABLED=false` to disable event capture and feature flag requests. A missing or blank project token also disables the SDK.
+Configure the SDK in `config/posthog.php`. It's enabled by default; set `POSTHOG_ENABLED=false` to disable it.
 
-This package only instruments your server. For browser events and session replay, install the [JavaScript SDK](/docs/libraries/js) separately.
+For browser events and session replay, install the [JavaScript SDK](/docs/libraries/js) separately.
 
 ### Capturing events and identifying users
 
@@ -50,15 +50,11 @@ PostHog::identify([
 ]);
 ```
 
-You can also inject `PostHog\Laravel\PostHog` to use the same API without a facade.
+The SDK uses the authenticated user's ID automatically, or you can pass a distinct ID explicitly as shown above. Without an identity, each event gets a new random ID without a person profile; these IDs don't identify returning visitors.
 
-The SDK uses an explicit `distinctId` first, then a scoped context identity, then your custom identity resolver or the authenticated user's auth identifier. If none is available, it falls back to the `X-PostHog-Distinct-Id` tracing header. `X-PostHog-Session-Id` links events to a frontend session. Configure the JavaScript SDK's [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname to send these headers.
+To link browser sessions to backend events, configure the JavaScript SDK's [tracing headers](/docs/libraries/js/config#tracing-headers). These headers are untrusted analytics input, not authentication. Pass an authenticated identity explicitly for security-sensitive events or flag decisions.
 
-Tracing headers are untrusted analytics input, not authentication or authorization. Pass an authenticated identity explicitly for security-sensitive events or flag decisions. Set `header_context` to `false` in `config/posthog.php` to ignore both headers.
-
-Without an identity, each captured event gets a fresh random UUID and defaults to `$process_person_profile=false`. These IDs don't persist across events or identify returning anonymous visitors. Feature flag evaluation without an identity returns an empty result without making flag requests.
-
-Captures include the request method and matched route template, not concrete route parameters. By default, the SDK doesn't collect raw URLs, query strings, request bodies, cookies, email, or IP addresses. Your own properties and exception messages can still contain sensitive information. Configure `sdk.before_send` in `config/posthog.php` to redact or drop events. Use a container class name rather than a closure so Laravel can cache the configuration.
+The SDK doesn't collect request bodies, query strings, email, or IP addresses by default. Check your own event properties and exception messages for sensitive data.
 
 ### Feature flags
 
@@ -73,9 +69,9 @@ $variant = $flags->getFlag("checkout-layout");
 $payload = $flags->getFlagPayload("checkout-layout");
 ```
 
-Identical evaluation inputs share a snapshot within the current context. Flag value reads send exposure events; payload reads don't.
+You can omit `distinctId` to use the current request identity. Without an identity, flag evaluation returns an empty result.
 
-For [local evaluation](/docs/feature-flags/local-evaluation), set `POSTHOG_SECRET_KEY` to your feature flags secure API key. Keep this key on the server. In production, enable `flag_cache.enabled` and choose a shared Laravel cache store with `flag_cache.store` in `config/posthog.php` to share definitions across requests and workers. Definitions load and refresh on demand, not on a background timer.
+For [local evaluation](/docs/feature-flags/local-evaluation), set `POSTHOG_SECRET_KEY` to your feature flags secure API key. Keep it on the server. In production, enable `flag_cache.enabled` and select a shared Laravel cache store with `flag_cache.store` in `config/posthog.php`.
 
 ### Laravel Pennant
 
@@ -89,9 +85,7 @@ composer require laravel/pennant:^1.26
 PENNANT_STORE=posthog
 ```
 
-Package discovery registers the `posthog` store unless your application already configured one. You don't need a Pennant migration or a database-backed flag store.
-
-Use your PostHog flag keys to read boolean flags and multivariate flags:
+Read flags using their PostHog keys:
 
 ```php
 use Laravel\Pennant\Feature;
@@ -100,15 +94,7 @@ $isEnabled = Feature::for("account-123")->active("new-checkout");
 $variant = Feature::for("account-123")->value("checkout-layout");
 ```
 
-String and integer scopes supply a distinct ID. Authenticated-user and model scopes use their auth identifier or model key without a class-name prefix. The SDK doesn't serialize the model or send its properties. Pennant uses the authenticated user as its default scope. If that scope is `null`, the store uses the current analytics context. For custom scope types, implement Pennant's scope-identifier contract to return a string or integer.
-
-Values retain their boolean or variant-string type. Unknown or unresolved flags return `false`. Reads use the SDK's normal exposure events, and repeated cached reads don't generate duplicate exposures.
-
-Define and manage flags in PostHog, not in local PHP feature classes. Pennant write operations such as `define`, `activate`, `deactivate`, `delete`, and `purge` throw `LogicException`. `Feature::defined()` returns an empty array because this store has no local definitions. Use `Feature::for($scope)->all()` or `Feature::for($scope)->loadAll()` to discover PostHog flags for a scope. Discovery doesn't record exposures, but reading flag values does.
-
-Pennant keeps its own feature/scope cache in addition to the SDK's evaluation snapshots. The integration clears PostHog stores at HTTP, queue, and command boundaries, including failed jobs. Pennant's Octane lifecycle integration also remains active. If targeting properties or groups change for the same scope within one request, call `Feature::flushCache()` before the next Pennant read.
-
-Use `PostHog::evaluateFlags()` directly when you need payloads, person or group properties, local-only evaluation, selected flag keys, or unresolved reasons. It keys snapshots by all evaluation inputs, not only the Pennant scope.
+Pennant uses the authenticated user by default, or an explicit scope as shown above. The store is read-only: create and manage flags in PostHog, not through Pennant write operations. You don't need a Pennant migration.
 
 ### Capturing exceptions
 
@@ -134,101 +120,18 @@ Publish the collector configuration:
 php artisan vendor:publish --tag=posthog-autocapture-config
 ```
 
-In `config/posthog-autocapture.php`, enable only the collectors you need. This example enables request, authentication, model, domain-event, and job collection. Model attributes and domain-event properties require explicit configuration:
+Enable only the collectors you need in `config/posthog-autocapture.php`. For example, update the `auth` section to capture registrations, logins, and logouts:
 
 ```php file=config/posthog-autocapture.php
-return [
-    "requests" => [
-        "enabled" => true,
-        "exclude" => [
-            "up", "health", "health/*", "build/*", "assets/*", "vendor/*",
-            "favicon.ico", "robots.txt", "*.css", "*.js", "*.map", "*.png",
-            "*.jpg", "*.svg", "*.ico", "*.woff*",
-        ],
-        "sample_rate" => 1.0,
-    ],
-    "pageviews" => ["enabled" => false],
-    "auth" => ["enabled" => true, "events" => ["registered", "login", "logout"]],
-    "models" => [
-        "enabled" => true,
-        "allow" => [App\Models\Order::class => ["state"]],
-    ],
-    "domain_events" => [
-        App\Events\OrderCompleted::class => [
-            "event" => "order_completed",
-            "properties" => ["amount" => "amount", "currency" => "details.currency"],
-        ],
-    ],
-    "jobs" => ["enabled" => true, "exclude" => [App\Jobs\InternalMaintenance::class]],
-    "commands" => ["enabled" => false, "exclude" => ["posthog:*"]],
-    "scheduler" => ["enabled" => false, "exclude" => []],
-    "blade" => ["enabled" => false],
-];
+"auth" => [
+    "enabled" => true,
+    "events" => ["registered", "login", "logout"],
+],
 ```
 
-These are example settings, not the defaults. Every `enabled` setting defaults to `false`, and `models.allow` and `domain_events` default to empty arrays. Register only the main PostHog service provider; it discovers the collectors automatically.
+Set `requests.enabled` to `true` for `laravel_request` events with route, method, status code, and duration. Keep the generated health-check and static-asset exclusions. Other collectors cover model changes, mapped domain events, jobs, commands, and scheduled tasks. Model attributes and domain-event properties must be explicitly allowlisted.
 
-You can also configure collectors under `autocapture` in `config/posthog.php`. Settings there override the separate collector file per top-level section. Include the complete section when you override it. Use class names rather than closures so Laravel can cache the configuration.
-
-#### Collected events
-
-Collectors add the following properties, plus SDK metadata, identity, session correlation, and groups. They don't copy arbitrary context properties. `duration_ms` is a nonnegative float, not a trace or span.
-
-- `laravel_request` - `route` (string), `method` (string), `status_code` (integer), and `duration_ms`
-
-- `$pageview` - Request properties plus `$current_url` (string) and `$pathname` (string)
-
-- `laravel_auth_registered` - No collector-specific properties
-
-- `laravel_auth_login` and `laravel_auth_logout` - `guard` (string), when supplied
-
-- `laravel_auth_failed` - `guard` (string), when supplied, but no credentials or attempted user ID
-
-- `laravel_auth_lockout` - No collector-specific properties or attempted user ID
-
-- `laravel_model_created`, `laravel_model_updated`, and `laravel_model_deleted` - `model` (exact class name) and `attributes` (only allowlisted JSON-safe values)
-
-- Your configured domain event name - Only explicitly mapped property names and JSON-safe values
-
-- `laravel_job` - `name` (queued job class), `outcome` (`success` or `failed`), `attempts` (integer), and `duration_ms`
-
-- `laravel_command` - `name` (first command token), `outcome` (`success` or `failed`), `exit_code` (integer), and `duration_ms`
-
-- `laravel_scheduled_task` - `name` (task PHP class), `outcome` (`success`, `failed`, or `background_started`), `exit_code` (integer or `null`), and `duration_ms`
-
-Collectors don't read request bodies, query values, cookies, credentials, email, IP addresses, job arguments, or full model/event payloads. Authentication uses `getAuthIdentifier()`, so configure an opaque identifier if your application uses email as its auth identifier. Allowlisted attributes and mapped properties can contain sensitive data. Select only fields you intend to send and use `sdk.before_send` for additional redaction.
-
-Collectors use the existing analytics identity when available. Without one, each event gets a fresh random UUID and defaults to `$process_person_profile=false`, as with manual captures. Failed login and lockout events never use the attempted user identifier. Collector failures don't change application responses or replace original errors. Set `sdk.debug` to `true` to log collector failures through Laravel's logger; diagnostics contain the collector site and exception class, not event data or exception messages.
-
-#### Requests and server pageviews
-
-Keep or extend the default health-check and static-asset exclusions. Exclusion patterns use Laravel's case-sensitive `Str::is` wildcard matching. Requests match against both the route template and concrete path for filtering, but collectors don't send the concrete path. Unmatched routes aren't captured.
-
-`requests.sample_rate` accepts values from zero to one. One captures every eligible request, and zero drops both request summaries and server pageviews. The SDK makes one sampling decision per request for both event types. Request summaries include all methods and status codes for eligible matched routes. Streaming duration measures response creation, not body delivery.
-
-Server HTML `$pageview` events are a separate opt-in through `pageviews.enabled`, independent of request summaries. They require a matched route, a GET request, an HTML response, and a 2xx status. `route` and `$pathname` contain a normalized route template such as `/orders/{order}`, never `/orders/123`.
-
-`$current_url` combines the HTTP or HTTPS origin from `app.url` with the route template. The SDK removes credentials, paths, and queries from the configured origin. It doesn't trust the request's Host header. Invalid configured origins suppress pageviews.
-
-Don't enable server pageviews for pageviews already captured by your browser SDK: there is no automatic deduplication. Server pageviews don't track client-side navigation, browser lifecycle, or actual browser rendering.
-
-#### Authentication, models, and domain events
-
-Authentication collection defaults to `registered`, `login`, and `logout` when enabled. Add `failed` or `lockout` to `auth.events` explicitly to collect those outcomes.
-
-Model collection requires an exact Eloquent class in `models.allow`. Only selected attributes are read, using their normal casts and accessors. JSON-safe scalar, `null`, and array values are accepted; objects, resources, and invalid JSON values are omitted. An empty attribute list captures class metadata only, without an implicit primary key, relations, or a full `toArray()` result. Don't allowlist sensitive accessors or JSON columns.
-
-The SDK snapshots selected model values and analytics context when a model changes, then emits the event after that connection's outer transaction commits. Rollback discards the pending events, including changes inside rolled-back savepoints. Outside a transaction, collection is immediate. In tests using `DatabaseTransactions` or `RefreshDatabase`, Laravel's test-wrapper transaction doesn't delay capture, but application-owned nested transactions still defer capture until commit.
-
-Pending model events across all connections share a limit of 1,000 events and 1 MiB of JSON-encoded event names, properties, and correlation context. The SDK drops the newest event if either limit would be exceeded. This isn't a durable outbox: process crashes and transport failures can lose events. Each model lifecycle event generates a separate event. Bulk query-builder updates and deletes don't produce model events. Soft deletes produce a deleted event, but restores aren't collected.
-
-Domain mappings match exact event classes and public property or array-key paths, such as `details.currency` above. They don't call getters, serialize models, match inherited event classes, or support wildcard subscriptions. Missing paths and non-JSON-safe values are omitted. Domain collection is immediate, even inside a transaction. Use Laravel's after-commit event dispatch when the event must reflect committed state. Rebuild cached configuration and restart long-running workers after changing mappings.
-
-#### Jobs, commands, and scheduled tasks
-
-Jobs emit one event per started attempt; a retry produces another event. Commands exclude arguments and options. Scheduler names use the task's PHP class, not descriptions or command lines. A background task emits `background_started` when launched, not when it completes. Skipped tasks and hard-killed jobs or commands without a terminal framework event aren't captured.
-
-Different collectors intentionally produce events for different lifecycle boundaries. A request that logs in a user and saves a model can produce request, authentication, and model events. The SDK doesn't deduplicate these against your manual instrumentation.
+Server `$pageview` events are a separate opt-in through `pageviews.enabled`. Leave them disabled if your browser SDK already captures pageviews to avoid duplicates.
 
 #### Blade flag conditionals
 
@@ -244,57 +147,11 @@ Set `blade.enabled` to `true` in `config/posthog-autocapture.php` to enable the 
 
 This uses `evaluateFlags()->isEnabled()` with the current analytics context. Repeated checks share the evaluation snapshot and exposure deduplication. Disabled or unavailable flags select the `@else` branch. This is a presentation helper, not authorization.
 
-### Queue workers, Octane, and scoped context
+### Queue workers and Octane
 
-The Laravel SDK flushes events and clears context at supported HTTP, queue, console, and sequential Octane lifecycle boundaries. Identity, session, and scalar group context propagate to jobs by default; arbitrary properties and request data don't. Set `queue_context` to `false` to disable propagation.
+The SDK automatically flushes events and clears context between requests, queue jobs, console commands, and sequential Octane lifecycles. Identity and session context propagate to jobs by default; set `queue_context` to `false` to disable this.
 
-Use a scoped context to set an identity or properties for a block of work:
-
-```php
-use PostHog\Laravel\Context;
-use PostHog\Laravel\Facades\PostHog;
-
-app(Context::class)->with([
-    "distinctId" => "account-123",
-    "properties" => ["component" => "import"],
-], function () {
-    PostHog::capture("import_started");
-});
-```
-
-The previous context and flag snapshots are restored even if the callback throws. The facade also exposes `withContext()`, `enterContext()`, and `getContext()` to bridge Laravel context and the underlying PHP client. These APIs accept `distinct_id` and `session_id` aliases; canonical `distinctId` and `sessionId` keys win if both forms are supplied. `["fresh" => true]` excludes ambient identity, request metadata, groups, and resolvers. Close an entered scope in `finally`.
-
-#### Lifecycle boundaries
-
-HTTP context remains active through kernel termination, including `dispatchAfterResponse()` jobs and application termination callbacks. The kernel's completion hook flushes events and clears context afterward. Custom HTTP kernels without Laravel's lifecycle callback API fall back to middleware cleanup and can't provide after-response correlation.
-
-Queue jobs start with fresh context. Propagated `_posthog` payload metadata contains bounded identity, session, and scalar group context, never authorization evidence. Jobs can override that context explicitly. Nested synchronous jobs and kernel-level `Artisan::call()` executions restore the caller's context and flag snapshots when they finish or fail.
-
-The root console command stays active through kernel termination. Nested kernel-level calls defer flushing to the outer command or HTTP termination. A standalone `Artisan::call()` flushes on exit. Octane request, task, and tick boundaries flush and clear context automatically for sequential sandbox lifecycles.
-
-Automatic flush failures don't replace an HTTP response or worker failure. Explicit `PostHog::flush()` and `PostHog::shutdown()` return SDK results, but a successful flush isn't a delivery receipt.
-
-#### Direct child commands
-
-Direct `$this->call()`, `$this->callSilent()`, and `$this->callSilently()` calls bypass console kernel boundaries. To isolate a child's analytics context, add `IsolatesCommandContext` to the calling command or your application's base command:
-
-```php
-namespace App\Console;
-
-use Illuminate\Console\Command as BaseCommand;
-use PostHog\Laravel\Concerns\IsolatesCommandContext;
-
-abstract class Command extends BaseCommand
-{
-    use IsolatesCommandContext;
-}
-```
-
-Have your application commands extend this base class, or add the trait directly to each calling command. The three call helpers restore the caller's context and flag snapshots after the child returns or throws, including closure children. Arguments, output, exit codes, and exceptions pass through unchanged. The trait also clears Pennant's PostHog cache on entry and after restoring the caller.
-
-This doesn't intercept every command call. Callers without the trait, including commands registered with `Artisan::command()`, need kernel-level `Artisan::call()` or an explicit scope such as `PostHog::withContext([], fn () => $this->call("import"))` when a child can change analytics context. Explicit context scopes don't clear Pennant's own cache. Custom call implementations that bypass Laravel's inherited `runCommand()` also need explicit scoping.
-
-SDK services are created lazily per Laravel scope. Don't retain them in application singletons or prewarm them in Octane. Ordinary HTTP, queue workers, console commands, and sequential Octane sandbox lifecycles are supported. Overlapping Swoole coroutines sharing one Laravel container aren't supported.
+Don't store scoped PostHog services in application singletons. Overlapping Swoole coroutines sharing one Laravel container aren't supported.
 
 ### Testing and diagnostics
 
