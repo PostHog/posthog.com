@@ -4,13 +4,13 @@ title: How much does an event cost anyway?
 
 import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
-So you looked at your PostHog bill, and an agent told you it could build the same thing on ClickHouse in a weekend. It probably can. We've watched it happen, and the first month's cloud invoice usually looks great.
+When you pay for an event in PostHog, you pay for more than a row in a database. The price covers the work to collect that event, keep it safe, make it useful, store it for many years, query it as often as you like, and send it to other tools.
 
-The catch is that the agent's estimate and our price are measuring different things. The estimate covers a weekend. Our price covers seven years of storage, every query you'll ever run on those events, and the person who gets paged at 2 am when it breaks. This page itemizes what you're paying for, so you can compare like with like.
+This page explains each of those jobs, so you know what the price includes. It's also useful if you're thinking about building your own pipeline, for example on ClickHouse. AI agents make the first version much faster to build than it used to be, so that's a fair option to consider. This page helps you compare the two like with like.
 
 You don't need to be an engineer to follow it. Every section starts in plain English and ends with the technical detail, so stop reading whenever you've seen enough.
 
-> **No bill yet? You can skip this page.** Every PostHog product has a free tier, and they're big enough that 97% of users never pay us a penny. A pipeline you build with Claude costs money from day one, because servers and engineering hours aren't free. Against a free tier, building it yourself always costs more.
+> **No bill yet?** Every PostHog product has a free tier, and they're big enough that 97% of users never pay us a penny. If you're inside the free tier, your events cost nothing, so this page is background reading for later.
 
 ## The price
 
@@ -52,7 +52,7 @@ If a single ID sends more than about 5,000 events a minute, it moves to an overf
 
 If an ingestion worker crashes halfway through a batch, Kafka redelivers it. Anything we can't process goes to a dead letter queue instead of disappearing.
 
-Without it, a traffic spike or a database restart can mean you lose your precious data for good. 
+Without it, a traffic spike or a database restart can mean you lose your precious data for good.
 
 ### Step 3: Making it mean something
 
@@ -74,7 +74,7 @@ We're also [rebuilding the storage format](/blog/changing-event-storage) so each
 
 Paid plans [keep events for many years](/docs/data/events-retention) and free plans for one. You can set a shorter window.
 
-Without it, a single-node ClickHouse with no replica loses everything the day its disk fails, and nobody tunes it until a query starts timing out.
+Without it, a database that keeps only one copy of your data can lose it when a disk fails, and queries get slower as the data grows.
 
 ### Step 5: Querying it as often as you like
 
@@ -88,35 +88,35 @@ We run guard rails so one query can't take a cluster down. A query gets 60 secon
 
 Sometimes the data needs to go somewhere else entirely. Your data team wants it in Snowflake next to everything else the company tracks. Your sales team wants a Slack message when a big account signs up, or a HubSpot contact updated when someone upgrades. And if you ever leave PostHog, you want every event to come with you.
 
-**How it works:** [Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet, on a schedule you set. The first 1 million rows you export each month are free. After that, exports bill per row under [data pipelines pricing](/pricing), not the event price.
+**How it works:** [Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet, on a schedule you set. The first 1 million rows you export each month are free. After that, exports bill per row under [Data Pipelines pricing](/pricing), not the event price.
 
 [Destinations](/docs/data-pipelines/destinations) send events to tools like [Slack](/docs/data-pipelines/destinations/slack), [HubSpot](/docs/data-pipelines/destinations/hubspot), and Customer.io as they happen. They have their own free tier and bill separately from events too. The [query API](/docs/api/query) returns anything SQL can express. If you leave, your data leaves with you.
 
-Without it, every tool that wants your data needs its own export job, and each one breaks in its own way.
+Without it, every tool that wants your data needs its own export job, and each one needs its own upkeep.
 
-## What you own if you build it
+## If you build it yourself
 
-Here's the same list from the other side. The second column is what we run for you, and the third is what you'd run instead. You can probably guess who's in the last column.
+Every one of those jobs still exists when you run the pipeline yourself. This table shows what each one looks like on both sides. The second column is what we run for you, the third is what you'd run instead, and the last is when the job needs time from your team.
 
-This assumes your build is still running in 18 months, and that someone owns it.
+It assumes your build runs in production for the long term, and that someone on your team owns it.
 
-| Job | What PostHog runs | What you run instead | Who gets paged |
+| Job | What PostHog runs | What you run instead | When it needs your team |
 |---|---|---|---|
-| Getting it in | SDKs for web, iOS, Android, React Native, Flutter, and server SDKs in Node, Python, Go, Java, Ruby, PHP, .NET, and more. A public capture endpoint. Sources that sync Stripe, HubSpot, and databases. | An SDK for every platform you ship on. An endpoint on the public internet. A sync job for every other tool your team wants data from. | You, when a mobile release ships a broken batcher |
-| Not losing it | Kafka with replication, overflow lanes, a dead letter queue, and replay after a crash | A queue, or none. Inserts straight into ClickHouse until it refuses them. | You, at 2 am on launch day |
-| Making it mean something | Validation, GeoIP, cookieless hashing, session attribution, a definitions catalog, and warnings | A transform step for every rule, plus the catalog your agent needs before it can query anything | You, when one platform renames a property |
-| Knowing who did it | Person profiles, anonymous-to-identified merges, and property updates in order | An identity table, merge logic that copes with two devices identifying at once, and backfills when it gets it wrong | You, when one customer shows up as two |
-| Storing it | Sharding, replication, tiering, compression, materialized columns, backups, and GDPR deletes | ClickHouse operations, upgrades validated against your real queries, and backups you've actually tested a restore from | You, when an upgrade changes a query result |
-| Querying it | Insights, SQL, AI, caching, and per-organization limits | A dashboard tool or an agent, plus limits so one query can't kill the cluster | You, when a teammate's query takes the cluster down |
-| Getting it out | Batch exports, real-time destinations, and the query API | An export job or a webhook for every tool that wants the data | You, when the warehouse load quietly stops |
+| Getting it in | SDKs for web, iOS, Android, React Native, Flutter, and server SDKs in Node, Python, Go, Java, Ruby, PHP, .NET, and more. A public capture endpoint. Sources that sync Stripe, HubSpot, and databases. | An SDK for every platform you ship on. An endpoint on the public internet. A sync job for every other tool your team wants data from. | When a mobile release changes how events are sent |
+| Not losing it | Kafka with replication, overflow lanes, a dead letter queue, and replay after a crash | A queue in front of the database, or direct inserts with their own retry logic | When traffic spikes or the database restarts |
+| Making it mean something | Validation, GeoIP, cookieless hashing, session attribution, a definitions catalog, and warnings | A transform step for every rule, plus a catalog of event and property names | When one platform renames a property |
+| Knowing who did it | Person profiles, anonymous-to-identified merges, and property updates in order | An identity table, merge logic that copes with two devices identifying at once, and backfills when it gets it wrong | When one customer shows up as two |
+| Storing it | Sharding, replication, tiering, compression, materialized columns, backups, and GDPR deletes | ClickHouse operations, upgrades validated against your real queries, and backups with tested restores | When an upgrade changes a query result |
+| Querying it | Insights, SQL, AI, caching, and per-organization limits | A dashboard or BI tool, plus limits so one query can't slow down everyone else's | When one large query slows down the cluster |
+| Getting it out | Batch exports, real-time destinations, and the query API | An export job or a webhook for every tool that wants the data | When an export job stops |
 
-## Six costs your agent's estimate leaves out
+## Costs that arrive later
 
-Agents are good at costing the parts of a system they can see in a code sample. These are the six they can't see.
+A build estimate usually covers the first version of the system: the servers, the storage, and the setup. The costs below arrive later, so estimates often leave them out, whether a person or an agent writes them.
 
 ### Storage for years, not months
 
-Storage looks cheap in month one, because there's only one month of it. That's the month an agent's estimate covers. Our price covers 84. Your storage bill compounds: in month 12 you're paying to store 12 months of events, and in month 84 you're paying for 84. The ledger below works out what that adds up to at your volume, your cloud's price per GB-month, and at least two replicas.
+Storage looks cheap in month one, because there's only one month of it. Paid plans keep events for many years, so a fair comparison costs the same window. Your storage bill grows every month: in month 12 you're paying to store 12 months of events, and in month 48 you're paying for 48. The ledger below works out what that adds up to at your volume, your cloud's price per GB-month, and at least two replicas.
 
 ### Compute for as long as you keep the data
 
@@ -126,34 +126,34 @@ Remember the CEO's Monday morning dashboard? Now picture the whole company openi
 
 ### Scaling you didn't plan for
 
-Traffic doesn't grow in a straight line. A launch, a bot, an SDK stuck in a retry loop, or an acquisition can multiply your event volume in a day. Our pipeline absorbs that with Kafka, overflow lanes, and clusters sized for our whole customer base. Yours is sized for last month.
+Traffic doesn't grow in a straight line. A launch, a bot, an SDK stuck in a retry loop, or an acquisition can multiply your event volume in a day. Our pipeline absorbs that with Kafka, overflow lanes, and clusters sized for our whole customer base. A cluster you run needs room for those days too, or a plan for when it runs out.
 
 ### Time you don't spend on your product
 
-Every hour someone spends upgrading ClickHouse or fixing an SDK is an hour not spent on the thing your customers pay you for. The ledger counts those hours at a loaded rate, but that's the generous way to count them. At an early-stage company, the real cost is the feature that ships a month late because your best engineer was babysitting a database.
+Every hour someone spends upgrading ClickHouse or fixing an SDK is an hour not spent on the thing your customers pay you for. The ledger counts those hours at a loaded rate. At an early-stage company, the bigger cost can be a feature that ships later because an engineer was busy with the pipeline.
 
 ### The features you'll be asked for next
 
-The agent builds you an events table and a dashboard. A week later, someone asks for a [funnel](/docs/product-analytics/funnels). Then retention, then [cohorts](/docs/data/cohorts), then a way to target a feature flag at one of those cohorts. Every request is reasonable, and every one is another system to build and maintain.
+Your first build gives you an events table and a dashboard. A week later, someone asks for a [funnel](/docs/product-analytics/funnels). Then retention, then [cohorts](/docs/data/cohorts), then a way to target a feature flag at one of those cohorts. Every request is reasonable, and every one is another system to build and maintain.
 
-In PostHog, the same events already power [feature flag targeting](/docs/feature-flags), [experiment metrics](/docs/experiments), and the filters in [session replay](/docs/session-replay). You pay for an event once, and every product can use it. An event store you build talks to nothing until you write the connection yourself. We made the same argument about [building your own feature flags](/blog/build-or-buy-feature-flags), and it holds here too.
+In PostHog, the same events already power [feature flag targeting](/docs/feature-flags), [experiment metrics](/docs/experiments), and the filters in [Session Replay](/docs/session-replay). You pay for an event once, and every product can use it. An event store you build talks to nothing until you write the connection yourself. Our post on [building your own feature flags](/blog/build-or-buy-feature-flags) covers the same trade-off.
 
 ### Trust
 
-A wrong number costs more than the time it takes to fix it, because of every decision someone made with it before anyone noticed. Trust means you can put the numbers in front of a board or an investor without an asterisk. We have [SOC 2](/docs/privacy/soc2), [HIPAA](/docs/privacy/hipaa-compliance), and GDPR controls, and a public [status page](/status). When [we lost Logs data in February 2026](/handbook/company/post-mortems/2026-02-20-posthog-us-logs-data-loss), we published what happened and what we changed. A pipeline one engineer runs on the side rarely gets a post-mortem.
+Data is only useful if people believe it. A wrong number costs more than the time it takes to fix, because of the decisions people made with it first. You want to be able to put the numbers in front of a board or an investor without an asterisk. We have [SOC 2](/docs/privacy/soc2), [HIPAA](/docs/privacy/hipaa-compliance), and GDPR controls, and a public [status page](/status). When [we lost Logs data in February 2026](/handbook/company/post-mortems/2026-02-20-posthog-us-logs-data-loss), we published what happened and what we changed. If you build your own, those controls and that reporting become your team's job too.
 
 ## Your own ledger
 
 This is where you do the math. You'll want an engineer for the technical rows, like bytes per event and compute nodes, but anyone can fill in the rest.
 
-Fill this in with your numbers. If an agent pitched you the build, make it fill this in too, and say where each number came from.
+Fill this in with your numbers. If an agent is helping with your estimate, ask it to fill this in too and say where each number came from.
 
 | Input | Your number | Notes |
 |---|---|---|
 | Events per month | | Your [billing page](https://app.posthog.com/organization/billing) shows it |
 | Compressed bytes per event | | Measure it on a sample of your real events in ClickHouse |
 | Replicas | | At least 2, or a disk failure is data loss |
-| Months retained | 84 | To match a paid plan |
+| Months retained | | How far back you need to query. Paid plans keep [many years](/docs/data/events-retention) |
 | Storage price per GB-month | | Your cloud's list price for the tier you use |
 | Compute nodes × hourly price | | Ingestion and query nodes, 730 hours a month |
 | Queue | | Managed Kafka or equivalent |
@@ -171,23 +171,23 @@ your cost per event  = monthly total ÷ events per month
 
 Compare the last line to a PostHog bill at the same volume. Take the monthly total from the [pricing calculator](/pricing), with any add-ons you need, and divide it by your monthly events. The free million and the falling tiers mean that average comes out lower than the rates at the top of this page. Run it for month 1, then again for month 36. If an agent is doing the math, point it at our [pricing guide for agents](/pricing/agent-estimates) for the PostHog side.
 
-The ledger only counts the costs you can put a price on. It leaves out trust, correct data, time away from your product, and the features you'll be asked to build next. All of those go on top of your number, so if the two totals are close, PostHog is the cheaper option.
+The ledger only counts the costs you can put a price on. It leaves out trust, correct data, time away from your product, and the features you'll be asked to build next. Those are real costs too, so weigh them when you compare the two totals.
 
 ## When building is the right call
 
-We'd be lying if we said never. There are three cases where we'd build it too.
+Building your own pipeline is the better choice for some teams. These are the cases where we'd build it too.
 
 **You sell analytics infrastructure.** The pipeline is your product, so the engineering time is the business, not overhead.
 
 **You already run ClickHouse for something else**, and a data team treats it like a product, with on-call, upgrades, and tested backups. Adding an events table to a cluster you already operate is a very different decision from standing one up.
 
-**Your data doesn't fit an events table**, like wide logs, sensor-rate time series, or rows you need to update in place. Our pipeline is built for append-only events, and we'd rather tell you that now than after you've migrated.
+**Your data doesn't fit an events table**, like wide logs, sensor-rate time series, or rows you need to update in place. Our pipeline is built for append-only events, so a different tool may suit you better.
 
-If none of those apply, paying per event is cheaper. If you're not sure, the ledger will tell you faster than we can.
+If you're not sure which side you're on, fill in the ledger. It gives you a better answer than any general rule.
 
-## How to control costs without vibe-coding
+## How to lower your PostHog bill
 
-Every PostHog product includes a large free tier that's designed to get early-stage teams to product-market fit. If you're past that and still struggling with costs, there are ways to cut your bill that don't involve running a database.
+If you want to keep using PostHog but pay less, these changes help most.
 
 - [Capture fewer events](/docs/product-analytics/cutting-costs) in total. Autocapture noise and an `identify()` call on every page are the two we see most.
 
@@ -195,4 +195,4 @@ Every PostHog product includes a large free tier that's designed to get early-st
 
 - Set a [billing limit](/docs/billing/limits-alerts) so you know the most you'll pay in a month.
 
-If none of that gets you where you need to be, [talk to us](/talk-to-a-human). We'd rather help you tune it than watch you rebuild it.
+If you'd like help with your setup, [talk to us](/talk-to-a-human).
