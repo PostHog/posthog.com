@@ -2987,12 +2987,12 @@ export const docsMenu = {
                                     url: '/docs/libraries/python/reference',
                                     children: [
                                         {
-                                            name: '7.x',
-                                            url: '/docs/libraries/python/7',
+                                            name: '7.x.x',
+                                            url: '/docs/libraries/python/7.x.x',
                                         },
                                         {
-                                            name: '8.x (experimental)',
-                                            url: '/docs/libraries/python/8',
+                                            name: '8.x.x (experimental)',
+                                            url: '/docs/libraries/python/8.x.x',
                                         },
                                     ],
                                 },

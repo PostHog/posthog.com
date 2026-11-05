@@ -69,8 +69,8 @@ describe('the real docs nav', () => {
         assert.ok(expected)
         for (const path of [
             '/docs/libraries/python/reference',
-            '/docs/libraries/python/7',
-            '/docs/libraries/python/8',
+            '/docs/libraries/python/7.x.x',
+            '/docs/libraries/python/8.x.x',
             '/docs/libraries/python/migration',
         ]) {
             assert.equal(sectionFor(path), expected)
