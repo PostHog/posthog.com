@@ -136,13 +136,13 @@ The rule only applies to new exceptions, so the engineers also select the two ex
 
 The grouping rule puts every `HostNotFoundError` in one issue. The engineers want one issue per missing host instead, because each host record needs its own fix.
 
-A grouping rule would need a new rule for every host. Twig's code already knows which host is missing, so it's easier to put the host in the fingerprint there <SeeFig n={4} />.
+With grouping rules, every host needs its own rule. Twig's code already knows which host is missing, so it's easier to put the host in the fingerprint there <SeeFig n={4} />.
 
 A custom fingerprint wins over the grouping rule. Each missing host now gets its own issue, whether Trip details or the stay page finds it. Like grouping rules, custom fingerprints only apply to new exceptions.
 
 ## Misgrouped issues
 
-As software grows and the organization changes, how you think about grouping will change as well.
+As Twig grows and the team changes, the engineers keep adjusting how they group issues.
 
 When issues are misgrouped, Twig's engineers debug like this:
 

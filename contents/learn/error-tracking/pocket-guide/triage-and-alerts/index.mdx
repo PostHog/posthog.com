@@ -51,7 +51,9 @@ Rules run at ingestion, after <Term name="source map">source maps</Term> are app
 
 ## Track fixes in GitHub
 
-Stand-up also used to copy issues into GitHub, where the Trips team plans its work. Now the engineers create the GitHub issue from the issue page. It links back to PostHog, with every exception and the guests the issue impacts <SeeFig n={2} />. The [GitLab, Linear, and Jira integrations](/docs/error-tracking/integrations) work the same way.
+Twig's engineering teams plan their sprints in GitHub issues. They configure Error Tracking to create mirrored issues in GitHub issues directly, so they can groom it as a part of their sprint planning <SeeFig n={2} />.
+
+If your team works out of GitLab, Linear, or Jira, you can do the same.
 
 ## Get alerted when an issue spikes
 
@@ -63,7 +65,7 @@ PostHog alerts on three triggers:
 - **Issue reopened** fires when a resolved issue comes back, which catches regressions.
 - **Issue spiking** fires when an issue gets far more exceptions than usual. PostHog compares each 5-minute window with the issue's baseline from the past hour <SeeFig n={3} />.
 
-The engineers only alert on spiking issues. New issues already go to the team that owns them, which grooms them, so an alert for each one would only add noise. Spike alerts go to the Trips team's Slack channel.
+The engineers only alert on spiking issues. New issues already go to the team that owns them, which grooms them, so an alert for each one only adds noise. Spike alerts go to the Trips team's Slack channel.
 
 When the spike alert fires, someone on the Trips team opens the issue and watches a recording of a guest who hit it. If it's a real bug, they fix it and link the GitHub issue. If it's noise, they suppress it.
 

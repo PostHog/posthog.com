@@ -140,7 +140,7 @@ import UploadSymbolSetsPlatforms from '../../../../docs/error-tracking/_snippets
 
 # Stack traces
 
-The **Trip details** exception is in PostHog, but the stack trace points to Twig's minified code. This means the engineers can only see stack traces like this, which isn't very useful <SeeFig n={1} />.
+The **Trip details** exception is in PostHog, but its stack trace points to Twig's minified code, so the engineers can't tell which line failed <SeeFig n={1} />.
 
 Twig's web app is a minified React bundle. An app that uses one of these frameworks likely has the same issue:
 
