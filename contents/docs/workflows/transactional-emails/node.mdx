@@ -99,7 +99,7 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 - **Engagement:** PostHog captures the email's engagement events unless you pass `captureEngagement: false`.
 - **One form per send:** A send has `templateId` or `templateKey`, not both. Content from your code takes no `templateData`, because PostHog renders nothing.
 
-See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks. If your app sends email with Nodemailer, [use the PostHog transport](/docs/workflows/transactional-emails/nodemailer) and keep your `sendMail` calls.
 
 ## Check an email's status
 
