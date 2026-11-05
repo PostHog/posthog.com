@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Every project holds a sending tier from 0 to 7. The tier caps how many emails your workflows send per hour and per day, and how large one batch audience can be. A new project starts at tier 0 and moves up one tier at a time as it sends with low bounce and spam complaint rates.
+Every project holds a sending tier from 0 to 7. The tier caps how many emails your workflows send per day and how large one batch audience can be. A new project starts at tier 0 and moves up one tier at a time as it sends with low bounce and spam complaint rates.
 
 Why the caps? All workflow email leaves through PostHog's shared sending infrastructure. Mailbox providers judge that infrastructure on the bounce and complaint rates of everything it sends. One project with a bad list hurts deliverability for every project. The tiers keep an unproven project's volume small until its record shows it is safe.
 
@@ -14,32 +14,32 @@ You see both parts on the **Reputation** tab under Workflows in [PostHog](https:
 
 The health card reports three numbers over a trailing 30-day window.
 
-| Number | What it measures | Threshold |
-| --- | --- | --- |
-| Bounce rate | Hard bounces divided by emails sent | Stay under 2% |
+| Number              | What it measures                       | Threshold       |
+| ------------------- | -------------------------------------- | --------------- |
+| Bounce rate         | Hard bounces divided by emails sent    | Stay under 2%   |
 | Spam complaint rate | Spam complaints divided by emails sent | Stay under 0.1% |
-| Emails sent | Workflow emails sent in the window | |
+| Emails sent         | Workflow emails sent in the window     |                 |
 
 Mailbox providers use the same thresholds. A project above either threshold cannot move up a tier, and PostHog can move it down. [Opt-outs and suppression](/docs/workflows/opt-outs) explains how PostHog keeps hard-bounced addresses off your lists. The [troubleshooting guide](/docs/workflows/troubleshooting#debugging-email-delivery-failures) shows how to find the invocations behind a bounce or complaint.
 
 ## Sending allowance tiers
 
-| Tier | Emails per hour | Emails per day | Largest batch audience |
-| --- | --- | --- | --- |
-| 0 | 50 | 100 | 100 |
-| 1 | 200 | 1,000 | 1,000 |
-| 2 | 600 | 3,000 | 3,000 |
-| 3 | 2,000 | 10,000 | 10,000 |
-| 4 | 6,000 | 30,000 | 30,000 |
-| 5 | 20,000 | 100,000 | 100,000 |
-| 6 | 60,000 | 300,000 | 300,000 |
-| 7 | 200,000 | 1,000,000 | 1,000,000 |
+| Tier | Emails per day | Largest batch audience |
+| ---- | -------------- | ---------------------- |
+| 0    | 100            | 100                    |
+| 1    | 1,000          | 1,000                  |
+| 2    | 3,000          | 3,000                  |
+| 3    | 10,000         | 10,000                 |
+| 4    | 30,000         | 30,000                 |
+| 5    | 100,000        | 100,000                |
+| 6    | 300,000        | 300,000                |
+| 7    | 1,000,000      | 1,000,000              |
 
 Tier 0 is a probation tier for a domain with no sending record. Its caps sit far below tier 1 on purpose. A first real send from an unknown domain is the send most likely to generate complaints, and a small cap keeps the damage small while complaint feedback catches up.
 
 <CalloutBox icon="IconInfo" title="Emails above the cap wait, they are not lost" type="fyi">
 
-An email that does not fit in the current hour or day stays queued. The worker sends it once the allowance frees up. The workflow's invocations show the delay.
+An email that does not fit in the current day stays queued. The worker sends it once the allowance frees up. The workflow's invocations show the delay.
 
 A batch send is different. When the audience is larger than the tier allows, the trigger button blocks the launch and shows the current limit. Add filters to narrow the audience, or wait for the next tier. This batch cap only applies to workflows with an email step.
 
