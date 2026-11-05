@@ -24,7 +24,7 @@ ID-JAG keeps authorization decisions in your IdP instead of spreading them acros
 - **Centralized revocation:** once your IdP stops issuing ID-JAGs for a user, clients can no longer get new access tokens for them.
 - **Scoped tokens:** the access token carries only the scopes your IdP granted, intersected with what the client requested.
 
-The most common use is connecting AI agents to the [PostHog MCP server](/docs/model-context-protocol) under central control. See [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization) for the MCP-specific setup.
+The most common use is connecting AI agents to the [PostHog MCP server](/docs/model-context-protocol) under central control. This page covers the PostHog side. For a full walkthrough with Claude, see [Claude-issued identity](/docs/model-context-protocol/claude-issued-identity) or [Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access).
 
 ## How it works
 
@@ -90,7 +90,7 @@ Use one XAA configuration per IdP and domain. If two configurations cover the sa
 
 The client app needs a client ID that PostHog recognizes, and your IdP must issue ID-JAGs for that client ID.
 
-- **MCP clients:** follow the client's enterprise-managed authorization setup. See [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization).
+- **MCP clients:** follow the client's enterprise-managed authorization setup. For Claude, see [Claude-issued identity](/docs/model-context-protocol/claude-issued-identity) or [Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access).
 - **Your own app:** register an [OAuth app](/docs/api/oauth) with PostHog, then see [how to exchange an ID-JAG yourself](#how-do-i-exchange-an-id-jag-myself).
 
 ### 4. Grant the required scopes in your IdP
@@ -130,7 +130,7 @@ For every error code, see [what all the error codes mean](#what-do-all-the-error
 | Signature | RS256, RS384, RS512, PS256, PS384, PS512, ES256, ES384, or ES512, with a key from your IdP's JWKS |
 | `iss` | Matches the issuer URL of the XAA configuration. A trailing slash makes no difference. |
 | `aud` | The PostHog authorization server the client uses: `https://oauth.posthog.com` on Cloud, or `https://us.posthog.com` / `https://eu.posthog.com` when the client calls a region directly. On self-hosted, your instance URL. |
-| `resource` | The PostHog resource the token is for: `https://us.posthog.com` or `https://eu.posthog.com` for the API, or `https://mcp.posthog.com/mcp` for the MCP server. On self-hosted, your instance URL. |
+| `resource` | Optional. The PostHog resource the token is for: `https://us.posthog.com` or `https://eu.posthog.com` for the API, or `https://mcp.posthog.com/mcp` / `https://mcp-eu.posthog.com/mcp` for the MCP server. On self-hosted, your instance URL. Without the claim, PostHog uses the token request's `resource` parameter, and without either, the regional API URL. A claim and a parameter that differ fail with `invalid_target`. |
 | `client_id` | The client ID of the client that presents the ID-JAG |
 | `sub` | A stable identifier for the user at your IdP |
 | `email` | The user's email address. If it's missing, `sub` must be the email address. If `email_verified` is present, it must not be `false`. |
@@ -176,6 +176,8 @@ curl -X POST https://oauth.posthog.com/oauth/token/ \
 
 With `private_key_jwt`, replace `client_secret` with `client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer` and `client_assertion=<a JWT signed with your client's key>`.
 
+To pick the resource yourself, add `resource=<a PostHog resource>` (RFC 8707). See the `resource` row in [what PostHog checks](#what-does-posthog-check-in-an-id-jag).
+
 A successful response:
 
 ```json
@@ -203,6 +205,28 @@ Use the token on API requests to your organization's region (`https://us.posthog
 </details>
 
 <details>
+<summary id="how-does-a-client-discover-that-posthog-supports-id-jag">How does a client discover that PostHog supports ID-JAG?</summary>
+
+The PostHog MCP server's protected resource metadata ([RFC 9728](https://www.rfc-editor.org/rfc/rfc9728)), for example `https://mcp.posthog.com/.well-known/oauth-protected-resource/mcp`, names `https://oauth.posthog.com` as its authorization server. That server's metadata ([RFC 8414](https://www.rfc-editor.org/rfc/rfc8414)) at `https://oauth.posthog.com/.well-known/oauth-authorization-server` advertises the ID-JAG grant profile:
+
+```json
+{
+  "authorization_grant_profiles_supported": [
+    "urn:ietf:params:oauth:grant-profile:id-jag"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "refresh_token",
+    "urn:ietf:params:oauth:grant-type:jwt-bearer"
+  ]
+}
+```
+
+Both documents also list every scope PostHog offers in `scopes_supported`. The OIDC discovery document lists the `jwt-bearer` grant type but not `authorization_grant_profiles_supported`.
+
+</details>
+
+<details>
 <summary id="what-do-all-the-error-codes-mean">What do all the error codes mean?</summary>
 
 The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.rfc-editor.org/rfc/rfc6749#section-5.2)):
@@ -218,7 +242,7 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 | `invalid_grant` (`ID-JAG lifetime exceeds 600 seconds`) | `exp` is more than 10 minutes after `iat`. |
 | `invalid_grant` (`ID-JAG assertion has already been used`) | The client sent an ID-JAG with a `jti` PostHog already accepted. Request a new ID-JAG from your IdP. |
 | `invalid_grant` (`ID-JAG is missing required claim…`) | A required claim, such as `jti` or `client_id`, is missing. |
-| `invalid_target` | The `resource` claim isn't one of the PostHog resources listed in [what PostHog checks](#what-does-posthog-check-in-an-id-jag). |
+| `invalid_target` | The resource isn't one of the PostHog resources listed in [what PostHog checks](#what-does-posthog-check-in-an-id-jag), or the `resource` claim and the `resource` parameter differ. |
 | `access_denied` | The organization doesn't have the Scale or Enterprise add-on. |
 | `insufficient_scope` (from the API) | The granted scopes don't cover the request. Add the missing scopes in your IdP. |
 
@@ -227,6 +251,8 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 ## Further reading
 
 - [Enterprise-managed authorization for MCP](/docs/model-context-protocol/enterprise-managed-authorization)
+- [Connect Claude with Claude-issued identity](/docs/model-context-protocol/claude-issued-identity)
+- [Connect Claude through Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access)
 - [ID-JAG / XAA specification](https://xaa.dev)
 - [SSO](/docs/settings/authentication/sso)
 - [OAuth integration](/docs/api/oauth)

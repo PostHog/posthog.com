@@ -2525,8 +2525,19 @@ const posthogMcpNav = [
         url: '/docs/model-context-protocol/faq',
     },
     {
-        name: 'Enterprise auth (ID-JAG)',
+        name: 'Enterprise auth',
+    },
+    {
+        name: 'Overview (ID-JAG)',
         url: '/docs/model-context-protocol/enterprise-managed-authorization',
+    },
+    {
+        name: 'Claude-issued identity',
+        url: '/docs/model-context-protocol/claude-issued-identity',
+    },
+    {
+        name: 'Okta Cross App Access',
+        url: '/docs/model-context-protocol/okta-cross-app-access',
     },
     {
         name: 'Code editors',
@@ -2874,8 +2885,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
