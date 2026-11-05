@@ -8310,6 +8310,10 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/python',
                         },
                         {
+                            name: 'Symfony Mailer',
+                            url: '/docs/workflows/transactional-emails/symfony',
+                        },
+                        {
                             name: 'API',
                             url: '/docs/workflows/transactional-emails/api',
                         },

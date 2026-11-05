@@ -1,0 +1,115 @@
+---
+title: Send transactional emails with Symfony Mailer
+sidebar: Docs
+showTitle: true
+---
+
+The [PHP SDK](/docs/libraries/php) has a Symfony Mailer transport, so the emails your Symfony app already builds send through PostHog. It works with Symfony Mailer 6.4, 7.x, and 8.x. Before you start, [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+
+## Install
+
+```bash
+composer require posthog/posthog-php symfony/mailer
+```
+
+## Set up the transport
+
+Set `MAILER_DSN` to your project secret API key and your PostHog host, and register the transport factory:
+
+```bash file=.env
+MAILER_DSN=posthog+api://phs_your_project_secret_key@default
+```
+
+```yaml file=config/services.yaml
+services:
+    PostHog\Mailer\PostHogTransportFactory:
+        parent: mailer.transport_factory.abstract
+        tags: [mailer.transport_factory]
+```
+
+- **Host:** `default` sends to US Cloud. Use `eu.posthog.com` for EU Cloud, or your own host, such as `posthog.example.com:8443`.
+- **Template key:** PostHog groups an email's metrics and sends under its template key. The transport uses `posthog-php-mailer` unless you set another default, such as `?default_template_key=transactional` on the DSN, or a key per email (see below).
+
+## Send an email
+
+Send a `Symfony\Component\Mime\Email` as you do today. Each email is one send to one recipient:
+
+```php
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
+public function sendPasswordReset(MailerInterface $mailer, User $user, string $html, string $resetRequestId): void
+{
+    $email = (new Email())
+        ->from('Hedgebox <security@example.com>')
+        ->to($user->getEmail())
+        ->subject('Reset your password')
+        ->html($html);
+    $email->getHeaders()
+        ->addTextHeader('X-PostHog-Distinct-Id', $user->getId())
+        ->addTextHeader('X-PostHog-Template-Key', 'password-reset')
+        ->addTextHeader('X-PostHog-Idempotency-Key', "password-reset-$resetRequestId");
+
+    $mailer->send($email);
+}
+```
+
+The transport sends the From, the To, Cc, Bcc, Reply-To, the subject, the HTML and text, and attachments. An inline image goes under the reference the HTML uses, such as `<img src="cid:logo">` for `->embed($logo, 'logo')`. The From needs an address on a domain that your project verified. Recipients go as bare addresses, without their display names.
+
+### PostHog options
+
+Set these as headers on the email. They set the send's options and never go out as email headers:
+
+| Header | Sets |
+| --- | --- |
+| `X-PostHog-Distinct-Id` | The person the send and its [engagement events](/docs/workflows/engagement-events) belong to. Pass the distinct ID you pass to `identify()`. |
+| `X-PostHog-Template-Key` | The template key for this email, such as `password-reset`. Use the same key every time you send this email. |
+| `X-PostHog-Idempotency-Key` | A key that identifies this one email, so a retry never sends it twice. |
+| `X-PostHog-Capture-Engagement` | `true` or `false`. PostHog captures engagement events unless you pass `false`. |
+
+On Symfony Mailer 8.2 and later, Symfony's `TrackingHeader` sets engagement capture too, when opens and clicks are both on or both off.
+
+### What the transport refuses
+
+PostHog sends one email to one recipient. When it can't carry part of an email, the transport refuses the whole email before any request, with a `LogicException` that names the reason, such as `PostHog cannot send this email: multiple_to.` It never drops part of an email. It refuses:
+
+- No To, or more than one. Send one email per recipient.
+- A custom header, tags (`TagHeader`), or metadata (`MetadataHeader`).
+- An inline attachment that has no content ID and that the HTML doesn't refer to.
+- More than one From, a priority other than normal, or an envelope that differs from the email's addresses.
+- Opens and clicks tracking set to different values.
+- A body set with `setBody()` that holds a part other than the email's text, HTML, and attachments, such as an AMP part.
+
+## Send a template made in PostHog
+
+On Symfony Mailer 8.2 and later, a `RemoteTemplateEmail` sends a [transactional email you made in PostHog](/docs/workflows/transactional-emails#create-a-transactional-email). PostHog renders it with the variables you pass:
+
+```php
+use Symfony\Component\Mailer\RemoteTemplateEmail;
+
+$email = (new RemoteTemplateEmail())
+    ->from('security@example.com')
+    ->to($user->getEmail())
+    ->template('<template_id>', ['first_name' => $user->getFirstName(), 'reset_link' => $resetLink]);
+$email->getHeaders()->addTextHeader('X-PostHog-Distinct-Id', $user->getId());
+
+$mailer->send($email);
+```
+
+The template sets its own sender, subject, and content. Symfony needs a From on every email, but the transport doesn't send it. A template email with a subject, a body, Reply-To, Cc, Bcc, or attachments is refused.
+
+## Errors and retries
+
+A send that PostHog doesn't queue throws `PostHog\Mailer\PostHogTransportException`, a Symfony `TransportException`. It carries the status, the `getErrorCode()` from the [errors table](/docs/workflows/transactional-emails#errors), and the field. `isRetryable()` says whether the same send can succeed later, and `getRetryAfter()` gives the seconds to wait when PostHog asked for a wait.
+
+The transport already retries network errors, rate limits, and a `503` up to two times, with the same idempotency key.
+
+When you send through [Messenger](https://symfony.com/doc/current/mailer.html#sending-messages-async), Messenger retries a failed send again later. Set `X-PostHog-Idempotency-Key` to a key that identifies the email, such as `password-reset-<reset request ID>`. The key travels with the queued email, so every retry sends with it, and PostHog sends the email once. Without it, each retry gets a new key, and after a network error or a `503` the recipient can get the email twice.
+
+## Symfony's own PostHog bridge
+
+Symfony plans a PostHog Mailer bridge of its own, for Symfony 8.3 and later. Once it ships, prefer it on apps that can use it. It maps an email the same way. When it's installed, this transport stands aside, so the two never compete for `posthog+api://`.
+
+## Test without sending email
+
+In tests, set `MAILER_DSN=null://null` and check the emails your code sends with Symfony's [mailer assertions](https://symfony.com/doc/current/mailer.html#write-a-functional-test), such as `assertEmailCount()` and `assertEmailHeaderSame()`. To check delivery, send a real email to your own address.
