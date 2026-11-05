@@ -1,6 +1,7 @@
 export const dataPipelines = {
     name: 'Data pipelines',
     url: '/docs/data-pipelines',
+    navAppearance: 'sidebar',
     color: 'sky-blue',
     icon: 'IconPlug',
     description: 'Collect, enrich, and send data to your destinations',
@@ -1669,6 +1670,10 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/onboarding-conversations-playbook',
                     },
                     {
+                        name: 'Onboarding skills',
+                        url: '/handbook/onboarding/onboarding-skills',
+                    },
+                    {
                         name: 'Sales handover',
                         url: '/handbook/onboarding/sales-handover',
                     },
@@ -2572,6 +2577,7 @@ export const docsMenu = {
             icon: 'IconFlag',
             color: 'red',
             url: '/docs/self-driving',
+            navAppearance: 'sidebar',
             description: 'Understand PostHog and get set up',
             badge: {
                 title: 'Beta',
@@ -2858,6 +2864,10 @@ export const docsMenu = {
                                 {
                                     name: 'Snippet versioning',
                                     url: '/docs/libraries/js/snippet-versioning',
+                                },
+                                {
+                                    name: "Security",
+                                    url: "/docs/libraries/js/security",
                                 },
                                 {
                                     name: 'Persistence',
@@ -3247,6 +3257,7 @@ export const docsMenu = {
             icon: 'IconHardDrive',
             color: 'teal',
             url: '/docs/new-to-posthog/getting-hogpilled',
+            navAppearance: 'sidebar',
             description: 'What PostHog is and how to win with it',
             children: [
                 {
@@ -3629,11 +3640,12 @@ export const docsMenu = {
             icon: 'IconStack',
             color: 'salmon',
             url: '/docs/self-host',
+            navAppearance: 'sidebar',
             description: 'Self-hosting, migrations, and reverse proxies',
             children: [
                 {
                     name: 'Self-host',
-                    url: '',
+                    url: '/docs/self-host',
                     children: [
                         {
                             name: 'Overview',
@@ -3641,7 +3653,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Configure',
-                            url: '',
+                            url: '/docs/self-host/configure/instance-settings',
                             children: [
                                 {
                                     name: 'Instance settings',
@@ -4056,6 +4068,7 @@ export const docsMenu = {
             icon: 'IconToolbar',
             color: 'yellow',
             url: '/docs/toolbar',
+            navAppearance: 'sidebar',
             description: 'The toolbar, heatmaps, and other built-in tools',
             children: [
                 {
@@ -5183,7 +5196,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'What to watch',
+                    name: 'Highlights',
                     url: '/docs/replay-vision/what-to-watch',
                     icon: 'IconEye',
                     color: 'yellow',
@@ -6686,6 +6699,12 @@ export const docsMenu = {
                     url: '/docs/data-warehouse',
                     icon: 'IconHome',
                     color: 'seagreen',
+                },
+                {
+                    name: 'Is PostHog warehouse native?',
+                    url: '/docs/data-warehouse/warehouse-native',
+                    icon: 'IconQuestion',
+                    color: 'purple',
                 },
                 {
                     name: 'Setup',
@@ -8276,6 +8295,33 @@ export const docsMenu = {
                     url: '/docs/workflows/broadcasts',
                     icon: 'IconSend',
                     color: 'orange',
+                },
+                {
+                    name: 'Transactional emails',
+                },
+                {
+                    name: 'Send transactional emails',
+                    url: '/docs/workflows/transactional-emails',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows/transactional-emails',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/workflows/transactional-emails/node',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/workflows/transactional-emails/python',
+                        },
+                        {
+                            name: 'API',
+                            url: '/docs/workflows/transactional-emails/api',
+                        },
+                    ],
                 },
                 {
                     name: 'Channels',

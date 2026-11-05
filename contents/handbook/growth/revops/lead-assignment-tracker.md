@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[The Lead Assignment Tracker](https://posthog.lightning.force.com/lightning/o/Lead_Assignment_Tracker__c/list?filterName=All) in Salesforce is the source of truth for who's in the round robin, how leads are weighted, and how to manage assignments. This page explains how to use it self serve.
+<PrivateLink url="https://posthog.lightning.force.com/lightning/o/Lead_Assignment_Tracker__c/list?filterName=All">The Lead Assignment Tracker</PrivateLink> in Salesforce is the source of truth for who's in the round robin, how leads are weighted, and how to manage assignments. This page explains how to use it self serve.
 
 ### Understanding the tracker
 Navigate to the Lead Assignment Tracker section in Salesforce. There you'll see every person who's part of the round robin, along with the following columns:

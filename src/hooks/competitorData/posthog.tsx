@@ -720,7 +720,7 @@ export const posthog = {
                 features: {
                     email: true,
                     sms: true,
-                    push: false,
+                    push: true,
                     webhooks: true,
                     whatsapp: false,
                 },

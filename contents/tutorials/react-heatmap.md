@@ -134,7 +134,7 @@ Once all these settings are set as you prefer, you've set up a heatmap for your 
 
 ## Further reading
 
-- [Using the PostHog Toolbar to visualize behavior and create actions](/tutorials/toolbar)
+- [Using the PostHog Toolbar to visualize behavior and create actions](/docs/toolbar)
 - [How to create new events the easy way](/tutorials/how-to-capture-events-the-easy-way)
 - [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
 

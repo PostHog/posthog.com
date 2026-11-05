@@ -5,6 +5,7 @@ author:
     - joe-martin
 featuredImage: https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/ai_features_12f2008503.jpg
 featuredImageType: full
+ogImage: generated
 tags:
     - Product updates
 ---

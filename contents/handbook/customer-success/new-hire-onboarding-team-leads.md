@@ -83,7 +83,7 @@ Questions from me
 
 ## In-person week (usually week 2)
 
-[In-person onboarding](/handbook/people/onboarding#in-person-onboarding) covers the company-wide process. Below is how we run the CSM week over 3-4 days - there's a [4-day agenda template](https://posthog.slack.com/docs/TSS5W8YQZ/F0BNBPN78EP) to start from, which we copy into a canvas in their onboarding channel. It's a living template - add what you learn from each onboarding. 3 days can feel tight with a lot of information, but it's enough to cover all the content!
+[In-person onboarding](/handbook/people/onboarding#in-person-onboarding) covers the company-wide process. Below is how we run the CSM week over 3-4 days - there's a <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0BNBPN78EP">4-day agenda template</PrivateLink> to start from, which we copy into a canvas in their onboarding channel. It's a living template - add what you learn from each onboarding. 3 days can feel tight with a lot of information, but it's enough to cover all the content!
 
 By the end of the week they should:
 

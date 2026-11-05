@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/milk_meme_1_049755a42a.jpg
 featuredImageType: full
+ogImage: generated
 category: Product
 tags:
     - Logs

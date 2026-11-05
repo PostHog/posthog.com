@@ -9,36 +9,29 @@ availability:
 sourceId: PulumiCloud
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Pulumi connector syncs stacks, stack updates, deployments, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+[Pulumi Cloud](https://www.pulumi.com/product/pulumi-cloud/) is the managed control plane for Pulumi infrastructure as code. This connector pulls your stacks and their tags, their full update history, Pulumi Deployments runs, the Insights resource index, policy issues, organization members, daily resources under management, and organization audit logs into the PostHog data warehouse, so you can measure deployment frequency, change-failure rate, and lead time for infrastructure changes alongside your product data.
 
 ## Prerequisites
 
-Credentials that can read the data you want to sync. PostHog only reads data, so read access is enough.
+You need a Pulumi Cloud account and an access token for a member of the organization you want to sync. The **Audit logs** table additionally requires a Pulumi Cloud plan with audit logs enabled (Enterprise or Business Critical), and the **Deployments** table only has data if your organization uses Pulumi Deployments.
 
 ## Adding a data source
 
 <SourceSetupIntro />
 
-Enter your Pulumi Cloud access token and organization name to pull your infrastructure-as-code data.
+Pulumi authenticates with an access token (it starts with `pul-`). Create a personal access token on your [access tokens page](https://app.pulumi.com/account/tokens), or an organization access token from your organization's settings, and paste it into the **Access token** field. The token inherits its owner's access, so no extra scopes are required.
 
-Create a personal access token from your [Pulumi Cloud access tokens page](https://app.pulumi.com/account/tokens), or an organization access token from your organization's settings. The token inherits its owner's access, so no extra scopes are required.
-
-The organization name is the one shown in your Pulumi Cloud console URL (`app.pulumi.com/<organization>`). Audit logs additionally require a Pulumi Cloud plan with audit logs enabled.
-
-You'll be asked for:
-
-- **Access token**: for example `pul-...`.
-- **Organization**: for example `my-org`.
+The **Organization** field takes your organization name as it appears in your Pulumi Cloud console URL (`app.pulumi.com/<organization>`).
 
 ## Sync modes
 
 <SyncModes />
 
-All Pulumi tables are full refresh. Each sync replaces the contents of the table.
+**Audit logs** syncs incrementally using the API's server-side time filter, and **Stack updates** syncs incrementally by reading each stack's history newest-first and stopping at the last synced update. Both re-read a short trailing window each run so late-completing updates and boundary events are picked up. The other tables are current-state snapshots, so they sync as full refresh.
 
 ## Configuration
 
@@ -50,7 +43,8 @@ All Pulumi tables are full refresh. Each sync replaces the contents of the table
 
 ## Troubleshooting
 
-- If the connection fails with an authorization error, the access token is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
-- If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
+- **401 Unauthorized** — the access token is invalid or has been revoked. Create a new access token in Pulumi Cloud and reconnect.
+- **403 Forbidden** — the token is valid but does not have access to the requested data. Check that the token's owner is a member of the organization, and for audit logs, that your plan has audit logs enabled.
+- **Audit logs table is empty or fails** — audit logs are only available on Pulumi Cloud plans with audit logs enabled. Deselect the table if your plan does not include them.
 
 <TroubleshootingLink />

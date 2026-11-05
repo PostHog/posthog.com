@@ -182,7 +182,7 @@ Lastly, update `app.component.html` to use the `buttonText` state variable.
 
 Now if you refresh your app, you should see the button text updated to either `Control variant` or `Test variant`. 
 
-With this, you’re ready to launch your A/B test! PostHog will randomly split your users into the each variant and track whether it has an impact on the button click-through rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page in PostHog.
+With this, you’re ready to launch your A/B test! PostHog will randomly split your users into the each variant and track whether it has an impact on the button click-through rate. You can [view your test results](/docs/experiments/analyzing-results) on the experiment page in PostHog.
 
 > **💡 PostHog Tip:** You may notice the button text "flicker" while the page loads and PostHog fetches the feature flag. To fix this, you can [bootstrap the flag value](/docs/feature-flags/bootstrapping).
 
