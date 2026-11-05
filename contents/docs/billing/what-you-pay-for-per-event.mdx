@@ -24,7 +24,7 @@ Those are the only line items for events. We don't charge to store them, to quer
 
 An event goes through six jobs between your SDK and a chart.
 
-### Getting it in
+### Step 1: Getting it in
 
 [Our SDKs](/docs/libraries) batch, compress, and retry. The capture service decompresses the payload, validates it, and corrects the timestamp using the time your client says it sent the batch, so a phone that was offline for an hour still lands its events in the right minute. It also adds a UUID if the SDK didn't.
 
@@ -32,7 +32,7 @@ If capture can't write to the queue, it returns an error and the SDK tries again
 
 Without it, events from a phone with the wrong clock land on the wrong day, retries count twice, and ad blockers quietly remove traffic you never knew you had.
 
-### Not losing it
+### Step 2: Not losing it
 
 Every event goes into [Kafka](/docs/how-posthog-works/ingestion-pipeline) before anything else touches it, and capture doesn't reply to your SDK until Kafka has acknowledged the write on every in-sync replica. The queue absorbs launch-day spikes and bots, and waits out database outages. Events from the same user stay in order.
 
@@ -42,7 +42,7 @@ If an ingestion worker crashes halfway through a batch, Kafka redelivers it. Any
 
 Without it, a traffic spike or a database restart is data you never get back.
 
-### Making it mean something
+### Step 3: Making it mean something
 
 Ingestion validates each event, drops anything older than a limit you set, and runs your [transformations](/docs/data-pipelines/transformations). It adds country and city from GeoIP, gives [cookieless](/tutorials/cookieless-tracking) events a daily-rotating hash instead of a cookie, and attaches UTM and referrer data to the [session](/docs/data/sessions). Every event and property name goes into a catalog, which is how the UI, SQL autocomplete, and [PostHog AI](/docs/posthog-ai) know what exists. If something's wrong with an event, an [ingestion warning](/docs/data/ingestion-warnings) tells you which one.
 
@@ -50,23 +50,23 @@ Identified events also go through [identity resolution](/docs/product-analytics/
 
 Without it, one platform renames a property, one metric quietly splits in two, and nobody notices until the board meeting.
 
-### Storing it for seven years
+### Step 4: Storing it for years
 
 Events land in a sharded, replicated ClickHouse cluster, with properties compressed using ZSTD. Hot data sits on local NVMe and [moves to cheaper tiers](/handbook/engineering/clickhouse/clusters#storage-tiers) as it ages. Every week we look at slow queries and materialize the columns that would make them fast.
 
 We're also [rebuilding the storage format](/blog/changing-event-storage) so each property is stored once, with its real type, which makes common queries up to 2x faster. GDPR deletions run as batched jobs, because deleting anything from ClickHouse means rewriting whole partitions.
 
-Paid plans [keep events for seven years](/docs/data/events-retention) and free plans for one. You can set a shorter window.
+Paid plans [keep events for many years](/docs/data/events-retention) and free plans for one. You can set a shorter window.
 
 Without it, a single-node ClickHouse with no replica loses everything the day its disk fails, and nobody tunes it until a query starts timing out.
 
-### Querying it as often as you like
+### Step 5: Querying it as often as you like
 
 Funnels, retention, paths, lifecycle, [SQL](/docs/data-warehouse/sql), and [PostHog AI](/docs/posthog-ai) all run on the same events, and the compute for those queries is in the event price.
 
 We run guard rails so one query can't take a cluster down. A query gets 60 seconds by default and 10 minutes in the background, and each organization has a concurrency limit. Inside those limits, we don't meter queries.
 
-### Getting it out
+### Step 6: Getting it out
 
 [Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet. The first 1 million rows you export each month are free. After that, exports bill per row under [data pipelines pricing](/pricing), not the event price. The [query API](/docs/api/query) returns anything SQL can express. If you leave, your data leaves with you.
 
