@@ -110,14 +110,20 @@ export function ScreenshotFigure({
     set,
     annotations,
     alt,
+    src,
+    srcDark,
 }: {
     n?: number
     caption: string
     legend?: string
     /** Product handle, e.g. "session_replay". */
-    product: string
+    product?: string
     /** Key in that product's `screenshots` object, e.g. "overview". */
-    screenshot: string
+    screenshot?: string
+    /** An image used only by a guide, given inline instead of through the product hook. */
+    src?: string
+    /** The dark mode version of `src`. */
+    srcDark?: string
     /** Named annotation set on the screenshot – for reusing a product page's markers. */
     set?: string
     /** Markers written inline, in page order. Takes precedence over `set`. */
@@ -126,7 +132,8 @@ export function ScreenshotFigure({
 }): JSX.Element | null {
     // Checked so a missing screenshot key skips the figure entirely – an empty frame with a
     // caption reads as a broken figure rather than none.
-    const shot = useProductScreenshot(product, screenshot)
+    const productShot = useProductScreenshot(product, screenshot)
+    const shot = src ? { src, srcDark, alt, annotations: undefined } : productShot
     if (!shot?.src) {
         return null
     }
