@@ -1,0 +1,51 @@
+# Blog assets
+
+Read this guide when you write a blog post. It is the home for all guidance about blog assets. At this time, it covers only the main image.
+
+## Main image
+
+The main image (`featuredImage`) shows at the top of the post, above the headline. It is also the Open Graph image. For the full frontmatter, read [metadata](../contents/handbook/content/metadata.md).
+
+### Use the generator first
+
+For each new blog post, use the blog image generator to make a first version (v0) of the main image. This is the preferred path. Do not use the generator if the author already has a custom image.
+
+The generator does not make the final image. It gives the author a start point. The author changes the card in the generator, then exports it.
+
+### Make the generator link
+
+The generator is a Claude artifact: https://claude.ai/artifact/S4HMrMHA8g5SmmwewkKQbm
+
+To fill the fields and start the generator automatically, add `#new-` to the URL, followed by a UTF-8 JSON object in hex. Query parameters (`?title=…`) do not work, because artifact links send only the `#` fragment to the page.
+
+The JSON object has two keys:
+
+- `title` – the `title` from the post frontmatter
+- `description` – one sentence that tells what the post is about. Most blog posts do not have a `description` field, so write the sentence from the post text.
+
+This command makes the link:
+
+```bash
+node -e 'const [title, description] = process.argv.slice(1); console.log("https://claude.ai/artifact/S4HMrMHA8g5SmmwewkKQbm#new-" + Buffer.from(JSON.stringify({ title, description }), "utf8").toString("hex"))' "Post title" "One sentence about the post"
+```
+
+### Open the link for the author
+
+Open the link for the author. Use the method that you prefer:
+
+- Run `open "<link>"` (macOS) or `xdg-open "<link>"` (Linux) to open it in the author's default browser.
+- Open it in your integrated browser, if you have one.
+
+If you cannot open a browser (for example, in a cloud session), give the link to the author in your reply. Also put the link in the PR description.
+
+You cannot export the image from the generator. The author does these steps:
+
+1. Examines the card that the generator makes.
+2. Changes the card until it is correct.
+3. Downloads the card as a 1200x630 PNG.
+4. Uploads the PNG to Cloudinary with the PostHog.com uploader (**Moderator tools** > **Upload media**), and copies the URL. Read [uploading assets with Cloudinary](../contents/handbook/engineering/posthog-com/assets.mdx). Do not put blog images in the repo.
+
+### Set the frontmatter
+
+- Set `featuredImage` to the Cloudinary URL (`https://res.cloudinary.com/dmukukwp6/image/upload/...`), and set `featuredImageType: full`.
+- If the card shows the headline, do not set `ogImage: generated`. That setting draws the title on top of the image, so the title shows two times.

@@ -80,6 +80,7 @@ Reference these when working on specific areas:
 - [Data hooks](agents/data.md) – Product, customer, navigation data
 - [Window system](agents/windows.md) – Desktop OS architecture, window management
 - [Browser screenshots](agents/browser-screenshots.md) – Capturing the before/after grid a visual PR needs, GIFs for motion, and attaching them with `gh pr-assets`
+- [Blog assets](agents/blog-assets.md) – Read before you write a blog post. Make a v0 main image with the blog image generator, unless the author already has a custom image
 
 ## Boundaries
 
