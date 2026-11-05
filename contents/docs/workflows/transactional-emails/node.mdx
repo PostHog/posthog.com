@@ -27,7 +27,7 @@ const posthog = new PostHog("<ph_project_token>", {
 })
 ```
 
-- **Local evaluation:** The client starts polling flag definitions with the secret key when it starts. A key with only the **Workflow** scope can't do that, so a client that only sends email needs `enableLocalEvaluation: false`. If your application [evaluates flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too, and leave local evaluation on.
+- **Local evaluation:** The client starts polling flag definitions with the secret key when it starts. A key with only the **Transactional email** scope can't do that, so a client that only sends email needs `enableLocalEvaluation: false`. If your application [evaluates flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too, and leave local evaluation on.
 - **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `appHost` to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
 
 ## Send an email

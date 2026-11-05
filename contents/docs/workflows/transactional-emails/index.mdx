@@ -62,12 +62,12 @@ Send transactional emails with a [project secret API key](/docs/api/project-secr
 
 1. Go to [**Project secret API keys**](https://app.posthog.com/settings/project-secret-api-keys) in your project settings.
 2. Click **Create project secret API key** and give the key a label.
-3. In the scopes list, set **Workflow** to **Write**.
+3. In the scopes list, set **Transactional email** to **Write**.
 4. Copy the key. It starts with `phs_`, and you can't see it again after you leave the page.
 
 A project secret API key with this scope can send transactional emails and read their status, and nothing else. It can't read or change your templates, and it can't use any other part of the Workflows API. Keep the key on your server. Never put it in client-side code.
 
-To give a service a key that can read statuses but not send, set **Workflow** to **Read** instead.
+To give a service a key that can read statuses but not send, set **Transactional email** to **Read** instead.
 
 ## Send an email
 
