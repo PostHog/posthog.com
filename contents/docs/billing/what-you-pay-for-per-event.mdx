@@ -55,7 +55,7 @@ Ingestion validates each event, drops events older than a limit you set, and app
 
 If something's wrong with an event, you get an [ingestion warning](/docs/data/ingestion-warnings) that names it.
 
-Identified events also go through [identity resolution](/docs/product-analytics/identity-resolution). We create the person, merge their anonymous history when they identify, and update person properties in order. That's what the person profile charge pays for.
+Identified events also go through [identity resolution](/docs/product-analytics/identity-resolution). We create the person, merge their anonymous history when they identify, and update person properties in order. That's what the person profile charge pays for. It's also the hardest part to build yourself. A user who browses on their phone and signs up on their laptop is two people until something merges them, and every funnel that crosses signup is wrong until then.
 
 Without it, one platform renames a property, one metric quietly splits into two, and nobody notices until a board meeting.
 
@@ -88,6 +88,7 @@ This table assumes the build still runs in 18 months and someone owns it.
 | Getting it in | SDKs for web, iOS, Android, React Native, Flutter, and server SDKs in Node, Python, Go, Java, Ruby, PHP, .NET, and more. A public capture endpoint. | An SDK for every platform you ship on. An endpoint on the public internet. | You, when a mobile release ships a broken batcher |
 | Not losing it | Kafka with replication, overflow lanes, a dead letter queue, and replay after a crash | A queue, or none. Inserts straight into ClickHouse until it refuses them. | You, at 2 am on launch day |
 | Making it mean something | Validation, GeoIP, cookieless hashing, session attribution, a definitions catalog, and warnings | A transform step for every rule, plus the catalog your agent needs before it can query anything | You, when one platform renames a property |
+| Knowing who did it | Person profiles, anonymous-to-identified merges, and property updates in order | An identity table, merge logic that copes with two devices identifying at once, and backfills when it gets it wrong | You, when one customer shows up as two |
 | Storing it | Sharding, replication, tiering, compression, materialized columns, backups, and GDPR deletes | ClickHouse operations, upgrades validated against your real queries, and backups you've actually tested a restore from | You, when an upgrade changes a query result |
 | Querying it | Insights, SQL, AI, caching, and per-organization limits | A dashboard tool or an agent, plus limits so one query can't kill the cluster | You, when a teammate's query takes the cluster down |
 | Getting it out | Batch exports and the query API | Your own export jobs | You |
