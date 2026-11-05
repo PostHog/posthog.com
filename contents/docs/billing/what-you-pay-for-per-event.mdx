@@ -12,9 +12,11 @@ The catch is that the agent's estimate and our price aren't measuring the same t
 
 Is this page biased? Obviously. We sell the thing. But most claims link to a page you can check, and the ledger at the bottom only works with your numbers, not ours.
 
+If you haven't had a bill yet, the math is shorter. The first 1 million events each month are free, and most other PostHog products have their own free tier. A pipeline you build costs money from the first day, because the server and the hours to keep it running aren't free. Below the free tier, building it yourself is the expensive option.
+
 ## The price
 
-[Product Analytics](/product-analytics) bills per event. The first 1 million events each month are free, and the price per event drops as volume grows. These are the live rates for [anonymous events](/docs/data/anonymous-vs-identified-events), which don't carry a person profile. Drag the slider to your volume:
+[Product Analytics](/product-analytics) bills per event. The first 1 million events each month are free, and the price per event drops as volume grows. These are the live rates for [anonymous events](/docs/data/anonymous-vs-identified-events), which don't carry a person profile. Drag the slider to your volume. The same rates are also in [plain Markdown](https://posthog.com/pricing.md), for agents and anyone who'd rather read a list.
 
 <Pricing productType="product_analytics" />
 
@@ -122,7 +124,7 @@ You can put the numbers in front of a board or an investor without an asterisk. 
 
 ## Your own ledger
 
-Fill this in with your numbers.
+Fill this in with your numbers. If an agent pitched you the build, ask it to fill this in too, and to say where each number came from.
 
 | Input | Your number | Notes |
 |---|---|---|
@@ -145,7 +147,9 @@ monthly total        = storage + compute + queue + (engineer hours × loaded rat
 your cost per event  = monthly total ÷ events per month
 ```
 
-Compare the last line to a PostHog bill at the same volume. Take the monthly total from the [pricing calculator](/pricing), with any add-ons you need, and divide it by your monthly events. The free million and the falling tiers make that average lower than the rates shown above. Run it for month 1 and again for month 36.
+Compare the last line to a PostHog bill at the same volume. Take the monthly total from the [pricing calculator](/pricing), with any add-ons you need, and divide it by your monthly events. The free million and the falling tiers make that average lower than the rates shown above. Run it for month 1 and again for month 36. If an agent is doing the math, point it at our [pricing guide for agents](/pricing/agent-estimates) for the PostHog side.
+
+The ledger counts only the costs you can put a price on. It leaves out trust, correct data, the time your team spends away from your product, and the features you'll be asked to build next. Those go on top of your number, so if the two totals are close, PostHog is the cheaper option.
 
 ## When building is the right call
 
