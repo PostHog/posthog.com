@@ -23,6 +23,8 @@ If a workflow file needs a type from the SDK, put the import inside `with workfl
 
 A worker process runs for days. Create the PostHog client and the `Prompts` client once, at module level in your activities file, and reuse them from every activity. Each `Prompts` instance has its own cache, so a client created inside the activity starts cold on every run.
 
+Use a [project secret API key](/docs/api/project-secret-api-keys) with the `llm_prompt:read` scope for prompt fetches. Unlike a personal API key, it isn't tied to a person's account, so it keeps working when teammates leave.
+
 <MultiLanguage>
 
 ```python
@@ -36,7 +38,7 @@ from posthog.ai.openai import AsyncOpenAI
 posthog = Posthog(
     '<your_project_api_key>',
     host='https://us.posthog.com',
-    secret_key='<your_personal_api_key>'
+    secret_key='<your_project_secret_api_key>'
 )
 prompts = Prompts(posthog)
 openai = AsyncOpenAI(posthog_client=posthog, api_key='<your_openai_api_key>')
@@ -44,17 +46,17 @@ openai = AsyncOpenAI(posthog_client=posthog, api_key='<your_openai_api_key>')
 
 ```typescript
 // activities.ts
-import { Context } from '@temporalio/activity'
-import { PostHog } from 'posthog-node'
-import { Prompts } from '@posthog/ai'
-import { OpenAI } from '@posthog/ai/openai'
+import { Context } from "@temporalio/activity";
+import { PostHog } from "posthog-node";
+import { Prompts } from "@posthog/ai";
+import { OpenAI } from "@posthog/ai/openai";
 
-export const posthog = new PostHog('<your_project_api_key>', {
-  host: 'https://us.posthog.com',
-  personalApiKey: '<your_personal_api_key>',
-})
-export const prompts = new Prompts({ posthog })
-const openai = new OpenAI({ apiKey: '<your_openai_api_key>', posthog })
+export const posthog = new PostHog("<your_project_api_key>", {
+  host: "https://us.posthog.com",
+  personalApiKey: "<your_project_secret_api_key>",
+});
+export const prompts = new Prompts({ posthog });
+const openai = new OpenAI({ apiKey: "<your_openai_api_key>", posthog });
 ```
 
 </MultiLanguage>
@@ -87,22 +89,22 @@ async def main():
 
 ```typescript
 // worker.ts
-import { Worker } from '@temporalio/worker'
-import * as activities from './activities'
+import { Worker } from "@temporalio/worker";
+import * as activities from "./activities";
 
 async function run() {
   try {
-    await activities.prompts.getAll({ label: 'production' })
+    await activities.prompts.getAll({ label: "production" });
   } catch (error) {
-    console.error('Prompt cache warm-up failed, activities will fetch on first use', error)
+    console.error("Prompt cache warm-up failed, activities will fetch on first use", error);
   }
 
   const worker = await Worker.create({
-    taskQueue: 'support',
-    workflowsPath: require.resolve('./workflows'),
+    taskQueue: "support",
+    workflowsPath: require.resolve("./workflows"),
     activities,
-  })
-  await worker.run()
+  });
+  await worker.run();
 }
 ```
 
@@ -156,24 +158,24 @@ async def draft_reply(ticket_text: str) -> dict:
 ```typescript
 // activities.ts
 interface DraftReply {
-  reply: string | null
-  promptName?: string
-  promptVersion?: number
-  promptSource: string
+  reply: string | null;
+  promptName?: string;
+  promptVersion?: number;
+  promptSource: string;
 }
 
 export async function draftReply(ticketText: string): Promise<DraftReply> {
-  const result = await prompts.get('support-system-prompt', {
-    label: 'production',
-    fallback: 'You are a helpful support agent.',
-  })
-  const info = Context.current().info
+  const result = await prompts.get("support-system-prompt", {
+    label: "production",
+    fallback: "You are a helpful support agent.",
+  });
+  const info = Context.current().info;
 
   const response = await openai.chat.completions.create({
-    model: 'gpt-5',
+    model: "gpt-5",
     messages: [
-      { role: 'system', content: result.prompt },
-      { role: 'user', content: ticketText },
+      { role: "system", content: result.prompt },
+      { role: "user", content: ticketText },
     ],
     posthogProperties: {
       $ai_prompt_name: result.name,
@@ -181,14 +183,14 @@ export async function draftReply(ticketText: string): Promise<DraftReply> {
       temporal_workflow_id: info.workflowExecution.workflowId,
       temporal_attempt: info.attempt,
     },
-  })
+  });
 
   return {
     reply: response.choices[0].message.content,
     promptName: result.name,
     promptVersion: result.version,
     promptSource: result.source,
-  }
+  };
 }
 ```
 
@@ -223,9 +225,9 @@ from activities import draft_reply, posthog, prompts
 ```typescript
 // worker.ts
 try {
-  await worker.run()
+  await worker.run();
 } finally {
-  await activities.posthog.shutdown()
+  await activities.posthog.shutdown();
 }
 ```
 

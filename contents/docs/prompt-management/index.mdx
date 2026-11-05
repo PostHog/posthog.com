@@ -2,7 +2,7 @@
 title: Prompt management
 ---
 
-import { ProductScreenshot } from "components/ProductScreenshot"
+import { ProductScreenshot } from "components/ProductScreenshot";
 
 Prompt management lets you create and update LLM prompts directly in PostHog. When you use prompts through the SDK, they're fetched at runtime with caching and fallback support—so you can iterate on prompts without deploying code.
 
@@ -42,15 +42,15 @@ You can also manage prompts through the [PostHog MCP server](/docs/model-context
 
 The MCP server provides seven prompt management tools:
 
-| Tool | Description |
-|------|-------------|
-| `llma-prompt-list` | List all team prompts with optional name filtering |
-| `llma-prompt-get` | Get a prompt by name, including full content, optionally by version or label |
-| `llma-prompt-create` | Create a new prompt with a unique name and content |
-| `llma-prompt-update` | Publish a new version of a prompt by name, optionally with a note describing the change |
-| `llma-prompt-duplicate` | Copy a prompt's latest version to a new prompt under a new name, for forking or renaming |
-| `llma-prompt-label-set` | Point a label at a version, creating the label or moving it from another version |
-| `llma-prompt-label-delete` | Remove a label from a prompt |
+| Tool                       | Description                                                                              |
+| -------------------------- | ---------------------------------------------------------------------------------------- |
+| `llma-prompt-list`         | List all team prompts with optional name filtering                                       |
+| `llma-prompt-get`          | Get a prompt by name, including full content, optionally by version or label             |
+| `llma-prompt-create`       | Create a new prompt with a unique name and content                                       |
+| `llma-prompt-update`       | Publish a new version of a prompt by name, optionally with a note describing the change  |
+| `llma-prompt-duplicate`    | Copy a prompt's latest version to a new prompt under a new name, for forking or renaming |
+| `llma-prompt-label-set`    | Point a label at a version, creating the label or moving it from another version         |
+| `llma-prompt-label-delete` | Remove a label from a prompt                                                             |
 
 This enables teams to manage prompts programmatically from agent workflows without using the web UI.
 
@@ -312,29 +312,36 @@ response = client.chat.completions.create(
 ```
 
 ```typescript
-const result = await prompts.get('support-system-prompt', { label: 'production', fallback: 'You are a helpful assistant.' })
+const result = await prompts.get("support-system-prompt", {
+  label: "production",
+  fallback: "You are a helpful assistant.",
+});
 
-const config = result.config ?? {}
+const config = result.config ?? {};
 const response = await openai.chat.completions.create({
-    model: (config.model as string) ?? 'your-default-model',
-    temperature: (config.temperature as number) ?? 0,
-    messages: [{ role: 'system', content: result.prompt }],
-})
+  model: (config.model as string) ?? "your-default-model",
+  temperature: (config.temperature as number) ?? 0,
+  messages: [{ role: "system", content: result.prompt }],
+});
 ```
 
 </MultiLanguage>
 
 `config` is `None` (Python) or `null` (JavaScript) when the version has no config, and it's missing entirely on fallback results, so read it defensively with defaults as above. The config is cached together with the prompt, including the stale-cache fallback.
 
-## Using prompts in code
-
 ### Prerequisites
 
-- **Personal API key (`phx_...`)** – Used as Bearer auth for prompt fetches
-- **Project Token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
+- **Personal API key (`phx_...`) or [project secret API key](/docs/api/project-secret-api-keys) (`phs_...`)** – Used as Bearer auth for prompt fetches. A project secret API key with the `llm_prompt:read` scope is recommended for services, since it isn't tied to a person's account.
+- **Project token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
 - **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
 
 When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys.
+Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
+
+- **Project token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
+- **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
+
+When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys. Use a [project secret API key](/docs/api/project-secret-api-keys/overview) when you want a server-to-server credential that isn't tied to a specific person's account.
 Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
 
 ### Python
@@ -343,7 +350,7 @@ Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.
 from posthog import Posthog
 from posthog.ai.prompts import Prompts
 
-# Initialize with PostHog client
+# Initialize with PostHog client (using a personal API key)
 posthog = Posthog(
     '<your_project_api_key>',
     host='https://us.posthog.com',
@@ -351,9 +358,17 @@ posthog = Posthog(
 )
 prompts = Prompts(posthog)
 
+# Or initialize with a project secret API key (for server-to-server prompt fetches)
+posthog = Posthog(
+    '<your_project_api_key>',
+    host='https://us.posthog.com',
+    secret_key='<your_project_secret_api_key>'  # Must have llm_prompt:read scope
+)
+prompts = Prompts(posthog)
+
 # Or initialize directly
 prompts = Prompts(
-    personal_api_key='<your_personal_api_key>',
+    personal_api_key='<your_personal_api_key>',  # Or project secret API key
     project_api_key='<your_project_api_key>',
     host='https://us.posthog.com'
 )
@@ -399,52 +414,60 @@ config = result.config or {}
 ### JavaScript/TypeScript
 
 ```typescript
-import { Prompts } from '@posthog/ai'
-import { PostHog } from 'posthog-node'
+import { Prompts } from "@posthog/ai";
+import { PostHog } from "posthog-node";
 
-// Initialize with PostHog client
-const posthog = new PostHog('<your_project_api_key>', {
-  host: 'https://us.posthog.com',
-  personalApiKey: '<your_personal_api_key>'
-})
+// Initialize with PostHog client (using a personal API key)
+const posthog = new PostHog("<your_project_api_key>", {
+  host: "https://us.posthog.com",
+  personalApiKey: "<your_personal_api_key>",
+});
 
-const prompts = new Prompts({ posthog })
+const prompts = new Prompts({ posthog });
+
+// Or initialize with a project secret API key (for server-to-server prompt fetches)
+const posthog = new PostHog("<your_project_api_key>", {
+  host: "https://us.posthog.com",
+  personalApiKey: "<your_project_secret_api_key>", // Must have llm_prompt:read scope
+});
+
+const prompts = new Prompts({ posthog });
 
 // Or initialize directly (without PostHog client)
 const prompts = new Prompts({
-  personalApiKey: '<your_personal_api_key>',
-  projectApiKey: '<your_project_api_key>',
-  host: 'https://us.posthog.com'
-})
+  personalApiKey: "<your_personal_api_key>", // Or project secret API key
+  projectApiKey: "<your_project_api_key>",
+  host: "https://us.posthog.com",
+});
 
 // Fetch the latest version of a prompt
 // Returns a PromptResult with prompt, name, version, and source
-const result = await prompts.get('support-system-prompt', {
+const result = await prompts.get("support-system-prompt", {
   cacheTtlSeconds: 600,
-  fallback: 'You are a helpful assistant.'
-})
+  fallback: "You are a helpful assistant.",
+});
 
 // Fetch the version a label points to (recommended for production apps)
-const result = await prompts.get('support-system-prompt', {
-  label: 'production',
-  fallback: 'You are a helpful assistant.'
-})
+const result = await prompts.get("support-system-prompt", {
+  label: "production",
+  fallback: "You are a helpful assistant.",
+});
 
 // Or fetch a specific version
-const result = await prompts.get('support-system-prompt', {
+const result = await prompts.get("support-system-prompt", {
   version: 2,
-  fallback: 'You are a helpful assistant.'
-})
+  fallback: "You are a helpful assistant.",
+});
 
 // Compile with variables
 const systemPrompt = prompts.compile(result.prompt, {
-  company: 'Acme Corp',
-  tier: 'premium',
-  userName: 'Alice'
-})
+  company: "Acme Corp",
+  tier: "premium",
+  userName: "Alice",
+});
 
 // Model parameters or other settings stored with the version (null when there are none)
-const config = result.config ?? {}
+const config = result.config ?? {};
 
 // Use in your LLM call
 // ... your OpenAI/Anthropic call here
@@ -472,16 +495,16 @@ latest = prompts.get('support-system-prompt', with_metadata=True)
 
 ```typescript
 // One request loads every prompt the 'production' label points to
-const prodPrompts = await prompts.getAll({ label: 'production' })
+const prodPrompts = await prompts.getAll({ label: "production" });
 
 // Served from cache, no extra request
-const result = await prompts.get('support-system-prompt', { label: 'production' })
+const result = await prompts.get("support-system-prompt", { label: "production" });
 
 // Without a label, one request loads the latest version of every prompt
-const allPrompts = await prompts.getAll()
+const allPrompts = await prompts.getAll();
 
 // Served from cache, no extra request
-const latest = await prompts.get('support-system-prompt')
+const latest = await prompts.get("support-system-prompt");
 ```
 
 </MultiLanguage>
@@ -521,18 +544,19 @@ response = client.chat.completions.create(
 
 ```typescript
 const response = await openai.chat.completions.create({
-    model: "gpt-5",
-    messages: [{ role: "system", content: systemPrompt }],
-    posthogProperties: {
-        $ai_prompt_name: "support-system-prompt",
-        $ai_prompt_version: 2
-    }
-})
+  model: "gpt-5",
+  messages: [{ role: "system", content: systemPrompt }],
+  posthogProperties: {
+    $ai_prompt_name: "support-system-prompt",
+    $ai_prompt_version: 2,
+  },
+});
 ```
 
 </MultiLanguage>
 
 Once linked, you can:
+
 - Filter generations by prompt name and version
 - View related traces from the prompt detail page
 - See which specific version was used in each trace
