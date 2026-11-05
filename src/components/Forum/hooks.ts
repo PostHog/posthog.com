@@ -13,7 +13,8 @@ const API = `${process.env.GATSBY_SQUEAK_API_HOST}/api`
 export type ForumSort = 'latest' | 'active' | 'popular'
 export type ForumTopic = StrapiRecord<ForumTopicData>
 export type ForumTag = StrapiRecord<ForumTagData>
-export type DeliveryMode = ForumSubscription['deliveryMode']
+// What a member can pick. 'eachPost' is only on old subscriptions and sends no email.
+export type DeliveryMode = Exclude<ForumSubscription['deliveryMode'], 'eachPost'>
 
 export const toSlug = (label: string) => slugify(label, { lower: true, strict: true })
 
