@@ -1,0 +1,134 @@
+---
+title: Send Better Auth emails with PostHog
+sidebar: Docs
+showTitle: true
+---
+
+[Better Auth](https://www.better-auth.com) calls your code when a user needs to verify their email address or reset their password. This guide sends those emails as [transactional emails](/docs/workflows/transactional-emails) with the [Node.js SDK](/docs/workflows/transactional-emails/node), from version 5.62.0. You write the email in your code, and Better Auth answers the request without waiting for the send.
+
+Before you start, [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key) and [set up a sender](/docs/workflows/configure-channels).
+
+## Install
+
+```bash
+npm install posthog-node
+```
+
+## Set up the client
+
+Create one PostHog client on your server. Keep the secret key on the server, never in client-side code.
+
+```ts
+// lib/posthog.ts
+import { PostHog } from "posthog-node"
+
+export const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    // This client only sends email, so it doesn't poll flag definitions with the secret key
+    enableLocalEvaluation: false,
+})
+```
+
+If your app already has a PostHog client, reuse it and set `secretKey` on it. See [set up the client](/docs/workflows/transactional-emails/node#set-up-the-client) for local evaluation and hosts.
+
+## Send the emails
+
+Give Better Auth a `sendVerificationEmail` and a `sendResetPassword` function, and a handler for background tasks:
+
+```ts
+// lib/auth.ts
+import { betterAuth } from "better-auth"
+import { waitUntil } from "@vercel/functions"
+import { posthog } from "./posthog"
+
+type AuthEmail = {
+    to: string
+    distinctId: string
+    templateKey: string
+    subject: string
+    text: string
+}
+
+async function sendAuthEmail(email: AuthEmail) {
+    const { error } = await posthog.emails.send(email)
+    if (error) {
+        // An EmailError. Better Auth logs it
+        throw error
+    }
+}
+
+export const auth = betterAuth({
+    advanced: {
+        // Better Auth hands each email to waitUntil and answers the request at once
+        backgroundTasks: { handler: waitUntil },
+    },
+    emailVerification: {
+        sendOnSignUp: true,
+        sendVerificationEmail: async ({ user, url }) => {
+            await sendAuthEmail({
+                to: user.email,
+                distinctId: user.id,
+                templateKey: "verify-email",
+                subject: "Verify your email address",
+                text: `Click the link to verify your email: ${url}`,
+            })
+        },
+    },
+    emailAndPassword: {
+        enabled: true,
+        sendResetPassword: async ({ user, url }) => {
+            await sendAuthEmail({
+                to: user.email,
+                distinctId: user.id,
+                templateKey: "reset-password",
+                subject: "Reset your password",
+                text: `Click the link to reset your password: ${url}`,
+            })
+        },
+    },
+})
+```
+
+- **Background sends:** With `advanced.backgroundTasks`, Better Auth passes each email to the handler and answers the request without waiting for it, so the response time doesn't tell anyone whether an account exists. Without a handler, Better Auth waits for the send. On Cloudflare Workers, pass a handler that calls the request's `ctx.waitUntil`. On a long-running Node.js server, the email finishes after the response anyway, so pass `handler: (promise) => { promise.catch(console.error) }`.
+- **Errors:** `send` returns `{ data, error }` and doesn't throw. `sendAuthEmail` throws the `error`, so Better Auth logs it, with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). When a user asks for a new verification email, Better Auth waits for the send, and the request fails with the error.
+- **Retries:** The client retries network errors, rate limits, and a `503` with the same idempotency key, so a retry never sends the email twice.
+- **Users:** `distinctId: user.id` records each email and its [engagement events](/docs/workflows/engagement-events) on the user's person. Pass the same ID to `identify()`.
+- **Key:** `templateKey` names the email, so PostHog groups each email's metrics and sends under it.
+- **Sender:** PostHog sends from the project's default sender. To send from another verified address, add `from`, such as `from: "Hedgebox <security@example.com>"`.
+- **HTML:** To send HTML, pass `html` next to `text` or in its place. For a [React Email](https://react.email) component, see [send content from your code](/docs/workflows/transactional-emails/node#send-content-from-your-code).
+
+## Send from a job queue
+
+When a job queue already sends your app's emails, add a job in Better Auth's function and send the email in the job:
+
+```ts
+sendResetPassword: async ({ user, url }) => {
+    await emailQueue.add("reset-password", { to: user.email, userId: user.id, url })
+},
+```
+
+```ts
+export async function sendResetPasswordJob(job) {
+    const { to, userId, url } = job.data
+    const { error } = await posthog.emails.send({
+        to,
+        distinctId: userId,
+        templateKey: "reset-password",
+        subject: "Reset your password",
+        text: `Click the link to reset your password: ${url}`,
+        // The queue retries the job, with the same key each time
+        idempotencyKey: `reset-password-${job.id}`,
+        maxRetries: 0,
+    })
+    if (error) {
+        throw error
+    }
+}
+```
+
+The idempotency key comes from the job, so a retry of the job never sends the email twice. Don't put the reset token or the link in the key.
+
+## Check that it works
+
+Sign up with your own email address, and open the link in the email. Each email appears under its key on the **Transactional** page in PostHog, with its sends and its [status](/docs/workflows/transactional-emails#check-an-emails-status).

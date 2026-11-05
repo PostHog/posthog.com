@@ -8313,6 +8313,10 @@ export const docsMenu = {
                             name: 'API',
                             url: '/docs/workflows/transactional-emails/api',
                         },
+                        {
+                            name: 'Better Auth',
+                            url: '/docs/workflows/transactional-emails/better-auth',
+                        },
                     ],
                 },
                 {
