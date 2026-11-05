@@ -67,7 +67,11 @@ We have several workflows to keep tickets moving:
 
 ## Managing service level agreements
 
-SLAs are the biggest set of workflows we have. We use three SLA types:
+SLAs are the biggest set of workflows we have. Most helpdesks have SLAs built in: you set your working hours and a policy per plan, and the tool decides behind the scenes when each deadline starts, pauses, and stops. In Workflows, nothing happens unless you say so. Every point where a deadline gets set or cleared is a step in a workflow, with its own working hours.
+
+That's more to set up, but it means I decide exactly how our SLAs behave, rather than working around someone else's idea of when a clock should start. I could give some customers different working hours, or put certain tickets on a 24/7 clock. We don't need that today, but nothing stops us. And because I describe what I want and AI builds the workflow, the extra setup is mostly a conversation, not hours in an editor.
+
+We use three types of SLA deadline:
 
 | SLA | Set when | Based on |
 | --- | --- | --- |
@@ -75,7 +79,7 @@ SLAs are the biggest set of workflows we have. We use three SLA types:
 | Next response time (NRT) | The customer replies, or we reopen a ticket | Segment and plan, rechecked on every reply |
 | Update time | We respond to the customer and the ticket is still new or open | The ticket's plan tag |
 
-Other workflows clear the SLA when a ticket moves to resolved, pending, or on hold.
+When a ticket moves to pending, resolved, or on hold, a separate workflow clears its deadline, so the clock stops while we're waiting on the customer.
 
 ### Setting the first response time
 
