@@ -7,7 +7,7 @@
     },
     "headers": [
         {
-            "source": "/docs/libraries/:sdk/:page(\\d+|migration):ext(\\.md)?",
+            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x|migration):ext(\\.md)?",
             "headers": [
                 {
                     "key": "X-Robots-Tag",

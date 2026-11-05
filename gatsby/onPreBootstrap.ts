@@ -131,7 +131,9 @@ async function writeSdkMarkdownReferences(): Promise<void> {
             attributes.referenceId.replace(/^posthog-/, '')
         )
         fs.mkdirSync(dir, { recursive: true })
-        fs.writeFileSync(path.join(dir, `${attributes.version}.md`), attributes.markdown)
+        // A major version, such as 7, is served at 7.x.x. Other pages keep their name.
+        const page = isNaN(Number(attributes.version)) ? attributes.version : `${attributes.version}.x.x`
+        fs.writeFileSync(path.join(dir, `${page}.md`), attributes.markdown)
     }
 }
 
