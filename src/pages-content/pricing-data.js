@@ -285,7 +285,7 @@ const faqs = [
                 </p>
                 <p>
                     You can read how we stack up against competitors like{' '}
-                    <Link to="/blog/posthog-vs-amplitude">Amplitude</Link>,{' '}
+                    <Link to="/compare/posthog-vs-amplitude">Amplitude</Link>,{' '}
                     <Link to="/blog/posthog-vs-mixpanel">Mixpanel</Link>,{' '}
                     <Link to="/compare/posthog-vs-heap">Heap</Link>,{' '}
                     <Link to="/compare/posthog-vs-fullstory">FullStory</Link>,{' '}
