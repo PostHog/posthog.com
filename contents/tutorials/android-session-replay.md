@@ -203,7 +203,6 @@ class MySessionReplaysApplication : Application() {
             host = POSTHOG_HOST 
         ).apply {
             sessionReplay = true
-            sessionReplayConfig.maskAllTextInputs = false // Whether all text and text input fields are masked or redacted (default is enabled)
         }
         PostHogAndroid.setup(this, config)
     }
