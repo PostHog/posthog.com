@@ -42,8 +42,8 @@ You cannot export the image from the generator. The author does these steps:
 
 1. Examines the card that the generator makes.
 2. Changes the card until it is correct.
-3. Exports the card as a 1200x630 PNG.
-4. Uploads the PNG to Cloudinary with the posthog.com uploader (**Moderator tools** > **Upload media**), and copies the URL. Read [uploading assets with Cloudinary](../contents/handbook/engineering/posthog-com/assets.mdx). Do not put blog images in the repo.
+3. Downloads the card as a 1200x630 PNG.
+4. Uploads the PNG to Cloudinary with the PostHog.com uploader (**Moderator tools** > **Upload media**), and copies the URL. Read [uploading assets with Cloudinary](../contents/handbook/engineering/posthog-com/assets.mdx). Do not put blog images in the repo.
 
 ### Set the frontmatter
 
