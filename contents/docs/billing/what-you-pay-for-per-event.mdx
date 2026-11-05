@@ -4,7 +4,11 @@ title: How much can an event cost anyway?
 
 import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
-You looked at the bill, and an agent told you it could build the same thing on ClickHouse in a weekend. It can. But to compare the two bills, you need to know what the per-event price pays for. This page itemizes it.
+You looked at the bill, and an agent told you it could build the same thing on ClickHouse in a weekend. It can. We've watched it happen, and the first month's cloud invoice usually looks great.
+
+The catch is that the agent's estimate and our price aren't measuring the same thing. One covers a weekend. The other covers seven years of storage, every query you'll ever run on those events, and the person who gets paged when it breaks. So before you compare the two bills, you need to know what the per-event price pays for. This page itemizes it.
+
+Is this page biased? Obviously. We sell the thing. But every claim links to a page you can check, and the ledger at the bottom only works with your numbers, not ours.
 
 ## The price
 
@@ -12,9 +16,9 @@ You looked at the bill, and an agent told you it could build the same thing on C
 
 <Pricing productType="product_analytics" />
 
-Identified events add a person profile charge on top. The [pricing page](/pricing) has the full tables for both event types and a calculator.
+Is the anonymous price really that low? Yes. Anonymous events skip person processing, which is [the most expensive step in our pipeline](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper), so we charge less for them. Identified events add a person profile charge on top. The [pricing page](/pricing) has the full tables for both event types and a calculator.
 
-That's every line item for events. We don't charge separately for storing them or for querying them in PostHog. The rest of this page is what that one price covers.
+That's every line item for events. We don't charge for storing them. We don't charge for querying them in PostHog. We don't charge per seat either, so invite the whole company. The rest of this page is what that one price covers.
 
 ## What happens to one event
 
@@ -75,6 +79,8 @@ Without it, a cluster you run yourself bills per node-hour whether anyone querie
 
 ## What you own if you build it
 
+This is the honest version of the build-it-yourself plan. Not the weekend version. The version where it's still running in 18 months and someone has to own it.
+
 | Job | What PostHog runs | What you run instead | Who gets paged |
 |---|---|---|---|
 | Getting it in | SDKs for web, iOS, Android, React Native, Flutter, and server SDKs in Node, Python, Go, Java, Ruby, PHP, .NET, and more. A public capture endpoint. | An SDK for every platform you ship on. An endpoint on the public internet. | You, when a mobile release ships a broken batcher |
@@ -85,6 +91,8 @@ Without it, a cluster you run yourself bills per node-hour whether anyone querie
 | Getting it out | Batch exports and the query API | Your own export jobs | You |
 
 ## Four costs your agent's estimate leaves out
+
+Agents are good at estimating the parts of a system they can see in a code sample. These are the four they can't.
 
 ### Storage for years, not months
 
@@ -131,12 +139,21 @@ Compare the last line to a PostHog bill at the same volume. Take the monthly tot
 
 ## When building is the right call
 
-- You sell analytics infrastructure, so the pipeline is your product.
-- You already run ClickHouse for something else, and a data team treats it like a product.
-- Your data doesn't fit an events table: wide logs, sensor-rate time series, or rows you need to update in place.
+We'd be lying if we said never. There are three cases where we'd build it too.
 
-If none of those apply, paying per event is cheaper.
+- **You sell analytics infrastructure.** The pipeline is your product, so the engineering time is the business, not overhead.
+- **You already run ClickHouse for something else.** You have a data team that treats it like a product, with on-call, upgrades, and tested backups. Adding an events table to a cluster you already operate is a different decision from standing one up.
+- **Your data doesn't fit an events table.** Wide logs, sensor-rate time series, or rows you need to update in place. Our pipeline is built for append-only events, and we'd rather tell you that now.
 
-## Cut the bill without leaving
+If none of those apply, paying per event is cheaper. And if you're not sure, the ledger above will tell you faster than we can.
 
-[Capture fewer events](/docs/product-analytics/cutting-costs), send [anonymous events](/docs/data/anonymous-vs-identified-events) where you don't need a person profile, and set a [billing limit](/docs/billing/limits-alerts). A [shorter retention window](/docs/data/events-retention#custom-retention) doesn't lower the bill, because you pay when an event is ingested, not while it's stored, and deleted events don't come back.
+## How to control costs without vibe-coding
+
+Every PostHog product includes a large free tier that's specifically designed to get early-stage teams to product-market fit. If you're past that and still struggling with costs, there are ways to cut your bill that don't involve running a database.
+
+- [Capture fewer events](/docs/product-analytics/cutting-costs) in total. Autocapture noise and an `identify()` call on every page are the two we see most.
+- Send [anonymous events](/docs/data/anonymous-vs-identified-events) where you don't need person data. Marketing site traffic and backend events rarely do.
+- Set a [billing limit](/docs/billing/limits-alerts) so you know the most you'll pay in a month.
+- Set a [shorter retention window](/docs/data/events-retention#custom-retention) if seven years is more data than you want around. It doesn't lower the bill, because you pay when an event is ingested, not while it's stored, and deleted events don't come back.
+
+If none of that gets you where you need to be, [talk to us](/talk-to-a-human). We'd rather help you tune it than watch you rebuild it.
