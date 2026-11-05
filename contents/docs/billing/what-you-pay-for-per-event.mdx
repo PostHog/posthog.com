@@ -52,7 +52,7 @@ If a single ID sends more than about 5,000 events a minute, it moves to an overf
 
 If an ingestion worker crashes halfway through a batch, Kafka redelivers it. Anything we can't process goes to a dead letter queue instead of disappearing.
 
-Without it, a traffic spike or a database restart is data you never get back.
+Without it, a traffic spike or a database restart can mean you lose your precious data for good. 
 
 ### Step 3: Making it mean something
 
