@@ -15,6 +15,8 @@ export type ForumTopic = StrapiRecord<ForumTopicData>
 export type ForumTag = StrapiRecord<ForumTagData>
 // What a member can pick. 'eachPost' is only on old subscriptions and sends no email.
 export type DeliveryMode = Exclude<ForumSubscription['deliveryMode'], 'eachPost'>
+// A subscription as the UI sees it: old 'eachPost' rows read as 'none', which is what they get.
+export type MemberSubscription = Omit<ForumSubscription, 'deliveryMode'> & { deliveryMode: DeliveryMode }
 
 export const toSlug = (label: string) => slugify(label, { lower: true, strict: true })
 
@@ -254,7 +256,12 @@ export const useForumSubscriptions = () => {
     const { data, mutate } = useSWR<{ data: ForumSubscription[] }>(user ? ['forum-subscriptions', user.id] : null, () =>
         request('/forum-subscriptions')
     )
-    const subscriptions = data?.data ?? []
+    const subscriptions = (data?.data ?? []).map(
+        (sub): MemberSubscription => ({
+            ...sub,
+            deliveryMode: sub.deliveryMode === 'eachPost' ? 'none' : sub.deliveryMode,
+        })
+    )
 
     return {
         // Signed in, and the list has not arrived yet.

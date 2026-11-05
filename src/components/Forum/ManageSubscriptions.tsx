@@ -3,8 +3,7 @@ import { IconBell, IconX } from '@posthog/icons'
 import Modal from 'components/RadixUI/Modal'
 import OSButton from 'components/OSButton'
 import DialogSelect from './DialogSelect'
-import { ForumSubscription } from 'lib/strapi'
-import { DeliveryMode, useForumSubscriptions, useForumTopics } from './hooks'
+import { DeliveryMode, MemberSubscription, useForumSubscriptions, useForumTopics } from './hooks'
 import TopicIcon from './TopicIcon'
 
 // No emails or the daily digest. Every subscription shows its posts in Following.
@@ -13,7 +12,7 @@ const deliveryModes: { value: DeliveryMode; label: string }[] = [
     { value: 'dailyDigest', label: 'Daily digest' },
 ]
 
-const Row = ({ subscription }: { subscription: ForumSubscription }) => {
+const Row = ({ subscription }: { subscription: MemberSubscription }) => {
     const { topics } = useForumTopics()
     const { subscribe, unsubscribe } = useForumSubscriptions()
     const topic = subscription.forumTopic
@@ -34,8 +33,7 @@ const Row = ({ subscription }: { subscription: ForumSubscription }) => {
             <div className="w-40">
                 <DialogSelect
                     options={deliveryModes.map((mode) => ({ label: mode.label, value: mode.value }))}
-                    // Old "Every post" subscriptions no longer send email, so they show as "No emails".
-                    value={subscription.deliveryMode === 'eachPost' ? 'none' : subscription.deliveryMode}
+                    value={subscription.deliveryMode}
                     onChange={(mode) => subscribe(target, mode)}
                 />
             </div>

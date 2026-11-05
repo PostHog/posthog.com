@@ -6,7 +6,7 @@ import { useApp } from '../../context/App'
 import { ForumTopic, useForumSubscriptions } from './hooks'
 
 // The same bell as a thread's reply emails. It turns a daily digest on or off. Manage subscriptions can switch
-// a subscription to no emails, or, for moderators, to "Every post".
+// a subscription to no emails.
 export default function TopicSubscribeButton({ topic }: { topic: ForumTopic }) {
     const { user } = useUser()
     const { openSignIn } = useApp()
