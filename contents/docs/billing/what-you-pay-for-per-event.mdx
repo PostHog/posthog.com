@@ -144,8 +144,6 @@ Your first build gives you an events table and a dashboard. A week later, someon
 
 This adds a lot of work and scope over time. You can trust us on that. 
 
-This adds a lot of work and scope over time. You can trust us on that. 
-
 In PostHog, the same events already power [feature flag targeting](/docs/feature-flags), [experiment metrics](/docs/experiments), and the filters in [Session Replay](/docs/session-replay). You pay for an event once, and every product can use it. An event store you build talks to nothing until you write the connection yourself. Our post on [building your own feature flags](/blog/build-or-buy-feature-flags) covers the same trade-off.
 
 ### Trust
@@ -173,7 +171,7 @@ Fill this in with your numbers. If an agent is helping with your estimate, ask i
 In plain English, work out how much data you'll store by a given month and what that costs. Add the servers and the people, then divide by the number of events you send. As a formula:
 
 ```
-GB stored at month N = events × bytes × replicas × N ÷ 1,000,000,000
+GB stored at month N = events × bytes × replicas × min(N, months retained) ÷ 1,000,000,000
 storage at month N   = GB stored × price per GB-month
 monthly total        = storage + compute + queue + (engineer hours × loaded rate)
 your cost per event  = monthly total ÷ events per month
