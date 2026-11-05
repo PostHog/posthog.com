@@ -138,7 +138,7 @@ export const transactional: CarouselSlide[] = [
                     },
                     {
                         label: 'Sends',
-                        description: 'Every send with its status and log messages, and on the recipient’s person.',
+                        description: "Every send with its status and log messages, and on the recipient's person.",
                     },
                     {
                         label: 'Versions',
@@ -159,8 +159,8 @@ export const transactional: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Every send returns a message ID. Every failure returns a code you can branch on. Nothing goes out
-                    twice.
+                    Each send returns a message ID, each failure returns an error code you can branch on, and an
+                    idempotency key means a retry never sends twice.
                 </p>
                 {list([
                     {
@@ -198,12 +198,12 @@ export const transactional: CarouselSlide[] = [
         icon: <IconDecisionTree className="size-5" />,
         progressBar: 'bg-orange',
         layout: 'stack',
-        heading: 'Delivery you can rely on',
+        heading: 'Out the door the moment you call send',
         description: (
             <>
                 <p>
-                    A transactional email goes out the moment you call send, from a domain you verified, and nothing is
-                    dropped without telling you.
+                    There is no queue of marketing email in front of your password reset. It goes out when you call
+                    send, from a domain you verified, and if PostHog refuses an address it tells you why.
                 </p>
                 {list([
                     {
@@ -214,7 +214,7 @@ export const transactional: CarouselSlide[] = [
                         label: 'Only hard bounces block',
                         description: (
                             <>
-                                The only address PostHog refuses is one that can’t receive mail, and the API says so
+                                The only address PostHog refuses is one that can't receive mail, and the API says so
                                 with <InlineCode>recipient_suppressed</InlineCode> instead of dropping the email.
                             </>
                         ),
@@ -244,7 +244,7 @@ export const transactional: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Delivery is the start. Every send sits on the person’s timeline next to their events, replays, and
+                    Delivery is the start. Every send sits on the person's timeline next to their events, replays, and
                     flags, so you can see whether the reset email got them back in.
                 </p>
                 {list([
@@ -289,11 +289,11 @@ export const transactional: CarouselSlide[] = [
                     {
                         label: 'No tracking redirects',
                         description:
-                            'Link clicks aren’t tracked, so a token in a reset link never passes through a redirect.',
+                            "Link clicks aren't tracked, so a token in a reset link never passes through a redirect.",
                     },
                     {
                         label: 'Still observable',
-                        description: 'Deliveries, opens, bounces, and the email’s status are still recorded.',
+                        description: "Deliveries, opens, bounces, and the email's status are still recorded.",
                     },
                 ])}
             </>
