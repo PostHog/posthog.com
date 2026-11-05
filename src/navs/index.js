@@ -2898,14 +2898,16 @@ export const docsMenu = {
                                 {
                                     name: 'Reference',
                                     url: '/docs/libraries/android/reference',
-                                },
-                                {
-                                    name: 'Reference 3.x.x',
-                                    url: '/docs/libraries/android/3.x.x',
-                                },
-                                {
-                                    name: 'Reference 4.x.x (experimental)',
-                                    url: '/docs/libraries/android/4.x.x',
+                                    children: [
+                                        {
+                                            name: '3.x.x',
+                                            url: '/docs/libraries/android/3.x.x',
+                                        },
+                                        {
+                                            name: '4.x.x (experimental)',
+                                            url: '/docs/libraries/android/4.x.x',
+                                        },
+                                    ],
                                 },
                                 {
                                     name: 'Migration guides',
@@ -2935,14 +2937,16 @@ export const docsMenu = {
                                 {
                                     name: 'Reference',
                                     url: '/docs/libraries/flutter/reference',
-                                },
-                                {
-                                    name: 'Reference 5.x.x',
-                                    url: '/docs/libraries/flutter/5.x.x',
-                                },
-                                {
-                                    name: 'Reference 6.x.x (experimental)',
-                                    url: '/docs/libraries/flutter/6.x.x',
+                                    children: [
+                                        {
+                                            name: '5.x.x',
+                                            url: '/docs/libraries/flutter/5.x.x',
+                                        },
+                                        {
+                                            name: '6.x.x (experimental)',
+                                            url: '/docs/libraries/flutter/6.x.x',
+                                        },
+                                    ],
                                 },
                             ],
                         },
@@ -2957,14 +2961,16 @@ export const docsMenu = {
                                 {
                                     name: 'Reference',
                                     url: '/docs/libraries/go/reference',
-                                },
-                                {
-                                    name: 'Reference 1.x.x',
-                                    url: '/docs/libraries/go/1.x.x',
-                                },
-                                {
-                                    name: 'Reference 2.x.x (experimental)',
-                                    url: '/docs/libraries/go/2.x.x',
+                                    children: [
+                                        {
+                                            name: '1.x.x',
+                                            url: '/docs/libraries/go/1.x.x',
+                                        },
+                                        {
+                                            name: '2.x.x (experimental)',
+                                            url: '/docs/libraries/go/2.x.x',
+                                        },
+                                    ],
                                 },
                                 {
                                     name: 'Migration guides',
@@ -3003,14 +3009,16 @@ export const docsMenu = {
                                 {
                                     name: 'Reference',
                                     url: '/docs/libraries/ios/reference',
-                                },
-                                {
-                                    name: 'Reference 3.x.x',
-                                    url: '/docs/libraries/ios/3.x.x',
-                                },
-                                {
-                                    name: 'Reference 4.x.x (experimental)',
-                                    url: '/docs/libraries/ios/4.x.x',
+                                    children: [
+                                        {
+                                            name: '3.x.x',
+                                            url: '/docs/libraries/ios/3.x.x',
+                                        },
+                                        {
+                                            name: '4.x.x (experimental)',
+                                            url: '/docs/libraries/ios/4.x.x',
+                                        },
+                                    ],
                                 },
                                 {
                                     name: 'Migration guides',
@@ -3127,14 +3135,16 @@ export const docsMenu = {
                                 {
                                     name: 'Reference',
                                     url: '/docs/libraries/rust/reference',
-                                },
-                                {
-                                    name: 'Reference 0.x.x',
-                                    url: '/docs/libraries/rust/0.x.x',
-                                },
-                                {
-                                    name: 'Reference 1.x.x (experimental)',
-                                    url: '/docs/libraries/rust/1.x.x',
+                                    children: [
+                                        {
+                                            name: '0.x.x',
+                                            url: '/docs/libraries/rust/0.x.x',
+                                        },
+                                        {
+                                            name: '1.x.x (experimental)',
+                                            url: '/docs/libraries/rust/1.x.x',
+                                        },
+                                    ],
                                 },
                                 {
                                     name: 'Migration guides',
