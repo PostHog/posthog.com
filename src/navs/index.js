@@ -3071,14 +3071,16 @@ export const docsMenu = {
                                 {
                                     name: 'Reference',
                                     url: '/docs/libraries/python/reference',
-                                },
-                                {
-                                    name: 'Reference 7.x.x',
-                                    url: '/docs/libraries/python/7.x.x',
-                                },
-                                {
-                                    name: 'Reference 8.x.x (experimental)',
-                                    url: '/docs/libraries/python/8.x.x',
+                                    children: [
+                                        {
+                                            name: '7.x.x',
+                                            url: '/docs/libraries/python/7.x.x',
+                                        },
+                                        {
+                                            name: '8.x.x (experimental)',
+                                            url: '/docs/libraries/python/8.x.x',
+                                        },
+                                    ],
                                 },
                                 {
                                     name: 'Migration guides',
