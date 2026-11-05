@@ -931,7 +931,7 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
 
-**MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`.
+**MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`. To decide if the MCP server fits a task, read the [MCP brief](https://posthog.com/mcp.md): what it does, its limits, safety controls, and the full tool list.
 
 `
 

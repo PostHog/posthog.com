@@ -126,11 +126,14 @@ export default function WaitingRoom(): JSX.Element {
         const cover = el?.firstElementChild as HTMLElement | undefined
         if (!el || !cover) return
         const unit = cover.getBoundingClientRect().width
-        if (!isPaging()) {
-            toMiddleCopy(el)
-            target.current = Math.round(el.scrollLeft / unit) * unit
-        }
-        target.current += direction * Math.round(el.clientWidth / unit) * unit
+        // During a page, the jump to the middle copy moves the target by the same distance.
+        const from = el.scrollLeft
+        toMiddleCopy(el)
+        const base = isPaging() ? target.current + el.scrollLeft - from : el.scrollLeft
+        // Fast presses add up, but the target stops at the last cover boundary and does not go past the row.
+        const end = Math.floor((el.scrollWidth - el.clientWidth) / unit) * unit
+        const next = Math.round(base / unit) * unit + direction * Math.round(el.clientWidth / unit) * unit
+        target.current = Math.min(Math.max(next, 0), end)
         lastPaged.current = Date.now()
         el.scrollTo({ left: target.current, behavior: reducedMotion ? 'auto' : 'smooth' })
     }
