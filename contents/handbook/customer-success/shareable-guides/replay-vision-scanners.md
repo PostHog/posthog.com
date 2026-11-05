@@ -18,7 +18,7 @@ When a call is not possible, build one proof-of-concept scanner on one flow. The
 
 A scanner can only watch sessions that the customer records. Check these items in the customer's project before you build:
 
-1. Session replay is on for the flow that you want to scan.
+1. Session Replay is on for the flow that you want to scan.
 2. The replay sampling rate. The scanner's own sampling applies on top of it. If the customer records 1% of sessions and the scanner samples 50%, the scanner sees 0.5% of all sessions.
 3. [Network recording](/docs/session-replay/network-recording) is on. Without it, a scan cannot tell a failed request from a slow one.
 4. [Canvas recording](/docs/session-replay/canvas-recording) or [iframe recording](/docs/session-replay/iframes) is on, if key screens use a canvas or an iframe.
@@ -95,7 +95,7 @@ Ratings change later scans automatically. PostHog turns them into rules that eve
 
 An edit to the prompt makes a new scanner version. Past observations keep the old prompt, so compare ratings within one version.
 
-## After launch: turn observations into answers
+## After launch: Turn observations into answers
 
 Each successful observation writes a `$recording_observed` event into the customer's project. Its result properties start with `scanner_output_`. The [observations docs](/docs/replay-vision/observations#querying-observations-as-events) list every property and give a query for each scanner type.
 
