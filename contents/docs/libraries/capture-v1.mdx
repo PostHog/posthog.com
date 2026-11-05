@@ -96,7 +96,33 @@ posthog.capture({
 })
 ```
 
+```swift
+PostHogSDK.shared.capture(
+    "signed_up",
+    properties: ["plan": "pro"],
+    options: ["process_person_profile": true]
+)
+```
+
+```kotlin
+PostHog.capture(
+    event = "signed_up",
+    properties = mapOf("plan" to "pro"),
+    options = mapOf("process_person_profile" to true),
+)
+```
+
+```dart
+await Posthog().capture(
+  eventName: 'signed_up',
+  properties: {'plan': 'pro'},
+  options: {'process_person_profile': true},
+);
+```
+
 </MultiLanguage>
+
+On iOS, Android, and Flutter, `capture`, `screen`, `identify`, and the other event methods take `options` too. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides list every method that takes it.
 
 The legacy option properties still work for now. The SDK moves them into `options` before it sends the event, and an option you set wins over its legacy option property. Use options in new code – the legacy option properties are deprecated, and a future major version will stop reading them.
 
@@ -276,7 +302,30 @@ posthog.captureAi({
 })
 ```
 
+```swift
+PostHogSDK.shared.captureAi(
+    "$ai_generation",
+    properties: ["$ai_model": "gpt-5", "$ai_input_tokens": 120]
+)
+```
+
+```kotlin
+PostHog.captureAi(
+    event = "\$ai_generation",
+    properties = mapOf("\$ai_model" to "gpt-5", "\$ai_input_tokens" to 120),
+)
+```
+
+```dart
+await Posthog().captureAi(
+  eventName: r'$ai_generation',
+  properties: {r'$ai_model': 'gpt-5', r'$ai_input_tokens': 120},
+);
+```
+
 </MultiLanguage>
+
+On iOS, Android, and Flutter, `captureAi` takes the same arguments as `capture`. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides cover their AI queue settings.
 
 `capture` doesn't move `$ai_` events to the AI path for you. For now, PostHog still accepts AI events sent with `capture`, so existing code keeps working while you upgrade. This is temporary, and large AI events always need the AI method. Calling `flush` or `shutdown` sends both queues. See [capturing large AI events](/docs/ai-observability/large-events) for limits and the AI integrations.
 
