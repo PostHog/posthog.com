@@ -11,7 +11,7 @@ tags:
 
 In July we moved our support team off Zendesk and onto [PostHog Support](/docs/support). Making the switch felt like a mammoth task. 
 
-Although the helpdesk features of PostHog Support were solid, it was missing nearly all of the more advance features we relied on in Zendesk. It had no native understanding of Service Level Agreements (SLAs), when they should be set, or how they should be calculated. No way of triaging and routing tickets. No handling of Customer Satisfaction surveys (CSATs). No out-of-office handling.
+Although the helpdesk features of PostHog Support were solid, it was missing nearly all of the more advanced features we relied on in Zendesk. It had no native understanding of Service Level Agreements (SLAs), when they should be set, or how they should be calculated. No way of triaging and routing tickets. No handling of Customer Satisfaction surveys (CSATs). No out-of-office handling.
 
 The obvious solution was to ask the engineering team to build all of it and wait, but this wasn't a good solution ([why not now?](/handbook/values#why-not-now)). Instead, I built almost everything we needed in [PostHog Workflows](/workflows). We now have 27 active workflows related to support, and I think the result is better than if we'd built it all natively.
 
@@ -21,19 +21,19 @@ Building these features natively means one of two things. Either we build them f
 
 Using Workflows lets us build exactly what our support team needs, on top of the data we already have in PostHog. When something changes, I can just go and modify the workflow, rather than waiting for a feature to ship.
 
-At times I thought it would be easier to build some features natively, but the more I use workflows, the more I realize how powerful they are. I control what happens and when. A native version would be more restrictive.
+At times I thought it would be easier to build some features natively, but the more I use Workflows, the more I realize how powerful they are. I control what happens and when. A native version would be more restrictive.
 
 This level of customizability isn't for everyone, and it can feel or sound overwhelming at times, but working with AI makes it a lot easier. The main restriction at this point is my own brain and what I can dream up.
 
-Here's some examples of what I built:
+Here are some examples of what I built:
 
 ## Triaging and categorizing tickets
 
-In our old world, triage was mostly manual - customers had to pick a product area and priority when submitting a ticket. That was fine when PostHog had a couple of products, but with so many now, customers have no idea which area to pick.
+In our old world, triage was mostly manual – customers had to pick a product area and priority when submitting a ticket. That was fine when PostHog had a couple of products, but with so many now, customers have no idea which area to pick.
 
 It was also a lot of upkeep for me and for engineering teams. Every time a team was created, renamed, or split, we had to update the sidebar topics and the Zendesk triggers that routed tickets.
 
-Moving to our new world, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [workflows AI task step](/docs/workflows/ai-tasks). It helps us do all of our triage and categorization in one workflow. On every new ticket it:
+Moving to our new world, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [Workflows AI task step](/docs/workflows/ai-tasks). It helps us do all of our triage and categorization in one workflow. On every new ticket it:
 
 1. Fetches the ticket.
 2. Runs a spam pre-filter, and skips and auto-resolves anything we don't want classified.
@@ -65,7 +65,7 @@ We have several workflows to keep tickets moving:
 - **Reopen on reply** - reopens a ticket when the customer replies (this is one of the few things I think should be native).
 - **Resolve stale pending tickets** - when a ticket goes to pending, it waits 5 days and checks in with the customer in case they want to add anything. After 2 more days with no reply, it marks the ticket resolved.
 
-> **Try it yourself:** with the acknowledge, reopen, and nudge-then-auto-resolve templates.
+> **Try it yourself:** With the acknowledge, reopen, and nudge-then-auto-resolve templates.
 
 ## Managing service level agreements
 
@@ -100,9 +100,9 @@ It only sets a new SLA deadline if the ticket has no SLA deadline set, or the ne
 
 The same SLA is applied when someone reopens a ticket, for example if it was set to pending or resolved by mistake. That workflow keys off the plan or segment tag already on the ticket.
 
-#### Setting the update time
+### Setting the update time
 
-When we send a reply, the workflow checks the ticket's status. If the team member set it to pending, resolved, or on hold, there's nothing to do. If it's still new or open, it sets an update SLA based on the plan tag. We don't want to just go quiet on a customer while we investigate.
+When we send a reply, the workflow checks the ticket's status. If the team member set it to pending, resolved, or on hold, there's nothing to do. If it's still new or open, it sets an update time based on the plan tag. We don't want to just go quiet on a customer while we investigate.
 
 ### Breach warnings
 
@@ -150,15 +150,15 @@ This workflow runs on every customer reply. A conditional branch splits by the t
 
 The date range is the important part: it only applies while you're away, so you don't have to remember to switch it off when you're back!
 
-**Try it yourself:** With the **reassign while an agent is out of office** template.
+> **Try it yourself:** With the **reassign while an agent is out of office** template.
 
-### CSAT
+## Sending CSAT surveys
 
-These measure customer satisfaction and we have workflow handle them. The first sends the survey, and the second handles completed responses.
+These measure customer satisfaction, and we have two workflows that handle them. The first sends the survey, and the second handles completed responses.
 
 The first workflow triggers when a ticket is resolved, then waits 24 hours and checks that the ticket is still resolved. If it is, it emails the customer with our CSAT survey. The email has a row of faces, and clicking one opens a survey we host with [Surveys](/docs/surveys) (with that face already selected so customers don't have to pick twice).
 
-The second triggers based on a partial or completed survey response. It:
+The second triggers based on a completed survey response. It:
 
 - Saves the CSAT scores and comment to the ticket as a private note.
 - Posts the response to our support team Slack channel. We like to celebrate the nice comments. When a score is low, we follow up, fix what went wrong, and make sure the customer has what they need, because we want all of our customers to be successful.
@@ -167,7 +167,7 @@ The second triggers based on a partial or completed survey response. It:
 
 > **Try it yourself:** With the **send survey after resolve** and **post responses to Slack and the ticket** templates.
 
-### Proactive tickets
+## Creating proactive tickets
 
 You can also use workflows to create tickets, very meta!
 
@@ -177,21 +177,15 @@ Turning this feedback into tickets means we can reply to customers who are missi
 
 ## Workflows the team built
 
-The rest of the support team have also built workflows for the things they wanted. Here are some examples:
+Individual support engineers have also customized their own workflows.
 
-### Following tickets
-
-Christian started with the basics: when a customer replies, the person the ticket is assigned to gets an email. He also made it so that when someone escalates a ticket to an engineering team, they follow it automatically, so they can see what the engineering team says. Luke then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily be into a Slack channel.
-
-**Try it yourself:** With the **notify the assignee when the customer replies** template.
-
-### Personal SLA warnings
+Christian started with the basics: when a customer replies, the ticket assignee gets an email. He also made it so anyone who escalates a ticket to an engineering team automatically follows that ticket, so they can see what the engineering team says. Luke then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily go to a Slack channel.
 
 Christiaan built a workflow to keep track of his own SLA deadlines. It posts a Slack warning 15 minutes before the SLA deadline on any ticket assigned to him that's still unresolved.
 
-### Incident detection
-
 Chris built two workflows that connect tickets to our incident.io incidents. When an incident is declared, an AI task finds open tickets about it and tags them, so they're all in one place. New tickets about an open or recently closed incident get the same tag.
+
+> **Try it yourself:** With the **notify the assignee when the customer replies** template.
 
 ## How all these workflows were built
 
@@ -216,7 +210,7 @@ A few habits make this work:
 
 ## Set up these workflows yourself
 
-Workflows glue together events, tickets, Customer Analytics data, emails, and Slack for us. If you run support, onboarding, or customer success on PostHog, you can build the same thing.
+Workflows glues together events, tickets, Customer Analytics data, emails, and Slack for us. If you run support, onboarding, or customer success on PostHog, you can build the same thing.
 
 The easiest way to get started is using the [support workflow templates](https://app.posthog.com/workflows/templates?tagFilter=support) I've created. They're generalized from ours, so they won't match our setup exactly, but they're a working starting point you can customize for your own use cases. You get 10,000 emails and 10,000 other destinations free every month. 
 
