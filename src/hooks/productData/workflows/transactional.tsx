@@ -30,10 +30,17 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Node.js',
         language: 'js',
-        code: `const { data, error } = await posthog.emails.send({
+        code: `const posthog = new PostHog("<ph_project_api_key>", {
+    host: "https://us.i.posthog.com",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+})
+
+const { data, error } = await posthog.emails.send({
     to: email,
-    templateId: "<template_id>",
-    templateData: { first_name: firstName, reset_link: resetLink },
+    templateKey: "password-reset",
+    subject: "Reset your password",
+    html: await render(<PasswordResetEmail resetLink={resetLink} />),
+    from: "Hedgebox <security@example.com>",
     distinctId: userId,
     // A retry never sends this email twice
     idempotencyKey: \`password-reset-\${resetRequestId}\`,
@@ -42,10 +49,18 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Python',
         language: 'python',
-        code: `result = posthog.emails.send(
+        code: `posthog = Posthog(
+    "<ph_project_api_key>",
+    host="https://us.i.posthog.com",
+    secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
+)
+
+result = posthog.emails.send(
     to=email,
-    template_id="<template_id>",
-    template_data={"first_name": first_name, "reset_link": reset_link},
+    template_key="password-reset",
+    subject="Reset your password",
+    html=render_to_string("emails/password_reset.html", {"reset_link": reset_link}),
+    from_="Hedgebox <security@example.com>",
     distinct_id=user_id,
     # A retry never sends this email twice
     idempotency_key=f"password-reset-{reset_request_id}",
@@ -54,10 +69,17 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Go',
         language: 'go',
-        code: `result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+        code: `client, err := posthog.NewWithConfig("<ph_project_api_key>", posthog.Config{
+    Endpoint:  "https://us.i.posthog.com",
+    SecretKey: os.Getenv("POSTHOG_PROJECT_SECRET_API_KEY"),
+})
+
+result, err := client.Emails().Send(ctx, posthog.CodeEmail{
     To:             email,
-    TemplateID:     "<template_id>",
-    TemplateData:   map[string]interface{}{"first_name": firstName, "reset_link": resetLink},
+    TemplateKey:    "password-reset",
+    Subject:        "Reset your password",
+    HTML:           html,
+    From:           "Hedgebox <security@example.com>",
     DistinctID:     userID,
     // A retry never sends this email twice
     IdempotencyKey: "password-reset-" + resetRequestID,
@@ -66,10 +88,18 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Ruby',
         language: 'ruby',
-        code: `result = posthog.emails.send(
+        code: `posthog = PostHog::Client.new({
+  api_key: '<ph_project_api_key>',
+  host: 'https://us.i.posthog.com',
+  secret_key: ENV.fetch('POSTHOG_PROJECT_SECRET_API_KEY')
+})
+
+result = posthog.emails.send(
   to: email,
-  template_id: '<template_id>',
-  template_data: { first_name: first_name, reset_link: reset_link },
+  template_key: 'password-reset',
+  subject: 'Reset your password',
+  html: html,
+  from: 'Hedgebox <security@example.com>',
   distinct_id: user_id,
   # A retry never sends this email twice
   idempotency_key: "password-reset-#{reset_request_id}"
@@ -78,10 +108,19 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'PHP',
         language: 'php',
-        code: `$result = PostHog::emails()->send([
+        code: `PostHog::init(client: new Client(
+    '<ph_project_api_key>',
+    ['host' => 'https://us.i.posthog.com'],
+    loadFeatureFlags: false,
+    secretKey: getenv('POSTHOG_PROJECT_SECRET_API_KEY'),
+));
+
+$result = PostHog::emails()->send([
     'to' => $email,
-    'template_id' => '<template_id>',
-    'template_data' => ['first_name' => $firstName, 'reset_link' => $resetLink],
+    'template_key' => 'password-reset',
+    'subject' => 'Reset your password',
+    'html' => $html,
+    'from' => 'Hedgebox <security@example.com>',
     'distinct_id' => $userId,
     // A retry never sends this email twice
     'idempotency_key' => "password-reset-$resetRequestId",
@@ -90,11 +129,20 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: '.NET',
         language: 'csharp',
-        code: `var result = await posthog.Emails.SendAsync(new SendTemplateEmailOptions
+        code: `await using var posthog = new PostHogClient(new PostHogOptions
+{
+    ProjectToken = "<ph_project_api_key>",
+    HostUrl = new Uri("https://us.i.posthog.com"),
+    SecretKey = Environment.GetEnvironmentVariable("POSTHOG_PROJECT_SECRET_API_KEY"),
+});
+
+var result = await posthog.Emails.SendAsync(new SendCodeEmailOptions
 {
     To = email,
-    TemplateId = Guid.Parse("<template_id>"),
-    TemplateData = new Dictionary<string, object> { ["first_name"] = firstName, ["reset_link"] = resetLink },
+    TemplateKey = "password-reset",
+    Subject = "Reset your password",
+    Html = html,
+    From = "Hedgebox <security@example.com>",
     DistinctId = userId,
     // A retry never sends this email twice
     IdempotencyKey = $"password-reset-{resetRequestId}",
@@ -103,11 +151,21 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Rust',
         language: 'rust',
-        code: `let result = posthog
+        code: `let posthog = posthog_rs::client(
+    ClientOptionsBuilder::default()
+        .api_key("<ph_project_api_key>".to_string())
+        .host("https://us.i.posthog.com")
+        .secret_key(std::env::var("POSTHOG_PROJECT_SECRET_API_KEY")?)
+        .build()?,
+)
+.await;
+
+let result = posthog
     .emails()
     .send(
-        TemplateEmail::new(&email, "<template_id>")
-            .template_data(json!({ "first_name": first_name, "reset_link": reset_link }))
+        CodeEmail::new(&email, "password-reset", "Reset your password")
+            .html(html)
+            .from("Hedgebox <security@example.com>")
             .distinct_id(&user_id)
             // A retry never sends this email twice
             .idempotency_key(format!("password-reset-{reset_request_id}")),
@@ -117,11 +175,20 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
     {
         label: 'Elixir',
         language: 'elixir',
-        code: `{:ok, result} =
+        code: `# config/runtime.exs
+config :posthog,
+  api_key: "<ph_project_api_key>",
+  api_host: "https://us.i.posthog.com",
+  secret_key: System.fetch_env!("POSTHOG_PROJECT_SECRET_API_KEY")
+
+# anywhere in your app
+{:ok, result} =
   PostHog.Emails.send(
     to: email,
-    template_id: "<template_id>",
-    template_data: %{first_name: first_name, reset_link: reset_link},
+    template_key: "password-reset",
+    subject: "Reset your password",
+    html: html,
+    from: "Hedgebox <security@example.com>",
     distinct_id: user_id,
     # A retry never sends this email twice
     idempotency_key: "password-reset-#{reset_request_id}"
@@ -135,10 +202,12 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
   -H "Content-Type: application/json" \\
   -H "Idempotency-Key: password-reset-8f14e45f" \\
   -d '{
-    "template_id": "<template_id>",
     "to": "jane@example.com",
-    "distinct_id": "user_123",
-    "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
+    "template_key": "password-reset",
+    "subject": "Reset your password",
+    "html": "<p>Hi Jane,</p><p><a href=\\"https://example.com/reset?token=abc123\\">Reset your password</a>.</p>",
+    "from": "Hedgebox <security@example.com>",
+    "distinct_id": "user_123"
   }'`,
     },
 ]
@@ -164,8 +233,9 @@ export const transactional: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Send with the PostHog SDK for Node.js, Python, Go, .NET, Ruby, Rust, Elixir, or PHP, or with the
-                    REST API from anything else. The client retries, sets the idempotency key, and returns a message ID.
+                    Add a project secret API key to the PostHog client you already run, in Node.js, Python, Go, .NET,
+                    Ruby, Rust, Elixir, or PHP, and send. The REST API works from anything else. The client retries,
+                    sets the idempotency key, and returns a message ID.
                 </p>
                 <SendCode />
                 {list([
@@ -173,8 +243,8 @@ export const transactional: CarouselSlide[] = [
                         label: 'Your templates or ours',
                         description: (
                             <>
-                                Send a template you designed in PostHog by its ID, or render the email yourself (React
-                                Email, MJML, a string) and send the <InlineCode>html</InlineCode>.
+                                Render the email yourself (React Email, MJML, a string) and send the{' '}
+                                <InlineCode>html</InlineCode>, or send a template you designed in PostHog by its ID.
                             </>
                         ),
                     },
