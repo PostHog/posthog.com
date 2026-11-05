@@ -208,7 +208,7 @@ Review your cost model quarterly at minimum, or whenever you ship significant in
 
 ## Worked example
 
-See the [Session Replay unit economics RFC](https://github.com/PostHog/requests-for-comments-internal/pull/964) for a complete example of this process applied to a real product.
+See the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal/pull/964">Session Replay unit economics RFC</PrivateLink> for a complete example of this process applied to a real product.
 
 ## Contacts
 

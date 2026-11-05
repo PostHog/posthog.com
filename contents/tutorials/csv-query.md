@@ -11,7 +11,7 @@ PostHog can capture a lot of data about your users. For data it can't capture, y
 
 This tutorial shows you how to upload a CSV to storage, connect that storage source to PostHog, and then query the CSV alongside your data in PostHog.
 
-> **Tip:** For small files under 50MB that don't need regular updates, you can [upload directly to PostHog](/docs/data-warehouse/sources/file-upload) without setting up external storage. This tutorial covers the external storage approach, which is better for larger files or data that updates frequently.
+> **Tip:** For small files under 50MB that don't need regular updates, you can [upload directly to PostHog](/docs/data-pipelines/sources/file-upload) without setting up external storage. This tutorial covers the external storage approach, which is better for larger files or data that updates frequently.
 
 ## Creating and uploading our CSV
 
@@ -97,7 +97,7 @@ When your data relates to [people](/docs/data/persons) in PostHog, you can creat
 
 To do this:
 
-1. Go to the data warehouse tab and find the [`persons` table](/docs/data-warehouse/sources/posthog#persons), click the three dots next to it, and click **Add join**.
+1. Go to the data warehouse tab and find the [`persons` table](/docs/data-pipelines/sources/posthog#persons), click the three dots next to it, and click **Add join**.
 2. In the popup, set the **Source Table Key** to a property that both tables include, in our case, that is `email`. To access it, we use SQL to set our **Source Table Key** to `properties.email`.
 3. Choose `csv_users` as your **Joining Table** and `email` as your **Joining Table Key.**
 4. Click **Save**.

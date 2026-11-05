@@ -48,3 +48,9 @@ import EmbeddingEvent from '../_snippets/embedding-event.mdx'
 ## Large events
 
 For large events, use the dedicated AI ingestion path – see [capturing large AI events](/docs/ai-observability/large-events).
+
+In Python, `capture()` drops events over 900 KiB. Call `capture_ai()` instead, with the same arguments, to send events up to 8MB:
+
+```python
+posthog.capture_ai("$ai_generation", distinct_id="user_123", properties={...})
+```

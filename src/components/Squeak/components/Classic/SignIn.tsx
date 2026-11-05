@@ -7,7 +7,7 @@ import { User, useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
 import Input from '../../../../components/OSForm/input'
 
-import SecurityHog from '../../../../images/security-hog.png'
+import TrafficPoliceHog from '../../../../images/traffic-police-hog.png'
 import { IconSpinner } from '@posthog/icons'
 import { useToast } from '../../../../context/Toast'
 import Link from 'components/Link'
@@ -106,7 +106,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
             >
                 <div className="bg-accent flex gap-6 px-8 py-6 flex-1 pt-10">
                     <div className="max-w-20">
-                        <img src={SecurityHog} className="w-20" />
+                        <img src={TrafficPoliceHog} alt="" className="w-20" />
                     </div>
                     <div data-scheme="primary" className="flex-1">
                         <h3 className="text-base font-semibold leading-tight mb-2">The hedgehogs missed you</h3>

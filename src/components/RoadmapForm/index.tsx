@@ -103,6 +103,8 @@ const statusLabels = {
     complete: 'Complete (Changelog)',
 }
 
+const codingOriginTags = ['human-coded', 'ai-coded']
+
 const ProfileSelect = ({ value, onChange }: { value: any; onChange: (value: any) => void }) => {
     const [profiles, setProfiles] = useState<any[]>([])
     useEffect(() => {
@@ -552,6 +554,7 @@ export default function RoadmapForm({
             betaAvailable: false,
             milestone: false,
             category: undefined,
+            tags: [],
             githubUrls: [''],
             dateCompleted: dayjs().format('YYYY-MM-DD'),
             author: undefined,
@@ -568,6 +571,7 @@ export default function RoadmapForm({
             milestone,
             githubUrls,
             category,
+            tags,
             dateCompleted,
             author,
             social,
@@ -621,6 +625,7 @@ export default function RoadmapForm({
                         milestone,
                         githubUrls: githubUrls.filter((url) => !!url),
                         category,
+                        tags,
                         socialSharing: JSON.stringify(social),
                         ...(author?.id ? { profiles: { connect: [author.id] } } : null),
                     },
@@ -644,6 +649,7 @@ export default function RoadmapForm({
             }
         },
     })
+    const selectedCodingOriginTags = codingOriginTags.filter((tag) => values.tags?.includes(tag))
 
     return (
         <form onSubmit={handleSubmit} className="">
@@ -722,6 +728,26 @@ export default function RoadmapForm({
                         ]}
                         onChange={(type) => setFieldValue('category', type)}
                         value={values.category}
+                        searchable={false}
+                    />
+                )}
+                {status === 'complete' && (
+                    <OSSelect
+                        label="Coding origin tag"
+                        direction="column"
+                        options={[
+                            { label: 'Untagged', value: '' },
+                            { label: 'Human-coded', value: 'human-coded' },
+                            { label: 'AI-coded', value: 'ai-coded' },
+                        ]}
+                        value={selectedCodingOriginTags.length === 1 ? selectedCodingOriginTags[0] : ''}
+                        onChange={(tag) =>
+                            setFieldValue('tags', [
+                                ...(values.tags || []).filter((value) => !codingOriginTags.includes(value)),
+                                ...(tag ? [tag] : []),
+                            ])
+                        }
+                        description="Leave untagged if the PR's coding origin is uncertain."
                         searchable={false}
                     />
                 )}

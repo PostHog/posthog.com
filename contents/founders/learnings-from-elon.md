@@ -6,8 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/newsletter/beyond-10x-engineer/elon.jpg
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
+  - Lessons from others
 crosspost:
   - Blog
   - Newsletter

@@ -10,7 +10,13 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-ceo-diary-blog.png
 featuredImageType: full
+ogImage: generated
 category: CEO diaries
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Being CEO
 ---
 
 2021 went well for PostHog - especially given we're not even two years old yet.

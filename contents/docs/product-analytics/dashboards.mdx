@@ -40,7 +40,7 @@ You can create a new dashboard from scratch, but we also offer numerous [dashboa
 1. Click on **Dashboards** in the left hand navigation and then **New Dashboard**.
 1. You can create a dashboard from a list of [available templates](/templates), or select **Blank Dashboard** to start from scratch.
 1. Name your dashboard, add some optional details if desired.
-1. Your dashboard will be empty – click **+New insight** to create an insight to add. Dashboards support all the core [product analytics insights](/docs/product-analytics/insights).
+1. Your dashboard will be empty – click **Add a chart** to browse your chart library, or click **Build it myself** to open a menu with options for charts, text cards, images, buttons, and widgets. Dashboards support all the core [product analytics insights](/docs/product-analytics/insights).
 1. Click **Save & add to dashboard** when you've created your insight.
 
 If you already have some insights set up, an alternative approach is to click **Add to dashboard** in any insight.
@@ -108,6 +108,51 @@ You can organize dashboards into folders for easier navigation. There are two wa
 The dashboards list page includes a **Folder** column that shows which folder each dashboard belongs to. Dashboards that haven't been filed into a folder display a dash (`—`).
 
 Click a folder name in the **Folder** column to filter the list to dashboards in that folder. The active filter appears as a clearable chip in the filters bar. The folder filter is saved to the URL as a `?folder=` query parameter, so filtered views persist across page reloads and can be shared with teammates.
+
+## Organizing tiles into groups
+
+You can organize tiles on a dashboard into named groups. Groups let you cluster related insights, text cards, and widgets together so large dashboards stay navigable.
+
+### Display modes
+
+Grouped tiles can be displayed in two ways:
+
+- **Sections** (default) – Each group appears as a full-width collapsible band. Tiles that aren't assigned to any group appear between the group bands, separated by a divider.
+- **Tabs** – Each group appears as a tab. Only one group's tiles are visible at a time. Tiles not assigned to any group appear in an **Overview** tab.
+
+To switch between modes:
+
+- Click the **⋯** menu on any group header (in sections mode) or in the tab bar (in tabs mode) and select **Show all groups as tabs** or **Show groups as sections**.
+- Alternatively, open the **Customize** menu on the dashboard and change the **Show groups as** setting.
+
+### Moving tiles to a group
+
+To move a tile into a group, click the **⋯** menu on any insight card, text card, or widget and select **Move to**. The submenu lists available groups under **Tile groups**. Click a group name to move the tile into that group.
+
+To remove a tile from its group, open the same **Move to** submenu and select **Take out of group**. The tile returns to the ungrouped area of the dashboard.
+
+You can also drag and drop tiles between groups while in edit mode. Drag a tile from one group's section and drop it onto another group's section to move it.
+
+### Collapsing groups
+
+In sections mode, click the chevron next to a group name to collapse or expand it. Collapsed groups show the group title and a tile count. Your collapse preferences are remembered for future visits.
+
+Groups can also be set to start collapsed by default.
+
+### Copying a group to another dashboard
+
+To copy all tiles in a group to another dashboard, click the **⋯** menu on the group header (or tab) and select **Copy group to dashboard** (or **Copy tab to dashboard** in tabs mode). Then choose the destination dashboard.
+
+## Bulk deleting dashboards
+
+You can select multiple dashboards from the list and delete them all at once.
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard) and select the dashboards you want to delete using the checkboxes.
+2. Click **Delete selected** in the bulk action bar.
+3. In the confirmation dialog, optionally check **Delete the selected dashboards' insights** to also remove insights that don't appear on any remaining dashboard.
+4. Click **Delete dashboards** to confirm.
+
+Dashboards you don't have edit access to are skipped automatically. You can select up to 100 dashboards per request.
 
 ## Copying dashboards and templates between projects
 
@@ -218,6 +263,8 @@ For moving tiles and other layout changes, enter 'Edit layout' mode. You can do 
 - Click on the '...' icon at the top of the dashboard and click 'Edit layout'
 - Click on the '...' icon on any insight card and click 'Edit layout'
 - Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
+
+You can also move tiles without holding the mouse button. Click once on a tile's header (where the grab cursor appears) to pick it up, then click again to place it. Press **Escape** while carrying a tile to return it to its original position. If you hold and drag a tile, releasing the mouse button continues the move until you click to place it – this is useful for scrolling across large dashboards mid-drag.
 
 Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
 

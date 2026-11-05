@@ -11,9 +11,9 @@ availability:
 Power users, rejoice! You can access many PostHog features using your keyboard.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_02_04_at_12_25_58_b6e426d0ff.png"
-    alt="Command palette"
-    classes="rounded"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_02_04_at_12_25_58_b6e426d0ff.png"
+  alt="Command palette"
+  classes="rounded"
 />
 
 ## Launch the command palette
@@ -21,28 +21,67 @@ Power users, rejoice! You can access many PostHog features using your keyboard.
 Open with `Cmd` + `K` (Mac) or `Ctrl` + `K` (Windows, Linux).
 
 Notable features
+
 - Quickly see recent 5 items you've visited.
 - See and navigate to all apps/tools available sorted by last visited.
 - See and navigate to groups, persons, organizations.
-- See and navigate to all organization/project/user settings.  
-- Navigate to a persons profile by typing their name or paste their ID. 
+- See and navigate to all organization/project/user settings.
+- Navigate to a persons profile by typing their name or paste their ID.
 - New... type 'New' and you'll see all creatable entities available, ex: "New funnel" or "New cohort"
-- When focused on input, press `Tab` to quickly open PostHog AI, or write your question first to immediately send a prompt on the next screen. 
+- When focused on input, press `Tab` to quickly open PostHog AI, or write your question first to immediately send a prompt on the next screen.
 - Search for **SDK health** to check your SDK versions.
 - Search for **Pipeline status** to monitor your data pipelines.
 - Search for **Exports** to view and download your exported data.
 - Search for **Jump to timestamp** to navigate to events around a specific point in time.
 - Search for **dark**, **light**, **theme**, or **appearance** to toggle between dark and light mode.
 
+## Search filters
+
+You can narrow search results using `key:value` filters. Filters are case-insensitive. Negate any filter with a `-` prefix (e.g., `-is:dashboard`). Quote values that contain spaces (e.g., `createdBy:"Ada Lovelace"`).
+
+### Available filters
+
+| Filter                             | Description                                                    | Example                   |
+| ---------------------------------- | -------------------------------------------------------------- | ------------------------- |
+| `is:` (or `type:`)                 | Filter by object type (dashboard, feature flag, insight, etc.) | `is:dashboard`, `is:flag` |
+| `createdBy:` (or `by:`, `author:`) | Filter by creator                                              | `createdBy:me`            |
+| `in:` (or `folder:`, `path:`)      | Filter by folder location                                      | `in:"Growth team"`        |
+| `name:` (or `title:`)              | Match name only, not description                               | `name:revenue`            |
+
+### Additional `is:` types
+
+Beyond standard object types, these additional `is:` values search their own APIs:
+
+| Filter            | What it searches                                  | Example                             |
+| ----------------- | ------------------------------------------------- | ----------------------------------- |
+| `is:alert`        | Insight alerts (by name)                          | `is:alert cpu`                      |
+| `is:ticket`       | Support tickets (by number, subject, or customer) | `is:ticket refund`, `is:ticket #42` |
+| `is:destination`  | Data pipeline destinations (server and browser)   | `is:destination slack`              |
+| `is:workflow`     | Workflows                                         | `is:workflow welcome`               |
+| `is:endpoint`     | API endpoints                                     | `is:endpoint`                       |
+| `is:product_tour` | Product tours                                     | `is:product_tour`                   |
+
+> **Note:** These types search their own API and don't support `createdBy:`, `in:`, or word exclusions with `-`. Queries combining these filters return no results. `is:alert` covers insight alerts only — log alerts are not yet searchable.
+
+### Examples
+
+- `is:dashboard revenue` — find dashboards with "revenue" in the name
+- `is:flag createdBy:me` — find feature flags you created
+- `is:ticket #42` — find support ticket number 42
+- `-is:insight` — find everything except insights
+
+When using an `is:` filter, a **View all** option appears to open the full list page for that type.
 
 ## Keyboard shortcuts
 
 You can use these shortcuts anywhere in PostHog without opening the command palette:
 
-| Shortcut | Action |
-|----------|--------|
-| `g` then `t` | Toggle theme (dark/light mode) |
-| `g` then `h` | Open health menu |
-| `g` then `a` | Open account menu |
-| `g` then `p` | Open project switcher |
-| `g` then `o` | Open organization switcher |
+| Shortcut                                          | Action                         |
+| ------------------------------------------------- | ------------------------------ |
+| `Cmd` + `B` (Mac) or `Ctrl` + `B` (Windows/Linux) | Toggle left sidebar            |
+| `[`                                               | Toggle left sidebar            |
+| `g` then `t`                                      | Toggle theme (dark/light mode) |
+| `g` then `h`                                      | Open health menu               |
+| `g` then `a`                                      | Open account menu              |
+| `g` then `p`                                      | Open project switcher          |
+| `g` then `o`                                      | Open organization switcher     |

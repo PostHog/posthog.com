@@ -237,7 +237,7 @@ const posthog = usePostHog()
 posthog.overrideFeatureFlag({'my-cool-experiment': 'control'}) 
 ```
 
-Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
+Lastly, you can [view your test results](/docs/experiments/analyzing-results) on the experiment page.
 
 ## Further reading
 

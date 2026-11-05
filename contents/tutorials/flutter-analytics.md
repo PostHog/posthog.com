@@ -374,7 +374,7 @@ class _HomePageState extends State<HomePage> {
 
 ### Identifying users
 
-Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identify) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
+Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identifying-users) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
 
 To show you an example, update the code for the login button to the following:
 
@@ -395,7 +395,7 @@ class LoginPage extends StatelessWidget {
 
 Any past or future events captured after calling `identify` will now be associated with the email you provided. 
 
-To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab]((https://us.posthog.com/events)).
+To test this, press logout, fill the form in and press login. Then, in the home page, press the submit button to capture the `home_button_clicked` event. You should now see the email in the **Person** column in your [activity tab](https://us.posthog.com/events).
 
 <ProductScreenshot
   imageLight={IdentifyLight} 
@@ -404,7 +404,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#removing-stored-super-properties). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```dart file=main.dart
 class _HomePageState extends State<HomePage> {
     // ...
@@ -453,7 +453,7 @@ In this tutorial, we create a simple trend insight:
 2. Under the **Series** header select the `home_button_clicked` event. 
 3. Click the **Total count** dropdown to change how events are aggregated. You can choose options such as `Count per user`, `Unique users`, `Unique company(s)`, and more. You can also add filters or breakdown based on properties. 
 
-For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggled is enabed:
+For example, in the image below we set our insight to show number of unique users that captured the `home_button_clicked` event where the toggle is enabled:
 
 <ProductScreenshot
   imageLight={InsightLight} 

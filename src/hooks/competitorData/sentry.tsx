@@ -3,7 +3,7 @@ export const sentry = {
     key: 'sentry',
     assets: {
         icon: '/images/competitors/sentry.svg',
-        comparisonArticle: '/blog/posthog-vs-sentry',
+        comparisonArticle: '/compare/posthog-vs-sentry',
     },
     products: {
         traces: {
@@ -31,7 +31,7 @@ export const sentry = {
             },
             ai_and_self_driving: {
                 features: {
-                    ai_opens_code_fix_pr: 'Beta',
+                    ai_opens_code_fix_pr: true,
                     fix_and_open_pr_from_slack: 'Beta',
                 },
             },
@@ -88,7 +88,7 @@ export const sentry = {
                 chat_with_recordings: false,
                 conditional_recording: true,
                 event_timeline: true,
-                export_to_json: false,
+                export_to_json: true,
                 export_to_video: false,
                 filter_by_user_or_event: true,
                 identity_detection: true,
@@ -128,7 +128,9 @@ export const sentry = {
             },
             ai: {
                 features: {
-                    ai_summaries: true,
+                    ai_summaries: 'Web only',
+                    replay_vision: false,
+                    ai_observations_as_events: false,
                 },
             },
         },
@@ -163,7 +165,7 @@ export const sentry = {
             },
             presentation: {
                 features: {
-                    custom_ui: 'Limited customization',
+                    custom_ui: 'Theme and position only',
                 },
             },
             templates: {
@@ -188,7 +190,7 @@ export const sentry = {
             features: {
                 advertising_analytics: false,
                 alerts: true,
-                autocapture: 'Errors only',
+                autocapture: 'Errors and breadcrumbs',
                 cohorts: false,
                 custom_events: true,
                 custom_properties: false,
@@ -260,6 +262,73 @@ export const sentry = {
             available: false,
             features: {
                 realtime_streaming: '',
+            },
+        },
+        logs: {
+            available: true,
+            pricing: {
+                features: {
+                    ingest_only_pricing: true,
+                    no_query_compute_fees: true,
+                    predictable_at_scale: true,
+                    free_tier: '5 GB',
+                },
+            },
+            core_logging_and_ingestion: {
+                features: {
+                    centralized_log_ingestion_search: true,
+                    // Auto-refresh polling only: pauses above 100 logs/s, stops after 10 minutes
+                    live_tail_real_time_logs: 'Auto-refresh, 10-minute cap',
+                    // OTLP logs endpoint is in open beta
+                    native_open_telemetry_ingest: 'Beta',
+                    // Only via OTLP (OTel Collector, Vector, Fluent Bit); errors still need the Sentry SDK
+                    vendor_agnostic_sdks: 'Via OTLP',
+                    high_cardinality_indexing: true,
+                    // Stored 30 days on all plans; UI query window is 7 / 14 / 30 days by plan
+                    retention: '30 days (7–30 day query window by plan)',
+                },
+            },
+            search: {
+                features: {
+                    // Raw text search covers the message field only, case-sensitive
+                    full_text_search: 'Message field only',
+                    no_proprietary_query_language: false,
+                },
+            },
+            security_and_compliance: {
+                features: {
+                    siem: false,
+                    enterprise_scale_compliance: false,
+                    security_monitoring: false,
+                },
+            },
+            investigation_workflow: {
+                features: {
+                    click_to_pivot_investigations: true,
+                    logs_scoped_by_investigation_context: true,
+                    // Seer reads logs as context (beta) but nothing summarizes logs
+                    ai_assisted_log_summaries: false,
+                },
+            },
+            debugging_integrations: {
+                features: {
+                    built_in_error_tracking: true,
+                    built_in_session_replay: true,
+                    product_analytics_context: false,
+                },
+            },
+            observability: {
+                features: {
+                    // Application Metrics GA May 2026; app-level only, no infra metrics
+                    metrics: true,
+                    traces: true,
+                    infra_monitoring: false,
+                    alerting: true,
+                    synthetic_monitoring: 'Uptime only',
+                    on_call_incident_management: false,
+                    service_map: false,
+                    code_level_profiling: true,
+                },
             },
         },
     },

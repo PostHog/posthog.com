@@ -4,6 +4,7 @@ link: https://posthog.com/handbook/content/posthog-style-guide
 level: warning
 ignorecase: true
 swap:
+    business knowledge: Business Knowledge
     customer analytics: Customer Analytics
     data pipelines: Data Pipelines
     data warehouse: Data Warehouse

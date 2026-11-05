@@ -12,7 +12,7 @@ Datasets are currently in beta. We'd love your [feedback](https://app.posthog.co
 
 Datasets let you curate sets of inputs and expected outputs that you can replay against prompt or model changes to catch regressions before they reach production. Instead of hoping a prompt tweak didn't break anything, you keep a growing collection of the cases you care about – the tricky ones, the ones users complained about, the ones that broke last time – and re-run them.
 
-Because every change is versioned, a dataset is also an audit trail. You can always see what a dataset looked like at the moment you ran a test against it.
+Every change is versioned, so you can see what a dataset looked like when you ran a test. Revisions are available until they expire under the [retention policy](#data-retention).
 
 ## Why use datasets?
 
@@ -64,11 +64,27 @@ Open a dataset and add an item directly, filling in **Input**, **Expected output
 
 ## Versioning
 
-Every item change creates an immutable version and a new dataset revision. You can view past revisions and restore an earlier version of an item without losing its history.
+Every item change creates an immutable version and a new dataset revision. You can view past revisions and restore an earlier version of an item while that history is still available under the [retention policy](#data-retention).
 
 ### Archiving
 
-Datasets and items can be archived instead of deleted. An archived dataset stays readable but rejects item mutations until you restore it. Archived items are filtered out of the default view – and out of exports – but their history is intact.
+Datasets and items can be archived instead of deleted immediately. An archived dataset stays readable until it expires, but rejects item mutations until you restore it. Archived items are filtered out of the default view – and out of exports. Their history follows the retention policy below.
+
+## Data retention
+
+PostHog deletes data after these periods without use:
+
+- **Active datasets:** 90 days, starting at creation.
+- **Archived datasets:** 30 days, starting when archived.
+- **Older revisions:** 30 days, starting when replaced by a newer revision.
+
+Reading contents in PostHog or through the SDK/API, exporting, editing, restoring, or using them in an evaluation counts as use. Listing datasets or revisions does not.
+
+Using a revision restarts the clock for that revision and its dataset, but not other revisions. The latest revision stays available with its dataset. Ongoing evaluation uploads and exports keep the data they need until they finish.
+
+**Expiring soon** appears in the final 7 days. Expired datasets and revisions cannot be read or restored. Export and download anything you need to keep.
+
+Historical evaluation scores and scorer configurations are kept. Evaluation inputs, outputs, and other payloads follow a [separate 30-day policy](/docs/ai-evals/offline-evals#data-retention).
 
 ## Exporting a dataset
 
@@ -125,11 +141,9 @@ CLI access is on the way, so you'll be able to pull a dataset revision and run i
 
 PostHog applies limits to datasets to prevent abuse. These limits are subject to change.
 
-## Coming soon: offline evals reporting
+## Report results with offline evals
 
-Today datasets are the curation and export half of the loop. You export a revision, run it in your own harness, and read the results wherever you run them.
-
-We're working on closing that loop. Soon you'll be able to report the results of an offline evaluation run back into PostHog, scored per dataset item and grouped by run, so you can compare a prompt or model change against the previous run and see which specific items regressed – all next to the [online evaluations](/docs/ai-evals) already scoring your production traffic.
+After your CI run scores each dataset item, send the results to PostHog with [offline evals](/docs/ai-evals/offline-evals). Each run appears as an experiment, with one row per test case and one column per evaluator, so you can compare runs and find the items that regressed.
 
 ## Further reading
 

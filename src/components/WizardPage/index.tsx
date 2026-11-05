@@ -185,14 +185,10 @@ function GetStarted(): JSX.Element {
                 PostHog Wizard takes around 8 minutes to run. So copy the command below, fire up your terminal, hit
                 enter, and make your way to our <ExtLink href="https://www.youtube.com/posthog">YouTube</ExtLink> where
                 you can watch approximately 1.76{' '}
-                <ExtLink href="https://www.youtube.com/playlist?list=PLnOY1RYHjDfzBX5wsSUHwLj91xuGnH5Ci">
-                    PostHog Demos
-                </ExtLink>
-                , 1.9{' '}
-                <ExtLink href="https://www.youtube.com/playlist?list=PLnOY1RYHjDfyW1w0OZwf8zlnkJNfQ_kki">
-                    PostHog AI tutorials
-                </ExtLink>
-                , or 2.7{' '}
+                <ExtLink href="https://www.youtube.com/playlist?list=PLnOY1RYHjDfzSAKPTLjOz_sQKx8hxlwi3">
+                    PostHog tutorials and demos
+                </ExtLink>{' '}
+                or 2.7{' '}
                 <ExtLink href="https://www.youtube.com/playlist?list=PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL">
                     changelog videos
                 </ExtLink>

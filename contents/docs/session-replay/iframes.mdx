@@ -51,4 +51,4 @@ A few clarifications that come up often:
 - **There is no per-domain allowlist for iframe recording.** PostHog does not have a setting to allowlist specific third-party iframes (e.g. "record Typeform but nothing else"). Cross-origin iframe recording is an all-or-nothing config option that still requires PostHog to be installed inside the iframe.
 - **You can still see the surrounding session.** Clicks, navigation, and other interactions on *your* page are recorded as normal – only the content rendered inside the third-party iframe is missing from the replay.
 
-If you need visibility into what users do inside a third-party tool like Typeform, use that tool's own analytics or send its results into PostHog via [events](/docs/product-analytics/capture-events) or an [integration](/docs/cdp).
+If you need visibility into what users do inside a third-party tool like Typeform, use that tool's own analytics or send its results into PostHog via [events](/docs/product-analytics/capture-events) or an [integration](/docs/data-pipelines).

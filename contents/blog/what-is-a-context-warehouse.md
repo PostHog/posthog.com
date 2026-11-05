@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Context_warehouse_blog_header_b21c5b6f1c.png
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
     - Data warehouse
@@ -68,13 +69,13 @@ The difference isn't the storage engine, it's what's allowed to touch the data w
 
 Your context warehouse starts with data that's already there. Once enabled, PostHog mirrors your product event data to S3, partitioned by organization, as it's captured with no pipeline to build.
 
-Everything else comes in through [Warehouse Sources](/context-warehouse/sources): 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more. Connecting each source is no-code and takes under two minutes, or even more hands-off with the PostHog Wizard. 
+Everything else comes in through [Warehouse Sources](/data-pipelines): 200+ integrations that sync external systems including Stripe, HubSpot, Salesforce, Postgres, and more. Connecting each source is no-code and takes under two minutes, or even more hands-off with the PostHog Wizard. 
 
 Compare that to an ETL pipeline: writing and maintaining extraction jobs, hosting them somewhere, wiring up a destination, and debugging it every time a schema changes upstream. Warehouse Sources allows you to skip all of that.
 
 ### Store your data
 
-Under the hood, we store all your data in our [rebuilt Managed Warehouse](/blog/why-we-rebuilt-our-data-warehouse). It's a DuckDB instance per organization sitting on an S3 data lake that you have full access and ownership over your data through.
+Under the hood, we store all your data in our [rebuilt Warehouse](/blog/why-we-rebuilt-our-data-warehouse). It's a DuckDB instance per organization sitting on an S3 data lake that you have full access and ownership over your data through.
 
 The main ingredients:
 
@@ -84,7 +85,7 @@ The main ingredients:
 * **Access:** A Postgres wire protocol endpoint. Connect with psql, point a BI tool at it, or wire it into an agent over MCP – no proprietary connector to build against.
 * **Local iteration:** DuckHog, a DuckDB extension that lets local compute pull subsets of warehouse data into pandas, polars, or DuckDB itself, iterate quickly, and write results back. For an agent that wants fast local loops instead of round-tripping every query to the cluster, this is the better pattern.
 
-![PostHog Managed Warehouse Architecture diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Context_Warehouse_Blog_flow_chart_3_cc7ffcacb3.png)
+![PostHog Warehouse Architecture diagram](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Context_Warehouse_Blog_flow_chart_3_cc7ffcacb3.png)
 
 ### Agents read your data and drive development
 
@@ -98,14 +99,14 @@ The context warehouse today is deliberately not a full data stack: land your eve
 
 | Direction | What it means |
 | :---- | :---- |
-| Making our Managed Warehouse generally available | Right now, we're in a closed beta that will be open very soon, you can [get on the waitlist](/context-warehouse/managed-warehouse) and be the first to hear about it. |
+| Making our Warehouse generally available | Right now, we're in a closed beta that will be open very soon, you can [get on the waitlist](/warehouse) and be the first to hear about it. |
 | Deeper modeling | Closing the gap with dbt-style transformation maturity for teams with more advanced modeling needs. |
-| More sources | Expanding [Warehouse Sources](/context-warehouse/sources) coverage so fewer teams need a custom sync to get their systems in. |
+| More sources | Expanding [Warehouse Sources](/data-pipelines) coverage so fewer teams need a custom sync to get their systems in. |
 | More of the loop exposed to agents | As the [self-driving product](/blog/self-driving-product) loop matures, more of what an agent can see in the context warehouse becomes something it can act on directly, not just read. |
 
 ## Try it yourself
 
-[Join the waitlist](/context-warehouse/managed-warehouse) for the managed warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, the warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
+[Join the waitlist](/warehouse) for the Warehouse beta, or just [connect your first source](/docs/data-warehouse/start-here) and get a head start, no need to wait around for us. Once you're in, Warehouse lives inside PostHog, same as everything else: sync a source through Warehouse Sources, poke at it in the SQL editor, or hand an agent the keys and see what it does with it.
 
 ## FAQ
 

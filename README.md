@@ -1,6 +1,4 @@
-<p align="center">
-  <img alt="posthoglogo" src="https://user-images.githubusercontent.com/65415371/205059737-c8a4f836-4889-4654-902e-f302b187b6a0.png">
-</p>
+[![PostHog: your product's context layer. PostHog automatically diagnoses problems, fixes bugs and generates pull requests, all without prompts.](https://github.com/user-attachments/assets/52390696-2a65-45ee-b34e-7b5d285ac58c)](https://posthog.com/?utm_source=github&utm_medium=org_profile)
 
 # PostHog.com - Website, docs, blog, and handbook
 
@@ -92,7 +90,7 @@ POSTHOG_OPEN_API_SPEC_URL="http://127.0.0.1:8000/api/schema/" pnpm start
 
 ### Want Ashby job listings or GitHub contributors to load?
 
-You’ll need to set environment variables for these. [See (private) instructions](https://github.com/PostHog/company-internal/blob/master/website-api-keys.md) for this.
+You’ll need to set environment variables for these. <PrivateLink url="https://github.com/PostHog/company-internal/blob/master/website-api-keys.md">See our (private) website API keys file</PrivateLink> for this.
 
 ### Developing the posts section
 To see your local version of the posts section, `/posts` needs to be visited directly (`http://localhost:8001/posts`)
@@ -121,6 +119,22 @@ To develop a dynamic open graph image:
 1. Find the generated open graph image in `public/og-images/`
 
 ## Contributing
+
+### Sign your commits
+
+PostHog requires commits with signatures that GitHub can verify, including commits from forks. Set up [commit signing](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits) before your first commit. After you configure your signing key, enable signing for this repository:
+
+```bash
+git config --local commit.gpgsign true
+```
+
+Check that GitHub shows **Verified** on each commit. A `Signed-off-by` line (`git commit -s`) does not meet this requirement. Cryptographic signing uses `git commit -S`.
+
+Enabling signing only affects future commits. You must also sign any existing unsigned commits.
+
+The `signed-commit-check` GitHub App checks signatures when you open or update a PR, including fork PRs and drafts. It posts one comment when GitHub cannot verify a signature, then updates that comment when you fix the commits. This feedback does not wait for GitHub Actions approval on fork PRs. GitHub's organization rule enforces the signature requirement independently of this app.
+
+### Ways to contribute
 
 We <3 contributions big and small. In priority order (although everything is appreciated) with the most helpful first:
 

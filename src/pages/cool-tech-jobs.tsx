@@ -40,7 +40,6 @@ import Spinner from 'components/Spinner'
 import { useUser } from 'hooks/useUser'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { debounce } from 'lodash'
-import { Authentication } from 'components/Squeak'
 import OSTable from 'components/OSTable'
 import Editor from 'components/Editor'
 import { slugifyTeamName } from 'lib/utils'
@@ -969,30 +968,9 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     )
 }
 
-const Auth = () => {
-    return (
-        <div className="-m-4">
-            <div className="p-4">
-                <div className="bg-accent p-4 mt-0 mb-2 rounded-md border border-primary">
-                    <p className="text-sm mb-2">
-                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                        account.
-                    </p>
-                </div>
-            </div>
-            <div className="">
-                <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
-            </div>
-        </div>
-    )
-}
-
 const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; companyId?: number }) => {
     const { user, getJwt, isModerator } = useUser()
+    const posthog = usePostHog()
     const [slugExists, setSlugExists] = useState<boolean | undefined>(undefined)
     const [nameExists, setNameExists] = useState<boolean | undefined>(undefined)
     const [company, setCompany] = useState<Company | null>(null)
@@ -1108,11 +1086,27 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         validateOnChange: true,
         validateOnBlur: false,
         onSubmit: async (values, { setSubmitting }) => {
+            // Which step we are on, so a failure can say where it happened instead of
+            // every path landing in the same catch with the same message.
+            let step = 'auth'
             try {
                 const { logoLight, logoDark, logomark, ...rest } = values
                 const jwt = await getJwt()
                 const profileID = user?.profile?.id
-                if (!profileID || !jwt) return
+                if (!profileID || !jwt) {
+                    // Used to return silently: the button stopped and the form said nothing.
+                    posthog?.capture('cool_tech_jobs_submit_failed', {
+                        step,
+                        reason: !jwt ? 'missing_jwt' : 'missing_profile_id',
+                    })
+                    setConfirmationMessage({
+                        type: 'error',
+                        title: 'Your session has expired',
+                        description: 'Sign in again and submit once more. Nothing you typed has been lost.',
+                    })
+                    return
+                }
+                step = canUpdate ? 'update_company' : 'create_company'
                 const endpoint = isModerator ? 'companies' : 'pending-companies'
                 const jobBoardChanged =
                     values.jobBoardType !== company?.attributes?.jobBoardType ||
@@ -1142,12 +1136,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     }
                 )
                 if (!companyResponse.ok) {
-                    throw new Error('Failed to create company')
+                    throw new Error(`${step}: ${companyResponse.status} ${companyResponse.statusText}`)
                 }
                 const createdCompany = await companyResponse.json()
                 if (!createdCompany?.data?.id) {
-                    throw new Error('Failed to create company')
+                    throw new Error(`${step}: response had no data.id`)
                 }
+                step = 'upload_logos'
                 // Upload images and update the company
                 const uploadedLogoLight =
                     values.logoLight?.file &&
@@ -1173,6 +1168,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                         id: profileID,
                         type: 'api::profile.profile',
                     }))
+                step = 'attach_logos'
                 const updateResponse = await fetch(
                     `${process.env.GATSBY_SQUEAK_API_HOST}/api/${endpoint}/${createdCompany.data.id}`,
                     {
@@ -1203,9 +1199,10 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     }
                 )
                 if (!updateResponse.ok) {
-                    throw new Error('Failed to update company')
+                    throw new Error(`${step}: ${updateResponse.status} ${updateResponse.statusText}`)
                 }
                 if (isModerator) {
+                    step = 'scrape_jobs'
                     const { jobsCreated } = await fetch(
                         `${process.env.GATSBY_SQUEAK_API_HOST}/api/scrape-jobs/${createdCompany.data.id}`,
                         {
@@ -1245,6 +1242,13 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                 }
                 onSuccess?.()
             } catch (error) {
+                // The form previously swallowed this: no log, no event, no step. A company
+                // reporting "it does not submit" left nothing behind to look at.
+                console.error('[cool-tech-jobs] submit failed', { step, error })
+                posthog?.capture('cool_tech_jobs_submit_failed', {
+                    step,
+                    message: error instanceof Error ? error.message : String(error),
+                })
                 setConfirmationMessage({
                     type: 'error',
                     title: 'Failed to submit application',
@@ -1299,9 +1303,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
         }
     }, [companyId])
 
-    return !user ? (
-        <Auth />
-    ) : !isModerator && !disclaimerConfirmed ? (
+    return !user ? null : !isModerator && !disclaimerConfirmed ? (
         <JobBoardIntro onConfirm={() => setDisclaimerConfirmed(true)} />
     ) : confirmationMessage ? (
         <div>
@@ -1600,24 +1602,12 @@ const IssueWindow = () => {
     )
 }
 
-const AddAJobWindow = ({
-    companyId,
-    onSuccess,
-    onClose,
-}: {
-    companyId?: number
-    onSuccess?: () => void
-    onClose?: () => void
-}) => {
+const AddAJobWindow = ({ companyId, onSuccess }: { companyId?: number; onSuccess?: () => void }) => {
     const { setWindowTitle } = useApp()
     const { appWindow } = useWindow()
 
     useEffect(() => {
         setWindowTitle(appWindow, 'Add a company')
-
-        return () => {
-            onClose?.()
-        }
     }, [])
 
     return (
@@ -1632,15 +1622,15 @@ const AddAJobWindow = ({
 }
 
 export default function JobsPage() {
-    const [companyId, setCompanyId] = useState<number>()
     const [filteredCompanies, setFilteredCompanies] = useState<Company[]>()
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [search, setSearch] = useState('')
     const [pendingCompaniesCount, setPendingCompaniesCount] = useState<number>(0)
-    const { addWindow } = useApp()
+    const [pendingCompanyWindow, setPendingCompanyWindow] = useState<{ companyId?: number } | null>(null)
+    const { addWindow, openSignIn, windows } = useApp()
     const { appWindow } = useWindow()
-    const { getJwt, isModerator } = useUser()
+    const { user, getJwt, isModerator } = useUser()
 
     const {
         companies: initialCompanies,
@@ -1678,23 +1668,38 @@ export default function JobsPage() {
         )
     }
 
-    const openAddAJobWindow = (companyId?: number) => {
-        addWindow(
-            <AddAJobWindow
-                newWindow
-                location={{ pathname: `cool-tech-jobs-add-a-job` }}
-                key={`cool-tech-jobs-add-a-job`}
-                companyId={companyId}
-                onSuccess={() => {
-                    mutate()
-                    fetchPendingCompaniesCount()
-                }}
-                onClose={() => {
-                    setCompanyId(undefined)
-                }}
-            />
-        )
-    }
+    const openAddAJobWindow = useCallback(
+        (companyId?: number) => {
+            if (!user) {
+                setPendingCompanyWindow({ companyId })
+                openSignIn()
+                return
+            }
+
+            addWindow(
+                <AddAJobWindow
+                    newWindow
+                    location={{ pathname: `cool-tech-jobs-add-a-job` }}
+                    key={`cool-tech-jobs-add-a-job`}
+                    companyId={companyId}
+                    onSuccess={() => {
+                        mutate()
+                        fetchPendingCompaniesCount()
+                    }}
+                />
+            )
+        },
+        [user, openSignIn, addWindow, mutate, fetchPendingCompaniesCount]
+    )
+
+    useEffect(() => {
+        if (!pendingCompanyWindow || windows.some(({ path }) => path.startsWith('community-auth-'))) return
+
+        setPendingCompanyWindow(null)
+        if (user) {
+            openAddAJobWindow(pendingCompanyWindow.companyId)
+        }
+    }, [user, windows, pendingCompanyWindow, openAddAJobWindow])
 
     return (
         <>
@@ -1775,7 +1780,7 @@ export default function JobsPage() {
                             Work at a company with great perks?{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
-                                onClick={() => openAddAJobWindow(companyId)}
+                                onClick={() => openAddAJobWindow()}
                             >
                                 Apply to get your jobs listed.
                             </button>

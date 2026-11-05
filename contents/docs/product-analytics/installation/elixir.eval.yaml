@@ -1,0 +1,23 @@
+owner: wizard-and-docs
+tags: [install, elixir]
+status: draft
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Elixir app from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: elixir-app
+      prompt: >-
+          Set up PostHog in the Elixir app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/mix.exs lists {:posthog, "~> 2.0"} or a compatible posthog
+                  version in deps.
+              initialized: >-
+                  The app configures :posthog with api_key (the project token) and
+                  api_host (the PostHog host), for example in config/config.exs or
+                  config/runtime.exs. Cite the file and line(s).

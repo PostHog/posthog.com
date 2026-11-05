@@ -13,7 +13,7 @@ PostHog enables you to track and analyze these sites by capturing analytics data
 
 ## How to add PostHog to your Carrd site
 
-Once your Carrd site is set up, go to PostHog and copy your web snippet from [your project settings](https://us.posthog.com/project/2/settings/project#snippet). It looks like this:
+Once your Carrd site is set up, go to PostHog and copy your web snippet from [your project settings](https://app.posthog.com/settings/project#snippet). It looks like this:
 
 ```html
 <script>
