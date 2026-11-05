@@ -189,7 +189,7 @@ posthog.capture({
 })
 ```
 
-Send the account ID with each backend event, and use [group analytics](/docs/product-analytics/group-analytics) to report per account or per plan. Group analytics is a paid add-on. Without it, you cannot split a metric by customer, and that analysis moves to another tool.
+Send the account ID and plan as properties on each backend event. You can then break down any metric by `account_id` or `plan` with standard [breakdowns](/docs/product-analytics/trends/breakdowns). To count unique accounts instead of users, or to use account-level properties, add [group analytics](/docs/product-analytics/group-analytics). Group analytics is a paid add-on.
 
 ## Anti-patterns
 
