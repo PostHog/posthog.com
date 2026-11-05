@@ -125,14 +125,13 @@ async function writeSdkMarkdownReferences(): Promise<void> {
         res.json()
     )
     for (const { attributes } of data ?? []) {
-        const dir = path.resolve(
-            __dirname,
-            '../contents/docs/libraries',
-            attributes.referenceId.replace(/^posthog-/, '')
-        )
-        fs.mkdirSync(dir, { recursive: true })
+        const sdk = attributes.referenceId.replace(/^posthog-/, '')
         // A major version, such as 7, is served at 7.x.x. Other pages keep their name.
         const page = isNaN(Number(attributes.version)) ? attributes.version : `${attributes.version}.x.x`
+        // Each name must be one plain path segment, so a row can't write outside contents/docs/libraries.
+        if ([sdk, page].some((name) => name !== path.basename(name) || name.startsWith('.'))) continue
+        const dir = path.resolve(__dirname, '../contents/docs/libraries', sdk)
+        fs.mkdirSync(dir, { recursive: true })
         fs.writeFileSync(path.join(dir, `${page}.md`), attributes.markdown)
     }
 }
