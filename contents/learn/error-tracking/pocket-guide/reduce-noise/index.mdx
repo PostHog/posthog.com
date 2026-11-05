@@ -48,15 +48,7 @@ Twig is growing, and the engineers are starting to notice issues they'll never f
 
 PostHog bills by events ingested, so these noisy events also cost money.
 
-Here's how Twig's engineers use various tools to silence different types of noisy exceptions:
-
-| Tool | How Twig uses it |
-| --- | --- |
-| [Production builds only](#skip-local-development-with-production-builds) | Local development never sends exceptions |
-| [`before_send`](#drop-browser-errors-with-before_send) | Drops `ResizeObserver loop` errors before they leave the browser |
-| [Burst protection](#stop-looping-browsers-with-burst-protection) | Keeps one looping browser from flooding the project |
-| [Suppression rules](#drop-extension-errors-with-a-suppression-rule) | Drops errors from browser extensions at ingestion |
-| [Rate limits](#cap-outages-with-rate-limits) | Caps volume during an outage |
+The noise comes from different places, so the engineers stop each kind at a different point. Their own laptops shouldn't send exceptions at all. Browser errors they know are harmless can be dropped before they leave the browser. A single looping browser shouldn't flood the project. Errors from code Twig doesn't own, like browser extensions, can be dropped when they reach PostHog. And during an outage, they want a cap on how many exceptions come in.
 
 ## Skip local development with production builds
 

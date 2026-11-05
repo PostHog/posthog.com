@@ -6,13 +6,14 @@ pocketGuideOrder: 6
 section: Automate
 pocketGuideCta:
   kind: prompt
-  label: Suggest rules with PostHog AI
-  note: It suggests rules from your recent exceptions. You add them under Assignment rules in Error Tracking settings.
+  label: Set up triage with PostHog AI
+  note: It suggests assignment rules and alerts from your recent exceptions. You add them in Error Tracking settings.
   prompt: >-
     Group my $exception events from the last 30 days by the source files in $exception_sources and the path of
     $current_url, and leave out third-party code. Name each group by the part of my product it covers, like
     trips or bookings. Suggest one error tracking assignment rule per group, with the property, operator, and
     value it filters on. List the rules most specific first, because the first rule that matches assigns the issue.
+    Then suggest which error tracking alerts each team needs, for reopened issues and spikes, and where to send them.
 ---
 
 <LeftPage>
@@ -46,8 +47,6 @@ The Trips team owns everything under `src/trips/`, including **Trip details**. T
 
 Rules run at ingestion, after <Term name="source map">source maps</Term> are applied, so they match Twig's unminified <Term name="stack trace" />. The first rule that matches assigns the issue, so specific rules go first.
 
-<Action />
-
 ## Track fixes in GitHub
 
 The Trips team plans its work in GitHub. From the issue page, the engineers create a GitHub issue that links back to PostHog, with every exception and the guests the issue impacts <SeeFig n={2} />. The [GitLab, Linear, and Jira integrations](/docs/error-tracking/integrations) work the same way.
@@ -61,6 +60,10 @@ The engineers set up alerts to hear when an issue like **Trip details** spikes. 
 - **Issue spiking** fires when an issue gets far more exceptions than usual. PostHog compares each 5-minute window with the issue's baseline from the past hour <SeeFig n={3} />.
 
 The engineers add two alerts in [alerting settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting), for reopened issues and for spikes. Both go to the Trips team's Slack channel.
+
+When the spike alert fires, someone on the Trips team opens the issue and watches a recording of a guest who hit it. If it's a real bug, they fix it and link the GitHub issue. If it's noise, they suppress it.
+
+<Action />
 
 ## Self-driving
 
