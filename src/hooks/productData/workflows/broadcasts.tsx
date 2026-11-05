@@ -39,8 +39,8 @@ export const broadcasts: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Announcements, product updates, a weekly digest. Pick who gets it, write it, choose when, and
-                    launch. Five steps, and PostHog saves a draft as you go.
+                    Pick who gets it, write it, choose when, and launch. PostHog saves a draft as you go, and a
+                    broadcast can recur, so a weekly digest is a broadcast on a schedule.
                 </p>
                 {list([
                     {
@@ -78,8 +78,8 @@ export const broadcasts: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    The people you message are the people in your analytics. Nothing to upload, nothing to sync, and
-                    nothing goes stale.
+                    The people you message are the people in your analytics, so there is no list to upload and no sync
+                    job to keep it fresh.
                 </p>
                 {list([
                     {
@@ -108,7 +108,7 @@ export const broadcasts: CarouselSlide[] = [
         icon: <IconPencil className="size-5" />,
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'Design once, reuse everywhere',
+        heading: 'Templates, merge tags, and a test send',
         description: (
             <>
                 <p>Build emails in the editor or start from a template, then use them in any broadcast or campaign.</p>
@@ -192,12 +192,12 @@ export const broadcasts: CarouselSlide[] = [
         icon: <IconGraph className="size-5" />,
         progressBar: 'bg-green',
         layout: 'stack',
-        heading: 'Measure the conversion, not the open rate',
+        heading: 'Every send is an event',
         description: (
             <>
                 <p>
-                    Opens and clicks are table stakes. Every message also lands on the person as an event, so you can
-                    see what they did next, in the same funnels and replays as everything else.
+                    Opens and clicks are table stakes. What you want to know is whether the email got anyone to upgrade,
+                    and because every send is an event on the person, that is a funnel like any other.
                 </p>
                 {list([
                     {

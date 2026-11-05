@@ -78,8 +78,8 @@ export const workflows = {
                 heading: 'Transactional email',
                 intro: (
                     <p>
-                        Password resets, sign-in codes, receipts, invites. One call from the SDK you already run, from a
-                        domain you verified, and every send lands on the person who triggered it.
+                        This is the email your code sends: password resets, sign-in codes, receipts, invites. One call
+                        from the SDK you already run, and the send shows up on the person who triggered it.
                     </p>
                 ),
             },
@@ -95,8 +95,9 @@ export const workflows = {
                 heading: 'Broadcasts',
                 intro: (
                     <p>
-                        Product updates, announcements, a weekly digest. Pick a cohort you already have, write it, send
-                        it, and count the people who did the thing you wanted.
+                        A broadcast is one email to a lot of people: a product update, a changelog, a webinar invite.
+                        The audience is a cohort or a property filter you already have in PostHog, so there is no list
+                        to export and nothing goes stale.
                     </p>
                 ),
             },
@@ -112,8 +113,9 @@ export const workflows = {
                 heading: 'Automation',
                 intro: (
                     <p>
-                        Onboarding drips, upgrade nudges, win-backs. Trigger from any event, wait for the right moment,
-                        split the audience, and branch to email, push, Slack, or a webhook.
+                        Campaigns that run themselves. An event starts one, a delay or a condition decides what happens
+                        next, and each step can send an email, a push, a Slack message, or a webhook. This is where
+                        Workflows started, and it still does the Zapier-shaped jobs too.
                     </p>
                 ),
             },
@@ -164,15 +166,11 @@ export const workflows = {
         eli5: (
             <>
                 <p>
-                    Email & Messaging is how your product talks to its users. Start with the transactional email a
-                    person is waiting for: a reset link, a sign-in code, a receipt. Then send a broadcast to a cohort
-                    you already have. Then automate the onboarding, upgrade, and win-back sequences from the events you
-                    already track, across email, push, Slack, and webhooks.
-                </p>
-                <p>
-                    The difference from a plain email API: every send is an event on the person who got it, next to
-                    their sessions, replays, and flags. So instead of a delivery rate, you see whether the reset email
-                    got them back in, and whether the onboarding drip got them to activate.
+                    Transactional email, broadcasts, and automated campaigns, sent from the same PostHog SDK that tracks
+                    your events. Start with the password reset. When that works, send a product update to a cohort, then
+                    wire up the onboarding drip. Every email lands on the person who got it, next to their events and
+                    replays, so you can see whether the reset got them back in and whether the drip got them to
+                    activate. The first 10,000 emails a month are free.
                 </p>
             </>
         ),
@@ -221,23 +219,23 @@ export const workflows = {
         rows: [
             [
                 'Backend Engineers',
-                'Replace Resend, Postmark, or SendGrid with the PostHog SDK you already run, with one key and one less vendor',
+                'Send the password reset from the SDK you already run, and drop Resend, Postmark, or SendGrid from the stack',
             ],
             [
                 'Product Engineers',
-                'See whether the reset email was delivered, opened, and clicked on the same person as their session replay',
+                'See whether the reset email was delivered, opened, and clicked, on the same person as their session replay',
             ],
             [
                 'Growth Engineers',
-                'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior',
+                'Trigger an onboarding drip from sign-up, nudge the people who stall, and A/B test the message',
             ],
             [
                 'Product Marketers',
-                'Broadcasts and lifecycle campaigns to cohorts you already have, with opt-outs by category and a conversion goal on every send',
+                'Send a product update to a cohort you already have, with opt-outs by category and a conversion goal on every broadcast',
             ],
             [
                 'Product Leads / Technical PMs',
-                'Consolidate Customer.io and Zapier into PostHog: activation, retention, and lifecycle flows on the same events you already track',
+                'Replace Customer.io and Zapier with flows that run on the events you already track',
             ],
         ],
     },

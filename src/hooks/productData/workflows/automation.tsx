@@ -33,8 +33,9 @@ export const automation: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    Welcome email on sign-up. A day later, a nudge, but only to the people who haven’t finished
-                    onboarding. Build it on a canvas from the events and properties you already track.
+                    A welcome email when someone signs up, then a nudge a day later for the ones who haven't finished
+                    onboarding. You build it on a canvas, and the branches use the same events and properties as your
+                    insights.
                 </p>
                 {list([
                     {
@@ -45,7 +46,7 @@ export const automation: CarouselSlide[] = [
                     {
                         label: 'Wait for the right moment',
                         description:
-                            'Add a delay, or wait until a person does something (or doesn’t) and branch on the result.',
+                            "Add a delay, or wait until a person does something (or doesn't) and branch on the result.",
                     },
                     {
                         label: 'Split the audience',
@@ -68,7 +69,7 @@ export const automation: CarouselSlide[] = [
         icon: <IconBolt className="size-5" />,
         progressBar: 'bg-yellow',
         layout: 'stack',
-        heading: 'Start from product data, not a CSV',
+        heading: 'Triggers: an event, a cohort, or a schedule',
         description: (
             <>
                 <p>
