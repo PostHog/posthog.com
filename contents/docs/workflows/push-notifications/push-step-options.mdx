@@ -36,7 +36,7 @@ With **Show a notification**, the system only shows the notification while your 
 - On Android, the message goes to `onMessageReceived`, and your app has to show it.
 - On iOS, your `UNUserNotificationCenterDelegate` has to return the presentation options, such as `[.banner, .sound]`, from `userNotificationCenter(_:willPresent:withCompletionHandler:)`.
 
-For data only and silent pushes, put everything your app needs in **Custom data payload**. On Android, the title, body and image aren't sent with a data only push, and only the **Android priority** setting applies. A silent push sends no title, body or image to any device.
+For data only and silent pushes, put everything your app needs in **Custom data payload**. On Android, the title, body and image aren't sent with a data only push, and **Android priority** is the only Android setting that applies. A silent push sends no title, body or image to any device.
 
 Things to know about silent pushes on iOS:
 
@@ -51,7 +51,7 @@ If you create a workflow through the API and leave out the title for a push that
 
 On iOS, **Group** is also used as the thread ID, so iOS bundles notifications with the same group. If you set **iOS thread ID**, that's used instead.
 
-PostHog SDKs don't open the link or group notifications on Android yet, so your app has to read these keys itself.
+PostHog SDKs don't open the link, and they don't group notifications on Android, so your app has to read these keys itself.
 
 On Android, read them where your app handles the push. For a data only or silent push, that's `onMessageReceived`, where you can also pass `group` to `setGroup()` when you build the notification:
 
@@ -94,10 +94,10 @@ Turn on **Protect sensitive data** in the step's settings panel for notification
 When it's on:
 
 - The notification is still sent as usual.
-- The workflow doesn't keep a copy of the title, subtitle, body or image as sent. The message history shows that a notification was sent, with the title as you wrote it in the step, before variables are filled in, and a note that the content wasn't stored.
+- The workflow doesn't keep a copy of the title, subtitle, body or image as sent. The workflow's **Assets** tab and the person's **Push notifications** tab show that a notification was sent, with the title as you wrote it in the step, before variables are filled in, and a note that the content wasn't stored.
 - The workflow run doesn't keep its variables, so the run can't be rerun.
 
-The message history never includes a push's custom data, whether or not this setting is on.
+These tabs never include a push's custom data, whether or not this setting is on.
 
 This setting only covers what the workflow stores. When someone taps the notification, the iOS SDK captures a `$push_notification_opened` event with the notification's title, subtitle and body. To keep that content out of your events, remove it before the event is sent:
 
