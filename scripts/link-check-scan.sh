@@ -10,6 +10,8 @@ if [ "${2:-}" = "--minimal-build" ]; then
     curl -fsSL --retry 3 --max-time 60 "$PRODUCTION_SITEMAP_URL" -o "$LINK_CHECK_FULL_SITEMAP" || exit 2
 fi
 
+cat public/sitemap/sitemap-*.xml > "$RESULTS_DIR/built-sitemap.xml" || exit 2
+
 STATUS=0
 for SCANNER in check-links-post-build check-src-links; do
     node "scripts/$SCANNER.js" "$RESULTS_DIR" > "$RESULTS_DIR/$SCANNER.log" 2>&1

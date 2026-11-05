@@ -200,11 +200,37 @@ jobs:
                   edit-mode: replace
                   body-path: preview-comment.md
 
+            - name: Find base commit
+              id: base
+              if: success()
+              run: echo "sha=$(git rev-parse HEAD^1)" >> "$GITHUB_OUTPUT"
+
+            - name: Restore link baseline from master
+              id: link-baseline
+              if: success()
+              continue-on-error: true
+              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: link-check-baseline
+                  key: link-check-baseline-${{ steps.base.outputs.sha }}
+                  restore-keys: |
+                      link-check-baseline-
+
             - name: Check links
               if: success()
               continue-on-error: true
               timeout-minutes: 5
-              run: scripts/link-check-scan.sh link-check-results --minimal-build
+              env:
+                  BASELINE_KEY: ${{ steps.link-baseline.outputs.cache-matched-key }}
+                  EXACT_BASELINE: ${{ steps.link-baseline.outputs.cache-hit }}
+              run: |
+                  mkdir -p link-check-results
+                  if [ -n "$BASELINE_KEY" ]; then
+                    mv link-check-baseline link-check-results/baseline
+                    echo "$BASELINE_KEY $EXACT_BASELINE" > link-check-results/baseline/source.txt
+                    export LINK_CHECK_BASELINE_SITEMAP=link-check-results/baseline/built-sitemap.xml
+                  fi
+                  scripts/link-check-scan.sh link-check-results --minimal-build
 
             - name: Upload link check results
               if: success()
@@ -278,12 +304,6 @@ jobs:
         steps:
             - name: Checkout
               uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
-              with:
-                  fetch-depth: 2
-
-            - name: Find base commit
-              id: base
-              run: echo "sha=$(git rev-parse HEAD^1)" >> "$GITHUB_OUTPUT"
 
             - name: Set up Node.js
               uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
@@ -296,27 +316,16 @@ jobs:
                   name: link-check-results
                   path: link-check-results
 
-            - name: Restore link baseline from master
-              id: link-baseline
-              uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-              with:
-                  path: link-check-baseline
-                  key: link-check-baseline-${{ steps.base.outputs.sha }}
-                  restore-keys: |
-                      link-check-baseline-
-
             - name: Compare with master
-              env:
-                  BASELINE_KEY: ${{ steps.link-baseline.outputs.cache-matched-key }}
-                  EXACT_BASELINE: ${{ steps.link-baseline.outputs.cache-hit }}
               run: |
-                  if [ -z "$BASELINE_KEY" ]; then
+                  if [ ! -f link-check-results/baseline/source.txt ]; then
                     echo "No master link baseline exists yet. Skipping the comparison." | tee -a "$GITHUB_STEP_SUMMARY"
                     exit 0
                   fi
+                  read -r BASELINE_KEY EXACT_BASELINE < link-check-results/baseline/source.txt
                   if [ "$EXACT_BASELINE" = "true" ]; then
-                    node scripts/link-check-report.js link-check-results --compare-base=link-check-baseline
+                    node scripts/link-check-report.js link-check-results --compare-base=link-check-results/baseline
                     exit
                   fi
                   echo "No baseline for this PR's base commit yet, so $BASELINE_KEY is used and new findings do not fail the check." | tee -a "$GITHUB_STEP_SUMMARY"
-                  node scripts/link-check-report.js link-check-results --compare-base=link-check-baseline || [ $? -eq 1 ]
+                  node scripts/link-check-report.js link-check-results --compare-base=link-check-results/baseline || [ $? -eq 1 ]

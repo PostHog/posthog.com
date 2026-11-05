@@ -99,41 +99,23 @@ function builtUrlExists(pathname, pages) {
     return (fs.existsSync(asset) && fs.statSync(asset).isFile()) || fs.existsSync(path.join(asset, 'index.html'))
 }
 
-let fullSitePages
+let fullSiteOnlyPages
 
 const normalizedPath = (pathname) => pathname.replace(/\/$/, '') || '/'
 
-const SOURCE_PAGES_DIR = 'src/pages/'
-
-function routeForRemovedFile(file) {
-    if (!file.startsWith(SOURCE_PAGES_DIR)) return pageUrl(file)
-    const route = file
-        .slice(SOURCE_PAGES_DIR.length)
-        .replace(/\.[jt]sx?$/, '')
-        .replace(/(^|\/)index$/, '')
-    return '/' + route
-}
-
-function pagesRemovedByHeadCommit() {
-    const changes = execFileSync(
-        'git',
-        ['diff', '--name-status', '--diff-filter=DR', 'HEAD^1', 'HEAD', '--', 'contents/', SOURCE_PAGES_DIR],
-        { encoding: 'utf8' }
-    )
-    return changes
-        .split('\n')
-        .filter(Boolean)
-        .map((line) => normalizedPath(routeForRemovedFile(line.split('\t')[1])))
+function sitemapPaths(file) {
+    const locations = file ? fs.readFileSync(file, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g) : []
+    return new Set([...locations].map((match) => normalizedPath(new URL(match[1].trim()).pathname)))
 }
 
 function inFullSiteOnly(pathname, pages) {
-    if (fullSitePages === undefined) {
-        const sitemapFile = process.env.LINK_CHECK_FULL_SITEMAP
-        const locations = sitemapFile ? fs.readFileSync(sitemapFile, 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g) : []
-        fullSitePages = new Set([...locations].map((match) => normalizedPath(new URL(match[1].trim()).pathname)))
-        if (sitemapFile) for (const removed of pagesRemovedByHeadCommit()) fullSitePages.delete(removed)
+    if (fullSiteOnlyPages === undefined) {
+        const baselineBuiltPages = sitemapPaths(process.env.LINK_CHECK_BASELINE_SITEMAP)
+        fullSiteOnlyPages = new Set(
+            [...sitemapPaths(process.env.LINK_CHECK_FULL_SITEMAP)].filter((page) => !baselineBuiltPages.has(page))
+        )
     }
-    return fullSitePages.has(normalizedPath(pathname)) && !builtUrlExists(pathname, pages)
+    return fullSiteOnlyPages.has(normalizedPath(pathname)) && !builtUrlExists(pathname, pages)
 }
 
 function maskExamples(content) {
