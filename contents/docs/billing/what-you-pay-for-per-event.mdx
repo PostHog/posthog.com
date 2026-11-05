@@ -60,7 +60,7 @@ Without it: a self-run cluster bills per node-hour whether anyone queries it or 
 
 ### Getting it out
 
-[Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet. The [query API](/docs/api/query) returns anything SQL can express. If you leave, your data leaves with you.
+[Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet. The first 1 million rows you export each month are free; past that, exports bill per row under [Data pipelines pricing](/pricing), not the event price. The [query API](/docs/api/query) returns anything SQL can express. If you leave, your data leaves with you.
 
 ## The ledger: what you own if you build it
 
@@ -81,7 +81,7 @@ An agent's estimate covers the first month of storage. The per-event price cover
 
 ### Compute, forever
 
-Each event is read many times across its life. Every dashboard refresh, funnel, cohort recalculation, and AI question reads it again. That is in the price. A cluster you run bills by the hour whether or not anyone is looking.
+Each event is read many times across its life. Every dashboard refresh, funnel, cohort recalculation, and SQL query reads it again. That is in the price. Asking [PostHog AI](/docs/posthog-ai) spends [AI credits](/docs/posthog-ai/pricing) on top, but the queries it runs are covered. A cluster you run bills by the hour whether or not anyone is looking.
 
 ### Scaling you did not plan for
 
@@ -110,12 +110,13 @@ Fill this in with your numbers.
 Then:
 
 ```
-storage at month N  = events × bytes × replicas × N × price per GB-month
-monthly total       = storage + compute + queue + (engineer hours × loaded rate)
-your cost per event = monthly total ÷ events per month
+GB stored at month N = events × bytes × replicas × N ÷ 1,000,000,000
+storage at month N   = GB stored × price per GB-month
+monthly total        = storage + compute + queue + (engineer hours × loaded rate)
+your cost per event  = monthly total ÷ events per month
 ```
 
-Compare the last line to your tier in the table at the top. Run it for month 1 and for month 36.
+Compare the last line to a PostHog bill at the same volume: take the monthly total from the [pricing calculator](/pricing), with any add-ons you need, and divide it by your monthly events. The free million and the falling tiers make that average lower than the rates in the table at the top. Run it for month 1 and for month 36.
 
 ## When building is the right call
 
@@ -127,4 +128,4 @@ If none of those apply, the per-event price is the cheaper way to get this.
 
 ## Cut the bill without leaving
 
-[Capture fewer events](/docs/product-analytics/cutting-costs), send [anonymous events](/docs/data/anonymous-vs-identified-events) where you do not need a person, set a [billing limit](/docs/billing/limits-alerts), and set a [shorter retention window](/docs/data/events-retention#custom-retention) if seven years is more than you need.
+[Capture fewer events](/docs/product-analytics/cutting-costs), send [anonymous events](/docs/data/anonymous-vs-identified-events) where you do not need a person, and set a [billing limit](/docs/billing/limits-alerts). A [shorter retention window](/docs/data/events-retention#custom-retention) does not lower the bill — you pay when an event is ingested, not while it is stored — and deleted events do not come back.
