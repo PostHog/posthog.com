@@ -44,7 +44,7 @@ To send an email template you already have, open it in the **Templates** tab, op
 
 With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to set up a transactional email. It can design the email from your brand, make it transactional, and write the code that sends it. It asks you to confirm before it makes a template transactional, and you create the API key yourself.
 
-You can also make a template transactional with the API: call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `hog_flow:write` scope.
+You can also make a template transactional with the API: call `POST /api/projects/:project_id/messaging_templates/:template_id/make_transactional/` with a [personal API key](/docs/api/personal-api-keys) that has the `transactional_email:write` scope. Keys with `hog_flow:write` still work.
 
 ### Edit a transactional email
 
@@ -58,16 +58,16 @@ For emails with sign-in codes, reset links, or other secrets, turn on **Protect 
 
 ## Create an API key
 
-Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `hog_flow:write` scope. The same key can also [read the status](#check-an-emails-status) of each email it sends.
+Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `transactional_email:write` scope. Keys with `hog_flow:write` still work. The same key can also [read the status](#check-an-emails-status) of each email it sends.
 
 1. Go to [**Project secret API keys**](https://app.posthog.com/settings/project-secret-api-keys) in your project settings.
 2. Click **Create project secret API key** and give the key a label.
-3. In the scopes list, set **Workflow** to **Write**.
+3. In the scopes list, set **Transactional email** to **Write**.
 4. Copy the key. It starts with `phs_`, and you can't see it again after you leave the page.
 
 A project secret API key with this scope can send transactional emails and read their status, and nothing else. It can't read or change your templates, and it can't use any other part of the Workflows API. Keep the key on your server. Never put it in client-side code.
 
-To give a service a key that can read statuses but not send, set **Workflow** to **Read** instead.
+To give a service a key that can read statuses but not send, set **Transactional email** to **Read** instead.
 
 ## Send an email
 
@@ -135,7 +135,7 @@ Use `code` in your error handling. The text in `detail` can change.
 | `400` | `marketing_template` | The template is in a marketing category. | Move the template to a transactional category, or remove its category. |
 | `400` | `transactional_email_paused` | The workflow that sends this template isn't active, or it was deleted. | Don't retry. A retry gets the same error. |
 | `401` | `not_authenticated` or `authentication_failed` | The `Authorization` header is missing, or the key isn't valid. | Check that you send a valid project secret API key. |
-| `403` | `permission_denied` | The key doesn't have the `hog_flow:write` scope, or the key belongs to a different project. | Use a key from this project with the correct scope. |
+| `403` | `permission_denied` | The key doesn't have the `transactional_email:write` scope, or the key belongs to a different project. | Use a key from this project with the correct scope. |
 | `404` | `not_found` | The template doesn't exist in this project, or transactional emails aren't turned on for the project. | Check the template ID and the project. |
 | `409` | `idempotency_key_in_flight` | A request with the same `Idempotency-Key` is still in progress. | Retry with the same key after a few seconds. |
 | `422` | `idempotency_key_reused` | The `Idempotency-Key` was already used for a different request. | Use a new key for a new email. |

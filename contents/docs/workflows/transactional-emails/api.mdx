@@ -353,7 +353,7 @@ To find out what happened to an email, read its status with the `message_id` fro
 GET https://us.posthog.com/api/projects/@current/messaging/emails/:message_id/
 ```
 
-Send the same `Authorization` header as for a send. The key needs the `hog_flow:read` or `hog_flow:write` scope. Only a project secret API key can read a status.
+Send the same `Authorization` header as for a send. The key needs the `transactional_email:read` or `transactional_email:write` scope. A key with a `hog_flow` scope still works. Only a project secret API key can read a status.
 
 A found email returns `200`:
 
