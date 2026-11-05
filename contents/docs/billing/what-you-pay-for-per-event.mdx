@@ -30,7 +30,7 @@ Every analytics setup, bought or built, has the same job.
 - You have to keep it safe for as long as anyone might need it, and nobody knows when that'll be. 
 - You have to keep it available for when you want to use it, or send it off wherever you want it to go.
 
-Say you ship a mobile app. Someone opens it on a train, taps through a few screens, loses signal, and closes it. Those taps still need to reach you once the phone is back online, in the right order and with the right time on them. Meanwhile your website has a different problem: some of your visitors run ad blockers that strip out tracking scripts. Finally, your backend records the events that matter most, like signups and payments, straight from your servers.
+That sounds like three jobs. In practice it's six, and each one has its own ways in can go wrong.
 
 ### Step 1: Getting it in
 
@@ -58,7 +58,7 @@ If an ingestion worker crashes halfway through a batch, Kafka redelivers it. Any
 
 Without it, a traffic spike or a database restart can mean you lose your precious data for good.
 
-**How it works at PostHog:** Ingestion validates each event, drops anything older than a limit you set, and runs your [transformations](/docs/data-pipelines/transformations). It adds country and city from GeoIP, gives [cookieless](/tutorials/cookieless-tracking) events a daily-rotating hash instead of a cookie, and attaches UTM and referrer data to the [session](/docs/data/sessions). Every event and property name goes into a catalog, which is how the UI, SQL autocomplete, and [PostHog AI](/docs/posthog-ai) know what exists. If something's wrong with an event, an [ingestion warning](/docs/data/ingestion-warnings) tells you which one. When two names mean the same thing, you can combine them into one [action](/docs/data/actions) or rename one with a transformation.
+### Step 3: Making it mean something
 
 Raw events are messy. Your iOS app sends `Signed Up`, your web app sends `signup_completed`, and last week's release misspelled a property name. Someone reads your blog on their phone at lunch and signs up on their laptop that evening, and as far as the raw data knows, that's two strangers. Before anyone can trust a chart, the data needs checking and joining up.
 
@@ -72,7 +72,7 @@ Without it, one platform renames a property, one metric quietly splits in two, a
 
 Simply put: you don't know which questions you'll need to ask next year. Your board wants to see how this year's signups compare with your first cohort. A new PM wants to know whether the redesign two years ago actually worked. You can only answer those sorts of questions if the data from back then is still there and still fast to query.
 
-**How it works:** Events land in a sharded, replicated ClickHouse cluster, with properties compressed using ZSTD. Hot data (that which you use regularly) sits on local NVMe and [moves to cheaper tiers](/handbook/engineering/clickhouse/clusters#storage-tiers) as it ages. Every week we look at slow queries and materialize the columns that would make them fast.
+**How it works at PostHog:** Events land in a sharded, replicated ClickHouse cluster, with properties compressed using ZSTD. Hot data (that which you use regularly) sits on local NVMe and [moves to cheaper tiers](/handbook/engineering/clickhouse/clusters#storage-tiers) as it ages. Every week we look at slow queries and materialize the columns that would make them fast.
 
 We're also [rebuilding the storage format](/blog/changing-event-storage) so each property is stored once, with its real type, which makes common queries up to 2x faster. GDPR deletions run as batched jobs, because deleting anything from ClickHouse means rewriting whole partitions.
 
@@ -86,7 +86,7 @@ Data is only worth keeping if people actually use it. Your PM builds a funnel fo
 
 (Well, maybe the PM.)
 
-**How it works:** Funnels, retention, paths, lifecycle, [dashboards](/docs/product-analytics/dashboards), [SQL](/docs/data-warehouse/sql), and [PostHog AI](/docs/posthog-ai) all run on the same events, and the compute for those queries is in the event price.
+**How it works at PostHog:** Funnels, retention, paths, lifecycle, [dashboards](/docs/product-analytics/dashboards), [SQL](/docs/data-warehouse/sql), and [PostHog AI](/docs/posthog-ai) all run on the same events, and the compute for those queries is in the event price.
 
 We run guard rails so one query can't take a cluster down. A query gets 60 seconds by default and 10 minutes in the background, and each organization has a concurrency limit. Inside those limits, we don't meter queries.
 
@@ -94,7 +94,7 @@ We run guard rails so one query can't take a cluster down. A query gets 60 secon
 
 Sometimes the data needs to go somewhere else entirely. Your data team wants it in Snowflake next to everything else the company tracks. Your sales team wants a Slack message when a big account signs up, or a HubSpot contact updated when someone upgrades. And if you ever leave PostHog, you want every event to come with you.
 
-**How it works:** [Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet, on a schedule you set. The first 1 million rows you export each month are free. After that, exports bill per row under [Data Pipelines pricing](/pricing), not the event price.
+**How it works at PostHog:** [Batch exports](/docs/data-pipelines/batch-exports) can send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet, on a schedule you set. The first 1 million rows you export each month are free. After that, exports bill per row under [Data Pipelines pricing](/pricing), not the event price.
 
 [Destinations](/docs/data-pipelines/destinations) send events to tools like [Slack](/docs/data-pipelines/destinations/slack), [HubSpot](/docs/data-pipelines/destinations/hubspot), and Customer.io as they happen. They have their own free tier and bill separately from events too. The [query API](/docs/api/query) returns anything SQL can express. If you leave, your data leaves with you.
 
