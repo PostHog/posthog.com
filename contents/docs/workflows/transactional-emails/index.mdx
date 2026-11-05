@@ -119,27 +119,27 @@ An error response has this shape:
 
 Use `code` in your error handling. The text in `detail` can change.
 
-| Status | `code` | What it means | What to do |
-| --- | --- | --- | --- |
-| `400` | Varies, with `"type": "validation_error"` | The body isn't valid. For example, `to` is missing or isn't an email address. `attr` names the field. | Fix the request. |
-| `400` | `invalid_recipient` | The `to` address contains `{` or `}`. | Send a plain email address. |
-| `400` | `invalid_idempotency_key` | The `Idempotency-Key` header isn't 1 to 255 visible ASCII characters. | Use a valid key. |
-| `400` | `template_not_transactional` | The template isn't transactional. | [Make the template transactional](#create-a-transactional-email). |
-| `400` | `template_not_sendable` | The template has no subject or no body. | Add them and publish the template. |
-| `400` | `marketing_template` | The template is in a marketing category. | Move the template to a transactional category, or remove its category. |
-| `400` | `transactional_email_paused` | The workflow that sends this template isn't active, or it was deleted. | Don't retry. A retry gets the same error. |
-| `401` | `not_authenticated` or `authentication_failed` | The `Authorization` header is missing, or the key isn't valid. | Check that you send a valid project secret API key. |
-| `403` | `permission_denied` | The key doesn't have the `hog_flow:write` scope, or the key belongs to a different project. | Use a key from this project with the correct scope. |
-| `404` | `not_found` | The template doesn't exist in this project, or transactional emails aren't turned on for the project. | Check the template ID and the project. |
-| `409` | `idempotency_key_in_flight` | A request with the same `Idempotency-Key` is still in progress. | Retry with the same key after a few seconds. |
-| `422` | `idempotency_key_reused` | The `Idempotency-Key` was already used for a different request. | Use a new key for a new email. |
-| `422` | `recipient_suppressed` | The address is on your project's [suppression list](/docs/workflows/opt-outs#the-suppression-list) after a hard bounce or a spam complaint. | Don't retry. Remove the address from the suppression list only if you know that it can receive email again. |
-| `422` | `recipient_unreachable` | The address isn't valid, or its domain has no mail servers, so the email would bounce. | Check the address for a typo. Don't retry the same address. |
-| `422` | `sending_paused` | Sending is paused for this transactional email because of its bounce or complaint rate. | Check the **Reputation** tab in Workflows. |
-| `422` | `sending_suspended` | Email sending is suspended for your project. | Check the **Reputation** tab in Workflows. |
-| `429` | `throttled` | You sent too many requests. | Wait for the number of seconds in the `Retry-After` header, then retry. |
-| `429` | `quota_limited` | Your project is over its email quota. | Check your usage and [billing limits](/docs/billing/limits-alerts). A retry gets the same error until the project is under its quota. |
-| `503` | `delivery_unavailable` | PostHog couldn't confirm that it queued the email. | Retry with backoff. Send the same `Idempotency-Key` so that the email doesn't go out twice. |
+| Status | `code`                                         | What it means                                                                                                                               | What to do                                                                                                                            |
+| ------ | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | Varies, with `"type": "validation_error"`      | The body isn't valid. For example, `to` is missing or isn't an email address. `attr` names the field.                                       | Fix the request.                                                                                                                      |
+| `400`  | `invalid_recipient`                            | The `to` address contains `{` or `}`.                                                                                                       | Send a plain email address.                                                                                                           |
+| `400`  | `invalid_idempotency_key`                      | The `Idempotency-Key` header isn't 1 to 255 visible ASCII characters.                                                                       | Use a valid key.                                                                                                                      |
+| `400`  | `template_not_transactional`                   | The template isn't transactional.                                                                                                           | [Make the template transactional](#create-a-transactional-email).                                                                     |
+| `400`  | `template_not_sendable`                        | The template has no subject or no body.                                                                                                     | Add them and publish the template.                                                                                                    |
+| `400`  | `marketing_template`                           | The template is in a marketing category.                                                                                                    | Move the template to a transactional category, or remove its category.                                                                |
+| `400`  | `transactional_email_paused`                   | The workflow that sends this template isn't active, or it was deleted.                                                                      | Don't retry. A retry gets the same error.                                                                                             |
+| `401`  | `not_authenticated` or `authentication_failed` | The `Authorization` header is missing, or the key isn't valid.                                                                              | Check that you send a valid project secret API key.                                                                                   |
+| `403`  | `permission_denied`                            | The key doesn't have the `hog_flow:write` scope, or the key belongs to a different project.                                                 | Use a key from this project with the correct scope.                                                                                   |
+| `404`  | `not_found`                                    | The template doesn't exist in this project, or transactional emails aren't turned on for the project.                                       | Check the template ID and the project.                                                                                                |
+| `409`  | `idempotency_key_in_flight`                    | A request with the same `Idempotency-Key` is still in progress.                                                                             | Retry with the same key after a few seconds.                                                                                          |
+| `422`  | `idempotency_key_reused`                       | The `Idempotency-Key` was already used for a different request.                                                                             | Use a new key for a new email.                                                                                                        |
+| `422`  | `recipient_suppressed`                         | The address is on your project's [suppression list](/docs/workflows/opt-outs#the-suppression-list) after a hard bounce or a spam complaint. | Don't retry. Remove the address from the suppression list only if you know that it can receive email again.                           |
+| `422`  | `recipient_unreachable`                        | The address isn't valid, or its domain has no mail servers, so the email would bounce.                                                      | Check the address for a typo. Don't retry the same address.                                                                           |
+| `422`  | `sending_paused`                               | Sending is paused for this transactional email because of its bounce or complaint rate.                                                     | Check the **Reputation** tab in Workflows.                                                                                            |
+| `422`  | `sending_suspended`                            | Email sending is suspended for your project.                                                                                                | Check the **Reputation** tab in Workflows.                                                                                            |
+| `429`  | `throttled`                                    | You sent too many requests.                                                                                                                 | Wait for the number of seconds in the `Retry-After` header, then retry.                                                               |
+| `429`  | `quota_limited`                                | Your project is over its email quota.                                                                                                       | Check your usage and [billing limits](/docs/billing/limits-alerts). A retry gets the same error until the project is under its quota. |
+| `503`  | `delivery_unavailable`                         | PostHog couldn't confirm that it queued the email.                                                                                          | Retry with backoff. Send the same `Idempotency-Key` so that the email doesn't go out twice.                                           |
 
 If you make a template transactional or save it without a verified sender, PostHog returns `400` with the code `sender_unavailable`.
 
@@ -151,14 +151,14 @@ Each project secret API key can send 600 requests per minute and 20,000 requests
 
 Each send returns a message ID. Read the email's status with it, for 30 days after the send. Your platform's page shows how.
 
-| `status` | What it means |
-| --- | --- |
-| `queued` | The email waits to go out. |
-| `sent` | PostHog handed the email to the email provider. |
-| `failed` | The email wasn't sent. `reason` says why. |
-| `delivered` | The recipient's mail server accepted the email. |
-| `bounced` | The recipient's mail server refused the email. `reason` is `hard`, `soft`, or `unknown`. |
-| `complained` | The recipient marked the email as spam. |
+| `status`     | What it means                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------- |
+| `queued`     | The email waits to go out.                                                               |
+| `sent`       | PostHog handed the email to the email provider.                                          |
+| `failed`     | The email wasn't sent. `reason` says why.                                                |
+| `delivered`  | The recipient's mail server accepted the email.                                          |
+| `bounced`    | The recipient's mail server refused the email. `reason` is `hard`, `soft`, or `unknown`. |
+| `complained` | The recipient marked the email as spam.                                                  |
 
 A status only moves forward. For example, a `delivered` email never goes back to `sent`. New statuses can appear in the future, so handle a value you don't know.
 
@@ -185,6 +185,6 @@ The lookup returns `404` with the code `not_found` when:
 - **No opt-outs or frequency caps.** Transactional emails ignore marketing [opt-outs](/docs/workflows/opt-outs) and frequency caps. Use them only for emails that a person needs, never for marketing.
 - **Suppression still applies.** PostHog doesn't send to an address on your suppression list.
 - **Billing and quotas.** Transactional emails are billed and quota limited like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
-- **Sending allowance.** Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its hourly or daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
+- **Sending allowance.** Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
 - **Engagement events.** If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails against the person whose distinct ID you send.
 - **Where to see sends.** [Read the status](#check-an-emails-status) of an email with its `message_id`. The template's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.
