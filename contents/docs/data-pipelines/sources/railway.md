@@ -9,11 +9,11 @@ availability:
 sourceId: Railway
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Railway connector syncs your [Railway](https://railway.com/) projects, services, environments, deployments, project members, and volumes into PostHog. This is useful for analyzing deployment activity and failure rates alongside your product data.
+The Railway connector syncs your [Railway](https://railway.com/) projects, services, environments, deployments, project members, volumes, usage data, metrics, and activity events into PostHog. This is useful for analyzing deployment activity, resource consumption, and failure rates alongside your product data.
 
 ## Prerequisites
 
@@ -37,7 +37,14 @@ Railway rate limits API requests per plan (as low as 100 requests/hour on the Fr
 
 <SyncModes />
 
-The `deployments` table supports incremental syncs: each run pulls deployments created since the last sync, and also re-syncs the previous day of deployments so recent status changes (for example a deployment moving from `DEPLOYING` to `SUCCESS`) are picked up. Status changes on older deployments are only reflected on a full refresh. All other tables are small and sync as full refreshes.
+The following tables support incremental syncs:
+
+- **`deployments`**: each run pulls deployments created since the last sync, and also re-syncs the previous day so recent status changes (for example a deployment moving from `DEPLOYING` to `SUCCESS`) are picked up. Status changes on older deployments are only reflected on a full refresh.
+- **`deployment_events`**: syncs events for deployments created since the last sync, with a 24-hour lookback for deployments that were still in progress.
+- **`usage`**: daily resource usage per project and service. The first sync pulls the last 90 days.
+- **`metrics`**: hourly resource metric samples per service and environment. The first sync pulls the last 30 days (Railway only retains about 30 days of metrics).
+
+All other tables (`projects`, `services`, `environments`, `project_members`, `volumes`, `events`, and `estimated_usage`) sync as full refreshes.
 
 ## Configuration
 

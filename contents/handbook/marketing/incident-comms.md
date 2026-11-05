@@ -68,7 +68,7 @@ At a high level, the Comms Lead is responsible for *how* we talk about the incid
 -   **Draft, coordinate, and send any messages.**
     When we *do* decide to communicate:
 
-    -   Create a comms plan to coordinate the response. This should be an issue in an internal repo. [Here's an example comms plan for a critical incident](https://github.com/PostHog/company-internal/issues/2431).
+    -   Create a comms plan to coordinate the response. This should be an issue in an internal repo. <PrivateLink url="https://github.com/PostHog/company-internal/issues/2431">Here's an example comms plan for a critical incident</PrivateLink>.
     -   Share comms drafts in the incident channel and on the comms plan for quick fact-checks from the incident lead or engineers.
     -   Keep messages in plain English, impact-first, and avoid status-speak. Use existing [communication templates for incidents](/handbook/growth/sales/communications-templates-incidents) as a reference.
     -   By default, communicate through email rather than in social posts. Social posts can exacerbate an issue.

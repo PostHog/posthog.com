@@ -11,6 +11,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-alternatives/posthog-alternatives.jpeg
 featuredImageType: full
+ogImage: generated
 category: General
 tags:
   - Comparisons
@@ -46,7 +47,7 @@ PostHog is a product development platform that includes:
 - **[Web analytics](/web-analytics):** Traffic sources, pageviews, UTM tracking, and conversion goals.
 - **[LLM observability](/docs/ai-observability):** Track token usage, latency, costs, and user feedback across your AI pipelines.
 - **[Data warehouse](/data-warehouse):** Query your external data sources alongside PostHog data in one place.
-- **[CDP](/cdp):** Send data to and from PostHog with a library of integrations and transformations.
+- **[CDP](/data-pipelines):** Send data to and from PostHog with a library of integrations and transformations.
 - **[Logs](/logs):** Capture and search log data alongside your analytics and session replays.
 - **[Workflows](/workflows):** Automate actions and notifications based on product events.
  
@@ -152,7 +153,7 @@ Keep reading to explore the alternatives.
 
 ### Key differences
 
-1. **Marketing vs. engineering focus:** Amplitude offers multi-touch attribution, predictive forecasting, and AI Visibility (which tracks how your brand appears in LLMs), which PostHog doesn't have. PostHog is designed for engineers and product teams: both have [CDPs](/cdp) and MCP servers, but PostHog adds SQL access, open-source code, error tracking, and logs. It also [ships relentlessly](/changelog) – new features land every week, which tends to matter to engineering teams who want their tools to keep up.
+1. **Marketing vs. engineering focus:** Amplitude offers multi-touch attribution, predictive forecasting, and AI Visibility (which tracks how your brand appears in LLMs), which PostHog doesn't have. PostHog is designed for engineers and product teams: both have [CDPs](/data-pipelines) and MCP servers, but PostHog adds SQL access, open-source code, error tracking, and logs. It also [ships relentlessly](/changelog) – new features land every week, which tends to matter to engineering teams who want their tools to keep up.
 
 2. **AI capabilities:** Both have AI assistants and MCP servers for querying data from tools like Claude and Cursor. Amplitude's AI Feedback stands out for marketing teams – it aggregates and synthesizes user signals from Zendesk, G2, Reddit, app store reviews, and more into prioritized product insights. PostHog has first-class [LLM observability](/docs/ai-observability) for AI product teams – tracking token usage, latency, costs, and user feedback across AI pipelines – something Amplitude doesn't have.
 
@@ -496,7 +497,7 @@ But PostHog's free tier – 1M analytics events, 5,000 web and 2,500 mobile repl
 
 Yes, for most teams. PostHog covers everything Mixpanel does (funnels, retention, user paths, cohorts) and adds session replay, feature flags, A/B testing, and error tracking.
 
-See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details or get started with [our managed migration](/migrate/managed-migrations) for an easy switch.
+See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details or get started with [our managed migration](/docs/migrate/managed-migrations) for an easy switch.
  
 </details>
  
@@ -505,7 +506,7 @@ See our [PostHog vs Mixpanel](/blog/posthog-vs-mixpanel) comparison for details 
 
 For engineering and product teams, yes. For growth and marketing teams who rely on multi-touch attribution and predictive analytics, Amplitude has capabilities PostHog doesn't. 
 
-See our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison or get started with [our managed migration](/migrate/managed-migrations) for an easy switch.
+See our [PostHog vs Amplitude](/blog/posthog-vs-amplitude) comparison or get started with [our managed migration](/docs/migrate/managed-migrations) for an easy switch.
  
 </details>
  

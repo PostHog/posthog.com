@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/open-source-hotjar-alternatives/replayhog.png
 featuredImageType: full
+ogImage: generated
 featuredVideo: 'https://www.youtube-nocookie.com/embed/mWW3lJw81LE'
 author:
   - hanna-crombie
@@ -204,7 +205,7 @@ Self-hosted lifetime licenses start at **$200 one-time** (Startup – up to 3 we
 
 ### Who is Matomo for?
 
-[Matomo](blog/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
+[Matomo](/compare/best-matomo-alternatives) is mainly built with marketing and content teams in mind, offering insights into website content engagement for optimization of user journeys. Features like session recording are part of a wider set of tools that are useful for product teams as well, but they aren't included in Matomo's open source release.
 
 To learn more, read our [PostHog vs Matomo comparison](/compare/posthog-vs-matomo).
 
@@ -325,9 +326,9 @@ The top session replay tools in 2026 include:
  
 - **[PostHog](/session-replay)** – Best all-in-one for engineering teams with analytics, feature flags, and error tracking
 - **[Microsoft Clarity](/blog/best-microsoft-clarity-alternatives)** – Best completely free option with unlimited recordings
-- **[Smartlook](/compare/smartlook-alternatives)** – Best for mobile-first apps with crash reports
 - **[LogRocket](/compare/posthog-vs-logrocket)** – Best for frontend debugging with performance monitoring
 - **[FullStory](/compare/best-fullstory-alternatives)** – Best for frustration signal detection and UX analytics
+- **[Smartlook](/compare/smartlook-alternatives)** – Strong for mobile-first apps with crash reports, but it no longer sells paid plans and closes on September 30, 2027
  
 See our full guide to the [best session replay tools](/compare/best-session-replay-tools) for more options.
  

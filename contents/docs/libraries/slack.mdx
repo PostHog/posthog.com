@@ -159,7 +159,7 @@ When you paste a PostHog insight or dashboard URL in any Slack channel where the
 
 <!-- TODO(screenshot): an unfurled insight link in Slack -->
 
-Link unfurling respects PostHog access permissions. Only team members with at least viewer access to the insight or dashboard will see the unfurled preview.
+Link unfurling checks PostHog access permissions for the person who pasted the link. If they have at least viewer access to the insight or dashboard, the preview is posted to the channel, so everyone in the channel sees it. Links are never unfurled in Slack Connect channels.
 
 ## What can you do with this integration?
 

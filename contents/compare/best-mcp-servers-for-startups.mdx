@@ -67,7 +67,7 @@ The loop: **form a hypothesis → query analytics → watch session replays → 
 
 The servers:
 
-- **[PostHog MCP](/docs/model-context-protocol)** is the core: ask product questions in plain English, pull session replays of specific users or cohorts, query feature flag exposure, run [funnel](/product-analytics/funnels) and [path](/product-analytics/paths) analyses, look at [survey](/surveys) responses, and dig into [experiment](/experiments) results.
+- **[PostHog MCP](/docs/model-context-protocol)** is the core: ask product questions in plain English, pull session replays of specific users or cohorts, query feature flag exposure, run [funnel](/docs/product-analytics/funnels) and [path](/docs/product-analytics/paths) analyses, look at [survey](/surveys) responses, and dig into [experiment](/experiments) results.
 - **[Slack MCP](https://slack.com/help/articles/48855576908307-Guide-to-the-Slack-MCP-server)** pulls in the customer-facing context: what's the support team hearing? What did sales flag in the deal review channel? Did anyone post about this in #product-feedback?
 - **[Notion MCP](https://developers.notion.com/guides/mcp)** or **[Linear MCP](https://linear.app/docs/mcp)** for any related research docs, customer interview notes, or experiment write-ups.
 
@@ -99,7 +99,7 @@ The loop: **define the question → find the right data source → run the query
 The servers:
 
 - **A database MCP** for application data: the [official Postgres MCP](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres) (a reference implementation; the repo is archived but the server still works) or **[Supabase MCP](https://supabase.com/docs/guides/getting-started/mcp)** if that's your stack. Both can run in read-only mode, which is the right default for production databases.
-- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/context-warehouse), or analyze [LLM traces and costs](/ai-observability). Good for "users who did X and then Y" queries.
+- **[PostHog MCP](/docs/model-context-protocol)** for event and product data: query analytics with SQL, pull from your [data warehouse](/warehouse), or analyze [LLM traces and costs](/ai-observability). Good for "users who did X and then Y" queries.
 
 A real prompt: _"Pull MRR by plan tier from Postgres, then break down feature usage by tier from PostHog, and give me a single table comparing them."_
 

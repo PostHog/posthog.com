@@ -45,7 +45,7 @@ You'll also need access to the relevant Meta Ads account.
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/meta_ads/template_meta_ads.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/nodejs/src/cdp/templates/_destinations/meta_ads/meta.template.ts) is available on GitHub.
 
 <PostHogMaintained />
 
