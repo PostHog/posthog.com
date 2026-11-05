@@ -49,9 +49,9 @@ In this 30-minute interview, you will meet one of our execs. They will try to an
 
 #### Technical Support Engineer SuperDay
 
-The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday). This is a paid full day of work (1,000 USD), which we can flexibly arrange around your schedule.
+The final stage of our interview process is what we call a PostHog [SuperDay](/handbook/people/hiring-process#4-posthog-superday). This is a paid full day of work (1,000 USD), which we can flexibly arrange around your schedule.
 
-If you've been invited to a PostHog [SuperDay](/handbook/people/hiring-process#posthog-superday), here's what to expect and how to set yourself up for success.
+If you've been invited to a PostHog [SuperDay](/handbook/people/hiring-process#4-posthog-superday), here's what to expect and how to set yourself up for success.
 
 ##### What the SuperDay looks like
 
