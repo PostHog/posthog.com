@@ -69,7 +69,7 @@ export const Addon = ({ type, name, description, plans, addons, setAddons, volum
 
     return (
         <div className={`flex items-center gap-4 ${checked ? '' : 'opacity-60'}`}>
-            <div className="w-48 shrink-0">
+            <div className="w-60 shrink-0">
                 <div className="flex space-x-1 items-center mb-0.5">
                     <p className="!m-0 text-sm font-bold">
                         {name}

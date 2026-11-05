@@ -188,7 +188,7 @@ export default function StandaloneAddonsTab({ activeProduct, setVolume, setProdu
                 />
                 {retention && retentionTiers && (
                     <div className="flex items-center gap-4 pt-3 pb-9">
-                        <div className="w-48 shrink-0">
+                        <div className="w-60 shrink-0">
                             <div className="flex items-center gap-1 mb-0.5">
                                 <p className="m-0 text-sm font-bold">{retention.label}</p>
                                 {retentionInfo && (

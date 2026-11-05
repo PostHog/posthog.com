@@ -18,7 +18,7 @@ const snapToMark = (value: number, marks: number[]) => {
 
 export const UsageSliderHeader = ({ unit }: { unit: string }) => (
     <div className="flex items-center gap-4 pb-1">
-        <span className="w-48 shrink-0 text-xs uppercase text-secondary font-semibold">Usage</span>
+        <span className="w-60 shrink-0 text-xs uppercase text-secondary font-semibold">Usage</span>
         <span className="hidden @md:block flex-1" />
         <span className="text-xs uppercase text-secondary shrink-0 font-semibold ml-auto">{unit} / mo</span>
     </div>
@@ -26,6 +26,7 @@ export const UsageSliderHeader = ({ unit }: { unit: string }) => (
 
 export default function UsageSliderRow({
     label,
+    icon,
     labelAccessory,
     subtitle,
     value,
@@ -38,6 +39,7 @@ export default function UsageSliderRow({
     inputPrefix,
 }: {
     label: string
+    icon?: React.ReactNode
     labelAccessory?: React.ReactNode
     subtitle?: React.ReactNode
     value: number
@@ -71,8 +73,9 @@ export default function UsageSliderRow({
 
     return (
         <div className={`flex items-center gap-4 py-3 ${value ? '' : 'opacity-60'}`}>
-            <div className="w-48 shrink-0">
+            <div className="w-60 shrink-0">
                 <div className="flex items-center gap-1 mb-0.5">
+                    {icon}
                     <p className="m-0 text-sm font-bold first-letter:uppercase">{label}</p>
                     {labelAccessory}
                 </div>

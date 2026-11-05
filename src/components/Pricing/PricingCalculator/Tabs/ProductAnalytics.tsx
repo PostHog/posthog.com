@@ -1,4 +1,4 @@
-import { IconInfo } from '@posthog/icons'
+import { IconGraph, IconInfo, IconPieChart } from '@posthog/icons'
 import { PricingTiers } from 'components/Pricing/Plans'
 import { calculatePrice } from 'components/Pricing/PricingCalculator/calculatorLogic'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -40,13 +40,26 @@ export const getDefaultAnalyticsData = () =>
 
 export const analyticsSliders = [
     {
-        label: 'Product analytics',
-        types: [{ type: 'productAnalyticsEvents', label: 'Identified events', enhanced: true }],
+        label: 'Product Analytics',
+        types: [
+            {
+                type: 'productAnalyticsEvents',
+                label: 'Product Analytics',
+                enhanced: true,
+                icon: <IconGraph className="size-4 shrink-0 text-blue" />,
+            },
+        ],
         checked: true,
     },
     {
-        label: 'Website analytics',
-        types: [{ type: 'websiteAnalyticsEvents', label: 'Anonymous events' }],
+        label: 'Web Analytics',
+        types: [
+            {
+                type: 'websiteAnalyticsEvents',
+                label: 'Web Analytics',
+                icon: <IconPieChart className="size-4 shrink-0 text-green-2" />,
+            },
+        ],
         checked: true,
     },
 ]
@@ -79,8 +92,8 @@ const EventTypeInfo = ({ enhanced }) => {
                     <div className="max-w-[250px]">
                         <p className="text-sm mb-2">
                             {enhanced
-                                ? 'Typically used for authenticated users where you know their email address or want to send custom properties'
-                                : "No individually-identifiable info, analyzed in aggregate. These don't use person profiles."}
+                                ? 'Identified events, which have a person profile. Use them when you need user-level analysis, like cohorts or person properties. These cost more.'
+                                : 'Anonymous events, which have no person profile. They work for aggregate traffic metrics, like visitors and referrers. These cost less.'}
                         </p>
                         <p className="text-sm mb-0">
                             <button
@@ -110,12 +123,13 @@ const SliderToggle = ({
 }) => {
     return (
         <>
-            {types.map(({ type, label }) => {
+            {types.map(({ type, label, icon }) => {
                 const unitPrice = analyticsData[type].enhanced ? identifiedUnitPrice : anonymousUnitPrice
                 return (
                     <UsageSliderRow
                         key={type}
                         label={label}
+                        icon={icon}
                         labelAccessory={<EventTypeInfo enhanced={analyticsData[type].enhanced} />}
                         subtitle={
                             unitPrice ? `$${unitPrice} each${afterFirstFree(1_000_000, 'event', label)}` : undefined
