@@ -110,7 +110,11 @@ function VendorIcon(): JSX.Element {
 
 export default function StackFrames({ type, message, frames }: StackFramesProps): JSX.Element {
     // One open frame at a time. The app allows several; the figure only ever needs to show one.
-    const [openFrame, setOpenFrame] = useState<number | null>(null)
+    // The first frame with source starts open, so a resolved trace shows real code without a click.
+    const [openFrame, setOpenFrame] = useState<number | null>(() => {
+        const first = frames.findIndex((frame) => frame.context)
+        return first === -1 ? null : first
+    })
 
     return (
         <div className="@container group/anatomy overflow-hidden rounded border border-primary bg-primary">

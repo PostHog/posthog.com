@@ -6,13 +6,14 @@ pocketGuideOrder: 6
 section: Automate
 pocketGuideCta:
   kind: prompt
-  label: Suggest rules with PostHog AI
-  note: It suggests rules from your recent exceptions. You add them under Assignment rules in Error Tracking settings.
+  label: Set up triage with PostHog AI
+  note: It suggests assignment rules and alerts from your recent exceptions. You add them in Error Tracking settings.
   prompt: >-
     Group my $exception events from the last 30 days by the source files in $exception_sources and the path of
     $current_url, and leave out third-party code. Name each group by the part of my product it covers, like
     trips or bookings. Suggest one error tracking assignment rule per group, with the property, operator, and
     value it filters on. List the rules most specific first, because the first rule that matches assigns the issue.
+    Then suggest which error tracking alerts each team needs, for reopened issues and spikes, and where to send them.
 ---
 
 <LeftPage>
@@ -38,29 +39,39 @@ pocketGuideCta:
 
 # Triage and alerts
 
-Twig's issue list now shows which issues matter most. As the team grows, the engineers split into teams, and each issue needs to reach the team that owns it.
+Every week at stand-up, Twig's engineers go through the new issues together. At first it takes 5 minutes. As Twig grows, it takes 10, then 20, and eventually the whole meeting. Most of that time goes to the same questions every week: who owns this issue, and does it need attention now?
+
+So the engineers look for ways to send each issue to the people who own it, and to only interrupt someone when an issue needs them.
 
 ## Route issues to their owners with assignment rules
 
-The Trips team owns everything under `src/trips/`, including **Trip details**. The engineers create a Trips role in the organization settings, then add an assignment rule that sends issues from `src/trips/` to it <SeeFig n={1} />.
+Most issues belong to one team. The Trips team owns everything under `src/trips/`, including **Trip details**. Instead of assigning those issues by hand at stand-up, the engineers add an assignment rule that sends issues from `src/trips/` to the Trips team <SeeFig n={1} />.
 
 Rules run at ingestion, after <Term name="source map">source maps</Term> are applied, so they match Twig's unminified <Term name="stack trace" />. The first rule that matches assigns the issue, so specific rules go first.
 
-<Action />
-
 ## Track fixes in GitHub
 
-The Trips team plans its work in GitHub. From the issue page, the engineers create a GitHub issue that links back to PostHog, with every exception and the guests the issue impacts <SeeFig n={2} />. The [GitLab, Linear, and Jira integrations](/docs/error-tracking/integrations) work the same way.
+Stand-up also used to copy issues into GitHub, where the Trips team plans its work. Now the engineers create the GitHub issue from the issue page. It links back to PostHog, with every exception and the guests the issue impacts <SeeFig n={2} />. The [GitLab, Linear, and Jira integrations](/docs/error-tracking/integrations) work the same way.
 
 ## Get alerted when an issue spikes
 
-The engineers set up alerts to hear when an issue like **Trip details** spikes. Each alert pairs one trigger with one destination, like a [Slack](/docs/data-pipelines/destinations/slack) channel or a [webhook](/docs/data-pipelines/destinations/webhook):
+Some issues can't wait for the next stand-up. When **Trip details** breaks for hundreds of guests, the Trips team wants to know right away, without a message for every new issue.
+
+PostHog alerts on three triggers:
 
 - **Issue created** fires for every new issue, which can mean many messages a day.
 - **Issue reopened** fires when a resolved issue comes back, which catches regressions.
 - **Issue spiking** fires when an issue gets far more exceptions than usual. PostHog compares each 5-minute window with the issue's baseline from the past hour <SeeFig n={3} />.
 
-The engineers add two alerts in [alerting settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting), for reopened issues and for spikes. Both go to the Trips team's Slack channel.
+The engineers only alert on spiking issues. New issues already go to the team that owns them, which grooms them, so an alert for each one would only add noise. Spike alerts go to the Trips team's Slack channel.
+
+When the spike alert fires, someone on the Trips team opens the issue and watches a recording of a guest who hit it. If it's a real bug, they fix it and link the GitHub issue. If it's noise, they suppress it.
+
+Stand-up takes 5 minutes again.
+
+To set up the same for your app, create a role for each team in your organization settings, then add assignment rules and alerts in [Error Tracking settings](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-alerting). Alerts can go to [Slack](/docs/data-pipelines/destinations/slack) or a [webhook](/docs/data-pipelines/destinations/webhook). PostHog AI can suggest rules and alerts from your recent exceptions:
+
+<Action />
 
 ## Self-driving
 

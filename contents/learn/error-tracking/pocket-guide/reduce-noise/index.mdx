@@ -44,19 +44,17 @@ section: Capture
 
 # Reduce noise
 
-Twig is growing, and the engineers are starting to notice issues they'll never fix, like browser extensions failing or `ResizeObserver loop` errors from the browser.
+Twig is growing, and the engineers are starting to notice issues that are noisy, but they'll never fix. For example:
+
+- Exceptions from their own laptops during local development.
+- `ResizeObserver loop` errors the browser or React throws, which guests never notice.
+- One browser stuck in a loop, sending the same exception 15,000 times in an hour.
+- Errors from browser extensions, in code Twig doesn't own.
+- A flood of exceptions during an outage.
 
 PostHog bills by events ingested, so these noisy events also cost money.
 
-Here's how Twig's engineers use various tools to silence different types of noisy exceptions:
-
-| Tool | How Twig uses it |
-| --- | --- |
-| [Production builds only](#skip-local-development-with-production-builds) | Local development never sends exceptions |
-| [`before_send`](#drop-browser-errors-with-before_send) | Drops `ResizeObserver loop` errors before they leave the browser |
-| [Burst protection](#stop-looping-browsers-with-burst-protection) | Keeps one looping browser from flooding the project |
-| [Suppression rules](#drop-extension-errors-with-a-suppression-rule) | Drops errors from browser extensions at ingestion |
-| [Rate limits](#cap-outages-with-rate-limits) | Caps volume during an outage |
+Here are the tools Twig's engineers use to silence noisy exceptions.
 
 ## Skip local development with production builds
 

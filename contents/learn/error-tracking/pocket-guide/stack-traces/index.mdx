@@ -48,7 +48,7 @@ import UploadSymbolSetsPlatforms from '../../../../docs/error-tracking/_snippets
 
 <StackTraceFigure
     n={2}
-    caption="With source maps, Twig's own frames show at the top of the trace, and dependency frames carry a box icon."
+    caption="With source maps, the same trace opens on the failing line in Twig's source code. Twig's own frames show at the top, and dependency frames carry a box icon."
     type="TypeError"
     message="Cannot read properties of undefined (reading 'name')"
     frames={[
@@ -148,7 +148,7 @@ Twig's web app is a minified React bundle. An app that uses one of these framewo
 
 ## Source map uploads
 
-To get full stack traces, the engineers need to upload a <Term name="source map" /> to map minified code to source code <SeeFig n={2} />. PostHog can get the maps three ways:
+The engineers set up <Term name="source map" /> uploads for Twig's source code to get full stack traces. PostHog can get the maps three ways:
 
 | Option | Trade-off |
 | --- | --- |
@@ -158,13 +158,7 @@ To get full stack traces, the engineers need to upload a <Term name="source map"
 
 The engineers link each upload to a [release](/docs/error-tracking/releases). PostHog then shows the version and commit on every trace. With a [GitHub or GitLab integration](/docs/error-tracking/integrations), it also links each frame to the file and line in `PostHog/twig.com`.
 
-The Wizard's Error Tracking setup already adds uploads where the platform needs them. To add them to an existing setup:
-
-<Setup subcommand="upload-source-maps" />
-
-After uploading, the engineers check the [symbol sets](https://app.posthog.com/error_tracking/configuration#selectedSetting=error-tracking-symbol-sets) in PostHog, which show any failed uploads or missing bundles.
-
-<Action />
+The engineers upload source maps in CI, which keeps Twig's source private. The Error Tracking Wizard sets up the upload step, so each build uploads its own maps. The **Trip details** trace now points at the failing line in `readTripHost`, in `src/trips/trip-details.ts` <SeeFig n={2} />.
 
 ## Breadcrumbs
 
@@ -182,6 +176,8 @@ The engineers pick where context goes by when they'll need it:
 | An event | The team wants to count the action on its own |
 
 Steps work in the <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg" alt="" className="inline-block size-4 align-text-bottom" /> [web](/docs/error-tracking/installation/web), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/react.svg" alt="" className="inline-block size-4 align-text-bottom" /> [React Native](/docs/error-tracking/installation/react-native), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/ios.svg" alt="" className="inline-block size-4 align-text-bottom dark:invert" /> [iOS](/docs/error-tracking/installation/ios), <img src="https://res.cloudinary.com/dmukukwp6/image/upload/Android_robot_bec2fb7318.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Android](/docs/error-tracking/installation/android), and <img src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/flutter.svg" alt="" className="inline-block size-4 align-text-bottom" /> [Flutter](/docs/error-tracking/installation/flutter) SDKs.
+
+<Action />
 
 <LessonFooter nextLabel="Issue grouping" nextHref="/learn/error-tracking/pocket-guide/issue-grouping">
 
