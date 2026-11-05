@@ -1,0 +1,98 @@
+---
+title: Offline evaluations
+shortTitle: Offline evaluations
+subtitle: Test AI prompt changes before release with saved datasets, offline evaluations, and prompt version tracking in PostHog.
+description: Test AI prompt changes before release with saved datasets, offline evaluations, and prompt version tracking in PostHog.
+pocketGuideOrder: 3
+---
+
+<RightPage>
+
+# Offline evaluations
+
+Before releasing the support agent, Twig's engineers had tested an ordinary cancellation: a visitor wants a full refund one day before arrival. The support agent explained the seven-day notice rule, and the policy evaluation passed.
+
+That answer is correct. But the heating complaint reveals a gap in the engineers' testing: a broken essential amenity that qualifies for an exception to the cancellation policy.
+
+Twig's engineers need to fix the support agent's refund refusal without breaking the standard cancellation policy answer. They use <Term name="offline evaluations">offline evaluations</Term> to run saved requests through the support agent and evaluate its answers before releasing the change.
+
+## Save the request and expected outcome
+
+Twig's engineers create a <Term name="dataset">dataset</Term>, a collection of test cases they can rerun. In PostHog, they open the recorded heating conversation and add it to the dataset to save it as a test case alongside the ordinary cancellation request.
+
+For the heating complaint, they save two different things:
+
+- `source_output` contains the support agent's original refusal.
+- `expected_output` describes what the support agent should do: apply the broken-amenity exception and offer relocation or a refund.
+
+The refusal is evidence of the problem, not the answer the engineers _want_ the evaluation to reward.
+
+Switch between the cancellation and broken-amenity cases to compare their answers with the expected outcomes:
+
+<AioDatasetFigure />
+
+The cancellation case passes because the visitor changed their mind too late to qualify for a full refund. The heating case fails because the support agent refuses a refund that Twig's policy permits.
+
+The engineers save the policy information with each case too. Otherwise, someone rerunning the heating complaint might give the support agent a different policy and end up testing a different situation.
+
+## Change the instructions and compare the answers
+
+Twig's engineers update the support prompt to tell the agent to apply the broken-amenity exception before the ordinary cancellation window.
+
+They keep the visitor's request, policy, model, and evaluation criteria the same. They're trying to find out whether changing this instruction fixes the refusal.
+
+The original prompt is their <Term name="baseline">baseline</Term>: the version they compare the updated prompt against. They can open the captured generation in PostHog's <Term name="playground">playground</Term>, a workspace for trying prompt and model changes against recorded inputs, to inspect a candidate answer.
+
+But one better answer isn't enough. The engineers also run both saved cases through the support agent.
+
+Send the heating complaint with the updated instructions, then inspect the answer and evaluation results:
+
+<AioPromptComparisonFigure />
+
+The support agent now explains that the heating qualifies for the broken-amenity exception because it can't be repaired. It offers relocation or a refund, and the policy evaluation passes.
+
+The ordinary cancellation still passes too. The new instructions haven't made the support agent offer a refund whenever someone cancels at the last minute.
+
+The code evaluation passes for both heating answers because both mention `"7 days"`. Sentiment remains negative because the visitor's complaint hasn't changed. The policy evaluation (LLM judge) is the one that tells Twig's engineers whether this fix worked.
+
+## Run the evaluations before release
+
+Twig's engineers automate both saved cases with a <Term name="test runner">test runner</Term>. It runs the requests through the support agent and its tools, evaluates the answers with the LLM judge, and reports the results to PostHog through the SDK.
+
+They run it locally while editing the prompt, then in continuous integration (CI), the automated tests that run with each application change.
+
+PostHog records each run as an <Term name="offline experiment">experiment</Term>. To compare the original and updated prompts fairly, the engineers keep the same:
+
+- <Term name="dataset revision">Dataset revision</Term>, a fixed version of the saved cases.
+- Model, policy, and LLM judge criteria.
+- <Term name="scorer">Scorer</Term>, which defines the result's type and passing rule. Their “Policy correctness” scorer records `true` as a pass and `false` as a failure.
+
+The runner performs the evaluation; the scorer tells PostHog how to interpret the reported result.
+
+The cancellation case is a <Term name="regression test">regression test</Term>: it catches the heating fix breaking an answer that already worked. The engineers add more cases as new failures appear.
+
+Errors and `N/A` results stay separate from passes. If the runner couldn't load the policy, it hasn't verified the answer.
+
+## Prepare a test in your project
+
+Copy this prompt into [PostHog AI](https://app.posthog.com/#panel=max:Help%20me%20prepare%20offline%20evaluations%20for%20a%20prompt%20change%20in%20my%20project.%20Find%20one%20confirmed%20failure%20and%20one%20successful%20request%20that%20should%20keep%20working.%20Ask%20me%20to%20confirm%20the%20expected%20outcome%20for%20each%2C%20keeping%20the%20captured%20answer%20separate.%0A%0AIdentify%20the%20messages%2C%20tool%20results%2C%20and%20reference%20facts%20needed%20to%20reproduce%20both%20cases.%20Propose%20one%20prompt%20change%2C%20then%20explain%20how%20to%20compare%20the%20original%20and%20updated%20prompts%20using%20the%20same%20dataset%20revision%2C%20model%2C%20and%20evaluation%20criteria.%0A%0AShow%20what%20my%20local%20or%20CI%20runner%20must%20execute%20and%20how%20to%20report%20results%20to%20PostHog.%20Keep%20evaluation%20errors%20and%20N%2FA%20results%20separate%20from%20passes.%20Explain%20how%20to%20verify%20which%20prompt%20version%20the%20application%20used.%20Don't%20run%20the%20experiment%20or%20change%20the%20production%20prompt%20without%20my%20confirmation.):
+
+<div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+
+```text
+Help me prepare offline evaluations for a prompt change in my project. Find one confirmed failure and one successful request that should keep working. Ask me to confirm the expected outcome for each, keeping the captured answer separate.
+
+Identify the messages, tool results, and reference facts needed to reproduce both cases. Propose one prompt change, then explain how to compare the original and updated prompts using the same dataset revision, model, and evaluation criteria.
+
+Show what my local or CI runner must execute and how to report results to PostHog. Keep evaluation errors and N/A results separate from passes. Explain how to verify which prompt version the application used. Don't run the experiment or change the production prompt without my confirmation.
+```
+
+</div>
+
+<AioChapterFooter nextLabel="Prompts" nextHref="/learn/ai-observability/pocket-guide/prompts">
+
+[Datasets](/docs/ai-evals/datasets) · [Offline evaluations](/docs/ai-evals/offline-evals) · [Prompt management](/docs/prompt-management) · [Playground](/docs/ai-observability/playground)
+
+</AioChapterFooter>
+
+</RightPage>
