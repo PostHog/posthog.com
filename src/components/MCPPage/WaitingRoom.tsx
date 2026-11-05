@@ -53,6 +53,11 @@ const magazines: Magazine[] = [
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/tool_4dbaa920ae.png',
         caption: 'Agent of the year went to a unicycle with a satellite dish? smh',
     },
+    {
+        title: 'The Hogformers',
+        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Hogformers_1c53fbaa50.png',
+        caption: 'PostHog. More than meets the AI.',
+    },
 ]
 
 // The row shows four covers on a wide window and two on a narrow one. The rest scroll in.
@@ -132,7 +137,7 @@ export default function WaitingRoom(): JSX.Element {
         const base = isPaging() ? target.current + el.scrollLeft - from : el.scrollLeft
         // Fast presses add up, but the target stops at the last cover boundary and does not go past the row.
         const end = Math.floor((el.scrollWidth - el.clientWidth) / unit) * unit
-        const next = Math.round(base / unit) * unit + direction * Math.round(el.clientWidth / unit) * unit
+        const next = Math.round(base / unit) * unit + direction * unit
         target.current = Math.min(Math.max(next, 0), end)
         lastPaged.current = Date.now()
         el.scrollTo({ left: target.current, behavior: reducedMotion ? 'auto' : 'smooth' })
@@ -143,7 +148,7 @@ export default function WaitingRoom(): JSX.Element {
     }, [])
 
     return (
-        <section id="waiting-room" className="scroll-mt-20 not-prose mb-20">
+        <section id="waiting-room" className="scroll-mt-20 not-prose">
             <div className="flex items-end gap-4 border-b border-primary @2xl/reader-content:gap-6">
                 {/* The hog's seat is at 90% of the image height. The shift puts it on the line and lets the feet hang below. */}
                 <CloudinaryImage

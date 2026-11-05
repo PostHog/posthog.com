@@ -5,6 +5,7 @@ import {
     IconAI,
     IconCheck,
     IconArrowRight,
+    IconArrowUpRight,
     IconDatabase,
     IconFlask,
     IconGraph,
@@ -30,9 +31,11 @@ import { SectionHeading } from 'components/Products/ReaderViewProduct/helpers'
 import MCPInstallCTA from 'components/MCPInstallCTA'
 import OSButton from 'components/OSButton'
 import CloudinaryImage from 'components/CloudinaryImage'
+import CustomerLogo from 'components/CustomerLogo'
 import SlotMachineText from 'components/SlotMachineText'
 import SmallTeam from 'components/SmallTeam'
 import { StickerAi } from 'components/Stickers/Stickers'
+import { useCustomers, Customer } from 'hooks/useCustomers'
 import {
     IconClaudeCode,
     IconGemini,
@@ -205,7 +208,7 @@ const whatItIs: IconItem[] = [
         color: 'text-green',
         name: 'Every product, read and write',
         description:
-            'One server covers every PostHog product, and your agent can ship changes, like a feature flag, from a prompt.',
+            'Build, ship, and measure from one UI. Your agent can find a bug, ship the fix behind a flag, and check the result.',
     },
     {
         Icon: IconShieldPeople,
@@ -235,7 +238,7 @@ const whatItIs: IconItem[] = [
                 <Link to="/docs/semantic-layer" state={{ newWindow: true }} className="font-semibold underline">
                     semantic layer
                 </Link>
-                . Every session gets the same answer.
+                .
             </>
         ),
     },
@@ -243,7 +246,7 @@ const whatItIs: IconItem[] = [
         Icon: IconSparkles,
         color: 'text-blue',
         name: 'Light on context',
-        description: 'In most clients, the agent only looks tools up as it needs them (tokenminning is tokenwinning).',
+        description: 'Most agent clients only look up tools as needed (tokenminning is tokenwinning).',
     },
 ]
 
@@ -391,7 +394,7 @@ function MCPChecklist(): JSX.Element {
 
 function MCPUseCases(): JSX.Element {
     return (
-        <section id="use-cases" className="scroll-mt-20 not-prose">
+        <section id="use-cases" className="scroll-mt-20 not-prose border-t border-primary pt-12">
             <div className="grid gap-6 @4xl/reader-content:grid-cols-[minmax(0,1fr)_28rem] @4xl/reader-content:gap-10">
                 <div className="min-w-0">
                     <SectionHeading
@@ -700,7 +703,7 @@ const resources = [
         title: 'Use cases',
         Icon: IconLightBulb,
         color: 'text-yellow',
-        description: 'Explore 20+ example prompts and multi-step recipes.',
+        description: 'Prompts to copy, from one-line questions to multi-step jobs.',
         cta: 'Browse the recipes',
         to: '/docs/model-context-protocol/use-cases',
     },
@@ -708,7 +711,7 @@ const resources = [
         title: 'MCP tools reference',
         Icon: IconWrench,
         color: 'text-red',
-        description: 'See every tool the server exposes, grouped by product area.',
+        description: 'Every tool your agent can call, sorted by product.',
         cta: 'See every tool',
         to: '/docs/model-context-protocol/tools',
     },
@@ -716,7 +719,7 @@ const resources = [
         title: 'FAQ and advanced setup',
         Icon: IconQuestion,
         color: 'text-blue',
-        description: 'Learn about auth, scoping, filtering, and safety.',
+        description: 'How sign-in works, what it costs, and how to limit what your agent can touch.',
         cta: 'Read the FAQ',
         to: '/docs/model-context-protocol/faq',
     },
@@ -725,7 +728,7 @@ const resources = [
 function MCPResources(): JSX.Element {
     return (
         <section id="resources" className="scroll-mt-20 not-prose">
-            <SectionHeading>Go deeper</SectionHeading>
+            <h2 className="mb-6 mt-0 text-balance text-2xl font-bold leading-tight text-primary">Go deeper</h2>
             <div className="grid gap-4 @3xl/reader-content:grid-cols-3">
                 {resources.map(({ title, Icon, color, description, cta, to }) => (
                     <div
@@ -797,72 +800,90 @@ const faq: { question: string; answer: string; link?: { label: string; to: strin
     },
 ]
 
-interface Complaint {
-    handle: string
-    quote: string
-    platform: 'twitter' | 'reddit'
-}
+const ctaBoxClassName = 'scroll-mt-20 not-prose rounded-md border p-5 shadow-xl @md/reader-content:p-7'
 
-const complaints: Complaint[] = [
-    {
-        handle: 'productpilled',
-        quote: "I just spent 20 minutes trying to find where to add a property filter. I'm a senior engineer.",
-        platform: 'twitter',
-    },
-    {
-        handle: 'toomanymenus',
-        quote: 'The PostHog UI has, conservatively, 14,000 menus.',
-        platform: 'reddit',
-    },
-    {
-        handle: 'phdrequired',
-        quote: 'PostHog is great if you have 6 hours and a PhD in product analytics.',
-        platform: 'twitter',
-    },
-    {
-        handle: 'tabhoarder',
-        quote: 'I have 14 PostHog tabs open. I do not know why.',
-        platform: 'reddit',
-    },
+// Real quotes about the MCP only. Each one is the `mcp` product quote of a person in `useCustomers`.
+// The first quote gets the big card, so put the longest one first.
+const mcpQuotes = [
+    { customer: 'soundboost', author: 'berkan_cesur' },
+    { customer: 'qred', author: 'lezgin_zilan' },
 ]
 
-function ComplaintCard({ complaint }: { complaint: Complaint }): JSX.Element {
-    const { handle, quote, platform } = complaint
+// A number from a published post, like the stats on the customers page. `customer` only sets the logo.
+const mcpStat = {
+    customer: 'posthog',
+    stat: '2.5x',
+    label: 'more insights made by agents through the MCP than by people in the web app, in one month',
+    to: '/blog/how-ai-agents-behave',
+    linkLabel: 'Read the post',
+}
+
+// One card style for the quotes and the stat: a title and the logo at the top, the text, and a link to the source.
+function StoryCard({
+    customer,
+    title,
+    children,
+    to = `/customers/${customer.slug}`,
+    linkLabel = 'Read the story',
+    className = '',
+}: {
+    customer: Customer
+    title: React.ReactNode
+    children: React.ReactNode
+    to?: string
+    linkLabel?: string
+    className?: string
+}): JSX.Element {
     return (
-        <figure className="m-0 flex min-w-0 flex-col rounded-md border border-primary bg-primary p-3">
-            <blockquote className="m-0 flex-1 border-0 p-0 text-sm font-semibold leading-snug not-italic">
-                "{quote}"
-            </blockquote>
-            <figcaption className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-                <span className="min-w-0 truncate text-xs text-secondary">
-                    {platform === 'twitter' ? `@${handle}` : `u/${handle}`}
-                </span>
-                <span className="inline-flex items-center gap-1 rounded-sm bg-green/10 px-1 py-0.5 text-xs font-semibold text-green">
-                    <IconCheck className="size-3" />
-                    Should've used MCP
-                </span>
+        <figure
+            className={`m-0 flex min-w-0 flex-col gap-3 rounded-md border border-primary bg-primary p-4 ${className}`}
+        >
+            <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">{title}</div>
+                <div className="flex h-5 shrink-0 items-center">
+                    <CustomerLogo customer={customer} className="h-5 max-w-24" />
+                </div>
+            </div>
+            <div className="flex-1 text-sm leading-snug text-secondary">{children}</div>
+            <figcaption className="flex justify-end text-xs">
+                <Link to={to} state={{ newWindow: true }} className="group font-semibold">
+                    {linkLabel} <IconArrowUpRight className="inline-block size-4 text-muted group-hover:text-primary" />
+                </Link>
             </figcaption>
         </figure>
     )
 }
 
-function NoUISection(): JSX.Element {
+function MCPNoUI(): JSX.Element {
+    const { getCustomer } = useCustomers()
+    const quotes = mcpQuotes.flatMap(({ customer: slug, author }) => {
+        const customer = getCustomer(slug)
+        const person = customer?.quotes?.[author]
+        const text = person?.products?.mcp
+        return customer && person && text ? [{ customer, person, text }] : []
+    })
+    const statCustomer = getCustomer(mcpStat.customer)
+
     return (
         <section
             id="no-ui"
-            className="not-prose grid scroll-mt-20 gap-6 border-b border-primary pb-12 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-8"
+            className="not-prose grid scroll-mt-20 gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-8"
         >
             <div className="min-w-0">
-                <SectionHeading>
+                <SectionHeading
+                    className="!mb-0"
+                    lede={
+                        <>
+                            PostHog has a lot of tools for product engineers. We know, we built them. We also kept
+                            hearing the same thing: the UI is overwhelming, and with agents it's better to pull context
+                            into where you're already building.{' '}
+                            <strong className="text-primary">That's where the MCP comes in.</strong>
+                        </>
+                    }
+                >
                     You don't need to use PostHog to <Highlight red>use PostHog</Highlight>
                 </SectionHeading>
-                <p className="m-0 text-base text-secondary">
-                    PostHog has a lot of tools for product engineers. We know, we built them. We also kept hearing the
-                    same thing: the UI is overwhelming, and with agents it's better to pull context into where you're
-                    already building.
-                </p>
-                <p className="mb-0 mt-3 text-base font-bold text-primary">That's where the MCP comes in.</p>
-                <div className="mt-5 rounded-md border border-primary bg-primary p-4">
+                <div className="max-w-md rounded-md border border-primary bg-primary p-4">
                     <p className="m-0 font-bold">
                         "But I <span className="rounded-sm bg-green/10 px-0.5 text-green">like</span> the PostHog UI"
                     </p>
@@ -879,11 +900,80 @@ function NoUISection(): JSX.Element {
                     </p>
                 </div>
             </div>
-            <div className="grid min-w-0 grid-cols-1 gap-3 @xl/reader-content:grid-cols-2 @3xl/reader-content:grid-rows-2">
-                {complaints.map((complaint) => (
-                    <ComplaintCard key={complaint.handle} complaint={complaint} />
+            <div className="grid min-w-0 grid-cols-1 gap-3 @xl/reader-content:grid-cols-2">
+                {quotes.map(({ customer, person, text }, index) => (
+                    <StoryCard
+                        key={customer.slug}
+                        customer={customer}
+                        className={index === 0 ? '@xl/reader-content:row-span-2' : ''}
+                        title={
+                            <>
+                                <p className="m-0 font-bold leading-tight text-primary">{person.name}</p>
+                                <p className="m-0 mt-1 text-sm text-secondary">
+                                    {person.role}, {customer.name}
+                                </p>
+                            </>
+                        }
+                    >
+                        <blockquote className="m-0 border-0 p-0 not-italic">&ldquo;{text}&rdquo;</blockquote>
+                    </StoryCard>
                 ))}
+                {statCustomer && (
+                    <StoryCard
+                        customer={statCustomer}
+                        to={mcpStat.to}
+                        linkLabel={mcpStat.linkLabel}
+                        title={
+                            <p className="m-0 text-3xl font-bold leading-none tracking-tight text-primary">
+                                {mcpStat.stat}
+                            </p>
+                        }
+                    >
+                        <p className="m-0">{mcpStat.label}</p>
+                    </StoryCard>
+                )}
             </div>
+        </section>
+    )
+}
+
+function MCPSetupCTA(): JSX.Element {
+    return (
+        <section
+            id="setup"
+            className={`${ctaBoxClassName} grid items-center gap-6 border-green bg-green/10 @3xl/reader-content:grid-cols-3 @3xl/reader-content:gap-8`}
+        >
+            <div className="min-w-0 @3xl/reader-content:col-span-2">
+                <h2 className="mb-2 mt-0 text-xl font-bold @xl/reader-content:text-2xl">
+                    No PostHog in your app yet? Your agent can add it
+                </h2>
+                <p className="m-0 text-sm @xl/reader-content:text-base">
+                    Connect the MCP, then ask your agent to install PostHog in your GitHub repository. The{' '}
+                    <Link
+                        to="/docs/ai-engineering/ai-wizard"
+                        state={{ newWindow: true }}
+                        className="font-semibold underline"
+                    >
+                        PostHog wizard
+                    </Link>{' '}
+                    runs in the cloud, makes the code changes, and opens a pull request for you to review.
+                </p>
+                <MCPInstallCTA className="mt-5 w-full" showDesktopLink={false} />
+            </div>
+            <figure className="m-0 flex min-w-0 flex-col items-center gap-3">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/Group_144404_d649bc516c.png"
+                    alt="A hedgehog toy with its arm, ear, shoe, and hat in pieces on the floor around it"
+                    title="Mr. Potato Hog, now with context included."
+                    loading="lazy"
+                    width={600}
+                    className="w-full max-w-40 @3xl/reader-content:max-w-60"
+                    imgClassName="block w-full"
+                />
+                <figcaption className="m-0 text-balance text-center text-sm text-secondary">
+                    Some assembly required (by your agent)
+                </figcaption>
+            </figure>
         </section>
     )
 }
@@ -920,22 +1010,26 @@ function MCPFaq(): JSX.Element {
     )
 }
 
-function MCPCTA(): JSX.Element {
+function MCPCTA({
+    id,
+    title,
+    children,
+    className = '',
+}: {
+    id: string
+    title: string
+    children: React.ReactNode
+    className?: string
+}): JSX.Element {
     return (
-        <section
-            id="get-started"
-            className="scroll-mt-20 not-prose rounded-md border border-purple bg-purple/10 p-5 shadow-xl @md/reader-content:p-7"
-        >
+        <section id={id} className={`${ctaBoxClassName} border-purple bg-purple/10 ${className}`}>
             <div className="grid items-center gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-8">
                 <div>
                     <h2 className="mb-2 mt-0 flex items-center gap-2 text-xl font-bold @xl/reader-content:text-2xl">
-                        Connect your agent in one command
+                        {title}
                         <StickerAi className="size-8 shrink-0 -rotate-3 @xl/reader-content:size-10" />
                     </h2>
-                    <p className="m-0 text-sm @xl/reader-content:text-base">
-                        <strong>Get started – free.</strong> Run the wizard and it adds the PostHog MCP to the agents on
-                        your machine, like Claude Code, Codex, Cursor, VS Code, and Zed.
-                    </p>
+                    <p className="m-0 text-sm @xl/reader-content:text-base">{children}</p>
                 </div>
                 <MCPInstallCTA className="w-full" showDesktopLink={false} />
             </div>
@@ -979,14 +1073,18 @@ export default function MCPPage(): JSX.Element {
                     ) : (
                         <>
                             <MCPHeader onReadAsAgent={() => setReader('agent')} />
-                            <NoUISection />
+                            <MCPNoUI />
                             <MCPUseCases />
                             <MCPConnectors />
                             <WhatIsMCP />
-                            <MCPCTA />
                             <MCPResources />
+                            <MCPSetupCTA />
                             <MCPFaq />
                             <WaitingRoom />
+                            <MCPCTA id="connect" title="Don't keep your agent waiting" className="-mt-6 mb-20">
+                                <strong>Get started – free.</strong> One command connects the PostHog MCP to Claude
+                                Code, Codex, Cursor, VS Code, and Zed.
+                            </MCPCTA>
                         </>
                     )}
                 </div>
