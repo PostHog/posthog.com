@@ -131,6 +131,8 @@ In a similar way to my triage workflow, a custom destination picks up the captur
 
 The Slack alert shows the deadline, the assignee, the priority, and the status, with a button to open the ticket.
 
+You can also add an escalation step, so if a ticket is still open and past its deadline, it gets reassigned to a lead or team, and posted to Slack.
+
 > **Try it yourself:** With the **warn before a breach** and **escalate overdue tickets** templates.
 
 ## Working with sales and customer success
