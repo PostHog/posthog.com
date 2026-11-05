@@ -1,0 +1,130 @@
+---
+title: What goes into the cost of an event?
+---
+
+You looked at the bill, and an agent told you it could build the same thing on ClickHouse in a weekend. It can. To compare the two bills, you need to know what the per-event price includes. This page itemizes it.
+
+## The price
+
+[Product Analytics](/product-analytics) bills by the event. The first 1 million events each month are free, and the price per event falls as volume rises. These are the rates for [anonymous events](/docs/data/anonymous-vs-identified-events), which carry no person profile:
+
+| Monthly events | Price per event |
+|---|---|
+| First 1,000,000 | Free |
+| 1,000,001 to 2,000,000 | $0.00005 |
+| 2,000,001 to 15,000,000 | $0.0000343 |
+| 15,000,001 to 50,000,000 | $0.0000295 |
+| 50,000,001 to 100,000,000 | $0.0000218 |
+| 100,000,001 to 250,000,000 | $0.000015 |
+| Above 250,000,000 | $0.000009 |
+
+An identified event adds a person profile charge on top, from $0.000198 per event at the first paid tier down to $0.000001 above 250 million. The [pricing page](/pricing) has the full tables and a calculator.
+
+Those are the only line items for events. There is no separate charge for storing them or for the queries you run on them in PostHog. The rest of this page is what the per-event price covers.
+
+## What happens to one event
+
+An event passes through six jobs between your SDK and a chart. Each job exists because something went wrong without it.
+
+### Getting it in
+
+[Our SDKs](/docs/libraries) batch, compress, and retry. The capture service decompresses the payload, validates the request, and corrects the timestamp using the time your client said it sent the batch, so a phone that was offline for an hour still lands in the right minute. It gives the event a UUID if the SDK did not. If the write to the queue fails, capture returns an error and the SDK retries, so a brief outage on our side does not lose your data. A [reverse proxy](/docs/advanced/proxy) sends events from your own domain, past ad blockers.
+
+Without it: events from a client with a wrong clock land in the wrong day, a retry counts twice, and a tracking blocker removes a share of your traffic that you never see.
+
+### Not losing it
+
+Every event goes into Kafka before anything else touches it. Kafka acknowledges the write on every in-sync replica before capture replies to your SDK. The queue absorbs a launch-day spike or a bot and waits out a database outage. Events from one user stay in order. A single ID that sends more than about 5,000 events a minute moves to an overflow lane so it cannot slow everyone else, and nothing is dropped. If an ingestion worker crashes partway through a batch, Kafka redelivers the batch. An event we cannot process goes to a dead letter queue instead of disappearing.
+
+Without it: a traffic spike or a database restart is data you never get back.
+
+### Making it mean something
+
+Ingestion validates the event, drops events older than a limit you set, and applies your [transformations](/docs/data-pipelines/transformations). GeoIP adds country and city. [Cookieless](/tutorials/cookieless-tracking) events get a daily-rotating hash instead of a cookie. UTM and referrer data lands on the [session](/docs/data/sessions). Every event name and property name is cataloged, so the UI, SQL autocomplete, and [PostHog AI](/docs/posthog-ai) know what exists. When something is wrong with an event, you get an [ingestion warning](/docs/data/ingestion-warnings) that names it.
+
+Identified events also run [identity resolution](/docs/product-analytics/identity-resolution): create the person, merge anonymous history on `identify`, and update person properties in order. That is the work the person profile charge pays for.
+
+Without it: a property name that changes on one platform splits one metric into two, and nobody notices until a board meeting.
+
+### Storing it for seven years
+
+Events land in a sharded, replicated ClickHouse cluster. Properties compress with ZSTD. Hot data sits on local NVMe and moves to cheaper tiers as it ages. Every week we analyze slow queries and materialize the columns that would make them fast. We are [rebuilding the storage format](/blog/changing-event-storage) so each property is stored once with its real type, which makes common queries up to 2x faster. GDPR deletions run as batched jobs, because deleting from ClickHouse rewrites whole partitions. Paid plans [keep events for 7 years](/docs/data/events-retention), free plans for 1 year, and you can set a shorter window.
+
+Without it: a single-node ClickHouse with no replica is one disk failure from losing everything, and nobody tunes it until a query starts timing out.
+
+### Querying it as often as you like
+
+Funnels, retention, paths, lifecycle, [SQL](/docs/data-warehouse/sql), and [PostHog AI](/docs/posthog-ai) all run on the same events. Query compute is in the event price. We run guard rails so one query cannot take a cluster down: a query gets 60 seconds by default and 10 minutes in the background, and each organization has a concurrency limit. Inside those limits, there is no meter on queries.
+
+Without it: a self-run cluster bills per node-hour whether anyone queries it or not, and one teammate's heavy query slows down everyone.
+
+### Getting it out
+
+[Batch exports](/docs/data-pipelines/batch-exports) send events to S3, Snowflake, BigQuery, Postgres, Redshift, Databricks, or Azure as JSON or Parquet. The [query API](/docs/api/query) returns anything SQL can express. If you leave, your data leaves with you.
+
+## The ledger: what you own if you build it
+
+| Job | What PostHog runs | What you run instead | Who gets paged |
+|---|---|---|---|
+| Getting it in | SDKs for web, iOS, Android, React Native, Flutter, and server SDKs in Node, Python, Go, Java, Ruby, PHP, .NET, and more. A public capture endpoint. | An SDK per platform you ship on. An endpoint on the public internet. | You, when a mobile release ships a broken batcher |
+| Not losing it | Kafka with replication, overflow lanes, a dead letter queue, and replay after a crash | A queue, or none. Inserts straight into ClickHouse until it refuses them | You, at 2 am on launch day |
+| Making it mean something | Validation, GeoIP, cookieless hashing, session attribution, a definitions catalog, and warnings | A transform step per rule, plus the catalog your agent needs before it can query anything | You, when one platform renames a property |
+| Storing it | Sharding, replication, tiering, compression, materialized columns, backups, and GDPR deletes | ClickHouse operations, upgrades validated against your real queries, and backups you have tested a restore from | You, when an upgrade changes a query result |
+| Querying it | Insights, SQL, AI, caching, and per-organization limits | A dashboard tool or an agent, plus limits so one query cannot kill the cluster | You, when a teammate's query takes the cluster down |
+| Getting it out | Batch exports and the query API | Your own export jobs | You |
+
+## Four costs that do not show up in the agent's estimate
+
+### Storage for years, not months
+
+An agent's estimate covers the first month of storage. The per-event price covers 84 months. Your own cost compounds: month 12 stores 12 months of events, and month 84 stores 84. The ledger below shows what that adds up to at your volume, your cloud's price per GB-month, and a replica or two.
+
+### Compute, forever
+
+Each event is read many times across its life. Every dashboard refresh, funnel, cohort recalculation, and AI question reads it again. That is in the price. A cluster you run bills by the hour whether or not anyone is looking.
+
+### Scaling you did not plan for
+
+A product launch, a bot, an SDK retry loop, or an acquisition can multiply your event volume in a day. Our pipeline absorbs that with Kafka, overflow lanes, and clusters sized for the whole customer base. Your cluster is sized for last month.
+
+### Trust
+
+Numbers you can put in front of a board or an investor without an asterisk. [SOC 2](/docs/privacy/soc2), [HIPAA](/docs/privacy/hipaa-compliance), and GDPR controls. A public [status page](/status). When [we lost Logs data in February 2026](/handbook/company/post-mortems/2026-02-20-posthog-us-logs-data-loss), we published what happened and what changed. A pipeline one engineer runs on the side rarely gets a post-mortem.
+
+## Your own ledger
+
+Fill this in with your numbers.
+
+| Input | Your number | Notes |
+|---|---|---|
+| Events per month | | Your [billing page](https://app.posthog.com/organization/billing) shows it |
+| Compressed bytes per event | | Measure it on a sample of your real events in ClickHouse |
+| Replicas | | At least 2, or a disk failure is data loss |
+| Months retained | 84 | To match a paid plan |
+| Storage price per GB-month | | Your cloud's list price for the tier you use |
+| Compute nodes × hourly price | | Ingestion and query nodes, 730 hours a month |
+| Queue | | Managed Kafka or equivalent |
+| Engineer hours per month | | Upgrades, schema changes, backups, SDK maintenance |
+| On-call | | Who, and what it costs them |
+
+Then:
+
+```
+storage at month N  = events × bytes × replicas × N × price per GB-month
+monthly total       = storage + compute + queue + (engineer hours × loaded rate)
+your cost per event = monthly total ÷ events per month
+```
+
+Compare the last line to your tier in the table at the top. Run it for month 1 and for month 36.
+
+## When building is the right call
+
+- You sell analytics infrastructure, so the pipeline is your product.
+- You already run ClickHouse for something else, and a data team treats it like a product.
+- Your data does not fit an events table: wide logs, sensor-rate time series, or rows that must be updated in place.
+
+If none of those apply, the per-event price is the cheaper way to get this.
+
+## Cut the bill without leaving
+
+[Capture fewer events](/docs/product-analytics/cutting-costs), send [anonymous events](/docs/data/anonymous-vs-identified-events) where you do not need a person, set a [billing limit](/docs/billing/limits-alerts), and set a [shorter retention window](/docs/data/events-retention#custom-retention) if seven years is more than you need.
