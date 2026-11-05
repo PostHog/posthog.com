@@ -58,7 +58,7 @@ If an ingestion worker crashes halfway through a batch, Kafka redelivers it. Any
 
 Without it, a traffic spike or a database restart can mean you lose your precious data for good.
 
-### Step 3: Making it mean something
+**How it works at PostHog:** Ingestion validates each event, drops anything older than a limit you set, and runs your [transformations](/docs/data-pipelines/transformations). It adds country and city from GeoIP, gives [cookieless](/tutorials/cookieless-tracking) events a daily-rotating hash instead of a cookie, and attaches UTM and referrer data to the [session](/docs/data/sessions). Every event and property name goes into a catalog, which is how the UI, SQL autocomplete, and [PostHog AI](/docs/posthog-ai) know what exists. If something's wrong with an event, an [ingestion warning](/docs/data/ingestion-warnings) tells you which one. When two names mean the same thing, you can combine them into one [action](/docs/data/actions) or rename one with a transformation.
 
 Raw events are messy. Your iOS app sends `Signed Up`, your web app sends `signup_completed`, and last week's release misspelled a property name. Someone reads your blog on their phone at lunch and signs up on their laptop that evening, and as far as the raw data knows, that's two strangers. Before anyone can trust a chart, the data needs checking and joining up.
 
