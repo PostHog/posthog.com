@@ -1,6 +1,6 @@
 ---
 title: "Rebundling your data stack is inevitable. Pick your bundle carefully."
-date: 2026-11-03
+date: 2026-11-11
 rootPage: /blog
 sidebar: Blog
 showTitle: true
