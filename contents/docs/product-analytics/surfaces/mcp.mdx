@@ -82,7 +82,7 @@ Try these with your MCP-enabled agent:
 
 ## Customize chart display
 
-When creating or updating SQL-backed insights, you can configure per-series display settings and number formatting on each Y-axis column.
+When creating or updating SQL-backed insights, you can configure per-series display settings and number formatting on each Y-axis column. For table visualizations, you can also set a `description` on any column via `tableSettings.columns[].settings.display.description`.
 
 **Per-series display** – set on each Y-axis column under `settings.display`:
 
@@ -93,6 +93,7 @@ When creating or updating SQL-backed insights, you can configure per-series disp
 | `trendLine`     | `true`, `false`               | Draw a linear trend line for the series.                                                            |
 | `label`         | string                        | Custom label shown in the legend and tooltips instead of the column name.                           |
 | `color`         | hex string (e.g. `#1d4aff`)   | Custom color for the series.                                                                        |
+| `description`   | string                        | Explanatory text for the column, shown via an info icon in the table header.                        |
 
 **Number formatting** – set on each Y-axis column under `settings.formatting`:
 
