@@ -369,7 +369,7 @@ A found email returns `200`:
 
 See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means.
 
-A `404` with the code `not_found` means the status isn't there yet, is older than 30 days, or the ID is wrong. See [when a status isn't found](/docs/workflows/transactional-emails#when-a-status-isnt-found). It returns `401` when the request has no project secret API key, `403` when the key doesn't have a Workflow scope, and `429` when you read too often.
+A `404` with the code `not_found` right after a send means the status isn't there yet: a new send can take a few seconds to get its first status, so retry after a short wait. Later, a `404` means the email is older than 30 days or the ID is wrong. See [when a status isn't found](/docs/workflows/transactional-emails#when-a-status-isnt-found). It returns `401` when the request has no project secret API key, `403` when the key doesn't have a Workflow scope, and `429` when you read too often.
 
 Each project secret API key can read 600 statuses per minute and 20,000 per hour. All the keys of one project share the same limits in total. Reads have their own limits, so they don't use up the limits for sends.
 
