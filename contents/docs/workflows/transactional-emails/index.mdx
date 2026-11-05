@@ -58,7 +58,7 @@ For emails with sign-in codes, reset links, or other secrets, turn on **Protect 
 
 ## Create an API key
 
-Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `hog_flow:write` scope. The same key can also [read the status](#check-an-emails-status) of each email it sends.
+Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `transactional_email:write` scope. Keys with `hog_flow:write` still work. The same key can also [read the status](#check-an-emails-status) of each email it sends.
 
 1. Go to [**Project secret API keys**](https://app.posthog.com/settings/project-secret-api-keys) in your project settings.
 2. Click **Create project secret API key** and give the key a label.
@@ -129,7 +129,7 @@ Use `code` in your error handling. The text in `detail` can change.
 | `400` | `marketing_template` | The template is in a marketing category. | Move the template to a transactional category, or remove its category. |
 | `400` | `transactional_email_paused` | The workflow that sends this template isn't active, or it was deleted. | Don't retry. A retry gets the same error. |
 | `401` | `not_authenticated` or `authentication_failed` | The `Authorization` header is missing, or the key isn't valid. | Check that you send a valid project secret API key. |
-| `403` | `permission_denied` | The key doesn't have the `hog_flow:write` scope, or the key belongs to a different project. | Use a key from this project with the correct scope. |
+| `403` | `permission_denied` | The key doesn't have the `transactional_email:write` scope, or the key belongs to a different project. | Use a key from this project with the correct scope. |
 | `404` | `not_found` | The template doesn't exist in this project, or transactional emails aren't turned on for the project. | Check the template ID and the project. |
 | `409` | `idempotency_key_in_flight` | A request with the same `Idempotency-Key` is still in progress. | Retry with the same key after a few seconds. |
 | `422` | `idempotency_key_reused` | The `Idempotency-Key` was already used for a different request. | Use a new key for a new email. |
