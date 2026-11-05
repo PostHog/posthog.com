@@ -23,7 +23,7 @@ A scanner can only watch sessions that the customer records. Check these items i
 3. [Network recording](/docs/session-replay/network-recording) is on. Without it, a scan cannot tell a failed request from a slow one.
 4. [Canvas recording](/docs/session-replay/canvas-recording) or [iframe recording](/docs/session-replay/iframes) is on, if key screens use a canvas or an iframe.
 
-If the customer records a small share of sessions, set the scanner's sampling rate to 100% and its session coverage to **All recordings**. Then read the estimate again (see Rule 7).
+A low replay sampling rate leaves the scanner with few sessions. Rule 3 sets the scanner to 100% sampling and **All recordings**, so the replay rate is then the only limit.
 
 ## Rule 2: Scope each scanner to one flow with a clear end
 
@@ -47,9 +47,9 @@ Give each scanner one question. For one flow, three questions answer most of wha
 | Onboarding friction type  | Classifier | Which type of friction did the user hit?            |
 | Onboarding friction score | Scorer     | How much friction did the user hit, from 0 to 10?   |
 
-Give all three scanners the same filter and a sampling rate of 100%. The editor starts each new scanner at 20%, so change it. Each scanner samples on its own, so two scanners at 50% share only about a quarter of their sessions. At 100% on the same filter, each session gets all three observations, and you can join the results on `session_id` (see "After launch" below).
+Give all three scanners the same filter, a sampling rate of 100%, and the session coverage **All recordings**. The editor starts each new scanner at 20% sampling and **Medium and high activity recordings**, so change both. A user who gives up looks quiet, and the default coverage skips quiet sessions. Each scanner samples on its own, so two scanners at 50% share only about a quarter of their sessions. With the same settings on the same filter, each session gets all three observations. You can then join the results on `session_id` (see "After launch" below).
 
-You cannot change a scanner's type after you create it, so choose the type first. Do not use a summarizer for this set. A summarizer returns text, so you cannot count, chart, or join its results. Use a summarizer when a person reads each observation.
+You cannot change a scanner's type after you create it, so choose the type first. Do not use a summarizer for this set. A summarizer returns a title and a text summary, with no fixed answer such as a verdict, a category, or a score. You can count and join its observations, but you cannot group them by answer. Use a summarizer when a person reads each observation.
 
 ## Rule 4: Put every instruction in the prompt
 
@@ -137,22 +137,22 @@ Then let PostHog watch the results for the customer:
 
 - Add a [scout](/docs/replay-vision/scouts) from the scanner's **Scouts** tab. A scanner judges one recording at a time. A scout compares observations over time and reports when a pattern changes.
 - Add an [alert](/docs/replay-vision/alerts) on each match, or on a threshold such as a rise in sessions that did not reach the end.
-- If the customer uses [self-driving](/docs/self-driving), turn on the scanner's **Self-driving** setting. Findings then go to the inbox. It is off by default.
+- If the customer uses [self-driving](/docs/self-driving), turn on the **Self-driving** setting for one scanner of the set, such as the outcome monitor. Findings then go to the inbox. Scanners that watch the same sessions can report the same problem more than once, and the copies then confirm each other in the inbox. The setting is off by default.
 
 For more on scanner design, read [a scanner that watches everything sees nothing](/blog/a-scanner-that-watches-everything-sees-nothing) and the [scanner prompts](/docs/replay-vision/scanner-prompts) library.
 
 ## Checklist
 
-| Step       | Check                                                      |
-| ---------- | ---------------------------------------------------------- |
-| Recording  | Replay is on for the flow, and you know its sampling rate  |
-| Scope      | One flow with a visible end, with test users filtered out  |
-| Set        | Monitor, classifier, and scorer on one filter at 100%      |
-| Prompt     | Every instruction is in the prompt, not the description    |
-| Categories | The list matches the prompt and has an escape category     |
-| Budget     | Estimate read, scanner limit on                            |
-| Test       | 5 to 10 known recordings scanned on demand and rated       |
-| Follow-up  | A scout or an alert reads the results                      |
+| Step       | Check                                                                     |
+| ---------- | ------------------------------------------------------------------------- |
+| Recording  | Replay is on for the flow, and you know its sampling rate                 |
+| Scope      | One flow with a visible end, with test users filtered out                 |
+| Set        | Monitor, classifier, and scorer on one filter, at 100%, on All recordings |
+| Prompt     | Every instruction is in the prompt, not the description                   |
+| Categories | The list matches the prompt and has an escape category                    |
+| Budget     | Estimate read, scanner limit on                                           |
+| Test       | 5 to 10 known recordings scanned on demand and rated                      |
+| Follow-up  | A scout or an alert reads the results                                     |
 
 ## The one-line version
 
