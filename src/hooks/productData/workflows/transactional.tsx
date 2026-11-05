@@ -37,13 +37,10 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
 
 const { data, error } = await posthog.emails.send({
     to: email,
-    templateKey: "password-reset",
-    subject: "Reset your password",
-    html: await render(<PasswordResetEmail resetLink={resetLink} />),
     from: "Hedgebox <security@example.com>",
-    distinctId: userId,
-    // A retry never sends this email twice
-    idempotencyKey: \`password-reset-\${resetRequestId}\`,
+    subject: "Reset your password",
+    html,
+    templateKey: "password-reset",
 })`,
     },
     {
@@ -57,13 +54,10 @@ const { data, error } = await posthog.emails.send({
 
 result = posthog.emails.send(
     to=email,
-    template_key="password-reset",
-    subject="Reset your password",
-    html=render_to_string("emails/password_reset.html", {"reset_link": reset_link}),
     from_="Hedgebox <security@example.com>",
-    distinct_id=user_id,
-    # A retry never sends this email twice
-    idempotency_key=f"password-reset-{reset_request_id}",
+    subject="Reset your password",
+    html=html,
+    template_key="password-reset",
 )`,
     },
     {
@@ -75,14 +69,11 @@ result = posthog.emails.send(
 })
 
 result, err := client.Emails().Send(ctx, posthog.CodeEmail{
-    To:             email,
-    TemplateKey:    "password-reset",
-    Subject:        "Reset your password",
-    HTML:           html,
-    From:           "Hedgebox <security@example.com>",
-    DistinctID:     userID,
-    // A retry never sends this email twice
-    IdempotencyKey: "password-reset-" + resetRequestID,
+    To:          email,
+    From:        "Hedgebox <security@example.com>",
+    Subject:     "Reset your password",
+    HTML:        html,
+    TemplateKey: "password-reset",
 })`,
     },
     {
@@ -96,13 +87,10 @@ result, err := client.Emails().Send(ctx, posthog.CodeEmail{
 
 result = posthog.emails.send(
   to: email,
-  template_key: 'password-reset',
+  from: 'Hedgebox <security@example.com>',
   subject: 'Reset your password',
   html: html,
-  from: 'Hedgebox <security@example.com>',
-  distinct_id: user_id,
-  # A retry never sends this email twice
-  idempotency_key: "password-reset-#{reset_request_id}"
+  template_key: 'password-reset'
 )`,
     },
     {
@@ -117,13 +105,10 @@ result = posthog.emails.send(
 
 $result = PostHog::emails()->send([
     'to' => $email,
-    'template_key' => 'password-reset',
+    'from' => 'Hedgebox <security@example.com>',
     'subject' => 'Reset your password',
     'html' => $html,
-    'from' => 'Hedgebox <security@example.com>',
-    'distinct_id' => $userId,
-    // A retry never sends this email twice
-    'idempotency_key' => "password-reset-$resetRequestId",
+    'template_key' => 'password-reset',
 ]);`,
     },
     {
@@ -139,13 +124,10 @@ $result = PostHog::emails()->send([
 var result = await posthog.Emails.SendAsync(new SendCodeEmailOptions
 {
     To = email,
-    TemplateKey = "password-reset",
+    From = "Hedgebox <security@example.com>",
     Subject = "Reset your password",
     Html = html,
-    From = "Hedgebox <security@example.com>",
-    DistinctId = userId,
-    // A retry never sends this email twice
-    IdempotencyKey = $"password-reset-{resetRequestId}",
+    TemplateKey = "password-reset",
 });`,
     },
     {
@@ -164,11 +146,8 @@ let result = posthog
     .emails()
     .send(
         CodeEmail::new(&email, "password-reset", "Reset your password")
-            .html(html)
             .from("Hedgebox <security@example.com>")
-            .distinct_id(&user_id)
-            // A retry never sends this email twice
-            .idempotency_key(format!("password-reset-{reset_request_id}")),
+            .html(html),
     )
     .await?;`,
     },
@@ -185,13 +164,10 @@ config :posthog,
 {:ok, result} =
   PostHog.Emails.send(
     to: email,
-    template_key: "password-reset",
+    from: "Hedgebox <security@example.com>",
     subject: "Reset your password",
     html: html,
-    from: "Hedgebox <security@example.com>",
-    distinct_id: user_id,
-    # A retry never sends this email twice
-    idempotency_key: "password-reset-#{reset_request_id}"
+    template_key: "password-reset"
   )`,
     },
     {
@@ -200,14 +176,12 @@ config :posthog,
         code: `curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \\
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \\
   -H "Content-Type: application/json" \\
-  -H "Idempotency-Key: password-reset-8f14e45f" \\
   -d '{
     "to": "jane@example.com",
-    "template_key": "password-reset",
+    "from": "Hedgebox <security@example.com>",
     "subject": "Reset your password",
     "html": "<p>Hi Jane,</p><p><a href=\\"https://example.com/reset?token=abc123\\">Reset your password</a>.</p>",
-    "from": "Hedgebox <security@example.com>",
-    "distinct_id": "user_123"
+    "template_key": "password-reset"
   }'`,
     },
 ]
