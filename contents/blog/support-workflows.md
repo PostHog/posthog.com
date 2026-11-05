@@ -43,14 +43,12 @@ Moving to our new world, I was adamant that I didn't want a branch per team that
     3. Captures a custom PostHog event to say the ticket has been classified and which tags were applied
     4. Investigates the ticket and pulls useful context onto it for the support engineer (including events, replays, customer analytics, errors, past tickets, etc)
 
-I don't need to worry about team changes anymore. The task uses what's currently in our [teams page](/teams), the [feature ownership page](/handbook/engineering/feature-ownership), and the [support SME page](/handbook/support/support-smes) to decide which team owns it.
-
 Having the tags automatically applied like this also means that:
 
 - I can easily report on support at a product-by-product level.
 - If a ticket does need escalating to engineering, the support engineer can see straight away which team it belongs to, without having to look anything up.
 
-Another cool thing to know: I get the custom PostHog classification event I capture to trigger a custom [destination](/docs/cdp/destinations). The source code I wrote for the destination works out the Slack channel name from the team tag, using our naming convention i.e. a product analytics ticket notifies `#support-product-analytics`. This way, if a team changes name or a new team is created, I don't have to update anything - it's all based on their name on our [teams page](/teams). I actually have a second custom destination which listens for the  `$conversation_ticket_assigned` event. So similarly, whenever a ticket is assigned, it works out the new assignee's team and notifies that team's channel.
+I don't need to worry about team changes anymore. The task uses what's currently on our [teams page](/teams), [feature ownership page](/handbook/engineering/feature-ownership), and [support SME page](/handbook/support/support-smes) to decide which team owns a ticket. The classification event it captures then triggers a custom [destination](/docs/cdp/destinations) that works out the Slack channel from the team tag, using our naming convention – a product analytics ticket notifies `#support-product-analytics`. So if a team is renamed or a new one is created, there's nothing for me to update. A second destination listens for the `$conversation_ticket_assigned` event and does the same whenever a ticket is assigned, notifying the new assignee's team.
 
 Workflows also knows which email address a ticket was sent to or what channel was used (email, widget, Slack, etc.) so I can have a workflow that sends tickets sent to our merch email address directly to our merch team.
 
@@ -205,7 +203,7 @@ A few habits make this work:
 
 - Watch for loops or workflows that are dependent on one another.
 - AI tasks are attributed to the workflow's creator.
-- AI tasks have daily limits. Each workflow can start 100 AI tasks a day, and each project 500.
+- AI tasks have daily limits. Each workflow can start 100 AI tasks a day, and each project 500 by default. If you need more, ask us to raise them.
 - Not everything a workflow can do shows up in the UI. For example, in the template that clears the SLA deadline when a ticket goes to on hold, pending, or resolved, you can't see all of the trigger conditions in the editor. I'd recommend getting your agent to build you a draft.
 
 ## Set up these workflows yourself
