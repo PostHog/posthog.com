@@ -43,6 +43,8 @@ Moving to our new world, I was adamant that I didn't want a branch per team that
     3. Captures a custom PostHog event to say the ticket has been classified and which tags were applied
     4. Investigates the ticket and pulls useful context onto it for the support engineer (including events, replays, customer analytics, errors, past tickets, etc.)
 
+![Triaging and categorizing tickets workflow](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/image_5_85d7b81326.png)
+
 Having the tags automatically applied like this also means that:
 
 - I can easily report on support at a product-by-product level.
