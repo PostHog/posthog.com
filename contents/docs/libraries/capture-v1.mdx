@@ -148,7 +148,7 @@ See [limits and validation](/docs/api/capture-v1#limits-and-validation) for ever
 
 - **Library name and version.** The SDK sets `$lib` and `$lib_version`. You can't override them from your properties.
 - **Session IDs.** `$session_id` and `$window_id` must be strings. Other values are dropped from the event, with a warning in your logs. The iOS, Android, and Flutter SDKs log it only when debug logging is on.
-- **Timestamps.** SDKs send every timestamp with at least millisecond precision, writing all three digits even when they're zero (`.000`), and keep any finer precision you provide. The iOS SDK sends milliseconds only. SDKs no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
+- **Timestamps.** SDKs send every timestamp with at least millisecond precision, writing all three digits even when they're zero (`.000`), and keep any finer precision you provide. The iOS and Android SDKs, and Flutter on those platforms, send milliseconds only. SDKs no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
 - **API keys.** An empty project token, or a personal API key (`phx_…`) used as one, turns the client off and logs one error, instead of failing your app.
 - **Redirects.** SDKs follow a redirect only to the same scheme, host, and port, and only a `307` or `308`. Any other redirect is an error. If you send events through a proxy that redirects, point the SDK at the final address.
 - **Logs.** Debug logs no longer include event contents, and some log messages changed. Update any alerts that match on old log text.
