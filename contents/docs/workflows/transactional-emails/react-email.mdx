@@ -69,7 +69,7 @@ export async function sendOrderShipped({ userId, email, firstName, trackingUrl, 
         text: toPlainText(html),
         from: "Shop <shop@example.com>",
         distinctId: userId,
-        // Identifies this one email, so a retry never sends it twice
+        // Identifies this one email, so a retry doesn't send it twice
         idempotencyKey: `order-shipped-${orderId}`,
     })
     if (error) {
@@ -84,6 +84,6 @@ export async function sendOrderShipped({ userId, email, firstName, trackingUrl, 
 - **Text:** `toPlainText` keeps the link of each button and drops the markup. If you leave out `text`, PostHog makes it from `html`.
 - **Sender:** `from` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender.
 - **User:** Pass the distinct ID that you pass to `identify()` as `distinctId`, so PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against that user. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
-- **Retries:** The idempotency key identifies the email, so a retry with the same key never sends it twice. See [timeouts and retries](/docs/workflows/transactional-emails/node#timeouts-and-retries).
+- **Retries:** The idempotency key identifies the email. A retry with the same key in the 24 hours after PostHog queues the email doesn't send it again. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) and [timeouts and retries](/docs/workflows/transactional-emails/node#timeouts-and-retries).
 
 `send` returns `{ data, error }` and doesn't throw. `data.id` is the message ID, which you can pass to [`get`](/docs/workflows/transactional-emails/node#check-an-emails-status) to read the email's status. For each error code, see the [errors table](/docs/workflows/transactional-emails#errors).
