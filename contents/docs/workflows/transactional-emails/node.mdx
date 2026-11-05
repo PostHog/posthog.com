@@ -99,6 +99,8 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 - **Engagement:** PostHog captures the email's engagement events unless you pass `captureEngagement: false`.
 - **One form per send:** A send has `templateId` or `templateKey`, not both. Content from your code takes no `templateData`, because PostHog renders nothing.
 
+For React Email from start to end, with the plain text version, see [send React Email components](/docs/workflows/transactional-emails/react-email).
+
 See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
 ## Check an email's status

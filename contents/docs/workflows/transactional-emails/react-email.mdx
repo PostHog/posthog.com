@@ -1,0 +1,89 @@
+---
+title: Send React Email components with PostHog
+sidebar: Docs
+showTitle: true
+---
+
+[React Email](https://react.email) lets you write emails as React components. Keep React Email to write your emails, render each one in your app, and send its HTML and plain text with the [Node.js SDK](/docs/workflows/transactional-emails/node). PostHog sends the content as you rendered it. You don't need a template in PostHog.
+
+The Node.js SDK sends content from your code from version 5.62.0. Before you start, [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key) with the **Transactional email** scope.
+
+## Install
+
+```bash
+npm install posthog-node react-email react react-dom
+```
+
+## Write an email
+
+Write the email as a component, with the components from `react-email`:
+
+```jsx
+// emails/order-shipped.jsx
+import { Body, Button, Html, Text } from "react-email"
+
+export function OrderShippedEmail({ firstName, trackingUrl }) {
+    return (
+        <Html lang="en">
+            <Body>
+                <Text>Hi {firstName}, your order is on its way.</Text>
+                <Button href={trackingUrl}>Track your order</Button>
+            </Body>
+        </Html>
+    )
+}
+```
+
+## Set up the client
+
+Reuse the PostHog client your application already creates, and set `secretKey` to your project secret API key. See [set up the client](/docs/workflows/transactional-emails/node#set-up-the-client) for the host and for local evaluation.
+
+```js
+// posthog.js
+import { PostHog } from "posthog-node"
+
+export const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    // This client only sends email, so it doesn't poll flag definitions with the secret key
+    enableLocalEvaluation: false,
+})
+```
+
+## Render and send
+
+Render the component to HTML with `render`, make the plain text version with `toPlainText`, and send both:
+
+```jsx
+import { render, toPlainText } from "react-email"
+import { OrderShippedEmail } from "./emails/order-shipped"
+import { posthog } from "./posthog"
+
+export async function sendOrderShipped({ userId, email, firstName, trackingUrl, orderId }) {
+    const html = await render(<OrderShippedEmail firstName={firstName} trackingUrl={trackingUrl} />)
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateKey: "order-shipped",
+        subject: "Your order shipped",
+        html,
+        text: toPlainText(html),
+        from: "Shop <shop@example.com>",
+        distinctId: userId,
+        // Identifies this one email, so a retry doesn't send it twice
+        idempotencyKey: `order-shipped-${orderId}`,
+    })
+    if (error) {
+        // An EmailError. Branch on error.code
+        throw error
+    }
+    return data.id
+}
+```
+
+- **Key:** `templateKey` names the email. PostHog groups the email's metrics and sends under it, so use one key for each component, such as `order-shipped`.
+- **Text:** `toPlainText` keeps the link of each button and drops the markup. If you leave out `text`, PostHog makes it from `html`.
+- **Sender:** `from` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender.
+- **User:** Pass the distinct ID that you pass to `identify()` as `distinctId`, so PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against that user. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
+- **Retries:** The idempotency key identifies the email. A retry with the same key in the 24 hours after PostHog queues the email doesn't send it again. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) and [timeouts and retries](/docs/workflows/transactional-emails/node#timeouts-and-retries).
+
+`send` returns `{ data, error }` and doesn't throw. `data.id` is the message ID, which you can pass to [`get`](/docs/workflows/transactional-emails/node#check-an-emails-status) to read the email's status. For each error code, see the [errors table](/docs/workflows/transactional-emails#errors).
