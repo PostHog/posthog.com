@@ -1,28 +1,27 @@
 ---
-title: How much can an event cost anyway?
+title: How much does an event cost anyway?
 ---
 
 import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
 
 So, you looked at a recent PostHog bill, and an agent told you it could build the same thing on ClickHouse in a weekend. It probably can. We've watched it happen, and the first month's cloud invoice usually looks great.
 
-So, why doesn't everyone switch to a vibe-coded version? What's the catch?
+So, why doesn't everyone switch to a vibe-coded version of PostHog? What's the catch?
 
 The catch is that the agent's estimate and our price aren't measuring the same thing. One covers a weekend. The other covers seven years of storage, every query you'll ever run on those events, and the person who gets paged when it breaks. So before you compare the two bills, you need to know what the per-event price pays for.
 
-Is this page biased? Obviously. We sell the thing. But most claims link to a page you can check, and the ledger at the bottom only works with your numbers, not ours.
 
-If you haven't had a bill yet, the math is shorter. The first 1 million events each month are free, and most other PostHog products have their own free tier. A pipeline you build costs money from the first day, because the server and the hours to keep it running aren't free. Below the free tier, building it yourself is the expensive option.
+> **If you haven't had a bill yet, you can skip this page.** The first 1 million events each month are free, and all other PostHog products have their own free tier too. These free tiers are specifically designed to help early-stage teams get to product-market fit and are generous enough that 97% of all users don't pay a penny. Meanwhile, a data pipeline you build with Claude will cost money from day one because the server and the hours to keep it running aren't free. Compared to the free tier, building it yourself is always the expensive option.
 
 ## The price
 
-[Product Analytics](/product-analytics) bills per event. The first 1 million events each month are free, and the price per event drops as volume grows. These are the live rates for [anonymous events](/docs/data/anonymous-vs-identified-events), which don't carry a person profile. Drag the slider to your volume. The same rates are also in [plain Markdown](https://posthog.com/pricing.md), for agents and anyone who'd rather read a list.
+[Product Analytics](/product-analytics) bills per event. The first 1 million events each month are free, and the price per event drops as volume grows. These are the live rates for [anonymous events](/docs/data/anonymous-vs-identified-events), which don't carry a person profile. Drag the slider to match your expected volume.
 
 <Pricing productType="product_analytics" />
 
-Anonymous events cost less because they skip person processing, which is [the most expensive step in our pipeline](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper). Identified events add a person profile charge on top. The [pricing page](/pricing) has the full tables for both event types and a calculator.
+Anonymous events cost less because they skip person processing, which is [the most expensive step in our pipeline](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper). Identified events add a person profile charge on top. The [pricing page](/pricing) has the full tables for both event types if you want to compare. 
 
-That's every line item for events. We don't charge to store them, to query them in PostHog, or per seat, so invite the whole company.
+That's every line item for events. We don't charge to store them, to query them in PostHog, or per seat. All those costs are factored in, meaning you can run as much analysis as you like with as many colleagues as you need. 
 
 ## What happens to one event
 
