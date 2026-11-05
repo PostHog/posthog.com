@@ -181,6 +181,31 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 
 A send has `templateId` or `templateKey`, not both. Content from your code takes no `templateData`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+Content from your code takes `cc`, `bcc`, and `attachments`:
+
+- **`cc` and `bcc`** - One address or a list of plain addresses.
+- **`attachments`** - A list of files. Each file has `filename` and `content`, and can also have `contentType` and `contentId`.
+
+Pass the file's bytes, such as a `Buffer`, as `content`, and the client encodes them for you. The client takes a string as content that's already Base64. When the client can't send a file, `send` returns an error with the code `invalid_attachment` before any request.
+
+```js
+import { readFile } from "node:fs/promises"
+
+const { error } = await posthog.emails.send({
+    to: user.email,
+    templateKey: "receipt",
+    subject: "Your receipt",
+    html,
+    cc: "billing@example.com",
+    attachments: [{ filename: "receipt.pdf", content: await readFile(pdfPath), contentType: "application/pdf" }],
+    distinctId: user.id,
+})
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
 ## Check an email's status
 
 ```js
@@ -231,4 +256,6 @@ assert.equal(requests[0].options.headers["Idempotency-Key"], "password-reset-1")
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `appHost` to your PostHog app URL. The client doesn't send the secret key to a host that might be a proxy.
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `appHost` to your PostHog app URL. The client doesn't send email requests to a host that might be a proxy.
+
+With `enableLocalEvaluation` on, the client still polls flag definitions from `host` with the secret key. If that host is a proxy that must not see the key, keep `enableLocalEvaluation: false`.

@@ -40,7 +40,11 @@ Go to [**Project secret API keys**](https://app.posthog.com/settings/project-sec
 
 <Step title="Send the email to yourself">
 
+Put your key in the shell, then send the email:
+
 ```bash
+export POSTHOG_PROJECT_SECRET_API_KEY="phs_..."
+
 curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \

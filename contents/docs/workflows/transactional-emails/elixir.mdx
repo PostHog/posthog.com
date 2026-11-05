@@ -301,6 +301,6 @@ end
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the SDK sends email to your region's app host, even when `api_host` is an ingestion host such as `us.i.posthog.com`. If `api_host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send returns the code `missing_app_host`. The SDK doesn't send the secret key to a host that might be a proxy.
+On PostHog Cloud, the SDK sends email to your region's app host, even when `api_host` is an ingestion host such as `us.i.posthog.com`. If `api_host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send returns the code `missing_app_host`. The SDK doesn't send email requests to a host that might be a proxy.
 
 Local evaluation still loads flag definitions from `api_host` with the secret key. If the proxy must not see the key, set `enable_local_evaluation: false`.

@@ -154,7 +154,8 @@ def send_password_reset_email(self, user_id: str, email: str, first_name: str, r
         )
     except EmailError as error:
         if error.code in RETRYABLE_CODES:
-            raise self.retry(exc=error, countdown=2**self.request.retries)
+            # Waits 10, 20, 40, 80, then 160 seconds, longer than a rate limit's minute
+            raise self.retry(exc=error, countdown=10 * 2**self.request.retries)
         # Any other code marks the task as failed, with no retry
         raise
     return result.id
@@ -210,6 +211,33 @@ async def send_password_reset(user_id: str, email: str, html: str, reset_request
 
 A send has `template_id` or `template_key`, not both, or it raises `TypeError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+Content from your code takes `cc`, `bcc`, and `attachments`:
+
+- **`cc` and `bcc`** - One address or a list of plain addresses.
+- **`attachments`** - A list of dicts. Each one has `filename` and `content`, and can also have `content_type` and `content_id`.
+
+Pass the file's bytes as `content`, and the client encodes them for you. The client takes a `str` as content that's already Base64. A file that the client can't send raises `EmailError` with the code `invalid_attachment` before any request.
+
+```python
+from pathlib import Path
+
+posthog.emails.send(
+    to=user.email,
+    template_key="receipt",
+    subject="Your receipt",
+    html=html,
+    cc="billing@example.com",
+    attachments=[
+        {"filename": "receipt.pdf", "content": Path(pdf_path).read_bytes(), "content_type": "application/pdf"}
+    ],
+    distinct_id=str(user.id),
+)
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
 ## Check an email's status
 
 ```python
@@ -261,4 +289,6 @@ For sync code, pass a `requests.Session` with a test adapter to `Emails(session=
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. The client doesn't send the secret key to a host that might be a proxy.
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. The client doesn't send email requests to a host that might be a proxy.
+
+When the client evaluates a flag locally, it still loads flag definitions from `host` with the secret key. If that host is a proxy that must not see the key, don't evaluate flags locally with this client.

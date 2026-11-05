@@ -283,6 +283,6 @@ async fn sends_password_reset() {
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send the secret key to a host that might be a proxy.
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send email requests to a host that might be a proxy.
 
 With `enable_local_evaluation` on, flag definitions still load from `host` with the secret key.

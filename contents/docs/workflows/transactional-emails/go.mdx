@@ -294,6 +294,6 @@ func TestSendPasswordReset(t *testing.T) {
 
 ## Use a proxy or self-hosted PostHog
 
-On PostHog Cloud, the client sends email to your region's app host, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. If `Endpoint` is a reverse proxy or a self-hosted PostHog, set `AppHost` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send the secret key to a host that might be a proxy.
+On PostHog Cloud, the client sends email to your region's app host, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. If `Endpoint` is a reverse proxy or a self-hosted PostHog, set `AppHost` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send email requests to a host that might be a proxy.
 
 Flag definitions for local evaluation still load from `Endpoint` with the secret key. If that host is a proxy that must not see the key, leave `SecretKey` off that client. Send email from a second client whose `Endpoint` is your PostHog host.
