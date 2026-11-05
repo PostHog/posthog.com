@@ -29,7 +29,7 @@ The table below shows how retention is changing by plan:
 
 Over the past year, many customers have asked us to shorten their events data retention period, and others were surprised to learn we keep events for 7 years. That feedback led us to review our retention policy and compare it with others in our industry. Here's what we found:
 
-- 2 years is the industry standard. Most non-enterprise plans keep event data for 2 years.
+- 2 years is the industry standard. Most non-enterprise plans keep events data for 2 years.
 - Old data rarely gets queried. The vast majority of queries run on data less than a year old.
 - Storing 7 years of data is expensive. We've been paying to store data that most of you weren't using and didn't need us to keep.
 
@@ -60,7 +60,7 @@ For more information on changing your events data retention period, see the [eve
 
 ## Can I export data out of PostHog?
 
-Yes, if you'd prefer not to upgrade your package, or you need to keep data for longer than 7 years, you can send it to your own data warehouse with a [batch export](/docs/cdp/batch-exports).
+Yes, if you'd prefer not to upgrade your package, or you need to keep data for longer than 7 years, you can send it to your own data warehouse with a [batch export](/docs/data-pipelines/batch-exports).
 
 ## Have questions?
 
