@@ -156,7 +156,7 @@ The date range is the important part: it only applies while you're away, so you 
 
 These measure customer satisfaction and we have workflow handle them. The first sends the survey, and the second handles completed responses.
 
-The first workflow is triggered when a ticket is resolved, then waits 24 hours and checks that the ticket is still resolved. If it is, it emails the customer with our CSAT survey. The email has a row of faces, and clicking one opens a survey we host with [Surveys](/docs/surveys) (with that face already selected so customers don't have to pick twice).
+The first workflow triggers when a ticket is resolved, then waits 24 hours and checks that the ticket is still resolved. If it is, it emails the customer with our CSAT survey. The email has a row of faces, and clicking one opens a survey we host with [Surveys](/docs/surveys) (with that face already selected so customers don't have to pick twice).
 
 The second triggers based on a partial or completed survey response. It:
 
