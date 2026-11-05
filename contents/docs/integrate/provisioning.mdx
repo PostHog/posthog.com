@@ -114,7 +114,7 @@ Requirements:
 - **`token_endpoint_auth_method`** must be `"private_key_jwt"` with an HTTPS `jwks_uri` if your app creates accounts. Your app then authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits). Publish your keys at the `jwks_uri` before you register. See [sign requests with a key](#sign-requests-with-a-key).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
-- The URL must be on a domain you control. PostHog doesn't accept metadata documents on throwaway hosts, and registration fails in the `metadata_document` check before PostHog fetches anything.
+- The URL must be on a domain you control. PostHog doesn't accept metadata documents on throwaway hosts.
 
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
