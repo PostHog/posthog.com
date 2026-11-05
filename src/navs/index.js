@@ -1930,6 +1930,10 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/data-foundations',
                             },
                             {
+                                name: 'PostHog Sources Datasheet',
+                                url: '/handbook/growth/sales/sources-datasheet',
+                            },
+                            {
                                 name: 'Data stack positioning',
                                 url: '/handbook/growth/sales/data-stack-positioning',
                             },
@@ -2078,6 +2082,10 @@ export const handbookSidebar = [
             {
                 name: 'Product & feature comparisons',
                 url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
+                name: 'Running experiments',
+                url: '/handbook/engineering/posthog-com/running-experiments',
             },
             {
                 name: 'Editing API docs',
