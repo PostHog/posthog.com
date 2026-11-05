@@ -52,7 +52,83 @@ const sendSnippets: { label: string; language: string; code: string }[] = [
 )`,
     },
     {
-        label: 'cURL',
+        label: 'Go',
+        language: 'go',
+        code: `result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+    To:             email,
+    TemplateID:     "<template_id>",
+    TemplateData:   map[string]interface{}{"first_name": firstName, "reset_link": resetLink},
+    DistinctID:     userID,
+    // A retry never sends this email twice
+    IdempotencyKey: "password-reset-" + resetRequestID,
+})`,
+    },
+    {
+        label: 'Ruby',
+        language: 'ruby',
+        code: `result = posthog.emails.send(
+  to: email,
+  template_id: '<template_id>',
+  template_data: { first_name: first_name, reset_link: reset_link },
+  distinct_id: user_id,
+  # A retry never sends this email twice
+  idempotency_key: "password-reset-#{reset_request_id}"
+)`,
+    },
+    {
+        label: 'PHP',
+        language: 'php',
+        code: `$result = PostHog::emails()->send([
+    'to' => $email,
+    'template_id' => '<template_id>',
+    'template_data' => ['first_name' => $firstName, 'reset_link' => $resetLink],
+    'distinct_id' => $userId,
+    // A retry never sends this email twice
+    'idempotency_key' => "password-reset-$resetRequestId",
+]);`,
+    },
+    {
+        label: '.NET',
+        language: 'csharp',
+        code: `var result = await posthog.Emails.SendAsync(new SendTemplateEmailOptions
+{
+    To = email,
+    TemplateId = Guid.Parse("<template_id>"),
+    TemplateData = new Dictionary<string, object> { ["first_name"] = firstName, ["reset_link"] = resetLink },
+    DistinctId = userId,
+    // A retry never sends this email twice
+    IdempotencyKey = $"password-reset-{resetRequestId}",
+});`,
+    },
+    {
+        label: 'Rust',
+        language: 'rust',
+        code: `let result = posthog
+    .emails()
+    .send(
+        TemplateEmail::new(&email, "<template_id>")
+            .template_data(json!({ "first_name": first_name, "reset_link": reset_link }))
+            .distinct_id(&user_id)
+            // A retry never sends this email twice
+            .idempotency_key(format!("password-reset-{reset_request_id}")),
+    )
+    .await?;`,
+    },
+    {
+        label: 'Elixir',
+        language: 'elixir',
+        code: `{:ok, result} =
+  PostHog.Emails.send(
+    to: email,
+    template_id: "<template_id>",
+    template_data: %{first_name: first_name, reset_link: reset_link},
+    distinct_id: user_id,
+    # A retry never sends this email twice
+    idempotency_key: "password-reset-#{reset_request_id}"
+  )`,
+    },
+    {
+        label: 'REST',
         language: 'bash',
         code: `curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \\
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \\
