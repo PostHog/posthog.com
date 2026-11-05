@@ -92,9 +92,9 @@ This is the honest version of the build-it-yourself plan. Not the weekend versio
 | Querying it | Insights, SQL, AI, caching, and per-organization limits | A dashboard tool or an agent, plus limits so one query can't kill the cluster | You, when a teammate's query takes the cluster down |
 | Getting it out | Batch exports and the query API | Your own export jobs | You |
 
-## Four costs your agent's estimate leaves out
+## Six costs your agent's estimate leaves out
 
-Agents are good at estimating the parts of a system they can see in a code sample. These are the four they can't.
+Agents are good at estimating the parts of a system they can see in a code sample. These are the six they can't.
 
 ### Storage for years, not months
 
@@ -107,6 +107,16 @@ Every event gets read many times over its life. Every dashboard refresh, funnel,
 ### Scaling you didn't plan for
 
 A launch, a bot, an SDK retry loop, or an acquisition can multiply your event volume in a day. Our pipeline absorbs that with Kafka, overflow lanes, and clusters sized for our whole customer base. Your cluster is sized for last month.
+
+### Time you don't spend on your product
+
+Every hour someone spends on ClickHouse upgrades and SDK fixes is an hour they don't spend on the thing your customers pay you for. The ledger below counts those hours at a loaded rate, but that's the cheap way to count them. At an early-stage company, the real cost is the feature that ships a month late because your best engineer was looking after a database.
+
+### The features you'll be asked for next
+
+The agent builds you an events table and a dashboard. A week later, someone asks for a [funnel](/docs/product-analytics/funnels), then retention, then [cohorts](/docs/data/cohorts), and then a way to target a feature flag at one of those cohorts. Each request is reasonable, and each one is another system to build and maintain.
+
+In PostHog, the same events already power [feature flag targeting](/docs/feature-flags), [experiment metrics](/docs/experiments), and the filters in [session replay](/docs/session-replay). You pay for an event once, and it works in every product that uses it. An event store you build connects to nothing until you write the connection. We made the same case for [building your own feature flags](/blog/build-or-buy-feature-flags), and the pattern holds here.
 
 ### Trust
 
