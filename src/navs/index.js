@@ -1573,6 +1573,10 @@ export const handbookSidebar = [
                         url: '/handbook/customer-success/cost-optimization',
                     },
                     {
+                        name: 'Shipping product changes',
+                        url: '/handbook/customer-success/shipping-product-changes',
+                    },
+                    {
                         name: 'Automation & AI',
                     },
                     {
