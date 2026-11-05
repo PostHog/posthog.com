@@ -6,7 +6,6 @@ export const inbox = {
     Icon: IconNotification,
     type: 'inbox',
     color: 'blue',
-    pricingBadge: 'Beta',
     // No category or slug yet: keep this visible on pricing surfaces, not product/app navigation.
     slider: {
         marks: [3, 10, 50, 100],

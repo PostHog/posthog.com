@@ -116,7 +116,6 @@ export const freeTierProducts: FreeTierProduct[] = [
     },
     {
         name: 'Inbox',
-        badge: 'Beta',
         allocation: '3 PRs',
         icon: Icons.IconNotification,
         iconColor: 'text-blue',
