@@ -5,7 +5,6 @@ import usePostHog from '../../../hooks/usePostHog'
 
 import Link from 'components/Link'
 import { MdxCodeBlock, SingleCodeBlock } from 'components/CodeBlock'
-import Mermaid from 'components/Mermaid'
 import { InlineCode } from 'components/InlineCode'
 import EnableScout from 'components/SelfDrivingInbox/EnableScout'
 import { productSource } from 'components/SelfDrivingInbox/sources'
@@ -14,6 +13,9 @@ import { pocketGuideDestination } from '../../../constants/pocketGuides'
 import { useEntry, useTemplate } from './bookContext'
 import { learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
 import { volumeArt } from './volumeArt'
+
+// Lazy, like CodeBlock, so Learn pages without a diagram never load Mermaid.
+const Mermaid = React.lazy(() => import('components/Mermaid'))
 
 /** Inline cue to a figure, color only – bold read larger than the surrounding text. */
 export function SeeFig({ n }: { n: number }): JSX.Element {
@@ -164,7 +166,9 @@ export const proseComponents = {
     code: ({ className, children }: any) =>
         String(className ?? '').includes('language-mermaid') ? (
             <div className="my-[0.8em]">
-                <Mermaid config={MERMAID_THEME}>{String(children)}</Mermaid>
+                <React.Suspense fallback={null}>
+                    <Mermaid config={MERMAID_THEME}>{String(children)}</Mermaid>
+                </React.Suspense>
             </div>
         ) : (
             <div className={CODE_WRAP}>
