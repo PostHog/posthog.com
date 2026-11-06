@@ -1741,6 +1741,10 @@ export const handbookSidebar = [
                         name: 'Error Tracking cross-sell',
                         url: '/handbook/growth/cross-selling/error-tracking-cross-sell',
                     },
+                    {
+                        name: 'Replay Vision experiment scanner cross-sell',
+                        url: '/handbook/growth/cross-selling/replay-vision-experiment-scanner-cross-sell',
+                    },
                 ],
             },
             {
