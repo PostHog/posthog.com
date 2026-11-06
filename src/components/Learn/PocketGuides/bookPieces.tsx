@@ -13,6 +13,7 @@ import { pocketGuideDestination } from '../../../constants/pocketGuides'
 import { useEntry, useTemplate } from './bookContext'
 import { learnChapterPath, normalizeUrl, volumeIdFromUrl } from './bookModel'
 import { volumeArt } from './volumeArt'
+import FigureErrorBoundary from './AioPocketGuide/FigureErrorBoundary'
 
 // Lazy, like CodeBlock, so Learn pages without a diagram never load Mermaid.
 const Mermaid = React.lazy(() => import('components/Mermaid'))
@@ -166,9 +167,11 @@ export const proseComponents = {
     code: ({ className, children }: any) =>
         String(className ?? '').includes('language-mermaid') ? (
             <div className="my-[0.8em]">
-                <React.Suspense fallback={null}>
-                    <Mermaid config={MERMAID_THEME}>{String(children)}</Mermaid>
-                </React.Suspense>
+                <FigureErrorBoundary>
+                    <React.Suspense fallback={null}>
+                        <Mermaid config={MERMAID_THEME}>{String(children)}</Mermaid>
+                    </React.Suspense>
+                </FigureErrorBoundary>
             </div>
         ) : (
             <div className={CODE_WRAP}>
