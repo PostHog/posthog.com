@@ -182,6 +182,53 @@ A few things to keep in mind:
 - The copy is independent – changes to the original don't sync to the copy, and vice versa.
 - If a dashboard or template with the same name already exists in the destination project, the copy is automatically renamed with a suffix like "(copy)", "(copy 2)", etc.
 
+## Cross-project dashboards
+
+A cross-project dashboard shows insights from several projects in your organization on one page. Use one to compare the same metric across products, regions, or environments without switching projects. Each tile shows data from its own project, and the tile header shows the project name.
+
+### Creating a cross-project dashboard
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard?tab=cross-project) and select the **Cross-project dashboards** tab.
+1. Click **New cross-project dashboard**, enter a name, and click **Create**.
+1. Click **Add insight**.
+1. Select a **Project**, then an **Insight** from that project.
+1. Click **Add to dashboard**.
+
+Repeat steps 3 to 5 for each insight. You can add insights from any project you have access to. Each insight can appear once per dashboard, and a dashboard holds up to 100 tiles.
+
+To rearrange tiles, click **Customize**, drag or resize the tiles, and click **Save layout**. To remove a tile, click **...** on the tile and select **Remove from dashboard**. Click **Undo** in the message that appears to put it back.
+
+### Filtering a cross-project dashboard
+
+The date range and interval at the top of the dashboard apply to every tile. You can also add property filters, and each project applies them to its own data. These filter types are available:
+
+- Event properties
+- Person properties
+- Event metadata
+
+Cohort, group, and feature flag filters aren't available. They point to IDs that mean something different in each project.
+
+To give one tile its own date range or interval, click **...** on the tile and select **Set override**. Click **Clear all overrides** to make the tile follow the dashboard again.
+
+Tiles can show two tags next to the project name:
+
+- **Time zone** - The tile shows its project's time zone when the projects on a dashboard use different time zones. Days start at different times in each project, so daily numbers don't line up exactly.
+- **Filter not in this project** - The project has never recorded a property that a dashboard filter uses, so the filter matches nothing in that project.
+
+### Who can see and change a cross-project dashboard
+
+Everyone in your organization can open a cross-project dashboard. Each person sees only the tiles from projects they have access to, so two people can see different tiles on the same dashboard.
+
+You can't edit or delete a dashboard that has a tile from a project you can't access. This stops you from changing tiles you can't see.
+
+Deleting a cross-project dashboard removes it for everyone in your organization. The insights on it stay in their projects.
+
+### Managing cross-project dashboards with the API
+
+Use the [cross-project dashboards API](/docs/api/cross-project-dashboards) to create and update dashboards and tiles. [Authenticate](/docs/api#authentication) with a personal API key that has access to your whole organization and the `cross_project_dashboard` scope. Keys limited to specific projects can't use these endpoints.
+
+The [PostHog MCP server](/docs/model-context-protocol) can list cross-project dashboards and read their tiles.
+
 ## Dates and filters
 
 ### Date range overrides
