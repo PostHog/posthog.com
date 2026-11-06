@@ -292,7 +292,6 @@ for (const initiallyAvailable of [false, true]) {
             './bookContext': { useEntry: () => ({}) },
             '../../../context/App': { useAppWindows: () => ({ windows }) },
             '../../../constants/pocketGuides': {
-                isSelfDrivingPage: () => false,
                 pocketGuideDestination: (url: string) => url,
                 volumeById: () => undefined,
             },

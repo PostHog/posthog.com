@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import {
-    IconBolt,
     IconBook,
     IconCursorClick,
     IconEye,
@@ -123,7 +122,7 @@ const LearnNav = ({
     }))
     const hub = volume?.learnHub
     const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
-    // Self-driving pages have no chapter number, so their names come through unnumbered.
+    // Only the Self-driving introduction is numbered, so the scout pages come through unnumbered.
     const scoutChapters = chapters.filter((_, index) => isSelfDriving(index))
     const items = hub
         ? [
@@ -134,18 +133,9 @@ const LearnNav = ({
                   icon: <IconBook className="size-4" />,
                   children: [
                       ...chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
-                      // The story ends in Self-driving, so it's the guide's last chapter. Its first
+                      // The story ends in Self-driving, the guide's last numbered chapter. Its first
                       // page is the introduction, so the label opens it and the chevron lists the scouts.
-                      ...(scoutChapters.length
-                          ? [
-                                {
-                                    name: 'Self-driving',
-                                    url: scoutChapters[0].url,
-                                    icon: <IconBolt className="size-4" />,
-                                    children: scoutChapters.slice(1),
-                                },
-                            ]
-                          : []),
+                      ...(scoutChapters.length ? [{ ...scoutChapters[0], children: scoutChapters.slice(1) }] : []),
                   ],
               },
               // Only the hub pages this volume has, so a smaller hub has no dead links.

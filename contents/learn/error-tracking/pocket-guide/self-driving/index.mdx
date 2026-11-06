@@ -10,9 +10,13 @@ section: Self-drive
 
 # Self-driving
 
-Now that Twig's exceptions flow into Error Tracking, the engineers want PostHog to be more proactive in resolving them, so they turn on <Term name="scout">scouts</Term> in self-driving. Scouts automatically look for issues, assess their impact, create a <Term name="report" /> with the impact and the fix, and even open pull requests to help the engineers resolve them.
+Now that Twig's engineers see reliable, high-quality exceptions flow into Error Tracking, they're ready to take the next step to let PostHog self-drive fixes.
 
-Here are some examples of how Twig self-drives with Error Tracking:
+Twig's engineers turn on a troop of <Term name="scout">scouts</Term>. Scouts are agents that run on a schedule to look for specific issues. They stay silent unless they find something to act on.
+
+They will automatically look for issues, assess their impact, create a <Term name="report" /> with the impact and the fix, and even open pull requests to help the engineers resolve them.
+
+This chapter covers these examples of how Twig self-drives with Error Tracking:
 
 - [Catch error spikes and stuck loops](/learn/error-tracking/pocket-guide/spikes-and-stuck-loops) ranks spikes by how many guests they affect.
 - [Find the errors Twig's paying hosts hit](/learn/error-tracking/pocket-guide/errors-in-paying-hosts) reports issues concentrated in hosts who pay.

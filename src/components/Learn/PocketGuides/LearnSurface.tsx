@@ -8,12 +8,7 @@ import OSButton from 'components/OSButton'
 import { useAppWindows } from '../../../context/App'
 import { useWindow } from '../../../context/Window'
 
-import {
-    isSelfDrivingPage,
-    pocketGuideDestination,
-    volumeById,
-    type PocketGuideVolume,
-} from '../../../constants/pocketGuides'
+import { pocketGuideDestination, volumeById, type PocketGuideVolume } from '../../../constants/pocketGuides'
 import usePocketGuideCounts from '../../../hooks/usePocketGuideCounts'
 import BookClubCallout from './BookClubCallout'
 import Cover from './Cover'
@@ -246,7 +241,8 @@ export default function LearnSurface({ volumeId, chapter, basePath, section }: L
     }
 
     const coverVolume = entry.isFrontMatter ? volumeById(volumeId) : undefined
-    const chapters = pages.filter((page) => !page.isFrontMatter && !isSelfDrivingPage(volumeId, page))
+    // Numbered pages only, so the Self-driving introduction is listed and its scout pages aren't.
+    const chapters = pages.filter((page) => page.page)
     const firstChapter = chapters[0]
     const firstChapterPath = firstChapter ? learnChapterPath(basePath, firstChapter) : undefined
     const chapterPaths = new Set(chapters.map((page) => learnChapterPath(basePath, page)))
