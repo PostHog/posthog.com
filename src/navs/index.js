@@ -8447,6 +8447,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Import from SendGrid',
+                    url: '/docs/workflows/import-from-sendgrid',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
                     name: 'Resources',
                 },
                 {
