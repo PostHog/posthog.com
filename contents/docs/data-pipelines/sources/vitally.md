@@ -9,7 +9,7 @@ availability:
 sourceId: Vitally
 ---
 
-The Vitally connector can link accounts, conversations, notes, tasks, and more to PostHog.
+The Vitally connector can link accounts, users, conversations, notes, tasks, projects, meetings, admins, and more to PostHog.
 
 To link Vitally:
 

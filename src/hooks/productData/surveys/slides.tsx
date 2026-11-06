@@ -21,7 +21,7 @@ import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product.
- * Capability detail belongs in `topFeatures`.
+ * Capability detail belongs in `keyFeatures`.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -196,7 +196,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'question-types',
         label: 'Question types',

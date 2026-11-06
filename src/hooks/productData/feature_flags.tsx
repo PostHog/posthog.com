@@ -16,7 +16,7 @@ import {
     IconToggle,
 } from '@posthog/icons'
 import { features } from './feature_flags/features'
-import { applications, topFeatures } from './feature_flags/slides'
+import { applications, keyFeatures } from './feature_flags/slides'
 import { getTool } from '../../data/tools'
 
 export const featureFlags = {
@@ -73,11 +73,11 @@ export const featureFlags = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

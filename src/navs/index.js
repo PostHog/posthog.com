@@ -1602,6 +1602,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'Engagement lifecycle',
+                        url: '/handbook/forward-deployed-engineering/fde-engagement-lifecycle',
+                    },
+                    {
                         name: 'How to get an FDE involved',
                         url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
@@ -1926,6 +1930,10 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/data-foundations',
                             },
                             {
+                                name: 'PostHog Sources Datasheet',
+                                url: '/handbook/growth/sales/sources-datasheet',
+                            },
+                            {
                                 name: 'Data stack positioning',
                                 url: '/handbook/growth/sales/data-stack-positioning',
                             },
@@ -2074,6 +2082,10 @@ export const handbookSidebar = [
             {
                 name: 'Product & feature comparisons',
                 url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
+                name: 'Running experiments',
+                url: '/handbook/engineering/posthog-com/running-experiments',
             },
             {
                 name: 'Editing API docs',
@@ -2860,6 +2872,10 @@ export const docsMenu = {
                                 {
                                     name: 'Snippet versioning',
                                     url: '/docs/libraries/js/snippet-versioning',
+                                },
+                                {
+                                    name: "Security",
+                                    url: "/docs/libraries/js/security",
                                 },
                                 {
                                     name: 'Persistence',
@@ -5188,7 +5204,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'What to watch',
+                    name: 'Highlights',
                     url: '/docs/replay-vision/what-to-watch',
                     icon: 'IconEye',
                     color: 'yellow',
@@ -6776,18 +6792,28 @@ export const docsMenu = {
                     icon: 'IconCalculator',
                     color: 'salmon',
                     featured: true,
-                },
-                {
-                    name: 'Materializing views',
-                    url: '/docs/data-warehouse/views/materialize',
-                    icon: 'IconCalculator',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Materialization troubleshooting',
-                    url: '/docs/data-warehouse/views/materialize-troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'orange',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/views',
+                        },
+                        {
+                            name: 'Materialized views',
+                            url: '/docs/data-warehouse/views/materialize',
+                        },
+                        {
+                            name: 'Freshness and refresh cadence',
+                            url: '/docs/data-warehouse/views/freshness',
+                        },
+                        {
+                            name: 'Failures and suspension',
+                            url: '/docs/data-warehouse/views/failures-and-suspension',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/data-warehouse/views/materialize-troubleshooting',
+                        },
+                    ],
                 },
                 {
                     name: 'Data quality',
@@ -8310,8 +8336,36 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/python',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/workflows/transactional-emails/go',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/workflows/transactional-emails/dotnet',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/workflows/transactional-emails/rust',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/workflows/transactional-emails/ruby',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/workflows/transactional-emails/elixir',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/workflows/transactional-emails/php',
+                        },
+                        {
                             name: 'API',
                             url: '/docs/workflows/transactional-emails/api',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/workflows/transactional-emails/examples',
                         },
                     ],
                 },
@@ -8334,6 +8388,10 @@ export const docsMenu = {
                             url: '/docs/workflows/push-notifications',
                         },
                         {
+                            name: 'Import device tokens',
+                            url: '/docs/workflows/push-notifications/import-device-tokens',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/workflows/push-notifications/ios',
                         },
@@ -8348,6 +8406,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/workflows/push-notifications/flutter',
+                        },
+                        {
+                            name: 'Push step settings',
+                            url: '/docs/workflows/push-notifications/push-step-options',
                         },
                     ],
                 },
