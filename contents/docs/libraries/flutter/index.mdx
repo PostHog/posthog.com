@@ -116,36 +116,6 @@ await Posthog().capture(
 - On iOS, macOS, Android, Windows and Linux, other option keys are sent unchanged.
 - On web, the known options are sent as their legacy properties and other keys are dropped. `posthog-js` sets `$process_person_profile` itself, so `process_person_profile` has no effect on web, and the options of `identify`, `setPersonProperties`, `alias` and `group` are dropped.
 
-## Capturing AI events
-
-`captureAi` sends AI events such as `$ai_generation`, `$ai_span`, `$ai_trace` and `$ai_embedding` to PostHog's AI endpoint, which accepts much larger events than `capture`. It takes the same arguments as `capture` and goes through the same `beforeSend` callbacks.
-
-```dart
-final uuid = await Posthog().captureAi(
-  eventName: r'$ai_generation',
-  properties: {
-    r'$ai_trace_id': traceId,
-    r'$ai_model': 'gpt-4o',
-    r'$ai_provider': 'openai',
-  },
-);
-```
-
-- `captureAi` returns the event's UUID, or `null` when the event isn't queued and won't be sent: `beforeSend` dropped it, it's over `captureAiMaxEventBytes`, the SDK is disabled, not set up or opted out, or the app is running on web.
-- On web, `captureAi` is a no-op: it sends nothing and returns `null`.
-- PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint, even ones named `$ai_*`.
-- The SDK sends AI events unchanged. It doesn't redact or truncate prompts, outputs or media, so use `beforeSend` to remove anything you don't want to send.
-- AI events are queued separately from other events. `flush()` and `close()` send both queues.
-
-These `PostHogConfig` settings control the AI queue and its requests. They have no effect on web.
-
-| Setting | Default | Description |
-| --- | --- | --- |
-| `captureAiCompression` | `PostHogCompression.gzip` | How AI request bodies are compressed, separately from `compression` |
-| `captureAiMaxQueueSize` | 100 | Maximum number of AI events kept in the queue before the oldest are dropped. The queue also keeps at most 50 MiB of AI events, whatever this is set to. A value of `0` or less uses the default |
-| `captureAiTimeout` | 60 seconds | How long an AI request can go without network activity before it fails. `Duration.zero` or less uses the default. iOS, macOS and Android use whole seconds |
-| `captureAiMaxEventBytes` | 8 MiB + 64 KiB | Maximum size of an AI event, measured before compression. Use it to lower the limit: a larger value, or a value of `0` or less, uses the default |
-
 ## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
@@ -696,7 +666,7 @@ The legacy properties still work, but an option wins over its legacy property. S
 
 ### AI events
 
-Version 6 adds `captureAi`, which sends AI events to `/i/v1/ai/events`, and the `captureAiCompression`, `captureAiMaxQueueSize`, `captureAiTimeout` and `captureAiMaxEventBytes` settings. On web, `captureAi` is a no-op and the settings have no effect. See [Capturing AI events](#capturing-ai-events).
+Version 6 adds `captureAi`, which sends AI events to `/i/v1/ai/events`, and the `captureAiCompression`, `captureAiMaxQueueSize`, `captureAiTimeout` and `captureAiMaxEventBytes` settings. On web, `captureAi` is a no-op and the settings have no effect. See [AI events](#ai-events).
 
 ### Retries
 
