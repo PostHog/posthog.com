@@ -18,15 +18,16 @@ Other platforms have the same idea under different names. Azure calls it a feder
 
 ## Supported CI providers
 
-Each provider page explains what the job needs, which claims a policy matches, the presets PostHog offers, and the workflow snippet.
+Each provider page explains what the job needs, which claims a policy matches, the presets PostHog offers, and how to configure the job.
 
 | Provider | Issuer | Guide |
 | --- | --- | --- |
 | GitHub Actions | `https://token.actions.githubusercontent.com` | [Workload identity for GitHub Actions](/docs/api/workload-identity/github-actions) |
 | GitLab.com | `https://gitlab.com` | [Workload identity for GitLab.com](/docs/api/workload-identity/gitlab) |
 | Depot CI | `https://identity.depot.dev` | [Workload identity for Depot CI](/docs/api/workload-identity/depot) |
+| Custom OIDC provider | Any OIDC issuer an admin trusts | [Custom OIDC provider](/docs/api/workload-identity/custom) |
 
-More providers may follow later.
+More providers may follow later. Until then, a custom OIDC provider covers any other issuer.
 
 ## How it works
 
@@ -45,7 +46,7 @@ Find trusted workloads in your project settings, under **Trusted workloads**. On
 Each trust policy has:
 
 - **Provider** - the issuer PostHog trusts for this policy.
-- **Subject** and **name** - the repository or project's ID and its readable name, from the claims the provider names. For GitHub Actions and Depot CI these are `repository_id` and `repository`, and for GitLab.com they're `project_id` and `project_path`. Both must match. The ID never changes, so a repository that is deleted and created again with the same name doesn't match.
+- **Subject** and **name** - the repository or project's ID and its readable name, from the claims the provider names. For GitHub Actions and Depot CI these are `repository_id` and `repository`, and for GitLab.com they're `project_id` and `project_path`. For a custom OIDC provider, the admin names the claims. Both must match. The ID never changes, so a repository that is deleted and created again with the same name doesn't match.
 - **Conditions** - claims the token must carry with an exact value, such as a branch or an environment. Each provider lists the claims a policy can use, and when it lists any, a policy must set at least one. A condition you leave empty matches any value. A token that doesn't carry a condition's claim never matches. Values are matched exactly, without wildcards.
 - **Scopes** - every token from the policy gets all of these scopes, and no others.
 
@@ -60,7 +61,7 @@ Turning a policy off, editing it, or deleting it stops its tokens from working w
 3. Enter the repository or project name and click **Look up**. PostHog fills in its ID. If PostHog can't find it, enter the ID yourself. Each provider page says where to find it.
 4. Under **Which runs can get a token**, pick one of the common choices, or pick one claim of the token and enter its value. Click **Add condition** to add more. A token must meet every condition.
 5. Give the trusted workload a **Name**, and pick its **Scopes**.
-6. Click **Add trusted workload**. PostHog shows the snippet for your CI job, with your PostHog address and project ID filled in, and a button to copy it.
+6. Click **Add trusted workload**. PostHog shows the `posthog.json` keys and the snippet for your CI job, with your PostHog address and project ID filled in, and buttons to copy them.
 
 ### Scopes that need care
 
@@ -95,18 +96,21 @@ The command:
 2. Asks PostHog to look up the repository or project's ID.
 3. Turns `--branch` and `--environment` into the matching presets. Pass one or both.
 4. Creates a policy request. If you're an admin, hog opens the approval page and waits. Otherwise it names the admins and prints the link to send them.
-5. Prints the snippet for your CI job.
+5. Prints the `posthog.json` keys and the snippet for your CI job.
 
 | Flag | What it does |
 | --- | --- |
 | `--branch <branch>` | Trusts runs on this branch, through the provider's branch preset |
 | `--environment <name>` | Trusts jobs that deploy to this environment |
-| `--scope <scope>` | Adds a scope the job gets. Repeat it for each scope. At least one is required. |
-| `--condition <claim>=<value>` | Adds another claim the token must carry, such as `org_id` for Depot CI. Repeat it for each claim. |
-| `--provider <key>` | Names the CI provider: `github_actions`, `gitlab`, or `depot_ci`. Pass it when hog can't tell, or when the repository has config for more than one provider. |
+| `--scope <scopes>` | Sets the scopes the job gets, separated by commas, such as `annotation:write,query:read`. Repeating the flag works too. At least one scope is required. |
+| `--condition <claim>=<value>` | Adds a claim the token must carry with this exact value, such as `org_id` for Depot CI. Repeat it for each claim. A custom OIDC provider needs at least one. |
+| `--provider <key>` | Names the provider: `github_actions`, `gitlab`, `depot_ci`, or `custom`. Pass it when hog can't tell, or when the repository has config for more than one provider. |
 | `--repository <name>` | Names the repository or project when it isn't your `origin` remote |
 | `--subject-id <id>` | Sets the immutable ID when PostHog can't look it up. Pass `--repository` with the exact name too, because PostHog matches both. |
 | `--name <name>` | Names the trusted workload in PostHog |
+| `--issuer <url>` | With `--provider custom`, the issuer URL, exactly as its tokens carry it |
+| `--subject-claim <claim>` | With `--provider custom`, the claim that names the workload. Defaults to `sub`. |
+| `--subject <value>` | With `--provider custom`, the exact value the subject claim must have |
 | `--wait` | Waits for a request an earlier run started. It stops after 10 minutes and keeps the request, so you can run it again. |
 
 ### Ask through the API
@@ -163,11 +167,14 @@ The exchange is rate limited per repository or project. Each one can make 300 ex
 
 Once hog is released, it does the exchange for you:
 
-- It asks the provider for an OIDC token whose audience is the PostHog host it sends the token to. That host is `HOG_HOST`, or else a PostHog Cloud host in your repository's `posthog.json`, or else `https://us.posthog.com`.
+- It reads the project ID from `projectId` in `posthog.json`, or from `HOG_PROJECT_ID`. The environment variable wins when both are set.
+- It asks the provider for an OIDC token whose audience is the PostHog host it sends the token to. That host is `HOG_HOST`, or else a PostHog Cloud host in `posthog.json`, or else `https://us.posthog.com`.
+- It reads a host from `posthog.json` only when it's PostHog Cloud, so a change to the file can't send the job's token elsewhere. A self-hosted PostHog needs `HOG_HOST`. When `posthog.json` names another host and `HOG_HOST` isn't set, hog stops with a `workload_host_not_allowed` error.
 - It sends the RFC 8693 exchange to `/oauth/token/` and keeps the PostHog token in memory only. It never writes the token to disk.
 - It exchanges again when the token is close to expiring, or after the API answers with a `401`.
 - When the exchange is rate limited and `Retry-After` is 60 seconds or less, it waits once and tries again.
-- It picks credentials in this order: `HOG_PERSONAL_API_KEY`, then the workload token, then a stored login. Remove `HOG_PERSONAL_API_KEY` from the job's environment, or hog uses that instead of the workload token.
+- It picks credentials in this order: `HOG_PERSONAL_API_KEY`, then the workload token, then a stored login. Remove `HOG_PERSONAL_API_KEY` from the job's environment, or hog uses that instead of the workload token. Never put it in `posthog.json`.
+- Its usage analytics from a job that uses a workload token carry an ID hashed from the provider and the repository, the provider's name, and your organization. They aren't tied to a person. Turn them off with `HOG_NO_TELEMETRY=1`.
 
 ## Errors
 
