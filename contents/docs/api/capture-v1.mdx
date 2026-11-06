@@ -56,7 +56,7 @@ Every request needs these headers. A missing or malformed header rejects the who
 | `Authorization` | Yes | `Bearer <ph_project_token>` – your [project token](https://app.posthog.com/project/settings). A personal API key (`phx_…`) is refused. |
 | `Content-Type` | Yes | `application/json` |
 | `User-Agent` | Yes | Any value that identifies your client |
-| `PostHog-Sdk-Info` | Yes | `<library>/<version>`, for example `my-backend/1.2.0`. PostHog sets `$lib` and `$lib_version` on every event from this header. |
+| `PostHog-Sdk-Info` | Yes | `<library>/<version>`, for example `my-backend/1.2.0`. PostHog uses it to fill in `$lib` and `$lib_version` on events that don't set them. See [library name and version](#library-name-and-version). |
 | `PostHog-Request-Id` | Yes | A UUID for this request. Send the **same** ID on every retry of the request. PostHog returns it in a response header of the same name. |
 | `PostHog-Attempt` | Yes | The attempt number: `1` for the first try, `2` for the first retry, and so on |
 | `PostHog-Request-Timestamp` | Yes | The time you send this attempt, in RFC 3339 format. Set it again on every retry. PostHog uses it to correct for a wrong client clock. |
@@ -106,9 +106,15 @@ Each event in `batch`:
 | `options` | No | Settings for how PostHog processes this event. See [event options](#event-options). |
 | `properties` | No | The event's properties. Must be a JSON object. |
 
-You don't need to send `$lib` or `$lib_version` – PostHog sets them from the `PostHog-Sdk-Info` header, which wins over any value in `properties`.
-
 The [capture spec in the SDK specs](https://github.com/PostHog/sdk-specs/blob/main/openspec/specs/capture/spec.md) describes the full wire contract that PostHog SDKs follow.
+
+### Library name and version
+
+Each event's `$lib` and `$lib_version` properties name the library that produced it. PostHog stores the values the event sends.
+
+If an event's `$lib` is missing, empty, or not a string, PostHog sets both properties from the `PostHog-Sdk-Info` header. If `$lib` matches the library in the header and `$lib_version` is missing, PostHog fills in `$lib_version` from the header. If `$lib` names a different library, PostHog stores both properties as sent, even if `$lib_version` is missing, so set both when you override them.
+
+If the `PostHog-Sdk-Info` value doesn't match `<library>/<version>` or is longer than 200 characters, PostHog still accepts the request, but events without `$lib` are stored without it.
 
 ### Event UUIDs
 
@@ -204,7 +210,7 @@ PostHog SDKs always send these types. If you change an event in a `before_send` 
 | `Content-Encoding` | None, or `gzip`, `deflate`, `br`, or `zstd` (not `identity`) | `415` `unsupported_encoding` |
 | Header values | Visible ASCII characters only | `400` `invalid_header_value` |
 | Field types | See [field types](#field-types) | `400` `request_parsing_error`, nothing stored |
-| `PostHog-Sdk-Info` | `<library>/<version>`, with a `/`, up to 200 bytes | Request accepted, but PostHog doesn't set `$lib` and `$lib_version` from the header. Values in `properties` are kept. |
+| `PostHog-Sdk-Info` | `<library>/<version>`, with a `/`, up to 200 bytes | Request accepted, but PostHog doesn't fill in `$lib` and `$lib_version` from the header. Values in `properties` are kept. See [library name and version](#library-name-and-version). |
 
 ### Event limits
 

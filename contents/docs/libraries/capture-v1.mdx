@@ -172,7 +172,7 @@ See [limits and validation](/docs/api/capture-v1#limits-and-validation) for ever
 
 ### Other changes
 
-- **Library name and version.** The SDK sets `$lib` and `$lib_version`. You can't override them from your properties.
+- **Library name and version.** A `$lib` and `$lib_version` you set in an event's properties, or in a `before_send` hook, are stored as you set them. Integrations such as MCP analytics use this to label their own events. When an event doesn't set `$lib`, the SDK fills in both with its own name and version. Set both when you override them: an event whose `$lib` names another library doesn't get the SDK's version. See [library name and version](/docs/api/capture-v1#library-name-and-version).
 - **Session IDs.** `$session_id` and `$window_id` must be strings. Other values are dropped from the event, with a warning in your logs. The iOS, Android, and Flutter SDKs log it only when debug logging is on.
 - **Timestamps.** SDKs send every timestamp with at least millisecond precision, writing all three digits even when they're zero (`.000`), and keep any finer precision you provide. The iOS and Android SDKs, and Flutter on those platforms, send milliseconds only. SDKs no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
 - **API keys.** An empty project token, or a personal API key (`phx_…`) used as one, turns the client off and logs one error, instead of failing your app.
