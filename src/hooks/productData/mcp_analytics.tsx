@@ -105,7 +105,6 @@ export const mcpAnalytics = {
                 'MCP server builders',
                 'Find and fix broken or slow tools. Get error rates, and p95 latency by tool, without building your own MCP analytics.',
             ],
-            ['MCP server observers', 'Check the health of the server and how many people use it.'],
             ['Engineers building MCP tools', 'Find the slow and failing tools and send a coding agent to fix them.'],
             ['Engineers maintaining APIs, 'Identify and fix endpoints causing high error rates in tool calls.'],
             ['Product managers', 'Learn who uses the server and what those users try to do.'],
