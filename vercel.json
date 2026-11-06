@@ -822,6 +822,10 @@
             "destination": "/compare/best-mcp-servers-for-startups"
         },
         {
+            "source": "/blog/best-mobile-app-analytics-tools",
+            "destination": "/compare/best-mobile-app-analytics-tools"
+        },
+        {
             "source": "/blog/best-mobile-app-ab-testing-tools",
             "destination": "/compare/best-mobile-app-ab-testing-tools"
         },
@@ -6762,12 +6766,12 @@
             "destination": "/docs/libraries/js/usage:ext?"
         },
         {
-            "source": "/handbook/engineering/on-call-rotation",
-            "destination": "/handbook/engineering/operations/on-call-rotation"
+            "source": "/handbook/engineering/on-call-rotation:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/on-call-rotation:ext?"
         },
         {
-            "source": "/handbook/engineering/incidents",
-            "destination": "/handbook/engineering/operations/incidents"
+            "source": "/handbook/engineering/incidents:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/incidents:ext?"
         },
         {
             "source": "/handbook/engineering/support-hero",
