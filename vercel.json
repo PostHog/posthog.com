@@ -152,6 +152,11 @@
     ],
     "redirects": [
         {
+            "source": "/learn/ai-observability/live-playground",
+            "destination": "/learn/ai-observability/live-playground/twig",
+            "permanent": true
+        },
+        {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
             "permanent": true
