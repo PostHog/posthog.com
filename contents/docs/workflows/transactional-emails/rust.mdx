@@ -187,6 +187,28 @@ async fn send_password_reset(
 
 A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+A `CodeEmail` takes copies and files. Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes, and the client encodes the bytes for you. Add `content_type` to set the file type, or `content_id` to show the file inline. A `TemplateEmail` takes none of them, because the template uses its own settings.
+
+```rust
+use posthog_rs::{CodeEmail, EmailAttachment};
+
+let receipt_pdf = std::fs::read(pdf_path)?;
+posthog
+    .emails()
+    .send(
+        CodeEmail::new(&user.email, "receipt", "Your receipt")
+            .html(html)
+            .cc("billing@example.com")
+            .attachment(EmailAttachment::new("receipt.pdf", receipt_pdf).content_type("application/pdf"))
+            .distinct_id(&user.id),
+    )
+    .await?;
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
 ## Check an email's status
 
 ```rust

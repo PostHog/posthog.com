@@ -195,6 +195,26 @@ end
 
 A send has `template_id` or `template_key`, not both. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+Content from your code also takes `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is a map with `filename`, the file's bytes as `content`, and optionally `content_type`. The SDK encodes the bytes for you, so don't encode them yourself.
+
+```elixir
+PostHog.Emails.send(
+  to: user.email,
+  template_key: "receipt",
+  subject: "Your receipt",
+  html: html,
+  cc: "billing@example.com",
+  attachments: [
+    %{filename: "receipt.pdf", content: File.read!(pdf_path), content_type: "application/pdf"}
+  ],
+  distinct_id: to_string(user.id)
+)
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
 ## Check an email's status
 
 ```elixir

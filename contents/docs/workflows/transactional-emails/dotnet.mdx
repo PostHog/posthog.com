@@ -212,6 +212,33 @@ public async Task<string> SendPasswordResetAsync(User user, string html, string 
 
 `SendTemplateEmailOptions` sends a template made in PostHog, and `SendCodeEmailOptions` sends your content. Content from your code takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+`SendCodeEmailOptions` takes `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is an `EmailAttachment` with a `Filename` and the file's bytes as `Content`, and optionally `ContentType` and `ContentId`. The client encodes the bytes for you. A template send takes none of them, because the template uses its own settings.
+
+```csharp
+var result = await emails.SendAsync(new SendCodeEmailOptions
+{
+    To = user.Email,
+    TemplateKey = "receipt",
+    Subject = "Your receipt",
+    Html = html,
+    Cc = ["billing@example.com"],
+    Attachments =
+    [
+        new EmailAttachment
+        {
+            Filename = "receipt.pdf",
+            Content = await File.ReadAllBytesAsync(pdfPath),
+            ContentType = "application/pdf",
+        },
+    ],
+    DistinctId = user.Id,
+});
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
 ## Check an email's status
 
 ```csharp

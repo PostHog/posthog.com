@@ -155,7 +155,7 @@ Without a distinct ID, PostHog records the email on a person whose distinct ID i
 
 ## Receipt with a PDF
 
-Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional-emails#choose-where-the-emails-content-lives), so your code renders the email. The SDKs don't send copies and attachments yet, so this example uses the API.
+Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional-emails#choose-where-the-emails-content-lives), so your code renders the email.
 
 | Setting | Value |
 | --- | --- |
@@ -185,9 +185,54 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
   }'
 ```
 
+```js file=Node.js
+import { readFile } from "node:fs/promises"
+
+export async function sendReceipt({ order, html, invoicePath }) {
+    const { error } = await posthog.emails.send({
+        to: order.customer.email,
+        templateKey: "receipt",
+        subject: `Your receipt for order ${order.number}`,
+        html,
+        cc: order.customer.billingEmail,
+        attachments: [
+            { filename: `invoice-${order.number}.pdf`, content: await readFile(invoicePath), contentType: "application/pdf" },
+        ],
+        distinctId: order.customer.userId,
+        idempotencyKey: `receipt-${order.id}`,
+    })
+    if (error) {
+        throw error
+    }
+}
+```
+
+```python file=Python
+from pathlib import Path
+
+
+def send_receipt(order, html: str, invoice_path: str) -> None:
+    posthog.emails.send(
+        to=order.customer.email,
+        template_key="receipt",
+        subject=f"Your receipt for order {order.number}",
+        html=html,
+        cc=order.customer.billing_email,
+        attachments=[
+            {
+                "filename": f"invoice-{order.number}.pdf",
+                "content": Path(invoice_path).read_bytes(),
+                "content_type": "application/pdf",
+            }
+        ],
+        distinct_id=str(order.customer.user_id),
+        idempotency_key=f"receipt-{order.id}",
+    )
+```
+
 </MultiLanguage>
 
-Send the file's content in Base64. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+The SDKs encode the file to Base64 for you. With the API, you send Base64 yourself. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits, and your SDK's page for its attachment fields.
 
 ## Measure whether an email works
 
