@@ -1,5 +1,5 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
-const { isSdkReferenceArchive, isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
+const { isNoindexSdkReference, isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
 const qs = require('qs')
 const pLimit = require('p-limit')
 
