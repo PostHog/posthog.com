@@ -16,15 +16,6 @@
             ]
         },
         {
-            "source": "/docs/libraries/python/reference:ext(\\.md)?",
-            "headers": [
-                {
-                    "key": "X-Robots-Tag",
-                    "value": "noindex"
-                }
-            ]
-        },
-        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -169,6 +160,26 @@
         }
     ],
     "redirects": [
+        {
+            "source": "/docs/references/posthog-python:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-python-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
         {
             "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
             "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",

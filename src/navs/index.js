@@ -2984,7 +2984,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-python',
+                                    url: '/docs/libraries/python/reference',
                                 },
                             ],
                         },
@@ -3037,6 +3037,31 @@ export const docsMenu = {
                         {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
+                        },
+                    ],
+                },
+                {
+                    name: 'SDK reference',
+                    url: '/docs/libraries/python/reference',
+                    icon: 'IconCode',
+                    children: [
+                        {
+                            name: 'Python',
+                            url: '/docs/libraries/python/reference',
+                            children: [
+                                {
+                                    name: '7.x.x',
+                                    url: '/docs/libraries/python/7.x.x',
+                                },
+                                {
+                                    name: '8.x.x (experimental)',
+                                    url: '/docs/libraries/python/8.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/python/migration',
+                                },
+                            ],
                         },
                     ],
                 },
@@ -6284,7 +6309,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Python SDK',
-                            url: '/docs/references/posthog-python?filter=error-tracking',
+                            url: '/docs/libraries/python/reference#capture-exception',
                         },
                         {
                             name: 'Error tracking API',

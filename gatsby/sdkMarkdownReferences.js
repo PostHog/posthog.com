@@ -10,11 +10,10 @@ const isSdkReferencePage = (file) => file === 'reference.md' || file === 'migrat
 
 /**
  * Whether a page answers noindex (see vercel.json), so it stays out of the sitemap and site search: a past or
- * next major, the migration guides, and the Python reference until #21973 links it.
+ * next major, and the migration guides.
  */
 const isNoindexSdkReference = (slug) =>
-    slug.startsWith('/docs/libraries/') &&
-    (slug.endsWith('.x.x') || slug.endsWith('/migration') || slug === '/docs/libraries/python/reference')
+    slug.startsWith('/docs/libraries/') && (slug.endsWith('.x.x') || slug.endsWith('/migration'))
 
 /** Whether a gatsby-source-filesystem File node is one of those pages. */
 const isSdkReferenceFile = (node) => {
