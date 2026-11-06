@@ -222,6 +222,8 @@ async function generatedInit(
             },
             'timers/promises': { setTimeout: async (delay) => waits.push(delay) },
             './devFetchCache': { cacheFetchResponsesInDevelopment: () => {} },
+            // Required relative to gatsby/, which this sandbox's require doesn't resolve from.
+            './sdkMarkdownReferences': require('../gatsby/sdkMarkdownReferences'),
             './enrichVideos': { enrichVideos: async () => {} },
             './utils/fetchMCPTools': {
                 fetchAndProcessMCPTools: async () => ({ error: true }),
