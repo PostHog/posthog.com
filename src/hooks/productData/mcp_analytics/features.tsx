@@ -85,7 +85,7 @@ export const features = {
         title: 'Missing capabilities',
         headline: 'Missing capabilities',
         description:
-            "Agents self-report when a tool is missing, through the `get_more_tools` virtual tool. It's completely automated feedback that your users would never take the time to file.",
+            "Find out what agents wish they could do with your MCP through agent feedback.",
         icon: <IconPuzzle />,
         color: 'orange',
         features: [
