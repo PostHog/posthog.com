@@ -1441,13 +1441,6 @@ const viewingMethods: {
     alt?: string
 }[] = [
     {
-        title: 'In the Heatmaps tool in PostHog',
-        Icon: IconLaptop,
-        src: IN_APP_IMAGE,
-        alt: 'The Heatmaps tool in PostHog showing a heatmap of posthog.com/docs, with date range, cohort, and event filters',
-        body: 'Enter the page URL and view the data over a live page, a screenshot, or a session replay snapshot. Works on every plan, including free.',
-    },
-    {
         title: 'In the toolbar, on your live site',
         Icon: IconToolbar,
         // No screenshot on purpose: the site has no modern capture of the toolbar
@@ -1461,6 +1454,13 @@ const viewingMethods: {
                 and click the heatmap icon. Needs a card on file.
             </>
         ),
+    },
+    {
+        title: 'In the Heatmaps tool in PostHog',
+        Icon: IconLaptop,
+        src: IN_APP_IMAGE,
+        alt: 'The Heatmaps tool in PostHog showing a heatmap of posthog.com/docs, with date range, cohort, and event filters',
+        body: 'Enter the page URL and view the data over a live page, a screenshot, or a session replay snapshot. Works on every plan, including free.',
     },
 ]
 
