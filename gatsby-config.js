@@ -242,9 +242,23 @@ module.exports = {
                     // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
+                    // These SDKs' HogRef pages redirect to their Markdown references (see vercel.json).
+                    const REDIRECTED_SDK_REFERENCES = ['posthog-python']
+                    const isRedirectedSdkReference = (path) =>
+                        REDIRECTED_SDK_REFERENCES.some(
+                            (id) =>
+                                path === `/docs/references/${id}` ||
+                                path.startsWith(`/docs/references/${id}/`) ||
+                                path.startsWith(`/docs/references/${id}-`)
+                        )
+
                     const transformedPages = allPages
-                        // Past and next SDK majors, and the migration guides, answer noindex (see vercel.json).
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isSdkReferenceArchive(path))
+                        .filter(
+                            ({ path }) =>
+                                !VERSIONED_SDK_REFERENCE.test(path) &&
+                                !isNoindexSdkReference(path) &&
+                                !isRedirectedSdkReference(path)
+                        )
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,

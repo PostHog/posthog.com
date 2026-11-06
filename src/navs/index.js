@@ -6309,7 +6309,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'Python SDK',
-                            url: '/docs/references/posthog-python?filter=error-tracking',
+                            url: '/docs/libraries/python/reference#capture-exception',
                         },
                         {
                             name: 'Error tracking API',
