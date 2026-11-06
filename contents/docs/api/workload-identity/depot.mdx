@@ -16,8 +16,8 @@ A Depot CI job can trade the OIDC token Depot issues for each job for a short-li
 
 ## What the job needs
 
+- A job that runs in Depot CI
 - The `id-token: write` permission, so Depot issues an OIDC token to the job
-- A Depot runner, such as `depot-ubuntu-latest`
 - A trusted workload in your PostHog project that matches your Depot organization, the repository, and the runs you pick
 - `HOG_HOST` and `HOG_PROJECT_ID` in the job's environment
 
@@ -25,7 +25,9 @@ PostHog trusts Depot's issuer, `https://identity.depot.dev`.
 
 ## How the job gets a token
 
-When a job has `id-token: write`, Depot puts the same token request variables in its environment that GitHub Actions does. Once hog is released, it uses them to ask Depot for an OIDC token whose audience is your PostHog host, then exchanges that token at `/oauth/token/`.
+Once hog is released, it knows it runs in Depot CI when the job has a `DEPOT_JOB_URL` variable. Depot runners for GitHub Actions don't set it, so their jobs use GitHub's tokens, as described on the [GitHub Actions page](/docs/api/workload-identity/github-actions).
+
+hog asks for the token the same way it does on GitHub Actions, through the token request variables in the job's environment. Depot's docs say tools built for GitHub's OIDC tokens work without extra configuration, but they don't name these variables. hog asks for a token whose audience is your PostHog host, then exchanges it at `/oauth/token/`.
 
 Depot's OIDC tokens live 5 minutes, and the PostHog token never outlives the token it came from. hog keeps the PostHog token in memory and exchanges a new Depot token when it's close to expiring, or after a `401`, so a long job keeps working.
 
@@ -38,16 +40,16 @@ A policy identifies the repository with two claims, and both must match:
 - **`repository_id`** - the repository's ID, assigned by the forge that hosts it. For a GitHub repository, this is the GitHub repository ID.
 - **`repository`** - the repository's full name, such as `acme/web`. If you rename the repository, update the policy.
 
-Depot repository IDs are only unique within one forge. So every Depot policy also pins two conditions:
+Every Depot policy must also set two conditions:
 
-- **`org_id`** - your Depot organization ID, so only jobs your organization runs can match
-- **`forge`** - the forge that hosts the repository, `github` by default, so a repository on another forge with the same ID can't match
+- **`org_id`** - your Depot organization ID, so no other Depot organization's job matches
+- **`forge`** - the forge that hosts the repository, `github` by default. Two forges can give the same ID to different repositories.
 
-These are the conditions a Depot policy can use:
+These two pin your account, not the runs, so they don't count as the condition every policy needs. A policy also sets at least one of `ref`, `event_name`, or `workflow_ref`.
 
 | Claim | What it holds | Example value |
 | --- | --- | --- |
-| `org_id` | Your Depot organization ID | `1a2b3c4d` |
+| `org_id` | Your Depot organization ID | `abcd1234efgh` |
 | `forge` | The forge that hosts the repository | `github` |
 | `ref` | The Git ref the run is for | `refs/heads/main` |
 | `event_name` | The event that started the workflow | `push` |
@@ -57,14 +59,14 @@ Depot tokens don't carry environment or protected-branch claims, so a Depot poli
 
 ## Presets in PostHog settings
 
-Under **Which runs can get a token**, the settings page offers these presets:
+Under **Which runs can get a token**, the settings page offers these presets. A new policy starts with both.
 
 | Preset | Conditions it sets | When to use it |
 | --- | --- | --- |
-| **Your Depot organization** (required) | `org_id` = `<organization ID>` | Every Depot policy |
-| **Pushes to a branch** | `ref` = `refs/heads/<branch>` and `event_name` = `push` | Jobs that run after code lands on a branch, such as deploys from `main` |
+| **Your Depot organization** | `org_id` = `<organization ID>` and `forge` = `github` | Every Depot policy for a GitHub repository |
+| **Pushes to a branch** (branch `main`) | `ref` = `refs/heads/<branch>` and `event_name` = `push` | Jobs that run after code lands on a branch, such as deploys from `main` |
 
-To use another claim from the table above, pick it under **One claim of the token** and enter its exact value.
+To use another claim from the table above, pick it under **One claim of the token** and enter its exact value. For a repository on another forge, set `org_id` and `forge` that way instead of the organization preset.
 
 ## Why the defaults are safe
 
@@ -79,30 +81,37 @@ Only organization admins and owners can add a trusted workload. Anyone else in t
 
 1. In your project settings, go to **Trusted workloads** and click **Add trusted workload**.
 2. Under **Provider**, pick **Depot CI**.
-3. Enter `owner/repo` and click **Look up**. If PostHog can't find the repository, enter its ID yourself. For a GitHub repository, you can get the ID with the GitHub CLI: `gh api repos/<owner>/<repo> --jq .id`.
-4. Under **Which runs can get a token**, enter your Depot organization ID. Copy it from your Depot organization settings, without an `org_` prefix.
-5. Click **Add condition**, pick **Pushes to a branch**, and enter the branch.
+3. In **Repository**, enter `owner/repo` and click **Look up**. PostHog fills in the **Repository ID**.
+4. Under **Which runs can get a token**, enter your Depot organization ID in **Your Depot organization**. Copy it exactly as Depot shows it in your organization settings.
+5. Keep **Pushes to a branch** and change the branch if it isn't `main`, or pick another claim.
 6. Give the trusted workload a **Name**, and pick the **Scopes** the job needs.
 7. Click **Add trusted workload**, then copy the snippet PostHog shows.
+
+PostHog looks the repository up on GitHub, through your project's GitHub integration first and then for public repositories, like it does for GitHub Actions. For a repository on another forge, or one PostHog can't find, enter the **Repository ID** yourself. For a GitHub repository, you can get it with the GitHub CLI: `gh api repos/<owner>/<repo> --jq .id`.
 
 ### With `hog ci setup` (beta)
 
 Once hog is released, run this in your repository:
 
 ```bash
-hog ci setup --branch main --scope annotation:write
+hog ci setup --branch main --condition org_id=<your Depot organization ID> --scope annotation:write
 ```
 
-hog reads `owner/repo` from your `origin` remote, asks PostHog to look up the repository ID, and applies the **Pushes to a branch** preset for `main`. Depot tokens name no environment, so `--environment` doesn't apply. Repeat `--scope` for each scope the job needs. If PostHog can't find the repository, pass `--subject-id` with its ID and `--repository` with its exact name.
+hog finds `.depot/workflows`, reads `owner/repo` from your `origin` remote, asks PostHog to look up the repository ID, and applies **Pushes to a branch** for `main`.
 
-hog then creates a policy request. If you're an admin, it opens the approval page and waits. Otherwise it prints the link to send to an admin. `hog ci setup --wait` waits for up to 10 minutes and keeps the request, so you can run it again later. The [overview](/docs/api/workload-identity#ask-with-hog-ci-setup-beta) lists every flag. Every Depot policy pins your organization, so check its Depot organization ID before you approve the request.
+- `--condition org_id=...` is required. `forge` defaults to `github`. Pass `--condition forge=<forge>` for another forge.
+- When `forge` isn't `github`, PostHog can't look up the repository, so pass `--subject-id` with its ID and `--repository` with its exact name.
+- When the repository also has `.github/workflows`, hog can't tell which provider you mean, so pass `--provider depot_ci`.
+- Depot tokens name no environment, so `--environment` doesn't apply.
+- Repeat `--scope` for each scope the job needs.
+
+hog then creates a policy request. If you're an admin, it opens the approval page and waits. Otherwise it prints the link to send to an admin. `hog ci setup --wait` waits for up to 10 minutes and keeps the request, so you can run it again later. The [overview](/docs/api/workload-identity#ask-with-hog-ci-setup-beta) lists every flag. Before you approve a request, check its Depot organization ID.
 
 ## Add the workflow snippet
 
 Add these keys to the job in your Depot CI workflow that runs hog, then run hog in one of its steps:
 
 ```yaml
-runs-on: depot-ubuntu-latest
 permissions:
   id-token: write # lets hog get an OIDC token for PostHog
   contents: read
@@ -110,6 +119,8 @@ env:
   HOG_HOST: https://us.posthog.com
   HOG_PROJECT_ID: "12345"
 ```
+
+The snippet in PostHog settings, and the one `hog ci setup` prints, have your PostHog address and project ID filled in.
 
 - `id-token: write` lets the job ask Depot for an OIDC token. Setting `permissions` turns off every permission you don't list, so `contents: read` keeps checkout working.
 - `HOG_HOST` is the address you open PostHog at, such as `https://eu.posthog.com` for EU Cloud. hog sends requests there and uses it as the token's audience.

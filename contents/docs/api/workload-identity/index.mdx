@@ -91,7 +91,7 @@ hog ci setup --branch main --scope annotation:write
 
 The command:
 
-1. Detects the provider and reads `owner/repo` or the GitLab project path from your git remote.
+1. Detects the provider from the CI config in the repository: `.github/workflows`, `.gitlab-ci.yml`, or `.depot/workflows`. It reads `owner/repo` or the GitLab project path from your `origin` remote.
 2. Asks PostHog to look up the repository or project's ID.
 3. Turns `--branch` and `--environment` into the matching presets. Pass one or both.
 4. Creates a policy request. If you're an admin, hog opens the approval page and waits. Otherwise it names the admins and prints the link to send them.
@@ -99,10 +99,11 @@ The command:
 
 | Flag | What it does |
 | --- | --- |
-| `--branch <branch>` | Trusts runs for pushes to this branch |
+| `--branch <branch>` | Trusts runs on this branch, through the provider's branch preset |
 | `--environment <name>` | Trusts jobs that deploy to this environment |
 | `--scope <scope>` | Adds a scope the job gets. Repeat it for each scope. At least one is required. |
-| `--provider <key>` | Names the CI provider when hog can't tell from the repository |
+| `--condition <claim>=<value>` | Adds another claim the token must carry, such as `org_id` for Depot CI. Repeat it for each claim. |
+| `--provider <key>` | Names the CI provider: `github_actions`, `gitlab`, or `depot_ci`. Pass it when hog can't tell, or when the repository has config for more than one provider. |
 | `--repository <name>` | Names the repository or project when it isn't your `origin` remote |
 | `--subject-id <id>` | Sets the immutable ID when PostHog can't look it up. Pass `--repository` with the exact name too, because PostHog matches both. |
 | `--name <name>` | Names the trusted workload in PostHog |
