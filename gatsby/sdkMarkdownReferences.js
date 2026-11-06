@@ -8,9 +8,13 @@ const YAML = require('yaml')
 /** The pages a row can write: reference, migration, and one per major version, such as 7.x.x.md. */
 const isSdkReferencePage = (file) => file === 'reference.md' || file === 'migration.md' || file.endsWith('.x.x.md')
 
-/** Whether a page's slug is a past or next major, or the migration guides, which stay out of search. */
-const isSdkReferenceArchive = (slug) =>
-    slug.startsWith('/docs/libraries/') && (slug.endsWith('.x.x') || slug.endsWith('/migration'))
+/**
+ * Whether a page answers noindex (see vercel.json), so it stays out of the sitemap and site search: a past or
+ * next major, the migration guides, and the Python reference until #21973 links it.
+ */
+const isNoindexSdkReference = (slug) =>
+    slug.startsWith('/docs/libraries/') &&
+    (slug.endsWith('.x.x') || slug.endsWith('/migration') || slug === '/docs/libraries/python/reference')
 
 /** Whether a gatsby-source-filesystem File node is one of those pages. */
 const isSdkReferenceFile = (node) => {
@@ -26,4 +30,4 @@ const splitFrontmatter = (raw) => {
     return { frontmatter: YAML.parse(raw.slice(4, end)) || {}, body: raw.slice(end + 5) }
 }
 
-module.exports = { isSdkReferencePage, isSdkReferenceArchive, isSdkReferenceFile, splitFrontmatter }
+module.exports = { isSdkReferencePage, isNoindexSdkReference, isSdkReferenceFile, splitFrontmatter }
