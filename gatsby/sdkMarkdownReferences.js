@@ -8,6 +8,10 @@ const YAML = require('yaml')
 /** The pages a row can write: reference, migration, and one per major version, such as 7.x.x.md. */
 const isSdkReferencePage = (file) => file === 'reference.md' || file === 'migration.md' || file.endsWith('.x.x.md')
 
+/** Whether a page's slug is a past or next major, or the migration guides, which stay out of search. */
+const isSdkReferenceArchive = (slug) =>
+    slug.startsWith('/docs/libraries/') && (slug.endsWith('.x.x') || slug.endsWith('/migration'))
+
 /** Whether a gatsby-source-filesystem File node is one of those pages. */
 const isSdkReferenceFile = (node) => {
     if (node.internal.type !== 'File' || node.sourceInstanceName !== 'contents') return false
@@ -22,4 +26,4 @@ const splitFrontmatter = (raw) => {
     return { frontmatter: YAML.parse(raw.slice(4, end)) || {}, body: raw.slice(end + 5) }
 }
 
-module.exports = { isSdkReferencePage, isSdkReferenceFile, splitFrontmatter }
+module.exports = { isSdkReferencePage, isSdkReferenceArchive, isSdkReferenceFile, splitFrontmatter }

@@ -23,7 +23,8 @@ const HEADINGS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']
 // The default schema drops a code block's `language-*` class, which picks its highlighting.
 const schema = { ...defaultSchema, attributes: { ...defaultSchema.attributes, code: ['className'] } }
 
-const text = (node): string => (node.type === 'text' ? node.value : (node.children || []).map(text).join(''))
+const text = (node): string =>
+    !node ? '' : node.type === 'text' ? node.value : (node.children || []).map(text).join('')
 
 /** Gives each heading the ID that gatsby-remark-autolink-headers gives an MDX page, which the table of contents links to. */
 const headingIds = () => (tree) => {
@@ -37,7 +38,9 @@ const components: Partial<Components> = {
     ...Object.fromEntries(HEADINGS.map((as) => [as, ({ node, ...props }) => <Heading as={as} {...(props as any)} />])),
     // A code block. Its language is the code element's `language-*` class.
     pre: ({ node }) => {
-        const code = node.children[0] as any
+        // The sanitizer can leave a code block empty, such as a <pre> that held only an <iframe>.
+        const code = node.children.find((child: any) => child.type === 'element' && child.tagName === 'code') as any
+        if (!code) return null
         const className = (code?.properties?.className || []).find((name) => name.startsWith('language-'))
         return (
             <SingleCodeBlock language={className?.slice('language-'.length) || ''}>
@@ -55,17 +58,22 @@ const components: Partial<Components> = {
     ),
 }
 
-const renderMarkdown = (markdown: string) => (
-    // rehype-sanitize sanitizes the HTML that rehype-raw parses, so no raw HTML is trusted.
-    // nosemgrep: typescript.react.security.react-markdown-insecure-html.react-markdown-insecure-html
-    <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw, [rehypeSanitize, schema], headingIds] as any}
-        components={components}
-    >
-        {markdown}
-    </ReactMarkdown>
-)
+// Resizing the window rerenders the page, so the Markdown parses again only when the body changes.
+const Markdown = React.memo(function Markdown({ markdown }: { markdown: string }) {
+    return (
+        // rehype-sanitize sanitizes the HTML that rehype-raw parses, so no raw HTML is trusted.
+        // nosemgrep: typescript.react.security.react-markdown-insecure-html.react-markdown-insecure-html
+        <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            rehypePlugins={[rehypeRaw, [rehypeSanitize, schema], headingIds] as any}
+            components={components}
+        >
+            {markdown}
+        </ReactMarkdown>
+    )
+})
+
+const renderMarkdown = (markdown: string) => <Markdown markdown={markdown} />
 
 export default function SdkMarkdownReference({ data: { sdkMarkdownReference } }) {
     const { title, body, tableOfContents, contentMaxWidthClass } = sdkMarkdownReference

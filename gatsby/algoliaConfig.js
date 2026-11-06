@@ -1,5 +1,6 @@
 const Slugger = require('github-slugger')
 const settings = require('./algoliaSettings.json')
+const { isSdkReferenceArchive } = require('./sdkMarkdownReferences')
 
 // Lower values win after Algolia's textual relevance criteria tie.
 const PATH_RANKING = {
@@ -349,6 +350,18 @@ const retrieveSearchPages = {
               slug
             }
           }
+          sdkReferences: allSdkMarkdownReference {
+            nodes {
+              id
+              slug
+              title
+              body
+              tableOfContents {
+                value
+                depth
+              }
+            }
+          }
           tools: allTool {
             nodes {
               aliases
@@ -400,7 +413,19 @@ const retrieveSearchPages = {
     `,
     transformer: ({ data }) => {
         const pages = new Map()
-        const contentIds = new Set(data.content.nodes.map(({ id }) => id))
+        // SDK references are plain Markdown, not MDX, so they join the MDX content in the MDX shape.
+        // Past and next majors, and the migration guides, stay out of search like they stay out of the sitemap.
+        const sdkReferences = data.sdkReferences.nodes.map(({ id, slug, title, body, tableOfContents }) => ({
+            id,
+            slug,
+            fields: { slug },
+            frontmatter: { title, noindex: isSdkReferenceArchive(slug) },
+            headings: (tableOfContents || []).map(({ value }) => ({ value, depth: 2 })),
+            rawBody: body,
+            excerpt: '',
+        }))
+        const contentNodes = [...data.content.nodes, ...sdkReferences]
+        const contentIds = new Set(contentNodes.map(({ id }) => id))
         const sitePathsByContentId = new Map()
 
         data.pages.nodes.forEach((page) => {
@@ -419,7 +444,7 @@ const retrieveSearchPages = {
             }
         })
 
-        const content = contentByPath(data.content.nodes, sitePathsByContentId)
+        const content = contentByPath(contentNodes, sitePathsByContentId)
         const toolPaths = toolPathsFromNodes(data.tools.nodes).filter(({ path }) => pages.has(path))
         const records = new Map()
 
