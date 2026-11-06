@@ -179,11 +179,9 @@ The SDK automatically flushes events and clears context between requests, queue 
 
 Don't store scoped PostHog services in application singletons. Overlapping Swoole coroutines sharing one Laravel container aren't supported.
 
-#### Queued event delivery (unreleased)
+#### Queued event delivery
 
-> Queued delivery is not in a published release yet. Track [posthog-php#303](https://github.com/PostHog/posthog-php/pull/303) for availability.
-
-Event delivery runs in the current PHP process by default. To send batches through Laravel queue workers instead, configure:
+From version 0.3.0, you can send event batches through Laravel queue workers instead of the current PHP process. To enable queued delivery, configure:
 
 ```bash file=.env
 POSTHOG_LARAVEL_QUEUE_ENABLED=true
