@@ -1,0 +1,136 @@
+---
+title: Send transactional emails with Rails
+sidebar: Docs
+showTitle: true
+---
+
+The [`posthog-rails` gem](/docs/libraries/ruby-on-rails) adds a `:posthog` delivery method to Action Mailer from version 3.21.0. Your mailers, views, previews, and `deliver_later` stay as they are, and each mail goes out as one PostHog transactional email. Before you start, [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key).
+
+## Install
+
+Add both gems to your `Gemfile`:
+
+```ruby file=Gemfile
+gem "posthog-ruby", require: "posthog"
+gem "posthog-rails"
+```
+
+## Set up the client
+
+The delivery method sends through the client that `PostHog.init` creates. Set `secret_key` on it to your project secret API key:
+
+```ruby file=config/initializers/posthog.rb
+PostHog.init do |config|
+  config.api_key = "<ph_project_token>"
+  config.host = "<ph_client_api_host>"
+  config.secret_key = ENV.fetch("POSTHOG_PROJECT_SECRET_API_KEY")
+end
+```
+
+When `secret_key` is set, the client also loads flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation). Give the key the **Feature flag** read scope too, or the client logs a failed load each time it polls. On PostHog Cloud, email goes to the app host of your region. For any other host, set `app_host` as the [Ruby page](/docs/libraries/ruby) describes.
+
+## Turn on the delivery method
+
+```ruby file=config/environments/production.rb
+config.action_mailer.delivery_method = :posthog
+```
+
+Your mailers don't change:
+
+```ruby file=app/mailers/user_mailer.rb
+class UserMailer < ApplicationMailer
+  def welcome(user)
+    mail(to: user.email, subject: "Welcome to Acme")
+  end
+end
+```
+
+`UserMailer.welcome(user).deliver_now` sends the email. After the send, the mail's `message_id` is PostHog's message ID.
+
+## Name your emails
+
+PostHog groups the metrics, logs, and status of each email by its template key. The delivery method uses the first key that it finds:
+
+1. The `X-PostHog-Template-Key` header of the mail, such as `password-reset`. It can only have letters, digits, hyphens, and underscores, at most 400.
+2. The mailer and the action, such as `user_mailer-welcome` for `UserMailer#welcome`.
+3. The `default_template_key` setting, for mail that doesn't come from a mailer:
+
+   ```ruby file=config/environments/production.rb
+   config.action_mailer.posthog_settings = { default_template_key: "transactional" }
+   ```
+
+4. `action-mailer`.
+
+## Set send options with headers
+
+Headers are the one place a mailer can set options for one email. The delivery method reads these headers and doesn't send them:
+
+| Header | Sets |
+| --- | --- |
+| `X-PostHog-Distinct-Id` | The recipient's distinct ID, so the email's [engagement events](/docs/workflows/engagement-events) go to that person. Without it, they go to a person whose distinct ID is the email address. |
+| `X-PostHog-Template-Key` | The template key. |
+| `X-PostHog-Idempotency-Key` | The idempotency key. For 24 hours after PostHog queues an email, a send with the same key sends nothing. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key). |
+| `X-PostHog-Capture-Engagement` | `true` or `false`: whether PostHog captures opens and clicks. |
+
+```ruby file=app/mailers/user_mailer.rb
+def welcome(user)
+  mail(
+    to: user.email,
+    subject: "Welcome to Acme",
+    "X-PostHog-Distinct-Id" => user.id.to_s
+  )
+end
+```
+
+## Send with deliver_later
+
+A job runner retries a failed `deliver_later` job, and each retry is a new send. Set `X-PostHog-Idempotency-Key` from a stable ID, such as the record ID and the mailer name, so a retry within 24 hours never sends the email twice:
+
+```ruby file=app/mailers/order_mailer.rb
+def shipped(order)
+  mail(
+    to: order.email,
+    subject: "Your order shipped",
+    "X-PostHog-Idempotency-Key" => "order-shipped-#{order.id}"
+  )
+end
+```
+
+Without the header, the client makes a key that covers only its own retries within one send.
+
+## What PostHog can't send
+
+PostHog sends one email to one recipient, with an HTML body, a text body, or both. The delivery method refuses a mail that PostHog can't send as written, before any request, and never drops part of it. It raises `PostHog::Rails::UnsupportedMailError`, and `error.refusal` tells you why:
+
+| `refusal` | When |
+| --- | --- |
+| `multiple_to` | The mail has no `To` address, or more than one. Send one mail to each recipient. |
+| `unsupported_header` | The mail has a header that PostHog can't send, such as `X-Campaign` or `Content-Language`. The headers that Mail writes itself, such as `Message-ID`, `Date`, and `Content-Type`, are ignored. |
+| `inline_without_cid` | An inline attachment has no content ID. |
+| `envelope_mismatch` | `smtp_envelope_from`, `Sender`, or `Return-Path` differs from `From`, or `smtp_envelope_to` differs from the `To`, `Cc`, and `Bcc` addresses. |
+| `unsupported_priority` | The mail sets a priority other than normal. |
+| `unsupported_part` | The mail has a part other than one HTML body, one text body, and attachments, such as a calendar invite or a signed message. |
+| `template_unsupported` | The mail sets `X-PostHog-Template-Id`. To send a template made in PostHog, call `PostHog.emails.send` with `template_id`. |
+| `invalid_template_key` | `X-PostHog-Template-Key` has characters that a template key can't have. |
+
+The display names of recipients, such as `Ana <ana@example.com>`, are dropped. The display name of `From` is kept.
+
+## Errors
+
+When PostHog doesn't queue the email, the delivery method raises `PostHog::Rails::DeliveryError`. It has the `status`, `code`, `detail`, and `attr` of the [errors table](/docs/workflows/transactional-emails#errors), `retry_after` when PostHog asked the client to wait, and `retryable?`. The client already retries network errors, rate limits, and a `503` two times before it raises.
+
+When `retryable?` is true, PostHog might have queued the email, so retry the job, after `retry_after` when it is set. A mail with a stable `X-PostHog-Idempotency-Key` is then sent at most once while PostHog remembers the key. A permanent error fails again on each attempt, so report it and end the job, as the handler also does after the fifth attempt. If the job raises the error again, your queue backend, such as Sidekiq, retries it with its own policy. The delivery method defines its errors when Action Mailer loads, so add the handler in an `on_load` block:
+
+```ruby file=config/initializers/posthog.rb
+ActiveSupport.on_load(:action_mailer) do
+  ActionMailer::MailDeliveryJob.rescue_from PostHog::Rails::DeliveryError do |error|
+    if error.retryable? && executions < 5
+      retry_job wait: error.retry_after || 30 * executions
+    else
+      Rails.error.report(error, handled: true)
+    end
+  end
+end
+```
+
+When `raise_delivery_errors` is `false`, Action Mailer doesn't raise either error. A refused mail is not sent, and you don't see a failed send.
