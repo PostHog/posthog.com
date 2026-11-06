@@ -156,7 +156,7 @@ export const posthog = {
                 target_by_feature_flag: true,
                 target_by_sample: true,
                 target_by_url: true,
-                wireframe_mode: true,
+                wireframe_mode: false, // removed in the Android and iOS 4.0 SDKs
             },
             export: {
                 features: {
