@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Everything we do as PostHog CSMs is in pursuit of being better engineers. Aligned with that goal, every new CSM should aim to merge at least one product PR in their first 90 days. This is a goal, not a requirement.
+Being a CSM at PostHog is about being as impactful for our customers as possible. Part of that is improving the product for them if we can. Aligned with that goal, every new CSM should aim to merge at least one product PR in their first 90 days. This is a goal, not a requirement.
 
 For former engineers, this is an exercise in learning how we ship. For non-engineers, what you're really after is three things the docs won't teach you:
 
@@ -19,7 +19,7 @@ Start small! It should be impactful, ideally tied to a customer request or an ou
 - An error message that blames the wrong thing ([example](https://github.com/PostHog/posthog/pull/127912))
 - A sync that "succeeds" with zero rows, or quits after page one
 - A missing table or field on a warehouse source
-- Something in Customer analytics that annoys you, because it annoys every CSM
+- Something in Customer analytics that annoys you, or you think could improve the way we work
 
 Skip anything already on a team's roadmap, or anything that spans products. Warehouse sources are a good place to start. Each source is its own module, so the blast radius is small and easy to see, and the repo has agent skills for them in `.agents/skills/`.
 
