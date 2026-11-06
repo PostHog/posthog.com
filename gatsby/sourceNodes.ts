@@ -1364,7 +1364,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     // its empty state and the build still passes.
     const fetchScopeReference = async () => {
         try {
-            const response = await fetch('https://oauth.posthog.com/oauth/scopes')
+            // The signal also aborts reading the body, so a stalled response can't hold up the build.
+            const response = await fetch('https://oauth.posthog.com/oauth/scopes', {
+                signal: AbortSignal.timeout(15000),
+            })
             if (!response.ok) {
                 console.warn('Failed to fetch API scopes:', response.status)
                 return
