@@ -60,9 +60,13 @@ e.yourdomain.com {
     }
   }
   handle {
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -92,9 +96,13 @@ e.yourdomain.com {
     }
   }
   handle {
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
@@ -113,7 +121,7 @@ The `header_up Host` directive tells PostHog which domain the request is for. Wi
 
 The `header_up -Cookie` directive removes the browser's cookies before the request goes to PostHog. PostHog does not need them.
 
-The `@non_bearer` matcher and `request_header` directive forward the `Authorization` header only when its value starts with `Bearer phc_`, and remove any other value, such as session tokens your app adds to its own requests. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. If your project token doesn't start with `phc_`, match `"Bearer <your project token>"` instead, which is an exact match. The asset routes always remove the header with `header_up -Authorization`, because asset requests don't need it.
+The `@non_bearer` matcher and `request_header` directive forward the `Authorization` header only when its value starts with `Bearer phc_`, `Bearer phs_` or `Bearer phx_`, and remove any other value, such as session tokens your app adds to its own requests. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`. Keys created before these prefixes need their exact `Bearer <key>` value allowed too. The asset routes always remove the header with `header_up -Authorization`, because asset requests don't need it.
 
 The `header_down -Access-Control-Allow-Origin` directive removes CORS headers from PostHog's response. This prevents conflicts with your own CORS configuration.
 
@@ -213,9 +221,13 @@ In your working directory, create a file named `Caddyfile`:
 
   handle_path /yourpath-proxy* {
     rewrite * {path}
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -252,9 +264,13 @@ In your working directory, create a file named `Caddyfile`:
 
   handle_path /yourpath-proxy* {
     rewrite * {path}
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
@@ -450,9 +466,13 @@ e.yourdomain.com {
     }
   }
   handle {
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -486,9 +506,13 @@ e.yourdomain.com {
     }
   }
   handle {
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
@@ -637,9 +661,13 @@ e.yourdomain.com {
     }
   }
   handle {
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://us.i.posthog.com:443 {
       header_up Host us.i.posthog.com
@@ -683,9 +711,13 @@ e.yourdomain.com {
     }
   }
   handle {
-    # Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    # If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    @non_bearer not header Authorization "Bearer phc_*"
+    # Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    # To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    @non_bearer {
+        not header Authorization "Bearer phc_*"
+        not header Authorization "Bearer phs_*"
+        not header Authorization "Bearer phx_*"
+    }
     request_header @non_bearer -Authorization
     reverse_proxy https://eu.i.posthog.com:443 {
       header_up Host eu.i.posthog.com
