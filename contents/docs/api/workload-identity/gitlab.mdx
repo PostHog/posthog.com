@@ -1,0 +1,134 @@
+---
+title: Workload identity for GitLab.com
+sidebar: Docs
+showTitle: true
+---
+
+> **Note:** PostHog doesn't accept GitLab.com tokens yet. This page describes how it works so you can plan for it. Until then, use a [personal API key](/docs/api/personal-api-keys).
+
+<CalloutBox icon="IconInfo" title="hog isn't released yet" type="fyi">
+
+`hog` is PostHog's new CLI. It isn't released yet. Every `hog` command on this page is a beta preview of how it works once hog is released, and the details can change. Until then, use [`posthog-cli`](/docs/cli) with a personal API key, as its [authentication docs](/docs/cli#authentication) describe.
+
+</CalloutBox>
+
+A GitLab CI/CD job on GitLab.com can trade the ID token GitLab issues for the job for a short-lived PostHog token. You don't store a personal API key as a CI/CD variable, and the token only works on one project. The [overview](/docs/api/workload-identity) covers trust policies, requests, and the token exchange for every provider.
+
+## What the job needs
+
+- An `id_tokens` entry named `HOG_ID_TOKEN`, with `aud` set to your PostHog host
+- A trusted workload in your PostHog project that matches the GitLab project and the pipelines you pick
+- `HOG_HOST` and `HOG_PROJECT_ID` in the job's variables
+
+PostHog trusts the GitLab.com issuer, `https://gitlab.com`. Tokens from a self-managed GitLab instance come from a different issuer, so PostHog refuses them.
+
+## How the job gets a token
+
+GitLab creates the ID tokens a job lists under `id_tokens` when the job starts, and puts each one in a variable with the entry's name. Once hog is released, it reads the token from `HOG_ID_TOKEN` and exchanges it at `/oauth/token/`. The `aud` you set must match the PostHog host hog sends the token to.
+
+The ID token lives as long as the job's timeout, or 5 minutes by default. The PostHog token never outlives the ID token it came from. hog keeps the PostHog token in memory and exchanges again when it's close to expiring, or after a `401`.
+
+See GitLab's [ID token authentication docs](https://docs.gitlab.com/ci/secrets/id_token_authentication/) and the [`id_tokens` keyword reference](https://docs.gitlab.com/ci/yaml/#id_tokens) for how GitLab issues these tokens.
+
+## Which pipelines a policy matches
+
+A policy identifies the GitLab project with two claims, and both must match:
+
+- **`project_id`** - the project's numeric ID. It never changes, so a project that is deleted and created again with the same path doesn't match.
+- **`project_path`** - the project's full path, such as `acme/web`. If you rename or move the project, update the policy.
+
+A merge request pipeline from a fork carries the fork's project ID, not yours. Your project's policy never matches code that runs from a fork.
+
+Conditions narrow which pipelines in that project get a token. A policy sets at least one.
+
+| Claim | What it holds | Example value |
+| --- | --- | --- |
+| `ref` | The short name of the branch or tag | `main` |
+| `ref_type` | Whether `ref` is a branch or a tag | `branch` |
+| `ref_protected` | Whether the branch or tag is protected | `true` |
+| `environment` | The environment the job deploys to | `production` |
+| `environment_protected` | Whether that environment is protected | `true` |
+| `pipeline_source` | What started the pipeline | `push` |
+| `ci_config_ref_uri` | The pipeline configuration file and the ref it came from | `gitlab.com/acme/web//.gitlab-ci.yml@refs/heads/main` |
+
+## Presets in PostHog settings
+
+Under **Which runs can get a token**, the settings page offers these presets:
+
+| Preset | Conditions it sets | When to use it |
+| --- | --- | --- |
+| **Pushes to a branch** (default) | `ref` = `<branch>`, `ref_type` = `branch`, and `pipeline_source` = `push` | Jobs that run after code lands on a branch, such as deploys from `main` |
+| **Protected branches only** | `ref_protected` = `true` | Jobs on any protected branch |
+| **An environment** | `environment` = `<environment>` | Jobs that deploy to a GitLab environment |
+| **Custom** | Any claim from the table above, with an exact value | Anything the presets don't cover |
+
+## Why the default is safe
+
+**Pushes to a branch** pins three claims:
+
+- `ref` alone holds a short name, so a tag called `main` has the same `ref` as the `main` branch. `ref_type` = `branch` stops a tag from matching.
+- `pipeline_source` = `push` stops scheduled, manual, merge request, and API-triggered pipelines from matching. Only code pushed to the branch gets a token.
+
+Fork merge requests can't match at all, because their pipelines carry the fork's project ID.
+
+## Set up a trusted workload
+
+Only organization admins and owners can add a trusted workload. Anyone else in the project can [ask an admin](/docs/api/workload-identity#asking-an-admin-for-a-trusted-workload) for one.
+
+### In PostHog settings
+
+1. In your project settings, go to **Trusted workloads** and add a trusted workload.
+2. Pick **GitLab.com** as the provider.
+3. In **Repository**, enter the project path, such as `acme/web`, and click **Find**. If PostHog can't find the project, enter its ID in the field that appears. GitLab shows the project ID under **Settings** > **General** in the project.
+4. Under **Which runs can get a token**, keep **Pushes to a branch** and enter the branch, or pick another preset.
+5. Pick the scopes the job needs.
+6. Save, then copy the snippet PostHog shows.
+
+### With `hog ci setup` (beta)
+
+Once hog is released, run this in your repository:
+
+```bash
+hog ci setup --branch main --scope annotation:write
+```
+
+hog reads the project path from your git remote, looks up the project ID, and applies the **Pushes to a branch** preset for `main`. Use `--environment production` instead for the environment preset. Repeat `--scope` for each scope the job needs.
+
+hog then creates a policy request and waits for an admin to approve it. If you stop waiting, run `hog ci setup --wait` to pick it up again. After approval, hog prints the snippet.
+
+## Add the pipeline snippet
+
+Add these keys to the job in `.gitlab-ci.yml` that calls PostHog, and rename `job` to your job's name:
+
+```yaml
+job:
+  id_tokens:
+    HOG_ID_TOKEN:
+      aud: https://us.posthog.com
+  variables:
+    HOG_HOST: https://us.posthog.com
+    HOG_PROJECT_ID: "12345"
+  script:
+    - hog <command>
+```
+
+- `id_tokens` asks GitLab for an ID token. Its `aud` must equal `HOG_HOST`.
+- `HOG_HOST` is the PostHog instance the policy lives on, such as `https://eu.posthog.com` for EU Cloud.
+- `HOG_PROJECT_ID` is your PostHog project's ID: the number in your project URL, such as `12345` in `https://us.posthog.com/project/12345`.
+
+Remove any personal API key from the job's variables. hog uses a personal API key ahead of the workload token.
+
+## Troubleshooting
+
+| Problem | Likely cause | What to do |
+| --- | --- | --- |
+| hog can't find an ID token | The job has no `id_tokens` entry named `HOG_ID_TOKEN` | Add the `id_tokens` block to the job. |
+| [`workload_issuer_not_allowed`](/docs/api/workload-identity#workload_issuer_not_allowed) | The job runs on a self-managed GitLab instance | Only GitLab.com is supported. |
+| [`workload_token_invalid`](/docs/api/workload-identity#workload_token_invalid) | The token's `aud` isn't the host hog sends it to, or the token expired | Set `aud` and `HOG_HOST` to the same PostHog URL. |
+| [`workload_no_matching_policy`](/docs/api/workload-identity#workload_no_matching_policy) | The pipeline doesn't match the policy, for example a merge request, a schedule, a tag, or another branch. A fork, a renamed or recreated project, or the wrong `HOG_PROJECT_ID`, also cause it. | Compare the pipeline's source and ref with the policy's conditions, and check the project path and ID. |
+| [`workload_policy_request_pending`](/docs/api/workload-identity#workload_policy_request_pending) | An admin hasn't approved the request yet | Send the approval link from the error to an admin. |
+| [`workload_no_usable_scopes`](/docs/api/workload-identity#workload_no_usable_scopes) | The policy only grants scopes a workload can't use | Ask an admin to add scopes the job can use. |
+| [`workload_rate_limited`](/docs/api/workload-identity#workload_rate_limited) | Too many exchanges for this project in a short time | Wait, then retry the job. |
+| A call fails with `403` | The policy doesn't grant the scope the call needs | The `WWW-Authenticate` header names the scope. Ask an admin to add it. |
+
+See [errors](/docs/api/workload-identity#errors) in the overview for every error code.

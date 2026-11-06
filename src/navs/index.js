@@ -3443,6 +3443,24 @@ export const docsMenu = {
                         {
                             name: 'Workload identity federation',
                             url: '/docs/api/workload-identity',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/api/workload-identity',
+                                },
+                                {
+                                    name: 'GitHub Actions',
+                                    url: '/docs/api/workload-identity/github-actions',
+                                },
+                                {
+                                    name: 'GitLab.com',
+                                    url: '/docs/api/workload-identity/gitlab',
+                                },
+                                {
+                                    name: 'Depot CI',
+                                    url: '/docs/api/workload-identity/depot',
+                                },
+                            ],
                         },
                         {
                             name: 'Popular',
