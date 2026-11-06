@@ -89,8 +89,8 @@ PostHog acts as your product's context layer: an error shows up with the replay,
 
 * PostHog offers 100k free errors and 5,000 web and 2,500 mobile recordings free per month vs Sentry's 5k errors and 50 recordings on the free tier.
 * PostHog ties every error to user sessions, product analytics, session recordings, feature flags, [logs](/logs), and [distributed traces](/tracing). Sentry focuses on stack traces and performance monitoring.
-* PostHog includes SQL querying and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors, and its data forwarding covers error events only on the Business plan.
-* Sentry supports 100+ platforms, including Unreal Engine, Godot, and game consoles; PostHog has 19 official SDKs (including Rust, Elixir, .NET, Unity, and Roblox) but doesn't cover Unreal or consoles.
+* PostHog includes SQL querying and warehouse syncs to analyze product data directly; Sentry doesn't offer a built-in SQL workspace or first-party warehouse connectors, and its data forwarding covers error events only and needs a Business or Enterprise plan.
+* Sentry supports 100+ platforms, including Unreal Engine, Godot, and game consoles; PostHog's official SDKs include Rust, Elixir, .NET, Unity, Godot, and Roblox, and an [Unreal Engine SDK](https://github.com/PostHog/posthog-unreal) is in development, but PostHog doesn't cover game consoles.
 * PostHog's AI features are included: 500 [PostHog AI](/ai) credits a month, a free [MCP server](/mcp), and a [Slack app](/slack). Sentry's Seer agent is a paid add-on at $40 per active contributor per month and isn't available on the free plan.
 
 </details>
@@ -109,7 +109,7 @@ PostHog acts as your product's context layer: an error shows up with the replay,
 
 | | PostHog | Sentry |
 |---|---|---|
-| **Free plan** | 100k errors, 5,000 web + 2,500 mobile replays, 1M events, 10 GB logs | 5k errors, 50 replays, 5M spans, 5 GB logs |
+| **Free plan** | 100k errors, 5,000 web + 2,500 mobile replays, 1M events, 10 GB logs and traces | 5k errors, 50 replays, 5M spans, 5 GB logs |
 | **Users on the free plan** | Unlimited | 1 |
 | **Paid plans** | No base fee; usage-based per product | Team $29/month, Business $89/month, plus usage |
 | **AI features** | PostHog AI (500 credits a month free), MCP server, and Slack app included | Seer at $40 per active contributor per month, not on the free plan |
@@ -178,7 +178,7 @@ PostHog acts as your product's context layer: an error shows up with the replay,
 * Sentry includes built-in performance monitoring and distributed tracing; Rollbar focuses purely on error tracking.
 * Sentry offers a self-hostable, source-available option (its main web app uses the FSL, which converts to Apache-2.0 after two years); Rollbar is cloud-only and proprietary.
 * Sentry's UI is built for large teams managing multiple projects; Rollbar's simplicity suits smaller setups.
-* Sentry has a larger free tier (5k errors vs Rollbar's limited free plan).
+* Both include 5k errors a month for free, but Rollbar's free plan also includes 1,000 session replays and unlimited users, compared to Sentry's 50 replays and 1 user.
 
 </details>
 
@@ -199,7 +199,7 @@ PostHog acts as your product's context layer: an error shows up with the replay,
 | **Free plan** | 5k error occurrences, 1,000 session replays, 30-day retention | 5k errors, 50 replays, 5M spans, 5 GB logs |
 | **Users on the free plan** | Unlimited | 1 |
 | **Paid plans** | Essentials from $9/month, Advanced from $13/month | Team $29/month, Business $89/month, plus usage |
-| **AI features** | Root cause analysis and Resolve via AI credits (none on the free plan) | Seer at $40 per active contributor per month, not on the free plan |
+| **AI features** | Root cause analysis and Resolve via AI credits (included on paid plans; free plans can buy credits) | Seer at $40 per active contributor per month, not on the free plan |
 | **Self-hosting** | None | Free (FSL, source-available) |
 
 > #### Bottom line
@@ -398,7 +398,7 @@ It provides crash reporting, performance monitoring, and user experience insight
 
 - **Log management:** Aggregate and analyze logs with distributed tracing for quick troubleshooting
 
-- **Integrations:** Connect with over 780 tools and open source ecosystems
+- **Integrations:** Connect with over 800 tools and open source ecosystems
 
 - **Flexible pricing:** Usage-based pricing model with a free tier, makes it cheaper to get started with (than Datadog)
 
@@ -435,7 +435,7 @@ It provides crash reporting, performance monitoring, and user experience insight
 * New Relic offers full-stack observability including infrastructure monitoring; Sentry focuses on application errors and performance.
 * New Relic has a more generous free tier (100 GB/month data ingest); Sentry's free tier is limited to 5k errors.
 * New Relic uses AI-powered anomaly detection across all telemetry; Sentry's AI features (Seer) are focused on error resolution.
-* New Relic supports 780+ integrations; Sentry has fewer but deeper developer tool integrations.
+* New Relic supports 800+ integrations; Sentry has fewer but deeper developer tool integrations.
 
 </details>
 
@@ -520,7 +520,7 @@ It provides crash reporting, performance monitoring, and user experience insight
 
 * LogRocket emphasizes frontend debugging with visual session replays; Sentry focuses on backend and full-stack error monitoring.
 * LogRocket captures user interactions, network calls, and console logs together; Sentry treats replay as a supplementary feature.
-* Sentry is source-available (FSL) and can be self-hosted or used in the cloud; LogRocket is cloud-only and proprietary.
+* Sentry is source-available (FSL) and anyone can self-host it for free; LogRocket is proprietary and offers self-hosting on Enterprise plans only.
 * Sentry has stronger backend error tracking; LogRocket is primarily frontend-focused.
 
 </details>
@@ -541,7 +541,7 @@ It provides crash reporting, performance monitoring, and user experience insight
 |---|---|---|
 | **Free plan** | None (14-day trial) | 5k errors, 50 replays, 5M spans, 5 GB logs |
 | **Users on the free plan** | Trial only | 1 |
-| **Paid plans** | Core from $176/month billed annually; Pro for 100k+ sessions; Enterprise custom | Team $29/month, Business $89/month, plus usage |
+| **Paid plans** | Core, Pro, and Enterprise, priced by session volume; from $176/month billed annually | Team $29/month, Business $89/month, plus usage |
 | **AI features** | Galileo AI on Pro and above | Seer at $40 per active contributor per month, not on the free plan |
 | **Self-hosting** | Enterprise plans only | Free (FSL, source-available) |
 
@@ -604,7 +604,7 @@ It provides crash reporting, performance monitoring, and user experience insight
   <summary>Main differences between AppSignal and Sentry</summary>
 
 * AppSignal has deep support for Ruby, Elixir, Node.js, and Python; Sentry supports 100+ platforms.
-* Sentry’s free tier is built around errors/spans/replays; AppSignal’s free plan is request/log–centric (≈ 50k requests, 1 GB logs, 5-day retention).
+* Sentry’s free tier is built around errors/spans/replays; AppSignal’s free plan is request/log–centric (30k requests, 1 GB logs, 5-day retention).
 * AppSignal includes host monitoring for CPU, memory, and disk; Sentry focuses on application-level metrics.
 * Sentry is source-available (FSL) and can be self-hosted or used in the cloud; AppSignal is SaaS-only.
 
@@ -627,7 +627,7 @@ It provides crash reporting, performance monitoring, and user experience insight
 | **Free plan** | 30k requests, 1 GB logs, 5-day retention | 5k errors, 50 replays, 5M spans, 5 GB logs |
 | **Users on the free plan** | Unlimited | 1 |
 | **Paid plans** | From $279/year for 250k requests; long-term log storage add-on $89/month | Team $29/month, Business $89/month, plus usage |
-| **AI features** | None advertised | Seer at $40 per active contributor per month, not on the free plan |
+| **AI features** | MCP server for AI coding tools | Seer at $40 per active contributor per month, not on the free plan |
 | **Self-hosting** | None (only the collector runs on your infrastructure) | Free (FSL, source-available) |
 
 > #### Bottom line
@@ -642,9 +642,9 @@ It provides crash reporting, performance monitoring, and user experience insight
 
 ### What is GlitchTip?
  
-**GlitchTip** is an open-source (MIT) reimplementation of Sentry's backend, built by Burke Software. It's compatible with Sentry's SDKs, so you point the Sentry client you already use at a GlitchTip DSN and keep going. You can self-host it with Docker Compose or Helm on as little as 512 MB of RAM, or use the hosted version, which has EU hosting on every plan.
+**GlitchTip** is an open-source (MIT) reimplementation of Sentry's backend, built by Burke Software. It's compatible with Sentry's SDKs, so you point the Sentry client you already use at a GlitchTip DSN and keep going. You can self-host it with Docker Compose or Helm, with 512 MB of RAM recommended, or use the hosted version, which has EU hosting on every plan.
  
-It covers the basics well and skips the rest: there's no session replay, profiling, or AI root cause analysis, and alerts are email and webhooks only.
+It covers the basics well and skips the rest: there's no session replay, profiling, or AI root cause analysis, and alerts go out by email or webhook (including Slack, Discord, and Google Chat formats).
  
 #### Key features
  
@@ -689,7 +689,7 @@ It covers the basics well and skips the rest: there's no session replay, profili
 * GlitchTip is MIT-licensed and free to self-host on modest hardware; Sentry's main web app is source-available (FSL) and its self-hosted stack is far heavier to run.
 * Sentry includes session replay, profiling, metrics, and the paid Seer agent; GlitchTip has none of these and keeps to errors, uptime, performance, and logs.
 * GlitchTip's hosted free plan covers 1,000 events a month with unlimited users; Sentry's covers 5k errors for 1 user.
-* GlitchTip alerts by email and webhook only; Sentry has native Slack, PagerDuty, and issue-tracker integrations.
+* GlitchTip alerts by email and webhook (including Slack, Discord, and Google Chat formats); Sentry has native Slack, PagerDuty, and issue-tracker integrations.
 
 </details>
 
@@ -791,7 +791,7 @@ Common reasons include: needing more context around errors, wanting a more gener
 <details>
   <summary>Which Sentry alternatives are open source?</summary>
 
-**PostHog** is fully open source under the MIT license with a public roadmap. **Sentry** itself is self-hostable and source-available; its main web app uses the Functional Source License (FSL) and converts to Apache-2.0 after two years. Most other alternatives like **Rollbar**, **Raygun**, **LogRocket**, and **AppSignal** are proprietary and cloud-only.
+**PostHog** is open source and open core: most of its code is MIT-licensed, enterprise features use a separate license, and it has a public [roadmap](/roadmap). **GlitchTip** is fully open source under the MIT license. **Sentry** itself is self-hostable and source-available; its main web app uses the Functional Source License (FSL) and converts to Apache-2.0 after two years. **Rollbar**, **Raygun**, and **AppSignal** are proprietary and cloud-only, and **LogRocket** is proprietary with self-hosting on Enterprise plans only.
 
 </details>
 
