@@ -2084,6 +2084,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/product-comparisons',
             },
             {
+                name: 'Running experiments',
+                url: '/handbook/engineering/posthog-com/running-experiments',
+            },
+            {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },
@@ -2738,6 +2742,10 @@ export const docsMenu = {
                         {
                             name: 'Error patterns',
                             url: '/docs/self-driving/pocket-guide/ai-error-patterns',
+                        },
+                        {
+                            name: 'Errors by account value',
+                            url: '/docs/self-driving/pocket-guide/errors-your-best-accounts-hit',
                         },
                     ],
                     badge: {
@@ -8332,8 +8340,36 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/python',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/workflows/transactional-emails/go',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/workflows/transactional-emails/dotnet',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/workflows/transactional-emails/rust',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/workflows/transactional-emails/ruby',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/workflows/transactional-emails/elixir',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/workflows/transactional-emails/php',
+                        },
+                        {
                             name: 'API',
                             url: '/docs/workflows/transactional-emails/api',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/workflows/transactional-emails/examples',
                         },
                     ],
                 },
@@ -8374,6 +8410,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/workflows/push-notifications/flutter',
+                        },
+                        {
+                            name: 'Push step settings',
+                            url: '/docs/workflows/push-notifications/push-step-options',
                         },
                     ],
                 },
