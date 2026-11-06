@@ -1,0 +1,9 @@
+Each table supports three sync methods:
+
+- **Full refresh** – reads all the files again on each sync, so the table always matches the files in the bucket.
+- **Incremental** – reads only new and changed files. When you delete a file, PostHog removes its rows from the table. For a Delta Lake table, an incremental sync also applies deleted and updated rows.
+- **Append only** – reads only new files and keeps every row that it imported before. PostHog waits until a file is at least one minute old before it reads the file.
+
+Use **Incremental** for most tables. Use **Append only** for folders where files are only added, such as event logs. See [sync methods](/docs/data-pipelines/sources#sync-methods) for more about each method.
+
+Rows that PostHog imports count toward your [data warehouse rows synced](/docs/data-warehouse/cutting-costs).
