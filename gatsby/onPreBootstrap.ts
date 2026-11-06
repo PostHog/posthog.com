@@ -112,25 +112,55 @@ async function downloadPostHogBootstrap(): Promise<string> {
     }
 }
 
+const LIBRARIES = path.resolve(__dirname, '../contents/docs/libraries')
+
+/** The pages Strapi can write: reference, migration, and one per major version, such as 7.x.x. */
+function isSdkReferencePage(file: string): boolean {
+    return file === 'reference.md' || file === 'migration.md' || file.endsWith('.x.x.md')
+}
+
 /**
  * Writes each SDK reference that Strapi stores as Markdown to contents/docs/libraries/<sdk>/<version>.md,
  * so it builds like any other docs page. The SDK repo writes the page, front matter included.
+ * These files are gitignored, and the ones from the last build are removed first.
  */
 async function writeSdkMarkdownReferences(): Promise<void> {
     const host = process.env.GATSBY_SQUEAK_API_HOST
     if (!host) return
-    const query = 'filters[markdown][$notNull]=true&fields[0]=referenceId&fields[1]=version&fields[2]=markdown'
-    // Strapi answers 400 with no data until its sdk-reference type has the `markdown` field.
-    const { data } = await fetch(`${host}/api/sdk-references?${query}&pagination[pageSize]=100`).then((res) =>
-        res.json()
-    )
+    const query = [
+        'filters[markdown][$notNull]=true',
+        'filters[referenceId][$notNull]=true',
+        'filters[version][$notNull]=true',
+        'fields[0]=referenceId',
+        'fields[1]=version',
+        'fields[2]=markdown',
+        'pagination[pageSize]=100',
+    ].join('&')
+    let data
+    try {
+        const res = await fetch(`${host}/api/sdk-references?${query}`, { signal: AbortSignal.timeout(30000) })
+        // Strapi answers 400 with no data until its sdk-reference type has the `markdown` field.
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        ;({ data } = await res.json())
+    } catch (error) {
+        console.warn('Skipping the Markdown SDK references:', error)
+        return
+    }
+    for (const sdk of fs.existsSync(LIBRARIES) ? fs.readdirSync(LIBRARIES) : []) {
+        const dir = path.join(LIBRARIES, sdk)
+        if (!fs.statSync(dir).isDirectory()) continue
+        for (const file of fs.readdirSync(dir).filter(isSdkReferencePage)) fs.rmSync(path.join(dir, file))
+    }
     for (const { attributes } of data ?? []) {
+        if (!attributes.referenceId || !attributes.version) continue
         const sdk = attributes.referenceId.replace(/^posthog-/, '')
         // A major version, such as 7, is served at 7.x.x. Other pages keep their name.
         const page = isNaN(Number(attributes.version)) ? attributes.version : `${attributes.version}.x.x`
-        // Each name must be one plain path segment, so a row can't write outside contents/docs/libraries.
+        // A page can only be one of the names above, so a row can't replace a hand-written page.
+        // Each name must also be one plain path segment, so a row can't write outside contents/docs/libraries.
+        if (!isSdkReferencePage(`${page}.md`)) continue
         if ([sdk, page].some((name) => name !== path.basename(name) || name.startsWith('.'))) continue
-        const dir = path.resolve(__dirname, '../contents/docs/libraries', sdk)
+        const dir = path.join(LIBRARIES, sdk)
         fs.mkdirSync(dir, { recursive: true })
         fs.writeFileSync(path.join(dir, `${page}.md`), attributes.markdown)
     }
