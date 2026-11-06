@@ -192,6 +192,37 @@ Body:
 // The "login_type" property was missing.
 ```
 
+### Why do I see "This capture call is ignored due to client rate limiting"?
+
+The JavaScript web SDK limits how quickly a page can capture events, which stops a runaway loop from flooding your project. By default, it allows an average of 10 events per second, with bursts of up to 100.
+
+Events over the limit are dropped in the browser. They aren't sent or retried, so they won't appear in PostHog. This limit is separate from your [billing limits](/docs/billing/limits-alerts), and reloading the page doesn't reset it because the SDK stores its count in the browser.
+
+To find the cause, look for code that calls `posthog.capture()` far more often than you expect:
+
+- A call inside a render loop or a `useEffect` that runs repeatedly.
+- An event listener that's added on every render and never removed, so each browser event triggers several captures.
+- A handler on a frequent browser event, such as `scroll`, `mousemove`, or the `timeupdate` event on a media player.
+
+The SDK also reports this as an [ingestion warning](/docs/data/ingestion-warnings) that includes the number of dropped events, the page, and the session ID.
+
+The best fix is usually to capture less often, such as at video milestones instead of on every `timeupdate`, or by sending one summary event when an interaction ends.
+
+If your event volume is expected, raise the limit with [`rate_limiting`](/docs/libraries/js/config). Events that were previously dropped are then sent, so your event volume and bill can go up.
+
+```js
+posthog.init('<ph_project_token>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    rate_limiting: {
+        events_per_second: 50,
+        events_burst_limit: 500,
+    },
+})
+```
+
+If you see this message at low event volumes, update `posthog-js`. Older versions could drop events after the device clock moved backward.
+
 ### Does PostHog block bots by default?
 
 Yes, PostHog blocks most known bots by default, including:
