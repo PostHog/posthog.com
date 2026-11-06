@@ -2879,7 +2879,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-js',
+                                    url: '/docs/libraries/js/reference',
                                 },
                             ],
                         },
@@ -2966,7 +2966,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-node',
+                                    url: '/docs/libraries/node/reference',
                                 },
                             ],
                         },
@@ -3010,7 +3010,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-react-native',
+                                    url: '/docs/libraries/react-native/reference',
                                 },
                             ],
                         },
@@ -3118,6 +3118,30 @@ export const docsMenu = {
                             ],
                         },
                         {
+                            name: 'JavaScript Web',
+                            url: '/docs/libraries/js/reference',
+                            children: [
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/js/1.x.x',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/libraries/node/reference',
+                            children: [
+                                {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/node/5.x.x',
+                                },
+                                {
+                                    name: '6.x.x (experimental)',
+                                    url: '/docs/libraries/node/6.x.x',
+                                },
+                            ],
+                        },
+                        {
                             name: 'Python',
                             url: '/docs/libraries/python/reference',
                             children: [
@@ -3132,6 +3156,16 @@ export const docsMenu = {
                                 {
                                     name: 'Migration guides',
                                     url: '/docs/libraries/python/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/libraries/react-native/reference',
+                            children: [
+                                {
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/react-native/4.x.x',
                                 },
                             ],
                         },
@@ -6391,11 +6425,11 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'JavaScript web SDK',
-                            url: '/docs/references/posthog-js?filter=error-tracking',
+                            url: '/docs/libraries/js/reference#capture-exception',
                         },
                         {
                             name: 'Node.js SDK',
-                            url: '/docs/references/posthog-node?filter=error-tracking',
+                            url: '/docs/libraries/node/reference#capture-exception',
                         },
                         {
                             name: 'Python SDK',
