@@ -9,6 +9,7 @@ showTitle: true
 hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/hero_9791aaf820
+ogImage: generated
 category: Engineering
 tags:
   - Engineering

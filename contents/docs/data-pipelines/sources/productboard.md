@@ -23,22 +23,25 @@ Once the syncs are complete, you can start using Productboard data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `features` | Features in your Productboard workspace | Full refresh |
-| `subfeatures` | Subfeatures | Full refresh |
-| `components` | Components | Full refresh |
-| `products` | Products | Full refresh |
-| `initiatives` | Initiatives | Full refresh |
-| `objectives` | Objectives | Full refresh |
-| `key_results` | Key results | Full refresh |
-| `releases` | Releases | Full refresh |
-| `release_groups` | Release groups | Full refresh |
-| `companies` | Companies | Full refresh |
-| `users` | Users | Full refresh |
-| `notes` | Customer feedback notes | Incremental |
-| `members` | Workspace members | Full refresh |
-| `teams` | Teams | Full refresh |
+| Table                   | Description                                                                                               | Sync method  |
+| ----------------------- | --------------------------------------------------------------------------------------------------------- | ------------ |
+| `features`              | Features in your Productboard workspace                                                                   | Full refresh |
+| `subfeatures`           | Subfeatures                                                                                               | Full refresh |
+| `components`            | Components                                                                                                | Full refresh |
+| `products`              | Products                                                                                                  | Full refresh |
+| `initiatives`           | Initiatives                                                                                               | Full refresh |
+| `objectives`            | Objectives                                                                                                | Full refresh |
+| `key_results`           | Key results                                                                                               | Full refresh |
+| `releases`              | Releases                                                                                                  | Full refresh |
+| `release_groups`        | Release groups                                                                                            | Full refresh |
+| `companies`             | Companies                                                                                                 | Full refresh |
+| `users`                 | Users                                                                                                     | Full refresh |
+| `notes`                 | Customer feedback notes                                                                                   | Incremental  |
+| `members`               | Workspace members                                                                                         | Full refresh |
+| `teams`                 | Teams                                                                                                     | Full refresh |
+| `entity_configurations` | Configuration for each entity type, including custom fields, statuses, options, and allowed relationships | Full refresh |
+| `entity_relationships`  | Relationships between entities, with `target_id` and `target_type` flattened for joins                    | Full refresh |
+| `note_relationships`    | Relationships between notes and entities, with `target_id` and `target_type` flattened for joins          | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

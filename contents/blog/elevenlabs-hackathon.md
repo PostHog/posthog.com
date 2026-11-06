@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog_elevenlabs_hackathon_fd48b58db2.png
 featuredImageType: full
+ogImage: generated
 category: General
 ---
 

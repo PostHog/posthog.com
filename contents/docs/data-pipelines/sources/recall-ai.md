@@ -9,9 +9,9 @@ availability:
 sourceId: RecallAI
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Recall.ai connector syncs bots, recordings, transcripts, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -47,6 +47,7 @@ Some Recall.ai tables support **incremental** sync. Each incremental sync uses t
 | `calendars`               | Full refresh                   | –                 |
 | `desktop_sdk_uploads`     | Full refresh                   | –                 |
 | `meeting_direct_connects` | Full refresh                   | –                 |
+| `usage`                   | Incremental sync only          | `date`            |
 
 A full refresh sync replaces the contents of the table.
 
