@@ -9,7 +9,7 @@ import { IconPlug, IconPulse, IconPuzzle, IconRewindPlay, IconTarget, IconThough
  */
 export const features = {
     tool_calls: {
-        title: 'Every tool call',
+        title: 'MCP Dashboard',
         headline: 'Every tool call',
         description:
             'Each tool call becomes an event with response, duration, and errors. See exactly how many tool calls you run and which ones fail.',
