@@ -99,7 +99,6 @@ export const mcpAnalytics = {
         layout: 'stacked',
     },
     useCases: {
-        intro: 'For teams whose MCP is becoming an important part of their product.',
         rows: [
             [
                 'Engineers building MCP servers',
