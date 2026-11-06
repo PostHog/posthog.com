@@ -8447,6 +8447,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Import from Postmark',
+                    url: '/docs/workflows/import-from-postmark',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
                     name: 'Resources',
                 },
                 {
