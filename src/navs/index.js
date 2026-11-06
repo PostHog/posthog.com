@@ -2882,8 +2882,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
@@ -3459,6 +3459,10 @@ export const docsMenu = {
                         {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
+                        },
+                        {
+                            name: 'API scopes',
+                            url: '/docs/api/scopes',
                         },
                         {
                             name: 'Popular',
