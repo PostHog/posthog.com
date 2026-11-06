@@ -423,7 +423,7 @@ The `beforeSend` callbacks only apply to events captured via Dart APIs:
 - Crash events
 - `$feature_flag_called` events
 
-Since version 6, the callbacks get the final event on every platform, with the system properties (like `$device_type` and `$session_id`) and registered super properties the SDK adds, and their changes are final. On iOS, macOS and Android, `PostHogEvent` also has the event's `uuid`, `distinctId` and `timestamp`.
+Since version 6, on every platform except web, the callbacks get the final event, with the system properties (like `$device_type` and `$session_id`) and registered super properties the SDK adds, and their changes are final. `PostHogEvent` also has the event's `uuid`, `distinctId` and `timestamp`. On web, the callbacks see only the properties you passed, and `posthog-js` adds the rest later.
 
 ### Filtering native events
 
@@ -552,6 +552,10 @@ If you implement or mock `PosthogFlutterPlatformInterface`, `PosthogFlutterIO` o
 - Rename `enable()` and `disable()` to `optIn()` and `optOut()`.
 - Remove `getFeatureFlagPayload()`.
 - Change the `bool sendEvent = true` parameter of `getFeatureFlagResult()` to `bool? sendFeatureFlagEvent`.
+- Add the `options` map to `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group` and `captureException`.
+- Add `defaultValue` to `isFeatureEnabled()`.
+- Return a `Future<PostHogFeatureFlagsLoaded>` from `reloadFeatureFlags()`.
+- Override the new `captureAi()` and `setAppLanguage(String? language)` if your class needs them. In the base class, `captureAi()` throws `UnimplementedError` and `setAppLanguage()` does nothing.
 
 Calls to `Posthog()` aren't affected by these.
 
@@ -593,7 +597,7 @@ await Posthog().setup(config);
 - A change made after the callback returns, such as one from a `Future` the callback started, isn't sent.
 - A callback that captures the event it's handling never finishes.
 
-A `reset()`, `identify()` or `optOut()` made straight after an un-awaited `capture()`, `screen()` or `captureException()` no longer applies to that event first.
+A `reset()`, `identify()` or `optOut()` made straight after an un-awaited `captureFeatureView()` or `captureFeatureInteraction()` no longer applies to that event first. On Windows and Linux, an un-awaited `capture()`, `screen()` or `captureException()` followed by one of these calls is no longer dropped.
 
 ### Events go to capture v1
 
@@ -644,6 +648,8 @@ In version 5, the SDK's own values won over the properties you registered or pas
 
 Review your `beforeSend` hooks for the new event shape. In version 5, the SDK marked person processing with the `$process_person_profile` property. In version 6, it's the `process_person_profile` option, and the property isn't set. A hook that returns a new `PostHogEvent` without copying `options` turns person processing on for anonymous users, overriding `personProfiles`. To keep it, pass `options: event.options`.
 
+On every platform except web, person processing is decided before `beforeSend` runs. In version 5, a callback that removed `$set` prevented a person profile. In version 6, the event is still person-processed, and so are later events. Return `null` to drop an event that must not create a profile. A callback that adds `$set` to an anonymous event must also set the `process_person_profile: true` option.
+
 ### Per-event options
 
 Capture v1 reads processing settings from an `options` map sent next to the event's properties. `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group` and `captureException` take a new `options` argument, and `beforeSend` can read and change `PostHogEvent.options`.
@@ -691,15 +697,16 @@ These changes are on top of the capture v1 changes above:
 - **Non-finite numbers:** `NaN` and infinite property values are dropped instead of being sent as `null`. In a list, they become `null` so the other elements keep their positions.
 - **Empty event names:** an event with an empty name is dropped on the device.
 - **Logs:** the count of events PostHog dropped only appears in debug mode. A one-time warning about a 404 prints without debug mode, because events stay queued and nothing else reports the missing route.
+- **Writes to disk:** an event is on disk only when the future returned by `capture`, `screen`, `captureException` or another event-sending method completes, not when the method returns. One you didn't await can be lost if the app crashes or calls `exit()` right after. Await the call, or `Posthog().close()`, before `exit()`.
 
 ### Behavior changes on iOS and macOS
 
 These changes come from `posthog-ios` 4.0 and need no code changes, but they can affect your data:
 
 - **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. PostHog rejects malformed payloads when you save a flag, so this rarely comes up.
+- **Empty variants:** `isFeatureEnabled()` without `defaultValue` returns `false` for a flag whose variant is an empty string. With `defaultValue`, and in `getFeatureFlagResult()`, the flag is still enabled.
 - **Bootstrapped payloads:** string values in `PostHogBootstrapConfig.featureFlagPayloads`, such as `"123"` or `"true"`, now stay strings instead of being decoded to numbers or booleans. This matches Android.
 - **Lifecycle events:** `Application Installed`, `Application Updated` and `Application Opened` no longer include the legacy `version` and `build` properties. Update any insights, cohorts or filters that use them to `$app_version` and `$app_build`. Android still sends `version` and `build` for now.
-- **`$locale` and `$app_language`:** `$locale` is now the device's preferred language with its region, such as `en-US` instead of `en`. If a user picks a language for your app in iOS Settings, `$locale` follows it. The new `$app_language` property is the language your app shows, using your app's localization name, such as `de`, `pt-BR` or `zh-Hans`. Update cohorts, insights and actions that match `$locale`: a filter on `$locale = de` stops matching `de-CH`. Use `$app_language` for the language your app shows, or a regex on `$locale` such as `^de(-|$)` for the device language. Events already stored keep the old `$locale` and have no `$app_language`.
 - **Network reachability:** a path that needs user action, such as a VPN waiting for a password, counts as reachable, and queues pause while cellular data is off for the app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
 - **Events queued by very old versions:** events still on disk from a `posthog-ios` 2.x SDK are deleted instead of sent. Distinct ID, anonymous ID, groups and cached feature flags carry over.
 
@@ -708,3 +715,11 @@ These changes come from `posthog-ios` 4.0 and need no code changes, but they can
 This change comes from `posthog-android` 4.0 and needs no code changes:
 
 - **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. A JSON `null` payload also reads as `null` instead of the string `"null"`.
+
+### `$locale` and `$app_language`
+
+`$locale` is now the device's language with its region, such as `de-CH` instead of `de`, on iOS, macOS, Windows and Linux. If a user picks a language for your app in iOS or macOS Settings, `$locale` follows it. On Android, `$locale` no longer follows a per-app language or `Locale.setDefault()`.
+
+Update cohorts, insights and actions that match `$locale`: a filter on `$locale = de` stops matching `de-CH`. Use a regex such as `^de(-|$)` to match a language. Events already stored keep the old `$locale`.
+
+The new `$app_language` property is the language your app shows. `PosthogObserver` reports the locale your `MaterialApp` resolved every time a route changes. An app that doesn't declare `supportedLocales` reports `en-US`, so use a regex such as `^en(-|$)` to match English. To send another value, call `Posthog().setAppLanguage('de')`.
