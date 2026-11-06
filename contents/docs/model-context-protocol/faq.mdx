@@ -43,7 +43,7 @@ No, OAuth is the recommended path and works out of the box with the wizard. If y
 
 ### Can I use more than one PostHog account, organization, or project at the same time?
 
-Yes, but add one MCP connection for each. A single connection signs in as one account and has one active organization and project. See [working with multiple accounts, organizations, or projects](#working-with-multiple-accounts-organizations-or-projects).
+Yes. A single connection signs in as one account, so add a separate connection for each account. Within one connection, each agent session keeps its own active organization and project, and switching in one session doesn't move another. This works as long as your client keeps its session or [conversation ID](#sessions-and-conversation-ids). See [working with multiple accounts, organizations, or projects](#working-with-multiple-accounts-organizations-or-projects).
 
 ### Can my organization manage MCP access centrally through our IdP?
 
@@ -55,7 +55,7 @@ The MCP server acts as a proxy to your PostHog instance and is automatically rou
 
 ### Is it safe to let an agent write to my project?
 
-Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review MCP tool calls before executing them. You can also restrict the session to [read-only MCP tools](#restricting-to-read-only-mcp-tools), limit it to specific MCP tools or feature categories using [MCP tool filtering](#filtering-available-mcp-tools), and pin the agent to a specific organization or project to limit blast radius.
+Be mindful of prompt injection – LLMs can be tricked into following untrusted commands, so always review MCP tool calls before executing them. You can also restrict the session to [read-only MCP tools](#restricting-to-read-only-mcp-tools), limit it to specific MCP tools or feature categories using [MCP tool filtering](#filtering-available-mcp-tools), and [restrict the login to specific projects](#limiting-an-agent-to-specific-projects) to limit blast radius.
 
 ## Advanced configuration
 
@@ -83,12 +83,12 @@ Example for Cursor (add to `.cursor/mcp.json`):
 
 ### Pinning to a specific organization or project
 
-If you're building a programmatic integration or want to restrict the MCP session to a specific organization or project, you can pin the context using headers or query parameters.
+If you're building a programmatic integration or want each MCP session to start in a specific organization or project, you can pin the context using headers or query parameters. Pinning works with both OAuth and personal API keys.
 
-When you pin the context, the `switch-organization` and `switch-project` MCP tools are automatically excluded from the available MCP tool list:
+A pin sets the session's starting context. It isn't an access limit: the agent can still switch to or read any project its login can access. To keep an agent out of other projects, [limit the login to specific projects](#limiting-an-agent-to-specific-projects).
 
-- When `projectId` is provided: both `switch-organization` and `switch-project` are excluded
-- When only `organizationId` is provided: only `switch-organization` is excluded
+- When only `projectId` is provided: the session starts in that project, and both `switch-organization` and `switch-project` stay available (a project-scoped API key never has `switch-organization`)
+- When `organizationId` is provided: `switch-organization` is excluded, and `switch-project` stays available
 
 **Headers:**
 
@@ -117,9 +117,32 @@ Example for Cursor (add to `.cursor/mcp.json`):
 }
 ```
 
+With OAuth, leave out the `Authorization` header. You can pin with either a header or a query parameter, for example:
+
+```json
+{
+  "mcpServers": {
+    "posthog": {
+      "url": "https://mcp.posthog.com/mcp?project_id=your_project_id"
+    }
+  }
+}
+```
+
+### Limiting an agent to specific projects
+
+To keep an agent out of other projects, limit what its login can reach:
+
+- **OAuth:** On the authorization screen, under **Organization & project access**, choose **Projects** and select the projects the agent should reach. Requests for other projects are refused with a `403`.
+- **Personal API key:** Use a project-scoped key, as described in [using an API key instead of OAuth](#using-an-api-key-instead-of-oauth).
+
+If the login can reach more than one project, add a [pin](#pinning-to-a-specific-organization-or-project) so the agent starts in the right one.
+
 ### Working with multiple accounts, organizations, or projects
 
-One MCP connection signs in as one account and has one active organization and project. To work across more than one, add a separate MCP server entry for each and give it a distinct name. The name is what your agent sees, so make it say which context it points to:
+One MCP connection signs in as one account. Each agent session on it keeps its own active organization and project. A session starts from the connection's pin. Without a pin, it starts in the project you have open in PostHog. If the login can't reach that project, it starts in one the login can reach. Switching in one session doesn't move another.
+
+To work across accounts or regions, or to give each project its own named entry, add a separate MCP server entry for each and give it a distinct name. The name is what your agent sees, so make it say which context it points to:
 
 ```json
 {
@@ -156,9 +179,13 @@ With OAuth, authorize each entry with the correct account. If your client shares
 
 #### Different organizations or projects in the same account
 
-The `switch-organization` and `switch-project` MCP tools change the active context inside one connection. This is sufficient for occasional use, but the agent must keep track of where it is, and a wrong assumption can send a write to the wrong project.
+The `switch-organization` and `switch-project` MCP tools change the active context for the current session only. This is sufficient for occasional use, but the agent must keep track of where it is, and a wrong assumption can send a write to the wrong project.
 
-If you work across organizations or projects regularly, [pin each connection](#pinning-to-a-specific-organization-or-project) to one of them instead. Pinning also removes the related switch MCP tools, so the agent cannot move the context.
+If you work across organizations or projects regularly, [pin each connection](#pinning-to-a-specific-organization-or-project) to one of them instead, so each agent starts in the right place, and [limit the login](#limiting-an-agent-to-specific-projects) if it shouldn't reach the others.
+
+#### Sessions and conversation IDs
+
+If your client doesn't keep an MCP session between requests, the server tracks the active context with a `conversation_id` that it returns on the first tool call. Your agent should send it back on later calls. A call without one starts a new conversation. That conversation uses the connection's pin or, if there's no pin, the project you have open in PostHog at that moment. The server refuses a switch without one and returns a new `conversation_id` to retry with. If your client can't keep the ID, pin the project or organization in the connection URL.
 
 ### Choosing a tool mode
 
