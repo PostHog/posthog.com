@@ -77,7 +77,7 @@ productData.<surface>Menu        →   sections rendered in the article column
 
 ### `props` (optional)
 
-- Object passed straight through to the section component as extra props (alongside the standard `SectionComponentProps`). Used to feed slot-specific data into reusable templates – e.g. handing the `applications` and `top-features` carousel templates their slide arrays.
+- Object passed straight through to the section component as extra props (alongside the standard `SectionComponentProps`). Used to feed slot-specific data into reusable templates – e.g. handing the `applications` and `key-features` carousel templates their slide arrays.
 
 ---
 
@@ -101,7 +101,7 @@ Cross-product JSX primitives shared between slide content and templates (e.g. `L
 
 ```tsx
 // src/hooks/productData/session_replay.tsx
-import { applications, topFeatures } from './session_replay/slides'
+import { applications, keyFeatures } from './session_replay/slides'
 import { features } from './session_replay/features'
 
 export const sessionReplay = {
@@ -119,11 +119,11 @@ export const sessionReplay = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         { slug: 'getting-started', name: 'Get started', group: 'divided' },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true },
@@ -231,6 +231,15 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 | `plans`                | (none yet)                              | Stub – plans summary placeholder for the Pricing surface.      |
 
 If a template finds nothing to render, it returns `null` – the section disappears but the menu item stays.
+
+The `plans` template also accepts optional props through a menu item's `props`, for a product that shows Plans once per billing meter (see `src/hooks/productData/data_pipelines.tsx`):
+
+- `meterName` – prefixes the TL;DR title, as in "Sources TL;DR:".
+- `hidePricingDetails` – hides the "Things you should know about our pricing" column, so a second Plans block doesn't repeat it.
+- `intro` – content above the TL;DR in the left column, so the pricing notes column starts level with it.
+- `calculatorId` – the section that the "or less!" link scrolls to. It defaults to `calculator`.
+
+A menu item's `props.productData` replaces the page's product data for that one section, which points it at a different billing product.
 
 ### Adding a new template
 

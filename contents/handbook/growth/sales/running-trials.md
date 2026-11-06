@@ -55,11 +55,11 @@ A trial gives unlimited usage on most products. Four AI products are different: 
 
 Many prospects in a sales-led trial do not have a subscription. For these prospects, the cap is 2x the free tier. This is low for a real evaluation. For example, the PostHog AI cap is 1,000 credits ($10). When the prospect gets to the cap, the product stops.
 
-If AI products are part of the evaluation, add the organization to the [`billing-trial-expanded-free-allocation`](https://us.posthog.com/project/2/feature_flags/902594) feature flag. Do this when you create the trial, before the kickoff call. The flag changes the cap to 10x the free tier. For example, the PostHog AI cap changes to 5,000 credits.
+If AI products are part of the evaluation, add the organization to the <PrivateLink url="https://us.posthog.com/project/2/feature_flags/902594"><code>billing-trial-expanded-free-allocation</code></PrivateLink> feature flag. Do this when you create the trial, before the kickoff call. The flag changes the cap to 10x the free tier. For example, the PostHog AI cap changes to 5,000 credits.
 
 To add an organization:
 
-1. Open the [flag](https://us.posthog.com/project/2/feature_flags/902594) and click **Edit**.
+1. Open the <PrivateLink url="https://us.posthog.com/project/2/feature_flags/902594">flag</PrivateLink> and click **Edit**.
 2. Add the organization to the release conditions. The organization name must match exactly.
 3. Click **Save**.
 

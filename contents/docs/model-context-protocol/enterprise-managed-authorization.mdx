@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 The PostHog MCP server supports the [Model Context Protocol Enterprise-Managed Authorization extension](https://modelcontextprotocol.io/extensions/auth/enterprise-managed-authorization). This lets your organization's identity provider (IdP) — like Okta, Microsoft Entra ID, or any OIDC-compliant SSO — control who can connect to the PostHog MCP server, without each employee individually OAuthing to PostHog or managing a [personal API key](/docs/model-context-protocol/faq#using-an-api-key-instead-of-oauth).
 
@@ -69,9 +69,7 @@ Both advertise the ID-JAG grant profile:
 
 ```json
 {
-  "authorization_grant_profiles_supported": [
-    "urn:ietf:params:oauth:grant-profile:id-jag"
-  ],
+  "authorization_grant_profiles_supported": ["urn:ietf:params:oauth:grant-profile:id-jag"],
   "grant_types_supported": [
     "authorization_code",
     "refresh_token",
@@ -80,7 +78,7 @@ Both advertise the ID-JAG grant profile:
 }
 ```
 
-The client derives the ID-JAG `aud` claim from the authorization server issuer (`https://oauth.posthog.com`) and the `resource` claim from the MCP server identifier (`https://mcp.posthog.com/mcp`).
+The client derives the ID-JAG `aud` claim from the authorization server issuer (`https://oauth.posthog.com`). For the `resource`, the client can include it as a claim in the ID-JAG, or pass it as a parameter in the token request. If neither is provided, PostHog defaults to the instance URL. The MCP server resource is `https://mcp.posthog.com/mcp`.
 
 ## Requirements
 
@@ -101,11 +99,11 @@ ID-JAG only accepts tokens for users who are **active members of the organizatio
 
 On the verified domain, open the **Configure XAA (ID-JAG)** modal and fill in:
 
-| Field | Required | Description |
-| --- | --- | --- |
-| **IdP issuer URL** | Yes | Your IdP's issuer URL. Must exactly match the `iss` claim on the ID-JAG tokens it issues (e.g. `https://idp.example.com`). Setting this enables ID-JAG for the domain. |
-| **JWKS URL** | No | Override the key set location. Defaults to OIDC discovery at `{issuer}/.well-known/openid-configuration`. |
-| **Allowed client IDs** | No | Restrict which OAuth `client_id` values are accepted. Leave empty to allow any client. |
+| Field                  | Required | Description                                                                                                                                                            |
+| ---------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **IdP issuer URL**     | Yes      | Your IdP's issuer URL. Must exactly match the `iss` claim on the ID-JAG tokens it issues (e.g. `https://idp.example.com`). Setting this enables ID-JAG for the domain. |
+| **JWKS URL**           | No       | Override the key set location. Defaults to OIDC discovery at `{issuer}/.well-known/openid-configuration`.                                                              |
+| **Allowed client IDs** | No       | Restrict which OAuth `client_id` values are accepted. Leave empty to allow any client.                                                                                 |
 
 PostHog uses the issuer URL to fetch your IdP's public keys and verify every ID-JAG signature. Internal, loopback, and metadata-host URLs are rejected.
 
@@ -157,14 +155,14 @@ Because authorization lives in your IdP, **revoking a user's access there takes 
 
 The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.rfc-editor.org/rfc/rfc6749#section-5.2)). Common ones:
 
-| Error | What it means |
-| --- | --- |
-| `access_denied` | The organization doesn't have the XAA authentication feature enabled. |
-| `invalid_grant` (`ID-JAG could not be verified`) | No verified domain matches the token's email/issuer, the issuer doesn't match the configured IdP, the email isn't verified, or the user isn't an active member of the organization. The message is intentionally generic — check PostHog logs and your IdP config. |
-| `invalid_grant` (`ID-JAG has expired` / `not yet valid`) | Clock skew between your IdP and PostHog (tolerance is 30 seconds by default), or an expired assertion. |
-| `invalid_target` | The token's `resource` claim doesn't match the MCP server. Confirm the client derived the resource from PostHog's discovery metadata. |
-| `invalid_client` | The token's `client_id` isn't in the domain's allowed client IDs list. |
-| `insufficient_scope` (from the MCP server) | The granted scopes are missing `user:read`, `organization:read`, or `project:read`. Add them in your IdP. |
+| Error                                                    | What it means                                                                                                                                                                                                                                                      |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `access_denied`                                          | The organization doesn't have the XAA authentication feature enabled.                                                                                                                                                                                              |
+| `invalid_grant` (`ID-JAG could not be verified`)         | No verified domain matches the token's email/issuer, the issuer doesn't match the configured IdP, the email isn't verified, or the user isn't an active member of the organization. The message is intentionally generic — check PostHog logs and your IdP config. |
+| `invalid_grant` (`ID-JAG has expired` / `not yet valid`) | Clock skew between your IdP and PostHog (tolerance is 30 seconds by default), or an expired assertion.                                                                                                                                                             |
+| `invalid_target`                                         | The resolved `resource` doesn't match the MCP server, or the ID-JAG's `resource` claim conflicts with the token request's `resource` parameter. Confirm the client derived the resource from PostHog's discovery metadata.                                         |
+| `invalid_client`                                         | The token's `client_id` isn't in the domain's allowed client IDs list.                                                                                                                                                                                             |
+| `insufficient_scope` (from the MCP server)               | The granted scopes are missing `user:read`, `organization:read`, or `project:read`. Add them in your IdP.                                                                                                                                                          |
 
 ## Further reading
 

@@ -66,6 +66,10 @@ When you add columns to a schema using incremental, append, or CDC sync, PostHog
 
 </CalloutBox>
 
+### Masking sensitive columns
+
+You can mask columns to replace their values with a deterministic one-way hash during sync instead of syncing them as plaintext. See [Masking sensitive columns](/docs/data-pipelines/sources#masking-sensitive-columns) for details.
+
 ## Filtering rows
 
 You can filter which rows sync from each table by adding row filter predicates. Each filter is a `{column, operator, value}` condition that is ANDed onto the source query's `WHERE` clause, so only matching rows sync. This reduces sync time and storage costs by scoping large tables down to the data you need.
@@ -141,7 +145,6 @@ PostHog stops syncing on these errors, because retrying fails the same way until
 
 After you fix the certificate or the source settings, re-enable the sync.
 
-
 <InboundIpAddresses />
 
 > **Note:** PostHog egresses over IPv4 and does not support IPv6-only database hosts. If your database host only resolves to an IPv6 address, use a connection pooler or enable your provider's IPv4 add-on. See the [troubleshooting section](#network-is-unreachable-or-no-route-to-host) for details.
@@ -184,12 +187,6 @@ There are two ways to start a live query:
 ## Sync methods
 
 Postgres tables support full table, incremental, append-only, xmin, and CDC sync methods.
-
-<CalloutBox icon="IconFlask" title="CDC sync is in alpha" type="action">
-
-CDC sync is currently in **alpha**. We'd love to [hear your feedback](https://app.posthog.com/home#panel=support%3Afeedback%3A%3Alow%3Atrue).
-
-</CalloutBox>
 
 Use CDC when you need PostHog to stay close to your source database and you care about deletes. It is especially useful when:
 

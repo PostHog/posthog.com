@@ -10,6 +10,7 @@ author:
 featuredImage: >-
     https://res.cloudinary.com/dmukukwp6/image/upload/Template_cover_15_8cf985674a.jpg
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
     - Marketing
@@ -25,7 +26,7 @@ Well, the relationship between product managers and product marketers is one of 
 
 ## Initiate the first contact
 
-At the beginning of this quarter, I started to support the [Error Tracking team](/teams/error-tracking). None of the team members, including the product manager, [Cory](/profiles/34160), had ever worked with a product marketer before.
+At the beginning of this quarter, I started to support the [Error Tracking team](/teams/error-tracking). None of the team members, including the product manager, [Cory](/community/profiles/34160), had ever worked with a product marketer before.
 
 I decided I had to make myself visible and prove I could be valuable. So, I made first contact by scheduling a call with Cory, rather than waiting for them to come to me. 
 

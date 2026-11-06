@@ -35,7 +35,7 @@ While similar in some respects to the EU's General Data Protection Regulation (G
 
 There are two ways to be HIPAA-compliant while using analytics tools:
 
-1. [Self-host your analytics](/best-open-source-analytics-tools), so data remains totally within your control.
+1. [Self-host your analytics](/compare/best-open-source-analytics-tools), so data remains totally within your control.
 2. Sign a Business Associate Agreement (BAA) with a third-party analytics tool.
 
 ## What is a Business Associate Agreement (BAA)?
@@ -95,7 +95,7 @@ A BAA is available on Mixpanel's Enterprise plan.
 
 ![Countly - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-**Countly** is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to [mobile app analytics](/blog/best-mobile-app-analytics-tools).
+**Countly** is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to [mobile app analytics](/compare/best-mobile-app-analytics-tools).
 
 #### Countly and HIPAA compliance
 

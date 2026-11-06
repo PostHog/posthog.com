@@ -23,7 +23,6 @@ Replay Vision's MCP tools are all prefixed `vision-`. They fall into a few group
 - `vision-scanners-counts` – count the project's scanners, in total and by type, and how many are enabled.
 - `vision-scanners-get` – read one scanner's config.
 - `vision-scanners-draft` – draft a full scanner config from a goal like "find where users get stuck during onboarding". Nothing is saved. Give it a monthly credit budget and it also picks sampling, model, and a credit limit to fit. With a budget, it can also draft an [experiment scanner](/docs/replay-vision/scanner-types#experiment): pass an `experiment_id`, or name a running experiment in the goal. Without a budget, it ignores `experiment_id`.
-- `vision-scanners-suggest-tags` – suggest tags for a classifier, grounded in your product data or the scanner's own observations. Nothing is saved.
 - `vision-scanners-create` – create a new scanner.
 - `vision-scanners-update` – edit an existing one.
 - `vision-scanners-duplicate` – copy a scanner into a new, disabled scanner, so you can try a variant without touching the original. Observations and alerts aren't copied.
@@ -75,7 +74,12 @@ List tools return a compact row per observation: its ID, session, status, and a 
 Across scanners:
 
 - `vision-observations-search` – search observations by meaning, like "users confused by the pricing page". It matches what the scanner wrote, so it finds sessions described in different words. Scope it to one scanner or search them all.
-- `vision-scanners-watch-feed` – rank recent observations by how worth watching their recordings are, with the reason each made the list.
+- `vision-scanners-highlight-feed` – the [Highlights](/docs/replay-vision/what-to-watch) feed: sessions where something went wrong, ranked across scanners, with the reason each made the list. Narrow it to some scanners, a scanner type, tags, or categories (`failure`, `struggle`, `revenue`).
+
+Recurring issues, rather than single sessions:
+
+- `vision-groups-list` and `vision-groups-get` – groups of one scanner's sessions that tell the same story, like one bug many people hit, with people and observation counts, trend, status, and examples.
+- `vision-themes-list` and `vision-themes-get` – broader, named themes of one scanner's issue sessions, with the same counts. Read the sessions behind a group or theme with `vision-scanners-observations-list` filtered by `group` or `theme`.
 
 Aggregate stats, rather than the rows themselves:
 

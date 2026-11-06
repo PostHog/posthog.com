@@ -5,6 +5,7 @@ author:
   - fraser-hopper
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/Blog_Job_Posts_70bb45215b.png
+ogImage: generated
 category: Startups
 tags:
   - Guides

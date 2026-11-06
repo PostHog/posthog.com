@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Alpha:** This source is in alpha. The connector works, but hasn't been tested against a live CleverTap account. Expect rough edges.
-
 The CleverTap connector syncs one configured event and the profiles of users who performed that event into the PostHog data warehouse. This is useful for retention analysis, campaign attribution, and combining CleverTap engagement data with your product analytics.
 
 ## Prerequisites

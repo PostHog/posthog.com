@@ -77,6 +77,13 @@ export const freeTierProducts: FreeTierProduct[] = [
         iconColor: 'text-purple',
     },
     {
+        name: 'Marketing analytics',
+        badge: 'Beta',
+        description: 'Billed with sources',
+        icon: Icons.IconMegaphone,
+        iconColor: 'text-orange',
+    },
+    {
         name: 'Destinations',
         allocation: '10K events + 1M rows',
         note: (

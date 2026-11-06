@@ -1,0 +1,416 @@
+---
+title: Send transactional emails with the API
+sidebar: Docs
+showTitle: true
+---
+
+Use the API to send transactional emails from any language. The SDKs for [Node.js](/docs/workflows/transactional-emails/node), [Python](/docs/workflows/transactional-emails/python), [Go](/docs/workflows/transactional-emails/go), [.NET](/docs/workflows/transactional-emails/dotnet), [Rust](/docs/workflows/transactional-emails/rust), [Ruby](/docs/workflows/transactional-emails/ruby), [Elixir](/docs/workflows/transactional-emails/elixir), and [PHP](/docs/workflows/transactional-emails/php) call this API, and retry with idempotency keys for you. If your language has an SDK, start there. The examples on this page show each SDK next to cURL.
+
+You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
+
+## Send an email
+
+```
+POST https://us.posthog.com/api/projects/@current/messaging/send/email/
+```
+
+- **Host** - Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
+- **Project** - `@current` is the project that the key belongs to. You can use your project ID instead.
+
+### Request
+
+Send these headers:
+
+| Header | Value |
+| --- | --- |
+| `Authorization` | `Bearer` followed by your project secret API key |
+| `Content-Type` | `application/json` |
+| `Idempotency-Key` | Optional. A unique key for this email. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key). |
+
+Send a JSON body with these fields:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `template_id` | Yes | The ID of the transactional template to send. |
+| `to` | Yes | The email address of the recipient. One address for each request. |
+| `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
+| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. Pass the distinct ID that you pass to `identify()`. See [link emails to your users](#link-emails-to-your-users). |
+
+In the template, use the same names that you send in `message_data`:
+
+```liquid
+Hi {{ variables.first_name }}, use this link to reset your password: {{ variables.reset_link }}
+```
+
+### Response
+
+A successful request returns `202 Accepted`:
+
+```json
+{
+  "message_id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
+  "replayed": false
+}
+```
+
+A `202` means that PostHog queued the email. It doesn't mean that the email was delivered. To see what happened to the email, [check its status](#check-an-emails-status) with its `message_id`, or open the template's **Sends** tab.
+
+`replayed` is `true` when an earlier request with the same `Idempotency-Key` already queued this email. In that case, PostHog sent no new email, and `message_id` is the ID of the first send.
+
+### Example
+
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: password-reset-8f14e45f" \
+  -d '{
+    "template_id": "<template_id>",
+    "to": "jane@example.com",
+    "distinct_id": "user_123",
+    "message_data": { "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }
+  }'
+```
+
+```js file=Node.js
+const { data, error } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateId: "<template_id>",
+    templateData: { first_name: "Jane", reset_link: "https://example.com/reset?token=abc123" },
+    distinctId: "user_123",
+    idempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```python file=Python
+result = posthog.emails.send(
+    to="jane@example.com",
+    template_id="<template_id>",
+    template_data={"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    distinct_id="user_123",
+    idempotency_key="password-reset-8f14e45f",
+)
+```
+
+```go file=Go
+result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+    To:             "jane@example.com",
+    TemplateID:     "<template_id>",
+    TemplateData:   map[string]interface{}{"first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123"},
+    DistinctID:     "user_123",
+    IdempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```csharp file=.NET
+var result = await posthog.Emails.SendAsync(new SendTemplateEmailOptions
+{
+    To = "jane@example.com",
+    TemplateId = Guid.Parse("<template_id>"),
+    TemplateData = new Dictionary<string, object>
+    {
+        ["first_name"] = "Jane",
+        ["reset_link"] = "https://example.com/reset?token=abc123",
+    },
+    DistinctId = "user_123",
+    IdempotencyKey = "password-reset-8f14e45f",
+});
+```
+
+```rust file=Rust
+let result = posthog
+    .emails()
+    .send(
+        TemplateEmail::new("jane@example.com", "<template_id>")
+            .template_data(json!({ "first_name": "Jane", "reset_link": "https://example.com/reset?token=abc123" }))
+            .distinct_id("user_123")
+            .idempotency_key("password-reset-8f14e45f"),
+    )
+    .await?;
+```
+
+```ruby file=Ruby
+result = posthog.emails.send(
+  to: 'jane@example.com',
+  template_id: '<template_id>',
+  template_data: { first_name: 'Jane', reset_link: 'https://example.com/reset?token=abc123' },
+  distinct_id: 'user_123',
+  idempotency_key: 'password-reset-8f14e45f'
+)
+```
+
+```elixir file=Elixir
+{:ok, result} =
+  PostHog.Emails.send(
+    to: "jane@example.com",
+    template_id: "<template_id>",
+    template_data: %{first_name: "Jane", reset_link: "https://example.com/reset?token=abc123"},
+    distinct_id: "user_123",
+    idempotency_key: "password-reset-8f14e45f"
+  )
+```
+
+```php file=PHP
+$result = PostHog::emails()->send([
+    'to' => 'jane@example.com',
+    'template_id' => '<template_id>',
+    'template_data' => ['first_name' => 'Jane', 'reset_link' => 'https://example.com/reset?token=abc123'],
+    'distinct_id' => 'user_123',
+    'idempotency_key' => 'password-reset-8f14e45f',
+]);
+```
+
+</MultiLanguage>
+
+Each SDK page shows how to set up the client and handle errors.
+
+The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
+
+When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors) and the [checks for content from your code](#checks-for-content-from-your-code).
+
+### `delivery_unavailable`
+
+A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm that it queued the email. It doesn't mean that the email failed, because PostHog can still send it. Retry with the same `Idempotency-Key`. If you resend the email through another email provider, the recipient can get it twice. The SDKs retry a `503` for you.
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
+
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+
+## Send content from your code
+
+You can also send the subject and the body from your code, without a template in PostHog. Use this when your code renders the email. For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and send the result as `html`. Name the email with `template_key`, and send the content in the body. Use the same `POST` route and headers as for a [template send](#send-an-email).
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `template_key` | Yes | A name for this email, such as `password-reset`. It has at most 400 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time you send this email. |
+| `to` | Yes | The email address of the recipient. |
+| `distinct_id` | No | The distinct ID of the recipient's person, as for a template send. See [link emails to your users](#link-emails-to-your-users). |
+| `subject` | Yes | The subject of the email. |
+| `html` | One of `html` and `text` | The HTML body. PostHog sends it as you wrote it and renders no placeholders. |
+| `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
+| `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
+| `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
+| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is `true`. Send `false` to turn capture off for this email. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
+
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
+
+If the `to` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
+
+The response is the same `202` as for a template send. A retry with the same `Idempotency-Key` is the [same request](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) when every field in the table above has the same value as in the first request. PostHog also compares the sender that it chose: if you leave out `from` and the project's default sender changes before the retry, PostHog returns `idempotency_key_reused`.
+
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: password-reset-8f14e45f" \
+  -d '{
+    "template_key": "password-reset",
+    "to": "jane@example.com",
+    "distinct_id": "user_123",
+    "subject": "Reset your password",
+    "html": "<p>Hi Jane,</p><p><a href=\"https://example.com/reset?token=abc123\">Reset your password</a>.</p>",
+    "from": "Hedgebox <security@example.com>"
+  }'
+```
+
+```js file=Node.js
+const { data, error } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateKey: "password-reset",
+    subject: "Reset your password",
+    html,
+    from: "Hedgebox <security@example.com>",
+    distinctId: "user_123",
+    idempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```python file=Python
+result = posthog.emails.send(
+    to="jane@example.com",
+    template_key="password-reset",
+    subject="Reset your password",
+    html=html,
+    from_="Hedgebox <security@example.com>",
+    distinct_id="user_123",
+    idempotency_key="password-reset-8f14e45f",
+)
+```
+
+```go file=Go
+result, err := client.Emails().Send(ctx, posthog.CodeEmail{
+    To:             "jane@example.com",
+    TemplateKey:    "password-reset",
+    Subject:        "Reset your password",
+    HTML:           html,
+    From:           "Hedgebox <security@example.com>",
+    DistinctID:     "user_123",
+    IdempotencyKey: "password-reset-8f14e45f",
+})
+```
+
+```csharp file=.NET
+var result = await posthog.Emails.SendAsync(new SendCodeEmailOptions
+{
+    To = "jane@example.com",
+    TemplateKey = "password-reset",
+    Subject = "Reset your password",
+    Html = html,
+    From = "Hedgebox <security@example.com>",
+    DistinctId = "user_123",
+    IdempotencyKey = "password-reset-8f14e45f",
+});
+```
+
+```rust file=Rust
+let result = posthog
+    .emails()
+    .send(
+        CodeEmail::new("jane@example.com", "password-reset", "Reset your password")
+            .html(html)
+            .from("Hedgebox <security@example.com>")
+            .distinct_id("user_123")
+            .idempotency_key("password-reset-8f14e45f"),
+    )
+    .await?;
+```
+
+```ruby file=Ruby
+result = posthog.emails.send(
+  to: 'jane@example.com',
+  template_key: 'password-reset',
+  subject: 'Reset your password',
+  html: html,
+  from: 'Hedgebox <security@example.com>',
+  distinct_id: 'user_123',
+  idempotency_key: 'password-reset-8f14e45f'
+)
+```
+
+```elixir file=Elixir
+{:ok, result} =
+  PostHog.Emails.send(
+    to: "jane@example.com",
+    template_key: "password-reset",
+    subject: "Reset your password",
+    html: html,
+    from: "Hedgebox <security@example.com>",
+    distinct_id: "user_123",
+    idempotency_key: "password-reset-8f14e45f"
+  )
+```
+
+```php file=PHP
+$result = PostHog::emails()->send([
+    'to' => 'jane@example.com',
+    'template_key' => 'password-reset',
+    'subject' => 'Reset your password',
+    'html' => $html,
+    'from' => 'Hedgebox <security@example.com>',
+    'distinct_id' => 'user_123',
+    'idempotency_key' => 'password-reset-8f14e45f',
+]);
+```
+
+</MultiLanguage>
+
+### Copies and attachments
+
+Content from your code also takes these fields. A template send takes none of them, because the template uses its own settings.
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `cc` | No | A list of up to 10 addresses that get a copy, without a display name. |
+| `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
+| `attachments` | No | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
+
+- **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
+- **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
+- **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+
+### Checks for content from your code
+
+These checks apply to content from your code, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. PostHog sends nothing when a check fails.
+
+| Status | Code | Cause | What to do |
+| --- | --- | --- | --- |
+| `400` | A code for the field, such as `required` or `invalid` | A field is missing or breaks a rule above, or PostHog doesn't take the field. The `type` is `validation_error`, and `attr` names the field, such as `subject`. | Fix the field. If the field comes from a newer SDK, update PostHog or leave the field out. |
+| `400` | `sender_not_verified` | No verified sender of the project can send from the `from` address. Or the request has no `from`, and the project has no verified default sender. | Send from an address on a verified domain, or [set a default sender](/docs/workflows/configure-channels) and leave out `from`. |
+
+## Check an email's status
+
+To find out what happened to an email, read its status with the `message_id` from the send:
+
+```
+GET https://us.posthog.com/api/projects/@current/messaging/emails/:message_id/
+```
+
+Send the same `Authorization` header as for a send. The key needs the `transactional_email:read` or `transactional_email:write` scope. A key with a `hog_flow` scope still works. Only a project secret API key can read a status.
+
+A found email returns `200`:
+
+```json
+{
+  "id": "01963d8a-6f2c-7d4e-9b1a-3c5e8f2a7b10",
+  "status": "delivered",
+  "created_at": "2026-10-28T16:27:44.364000Z",
+  "status_at": "2026-10-28T16:27:49.625000Z",
+  "reason": null
+}
+```
+
+See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means.
+
+A `404` with the code `not_found` right after a send means the status isn't there yet: a new send can take a few seconds to get its first status, so retry after a short wait. Later, a `404` means the email is older than 30 days or the ID is wrong. See [when a status isn't found](/docs/workflows/transactional-emails#when-a-status-isnt-found). It returns `401` when the request has no project secret API key, `403` when the key doesn't have a Workflow scope, and `429` when you read too often.
+
+Each project secret API key can read 600 statuses per minute and 20,000 per hour. All the keys of one project share the same limits in total. Reads have their own limits, so they don't use up the limits for sends.
+
+### Example
+
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
+curl "https://us.posthog.com/api/projects/@current/messaging/emails/<message_id>/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY"
+```
+
+```js file=Node.js
+const { data: status, error } = await posthog.emails.get("<message_id>")
+```
+
+```python file=Python
+status = posthog.emails.get("<message_id>")
+```
+
+```go file=Go
+status, err := client.Emails().Get(ctx, "<message_id>")
+```
+
+```csharp file=.NET
+var status = await posthog.Emails.GetAsync("<message_id>");
+```
+
+```rust file=Rust
+let status = posthog.emails().get("<message_id>").await?;
+```
+
+```ruby file=Ruby
+status = posthog.emails.get('<message_id>')
+```
+
+```elixir file=Elixir
+{:ok, status} = PostHog.Emails.get("<message_id>")
+```
+
+```php file=PHP
+$status = PostHog::emails()->get('<message_id>');
+```
+
+</MultiLanguage>

@@ -1,0 +1,203 @@
+---
+title: Transactional email examples
+sidebar: Docs
+showTitle: true
+---
+
+These examples cover the transactional emails that most products send. Each one says which settings to use, how to build its idempotency key, and whether to pass a distinct ID. Then it shows the send.
+
+The examples use Node.js and Python. Every [SDK page](/docs/workflows/transactional-emails#send-your-first-email) shows the same calls in its language. Each example assumes that you already [set up the client](/docs/workflows/transactional-emails/node#set-up-the-client) and [created the email](/docs/workflows/transactional-emails#create-a-transactional-email) with the variables that the example sends.
+
+## Sign-in code
+
+Send a one-time code when someone signs in without a password.
+
+| Setting | Value |
+| --- | --- |
+| Template variables | `code`, `expires_in_minutes` |
+| [Protect sensitive data](/docs/workflows/transactional-emails#protect-sensitive-data) | On, so PostHog keeps no copy of the code |
+| Distinct ID | The user's ID |
+| Idempotency key | `sign-in-code-{code_id}`, one key for each code that you issue |
+
+```liquid
+Your sign-in code is {{ variables.code }}. It expires in {{ variables.expires_in_minutes }} minutes.
+```
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+export async function sendSignInCode({ user, signInCode }) {
+    const { error } = await posthog.emails.send({
+        to: user.email,
+        templateId: "<template_id>",
+        templateData: { code: signInCode.code, expires_in_minutes: 10 },
+        distinctId: user.id,
+        idempotencyKey: `sign-in-code-${signInCode.id}`,
+    })
+    if (error) {
+        throw error
+    }
+}
+```
+
+```python file=Python
+def send_sign_in_code(user, sign_in_code) -> None:
+    posthog.emails.send(
+        to=user.email,
+        template_id="<template_id>",
+        template_data={"code": sign_in_code.code, "expires_in_minutes": 10},
+        distinct_id=str(user.id),
+        idempotency_key=f"sign-in-code-{sign_in_code.id}",
+    )
+```
+
+</MultiLanguage>
+
+When the person asks for a new code, issue a new code with a new ID. The new ID makes a new key, so PostHog sends a new email. A retry of the same code sends nothing new.
+
+## Email address check
+
+Send a link that confirms that a new user owns their email address.
+
+| Setting | Value |
+| --- | --- |
+| Template variables | `first_name`, `verify_link` |
+| Protect sensitive data | On, so the link's token never goes through a tracking redirect |
+| Distinct ID | The new user's ID. Call `identify()` with the same ID when the user signs up. |
+| Idempotency key | `verify-email-{verification_id}` |
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+export async function sendEmailCheck({ user, verification }) {
+    const { error } = await posthog.emails.send({
+        to: user.email,
+        templateId: "<template_id>",
+        templateData: {
+            first_name: user.firstName,
+            verify_link: `https://example.com/verify?token=${verification.token}`,
+        },
+        distinctId: user.id,
+        idempotencyKey: `verify-email-${verification.id}`,
+    })
+    if (error) {
+        throw error
+    }
+}
+```
+
+```python file=Python
+def send_email_check(user, verification) -> None:
+    posthog.emails.send(
+        to=user.email,
+        template_id="<template_id>",
+        template_data={
+            "first_name": user.first_name,
+            "verify_link": f"https://example.com/verify?token={verification.token}",
+        },
+        distinct_id=str(user.id),
+        idempotency_key=f"verify-email-{verification.id}",
+    )
+```
+
+</MultiLanguage>
+
+Send it from a background job after the user's row is saved, so a slow send never holds up the signup. Your SDK's page shows a job that retries only the errors that a later attempt can fix.
+
+## Team invite
+
+Send an invite to someone who doesn't have an account yet.
+
+| Setting | Value |
+| --- | --- |
+| Template variables | `inviter_name`, `team_name`, `accept_link` |
+| Protect sensitive data | On, because the link carries the invite token |
+| Distinct ID | Leave it out. The invitee isn't a user yet, so you have no distinct ID for them. |
+| Idempotency key | `invite-{invite_id}` |
+
+<MultiLanguage selector="tabs">
+
+```js file=Node.js
+export async function sendInvite({ invite, inviter, team }) {
+    const { error } = await posthog.emails.send({
+        to: invite.email,
+        templateId: "<template_id>",
+        templateData: {
+            inviter_name: inviter.name,
+            team_name: team.name,
+            accept_link: `https://example.com/invites/${invite.token}`,
+        },
+        idempotencyKey: `invite-${invite.id}`,
+    })
+    if (error) {
+        throw error
+    }
+}
+```
+
+```python file=Python
+def send_invite(invite, inviter, team) -> None:
+    posthog.emails.send(
+        to=invite.email,
+        template_id="<template_id>",
+        template_data={
+            "inviter_name": inviter.name,
+            "team_name": team.name,
+            "accept_link": f"https://example.com/invites/{invite.token}",
+        },
+        idempotency_key=f"invite-{invite.id}",
+    )
+```
+
+</MultiLanguage>
+
+Without a distinct ID, PostHog records the email on a person whose distinct ID is the email address. To resend an invite, issue a new invite with a new ID.
+
+## Receipt with a PDF
+
+Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional-emails#choose-where-the-emails-content-lives), so your code renders the email. The SDKs don't send copies and attachments yet, so this example uses the API.
+
+| Setting | Value |
+| --- | --- |
+| Template key | `receipt` |
+| Copies | `cc` to the billing contact, if the customer has one |
+| Attachment | The invoice PDF, 512 KB at most for all files together |
+| Distinct ID | The customer's user ID |
+| Idempotency key | `receipt-{order_id}` |
+
+<MultiLanguage selector="tabs">
+
+```bash file=cURL
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: receipt-ord_1042" \
+  -d '{
+    "template_key": "receipt",
+    "to": "jane@example.com",
+    "cc": ["billing@example.com"],
+    "subject": "Your receipt for order 1042",
+    "html": "<p>Thanks for your order. Your invoice is attached.</p>",
+    "distinct_id": "user_123",
+    "attachments": [
+      {"filename": "invoice-1042.pdf", "content": "'"$(base64 < invoice-1042.pdf | tr -d '\n')"'", "content_type": "application/pdf"}
+    ]
+  }'
+```
+
+</MultiLanguage>
+
+Send the file's content in Base64. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
+## Measure whether an email works
+
+Each send lands on the recipient's person, so you can measure what people do after an email with the rest of your product data. First, turn on [**Capture email engagement events**](/docs/workflows/engagement-events) in your Workflows settings.
+
+For example, to see how many people finish a password reset after they get the email, build a [funnel](/docs/product-analytics/funnels) with these steps:
+
+1. `$workflows_email_delivered`, filtered to `$email_subject` equals your reset email's subject
+2. Your own event for a finished reset, such as `password_reset_completed`
+
+Use `$workflows_email_delivered`, not `$workflows_email_link_clicked`, as the first step. An email with **Protect sensitive data** turned on doesn't track link clicks, so a click step counts nobody.
+
+For this funnel to work, pass the same distinct ID in the send and in the event that your app captures.

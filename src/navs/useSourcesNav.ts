@@ -9,7 +9,6 @@ export default function useSourcesNav(basePath = '/docs/data-pipelines/sources')
                 nodes {
                     slug
                     name
-                    beta
                     mdx {
                         fields {
                             slug
@@ -23,12 +22,6 @@ export default function useSourcesNav(basePath = '/docs/data-pipelines/sources')
     const managed = allPostHogSource.nodes.map((node: any) => ({
         url: getSourceDocsPath(node, basePath),
         name: node.name,
-        ...(node.beta && {
-            badge: {
-                title: 'Beta',
-                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
-        }),
     }))
 
     const selfManaged = SELF_HOSTED_SOURCES.map((s) => ({

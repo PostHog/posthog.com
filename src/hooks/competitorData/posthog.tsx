@@ -720,7 +720,7 @@ export const posthog = {
                 features: {
                     email: true,
                     sms: true,
-                    push: false,
+                    push: true,
                     webhooks: true,
                     whatsapp: false,
                 },
@@ -927,7 +927,7 @@ export const posthog = {
             ccpa_ready: true,
             cookieless_tracking: true,
             data_anonymization: true,
-            data_retention: '7 years',
+            data_retention: '2 years',
             dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,

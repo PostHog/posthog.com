@@ -16,7 +16,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './workflows/features'
-import { applications, topFeatures } from './workflows/slides'
+import { applications, keyFeatures } from './workflows/slides'
 import { getTool } from '../../data/tools'
 
 export const workflows = {
@@ -72,11 +72,11 @@ export const workflows = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -113,6 +113,7 @@ export const workflows = {
     ],
     overview: {
         title: 'Automate workflows with product data',
+        description: '"Create an onboarding email series for trial users"',
         // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
         eli5: (
             <>
