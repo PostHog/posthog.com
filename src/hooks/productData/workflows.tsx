@@ -28,6 +28,7 @@ export const workflows = {
     Icon: IconDecisionTree,
     type: 'workflows_emails',
     teamSlug: 'workflows',
+    docsSlug: 'workflows',
     forumTag: 'workflows',
     color: 'teal',
     colorSecondary: 'green-2',
