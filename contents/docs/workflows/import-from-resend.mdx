@@ -30,7 +30,7 @@ Resend keeps working as before while you move your sending over at your own pace
 These stay in Resend:
 
 - API keys, webhooks, send history, and stats. Rebuild what you need.
-- Contacts. They don't become people in PostHog.
+- Contacts and who is in each segment. They don't become people in PostHog.
 - Domains and their signing keys. PostHog signs mail with its own keys, so [each domain needs new DNS records](#sending-domains).
 
 ## Run the import
@@ -67,6 +67,7 @@ Importing again adds what's missing and never changes what's already in PostHog,
 | Topic | Keeps your edits. A category you deleted stays deleted. |
 | Template | Skips a template when its key is already taken, including by a deleted template or by one you didn't import. |
 | Automation | Skips an automation you imported before, even if you deleted the draft. |
+| Segment cohort | Uses the cohort from an earlier import, with your edits. A cohort you deleted stays deleted. |
 | Domain | Lists it again. The import writes no domains. |
 
 So fixes you make in Resend don't come across.
@@ -112,7 +113,7 @@ Anything else in braces stays as visible text, and a note names it, so you can r
 
 Open each template with notes and fix what they mention, then send yourself a test. The notes also cover these differences:
 
-- **Contact fields** - Resend fills `FIRST_NAME`, `LAST_NAME`, and `EMAIL` from the contact. PostHog doesn't, so your app has to pass them.
+- **Contact fields** - Resend fills `FIRST_NAME`, `LAST_NAME`, and `EMAIL` from the contact. A library template doesn't, so your app has to pass them when it sends. An imported automation reads them from person properties.
 - **Missing variables** - Resend refuses to send without a required variable. PostHog sends with a blank value.
 - **Unpublished templates** - PostHog imports the draft of an unpublished template, and the published version of a template with unpublished edits.
 - **Senders** - A note tells you if the template's sender is missing or isn't verified in PostHog.
@@ -128,12 +129,28 @@ If Resend already uses PostHog's default `feedback` subdomain on a domain, a not
 
 Each automation becomes a draft workflow. A draft never sends until you enable it, even if the automation is on in Resend.
 
-Review the notes on each draft before you enable it:
+Every step carries over where PostHog can do the same thing:
+
+| Resend step | In the draft |
+| --- | --- |
+| Trigger | The event trigger |
+| Send email | An email step. Template variables, and a step's own subject, sender, and reply-to, carry over. Contact fields such as `FIRST_NAME` read person properties |
+| Delay | A delay |
+| Condition | A conditional branch with the same logic. An "or" inside an "and" becomes one path per combination |
+| Wait for event | A wait, with its event filter |
+| Contact update | An update person property step. Setting `unsubscribed` to true adds an opt out of messages step |
+| Add to segment | An add to static cohort step |
+| Delete contact | The end of that path |
+
+Review the notes on each draft before you enable it. These parts work differently:
 
 - **Trigger events** - Your app sends the event to Resend. Send it to PostHog too, or the workflow never starts.
-- **Steps PostHog doesn't have** - Add to segment, update contact, and delete contact steps are left out, and the steps around them are joined up.
-- **Delays and waits** - A delay PostHog can't read becomes 1 day. A wait for an event lasts at most 30 days, and an event filter on a wait isn't kept.
-- **Conditions** - Some conditions need another look, and a note says which.
+- **Segments** - The import makes one static cohort per segment, named after it, and uses it again the next time. The cohort starts empty, because contacts don't come across. If you deleted the cohort, it stays deleted, and the step waits for you to choose one.
+- **Delete contact** - PostHog has no step that deletes a person. The path ends there and the person stays in PostHog, so delete them on the Persons page if you need to. Any steps after it are left out, and a note names them.
+- **Data from a wait** - PostHog can't read data from the event a wait received, so anything using `wait_events` needs a new source. A wait filter that compares with the event that started the automation is left out too.
+- **Resubscribing** - Setting `unsubscribed` to false, or from a variable, isn't kept. A note says so.
+- **Waits** - A wait with no time limit lasts at most 30 days.
+- **Unknown steps** - A step type PostHog doesn't know is left out, and the steps around it are joined up. A note names it.
 
 Keep these in mind as well:
 
