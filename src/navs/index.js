@@ -3075,6 +3075,10 @@ export const docsMenu = {
                                     name: '6.x.x (experimental)',
                                     url: '/docs/libraries/flutter/6.x.x',
                                 },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/flutter/migration',
+                                },
                             ],
                         },
                         {
