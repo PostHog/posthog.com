@@ -238,6 +238,42 @@ import FlushNotes from '../_snippets/flush-notes.mdx'
 
 <FlushNotes />
 
+## AI events
+
+To send [AI observability](/docs/ai-observability) events you build yourself, such as `$ai_generation`, `$ai_span`, or `$ai_embedding`, call `captureAi` instead of `capture`. It's available from version `4.0.0`. It takes the same arguments as `capture` and runs the same `beforeSend` hooks, then sends the event to PostHog's [AI endpoint](/docs/ai-observability/large-events), which accepts much larger events than `capture`.
+
+```kotlin
+import com.posthog.PostHog
+
+val uuid = PostHog.captureAi(
+    event = "\$ai_generation",
+    properties = mapOf(
+        "\$ai_trace_id" to traceId,
+        "\$ai_model" to "gpt-5",
+        "\$ai_provider" to "openai",
+        "\$ai_input_tokens" to 120,
+        "\$ai_output_tokens" to 45,
+    ),
+)
+```
+
+`captureAi` returns the event's `UUID` once the event is queued. It returns `null` when the event isn't queued: the SDK is opted out or disabled, the event name is empty, a `beforeSend` hook dropped the event, or the event is over `captureAiMaxEventBytes`.
+
+- **Separate queue.** AI events have their own on-disk queue, so large events don't push your other events out. It keeps up to `captureAiMaxQueueSize` events and at most 50 MiB. Past either limit, the oldest events are dropped. `flush()` and `close()` send both queues.
+- **Size limit.** The SDK drops an AI event that's over 8 MiB plus 64 KiB once serialized: PostHog's 8 MiB limit on an AI event's properties, plus room for the rest of the event. Everything you pass is sent as is. The SDK doesn't truncate or redact prompts, outputs, or media.
+- **`capture` doesn't reroute AI events.** `capture` never sends `$ai_` events to the AI endpoint, so use `captureAi` for them. PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`, and the SDK logs a debug message when you pass one.
+
+These `PostHogAndroidConfig` settings apply only to `captureAi`:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `captureAiCompression` | `PostHogCompression.GZIP` | How `captureAi` request bodies are compressed, separately from `compression`. |
+| `captureAiMaxQueueSize` | `100` | Maximum number of AI events kept on disk before the oldest are dropped. The 50 MiB limit applies too. |
+| `captureAiTimeout` | `60` | Seconds an AI request can go without network activity before it times out. Other requests keep OkHttp's 10-second defaults. |
+| `captureAiMaxEventBytes` | `8454144` (8 MiB + 64 KiB) | Maximum size of a serialized AI event. You can only lower it: a larger value uses the default. |
+
+A value of `0` or less for a numeric setting uses its default.
+
 ## Reset after logout
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
@@ -430,6 +466,10 @@ val config = PostHogAndroidConfig(
 | `maxBatchSize` | `50` | Maximum number of events sent in one batch request. |
 | `maxRetries` | `3` | Maximum retry attempts for push-subscription registration failures. It does not apply to event, session recording, or log ingestion. |
 | `flushIntervalSeconds` | `30` | Maximum delay before queued data is flushed. |
+| `captureAiCompression` | `PostHogCompression.GZIP` | Compression for [`captureAi`](#ai-events) requests, separately from `compression`. Requires `4.0.0`+. |
+| `captureAiMaxQueueSize` | `100` | Maximum number of [`captureAi`](#ai-events) events kept in their own on-disk queue (at most 50 MiB). Requires `4.0.0`+. |
+| `captureAiTimeout` | `60` | Seconds a [`captureAi`](#ai-events) request can go without network activity before it times out. Requires `4.0.0`+. |
+| `captureAiMaxEventBytes` | `8454144` (8 MiB + 64 KiB) | Maximum size of a serialized [`captureAi`](#ai-events) event. Larger events are dropped. Requires `4.0.0`+. |
 | `encryption` | `null` | Optional `PostHogEncryption` implementation for encrypting persisted queued events. |
 | `proxy` | `null` | Optional `java.net.Proxy` for PostHog API requests. |
 | `getAnonymousId` | generated UUID | Optional hook to customize anonymous ID generation. |
