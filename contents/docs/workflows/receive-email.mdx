@@ -1,0 +1,242 @@
+---
+title: Receive email
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Receiving email is in beta" type="action">
+
+Receiving email isn't on for every project yet, and it might change while we work on it.
+If **Log** in **Transactional** has no **Receiving** view, it isn't on for your project.
+
+</CalloutBox>
+
+PostHog can receive email as well as send it. Each email that arrives is stored for your project, can link to a person and to the [transactional email](/docs/workflows/transactional-emails) it answers, and fires an `$email_received` event that can start a workflow.
+
+Use it to:
+
+- Act on replies to your transactional emails.
+- Bring in a support mailbox by forwarding it, with no DNS changes.
+- Handle incoming email in your own code with a [delivery webhook](#delivery-webhooks).
+- Let an agent read mail with [MCP](#mcp), for example to test an email flow from end to end.
+- Collect documents that people send as attachments.
+
+This isn't an inbox. PostHog has no folders or assignment for received email, and you can't [reply from PostHog](#limits).
+
+## Choose an address
+
+| | Ready-made address | Your own domain |
+| --- | --- | --- |
+| Looks like | Any name at a domain that PostHog gives your project | `support@inbound.example.com` |
+| Setup | None. It works at once. | One MX record on a domain or subdomain you've verified for sending |
+| Your existing mail | Not affected | Not affected on a subdomain. On a whole domain, all its mail moves to PostHog. |
+| How many | One for each project | Each domain belongs to one project |
+
+Find your ready-made address in **Transactional**, under **Log** > **Receiving**. Use **Addresses** to manage it and your own domains.
+
+**Change address** gives you a new ready-made address. Mail to the old one is dropped, and email you already received stays.
+
+### Keep your current address
+
+To keep an address such as `support@example.com`, forward its mail to your ready-made address. The mailbox keeps working as before.
+
+Some mail providers send a confirmation code before they start forwarding. The code might arrive under the **Filtered** status in the **Receiving** view.
+
+### Use your own domain
+
+You can receive on a domain that your project [verified for sending](/docs/workflows/configure-channels), or on a subdomain of it. We suggest a subdomain such as `inbound.example.com`.
+
+1. Under **Addresses**, add your domain.
+2. Add the MX record that PostHog shows at your DNS provider.
+3. Wait for the domain to show **Receiving**. DNS changes can take a few minutes to show up.
+
+Keep these in mind:
+
+- **Whole domains** - Adding the verified domain itself, or a domain with other mail hosts, moves all of its mail to PostHog. Its mailboxes stop getting mail. PostHog asks you to confirm first, and you can forward mail instead.
+- **Other MX records** - PostHog's record must have the lowest priority number on the domain. Another record with the same or a lower number blocks it.
+- **Staying verified** - The domain stops receiving if your project no longer has a verified sending domain that covers it. It also stops if the MX record fails its checks for 2 days.
+- **Removing a domain** - Mail to the domain is dropped. Email you already received stays until it expires.
+- **Sharing** - One project receives on a domain. If another project in your organization already claimed it, remove it there first.
+
+## Replies to your transactional emails
+
+PostHog doesn't set a reply address for you. To get replies, set the reply-to address of your email to a receiving address, in the template or [on your send](/docs/workflows/transactional-emails/api#send-content-from-your-code).
+
+When a reply arrives, PostHog looks for the email it answers in the message headers. A match shows under **Linked to** in the **Receiving** view, and on the event as `$email_original_message_id` and `$email_original_workflow_id`.
+
+The link has limits:
+
+- Only replies to [transactional emails](/docs/workflows/transactional-emails) link back. A reply to an email from a workflow step or a broadcast still arrives, but with no link.
+- The link only works for 30 days after the send.
+- A mail client that removes the reply headers loses the link.
+
+Treat the link as context, because the sender controls these headers.
+
+`$email_is_reply` only means that the message says it's a reply. To check for a match with one of your sends, use `$email_match_method`.
+
+## The Receiving view
+
+Open **Transactional**, go to **Log**, and choose **Receiving**. You can search by sender, subject, or recipient, and filter by date and by status:
+
+- **Received** - Email that fired an event.
+- **Filtered** - Email that PostHog kept but that fired no event. See [spam and limits](#spam-and-limits).
+
+Open an email to see:
+
+- **Preview**, **Plain text**, **Reply only**, **HTML**, and **Raw** tabs. **Reply only** removes quoted earlier messages on a best-effort basis.
+- Attachments, which you can download once the virus scan passes.
+- **Linked to**, with the person and the email it answers.
+- **Checks**, with SPF, DKIM, DMARC, and the spam and virus scans.
+
+The preview runs no scripts. It also blocks remote images, because loading them tells the sender that you opened the email. Click **Load remote images** to see them.
+
+## Verified senders
+
+Anyone can write any address in an email's From header, so PostHog checks it. A sender is verified when the mail server checks prove the domain in the From address: a DMARC pass, or an SPF pass for that same domain if the domain has no DMARC policy. A From header that isn't one plainly written address stays unverified.
+
+An unverified email still arrives, with an **Unverified sender** label. The differences are:
+
+| | Verified sender | Unverified sender |
+| --- | --- | --- |
+| Links to a person | Yes, if a person has that email address | Never |
+| The event's distinct ID | The person's, or the sender's address if no person matches | `received-email-<id>` |
+| New workflows from **Create workflow** | Included | Left out by a filter you can see and change |
+| Daily limit | [Higher](#spam-and-limits) | [Lower](#spam-and-limits) |
+
+Receiving an email never creates a person.
+
+## The `$email_received` event
+
+The event holds details about the email and never its content. It has no body, subject, or Cc addresses.
+
+| Property | Description |
+| --- | --- |
+| `$email_received_id` | The ID of the received email, for the [API](#api) |
+| `$email_message_id` | The same ID, named like the property on send events |
+| `$email_from` | The address in the From header |
+| `$email_from_name` | The display name in the From header. The sender chooses it. |
+| `$email_envelope_from` | The return path |
+| `$email_recipient` | The first of your addresses that the email reached |
+| `$email_recipients` | All of your addresses that the email reached. Use this to route, because it includes Bcc. |
+| `$email_to_addresses` | The addresses in the To header |
+| `$email_internet_message_id` | The `Message-ID` header |
+| `$email_in_reply_to` | The `In-Reply-To` header |
+| `$email_is_reply` | Whether the email has an `In-Reply-To` header |
+| `$email_match_method` | How it matched one of your sends: `in_reply_to`, `references`, or `none` |
+| `$email_original_message_id` | The transactional email it answers, if it matched |
+| `$email_original_workflow_id` | The workflow behind that email, if it matched |
+| `$email_sender_verified` | Whether the [sender is verified](#verified-senders) |
+| `$email_spf`, `$email_dkim`, `$email_dmarc` | The check results: `pass`, `fail`, `gray`, or `processing_failed` |
+| `$email_spam_verdict`, `$email_virus_verdict` | The scan results |
+| `$email_attachment_count` | The number of attachments |
+| `$email_size_bytes` | The size of the message |
+| `$email_body_included` | Always `false` |
+| `$email_content_url` | The API path to read the email |
+
+## Workflows
+
+Start a workflow from the **Email received** event, or click **Create workflow** in the **Receiving** view. That workflow starts with a filter on `$email_sender_verified`. If you remove the filter, any stranger can start the workflow.
+
+A workflow sees the event's properties only, so it can't read the body or the subject.
+
+PostHog fires no event for auto-replies, which stops most loops between a workflow and an out-of-office message.
+
+## Delivery webhooks
+
+To handle received email in your own code, go to **Transactional** > **Webhooks**, click **Add webhook**, and select **Received** under **Events**. To limit the webhook, fill in **Only for mail to** with part of an address, such as `support@` or a domain.
+
+Each request is signed with a secret that PostHog shows once, following the [Standard Webhooks](https://www.standardwebhooks.com) spec. Check the `webhook-signature` header on your endpoint.
+
+The request has no body or subject of the email. Read them from `content_url` with the [API](#api).
+
+```json
+{
+    "type": "email.received",
+    "created_at": "2026-01-15T09:30:00Z",
+    "data": {
+        "created_at": "2026-01-15T09:30:00Z",
+        "email_id": "0194f2a0-7b1c-7f3e-9a55-2c1d8e6f4b10",
+        "from": "ada@example.com",
+        "to": ["support@inbound.example.com"],
+        "recipients": ["support@inbound.example.com"],
+        "distinct_id": "ada@example.com",
+        "body_included": false,
+        "content_url": "/api/projects/12345/received_emails/0194f2a0-7b1c-7f3e-9a55-2c1d8e6f4b10/",
+        "is_reply": true,
+        "original_email_id": "0194f1c4-2d3e-7a90-8b11-5e6f7a8b9c0d",
+        "sender_verified": true,
+        "authentication": {
+            "spf": "pass",
+            "dkim": "pass",
+            "dmarc": "pass"
+        },
+        "attachment_count": 0
+    }
+}
+```
+
+## API
+
+The key needs the `hog_flow:read` and `person:read` scopes to read received email. Changing receiving domains needs `hog_flow:write`.
+
+| Request | What it does |
+| --- | --- |
+| `GET /api/projects/:project_id/received_emails/` | Lists email, newest first, with no bodies. Takes `search`, `date_from`, `date_to`, `status`, `limit`, and `offset`. Covers the last 7 days by default. |
+| `GET /api/projects/:project_id/received_emails/:id/` | Reads one email with `text`, `reply_text`, `html`, its headers, its links to a person and a send, and attachments. |
+| `GET /api/projects/:project_id/inbound_email_domains/` | Lists your receiving domains, and the MX record to add. |
+| `POST /api/projects/:project_id/inbound_email_domains/receiving_address/` | Gets your ready-made address. Send `rotate: true` to replace it. |
+| `POST /api/projects/:project_id/inbound_email_domains/preflight/` | Checks whether your project can receive on a domain. |
+| `POST /api/projects/:project_id/inbound_email_domains/` | Adds a domain. Send `confirm_move_mail: true` if adding it moves existing mail. |
+| `POST /api/projects/:project_id/inbound_email_domains/:id/verify/` | Checks a domain's MX record now. |
+| `DELETE /api/projects/:project_id/inbound_email_domains/:id/` | Removes a domain. |
+
+A stranger writes every field of a received email. Render `html` only in a sandbox, and never use an attachment's file name as a path. Download links are short-lived, and are empty unless the virus scan passed.
+
+## MCP
+
+With the [PostHog MCP server](/docs/model-context-protocol), an agent can read received email:
+
+- `received-emails-list` - Lists email, with search and dates.
+- `received-emails-get` - Reads one email.
+
+These tools leave out HTML, headers, the raw message, and download links. They also mark the content as untrusted data. This lowers the risk that text in an email acts as instructions to the agent, but can't remove it, so think about what else your agent can do before it reads mail.
+
+## Spam and limits
+
+Strangers choose what they send you, so PostHog limits what it accepts.
+
+| What arrives | Kept | Fires an event |
+| --- | --- | --- |
+| Email that fails the virus scan | Nothing | No |
+| Email to a domain with no active address | Nothing | No |
+| Email over the daily limit | Nothing | No |
+| Email that fails the spam scan | Details only, under **Filtered** | No |
+| More than 60 emails in an hour from one sender | Details only, under **Filtered** | No |
+| Auto-replies, bounces, and other machine-written email | Details and content, under **Filtered** | No |
+| Email over 40 MB | Details only | Yes |
+| Email PostHog can't read | Details and the raw message | Yes |
+| All other email | Details and content | Yes |
+
+Each project has two daily limits, so junk mail can't use up the allowance for real senders:
+
+| Email | Emails each day | Size each day |
+| --- | --- | --- |
+| Verified sender, not spam | 10,000 | 5 GiB |
+| Everything else | 1,000 | 256 MiB |
+
+When mail goes over a limit, the **Receiving** view shows a banner, and the emails over the limit are lost. Contact support if you need a higher limit.
+
+If the virus scan can't give a clear result, the email arrives, but you can't download its attachments.
+
+## Retention and deletion
+
+PostHog keeps received email for 30 days, then deletes it. PostHog also deletes it when you delete the project, and when you delete the person who sent it. Deleting a person also removes unlinked email from their address.
+
+The `$email_received` event stays with your other events, but it holds no body or subject.
+
+## Limits
+
+- **Replies don't link for every send** - Only replies to transactional emails link back to the send.
+- **Nothing sets a reply address for you** - Set the reply-to address on your emails, or replies never reach PostHog.
+- **You can't reply from PostHog** - To answer someone, send a new email from your app or a workflow.
+- **Workflows can't read the content** - Use a delivery webhook and the API if you need the body.

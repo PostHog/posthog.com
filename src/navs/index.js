@@ -8370,6 +8370,12 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Receive email',
+                    url: '/docs/workflows/receive-email',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                },
+                {
                     name: 'Channels',
                 },
                 {
