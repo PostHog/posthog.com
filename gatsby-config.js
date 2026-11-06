@@ -242,12 +242,9 @@ module.exports = {
                     // Versioned SDK reference pages age out of the build, so keep them out of the sitemap.
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
-                    // The Markdown SDK reference pages answer noindex until they replace the old ones (see vercel.json).
-                    const isNoindexSdkReference = (path) =>
-                        isSdkReferenceArchive(path) || path === '/docs/libraries/python/reference'
-
                     const transformedPages = allPages
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isNoindexSdkReference(path))
+                        // Past and next SDK majors, and the migration guides, answer noindex (see vercel.json).
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isSdkReferenceArchive(path))
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,
