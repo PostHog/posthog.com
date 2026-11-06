@@ -55,12 +55,12 @@ Turning a policy off, editing it, or deleting it stops its tokens from working w
 
 ### Add a trusted workload in settings
 
-1. In your project settings, go to **Trusted workloads** and add a trusted workload.
-2. Pick the provider.
-3. In **Repository**, enter the repository or project name and click **Find**. PostHog looks up its ID. If PostHog can't find it, enter the ID in the field that appears instead. Each provider page says where to find the ID.
-4. Under **Which runs can get a token**, pick a preset, or pick **Custom** to set a claim and value yourself.
-5. Pick the scopes the workload needs.
-6. Save. PostHog shows the workflow snippet for your provider, with a button to copy it.
+1. In your project settings, go to **Trusted workloads** and click **Add trusted workload**.
+2. Under **Provider**, pick your CI provider.
+3. Enter the repository or project name and click **Look up**. PostHog fills in its ID. If PostHog can't find it, enter the ID yourself. Each provider page says where to find it.
+4. Under **Which runs can get a token**, pick one of the common choices, or pick one claim of the token and enter its value. Click **Add condition** to add more. A token must meet every condition.
+5. Give the trusted workload a **Name**, and pick its **Scopes**.
+6. Click **Add trusted workload**. PostHog shows the snippet for your CI job, with your PostHog address and project ID filled in, and a button to copy it.
 
 ### Scopes that need care
 
@@ -83,7 +83,7 @@ Any project member can ask for a trusted workload. A request grants nothing on i
 
 ### Ask with `hog ci setup` (beta)
 
-Once hog is released, run `hog ci setup` in your repository:
+Once hog is released, log in with `hog auth login` and run `hog ci setup` in your repository:
 
 ```bash
 hog ci setup --branch main --scope annotation:write
@@ -91,11 +91,22 @@ hog ci setup --branch main --scope annotation:write
 
 The command:
 
-1. Detects the provider from your git remote and the CI files in the repository, and reads `owner/repo` or the GitLab project path.
-2. Looks up the repository or project's ID.
-3. Turns `--branch main` or `--environment production` into the matching preset, and adds a scope for each `--scope` you pass.
-4. Creates a policy request and waits for an admin to approve it. If you stop waiting, run `hog ci setup --wait` to pick it up again.
-5. Prints the workflow snippet for your provider.
+1. Detects the provider and reads `owner/repo` or the GitLab project path from your git remote.
+2. Asks PostHog to look up the repository or project's ID.
+3. Turns `--branch` and `--environment` into the matching presets. Pass one or both.
+4. Creates a policy request. If you're an admin, hog opens the approval page and waits. Otherwise it names the admins and prints the link to send them.
+5. Prints the snippet for your CI job.
+
+| Flag | What it does |
+| --- | --- |
+| `--branch <branch>` | Trusts runs for pushes to this branch |
+| `--environment <name>` | Trusts jobs that deploy to this environment |
+| `--scope <scope>` | Adds a scope the job gets. Repeat it for each scope. At least one is required. |
+| `--provider <key>` | Names the CI provider when hog can't tell from the repository |
+| `--repository <name>` | Names the repository or project when it isn't your `origin` remote |
+| `--subject-id <id>` | Sets the immutable ID when PostHog can't look it up. Pass `--repository` with the exact name too, because PostHog matches both. |
+| `--name <name>` | Names the trusted workload in PostHog |
+| `--wait` | Waits for a request an earlier run started. It stops after 10 minutes and keeps the request, so you can run it again. |
 
 ### Ask through the API
 
@@ -145,16 +156,17 @@ A successful response looks like this:
 
 The token never outlives the OIDC token it came from, and there is no refresh token. When a call needs a scope the policy doesn't have, the API answers with a `403` and a `WWW-Authenticate` header naming the missing scope. Ask an admin to add it to the policy.
 
-The exchange is rate limited per subject. Over the limit, it returns a `429` with the [`workload_rate_limited`](#workload_rate_limited) error.
+The exchange is rate limited per repository or project. Each one can make 300 exchanges at once, and gets one more each second. Past that, PostHog answers with a `429`, a `Retry-After` header, and the [`workload_rate_limited`](#workload_rate_limited) error.
 
 ### How hog exchanges tokens (beta)
 
 Once hog is released, it does the exchange for you:
 
-- It asks the provider for an OIDC token whose audience is the PostHog host it sends the token to. That host is `HOG_HOST`, or else the host in your project's hog config, or else `https://us.posthog.com`.
+- It asks the provider for an OIDC token whose audience is the PostHog host it sends the token to. That host is `HOG_HOST`, or else a PostHog Cloud host in your repository's `posthog.json`, or else `https://us.posthog.com`.
 - It sends the RFC 8693 exchange to `/oauth/token/` and keeps the PostHog token in memory only. It never writes the token to disk.
 - It exchanges again when the token is close to expiring, or after the API answers with a `401`.
-- It picks credentials in this order: a personal API key, then the workload token, then a stored login. Remove any personal API key from the job's environment, or hog uses that instead of the workload token.
+- When the exchange is rate limited and `Retry-After` is 60 seconds or less, it waits once and tries again.
+- It picks credentials in this order: `HOG_PERSONAL_API_KEY`, then the workload token, then a stored login. Remove `HOG_PERSONAL_API_KEY` from the job's environment, or hog uses that instead of the workload token.
 
 ## Errors
 
@@ -170,7 +182,7 @@ The OIDC token comes from an issuer PostHog doesn't trust. Only the [supported p
 
 <h3 id="workload_token_invalid">workload_token_invalid</h3>
 
-PostHog couldn't verify the OIDC token: it expired, its audience isn't your PostHog instance, its signature doesn't verify, or it lacks a claim PostHog needs, such as the subject or the name.
+PostHog couldn't verify the OIDC token: it expired, its audience isn't your PostHog instance, its signature doesn't verify, or it lacks a claim PostHog needs, such as the subject or the name. For a wrong audience, set `HOG_HOST` to the address you open PostHog at, such as `https://us.posthog.com`.
 
 <h3 id="workload_provider_unavailable">workload_provider_unavailable</h3>
 
@@ -179,6 +191,8 @@ PostHog couldn't fetch the provider's signing keys. Try again in a minute.
 <h3 id="workload_no_matching_policy">workload_no_matching_policy</h3>
 
 No enabled trust policy in the project matches the token's subject, name, and conditions. The same error covers a project or environment ID that doesn't exist, so the exchange can't be used to find out which projects exist.
+
+The error lists the claims the job sent, so you can compare them with the policy. To ask for a policy that matches, run `hog ci setup` (beta) in the repository.
 
 <h3 id="workload_policy_request_pending">workload_policy_request_pending</h3>
 
@@ -190,7 +204,7 @@ The matching policy only grants scopes a workload token can't use. Ask an admin 
 
 <h3 id="workload_rate_limited">workload_rate_limited</h3>
 
-Too many exchanges for the same subject in a short time. The response has a `429` status. Wait, then try again. A job that reuses its PostHog token until it's close to expiring, as hog does, makes fewer exchanges.
+The repository or project made more than 300 exchanges at once, faster than the limit refills at one each second. The response has a `429` status and a `Retry-After` header with the seconds to wait. hog waits once when that is 60 seconds or less. Otherwise, run the job again later.
 
 <h3 id="workload_no_owner">workload_no_owner</h3>
 
