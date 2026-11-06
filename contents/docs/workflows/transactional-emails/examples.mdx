@@ -161,7 +161,7 @@ Send a receipt with the invoice attached, and a copy to the customer's billing c
 | --- | --- |
 | Template key | `receipt` |
 | Copies | `cc` to the billing contact, if the customer has one |
-| Attachment | The invoice PDF, 512 KB at most for all files together |
+| Attachment | The invoice PDF, 10 MB at most for all files together |
 | Distinct ID | The customer's user ID |
 | Idempotency key | `receipt-{order_id}` |
 
@@ -187,7 +187,7 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
 
 </MultiLanguage>
 
-Send the file's content in Base64. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+Send the file's content in Base64. See [copies, attachments, and headers](/docs/workflows/transactional-emails/api#copies-attachments-and-headers) for the limits.
 
 ## Measure whether an email works
 

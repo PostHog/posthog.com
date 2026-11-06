@@ -196,8 +196,9 @@ You can also send the subject and the body from your code, without a template in
 | `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
 | `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
 | `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is `true`. Send `false` to turn capture off for this email. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
+| `track_opens_and_clicks` | No | Whether PostHog tracks opens and clicks of this email. The default is `true`. Send `false` to send the email with no open pixel and no link tracking, for example when it has a single-use link. |
 
-A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, `capture_engagement`, and `track_opens_and_clicks`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
 
 If the `to` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
@@ -321,7 +322,7 @@ $result = PostHog::emails()->send([
 
 </MultiLanguage>
 
-### Copies and attachments
+### Copies, attachments, and headers
 
 Content from your code also takes these fields. A template send takes none of them, because the template uses its own settings.
 
@@ -329,11 +330,29 @@ Content from your code also takes these fields. A template send takes none of th
 | --- | --- | --- |
 | `cc` | No | A list of up to 10 addresses that get a copy, without a display name. |
 | `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
-| `attachments` | No | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
+| `attachments` | No | A list of up to 10 files, 10 MB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
+| `headers` | No | An object of header names and values, with up to 10 headers. See [custom headers](#custom-headers). |
 
 - **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
 - **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
 - **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+
+### Custom headers
+
+You can send `In-Reply-To`, `References`, `List-Unsubscribe`, `List-Unsubscribe-Post`, `List-Id`, and your own `X-` headers.
+
+```json
+{
+    "headers": {
+        "In-Reply-To": "<order-1042@example.com>",
+        "X-Campaign": "spring-sale"
+    }
+}
+```
+
+- **Reserved headers** - `X-PostHog-` and `X-SES-` headers are reserved. PostHog refuses them.
+- **Other headers** - PostHog refuses any other header, because it sets the headers that decide who an email is from and how its delivery is tracked.
+- **Values** - A value has at most 998 characters and no line breaks. Send each header once, in any letter case.
 
 ### Checks for content from your code
 
