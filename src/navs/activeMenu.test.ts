@@ -83,7 +83,7 @@ describe('the real docs nav', () => {
             rust: ['0.x.x', '1.x.x', 'migration'],
             ios: ['3.x.x', '4.x.x', 'migration'],
             android: ['3.x.x', '4.x.x', 'migration'],
-            flutter: ['5.x.x', '6.x.x'],
+            flutter: ['5.x.x', '6.x.x', 'migration'],
         }
         for (const [sdk, names] of Object.entries(pages)) {
             const expected = sectionFor(`/docs/libraries/${sdk}`)
