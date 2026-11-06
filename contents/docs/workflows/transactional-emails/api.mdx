@@ -333,6 +333,7 @@ Content from your code also takes these fields. A template send takes none of th
 
 - **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
 - **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
+- **SDKs** - The SDKs encode the file's bytes to Base64 for you.
 - **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
 
 ### Checks for content from your code

@@ -191,6 +191,26 @@ function sendPasswordReset(User $user, string $html, string $resetRequestId): st
 
 A send has `template_id` or `template_key`, not both. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+Content from your code takes `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is an array with `filename` and the file's bytes as `content`, such as `file_get_contents()` returns, and optionally `content_type` and `content_id`. The client encodes the bytes for you, so don't pass Base64. If you have Base64, pass `base64_decode($content)`. A file that the client can't send throws `PostHog\EmailError` with the code `invalid_attachment` before any request.
+
+```php
+PostHog::emails()->send([
+    'to' => $user->email,
+    'template_key' => 'receipt',
+    'subject' => 'Your receipt',
+    'html' => $html,
+    'cc' => 'billing@example.com',
+    'attachments' => [
+        ['filename' => 'receipt.pdf', 'content' => file_get_contents($pdfPath), 'content_type' => 'application/pdf'],
+    ],
+    'distinct_id' => (string) $user->id,
+]);
+```
+
+See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+
 ## Check an email's status
 
 ```php
