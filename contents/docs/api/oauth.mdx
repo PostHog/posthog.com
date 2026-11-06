@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 PostHog supports [OAuth 2.0](https://datatracker.ietf.org/doc/html/rfc6749) for third-party applications to access PostHog on behalf of users. This page explains how to integrate with PostHog's OAuth system.
 
 ## OAuth server endpoints
@@ -117,7 +119,13 @@ OAuth clients and MCP-style agents discover this endpoint automatically through 
 
 ## Supported scopes
 
-The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). [API scopes](/docs/api/scopes) explains what each one covers. Request only the scopes your application actually needs – this is a security best practice and reduces friction for users on the authorization screen.
+<CalloutBox icon="IconInfo" title="What each scope covers" type="fyi">
+
+[API scopes](/docs/api/scopes) lists every scope, what it grants, and which ones OAuth apps can request.
+
+</CalloutBox>
+
+The scopes available through OAuth are listed in the `scopes_supported` field of the metadata document and mirror the scopes available for [personal API keys in our REST API](/docs/api). Request only the scopes your application actually needs – this is a security best practice and reduces friction for users on the authorization screen.
 
 ## Going live and getting verified
 

@@ -54,12 +54,15 @@ const matchesSearch = (scopeObject: ScopeObject, search: string): boolean => {
     return tokens.every((token) => haystack.includes(token))
 }
 
+const LEVEL_LABELS: Record<ScopeAction['action'], string> = { read: 'Read', write: 'Read and write' }
+
 const ScopeStrings = ({ actions }: { actions: ScopeAction[] }) => (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex flex-col items-start gap-1.5">
         {actions.map((action) => (
-            <code key={action.scope} className="text-xs whitespace-nowrap">
-                {action.scope}
-            </code>
+            <div key={action.scope} className="flex flex-col items-start">
+                <code className="text-xs whitespace-nowrap">{action.scope}</code>
+                <span className="text-xs text-secondary">{LEVEL_LABELS[action.action]}</span>
+            </div>
         ))}
     </div>
 )
@@ -88,9 +91,9 @@ const Notes = ({ scopeObject }: { scopeObject: ScopeObject }) => {
 }
 
 const columns = [
-    { name: 'Scope', width: 'minmax(140px, 1fr)', align: 'left' as const },
+    { name: 'Scope', width: 'minmax(120px, 1fr)', align: 'left' as const },
     { name: 'What it covers', width: 'minmax(240px, 2.5fr)', align: 'left' as const },
-    { name: 'Scope strings', width: 'auto', align: 'left' as const },
+    { name: 'Request one', width: 'auto', align: 'left' as const },
 ]
 
 const toRow = (scopeObject: ScopeObject) => ({
@@ -98,9 +101,8 @@ const toRow = (scopeObject: ScopeObject) => ({
     cells: [
         {
             content: (
-                <div id={scopeObject.scopeObject} className="scroll-mt-24">
-                    <div className="font-semibold">{scopeObject.name}</div>
-                    <code className="text-xs">{scopeObject.scopeObject}</code>
+                <div id={scopeObject.scopeObject} className="scroll-mt-24 font-semibold">
+                    {scopeObject.name}
                 </div>
             ),
         },
@@ -220,6 +222,7 @@ export default function ScopeReference(): JSX.Element {
                             rows={visible.filter((scopeObject) => scopeObject.group === label).map(toRow)}
                             editable={false}
                             rowAlignment="top"
+                            width="full"
                         />
                     </div>
                 ))
