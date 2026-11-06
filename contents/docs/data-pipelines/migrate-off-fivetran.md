@@ -39,7 +39,7 @@ The agent then reads your Fivetran account, lists your connections, and builds a
 
 ## Step 3: Choose which connections to migrate
 
-Before anything is created, the agent shows you a report with any limitations and caveats. _TODO: list the common caveats._
+Before anything is created, the agent shows you a report with any limitations and caveats.
 
 You don't have to move everything at once. Tell the agent which connections to migrate and which to skip, in plain language. For example:
 
