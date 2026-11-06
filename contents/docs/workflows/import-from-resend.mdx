@@ -1,0 +1,165 @@
+---
+title: Import from Resend
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Importing from Resend is in beta" type="action">
+
+This import isn't on for every project yet, and it might change while we work on it.
+If the opt-outs page shows **Import from Customer.io** and no **Import from another tool**, it isn't on for your project.
+
+</CalloutBox>
+
+You can copy your suppression list, unsubscribes, topics, templates, and automations from Resend to PostHog in one background import.
+The import only reads from Resend, and nothing sends by itself.
+Resend keeps working as before while you move your sending over at your own pace.
+
+## What moves and what stays
+
+| In the import window | What PostHog creates |
+| --- | --- |
+| **Topics** | A marketing message category for each topic |
+| **Suppression list** | Entries on your [suppression list](/docs/workflows/opt-outs#the-suppression-list) |
+| **Unsubscribed contacts** | Opt-outs from all marketing email, by email address |
+| **Topic preferences** | Opt-outs from the categories that contacts left |
+| **Templates** | [Library](/docs/workflows/library) templates, with notes on anything to review |
+| **Automations** | Draft workflows, with notes on anything to set |
+| **Sending domains** | A list of your domains and which ones can already send from PostHog |
+
+These stay in Resend:
+
+- API keys, webhooks, send history, and stats. Rebuild what you need.
+- Contacts. They don't become people in PostHog.
+- Domains and their signing keys. PostHog signs mail with its own keys, so [each domain needs new DNS records](#sending-domains).
+
+## Run the import
+
+You need to be an organization admin or owner, with edit access to Workflows in the project.
+
+1. In Resend, [create an API key](https://resend.com/api-keys) with full access, just for this import. Resend has no read-only keys, so a sending-only key can't read your data.
+2. In PostHog, go to **Workflows**, open **Opt-outs**, and click **Import from another tool**.
+3. Select **Resend**.
+4. Select what to import, paste the key, and click **Start import**.
+
+You can close the window and come back. Each step shows its progress, and each template and automation links to what PostHog created.
+A project runs one import from a tool at a time.
+
+## Your API key
+
+**Before the import.** Treat the key as a secret, because it can do anything in your Resend account. PostHog only makes read requests with it.
+
+**During the import.** PostHog keeps the key encrypted for this import only.
+
+**After the import.** PostHog deletes the key when the import ends, whether it finished or failed. If an import stops unexpectedly, PostHog deletes the key within about 26 hours of the start.
+
+The key stays valid at Resend until you delete it there, so delete it in Resend when you're done.
+PostHog asks for a key again each time you import.
+
+## Import again
+
+Importing again adds what's missing and never changes what's already in PostHog, so PostHog wins every time.
+
+| What you import | What importing again does |
+| --- | --- |
+| Suppression | Leaves an existing entry as it is. An address you removed stays removed. |
+| Opt-out | Keeps a choice already stored in PostHog, and adds new categories. |
+| Topic | Keeps your edits. A category you deleted stays deleted. |
+| Template | Skips a template when its key is already taken, including by a deleted template or by one you didn't import. |
+| Automation | Skips an automation you imported before, even if you deleted the draft. |
+| Domain | Lists it again. The import writes no domains. |
+
+So fixes you make in Resend don't come across.
+To bring over an edited template, change its alias in Resend and import again, or copy the change by hand.
+
+If some steps failed, click **Run again**. Each failed step continues from where it stopped. The counts of a continued step only cover what the new run read, so they don't show the whole list.
+A key that Resend rejects needs a new key. For any other failure, run the import again.
+
+## Hard bounces and spam complaints
+
+PostHog treats these differently from Resend, which blocks all email to all of them.
+
+| Resend reason | Marketing email | Transactional email |
+| --- | --- | --- |
+| Bounce | Blocked | Blocked |
+| Spam complaint | Blocked | Sent |
+| Added by your team | Blocked | Sent |
+
+The results show each count, so check how many spam complaints you imported.
+
+PostHog refuses a send to a hard-bounced address with `recipient_suppressed`.
+If your app retries failed sends, make sure that it doesn't retry this error.
+
+## Why it's slow
+
+The import makes at most 2 requests a second to Resend.
+Resend limits an account's API requests, and your live sending counts against the same limit, so a faster import could slow your production email.
+
+Resend shares topic choices one contact at a time, so **Topic preferences** reads about 7,000 contacts an hour.
+It skips contacts who already opted out of everything, and the step doesn't run if you have no topics.
+
+An import stops after 24 hours, which is about 150,000 contacts into that step.
+Templates, automations, and domains come after it, so they might not have started by then.
+To get them sooner, clear **Topic preferences**, and run it in a later import. Otherwise, click **Run again** to continue from where it stopped.
+
+## Templates
+
+A template's key in PostHog is its Resend alias, or `resend-<id>` if it has no alias.
+Imported templates aren't transactional until you make them so.
+
+PostHog rewrites Resend's variables to Liquid. For example, `{{{NAME|there}}}` becomes a variable with the fallback `there`, and `{{{RESEND_UNSUBSCRIBE_URL}}}` becomes PostHog's unsubscribe link.
+Anything else in braces stays as visible text, and a note names it, so you can rewrite it in Liquid.
+
+Open each template with notes and fix what they mention, then send yourself a test. The notes also cover these differences:
+
+- **Contact fields** - Resend fills `FIRST_NAME`, `LAST_NAME`, and `EMAIL` from the contact. PostHog doesn't, so your app has to pass them.
+- **Missing variables** - Resend refuses to send without a required variable. PostHog sends with a blank value.
+- **Unpublished templates** - PostHog imports the draft of an unpublished template, and the published version of a template with unpublished edits.
+- **Senders** - A note tells you if the template's sender is missing or isn't verified in PostHog.
+
+## Sending domains
+
+The import only lists your domains. [Add each domain](/docs/workflows/configure-channels) in PostHog and publish its new DNS records.
+Leave your Resend records in place while you move, because both tools can sign mail for one domain.
+
+If Resend already uses PostHog's default `feedback` subdomain on a domain, a note tells you. Choose a different MAIL FROM subdomain, because two services can't share one MX record.
+
+## Automations
+
+Each automation becomes a draft workflow. A draft never sends until you enable it, even if the automation is on in Resend.
+
+Review the notes on each draft before you enable it:
+
+- **Trigger events** - Your app sends the event to Resend. Send it to PostHog too, or the workflow never starts.
+- **Steps PostHog doesn't have** - Add to segment, update contact, and delete contact steps are left out, and the steps around them are joined up.
+- **Delays and waits** - A delay PostHog can't read becomes 1 day. A wait for an event lasts at most 30 days, and an event filter on a wait isn't kept.
+- **Conditions** - Some conditions need another look, and a note says which.
+
+Keep these in mind as well:
+
+- A draft holds its own copy of each email, so a fix to the library template doesn't change the draft. Fix both.
+- A draft sends to the `email` person property. The import creates no people, so a draft only reaches people who are already in PostHog with that property. Conditions on contact fields depend on person properties too.
+- Turn the automation off in Resend when you enable the workflow, or people get both emails.
+
+## Run it with MCP
+
+With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to move you from Resend. The `migrating-from-email-providers` skill walks it through the import and the switch. It doesn't enable a draft without your sign-off.
+
+| Tool | What it does |
+| --- | --- |
+| `provider-imports-providers` | Lists the tools your project can import from, each tool's steps, and what comes next |
+| `provider-imports-list` | Lists recent imports, including one that's running |
+| `provider-imports-create` | Starts an import with the steps and the API key |
+| `provider-imports-get` | Shows the status, counts, items, and notes of an import |
+
+With MCP, the API key passes through the conversation with your agent. To keep it out of the conversation, run the import in the app instead.
+
+## Move your sending
+
+The import finishes with these next steps:
+
+1. Add each sending domain in PostHog and publish its DNS records.
+2. Fix what the template notes mention, and send yourself a test.
+3. [Make a template transactional](/docs/workflows/transactional-emails) and change your app to send it through PostHog. Start with a low-risk email and move the rest one at a time.
+4. If you send a lot of email, move it over several days, because mailbox providers slow down mail from a sender whose volume jumps. Check your [sending allowance](/docs/workflows/sending-reputation) first.
+5. Once nothing sends through Resend, remove its DNS records and delete the API key you created for this import.
