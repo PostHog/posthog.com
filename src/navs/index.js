@@ -3042,9 +3042,81 @@ export const docsMenu = {
                 },
                 {
                     name: 'SDK reference',
-                    url: '/docs/libraries/python/reference',
+                    url: '/docs/libraries/android/reference',
                     icon: 'IconCode',
                     children: [
+                        {
+                            name: 'Android',
+                            url: '/docs/libraries/android/reference',
+                            children: [
+                                {
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/android/3.x.x',
+                                },
+                                {
+                                    name: '4.x.x (experimental)',
+                                    url: '/docs/libraries/android/4.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/android/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/libraries/flutter/reference',
+                            children: [
+                                {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/flutter/5.x.x',
+                                },
+                                {
+                                    name: '6.x.x (experimental)',
+                                    url: '/docs/libraries/flutter/6.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/flutter/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/libraries/go/reference',
+                            children: [
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/go/1.x.x',
+                                },
+                                {
+                                    name: '2.x.x (experimental)',
+                                    url: '/docs/libraries/go/2.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/go/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/libraries/ios/reference',
+                            children: [
+                                {
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/ios/3.x.x',
+                                },
+                                {
+                                    name: '4.x.x (experimental)',
+                                    url: '/docs/libraries/ios/4.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/ios/migration',
+                                },
+                            ],
+                        },
                         {
                             name: 'Python',
                             url: '/docs/libraries/python/reference',
@@ -3060,6 +3132,24 @@ export const docsMenu = {
                                 {
                                     name: 'Migration guides',
                                     url: '/docs/libraries/python/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/libraries/rust/reference',
+                            children: [
+                                {
+                                    name: '0.x.x',
+                                    url: '/docs/libraries/rust/0.x.x',
+                                },
+                                {
+                                    name: '1.x.x (experimental)',
+                                    url: '/docs/libraries/rust/1.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/rust/migration',
                                 },
                             ],
                         },

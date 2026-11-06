@@ -77,6 +77,23 @@ describe('the real docs nav', () => {
         }
     })
 
+    test('the other SDK reference pages use their SDK sidebar', () => {
+        const pages = {
+            go: ['1.x.x', '2.x.x', 'migration'],
+            rust: ['0.x.x', '1.x.x', 'migration'],
+            ios: ['3.x.x', '4.x.x', 'migration'],
+            android: ['3.x.x', '4.x.x', 'migration'],
+            flutter: ['5.x.x', '6.x.x', 'migration'],
+        }
+        for (const [sdk, names] of Object.entries(pages)) {
+            const expected = sectionFor(`/docs/libraries/${sdk}`)
+            assert.ok(expected)
+            for (const name of ['reference', ...names]) {
+                assert.equal(sectionFor(`/docs/libraries/${sdk}/${name}`), expected)
+            }
+        }
+    })
+
     // Self-driving is the single home for its products (Slack, MCP, CLI, Web) — the
     // standalone sections for those products are flat drop-down links with no sidebar of their own.
     test('product pages always use the Self-driving sidebar', () => {
