@@ -110,6 +110,8 @@ These change behavior without a build error, so check them even if your app buil
 
 **Feature flag payloads.** A malformed, empty, or whitespace-only payload now reads as `nil` instead of the raw string. The flag's value isn't affected. A bootstrapped string payload such as `"123"` stays a string instead of being decoded again.
 
+**Empty flag variants.** `isFeatureEnabled` returns `false` for a flag whose variant is an empty string. Version 3 returned `true`.
+
 **Lifecycle events.** `Application Installed`, `Application Updated`, and `Application Opened` no longer send `version` and `build`. Use `$app_version` and `$app_build` in insights, cohorts, and actions. To find cold launches, filter on `from_background = false`.
 
 **Network detection.** A connection that needs user action, such as a VPN waiting for a password, counts as reachable. Queues pause while cellular data is off for your app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
@@ -138,6 +140,8 @@ These change behavior without a build error, so check them even if your app buil
 | `PostHogSDK.didReceiveFeatureFlags` | [`onFeatureFlags(_:)`](/docs/libraries/ios/usage) |
 | `PostHogSessionManager` | `getSessionId()`, `startSession()`, and `endSession()` on `PostHogSDK` |
 | `PostHogStorageManager`, `config.storageManager` | `identify(_:)`, `getDistinctId()`, and `reset()` on `PostHogSDK` |
+
+Utility APIs that were public by accident, such as `Gzip`, `toISO8601String(_:)`, `toISO8601Date(_:)`, `dateToMillis(_:)`, and `UIColor(hex:)`, are no longer public, so copy the code you need into your app. Internals that only PostHog's React Native and Flutter SDKs use, such as `PostHogSessionManager` and `PostHogStorageManager`, moved behind `@_spi(PostHogInternal)`. The [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#internal-and-utility-apis) lists them all.
 
 Callbacks the SDK can call off the main thread are now `@Sendable`: `reloadFeatureFlags(_:)`, `setBeforeSend(_:)`, `getAnonymousId`, `pushIdentityProvider`, and `logSanitizer`. In Swift 6 mode, a closure that touches main-actor state no longer compiles. In `reloadFeatureFlags(_:)` and `pushIdentityProvider`, hop with `Task { @MainActor in ... }`. The others must return right away, so don't read main-actor state in them.
 
