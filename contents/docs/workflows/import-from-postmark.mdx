@@ -1,0 +1,172 @@
+---
+title: Import from Postmark
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Importing from Postmark is in beta" type="action">
+
+This import isn't on for every project yet, and it might change while we work on it.
+If **Postmark** isn't listed under **Import from another tool** on the opt-outs page, it isn't on for your project.
+
+We've tested this import against Postmark's API documentation, not yet against a real Postmark account.
+
+</CalloutBox>
+
+You can copy your suppressions and templates from Postmark to PostHog in one background import, and get a list of what you need to set up by hand.
+The import only reads from Postmark, and nothing sends by itself.
+Postmark keeps working as before while you move your sending over at your own pace.
+
+## What moves and what stays
+
+| In the import window | What PostHog creates |
+| --- | --- |
+| **Servers and message streams** | A list of your servers and streams, and a marketing message category for each broadcast stream you added yourself |
+| **Suppressions** | Entries on your [suppression list](/docs/workflows/opt-outs#the-suppression-list), and opt-outs for people who unsubscribed |
+| **Templates** | [Library](/docs/workflows/library) templates, each with its own copy of its layout, with notes on anything to review |
+| **Sending domains and senders** | A list of your domains and sender signatures, with notes on their DNS records |
+| **Webhooks** | A list of your webhooks and what each one fires on |
+
+These stay in Postmark:
+
+- Domains, sender signatures, and their signing keys. PostHog signs mail with its own keys, so [each domain needs new DNS records](#sending-domains).
+- Webhooks, inbound streams, send history, stats, and tokens. Rebuild what you need.
+- SMTP. PostHog has no SMTP service, so an app that sends over SMTP needs to change to the [send API](/docs/workflows/transactional-emails).
+
+Postmark has no automations or contact lists, so there's nothing to import for those.
+
+## Choose a token
+
+Postmark has no read-only tokens, so either one can change your Postmark data. PostHog only makes read requests with it.
+
+| Token | Where to find it | What it imports |
+| --- | --- | --- |
+| Server token | The **API Tokens** tab of a server | That server's streams, suppressions, templates, and webhooks. **Sending domains and senders** can't run, and it says so. |
+| Account token | The **API Tokens** page of your account. Only the account owner and admins can see it. | Every live server, plus your domains and sender signatures. PostHog reads each server's token from your account for the run and doesn't store it. |
+
+An account token skips sandbox servers, because they never deliver mail, so their suppressions aren't real addresses.
+To import a sandbox server's templates, run an import with that server's own token.
+
+If you keep staging and production in one Postmark account, use a server token for the one you want. An account token puts them all in one PostHog project.
+
+## Run the import
+
+You need to be an organization admin or owner, with edit access to Workflows in the project.
+
+1. Copy a [token](https://account.postmarkapp.com/api_tokens) from Postmark.
+2. In PostHog, go to **Workflows**, open **Opt-outs**, and click **Import from another tool**.
+3. Select **Postmark**.
+4. Select what to import, paste the token, and click **Start import**.
+
+You can close the window and come back. Each step shows its progress, and each template links to what PostHog created.
+A project runs one import from a tool at a time.
+
+## Your token
+
+**During the import.** PostHog keeps the token encrypted for this import only.
+
+**After the import.** PostHog deletes the token when the import ends, whether it finished or failed. If an import stops unexpectedly, PostHog deletes the token within about 26 hours of the start.
+
+The token stays valid at Postmark, so rotate it there if you created or shared it for this import.
+PostHog asks for a token again each time you import.
+
+## Import again
+
+Importing again adds what's missing and never changes what's already in PostHog, so PostHog wins every time.
+
+| What you import | What importing again does |
+| --- | --- |
+| Suppression | Leaves an existing entry as it is. An address you removed stays removed. |
+| Opt-out | Keeps a choice already stored in PostHog. |
+| Category | Keeps your edits. A category you deleted stays deleted. |
+| Template | Skips a template when its key is already taken, including by a deleted template or by one you didn't import. |
+| Domain, sender, webhook | Lists it again. The import writes none of them. |
+
+So fixes you make in Postmark don't come across.
+To bring over an edited template, change its alias in Postmark and import again, or copy the change by hand.
+
+If some steps failed, click **Import again** and paste the token. Each failed step continues from where it stopped. The counts of a continued step only cover what the new run read, so they don't show the whole list.
+A token that Postmark rejects needs a new token. For any other failure, run the import again.
+
+## Suppressions and streams
+
+In Postmark, a suppression belongs to one message stream. In PostHog, it applies to the whole project.
+So each address takes the strongest reason it has on any stream, with a hard bounce first, then a spam complaint, then a manual entry.
+
+| Postmark reason | Origin | In PostHog | Marketing email | Transactional email |
+| --- | --- | --- | --- | --- |
+| Hard bounce | Any | Suppression | Blocked | Blocked |
+| Spam complaint | Any | Suppression | Blocked | Sent |
+| Manual | Customer or Admin | Suppression | Blocked | Sent |
+| Manual | Recipient, meaning they unsubscribed | Opt-out from all marketing email | Blocked | Sent |
+
+Here's where this differs from Postmark:
+
+- **Transactional streams** - Postmark blocks a transactional stream for all of these reasons. PostHog only blocks transactional email for a hard bounce. The results count how many people this changes, so check that number.
+- **Several broadcast streams** - Someone who unsubscribed from one broadcast stream can still get email from your others in Postmark. In PostHog they're opted out of all marketing email, so nobody who unsubscribed gets marketing email by accident.
+- **Hard bounces** - A hard bounce on one stream now blocks all email to that address, because it can't receive mail.
+
+Archived and inbound streams aren't read.
+
+PostHog refuses a send to a hard-bounced address with `recipient_suppressed`.
+If your app retries failed sends, make sure that it doesn't retry this error.
+
+## Why it's slow
+
+The import makes at most 2 requests a second to Postmark.
+Postmark doesn't publish a limit, and asks you to slow down when it answers with a rate limit error, so a faster import could slow your production email.
+
+Reading a suppression list takes one request per stream, however long the list is. Each template takes one more request, so 100 templates take about a minute.
+
+## Templates
+
+A template's key in PostHog is its Postmark alias. Characters PostHog doesn't allow, such as `.`, become `-`, and a template with no alias gets `postmark-<id>`.
+If two servers have the same alias, the second gets `<alias>-<server id>`.
+Imported templates aren't transactional until you make them so, and Postmark templates don't name a sender, so choose one on each.
+
+PostHog rewrites Mustachio to Liquid. The values your app passed as `TemplateModel` become `variables` in the template, and each name gets its full path, because a Mustachio section changes where its names are read from:
+
+| Postmark | PostHog |
+| --- | --- |
+| `{{ name }}`, `{{ person.name }}` | `{{ variables.name }}`, `{{ variables.person.name }}` |
+| `{{{ html }}}`, `{{& html }}` | `{{ variables.html \| raw }}` |
+| `{{#person}}{{ name }}{{/person}}` | An `if` around `{{ variables.person.name }}` |
+| `{{^person}}...{{/person}}` | An `unless` |
+| `{{#each items}}{{ sku }}{{/each}}` | A `for` loop |
+| `{{{ pm:unsubscribe }}}` | `{{ unsubscribe_url }}`, in a link when it isn't already in one |
+| `{{! comment }}` | Removed |
+
+Open each template with notes and fix what they mention, then send yourself a test. Here's what to look for:
+
+- **Layouts** - PostHog has no layouts, so each template gets its own copy of its layout. A change to one copy doesn't reach the others. A layout no template uses isn't imported.
+- **CSS** - Postmark copies CSS from a style block onto each element when it sends. PostHog sends the style block as it is, so check the email in the mail clients you care about.
+- **Unsubscribe links** - On a broadcast stream, Postmark adds an unsubscribe link when a template has none. PostHog doesn't, so add one if you send the template as marketing email.
+- **Printing a true or false value** - Postmark prints `True` and `False`. PostHog prints `true` and `false`.
+- **Printing a list or an object** - Postmark prints nothing. PostHog prints its contents.
+- **Anything else in braces** - It stays as visible text, and a note names it, so you can rewrite it in Liquid.
+
+## Sending domains
+
+The import only lists your domains and sender signatures. [Add each domain](/docs/workflows/configure-channels) in PostHog and publish its new DNS records.
+Leave your Postmark records in place while you move, because both tools can sign mail for one domain.
+
+If Postmark already uses PostHog's default `feedback` subdomain for bounces on a domain, a note tells you. Choose a different MAIL FROM subdomain, because two services can't share one DNS name.
+
+## Run it with MCP
+
+With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to move you from Postmark. The `migrating-from-email-providers` skill walks it through the import and the switch.
+
+The tools are the same as in [Import from Resend](/docs/workflows/import-from-resend#run-it-with-mcp).
+
+With MCP, the token passes through the conversation with your agent. To keep it out of the conversation, run the import in the app instead.
+
+## Move your sending
+
+The import finishes with these next steps:
+
+1. Add each sending domain in PostHog and publish its DNS records.
+2. Fix what the template notes mention, choose a sender, and send yourself a test.
+3. [Make a template transactional](/docs/workflows/transactional-emails) and change your app to send it through PostHog. Start with a low-risk email and move the rest one at a time.
+4. If you send a lot of email, move it over several days, because mailbox providers slow down mail from a sender whose volume jumps. Check your [sending allowance](/docs/workflows/sending-reputation) first.
+5. Rebuild your webhooks.
+6. Once nothing sends through Postmark, remove its DNS records and revoke the token you used for this import.
