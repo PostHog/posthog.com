@@ -54,8 +54,15 @@ const matchesSearch = (scopeObject: ScopeObject, search: string): boolean => {
     return tokens.every((token) => haystack.includes(token))
 }
 
-const ScopeCell = ({ action }: { action: ScopeAction | undefined }) =>
-    action ? <code className="text-sm whitespace-nowrap">{action.scope}</code> : <span className="text-muted">-</span>
+const ScopeStrings = ({ actions }: { actions: ScopeAction[] }) => (
+    <div className="flex flex-col items-start gap-1">
+        {actions.map((action) => (
+            <code key={action.scope} className="text-xs whitespace-nowrap">
+                {action.scope}
+            </code>
+        ))}
+    </div>
+)
 
 const Notes = ({ scopeObject }: { scopeObject: ScopeObject }) => {
     const notes = [
@@ -72,7 +79,7 @@ const Notes = ({ scopeObject }: { scopeObject: ScopeObject }) => {
         return null
     }
     return (
-        <ul className="m-0 pl-4 text-sm space-y-1">
+        <ul className="mt-2 mb-0 pl-4 text-xs text-secondary space-y-1">
             {notes.map((note) => (
                 <li key={note}>{note}</li>
             ))}
@@ -81,43 +88,36 @@ const Notes = ({ scopeObject }: { scopeObject: ScopeObject }) => {
 }
 
 const columns = [
-    { name: 'Scope', width: 'minmax(180px, 1fr)', align: 'left' as const },
-    { name: 'What it covers', width: 'minmax(260px, 2fr)', align: 'left' as const },
-    { name: 'Read', width: 'auto', align: 'left' as const },
-    { name: 'Write', width: 'auto', align: 'left' as const },
-    { name: 'Notes', width: 'minmax(200px, 1.5fr)', align: 'left' as const },
+    { name: 'Scope', width: 'minmax(140px, 1fr)', align: 'left' as const },
+    { name: 'What it covers', width: 'minmax(240px, 2.5fr)', align: 'left' as const },
+    { name: 'Scope strings', width: 'auto', align: 'left' as const },
 ]
 
-const toRow = (scopeObject: ScopeObject) => {
-    const read = scopeObject.actions.find((action) => action.action === 'read')
-    const write = scopeObject.actions.find((action) => action.action === 'write')
-    return {
-        key: scopeObject.scopeObject,
-        cells: [
-            {
-                content: (
-                    <div id={scopeObject.scopeObject} className="scroll-mt-24">
-                        <div className="font-semibold">{scopeObject.name}</div>
-                        <code className="text-xs">{scopeObject.scopeObject}</code>
-                    </div>
-                ),
-            },
-            {
-                content: (
-                    <div className="text-sm">
-                        {scopeObject.description}{' '}
-                        {scopeObject.docsUrl && (
-                            <Link to={scopeObject.docsUrl.replace('https://posthog.com', '')}>Docs</Link>
-                        )}
-                    </div>
-                ),
-            },
-            { content: <ScopeCell action={read} /> },
-            { content: <ScopeCell action={write} /> },
-            { content: <Notes scopeObject={scopeObject} /> },
-        ],
-    }
-}
+const toRow = (scopeObject: ScopeObject) => ({
+    key: scopeObject.scopeObject,
+    cells: [
+        {
+            content: (
+                <div id={scopeObject.scopeObject} className="scroll-mt-24">
+                    <div className="font-semibold">{scopeObject.name}</div>
+                    <code className="text-xs">{scopeObject.scopeObject}</code>
+                </div>
+            ),
+        },
+        {
+            content: (
+                <div className="text-sm">
+                    {scopeObject.description}{' '}
+                    {scopeObject.docsUrl && (
+                        <Link to={scopeObject.docsUrl.replace('https://posthog.com', '')}>Docs</Link>
+                    )}
+                    <Notes scopeObject={scopeObject} />
+                </div>
+            ),
+        },
+        { content: <ScopeStrings actions={scopeObject.actions} /> },
+    ],
+})
 
 export default function ScopeReference(): JSX.Element {
     const { allPostHogScopeObject } = useStaticQuery(graphql`
