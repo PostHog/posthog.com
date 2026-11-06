@@ -12,12 +12,12 @@ The examples use Node.js and Python. Every [SDK page](/docs/workflows/transactio
 
 Send a one-time code when someone signs in without a password.
 
-| Setting | Value |
-| --- | --- |
-| Template variables | `code`, `expires_in_minutes` |
-| [Protect sensitive data](/docs/workflows/transactional-emails#protect-sensitive-data) | On, so PostHog keeps no copy of the code |
-| Distinct ID | The user's ID |
-| Idempotency key | `sign-in-code-{code_id}`, one key for each code that you issue |
+| Setting                                                                               | Value                                                          |
+| ------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Template variables                                                                    | `code`, `expires_in_minutes`                                   |
+| [Protect sensitive data](/docs/workflows/transactional-emails#protect-sensitive-data) | On, so PostHog keeps no copy of the code                       |
+| Distinct ID                                                                           | The user's ID                                                  |
+| Idempotency key                                                                       | `sign-in-code-{code_id}`, one key for each code that you issue |
 
 ```liquid
 Your sign-in code is {{ variables.code }}. It expires in {{ variables.expires_in_minutes }} minutes.
@@ -27,16 +27,16 @@ Your sign-in code is {{ variables.code }}. It expires in {{ variables.expires_in
 
 ```js file=Node.js
 export async function sendSignInCode({ user, signInCode }) {
-    const { error } = await posthog.emails.send({
-        to: user.email,
-        templateId: "<template_id>",
-        templateData: { code: signInCode.code, expires_in_minutes: 10 },
-        distinctId: user.id,
-        idempotencyKey: `sign-in-code-${signInCode.id}`,
-    })
-    if (error) {
-        throw error
-    }
+  const { error } = await posthog.emails.send({
+    to: user.email,
+    templateId: "<template_id>",
+    templateData: { code: signInCode.code, expires_in_minutes: 10 },
+    distinctId: user.id,
+    idempotencyKey: `sign-in-code-${signInCode.id}`,
+  });
+  if (error) {
+    throw error;
+  }
 }
 ```
 
@@ -59,30 +59,30 @@ When the person asks for a new code, issue a new code with a new ID. The new ID 
 
 Send a link that confirms that a new user owns their email address.
 
-| Setting | Value |
-| --- | --- |
-| Template variables | `first_name`, `verify_link` |
-| Protect sensitive data | On, so the link's token never goes through a tracking redirect |
-| Distinct ID | The new user's ID. Call `identify()` with the same ID when the user signs up. |
-| Idempotency key | `verify-email-{verification_id}` |
+| Setting                | Value                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------- |
+| Template variables     | `first_name`, `verify_link`                                                   |
+| Protect sensitive data | On, so the link's token never goes through a tracking redirect                |
+| Distinct ID            | The new user's ID. Call `identify()` with the same ID when the user signs up. |
+| Idempotency key        | `verify-email-{verification_id}`                                              |
 
 <MultiLanguage selector="tabs">
 
 ```js file=Node.js
 export async function sendEmailCheck({ user, verification }) {
-    const { error } = await posthog.emails.send({
-        to: user.email,
-        templateId: "<template_id>",
-        templateData: {
-            first_name: user.firstName,
-            verify_link: `https://example.com/verify?token=${verification.token}`,
-        },
-        distinctId: user.id,
-        idempotencyKey: `verify-email-${verification.id}`,
-    })
-    if (error) {
-        throw error
-    }
+  const { error } = await posthog.emails.send({
+    to: user.email,
+    templateId: "<template_id>",
+    templateData: {
+      first_name: user.firstName,
+      verify_link: `https://example.com/verify?token=${verification.token}`,
+    },
+    distinctId: user.id,
+    idempotencyKey: `verify-email-${verification.id}`,
+  });
+  if (error) {
+    throw error;
+  }
 }
 ```
 
@@ -108,30 +108,30 @@ Send it from a background job after the user's row is saved, so a slow send neve
 
 Send an invite to someone who doesn't have an account yet.
 
-| Setting | Value |
-| --- | --- |
-| Template variables | `inviter_name`, `team_name`, `accept_link` |
-| Protect sensitive data | On, because the link carries the invite token |
-| Distinct ID | Leave it out. The invitee isn't a user yet, so you have no distinct ID for them. |
-| Idempotency key | `invite-{invite_id}` |
+| Setting                | Value                                                                            |
+| ---------------------- | -------------------------------------------------------------------------------- |
+| Template variables     | `inviter_name`, `team_name`, `accept_link`                                       |
+| Protect sensitive data | On, because the link carries the invite token                                    |
+| Distinct ID            | Leave it out. The invitee isn't a user yet, so you have no distinct ID for them. |
+| Idempotency key        | `invite-{invite_id}`                                                             |
 
 <MultiLanguage selector="tabs">
 
 ```js file=Node.js
 export async function sendInvite({ invite, inviter, team }) {
-    const { error } = await posthog.emails.send({
-        to: invite.email,
-        templateId: "<template_id>",
-        templateData: {
-            inviter_name: inviter.name,
-            team_name: team.name,
-            accept_link: `https://example.com/invites/${invite.token}`,
-        },
-        idempotencyKey: `invite-${invite.id}`,
-    })
-    if (error) {
-        throw error
-    }
+  const { error } = await posthog.emails.send({
+    to: invite.email,
+    templateId: "<template_id>",
+    templateData: {
+      inviter_name: inviter.name,
+      team_name: team.name,
+      accept_link: `https://example.com/invites/${invite.token}`,
+    },
+    idempotencyKey: `invite-${invite.id}`,
+  });
+  if (error) {
+    throw error;
+  }
 }
 ```
 
@@ -155,15 +155,21 @@ Without a distinct ID, PostHog records the email on a person whose distinct ID i
 
 ## Receipt with a PDF
 
+<CalloutBox icon="IconWarning" title="Attachments temporarily unavailable" type="warning">
+
+Attachments are temporarily unavailable. This example returns a `400` error until attachments are re-enabled in a future update.
+
+</CalloutBox>
+
 Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional-emails#choose-where-the-emails-content-lives), so your code renders the email. The SDKs don't send copies and attachments yet, so this example uses the API.
 
-| Setting | Value |
-| --- | --- |
-| Template key | `receipt` |
-| Copies | `cc` to the billing contact, if the customer has one |
-| Attachment | The invoice PDF, 512 KB at most for all files together |
-| Distinct ID | The customer's user ID |
-| Idempotency key | `receipt-{order_id}` |
+| Setting         | Value                                                  |
+| --------------- | ------------------------------------------------------ |
+| Template key    | `receipt`                                              |
+| Copies          | `cc` to the billing contact, if the customer has one   |
+| Attachment      | The invoice PDF, 512 KB at most for all files together |
+| Distinct ID     | The customer's user ID                                 |
+| Idempotency key | `receipt-{order_id}`                                   |
 
 <MultiLanguage selector="tabs">
 
