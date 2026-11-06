@@ -627,7 +627,7 @@ A `reset()`, `identify()` or `optOut()` made straight after an un-awaited `captu
 
 ### Events go to capture v1
 
-On iOS, macOS, Android, Windows and Linux, version 6 sends events to capture v1 instead of `/batch/`. iOS and macOS do this through `posthog-ios` 4.0, Android through `posthog-android` 4.0, and Windows and Linux in the SDK's Dart client. For how the native SDKs behave, see the [`posthog-ios` 4.0](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) and [`posthog-android` 4.0](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md) migration guides.
+On iOS, macOS, Android, Windows and Linux, version 6 sends events to capture v1 instead of `/batch/`. iOS and macOS do this through `posthog-ios` 4.0, Android through `posthog-android` 4.0, and Windows and Linux in the SDK's Dart client. For how the native SDKs behave, see the [`posthog-ios` 4.0](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) and [`posthog-android` 4.0](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md) migration guides. For the changes every SDK shares, such as event validation, property precedence and retries, see the [capture v1 upgrade guide](/docs/libraries/capture-v1).
 
 Web is unchanged. Flutter web runs `posthog-js`, which keeps sending events to the endpoints it uses today.
 
