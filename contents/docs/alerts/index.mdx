@@ -275,6 +275,81 @@ When creating or editing an alert, you can add notification destinations inline:
 
 You can add multiple notification destinations to a single alert, up to five. Each destination appears in the list with its status.
 
+### Webhook payloads
+
+PostHog sends an HTTP `POST` with a JSON body in the [Alertmanager webhook format](https://prometheus.io/docs/alerting/latest/configuration/#webhook_config), so incident and on-call tools that accept Alertmanager webhooks can read it without a custom parser. The webhook URL must use `https`.
+
+- **Headers:**
+  - `Content-Type: application/json`
+  - `X-PostHog-Webhook-Version: 2` is the payload version. New fields may be added to the body without changing it, so ignore unknown fields rather than rejecting the payload. A breaking change would ship under a new version.
+
+Each request carries one alert. The `posthog_event_kind` label tells you what happened. Route on it:
+
+| `posthog_event_kind` | `status` | Meaning |
+| --- | --- | --- |
+| `firing` | `firing` | The alert condition is met. PostHog sends this on every check while the condition is met, except for AI detector alerts, which send it once. |
+| `errored` | `firing` | A check couldn't run. `annotations.error` carries the reason. |
+| `verdict_changed` | `resolved` | A follow-up about a firing PostHog already sent, such as the result of an investigation. It uses its own `fingerprint`, so it doesn't open or close anything. |
+
+Insight alerts don't send a payload when the condition stops being met, so your receiver never gets a `resolved` payload for a `firing` one. Resolve those alerts in your receiver, for example with an auto-resolve timeout.
+
+Alertmanager has only the `firing` and `resolved` statuses, so `errored` is sent as `firing`. It uses its own `fingerprint`, so your receiver treats it as a separate alert from the condition.
+
+Labels:
+
+- `alertname` is the alert's name.
+- `posthog_configuration_id` identifies the alert.
+- `posthog_source_kind` is `insight`.
+- `posthog_event_kind` is one of the values in the table above.
+- An alert that checks each breakdown value separately adds a `breakdown` label with that value.
+
+Annotations:
+
+- `summary` is a one-line headline, such as "Insight alert 'Daily signups' is firing".
+- `description` lists the details of the check, one per line.
+- `value` is the value the check measured, when there is one.
+- `error` is the reason a check couldn't run, on `errored` payloads.
+
+`startsAt` is when the alert started firing, and `endsAt` is `0001-01-01T00:00:00Z` on every payload except `verdict_changed`. `generatorURL` links to the alert in PostHog. `fingerprint` is the same for every `firing` payload of one alert, or of one breakdown value, so repeated payloads update one alert in your receiver.
+
+A firing payload looks like this:
+
+```json
+{
+  "version": "4",
+  "groupKey": "0192f3a4-...:...",
+  "truncatedAlerts": 0,
+  "status": "firing",
+  "receiver": "posthog",
+  "groupLabels": {
+    "alertname": "Daily signups",
+    "posthog_configuration_id": "0192f3a4-...",
+    "posthog_source_kind": "insight"
+  },
+  "commonLabels": {
+    "alertname": "Daily signups",
+    "posthog_configuration_id": "0192f3a4-...",
+    "posthog_source_kind": "insight",
+    "posthog_event_kind": "firing"
+  },
+  "commonAnnotations": { "summary": "Insight alert 'Daily signups' is firing", "...": "..." },
+  "externalURL": "https://us.posthog.com",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": { "...": "the same labels as commonLabels" },
+      "annotations": { "...": "the same annotations as commonAnnotations" },
+      "startsAt": "2026-11-05T12:00:00Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "https://us.posthog.com/project/1/...",
+      "fingerprint": "3f1c9a0b2d4e6f78"
+    }
+  ]
+}
+```
+
+Projects that had a webhook on logs or insight alerts by November 6, 2026 keep receiving the earlier payload, sent with `X-PostHog-Webhook-Version: 1`. Check the header to tell the two formats apart.
+
 ## Advanced options
 
 You can skip weekend checks for real-time, 15-minute, hourly, and daily alerts. Weekly and monthly alerts do not support this option.
