@@ -60,10 +60,7 @@ const ScopeStrings = ({ actions }: { actions: ScopeAction[] }) => (
     <div className="flex flex-col items-start gap-1.5">
         {actions.map((action) => (
             <div key={action.scope} className="flex flex-col items-start">
-                <code className="text-xs break-words">
-                    {action.scope.split(':')[0]}:<wbr />
-                    {action.action}
-                </code>
+                <code className="text-xs whitespace-nowrap">{action.scope}</code>
                 <span className="text-xs text-secondary">{LEVEL_LABELS[action.action]}</span>
             </div>
         ))}
@@ -94,9 +91,9 @@ const Notes = ({ scopeObject }: { scopeObject: ScopeObject }) => {
 }
 
 const columns = [
-    { name: 'Scope', width: 'minmax(110px, 1fr)', align: 'left' as const },
-    { name: 'What it covers', width: 'minmax(220px, 2.2fr)', align: 'left' as const },
-    { name: 'Request one', width: 'minmax(150px, 1.3fr)', align: 'left' as const },
+    { name: 'Scope', width: 'minmax(120px, 1fr)', align: 'left' as const },
+    { name: 'What it covers', width: 'minmax(240px, 2.5fr)', align: 'left' as const },
+    { name: 'Request one', width: 'auto', align: 'left' as const },
 ]
 
 const toRow = (scopeObject: ScopeObject) => ({
