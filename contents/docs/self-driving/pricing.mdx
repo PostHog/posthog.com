@@ -65,16 +65,12 @@ The skill:
 
 Your sources decide which reports get researched, so start here. [Turn off a source](/docs/self-driving/inbox/sources#configure-sources) to stop Self-driving from watching it. Reports that already exist stay in your inbox.
 
-{/* TODO(Annika): check how the AI evals and Alerts controls in the table below work exactly before merging. */}
-
 Before you turn off a whole source, check whether one part of it drives the spend. Some sources let you turn down part of the signals they send:
 
 | Source                                         | What you can turn down                                                                                                                                                  |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Error tracking](/docs/error-tracking)         | Turn new, reopened, and spiking issues off separately.                                                                                                                  |
 | [Replay Vision](/docs/replay-vision)           | Stop a scanner from sending findings to your inbox while it keeps scanning, lower the share of recordings it scans, or turn it off.                                     |
-| [AI evals](/docs/ai-evals)                     | Turn off an evaluation report, run it less often, or cap its daily runs. This also changes that report's email and Slack delivery.                                     |
-| [Alerts](/docs/alerts)                         | Turn off the agent that investigates an alert when it fires, or hold back investigations that come back inconclusive.                                                   |
 | Linear                                         | Choose which teams' issues Self-driving watches.                                                                                                                        |
 
 Other sources, such as support tickets, have no setting that selects part of the source. Keep them, turn them off, or [steer them](#steering-instructions).
