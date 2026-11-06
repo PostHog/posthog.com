@@ -243,6 +243,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         { type: 'separator' },
         {
             type: 'item',
+            label: 'PostHog AI',
+            link: '/ai',
+            icon: <Icons.IconAI className="size-4 text-lilac" />,
+        },
+        {
+            type: 'item',
             label: 'PostHog Self-driving',
             link: '/self-driving',
             icon: <Icons.IconFlag className="size-4 text-red" />,
