@@ -287,13 +287,13 @@ Each request carries one alert. The `posthog_event_kind` label tells you what ha
 
 | `posthog_event_kind` | `status` | Meaning |
 | --- | --- | --- |
-| `firing` | `firing` | The alert condition is met. |
-| `resolved` | `resolved` | The alert condition is no longer met. |
+| `firing` | `firing` | The alert condition is met. PostHog sends this on every check while the condition is met, except for AI detector alerts, which send it once. |
 | `errored` | `firing` | A check couldn't run. `annotations.error` carries the reason. |
-| `broken` | `firing` | Checks failed repeatedly and PostHog turned the alert off. |
 | `verdict_changed` | `resolved` | A follow-up about a firing PostHog already sent, such as the result of an investigation. It uses its own `fingerprint`, so it doesn't open or close anything. |
 
-Alertmanager has only the `firing` and `resolved` statuses, so `errored` and `broken` are sent as `firing`. They use their own `fingerprint`, so a later `resolved` for the condition doesn't close them.
+Insight alerts don't send a payload when the condition stops being met, so your receiver never gets a `resolved` payload for a `firing` one. Resolve those alerts in your receiver, for example with an auto-resolve timeout.
+
+Alertmanager has only the `firing` and `resolved` statuses, so `errored` is sent as `firing`. It uses its own `fingerprint`, so your receiver treats it as a separate alert from the condition.
 
 Labels:
 
@@ -308,9 +308,9 @@ Annotations:
 - `summary` is a one-line headline, such as "Insight alert 'Daily signups' is firing".
 - `description` lists the details of the check, one per line.
 - `value` is the value the check measured, when there is one.
-- `error` is the reason a check couldn't run, on `errored` and `broken` payloads.
+- `error` is the reason a check couldn't run, on `errored` payloads.
 
-`startsAt` is when the alert started firing, and `endsAt` is `0001-01-01T00:00:00Z` until it resolves. `generatorURL` links to the alert in PostHog. `fingerprint` is the same for the `firing` and `resolved` payloads of one alert, or of one group in a grouped alert, so you can use it to match them.
+`startsAt` is when the alert started firing, and `endsAt` is `0001-01-01T00:00:00Z` on every payload except `verdict_changed`. `generatorURL` links to the alert in PostHog. `fingerprint` is the same for every `firing` payload of one alert, or of one breakdown value, so repeated payloads update one alert in your receiver.
 
 A firing payload looks like this:
 
