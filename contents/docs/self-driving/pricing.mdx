@@ -7,7 +7,7 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-PostHog Self-driving is priced on usage. You pay for the work agents do on your behalf: watching the [sources](/docs/self-driving/inbox/sources) you turn on, running [scouts](/docs/self-driving/scouts), researching [reports](/docs/self-driving/reports), and opening pull requests.
+PostHog Self-driving is priced on usage. You pay for the work agents do on your behalf: watching the [sources](/docs/self-driving/inbox/sources) you turn on, running [scouts](/docs/self-driving/scouts), researching [reports](/docs/self-driving/reports), and, if you turn them on, opening pull requests.
 
 Self-driving is charged in [AI credits](/docs/posthog-ai/pricing), the same unit other AI features in PostHog use. **1 AI credit = $0.01**.
 
@@ -15,7 +15,7 @@ The number of credits each piece of work uses varies with how much effort it tak
 
 ## Your first month
 
-Your first month of Self-driving comes with **1,000 AI credits, worth $10**, so you can see what the agents find in your product before you pay anything. After that, there's no recurring free tier. You pay for what you use.
+Your first month of Self-driving comes with **1,000 AI credits, worth $10**, so you can see what the agents find in your product before you pay anything. During your first month, Self-driving creates up to 5 reports and runs up to 3 scouts. After that, there's no recurring free tier. You pay for what you use.
 
 ## How spend builds up
 
@@ -23,7 +23,7 @@ Knowing where spend comes from tells you which settings shape it.
 
 - **Sources:** Each source you turn on sends [signals](/docs/self-driving/signals) to Self-driving. You pay for processing and grouping those signals, and for researching the reports they form.
 - **Scout runs:** Each scheduled scout run costs money, whether it finds something or not. A scout's schedule affects its spend more than what it finds.
-- **Pull requests:** Writing a pull request for an actionable report costs money.
+- **Pull requests:** Pull requests are off by default. If you turn them on, writing a pull request for an actionable report costs money.
 
 ## Track your spend
 
@@ -69,7 +69,7 @@ Before you turn off a whole source, check whether one part of it drives the spen
 
 | Source                                         | What you can turn down                                                                                                                                                  |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Error tracking](/docs/error-tracking)         | Turn new, reopened, and spiking issues off separately.                                                                                                                  |
+| [Error Tracking](/docs/error-tracking)         | Turn new, reopened, and spiking issues off separately.                                                                                                                  |
 | [Replay Vision](/docs/replay-vision)           | Stop a scanner from sending findings to your inbox while it keeps scanning, lower the share of recordings it scans, or turn it off.                                     |
 | Linear                                         | Choose which teams' issues Self-driving watches.                                                                                                                        |
 
@@ -84,11 +84,15 @@ A scout that rarely creates reports can still be useful if it keeps existing rep
 
 #### Steering instructions
 
-[Steering instructions](/docs/self-driving/steering) tell agents what to focus on and what to skip, for example "Skip support tickets that are low-priority questions about billing." They change what agents spend effort on, not how much work arrives, so their effect on spend is hard to predict. Check your spend again after two weeks.
+[Steering instructions](/docs/self-driving/steering) tell scouts and research agents what to focus on and what to skip, for example "Skip support tickets that are low-priority questions about billing." Some sources also take their own [guidance](/docs/self-driving/inbox/sources#steer-a-source-with-guidance) about what to skip, but not every source supports it yet.
+
+Steering changes what agents spend effort on, not how much work arrives, so its effect on spend is hard to predict. Check your spend again after two weeks.
 
 #### Pull requests
 
-- **PR generation:** Turn off automatic pull requests for actionable reports. Reports still land in your inbox.
+Pull requests are optional and off by default. Reports land in your inbox either way.
+
+- **PR generation:** Turn on automatic pull requests for actionable reports.
 - **Priority threshold:** Set the lowest report priority that opens a pull request automatically. Lower-priority fixes then need a manual start. You can also set your own threshold under **Your overrides**. The priorities, from highest to lowest, are **P0 – Critical**, **P1 – High**, **P2 – Medium**, **P3 – Low**, and **P4 – Minimal**.
 
 #### Limits

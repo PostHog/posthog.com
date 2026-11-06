@@ -21,7 +21,7 @@ That's the failure mode, and the whole system is built to avoid it. Three things
 
 1. **Reports are investigated before anything is written.** An agent has to confirm the problem is real in your data and your code before a PR exists at all. Reports that don't clear the bar never become code.
 2. **Every change is a pull request a human reviews.** It arrives with your CI and review rules attached, and nothing merges itself.
-3. **You see what every piece of work costs.** [Spend](/docs/self-driving/pricing#track-your-spend) is broken down by source and scout, so work that doesn't lead to useful reports is easy to spot and turn off.
+3. **You see what every piece of work costs.** [Spend](/docs/self-driving/pricing#track-your-spend) is broken down by source and scout, so you can spot and turn off work that doesn't lead to useful reports.
 
 Self-driving also stays in its lane: maintenance, fixes, and optimization. It doesn't attempt speculative rewrites of your architecture.
 
@@ -44,14 +44,6 @@ Nothing reaches production without a human clicking merge.
 ## Do you use this on PostHog itself?
 
 Yes, heavily. A troop of more than 90 scouts – the canonical fleet plus dozens our own teams have written – watches the PostHog app, and reports about posthog.com become pull requests on [the public repo that builds this site](https://github.com/PostHog/posthog.com/pulls), where you can read them. We're the first customer of every part of the loop, and the first to feel it when something's off.
-
-## What happens when it gets something wrong?
-
-It will sometimes; it's in open beta and we say so on every page. The system is designed so that being wrong is cheap:
-
-- A wrong report costs you the research behind it. Decline or snooze it, and dismiss it with a note so later runs learn from it.
-- A wrong PR costs you a review. Decline it, or ask the agent for changes.
-- A wrong merged change gets caught by the loop itself. PostHog measures whether the targeted metric actually moved, and a validation scout re-checks fixes after a soak window.
 
 ## Is my code or data used to train models?
 
