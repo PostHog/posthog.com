@@ -4,14 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Data quality is in beta" type="action">
-
-Found a bug, or have feedback? [Contact support](https://app.posthog.com/home#supportModal).
-
-</CalloutBox>
-
 PostHog supports seven data quality check types. Connected tables, saved views, and the PostHog tables `events`, `persons`, and `groups` support every type. Metrics support **Custom SQL** only and must have a saved HogQL definition.
 
 Most checks pass when they find zero failing rows. **Row count** is the exception: it passes when the number of rows is within the limits you set.
@@ -20,15 +12,15 @@ Most checks pass when they find zero failing rows. **Row count** is the exceptio
 
 Start by choosing the table, view, metric, or PostHog table that you want to check. Then provide:
 
-| Field | What to enter |
-| --- | --- | --- |
-| **Check type** | One of the seven types on this page. Metrics only support **Custom SQL**. |
-| **Column** | The column to check when the selected type needs one. |
-| Type-specific options | The allowed values, referenced table and column, row limits, maximum age, or query described below. |
-| **Name** | An optional name that starts with a letter and contains only letters, numbers, and underscores. Names must be unique across active checks in the project. |
-| **Description** | Why the check exists and what a failure means. |
-| **Severity** | **Error** when a failure makes the data untrustworthy, or **Warning** when it provides useful context. |
-| **Tags** | Optional labels that help organize checks. |
+| Field                 | What to enter                                                                                                                                             |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Check type**        | One of the seven types on this page. Metrics only support **Custom SQL**.                                                                                 |
+| **Column**            | The column to check when the selected type needs one.                                                                                                     |
+| Type-specific options | The allowed values, referenced table and column, row limits, maximum age, or query described below.                                                       |
+| **Name**              | An optional name that starts with a letter and contains only letters, numbers, and underscores. Names must be unique across active checks in the project. |
+| **Description**       | Why the check exists and what a failure means.                                                                                                            |
+| **Severity**          | **Error** when a failure makes the data untrustworthy, or **Warning** when it provides useful context.                                                    |
+| **Tags**              | Optional labels that help organize checks.                                                                                                                |
 
 ## Not null
 
@@ -92,15 +84,15 @@ Metric check SQL can't define common table expressions (CTEs), including nested 
 
 ## How each type handles null values
 
-| Check type | Null behavior |
-| --- | --- |
-| **Not null** | Each null is a failure. |
-| **Unique** | Nulls are ignored. |
-| **Accepted values** | Nulls are ignored. Add a separate **Not null** check when null isn't valid. |
-| **Relationships** | Nulls in the source column are ignored. Add a separate **Not null** check when every row must have a reference. |
-| **Row count** | Every row counts, regardless of which values are null. |
-| **Freshness** | Null timestamps are ignored when PostHog finds the newest value. The check fails if no non-null timestamp exists. |
-| **Custom SQL** | Your query decides which null values return as failures. |
+| Check type          | Null behavior                                                                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Not null**        | Each null is a failure.                                                                                           |
+| **Unique**          | Nulls are ignored.                                                                                                |
+| **Accepted values** | Nulls are ignored. Add a separate **Not null** check when null isn't valid.                                       |
+| **Relationships**   | Nulls in the source column are ignored. Add a separate **Not null** check when every row must have a reference.   |
+| **Row count**       | Every row counts, regardless of which values are null.                                                            |
+| **Freshness**       | Null timestamps are ignored when PostHog finds the newest value. The check fails if no non-null timestamp exists. |
+| **Custom SQL**      | Your query decides which null values return as failures.                                                          |
 
 ## Limit checks to recent PostHog rows
 

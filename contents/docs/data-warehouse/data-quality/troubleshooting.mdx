@@ -4,26 +4,18 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Data quality is in beta" type="action">
-
-Found a bug, or have feedback? [Contact support](https://app.posthog.com/home#supportModal).
-
-</CalloutBox>
-
 Start troubleshooting with the individual check result, then use the overall health status to understand its effect on the table, view, or metric.
 
 ## Understand check results
 
 Each check execution ends with one result:
 
-| Result | Meaning |
-| --- | --- |
-| **Passed** | The assertion succeeded. Most checks found zero failing rows. |
-| **Failed** | The assertion ran and found a violation. This is a data result, not a query error. |
+| Result      | Meaning                                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------------------------- |
+| **Passed**  | The assertion succeeded. Most checks found zero failing rows.                                              |
+| **Failed**  | The assertion ran and found a violation. This is a data result, not a query error.                         |
 | **Errored** | PostHog couldn't compile or execute the check. The result doesn't prove that the data is valid or invalid. |
-| **Skipped** | PostHog couldn't run the check, usually because its table, view, or metric was deleted. |
+| **Skipped** | PostHog couldn't run the check, usually because its table, view, or metric was deleted.                    |
 
 Row-based checks show how many rows failed. Row count and freshness checks show the value they observed instead. A **Row count** check has no individual failing rows.
 
@@ -31,13 +23,13 @@ Row-based checks show how many rows failed. Row count and freshness checks show 
 
 PostHog rolls the latest result of every enabled check into one health value for the table, view, or metric.
 
-| Health | Meaning |
-| --- | --- |
-| **Failing** | At least one error-severity check failed. |
-| **Erroring** | No error-severity check is failing, but at least one check errored. |
-| **Warning** | Only warning-severity checks are failing. |
-| **Healthy** | At least one check passed, with no failing or errored check taking priority. |
-| **Not run yet** | No enabled check has produced a usable result. |
+| Health          | Meaning                                                                      |
+| --------------- | ---------------------------------------------------------------------------- |
+| **Failing**     | At least one error-severity check failed.                                    |
+| **Erroring**    | No error-severity check is failing, but at least one check errored.          |
+| **Warning**     | Only warning-severity checks are failing.                                    |
+| **Healthy**     | At least one check passed, with no failing or errored check taking priority. |
+| **Not run yet** | No enabled check has produced a usable result.                               |
 
 The worst outcome wins in the order shown above. A failing error-severity check takes priority over an errored check.
 

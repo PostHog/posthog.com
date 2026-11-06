@@ -4,14 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Data quality is in beta" type="action">
-
-Found a bug, or have feedback? [Contact support](https://app.posthog.com/home#supportModal).
-
-</CalloutBox>
-
 Use the [PostHog MCP server](/docs/model-context-protocol) to discover subjects, create and manage checks, start runs, read results, and change schedules. Use the data quality information-schema tables to list existing coverage and analyze recent outcomes with SQL.
 
 ## Permissions and scopes
@@ -33,16 +25,16 @@ PostHog filters subject discovery, definitions, results, health, and notificatio
 
 The data quality MCP surface has eight enabled tools. These tools work across tables, views, metrics, and PostHog tables, so you don't need a subject-specific tool name.
 
-| Tool | Use it to |
-| --- | --- |
-| `data-quality-subjects` | List subjects you can read, their IDs, columns, time columns, and whether you can edit them. |
-| `data-quality-check-types` | List supported check types and their configuration schemas. Pass `subject_type` to narrow the result. |
-| `data-quality-check-create` | Create a check or return an existing check with the same subject and assertion. |
-| `data-quality-check-update` | Change a check's definition or presentation without changing its subject or history. |
-| `data-quality-check-run` | Start one check and return its suite run. |
-| `data-quality-check-results` | Read the check's recent executions, counts, errors, and compiled diagnostic queries. |
-| `data-quality-check-schedule` | Update the schedule for a metric or PostHog table. |
-| `data-quality-check-delete` | Soft-delete a check while keeping its run history queryable. |
+| Tool                          | Use it to                                                                                             |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `data-quality-subjects`       | List subjects you can read, their IDs, columns, time columns, and whether you can edit them.          |
+| `data-quality-check-types`    | List supported check types and their configuration schemas. Pass `subject_type` to narrow the result. |
+| `data-quality-check-create`   | Create a check or return an existing check with the same subject and assertion.                       |
+| `data-quality-check-update`   | Change a check's definition or presentation without changing its subject or history.                  |
+| `data-quality-check-run`      | Start one check and return its suite run.                                                             |
+| `data-quality-check-results`  | Read the check's recent executions, counts, errors, and compiled diagnostic queries.                  |
+| `data-quality-check-schedule` | Update the schedule for a metric or PostHog table.                                                    |
+| `data-quality-check-delete`   | Soft-delete a check while keeping its run history queryable.                                          |
 
 ## Create and run a check
 

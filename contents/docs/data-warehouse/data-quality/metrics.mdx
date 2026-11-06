@@ -4,14 +4,6 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
-
-<CalloutBox icon="IconFlask" title="Data quality is in beta" type="action">
-
-Found a bug, or have feedback? [Contact support](https://app.posthog.com/home#supportModal).
-
-</CalloutBox>
-
 Metric checks test the rows returned by a saved [semantic layer metric](/docs/semantic-layer/metrics). They help you verify constraints such as revenue never being negative or a daily signup count staying above a required minimum.
 
 Only metrics with a saved HogQL definition support data quality checks. Markdown definitions, Trends definitions, metrics without a definition, and deleted metrics aren't supported.
@@ -73,11 +65,11 @@ Fix the metric definition or access problem, then reload the editor.
 
 Saving a check and running it are separate operations.
 
-| Operation | What PostHog verifies |
-| --- | --- |
-| Open the check editor | Executes a zero-row schema query to discover the metric's output columns. |
+| Operation              | What PostHog verifies                                                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Open the check editor  | Executes a zero-row schema query to discover the metric's output columns.                                                                             |
 | Save or edit the check | Parses the saved metric definition and check query, validates the placeholder and CTE rules, and saves the definition without running the full check. |
-| Run the check | Binds the current saved metric definition into the check and executes the compiled query. |
+| Run the check          | Binds the current saved metric definition into the check and executes the compiled query.                                                             |
 
 A check can save successfully and later error during execution. For example, a table can become unavailable, permissions can change, or a query can time out.
 
