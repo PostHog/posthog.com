@@ -51,7 +51,7 @@ export const features = {
     },
     tool_quality: {
         title: 'Tool quality',
-        headline: 'Tool quality',
+        headline: 'Errors and Latency',
         description:
             'Monitor error rates, call volume, and latency percentiles for each tool, next to the failed calls and their error details.',
         icon: <IconPulse />,
