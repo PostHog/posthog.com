@@ -211,33 +211,6 @@ async def send_password_reset(user_id: str, email: str, html: str, reset_request
 
 A send has `template_id` or `template_key`, not both, or it raises `TypeError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
-### Copies and attachments
-
-Content from your code takes `cc`, `bcc`, and `attachments`:
-
-- **`cc` and `bcc`** - One address or a list of plain addresses.
-- **`attachments`** - A list of dicts. Each one has `filename` and `content`, and can also have `content_type` and `content_id`.
-
-Pass the file's bytes as `content`, and the client encodes them for you. The client takes a `str` as content that's already Base64. A file that the client can't send raises `EmailError` with the code `invalid_attachment` before any request.
-
-```python
-from pathlib import Path
-
-posthog.emails.send(
-    to=user.email,
-    template_key="receipt",
-    subject="Your receipt",
-    html=html,
-    cc="billing@example.com",
-    attachments=[
-        {"filename": "receipt.pdf", "content": Path(pdf_path).read_bytes(), "content_type": "application/pdf"}
-    ],
-    distinct_id=str(user.id),
-)
-```
-
-See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
-
 ## Check an email's status
 
 ```python

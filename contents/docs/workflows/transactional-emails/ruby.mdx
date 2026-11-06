@@ -156,31 +156,6 @@ end
 
 A send has `template_id` or `template_key`, not both, or it raises `ArgumentError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
-### Copies and attachments
-
-Content from your code takes `cc`, `bcc`, and `attachments`:
-
-- **`cc` and `bcc`** - One address or a list of plain addresses.
-- **`attachments`** - A list of Hashes. Each one has `filename` and the file's bytes as `content`, and can also have `content_type` and `content_id`.
-
-Read the file with `File.binread`, not `File.read`, and the client encodes the bytes for you. The client takes any other String as content that's already Base64. A file that the client can't send raises `PostHog::EmailError` with the code `invalid_attachment` before any request.
-
-```ruby
-$posthog.emails.send(
-  to: user.email,
-  template_key: 'receipt',
-  subject: 'Your receipt',
-  html: html,
-  cc: 'billing@example.com',
-  attachments: [
-    { filename: 'receipt.pdf', content: File.binread(pdf_path), content_type: 'application/pdf' }
-  ],
-  distinct_id: user.id.to_s
-)
-```
-
-See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
-
 ## Check an email's status
 
 ```ruby
