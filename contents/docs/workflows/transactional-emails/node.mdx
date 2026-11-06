@@ -19,15 +19,15 @@ Reuse the PostHog client your application already creates, and set `secretKey` t
 ```js
 import { PostHog } from "posthog-node"
 
-const posthog = new PostHog("<ph_project_api_key>", {
-    host: "https://us.i.posthog.com",
+const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
     secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
     // This client only sends email, so it doesn't poll flag definitions with the secret key
     enableLocalEvaluation: false,
 })
 ```
 
-- **Local evaluation:** The client starts polling flag definitions with the secret key when it starts. A key with only the **Workflow** scope can't do that, so a client that only sends email needs `enableLocalEvaluation: false`. If your application [evaluates flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too, and leave local evaluation on.
+- **Local evaluation:** The client starts polling flag definitions with the secret key when it starts. A key with only the **Transactional email** scope can't do that, so a client that only sends email needs `enableLocalEvaluation: false`. If your application [evaluates flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too, and leave local evaluation on.
 - **Host:** On PostHog Cloud, the client sends email to the app host of your region, even when `host` is an ingestion host such as `us.i.posthog.com`. For any other host, such as a reverse proxy or a self-hosted instance, set `appHost` to your PostHog app URL. The client refuses to send the secret key to a host that might be a proxy.
 
 ## Send an email
@@ -57,6 +57,49 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 Each request times out after 15 seconds. The client retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 and then 2 seconds, or longer if the server's `Retry-After` asks for it. A `Retry-After` over 30 seconds returns the error at once.
 
 To change this, set `emailRequestTimeoutMs` and `emailRequestMaxRetries` on the client, or `maxRetries` on one send. When a job queue already retries the send, set the retries to `0` and pass an `idempotencyKey` that identifies the email.
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()`, usually the ID your app gives that user, as `distinctId`. PostHog then records the send, and its [engagement events](/docs/workflows/engagement-events) such as sent, opened, and clicked, against that user's person, next to their product events.
+
+- **If you leave it out,** PostHog records the email against a person whose distinct ID is the recipient's email address. Unless your app identifies users by their email address, that's a separate person from your user.
+- **For someone who isn't a user yet,** such as an invite or an email address check before the account exists, there's no distinct ID to pass. Leave `distinctId` out.
+
+## Send content from your code
+
+From version 5.62.0, `send` also takes content that your code rendered, without a template in PostHog. Name the email with `templateKey`, and pass `subject` and `html`, `text`, or both. PostHog sends the content as you wrote it.
+
+For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and pass the result as `html`:
+
+```jsx
+import { render } from "@react-email/render"
+import { PasswordResetEmail } from "./emails/password-reset"
+
+export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
+    const html = await render(<PasswordResetEmail firstName={firstName} resetLink={resetLink} />)
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateKey: "password-reset",
+        subject: "Reset your password",
+        html,
+        from: "Hedgebox <security@example.com>",
+        distinctId: userId,
+        idempotencyKey: `password-reset-${resetRequestId}`,
+    })
+    if (error) {
+        throw error
+    }
+    return data.id
+}
+```
+
+- **Key:** `templateKey` names the email, such as `password-reset`. PostHog groups the email's metrics and sends under it, so use the same key every time you send this email.
+- **Text:** If you leave out `text`, PostHog makes it from `html`.
+- **Sender:** `from` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
+- **Engagement:** PostHog captures the email's engagement events unless you pass `captureEngagement: false`.
+- **One form per send:** A send has `templateId` or `templateKey`, not both. Content from your code takes no `templateData`, because PostHog renders nothing.
+
+See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
 ## Check an email's status
 
