@@ -141,7 +141,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         })
     }
 
-    // Minimal builds, such as Vercel previews, need these pages too.
+    // Minimal builds, such as the preview deploys, need these pages too.
     await createSdkMarkdownReferencePages({ createPage, graphql })
 
     if (isMinimalBuild) {
