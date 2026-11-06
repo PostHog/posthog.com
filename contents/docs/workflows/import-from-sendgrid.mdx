@@ -1,0 +1,177 @@
+---
+title: Import from SendGrid
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Importing from SendGrid is in beta" type="action">
+
+This import isn't on for every project yet, and it might change while we work on it.
+If **SendGrid** isn't an option under **Import from another tool** on the opt-outs page, it isn't on for your project.
+
+</CalloutBox>
+
+You can copy your bounces, unsubscribes, unsubscribe groups, and templates from SendGrid to PostHog in one background import.
+The import only reads from SendGrid, and nothing sends by itself.
+SendGrid keeps working as before while you move your sending over at your own pace.
+
+## What moves and what stays
+
+| In the import window | What PostHog creates | Read access it needs |
+| --- | --- | --- |
+| **Unsubscribe groups** | A marketing message category for each group | `asm.groups.read` |
+| **Bounces, invalid addresses and spam reports** | Entries on your [suppression list](/docs/workflows/opt-outs#the-suppression-list) | `suppression.bounces.read`, `suppression.invalid_emails.read`, `suppression.spam_reports.read` |
+| **Global unsubscribes** | Opt-outs from all marketing email, by email address | `suppression.unsubscribes.read` |
+| **Group unsubscribes** | Opt-outs from the categories that people left | `asm.groups.read` |
+| **Dynamic and legacy templates** | [Library](/docs/workflows/library) templates, with notes on anything to review | `templates.read`, `templates.versions.read` |
+| **Design Library** | Library templates, with notes | None documented |
+| **Single Sends** | Library templates, with notes | `marketing.read` |
+| **Contact lists** | A list of your lists and how many people are on them | `marketing.read` |
+| **Verified senders** | A list of senders and which ones can already send from PostHog | None documented |
+| **Authenticated domains** | A list of domains and which ones can already send from PostHog | `whitelabel.read` |
+
+These stay in SendGrid:
+
+- Automations. SendGrid's API only shares their stats, so there's nothing to read their steps or emails from. Rebuild them as [workflows](/docs/workflows/start-here) using your imported templates.
+- Blocks. SendGrid doesn't keep suppressing these addresses either, because a block is about the message or the sending server, not the address.
+- Inactive template versions. PostHog copies each template's active version, and a note names the others.
+- Contacts. They don't become people in PostHog, and PostHog doesn't need them to send. Unsubscribes come across by email address.
+- Webhooks, API keys, stats, and send history. Rebuild what you need.
+- Domains and their signing keys. PostHog signs mail with its own keys, so [each domain needs new DNS records](#sending-domains).
+
+## Run the import
+
+You need to be an organization admin or owner, with edit access to Workflows in the project.
+
+1. In SendGrid, [create an API key](https://app.sendgrid.com/settings/api_keys) with restricted access, and give it read access to what you're importing. The table above lists what each step needs.
+2. In PostHog, go to **Workflows**, open **Opt-outs**, and click **Import from another tool**.
+3. Select **SendGrid**.
+4. Select what to import, paste the key, and click **Start import**.
+
+If the key is missing access, PostHog says which permissions to add, and nothing starts. Add them in SendGrid, or clear the steps that need them.
+
+You can close the window and come back. Each step shows its progress, and each template links to what PostHog created.
+A project runs one import from a tool at a time.
+
+### Subusers and EU data residency
+
+A SendGrid key reads one account, so import each subuser with its own key, one after another. To import a subuser, create the key while you're logged in as that subuser.
+
+PostHog finds out by itself whether a key belongs to SendGrid's global or EU host (`api.eu.sendgrid.com`).
+If you keep data in SendGrid's EU region for residency reasons, import into a project on [PostHog EU](/docs/privacy/eu-cloud).
+
+## Your API key
+
+**Before the import.** Treat the key as a secret. Give it read access only. `marketing.read` is the one exception, because SendGrid says this permission can also write to your marketing data. If you'd rather not grant it, clear **Single Sends** and **Contact lists**.
+
+**During the import.** PostHog keeps the key encrypted for this import only, and only makes read requests with it.
+
+**After the import.** PostHog deletes the key when the import ends, whether it finished or failed. If an import stops unexpectedly, PostHog deletes the key within about 26 hours of the start.
+
+The key stays valid at SendGrid until you delete it there, so delete it in SendGrid when you're done.
+PostHog asks for a key again each time you import.
+
+## Import again
+
+Importing again adds what's missing and never changes what's already in PostHog, so PostHog wins every time.
+
+| What you import | What importing again does |
+| --- | --- |
+| Suppression | Leaves an existing entry as it is. An address you removed stays removed. |
+| Opt-out | Keeps a choice already stored in PostHog, and adds new categories. |
+| Unsubscribe group | Keeps your edits. A category you deleted stays deleted. |
+| Template | Skips a template when its key is already taken, including by a deleted template or by one you didn't import. |
+| List, sender, or domain | Lists it again. The import writes none of these. |
+
+So fixes you make in SendGrid don't come across. To bring over an edited template, copy the change by hand.
+
+If some steps failed, click **Run again**. Each failed step continues from where it stopped. The counts of a continued step only cover what the new run read, so they don't show the whole list.
+A key that SendGrid rejects needs a new key. For any other failure, run the import again.
+
+## How blocking rules change
+
+PostHog treats these differently from SendGrid, which stops all email to all of them.
+
+| SendGrid list | Marketing email | Transactional email |
+| --- | --- | --- |
+| Bounce | Blocked | Blocked |
+| Invalid email | Blocked | Blocked |
+| Spam report | Blocked | Sent |
+| Global unsubscribe | Blocked | Sent |
+| Group unsubscribe | Blocked in that category | Sent |
+| Block | Not imported | Not imported |
+
+The results show each count, so check how many spam reports and global unsubscribes you imported.
+
+PostHog refuses a send to a hard-bounced address with `recipient_suppressed`.
+If your app retries failed sends, make sure that it doesn't retry this error.
+
+## Why it's slow
+
+The import makes at most 2 requests a second to SendGrid, and waits when SendGrid says a limit is used up.
+SendGrid limits each API endpoint, and your account's other API calls count too, so a faster import could get in the way of your own.
+
+Each template, design, and Single Send costs one more request to read its content.
+
+## Templates
+
+A template's key in PostHog is its SendGrid template ID, such as `d-1234...`. A design's key is `sendgrid-design-<id>`, and a Single Send's key is `sendgrid-singlesend-<id>`.
+Imported templates aren't transactional until you make them so, and a template never sends by itself.
+
+PostHog rewrites Handlebars to Liquid so that a template prints the same thing for the same data. Your app's data goes in `variables`, so `{{order.id}}` becomes `{{ variables.order.id }}`.
+
+| In SendGrid | What PostHog does |
+| --- | --- |
+| `{{name}}`, `{{{name}}}`, nested paths | Keeps them, and HTML escapes the same way |
+| `{{#if}}`, `{{else if}}`, `{{#unless}}` | Keeps SendGrid's rules, so an empty string, a 0, and an empty list count as false |
+| `{{#each}}`, `{{this}}`, `{{../parent}}`, `{{@root}}`, `{{@index}}`, `{{@first}}`, `{{@last}}` | Rewrites them to a Liquid loop |
+| `{{#equals}}`, `{{#notEquals}}` | Compares as text, so 3 equals `"3"` as in SendGrid |
+| `{{#greaterThan}}`, `{{#lessThan}}`, `{{#and}}`, `{{#or}}`, `{{length}}` | Rewrites them to Liquid |
+| `{{insert name "default=there"}}` | A variable with the default `there` |
+| `{{formatDate date "MMMM DD, YYYY" "-0800"}}` | Liquid's `date` filter with the same format and offset |
+| `{{{unsubscribe}}}`, `<%asm_group_unsubscribe_raw_url%>` and the other unsubscribe tags | PostHog's unsubscribe link |
+| `-name-` in a legacy template | A variable that prints `-name-` if you pass no value, as SendGrid does |
+| `<%subject%>` and `<%body%>` in a legacy template | The variables `subject` and `body` |
+
+Anything else in braces stays as visible text, and a note names it, so you can rewrite it in Liquid.
+
+Open each template with notes and fix what they mention, then send yourself a test. The notes also cover these differences:
+
+- **Sender** - SendGrid sets the sender on each send, so a template has none. Choose one before you send it.
+- **Plain text** - SendGrid builds the plain text version when it sends, if you ask it to. PostHog builds it once, during the import, so update it when you edit the HTML.
+- **Unsubscribe links** - A SendGrid link takes people out of a group in one click. PostHog's link opens a page where they choose what to leave.
+- **Date formats from your data** - `formatDate` can read its format from your data in SendGrid. PostHog needs the format in the template.
+- **Design editor** - The HTML of a template built in SendGrid's design editor comes across, and its drag and drop blocks can't.
+- **Sender and contact fields** - SendGrid fills `Sender_Name` and the other sender fields, and fills contact fields such as `first_name` in a Single Send. PostHog doesn't, so your app has to pass them.
+
+In a subject line or plain text, PostHog doesn't HTML escape values at all. So `{{name}}` with the value `Tom & Ann` shows `Tom & Ann` there, where SendGrid shows `Tom &amp; Ann`.
+
+### Single Sends
+
+Each Single Send becomes a template with its content, sender, and category. Who it goes to doesn't come across, because that's a list of SendGrid contacts.
+A Single Send that's still scheduled in SendGrid stays scheduled there, so cancel it if you don't want it to go out.
+
+## Sending domains
+
+The import only lists your domains and senders. [Add each domain](/docs/workflows/configure-channels) in PostHog and publish its new DNS records.
+Leave your SendGrid records in place while you move, because both tools can sign mail for one domain. A note lists which records those are.
+
+If SendGrid already uses PostHog's default `feedback` subdomain on a domain, a note tells you. Choose a different MAIL FROM subdomain, because both tools can't claim one name in DNS.
+
+## Run it with MCP
+
+With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to move you from SendGrid. The `migrating-from-email-providers` skill walks it through the import and the switch.
+
+The agent uses the same tools as for [Resend](/docs/workflows/import-from-resend#run-it-with-mcp).
+With MCP, the API key passes through the conversation with your agent. To keep it out of the conversation, run the import in the app instead.
+
+## Move your sending
+
+The import finishes with these next steps:
+
+1. Add each sending domain in PostHog and publish its DNS records.
+2. Fix what the template notes mention, and send yourself a test.
+3. [Make a template transactional](/docs/workflows/transactional-emails) and change your app to send it through PostHog. Its key is the SendGrid template ID, and your data goes in as variables. Start with a low-risk email and move the rest one at a time.
+4. Rebuild your SendGrid automations as workflows, using the imported templates, and turn each one off in SendGrid when its workflow goes live.
+5. If you send a lot of email, move it over several days, because mailbox providers slow down mail from a sender whose volume jumps. Check your [sending allowance](/docs/workflows/sending-reputation) first.
+6. Once nothing sends through SendGrid, remove its DNS records and delete the API key you created for this import.
