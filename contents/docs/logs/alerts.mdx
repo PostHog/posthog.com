@@ -125,7 +125,7 @@ A firing payload looks like this:
 }
 ```
 
-Projects that already had webhooks on logs or insight alerts before this format was introduced keep receiving the earlier payload, sent with `X-PostHog-Webhook-Version: 1`. Check the header to tell the two formats apart.
+Projects that had a webhook on logs or insight alerts by November 6, 2026 keep receiving the earlier payload, sent with `X-PostHog-Webhook-Version: 1`. Check the header to tell the two formats apart.
 
 ## Signals for the self-driving inbox
 
