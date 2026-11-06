@@ -1,6 +1,6 @@
 const Slugger = require('github-slugger')
 const settings = require('./algoliaSettings.json')
-const { isSdkReferenceArchive } = require('./sdkMarkdownReferences')
+const { isNoindexSdkReference } = require('./sdkMarkdownReferences')
 
 // Lower values win after Algolia's textual relevance criteria tie.
 const PATH_RANKING = {
@@ -413,15 +413,16 @@ const retrieveSearchPages = {
     `,
     transformer: ({ data }) => {
         const pages = new Map()
-        // SDK references are plain Markdown, not MDX, so they join the MDX content in the MDX shape.
-        // Past and next majors, and the migration guides, stay out of search like they stay out of the sitemap.
+        // SDK references are plain Markdown, not MDX, so they join the MDX content in the MDX shape. The pages
+        // that answer noindex stay out of search, as they stay out of the sitemap. A reference runs to about
+        // 400 KB, twice the largest page indexed today, so search reads its first 150,000 characters.
         const sdkReferences = data.sdkReferences.nodes.map(({ id, slug, title, body, tableOfContents }) => ({
             id,
             slug,
             fields: { slug },
-            frontmatter: { title, noindex: isSdkReferenceArchive(slug) },
+            frontmatter: { title, noindex: isNoindexSdkReference(slug) },
             headings: (tableOfContents || []).map(({ value }) => ({ value, depth: 2 })),
-            rawBody: body,
+            rawBody: body.slice(0, 150000),
             excerpt: '',
         }))
         const contentNodes = [...data.content.nodes, ...sdkReferences]
