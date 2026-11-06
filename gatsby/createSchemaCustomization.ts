@@ -521,6 +521,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       description: String
     }
+    type SdkMarkdownReference implements Node @dontInfer {
+      slug: String!
+      title: String
+      contentMaxWidthClass: String
+      tableOfContents: [SdkMarkdownReferenceHeading]
+      body: String
+    }
+    type SdkMarkdownReferenceHeading {
+      value: String
+      url: String
+      depth: Int
+    }
     type AgentSkill implements Node @dontInfer {
       product: String
       name: String

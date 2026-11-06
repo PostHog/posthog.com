@@ -173,6 +173,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
     const DataWarehouseSource = path.resolve(`src/templates/DataWarehouseSource.tsx`)
+    const SdkMarkdownReferenceTemplate = path.resolve(`src/templates/sdk/SdkMarkdownReference.tsx`)
 
     const result = (await graphql(`
         {
@@ -583,6 +584,24 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     if (eventsResult.error) {
         return Promise.reject(eventsResult.error)
     }
+
+    // SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js).
+    const sdkMarkdownReferences = (await graphql(`
+        {
+            allSdkMarkdownReference {
+                nodes {
+                    id
+                    slug
+                }
+            }
+        }
+    `)) as any
+    if (sdkMarkdownReferences.errors) {
+        return Promise.reject(sdkMarkdownReferences.errors)
+    }
+    sdkMarkdownReferences.data.allSdkMarkdownReference.nodes.forEach(({ id, slug }) => {
+        createPage({ path: slug, component: SdkMarkdownReferenceTemplate, context: { id } })
+    })
 
     const menuFlattened = flattenMenu(menu)
 
