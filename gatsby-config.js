@@ -1,5 +1,5 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
-const { isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
+const { isSdkReferenceArchive, isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
 const qs = require('qs')
 const pLimit = require('p-limit')
 
@@ -244,10 +244,7 @@ module.exports = {
 
                     // The Markdown SDK reference pages answer noindex until they replace the old ones (see vercel.json).
                     const isNoindexSdkReference = (path) =>
-                        path.startsWith('/docs/libraries/') &&
-                        (path.endsWith('.x.x') ||
-                            path.endsWith('/migration') ||
-                            path === '/docs/libraries/python/reference')
+                        isSdkReferenceArchive(path) || path === '/docs/libraries/python/reference'
 
                     const transformedPages = allPages
                         .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isNoindexSdkReference(path))
