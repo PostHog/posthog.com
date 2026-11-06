@@ -96,7 +96,7 @@ posthog.capture({
 })
 ```
 
-```swift
+```swift file=iOS
 PostHogSDK.shared.capture(
     "signed_up",
     properties: ["plan": "pro"],
@@ -104,7 +104,7 @@ PostHogSDK.shared.capture(
 )
 ```
 
-```kotlin
+```kotlin file=Android
 PostHog.capture(
     event = "signed_up",
     properties = mapOf("plan" to "pro"),
@@ -112,7 +112,7 @@ PostHog.capture(
 )
 ```
 
-```dart
+```dart file=Flutter
 await Posthog().capture(
   eventName: 'signed_up',
   properties: {'plan': 'pro'},
@@ -302,21 +302,21 @@ posthog.captureAi({
 })
 ```
 
-```swift
+```swift file=iOS
 PostHogSDK.shared.captureAi(
     "$ai_generation",
     properties: ["$ai_model": "gpt-5", "$ai_input_tokens": 120]
 )
 ```
 
-```kotlin
+```kotlin file=Android
 PostHog.captureAi(
     event = "\$ai_generation",
     properties = mapOf("\$ai_model" to "gpt-5", "\$ai_input_tokens" to 120),
 )
 ```
 
-```dart
+```dart file=Flutter
 await Posthog().captureAi(
   eventName: r'$ai_generation',
   properties: {r'$ai_model': 'gpt-5', r'$ai_input_tokens': 120},
