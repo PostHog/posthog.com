@@ -1,0 +1,219 @@
+---
+title: Workload identity federation
+sidebar: Docs
+showTitle: true
+---
+
+> **Note:** PostHog doesn't support any workload provider for workload identity federation yet. This page and the provider pages describe how the feature works so you can plan for it. Until a provider is supported, use a [personal API key](/docs/api/personal-api-keys).
+
+<CalloutBox icon="IconInfo" title="hog isn't released yet" type="fyi">
+
+`hog` is PostHog's new CLI. It isn't released yet. Every `hog` command on these pages is a beta preview of how it works once hog is released, and the details can change. Until then, use [`posthog-cli`](/docs/cli) with a personal API key, as its [authentication docs](/docs/cli#authentication) describe.
+
+</CalloutBox>
+
+Workload identity federation lets a workload you trust, such as a CI job, get a short-lived PostHog token without storing an API key as a secret. The workload proves who it is with the OIDC token its provider issues for each run. PostHog swaps that for a token that works on one project for about 10 minutes.
+
+Other platforms have the same idea under different names. Azure calls it a federated identity credential, AWS a role trust policy, Google Cloud a workload identity provider, and PyPI and npm call it trusted publishing. PostHog's trust policies follow the same OIDC model: an issuer, a subject, and conditions on the token's claims.
+
+## Supported CI providers
+
+Each provider page explains what the job needs, which claims a policy matches, the presets PostHog offers, and how to configure the job.
+
+| Provider | Issuer | Guide |
+| --- | --- | --- |
+| GitHub Actions | `https://token.actions.githubusercontent.com` | [Workload identity for GitHub Actions](/docs/api/workload-identity/github-actions) |
+| GitLab.com | `https://gitlab.com` | [Workload identity for GitLab.com](/docs/api/workload-identity/gitlab) |
+| Depot CI | `https://identity.depot.dev` | [Workload identity for Depot CI](/docs/api/workload-identity/depot) |
+
+More providers may follow later.
+
+## How it works
+
+1. An organization admin adds a **trusted workload** to a project. This creates a trust policy that names the provider, the workload's subject, and the conditions a token must meet, such as a branch or an environment, plus the scopes those tokens carry.
+2. The workload asks its provider for an OIDC token whose audience is your PostHog instance.
+3. The workload sends that token to PostHog's token endpoint, naming the project.
+4. PostHog checks the token's signature, issuer, audience, and expiry, finds the project's trust policy that matches the token's claims, and returns a PostHog access token.
+5. The workload calls the PostHog API with that token until it expires, then exchanges a new OIDC token.
+
+Workload tokens act as the oldest owner of the project's organization, limited to the project and to the scopes in the policy. Changes they make show up in the activity log under the workload, named with the claims its provider records, for example the repository, workflow, and run, with a link to the run and the trust policy.
+
+## Trusted workloads
+
+Find trusted workloads in your project settings, under **Trusted workloads**. Only organization admins and owners can see them, and changing one asks you to log in again if you haven't recently.
+
+Each trust policy has:
+
+- **Provider** - the issuer PostHog trusts for this policy.
+- **Subject** and **name** - the repository or project's ID and its readable name, from the claims the provider names. For GitHub Actions and Depot CI these are `repository_id` and `repository`, and for GitLab.com they're `project_id` and `project_path`. Both must match. The ID never changes, so a repository that is deleted and created again with the same name doesn't match.
+- **Conditions** - claims the token must carry with an exact value, such as a branch or an environment. Each provider lists the claims a policy can use, and when it lists any, a policy must set at least one. A condition you leave empty matches any value. A token that doesn't carry a condition's claim never matches. Values are matched exactly, without wildcards.
+- **Scopes** - every token from the policy gets all of these scopes, and no others.
+
+When more than one policy matches a token, the most specific one wins: a policy with more conditions beats one with fewer. If two are equally specific, the older one wins.
+
+Turning a policy off, editing it, or deleting it stops its tokens from working within about 10 seconds. Every change emails the organization's admins and owners and appears in the activity log.
+
+### Add a trusted workload in settings
+
+1. In your project settings, go to **Trusted workloads** and click **Add trusted workload**.
+2. Under **Provider**, pick your CI provider.
+3. Enter the repository or project name and click **Look up**. PostHog fills in its ID. If PostHog can't find it, enter the ID yourself. Each provider page says where to find it.
+4. Under **Which runs can get a token**, pick one of the common choices, or pick one claim of the token and enter its value. Click **Add condition** to add more. A token must meet every condition.
+5. Give the trusted workload a **Name**, and pick its **Scopes**.
+6. Click **Add trusted workload**. PostHog shows the `posthog.json` keys and the snippet for your CI job, with your PostHog address and project ID filled in, and buttons to copy them.
+
+### Scopes that need care
+
+A policy can grant almost any scope. Some scopes let a token do things that reach beyond the project, last longer than the token, or touch credentials. PostHog shows a warning next to these scopes when you pick them for a trusted workload or a personal API key, and on the approval page. Add them only when the workload needs them.
+
+A few scopes can never be granted to a workload, because they would let a token outlive itself, change its own policy, or read one person's private data:
+
+- `workload_trust_policy` and `workload_trust_policy_request`
+- `project:write`, which can rotate the project's secret token
+- `user:write`, which changes the account of the organization owner the token acts as
+- `task:write`, `conversation:write`, `signal_scout:write`, `business_knowledge:write`, `autoresearch:write`, and `hog_flow:write`, which start agent runs with their own longer-lived tokens (a workflow can create a task)
+- `streamlit_app`, which hands out a one-hour token for a running app
+- `webhook:write`, `batch_export:write`, and `subscription:write`, which set up data feeds or emails that keep sending after the token expires
+- `sharing_configuration`, because a public sharing link keeps working after the token expires
+- `conversation:read` and `task:read`, because a workload token acts as an organization owner, and these read that person's private PostHog AI conversations and tasks
+
+## Asking an admin for a trusted workload
+
+Any project member can ask for a trusted workload. A request grants nothing on its own. It gives you an approval link to send to an organization admin or owner. They open the link, review the policy, who asked for it and, for an OAuth token, through which app, and approve or reject it. Approving creates the trust policy. Requests expire after 24 hours and can't be edited.
+
+### Ask with `hog ci setup` (beta)
+
+Once hog is released, log in with `hog auth login` and run `hog ci setup` in your repository:
+
+```bash
+hog ci setup --branch main --scope annotation:write
+```
+
+The command:
+
+1. Detects the provider from the CI config in the repository: `.github/workflows`, `.gitlab-ci.yml`, or `.depot/workflows`. It reads `owner/repo` or the GitLab project path from your `origin` remote.
+2. Asks PostHog to look up the repository or project's ID.
+3. Turns `--branch` and `--environment` into the matching presets. Pass one or both.
+4. Creates a policy request. If you're an admin, hog opens the approval page and waits. Otherwise it names the admins and prints the link to send them.
+5. Prints the `posthog.json` keys and the snippet for your CI job.
+
+| Flag | What it does |
+| --- | --- |
+| `--branch <branch>` | Trusts runs on this branch, through the provider's branch preset |
+| `--environment <name>` | Trusts jobs that deploy to this environment |
+| `--scope <scopes>` | Sets the scopes the job gets, separated by commas, such as `annotation:write,query:read`. Repeating the flag works too. At least one scope is required. |
+| `--condition <claim>=<value>` | Adds a claim the token must carry with this exact value, such as `org_id` for Depot CI. Repeat it for each claim. |
+| `--provider <key>` | Names the provider: `github_actions`, `gitlab`, or `depot_ci`. Pass it when hog can't tell, or when the repository has config for more than one provider. |
+| `--repository <name>` | Names the repository or project when it isn't your `origin` remote |
+| `--subject-id <id>` | Sets the immutable ID when PostHog can't look it up. Pass `--repository` with the exact name too, because PostHog matches both. |
+| `--name <name>` | Names the trusted workload in PostHog |
+| `--wait` | Waits for a request an earlier run started. It stops after 10 minutes and keeps the request, so you can run it again. |
+
+### Ask through the API
+
+Send a request with an OAuth token that has the `workload_trust_policy_request:write` scope:
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/<project_id>/workload_trust_policy_requests/" \
+  -H "Authorization: Bearer <oauth_access_token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Production deploys",
+    "issuer": "<provider issuer>",
+    "subject_name": "acme/web",
+    "subject": "123456789",
+    "conditions": {"ref": "refs/heads/main"},
+    "scopes": ["annotation:write"]
+  }'
+```
+
+The keys in `conditions` are claim names from the provider's OIDC token, and only the claims the provider lists are allowed. The response includes an `approval_url` to send to an admin.
+
+## Exchanging a token
+
+Send the OIDC token to the token endpoint as a form-encoded [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693) token exchange:
+
+```bash
+curl -X POST "https://us.posthog.com/oauth/token/" \
+  -d grant_type=urn:ietf:params:oauth:grant-type:token-exchange \
+  -d subject_token_type=urn:ietf:params:oauth:token-type:jwt \
+  -d subject_token="$OIDC_TOKEN" \
+  -d resource=https://us.posthog.com/api/projects/<project_id>
+```
+
+`resource` names the project: your PostHog host followed by `/api/projects/<project_id>`. Use the project's ID, not the ID of one of its environments.
+
+A successful response looks like this:
+
+```json
+{
+  "access_token": "<token>",
+  "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
+  "token_type": "Bearer",
+  "expires_in": 600,
+  "scope": "annotation:write"
+}
+```
+
+The token never outlives the OIDC token it came from, and there is no refresh token. When a call needs a scope the policy doesn't have, the API answers with a `403` and a `WWW-Authenticate` header naming the missing scope. Ask an admin to add it to the policy.
+
+The exchange is rate limited per repository or project. Each one can make 300 exchanges at once, and gets one more each second. Past that, PostHog answers with a `429`, a `Retry-After` header, and the [`workload_rate_limited`](#workload_rate_limited) error.
+
+### How hog exchanges tokens (beta)
+
+Once hog is released, it does the exchange for you:
+
+- It reads the project ID from `projectId` in `posthog.json`, or from `HOG_PROJECT_ID`. The environment variable wins when both are set.
+- It asks the provider for an OIDC token whose audience is the PostHog host it sends the token to. That host is `HOG_HOST`, or else a PostHog Cloud host in `posthog.json`, or else `https://us.posthog.com`.
+- It reads a host from `posthog.json` only when it's PostHog Cloud, so a change to the file can't send the job's token elsewhere. A self-hosted PostHog needs `HOG_HOST`. When `posthog.json` names another host and `HOG_HOST` isn't set, hog stops with a `workload_host_not_allowed` error.
+- It sends the RFC 8693 exchange to `/oauth/token/` and keeps the PostHog token in memory only. It never writes the token to disk.
+- It exchanges again when the token is close to expiring, or after the API answers with a `401`.
+- When the exchange is rate limited and `Retry-After` is 60 seconds or less, it waits once and tries again.
+- It picks credentials in this order: `HOG_PERSONAL_API_KEY`, then the workload token, then a stored login. Remove `HOG_PERSONAL_API_KEY` from the job's environment, or hog uses that instead of the workload token. Never put it in `posthog.json`.
+- Its usage analytics from a job that uses a workload token carry an ID hashed from the provider and the repository, the provider's name, and your organization. They aren't tied to a person. Turn them off with `HOG_NO_TELEMETRY=1`.
+
+## Errors
+
+A refused exchange returns an OAuth error body with an `error_code` and an `error_uri` that links to the matching entry below.
+
+<h3 id="workload_invalid_request">workload_invalid_request</h3>
+
+The request is missing `subject_token`, uses an unsupported `subject_token_type`, or `resource` isn't a project URL on this PostHog instance.
+
+<h3 id="workload_issuer_not_allowed">workload_issuer_not_allowed</h3>
+
+The OIDC token comes from an issuer PostHog doesn't trust. Only the [supported providers](#supported-ci-providers) are trusted.
+
+<h3 id="workload_token_invalid">workload_token_invalid</h3>
+
+PostHog couldn't verify the OIDC token: it expired, its audience isn't your PostHog instance, its signature doesn't verify, or it lacks a claim PostHog needs, such as the subject or the name. For a wrong audience, set `HOG_HOST` to the address you open PostHog at, such as `https://us.posthog.com`.
+
+<h3 id="workload_provider_unavailable">workload_provider_unavailable</h3>
+
+PostHog couldn't fetch the provider's signing keys. Try again in a minute.
+
+<h3 id="workload_no_matching_policy">workload_no_matching_policy</h3>
+
+No enabled trust policy in the project matches the token's subject, name, and conditions. The same error covers a project or environment ID that doesn't exist, so the exchange can't be used to find out which projects exist.
+
+The error lists the claims the job sent, so you can compare them with the policy. To ask for a policy that matches, run `hog ci setup` (beta) in the repository.
+
+<h3 id="workload_policy_request_pending">workload_policy_request_pending</h3>
+
+No policy matches yet, but a request for one is waiting for an admin. The error includes the request's approval link.
+
+<h3 id="workload_no_usable_scopes">workload_no_usable_scopes</h3>
+
+The matching policy only grants scopes a workload token can't use. Ask an admin to edit the policy.
+
+<h3 id="workload_rate_limited">workload_rate_limited</h3>
+
+The repository or project made more than 300 exchanges at once, faster than the limit refills at one each second. The response has a `429` status and a `Retry-After` header with the seconds to wait. hog waits once when that is 60 seconds or less. Otherwise, run the job again later.
+
+<h3 id="workload_no_owner">workload_no_owner</h3>
+
+The project's organization has no active owner for workload tokens to act as.
+
+<h3 id="workload_not_configured">workload_not_configured</h3>
+
+This PostHog instance isn't set up to issue workload tokens.

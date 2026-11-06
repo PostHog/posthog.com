@@ -2882,8 +2882,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
@@ -3459,6 +3459,28 @@ export const docsMenu = {
                         {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
+                        },
+                        {
+                            name: 'Workload identity federation',
+                            url: '/docs/api/workload-identity',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/api/workload-identity',
+                                },
+                                {
+                                    name: 'GitHub Actions',
+                                    url: '/docs/api/workload-identity/github-actions',
+                                },
+                                {
+                                    name: 'GitLab.com',
+                                    url: '/docs/api/workload-identity/gitlab',
+                                },
+                                {
+                                    name: 'Depot CI',
+                                    url: '/docs/api/workload-identity/depot',
+                                },
+                            ],
                         },
                         {
                             name: 'Popular',
