@@ -5,7 +5,14 @@
 const fs = require('fs')
 const path = require('path')
 const ts = require('typescript')
-const { internalUrl, resolveUrl, changedFiles, cliOptions, builtUrlExists } = require('./link-check-utils')
+const {
+    internalUrl,
+    resolveUrl,
+    changedFiles,
+    cliOptions,
+    builtUrlExists,
+    inFullSiteOnly,
+} = require('./link-check-utils')
 const { validateAnchor } = require('./check-links-post-build')
 
 const CONFIG = {
@@ -166,6 +173,10 @@ function checkLinks(pages, redirectSources, files) {
             }
             const target = normalizeUrl(resolved.url.pathname)
             if (resolved.redirected) stats.redirectedLinks++
+            if (!resolved.error && inFullSiteOnly(target, pages)) {
+                stats.excludedLinks++
+                continue
+            }
             if (!resolved.error && builtUrlExists(target, pages) && validateAnchor(target, resolved.url.hash)) continue
             const base = normalizeUrl(url) + internalUrl(url).hash
             if (!brokenByUrl.has(base)) {

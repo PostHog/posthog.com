@@ -404,16 +404,16 @@ Once a sentiment evaluation is running, the **Sentiment** tab in AI Observabilit
 
 You can also manage evaluations through the [PostHog MCP server](/docs/model-context-protocol) using AI agents like Claude Code, Cursor, or any MCP-connected tool.
 
-The MCP server provides six evaluation management tools:
+The MCP server provides these evaluation management tools:
 
-| Tool                | Description                                                    |
-| ------------------- | -------------------------------------------------------------- |
-| `evaluations-get`   | List evaluations with optional search and enabled filter       |
-| `evaluation-get`    | Get a specific evaluation by UUID                              |
-| `evaluation-create` | Create LLM judge or Hog code evaluations                       |
-| `evaluation-update` | Update evaluation config, name, or enabled status              |
-| `evaluation-delete` | Delete an evaluation (soft delete)                             |
-| `evaluation-run`    | Trigger an async evaluation run on a specific generation event |
+| Tool                     | Description                                                    |
+| ------------------------ | -------------------------------------------------------------- |
+| `llma-evaluation-list`   | List evaluations with optional search and enabled filter       |
+| `llma-evaluation-get`    | Get a specific evaluation by UUID                              |
+| `llma-evaluation-create` | Create LLM judge or Hog code evaluations                       |
+| `llma-evaluation-update` | Update evaluation config, name, or enabled status              |
+| `llma-evaluation-delete` | Delete an evaluation (soft delete)                             |
+| `llma-evaluation-run`    | Trigger an async evaluation run on a specific generation event |
 
 This enables teams to manage evaluations programmatically from agent workflows without using the web UI.
 

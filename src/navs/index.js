@@ -2084,6 +2084,10 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/posthog-com/product-comparisons',
             },
             {
+                name: 'Running experiments',
+                url: '/handbook/engineering/posthog-com/running-experiments',
+            },
+            {
                 name: 'Editing API docs',
                 url: '/handbook/engineering/posthog-com/api-docs',
             },
@@ -8374,6 +8378,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/workflows/push-notifications/flutter',
+                        },
+                        {
+                            name: 'Push step settings',
+                            url: '/docs/workflows/push-notifications/push-step-options',
                         },
                     ],
                 },
