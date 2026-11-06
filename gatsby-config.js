@@ -1,4 +1,5 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
+const { isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
 const qs = require('qs')
 const pLimit = require('p-limit')
 
@@ -140,14 +141,16 @@ module.exports = {
             resolve: 'gatsby-plugin-mdx',
             options: {
                 shouldBlockNodeFromTransformation: (node) =>
-                    node.internal.type === 'File' &&
-                    // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
-                    // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
-                    // (and thus pages).
-                    ((node.sourceInstanceName === 'posthog-main-repo' &&
-                        node.name === 'SKILL' &&
-                        (node.relativeDirectory || '').includes('/skills/')) ||
-                        (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com')),
+                    // SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js).
+                    isSdkReferenceFile(node) ||
+                    (node.internal.type === 'File' &&
+                        // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
+                        // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
+                        // (and thus pages).
+                        ((node.sourceInstanceName === 'posthog-main-repo' &&
+                            node.name === 'SKILL' &&
+                            (node.relativeDirectory || '').includes('/skills/')) ||
+                            (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com'))),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
