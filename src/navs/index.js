@@ -3460,10 +3460,6 @@ export const docsMenu = {
                                     name: 'Depot CI',
                                     url: '/docs/api/workload-identity/depot',
                                 },
-                                {
-                                    name: 'Custom OIDC provider',
-                                    url: '/docs/api/workload-identity/custom',
-                                },
                             ],
                         },
                         {

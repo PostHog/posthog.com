@@ -25,9 +25,8 @@ Each provider page explains what the job needs, which claims a policy matches, t
 | GitHub Actions | `https://token.actions.githubusercontent.com` | [Workload identity for GitHub Actions](/docs/api/workload-identity/github-actions) |
 | GitLab.com | `https://gitlab.com` | [Workload identity for GitLab.com](/docs/api/workload-identity/gitlab) |
 | Depot CI | `https://identity.depot.dev` | [Workload identity for Depot CI](/docs/api/workload-identity/depot) |
-| Custom OIDC provider | Any OIDC issuer an admin trusts | [Custom OIDC provider](/docs/api/workload-identity/custom) |
 
-More providers may follow later. Until then, a custom OIDC provider covers any other issuer.
+More providers may follow later.
 
 ## How it works
 
@@ -46,7 +45,7 @@ Find trusted workloads in your project settings, under **Trusted workloads**. On
 Each trust policy has:
 
 - **Provider** - the issuer PostHog trusts for this policy.
-- **Subject** and **name** - the repository or project's ID and its readable name, from the claims the provider names. For GitHub Actions and Depot CI these are `repository_id` and `repository`, and for GitLab.com they're `project_id` and `project_path`. For a custom OIDC provider, the admin names the claims. Both must match. The ID never changes, so a repository that is deleted and created again with the same name doesn't match.
+- **Subject** and **name** - the repository or project's ID and its readable name, from the claims the provider names. For GitHub Actions and Depot CI these are `repository_id` and `repository`, and for GitLab.com they're `project_id` and `project_path`. Both must match. The ID never changes, so a repository that is deleted and created again with the same name doesn't match.
 - **Conditions** - claims the token must carry with an exact value, such as a branch or an environment. Each provider lists the claims a policy can use, and when it lists any, a policy must set at least one. A condition you leave empty matches any value. A token that doesn't carry a condition's claim never matches. Values are matched exactly, without wildcards.
 - **Scopes** - every token from the policy gets all of these scopes, and no others.
 
@@ -103,14 +102,11 @@ The command:
 | `--branch <branch>` | Trusts runs on this branch, through the provider's branch preset |
 | `--environment <name>` | Trusts jobs that deploy to this environment |
 | `--scope <scopes>` | Sets the scopes the job gets, separated by commas, such as `annotation:write,query:read`. Repeating the flag works too. At least one scope is required. |
-| `--condition <claim>=<value>` | Adds a claim the token must carry with this exact value, such as `org_id` for Depot CI. Repeat it for each claim. A custom OIDC provider needs at least one. |
-| `--provider <key>` | Names the provider: `github_actions`, `gitlab`, `depot_ci`, or `custom`. Pass it when hog can't tell, or when the repository has config for more than one provider. |
+| `--condition <claim>=<value>` | Adds a claim the token must carry with this exact value, such as `org_id` for Depot CI. Repeat it for each claim. |
+| `--provider <key>` | Names the provider: `github_actions`, `gitlab`, or `depot_ci`. Pass it when hog can't tell, or when the repository has config for more than one provider. |
 | `--repository <name>` | Names the repository or project when it isn't your `origin` remote |
 | `--subject-id <id>` | Sets the immutable ID when PostHog can't look it up. Pass `--repository` with the exact name too, because PostHog matches both. |
 | `--name <name>` | Names the trusted workload in PostHog |
-| `--issuer <url>` | With `--provider custom`, the issuer URL, exactly as its tokens carry it |
-| `--subject-claim <claim>` | With `--provider custom`, the claim that names the workload. Defaults to `sub`. |
-| `--subject <value>` | With `--provider custom`, the exact value the subject claim must have |
 | `--wait` | Waits for a request an earlier run started. It stops after 10 minutes and keeps the request, so you can run it again. |
 
 ### Ask through the API
