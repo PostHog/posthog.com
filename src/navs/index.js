@@ -2879,7 +2879,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-js',
+                                    url: '/docs/libraries/js/reference',
                                 },
                             ],
                         },
@@ -2966,7 +2966,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-node',
+                                    url: '/docs/libraries/node/reference',
                                 },
                             ],
                         },
@@ -3010,7 +3010,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-react-native',
+                                    url: '/docs/libraries/react-native/reference',
                                 },
                             ],
                         },
@@ -6421,11 +6421,11 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'JavaScript web SDK',
-                            url: '/docs/references/posthog-js?filter=error-tracking',
+                            url: '/docs/libraries/js/reference#capture-exception',
                         },
                         {
                             name: 'Node.js SDK',
-                            url: '/docs/references/posthog-node?filter=error-tracking',
+                            url: '/docs/libraries/node/reference#capture-exception',
                         },
                         {
                             name: 'Python SDK',

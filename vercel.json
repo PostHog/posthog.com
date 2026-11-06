@@ -161,6 +161,66 @@
     ],
     "redirects": [
         {
+            "source": "/docs/references/posthog-js:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-js/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-js-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-js-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-node-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version([^/]+?):ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/references/posthog-react-native-:version/:path*:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-python:ext(\\.md)?",
             "destination": "/docs/libraries/python/reference:ext?",
             "statusCode": 301
