@@ -102,8 +102,8 @@ export const mcpAnalytics = {
         intro: 'For teams whose MCP is becoming an important part of their product.',
         rows: [
             [
-                'MCP server builders',
-                'Find and fix broken or slow tools. Get error rates, and p95 latency by tool, without building your own MCP analytics.',
+                'Engineers building MCP servers',
+                'Find and fix broken or slow tools. Get error rates and p95 latency by tool. Monitor health and performance.'
             ],
             ['Engineers building MCP tools', 'Find the slow and failing tools and send a coding agent to fix them.'],
             ['Engineers maintaining APIs, 'Identify and fix endpoints causing high error rates in tool calls.'],
