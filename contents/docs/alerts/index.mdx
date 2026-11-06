@@ -65,6 +65,7 @@ The [MCP server](/docs/model-context-protocol) is the most complete way to creat
 - "Set up an anomaly detection alert on our signups trend using Z-score"
 - "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
 - "Simulate a MAD detector on my revenue insight for the last 30 days"
+- "Create an AI judgment alert on daily signups. A drop on a weekday is bad, weekends are always lower"
 - "List all my alerts and their current state"
 - "Update my pageview alert threshold to 5000"
 - "Delete the old conversion alert"
@@ -160,7 +161,7 @@ Instead of setting a fixed threshold, anomaly detection uses detectors to identi
 
 ### Available detectors
 
-PostHog offers statistical detectors, machine learning detectors, and an ensemble that combines detectors. For most use cases, **Z-score** or **MAD** are good starting points. The **AI judgment** detector is available separately for accounts with access to it.
+PostHog offers statistical detectors, machine learning detectors, and an ensemble that combines detectors. For most use cases, **Z-score** or **MAD** are good starting points. The [**AI judgment**](#ai-judgment) detector asks an AI model to review the latest value instead.
 
 #### Statistical detectors
 
@@ -195,9 +196,16 @@ The **Ensemble** detector combines two or more of the above detectors with AND/O
 
 #### AI judgment
 
-The **AI judgment** detector sends recent insight values and a chart to an AI model. You can add instructions to describe unusual behavior. The model returns a verdict and its confidence in that verdict; the confidence is not a calibrated anomaly probability.
+The **AI judgment** detector sends recent insight values and a chart to an AI model, and asks whether the latest value needs attention. The model returns a verdict, the type of change it saw (such as a spike or a drop), and a short explanation. The explanation is included in the alert notification.
 
-This detector appears only when it is enabled for your account and your organization permits AI data processing. It cannot run with a real-time interval, monitor a breakdown, or join an ensemble. Each check uses a model call. Use [simulation](#simulating-a-detector) to assess its results before you save the alert.
+You can add instructions to describe what counts as unusual for your metric. For example, say whether a drop is good or bad, mention known weekly cycles, or list changes to ignore.
+
+Each check and each preview uses your organization's [AI credits](/docs/posthog-ai/pricing). Daily or hourly checks keep usage low. To use this detector:
+
+- Your organization must permit AI data processing.
+- A project can have up to 20 enabled alerts that use AI judgment.
+- It works on trend insights and on SQL insights that use **last row** or **first row** evaluation.
+- It cannot run with a real-time interval, monitor a breakdown, or join an ensemble.
 
 ### Configuration
 
@@ -238,6 +246,8 @@ For ensemble detectors, the chart shows individual score lines for each sub-dete
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
 
+For **AI judgment**, the preview runs one check on the latest value, the same way a scheduled check does. It shows the verdict and the model's explanation, but no anomaly scores. Each preview uses AI credits.
+
 ### Tips
 
 - **Start with Z-score or MAD** – they work well for most time series data and are straightforward to interpret.
@@ -245,6 +255,7 @@ Use the date range dropdown to test the detector over different time periods (e.
 - **Set sensitivity to 0.95 for noisy metrics** – the default of 0.9 may produce too many alerts for high-variance data.
 - **Use ensemble AND to reduce false positives** – combining two detectors with AND logic means both must agree, which cuts down on noise.
 - **Differencing matters** – if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
+- **Try AI judgment for noisy or low-volume metrics** – when a statistical detector flags too much, describe what matters in the instructions and preview the result.
 
 ## Notifications
 
