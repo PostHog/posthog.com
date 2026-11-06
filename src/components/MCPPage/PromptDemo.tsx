@@ -58,10 +58,10 @@ const Run = ({ demo, next, onNext, onDone }: { demo: Demo; next: Demo; onNext: (
         if (done) onDone?.()
     }, [done, onDone])
     return (
-        <div ref={ref} className="@container">
+        <div ref={ref} className="@container @2xl/reader-content:absolute @2xl/reader-content:inset-0">
             <ClaudeTerminal
                 state={demo.trace.stateAt(elapsed)}
-                className="h-80 rounded"
+                className="h-80 rounded @2xl/reader-content:h-full"
                 lightSize={10}
                 cwd="~/hogflix"
                 suggestion={answered ? { prompt: next.prompt, onRun: onNext } : undefined}
@@ -76,7 +76,7 @@ export default function PromptDemo(): JSX.Element {
     const [runId, setRunId] = useState(0)
     const [picked, setPicked] = useState(false)
     const buttons = useRef<(HTMLButtonElement | null)[]>([])
-    const listRef = useRef<HTMLUListElement>(null)
+    const layoutRef = useRef<HTMLDivElement>(null)
     const terminalRef = useRef<HTMLDivElement>(null)
     const shouldReduceMotion = useReducedMotion()
 
@@ -93,7 +93,7 @@ export default function PromptDemo(): JSX.Element {
         if (trigger === 'terminal') buttons.current[index]?.focus({ preventScroll: true })
         // In one column the terminal is below all the prompts, so bring it into view. In two columns it's already visible.
         const singleColumn =
-            listRef.current && getComputedStyle(listRef.current).gridTemplateColumns.split(' ').length === 1
+            layoutRef.current && getComputedStyle(layoutRef.current).gridTemplateColumns.split(' ').length === 1
         if (trigger === 'list' && singleColumn) {
             terminalRef.current?.scrollIntoView({ block: 'nearest', behavior: shouldReduceMotion ? 'auto' : 'smooth' })
         }
@@ -110,50 +110,56 @@ export default function PromptDemo(): JSX.Element {
             <p className="mb-0 mt-2 text-base text-secondary">
                 Pick a prompt to start a new run. You'll see each MCP tool call the agent makes to get the answer.
             </p>
-            <ul ref={listRef} className="m-0 mt-4 grid list-none gap-x-7 p-0 @xl/reader-content:grid-cols-2">
-                {demos.map(({ title, prompt, calls }, index) => {
-                    const active = index === activeIndex
-                    const sources = Array.from(new Set(calls.map(({ source }) => source)))
-                    return (
-                        <li
-                            key={title}
-                            className="border-b border-primary last:border-b-0 @xl/reader-content:[&:nth-last-child(2):nth-child(odd)]:border-b-0"
-                        >
-                            <button
-                                ref={(element) => {
-                                    buttons.current[index] = element
-                                }}
-                                type="button"
-                                aria-pressed={active}
-                                onClick={() => pick(index, 'list')}
-                                className={cn(
-                                    'flex h-full w-full cursor-pointer flex-col rounded border-0 px-3 py-3 text-left text-primary',
-                                    active ? 'bg-accent' : 'bg-transparent hover:bg-accent'
-                                )}
-                            >
-                                <span className="text-base font-bold">{title}</span>
-                                <span className="mt-1 text-sm text-secondary">“{prompt}”</span>
-                                <span aria-hidden className="mt-auto flex items-center gap-1 pt-2">
-                                    {sources.map((source, sourceIndex) => (
-                                        <React.Fragment key={source}>
-                                            {sourceIndex > 0 && <IconArrowRight className="size-3 text-secondary" />}
-                                            <SourceIcon source={source} className="size-4 shrink-0" />
-                                        </React.Fragment>
-                                    ))}
-                                </span>
-                            </button>
-                        </li>
-                    )
-                })}
-            </ul>
-            <div ref={terminalRef} className="mt-4">
-                <Run
-                    key={runId}
-                    demo={demos[activeIndex]}
-                    next={demos[nextIndex]}
-                    onNext={() => pick(nextIndex, 'terminal')}
-                    onDone={picked ? undefined : () => play(nextIndex)}
-                />
+            <div
+                ref={layoutRef}
+                className="mt-6 grid gap-x-8 gap-y-4 @2xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+            >
+                <div>
+                    <p className="m-0 border-b border-primary pb-2 text-sm font-semibold text-secondary">Try asking</p>
+                    <ul className="m-0 list-none p-0">
+                        {demos.map(({ title, prompt, calls }, index) => {
+                            const active = index === activeIndex
+                            const sources = Array.from(new Set(calls.map(({ source }) => source)))
+                            return (
+                                <li key={title} className="border-b border-primary last:border-b-0">
+                                    <button
+                                        ref={(element) => {
+                                            buttons.current[index] = element
+                                        }}
+                                        type="button"
+                                        aria-pressed={active}
+                                        onClick={() => pick(index, 'list')}
+                                        className={cn(
+                                            'flex w-full cursor-pointer flex-col border-0 bg-transparent py-4 text-left text-primary transition-opacity',
+                                            active ? 'opacity-100' : 'opacity-60 hover:opacity-100'
+                                        )}
+                                    >
+                                        <span className="text-base font-bold leading-snug">“{prompt}”</span>
+                                        <span aria-hidden className="mt-2 flex items-center gap-1">
+                                            {sources.map((source, sourceIndex) => (
+                                                <React.Fragment key={source}>
+                                                    {sourceIndex > 0 && (
+                                                        <IconArrowRight className="size-3 text-secondary" />
+                                                    )}
+                                                    <SourceIcon source={source} className="size-4 shrink-0" />
+                                                </React.Fragment>
+                                            ))}
+                                        </span>
+                                    </button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+                <div ref={terminalRef} className="relative @2xl/reader-content:min-h-80">
+                    <Run
+                        key={runId}
+                        demo={demos[activeIndex]}
+                        next={demos[nextIndex]}
+                        onNext={() => pick(nextIndex, 'terminal')}
+                        onDone={picked ? undefined : () => play(nextIndex)}
+                    />
+                </div>
             </div>
         </div>
     )
