@@ -137,6 +137,8 @@ You can set properties and options in several places. When the same key is set i
 3. **Global defaults** – values set on the client for every event, such as Python's `super_properties` and `super_options`, Go's `DefaultEventProperties` and `DefaultEventOptions`, Node.js's `register()` and `registerOptions()`, or super properties set with `register()` on iOS and Android
 4. **SDK values** – properties the SDK adds itself, such as `$is_server`, and the `$feature/<key>` and `$active_feature_flags` properties from the feature flags you attach to an event. Some SDKs also add the `$trace_id` and `$span_id` of the active OpenTelemetry span to some events. Your SDK's migration guide says when
 
+The SDK's own `$lib` and `$lib_version` come after all of these. They fill in only when the event doesn't set `$lib`, or sets the SDK's own name without a version. See [library name and version](/docs/api/capture-v1#library-name-and-version).
+
 Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
 
 **Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. To change a setting in the hook, edit `options`: a legacy option property the hook adds doesn't replace an option that's already set.
