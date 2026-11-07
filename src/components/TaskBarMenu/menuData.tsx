@@ -189,12 +189,6 @@ const docsMenuItems: MenuItemType[] = [
     },
     {
         type: 'item',
-        label: 'Compare',
-        link: '/compare',
-        icon: <Icons.IconColumns className="size-4 text-lilac" />,
-    },
-    {
-        type: 'item',
         label: 'Tutorials',
         link: '/tutorials',
         icon: <Icons.IconGraduationCap className="size-4 text-purple" />,
@@ -597,6 +591,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Media',
                     link: '/media',
                     icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
+                },
+                {
+                    type: 'item',
+                    label: 'Compare',
+                    link: '/compare',
+                    icon: <Icons.IconColumns className="size-4 text-lilac" />,
                 },
             ],
         },
