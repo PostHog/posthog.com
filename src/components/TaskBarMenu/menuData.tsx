@@ -261,7 +261,7 @@ export function useMenuData(): MenuType[] {
             items: [
                 {
                     type: 'item',
-                    label: 'PostHog Self-Driving',
+                    label: 'Self-driving',
                     link: '/self-driving',
                     icon: <Icons.IconFlag className="size-4 text-red" />,
                 },
@@ -299,15 +299,15 @@ export function useMenuData(): MenuType[] {
                 { type: 'separator' },
                 {
                     type: 'item',
-                    label: 'Roadmap',
-                    link: '/roadmap',
-                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
-                },
-                {
-                    type: 'item',
                     label: 'Changelog',
                     link: '/changelog',
                     icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
+                },
+                {
+                    type: 'item',
+                    label: 'Roadmap',
+                    link: '/roadmap',
+                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
                 },
             ],
         },
@@ -327,6 +327,26 @@ export function useMenuData(): MenuType[] {
             trigger: 'Community',
             items: [
                 {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                    icon: <Icons.IconPencil className="size-4 text-yellow" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Newsletter',
+                    link: '/newsletter',
+                    icon: <Icons.IconNewspaper className="size-4 text-orange" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Merch',
+                    link: '/merch',
+                    icon: <Icons.IconStore className="size-4 text-purple" />,
+                },
+                { type: 'separator' },
+                { type: 'label', label: 'Chat' },
+                {
                     type: 'item' as const,
                     label: 'Forums',
                     link: '/forum',
@@ -334,16 +354,18 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Events',
-                    link: '/events',
-                    icon: <Icons.IconCalendar className="size-4 text-red" />,
-                },
-                {
-                    type: 'item',
                     label: 'Discord',
                     link: 'https://discord.gg/t57vmkcm95',
                     external: true,
                     icon: <IconDiscord className="size-4" />,
+                },
+                { type: 'separator' },
+                { type: 'label', label: 'Meet' },
+                {
+                    type: 'item',
+                    label: 'Events',
+                    link: '/events',
+                    icon: <Icons.IconCalendar className="size-4 text-red" />,
                 },
                 {
                     type: 'item',
@@ -353,10 +375,12 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Merch',
-                    link: '/merch',
-                    icon: <Icons.IconStore className="size-4 text-purple" />,
+                    label: 'Students',
+                    link: '/students',
+                    icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
                 },
+                { type: 'separator' },
+                { type: 'label', label: 'Work with us' },
                 {
                     type: 'item',
                     label: 'Partnerships',
@@ -369,32 +393,11 @@ export function useMenuData(): MenuType[] {
                     link: '/startups',
                     icon: <Icons.IconPresent className="size-4 text-purple" />,
                 },
-                {
-                    type: 'item',
-                    label: 'Students',
-                    link: '/students',
-                    icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
-                },
             ],
         },
         {
             trigger: 'Company',
             items: [
-                { type: 'label', label: 'Content' },
-                {
-                    type: 'item',
-                    label: 'Blog',
-                    link: '/blog',
-                    icon: <Icons.IconPencil className="size-4 text-yellow" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Newsletter',
-                    link: '/newsletter',
-                    icon: <Icons.IconNewspaper className="size-4 text-orange" />,
-                },
-                { type: 'separator' },
-                { type: 'label', label: 'Info' },
                 {
                     type: 'item',
                     label: 'About',
@@ -443,11 +446,8 @@ export function useMenuData(): MenuType[] {
                     link: '/teams',
                     icon: getMenuIcon(companyMenu.children, '/teams', 'IconShieldPeople', 'teal'),
                 },
-            ],
-        },
-        {
-            trigger: 'Legal',
-            items: [
+                { type: 'separator' },
+                { type: 'label', label: 'Legal' },
                 {
                     type: 'item',
                     label: 'Terms',
@@ -758,8 +758,8 @@ export function useMenuSelectOptions() {
         {
             label: 'Platform',
             items: [
-                { value: 'roadmap', label: 'Roadmap' },
                 { value: 'changelog', label: 'Changelog' },
+                { value: 'roadmap', label: 'Roadmap' },
             ],
         },
         {
