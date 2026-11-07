@@ -3197,6 +3197,10 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'ClickFunnels',
+                            url: '/docs/libraries/clickfunnels',
+                        },
+                        {
                             name: 'Discord',
                             url: '/docs/libraries/discord',
                         },
