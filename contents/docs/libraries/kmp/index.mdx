@@ -58,7 +58,7 @@ You can find the latest version on [Maven Central](https://central.sonatype.com/
 
 On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
 
-`posthog-kmp` 0.7.0 and later requires iOS 15 or later.
+`posthog-kmp` 0.7.0 and later requires iOS 15 or later. `posthog-kmp` 0.11.0 and later requires Xcode 26 or later to build, and macOS 11 or later for macOS targets.
 
 After adding the dependency, run the linkage task once from your project root:
 
@@ -90,6 +90,10 @@ PostHog.setup(
 ```
 
 You can find your project token and host in [your project settings](https://us.posthog.com/settings/project). For convenience, `PostHogConfig.HOST_US` and `PostHogConfig.HOST_EU` are provided as constants for the two PostHog Cloud hosts.
+
+Use your project token (`phc_...`), not a personal API key. From `posthog-kmp` 0.11.0, the SDK stays disabled on Android, iOS and the JVM if `projectToken` is a personal API key (`phx_...`).
+
+> **Note:** From `posthog-kmp` 0.11.0, Android, iOS and the JVM send events to `/i/v1/analytics/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, make sure it forwards that path.
 
 ### Platform-specific setup
 
@@ -539,29 +543,18 @@ PostHog.setup(
 )
 ```
 
-You can also enable experimental screenshot mode instead of the default wireframe recording:
-
-```kotlin
-sessionRecording = SessionRecordingConfig(
-    enabled = true,
-    screenshot = true,   // capture screenshots instead of wireframes
-    maskAllImages = true, // recommended when using screenshots
-)
-```
-
-> **Warning:** Screenshots may contain sensitive information. Make sure masking is configured appropriately before enabling screenshot mode.
+Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.11.0 removed wireframe recording and the `screenshot` option; remove `screenshot` from your `SessionRecordingConfig` when you upgrade. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
 
 On Android, enable experimental mask-alignment verification to help preserve screenshot captures during pixel-only redraws, such as continuously animated content:
 
 ```kotlin
 sessionRecording = SessionRecordingConfig(
     enabled = true,
-    screenshot = true,
     verifyScreenshotMaskAlignment = true,
 )
 ```
 
-`verifyScreenshotMaskAlignment` defaults to `false` and only affects Android screenshot mode. It adds view-hierarchy walks during capture, so evaluate its performance in your app. Windows with a Compose root already use verification regardless of this flag; setting it to `false` doesn't disable verification for those windows. Other platforms ignore this option.
+`verifyScreenshotMaskAlignment` defaults to `false` and only affects Android. It adds view-hierarchy walks during capture, so evaluate its performance in your app. Windows with a Compose root already use verification regardless of this flag; setting it to `false` doesn't disable verification for those windows. Other platforms ignore this option.
 
 ## Opt out of data capture
 
@@ -697,10 +690,9 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | `maskAllImages` | `Boolean` | `true` | Masks all images. |
 | `captureNetworkTelemetry` | `Boolean` | `true` | Includes network requests in the recording. |
 | `captureLogs` | `Boolean` | `false` | Captures console and system logs (iOS and web). |
-| `screenshot` | `Boolean` | `false` | Uses screenshots instead of wireframes (experimental, Android and iOS). |
 | `captureLogcat` | `Boolean` | `true` | Captures Android logcat output (Android only). |
-| `debouncerDelayMs` | `Long` | `1000` | Touch event debounce delay in milliseconds (Android only). |
-| `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshot mode. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
+| `throttleDelayMs` | `Long` | `1000` | Minimum delay in milliseconds between replay snapshots (Android and iOS). Replaces the deprecated `debouncerDelayMs`. |
+| `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshots. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
 
 ## Platform support
 
@@ -708,12 +700,24 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | --- | --- | --- |
 | Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
 | iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM) |
+| macOS (Apple silicon) | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM). Version 0.11.0 and later requires macOS 11 or later. |
 | Web | ✅ | [PostHog.js](/docs/libraries/js) |
 | JVM (desktop) | ✅ | `com.posthog:posthog`, the [JVM core library](/docs/libraries/java) the Android SDK is built on |
 
 Because the SDK delegates to the native library on each platform, feature availability and behavior follow the underlying SDK. Session replay is available on Android and iOS; the web target inherits PostHog.js behavior.
 
 On the JVM, event capture, identification, feature flags, groups, error tracking, and super properties are all supported. Mobile and browser-only concepts don't apply, so `sessionRecording`, `captureApplicationLifecycleEvents`, `captureScreenViews`, `captureDeepLinks`, and `autocapture` are ignored. The JVM also has no standard app-manifest source, so `$app_version`, `$app_build`, and `$app_namespace` person properties aren't set – feature flags targeting those won't match desktop users.
+
+## Upgrade to 0.11.0
+
+Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. These changes apply on Android, iOS, macOS, and the JVM. They don't apply to the web target.
+
+- **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path.
+- **Project token:** if `projectToken` is a personal API key (`phx_...`), the SDK disables itself at setup. Use your project token (`phc_...`).
+- **Super properties:** values that you set with `register` replace the properties that the SDK sets, such as `$os_name`.
+- **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets.
+- **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. Refer to [Session replay](#session-replay).
+- **Replay throttling:** use `throttleDelayMs` instead of the deprecated `debouncerDelayMs`.
 
 ## FAQ
 
