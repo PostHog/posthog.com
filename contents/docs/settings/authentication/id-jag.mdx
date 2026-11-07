@@ -97,7 +97,7 @@ The client app needs a client ID that PostHog recognizes, and your IdP must issu
 
 Configure your IdP to include the scopes each integration needs when it issues ID-JAGs. At minimum, all tokens need `user:read`. For the [MCP server](/docs/model-context-protocol/enterprise-managed-authorization), also include `organization:read` and `project:read`. Add any additional [API scopes](/docs/api/personal-api-keys) for what you want to do (for example, `feature_flag:write` to manage flags).
 
-The access token gets only the scopes that both your IdP granted and the client asked for. For a starting list, see [which scopes to grant](#which-scopes-should-i-grant).
+The access token gets only the scopes that both your IdP granted and the client asked for. For a starting list, see [which scopes to grant](#which-scopes-should-i-grant). For what each scope covers, see [API scopes](/docs/api/scopes).
 
 ## Revoking access
 
@@ -199,7 +199,7 @@ Use the token on API requests to your organization's region (`https://us.posthog
 - **It lasts 2 hours by default.** The client repeats the ID-JAG exchange to get a fresh token. There is no refresh token.
 - **It acts as the matched user**, with that user's permissions, limited to the granted scopes.
 - **It is bound to one organization:** the one that owns the XAA configuration.
-- **It works only for PostHog's own resources.** Its `aud` is the ID-JAG's `resource`.
+- **It works only for PostHog's own resources.** Its `aud` is the resolved `resource`: the ID-JAG's claim, the token request's parameter, or your instance URL.
 - **PostHog checks it on every request.** The user must still be an active member, and the organization must still have the Scale or Enterprise add-on. If the granted scopes are empty, PostHog still issues the token, and API requests with it fail with `403 insufficient_scope`.
 
 </details>
@@ -211,15 +211,15 @@ Start with the scopes the PostHog MCP server grants by default when someone conn
 
 Write scopes, each of which also grants the matching read:
 
-`action:write`, `alert:write`, `annotation:write`, `cohort:write`, `dashboard:write`, `data_catalog:write`, `endpoint:write`, `error_tracking:write`, `event_definition:write`, `experiment:write`, `external_data_source:write`, `feature_flag:write`, `heatmap:write`, `hog_flow:write`, `hog_function:write`, `insight:write`, `insight_variable:write`, `llm_skill:write`, `marketing_analytics:write`, `notebook:write`, `person:write`, `product_enablement:write`, `project:write`, `property_definition:write`, `replay_scanner:write`, `session_recording_playlist:write`, `signal_scout:write`, `subscription:write`, `survey:write`, `task:write`, `warehouse_view:write`
+[`action:write`](/docs/api/scopes#action), [`alert:write`](/docs/api/scopes#alert), [`annotation:write`](/docs/api/scopes#annotation), [`cohort:write`](/docs/api/scopes#cohort), [`dashboard:write`](/docs/api/scopes#dashboard), [`data_catalog:write`](/docs/api/scopes#data_catalog), [`endpoint:write`](/docs/api/scopes#endpoint), [`error_tracking:write`](/docs/api/scopes#error_tracking), [`event_definition:write`](/docs/api/scopes#event_definition), [`experiment:write`](/docs/api/scopes#experiment), [`external_data_source:write`](/docs/api/scopes#external_data_source), [`feature_flag:write`](/docs/api/scopes#feature_flag), [`heatmap:write`](/docs/api/scopes#heatmap), [`hog_flow:write`](/docs/api/scopes#hog_flow), [`hog_function:write`](/docs/api/scopes#hog_function), [`insight:write`](/docs/api/scopes#insight), [`insight_variable:write`](/docs/api/scopes#insight_variable), [`llm_skill:write`](/docs/api/scopes#llm_skill), [`marketing_analytics:write`](/docs/api/scopes#marketing_analytics), [`notebook:write`](/docs/api/scopes#notebook), [`person:write`](/docs/api/scopes#person), [`product_enablement:write`](/docs/api/scopes#product_enablement), [`project:write`](/docs/api/scopes#project), [`property_definition:write`](/docs/api/scopes#property_definition), [`replay_scanner:write`](/docs/api/scopes#replay_scanner), [`session_recording_playlist:write`](/docs/api/scopes#session_recording_playlist), [`signal_scout:write`](/docs/api/scopes#signal_scout), [`subscription:write`](/docs/api/scopes#subscription), [`survey:write`](/docs/api/scopes#survey), [`task:write`](/docs/api/scopes#task), [`warehouse_view:write`](/docs/api/scopes#warehouse_view)
 
 Read scopes:
 
-`activity_log:read`, `batch_export:read`, `billing:read`, `business_knowledge:read`, `dashboard_template:read`, `early_access_feature:read`, `evaluation:read`, `experiment_saved_metric:read`, `group:read`, `health_issue:read`, `integration:read`, `llm_prompt:read`, `logs:read`, `mcp_analytics:read`, `organization:read`, `organization_member:read`, `query:read`, `session_recording:read`, `ticket:read`, `tracing:read`, `user:read`, `warehouse_table:read`, `web_analytics:read`
+[`activity_log:read`](/docs/api/scopes#activity_log), [`batch_export:read`](/docs/api/scopes#batch_export), [`billing:read`](/docs/api/scopes#billing), [`business_knowledge:read`](/docs/api/scopes#business_knowledge), [`dashboard_template:read`](/docs/api/scopes#dashboard_template), [`early_access_feature:read`](/docs/api/scopes#early_access_feature), [`evaluation:read`](/docs/api/scopes#evaluation), [`experiment_saved_metric:read`](/docs/api/scopes#experiment_saved_metric), [`group:read`](/docs/api/scopes#group), [`health_issue:read`](/docs/api/scopes#health_issue), [`integration:read`](/docs/api/scopes#integration), [`llm_prompt:read`](/docs/api/scopes#llm_prompt), [`logs:read`](/docs/api/scopes#logs), [`mcp_analytics:read`](/docs/api/scopes#mcp_analytics), [`organization:read`](/docs/api/scopes#organization), [`organization_member:read`](/docs/api/scopes#organization_member), [`query:read`](/docs/api/scopes#query), [`session_recording:read`](/docs/api/scopes#session_recording), [`ticket:read`](/docs/api/scopes#ticket), [`tracing:read`](/docs/api/scopes#tracing), [`user:read`](/docs/api/scopes#user), [`warehouse_table:read`](/docs/api/scopes#warehouse_table), [`web_analytics:read`](/docs/api/scopes#web_analytics)
 
 - Every connection needs at least `user:read`, `organization:read`, and `project:read` (or `project:write`).
 - For read-only access, replace each `:write` scope with its `:read` scope.
-- The full list is in `scopes_supported` at `https://oauth.posthog.com/.well-known/oauth-authorization-server`.
+- [API scopes](/docs/api/scopes) lists every scope and what it covers. OAuth apps can request the ones in `scopes_supported` at `https://oauth.posthog.com/.well-known/oauth-authorization-server`.
 
 The scopes you grant in your identity provider are the most a token can carry. PostHog can't ask for more later. To add a scope, add it in your identity provider, and members get it with their next token, within 2 hours.
 
@@ -278,3 +278,4 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 - [SSO](/docs/settings/authentication/sso)
 - [OAuth integration](/docs/api/oauth)
 - [API authentication and scopes](/docs/api#authentication)
+- [API scopes](/docs/api/scopes)
