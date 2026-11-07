@@ -286,18 +286,6 @@ export function useMenuData(): MenuType[] {
                 { type: 'separator' },
                 {
                     type: 'item',
-                    label: 'Changelog',
-                    link: '/changelog',
-                    icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
-                },
-                {
-                    type: 'item',
-                    label: 'Roadmap',
-                    link: '/roadmap',
-                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
-                },
-                {
-                    type: 'item',
                     label: 'Research',
                     link: '/research',
                     icon: <Icons.IconBrain className="size-4 text-purple" />,
@@ -398,24 +386,12 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Company',
             items: [
-                { type: 'label', label: 'PostHog stuff' },
+                { type: 'label', label: 'Sacred texts' },
                 {
                     type: 'item',
                     label: 'About',
                     link: '/about',
                     icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
-                },
-                {
-                    type: 'item',
-                    label: 'Careers',
-                    link: '/careers',
-                    icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
-                },
-                {
-                    type: 'item',
-                    label: 'Customers',
-                    link: '/customers',
-                    icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
                 },
                 {
                     type: 'item',
@@ -434,6 +410,24 @@ export function useMenuData(): MenuType[] {
                     label: 'Teams',
                     link: '/teams',
                     icon: getMenuIcon(companyMenu.children, '/teams', 'IconShieldPeople', 'teal'),
+                },
+                {
+                    type: 'item',
+                    label: 'Careers',
+                    link: '/careers',
+                    icon: getMenuIcon(companyMenu.children, '/careers', 'IconLaptop', 'purple'),
+                },
+                {
+                    type: 'item',
+                    label: 'Changelog',
+                    link: '/changelog',
+                    icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
+                },
+                {
+                    type: 'item',
+                    label: 'Roadmap',
+                    link: '/roadmap',
+                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
                 },
                 { type: 'separator' },
                 { type: 'label', label: 'Follow us', mobileDestination: false }, // Every item below is desktop-only
@@ -518,6 +512,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Startups',
                     link: '/startups',
                     icon: <Icons.IconPresent className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Customers',
+                    link: '/customers',
+                    icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
                 },
                 { type: 'separator' },
                 { type: 'label', label: 'Legal' },
@@ -756,21 +756,16 @@ export function useMenuSelectOptions() {
             items: [{ value: 'blog', label: 'Blog' }],
         },
         {
-            label: 'Platform',
-            items: [
-                { value: 'changelog', label: 'Changelog' },
-                { value: 'roadmap', label: 'Roadmap' },
-            ],
-        },
-        {
             label: 'Company',
             items: [
                 { value: 'about', label: 'About' },
-                { value: 'careers', label: 'Careers' },
                 { value: 'customers', label: 'Customers' },
                 { value: 'handbook', label: 'Handbook' },
+                { value: 'roadmap', label: 'Roadmap' },
+                { value: 'changelog', label: 'Changelog' },
                 { value: 'people', label: 'People' },
                 { value: 'teams', label: 'Teams' },
+                { value: 'careers', label: 'Careers' },
             ],
         },
         {
