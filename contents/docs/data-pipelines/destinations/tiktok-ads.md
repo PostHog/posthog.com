@@ -33,7 +33,9 @@ You should be aware that this destination relies on creating third-party cookies
 
 6. Set up your event and property filters to remove unnecessary events. You only want to send events that are conversions. Filter out unrelated events or ones missing required data.
 
-7. Press **Create & enable**, test your destination, and then watch your conversions get sent to TikTok Ads.
+7. If your TikTok Pixel also sends any of these conversions, set **Event ID** to an ID that the Pixel sends too. Otherwise, TikTok counts the conversion twice. See [how to stop TikTok from counting a conversion twice](#how-do-i-stop-tiktok-from-counting-a-conversion-twice).
+
+8. Press **Create & enable**, test your destination, and then watch your conversions get sent to TikTok Ads.
 
 <HideOnCDPIndex>
 
@@ -44,6 +46,20 @@ You should be aware that this destination relies on creating third-party cookies
 ## FAQ
 
 <AdDestinationPersonDataFaq />
+
+### How do I stop TikTok from counting a conversion twice?
+
+When your TikTok Pixel and this destination both send the same conversion, TikTok keeps one copy only if both copies have the same Pixel ID, event name, and `event_id`, and TikTok receives them within 48 hours of the first copy. See [TikTok's event deduplication rules](https://ads.tiktok.com/help/article/event-deduplication).
+
+**Event ID** defaults to `{event.uuid}`, the ID of the PostHog event. Your Pixel doesn't know this ID, so TikTok keeps both copies. Use an ID that the browser and your server both have. For a purchase, use the order ID. In the Pixel, `event_id` goes in the third argument of `ttq.track`:
+
+```js
+ttq.track("CompletePayment", { value: 49.0, currency: "EUR" }, { event_id: "order_10482" })
+```
+
+Then set **Event ID** in the destination to the property that holds the same order ID, for example `{toString(event.properties.order_id)}`. Use a different ID for each new conversion.
+
+For example values for each input of this destination, see the [PostHog TikTok Ads integration guide from 99Ways](https://99ways.io/how-to-send-posthog-conversion-events-to-tiktok-ads/#event-id-and-time).
 
 ### Is the source code for this destination available?
 
