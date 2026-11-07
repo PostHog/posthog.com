@@ -1214,16 +1214,6 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
         ...(isCurrentUser
             ? [
                   {
-                      value: 'likes',
-                      label: 'Liked posts',
-                      content: (
-                          <>
-                              <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
-                              <LikedPosts profileID={id} />
-                          </>
-                      ),
-                  },
-                  {
                       value: 'points',
                       label: 'Points',
                       content: <Points />,
