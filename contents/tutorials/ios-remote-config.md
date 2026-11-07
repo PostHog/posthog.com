@@ -24,7 +24,7 @@ First, open Xcode and create a new project:
 
 ## 2. Setting up PostHog
 
-Next, we'll add [PostHog’s iOS SDK](/docs/libraries/ios) as a dependency. You can use either Swift Package Manager or CocoaPods. We'll use Swift Package Manager for this tutorial:
+Next, we'll add [PostHog’s iOS SDK](/docs/libraries/ios) as a dependency with Swift Package Manager:
 
 1. In Xcode, select **File > Add Package Dependencies**
 2. Enter `https://github.com/PostHog/posthog-ios.git` in the search field
@@ -42,7 +42,7 @@ import PostHog
 struct PostHogRemoteConfigApp: App {
   init() {
     let config = PostHogConfig(
-      apiKey: "<ph_project_token>",
+      projectToken: "<ph_project_token>",
       host: "<ph_client_api_host>"
     )
     PostHogSDK.shared.setup(config)

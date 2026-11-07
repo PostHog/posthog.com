@@ -15,8 +15,9 @@ checks:
           shared: [builds, docs-read]
           rubrics:
               sdk-installed: >-
-                  The PostHog iOS SDK is a dependency: a Swift Package reference to
-                  https://github.com/PostHog/posthog-ios.git, or a PostHog pod.
+                  The PostHog iOS SDK 4.x is a dependency: a Swift Package reference to
+                  https://github.com/PostHog/posthog-ios.git. A PostHog pod doesn't pass,
+                  because 4.x isn't published to CocoaPods.
               initialized: >-
                   The app imports PostHog, creates PostHogConfig(projectToken:host:)
                   with the project token and PostHog host, and calls

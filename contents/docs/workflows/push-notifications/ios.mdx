@@ -11,14 +11,14 @@ Available in the iOS SDK version 3.69.0 and newer.
 
 - Enable the **Push Notifications** capability for your app and register for remote notifications (`registerForRemoteNotifications()`), which requires requesting notification permission from the user.
 - A connected **FCM** or **APNs** channel in PostHog whose Firebase project / APNs topic (bundle id) matches your app.
-- **iOS 14 or newer** for the automatic hooks. On iOS 13 the SDK installs neither the registration nor the open-capture hook, so no push events are captured. Everything else the SDK captures is unaffected.
+- **iOS 14 or newer** for the automatic hooks on SDK version 3, which still supports iOS 13. On iOS 13 the SDK installs neither the registration nor the open-capture hook, so no push events are captured. Everything else the SDK captures is unaffected. SDK version 4 requires iOS 15.
 
 ## Automatic registration and open tracking (default)
 
 By default the SDK registers the device token and captures opens for you, by hooking into the system callbacks:
 
 ```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>")
+let config = PostHogConfig(projectToken: "<ph_project_api_key>")
 // Both default to true, shown here for clarity:
 config.capturePushNotificationSubscriptions = true // register the device token with PostHog
 config.capturePushNotificationOpened = true        // capture `$push_notification_opened` on tap
