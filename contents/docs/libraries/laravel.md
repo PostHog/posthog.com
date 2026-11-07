@@ -192,8 +192,10 @@ POSTHOG_LARAVEL_QUEUE_NAME=posthog
 Start a worker for that connection and queue:
 
 ```bash
-php artisan queue:work redis --queue=posthog --tries=3 --backoff=10
+php artisan queue:work redis --queue=posthog --tries=3 --backoff=10 --timeout=180
 ```
+
+Set `retry_after` to `240` seconds for the Redis connection in `config/queue.php`. The worker timeout must cover all SDK HTTP attempts and backoff, and `retry_after` must exceed the worker timeout. Increase both if you increase SDK timeouts or retry backoff.
 
 Producers and workers need the same project configuration and valid `APP_KEY`, which Laravel uses to encrypt delivery jobs. If you already published `config/posthog.php`, add the package's new `laravel_queue` section. Rebuild cached configuration and restart workers after changes.
 
