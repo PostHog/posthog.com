@@ -283,13 +283,6 @@ export function useMenuData(): MenuType[] {
                     link: '/slack',
                     icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
                 },
-                { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Research',
-                    link: '/research',
-                    icon: <Icons.IconBrain className="size-4 text-purple" />,
-                },
             ],
         },
         {
@@ -307,7 +300,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Community',
             items: [
-                { type: 'label', label: 'Words' },
+                { type: 'label', label: 'Read' },
                 {
                     type: 'item',
                     label: 'Blog',
@@ -362,7 +355,7 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconMap className="size-4 text-red" />,
                 },
                 { type: 'separator' },
-                { type: 'label', label: 'Vibes' },
+                { type: 'label', label: 'Fun stuff' },
                 {
                     type: 'item',
                     label: 'Merch',
@@ -386,7 +379,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Company',
             items: [
-                { type: 'label', label: 'Sacred texts' },
+                { type: 'label', label: 'Meta' },
                 {
                     type: 'item',
                     label: 'About',
@@ -428,6 +421,12 @@ export function useMenuData(): MenuType[] {
                     label: 'Roadmap',
                     link: '/roadmap',
                     icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
+                },
+                {
+                    type: 'item',
+                    label: 'Research',
+                    link: '/research',
+                    icon: <Icons.IconBrain className="size-4 text-purple" />,
                 },
                 { type: 'separator' },
                 { type: 'label', label: 'Follow us', mobileDestination: false }, // Every item below is desktop-only
