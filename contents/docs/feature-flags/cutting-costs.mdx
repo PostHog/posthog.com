@@ -211,7 +211,7 @@ final config = PostHogConfig('<ph_project_token>');
 
 if (isTestEnv) {
     config.preloadFeatureFlags = false;
-    config.sendFeatureFlagEvents = false;
+    config.sendFeatureFlagEvent = false;
     config.flushAt = 100;
     config.flushInterval = const Duration(seconds: 120);
 }
