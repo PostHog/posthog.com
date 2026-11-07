@@ -1651,6 +1651,10 @@ export const handbookSidebar = [
                         name: 'LLM cost optimization',
                         url: '/handbook/customer-success/shareable-guides/llm-cost-optimization',
                     },
+                    {
+                        name: 'Setting up Replay Vision scanners',
+                        url: '/handbook/customer-success/shareable-guides/replay-vision-scanners',
+                    },
                 ],
             },
             {
