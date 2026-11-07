@@ -4101,6 +4101,10 @@ export const docsMenu = {
                             url: '/docs/toolbar',
                         },
                         {
+                            name: 'Chrome extension',
+                            url: '/docs/toolbar/extension',
+                        },
+                        {
                             name: 'Heatmaps',
                             url: '/docs/toolbar/heatmaps',
                         },
