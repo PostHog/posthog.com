@@ -85,7 +85,7 @@ export const posthog = {
                 movement_maps: true,
                 rage_clicks: true,
                 rage_taps: true,
-                save_heatmaps: false,
+                save_heatmaps: true,
                 toolbar: true,
             },
         },
