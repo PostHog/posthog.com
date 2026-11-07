@@ -3,28 +3,22 @@ import { IconBell, IconX } from '@posthog/icons'
 import Modal from 'components/RadixUI/Modal'
 import OSButton from 'components/OSButton'
 import DialogSelect from './DialogSelect'
-import { ForumSubscription } from 'lib/strapi'
-import { useUser } from 'hooks/useUser'
-import { DeliveryMode, useForumSubscriptions, useForumTopics } from './hooks'
+import { DeliveryMode, MemberSubscription, useForumSubscriptions, useForumTopics } from './hooks'
 import TopicIcon from './TopicIcon'
 
-// Everyone can choose no emails or the daily digest; only moderators can get an email for each new post. Every
-// subscription shows its posts in Following.
-const deliveryModes: { value: DeliveryMode; label: string; moderatorOnly?: boolean }[] = [
+// No emails or the daily digest. Every subscription shows its posts in Following.
+const deliveryModes: { value: DeliveryMode; label: string }[] = [
     { value: 'none', label: 'No emails' },
     { value: 'dailyDigest', label: 'Daily digest' },
-    { value: 'eachPost', label: 'Every post', moderatorOnly: true },
 ]
 
-const Row = ({ subscription }: { subscription: ForumSubscription }) => {
-    const { isForumModerator } = useUser()
+const Row = ({ subscription }: { subscription: MemberSubscription }) => {
     const { topics } = useForumTopics()
     const { subscribe, unsubscribe } = useForumSubscriptions()
     const topic = subscription.forumTopic
     const tag = subscription.forumTag
     const label = topic ? `#${topic.slug}` : tag?.label
     const icon = topic ? topics.find((t) => t.id === topic.id)?.attributes.icon : null
-    const modes = deliveryModes.filter((mode) => !mode.moderatorOnly || isForumModerator)
     const target = topic ? { forumTopic: topic.id } : { forumTag: tag?.id as number }
 
     return (
@@ -38,7 +32,7 @@ const Row = ({ subscription }: { subscription: ForumSubscription }) => {
             </div>
             <div className="w-40">
                 <DialogSelect
-                    options={modes.map((mode) => ({ label: mode.label, value: mode.value }))}
+                    options={deliveryModes.map((mode) => ({ label: mode.label, value: mode.value }))}
                     value={subscription.deliveryMode}
                     onChange={(mode) => subscribe(target, mode)}
                 />
