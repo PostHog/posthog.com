@@ -162,7 +162,7 @@ import com.posthog.android.PostHogAndroidConfig
 // Detect test/CI environment
 val isTestEnv = BuildConfig.DEBUG || System.getProperty("CI") != null
 
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>").apply {
+val config = PostHogAndroidConfig(projectToken = "<ph_project_token>").apply {
     if (isTestEnv) {
         // Disable automatic flag requests
         preloadFeatureFlags = false

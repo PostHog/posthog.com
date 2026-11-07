@@ -59,7 +59,7 @@ import com.posthog.android.PostHogAndroidConfig
 import okhttp3.OkHttpClient
 
 val config = PostHogAndroidConfig(
-    apiKey = POSTHOG_API_KEY,
+    projectToken = POSTHOG_API_KEY,
     host = POSTHOG_HOST,
 ).apply {
     tracingHeaders = listOf("api.example.com")
@@ -174,6 +174,83 @@ This will remove the Super Property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply use `PostHog.reset` which takes care of clearing all stored Super Properties and more.
 
+## Event options
+
+From version `4.0.0`, `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, and `captureException` take an `options` map as their last parameter. Options tell PostHog how to process the event and are sent apart from its properties. They replace the `$`-prefixed properties that earlier versions sent as settings:
+
+| Option | Legacy property |
+| --- | --- |
+| `process_person_profile` | `$process_person_profile` |
+| `cookieless_mode` | `$cookieless_mode` |
+| `disable_skew_correction` | `$ignore_sent_at` |
+| `product_tour_id` | `$product_tour_id` |
+
+For example, set `process_person_profile` to `false` to capture an event without processing a [person profile](/docs/data/persons):
+
+```kotlin
+import com.posthog.PostHog
+
+PostHog.capture(
+    event = "signed_up",
+    options = mapOf("process_person_profile" to false),
+)
+```
+
+Java has no default arguments, so pass every parameter, with `null` for `options` when you don't set any:
+
+```java
+import com.posthog.PostHog;
+
+import java.util.HashMap;
+import java.util.Map;
+
+Map<String, Object> options = new HashMap<>();
+options.put("process_person_profile", false);
+
+// event, distinctId, properties, userProperties, userPropertiesSetOnce, groups, timestamp, options
+PostHog.Companion.capture("signed_up", null, null, null, null, null, null, options);
+
+// screenTitle, properties, options
+PostHog.Companion.screen("Checkout", null, null);
+```
+
+- An option wins over its legacy property, which still works. Other keys are sent unchanged, and PostHog ignores keys it doesn't know.
+- PostHog reads common forms of a value, such as `"false"` or `0` for a boolean, and drops an event whose option value it can't read.
+- For `identify`, the options apply to the `$identify` or `$set` event the call sends.
+- In `beforeSend`, read and change options through `event.options`. Edit the map in place: when person processing is off, the SDK sets `process_person_profile` to `false` there, and assigning a new map loses it.
+- There are no global options. To set one on every event, register its legacy property, for example `PostHog.register("\$process_person_profile", false)`.
+
+## App language
+
+From version `4.0.0`, events carry two language properties:
+
+- `$locale` is the first language in the device settings, as a full language tag such as `de-CH` or `zh-Hant-TW`, whichever language your app shows. It's left out when the device reports no language.
+- `$app_language` is the language your app shows.
+
+On Android 13+, the SDK detects `$app_language` from the per-app language. If you declare `android:localeConfig`, by hand or with the Android Gradle plugin's `generateLocaleConfig` option, it falls back to the first device language that matches a language you declare. Without `localeConfig`, it's sent only when a per-app language is set. On Android 6 to 12, it isn't sent unless you set it.
+
+The SDK reads the languages in the background, so the first event after a language change can still carry the previous value.
+
+To send `$app_language` on every Android version, or if your app picks its language some other way, such as an in-app setting, call `setAppLanguage` with a language tag. The value overrides the detected language and survives `reset()`, but it's kept in memory only, so call it at startup and whenever the language changes. Pass `null` to go back to the detected language.
+
+```kotlin
+import com.posthog.PostHog
+
+PostHog.setAppLanguage("de")
+
+// go back to the detected language
+PostHog.setAppLanguage(null)
+```
+
+```java
+import com.posthog.PostHog;
+
+PostHog.Companion.setAppLanguage("de");
+
+// go back to the detected language
+PostHog.Companion.setAppLanguage(null);
+```
+
 ## Opt out of data capture
 
 You can completely opt-out users from data capture. To do this, there are two options:
@@ -182,7 +259,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 
 ```kotlin
 val config = PostHogAndroidConfig(
-    apiKey = "<ph_project_token>",
+    projectToken = "<ph_project_token>",
     host = "<ph_client_api_host>"
 )
 config.optOut = true
@@ -218,7 +295,7 @@ You can also configure the flush interval with `flushIntervalSeconds` (default `
 ```kotlin
 import com.posthog.android.PostHogAndroidConfig
 
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
     flushAt = 20
     flushIntervalSeconds = 30
 }
@@ -270,7 +347,7 @@ Set `config.bootstrap` before calling `setup()` to seed identity and flag values
 ```kotlin
 import com.posthog.PostHogBootstrapConfig
 
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
+val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST)
 config.bootstrap = PostHogBootstrapConfig(
     distinctId = "distinct_id_of_your_user",
     isIdentifiedId = true,
@@ -366,7 +443,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode by setting the `debug` option to `true` in the `PostHogAndroidConfig` object. This will enable verbose logs about the inner workings of the SDK.
 
 ```kotlin
-val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
     debug = true
     // ... other config options
 }
@@ -381,7 +458,7 @@ import com.posthog.PersonProfiles
 import com.posthog.android.PostHogAndroidConfig
 
 val config = PostHogAndroidConfig(
-    apiKey = POSTHOG_API_KEY,
+    projectToken = POSTHOG_API_KEY,
     host = POSTHOG_HOST
 ).apply {
     captureApplicationLifecycleEvents = true
@@ -391,7 +468,7 @@ val config = PostHogAndroidConfig(
     flushAt = 20
     maxQueueSize = 1000
     maxBatchSize = 50
-    maxRetries = 3
+    pushNotificationSubscriptionMaxRetries = 3
     flushIntervalSeconds = 30
 
     debug = false
@@ -427,11 +504,12 @@ val config = PostHogAndroidConfig(
 | `optOut` | `false` | Prevents data capture when enabled. You can also call `PostHog.optOut()` and `PostHog.optIn()`. |
 | `flushAt` | `20` | Number of queued events that triggers a flush. |
 | `maxQueueSize` | `1000` | Maximum number of events kept across memory and disk before FIFO eviction. |
-| `maxBatchSize` | `50` | Maximum number of events sent in one batch request. |
-| `maxRetries` | `3` | Maximum retry attempts for push-subscription registration failures. It does not apply to event, session recording, or log ingestion. |
+| `maxBatchSize` | `50` | Maximum number of events sent in one batch request. In version 4.0+, a request also carries at most about 5 MiB of events, and the SDK sends as soon as that much is queued. |
+| `pushNotificationSubscriptionMaxRetries` | `3` | Maximum retry attempts for push-subscription registration failures. It does not apply to event, session recording, or log ingestion. |
 | `flushIntervalSeconds` | `30` | Maximum delay before queued data is flushed. |
 | `encryption` | `null` | Optional `PostHogEncryption` implementation for encrypting persisted queued events. |
 | `proxy` | `null` | Optional `java.net.Proxy` for PostHog API requests. |
+| `compression` | `PostHogCompression.GZIP` | Compresses request bodies sent to PostHog. Set it to `PostHogCompression.NONE` if something between the app and PostHog alters compressed bodies. `captureAi` requests use `captureAiCompression` instead. Has no effect when you set your own `httpClient`. |
 | `getAnonymousId` | generated UUID | Optional hook to customize anonymous ID generation. |
 | `reuseAnonymousId` | `false` | Reuses one anonymous ID across user changes on the same device. |
 | `personProfiles` | `PersonProfiles.IDENTIFIED_ONLY` | Controls when person profiles are processed: `IDENTIFIED_ONLY`, `ALWAYS`, or `NEVER`. |
@@ -446,15 +524,14 @@ val config = PostHogAndroidConfig(
 | `sendFeatureFlagEvent` | `true` | Sends `$feature_flag_called` when a feature flag is evaluated. |
 | `featureFlagCalledCacheSize` | `1000` | Number of feature flag calls cached for deduplicating `$feature_flag_called` events. |
 | `preloadFeatureFlags` | `true` | Fetches feature flags automatically during setup. |
-| `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.29.1+. The legacy `evaluationEnvironments` option is available in version 3.24.0+. |
-| `onFeatureFlags` | `null` | Callback invoked when feature flags are loaded. |
+| `evaluationContexts` | `null` | Context tags that constrain which feature flags are evaluated. Available in version 3.29.1+. The legacy `evaluationEnvironments` option was available in version 3.24.0+ and removed in 4.0. |
 
 ### Product configuration objects
 
 | Option | Default | Description |
 | --- | --- | --- |
 | `sessionReplay` | `false` | Enables session replay when project settings also allow recording. |
-| `sessionReplayConfig` | `PostHogSessionReplayConfig()` | Configures masking, screenshots, Logcat capture, sampling, and custom drawable conversion. |
+| `sessionReplayConfig` | `PostHogSessionReplayConfig()` | Configures masking, screenshot settings, Logcat capture, and sampling. |
 | `logs` | `PostHogLogsConfig()` | Configures [Android logs](/docs/logs/installation/android). |
 | `errorTrackingConfig` | `PostHogErrorTrackingConfig()` | Configures error tracking. `autoCapture` defaults to `false`; set it to `true` to autocapture uncaught exceptions when project settings also enable error tracking. |
 | `surveys` | `false` | Internal/experimental native Android survey support. Native Android survey UI is not fully supported or documented yet. |
@@ -499,6 +576,107 @@ config.addBeforeSend { event ->
 # Push notifications
 
 The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
+
+## Upgrading from version 3 to version 4
+
+Version 4.0 removes APIs deprecated in 3.x, sends events to capture v1, and always records session replay as screenshots. For every change, with before and after code, see the [migration guide](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md).
+
+### Requirements
+
+Update `posthog-android` to `4.+`. If you only depend on `posthog-android-surveys-compose`, declare `com.posthog:posthog-android` 4.0.0 or later in your build so Gradle resolves 4.x instead of the 3.x version surveys-compose pulls in. If you depend on core `posthog` directly, update it in the same change: core is now 7.0 and isn't binary compatible with SDKs built against 6.x. If the same project also uses `posthog-server`, update it too.
+
+The minimum Android API level (23), Java bytecode target (Java 8), and Kotlin compatibility (2.0) are unchanged.
+
+React Native, Flutter, and Kotlin Multiplatform apps get this SDK through their PostHog package. Upgrade that package instead of adding `posthog-android` 4.0 yourself.
+
+### Removed APIs
+
+These are compile errors:
+
+| Removed | Use instead |
+| --- | --- |
+| `apiKey`, `PostHogAndroidConfig(apiKey = …)` | `projectToken` |
+| `propertiesSanitizer`, `PostHogPropertiesSanitizer` | `addBeforeSend` |
+| `evaluationEnvironments` | `evaluationContexts` |
+| `getFeatureFlagPayload()` | `getFeatureFlagResult(key, sendFeatureFlagEvent = false)?.payload` |
+| `defaultValue` on `getFeatureFlag()` | `getFeatureFlag(key) ?: default` |
+| `PostHogConfig.onFeatureFlags` | `PostHog.onFeatureFlags()` before `setup()` |
+| `PostHogOnFeatureFlags` | `PostHogFeatureFlagsCallback` |
+| `PostHogSessionReplayConfig.debouncerDelayMs` | `throttleDelayMs` |
+| `PostHogSessionReplayConfig.screenshot`, `drawableConverter`, `PostHogDrawableConverter` | Nothing – replay always records screenshots |
+| `remoteConfig` | Nothing – remote config always loads |
+| `maxRetries` | `pushNotificationSubscriptionMaxRetries` |
+
+`getFeatureFlagResult()` sends `$feature_flag_called` by default and `getFeatureFlagPayload()` never did, so pass `sendFeatureFlagEvent = false` to keep your event volume and experiment exposures unchanged. It also has no default value parameter, so add `?: yourDefault` if you need one.
+
+Classes that implement `PostHogInterface`, such as test fakes, need updating. The migration guide lists the changed methods. `identify(distinctId, userProperties, userPropertiesSetOnce)` moved from `PostHogCoreInterface` to `PostHogStatelessInterface`, so call it through `PostHogInterface` or `PostHogStatelessInterface`.
+
+Helpers in `com.posthog.internal`, `com.posthog.android.internal`, and `com.posthog.android.replay.internal` that were marked `@PostHogInternal` are no longer public. Apps that don't use `@PostHogInternal` APIs aren't affected.
+
+### Feature flag callbacks
+
+`PostHogConfig.onFeatureFlags` is removed, so call `PostHog.onFeatureFlags()` before `setup()` instead. The listener and `reloadFeatureFlags()` now receive a `PostHogFeatureFlagsLoaded`:
+
+```kotlin
+val mainHandler = Handler(Looper.getMainLooper())
+
+// Version 3
+config.onFeatureFlags = PostHogOnFeatureFlags {
+    mainHandler.post { refreshUi() }
+}
+
+// Version 4, before PostHogAndroid.setup()
+PostHog.onFeatureFlags { loaded ->
+    if (!loaded.errorsLoading) {
+        refreshUi()
+    }
+}
+```
+
+The listener returns a subscription you can `unsubscribe()`, and it differs from the removed option in three ways:
+
+- It runs on the main thread. The option ran on a background thread.
+- Bootstrapped flags arrive just after `setup()` is called, not synchronously inside it.
+- A reload on a disabled SDK doesn't call listeners. `reloadFeatureFlags(callback)` still gets `errorsLoading = true` in that case.
+
+The `reloadFeatureFlags()` callback still runs on a background thread, so switch to the main thread before touching UI. See [ensuring flags are loaded before usage](/docs/feature-flags/adding-feature-flag-code?tab=Android#ensuring-flags-are-loaded-before-usage).
+
+A trailing lambda such as `PostHog.reloadFeatureFlags { mainHandler.post { refreshUi() } }` still compiles, so check whether it should read `errorsLoading`. The callback also runs after a failed load.
+
+### Event options and AI events
+
+`capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, and `captureException` take a new `options` argument as their last parameter. Use it for capture settings such as `process_person_profile` and `cookieless_mode`, which 3.x read from `$`-prefixed properties. The legacy properties still work.
+
+```kotlin
+// Version 3
+PostHog.capture("signed_up", properties = mapOf("\$process_person_profile" to false))
+
+// Version 4
+PostHog.capture("signed_up", options = mapOf("process_person_profile" to false))
+```
+
+Java callers pass the new trailing `options` argument, or `null`. In `beforeSend`, read and edit options through `event.options`. See [event options](#event-options).
+
+Version 4 also adds `captureAi` for AI events, which go to `/i/v1/ai/events`. See [AI events](#ai-events).
+
+### Behavior changes
+
+These don't fail the build:
+
+- **`getFeatureFlag()`'s second parameter is now `sendFeatureFlagEvent`.** `getFeatureFlag("flag-key", true)` still compiles, but `true` no longer means the default value. A disabled SDK returns `null` instead of your default, and `$feature_flag_called` no longer reports a fallback as the flag's value.
+- **Session replay records screenshots.** Apps that used the default wireframe mode now upload masked screenshots. Custom-drawn views and other content the SDK doesn't recognize, such as maps or video, can be visible unless you mask them. Jetpack Compose screens, which wireframe recorded as empty boxes, now show their content, so check that your consent or privacy notice covers them. Review [masking](/docs/session-replay/privacy?tab=Android) before you upgrade.
+- **Compose masking changed.** This also applies to apps that already set `screenshot = true`. `Modifier.postHogMask()` and `Modifier.postHogUnmask()` apply only to the element and its children, not to siblings merged into the same clickable row. Text that draws past its layout box is masked in full. Nodes using `Modifier.clearAndSetSemantics` are masked while text or image masking is on, so use `Modifier.postHogUnmask()` to show them.
+- **`$locale` is the device language.** It's now the first language in the device settings, as a full language tag such as `zh-Hant-TW`, instead of `Locale.getDefault()`, which your app can change. Hebrew, Indonesian, and Yiddish values on older Android versions change from the legacy codes `iw`, `in`, and `ji`, so update filters that match those. The new `$app_language` property is the language your app shows, sent on Android 13+ when it can be read. Call `PostHog.setAppLanguage("de")` to send it on every version. See [app language](#app-language).
+- **Your properties win over the SDK's values.** A registered super property with the same key as one the SDK sets, such as `$os_name`, now overrides the SDK's value. Super and event properties also override `$is_identified`, `$process_person_profile`, and the session replay debug properties. A registered `$session_id` overrides the SDK's session ID, which can detach events from their session replay. When you pass both `userProperties` and a `$set` property, they're merged key by key and `userProperties` wins; the same goes for `userPropertiesSetOnce` and `$set_once`. In 3.x, the `$set` property replaced `userProperties` whole.
+- **Person processing is sent only when it's off.** When `personProfiles` turns person processing off, the SDK sets the `process_person_profile` option to `false`. Otherwise it sends nothing, because PostHog processes person profiles by default. In 3.x, every event carried a `$process_person_profile` property. A `beforeSend` hook that assigns a new map to `event.options` loses that `false`, so edit `event.options` in place.
+- **Some events and values are dropped or replaced.** Events with an empty name are dropped, including ones `beforeSend` renames to `""`. Deep link query parameters whose name starts with `$` are left out of `Deep Link Opened`. A uuid you set in `beforeSend`, for example with `copy(uuid = …)`, is replaced with the uuid of the original capture.
+- **Events go to capture v1.** Analytics events go to `/i/v1/analytics/events` instead of `/batch`. If you self-host PostHog or send events through your own proxy, make sure that path is served first. Capture v1 also changes event validation, property precedence, and retries. See the [capture v1 upgrade guide](/docs/libraries/capture-v1).
+- **`$session_id` and `$window_id` are top-level fields.** Capture requests send them as `session_id` and `window_id` instead of properties, so update a proxy that reads them from the request body. In PostHog, events still have `$session_id` and `$window_id`.
+- **Capture requests follow fewer redirects and cap `Retry-After`.** Only a 307 or 308 redirect to the same origin as `host` is followed. Any other redirect drops the events, so point `host` at the final host. A `Retry-After` longer than 30 seconds is capped at 30 seconds.
+- **Capture requests set their own `Authorization` header.** They send `Authorization: Bearer <projectToken>`, which replaces any `Authorization` header you set in `requestHeaders`. If your reverse proxy authenticates with `Authorization`, switch it to another header, such as `X-Proxy-Token`. Other requests still send your `Authorization` header.
+- **A personal API key disables the SDK.** If `projectToken` is a personal API key (`phx_...`), the SDK is disabled at setup, as with an empty token, and prints a warning even when `debug` is off. In 3.x, the SDK started and PostHog rejected every event. Use your project token (`phc_...`).
+- **Feature flag payloads must be valid JSON.** A malformed, empty, or whitespace-only payload, or one only valid in lenient mode such as unquoted `hello`, now reads as `null` instead of a string. A JSON `null` payload reads as `null` instead of the string `"null"`. If you store plain text in a payload, change it to valid JSON such as `"hello"` before you upgrade. The flag's value isn't affected.
+- **`remoteConfig = false` no longer skips `/config`.** Apps that set it now request `/config` at setup and apply its session replay, surveys, error tracking, and push settings. `/flags` is then requested only if the project has feature flags, and if it has none, the cached flags are cleared.
 
 # FAQ
 

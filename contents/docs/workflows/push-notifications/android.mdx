@@ -16,7 +16,7 @@ Set up Firebase Cloud Messaging and request the `POST_NOTIFICATIONS` runtime per
 Both behaviors are on by default. When `firebase-messaging` is on your classpath, the SDK registers this device's FCM token with PostHog, and it auto-captures a `$push_notification_opened` event when a user opens the app from a notification tray tap.
 
 ```kotlin
-val config = PostHogAndroidConfig(apiKey = "<ph_project_api_key>").apply {
+val config = PostHogAndroidConfig(projectToken = "<ph_project_api_key>").apply {
     capturePushNotificationSubscriptions = true // register the FCM token with PostHog
     capturePushNotificationOpened = true         // capture `$push_notification_opened`
 }

@@ -299,7 +299,7 @@ PostHogSDK.shared.setup(config)
 ```
 
 ```kotlin file=Android
-val config = PostHogAndroidConfig(apiKey = "<ph_project_token>", host = "<ph_client_api_host>").apply {
+val config = PostHogAndroidConfig(projectToken = "<ph_project_token>", host = "<ph_client_api_host>").apply {
     errorTrackingConfig.exceptionSteps.enabled = true
     errorTrackingConfig.exceptionSteps.maxBytes = 32768
 }

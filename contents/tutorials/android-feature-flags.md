@@ -123,7 +123,7 @@ First, add the [PostHog Android SDK](/docs/libraries/android) as a dependency in
 
 ```gradle_kotlin file=app/build.gradle
 dependencies {
-    implementation("com.posthog:posthog-android:3.+")
+    implementation("com.posthog:posthog-android:4.+")
     //... other dependencies
 }
 ```
@@ -148,7 +148,7 @@ class MyFeatureFlagsApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
-            apiKey = POSTHOG_API_KEY,
+            projectToken = POSTHOG_API_KEY,
             host = POSTHOG_HOST // TIP: host is optional if you use https://us.i.posthog.com
         )
         PostHogAndroid.setup(this, config)
