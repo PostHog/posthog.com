@@ -7,6 +7,24 @@
     },
     "headers": [
         {
+            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x|migration):ext(\\.md)?",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex"
+                }
+            ]
+        },
+        {
+            "source": "/docs/libraries/python/reference:ext(\\.md)?",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
