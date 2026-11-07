@@ -44,7 +44,7 @@ npm install @posthog/mcp posthog-node
 
 Call `instrument(server, posthog)` once, before the server accepts requests. Pass the `McpServer` or the low-level `Server`. The SDK also instruments tools that you register later.
 
-`instrument()` labels the whole client: every event it sends reports `$lib` `posthog-node-mcp` and the `@posthog/mcp` version. If your app also captures its own events, give MCP analytics its own `PostHog` client. With `posthog-node` 6, call `instrument()` before the client captures anything, because the client fixes its label when it first sends. To find MCP traffic, filter on `$mcp_*` events rather than `$lib`.
+`instrument()` labels the whole client: every event it sends reports `$lib` `posthog-node-mcp` and the `@posthog/mcp` version. If your app also captures its own events, give MCP analytics its own `PostHog` client. To find MCP traffic, filter on `$mcp_*` events rather than `$lib`.
 
 <MultiLanguage>
 
