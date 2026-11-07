@@ -17,16 +17,13 @@ Each run follows four steps:
 3. **Score the output** – Your evaluator calculates a result for each item. For example, it might check whether the agent called the right tool or ask an LLM to judge its answer.
 4. **Upload the results** – Send each score to PostHog, then mark the experiment complete. PostHog displays the items and scores together.
 
-A _scorer_ defines what a result means: its name, value type, and passing rule. It doesn't run your evaluation code. For example, a boolean scorer named **Task completed correctly** records whether your evaluator returned `true` or `false`.
+A _scorer_ defines what a result means: its name, value type, and passing rule. It doesn't run your evaluation code. For example, a boolean scorer named **Correct tool** records whether your agent selected the expected tool.
 
 ## Run your first experiment
 
-This example tests an agent against a set of requests and expected outcomes. Connect your own agent and evaluator using these placeholder functions:
+This example checks the tool and arguments a support agent selects for six requests. The demo uses routing rules and returns a tool call without calling a model or executing a tool. Two scorers check the tool name and arguments separately.
 
--   `run_agent(input)` / `runAgent(input)` runs your agent and returns its output.
--   `evaluate_answer(input, output, expected)` / `evaluateAnswer(input, output, expected)` checks whether the agent achieved the expected outcome and returns a boolean. This can use an LLM judge or your existing evaluation code.
-
-These functions belong to your code, not the PostHog SDK.
+The demo has three deliberate mistakes: a delivery question goes to the refund tool, a cancellation omits its order ID, and a refund uses the wrong order ID. After running the example, replace `run_agent()` / `runAgent()` with your agent and adapt `evaluate_answer()` / `evaluateAnswer()` to your evaluation criteria.
 
 ### 1. Install the SDK and configure access
 
@@ -62,9 +59,9 @@ export POSTHOG_HOST="https://us.posthog.com"
 
 Find your project ID in [project settings](https://app.posthog.com/settings/project). For an EU project, set `POSTHOG_HOST` to `https://eu.posthog.com`. These examples use the app API host and a secret API key, rather than the public project token used to capture analytics events. Keep the key on your server or in your CI.
 
-### 2. Create a scorer
+### 2. Create two scorers
 
-Run this once to create the **Task completed correctly** scorer. A value of `true` passes, and `false` fails.
+Save this as `create_scorers.py` or `create_scorers.mts` and run it once to create **Correct tool** and **Correct arguments**. For both scorers, `true` passes and `false` fails.
 
 <MultiLanguage selector="tabs">
 
@@ -77,12 +74,13 @@ with OfflineEvaluations(
     secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
     host=os.environ["POSTHOG_HOST"],
 ) as evaluations:
-    scorer = evaluations.scorers.create(
-        name="Task completed correctly",
-        kind="boolean",
-        config={"true_is_failure": False},
-    )
-    print(scorer.id)
+    for name in ["Correct tool", "Correct arguments"]:
+        scorer = evaluations.scorers.create(
+            name=name,
+            kind="boolean",
+            config={"true_is_failure": False, "true_label": "Pass", "false_label": "Fail"},
+        )
+        print(f"{name}: {scorer.id}")
 ```
 
 ```typescript file=TypeScript
@@ -95,12 +93,14 @@ const evaluations = new OfflineEvaluations({
 })
 
 try {
-    const scorer = await evaluations.scorers.create({
-        name: "Task completed correctly",
-        kind: "boolean",
-        config: { trueIsFailure: false },
-    })
-    console.log(scorer.id)
+    for (const name of ["Correct tool", "Correct arguments"]) {
+        const scorer = await evaluations.scorers.create({
+            name,
+            kind: "boolean",
+            config: { trueIsFailure: false, trueLabel: "Pass", falseLabel: "Fail" },
+        })
+        console.log(`${name}: ${scorer.id}`)
+    }
 } finally {
     evaluations.close()
 }
@@ -108,36 +108,96 @@ try {
 
 </MultiLanguage>
 
-Results use the scorer version ID: `scorer.current_version_id` in Python or `scorer.currentVersionId` in TypeScript. You can save this ID in your code and update it when you change the scorer. Or fetch the scorer by `scorer.id` at the start of each experiment to use its current version.
-
-The examples below fetch the current version. Save the printed scorer ID as `POSTHOG_SCORER_ID`:
-
-```bash
-export POSTHOG_SCORER_ID="<scorer_id>"
+```bash file=Python
+python create_scorers.py
 ```
 
-Reuse this scorer across experiments. Creating a new scorer with the same name creates a separate scorer, which splits its history.
+```bash file=TypeScript
+pnpm dlx tsx create_scorers.mts
+```
+
+Results use the scorer version ID: `scorer.current_version_id` in Python or `scorer.currentVersionId` in TypeScript. You can save this ID in your code and update it when you change the scorer. Or fetch the scorer by `scorer.id` at the start of each experiment to use its current version.
+
+The examples below fetch the current versions. Save the two printed scorer IDs:
+
+```bash
+export POSTHOG_TOOL_SCORER_ID="<correct_tool_scorer_id>"
+export POSTHOG_ARGUMENTS_SCORER_ID="<correct_arguments_scorer_id>"
+```
+
+Reuse these scorers across experiments. Creating a new scorer with the same name creates a separate scorer, which splits its history.
 
 ### 3. Run the cases and upload scores
 
-The following code creates an experiment, runs each test case through your agent, and uploads one score per item. Replace the example cases with requests and expected outcomes for your agent.
+Save the following code as `support_eval.py` or `support_eval.mts`. It creates an experiment and uploads two scores per item, with an explanation of each result. The argument check compares exact key-value pairs independently of the tool name, so a case can pass one check and fail the other.
 
 <MultiLanguage selector="tabs">
 
 ```python file=Python
+import json
 import os
+import re
 from posthog.ai.evaluations import EvaluationItem, OfflineEvaluations
+
+def run_agent(input: str) -> dict:
+    text = input.lower()
+    match = re.search(r"#(\d+)", text)
+    order_id = match.group(1) if match else ""
+    # These three rules contain deliberate mistakes for the demo.
+    if "cancel" in text:
+        return {"tool": "cancel_order", "arguments": {}}
+    if "refund" in text:
+        return {"tool": "check_refund_policy", "arguments": {"order_id": "1001"}}
+    if "order" in text:
+        return {"tool": "check_refund_policy", "arguments": {"order_id": order_id}}
+    queue = "billing" if "charged" in text else "account"
+    return {"tool": "handoff_to_support", "arguments": {"queue": queue}}
+
+def evaluate_answer(output: dict, expected: dict) -> dict:
+    return {
+        "tool": {
+            "value": output["tool"] == expected["tool"],
+            "reasoning": f"Expected {expected['tool']}; selected {output['tool']}.",
+        },
+        "arguments": {
+            "value": output["arguments"] == expected["arguments"],
+            "reasoning": (
+                f"Expected {json.dumps(expected['arguments'])}; "
+                f"received {json.dumps(output['arguments'])}."
+            ),
+        },
+    }
 
 cases = [
     {
         "id": "refund_eligibility",
-        "input": "Am I eligible for a refund on my last order?",
-        "expected": "Check the order and refund policy before answering.",
+        "input": "Can I get a refund for order #1001?",
+        "expected": {"tool": "check_refund_policy", "arguments": {"order_id": "1001"}},
     },
     {
         "id": "delivery_status",
-        "input": "Where is my order?",
-        "expected": "Look up the order and report its current delivery status.",
+        "input": "Where is order #1002?",
+        "expected": {"tool": "look_up_order", "arguments": {"order_id": "1002"}},
+    },
+    {
+        "id": "cancel_order",
+        "input": "Please cancel order #1003.",
+        "expected": {"tool": "cancel_order", "arguments": {"order_id": "1003"}},
+    },
+    {
+        "id": "refund_other_order",
+        "input": "Can I get a refund for order #1004?",
+        "expected": {"tool": "check_refund_policy", "arguments": {"order_id": "1004"}},
+    },
+    {
+        "id": "account_access",
+        "input": "I can't sign in to my account.",
+        "expected": {"tool": "handoff_to_support", "arguments": {"queue": "account"}},
+    },
+    {
+        "id": "billing_question",
+        "input": "Why was I charged twice?",
+        "expected": {"tool": "handoff_to_support", "arguments": {"queue": "billing"}},
     },
 ]
 
@@ -146,29 +206,36 @@ with OfflineEvaluations(
     secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
     host=os.environ["POSTHOG_HOST"],
 ) as evaluations:
-    scorer = evaluations.scorers.get(os.environ["POSTHOG_SCORER_ID"])
+    scorers = {
+        "tool": evaluations.scorers.get(os.environ["POSTHOG_TOOL_SCORER_ID"]),
+        "arguments": evaluations.scorers.get(os.environ["POSTHOG_ARGUMENTS_SCORER_ID"]),
+    }
     experiment = evaluations.create_experiment(
         name="Support agent baseline",
         suite_key="support-agent",
         run_source="local",
         expected_item_count=len(cases),
-        expected_result_count=len(cases),
+        expected_result_count=len(cases) * len(scorers),
     )
 
-    for case in cases:
-        output = run_agent(case["input"])
-        passed = evaluate_answer(case["input"], output, case["expected"])
-        item = EvaluationItem(
-            case_key=case["id"],
-            input=case["input"],
-            output=output,
-            expected_output=case["expected"],
-        )
-        experiment.upload_result(
-            item=item,
-            scorer_version_id=scorer.current_version_id,
-            value=passed,
-        )
+    try:
+        for case in cases:
+            output = run_agent(case["input"])
+            item = EvaluationItem(
+                case_key=case["id"],
+                input=case["input"],
+                output=output,
+                expected_output=case["expected"],
+            )
+            for key, result in evaluate_answer(output, case["expected"]).items():
+                experiment.upload_result(
+                    item=item,
+                    scorer_version_id=scorers[key].current_version_id,
+                    **result,
+                )
+    except Exception:
+        experiment.fail()
+        raise
 
     experiment.complete()
     print(f"Completed experiment: {experiment.id}")
@@ -177,16 +244,72 @@ with OfflineEvaluations(
 ```typescript file=TypeScript
 import { EvaluationItem, OfflineEvaluations } from "@posthog/ai/evaluations"
 
-const cases = [
+type ToolCall = { tool: string; arguments: Record<string, string> }
+
+function runAgent(input: string): ToolCall {
+    const text = input.toLowerCase()
+    const orderId = text.match(/#(\d+)/)?.[1] ?? ""
+    // These three rules contain deliberate mistakes for the demo.
+    if (text.includes("cancel")) {
+        return { tool: "cancel_order", arguments: {} }
+    }
+    if (text.includes("refund")) {
+        return { tool: "check_refund_policy", arguments: { order_id: "1001" } }
+    }
+    if (text.includes("order")) {
+        return { tool: "check_refund_policy", arguments: { order_id: orderId } }
+    }
+    const queue = text.includes("charged") ? "billing" : "account"
+    return { tool: "handoff_to_support", arguments: { queue } }
+}
+
+function evaluateAnswer(output: ToolCall, expected: ToolCall) {
+    const actualArgs = output.arguments
+    const expectedArgs = expected.arguments
+    return {
+        tool: {
+            value: output.tool === expected.tool,
+            reasoning: `Expected ${expected.tool}; selected ${output.tool}.`,
+        },
+        arguments: {
+            value:
+                Object.keys(actualArgs).length === Object.keys(expectedArgs).length &&
+                Object.entries(expectedArgs).every(([key, value]) => actualArgs[key] === value),
+            reasoning: `Expected ${JSON.stringify(expectedArgs)}; received ${JSON.stringify(actualArgs)}.`,
+        },
+    }
+}
+
+const cases: { id: string; input: string; expected: ToolCall }[] = [
     {
         id: "refund_eligibility",
-        input: "Am I eligible for a refund on my last order?",
-        expected: "Check the order and refund policy before answering.",
+        input: "Can I get a refund for order #1001?",
+        expected: { tool: "check_refund_policy", arguments: { order_id: "1001" } },
     },
     {
         id: "delivery_status",
-        input: "Where is my order?",
-        expected: "Look up the order and report its current delivery status.",
+        input: "Where is order #1002?",
+        expected: { tool: "look_up_order", arguments: { order_id: "1002" } },
+    },
+    {
+        id: "cancel_order",
+        input: "Please cancel order #1003.",
+        expected: { tool: "cancel_order", arguments: { order_id: "1003" } },
+    },
+    {
+        id: "refund_other_order",
+        input: "Can I get a refund for order #1004?",
+        expected: { tool: "check_refund_policy", arguments: { order_id: "1004" } },
+    },
+    {
+        id: "account_access",
+        input: "I can't sign in to my account.",
+        expected: { tool: "handoff_to_support", arguments: { queue: "account" } },
+    },
+    {
+        id: "billing_question",
+        input: "Why was I charged twice?",
+        expected: { tool: "handoff_to_support", arguments: { queue: "billing" } },
     },
 ]
 
@@ -197,29 +320,39 @@ const evaluations = new OfflineEvaluations({
 })
 
 try {
-    const scorer = await evaluations.scorers.get(process.env.POSTHOG_SCORER_ID!)
+    const scorers = {
+        tool: await evaluations.scorers.get(process.env.POSTHOG_TOOL_SCORER_ID!),
+        arguments: await evaluations.scorers.get(process.env.POSTHOG_ARGUMENTS_SCORER_ID!),
+    }
     const experiment = await evaluations.createExperiment({
         name: "Support agent baseline",
         suiteKey: "support-agent",
         runSource: "local",
         expectedItemCount: cases.length,
-        expectedResultCount: cases.length,
+        expectedResultCount: cases.length * Object.keys(scorers).length,
     })
 
-    for (const testCase of cases) {
-        const output = await runAgent(testCase.input)
-        const passed = await evaluateAnswer(testCase.input, output, testCase.expected)
-        const item = new EvaluationItem({
-            caseKey: testCase.id,
-            input: testCase.input,
-            output,
-            expectedOutput: testCase.expected,
-        })
-        await experiment.uploadResult({
-            item,
-            scorerVersionId: scorer.currentVersionId,
-            value: passed,
-        })
+    try {
+        for (const testCase of cases) {
+            const output = await runAgent(testCase.input)
+            const item = new EvaluationItem({
+                caseKey: testCase.id,
+                input: testCase.input,
+                output,
+                expectedOutput: testCase.expected,
+            })
+            const scores = evaluateAnswer(output, testCase.expected)
+            for (const key of ["tool", "arguments"] as const) {
+                await experiment.uploadResult({
+                    item,
+                    scorerVersionId: scorers[key].currentVersionId,
+                    ...scores[key],
+                })
+            }
+        }
+    } catch (error) {
+        await experiment.fail()
+        throw error
     }
 
     await experiment.complete()
@@ -231,19 +364,58 @@ try {
 
 </MultiLanguage>
 
-The results depend on your agent and evaluator. After changing a prompt, model, or tool, run the same cases again under a new experiment name to compare the scores.
+Run the script with the environment variables from the previous steps:
+
+```bash file=Python
+python support_eval.py
+```
+
+```bash file=TypeScript
+pnpm dlx tsx support_eval.mts
+```
+
+Open [**Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments) and select **Support agent baseline**. You should see six items and twelve results. **Correct tool** passes five of six cases (83.33%), and **Correct arguments** passes four of six (66.67%).
+
+<ProductScreenshot
+imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/1bb3a5a4-02ae-4426-b214-fbe5e2a9e337.jpg"
+imageDark="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/a8be0300-2237-4c3c-85e0-7c30bf81fd01.jpg"
+alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
+classes="rounded"
+/>
+
+Keep `suite_key` / `suiteKey` the same for related experiments, such as runs of this support-agent test suite. Keep `case_key` / `caseKey` stable for the same test case across runs. Each new `EvaluationItem` represents a separate execution. For repeated executions of one case, keep its case key and set a distinct `trial`, such as `"1"` or `"2"`.
 
 The SDK sends results directly to PostHog. There's no analytics client to initialize or event queue to flush. Closing the client releases connections; it doesn't complete the experiment. Always call `complete()` after uploading the results. If your run stops early, call `experiment.fail()` to mark it failed.
 
 ## Review and compare experiments
 
-Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments). Select an experiment to inspect its results:
+Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments):
 
--   Each row is an experiment item, and each scorer has its own column.
--   Open an item to inspect its input, expected output, actual output, and score details.
--   Follow **Score trends** across experiments, then open a scorer's history to investigate a change.
+1. Select **Completed** in the upload-state filter to exclude runs that are still uploading or failed before all results arrived.
+2. Click **Choose scores** to select the scorers shown in **Score trends**. Open a scorer's history to inspect its versions and the experiments behind the trend.
+3. Select **Support agent baseline**. Each row is an experiment item, and each scorer version has its own column.
+4. Click the **Fail** score in the **Correct arguments** column for `refund_other_order`. The inspector shows the input, expected output, actual output, and your evaluator's reasoning. Here, the agent selected the right tool but passed order ID `1001` instead of `1004`.
+
+<ProductScreenshot
+imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/9d7e1acb-52b2-4012-a77e-1da16000b928.jpg"
+imageDark="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/12ac8c6a-b8a8-400a-8d94-c741e6a6f17f.jpg"
+alt="Refund case inspector showing a passing tool check and a failing argument check: the agent sent order ID 1001 instead of 1004."
+classes="rounded"
+/>
+
+To fix the demo, pass the extracted order ID to the cancellation and refund tools, and return `look_up_order` for delivery questions. Run the same cases again with the experiment name **Support agent routing fix**. Both scorers should pass all six cases.
 
 Use the same test cases and scorer versions when you compare an agent change. Changing the cases or passing threshold can change your scores even when your agent hasn't changed.
+
+### Read scores alongside coverage
+
+Pass rate counts passing results out of results with status `ok`. Errors, skipped checks, and not-applicable checks don't enter that denominator. For example, eight passing results and two evaluator errors produce a 100% pass rate, with only eight scored items.
+
+Read the **Coverage** column beside each scorer summary. Expand it to inspect the result statuses. A missing result means an uploaded item has no result for that scorer; it doesn't count cases that were never uploaded. Compare the received item count with your expected count too.
+
+Numeric scorers show their mean score. Numeric and categorical scorers only have a pass rate when you configure a passing rule. A missing pass rate doesn't mean zero. Repeated trials each count as an item, so keep trial counts consistent when comparing runs.
+
+### Use results in CI
 
 In your CI, set `run_source="ci"` in Python or `runSource: "ci"` in TypeScript. Record your agent's commit SHA in `application_version` or `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
 
@@ -257,7 +429,7 @@ You can keep all your test cases in code, files, or another system. A PostHog [d
 
 The example below fetches the cases once before starting the experiment. It keeps the items locally and records which dataset revision they came from.
 
-To try it, set `POSTHOG_DATASET_ID` to your dataset's ID and replace the experiment creation and loop in the previous example. Keep the same client, scorer, agent, evaluator, and final `complete()` call.
+To try it with the demo, create dataset items with string inputs and expected outputs containing `tool` and `arguments`, as in the cases above. Set `POSTHOG_DATASET_ID` to your dataset's ID and replace the experiment creation and loop in the previous example. Keep the same client, scorers, agent, evaluator, error handling, and final `complete()` call.
 
 <MultiLanguage selector="tabs">
 
@@ -274,13 +446,13 @@ experiment = evaluations.create_experiment(
 
 for row in items:
     output = run_agent(row.input)
-    passed = evaluate_answer(row.input, output, row.expected_output)
     item = EvaluationItem.from_dataset_item(row, output=output)
-    experiment.upload_result(
-        item=item,
-        scorer_version_id=scorer.current_version_id,
-        value=passed,
-    )
+    for key, result in evaluate_answer(output, row.expected_output).items():
+        experiment.upload_result(
+            item=item,
+            scorer_version_id=scorers[key].current_version_id,
+            **result,
+        )
 ```
 
 ```typescript file=TypeScript
@@ -298,14 +470,19 @@ const experiment = await evaluations.createExperiment({
 })
 
 for (const row of items) {
+    if (typeof row.input !== "string") {
+        throw new Error("The demo requires string inputs")
+    }
     const output = await runAgent(row.input)
-    const passed = await evaluateAnswer(row.input, output, row.expectedOutput)
+    const scores = evaluateAnswer(output, row.expectedOutput as ToolCall)
     const item = EvaluationItem.fromDatasetItem(row, { output })
-    await experiment.uploadResult({
-        item,
-        scorerVersionId: scorer.currentVersionId,
-        value: passed,
-    })
+    for (const key of ["tool", "arguments"] as const) {
+        await experiment.uploadResult({
+            item,
+            scorerVersionId: scorers[key].currentVersionId,
+            ...scores[key],
+        })
+    }
 }
 ```
 
@@ -355,6 +532,6 @@ Keep your own copy of inputs, outputs, and other payload fields you need after 3
 
 ## Pricing
 
-Each item metric counts as one AI Observability event. An item metric is one scorer's result for one experiment item. For example, 100 items with three scores each count as 300 events.
+Each scorer result for one experiment item counts as one AI Observability event. For example, 100 items with three scores each count as 300 events.
 
 Offline evals share the [AI Observability event pricing and free tier](/pricing) with your other AI Observability events. They don't have a separate free allowance.
