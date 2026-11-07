@@ -2529,8 +2529,19 @@ const posthogMcpNav = [
         url: '/docs/model-context-protocol/faq',
     },
     {
-        name: 'Enterprise auth (ID-JAG)',
+        name: 'Enterprise Managed Authorization (EMA)',
+    },
+    {
+        name: 'Overview',
         url: '/docs/model-context-protocol/enterprise-managed-authorization',
+    },
+    {
+        name: 'Claude-issued identity',
+        url: '/docs/model-context-protocol/claude-issued-identity',
+    },
+    {
+        name: 'Okta Cross App Access',
+        url: '/docs/model-context-protocol/okta-cross-app-access',
     },
     {
         name: 'Code editors',

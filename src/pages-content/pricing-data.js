@@ -88,12 +88,12 @@ const faqs = [
         q: 'How long does PostHog retain data (events, recordings, logs)?',
         a: (
             <>
-                <p>  
-                    Events are retained for 1 year on free plans and 2 years on pay-as-you-go plans. Platform packages let  
-                    you set a custom retention policy to keep events for longer: up to 3 years on Boost, 5 years on Scale, and 7  
-                    years on Enterprise. For more information on data retention, see the{' '}  
-                    <Link to="/docs/data/events-retention">events data retention docs</Link>.  
-                </p>  
+                <p>
+                    Events are retained for 1 year on free plans and 2 years on pay-as-you-go plans. Platform packages
+                    let you set a custom retention policy to keep events for longer: up to 3 years on Boost, 5 years on
+                    Scale, and 7 years on Enterprise. For more information on data retention, see the{' '}
+                    <Link to="/docs/data/events-retention">events data retention docs</Link>.
+                </p>
                 <p>
                     Recordings on the free plan are retained for 1 month. On the pay-as-you-go plan, recordings are
                     retained for 90 days. The Boost and Scale add-ons can increase this to up to one year. The

@@ -5,7 +5,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from "components/Docs/CalloutBox";
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 ID-JAG (Identity Assertion JWT Authorization Grant, also called [XAA](https://xaa.dev)) lets your organization's identity provider (IdP), such as Okta, Microsoft Entra ID, or any OIDC-compliant SSO, grant programmatic access to PostHog. Instead of each user creating a [personal API key](/docs/api#authentication) or running an [OAuth](/docs/api/oauth) flow, your IdP issues an **ID-JAG** that a client exchanges with PostHog for a short-lived access token. You grant, scope, and revoke access centrally in your IdP.
 
@@ -24,7 +24,7 @@ ID-JAG keeps authorization decisions in your IdP instead of spreading them acros
 - **Centralized revocation:** once your IdP stops issuing ID-JAGs for a user, clients can no longer get new access tokens for them.
 - **Scoped tokens:** the access token carries only the scopes your IdP granted, intersected with what the client requested.
 
-The most common use is connecting AI agents to the [PostHog MCP server](/docs/model-context-protocol) under central control. See [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization) for the MCP-specific setup.
+The most common use is connecting AI agents to the [PostHog MCP server](/docs/model-context-protocol) under central control. This page covers the PostHog side. For a full walkthrough with Claude, see [Claude-issued identity](/docs/model-context-protocol/claude-issued-identity) or [Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access).
 
 ## How it works
 
@@ -76,11 +76,11 @@ Go to [**Organization settings → Authentication**](https://app.posthog.com/set
 
 On the same settings page, find **XAA authentication** and click **Configure**. You need to be an organization admin. Fill in:
 
-| Field                             | Required | Description                                                                                                                                       |
-| --------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Identity provider issuer URL**  | Yes      | Your IdP's issuer URL, e.g. `https://idp.example.com`. Your IdP shows it in its OIDC or authorization server settings.                            |
-| **JWKS URL (optional)**           | No       | Where PostHog fetches your IdP's public keys. Leave it empty unless your IdP publishes its keys somewhere other than its OIDC discovery document. |
-| **Allowed client IDs (optional)** | No       | Limits which client apps can use this IdP. Leave it empty to allow any registered client.                                                         |
+| Field | Required | Description |
+| --- | --- | --- |
+| **Identity provider issuer URL** | Yes | Your IdP's issuer URL, e.g. `https://idp.example.com`. Your IdP shows it in its OIDC or authorization server settings. |
+| **JWKS URL (optional)** | No | Where PostHog fetches your IdP's public keys. Leave it empty unless your IdP publishes its keys somewhere other than its OIDC discovery document. |
+| **Allowed client IDs (optional)** | No | Limits which client apps can use this IdP. Leave it empty to allow any registered client. |
 
 Under **Domains**, choose **All domains** to cover every verified domain in your organization, or **Selected domains** to pick specific ones. Then click **Save configuration**.
 
@@ -90,14 +90,14 @@ Use one XAA configuration per IdP and domain. If two configurations cover the sa
 
 The client app needs a client ID that PostHog recognizes, and your IdP must issue ID-JAGs for that client ID.
 
-- **MCP clients:** follow the client's enterprise-managed authorization setup. See [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization).
+- **MCP clients:** follow the client's enterprise-managed authorization setup. For Claude, see [Claude-issued identity](/docs/model-context-protocol/claude-issued-identity) or [Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access).
 - **Your own app:** register an [OAuth app](/docs/api/oauth) with PostHog, then see [how to exchange an ID-JAG yourself](#how-do-i-exchange-an-id-jag-myself).
 
 ### 4. Grant the required scopes in your IdP
 
 Configure your IdP to include the scopes each integration needs when it issues ID-JAGs. At minimum, all tokens need `user:read`. For the [MCP server](/docs/model-context-protocol/enterprise-managed-authorization), also include `organization:read` and `project:read`. Add any additional [API scopes](/docs/api/personal-api-keys) for what you want to do (for example, `feature_flag:write` to manage flags).
 
-The access token gets only the scopes that both your IdP granted and the client asked for.
+The access token gets only the scopes that both your IdP granted and the client asked for. For a starting list, see [which scopes to grant](#which-scopes-should-i-grant). For what each scope covers, see [API scopes](/docs/api/scopes).
 
 ## Revoking access
 
@@ -109,13 +109,13 @@ The access token gets only the scopes that both your IdP granted and the client 
 
 The most common errors when a client requests a token:
 
-| Error                                                   | What to check                                                                                                                                  |
-| ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| `access_denied`                                         | Your organization doesn't have the Scale or Enterprise add-on.                                                                                 |
-| `invalid_client`                                        | The client's credentials are wrong, or its client ID isn't in **Allowed client IDs**.                                                          |
-| `invalid_grant` (`ID-JAG could not be verified`)        | The issuer URL in your XAA configuration doesn't match your IdP, or the user's email domain isn't one of the configuration's verified domains. |
-| `invalid_grant` (`ID-JAG sub is not an active member…`) | The user isn't a member of your PostHog organization yet.                                                                                      |
-| `insufficient_scope` (from the API)                     | The token is missing a scope the request needs. Add the scope in your IdP.                                                                     |
+| Error | What to check |
+| --- | --- |
+| `access_denied` | Your organization doesn't have the Scale or Enterprise add-on. |
+| `invalid_client` | The client's credentials are wrong, or its client ID isn't in **Allowed client IDs**. |
+| `invalid_grant` (`ID-JAG could not be verified`) | The issuer URL in your XAA configuration doesn't match your IdP, or the user's email domain isn't one of the configuration's verified domains. |
+| `invalid_grant` (`ID-JAG sub is not an active member…`) | The user isn't a member of your PostHog organization yet. |
+| `insufficient_scope` (from the API) | The token is missing a scope the request needs. Add the scope in your IdP. |
 
 For every error code, see [what all the error codes mean](#what-do-all-the-error-codes-mean).
 
@@ -124,20 +124,20 @@ For every error code, see [what all the error codes mean](#what-do-all-the-error
 <details>
 <summary id="what-does-posthog-check-in-an-id-jag">What does PostHog check in an ID-JAG?</summary>
 
-| Part         | Requirement                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Header `typ` | `oauth-id-jag+jwt`                                                                                                                                                                                                                                                                                                                                                                                                             |
-| Signature    | RS256, RS384, RS512, PS256, PS384, PS512, ES256, ES384, or ES512, with a key from your IdP's JWKS                                                                                                                                                                                                                                                                                                                              |
-| `iss`        | Matches the issuer URL of the XAA configuration. A trailing slash makes no difference.                                                                                                                                                                                                                                                                                                                                         |
-| `aud`        | The PostHog authorization server the client uses: `https://oauth.posthog.com` on Cloud, or `https://us.posthog.com` / `https://eu.posthog.com` when the client calls a region directly. On self-hosted, your instance URL.                                                                                                                                                                                                     |
-| `resource`   | Optional. The PostHog resource the token is for. If omitted from the ID-JAG, PostHog uses the `resource` parameter from the token request instead. If neither is provided, PostHog defaults to your instance URL. If both are present, they must match. Valid values: `https://us.posthog.com` or `https://eu.posthog.com` for the API, `https://mcp.posthog.com/mcp` for the MCP server, or your instance URL on self-hosted. |
-| `client_id`  | The client ID of the client that presents the ID-JAG                                                                                                                                                                                                                                                                                                                                                                           |
-| `sub`        | A stable identifier for the user at your IdP                                                                                                                                                                                                                                                                                                                                                                                   |
-| `email`      | The user's email address. If it's missing, `sub` must be the email address. If `email_verified` is present, it must not be `false`.                                                                                                                                                                                                                                                                                            |
-| `iat`, `exp` | The ID-JAG must be valid at most 10 minutes. PostHog allows 30 seconds of clock skew.                                                                                                                                                                                                                                                                                                                                          |
-| `jti`        | A unique ID. Each ID-JAG works once.                                                                                                                                                                                                                                                                                                                                                                                           |
-| `scope`      | Optional. Space-separated PostHog scopes. If the client sends no `scope`, the token gets all of them. PostHog ignores scopes it doesn't know.                                                                                                                                                                                                                                                                                  |
-| `tenant`     | Optional. Set it when your IdP issues ID-JAGs for several tenants under one issuer.                                                                                                                                                                                                                                                                                                                                            |
+| Part | Requirement |
+| --- | --- |
+| Header `typ` | `oauth-id-jag+jwt` |
+| Signature | RS256, RS384, RS512, PS256, PS384, PS512, ES256, ES384, or ES512, with a key from your IdP's JWKS |
+| `iss` | Matches the issuer URL of the XAA configuration. A trailing slash makes no difference. |
+| `aud` | The PostHog authorization server the client uses: `https://oauth.posthog.com` on Cloud, or `https://us.posthog.com` / `https://eu.posthog.com` when the client calls a region directly. On self-hosted, your instance URL. |
+| `resource` | Optional. The PostHog resource the token is for: `https://us.posthog.com` or `https://eu.posthog.com` for the API, or `https://mcp.posthog.com/mcp` / `https://mcp-eu.posthog.com/mcp` for the MCP server. On self-hosted, your instance URL. Without the claim, PostHog uses the token request's `resource` parameter, and without either, the regional API URL. A claim and a parameter that differ fail with `invalid_target`. |
+| `client_id` | The client ID of the client that presents the ID-JAG |
+| `sub` | A stable identifier for the user at your IdP |
+| `email` | The user's email address. If it's missing, `sub` must be the email address. If `email_verified` is present, it must not be `false`. |
+| `iat`, `exp` | The ID-JAG must be valid at most 10 minutes. PostHog allows 30 seconds of clock skew. |
+| `jti` | A unique ID. Each ID-JAG works once. |
+| `scope` | Optional. Space-separated PostHog scopes. If the client sends no `scope`, the token gets all of them. PostHog ignores scopes it doesn't know. |
+| `tenant` | Optional. Set it when your IdP issues ID-JAGs for several tenants under one issuer. |
 
 PostHog fetches your IdP's keys from the JWKS URL, or from OIDC discovery at `{issuer}/.well-known/openid-configuration`. It rejects issuer and JWKS URLs that point at internal, loopback, or cloud metadata addresses.
 
@@ -171,13 +171,12 @@ curl -X POST https://oauth.posthog.com/oauth/token/ \
   -d assertion=<the ID-JAG JWT from your IdP> \
   -d client_id=<your PostHog client ID> \
   -d client_secret=<your client secret> \
-  -d scope="user:read organization:read project:read" \
-  -d resource=https://us.posthog.com
+  -d scope="user:read organization:read project:read"
 ```
 
-The `resource` parameter tells PostHog which resource server the token is for (for example, `https://us.posthog.com` for the API or `https://mcp.posthog.com/mcp` for the MCP server). It's optional — if omitted, PostHog uses the `resource` claim from the ID-JAG, or defaults to your instance URL. If both the claim and the parameter are present, they must match.
-
 With `private_key_jwt`, replace `client_secret` with `client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer` and `client_assertion=<a JWT signed with your client's key>`.
+
+To pick the resource yourself, add `resource=<a PostHog resource>` (RFC 8707). See the `resource` row in [what PostHog checks](#what-does-posthog-check-in-an-id-jag).
 
 A successful response:
 
@@ -200,8 +199,51 @@ Use the token on API requests to your organization's region (`https://us.posthog
 - **It lasts 2 hours by default.** The client repeats the ID-JAG exchange to get a fresh token. There is no refresh token.
 - **It acts as the matched user**, with that user's permissions, limited to the granted scopes.
 - **It is bound to one organization:** the one that owns the XAA configuration.
-- **It works only for PostHog's own resources.** Its `aud` is the resolved `resource` — from the ID-JAG claim, the token request parameter, or your instance URL.
+- **It works only for PostHog's own resources.** Its `aud` is the resolved `resource`: the ID-JAG's claim, the token request's parameter, or your instance URL.
 - **PostHog checks it on every request.** The user must still be an active member, and the organization must still have the Scale or Enterprise add-on. If the granted scopes are empty, PostHog still issues the token, and API requests with it fail with `403 insufficient_scope`.
+
+</details>
+
+<details>
+<summary id="which-scopes-should-i-grant">Which scopes should I grant?</summary>
+
+Start with the scopes the PostHog MCP server grants by default when someone connects with OAuth. PostHog chose them from the tools people use most, and there are fewer than 100, so they fit identity providers that cap scopes per app, such as Okta.
+
+Write scopes, each of which also grants the matching read:
+
+[`action:write`](/docs/api/scopes#action), [`alert:write`](/docs/api/scopes#alert), [`annotation:write`](/docs/api/scopes#annotation), [`cohort:write`](/docs/api/scopes#cohort), [`dashboard:write`](/docs/api/scopes#dashboard), [`data_catalog:write`](/docs/api/scopes#data_catalog), [`endpoint:write`](/docs/api/scopes#endpoint), [`error_tracking:write`](/docs/api/scopes#error_tracking), [`event_definition:write`](/docs/api/scopes#event_definition), [`experiment:write`](/docs/api/scopes#experiment), [`external_data_source:write`](/docs/api/scopes#external_data_source), [`feature_flag:write`](/docs/api/scopes#feature_flag), [`heatmap:write`](/docs/api/scopes#heatmap), [`hog_flow:write`](/docs/api/scopes#hog_flow), [`hog_function:write`](/docs/api/scopes#hog_function), [`insight:write`](/docs/api/scopes#insight), [`insight_variable:write`](/docs/api/scopes#insight_variable), [`llm_skill:write`](/docs/api/scopes#llm_skill), [`marketing_analytics:write`](/docs/api/scopes#marketing_analytics), [`notebook:write`](/docs/api/scopes#notebook), [`person:write`](/docs/api/scopes#person), [`product_enablement:write`](/docs/api/scopes#product_enablement), [`project:write`](/docs/api/scopes#project), [`property_definition:write`](/docs/api/scopes#property_definition), [`replay_scanner:write`](/docs/api/scopes#replay_scanner), [`session_recording_playlist:write`](/docs/api/scopes#session_recording_playlist), [`signal_scout:write`](/docs/api/scopes#signal_scout), [`subscription:write`](/docs/api/scopes#subscription), [`survey:write`](/docs/api/scopes#survey), [`task:write`](/docs/api/scopes#task), [`warehouse_view:write`](/docs/api/scopes#warehouse_view)
+
+Read scopes:
+
+[`activity_log:read`](/docs/api/scopes#activity_log), [`batch_export:read`](/docs/api/scopes#batch_export), [`billing:read`](/docs/api/scopes#billing), [`business_knowledge:read`](/docs/api/scopes#business_knowledge), [`dashboard_template:read`](/docs/api/scopes#dashboard_template), [`early_access_feature:read`](/docs/api/scopes#early_access_feature), [`evaluation:read`](/docs/api/scopes#evaluation), [`experiment_saved_metric:read`](/docs/api/scopes#experiment_saved_metric), [`group:read`](/docs/api/scopes#group), [`health_issue:read`](/docs/api/scopes#health_issue), [`integration:read`](/docs/api/scopes#integration), [`llm_prompt:read`](/docs/api/scopes#llm_prompt), [`logs:read`](/docs/api/scopes#logs), [`mcp_analytics:read`](/docs/api/scopes#mcp_analytics), [`organization:read`](/docs/api/scopes#organization), [`organization_member:read`](/docs/api/scopes#organization_member), [`query:read`](/docs/api/scopes#query), [`session_recording:read`](/docs/api/scopes#session_recording), [`ticket:read`](/docs/api/scopes#ticket), [`tracing:read`](/docs/api/scopes#tracing), [`user:read`](/docs/api/scopes#user), [`warehouse_table:read`](/docs/api/scopes#warehouse_table), [`web_analytics:read`](/docs/api/scopes#web_analytics)
+
+- Every connection needs at least `user:read`, `organization:read`, and `project:read` (or `project:write`).
+- For read-only access, replace each `:write` scope with its `:read` scope.
+- [API scopes](/docs/api/scopes) lists every scope and what it covers. OAuth apps can request the ones in `scopes_supported` at `https://oauth.posthog.com/.well-known/oauth-authorization-server`.
+
+The scopes you grant in your identity provider are the most a token can carry. PostHog can't ask for more later. To add a scope, add it in your identity provider, and members get it with their next token, within 2 hours.
+
+</details>
+
+<details>
+<summary id="how-does-a-client-discover-that-posthog-supports-id-jag">How does a client discover that PostHog supports ID-JAG?</summary>
+
+The PostHog MCP server's protected resource metadata ([RFC 9728](https://www.rfc-editor.org/rfc/rfc9728)), for example `https://mcp.posthog.com/.well-known/oauth-protected-resource/mcp`, names `https://oauth.posthog.com` as its authorization server. That server's metadata ([RFC 8414](https://www.rfc-editor.org/rfc/rfc8414)) at `https://oauth.posthog.com/.well-known/oauth-authorization-server` advertises the ID-JAG grant profile:
+
+```json
+{
+  "authorization_grant_profiles_supported": [
+    "urn:ietf:params:oauth:grant-profile:id-jag"
+  ],
+  "grant_types_supported": [
+    "authorization_code",
+    "refresh_token",
+    "urn:ietf:params:oauth:grant-type:jwt-bearer"
+  ]
+}
+```
+
+Both documents also list every scope PostHog offers in `scopes_supported`. The OIDC discovery document lists the `jwt-bearer` grant type but not `authorization_grant_profiles_supported`.
 
 </details>
 
@@ -210,27 +252,30 @@ Use the token on API requests to your organization's region (`https://us.posthog
 
 The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.rfc-editor.org/rfc/rfc6749#section-5.2)):
 
-| Error                                                                        | What it means                                                                                                                                                                                                                                                                                    |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `invalid_request` (`assertion is required`)                                  | The request has no `assertion` parameter.                                                                                                                                                                                                                                                        |
-| `invalid_client`                                                             | Client authentication failed: the client ID, secret, or `private_key_jwt` assertion is missing or wrong. It also appears when the ID-JAG's `client_id` isn't in the configuration's allowed client IDs.                                                                                          |
-| `invalid_grant` (`ID-JAG could not be verified`)                             | No XAA configuration matches the ID-JAG's issuer and email domain, or more than one does. It also covers an `iss` that doesn't match after signature verification, an `email_verified` of `false`, and a member already linked to a different IdP subject. The message is intentionally generic. |
-| `invalid_grant` (`ID-JAG sub is not an active member…`)                      | The email doesn't match an active member of the organization that owns the XAA configuration.                                                                                                                                                                                                    |
-| `invalid_grant` (`ID-JAG client_id doesn't match the authenticating client`) | The ID-JAG's `client_id` differs from the client that sent the request.                                                                                                                                                                                                                          |
-| `invalid_grant` (`ID-JAG has expired` / `is not yet valid`)                  | The assertion expired, or the clocks of your IdP and PostHog differ by more than 30 seconds.                                                                                                                                                                                                     |
-| `invalid_grant` (`ID-JAG lifetime exceeds 600 seconds`)                      | `exp` is more than 10 minutes after `iat`.                                                                                                                                                                                                                                                       |
-| `invalid_grant` (`ID-JAG assertion has already been used`)                   | The client sent an ID-JAG with a `jti` PostHog already accepted. Request a new ID-JAG from your IdP.                                                                                                                                                                                             |
-| `invalid_grant` (`ID-JAG is missing required claim…`)                        | A required claim, such as `jti` or `client_id`, is missing.                                                                                                                                                                                                                                      |
-| `invalid_target`                                                             | The resolved `resource` isn't one of the PostHog resources listed in [what PostHog checks](#what-does-posthog-check-in-an-id-jag), or the ID-JAG's `resource` claim conflicts with the token request's `resource` parameter.                                                                     |
-| `access_denied`                                                              | The organization doesn't have the Scale or Enterprise add-on.                                                                                                                                                                                                                                    |
-| `insufficient_scope` (from the API)                                          | The granted scopes don't cover the request. Add the missing scopes in your IdP.                                                                                                                                                                                                                  |
+| Error | What it means |
+| --- | --- |
+| `invalid_request` (`assertion is required`) | The request has no `assertion` parameter. |
+| `invalid_client` | Client authentication failed: the client ID, secret, or `private_key_jwt` assertion is missing or wrong. It also appears when the ID-JAG's `client_id` isn't in the configuration's allowed client IDs. |
+| `invalid_grant` (`ID-JAG could not be verified`) | No XAA configuration matches the ID-JAG's issuer and email domain, or more than one does. It also covers an `iss` that doesn't match after signature verification, an `email_verified` of `false`, and a member already linked to a different IdP subject. The message is intentionally generic. |
+| `invalid_grant` (`ID-JAG sub is not an active member…`) | The email doesn't match an active member of the organization that owns the XAA configuration. |
+| `invalid_grant` (`ID-JAG client_id doesn't match the authenticating client`) | The ID-JAG's `client_id` differs from the client that sent the request. |
+| `invalid_grant` (`ID-JAG has expired` / `is not yet valid`) | The assertion expired, or the clocks of your IdP and PostHog differ by more than 30 seconds. |
+| `invalid_grant` (`ID-JAG lifetime exceeds 600 seconds`) | `exp` is more than 10 minutes after `iat`. |
+| `invalid_grant` (`ID-JAG assertion has already been used`) | The client sent an ID-JAG with a `jti` PostHog already accepted. Request a new ID-JAG from your IdP. |
+| `invalid_grant` (`ID-JAG is missing required claim…`) | A required claim, such as `jti` or `client_id`, is missing. |
+| `invalid_target` | The resource isn't one of the PostHog resources listed in [what PostHog checks](#what-does-posthog-check-in-an-id-jag), or the `resource` claim and the `resource` parameter differ. |
+| `access_denied` | The organization doesn't have the Scale or Enterprise add-on. |
+| `insufficient_scope` (from the API) | The granted scopes don't cover the request. Add the missing scopes in your IdP. |
 
 </details>
 
 ## Further reading
 
 - [Enterprise-managed authorization for MCP](/docs/model-context-protocol/enterprise-managed-authorization)
+- [Connect Claude with Claude-issued identity](/docs/model-context-protocol/claude-issued-identity)
+- [Connect Claude through Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access)
 - [ID-JAG / XAA specification](https://xaa.dev)
 - [SSO](/docs/settings/authentication/sso)
 - [OAuth integration](/docs/api/oauth)
 - [API authentication and scopes](/docs/api#authentication)
+- [API scopes](/docs/api/scopes)
