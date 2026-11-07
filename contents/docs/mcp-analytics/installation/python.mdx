@@ -155,7 +155,7 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `identify` | – | `(request, extra) -> UserIdentity \| None`, sync or async, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `report_missing` | `False` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missing_capability_tool_name` | `"get_more_tools"` | Renames the `report_missing` tool. |
-| `collect_feedback` | `False` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `report_missing` reports. |
+| `collect_feedback` | `False` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). Its missing-capability reports don't appear in the [Missing capabilities](/docs/mcp-analytics/missing-capability) views. |
 | `enable_exception_autocapture` | `True` | Emit a `$exception` event for each failed tool call. |
 | `send_initialize_event` | `True` | Emit `$mcp_initialize` for each `initialize` handshake. Set to `False` to stop it. Other events keep their sessions and client names. MCP onboarding and the default dashboard's users and sessions tiles then show no data. |
 | `send_tools_list_event` | `True` | Emit `$mcp_tools_list` for each `tools/list`. Set to `False` to stop it. Tools keep their injected arguments. |
