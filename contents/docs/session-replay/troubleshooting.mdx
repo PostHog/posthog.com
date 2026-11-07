@@ -18,6 +18,14 @@ window.posthog.LIB_VERSION;
 
 You can also check using the [SDK health check](/docs/health-checks/sdk-health).
 
+## Check mobile recordings
+
+Open a recent mobile SDK event in the [Activity view](https://app.posthog.com/events). A `$screen` or custom event works, so you don't need a `$pageview`.
+
+Copy its `$session_id` and use it in the [SQL query below](#check-the-replay-status-on-your-events). If the event has replay diagnostic properties, use the [diagnostic button](#use-the-diagnostic-button-in-event-details). Properties vary by SDK and version.
+
+For setup and platform requirements, check the [mobile replay guides](/docs/session-replay/mobile#next-steps). The `recorder.js` and browser checks on this page apply to web recording.
+
 ## Check the replay status on your events
 
 Recent versions of `posthog-js` attach diagnostic properties to every event that describe what Session Replay was doing at the moment the event was captured. Reading these is usually the fastest way to figure out _why_ a session wasn't recorded before you start changing settings.
