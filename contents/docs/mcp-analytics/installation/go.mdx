@@ -254,7 +254,7 @@ A client on an older revision never sees a round. go-sdk answers the requests it
 
 ### Properties
 
-- **`$lib`:** MCP events report `posthog-go-mcp`. `$lib_version` stays the `posthog-go` version. A client built with `CaptureMode: posthog.CaptureModeAnalyticsV1` still reports `posthog-go` for MCP events.
+- **`$lib`:** MCP events report `posthog-go-mcp`, and `$lib_version` stays the `posthog-go` version. Other events the client sends keep `posthog-go`. A `$lib` you set in `ToolCall.Properties` wins. Find MCP events by their `$mcp_*` event names.
 - **Errors:** handler errors from `mcp.AddTool` keep their Go type in `$mcp_error_type` and `$exception`, such as `fs.PathError`. Plain errors give `Error`. The adapter has no override. On the manual API, set `ToolCall.ErrorType`.
 - **Client headers:** `$mcp_client_user_agent` and `$mcp_vendor_client` come from the `User-Agent` and `X-Anthropic-Client` headers, on HTTP only. The SDK redacts them and caps each at 256 bytes.
 

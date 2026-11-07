@@ -15,6 +15,17 @@ features:
   errorTracking: true
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Capture v1 in v2.0.0" type="fyi">
+
+The Go SDK `v2.0.0` sends events with [capture v1](/docs/libraries/capture-v1). It's a major version with breaking changes, including event options, per-event results, and new retry and compression settings. The module path changes to `github.com/posthog/posthog-go/v2`. Read the [upgrade guide](/docs/libraries/capture-v1) before you upgrade.
+
+</CalloutBox>
+
+<!-- TODO(capture-v1): add this callout on release day only. -->
+
+
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance.
 
 import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
@@ -60,15 +71,13 @@ client.Enqueue(posthog.Capture{
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `process_person_profile` option to `false`:
 
 ```go
 client.Enqueue(posthog.Capture{
     DistinctId: "distinct_id",
     Event:      "event_name",
-    Properties: map[string]interface{}{
-        "$process_person_profile": false,
-    },
+    Options:    posthog.NewOptions().Set("process_person_profile", false),
 })
 ```
 
@@ -110,7 +119,7 @@ handler := posthog.NewRequestContextMiddleware(http.HandlerFunc(func(w http.Resp
 
 The middleware adds `$current_url`, `$request_method`, `$request_path`, `$user_agent`, and `$ip` properties. By default, it also reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` as request-scoped defaults. Explicit `DistinctId` values and `$session_id` properties passed to captures take precedence over request context.
 
-If request context is attached but no distinct ID is available, capture and exception events are sent as [personless events](/docs/data/anonymous-vs-identified-events) with an auto-generated UUID and `$process_person_profile: false`. Calls to `Enqueue` without request context still require `DistinctId`. `EvaluateFlagsWithContext` uses the request-scoped distinct ID when `EvaluateFlagsPayload.DistinctId` is empty, but it never generates personless IDs and returns `ErrNoDistinctID` when no distinct ID is available.
+If request context is attached but no distinct ID is available, capture and exception events are sent as [personless events](/docs/data/anonymous-vs-identified-events) with an auto-generated UUID and the `process_person_profile: false` option. Calls to `Enqueue` without request context still require `DistinctId`. `EvaluateFlagsWithContext` uses the request-scoped distinct ID when `EvaluateFlagsPayload.DistinctId` is empty, but it never generates personless IDs and returns `ErrNoDistinctID` when no distinct ID is available.
 
 Tracing headers are client-controlled analytics context, not authentication or authorization. For security-sensitive server-side decisions, pass an authenticated `DistinctId` explicitly or attach one to the request context:
 

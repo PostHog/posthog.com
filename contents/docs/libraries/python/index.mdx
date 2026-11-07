@@ -16,11 +16,22 @@ features:
   tracing: true
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Capture v1 in 8.0.0" type="fyi">
+
+The Python SDK `8.0.0` sends events with [capture v1](/docs/libraries/capture-v1). It's a major version with breaking changes, including event options, per-event results, and new retry and compression settings. Read the [upgrade guide](/docs/libraries/capture-v1) before you upgrade.
+
+</CalloutBox>
+
+<!-- TODO(capture-v1): add this callout on release day only. -->
+
+
 import PythonSdkVersionNote from '../../_snippets/python-sdk-version-note.mdx'
 
 The Python SDK makes it easy to capture events, evaluate feature flags, track errors, and more in your Python apps.
 
-> These docs cover version `7.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
+> These docs cover version `8.x` of the Python SDK, which requires Python 3.10 or higher. On Python 3.9? See [supported versions](#supported-versions).
 
 import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
 
@@ -151,13 +162,13 @@ with new_context():
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/product-analytics/person-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `False`. Events captured with no context or explicit distinct_id are marked as personless, and will have an auto-generated distinct_id:
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `process_person_profile` option to `False`. Events captured with no context or explicit distinct_id are marked as personless, and will have an auto-generated distinct_id:
 
 ```python
 posthog.capture(
     event='event_name',
-    properties={
-        '$process_person_profile': False
+    options={
+        'process_person_profile': False
     }
 )
 ```
@@ -631,7 +642,7 @@ client = posthog.Client(
 )
 ```
 
-If your callback raises an exception, the SDK logs the error and continues with the original unmodified event.
+If your callback raises an exception, the SDK logs the error and drops the event.
 
 ## Historical migrations
 

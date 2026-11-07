@@ -156,15 +156,17 @@ Image previews appear when hovering over events in the event selector, such as w
 
 ## Event deduplication
 
-Every event has a `uuid`. Events that share the same `uuid`, `event` name, `timestamp`, and `distinct_id` are treated as duplicates and are eventually de-duplicated. This matters because failures and retries happen, so your app or one of our SDKs might send the same event more than once.
+Every event has a `uuid`. Events that share the same `uuid`, `event` name, `distinct_id`, and UTC date of `timestamp` are treated as duplicates and are eventually de-duplicated. This matters because failures and retries happen, so your app or one of our SDKs might send the same event more than once.
+
+On [capture v1](/docs/api/capture-v1#event-uuids), every event must have its own `uuid`. If one request repeats a `uuid`, PostHog keeps the first event with it and drops the rest. To update an event, resend it in a later request with the same `uuid`, `event`, `distinct_id`, and a `timestamp` on the same UTC day. PostHog stores both copies at first. Background merges then keep only the later copy, usually within minutes. Until then, insights and SQL count both. The later copy replaces the whole event, including its `timestamp`.
 
 Most of the time you don't need to think about this. PostHog generates a `uuid` for each event, and client-side SDKs like [JavaScript Web](/docs/libraries/js) set one automatically, so retried events are de-duplicated for you.
 
-You can rely on deduplication to modify events, for example if some events were missing required properties. Sending an event with a `uuid`, `event` name, `timestamp`, and `distinct_id` that matches an already-ingested event lets you upsert it. De-duplication is eventual, as it happens during background [ClickHouse](/docs/how-posthog-works/clickhouse) merges, so duplicates may persist for a while before they're merged. When the modified event is re-ingested, it completely replaces the original - you must therefore include **all** properties you want to be present on the final event.
+You can rely on deduplication to modify events, for example if some events were missing required properties. Sending an event with a `uuid`, `event` name, and `distinct_id` that match an already-ingested event, and a `timestamp` on the same UTC day, lets you upsert it. De-duplication is eventual, as it happens during background [ClickHouse](/docs/how-posthog-works/clickhouse) merges, so duplicates may persist for a while before they're merged. When the modified event is re-ingested, it completely replaces the original - you must therefore include **all** properties you want to be present on the final event.
 
 <CalloutBox icon="IconWarning" title="Things to know when modifying events" type="caution">
 
-- Keep the `timestamp` identical to the original, or the event won't be deduplicated. Avoid sending a `sent_at` query parameter, as PostHog uses it to [adjust the timestamp](/docs/data/timestamps).
+- Keep the `timestamp` on the same UTC day as the original, or the event won't be deduplicated. The new copy's `timestamp` replaces the original's. Avoid sending a `sent_at` query parameter, as PostHog uses it to [adjust the timestamp](/docs/data/timestamps).
 - Omit `$set` and `$set_once` to avoid overwriting person properties that have changed since the event was originally ingested.
 - Person properties on the re-ingested event reflect the person's current values, not those at the time of the original event.
 - Downstream consumers like realtime destinations, webhooks, and [batch exports](/docs/data-pipelines/batch-exports) may re-trigger or duplicate rows.
