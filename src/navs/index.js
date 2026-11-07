@@ -393,6 +393,12 @@ export const dataPipelines = {
             name: 'Resources',
         },
         {
+            name: 'Migrate off Fivetran',
+            url: '/docs/data-pipelines/migrate-off-fivetran',
+            icon: 'IconBook',
+            color: 'seagreen',
+        },
+        {
             name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
             url: '/docs/data-pipelines/fivetran-airbyte',
             icon: 'IconBook',
