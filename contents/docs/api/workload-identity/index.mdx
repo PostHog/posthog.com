@@ -4,11 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-> **Note:** PostHog doesn't support any workload provider for workload identity federation yet. This page and the provider pages describe how the feature works so you can plan for it. Until a provider is supported, use a [personal API key](/docs/api/personal-api-keys).
-
 <CalloutBox icon="IconInfo" title="hog isn't released yet" type="fyi">
 
-`hog` is PostHog's new CLI. It isn't released yet. Every `hog` command on these pages is a beta preview of how it works once hog is released, and the details can change. Until then, use [`posthog-cli`](/docs/cli) with a personal API key, as its [authentication docs](/docs/cli#authentication) describe.
+These docs are forward-looking. They describe how you'll use workload identity with `hog`, PostHog's new CLI, which isn't released yet. Every `hog` command is a beta preview, and the details can change.
 
 </CalloutBox>
 
@@ -135,31 +133,9 @@ curl -X POST "https://us.posthog.com/api/projects/<project_id>/workload_trust_po
 
 The keys in `conditions` are claim names from the provider's OIDC token, and only the claims the provider lists are allowed. On GitHub Actions, a `ref` condition also needs `event_name` or `environment`, so a `pull_request_target` run from a fork can't match. The response includes an `approval_url` to send to an admin.
 
-## Exchanging a token
+## How the token exchange works
 
-Send the OIDC token to the token endpoint as a form-encoded [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693) token exchange:
-
-```bash
-curl -X POST "https://us.posthog.com/oauth/token/" \
-  -d grant_type=urn:ietf:params:oauth:grant-type:token-exchange \
-  -d subject_token_type=urn:ietf:params:oauth:token-type:jwt \
-  -d subject_token="$OIDC_TOKEN" \
-  -d resource="https://us.posthog.com/api/projects/<project_id>"
-```
-
-`resource` names the project: your PostHog host followed by `/api/projects/<project_id>`. Use the project's ID, not the ID of one of its environments.
-
-A successful response looks like this:
-
-```json
-{
-  "access_token": "<token>",
-  "issued_token_type": "urn:ietf:params:oauth:token-type:access_token",
-  "token_type": "Bearer",
-  "expires_in": 600,
-  "scope": "annotation:write"
-}
-```
+The job sends its OIDC token to PostHog's token endpoint, `/oauth/token/`, as an [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693) token exchange that names the project. PostHog verifies the token, finds the matching trust policy, and returns a PostHog access token with the policy's scopes. The token works for at most 10 minutes. hog does all of this for you, as [How hog exchanges tokens](#how-hog-exchanges-tokens-beta) describes.
 
 The token never outlives the OIDC token it came from, and there is no refresh token. When a call needs a scope the policy doesn't have, the API answers with a `403` and a `WWW-Authenticate` header naming the missing scope. Ask an admin to add it to the policy.
 
