@@ -1,0 +1,185 @@
+---
+title: Import from Mailgun
+sidebar: Docs
+showTitle: true
+---
+
+<CalloutBox icon="IconFlask" title="Importing from Mailgun is in beta" type="action">
+
+This import isn't on for every project yet, and it might change while we work on it.
+If **Import from another tool** on the opt-outs page doesn't list Mailgun, it isn't on for your project.
+
+</CalloutBox>
+
+You can copy your bounces, complaints, unsubscribes, mailing list opt-outs, and templates from Mailgun to PostHog in one background import.
+The import only reads from Mailgun, and nothing sends by itself.
+Mailgun keeps working as before while you move your sending over at your own pace.
+
+## What moves and what stays
+
+| In the import window | What PostHog creates |
+| --- | --- |
+| **Bounces** | Entries on your [suppression list](/docs/workflows/opt-outs#the-suppression-list), with the SMTP code and error |
+| **Spam complaints** | Entries on your suppression list |
+| **Unsubscribes** | Opt-outs from all marketing email, or from a message category for each tag |
+| **Allowlists** | A list of what each domain allows. Nothing changes in PostHog |
+| **Mailing lists** | A marketing message category for each list, and opt-outs for the members who left |
+| **Templates** | [Library](/docs/workflows/library) templates in Liquid, with notes on anything to review |
+| **Sending domains** | A list of your domains and DNS records, and which domains can already send from PostHog |
+
+These stay in Mailgun:
+
+- Automations. Mailgun's API has none to import.
+- Routes, webhooks, tracking settings, send history, and stats. Rebuild what you need.
+- Subscribed list members and their custom variables. They don't become people in PostHog.
+- Domains and their signing keys. PostHog signs mail with its own keys, so [each domain needs new DNS records](#sending-domains).
+- Mailjet, which is a separate product.
+
+## Run the import
+
+You need to be an organization admin or owner, with edit access to Workflows in the project.
+
+1. In Mailgun, create an account API key, just for this import. A domain sending key can't read your data.
+2. In PostHog, go to **Workflows**, open **Opt-outs**, and click **Import from another tool**.
+3. Select **Mailgun**.
+4. Choose your **Mailgun region**: US, EU, or both.
+5. Select what to import, paste the key, and click **Start import**.
+
+You can close the window and come back. Each step shows its progress, and each template links to what PostHog created.
+A project runs one import from a tool at a time.
+
+### Choose a region
+
+Mailgun keeps suppressions, mailing lists, and templates in each region apart, so an account with domains in both has two sets of data.
+PostHog only sends your key to the region you choose.
+If you choose a region where you have no domains, the import finishes and tells you to try the other one.
+
+### Choose a key role
+
+If your Mailgun plan has key roles, choose the smallest one that can read what you import.
+
+| Role | Bounces, complaints, unsubscribes | Allowlists, lists, templates, domains |
+| --- | --- | --- |
+| Analyst | Can't read | Can read |
+| Support | Can read | Can read |
+| Developer, Admin | Can read | Can read |
+
+Mailgun has no read-only role that covers suppressions. Support can also make changes in Mailgun, though PostHog only makes read requests.
+If you start an import with a key that can't read a step, PostHog stops before the import starts and names the step, so you can clear it or use another key.
+
+## Your API key
+
+**During the import.** PostHog keeps the key encrypted for this import only.
+
+**After the import.** PostHog deletes the key when the import ends, whether it finished or failed. If an import stops unexpectedly, PostHog deletes the key within about 26 hours of the start.
+
+The key stays valid at Mailgun until you delete it there, so delete it in Mailgun when you're done.
+PostHog asks for a key again each time you import.
+
+## Import again
+
+Importing again adds what's missing and never changes what you changed in PostHog.
+
+| What you import | What importing again does |
+| --- | --- |
+| Bounce or complaint | Leaves an existing entry as it is. An address you removed stays removed. |
+| Unsubscribe | Keeps a choice already stored in PostHog, and adds new categories. |
+| Category from a list or tag | Keeps your edits. A category you deleted stays deleted. |
+| Template | Skips a template when its key is already taken, including by a deleted template. |
+| Domain or allowlist | Lists it again. The import writes neither. |
+
+One entry can change: if a bounced address came in as a complaint from an earlier import, the bounce replaces it, because a bounce also blocks transactional email.
+
+If some steps failed, click **Import again** with the same region. Each failed step continues from where it stopped, so its counts only cover what the new run read.
+A key that Mailgun rejects needs a new key. For any other failure, run the import again.
+
+## Every domain becomes one project
+
+Mailgun keeps suppressions per domain, and PostHog keeps them per project.
+An address that unsubscribed from one Mailgun domain is opted out for the whole project in PostHog.
+If you send unrelated brands from one Mailgun account, consider importing into separate projects, or check the results.
+
+## How each list blocks email
+
+| Mailgun list | Marketing email | Transactional email | Mailgun blocks |
+| --- | --- | --- | --- |
+| Bounce | Blocked | Blocked | All email from that domain |
+| Spam complaint | Blocked | Sent | All email from that domain |
+| Unsubscribe from everything | Blocked | Sent | All email from that domain |
+| Unsubscribe from a tag | Blocked in that category | Sent | Email with that tag |
+| Left a mailing list | Blocked in that category | Sent | Email sent to that list |
+
+**Tags.** Mailgun blocks an unsubscribed tag when a message carries it. PostHog has no tags on email, so put the templates that carried the tag in the category named after it.
+
+**Allowlists.** Mailgun doesn't add an allowed address to its bounce list. PostHog has no allowlist, so a bounce there can suppress the address. The results name any allowed address already on your suppression list.
+
+PostHog refuses a send to a hard-bounced address with `recipient_suppressed`.
+If your app retries failed sends, make sure that it doesn't retry this error.
+
+## Why it's slow
+
+The import makes at most 2 requests a second in each region.
+Mailgun doesn't publish a limit for these requests, and your live sending shares your account, so the import stays gentle. It also waits when Mailgun's `X-RateLimit-Reset` header asks it to.
+
+## Templates
+
+PostHog imports account templates and each domain's templates.
+
+| Mailgun template | Key in PostHog |
+| --- | --- |
+| Account template in the US | Its name, such as `welcome` |
+| Account template in the EU | `eu-welcome` |
+| Domain template | `mg-example-com-welcome` |
+
+A name with characters a key can't hold, such as `template.test`, also gets a short hash.
+Imported templates aren't transactional until you make them so, and none of them send on their own.
+
+PostHog imports the active version of each template. To import the others, choose **Every version, each as its own template**.
+
+### What converts
+
+| In Mailgun | In PostHog |
+| --- | --- |
+| `{{name}}`, `{{.Name}}` | `{{ variables.name }}`, escaped for HTML |
+| `{{{name}}}`, `{{&name}}` | `{{ variables.name \| raw }}` |
+| `{{#if}}`, `{{else if}}`, `{{#unless}}`, `{{#each}}`, `{{#with}}`, `{{#equal}}` | Liquid conditions and loops that treat an empty value the same way |
+| Go `{{if}}`, `{{range}}`, `{{with}}`, `eq`, `ne`, `not`, `and` | The same |
+| `%recipient.city%`, `%recipient_email%` | `{{ variables.city }}`, `{{ variables.recipient_email }}` |
+| `%unsubscribe_url%`, `%tag_unsubscribe_url%`, `%mailing_list_unsubscribe_url%` | `{{ unsubscribe_url }}`, which opens the preferences page |
+
+Anything else in braces stays as visible text, and a note names it, so you can rewrite it in Liquid. This covers other helpers, partials, and Go's `or`, `printf` and pipelines.
+
+### What to check
+
+Open each template with notes and fix what they mention, then send yourself a test. The notes also cover these differences:
+
+- **Values** - Pass everything Mailgun took from `t:variables` and recipient variables as `variables` in your send.
+- **Subject and sender** - Mailgun can set these when you send, so a template might have neither. A note tells you. It also tells you if the sender isn't verified in PostHog.
+- **MJML** - PostHog imports the HTML. The MJML source stays in Mailgun.
+- **Go templates** - PostHog escapes values for HTML, so check any value that holds HTML.
+- **Unsubscribe footer** - Mailgun can add a footer on a domain, and PostHog doesn't. The domain list tells you which domains do, so add a link to their marketing templates.
+
+## Sending domains
+
+The import lists your domains with their Mailgun DNS records, so you know what to remove later. [Add each domain](/docs/workflows/configure-channels) in PostHog and publish its new DNS records.
+Leave your Mailgun records in place while you move.
+
+If Mailgun already uses PostHog's default `feedback` subdomain on a domain, a note tells you. Choose a different MAIL FROM subdomain, because two services can't share one MX record.
+
+## Run it with MCP
+
+With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to move you from Mailgun. The `migrating-from-email-providers` skill walks it through the import and the switch.
+
+The tools are the same as for [Resend](/docs/workflows/import-from-resend#run-it-with-mcp). `provider-imports-create` also takes `settings`, with your `region` and, if you want every version, `template_versions`.
+With MCP, the API key passes through the conversation with your agent. To keep it out of the conversation, run the import in the app instead.
+
+## Move your sending
+
+The import finishes with these next steps:
+
+1. Add each sending domain in PostHog and publish its DNS records.
+2. Fix what the template notes mention, and send yourself a test.
+3. Add an unsubscribe link to marketing templates on domains where Mailgun added a footer.
+4. [Make a template transactional](/docs/workflows/transactional-emails) and change your app to send it through PostHog. Start with a low-risk email and move the rest one at a time.
+5. If you send a lot of email, move it over several days, because mailbox providers slow down mail from a sender whose volume jumps. Check your [sending allowance](/docs/workflows/sending-reputation) first.
+6. Once nothing sends through Mailgun, remove its DNS records and delete the API key you created for this import.

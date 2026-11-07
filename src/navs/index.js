@@ -8447,6 +8447,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Import from Mailgun',
+                    url: '/docs/workflows/import-from-mailgun',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
                     name: 'Resources',
                 },
                 {
