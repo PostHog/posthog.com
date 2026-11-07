@@ -398,7 +398,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Company',
             items: [
-                { type: 'label', label: 'Info' },
+                { type: 'label', label: 'PostHog stuff' },
                 {
                     type: 'item',
                     label: 'About',
