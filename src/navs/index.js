@@ -3877,6 +3877,10 @@ export const docsMenu = {
                             url: '/docs/billing/estimating-usage-costs',
                         },
                         {
+                            name: 'What you actually get when you pay for an event',
+                            url: '/docs/billing/what-you-pay-for-per-event',
+                        },
+                        {
                             name: 'Pre-paid plans',
                             url: '/docs/billing/pre-paid-plans',
                         },
