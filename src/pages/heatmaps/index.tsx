@@ -344,13 +344,13 @@ const HeatmapsVsHotjar = ({ id }: SectionComponentProps) => (
                 .
             </p>
         </Prose>
-        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3 mb-8">
             <FitList title="Hotjar (Contentsquare) is a better fit if…" items={hotjarFit} />
             <FitList title="PostHog is a better fit if…" items={posthogFit} />
         </div>
         <div
             role="table"
-            className="rounded-lg border border-primary overflow-hidden bg-primary text-[15px]"
+            className="rounded border border-primary overflow-hidden bg-primary text-[15px]"
             style={{ backgroundImage: TABLE_HEAT }}
         >
             <div
@@ -478,7 +478,7 @@ const WorksWith = ({ id, productData, allProducts }: SectionComponentProps) => {
                             <Link
                                 to={pair.to || `/${pair.slug}`}
                                 state={{ newWindow: true }}
-                                className="flex items-start gap-3 -m-4 p-4 h-full"
+                                className="flex items-start gap-3 -m-3 p-3 h-full"
                             >
                                 {icon}
                                 <span className="min-w-0">
@@ -813,8 +813,9 @@ const heatUp = (event: React.MouseEvent<HTMLElement>) => {
 }
 
 /**
- * The one card style for this page: rounded, bordered, and it warms up under the
- * cursor. Every box the page owns uses it so the whole thing reads as one system.
+ * The one card style for this page. It matches the site's standard card (the shell the
+ * PairsWith template uses: border, `rounded`, `bg-primary`, `p-3`) and adds a warm glow
+ * under the cursor.
  */
 const HeatCard = ({
     as: Tag = 'div',
@@ -830,7 +831,7 @@ const HeatCard = ({
     return (
         <Element
             onMouseMove={heatUp}
-            className={`group relative overflow-hidden border border-primary rounded-lg bg-primary p-4 ${className}`}
+            className={`group relative overflow-hidden border border-primary rounded bg-primary p-3 ${className}`}
             {...rest}
         >
             <span
@@ -958,7 +959,7 @@ const drawHeatmap = (
 }
 
 const FLOATING_NOTE =
-    'fixed bottom-6 left-1/2 -translate-x-1/2 w-max max-w-[calc(100vw-2rem)] rounded-lg border border-primary bg-primary px-4 py-2.5 text-sm text-primary shadow-lg'
+    'fixed bottom-6 left-1/2 -translate-x-1/2 w-max max-w-[calc(100vw-2rem)] rounded border border-primary bg-primary px-4 py-2.5 text-sm text-primary shadow-lg'
 
 /** Page-wide listeners: records moves and clicks, shows the rageclick toast, and draws
     the visitor's own heatmap when they press H or use the button in "Try it". */
@@ -1641,7 +1642,7 @@ const HeatmapsPricing = ({ id }: SectionComponentProps) => (
                 toolbar.
             </p>
         </Prose>
-        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-4 max-w-3xl mb-6">
+        <div className="grid grid-cols-1 @2xl/reader-content:grid-cols-2 gap-3 max-w-3xl mb-6">
             {pricingTiers.map(({ title, subtitle, rows }) => (
                 <HeatCard key={title}>
                     <h3 className="text-lg font-bold text-primary m-0">{title}</h3>
@@ -2248,7 +2249,7 @@ const docGroups: { title: string; links: RelatedLink[] }[] = [
 
 const DocCard = ({ to, label, description, Icon }: RelatedLink) => (
     <HeatCard as="li" className="m-0">
-        <Link to={to} state={{ newWindow: true }} className="group flex items-start gap-3 -m-4 p-4 h-full">
+        <Link to={to} state={{ newWindow: true }} className="group flex items-start gap-3 -m-3 p-3 h-full">
             <Icon className="size-5 shrink-0 mt-0.5 text-secondary group-hover:text-primary transition-colors" />
             <span className="min-w-0 flex-1">
                 <span className="block text-[15px] font-semibold text-primary underline leading-snug mb-0.5">
@@ -2291,7 +2292,7 @@ const ClosingCta = ({ id }: SectionComponentProps) => {
     return (
         <Section id={id} className="mb-20">
             <div
-                className="rounded-lg border border-primary bg-primary px-6 py-10 flex flex-col items-center text-center gap-4"
+                className="rounded border border-primary bg-primary px-6 py-10 flex flex-col items-center text-center gap-4"
                 style={{ backgroundImage: CLOSING_HEAT }}
             >
                 <HedgehogCursor className="h-24 w-auto" />
