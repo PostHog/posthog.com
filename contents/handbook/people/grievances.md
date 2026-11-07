@@ -67,3 +67,7 @@ If your concern is a personal one, it will usually not be covered by whistleblow
 If you disagree with the outcome of the above processes, you have the right to appeal if you can demonstrate why you believe a particular aspect of the investigation has materially affected the outcome. Appeals must be submitted within 2 weeks of receiving the outcome.
 
 If an appeal is submitted, we’ll arrange a final meeting within a reasonable time period. Any decision made here will be final and there is no further right of appeal. We will aim for the meeting to be held by a member of the Exec team who wasn’t involved in the process previously.
+
+## Employment letters and verification
+
+To request an employment letter in a specific format, such as an NHG mortgage employer statement (*werkgeversverklaring*), go to **Documents → Custom Request** in Deel. Describe the required format and attach the official template. Once the request is complete, the letter appears under **Documents** in Deel.
