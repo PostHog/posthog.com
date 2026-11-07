@@ -298,11 +298,11 @@ In Xcode, add a **Run Script** build phase to your main app target and place it 
 
 <MultiLanguage>
 
-```bash file=CocoaPods
+```bash file=CocoaPods (plugin 2.x)
 "${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
 ```
 
-```bash file=Swift Package Manager
+```bash file=Swift Package Manager (and plugin 3.0 and later)
 "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
 ```
 
@@ -317,11 +317,11 @@ To also upload native source files for source-code context (iOS only), prefix th
 
 <MultiLanguage>
 
-```bash file=CocoaPods
+```bash file=CocoaPods (plugin 2.x)
 POSTHOG_INCLUDE_SOURCE=1 "${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
 ```
 
-```bash file=Swift Package Manager
+```bash file=Swift Package Manager (and plugin 3.0 and later)
 POSTHOG_INCLUDE_SOURCE=1 "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
 ```
 
