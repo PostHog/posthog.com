@@ -564,13 +564,6 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconServer className="size-4 text-orange" />,
                 },
                 { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Media',
-                    link: '/media',
-                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
-                },
-                { type: 'separator' },
                 { type: 'label', label: 'Misc' },
                 {
                     type: 'item',
@@ -587,6 +580,12 @@ export function useMenuData(): MenuType[] {
                     link: 'https://status.posthog.com',
                     external: true,
                     icon: <Icons.IconPulse className="size-4 text-red" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Media',
+                    link: '/media',
+                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
                 },
             ],
         },
