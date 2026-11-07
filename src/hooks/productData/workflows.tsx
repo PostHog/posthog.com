@@ -13,18 +13,22 @@ import {
     IconMessage,
     IconPieChart,
     IconRocket,
-    IconSparkles,
+    IconSend,
 } from '@posthog/icons'
 import { features } from './workflows/features'
-import { applications, keyFeatures } from './workflows/slides'
+import { applications } from './workflows/slides'
+import { transactional } from './workflows/transactional'
+import { broadcasts } from './workflows/broadcasts'
+import { automation } from './workflows/automation'
 import { getTool } from '../../data/tools'
 
 export const workflows = {
     ...getTool('workflows_emails'),
-    productVariantName: 'Emails',
+    productVariantName: 'Email & Messaging',
     Icon: IconDecisionTree,
     type: 'workflows_emails',
     teamSlug: 'workflows',
+    docsSlug: 'workflows',
     forumTag: 'workflows',
     color: 'teal',
     colorSecondary: 'green-2',
@@ -33,9 +37,9 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Workflows – Automate emails and messages from user behavior',
+        title: 'Email & Messaging – Email for product engineers',
         description:
-            'Trigger emails, push notifications, Slack messages, and webhooks from live user behavior. Build automations in PostHog with 10K emails free monthly.',
+            'Send transactional email from the PostHog SDK, broadcast to a cohort, and automate campaigns from live user behavior. 10K emails free monthly.',
     },
     /**
      * Sections rendered on the Product surface (`/workflows`). Each entry
@@ -65,18 +69,64 @@ export const workflows = {
             icon: <IconMagic className="size-4" />,
         },
         {
+            slug: 'transactional',
+            name: 'Transactional email',
+            group: 'divided',
+            template: 'key-features',
+            icon: <IconCode className="size-4" />,
+            props: {
+                slides: transactional,
+                heading: 'Transactional email',
+                intro: (
+                    <p>
+                        This is the email your code sends: password resets, sign-in codes, receipts, invites. One call
+                        from the SDK you already run, and the send shows up on the person who triggered it.
+                    </p>
+                ),
+            },
+        },
+        {
+            slug: 'broadcasts',
+            name: 'Broadcasts',
+            group: 'divided',
+            template: 'key-features',
+            icon: <IconSend className="size-4" />,
+            props: {
+                slides: broadcasts,
+                heading: 'Broadcasts',
+                intro: (
+                    <p>
+                        A broadcast is one email to a lot of people: a product update, a changelog, a webinar invite.
+                        The audience is a cohort or a property filter you already have in PostHog, so there is no list
+                        to export and nothing goes stale.
+                    </p>
+                ),
+            },
+        },
+        {
+            slug: 'automation',
+            name: 'Automation',
+            group: 'divided',
+            template: 'key-features',
+            icon: <IconDecisionTree className="size-4" />,
+            props: {
+                slides: automation,
+                heading: 'Automation',
+                intro: (
+                    <p>
+                        Campaigns that run themselves. An event starts one, a delay or a condition decides what happens
+                        next, and each step can send an email, a push, a Slack message, or a webhook. This is where
+                        Workflows started, and it still does the Zapier-shaped jobs too.
+                    </p>
+                ),
+            },
+        },
+        {
             slug: 'applications',
             name: 'How do I use it?',
             group: 'divided',
             icon: <IconCursorClick className="size-4" />,
             props: { slides: applications },
-        },
-        {
-            slug: 'key-features',
-            name: 'Key features',
-            group: 'divided',
-            icon: <IconSparkles className="size-4" />,
-            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -112,15 +162,17 @@ export const workflows = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Automate workflows with product data',
-        description: '"Create an onboarding email series for trial users"',
-        // Reshaped from contents/docs/workflows/index.mdx + start-here.mdx
+        title: 'Email for product engineers',
+        description:
+            'Send the password reset, the product update, and the onboarding drip from one SDK, then see what people did after they opened it.',
         eli5: (
             <>
                 <p>
-                    Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to
-                    your users. You decide when a workflow is triggered, who it reaches, and what happens at each step –
-                    triggers, delays, audience splits, message sends, and PostHog actions.
+                    Transactional email, broadcasts, and automated campaigns, sent from the same PostHog SDK that tracks
+                    your events. Start with the password reset. When that works, send a product update to a cohort, then
+                    wire up the onboarding drip. Every email lands on the person who got it, next to their events and
+                    replays, so you can see whether the reset got them back in and whether the drip got them to
+                    activate. The first 10,000 emails a month are free.
                 </p>
             </>
         ),
@@ -168,24 +220,24 @@ export const workflows = {
     useCases: {
         rows: [
             [
-                'Product Leads / Technical PMs',
-                'Consolidate Zapier or Customer.io into PostHog – activation, retention, and lifecycle flows on the same events you already track',
-            ],
-            [
-                'Product Marketers',
-                'Lifecycle marketing and campaign automation with email, SMS, webhooks, and destinations driven by product usage data',
-            ],
-            [
-                'Growth Engineers',
-                'Onboarding drips, upgrade nudges, and re-engagement sequences triggered by real user behavior',
+                'Backend Engineers',
+                'Send the password reset from the SDK you already run, and drop Resend, Postmark, or SendGrid from the stack',
             ],
             [
                 'Product Engineers',
-                'Event-triggered automations – Slack alerts, property updates, and follow-ups without a separate automation vendor',
+                'See whether the reset email was delivered, opened, and clicked, on the same person as their session replay',
             ],
             [
-                'Automation-minded teams',
-                'Zapier/n8n-style flows triggered by product events, with destinations and basic workflow logic in one place',
+                'Growth Engineers',
+                'Trigger an onboarding drip from sign-up, nudge the people who stall, and A/B test the message',
+            ],
+            [
+                'Product Marketers',
+                'Send a product update to a cohort you already have, with opt-outs by category and a conversion goal on every broadcast',
+            ],
+            [
+                'Product Leads / Technical PMs',
+                'Replace Customer.io and Zapier with flows that run on the events you already track',
             ],
         ],
     },
