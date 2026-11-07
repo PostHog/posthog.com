@@ -137,12 +137,12 @@ Don't use one value for many people or machines, such as a server name or a plac
 
 Options control how PostHog processes an event. They replace the legacy option properties: the `$`-prefixed properties legacy capture reads as settings from `properties`.
 
-| Option | Type | What it does | Legacy option property |
+| Option | Type | What it does | Replaces |
 |---|---|---|---|
 | `process_person_profile` | Boolean | `false` sends an [anonymous event](/docs/data/anonymous-vs-identified-events) that doesn't create or update a person profile | `$process_person_profile` |
 | `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
 | `disable_skew_correction` | Boolean | `true` keeps your `timestamp` as sent instead of [correcting for clock skew](#timestamps-and-clock-skew), unless it's more than 23 hours in the future | `$ignore_sent_at` |
-| `product_tour_id` | String | Links the event to a product tour. PostHog's web SDK sets it on product tour events, so you rarely need it | `$product_tour_id` |
+| `product_tour_id` | String | Links the event to a product tour. You rarely need it | `$product_tour_id` |
 
 - Booleans also accept common forms like `"true"`, `"false"`, `1`, and `0`. `null` means "not set".
 - `product_tour_id` also accepts a whole number. An empty string means "not set".
@@ -151,13 +151,9 @@ Options control how PostHog processes an event. They replace the legacy option p
 
 ### Legacy option properties
 
-Set these settings as options when you call capture v1 directly.
+Set these settings in `options`. The `$process_person_profile` and `$cookieless_mode` legacy option properties still work, but an option overrides its legacy property. Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use options.
 
-- Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use the `disable_skew_correction` and `product_tour_id` options instead.
-- During the move to v1, PostHog still reads `$process_person_profile` and `$cookieless_mode` from `properties`. If you set both, the option wins. These legacy option properties are deprecated, and we'll stop reading them in a future release.
-- PostHog SDKs on v1 move legacy option properties into `options` for you.
-
-Your stored events don't change shape: PostHog stores options as the same properties you query today, so your insights and filters keep working.
+PostHog stores each option as its `$`-prefixed property, such as `$process_person_profile`, so your insights and filters keep working.
 
 ## Compression
 

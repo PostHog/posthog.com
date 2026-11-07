@@ -39,7 +39,7 @@ Each SDK below moves to capture v1 in a new major version. These versions includ
 | [Flutter](/docs/libraries/flutter) | `6.0.0` | iOS, macOS, Android, Windows, and Linux | [`5.x` to `6.0`](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) |
 
 <!-- TODO(capture-v1): list only released SDKs at merge; add each later SDK in its own PR on release day. -->
-Other SDKs, including the JavaScript Web SDK and React Native, move to capture v1 in later major versions. Flutter apps on the web use the JavaScript Web SDK, so they keep using legacy capture until then. Until an SDK moves, it keeps working as it does today.
+Other SDKs, including the JavaScript Web SDK and React Native, use legacy capture. Flutter apps on the web use the JavaScript Web SDK, so they use legacy capture too.
 
 ## What changes for everyone
 
@@ -53,7 +53,7 @@ SDKs generate a UUIDv7 for each event. If you set an event's UUID yourself, use 
 
 Legacy option properties are the `$`-prefixed properties legacy capture reads as settings. Set these settings in an event's `options` instead:
 
-| Option | Legacy option property |
+| Option | Replaces |
 |---|---|
 | `process_person_profile` | `$process_person_profile` |
 | `cookieless_mode` | `$cookieless_mode` |
@@ -124,7 +124,7 @@ await Posthog().capture(
 
 On iOS, Android, and Flutter, `capture`, `screen`, `identify`, and the other event methods take `options` too. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides list every method that takes it.
 
-The legacy option properties still work for now. The SDK moves them into `options` before it sends the event, and an option you set wins over its legacy option property. Use options in new code – the legacy option properties are deprecated, and a future major version will stop reading them.
+Legacy option properties still work, but an option overrides its legacy property. Use options.
 
 SDKs send options exactly as you set them. PostHog ignores option names it doesn't know, and drops an event whose option value it can't read, with the detail `invalid_options`. See [event options](/docs/api/capture-v1#event-options) for the types each option takes.
 
@@ -139,9 +139,9 @@ You can set properties and options in several places. When the same key is set i
 
 The SDK's own `$lib` and `$lib_version` come after all of these. They fill in only when the event doesn't set `$lib`, or sets the SDK's own name without a version. See [library name and version](/docs/api/capture-v1#library-name-and-version).
 
-Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
+Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything.
 
-**Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. The Android SDK is the exception: a new event without `options` keeps the options of the event your hook got, so return an empty `options` map to clear them. To change a setting in the hook, edit `options`: a legacy option property the hook adds doesn't replace an option that's already set.
+**Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. The Android SDK is the exception: a new event without `options` keeps the options of the event your hook got, so return an empty `options` map to clear them. To change a setting in the hook, edit `options`.
 
 A few details:
 
@@ -149,14 +149,14 @@ A few details:
 - A property set to `null` (or `None`, or `nil`) counts as set, so a lower layer can't replace it. An option set to `null` counts as unset.
 - On Python, Go, Node.js, and Rust, `$set`, `$set_once`, `$groups`, and `$group_set` merge key by key, and the most specific value wins for each key. On iOS, Android, and Flutter, a `$set` or `$set_once` you pass on the call replaces a registered one, as before.
 - A `$set` in a global or context layer adds those person properties to every event that layer reaches.
-- On server SDKs, `process_person_profile: false` (or `$process_person_profile: false`) in a global or context layer also reaches identify, alias, and group identify events. PostHog drops those events when person processing is off, and your error handler doesn't report it, because PostHog accepts them first. Set person processing on each capture call instead of in a layer that covers these calls.
+- On server SDKs, `process_person_profile: false` in a global or context layer also reaches identify, alias, and group identify events. PostHog drops those events when person processing is off, and your error handler doesn't report it, because PostHog accepts them first. Set person processing on each capture call instead of in a layer that covers these calls.
 - Not every SDK has every layer. Rust has no global layer, and iOS, Android, and Flutter have global properties but no global options or context layer. Your SDK's migration guide lists the layers it has and which calls they reach.
 
 ### Person processing
 
 - On server SDKs, adding groups to an event doesn't turn on person processing. The Rust SDK did before 1.0. To use [group analytics](/docs/product-analytics/group-analytics), send events with person processing on.
 - On iOS, Android, and Flutter, an event with groups still turns on person processing, as before, unless `personProfiles` is set to `never`.
-- On server SDKs, an event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Setting `$process_person_profile: true` no longer changes that. (The Go SDK returns an error instead when the call has no request context.)
+- On server SDKs, an event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Only the `process_person_profile` option can change that. If the event belongs to a person, pass their distinct ID. (The Go SDK returns an error instead when the call has no request context.)
 - Use a real distinct ID: one visitor, or your own ID for a known user. See [choosing a distinct ID](/docs/api/capture-v1#choosing-a-distinct-id).
 - On server SDKs, **group identify without a distinct ID** uses `$<group type>_<group key>` as the event's distinct ID. If that is over 200 bytes, pass a `distinct_id` explicitly, or PostHog drops the event.
 

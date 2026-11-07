@@ -150,7 +150,7 @@ If `identify()` returns a `groups` field (a `Record<string, string>` of groupTyp
 
 ## Person profiles for anonymous sessions
 
-Events for sessions with no resolved identity are sent with `$process_person_profile: false`, so anonymous MCP sessions do not each create a person profile. Once `identify()` resolves an identity for the session, person processing stays on and the events attribute to that user.
+Events for sessions with no resolved identity are sent with person processing turned off, so anonymous MCP sessions do not each create a person profile. Once `identify()` resolves an identity for the session, person processing stays on and the events attribute to that user.
 
 ## Constants exported from the package
 
