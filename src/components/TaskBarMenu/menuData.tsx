@@ -313,6 +313,18 @@ export function useMenuData(): MenuType[] {
                     link: '/newsletter',
                     icon: <Icons.IconNewspaper className="size-4 text-orange" />,
                 },
+                {
+                    type: 'item',
+                    label: "Product Engineer's Handbook",
+                    link: '/product-engineer',
+                    icon: <Icons.IconBook className="size-4 text-blue" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Product-Market Fit Game',
+                    link: '/founders/product-market-fit-game',
+                    icon: <Icons.IconTarget className="size-4 text-red" />,
+                },
                 { type: 'separator' },
                 { type: 'label', label: 'Chat' },
                 {
