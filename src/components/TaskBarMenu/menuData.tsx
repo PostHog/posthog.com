@@ -315,13 +315,13 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: "Product Engineer's Handbook",
+                    label: 'Product Engineer',
                     link: '/product-engineer',
                     icon: <Icons.IconBook className="size-4 text-blue" />,
                 },
                 {
                     type: 'item',
-                    label: 'Product-Market Fit Game',
+                    label: 'Product-Market Fit',
                     link: '/founders/product-market-fit-game',
                     icon: <Icons.IconTarget className="size-4 text-red" />,
                 },
