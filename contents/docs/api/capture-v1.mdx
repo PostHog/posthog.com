@@ -112,9 +112,9 @@ The [capture spec in the SDK specs](https://github.com/PostHog/sdk-specs/blob/ma
 
 Each event's `$lib` and `$lib_version` properties name the library that produced it. PostHog stores the values the event sends.
 
-If an event's `$lib` is missing, empty, or not a string, PostHog sets both properties from the `PostHog-Sdk-Info` header. If `$lib` matches the library in the header and `$lib_version` is missing, PostHog fills in `$lib_version` from the header. If `$lib` names a different library, PostHog stores both properties as sent, even if `$lib_version` is missing, so set both when you override them.
+If an event's `$lib` is missing, empty, or not a string, PostHog sets both properties from the `PostHog-Sdk-Info` header. If `$lib` matches the library in the header and `$lib_version` is missing, empty, or not a string, PostHog fills in `$lib_version` from the header. If `$lib` names a different library, PostHog stores both properties as sent, even if `$lib_version` is missing, so set both when you override them.
 
-If the `PostHog-Sdk-Info` value doesn't match `<library>/<version>` or is longer than 200 characters, PostHog still accepts the request, but events without `$lib` are stored without it.
+If the `PostHog-Sdk-Info` value doesn't match `<library>/<version>` or is longer than 200 bytes, PostHog still accepts the request, but events without `$lib` are stored without it.
 
 ### Event UUIDs
 
