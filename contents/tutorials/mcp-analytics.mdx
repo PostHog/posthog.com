@@ -95,7 +95,7 @@ It also unlocks signals the manual approach can't easily capture, each a one-lin
 - **[Missing capabilities](/docs/mcp-analytics/missing-capability)** – a queryable feed of things agents wished your server supported
 - **[Conversation IDs](/docs/mcp-analytics/conversation-id)** – `enableConversationId: true`, which is how you get a shared `$session_id` on MCP SDK v2 serving `2026-07-28`, since that revision has no protocol session of its own
 
-Remember to drain queued events on shutdown by calling `posthog.shutdown()` (or `posthog.flush()`) from your `SIGTERM` handler, since you own the client's lifecycle.
+Remember to drain queued events on shutdown by calling `posthog.shutdown()` (or `posthog.flush()`) from your `SIGTERM` handler, since you own the client's lifecycle. On a stdio server, also call it when `stdin` ends, since the MCP spec tells clients to close `stdin` first and send `SIGTERM` only if the server doesn't exit in time.
 
 > **Note:** `@posthog/mcp` is in beta (pre-1.0). The API may still change – including breaking changes in minor `0.x` releases – so pin a specific version while we iterate. Running a custom dispatcher with no server object to wrap? See the custom dispatcher section of your [language's installation page](/docs/mcp-analytics/installation).
 
@@ -509,6 +509,7 @@ async function main() {
 
     process.on("SIGINT", async () => await stopStdioServer(handle,analytics));
     process.on("SIGTERM", async () => await stopStdioServer(handle, analytics));
+    process.stdin.on("end", async () => await stopStdioServer(handle, analytics));
 
     await new Promise(() => {});
 

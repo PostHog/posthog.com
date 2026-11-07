@@ -97,6 +97,15 @@ process.on("SIGTERM", async () => {
 })
 ```
 
+The MCP spec tells stdio clients to close `stdin` first and send `SIGTERM` only if the server doesn't exit in time, so the `SIGTERM` handler may never run. On a stdio server, also shut down when `stdin` ends:
+
+```ts
+process.stdin.on("end", async () => {
+  await posthog.shutdown()
+  process.exit(0)
+})
+```
+
 In serverless and edge functions, `SIGTERM` may not run. Call `await posthog.flush()` at the end of each invocation, or `ctx.waitUntil(posthog.flush())` where the platform supports it.
 
 </Step>
