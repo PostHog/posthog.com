@@ -86,27 +86,33 @@ Any project member can ask for a trusted workload. A request grants nothing on i
 Once hog is released, log in with `hog auth login` and run `hog ci setup` in your repository:
 
 ```bash
-hog ci setup --branch main --scope annotation:write
+hog ci setup --preset branch_push=main --scope annotation:write
 ```
 
 The command:
 
 1. Detects the provider from the CI config in the repository: `.github/workflows`, `.gitlab-ci.yml`, or `.depot/workflows`. It reads `owner/repo` or the GitLab project path from your `origin` remote.
-2. Asks PostHog to look up the repository or project's ID.
-3. Turns `--branch` and `--environment` into the matching presets. Pass one or both.
-4. Creates a policy request. If you're an admin, hog opens the approval page and waits. Otherwise it names the admins and prints the link to send them.
-5. Prints the `posthog.json` keys and the snippet for your CI job.
+2. Reads the provider's presets, questions, and job snippet from PostHog, so it works the same way for every provider.
+3. Applies the presets you pass with `--preset`, plus any the provider requires. It asks for anything still missing, such as which runs may get a token. When no person can answer, such as when an agent runs it, it returns `status: input_required` with the presets and values it still needs, and PostHog's explanation of each.
+4. Asks PostHog to look up the repository or project's ID. If PostHog can't, pass the ID with `--subject-id`.
+5. Creates a policy request named `<repository> on <provider>`. If you're an admin, hog opens the approval page and waits. Otherwise it names the admins and prints the link to send them.
+6. Prints the `posthog.json` keys and the snippet for your CI job.
+
+Each provider has its own preset keys. A preset that takes a value is passed as `--preset <key>=<value>`.
+
+| Provider | Presets | Required | A new policy in settings starts with |
+| --- | --- | --- | --- |
+| GitHub Actions | `branch_push=<branch>`, `environment=<environment>` | None | `branch_push` |
+| GitLab.com | `branch=<branch>`, `environment=<environment>` | None | `branch` |
+| Depot CI | `organization=<organization ID>`, `branch_push=<branch>` | `organization` | `organization` and `branch_push` |
 
 | Flag | What it does |
 | --- | --- |
-| `--branch <branch>` | Trusts runs on this branch, through the provider's branch preset |
-| `--environment <name>` | Trusts jobs that deploy to this environment |
+| `--preset <key>=<value>` | Applies one of the provider's presets, such as `branch_push=main`. Repeat it for each preset. |
 | `--scope <scopes>` | Sets the scopes the job gets, separated by commas, such as `annotation:write,query:read`. Repeating the flag works too. At least one scope is required. |
-| `--condition <claim>=<value>` | Adds a claim the token must carry with this exact value, such as `org_id` for Depot CI. Repeat it for each claim. |
 | `--provider <key>` | Names the provider: `github_actions`, `gitlab`, or `depot_ci`. Pass it when hog can't tell, or when the repository has config for more than one provider. |
 | `--repository <name>` | Names the repository or project when it isn't your `origin` remote |
 | `--subject-id <id>` | Sets the immutable ID when PostHog can't look it up. Pass `--repository` with the exact name too, because PostHog matches both. |
-| `--name <name>` | Names the trusted workload in PostHog |
 | `--wait` | Waits for a request an earlier run started. It stops after 10 minutes and keeps the request, so you can run it again. |
 
 ### Ask through the API
@@ -157,7 +163,10 @@ A successful response looks like this:
 
 The token never outlives the OIDC token it came from, and there is no refresh token. When a call needs a scope the policy doesn't have, the API answers with a `403` and a `WWW-Authenticate` header naming the missing scope. Ask an admin to add it to the policy.
 
-The exchange is rate limited per repository or project. Each one can make 300 exchanges at once, and gets one more each second. Past that, PostHog answers with a `429`, a `Retry-After` header, and the [`workload_rate_limited`](#workload_rate_limited) error.
+The exchange has two rate limits. Past either one, PostHog answers with a `429`, a `Retry-After` header, and the [`workload_rate_limited`](#workload_rate_limited) error.
+
+- **Per policy** - each trust policy can make 300 exchanges at once, and gets one more each second. Runs that another policy covers don't use up this budget.
+- **Per IP address** - before PostHog verifies a token, it limits the exchange attempts from one IP address to 600 a minute and 7,200 an hour. CI runners often share an IP address, so these limits are twice one policy's budget.
 
 ### How hog exchanges tokens (beta)
 
@@ -168,7 +177,7 @@ Once hog is released, it does the exchange for you:
 - It reads a host from `posthog.json` only when it's PostHog Cloud, so a change to the file can't send the job's token elsewhere. A self-hosted PostHog needs `HOG_HOST`. When `posthog.json` names another host and `HOG_HOST` isn't set, hog stops with a `workload_host_not_allowed` error.
 - It sends the RFC 8693 exchange to `/oauth/token/` and keeps the PostHog token in memory only. It never writes the token to disk.
 - It exchanges again when the token is close to expiring, or after the API answers with a `401`.
-- When the exchange is rate limited and `Retry-After` is 60 seconds or less, it waits once and tries again.
+- When the exchange is rate limited, it waits for `Retry-After` plus a random part, and tries again up to three times, as long as the total wait stays within 60 seconds.
 - It picks credentials in this order: `HOG_PERSONAL_API_KEY`, then the workload token, then a stored login. Remove `HOG_PERSONAL_API_KEY` from the job's environment, or hog uses that instead of the workload token. Never put it in `posthog.json`.
 - Its usage analytics from a job that uses a workload token carry an ID hashed from the provider and the repository, the provider's name, and your organization. They aren't tied to a person. Turn them off with `HOG_NO_TELEMETRY=1`.
 
@@ -186,7 +195,11 @@ The OIDC token comes from an issuer PostHog doesn't trust. Only the [supported p
 
 <h3 id="workload_token_invalid">workload_token_invalid</h3>
 
-PostHog couldn't verify the OIDC token: it expired, its audience isn't your PostHog instance, its signature doesn't verify, or it lacks a claim PostHog needs, such as the subject or the name. For a wrong audience, set `HOG_HOST` to the address you open PostHog at, such as `https://us.posthog.com`.
+PostHog couldn't verify the OIDC token: it expired, its signature doesn't verify, or it lacks a claim PostHog needs, such as the subject or the name.
+
+<h3 id="workload_audience_mismatch">workload_audience_mismatch</h3>
+
+The token's `aud` isn't this PostHog instance's site URL. The error names the audience PostHog expects. Ask your provider for a token with that audience. With hog, put the address you open PostHog at in `posthog.json` as `host`, or set `HOG_HOST`.
 
 <h3 id="workload_provider_unavailable">workload_provider_unavailable</h3>
 
@@ -208,7 +221,7 @@ The matching policy only grants scopes a workload token can't use. Ask an admin 
 
 <h3 id="workload_rate_limited">workload_rate_limited</h3>
 
-The repository or project made more than 300 exchanges at once, faster than the limit refills at one each second. The response has a `429` status and a `Retry-After` header with the seconds to wait. hog waits once when that is 60 seconds or less. Otherwise, run the job again later.
+Either the trust policy used up its 300 exchanges, which refill at one each second, or too many exchange attempts came from one IP address before verification. The response has a `429` status and a `Retry-After` header with the seconds to wait. hog retries while its total wait stays within 60 seconds. Otherwise, run the job again later.
 
 <h3 id="workload_no_owner">workload_no_owner</h3>
 

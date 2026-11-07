@@ -100,10 +100,17 @@ PostHog looks the project up through your project's GitLab integration first, if
 Once hog is released, run this in your repository:
 
 ```bash
-hog ci setup --branch main --scope annotation:write
+hog ci setup --preset branch=main --scope annotation:write
 ```
 
-hog finds `.gitlab-ci.yml`, reads the project path from your `origin` remote, asks PostHog to look up the project ID, and applies **A protected branch** for `main`. Add `--environment production`, or use it instead of `--branch`, for **A protected environment**. List the scopes the job needs in `--scope`, separated by commas, such as `--scope annotation:write,query:read`. Repeating `--scope` works too. If PostHog can't find the project, pass `--subject-id` with the project ID and `--repository` with the exact project path.
+hog finds `.gitlab-ci.yml`, reads the project path from your `origin` remote, asks PostHog to look up the project ID, and applies **A protected branch** for `main`. GitLab offers two presets, and neither is required:
+
+- `--preset branch=<branch>` - **A protected branch**
+- `--preset environment=<environment>` - **A protected environment**
+
+To pass both, repeat the flag: `--preset branch=main --preset environment=production`. Without `--preset`, hog asks which runs may get a token. List the scopes the job needs in `--scope`, separated by commas, such as `--scope annotation:write,query:read`. hog names the policy `<project path> on GitLab`.
+
+If PostHog can't look up the project, pass `--subject-id` with the project ID and `--repository` with the exact project path.
 
 hog then creates a policy request. If you're an admin, it opens the approval page and waits. Otherwise it prints the link to send to an admin. `hog ci setup --wait` waits for up to 10 minutes and keeps the request, so you can run it again later. The [overview](/docs/api/workload-identity#ask-with-hog-ci-setup-beta) lists every flag.
 
@@ -151,11 +158,12 @@ Remove `HOG_PERSONAL_API_KEY` from the job. hog uses a personal API key ahead of
 | --- | --- | --- |
 | hog can't find an ID token | The job has no `id_tokens` entry named `HOG_ID_TOKEN` | Add the `id_tokens` block from the snippet to the job. |
 | Self-managed GitLab, or [`workload_issuer_not_allowed`](/docs/api/workload-identity#workload_issuer_not_allowed) | PostHog only trusts tokens from GitLab.com | Use `HOG_PERSONAL_API_KEY` and `HOG_PROJECT_ID` in this job instead. |
-| [`workload_token_invalid`](/docs/api/workload-identity#workload_token_invalid) | The token's `aud` isn't the host hog sends it to, or the token expired | Set `aud`, and the host in `posthog.json` or `HOG_HOST`, to the address you open PostHog at. |
+| [`workload_audience_mismatch`](/docs/api/workload-identity#workload_audience_mismatch) | The token's `aud` isn't the PostHog site URL hog sends it to | Set `aud`, and the host in `posthog.json` or `HOG_HOST`, to the address you open PostHog at. |
+| [`workload_token_invalid`](/docs/api/workload-identity#workload_token_invalid) | The token expired, its signature doesn't verify, or it lacks a claim PostHog needs | Run the job again. GitLab issues a new ID token for each job. |
 | [`workload_no_matching_policy`](/docs/api/workload-identity#workload_no_matching_policy) | The pipeline doesn't match the policy, for example a tag, another branch, or a branch that isn't protected. A fork, a pipeline that runs in another project, a renamed or recreated project, or the wrong project ID, also cause it. | The error lists the claims the job sent. Compare them with the policy, or run `hog ci setup` to ask for a policy that matches. |
 | [`workload_policy_request_pending`](/docs/api/workload-identity#workload_policy_request_pending) | An admin hasn't approved the request yet | Send the approval link from the error to an admin. |
 | [`workload_no_usable_scopes`](/docs/api/workload-identity#workload_no_usable_scopes) | The policy only grants scopes a workload can't use | Ask an admin to add scopes the job can use. |
-| [`workload_rate_limited`](/docs/api/workload-identity#workload_rate_limited) | The project used up its 300 exchanges, which refill at one each second | hog waits once when `Retry-After` is 60 seconds or less. Otherwise, run the job again later. |
+| [`workload_rate_limited`](/docs/api/workload-identity#workload_rate_limited) | The policy used up its exchanges, or too many exchange attempts came from the runner's IP address | hog retries while the total wait stays within 60 seconds. Otherwise, run the job again later. |
 | `workload_host_not_allowed` from hog | `posthog.json` names a host that isn't PostHog Cloud, and the job doesn't set `HOG_HOST` | Set `HOG_HOST` in the job to the host the error names. |
 | A call fails with `403` | The policy doesn't grant the scope the call needs | The `WWW-Authenticate` header names the scope. Ask an admin to add it. |
 

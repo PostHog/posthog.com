@@ -104,16 +104,21 @@ Only organization admins and owners can add a trusted workload. Anyone else in t
 Once hog is released, run this in your repository:
 
 ```bash
-hog ci setup --branch main --condition org_id=<your Depot organization ID> --scope annotation:write
+hog ci setup --preset organization=<your Depot organization ID> --preset branch_push=main --scope annotation:write
 ```
 
-hog finds `.depot/workflows`, reads `owner/repo` from your `origin` remote, asks PostHog to look up the repository ID, and applies **Pushes to a branch** for `main`.
+hog finds `.depot/workflows`, reads `owner/repo` from your `origin` remote, asks PostHog to look up the repository ID, and applies both presets. Depot CI offers two presets:
 
-- `--condition org_id=...` is required. `forge` defaults to `github`. Pass `--condition forge=<forge>` for another forge.
-- When `forge` isn't `github`, PostHog can't look up the repository, so pass `--subject-id` with its ID and `--repository` with its exact name.
+- `--preset organization=<organization ID>` - **Your Depot organization**, required. It also sets `forge` to `github`.
+- `--preset branch_push=<branch>` - **Pushes to a branch**
+
+hog always adds the required preset. Without a value for it, or without a preset that says which runs may get a token, hog asks.
+
+- If PostHog can't look up the repository, pass `--subject-id` with its ID and `--repository` with its exact name.
+- `hog ci setup` sets up GitHub repositories only. For a repository on another forge, add the trusted workload in PostHog settings.
 - When the repository also has `.github/workflows`, hog can't tell which provider you mean, so pass `--provider depot_ci`.
-- Depot tokens name no environment, so `--environment` doesn't apply.
-- List the scopes the job needs in `--scope`, separated by commas, such as `--scope annotation:write,query:read`. Repeating `--scope` works too.
+- List the scopes the job needs in `--scope`, separated by commas, such as `--scope annotation:write,query:read`.
+- hog names the policy `<repository> on Depot CI`.
 
 hog then creates a policy request. If you're an admin, it opens the approval page and waits. Otherwise it prints the link to send to an admin. `hog ci setup --wait` waits for up to 10 minutes and keeps the request, so you can run it again later. The [overview](/docs/api/workload-identity#ask-with-hog-ci-setup-beta) lists every flag. Before you approve a request, check its Depot organization ID.
 
@@ -159,11 +164,12 @@ Remove `HOG_PERSONAL_API_KEY` from the job. hog uses a personal API key ahead of
 | Problem | Likely cause | What to do |
 | --- | --- | --- |
 | hog can't get an OIDC token | The job doesn't have `id-token: write` | Add the permission to the job. |
-| [`workload_token_invalid`](/docs/api/workload-identity#workload_token_invalid) | The token's audience isn't the host hog sends it to, or the token expired | Set the host in `posthog.json`, or `HOG_HOST`, to the address you open PostHog at. |
+| [`workload_audience_mismatch`](/docs/api/workload-identity#workload_audience_mismatch) | The token's `aud` isn't the PostHog site URL hog sends it to | Set the host in `posthog.json`, or `HOG_HOST`, to the address you open PostHog at. |
+| [`workload_token_invalid`](/docs/api/workload-identity#workload_token_invalid) | The token expired, its signature doesn't verify, or it lacks a claim PostHog needs | Run the job again. hog asks the provider for a fresh token on each exchange. |
 | [`workload_no_matching_policy`](/docs/api/workload-identity#workload_no_matching_policy) | The run doesn't match the policy, for example a pull request, a run started with `depot ci run`, or another branch. A different Depot organization or forge, a renamed repository, or the wrong project ID, also cause it. | The error lists the claims the job sent. Compare them with the policy, or run `hog ci setup` to ask for a policy that matches. |
 | [`workload_policy_request_pending`](/docs/api/workload-identity#workload_policy_request_pending) | An admin hasn't approved the request yet | Send the approval link from the error to an admin. |
 | [`workload_no_usable_scopes`](/docs/api/workload-identity#workload_no_usable_scopes) | The policy only grants scopes a workload can't use | Ask an admin to add scopes the job can use. |
-| [`workload_rate_limited`](/docs/api/workload-identity#workload_rate_limited) | The repository used up its 300 exchanges, which refill at one each second | hog waits once when `Retry-After` is 60 seconds or less. Otherwise, run the job again later. |
+| [`workload_rate_limited`](/docs/api/workload-identity#workload_rate_limited) | The policy used up its exchanges, or too many exchange attempts came from the runner's IP address | hog retries while the total wait stays within 60 seconds. Otherwise, run the job again later. |
 | `workload_host_not_allowed` from hog | `posthog.json` names a host that isn't PostHog Cloud, and the job doesn't set `HOG_HOST` | Set `HOG_HOST` in the job to the host the error names. |
 | A call fails with `403` | The policy doesn't grant the scope the call needs | The `WWW-Authenticate` header names the scope. Ask an admin to add it. |
 
