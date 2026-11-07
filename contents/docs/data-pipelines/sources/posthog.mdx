@@ -445,6 +445,28 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 | `name`        | Name of the issue                |
 | `description` | Description of the issue         |
 
+### `system.event_definitions`
+
+The `system.event_definitions` table contains the [event definitions](/docs/data/events#managing-event-definitions) in your project: every event PostHog has ingested or that someone defined ahead of time. It has one row per event name.
+
+| Column         | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| `id`           | Unique identifier for the event definition                                                         |
+| `team_id`      | Team ID the event definition belongs to                                                            |
+| `name`         | Event name, like `$pageview` or `signed_up`                                                        |
+| `created_at`   | When the event was first seen or defined                                                           |
+| `last_seen_at` | When the event was last ingested (null if it hasn't been seen since PostHog started tracking this) |
+| `tags.names`   | Sorted list of the tag names applied to the event                                                  |
+
+For example, to find events that stopped arriving more than 30 days ago:
+
+```sql
+SELECT name, last_seen_at, tags.names
+FROM system.event_definitions
+WHERE last_seen_at < now() - INTERVAL 30 DAY
+ORDER BY last_seen_at
+```
+
 ### `system.hog_flows`
 
 The `system.hog_flows` table contains workflow definitions from your project.
@@ -544,6 +566,23 @@ The `system.notebooks` table contains notebook metadata from your project.
 | `version`          | Version number of the notebook                    |
 | `created_at`       | When the notebook was created                     |
 | `last_modified_at` | When the notebook was last modified               |
+
+### `system.property_definitions`
+
+The `system.property_definitions` table contains the property definitions in your project for events, persons, groups, and sessions. It has one row per property name and type, so the same name can appear more than once, like a `plan` event property and a `plan` person property. Filter on `type`, and on `group_type_index` for group properties, to get a single property.
+
+| Column             | Description                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------- |
+| `id`               | Unique identifier for the property definition                                                             |
+| `team_id`          | Team ID the property definition belongs to                                                                |
+| `name`             | Property name, like `$browser` or `plan`                                                                  |
+| `type`             | What the property describes: `event`, `person`, `group`, or `session`                                     |
+| `group_type_index` | Group type index (0-4) for group properties (null for other types)                                        |
+| `property_type`    | Detected value type: `String`, `Numeric`, `Boolean`, `DateTime`, or `Duration` (null if not detected yet) |
+| `is_numerical`     | Whether the property's values can be used in numeric aggregations (1 = yes, 0 = no)                       |
+| `tags.names`       | Sorted list of the tag names applied to the property                                                      |
+
+> **Note:** Properties that [property access control](/docs/settings/property-access-control) hides from you are not included, the same as in the properties list in data management.
 
 ### `system.support_tickets`
 
