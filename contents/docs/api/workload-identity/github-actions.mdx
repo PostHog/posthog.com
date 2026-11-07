@@ -70,7 +70,7 @@ There is no preset for protected branches. `ref_protected` is `true` whenever an
 
 A workflow that runs on `pull_request_target` can get an OIDC token when the pull request comes from a fork, and its `ref` is the base branch. A policy that only pins `ref` = `refs/heads/main` would give that run a token. Requiring `event_name` = `push` means only code pushed to the branch matches.
 
-Workflows that run on `pull_request` from a fork don't get an OIDC token at all.
+In a public repository, workflows that run on `pull_request` from a fork don't get an OIDC token. In a private or internal repository, they can when **Send write tokens to workflows from pull requests** is on, so keep `event_name` or `environment` in the policy either way.
 
 ## Set up a trusted workload
 
@@ -146,7 +146,7 @@ Remove `HOG_PERSONAL_API_KEY` from the job. hog uses a personal API key ahead of
 
 | Problem | Likely cause | What to do |
 | --- | --- | --- |
-| hog can't get an OIDC token | The job doesn't have `id-token: write`, or the run is a `pull_request` from a fork | Add the permission to the job. Fork pull requests can't get a token. |
+| hog can't get an OIDC token | The job doesn't have `id-token: write`, or the run is a `pull_request` from a fork | Add the permission to the job. Fork pull requests get a token only in a private or internal repository with **Send write tokens to workflows from pull requests** on. |
 | [`workload_issuer_not_allowed`](/docs/api/workload-identity#workload_issuer_not_allowed) | Your enterprise uses a customized issuer, which PostHog doesn't support | Use `HOG_PERSONAL_API_KEY` and `HOG_PROJECT_ID` in this job instead. |
 | [`workload_token_invalid`](/docs/api/workload-identity#workload_token_invalid) | The token's audience isn't the host hog sends it to, or the token expired | Set the host in `posthog.json`, or `HOG_HOST`, to the address you open PostHog at. |
 | [`workload_no_matching_policy`](/docs/api/workload-identity#workload_no_matching_policy) | The run doesn't match the policy, for example a pull request, a tag, a manual run, or another branch. A renamed or recreated repository, or the wrong project ID, also cause it. | The error lists the claims the job sent. Compare them with the policy, or run `hog ci setup` to ask for a policy that matches. |

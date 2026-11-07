@@ -111,7 +111,7 @@ The command:
 
 ### Ask through the API
 
-Send a request with an OAuth token that has the `workload_trust_policy_request:write` scope:
+Send a request with an OAuth token that has the `workload_trust_policy_request:write` scope. This example asks to trust pushes to `main` from a GitHub Actions repository:
 
 ```bash
 curl -X POST "https://us.posthog.com/api/projects/<project_id>/workload_trust_policy_requests/" \
@@ -119,15 +119,15 @@ curl -X POST "https://us.posthog.com/api/projects/<project_id>/workload_trust_po
   -H "Content-Type: application/json" \
   -d '{
     "name": "Production deploys",
-    "issuer": "<provider issuer>",
+    "issuer": "https://token.actions.githubusercontent.com",
     "subject_name": "acme/web",
     "subject": "123456789",
-    "conditions": {"ref": "refs/heads/main"},
+    "conditions": {"ref": "refs/heads/main", "event_name": "push"},
     "scopes": ["annotation:write"]
   }'
 ```
 
-The keys in `conditions` are claim names from the provider's OIDC token, and only the claims the provider lists are allowed. The response includes an `approval_url` to send to an admin.
+The keys in `conditions` are claim names from the provider's OIDC token, and only the claims the provider lists are allowed. On GitHub Actions, a `ref` condition also needs `event_name` or `environment`, so a `pull_request_target` run from a fork can't match. The response includes an `approval_url` to send to an admin.
 
 ## Exchanging a token
 
@@ -138,7 +138,7 @@ curl -X POST "https://us.posthog.com/oauth/token/" \
   -d grant_type=urn:ietf:params:oauth:grant-type:token-exchange \
   -d subject_token_type=urn:ietf:params:oauth:token-type:jwt \
   -d subject_token="$OIDC_TOKEN" \
-  -d resource=https://us.posthog.com/api/projects/<project_id>
+  -d resource="https://us.posthog.com/api/projects/<project_id>"
 ```
 
 `resource` names the project: your PostHog host followed by `/api/projects/<project_id>`. Use the project's ID, not the ID of one of its environments.
