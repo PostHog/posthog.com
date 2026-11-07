@@ -141,7 +141,7 @@ The SDK's own `$lib` and `$lib_version` come after all of these. They fill in on
 
 Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
 
-**Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. To change a setting in the hook, edit `options`: a legacy option property the hook adds doesn't replace an option that's already set.
+**Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. The Android SDK is the exception: a new event without `options` keeps the options of the event your hook got, so return an empty `options` map to clear them. To change a setting in the hook, edit `options`: a legacy option property the hook adds doesn't replace an option that's already set.
 
 A few details:
 

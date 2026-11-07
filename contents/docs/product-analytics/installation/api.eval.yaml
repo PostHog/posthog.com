@@ -17,8 +17,11 @@ checks:
           rubrics:
               capture-request: >-
                   The code sends an HTTP POST to a PostHog capture endpoint on the
-                  PostHog host, /capture/ or /i/v0/e/, with a JSON content type. Cite
-                  the file and line(s).
+                  PostHog host, /capture/, /i/v0/e/ or /i/v1/analytics/events, with a
+                  JSON content type. Cite the file and line(s).
               payload-fields: >-
-                  The JSON body has api_key set to the project token, event set to
-                  job_created, and a distinct_id, at the top level or in properties.
+                  The request carries the project token, event set to job_created, and
+                  a distinct_id. On /capture/ or /i/v0/e/, the token is api_key in the
+                  JSON body and distinct_id is at the top level or in properties. On
+                  /i/v1/analytics/events, the token is in an Authorization: Bearer
+                  header, and the body has a batch of events, each with a distinct_id.
