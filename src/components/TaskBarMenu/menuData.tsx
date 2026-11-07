@@ -379,6 +379,12 @@ export function useMenuData(): MenuType[] {
                     link: '/students',
                     icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
                 },
+                {
+                    type: 'item',
+                    label: 'Places',
+                    link: '/places',
+                    icon: <Icons.IconMap className="size-4 text-red" />,
+                },
                 { type: 'separator' },
                 { type: 'label', label: 'Work with us' },
                 {
@@ -517,12 +523,6 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'separator',
-                },
-                {
-                    type: 'item',
-                    label: 'Places',
-                    link: '/places',
-                    icon: <Icons.IconMap className="size-4 text-red" />,
                 },
                 {
                     type: 'item',
