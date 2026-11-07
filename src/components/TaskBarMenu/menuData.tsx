@@ -309,6 +309,12 @@ export function useMenuData(): MenuType[] {
                     link: '/roadmap',
                     icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
                 },
+                {
+                    type: 'item',
+                    label: 'Research',
+                    link: '/research',
+                    icon: <Icons.IconBrain className="size-4 text-purple" />,
+                },
             ],
         },
         {
@@ -326,6 +332,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Community',
             items: [
+                { type: 'label', label: 'Content' },
                 {
                     type: 'item',
                     label: 'Blog',
@@ -337,12 +344,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Newsletter',
                     link: '/newsletter',
                     icon: <Icons.IconNewspaper className="size-4 text-orange" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Merch',
-                    link: '/merch',
-                    icon: <Icons.IconStore className="size-4 text-purple" />,
                 },
                 { type: 'separator' },
                 { type: 'label', label: 'Chat' },
@@ -404,6 +405,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Company',
             items: [
+                { type: 'label', label: 'Info' },
                 {
                     type: 'item',
                     label: 'About',
@@ -430,21 +432,15 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Media',
-                    link: '/media',
-                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
+                    label: 'Merch',
+                    link: '/merch',
+                    icon: <Icons.IconStore className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
                     label: 'People',
                     link: '/people',
                     icon: getMenuIcon(companyMenu.children, '/people', 'IconPeople', 'blue'),
-                },
-                {
-                    type: 'item',
-                    label: 'Research',
-                    link: '/research',
-                    icon: <Icons.IconBrain className="size-4 text-purple" />,
                 },
                 {
                     type: 'item',
@@ -586,6 +582,13 @@ export function useMenuData(): MenuType[] {
                     icon: <IconGithub className="size-4" />,
                     external: true,
                     mobileDestination: false, // Omit from mobile menu
+                },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Media',
+                    link: '/media',
+                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
                 },
             ],
         },
