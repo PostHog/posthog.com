@@ -161,6 +161,7 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `send_tools_list_event` | `True` | Emit `$mcp_tools_list` for each `tools/list`. Set to `False` to stop it. Tools keep their injected arguments. |
 | `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
+| `event_options` | – | `(request, extra) -> dict \| None`, sync or async. Sets [event options](#event-options) on every event. posthog-python 8.0 and later. |
 | `server_build` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
 | `should_record_input_key` | declared names | Decides which argument names `$mcp_input_keys` records. Other names become one `[redacted]` entry. |
 | `resolve_input_aliases` | – | `(tool_name) -> aliases`. Lists alternative argument names, recorded as `$mcp_input_aliases_used`. |
@@ -170,6 +171,32 @@ instrument(server, posthog, MCPAnalyticsOptions(
 MCP events report `$lib: "posthog-python-mcp"`. On posthog-python 8.0, the client you pass in keeps `posthog-python` for everything else it sends. On 7.x, `instrument()` relabels every event the client sends, so give MCP analytics its own `Posthog` client if your app also captures other events. To find MCP traffic, filter on `$mcp_*` event names rather than `$lib`.
 
 On raw low-level servers and standalone FastMCP, the SDK advertises the injected `context` and `llm_model` arguments as optional, not required. On standalone FastMCP with `mcp` 1.x, middleware that overrides tool listing or dispatch turns off `llm_model` injection. Model capture from client metadata still works.
+
+## Event options
+
+On posthog-python 8.0 and later, set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events with `event_options`. The name keeps them apart from `MCPAnalyticsOptions`.
+
+`MCPAnalyticsOptions(event_options=...)` sets options on every event `instrument()` captures, including `$exception` events. Like `event_properties`, it's a function of `(request, extra)` that returns a dict or `None`, and it can be sync or async:
+
+```python
+instrument(server, posthog, MCPAnalyticsOptions(
+    event_options=lambda request, extra: {"cookieless_mode": True},
+))
+```
+
+`analytics.capture()` and the `PostHogMCP` `capture_*` methods take `event_options` for one event:
+
+```python
+await analytics.capture("report_exported", event_options={"cookieless_mode": True})
+
+# On a custom dispatcher, where posthog is a PostHogMCP client:
+posthog.capture_tool_call("search_docs", distinct_id="user-1", event_options={"cookieless_mode": True})
+```
+
+- An event without an identity always sends `process_person_profile: False`, even when `event_options` sets it to `True`.
+- An `event_options` value that isn't a dict is logged and ignored. The event is still sent.
+- `PostHogMCP.capture()` is the core client's `capture`, so it takes `options` instead.
+- `before_send` sees each event's `options`. A hook that returns a new dict must copy them, or the event is sent without them.
 
 ## Custom dispatchers
 
@@ -238,7 +265,7 @@ posthog.capture_initialize(client_name="claude-code", client_version="1.2.3", **
 posthog.capture_tools_list(tool_names=[t["name"] for t in tools], **common)
 ```
 
-`PostHogMCP` also takes `capture_model`, `enable_conversation_id`, `server_build`, `missing_capability_tool_name`, `collect_feedback`, and `mcp_exception_autocapture`. When `prepare_tool_call` returns a feedback report, send it with `capture_feedback`. The `instrument()` hooks (`identify`, `intent_fallback`, `event_properties`) don't run on this path. Pass identity on each `capture_*` call. On a stateless server, pass the tool's descriptor as `original_tool=` to `prepare_tool_call`, so a process that didn't serve `tools/list` still knows which arguments it added. `PostHogMCP` is a `posthog` client, so call `flush()` or `shutdown()` yourself.
+`PostHogMCP` also takes `capture_model`, `enable_conversation_id`, `server_build`, `missing_capability_tool_name`, `collect_feedback`, and `mcp_exception_autocapture`. When `prepare_tool_call` returns a feedback report, send it with `capture_feedback`. The `instrument()` hooks (`identify`, `intent_fallback`, `event_properties`, `event_options`) don't run on this path. Pass identity, and any [event options](#event-options), on each `capture_*` call. On a stateless server, pass the tool's descriptor as `original_tool=` to `prepare_tool_call`, so a process that didn't serve `tools/list` still knows which arguments it added. `PostHogMCP` is a `posthog` client, so call `flush()` or `shutdown()` yourself.
 
 The two transport headers in `common` matter. `clientInfo.name` reports `claude-code` for the CLI, Agent SDK, VS Code extension, and desktop app. `client_user_agent` tells those builds apart, and `vendor_client` separates Anthropic's products, such as Claude.ai and Claude Design. `instrument()` reads both headers for you. Leave them unset on stdio.
 

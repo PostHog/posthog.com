@@ -135,6 +135,7 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(NotesServer)
 | `model_description(text)` | – | Replaces the `llm_model` argument's description. |
 | `conversation_id(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. When the SDK mints a handle, it appends a last `{"conversation_id": ...}` text block to the result. |
 | `identify(callback)` | – | `Fn(&RequestInfo) -> Option<Identity>`. Maps a request to a person and groups. See [Identify the caller](#identify-the-caller). |
+| `event_options(callback)` | – | `Fn(&RequestInfo) -> Option<serde_json::Map<String, Value>>`. Sets [event options](#event-options) on each request's events. posthog-rs 1.0 and later. |
 | `missing_capability_tool(name)` | off | Adds the [`get_more_tools` virtual tool](/docs/mcp-analytics/missing-capability) under this name. A blank name uses `get_more_tools`. |
 | `exception_autocapture(bool)` | `true` | Sends a `$exception` event for each failed tool call. For a panic, the `posthog-rs` panic hook sends the `$exception` instead when it's installed, which needs a global client with `capture_panics` on. |
 | `capture_parameters(bool)` | `true` | Captures the tool arguments as `$mcp_parameters`. |
@@ -144,6 +145,32 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(NotesServer)
 A tool that declares its own `context`, `llm_model`, or `conversation_id` argument keeps it. A tool whose input schema uses `$ref`, `allOf`, `anyOf`, or `oneOf` at the top level gets no added arguments, so the SDK captures no intent or model from its arguments. This can happen when `Parameters<T>` wraps an enum. Callbacks that panic never break the request. A panicking `identify` makes the request anonymous, and a panicking `before_send` drops the event.
 
 The SDK logs its warnings through [`tracing`](https://docs.rs/tracing), never to stdout. On a stdio server, point your `tracing` subscriber at stderr, because stdout carries the protocol.
+
+## Event options
+
+On posthog-rs 1.0, set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `event_options` and `event_option` keep them apart from `McpOptions`.
+
+- `McpOptionsBuilder::event_options` takes a callback that returns options for each request's events: its tool call, its `$exception`, and its listing or handshake.
+- `ToolCallRequest::event_option(key, value)` sets an option on one call's events in the [manual API](#custom-dispatchers). It wins over the callback.
+
+```rust
+use posthog_rs::mcp::{McpOptionsBuilder, ToolCallRequest};
+
+let options = McpOptionsBuilder::default()
+    .event_options(|_request| {
+        let mut options = serde_json::Map::new();
+        options.insert("cookieless_mode".into(), true.into());
+        Some(options)
+    })
+    .build()?;
+
+let call = ToolCallRequest::new("search_docs", None).event_option("cookieless_mode", true)?;
+```
+
+- Over HTTP, MCP events also take the `RequestContext` that `PostHogLayer` or your middleware put in the request extensions. Its properties and options fill only the keys the event leaves unset, so event options win over context options.
+- An anonymous event keeps its MCP session ID as the distinct ID and always keeps `process_person_profile: false`.
+- A `null` value sets nothing, and a panicking callback sets no options.
+- The `McpOptions` `before_send` hook, then your client's `before_send`, see the options and can change them.
 
 ## Identify the caller
 
@@ -246,7 +273,7 @@ async fn run_tool(arguments: Option<&JsonObject>) -> Result<CallToolResult, std:
 
 - `call.arguments()` no longer holds the `context`, `llm_model`, or `conversation_id` arguments, when the SDK knows it added them: the tool is `ToolRegistration::Registered`, or it went through `list_tools` earlier.
 - `ToolRegistration::NotRegistered` sends `$mcp_unknown_tool` instead of a tool call. Use `ToolRegistration::NoRegistry` when you can't tell. Then the SDK removes the analytics arguments only for tools it saw in `list_tools`.
-- `ToolCallRequest` also takes the request `_meta` with `.meta()`, the HTTP request with `.http()`, your server's `Implementation` with `.server()`, and the arrival time with `.started_at()`.
+- `ToolCallRequest` also takes the request `_meta` with `.meta()`, the HTTP request with `.http()`, your server's `Implementation` with `.server()`, the arrival time with `.started_at()`, and, on posthog-rs 1.0, [event options](#event-options) with `.event_option()`.
 - `TransportSession::Id` groups requests that share a session ID. For a one-client connection, create one `Connection::new()` per connection and pass `TransportSession::Connection`. Without a transport session, the call is a stateless request.
 - On a `2026-07-28` round, call `call.input_required(&round)` to send `$mcp_input_required`. The retry that completes the call is a call of its own.
 - `ToolCallError::new` names the failure by the error's type name without its path or generics, such as `UpstreamTimeout`. A `Box`, `Arc`, `Rc`, reference, or `dyn` type gives `Error`. `error_type` sets the `$mcp_error_type` label, such as `validation`, `permission`, or `rate_limited`. The `$exception` keeps the error's own type.

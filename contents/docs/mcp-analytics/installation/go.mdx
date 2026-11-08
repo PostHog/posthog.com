@@ -129,6 +129,7 @@ A valid conversation handle also takes priority over the transport session, so a
 | `WithIntentFallback(fallback)` | – | `func(ctx, req) (string, error)`. Supplies intent, with `$mcp_intent_source` `"inferred"`, when the agent sends no `context`. The agent's own `context` always wins. It runs on the tool call's response path. |
 | `WithIdentity(resolver)` | – | Maps a call to a person and groups. See [Identify the caller](#identify-the-caller). |
 | `WithProperties(resolver)` | – | Adds properties to each `$mcp_tool_call` and its `$exception`. The resolver also receives the result and the handler's error. |
+| `WithEventOptions(resolver)` | – | Sets [event options](#event-options) on each `$mcp_tool_call` and its `$exception`. posthog-go v2 and later. |
 | `WithMissingCapabilityTool(name)` | off | Adds the [`get_more_tools` virtual tool](/docs/mcp-analytics/missing-capability). Agents call it to report a capability your server lacks. The call sends `$mcp_missing_capability`, not `$mcp_tool_call`. An empty name uses `get_more_tools`. |
 | `WithCaptureParameters(bool)` | `true` | Captures the tool arguments as `$mcp_parameters`. |
 | `WithCaptureResponses(bool)` | `true` | Captures the tool result as `$mcp_response`. A failed call's error text is captured either way. |
@@ -139,6 +140,27 @@ To stop the `$exception` event for failed calls, pass `posthogmcp.WithExceptionA
 The adapter's `WithErrorHandler` default is a no-op, but the `posthog-go` client logs to stderr by default. Set `Config.Logger` to change that.
 
 The SDK learns each tool's schema from `tools/list` and refreshes it when the server sends `notifications/tools/list_changed`. A server with no connected session sends no notification, so the SDK trusts what it learned for 10 seconds and then lists the tools again on the next call. A tool that declares its own `context`, `llm_model`, or `conversation_id` argument keeps it. Schemas built from `$ref`, `allOf`, `anyOf`, or `oneOf` get no added arguments. Schemas with a non-object type or non-object `properties` are skipped too. Output schemas with `maxProperties` or `propertyNames` get no `_mcp_instructions`.
+
+## Event options
+
+On posthog-go v2 (module `github.com/posthog/posthog-go/v2`), set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `WithEventOptions` and `EventOptions` keep them apart from the adapter's own options.
+
+`WithEventOptions` takes a resolver that returns `posthog.Options` for each tool call. The options apply to the `$mcp_tool_call` and its `$exception`:
+
+```go
+posthogmcpsdk.Instrument(server, posthogmcp.New(client),
+	posthogmcpsdk.WithEventOptions(func(
+		ctx context.Context, req *mcp.CallToolRequest, result *mcp.CallToolResult, err error,
+	) (posthog.Options, error) {
+		return posthog.NewOptions().Set("cookieless_mode", true), nil
+	}),
+)
+```
+
+- These options win over a `posthog.RequestContext`'s options.
+- A call without a distinct ID is sent with `process_person_profile` set to `false`, whatever the options say. A `BeforeSend` hook on the client can still change it.
+- A resolver error or panic goes to `WithErrorHandler`, and the call is captured without these options.
+- On the manual API, set `ToolCall.EventOptions`, or `EventContext.EventOptions` for the other events. See [Custom dispatchers](#custom-dispatchers).
 
 ## Report missing capabilities
 
@@ -212,7 +234,7 @@ if err != nil {
 }
 ```
 
-A call with neither `SessionID` nor `ConversationID` gets a new `ses_` plus UUIDv7 session, and `distinct_id` falls back to it. Pass a stable `SessionID` or `ConversationID` to group calls. `ToolCall` also takes `ConversationID`, `LLMModel` with `LLMModelSource`, `ClientUserAgent`, and `VendorClient`.
+A call with neither `SessionID` nor `ConversationID` gets a new `ses_` plus UUIDv7 session, and `distinct_id` falls back to it. Pass a stable `SessionID` or `ConversationID` to group calls. `ToolCall` also takes `ConversationID`, `LLMModel` with `LLMModelSource`, `ClientUserAgent`, and `VendorClient`. On posthog-go v2, it also takes `EventOptions` for [event options](#event-options), and `EventContext` takes `EventOptions` for the other events.
 
 This path has no prepare steps. You strip any injected arguments and manage sessions and conversation handles yourself. If `Intent` comes from an argument, remove it from `Parameters`. An `Intent` of `{}` is omitted. `SetProperties` becomes `$set` only with an explicit `DistinctID`.
 
@@ -240,7 +262,7 @@ err = analytics.CaptureMissingCapability(ctx, posthogmcp.MissingCapability{
 
 ## Events
 
-The Go SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_unknown_tool`, `$mcp_input_required`, and, when you turn it on, `$mcp_missing_capability`. `WithIdentity` applies to all of them. `WithProperties` applies to `$mcp_tool_call` and its `$exception`.
+The Go SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_unknown_tool`, `$mcp_input_required`, and, when you turn it on, `$mcp_missing_capability`. `WithIdentity` applies to all of them. `WithProperties` and `WithEventOptions` apply to `$mcp_tool_call` and its `$exception`.
 
 ### Calls that are not tool calls
 

@@ -90,7 +90,7 @@ Capture only the final outcome of a call to a tool your server has. Don't captur
 - A result with `resultType: "input_required"`. Capture the retry that completes the call instead.
 - A task handle (`resultType: "task"`). It isn't a completed call.
 
-This is the event, as PostHog stores it. If you use the [capture API](/docs/api/capture), wrap it in the request body that page describes, with your project token:
+This is the event, as PostHog stores it. PostHog stores the `process_person_profile` [event option](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties) as a property, so it appears in `properties` below. When you send the event, set it as an option instead, as described in [Identify the user](#identify-the-user). If you use the [capture API](/docs/api/capture-v1), wrap the event in the request body that page describes, with your project token, and put the option in the event's `options`:
 
 ```json
 {
