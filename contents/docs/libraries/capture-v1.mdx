@@ -81,7 +81,7 @@ client.Enqueue(posthog.Capture{
 ```
 
 ```rust
-let mut event = posthog_rs::Event::new("signed_up", "user_123");
+let mut event = posthog::Event::new("signed_up", "user_123");
 event.insert_prop("plan", "pro")?;
 event.insert_option("process_person_profile", true)?;
 client.capture(event);
@@ -240,12 +240,12 @@ client, err := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
 ```
 
 ```rust
-let options = posthog_rs::ClientOptionsBuilder::default()
+let options = posthog::ClientOptionsBuilder::default()
     .api_key("<ph_project_token>".to_string())
     .host("<ph_client_api_host>")
     .on_error(|failure| eprintln!("PostHog capture failed: {failure:?}"))
     .build()?;
-let client = posthog_rs::client(options).await;
+let client = posthog::client(options).await;
 ```
 
 ```node
@@ -290,7 +290,7 @@ client.EnqueueAI(posthog.Capture{
 ```
 
 ```rust
-let mut event = posthog_rs::Event::new("$ai_generation", "user_123");
+let mut event = posthog::Event::new("$ai_generation", "user_123");
 event.insert_prop("$ai_model", "gpt-5")?;
 event.insert_prop("$ai_input_tokens", 120)?;
 client.capture_ai(event);

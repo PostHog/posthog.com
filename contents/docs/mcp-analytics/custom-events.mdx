@@ -124,7 +124,7 @@ PostHog receives:
 
 ## Set event options
 
-[Event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, control how PostHog processes an event. MCP SDKs take them under a name that keeps them apart from the SDK's own MCP options. Python needs posthog-python 8.0, Go needs posthog-go v2, and Rust needs posthog-rs 1.0.
+[Event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, control how PostHog processes an event. MCP SDKs take them under a name that keeps them apart from the SDK's own MCP options. Python needs posthog-python 8.0, Go needs posthog-go v2, and Rust needs the `posthog` crate 1.0.
 
 | SDK | Every auto-captured event | One event |
 |---|---|---|
@@ -159,7 +159,7 @@ client.Enqueue(posthog.Capture{
 ```
 
 ```rust file=Rust
-let mut event = posthog_rs::Event::new("feedback_submitted", user_id);
+let mut event = posthog::Event::new("feedback_submitted", user_id);
 event.insert_prop("rating", 5)?;
 event.insert_option("cookieless_mode", true)?;
 client.capture(event);
@@ -167,7 +167,7 @@ client.capture(event);
 
 </MultiLanguage>
 
-Go and Rust have no analytics handle, so a custom event goes through your `posthog-go` or `posthog-rs` client, which takes `options` like any other event.
+Go and Rust have no analytics handle, so a custom event goes through your `posthog-go` or `posthog` client, which takes `options` like any other event.
 
 An MCP event without an identity always gets `process_person_profile: false`. In TypeScript, an explicit `process_person_profile` in `eventOptions` wins over that default.
 
