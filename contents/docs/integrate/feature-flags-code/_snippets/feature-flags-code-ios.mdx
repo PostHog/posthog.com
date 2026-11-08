@@ -9,6 +9,14 @@ if let result = PostHogSDK.shared.getFeatureFlagResult("flag-key"), result.enabl
 }
 ```
 
+To only check whether a flag is on, use `isFeatureEnabled`. From version 4.0, you can pass a `defaultValue` to return when the flag has no value, for example because flags haven't loaded yet or the flag doesn't exist. A flag that has a value always wins:
+
+```swift
+if PostHogSDK.shared.isFeatureEnabled("flag-key", defaultValue: true) {
+    // Do something differently for this user
+}
+```
+
 ### Multivariate feature flags
 
 ```swift

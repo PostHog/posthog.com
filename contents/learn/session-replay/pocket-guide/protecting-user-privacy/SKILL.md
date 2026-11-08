@@ -24,7 +24,8 @@ you append `.md`:
   config option names
 - `https://posthog.com/docs/session-replay/network-recording.md` – headers, bodies, and the
   callback that redacts them and the page URL
-- `https://posthog.com/docs/session-replay/mobile.md` – wireframe versus screenshot mode
+- `https://posthog.com/docs/session-replay/mobile.md` – how mobile screenshots are
+  recorded and masked
 - `https://posthog.com/llms.txt` – the index, if you need anything else
 
 Then find out what you're working with:
@@ -32,7 +33,9 @@ Then find out what you're working with:
 1. Which PostHog SDK, and where it's initialized.
 2. Whether masking has already been configured, and by whom – do not silently overwrite an
    existing config.
-3. On mobile, whether screenshot mode is on. It raises the stakes of every unmarked view.
+3. On mobile, which SDK version. From posthog-ios 4.0 and posthog-android 4.0, replay always
+   records masked screenshots, as React Native and Flutter do, so every unmarked view is visible.
+   Earlier native versions record a wireframe unless screenshot mode is on.
 
 ## Step one: mask everything
 

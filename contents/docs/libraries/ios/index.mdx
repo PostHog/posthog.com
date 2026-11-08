@@ -74,6 +74,31 @@ You can learn more about configuring method swizzling in the [configuration page
 
 The iOS SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
+## Event options
+
+From version 4.0, `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, and `captureException` take an `options` argument. Options tell PostHog how to process the event and are sent apart from its properties. They replace the `$`-prefixed properties that earlier versions sent as settings:
+
+| Option | Legacy property |
+| --- | --- |
+| `process_person_profile` | `$process_person_profile` |
+| `cookieless_mode` | `$cookieless_mode` |
+| `disable_skew_correction` | `$ignore_sent_at` |
+| `product_tour_id` | `$product_tour_id` |
+
+For example, set `process_person_profile` to `false` to capture an event without processing a [person profile](/docs/data/persons):
+
+```swift
+PostHogSDK.shared.capture("signed_up", options: ["process_person_profile": false])
+```
+
+In Objective-C, use the selectors that end in `options:`, such as `captureWithEvent:distinctId:properties:userProperties:userPropertiesSetOnce:groups:timestamp:options:`.
+
+- An option wins over its legacy property, which still works. Other keys are sent unchanged, and PostHog ignores keys it doesn't know.
+- PostHog reads common forms of a value, such as `"false"` or `0` for a boolean, and drops an event whose option value it can't read.
+- For `identify`, the options apply to the `$identify` or `$set` event the call sends.
+- In `beforeSend`, read and change options through `event.options`. Edit the dictionary instead of replacing it: when person processing is off, the SDK sets `process_person_profile` to `false` there, and a new dictionary loses it.
+- There are no global options. To set one on every event, register its legacy property, for example `PostHogSDK.shared.register(["$process_person_profile": false])`.
+
 ## Upgrading from version 3 to version 4
 
 This section covers what most apps need. The [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) lists every removed API, including the Objective-C names.
@@ -110,7 +135,7 @@ These change behavior without a build error, so check them even if your app buil
 
 **Feature flag payloads.** A malformed, empty, or whitespace-only payload now reads as `nil` instead of the raw string. The flag's value isn't affected. A bootstrapped string payload such as `"123"` stays a string instead of being decoded again.
 
-**Empty flag variants.** `isFeatureEnabled` returns `false` for a flag whose variant is an empty string. Version 3 returned `true`.
+**Empty flag variants.** A flag whose variant is an empty string reads as disabled. `isFeatureEnabled` returns `false`, `enabled` is `false` in `getFeatureFlagResult` and `getAllFeatureFlags`, `onFeatureFlags` leaves the flag out of `flags` and `variants`, and events leave it out of `$active_feature_flags`. Version 3 treated it as enabled. `variant`, `getFeatureFlag`, and the event's `$feature/<key>` property still return `""`.
 
 **Lifecycle events.** `Application Installed`, `Application Updated`, and `Application Opened` no longer send `version` and `build`. Use `$app_version` and `$app_build` in insights, cohorts, and actions. To find cold launches, filter on `from_background = false`.
 
