@@ -20,7 +20,7 @@ seo:
 
 In July we launched PostHog [self-driving](/self-driving) as an open beta. Our agents dug through your product data, found things worth fixing, and tried to fix them. Their fix rate is now high enough that it's out of beta, and it has real pricing.
 
-If pricing is all you came for, skip to [the pricing section](#all-i-want-to-know-about-is-the-pricing). For everyone else, here's what thousands of teams, including ours, are doing with it.
+If pricing is all you came for, skip ahead to the pricing section. For everyone else, here's what thousands of teams, including ours, are doing with it.
 
 ## Juno merged 26 of the last 30 PRs our agents opened
 
