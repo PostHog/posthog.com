@@ -6,7 +6,6 @@ import { cn } from '../../utils'
 import { ClaudeTerminal } from '../Home/DataStory/Query/AgentWindow'
 import { ANSWER_MS_PER_CHAR, SourceIcon, TOOL_RUN_MS, Trace, defineTrace } from '../Home/DataStory/Query/trace'
 import { useEventClock } from '../Home/DataStory/timeline'
-import Highlight from './Highlight'
 import { PromptFlow, flows } from './promptDemo.data'
 
 const SUBMIT_AT = 400
@@ -103,16 +102,10 @@ export default function PromptDemo(): JSX.Element {
     const nextIndex = (activeIndex + 1) % demos.length
 
     return (
-        <div className="mt-12">
-            <h3 className="m-0 text-balance text-2xl font-bold leading-tight text-primary">
-                <Highlight red>Watch an agent work</Highlight> with PostHog
-            </h3>
-            <p className="mb-0 mt-2 text-base text-secondary">
-                Pick a prompt to start a new run. You'll see each MCP tool call the agent makes to get the answer.
-            </p>
+        <div>
             <div
                 ref={layoutRef}
-                className="mt-6 grid gap-x-8 gap-y-4 @2xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
+                className="grid gap-x-8 gap-y-4 @2xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
             >
                 <div>
                     <p className="m-0 border-b border-primary pb-2 text-sm font-semibold text-secondary">Try asking</p>

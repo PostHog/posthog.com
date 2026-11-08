@@ -17,7 +17,7 @@ node --test src/components/MCPPage/agentBrief.test.ts src/components/MCPPage/pro
 
 ## Section order
 
-`MCPHeader` → `MCPNoUI` → `MCPUseCases` (checklist and `PromptDemo`) → `MCPConnectors` → `WhatIsMCP` → `MCPResources` → `MCPSetupCTA` → `MCPFaq` → `WaitingRoom` → `MCPCTA`.
+`MCPHeader` → `MCPNoUI` → `MCPUseCases` (`PromptDemo`) → `MCPConnectors` → `WhatIsMCP` → `MCPResources` → `MCPSetupCTA` → `MCPFaq` → `WaitingRoom` → `MCPCTA`.
 
 The layout uses container queries on the reader width (`@lg/reader-content`, and so on), not media queries.
 

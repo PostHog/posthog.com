@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { motion, useReducedMotion } from 'framer-motion'
 import {
-    IconCheck,
     IconArrowRight,
     IconArrowUpRight,
     IconGraph,
@@ -346,58 +345,14 @@ function MCPConnectors(): JSX.Element {
     )
 }
 
-const checklist = [
-    'Find where users drop off',
-    'Answer a question with SQL',
-    'Set up an A/B test',
-    'Turn a feature flag on or off',
-    'Triage a support ticket',
-    'Send events to another tool',
-    'Ask users with a survey',
-    'Find the replay of a bug report',
-]
-
-function MCPChecklist(): JSX.Element {
-    return (
-        <div className="not-prose">
-            <ul className="list-none p-0 m-0 grid w-fit grid-cols-1 @xs:grid-cols-2 gap-x-6 gap-y-3">
-                {checklist.map((label) => (
-                    <li key={label} className="flex items-start gap-2 text-sm">
-                        <IconCheck className="size-4 text-green shrink-0 mt-0.5" />
-                        <span className="font-semibold text-primary">{label}</span>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
-}
-
 function MCPUseCases(): JSX.Element {
     return (
         <section id="use-cases" className="scroll-mt-20 not-prose border-t border-primary pt-12">
-            <div className="grid gap-6 @4xl/reader-content:grid-cols-[minmax(0,1fr)_28rem] @4xl/reader-content:gap-10">
-                <div className="min-w-0">
-                    <SectionHeading
-                        lede={`Your agent selects from ${toolCountLabel} across ${categoryCount} categories, then reads or updates your PostHog project for you.`}
-                    >
-                        What can you do with the PostHog MCP?
-                    </SectionHeading>
-                    <MCPChecklist />
-                </div>
-                <figure className="m-0 flex flex-col items-center justify-end">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_bottle_4ba0223072.png"
-                        alt=""
-                        width={900}
-                        loading="lazy"
-                        className="w-full max-w-lg"
-                        imgClassName="block w-full"
-                    />
-                    <figcaption className="mt-2 text-center text-sm text-secondary">
-                        All your product context, bottled up for agents
-                    </figcaption>
-                </figure>
-            </div>
+            <SectionHeading
+                lede={`Your agent selects from ${toolCountLabel} across ${categoryCount} categories, then reads or updates your PostHog project for you.`}
+            >
+                What can you do with the PostHog MCP?
+            </SectionHeading>
             <PromptDemo />
         </section>
     )
