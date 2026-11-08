@@ -136,7 +136,7 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
                             imgClassName="w-full"
                         />
                     </motion.div>
-                    <p className="m-0 hidden text-balance text-center text-sm text-secondary @lg/reader-content:block">
+                    <p className="m-0 hidden w-full -translate-x-[7%] text-balance text-center text-sm text-secondary @lg/reader-content:block">
                         {agentLink}
                     </p>
                 </div>
