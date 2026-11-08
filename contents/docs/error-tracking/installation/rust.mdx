@@ -25,7 +25,7 @@ Error tracking ships enabled by default through the `error-tracking` feature. If
 
 ```toml
 [dependencies]
-posthog = { version = "*", default-features = false, features = ["error-tracking"] }
+posthog = { version = "1", default-features = false, features = ["error-tracking", "tls"] }
 ```
 
 <CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">
