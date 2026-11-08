@@ -374,6 +374,21 @@ PostHog.unregister("team_id")
 
 If you're doing this as part of a user logging out, you can instead call `PostHog.reset()`, which clears all stored super properties and more.
 
+## Setting the app language
+
+Events carry `$app_language`, the language your app displays. On Android 13 and later, the SDK detects it from the app's `localeConfig`, and on iOS and macOS from the localizations the app bundle declares. Compose Multiplatform resources declare neither, so on iOS and macOS list your languages under `CFBundleLocalizations` in `Info.plist`. Android 6 to 12 and the JVM send no `$app_language` until you set it.
+
+If your app picks its language some other way, such as an in-app setting, call `setAppLanguage()` with a BCP 47 language tag at startup and whenever the language changes:
+
+```kotlin
+PostHog.setAppLanguage("pt-BR")
+PostHog.setAppLanguage(null) // back to the detected language
+```
+
+The value is kept in memory only and survives `reset()`. A `$app_language` super property set with `register()` takes precedence. On JavaScript and Wasm, `setAppLanguage()` does nothing yet, because PostHog.js doesn't support `$app_language`. To send it there now, call `PostHog.register("\$app_language", "pt-BR")`.
+
+`$locale` is the device's language. On Android, iOS, and macOS it includes the region, such as `de-CH`. On the JVM it's a BCP 47 tag that keeps the script, such as `zh-Hant-TW`.
+
 ## Feature flags
 
 import FeatureFlagsLibsIntro from '../_snippets/feature-flags-libs-intro.mdx'
@@ -412,18 +427,57 @@ if (result != null) {
 }
 ```
 
+`payload` is `null` when the flag's payload isn't valid JSON, such as plain text or an empty string. A flag whose variant is an empty string counts as disabled: `isFeatureEnabled()` returns `false` and `result.enabled` is `false`, while `getFeatureFlag()` and `result.variant` still return `""`.
+
 Get every evaluated flag at once as a map of `FeatureFlagResult`:
 
 ```kotlin
 val allFlags = PostHog.getAllFeatureFlags()
 ```
 
-Feature flags are fetched on setup and cached. If a user's properties change (for example, after `identify`), reload them so they reflect the latest state:
+Feature flags are fetched on setup and cached. If a user's properties change (for example, after `identify`), reload them so they reflect the latest state. The optional callback runs once when the reload finishes and receives a `PostHogFeatureFlagsLoaded` with the enabled flags (`flags`), their values (`variants`), and `errorsLoading`, which is `true` when the reload failed and the values are the last known flags:
 
 ```kotlin
-PostHog.reloadFeatureFlags {
-    // flags are now up to date
+PostHog.reloadFeatureFlags { loaded ->
+    if (!loaded.errorsLoading && "new-checkout" in loaded.flags) {
+        showNewCheckout()
+    }
 }
+```
+
+To react every time flags load or change, such as at startup, after `identify`, `group`, or `reset`, and after a reload, register a listener with `onFeatureFlags()`. If flags have already loaded, it also runs with the current values. You can register before `setup`, and the listener stays active until you unsubscribe. On Android, iOS, and macOS it runs on the main thread:
+
+```kotlin
+val subscription = PostHog.onFeatureFlags { loaded ->
+    showNewCheckout = loaded.variants["new-checkout"] == "test"
+}
+
+// Later, stop listening
+subscription.unsubscribe()
+```
+
+### Setting properties for flag evaluation
+
+If a flag targets a person or group property that you just set, PostHog may not have processed it yet when flags are evaluated. Send the properties with flag requests so the flag uses them right away. They're stored on the device until you reset them, no event is sent, and flags reload afterwards unless you pass `reloadFeatureFlags = false`:
+
+```kotlin
+PostHog.setPersonPropertiesForFlags(mapOf("plan" to "pro"))
+PostHog.setGroupPropertiesForFlags("company", mapOf("plan" to "enterprise"))
+
+// Clear them
+PostHog.resetPersonPropertiesForFlags()
+PostHog.resetGroupPropertiesForFlags("company") // or no argument for every group type
+```
+
+### Evaluation contexts
+
+To evaluate only the flags tagged for part of your app, set `evaluationContexts` in `PostHogConfig`. PostHog then evaluates the flags with at least one of these [evaluation tags](/docs/feature-flags/evaluation-contexts), plus flags with no evaluation tags:
+
+```kotlin
+PostHogConfig(
+    projectToken = "<ph_project_token>",
+    evaluationContexts = listOf("production", "checkout"),
+)
 ```
 
 ## Experiments (A/B tests)
@@ -666,6 +720,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
 | `beforeSend` | `List<PostHogBeforeSend>` | `emptyList()` | Modifies or drops events before the SDK queues them. |
 | `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
+| `evaluationContexts` | `List<String>?` | `null` | Evaluates only feature flags with one of these evaluation tags, plus untagged flags. `null` evaluates every flag. |
 
 ### Error Tracking options
 
@@ -718,6 +773,12 @@ Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. Thes
 - **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets.
 - **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. Refer to [Session replay](#session-replay).
 - **Replay throttling:** use `throttleDelayMs` instead of the deprecated `debouncerDelayMs`.
+
+These feature flag changes also apply to the web target:
+
+- **`reloadFeatureFlags` callback:** the callback now receives a `PostHogFeatureFlagsLoaded`. A lambda that ignores it still compiles, but a function reference or a `() -> Unit` value needs the parameter. Before `setup`, the callback runs right away with no flags and `errorsLoading = true`.
+- **Payloads:** `FeatureFlagResult.payload` is `null` for a payload that isn't valid JSON, instead of the raw string.
+- **Empty variants:** a flag whose variant is an empty string is disabled on every platform and is left out of `$active_feature_flags`.
 
 ## FAQ
 
