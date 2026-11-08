@@ -18,7 +18,7 @@ MCP Analytics for Python ships inside the [`posthog`](/docs/libraries/python) pa
 - `MCPServer`, FastMCP's new name on `mcp` 2.x, and the 2.x low-level `Server`
 - [jlowin's standalone FastMCP](https://github.com/jlowin/fastmcp) (the `fastmcp` package)
 
-The SDK handles both the `2025-11-25` and `2026-07-28` protocol revisions. You need Python 3.10+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no server object? See [Custom dispatchers](#custom-dispatchers).
+The SDK handles both the `2025-11-25` and `2026-07-28` protocol revisions. You need Python 3.10+, `posthog` 8.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no server object? See [Custom dispatchers](#custom-dispatchers).
 
 <WizardCommand command="mcp-analytics" />
 
@@ -33,6 +33,8 @@ pip install posthog
 ```
 
 `instrument()` needs `mcp` or `fastmcp` at runtime. You already have one, because you built your server with it.
+
+On `posthog` 7.x, MCP events take no event options, and `instrument()` sets `$lib` to `posthog-python-mcp` on every event the client sends.
 
 </Step>
 
@@ -161,20 +163,20 @@ instrument(server, posthog, MCPAnalyticsOptions(
 | `send_tools_list_event` | `True` | Emit `$mcp_tools_list` for each `tools/list`. Set to `False` to stop it. Tools keep their injected arguments. |
 | `before_send` | – | `(event) -> event \| None`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `event_properties` | – | `(request, extra) -> dict`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
-| `event_options` | – | `(request, extra) -> dict \| None`, sync or async. Sets [event options](#event-options) on every event. posthog-python 8.0 and later. |
+| `event_options` | – | `(request, extra) -> dict \| None`, sync or async. Sets [event options](#event-options) on every event. |
 | `server_build` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
 | `should_record_input_key` | declared names | Decides which argument names `$mcp_input_keys` records. Other names become one `[redacted]` entry. |
 | `resolve_input_aliases` | – | `(tool_name) -> aliases`. Lists alternative argument names, recorded as `$mcp_input_aliases_used`. |
 | `resolve_original_tool` | – | `(tool_name) -> tool \| None`. Resolves argument ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
 | `logger` | no-op | `(message: str) -> None`. A stdio-safe sink for SDK warnings. |
 
-MCP events report `$lib: "posthog-python-mcp"`. On posthog-python 8.0, the client you pass in keeps `posthog-python` for everything else it sends. On 7.x, `instrument()` relabels every event the client sends, so give MCP analytics its own `Posthog` client if your app also captures other events. To find MCP traffic, filter on `$mcp_*` event names rather than `$lib`.
+MCP events report `$lib: "posthog-python-mcp"`, and the client you pass in keeps `posthog-python` for everything else it sends. To find MCP traffic, filter on `$mcp_*` event names rather than `$lib`.
 
 On raw low-level servers and standalone FastMCP, the SDK advertises the injected `context` and `llm_model` arguments as optional, not required. On standalone FastMCP with `mcp` 1.x, middleware that overrides tool listing or dispatch turns off `llm_model` injection. Model capture from client metadata still works.
 
 ## Event options
 
-On posthog-python 8.0 and later, set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events with `event_options`. The name keeps them apart from `MCPAnalyticsOptions`.
+Set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events with `event_options`. The name keeps them apart from `MCPAnalyticsOptions`.
 
 `MCPAnalyticsOptions(event_options=...)` sets options on every event `instrument()` captures, including `$exception` events. Like `event_properties`, it's a function of `(request, extra)` that returns a dict or `None`, and it can be sync or async:
 

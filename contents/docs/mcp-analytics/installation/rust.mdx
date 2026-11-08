@@ -16,7 +16,7 @@ Try it, and report bugs or send patches to [posthog-rs](https://github.com/PostH
 
 `posthog_rs::mcp` ships inside the [`posthog-rs`](/docs/libraries/rust) crate, behind the `mcp` feature. It instruments servers built on [`rmcp`](https://github.com/modelcontextprotocol/rust-sdk), the official Rust MCP SDK, over stdio and Streamable HTTP. It serves both the `2025-11-25` and `2026-07-28` protocol revisions.
 
-You need Rust 1.88+, `rmcp` 3.7 or later, `posthog-rs` 0.29.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `rmcp` server? See [Custom dispatchers](#custom-dispatchers).
+You need Rust 1.88+, `rmcp` 3.7 or later, `posthog-rs` 1.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `rmcp` server? See [Custom dispatchers](#custom-dispatchers).
 
 <Steps>
 
@@ -106,7 +106,7 @@ You should see a `$mcp_tool_call` row for the tool you called. Events can take a
 
 </Steps>
 
-For a runnable server, see [`examples/mcp_server.rs`](https://github.com/PostHog/posthog-rs/blob/0.29.0/examples/mcp_server.rs). The example reads the token from `POSTHOG_API_KEY`, so pass it your `POSTHOG_PROJECT_TOKEN`:
+For a runnable server, see [`examples/mcp_server.rs`](https://github.com/PostHog/posthog-rs/blob/main/examples/mcp_server.rs). The example reads the token from `POSTHOG_API_KEY`, so pass it your `POSTHOG_PROJECT_TOKEN`:
 
 ```bash
 POSTHOG_API_KEY="$POSTHOG_PROJECT_TOKEN" cargo run --example mcp_server --features mcp
@@ -135,7 +135,7 @@ let server = McpAnalytics::new(posthog.clone(), options).instrument(NotesServer)
 | `model_description(text)` | – | Replaces the `llm_model` argument's description. |
 | `conversation_id(bool)` | `true` | Adds an optional `conversation_id` argument to [group calls](/docs/mcp-analytics/conversation-id) across requests. When the SDK mints a handle, it appends a last `{"conversation_id": ...}` text block to the result. |
 | `identify(callback)` | – | `Fn(&RequestInfo) -> Option<Identity>`. Maps a request to a person and groups. See [Identify the caller](#identify-the-caller). |
-| `event_options(callback)` | – | `Fn(&RequestInfo) -> Option<serde_json::Map<String, Value>>`. Sets [event options](#event-options) on each request's events. posthog-rs 1.0 and later. |
+| `event_options(callback)` | – | `Fn(&RequestInfo) -> Option<serde_json::Map<String, Value>>`. Sets [event options](#event-options) on each request's events. |
 | `missing_capability_tool(name)` | off | Adds the [`get_more_tools` virtual tool](/docs/mcp-analytics/missing-capability) under this name. A blank name uses `get_more_tools`. |
 | `exception_autocapture(bool)` | `true` | Sends a `$exception` event for each failed tool call. For a panic, the `posthog-rs` panic hook sends the `$exception` instead when it's installed, which needs a global client with `capture_panics` on. |
 | `capture_parameters(bool)` | `true` | Captures the tool arguments as `$mcp_parameters`. |
@@ -148,7 +148,7 @@ The SDK logs its warnings through [`tracing`](https://docs.rs/tracing), never to
 
 ## Event options
 
-On posthog-rs 1.0, set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `event_options` and `event_option` keep them apart from `McpOptions`.
+Set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `event_options` and `event_option` keep them apart from `McpOptions`.
 
 - `McpOptionsBuilder::event_options` takes a callback that returns options for each request's events: its tool call, its `$exception`, and its listing or handshake.
 - `ToolCallRequest::event_option(key, value)` sets an option on one call's events in the [manual API](#custom-dispatchers). It wins over the callback.
@@ -273,7 +273,7 @@ async fn run_tool(arguments: Option<&JsonObject>) -> Result<CallToolResult, std:
 
 - `call.arguments()` no longer holds the `context`, `llm_model`, or `conversation_id` arguments, when the SDK knows it added them: the tool is `ToolRegistration::Registered`, or it went through `list_tools` earlier.
 - `ToolRegistration::NotRegistered` sends `$mcp_unknown_tool` instead of a tool call. Use `ToolRegistration::NoRegistry` when you can't tell. Then the SDK removes the analytics arguments only for tools it saw in `list_tools`.
-- `ToolCallRequest` also takes the request `_meta` with `.meta()`, the HTTP request with `.http()`, your server's `Implementation` with `.server()`, the arrival time with `.started_at()`, and, on posthog-rs 1.0, [event options](#event-options) with `.event_option()`.
+- `ToolCallRequest` also takes the request `_meta` with `.meta()`, the HTTP request with `.http()`, your server's `Implementation` with `.server()`, the arrival time with `.started_at()`, and [event options](#event-options) with `.event_option()`.
 - `TransportSession::Id` groups requests that share a session ID. For a one-client connection, create one `Connection::new()` per connection and pass `TransportSession::Connection`. Without a transport session, the call is a stateless request.
 - On a `2026-07-28` round, call `call.input_required(&round)` to send `$mcp_input_required`. The retry that completes the call is a call of its own.
 - `ToolCallError::new` names the failure by the error's type name without its path or generics, such as `UpstreamTimeout`. A `Box`, `Arc`, `Rc`, reference, or `dyn` type gives `Error`. `error_type` sets the `$mcp_error_type` label, such as `validation`, `permission`, or `rate_limited`. The `$exception` keeps the error's own type.
@@ -284,7 +284,7 @@ The manual API never answers `get_more_tools`. Only `instrument` does.
 
 The Rust SDK sends `$mcp_tool_call`, `$exception` for failed calls, `$mcp_tools_list`, `$mcp_initialize`, `$mcp_unknown_tool`, `$mcp_input_required`, and, when you turn it on, `$mcp_missing_capability`. Only `$mcp_tool_call` carries `$mcp_source`.
 
-- **`$lib`:** MCP events report `posthog-rs-mcp`, and the client you pass in keeps its own `$lib` for everything else it sends, on posthog-rs 0.x and 1.0. Find MCP events by their `$mcp_*` event names.
+- **`$lib`:** MCP events report `posthog-rs-mcp`, and the client you pass in keeps its own `$lib` for everything else it sends. Find MCP events by their `$mcp_*` event names.
 - **Errors:** an `McpError` from your tool counts under `McpError`, or `validation` for invalid params. A panic counts under `Panic`, and the SDK re-raises it after capturing. A result with `is_error` set is a failed call with the type `Error`, or `validation` when `rmcp` couldn't parse the arguments.
 - **Unknown tools:** a call that names a tool your server doesn't have, and that your server rejects as not found, sends `$mcp_unknown_tool` instead of `$mcp_tool_call`.
 - **`input_required` rounds:** a tool that ends a `2026-07-28` round by asking the client for input sends `$mcp_input_required` with the request methods, never their contents. On an older revision, `rmcp` answers the round with an error, so it's a failed `$mcp_tool_call` with `$mcp_error_type` set to `input_required`.

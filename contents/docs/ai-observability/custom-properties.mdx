@@ -110,7 +110,7 @@ response = client.responses.create(
 </MultiLanguage>
 
 - In JavaScript, `withTracing()` takes `posthogOptions` too. The LangChain callback handler and the OpenAI Agents, Claude Agent SDK, Google ADK, and Genkit integrations take `options` when you set them up.
-- In Python, every wrapper method that takes `posthog_properties` also takes `posthog_options`, and the Gemini clients take it as a default for every call. LangChain's `CallbackHandler` and `PostHogMiddleware`, and the OpenAI Agents and Claude Agent SDK integrations, take `options` when you set them up.
+- In Python, every wrapper method that takes `posthog_properties` also takes `posthog_options`, and the Gemini clients take it as a default for every call. LangChain's `CallbackHandler` and `PostHogMiddleware`, and the OpenAI Agents and Claude Agent SDK integrations, take `options` when you set them up. The `$exception` event LangChain captures for a failed run gets the same options.
 - These options win over context and global options.
 - An event without a distinct ID always has person processing turned off, whatever its options say.
 
