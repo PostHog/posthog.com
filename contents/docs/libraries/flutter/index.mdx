@@ -685,6 +685,10 @@ On iOS, macOS, Android, Windows and Linux:
 - A `Retry-After` header pauses sending for at most 30 seconds.
 - Retries have no limit. Queued events stay until they're delivered or a full queue evicts the oldest.
 
+### Empty flag variants
+
+A flag whose variant is an empty string now reads as disabled on iOS, macOS, Android, Windows and Linux, as it already did on web. `isFeatureEnabled()` returns `false` with or without `defaultValue`, `getFeatureFlagResult()` returns `enabled: false`, and `onFeatureFlags` listeners and `$active_feature_flags` leave the flag out. `getFeatureFlag()`, the result's `variant` and the event's `$feature/<key>` property still return `""`.
+
 ### Behavior changes on Windows and Linux
 
 These changes are on top of the capture v1 changes above:
@@ -704,7 +708,6 @@ These changes are on top of the capture v1 changes above:
 These changes come from `posthog-ios` 4.0 and need no code changes, but they can affect your data:
 
 - **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. PostHog rejects malformed payloads when you save a flag, so this rarely comes up.
-- **Empty variants:** `isFeatureEnabled()` without `defaultValue` returns `false` for a flag whose variant is an empty string. With `defaultValue`, and in `getFeatureFlagResult()`, the flag is still enabled.
 - **Bootstrapped payloads:** string values in `PostHogBootstrapConfig.featureFlagPayloads`, such as `"123"` or `"true"`, now stay strings instead of being decoded to numbers or booleans. This matches Android.
 - **Lifecycle events:** `Application Installed`, `Application Updated` and `Application Opened` no longer include the legacy `version` and `build` properties. Update any insights, cohorts or filters that use them to `$app_version` and `$app_build`. Android still sends `version` and `build` for now.
 - **Network reachability:** a path that needs user action, such as a VPN waiting for a password, counts as reachable, and queues pause while cellular data is off for the app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
@@ -722,4 +725,4 @@ This change comes from `posthog-android` 4.0 and needs no code changes:
 
 Update cohorts, insights and actions that match `$locale`: a filter on `$locale = de` stops matching `de-CH`. Use a regex such as `^de(-|$)` to match a language. Events already stored keep the old `$locale`.
 
-The new `$app_language` property is the language your app shows. `PosthogObserver` reports the locale your `MaterialApp` resolved every time a route changes. An app that doesn't declare `supportedLocales` reports `en-US`, so use a regex such as `^en(-|$)` to match English. To send another value, call `Posthog().setAppLanguage('de')`.
+The new `$app_language` property is the language your app shows. `PosthogObserver` reports the locale your `MaterialApp` resolved every time a route changes. An app that doesn't declare `supportedLocales` reports `en-US`, so use a regex such as `^en(-|$)` to match English. To send another value, call `Posthog().setAppLanguage('de')`. Web doesn't send `$app_language` yet, because `posthog-js` doesn't support it. To send it there now, call `Posthog().register(r'$app_language', 'de')`.
