@@ -720,6 +720,8 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `autocapture` | `Boolean` | `false` | Enables automatic event capture where the native platform supports it. |
 | `beforeSend` | `List<PostHogBeforeSend>` | `emptyList()` | Modifies or drops events before the SDK queues them. |
 | `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
+| `capturePushNotificationSubscriptions` | `Boolean` | `true` | Registers the FCM token at startup when Firebase Messaging is available (Android only). |
+| `capturePushNotificationOpened` | `Boolean` | `true` | Captures push notification opens automatically (Android only). |
 | `evaluationContexts` | `List<String>?` | `null` | Evaluates only feature flags with one of these evaluation tags, plus untagged flags. `null` evaluates every flag. |
 
 ### Error Tracking options
