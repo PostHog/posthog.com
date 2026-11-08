@@ -141,7 +141,7 @@ function MCPHeader({ onReadAsAgent }: { onReadAsAgent: () => void }): JSX.Elemen
                         {agentLink}
                     </p>
                 </div>
-                <h1 className="col-start-1 row-start-2 !m-0 min-w-0 text-3xl font-bold leading-tight @xl/reader-content:text-4xl">
+                <h1 className="col-start-1 row-start-2 !m-0 min-w-0 text-3xl font-bold leading-tight text-primary @xl/reader-content:text-4xl">
                     PostHog, <span className="whitespace-nowrap bg-blue/10 p-0.5 font-bold text-blue">headless</span>
                 </h1>
                 <p className="col-span-full m-0 text-base @lg/reader-content:col-span-1 @xl/reader-content:text-lg">
@@ -548,7 +548,7 @@ function StoryCard({
                     <CustomerLogo customer={customer} className="h-5 max-w-24" />
                 </div>
             </div>
-            <div className="flex-1 text-sm leading-snug text-secondary">{children}</div>
+            <div className="flex-1 text-sm leading-normal text-secondary">{children}</div>
             <figcaption className="flex justify-end text-xs">
                 <Link to={to} state={{ newWindow: true }} className="group font-semibold">
                     {linkLabel} <IconArrowUpRight className="inline-block size-4 text-muted group-hover:text-primary" />
@@ -569,47 +569,18 @@ function MCPNoUI(): JSX.Element {
     const statCustomer = getCustomer(mcpStat.customer)
 
     return (
-        <section
-            id="no-ui"
-            className="not-prose grid scroll-mt-20 gap-6 @3xl/reader-content:grid-cols-2 @3xl/reader-content:gap-8"
-        >
-            <div className="min-w-0">
-                <SectionHeading
-                    className="!mb-0"
-                    lede={
-                        <>
-                            PostHog has a lot of tools for product engineers. We know, we built them. We also kept
-                            hearing the same thing: the UI is overwhelming, and with agents it's better to pull context
-                            into where you're already building.{' '}
-                            <strong className="text-primary">That's where the MCP comes in.</strong>
-                        </>
-                    }
-                >
+        <section id="no-ui" className="not-prose grid scroll-mt-20 gap-6">
+            <header className="min-w-0">
+                <h2 className="mt-0 text-balance text-2xl font-bold leading-tight text-primary @xl/reader-content:text-3xl">
                     You don't need to use PostHog to <Highlight red>use PostHog</Highlight>
-                </SectionHeading>
-                <div className="max-w-md rounded-md border border-primary bg-primary p-4">
-                    <p className="m-0 font-bold">
-                        "But I <span className="rounded-sm bg-green/10 px-0.5 text-green">like</span> the PostHog UI"
-                    </p>
-                    <p className="mb-0 mt-1 text-sm text-secondary">
-                        Then carry on. Try the{' '}
-                        <Link
-                            to="/roadmap?feature=today-rail-nav"
-                            state={{ newWindow: true }}
-                            className="font-semibold underline"
-                        >
-                            new navigation beta
-                        </Link>{' '}
-                        and tell <SmallTeam slug="surfaces" /> (they'll be thrilled).
-                    </p>
-                </div>
-            </div>
-            <div className="grid min-w-0 grid-cols-1 gap-3 @xl/reader-content:grid-cols-2">
+                </h2>
+            </header>
+            <div className="grid min-w-0 grid-cols-1 gap-3 @xl/reader-content:grid-cols-2 @3xl/reader-content:grid-cols-[3fr_2fr_2fr]">
                 {quotes.map(({ customer, person, text }, index) => (
                     <StoryCard
                         key={customer.slug}
                         customer={customer}
-                        className={index === 0 ? '@xl/reader-content:row-span-2' : ''}
+                        className={index === 0 ? '@xl/reader-content:col-span-2 @3xl/reader-content:col-span-1' : ''}
                         title={
                             <>
                                 <p className="m-0 font-bold leading-tight text-primary">{person.name}</p>
@@ -637,6 +608,17 @@ function MCPNoUI(): JSX.Element {
                     </StoryCard>
                 )}
             </div>
+            <p className="m-0 text-sm text-secondary">
+                <strong className="text-primary">"But I like the PostHog UI."</strong> Then carry on. Try the{' '}
+                <Link
+                    to="/roadmap?feature=today-rail-nav"
+                    state={{ newWindow: true }}
+                    className="font-semibold underline"
+                >
+                    new navigation beta
+                </Link>{' '}
+                and tell <SmallTeam slug="surfaces" /> (they'll be thrilled).
+            </p>
         </section>
     )
 }
