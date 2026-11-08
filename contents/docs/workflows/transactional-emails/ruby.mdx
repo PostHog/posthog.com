@@ -1,0 +1,216 @@
+---
+title: Send transactional emails with Ruby
+sidebar: Docs
+showTitle: true
+---
+
+The [Ruby SDK](/docs/libraries/ruby) sends transactional emails from version 3.30.0. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
+
+<details>
+<summary>Prompt for your coding agent</summary>
+
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+
+```text
+Add PostHog transactional email to this Ruby app with the posthog-ruby gem.
+
+Read https://posthog.com/docs/workflows/transactional-emails/ruby.md first. Follow it over anything you remember about PostHog.
+
+- Reuse the app's PostHog::Client. Add secret_key from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. The client also loads feature flag definitions with this key, so tell me to give the key the Feature flag read scope too.
+- Send only from server code. Never put the secret key in code or config that reaches the browser.
+- Build each idempotency_key from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
+- emails.send returns a SendResult and raises PostHog::EmailError when PostHog doesn't queue the email. Branch on error.code, never on the message.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. In a Sidekiq job, pass max_retries: 0 to send and let Sidekiq retry. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
+- Pass the distinct_id that the app passes to identify(). Leave it out for people without an account, such as invitees.
+- Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
+- Add a test that stubs the send request with WebMock and checks the request.
+
+Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+```
+
+</details>
+
+## Install
+
+Add this to your `Gemfile`:
+
+```ruby
+gem "posthog-ruby"
+```
+
+## Set up the client
+
+Add your project secret API key to the PostHog client that your app already has. The project token keeps capturing events. The secret key sends email, so keep it on your server and never ship it to the browser.
+
+```ruby
+require 'posthog'
+
+$posthog = PostHog::Client.new({
+  api_key: '<ph_project_token>',
+  host: '<ph_client_api_host>',
+  secret_key: ENV.fetch('POSTHOG_PROJECT_SECRET_API_KEY')
+})
+```
+
+When `secret_key` is set, the client also loads flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation) when it starts. Give the key the **Feature flag** read scope too, or the client logs a failed load each time it polls.
+
+Shut the client down when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
+
+## Send an email
+
+```ruby
+def send_password_reset(user, reset_link, reset_request_id)
+  # Raises PostHog::EmailError when PostHog doesn't queue the email. Branch on error.code.
+  result = $posthog.emails.send(
+    to: user.email,
+    template_id: '<template_id>',
+    template_data: { first_name: user.first_name, reset_link: reset_link },
+    distinct_id: user.id.to_s,
+    # Identifies this one email, so a retry never sends it twice
+    idempotency_key: "password-reset-#{reset_request_id}"
+  )
+  result.id
+end
+```
+
+`send` returns a `SendResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `PostHog::EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument raises `ArgumentError` before any request.
+
+A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
+
+### Timeouts and retries
+
+The client retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or longer if the server's `Retry-After` asks for it. When `Retry-After` asks for more than 30 seconds, the client raises the error at once. Each request waits up to 15 seconds to connect, and up to 15 seconds for each read or write.
+
+To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client, or `max_retries` on one send.
+
+## Send from a background job
+
+Send from a job queue when the email shouldn't slow down the request, such as an email address check after a signup. Let the queue own the retries:
+
+- Pass `max_retries: 0` to `send`, so that the client doesn't retry inside the job.
+- Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
+- Retry only the errors that a later attempt can fix. Every other code fails the same way again.
+
+This example uses [Sidekiq](https://github.com/sidekiq/sidekiq) 6.5.2 or later. `sidekiq_retry_in` returns `nil` to retry with Sidekiq's usual backoff, or `:kill` to move the job to the Dead set with no more retries.
+
+```ruby
+class PasswordResetEmailJob
+  include Sidekiq::Job
+  # Five retries finish within minutes, well inside the 24 hours that PostHog keeps an idempotency key
+  sidekiq_options retry: 5
+
+  # A later attempt can fix these. Any other code fails the same way again.
+  RETRYABLE_CODES = %w[network_error idempotency_key_in_flight throttled delivery_unavailable].freeze
+
+  sidekiq_retry_in do |_count, error|
+    retryable = error.is_a?(PostHog::EmailError) && RETRYABLE_CODES.include?(error.code)
+    retryable ? nil : :kill
+  end
+
+  def perform(user_id, email, first_name, reset_link, reset_request_id)
+    $posthog.emails.send(
+      to: email,
+      template_id: '<template_id>',
+      template_data: { first_name: first_name, reset_link: reset_link },
+      distinct_id: user_id,
+      # The same key on every attempt, so a retried job never sends the email twice
+      idempotency_key: "password-reset-#{reset_request_id}",
+      # Sidekiq retries the job, so the client doesn't retry on its own
+      max_retries: 0
+    )
+  end
+end
+```
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
+
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+
+## Send content from your code
+
+`send` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Name the email with `template_key`, and pass `subject` with `html`, `text`, or both. PostHog sends the content as you wrote it, so render it first with your template engine, such as ERB or Action Mailer views.
+
+```ruby
+def send_password_reset(user, html, reset_request_id)
+  result = $posthog.emails.send(
+    to: user.email,
+    template_key: 'password-reset',
+    subject: 'Reset your password',
+    html: html,
+    from: 'Hedgebox <security@example.com>',
+    distinct_id: user.id.to_s,
+    idempotency_key: "password-reset-#{reset_request_id}"
+  )
+  result.id
+end
+```
+
+- **`template_key`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`text`** - If you leave it out, PostHog makes it from `html`.
+- **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
+- **`capture_engagement`** - PostHog captures the email's engagement events unless you pass `capture_engagement: false`.
+
+A send has `template_id` or `template_key`, not both, or it raises `ArgumentError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+## Check an email's status
+
+```ruby
+def email_bounced(message_id)
+  status = $posthog.emails.get(message_id)
+  status.status == 'bounced'
+rescue PostHog::EmailError => e
+  # The first status can take a few seconds to arrive. Try again later.
+  return nil if e.code == 'not_found'
+
+  raise
+end
+```
+
+`get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means. The helper returns `nil` while the status isn't there yet, so check for `nil` before you read the result as "not bounced".
+
+A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
+
+## Test without sending email
+
+The client sends email with Ruby's `Net::HTTP`, so [WebMock](https://github.com/bblimke/webmock) can stub the request and show exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
+
+The client also loads flag definitions when it starts, so stub that request too.
+
+```ruby
+require 'posthog'
+require 'webmock/rspec'
+
+RSpec.describe 'password reset email' do
+  let(:send_url) { 'https://us.posthog.com/api/projects/@current/messaging/send/email/' }
+  let(:posthog) { PostHog::Client.new(api_key: 'phc_test', secret_key: 'phs_test', test_mode: true) }
+
+  before do
+    stub_request(:get, %r{/flags/definitions}).to_return(status: 200, body: '{"flags":[]}')
+    stub_request(:post, send_url).to_return(status: 202, body: '{"message_id":"msg_1","replayed":false}')
+  end
+
+  after { posthog.shutdown }
+
+  it 'sends the email once, with its idempotency key' do
+    result = posthog.emails.send(
+      to: 'jane@example.com',
+      template_id: '0190f6d2-7c1e-7b3a-9f5e-1c2d3e4f5a6b',
+      idempotency_key: 'password-reset-1'
+    )
+
+    expect(result.id).to eq('msg_1')
+    expect(a_request(:post, send_url).with(headers: { 'Idempotency-Key' => 'password-reset-1' }))
+      .to have_been_made.once
+  end
+end
+```
+
+## Use a proxy or self-hosted PostHog
+
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. The client doesn't send email requests to a host that might be a proxy.
+
+Flag definitions for local evaluation still load from `host` with the secret key. If that host is a proxy that must not see the key, leave `secret_key` off that client. Send email from a second client whose `host` is your PostHog host.

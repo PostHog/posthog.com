@@ -182,6 +182,42 @@ Row filters validate values against the column's data type. Columns with unsuppo
 - If a filter references a column that no longer exists or has a type mismatch, the sync fails with an error message. Fix or remove the filter to resume syncing.
 - Sampling and row count estimates remain unfiltered.
 
+## Masking sensitive columns
+
+Column masking replaces sensitive values (like passwords, emails, or card numbers) with a deterministic one-way hash during sync. Each masked value becomes a 64-character hex string. Equal values produce the same hash within a project, so joins and distinct counts still work, but the original value can't be recovered from the hash.
+
+Masking is available for SQL sources (Postgres, MySQL, MSSQL, Snowflake, BigQuery, and Redshift) and other sources that support column selection. It is not available for:
+
+- **Direct query sources** – nothing syncs, so a mask would protect nothing.
+- **Managed-schema sources** (Stripe, Paddle, Zendesk) – their tables use fixed column types.
+- **CDC tables** – masking is supported on CDC tables via a new snapshot, not inline on the change stream.
+
+### Configuring column masking
+
+To mask columns during source setup:
+
+1. In the table picker, click **Columns** next to any table.
+2. Click **Mask** on the columns you want to mask.
+3. Masked columns show **Masked** as text. Click it to unmask.
+
+To mask columns after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your source.
+2. Click **Configure** next to any schema.
+3. Click **Mask** or **Masked** to toggle masking on individual columns.
+4. Click **Save**.
+
+You can also set `masked_columns` through the API when creating a source or updating a schema.
+
+> **Note:** Changing masked columns on a synced table triggers a full resync (CDC tables take a new snapshot). A confirmation dialog appears before the change is saved.
+
+### Limitations
+
+- **Primary key, incremental-field, and partition columns** can't be masked – a hashed merge key would break deduplication, and a hashed cursor has no order.
+- Masked columns lose their min/max statistics. Only row counts are preserved.
+- Rows already synced keep their original values until the rebuild completes.
+- A synced webhook table can't change its masked columns, because its data can't be fetched again from the source.
+
 ## Syncing
 
 Once you add a source, you can see its status, sync frequency, and last successful run in the [sources page](https://app.posthog.com/data-management/sources). You can also reload or delete sources here.

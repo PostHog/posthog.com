@@ -80,6 +80,7 @@ Reference these when working on specific areas:
 - [Data hooks](agents/data.md) – Product, customer, navigation data
 - [Window system](agents/windows.md) – Desktop OS architecture, window management
 - [Browser screenshots](agents/browser-screenshots.md) – Capturing the before/after grid a visual PR needs, GIFs for motion, and attaching them with `gh pr-assets`
+- [Running experiments](contents/handbook/engineering/posthog-com/running-experiments.md) – Read before planning, changing, or reviewing a website A/B test. Includes the `website-experiments` skill.
 
 ## Boundaries
 
