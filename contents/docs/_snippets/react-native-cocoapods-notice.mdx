@@ -2,6 +2,6 @@
 >
 > `@posthog/react-native-plugin` 3.0 and later resolves `posthog-ios` through SPM by default, including on the CocoaPods path, so upgrading the plugin is enough. See [Upgrading to `@posthog/react-native-plugin` 3.0](/docs/libraries/react-native#upgrading-to-posthogreact-native-plugin-30).
 >
-> On plugin 2.x, CocoaPods only resolves `posthog-ios` versions already published there. To keep receiving iOS SDK updates on 2.x, use the [hybrid CocoaPods and SPM setup](/docs/libraries/react-native#cocoapods-with-posthog-ios-through-swift-package-manager) or [full SPM integration](/docs/libraries/react-native#full-swift-package-manager).
+> Plugin 2.x pins `posthog-ios` 3.92.x on every iOS dependency path, including the hybrid and full SPM setups, so switching paths doesn't bring newer iOS SDK versions. To get `posthog-ios` 4.0 and later, upgrade to plugin 3.0.
 >
 > This change doesn't affect `@posthog/react-native-plugin` releases on npm or Android.

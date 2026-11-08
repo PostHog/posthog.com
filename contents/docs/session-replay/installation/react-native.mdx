@@ -37,4 +37,4 @@ See [iOS dependency paths for the native React Native plugin](/docs/libraries/re
 
 ## Troubleshooting
 
-- If session replay looks janky or drops frames on high-refresh-rate (120Hz ProMotion) iPhones, turn on the experimental `sessionReplayConfig.screenshotModeBackgroundCapture` option (iOS only, requires `posthog-react-native` 4.45.0 or higher and `@posthog/react-native-plugin` 2.x) to move screenshot capture off the main thread. This can trigger Xcode's Main Thread Checker warnings, so disable it in your scheme's Run diagnostics if that happens.
+- If session replay looks janky or drops frames on high-refresh-rate (120Hz ProMotion) iPhones, turn on the experimental `sessionReplayConfig.screenshotModeBackgroundCapture` option (iOS only, requires `posthog-react-native` 4.45.0 or higher and `@posthog/react-native-plugin` 2.x; plugin 3.0 and later ignores it) to move screenshot capture off the main thread. This can trigger Xcode's Main Thread Checker warnings, so disable it in your scheme's Run diagnostics if that happens.
