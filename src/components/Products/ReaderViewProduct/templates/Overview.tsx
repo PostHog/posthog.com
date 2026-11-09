@@ -15,7 +15,7 @@ const Overview = ({ id, productData }: SectionComponentProps) => {
     const hogSizeClasses = hog?.className || 'h-32 @3xl/reader-content:h-44 @6xl/reader-content:h-52'
 
     return (
-        <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 max-w-7xl w-full">
+        <section id={id} className="scroll-mt-20 not-prose flex flex-col gap-12 w-full">
             {/* <DebugContainerQuery name="reader-content" /> */}
             <header>
                 {screenshots?.home?.src && (
