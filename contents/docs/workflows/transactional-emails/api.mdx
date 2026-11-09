@@ -168,7 +168,7 @@ Each SDK page shows how to set up the client and handle errors.
 
 The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
 
-When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors) and the [checks for content from your code](#checks-for-content-from-your-code).
+When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files).
 
 ### `delivery_unavailable`
 
@@ -445,13 +445,13 @@ For a complete script, see the [receipt with a PDF](/docs/workflows/transactiona
 
 ### Checks for files
 
-These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. PostHog sends nothing when a check fails. The body of each error has a `why` and a `fix`, which tell you the cause and what to do.
+These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. After a `400` or a `429`, PostHog sends nothing. The body of these errors has `why` and `fix` in addition to `code` and `attr`, which tell you the cause and what to do.
 
 | Status | Code | Route | Cause | What to do |
 | --- | --- | --- | --- | --- |
 | `400` | `field_not_accepted` | Both | PostHog can't send files for your project yet. | Send the email without files. |
 | `400` | `too_many_attachments` | Both | The email has more than 10 files. | Send 10 files at most. Link to other files from the email body. |
-| `400` | `message_too_large` | Both | The email is over 40 MB after Base64 encoding. On the upload route, `attr` names the size of the largest file. | Send fewer or smaller files, or link to large files from the email body. |
+| `400` | `message_too_large` | Both | The email is over 40 MB after Base64 encoding. On the upload route, `attr` names the largest file, such as `files__1__size`. | Send fewer or smaller files, or link to large files from the email body. |
 | `400` | `attachment_not_uploaded` | Send | Your project has no uploaded file with this SHA-256. The upload didn't finish, the file expired, or a different project uploaded it. `attr` names the file, such as `attachments__0__sha256`. | Ask where to upload again, upload the file, and send the email again. |
 | `400` | `blocked_file_type` | Send | Mailbox providers block this file type, such as `.exe`. | Send a different file type, or link to the file from the email body. |
 | `400` | `unsafe_filename` | Send | `filename` has a path or a line break. | Send only the file name, such as `invoice.pdf`. |
@@ -459,7 +459,7 @@ These checks apply to the upload route and to sends with `attachments`, in addit
 | `400` | `unsafe_content_id` | Send | `content_id` has `<`, `>`, or a line break. | Send only the ID, such as `logo`. |
 | `400` | `content_too_large` | Both | The request body is over 20 MB. | Make the request smaller. Files go to the upload URL, never in the request body. |
 | `429` | `upload_quota_exceeded` | Upload | Your project uploaded all the file bytes that it can upload today. The day starts at midnight UTC. | Send files that PostHog already has, because they don't count. Or upload after midnight UTC. |
-| `503` | `delivery_unavailable` | Both | PostHog couldn't get to its file storage. | Send the same request again after a short wait. For a send, use the same `Idempotency-Key`. |
+| `503` | `delivery_unavailable` | Both | PostHog couldn't get to its file storage. On a send, it can also mean that PostHog couldn't confirm that it queued the email, so PostHog can still send it. See [`delivery_unavailable`](#delivery_unavailable). | Send the same request again after a short wait. For a send, use the same `Idempotency-Key`, so that the email doesn't go out twice. |
 
 Other problems with `attachments` or `files`, such as a hash that isn't 64 lowercase hex characters, return the code `invalid_request`, and `attr` names the field.
 

@@ -176,10 +176,11 @@ SHA256=$(shasum -a 256 "$FILE" | cut -d " " -f 1)
 SIZE=$(wc -c < "$FILE" | tr -d " ")
 
 # 1. Ask where to upload the file
-SLOT=$(curl -sS --fail-with-body -X POST "https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/" \
+ANSWER=$(curl -sS --fail-with-body -X POST "https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
-  -d "{\"files\": [{\"sha256\": \"$SHA256\", \"size\": $SIZE}]}" | jq ".files[0]")
+  -d "{\"files\": [{\"sha256\": \"$SHA256\", \"size\": $SIZE}]}") || { echo "$ANSWER" >&2; exit 1; }
+SLOT=$(jq ".files[0]" <<< "$ANSWER")
 
 # 2. Upload the file, if PostHog doesn't have it yet
 if [ "$(jq -r .status <<< "$SLOT")" = "upload" ]; then
@@ -255,7 +256,7 @@ def send_receipt(order, html: str, invoice_path: str) -> None:
 
 </MultiLanguage>
 
-The SDKs hash and upload the file for you, and upload nothing when PostHog already has it. With the API, the script does these steps itself, and needs [`jq`](https://jqlang.org). See [send files](/docs/workflows/transactional-emails/api#send-files) for each step, and your SDK's page for its attachment fields.
+The SDKs hash and upload the file for you, and upload nothing when PostHog already has it. With the API, the script does these steps itself. It needs `bash`, `curl`, `shasum`, and [`jq`](https://jqlang.org). On Linux without `shasum`, use `sha256sum "$FILE"` in its place. See [send files](/docs/workflows/transactional-emails/api#send-files) for each step, and your SDK's page for its attachment fields.
 
 ## Measure whether an email works
 
