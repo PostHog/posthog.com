@@ -12,7 +12,6 @@ import {
     IconMessage,
     IconPeople,
     IconPieChart,
-    IconPlug,
     IconRewindPlay,
     IconSparkles,
     IconSupport,
@@ -20,6 +19,7 @@ import {
     IconTrends,
     IconWarning,
 } from '@posthog/icons'
+import { IconMCP } from 'components/OSIcons'
 import { getTool } from '../../data/tools'
 
 /**
@@ -38,13 +38,14 @@ export const taskbarProducts = [
     { ...getTool('logs'), Icon: IconActivity, color: 'red' },
     { ...getTool('traces'), Icon: IconGanttChart, color: 'blue', docsSlug: 'distributed-tracing' },
     { ...getTool('data_warehouse'), Icon: IconDatabase, color: 'purple', docsSlug: 'data-warehouse' },
+    { ...getTool('cdp'), handle: 'data_pipelines', name: 'Data Pipelines', Icon: IconDecisionTree, color: 'blue' },
     { ...getTool('endpoints'), Icon: IconEndpoints, color: 'teal' },
     { ...getTool('workflows_emails'), Icon: IconDecisionTree, color: 'teal' },
     { ...getTool('surveys'), Icon: IconMessage, color: 'salmon' },
     { ...getTool('support'), Icon: IconSupport, color: 'blue' },
     { ...getTool('heatmaps'), Icon: IconCursorClick, color: 'green' },
     { ...getTool('group_analytics'), Icon: IconPeople, color: 'teal' },
-    { ...getTool('mcp_analytics'), Icon: IconPlug, color: 'blue' },
+    { ...getTool('mcp_analytics'), Icon: IconMCP, color: 'purple' },
     { ...getTool('posthog_ai'), Icon: IconSparkles, color: 'blue' },
     { ...getTool('metrics'), Icon: IconTrends, color: 'green' },
 ]

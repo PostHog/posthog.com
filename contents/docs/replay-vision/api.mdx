@@ -72,7 +72,7 @@ Scans usually take a few minutes. A session that hits a credit or concurrency li
 
 ## Get notified when a request finishes
 
-Instead of polling, send a webhook or Slack message when a request completes. PostHog emits a `$replay_vision_request_completed` event for each finished request, and [Data pipelines](/docs/cdp) can send it on. Create the destination through the [Hog functions API](/docs/api/hog-functions) as an `internal_destination` that filters on that event. For example, a webhook:
+Instead of polling, send a webhook or Slack message when a request completes. PostHog emits a `$replay_vision_request_completed` event for each finished request, and [Data pipelines](/docs/data-pipelines) can send it on. Create the destination through the [Hog functions API](/docs/api/hog-functions) as an `internal_destination` that filters on that event. For example, a webhook:
 
 ```bash
 curl -X POST "https://us.posthog.com/api/projects/:project_id/hog_functions/" \

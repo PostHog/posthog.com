@@ -66,6 +66,10 @@ When you add columns to a schema using incremental, append, or CDC sync, PostHog
 
 </CalloutBox>
 
+### Masking sensitive columns
+
+You can mask columns to replace their values with a deterministic one-way hash during sync instead of syncing them as plaintext. See [Masking sensitive columns](/docs/data-pipelines/sources#masking-sensitive-columns) for details.
+
 ## Filtering rows
 
 You can filter which rows sync from each table by adding row filter predicates. Each filter is a `{column, operator, value}` condition that is ANDed onto the source query's `WHERE` clause, so only matching rows sync. This reduces sync time and storage costs by scoping large tables down to the data you need.
@@ -140,7 +144,6 @@ PostHog stops syncing on these errors, because retrying fails the same way until
 - For CDC sources: "The TLS certificate check failed. Either the source database's certificate did not pass verification, or the database rejected the client certificate. Check the TLS settings of the source, then re-enable change data capture."
 
 After you fix the certificate or the source settings, re-enable the sync.
-
 
 <InboundIpAddresses />
 
