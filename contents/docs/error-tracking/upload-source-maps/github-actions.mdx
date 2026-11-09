@@ -62,7 +62,7 @@ This step:
 | --- | --- | --- |
 | `directory` | Yes | Directory containing built assets (for example, `dist`) |
 | `project-id` | Yes | PostHog project ID. Get it from your [project settings](https://app.posthog.com/settings/project#variables) |
-| `api-key` | Yes | Personal API key with error tracking write and organization read scopes. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
+| `api-key` | Yes | Personal API key with the `error tracking write` scope. You can limit the key to one project. Get it from your [personal API key settings](https://app.posthog.com/settings/user-api-keys#variables) |
 | `release-name` | No | Release name. Defaults to the Git repository name when available |
 | `release-version` | No | Release version (for example, commit SHA). Defaults to current commit SHA when available |
 | `host` | No | PostHog host URL. Defaults to `https://us.posthog.com`. For EU cloud, set it to `https://eu.posthog.com` |
