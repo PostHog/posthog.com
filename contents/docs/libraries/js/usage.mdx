@@ -430,7 +430,7 @@ The defaults for `maskAllInputs`, `maskTextSelector` and `blockSelector` will ch
 
 ## Error tracking
 
-You can enable [exception autocapture](/docs/error-tracking/installation) in the **Autocapture & heatmaps** section of [your project settings](https://us.posthog.com/settings/project-autocapture#exception-autocapture). When enabled, this automatically captures `$exception` events when errors are thrown.
+You can enable [exception autocapture](/docs/error-tracking/installation) in the **Error tracking** section of [your project settings](https://us.posthog.com/settings/project-error-tracking#error-tracking-exception-autocapture). When enabled, this automatically captures `$exception` events when errors are thrown.
 
 It is also possible to manually capture exceptions using the `captureException` method:
 
@@ -728,7 +728,7 @@ posthog.init('<ph_project_token>', {
 
 ### Removing already ingested events
 
-Deleting already ingested events is complicated, but you can add user agents to the [internal and test accounts filter](https://us.posthog.com/settings/project-product-analytics#internal-user-filtering) in your project settings to filter them from your analytics.
+Deleting already ingested events is complicated, but you can add user agents to the [internal and test accounts filter](https://us.posthog.com/settings/project-customization#internal-user-filtering) in your project settings to filter them from your analytics.
 
 ## Debug mode
 
