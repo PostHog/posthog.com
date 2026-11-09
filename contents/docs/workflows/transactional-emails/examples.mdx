@@ -155,6 +155,12 @@ Without a distinct ID, PostHog records the email on a person whose distinct ID i
 
 ## Receipt with a PDF
 
+<CalloutBox icon="IconWarning" title="Attachments are temporarily unavailable" type="warning">
+
+This example gets a `400` error while attachments are unavailable. To send the receipt now, leave out `attachments`. The `cc` copy still works.
+
+</CalloutBox>
+
 Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional-emails#choose-where-the-emails-content-lives), so your code renders the email. The SDKs don't send copies and attachments yet, so this example uses the API.
 
 | Setting | Value |
