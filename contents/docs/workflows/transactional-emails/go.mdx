@@ -190,6 +190,7 @@ func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email
 - **`Text`** - If you leave it out, PostHog makes it from `HTML`.
 - **`From`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `ReplyTo` takes a list of addresses.
 - **`CaptureEngagement`** - PostHog captures the email's engagement events unless you set it to `posthog.Ptr(false)`.
+- **`TrackOpensAndClicks`** - PostHog tracks the email's opens and clicks unless you set `TrackOpensAndClicks` to `posthog.Ptr(false)`, which sends the email without tracking. PostHog then can't count the email's opens and clicks. It works separately from `CaptureEngagement`.
 
 A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
