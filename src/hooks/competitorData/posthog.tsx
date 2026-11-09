@@ -637,8 +637,8 @@ export const posthog = {
                 human_annotation: true,
                 // Beta per /docs/ai-observability/collect-user-feedback.
                 user_feedback: 'Beta',
-                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR (open beta).
-                agent_reports: 'Beta',
+                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR.
+                agent_reports: true,
                 ai_gateway_proxy: false,
             },
             tracing: {
