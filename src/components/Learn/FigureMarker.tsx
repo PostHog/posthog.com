@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
-import Tooltip from 'components/RadixUI/Tooltip'
+import Tooltip from '../RadixUI/Tooltip'
 
 import usePostHog from '../../hooks/usePostHog'
 
