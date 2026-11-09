@@ -116,7 +116,8 @@ export const freeTierProducts: FreeTierProduct[] = [
     },
     {
         name: 'Inbox',
-        allocation: '3 PRs',
+        allocation: '1,000 credits, first month only',
+        note: 'Worth $10, for up to 5 reports. One time, not monthly: there is no recurring free tier.',
         icon: Icons.IconNotification,
         iconColor: 'text-blue',
     },
