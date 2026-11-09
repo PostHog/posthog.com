@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Saved views let you save column configurations, filters, and sort order for the [persons](/docs/data/persons) and [groups](/docs/product-analytics/group-analytics) lists. This helps you quickly switch between different ways of viewing your customer data without reconfiguring the table each time.
+Saved views let you save column configurations, filters, and sort order for the [persons](/docs/data/persons) and [groups](/docs/product-analytics/group-analytics) lists, as well as the account **Notes** tabs in [Customer Analytics](/docs/customer-analytics/start-here). This helps you quickly switch between different ways of viewing your data without reconfiguring the table each time.
 
 For example, you might create a "High value customers" view that shows lifetime value, last active date, and subscription status columns with a filter for revenue above a certain threshold.
 
@@ -68,3 +68,33 @@ Click the settings icon (gear) next to a view name in the dropdown to access opt
   alt="View settings menu"
   classes="rounded"
 />
+
+## Saved views for account notes
+
+Saved views also work on the **Notes** tab in Customer Analytics. You can use them on both the per-account Notes tab (inside an individual account) and the team-wide Notes tab.
+
+The same saved views appear on every account's Notes tab and on the team-wide Notes tab. Views can be private or shared with project members, and creating, switching, updating, renaming, and deleting work the same way as for persons and groups.
+
+### What's saved in a Notes view
+
+Notes views store different fields than persons or groups views:
+
+- **Search term** - Any text search applied to note titles and content
+- **Tags** - Filter to notes carrying specific tags
+- **Created by** - Filter to notes written by specific team members
+- **Sort order** - How the list is sorted (by title, created date, last modified, or author)
+
+On the team-wide Notes tab, views also store:
+
+- **Account** - Filter to notes on a specific account
+- **Assigned to** - Filter to notes on accounts assigned to specific team members
+
+When you apply a team-wide view on a per-account Notes tab, the account and assignee parts don't apply there. The view summary notes which filters are team-tab-only.
+
+## Tagging account notes
+
+Account notes can be tagged for organization. Tags appear in a **Tags** column and can be edited inline directly from the Notes table.
+
+To filter notes by tag, use the tag filter next to the search box. Notes use the same tag names as accounts, so tags you create on notes are available on accounts and vice versa.
+
+You can also pass tags when creating or updating a note through the API or MCP. The `tags` field accepts an array of tag name strings and replaces the full tag set on update.
