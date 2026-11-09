@@ -48,6 +48,8 @@ You'll be asked for:
 
 **Users** requires the _Administer System_ permission. It's off by default.
 
+**Hotspots** use an API that SonarQube Server 2026.4 deprecated in favor of security issues. On those versions, security findings also appear in the **issues** table.
+
 ## Configuration
 
 <SourceParameters />
@@ -63,5 +65,6 @@ You'll be asked for:
 - If the **users** table fails to sync, the token's user needs the _Administer System_ permission. Either grant it or leave the users table unselected.
 - If you see fewer issues than expected on a large project, note that SonarQube caps issue search at 10,000 results per query window. PostHog automatically pages past this by re-windowing on the issue creation date, so all issues are synced. If you still see gaps, check that the token can browse the affected projects.
 - If the **project_pull_requests** table is empty, this table only has data on Developer Edition and above. Community Build doesn't analyze pull requests.
+- If you see fewer hotspots than expected on a large project, note that SonarQube caps hotspot search at 10,000 results per project. PostHog can't page past this limit, so projects with more hotspots have incomplete hotspot data.
 
 <TroubleshootingLink />
