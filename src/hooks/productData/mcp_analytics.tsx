@@ -8,14 +8,14 @@ import {
     IconInfo,
     IconMagic,
     IconMessage,
-    IconPlug,
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
 import { HedgehogPuzzle } from '@posthog/brand/hoggies'
 import Link from 'components/Link'
+import { IconMCP } from 'components/OSIcons'
 import { features } from './mcp_analytics/features'
-import { applications, topFeatures } from './mcp_analytics/slides'
+import { applications, keyFeatures } from './mcp_analytics/slides'
 import MCPAnalyticsInstall from './mcp_analytics/install'
 import { LeaderboardSection } from './mcp_analytics/sections'
 import { getTool } from '../../data/tools'
@@ -27,13 +27,13 @@ import { getTool } from '../../data/tools'
 
 export const mcpAnalytics = {
     ...getTool('mcp_analytics'),
-    Icon: IconPlug,
+    Icon: IconMCP,
     type: 'mcp_analytics',
     teamSlug: 'mcp-analytics',
     // The `mcp-analytics` tag does not exist in the forum yet. Until someone creates it, Questions? shows
     // no recent discussions and the forum link opens an empty feed.
     forumTag: 'mcp-analytics',
-    color: 'blue',
+    color: 'purple',
     colorSecondary: 'sky-blue',
     wizardSupport: true,
     wizardCommand: 'mcp-analytics',
@@ -71,11 +71,11 @@ export const mcpAnalytics = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
+            slug: 'key-features',
             name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures, title: 'Key features' },
+            props: { slides: keyFeatures },
         },
         { slug: 'mcp-leaderboard', name: 'MCP leaderboard', hideFromNav: true, component: LeaderboardSection },
         { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },

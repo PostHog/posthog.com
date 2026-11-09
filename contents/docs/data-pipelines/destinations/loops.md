@@ -29,7 +29,7 @@ You'll also need access to the relevant Loops account. See the [Loops PostHog in
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/loops/template_loops.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/loops/template_loops.py) is available on GitHub.
 
 <PostHogMaintained />
 

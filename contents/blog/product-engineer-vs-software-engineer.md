@@ -7,6 +7,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/product-engineer.jpg
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Explainers

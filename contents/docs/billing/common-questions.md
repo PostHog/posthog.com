@@ -34,6 +34,49 @@ Yes, you can set a billing limit for most of PostHog's products in your organiza
 
 Yes, PostHog drops data after you go over your billing limit. To capture more during the current billing period, you need to raise your billing limits. For future billing periods, you can tune your PostHog implementation to limit the number of [events](/tutorials/fewer-unwanted-events) or [session replays](/tutorials/limit-session-recordings) you capture.
 
+## What does each product bill for?
+
+PostHog bills only what it ingests, which means data it **receives** and **stores**. 
+
+Events that a [transformation](/docs/data-pipelines/transformations/drop-events) drops, or that arrive after you reach a [billing limit](/docs/billing/limits-alerts), are not stored, so they are free. Events that another product bills, like `$exception`, don't also bill as Product Analytics events.
+
+| [Product Analytics](/product-analytics/pricing), billed per event | Billed |
+| --- | --- |
+| Custom events | Yes |
+| `$pageview`, `$pageleave`, `$autocapture` | Yes |
+| `$identify`, `$create_alias`, `$groupidentify` | Yes |
+
+| [Session Replay](/session-replay/pricing), billed per recording | Billed |
+| --- | --- |
+| Recordings | Yes |
+| Heatmap data | No |
+
+| [Feature Flags](/feature-flags/pricing), billed per request | Billed |
+| --- | --- |
+| `/flags` requests | Yes |
+| Local evaluation polls that return new definitions, 10 requests each | Yes |
+| Local evaluation polls that return `304` | No |
+| `$feature_flag_called` | No |
+
+| [Experiments](/experiments/pricing), billed through Feature Flags | Billed |
+| --- | --- |
+| `/flags` requests | Yes |
+| `$experiment_exposure` | No |
+
+| [Error Tracking](/error-tracking/pricing), billed per exception | Billed |
+| --- | --- |
+| `$exception` | Yes |
+
+| [LLM Analytics](/ai-observability/pricing), billed per event | Billed |
+| --- | --- |
+| `$ai_generation`, `$ai_trace`, `$ai_span`, `$ai_embedding` | Yes |
+| Every other `$ai_` event | Yes |
+
+| [Surveys](/surveys/pricing), billed per response | Billed |
+| --- | --- |
+| `survey sent` | Yes |
+| `survey shown`, `survey dismissed` | No |
+
 ## I'm an early-stage startup or non-profit, can I get a discount?
 
 Yes, early-stage startups can get $50,000 in credits, merch, and exclusive events. Find out more and apply on our [startup program page](/startups).

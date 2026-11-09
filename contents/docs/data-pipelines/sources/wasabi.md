@@ -13,9 +13,9 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Wasabi connector syncs sub-account, usage, and billing data from the [Wasabi Account Control API (WACA)](https://docs.wasabi.com/apidocs/account-control-api) into PostHog – sub-accounts, daily storage and data-transfer utilizations (account-level and per-bucket), and sub-account invoices. Use it to track storage spend and usage per sub-account or bucket alongside your product and revenue data.
+The Wasabi connector syncs sub-account, usage, and billing data from the [Wasabi Account Control API (WACA)](https://docs.wasabi.com/apidocs/account-control-api) into PostHog – sub-accounts, daily storage and data-transfer utilizations (account-level and per-bucket), sub-account invoices with line-item detail (including per-region breakdowns), and AiR job history. Use it to track storage spend and usage per sub-account or bucket alongside your product and revenue data.
 
-This connector talks to the Account Control API for Wasabi Control Accounts (partners managing sub-accounts). It does not read objects from your Wasabi buckets – to import files stored in Wasabi, use the S3-compatible bucket options on our [S3 source](/docs/data-pipelines/sources/s3) instead.
+This connector talks to the Account Control API for Wasabi Control Accounts (partners managing sub-accounts). It does not read objects from your Wasabi buckets – PostHog can't import files from Wasabi buckets. To import the files, copy them to a bucket that PostHog supports, such as [Amazon S3](/docs/data-pipelines/sources/s3) or [Cloudflare R2](/docs/data-pipelines/sources/r2).
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ When linking Wasabi, you'll need an **API key**: generate one from your Wasabi C
 
 <SyncModes />
 
-The `utilizations` and `bucket_utilizations` tables support incremental syncs on `StartTime` – Wasabi computes utilization metrics daily, so each incremental run only fetches days at or after the last synced day. The `accounts` and `sub_account_invoices` tables are full refresh.
+The `utilizations` and `bucket_utilizations` tables support incremental syncs on `StartTime` – Wasabi computes utilization metrics daily, so each incremental run only fetches days at or after the last synced day. The `air_jobs` table supports incremental syncs on `FinishedAt`. The `accounts`, `sub_account_invoices`, `sub_account_invoice_items`, and `sub_account_invoice_regional_items` tables are full refresh.
 
 ## Configuration
 

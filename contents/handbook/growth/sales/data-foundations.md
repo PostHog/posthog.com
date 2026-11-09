@@ -4,8 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
-[Full deck for sales training](https://docs.google.com/presentation/d/19jVn8Zth5XCYT48c6Yxxe1d1s1h-n9_C/edit?usp=sharing&ouid=111249669219449939298&rtpof=true&sd=true)
-[Recorded sales training session](https://drive.google.com/file/d/1MsaeBU94nEBUQz-wid297RdU-o6tyznD/view?usp=sharing)
+<PrivateLink url="https://docs.google.com/presentation/d/19jVn8Zth5XCYT48c6Yxxe1d1s1h-n9_C/edit?usp=sharing&amp;ouid=111249669219449939298&amp;rtpof=true&amp;sd=true">Full deck for sales training</PrivateLink>
+<PrivateLink url="https://drive.google.com/file/d/1MsaeBU94nEBUQz-wid297RdU-o6tyznD/view?usp=sharing">Recorded sales training session</PrivateLink>
 
 ## Why do companies need data tools?
 

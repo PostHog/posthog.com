@@ -72,7 +72,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     alerts: {
         feature: 'Alerts',
-        owner: ['product-analytics'],
+        owner: ['apm'],
     },
     annotations: {
         feature: 'Annotations',
@@ -314,6 +314,11 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     'mcp-store': {
         feature: 'MCP store',
         owner: ['context-and-mcp'],
+        label: false,
+    },
+    'mobile-app': {
+        feature: 'Mobile app',
+        owner: ['mobile-app'],
         label: false,
     },
     notebooks: {

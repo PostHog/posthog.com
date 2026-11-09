@@ -1,0 +1,20 @@
+owner: product-analytics
+tags: [concept, data-quality]
+status: active
+
+checks:
+    - id: filter-internal-users
+      description: >-
+          Baseline: can an agent explain how to filter internal users? The agent gets no
+          docs, so docs-read shows which pages it finds on its own.
+      prompt: >-
+          How do I filter out internal users in PostHog?
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              names-the-toggle: >-
+                  The final answer mentions "Filter out internal and test users".
+              settings-filter: >-
+                  The answer says to add filters in the project settings, with a
+                  negative operator such as "doesn't equal" or "doesn't contain",
+                  because a filter describes the traffic to keep.

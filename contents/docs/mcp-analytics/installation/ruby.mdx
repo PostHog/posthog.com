@@ -18,6 +18,10 @@ Try it, and report bugs or send patches to [posthog-ruby](https://github.com/Pos
 
 You need Ruby 3.0+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `MCP::Server`? See [Custom dispatchers](#custom-dispatchers).
 
+<WizardCommand command="mcp-analytics" />
+
+The [wizard](/blog/envoy-wizard-llm-agent) installs the gem and adds `PostHog::MCP.instrument` for you. To install by hand, follow the steps below.
+
 <Steps>
 
 <Step title="Install the gem" badge="required">
@@ -124,13 +128,17 @@ PostHog::MCP.instrument(
 | `event_properties` | – | `(request, extra) -> Hash`. Adds properties to every event. |
 | `logger` | no-op | `->(message) { ... }`. A stdio-safe sink. Never writes to stdout. |
 
-Callbacks receive `extra["headers"]`, a Hash with lowercase keys on HTTP transports and an empty Hash on stdio:
+Callbacks receive `extra`, a Hash with `session_id`, `request_id`, `protocol_version`, `session`, and `headers`. On HTTP transports, `headers` holds every request header, with lowercase keys (`posthog-ruby` 3.29.0 and later). On stdio, it's an empty Hash. To identify the user from a bearer token, read the `authorization` header:
 
 ```ruby
 identify = lambda do |_request, extra|
-  resolve_user(extra["headers"]["authorization"])
+  token = extra["headers"]["authorization"]
+  user = token && resolve_user_from_token(token)
+  user && { distinct_id: user.id }
 end
 ```
+
+The SDK doesn't capture `extra["headers"]`. It only records `User-Agent` and `X-Anthropic-Client`, as `$mcp_client_user_agent` and `$mcp_vendor_client`. Don't return a raw token, cookie, or API key in `properties:` or from `event_properties`, because the SDK doesn't redact those, and person properties persist on the person profile. Resolve the header to an ID first.
 
 The SDK removes the arguments it adds before your tool's `call` runs, so `def self.call(query:, server_context:)` keeps working. A tool that declares `context` in its own `input_schema` keeps it. A tool whose `input_schema` uses `oneOf`, `allOf`, `anyOf`, or `$ref` gets no added arguments.
 
@@ -163,7 +171,7 @@ def handle_tools_list
 end
 ```
 
-It adds a required `context` argument and an optional `llm_model` argument to every tool. With `report_missing: true`, it also adds the `get_more_tools` tool. Pass `context: false` or `capture_model: false` to skip an argument.
+It adds a required `context` argument and a required `llm_model` argument to every tool. With `report_missing: true`, it also adds the `get_more_tools` tool. Pass `context: false` or `capture_model: false` to skip an argument.
 
 ### 2. Prepare each tool call
 

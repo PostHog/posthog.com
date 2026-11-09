@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Note:** This connector is in **alpha**. The interface and available tables may change.
-
 The LogRocket connector syncs audit logs and session events into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites

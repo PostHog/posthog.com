@@ -150,7 +150,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     featureSlide('tool-calls', f.tool_calls, 'bg-blue'),
     featureSlide('intent', f.intent, 'bg-seagreen'),
     featureSlide('tool-quality', f.tool_quality, 'bg-red'),

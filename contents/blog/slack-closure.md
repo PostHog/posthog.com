@@ -8,6 +8,8 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-company-culture-blog.png
 featuredImageType: full
+ogImage: generated
+
 ---
 
 One of the great things about being open source is that we’ve grown a vibrant community around the project. Since launch we’ve accepted code from over 500 contributors and swapped ideas with thousands of users in our public Slack group. 

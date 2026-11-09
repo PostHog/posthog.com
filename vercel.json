@@ -144,9 +144,223 @@
         {
             "source": "/startups/:path*",
             "destination": "/startups/[...slug]/index.html"
+        },
+        {
+            "source": "/:path(.*)\\.md",
+            "destination": "/api/md-not-found?path=:path"
         }
     ],
     "redirects": [
+        {
+            "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/prompts-and-offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/prompts-and-offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/prompts-and-offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/prompts-and-offline-evaluations",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/prompts-and-offline-evaluations.md",
+            "destination": "/learn/ai-observability/pocket-guide/offline-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/101",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/101.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/101",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/101.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/101",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/101.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/unexplained-answers",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/unexplained-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/unexplained-answers",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/unexplained-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/unexplained-answers",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/unexplained-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/traces-and-conversations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/quality-output",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/quality-output.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/quality-output",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/quality-output.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/quality-output",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/quality-output.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/invented-functions",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/invented-functions.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/invented-functions",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/invented-functions.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/invented-functions",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/invented-functions.md",
+            "destination": "/learn/ai-observability/pocket-guide/online-evaluations.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/throw-away-answers",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/throw-away-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/throw-away-answers",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/throw-away-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/throw-away-answers",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/throw-away-answers.md",
+            "destination": "/learn/ai-observability/pocket-guide/product-outcomes.md",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/ai-cost",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance",
+            "permanent": true
+        },
+        {
+            "source": "/learn/ai-observability/pocket-guide/ai-cost.md",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance.md",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/ai-cost",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance",
+            "permanent": true
+        },
+        {
+            "source": "/pocket-guides/ai-observability/ai-cost.md",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance.md",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/ai-cost",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance",
+            "permanent": true
+        },
+        {
+            "source": "/docs/ai-observability/learn/ai-cost.md",
+            "destination": "/learn/ai-observability/pocket-guide/cost-and-performance.md",
+            "permanent": true
+        },
         {
             "source": "/field-guide/foreword",
             "destination": "/field-guide#about",
@@ -294,6 +508,11 @@
         {
             "source": "/pocket-guides/self-driving/:path*",
             "destination": "/docs/self-driving/pocket-guide/:path*",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/warehouse-native",
+            "destination": "/docs/data-warehouse/warehouse-native",
             "statusCode": 301
         },
         {
@@ -603,6 +822,10 @@
             "destination": "/compare/best-mcp-servers-for-startups"
         },
         {
+            "source": "/blog/best-mobile-app-analytics-tools",
+            "destination": "/compare/best-mobile-app-analytics-tools"
+        },
+        {
             "source": "/blog/best-mobile-app-ab-testing-tools",
             "destination": "/compare/best-mobile-app-ab-testing-tools"
         },
@@ -617,6 +840,10 @@
         {
             "source": "/blog/best-product-analytics-tools-for-startups",
             "destination": "/compare/best-product-analytics-tools-for-startups"
+        },
+        {
+            "source": "/blog/best-open-source-analytics-tools",
+            "destination": "/compare/best-open-source-analytics-tools"
         },
         {
             "source": "/blog/best-real-time-analytics-platforms",
@@ -2270,6 +2497,16 @@
             "statusCode": 301
         },
         {
+            "source": "/group-analytics",
+            "destination": "/docs/product-analytics/group-analytics",
+            "statusCode": 301
+        },
+        {
+            "source": "/group-analytics/pricing",
+            "destination": "/docs/product-analytics/group-analytics",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/tutorials/b2b",
             "destination": "/tutorials/b2b"
         },
@@ -3074,6 +3311,26 @@
             "destination": "/docs/contribute/badge:ext?"
         },
         {
+            "source": "/brand/badge/posthog-badge-white-bg-color.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge.svg",
+            "statusCode": 301
+        },
+        {
+            "source": "/brand/badge/posthog-badge-transparent-bg-color.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge.svg",
+            "statusCode": 301
+        },
+        {
+            "source": "/brand/badge/posthog-badge-transparent-bg-black-text.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge.svg",
+            "statusCode": 301
+        },
+        {
+            "source": "/brand/badge/posthog-badge-transparent-bg-white-text.svg",
+            "destination": "https://brand.posthog.com/badges/posthog-badge-dark.svg",
+            "statusCode": 301
+        },
+        {
             "source": "/blog/introduction-to-customer-retention",
             "destination": "/blog/customer-churn-analysis-guide"
         },
@@ -3633,11 +3890,11 @@
         },
         {
             "source": "/apps/bitbucket-release-tracker",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/currency-normalization",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/customer-io",
@@ -3645,7 +3902,7 @@
         },
         {
             "source": "/apps/databricks",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/downsampling",
@@ -3653,7 +3910,7 @@
         },
         {
             "source": "/apps/email-scoring",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/engage-connector",
@@ -3693,7 +3950,7 @@
         },
         {
             "source": "/apps/heartbeat",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/hubspot-connector",
@@ -3701,7 +3958,7 @@
         },
         {
             "source": "/apps/ingestion-alert",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/intercom",
@@ -3721,7 +3978,7 @@
         },
         {
             "source": "/apps/orbit",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/outfunnel-exporter",
@@ -3733,7 +3990,7 @@
         },
         {
             "source": "/apps/pagerduty-connector",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/patterns-connector",
@@ -3749,7 +4006,7 @@
         },
         {
             "source": "/apps/property-flattener",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/redshift-export",
@@ -3801,7 +4058,7 @@
         },
         {
             "source": "/apps/shopify",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/snowflake-export",
@@ -3809,7 +4066,7 @@
         },
         {
             "source": "/apps/stripe-connector",
-            "destination": "/cdp"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/taxonomy-standardizer",
@@ -3821,11 +4078,11 @@
         },
         {
             "source": "/apps/twitter-followers",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/unduplicator",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/url-normalizer",
@@ -3845,7 +4102,7 @@
         },
         {
             "source": "/apps/zapier-connector",
-            "destination": "/cdp/"
+            "destination": "/data-pipelines"
         },
         {
             "source": "/apps/zendesk-connector",
@@ -5566,7 +5823,7 @@
         },
         {
             "source": "/teams/data-warehouse",
-            "destination": "/teams/managed-warehouse"
+            "destination": "/teams/warehouse"
         },
         {
             "source": "/handbook/small-teams/infrastructure",
@@ -5908,7 +6165,7 @@
         },
         {
             "source": "/apps",
-            "destination": "/cdp",
+            "destination": "/data-pipelines",
             "statusCode": 302
         },
         {
@@ -6333,7 +6590,7 @@
         },
         {
             "source": "/manual/trends",
-            "destination": "/docs/product-analytics/trends"
+            "destination": "/docs/product-analytics/trends/overview"
         },
         {
             "source": "/docs/cdp/url-query:ext(\\.md)?",
@@ -6504,12 +6761,12 @@
             "destination": "/docs/libraries/js/usage:ext?"
         },
         {
-            "source": "/handbook/engineering/on-call-rotation",
-            "destination": "/handbook/engineering/operations/on-call-rotation"
+            "source": "/handbook/engineering/on-call-rotation:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/on-call-rotation:ext?"
         },
         {
-            "source": "/handbook/engineering/incidents",
-            "destination": "/handbook/engineering/operations/incidents"
+            "source": "/handbook/engineering/incidents:ext(\\.md)?",
+            "destination": "/handbook/engineering/operations/incidents:ext?"
         },
         {
             "source": "/handbook/engineering/support-hero",
@@ -6552,20 +6809,25 @@
             "destination": "/handbook/growth/sales/reverse-demo-calls"
         },
         {
+            "source": "/handbook/cs-and-onboarding/:path*",
+            "destination": "/handbook/customer-success/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
-            "destination": "/data-stack"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-warehouse",
-            "destination": "/data-stack"
+            "destination": "/warehouse"
         },
         {
             "source": "/sql",
-            "destination": "/data-stack/sql-editor"
+            "destination": "/warehouse"
         },
         {
             "source": "/bi",
-            "destination": "/data-stack/business-intelligence"
+            "destination": "/warehouse"
         },
         {
             "source": "/docs/error-tracking/common-questions:ext(\\.md)?",
@@ -6746,7 +7008,7 @@
         },
         {
             "source": "/ai-observability/features",
-            "destination": "/ai-observability#top-features"
+            "destination": "/ai-observability#key-features"
         },
         {
             "source": "/error-tracking/customers",
@@ -6871,7 +7133,7 @@
         },
         {
             "source": "/data-stack",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-stack/managed-warehouse",
@@ -6890,6 +7152,63 @@
             "destination": "/warehouse"
         },
         {
+            "source": "/cdp",
+            "destination": "/data-pipelines"
+        },
+        {
+            "source": "/context-warehouse/sources",
+            "destination": "/data-pipelines"
+        },
+        {
+            "source": "/context-warehouse/reverse-etl-export",
+            "destination": "/data-pipelines"
+        },
+        {
+            "source": "/context-warehouse",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/use-cases",
+            "destination": "/learn/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/the-context-gap-report",
+            "destination": "/blog/mind-the-context-gap",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/posthog-ai",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/data-modeling",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/sql-editor",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/business-intelligence",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/integrations-library",
+            "destination": "/docs/data-pipelines",
+            "statusCode": 301
+        },
+        {
+            "source": "/context-warehouse/:path*",
+            "destination": "/warehouse",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/data-warehouse/managed-warehouse:ext(\\.md)?",
             "destination": "/docs/data-warehouse/warehouse:ext?"
         },
@@ -6899,19 +7218,19 @@
         },
         {
             "source": "/customer-data-infrastructure/:path*",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/data-warehouse",
-            "destination": "/context-warehouse"
+            "destination": "/warehouse"
         },
         {
             "source": "/sql",
-            "destination": "/context-warehouse/sql-editor"
+            "destination": "/warehouse"
         },
         {
             "source": "/bi",
-            "destination": "/context-warehouse/business-intelligence"
+            "destination": "/warehouse"
         },
         {
             "source": "/docs/experiments/create-experiments-mcp:ext(\\.md)?",
@@ -6956,11 +7275,27 @@
         },
         {
             "source": "/teams/data-stack",
-            "destination": "/teams/managed-warehouse"
+            "destination": "/teams/warehouse"
         },
         {
             "source": "/teams/data-stack/:path*",
-            "destination": "/teams/managed-warehouse/:path*"
+            "destination": "/teams/warehouse/:path*"
+        },
+        {
+            "source": "/teams/onboarding",
+            "destination": "/teams/scaled-customer-success"
+        },
+        {
+            "source": "/teams/onboarding/:path*",
+            "destination": "/teams/scaled-customer-success/:path*"
+        },
+        {
+            "source": "/teams/managed-warehouse",
+            "destination": "/teams/warehouse"
+        },
+        {
+            "source": "/teams/managed-warehouse/:path*",
+            "destination": "/teams/warehouse/:path*"
         },
         {
             "source": "/teams/signals/:path*",

@@ -34,7 +34,7 @@ PostHog effectively became the company’s source of truth – not because it wa
 
 For Job, one of the most valuable parts of PostHog is the ability to turn product data into action without depending on multiple tools or teams. 
 
-He regularly creates product events in PostHog and routes them directly to ad platforms or Customer.io using [destinations](/cdp). This allows Kilo to experiment quickly with onboarding flows, activation campaigns, and new segments – often without engineering involvement.
+He regularly creates product events in PostHog and routes them directly to ad platforms or Customer.io using [destinations](/data-pipelines). This allows Kilo to experiment quickly with onboarding flows, activation campaigns, and new segments – often without engineering involvement.
 
 This setup matches how the company operates: ideas move fast, and tooling needs to keep up without introducing delays or long-term commitments.
 

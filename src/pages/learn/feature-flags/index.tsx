@@ -1,7 +1,7 @@
 import React from 'react'
 
-import LearnLanding from 'components/PocketGuides/LearnLanding'
-import LearnPage from 'components/PocketGuides/LearnPage'
+import LearnLanding from 'components/Learn/LearnLanding'
+import LearnPage from 'components/Learn/LearnPage'
 
 export default function FeatureFlagsLearn(): JSX.Element {
     return (

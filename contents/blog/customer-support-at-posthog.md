@@ -9,6 +9,7 @@ author:
   - mo-shehu
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/customer-support-at-posthog/customer-support-at-posthog.jpg
+ogImage: generated
 category: Inside PostHog
 tags:
   - Open source

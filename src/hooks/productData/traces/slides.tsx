@@ -295,7 +295,7 @@ const compactMcpSchema: InstallSchema = {
     ],
 }
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'waterfall',
         label: 'Trace waterfall',
