@@ -400,7 +400,7 @@ A successful request returns `200`, with one answer for each file, in the order 
 ```
 
 - **`present`** - PostHog has this file from an earlier upload by your project. Upload nothing. `expires_at` is the time when PostHog deletes the file, if no send uses it before then.
-- **`upload`** - Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes.
+- **`upload`** - Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes. The bytes of each `upload` file count toward your project's daily upload limit when PostHog gives you the URL, even if you don't upload the file. Upload each file soon after you ask.
 
 #### Upload a file
 
@@ -458,7 +458,7 @@ These checks apply to the upload route and to sends with `attachments`, in addit
 | `400` | `not_mime_type` | Send | `content_type` isn't a MIME type. | Send a type such as `application/pdf`, or leave out `content_type`. |
 | `400` | `unsafe_content_id` | Send | `content_id` has `<`, `>`, or a line break. | Send only the ID, such as `logo`. |
 | `400` | `content_too_large` | Both | The request body is over 20 MB. | Make the request smaller. Files go to the upload URL, never in the request body. |
-| `429` | `upload_quota_exceeded` | Upload | Your project uploaded all the file bytes that it can upload today. The day starts at midnight UTC. | Send files that PostHog already has, because they don't count. Or upload after midnight UTC. |
+| `429` | `upload_quota_exceeded` | Upload | Your project asked to upload all the file bytes that it can upload today. A file counts when PostHog gives you its upload URL, even if you don't upload it, and again each time that you ask for a new URL. The day starts at midnight UTC. | Send files that PostHog already has, because they don't count. Or ask again after midnight UTC. |
 | `503` | `delivery_unavailable` | Both | PostHog couldn't get to its file storage. On a send, it can also mean that PostHog couldn't confirm that it queued the email, so PostHog can still send it. See [`delivery_unavailable`](#delivery_unavailable). | Send the same request again after a short wait. For a send, use the same `Idempotency-Key`, so that the email doesn't go out twice. |
 
 Other problems with `attachments` or `files`, such as a hash that isn't 64 lowercase hex characters, return the code `invalid_request`, and `attr` names the field.
