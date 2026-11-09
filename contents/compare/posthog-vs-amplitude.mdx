@@ -20,13 +20,12 @@ seo:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Choosing the right analytics platform often comes down to trade-offs.
 
-PostHog and [Amplitude](/compare/best-amplitude-alternatives) are multi-product platforms that help teams understand what users do and ship better products. There's a lot of overlap in what they cover (we're both "analytics" tools at heart), but who they're built for, and what sits around the analytics, differs.
+PostHog and [Amplitude](/compare/best-amplitude-alternatives) are both multi-product platforms that help teams understand what users do and ship better products. There's a lot of overlap in what they cover (we're both "analytics" tools at heart), but who they're built for, and what sits around the analytics, differs.
 
-1. **Amplitude** is a product analytics platform that has grown into a marketing and growth suite: session replay, feature flags and experiments, guides and surveys, a CDP (Activation), multi-touch attribution and forecasting, and a growing set of AI agents. It's built for product, growth, and marketing teams.
+1. **Amplitude** is a product analytics platform that has grown into a marketing and growth suite with session replay, feature flags and experiments, guides and surveys, a CDP (Activation), multi-touch attribution and forecasting, and a growing set of AI agents. It's built for product, growth, and marketing teams.
 
-2. **PostHog** is your product's context layer. On top of [product analytics](/product-analytics), it includes [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [surveys](/surveys), an [AI assistant](/ai), and more; a [data warehouse](/warehouse) and [CDP](/cdp) tie it all together, unifying that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
+2. **PostHog** is your product's context layer. On top of [product analytics](/product-analytics), it includes [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [surveys](/surveys), an [AI assistant](/ai), and more. A [data warehouse](/warehouse) and [CDP](/cdp) tie it all together and unify that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
 
 In this post, we'll cover these differences in more detail, comparing features, pricing, reporting, integrations, and the best fit for different use cases.
 
@@ -71,7 +70,7 @@ Companies that qualify for [PostHog's startup program](/startups) get $50,000 in
 
 ## Comparing PostHog and Amplitude
 
-PostHog and Amplitude offer a similar suite of products, but Amplitude has no error tracking, logs, or data warehouse of its own, and its AI observability covers agent traces rather than the full LLM pipeline.
+PostHog and Amplitude offer a similar suite of products, but Amplitude has no error tracking, logs, or data warehouse of its own. Its AI observability also only covers agent traces rather than the full LLM pipeline.
 
 <p>
 <ProductComparisonTable
@@ -205,17 +204,17 @@ PostHog includes experiments in its free tier (1M requests per month, including 
 
 <CalloutBox icon="IconInfo" title="Good to know" type="fyi">
 
-Amplitude includes Web Experimentation on all plans, but the free tier lets you run only one active experiment at a time, and it does not include experiment results. Advanced features like the custom code editor, holdout groups, and multi-armed bandits require Growth or Enterprise plans, some as add-ons. 
+Amplitude includes Web Experimentation on all plans, but the free tier lets you run only one active experiment at a time. You won't have access to experiment results, either. Advanced features like the custom code editor, holdout groups, and multi-armed bandits require Growth or Enterprise plans, some as add-ons. 
 
-Amplitude has also operated [Statsig](/compare/posthog-vs-statsig) since May 2026, which is its deeper experimentation product if you're willing to run a second tool. PostHog does not limit how many experiments you run at once, includes every feature on the free tier, and gives you 1 million experiment requests per month.
+Amplitude has also been operating [Statsig](/compare/posthog-vs-statsig) since May 2026, which is its deeper experimentation product if you're willing to run a second tool. PostHog does not limit how many experiments you run at once, includes every feature on the free tier, and gives you 1 million experiment requests per month.
 
 </CalloutBox>
 
 ### Session replay
 
-Both platforms capture console logs and failed network requests alongside the replay. PostHog goes deeper for developer debugging: a DOM explorer lets you inspect the actual page structure during playback, and performance monitoring shows page load times, web vitals, and resource bottlenecks, which Amplitude doesn't offer.
+Both platforms capture console logs and failed network requests alongside the replay, but PostHog goes deeper for developer debugging. PostHog's DOM explorer lets you inspect the actual page structure during playback, and performance monitoring shows page load times, web vitals, and resource bottlenecks – all of which Amplitude doesn't offer.
 
-Where PostHog goes further is in not making you watch. [Replay Vision](/replay-vision) runs AI scanners across your recordings: point one at sessions that dropped out of a funnel and it reviews each one, flags dead ends and frustration, summarizes what the user was trying to do, and logs each finding as an event you can chart or alert on. 
+With PostHog, you don't even have to watch the replays. [Replay Vision](/replay-vision) runs AI scanners across your recordings to save you hours of time. It can look for sessions that dropped out of a funnel and review every single one to flag dead ends and frustrations, summarize what your users were trying to do, and log finding as events you can set charts or alerts for. 
 
 The first 2,500 credits a month are free. Amplitude's Session Replay Agent summarizes sessions you point it at, as a paid add-on on Growth and Enterprise.
 
@@ -260,9 +259,9 @@ Replays let you watch how users experience your app, diagnose issues, improve su
 
 ### AI observability
  
-Both platforms now have something here, but they answer different questions. Amplitude's Agent Analytics, launched in 2026 and included on every plan, scores each AI agent trace for task success, failure type, and tool-call errors, clusters user intents, and ties traces to replays, conversion, and churn. It's a product view of whether your agent did its job.
+Both platforms now offer AI observability products, but they answer different questions. Amplitude's Agent Analytics scores each AI agent trace for task success, failure type, and tool-call errors. It also clusters user intents and ties traces to replays, conversion, and churn. It's essentially a product view of whether your agent did its job, and it's included on every plan.
  
-PostHog's [AI observability](/ai-observability) instruments the pipeline itself. Every generation and trace is captured with tokens, cost, latency, and errors, linked to the user's session replay; failed calls become [error tracking](/error-tracking) issues; you can run evals (LLM-as-a-judge, code-based, or sentiment) on production traffic; and prompts or models can be A/B tested behind a [feature flag](/feature-flags). 
+PostHog's [AI observability](/ai-observability) instruments the pipeline itself. Every generation and trace is captured with tokens, cost, latency, and errors. These get linked to the user's session replay. That way, you can reference and run any other part of PostHog on each part of your AI stack seamlessly. Failed calls become [error tracking](/error-tracking) issues; evals (LLM-as-a-judge, code-based, or sentiment) can be run on production traffic; prompts or models can be A/B tested behind a [feature flag](/feature-flags). 
  
 <p>
 <ProductComparisonTable
@@ -293,7 +292,7 @@ An AI feature fails in two ways: the exception your code throws when a provider 
 
 ### AI and MCP
  
-Both companies now ship AI across the product, and both have MCP servers, so the question is what the agent can see.
+Both companies now ship AI across the product, and both have MCP servers, so the question is what your agents can see in each.
  
 - **Amplitude** has AI Agents that monitor dashboards and replays, AI Feedback (synthesizes Zendesk, G2, Reddit, and app store signals), AI Visibility (how your brand shows up in LLM answers), Agent Analytics for scoring AI agent traces, and an MCP server that's GA on every plan. The Session Replay Agent and AI summaries are a Growth and Enterprise add-on.
 
@@ -330,7 +329,7 @@ Like PostHog, this means your bill tracks how much you actually send rather than
 
 <CalloutBox icon="IconInfo" title="Example" type="fyi">
 
-Both PostHog and Amplitude scale with events, so the comparison comes down to free-tier headroom and what's bundled. Amplitude's free plan has more events; PostHog's has more products. A team that needs experiment results, SSO, or warehouse exports upgrades into Amplitude's Growth plan through sales, while on PostHog those are on the same usage-based bill as everything else.
+Both PostHog and Amplitude scale with events, so the comparison comes down to free-tier headroom and how they grow. Amplitude's free plan has more events whereas PostHog's has more products. A team that needs experiment results, SSO, or warehouse exports upgrades will have to adopt Amplitude's Growth plan and speak to their sales team, while PostHog lets you continue on the same usage-based bill as everything else.
 
 </CalloutBox>
 
@@ -388,7 +387,7 @@ We offer a Business Associate Agreement (BAA) for any customer on our platform p
 
 Choosing the right analytics platform depends on your team's priorities and technical needs. Here's a quick guide:
  
-- Want one platform where every event, replay, error, flag, and LLM trace is tied to the same user, with a [data warehouse](/warehouse) for your business data, agents that can work from [Slack](/slack) or [the MCP](/mcp), and transparent usage-based [pricing](/pricing)? Go with **PostHog**.
+- Want one platform where every event, replay, error, flag, and LLM trace is tied to the same user? How about a [data warehouse](/warehouse) for your business data, agents that can work from [Slack](/slack) or [the MCP](/mcp), and transparent usage-based [pricing](/pricing)? Go with **PostHog**.
 
 - Need a platform optimized for marketing analytics, campaign attribution, and growth experimentation with a UI built for non-technical teams? **Amplitude** is probably the right choice.
 
@@ -412,7 +411,7 @@ Choosing the right analytics platform depends on your team's priorities and tech
 - Both are SOC 2 Type 2 certified and GDPR-ready with EU data residency options, and both sign HIPAA BAAs: **PostHog** on its Boost, Scale, and Enterprise packages, **Amplitude** on request. **PostHog** also offers raw data access via its [data warehouse](/warehouse); **Amplitude**'s SSO is Growth and Enterprise only.
 
 **For early-stage startups**
-- **PostHog** – Generous free tiers across every product, transparent pricing you can model in advance, and no features locked behind sales calls. [Startups can qualify for $50k in free credits](/startups). Amplitude for Startups gives companies under 20 employees and $10M raised a year of Growth free, which is a strong offer; after that year you're on a sales-led plan, where PostHog's usage-based model keeps costs predictable.
+- **PostHog** – Generous free tiers across every product, transparent pricing you can model in advance, and no features locked behind sales calls. [Startups can qualify for $50k in free credits](/startups). Amplitude for Startups gives companies under 20 employees and $10M raised a year of Growth free, which is a strong offer. After that first year, you'll have to get on a sales-led plan. PostHog's usage-based model keeps costs predictable and controllable.
 
 **For enterprise product teams**
 - **Tied** – Both offer robust analytics, experimentation, and compliance features. Choose based on team composition: engineering-heavy teams will prefer PostHog; marketing-heavy teams will prefer Amplitude.
@@ -423,9 +422,9 @@ Choosing the right analytics platform depends on your team's priorities and tech
 
 <details>
 <summary>What does it mean for PostHog to be your product's context layer?</summary>
-Amplitude knows what users did. PostHog knows what users did, what they saw, what broke, which flags they were in, what the model answered them, and what they pay you, because [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), and [AI observability](/ai-observability) all write to the same database with one model of users and sessions.
+Amplitude can tell you what your users did. PostHog knows what users did as well as what they saw, what broke, which flags they were in, what your LLMs said to them, and what they pay you. That's because [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), and [AI observability](/ai-observability) all write to the same database, with a unified schema that consistently ties users and sessions.
  
-The [data warehouse](/warehouse) and [CDP](/cdp) extend that to the business data that lives elsewhere – Stripe, HubSpot, Postgres, Salesforce – synced in and pushed back out. The practical result is that "did the users who hit this error last week churn, and what were they paying us" is one SQL query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the whole product rather than the events one tool happens to hold.
+The [data warehouse](/warehouse) and [CDP](/cdp) extends that power to all your business data that lives elsewhere like in Stripe, HubSpot, Postgres, Salesforce. It syncs that data in, and pushes new data back out. As a result, a question like "did the users who hit this error last week churn, and what were they paying us?" turns into one SQL query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees the product as a whole, rather than the events one tool happens to hold.
  
 </details>
 
