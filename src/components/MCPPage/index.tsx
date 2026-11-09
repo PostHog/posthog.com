@@ -422,6 +422,29 @@ const faq: { question: string; answer: string; link?: { label: string; to: strin
         link: { label: 'Setup guide', to: '/docs/model-context-protocol' },
     },
     {
+        question: 'Which AI tools work with the PostHog MCP?',
+        answer: 'Any AI tool that supports MCP works. We tested and documented setup for Claude Code, Claude Desktop, Cursor, Codex, VS Code, Windsurf, Zed, and PostHog Desktop.',
+        link: {
+            label: 'Supported clients',
+            to: '/docs/model-context-protocol/faq#which-ai-clients-and-editors-are-supported',
+        },
+    },
+    {
+        question: 'How do I set up the PostHog MCP in Claude Code or Cursor?',
+        answer: 'Run npx @posthog/wizard mcp add in your terminal and select your client. The wizard adds the server and signs you in with OAuth. To set it up manually, add the server URL https://mcp.posthog.com/mcp to the MCP settings of your client.',
+        link: { label: 'Client setup guides', to: '/docs/model-context-protocol' },
+    },
+    {
+        question: 'Do I need to install PostHog first before using the MCP?',
+        answer: 'You need a PostHog account, because your agent signs in to it. It is free to sign up. You do not need to install the PostHog SDK to connect the MCP. But to ask questions about your product data, your project must have events. If you do not send events yet, the PostHog Wizard can add the SDK to your app.',
+        link: { label: 'Install PostHog', to: '/docs/getting-started/install' },
+    },
+    {
+        question: 'Is the PostHog MCP server free?',
+        answer: 'Yes. Connecting to the MCP server and calling its tools is free. Standard PostHog usage and billing still apply to the data your queries use. Some tools use LLMs internally and can add PostHog AI spend. Those tools need AI data processing to be enabled in your organization, and they are hidden when it is off.',
+        link: { label: 'Cost details', to: '/docs/model-context-protocol/faq#how-much-does-it-cost' },
+    },
+    {
         question: 'Can the PostHog MCP make changes, or only read data?',
         answer: 'It can do both. Your agent can read data, for example to run queries, look at errors, or find session replays. It can also make changes, for example to create dashboards and insights, roll out or turn off feature flags, and set up experiments and surveys. If you want your agent to only read data, use read-only mode. It removes the tools that create, update, or delete data.',
         link: { label: 'All MCP tools', to: '/docs/model-context-protocol/tools' },
@@ -432,14 +455,14 @@ const faq: { question: string; answer: string; link?: { label: string; to: strin
         link: { label: 'About PostHog AI', to: '/docs/posthog-ai' },
     },
     {
-        question: 'Do I need to install PostHog first before using the MCP?',
-        answer: 'You need a PostHog account, because your agent signs in to it. It is free to sign up. You do not need to install the PostHog SDK to connect the MCP. But to ask questions about your product data, your project must have events. If you do not send events yet, the PostHog Wizard can add the SDK to your app.',
-        link: { label: 'Install PostHog', to: '/docs/getting-started/install' },
+        question: 'Is it safe to give an AI agent access to PostHog?',
+        answer: 'Review tool calls before they run, because an LLM can be tricked into following untrusted commands. You can also limit the session to read-only tools, filter the tools by feature or name, and pin the agent to one organization or project.',
+        link: { label: 'Read-only mode', to: '/docs/model-context-protocol/faq#restricting-to-read-only-mcp-tools' },
     },
     {
-        question: 'How much does it cost?',
-        answer: 'Connecting to the MCP server and calling its tools is free. Standard PostHog usage and billing still apply to the data your queries use. Some tools use LLMs internally and can add PostHog AI spend. Those tools need AI data processing to be enabled in your organization, and they are hidden when it is off.',
-        link: { label: 'Cost details', to: '/docs/model-context-protocol/faq#how-much-does-it-cost' },
+        question: 'Does the PostHog MCP store my data?',
+        answer: 'No. The server is a proxy to your PostHog instance, and it does not store your analytics data. It routes to the US or EU region of the account you sign in with. Queries run against your project, and the results go straight to your AI client.',
+        link: { label: 'Data and privacy', to: '/docs/model-context-protocol/faq#where-is-my-data-sent' },
     },
     {
         question: 'Are there rate limits?',
@@ -450,16 +473,6 @@ const faq: { question: string; answer: string; link?: { label: string; to: strin
         question: 'Do I need to create an API key?',
         answer: 'No. OAuth is the recommended way, and the wizard sets it up. If your client does not support OAuth, use a personal API key with the MCP Server preset.',
         link: { label: 'API key setup', to: '/docs/model-context-protocol/faq#using-an-api-key-instead-of-oauth' },
-    },
-    {
-        question: 'Is it safe to let an agent write to my project?',
-        answer: 'Review tool calls before they run, because an LLM can be tricked into following untrusted commands. You can also limit the session to read-only tools, filter the tools by feature or name, and pin the agent to one organization or project.',
-        link: { label: 'Read-only mode', to: '/docs/model-context-protocol/faq#restricting-to-read-only-mcp-tools' },
-    },
-    {
-        question: 'Where does my data go?',
-        answer: 'The server is a proxy to your PostHog instance, and it routes to the US or EU region of the account you sign in with. It does not store your analytics data. Queries run against your project, and the results go straight to your AI client.',
-        link: { label: 'Data and privacy', to: '/docs/model-context-protocol/faq#where-is-my-data-sent' },
     },
     {
         question: 'Can I use more than one account, organization, or project?',
