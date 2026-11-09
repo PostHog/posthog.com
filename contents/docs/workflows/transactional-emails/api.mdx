@@ -413,7 +413,9 @@ curl -X PUT "<url>" \
 
 A successful upload returns `200`. The upload fails with a `400` or a `403` when the bytes don't agree with `size` and `sha256`, when a header isn't as given, or when the URL expired. Ask where to upload again to get a new URL. Don't send the email until all uploads are successful.
 
-The upload goes to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, let your servers connect with HTTPS to the host of `url`:
+#### Allow the upload host
+
+The upload goes to Amazon S3, not to the PostHog host. The SDKs upload there too. If your network limits outgoing traffic, let your servers connect with HTTPS to the host of `url`:
 
 | PostHog Cloud | Upload host |
 | --- | --- |
