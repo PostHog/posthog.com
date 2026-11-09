@@ -262,7 +262,7 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'PostHog AI',
                     link: '/ai',
-                    icon: <Icons.IconSparkles className="size-4 text-blue" />,
+                    icon: <Icons.IconAI className="size-4 text-lilac" />,
                 },
                 {
                     type: 'item',
