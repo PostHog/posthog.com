@@ -95,6 +95,9 @@ jobs:
             - name: Check shared window paths
               run: pnpm test:internal-path
 
+            - name: Check HTTP log drain
+              run: pnpm test:http-log-drain
+
             - name: Build site
               run: pnpm build
               env:

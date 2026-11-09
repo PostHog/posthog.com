@@ -37,6 +37,7 @@
         "test:tier-list": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/components/TierList/catalog.test.ts src/components/TierList/state.test.ts",
         "test:middleware": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test middleware.test.ts",
         "test:gatsby-functions": "node --test scripts/gatsby-functions.test.cjs",
+        "test:http-log-drain": "node --test scripts/http-log-drain.test.cjs",
         "test:posthog-loader": "node --test scripts/posthog-loader.test.cjs scripts/early-access-features.test.cjs",
         "test:gatsby-utils": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/utils.test.ts",
         "test:mcp-rest-mapping": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/mcp-rest-mapping.test.ts",
