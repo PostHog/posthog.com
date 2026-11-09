@@ -166,13 +166,24 @@ Any ad-hoc customer email broadcasts are owned by the <SmallTeam slug="developer
 
 These emails are usually categorized as `Service updates` in Workflows when they include important account or product information. They have a dedicated unsubscribe option in the footer, which makes it clear that we don't recommend users unsubscribe from them. 
 
-Important service updates are the _only_ type of email we may send to unsubscribed users, and only when it's warranted.
+Important service updates are the _only_ type of email we may send to unsubscribed users, and only when it's warranted. The one exception is legal comms, when Hector tells us to. See [legal updates](#legal-updates).
 
 > `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
 Whenever we need to send an email broadcast like this, we begin by creating an issue using the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) in the marketing repo. If it involves personal information, we discuss it in <PrivateLink url="https://github.com/PostHog/company-internal">Company Internal</PrivateLink> instead. This lets us summarize information and get approval from teams while keeping our work open source. Issues are closed when an email is sent.
 
 If you'd like to work with Marketing on an email activity, start by opening an issue with the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md).
+
+### Legal updates
+We use the `Legal updates` category in Workflows for all legal comms. These include, but are not limited to:
+
+- Updates to our terms and conditions
+- Updates to our list of subprocessors
+- Changes to other legal terms
+
+Use `Legal updates` for every legal email by default. New users are subscribed to this category automatically, and users can unsubscribe from it.
+
+Do not send a legal email to users who unsubscribed unless Hector gives you specific direction to do so. Only then, use the `Legal notices (required)` category instead. This category is transactional, so it ignores opt-outs.
 
 ## Email campaigns
 We run many email campaigns to help users get more out of PostHog. All of these campaigns now live in PostHog Workflows, not Customer.io. The most developed and documented of these are our four onboarding campaigns.  
