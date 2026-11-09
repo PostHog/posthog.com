@@ -331,7 +331,7 @@ Content from your code also takes these fields. A template send takes none of th
 | `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
 | `attachments` | No | A list of up to 10 files that you [uploaded first](#send-files). Each file is an object with `sha256`, `filename`, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
 
-- **Size** - An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too. One file can use all of the limit.
+- **Size** - An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
 - **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
 - **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
 - **Viruses** - PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
@@ -445,11 +445,12 @@ For a complete script, see the [receipt with a PDF](/docs/workflows/transactiona
 
 ### Checks for files
 
-These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. After a `400` or a `429`, PostHog sends nothing. The body of these errors has `why` and `fix` in addition to `code` and `attr`, which tell you the cause and what to do.
+These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. After a `400`, a `404`, or a `429`, PostHog sends nothing. The body of a `400` or a `429` has `why` and `fix` in addition to `code` and `attr`, which tell you the cause and what to do.
 
 | Status | Code | Route | Cause | What to do |
 | --- | --- | --- | --- | --- |
 | `400` | `field_not_accepted` | Both | PostHog can't send files for your project yet. | Send the email without files. |
+| `404` | `not_found` | Upload | Content from your code is off for your project, or your PostHog version has no upload route. | Send the email without files. |
 | `400` | `too_many_attachments` | Both | The email has more than 10 files. | Send 10 files at most. Link to other files from the email body. |
 | `400` | `message_too_large` | Both | The email is over 40 MB after Base64 encoding. On the upload route, `attr` names the largest file, such as `files__1__size`. | Send fewer or smaller files, or link to large files from the email body. |
 | `400` | `attachment_not_uploaded` | Send | Your project has no uploaded file with this SHA-256. The upload didn't finish, the file expired, or a different project uploaded it. `attr` names the file, such as `attachments__0__sha256`. | Ask where to upload again, upload the file, and send the email again. |
