@@ -108,6 +108,10 @@ Any PostHog team can run small events for the customers in a city. Two formats w
 
 We take over a coffee shop for a morning, invite local customers, hand out merch, and hear what active users think of the product. We've run these in [Austin](https://luma.com/ph-austin-cafe) (<PrivateLink url="https://posthog.slack.com/archives/C0A7Q222QF8/p1793991454953669">photos</PrivateLink>) and [Madrid](https://luma.com/contexto-cafe-madrid) (<PrivateLink url="https://posthog.slack.com/archives/C0ABM7L5GCC/p1790937690847009?thread_ts=1790931877.054409&cid=C0ABM7L5GCC">photos</PrivateLink>), and any team with the time and interest should do one too.
 
+![Self-driving cafe in Madrid](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/img_8836_5e685c9237.jpg)
+
+<Caption>Self-driving cafe at OSOM coffee shop in Madrid</Caption>
+
 If your team is in a city for a week-long offsite or onboarding, the Builder Relations team will organize it for you. We find the coffee shop (usually near your hotel), create the event page, invite local customers, and ship the merch. You show up and talk to customers. The cost comes out of the Builder Relations event budget: before the event we add your point of contact to our Brex spend limit, so whoever pays the cafe swipes against our budget, not yours.
 
 To set one up, post in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> with:
