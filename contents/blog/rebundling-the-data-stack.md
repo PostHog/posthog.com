@@ -23,7 +23,7 @@ On 1 June 2026, Fivetran and dbt Labs [finished merging](https://www.getorchestr
 
 This is an interesting move if you remember 2021 and the dawn of the modern data stack, which promised you could pick the best tool for every layer. The two layers with the biggest monopoly on their part of the stack have now picked each other.
 
-Plenty of people have called this the death of the modern data stack, but I think that's a bit dramatic. Software categories unbundle, sprawl, then rebundle. Data tools have just reached the rebundle step.
+Plenty of people (including [Fivetran](https://www.fivetran.com/blog/modern-data-stack-vs-open-data-infrastructure), [Matillion](https://www.matillion.com/blog/why-the-modern-data-stack-is-broken-and-how-to-fix-it), and [Hightouch](https://hightouch.com/blog/you-dont-need-the-mds)) have called this the death of the modern data stack, but I think that's a bit dramatic. Software categories unbundle, sprawl, then rebundle. Data tools have just reached the rebundle step.
 
 What matters now is who holds the bundle, and how tightly you're locked into it.
 
@@ -71,7 +71,7 @@ We like rebundling. It means fewer contracts and fewer late night hunts for whic
 
 But what's the cost? Your stack might be getting simpler by getting harder to leave.
 
-You should be able to cut tools without signing up to someone's whole platform and paying for features that you didn't want to be included in the deal. Simplicity you can't walk away from is just lock-in with a bigger dashboard.
+You should be able to cut tools without signing up to someone's whole platform and paying for features that you didn't want to be included in the deal.
 
 That's the philosophy we built our ELT tool with. It syncs your data into whichever warehouse you already run. If you'd rather not run one, it syncs into PostHog's warehouse instead, and if you change your mind, you can add an [ELT destination](/docs/data-pipelines/destinations/elt-destinations) to send the same tables to your own warehouse. Adding one starts a full resync that's billed per row, so check your row counts first. You don't need any other PostHog product to use it, it just does what it says on the tin.
 
@@ -82,7 +82,7 @@ The pricing doesn't trap you either. Historical syncs are free for the first sev
 You're probably being bundled whether you planned for it or not; there are pros and cons to both. Here's what to know to keep your options open to make sure you get the best deal.
 
 1. **Read your renewal:** Bundles change pricing. Fivetran [moved to per-connection billing](https://weld.app/blog/fivetran-pricing) in March 2025. In January 2026 it added a $5 minimum per connection. Deletes and history-mode changes [now count as billable rows](https://www.getorchestra.io/guides/fivetran-pricing) too.
-2. **Count your hops:** Pick one real question that you need answering on a regular basis and trace it from source to answer. Every tool it passes through costs you time, money or both.
+2. **Count how many tools it takes to get an answer:** Pick one real question that you need answering on a regular basis and trace it from source to answer. Every tool it passes through costs you time, money or both.
 3. **Keep an exit open:** Favor open formats and tools you could run yourself. Fivetran and dbt Labs say [dbt Core stays open](https://www.getorchestra.io/guides/fivetran-dbt-merger-what-it-means-for-the-modern-data-stack) under its current license. Check the same for everything you depend on.
 4. **Price the exit:** Before you add a tool, work out how you'd take it out. If the answer is a six-month migration, you'd never do it; you'd just keep paying the price increases.
 5. **Model a bad month:** Row-based pricing means your bill month to month is unpredictable. Backfills, schema changes and high-churn tables all land on the bill. Price the worst-case-scenario month, and no bill will arrive unexpectedly.
