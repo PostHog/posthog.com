@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/story-about-pivots.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
   - CEO diaries

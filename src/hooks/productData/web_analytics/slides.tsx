@@ -21,7 +21,7 @@ import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product (like session replay's
- * Editor / Search / Browse). Capability detail belongs in `topFeatures`.
+ * Editor / Search / Browse). Capability detail belongs in `keyFeatures`.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -144,7 +144,7 @@ export const applications: CarouselSlide[] = [
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'core-metrics',
         label: 'Core metrics',

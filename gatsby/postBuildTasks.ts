@@ -8,7 +8,6 @@ import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
 import { createBlogOgImages } from './og/blog'
-import { createCustomerOgImages } from './og/customers'
 import { createDocsOgImages } from './og/docs'
 import { createJobOgImages } from './og/jobs'
 import { createTakumiRenderer, registerMatterFont } from './og/takumi'
@@ -50,7 +49,6 @@ export const createOGImages = async (data) => {
             docsHandbookMenus,
             ogImagesDir
         ),
-        createCustomerOgImages(takumi, data.customers.nodes, ogImagesDir),
     ])
 }
 
