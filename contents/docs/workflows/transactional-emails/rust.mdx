@@ -183,7 +183,7 @@ async fn send_password_reset(
 - **Template key** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
 - **`text`** - If you leave it out, PostHog makes it from `html`.
 - **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. Call `reply_to` once for each reply-to address.
-- **`capture_engagement`** - PostHog captures the email's engagement events unless you call `capture_engagement(false)`.
+- **`capture_engagement`** - PostHog captures the email's engagement events on the recipient's person unless you call `capture_engagement(false)`. Turning it off doesn't change the email: PostHog still adds its open pixel and rewrites links to count opens and clicks.
 
 A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 

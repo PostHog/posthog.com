@@ -195,7 +195,7 @@ You can also send the subject and the body from your code, without a template in
 | `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
 | `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
 | `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
-| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is `true`. Send `false` to turn capture off for this email. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
+| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events) on the recipient's person. The default is `true`. Send `false` to turn capture off for this email. It doesn't change the email: PostHog still adds its open pixel and rewrites links to count opens and clicks. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
 
 A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
 
