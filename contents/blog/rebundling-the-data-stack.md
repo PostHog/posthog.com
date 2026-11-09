@@ -1,5 +1,5 @@
 ---
-title: "Rebundling your data stack is inevitable. Pick your bundle carefully."
+title: "The modern data stack had a good run
 date: 2026-11-11
 rootPage: /blog
 sidebar: Blog
@@ -29,7 +29,7 @@ What matters now is who holds the bundle, and how tightly you're locked into it.
 
 ## A brief history of the modern data stack
 
-Unbundling made sense in 2021. Cloud warehouses made storage cheap, so teams loaded everything first and transformed it later. That's ELT, and it reshaped the way data pipelines were built to allow for a fragmented stack.
+Unbundling made sense in 2021. Cloud warehouses made storage cheap, so teams loaded everything first and transformed it later. That's ELT (Extract, Load, Transform), and it reshaped the way data pipelines were built to allow for a fragmented stack.
 
 After standalone ELT tools came modeling, orchestration, reverse ETL, observability, catalogs, semantic layers and metrics stores. Around each layer sprung a host of startups, and over the last five years, the main players have emerged.
 
@@ -39,9 +39,9 @@ But in 2022 the Federal Reserve started raising rates to fight inflation, and [b
 
 ## Fragmentation frustrated data professionals
 
-The Modern Data Company [surveyed 232 senior data professionals](https://www.accessnewswire.com/newsroom/en/computers-technology-and-internet/new-report-from-the-modern-data-company-reveals-how-data-architec-1063545) in late 2024. They found that seven in ten juggle five to ten tools every day. 85% rank integrating them as a top-three challenge, with 63% of respondents spending over a fifth of their time on pipeline maintenance.
+The Modern Data Company [surveyed 232 senior data professionals](https://www.accessnewswire.com/newsroom/en/computers-technology-and-internet/new-report-from-the-modern-data-company-reveals-how-data-architec-1063545) in late 2024. They found that 70% were juggling five to ten tools every day. 85% ranked integrating them as a top-three challenge, with 63% of respondents spending over a fifth of their time on pipeline maintenance.
 
-Now picture who's doing that maintenance. Metabase's [community survey](https://discourse.metabase.com/t/the-metabase-community-data-stack-report-is-here/260892) found most data teams have one to three people, even at big companies, which is an incredibly small team. They also found people [rate their individual tools higher](https://metabase.com/blog/metabase-community-data-stack-report-2025-key-analysis) than their stack as a whole. This suggests data professionals think each layer of the stack works well on its own, but the constant need to maintain integrations causes disillusionment with the system.
+Now picture who's doing that maintenance. Metabase's [community survey](https://discourse.metabase.com/t/the-metabase-community-data-stack-report-is-here/260892) found most data teams have one to three people, even at big companies, which is an incredibly small team. They also found people [rate their individual tools higher](https://metabase.com/blog/metabase-community-data-stack-report-2025-key-analysis) than their stack as a whole. This suggests data professionals think each layer of the stack works well on its own, but *maintaining* those integrations is a constant headache.
 
 Pricing makes the ten-tool stack even more confusing. Each tool is charged based on something different: rows, credits, seats, model runs. Nobody can forecast the total, and surprise bills are commonplace.
 
@@ -49,7 +49,7 @@ Pricing makes the ten-tool stack even more confusing. Each tool is charged based
 
 Rebundling is now coming from two directions at once:
 
-### Individual vendors are buying more layers of the stack
+### 1. Individual vendors are buying more layers of the stack
 
 The biggest example of this happening is Fivetran. In about 13 months, Fivetran have assembled every layer of the stack except compute:
 
@@ -57,7 +57,7 @@ The biggest example of this happening is Fivetran. In about 13 months, Fivetran 
 - **September 2025:** bought Tobiko Data, the company behind [SQLMesh](https://peliqan.io/blog/dbt-fivetran-merger-explained/).
 - **October 2025:** announced the dbt Labs merger, which closed in June 2026.
 
-### Warehouses are expanding their offering
+### 2. Warehouses are expanding their offering
 
 Snowflake launched [Openflow](https://www.infoworld.com/article/4000742/snowflake-launches-openflow-to-tackle-ai-era-data-ingestion-challenges.html) in June 2025, a native ingestion service built on Apache NiFi. Databricks has [Lakeflow Connect](https://events.databricks.com/emea-daiwt), its own connectors for SaaS apps and databases.
 
@@ -67,7 +67,7 @@ Both camps want to own every layer of your stack. Once one company owns it all, 
 
 ## A simpler stack shouldn't come with caveats
 
-We like rebundling. Fewer contracts and fewer late night hunts for whichever tool broke, and nobody will miss the context switching that comes with five tools.
+We like rebundling. It means fewer contracts and fewer late night hunts for whichever tool broke – and nobody will miss the context switching that comes with five tools.
 
 But what's the cost? Your stack might be getting simpler by getting harder to leave.
 
