@@ -125,3 +125,27 @@ Find this setting under [**Settings** > **Organization** > **Security**](https:/
 When disabled, members only see themselves and other members in their projects.
 
 > **Note:** This feature requires the [Boost, Scale, or Enterprise plan](/platform-packages).
+
+### IP restrictions
+
+Organization admins and owners can restrict access to the organization by creating an allowlist of IP addresses and CIDR blocks. When enabled, only requests from allowed IPs can access the organization's data and settings.
+
+Find this under [**Settings** > **Organization** > **Security**](https://app.posthog.com/settings/organization-security).
+
+To configure IP restrictions:
+
+- Add up to 100 IP addresses or CIDR blocks to the allowlist (e.g. `192.168.1.1` or `10.0.0.0/8`)
+- Toggle enforcement on or off – when off, the allowlist is saved but not enforced
+- Requests from IPs not in the allowlist receive a 403 error explaining that their IP is not allowed
+
+PostHog prevents you from saving a policy that would block your own current IP address. If your IP isn't in the allowlist, the save is rejected with a warning asking you to include it first.
+
+Even when an organization blocks your IP, you can still:
+
+- Switch to another organization you belong to
+- Remove your own membership from the blocking organization
+- Create a new organization
+
+This ensures you're never completely locked out of your PostHog account.
+
+> **Note:** IP restrictions require a plan that includes this feature. Only admins and owners can configure the allowlist.
