@@ -379,7 +379,7 @@ posthog.capture("survey sent", {
 
 ## Session replay
 
-To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://us.posthog.com/settings/project-replay).
+To set up [session replay](/docs/session-replay) in your project, all you need to do is install the JavaScript web library and enable "Record user sessions" in [your project settings](https://app.posthog.com/settings/project-replay).
 
 For [fine-tuning control](/docs/session-replay/how-to-control-which-sessions-you-record) of which sessions you record, you can use [feature flags](/docs/session-replay/how-to-control-which-sessions-you-record#feature-flag-triggers), [sampling](/docs/session-replay/how-to-control-which-sessions-you-record#sampling), [minimum duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration), or set the `disable_session_recording` [config option](/docs/libraries/js/config) and use the following methods:
 
@@ -426,7 +426,7 @@ The defaults are the same as in rrweb, except for these fields:
 | maskTextClass            | 'ph-mask'          | Use a string or RegExp to configure which elements should be masked, refer to the [privacy](https://github.com/rrweb-io/rrweb/blob/master/guide.md#privacy) chapter                           |
 | maskAllInputs            | true               | mask all input content as \*                                                                                                                                                                  |
 
-The defaults for `maskAllInputs`, `maskTextSelector` and `blockSelector` will change depending on your masking configuration in the session replay section of [your project settings](https://us.posthog.com/settings/project-replay#replay-masking).
+The defaults for `maskAllInputs`, `maskTextSelector` and `blockSelector` will change depending on your masking configuration in the session replay section of [your project settings](https://app.posthog.com/settings/project-replay#replay-masking).
 
 ## Error tracking
 
