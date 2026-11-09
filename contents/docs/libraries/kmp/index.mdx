@@ -93,7 +93,7 @@ You can find your project token and host in [your project settings](https://us.p
 
 Use your project token (`phc_...`), not a personal API key. From `posthog-kmp` 0.11.0, the SDK stays disabled on Android, iOS and the JVM if `projectToken` is a personal API key (`phx_...`).
 
-> **Note:** From `posthog-kmp` 0.11.0, Android, iOS and the JVM send events to `/i/v1/analytics/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, make sure it forwards that path.
+> **Note:** From `posthog-kmp` 0.11.0, Android, iOS and the JVM send events to `/i/v1/analytics/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, make sure it forwards that path and passes the request headers and PostHog's response through unchanged. Refer to Upgrade to 0.11.0 below for the full list.
 
 ### Platform-specific setup
 
@@ -769,7 +769,10 @@ On the JVM, event capture, identification, feature flags, groups, error tracking
 
 Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. These changes apply on Android, iOS, macOS, and the JVM. They don't apply to the web target.
 
-- **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path.
+- **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path. A reverse proxy must also:
+  - Pass these request headers through unchanged: `Authorization`, `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id`, `PostHog-Request-Timestamp`, `Content-Type`, `Content-Encoding` and `User-Agent`.
+  - Return PostHog's response status, body and `Retry-After` header unchanged. The SDKs read them to decide which events to retry or drop, and drop the events on a `2xx` whose body isn't PostHog's.
+  - Proxy setups from our guides before 29 October 2026 strip `Authorization`, so PostHog answers `401` and drops the events. Update yours from the current guide.
 - **Project token:** if `projectToken` is a personal API key (`phx_...`), the SDK disables itself at setup. Use your project token (`phc_...`).
 - **Super properties:** values that you set with `register` replace the properties that the SDK sets, such as `$os_name`.
 - **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets.
