@@ -10,7 +10,7 @@ This page covers the basics: what observability is, what PostHog offers, and how
 
 - <PrivateLink url="https://www.figma.com/file/yHjzK2vmjWdbkcNA9Ee4ph?type=slides">Sales training deck</PrivateLink>
 - <PrivateLink url="https://docs.google.com/presentation/d/1ZXiYUwFmF5LYstM-eFhz0oVBkYYllzR6/edit">Leo's demo slides</PrivateLink> and <PrivateLink url="https://drive.google.com/file/d/1CV-fg2OPxivSgvyooCLJeaIMXA7XhllV/view">demo video</PrivateLink>
-- <PrivateLink url="https://docs.google.com/document/d/1Rswft51xDkYtkldt5BZXNYQewNjQCGMQ5V80MAvwQmg/edit?tab=t.0">Customers who switched to PostHog</PrivateLink>, with their quotes, why they moved, and what to watch out for.
+- <PrivateLink url="https://docs.google.com/document/d/1Rswft51xDkYtkldt5BZXNYQewNjQCGMQ5V80MAvwQmg/edit?tab=t.0">Customers who switched to PostHog</PrivateLink>, with their quotes, why they moved, and what to watch out for (internal only).
 
 ## Every bug leaves clues
 
