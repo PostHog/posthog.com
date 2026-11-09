@@ -145,6 +145,14 @@ These change behavior without a build error, so check them even if your app buil
 
 **Capture v1.** Analytics events now go to `/i/v1/analytics/events` instead of `/batch`. If you use a reverse proxy or self-host PostHog, forward that path before you upgrade. A reverse proxy must serve `/i/v1/*` and pass the `Authorization` header (`Bearer phc_…`) through unchanged, because the project token now travels there instead of in the request body. See the [proxy reference](/docs/advanced/proxy/proxy-reference#checklist) for the full list, and the [capture v1 upgrade guide](/docs/libraries/capture-v1) for what else changes.
 
+**Long distinct IDs.** PostHog now drops an event whose distinct ID is over 200 UTF-8 bytes. Version 3 shortened the ID and kept the event. If you identify users with a long ID, such as a JWT or a long email address, shorten or hash it before you upgrade, or every event for that user is dropped.
+
+**`Authorization` in `requestHeaders`.** Event requests send `Authorization: Bearer <projectToken>`, which replaces any `Authorization` header you set in `requestHeaders`. If your proxy authenticates with `Authorization`, switch it to another header, such as `X-Proxy-Token`.
+
+**Personal API keys.** A personal API key (`phx_…`) in `projectToken` now disables the SDK at setup and logs a warning. Version 3 started and PostHog rejected every event. Use your project token (`phc_…`).
+
+**Person processing in `beforeSend`.** When `personProfiles` turns person processing off, the SDK now sets the `process_person_profile` [option](#event-options) to `false` instead of the `$process_person_profile` property, so `beforeSend` hooks see it in `event.options`. A `$process_person_profile` you register or pass now wins over the SDK's value.
+
 **`$locale` and `$app_language`.** `$locale` is now the device's preferred language with its region, such as `de-CH` instead of `de`. The new `$app_language` property is the language your app shows, such as `de` or `pt-BR`. Update cohorts, insights, and actions that match `$locale`: to filter on your app's language, use `$app_language`. If your app sets its language itself instead of using iOS localizations, call `PostHogSDK.shared.setAppLanguage("de")` at startup and whenever it changes.
 
 ### Compile errors
@@ -163,12 +171,12 @@ These change behavior without a build error, so check them even if your app buil
 | `getFeatureFlagPayload(key)` | `getFeatureFlagResult(key, sendFeatureFlagEvent: false)?.payload` |
 | `reloadFeatureFlags { ... }` | `reloadFeatureFlags { result in ... }`, where `result.errorsLoading` is `true` if the reload failed |
 | `PostHogSDK.didReceiveFeatureFlags` | [`onFeatureFlags(_:)`](/docs/libraries/ios/usage) |
-| `PostHogSessionManager` | `getSessionId()`, `startSession()`, and `endSession()` on `PostHogSDK` |
+| `PostHogSessionManager` | `getSessionId()`, `startSession()`, and `endSession()` on `PostHogSDK`. Custom session IDs (`setSessionId(_:)`) have no public replacement. |
 | `PostHogStorageManager`, `config.storageManager` | `identify(_:)`, `getDistinctId()`, and `reset()` on `PostHogSDK` |
 
 Utility APIs that were public by accident, such as `Gzip`, `toISO8601String(_:)`, `toISO8601Date(_:)`, `dateToMillis(_:)`, and `UIColor(hex:)`, are no longer public, so copy the code you need into your app. Internals that only PostHog's React Native and Flutter SDKs use, such as `PostHogSessionManager` and `PostHogStorageManager`, moved behind `@_spi(PostHogInternal)`. The [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#internal-and-utility-apis) lists them all.
 
-Callbacks the SDK can call off the main thread are now `@Sendable`: `reloadFeatureFlags(_:)`, `setBeforeSend(_:)`, `getAnonymousId`, `pushIdentityProvider`, and `logSanitizer`. In Swift 6 mode, a closure that touches main-actor state no longer compiles. In `reloadFeatureFlags(_:)` and `pushIdentityProvider`, hop with `Task { @MainActor in ... }`. The others must return right away, so don't read main-actor state in them.
+Callbacks the SDK can call off the main thread are now `@Sendable`: `reloadFeatureFlags(_:)`, `setBeforeSend(_:)`, `getAnonymousId`, `pushIdentityProvider`, and `logSanitizer`. In Swift 6 mode, a closure that touches main-actor state no longer compiles. In `reloadFeatureFlags(_:)` and `pushIdentityProvider`, hop with `Task { @MainActor in ... }`. The others must return right away, so don't read main-actor state in them. In Swift 6 mode, passing a stored closure or method reference to `setBeforeSend(_:)` fails to compile: declare it as `BeforeSendBlock`, or pass it in an array.
 
 ### New: AI events
 
