@@ -323,6 +323,12 @@ $result = PostHog::emails()->send([
 
 ### Copies and attachments
 
+<CalloutBox icon="IconWarning" title="Attachments are temporarily unavailable" type="warning">
+
+A send with `attachments` gets a `400` error with the code `invalid_request`, and `attr` is `attachments`. PostHog sends nothing. Leave out `attachments` to send the email. `cc` and `bcc` work as described below.
+
+</CalloutBox>
+
 Content from your code also takes these fields. A template send takes none of them, because the template uses its own settings.
 
 | Field | Required | Description |

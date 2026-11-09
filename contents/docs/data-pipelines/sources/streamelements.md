@@ -9,11 +9,11 @@ availability:
 sourceId: StreamElements
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The StreamElements connector syncs your channel's tips, activity feed events, loyalty points leaderboards, store items and redemptions, chatbot commands and timers, and channel details into the PostHog Data warehouse, so you can analyze your stream's community and revenue alongside your product data.
+The StreamElements connector syncs your channel's tips, activity feed events, loyalty points and watch time leaderboards, song request history, session totals, store items and redemptions, chatbot commands and timers, and channel details into the PostHog Data warehouse, so you can analyze your stream's community and revenue alongside your product data.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ An OAuth2 access token also works in place of the JWT token, as long as it has t
 
 <SyncModes />
 
-The `tips` and `activities` tables support incremental sync on `createdAt`. Points leaderboards are snapshots of the current standings, so they are full refresh only.
+The `tips` and `activities` tables support incremental sync on `createdAt`. Points and watch time leaderboards, song request history, and session data are snapshots, so they are full refresh only.
 
 ## Configuration
 
