@@ -8,6 +8,8 @@ showTitle: true
 
 *For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
 
+> **Customers who switched to PostHog.** <PrivateLink url="https://docs.google.com/document/d/1Rswft51xDkYtkldt5BZXNYQewNjQCGMQ5V80MAvwQmg/edit?tab=t.0">See the list</PrivateLink> of customers who moved to PostHog from another tool, with their quotes, why they moved, and what to watch out for.
+
 ## Elevator pitch
 
 PostHog Error Tracking captures unhandled exceptions from web, mobile, and backend code, groups them into issues, and surfaces them alongside session replays, logs, feature flags, and product analytics in the same platform. Source maps, auto-assignment, spike detection, "Fix with AI" prompts, and Slack / Linear / Jira / GitHub alerts all come built-in. Generous free tier, then usage-priced per exception.

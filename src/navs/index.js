@@ -1939,6 +1939,28 @@ export const handbookSidebar = [
                             },
                         ],
                     },
+                    {
+                        name: 'Observability enablement',
+                        url: '',
+                        children: [
+                            {
+                                name: 'Observability foundations',
+                                url: '/handbook/growth/sales/observability-foundations',
+                            },
+                            {
+                                name: 'Observability positioning',
+                                url: '/handbook/growth/sales/observability-positioning',
+                            },
+                            {
+                                name: 'Error tracking positioning',
+                                url: '/handbook/growth/sales/error-tracking-positioning',
+                            },
+                            {
+                                name: 'Logs positioning',
+                                url: '/handbook/growth/sales/logs-positioning',
+                            },
+                        ],
+                    },
                 ],
             },
             {
@@ -2878,8 +2900,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',

@@ -8,6 +8,8 @@ showTitle: true
 
 *For the canonical frame everyone at PostHog uses – the self-driving story and standard description – see [Brand foundations](/handbook/brand/foundations#how-we-describe-posthog).*
 
+> **Customers who switched to PostHog.** <PrivateLink url="https://docs.google.com/document/d/1Rswft51xDkYtkldt5BZXNYQewNjQCGMQ5V80MAvwQmg/edit?tab=t.0">See the list</PrivateLink> of customers who moved to PostHog from another tool, with their quotes, why they moved, and what to watch out for.
+
 ## Elevator pitch
 
 PostHog Logs is a centralized log search built on OpenTelemetry. Send logs from any OTLP-compatible source (including your existing Datadog Agent) and they're searchable inside the same platform that runs your analytics, session replays, errors, and feature flags. Generous free tier, usage-priced per GB, no per-host or per-user fees.
@@ -121,7 +123,7 @@ Every PostHog log already knows the user. Click any log to jump to the user who 
 
 **Follow-up:** Who would own this, platform engineering and SRE, or product engineering? And is the pitch landing on infrastructure observability or product behavior?
 
-**Answer:** Better Stack is OTel-native, MCP-capable, does contract buyouts for Datadog migrations, and has a fuller observability bundle than ours (traces, status pages, on-call). If the team is platform/SRE-led and the work is infrastructure observability + incident response, Better Stack is the more direct fit. Where PostHog wins is when the team is *product*-led, meaning they need logs connected to funnels, retention, cohorts, experiments, and feature flag exposures. Better Stack has web vitals and RUM; PostHog has the full product behavior stack and feature flags as first-class triggers. The differentiation isn't observability features, it's the product data layer those features connect to.
+**Answer:** Better Stack is OTel-native, MCP-capable, does contract buyouts for Datadog migrations, and bundles status pages and on-call, which we don't have. If the team is platform/SRE-led and the work is infrastructure observability + incident response, Better Stack is the more direct fit. Where PostHog wins is when the team is *product*-led, meaning they need logs connected to funnels, retention, cohorts, experiments, and feature flag exposures. Better Stack has web vitals and RUM; PostHog has the full product behavior stack and feature flags as first-class triggers. The differentiation isn't observability features, it's the product data layer those features connect to.
 
 ### "How does PostHog handle terabytes of logs per day?"
 

@@ -4,6 +4,9 @@ showTitle: true
 hideAnchor: false
 ---
 
+> This page is about cross-selling. For the basics, read [observability foundations](/handbook/growth/sales/observability-foundations). For positioning, messaging, and pricing, read [observability positioning](/handbook/growth/sales/observability-positioning).
+
+> **Customers who switched to PostHog.** <PrivateLink url="https://docs.google.com/document/d/1Rswft51xDkYtkldt5BZXNYQewNjQCGMQ5V80MAvwQmg/edit?tab=t.0">See the list</PrivateLink> of customers who moved to PostHog from another tool, with their quotes, why they moved, and what to watch out for.
 
 ## What is the job to be done?
 
