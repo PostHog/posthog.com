@@ -306,18 +306,6 @@ export function useMenuData(): MenuType[] {
                     link: '/newsletter',
                     icon: <Icons.IconNewspaper className="size-4 text-orange" />,
                 },
-                {
-                    type: 'item',
-                    label: 'Product Engineer',
-                    link: '/product-engineer',
-                    icon: <Icons.IconBook className="size-4 text-blue" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Product-Market Fit',
-                    link: '/founders/product-market-fit-game',
-                    icon: <Icons.IconTarget className="size-4 text-red" />,
-                },
                 { type: 'separator' },
                 { type: 'label', label: 'Chat' },
                 {
@@ -333,7 +321,7 @@ export function useMenuData(): MenuType[] {
                     external: true,
                     // Stroke the filled brand path so it matches the outline icons around it
                     icon: (
-                        <IconDiscord className="size-4 text-blue" fill="none" stroke="currentColor" strokeWidth={1.5} />
+                        <IconDiscord className="size-4 text-blue" fill="none" stroke="currentColor" strokeWidth={1.2} />
                     ),
                 },
                 { type: 'separator' },
