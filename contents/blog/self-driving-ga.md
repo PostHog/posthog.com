@@ -79,7 +79,9 @@ Every new org gets $10 off Self-Driving in its first month. That's enough for up
 
 - **You only pay for what you turn on.** Choose reports, PRs, or both. Billing limits cap what you spend.
 
-In the beta we charged $15 per PR and gave the reports away for free. That turned out to be backwards. The research is where the agents do most of the work, and it's the part people care about most, so now every run is billed, reports included.
+In the beta we charged $15 per PR and gave the reports away for free. That turned out to be backwards. The research is where the agents do most of the work, and it's the part people care about most, so now every run is billed, reports included. Automatic PRs are turned off by default, so you can keep an eye on how useful they are while you get used to the system. 
+
+> **Controlling your costs:** We've updated [our Self-Driving pricing docs](/docs/self-driving/pricing#ask-your-agent) with more information, including a [`managing-self-driving-spend` skill](https://github.com/PostHog/posthog/blob/master/products/signals/skills/managing-self-driving-spend/SKILL.md) you can call through [the PostHog MCP](/mcp). 
 
 ### If you used the beta
 
