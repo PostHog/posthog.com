@@ -385,7 +385,7 @@ PostHog.setAppLanguage("pt-BR")
 PostHog.setAppLanguage(null) // back to the detected language
 ```
 
-The value is kept in memory only and survives `reset()`. A `$app_language` super property set with `register()` takes precedence. On JavaScript and Wasm, `setAppLanguage()` does nothing yet, because PostHog.js doesn't support `$app_language`. To send it there now, call `PostHog.register("\$app_language", "pt-BR")`.
+Call `setAppLanguage()` after `PostHog.setup()`: on Android and the JVM, a call before setup is dropped. The value is kept in memory only and survives `reset()`. A `$app_language` super property set with `register()` takes precedence. On JavaScript and Wasm, `setAppLanguage()` does nothing yet, because PostHog.js doesn't support `$app_language`. To send it there now, call `PostHog.register("\$app_language", "pt-BR")`.
 
 `$locale` is the device's language. On Android, iOS, and macOS it includes the region, such as `de-CH`. On the JVM it's a BCP 47 tag that keeps the script, such as `zh-Hant-TW`.
 
@@ -427,7 +427,7 @@ if (result != null) {
 }
 ```
 
-`payload` is `null` when the flag's payload isn't valid JSON, such as plain text or an empty string. A flag whose variant is an empty string counts as disabled: `isFeatureEnabled()` returns `false` and `result.enabled` is `false`, while `getFeatureFlag()` and `result.variant` still return `""`.
+On Android, iOS, macOS and the JVM, `payload` is `null` when the flag's payload isn't valid JSON, such as plain text or an empty string. On JavaScript and Wasm, it's the raw string. A flag whose variant is an empty string counts as disabled: `isFeatureEnabled()` returns `false` and `result.enabled` is `false`, while `getFeatureFlag()` and `result.variant` still return `""`.
 
 Get every evaluated flag at once as a map of `FeatureFlagResult`:
 
