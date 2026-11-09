@@ -22,17 +22,17 @@ Treat every email we send from PostHog like code. At least one peer must review 
 For customer-facing comms, we recommend all comms are reviewed by a member of the <SmallTeam slug="developer-marketing" />. You can do this in two ways:
 
 - **If you've already created the email,** ask for feedback in the #team-developer-marketing Slack channel.
-- **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the [Requests for Comments Internal repo](https://github.com/PostHog/requests-for-comments-internal), and assign a member of the team. They'll figure it out from there. 
+- **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal">Requests for Comments Internal repo</PrivateLink>, and assign a member of the team. They'll figure it out from there. 
 
 ## Writing emails with AI
 
 We care a lot about keeping AI slop out of our emails, so we recommend you don't use AI to write original email content.
 
-When you use an agent to edit email copy, ask it to use the [`no-slop` skill](https://us.posthog.com/project/2/skills/no-slop?owner_id=3301) from the PostHog skills store. The skill removes or flags common AI writing patterns and applies the [PostHog style guide](/handbook/content/posthog-style-guide).
+When you use an agent to edit email copy, ask it to use the <PrivateLink url="https://us.posthog.com/project/2/skills/no-slop?owner_id=3301">`no-slop` skill</PrivateLink> from the PostHog skills store. The skill removes or flags common AI writing patterns and applies the [PostHog style guide](/handbook/content/posthog-style-guide).
 
 ## Building emails in Workflows
 
-We usually send emails as HTML blocks. Use the [PostHog HTML Email Maker](https://us.posthog.com/project/2/skills/posthog-html-email-maker?owner_id=3301) skill to style your HTML blocks so they match the rest of our emails. It works great if you just feed it the copy and image you want as raw text!
+We usually send emails as HTML blocks. Use the <PrivateLink url="https://us.posthog.com/project/2/skills/posthog-html-email-maker?owner_id=3301">PostHog HTML Email Maker</PrivateLink> skill to style your HTML blocks so they match the rest of our emails. It works great if you just feed it the copy and image you want as raw text!
 
 All new broadcasts and automations should use these defaults:
 
@@ -83,7 +83,7 @@ Since we started moving to Workflows, Workflows has automatically paused some br
 
 The way users interact with PostHog is also changing. Previously, we relied on a `user has logged in` property to check if they were active. Now, users don't need to login at all to interact with their PostHog data, if they use our MCP, for example.
 
-We solve both of these issues by using the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, interacting with `@PostHog` in Slack, loading the toolbar, or creating a feature flag. 
+We solve both of these issues by using the <PrivateLink url="https://us.posthog.com/project/2/cohorts/671128">Active PostHog users (last 90 days)</PrivateLink> cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, interacting with `@PostHog` in Slack, loading the toolbar, or creating a feature flag. 
 
 **Add this cohort to all broadcasts by default.**
 
@@ -101,7 +101,7 @@ If you want to notify a specific group of users about a breaking change, inciden
 ## After you send
 
 - **Watch bounces and complaints.** Check them after every large send. If Workflows pauses a broadcast, find out why before you resume it. The cause is usually the audience.
-- **Measure the result.** Add an [annotation](https://us.posthog.com/project/2/data-management/annotations) on the send date. About a week later, check the [engagement events](/docs/workflows/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
+- **Measure the result.** Add an <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">annotation</PrivateLink> on the send date. About a week later, check the [engagement events](/docs/workflows/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
 
 ## Linking to the PostHog app or PostHog AI
 
