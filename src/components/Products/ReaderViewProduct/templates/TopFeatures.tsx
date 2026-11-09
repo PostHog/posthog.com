@@ -6,14 +6,16 @@ import type { CarouselSlide as CarouselSlideType, SectionComponentProps } from '
 
 interface TopFeaturesProps extends SectionComponentProps {
     slides?: CarouselSlideType[]
+    /** Section heading. Defaults to "Top features". */
+    title?: string
 }
 
-const TopFeatures = ({ id, productData, slides = [] }: TopFeaturesProps) => {
+const TopFeatures = ({ id, productData, slides = [], title = 'Top features' }: TopFeaturesProps) => {
     if (!slides.length) return null
 
     return (
         <section id={id} className="scroll-mt-20 not-prose">
-            <h2 className={SECTION_H2}>Top features</h2>
+            <h2 className={SECTION_H2}>{title}</h2>
             <TabbedCarousel
                 tabs={slides.map((s) => ({
                     value: s.slug,

@@ -12,11 +12,12 @@ import {
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
+import { HedgehogPuzzle } from '@posthog/brand/hoggies'
 import Link from 'components/Link'
 import { features } from './mcp_analytics/features'
 import { applications, topFeatures } from './mcp_analytics/slides'
 import MCPAnalyticsInstall from './mcp_analytics/install'
-import { ApplicationsWithHowItWorks, LeaderboardSection } from './mcp_analytics/sections'
+import { LeaderboardSection } from './mcp_analytics/sections'
 import { getTool } from '../../data/tools'
 
 // MCP Analytics is a beta product (@posthog/mcp on npm) with a dedicated scene in the app
@@ -56,56 +57,64 @@ export const mcpAnalytics = {
             icon: <IconInfo className="size-4" />,
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
-            group: 'divided',
-            icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
-        },
-        {
-            slug: 'applications',
-            name: 'How do I use it?',
-            group: 'divided',
-            icon: <IconCursorClick className="size-4" />,
-            component: ApplicationsWithHowItWorks,
-            props: { slides: applications },
-        },
-        {
             slug: 'use-cases',
             name: 'Who is it for?',
             hideFromNav: true,
             group: 'divided',
             icon: <IconMagic className="size-4" />,
         },
-        { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },
-        { slug: 'installation', name: 'Install', group: 'divided', icon: <IconCode className="size-4" /> },
         {
-            slug: 'mcp-leaderboard',
-            name: 'MCP leaderboard',
-            hideFromNav: true,
+            slug: 'applications',
+            name: 'How do I use it?',
             group: 'divided',
-            component: LeaderboardSection,
+            icon: <IconCursorClick className="size-4" />,
+            props: { slides: applications },
         },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        {
+            slug: 'top-features',
+            name: 'Key features',
+            group: 'divided',
+            icon: <IconSparkles className="size-4" />,
+            props: { slides: topFeatures, title: 'Key features' },
+        },
+        { slug: 'mcp-leaderboard', name: 'MCP leaderboard', hideFromNav: true, component: LeaderboardSection },
+        { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
+        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
+        { slug: 'installation', name: 'Install', group: 'divided', icon: <IconCode className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
     overview: {
         title: 'See everything agents do on your MCP server',
-        description:
-            'Product analytics for your MCP. Wrap your server once and see every tool call, failure and context of what agents were trying to do.',
-        eli5: "Your MCP server is a product, and agents are its users. To improve it, you need to know which tools were called, what they sent and got back, how long it took, and whether it failed. Our SDK also asks the agent why it is calling each tool, so you'll know the user's end goal too.",
+        description: '“Summarize the agent intents behind my top 5 tools.”',
+        eli5: "MCP Analytics captures every tool call agents make to your MCP server: what they sent, what came back, how long it took and whether it failed. We ask agents why they're calling each tool, so you see the user's goal alongside the call. Sessions tie the calls together, so one agent task reads as a single story.",
         textColor: 'text-white',
         layout: 'stacked',
+    },
+    hogs: {
+        mobileHog: {
+            Component: HedgehogPuzzle,
+            alt: 'Two hedgehogs holding puzzle pieces that fit together',
+        },
+    },
+    screenshots: {
+        // No `q_auto,f_auto` here: CloudinaryImage renders a URL with a comma as a plain <img> and drops the
+        // class that hides the other color mode's image, so both would show.
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/NEW_MCP_analytics_dashboard_light_ab100d9fb3.png',
+            srcDark:
+                'https://res.cloudinary.com/dmukukwp6/image/upload/NEW_MCP_analytics_dashboard_dark_44a5c6b92a.png',
+            alt: 'MCP Analytics dashboard showing tool calls, error rates, and latency',
+        },
     },
     useCases: {
         rows: [
             [
                 'Engineers building MCP servers',
-                'Find and fix broken or slow tools. Get error rates and p95 latency by tool. Monitor health and performance.'
+                'Find and fix broken or slow tools. Get error rates and p95 latency by tool. Monitor health and performance.',
             ],
             ['Engineers building MCP tools', 'Find the slow and failing tools and send a coding agent to fix them.'],
-            ['Engineers maintaining APIs, 'Identify and fix endpoints causing high error rates in tool calls.'],
+            ['Engineers maintaining APIs', 'Identify and fix endpoints causing high error rates in tool calls.'],
             ['Product managers', 'Learn who uses the server and what those users try to do.'],
         ],
     },

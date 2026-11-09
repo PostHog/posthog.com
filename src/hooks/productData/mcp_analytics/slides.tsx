@@ -27,7 +27,7 @@ const featureSlide = (slug: string, feature: Feature, progressBar: string): Caro
     color: 'bg-light dark:bg-dark',
     activeText: 'text-primary',
     progressBar,
-    layout: 'stack',
+    layout: 'float',
     heading: feature.headline,
     description: (
         <>
@@ -35,6 +35,7 @@ const featureSlide = (slug: string, feature: Feature, progressBar: string): Caro
             {list(feature.features)}
         </>
     ),
+    image: { ...feature.images[0], glow: true },
 })
 
 /**
@@ -155,5 +156,4 @@ export const topFeatures: CarouselSlide[] = [
     featureSlide('tool-quality', f.tool_quality, 'bg-red'),
     featureSlide('sessions', f.sessions, 'bg-yellow'),
     featureSlide('missing-capabilities', f.missing_capabilities, 'bg-orange'),
-    featureSlide('clients-and-models', f.clients_and_models, 'bg-purple'),
 ]

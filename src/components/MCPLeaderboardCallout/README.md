@@ -1,8 +1,8 @@
 # MCPLeaderboardCallout
 
-A callout that sends readers to the [MCP leaderboard](/mcp/leaderboard). It has the same shape as `TraceExplorerCallout` (`contents/docs/ai-observability/installation/_snippets/trace-explorer-callout.tsx`): copy and a button on the left, a hedgehog on the right.
+A callout that sends readers to the [MCP leaderboard](/mcp/leaderboard). It has the same layout as `FieldGuideCallout` (`src/components/FieldGuide/FieldGuideCallout.tsx`): a hedgehog on the left that breaks out of the top border, copy in the middle, and a button on the right.
 
-It renders on `/mcp-analytics`, between Install and Questions?. See `LeaderboardSection` in `src/hooks/productData/mcp_analytics/sections.tsx`.
+It renders on `/mcp-analytics`, between Key features and AI prompts. See `LeaderboardSection` in `src/hooks/productData/mcp_analytics/sections.tsx`.
 
 ## Usage
 
@@ -16,14 +16,14 @@ It also works in MDX with the same import.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `className` | `string` | `''` | Extra classes on the wrapper. The wrapper has a 24px top and bottom margin. Pass `!my-0` to remove it. |
+| `className` | `string` | `''` | Extra classes on the wrapper. The wrapper has a 24px top and bottom margin. Pass `!my-0` to remove it. It also has 32px of top padding for the hedgehog. |
 
 ## Layout
 
 The wrapper is a size container, so the layout follows the reader width, not the viewport:
 
-- **560px and wider:** copy on the left, hedgehog on the right. The callout is at most 680px wide, so the hedgehog stays next to the copy.
-- **Below 560px:** the copy stacks above the hedgehog, which is centered.
+- **576px and wider:** the callout fills the container width. The hedgehog is on the left, the copy is in the middle, and the button is on the right.
+- **Below 576px:** the hedgehog is smaller and the button moves below the copy.
 
 ## Styles and colors
 
