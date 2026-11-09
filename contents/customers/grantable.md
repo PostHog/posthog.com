@@ -2,7 +2,7 @@
 title: How Grantable replaced Zapier with PostHog Workflows and cut setup time by ~90%
 customer: Grantable
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/grantable_story_85e8fd3bba.jpg
+    https://res.cloudinary.com/dmukukwp6/image/upload/Grantable_1920x1080_59036efb58.png
 date: 2025-11-05
 ---
 

@@ -58,8 +58,8 @@ Engage with users. Look for cues that signal gaps that Error Tracking can fill:
   * https://posthog.com/tutorials/error-tracking
 * Visiting the error tracking product page (https://posthog.com/error-tracking) and clicking "Get started - free"
 * Reading blog posts about error tracking:
-  * https://posthog.com/blog/posthog-vs-sentry
-  * https://posthog.com/blog/best-sentry-alternatives
+  * https://posthog.com/compare/posthog-vs-sentry
+  * https://posthog.com/compare/best-sentry-alternatives
 * Asking PostHog AI about error tracking
 * Asking MCP about error tracking
 
@@ -71,7 +71,7 @@ When reviewing accounts, ask:
 * **Incomplete implementations**: Are there any products a customer started to configure but didn't finish? Understanding why can highlight pain points Error Tracking could address.
 * **Product churn**: Are there any products a customer used and then stopped? Understanding why can help identify if Error Tracking could solve the underlying issues.
 * **Decision-making timeline**: Are they doing annual engineering roadmaps or quarterly goals? This helps you time cross-sell conversations appropriately.
-* **Competitive landscape**: Use the [SDK scanner](https://sdk-scanner.posthog.dev/) to check if they're using a competitor for error tracking, which can help you position PostHog's integrated approach.
+* **Competitive landscape**: Use the <PrivateLink url="https://sdk-scanner.posthog.dev/">SDK scanner</PrivateLink> to check if they're using a competitor for error tracking, which can help you position PostHog's integrated approach.
 
 ## Demonstrate the value
 

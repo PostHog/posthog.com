@@ -88,7 +88,7 @@ These views contain tickets from your specific product groups (see groupings abo
 
 ### Your daily workflow
 
-Start your day with your SME views. Build your knowledge. Get really good at your products. Once you're on top of your SME queue, move to the [support shared view](https://us.posthog.com/project/2/support/tickets?view=eO1HETSX) which has all tickets the technical support team is responsible for.
+Start your day with your SME views. Build your knowledge. Get really good at your products. Once you're on top of your SME queue, move to the <PrivateLink url="https://us.posthog.com/project/2/support/tickets?view=eO1HETSX">support shared view</PrivateLink> which has all tickets the technical support team is responsible for.
 
 **But here's the key**: you're not locked into only your SME products. The goal is expertise, not silos. If you're caught up and the shared queue needs attention, dive in. If you're swamped and someone else can help with your SME queue, ask for it.
 

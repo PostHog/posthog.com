@@ -22,8 +22,9 @@ import AIPromptsSection from 'components/ReplayVision/AIPromptsSection'
 import WorksWithSection from 'components/ReplayVision/WorksWithSection'
 import { PricingTLDR, PricingPlans, PricingCredits } from 'components/ReplayVision/PricingSections'
 import PricingFooterCTASection from 'components/ReplayVision/PricingFooterCTASection'
+import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
 import { sessionReplay } from './session_replay'
-import { topFeatures } from './replay_vision/slides'
+import { keyFeatures } from './replay_vision/slides'
 
 // Feature-comparison rows. Header rows group the table; feature rows carry the
 // row label and pull each competitor's value from `products.replay_vision.features`
@@ -227,6 +228,7 @@ export const replayVision = {
             icon: <IconInfo className="size-4" />,
         },
         { slug: 'use-cases', name: 'Who is it for?', icon: <IconPeople className="size-4" /> },
+        { slug: 'field-guide', name: 'Field guide', component: FieldGuideCallout, hideFromNav: true },
         {
             slug: 'how-to-use',
             name: 'How to use it',
@@ -234,10 +236,10 @@ export const replayVision = {
             icon: <IconCursorClick className="size-4" />,
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             icon: <IconList className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ai-prompts',
@@ -293,6 +295,7 @@ export const replayVision = {
     ],
     overview: {
         title: 'Your product, watching itself',
+        description: '"Summarize sessions on the settings page where users experience friction"',
         eli5: 'Replay Vision watches your session recordings for you. Describe what to look for once, and a scanner reads every matching session, video and events, and turns what it sees into structured observations you can query, chart, and alert on.',
         textColor: 'text-black', // tw
     },

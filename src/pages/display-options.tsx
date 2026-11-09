@@ -294,29 +294,6 @@ export default function DisplayOptions() {
                 </div>
                 <div className="bg-primary grid grid-cols-2 gap-2">
                     <div className="flex items-center gap-1 mb-1">
-                        <span className="text-sm">Reduce transparency</span>
-                        <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
-                            <p className="max-w-sm my-0 leading-snug">
-                                Solid, opaque backgrounds for windows and sidebars instead of blurred transparency.
-                            </p>
-                        </Tooltip>
-                    </div>
-                    <div>
-                        <ToggleGroup
-                            title=""
-                            options={[
-                                { label: 'Disabled', value: 'false' },
-                                { label: 'Enabled', value: 'true' },
-                            ]}
-                            onValueChange={(value) => {
-                                updateSiteSettings({ ...siteSettings, reduceTransparency: value === 'true' })
-                            }}
-                            value={siteSettings.reduceTransparency ? 'true' : 'false'}
-                        />
-                    </div>
-                </div>
-                <div className="bg-primary grid grid-cols-2 gap-2">
-                    <div className="flex items-center gap-1 mb-1">
                         <span className="text-sm">Hedgehog mode</span>
                         <Tooltip trigger={<IconInfo className="size-4 inline-block relative -top-px" />} delay={0}>
                             <p className="max-w-sm my-0 leading-snug">

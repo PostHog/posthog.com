@@ -68,7 +68,7 @@ npx -y @posthog/wizard@latest
 
 Here's what it does automatically:
 
-- Instruments multiple products like Product Analytics, Web Analytics, Session Replay, Error Tracking, and [others]((/docs/ai-engineering/ai-wizard))
+- Instruments multiple products like Product Analytics, Web Analytics, Session Replay, Error Tracking, and [others](/docs/ai-engineering/ai-wizard)
 - Installs the right SDKs for their stack
 - Scans their codebase to understand their product
 - Creates 10-15 custom events based on product flows it identifies

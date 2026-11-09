@@ -29,7 +29,7 @@ For detailed column definitions, formulas, and platform field mappings, see [Col
 When you first visit the [Marketing Analytics dashboard](https://app.posthog.com/web/marketing), you'll see a guided onboarding wizard that walks you through setup:
 
 1. **Welcome** – Introduction to Marketing Analytics and its capabilities
-2. **Add source** – Connect your marketing data sources (native integrations, Data Warehouse, or self-managed sources)
+2. **Add source** – Connect your marketing data sources (native integrations, Data Warehouse, or file sources)
 3. **Conversion goals** – Define what actions count as conversions (optional)
 
 You can skip the conversion goals step and configure them later in [settings](https://app.posthog.com/settings/environment-marketing-analytics). Once you complete onboarding, you'll see the full marketing dashboard with your campaign data.
@@ -77,6 +77,32 @@ The campaign breakdown table provides detailed performance metrics by individual
 - **Conversion goals**: Performance against your defined conversion goals
 - **Cost per conversion**: Cost efficiency for conversions (total cost ÷ conversions)
 
+### Ad performance overview
+
+The ad performance overview displays summary metric cards at the top of the dashboard, organized into two collapsible groups:
+
+- **Ad platforms** – Metrics reported by your connected ad platforms, such as impressions, clicks, cost, and CTR
+- **PostHog** – Your configured conversion goals and cost per conversion
+
+Each group shows how many metrics are currently visible out of the total available.
+
+#### Configure metrics
+
+Click **Configure metrics** to customize which metrics appear in the overview. In the configuration modal, you can:
+
+- **Show or hide individual metrics** using the checkbox next to each metric name
+- **Show or hide entire groups** using the **Show all** and **Hide all** buttons for each section
+- **Reorder metrics** within each group using the up and down arrow buttons
+- **Reset to defaults** to restore the original visibility and order
+
+Click **Apply** to save your changes or **Cancel** to discard them. Configuring overview metrics does not affect table columns or the underlying queries.
+
+#### Collapse groups
+
+Click the group name (**Ad platforms** or **PostHog**) to collapse or expand that section. Collapsing a group hides the cards temporarily without removing them from your configuration.
+
+Visibility, order, and collapsed state are saved per project in your browser and persist across page reloads.
+
 ## Settings and configuration
 
 ### Data source configuration
@@ -84,7 +110,7 @@ The campaign breakdown table provides detailed performance metrics by individual
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/Screenshot_2025_10_24_at_11_32_53_AM_11adfeb6c8.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/Screenshot_2025_10_24_at_11_32_23_AM_00e27030df.png"
-  alt="Unified data source configuration showing native, data warehouse, and self-managed sources"
+  alt="Unified data source configuration showing native, data warehouse, and file sources"
   classes="rounded"
 />
 
@@ -102,8 +128,8 @@ PostHog can automatically sync marketing data from supported advertising platfor
 
 **Supported native sources:**
 
-| Platform      | Setup Guide                                    | Required Tables                               |
-| ------------- | ---------------------------------------------- | --------------------------------------------- |
+| Platform      | Setup Guide                                               | Required Tables                               |
+| ------------- | --------------------------------------------------------- | --------------------------------------------- |
 | Google Ads    | [Setup guide](/docs/data-pipelines/sources/google-ads)    | `campaign` and `campaign_overview_stats`      |
 | LinkedIn Ads  | [Setup guide](/docs/data-pipelines/sources/linkedin-ads)  | `campaign_groups` and `campaign_group_stats`  |
 | Meta Ads      | [Setup guide](/docs/data-pipelines/sources/meta-ads)      | `campaigns` and `campaign_stats`              |
@@ -132,13 +158,15 @@ You can _optionally_ connect external Data Warehouse sources (currently BigQuery
 - **Currency**: Currency code for cost values
 - **Impressions**: Number of impressions served
 
-#### Self-managed sources
+#### File sources
 
-You can configure self-managed sources from S3, GCS, Cloudflare R2, and Azure. Like Data Warehouse sources, you'll need to map the required columns for each table to enable the functionality.
+To use marketing data from files, import the files with the [Amazon S3](/docs/data-pipelines/sources/s3), [Google Cloud Storage](/docs/data-pipelines/sources/gcs), [Azure Blob Storage](/docs/data-pipelines/sources/azure-blob), or [Cloudflare R2](/docs/data-pipelines/sources/r2) source, or [upload a file](/docs/data-pipelines/sources/file-upload). These tables are Data Warehouse sources, so you map the required columns for each table in the same way.
+
+Tables that you linked as self-managed tables before show as **Self-managed** until you turn on syncing for them. You map their columns in the same way.
 
 <CalloutBox icon="IconInfo" title="Recommended format" type="fyi">
 
-We strongly recommend using JSON format for better support and troubleshooting. Create a connection between PostHog and your marketing source, map the desired fields, and PostHog will use the marketing data directly from that source.
+We strongly recommend using JSON format for better support and troubleshooting. Create a connection between PostHog and your file storage source, map the desired fields, and PostHog will use the marketing data directly from that source.
 
 </CalloutBox>
 

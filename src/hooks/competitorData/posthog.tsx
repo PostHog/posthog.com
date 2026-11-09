@@ -101,7 +101,7 @@ export const posthog = {
                 error_grouping: true,
                 exception_capture: true,
                 issue_management: true,
-                log_management: 'Beta',
+                log_management: true,
                 mobile_sdk_coverage: true,
                 profiling: false,
                 source_map_support: true,
@@ -184,6 +184,13 @@ export const posthog = {
                     heatmaps: true,
                 },
             },
+            ai: {
+                features: {
+                    ai_summaries: true,
+                    replay_vision: true,
+                    ai_observations_as_events: true,
+                },
+            },
         },
         logs: {
             available: true,
@@ -199,7 +206,7 @@ export const posthog = {
             },
             search: {
                 features: {
-                    full_text_search: 'Attribute search',
+                    full_text_search: 'Message and attribute search',
                     no_proprietary_query_language: true,
                 },
             },
@@ -242,6 +249,7 @@ export const posthog = {
                     ingest_only_pricing: true,
                     no_query_compute_fees: true,
                     predictable_at_scale: true,
+                    free_tier: '10 GB',
                 },
             },
         },
@@ -629,8 +637,8 @@ export const posthog = {
                 human_annotation: true,
                 // Beta per /docs/ai-observability/collect-user-feedback.
                 user_feedback: 'Beta',
-                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR (open beta).
-                agent_reports: 'Beta',
+                // Self-driving: eval reports, anomaly investigations, scouts -> inbox -> PR.
+                agent_reports: true,
                 ai_gateway_proxy: false,
             },
             tracing: {
@@ -712,7 +720,7 @@ export const posthog = {
                 features: {
                     email: true,
                     sms: true,
-                    push: false,
+                    push: true,
                     webhooks: true,
                     whatsapp: false,
                 },
@@ -843,6 +851,9 @@ export const posthog = {
                 react: true,
                 ruby: true,
                 rust: true,
+                roblox: true,
+                unity: true,
+                kotlin_multiplatform: true,
             },
         },
         pricing: {
@@ -916,7 +927,7 @@ export const posthog = {
             ccpa_ready: true,
             cookieless_tracking: true,
             data_anonymization: true,
-            data_retention: '7 years',
+            data_retention: '2 years',
             dpa: true,
             gdpr_ready: true,
             hipaa_ready: true,

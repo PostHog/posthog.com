@@ -26,7 +26,18 @@ The PostHog iOS SDK is a library that you can use to track events, identify user
 
 This page shows you how to install the SDK and get started with it. If you've already installed the SDK, you can skip ahead to learn about [using the features](/docs/libraries/ios/usage) and [configuring the SDK](/docs/libraries/ios/configuration).
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="iOS" />
+
 ## Installation
+
+> **CocoaPods is becoming read-only.** [CocoaPods has announced](https://blog.cocoapods.org/CocoaPods-Specs-Repo/) the following schedule for its public specs repository:
+>
+> - November 2–6, 2026: A read-only dry run will prevent us from publishing new PostHog iOS SDK versions to CocoaPods.
+> - December 2, 2026 onward: The repository will be permanently read-only. New PostHog iOS SDK versions will only be available through Swift Package Manager (SPM).
+>
+> Existing versions will remain available through CocoaPods, but you'll need SPM to get new releases during the dry run and after December 2. To migrate, remove the `PostHog` entry from your `Podfile`, run `pod install`, and follow the [Swift Package Manager installation instructions](#swift-package-manager) below.
 
 <IOSInstall />
 

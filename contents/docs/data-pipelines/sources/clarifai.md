@@ -18,7 +18,7 @@ The Clarifai connector syncs your models, workflows, datasets, and concepts into
 ## Prerequisites
 
 - A Clarifai account with at least one app
-- A [personal access token](https://docs.clarifai.com/control/authentication/pat/) (PAT) with read access to the resources you want to sync
+- A personal access token (PAT) with read access to the resources you want to sync
 
 ## Adding a data source
 

@@ -12,8 +12,6 @@ sourceId: RudderStack
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **This source is in alpha.** The interface and available tables may change.
-
 The RudderStack connector syncs your customer data platform configuration into PostHog, including sources, destinations, connections, transformations, tracking plans, catalog data, audit logs, and Reverse ETL syncs. Use it to analyze your RudderStack workspace alongside your product data.
 
 ## Prerequisites

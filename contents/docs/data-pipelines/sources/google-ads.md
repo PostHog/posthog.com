@@ -9,9 +9,11 @@ availability:
 sourceId: GoogleAds
 ---
 
-You can sync data from Google Ads reports by configuring it as a source in PostHog. The supported reports that can be synced include Ad, AdStats, AdGroup, AdGroupStats, Campaign, CampaignStats, GeographicStats, Keyword, KeywordStats, Video, and VideoStats, as they are described in the [Google Ads BigQuery transformation documentation](https://cloud.google.com/bigquery/docs/google-ads-transformation). Additional reports will be added based on user feedback we receive via our [in-app support form](https://app.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
+You can sync data from Google Ads reports by configuring it as a source in PostHog. The supported reports that can be synced include Ad, AdStats, AdGroup, AdGroupStats, Campaign, CampaignStats, GeographicStats, Keyword, KeywordStats, SearchTermStats, SearchTermKeywordStats, Video, and VideoStats, as they are described in the [Google Ads BigQuery transformation documentation](https://cloud.google.com/bigquery/docs/google-ads-transformation). Additional reports will be added based on user feedback we receive via our [in-app support form](https://app.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
 
 > **Note:** The GeographicStats table is disabled by default because it can load hundreds of millions of rows for active campaigns. You can enable it manually during source configuration if you need geographic performance data.
+
+> **Note:** The SearchTermKeywordStats table is disabled by default. It provides the same search term data as SearchTermStats but additionally includes the keyword that matched each term and its match type (exact, phrase, or broad). Enable it during source configuration if you need to analyze which keywords are triggering your search terms.
 
 ## Requirements
 

@@ -136,6 +136,8 @@ If you're on an older SDK version, some of these properties won't be present, `n
 
 There are a few common reasons that you may not see recordings appear in your project.
 
+<a id="1-authorized-domains-for-recordings" />
+
 **1. Authorized domains for recordings**
 
 Authorized domains for recordings is deprecated, you should use URL triggers instead. [Read more in our replay controls doc](/docs/session-replay/how-to-control-which-sessions-you-record#url-triggers).
@@ -154,6 +156,8 @@ To re-enable session recordings you want to either remove the `disable_session_r
 
 You can read more about [`posthog-js` configurations here](/docs/libraries/js/config).
 
+<a id="content-security-policy" />
+
 **3. Content security policy**
 
 When recordings are enabled, `posthog-js` will fetch a `recorder.js` script from the PostHog server. (This is not included in the default `posthog-js` to minimize the default bundle size)
@@ -161,6 +165,8 @@ When recordings are enabled, `posthog-js` will fetch a `recorder.js` script from
 Depending on your content security policy, this script may be blocked. If you have a `default-src`, `script-src`, `script-src-elem`, or `connect-src` directive in your CSP, you may need to ensure that PostHog domains are permitted (see [CSP documentation](/docs/advanced/content-security-policy)).
 
 If PostHog is being blocked by your content security policy, you should see an error message in your developer console with more details.
+
+<a id="adtracking-blockers" />
 
 **4. Ad/tracking blockers**
 

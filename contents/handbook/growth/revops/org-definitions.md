@@ -6,7 +6,7 @@ showTitle: true
 
 Intent, setup, and engagement are customer level concepts that Sales, Marketing & Website, Customer Success, and Growth all rely on. If you think a definition should change (which events qualify, which table is the source of truth, etc.), see "Adding an event to these definitions" section below and suggest here before you edit a dashboard tile so we can all work off of same source of truth.
 
-[Growth's self-serve dashboard](https://us.posthog.com/project/2/dashboard/2028479) tracks these definitions against specific time windows and cohorts (e.g. "% of intent orgs that completed setup within 14 days of signup"). 
+<PrivateLink url="https://us.posthog.com/project/2/dashboard/2028479">Growth's self-serve dashboard</PrivateLink> tracks these definitions against specific time windows and cohorts (e.g. "% of intent orgs that completed setup within 14 days of signup").
 
 ## Level of aggregation
 
@@ -17,7 +17,7 @@ Every definition below is at the **organization** level (PostHog's `organization
 - **PostHog staff inside customer orgs**: exclude events where the person's `email` contains `@posthog.com`.
 - **Impersonated sessions**: exclude events with `was_impersonated = true`. Impersonation carries the *customer's* identity, so the email filter doesn't catch it.
 
-**Ready-made actions:** the event-based definitions (Intent, Engaged, Teammate invited, Teammate joined) exist as [actions](https://us.posthog.com/project/2/data-management/actions?search=%5BRevOps%20def%5D) in project 2, named `[RevOps def] …` and tagged `revops-def`. Each action carries the same events and property filters as its table below, so use it in insights and funnels with "unique organizations" math, or in SQL with `matchesAction('[RevOps def] Org engaged')`. The actions do **not** apply the standard exclusions – add those in the insight. Setup and Paying have no action because they read billing tables, not events.
+**Ready-made actions:** the event-based definitions (Intent, Engaged, Teammate invited, Teammate joined) exist as <PrivateLink url="https://us.posthog.com/project/2/data-management/actions?search=%5BRevOps%20def%5D">actions</PrivateLink> in project 2, named `[RevOps def] …` and tagged `revops-def`. Each action carries the same events and property filters as its table below, so use it in insights and funnels with "unique organizations" math, or in SQL with `matchesAction('[RevOps def] Org engaged')`. The actions do **not** apply the standard exclusions – add those in the insight. Setup and Paying have no action because they read billing tables, not events.
 
 **Organization vs. customer/billing account:** the billing tables (`prod_postgres_billing_usagereport`, `prod_postgres_billing_customer`) also have a `customer_id` a billing system identifier separate from `organization_id`. Today these are the same level: `organization_id` and billing `customer_id` are 1:1 and `prod_postgres_billing_customer` has a single `organization_id` per customer row so there's no way to attach multiple orgs to one billing customer in the current schema.
 
@@ -46,7 +46,7 @@ Both the start and the finish of the same flow qualify (`onboarding started` and
 
 Some events that look similar but do not qualify: the `<field> team setting updated` events (e.g. `heatmaps_opt_in team setting updated`). Onboarding saves default settings in bulk, so these fire for nearly every new org – they look like deliberate toggles but usually aren't. Use the toggle events above instead.
 
-Action: [`[RevOps def] Org intent`](https://us.posthog.com/project/2/data-management/actions/363709).
+Action: <PrivateLink url="https://us.posthog.com/project/2/data-management/actions/363709"><code>[RevOps def] Org intent</code></PrivateLink>.
 
 ## Setup
 
@@ -66,7 +66,7 @@ The threshold is deliberately a single event. The quality bar lives in *which* e
 
 Related: one action often produces several qualifying events. An agent creating a dashboard over MCP fires both `$mcp_tool_call` and `dashboard created` (with `source = 'mcp'`); opening a dashboard in the app fires `viewed dashboard` plus a `query executed` per tile. Harmless for the definition but another reason never to read summed event counts as "number of actions".
 
-Action: [`[RevOps def] Org engaged`](https://us.posthog.com/project/2/data-management/actions/363712) – consuming and creating events together, with the `source` allowlist and the two historical `source IS NULL` windows below built in.
+Action: <PrivateLink url="https://us.posthog.com/project/2/data-management/actions/363712"><code>[RevOps def] Org engaged</code></PrivateLink> – consuming and creating events together, with the `source` allowlist and the two historical `source IS NULL` windows below built in.
 
 ### The `source` allowlist
 
@@ -143,7 +143,7 @@ Server-side events also need the `source` allowlist. When the page changes, upda
 
 An org has invited a teammate if it has any of the following events: `team member invited`, `user invited`, `bulk invite executed`.
 
-Action: [`[RevOps def] Teammate invited`](https://us.posthog.com/project/2/data-management/actions/363710).
+Action: <PrivateLink url="https://us.posthog.com/project/2/data-management/actions/363710"><code>[RevOps def] Teammate invited</code></PrivateLink>.
 
 ## Teammate joined
 
@@ -153,7 +153,7 @@ An org has a second teammate once any of these fire:
 
 Both are server-side and carry the organization group. Invited is the weak signal (an email was sent); joined is the strong one (a second human is in the org). One gap: an existing user who auto-joins through a verified SSO domain fires no event.
 
-Action: [`[RevOps def] Teammate joined`](https://us.posthog.com/project/2/data-management/actions/363711).
+Action: <PrivateLink url="https://us.posthog.com/project/2/data-management/actions/363711"><code>[RevOps def] Teammate joined</code></PrivateLink>.
 
 ## Paying / revenue
 

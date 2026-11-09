@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/simpler-self-deployments.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Guides

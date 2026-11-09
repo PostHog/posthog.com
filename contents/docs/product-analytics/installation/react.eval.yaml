@@ -1,0 +1,23 @@
+owner: wizard-and-docs
+tags: [install, javascript, react]
+status: active
+
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Vite React app from a one-line
+          request? The agent gets no docs, so docs-read shows which pages it finds on
+          its own.
+      codebase_to_test: react-vite
+      prompt: >-
+          Set up PostHog in the React app in {folder}/.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-js` and `@posthog/react`.
+              provider: >-
+                  {folder}/src/main.tsx wraps the rendered app in PostHogProvider from
+                  @posthog/react, set up either with a posthog client initialized with
+                  the project token and api_host, or with apiKey and options on the
+                  provider. Cite the file and line(s).
