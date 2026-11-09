@@ -692,7 +692,7 @@ On iOS, macOS, Android, Windows and Linux:
 
 ### Empty flag variants
 
-A flag whose variant is an empty string now reads as disabled on iOS, macOS, Android, Windows and Linux, as it already did on web. `isFeatureEnabled()` returns `false` with or without `defaultValue`, `getFeatureFlagResult()` returns `enabled: false`, and `onFeatureFlags` listeners and `$active_feature_flags` leave the flag out. `getFeatureFlag()`, the result's `variant` and the event's `$feature/<key>` property still return `""`.
+A flag whose variant is an empty string now reads as disabled on iOS, macOS, Android, Windows and Linux, as it already did on web. `isFeatureEnabled()` returns `false` with or without `defaultValue`, `getFeatureFlagResult()` and `getAllFeatureFlags()` return `enabled: false`, and `onFeatureFlags` listeners and `$active_feature_flags` leave the flag out. `getFeatureFlag()`, the result's `variant` and the event's `$feature/<key>` property still return `""`. PostHog no longer accepts empty variants for new flags, so only flags created earlier through the API, MCP or Terraform are affected. `/flags` still returns `enabled: true` for them, and other PostHog SDKs can still report them as enabled, so rename the variant before you upgrade.
 
 ### Behavior changes on Windows and Linux
 
