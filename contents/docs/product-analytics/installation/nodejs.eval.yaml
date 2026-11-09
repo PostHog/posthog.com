@@ -2,8 +2,9 @@ owner: wizard-and-docs
 tags: [install, javascript, node, server]
 status: active
 
-# One check for each flow the Node.js docs teach. Every check is a baseline: a one-line
-# prompt, no docs added. The rubrics describe the correct result for posthog-node 5, the
+# One check for each flow the Node.js docs teach. Every check is a baseline: a short
+# prompt in a user's words, no docs added. The prompt names PostHog and the kind of
+# analytics, and no API. The rubrics describe the correct result for posthog-node 5, the
 # major the docs show. `install` runs in an app with no PostHog code. The other checks run
 # in an app that already uses posthog-node 5.
 checks:
@@ -14,7 +15,7 @@ checks:
           shows which pages it finds on its own.
       codebase_to_test: oss-etherpad
       prompt: >-
-          Set up PostHog in the Node.js app in {folder}/.
+          Set up PostHog in this Node.js app.
       criteria:
           shared: [docs-read]
           rubrics:
@@ -29,71 +30,72 @@ checks:
               flushes-on-exit: >-
                   The app awaits the client's shutdown() when the server stops.
 
-    - id: events-with-group
+    - id: event-by-user
       description: >-
-          Baseline in Hoppscotch's NestJS backend, which is on posthog-node 5.50.0.
-          Does an agent capture events for the acting user and attach the team as a
-          group? The prompt does not say "group".
-      codebase_to_test: oss-hoppscotch-backend
-      pages:
-          - docs/libraries/node
-          - docs/product-analytics/group-analytics
-      prompt: >-
-          In the backend in {folder}/, send PostHog events when a team invitation is
-          created and when it is accepted. We want to analyze them per team as well as
-          per user.
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              events-captured: >-
-                  Creating and accepting an invitation each call capture({ distinctId,
-                  event, properties }) on the posthog-node client, with the acting
-                  user's ID as distinctId. Cite the file and line(s).
-              team-as-group: >-
-                  Each of those events passes the team as a group: groups: { team:
-                  <team ID> }.
-
-    - id: person-properties
-      description: >-
-          Baseline in the same backend. Does an agent put the email and name on the
-          person and keep them out of event properties? The prompt does not name the
+          Baseline in Hoppscotch's NestJS backend, which is on posthog-node 5.50.0 and
+          sends only instance telemetry. Does an agent capture the event for the user
+          and put the email and name on the person? The prompt does not name the
           method.
       codebase_to_test: oss-hoppscotch-backend
       pages:
           - docs/libraries/node
       prompt: >-
-          In the backend in {folder}/, send a PostHog event when a user accepts a team
-          invitation, and keep their email and display name on their PostHog profile.
+          Track when a user accepts a team invitation in the backend, by user, with
+          PostHog product analytics. Make sure the user's email and name are populated.
       criteria:
           shared: [docs-read]
           rubrics:
+              event-captured: >-
+                  Accepting an invitation calls capture({ distinctId, event, properties
+                  }) on the posthog-node client, with the accepting user's ID as
+                  distinctId. Cite the file and line(s).
               set-on-person: >-
-                  The email and display name are set on the person, with `$set` in the
-                  captured event or with identify({ distinctId, properties }). Cite the
+                  The email and name are set on the person, with `$set` in the captured
+                  event or with identify({ distinctId, properties }). They are not plain
+                  properties of the event.
+
+    - id: events-by-team
+      description: >-
+          Baseline in the same backend. Does an agent attach the team as a group and
+          keep the acting user as the distinct ID? The prompt does not say how.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+          - docs/product-analytics/group-analytics
+      prompt: >-
+          Track team invitations per team and by user in the backend, with PostHog
+          group analytics.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              events-captured: >-
+                  Creating and accepting an invitation each call capture() on the
+                  posthog-node client, with the acting user's ID as distinctId. Cite the
                   file and line(s).
-              not-event-properties: >-
-                  The email and display name are not plain properties of the event.
+              team-as-group: >-
+                  Each of those events passes the team as a group: groups: { team:
+                  <team ID> }.
 
     - id: anonymous-event
       description: >-
           Baseline in the same backend. Does an agent turn off person processing for
-          an event that is not about a signed-in user? The prompt does not name the
+          events that are not about a signed-in user? The prompt does not name the
           option.
       codebase_to_test: oss-hoppscotch-backend
       pages:
           - docs/libraries/node
       prompt: >-
-          In the backend in {folder}/, send a PostHog event each time someone opens a
-          published doc. Visitors are not signed in.
+          Track each visitor who opens a published doc in the backend, with PostHog
+          product analytics. Visitors aren't signed in.
       criteria:
           shared: [docs-read]
           rubrics:
               no-person-profile: >-
                   The event sets `$process_person_profile: false` in its properties.
                   Cite the file and line(s).
-              generated-distinct-id: >-
-                  Each event uses a generated distinct ID, such as randomUUID(), not one
-                  constant shared by all visitors.
+              distinct-id-per-visitor: >-
+                  Each visitor gets their own distinct ID, such as a generated ID, a
+                  cookie or a hash. It is not one constant shared by all visitors.
 
     - id: error
       description: >-
@@ -104,8 +106,8 @@ checks:
           - docs/libraries/node
           - docs/error-tracking/installation/node
       prompt: >-
-          In the backend in {folder}/, report errors to PostHog when creating a team
-          invitation fails, so we can see which user hit them.
+          Track errors when creating a team invitation fails in the backend, by user,
+          with PostHog error tracking.
       criteria:
           shared: [docs-read]
           rubrics:
@@ -124,8 +126,7 @@ checks:
           - docs/libraries/node
           - docs/feature-flags/installation/nodejs
       prompt: >-
-          In the backend in {folder}/, put creating team invitations behind a PostHog
-          feature flag.
+          Put creating team invitations in the backend behind a PostHog feature flag.
       criteria:
           shared: [docs-read]
           rubrics:
