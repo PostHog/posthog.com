@@ -1,0 +1,35 @@
+# A project on posthog-android 3. See "SDK major checks" in evals/README.md.
+owner: wizard-and-docs
+tags: [sdk-majors, android, mobile]
+status: active
+pages:
+    - docs/libraries/android
+    - docs/feature-flags/installation/android
+
+checks:
+    - id: turn-on-flags
+      description: >-
+          Tasks is on posthog-android 3.72.3 and turns feature flags off. Does an agent
+          that follows the docs register the flags callback the way the installed
+          major does? The prompt names no API and no version, so the agent must read
+          gradle/libs.versions.toml. No build criterion: the Gauge image has no Android
+          SDK.
+      codebase_to_test: oss-tasks-android
+      append_docs_link: true
+      prompt: >-
+          Turn on PostHog feature flags in the Android app in {folder}/ and log the
+          enabled flags when they finish loading.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flags-enabled: >-
+                  {folder}/src/googleplay/java/org/tasks/analytics/Firebase.kt no longer
+                  sets preloadFeatureFlags to false.
+              matches-android-3: >-
+                  The callback is set on the config, as `onFeatureFlags =
+                  PostHogOnFeatureFlags { ... }`. Fails if it calls
+                  `PostHog.onFeatureFlags { ... }`, which only 4.0 has. Cite the file and
+                  line(s).
+              major-not-bumped: >-
+                  gradle/libs.versions.toml keeps posthog-android on 3.x. Fails if the
+                  agent moved it to 4 or later.

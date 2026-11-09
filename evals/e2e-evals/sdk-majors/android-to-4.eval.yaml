@@ -1,0 +1,33 @@
+# Parked until posthog-android 4 ships. See "SDK major checks" in evals/README.md.
+owner: wizard-and-docs
+tags: [sdk-majors, android, mobile]
+status: draft
+pages:
+    - docs/libraries/android
+    - docs/feature-flags/installation/android
+
+checks:
+    - id: upgrade-and-turn-on-flags
+      description: >-
+          The same Tasks app and task as android-on-3, with an upgrade first. The
+          existing setup uses three options that 4.0 removes. Do the docs lead an agent
+          to fix them? No build criterion: the Gauge image has no Android SDK.
+      codebase_to_test: oss-tasks-android
+      append_docs_link: true
+      prompt: >-
+          Upgrade the PostHog SDK to the latest major version in the Android app in
+          {folder}/. Then turn on PostHog feature flags and log the enabled flags when
+          they finish loading.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              on-android-4: >-
+                  gradle/libs.versions.toml has posthog-android on 4.x.
+              removed-options-fixed: >-
+                  In {folder}/src/googleplay/java/org/tasks/analytics/Firebase.kt, the
+                  config takes `projectToken =` and no longer sets `apiKey`,
+                  `remoteConfig` or `sessionReplayConfig.screenshot`.
+              matches-android-4: >-
+                  The app logs the flags from `PostHog.onFeatureFlags { ... }`, called
+                  before PostHogAndroid.setup(). Fails if it sets `onFeatureFlags` on the
+                  config. Cite the file and line(s).

@@ -1,0 +1,30 @@
+# Parked until posthog-node 6 ships. See "SDK major checks" in evals/README.md.
+owner: wizard-and-docs
+tags: [sdk-majors, node, javascript, server]
+status: draft
+pages:
+    - docs/libraries/node
+    - docs/error-tracking/capture
+    - docs/error-tracking/installation/nestjs
+
+checks:
+    - id: upgrade-and-capture-error
+      description: >-
+          The same Hoppscotch backend and task as node-on-5, with an upgrade first. Do
+          the docs give an agent the posthog-node 6 call? The prompt names no API.
+      codebase_to_test: oss-hoppscotch-backend
+      append_docs_link: true
+      prompt: >-
+          Upgrade posthog-node to the latest major version in the NestJS backend in
+          {folder}/. Then report an error to PostHog when creating a team invitation
+          fails. Include the inviting user's ID and the team ID.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              on-node-6: >-
+                  {folder}/package.json lists posthog-node 6.x.
+              matches-node-6: >-
+                  The error is sent with captureException(error, { distinctId,
+                  properties }): one options object with the user's ID as distinctId and
+                  the team ID in properties. Fails if the user's ID is a positional
+                  second argument. Cite the file and line(s).

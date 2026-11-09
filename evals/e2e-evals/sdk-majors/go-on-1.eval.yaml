@@ -1,0 +1,34 @@
+# A project on posthog-go v1. See "SDK major checks" in evals/README.md.
+owner: wizard-and-docs
+tags: [sdk-majors, go, server]
+status: active
+pages:
+    - docs/libraries/go
+    - docs/product-analytics/installation/go
+
+checks:
+    - id: capture-event
+      description: >-
+          Blnk's ledger API is on posthog-go v1.3.3 and sends only a heartbeat. Does an
+          agent that follows the docs import and call the major the project has? The
+          prompt names no API and no version, so the agent must read go.mod.
+      codebase_to_test: oss-blnk
+      append_docs_link: true
+      prompt: >-
+          Capture a PostHog event when a ledger is created in the API in {folder}/. The
+          API has no user accounts.
+      criteria:
+          shared: [builds, docs-read]
+          rubrics:
+              event-captured: >-
+                  The code path that creates a ledger enqueues a posthog.Capture on the
+                  PostHog client. Cite the file and line(s).
+              matches-go-1: >-
+                  Every Go file the agent changed imports
+                  `github.com/posthog/posthog-go` with no `/v2` suffix, and turns off
+                  person processing with `"$process_person_profile": false` in
+                  Properties. Fails if it sets `Options` or calls posthog.NewOptions(),
+                  which only v2 has.
+              major-not-bumped: >-
+                  {folder}/go.mod still requires `github.com/posthog/posthog-go` at
+                  v1.x. Fails if it requires `github.com/posthog/posthog-go/v2`.
