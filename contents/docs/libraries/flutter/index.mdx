@@ -482,9 +482,11 @@ Before you upgrade, update to the latest version 5 release and fix its deprecati
 | iOS | 13.0 | 15.0 |
 | macOS | 10.15 | 11.0 |
 | Xcode | – | 26 or later |
-| Flutter, for iOS and macOS builds | 3.27 | 3.41 or later |
+| Flutter, on every platform | 3.27 | 3.41 or later |
 | iOS and macOS dependency manager | CocoaPods or Swift Package Manager | Swift Package Manager only |
 | Android | API 23 | API 23 (unchanged) |
+
+Version 6 needs Flutter 3.41 or later on every platform, including Android and web: `flutter pub get` fails on an older Flutter. Only iOS and macOS builds need Swift Package Manager.
 
 If you keep a `Podfile` for other plugins, raise the platform version there:
 
@@ -620,18 +622,21 @@ If you send events through your own reverse proxy, update it before you upgrade:
 - Pass `Authorization` (the project token, sent as `Bearer <token>`), every `PostHog-*` header, `Content-Type`, `Content-Encoding` and `User-Agent` through unchanged.
 - If your proxy strips other credentials, keep `Authorization` values that start with `Bearer phc_`, `Bearer phs_` or `Bearer phx_`. Keys created before these prefixes need their exact `Bearer <key>` value allowed too.
 - Accept request bodies up to 20 MB. AI requests are often larger than 1 MB, the default limit in NGINX.
+- Pass PostHog's response body through unchanged. A 2xx response whose body isn't PostHog's `{"results": {...}}` drops the events instead of retrying them.
 - If your app also runs on web, keep the routes the proxy already forwards for `posthog-js`. One proxy that serves every platform needs both sets of routes.
 
 PostHog's [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) already does this.
+
+**A proxy set up from PostHog's [proxy guides](/docs/advanced/proxy) before 29 October 2026 strips `Authorization`**, so PostHog answers `401` and the events are dropped. Update it from the current guide before you upgrade.
 
 The SDK doesn't fall back to `/batch/`. A 404 is retried, so events stay queued until the path is served.
 
 Other changes that come with capture v1, on every platform except web:
 
 - **Redirects:** the SDK only follows a 307 or 308 redirect to the same origin as `host`. Any other redirect drops the batch. If your proxy redirects capture requests to another host, point `host` at the final host.
-- **Event validation:** PostHog checks each event on its own and drops only the invalid ones, so the rest of the batch is delivered. It drops an event with an empty name, an empty distinct ID, or a name or distinct ID over 200 UTF-8 bytes. Version 5 shortened a long distinct ID and kept the event. If you identify users with a long ID, such as a JWT, shorten or hash it before you upgrade.
+- **Event validation:** PostHog checks each event on its own and drops only the invalid ones, so the rest of the batch is delivered. It drops an event with an empty distinct ID, or a name or distinct ID over 200 UTF-8 bytes. Version 5 shortened a long distinct ID and kept the event. Events with an empty name are dropped too, as version 5 already did on Windows and Linux. If you identify users with a long ID, such as a JWT, shorten or hash it before you upgrade.
 - **Personal API keys:** a personal API key (`phx_...`) in `projectToken` disables the SDK at setup. Use your project token (`phc_...`).
-- **Billing limit:** a 402 (over your billing limit) drops the whole request.
+- **Billing limit:** on iOS, macOS and Android, a 402 (over your billing limit) drops the whole request. Windows and Linux already dropped it in version 5.
 - **Session and window IDs:** a `$session_id` or `$window_id` that isn't a string is removed before sending.
 
 ### Property precedence
