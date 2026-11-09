@@ -100,31 +100,31 @@ Community events are better when organizers share what happened, what you learne
 
 PostHog team members who attended or presented at an event can share their feedback directly through our [event feedback form](/events-feedback-form).
 
-## Events any team can host
+## Events during small team offsites
 
-Any PostHog team can host small events for the customers in a city. Two formats work well:
+If your team is together for an offsite, Builder Relations can organize and pay for an event where you meet users in person. Any team that wants to meet customers should consider one.
 
-### Self-driving cafes
+### Event format
 
-We take over a coffee shop for a morning, invite local customers, hand out merch, and hear what active users think of the product. We've run these in [Austin](https://luma.com/ph-austin-cafe) (<PrivateLink url="https://posthog.slack.com/archives/C0A7Q222QF8/p1793991454953669">photos</PrivateLink>) and [Madrid](https://luma.com/contexto-cafe-madrid) (<PrivateLink url="https://posthog.slack.com/archives/C0ABM7L5GCC/p1790937690847009?thread_ts=1790931877.054409&cid=C0ABM7L5GCC">photos</PrivateLink>), and any team with the time and interest should do one too.
+We've learned that two formats work well: self-driving cafes and cohort dinners.
 
-![Self-driving cafe in Madrid](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/img_8836_5e685c9237.jpg)
+- **A self-driving cafe** is an event where you'll take over a coffee shop for a morning to hand out merch and chat with customers. It's loosely organized and users of all types can attend. We've run these for the GTM offsite in [Austin](https://luma.com/ph-austin-cafe) (<PrivateLink url="https://posthog.slack.com/archives/C0A7Q222QF8/p1793991454953669">photos</PrivateLink>) and the Marketing teams offsite in [Madrid](https://luma.com/contexto-cafe-madrid) (<PrivateLink url="https://posthog.slack.com/archives/C0ABM7L5GCC/p1790937690847009?thread_ts=1790931877.054409&cid=C0ABM7L5GCC">photos</PrivateLink>).
+- **A cohort dinner** is a private dinner for groups of customers at a similar stage. We've run these with the Customer Success team. Further info is available on the [cohort dinners](/handbook/customer-success/cohort-dinners) page.
 
-<Caption>Self-driving cafe at OSOM coffee shop in Madrid</Caption>
+### What we handle
 
-If your team is in a city for a week-long offsite or onboarding, the Builder Relations team will organize it for you. We find the coffee shop (usually near your hotel), create the event page, invite local customers, and ship the merch. You show up and talk to customers. The cost comes out of the Builder Relations event budget: before the event we add your point of contact to our Brex spend limit, so whoever pays the cafe swipes against our budget, not yours.
+For either format, Builder Relations finds a venue (usually near your hotel), creates the event page, and invites local customers. For cafes, we also ship the merch. You just show up and talk to customers.
 
-To set one up, post in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> with:
+The cost comes out of the Builder Relations event budget. Before the event, we add your point of contact to our Brex spend limit, so they can pay the venue without touching your team's budget.
 
-- Preferred dates
+### How to set one up
+
+Post in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> at least one month before your offsite with:
+
+- Which format you want
+- Your preferred dates
 - Your hotel's location
-- Who on your team is the point of contact
-
-Give us at least one month's notice.
-
-### Cohort dinners
-
-Customer Success hosts dinners for groups of customers at a similar stage. If you'd like to organize one, start with the [cohort dinners](/handbook/customer-success/cohort-dinners) page.
+- Your team's point of contact
 
 ## Sponsoring external events
 
