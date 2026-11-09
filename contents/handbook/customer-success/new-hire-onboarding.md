@@ -75,7 +75,7 @@ This is when you start working with your customers. Reach out, take the first ca
 
 ## What good looks like at the end of week 4
 
-This is the bar for end of month 1, and it's what your team lead is looking at during your first check-in. During probation your team lead gets an automated [30, 60 and 80-day check-in](/handbook/people/onboarding#306090-day-check-ins) form. At each one they are effectively answering the [keeper test](/handbook/company/management#the-keeper-test) question: _if you were leaving for a similar role at another company, would they fight to keep you?_ The answer comes from our values, and the benchmarks in this section and the next are the concrete things we look at to get there. We'll go through them during in-person onboarding and again at each check-in, so nothing here should come as a surprise. If you're behind on something, say so early - it's much easier to fix at day 30 than day 80.
+This is the bar for end of month 1, and it's what your team lead is looking at during your first check-in. During probation your team lead gets an automated [30, 60 and 80-day check-in](/handbook/people/onboarding#306090-day-check-ins) form. At each one they are working with you to make sure you are ramping up as expected. The benchmarks in this section and the next are the concrete things we compare against. We'll go through them during in-person onboarding and again at each check-in, so nothing here should come as a surprise. If you're behind on something, say so early. It's much easier to fix at day 30 than day 80.
 
 **You have a clear read on your book:**
 
