@@ -60,6 +60,8 @@ Here’s how it works:
   - Number of attendees
 This will automatically create a Slack channel and Brex budget for all attendees. If the offsite is happening in London or San Francisco, it will also post an announcement in those channels so people can come and say hi 
 
+- The team lead must also add the offsite to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20). This calendar shows all in-person onboardings and small team offsites, so other teams can see where you will be and join you. Create an event for the offsite dates in your calendar, then invite the In-person Onboarding Calendar as a guest.
+
 - Kendal will then:
   - Update the team’s Canvas with:
     - Accommodation details and a handy map
@@ -187,6 +189,8 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location.
   - Consider the cost of transportation to/from the airport, and around town, for when your team arrives at the offsite location.
   - Be mindful that people who take long flights won't appreciate a 2hr journey from the airport to accommodation!
+- [ ] Add the offsite to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20)
+  - Create an event for the offsite dates in your calendar, then invite the In-person Onboarding Calendar as a guest. This lets other teams see where you will be.
 - [ ] Announce to team
   - You can have fun with this and build excitement by progressively dropping hints and having folks try to guess the location
 - [ ] Create an offsite Slack channel and invite team
