@@ -224,7 +224,7 @@ PostHog.Companion.screen("Checkout", null, null);
 
 From version `4.0.0`, events carry two language properties:
 
-- `$locale` is the first language in the device settings, as a full language tag such as `de-CH` or `zh-Hant-TW`, whichever language your app shows. It's left out when the device reports no language.
+- `$locale` is the first language in the device settings, as a full language tag such as `de-CH` or `zh-Hant-TW`, regardless of the language your app shows. It's left out when the device reports no language.
 - `$app_language` is the language your app shows.
 
 On Android 13+, the SDK detects `$app_language` from the per-app language. If you declare `android:localeConfig`, by hand or with the Android Gradle plugin's `generateLocaleConfig` option, it falls back to the first device language that matches a language you declare. Without `localeConfig`, it's sent only when a per-app language is set. On Android 6 to 12, it isn't sent unless you set it.
@@ -583,7 +583,7 @@ Version 4.0 removes APIs deprecated in 3.x, sends events to capture v1, and alwa
 
 ### Requirements
 
-Update `posthog-android` to `4.+`. If you only depend on `posthog-android-surveys-compose`, declare `com.posthog:posthog-android` 4.0.0 or later in your build so Gradle resolves 4.x instead of the 3.x version surveys-compose pulls in. If you depend on core `posthog` directly, update it in the same change: core is now 7.0 and isn't binary compatible with SDKs built against 6.x. If the same project also uses `posthog-server`, update it too.
+Update `posthog-android` to `4.+`. If you only depend on `posthog-android-surveys-compose`, declare `com.posthog:posthog-android` 4.0.0 or later in your build so Gradle resolves 4.x instead of the 3.x version surveys-compose pulls in. If you depend on core `posthog` directly, update it in the same change: core is now 7.0 and isn't binary compatible with SDKs built against 6.x. If the same project also uses `posthog-server`, update it to 2.25.0 or later in the same change. `posthog-server` 2.25.0 depends on core 7.0, so keep `posthog-server` on 2.24.x while the project still uses `posthog-android` 3.x, which fails at runtime against core 7.0.
 
 The minimum Android API level (23), Java bytecode target (Java 8), and Kotlin compatibility (2.0) are unchanged.
 
@@ -657,15 +657,16 @@ PostHog.capture("signed_up", options = mapOf("process_person_profile" to false))
 
 Java callers pass the new trailing `options` argument, or `null`. In `beforeSend`, read and edit options through `event.options`. See [event options](#event-options).
 
-Version 4 also adds `captureAi` for AI events, which go to `/i/v1/ai/events`. See [AI events](#ai-events).
+Version 4 also adds `captureAi` for AI events, which go to `/i/v1/ai/events`. See [AI events](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md#ai-events) in the migration guide.
 
 ### Behavior changes
 
 These don't fail the build:
 
 - **`getFeatureFlag()`'s second parameter is now `sendFeatureFlagEvent`.** `getFeatureFlag("flag-key", true)` still compiles, but `true` no longer means the default value. A disabled SDK returns `null` instead of your default, and `$feature_flag_called` no longer reports a fallback as the flag's value.
+- **`$feature_flag_response` is left out for a missing flag.** In 3.x, `$feature_flag_called` for a missing flag sent `""` from `getFeatureFlag()` and `false` from `isFeatureEnabled()`. An empty string now means an empty variant, so insights, cohorts, and actions that filter on those values stop matching new events. Filter on `$feature_flag_response` not being set instead.
 - **Session replay records screenshots.** Apps that used the default wireframe mode now upload masked screenshots. Custom-drawn views and other content the SDK doesn't recognize, such as maps or video, can be visible unless you mask them. Jetpack Compose screens, which wireframe recorded as empty boxes, now show their content, so check that your consent or privacy notice covers them. A `WebView` is masked whole while `maskAllTextInputs` or `maskAllImages` is on, as both are by default, and recorded in full when both are off. Each frame uses more bandwidth and CPU than a wireframe. Review [masking](/docs/session-replay/privacy?tab=Android) before you upgrade.
-- **Compose masking changed.** This also applies to apps that already set `screenshot = true`. `Modifier.postHogMask()` and `Modifier.postHogUnmask()` apply only to the element and its children, not to siblings merged into the same clickable row. Text that draws past its layout box is masked in full. Nodes using `Modifier.clearAndSetSemantics` are masked while text or image masking is on, so use `Modifier.postHogUnmask()` to show them.
+- **Compose masking changed.** This also applies to apps that already set `screenshot = true`. See [masking in Jetpack Compose](/docs/session-replay/privacy?tab=Android).
 - **`$locale` is the device language.** It's now the first language in the device settings, as a full language tag such as `zh-Hant-TW`, instead of `Locale.getDefault()`, which your app can change. Hebrew, Indonesian, and Yiddish values on older Android versions change from the legacy codes `iw`, `in`, and `ji`, so update filters that match those. The new `$app_language` property is the language your app shows, sent on Android 13+ when it can be read. Call `PostHog.setAppLanguage("de")` to send it on every version. See [app language](#app-language).
 - **Your properties win over the SDK's values.** A registered super property with the same key as one the SDK sets, such as `$os_name`, now overrides the SDK's value. Super and event properties also override `$is_identified`, `$process_person_profile`, and the session replay debug properties. A registered `$session_id` overrides the SDK's session ID, which can detach events from their session replay. When you pass both `userProperties` and a `$set` property, they're merged key by key and `userProperties` wins; the same goes for `userPropertiesSetOnce` and `$set_once`. In 3.x, the `$set` property replaced `userProperties` whole.
 - **Person processing is sent only when it's off.** When `personProfiles` turns person processing off, the SDK sets the `process_person_profile` option to `false`. Otherwise it sends nothing, because PostHog processes person profiles by default. In 3.x, every event carried a `$process_person_profile` property. A `beforeSend` hook that assigns a new map to `event.options` loses that `false`, so edit `event.options` in place.
