@@ -208,7 +208,7 @@ async def send_password_reset(user_id: str, email: str, html: str, reset_request
 - **`text`** - If you leave it out, PostHog makes it from `html`.
 - **`from_`** - The sender. It has a trailing underscore because `from` is a Python keyword. It needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
 - **`capture_engagement`** - PostHog captures the email's engagement events unless you pass `capture_engagement=False`.
-- **`track_opens_and_clicks`** - PostHog tracks the email's opens and clicks unless you pass `track_opens_and_clicks=False`, which sends the email without tracking. PostHog then can't count the email's opens and clicks. It works separately from `capture_engagement`.
+- **`track_opens_and_clicks`** - Whether PostHog tracks the email's opens and clicks. If you pass `track_opens_and_clicks=False`, the email goes out without PostHog's open pixel, so PostHog can't count its opens. PostHog doesn't track clicks on emails sent from your code, so it never rewrites their links either way. It works separately from `capture_engagement`, which decides whether PostHog captures engagement events on the recipient's person.
 
 A send has `template_id` or `template_key`, not both, or it raises `TypeError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
