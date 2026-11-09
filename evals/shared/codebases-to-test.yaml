@@ -63,38 +63,18 @@ acme-dispatch-rails:
     ref: e6ded42fe15148d937a9bb9a4ecdf4365eea8d18
     folder: .
 
-# --- Open-source apps that already use a PostHog SDK. Each `ref` is a commit where the
-# app is on the SDK major named in the comment, so the SDK major checks in
-# e2e-evals/sdk-majors/ run in a real project on that major. Don't move a `ref` past the
-# commit where the app upgrades to the next major.
+# --- Open-source production apps (not Gauge's). The install checks need a real app with
+# no PostHog code. The other SDK checks need a real app that already uses the SDK: each
+# `ref` is a commit where the app is on the SDK major named in the comment, so don't move
+# a `ref` past the commit where the app upgrades to the next major.
+oss-etherpad: # Express server, no PostHog code
+    repo: https://github.com/ether/etherpad-lite
+    ref: 937a117439e30c919453a5fbf52e1ab9f007f881
+    folder: src
 oss-hoppscotch-backend: # NestJS API, posthog-node 5.50.0
     repo: https://github.com/hoppscotch/hoppscotch
     ref: 55908a76a1d0555c9bbb5d74244c14173df95b06
     folder: packages/hoppscotch-backend
-oss-polar-server: # FastAPI server, posthog 7.76.1 (Python)
-    repo: https://github.com/polarsource/polar
-    ref: ba3f8138458c9c615bf86aa7285a107234339633
-    folder: server
-oss-blnk: # Gin ledger API, posthog-go v1.3.3
-    repo: https://github.com/blnkfinance/blnk
-    ref: cb48a92f0afe7b5b2ba8d876d4f326e9f645b13e
-    folder: .
-oss-codemod-telemetry: # Rust telemetry crate, posthog-rs 0.21
-    repo: https://github.com/codemod/codemod
-    ref: 0187ff2835991e213312e625571f778653889177
-    folder: crates/telemetry
-oss-element-x-ios: # Swift app, posthog-ios 3.92.6. Can't build on Linux
-    repo: https://github.com/element-hq/element-x-ios
-    ref: 931e3866d40c52842b288f2bd5736d2e27afd689
-    folder: .
-oss-tasks-android: # Kotlin app, posthog-android 3.72.3
-    repo: https://github.com/tasks/tasks
-    ref: 3b9982e596f82a3b4754a1ff7455cd6df52395ed
-    folder: app
-oss-enjoy-player: # Flutter app, posthog_flutter 5.60.0
-    repo: https://github.com/baizhiheizi/enjoy_player
-    ref: 7890e2662bfd118c2ac620c29048e2f28f93b833
-    folder: .
 
 # --- Placeholders. These repos don't exist: PostHog/docs-eval-fixtures was planned
 # but never built. Checks that use them can't run. Replace each with a real codebase

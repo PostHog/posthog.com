@@ -123,25 +123,6 @@ If you add a check that tests the same task in another setup, such as with the p
 - **Answer-only checks** (no `codebase_to_test`) are graded on the final message. Use `shared: [docs-read]`; code checks use `[builds, docs-read]`.
 - **Multi-page checks** list the other pages in `pages:`. If the task needs PostHog installed first, include the install page. If no single page owns the task, or it needs more than 4 pages, put it in `evals/e2e-evals/`. That file names an `owner` and a file-level `pages:` list that every check in it reads.
 
-### SDK major checks
-
-The docs show one major version of each SDK. `evals/e2e-evals/sdk-majors/` tests what happens to a project on the other major when the docs change. Each SDK has two files, because `status` is set per file:
-
-| File | Status | The agent works in | Passes when |
-| --- | --- | --- | --- |
-| `<sdk>-on-<current>.eval.yaml` | `active` | An open-source app on the current major (`oss-*` in `shared/codebases-to-test.yaml`) | The code matches the installed major and the major does not change |
-| `<sdk>-to-<next>.eval.yaml` | `draft` until the next major ships | The same app | The agent upgrades to the next major and the code matches it |
-
-Every check sets `append_docs_link`, so the agent follows the pages in `pages:` and the result shows what those pages make an agent do. The prompt never names the version: the agent must read it from the project.
-
-Use them in this order when an SDK ships a major:
-
-1. Set `status: active` in `<sdk>-to-<next>.eval.yaml` and run it. It fails while the docs show the old major.
-2. Run both files against the deploy preview of the docs PR for that major (`--base-url`). `to-<next>` must pass. If `on-<current>` now fails, the new docs mislead a project on the old major: add a note that sends those readers to the old reference, then run it again.
-3. Merge the docs PR only when both pass.
-
-A docs PR that changes one of the `pages:` selects these checks with `--changed`.
-
 ## What the agent gets
 
 Each check runs once, as written. With none of the keys below, the agent gets only the prompt and finds docs on its own, which is how every baseline check runs. Four keys add to it, in any combination. `append_` keys add to the end of the prompt. `attach_` keys add to the Gauge eval.

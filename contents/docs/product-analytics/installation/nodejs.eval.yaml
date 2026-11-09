@@ -2,21 +2,136 @@ owner: wizard-and-docs
 tags: [install, javascript, node, server]
 status: active
 
+# One check for each flow the Node.js docs teach. Every check is a baseline: a one-line
+# prompt, no docs added. The rubrics describe the correct result for posthog-node 5, the
+# major the docs show. `install` runs in an app with no PostHog code. The other checks run
+# in an app that already uses posthog-node 5.
 checks:
     - id: install
       description: >-
           Baseline: can an agent set up PostHog in a Node.js app from a one-line
           request? The prompt names only the stack; the agent gets no docs, so docs-read
           shows which pages it finds on its own.
-      codebase_to_test: node-express
+      codebase_to_test: oss-etherpad
       prompt: >-
           Set up PostHog in the Node.js app in {folder}/.
       criteria:
-          shared: [builds, docs-read]
+          shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/package.json lists `posthog-node`.
+                  {folder}/package.json lists `posthog-node` at 5.x.
               initialized: >-
-                  The app creates a client with new PostHog(token, { host }) from
-                  posthog-node, passing the project token and a host option. Cite the
+                  The app creates one client at startup with new PostHog(token, { host
+                  }) from posthog-node. Cite the file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable. It is not
+                  written in the source.
+              flushes-on-exit: >-
+                  The app awaits the client's shutdown() when the server stops.
+
+    - id: events-with-group
+      description: >-
+          Baseline in Hoppscotch's NestJS backend, which is on posthog-node 5.50.0.
+          Does an agent capture events for the acting user and attach the team as a
+          group? The prompt does not say "group".
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+          - docs/product-analytics/group-analytics
+      prompt: >-
+          In the backend in {folder}/, send PostHog events when a team invitation is
+          created and when it is accepted. We want to analyze them per team as well as
+          per user.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              events-captured: >-
+                  Creating and accepting an invitation each call capture({ distinctId,
+                  event, properties }) on the posthog-node client, with the acting
+                  user's ID as distinctId. Cite the file and line(s).
+              team-as-group: >-
+                  Each of those events passes the team as a group: groups: { team:
+                  <team ID> }.
+
+    - id: person-properties
+      description: >-
+          Baseline in the same backend. Does an agent put the email and name on the
+          person and keep them out of event properties? The prompt does not name the
+          method.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+      prompt: >-
+          In the backend in {folder}/, send a PostHog event when a user accepts a team
+          invitation, and keep their email and display name on their PostHog profile.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              set-on-person: >-
+                  The email and display name are set on the person, with `$set` in the
+                  captured event or with identify({ distinctId, properties }). Cite the
                   file and line(s).
+              not-event-properties: >-
+                  The email and display name are not plain properties of the event.
+
+    - id: anonymous-event
+      description: >-
+          Baseline in the same backend. Does an agent turn off person processing for
+          an event that is not about a signed-in user? The prompt does not name the
+          option.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+      prompt: >-
+          In the backend in {folder}/, send a PostHog event each time someone opens a
+          published doc. Visitors are not signed in.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event sets `$process_person_profile: false` in its properties.
+                  Cite the file and line(s).
+              generated-distinct-id: >-
+                  Each event uses a generated distinct ID, such as randomUUID(), not one
+                  constant shared by all visitors.
+
+    - id: error
+      description: >-
+          Baseline in the same backend. Does an agent report a handled error with
+          captureException and link it to the user?
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+          - docs/error-tracking/installation/node
+      prompt: >-
+          In the backend in {folder}/, report errors to PostHog when creating a team
+          invitation fails, so we can see which user hit them.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  A failed create calls captureException(error, distinctId, properties)
+                  on the posthog-node client, with the inviting user's ID as the second
+                  argument. Cite the file and line(s).
+
+    - id: feature-flag
+      description: >-
+          Baseline in the same backend. Does an agent evaluate the flag the way the
+          docs recommend? An agent that works from memory uses the older single-flag
+          methods.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+          - docs/feature-flags/installation/nodejs
+      prompt: >-
+          In the backend in {folder}/, put creating team invitations behind a PostHog
+          feature flag.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code awaits evaluateFlags(<user ID>) on the posthog-node client and
+                  reads the flag from the result, with isEnabled() or getFlag(). Cite the
+                  file and line(s).
+              flag-gates-create: >-
+                  Creating an invitation is refused when the flag is off.
