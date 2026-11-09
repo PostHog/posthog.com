@@ -163,7 +163,7 @@ Content from your code takes `cc`, `bcc`, and `attachments`:
 - **`cc` and `bcc`** - One address or a list of plain addresses.
 - **`attachments`** - A list of Hashes. Each one has `filename` and the file's bytes as `content`, and can also have `content_type` and `content_id`.
 
-Read the file with `File.binread`, not `File.read`, and the client encodes the bytes for you. The client takes any other String as content that's already Base64. A file that the client can't send raises `PostHog::EmailError` with the code `invalid_attachment` before any request.
+Read the file with `File.binread`, not `File.read`. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, `send` raises an error, and PostHog sends nothing.
 
 ```ruby
 $posthog.emails.send(
@@ -179,7 +179,7 @@ $posthog.emails.send(
 )
 ```
 
-See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
 
 ## Check an email's status
 

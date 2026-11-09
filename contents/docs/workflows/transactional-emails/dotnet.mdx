@@ -214,7 +214,7 @@ public async Task<string> SendPasswordResetAsync(User user, string html, string 
 
 ### Copies and attachments
 
-`SendCodeEmailOptions` takes `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is an `EmailAttachment` with a `Filename` and the file's bytes as `Content`, and optionally `ContentType` and `ContentId`. The client encodes the bytes for you. A template send takes none of them, because the template uses its own settings.
+`SendCodeEmailOptions` takes `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is an `EmailAttachment` with a `Filename` and the file's bytes as `Content`, and optionally `ContentType` and `ContentId`. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, the send fails with an error, and PostHog sends nothing. A template send takes none of these fields, because the template uses its own settings.
 
 ```csharp
 var result = await emails.SendAsync(new SendCodeEmailOptions
@@ -237,7 +237,7 @@ var result = await emails.SendAsync(new SendCodeEmailOptions
 });
 ```
 
-See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
 
 ## Check an email's status
 

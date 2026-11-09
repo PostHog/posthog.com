@@ -197,7 +197,7 @@ A send has `template_id` or `template_key`, not both. Content from your code tak
 
 ### Copies and attachments
 
-Content from your code also takes `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is a map with `filename`, the file's bytes as `content`, and optionally `content_type`. The SDK encodes the bytes for you, so don't encode them yourself.
+Content from your code also takes `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is a map with `filename`, the file's bytes as `content`, and optionally `content_type` and `content_id`. The SDK gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The SDK checks this limit before it uploads a file. If an upload fails, `send` returns an error, and PostHog sends nothing.
 
 ```elixir
 PostHog.Emails.send(
@@ -213,7 +213,7 @@ PostHog.Emails.send(
 )
 ```
 
-See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
 
 ## Check an email's status
 

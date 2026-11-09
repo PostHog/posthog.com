@@ -189,7 +189,7 @@ A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your
 
 ### Copies and attachments
 
-A `CodeEmail` takes copies and files. Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes, and the client encodes the bytes for you. Add `content_type` to set the file type, or `content_id` to show the file inline. A `TemplateEmail` takes none of them, because the template uses its own settings.
+A `CodeEmail` takes copies and files. Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes. Add `content_type` to set the file type, or `content_id` to show the file inline. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, `send` returns an error, and PostHog sends nothing. A `TemplateEmail` takes none of them, because the template uses its own settings.
 
 ```rust
 use posthog_rs::{CodeEmail, EmailAttachment};
@@ -207,7 +207,7 @@ posthog
     .await?;
 ```
 
-See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
 
 ## Check an email's status
 

@@ -323,24 +323,143 @@ $result = PostHog::emails()->send([
 
 ### Copies and attachments
 
-<CalloutBox icon="IconWarning" title="Attachments are temporarily unavailable" type="warning">
-
-A send with `attachments` gets a `400` error with the code `invalid_request`, and `attr` is `attachments`. PostHog sends nothing. Leave out `attachments` to send the email. `cc` and `bcc` work as described below.
-
-</CalloutBox>
-
 Content from your code also takes these fields. A template send takes none of them, because the template uses its own settings.
 
 | Field | Required | Description |
 | --- | --- | --- |
 | `cc` | No | A list of up to 10 addresses that get a copy, without a display name. |
 | `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
-| `attachments` | No | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
+| `attachments` | No | A list of up to 10 files that you [uploaded first](#send-files). Each file is an object with `sha256`, `filename`, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
 
+- **Size** - An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too. One file can use all of the limit.
 - **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
 - **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
-- **SDKs** - The SDKs encode the file's bytes to Base64 for you.
+- **Viruses** - PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
+- **SDKs** - The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
 - **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+
+### Send files
+
+The files of an email go to PostHog before the email. Your SDK does these steps for you. With the API, do them yourself:
+
+1. **Hash each file.** Get the SHA-256 of the file's bytes, as 64 lowercase hex characters, and the size of the file in bytes.
+2. **Ask where to upload.** Send the hash and the size of each file of the email to the [upload route](#ask-where-to-upload). PostHog answers `present` for a file that it already has, and `upload` with an upload URL for each other file.
+3. **Upload the files.** Send the bytes of each `upload` file to its URL. Don't send your PostHog API key with the upload.
+4. **Send the email.** When all uploads are successful, send the email. Put the `sha256` and the `filename` of each file in `attachments`.
+
+Ask where to upload before each send, also for a file that you sent before. PostHog answers `present` for a file that it still has, so a file that you send to many recipients, such as your terms, goes up only one time.
+
+#### Ask where to upload
+
+```
+POST https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/
+```
+
+Send the `Authorization` and `Content-Type` headers of a [send](#request). The key needs the `transactional_email:write` scope. Send a JSON body with a `files` list of 1 to 10 files, all for one email:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `sha256` | Yes | The SHA-256 of the file's bytes, as 64 lowercase hex characters. |
+| `size` | Yes | The size of the file in bytes, at least 1. |
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "files": [
+      {"sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252", "size": 48213},
+      {"sha256": "aba4cc7ef2a4423000b9ec5269993717c92b29f092eac5b791c7e9ce24a69306", "size": 120544}
+    ]
+  }'
+```
+
+A successful request returns `200`, with one answer for each file, in the order of the request:
+
+```json
+{
+  "files": [
+    {
+      "sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252",
+      "status": "upload",
+      "url": "https://<bucket>.s3.us-east-1.amazonaws.com/<key>?X-Amz-Algorithm=AWS4-HMAC-SHA256&...",
+      "method": "PUT",
+      "headers": {
+        "Content-Length": "48213",
+        "x-amz-checksum-sha256": "0AyjwilurOCYZYqFdtr+yKlZ9dpTalHI+dBgwA5CclI="
+      },
+      "url_expires_at": "2026-11-10T09:15:00Z"
+    },
+    {
+      "sha256": "aba4cc7ef2a4423000b9ec5269993717c92b29f092eac5b791c7e9ce24a69306",
+      "status": "present",
+      "expires_at": "2026-12-16T09:00:00Z"
+    }
+  ]
+}
+```
+
+- **`present`** - PostHog has this file from an earlier upload by your project. Upload nothing. `expires_at` is the time when PostHog deletes the file, if no send uses it before then.
+- **`upload`** - Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes.
+
+#### Upload a file
+
+```bash
+curl -X PUT "<url>" \
+  -H "Content-Length: 48213" \
+  -H "x-amz-checksum-sha256: 0AyjwilurOCYZYqFdtr+yKlZ9dpTalHI+dBgwA5CclI=" \
+  --data-binary @invoice-1042.pdf
+```
+
+A successful upload returns `200`. The upload fails with a `400` or a `403` when the bytes don't agree with `size` and `sha256`, when a header isn't as given, or when the URL expired. Ask where to upload again to get a new URL. Don't send the email until all uploads are successful.
+
+The upload goes to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, let your servers connect with HTTPS to the host of `url`:
+
+| PostHog Cloud | Upload host |
+| --- | --- |
+| US | A host that ends in `.s3.us-east-1.amazonaws.com` |
+| EU | A host that ends in `.s3.eu-central-1.amazonaws.com` |
+
+#### Send the email with its files
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: receipt-1042" \
+  -d '{
+    "to": "jane@example.com",
+    "template_key": "receipt",
+    "subject": "Your receipt for order 1042",
+    "html": "<p>Thanks for your order. Your invoice and our terms are attached.</p>",
+    "attachments": [
+      {"sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252", "filename": "invoice-1042.pdf", "content_type": "application/pdf"},
+      {"sha256": "aba4cc7ef2a4423000b9ec5269993717c92b29f092eac5b791c7e9ce24a69306", "filename": "terms.pdf", "content_type": "application/pdf"}
+    ]
+  }'
+```
+
+For a complete script, see the [receipt with a PDF](/docs/workflows/transactional-emails/examples#receipt-with-a-pdf) example.
+
+### Checks for files
+
+These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. PostHog sends nothing when a check fails. The body of each error has a `why` and a `fix`, which tell you the cause and what to do.
+
+| Status | Code | Route | Cause | What to do |
+| --- | --- | --- | --- | --- |
+| `400` | `field_not_accepted` | Both | PostHog can't send files for your project yet. | Send the email without files. |
+| `400` | `too_many_attachments` | Both | The email has more than 10 files. | Send 10 files at most. Link to other files from the email body. |
+| `400` | `message_too_large` | Both | The email is over 40 MB after Base64 encoding. On the upload route, `attr` names the size of the largest file. | Send fewer or smaller files, or link to large files from the email body. |
+| `400` | `attachment_not_uploaded` | Send | Your project has no uploaded file with this SHA-256. The upload didn't finish, the file expired, or a different project uploaded it. `attr` names the file, such as `attachments__0__sha256`. | Ask where to upload again, upload the file, and send the email again. |
+| `400` | `blocked_file_type` | Send | Mailbox providers block this file type, such as `.exe`. | Send a different file type, or link to the file from the email body. |
+| `400` | `unsafe_filename` | Send | `filename` has a path or a line break. | Send only the file name, such as `invoice.pdf`. |
+| `400` | `not_mime_type` | Send | `content_type` isn't a MIME type. | Send a type such as `application/pdf`, or leave out `content_type`. |
+| `400` | `unsafe_content_id` | Send | `content_id` has `<`, `>`, or a line break. | Send only the ID, such as `logo`. |
+| `400` | `content_too_large` | Both | The request body is over 20 MB. | Make the request smaller. Files go to the upload URL, never in the request body. |
+| `429` | `upload_quota_exceeded` | Upload | Your project uploaded all the file bytes that it can upload today. The day starts at midnight UTC. | Send files that PostHog already has, because they don't count. Or upload after midnight UTC. |
+| `503` | `delivery_unavailable` | Both | PostHog couldn't get to its file storage. | Send the same request again after a short wait. For a send, use the same `Idempotency-Key`. |
+
+Other problems with `attachments` or `files`, such as a hash that isn't 64 lowercase hex characters, return the code `invalid_request`, and `attr` names the field.
 
 ### Checks for content from your code
 
