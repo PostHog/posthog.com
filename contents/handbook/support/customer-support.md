@@ -126,7 +126,7 @@ We also often get requests for partnerships, backlinks, or messages trying to se
 
 ### Users asking for their data to be deleted
 
-Most of the time users can self-serve deletion requests and should be encouraged to do so in order to save time and ensure they take responsibility for deleting their own data. Users can delete their [project](https://us.posthog.com/settings/project-danger-zone) and [organization](https://us.posthog.com/settings/organization-danger-zone) in the appropriate 'Danger Zone' section of their settings page if they have the correct permissions. Admins can remove members from their organization in [the Members page](https://us.posthog.com/settings/organization-members).
+Most of the time users can self-serve deletion requests and should be encouraged to do so in order to save time and ensure they take responsibility for deleting their own data. Users can delete their [project](https://app.posthog.com/settings/project-danger-zone) and [organization](https://app.posthog.com/settings/organization-danger-zone) in the appropriate 'Danger Zone' section of their settings page if they have the correct permissions. Admins can remove members from their organization in [the Members page](https://app.posthog.com/settings/organization-members).
 
 If a user refuses to delete their own data, you must first confirm they have the permissions to do this by checking their email address matches that of an organization admin. As an extra layer of security, you should also ask them to confirm their address by emailing you directly from it (e.g. not through PostHog Support.) Only then should you delete any data on their behalf. 
 
