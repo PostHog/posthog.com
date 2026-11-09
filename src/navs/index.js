@@ -1644,6 +1644,10 @@ export const handbookSidebar = [
                         url: '/handbook/customer-success/shareable-guides/designing-events-for-per-entity-metrics',
                     },
                     {
+                        name: 'Instrumenting PostHog in the development process',
+                        url: '/handbook/customer-success/shareable-guides/instrumenting-posthog-in-the-development-process',
+                    },
+                    {
                         name: 'LLM cost optimization',
                         url: '/handbook/customer-success/shareable-guides/llm-cost-optimization',
                     },
@@ -2082,6 +2086,10 @@ export const handbookSidebar = [
             {
                 name: 'Product & feature comparisons',
                 url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
+                name: 'Running experiments',
+                url: '/handbook/engineering/posthog-com/running-experiments',
             },
             {
                 name: 'Editing API docs',
@@ -2739,6 +2747,10 @@ export const docsMenu = {
                             name: 'Error patterns',
                             url: '/docs/self-driving/pocket-guide/ai-error-patterns',
                         },
+                        {
+                            name: 'Errors by account value',
+                            url: '/docs/self-driving/pocket-guide/errors-your-best-accounts-hit',
+                        },
                     ],
                     badge: {
                         title: 'New',
@@ -2870,8 +2882,8 @@ export const docsMenu = {
                                     url: '/docs/libraries/js/snippet-versioning',
                                 },
                                 {
-                                    name: "Security",
-                                    url: "/docs/libraries/js/security",
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
@@ -3447,6 +3459,10 @@ export const docsMenu = {
                         {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
+                        },
+                        {
+                            name: 'API scopes',
+                            url: '/docs/api/scopes',
                         },
                         {
                             name: 'Popular',
@@ -4083,6 +4099,10 @@ export const docsMenu = {
                         {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
+                        },
+                        {
+                            name: 'Chrome extension',
+                            url: '/docs/toolbar/extension',
                         },
                         {
                             name: 'Heatmaps',
@@ -8332,8 +8352,36 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/python',
                         },
                         {
+                            name: 'Go',
+                            url: '/docs/workflows/transactional-emails/go',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/workflows/transactional-emails/dotnet',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/workflows/transactional-emails/rust',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/workflows/transactional-emails/ruby',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/workflows/transactional-emails/elixir',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/workflows/transactional-emails/php',
+                        },
+                        {
                             name: 'API',
                             url: '/docs/workflows/transactional-emails/api',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/workflows/transactional-emails/examples',
                         },
                     ],
                 },
@@ -8374,6 +8422,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/workflows/push-notifications/flutter',
+                        },
+                        {
+                            name: 'Push step settings',
+                            url: '/docs/workflows/push-notifications/push-step-options',
                         },
                     ],
                 },

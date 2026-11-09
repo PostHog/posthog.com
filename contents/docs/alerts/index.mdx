@@ -65,6 +65,7 @@ The [MCP server](/docs/model-context-protocol) is the most complete way to creat
 - "Set up an anomaly detection alert on our signups trend using Z-score"
 - "Set up an ensemble alert using Z-score AND Isolation Forest on daily signups"
 - "Simulate a MAD detector on my revenue insight for the last 30 days"
+- "Create an AI judgment alert on daily signups. A drop on a weekday is bad, weekends are always lower"
 - "List all my alerts and their current state"
 - "Update my pageview alert threshold to 5000"
 - "Delete the old conversion alert"
@@ -160,7 +161,7 @@ Instead of setting a fixed threshold, anomaly detection uses detectors to identi
 
 ### Available detectors
 
-PostHog offers statistical detectors, machine learning detectors, and an ensemble that combines detectors. For most use cases, **Z-score** or **MAD** are good starting points. The **AI judgment** detector is available separately for accounts with access to it.
+PostHog offers statistical detectors, machine learning detectors, and an ensemble that combines detectors. For most use cases, **Z-score** or **MAD** are good starting points. The [**AI judgment**](#ai-judgment) detector asks an AI model to review the latest value instead.
 
 #### Statistical detectors
 
@@ -195,9 +196,16 @@ The **Ensemble** detector combines two or more of the above detectors with AND/O
 
 #### AI judgment
 
-The **AI judgment** detector sends recent insight values and a chart to an AI model. You can add instructions to describe unusual behavior. The model returns a verdict and its confidence in that verdict; the confidence is not a calibrated anomaly probability.
+The **AI judgment** detector sends recent insight values and a chart to an AI model, and asks whether the latest value needs attention. The model returns a verdict, the type of change it saw (such as a spike or a drop), and a short explanation. The explanation is included in the alert notification.
 
-This detector appears only when it is enabled for your account and your organization permits AI data processing. It cannot run with a real-time interval, monitor a breakdown, or join an ensemble. Each check uses a model call. Use [simulation](#simulating-a-detector) to assess its results before you save the alert.
+You can add instructions to describe what counts as unusual for your metric. For example, say whether a drop is good or bad, mention known weekly cycles, or list changes to ignore.
+
+Each check and each preview uses your organization's [AI credits](/docs/posthog-ai/pricing). Daily or hourly checks keep usage low. To use this detector:
+
+- Your organization must permit AI data processing.
+- A project can have up to 20 enabled alerts that use AI judgment.
+- It works on trend insights and on SQL insights that use **last row** or **first row** evaluation.
+- It cannot run with a real-time interval, monitor a breakdown, or join an ensemble.
 
 ### Configuration
 
@@ -238,6 +246,8 @@ For ensemble detectors, the chart shows individual score lines for each sub-dete
 
 Use the date range dropdown to test the detector over different time periods (e.g., last 24 hours, last 7 days, last 30 days).
 
+For **AI judgment**, the preview runs one check on the latest value, the same way a scheduled check does. It shows the verdict and the model's explanation, but no anomaly scores. Each preview uses AI credits.
+
 ### Tips
 
 - **Start with Z-score or MAD** – they work well for most time series data and are straightforward to interpret.
@@ -245,6 +255,7 @@ Use the date range dropdown to test the detector over different time periods (e.
 - **Set sensitivity to 0.95 for noisy metrics** – the default of 0.9 may produce too many alerts for high-variance data.
 - **Use ensemble AND to reduce false positives** – combining two detectors with AND logic means both must agree, which cuts down on noise.
 - **Differencing matters** – if your data has regular cycles (e.g., more traffic on weekdays), make sure differencing is enabled. Z-score and MAD enable it by default.
+- **Try AI judgment for noisy or low-volume metrics** – when a statistical detector flags too much, describe what matters in the instructions and preview the result.
 
 ## Notifications
 
@@ -274,6 +285,81 @@ When creating or editing an alert, you can add notification destinations inline:
 7. Click **Create alert** or **Save** to apply your changes.
 
 You can add multiple notification destinations to a single alert, up to five. Each destination appears in the list with its status.
+
+### Webhook payloads
+
+PostHog sends an HTTP `POST` with a JSON body in the [Alertmanager webhook format](https://prometheus.io/docs/alerting/latest/configuration/#webhook_config), so incident and on-call tools that accept Alertmanager webhooks can read it without a custom parser. The webhook URL must use `https`.
+
+- **Headers:**
+  - `Content-Type: application/json`
+  - `X-PostHog-Webhook-Version: 2` is the payload version. New fields may be added to the body without changing it, so ignore unknown fields rather than rejecting the payload. A breaking change would ship under a new version.
+
+Each request carries one alert. The `posthog_event_kind` label tells you what happened. Route on it:
+
+| `posthog_event_kind` | `status` | Meaning |
+| --- | --- | --- |
+| `firing` | `firing` | The alert condition is met. PostHog sends this on every check while the condition is met, except for AI detector alerts, which send it once. |
+| `errored` | `firing` | A check couldn't run. `annotations.error` carries the reason. |
+| `verdict_changed` | `resolved` | A follow-up about a firing PostHog already sent, such as the result of an investigation. It uses its own `fingerprint`, so it doesn't open or close anything. |
+
+Insight alerts don't send a payload when the condition stops being met, so your receiver never gets a `resolved` payload for a `firing` one. Resolve those alerts in your receiver, for example with an auto-resolve timeout.
+
+Alertmanager has only the `firing` and `resolved` statuses, so `errored` is sent as `firing`. It uses its own `fingerprint`, so your receiver treats it as a separate alert from the condition.
+
+Labels:
+
+- `alertname` is the alert's name.
+- `posthog_configuration_id` identifies the alert.
+- `posthog_source_kind` is `insight`.
+- `posthog_event_kind` is one of the values in the table above.
+- An alert that checks each breakdown value separately adds a `breakdown` label with that value.
+
+Annotations:
+
+- `summary` is a one-line headline, such as "Insight alert 'Daily signups' is firing".
+- `description` lists the details of the check, one per line.
+- `value` is the value the check measured, when there is one.
+- `error` is the reason a check couldn't run, on `errored` payloads.
+
+`startsAt` is when the alert started firing, and `endsAt` is `0001-01-01T00:00:00Z` on every payload except `verdict_changed`. `generatorURL` links to the alert in PostHog. `fingerprint` is the same for every `firing` payload of one alert, or of one breakdown value, so repeated payloads update one alert in your receiver.
+
+A firing payload looks like this:
+
+```json
+{
+  "version": "4",
+  "groupKey": "0192f3a4-...:...",
+  "truncatedAlerts": 0,
+  "status": "firing",
+  "receiver": "posthog",
+  "groupLabels": {
+    "alertname": "Daily signups",
+    "posthog_configuration_id": "0192f3a4-...",
+    "posthog_source_kind": "insight"
+  },
+  "commonLabels": {
+    "alertname": "Daily signups",
+    "posthog_configuration_id": "0192f3a4-...",
+    "posthog_source_kind": "insight",
+    "posthog_event_kind": "firing"
+  },
+  "commonAnnotations": { "summary": "Insight alert 'Daily signups' is firing", "...": "..." },
+  "externalURL": "https://us.posthog.com",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": { "...": "the same labels as commonLabels" },
+      "annotations": { "...": "the same annotations as commonAnnotations" },
+      "startsAt": "2026-11-05T12:00:00Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "https://us.posthog.com/project/1/...",
+      "fingerprint": "3f1c9a0b2d4e6f78"
+    }
+  ]
+}
+```
+
+Projects that had a webhook on logs or insight alerts by November 6, 2026 keep receiving the earlier payload, sent with `X-PostHog-Webhook-Version: 1`. Check the header to tell the two formats apart.
 
 ## Advanced options
 

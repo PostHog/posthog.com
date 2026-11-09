@@ -35,6 +35,26 @@ Configure the SDK in `config/posthog.php`. It's enabled by default; set `POSTHOG
 
 For browser events and session replay, install the [JavaScript SDK](/docs/libraries/js) separately.
 
+### SDK configuration
+
+From version 0.2.0, set these optional variables in your server's `.env` to tune delivery and feature-flag requests:
+
+| Variable | Default |
+| --- | --- |
+| `POSTHOG_TIMEOUT_MS` | `10000` milliseconds (cURL delivery and SDK HTTP requests) |
+| `POSTHOG_SOCKET_TIMEOUT_SECONDS` | `5` seconds (socket delivery only) |
+| `POSTHOG_BATCH_SIZE` | `100` events |
+| `POSTHOG_MAX_QUEUE_SIZE` | `10000` buffered events |
+| `POSTHOG_FLUSH_INTERVAL_SECONDS` | `5` seconds |
+| `POSTHOG_COMPRESS_REQUEST` | `false` |
+| `POSTHOG_CONSUMER` | `lib_curl` |
+| `POSTHOG_FF_REQUEST_TIMEOUT_MS` | `3000` milliseconds (remote flag evaluation) |
+| `POSTHOG_FF_REQUEST_MAX_RETRIES` | `1` retry |
+
+The flush interval is checked when events are captured, not by a background timer. Lifecycle flushes still apply.
+
+If you already published `config/posthog.php`, copy the environment mappings and conversion helpers from the [package configuration](https://github.com/PostHog/posthog-php/blob/main/packages/laravel/config/posthog.php). Package updates and `posthog:install` don't overwrite your existing config. After configuration changes, run `php artisan config:cache` if you cache configuration, and restart long-running workers.
+
 ### Capturing events and identifying users
 
 Use the Laravel facade, not the PHP SDK's `PostHog\PostHog` class:
@@ -54,7 +74,13 @@ The SDK uses the authenticated user's ID automatically, or you can pass a distin
 
 To link browser sessions to backend events, configure the JavaScript SDK's [tracing headers](/docs/libraries/js/config#tracing-headers). These headers are untrusted analytics input, not authentication. Pass an authenticated identity explicitly for security-sensitive events or flag decisions.
 
-The SDK doesn't collect request bodies, query strings, email, or IP addresses by default. Check your own event properties and exception messages for sensitive data.
+The SDK doesn't collect request bodies, query strings, or email by default. Check your own event properties and exception messages for sensitive data.
+
+#### Request IP addresses
+
+From version 0.2.0, events include `$ip` from Laravel's `request()->ip()`. Configure Laravel's [trusted proxies](https://laravel.com/docs/requests#configuring-trusted-proxies) when running behind a proxy or load balancer. Set `POSTHOG_CAPTURE_IP=false` to disable automatic IP collection; explicitly supplied IPs are unchanged.
+
+GeoIP enrichment is separate and remains disabled by default. To enable it, set `"disableGeoip" => false` in the `sdk` section of `config/posthog.php`.
 
 ### Feature flags
 
@@ -152,6 +178,28 @@ This uses `evaluateFlags()->isEnabled()` with the current analytics context. Rep
 The SDK automatically flushes events and clears context between requests, queue jobs, console commands, and sequential Octane lifecycles. Identity and session context propagate to jobs by default; set `queue_context` to `false` to disable this.
 
 Don't store scoped PostHog services in application singletons. Overlapping Swoole coroutines sharing one Laravel container aren't supported.
+
+#### Queued event delivery
+
+From version 0.3.0, you can send event batches through Laravel queue workers instead of the current PHP process. To enable queued delivery, configure:
+
+```bash file=.env
+POSTHOG_LARAVEL_QUEUE_ENABLED=true
+POSTHOG_LARAVEL_QUEUE_CONNECTION=redis
+POSTHOG_LARAVEL_QUEUE_NAME=posthog
+```
+
+Start a worker for that connection and queue:
+
+```bash
+php artisan queue:work redis --queue=posthog --tries=3 --backoff=10 --timeout=180
+```
+
+Set `retry_after` to `240` seconds for the Redis connection in `config/queue.php`. The worker timeout must cover all SDK HTTP attempts and backoff, and `retry_after` must exceed the worker timeout. Increase both if you increase SDK timeouts or retry backoff.
+
+Producers and workers need the same project configuration and valid `APP_KEY`, which Laravel uses to encrypt delivery jobs. If you already published `config/posthog.php`, add the package's new `laravel_queue` section. Rebuild cached configuration and restart workers after changes.
+
+Omit the connection and queue name to use Laravel's defaults. Use a non-`sync` connection for background delivery. SDK batching still applies, and a successful `flush()` confirms queue handoff, not receipt by PostHog. Feature-flag requests remain synchronous. This setting is separate from `queue_context`, which passes analytics context to your application's jobs.
 
 ### Testing and diagnostics
 
