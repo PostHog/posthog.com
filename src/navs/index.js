@@ -2595,19 +2595,11 @@ export const docsMenu = {
             url: '/docs/self-driving',
             navAppearance: 'sidebar',
             description: 'Understand PostHog and get set up',
-            badge: {
-                title: 'Beta',
-                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
             children: [
                 {
                     name: 'Overview',
                     url: '/docs/self-driving',
                     icon: 'IconHome',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Setup',
@@ -7338,10 +7330,6 @@ export const docsMenu = {
                     icon: 'IconBolt',
                     color: 'orange',
                     featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Where to use',
