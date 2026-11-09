@@ -125,3 +125,23 @@ Find this setting under [**Settings** > **Organization** > **Security**](https:/
 When disabled, members only see themselves and other members in their projects.
 
 > **Note:** This feature requires the [Boost, Scale, or Enterprise plan](/platform-packages).
+
+### IP restrictions
+
+Organization admins and owners can restrict access to PostHog based on IP address. When enabled, members can only sign in and use PostHog from allowlisted IP addresses or CIDR blocks.
+
+Find this setting under [**Settings** > **Organization** > **Security** > **IP restrictions**](https://app.posthog.com/settings/organization-security#organization-ip-restrictions).
+
+To configure IP restrictions:
+
+1. **Add IP addresses or CIDR blocks** – Enter individual IP addresses (like `203.0.113.4`) or CIDR ranges (like `10.0.0.0/8`). You can add up to 100 entries. Both IPv4 and IPv6 are supported.
+
+2. **Enable enforcement** – Toggle **Enable IP restrictions** to start blocking access from non-allowlisted addresses.
+
+3. **Test an IP address** – Use the IP tester to check whether a specific address would be allowed before enabling enforcement.
+
+When enforcement is enabled, members trying to access PostHog from a non-allowlisted IP address see a recovery page with options to retry, connect through a VPN, or log out.
+
+> **Tip:** You can add and edit the allowlist while enforcement is disabled. This lets you build your allowlist before turning on restrictions.
+
+> **Note:** This feature requires a plan that includes IP restrictions. Only organization admins and owners can configure this setting.
