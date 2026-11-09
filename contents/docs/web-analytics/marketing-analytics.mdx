@@ -29,7 +29,7 @@ For detailed column definitions, formulas, and platform field mappings, see [Col
 When you first visit the [Marketing Analytics dashboard](https://app.posthog.com/web/marketing), you'll see a guided onboarding wizard that walks you through setup:
 
 1. **Welcome** – Introduction to Marketing Analytics and its capabilities
-2. **Add source** – Connect your marketing data sources (native integrations or Data Warehouse sources)
+2. **Add source** – Connect your marketing data sources (native integrations, Data Warehouse, or file sources)
 3. **Conversion goals** – Define what actions count as conversions (optional)
 
 You can skip the conversion goals step and configure them later in [settings](https://app.posthog.com/settings/environment-marketing-analytics). Once you complete onboarding, you'll see the full marketing dashboard with your campaign data.
@@ -110,7 +110,7 @@ Visibility, order, and collapsed state are saved per project in your browser and
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/Screenshot_2025_10_24_at_11_32_53_AM_11adfeb6c8.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/Screenshot_2025_10_24_at_11_32_23_AM_00e27030df.png"
-  alt="Unified data source configuration showing native, data warehouse, and self-managed sources"
+  alt="Unified data source configuration showing native, data warehouse, and file sources"
   classes="rounded"
 />
 
@@ -158,15 +158,13 @@ You can _optionally_ connect external Data Warehouse sources (currently BigQuery
 - **Currency**: Currency code for cost values
 - **Impressions**: Number of impressions served
 
-#### Files in object storage
+#### File sources
 
-To use marketing data from files, import the files with the [Amazon S3](/docs/data-pipelines/sources/s3), [Google Cloud Storage](/docs/data-pipelines/sources/gcs), [Azure Blob Storage](/docs/data-pipelines/sources/azure-blob), or [Cloudflare R2](/docs/data-pipelines/sources/r2) source, or [upload a file](/docs/data-pipelines/sources/file-upload). These tables are Data Warehouse sources, so you map the required columns for each table in the same way.
-
-Tables that you linked as self-managed tables before show as **Self-managed** until you turn on syncing for them. You map their columns in the same way.
+You can import spend data from files stored in Amazon S3, Google Cloud Storage, Azure Blob, Cloudflare R2, or upload files directly. Like Data Warehouse sources, you'll need to map the required columns for each table to enable the functionality.
 
 <CalloutBox icon="IconInfo" title="Recommended format" type="fyi">
 
-We strongly recommend using JSON format for better support and troubleshooting. Create a connection between PostHog and your marketing source, map the desired fields, and PostHog will use the marketing data directly from that source.
+We strongly recommend using JSON format for better support and troubleshooting. Create a connection between PostHog and your file storage source, map the desired fields, and PostHog will use the marketing data directly from that source.
 
 </CalloutBox>
 
