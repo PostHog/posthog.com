@@ -37,6 +37,7 @@ import Overview from 'components/Products/ReaderViewProduct/templates/Overview'
 import ToolsTicker, { DEFAULT_HANDLES } from 'components/Home/ToolsTicker'
 import { AppIcon, isAppIconName } from 'components/OSIcons/AppIcon'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { Accordion } from 'components/RadixUI/Accordion'
 
 /**
  * AEO/SEO proof of concept for the Heatmaps product page.
@@ -656,11 +657,19 @@ const quickLinks: { slug: string; label: string; aside?: string }[] = [
 ]
 
 /** If the anchor is in (or is) a collapsed FAQ answer, open it so the jump lands on the
-    answer. Covers deep links such as /heatmaps#scrollmaps inside "What are heatmaps?". */
+    answer. Covers deep links such as /heatmaps#scrollmaps inside "What are heatmaps?",
+    and FAQ accordion rows, where the anchor sits inside the row's trigger button. */
 const openAnchor = (id: string) => {
     const el = typeof document !== 'undefined' ? document.getElementById(id) : null
-    const details = el?.closest('details')
+    if (!el) return
+    const details = el.closest('details')
     if (details) details.open = true
+    // Click outside React's render and effect phase, so the accordion updates at once and a
+    // second call (React runs effects twice in development) sees it open and does nothing.
+    const trigger = el.closest('button[aria-expanded]')
+    if (trigger instanceof HTMLButtonElement) {
+        setTimeout(() => trigger.getAttribute('aria-expanded') === 'false' && trigger.click(), 0)
+    }
 }
 
 const QUICK_LINK_CLASS =
@@ -2166,22 +2175,22 @@ const HeatmapsFAQ = ({ id }: SectionComponentProps) => (
             <WhoIsItFor id="who-is-it-for" />
         </div>
         <h3 className={FAQ_H3}>Other burning questions you (or your agent) might have</h3>
-        {/* Native <details> gets the site's global summary/chevron styling, needs no
-            JS, and keeps every answer in the HTML for crawlers and LLMs. */}
-        <div className="max-w-3xl flex flex-col gap-3">
-            {faq.map(({ question, answer, render, id: anchor }) => (
-                <details key={question} id={anchor} className="scroll-mt-20" style={QUIET_DETAILS}>
-                    <summary style={QUIET_SUMMARY}>
-                        <h3 className="inline !px-0 text-[15px] leading-6 font-semibold text-primary m-0 underline decoration-dotted underline-offset-4">
-                            {question}
-                        </h3>
-                    </summary>
-                    <div className="contents text-[15px] leading-relaxed text-secondary">
-                        {render ?? <p>{answer}</p>}
-                    </div>
-                </details>
-            ))}
-        </div>
+        {/* The shared site accordion, styled like the /mcp FAQ. It force-mounts every answer,
+            so closed answers stay in the HTML for crawlers and LLMs. */}
+        <Accordion
+            className="max-w-3xl"
+            triggerClassName="!px-3 !py-2"
+            contentClassName="!px-3 !py-2.5 !text-base !leading-relaxed space-y-3"
+            items={faq.map(({ question, answer, render, id: anchor }) => ({
+                value: anchor ?? question,
+                trigger: (
+                    <span id={anchor} className="scroll-mt-20">
+                        {question}
+                    </span>
+                ),
+                content: render ?? <p>{answer}</p>,
+            }))}
+        />
         <p className="text-sm text-secondary mt-6 mb-0">
             Something else?{' '}
             <Link className="underline" to="/questions/topic/heatmaps">
