@@ -248,11 +248,10 @@ export function useMenuData(): MenuType[] {
     const mainNavItems: MenuType[] = [
         {
             trigger: 'Products',
-            items: buildProductsMenuItems(taskbarProducts),
-        },
-        {
-            trigger: 'Platform',
             items: [
+                ...buildProductsMenuItems(taskbarProducts),
+                { type: 'separator' },
+                { type: 'label', label: 'Platform' },
                 {
                     type: 'item',
                     label: 'Self-driving',
@@ -332,7 +331,10 @@ export function useMenuData(): MenuType[] {
                     label: 'Discord',
                     link: 'https://discord.gg/t57vmkcm95',
                     external: true,
-                    icon: <IconDiscord className="size-4" />,
+                    // Stroke the filled brand path so it matches the outline icons around it
+                    icon: (
+                        <IconDiscord className="size-4 text-blue" fill="none" stroke="currentColor" strokeWidth={1.5} />
+                    ),
                 },
                 { type: 'separator' },
                 { type: 'label', label: 'Meet' },
@@ -430,7 +432,7 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Research',
+                    label: 'AI Research',
                     link: '/research',
                     icon: <Icons.IconBrain className="size-4 text-purple" />,
                 },
@@ -524,6 +526,12 @@ export function useMenuData(): MenuType[] {
                     link: '/customers',
                     icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
                 },
+                {
+                    type: 'item',
+                    label: 'Compare',
+                    link: '/compare',
+                    icon: <Icons.IconColumns className="size-4 text-lilac" />,
+                },
                 { type: 'separator' },
                 { type: 'label', label: 'Legal' },
                 {
@@ -591,12 +599,6 @@ export function useMenuData(): MenuType[] {
                     label: 'Media',
                     link: '/media',
                     icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
-                },
-                {
-                    type: 'item',
-                    label: 'Compare',
-                    link: '/compare',
-                    icon: <Icons.IconColumns className="size-4 text-lilac" />,
                 },
             ],
         },
