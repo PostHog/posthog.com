@@ -15,7 +15,7 @@ import {
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 import { useWindow } from '../../context/Window'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import Link from 'components/Link'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ReaderView from 'components/ReaderView'
@@ -417,6 +417,26 @@ function MCPResources(): JSX.Element {
 
 const faq: { question: string; answer: string; link?: { label: string; to: string } }[] = [
     {
+        question: 'What is the PostHog MCP?',
+        answer: 'The PostHog MCP is a free, hosted Model Context Protocol (MCP) server that lets your AI agent use PostHog. From Claude, Cursor, Codex, VS Code, and other MCP clients, your agent can query analytics, debug errors, roll out feature flags, and run experiments in plain English.',
+        link: { label: 'Setup guide', to: '/docs/model-context-protocol' },
+    },
+    {
+        question: 'Can the PostHog MCP make changes, or only read data?',
+        answer: 'It can do both. Your agent can read data, for example to run queries, look at errors, or find session replays. It can also make changes, for example to create dashboards and insights, roll out or turn off feature flags, and set up experiments and surveys. If you want your agent to only read data, use read-only mode. It removes the tools that create, update, or delete data.',
+        link: { label: 'All MCP tools', to: '/docs/model-context-protocol/tools' },
+    },
+    {
+        question: 'How is the PostHog MCP different from PostHog AI?',
+        answer: 'PostHog AI is the AI agent inside the PostHog app. The PostHog MCP brings PostHog to the AI agent that you already use, such as Claude Code, Cursor, or Codex. Use PostHog AI when you work in PostHog. Use the MCP when you work in your editor, terminal, or chat client and want your agent to use your product data next to your code.',
+        link: { label: 'About PostHog AI', to: '/docs/posthog-ai' },
+    },
+    {
+        question: 'Do I need to install PostHog first before using the MCP?',
+        answer: 'You need a PostHog account, because your agent signs in to it. It is free to sign up. You do not need to install the PostHog SDK to connect the MCP. But to ask questions about your product data, your project must have events. If you do not send events yet, the PostHog Wizard can add the SDK to your app.',
+        link: { label: 'Install PostHog', to: '/docs/getting-started/install' },
+    },
+    {
         question: 'How much does it cost?',
         answer: 'Connecting to the MCP server and calling its tools is free. Standard PostHog usage and billing still apply to the data your queries use. Some tools use LLMs internally and can add PostHog AI spend. Those tools need AI data processing to be enabled in your organization, and they are hidden when it is off.',
         link: { label: 'Cost details', to: '/docs/model-context-protocol/faq#how-much-does-it-cost' },
@@ -678,6 +698,10 @@ function MCPCTA({
     )
 }
 
+const seoTitle = 'PostHog MCP server – Your product data in any AI agent'
+const seoDescription =
+    'PostHog’s free, hosted MCP server lets your AI agent query analytics, debug errors, roll out flags, and run experiments from Claude, Cursor, Codex, and more.'
+
 export default function MCPPage(): JSX.Element {
     const [reader, setReader] = useState<Reader>('human')
     const { appWindow } = useWindow()
@@ -692,9 +716,15 @@ export default function MCPPage(): JSX.Element {
     return (
         <>
             <SEO
-                title="PostHog MCP – Ask questions. Get answers."
-                description="The PostHog Model Context Protocol lets your AI agent query data and take action across PostHog from any MCP-compatible client."
+                title={seoTitle}
+                description={seoDescription}
                 image="/images/og/default.png"
+                structuredData={buildProductStructuredData({
+                    name: 'PostHog MCP server',
+                    description: seoDescription,
+                    slug: 'mcp',
+                    faq: faq.map(({ question, answer }) => ({ question, answer })),
+                })}
             />
             <Helmet>
                 <link rel="alternate" type="text/markdown" href="https://posthog.com/mcp.md" />
