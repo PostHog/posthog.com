@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Proofpoint TAP (Targeted Attack Protection) connector syncs your email security data – blocked and permitted clicks, blocked and delivered messages – into PostHog, so you can analyze email threat activity, track attack patterns, and correlate security findings with the rest of your data.
+The Proofpoint TAP (Targeted Attack Protection) connector syncs your email security data – clicks, messages, threat summaries, campaigns, and people insights – into PostHog, so you can analyze email threat activity, track attack patterns, and correlate security findings with the rest of your data.
 
 ## Prerequisites
 
@@ -32,11 +32,13 @@ When linking Proofpoint TAP, you'll need:
 
 <SyncModes />
 
-All tables (`clicks_blocked`, `clicks_permitted`, `messages_blocked`, `messages_delivered`) support incremental and full refresh syncs. Incremental syncs use the `query_end_time` cursor field and merge records by their unique IDs.
+The SIEM tables (`clicks_blocked`, `clicks_permitted`, `messages_blocked`, `messages_delivered`), `threats`, and `campaigns` support incremental and full refresh syncs. Incremental syncs use the `query_end_time` cursor field and merge records by their unique IDs.
 
-The Proofpoint TAP API retains only seven days of event history, so the first sync (and any full refresh) reaches back almost seven days with a two-minute buffer at the retention boundary. We recommend syncing at least once daily to avoid losing data.
+The `very_attacked_people` and `top_clickers` tables use full refresh only. Each sync fetches the full 90-day window from the People API.
 
-Proofpoint TAP rate-limits API access to 1,800 requests per rolling day for the `clicks_permitted` endpoint, with 1,800 requests shared across the other three endpoints.
+The Proofpoint TAP API retains only seven days of SIEM event history, so the first sync (and any full refresh) of SIEM tables reaches back almost seven days with a two-minute buffer at the retention boundary. We recommend syncing at least once daily to avoid losing data.
+
+Proofpoint TAP rate-limits SIEM API access to 1,800 requests per rolling day for the `clicks_permitted` endpoint, with 1,800 requests shared across the other SIEM endpoints. The Campaign and People APIs each allow 50 requests per day.
 
 ## Configuration
 
@@ -46,12 +48,16 @@ Proofpoint TAP rate-limits API access to 1,800 requests per rolling day for the 
 
 <SourceTables />
 
-| Table                | Primary key | Event time field | Description                              |
-| -------------------- | ----------- | ---------------- | ---------------------------------------- |
-| `clicks_blocked`     | `id`        | `clickTime`      | Blocked URL clicks from email messages   |
-| `clicks_permitted`   | `id`        | `clickTime`      | Permitted URL clicks from email messages |
-| `messages_blocked`   | `GUID`      | `messageTime`    | Blocked email messages                   |
-| `messages_delivered` | `GUID`      | `messageTime`    | Delivered email messages                 |
+| Table                  | Primary key | Event time field | Description                                            |
+| ---------------------- | ----------- | ---------------- | ------------------------------------------------------ |
+| `clicks_blocked`       | `id`        | `clickTime`      | Blocked URL clicks from email messages                 |
+| `clicks_permitted`     | `id`        | `clickTime`      | Permitted URL clicks from email messages               |
+| `messages_blocked`     | `GUID`      | `messageTime`    | Blocked email messages                                 |
+| `messages_delivered`   | `GUID`      | `messageTime`    | Delivered email messages                               |
+| `threats`              | `id`        | `identifiedAt`   | Threat summaries from SIEM events                      |
+| `campaigns`            | `id`        | `startDate`      | Campaigns with their threats, actors, and malware      |
+| `very_attacked_people` | `guid`      | –                | Users with highest attack index over 90 days           |
+| `top_clickers`         | `guid`      | –                | Users who clicked the most malicious URLs over 90 days |
 
 ## Troubleshooting
 

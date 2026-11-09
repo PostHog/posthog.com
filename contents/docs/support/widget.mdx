@@ -29,7 +29,7 @@ Configure these settings in the **In-app widget** section of Support settings:
 | Setting              | Description                                | Options                                                | Default                  |
 | -------------------- | ------------------------------------------ | ------------------------------------------------------ | ------------------------ |
 | **Enable widget**    | Show the chat widget on your site          | `true`, `false`                                        | `false`                  |
-| **Button color**     | Primary color for the widget (hex)         | Any hex color                                          | `#5375ff`                |
+| **Button color**     | Primary color for the widget (hex). A [theme](/docs/support/widget#theme-the-widget) overrides it | Any hex color                                          | `#5375ff`                |
 | **Widget position**  | Position of the widget on screen           | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right`           |
 | **Greeting message** | Welcome text shown when widget opens       | Any string                                             | `"Hi! How can we help?"` |
 | **Allowed domains**  | Restrict which domains can show the widget | Array of domain strings                                | `[]` (all domains)       |
@@ -86,24 +86,99 @@ If `domains` is empty or not set, the widget shows on all domains.
 
 ### Show and hide the widget
 
-Use the [JavaScript API](/docs/support/javascript-api) to programmatically show or hide the widget:
+`show()` adds the widget, including the launcher button. `hide()` removes it from the page. `show()` does nothing until the widget bundle has loaded. These methods are part of the [JavaScript API](/docs/support/javascript-api).
 
 ```javascript
-// Show the widget (renders it if not already rendered)
+// Add the widget, including the launcher button
 posthog.conversations.show();
 
-// Hide and remove the widget from DOM
+// Remove the widget from the page
 posthog.conversations.hide();
 
-// Check if widget is currently visible
+// Check if the widget is on the page
 const isVisible = posthog.conversations.isVisible();
 ```
 
-This is useful for:
+Use this to show the widget only on certain pages, or to hide it during a flow such as checkout. To open the chat from a button in your own UI, use [`open()`](/docs/support/widget#open-and-close-the-chat-panel).
 
-- Showing the widget only on certain pages
-- Triggering the widget from a custom button
-- Hiding the widget during specific user flows
+### Open and close the chat panel
+
+`open()` and `close()` control the chat panel. The launcher stays on the page. `open()` renders the widget first when it is not already there.
+
+```javascript
+// Open the chat panel. Renders the widget first if it is not on the page.
+posthog.conversations.open();
+
+// Close the panel. The launcher stays.
+posthog.conversations.close();
+```
+
+If you call `open()` or `close()` before the widget bundle has loaded, the last call runs once the bundle loads. A `hide()` call cancels an `open()` that is still waiting. `open()` does nothing on a domain that is not in **Allowed domains**. These methods need `posthog-js` 1.442.0 or later.
+
+### Theme the widget
+
+**Button color** in Support settings sets the primary color. To match the rest of your site, including dark mode, fonts, corner radius, and shadows, pass a theme when you initialize PostHog, or call `setTheme()` later.
+
+Theming needs `posthog-js` 1.444.0 or later.
+
+```javascript
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  conversations: {
+    theme: {
+      colorScheme: "auto", // "light" (default), "dark", or "auto"
+      primary: "#111827",
+      borderRadius: "16px",
+      launcherShadow: "none",
+      dark: { primary: "#f9fafb" },
+    },
+  },
+});
+```
+
+`colorScheme` picks the palette:
+
+- `light` is the default.
+- `dark` uses the built-in dark colors.
+- `auto` follows the visitor's `prefers-color-scheme`.
+
+The top-level colors apply to the light scheme only. `dark` holds the colors used when the dark scheme is active, so set `background`, `text`, and the other colors there for dark mode. A color you leave unset in `dark` falls back to the built-in dark color. `primary` and `primaryText` are the exception: they keep the light values until you set them under `dark`.
+
+```javascript
+// Switch the widget to dark mode after init
+posthog.conversations.setTheme({ colorScheme: "dark" });
+```
+
+`setTheme()` merges the object you pass over the current theme. The `dark` object merges the same way, so a later call can change one dark color without clearing the others. It is safe to call before the widget loads, and `posthog.reset()` keeps the theme.
+
+You can set the same values in your own stylesheet. The widget reads them as CSS custom properties on `#ph-conversations-widget-container`. A rule that selects `#ph-conversations-widget-container` overrides the theme from the SDK.
+
+```css
+html.dark #ph-conversations-widget-container {
+  --ph-conv-bg: #0b0f19;
+  --ph-conv-text: #e5e7eb;
+}
+```
+
+Values apply in this order: built-in defaults, the **Button color** from Support settings, the theme in `posthog.init()`, `setTheme()`, then your CSS.
+
+| Theme option | CSS variable | What it sets |
+| --- | --- | --- |
+| `colorScheme` | – | `light`, `dark`, or `auto` |
+| `primary` | `--ph-conv-primary` | Launcher, header, customer messages, and buttons. Overrides **Button color**. |
+| `primaryText` | `--ph-conv-on-primary` | Text and icons on `primary`. When this is unset, the widget picks black or white for contrast if `primary` is a hex color, and white otherwise. |
+| `background` | `--ph-conv-bg` | Window, message list, and input background |
+| `surface` | `--ph-conv-surface` | Identification form, unread tickets, and code blocks |
+| `text` | `--ph-conv-text` | Main text |
+| `mutedText` | `--ph-conv-muted` | Timestamps, author names, and descriptions |
+| `border` | `--ph-conv-border` | Borders and dividers |
+| `agentBubble` | `--ph-conv-agent-bubble` | Messages from your team |
+| `fontFamily` | `--ph-conv-font` | Font family |
+| `borderRadius` | `--ph-conv-radius` | Corner radius of the chat window, for example `16px` |
+| `launcherShadow` | `--ph-conv-launcher-shadow` | CSS `filter` on the launcher, for example `none` |
+| `windowShadow` | `--ph-conv-window-shadow` | CSS `box-shadow` of the chat window |
+
+Color options take any CSS color. `fontFamily`, `borderRadius`, `launcherShadow`, and `windowShadow` take the CSS value for that property. The widget ignores a value that contains `{`, `}`, `;`, `<`, or `>`, and logs a warning.
 
 ### Disable the widget
 

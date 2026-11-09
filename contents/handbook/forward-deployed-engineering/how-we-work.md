@@ -6,12 +6,7 @@ showTitle: true
 
 ## The engagement lifecycle
 
-Every engagement moves through four phases:
-
-1. **Intake.** A colleague or customer raises a need with the information outlined in [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved). That's enough for us to scope it.
-2. **Scope.** We then classify the engagement type, estimate effort, and quote if the shape calls for it. The output is a short brief the customer can confirm before we commit. Details below.
-3. **Execute.** We do the hands-on work: instrumentation, data modeling, migrations, integrations, dashboards, and reference implementations. We capture the durable artifacts as we go.
-4. **Wrap-up.** We confirm the deliverable was shipped and approved, then hand the relationship back to [sales and CS](/handbook/forward-deployed-engineering/working-with-sales-and-cs). We write down anything worth keeping for the next customer, along with any learnings to take back to product.
+Every engagement moves from opportunity through scoping and delivery to close. For each stage, see the [engagement lifecycle](/handbook/forward-deployed-engineering/fde-engagement-lifecycle).
 
 ## Scoping engagements
 

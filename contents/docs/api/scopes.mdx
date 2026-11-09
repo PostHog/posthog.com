@@ -1,0 +1,43 @@
+---
+title: API scopes
+sidebar: Docs
+showTitle: true
+---
+
+import ScopeReference from 'components/ScopeReference'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+A scope grants access to one part of PostHog, such as feature flags or insights. You choose scopes when you create a [personal API key](/docs/api/personal-api-keys) or a [project secret API key](/docs/api/project-secret-api-keys), and when you authorize an [OAuth app](/docs/api/oauth).
+
+Each scope has two levels:
+
+- **Read** (`<object>:read`) lets the key or app view the data.
+- **Write** (`<object>:write`) lets it view, create, change, and delete the data.
+
+<CalloutBox icon="IconInfo" title="Request read or write, not both" type="fyi">
+
+Write access includes read access, so `feature_flag:write` already covers everything `feature_flag:read` does. For each part of PostHog, request `:read` if the key or app only views data, or `:write` if it also changes it.
+
+</CalloutBox>
+
+Grant only the scopes a key or app needs. A request that needs a scope the key or app doesn't have fails with a `403` error that names the missing scope.
+
+## Scopes
+
+<ScopeReference />
+
+## FAQ
+
+<details>
+<summary id="oauth-only-scopes">Why can't my OAuth app request some scopes?</summary>
+
+PostHog grants some scopes only through its own admin tools, so an OAuth app that registers itself can't request them. The notes under each description mark these scopes. The scopes an OAuth app can request are also listed in `scopes_supported` in the [authorization server metadata](/docs/api/oauth#oauth-server-endpoints).
+
+</details>
+
+<details>
+<summary id="scope-list-api">Can I get this list as JSON?</summary>
+
+Yes. `https://oauth.posthog.com/oauth/scopes` returns every scope on this page, with the same descriptions. It doesn't need authentication.
+
+</details>

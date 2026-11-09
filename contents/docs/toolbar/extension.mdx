@@ -1,0 +1,106 @@
+---
+title: Chrome extension
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+The PostHog Chrome extension gives you the [toolbar](/docs/toolbar) tools in a Chrome side panel next to your website. With it, you can inspect elements, view heatmaps, override feature flags, debug events, and more.
+
+Compared with the floating toolbar:
+
+- You don't relaunch it from PostHog for each site or tab.
+- It doesn't use the page's own toolbar session.
+- It doesn't add anything to the page itself, apart from the overlays the tools draw, such as heatmaps or element highlights.
+
+## Install the extension
+
+The extension needs Chrome 116 or later. It works only in Chrome. There is no Firefox version.
+
+1. Go to the [PostHog extension in the Chrome Web Store](https://chromewebstore.google.com/detail/posthog/khajokjedaapggnioajbdaoaaedaaoeg).
+2. Click **Add to Chrome**.
+
+## Open the side panel
+
+Click the extension's button in Chrome's own toolbar to open the side panel next to the website.
+
+The side panel follows the active tab of its window. When you switch tabs, it shows the state of that tab.
+
+## Sign in and choose your PostHog host
+
+The extension uses the PostHog login that you already have in that browser. If you're signed out, the side panel asks you to log in.
+
+To choose your PostHog host, open the settings at the bottom of the side panel. Choose US Cloud, EU Cloud, or enter a self-hosted address. You also switch the project in these settings.
+
+The first time you open the tools for a project, a tab opens and closes by itself to connect the toolbar. If that fails, the side panel shows a **Connect** button.
+
+Chrome may ask for access to your PostHog host. If it does, click **Allow access** in the side panel.
+
+## Prepare your website
+
+### Add your website to the authorized URLs
+
+The extension only runs on a page when the page's origin is in your project's [authorized URLs](https://app.posthog.com/toolbar).
+
+If the origin isn't authorized, the side panel tells you. It links to the authorized URLs setting and lists the project's authorized URLs. Click one to open it in a new tab. The side panel stays open.
+
+> **Note:** Only add websites that you own and control. Authorized URLs are a [security boundary](/docs/health-checks/authorized-urls#why-it-matters).
+
+If you open the side panel on the PostHog app itself, it asks you to open your own website and lists your authorized URLs.
+
+### Check the page
+
+- The page must use https. Plain http works only on `localhost`.
+- The extension can't run on browser pages, such as the new tab page, or on the Chrome Web Store.
+- To override feature flags, the page must load [posthog-js](/docs/libraries/js) as `window.posthog`.
+
+## Access control
+
+The project's [access control](/docs/toolbar#access-control) for **Toolbar** applies to the extension. A user without toolbar access sees a message that tells them to ask an admin.
+
+## Tools
+
+The side panel has these tools:
+
+- **Inspect** – Hover an element to see its selector, its click and rage-click counts, and its actions. Then [create an action](/docs/toolbar/create-toolbar-actions) from it.
+- **Heatmap** – View clickmaps, [heatmaps](/docs/toolbar/heatmaps), and scroll depth. Set a date range, filter to an area of the page, and click **Save to PostHog**.
+- **Actions** – View and edit [actions](/docs/data/actions), and pick elements.
+- **Feature flags** – [Override a flag](/docs/toolbar/override-feature-flags) on or off, pick a variant, edit the payload, and clear overrides.
+- **Events** – A live [debugger](/docs/toolbar#debugging-events) of the events that posthog-js sends from the page, with search, pause, and export.
+- **Web vitals** – The project's P90 [web vitals](/docs/web-analytics/web-vitals) metrics, and the metrics for this page load.
+- **Experiments** – [No-code web experiments](/docs/experiments/no-code-web-experiments). Edit a variant and preview it on the page.
+- **More** – Debug info, a link to the current [session recording](/docs/session-replay), an option to hide PII on the page, and a [screenshot for an event](/docs/toolbar#capture-screenshots-for-event-definitions).
+
+## Permissions
+
+The extension asks Chrome for these permissions:
+
+| Permission | Why the extension needs it |
+|---|---|
+| Site access to http and https pages | To read the active tab's URL and run on it |
+| `scripting` | To inject its content script |
+| `storage` | To store the host and sign-in tokens |
+| `sidePanel` | To show the side panel |
+
+## Data the extension sends
+
+The extension sends this data to your own PostHog host:
+
+- Authentication info
+- The active tab's URL
+- The website content that you save, such as element selectors and text in actions, variant HTML in experiments, and page screenshots for heatmaps or event screenshots
+
+The extension also sends usage events about which tools you open to PostHog's product analytics.
+
+The extension doesn't change the events that the page's own posthog-js sends.
+
+## Limits
+
+- The extension works only in Chrome 116 or later.
+- It only runs on https pages, or on plain http on `localhost`.
+- It can't run on browser pages, such as the new tab page, or on the Chrome Web Store.
+- It only runs on pages whose origin is in your project's authorized URLs.
+- Feature flag overrides need the page to load posthog-js as `window.posthog`.

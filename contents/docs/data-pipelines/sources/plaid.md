@@ -9,11 +9,11 @@ availability:
 sourceId: Plaid
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Plaid connector syncs the accounts and transactions of a linked Plaid Item into PostHog, so you can analyze financial data alongside your product data.
+The Plaid connector syncs financial data from a linked Plaid Item into PostHog – including accounts, transactions, investment holdings, liabilities, and institution details – so you can analyze financial data alongside your product data.
 
 ## Prerequisites
 
@@ -39,6 +39,12 @@ When linking Plaid, you'll need:
 <SourceParameters />
 
 ## Supported tables
+
+<CalloutBox icon="IconWarning" title="Investment transactions billing" type="caution">
+
+The `investment_transactions` table is disabled by default. Enabling it starts Plaid's Investments Transactions subscription for the Item if it doesn't already have one, which incurs additional Plaid charges. Only enable this table if you specifically need investment transaction history.
+
+</CalloutBox>
 
 <SourceTables />
 

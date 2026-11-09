@@ -9,9 +9,9 @@ availability:
 sourceId: Pylon
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Pylon connector pulls your customer support data into the PostHog Data warehouse, so you can analyze it alongside your product data.
 
@@ -38,6 +38,8 @@ When linking Pylon, you'll need:
 ## Supported tables
 
 <SourceTables />
+
+> **Note:** The `issue_messages` table is disabled by default because it requires one API request per issue with no time filter. This can result in high API usage for accounts with many issues. You can enable it in the source configuration.
 
 ## Troubleshooting
 

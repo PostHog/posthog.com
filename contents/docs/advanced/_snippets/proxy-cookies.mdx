@@ -2,15 +2,15 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Cookies being forwarded to PostHog" type="fyi">
 
-By default, the proxy forwards all headers including cookies to PostHog. If you don't want to forward authentication cookies and headers, delete them from the request. Keep an `Authorization` header that starts with `Bearer phc_`, because capture v1 SDKs send the project token there. If your project token doesn't start with `phc_`, keep only the exact value `Bearer <your project token>`:
+By default, the proxy forwards all headers including cookies to PostHog. If you don't want to forward authentication cookies and headers, delete them from the request. Keep an `Authorization` header that starts with `Bearer phc_`, `Bearer phs_` or `Bearer phx_`, because PostHog SDKs send their keys there. Keys created before these prefixes need their exact `Bearer <key>` value allowed too:
 
 ```js
 const requestHeaders = new Headers(request.headers)
 requestHeaders.set('host', hostname)
 requestHeaders.delete('cookie')
-// Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-// If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-if (!requestHeaders.get('authorization')?.startsWith('Bearer phc_')) {
+// Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+// To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+if (!/^Bearer ph[csx]_/.test(requestHeaders.get('authorization') ?? '')) {
   requestHeaders.delete('authorization')
 }
 ```
