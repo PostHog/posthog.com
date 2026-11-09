@@ -809,8 +809,8 @@ export default function SelfDrivingPage({
     return (
         <>
             <SEO
-                title="Self-driving – AI agents that fix your product | PostHog"
-                description="PostHog agents analyze your events, errors, and session replays, find what is worth fixing, and open pull requests. All you need to do is review and merge."
+                title="Self-driving – Proactive fixes from product data | PostHog"
+                description="PostHog proactively analyzes your events, errors, and session replays, spots what is hurting your product, and suggests targeted fixes before you ask."
                 image="/images/og/default.png"
             />
             <ReaderView
