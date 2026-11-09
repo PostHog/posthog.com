@@ -100,9 +100,9 @@ Community events are better when organizers share what happened, what you learne
 
 PostHog team members who attended or presented at an event can share their feedback directly through our [event feedback form](/events-feedback-form).
 
-## Events for customers
+## Events any team can host
 
-Any PostHog team can run small events for the customers in a city. Two formats work well:
+Any PostHog team can host small events for the customers in a city. Two formats work well:
 
 ### Self-driving cafes
 
