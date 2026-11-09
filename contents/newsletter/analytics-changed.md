@@ -72,8 +72,8 @@ Analytics has not only expanded into new data sources, but whole new types of us
 Agent analytics is a nascent field, but here’s some tools at your disposal:
 
 - Tagging key events with an agent or human source. At PostHog, backend events like `dashboard created` or `experiment created` get a `source` property with values like `web`, `mcp`, `slack`, and `cli`. This is how we know 50% of dashboards and 18% of experiments are created using AI.
-- [MCP Analytics](/docs/mcp-analytics). Our SDK captures every tool call as an `$mcp_tool_call`. It provides clients, error rates, latency, and intent. Through this we’ve found many [missing capabilities](/docs/mcp-analytics/missing-capability) as well as broken ones, like agents telling us they couldn’t resolve or archive error tracking issues.
-- Tracking AI crawlers and assistants through logs as they don’t run JavaScript. We [forward logs](/docs/web-analytics/sending-http-logs) from Vercel as `$http_log` events, and then classify them. This lets us see the requests AI crawlers, assistants, and search are making on our site.
+- [MCP Analytics](/docs/mcp-analytics). Our SDK captures every tool call as an `$mcp_tool_call`. It provides clients, error rates, latency, and intent. Through this we’ve found many [missing capabilities](/docs/mcp-analytics/missing-capability) as well as broken ones, like agents telling us they couldn’t resolve or archive [error tracking](/error-tracking) issues.
+- Tracking AI crawlers and assistants through [logs](/logs) as they don’t run JavaScript. We [forward logs](/docs/web-analytics/sending-http-logs) from Vercel as `$http_log` events, and then classify them. This lets us see the requests AI crawlers, assistants, and search are making on our site.
 
 ![PostHog insight ranking posthog.com pages by requests from AI crawlers, search, and assistants, built from forwarded Vercel HTTP logs](https://res.cloudinary.com/dmukukwp6/image/upload/v1794209370/analytics_changed_tip3_ai_agent_http_logs_8cabd38c80.png)
 
