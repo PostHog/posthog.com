@@ -341,7 +341,7 @@ Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.
 - **Project token (`phc_...`)** – Used as `token` query param so prompt reads are resolved deterministically to the right project
 - **PostHog SDK** – Install the Python or JavaScript SDK with the AI package
 
-When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys. Use a [project secret API key](/docs/api/project-secret-api-keys/overview) when you want a server-to-server credential that isn't tied to a specific person's account.
+When you initialize `Prompts` with a PostHog client, the SDK uses the client's project token automatically. If you initialize `Prompts` directly, you must pass both keys. Use a [project secret API key](/docs/api/project-secret-api-keys) when you want a server-to-server credential that isn't tied to a specific person's account.
 Use your app host (for example, `https://us.posthog.com` or `https://eu.posthog.com`) for prompt reads, not an ingestion host like `https://us.i.posthog.com`.
 
 ### Python
