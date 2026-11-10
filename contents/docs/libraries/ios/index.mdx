@@ -97,7 +97,7 @@ In Objective-C, use the selectors that end in `options:`, such as `captureWithEv
 - PostHog reads common forms of a value, such as `"false"` or `0` for a boolean, and drops an event whose option value it can't read.
 - For `identify`, the options apply to the `$identify` or `$set` event the call sends.
 - In `beforeSend`, read and change options through `event.options`. Edit the dictionary instead of replacing it: when person processing is off, the SDK sets `process_person_profile` to `false` there, and a new dictionary loses it.
-- There are no global options. To set one on every event, register its legacy property, for example `PostHogSDK.shared.register(["$process_person_profile": false])`.
+- There are no global options. To set one on every event, register its legacy property, for example `PostHogSDK.shared.register(["$cookieless_mode": true])`. A registered `$process_person_profile` set to `false` also reaches `$identify`, `$create_alias`, and `$groupidentify`. PostHog drops these events on purpose, and the app shows no error. To create no person profiles, set `personProfiles = .never` instead. The SDK then skips those calls on the device.
 
 ## Upgrading from version 3 to version 4
 
