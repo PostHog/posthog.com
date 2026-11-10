@@ -3,9 +3,15 @@ title: Getting started with Replay Vision
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
-import WizardCommand from 'components/WizardCommand'
+import WizardCommand from "components/WizardCommand";
 
 This walkthrough takes you from zero to your first observation in about five minutes. We'll have PostHog AI draft a scanner from a common starting point, run it on a recording you pick, and then query the result as a regular PostHog event.
+
+<CalloutBox type="info" title="Cloud only">
+
+Replay Vision is only available on PostHog Cloud. Self-hosted installations don't include the AI gateway and recording rasterizer that Replay Vision requires.
+
+</CalloutBox>
 
 You should already have [Session Replay](/docs/session-replay) recording sessions for your project. Replay Vision watches those recordings – without them there's nothing to scan.
 
