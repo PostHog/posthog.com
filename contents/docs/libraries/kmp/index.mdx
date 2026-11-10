@@ -91,9 +91,9 @@ PostHog.setup(
 
 You can find your project token and host in [your project settings](https://us.posthog.com/settings/project). For convenience, `PostHogConfig.HOST_US` and `PostHogConfig.HOST_EU` are provided as constants for the two PostHog Cloud hosts.
 
-Use your project token (`phc_...`), not a personal API key. From `posthog-kmp` 0.11.0, the SDK stays disabled on Android, iOS and the JVM if `projectToken` is a personal API key (`phx_...`).
+Use your project token (`phc_...`), not a personal API key. From `posthog-kmp` 0.11.0, the SDK stays disabled on Android, iOS, macOS and the JVM if `projectToken` is a personal API key (`phx_...`).
 
-> **Note:** From `posthog-kmp` 0.11.0, Android, iOS and the JVM send events to `/i/v1/analytics/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, make sure it forwards that path and passes the request headers and PostHog's response through unchanged. Refer to Upgrade to 0.11.0 below for the full list.
+> **Note:** From `posthog-kmp` 0.11.0, Android, iOS, macOS and the JVM send events to `/i/v1/analytics/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, make sure it forwards that path and passes the request headers and PostHog's response through unchanged. Refer to Upgrade to 0.11.0 below for the full list.
 
 ### Platform-specific setup
 
@@ -767,22 +767,27 @@ On the JVM, event capture, identification, feature flags, groups, error tracking
 
 ## Upgrade to 0.11.0
 
-Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. These changes apply on Android, iOS, macOS, and the JVM. They don't apply to the web target.
+Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) lists every change. These changes apply on Android, iOS, macOS, and the JVM. They don't apply to the web target.
 
 - **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path. A reverse proxy must also:
   - Pass these request headers through unchanged: `Authorization`, `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id`, `PostHog-Request-Timestamp`, `Content-Type`, `Content-Encoding` and `User-Agent`.
   - Return PostHog's response status, body and `Retry-After` header unchanged. The SDKs read them to decide which events to retry or drop, and drop the events on a `2xx` whose body isn't PostHog's.
   - Proxy setups from our guides before 29 October 2026 strip `Authorization`, so PostHog answers `401` and drops the events. Update yours from the current guide.
+- **Retries:** until your host serves the path, a `404` is retried about every 30 seconds, and events stay queued only until a full queue evicts them (`maxQueueSize`, 1000 by default). Other errors that aren't retried, such as `401` or `403`, drop the events. Only `307` and `308` redirects to the same origin are followed, `3xx` responses are no longer retried, and a request carries at most about 5 MiB.
 - **Project token:** if `projectToken` is a personal API key (`phx_...`), the SDK disables itself at setup. Use your project token (`phc_...`).
 - **Super properties:** values that you set with `register` replace the properties that the SDK sets, such as `$os_name`.
-- **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets.
-- **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. Refer to [Session replay](#session-replay).
+- **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets. Build your Xcode app once and commit the updated `KotlinMultiplatformLinkedPackage`, which now pins posthog-ios 4.0.
+- **Binary compatibility:** recompile any library built against posthog-kmp 0.10. Its Android and JVM bytecode fails at runtime with `NoSuchMethodError`.
+- **Other PostHog artifacts:** if the same Android or JVM build uses `posthog-server`, use 2.25.0 or later. If it uses `posthog-android-surveys-compose`, declare `posthog-android` 4.0.0 or later alongside it.
+- **Person processing in `beforeSend`:** when the SDK doesn't process person profiles for an event, it no longer adds a `$process_person_profile = false` property, so `beforeSend` doesn't see it, and setting `$process_person_profile` there doesn't turn person processing on. Pass it to `capture()`, call `identify()`, or set `personProfiles = PersonProfiles.ALWAYS` instead.
+- **Event changes:** events with an empty name, or whose distinct ID `beforeSend` blanks, are dropped. `$feature_flag_called` for a missing flag leaves out `$feature_flag_response` – filter on *is not set*. `Application Installed`, `Application Updated`, and `Application Opened` no longer have `version` and `build` on iOS and macOS – use `$app_version` and `$app_build`. `$locale` is now the device's preferred language and region on Android, iOS, and macOS, such as `de-CH`. Refer to the [migration guide](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md#event-changes) for the full list.
+- **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. On Android, Compose screens, including Compose Multiplatform UI, are now recorded, which can count against your replay quota. Refer to [Session replay](#session-replay).
 - **Replay throttling:** use `throttleDelayMs` instead of the deprecated `debouncerDelayMs`.
+- **Payloads:** `FeatureFlagResult.payload` is `null` for a payload that isn't valid JSON, instead of the raw string. On the web target it's still the raw string.
 
 These feature flag changes also apply to the web target:
 
 - **`reloadFeatureFlags` callback:** the callback now receives a `PostHogFeatureFlagsLoaded`. A lambda that ignores it still compiles, but a function reference or a `() -> Unit` value needs the parameter. Before `setup`, the callback runs right away with no flags and `errorsLoading = true`.
-- **Payloads:** `FeatureFlagResult.payload` is `null` for a payload that isn't valid JSON, instead of the raw string.
 - **Empty variants:** a flag whose variant is an empty string is disabled on every platform and is left out of `$active_feature_flags`.
 
 ## FAQ
