@@ -166,7 +166,7 @@ Run `go run main.go` and navigate to `http://localhost:8000` to see our app in a
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-Run `go get github.com/posthog/posthog-go` to add [PostHog's Go SDK](/docs/libraries/go) as a dependency. Then, initialize PostHog in the `main()` method in `main.go`.
+Run `go get github.com/posthog/posthog-go/v2` to add [PostHog's Go SDK](/docs/libraries/go) as a dependency. Then, initialize PostHog in the `main()` method in `main.go`.
 
 To do this, you need your project token and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize your client using `posthog.NewWithConfig()`: 
 
@@ -178,7 +178,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/sessions"
-	"github.com/posthog/posthog-go"
+	"github.com/posthog/posthog-go/v2"
 )
 
 var (

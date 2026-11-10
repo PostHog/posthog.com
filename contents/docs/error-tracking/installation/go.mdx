@@ -18,7 +18,7 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 Install the [PostHog Go SDK](/docs/libraries/go):
 
 ```bash
-go get github.com/posthog/posthog-go
+go get github.com/posthog/posthog-go/v2
 ```
 
 <CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">
@@ -35,7 +35,7 @@ The Go SDK resolves stack traces in-process, so captured frames include file nam
 package main
 
 import (
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 func main() {
@@ -62,7 +62,7 @@ Use `NewDefaultException` to capture errors directly. This automatically generat
 ```go
 import (
     "time"
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 exception := posthog.NewDefaultException(
@@ -79,7 +79,7 @@ For more control, build the `Exception` struct manually:
 ```go
 import (
     "time"
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 handled := true
@@ -117,7 +117,7 @@ import (
     "log/slog"
     "os"
 
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 client, _ := posthog.NewWithConfig(
