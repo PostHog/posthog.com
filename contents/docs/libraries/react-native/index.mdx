@@ -773,7 +773,7 @@ On iOS and Android, events that the plugin sends natively go to capture v1 (`/i/
 - Forward `/i/v1/*` to PostHog.
 - Pass these request headers through unchanged: `Authorization`, `Content-Type`, `Content-Encoding`, `User-Agent`, `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id` and `PostHog-Request-Timestamp`.
 - Return PostHog's response status, body and `Retry-After` header unchanged. The SDKs read them to decide which events to retry or drop, and drop the events on a `2xx` whose body isn't PostHog's.
-- Proxy setups from our guides before 29 October 2026 strip `Authorization`, so PostHog answers `401` and drops the native events. Update yours from the current guide.
+- Proxy setups from our guides before October 29, 2026 strip `Authorization`, so PostHog answers `401` and drops the native events. Update yours from the current guide.
 - Don't rely on a custom `Authorization` header in `requestHeaders` for these requests. The SDK replaces it with `Bearer <projectToken>`, so authenticate your proxy with a different header. Session replay uploads to `/s/` still send your `Authorization` header.
 - Don't redirect these requests to another origin. The SDKs follow only a 307 or 308 redirect to the same origin as `host`, and drop the events on any other redirect.
 - If the path isn't served and the proxy answers `404`, each running app retries about every 30 seconds, and the native events stay queued on the device only until a full queue evicts them (1000 events by default), oldest first. Other errors, such as `401`, `403` or `405`, drop them.
