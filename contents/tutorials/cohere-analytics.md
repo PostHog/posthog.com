@@ -35,7 +35,7 @@ After creating your app, go into the newly created `cohere-analytics` directory 
 
 ```bash
 cd cohere-analytics
-npm install --save posthog-node @posthog/ai ai @ai-sdk/cohere
+npm install --save posthog-node@5 @posthog/ai ai @ai-sdk/cohere
 ```
 
 Next, we'll create our frontend by replacing the placeholder code in `app/page.js`. Our frontend will be a simple form with an input, model selector, and response label. Each of these will need a state. We'll also set up an API call to `/api/generate` with the user's input and model.

@@ -51,7 +51,7 @@ This is the basic app set up to showcase one-time feature flags.
 Next, install PostHog through the [Node SDK](/docs/libraries/node) as Express is a Node framework.
 
 ```bash
-npm i posthog-node
+npm i posthog-node@5
 ```
 
 Add `posthog-node` to your Express app and set up the PostHog client with your project token and instance address. You can find these in the getting started flow or in your [project settings](https://app.posthog.com/project/settings)

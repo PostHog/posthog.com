@@ -227,7 +227,7 @@ Server-side rendering is a way to avoid this. This fetches the feature flag befo
 To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
-npm install posthog-node
+npm install posthog-node@5
 ```
 
 Then, we use the PostHog Node library to fetch the feature flag using `useAsyncData` in `app.vue`:
