@@ -99,6 +99,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 
 - **CSM overview** - who we cover, why we exist, how comp works, the CSM + TAM overlay
 - **How we work** - sprint planning, account review, the quarterly goal
+- **The first 90 days** - walk through the [30/60/90 day benchmarks](/handbook/customer-success/new-hire-onboarding#what-good-looks-like-at-the-end-of-week-4) and how the keeper test works, so they know exactly what you'll be looking at during each probation check-in
 - **Tools & access check**
 - **Agent setup** - MCPs, a PostHog repo clone, impersonation, and a list of GTM skills from the [skills store](/docs/ai-engineering/skills-store)
 - **Finding info** - where to look (handbook vs repo vs Slack), maybe even a working exercise (e.g. "what is the Teams plan?")

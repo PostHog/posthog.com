@@ -19,7 +19,7 @@
  * this function declines to handle behaves exactly as it does today.
  */
 export const config = {
-    matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog'],
+    matcher: ['/docs/:path*', '/handbook/:path*', '/blog/:path*', '/newsletter/:path*', '/changelog', '/mcp'],
 }
 
 const USER_AGENT_FETCHERS = ['ChatGPT-User', 'Claude-User', 'Perplexity-User']

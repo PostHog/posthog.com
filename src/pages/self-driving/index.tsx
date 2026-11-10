@@ -809,8 +809,8 @@ export default function SelfDrivingPage({
     return (
         <>
             <SEO
-                title="PostHog self-driving"
-                description="PostHog is the context warehouse and product toolkit that helps humans and AI agents understand, improve, and ship better products."
+                title="Self-driving – Proactive fixes from product data | PostHog"
+                description="PostHog proactively analyzes your events, errors, and session replays, spots what is hurting your product, and suggests targeted fixes before you ask."
                 image="/images/og/default.png"
             />
             <ReaderView
