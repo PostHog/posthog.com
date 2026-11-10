@@ -14,7 +14,7 @@ checks:
           The prompt names only the stack; the agent gets no docs, so docs-read shows
           which pages it finds on its own.
       codebase_to_test: oss-miniflux
-      prompt: >-
+      prompt: &install-prompt >-
           Set up PostHog in this Go app.
       criteria:
           shared: [docs-read]
@@ -90,7 +90,7 @@ checks:
       pages:
           - docs/libraries/go
           - docs/data/anonymous-vs-identified-events
-      prompt: >-
+      prompt: &anonymous-event-prompt >-
           Track each visitor who opens the sign-in page in the control plane, with
           PostHog product analytics. Visitors aren't signed in.
       criteria:
@@ -148,3 +148,52 @@ checks:
                   Cite the file and line(s).
               flag-gates-create: >-
                   Creating an invitation is refused when the flag is off.
+
+    # Next major: the same tasks for a project on posthog-go v2. Expected to fail until the
+    # docs show that major.
+    - id: install-next
+      description: >-
+          The same task as install, for posthog-go v2. Expected to fail until the docs
+          show that major.
+      codebase_to_test: oss-miniflux
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/go.mod lists `github.com/posthog/posthog-go/v2` at v2.x.
+              imported: >-
+                  The code imports the package as "github.com/posthog/posthog-go/v2".
+                  Cite the file and line(s).
+              initialized: >-
+                  The app creates one client at startup with client, err :=
+                  posthog.NewWithConfig(token, posthog.Config{ Endpoint: <host> }) and
+                  handles err before using the client. Cite the file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable. It is not
+                  written in the source.
+              flushes-on-exit: >-
+                  The app calls the client's Close() when the server stops, for example
+                  with defer client.Close() in the function that runs the server. Fails
+                  if Close() is never reached on a normal shutdown.
+
+    - id: anonymous-event-next
+      description: >-
+          The same task as anonymous-event, for a project on posthog-go v2. Expected to
+          fail until the docs show that major.
+      codebase_to_test: oss-chainloop-next
+      pages:
+          - docs/libraries/go
+          - docs/data/anonymous-vs-identified-events
+      prompt: *anonymous-event-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event turns off person processing with an event option: Options:
+                  posthog.NewOptions().Set("process_person_profile", false) on the
+                  posthog.Capture. Fails if it only sets a `$process_person_profile`
+                  property. Cite the file and line(s).
+              distinct-id-per-visitor: >-
+                  Each visitor gets their own DistinctId, such as a generated UUID, a
+                  cookie or a hash. It is not one constant shared by all visitors.

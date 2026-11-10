@@ -15,7 +15,7 @@ checks:
           only the stack; the agent gets no docs, so docs-read shows which pages it finds
           on its own.
       codebase_to_test: oss-icecubes
-      prompt: >-
+      prompt: &install-prompt >-
           Set up PostHog in this iOS app.
       criteria:
           shared: [docs-read]
@@ -96,7 +96,7 @@ checks:
       pages:
           - docs/libraries/ios/usage
           - docs/feature-flags/installation/ios
-      prompt: >-
+      prompt: &feature-flag-prompt >-
           Put creating polls in the iOS app behind a PostHog feature flag.
       criteria:
           shared: [docs-read]
@@ -133,3 +133,55 @@ checks:
                   or captureException(error, properties:), directly or through the app's
                   PostHog client wrapper, with the Swift Error from the failure. Cite the
                   file and line(s). Fails if it sends a plain capture() event instead.
+
+    # Next major: the same tasks for a project on posthog-ios 4. Expected to fail until the
+    # docs show that major.
+    - id: install-next
+      description: >-
+          The install task in an app with no PostHog code, graded for posthog-ios 4, which
+          the agent gets as the newest release. Expected to fail until the docs show that
+          major.
+      codebase_to_test: oss-icecubes
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  posthog-ios is a Swift Package dependency at 4.x: either a package
+                  reference to https://github.com/PostHog/posthog-ios(.git) in the Xcode
+                  project with the `PostHog` library linked to the app target, or
+                  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0")
+                  with .product(name: "PostHog", package: "posthog-ios") in a Package.swift
+                  target the app uses. Fails if it installs PostHog with CocoaPods.
+              initialized: >-
+                  The app imports PostHog, creates PostHogConfig(projectToken:host:) and
+                  calls PostHogSDK.shared.setup(config) once at launch, in the App's init()
+                  or in application(_:didFinishLaunchingWithOptions:). Cite the file and
+                  line(s).
+
+    - id: feature-flag-next
+      description: >-
+          The feature-flag task in Element X on posthog-ios 4, where the reload callback
+          receives the load result. Expected to fail until the docs show that major.
+      codebase_to_test: oss-element-x-ios-next
+      pages:
+          - docs/libraries/ios/usage
+          - docs/feature-flags/installation/ios
+      prompt: *feature-flag-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code reads the flag on PostHogSDK.shared, directly or through the
+                  app's PostHog client wrapper, with getFeatureFlagResult(<flag key>) and
+                  its `.enabled`, or with isFeatureEnabled(<flag key>). Cite the file and
+                  line(s).
+              flags-load: >-
+                  Flags get fetched: the change sets preloadFeatureFlags to true (or
+                  removes the line that sets it to false), or calls reloadFeatureFlags()
+                  before the flag is read. A reload with a completion block passes a
+                  closure that takes the PostHogFeatureFlagsLoaded result, such as
+                  reloadFeatureFlags { result in ... } or { _ in ... }. Fails if the closure
+                  takes no argument.
+              flag-gates-polls: >-
+                  Creating a poll is hidden or refused when the flag is off.

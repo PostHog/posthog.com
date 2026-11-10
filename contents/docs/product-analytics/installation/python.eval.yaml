@@ -17,7 +17,7 @@ checks:
       codebase_to_test: oss-mealie
       pages:
           - docs/libraries/python
-      prompt: >-
+      prompt: &install-prompt >-
           Set up PostHog in this app's Python backend.
       criteria:
           shared: [docs-read]
@@ -103,7 +103,7 @@ checks:
       pages:
           - docs/libraries/python
           - docs/data/anonymous-vs-identified-events
-      prompt: >-
+      prompt: &anonymous-event-prompt >-
           Track each visitor who opens a checkout link in the backend, with PostHog
           product analytics. Visitors aren't signed in.
       criteria:
@@ -166,3 +166,54 @@ checks:
                   through the existing helper unchanged. Cite the file and line(s).
               flag-gates-invite: >-
                   Inviting a member is refused when the flag is off.
+
+    # Next major: the same tasks for a project on posthog 8. Expected to fail until the
+    # docs show that major.
+    - id: install-next
+      description: >-
+          The install task for a project on posthog 8. Expected to fail until the docs
+          show that major.
+      codebase_to_test: oss-mealie
+      pages:
+          - docs/libraries/python
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/pyproject.toml lists `posthog` at 8.x.
+              initialized: >-
+                  The backend creates one client at startup with Posthog(token,
+                  host=...) or AsyncPosthog(token, host=...) from the posthog package.
+                  Every argument after the token and host is passed by keyword. Cite the
+                  file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable, directly or
+                  through the app's settings. It is not written in the source.
+              shuts-down-on-exit: >-
+                  The client's shutdown() runs when the server stops: called in the
+                  app's shutdown hook (awaited for AsyncPosthog), or by leaving an `async
+                  with AsyncPosthog(...)` block. Fails if nothing flushes or shuts the
+                  client down.
+
+    - id: anonymous-event-next
+      description: >-
+          The anonymous-event task for a project on posthog 8. Expected to fail until
+          the docs show that major.
+      codebase_to_test: oss-polar-server-next
+      pages:
+          - docs/libraries/python
+          - docs/data/anonymous-vs-identified-events
+      prompt: *anonymous-event-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event is personless: capture() passes options={"process_person_profile":
+                  False}, or is called with no distinct_id outside an identified context,
+                  which the SDK marks personless. Fails if person processing is turned
+                  off only in `properties`. Cite the file and line(s).
+              distinct-id-per-visitor: >-
+                  Visitors don't share one constant distinct ID, such as the app's
+                  `polar_anonymous`. A generated ID, a cookie, a hash or the SDK's
+                  auto-generated ID passes.

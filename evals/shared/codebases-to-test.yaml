@@ -75,6 +75,9 @@ oss-hoppscotch-backend: # NestJS API, posthog-node 5.50.0
     repo: https://github.com/hoppscotch/hoppscotch
     ref: 55908a76a1d0555c9bbb5d74244c14173df95b06
     folder: packages/hoppscotch-backend
+oss-hoppscotch-backend-next: # needs a commit where the app is on posthog-node 6
+    repo: https://github.com/hoppscotch/hoppscotch
+    folder: packages/hoppscotch-backend
 oss-miniflux: # Go RSS server (net/http, Postgres), no PostHog code
     repo: https://github.com/miniflux/v2
     ref: 9447aaeceb98ebdf7c4528b3e96dc5b44b35af5b
@@ -118,6 +121,33 @@ oss-element-x-ios: # SwiftUI iOS Matrix client (XcodeGen), posthog-ios 3.92.6 ex
 oss-bouncer-ios: # SwiftUI iOS SMS filter, posthog-ios 3.92.0 (Package.resolved)
     repo: https://github.com/afterxleep/Bouncer
     ref: 8c6f44fd5467c507d4d6355daa010493c9c43656
+    folder: .
+oss-chainloop-next: # needs a commit where the app is on posthog-go v2
+    repo: https://github.com/chainloop-dev/chainloop
+    folder: .
+oss-codemod-cli-next: # needs a commit where the app is on posthog 1.0
+    repo: https://github.com/codemod/codemod
+    folder: crates/telemetry
+oss-polar-server-next: # needs a commit where the app is on posthog 8
+    repo: https://github.com/polarsource/polar
+    folder: server
+oss-element-x-ios-next: # needs a commit where the app is on posthog-ios 4
+    repo: https://github.com/element-hq/element-x-ios
+    folder: .
+oss-tasks-android-next: # needs a commit where the app is on posthog-android 4
+    repo: https://github.com/tasks/tasks
+    folder: app
+oss-saber: # Flutter note app (Android, iOS, desktop), no PostHog code
+    repo: https://github.com/saber-notes/saber
+    ref: c85af406e6d954402cc7c6d718a8f240f54408b2
+    folder: .
+oss-spark: # Flutter AT Protocol social app (Riverpod, AutoRoute), posthog_flutter 5.60.0
+    repo: https://github.com/sprksocial/client
+    ref: 4f034bfb29f632e14491db9148a6cbe57c04184f
+    folder: .
+oss-spark-before-screens: # Flutter AT Protocol social app (auto_route), posthog_flutter 5.23.1, no screen tracking
+    repo: https://github.com/sprksocial/client
+    ref: fbaf575b523d76705e277259e8001de93cd791f4
     folder: .
 
 # --- Placeholders. These repos don't exist: PostHog/docs-eval-fixtures was planned

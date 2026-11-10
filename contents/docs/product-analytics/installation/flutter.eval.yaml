@@ -1,23 +1,199 @@
 owner: wizard-and-docs
-tags: [install, flutter]
-status: draft
+tags: [install, flutter, mobile]
+status: active
 
+# One check for each flow the Flutter docs teach. Every check is a baseline: a short
+# prompt in a user's words, no docs added. The prompt names PostHog and the kind of
+# analytics, and no API. The rubrics describe the correct result for posthog_flutter 5,
+# the major the docs show. `install` runs in an app with no PostHog code. The other
+# checks run in apps that already use posthog_flutter 5. Agents don't build the app:
+# the rubrics are graded from the diff.
 checks:
     - id: install
       description: >-
           Baseline: can an agent set up PostHog in a Flutter app from a one-line
           request? The prompt names only the stack; the agent gets no docs, so docs-read
-          shows which pages it finds on its own.
-      codebase_to_test: flutter-app
-      prompt: >-
-          Set up PostHog in the Flutter app in {folder}/.
+          shows which pages it finds on its own. Saber targets Android, iOS and
+          desktop, with no web/ folder, so the native Android and iOS setup is graded
+          and the web snippet is not.
+      codebase_to_test: oss-saber
+      prompt: &install-prompt >-
+          Set up PostHog in this Flutter app.
       criteria:
-          shared: [builds, docs-read]
+          shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/pubspec.yaml lists `posthog_flutter`.
-              initialized: >-
-                  Each platform the app targets is set up with the project token and the
-                  PostHog host, as the Flutter page describes: AndroidManifest.xml on
-                  Android, Info.plist on iOS, the web snippet on web. Cite the file and
+                  {folder}/pubspec.yaml lists `posthog_flutter` at 5.x.
+              android-setup: >-
+                  android/app/src/main/AndroidManifest.xml has PostHog meta-data inside
+                  <application>: either `com.posthog.posthog.PROJECT_TOKEN` and
+                  `com.posthog.posthog.POSTHOG_HOST` (automatic setup), or
+                  `com.posthog.posthog.AUTO_INIT` set to false (manual setup). Fails if
+                  the token key is `com.posthog.posthog.API_KEY`. Cite the file and
                   line(s).
+              ios-setup: >-
+                  ios/Runner/Info.plist has the same PostHog keys: either
+                  `com.posthog.posthog.PROJECT_TOKEN` and
+                  `com.posthog.posthog.POSTHOG_HOST`, or `com.posthog.posthog.AUTO_INIT`
+                  set to false. Fails if the token key is `com.posthog.posthog.API_KEY`.
+                  Cite the file and line(s).
+              dart-setup: >-
+                  If either platform sets AUTO_INIT to false, main() calls
+                  WidgetsFlutterBinding.ensureInitialized() and awaits
+                  Posthog().setup(config) with a PostHogConfig(<project token>) and
+                  config.host before runApp(). Fails if AUTO_INIT is false and nothing
+                  calls Posthog().setup(). Passes with no Dart change if both platforms
+                  use automatic setup.
+
+    - id: event-by-user
+      description: >-
+          Baseline in Spark (sprksocial/client), an AT Protocol social app on
+          posthog_flutter 5.60.0 that only records screen views. Nothing identifies the
+          user yet. Does an agent capture the event and identify the user with the
+          handle and display name as person properties? The prompt does not name the
+          method. Spark has no email, so the prompt asks for handle and display name.
+      codebase_to_test: oss-spark
+      pages:
+          - docs/libraries/flutter
+          - docs/product-analytics/identify
+      prompt: >-
+          Track when a user follows another account in the app, by user, with PostHog
+          product analytics. Make sure the user's handle and display name are
+          populated.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  Following an account calls Posthog().capture(eventName:, properties:)
+                  after the follow succeeds. Cite the file and line(s).
+              user-identified: >-
+                  The signed-in user is identified with Posthog().identify(userId:,
+                  userProperties:), with the user's DID as userId and the handle and
+                  display name in userProperties. Fails if the handle and display name
+                  are only plain properties of the captured event.
+
+    - id: identify-and-reset
+      description: >-
+          Baseline in the same app. Does an agent identify the user after sign-in and
+          call reset() on sign-out? The prompt does not name either method.
+      codebase_to_test: oss-spark
+      pages:
+          - docs/libraries/flutter
+          - docs/product-analytics/identify
+      prompt: >-
+          Link PostHog product analytics to the user when they sign in to the app, and
+          stop when they sign out.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              identify-on-sign-in: >-
+                  After a successful sign-in, the app calls Posthog().identify(userId:)
+                  with the user's DID. Cite the file and line(s).
+              reset-on-sign-out: >-
+                  Signing out calls Posthog().reset(). Fails if sign-out only stops
+                  sending events, for example with disable() or optOut().
+
+    - id: screen-views
+      description: >-
+          Baseline in Spark at the commit before its maintainer added screen
+          tracking: posthog_flutter 5.23.1, set up through AndroidManifest.xml and
+          Info.plist, with no screen views. The app routes with auto_route. Does an
+          agent add the SDK's observer? An agent that works from memory writes its own
+          observer that calls screen().
+      codebase_to_test: oss-spark-before-screens
+      pages:
+          - docs/libraries/flutter
+      prompt: >-
+          Track which screens users view in the app with PostHog product analytics.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              observer-added: >-
+                  The app's router gets a PosthogObserver from posthog_flutter in its
+                  navigator observers, for example `_appRouter.config(navigatorObservers:
+                  () => [PosthogObserver()])`. Extra observers for tab switches are
+                  fine. Fails if the only screen tracking is the agent's own observer
+                  that calls Posthog().screen() or capture(). Cite the file and line(s).
+
+    - id: feature-flag
+      description: >-
+          Baseline in Spark. Does an agent evaluate the flag with a documented call and
+          gate the feature on it? The Flutter page shows getFeatureFlagResult() for
+          boolean flags and isFeatureEnabled() in its onFeatureFlags example, so both
+          pass.
+      codebase_to_test: oss-spark
+      pages:
+          - docs/libraries/flutter
+          - docs/feature-flags/installation/flutter
+      prompt: >-
+          Put importing follows from Bluesky in the app behind a PostHog feature flag.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code awaits Posthog().getFeatureFlagResult('<flag key>') and reads
+                  `enabled` on the result with a null check, or awaits
+                  Posthog().isFeatureEnabled('<flag key>'). Cite the file and line(s).
+              flag-gates-import: >-
+                  When the flag is off, users can't start the follow import: the entry
+                  point is hidden or the import is refused.
+
+    - id: error
+      description: >-
+          Baseline in Spark. Does an agent report a handled error with
+          captureException and pass the caught stack trace? The prompt does not name
+          the method.
+      codebase_to_test: oss-spark
+      pages:
+          - docs/libraries/flutter
+          - docs/error-tracking/installation/flutter
+      prompt: >-
+          Track errors when posting a comment fails in the app, with PostHog error
+          tracking.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  The catch block for a failed comment post calls
+                  Posthog().captureException(error:, stackTrace:) with the caught error
+                  and the caught stack trace. Fails if it sends the error as a custom
+                  event with capture(). Cite the file and line(s).
+
+    # Next major: the same tasks for a project on posthog_flutter 6. Expected to fail until the docs show that major.
+    - id: install-next
+      description: >-
+          The same task as install, for a project on posthog_flutter 6. Expected to
+          fail until the docs show that major.
+      codebase_to_test: oss-saber
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/pubspec.yaml lists `posthog_flutter` at 6.x.
+              android-setup: >-
+                  android/app/src/main/AndroidManifest.xml has PostHog meta-data inside
+                  <application>: either `com.posthog.posthog.PROJECT_TOKEN` and
+                  `com.posthog.posthog.POSTHOG_HOST` (automatic setup), or
+                  `com.posthog.posthog.AUTO_INIT` set to false (manual setup). Fails if
+                  the token key is `com.posthog.posthog.API_KEY`. Cite the file and
+                  line(s).
+              ios-setup: >-
+                  ios/Runner/Info.plist has the same PostHog keys: either
+                  `com.posthog.posthog.PROJECT_TOKEN` and
+                  `com.posthog.posthog.POSTHOG_HOST`, or `com.posthog.posthog.AUTO_INIT`
+                  set to false. Fails if the token key is `com.posthog.posthog.API_KEY`.
+                  Cite the file and line(s).
+              dart-setup: >-
+                  If either platform sets AUTO_INIT to false, main() calls
+                  WidgetsFlutterBinding.ensureInitialized() and awaits
+                  Posthog().setup(config) with a PostHogConfig(<project token>) and
+                  config.host before runApp(). Fails if AUTO_INIT is false and nothing
+                  calls Posthog().setup(). Passes with no Dart change if both platforms
+                  use automatic setup.
+              apple-deployment-targets: >-
+                  The iOS deployment target is 15.0 or higher and the macOS deployment
+                  target is 11.0 or higher: `IPHONEOS_DEPLOYMENT_TARGET` and
+                  `MACOSX_DEPLOYMENT_TARGET` in the Runner Xcode projects, and any
+                  `platform :ios` or `platform :osx` line in ios/Podfile and
+                  macos/Podfile. Fails if the agent lowers either target below that.
