@@ -8,7 +8,7 @@ hideAnchor: true
 author:
     - lizzie-epton
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/the_modern_data_stack_had_a_good_run_40910e3f33.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/it_s_time_to_rebundle_the_data_stack_again_5257360f93.png
 featuredImageType: full
 ogImage: generated
 category: General
