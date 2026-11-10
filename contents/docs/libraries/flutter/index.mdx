@@ -116,6 +116,17 @@ await Posthog().capture(
 - On iOS, macOS, Android, Windows and Linux, other option keys are sent unchanged.
 - On web, the known options are sent as their legacy properties and other keys are dropped. `posthog-js` sets `$process_person_profile` itself, so `process_person_profile` has no effect on web, and the options of `identify`, `setPersonProperties`, `alias` and `group` are dropped.
 
+To send an option with every following event, register it. Registered options persist across app restarts until you call `unregisterOptions()` or `reset()`, and an event's own options win over them key by key:
+
+```dart
+await Posthog().registerOptions({'cookieless_mode': true});
+
+// Later
+await Posthog().unregisterOptions('cookieless_mode');
+```
+
+Use `registerOptions()` instead of registering a legacy property such as `$cookieless_mode` with `register()`. On web, the known options are registered as their legacy properties and other keys are dropped.
+
 ## Identifying users
 
 > We highly recommend reading our section on [Identifying users](/docs/integrate/identifying-users) to better understand how to correctly use this method.
@@ -189,6 +200,8 @@ await Posthog().unregister("team_id");
 ```
 
 This will remove the super property and subsequent events will not include it.
+
+To send a capture option, such as `cookieless_mode`, with every event, use `Posthog().registerOptions()` instead. See [Event options](#event-options).
 
 If you are doing this as part of a user logging out you can instead simply use `Posthog().reset()` which takes care of clearing all stored super properties and more.
 
@@ -558,6 +571,8 @@ If you implement or mock `PosthogFlutterPlatformInterface`, `PosthogFlutterIO` o
 - Add `defaultValue` to `isFeatureEnabled()`.
 - Return a `Future<PostHogFeatureFlagsLoaded>` from `reloadFeatureFlags()`.
 - Override the new `captureAi()` and `setAppLanguage(String? language)` if your class needs them. In the base class, `captureAi()` throws `UnimplementedError` and `setAppLanguage()` does nothing.
+- Override the new `registerOptions(Map<String, Object?> options)` and `unregisterOptions(String key)` if your class needs them. In the base class, both throw `UnimplementedError`.
+- Change `OnFeatureFlagsCallback` implementations to take a `PostHogFeatureFlagsLoaded`.
 
 Calls to `Posthog()` aren't affected by these.
 
@@ -603,7 +618,7 @@ A `reset()`, `identify()` or `optOut()` made straight after an un-awaited `captu
 
 ### Events go to capture v1
 
-On iOS, macOS, Android, Windows and Linux, version 6 sends events to capture v1 instead of `/batch/`. iOS and macOS do this through `posthog-ios` 4.0, Android through `posthog-android` 4.0, and Windows and Linux in the SDK's Dart client. For how the native SDKs behave, see the [`posthog-ios` 4.0](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) and [`posthog-android` 4.0](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md) migration guides. For the changes every SDK shares, such as event validation, property precedence and retries, see the [capture v1 upgrade guide](/docs/libraries/capture-v1).
+On iOS, macOS, Android, Windows and Linux, version 6 sends events to capture v1 instead of `/batch/`. iOS and macOS do this through `posthog-ios` 4.0, Android through `posthog-android` 4.0, and Windows and Linux in the SDK's Dart client. For how the native SDKs behave, see the [`posthog-ios` 4.0](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) and [`posthog-android` 4.0](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md) migration guides. For the changes every SDK shares, such as event validation, property precedence and retries, see the [capture v1 upgrade guide](/docs/libraries/capture-v1).
 
 Web is unchanged. Flutter web runs `posthog-js`, which keeps sending events to the endpoints it uses today.
 
@@ -634,7 +649,7 @@ The SDK doesn't fall back to `/batch/`. On iOS, macOS, Android, Windows and Linu
 Other changes that come with capture v1, on every platform except web:
 
 - **Redirects:** the SDK only follows a 307 or 308 redirect to the same origin as `host`. Any other redirect drops the batch. If your proxy redirects capture requests to another host, point `host` at the final host.
-- **Event validation:** PostHog checks each event on its own and drops only the invalid ones, so the rest of the batch is delivered. It drops an event with an empty distinct ID, or a name or distinct ID over 200 UTF-8 bytes. Version 5 shortened a long distinct ID and kept the event. Events with an empty name are dropped too, as version 5 already did on Windows and Linux. If you identify users with a long ID, such as a JWT, shorten or hash it before you upgrade.
+- **Event validation:** PostHog checks each event on its own and drops only the invalid ones, so the rest of the batch is delivered. It drops an event whose name or distinct ID is over 200 UTF-8 bytes. A Dart `beforeSend` callback that sets an empty distinct ID keeps the SDK's ID, but a native `PosthogFlutterPlugin.addBeforeSend` hook that does so drops the event. Version 5 shortened a long distinct ID and kept the event. Events with an empty name are dropped too, as version 5 already did on Windows and Linux. If you identify users with a long ID, such as a JWT, shorten or hash it before you upgrade.
 - **Personal API keys:** a personal API key (`phx_...`) in `projectToken` disables the SDK at setup. Use your project token (`phc_...`).
 - **Billing limit:** on iOS, macOS and Android, a 402 (over your billing limit) drops the whole request. Windows and Linux already dropped it in version 5.
 - **Session and window IDs:** a `$session_id` or `$window_id` that isn't a string is removed before sending.
@@ -648,6 +663,8 @@ On iOS, macOS, Android, Windows and Linux, an event's properties are merged in t
 3. the properties you pass to `capture` or another event-sending method
 
 In version 5, the SDK's own values won over the properties you registered or passed. In version 6, your value wins for that event. A registered `$session_id` now overrides the SDK's session ID, which can detach events from their session replay.
+
+`$lib` and `$lib_version` are the exception: the SDK fills them as a pair after the merge. If `$lib` is missing or empty, the SDK sets both, replacing a `$lib_version` you passed on its own. If `$lib` names another library, the SDK leaves both as you set them and doesn't add its own version.
 
 `beforeSend` runs after the merge, so it sees and can change every property and option the SDK adds. In version 5, on iOS, macOS and Android, it ran before the native SDK added its properties and saw only the properties you passed.
 
@@ -673,7 +690,7 @@ await Posthog().capture(
 );
 ```
 
-The legacy properties still work, but an option wins over its legacy property. See [Event options](#event-options) for the known options, their legacy properties and the limits on web.
+The legacy properties still work, but an option wins over its legacy property. To send an option with every event, use the new `Posthog().registerOptions()` and `unregisterOptions()` instead of registering its legacy property. See [Event options](#event-options) for the known options, their legacy properties and the limits on web.
 
 ### AI events
 
@@ -706,6 +723,7 @@ These changes are on top of the capture v1 changes above:
 - **Non-finite numbers:** `NaN` and infinite property values are dropped instead of being sent as `null`. In a list, they become `null` so the other elements keep their positions.
 - **Empty event names:** an event with an empty name is dropped on the device.
 - **Logs:** the count of events PostHog dropped only appears in debug mode.
+- **`close()`:** waits up to 2 seconds for one last send and up to 2 more for the queue's files, so it can take up to 4 seconds.
 - **Writes to disk:** an event is on disk only when the future returned by `capture`, `screen`, `captureException` or another event-sending method completes, not when the method returns. One you didn't await can be lost if the app crashes or calls `exit()` right after. Await the call, or `Posthog().close()`, before `exit()`.
 
 ### Behavior changes on iOS and macOS
@@ -716,13 +734,22 @@ These changes come from `posthog-ios` 4.0 and need no code changes, but they can
 - **Bootstrapped payloads:** string values in `PostHogBootstrapConfig.featureFlagPayloads`, such as `"123"` or `"true"`, now stay strings instead of being decoded to numbers or booleans. This matches Android.
 - **Lifecycle events:** `Application Installed`, `Application Updated` and `Application Opened` no longer include the legacy `version` and `build` properties. Update any insights, cohorts or filters that use them to `$app_version` and `$app_build`. Android still sends `version` and `build` for now.
 - **Network reachability:** a path that needs user action, such as a VPN waiting for a password, counts as reachable, and queues pause while cellular data is off for the app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
+- **Null values:** a `null` inside a nested map is now left out of the event instead of being sent as `null`. A list keeps a `null` element at its position. `$set`, `$set_once` and `$group_set` still send `null` values.
+- **Missing flags:** `$feature_flag_called` for a flag with no value now leaves out `$feature_flag_response` instead of sending `null`. Filter on `is not set` to find missing flags.
 - **Events queued by very old versions:** events still on disk from a `posthog-ios` 2.x SDK are deleted instead of sent. Distinct ID, anonymous ID, groups and cached feature flags carry over.
 
 ### Behavior changes on Android
 
-This change comes from `posthog-android` 4.0 and needs no code changes:
+These changes come from `posthog-android` 4.0 and need no code changes, but they can affect your data:
 
 - **Malformed feature flag payloads:** a payload that is malformed JSON, empty, or only whitespace is now `null` instead of the raw string. A JSON `null` payload also reads as `null` instead of the string `"null"`.
+- **Missing flags:** `$feature_flag_called` for a missing flag now leaves out `$feature_flag_response`. Version 5 sent `""` from `getFeatureFlag()` and `false` from `isFeatureEnabled()`. Insights, cohorts and actions that filter on those values to find missing flags stop matching new events without any error, so use an `is not set` filter instead.
+- **Null list elements:** a `null` element in a list is now sent at its position instead of being removed.
+- **Other libraries built on `posthog-android` 3.x:** `posthog-android` 4.0 brings the `posthog` core 7.0, which isn't binary compatible with 3.x. If your app also uses `posthog-server` older than 2.25.0, or another plugin or library built on `posthog-android` 3.x, it fails at runtime with errors such as `NoSuchMethodError`. Upgrade `posthog-server` to 2.25.0 or later.
+
+### Debug logs
+
+On every platform except web, the text of the SDK's debug log lines changed. Update any log-based alerts that match the version 5 text.
 
 ### `$locale` and `$app_language`
 
@@ -731,3 +758,18 @@ This change comes from `posthog-android` 4.0 and needs no code changes:
 Update cohorts, insights and actions that match `$locale`: a filter on `$locale = de` stops matching `de-CH`. Use a regex such as `^de(-|$)` to match a language. Events already stored keep the old `$locale`.
 
 The new `$app_language` property is the language your app shows. `PosthogObserver` reports the locale your `MaterialApp` resolved every time a route changes. An app that doesn't declare `supportedLocales` reports `en-US`, so use a regex such as `^en(-|$)` to match English. To send another value, call `Posthog().setAppLanguage('de')`. Web doesn't send `$app_language` yet, because `posthog-js` doesn't support it. To send it there now, call `Posthog().register(r'$app_language', 'de')`.
+
+### Upgrade checklist
+
+- Use Flutter 3.41 or later, Xcode 26 or later, and Swift Package Manager for iOS and macOS. Don't upgrade yet if you embed Flutter as an iOS or macOS add-to-app module.
+- Raise iOS to 15.0 and macOS to 11.0.
+- Rename `com.posthog.posthog.API_KEY` to `com.posthog.posthog.PROJECT_TOKEN` in `AndroidManifest.xml` and `Info.plist`.
+- If you run your own reverse proxy or self-host, serve `/i/v1/analytics/events` and `/i/v1/ai/events` first.
+- Shorten or hash distinct IDs over 200 UTF-8 bytes.
+- On Android, upgrade `posthog-server` to 2.25.0 or later if you use it.
+- Make `beforeSend` callbacks synchronous, and check them for the new event shape and its options.
+- Replace `PostHogConfig.onFeatureFlags` with `Posthog().onFeatureFlags()` before `setup()`.
+- Change filters on `$feature_flag_response` for missing flags to `is not set`, and filters on `$locale` to match the region.
+- Move anything that reads `version` or `build` on iOS and macOS lifecycle events to `$app_version` and `$app_build`.
+- On Windows and Linux, await calls or `Posthog().close()` before `exit()`.
+- Fix the remaining compile errors, including any test fakes of the platform classes.
