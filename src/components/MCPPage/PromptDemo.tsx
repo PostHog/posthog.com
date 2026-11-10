@@ -108,7 +108,6 @@ export default function PromptDemo(): JSX.Element {
                 className="grid gap-x-8 gap-y-4 @2xl/reader-content:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
             >
                 <div>
-                    <p className="m-0 border-b border-primary pb-2 text-sm font-semibold text-secondary">Try asking</p>
                     <ul className="m-0 list-none p-0">
                         {demos.map(({ title, prompt, calls }, index) => {
                             const active = index === activeIndex
