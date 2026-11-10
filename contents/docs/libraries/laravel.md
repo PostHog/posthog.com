@@ -18,7 +18,7 @@ The [PostHog Laravel SDK](https://github.com/PostHog/posthog-laravel) supports L
 Install [`posthog/posthog-laravel`](https://packagist.org/packages/posthog/posthog-laravel) and publish its configuration:
 
 ```bash
-composer require posthog/posthog-laravel
+composer require "posthog/posthog-laravel:^0.3"
 php artisan posthog:install
 ```
 
@@ -226,7 +226,13 @@ The wizard installs the PHP SDK, not the experimental Laravel SDK.
 
 ### Initialize the PHP SDK
 
-Install the PHP SDK as described in the [PHP installation guide](/docs/libraries/php#installation), then add your project token and host to `.env`:
+Install the PHP SDK as described in the [PHP installation guide](/docs/libraries/php#installation):
+
+```bash
+composer require "posthog/posthog-php:^4.0"
+```
+
+Then add your project token and host to `.env`:
 
 ```bash file=.env
 POSTHOG_API_KEY=<ph_project_token>
