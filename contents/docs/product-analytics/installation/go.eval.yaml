@@ -190,10 +190,12 @@ checks:
           shared: [docs-read]
           rubrics:
               no-person-profile: >-
-                  The event turns off person processing with an event option: Options:
-                  posthog.NewOptions().Set("process_person_profile", false) on the
-                  posthog.Capture. Fails if it only sets a `$process_person_profile`
-                  property. Cite the file and line(s).
+                  The event turns off person processing with the event option
+                  process_person_profile: false. Either the posthog.Capture sets
+                  Options: posthog.NewOptions().Set("process_person_profile", false), or
+                  it is sent with posthog.EnqueueWithContext from a request context and
+                  no DistinctId, so the SDK sets that option itself. Fails if it only
+                  sets a `$process_person_profile` property. Cite the file and line(s).
               distinct-id-per-visitor: >-
                   Each visitor gets their own DistinctId, such as a generated UUID, a
                   cookie or a hash. It is not one constant shared by all visitors.
