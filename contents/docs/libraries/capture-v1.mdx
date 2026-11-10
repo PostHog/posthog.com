@@ -149,7 +149,7 @@ A few details:
 - A property set to `null` (or `None`, or `nil`) counts as set, so a lower layer can't replace it. An option set to `null` counts as unset.
 - On Python, Go, Node.js, and Rust, `$set`, `$set_once`, `$groups`, and `$group_set` merge key by key, and the most specific value wins for each key. On iOS, Android, and Flutter, a `$set` or `$set_once` you pass on the call replaces a registered one, as before.
 - A `$set` in a global or context layer adds those person properties to every event that layer reaches.
-- On server SDKs, `process_person_profile: false` in a global or context layer also reaches identify, alias, and group identify events. PostHog drops those events when person processing is off, and your error handler doesn't report it, because PostHog accepts them first. Set person processing on each capture call instead of in a layer that covers these calls.
+- `process_person_profile: false` in a global or context layer also reaches identify, alias, and group identify calls, and PostHog drops those events. See [person processing](#person-processing) to keep them.
 - Not every SDK has every layer. Rust has no global layer. iOS and Android have global properties but no global options or context layer, and Flutter has global options (`registerOptions`) but no context layer. Your SDK's migration guide lists the layers it has and which calls they reach.
 
 ### Person processing
@@ -159,6 +159,52 @@ A few details:
 - On server SDKs, an event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Only the `process_person_profile` option can change that. If the event belongs to a person, pass their distinct ID. (The Go SDK returns an error instead when the call has no request context.)
 - Use a real distinct ID: one visitor, or your own ID for a known user. See [choosing a distinct ID](/docs/api/capture-v1#choosing-a-distinct-id).
 - On server SDKs, **group identify without a distinct ID** uses `$<group type>_<group key>` as the event's distinct ID. If that is over 200 bytes, pass a `distinct_id` explicitly, or PostHog drops the event.
+
+**Global person processing settings reach identify calls.** Turning person processing off in a global or context layer, with the option or its legacy property, affects every event that layer reaches. PostHog then drops identify, alias, and group identify events, so they don't create or merge a person or update a group. It keeps `$set` events but ignores their person properties. Your SDK doesn't report an error for either. To keep these calls working, pass `process_person_profile: true` as an option on the call, or set it in `before_send`. A call option overrides every layer. Rust's `alias` and `group_identify` don't take options, so use `before_send` there:
+
+<MultiLanguage>
+
+```python
+posthog.group_identify(
+    "company",
+    "company_id_in_your_db",
+    {"name": "Acme"},
+    options={"process_person_profile": True},
+)
+```
+
+```go
+client.Enqueue(posthog.GroupIdentify{
+    Type:       "company",
+    Key:        "company_id_in_your_db",
+    Properties: posthog.NewProperties().Set("name", "Acme"),
+    Options:    posthog.NewOptions().Set("process_person_profile", true),
+})
+```
+
+```rust
+let options = posthog::ClientOptionsBuilder::default()
+    .api_key("<ph_project_token>".to_string())
+    .host("<ph_client_api_host>")
+    .before_send(|mut event| {
+        if event.event_name() == "$groupidentify" {
+            let _ = event.insert_option("process_person_profile", true);
+        }
+        Some(event)
+    })
+    .build()?;
+```
+
+```node
+posthog.groupIdentify({
+    groupType: 'company',
+    groupKey: 'company_id_in_your_db',
+    properties: { name: 'Acme' },
+    options: { process_person_profile: true },
+})
+```
+
+</MultiLanguage>
 
 ### Limits
 
