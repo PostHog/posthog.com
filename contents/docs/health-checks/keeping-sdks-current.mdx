@@ -24,7 +24,7 @@ However, there are a few things which can break the intended auto-update behavio
 
 ### npm and package manager lockfiles
 
-When you install `posthog-js` (or any npm package) via a package manager, your lockfile pins the exact version. So, running `npm install` again in the future just reproduces the lockfile; it won't update to a newer version even if one is available. This leaves you stuck on the version you originally installed.
+When you install `posthog-js@1` (or any npm package) via a package manager, your lockfile pins the exact version. So, running `npm install` again in the future just reproduces the lockfile; it won't update to a newer version even if one is available. This leaves you stuck on the version you originally installed.
 
 To actually _update_ the package, you need to update the version constraint in your `package.json` file and then reinstall, or run `update` instead of `install`:
 
@@ -221,7 +221,7 @@ mix deps.update posthog
 
 ```bash file=.NET
 # Updates the `posthog-dotnet` package:
-dotnet add package PostHog
+dotnet add package PostHog --version "2.*"
 ```
 
 </MultiLanguage>

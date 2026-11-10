@@ -53,7 +53,7 @@ Since PostHog handles the management and evaluation of feature flags, we must se
 Start by installing the `posthog-js` library to get access to the [JavaScript Web SDK](/docs/libraries/js).
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 Then, store your PostHog key and host in environment variables. Add them to a `.env` file in your project's base directory. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)

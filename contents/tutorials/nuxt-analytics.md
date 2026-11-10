@@ -83,7 +83,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 First install `posthog-js`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 Then, store your PostHog key and host in environment variables. Add them to a `.env` file in your project's base directory. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project).

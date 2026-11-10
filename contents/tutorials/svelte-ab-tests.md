@@ -56,7 +56,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In the `src/routes` folder, create a `+layout.js`. In this file, check the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).  

@@ -31,7 +31,7 @@ After creating your app, go into the newly created `claude-analytics` directory 
 
 ```bash
 cd claude-analytics
-npm install --save posthog-node@5 @posthog/ai @anthropic-ai/sdk
+npm install --save posthog-node@5 @posthog/ai@8 @anthropic-ai/sdk
 ```
 
 Next, we'll create our frontend by replacing the placeholder code in `app/page.js`. Our frontend will be a simple form with an input, model selector, and response label. Each of these needs a state. We'll also set up an API call to `/api/generate` with the user's input and model.

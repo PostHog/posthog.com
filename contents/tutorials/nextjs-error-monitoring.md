@@ -75,7 +75,7 @@ Once saved, run `npm run dev` to see your new app in action. Click either of the
 To start, in [your PostHog project settings under error tracking](https://us.posthog.com/settings/environment-error-tracking), toggle on **Enable exception autocapture**. Once done, go back to your app and install both `posthog-js` and `posthog-node`:
 
 ```bash
-npm i posthog-js posthog-node@5
+npm i posthog-js@1 posthog-node@5
 ```
 
 ### Frontend setup

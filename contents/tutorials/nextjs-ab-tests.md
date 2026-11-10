@@ -46,7 +46,7 @@ To track our app and set up an A/B test, we install PostHog. If you don't have a
 Start by installing the `posthog-js` SDK:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, create a `providers.js` file in your `app` folder. In it, initialize PostHog with your project token and instance address and export a provider component.

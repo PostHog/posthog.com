@@ -284,7 +284,7 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 Next, install [`posthog-js`](https://github.com/posthog/posthog-js) and `@posthog/react`:
 
 ```shell
-npm install --save posthog-js @posthog/react
+npm install --save posthog-js@1 @posthog/react@1
 ```
 
 Afterwards, create an `instrumentation-client.js` file in the base `pages-tutorial` directory. This is where you initialize PostHog like this:

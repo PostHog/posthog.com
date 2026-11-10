@@ -154,7 +154,7 @@ npm run dev
 Up next is adding PostHog, which you can install by running:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Once done, you need your project token and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
