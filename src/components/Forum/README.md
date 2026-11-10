@@ -1,6 +1,6 @@
 # Forum
 
-The `/forum` app. Forum posts are Squeak questions with a `forumTopic`, so the forum reuses the question and reply APIs and components. The full API contract lives in `docs/forum-api.md` in [squeak-strapi](https://github.com/PostHog/squeak-strapi).
+The `/forum` app. Forum posts are Squeak questions with a `forumTopic`, so the forum reuses the question and reply APIs and components. The full API contract lives in `docs/forum-api.md` in <PrivateLink url="https://github.com/PostHog/squeak-strapi">squeak-strapi</PrivateLink>.
 
 ## Routes
 
