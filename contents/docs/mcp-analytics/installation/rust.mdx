@@ -18,6 +18,10 @@ Try it, and report bugs or send patches to [posthog-rs](https://github.com/PostH
 
 You need Rust 1.88+, `rmcp` 3.7 or later, `posthog` 1.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `rmcp` server? See [Custom dispatchers](#custom-dispatchers).
 
+<WizardCommand command="mcp-analytics" />
+
+The [wizard](/blog/envoy-wizard-llm-agent) adds the crate with its `mcp` feature and wraps your server with `posthog_rs::mcp::instrument` for you. To install by hand, follow the steps below.
+
 <Steps>
 
 <Step title="Install the crate" badge="required">
@@ -311,7 +315,6 @@ The Rust SDK doesn't yet have:
 - An event properties callback, or an analytics handle for [custom events](/docs/mcp-analytics/custom-events). Call `capture` on your `posthog` client instead
 - `$identify` and the merge of anonymous events into a user
 - Stack traces and model properties on the `$exception`
-- Wizard support
 
 Some behavior to know about:
 

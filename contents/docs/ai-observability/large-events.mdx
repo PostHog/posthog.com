@@ -48,6 +48,12 @@ With the flag on, nothing is truncated or redacted. On posthog-python 8.0.0+ and
 
 If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture` and returns the captured event's UUID. The other capture v1 SDKs have an AI capture method too: `EnqueueAI` in Go, `capture_ai` in Rust, and `captureAi` on iOS, Android, and Flutter. See [AI events](/docs/libraries/capture-v1#ai-events) for each SDK's method and settings.
 
+<CalloutBox icon="IconWarning" title="Plain capture drops large events in Python" type="caution">
+
+In posthog-python, `capture()` drops any event over 900 KiB before sending it and only logs an error. A large `$ai_generation`, for example one that carries base64 images or audio, never reaches PostHog. Use `capture_ai()` for these events.
+
+</CalloutBox>
+
 <MultiLanguage>
 
 ```python

@@ -13,6 +13,7 @@ import {
     generatePricingMd,
     generatePlatformMd,
     generateProductPagesMarkdown,
+    generateMcpMd,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
 import { pocketGuideDestination } from '../src/constants/pocketGuides'
@@ -148,6 +149,7 @@ const generateMarkdownArtifacts = async (graphql: any) => {
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents
     generatePlatformMd()
     generateProductPagesMarkdown()
+    generateMcpMd()
 
     // Generate changelog.md (+ per-year archives) from build-time Roadmap nodes for LLMs/agents.
     // The /changelog page renders a virtualized UI, so the HTML-scrape path can't cover it.
@@ -288,6 +290,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         title
+                        ogImage
                         featuredImage {
                             publicURL
                         }
@@ -344,22 +347,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         featuredImage {
                             publicURL
                         }
-                    }
-                }
-            }
-            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        featuredImage {
-                            publicURL
-                        }
-                        logo {
-                            publicURL
-                        }
-                        title
                     }
                 }
             }

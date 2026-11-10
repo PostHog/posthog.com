@@ -13,7 +13,7 @@ Bootstrapping feature flags makes them available as soon as React and PostHog lo
 
 To show you how you can bootstrap feature flags, we are going to build a React app with Vite, add PostHog, set up an Express server to server-side render our app, and finally bootstrap our flags from the server to the client.
 
-> Already have an app set up? [Skip straight to the feature flag bootstrapping implementation](#handle-feature-flags-on-the-backend).
+> Already have an app set up? [Skip straight to the feature flag bootstrapping implementation](#set-up-our-server-rendering-express-app).
 
 ## Create a React app with Vite and add PostHog
 

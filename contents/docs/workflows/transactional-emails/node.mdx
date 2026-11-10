@@ -1,0 +1,236 @@
+---
+title: Send transactional emails with Node.js
+sidebar: Docs
+showTitle: true
+---
+
+The [Node.js SDK](/docs/libraries/node) sends transactional emails from version 5.61.2. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
+
+<details>
+<summary>Prompt for your coding agent</summary>
+
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+
+```text
+Add PostHog transactional email to this Node.js app with posthog-node.
+
+Read https://posthog.com/docs/workflows/transactional-emails/node.md first. Follow it over anything you remember about PostHog.
+
+- Reuse the app's PostHog client. Add secretKey from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. Set enableLocalEvaluation: false unless the app evaluates feature flags locally with this client.
+- Send only from server code. Never import the secret key into code that runs in the browser.
+- Build each idempotencyKey from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
+- send returns { data, error } and doesn't throw. Branch on error.code, never on error.message.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotencyKey. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
+- Pass the distinctId that the app passes to identify(). Leave it out for people without an account, such as invitees.
+- Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
+- Add a test that passes a fake fetch to the client and checks the request.
+
+Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+```
+
+</details>
+
+## Install
+
+```bash
+npm install posthog-node
+```
+
+## Set up the client
+
+Add your project secret API key to the PostHog client that your app already has. The project token keeps capturing events. The secret key sends email, so keep it on your server and never ship it to the browser.
+
+```js
+import { PostHog } from "posthog-node"
+
+const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    // This client only sends email, so it doesn't poll flag definitions with the secret key
+    enableLocalEvaluation: false,
+})
+```
+
+Keep `enableLocalEvaluation: false` unless this client also [evaluates feature flags locally](/docs/feature-flags/local-evaluation). With local evaluation on, the client polls flag definitions with the secret key, and a key with only the **Transactional email** scope can't read them. If you do evaluate flags locally with this client, give the key the **Feature flag** read scope too.
+
+Shut the client down when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
+
+## Send an email
+
+```js
+export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateId: "<template_id>",
+        templateData: { first_name: firstName, reset_link: resetLink },
+        distinctId: userId,
+        // Identifies this one email, so a retry never sends it twice
+        idempotencyKey: `password-reset-${resetRequestId}`,
+    })
+    if (error) {
+        // An EmailError. Branch on error.code
+        throw error
+    }
+    return data.id
+}
+```
+
+`send` doesn't throw. It returns `{ data, error }`. `data.id` is the message ID. `error` is an `EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows/transactional-emails#errors).
+
+A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
+
+### Timeouts and retries
+
+The client retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or as long as the server's `Retry-After` asks, up to 30 seconds. When `Retry-After` asks for more than 30 seconds, the client returns the error at once. Each request times out after 15 seconds.
+
+To change this, set `emailRequestTimeoutMs` and `emailRequestMaxRetries` on the client, or `maxRetries` on one send.
+
+## Send from a background job
+
+Send from a job queue when the email shouldn't slow down the request, such as an email address check after a signup. Let the queue own the retries:
+
+- Set `maxRetries: 0`, so that the client doesn't retry inside the job.
+- Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
+- Retry only the errors that a later attempt can fix. Every other code fails the same way again.
+
+This example uses [BullMQ](https://docs.bullmq.io). Add the job with `attempts` and a `backoff`, so that BullMQ retries it. Five attempts with this backoff finish within minutes.
+
+```js
+import { Queue } from "bullmq"
+
+const emails = new Queue("emails", { connection: { host: "localhost", port: 6379 } })
+
+await emails.add(
+    "password-reset",
+    { userId, email, firstName, resetLink, resetRequestId },
+    { attempts: 5, backoff: { type: "exponential", delay: 10_000 } }
+)
+```
+
+The worker sends the email:
+
+```js
+import { UnrecoverableError, Worker } from "bullmq"
+
+// A later attempt can fix these. Any other code fails the same way again.
+const RETRYABLE_CODES = new Set(["network_error", "idempotency_key_in_flight", "throttled", "delivery_unavailable"])
+
+new Worker(
+    "emails",
+    async (job) => {
+        const { userId, email, firstName, resetLink, resetRequestId } = job.data
+        const { data, error } = await posthog.emails.send({
+            to: email,
+            templateId: "<template_id>",
+            templateData: { first_name: firstName, reset_link: resetLink },
+            distinctId: userId,
+            // The same key on every attempt, so a retried job never sends the email twice
+            idempotencyKey: `password-reset-${resetRequestId}`,
+            // BullMQ retries the job, so the client doesn't retry on its own
+            maxRetries: 0,
+        })
+        if (error) {
+            throw RETRYABLE_CODES.has(error.code) ? error : new UnrecoverableError(`${error.code}: ${error.message}`)
+        }
+        return data.id
+    },
+    { connection: { host: "localhost", port: 6379 } }
+)
+```
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `distinctId`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
+
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinctId` out.
+
+## Send content from your code
+
+From version 5.62.0, `send` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Name the email with `templateKey`, and pass `subject` with `html`, `text`, or both. PostHog sends the content as you wrote it.
+
+For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and pass the result as `html`:
+
+```jsx
+import { render } from "@react-email/render"
+import { PasswordResetEmail } from "./emails/password-reset"
+
+export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
+    const html = await render(<PasswordResetEmail firstName={firstName} resetLink={resetLink} />)
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateKey: "password-reset",
+        subject: "Reset your password",
+        html,
+        from: "Hedgebox <security@example.com>",
+        distinctId: userId,
+        idempotencyKey: `password-reset-${resetRequestId}`,
+    })
+    if (error) {
+        throw error
+    }
+    return data.id
+}
+```
+
+- **`templateKey`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`text`** - If you leave it out, PostHog makes it from `html`.
+- **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
+- **`captureEngagement`** - PostHog captures the email's engagement events unless you pass `captureEngagement: false`.
+
+A send has `templateId` or `templateKey`, not both. Content from your code takes no `templateData`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+## Check an email's status
+
+```js
+export async function emailBounced(messageId) {
+    const { data: status, error } = await posthog.emails.get(messageId)
+    if (error) {
+        if (error.code === "not_found") {
+            // The first status can take a few seconds to arrive. Try again later.
+            return null
+        }
+        throw error
+    }
+    return status.status === "bounced"
+}
+```
+
+`get` returns `{ data, error }`. `data` has `id`, `status`, `createdAt`, `statusAt`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means.
+
+A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
+
+## Test without sending email
+
+Pass your own `fetch` to see exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
+
+```js
+import assert from "node:assert/strict"
+import { PostHog } from "posthog-node"
+
+const requests = []
+const posthog = new PostHog("phc_test", {
+    secretKey: "phs_test",
+    enableLocalEvaluation: false,
+    fetch: async (url, options) => {
+        requests.push({ url, options })
+        return new Response(JSON.stringify({ message_id: "msg_1", replayed: false }), { status: 202 })
+    },
+})
+
+const { data } = await posthog.emails.send({
+    to: "jane@example.com",
+    templateId: "0190f6d2-7c1e-7b3a-9f5e-1c2d3e4f5a6b",
+    idempotencyKey: "password-reset-1",
+})
+
+assert.equal(data.id, "msg_1")
+assert.equal(requests[0].options.headers["Idempotency-Key"], "password-reset-1")
+```
+
+## Use a proxy or self-hosted PostHog
+
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `appHost` to your PostHog app URL. The client doesn't send email requests to a host that might be a proxy.
+
+With `enableLocalEvaluation` on, the client still polls flag definitions from `host` with the secret key. If that host is a proxy that must not see the key, keep `enableLocalEvaluation: false`.

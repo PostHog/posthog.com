@@ -1602,6 +1602,10 @@ export const handbookSidebar = [
                         url: '/handbook/forward-deployed-engineering/how-we-work',
                     },
                     {
+                        name: 'Engagement lifecycle',
+                        url: '/handbook/forward-deployed-engineering/fde-engagement-lifecycle',
+                    },
+                    {
                         name: 'How to get an FDE involved',
                         url: '/handbook/forward-deployed-engineering/how-to-get-fde-involved',
                     },
@@ -1638,6 +1642,10 @@ export const handbookSidebar = [
                     {
                         name: 'Designing events for per-entity metrics',
                         url: '/handbook/customer-success/shareable-guides/designing-events-for-per-entity-metrics',
+                    },
+                    {
+                        name: 'Instrumenting PostHog in the development process',
+                        url: '/handbook/customer-success/shareable-guides/instrumenting-posthog-in-the-development-process',
                     },
                     {
                         name: 'LLM cost optimization',
@@ -1926,6 +1934,10 @@ export const handbookSidebar = [
                                 url: '/handbook/growth/sales/data-foundations',
                             },
                             {
+                                name: 'PostHog Sources Datasheet',
+                                url: '/handbook/growth/sales/sources-datasheet',
+                            },
+                            {
                                 name: 'Data stack positioning',
                                 url: '/handbook/growth/sales/data-stack-positioning',
                             },
@@ -2074,6 +2086,10 @@ export const handbookSidebar = [
             {
                 name: 'Product & feature comparisons',
                 url: '/handbook/engineering/posthog-com/product-comparisons',
+            },
+            {
+                name: 'Running experiments',
+                url: '/handbook/engineering/posthog-com/running-experiments',
             },
             {
                 name: 'Editing API docs',
@@ -2579,19 +2595,11 @@ export const docsMenu = {
             url: '/docs/self-driving',
             navAppearance: 'sidebar',
             description: 'Understand PostHog and get set up',
-            badge: {
-                title: 'Beta',
-                className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
             children: [
                 {
                     name: 'Overview',
                     url: '/docs/self-driving',
                     icon: 'IconHome',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Setup',
@@ -2731,6 +2739,10 @@ export const docsMenu = {
                             name: 'Error patterns',
                             url: '/docs/self-driving/pocket-guide/ai-error-patterns',
                         },
+                        {
+                            name: 'Errors by account value',
+                            url: '/docs/self-driving/pocket-guide/errors-your-best-accounts-hit',
+                        },
                     ],
                     badge: {
                         title: 'New',
@@ -2864,6 +2876,10 @@ export const docsMenu = {
                                 {
                                     name: 'Snippet versioning',
                                     url: '/docs/libraries/js/snippet-versioning',
+                                },
+                                {
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
                                 },
                                 {
                                     name: 'Persistence',
@@ -3439,6 +3455,10 @@ export const docsMenu = {
                         {
                             name: 'OAuth integration',
                             url: '/docs/api/oauth',
+                        },
+                        {
+                            name: 'API scopes',
+                            url: '/docs/api/scopes',
                         },
                         {
                             name: 'Popular',
@@ -4079,6 +4099,10 @@ export const docsMenu = {
                         {
                             name: 'Toolbar',
                             url: '/docs/toolbar',
+                        },
+                        {
+                            name: 'Chrome extension',
+                            url: '/docs/toolbar/extension',
                         },
                         {
                             name: 'Heatmaps',
@@ -5196,7 +5220,7 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'What to watch',
+                    name: 'Highlights',
                     url: '/docs/replay-vision/what-to-watch',
                     icon: 'IconEye',
                     color: 'yellow',
@@ -6784,18 +6808,28 @@ export const docsMenu = {
                     icon: 'IconCalculator',
                     color: 'salmon',
                     featured: true,
-                },
-                {
-                    name: 'Materializing views',
-                    url: '/docs/data-warehouse/views/materialize',
-                    icon: 'IconCalculator',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Materialization troubleshooting',
-                    url: '/docs/data-warehouse/views/materialize-troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'orange',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/data-warehouse/views',
+                        },
+                        {
+                            name: 'Materialized views',
+                            url: '/docs/data-warehouse/views/materialize',
+                        },
+                        {
+                            name: 'Freshness and refresh cadence',
+                            url: '/docs/data-warehouse/views/freshness',
+                        },
+                        {
+                            name: 'Failures and suspension',
+                            url: '/docs/data-warehouse/views/failures-and-suspension',
+                        },
+                        {
+                            name: 'Troubleshooting',
+                            url: '/docs/data-warehouse/views/materialize-troubleshooting',
+                        },
+                    ],
                 },
                 {
                     name: 'Data quality',
@@ -7304,10 +7338,6 @@ export const docsMenu = {
                     icon: 'IconBolt',
                     color: 'orange',
                     featured: true,
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Where to use',
@@ -8297,6 +8327,61 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Transactional emails',
+                },
+                {
+                    name: 'Send transactional emails',
+                    url: '/docs/workflows/transactional-emails',
+                    icon: 'IconLetter',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/workflows/transactional-emails',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/workflows/transactional-emails/node',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/workflows/transactional-emails/python',
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/workflows/transactional-emails/go',
+                        },
+                        {
+                            name: '.NET',
+                            url: '/docs/workflows/transactional-emails/dotnet',
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/workflows/transactional-emails/rust',
+                        },
+                        {
+                            name: 'Ruby',
+                            url: '/docs/workflows/transactional-emails/ruby',
+                        },
+                        {
+                            name: 'Elixir',
+                            url: '/docs/workflows/transactional-emails/elixir',
+                        },
+                        {
+                            name: 'PHP',
+                            url: '/docs/workflows/transactional-emails/php',
+                        },
+                        {
+                            name: 'API',
+                            url: '/docs/workflows/transactional-emails/api',
+                        },
+                        {
+                            name: 'Examples',
+                            url: '/docs/workflows/transactional-emails/examples',
+                        },
+                    ],
+                },
+                {
                     name: 'Channels',
                 },
                 {
@@ -8315,6 +8400,10 @@ export const docsMenu = {
                             url: '/docs/workflows/push-notifications',
                         },
                         {
+                            name: 'Import device tokens',
+                            url: '/docs/workflows/push-notifications/import-device-tokens',
+                        },
+                        {
                             name: 'iOS',
                             url: '/docs/workflows/push-notifications/ios',
                         },
@@ -8329,6 +8418,10 @@ export const docsMenu = {
                         {
                             name: 'Flutter',
                             url: '/docs/workflows/push-notifications/flutter',
+                        },
+                        {
+                            name: 'Push step settings',
+                            url: '/docs/workflows/push-notifications/push-step-options',
                         },
                     ],
                 },

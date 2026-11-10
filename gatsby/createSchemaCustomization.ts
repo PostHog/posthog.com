@@ -213,6 +213,9 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       platformIconName: String
       platformSourceType: String
       featuredImageCaption: String
+      # "generated" draws the post title onto the featured image for the social card.
+      # Absent: the featured image is the social card.
+      ogImage: String
       sourceId: String
     }
     type TeamData {
@@ -531,6 +534,28 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       summary: String
       category: String
       feature: String
+    }
+    type PostHogScopeObject implements Node @dontInfer {
+      scopeObject: String
+      name: String
+      plural: String
+      description: String
+      group: String
+      groupOrder: Int
+      docsUrl: String
+      organizationWide: Boolean
+      actions: [PostHogScopeAction]
+      writeRequires: PostHogScopeRequirement
+    }
+    type PostHogScopeAction {
+      action: String
+      scope: String
+      oauth: Boolean
+      warning: String
+    }
+    type PostHogScopeRequirement {
+      scope: String
+      reason: String
     }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")

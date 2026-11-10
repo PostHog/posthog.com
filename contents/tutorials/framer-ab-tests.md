@@ -110,7 +110,7 @@ Click "Save" and then publish your site.
 
 ![Add script in Framer](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/framer-ab-tests/add-experiment-code.mp4)
 
-That's it! Your A/B test is now live. Half your users will see the updated button text and PostHog will track whether it has an impact on your clickthrough rate. You can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
+That's it! Your A/B test is now live. Half your users will see the updated button text and PostHog will track whether it has an impact on your clickthrough rate. You can [view your test results](/docs/experiments/analyzing-results) on the experiment page.
 
 If you want to view both variants of your experiment to make sure they are working correctly, add the line `posthog.featureFlags.overrideFeatureFlags({ flags: {'home-button-test': 'test'}})` to your code:
 

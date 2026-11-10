@@ -1,0 +1,267 @@
+---
+title: Send transactional emails with Python
+sidebar: Docs
+showTitle: true
+---
+
+The [Python SDK](/docs/libraries/python) sends transactional emails from version 7.81.2. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
+
+<details>
+<summary>Prompt for your coding agent</summary>
+
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+
+```text
+Add PostHog transactional email to this Python app with the posthog package.
+
+Read https://posthog.com/docs/workflows/transactional-emails/python.md first. Follow it over anything you remember about PostHog.
+
+- Reuse the app's Posthog or AsyncPosthog client. Add secret_key from the POSTHOG_PROJECT_SECRET_API_KEY environment variable.
+- Send only from server code. Never put the secret key in code or config that reaches the browser.
+- Build each idempotency_key from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
+- send returns a SendEmailResult and raises posthog.emails.EmailError when PostHog doesn't queue the email. Branch on error.code, never on the message.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. In a Celery task, pass max_retries=0 to send and let Celery retry. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
+- Pass the distinct_id that the app passes to identify(). Leave it out for people without an account, such as invitees.
+- Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
+- Add a test that fakes HTTP: pass an httpx.AsyncClient with an httpx.MockTransport as http_client to AsyncEmails, or a requests.Session with a test adapter as session to Emails, and check the request.
+
+Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+```
+
+</details>
+
+## Install
+
+```bash
+pip install posthog
+```
+
+For async code, install `posthog[async]` instead.
+
+## Set up the client
+
+Add your project secret API key to the PostHog client that your app already has. The project token keeps capturing events. The secret key sends email, so keep it on your server and never ship it to the browser.
+
+<MultiLanguage selector="tabs">
+
+```python file=Sync
+import os
+
+from posthog import Posthog
+
+posthog = Posthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
+)
+```
+
+```python file=Async
+import os
+
+from posthog import AsyncPosthog
+
+posthog = AsyncPosthog(
+    "<ph_project_token>",
+    host="<ph_client_api_host>",
+    secret_key=os.environ["POSTHOG_PROJECT_SECRET_API_KEY"],
+)
+```
+
+</MultiLanguage>
+
+The client loads flag definitions only when it evaluates a flag. If your app [evaluates feature flags locally](/docs/feature-flags/local-evaluation) with the same client, give the key the **Feature flag** read scope too.
+
+In a process that only sends email, you can use `Emails` or `AsyncEmails` from `posthog.emails` instead of a full client.
+
+Shut the client down when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
+
+## Send an email
+
+<MultiLanguage selector="tabs">
+
+```python file=Sync
+def send_password_reset(user_id: str, email: str, first_name: str, reset_link: str, reset_request_id: str) -> str:
+    # Raises posthog.emails.EmailError when PostHog doesn't queue the email. Branch on error.code.
+    result = posthog.emails.send(
+        to=email,
+        template_id="<template_id>",
+        template_data={"first_name": first_name, "reset_link": reset_link},
+        distinct_id=user_id,
+        # Identifies this one email, so a retry never sends it twice
+        idempotency_key=f"password-reset-{reset_request_id}",
+    )
+    return result.id
+```
+
+```python file=Async
+async def send_password_reset(user_id: str, email: str, first_name: str, reset_link: str, reset_request_id: str) -> str:
+    # Raises posthog.emails.EmailError when PostHog doesn't queue the email. Branch on error.code.
+    result = await posthog.emails.send(
+        to=email,
+        template_id="<template_id>",
+        template_data={"first_name": first_name, "reset_link": reset_link},
+        distinct_id=user_id,
+        # Identifies this one email, so a retry never sends it twice
+        idempotency_key=f"password-reset-{reset_request_id}",
+    )
+    return result.id
+```
+
+</MultiLanguage>
+
+`send` returns a `SendEmailResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument raises `TypeError` or `ValueError` before any request.
+
+A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
+
+### Timeouts and retries
+
+The client retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or longer if the server's `Retry-After` asks for it. When `Retry-After` asks for more than 30 seconds, the client raises the error at once. Each request times out after 15 seconds.
+
+To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client, or `max_retries` on one send.
+
+## Send from a background job
+
+Send from a job queue when the email shouldn't slow down the request, such as an email address check after a signup. Let the queue own the retries:
+
+- Pass `max_retries=0` to `send`, so that the client doesn't retry inside the task.
+- Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
+- Retry only the errors that a later attempt can fix. Every other code fails the same way again.
+
+This example uses [Celery](https://docs.celeryq.dev). The task retries itself with `self.retry` for the codes that can pass later, and fails for good on every other code.
+
+```python
+from celery import shared_task
+from posthog.emails import EmailError
+
+# A later attempt can fix these. Any other code fails the same way again.
+RETRYABLE_CODES = {"network_error", "idempotency_key_in_flight", "throttled", "delivery_unavailable"}
+
+
+@shared_task(bind=True, max_retries=5)
+def send_password_reset_email(self, user_id: str, email: str, first_name: str, reset_link: str, reset_request_id: str) -> str:
+    try:
+        result = posthog.emails.send(
+            to=email,
+            template_id="<template_id>",
+            template_data={"first_name": first_name, "reset_link": reset_link},
+            distinct_id=user_id,
+            # The same key on every attempt, so a retried task never sends the email twice
+            idempotency_key=f"password-reset-{reset_request_id}",
+            # Celery retries the task, so the client doesn't retry on its own
+            max_retries=0,
+        )
+    except EmailError as error:
+        if error.code in RETRYABLE_CODES:
+            # Waits 10, 20, 40, 80, then 160 seconds, longer than a rate limit's minute
+            raise self.retry(exc=error, countdown=10 * 2**self.request.retries)
+        # Any other code marks the task as failed, with no retry
+        raise
+    return result.id
+```
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
+
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+
+## Send content from your code
+
+From version 7.84.0, `send` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Name the email with `template_key`, and pass `subject` with `html`, `text`, or both. PostHog sends the content as you wrote it, so render it first with your template engine, such as Jinja or Django templates.
+
+<MultiLanguage selector="tabs">
+
+```python file=Sync
+def send_password_reset(user_id: str, email: str, html: str, reset_request_id: str) -> str:
+    result = posthog.emails.send(
+        to=email,
+        template_key="password-reset",
+        subject="Reset your password",
+        html=html,
+        from_="Hedgebox <security@example.com>",
+        distinct_id=user_id,
+        idempotency_key=f"password-reset-{reset_request_id}",
+    )
+    return result.id
+```
+
+```python file=Async
+async def send_password_reset(user_id: str, email: str, html: str, reset_request_id: str) -> str:
+    result = await posthog.emails.send(
+        to=email,
+        template_key="password-reset",
+        subject="Reset your password",
+        html=html,
+        from_="Hedgebox <security@example.com>",
+        distinct_id=user_id,
+        idempotency_key=f"password-reset-{reset_request_id}",
+    )
+    return result.id
+```
+
+</MultiLanguage>
+
+- **`template_key`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`text`** - If you leave it out, PostHog makes it from `html`.
+- **`from_`** - The sender. It has a trailing underscore because `from` is a Python keyword. It needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
+- **`capture_engagement`** - PostHog captures the email's engagement events unless you pass `capture_engagement=False`.
+
+A send has `template_id` or `template_key`, not both, or it raises `TypeError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+## Check an email's status
+
+```python
+from posthog.emails import EmailError
+
+def email_bounced(message_id: str) -> bool | None:
+    try:
+        status = posthog.emails.get(message_id)
+    except EmailError as error:
+        if error.code == "not_found":
+            # The first status can take a few seconds to arrive. Try again later.
+            return None
+        raise
+    return status.status == "bounced"
+```
+
+`get` returns an `EmailStatus` with `id`, `status`, `created_at`, `status_at`, and `reason`. The two times are `datetime` objects. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means.
+
+A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
+
+## Test without sending email
+
+Pass your own HTTP transport to see exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
+
+```python
+import httpx
+from posthog.emails import AsyncEmails
+
+requests = []
+
+def handler(request: httpx.Request) -> httpx.Response:
+    requests.append(request)
+    return httpx.Response(202, json={"message_id": "msg_1", "replayed": False})
+
+async def test_send_password_reset():
+    emails = AsyncEmails(
+        "phs_test",
+        host="https://us.posthog.com",
+        http_client=httpx.AsyncClient(transport=httpx.MockTransport(handler)),
+    )
+
+    result = await emails.send(to="jane@example.com", template_id="0190f6d2-7c1e-7b3a-9f5e-1c2d3e4f5a6b", idempotency_key="password-reset-1")
+
+    assert result.id == "msg_1"
+    assert requests[0].headers["Idempotency-Key"] == "password-reset-1"
+```
+
+For sync code, pass a `requests.Session` with a test adapter to `Emails(session=...)`. Any library that mocks `requests` or `httpx` works too.
+
+## Use a proxy or self-hosted PostHog
+
+On PostHog Cloud, the client sends email to your region's app host, even when `host` is an ingestion host such as `us.i.posthog.com`. If `host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. The client doesn't send email requests to a host that might be a proxy.
+
+When the client evaluates a flag locally, it still loads flag definitions from `host` with the secret key. If that host is a proxy that must not see the key, don't evaluate flags locally with this client.
