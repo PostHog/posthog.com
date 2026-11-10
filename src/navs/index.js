@@ -8737,6 +8737,12 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Query what you send',
+                    url: '/docs/metrics/query-what-you-send',
+                    icon: 'IconCode',
+                    color: 'blue',
+                },
+                {
                     name: 'How metrics works',
                     url: '/docs/metrics/architecture',
                     icon: 'IconDatabase',

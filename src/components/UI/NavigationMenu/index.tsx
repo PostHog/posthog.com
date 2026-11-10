@@ -1,0 +1,160 @@
+import React from 'react'
+import { NavigationMenu as BaseNavigationMenu } from '@base-ui/react/navigation-menu'
+import { IconChevronDown } from '@posthog/icons'
+import {
+    menuItem,
+    menubarTrigger,
+    popupArrow,
+    popupSurface,
+    popupTransition,
+    positionerLayer,
+    surfaceAppearances,
+} from '../styles'
+import type { SurfaceAppearance } from '../styles'
+import { mergeClassName, positionerPropNames, splitProps, withClassName } from '../utils'
+import type { PositionerPropName } from '../utils'
+import { wrapText } from '../truncation'
+
+type NavigationMenuOrientation = NonNullable<BaseNavigationMenu.Root.Props['orientation']>
+
+const OrientationContext = React.createContext<NavigationMenuOrientation>('horizontal')
+
+const Root = React.forwardRef(function NavigationMenuRoot(
+    { orientation = 'horizontal', ...props }: BaseNavigationMenu.Root.Props,
+    ref: React.ForwardedRef<HTMLElement>
+) {
+    return (
+        <OrientationContext.Provider value={orientation}>
+            <BaseNavigationMenu.Root ref={ref} orientation={orientation} {...props} />
+        </OrientationContext.Provider>
+    )
+}) as typeof BaseNavigationMenu.Root
+
+export type NavigationMenuAppearance = SurfaceAppearance
+
+export type NavigationMenuListProps = BaseNavigationMenu.List.Props & {
+    appearance?: NavigationMenuAppearance
+}
+
+const List = React.forwardRef<HTMLUListElement, NavigationMenuListProps>(function NavigationMenuList(
+    { appearance = 'raised', className, ...props },
+    ref
+) {
+    const vertical = React.useContext(OrientationContext) === 'vertical'
+    return (
+        <BaseNavigationMenu.List
+            ref={ref}
+            className={mergeClassName(
+                `m-0 flex list-none gap-px py-0.5 ${vertical ? 'flex-col items-stretch' : 'items-center'} ${
+                    appearance === 'plain' ? 'px-0' : 'w-fit px-1'
+                } ${surfaceAppearances[appearance]}`,
+                className
+            )}
+            {...props}
+        />
+    )
+})
+
+const Trigger = withClassName(BaseNavigationMenu.Trigger, menubarTrigger)
+
+const Icon = withClassName(
+    BaseNavigationMenu.Icon,
+    'flex shrink-0 text-secondary transition-transform duration-150 ease-out data-[popup-open]:rotate-180 motion-reduce:transition-none',
+    { children: <IconChevronDown className="size-3.5" /> }
+)
+
+const morphTiming = 'duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none'
+
+const InsideContentContext = React.createContext(false)
+
+const navigationContent = `p-[5px] transition-[opacity,transform] ${morphTiming} data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 data-[starting-style]:data-[activation-direction=left]:-translate-x-1/2 data-[starting-style]:data-[activation-direction=right]:translate-x-1/2 data-[ending-style]:data-[activation-direction=left]:translate-x-1/2 data-[ending-style]:data-[activation-direction=right]:-translate-x-1/2`
+
+const Content = React.forwardRef<HTMLDivElement, BaseNavigationMenu.Content.Props>(function NavigationMenuContent(
+    { className, ...props },
+    ref
+) {
+    return (
+        <InsideContentContext.Provider value>
+            <BaseNavigationMenu.Content ref={ref} className={mergeClassName(navigationContent, className)} {...props} />
+        </InsideContentContext.Provider>
+    )
+})
+
+const contentLink = `${menuItem} ${wrapText} h-auto min-h-[25px] flex-col items-start justify-center gap-1 py-1.5 no-underline hover:bg-accent focus-visible:bg-accent data-[highlighted]:bg-accent`
+
+const listLink = `${menubarTrigger} no-underline`
+
+const Link = React.forwardRef<HTMLAnchorElement, BaseNavigationMenu.Link.Props>(function NavigationMenuLink(
+    { className, closeOnClick = true, ...props },
+    ref
+) {
+    const insideContent = React.useContext(InsideContentContext)
+
+    return (
+        <BaseNavigationMenu.Link
+            ref={ref}
+            closeOnClick={closeOnClick}
+            className={mergeClassName(insideContent ? contentLink : listLink, className)}
+            {...props}
+        />
+    )
+})
+
+const navigationPositioner = `${positionerLayer} h-[var(--positioner-height)] max-h-[var(--available-height)] w-[var(--positioner-width)] max-w-[var(--available-width)] transition-[top,left,right,bottom] ${morphTiming} data-[instant]:transition-none`
+
+const navigationPopup = `${popupSurface} ${popupTransition} h-[var(--popup-height)] max-h-[var(--available-height)] w-[var(--popup-width)] transition-[transform,opacity,width,height] ${morphTiming} data-[ending-style]:duration-150 data-[ending-style]:ease-out`
+
+const navigationViewport =
+    'relative h-full max-h-[calc(var(--available-height)-2px)] w-full overflow-y-auto overflow-x-hidden overscroll-contain'
+
+const keepPreferredSide: BaseNavigationMenu.Positioner.Props['collisionAvoidance'] = { side: 'none' }
+
+export type NavigationMenuPopupProps = BaseNavigationMenu.Popup.Props &
+    Pick<BaseNavigationMenu.Positioner.Props, PositionerPropName> & {
+        container?: BaseNavigationMenu.Portal.Props['container']
+    }
+
+const Popup = React.forwardRef<HTMLElement, NavigationMenuPopupProps>(function NavigationMenuPopup(
+    { className, children, container, ...props },
+    ref
+) {
+    const [positionerProps, popupProps] = splitProps(props, positionerPropNames)
+    const vertical = React.useContext(OrientationContext) === 'vertical'
+
+    return (
+        <BaseNavigationMenu.Portal container={container}>
+            <BaseNavigationMenu.Positioner
+                side={vertical ? 'inline-end' : 'bottom'}
+                sideOffset={4}
+                align="start"
+                collisionAvoidance={keepPreferredSide}
+                {...positionerProps}
+                className={navigationPositioner}
+            >
+                <BaseNavigationMenu.Popup
+                    ref={ref}
+                    data-scheme="primary"
+                    className={mergeClassName(navigationPopup, className)}
+                    {...popupProps}
+                >
+                    {children}
+                    <BaseNavigationMenu.Viewport className={navigationViewport} />
+                </BaseNavigationMenu.Popup>
+            </BaseNavigationMenu.Positioner>
+        </BaseNavigationMenu.Portal>
+    )
+})
+
+const Arrow = withClassName(BaseNavigationMenu.Arrow, `${popupArrow} transition-[left,right] ${morphTiming}`)
+
+export const NavigationMenu = {
+    Root,
+    List,
+    Item: BaseNavigationMenu.Item,
+    Trigger,
+    Icon,
+    Content,
+    Link,
+    Popup,
+    Arrow,
+}
