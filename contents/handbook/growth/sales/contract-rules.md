@@ -41,7 +41,7 @@ Beyond optimization, we offer discounts based on three levers:
 >
 > - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
 > - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
-> - **The credit purchase must be sized in good faith to cover the customer's forecast usage for the full contract year.** A purchase that clearly covers only part of the year doesn't qualify for a volume discount.
+> - **The credit purchase must be sized in good faith to cover the customer's forecasted usage for the full contract year.** A purchase that clearly covers only part of the year doesn't qualify for a volume discount.
 
 #### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
