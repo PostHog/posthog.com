@@ -75,6 +75,38 @@ oss-hoppscotch-backend: # NestJS API, posthog-node 5.50.0
     repo: https://github.com/hoppscotch/hoppscotch
     ref: 55908a76a1d0555c9bbb5d74244c14173df95b06
     folder: packages/hoppscotch-backend
+oss-miniflux: # Go RSS server (net/http, Postgres), no PostHog code
+    repo: https://github.com/miniflux/v2
+    ref: 9447aaeceb98ebdf7c4528b3e96dc5b44b35af5b
+    folder: .
+oss-chainloop: # Go control plane (Kratos gRPC/HTTP, Ent), posthog-go v1.37.0
+    repo: https://github.com/chainloop-dev/chainloop
+    ref: 2a002e084300baa35285aaf5122a908d33c05c1e
+    folder: .
+oss-rustypaste: # actix-web file paste server, no PostHog code
+    repo: https://github.com/orhun/rustypaste
+    ref: f7e20aac23d46e1eeef8b95036a7c7d34f657193
+    folder: .
+oss-codemod-cli: # Rust CLI (clap, tokio), posthog-rs 0.21.0 with async-client only
+    repo: https://github.com/codemod/codemod
+    ref: 0187ff2835991e213312e625571f778653889177
+    folder: crates/telemetry
+oss-fossify-calendar: # Kotlin Android app (Views, version catalog), no PostHog code
+    repo: https://github.com/FossifyOrg/Calendar
+    ref: 0a936ec8c43b669ffb0a8c29b0d08347066a75ae
+    folder: .
+oss-tasks-android: # Kotlin Android + KMP app, posthog-android 3.72.3 (googleplay flavor)
+    repo: https://github.com/tasks/tasks
+    ref: 3b9982e596f82a3b4754a1ff7455cd6df52395ed
+    folder: app
+oss-mealie: # FastAPI backend with a Nuxt frontend, no PostHog code
+    repo: https://github.com/mealie-recipes/mealie
+    ref: 471c7936d3c782a431fd2081b632f404cb3dbb1a
+    folder: .
+oss-polar-server: # FastAPI API, posthog 7.76.1
+    repo: https://github.com/polarsource/polar
+    ref: ba3f8138458c9c615bf86aa7285a107234339633
+    folder: server
 
 # --- Placeholders. These repos don't exist: PostHog/docs-eval-fixtures was planned
 # but never built. Checks that use them can't run. Replace each with a real codebase

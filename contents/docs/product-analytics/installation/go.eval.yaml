@@ -1,22 +1,150 @@
 owner: wizard-and-docs
-tags: [install, go]
+tags: [install, go, server]
 status: active
 
+# One check for each flow the Go docs teach. Every check is a baseline: a short prompt
+# in a user's words, no docs added. The prompt names PostHog and the kind of analytics,
+# and no API. The rubrics describe the correct result for posthog-go 1.x, the major the
+# docs show. `install` runs in an app with no PostHog code. The other checks run in an
+# app that already uses posthog-go 1.x.
 checks:
     - id: install
       description: >-
-          Baseline: can an agent set up PostHog in a Go app from a one-line request? The
-          prompt names only the stack; the agent gets no docs, so docs-read shows which
-          pages it finds on its own.
-      codebase_to_test: starter-go
+          Baseline: can an agent set up PostHog in a Go server from a one-line request?
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: oss-miniflux
       prompt: >-
-          Set up PostHog in the Go app in {folder}/.
+          Set up PostHog in this Go app.
       criteria:
-          shared: [builds, docs-read]
+          shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/go.mod lists `github.com/posthog/posthog-go`.
+                  {folder}/go.mod lists `github.com/posthog/posthog-go` at v1.x.
               initialized: >-
-                  The app creates a client with posthog.NewWithConfig, passing the
-                  project token and a posthog.Config whose Endpoint is the PostHog host,
-                  and closes the client before exit. Cite the file and line(s).
+                  The app creates one client at startup with posthog.NewWithConfig(token,
+                  posthog.Config{ Endpoint: <host> }). Cite the file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable. It is not
+                  written in the source.
+              flushes-on-exit: >-
+                  The app calls the client's Close() when the server stops, for example
+                  with defer client.Close() in the function that runs the server. Fails
+                  if Close() is never reached on a normal shutdown.
+
+    - id: event-by-user
+      description: >-
+          Baseline in Chainloop's control plane, a Go gRPC/HTTP API on posthog-go 1.37.0
+          that uses PostHog only for CLI telemetry. Does an agent capture the event for
+          the user and put the email and name on the person? The prompt does not name
+          the message type.
+      codebase_to_test: oss-chainloop
+      pages:
+          - docs/libraries/go
+          - docs/product-analytics/person-properties
+      prompt: >-
+          Track when a user accepts an organization invitation in the control plane, by
+          user, with PostHog product analytics. Make sure the user's email and name are
+          populated.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  Accepting an invitation calls client.Enqueue(posthog.Capture{ DistinctId,
+                  Event, Properties }) on the posthog-go client, with the accepting user's
+                  ID as DistinctId. Cite the file and line(s).
+              set-on-person: >-
+                  The email and name are set on the person, with `$set` in the captured
+                  event's Properties or with client.Enqueue(posthog.Identify{ DistinctId,
+                  Properties }). They are not plain properties of the event.
+
+    - id: events-by-org
+      description: >-
+          Baseline in the same control plane. Does an agent attach the organization as
+          a group and keep the acting user as the distinct ID? The prompt does not say
+          how.
+      codebase_to_test: oss-chainloop
+      pages:
+          - docs/libraries/go
+          - docs/product-analytics/group-analytics
+      prompt: >-
+          Track organization invitations per organization and by user in the control
+          plane, with PostHog group analytics.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              events-captured: >-
+                  Creating and accepting an invitation each call
+                  client.Enqueue(posthog.Capture{...}) on the posthog-go client, with the
+                  acting user's ID as DistinctId. Cite the file and line(s).
+              org-as-group: >-
+                  Each of those events passes the organization as a group: Groups:
+                  posthog.NewGroups().Set(<group type>, <organization ID>).
+
+    - id: anonymous-event
+      description: >-
+          Baseline in the same control plane. Does an agent turn off person processing
+          for events that are not about a signed-in user? The prompt does not name the
+          property.
+      codebase_to_test: oss-chainloop
+      pages:
+          - docs/libraries/go
+          - docs/data/anonymous-vs-identified-events
+      prompt: >-
+          Track each visitor who opens the sign-in page in the control plane, with
+          PostHog product analytics. Visitors aren't signed in.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event sets `$process_person_profile` to false in its Properties.
+                  Cite the file and line(s).
+              distinct-id-per-visitor: >-
+                  Each visitor gets their own DistinctId, such as a generated UUID, a
+                  cookie or a hash. It is not one constant shared by all visitors.
+
+    - id: error
+      description: >-
+          Baseline in the same control plane. Does an agent report a handled error as a
+          PostHog exception and link it to the user? The prompt does not name the
+          helper.
+      codebase_to_test: oss-chainloop
+      pages:
+          - docs/libraries/go
+          - docs/error-tracking/installation/go
+      prompt: >-
+          Track errors when creating an organization invitation fails in the control
+          plane, by user, with PostHog error tracking.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  A failed create sends an exception with
+                  client.Enqueue(posthog.NewDefaultException(time.Now(), distinctID,
+                  type, value)) or client.Enqueue(posthog.Exception{...}), with the
+                  inviting user's ID as the distinct ID. Cite the file and line(s).
+
+    - id: feature-flag
+      description: >-
+          Baseline in the same control plane. Does an agent evaluate the flag the way
+          the docs recommend? An agent that works from memory uses the older
+          single-flag methods. "by user" makes the user the distinct ID; without it
+          agents key the flag on the organization.
+      codebase_to_test: oss-chainloop
+      pages:
+          - docs/libraries/go
+          - docs/feature-flags/installation/go
+      prompt: >-
+          Put creating organization invitations in the control plane behind a PostHog
+          feature flag, by user.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code calls client.EvaluateFlags(posthog.EvaluateFlagsPayload{
+                  DistinctId: <user ID> }), or posthog.EvaluateFlagsWithContext(ctx,
+                  client, ...), and reads the flag from the result with IsEnabled() or
+                  GetFlag(). Fails if it uses IsFeatureEnabled() or GetFeatureFlag().
+                  Cite the file and line(s).
+              flag-gates-create: >-
+                  Creating an invitation is refused when the flag is off.

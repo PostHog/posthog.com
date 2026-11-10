@@ -1,23 +1,157 @@
 owner: wizard-and-docs
-tags: [install, android]
+tags: [install, android, kotlin, mobile]
 status: active
 
+# One check for each flow the Android docs teach. Every check is a baseline: a short
+# prompt in a user's words, no docs added. The prompt names PostHog and the kind of
+# analytics, and no API. The rubrics describe the correct result for posthog-android 3,
+# the major the docs show. `install` runs in an app with no PostHog code. The other
+# checks run in the Tasks.org app, which already uses posthog-android 3 in its Google
+# Play flavor through a wrapper class (Firebase.kt) that the shared code calls.
 checks:
     - id: install
       description: >-
-          Baseline: can an agent set up PostHog in a Android app from a one-line
-          request? The prompt names only the stack; the agent gets no docs, so docs-read
-          shows which pages it finds on its own.
-      codebase_to_test: android-app
+          Baseline: can an agent set up PostHog in a Kotlin Android app from a one-line
+          request? Fossify Calendar has an Application subclass and a version catalog.
+          The prompt names only the stack; the agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: oss-fossify-calendar
       prompt: >-
-          Set up PostHog in the Android app in {folder}/.
+          Set up PostHog in this Android app.
       criteria:
-          shared: [builds, docs-read]
+          shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/app/build.gradle.kts declares com.posthog:posthog-android,
-                  directly or through an entry in {folder}/gradle/libs.versions.toml.
+                  {folder}/app/build.gradle.kts declares com.posthog:posthog-android at
+                  3.x (a 3.x version or `3.+`), directly or through an entry in the
+                  [libraries] table of {folder}/gradle/libs.versions.toml. Fails if the
+                  catalog entry sits in another table, so the alias does not resolve.
               initialized: >-
-                  An Application subclass's onCreate builds PostHogAndroidConfig with
-                  apiKey (the project token) and host (the PostHog host) and calls
-                  PostHogAndroid.setup. Cite the file and line(s).
+                  The app's Application subclass (App, which extends FossifyApp) builds
+                  PostHogAndroidConfig with the project token as apiKey (or projectToken)
+                  and host, then calls PostHogAndroid.setup(this, config) in onCreate.
+                  Cite the file and line(s).
+
+    - id: event-by-user
+      description: >-
+          Baseline in the Tasks.org Android app, which is on posthog-android 3.72.3 and
+          sends anonymous events only. Does an agent tie the event to the signed-in
+          account and put the email and name on the person? The prompt does not name
+          identify or userProperties.
+      codebase_to_test: oss-tasks-android
+      pages:
+          - docs/libraries/android
+          - docs/product-analytics/identify
+      prompt: >-
+          Track when a user shares a list in the Android app, by user, with PostHog
+          product analytics. Make sure the user's email and name are populated.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  Sharing a list sends an event with PostHog.capture(event = ...),
+                  directly or through the app's existing wrapper (logEvent in
+                  app/src/googleplay/java/org/tasks/analytics/Firebase.kt). Cite the
+                  file and line(s).
+              user-identified: >-
+                  The event belongs to the signed-in account: PostHog.identify(distinctId
+                  = <account ID>) runs before the event, or capture() passes distinctId =
+                  <account ID>. Fails if the event goes out under the anonymous ID.
+              set-on-person: >-
+                  The email and name are set on the person, with userProperties in
+                  PostHog.identify() or in PostHog.capture(). They are not plain
+                  properties of the event.
+
+    - id: identify-and-reset
+      description: >-
+          Baseline in the same app. Does an agent identify the user when they sign in
+          and reset when they sign out? The prompt says "attribute" and "stop", not
+          identify or reset.
+      codebase_to_test: oss-tasks-android
+      pages:
+          - docs/libraries/android
+          - docs/product-analytics/identify
+      prompt: >-
+          In the Android app, attribute PostHog product analytics to the user when they
+          sign in to their Tasks.org account, and stop when they sign out.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              identified-on-sign-in: >-
+                  After a Tasks.org sign-in succeeds, the app calls
+                  PostHog.identify(distinctId = <account ID>), with a stable ID for the
+                  account such as its username. Cite the file and line(s).
+              reset-on-sign-out: >-
+                  Signing out of the Tasks.org account (removing it) calls
+                  PostHog.reset(). Cite the file and line(s).
+
+    - id: screen-views
+      description: >-
+          Baseline in the same app, which sets captureScreenViews = false and shows
+          most screens as Compose destinations inside one Activity. Does an agent send
+          screen views the documented way and cover the Compose screens? The prompt
+          does not name screen().
+      codebase_to_test: oss-tasks-android
+      pages:
+          - docs/libraries/android
+      prompt: >-
+          Track which screens users view in the Android app with PostHog product
+          analytics.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              screen-captured: >-
+                  Screen views call PostHog.screen(screenTitle = <screen name>),
+                  directly or through the app's wrapper. A `$screen` event built by hand
+                  with capture() does not pass. Cite the file and line(s).
+              compose-screens-covered: >-
+                  Each destination of the Compose NavHost in MainActivity is reported as
+                  its own screen. Turning on captureScreenViews alone does not pass,
+                  because it records only Activity screens.
+
+    - id: feature-flag
+      description: >-
+          Baseline in the same app, which sets preloadFeatureFlags = false. Does an
+          agent read the flag with the documented methods and make sure flags load
+          before the read? The prompt says neither.
+      codebase_to_test: oss-tasks-android
+      pages:
+          - docs/libraries/android
+          - docs/feature-flags/installation/android
+      prompt: >-
+          Put sharing a list in the Android app behind a PostHog feature flag.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The app reads the flag with PostHog.getFeatureFlagResult("<key>") and
+                  checks enabled, or with PostHog.isFeatureEnabled("<key>"). Cite the
+                  file and line(s).
+              flags-loaded: >-
+                  Flags load before the read: preloadFeatureFlags is no longer false,
+                  or the flag is read in the callback of PostHog.reloadFeatureFlags { }.
+                  Fails if preloading stays off and nothing reloads the flags.
+              flag-gates-share: >-
+                  Sharing a list is hidden or refused when the flag is off.
+
+    - id: error
+      description: >-
+          Baseline in the same app, which reports handled errors to Crashlytics only.
+          Does an agent send the handled error with captureException? "With another
+          person" points at list sharing, not the share sheet that sends a task list
+          as text.
+      codebase_to_test: oss-tasks-android
+      pages:
+          - docs/libraries/android
+          - docs/error-tracking/installation/android
+      prompt: >-
+          Track errors when sharing a list with another person fails in the Android
+          app, with PostHog error tracking.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  When share() in CaldavCalendarSettingsViewModel fails, the error
+                  reaches PostHog.captureException(throwable, properties), directly or
+                  through the app's wrapper (reportException in the Google Play
+                  Firebase.kt). Cite the file and line(s).
