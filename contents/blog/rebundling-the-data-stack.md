@@ -1,6 +1,6 @@
 ---
 title: "The modern data stack had a good run"
-date: 2026-11-11
+date: 2026-11-12
 rootPage: /blog
 sidebar: Blog
 showTitle: true
