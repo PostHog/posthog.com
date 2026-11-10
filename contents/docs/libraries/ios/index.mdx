@@ -153,6 +153,10 @@ These change behavior without a build error, so check them even if your app buil
 
 **Person processing in `beforeSend`.** When `personProfiles` turns person processing off, the SDK now sets the `process_person_profile` [option](#event-options) to `false` instead of the `$process_person_profile` property, so `beforeSend` hooks see it in `event.options`. A `$process_person_profile` you register or pass now wins over the SDK's value.
 
+**Null properties.** A property set to `NSNull()` or a `nil` optional is now left out of the event instead of sent as `null`, also inside nested dictionaries and when `beforeSend` sets it. Filters such as "is set" and "is not set" match differently. `$set`, `$set_once`, and `$group_set` still send `null` to clear a property.
+
+**Property precedence.** Values you register or pass now win over the SDK's own. A registered super property overrides `$os`, `$app_version`, and other SDK properties, and a passed `$is_identified` or `$geoip_disable` overrides the SDK's value. A registered `$session_id` can detach events from their recording. `$lib` and `$lib_version` are the exception: the SDK fills them as a pair. See the [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#property-precedence).
+
 **`$locale` and `$app_language`.** `$locale` is now the device's preferred language with its region, such as `de-CH` instead of `de`. The new `$app_language` property is the language your app shows, such as `de` or `pt-BR`. Update cohorts, insights, and actions that match `$locale`: to filter on your app's language, use `$app_language`. If your app sets its language itself instead of using iOS localizations, call `PostHogSDK.shared.setAppLanguage("de")` at startup and whenever it changes.
 
 ### Compile errors
@@ -172,7 +176,7 @@ These change behavior without a build error, so check them even if your app buil
 | `reloadFeatureFlags { ... }` | `reloadFeatureFlags { result in ... }`, where `result.errorsLoading` is `true` if the reload failed |
 | `PostHogSDK.didReceiveFeatureFlags` | [`onFeatureFlags(_:)`](/docs/libraries/ios/usage) |
 | `PostHogSessionManager` | `getSessionId()`, `startSession()`, and `endSession()` on `PostHogSDK`. Custom session IDs (`setSessionId(_:)`) have no public replacement. |
-| `PostHogStorageManager`, `config.storageManager` | `identify(_:)`, `getDistinctId()`, and `reset()` on `PostHogSDK` |
+| `PostHogStorageManager`, `config.storageManager` | `identify(_:)`, `getDistinctId()`, `getAnonymousId()`, `getDeviceId()`, and `reset()` on `PostHogSDK` |
 
 Utility APIs that were public by accident, such as `Gzip`, `toISO8601String(_:)`, `toISO8601Date(_:)`, `dateToMillis(_:)`, and `UIColor(hex:)`, are no longer public, so copy the code you need into your app. Internals that only PostHog's React Native and Flutter SDKs use, such as `PostHogSessionManager` and `PostHogStorageManager`, moved behind `@_spi(PostHogInternal)`. The [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#internal-and-utility-apis) lists them all.
 
@@ -198,6 +202,8 @@ dependencies: [
   .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0", traits: ["CrashReporting"])
 ],
 ```
+
+In an Xcode app project, you can pick a package's traits from Xcode 26.4. SwiftPM turns a trait back on if any dependency in your graph uses posthog-ios with the default traits, so check that the build actually leaves the feature out.
 
 ## Next steps
 
