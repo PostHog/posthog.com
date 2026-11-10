@@ -104,7 +104,9 @@ export const popupArrow =
 export const disclosureChevron =
     'size-4 shrink-0 text-secondary transition-transform duration-150 ease-out group-data-[panel-open]:rotate-90 motion-reduce:transition-none'
 
-export const menuPopup = `${popupSurface} ${popupTransition} min-w-[180px] max-w-[min(var(--available-width),24rem)] max-h-[var(--available-height)] overflow-y-auto p-[5px]`
+export const menuPopup = `${popupSurface} ${popupTransition} min-w-[180px] max-w-[min(var(--available-width),24rem)] max-h-[var(--available-height)] flex flex-col overflow-hidden`
+
+export const menuPopupScroll = 'min-h-0 overflow-y-auto overscroll-contain rounded-[inherit] p-[5px]'
 
 export const menuItem =
     'relative flex h-[25px] cursor-default select-none items-center gap-2 rounded px-2.5 [&>svg]:shrink-0 text-13 leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'
@@ -134,7 +136,7 @@ export const roundControlSurface = `${controlBase} shadow-[inset_0_1px_0_rgb(0_0
 
 export const controlSurface = `${controlBase} ${sunkenTopEdge} dark:[--ui-sunken-top:0.16]`
 
-export const fieldSurface = `${controlSurface} rounded-md transition-[border-color,box-shadow,background-color] duration-150 ease-out hover:border-[rgb(var(--text-primary)/0.36)] motion-reduce:transition-none`
+export const fieldSurface = `${controlSurface} rounded-md transition-[border-color,box-shadow,background-color] duration-150 ease-out hover:border-[rgb(var(--text-primary)/0.36)] hover:border-t-[rgb(var(--text-primary)/var(--ui-sunken-top))] hover:[--ui-sunken-top:0.55] dark:hover:[--ui-sunken-top:0.36] motion-reduce:transition-none`
 
 export const fieldFocusVisible =
     'focus-visible:border-orange focus-visible:bg-white/55 focus-visible:shadow-[0_0_0_3px_rgb(235_157_42/0.28)] dark:focus-visible:bg-white/[0.11] dark:focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
@@ -219,13 +221,15 @@ export const trackSurface =
     'bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.45)]'
 
 export const chip =
-    'inline-flex h-6 min-w-0 max-w-full shrink-0 items-center gap-1 rounded-full border border-[rgb(var(--text-primary)/0.1)] border-b-[rgb(var(--text-primary)/0.3)] bg-white/60 px-2 text-13 font-medium leading-4 text-primary has-[button]:pr-px dark:bg-white/[0.1]'
+    'inline-flex h-6 min-w-0 max-w-full shrink-0 items-center gap-1 rounded-[5px] border border-[rgb(var(--text-primary)/0.1)] border-b-[rgb(var(--text-primary)/0.3)] bg-white/60 px-2 text-13 font-medium leading-4 text-primary has-[button]:pr-px dark:bg-white/[0.1]'
 
-export const chipImage = '-ml-1 size-4 shrink-0 rounded-full object-cover'
+export const chipImageBorder = 'border border-[rgb(var(--text-primary)/0.16)] object-cover'
 
-export const chipIcon = 'flex size-3.5 shrink-0 items-center justify-center text-secondary [&>svg]:size-full'
+export const chipImage = `-ml-[7px] size-5 shrink-0 rounded-full ${chipImageBorder}`
 
-export const chipRemove = `flex size-5 shrink-0 items-center justify-center rounded-full text-secondary ${neutralHover} hover:text-primary ${insetFocusRing}`
+export const chipIcon = '-ml-0.5 flex size-3.5 shrink-0 items-center justify-center text-secondary [&>svg]:size-full'
+
+export const chipRemove = `flex size-5 shrink-0 items-center justify-center rounded-[3px] text-secondary ${neutralHover} hover:text-primary ${insetFocusRing}`
 
 export const listItem =
     'min-h-[25px] cursor-default select-none items-center gap-2 rounded py-1 text-sm leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'

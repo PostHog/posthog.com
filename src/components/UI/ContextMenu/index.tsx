@@ -1,7 +1,7 @@
 import React from 'react'
 import { ContextMenu as BaseContextMenu } from '@base-ui/react/context-menu'
 import { Menu } from '../Menu'
-import { menuPopup, positionerLayer } from '../styles'
+import { menuPopup, menuPopupScroll, positionerLayer } from '../styles'
 import { mergeClassName, positionerPropNames, splitProps } from '../utils'
 import type { PositionerPropName } from '../utils'
 
@@ -11,7 +11,7 @@ export type ContextMenuPopupProps = BaseContextMenu.Popup.Props &
     }
 
 const Popup = React.forwardRef<HTMLDivElement, ContextMenuPopupProps>(function ContextMenuPopup(
-    { className, container, ...props },
+    { className, container, children, ...props },
     ref
 ) {
     const [positionerProps, popupProps] = splitProps(props, positionerPropNames)
@@ -24,7 +24,9 @@ const Popup = React.forwardRef<HTMLDivElement, ContextMenuPopupProps>(function C
                     data-scheme="primary"
                     className={mergeClassName(menuPopup, className)}
                     {...popupProps}
-                />
+                >
+                    <div className={menuPopupScroll}>{children}</div>
+                </BaseContextMenu.Popup>
             </BaseContextMenu.Positioner>
         </BaseContextMenu.Portal>
     )

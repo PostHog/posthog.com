@@ -33,7 +33,22 @@ const Popup = React.forwardRef<HTMLDivElement, PreviewCardPopupProps>(function P
     )
 })
 
-const Trigger = withClassName(BasePreviewCard.Trigger, previewCardTrigger)
+export type PreviewCardTriggerProps = BasePreviewCard.Trigger.Props & {
+    appearance?: 'link' | 'none'
+}
+
+const Trigger = React.forwardRef<HTMLAnchorElement, PreviewCardTriggerProps>(function PreviewCardTrigger(
+    { appearance = 'link', className, ...props },
+    ref
+) {
+    return (
+        <BasePreviewCard.Trigger
+            ref={ref}
+            className={appearance === 'link' ? mergeClassName(previewCardTrigger, className) : className}
+            {...props}
+        />
+    )
+})
 
 const Arrow = withClassName(BasePreviewCard.Arrow, popupArrow)
 

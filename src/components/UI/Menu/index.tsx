@@ -7,6 +7,7 @@ import {
     menuItemIndicator,
     menuItemWithIndicator,
     menuPopup,
+    menuPopupScroll,
     menuSeparator,
     positionerLayer,
 } from '../styles'
@@ -20,7 +21,7 @@ export type MenuPopupProps = BaseMenu.Popup.Props &
     }
 
 const Popup = React.forwardRef<HTMLDivElement, MenuPopupProps>(function MenuPopup(
-    { className, container, ...props },
+    { className, container, children, ...props },
     ref
 ) {
     const [positionerProps, popupProps] = splitProps(props, positionerPropNames)
@@ -33,7 +34,9 @@ const Popup = React.forwardRef<HTMLDivElement, MenuPopupProps>(function MenuPopu
                     data-scheme="primary"
                     className={mergeClassName(menuPopup, className)}
                     {...popupProps}
-                />
+                >
+                    <div className={menuPopupScroll}>{children}</div>
+                </BaseMenu.Popup>
             </BaseMenu.Positioner>
         </BaseMenu.Portal>
     )
