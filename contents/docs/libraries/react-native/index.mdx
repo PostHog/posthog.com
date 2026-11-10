@@ -768,7 +768,7 @@ Apps that use the plugin only through `posthog-react-native` need no code change
 
 On iOS, native uploads (session replay and native crash reports) pause while cellular data is turned off for your app, instead of sending requests that fail.
 
-On iOS and Android, events that the plugin sends natively go to capture v1 (`/i/v1/analytics/events`) in `posthog-ios` 4.0 and `posthog-android` 4.0. These are native crash reports, `$exception` events from fatal exceptions, iOS rage clicks (`$rageclick`), and push-opened events. Events captured in JavaScript still go to `/batch`. If you self-host PostHog or use a [reverse proxy](/docs/advanced/proxy):
+On iOS and Android, events that the plugin sends natively go to capture v1 (`/i/v1/analytics/events`) in `posthog-ios` 4.0 and `posthog-android` 4.0. These are native crash reports, fatal JavaScript errors, iOS rage clicks (`$rageclick`), and push-opened events. Events captured in JavaScript still go to `/batch`. If you self-host PostHog or use a [reverse proxy](/docs/advanced/proxy):
 
 - Forward `/i/v1/*` to PostHog.
 - Pass these request headers through unchanged: `Authorization`, `Content-Type`, `Content-Encoding`, `User-Agent`, `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id` and `PostHog-Request-Timestamp`.
