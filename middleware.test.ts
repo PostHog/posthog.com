@@ -74,3 +74,13 @@ test('falls through when no Markdown sibling exists', async (t) => {
 
     assert.equal(await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User' } })), undefined)
 })
+
+test('serves the MCP page brief to agents that fetch /mcp for a user', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# PostHog MCP server'))
+
+    const response = await middleware(
+        new Request('https://posthog.com/mcp', { headers: { 'user-agent': 'Claude-User/1.0' } })
+    )
+    assert.equal(await response?.text(), '# PostHog MCP server')
+    assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
+})

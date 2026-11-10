@@ -1,11 +1,21 @@
 import React from 'react'
 import { cn } from '../../../../utils'
-import { IconGraph, IconRewindPlay, IconWarning } from '@posthog/icons'
+import {
+    IconDashboard,
+    IconEye,
+    IconGraph,
+    IconListCheck,
+    IconLlmAnalytics,
+    IconPieChart,
+    IconRewindPlay,
+    IconToggle,
+    IconWarning,
+} from '@posthog/icons'
 import { LOGOS } from '../../../../constants/logos'
 import { ticks, wordStream } from '../timeline'
 import { SCENE_SIZE } from '../sceneScale'
 
-type ProductKey = 'analytics' | 'replay' | 'errors'
+type ProductKey = 'analytics' | 'replay' | 'errors' | 'flags' | 'vision' | 'web' | 'dashboards' | 'llm' | 'evals'
 type ExternalKey = 'stripe' | 'zendesk' | 'hubspot'
 export type SourceKey = ProductKey | ExternalKey
 
@@ -13,6 +23,12 @@ const PRODUCT_ICONS: Record<ProductKey, { Icon: React.ComponentType<{ className?
     analytics: { Icon: IconGraph, className: 'text-blue' },
     replay: { Icon: IconRewindPlay, className: 'text-yellow' },
     errors: { Icon: IconWarning, className: 'text-orange' },
+    flags: { Icon: IconToggle, className: 'text-seagreen' },
+    vision: { Icon: IconEye, className: 'text-yellow' },
+    web: { Icon: IconPieChart, className: 'text-green-2' },
+    dashboards: { Icon: IconDashboard, className: 'text-seagreen' },
+    llm: { Icon: IconLlmAnalytics, className: 'text-purple' },
+    evals: { Icon: IconListCheck, className: 'text-lilac' },
 }
 
 const SOURCE_LOGOS: Record<ExternalKey, { logo: string; className?: string }> = {
@@ -23,11 +39,11 @@ const SOURCE_LOGOS: Record<ExternalKey, { logo: string; className?: string }> = 
 
 const isProduct = (source: SourceKey): source is ProductKey => source in PRODUCT_ICONS
 
-const TOOL_RUN_MS = 1000
+export const TOOL_RUN_MS = 1000
 const TYPING_STARTS_AT = 600
 const TYPING_MS_PER_CHAR = 55
 const SUBMIT_PAUSE_MS = 500
-const ANSWER_MS_PER_CHAR = 16
+export const ANSWER_MS_PER_CHAR = 16
 const SECOND_MS = 1000
 
 export interface ToolCall {
@@ -51,6 +67,7 @@ interface CallState {
 
 export interface TraceState {
     question: string
+    intro?: string
     typed: string
     submitted: boolean
     calls: CallState[]
@@ -68,6 +85,7 @@ export interface Trace {
 
 export const defineTrace = ({
     question,
+    intro,
     calls,
     answer,
     answerAt,
@@ -77,6 +95,7 @@ export const defineTrace = ({
     submittedAt,
 }: {
     question: string
+    intro?: string
     calls: ToolCall[]
     answer: string
     answerAt: number
@@ -109,6 +128,7 @@ export const defineTrace = ({
             const typedChars = Math.floor(Math.max(0, elapsed - TYPING_STARTS_AT) / TYPING_MS_PER_CHAR)
             return {
                 question,
+                intro,
                 typed: submitted ? '' : question.slice(0, typedChars),
                 submitted,
                 calls: calls
@@ -124,6 +144,7 @@ export const defineTrace = ({
 
 export const TERMINAL_TRACE = defineTrace({
     question: "What's causing the latest errors in checkout?",
+    intro: "I'll trace the checkout errors in PostHog.",
     loopMs: 19000,
     restingMs: 16000,
     answerAt: 10600,
