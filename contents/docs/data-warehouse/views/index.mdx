@@ -20,6 +20,16 @@ For a query to be a valid view, all fields being accessed must be aliased (with 
 
 ![valid view](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/features/data-warehouse/valid-view.png)
 
+## Editing views
+
+To edit a view, open it in the [SQL editor](https://app.posthog.com/sql), change the query, and save.
+
+### Breaking column change protection
+
+When you remove columns from a view that other views depend on, PostHog stops the save and shows a confirmation dialog. The dialog lists the removed columns, names up to three affected downstream views you have access to, and notes whether additional views you can't access are also affected.
+
+Click **Save anyway** to confirm the change, or **Cancel** to go back and adjust your query. If you confirm, update the downstream views afterward so they don't fail on the missing columns.
+
 ## Extending PostHog models with views
 
 Views are a powerful tool for extending existing PostHog models for easier data access. For example, if you wanted to associate your Stripe customer data with product usage data of your users, you would normally need to manually set up a join. With views, you can attach views to PostHog models so that you can directly access those fields on the PostHog table.
