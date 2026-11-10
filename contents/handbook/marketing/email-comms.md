@@ -187,6 +187,21 @@ Use `Legal updates` for every legal email by default. New users are subscribed t
 
 Do not send a legal email to users who unsubscribed unless Hector gives you specific direction to do so. Only then, use the `Legal notices (required)` category instead. This category is transactional, so it ignores opt-outs.
 
+## Transactional emails
+Timing matters when deciding how to communicate changes to users. Think of it as choosing between a just in case and a just in time approach.
+
+- Just in case: Like reading a book about bikes, so you have the knowledge when you take it out for a ride. In email, this means announcing a change to a broad audience ahead of time, even if it doesn't affect what they're doing right now.
+- Just in time: Like pulling out the bike manual when you get a flat tire. In email, this means notifying specific users when they're about to encounter a change or when it becomes relevant to their workflow.
+
+For the second approach, think about how users interact with our product over time and which actions or events could trigger a transactional email. Sometimes the best email is not a one-off broadcast to a large audience, but a drip of accurately timed transactional emails.
+
+The best just-in-time emails are specific and personalized to the user's situation. You can use Liquid code to pull in relevant events and user or organization properties, making each email more contextual and actionable.
+
+Things to check with engineers and PMs before writing:
+
+- Map the scenarios: Identify common use cases and edge cases, including both straightforward and branched workflows.
+
+- Check available events and properties: Find out which events our data infrastructure already captures across those scenarios. This will help you determine which events or custom properties you'll need to reference in your Liquid code.
 ## Email campaigns
 We run many email campaigns to help users get more out of PostHog. All of these campaigns now live in PostHog Workflows, not Customer.io. The most developed and documented of these are our four onboarding campaigns.  
 
