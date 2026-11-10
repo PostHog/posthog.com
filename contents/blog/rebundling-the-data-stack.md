@@ -1,5 +1,5 @@
 ---
-title: "The modern data stack had a good run
+title: "The modern data stack had a good run"
 date: 2026-11-11
 rootPage: /blog
 sidebar: Blog
