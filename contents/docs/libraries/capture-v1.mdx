@@ -35,7 +35,7 @@ Each SDK below moves to capture v1 in a new major version. These versions includ
 | [Rust](/docs/libraries/rust) | `1.0.0` | All | [`0.x` to `1.0`](https://github.com/PostHog/posthog-rs/blob/main/docs/migration-0.x-to-1.0.md) |
 | [Node.js](/docs/libraries/node) | `6.0.0` | Server (`posthog-node`) | [`5.x` to `6.0`](https://github.com/PostHog/posthog-js/blob/main/packages/node/MIGRATION.md) |
 | [iOS](/docs/libraries/ios) | `4.0.0` | iOS, macOS, tvOS, watchOS, and visionOS | [`3.x` to `4.0`](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1) |
-| [Android](/docs/libraries/android) | `4.0.0` | Android | [`3.x` to `4.0`](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md) |
+| [Android](/docs/libraries/android) | `4.0.0` | Android | [`3.x` to `4.0`](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md) |
 | [Flutter](/docs/libraries/flutter) | `6.0.0` | iOS, macOS, Android, Windows, and Linux | [`5.x` to `6.0`](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) |
 
 <!-- TODO(capture-v1): list only released SDKs at merge; add each later SDK in its own PR on release day. -->
@@ -122,7 +122,7 @@ await Posthog().capture(
 
 </MultiLanguage>
 
-On iOS, Android, and Flutter, `capture`, `screen`, `identify`, and the other event methods take `options` too. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides list every method that takes it.
+On iOS, Android, and Flutter, `capture`, `screen`, `identify`, and the other event methods take `options` too. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides list every method that takes it.
 
 Legacy option properties still work, but an option overrides its legacy property. Use options.
 
@@ -150,7 +150,7 @@ A few details:
 - On Python, Go, Node.js, and Rust, `$set`, `$set_once`, `$groups`, and `$group_set` merge key by key, and the most specific value wins for each key. On iOS, Android, and Flutter, a `$set` or `$set_once` you pass on the call replaces a registered one, as before.
 - A `$set` in a global or context layer adds those person properties to every event that layer reaches.
 - On server SDKs, `process_person_profile: false` in a global or context layer also reaches identify, alias, and group identify events. PostHog drops those events when person processing is off, and your error handler doesn't report it, because PostHog accepts them first. Set person processing on each capture call instead of in a layer that covers these calls.
-- Not every SDK has every layer. Rust has no global layer, and iOS, Android, and Flutter have global properties but no global options or context layer. Your SDK's migration guide lists the layers it has and which calls they reach.
+- Not every SDK has every layer. Rust has no global layer. iOS and Android have global properties but no global options or context layer, and Flutter has global options (`registerOptions`) but no context layer. Your SDK's migration guide lists the layers it has and which calls they reach.
 
 ### Person processing
 
@@ -327,7 +327,7 @@ await Posthog().captureAi(
 
 </MultiLanguage>
 
-On iOS, Android, and Flutter, `captureAi` takes the same arguments as `capture`. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides cover their AI queue settings.
+On iOS, Android, and Flutter, `captureAi` takes the same arguments as `capture`. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides cover their AI queue settings.
 
 `capture` doesn't move `$ai_` events to the AI path for you. For now, PostHog still accepts AI events sent with `capture`, so existing code keeps working while you upgrade. This is temporary, and large AI events always need the AI method. Calling `flush` or `shutdown` sends both queues. See [capturing large AI events](/docs/ai-observability/large-events) for limits and the AI integrations.
 
