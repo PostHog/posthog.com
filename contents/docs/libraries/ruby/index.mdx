@@ -104,7 +104,7 @@ flushed = posthog.flush(timeout: 5)
 stopped = posthog.shutdown(timeout: 5)
 ```
 
-They return `true` when pending events have been sent, or `false` when the timeout expires. `flush` leaves the client running; `shutdown` stops it and does not send events still queued at the deadline. Shutdown cleanup can take up to one additional second and may continue after the method returns. Without a timeout, both wait indefinitely. In sync mode, the timeout is ignored and both return `true`.
+Both return `true` when pending events are sent, or `false` on timeout. `flush` leaves the client running. `shutdown` stops it and drops events still queued at the deadline. Cleanup can take up to one extra second. Without a timeout, both wait indefinitely.
 
 ## Identifying users
 
@@ -200,14 +200,14 @@ import RubyFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/f
 
 ### Default values
 
-From version 3.27.0, `enabled?` accepts a default for flags with no value in the snapshot:
+From version 3.27.0, use `default_value:` when a flag has no value:
 
 ```ruby
 flags = posthog.evaluate_flags("user_123")
 show_checkout = flags.enabled?("new-checkout", default_value: true)
 ```
 
-The default applies when a flag is missing, definitions have not loaded, or the request failed without returning a value. An evaluated `false` still wins over the default. A flag returned by the server but marked as failed resolves to `false`, not the default. Without `default_value:`, missing flags return `false`.
+The default applies only when the snapshot has no value for the flag. Evaluated values, including `false` and server-reported failures, take precedence. Without a default, missing flags return `false`.
 
 ### Legacy single-flag methods
 
@@ -227,7 +227,7 @@ import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-
 
 <LocalEvaluationIntro />
 
-For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation). Set `secret_key` to a personal API key or project secret API key with feature flag read access. Keep this key on your server. Remote flag evaluation does not require it.
+Set `secret_key` to a personal or project secret API key with feature flag read access. Keep it on your server. Remote evaluation does not require it. See the [local evaluation guide](/docs/feature-flags/local-evaluation) for setup.
 
 #### Load definitions asynchronously
 
@@ -243,11 +243,11 @@ posthog = PostHog::Client.new({
 posthog.feature_flags_loaded?
 ```
 
-The poller fetches definitions on startup and retries on the polling interval if loading fails. Until `feature_flags_loaded?` returns `true`, evaluations fall back to a remote request on the calling thread unless you pass `only_evaluate_locally: true`. With that option, unresolved flags have no value in the snapshot.
+Until `feature_flags_loaded?` returns `true`, evaluations use a remote request. With `only_evaluate_locally: true`, unavailable flags have no value instead.
 
 #### Diagnose unresolved flags
 
-From version 3.29.0, `unresolved_flags` reports loaded definitions that neither local evaluation nor a remote fallback resolved:
+From version 3.29.0, inspect `unresolved_flags` to see why flags could not be evaluated:
 
 ```ruby
 flags = posthog.evaluate_flags("user_123", only_evaluate_locally: true)
@@ -256,9 +256,7 @@ flags.unresolved_flags.each do |key, reason|
 end
 ```
 
-The reasons are `experience_continuity`, `unsupported_definition`, `unresolved_dependency`, and `missing_context`. Reading `unresolved_flags` does not send a `$feature_flag_called` event. These flags are absent from `keys`, and `enabled?` uses its missing-flag default. Snapshots returned by `only` or `only_accessed` do not retain unresolved flags.
-
-The SDK also logs a warning when it loads a flag definition that cannot resolve locally, such as an unsupported operator or a static cohort. It warns again only when that definition changes. Client-only definitions are excluded from these warnings.
+Reasons are `experience_continuity`, `unsupported_definition`, `unresolved_dependency`, or `missing_context`. Unresolved flags use the missing-flag default. The SDK also warns about definitions that cannot be evaluated locally.
 
 #### Evaluating feature flags locally in unicorn server
 
@@ -307,11 +305,11 @@ posthog = PostHog::Client.new({
 })
 ```
 
-Store the complete snapshot passed to `on_flag_definitions_received`, including `property_matching_version`, with the definitions. Omitting the version makes the SDK use legacy property matching, which can change flag results.
+Store the complete snapshot, including `property_matching_version`, to preserve flag matching behavior.
 
-From version 3.27.1, cache-only consumers can omit `secret_key`. They read the cache on each refresh without acquiring fetch leadership or publishing definitions. Only workers that fetch definitions from PostHog need the key. If the cache is empty or fails, a consumer without a key cannot fall back to fetching definitions.
+From version 3.27.1, cache-only clients can omit `secret_key`. Without a key, they cannot fetch definitions if the cache is unavailable.
 
-In Rails, `config.flag_definition_cache_provider = my_cache_provider` is also supported inside `PostHog.init` from `posthog-rails` version 3.19.0.
+In Rails, set `config.flag_definition_cache_provider` inside `PostHog.init` from `posthog-rails` 3.19.0.
 
 ### Remote config payloads
 
@@ -411,9 +409,9 @@ The `capture_exception` method accepts the following parameters:
 | `flags` | `PostHog::FeatureFlagEvaluations` | Optional keyword argument. Adds the same feature flag properties as `capture({ flags: flags })`. |
 | `mechanism` | `Hash` | Optional keyword argument to override the capture mechanism. Manual captures default to `generic` with `handled: true`. |
 
-Exception reports include the `exception.cause` chain, up to 50 exceptions. For mutable exceptions, the SDK suppresses subsequent captures of the same exception object and its captured causes, including calls through another client. The first successful capture wins, so supply identity and context on the first call. Failed captures can be retried.
+Reports include chained causes and active OpenTelemetry trace and span IDs, when available. Repeated captures of the same mutable exception are ignored after the first successful report. Include identity and context on the first call.
 
-If your app provides OpenTelemetry, exceptions include the active trace and span IDs. To link exceptions to a deployment, see [link Ruby releases](/docs/error-tracking/link-releases/ruby).
+To associate errors with a deployment, see [link Ruby releases](/docs/error-tracking/link-releases/ruby).
 
 You can also override the [fingerprint](/docs/error-tracking/fingerprints) to customize how exceptions are grouped into issues:
 
@@ -429,7 +427,7 @@ posthog.capture_exception(
 
 ## Transactional emails
 
-From version 3.30.0, `posthog.emails.send` sends transactional emails and `posthog.emails.get` reads their delivery status. See [send transactional emails with Ruby](/docs/workflows/transactional-emails/ruby) for credentials, templates, idempotency, background jobs, and testing.
+From version 3.30.0, use `posthog.emails` to send emails and check delivery status. See [send transactional emails with Ruby](/docs/workflows/transactional-emails/ruby) for setup and examples.
 
 ## Debug mode
 

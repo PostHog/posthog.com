@@ -20,11 +20,11 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 
 ## Automatic exception tracking
 
-`report_rescued_exceptions` controls whether exceptions Rails rescues (for example, exceptions rendered by Rails error pages) are captured. Enable it along with `auto_capture_exceptions` for complete error visibility, or leave it disabled to capture only unhandled exceptions.
+Enable `auto_capture_exceptions` to capture unhandled exceptions. Also enable `report_rescued_exceptions` to include errors that Rails rescues. Both default to `false`.
 
 ## Manual exception capture
 
-From `posthog-rails` version 3.24.0, controllers and API controllers have a private `capture_exception` helper. It adds the configured user identity, request metadata, controller/action, and parameters filtered through Rails' parameter filters:
+From `posthog-rails` 3.24.0, use `capture_exception` in controllers to report handled errors. It includes the current user and filtered request context:
 
 ```ruby
 class PaymentsController < ApplicationController
@@ -38,54 +38,37 @@ class PaymentsController < ApplicationController
 end
 ```
 
-Manual reports work without `auto_capture_exceptions` and do not apply automatic exception exclusions. The helper does not replace an existing controller method with the same name. Missing or disabled clients return `false` without creating a client.
+Manual capture works without `auto_capture_exceptions` and ignores automatic exception exclusions. Explicit identity and properties override the request defaults. Check custom properties for sensitive data.
 
-You can pass `distinct_id` and additional properties explicitly; these override inferred identity and request properties. The helper removes query strings from inferred URLs, but explicit properties are sent as supplied. Review them for sensitive data.
-
-Outside controllers, use `PostHog.capture_exception(exception, distinct_id, properties)` as before.
-
-If you evaluated feature flags for the request, pass the same snapshot to include matching flag properties on the exception event:
-
-```ruby
-flags = PostHog.evaluate_flags(current_user.id)
-
-capture_exception(
-  exception,
-  current_user.id,
-  { custom_property: "value" },
-  flags: flags
-)
-```
+Outside controllers, use `PostHog.capture_exception`. See [Ruby exception capture](/docs/libraries/ruby#exception-capture) for arguments, feature flag snapshots, and duplicate prevention.
 
 ## Streaming exceptions
 
-From version 3.21.0, `auto_capture_exceptions` also captures errors reported by `ActionController::Live` and ActionView streaming templates. Exception exclusions, `before_send`, and duplicate prevention still apply. Rails logging and stream completion behavior are unchanged.
+From version 3.21.0, `auto_capture_exceptions` also captures errors from `ActionController::Live` and ActionView streaming templates.
 
 ## Action Cable exceptions
 
-From version 3.22.0, `auto_capture_exceptions` also captures exceptions escaping Action Cable connection open/close, channel subscribe/unsubscribe callbacks, and channel actions. No separate setup is needed, and Action Cable remains an optional dependency.
+From version 3.22.0, `auto_capture_exceptions` captures unhandled connection, channel lifecycle, and channel action errors. Reports include filtered channel parameters and action data. Review your application's and connection's `filter_parameters` for sensitive data.
 
-Reports include connection/channel classes, the operation, and channel parameters or action data filtered through both the application's and the connection's `filter_parameters`. Raw connection environments, cookies, authorization headers, subscription identifiers, and URL query strings are not attached. Review your filters and `before_send` for application-specific sensitive data.
+Use `current_user_method` and `user_id_method` to identify connection users. The controller-only `current_user_resolver` does not apply.
 
-Identity comes from the connection's configured `current_user_method` and `user_id_method`, then from PostHog tracing headers when enabled. The controller-only `current_user_resolver` is not used for connections. Context is isolated between connections.
-
-Exceptions consumed by channel or connection `rescue_from` handlers are not captured by these boundaries, even with `report_rescued_exceptions = true`. That option does not enable handled Action Cable reports.
+Errors handled by `rescue_from` are not captured, even with `report_rescued_exceptions = true`.
 
 ## Rails runner exceptions
 
-From version 3.24.0, `auto_capture_exceptions` captures terminating `rails runner` errors before the SDK shuts down. They are fatal, unhandled events with source `rails.runner`. Deliberate nonzero exits such as `exit 23` are also reported. Normal completion, successful exits, and signal termination such as Ctrl-C or SIGTERM are not reported.
+From version 3.24.0, `auto_capture_exceptions` reports terminating `rails runner` errors and nonzero exits as fatal exceptions. Successful exits and signals such as Ctrl-C or SIGTERM are not reported.
 
-Rails' exit status and error output are preserved. Exception exclusions and `before_send` still apply. Delivery is best-effort: failures before runner hooks load, `exit!`, and forced termination that skips Ruby exit hooks cannot be captured.
+Capture runs before SDK shutdown without changing the exit status. Forced termination and `exit!` cannot be captured.
 
 ## Background job exceptions
 
-When `auto_instrument_active_job` is enabled, Active Job exceptions are captured with job context.
+Enable `auto_instrument_active_job` to capture Active Job failures with job context.
 
-From version 3.20.0, this integration also copies the current PostHog session and distinct IDs into queued Active Job data. Events and optional logs captured while the job runs use those IDs. Request properties are not copied. An explicit job identity extractor takes precedence over the saved distinct ID. This does not propagate a distributed trace; see the [Rails trace context guide](/docs/libraries/ruby-on-rails#trace-context) for OpenTelemetry setup.
+From version 3.20.0, queued jobs also retain the request's PostHog session and distinct IDs. Job events and logs use these IDs unless a job identity extractor overrides the distinct ID.
 
 ### Report retry failures
 
-From version 3.24.0, enable `report_active_job_retries` to report failures when Active Job schedules a retry, not only errors that escape job execution:
+From version 3.24.0, also enable `report_active_job_retries` to capture failed attempts that Active Job retries:
 
 ```ruby file=config/initializers/posthog.rb
 PostHog::Rails.configure do |config|
@@ -94,7 +77,7 @@ PostHog::Rails.configure do |config|
 end
 ```
 
-The option defaults to `false` and works on Rails 5.2 or later. It uses the same job identity and filtered arguments as terminal reports. Retry reports have source `rails.active_job`, level `error`, and a handled `task` mechanism. They honor exception exclusions across the cause chain without changing retry scheduling. Discarded or otherwise rescued failures are not added by this option. Duplicate prevention still applies if the same exception object is raised again.
+This defaults to `false` and requires `auto_instrument_active_job`. Retry reports use the job's identity and filtered arguments. Exception exclusions still apply, and retry scheduling does not change.
 
 ### Associating jobs with users
 
@@ -117,30 +100,11 @@ class SendWelcomeEmailJob < ApplicationJob
 end
 ```
 
-You can also use a block:
-
-```ruby
-class ProcessOrderJob < ApplicationJob
-  posthog_distinct_id do |_order, notify_user_id|
-    notify_user_id
-  end
-
-  def perform(order, notify_user_id)
-    # Process the order...
-  end
-end
-```
-
 ## Rails 7.0+ error reporter
 
-With `auto_capture_exceptions = true`, PostHog integrates with Rails' built-in error reporting, including handled errors reported during web requests:
+With `auto_capture_exceptions = true`, errors reported through `Rails.error` are sent to PostHog:
 
 ```ruby
-# These errors are automatically sent to PostHog
-Rails.error.handle do
-  # Code that might raise an error
-end
-
 Rails.error.report(exception, handled: true, context: { user_id: current_user.id })
 ```
 
@@ -148,7 +112,7 @@ PostHog automatically extracts the user's distinct ID from `user_id` or `distinc
 
 ## User context
 
-PostHog Rails automatically captures authenticated user information from your controllers for exceptions. Authenticated Rails user context takes precedence over client-supplied tracing headers for exception identity.
+Controller exception reports use the authenticated user's ID before client-supplied tracing headers.
 
 If your user method has a different name, configure it:
 
@@ -164,34 +128,16 @@ PostHog::Rails.configure do |config|
 end
 ```
 
-The resolver can also accept the controller as an argument. A zero-argument proc runs in the controller's context. The resolved user uses the same ID extraction rules below.
+The resolver can accept the controller as an argument.
 
 ### User ID extraction
 
-By default, PostHog Rails auto-detects the user's distinct ID by trying these methods in order:
-
-1. `posthog_distinct_id` – Define this on your User model for full control
-2. `distinct_id` – Common analytics convention
-3. `id` – Standard ActiveRecord primary key
-4. `pk` – Primary key alias
-5. `uuid` – For UUID-based primary keys
-
-It also checks hash-like users for `id`, `pk`, and `uuid` keys.
+PostHog checks `posthog_distinct_id`, `distinct_id`, `id`, `pk`, and `uuid`, in that order. Hash-like users can provide `id`, `pk`, or `uuid` keys.
 
 You can configure a specific method:
 
 ```ruby
 PostHog::Rails.config.user_id_method = :email
-```
-
-Or define a method on your User model:
-
-```ruby
-class User < ApplicationRecord
-  def posthog_distinct_id
-    "user_#{id}"  # or external_id, or any unique identifier
-  end
-end
 ```
 
 ## Excluded exceptions
@@ -219,14 +165,8 @@ Add more with:
 PostHog::Rails.config.excluded_exceptions = ["MyException"]
 ```
 
-## Cause chains and duplicate prevention
-
-Exception reports include the `exception.cause` chain, up to 50 exceptions. Capture mechanisms distinguish manual reports from Rails middleware, the error reporter, and Active Job integrations.
-
-For mutable exceptions, the SDK suppresses repeated captures of the same exception object and its captured causes, even through another client. The first successful capture wins; later calls return `false` without merging context. Supply the required identity and properties on the first report. Failed captures can be retried.
-
 ## Trace and release correlation
 
-When your app already provides OpenTelemetry, exception events include the active trace and span IDs. See [Rails trace context](/docs/libraries/ruby-on-rails#trace-context) to correlate application spans with PostHog session and person IDs.
+See [Rails trace context](/docs/libraries/ruby-on-rails#trace-context) to connect errors with application traces.
 
-To associate exceptions with a deployed release, set `POSTHOG_RELEASE_ID` before client initialization. See [link Ruby releases](/docs/error-tracking/link-releases/ruby) for the deployment steps.
+Set `POSTHOG_RELEASE_ID` before client initialization to [link errors to a release](/docs/error-tracking/link-releases/ruby).

@@ -104,7 +104,7 @@ View your logs in PostHog
 
 ## Structured notification logs
 
-From `posthog-rails` version 3.23.0, select Rails components in `logs_notifications` to capture structured lifecycle records alongside logger output:
+From `posthog-rails` 3.23.0, use `logs_notifications` to capture structured controller, SQL, job, and mailer logs:
 
 ```ruby file=config/initializers/posthog.rb
 PostHog::Rails.configure do |config|
@@ -114,28 +114,26 @@ PostHog::Rails.configure do |config|
 end
 ```
 
-The array defaults to `[]`. Components are subscribed to when Rails loads them; this option does not load optional Rails packages. Restart your app after changing the selection.
+This defaults to `[]`. Restart your app after changing the selection.
 
-| Component | Notifications | Metadata |
-|-----------|---------------|----------|
-| `:action_controller` | `process_action.action_controller` | Controller, action, HTTP method, status, and Rails-filtered parameters. |
-| `:active_record` | `sql.active_record` | Query name, cache status, and SQL operation such as `SELECT`. No SQL statements or bind values. |
-| `:active_job` | Enqueue, scheduled enqueue, perform, retry, retry stopped, and discard | Job class, ID, queue, executions, priority, retry wait in seconds, and filtered arguments. |
-| `:action_mailer` | `process.action_mailer`, `deliver.action_mailer` | Mailer class and action. No recipients, subject, or message content. |
+| Component | Captures |
+|-----------|----------|
+| `:action_controller` | Controller, action, HTTP method, response status, and filtered parameters. |
+| `:active_record` | Query name, cache status, and SQL operation. No SQL statements or bind values. |
+| `:active_job` | Enqueue, execution, retry, and discard events with job details and filtered arguments. |
+| `:action_mailer` | Mailer class and action. No recipients, subject, or message content. |
 
-Each record has a fixed description and an `event.name` attribute containing the Rails notification name. These records do not create spans or collect timings.
+Set `logs_level = :debug` to include SQL records. Other successful operations use info, controller 4xx responses use warn, and failures use error. A failed retry attempt uses error even if retries remain.
 
-SQL records use debug severity. Successful controller, job, and mailer records use info; controller 4xx responses use warn; failures and controller 5xx responses use error. Retry notifications with an error also use error severity, even if the job has retries left. Set `logs_level = :debug` to include SQL records. This does not change your local Rails logger level or make Rails produce additional logger output.
-
-Notification logs use the same `logs_level`, `logs_before_send`, rate cap, trace correlation, and shutdown pipeline as forwarded logger records. To collect only notification logs, set `config.logs_forward_rails_logger = false` while keeping `logs_enabled = true`.
+Notification logs share the existing severity filter, rate cap, and `logs_before_send` hook. Set `logs_forward_rails_logger = false` to collect only notification logs.
 
 ### Filter sensitive notification data
 
-Controller records reuse Rails' already-filtered parameters. Job hash arguments use your application's `filter_parameters`; unkeyed arguments are redacted. Jobs with `log_arguments = false` and Action Mailer delivery jobs omit arguments entirely. With an empty parameter-filter list, keyed job payloads are redacted rather than exported unfiltered.
+Controller and job parameters use Rails' parameter filters. Unkeyed job arguments are redacted. Jobs with `log_arguments = false` and mail delivery jobs omit arguments. With no parameter filters configured, job hash arguments are redacted.
 
-Unsupported, cyclic, oversized, or unencodable parameter payloads are replaced with a redaction marker instead of exporting partial data. Notification metadata does not include cookies or headers. Review your parameter filters and use `logs_before_send` for additional scrubbing. These protections apply to notification metadata, not arbitrary text passed to `Rails.logger`.
+Review your filters and use `logs_before_send` to remove sensitive data. These protections do not filter arbitrary text passed to `Rails.logger`.
 
-Job lifecycle logs use saved job identity only when `auto_instrument_active_job = true`. See [Active Job context](/docs/error-tracking/installation/ruby-on-rails#background-job-exceptions). Enabling notification logs alone does not enable job context propagation or exception capture.
+Enable `auto_instrument_active_job` to [carry user and session IDs into job logs](/docs/error-tracking/installation/ruby-on-rails#background-job-exceptions). Notification logs alone do not enable exception capture.
 
 ## Configuration reference
 

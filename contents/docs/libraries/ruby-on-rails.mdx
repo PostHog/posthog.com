@@ -242,21 +242,13 @@ PostHog.capture({
 })
 ```
 
-For local evaluation, set `secret_key` to a personal API key or project secret API key with feature flag read access:
+For local evaluation, configure `secret_key` in your initializer. See [Ruby local evaluation](/docs/libraries/ruby#local-evaluation) for credentials, caching, and Puma/Unicorn setup.
 
-```ruby
-config.secret_key = Rails.application.credentials.posthog[:secret_key]
-```
-
-`personal_api_key` remains a deprecated alias. `secret_key` takes precedence when both are supplied.
-
-See our [Ruby SDK docs](/docs/libraries/ruby#local-evaluation) for details on local evaluation with Puma and Unicorn servers.
-
-> **Note:** `PostHog.is_feature_enabled`, `PostHog.get_feature_flag`, `PostHog.get_feature_flag_result`, `PostHog.get_feature_flag_payload`, and `PostHog.capture({ ..., send_feature_flags: true })` still work during the migration period, but they're deprecated. Prefer `PostHog.evaluate_flags` for new code.
+Older single-flag methods are deprecated. See the [migration reference](/docs/libraries/ruby#legacy-single-flag-methods).
 
 ## Transactional emails
 
-Use `PostHog.emails.send` to send a transactional email and `PostHog.emails.get` to read its status. See [send transactional emails with Ruby](/docs/workflows/transactional-emails/ruby#use-in-rails) for Rails client setup, templates, background jobs, and testing.
+See [send transactional emails with Ruby](/docs/workflows/transactional-emails/ruby#use-in-rails) for Rails setup and examples using `PostHog.emails`.
 
 ## Testing
 
@@ -269,7 +261,7 @@ PostHog.init do |config|
 end
 ```
 
-Test mode does not disable feature flag definition fetches or email requests. Stub those separately; see [test email without sending](/docs/workflows/transactional-emails/ruby#test-without-sending-email).
+Stub feature flag definition fetches separately. For transactional emails, follow the [email testing guide](/docs/workflows/transactional-emails/ruby#test-without-sending-email).
 
 Or stub event capture in your specs:
 
@@ -285,23 +277,7 @@ end
 
 ### Core PostHog options
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `api_key` | String | **required** | Your PostHog project token. |
-| `host` | String | `https://us.i.posthog.com` | Fully qualified PostHog API host. |
-| `secret_key` | String | `nil` | Personal API key (`phx_...`) or project secret API key (`phs_...`) for local feature flag evaluation and remote config. |
-| `personal_api_key` | String | `nil` | Deprecated alias for `secret_key`. When both are supplied, `secret_key` wins. |
-| `max_queue_size` | Integer | `10000` | Maximum number of events to keep in the async queue before dropping new events. |
-| `test_mode` | Boolean | `false` | Keep events queued and do not send them. Useful for tests. |
-| `sync_mode` | Boolean | `false` | Send events synchronously on the calling thread. |
-| `compress_request` | Boolean | `true` | Gzip-compress batch uploads. |
-| `flag_definition_cache_provider` | Object | `nil` | Share local feature flag definitions through an external cache. Supported in the initializer block from version 3.19.0. |
-| `on_error` | Proc | no-op | Callback called as `on_error.call(status, error)`. |
-| `feature_flags_polling_interval` | Integer | `30` | Seconds between local feature flag definition polls. |
-| `feature_flag_request_timeout_seconds` | Integer | `3` | Timeout, in seconds, for feature flag requests. |
-| `before_send` | Proc | `nil` | Callback that receives the event hash before it is queued or sent. Return a modified event hash, or `nil` to drop the event. If the callback raises, the event is dropped. |
-
-The `PostHog.init` block supports the options above. Pass other core options, such as `flush_interval_seconds`, `feature_flags_async_load`, `feature_flag_request_max_retries`, and email options, as a hash to `PostHog.init(...)`:
+`PostHog.init` accepts [Ruby SDK options](/docs/libraries/ruby#configuration) as a hash. Use this form for options not supported by the initializer block:
 
 ```ruby
 PostHog.init(
@@ -313,7 +289,7 @@ PostHog.init(
 )
 ```
 
-See the [Ruby SDK configuration](/docs/libraries/ruby#configuration) and [local evaluation options](/docs/libraries/ruby#load-definitions-asynchronously) for defaults and startup behavior. The Rails facade also supports [`flush(timeout:)` and `shutdown(timeout:)`](/docs/libraries/ruby#flushing-and-shutting-down).
+See [asynchronous flag loading](/docs/libraries/ruby#load-definitions-asynchronously) for startup behavior and [flush/shutdown](/docs/libraries/ruby#flushing-and-shutting-down) for timeout options.
 
 ### Rails-specific options
 
@@ -357,7 +333,7 @@ Configure these via `PostHog::Rails.configure` or `PostHog::Rails.config`:
 
 ### Feature flags not working
 
-For local evaluation, set `secret_key` with feature flag read access or configure a flag definition cache provider. Remote evaluation only needs your project token. If asynchronous loading is enabled, check `PostHog.feature_flags_loaded?` before expecting local results.
+Check your [local evaluation configuration](/docs/libraries/ruby#local-evaluation). With asynchronous loading, check `PostHog.feature_flags_loaded?` before expecting local results.
 
 ## Next steps
 
