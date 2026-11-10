@@ -34,7 +34,7 @@ export default function ToggleGroupExample(): JSX.Element {
         <div className="flex flex-col gap-4">
             {looks.map(({ label, appearance, variant }) => (
                 <div key={label} className="flex flex-wrap items-center gap-3">
-                    <span className="w-36 shrink-0 font-code text-caption text-secondary">{label}</span>
+                    <span className="w-36 shrink-0 font-code text-13 text-secondary">{label}</span>
                     <ViewSwitcher appearance={appearance} variant={variant} />
                     <ToggleGroup
                         appearance={appearance}

@@ -24,22 +24,22 @@ export default function Examples(): JSX.Element {
                     </Skeleton>
                     <div className="flex min-w-0 flex-1 flex-col">
                         <Skeleton loading={loading}>
-                            <span className="text-heading-sm">Weekly product report</span>
+                            <span className="text-15 font-semibold">Weekly product report</span>
                         </Skeleton>
                         <Skeleton loading={loading}>
-                            <span className="text-caption text-secondary">Max Hedgehog · Monday</span>
+                            <span className="text-13 text-secondary">Max Hedgehog · Monday</span>
                         </Skeleton>
                     </div>
                 </div>
                 <Skeleton loading={loading} className="mt-4">
-                    <p className="m-0 text-body text-secondary">
+                    <p className="m-0 text-15 text-secondary">
                         Weekly active users grew 12%. Most people leave the signup funnel at the plan step.
                     </p>
                 </Skeleton>
                 <Skeleton shape="rect" loading={loading} className="mt-4">
                     <div className="flex h-24 flex-col justify-center rounded-md border border-[rgb(var(--text-primary)/0.14)] px-3">
-                        <span className="text-caption text-secondary">Weekly active users</span>
-                        <strong className="text-heading-md tabular-nums">2,418</strong>
+                        <span className="text-13 text-secondary">Weekly active users</span>
+                        <strong className="text-xl font-bold tabular-nums">2,418</strong>
                     </div>
                 </Skeleton>
             </Card.Root>

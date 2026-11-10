@@ -1,13 +1,8 @@
 import React from 'react'
-import { Text } from 'components/UI/Typography'
 import { cn } from '../../utils'
 
 export function DemoLabel({ children, className }: { children: React.ReactNode; className?: string }): JSX.Element {
-    return (
-        <Text as="span" size="caption" color="secondary" className={cn('whitespace-nowrap', className)}>
-            {children}
-        </Text>
-    )
+    return <span className={cn('whitespace-nowrap text-13 text-secondary', className)}>{children}</span>
 }
 
 export function DemoRows({ children, className }: { children: React.ReactNode; className?: string }): JSX.Element {

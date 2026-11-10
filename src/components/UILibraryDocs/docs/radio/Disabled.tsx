@@ -25,10 +25,7 @@ function PeriodGroup({
             {periods.map(({ value, label }) => {
                 const disabled = groupDisabled || value === disabledValue
                 return (
-                    <label
-                        key={value}
-                        className={`flex items-center gap-2 text-body-sm ${disabled ? 'text-muted' : ''}`}
-                    >
+                    <label key={value} className={`flex items-center gap-2 text-sm ${disabled ? 'text-muted' : ''}`}>
                         <Radio.Root value={value} disabled={value === disabledValue}>
                             <Radio.Indicator />
                         </Radio.Root>

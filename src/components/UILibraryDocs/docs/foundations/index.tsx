@@ -46,7 +46,7 @@ export const doc: ComponentDoc = {
             id: 'depth',
             title: 'Depth',
             description:
-                'Light comes from above. Sunken surfaces have a dark inner top edge. Raised surfaces have a dark lip under the bottom edge. Floating surfaces cast a soft shadow.',
+                'Light comes from above. Sunken surfaces have a darker top edge: a darker top border in light mode, and a dark inner line in dark mode. Raised surfaces have a dark lip under the bottom edge. Floating surfaces cast a soft shadow.',
             Component: Depth,
             source: depthSource,
         },
@@ -185,9 +185,14 @@ export const doc: ComponentDoc = {
                         'Container looks for menubars, toolbars, tables, and similar. Outlined is flat with a border.',
                 },
                 {
-                    name: 'controlSurface, trackSurface',
+                    name: 'controlSurface, sunkenTopEdge',
+                    type: 'darker top border',
+                    description: 'Sunken surfaces: fields, checkbox boxes, inset cards, and snippets.',
+                },
+                {
+                    name: 'roundControlSurface, trackSurface',
                     type: 'inset top shadow',
-                    description: 'Sunken surfaces: fields, checkbox and radio boxes, slider and switch tracks.',
+                    description: 'Radio boxes, switches, and slider and progress tracks.',
                 },
                 {
                     name: 'cardLevels',

@@ -3,7 +3,7 @@ import { RoughAnnotation } from 'components/UI/RoughAnnotation'
 
 export default function Sequence(): JSX.Element {
     return (
-        <p className="m-0 text-heading-lg font-bold">
+        <p className="m-0 text-2xl font-bold">
             <RoughAnnotation type="underline" color="tangerine">
                 Capture
             </RoughAnnotation>

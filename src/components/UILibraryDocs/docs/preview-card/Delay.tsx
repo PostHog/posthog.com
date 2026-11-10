@@ -5,7 +5,7 @@ const OPEN_DELAY_MS = 200
 
 export default function PreviewCardDelay(): JSX.Element {
     return (
-        <p className="m-0 text-[15px]">
+        <p className="m-0 text-15">
             The code for this website is on{' '}
             <PreviewCard.Root>
                 <PreviewCard.Trigger
@@ -18,7 +18,7 @@ export default function PreviewCardDelay(): JSX.Element {
                 </PreviewCard.Trigger>
                 <PreviewCard.Popup className="w-64">
                     <PreviewCard.Arrow />
-                    <span className="block text-[15px] font-bold leading-snug">PostHog/posthog.com</span>
+                    <span className="block text-15 font-bold leading-snug">PostHog/posthog.com</span>
                     <span className="mt-1 block text-sm text-secondary">
                         The Gatsby site, the docs, and the handbook. Anyone can open a pull request.
                     </span>

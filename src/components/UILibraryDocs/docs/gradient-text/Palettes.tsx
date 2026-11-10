@@ -18,8 +18,8 @@ export default function Palettes(): JSX.Element {
                     key={palette}
                     className="grid gap-1 py-3 first:pt-0 last:pb-0 @md:grid-cols-[6rem_1fr] @md:items-center @md:gap-4"
                 >
-                    <span className="font-code text-caption text-secondary">{palette}</span>
-                    <span className="text-heading-lg">
+                    <span className="font-code text-13 text-secondary">{palette}</span>
+                    <span className="text-2xl font-bold">
                         <GradientText palette={palette} animate={false}>
                             {phrase}
                         </GradientText>

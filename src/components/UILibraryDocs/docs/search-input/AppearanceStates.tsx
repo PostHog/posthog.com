@@ -1,8 +1,7 @@
 import React from 'react'
 import { SearchInput } from 'components/UI/SearchInput'
-import type { FieldAppearance } from 'components/UI/styles'
+import { controlLabel, type FieldAppearance } from 'components/UI/styles'
 import { DemoColumn, DemoColumns } from 'components/UILibraryDocs/DemoLayout'
-import { Text } from 'components/UI/Typography'
 
 const states = [
     { label: 'Empty', props: { placeholder: 'Search members' } },
@@ -16,9 +15,9 @@ function StateColumn({ appearance }: { appearance: FieldAppearance }): JSX.Eleme
         <div className="flex flex-col gap-5">
             {states.map(({ label, props }) => (
                 <div key={label} className="flex flex-col gap-1">
-                    <Text as="span" size="sm" weight="semibold" color={label === 'Disabled' ? 'muted' : 'primary'}>
+                    <span className={controlLabel} data-disabled={label === 'Disabled' ? '' : undefined}>
                         {label}
-                    </Text>
+                    </span>
                     <SearchInput appearance={appearance} aria-label={`${label} search`} {...props} />
                 </div>
             ))}

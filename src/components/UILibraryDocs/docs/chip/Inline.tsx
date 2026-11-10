@@ -6,7 +6,7 @@ const hogImage = (file: string): string => `https://res.cloudinary.com/dmukukwp6
 export default function ChipInline(): JSX.Element {
     return (
         <div className="flex max-w-lg flex-col gap-4 text-primary">
-            <p className="m-0 text-[15px] leading-relaxed">
+            <p className="m-0 text-15 leading-relaxed">
                 Thanks{' '}
                 <Chip size="inline" href="/community/profiles/30200" image={hogImage('night_hog_219fff00f3.png')}>
                     Night hog

@@ -6,17 +6,15 @@ import { Button, IconButton } from 'components/UI/Button'
 import { Toggle } from 'components/UI/Toggle'
 import { Tooltip } from 'components/UI/Tooltip'
 import { CodeBlock } from 'components/UI/CodeBlock'
-import { Heading, Text } from 'components/UI/Typography'
 import { cardInnerBottomRadius, cardInnerTopRadius, heightRevealPanel } from 'components/UI/styles'
 import { cn } from '../../utils'
 import { useApp } from '../../context/App'
 import type { DocExample } from './types'
-import { proseLinks } from './styles'
 import { setPreviewSurface, usePreviewSurface } from './previewSurface'
 
 const clearCard = 'bg-transparent shadow-none after:hidden dark:bg-transparent dark:shadow-none'
 
-export default function Example({ id, title, description, Component, source, replay }: DocExample): JSX.Element {
+export default function Example({ id, title, description, Component, source, replay, prose }: DocExample): JSX.Element {
     const { siteSettings, updateSiteSettings } = useApp()
     const surface = usePreviewSurface()
     const [codeOpen, setCodeOpen] = useState(false)
@@ -36,15 +34,9 @@ export default function Example({ id, title, description, Component, source, rep
 
     return (
         <section id={id} className="scroll-mt-4">
-            <Heading level={2} size="md" className="mb-1">
-                {title}
-            </Heading>
-            {description && (
-                <Text color="secondary" className={`mb-3 ${proseLinks}`}>
-                    {description}
-                </Text>
-            )}
-            <Card.Root padding="none" className={cn('not-prose', surface === 'window' && clearCard)}>
+            <h2>{title}</h2>
+            {description && <p>{description}</p>}
+            <Card.Root padding="none" className={cn(!prose && 'not-prose', surface === 'window' && clearCard)}>
                 <div className={cn('overflow-hidden', cardInnerTopRadius)} data-skin={siteSettings.skinMode}>
                     <div data-scheme="tertiary" className="@container min-h-24 p-6 text-primary">
                         <CardLevelBoundary>
@@ -52,7 +44,7 @@ export default function Example({ id, title, description, Component, source, rep
                         </CardLevelBoundary>
                     </div>
                 </div>
-                <Card.StatusBar className={cn('justify-between px-2 py-1', codeOpen && 'rounded-none')}>
+                <Card.StatusBar className={cn('not-prose justify-between px-2 py-1', codeOpen && 'rounded-none')}>
                     <Tooltip.Provider>
                         <div className="flex items-center gap-1">
                             <Tooltip.Root>
@@ -102,7 +94,7 @@ export default function Example({ id, title, description, Component, source, rep
                         </Toggle>
                     </div>
                 </Card.StatusBar>
-                <BaseCollapsible.Root open={codeOpen}>
+                <BaseCollapsible.Root open={codeOpen} className="not-prose">
                     <BaseCollapsible.Panel
                         className={cn(
                             heightRevealPanel,

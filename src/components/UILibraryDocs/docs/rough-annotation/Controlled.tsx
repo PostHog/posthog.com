@@ -7,7 +7,7 @@ export default function Controlled(): JSX.Element {
     const [drawn, setDrawn] = useState(false)
     return (
         <div className="flex flex-col items-start gap-4">
-            <p className="m-0 text-body-lg">
+            <p className="m-0 text-lg">
                 Flags let you{' '}
                 <RoughAnnotation type="highlight" color="yellow" show={shown} onComplete={() => setDrawn(shown)}>
                     roll out to 5% of users first
@@ -18,7 +18,7 @@ export default function Controlled(): JSX.Element {
                 <Button size="sm" onClick={() => setShown((value) => !value)}>
                     {shown ? 'Hide' : 'Show'} the highlight
                 </Button>
-                <span className="text-caption text-secondary">{drawn && shown ? 'Drawn' : 'Not drawn'}</span>
+                <span className="text-13 text-secondary">{drawn && shown ? 'Drawn' : 'Not drawn'}</span>
             </div>
         </div>
     )

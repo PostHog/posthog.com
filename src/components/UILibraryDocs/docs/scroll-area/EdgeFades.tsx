@@ -12,7 +12,7 @@ export default function EdgeFades(): JSX.Element {
                     <ScrollArea.Viewport edgeFades aria-label="Insight types">
                         <ScrollArea.Content className="p-3">
                             {insights.map((insight) => (
-                                <div key={insight} className="py-1.5 text-body-sm">
+                                <div key={insight} className="py-1.5 text-sm">
                                     {insight}
                                 </div>
                             ))}
@@ -30,7 +30,7 @@ export default function EdgeFades(): JSX.Element {
                             {[...insights, ...insights].map((insight, index) => (
                                 <span
                                     key={`${insight}-${index}`}
-                                    className="whitespace-nowrap rounded border border-primary px-2 py-1 text-body-sm"
+                                    className="whitespace-nowrap rounded border border-primary px-2 py-1 text-sm"
                                 >
                                     {insight}
                                 </span>

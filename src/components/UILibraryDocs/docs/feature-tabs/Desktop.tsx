@@ -37,7 +37,7 @@ function FeaturePanel({
                 <span className={`rounded-sm px-0.5 ${highlightClasses[highlightColor]}`}>{highlightedTitle}</span>
                 {titleSuffix ? ` ${titleSuffix}` : null}
             </h3>
-            <div className="flex-1 text-[15px] text-secondary">{children}</div>
+            <div className="flex-1 text-15 text-secondary">{children}</div>
             <div className="-mx-4 -mb-4 mt-4 overflow-hidden rounded-b leading-[0] @xl:-mx-6 @xl:-mb-6">
                 <CloudinaryImage src={imageLight} alt={imageAlt} className="dark:hidden" imgClassName="w-full block" />
                 <CloudinaryImage

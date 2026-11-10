@@ -31,7 +31,7 @@ export default function AlertDialogLongContent(): JSX.Element {
                     <AlertDialog.Description>
                         These flags had no evaluations in the last 30 days. Code that checks them gets false.
                     </AlertDialog.Description>
-                    <ul className="m-0 flex list-none flex-col gap-1.5 p-0 font-code text-[13px]">
+                    <ul className="m-0 flex list-none flex-col gap-1.5 p-0 font-code text-13">
                         {flags.map((flag) => (
                             <li key={flag}>{flag}</li>
                         ))}

@@ -20,7 +20,7 @@ export default function DrawerBottom(): JSX.Element {
                         {notifications.map((notification) => (
                             <li key={notification.title} className="flex items-baseline justify-between gap-3">
                                 <span>{notification.title}</span>
-                                <span className="shrink-0 text-[13px] text-muted">{notification.time}</span>
+                                <span className="shrink-0 text-13 text-muted">{notification.time}</span>
                             </li>
                         ))}
                     </ul>

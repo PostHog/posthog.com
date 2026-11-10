@@ -12,7 +12,7 @@ export default function Bars(): JSX.Element {
                     Your product
                 </Card.TitleBar>
                 <div className="flex flex-col gap-1">
-                    <span className="text-[15px] font-semibold">Hogzilla sticker</span>
+                    <span className="text-15 font-semibold">Hogzilla sticker</span>
                     <span className="text-sm text-secondary">Matte, glossy, or holographic.</span>
                 </div>
                 <div>

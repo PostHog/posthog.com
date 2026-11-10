@@ -12,7 +12,7 @@ const rows = [
 
 export default function Options(): JSX.Element {
     return (
-        <DemoRows className="text-body-lg @md:grid-cols-[11rem_minmax(0,1fr)]">
+        <DemoRows className="text-lg @md:grid-cols-[11rem_minmax(0,1fr)]">
             {rows.map(({ label, props }) => (
                 <DemoRow key={label} label={label}>
                     <span className="px-3 py-1">

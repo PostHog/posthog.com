@@ -35,7 +35,7 @@ export default function TreeCheckboxes(): JSX.Element {
                 checked={checked}
                 onCheckedChange={setChecked}
             />
-            <p className="m-0 text-[13px] text-secondary">Checked: {checked.join(', ') || 'none'}</p>
+            <p className="m-0 text-13 text-secondary">Checked: {checked.join(', ') || 'none'}</p>
         </div>
     )
 }

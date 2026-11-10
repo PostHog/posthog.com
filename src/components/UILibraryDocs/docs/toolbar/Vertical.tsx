@@ -20,7 +20,7 @@ export default function VerticalToolbar(): JSX.Element {
                     <IconTrash className="size-4" />
                 </Toolbar.Button>
             </Toolbar.Root>
-            <div className="flex h-36 min-w-0 flex-1 items-center justify-center rounded-md border border-dashed border-[rgb(var(--text-primary)/0.2)] text-caption text-secondary">
+            <div className="flex h-36 min-w-0 flex-1 items-center justify-center rounded-md border border-dashed border-[rgb(var(--text-primary)/0.2)] text-13 text-secondary">
                 Insight canvas
             </div>
         </div>

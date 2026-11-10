@@ -10,7 +10,7 @@ export default function BadgeInline(): JSX.Element {
                     Beta
                 </Badge>
             </h3>
-            <p className="m-0 text-[15px] leading-relaxed">
+            <p className="m-0 text-15 leading-relaxed">
                 Mobile replay is{' '}
                 <Badge size="inline" color="green" appearance="soft" href="/docs/session-replay/mobile">
                     New

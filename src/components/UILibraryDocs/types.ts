@@ -7,6 +7,7 @@ export type DocExample = {
     Component: React.ComponentType
     source: string
     replay?: boolean
+    prose?: boolean
 }
 
 export type DocProp = {

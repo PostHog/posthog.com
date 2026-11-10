@@ -13,8 +13,8 @@ export default function ChartSparklines(): JSX.Element {
         <div className="grid gap-3 @lg:grid-cols-3">
             {stats.map((stat) => (
                 <Card.Root key={stat.label} padding="sm">
-                    <div className="text-caption text-secondary">{stat.label}</div>
-                    <div className="text-heading-lg">{stat.value}</div>
+                    <div className="text-13 text-secondary">{stat.label}</div>
+                    <div className="text-2xl font-bold">{stat.value}</div>
                     <Sparkline className="mt-2" height={40} data={stat.data} />
                 </Card.Root>
             ))}

@@ -22,7 +22,7 @@ export default function ScrollAreaVertical(): JSX.Element {
     return (
         <ScrollArea.Root className="h-40 w-full max-w-sm rounded border border-primary">
             <ScrollArea.Viewport aria-label="Recent events">
-                <ScrollArea.Content className="flex flex-col gap-2 p-3 text-body-sm">
+                <ScrollArea.Content className="flex flex-col gap-2 p-3 text-sm">
                     {events.map((event) => (
                         <p key={event} className="m-0">
                             {event}

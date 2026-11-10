@@ -3,7 +3,7 @@ import { Snippet } from 'components/UI/Snippet'
 
 export default function Inline(): JSX.Element {
     return (
-        <div className="flex max-w-[65ch] flex-col gap-3 text-body">
+        <div className="flex max-w-[65ch] flex-col gap-3 text-15">
             <p className="!m-0">
                 Install <Snippet.Inline>posthog-js</Snippet.Inline>, then set <Snippet.Inline>api_host</Snippet.Inline>{' '}
                 in your SDK configuration.

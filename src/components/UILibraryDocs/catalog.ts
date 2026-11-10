@@ -40,7 +40,7 @@ export const catalog: CatalogEntry[] = [
     {
         slug: 'typography',
         name: 'Typography',
-        description: 'The type roles, fonts, and rules for all text.',
+        description: 'How prose, the Tailwind scale, and global styles set all text.',
         category: 'Foundations',
     },
     {

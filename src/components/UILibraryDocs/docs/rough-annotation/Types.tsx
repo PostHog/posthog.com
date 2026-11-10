@@ -17,7 +17,7 @@ const marks: Omit<RoughAnnotationProps, 'children'>[] = [
 
 export default function Types(): JSX.Element {
     return (
-        <DemoRows className="text-body-lg">
+        <DemoRows className="text-lg">
             {marks.map((mark) => (
                 <DemoRow key={mark.type} label={mark.type}>
                     <RoughAnnotation {...mark}>Insights</RoughAnnotation>

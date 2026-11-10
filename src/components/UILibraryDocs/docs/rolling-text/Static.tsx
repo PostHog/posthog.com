@@ -4,7 +4,7 @@ import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 export default function Static(): JSX.Element {
     return (
-        <DemoRows className="text-body-lg">
+        <DemoRows className="text-lg">
             <DemoRow label="animate={false}">
                 <span>
                     Give your agents{' '}

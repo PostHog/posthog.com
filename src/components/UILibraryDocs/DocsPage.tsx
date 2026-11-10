@@ -5,12 +5,10 @@ import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { ButtonLink } from 'components/UI/Button'
 import { Snippet } from 'components/UI/Snippet'
-import { Heading, Text } from 'components/UI/Typography'
 import { catalogEntry, libraryNav } from './catalog'
 import Example from './Example'
 import PropsTable from './PropsTable'
 import type { ComponentDoc } from './types'
-import { proseLinks } from './styles'
 
 const repoTreeUrl = 'https://github.com/PostHog/posthog.com/tree/master/'
 
@@ -53,10 +51,8 @@ export function renderDocsPage(doc: ComponentDoc): JSX.Element {
                 showQuestions={false}
                 hideMobileTableOfContents
             >
-                <div className="@container not-prose font-body text-body text-primary">
-                    <Text size="lg" color="secondary" className="mb-4">
-                        {entry.description}
-                    </Text>
+                <div className="@container">
+                    <p className="lead">{entry.description}</p>
                     <div className="not-prose flex flex-wrap items-center gap-2">
                         {statements.map((statement) => (
                             <Snippet key={statement} text={statement} prompt={false} className="max-w-full" />
@@ -88,36 +84,23 @@ export function renderDocsPage(doc: ComponentDoc): JSX.Element {
                             </ButtonLink>
                         ))}
                     </div>
-                    <div className="mt-10 flex flex-col gap-12">
-                        {doc.examples.map((example) => (
-                            <Example key={example.id} {...example} />
-                        ))}
-                    </div>
+                    {doc.examples.map((example) => (
+                        <Example key={example.id} {...example} />
+                    ))}
                     {doc.notes?.length ? (
-                        <section id={NOTES_ID} className="mt-12">
-                            <Heading level={2} size="md" className="mb-3">
-                                Usage
-                            </Heading>
-                            <ul className={`m-0 flex flex-col gap-2 p-0 text-body ${proseLinks}`}>
+                        <section id={NOTES_ID}>
+                            <h2>Usage</h2>
+                            <ul>
                                 {doc.notes.map((note, index) => (
-                                    <li
-                                        key={index}
-                                        className="relative pl-5 before:absolute before:left-1.5 before:top-[9px] before:size-1.5 before:rounded-full before:bg-[rgb(var(--text-primary)/0.45)] before:content-['']"
-                                    >
-                                        {note}
-                                    </li>
+                                    <li key={index}>{note}</li>
                                 ))}
                             </ul>
                         </section>
                     ) : null}
                     {doc.props?.length ? (
-                        <section id={API_ID} className="mt-12">
-                            <Heading level={2} size="md" className="mb-3">
-                                API
-                            </Heading>
-                            <Text color="secondary" className={`mb-4 ${proseLinks}`}>
-                                {doc.apiNote ?? DEFAULT_API_NOTE}
-                            </Text>
+                        <section id={API_ID}>
+                            <h2>API</h2>
+                            <p>{doc.apiNote ?? DEFAULT_API_NOTE}</p>
                             <div className="flex flex-col gap-6">
                                 {doc.props.map((group) => (
                                     <PropsTable key={group.component} {...group} />

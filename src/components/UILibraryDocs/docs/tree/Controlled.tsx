@@ -47,7 +47,7 @@ export default function TreeControlled(): JSX.Element {
                 selected={selected}
                 onSelectedChange={setSelected}
             />
-            <p className="m-0 text-[13px] text-secondary">Selected: {selected.join(', ') || 'none'}</p>
+            <p className="m-0 text-13 text-secondary">Selected: {selected.join(', ') || 'none'}</p>
         </div>
     )
 }
