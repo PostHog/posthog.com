@@ -56,7 +56,7 @@ When you read metrics back as Prometheus series, expect this:
 - A histogram named `dash_query_duration_ms` reads back as `dash_query_duration_ms_bucket`, `dash_query_duration_ms_count`, and `dash_query_duration_ms_sum`, plus a bare `dash_query_duration_ms` series.
 - A counter keeps its name. PostHog doesn't add `_total`.
 - Resource attributes become labels, so you can filter on `service_name` or `region` (from `resourceAttributes`). Each series carries both the dotted OpenTelemetry label (`service.name`) and an underscore form (`service_name`), plus `deployment.environment` and `telemetry.sdk.*`.
-- Dotted names and labels must be quoted in PromQL: `{"deployment.environment"="production"}` and `sum by ("url.template", le)`. Tools that expect Prometheus label names, such as Grafana legend templates like `{{url.template}}`, can't reference them. If that matters, use underscore names for your own attributes.
+- Dotted names and labels must be quoted in PromQL: `{"deployment.environment"="production"}` and `sum by ("url.template", le)`. Grafana legend templates reference them as-is, for example `{{url.template}}`.
 
 ### Counters: sum deltas, don't use rate()
 
