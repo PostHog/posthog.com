@@ -37,17 +37,18 @@ Beyond optimization, we offer discounts based on three levers:
 - **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
 
-> Two things to be clear on when working out which tier applies:
+> Three things to be clear on when working out which tier applies:
 >
 > - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
 > - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
+> - **The credit purchase must be sized in good faith to cover the customer's forecast usage for the full contract year.** A purchase that clearly covers only part of the year doesn't qualify for a volume discount.
 
 #### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
 - **Multi-year deals:** +2.5% per additional year paid upfront (+2.5% for 2 years, +5% for 3 years. capped at +5%)
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
-> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier and then add more later. 
+> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can stay on monthly billing, or buy credits sized to a lower but credible 12-month forecast. 
 
 #### 3. Ability to forecast - mutual commitment to timing (additive)
 
