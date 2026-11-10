@@ -296,7 +296,7 @@ const faqItems = [
         trigger: 'Can a new product or company that is part of an established group apply?',
         content: (
             <p>
-                No. Eligibility is based on the company, not the product. If an established company owns a new product,
+                No. Eligibility is based on the company, not the product. If an ineligible company owns a new product,
                 brand, or company, it isn't eligible, even if the new company is less than 2 years old and has no
                 outside funding. This applies whether you apply from a project in your existing organization or from a
                 new organization. Credits are always issued at PostHog's discretion.
