@@ -693,6 +693,9 @@ importers:
       node-gyp:
         specifier: ^12.2.0
         version: 12.2.0
+      path-to-regexp:
+        specifier: 6.3.0
+        version: 6.3.0
       postcss:
         specifier: ^8.4.14
         version: 8.5.6

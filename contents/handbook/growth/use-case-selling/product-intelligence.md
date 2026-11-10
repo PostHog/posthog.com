@@ -36,7 +36,7 @@ This is our bread and butter. Most accounts start here. The risk is they *stay* 
 
 [self-driving](/docs/self-driving) cuts across all seven use cases, but it lands differently here than it does in Observability or Release Engineering. An error has an obvious right answer, so it converts into a merged pull request quickly. A product-intelligence finding — "users hesitate on the plan picker" — usually needs a human judgment call about what the product *should* do, so it more often arrives as a **needs input** report than as code.
 
-That's not a weakness, and reports are free (you're only billed $15 per pull request, first three each month free). To a PM, self-driving's value here is a prioritized queue of investigated problems with the evidence attached, not an agent that redesigns your onboarding. Full guidance in [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
+That's not a weakness. The research behind a report is where most of the value is, and it's what self-driving charges for, in AI credits based on effort. To a PM, self-driving's value here is a prioritized queue of investigated problems with the evidence attached, not an agent that redesigns your onboarding. Full guidance in [how to pitch self-driving](/handbook/growth/sales/how-to-pitch-self-driving).
 
 Write it lowercase and hyphenated, and keep the customer's product as the subject — we make *their* product self-driving. It's a capability, not a SKU you can add to an order form.
 
