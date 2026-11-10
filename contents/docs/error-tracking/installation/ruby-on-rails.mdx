@@ -16,4 +16,153 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 
 <AgentIntegrationSection framework="Rails" flagCommand={{ flag: 'error-tracking-new-wizard', command: 'error-tracking' }} />
 
-<ErrorTrackingRubyOnRailsInstallationWrapper /> 
+<ErrorTrackingRubyOnRailsInstallationWrapper />
+
+The sections below cover additional capture options and user context.
+
+## Controller exception helper
+
+From `posthog-rails` 3.24.0, use `capture_exception` in controllers to report handled errors. It includes the current user and filtered request context:
+
+```ruby
+class PaymentsController < ApplicationController
+  def create
+    PaymentService.charge(params[:order_id])
+    head :created
+  rescue PaymentService::Error => error
+    capture_exception(error, nil, { payment_provider: "stripe" })
+    head :bad_gateway
+  end
+end
+```
+
+Manual capture works without `auto_capture_exceptions` and ignores automatic exception exclusions. Explicit identity and properties override the request defaults. Check custom properties for sensitive data.
+
+Outside controllers, use `PostHog.capture_exception`. See [Ruby exception capture](/docs/libraries/ruby#exception-capture) for arguments, feature flag snapshots, and duplicate prevention.
+
+## Streaming exceptions
+
+From version 3.21.0, `auto_capture_exceptions` also captures errors from `ActionController::Live` and ActionView streaming templates.
+
+## Action Cable exceptions
+
+From version 3.22.0, `auto_capture_exceptions` captures unhandled connection, channel lifecycle, and channel action errors. Reports include filtered channel parameters and action data. Review your application's and connection's `filter_parameters` for sensitive data.
+
+Use `current_user_method` and `user_id_method` to identify connection users. The controller-only `current_user_resolver` does not apply.
+
+Errors handled by `rescue_from` are not captured, even with `report_rescued_exceptions = true`.
+
+## Rails runner exceptions
+
+From version 3.24.0, `auto_capture_exceptions` reports terminating `rails runner` errors and nonzero exits as fatal exceptions. Successful exits and signals such as Ctrl-C or SIGTERM are not reported.
+
+Capture runs before SDK shutdown without changing the exit status. Forced termination and `exit!` cannot be captured.
+
+## Active Job context and retries
+
+From version 3.20.0, queued jobs also retain the request's PostHog session and distinct IDs. Job events and logs use these IDs unless a job identity extractor overrides the distinct ID.
+
+### Report retry failures
+
+From version 3.24.0, also enable `report_active_job_retries` to capture failed attempts that Active Job retries:
+
+```ruby file=config/initializers/posthog.rb
+PostHog::Rails.configure do |config|
+  config.auto_instrument_active_job = true
+  config.report_active_job_retries = true
+end
+```
+
+This defaults to `false` and requires `auto_instrument_active_job`. Retry reports use the job's identity and filtered arguments. Exception exclusions still apply, and retry scheduling does not change.
+
+### Associating jobs with users
+
+By default, PostHog extracts a `distinct_id` from job arguments by looking for a `user_id` key in hash arguments:
+
+```ruby
+# PostHog will automatically use options[:user_id] as the distinct_id
+ProcessOrderJob.perform_later(order.id, user_id: current_user.id)
+```
+
+For more control, use the `posthog_distinct_id` class method. The proc or block receives the same arguments as `perform`:
+
+```ruby
+class SendWelcomeEmailJob < ApplicationJob
+  posthog_distinct_id ->(user, _options) { user.id }
+
+  def perform(user, options = {})
+    UserMailer.welcome(user).deliver_now
+  end
+end
+```
+
+## Rails 7.0+ error reporter
+
+With `auto_capture_exceptions = true`, errors reported through `Rails.error` are sent to PostHog:
+
+```ruby
+Rails.error.report(exception, handled: true, context: { user_id: current_user.id })
+```
+
+PostHog automatically extracts the user's distinct ID from `user_id` or `distinct_id` in the context hash. Other context keys are included as properties on the exception event.
+
+## User context
+
+Controller exception reports use the authenticated user's ID before client-supplied tracing headers.
+
+If your user method has a different name, configure it:
+
+```ruby
+PostHog::Rails.config.current_user_method = :logged_in_user
+```
+
+For request-local authentication, set `current_user_resolver` instead. It takes precedence over `current_user_method`:
+
+```ruby
+PostHog::Rails.configure do |config|
+  config.current_user_resolver = -> { Current.user }
+end
+```
+
+The resolver can accept the controller as an argument.
+
+### User ID extraction
+
+PostHog checks `posthog_distinct_id`, `distinct_id`, `id`, `pk`, and `uuid`, in that order. Hash-like users can provide `id`, `pk`, or `uuid` keys.
+
+You can configure a specific method:
+
+```ruby
+PostHog::Rails.config.user_id_method = :email
+```
+
+## Excluded exceptions
+
+Automatic capture excludes the following exceptions by default:
+
+- `AbstractController::ActionNotFound`
+- `ActionController::BadRequest`
+- `ActionController::InvalidAuthenticityToken`
+- `ActionController::InvalidCrossOriginRequest`
+- `ActionController::MethodNotAllowed`
+- `ActionController::NotImplemented`
+- `ActionController::ParameterMissing`
+- `ActionController::RoutingError`
+- `ActionController::UnknownFormat`
+- `ActionController::UnknownHttpMethod`
+- `ActionDispatch::Http::MimeNegotiation::InvalidType`
+- `ActionDispatch::Http::Parameters::ParseError`
+- `ActiveRecord::RecordNotFound`
+- `ActiveRecord::RecordNotUnique`
+
+Add more with:
+
+```ruby
+PostHog::Rails.config.excluded_exceptions = ["MyException"]
+```
+
+## Trace and release correlation
+
+See [Rails trace context](/docs/libraries/ruby-on-rails#trace-context) to connect errors with application traces.
+
+Set `POSTHOG_RELEASE_ID` before client initialization to [link errors to a release](/docs/error-tracking/link-releases/ruby).

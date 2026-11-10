@@ -34,7 +34,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
   - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
 - Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook. Channels to join from day one: #team-customer-success (ask questions here by default), #group-cs-sales-support, #team-product-led-sales, #closed-won, #spike-detector, #customer-churn, and your local city/country channel. For #spike-detector, ask your team lead to add you and tag you as owner on your accounts.
-- Get your AI investigation setup running early - PostHog Desktop, Claude Code, and the MCPs. It quickly becomes a go-to for digging into accounts.
+- Get your AI investigation setup running early - PostHog Desktop, Claude Code, and the MCPs. It quickly becomes a go-to for digging into accounts. Clone [PostHog/posthog](https://github.com/PostHog/posthog) too, so Claude Code can read the code behind a customer's problem. Some tips can be found in the handbook [here](/handbook/engineering/developing-locally#cloning-the-repository).
 
 **How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:
 
@@ -112,6 +112,7 @@ This is the bar for end of month 1, and it's what your team lead is looking at d
 - Picked a [quarterly goal](/handbook/customer-success/how-we-work) with your team lead and know how you'll measure it
 - On track to consistently hit your retention targets
 - Actively influencing the way we work - you've suggested and made changes to our systems and processes that enable you and the team to do the job better
+- Picked and merged your first product PR: small, tied to a customer request or an outcome you want to move, and the owning team knows it's coming. See [shipping product changes](/handbook/customer-success/shipping-product-changes) for details. This is a goal, but not a requirement!
 - Think about customer health scores and add/change anything you learn here
 
 ## What to Avoid

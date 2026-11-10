@@ -329,6 +329,31 @@ If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tr
 
 See the [Fastify guide](/docs/libraries/fastify) for installation, request context, event capture, error handling, and shutdown.
 
+## Metrics
+
+> Requires `posthog-node` version >= 5.43.0.
+
+`posthog.metrics` records counters, gauges, and histograms with no OpenTelemetry dependency. See [Node.js metrics installation](/docs/metrics/installation/nodejs) for setup and [Query what you send](/docs/metrics/query-what-you-send) for how the data reads back. Pass options in the `metrics` client option:
+
+```ts
+const posthog = new PostHog('<ph_project_token>', {
+  host: '<ph_client_api_host>',
+  metrics: { serviceName: 'billing-worker', environment: 'production' },
+})
+```
+
+| Option | Default | Description |
+|---|---|---|
+| `serviceName` | `unknown_service` | Sent as the `service.name` resource attribute |
+| `serviceVersion` | – | Sent as `service.version` |
+| `environment` | – | Sent as `deployment.environment` |
+| `resourceAttributes` | – | Extra resource attributes attached to every batch. Takes precedence over the fields above |
+| `flushIntervalMs` | `10000` | How often the aggregated window is flushed |
+| `maxSeriesPerFlush` | `1000` | Maximum distinct series per window. Samples for series beyond the cap are dropped with one warning |
+| `beforeSend` | – | Edit or drop each sample before it's aggregated. Return `null` to drop it. Accepts a function or an array run left to right |
+
+`metrics.histogram()` also accepts a `bounds` option for the bucket boundaries (from `posthog-node` 5.63.0). The types `MetricsConfig` and `TracesConfig` come from `@posthog/core`, and `posthog-node` re-exports `MetricsConfig`.
+
 ## Distributed tracing
 
 > Requires `posthog-node` version >= 5.52.0.
