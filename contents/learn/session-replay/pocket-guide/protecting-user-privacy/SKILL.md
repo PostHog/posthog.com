@@ -42,7 +42,7 @@ Then find out what you're working with:
 Set the project to mask all text and all inputs, using whatever the SDK calls it.
 
 On web that means text masking applied broadly rather than per-element. On Android, iOS, React
-Native, and Flutter the SDK already masks text and images by default — confirm it hasn't been
+Native, and Flutter the SDK already masks text and images by default – confirm it hasn't been
 turned off rather than assuming.
 
 Stop here and confirm recordings still capture something useful before going further. A fully
