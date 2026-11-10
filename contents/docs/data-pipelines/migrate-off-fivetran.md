@@ -10,6 +10,13 @@ You enter your credentials. Everything else (connector settings, schemas, destin
 
 The agent only reads from Fivetran, so your Fivetran setup stays as it is. You can run both side by side and check the data before switching over.
 
+Prefer to watch how it works? Follow the instruction video below: 
+<video
+  src="https://res.cloudinary.com/dmukukwp6/video/upload/Fivetran_migration_f8ec08e19e.mp4"
+  controls
+  width="100%"
+></video>
+
 ## Before you start
 
 You need:
