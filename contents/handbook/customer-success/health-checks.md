@@ -19,7 +19,7 @@ left unchecked these things will lead to avoidable churn.
 [Group Analytics](/docs/product-analytics/group-analytics) can be a real value-add for B2B companies, allowing them to track
 analytics at the company or workspace level rather than an individual person.  They 
 do however need to [implement group tracking](/docs/product-analytics/group-analytics#set-up-group-analytics) in their PostHog SDK.  Customers who haven't 
-done this may end up paying for Group Analytics but not able to use it.
+done this may end up paying for Group Analytics but not being able to use it.
 
 You can [ask @PostHog in Slack](/docs/posthog-ai/surfaces/slack) or use the [PostHog MCP](/docs/model-context-protocol) to check who is paying for Group Analytics 
 but not using it.  
@@ -51,7 +51,7 @@ If a customer has Session replay enabled, log in as them and look at their sessi
 
 Outdated SDKs miss out on bug fixes, performance improvements, and new features. A customer using a three-year-old SDK will hit issues we've already solved, which can silently erode trust over time.
 
-Check SDK versions using the [SDK health check](/docs/health-checks/sdk-health) or in Metabase via the `Library version audit` table. At minimum, the SDK sending the bulk of their event volume shouldn't be more than 3 months behind the latest. Monthly updates are the best-practice habit to encourage. Some SDKs have breaking changes between versions, and if so, make sure you make the customer aware about the breaking change.
+Check SDK versions using the [SDK health check](/docs/health-checks/sdk-health) or in Metabase via the `Library version audit` table. At minimum, the SDK sending the bulk of their event volume shouldn't be more than 3 months behind the latest. Monthly updates are the best-practice habit to encourage. Some SDKs have breaking changes between versions, and if so, make sure you make the customer aware of the breaking change.
 
 A light nudge on this also doubles as a natural re-engagement touchpoint for customers you haven't spoken to in a while.
 
@@ -59,7 +59,7 @@ A light nudge on this also doubles as a natural re-engagement touchpoint for cus
 
 ### Calling identify too often
 
-A common pattern is for users to call `posthog.identify()` on every page, or in an endless loop.  Whilst this won't break their tracking (unless they use different distinct IDs in the identify call) they will end up with a drastically inflated event volume.  You can diagnose this by looking at their Metabase usage dashboard in the Key event volume visualization.  If either the volume of $identify or $set events is higher then 5% then something has likely gone wrong in the implementation.
+A common pattern is for users to call `posthog.identify()` on every page, or in an endless loop.  Whilst this won't break their tracking (unless they use different distinct IDs in the identify call) they will end up with a drastically inflated event volume.  You can diagnose this by looking at their Metabase usage dashboard in the Key event volume visualization.  If either the volume of $identify or $set events is higher than 5% then something has likely gone wrong in the implementation.
 
 You should get in touch and let them know that they only need to call `posthog.identify()` [once per session](/docs/product-analytics/identify#best-practices-when-using-identify).
 
@@ -90,11 +90,11 @@ ORDER BY groupidentify_event_count DESC
 
 ### Calling posthog.reset() before identifying the user
 
-`Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
+`posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked users may be created.  There is no easy way to proactively diagnose this; however, if a customer says that their tracking between web and app is off, this is a common culprit.
 
 We have guidance on when to call `posthog.reset()` in the [JavaScript Web SDK usage guide](/docs/libraries/js/usage#resetting-a-user).
 
-### Reverse Proxies 
+### Reverse proxies
 
 It is best practice for a customer to use PostHog's [Managed Reverse Proxy](/docs/advanced/proxy/managed-reverse-proxy) or to configure their own for events to be sent from their own domain. 
 
@@ -102,20 +102,20 @@ When using either PostHog's managed reverse proxy or deploying a [non-managed re
 
 ### Cookieless tracking
 
-If a customer mentions their user/event count seems to be missing a lot of data from their website, ask them if they have implemented cookie opt-in and to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initiatlize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
+If a customer mentions their user/event count seems to be missing a lot of data from their website, ask them if they have implemented cookie opt-in and to share the part of their code where PostHog is initialized. Some customers may not be aware that we have specific recommendations for how to initialize PostHog for [cookieless tracking](/tutorials/cookieless-tracking). 
 
 For example, if they implement PostHog on their website similar to as follows: 
 ```
-posthog.init(...,
+posthog.init('<ph_project_token>', {
     opt_out_capturing_by_default: true
-)
+})
 
 if (cookiePreference === 'accepted') {
     posthog.opt_in_capturing()
 }
 ```
 
-They will not be capturing anything for customers who visit their website and opt-out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). If the customer wants to move forward with implementing cookieless mode, ensure they go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**.
+They will not be capturing anything for customers who visit their website and opt out of cookies or ignore the cookie banner completely. We recommend instead they use the `cookieless_mode` parameter in their initializer as outlined in the [cookieless tracking tutorial](/tutorials/cookieless-tracking). If the customer wants to move forward with implementing cookieless mode, ensure they go to **Settings** > **Project** > **Web analytics**, turn on **Enable cookieless tracking**, and click **Save**.
 
 Cookieless mode can help them have more accurate tracking totals because when using cookieless tracking, the PostHog SDK will generate a privacy-preserving hash, calculated on our servers.
 
