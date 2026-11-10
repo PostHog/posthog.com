@@ -1,0 +1,43 @@
+diff --git a/node_modules/gatsby/dist/utils/page-data.js b/node_modules/gatsby/dist/utils/page-data.js
+index e5cfaa4..2acbfc1 100644
+--- a/node_modules/gatsby/dist/utils/page-data.js
++++ b/node_modules/gatsby/dist/utils/page-data.js
+@@ -96,15 +96,34 @@ async function savePageQueryResult(programDir, pagePath, stringifiedResult) {
+   }
+ }
+ 
++const TEMP_QUERY_RESULT_RETRY_DELAYS_MS = [100, 500, 2000];
++
+ async function readPageQueryResult(publicDir, pagePath) {
+   if ((0, _datastore.isLmdbStore)()) {
+-    const stringifiedResult = await getLMDBPageQueryResultsCache().get(pagePath);
++    const cache = getLMDBPageQueryResultsCache();
++
++    for (let attempt = 0;; attempt++) {
++      const stringifiedResult = await cache.get(pagePath);
++
++      if (typeof stringifiedResult === `string`) {
++        if (attempt > 0) {
++          _reporter.default.warn(`Temp query result for "${pagePath}" appeared after ${attempt} retries.`);
++        }
++
++        return stringifiedResult;
++      }
++
++      const retryDelay = TEMP_QUERY_RESULT_RETRY_DELAYS_MS[attempt];
++
++      if (retryDelay === undefined) {
++        break;
++      }
+ 
+-    if (typeof stringifiedResult === `string`) {
+-      return stringifiedResult;
++      cache.getDb().resetReadTxn();
++      await new Promise(resolve => setTimeout(resolve, retryDelay));
+     }
+ 
+-    throw new Error(`Couldn't find temp query result for "${pagePath}".`);
++    throw new Error(`Couldn't find temp query result for "${pagePath}" after ${TEMP_QUERY_RESULT_RETRY_DELAYS_MS.length} retries (${cache.getDb().getKeysCount()} temp results stored).`);
+   } else {
+     const pageQueryResultsPath = _path.default.join(publicDir, `..`, `.cache`, `json`, `${pagePath.replace(/\//g, `_`)}.json`);
+ 
