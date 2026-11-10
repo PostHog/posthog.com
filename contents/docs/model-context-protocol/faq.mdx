@@ -47,7 +47,7 @@ Yes, but add one MCP connection for each. A single connection signs in as one ac
 
 ### Can my organization manage MCP access centrally through our IdP?
 
-Yes. If you're on an enterprise plan, you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
+Yes. If your organization has the Scale or Enterprise [platform add-on](/platform-packages), you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
 
 ### Where is my data sent?
 
@@ -227,7 +227,7 @@ Available features:
 | ------------------------ | -------------------------------------------------------------------------------------- |
 | `workspace`              | Organization and project management                                                    |
 | `actions`                | [Action definitions](/docs/data/actions)                                               |
-| `activity_logs`          | Activity log viewing                                                                   |
+| `platform_features`      | Activity logs, comments, approvals, and organization and role details                  |
 | `alerts`                 | [Alert management](/docs/product-analytics/alerts)                                     |
 | `annotations`            | [Annotation management](/docs/data/annotations)                                        |
 | `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
@@ -244,15 +244,14 @@ Available features:
 | `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
 | `hog_functions`          | [CDP function management](/docs/data-pipelines)                                                   |
 | `hog_function_templates` | CDP function template browsing                                                         |
-| `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
-| `ai_observability`          | [AI observability evaluations](/docs/ai-observability)                                      |
-| `prompts`                | [LLM prompt management](/docs/prompt-management)                                          |
+| `insights`               | [Run insight queries](/docs/product-analytics/insights). Saved insights are in `product_analytics` |
+| `product_analytics`      | Saved insights and other product analytics tools                                       |
+| `llm_analytics`          | [AI observability](/docs/ai-observability), including evaluations and [prompts](/docs/prompt-management) |
 | `logs`                   | [Log querying](/docs/logs)                                     |
 | `notebooks`              | [Notebook management](/docs/notebooks)                                                 |
 | `persons`                | [Person and group management](/docs/data/persons)                                      |
 | `reverse_proxy`          | Reverse proxy record management                                                        |
-| `search`                 | Entity search across the project                                                       |
-| `sdk_doctor`             | [SDK health diagnostics](/docs/health-checks/sdk-health)                                             |
+| `health_issues`          | [Health checks](/docs/health-checks), including outdated SDKs                          |
 | `sql`                    | SQL query execution                                                                    |
 | `surveys`                | [Survey management](/docs/surveys)                                                     |
 | `workflows`              | [Workflow management](/docs/workflows)                                                 |

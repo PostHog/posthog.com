@@ -70,7 +70,7 @@ This guide covers the best open source analytics tools available today, from ful
 
 [PostHog](/) is an all-in-one platform that combines product analytics with several other developer-focused tools, such as [web analytics](/web-analytics), [AI observability](/ai-observability), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [surveys](/surveys), [logs](/logs), and more.
 
-What sets it apart from the other tools here is that all of that data lands in one place. PostHog's [data warehouse](/context-warehouse) stores everything it collects alongside data you sync in from Stripe, HubSpot, Salesforce, Postgres, and [dozens of other sources](/data-pipelines), with no pipelines to maintain, and it can query Snowflake, Redshift, and others in place. You then [query all of it with standard SQL](/docs/sql), joining a Stripe revenue column to a signup event for example, or ask [PostHog AI](/ai) to write the query for you. 
+What sets it apart from the other tools here is that all of that data lands in one place. PostHog's [data warehouse](/warehouse) stores everything it collects alongside data you sync in from Stripe, HubSpot, Salesforce, Postgres, and [dozens of other sources](/data-pipelines), with no pipelines to maintain, and it can query Snowflake, Redshift, and others in place. You then [query all of it with standard SQL](/docs/sql), joining a Stripe revenue column to a signup event for example, or ask [PostHog AI](/ai) to write the query for you. 
 
 The first million rows a month are free.
 
@@ -97,7 +97,7 @@ It's also the obvious pick if you're building an AI product: [AI observability](
 <details>
 <summary>What does it mean for PostHog to be your product's context layer?</summary>
 
-It means everything your product generates ends up in one queryable place. Events, sessions, replays, errors, LLM traces, flag states, and experiment results are stored together and share one model of users and sessions, and the built-in [data warehouse](/context-warehouse) adds business data synced from other sources alongside them.
+It means everything your product generates ends up in one queryable place. Events, sessions, replays, errors, LLM traces, flag states, and experiment results are stored together and share one model of users and sessions, and the built-in [data warehouse](/warehouse) adds business data synced from other sources alongside them.
 
 The practical result is that a question like "did users who hit this error last week churn, and what were they paying us?" is one SQL query instead of three tools and a spreadsheet. The same applies to agents: anything you connect through [the MCP](/mcp) gets the full picture of your product, not a slice of it.
 
@@ -756,7 +756,7 @@ For deeper product analytics beyond website traffic, **PostHog** is the stronges
 Most tools in this guide do one thing well. PostHog is built so that everything about your product ends up in one place you can query, and so that people and agents can act on it from there:
 
 - **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [error tracking](/error-tracking), [logs](/logs), and [AI observability](/ai-observability), sharing one model of your users and sessions
-- **One place for all your data:** A built-in [data warehouse](/context-warehouse) syncs Stripe, HubSpot, Salesforce, Postgres, and dozens of other sources next to your product data, and you can [query it all with SQL](/docs/sql)
+- **One place for all your data:** A built-in [data warehouse](/warehouse) syncs Stripe, HubSpot, Salesforce, Postgres, and dozens of other sources next to your product data, and you can [query it all with SQL](/docs/sql)
 - **Built for agents as much as people:** The [MCP](/mcp) and [Slack app](/slack) let Claude, Cursor, Codex, or a Slack thread query your project and make changes, and [self-driving](/self-driving) features flag what's worth fixing
 - **Open source:** MIT-licensed and [actively maintained](https://github.com/PostHog/posthog) in public
 - **Free to start:** Every product has a monthly free tier, and 97% of companies use PostHog for free

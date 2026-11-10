@@ -13,7 +13,7 @@ export default function AboutPostHog(): JSX.Element {
             <a href="/session-replay">session replay</a>, <a href="/feature-flags">feature flags</a>,{' '}
             <a href="/experiments">experiments</a>, <a href="/error-tracking">error tracking</a>,{' '}
             <a href="/logs">logs</a>, and more – PostHog ingests and stores all the data agents need to diagnose
-            problems, uncover opportunities, and ship fixes. A <a href="/context-warehouse">data warehouse</a> and{' '}
+            problems, uncover opportunities, and ship fixes. A <a href="/warehouse">data warehouse</a> and{' '}
             <a href="/data-pipelines">CDP</a> tie it all together, unifying that context into one source agents can read
             across. You can steer it all from <a href="/slack">Slack</a>, <a href="/ai">the web app</a>, the desktop (
             <a href="/desktop">PostHog Desktop</a>), or your own editor via <a href="/mcp">the MCP</a>.

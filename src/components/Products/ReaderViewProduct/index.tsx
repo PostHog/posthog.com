@@ -117,7 +117,7 @@ export default function ProductReaderView({
                 menuTabs={menuTabs}
                 productSelect={<ProductSwitcher activeHandle={productData.handle} surface={surface} />}
             >
-                <div ref={sectionsRef} className="flex flex-col gap-12">
+                <div ref={sectionsRef} className="flex flex-col gap-12 w-full max-w-7xl mx-auto">
                     {groupSurfaceMenu(surfaceMenu).map((group, groupIndex) => {
                         const renderedItems = group.items.map((item) => {
                             const Component = (item.component ?? templateRegistry[resolveTemplate(item)]) as

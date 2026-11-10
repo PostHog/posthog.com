@@ -12,7 +12,7 @@ import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import useProduct from 'hooks/useProduct'
 import { useApp } from '../../context/App'
 import { GetStarted } from 'components/Home/Test'
-import VolumeCard from 'components/PocketGuides/VolumeCard'
+import VolumeCard from 'components/Learn/PocketGuides/VolumeCard'
 import { useSelfDrivingTemplates } from 'components/SelfDrivingInbox'
 import { volumeById } from '../../constants/pocketGuides'
 import { CatalogLayers } from 'components/ContextWarehouseCatalog'
@@ -809,8 +809,8 @@ export default function SelfDrivingPage({
     return (
         <>
             <SEO
-                title="PostHog self-driving"
-                description="PostHog is the context warehouse and product toolkit that helps humans and AI agents understand, improve, and ship better products."
+                title="Self-driving – Proactive fixes from product data | PostHog"
+                description="PostHog proactively analyzes your events, errors, and session replays, spots what is hurting your product, and suggests targeted fixes before you ask."
                 image="/images/og/default.png"
             />
             <ReaderView
