@@ -1,0 +1,554 @@
+---
+title: The best feature flag software for developers, compared
+date: 2026-11-10
+rootPage: /compare
+sidebar: Compare
+showTitle: true
+hideAnchor: true
+author:
+    - natalia-amorim
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Group_144685_c2d6a4fb53.png
+featuredImageType: full
+ogImage: generated
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: 'What are the best feature flag tools? 7 dev tools compared'
+    metaDescription: 'Compare 7 of the best feature flag tools, including PostHog and LaunchDarkly, on free tiers, pricing, open source, self-hosting, A/B testing, and more.'
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+There's "ready" and then there's "ready for everyone"; if you've ever scrambled to revert a deploy, you know the difference.
+
+Maybe an edge case breaks on mobile, maybe the feature tanks conversion for a segment you didn't test, or maybe your new onboarding flow confuses more people than it helps. 
+
+[This is where feature flags come in](/blog/what-is-a-feature-flag): you ship the code when it's ready, and you control who sees it separately.
+
+This guide compares the best feature flag tools for developers – what they do well, where they fall short, and which one fits your workflow best.
+
+<details>
+<summary>Which feature flag tool is best? The short version</summary>
+
+If you want flags that come with the [analytics](/product-analytics), [replays](/session-replay), and [errors](/error-tracking) needed to judge a rollout, **[PostHog](/feature-flags)** is the only tool here that bundles all of it on one usage-based bill.
+
+**[LaunchDarkly](/compare/posthog-vs-launchdarkly)** is the enterprise standard and now includes observability too, at a price that scales with users. 
+
+**GrowthBook** and **Unleash** are the open-source picks: GrowthBook if you want experimentation on your warehouse, Unleash if you want plain flags you fully control. 
+
+**Flagsmith** is the flexible-deployment option, **Statsig** gives you unlimited flag checks and a serious stats engine (now under Amplitude), and **DevCycle** is the lightweight developer-workflow choice (now under Dynatrace).
+
+| Tool | Free tier | Paid pricing | Open source | Experimentation built in |
+|---|---|---|---|---|
+| **PostHog** | 1M flag requests a month, unlimited seats | Per request, no seats | Yes (MIT, open core) | Yes, with analytics, replay, and error tracking |
+| **LaunchDarkly** | 1k client MAU, unlimited seats and flags | Per client MAU and service connection | No | Yes |
+| **GrowthBook** | Cloud: 3 users; self-hosted: unlimited | $40 per seat | Yes (MIT, open core) | Yes, warehouse-native |
+| **Unleash** | Self-hosted: unlimited, 2 environments | $75 per seat | Yes (Apache-2.0) | No |
+| **Flagsmith** | 50k requests, 1 seat | From $40 a month | Yes (BSD-3) | Basic A/B tests |
+| **Statsig** | 2M events, unlimited flag checks | $150 a month, then per event | No | Yes |
+| **DevCycle** | 1k client MAU, unlimited seats | $500 a month for 100k MAU | No | Yes |
+ 
+</details>
+
+<details>
+<summary>What features do you need in your feature flag tool?</summary>
+
+At its core, a feature flag tool lets you [toggle features on or off](/product-engineers/decouple-deployment-from-release) for specific users, groups, or percentages of traffic without redeploying code. But the best tools are a lot more than flip switches.
+ 
+Most solid feature flag tools include:
+ 
+- Boolean and multivariate flag types
+- Percentage-based and targeted rollouts
+- Environment management (dev, staging, production)
+- SDKs for major languages and frameworks
+- A dashboard for everyone to manage flags
+
+Developer-focused tools often go further with:
+ 
+- **Local evaluation** so flag checks don't add latency or depend on network calls
+- **Built-in experimentation** to measure the impact of a flag, not just toggle it
+- **Analytics integration** so you can trace a conversion drop back to a specific flag variant
+- **Stale flag detection** to prevent feature flags from becoming permanent technical debt
+- **Audit logs and approval workflows** for governance in larger teams
+- **OpenFeature support** so you're not locked to one vendor's SDK
+- **Agent access** through an MCP server or CLI, so the coding agent that wrote the feature can also flag it
+
+And watch the pricing model. Per-seat pricing punishes you for giving everyone access; per-MAU pricing punishes you for growing; per-request pricing with local evaluation is the one that stays flat as your app does well.
+ 
+</details>
+
+## What's the best feature flag tool for developers?
+
+### 1. PostHog
+
+![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_11_at_09_54_29_2x_96f74a428a.png)
+
+PostHog is your product's context layer, and [feature flags](/feature-flags) are one of the things writing to it. They're woven into a broader workflow that includes [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more, all tied to the same users, so every error and replay already knows which flag variant the user was in.
+
+This means you can [roll out a feature to 10% of users](/docs/feature-flags/phased-rollout), [watch session replays of those users](/docs/session-replay/how-to-watch-recordings), check whether the flag variant increased conversion, [catch any errors it triggered](/docs/error-tracking/capture), and [get feedback about their experience](/docs/surveys/creating-surveys) – all without leaving the platform. It also powers PostHog's [experimentation](/experiments) features, so you can easily go from "ship it behind a flag" to "measure its impact with statistical significance".
+
+Your agents get the same access: the free [MCP server](/mcp) can create, update, and schedule flags, [PostHog AI](/ai) can tell you which ones have gone stale, and there are [OpenFeature](/docs/feature-flags/installation/openfeature-js) providers if you'd rather not couple your code to any vendor's SDK. 
+
+#### Key features
+
+- **Flag types:** Boolean and multivariate flags, JSON payloads for remote config, percentage rollouts, and user, group, and cohort targeting.
+
+- **Lifecycle:** [Scheduled changes](/docs/feature-flags/scheduled-flag-changes), [early access opt-ins](/docs/feature-flags/early-access-feature-management), approvals on Scale, and [stale flag detection](/docs/feature-flags/cleaning-up-stale-flags) for flags unused or fully rolled out for 30 days.
+
+- **Experiments:** Any flag becomes an [A/B test](/experiments) with Bayesian or frequentist stats, holdouts, and primary and secondary metrics.
+
+- **Context:** Every replay, error, event, and LLM trace carries the flag variant the user saw.
+
+#### How much does PostHog cost?
+
+The first [1 million flag requests a month are free](/feature-flags/pricing), then $0.0001 per request, falling with volume; there are no seat charges, and local evaluation only bills for the periodic poll of flag definitions. 
+
+You can set billing caps to prevent surprise charges, and eligible startups get $50k in free credits through the [PostHog for Startups program](/startups).
+
+#### How good are PostHog feature flags for developers?
+
+- **SDKs and evaluation:** iOS, Android, React Native, Flutter, Kotlin Multiplatform, Unity, and the major server languages, with [local evaluation](/docs/feature-flags/local-evaluation) for server-side checks and bootstrapping for first-paint flags on the web.
+- **Standards:** Official [OpenFeature](/docs/feature-flags/installation/openfeature-js) providers for web, Node, and Python.
+- **Agents:** The free [MCP server](/mcp) can create, update, delete, and schedule flags; [PostHog AI](/ai) creates flags from a sentence and finds stale ones; a [CLI](/docs/cli) and [VS Code extension](/docs/vscode-extension/flag-management) cover the terminal and editor.
+- **Environments:** [Projects with flag syncing](/docs/feature-flags/multi-project-feature-flags) rather than first-class environments.
+
+<CalloutBox icon="IconStarFilled" title="PostHog is best for..." type="fyi">
+
+Developers who want feature flags as part of a complete build-measure-learn workflow, startups that want to replace multiple tools with one platform, and teams whose agents ship code and need to flag it too. 
+
+</CalloutBox>
+
+<WizardCTA
+    command="feature-flags"
+    title="Add feature flags with one command"
+    subtitle="The wizard sets up example feature flags in your codebase, ready to roll out."
+    learnMoreTo="/docs/feature-flags/installation"
+/>
+
+### 2. LaunchDarkly
+
+![LaunchDarkly](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_09_T16_54_54_518_Z_a5d2bb524a.png)
+
+[LaunchDarkly](/compare/posthog-vs-launchdarkly) is the most established feature flag platform and the go-to choice for many organizations. It was built specifically for feature management at scale, and it shows in the depth of its targeting rules, governance features, and SDK support.
+
+[LaunchDarkly](/compare/best-launchdarkly-alternatives) has also grown well beyond flags: experimentation, release monitoring, runtime control for AI features, and, since acquiring Highlight in 2025, session replay, errors, logs, and traces. What it still doesn't have is product analytics, so funnels, retention, and paths need another tool. The other trade-off is cost once you're past the free plan, since paid pricing scales with your client-side users.
+
+#### Key features
+
+- **Targeting and governance:** Multi-dimensional targeting, segments, approval workflows, and audit logs (approvals and audit on Enterprise).
+- **Release safety:** Guarded rollouts that pause or roll back on metric regressions; the full Guardian package is an Enterprise add-on.
+- **Experimentation:** On every plan, with usage-based experimentation MAU.
+- **Observability:** Session replay, errors, logs, and traces included since the Highlight acquisition.
+- **AgentControl:** Runtime control of prompts, models, and agents, with online and offline evals.
+
+#### How much does LaunchDarkly cost?
+
+The Developer plan is free forever: unlimited seats and flags, 1,000 client-side MAU a month, 5 service connections, 5,000 replays and errors, and 5,000 AI runs. Foundation is pay-as-you-go with no platform fee, at $10 per service connection and roughly $8–10 per 1,000 client-side MAU a month. Enterprise is custom and is where approvals, audit logs, scheduling, and Guardian live.
+
+#### How good are LaunchDarkly feature flags for developers?
+
+- **SDKs and evaluation:** Multiple native SDKs across client, server, edge, and AI, with streaming updates by default and local evaluation on server SDKs.
+- **Standards:** Official OpenFeature providers.
+- **Environments:** First-class projects and environments on every plan (Developer gets one project with three environments).
+- **Agents:** AgentControl is about controlling your agents in production rather than letting them manage flags.
+
+<CalloutBox icon="IconStarFilled" title="LaunchDarkly is best for" type="fyi">
+
+Large engineering teams that need enterprise-grade feature management with deep governance, compliance, and the broadest possible SDK support.
+
+</CalloutBox>
+
+<WizardCTA
+    command="migrate"
+    title="Switching from another flag tool? Migrate in one command"
+    subtitle="The wizard moves your existing flags and analytics into PostHog for you."
+    learnMoreTo="/docs/migrate/launchdarkly"
+/>
+
+### 3. GrowthBook
+
+![GrowthBook](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_09_T17_08_40_989_Z_7b265c5d2c.png)
+
+[GrowthBook](/compare/posthog-vs-growthbook) is an open-source platform built around the idea that every feature release should be measurable. It combines feature flags with a powerful experimentation engine that connects directly to your data warehouse, making it a strong pick for data-savvy teams.
+
+Any flag can become an A/B test analyzed on your own warehouse data, without exporting anything or wiring up a separate tool, and in the last year it has added product analytics and agent support on top.
+
+#### Key features
+
+- **Flags:** Targeting rules, percentage rollouts, prerequisite flags, JSON payloads, and safe rollouts on Pro.
+- **Experimentation:** Warehouse-native: metrics defined in SQL, Bayesian and frequentist engines, with CUPED, sequential testing, and bandits on Pro.
+- **Product analytics:** Dashboards and SQL exploration over the same warehouse data, added in late 2025.
+- **Governance:** Basic roles on Pro; approvals, SSO, SCIM, custom environments, and audit export on Enterprise.
+
+#### How much does GrowthBook cost?
+
+[GrowthBook](/compare/best-growthbook-alternatives) is free to self-host with no limits on users, flags, or traffic. The cloud Starter plan is free for up to 3 users; Pro is $40 per seat a month and adds CUPED, sequential testing, multi-armed bandits, safe rollouts, and basic roles; Enterprise adds approvals, SSO and SCIM, custom environments, and audit log export.
+
+#### How good are GrowthBook feature flags for developers?
+
+- **SDKs and evaluation:** Lightweight SDKs for the major languages with local evaluation and edge remote evaluation.
+- **Standards:** Official OpenFeature provider.
+- **Agents:** GrowthBook 5.0 ships open-source agent skills and an in-app AI assistant, plus an AI visual editor for web experiments.
+- **Data:** Your warehouse is the source of truth; nothing leaves it for analysis.
+
+<CalloutBox icon="IconStarFilled" title="GrowthBook is best for" type="fyi">
+
+Data teams and engineers who want experimentation built into their feature release workflow, with full control over their data.
+
+</CalloutBox>
+
+### 4. Unleash
+
+![Unleash](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_08_10_906_Z_d2c3735ab7.png)
+
+Unleash is an [open-source feature flag platform](/compare/best-open-source-feature-flag-tools) designed for teams that need full control over their infrastructure. It's used in production by large orgs, including Visa, where data sovereignty and compliance aren't optional.
+
+It focuses on doing feature flags well without trying to be an analytics or experimentation platform. The open-source edition is a real product rather than a trial, and teams usually move to a paid plan when they need more environments and governance.
+
+#### Key features
+
+- **Flags:** Progressive rollouts, kill switches, custom activation strategies, and constraints and segments for targeting.
+- **Environments:** Two environments and one project on open source; unlimited on paid plans.
+- **Governance:** Change requests, custom project roles, SSO, SCIM, and a two-year audit log on paid plans.
+- **Architecture:** Node.js and PostgreSQL, deployable with Docker or Kubernetes; Unleash Edge for low-latency, resilient evaluation at scale.
+- **Scope:** Flags only by design; no analytics or experimentation.
+
+#### How much does Unleash cost?
+
+Open source is free to self-host. Pay-as-you-go is $75 per seat a month, cloud or self-hosted (five-seat minimum self-hosted), with 53M requests included; Enterprise is custom and adds a hosted private instance, multi-region edge, and access logs.
+
+#### How good are Unleash feature flags for developers?
+
+- **SDKs and evaluation:** Official server SDKs (Node, Java, Go, Python, .NET, Ruby, PHP, Rust) and client SDKs (JavaScript, React, Vue, Svelte, Next.js, React Native, Android, iOS, Flutter), with server-side local evaluation.
+- **Standards:** Unleash-maintained OpenFeature providers for Node, PHP, Python, Ruby, Rust, Swift, and Android.
+- **Data control:** Self-host the whole thing; nothing about your users has to leave your infrastructure.
+- **Agents:** No MCP server documented.
+
+<CalloutBox icon="IconStarFilled" title="Unleash is best for" type="fyi">
+
+Engineering teams in regulated industries that need self-hosted feature flags with enterprise-grade security, audit trails, and full data control.
+
+</CalloutBox>
+
+### 5. Flagsmith
+
+![Flagsmith](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_09_52_621_Z_86c1ee217a.png)
+
+[Flagsmith](/compare/best-flagsmith-alternatives) is an [open-source feature flag](/compare/best-open-source-feature-flag-tools) and remote configuration platform that gives teams flexibility in how they deploy. You can run it as SaaS, on a private cloud, or fully on-premises – a rare combination that makes it a strong fit for security-conscious organizations.
+
+It isn't trying to be a product analytics suite: it can split traffic for A/B tests, but for funnels, retention, or replay-led debugging you'll pair it with your existing analytics stack. It's also one of the few tools on this list still independently owned.
+
+#### Key features
+
+- **Flags and config:** Boolean and multivariate flags, segments, percentage rollouts, scheduled flags, and remote configuration values alongside each flag.
+- **Experimentation:** A/B and multivariate splits on Start-Up and above, measured in your own analytics tool.
+- **Deployment:** SaaS, private cloud, or fully on-prem including air-gapped, from an open-source (BSD-3) core.
+- **Governance:** SAML, RBAC, change requests, and audit logs on Scale-Up; unlimited audit history and Okta, ADFS, and LDAP on Enterprise.
+
+#### How good are Flagsmith feature flags for developers?
+
+- **SDKs and evaluation:** SDKs for the major client and server languages, with local evaluation on server SDKs and an Edge API replicated across eight AWS regions for low-latency delivery.
+- **Standards:** Official OpenFeature provider.
+- **Environments:** First-class projects and environments on every plan.
+- **Agents:** No MCP server documented.
+
+<CalloutBox icon="IconStarFilled" title="Flagsmith is best for" type="fyi">
+
+Security-conscious teams that need deployment flexibility and remote configuration, with the option to self-host on their own infrastructure.
+
+</CalloutBox>
+
+### 6. Statsig
+
+![Statsig](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_10_58_425_Z_edf21cb1a8.png)
+
+[Statsig](/compare/posthog-vs-statsig) was built by ex-Facebook engineers who wanted to bring Meta's internal experimentation infrastructure to every team. The result is a platform that combines feature flags, experimentation, analytics, and session replay in one unified system. OpenAI acquired it in September 2025, and since May 2026 [Amplitude](/compare/posthog-vs-amplitude) has run the brand, product, and customers; it's still sold standalone, with the founding team now at OpenAI.
+
+#### Key features
+
+- **Flags and config:** Feature gates, dynamic configs, and layers, with unlimited checks on every tier.
+- **Experimentation:** Every gate becomes an experiment with automatic metric tracking, CUPED, sequential testing, and holdouts.
+- **Analytics and replay:** Product analytics, funnels, and session replay (50,000 a month free) in the same platform.
+- **Deployment:** Cloud, or warehouse-native on Enterprise for teams that want data to stay put.
+
+#### How much does Statsig cost?
+
+Flag and config checks are unlimited on every tier. The Developer plan is free with 2M events and 50,000 session replays a month; Pro is $150 a month for 5M events (then $0.05 per thousand) and 100,000 replays; Enterprise is custom and is where the warehouse-native deployment lives. In practice you can run a lot of flags without paying for every check; costs scale with how much you measure and replay.
+
+#### How good are Statsig feature flags for developers?
+
+- **SDKs and evaluation:** 30+ client and server SDKs with local evaluation and edge support.
+- **Standards:** Community OpenFeature providers only; no official one.
+- **Environments:** First-class environments on every plan.
+- **Agents:** No MCP server documented.
+
+<CalloutBox icon="IconStarFilled" title="Statsig is best for" type="fyi">
+
+Product and engineering teams that want to run high-velocity experiments as part of every feature release, with advanced statistical methods built in.
+
+</CalloutBox>
+
+### 7. DevCycle
+
+![DevCycle](https://res.cloudinary.com/dmukukwp6/image/upload/pasted_image_2026_02_10_T16_12_28_211_Z_ba266982d4.png)
+
+DevCycle is a feature flag platform that prioritizes speed, simplicity, and tight integration with existing development workflows. It's designed for teams that want to manage flags the same way they manage code. Dynatrace acquired it in January 2026; it's still sold standalone, with the functionality due to fold into Dynatrace over time.
+ 
+What sets it apart is how much of the flag lifecycle happens where developers already work: flags show up in pull requests, link to Jira tickets, and can be managed from the CLI or VS Code.
+
+#### Key features
+ 
+- **Flags:** Boolean and multivariate flags, percentage rollouts, user targeting, and unlimited environments and projects on every plan.
+- **Workflow:** Flags surface in pull requests on GitHub and GitLab, link to Jira tickets, and can be managed from the CLI and VS Code.
+- **Hygiene:** Code references and stale flag detection (Business plan) so flags get removed, not forgotten.
+- **Experimentation:** A/B testing included in the free plan.
+
+#### How much does DevCycle cost?
+ 
+The Free plan covers 1,000 client-side MAU a month with unlimited seats, flags, environments, and projects, and includes the MCP server and A/B testing. Business is $500 a month billed yearly for 100,000 MAU (then $2.50 per thousand) and adds stale flag detection, audit logs, and RBAC; Enterprise adds approvals, SSO, and SCIM.
+
+#### How good are DevCycle feature flags for developers?
+ 
+- **SDKs and evaluation:** Client and server SDKs with local bucketing (WASM) on the server and edge evaluation on Cloudflare Workers.
+- **Standards:** Native OpenFeature providers across client and server SDKs.
+- **Environments:** Unlimited environments and projects on every plan, including free.
+- **Agents:** MCP server included on the free plan, plus a CLI for scripting flag changes.
+
+<CalloutBox icon="IconStarFilled" title="DevCycle is best for" type="fyi">
+
+Engineering teams that want a fast, lightweight feature flag tool that fits into Git-based workflows without the overhead of a full platform, and are comfortable that its roadmap now runs through Dynatrace.
+
+</CalloutBox>
+
+<details>
+<summary>Honorable mentions</summary>
+
+- **ConfigCat:** A privacy-first feature flag service with fixed, predictable pricing: the free plan covers 5M config downloads a month and 10 flags, and Pro is $95 a month billed yearly for 25M downloads, with every feature on every plan. All evaluations happen locally via SDKs pulling from a global CDN, and no end-user data reaches ConfigCat, which simplifies GDPR compliance. The trade-off is no results analysis: you can do percentage rollouts and A/B splits, but you measure them in your own analytics tool.
+
+- **Harness:** Harness acquired **Split** in 2024 and the product is now Harness Feature Management & Experimentation (FME), with flags going through the same governance and verification workflows as code changes. Harness's older Feature Flags product is being retired in favour of FME, with free users migrating by the end of 2026. Best for enterprise DevOps teams already on Harness.
+
+- **Datadog Feature Flags:** Launched in 2026 on OpenFeature, with 1M flag configuration requests a month free and flags that show up next to your [Datadog](/compare/posthog-vs-datadog) traces and errors. Datadog also acquired **Eppo** in 2025, now sold as Datadog Experiments. Best for teams already standardised on Datadog.
+
+- **Vercel Flags:** Vercel's open-source Flags SDK lets you define flags as code in Next.js and SvelteKit and plug in any provider (it has adapters for LaunchDarkly, Statsig, ConfigCat, DevCycle, and OpenFeature). In 2026 Vercel added a hosted provider of its own, free for 10,000 requests a month on Hobby and $0.03 per thousand on Pro. Best for Next.js teams who want flags to live in the repo.
+
+- **Reflag:** Formerly Bucket, renamed in 2025. TypeScript-first flags for SaaS products with adoption metrics and user feedback attached to each feature, a free plan up to 1,000 monthly tracked users, and CLI and MCP access. Best for small B2B teams.
+
+</details>
+
+## Which feature flag tool should you choose?
+
+- Want flags your agents can create and roll out (either via the UI or [through the MCP](/mcp)), with the replays, analytics, and errors to judge every release, and no per-seat pricing? **[PostHog](/feature-flags)**
+- Need enterprise-grade governance, compliance, and the widest SDK coverage? **LaunchDarkly**
+- Want open-source flags with a warehouse-native experimentation engine? **GrowthBook**
+- Need self-hosted flags with full data sovereignty for regulated industries? **Unleash**
+- Want deployment flexibility with remote config and an open-source core? **Flagsmith**
+- Need advanced experimentation with free unlimited flag checks, and don't mind that it's now part of Amplitude? **Statsig**
+- Prefer a lightweight, developer-first tool with Git-based workflows, now part of Dynatrace? **DevCycle**
+
+### Recommendations by team type
+
+#### For high-growth startups
+
+- **PostHog** for per-request pricing with no seats, 1M free flag requests a month, $50k in startup credits, and a single platform that replaces multiple SaaS tools
+- **GrowthBook** if your team wants open-source experimentation connected to your warehouse
+- **LaunchDarkly** if you want its free Developer plan now and room to grow into enterprise governance later
+
+#### For enterprise and large engineering teams
+
+- **LaunchDarkly** for the most sophisticated targeting, governance, and compliance features
+- **Unleash** if you need self-hosted flags with change requests, custom roles, and full audit trails
+- **Statsig** for high-velocity experimentation at scale without paying per flag check, now under Amplitude
+
+#### For developers and engineering-heavy teams
+
+- **PostHog** if you want to flag a feature from your editor, roll it out from the terminal, and see its errors, replays, and conversion impact without opening another tool
+- **DevCycle** if you want something lightweight that puts flags in your pull requests and Jira tickets
+- **GrowthBook** if you want to self-host and measure every release with experiments
+
+#### For teams in regulated industries
+
+- **Unleash** for full self-hosting and data sovereignty, with nothing leaving your infrastructure
+- **Flagsmith** for flexible deployment, including private cloud and air-gapped on-prem, with strong governance
+- **LaunchDarkly** if you need SOC 2, HIPAA, or FedRAMP Moderate compliance from a managed platform
+
+#### For teams shipping with AI agents
+
+- **PostHog** if you want the agent that wrote the feature to create the flag, roll it out, and read the results through one MCP server
+- **LaunchDarkly** if you're also controlling prompts and models at runtime with AgentControl
+- **DevCycle** for a lightweight MCP server on the free plan
+- **GrowthBook** if you want open-source agent skills that work with your own warehouse
+
+## Is PostHog right for you?
+
+Here's the (short) sales pitch.
+
+We're biased, obviously, but PostHog is the best choice for feature flags if:
+
+- You want flags connected to your entire suite of data tools, so you can roll out features safely and see exactly how they impact user behavior
+- You value open source and transparent, per-request pricing with no seats
+- You want your agents to manage flags through the MCP, Slack, or CLI, with the same context you have
+- You want to try before you buy with 1 million feature flag requests free every month
+
+It's completely free to get started – no credit card required. Our [setup wizard](/wizard) handles configuration in minutes, or you can check out our [docs](/docs/feature-flags/start-here) to do it yourself.
+
+<WizardCTA
+    command="feature-flags"
+    title="Add feature flags with one command"
+    subtitle="The wizard sets up example feature flags in your codebase, ready to roll out."
+    learnMoreTo="/docs/feature-flags/installation"
+/>
+
+## Frequently asked questions
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+In PostHog, [feature flags](/feature-flags), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), and [AI observability](/ai-observability) all write to the same database with one model of users and sessions, so every event, replay, and exception already carries the flag variant the user was in.
+ 
+The [data warehouse](/context-warehouse) and [CDP](/cdp) extend that to your Stripe, HubSpot, and Postgres data, so you can roll out to paying customers specifically and check what it did to revenue. And an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees all of it, which is what lets it ship a flag, watch the rollout, and roll back without you copying anything between tools.
+ 
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with context. A full suite of developer tools – [AI Observability](/ai-observability), [Product Analytics](/product-analytics), [Session Replay](/session-replay), [Feature Flags](/feature-flags), [Experiments](/experiments), [Error Tracking](/error-tracking), [Logs](/logs), and more – captures everything happening in your product, and a [Context Warehouse](/blog/what-is-a-context-warehouse) unifies it into one source agents can read across.
+
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+  <summary>Can my AI agent create and manage feature flags?</summary>
+  
+Yes, if the tool has an MCP server. **PostHog**'s free [MCP server](/mcp) exposes tools to create, update, delete, and schedule flags, and [PostHog AI](/ai) can create flags from a sentence and tell you which ones have gone stale, so the agent that shipped the feature can wrap it in a flag, roll it out, and check the replays and errors of the users who got it, all through one connection. **DevCycle** includes an MCP server on its free plan, **Reflag** ships CLI and MCP access, and **LaunchDarkly**'s AgentControl is aimed at the other direction, controlling what your agents do at runtime.
+ 
+</details>
+
+<details>
+  <summary>What are feature flags, and why should developers use them?</summary>
+
+**[Feature flags](/blog/what-is-a-feature-flag)** (also called feature toggles) let you control which users see a feature without redeploying code. They're used for progressive rollouts, A/B testing, kill switches, and [trunk-based development](/product-engineers/trunk-based-development). Instead of maintaining long-lived feature branches, you merge code behind a flag and control its visibility separately.
+
+</details>
+
+<details>
+  <summary>What's the best feature flag tool for developers?</summary>
+
+For most developers, **PostHog**. It's the only platform here where every flag comes with the analytics, session replays, and errors to judge the rollout. It's open source with local evaluation and OpenFeature providers, your agents can manage flags through the [MCP server](/mcp), and pricing is per request with no seats and 1M requests free every month.
+
+Your pick might change if one of these needs outweigh the rest:
+
+- **Deepest governance and compliance:** **LaunchDarkly**, with approvals, audit logs, and FedRAMP Moderate authorization on Enterprise
+- **Experimentation on your own warehouse:** **GrowthBook**, open source and free to self-host
+- **Plain flags you fully control:** **Unleash**, open source (Apache-2.0) and self-hosted
+- **Advanced stats with unlimited flag checks:** **Statsig**, now part of Amplitude
+
+</details>
+
+<details>
+  <summary>What's the difference between PostHog and LaunchDarkly?</summary>
+
+**LaunchDarkly** is a dedicated feature management platform built for enterprise-scale flag operations. It has the most sophisticated targeting rules, governance workflows, and SDK coverage, but doesn't include analytics, session replay, or error tracking.
+
+**PostHog** takes a different approach by embedding feature flags into an all-in-one developer platform. You can roll out a flag, watch session replays of affected users, check analytics for impact, and catch errors – all without switching tools. It's more affordable for most teams but doesn't match LaunchDarkly's depth in pure feature management.
+
+Choose **LaunchDarkly** if feature flag governance is your primary concern. Choose **PostHog** if you want flags as part of a broader build-measure-learn workflow. [Learn more about the differences in our PostHog vs LaunchDarkly comparison guide](/compare/posthog-vs-launchdarkly). 
+
+</details>
+
+<details>
+  <summary>What are the best LaunchDarkly alternatives?</summary>
+
+The [best LaunchDarkly alternatives](/compare/best-launchdarkly-alternatives) depend on what you're optimizing for:
+
+- **[PostHog](/feature-flags)** if you want feature flags bundled with [a broad suite of developer tools](/products), so you can measure the impact of every rollout without switching tools.
+- **[GrowthBook](/compare/best-growthbook-alternatives)** if you want an open-source, warehouse-native alternative with strong experimentation.
+- **[Statsig](/compare/best-statsig-alternatives)** if you want advanced experimentation with free unlimited flags and built-in analytics.
+- **[Flagsmith](/compare/best-flagsmith-alternatives)** if you need flexible deployment options (SaaS, private cloud, on-prem) with an open-source core.
+- **Unleash** if you need full self-hosting and data sovereignty for regulated industries.
+- **DevCycle** if you want a lightweight, Git-based developer workflow.
+
+For a full breakdown, see our guide to the [best LaunchDarkly alternatives and competitors](/compare/best-launchdarkly-alternatives).
+
+</details>
+
+<details>
+  <summary>Are there open-source feature flag tools?</summary>
+
+Yes. **PostHog** (MIT, open core), **GrowthBook** (MIT, open core), **Unleash** (Apache-2.0), and **Flagsmith** (BSD-3) all have open-source editions. GrowthBook and Unleash are commonly self-hosted by teams that want maximum control over data and infrastructure. Keep in mind that open-source editions can differ from paid plans in governance features like multi-environment management, RBAC, and approvals: Unleash's, for example, gives you one project with two environments. See our guide to the [best open-source feature flag tools](/compare/best-open-source-feature-flag-tools) for the full comparison.
+
+</details>
+
+<details>
+  <summary>Can feature flags cause technical debt?</summary>
+
+Yes. Feature flags that are never cleaned up become "stale flags" – dead code paths that add complexity and make the codebase harder to maintain. Good feature flag hygiene includes setting expiry dates, using stale flag detection, and treating flag removal as part of the feature lifecycle.
+
+</details>
+
+<details>
+  <summary>Which is the cheapest feature flag tool?</summary>
+
+**Statsig** offers unlimited free feature flags at every pricing tier and includes 2M events per month. **PostHog** includes 1 million free feature flag requests per month with transparent usage-based pricing. **GrowthBook** and **Unleash** are both free to self-host with no usage limits.
+
+</details>
+
+<details>
+  <summary>Which feature flag tool integrates best with analytics?</summary>
+
+**PostHog** has the tightest integration since analytics, session replay, and feature flags are all built into the same platform. **Statsig** also includes built-in analytics and experimentation. For tools without native analytics – like **Unleash** and **Flagsmith** – you'll need to integrate with external analytics platforms.
+
+</details>
+
+<details>
+  <summary>Which feature flag tool is best for mobile apps?</summary>
+
+**PostHog** supports iOS, Android, React Native, and Flutter with native SDKs. **LaunchDarkly** has the broadest SDK coverage across platforms, and **Flagsmith** focuses heavily on low-latency delivery via its Edge API, which can be helpful for global mobile performance.
+
+</details>
+
+<details>
+  <summary>Do I need a feature flag tool, or can I build my own?</summary>
+
+You can [build a basic flag system](/blog/build-or-buy-feature-flags) with config files or a database table. But as your needs grow – targeting rules, percentage rollouts, multi-environment support, audit logs, experimentation – the engineering cost of maintaining a homegrown system adds up fast. Most teams find it's [worth adopting a purpose-built feature flag tool](/blog/feature-flags-as-a-service) once they have more than a handful of flags.
+
+</details>
+
+<details>
+  <summary>How is PostHog different from other feature flag tools?</summary>
+
+**PostHog** is more than a feature flag tool. It gives developers full context by combining all the tools needed to build a successful product in one platform.
+
+- **All-in-one toolkit:** [Product analytics](/product-analytics), [web analytics](/web-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [surveys](/surveys), [AI observability](/ai-observability), [logs](/logs), and [error tracking](/error-tracking)
+- **Agent-ready:** A free [MCP server](/mcp) that can create, update, and schedule flags, a [Slack app](/slack), a [CLI](/docs/cli), and OpenFeature providers
+- **Developer-first:** Transparent APIs, [SQL query builder](/docs/data-warehouse/sql), [docs](/docs) that let you self-serve, open source, and a [public roadmap](/roadmap)
+- **Transparent pricing:** Generous free tiers and [usage-based billing](/pricing)
+- **Trusted by teams:** Used by [Supabase, Lovable, ElevenLabs, ResearchGate](/customers), and more
+
+</details>
+
+<details>
+  <summary>What are the best feature flag tools in 2026?</summary>
+
+Based on our research, the best feature flag tools for developers right now are:
+
+1. **[PostHog](/feature-flags)** – Best all-in-one platform with flags, analytics, experiments, and error tracking
+2. **LaunchDarkly** – Best for enterprise governance, compliance, and SDK coverage
+3. **GrowthBook** – Best open-source option with warehouse-native experimentation
+4. **Unleash** – Best for self-hosted flags with full data sovereignty
+5. **Flagsmith** – Best for flexible deployment (SaaS, private cloud, on-prem)
+6. **Statsig** – Best for advanced experimentation with free unlimited flags
+7. **DevCycle** – Best for lightweight, Git-based developer workflows
+
+For a deeper look at open-source options specifically, see our guide to the [best open-source feature flag tools](/compare/best-open-source-feature-flag-tools).
+
+</details>
+
+<NewsletterForm />
