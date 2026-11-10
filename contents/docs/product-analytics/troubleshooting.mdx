@@ -208,7 +208,7 @@ The SDK also reports this as an [ingestion warning](/docs/data/ingestion-warning
 
 The best fix is usually to capture less often, such as at video milestones instead of on every `timeupdate`, or by sending one summary event when an interaction ends.
 
-If your event volume is expected, raise the limit with [`rate_limiting`](/docs/libraries/js/config). Events that were previously dropped are then sent, so your event volume and bill can go up.
+If your event volume is expected, you can raise the limit with [`rate_limiting`](/docs/libraries/js/config). This only affects future events. Events already dropped cannot be recovered. A higher limit may mean more events are sent, which can increase your bill.
 
 ```js
 posthog.init('<ph_project_token>', {
