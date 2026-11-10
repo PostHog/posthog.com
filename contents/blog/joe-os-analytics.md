@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/mcp_analytics_fe722d85af.jpg
 featuredImageType: full
+ogImage: generated
 category: Inside PostHog
 tags:
   - AI

@@ -200,7 +200,7 @@ You can also draw inspiration from the [Customer Success team's tactics](https:/
 
 Use Customer Analytics and [Metabase](https://posthog.com/handbook/onboarding/metabase-account-analysis) to understand the customer’s current setup. For easier access, you can pin the "Engagement Metric Dashboard" custom trait in Customer Analytics, where you can take a closer look at power users in the organization, the usage of AI or error tracking, and more. 
 
-You can supplement Metabase analysis with the [HogSpy extension](https://github.com/PostHog/hogspy/releases/tag/v1.0.0) to audit the implementation of identify, flags, and experiments.
+You can supplement Metabase analysis with the <PrivateLink url="https://github.com/PostHog/hogspy/releases/tag/v1.0.0">HogSpy extension</PrivateLink> to audit the implementation of identify, flags, and experiments.
 
 Then zoom out to learn about their business, their product, and the rest of their stack. The better your context, the faster you’ll get to relevant recommendations.
 
@@ -306,7 +306,7 @@ The goal is to make the information accessible to a wider audience within the cu
 - Send it the same day. Use the momentum!
 - Include the public Gong recording link.
 - Loop in everybody. If some folks couldn’t attend, include them anyway so they can catch up async.
-- Summarize the call and send resources. Include some extra resources if you feel it would be beneficial as well. For example, our [YouTube playlist](https://www.youtube.com/playlist?list=PLnOY1RYHjDfzBX5wsSUHwLj91xuGnH5Ci%C2%A0) is great!
+- Summarize the call and send resources. Include some extra resources if you feel it would be beneficial as well. For example, our [YouTube playlist](https://www.youtube.com/playlist?list=PLnOY1RYHjDfzSAKPTLjOz_sQKx8hxlwi3) is great!
 - If relevant, give them one quick win. Encourage a small task they can do immediately after the call to lock in value and reinforce learning.
 - If you feel you have built a strong relationship, use your champion to introduce you to other teams that might be interested in PostHog and might be willing to jump on the call to be shown around.
 - Leverage the good relationship you've just established, and ask for direct feedback on the onboarding experience. Link to [our survey](https://us.posthog.com/external_surveys/019c523d-0d90-0000-65ba-4b976e24c83e) in your email/notebook.

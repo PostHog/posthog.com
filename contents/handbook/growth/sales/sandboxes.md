@@ -186,4 +186,4 @@ For prospect sandboxes, create the project in an org the prospect can be invited
 
 ## Getting help
 
-DemoHog is maintained as an internal tool. Code lives in the [demohog repo](https://github.com/PostHog/demohog). 
+DemoHog is maintained as an internal tool. Code lives in the <PrivateLink url="https://github.com/PostHog/demohog">demohog repo</PrivateLink>.

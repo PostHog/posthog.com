@@ -30,7 +30,6 @@ import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
-import SourceReleaseCallout, { hasReleaseCallout } from 'components/Docs/SourceReleaseCallout'
 import AIObservabilityWizardHint from 'components/AIObservabilityWizardHint'
 import Tooltip from 'components/Tooltip'
 import NewsletterForm from 'components/NewsletterForm'
@@ -54,7 +53,7 @@ const DestinationsLibraryCallout = () => {
             <p className="m-0 !mb-3 !mt-1.5">
                 We're building new destinations and want your input on what to build next.
             </p>
-            <CallToAction to="/cdp#library" size="sm">
+            <CallToAction to="/docs/data-pipelines" size="sm">
                 Browse the library
             </CallToAction>
         </div>
@@ -129,7 +128,7 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                         <p className="text-sm m-0 mb-3 mt-1.5">
                             We're building more destinations and prioritzing them based on your feedback.
                         </p>
-                        <CallToAction size="sm" to="/cdp#library">
+                        <CallToAction size="sm" to="/docs/data-pipelines">
                             Browse the library
                         </CallToAction>
                     </div>
@@ -355,7 +354,6 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
     } = post
 
     const sourceFields = postHogSource?.sourceFields ?? null
-    const sourceReleaseStatus = postHogSource?.releaseStatus ?? null
     const sourceTables = postHogSource?.tables ?? null
     const posthog = usePostHog()
     const { pathname } = useLocation()
@@ -377,21 +375,12 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             pathname.split('/').filter(Boolean).pop() ?? ''
         )
 
-    const releaseCallout = hasReleaseCallout(sourceReleaseStatus) ? (
-        <SourceReleaseCallout releaseStatus={sourceReleaseStatus} />
-    ) : null
     const wizardHint =
         (showWarehouseWizardHint && <WarehouseWizardHint />) ||
         (showAIObservabilityWizardHint && <AIObservabilityWizardHint />) ||
         null
     // `undefined` when there is nothing to show, so ReaderView skips the wrapper's margin.
-    const belowTitle =
-        releaseCallout || wizardHint ? (
-            <>
-                {releaseCallout}
-                {wizardHint}
-            </>
-        ) : undefined
+    const belowTitle = wizardHint || undefined
 
     // Every docs article gets a "Still have questions?" PostHog AI input above the page survey.
     // Gated on the MDX slug (not `pathname`). Scoped to /docs so the
@@ -492,6 +481,7 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
             belowTitle={belowTitle}
             tableOfContents={frontmatterTableOfContents || tableOfContents}
             mdxComponents={components}
+            renderMdx={(content) => <MDXRenderer>{content}</MDXRenderer>}
             commits={commits}
             filePath={post.parent?.relativePath}
             showSurvey
@@ -533,7 +523,6 @@ export default function Handbook({ data: { post, postHogSource }, pageContext: {
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
         postHogSource(mdx: { id: { eq: $id } }) {
-            releaseStatus
             sourceFields {
                 name
                 label

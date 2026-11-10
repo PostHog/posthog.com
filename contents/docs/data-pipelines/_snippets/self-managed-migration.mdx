@@ -1,0 +1,7 @@
+<CalloutBox icon="IconInfo" title="Tables you linked before" type="fyi">
+
+You can no longer create self-managed tables, which PostHog read directly from your bucket on each query. PostHog moved each existing self-managed table into a source for its storage provider. The table keeps its name, so your queries continue to work.
+
+A moved table has syncing turned off. Until you turn it on, the table continues to read the files in your bucket directly, at no charge. To import the data into PostHog, open the source, find the table, and turn on syncing. PostHog then imports the data on the schedule you choose. Synced rows count toward your data warehouse rows synced.
+
+</CalloutBox>

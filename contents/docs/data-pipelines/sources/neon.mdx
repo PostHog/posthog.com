@@ -39,7 +39,7 @@ PostHog then starts syncing your Neon data. You can see details and progress in 
 
 ## CDC sync
 
-Because Neon uses the Postgres integration, you can also enable change data capture (CDC) sync. See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#sync-methods) for details. CDC sync is currently in **alpha**.
+Because Neon uses the Postgres integration, you can also enable change data capture (CDC) sync. See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#sync-methods) for details.
 
 To use CDC with Neon:
 
@@ -64,7 +64,7 @@ See the [Postgres source documentation](/docs/data-pipelines/sources/postgres#se
 
 > **Permissions** The Neon source only requires read permissions on the schemas and tables you intend to sync. We recommend creating a dedicated read-only role in Neon rather than using the default `neondb_owner` role.
 
-Neon requires SSL/TLS for all connections, which PostHog uses by default.
+Neon requires SSL/TLS for all connections, which PostHog uses by default. To verify your database's TLS certificate or use a client certificate, see [Verify the server certificate](/docs/data-pipelines/sources/postgres#verify-the-server-certificate) on the Postgres page. The same fields and errors apply.
 
 import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 

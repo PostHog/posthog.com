@@ -12,7 +12,7 @@ Support and engineering are always available to help, but try to solve issues yo
 
 ### PostHog Support
 
-We use [PostHog Support](https://us.posthog.com/project/2/support/tickets) as our support ticketing system. For specifics on how to work in it, see [Working in PostHog Support](/handbook/support/posthog-support).
+We use <PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink> as our support ticketing system. For specifics on how to work in it, see [Working in PostHog Support](/handbook/support/posthog-support).
 
 ### Tickets from Slack
 
@@ -21,7 +21,7 @@ Customers can [create tickets from Slack](/handbook/support/posthog-support#how-
 
 If you're working on a ticket the customer raised in Slack, assign yourself as the owner in PostHog Support, and then either resolve it or assign it to Team Support if you need to escalate it.
 
-> Tip: Customer messages from SupportHog channels also go to [#support-managed-customers](https://posthog.slack.com/archives/C05MUMZLC13). Find the ticket there and follow the link to see the ticket in PostHog.
+> Tip: Customer messages from SupportHog channels also go to <PrivateLink url="https://posthog.slack.com/archives/C05MUMZLC13">#support-managed-customers</PrivateLink>. Find the ticket there and follow the link to see the ticket in PostHog.
 
 ### Tickets from email
 

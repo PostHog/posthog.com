@@ -217,7 +217,7 @@ When photography is used:
 
 Use [html2design](https://www.figma.com/community/plugin/1159123024924461424) to capture real webpages and import them directly into Figma. This makes sanitizing data much easier than working from flat image exports.
 
-All screenshots are stored in a [private Figma file](https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&t=ODxST4bS2pHBADwU-1) (private because source data may contain PII).
+All screenshots are stored in a <PrivateLink url="https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&amp;t=ODxST4bS2pHBADwU-1">private Figma file</PrivateLink> (private because source data may contain PII).
 
 **Using synthetic data**
 

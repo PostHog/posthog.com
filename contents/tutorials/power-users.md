@@ -12,7 +12,7 @@ tags:
   - product analytics
 ---
 
-Power users are your best and most important customers. They're knowledgable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
+Power users are your best and most important customers. They're knowledgeable, willing to learn, and more likely to give feedback than average users. They're also more demanding.
 
 They care more about new features and upgrades. They have different needs and usage patterns than average users. They notice changes (positive or negative) average users won't. 
 

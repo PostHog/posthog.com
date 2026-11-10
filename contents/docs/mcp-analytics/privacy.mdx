@@ -141,7 +141,7 @@ Language notes:
 - **Go:** the hook is the `posthog-go` client's `BeforeSend`, so it also sees your app's other events. It receives the `$exception` event as a `posthog.Exception` and every other event as a `posthog.Capture`.
 - **TypeScript:** on a `PostHogMCP` dispatcher, pass `beforeSend` to the client constructor.
 
-Dropping a tool call event doesn't drop its `$exception` event. Check for `$exception` too if you want both gone.
+Dropping a tool call event doesn't drop its `$exception` event. Check for `$exception` too if you want both gone. In Rust, dropping a `$mcp_tool_call` also drops its `$exception`.
 
 ## Turn off exception events
 
@@ -179,7 +179,7 @@ Events queue in the PostHog client you pass in. If the queue overflows or fails 
 
 ## Logging
 
-MCP servers often use stdio, where writing to stdout corrupts the protocol stream. The SDKs' default loggers write nothing. Pass a logger during development to see callback errors and warnings, such as `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go. The Go adapter's `WithErrorHandler` default is a no-op, but the `posthog-go` client logs to stderr by default. Set `Config.Logger` to change that:
+MCP servers often use stdio, where writing to stdout corrupts the protocol stream. The SDKs' default loggers write nothing. Pass a logger during development to see callback errors and warnings, such as `logger` in TypeScript, Python, and Ruby, or `WithErrorHandler` in Go. The Rust SDK logs through `tracing`, so point your subscriber at stderr. The Go adapter's `WithErrorHandler` default is a no-op, but the `posthog-go` client logs to stderr by default. Set `Config.Logger` to change that:
 
 ```ts
 instrument(server, posthog, {

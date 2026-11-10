@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/12-million-series-a.png
 featuredImageType: full
+ogImage: generated
 category: PostHog news
 tags:
   - Y Combinator

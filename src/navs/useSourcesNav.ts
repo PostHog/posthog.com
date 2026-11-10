@@ -1,5 +1,5 @@
 import { useStaticQuery, graphql } from 'gatsby'
-import { SELF_HOSTED_SOURCES } from '../constants/sources'
+import { EXTRA_SOURCES } from '../constants/sources'
 import { getSourceDocsPath } from '../lib/sourceDocs'
 
 export default function useSourcesNav(basePath = '/docs/data-pipelines/sources'): { url?: string; name: string }[] {
@@ -9,7 +9,6 @@ export default function useSourcesNav(basePath = '/docs/data-pipelines/sources')
                 nodes {
                     slug
                     name
-                    beta
                     mdx {
                         fields {
                             slug
@@ -23,18 +22,12 @@ export default function useSourcesNav(basePath = '/docs/data-pipelines/sources')
     const managed = allPostHogSource.nodes.map((node: any) => ({
         url: getSourceDocsPath(node, basePath),
         name: node.name,
-        ...(node.beta && {
-            badge: {
-                title: 'Beta',
-                className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-            },
-        }),
     }))
 
-    const selfManaged = SELF_HOSTED_SOURCES.map((s) => ({
+    const extra = EXTRA_SOURCES.map((s) => ({
         name: s.name,
         url: `${basePath}/${s.slug}`,
     }))
 
-    return [...managed, { name: 'Self-managed' }, ...selfManaged]
+    return [...managed, ...extra].sort((a, b) => a.name.localeCompare(b.name))
 }

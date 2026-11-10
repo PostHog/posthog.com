@@ -1,5 +1,5 @@
 ---
-title: Linking Azure as a source
+title: Linking Azure Blob Storage as a source
 sidebar: Docs
 showTitle: true
 availability:
@@ -9,43 +9,40 @@ availability:
 sourceId: AzureBlob
 ---
 
-The data warehouse can link to data in your Azure storage accounts.
+import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
+import ObjectStorageFiles from "../_snippets/object-storage-files.mdx"
+import ObjectStorageSyncModes from "../_snippets/object-storage-sync-modes.mdx"
+import ObjectStorageTroubleshooting from "../_snippets/object-storage-troubleshooting.mdx"
+import SelfManagedMigration from "../_snippets/self-managed-migration.mdx"
+import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-1. Create an Azure storage account
-2. Create a blob container
-3. Upload data and link to PostHog
+The Azure Blob Storage source imports CSV, JSON Lines, and Parquet files, and Delta Lake tables, from an Azure Blob Storage container into PostHog. PostHog keeps the tables up to date on the schedule you choose, so you can query your files alongside your product data.
 
-## Step 1: Create an Azure storage account
+<SelfManagedMigration />
 
-Firstly, log into Azure and go to Storage Accounts, then create a storage account by following [this Azure guide](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account).
+## Prerequisites
 
-## Step 2: Create a blob container
+You need:
 
-Once the storage account has been created, follow [this guide to create a blob container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container).
+- An Azure storage account with a blob container that contains your files. See the Azure guides to [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create?tabs=azure-portal#create-a-storage-account) and [create a container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#create-a-container).
+- The account key of the storage account. In the Azure portal, open the storage account and go to the **Access keys** page. See [view account access keys](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys).
 
-![container creation](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_18_at_11_08_05_cf44b9340b.png)
+## Adding a data source
 
-## Step 3: Upload data and link to PostHog
+<SourceSetupIntro />
 
-[Upload your data to the newly created container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal#upload-a-block-blob), Parquet files are the recommended format, but the connector also works with JSON and CSVs too.
+When you link Azure Blob Storage, enter:
 
-Find the newly created file via the storage browser menu item. Once found, open the details and copy URL property. We need it to link the file in PostHog.
+- **Files URL**: The URL of your files, such as `https://yourstorageaccount.blob.core.windows.net/your-container/orders/**/*.parquet`. To get the URL of a file, open the file in the storage browser of the Azure portal and copy its **URL** property.
+- **Account key**: The account key of the storage account.
 
-![copy blob file](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_17_59_09_2f888aaa2f.png)
+## Files and tables
 
-1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
-2. Click **New source** and select Azure from the self managed section
-3. Enter a name for your dataset and paste the copied URL into the "Files URL pattern" box
-4. Select the correct format for your data
-   - When using CSV format, you can configure **CSV quote handling** to control how quotes are processed:
-     - **RFC 4180 double quotes** – for CSVs that use standard double-quote escaping (e.g., `"Hello ""World"""` becomes `Hello "World"`)
-     - **Literal quotes** – for CSVs where quote characters are treated as literal values (default)
-5. Enter the storage account name (this is name of the storage account you created in step 1)
-6. Find and paste your storage account key - you can use [this Azure doc](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage?tabs=azure-portal#view-account-access-keys) to view your access keys
+<ObjectStorageFiles />
 
-![linking your data in posthog](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_15_at_18_10_06_f93fadf82b.png)
+## Sync modes
 
-That's it! You should be able to query the data from the PostHog SQL editor.
+<ObjectStorageSyncModes />
 
 ## Configuration
 
@@ -54,3 +51,9 @@ That's it! You should be able to query the data from the PostHog SQL editor.
 ## Supported tables
 
 <SourceTables />
+
+## Troubleshooting
+
+<ObjectStorageTroubleshooting />
+
+<TroubleshootingLink />

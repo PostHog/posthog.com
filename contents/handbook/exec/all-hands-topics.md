@@ -19,7 +19,7 @@ The format varies week to week. Sometimes it's a talk, sometimes we invite demos
 
 If you did anything you want to share to everyone, you can volunteer and present it after the topic of the day (unless there is a specific set of demos that day). Demos are not limited to product work, and can be anything you did that's significant for PostHog and worth sharing. A customer story, customer win, changes in how a team works, event, handbook update... Code is not the only thing worth demoing.
 
-If you have a topic or theme you'd like covered, ask in the [#team-blitzscale](https://posthog.slack.com/archives/C06LMMS3YP4) channel in Slack.
+If you have a topic or theme you'd like covered, ask in the <PrivateLink url="https://posthog.slack.com/archives/C06LMMS3YP4">#team-blitzscale</PrivateLink> channel in Slack.
 
 ## Important topics to revisit regularly
 
