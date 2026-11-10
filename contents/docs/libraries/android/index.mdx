@@ -573,10 +573,6 @@ config.addBeforeSend { event ->
 }
 ```
 
-# Push notifications
-
-The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
-
 ## Upgrading from version 3 to version 4
 
 Version 4.0 removes APIs deprecated in 3.x, sends events to capture v1, and always records session replay as screenshots. For every change, with before and after code, see the [migration guide](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md).
@@ -683,6 +679,10 @@ These don't fail the build:
 - **Empty flag variants read as disabled.** For a flag whose variant is an empty string, `getFeatureFlagResult()` and `getAllFeatureFlags()` now return `enabled = false`, `PostHogFeatureFlagsLoaded` leaves the flag out of `flags` and `variants`, and captured events leave it out of `$active_feature_flags`. `isFeatureEnabled()` already returned `false`. `variant`, `getFeatureFlag()`, and the event's `$feature/<key>` property still return `""`. PostHog no longer accepts empty variants for new flags, so only flags created earlier through the API, MCP or Terraform are affected. `/flags` still returns `enabled: true` for them, and other PostHog SDKs can still report them as enabled, so rename the variant before you upgrade.
 - **The debug log no longer prints event content.** Capture requests log the event count and response status instead of request and response bodies. A property value that can't be serialized is logged by key and type, and a `beforeSend` exception by its type, not its message. Update anything that reads event content from the log or matches its text.
 - **`remoteConfig = false` no longer skips `/config`.** Apps that set it now request `/config` at setup and apply its session replay, surveys, error tracking, and push settings. `/flags` is then requested only if the project has feature flags, and if it has none, the cached flags are cleared.
+
+# Push notifications
+
+The Android SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, opting out, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
 
 # FAQ
 
