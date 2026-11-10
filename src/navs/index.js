@@ -393,6 +393,12 @@ export const dataPipelines = {
             name: 'Resources',
         },
         {
+            name: 'Migrate off Fivetran',
+            url: '/docs/data-pipelines/migrate-off-fivetran',
+            icon: 'IconBook',
+            color: 'seagreen',
+        },
+        {
             name: 'Using Fivetran, Airbyte or other ETL tools with PostHog',
             url: '/docs/data-pipelines/fivetran-airbyte',
             icon: 'IconBook',
@@ -1650,6 +1656,10 @@ export const handbookSidebar = [
                     {
                         name: 'LLM cost optimization',
                         url: '/handbook/customer-success/shareable-guides/llm-cost-optimization',
+                    },
+                    {
+                        name: 'Setting up Replay Vision scanners',
+                        url: '/handbook/customer-success/shareable-guides/replay-vision-scanners',
                     },
                 ],
             },
@@ -3867,6 +3877,10 @@ export const docsMenu = {
                         {
                             name: 'Estimating usage and costs',
                             url: '/docs/billing/estimating-usage-costs',
+                        },
+                        {
+                            name: 'What you actually get when you pay for an event',
+                            url: '/docs/billing/what-you-pay-for-per-event',
                         },
                         {
                             name: 'Pre-paid plans',
