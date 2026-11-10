@@ -53,9 +53,11 @@ app.setErrorHandler((error, request, reply) => {
 
     // Optional application policy: capture server errors only.
     if (statusCode >= 500) {
-        posthog.captureException(error, undefined, {
-            $response_status_code: statusCode,
-            $request_path: request.routeOptions.url,
+        posthog.captureException(error, {
+            properties: {
+                $response_status_code: statusCode,
+                $request_path: request.routeOptions.url,
+            },
         })
     }
 

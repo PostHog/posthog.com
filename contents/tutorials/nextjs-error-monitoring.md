@@ -173,7 +173,7 @@ posthog.captureException(error, additionalProperties)
 ```
 
 ```node
-posthog.captureException(e, 'user_distinct_id', additionalProperties)
+posthog.captureException(e, { distinctId: 'user_distinct_id', properties: additionalProperties })
 ```
 
 </MultiLanguage>
@@ -269,7 +269,10 @@ export const onRequestError = async (err, request, context) => {
     const sessionId = request.headers.get('X-POSTHOG-SESSION-ID');
     const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID');
 
-    await posthog.captureException(err, distinctId || undefined, { $session_id: sessionId })
+    await posthog.captureException(err, {
+      distinctId: distinctId || undefined,
+      properties: { $session_id: sessionId },
+    })
   }
 }
 ```
