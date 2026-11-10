@@ -272,7 +272,7 @@ final uuid = await Posthog().captureAi(
 );
 ```
 
-`captureAi` returns the event's UUID once the event is queued. It returns `null` when the event isn't queued: the SDK is disabled, not set up, or opted out, a `beforeSend` callback dropped the event, the event is over `captureAiMaxEventBytes`, or the app is running on the web.
+`captureAi` returns the event's UUID once the event is queued. It returns `null` when the event isn't queued: the SDK is disabled, not set up, or opted out, the event name is empty, a `beforeSend` callback dropped the event, the event is over `captureAiMaxEventBytes`, or the app is running on the web.
 
 - **Separate queue.** AI events have their own on-disk queue, so large events don't push your other events out. It keeps up to `captureAiMaxQueueSize` events and at most 50 MiB. Past either limit, the oldest events are dropped. `flush()` and `close()` send both queues.
 - **Size limit.** The SDK drops an AI event that's over 8 MiB plus 64 KiB once serialized: PostHog's 8 MiB limit on an AI event's properties, plus room for the rest of the event. Everything you pass is sent as is. The SDK doesn't truncate or redact prompts, outputs, or media.
