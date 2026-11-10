@@ -42,7 +42,6 @@ export const dataPipelines = {
     slug: 'data-pipelines',
     Icon: IconDecisionTree,
     type: 'data_pipelines',
-    // Must be a `Glow` colour, or the hero screenshot loses its glow.
     color: 'blue',
     colorSecondary: 'blue',
     docsSlug: 'data-pipelines',

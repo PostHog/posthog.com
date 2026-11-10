@@ -217,6 +217,66 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
+## Init config and project settings
+
+Some features can be turned on in `posthog.init` and in your project settings. Which one wins depends on the feature. In all of these, the SDK reads project settings from the remote config it fetches when it loads.
+
+| Feature | Init option | Result |
+|---------|-------------|--------|
+| Exception autocapture | `capture_exceptions`  | The init option wins when you set it (`true`, `false`, or an object). When you leave it `undefined`, the project setting decides. |
+| Heatmaps | `capture_heatmaps` (or `enable_heatmaps`)  | The init option wins when you set it, including `false`. When you leave it unset, the project setting decides. |
+| Web vitals | `capture_performance.web_vitals` (or `capture_performance: true/false`)  | The init option wins when it's a boolean. Otherwise the project setting decides. |
+| Session replay | `disable_session_recording`  | Both must allow it. Recording runs only when the project setting is on and `disable_session_recording` isn't `true`. |
+| Autocapture | `autocapture`  | Either can turn it off. Autocapture runs only when neither the init option nor the project setting disables it. |
+| Console logs | `logs.captureConsoleLogs`  | Either can turn it on. The project setting doesn't switch the init option off. |
+
+A new project has replay, exception autocapture, heatmaps, and web vitals off in project settings. Setting the init option is enough for exception autocapture, heatmaps, and web vitals. Session replay needs the project setting on as well.
+
+## Configuring metrics
+
+The `metrics` config controls the `posthog.metrics` API (`count`, `gauge`, and `histogram`) and optional automatic network timing. Requires `posthog-js` version `1.399.0` or later. See the [JavaScript web metrics installation guide](/docs/metrics/installation/javascript) for a walkthrough.
+
+| Attribute | Description |
+|-----------|-------------|
+| `serviceName`<br/><br/>**Type:** String<br/>**Default:** `'unknown_service'` | Sent as the `service.name` resource attribute. |
+| `environment`<br/><br/>**Type:** String<br/>**Default:** `undefined` | Sent as `deployment.environment`. |
+| `serviceVersion`<br/><br/>**Type:** String<br/>**Default:** `undefined` | Sent as `service.version`. |
+| `resourceAttributes`<br/><br/>**Type:** Object<br/>**Default:** `undefined` | Extra resource attributes attached to every batch. Takes precedence over the named fields above. |
+| `flushIntervalMs`<br/><br/>**Type:** Number<br/>**Default:** `10000` | How often the aggregated window is flushed, in milliseconds. |
+| `maxSeriesPerFlush`<br/><br/>**Type:** Number<br/>**Default:** `1000` | Maximum distinct series per window. Samples for series beyond the cap are dropped with one warning. |
+| `beforeSend`<br/><br/>**Type:** Function or array of functions<br/>**Default:** `undefined` | Edit or drop each sample before it's aggregated. Return `null` to drop it. |
+| `network`<br/><br/>**Type:** Boolean or object<br/>**Default:** `undefined` | Records the duration of every HTTP or HTTPS `fetch` and `XMLHttpRequest` as a histogram. `true` uses the defaults. Requests to PostHog itself are not recorded. See below. |
+
+### Network timing
+
+Set `metrics.network` to `true`, or pass an object with these options:
+
+| Attribute | Description |
+|-----------|-------------|
+| `name`<br/><br/>**Type:** String or function<br/>**Default:** `'http.client.request.duration'` | The metric name. A function is called once per request with `{ url, method }`. Return a falsy value to skip that request. |
+| `attributes`<br/><br/>**Type:** Function<br/>**Default:** `undefined` | Called with the request and the response (`{ status, durationMs }`). The result is merged over the default attributes, so you can replace them. |
+
+The default attributes follow the OpenTelemetry HTTP client conventions: `http.request.method`, `server.address`, `server.port`, `url.scheme`, `url.template`, `http.response.status_code`, and `error.type`. The default `url.template` replaces each all-digit or UUID-like path segment with `:id`. Ids with a prefix or suffix, such as `order-123` or `38217.pdf`, are kept as they are, so return your own `url.template` from `attributes` for those routes. Keep attribute values low-cardinality.
+
+```js
+posthog.init('<ph_project_token>', {
+  api_host: '<ph_client_api_host>',
+  metrics: {
+    serviceName: 'storefront-web',
+    network: {
+      attributes: (request) =>
+        request.url.includes('/dashboards/') ? { 'url.template': '/dashboards/:slug' } : undefined,
+    },
+  },
+})
+```
+
+`metrics.histogram()` also accepts a `bounds` option for the bucket boundaries (from `posthog-js` 1.447.0).
+
+## Configuring traces
+
+`posthog-js` doesn't create spans. To link backend traces to browser sessions, set [`tracing_headers`](#tracing-headers). To send spans from the server, see [Node.js](/docs/libraries/node#distributed-tracing) or [Python](/docs/distributed-tracing/installation/python).
+
 ## Advanced configuration
 
 These are features for advanced users and may lead to unintended side effects if not reviewed carefully.
