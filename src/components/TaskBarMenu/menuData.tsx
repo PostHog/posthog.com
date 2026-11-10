@@ -255,6 +255,12 @@ const buildProductsMenuItems = (allProducts: any[]) => {
         },
         {
             type: 'item',
+            label: 'PostHog AI',
+            link: '/ai',
+            icon: <Icons.IconAI className="size-4 text-lilac" />,
+        },
+        {
+            type: 'item',
             label: 'PostHog Slack',
             link: '/slack',
             icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,

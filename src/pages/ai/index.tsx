@@ -12,7 +12,7 @@ import SlotMachineText from 'components/SlotMachineText'
 import ContextDiagram from 'components/PostHogAI/ContextDiagram'
 import ProductIcon from 'components/PostHogAI/ProductIcon'
 import { SectionHeader } from 'components/Pricing/Test/Sections'
-import { StickerCoffee, StickerMicroscope, StickerRobot } from 'components/Stickers/Stickers'
+import { StickerCoffee, StickerMicroscope } from 'components/Stickers/Stickers'
 import { AIEngineering } from 'components/PostHogAI/Capabilities'
 import Testimonials from 'components/PostHogAI/Testimonials'
 import MCPInstallCTA from 'components/MCPInstallCTA'
@@ -370,7 +370,6 @@ const PromptsSection = (): JSX.Element => {
             <SectionHeader>
                 <div className="relative">
                     <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
-                        <StickerRobot className="size-8 shrink-0 -rotate-3" />
                         Actual jobs for your AI
                     </h2>
                     <p className="mb-0 mt-2 text-base text-secondary @3xl/reader-content:mr-36">
@@ -511,7 +510,7 @@ const backgroundTools = [
 const BackgroundWork = (): JSX.Element => (
     <section id="background-work" className="my-12">
         <header>
-            <h2 className="m-0 flex items-start gap-3 text-2xl font-bold leading-tight tracking-tight @xl/reader-content:text-3xl">
+            <h2 className="m-0 flex items-start gap-3 text-xl font-bold leading-tight tracking-tight @xl/reader-content:text-2xl">
                 <StickerCoffee className="size-8 shrink-0 rotate-6" />
                 Agents that keep working when the chat window is closed
             </h2>
@@ -595,7 +594,7 @@ const AccessSection = (): JSX.Element => {
                     </div>
                     <div className="-mx-4 -mb-4 mt-auto pt-4 leading-[0] @xl:-mx-6 @xl:-mb-6">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/Inbox_in_slack_229d1d3693.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Inbox_in_slack_229d1d3693.png"
                             alt="PostHog Inbox reports posted to a Slack channel, with buttons to review the pull request"
                             loading="lazy"
                             imgClassName="w-full"
