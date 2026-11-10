@@ -133,7 +133,7 @@ Controller and job parameters use Rails' parameter filters. Unkeyed job argument
 
 Review your filters and use `logs_before_send` to remove sensitive data. These protections do not filter arbitrary text passed to `Rails.logger`.
 
-Enable `auto_instrument_active_job` to [carry user and session IDs into job logs](/docs/error-tracking/installation/ruby-on-rails#background-job-exceptions). Notification logs alone do not enable exception capture.
+Enable `auto_instrument_active_job` to [carry user and session IDs into job logs](/docs/error-tracking/installation/ruby-on-rails#active-job-context-and-retries). Notification logs alone do not enable exception capture.
 
 ## Configuration reference
 

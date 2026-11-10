@@ -18,11 +18,9 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 
 <ErrorTrackingRubyOnRailsInstallationWrapper />
 
-## Automatic exception tracking
+The sections below cover additional capture options and user context.
 
-Enable `auto_capture_exceptions` to capture unhandled exceptions. Also enable `report_rescued_exceptions` to include errors that Rails rescues. Both default to `false`.
-
-## Manual exception capture
+## Controller exception helper
 
 From `posthog-rails` 3.24.0, use `capture_exception` in controllers to report handled errors. It includes the current user and filtered request context:
 
@@ -60,9 +58,7 @@ From version 3.24.0, `auto_capture_exceptions` reports terminating `rails runner
 
 Capture runs before SDK shutdown without changing the exit status. Forced termination and `exit!` cannot be captured.
 
-## Background job exceptions
-
-Enable `auto_instrument_active_job` to capture Active Job failures with job context.
+## Active Job context and retries
 
 From version 3.20.0, queued jobs also retain the request's PostHog session and distinct IDs. Job events and logs use these IDs unless a job identity extractor overrides the distinct ID.
 
