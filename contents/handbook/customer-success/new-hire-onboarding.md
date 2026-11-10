@@ -75,7 +75,7 @@ This is when you start working with your customers. Reach out, take the first ca
 
 ## What good looks like at the end of week 4
 
-This is the bar for end of month 1.
+This is the bar for end of month 1, and it's what your team lead is looking at during your first check-in. During probation your team lead gets an automated [30, 60 and 80-day check-in](/handbook/people/onboarding#306090-day-check-ins) form. At each one they are working with you to make sure you are ramping up as expected. The benchmarks in this section and the next are the concrete things we compare against. We'll go through them during in-person onboarding and again at each check-in, so nothing here should come as a surprise. If you're behind on something, say so early. It's much easier to fix at day 30 than day 80.
 
 **You have a clear read on your book:**
 
@@ -86,28 +86,32 @@ This is the bar for end of month 1.
 
 **You're up and running with customers:**
 
-- Made contact with every customer in your book of business
-- Handling tickets and customer questions across the products your book uses, with help when needed
+- Reached out to every customer in your book of business, and have at least one customer call booked
+- Investigating and handling tickets and customer questions across the products your book uses, with help when needed - dig into the problem yourself before escalating
 - Doing demos for those products
 - Evaluating customer implementations and seeing where to improve them
 - Understanding how pricing works and the levers you have for cost optimization
 
 **You're working with signals.** You know what the signals are and have a sense of how to prioritise and work through them.
 
-**You're sharing with the team.** You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
+**You're contributing to the team.** You're an active voice in sprint planning, account review and team meetings - asking questions and sharing what you're seeing, not just observing. You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
 
 ## Month 2 and beyond
 
-**By the end of month 2:**
+**By the end of month 2 (60-day check-in):**
 
+- Over half of your book has replied to you in some form
+- Delivered a strong demo - a practice run with the team or a real one - and taken on the feedback from your demo sessions
 - Saved your first 'we're going to churn' - it's going to happen, but you're going to save them!
-- Be independently working with your entire book to solve tricky technical problems with minimal assistance
+- Owning technical issues on your own - independently working with your entire book to solve tricky technical problems with minimal assistance
 - Focusing strategically on your customers - engaging with accounts based on risk and growth opportunity, not just reacting to tickets and signals
 
-**By the end of month 3:**
+**By the end of month 3 (end of probation):**
 
+- All but a few accounts have replied, and for the ones that haven't you know why and what you're doing about it
+- Picked a [quarterly goal](/handbook/customer-success/how-we-work) with your team lead and know how you'll measure it
 - On track to consistently hit your retention targets
-- You've suggested and made changes to our systems that enable you to do your job better
+- Actively influencing the way we work - you've suggested and made changes to our systems and processes that enable you and the team to do the job better
 - Picked and merged your first product PR: small, tied to a customer request or an outcome you want to move, and the owning team knows it's coming. See [shipping product changes](/handbook/customer-success/shipping-product-changes) for details. This is a goal, but not a requirement!
 - Think about customer health scores and add/change anything you learn here
 
