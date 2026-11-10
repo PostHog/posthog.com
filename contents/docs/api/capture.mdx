@@ -12,7 +12,6 @@ This page covers legacy capture, which stays supported. [Capture v1](/docs/api/c
 
 </CalloutBox>
 
-
 The `/i/v0/e` and `/batch` endpoints are the main way to send events to PostHog. Beyond user behavior, they are also used to identify users, update person or group properties, migrate from other platforms, and more. [Our SDKs](/docs/libraries) handle the different event types for you, but with the API, you need to send the right type of event (listed below) to trigger the functionality you want.
 
 Both are POST-only public endpoints that use your [project token](https://app.posthog.com/project/settings) and do not return any sensitive data from your PostHog instance.

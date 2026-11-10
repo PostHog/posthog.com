@@ -91,7 +91,10 @@ export async function handle({ event, resolve }) {
 }
 
 export function handleError({ error, event, message }) {
-  posthog.captureException(error, event.locals.posthogError?.distinctId, event.locals.posthogError?.properties);
+  posthog.captureException(error, {
+    distinctId: event.locals.posthogError?.distinctId,
+    properties: event.locals.posthogError?.properties,
+  });
   return { message };
 }
 ```

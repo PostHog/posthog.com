@@ -18,14 +18,14 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 Install the [PostHog Rust SDK](/docs/libraries/rust):
 
 ```bash
-cargo add posthog-rs
+cargo add posthog
 ```
 
 Error tracking ships enabled by default through the `error-tracking` feature. If you build with `default-features = false`, add it back explicitly:
 
 ```toml
 [dependencies]
-posthog-rs = { version = "*", default-features = false, features = ["error-tracking"] }
+posthog = { version = "1", default-features = false, features = ["error-tracking", "tls"] }
 ```
 
 <CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">
@@ -39,7 +39,7 @@ The Rust SDK resolves stack traces in-process, so when the running binary carrie
 <Step title="Initialize the client" badge="required">
 
 ```rust
-let client = posthog_rs::client((
+let client = posthog::client((
     "<ph_project_token>",
     "<ph_client_api_host>",
 )).await;
@@ -62,7 +62,7 @@ client.capture_exception(&error).await.unwrap();
 To associate the exception with a person or attach context, use `capture_exception_with`:
 
 ```rust
-use posthog_rs::CaptureExceptionOptions;
+use posthog::CaptureExceptionOptions;
 
 client.capture_exception_with(
     &error,
@@ -93,7 +93,7 @@ if let Err(err) = result {
 Panic autocapture is opt-in and uses the process-global client. Enable `capture_panics` and initialize the global client with `init_global`; the SDK then installs a process-wide `std::panic` hook:
 
 ```rust
-use posthog_rs::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
+use posthog::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
 
 let options = ClientOptionsBuilder::default()
     .api_key("<ph_project_token>".to_string())
@@ -108,7 +108,7 @@ let options = ClientOptionsBuilder::default()
     .unwrap();
 
 // Installs the panic hook and routes panics through the global client.
-posthog_rs::init_global(options).await.unwrap();
+posthog::init_global(options).await.unwrap();
 ```
 
 Each panic is captured as a personless `$exception` carrying the panic message, the panic-site location, and a call-site stack trace (subject to `capture_stacktrace`). The previously installed hook still runs afterwards.
@@ -122,7 +122,7 @@ Because a panic hook is process-global, panic autocapture pairs with the global 
 Stack trace capture and in-app frame classification are configured per client through `ErrorTrackingOptionsBuilder`:
 
 ```rust
-use posthog_rs::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
+use posthog::{ClientOptionsBuilder, ErrorTrackingOptionsBuilder};
 
 let options = ClientOptionsBuilder::default()
     .api_key("<ph_project_token>".to_string())
@@ -139,7 +139,7 @@ let options = ClientOptionsBuilder::default()
     .build()
     .unwrap();
 
-let client = posthog_rs::client(options).await;
+let client = posthog::client(options).await;
 ```
 
 In-app patterns match both file paths and function symbols, so crate prefixes like `"my_crate::"` and path fragments like `"/service/"` both work. By default, frames from the cargo registry, the standard library, and vendored or target paths are classified as library code.

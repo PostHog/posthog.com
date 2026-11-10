@@ -74,10 +74,12 @@ Reuse the existing client in your application's error handler:
 
 ```ts file=index.ts
 app.onError(async (err, c) => {
-  await posthog.captureExceptionImmediate(err, undefined, {
-    path: c.req.path,
-    method: c.req.method,
-    // ... other properties
+  await posthog.captureExceptionImmediate(err, {
+    properties: {
+      path: c.req.path,
+      method: c.req.method,
+      // ... other properties
+    },
   })
   await posthog.flush() // TIP: On program exit, call flush to send any remaining events
   // other error handling logic

@@ -380,7 +380,7 @@ class _HomePageState extends State<HomePage> {
 
 ### Identifying users
 
-Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identify) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
+Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`Posthog().identify`](/docs/libraries/flutter#identifying-users) with a `userId` argument. The `userId` must be a unique identifier for the user – usually their email or database ID.
 
 To show you an example, update the code for the login button to the following:
 
@@ -410,7 +410,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`Posthog().reset()`](/docs/libraries/flutter#removing-stored-super-properties). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```dart file=main.dart
 class _HomePageState extends State<HomePage> {
     // ...

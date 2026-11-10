@@ -12,7 +12,7 @@ tags:
 
 Evaluation runtimes and evaluation contexts are two complementary features that give you precise control over where and when your feature flags evaluate. This guide shows practical examples of using them together effectively.
 
-> **Prerequisites:** First understand [evaluation contexts](/docs/feature-flags/evaluation-contexts) and [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime) individually.
+> **Prerequisites:** First understand [evaluation contexts](/docs/feature-flags/evaluation-contexts) and [evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime-optional) individually.
 
 ## How they work together
 
@@ -205,4 +205,4 @@ const posthog = new PostHog('KEY', {
 For implementation details:
 
 - [Evaluation contexts documentation](/docs/feature-flags/evaluation-contexts)
-- [Evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime)
+- [Evaluation runtime](/docs/feature-flags/creating-feature-flags#evaluation-runtime-optional)

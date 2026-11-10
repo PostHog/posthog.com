@@ -10,7 +10,6 @@ import {
     IconDashboard,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
@@ -28,19 +27,17 @@ export const applications: CarouselSlide[] = [
         heading: 'Query product data without leaving your editor',
         description: (
             <>
-                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
-                    <Glow color="black" intensity="gentle" rounded="lg">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
-                            className="dark:hidden w-full"
-                            imgClassName="w-full"
-                        />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
-                            className="hidden dark:inline-block w-full"
-                            imgClassName="w-full"
-                        />
-                    </Glow>
+                <aside className="my-4 @xl/reader-content:mt-2 @xl/reader-content:float-right max-w-[100%_+_1rem] @xl/reader-content:max-w-[300px] @3xl/reader-content:max-w-[360px] @4xl/reader-content:max-w-[440px] @xl/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
+                        className="dark:hidden w-full"
+                        imgClassName="w-full"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
+                        className="hidden dark:inline-block w-full"
+                        imgClassName="w-full"
+                    />
                 </aside>
                 <p>{f.mcp.description}</p>
                 <div className="@container">
@@ -144,11 +141,11 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'trends', glow: true },
+        image: 'trends',
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'funnels',
         label: 'Funnels',
@@ -180,7 +177,7 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'funnels', glow: true },
+        image: 'funnels',
     },
     {
         slug: 'trends',
@@ -217,7 +214,7 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'trends', glow: true },
+        image: 'trends',
     },
     {
         slug: 'retention',
@@ -247,7 +244,7 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'retention', glow: true },
+        image: 'retention',
     },
     {
         slug: 'sql-editor',
@@ -277,7 +274,7 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'sql-editor', glow: true },
+        image: 'sql-editor',
     },
     {
         slug: 'mcp',
@@ -326,6 +323,6 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'mcp-analytics', glow: true },
+        image: 'mcp-analytics',
     },
 ]

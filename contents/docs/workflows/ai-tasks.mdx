@@ -2,7 +2,7 @@
 title: Run AI tasks from a workflow
 ---
 
-The **Create AI task** step starts an AI agent from a [workflow](/docs/workflows). The agent runs in the background with the tools you give it: a GitHub repository, connectors, skills, and your PostHog project. The workflow waits for the agent to finish, then continues with its result.
+The **Create AI task** step starts an AI agent from a [workflow](/docs/workflows). The agent runs in the background with the tools you give it: GitHub repositories, connectors, skills, and your PostHog project. The workflow waits for the agent to finish, then continues with its result.
 
 Use it when an event, webhook, or schedule should kick off work, not only a message. The agent can investigate a support ticket and tag it, open a pull request from a webhook, or review every trial account once a week.
 
@@ -13,15 +13,15 @@ Use it when an event, webhook, or schedule should kick off work, not only a mess
 3. Write the **Instructions**. You can reference the triggering event and person in them: `A user with email {person.properties.email} hit {event.properties.error_message}`.
 4. Pick what the agent can use. All of these are optional:
 
-| Field | What it does |
-|-------|--------------|
-| **Task title** | Name shown in the task list. Leave empty to name the task from the instructions. |
-| **Model** | Model and reasoning effort. Leave empty for the default. |
-| **Repository** | GitHub repository the agent works in. |
-| **Connectors** | MCP servers the agent can call. Only servers shared with everyone in the project appear. |
-| **Skills** | Skills from your skills store. The agent reads the full skill when it needs it. |
-| **PostHog access** | **Read only** (default) lets the agent query your project. **Full access** lets it change things, such as cohorts or person properties. |
-| **Maximum parallel tasks** | New runs are skipped while this many tasks from the workflow are still running. Default 5. |
+| Field                         | What it does                                                                                                                                                    |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Task title**                | Name shown in the task list. Leave empty to name the task from the instructions.                                                                                |
+| **Model**                     | Model and reasoning effort. Leave empty for the default.                                                                                                        |
+| **Repositories**              | GitHub repositories the agent can work in, up to 10. Each must be in `org/repo` format.                                                                         |
+| **Connectors**                | MCP servers the agent can call. Only servers shared with everyone in the project appear.                                                                        |
+| **Skills**                    | Skills from your skills store. The agent reads the full skill when it needs it.                                                                                 |
+| **PostHog access**            | **Read only** (default) lets the agent query your project. **Full access** lets it change things, such as cohorts or person properties.                         |
+| **Maximum parallel tasks**    | New runs are skipped while this many tasks from the workflow are still running. Default 5.                                                                      |
 | **Reply in the Slack thread** | On a Slack-triggered workflow, the agent posts its updates as replies in the thread that started the workflow, and replies in that thread go back to the agent. |
 
 Each task shows up in **Tasks**, where you can follow the agent's progress and read its output.
@@ -30,11 +30,11 @@ Each task shows up in **Tasks**, where you can follow the agent's progress and r
 
 The workflow run pauses at the step until the task finishes, for up to about 3 hours. When the task completes, the next step can use its result:
 
-| Result path | What it holds |
-|-------------|---------------|
-| `status` | `completed` |
-| `final_message` | The agent's final message, cut to fit the step result |
-| `pr_urls` | Pull requests the agent opened, when it had a repository |
+| Result path     | What it holds                                                         |
+| --------------- | --------------------------------------------------------------------- |
+| `status`        | `completed`                                                           |
+| `final_message` | The agent's final message, cut to fit the step result                 |
+| `pr_urls`       | Pull requests the agent opened, when it had a repository              |
 | `output.<name>` | Fields you asked for, see [structured output](#get-structured-output) |
 
 If the task fails or is canceled, or the wait runs out, the step fails. The step's **On error** setting decides what happens next. With **Continue**, the next step sees `status` (`failed` or `cancelled`) and `error_message`, so a condition step can route the failure to a Slack message or an email.
@@ -73,7 +73,7 @@ Each example is one workflow: a trigger, the AI task step, and what the agent ha
 
 **Instructions:** You are the first responder for this alert. Read the runbook for the alerting service in the runbooks repository, check the service's metrics and logs in PostHog, and reply with whether the alert is real, how severe it is, and the most likely cause. Reply with your best assessment quickly rather than waiting for certainty.
 
-**Options:** Set **Repository** to your runbooks repository. Leave **Reply in the Slack thread** on so the assessment lands in the thread and on-call can ask follow-up questions there.
+**Options:** Add your runbooks repository under **Repositories**. Leave **Reply in the Slack thread** on so the assessment lands in the thread and on-call can ask follow-up questions there.
 
 ### Open a pull request from a webhook
 
@@ -81,7 +81,7 @@ Each example is one workflow: a trigger, the AI task step, and what the agent ha
 
 **Instructions:** Fetch the meeting with id `{event.properties.note_id}` through the connector. Summarize the notes and transcript. Add the summary as a new file under `meetings/` in the repository, then open a pull request.
 
-**Options:** Set **Repository** to the target repo and add the tool's MCP server under **Connectors**. Map `pr_urls` to a variable and post it with a **Slack** step.
+**Options:** Add the target repo under **Repositories** and add the tool's MCP server under **Connectors**. Map `pr_urls` to a variable and post it with a **Slack** step.
 
 ### Enrich a record when it is tagged
 

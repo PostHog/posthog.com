@@ -49,7 +49,7 @@ pip install posthog
 ```
 
 ```bash file=Go
-go get github.com/posthog/posthog-go/posthogmcpsdk
+go get github.com/posthog/posthog-go/posthogmcpsdk/v2
 ```
 
 ```bash file=Ruby
@@ -57,7 +57,7 @@ bundle add posthog-ruby
 ```
 
 ```bash file=Rust
-cargo add posthog-rs --features mcp
+cargo add posthog --features mcp
 ```
 
 </MultiLanguage>
@@ -67,8 +67,7 @@ Set `POSTHOG_PROJECT_TOKEN` in your environment. Wrap your existing server once,
 <MultiLanguage>
 
 ```ts file=TypeScript
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
@@ -133,10 +132,10 @@ use rmcp::ServiceExt;
 
 let token = std::env::var("POSTHOG_PROJECT_TOKEN")?;
 let posthog = Arc::new(
-    posthog_rs::client((token.as_str(), "https://us.i.posthog.com")).await, // or https://eu.i.posthog.com
+    posthog::client((token.as_str(), "https://us.i.posthog.com")).await, // or https://eu.i.posthog.com
 );
 
-let server = posthog_rs::mcp::instrument(server, posthog.clone());
+let server = posthog::mcp::instrument(server, posthog.clone());
 server.serve(rmcp::transport::stdio()).await?.waiting().await?;
 
 posthog.shutdown().await;
@@ -146,7 +145,7 @@ posthog.shutdown().await;
 
 Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. The [Ruby](/docs/mcp-analytics/installation/ruby) and [Rust](/docs/mcp-analytics/installation/rust) SDKs are experimental.
 
-For TypeScript and Python servers, the wizard does the setup for you:
+For TypeScript, Python, Go, Ruby, and Rust servers, the wizard does the setup for you:
 
 <WizardCommand command="mcp-analytics" />
 
@@ -231,7 +230,7 @@ PostHog::MCP.instrument(
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .capture_responses(false) // keep tool results out of PostHog
@@ -372,7 +371,7 @@ PostHog::MCP.instrument(
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .identify(|request| {
@@ -423,7 +422,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .missing_capability_tool("get_more_tools")

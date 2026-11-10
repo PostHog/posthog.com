@@ -15,7 +15,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { getTool } from '../../data/tools'
-import { applications, topFeatures } from './traces/slides'
+import { applications, keyFeatures } from './traces/slides'
 
 export const traces = {
     ...getTool('traces'),
@@ -65,11 +65,11 @@ export const traces = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

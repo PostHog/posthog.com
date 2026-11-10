@@ -1,6 +1,5 @@
 import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
 import { useApp } from '../../../context/App'
 import type { CarouselSlide as CarouselSlideType, ImageConfig } from './types'
 
@@ -92,9 +91,8 @@ interface CarouselSlideProps {
  *   `image.frameless: true` for full-bleed images.
  *
  * - `float`: at narrow container sizes the image stacks above the prose; at
- *   `@2xl/reader-content`+ it floats right and the prose flows around it. Glow halo
- *   is opt-in via `image.glow: true | GlowColor`. Set `image.frameless: true` to
- *   skip the default border around the floated image.
+ *   `@2xl/reader-content`+ it floats right and the prose flows around it. Set
+ *   `image.frameless: true` to skip the default border around the floated image.
  *
  * All defaults are overridable via `slide.className`, `image.containerClassName`,
  * and `image.imgClassName`.
@@ -156,16 +154,9 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
     }
 
     // 'float' layout
-    // Glow is keyed off the inline image config (string-shorthand images can't carry glow);
-    // resolved color falls back to the product's own brand color.
-    //
     // Width is percentage-based once floated so the image and prose stay proportional as
     // the reader container shrinks toward the stack breakpoint. Fixed max-w-* tokens left
     // a wide mid-range where a ~28–36rem image crushed the text column.
-    const inlineImage = typeof slide.image === 'object' ? slide.image : null
-    const showGlow = !!inlineImage?.glow
-    const glowColor = typeof inlineImage?.glow === 'string' ? inlineImage.glow : productData?.color
-
     return (
         <div className={`${SLIDE_PADDING}${slide.className ? ` ${slide.className}` : ''}`}>
             {image && (
@@ -176,27 +167,12 @@ export default function CarouselSlide({ slide, productData }: CarouselSlideProps
                         image.containerClassName ? ` ${image.containerClassName}` : ''
                     }`}
                 >
-                    {showGlow ? (
-                        <Glow
-                            color={glowColor}
-                            intensity="soft"
-                            className={image.frameless ? 'rounded' : 'rounded border border-secondary'}
-                        >
-                            <CloudinaryImage
-                                src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
-                                alt={image.alt || productData?.name}
-                                className="w-full"
-                                imgClassName={`h-auto${image.imgClassName ? ` ${image.imgClassName}` : ''}`}
-                            />
-                        </Glow>
-                    ) : (
-                        <CloudinaryImage
-                            src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
-                            alt={image.alt || productData?.name}
-                            className={image.frameless ? 'w-full' : 'w-full rounded border border-secondary'}
-                            imgClassName={`h-auto${image.imgClassName ? ` ${image.imgClassName}` : ''}`}
-                        />
-                    )}
+                    <CloudinaryImage
+                        src={pickSrc(image, isDark) as `https://res.cloudinary.com/${string}`}
+                        alt={image.alt || productData?.name}
+                        className={image.frameless ? 'w-full' : 'w-full rounded border border-secondary'}
+                        imgClassName={`h-auto${image.imgClassName ? ` ${image.imgClassName}` : ''}`}
+                    />
                 </div>
             )}
             <div className="text-base text-primary/90">

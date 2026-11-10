@@ -101,9 +101,12 @@ export class AppController {
     try {
       await processPayment(body)
     } catch (error) {
-      this.posthog.captureException(error, 'user_distinct_id', {
-        path: '/checkout',
-        method: 'POST',
+      this.posthog.captureException(error, {
+        distinctId: 'user_distinct_id',
+        properties: {
+          path: '/checkout',
+          method: 'POST',
+        },
       })
       throw error
     }

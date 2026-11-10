@@ -39,7 +39,7 @@ Each SDK below moves to capture v1 in a new major version. These versions includ
 | [Flutter](/docs/libraries/flutter) | `6.0.0` | iOS, macOS, Android, Windows, and Linux | [`5.x` to `6.0`](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) |
 
 <!-- TODO(capture-v1): list only released SDKs at merge; add each later SDK in its own PR on release day. -->
-Other SDKs, including the JavaScript Web SDK and React Native, move to capture v1 in later major versions. Flutter apps on the web use the JavaScript Web SDK, so they keep using legacy capture until then. Until an SDK moves, it keeps working as it does today.
+Other SDKs, including the JavaScript Web SDK and React Native, use legacy capture. Flutter apps on the web use the JavaScript Web SDK, so they use legacy capture too.
 
 ## What changes for everyone
 
@@ -53,7 +53,7 @@ SDKs generate a UUIDv7 for each event. If you set an event's UUID yourself, use 
 
 Legacy option properties are the `$`-prefixed properties legacy capture reads as settings. Set these settings in an event's `options` instead:
 
-| Option | Legacy option property |
+| Option | Replaces |
 |---|---|
 | `process_person_profile` | `$process_person_profile` |
 | `cookieless_mode` | `$cookieless_mode` |
@@ -81,7 +81,7 @@ client.Enqueue(posthog.Capture{
 ```
 
 ```rust
-let mut event = posthog_rs::Event::new("signed_up", "user_123");
+let mut event = posthog::Event::new("signed_up", "user_123");
 event.insert_prop("plan", "pro")?;
 event.insert_option("process_person_profile", true)?;
 client.capture(event);
@@ -124,7 +124,7 @@ await Posthog().capture(
 
 On iOS, Android, and Flutter, `capture`, `screen`, `identify`, and the other event methods take `options` too. The [iOS](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#capture-v1), [Android](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md), and [Flutter](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) migration guides list every method that takes it.
 
-The legacy option properties still work for now. The SDK moves them into `options` before it sends the event, and an option you set wins over its legacy option property. Use options in new code – the legacy option properties are deprecated, and a future major version will stop reading them.
+Legacy option properties still work, but an option overrides its legacy property. Use options.
 
 SDKs send options exactly as you set them. PostHog ignores option names it doesn't know, and drops an event whose option value it can't read, with the detail `invalid_options`. See [event options](/docs/api/capture-v1#event-options) for the types each option takes.
 
@@ -137,9 +137,11 @@ You can set properties and options in several places. When the same key is set i
 3. **Global defaults** – values set on the client for every event, such as Python's `super_properties` and `super_options`, Go's `DefaultEventProperties` and `DefaultEventOptions`, Node.js's `register()` and `registerOptions()`, or super properties set with `register()` on iOS and Android
 4. **SDK values** – properties the SDK adds itself, such as `$is_server`, and the `$feature/<key>` and `$active_feature_flags` properties from the feature flags you attach to an event. Some SDKs also add the `$trace_id` and `$span_id` of the active OpenTelemetry span to some events. Your SDK's migration guide says when
 
-Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything. Last, legacy option properties fill in any option that is still unset.
+The SDK's own `$lib` and `$lib_version` come after all of these. They fill in only when the event doesn't set `$lib`, or sets the SDK's own name without a version. See [library name and version](/docs/api/capture-v1#library-name-and-version).
 
-**Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. To change a setting in the hook, edit `options`: a legacy option property the hook adds doesn't replace an option that's already set.
+Then `before_send` runs. It sees the combined event, including `options`, and can change or remove anything.
+
+**Check your `before_send` hooks when you upgrade.** The SDK sends the event your hook returns, as it is. If your hook builds a new event instead of changing the one it got, copy `options` too, or the event goes out without them. That includes `process_person_profile: false`, which server SDKs set for an event with no distinct ID, so PostHog would create a person for its generated ID. The Android SDK is the exception: a new event without `options` keeps the options of the event your hook got, so return an empty `options` map to clear them. To change a setting in the hook, edit `options`.
 
 A few details:
 
@@ -147,14 +149,14 @@ A few details:
 - A property set to `null` (or `None`, or `nil`) counts as set, so a lower layer can't replace it. An option set to `null` counts as unset.
 - On Python, Go, Node.js, and Rust, `$set`, `$set_once`, `$groups`, and `$group_set` merge key by key, and the most specific value wins for each key. On iOS, Android, and Flutter, a `$set` or `$set_once` you pass on the call replaces a registered one, as before.
 - A `$set` in a global or context layer adds those person properties to every event that layer reaches.
-- On server SDKs, `process_person_profile: false` (or `$process_person_profile: false`) in a global or context layer also reaches identify, alias, and group identify events. PostHog drops those events when person processing is off, and your error handler doesn't report it, because PostHog accepts them first. Set person processing on each capture call instead of in a layer that covers these calls.
+- On server SDKs, `process_person_profile: false` in a global or context layer also reaches identify, alias, and group identify events. PostHog drops those events when person processing is off, and your error handler doesn't report it, because PostHog accepts them first. Set person processing on each capture call instead of in a layer that covers these calls.
 - Not every SDK has every layer. Rust has no global layer, and iOS, Android, and Flutter have global properties but no global options or context layer. Your SDK's migration guide lists the layers it has and which calls they reach.
 
 ### Person processing
 
 - On server SDKs, adding groups to an event doesn't turn on person processing. The Rust SDK did before 1.0. To use [group analytics](/docs/product-analytics/group-analytics), send events with person processing on.
 - On iOS, Android, and Flutter, an event with groups still turns on person processing, as before, unless `personProfiles` is set to `never`.
-- On server SDKs, an event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Setting `$process_person_profile: true` no longer changes that. (The Go SDK returns an error instead when the call has no request context.)
+- On server SDKs, an event without a distinct ID becomes an anonymous event with a generated ID, and doesn't create a person profile. Only the `process_person_profile` option can change that. If the event belongs to a person, pass their distinct ID. (The Go SDK returns an error instead when the call has no request context.)
 - Use a real distinct ID: one visitor, or your own ID for a known user. See [choosing a distinct ID](/docs/api/capture-v1#choosing-a-distinct-id).
 - On server SDKs, **group identify without a distinct ID** uses `$<group type>_<group key>` as the event's distinct ID. If that is over 200 bytes, pass a `distinct_id` explicitly, or PostHog drops the event.
 
@@ -172,7 +174,7 @@ See [limits and validation](/docs/api/capture-v1#limits-and-validation) for ever
 
 ### Other changes
 
-- **Library name and version.** The SDK sets `$lib` and `$lib_version`. You can't override them from your properties.
+- **Library name and version.** A `$lib` and `$lib_version` you set in an event's properties, or in a `before_send` hook, are stored as you set them. Integrations such as MCP analytics use this to label their own events. When an event doesn't set `$lib`, the SDK fills in both with its own name and version. Set both when you override them: an event whose `$lib` names another library doesn't get the SDK's version. See [library name and version](/docs/api/capture-v1#library-name-and-version).
 - **Session IDs.** `$session_id` and `$window_id` must be strings. Other values are dropped from the event, with a warning in your logs. The iOS, Android, and Flutter SDKs log it only when debug logging is on.
 - **Timestamps.** SDKs send every timestamp with at least millisecond precision, writing all three digits even when they're zero (`.000`), and keep any finer precision you provide. The iOS and Android SDKs, and Flutter on those platforms, send milliseconds only. SDKs no longer reject future timestamps – PostHog [handles those](/docs/api/capture-v1#timestamps-and-clock-skew).
 - **API keys.** An empty project token, or a personal API key (`phx_…`) used as one, turns the client off and logs one error, instead of failing your app.
@@ -238,12 +240,12 @@ client, err := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
 ```
 
 ```rust
-let options = posthog_rs::ClientOptionsBuilder::default()
+let options = posthog::ClientOptionsBuilder::default()
     .api_key("<ph_project_token>".to_string())
     .host("<ph_client_api_host>")
     .on_error(|failure| eprintln!("PostHog capture failed: {failure:?}"))
     .build()?;
-let client = posthog_rs::client(options).await;
+let client = posthog::client(options).await;
 ```
 
 ```node
@@ -288,7 +290,7 @@ client.EnqueueAI(posthog.Capture{
 ```
 
 ```rust
-let mut event = posthog_rs::Event::new("$ai_generation", "user_123");
+let mut event = posthog::Event::new("$ai_generation", "user_123");
 event.insert_prop("$ai_model", "gpt-5")?;
 event.insert_prop("$ai_input_tokens", 120)?;
 client.capture_ai(event);
@@ -329,6 +331,8 @@ On iOS, Android, and Flutter, `captureAi` takes the same arguments as `capture`.
 
 `capture` doesn't move `$ai_` events to the AI path for you. For now, PostHog still accepts AI events sent with `capture`, so existing code keeps working while you upgrade. This is temporary, and large AI events always need the AI method. Calling `flush` or `shutdown` sends both queues. See [capturing large AI events](/docs/ai-observability/large-events) for limits and the AI integrations.
 
+The Python and Node.js AI integrations take [event options per call](/docs/ai-observability/custom-properties#setting-event-options): `posthog_options` in Python and `posthogOptions` in Node.js.
+
 ## Proxies
 
 If you send events through a [reverse proxy](/docs/advanced/proxy), make sure it:
@@ -336,9 +340,9 @@ If you send events through a [reverse proxy](/docs/advanced/proxy), make sure it
 - Forwards `/i/v1/analytics/events` and `/i/v1/ai/events`
 - Passes the `Authorization` header and every `PostHog-*` header through unchanged, along with `Content-Type`, `Content-Encoding`, and `User-Agent`
 - Returns PostHog's status code and response body unchanged, so your SDK sees the result for each event
-- Accepts request bodies of at least 20MB, the most PostHog accepts on the AI endpoint. AI requests can be larger than 1MB, the default limit in nginx and ingress-nginx, and a `413` from your proxy drops the events in that request (the iOS, Android and Flutter SDKs split the batch first, and drop only an event that's too large on its own)
+- Accepts request bodies of at least 20MB, the most PostHog accepts on the AI endpoint. AI requests can be larger than 1MB, the default limit in nginx and ingress-nginx, and a `413` from your proxy drops the events in that request (the iOS, Android, and Flutter SDKs split the batch first, and drop only an event that's too large on its own)
 
-Capture v1 SDKs send your project token in the `Authorization` header, as `Bearer <token>`. Without it, PostHog returns `401` and the SDK drops the events. If your proxy removes other credentials, keep `Authorization` values that start with `Bearer phc_`, `Bearer phs_` or `Bearer phx_` (server SDKs send the last two for features such as local feature flag evaluation and remote config), plus the exact `Bearer <key>` value of any older key without one of these prefixes. Some older versions of our proxy guides removed this header and kept the 1MB default request limit, so check your proxy against the current [proxy guides](/docs/advanced/proxy) and the [proxy reference](/docs/advanced/proxy/proxy-reference). The [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) already serves both capture v1 endpoints and passes these headers through.
+Capture v1 SDKs send your project token in the `Authorization` header, as `Bearer <token>`. Without it, PostHog returns `401` and the SDK drops the events. If your proxy removes other credentials, keep `Authorization` values that start with `Bearer phc_`, `Bearer phs_`, or `Bearer phx_` (server SDKs send the last two for features such as local feature flag evaluation and remote config), plus the exact `Bearer <key>` value of any older key without one of these prefixes. Some older versions of our proxy guides removed this header and kept the 1MB default request limit, so check your proxy against the current [proxy guides](/docs/advanced/proxy) and the [proxy reference](/docs/advanced/proxy/proxy-reference). The [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy) already serves both capture v1 endpoints and passes these headers through.
 
 ## Learn more
 

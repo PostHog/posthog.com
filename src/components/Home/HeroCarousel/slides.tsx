@@ -6,7 +6,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { Logo } from '@posthog/brand/logo'
 import { getLogo } from 'constants/logos'
 import useSourcePlatforms from 'hooks/useSourcePlatforms'
-import { SELF_HOSTED_SOURCES } from 'constants/sources'
+import { EXTRA_SOURCES } from 'constants/sources'
 import useProduct from 'hooks/useProduct'
 import CloudinaryImage from 'components/CloudinaryImage'
 
@@ -88,12 +88,12 @@ const ProductItem = ({ product }: { product: any }) => {
 export const OnePlaceSlide = () => {
     const allProducts = useProduct() as any[]
     const managedPlatforms = useSourcePlatforms()
-    const selfHosted = SELF_HOSTED_SOURCES.map((s) => ({
+    const extraSources = EXTRA_SOURCES.map((s) => ({
         label: s.name,
         url: `/docs/data-pipelines/sources/${s.slug}`,
         image: getLogo(s.logo),
     }))
-    const platforms = [...managedPlatforms, ...selfHosted].sort((a, b) => a.label.localeCompare(b.label))
+    const platforms = [...managedPlatforms, ...extraSources].sort((a, b) => a.label.localeCompare(b.label))
     const sourceCount = platforms.length
 
     const { allDestinations } = useStaticQuery(graphql`
