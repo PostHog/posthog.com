@@ -100,7 +100,7 @@ await Posthog().capture(
 | `disable_skew_correction` | `bool` | Whether PostHog keeps the event timestamp as sent instead of correcting it for device clock skew | `$ignore_sent_at` |
 | `product_tour_id` | `String` | The product tour the event belongs to | `$product_tour_id` |
 
-- An option wins over its legacy property. A `null` option counts as unset.
+- Legacy option properties still work, but an option overrides its legacy property. Use options. A `null` option counts as unset.
 - `beforeSend` can read and change the options of the events it receives through `PostHogEvent.options`:
 
   ```dart
@@ -690,7 +690,7 @@ await Posthog().capture(
 );
 ```
 
-The legacy properties still work, but an option wins over its legacy property. To send an option with every event, use the new `Posthog().registerOptions()` and `unregisterOptions()` instead of registering its legacy property. See [Event options](#event-options) for the known options, their legacy properties and the limits on web.
+To send an option with every event, use the new `Posthog().registerOptions()` and `unregisterOptions()` instead of registering its legacy property. See [Event options](#event-options) for the known options, their legacy properties and the limits on web.
 
 ### AI events
 
