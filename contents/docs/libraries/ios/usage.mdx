@@ -202,6 +202,37 @@ To set up [session replay](/docs/session-replay/mobile) in your project, all you
 
 To set up error tracking in your project, see the [error tracking docs](/docs/error-tracking).
 
+## AI events
+
+To send [AI observability](/docs/ai-observability) events you build yourself, such as `$ai_generation`, `$ai_span`, or `$ai_embedding`, call `captureAi` instead of `capture`. It's available from version `4.0.0`. It takes the same arguments as `capture` and runs the same `beforeSend` hooks, then sends the event to PostHog's [AI endpoint](/docs/ai-observability/large-events), which accepts much larger events than `capture`.
+
+```swift
+let uuid = PostHogSDK.shared.captureAi("$ai_generation", properties: [
+    "$ai_trace_id": traceId,
+    "$ai_model": "gpt-5",
+    "$ai_provider": "openai",
+    "$ai_input_tokens": 120,
+    "$ai_output_tokens": 45,
+])
+```
+
+`captureAi` returns the event's UUID once the event is queued. It returns `nil` when the event isn't queued: the SDK is opted out or disabled, the event name is empty, a `beforeSend` hook dropped the event, or the event is over `captureAiMaxEventBytes`.
+
+- **Separate queue.** AI events have their own on-disk queue, so large events don't push your other events out. It keeps up to `captureAiMaxQueueSize` events and at most 50 MiB. Past either limit, the oldest events are dropped. `flush()` and `close()` send both queues.
+- **Size limit.** The SDK drops an AI event that's over 8 MiB plus 64 KiB once serialized: PostHog's 8 MiB limit on an AI event's properties, plus room for the rest of the event. Everything you pass is sent as is. The SDK doesn't truncate or redact prompts, outputs, or media.
+- **`capture` doesn't reroute AI events.** `capture` never sends `$ai_` events to the AI endpoint, so use `captureAi` for them. PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`, and the SDK logs a debug message when you pass one.
+
+These [`PostHogConfig`](/docs/libraries/ios/configuration#all-configuration-options) settings apply only to `captureAi`:
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| `captureAiCompression` | `.gzip` | How `captureAi` request bodies are compressed, separately from `compression`. |
+| `captureAiMaxQueueSize` | `100` | Maximum number of AI events kept on disk before the oldest are dropped. The 50 MiB limit applies too. |
+| `captureAiTimeout` | `60` | Seconds an AI request can go without network activity before it times out. Other requests time out after 10 seconds. |
+| `captureAiMaxEventBytes` | `8454144` (8 MiB + 64 KiB) | Maximum size of a serialized AI event. You can only lower it: a larger value uses the default. |
+
+A value of `0` or less for a numeric setting uses its default.
+
 ## Debug mode 
 
 If you're not seeing the expected events being captured, the feature flags being evaluated, or the surveys being shown, you can enable debug mode to see what's happening. 
