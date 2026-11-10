@@ -56,7 +56,7 @@ Run the following commands in your root directory:
 
 ```bash
 # in the root directory
-npm install posthog-node
+npm install posthog-node@6
 npm install posthog-js @posthog/react
 touch src/app/providers.js
 ```

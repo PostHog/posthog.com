@@ -176,7 +176,7 @@ You may notice the text flickers when you load your app. This is because PostHog
 We'll show you how to fetch the flag on the server side. First, install the [`posthog-node` SDK](/docs/libraries/node):
 
 ```bash
-npm install posthog-node
+npm install posthog-node@6
 ```
 
 Then, we use the PostHog Node library to fetch the feature flag using [`useAsyncData`](https://nuxt.com/docs/api/composables/use-async-data). Replace the code in `app.vue` with the following:

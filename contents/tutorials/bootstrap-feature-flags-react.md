@@ -174,7 +174,7 @@ To get the feature flags data on the backend and pass it to the frontend, we nee
 This starts by installing the necessary packages:
 
 ```bash
-npm install express cookie-parser posthog-node uuid dotenv
+npm install express cookie-parser posthog-node@6 uuid dotenv
 npm install --save-dev nodemon
 ```
 

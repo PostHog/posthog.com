@@ -179,7 +179,7 @@ Server-side rendering is a way to avoid this. This fetches the feature flag befo
 To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
-npm install posthog-node
+npm install posthog-node@6
 ```
 
 In SvelteKit, server-side logic can be implemented using the [load](https://kit.svelte.dev/docs/load#page-data) function. To do this, create a new file `+page.server.js` in the same directory as `+page.svelte` and add the following code:
