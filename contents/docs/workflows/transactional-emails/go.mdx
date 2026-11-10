@@ -189,10 +189,31 @@ func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email
 - **`TemplateKey`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
 - **`Text`** - If you leave it out, PostHog makes it from `HTML`.
 - **`From`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `ReplyTo` takes a list of addresses.
-- **`CaptureEngagement`** - PostHog captures the email's engagement events unless you set it to `posthog.Ptr(false)`.
-- **`TrackOpensAndClicks`** - Whether PostHog tracks the email's opens and clicks. If you set `TrackOpensAndClicks` to `posthog.Ptr(false)`, the email goes out without PostHog's open pixel, so PostHog can't count its opens. PostHog doesn't track clicks on emails sent from your code, so it never rewrites their links either way. It works separately from `CaptureEngagement`, which decides whether PostHog captures engagement events on the recipient's person.
+- **`Tracking`** - What PostHog tracks for the email. If you leave it out, PostHog tracks opens, not clicks, and captures engagement events. See [open and click tracking](#open-and-click-tracking).
+- **`CaptureEngagement`** - Deprecated. Set `Tracking: &posthog.EmailTracking{Engagement: posthog.Ptr(false)}` instead. It still works, but a send that sets both `CaptureEngagement` and `Tracking` gets an error.
 
 A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+### Open and click tracking
+
+`Tracking` decides what PostHog tracks for an email from your code:
+
+| `Tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Left out | On | Off | On |
+| `posthog.EmailTrackingOn()` | On | On | On |
+| `posthog.EmailTrackingOff()` | Off | Off | Off |
+| `&posthog.EmailTracking{...}` | `Opens`, on by default | `Clicks`, off by default | `Engagement`, on by default |
+
+- **Opens** - PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** - PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+
+Clicks are off by default because PostHog can't tell a newsletter from an email with a sign-in or password reset link. A tracked link goes through a redirect, so a token in the link would go through it too. Set `Tracking: &posthog.EmailTracking{Clicks: posthog.Ptr(true)}` when the email's links are safe to rewrite.
+
+With `posthog.EmailTrackingOff()`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and captures no engagement events for it.
+
+PostHog refuses `Opens` set to `posthog.Ptr(false)` with `Clicks` set to `posthog.Ptr(true)`, because click tracking needs open tracking. See [open and click tracking](/docs/workflows/transactional-emails/api#open-and-click-tracking) for every rule.
 
 ## Check an email's status
 
