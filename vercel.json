@@ -674,6 +674,10 @@
             "destination": "/compare/best-fathom-alternatives"
         },
         {
+            "source": "/blog/best-feature-flag-software-for-developers",
+            "destination": "/compare/best-feature-flag-tools-for-developers"
+        },
+        {
             "source": "/blog/best-flagsmith-alternatives",
             "destination": "/compare/best-flagsmith-alternatives"
         },
