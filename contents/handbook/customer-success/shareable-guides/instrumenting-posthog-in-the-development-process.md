@@ -192,7 +192,7 @@ Send the account ID and plan as properties on each backend event. You can then b
 ## Anti-patterns
 
 - **A flag evaluated in a latency hot path.** Each remote evaluation is a network request. Use [server-side local evaluation](/docs/feature-flags/local-evaluation), and [evaluate the flag once, not on every request](/docs/feature-flags/best-practices#evaluate-once-not-continuously).
-- **A launch with no list of the events it fires.** If nobody can name the events, nobody can grade the launch. Step 5 of the loop prevents this.
+- **A launch with no list of the events it fires.** If nobody can name the events, nobody can grade the launch. Step 2 of the loop prevents this.
 - **An agent that builds a whole feature with no tracking plan.** The agent invents names and properties, and nobody checks them against the PRD metric. Give the agent the event spec and the rules first.
 
 ## Common questions
