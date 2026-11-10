@@ -214,7 +214,7 @@ PostHog.Companion.capture("signed_up", null, null, null, null, null, null, optio
 PostHog.Companion.screen("Checkout", null, null);
 ```
 
-- An option wins over its legacy property, which still works. Other keys are sent unchanged, and PostHog ignores keys it doesn't know.
+- Legacy option properties still work, but an option overrides its legacy property. Use options. Other keys are sent unchanged, and PostHog ignores keys it doesn't know.
 - PostHog reads common forms of a value, such as `"false"` or `0` for a boolean, and drops an event whose option value it can't read.
 - For `identify`, the options apply to the `$identify` or `$set` event the call sends.
 - In `beforeSend`, read and change options through `event.options`. Edit the map in place: when person processing is off, the SDK sets `process_person_profile` to `false` there, and assigning a new map loses it.
@@ -645,7 +645,7 @@ A trailing lambda such as `PostHog.reloadFeatureFlags { mainHandler.post { refre
 
 ### Event options and AI events
 
-`capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, and `captureException` take a new `options` argument as their last parameter. Use it for capture settings such as `process_person_profile` and `cookieless_mode`, which 3.x read from `$`-prefixed properties. The legacy properties still work.
+`capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, and `captureException` take a new `options` argument as their last parameter. Use it for capture settings such as `process_person_profile` and `cookieless_mode`, which 3.x read from `$`-prefixed properties.
 
 ```kotlin
 // Version 3
