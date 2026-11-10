@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tabs as BaseTabs } from '@base-ui/react/tabs'
 import { Button, ButtonGroup } from '../Button'
-import type { ButtonAppearance, ButtonSize, ButtonVariant } from '../Button'
+import type { ButtonAppearance, ButtonSize } from '../Button'
 import { focusRing } from '../styles'
 import {
     HEIGHT_CHANGE_MS,
@@ -16,14 +16,12 @@ const TAB_CHANGE_WINDOW_MS = HEIGHT_CHANGE_MS * 2
 
 type TabsLook = {
     appearance: ButtonAppearance
-    variant: ButtonVariant
     size: ButtonSize
     orientation: 'horizontal' | 'vertical'
 }
 
 const LookContext = React.createContext<TabsLook>({
-    appearance: 'flat',
-    variant: 'secondary',
+    appearance: 'outline',
     size: 'md',
     orientation: 'horizontal',
 })
@@ -33,20 +31,11 @@ const root =
 
 export type TabsRootProps = Omit<BaseTabs.Root.Props, 'ref'> & {
     appearance?: ButtonAppearance
-    variant?: ButtonVariant
     size?: ButtonSize
 }
 
 const Root = React.forwardRef<HTMLDivElement, TabsRootProps>(function TabsRoot(
-    {
-        appearance = 'flat',
-        variant = 'secondary',
-        size = 'md',
-        orientation = 'horizontal',
-        className,
-        onValueChange,
-        ...props
-    },
+    { appearance = 'outline', size = 'md', orientation = 'horizontal', className, onValueChange, ...props },
     ref
 ) {
     const tabChanged = React.useRef(false)
@@ -78,10 +67,7 @@ const Root = React.forwardRef<HTMLDivElement, TabsRootProps>(function TabsRoot(
         markTabChange()
         onValueChange?.(...args)
     }
-    const look = React.useMemo(
-        () => ({ appearance, variant, size, orientation }),
-        [appearance, variant, size, orientation]
-    )
+    const look = React.useMemo(() => ({ appearance, size, orientation }), [appearance, size, orientation])
     return (
         <LookContext.Provider value={look}>
             <BaseTabs.Root
@@ -99,18 +85,18 @@ const List = React.forwardRef<HTMLDivElement, Omit<BaseTabs.List.Props, 'ref' | 
     props,
     ref
 ) {
-    const { appearance, variant, size, orientation } = React.useContext(LookContext)
+    const { appearance, size, orientation } = React.useContext(LookContext)
     return (
         <BaseTabs.List
             ref={ref}
-            render={<ButtonGroup appearance={appearance} variant={variant} size={size} orientation={orientation} />}
+            render={<ButtonGroup appearance={appearance} size={size} orientation={orientation} />}
             {...props}
         />
     )
 })
 
 const Tab = React.forwardRef<HTMLElement, Omit<BaseTabs.Tab.Props, 'ref' | 'render'>>(function TabsTab(props, ref) {
-    const { appearance, variant, size } = React.useContext(LookContext)
+    const { appearance, size } = React.useContext(LookContext)
     return (
         <BaseTabs.Tab
             ref={ref}
@@ -118,7 +104,6 @@ const Tab = React.forwardRef<HTMLElement, Omit<BaseTabs.Tab.Props, 'ref' | 'rend
                 <Button
                     {...tabProps}
                     appearance={appearance}
-                    variant={variant}
                     size={size}
                     data-pressed={state.active ? '' : undefined}
                 />

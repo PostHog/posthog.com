@@ -220,8 +220,17 @@ export const searchGroupFor = (appearance: SearchAppearance): string =>
 export const trackSurface =
     'bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.45)]'
 
-export const chip =
-    'inline-flex h-6 min-w-0 max-w-full shrink-0 items-center gap-1 rounded-[5px] border border-[rgb(var(--text-primary)/0.1)] border-b-[rgb(var(--text-primary)/0.3)] bg-white/60 px-2 text-13 font-medium leading-4 text-primary has-[button]:pr-px dark:bg-white/[0.1]'
+export const neutralTagSurface =
+    'border-[rgb(var(--text-primary)/0.1)] border-b-[rgb(var(--text-primary)/0.3)] bg-white/60 text-primary dark:bg-white/[0.1]'
+
+export const chipBase =
+    'inline-flex h-6 min-w-0 max-w-full shrink-0 items-center gap-1 rounded-full border px-2 text-13 font-medium leading-4 has-[button]:pr-px'
+
+export const chip = `${chipBase} ${neutralTagSurface}`
+
+export const neutralTagLink = `cursor-pointer no-underline transition-colors duration-150 ease-out hover:border-[rgb(var(--text-primary)/0.25)] hover:border-b-[rgb(var(--text-primary)/0.45)] hover:bg-white motion-reduce:transition-none dark:hover:bg-white/[0.16] ${focusRing}`
+
+export const tintedLink = `cursor-pointer no-underline transition-[filter] duration-150 ease-out hover:brightness-[0.94] motion-reduce:transition-none dark:hover:brightness-110 ${focusRing}`
 
 export const chipImageBorder = 'border border-[rgb(var(--text-primary)/0.16)] object-cover'
 
@@ -229,7 +238,7 @@ export const chipImage = `-ml-[7px] size-5 shrink-0 rounded-full ${chipImageBord
 
 export const chipIcon = '-ml-0.5 flex size-3.5 shrink-0 items-center justify-center text-secondary [&>svg]:size-full'
 
-export const chipRemove = `flex size-5 shrink-0 items-center justify-center rounded-[3px] text-secondary ${neutralHover} hover:text-primary ${insetFocusRing}`
+export const chipRemove = `flex size-5 shrink-0 items-center justify-center rounded-full text-secondary ${neutralHover} hover:text-primary ${insetFocusRing}`
 
 export const listItem =
     'min-h-[25px] cursor-default select-none items-center gap-2 rounded py-1 text-sm leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'

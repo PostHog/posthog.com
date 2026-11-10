@@ -277,6 +277,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
             )}
         >
             <Tabs.Root
+                appearance="flat"
                 value={activeSnippet.id}
                 onValueChange={(nextValue) => {
                     const nextId = String(nextValue)
