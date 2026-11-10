@@ -115,7 +115,7 @@ Subscribers to [Every](https://every.to/) get:
 Applications are automatically enriched with Clearbit and Clay, then approved. We then manually review all emails to ensure eligibility. If there's a mismatch (e.g. on founding date or funding raised), we’ll email the founder.
 If we don’t hear back in a week or confirm ineligibility, we remove the credits.
 
-We also check that the founder and the organization have not received startup or YC credits before. If either has, we reject the application or remove the credits. The exception is a YC application from a team whose PostHog for Startups credits have ended. We also decline applications from new products, brands, or subsidiaries of an established company. People sometimes claim to be part of several startups to get credits again. Because credits are always issued at our discretion, we don't need to prove this before we decline. Don't tell applicants how we detect duplicate claims.
+We also check that the founder and the organization have not received startup or YC credits before. If either has, we reject the application or remove the credits. The exception is a YC application from a team whose PostHog for Startups credits have ended. We also decline applications from new products, brands, or subsidiaries of an ineligible company. People sometimes claim to be part of several startups to get credits again. Because credits are always issued at our discretion, we don't need to prove this before we decline. Don't tell applicants how we detect duplicate claims.
 
 ## Merch
 
