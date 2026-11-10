@@ -151,7 +151,7 @@ Options control how PostHog processes an event. They replace the legacy option p
 
 ### Legacy option properties
 
-Set these settings in `options`. The `$process_person_profile` and `$cookieless_mode` legacy option properties still work, but an option overrides its legacy property. Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use options.
+Set these settings in `options`. The `$process_person_profile` and `$cookieless_mode` legacy option properties still work, but an option overrides its legacy property. Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use options; legacy properties may not be supported in future major versions.
 
 PostHog stores each option as its `$`-prefixed property, such as `$process_person_profile`, so your insights and filters keep working.
 
