@@ -151,7 +151,7 @@ Options control how PostHog processes an event. They replace the legacy option p
 
 ### Legacy option properties
 
-Set these settings in `options`. The `$process_person_profile` and `$cookieless_mode` legacy option properties still work, but an option overrides its legacy property. Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use options; legacy properties may not be supported in future major versions.
+Set these settings in `options`. The `$process_person_profile` and `$cookieless_mode` legacy option properties still work, but an option overrides its legacy property. Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use options.
 
 PostHog stores each option as its `$`-prefixed property, such as `$process_person_profile`, so your insights and filters keep working.
 
@@ -159,7 +159,7 @@ PostHog stores each option as its `$`-prefixed property, such as `$process_perso
 
 Compress the body and set `Content-Encoding` to one of `gzip`, `deflate`, `br`, or `zstd`. An uncompressed body needs no `Content-Encoding`. Don't send `Content-Encoding: identity`: it fails with `415`.
 
-Legacy formats such as `gzip-js`, `lz64`, and `base64` are not accepted on v1: a `Content-Encoding` value other than the four above fails with `415`, and a body in one of those formats isn't valid JSON, so the request fails with `400`. The `?compression=` query parameter is ignored.
+Legacy formats such as `gzip-js`, `lz64`, and `base64` aren't accepted on v1: a `Content-Encoding` value other than the four above fails with `415`, and a body in one of those formats isn't valid JSON, so the request fails with `400`. The `?compression=` query parameter is ignored.
 
 [SDKs](/docs/libraries/capture-v1#configuration) support different sets of these formats. Check your SDK's migration guide for which ones it offers.
 
@@ -248,7 +248,6 @@ The request body limits above are for PostHog Cloud. On a self-hosted instance, 
 | `415` | Unsupported `Content-Type` or `Content-Encoding` | No |
 | `429` | Too many requests from one source. PostHog's network edge, in front of capture, can send this when a single client sends an unusually high request rate. It's rare. | Yes, after at least the `Retry-After` time if the response has one. Send fewer, larger requests. |
 | `500`, `502`, `503`, `504` | A temporary problem | Yes |
-
 
 Errors from capture use this body. `error` is a stable tag you can match on. A response from a proxy or from PostHog's network edge in front of capture, such as some `404`, `405`, `413`, or `429` responses, may not be JSON, so check the status code first.
 

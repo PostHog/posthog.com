@@ -17,7 +17,7 @@ checks:
           rubrics:
               capture-request: >-
                   The code sends an HTTP POST to a PostHog capture endpoint on the
-                  PostHog host, /capture/, /i/v0/e/ or /i/v1/analytics/events, with a
+                  PostHog host, /capture/, /i/v0/e/, or /i/v1/analytics/events, with a
                   JSON content type. Cite the file and line(s).
               payload-fields: >-
                   The request carries the project token, event set to job_created, and

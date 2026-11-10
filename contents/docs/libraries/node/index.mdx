@@ -26,7 +26,6 @@ The Node.js SDK `6.0.0` sends events with [capture v1](/docs/libraries/capture-v
 
 <!-- TODO(capture-v1): add this callout on release day only. -->
 
-
 If you're working with Node.js (version 20.20 or later on Node.js 20, or 22.22 or later), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
 
 import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
@@ -59,7 +58,7 @@ import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx
 | `featureFlagsPollingInterval` | How often, in milliseconds, feature flag definitions are fetched for local evaluation. Minimum `100`                  | `30000`                    |
 | `enableLocalEvaluation`       | When `false`, the SDK does not poll for feature flag definitions, even if `secretKey` or its legacy alias `personalApiKey` is set                     | `true`                     |
 | `requestTimeout`              | Timeout in milliseconds for any calls                                                                                 | `10000`                    |
-| `captureMaxRetries`           | Number of times the SDK retries a failed capture request. Waits start at 100 ms and double each retry, up to 30 seconds. When not set, `fetchRetryCount` is used | `3`                        |
+| `captureMaxRetries`           | Number of times the SDK retries a failed capture request. Waits start at 100ms and double each retry, up to 30 seconds. When not set, `fetchRetryCount` is used | `3`                        |
 | `captureCompression`          | How capture requests compress their body: `'none'`, `'gzip'`, `'deflate'`, or `'zstd'`. `'zstd'` needs Node.js 22.15 or later and falls back to `'gzip'` elsewhere | `'gzip'`                   |
 | `fetchRetryCount`             | Number of times the SDK retries a failed request                                                                      | `3`                        |
 | `fetchRetryDelay`             | Delay in milliseconds between request retries. Capture requests don't use it                                          | `3000`                     |

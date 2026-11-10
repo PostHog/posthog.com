@@ -96,7 +96,7 @@ To enable local evaluation, you need a [secret API key](/docs/feature-flags/loca
 use posthog::ClientOptionsBuilder;
 
 let options = ClientOptionsBuilder::default()
-    .api_key("your-project-api-key".to_string())
+    .api_key("<ph_project_token>".to_string())
     .secret_key("your-secret-api-key")
     .enable_local_evaluation(true)
     .poll_interval_seconds(30) // Optional, defaults to 30

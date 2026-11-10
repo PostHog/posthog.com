@@ -15,7 +15,7 @@ let client = posthog::client("<ph_project_token>").await;
 
 Our Rust SDK supports both blocking and async clients. The async client is the default and is recommended for most use cases.
 
-If you need to use a synchronous client instead – like we do in our [CLI](https://github.com/PostHog/posthog/tree/master/cli) –, you can opt into it by turning off the default features in your `Cargo.toml` file. This also turns off TLS, so turn the `tls` feature back on to send events over HTTPS.
+If you need to use a synchronous client instead – like we do in our [CLI](https://github.com/PostHog/posthog/tree/master/cli) – you can opt into it by turning off the default features in your `Cargo.toml` file. This also turns off TLS, so turn the `tls` feature back on to send events over HTTPS.
 
 ```toml
 [dependencies]
