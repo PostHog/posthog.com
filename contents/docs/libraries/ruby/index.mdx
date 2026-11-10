@@ -104,7 +104,9 @@ flushed = posthog.flush(timeout: 5)
 stopped = posthog.shutdown(timeout: 5)
 ```
 
-Both return `true` when pending events are sent, or `false` on timeout. `flush` leaves the client running. `shutdown` stops it and drops events still queued at the deadline. Cleanup can take up to one extra second. Without a timeout, both wait indefinitely.
+In async mode, both return `true` when pending events are sent, or `false` on timeout. `flush` leaves the client running. `shutdown` stops it and drops events still queued at the deadline. Cleanup can take up to one extra second. Without a timeout, both wait indefinitely.
+
+With `sync_mode: true`, both wait for in-flight event requests without honoring `timeout:`.
 
 ## Identifying users
 
