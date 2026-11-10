@@ -202,6 +202,8 @@ Things to check with engineers and PMs before writing:
 - Map the scenarios: Identify common use cases and edge cases, including both straightforward and branched workflows.
 
 - Check available events and properties: Find out which events our data infrastructure already captures across those scenarios. This will help you determine which events or custom properties you'll need to reference in your Liquid code.
+
+
 ## Email campaigns
 We run many email campaigns to help users get more out of PostHog. All of these campaigns now live in PostHog Workflows, not Customer.io. The most developed and documented of these are our four onboarding campaigns.  
 
