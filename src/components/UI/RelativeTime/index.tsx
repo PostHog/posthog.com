@@ -11,7 +11,7 @@ export type RelativeTimeProps = Omit<React.ComponentPropsWithoutRef<'time'>, 'da
     tooltip?: boolean
 }
 
-const exactTimePopup = 'px-2 py-1 text-[13px] leading-4'
+const exactTimePopup = 'px-2 py-1 text-13 leading-4'
 
 const MINUTE_MS = 60_000
 const HOUR_MS = 60 * MINUTE_MS

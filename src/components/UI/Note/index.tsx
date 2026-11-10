@@ -14,8 +14,8 @@ export type NoteRootProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'color'> 
 export type NoteIconProps = React.HTMLAttributes<HTMLSpanElement>
 
 const noteSizes = {
-    sm: 'text-[13px] [--note-x:0.625rem] [--note-y:0.375rem] [--note-title-y:0.25rem]',
-    md: 'text-sm [--note-x:0.75rem] [--note-y:0.5rem] [--note-title-y:0.375rem]',
+    sm: 'text-13 leading-5 [--note-x:0.625rem] [--note-y:0.375rem] [--note-title-y:0.25rem]',
+    md: 'text-sm leading-5 [--note-x:0.75rem] [--note-y:0.5rem] [--note-title-y:0.375rem]',
 }
 const NoteColor = React.createContext<ColorOrStatus>('info')
 
@@ -35,7 +35,7 @@ const Root = React.forwardRef<HTMLDivElement, NoteRootProps>(function NoteRoot(
                 {...props}
                 className={cn(
                     cardLevels[1],
-                    '@container overflow-hidden leading-5 text-primary',
+                    '@container overflow-hidden text-primary',
                     title && 'border-t-0',
                     noteSizes[size],
                     className

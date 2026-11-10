@@ -39,13 +39,13 @@ const inGroup =
 const labelSizes: Record<FloatingButtonSize, string> = {
     sm: 'h-8 gap-1.5 px-3 text-xs',
     md: 'h-10 gap-2 px-4 text-sm',
-    lg: 'h-12 gap-2 px-5 text-[15px]',
+    lg: 'h-12 gap-2 px-5 text-15',
 }
 
 const groupedLabelSizes: Record<FloatingButtonSize, string> = {
     sm: 'h-6 gap-1.5 px-2.5 text-xs',
     md: 'h-8 gap-2 px-3 text-sm',
-    lg: 'h-10 gap-2 px-4 text-[15px]',
+    lg: 'h-10 gap-2 px-4 text-15',
 }
 
 const squareSizes: Record<FloatingButtonSize, string> = { sm: 'size-8', md: 'size-10', lg: 'size-12' }

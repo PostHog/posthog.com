@@ -78,8 +78,8 @@ const flatBase = `relative inline-flex min-w-0 max-w-full items-center justify-c
 
 const flatPadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-1 text-xs leading-4',
-    md: 'gap-1 px-2.5 py-1.5 text-[13px] leading-[22px]',
-    lg: 'gap-1 px-3 py-2 text-[15px] leading-[26px]',
+    md: 'gap-1 px-2.5 py-1.5 text-13 leading-[22px]',
+    lg: 'gap-1 px-3 py-2 text-15 leading-[26px]',
 }
 
 const flatTones: Record<ButtonVariant, string> = {
@@ -185,8 +185,8 @@ const raisedFaceMotion: Record<ButtonSize, string> = {
 
 const raisedFacePadding: Record<ButtonSize, string> = {
     sm: 'gap-1 px-2 py-[3px] text-xs leading-4',
-    md: 'gap-1 px-2.5 py-[5px] text-[13px] leading-[22px]',
-    lg: 'gap-1 px-3 py-[7px] text-[15px] leading-[26px]',
+    md: 'gap-1 px-2.5 py-[5px] text-13 leading-[22px]',
+    lg: 'gap-1 px-3 py-[7px] text-15 leading-[26px]',
 }
 
 const raisedFaceSquarePadding: Record<ButtonSize, string> = { sm: 'p-1', md: 'p-2', lg: 'p-2.5' }

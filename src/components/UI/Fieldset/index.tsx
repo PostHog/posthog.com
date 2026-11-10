@@ -7,7 +7,7 @@ const Root = withClassName(BaseFieldset.Root, `m-0 flex min-w-0 flex-col gap-3 p
 
 const Legend = withClassName(
     BaseFieldset.Legend,
-    '-mx-1 bg-transparent px-1 text-[15px] font-bold text-primary data-[disabled]:text-muted',
+    '-mx-1 bg-transparent px-1 text-15 font-bold text-primary data-[disabled]:text-muted',
     {
         render: <legend />,
     }

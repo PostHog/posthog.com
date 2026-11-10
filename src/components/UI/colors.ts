@@ -106,7 +106,7 @@ export const colorText: Record<ColorName, string> = {
 }
 
 export const colorFill: Record<ColorName, string> = {
-    gray: 'bg-[rgb(var(--text-primary)/0.5)]',
+    gray: 'bg-[color:color-mix(in_srgb,rgb(var(--text-primary))_50%,rgb(var(--bg)))]',
     brand: 'bg-orange',
     blue: 'bg-brand-blue',
     cobalt: 'bg-brand-cobalt',

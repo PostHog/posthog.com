@@ -7,6 +7,7 @@ import {
     cardInnerTopRadius,
     cardLevels,
     cardAppearances,
+    solidInsetCard,
     surfacePaddings,
 } from '../styles'
 
@@ -70,7 +71,9 @@ const Root = React.forwardRef<HTMLDivElement, CardRootProps>(function CardRoot(
                         className={cn(
                             'flex min-w-0 flex-col text-primary',
                             cardLevels[resolvedLevel],
-                            cardAppearances[resolvedAppearance],
+                            resolvedLevel === 2 && resolvedAppearance === 'solid'
+                                ? solidInsetCard
+                                : cardAppearances[resolvedAppearance],
                             surfacePaddings[padding],
                             className
                         )}
@@ -87,7 +90,7 @@ const Header = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>): 
 )
 
 const Title = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element => (
-    <h3 className={cn('m-0 text-[15px] font-semibold leading-snug text-primary', className)} {...props} />
+    <h3 className={cn('m-0 text-15 font-semibold leading-snug text-primary', className)} {...props} />
 )
 
 const Description = ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>): JSX.Element => (
@@ -123,10 +126,10 @@ const TitleBar = ({ icon, meta, actions, className, children, ...props }: CardTi
                     {icon}
                 </span>
             )}
-            <h3 className="m-0 min-w-0 flex-1 text-heading-sm text-primary">
+            <h3 className="m-0 min-w-0 flex-1 text-15 font-semibold leading-snug text-primary">
                 <TruncatedText>{children}</TruncatedText>
             </h3>
-            {meta && <span className="shrink-0 font-code text-[13px] text-secondary">{meta}</span>}
+            {meta && <span className="shrink-0 font-code text-13 text-secondary">{meta}</span>}
             {actions && <span className="-my-1 -mr-1.5 flex shrink-0 items-center gap-1">{actions}</span>}
         </div>
     )
@@ -137,7 +140,7 @@ const StatusBar = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>
     return (
         <div
             className={cn(
-                'flex min-h-10 shrink-0 items-center gap-2 border-t py-2 text-[13px] text-secondary',
+                'flex min-h-10 shrink-0 items-center gap-2 border-t py-2 text-13 text-secondary',
                 cardInnerBottomRadius,
                 cardBarSurface,
                 barInset[padding],

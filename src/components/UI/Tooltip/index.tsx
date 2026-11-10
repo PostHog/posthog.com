@@ -7,7 +7,7 @@ import type { PositionerPropName } from '../utils'
 
 const OPEN_DELAY_MS = 0
 
-const tooltipPopup = `${grainSurface} pointer-events-none relative max-w-[min(20rem,var(--available-width))] select-none rounded border border-primary bg-primary px-2 py-1 text-[13px] leading-4 text-primary ${overlayShadowSm} ${popupTransition} data-[instant]:transition-none`
+const tooltipPopup = `${grainSurface} pointer-events-none relative max-w-[min(20rem,var(--available-width))] select-none rounded border border-primary bg-primary px-2 py-1 text-13 leading-4 text-primary ${overlayShadowSm} ${popupTransition} data-[instant]:transition-none`
 
 export type TooltipRootProps = Omit<BaseTooltip.Root.Props, 'disableHoverablePopup'>
 

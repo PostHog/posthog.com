@@ -130,7 +130,7 @@ const Tab = React.forwardRef<HTMLElement, Omit<BaseTabs.Tab.Props, 'ref' | 'rend
 
 const Panel = withClassName(
     BaseTabs.Panel,
-    `grow rounded text-[15px] text-primary transition-opacity duration-200 ease-out data-[starting-style]:opacity-0 motion-reduce:transition-none ${focusRing}`
+    `grow rounded text-15 text-primary transition-opacity duration-200 ease-out data-[starting-style]:opacity-0 motion-reduce:transition-none ${focusRing}`
 )
 
 export const Tabs = { Root, List, Tab, Panel }

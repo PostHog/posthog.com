@@ -33,7 +33,7 @@ const Popup = React.forwardRef<HTMLDivElement, PopoverPopupProps>(function Popov
 
 const Arrow = withClassName(BasePopover.Arrow, popupArrow)
 
-const Title = withClassName(BasePopover.Title, 'm-0 text-[15px] font-bold leading-snug text-primary')
+const Title = withClassName(BasePopover.Title, 'm-0 text-15 font-bold leading-snug text-primary')
 
 const Description = withClassName(BasePopover.Description, 'm-0 text-sm text-secondary')
 

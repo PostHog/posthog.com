@@ -7,8 +7,8 @@ export type AvatarSize = 'sm' | 'md' | 'lg'
 
 const avatarSizes: Record<AvatarSize, string> = {
     sm: 'size-6 text-[10px]',
-    md: 'size-8 text-[13px]',
-    lg: 'size-10 text-[15px]',
+    md: 'size-8 text-13',
+    lg: 'size-10 text-15',
 }
 
 const groupOverlap: Record<AvatarSize, string> = {

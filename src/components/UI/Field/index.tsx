@@ -29,7 +29,7 @@ const Control = React.forwardRef<HTMLInputElement, FieldControlProps>(function F
     )
 })
 
-const Description = withClassName(BaseField.Description, 'm-0 text-[13px] text-secondary')
+const Description = withClassName(BaseField.Description, 'm-0 text-13 text-secondary')
 
 const errorReveal =
     'grid grid-rows-[1fr] transition-[grid-template-rows,opacity,margin-top] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] data-[ending-style]:duration-150 data-[starting-style]:-mt-1 data-[starting-style]:grid-rows-[0fr] data-[starting-style]:opacity-0 data-[ending-style]:-mt-1 data-[ending-style]:grid-rows-[0fr] data-[ending-style]:opacity-0 motion-reduce:transition-none'
@@ -41,7 +41,7 @@ const ErrorMessage = React.forwardRef<HTMLDivElement, Omit<BaseField.Error.Props
     return (
         <BaseField.Error
             ref={ref}
-            className={mergeClassName(`m-0 text-[13px] text-red dark:text-yellow ${errorReveal}`, className)}
+            className={mergeClassName(`m-0 text-13 text-red dark:text-yellow ${errorReveal}`, className)}
             render={(errorProps) => (
                 <div {...errorProps}>
                     <span className="min-h-0 overflow-hidden">{errorProps.children}</span>

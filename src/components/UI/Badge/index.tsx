@@ -44,7 +44,7 @@ const isLinkBadge = (props: BadgeLabelOwnProps | BadgeLinkOwnProps): props is Ba
     typeof props.href === 'string'
 
 const badgeSizes: Record<BadgeSize, string> = {
-    sm: 'inline-flex h-5 max-w-full items-center gap-1 px-1.5 text-[11px]',
+    sm: 'inline-flex h-5 max-w-full items-center gap-1 px-1.5 text-11',
     md: 'inline-flex h-6 max-w-full items-center gap-1 px-2 text-xs',
     inline: 'not-prose inline px-[0.4em] py-[0.1em] align-[0.08em] text-[0.8em] leading-none',
 }

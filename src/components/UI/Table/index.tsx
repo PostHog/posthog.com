@@ -45,7 +45,7 @@ const cellPadding: Record<TableDensity, string> = {
 }
 
 const headStyles = {
-    col: '!text-[13px] font-semibold text-secondary',
+    col: '!text-13 font-semibold text-secondary',
     row: '!text-sm font-medium text-primary',
 }
 
@@ -81,25 +81,28 @@ const Root = React.forwardRef<HTMLTableElement, TableRootProps>(function TableRo
     return (
         <TableContext.Provider value={context}>
             <div
-                tabIndex={0}
-                {...scrollProps}
                 className={cn(
                     surfaceAppearances[appearance],
-                    'overflow-auto text-primary',
-                    insetFocusRing,
+                    'flex flex-col overflow-hidden text-primary',
                     containerClassName
                 )}
             >
-                <table
-                    {...props}
-                    ref={ref}
-                    className={cn(
-                        'm-0 w-full border-separate border-spacing-0 text-sm',
-                        striped && stripedRows,
-                        interactive && rowHover,
-                        className
-                    )}
-                />
+                <div
+                    tabIndex={0}
+                    {...scrollProps}
+                    className={cn('min-h-0 overflow-auto rounded-[inherit]', insetFocusRing)}
+                >
+                    <table
+                        {...props}
+                        ref={ref}
+                        className={cn(
+                            'm-0 w-full border-separate border-spacing-0 text-sm',
+                            striped && stripedRows,
+                            interactive && rowHover,
+                            className
+                        )}
+                    />
+                </div>
             </div>
         </TableContext.Provider>
     )

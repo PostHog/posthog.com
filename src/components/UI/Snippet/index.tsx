@@ -3,7 +3,8 @@ import { cn } from '../../../utils'
 import { CopyButton } from '../CopyButton'
 import type { CopyButtonActions } from '../CopyButton'
 import { globalToastManager } from '../Toast'
-import { focusRing, plainCode } from '../styles'
+import { ScrollArea } from '../ScrollArea'
+import { focusRing, plainCode, sunkenTopEdge } from '../styles'
 import { colorOpaque, colorText } from '../colors'
 import type { ColorName } from '../colors'
 import './styles.css'
@@ -24,8 +25,7 @@ export type SnippetInlineProps = Omit<React.HTMLAttributes<HTMLElement>, 'color'
     onCopy?: () => void
 }
 
-const graySurface =
-    'border-[rgb(var(--text-primary)/0.1)] bg-[rgb(var(--text-primary)/0.035)] shadow-[inset_0_1px_0_rgb(0_0_0/0.04)] dark:bg-black/20 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)]'
+const graySurface = `border-[rgb(var(--text-primary)/0.1)] ${sunkenTopEdge} bg-[rgb(var(--text-primary)/0.07)] dark:bg-black/30 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)] dark:[--ui-sunken-top:0.1]`
 
 const COPIED_TOAST_MS = 2000
 
@@ -65,7 +65,7 @@ const Block = React.forwardRef<HTMLDivElement, SnippetProps>(function Snippet(
         <div
             ref={ref}
             className={cn(
-                'flex min-w-0 items-start gap-2 rounded-md border p-2',
+                'flex min-w-0 items-start gap-2 overflow-hidden rounded-md border',
                 copyOnClick && 'cursor-pointer',
                 surfaceFor(color),
                 textFor(color),
@@ -81,29 +81,28 @@ const Block = React.forwardRef<HTMLDivElement, SnippetProps>(function Snippet(
             }}
             {...props}
         >
-            <pre
-                className={cn(
-                    'm-0 min-w-0 flex-1 overflow-x-auto rounded-[3px] bg-transparent p-0 font-code text-[13px] leading-[26px] text-inherit',
-                    focusRing
-                )}
-                tabIndex={0}
-                role="region"
-                aria-label="Code snippet"
-            >
-                <code ref={codeRef} className={cn(plainCode, 'text-inherit')}>
-                    {content.split('\n').map((line, index) => (
-                        <span className="block min-h-[26px]" key={index}>
-                            {prompt && (
-                                <span aria-hidden="true" className="select-none pr-3 opacity-50">
-                                    $
+            <ScrollArea.Root className="min-w-0 flex-1 rounded-l-[5px]">
+                <ScrollArea.Viewport role="region" aria-label="Code snippet">
+                    <pre className="m-0 w-max min-w-full bg-transparent py-2 pl-2 font-code text-13 leading-[26px] text-inherit">
+                        <code ref={codeRef} className={cn(plainCode, 'text-inherit')}>
+                            {content.split('\n').map((line, index) => (
+                                <span className="block min-h-[26px]" key={index}>
+                                    {prompt && (
+                                        <span aria-hidden="true" className="select-none pr-3 opacity-50">
+                                            $
+                                        </span>
+                                    )}
+                                    {line}
                                 </span>
-                            )}
-                            {line}
-                        </span>
-                    ))}
-                </code>
-            </pre>
-            <span className="shrink-0">
+                            ))}
+                        </code>
+                    </pre>
+                </ScrollArea.Viewport>
+                <ScrollArea.Scrollbar orientation="horizontal">
+                    <ScrollArea.Thumb />
+                </ScrollArea.Scrollbar>
+            </ScrollArea.Root>
+            <span className="shrink-0 py-2 pr-2">
                 <CopyButton
                     appearance="flat"
                     ref={copyButtonRef}

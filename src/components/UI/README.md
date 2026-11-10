@@ -104,8 +104,8 @@ Popups render in a portal at the end of `<body>`, outside the window that opened
 
 Site windows are frosted glass, so the color behind a field changes with the wallpaper. Fields (inputs, selects, comboboxes, number and code fields), checkbox and radio boxes, tracks, and chips follow these rules. The classes are in `styles.ts` (`controlSurface`, `fieldSurface`, `fieldFocusVisible`, `fieldFocusWithin`, `fieldState`, `trackSurface`, `chip`).
 
-- **Fill:** see-through white (50% in light mode, 8% in dark mode), so a field is lighter than the window behind it. Do not use a gray fill: a gray field looks disabled.
-- **Edges and tints:** borders, dividers, and hover fills use the text color at low opacity, for example `rgb(var(--text-primary)/0.16)`. They darken a light window and lighten a dark one, so they work on every wallpaper. The top border is a little darker and a soft inner shadow makes the field look set into the glass.
+- **Fill:** see-through white (35% in light mode, 8% in dark mode), so a field is lighter than the window behind it. Do not use a gray fill: a gray field looks disabled.
+- **Edges and tints:** borders, dividers, and hover fills use the text color at low opacity, for example `rgb(var(--text-primary)/0.16)`. They darken a light window and lighten a dark one, so they work on every wallpaper. In light mode, a sunken surface (field, checkbox box, inset card, snippet) has a darker top border and no inner shadow. In dark mode, it has a dark inner top edge. `sunkenTopEdge` in `styles.ts` sets the top border. Radio boxes, switches, and slider and progress tracks keep a soft inner shadow in both modes.
 - **Focus:** an orange border and a soft orange glow.
 - **Disabled:** a dashed border, a hatched fill, and 70% opacity, with no inner shadow.
 - **Solid surfaces:** only floating surfaces (popups, dialogs, drawers, toasts) use the solid `bg-primary`, because they sit above other content.

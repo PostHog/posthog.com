@@ -53,7 +53,7 @@
             @apply no-underline;
         }
 
-        h4:not(.font-heading) {
+        h4 {
             @apply text-lg;
 
             code {
@@ -288,26 +288,13 @@
 
 @layer not-prose {
     .not-prose h1 {
-        font-size: 1.875rem;
         line-height: 2.25rem;
     }
     .not-prose h2 {
-        font-size: 1.5rem;
         line-height: 2rem;
     }
     .not-prose h3 {
-        font-size: 1.25rem;
         line-height: 1.75rem;
-    }
-
-    .not-prose ul,
-    .not-prose ol {
-        padding-left: 0;
-    }
-
-    .not-prose ul li,
-    .not-prose ol li {
-        list-style-type: none;
     }
 }
 
@@ -1071,10 +1058,6 @@ fieldset {
         @apply mt-4;
     }
 
-    code:not('.article-content-ignore') {
-        @apply font-code font-medium text-sm border border-primary bg-accent  rounded-sm px-1 py-0.5;
-    }
-
     blockquote {
         letter-spacing: initial;
 
@@ -1548,34 +1531,6 @@ body {
 
 body.light {
     @apply text-primary;
-
-    .post-page {
-        .docsPagesContent {
-            a:not(.button) {
-                @apply text-orange;
-            }
-        }
-    }
-}
-
-body.dark {
-    .post-page {
-        blockquote {
-            background-color: rgba(255, 255, 255, 0.05) !important;
-            border: solid 2px #fff;
-        }
-
-        .docsPagesContent {
-            a:not(.button) {
-                @apply text-orange;
-            }
-
-            h3,
-            h3 a {
-                color: #fff !important;
-            }
-        }
-    }
 }
 
 .contributor-images > .gatsby-image-wrapper {

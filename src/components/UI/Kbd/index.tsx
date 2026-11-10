@@ -68,7 +68,7 @@ function keyLabel(key: string, platform: Platform): KeyLabel {
 }
 
 const keycapSizes: Record<KeySize, string> = {
-    sm: 'h-[18px] min-w-[18px] px-[3px] text-[11px]',
+    sm: 'h-[18px] min-w-[18px] px-[3px] text-11',
     md: 'h-[22px] min-w-[22px] px-[5px] text-[12px]',
 }
 

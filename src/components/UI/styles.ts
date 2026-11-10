@@ -56,12 +56,14 @@ export const sectionSurface = `rounded-[8px] border ${surfaceDivider}`
 
 export const heightRevealPanel = `h-[var(--collapsible-panel-height)] ${heightReveal}`
 
+export const sunkenTopEdge = '[--ui-sunken-top:0.38] border-t-[rgb(var(--text-primary)/var(--ui-sunken-top))]'
+
 export const cardBarSurface =
     'border-[rgb(var(--text-primary)/0.12)] bg-[rgb(var(--text-primary)/0.045)] dark:bg-white/[0.035]'
 
 export const cardLevels = {
-    1: `${grainSurface} ${edgeSpace} [--ui-card-radius:8px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.13)] bg-white/60 shadow-[0_1px_0_rgb(0_0_0/0.25),0_1px_2px_-1px_rgb(0_0_0/0.08)] dark:border-[rgb(var(--text-primary)/0.12)] dark:bg-white/[0.06] reduce-transparency:bg-white dark:reduce-transparency:bg-accent-dark dark:shadow-[0_1px_0_rgb(0_0_0/0.3)]`,
-    2: `${grainSurface} [--ui-card-radius:6px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.1)] bg-[rgb(var(--text-primary)/0.035)] shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-black/20 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]`,
+    1: `${grainSurface} ${edgeSpace} [--ui-card-radius:8px] [--ui-card-edge:0.2] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/var(--ui-card-edge))] bg-white/60 shadow-[0_1px_0_rgb(0_0_0/0.25),0_1px_2px_-1px_rgb(0_0_0/0.08)] dark:[--ui-card-edge:0.12] dark:bg-white/[0.06] reduce-transparency:bg-white dark:reduce-transparency:bg-accent-dark dark:shadow-[0_1px_0_rgb(0_0_0/0.3)]`,
+    2: `${grainSurface} [--ui-card-radius:6px] rounded-[var(--ui-card-radius)] border border-[rgb(var(--text-primary)/0.1)] ${sunkenTopEdge} bg-[rgb(var(--text-primary)/0.035)] dark:[--ui-sunken-top:0.1] dark:bg-black/20 dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]`,
 } as const
 
 export const cardInnerTopRadius = 'rounded-t-[calc(var(--ui-card-radius)_-_1px)]'
@@ -73,6 +75,9 @@ export const cardAppearances = {
     solid: 'bg-white dark:bg-accent-dark dark:[background-image:linear-gradient(rgb(255_255_255/0.025),rgb(255_255_255/0.025))]',
     dashed: 'border-dashed border-[rgb(var(--text-primary)/0.28)] shadow-none dark:border-[rgb(var(--text-primary)/0.28)] dark:shadow-none',
 } as const
+
+export const solidInsetCard =
+    'bg-white [background-image:linear-gradient(rgb(var(--text-primary)/0.05),rgb(var(--text-primary)/0.05))] dark:bg-accent-dark dark:[background-image:linear-gradient(rgb(0_0_0/0.2),rgb(0_0_0/0.2))]'
 
 export const surfaceAppearances = {
     plain: '',
@@ -102,7 +107,7 @@ export const disclosureChevron =
 export const menuPopup = `${popupSurface} ${popupTransition} min-w-[180px] max-w-[min(var(--available-width),24rem)] max-h-[var(--available-height)] overflow-y-auto p-[5px]`
 
 export const menuItem =
-    'relative flex h-[25px] cursor-default select-none items-center gap-2 rounded px-2.5 [&>svg]:shrink-0 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'
+    'relative flex h-[25px] cursor-default select-none items-center gap-2 rounded px-2.5 [&>svg]:shrink-0 text-13 leading-none text-primary outline-none data-[highlighted]:bg-accent data-[disabled]:pointer-events-none data-[disabled]:data-[highlighted]:bg-transparent data-[disabled]:text-muted'
 
 export const menuItemWithIndicator = `${menuItem} pl-7`
 
@@ -113,25 +118,29 @@ export const menubarAppearances = {
     plain: 'flex items-center gap-px py-0.5',
 } as const
 
-export const menubarTrigger = `flex select-none items-center gap-0.5 rounded px-1.5 py-0.5 text-[13px] font-medium leading-none text-primary outline-none transition-colors duration-150 ${neutralHover} focus-visible:bg-[rgb(var(--text-primary)/0.06)] ${neutralPress} ${neutralLatched} data-[disabled]:text-muted motion-reduce:transition-none`
+export const menubarTrigger = `flex select-none items-center gap-0.5 rounded px-1.5 py-0.5 text-13 font-medium leading-none text-primary outline-none transition-colors duration-150 ${neutralHover} focus-visible:bg-[rgb(var(--text-primary)/0.06)] ${neutralPress} ${neutralLatched} data-[disabled]:text-muted motion-reduce:transition-none`
 
 export const menuSeparator = 'm-[5px] h-px bg-border'
 
 export const menuGroupLabel =
-    'select-none px-2.5 pb-1 pt-1.5 text-[11px] font-semibold uppercase leading-none tracking-wide text-muted'
+    'select-none px-2.5 pb-1 pt-1.5 text-11 font-semibold uppercase leading-none tracking-wide text-muted'
 
 export const fieldDivider = 'border-[rgb(var(--text-primary)/0.16)]'
 
-export const controlSurface =
-    'border border-[rgb(var(--text-primary)/0.16)] bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]'
+const controlBase =
+    'border border-[rgb(var(--text-primary)/0.16)] bg-white/35 dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.4)]'
+
+export const roundControlSurface = `${controlBase} shadow-[inset_0_1px_0_rgb(0_0_0/0.25)]`
+
+export const controlSurface = `${controlBase} ${sunkenTopEdge} dark:[--ui-sunken-top:0.16]`
 
 export const fieldSurface = `${controlSurface} rounded-md transition-[border-color,box-shadow,background-color] duration-150 ease-out hover:border-[rgb(var(--text-primary)/0.36)] motion-reduce:transition-none`
 
 export const fieldFocusVisible =
-    'focus-visible:border-orange focus-visible:bg-white/70 focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.25),0_0_0_3px_rgb(235_157_42/0.28)] dark:focus-visible:bg-white/[0.11] dark:focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
+    'focus-visible:border-orange focus-visible:bg-white/55 focus-visible:shadow-[0_0_0_3px_rgb(235_157_42/0.28)] dark:focus-visible:bg-white/[0.11] dark:focus-visible:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
 
 export const fieldFocusWithin =
-    'has-[:focus-visible]:border-orange has-[:focus-visible]:bg-white/70 has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.25),0_0_0_3px_rgb(235_157_42/0.28)] dark:has-[:focus-visible]:bg-white/[0.11] dark:has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
+    'has-[:focus-visible]:border-orange has-[:focus-visible]:bg-white/55 has-[:focus-visible]:shadow-[0_0_0_3px_rgb(235_157_42/0.28)] dark:has-[:focus-visible]:bg-white/[0.11] dark:has-[:focus-visible]:shadow-[inset_0_1px_0_rgb(0_0_0/0.4),0_0_0_3px_rgb(235_157_42/0.3)]'
 
 export const disabledHatch = '[&[data-disabled]:not([aria-busy=true])]:bg-hatch'
 
@@ -210,7 +219,7 @@ export const trackSurface =
     'bg-white/50 shadow-[inset_0_1px_0_rgb(0_0_0/0.25)] dark:bg-white/[0.08] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.45)]'
 
 export const chip =
-    'inline-flex h-6 min-w-0 max-w-full shrink-0 items-center gap-1 rounded-full border border-[rgb(var(--text-primary)/0.1)] bg-white/60 px-2 text-[13px] font-medium leading-4 text-primary has-[button]:pr-px dark:bg-white/[0.1]'
+    'inline-flex h-6 min-w-0 max-w-full shrink-0 items-center gap-1 rounded-full border border-[rgb(var(--text-primary)/0.1)] border-b-[rgb(var(--text-primary)/0.3)] bg-white/60 px-2 text-13 font-medium leading-4 text-primary has-[button]:pr-px dark:bg-white/[0.1]'
 
 export const chipImage = '-ml-1 size-4 shrink-0 rounded-full object-cover'
 
@@ -241,7 +250,7 @@ export const barForcedTrack = 'forced-colors:border forced-colors:border-[color:
 
 export const barForcedIndicator = 'forced-colors:bg-[color:Highlight] forced-colors:[forced-color-adjust:none]'
 
-export const barTrack = `col-span-2 h-2 overflow-hidden rounded-full bg-[rgb(var(--text-primary)/0.08)] ${barForcedTrack} shadow-[inset_0_1px_0_rgb(0_0_0/0.06)] dark:bg-white/[0.07] dark:shadow-[inset_0_1px_0_rgb(0_0_0/0.3)]`
+export const barTrack = `col-span-2 h-2 overflow-hidden rounded-full ${trackSurface} bg-[image:repeating-linear-gradient(135deg,rgb(var(--text-primary)/0.05)_0_1px,transparent_1px_6px)] data-[indeterminate]:bg-none ${barForcedTrack}`
 
 export const barIndicator = `block h-full rounded-full bg-orange ${barForcedIndicator} transition-[width] duration-500 ease-out motion-reduce:transition-none`
 
@@ -301,7 +310,7 @@ export type FieldSize = 'sm' | 'md' | 'lg'
 export const fieldSizes = {
     sm: 'h-[26px] rounded px-2 text-[12px]',
     md: 'h-9 px-2.5 text-sm',
-    lg: 'h-11 px-3 text-[15px]',
+    lg: 'h-11 px-3 text-15',
 } as const
 export const searchRoundPadding = {
     sm: 'rounded-full px-3',
@@ -311,12 +320,12 @@ export const searchRoundPadding = {
 export const fieldGroupSizes = {
     sm: 'min-h-[26px] rounded text-[12px]',
     md: 'min-h-9 text-sm',
-    lg: 'min-h-11 text-[15px]',
+    lg: 'min-h-11 text-15',
 } as const
 export const fieldInnerSizes = {
     sm: 'min-h-[18px] px-1 text-[12px]',
     md: 'min-h-6 px-1.5 text-sm',
-    lg: 'min-h-7 px-2 text-[15px]',
+    lg: 'min-h-7 px-2 text-15',
 } as const
 export const fieldIconButtonSizes = {
     sm: 'size-5 shrink-0 self-start mt-[2px] rounded-[3px] p-0 text-secondary hover:text-primary focus-visible:-outline-offset-2',
@@ -325,8 +334,8 @@ export const fieldIconButtonSizes = {
 } as const
 export const fieldIconButtonIconSize = { sm: 'sm', md: 'sm', lg: 'md' } as const
 export const fieldChipSizes = {
-    sm: 'h-[18px] px-1.5 text-[11px] has-[button]:pr-px',
-    md: 'h-6 px-2 text-[13px] has-[button]:pr-px',
+    sm: 'h-[18px] px-1.5 text-11 has-[button]:pr-px',
+    md: 'h-6 px-2 text-13 has-[button]:pr-px',
     lg: 'h-7 px-2.5 text-sm has-[button]:pr-[3px]',
 } as const
 export const fieldChipRemoveSizes = { sm: 'size-3.5 [&>svg]:size-2.5', md: 'size-5', lg: 'size-5' } as const
@@ -335,7 +344,7 @@ export const fieldChevronSizes = { sm: 'size-4', md: 'size-5', lg: 'size-6' } as
 export const fieldListItemSizes = {
     sm: 'min-h-[22px] text-[12px]',
     md: 'min-h-[25px] text-sm',
-    lg: 'min-h-[30px] text-[15px]',
+    lg: 'min-h-[30px] text-15',
 } as const
 export const fieldStepperSizes = {
     sm: 'w-4 [&_svg]:size-3',
@@ -345,7 +354,7 @@ export const fieldStepperSizes = {
 export const textareaSizes = {
     sm: 'min-h-[42px] rounded px-2 py-1 text-[12px] leading-4',
     md: 'min-h-14 px-2.5 py-[7px] text-sm leading-5',
-    lg: 'min-h-[68px] px-3 py-[9px] text-[15px] leading-6',
+    lg: 'min-h-[68px] px-3 py-[9px] text-15 leading-6',
 } as const
 
 export const tintedHeaderEdge =

@@ -217,7 +217,7 @@ function SnippetContent({
                     aria-expanded={expanded}
                     onClick={() => setExpanded(!expanded)}
                     className={cn(
-                        'flex min-h-10 w-full items-center justify-between gap-3 border-0 border-t px-4 py-1.5 text-left text-[13px] text-secondary hover:text-primary',
+                        'flex min-h-10 w-full items-center justify-between gap-3 border-0 border-t px-4 py-1.5 text-left text-13 text-secondary hover:text-primary',
                         flatPressable,
                         cardInnerBottomRadius,
                         cardBarSurface,
@@ -309,7 +309,7 @@ export const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(functi
                             ))}
                         </Tabs.List>
                     ) : (
-                        <div className={cn(wrapText, 'px-2.5 text-[13px] font-semibold')}>
+                        <div className={cn(wrapText, 'px-2.5 text-13 font-semibold')}>
                             {snippetLabel(activeSnippet)}
                             {activeSnippet.fileName && activeSnippet.language && (
                                 <span className="ml-2 font-code font-normal text-secondary">

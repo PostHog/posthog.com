@@ -40,7 +40,7 @@ type ChipLinkProps = ChipContentProps &
 export type ChipProps = ChipLabelProps | ChipLinkProps
 
 const inlineChip =
-    'not-prose inline whitespace-nowrap rounded-full border border-[rgb(var(--text-primary)/0.1)] bg-white/60 px-[0.5em] py-px font-medium text-primary no-underline dark:bg-white/[0.1]'
+    'not-prose inline whitespace-nowrap rounded-full border border-[rgb(var(--text-primary)/0.1)] border-b-[rgb(var(--text-primary)/0.3)] bg-white/60 px-[0.5em] py-px font-medium text-primary no-underline dark:bg-white/[0.1]'
 
 const inlineChipWithImage = 'pl-px'
 

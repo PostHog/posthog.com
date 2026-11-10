@@ -3,7 +3,7 @@ import { Toast as BaseToast } from '@base-ui/react/toast'
 import { IconX } from '@posthog/icons'
 import { cn } from '../../../utils'
 import { Button, IconButton } from '../Button'
-import { grainSurface, raisedOverlayShadowMd } from '../styles'
+import { dialogDescription, grainSurface, raisedOverlayShadowMd } from '../styles'
 import { colorIcon, isColorOrStatus, resolveColor } from '../colors'
 import { statusIcon } from '../toneIcons'
 import { Spinner } from '../Spinner'
@@ -52,8 +52,8 @@ const ToastList = (): JSX.Element => {
                     >
                         <StatusIcon type={toast.type} />
                         <div className="flex min-w-0 flex-1 flex-col gap-1">
-                            <BaseToast.Title className={`my-0 text-heading-sm text-primary ${wrapText}`} />
-                            <BaseToast.Description className={`my-0 text-sm text-secondary ${wrapText}`} />
+                            <BaseToast.Title className={cn('my-0 text-15 font-semibold text-primary', wrapText)} />
+                            <BaseToast.Description className={cn(dialogDescription, wrapText)} />
                         </div>
                         <div className="-my-[3px] flex min-w-0 max-w-[50%] items-center gap-1">
                             <BaseToast.Action render={<Button appearance="flat" size="sm" />} />
