@@ -7,6 +7,7 @@ showTitle: true
 The [Ruby SDK](/docs/libraries/ruby) sends transactional emails from version 3.30.0. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
 
 <details>
+
 <summary>Prompt for your coding agent</summary>
 
 Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
@@ -56,6 +57,22 @@ When `secret_key` is set, the client also loads flag definitions with it for [lo
 
 Shut the client down when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
 
+### Use in Rails
+
+With [`posthog-rails`](/docs/libraries/ruby-on-rails), reuse the client initialized by `PostHog.init`. Add the secret key to your existing initializer:
+
+```ruby file=config/initializers/posthog.rb
+PostHog.init do |config|
+  config.api_key = "<ph_project_token>"
+  config.host = "<ph_client_api_host>"
+  config.secret_key = ENV.fetch("POSTHOG_PROJECT_SECRET_API_KEY")
+end
+```
+
+Then call `PostHog.emails.send(...)` and `PostHog.emails.get(message_id)` wherever the examples below use `$posthog.emails`. Do not initialize another client or shut it down after each email; the Rails integration shuts it down when the process exits.
+
+Email-specific options such as `app_host`, `email_request_timeout_seconds`, `email_request_max_retries`, and `migrated_from` must be passed as a hash to `PostHog.init(...)`, not assigned in its configuration block. For example, add `email_request_max_retries: 0` to the existing `PostHog.init` call when your job runner owns retries.
+
 ## Send an email
 
 ```ruby
@@ -75,6 +92,8 @@ end
 
 `send` returns a `SendResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `PostHog::EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument raises `ArgumentError` before any request.
 
+A successful result means PostHog queued the email, not that it was delivered. `result.replayed` is `true` when PostHog returns the original result for an already-accepted idempotency key. `result.warnings` contains warning objects with `code`, `message`, and `fix`; the SDK also logs these warnings.
+
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
 ### Timeouts and retries
@@ -82,6 +101,8 @@ A `network_error` or a `503` doesn't mean that the email failed, because PostHog
 The client retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or longer if the server's `Retry-After` asks for it. When `Retry-After` asks for more than 30 seconds, the client raises the error at once. Each request waits up to 15 seconds to connect, and up to 15 seconds for each read or write.
 
 To change this, set `email_request_timeout_seconds` and `email_request_max_retries` on the client, or `max_retries` on one send.
+
+`PostHog::EmailError` also exposes `status_code`, `retry_after` in seconds, and optional `why`, `fix`, `docs_url`, and `field` details. `status_code` is `nil` when no HTTP response was received. Use `code` for retry decisions, not the human-readable message.
 
 ## Send from a background job
 
@@ -156,6 +177,8 @@ end
 
 A send has `template_id` or `template_key`, not both, or it raises `ArgumentError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+When migrating from another provider, set `migrated_from` on the client, for example `migrated_from: "resend"`. The SDK includes it with email requests; it does not route email through that provider.
+
 ## Check an email's status
 
 ```ruby
@@ -172,13 +195,15 @@ end
 
 `get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means. The helper returns `nil` while the status isn't there yet, so check for `nil` before you read the result as "not bounced".
 
+Statuses are available for 30 days after a send. Use a key with **Transactional email** read or write access to retrieve them.
+
 A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
 
 ## Test without sending email
 
 The client sends email with Ruby's `Net::HTTP`, so [WebMock](https://github.com/bblimke/webmock) can stub the request and show exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
 
-The client also loads flag definitions when it starts, so stub that request too.
+`test_mode: true` keeps analytics events queued, but does not disable email requests. Stub email sends and status reads explicitly to avoid sending real email in tests. The client also loads flag definitions when it starts, so stub that request too.
 
 ```ruby
 require 'posthog'

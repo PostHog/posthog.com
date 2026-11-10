@@ -7,7 +7,7 @@ showStepsToc: true
 import { Steps, Step } from 'components/Docs/Steps'
 import LogsNextSteps from './_snippets/logs-next-steps.mdx'
 
-`posthog-rails` forwards `Rails.logger` output to PostHog Logs over OpenTelemetry (OTLP), automatically correlated with each request's distinct ID and session ID. Requires Ruby 3.3+.
+`posthog-rails` forwards `Rails.logger` output and optional structured Rails notification logs to PostHog Logs over OpenTelemetry (OTLP), correlated with each request's distinct ID and session ID. Requires Ruby 3.3+.
 
 <Steps>
 
@@ -102,12 +102,48 @@ View your logs in PostHog
 
 </Steps>
 
+## Structured notification logs
+
+From `posthog-rails` version 3.23.0, select Rails components in `logs_notifications` to capture structured lifecycle records alongside logger output:
+
+```ruby file=config/initializers/posthog.rb
+PostHog::Rails.configure do |config|
+  config.logs_enabled = true
+  config.logs_notifications = [:action_controller, :active_record, :active_job, :action_mailer]
+  config.logs_level = :debug
+end
+```
+
+The array defaults to `[]`. Components are subscribed to when Rails loads them; this option does not load optional Rails packages. Restart your app after changing the selection.
+
+| Component | Notifications | Metadata |
+|-----------|---------------|----------|
+| `:action_controller` | `process_action.action_controller` | Controller, action, HTTP method, status, and Rails-filtered parameters. |
+| `:active_record` | `sql.active_record` | Query name, cache status, and SQL operation such as `SELECT`. No SQL statements or bind values. |
+| `:active_job` | Enqueue, scheduled enqueue, perform, retry, retry stopped, and discard | Job class, ID, queue, executions, priority, retry wait in seconds, and filtered arguments. |
+| `:action_mailer` | `process.action_mailer`, `deliver.action_mailer` | Mailer class and action. No recipients, subject, or message content. |
+
+Each record has a fixed description and an `event.name` attribute containing the Rails notification name. These records do not create spans or collect timings.
+
+SQL records use debug severity. Successful controller, job, and mailer records use info; controller 4xx responses use warn; failures and controller 5xx responses use error. Retry notifications with an error also use error severity, even if the job has retries left. Set `logs_level = :debug` to include SQL records. This does not change your local Rails logger level or make Rails produce additional logger output.
+
+Notification logs use the same `logs_level`, `logs_before_send`, rate cap, trace correlation, and shutdown pipeline as forwarded logger records. To collect only notification logs, set `config.logs_forward_rails_logger = false` while keeping `logs_enabled = true`.
+
+### Filter sensitive notification data
+
+Controller records reuse Rails' already-filtered parameters. Job hash arguments use your application's `filter_parameters`; unkeyed arguments are redacted. Jobs with `log_arguments = false` and Action Mailer delivery jobs omit arguments entirely. With an empty parameter-filter list, keyed job payloads are redacted rather than exported unfiltered.
+
+Unsupported, cyclic, oversized, or unencodable parameter payloads are replaced with a redaction marker instead of exporting partial data. Notification metadata does not include cookies or headers. Review your parameter filters and use `logs_before_send` for additional scrubbing. These protections apply to notification metadata, not arbitrary text passed to `Rails.logger`.
+
+Job lifecycle logs use saved job identity only when `auto_instrument_active_job = true`. See [Active Job context](/docs/error-tracking/installation/ruby-on-rails#background-job-exceptions). Enabling notification logs alone does not enable job context propagation or exception capture.
+
 ## Configuration reference
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `logs_enabled` | Boolean | `false` | Master switch for log forwarding. Requires Ruby 3.3+ and the three OpenTelemetry gems above. |
 | `logs_forward_rails_logger` | Boolean | `true` | Broadcast `Rails.logger` into the PostHog Logs sink. Takes effect only when `logs_enabled` is true. |
+| `logs_notifications` | Array of symbols | `[]` | Components to log: `:action_controller`, `:active_record`, `:active_job`, and `:action_mailer`. Requires `logs_enabled`. |
 | `logs_level` | Symbol/Integer | `nil` | Minimum severity to forward (`:debug`, `:info`, `:warn`, `:error`, `:fatal`, `:unknown`, or a `Logger` constant). Inherits the Rails logger level when nil. |
 | `logs_max_records_per_minute` | Integer/String | `6000` | Records-per-minute cap. Numeric strings (e.g. from `ENV`) are coerced. Set to `nil`, `0`, or a negative value to disable. |
 | `logs_before_send` | Proc | `nil` | Called with each record hash (`:timestamp`, `:severity`, `:body`, `:attributes`) before sending. Return a modified hash to send or `nil` to drop. Records are dropped if the callback raises. |
