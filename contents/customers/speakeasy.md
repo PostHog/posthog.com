@@ -45,4 +45,4 @@ Being a developer-led team, Speakeasy naturally incorporates feature flags into 
 
 "We have alpha features that we want to keep hidden, so we use PostHog's feature flags to control access and roll out changes," Nolan states. "The integrated insights and feature flags help us monitor how users with specific flags enabled are using features, all from a single UI as we implement changes."
 
-"In all honesty, I love that PostHog offers all these functionalities. It has all the features of LaunchDarkly and [Amplitude](/blog/posthog-vs-amplitude), but in one tool!"
+"In all honesty, I love that PostHog offers all these functionalities. It has all the features of LaunchDarkly and [Amplitude](/compare/posthog-vs-amplitude), but in one tool!"

@@ -10,8 +10,6 @@ featuredImageType: full
 category: PostHog news
 ---
 
-import DuckDBWaitlistSurvey from 'components/DuckDBWaitlistSurvey'
-
 You've learned the difference between data lakes and data warehouses. You can drop acronyms like ETL and OLAP into conversation without flinching. But you’re still stuck on the annoying question underneath all of it.
 
 Why should you use a data warehouse in the first place?
@@ -98,9 +96,6 @@ For example, if someone changes a column name in your production database withou
         <span className="rounded-sm bg-highlight py-0.5 px-1 text-xs font-bold text-red dark:text-yellow">
             Beta
         </span>
-        . Join the waitlist to get early access.
+        . <a href="/warehouse">Get access to the Warehouse beta</a>.
     </p>
-    <div className="max-w-md">
-        <DuckDBWaitlistSurvey />
-    </div>
 </div>

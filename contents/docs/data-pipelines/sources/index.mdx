@@ -9,7 +9,7 @@ availability:
 ---
 
 import { ProductScreenshot } from "components/ProductScreenshot";
-import { ManagedSources, SelfHostedSources } from "../../_snippets/data-sources";
+import { ManagedSources } from "../../_snippets/data-sources";
 export const SettingsLight =
   "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_08_30_at_10_45_12_ef06f67105.png";
 export const SettingsDark =
@@ -25,11 +25,11 @@ Provide your credentials and PostHog handles the entire extract and load process
 
 <ManagedSources />
 
-## Self-hosted sources
+### Files and object storage
 
-[Upload a CSV, JSON, or Parquet file](/docs/data-pipelines/sources/file-upload) directly to PostHog, or link files in your own object storage (S3, GCS, R2, Azure Blob). PostHog reads directly from storage on every query.
+To import files, connect the bucket that holds them with the [Amazon S3](/docs/data-pipelines/sources/s3), [Google Cloud Storage](/docs/data-pipelines/sources/gcs), [Azure Blob Storage](/docs/data-pipelines/sources/azure-blob), or [Cloudflare R2](/docs/data-pipelines/sources/r2) source. These sources import CSV, JSON Lines, and Parquet files, and Delta Lake tables, and keep them up to date on a schedule. For a single file of up to 50MB, [upload the file](/docs/data-pipelines/sources/file-upload) to PostHog.
 
-<SelfHostedSources />
+Like other sources, these sources import the data, and synced rows count toward your data warehouse usage. PostHog no longer reads self-managed tables directly from your bucket on each query. If you linked self-managed tables before, PostHog moved them into sources, and they keep their names. See the page of your storage provider to learn how to turn on syncing for them.
 
 ## Where synced rows are written
 
@@ -41,14 +41,7 @@ import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
 
 ## Linking a custom source
 
-The data warehouse can link to data in your object storage system. To do this, you'll need to:
-
-1. Create a bucket in your object storage system like S3, GCS, or Cloudflare R2
-2. Set up an access key and secret
-3. Add data to the bucket (potentially using a tool like Airbyte, Fivetran, Stitch, or others)
-4. Link the table in PostHog
-
-See an example in our [S3 setup docs](/docs/data-pipelines/sources/s3).
+If PostHog has no source for a tool, export its data to a bucket in Amazon S3, Google Cloud Storage, Azure Blob Storage, or Cloudflare R2. You can use an ETL tool such as Airbyte, Fivetran, or Stitch. Then connect the bucket with the source for your storage provider. See the [Amazon S3 source](/docs/data-pipelines/sources/s3) for an example.
 
 ## Sync methods
 
@@ -181,6 +174,42 @@ Row filters validate values against the column's data type. Columns with unsuppo
 - Filters apply on the next sync — they don't remove rows that have already been synced.
 - If a filter references a column that no longer exists or has a type mismatch, the sync fails with an error message. Fix or remove the filter to resume syncing.
 - Sampling and row count estimates remain unfiltered.
+
+## Masking sensitive columns
+
+Column masking replaces sensitive values (like passwords, emails, or card numbers) with a deterministic one-way hash during sync. Each masked value becomes a 64-character hex string. Equal values produce the same hash within a project, so joins and distinct counts still work, but the original value can't be recovered from the hash.
+
+Masking is available for SQL sources (Postgres, MySQL, MSSQL, Snowflake, BigQuery, and Redshift) and other sources that support column selection. It is not available for:
+
+- **Direct query sources** – nothing syncs, so a mask would protect nothing.
+- **Managed-schema sources** (Stripe, Paddle, Zendesk) – their tables use fixed column types.
+- **CDC tables** – masking is supported on CDC tables via a new snapshot, not inline on the change stream.
+
+### Configuring column masking
+
+To mask columns during source setup:
+
+1. In the table picker, click **Columns** next to any table.
+2. Click **Mask** on the columns you want to mask.
+3. Masked columns show **Masked** as text. Click it to unmask.
+
+To mask columns after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your source.
+2. Click **Configure** next to any schema.
+3. Click **Mask** or **Masked** to toggle masking on individual columns.
+4. Click **Save**.
+
+You can also set `masked_columns` through the API when creating a source or updating a schema.
+
+> **Note:** Changing masked columns on a synced table triggers a full resync (CDC tables take a new snapshot). A confirmation dialog appears before the change is saved.
+
+### Limitations
+
+- **Primary key, incremental-field, and partition columns** can't be masked – a hashed merge key would break deduplication, and a hashed cursor has no order.
+- Masked columns lose their min/max statistics. Only row counts are preserved.
+- Rows already synced keep their original values until the rebuild completes.
+- A synced webhook table can't change its masked columns, because its data can't be fetched again from the source.
 
 ## Syncing
 

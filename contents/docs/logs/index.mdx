@@ -8,7 +8,7 @@ contentMaxWidthClass: max-w-5xl
 import { IconLaptop, IconMagic, IconBrackets, IconServer, IconFilter, IconRewindPlay, IconWarning } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
-Logs is an OpenTelemetry-native log store, so there are no PostHog-specific SDKs to adopt – point any OTLP client at PostHog and your log records start arriving. Search them by service, severity, and attribute, group similar lines into [patterns](/docs/logs/patterns) to see what changed, and open any record to have [PostHog AI](/docs/logs/explain-logs-ai) explain it.
+Logs is an OpenTelemetry-native log store. Point any OTLP client at PostHog and your log records start arriving. The JavaScript web, React Native, iOS, Android, and Flutter SDKs can also send logs natively, and other languages use OpenTelemetry (see the [SDK support table](/docs/logs/installation#sdk-support-by-signal)). Search them by service, severity, and attribute, group similar lines into [patterns](/docs/logs/patterns) to see what changed, and open any record to have [PostHog AI](/docs/logs/explain-logs-ai) explain it.
 
 Because your logs live next to the rest of your data, a log line is one click from the [session replay](/docs/session-replay), [person](/docs/data/persons), and [error](/docs/error-tracking) it belongs to.
 

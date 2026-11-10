@@ -1,0 +1,286 @@
+---
+title: Send transactional emails with Elixir
+sidebar: Docs
+showTitle: true
+---
+
+The [Elixir SDK](/docs/libraries/elixir) sends transactional emails from version 2.20.0. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
+
+<details>
+<summary>Prompt for your coding agent</summary>
+
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+
+```text
+Add PostHog transactional email to this Elixir app with the posthog Hex package.
+
+Read https://posthog.com/docs/workflows/transactional-emails/elixir.md first. Follow it over anything you remember about PostHog.
+
+- Reuse the app's :posthog config. Add secret_key from the POSTHOG_PROJECT_SECRET_API_KEY environment variable in config/runtime.exs. Set enable_local_evaluation: false unless the app evaluates feature flags locally.
+- Send only from server code. Never put the secret key in source code or in anything sent to the browser.
+- Build each idempotency_key from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
+- PostHog.Emails.send/2 returns {:ok, %PostHog.Emails.SendResult{id: id}} or {:error, %PostHog.Emails.Error{}} and doesn't raise. Branch on error.code, never on error.message.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same idempotency_key. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
+- In an Oban worker, pass max_retries: 0. Return {:error, reason} for the four codes above and {:cancel, reason} for every other code.
+- Pass the distinct_id that the app passes to identify(), as a string. Leave it out for people without an account, such as invitees.
+- Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
+- Add an ExUnit test that starts a PostHog instance with an api_client_module that adds a Req.Test plug, and checks the request.
+
+Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+```
+
+</details>
+
+## Install
+
+Add `posthog` to your dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:posthog, "~> 2.20"}
+  ]
+end
+```
+
+## Set up the client
+
+Add your project secret API key to the PostHog config that your app already has. The project token keeps capturing events. The secret key sends email, so read it from the environment and keep it on your server.
+
+```elixir file=config/runtime.exs
+config :posthog,
+  api_host: "<ph_client_api_host>",
+  api_key: "<ph_project_token>",
+  secret_key: System.fetch_env!("POSTHOG_PROJECT_SECRET_API_KEY"),
+  # The SDK doesn't load flag definitions with the secret key
+  enable_local_evaluation: false
+```
+
+Keep `enable_local_evaluation: false` unless your app [evaluates feature flags locally](/docs/feature-flags/local-evaluation). With local evaluation on, the SDK loads flag definitions with the secret key when it starts, and a key with only the **Transactional email** scope can't read them. If you do evaluate flags locally, give the key the **Feature flag** read scope too.
+
+If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
+
+## Send an email
+
+```elixir
+def send_password_reset(user, reset_link, reset_request_id) do
+  case PostHog.Emails.send(
+         to: user.email,
+         template_id: "<template_id>",
+         template_data: %{first_name: user.first_name, reset_link: reset_link},
+         distinct_id: to_string(user.id),
+         # Identifies this one email, so a retry never sends it twice
+         idempotency_key: "password-reset-#{reset_request_id}"
+       ) do
+    {:ok, result} ->
+      {:ok, result.id}
+
+    # A %PostHog.Emails.Error{}. Branch on error.code
+    {:error, error} ->
+      {:error, error}
+  end
+end
+```
+
+`send/2` doesn't raise. It returns `{:ok, %PostHog.Emails.SendResult{}}` or `{:error, %PostHog.Emails.Error{}}`. `result.id` is the message ID. The error's `code` is one of the codes in the [errors table](/docs/workflows/transactional-emails#errors). An option that the SDK refuses returns an `invalid_*` code before any request.
+
+A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
+
+To send through a named PostHog instance instead of the default one, pass its name first: `PostHog.Emails.send(MyPostHog, options)`.
+
+### Timeouts and retries
+
+The SDK retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or as long as the server's `Retry-After` asks, up to 30 seconds. When `Retry-After` asks for more than 30 seconds, the SDK returns the error at once. Each request times out after 15 seconds, and a send blocks the calling process until it finishes.
+
+To change this, set `email_request_timeout_ms` and `email_request_max_retries` in the config, or `max_retries` on one send.
+
+## Send from a background job
+
+Send from a job queue when the email shouldn't slow down the request, such as an email address check after a signup. Let the queue own the retries:
+
+- Set `max_retries: 0`, so that the SDK doesn't retry inside the job.
+- Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
+- Retry only the errors that a later attempt can fix. Every other code fails the same way again.
+
+This example uses [Oban](https://hexdocs.pm/oban). `{:error, reason}` tells Oban to retry the job, up to `max_attempts`. `{:cancel, reason}` stops it for good.
+
+```elixir
+defmodule MyApp.Workers.PasswordResetEmail do
+  use Oban.Worker, queue: :emails, max_attempts: 10
+
+  # A later attempt can fix these. Any other code fails the same way again.
+  @retryable_codes ["network_error", "idempotency_key_in_flight", "throttled", "delivery_unavailable"]
+
+  @impl Oban.Worker
+  def perform(%Oban.Job{args: args}) do
+    # Oban stores args as JSON, so the keys are strings
+    %{
+      "user_id" => user_id,
+      "email" => email,
+      "first_name" => first_name,
+      "reset_link" => reset_link,
+      "reset_request_id" => reset_request_id
+    } = args
+
+    case PostHog.Emails.send(
+           to: email,
+           template_id: "<template_id>",
+           template_data: %{first_name: first_name, reset_link: reset_link},
+           distinct_id: to_string(user_id),
+           # The same key on every attempt, so a retried job never sends the email twice
+           idempotency_key: "password-reset-#{reset_request_id}",
+           # Oban retries the job, so the SDK doesn't retry on its own
+           max_retries: 0
+         ) do
+      {:ok, _result} ->
+        :ok
+
+      {:error, %PostHog.Emails.Error{code: code} = error} when code in @retryable_codes ->
+        {:error, error}
+
+      {:error, error} ->
+        {:cancel, error}
+    end
+  end
+end
+```
+
+Add the job where your app creates the reset request:
+
+```elixir
+%{
+  user_id: user.id,
+  email: user.email,
+  first_name: user.first_name,
+  reset_link: reset_link,
+  reset_request_id: reset_request.id
+}
+|> MyApp.Workers.PasswordResetEmail.new()
+|> Oban.insert()
+```
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `distinct_id`, as a string. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events. The SDK doesn't take it from `PostHog.set_context/2`.
+
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+
+## Send content from your code
+
+`send/2` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Name the email with `template_key`, and pass `subject` with `html`, `text`, or both. PostHog sends the content as you wrote it, so render it first with EEx, Phoenix templates, or another template engine.
+
+```elixir
+def send_password_reset(user, html, reset_request_id) do
+  case PostHog.Emails.send(
+         to: user.email,
+         template_key: "password-reset",
+         subject: "Reset your password",
+         html: html,
+         from: "Hedgebox <security@example.com>",
+         distinct_id: to_string(user.id),
+         idempotency_key: "password-reset-#{reset_request_id}"
+       ) do
+    {:ok, result} -> {:ok, result.id}
+    {:error, error} -> {:error, error}
+  end
+end
+```
+
+- **`template_key`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`text`** - If you leave it out, PostHog makes it from `html`.
+- **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
+- **`capture_engagement`** - PostHog captures the email's engagement events unless you pass `capture_engagement: false`.
+
+A send has `template_id` or `template_key`, not both. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+## Check an email's status
+
+```elixir
+def email_bounced(message_id) do
+  case PostHog.Emails.get(message_id) do
+    {:ok, %PostHog.Emails.Status{status: status}} ->
+      {:ok, status == "bounced"}
+
+    # The first status can take a few seconds to arrive. Try again later.
+    {:error, %PostHog.Emails.Error{code: "not_found"}} ->
+      {:ok, nil}
+
+    {:error, error} ->
+      {:error, error}
+  end
+end
+```
+
+`get/2` returns `{:ok, %PostHog.Emails.Status{}}` or `{:error, %PostHog.Emails.Error{}}`. The status has `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means.
+
+A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The SDK doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
+
+## Test without sending email
+
+Every request goes through the config's `api_client_module`. Wrap the default client with a [`Req.Test`](https://hexdocs.pm/req/Req.Test.html) plug to see exactly what your code sends, with no network call. `Req.Test` needs the `plug` package, which a Phoenix app already has. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
+
+`test_mode: true` keeps captured events in memory, but it doesn't stop email requests. Use the plug for those.
+
+```elixir
+defmodule MyApp.PostHogTestClient do
+  # The default client, with Req.Test in place of the network
+  @behaviour PostHog.API.Client
+
+  @impl true
+  def client(api_key, api_host) do
+    default = PostHog.API.Client.client(api_key, api_host)
+    %{default | client: Req.merge(default.client, plug: {Req.Test, __MODULE__})}
+  end
+
+  @impl true
+  defdelegate request(client, method, url, opts), to: PostHog.API.Client
+end
+
+defmodule MyApp.PasswordResetEmailTest do
+  use ExUnit.Case, async: true
+
+  setup do
+    config =
+      PostHog.Config.validate!(
+        supervisor_name: MyApp.TestPostHog,
+        api_key: "phc_test",
+        secret_key: "phs_test",
+        enable_local_evaluation: false,
+        api_client_module: MyApp.PostHogTestClient
+      )
+
+    start_supervised!({PostHog.Supervisor, config})
+    :ok
+  end
+
+  test "sends the email with its idempotency key" do
+    test_pid = self()
+
+    Req.Test.expect(MyApp.PostHogTestClient, fn conn ->
+      {:ok, body, conn} = Plug.Conn.read_body(conn)
+      send(test_pid, {:email_request, Plug.Conn.get_req_header(conn, "idempotency-key"), body})
+      Req.Test.json(conn, %{message_id: "msg_1", replayed: false})
+    end)
+
+    assert {:ok, %PostHog.Emails.SendResult{id: "msg_1"}} =
+             PostHog.Emails.send(MyApp.TestPostHog,
+               to: "jane@example.com",
+               template_key: "password-reset",
+               subject: "Reset your password",
+               text: "Reset it here.",
+               idempotency_key: "password-reset-1"
+             )
+
+    assert_received {:email_request, ["password-reset-1"], body}
+    assert %{"to" => "jane@example.com"} = Jason.decode!(body)
+  end
+end
+```
+
+## Use a proxy or self-hosted PostHog
+
+On PostHog Cloud, the SDK sends email to your region's app host, even when `api_host` is an ingestion host such as `us.i.posthog.com`. If `api_host` is a reverse proxy or a self-hosted PostHog, set `app_host` to your PostHog app URL. Without it, a send returns the code `missing_app_host`. The SDK doesn't send email requests to a host that might be a proxy.
+
+Local evaluation still loads flag definitions from `api_host` with the secret key. If the proxy must not see the key, set `enable_local_evaluation: false`.
