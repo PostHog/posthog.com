@@ -91,7 +91,7 @@ const faqs = [
                 Collecting the event, processing it, storing it, and every query you run on it in PostHog. It also pays
                 for the engineers who keep that pipeline running, so your data arrives complete and correct.{' '}
                 <Link to="/docs/billing/what-you-pay-for-per-event">
-                    What you actually get when you pay for an event
+                    Our docs
                 </Link>{' '}
                 explains each step.
             </p>
