@@ -20,13 +20,13 @@ Use it when the next step depends on what happened in the session, which event p
 2. Choose **Replay Vision** from the **AI** section of the step list.
 3. Under **What should Replay Vision do?**, pick what you want back, and fill in its fields:
 
-| Option | What you get back | Fields |
-| --- | --- | --- |
-| **Ask a question** | A yes or no verdict on your question | Question |
-| **Categorize** | The categories from your list that fit the session | Question, categories |
-| **Score** | A score on a scale you set | Question, from and to |
-| **Summarize** | A title, a summary, and chapters | What to focus on |
-| **Use a saved scanner** | The answer of a [scanner](/docs/replay-vision/creating-scanners) you already have, with its own type, prompt, and model | Scanner |
+| Option                  | What you get back                                                                                                       | Fields                |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- | --------------------- |
+| **Ask a question**      | A yes or no verdict on your question                                                                                    | Question              |
+| **Categorize**          | The categories from your list that fit the session                                                                      | Question, categories  |
+| **Score**               | A score on a scale you set                                                                                              | Question, from and to |
+| **Summarize**           | A title, a summary, and chapters                                                                                        | What to focus on      |
+| **Use a saved scanner** | The answer of a [scanner](/docs/replay-vision/creating-scanners) you already have, with its own type, prompt, and model | Scanner               |
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/rv_workflow_step_setup_87b6e71093.png"
@@ -51,36 +51,37 @@ If Replay Vision already answered the same question about the same session, the 
 
 The step's result has three fields:
 
-| Field | What it holds |
-| --- | --- |
-| `state` | `succeeded`, `skipped`, `ineligible`, `failed`, or `lost` |
-| `output` | The answer, when `state` is `succeeded` |
-| `warnings` | Why there is no answer, when there isn't one |
+| Field      | What it holds                                             |
+| ---------- | --------------------------------------------------------- |
+| `state`    | `succeeded`, `skipped`, `ineligible`, `failed`, or `lost` |
+| `output`   | The answer, when `state` is `succeeded`                   |
+| `warnings` | Why there is no answer, when there isn't one              |
 
 What `output` holds depends on the option:
 
-| Option | `output` fields |
-| --- | --- |
-| Ask a question | `verdict`, `reasoning`, `confidence` |
-| Categorize | `tags`, `reasoning`, `confidence` |
-| Score | `score`, `reasoning`, `confidence` |
-| Summarize | `title`, `summary`, `chapters`, `confidence` |
+| Option         | `output` fields                              |
+| -------------- | -------------------------------------------- |
+| Ask a question | `verdict`, `reasoning`, `confidence`         |
+| Categorize     | `tags`, `reasoning`, `confidence`            |
+| Score          | `score`, `reasoning`, `confidence`           |
+| Summarize      | `title`, `summary`, `chapters`, `confidence` |
 
 Keep the parts you need with [output variables](/docs/workflows/workflow-builder#output-variables). For example, store `output.score` in a `friction_score` variable and `output.reasoning` in `friction_reasoning`. A [conditional branch](/docs/workflows/workflow-builder#audience-splits) on `friction_score` can then send scores of 2 or lower one way, and a Slack message can include `{variables.friction_reasoning}`.
 
 When there is no answer, `state` says why, and `warnings` says it in words:
 
-| `state` | What happened |
-| --- | --- |
-| `skipped` | The scan never started because a limit was reached: the workflow's or project's daily scan limit, your organization's Replay Vision credits, or the scanner's own credit limit |
+| `state`      | What happened                                                                                                                                                                       |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `skipped`    | The scan never started because a limit was reached: the workflow's or project's daily scan limit, your organization's Replay Vision credits, or the scanner's own credit limit      |
 | `ineligible` | Replay Vision can't scan this session, for example because it has no recording or is too short. See [ineligible sessions](/docs/replay-vision/running-scanners#ineligible-sessions) |
-| `failed` | The scan failed. See [failed observations](/docs/replay-vision/troubleshooting#failed-observations) |
-| `lost` | The scan ran out of time before it finished |
+| `failed`     | The scan failed. See [failed observations](/docs/replay-vision/troubleshooting#failed-observations)                                                                                 |
+| `lost`       | The scan ran out of time before it finished                                                                                                                                         |
 
 In all of these cases the workflow continues to the next step, so branch on `state` if a missing answer should take a different path.
 
 ## Requirements
 
+- Your project is on **PostHog Cloud**. Replay Vision is not available on self-hosted PostHog installations.
 - The project records sessions with [Session Replay](/docs/session-replay).
 - The triggering event carries a `$session_id`. Events the [JavaScript Web SDK](/docs/libraries/js) captures do. For events you send from your server, pass the session ID along.
 - Your organization has allowed AI data processing.
@@ -114,11 +115,11 @@ When a limit is reached, the step returns `skipped` and the workflow continues. 
 
 Three [workflow templates](/docs/workflows/library#workflow-templates) start with a Replay Vision step. Each one has a question written for its job, so you only need to pick a Slack channel:
 
-| Template | Trigger | What Replay Vision does | Then |
-| --- | --- | --- | --- |
-| **Negative survey feedback with session context** | A survey response with a rating of 2 or lower | Summarizes what the person did before the survey and what likely led to the low rating | Posts the rating and summary to Slack |
-| **Support tickets with session context** | A new [support](/docs/support) ticket that has a session | Summarizes what the customer tried, where they got stuck, and any errors, before they asked for help | Posts the ticket and summary to Slack |
-| **Onboarding friction alerts** | `user signed up` | Scores from 1 to 5 how smoothly they got started | Posts scores of 2 or lower, with the reasoning, to Slack |
+| Template                                          | Trigger                                                  | What Replay Vision does                                                                              | Then                                                     |
+| ------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| **Negative survey feedback with session context** | A survey response with a rating of 2 or lower            | Summarizes what the person did before the survey and what likely led to the low rating               | Posts the rating and summary to Slack                    |
+| **Support tickets with session context**          | A new [support](/docs/support) ticket that has a session | Summarizes what the customer tried, where they got stuck, and any errors, before they asked for help | Posts the ticket and summary to Slack                    |
+| **Onboarding friction alerts**                    | `user signed up`                                         | Scores from 1 to 5 how smoothly they got started                                                     | Posts scores of 2 or lower, with the reasoning, to Slack |
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/rv_workflow_templates_1039fd7269.png"
