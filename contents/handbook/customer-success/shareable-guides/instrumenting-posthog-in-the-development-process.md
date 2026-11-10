@@ -171,8 +171,6 @@ Keep one dashboard for launches, and rotate it. While a feature launches, the da
 
 After the launch window, move the insights that still matter to the dashboard for that product area. Then clear the launch dashboard for the next launch, and [clean up the flag](/docs/feature-flags/cleaning-up-stale-flags).
 
-A large number of dashboards is not the real problem. The real problem is that nobody can find the one they need. A few core dashboards for top-level questions, plus one launch dashboard, keep each answer easy to find.
-
 ## Start backend events with one closed loop
 
 Frontend events show what users try. Backend events show what happened. [Backend tracking is also more reliable](/docs/product-analytics/best-practices#7-prefer-backend-to-frontend-tracking), because ad blockers and browser network errors do not drop it.
@@ -205,6 +203,6 @@ Send the account ID and plan as properties on each backend event. You can then b
 
 **We already have events with inconsistent names. Do we fix them?** Leave the old events as they are, and apply the convention to new events from now on. When an old event and a new event track the same thing, create an [action](/docs/data/actions) that matches both.
 
-## The one-line version
+## TL;DR
 
 **Decide what to track before you build, send every event through one typed module, and make every pull request say what it tracks.**
