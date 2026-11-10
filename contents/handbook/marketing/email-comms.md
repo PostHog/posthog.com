@@ -166,7 +166,9 @@ Any ad-hoc customer email broadcasts are owned by the <SmallTeam slug="developer
 
 These emails are usually categorized as `Service updates` in Workflows when they include important account or product information. They have a dedicated unsubscribe option in the footer, which makes it clear that we don't recommend users unsubscribe from them. 
 
-Important service updates are the _only_ type of email we may send to unsubscribed users, and only when it's warranted. The one exception is legal comms, when Hector tells us to. See [legal updates](#legal-updates).
+Important service updates are the _only_ type of email we may send to unsubscribed users, and only when it's warranted. The one exception is legal comms, when Hector tells us to. See [legal updates](#legal-updates). 
+
+For changes that require email comms, loop in Hector as early as possible for his legal assessment. 
 
 > `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
