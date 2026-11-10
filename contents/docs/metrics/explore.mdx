@@ -90,7 +90,7 @@ Each cell shows the average over the date range with a sparkline. Sparklines in 
 A few limits to know about:
 
 - Shared and public dashboards show a placeholder instead of the table.
-- If a label has more than 100 values, the rows with the smallest values are dropped.
+- The table keeps only as many rows as the row limit allows, and the sort column and direction decide which ones. With **Highest first**, the rows with the smallest values are dropped. With **Lowest first**, the rows with the largest values are dropped.
 - The widget reads ingested metrics. A project that only sends traces or logs has nothing for it to show.
 
 ## Alerting
