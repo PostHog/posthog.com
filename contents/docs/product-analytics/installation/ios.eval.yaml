@@ -107,9 +107,11 @@ checks:
                   its `.enabled`, or with isFeatureEnabled(<flag key>). Cite the file and
                   line(s).
               flags-load: >-
-                  Flags get fetched: the change sets preloadFeatureFlags to true (or
-                  removes the line that sets it to false), or calls reloadFeatureFlags()
-                  before the flag is read.
+                  Flags are loaded before the flag is read: the change sets
+                  preloadFeatureFlags to true (or removes the line that sets it to
+                  false), or calls reloadFeatureFlags() and reads the flag after the
+                  reload finishes, in its completion callback or on the
+                  PostHogSDK.didReceiveFeatureFlags notification.
               flag-gates-polls: >-
                   Creating a poll is hidden or refused when the flag is off.
 
