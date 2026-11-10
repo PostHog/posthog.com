@@ -10,7 +10,7 @@ We run two special programs for early-stage teams, plus external partnerships wi
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised, not acquired or owned by an established company, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
+| Eligibility                 | <2 years old, <$5M raised, not acquired or owned by an ineligible company, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Limit                       | Once per founder or org, whichever comes first | Once per founder or org, whichever comes first (annual renewals for the same org, and joining after PostHog for Startups credits end, don't count) |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
