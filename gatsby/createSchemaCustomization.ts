@@ -535,6 +535,28 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       category: String
       feature: String
     }
+    type PostHogScopeObject implements Node @dontInfer {
+      scopeObject: String
+      name: String
+      plural: String
+      description: String
+      group: String
+      groupOrder: Int
+      docsUrl: String
+      organizationWide: Boolean
+      actions: [PostHogScopeAction]
+      writeRequires: PostHogScopeRequirement
+    }
+    type PostHogScopeAction {
+      action: String
+      scope: String
+      oauth: Boolean
+      warning: String
+    }
+    type PostHogScopeRequirement {
+      scope: String
+      reason: String
+    }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")
       sourceId: String

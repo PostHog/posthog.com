@@ -545,7 +545,7 @@ export const dataWarehouse = {
                 },
                 {
                     title: 'S3 & BigQuery',
-                    description: 'Run SQL in PostHog over data in your object storage',
+                    description: 'Import files from your object storage and query them with SQL',
                 },
             ],
         },

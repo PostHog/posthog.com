@@ -2,14 +2,16 @@ name: Bundle baseline (master)
 
 # Produces the master baseline that deploy-preview.yml diffs each PR against. Builds the
 # site the same way the preview build does (GATSBY_MINIMAL + EMIT_WEBPACK_STATS) and caches
-# the resulting reports. Path-filtered so content/docs-only commits don't trigger a build —
-# only changes that can move the JS bundle do.
+# the resulting reports.
 
 on:
     push:
         branches:
             - master
         paths:
+            - 'contents/**'
+            - 'vercel.json'
+            - 'scripts/*link*'
             - 'src/**'
             - 'gatsby-*'
             - 'gatsby/**'
@@ -77,3 +79,14 @@ jobs:
               with:
                   path: bundle-report/baseline
                   key: bundle-baseline-${{ github.sha }}
+
+            - name: Check links
+              run: |
+                  scripts/link-check-scan.sh link-check-baseline --minimal-build
+                  node scripts/link-check-report.js link-check-baseline
+
+            - name: Save link baseline to cache
+              uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+              with:
+                  path: link-check-baseline
+                  key: link-check-baseline-${{ github.sha }}
