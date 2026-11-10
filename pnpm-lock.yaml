@@ -720,9 +720,6 @@ importers:
       sharp:
         specifier: 0.34.5
         version: 0.34.5
-      storybook-addon-gatsby:
-        specifier: 0.0.2
-        version: 0.0.2(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1))
       storybook-dark-mode:
         specifier: ^1.0.8
         version: 1.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -15863,12 +15860,6 @@ packages:
 
   store2@2.14.4:
     resolution: {integrity: sha512-srTItn1GOvyvOycgxjAnPA63FZNwy0PTyUBFMHRM+hVFltAeoh0LmNBz9SZqUS9mMqGk8rfyWyXn3GH5ReJ8Zw==}
-
-  storybook-addon-gatsby@0.0.2:
-    resolution: {integrity: sha512-3vjyy3Hr2+/5yHRz/ImoYw19rmm9npS3ae7rNL2/dATEjGWOHuNi02GpDLG21vNgZgba98nB45WQaSZZt+eOTw==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      gatsby: ^3.10.1
 
   storybook-dark-mode@1.1.2:
     resolution: {integrity: sha512-L5QjJN49bl+ktprM6faMkTeW+LCvuMYWQaRo8/JGSMmzomIjLT7Yo20UiTsnMgMYyYWYF5O4EK/F3OvjDNp8tQ==}
@@ -38516,10 +38507,6 @@ snapshots:
       internal-slot: 1.1.0
 
   store2@2.14.4: {}
-
-  storybook-addon-gatsby@0.0.2(gatsby@4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)):
-    dependencies:
-      gatsby: 4.25.9(@types/webpack@4.41.40)(babel-eslint@10.1.0(eslint@7.32.0))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)
 
   storybook-dark-mode@1.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
