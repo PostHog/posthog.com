@@ -30,7 +30,7 @@ Opting out on a PostHog client stops it from capturing new events. This includes
 
 Opting out doesn't affect:
 
-- **Feature flags.** In recent SDK versions, flags still load while the user is opted out. The SDK sends `/flags` requests that include the distinct ID and any person properties set for flag evaluation.
+- **Feature flags.** Flags still load while the user is opted out (iOS requires 3.93.3 or later). The SDK sends `/flags` requests that include the distinct ID and any person properties set for flag evaluation.
 - **Events captured before opting out.** Events already queued on the device can still be sent to PostHog after the user opts out.
 
 ### Opting in and out
