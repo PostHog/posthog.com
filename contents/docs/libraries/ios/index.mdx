@@ -190,7 +190,7 @@ Callbacks the SDK can call off the main thread are now `@Sendable`: `reloadFeatu
 PostHogSDK.shared.captureAi("$ai_generation", properties: ["$ai_model": "gpt-5", "$ai_trace_id": traceId])
 ```
 
-PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint.
+PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint. See [AI events](/docs/libraries/ios/usage#ai-events) for the return value, the separate queue, and the `captureAi` settings.
 
 ### Optional: leave out features
 
