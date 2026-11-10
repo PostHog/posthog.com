@@ -342,7 +342,7 @@ import MobileBootstrapBehavior from "../_snippets/mobile-bootstrap-behavior.mdx"
 
 <BootstrappingIntro />
 
-Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response (requires Android SDK `3.55.0`+):
+Set `config.bootstrap` before calling `setup()` to seed identity and flag values before the first `/flags` response (requires Android SDK `3.55.0`+, and versions before `3.72.0` take `apiKey` instead of `projectToken`):
 
 ```kotlin
 import com.posthog.PostHogBootstrapConfig
