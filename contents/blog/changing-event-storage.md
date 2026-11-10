@@ -25,6 +25,7 @@ seo:
 - `$set`, `$set_once` and other short-lived debugging properties on events are now kept for 60 days instead of forever.
 - `$feature_flag_called` events and `$feature/*` properties move to dedicated storage built for them. Most queries on flag calls keep working, but [a few need a change](#do-you-need-to-change-anything-for-flag-calls).
 - We're removing some deprecated properties, mostly flag payloads and internal SDK state.
+- We'll stop storing `null` values and empty objects in properties, and we'll store a few built-in properties as text. [See what this changes](#how-some-property-values-change).
 - Other person and event properties are unaffected. They stay on your persons and on every event, queryable as before.
 - All of this takes effect on November 30.
 
@@ -63,7 +64,6 @@ Here's more details on what this means:
 | --- | --- | --- | --- |
 | `$feature_flag_called` events | Stored in the events table | Stored in a dedicated flag evaluations table, kept for 90 days | Only in a few cases. See [below](#do-you-need-to-change-anything-for-flag-calls) |
 | `$feature/<flag>` properties | One property per flag on each event | One feature flags map per event | No. Existing insights and HogQL queries keep working |
-| `null` property values | Stored as `null` | Stored as "not set". Exports and event details still show `null` | No. Queries already treat `null` and "not set" the same |
 
 ### Do you need to change anything for flag calls?
 
@@ -111,6 +111,16 @@ These properties are deprecated, and we'll stop storing them on events.
 Queries using `$active_feature_flags` keep working. HogQL translates them to the new feature flags map, so existing insights and queries won’t break. For new queries, use the map directly.
 
 **Raw LLM payloads already live somewhere else.** `$ai_input`, `$ai_output` and the rest moved to a dedicated AI observability table with 30-day retention, which keeps very heavy data off the events table and AI observability affordable. Any copies still on the events table are legacy data older than 30 days, so removing them changes nothing in the product.
+
+## How some property values change
+
+We'll stop storing two kinds of empty values, and we'll store a few built-in properties as text. You'll mostly see this where PostHog shows a whole event, like batch exports, the API, and event details.
+
+| What you send | Before | After | Do you need to do anything? |
+| --- | --- | --- | --- |
+| A property set to `null`, like `{"plan": null}` | Stored as `null` | Not stored. Filters already treat `null` as not set, so they work as before. Whole events leave the property out instead of showing `null` | Only if a tool that reads your batch exports expects the `null` |
+| An empty object, like `{"filters": {}}`, or an object that only holds `null` values | Stored as sent | Not stored. The property counts as not set everywhere, including in filters and whole events | Only if you filter on whether the property is set, or a tool that reads your batch exports expects the object |
+| A number in a built-in text property, like `$browser_version` or the group keys `$group_0` to `$group_4` | Stored as a number, like `155` | Stored as text, like `"155"`. An empty value (`""` or `[]`) in these properties is left out of whole events | Only if a tool that reads your batch exports expects a number |
 
 ## When
 
