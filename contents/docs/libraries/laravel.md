@@ -29,8 +29,6 @@ POSTHOG_PROJECT_TOKEN=<ph_project_token>
 POSTHOG_HOST=<ph_client_api_host>
 ```
 
-The SDK reads `POSTHOG_PROJECT_TOKEN` from version 0.4.0. Earlier versions read `POSTHOG_API_KEY`. Version 0.4.0 and later still read `POSTHOG_API_KEY` if `POSTHOG_PROJECT_TOKEN` is not set, and a `config/posthog.php` published by an earlier version keeps working.
-
 Laravel's package discovery registers the service provider and facade automatically. If discovery is disabled, register `PostHog\Laravel\PostHogServiceProvider` manually. No PHP SDK initialization or custom middleware is needed.
 
 Configure the SDK in `config/posthog.php`. It's enabled by default; set `POSTHOG_ENABLED=false` to disable it.
