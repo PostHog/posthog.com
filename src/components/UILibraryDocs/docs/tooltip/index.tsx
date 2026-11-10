@@ -2,6 +2,7 @@ import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import HoverSurfaceGuide from '../../HoverSurfaceGuide'
 import WithoutArrow from './WithoutArrow'
 import withoutArrowSource from '!!../../rawSourceLoader!./WithoutArrow.tsx?raw'
 import Delay from './Delay'
@@ -49,6 +50,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        <HoverSurfaceGuide key="guide" />,
         'Use a tooltip for a short label or hint, such as the name of an icon button. Touch users cannot hover, so never put the only copy of important information in a tooltip.',
         <>
             Do not put links or buttons in a tooltip. Use a <Link to="/components/ui/popover">Popover</Link>.

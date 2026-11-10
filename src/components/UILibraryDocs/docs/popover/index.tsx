@@ -2,8 +2,11 @@ import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import HoverSurfaceGuide from '../../HoverSurfaceGuide'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
+import OpenOnHover from './OpenOnHover'
+import openOnHoverSource from '!!../../rawSourceLoader!./OpenOnHover.tsx?raw'
 import WithClose from './WithClose'
 import withCloseSource from '!!../../rawSourceLoader!./WithClose.tsx?raw'
 
@@ -30,8 +33,17 @@ export const doc: ComponentDoc = {
             Component: WithClose,
             source: withCloseSource,
         },
+        {
+            id: 'open-on-hover',
+            title: 'Open on hover',
+            description:
+                'Set openOnHover on Popover.Trigger for a hover card on a trigger that is not a link. The popover still opens on click, tap, and keyboard, so all users can reach it. delay and closeDelay set the timing in milliseconds.',
+            Component: OpenOnHover,
+            source: openOnHoverSource,
+        },
     ],
     notes: [
+        <HoverSurfaceGuide key="guide" />,
         <>
             Use a popover for content that the user interacts with next to a trigger. For a short text hint, use{' '}
             <Link to="/components/ui/tooltip">Tooltip</Link>. For a task that needs full focus, use{' '}

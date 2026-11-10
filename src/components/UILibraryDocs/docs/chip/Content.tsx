@@ -22,6 +22,14 @@ export default function ChipContent(): JSX.Element {
                 <Chip image={hogImage('night_hog_219fff00f3.png')}>Night hog</Chip>
                 <Chip image={hogImage('steve_hogs_17c7900b07.png')}>Steve hog</Chip>
             </DemoRow>
+            <DemoRow label="Square image">
+                <Chip image={hogImage('night_hog_219fff00f3.png')} imageShape="square">
+                    Night hog
+                </Chip>
+                <Chip image={hogImage('steve_hogs_17c7900b07.png')} imageShape="square">
+                    Steve hog
+                </Chip>
+            </DemoRow>
         </DemoRows>
     )
 }

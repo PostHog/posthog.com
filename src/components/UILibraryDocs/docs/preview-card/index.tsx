@@ -1,6 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
+import HoverSurfaceGuide from '../../HoverSurfaceGuide'
 import Delay from './Delay'
 import delaySource from '!!../../rawSourceLoader!./Delay.tsx?raw'
 import LinkPreviews from './LinkPreviews'
@@ -31,6 +32,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        <HoverSurfaceGuide key="guide" />,
         'Use PreviewCard to preview a linked page. Touch screens cannot hover, so do not put information in the card that the linked page does not have.',
         <>
             For an internal link, pass <Snippet.Inline>{'render={<GatsbyLink to="/path" />}'}</Snippet.Inline> to{' '}
@@ -38,6 +40,18 @@ export const doc: ComponentDoc = {
         </>,
     ],
     props: [
+        {
+            component: 'PreviewCard.Trigger',
+            rows: [
+                {
+                    name: 'appearance',
+                    type: "'link' | 'none'",
+                    defaultValue: "'link'",
+                    description:
+                        'link styles the trigger as a text link. none adds no styles, for a trigger that has its own look, such as a chip.',
+                },
+            ],
+        },
         {
             component: 'PreviewCard.Popup',
             rows: [
