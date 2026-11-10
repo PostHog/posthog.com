@@ -6,7 +6,7 @@ import { ProductScreenshot } from "components/ProductScreenshot";
 
 Replay Vision uses AI to automatically watch your [session recordings](/docs/session-replay) and turn what it sees into structured, queryable data. You configure **scanners** – named AI probes that describe what to look for – and PostHog applies them to your recordings, producing **observations** you can query, chart, and alert on.
 
-The key idea is that Replay Vision actually *watches the video* of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
+The key idea is that Replay Vision actually _watches the video_ of each recording alongside its events. This lets it pick up on visual and behavioral cues – hesitation, confusion, where a user's attention goes – that aren't captured by clicks and pageviews alone. Instead of manually reviewing hundreds of replays to spot a pattern, you describe what matters once and let it run continuously.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/rv_highlights_overview_light_ac11794766.png"
@@ -14,6 +14,12 @@ The key idea is that Replay Vision actually *watches the video* of each recordin
   alt="The Replay Vision home on the Highlights tab: a grid of sessions picked from every scanner for failures, struggles, and payment problems"
   classes="rounded"
 />
+
+<CalloutBox type="info" title="Cloud only">
+
+Replay Vision is only available on PostHog Cloud. Self-hosted installations don't include the AI gateway and recording rasterizer that Replay Vision requires.
+
+</CalloutBox>
 
 ## How it works
 
