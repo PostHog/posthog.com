@@ -767,6 +767,8 @@ The new `$app_language` property is the language your app shows. `PosthogObserve
 - On Android, upgrade `posthog-server` to 2.25.0 or later if you use it.
 - Make `beforeSend` callbacks synchronous, and check them for the new event shape and its options.
 - Replace `PostHogConfig.onFeatureFlags` with `Posthog().onFeatureFlags()` before `setup()`.
+- Rename empty-string flag variants before you upgrade.
+- Pass `sendFeatureFlagEvent: false` wherever you replace `getFeatureFlagPayload()`.
 - Change filters on `$feature_flag_response` for missing flags to `is not set`, and filters on `$locale` to match the region.
 - Move anything that reads `version` or `build` on iOS and macOS lifecycle events to `$app_version` and `$app_build`.
 - On Windows and Linux, await calls or `Posthog().close()` before `exit()`.
