@@ -205,6 +205,12 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                 </Tooltip>{' '}
                                 for startups and non-profits
                             </SidebarListItem>
+                            <SidebarListItem>
+                                <Link href="/docs/billing/what-you-pay-for-per-event" className={sidebarLinkClasses}>
+                                    What you actually get when you pay for an event
+                                </Link>{' '}
+                                breaks down what the price covers, with a ledger to compare it with building your own
+                            </SidebarListItem>
                         </SidebarList>
                     </div>
                     <div>
