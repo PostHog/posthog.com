@@ -107,6 +107,18 @@ oss-polar-server: # FastAPI API, posthog 7.76.1
     repo: https://github.com/polarsource/polar
     ref: ba3f8138458c9c615bf86aa7285a107234339633
     folder: server
+oss-icecubes: # SwiftUI iOS Mastodon client, no PostHog code (uses TelemetryDeck)
+    repo: https://github.com/Dimillian/IceCubesApp
+    ref: 98098b9c4b5928f89f338203193c2bf40ab7f38c
+    folder: .
+oss-element-x-ios: # SwiftUI iOS Matrix client (XcodeGen), posthog-ios 3.92.6 exact pin in project.yml
+    repo: https://github.com/element-hq/element-x-ios
+    ref: 931e3866d40c52842b288f2bd5736d2e27afd689
+    folder: .
+oss-bouncer-ios: # SwiftUI iOS SMS filter, posthog-ios 3.92.0 (Package.resolved)
+    repo: https://github.com/afterxleep/Bouncer
+    ref: 8c6f44fd5467c507d4d6355daa010493c9c43656
+    folder: .
 
 # --- Placeholders. These repos don't exist: PostHog/docs-eval-fixtures was planned
 # but never built. Checks that use them can't run. Replace each with a real codebase
