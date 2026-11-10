@@ -140,14 +140,14 @@ import com.posthog.android.PostHogAndroidConfig
 
 class MyABTestApplication : Application() {
     companion object {
-        private const val POSTHOG_API_KEY = "<ph_project_token>"
+        private const val POSTHOG_PROJECT_TOKEN = "<ph_project_token>"
         private const val POSTHOG_HOST = "<ph_client_api_host>" // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
     }
 
     override fun onCreate() {
         super.onCreate()
         val config = PostHogAndroidConfig(
-            projectToken = POSTHOG_API_KEY,
+            projectToken = POSTHOG_PROJECT_TOKEN,
             host = POSTHOG_HOST
         )
         PostHogAndroid.setup(this, config)

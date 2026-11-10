@@ -59,7 +59,7 @@ import com.posthog.android.PostHogAndroidConfig
 import okhttp3.OkHttpClient
 
 val config = PostHogAndroidConfig(
-    projectToken = POSTHOG_API_KEY,
+    projectToken = POSTHOG_PROJECT_TOKEN,
     host = POSTHOG_HOST,
 ).apply {
     tracingHeaders = listOf("api.example.com")
@@ -295,7 +295,7 @@ You can also configure the flush interval with `flushIntervalSeconds` (default `
 ```kotlin
 import com.posthog.android.PostHogAndroidConfig
 
-val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+val config = PostHogAndroidConfig(projectToken = POSTHOG_PROJECT_TOKEN, host = POSTHOG_HOST).apply {
     flushAt = 20
     flushIntervalSeconds = 30
 }
@@ -347,7 +347,7 @@ Set `config.bootstrap` before calling `setup()` to seed identity and flag values
 ```kotlin
 import com.posthog.PostHogBootstrapConfig
 
-val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST)
+val config = PostHogAndroidConfig(projectToken = POSTHOG_PROJECT_TOKEN, host = POSTHOG_HOST)
 config.bootstrap = PostHogBootstrapConfig(
     distinctId = "distinct_id_of_your_user",
     isIdentifiedId = true,
@@ -443,7 +443,7 @@ If you're not seeing the expected events being captured, the feature flags being
 You can enable debug mode by setting the `debug` option to `true` in the `PostHogAndroidConfig` object. This will enable verbose logs about the inner workings of the SDK.
 
 ```kotlin
-val config = PostHogAndroidConfig(projectToken = POSTHOG_API_KEY, host = POSTHOG_HOST).apply {
+val config = PostHogAndroidConfig(projectToken = POSTHOG_PROJECT_TOKEN, host = POSTHOG_HOST).apply {
     debug = true
     // ... other config options
 }
@@ -458,7 +458,7 @@ import com.posthog.PersonProfiles
 import com.posthog.android.PostHogAndroidConfig
 
 val config = PostHogAndroidConfig(
-    projectToken = POSTHOG_API_KEY,
+    projectToken = POSTHOG_PROJECT_TOKEN,
     host = POSTHOG_HOST
 ).apply {
     captureApplicationLifecycleEvents = true
