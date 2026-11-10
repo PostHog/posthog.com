@@ -220,8 +220,8 @@ public async Task<string> SendPasswordResetAsync(User user, string html, string 
 | `Tracking` | Opens | Clicks | Engagement events |
 | --- | --- | --- | --- |
 | Left out | On | Off | On |
-| `EmailTracking.On` | On | On | On |
-| `EmailTracking.Off` | Off | Off | Off |
+| `EmailTracking.All` | On | On | On |
+| `EmailTracking.None` | Off | Off | Off |
 | `new EmailTracking { ... }` | `Opens`, on by default | `Clicks`, off by default | `Engagement`, on by default |
 
 - **Opens** - PostHog adds an open pixel to the email, so it can count opens.
@@ -230,7 +230,7 @@ public async Task<string> SendPasswordResetAsync(User user, string html, string 
 
 Clicks are off by default because PostHog can't tell a newsletter from an email with a sign-in or password reset link. A tracked link goes through a redirect, so a token in the link would go through it too. Set `Tracking = new EmailTracking { Clicks = true }` when the email's links are safe to rewrite.
 
-With `EmailTracking.Off`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and captures no engagement events for it.
+With `EmailTracking.None`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and captures no engagement events for it.
 
 PostHog refuses `new EmailTracking { Opens = false, Clicks = true }`, because click tracking needs open tracking. See [open and click tracking](/docs/workflows/transactional-emails/api#open-and-click-tracking) for every rule.
 
