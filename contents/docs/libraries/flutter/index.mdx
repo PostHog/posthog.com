@@ -292,7 +292,7 @@ To set up [session replay web](/docs/session-replay) or [mobile session replay](
 If you're using Flutter Web, also enable the [Canvas capture](/docs/session-replay/canvas-recording) in [your project settings](https://us.posthog.com/settings/project-replay).
 This is needed as Flutter renders your app using a browser canvas element.
 
-On Flutter Web, masking (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) applies inside that canvas too – declare `session_recording.canvasCapture.maskRegionsFn` in the `posthog.init` call in your `web/index.html` to enable it (requires PostHog Flutter SDK 5.34.0+ and posthog-js 1.408.0+). See [masking on Flutter Web](/docs/session-replay/privacy) under the Flutter tab.
+On Flutter Web, masking (`maskAllTexts`, `maskAllImages`, `PostHogMaskWidget`) applies inside that canvas too. To enable it, declare `session_recording.canvasCapture.maskRegionsFn` in the `posthog.init` call in your `web/index.html` (requires PostHog Flutter SDK 5.34.0+ and posthog-js 1.408.0+). See [masking on Flutter Web](/docs/session-replay/privacy) under the Flutter tab.
 
 ## Surveys
 
@@ -426,10 +426,10 @@ config.beforeSend = [
 
 The `beforeSend` callbacks only apply to events captured via Dart APIs:
 
-- `Posthog().capture()` – custom events
-- `Posthog().captureAi()` – AI events
-- `Posthog().screen()` – screen events (event name is `$screen`)
-- `Posthog().captureException()` – exception events (event name is `$exception`)
+- `Posthog().capture()`: custom events
+- `Posthog().captureAi()`: AI events
+- `Posthog().screen()`: screen events (event name is `$screen`)
+- `Posthog().captureException()`: exception events (event name is `$exception`)
 
 `identify`, `alias`, `group` and `setPersonProperties` don't go through them, and neither do events the native SDK captures itself, such as:
 
@@ -496,7 +496,7 @@ Before you upgrade, update to the latest version 5 release and fix its deprecati
 | --- | --- | --- |
 | iOS | 13.0 | 15.0 |
 | macOS | 10.15 | 11.0 |
-| Xcode | – | 26 or later |
+| Xcode | None | 26 or later |
 | Flutter, on every platform | 3.27 | 3.41 or later |
 | iOS and macOS dependency manager | CocoaPods or Swift Package Manager | Swift Package Manager only |
 | Android | API 23 | API 23 (unchanged) |
@@ -627,7 +627,7 @@ Web is unchanged. Flutter web runs `posthog-js`, which keeps sending events to t
 | Data | Version 5 | Version 6 on iOS, macOS, Android, Windows and Linux |
 | --- | --- | --- |
 | Events | `/batch/` | `/i/v1/analytics/events` |
-| AI events (`captureAi`) | – | `/i/v1/ai/events` |
+| AI events (`captureAi`) | None | `/i/v1/ai/events` |
 
 Session replay, logs and feature flags keep their endpoints.
 
