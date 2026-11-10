@@ -20,7 +20,7 @@ A better tool does not fix this. A better process does. This guide puts tracking
 2. **Turn the PRD into an event spec.** An agent skill or a planning prompt can draft the spec. A person approves it.
 3. **Assign an owner.** The PM and the lead engineer own the spec, the launch dashboard, and the grade.
 4. **Build behind a feature flag.** The events ship in the same pull request as the feature code.
-5. **Verify the events.** Trigger the feature locally and confirm that each event arrives in the [activity tab](/docs/data/events) with the correct properties.
+5. **Verify the events.** Trigger the feature locally and confirm that each event arrives in the [activity tab](/docs/data/events) with the correct properties. Send local events to a separate development project so test data stays out of production. If you don't have one yet, see [how to set up PostHog for multiple environments](/tutorials/multiple-environments).
 6. **Launch.** Roll out the flag.
 7. **Grade the launch.** Compare the result to the PRD metric.
 8. **Hold a retro.** Decide what the data changes about your next piece of work.
