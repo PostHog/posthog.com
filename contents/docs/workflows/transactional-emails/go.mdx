@@ -203,7 +203,7 @@ A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your
 | Left out | On | Off | On |
 | `posthog.EmailTrackingOn()` | On | On | On |
 | `posthog.EmailTrackingOff()` | Off | Off | Off |
-| `posthog.EmailTrackingWith(posthog.EmailTrackingOptions{...})` | `Opens`, on by default | `Clicks`, off by default | `Engagement`, on by default |
+| `posthog.EmailTrackingWith(...)` | `Opens`, on by default | `Clicks`, off by default | `Engagement`, on by default |
 
 - **Opens** - PostHog adds an open pixel to the email, so it can count opens.
 - **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
