@@ -37,7 +37,7 @@ Scan the content for opportunities to add internal links. For each suggestion, p
 
 - **Don't suggest links for text that's already linked.** Parse the markdown and skip any text inside `[...]()` or `<a>` tags.
 - **Prefer product pages** for first/prominent mentions of a PostHog feature (e.g., link "feature flags" to `/feature-flags` not `/docs/feature-flags`). Use docs links for technical/setup references.
-- **Prefer blog and product engineer posts** for conceptual mentions (e.g., "A/B testing" → `/product-engineers/ab-testing`).
+- **Prefer blog and product engineer posts** for conceptual mentions (e.g., "A/B testing" → `/product-engineers/experiments`).
 - **Don't over-link.** Each unique concept should only be linked once (on first mention). Don't suggest linking every occurrence.
 - **Match the content type.** If the post is a tutorial, prefer linking to other tutorials and docs. If it's a blog post, prefer blog and product page links. If it's a newsletter, prefer blog posts and product pages.
 - **Consider context.** A mention of "funnels" in a sentence about user behavior should link to the funnels product page, while "funnels" in a sentence about setup should link to the docs.

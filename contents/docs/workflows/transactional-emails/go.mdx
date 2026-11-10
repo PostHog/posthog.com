@@ -1,0 +1,279 @@
+---
+title: Send transactional emails with Go
+sidebar: Docs
+showTitle: true
+---
+
+The [Go SDK](/docs/libraries/go) sends transactional emails from version 1.40.0. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
+
+<details>
+<summary>Prompt for your coding agent</summary>
+
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+
+```text
+Add PostHog transactional email to this Go app with github.com/posthog/posthog-go.
+
+Read https://posthog.com/docs/workflows/transactional-emails/go.md first. Follow it over anything you remember about PostHog.
+
+- Reuse the app's posthog.Client. Set SecretKey in posthog.Config from the POSTHOG_PROJECT_SECRET_API_KEY environment variable. The client then polls flag definitions with this key, so tell me that the key needs the Feature flag read scope too.
+- Never hard-code the secret key, log it, or put it in config that reaches the browser.
+- Build each IdempotencyKey from the record that caused the email, such as the password reset request ID or the order ID. Never use a random value or a timestamp.
+- Emails().Send returns (*posthog.SendEmailResult, error). Every error is a *posthog.EmailError. Read it with errors.As and branch on its Code, never on its Message.
+- Retry only network_error, idempotency_key_in_flight, throttled, and delivery_unavailable, with the same IdempotencyKey. In a River job, set MaxRetries: posthog.Ptr(0) on the send and return river.JobCancel for every other code. Never resend the email through another email provider. Finish every retry within 24 hours, because PostHog keeps an idempotency key for 24 hours.
+- Pass the DistinctID that the app passes to identify(). Leave it out for people without an account, such as invitees.
+- Use transactional email only for email that a person needs, such as password resets, sign-in codes, and receipts. Never use it for marketing.
+- Add a test that starts an httptest.Server, sets its URL as both Endpoint and AppHost in posthog.Config, and checks the request.
+
+Ask me for the template ID and the names of its variables. Don't create the API key. I create it.
+```
+
+</details>
+
+## Install
+
+```bash
+go get github.com/posthog/posthog-go
+```
+
+## Set up the client
+
+Add your project secret API key to the PostHog client that your app already has. The project token keeps capturing events. The secret key sends email, so keep it on your server.
+
+```go
+import (
+    "log"
+    "os"
+
+    "github.com/posthog/posthog-go"
+)
+
+client, err := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
+    Endpoint:  "<ph_client_api_host>",
+    SecretKey: os.Getenv("POSTHOG_PROJECT_SECRET_API_KEY"),
+})
+if err != nil {
+    log.Fatal(err)
+}
+defer client.Close()
+```
+
+When `SecretKey` is set, the client also polls flag definitions with it for [local evaluation](/docs/feature-flags/local-evaluation). Give the key the **Feature flag** read scope too, or the client logs a failed poll each time it polls.
+
+Close the client when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
+
+## Send an email
+
+```go
+func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email, firstName, resetLink, resetRequestID string) (string, error) {
+    result, err := client.Emails().Send(ctx, posthog.TemplateEmail{
+        To:           email,
+        TemplateID:   "<template_id>",
+        TemplateData: map[string]interface{}{"first_name": firstName, "reset_link": resetLink},
+        DistinctID:   userID,
+        // Identifies this one email, so a retry never sends it twice
+        IdempotencyKey: "password-reset-" + resetRequestID,
+    })
+    if err != nil {
+        // A *posthog.EmailError. Branch on its Code
+        return "", err
+    }
+    return result.ID, nil
+}
+```
+
+`Send` returns a `*SendEmailResult` and an error. `result.ID` is the message ID. Every error is a `*posthog.EmailError`. Read it with `errors.As`, and branch on its `Code`, one of the codes in the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument, such as a template ID that isn't a UUID, returns an `EmailError` before any request.
+
+A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
+
+### Timeouts and retries
+
+The client retries for you. It retries network errors, rate limits, an in-flight idempotency key, and a `503` up to two times, with the same idempotency key. It waits about 1 second and then 2 seconds, or longer if the server's `Retry-After` asks for it. When `Retry-After` asks for more than 30 seconds, the client returns the error at once. Each request times out after 15 seconds.
+
+To change this, set `EmailRequestTimeout` and `EmailRequestMaxRetries` in `posthog.Config`, or `MaxRetries` on one send. The retry settings take a pointer, so pass `posthog.Ptr(0)` to turn retries off.
+
+## Send from a background job
+
+Send from a job queue when the email shouldn't slow down the request, such as an email address check after a signup. Let the queue own the retries:
+
+- Set `MaxRetries: posthog.Ptr(0)`, so that the client doesn't retry inside the job.
+- Keep the idempotency key the same on every attempt.
+- Finish the retries within 24 hours. PostHog remembers an idempotency key for 24 hours after it queues the email, so a later retry can send the email twice.
+- Retry only the errors that a later attempt can fix. Every other code fails the same way again.
+
+This example uses [River](https://riverqueue.com/docs), which keeps its jobs in Postgres. River retries a job when `Work` returns an error. `river.JobCancel` stops the job for good, even when it has attempts left.
+
+```go
+import (
+    "context"
+    "errors"
+    "slices"
+
+    "github.com/posthog/posthog-go"
+    "github.com/riverqueue/river"
+)
+
+// A later attempt can fix these. Any other code fails the same way again.
+var retryableCodes = []string{"network_error", "idempotency_key_in_flight", "throttled", "delivery_unavailable"}
+
+type PasswordResetArgs struct {
+    UserID         string `json:"user_id"`
+    Email          string `json:"email"`
+    FirstName      string `json:"first_name"`
+    ResetLink      string `json:"reset_link"`
+    ResetRequestID string `json:"reset_request_id"`
+}
+
+func (PasswordResetArgs) Kind() string { return "password_reset_email" }
+
+// Five attempts finish within minutes, well inside the 24 hours that PostHog keeps an idempotency key
+func (PasswordResetArgs) InsertOpts() river.InsertOpts { return river.InsertOpts{MaxAttempts: 5} }
+
+type PasswordResetWorker struct {
+    river.WorkerDefaults[PasswordResetArgs]
+    PostHog posthog.Client
+}
+
+func (w *PasswordResetWorker) Work(ctx context.Context, job *river.Job[PasswordResetArgs]) error {
+    args := job.Args
+    _, err := w.PostHog.Emails().Send(ctx, posthog.TemplateEmail{
+        To:           args.Email,
+        TemplateID:   "<template_id>",
+        TemplateData: map[string]interface{}{"first_name": args.FirstName, "reset_link": args.ResetLink},
+        DistinctID:   args.UserID,
+        // The same key on every attempt, so a retried job never sends the email twice
+        IdempotencyKey: "password-reset-" + args.ResetRequestID,
+        // River retries the job, so the client doesn't retry on its own
+        MaxRetries: posthog.Ptr(0),
+    })
+    var emailErr *posthog.EmailError
+    if errors.As(err, &emailErr) && !slices.Contains(retryableCodes, emailErr.Code) {
+        // River doesn't run a cancelled job again
+        return river.JobCancel(err)
+    }
+    return err
+}
+```
+
+Register the worker with `river.AddWorker(workers, &PasswordResetWorker{PostHog: client})`.
+
+## Link emails to your users
+
+Pass the distinct ID that you pass to `identify()` as `DistinctID`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
+
+- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** - For an invite, or an email address check before the account exists, leave `DistinctID` out.
+
+## Send content from your code
+
+`Send` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Pass a `CodeEmail`, name the email with `TemplateKey`, and set `Subject` with `HTML`, `Text`, or both. PostHog sends the content as you wrote it, so render it first with your template engine, such as `html/template`.
+
+```go
+func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email, html, resetRequestID string) (string, error) {
+    result, err := client.Emails().Send(ctx, posthog.CodeEmail{
+        To:             email,
+        TemplateKey:    "password-reset",
+        Subject:        "Reset your password",
+        HTML:           html,
+        From:           "Hedgebox <security@example.com>",
+        DistinctID:     userID,
+        IdempotencyKey: "password-reset-" + resetRequestID,
+    })
+    if err != nil {
+        return "", err
+    }
+    return result.ID, nil
+}
+```
+
+- **`TemplateKey`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`Text`** - If you leave it out, PostHog makes it from `HTML`.
+- **`From`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `ReplyTo` takes a list of addresses.
+- **`CaptureEngagement`** - PostHog captures the email's engagement events unless you set it to `posthog.Ptr(false)`.
+
+A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+## Check an email's status
+
+```go
+func emailBounced(ctx context.Context, client posthog.Client, messageID string) (bounced bool, known bool, err error) {
+    status, err := client.Emails().Get(ctx, messageID)
+    var emailErr *posthog.EmailError
+    if errors.As(err, &emailErr) && emailErr.Code == "not_found" {
+        // The first status can take a few seconds to arrive. Try again later.
+        return false, false, nil
+    }
+    if err != nil {
+        return false, false, err
+    }
+    return status.Status == "bounced", true, nil
+}
+```
+
+`Get` returns an `*EmailStatus` with `ID`, `Status`, `CreatedAt`, `StatusAt`, and `Reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means.
+
+A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
+
+## Test without sending email
+
+Start an `httptest.Server` and set its URL as both `Endpoint` and `AppHost`, to see exactly what your code sends with no request to PostHog. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
+
+```go
+package email_test
+
+import (
+    "context"
+    "net/http"
+    "net/http/httptest"
+    "testing"
+
+    "github.com/posthog/posthog-go"
+)
+
+func TestSendPasswordReset(t *testing.T) {
+    keys := make(chan string, 1)
+    server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        if r.URL.Path != "/api/projects/@current/messaging/send/email/" {
+            // The client also polls flag definitions here with the secret key
+            http.NotFound(w, r)
+            return
+        }
+        keys <- r.Header.Get("Idempotency-Key")
+        w.WriteHeader(http.StatusAccepted)
+        _, _ = w.Write([]byte(`{"message_id":"msg_1","replayed":false}`))
+    }))
+    defer server.Close()
+
+    client, err := posthog.NewWithConfig("phc_test", posthog.Config{
+        Endpoint:  server.URL,
+        AppHost:   server.URL,
+        SecretKey: "phs_test",
+    })
+    if err != nil {
+        t.Fatal(err)
+    }
+    defer client.Close()
+
+    result, err := client.Emails().Send(context.Background(), posthog.TemplateEmail{
+        To: "jane@example.com",
+        // The client checks that this is a UUID before it sends, so use any UUID
+        TemplateID:     "0190f6d2-7c1e-7b3a-9f5e-1c2d3e4f5a6b",
+        IdempotencyKey: "password-reset-1",
+    })
+    if err != nil {
+        t.Fatal(err)
+    }
+    if result.ID != "msg_1" {
+        t.Errorf("got message ID %q", result.ID)
+    }
+    if key := <-keys; key != "password-reset-1" {
+        t.Errorf("got idempotency key %q", key)
+    }
+}
+```
+
+## Use a proxy or self-hosted PostHog
+
+On PostHog Cloud, the client sends email to your region's app host, even when `Endpoint` is an ingestion host such as `us.i.posthog.com`. If `Endpoint` is a reverse proxy or a self-hosted PostHog, set `AppHost` to your PostHog app URL. Without it, a send fails with `missing_app_host`. The client doesn't send email requests to a host that might be a proxy.
+
+Flag definitions for local evaluation still load from `Endpoint` with the secret key. If that host is a proxy that must not see the key, leave `SecretKey` off that client. Send email from a second client whose `Endpoint` is your PostHog host.

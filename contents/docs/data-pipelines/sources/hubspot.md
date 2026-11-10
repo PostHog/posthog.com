@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The HubSpot connector syncs your CRM data – contacts, companies, deals, tickets, quotes, emails, and meetings – into PostHog, so you can analyze your sales and marketing data alongside your product data.
+The HubSpot connector syncs your CRM data – contacts, companies, deals, tickets, quotes, emails, meetings, forecasts, and conversation threads – into PostHog, so you can analyze your sales and marketing data alongside your product data.
 
 ## Prerequisites
 
@@ -81,6 +81,18 @@ When you add columns to a schema, PostHog prompts you to choose:
 </CalloutBox>
 
 > **Note:** This column selection feature is separate from **Customize synced properties**, which controls which HubSpot properties are fetched from the API during setup. Column selection lets you choose which already-synced columns appear in your warehouse tables after data has been imported.
+
+### Tables requiring additional scopes
+
+Some HubSpot tables require optional OAuth scopes that may not be present on your existing connection. These tables are deselected by default and may require specific HubSpot plans:
+
+| Table                  | Required scope               | HubSpot plan requirement           |
+| ---------------------- | ---------------------------- | ---------------------------------- |
+| `leads`                | `crm.objects.leads.read`     | Sales Hub Professional+            |
+| `forecasts`            | `crm.objects.forecasts.read` | Sales or Service Hub Professional+ |
+| `conversation_threads` | `conversations.read`         | —                                  |
+
+If you connected HubSpot before these tables were available, you need to reconnect your HubSpot account to grant the new scopes. Go to the [sources tab](https://app.posthog.com/data-management/sources), delete the existing HubSpot connection, and create a new one.
 
 ## Supported tables
 
