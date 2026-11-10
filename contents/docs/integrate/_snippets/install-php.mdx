@@ -12,6 +12,6 @@ PostHog\PostHog::init("<ph_project_token>",
 );
 ```
 
-> **Note:** As a rule of thumb, we do not recommend having API keys or tokens in plaintext. Setting them as environment variables is best. The PHP SDK reads `POSTHOG_API_KEY` and `POSTHOG_HOST` when you omit the project token or host.
+> **Note:** As a rule of thumb, we do not recommend having API keys or tokens in plaintext. Setting them as environment variables is best. The PHP SDK reads `POSTHOG_PROJECT_TOKEN` and `POSTHOG_HOST` when you omit the project token or host. If `POSTHOG_PROJECT_TOKEN` is not set, it reads `POSTHOG_API_KEY`. SDK versions before 4.23.0 read only `POSTHOG_API_KEY`.
 
 You can find your project token and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
