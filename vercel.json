@@ -650,6 +650,10 @@
             "destination": "/compare/best-amplitude-alternatives"
         },
         {
+            "source": "/blog/posthog-vs-amplitude",
+            "destination": "/compare/posthog-vs-amplitude"
+        },
+        {
             "source": "/blog/best-braintrust-alternatives",
             "destination": "/compare/best-braintrust-alternatives"
         },

@@ -22,11 +22,13 @@ const KeyFeatures = ({ id, productData, slides = [] }: KeyFeaturesProps) => {
                     color: s.color,
                     activeText: s.activeText,
                     progressBar: s.progressBar,
+                    triggerClassName:
+                        'border border-b-0 border-transparent data-[state=active]:border-primary data-[state=active]:-mb-px',
                     content: <CarouselSlide slide={s} productData={productData} />,
                 }))}
                 slideDuration={6000}
                 showActiveBg={false}
-                slideClassName="!min-h-0 !p-0 !rounded"
+                slideClassName="!min-h-0 !p-0 overflow-hidden border border-primary [&>div]:!shadow-none [&>div]:!rounded-none"
                 className="mt-4 mb-12"
             />
         </section>

@@ -431,20 +431,6 @@ The `system.data_modeling_jobs` table tracks data modeling job runs, useful for 
 | `created_at`            | When the job was created                        |
 | `updated_at`            | When the job was last updated                   |
 
-### `system.event_definitions`
-
-The `system.event_definitions` table contains event definitions known to the project, either from ingestion or defined ahead of time. Each row represents a unique event name.
-
-| Column         | Description                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------- |
-| `id`           | Event definition UUID                                                                       |
-| `name`         | Event name, e.g. `$pageview` or `signed_up`                                                 |
-| `created_at`   | When the event was first seen or defined (nullable)                                         |
-| `last_seen_at` | When the event was last ingested; NULL if not tracked since this field was added (nullable) |
-| `tags`         | Sorted, distinct tag names applied to the event definition (via lazy join)                  |
-
-> **Note:** This table uses `team_id` scope. Multi-environment projects may see incomplete results compared to the REST API.
-
 ### `system.error_tracking_issues`
 
 The `system.error_tracking_issues` table contains error tracking issues from your project.
@@ -457,6 +443,30 @@ The `system.error_tracking_issues` table contains error tracking issues from you
 | `status`      | Current status of the issue      |
 | `name`        | Name of the issue                |
 | `description` | Description of the issue         |
+
+### `system.event_definitions`
+
+The `system.event_definitions` table contains the [event definitions](/docs/data/events#managing-event-definitions) in your project: every event PostHog has ingested or that someone defined ahead of time. It has one row per event name.
+
+| Column         | Description                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------------- |
+| `id`           | Unique identifier for the event definition                                                         |
+| `team_id`      | Team ID the event definition belongs to                                                            |
+| `name`         | Event name, like `$pageview` or `signed_up`                                                        |
+| `created_at`   | When the event was first seen or defined                                                           |
+| `last_seen_at` | When the event was last ingested (null if it hasn't been seen since PostHog started tracking this) |
+| `tags.names`   | Sorted list of the tag names applied to the event                                                  |
+
+For example, to find events that stopped arriving more than 30 days ago:
+
+```sql
+SELECT name, last_seen_at, tags.names
+FROM system.event_definitions
+WHERE last_seen_at < now() - INTERVAL 30 DAY
+ORDER BY last_seen_at
+```
+
+> **Note:** This table is scoped by `team_id`, so in a project with multiple environments it can return fewer events than the REST API.
 
 ### `system.hog_flows`
 
@@ -560,19 +570,20 @@ The `system.notebooks` table contains notebook metadata from your project.
 
 ### `system.property_definitions`
 
-The `system.property_definitions` table contains property definitions known to the project, either from ingestion or defined ahead of time. Each row represents a unique combination of property name, type, and group type index.
+The `system.property_definitions` table contains the property definitions in your project for events, persons, groups, and sessions. It has one row per property name and type, so the same name can appear more than once, like a `plan` event property and a `plan` person property. Filter on `type`, and on `group_type_index` for group properties, to get a single property.
 
-| Column             | Description                                                                               |
-| ------------------ | ----------------------------------------------------------------------------------------- |
-| `id`               | Property definition UUID                                                                  |
-| `name`             | Property name, e.g. `$browser` or `plan`                                                  |
-| `type`             | What the property describes: `event`, `person`, `group`, or `session`                     |
-| `group_type_index` | Group type index (0–4) for group properties; NULL for other types (nullable)              |
-| `property_type`    | Detected value type: `String`, `Numeric`, `Boolean`, `DateTime`, or `Duration` (nullable) |
-| `is_numerical`     | Whether the property's values can be used in numeric aggregations (1 = yes, 0 = no)       |
-| `tags`             | Sorted, distinct tag names applied to the property definition (via lazy join)             |
+| Column             | Description                                                                                               |
+| ------------------ | --------------------------------------------------------------------------------------------------------- |
+| `id`               | Unique identifier for the property definition                                                             |
+| `team_id`          | Team ID the property definition belongs to                                                                |
+| `name`             | Property name, like `$browser` or `plan`                                                                  |
+| `type`             | What the property describes: `event`, `person`, `group`, or `session`                                     |
+| `group_type_index` | Group type index (0-4) for group properties (null for other types)                                        |
+| `property_type`    | Detected value type: `String`, `Numeric`, `Boolean`, `DateTime`, or `Duration` (null if not detected yet) |
+| `is_numerical`     | Whether the property's values can be used in numeric aggregations (1 = yes, 0 = no)                       |
+| `tags.names`       | Sorted list of the tag names applied to the property                                                      |
 
-> **Note:** This table uses `team_id` scope. Multi-environment projects may see incomplete results compared to the REST API. Properties denied by [property-level access control](/docs/settings/warehouse-access-control) are hidden from results.
+> **Note:** Properties that [property access control](/docs/settings/property-access-control) hides from you are not included, the same as in the properties list in data management. Like `system.event_definitions`, this table is scoped by `team_id`, so in a project with multiple environments it can return fewer properties than the REST API.
 
 ### `system.support_tickets`
 
