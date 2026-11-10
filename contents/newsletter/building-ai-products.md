@@ -73,7 +73,7 @@ We’ve built 10 different AI products at PostHog, including [PostHog AI](/ai), 
 
 ![Are ya winning, son? Overcomplicated agent architecture](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/winning_fe60fdd2a2.webp)
 
-24. Track agent usage like human usage. Although agents don’t trigger pageviews or rageclicks, you can still track the [MCP tool calls](/blog/agents-killing-ui#watch-what-agents-actually-do), [page requests](/docs/web-analytics/sending-http-logs), and more.
+24. [Track agent usage](/newsletter/analytics-changed#3-treat-agents-like-a-new-set-of-users) like human usage. Although agents don’t trigger pageviews or rageclicks, you can still track the [MCP tool calls](/blog/agents-killing-ui#watch-what-agents-actually-do), [page requests](/docs/web-analytics/sending-http-logs), and more.
 
 25. Learn your AI product unit costs. Our wizard costs $6.67 per run, but the improved activation and retention are worth more than this. Moving trace summaries from standard `gpt-4.1-nano` to flex tier `gpt-5-nano` halved costs.
 

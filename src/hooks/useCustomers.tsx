@@ -1312,6 +1312,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                 quotes: [
                     'One thing I have to say is that PostHog’s support is awesome. There’s no outsourced first line or call centers — you get real answers fast, straight from the actual engineers. If you find a bug, they show you the GitHub issue and you can literally watch it get fixed. I love that.',
                 ],
+                products: {
+                    mcp: "Hell yes, I'd recommend PostHog. […] Especially the MCP.",
+                },
             },
         },
     },
@@ -1563,6 +1566,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
                     "We're a small team and we can't find everything that's going on across different browsers, operating systems, and device types. PostHog just finds it for us now.",
                     "PostHog was always a good analytics tool, but it needed a human to understand, analyze, and combine everything to get something valuable from it. Now it's just on autopilot.",
                 ],
+                products: {
+                    mcp: "It's really easy to miss an action, or track it wrong, when you do it manually with code. After I discovered the MCP, I can even fix what's wrong in PostHog from my editor. It's the only way I develop new features with PostHog now.",
+                },
             },
         },
     },

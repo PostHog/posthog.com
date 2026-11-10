@@ -148,6 +148,10 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
     error_tracking: {
         __capturePostHogExceptions: true,
     },
+    metrics: {
+        flags: true,
+        serviceName: 'posthog.com',
+    },
     // Drop exceptions coming from local dev servers so developers' local
     // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
     // don't pollute production error tracking. Real users are never on localhost.

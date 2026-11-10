@@ -1,5 +1,5 @@
 import React from 'react'
-import * as Icons from '@posthog/icons'
+import { IconMCP } from 'components/OSIcons'
 
 /**
  * Curated product/tool handles shown in the taskbar "Browse tools" menu and
@@ -31,7 +31,7 @@ export const BROWSE_TOOLS_HANDLES = [
 // switcher uses the same order without the group labels.
 export const PRODUCT_CATEGORIES: { label: string; handles: string[] }[] = [
     // MCP Analytics belongs in Analyze – add it here once its product page ships
-    { label: 'Analyze', handles: ['product_analytics', 'web_analytics'] },
+    { label: 'Analyze', handles: ['product_analytics', 'web_analytics', 'mcp_analytics'] },
     {
         label: 'Observe',
         handles: ['ai_observability', 'session_replay', 'replay_vision', 'error_tracking', 'logs', 'traces'],
@@ -48,8 +48,8 @@ export const nonProductPages = {
     mcpAnalytics: {
         slug: 'mcp-analytics',
         url: '/docs/mcp-analytics',
-        icon: 'IconPlug',
-        color: 'blue',
+        icon: IconMCP,
+        color: 'purple',
     },
 }
 
@@ -67,7 +67,7 @@ export function buildProductMenuItems(handles: string[], allProducts: any[]): an
                 // Handle icon for non-product pages
                 let iconElement = null
                 if (nonProductPage.icon) {
-                    const IconComponent = Icons[nonProductPage.icon as keyof typeof Icons]
+                    const IconComponent = nonProductPage.icon
                     if (IconComponent) {
                         iconElement = React.createElement(IconComponent, {
                             className: `text-${nonProductPage.color || product.color || 'gray'} size-4`,
@@ -140,7 +140,7 @@ export function buildAllProductsMenuItems(allProducts: any[]): any[] {
             // Handle icon for non-product pages
             let iconElement = null
             if (nonProductPage.icon) {
-                const IconComponent = Icons[nonProductPage.icon as keyof typeof Icons]
+                const IconComponent = nonProductPage.icon
                 if (IconComponent) {
                     iconElement = React.createElement(IconComponent, {
                         className: `text-${nonProductPage.color || product.color || 'gray'} size-4`,
