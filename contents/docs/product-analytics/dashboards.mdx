@@ -131,7 +131,7 @@ To move a tile into a group, click the **⋯** menu on any insight card, text ca
 
 To remove a tile from its group, open the same **Move to** submenu and select **Take out of group**. The tile returns to the ungrouped area of the dashboard.
 
-You can also drag and drop tiles between groups while in edit mode. Drag a tile from one group's section and drop it onto another group's section to move it.
+You can also drag and drop tiles between groups. Drag a tile from one group's section and drop it onto another group's section to move it.
 
 ### Collapsing groups
 
@@ -181,6 +181,53 @@ A few things to keep in mind:
 - The source and destination must be different projects in the same organization.
 - The copy is independent – changes to the original don't sync to the copy, and vice versa.
 - If a dashboard or template with the same name already exists in the destination project, the copy is automatically renamed with a suffix like "(copy)", "(copy 2)", etc.
+
+## Cross-project dashboards
+
+A cross-project dashboard shows insights from several projects in your organization on one page. Use one to compare the same metric across products, regions, or environments without switching projects. Each tile shows data from its own project, and the tile header shows the project name.
+
+### Creating a cross-project dashboard
+
+1. Go to [**Dashboards**](https://app.posthog.com/dashboard?tab=cross-project) and select the **Cross-project dashboards** tab.
+1. Click **New cross-project dashboard**, enter a name, and click **Create**.
+1. Click **Add insight**.
+1. Select a **Project**, then an **Insight** from that project.
+1. Click **Add to dashboard**.
+
+Repeat steps 3 to 5 for each insight. You can add insights from any project you have access to. Each insight can appear once per dashboard, and a dashboard holds up to 100 tiles.
+
+To rearrange tiles, click **Customize**, drag or resize the tiles, and click **Save layout**. To remove a tile, click **...** on the tile and select **Remove from dashboard**. Click **Undo** in the message that appears to put it back.
+
+### Filtering a cross-project dashboard
+
+The date range and interval at the top of the dashboard apply to every tile. You can also add property filters, and each project applies them to its own data. These filter types are available:
+
+- Event properties
+- Person properties
+- Event metadata
+
+Cohort, group, and feature flag filters aren't available. They point to IDs that mean something different in each project.
+
+To give one tile its own date range or interval, click **...** on the tile and select **Set override**. Click **Clear all overrides** to make the tile follow the dashboard again.
+
+Tiles can show two tags next to the project name:
+
+- **Time zone** - The tile shows its project's time zone when the projects on a dashboard use different time zones. Days start at different times in each project, so daily numbers don't line up exactly.
+- **Filter not in this project** - The project has never recorded a property that a dashboard filter uses, so the filter matches nothing in that project.
+
+### Who can see and change a cross-project dashboard
+
+Everyone in your organization can open a cross-project dashboard. Each person sees only the tiles from projects they have access to, so two people can see different tiles on the same dashboard.
+
+You can't edit or delete a dashboard that has a tile from a project you can't access. This stops you from changing tiles you can't see.
+
+Deleting a cross-project dashboard removes it for everyone in your organization. The insights on it stay in their projects.
+
+### Managing cross-project dashboards with the API
+
+Use the [cross-project dashboards API](/docs/api/cross-project-dashboards) to create and update dashboards and tiles. [Authenticate](/docs/api#authentication) with a personal API key that has access to your whole organization and the `cross_project_dashboard` scope. Keys limited to specific projects can't use these endpoints.
+
+The [PostHog MCP server](/docs/model-context-protocol) can list cross-project dashboards and read their tiles.
 
 ## Dates and filters
 
@@ -255,22 +302,32 @@ Tiles ignoring dashboard filters display an **Ignores dashboard filters** indica
 
 ### Editing the layout
 
-If you have edit access to a dashboard, you can resize tiles directly without entering edit mode. Hover near any edge or corner of a tile to reveal resize handles, then drag to resize. Grabbing a handle automatically enters edit mode so the resize takes effect immediately. Corner handles support diagonal resizing.
+If you have edit access to a dashboard, you can drag and resize tiles directly – no edit mode required. Layout changes save automatically as you make them.
 
-For moving tiles and other layout changes, enter 'Edit layout' mode. You can do this in several ways:
+To **resize** a tile, hover near any edge or corner to reveal resize handles, then drag to resize. Corner handles support diagonal resizing.
 
-- Tap 'E' on your keyboard
-- Click on the '...' icon at the top of the dashboard and click 'Edit layout'
-- Click on the '...' icon on any insight card and click 'Edit layout'
-- Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
+To **move** a tile, grab its header or body area and drag it to a new position. You can also click once on a tile's header (where the grab cursor appears) to pick it up, then click again to place it. Press **Escape** while carrying a tile to return it to its original position. If you hold and drag a tile, releasing the mouse button continues the move until you click to place it – this is useful for scrolling across large dashboards mid-drag.
 
-Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
+The grid background and drop space only appear while you are actively dragging a tile.
 
-Tapping 'F' enables full-screen mode.
+#### Undoing and redoing layout changes
 
-While in edit mode, you can click **Collapse view** to zoom out and see all tiles at a smaller size. This makes it easier to drag and rearrange items on large dashboards without excessive scrolling. You can also tap 'Z' to toggle collapsed view. When collapsed, you can drag tiles to rearrange them, but resizing is disabled. Click **Expand view** (or tap 'Z' again) to return to the normal size.
+An **Undo** button appears in the dashboard header after you make a layout change. You can undo up to 20 layout changes. The undo history is local to your current page session and is not persisted – reloading the page clears it.
+
+You can also undo and redo layout changes from the **Edit** menu, which shows **Undo layout change** and **Redo layout change** options.
+
+Keyboard shortcuts:
+
+- `Cmd` + `Z` (Mac) or `Ctrl` + `Z` (Windows/Linux) – Undo the last layout change
+- `Shift` + `Cmd` + `Z` (Mac) or `Shift` + `Ctrl` + `Z` (Windows/Linux) – Redo an undone layout change
+
+These shortcuts are disabled while an input field has focus.
+
+Tapping `F` enables full-screen mode.
 
 > **Note:** On smaller screens, dashboard tiles are automatically stacked in a single column based on the desktop layout order. Layout editing (drag and resize) is only available on wider viewports.
+>
+> [Cross-project dashboards](#cross-project-dashboards) use their own edit mode for layout changes.
 
 ### Insight card options
 

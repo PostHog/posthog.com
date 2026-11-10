@@ -1,3 +1,4 @@
+import SqlBarChart, { type SqlBarChartProps } from './SqlBarChart'
 import React from 'react'
 
 import { IconCheckCircle, IconCompass, IconGraph, IconPullRequest } from '@posthog/icons'
@@ -9,17 +10,23 @@ import { useProductScreenshot } from 'components/ImageAnnotations/useProductScre
 import type { SelfDrivingReport } from 'components/SelfDrivingInbox/types'
 import ScoutFile from 'components/SelfDrivingInbox/ScoutFile'
 
+import AssignmentRuleForm, { AssignmentRuleFormProps } from './AssignmentRuleForm'
 import Divergence, { DivergenceSeries } from './Divergence'
+import ExternalIssue from './ExternalIssue'
 import Figure from '../Figure'
 import FactorSplit, { FactorSplitRow } from './FactorSplit'
 import FlagLedger, { FlagLedgerRow } from './FlagLedger'
 import { ReleaseConditionsForm, VariantsForm } from './FeatureFlagForms'
 import LeakFunnel, { LeakFunnelProps } from './LeakFunnel'
 import InboxFigure from './InboxFigure'
+import IssueList from './IssueList'
+import IssueSpike from './IssueSpike'
 import EvalRuns, { EvalRun } from './EvalRuns'
 import PersonsModal, { PersonsModalProps } from './PersonsModal'
 import RedirectLoop from './RedirectLoop'
 import ReportAnatomy, { AnatomyHint } from './ReportAnatomy'
+import SessionTimeline, { TimelineRow } from './SessionTimeline'
+import StackFrames, { StackFramesProps } from './StackFrames'
 import ReportDetailAnatomy from './ReportDetailAnatomy'
 import TraceTree, { TraceTreeRow } from '../TraceTree'
 import TriggerGroupForm, { TriggerGroupFormProps } from './TriggerGroupForm'
@@ -103,14 +110,20 @@ export function ScreenshotFigure({
     set,
     annotations,
     alt,
+    src,
+    srcDark,
 }: {
     n?: number
     caption: string
     legend?: string
     /** Product handle, e.g. "session_replay". */
-    product: string
+    product?: string
     /** Key in that product's `screenshots` object, e.g. "overview". */
-    screenshot: string
+    screenshot?: string
+    /** An image used only by a guide, given inline instead of through the product hook. */
+    src?: string
+    /** The dark mode version of `src`. */
+    srcDark?: string
     /** Named annotation set on the screenshot – for reusing a product page's markers. */
     set?: string
     /** Markers written inline, in page order. Takes precedence over `set`. */
@@ -119,7 +132,8 @@ export function ScreenshotFigure({
 }): JSX.Element | null {
     // Checked so a missing screenshot key skips the figure entirely – an empty frame with a
     // caption reads as a broken figure rather than none.
-    const shot = useProductScreenshot(product, screenshot)
+    const productShot = useProductScreenshot(product, screenshot)
+    const shot = src ? { src, srcDark, alt, annotations: undefined } : productShot
     if (!shot?.src) {
         return null
     }
@@ -441,6 +455,43 @@ export function TriggerGroupFigure({
     )
 }
 
+/** One assignment rule in the editor: the filters, the assignee, and the 7-day test result. */
+export function AssignmentRuleFigure({
+    n = 1,
+    caption,
+    legend,
+    ...rule
+}: AssignmentRuleFormProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        // No hover hint: this figure's markers are always visible, so there is nothing to reveal.
+        <Fig n={n} caption={caption} legend={legend}>
+            <AssignmentRuleForm {...rule} />
+        </Fig>
+    )
+}
+
+/** Twig's issue list with one bug split into two issues. */
+export function IssueListFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <IssueList />
+        </Fig>
+    )
+}
+
+/** An issue volume chart that explains why its sharp increase is worth an alert. */
+export function IssueSpikeFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <IssueSpike />
+        </Fig>
+    )
+}
+
 export function ReleaseConditionsFigure({
     n = 1,
     caption,
@@ -453,6 +504,15 @@ export function ReleaseConditionsFigure({
     return (
         <Fig n={n} caption={caption} legend={legend}>
             <ReleaseConditionsForm />
+        </Fig>
+    )
+}
+
+/** The GitHub issue created from an Error Tracking issue. */
+export function ExternalIssueFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <ExternalIssue />
         </Fig>
     )
 }
@@ -507,10 +567,82 @@ export function RedirectLoopFigure({
     )
 }
 
+/** The issue's Timeline tab: the session around the throw, steps included. */
+export function TimelineFigure({
+    n = 1,
+    caption,
+    legend,
+    rows,
+}: {
+    n?: number
+    caption: string
+    legend?: string
+    rows: TimelineRow[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <SessionTimeline rows={rows} />
+        </Fig>
+    )
+}
+
+/** A stack trace as the issue page draws it – resolved through a source map, or not. */
+export function StackTraceFigure({
+    n = 1,
+    caption,
+    legend,
+    ...trace
+}: StackFramesProps & {
+    n?: number
+    caption: string
+    legend?: string
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <StackFrames {...trace} />
+        </Fig>
+    )
+}
+
+/** Two stack traces side by side, to compare the frames that set each one's fingerprint. */
+export function StackTraceCompareFigure({
+    n = 1,
+    caption,
+    traces,
+}: {
+    n?: number
+    caption: string
+    traces: StackFramesProps[]
+}): JSX.Element {
+    return (
+        <Fig n={n} caption={caption}>
+            <div className="grid gap-3 @xl:grid-cols-2">
+                {traces.map((trace) => (
+                    <StackFrames key={trace.message} {...trace} />
+                ))}
+            </div>
+        </Fig>
+    )
+}
+
 export function LoopFigure({ n = 1, caption }: { n?: number; caption: string }): JSX.Element {
     return (
         <Fig n={n} caption={caption}>
             <CustomSelfDrivingLoop stages={LOOP_STAGES} loop />
+        </Fig>
+    )
+}
+
+/** A SQL result drawn as a static horizontal bar chart. */
+export function SqlBarChartFigure({
+    n = 1,
+    caption,
+    legend,
+    ...chart
+}: SqlBarChartProps & { n?: number; caption: string; legend?: string }): JSX.Element {
+    return (
+        <Fig n={n} caption={caption} legend={legend}>
+            <SqlBarChart {...chart} />
         </Fig>
     )
 }

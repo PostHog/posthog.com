@@ -9,6 +9,7 @@ import { flattenMenu, replacePath } from './utils'
 import { HOGPEDIA_RESERVED } from '../src/components/Hogpedia/categories'
 import { isLatestVersion, typeHasPage } from '../src/components/SdkReferences/utils'
 import { POCKET_GUIDE_SOURCE, pocketGuidePageContext } from '../src/constants/pocketGuides'
+import { catalog, docUrl, libraryRootUrl } from '../src/components/UILibraryDocs/catalog'
 const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
@@ -139,6 +140,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             component: path.resolve('src/pages/teams/[slug].tsx'),
             context: { slug: team.slug },
         })
+    }
+
+    for (const pagePath of [libraryRootUrl, ...catalog.map((entry) => docUrl(entry.slug))]) {
+        createPage({ path: pagePath, component: path.resolve('src/templates/UILibraryDocs.tsx'), context: {} })
     }
 
     // Minimal builds, such as the preview deploys, need these pages too.
