@@ -4,9 +4,9 @@ import { Menubar } from 'components/UI/Menubar'
 import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 const appearances = [
-    { appearance: 'raised', label: 'Raised (default)' },
-    { appearance: 'outlined', label: 'Outlined' },
-    { appearance: 'plain', label: 'Plain' },
+    { appearance: 'raised', label: 'raised · on window' },
+    { appearance: 'outlined', label: 'outlined · flat region' },
+    { appearance: 'plain', label: 'plain · in a card' },
 ] as const
 
 export default function Surfaces(): JSX.Element {

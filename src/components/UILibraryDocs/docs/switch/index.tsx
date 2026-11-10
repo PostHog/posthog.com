@@ -1,7 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { InputChoiceGuide } from '../../ChoiceGuide'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import Controlled from './Controlled'
@@ -39,10 +39,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        <>
-            Use a switch for a setting that applies at once. In a form that the user submits, use a{' '}
-            <Link to="/components/ui/checkbox">Checkbox</Link>.
-        </>,
+        <InputChoiceGuide key="guide" />,
         <>
             Put <Snippet.Inline>{'Switch.Root'}</Snippet.Inline> and its text in a{' '}
             <Snippet.Inline>{'<label>'}</Snippet.Inline>, so a click on the text toggles it.

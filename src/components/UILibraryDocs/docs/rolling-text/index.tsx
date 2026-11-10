@@ -14,8 +14,7 @@ export const doc: ComponentDoc = {
         {
             id: 'headline',
             title: 'Headline',
-            description:
-                'The longest word sets the width, so the headline does not move. Hover or focus pauses the motion.',
+            description: 'Hover or focus pauses the motion.',
             Component: Headline,
             source: headlineSource,
             replay: true,
@@ -28,10 +27,7 @@ export const doc: ComponentDoc = {
             source: staticSource,
         },
     ],
-    notes: [
-        'Use short words that fit the narrowest window. The longest word sets the width.',
-        'Use the effect in one headline per page at most.',
-    ],
+    notes: ['Use short words that fit the narrowest window. The longest word sets the width.'],
     props: [
         {
             component: 'RollingText',

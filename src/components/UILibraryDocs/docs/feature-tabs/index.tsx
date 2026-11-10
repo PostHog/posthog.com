@@ -17,14 +17,14 @@ export const doc: ComponentDoc = {
         {
             id: 'self-driving',
             title: 'Self-driving hero',
-            description: 'The hero appearance, with four feature tabs.',
+            description: 'Use hero for the first feature tour on a page. This example has four feature tabs.',
             Component: SelfDriving,
             source: selfDrivingSource,
         },
         {
             id: 'desktop',
             title: 'Desktop features',
-            description: 'The minimal appearance, the default.',
+            description: 'Use minimal (the default) for later tours on a page, or for a tour inside a section.',
             Component: Desktop,
             source: desktopSource,
         },

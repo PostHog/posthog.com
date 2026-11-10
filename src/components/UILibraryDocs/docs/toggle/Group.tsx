@@ -3,9 +3,9 @@ import { Toggle, ToggleGroup } from 'components/UI/Toggle'
 import type { ToggleAppearance, ToggleVariant } from 'components/UI/Toggle'
 
 const looks = [
-    { label: 'flat', appearance: 'flat', variant: 'secondary' },
+    { label: 'flat · toolbars', appearance: 'flat', variant: 'secondary' },
     { label: 'raised primary', appearance: 'raised', variant: 'primary' },
-    { label: 'raised secondary', appearance: 'raised', variant: 'secondary' },
+    { label: 'raised · default', appearance: 'raised', variant: 'secondary' },
 ] as const
 
 function ViewSwitcher({ appearance, variant }: { appearance: ToggleAppearance; variant: ToggleVariant }): JSX.Element {

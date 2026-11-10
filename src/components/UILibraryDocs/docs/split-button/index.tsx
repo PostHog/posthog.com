@@ -22,7 +22,8 @@ export const doc: ComponentDoc = {
         {
             id: 'basic',
             title: 'Save with related actions',
-            description: 'The main button saves the insight. The menu offers related save actions.',
+            description:
+                'Use this when the main action has a few close alternatives, such as Export CSV with other formats. Here the main button saves, and the menu offers other save actions.',
             Component: Basic,
             source: basicSource,
         },
@@ -30,7 +31,7 @@ export const doc: ComponentDoc = {
             id: 'variants',
             title: 'Every variant and size',
             description:
-                'Each appearance and variant in sm, md, and lg, from left to right. Each raised segment lifts on its own.',
+                'Each row shows sm, md, and lg from left to right. The row labels give the default use of each look. Each raised segment lifts on its own.',
             Component: Variants,
             source: variantsSource,
         },
@@ -45,8 +46,8 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Use a split button when one action is the usual choice and a few related actions are less common. When no
-            action is the default, use a <Link to="/components/ui/menu">Menu</Link>.
+            When no action is the usual choice, use a <Link to="/components/ui/menu">Menu</Link>. For the appearance,
+            variant, and size rules, see <Link to="/components/ui/button">Button</Link>.
         </>,
         <>
             Set <Snippet.Inline>{'appearance'}</Snippet.Inline>, <Snippet.Inline>{'variant'}</Snippet.Inline>, and{' '}

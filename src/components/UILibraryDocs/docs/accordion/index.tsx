@@ -20,14 +20,15 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic',
             description:
-                'One item opens at a time. defaultValue sets the items that are open when the accordion first shows.',
+                'Use this for a list of sections, such as an FAQ. One item opens at a time by default. defaultValue sets the items that are open at first.',
             Component: Basic,
             source: basicSource,
         },
         {
             id: 'multiple',
             title: 'Multiple open items',
-            description: 'Set multiple on Accordion.Root to let more than one item stay open.',
+            description:
+                'Use multiple when the user compares the content of two or more items. Set multiple on Accordion.Root to let more than one item stay open.',
             Component: Multiple,
             source: multipleSource,
         },
@@ -41,7 +42,7 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Use Accordion for a set of related panels. For a single panel, use{' '}
+            For one region that you show or hide, such as advanced options, use{' '}
             <Link to="/components/ui/collapsible">Collapsible</Link>.
         </>,
         <>

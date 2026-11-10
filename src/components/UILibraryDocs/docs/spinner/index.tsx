@@ -14,7 +14,8 @@ export const doc: ComponentDoc = {
         {
             id: 'examples',
             title: 'Sizes and color',
-            description: 'Three sizes. The spinner takes the current text color.',
+            description:
+                'Use md (the default) in most places and sm in dense UI, such as next to small text. The spinner takes the current text color.',
             Component: Examples,
             source: examplesSource,
         },

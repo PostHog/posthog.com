@@ -2,10 +2,10 @@ import React from 'react'
 import { Toggle } from 'components/UI/Toggle'
 
 const looks = [
-    { label: 'flat', appearance: 'flat', variant: 'secondary' },
-    { label: 'outline', appearance: 'outline', variant: 'secondary' },
+    { label: 'flat · toolbars', appearance: 'flat', variant: 'secondary' },
+    { label: 'outline · beside raised', appearance: 'outline', variant: 'secondary' },
     { label: 'raised primary', appearance: 'raised', variant: 'primary' },
-    { label: 'raised secondary', appearance: 'raised', variant: 'secondary' },
+    { label: 'raised · default', appearance: 'raised', variant: 'secondary' },
     { label: 'raised danger', appearance: 'raised', variant: 'danger' },
 ] as const
 

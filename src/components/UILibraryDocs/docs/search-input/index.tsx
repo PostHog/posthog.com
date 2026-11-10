@@ -30,7 +30,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Use the same sizes as other fields.',
+            description:
+                'Match the size of the buttons beside the field, and use lg only for a hero search bar. The sizes match the other fields.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -45,7 +46,7 @@ export const doc: ComponentDoc = {
             id: 'appearances',
             title: 'Appearances',
             description:
-                'Inset and line match the other fields. Pill is a round search bar for the top of a list or a page. Floating is liquid glass for a search bar over images or content.',
+                'Use inset in forms, line for inline filters, pill for a round search bar above a list, and floating, which is liquid glass, over images or content.',
             Component: Appearances,
             source: appearancesSource,
         },
@@ -53,7 +54,7 @@ export const doc: ComponentDoc = {
             id: 'field-states',
             title: 'States',
             description:
-                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+                'Inset and line show the same states as the other fields. Hover and focus the fields to see those states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },
@@ -63,7 +64,6 @@ export const doc: ComponentDoc = {
             Give the field a visible label or an <Snippet.Inline>{'aria-label'}</Snippet.Inline>. A placeholder is not a
             label.
         </>,
-        'Pick the appearance by place: inset in forms, line for light or inline filters, pill for a search bar above a list, and floating over images or content.',
         'The shortcut hint is only a hint. Register the shortcut yourself.',
     ],
     props: [

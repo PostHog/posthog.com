@@ -35,7 +35,7 @@ export const doc: ComponentDoc = {
             id: 'long-content',
             title: 'Long content',
             description:
-                'The dialog is never taller than the screen. The body scrolls, and the header and footer stay fixed.',
+                'Put long content in Dialog.Body. The dialog is never taller than the screen. The body scrolls, and the header and footer stay fixed.',
             Component: LongContent,
             source: longContentSource,
         },
@@ -50,10 +50,6 @@ export const doc: ComponentDoc = {
         <>
             Every dialog needs a title. Use <Snippet.Inline>{'Dialog.Header'}</Snippet.Inline>, or put{' '}
             <Snippet.Inline>{'Dialog.Title'}</Snippet.Inline> in the body.
-        </>,
-        <>
-            Put long content in <Snippet.Inline>{'Dialog.Body'}</Snippet.Inline>, so it scrolls and the footer stays
-            visible.
         </>,
         <>
             Pass a width class, such as <Snippet.Inline>{'max-w-2xl'}</Snippet.Inline>, to{' '}

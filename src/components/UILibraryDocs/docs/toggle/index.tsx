@@ -26,14 +26,16 @@ export const doc: ComponentDoc = {
         {
             id: 'variants',
             title: 'Variants',
-            description: 'A toggle stays pressed after a click. The second toggle in each row starts pressed.',
+            description:
+                'Use raised by default and flat in toolbars. A toggle stays pressed after a click. The second toggle in each row starts pressed.',
             Component: Variants,
             source: variantsSource,
         },
         {
             id: 'group',
             title: 'Toggle group',
-            description: 'Only one toggle in a group is pressed at a time.',
+            description:
+                'Use a group for a view control, such as List or Grid. Only one toggle in a group is pressed at a time.',
             Component: Group,
             source: groupSource,
         },
@@ -56,6 +58,9 @@ export const doc: ComponentDoc = {
         <>
             Use a toggle for an on or off state in a toolbar or view control, such as bold text or a view mode. For a
             setting, use <Link to="/components/ui/switch">Switch</Link>.
+        </>,
+        <>
+            For the full appearance and variant rules, see <Link to="/components/ui/button">Button</Link>.
         </>,
         <>
             Set <Snippet.Inline>{'required'}</Snippet.Inline> on <Snippet.Inline>{'ToggleGroup'}</Snippet.Inline> to

@@ -13,7 +13,7 @@ export const doc: ComponentDoc = {
         {
             id: 'customers',
             title: 'Customer logos',
-            description: 'A calm logo row scrolls at a constant speed, even in wide containers.',
+            description: 'The row scrolls at a constant speed.',
             Component: Customers,
             source: customersSource,
         },
@@ -26,7 +26,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Use a marquee for decorative content that repeats, such as customer logos. Do not put content that users must read or click in it.',
+        'Put only decorative content that repeats in a marquee, such as customer logos. Do not put content that users must read or click in it.',
         'Children are copied to fill the row. Do not put IDs or autoplaying media in them.',
     ],
     props: [

@@ -20,7 +20,7 @@ export const doc: ComponentDoc = {
             id: 'internal',
             title: 'Links to site pages',
             description:
-                'Pass a site path to to. ButtonLink takes the same appearance, variant, size, and icon props as Button.',
+                'Use this for a call to action that opens another page, such as See pricing. Pass a site path to to.',
             Component: Internal,
             source: internalSource,
         },
@@ -42,7 +42,8 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Use ButtonLink for navigation and <Link to="/components/ui/button">Button</Link> for actions.
+            Use ButtonLink for navigation and <Link to="/components/ui/button">Button</Link> for actions. ButtonLink
+            takes the same appearance, variant, and size props, so follow the rules on the Button page.
         </>,
         <>
             ButtonLink does not forward a ref, so it cannot be a Base UI <Snippet.Inline>{'render'}</Snippet.Inline>{' '}

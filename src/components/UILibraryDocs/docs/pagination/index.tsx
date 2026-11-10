@@ -1,5 +1,3 @@
-import React from 'react'
-import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
@@ -20,7 +18,8 @@ export const doc: ComponentDoc = {
         {
             id: 'basic',
             title: 'Basic',
-            description: 'Select a page. The previous and next controls stop at the ends.',
+            description:
+                'Use md by default and sm in dense UI, such as under a compact table. The previous and next controls stop at the ends.',
             Component: Basic,
             source: basicSource,
         },
@@ -34,28 +33,21 @@ export const doc: ComponentDoc = {
         {
             id: 'links',
             title: 'Links to pages',
-            description: 'Each control has a URL. These links open blog pages.',
+            description:
+                'Use getPageHref when each page has a URL, and onPageChange for local state. These links open blog pages.',
             Component: Links,
             source: linksSource,
         },
         {
             id: 'compact',
             title: 'Compact',
-            description: 'Show the page count between the previous and next controls.',
+            description:
+                'Use compact in narrow containers. It shows the page count between the previous and next controls. It does not switch on its own.',
             Component: Compact,
             source: compactSource,
         },
     ],
-    notes: [
-        'Pages start at 1.',
-        <>
-            Use <Snippet.Inline>{'getPageHref'}</Snippet.Inline> when each page has a URL, and{' '}
-            <Snippet.Inline>{'onPageChange'}</Snippet.Inline> for local state.
-        </>,
-        <>
-            Set <Snippet.Inline>{'compact'}</Snippet.Inline> in narrow containers. It does not switch on its own.
-        </>,
-    ],
+    notes: ['Pages start at 1.'],
     props: [
         {
             component: 'Pagination',

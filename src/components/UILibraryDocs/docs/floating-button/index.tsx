@@ -20,22 +20,22 @@ export const doc: ComponentDoc = {
             id: 'over-content',
             title: 'Over content',
             description:
-                'A liquid glass button for places where a button sits over an image, a video, or page content. The content behind it shows through. FloatingButtonGroup puts several buttons in one glass pill.',
+                'Use this only over images, video, or a canvas. The content behind the glass shows through. FloatingButtonGroup puts several buttons in one glass pill.',
             Component: OverContent,
             source: overContentSource,
         },
         {
             id: 'sizes',
             title: 'Sizes and states',
-            description: 'Three sizes, an icon button, and the disabled and loading states.',
+            description:
+                'Use md by default and sm in dense UI, such as a zoom group. The demo also shows an icon button and the disabled and loading states.',
             Component: Sizes,
             source: sizesSource,
         },
     ],
     notes: [
         <>
-            Use a floating button only over images, video, or other content. On a normal surface, use{' '}
-            <Link to="/components/ui/button">Button</Link>.
+            On a normal surface, use <Link to="/components/ui/button">Button</Link>.
         </>,
         <>
             <Snippet.Inline>{'FloatingIconButton'}</Snippet.Inline> needs an{' '}

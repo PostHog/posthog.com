@@ -19,7 +19,7 @@ export const doc: ComponentDoc = {
             id: 'vertical',
             title: 'Vertical',
             description:
-                'Give the root a fixed height. Move the pointer onto the area or scroll it to show the scrollbar.',
+                'Use this for long content in a region with a fixed height, such as a list in a card or a sidebar. Move the pointer onto the area or scroll it to show the scrollbar.',
             Component: Vertical,
             source: verticalSource,
         },
@@ -33,7 +33,8 @@ export const doc: ComponentDoc = {
         {
             id: 'edgefades',
             title: 'Edge fades',
-            description: 'Set edgeFades on Viewport. An edge fades only while content continues past it.',
+            description:
+                'Use edge fades when the scrollbar is hidden and users may not see that the content scrolls. Set edgeFades on Viewport. An edge fades only while content continues past it.',
             Component: EdgeFades,
             source: edgeFadesSource,
         },

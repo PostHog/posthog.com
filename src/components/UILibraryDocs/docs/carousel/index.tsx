@@ -20,7 +20,7 @@ export const doc: ComponentDoc = {
             id: 'screenshots',
             title: 'Product screenshots',
             description:
-                'One screenshot with part of the next one showing. Set arrows to add previous and next buttons, which show on hover.',
+                'One screenshot with part of the next one showing. Set arrows when users may not know they can swipe, such as for screenshots on desktop. The arrows show on hover.',
             Component: Screenshots,
             source: screenshotsSource,
         },
@@ -43,10 +43,6 @@ export const doc: ComponentDoc = {
     notes: [
         'Use a carousel to browse a set of similar items. Do not put content that every user must see after the first slide.',
         'Use slides with the same aspect ratio, so the row height stays stable.',
-        <>
-            Arrows are off by default. Turn on <Snippet.Inline>{'arrows'}</Snippet.Inline> when users may not know they
-            can swipe, such as for screenshots on desktop.
-        </>,
         <>
             Use <Snippet.Inline>{'autoplay'}</Snippet.Inline> rarely. It stops when the user focuses or moves the
             carousel, and it is off for users who prefer reduced motion.

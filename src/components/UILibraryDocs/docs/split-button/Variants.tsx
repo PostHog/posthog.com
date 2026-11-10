@@ -4,11 +4,11 @@ import { Menu } from 'components/UI/Menu'
 import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 const looks = [
-    { label: 'raised primary', appearance: 'raised', variant: 'primary' },
-    { label: 'raised secondary', appearance: 'raised', variant: 'secondary' },
-    { label: 'raised danger', appearance: 'raised', variant: 'danger' },
-    { label: 'outline', appearance: 'outline', variant: 'secondary' },
-    { label: 'flat', appearance: 'flat', variant: 'secondary' },
+    { label: 'raised primary', rowLabel: 'primary · main path', appearance: 'raised', variant: 'primary' },
+    { label: 'raised secondary', rowLabel: 'raised · default', appearance: 'raised', variant: 'secondary' },
+    { label: 'raised danger', rowLabel: 'danger · final delete', appearance: 'raised', variant: 'danger' },
+    { label: 'outline', rowLabel: 'outline · beside raised', appearance: 'outline', variant: 'secondary' },
+    { label: 'flat', rowLabel: 'flat · toolbars', appearance: 'flat', variant: 'secondary' },
 ] as const
 
 const sizes = ['sm', 'md', 'lg'] as const
@@ -16,8 +16,8 @@ const sizes = ['sm', 'md', 'lg'] as const
 export default function Variants(): JSX.Element {
     return (
         <DemoRows>
-            {looks.map(({ label, appearance, variant }) => (
-                <DemoRow key={label} label={label}>
+            {looks.map(({ label, rowLabel, appearance, variant }) => (
+                <DemoRow key={label} label={rowLabel}>
                     {sizes.map((size) => (
                         <SplitButton.Root
                             key={size}

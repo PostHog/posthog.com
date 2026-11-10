@@ -27,7 +27,7 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic table',
             description:
-                'Use a caption and native header cells to describe the data. The default appearance is raised.',
+                'Use this for data in rows and columns. Use a caption and native header cells to describe the data.',
             Component: Basic,
             source: basicSource,
         },
@@ -35,14 +35,15 @@ export const doc: ComponentDoc = {
             id: 'surfaces',
             title: 'Surfaces',
             description:
-                'Raised is the default, with a fill and a shadow. Use outlined or plain only where a raised table does not fit, such as inside another raised surface.',
+                'Use raised (the default) on the window background. Use plain inside a card, so there is no box in a box. Use outlined in a Section or another flat region.',
             Component: Surfaces,
             source: surfacesSource,
         },
         {
             id: 'density',
             title: 'Density and stripes',
-            description: 'Compact rows use less vertical space. Stripes add a glass tint to alternate body rows.',
+            description:
+                'Use compact for data that people scan, such as event lists and long API tables. Use default for tables that people read, such as pricing and comparisons. Stripes tint alternate rows.',
             Component: Density,
             source: densitySource,
         },

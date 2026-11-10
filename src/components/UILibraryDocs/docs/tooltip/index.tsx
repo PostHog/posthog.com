@@ -2,7 +2,7 @@ import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
-import HoverSurfaceGuide from '../../HoverSurfaceGuide'
+import { HoverSurfaceGuide } from '../../ChoiceGuide'
 import WithoutArrow from './WithoutArrow'
 import withoutArrowSource from '!!../../rawSourceLoader!./WithoutArrow.tsx?raw'
 import Delay from './Delay'
@@ -22,7 +22,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sides',
             title: 'Sides',
-            description: 'Pass side to Tooltip.Popup. The arrow moves to point at the trigger.',
+            description:
+                'Keep the default top side. Pass side to Tooltip.Popup when the tooltip covers nearby content. The arrow moves to point at the trigger.',
             Component: Sides,
             source: sidesSource,
         },
@@ -30,7 +31,7 @@ export const doc: ComponentDoc = {
             id: 'icon-buttons',
             title: 'On icon buttons',
             description:
-                'An icon button shows no text, so a tooltip tells sighted users what it does. Use the same text as the aria-label.',
+                'Use a tooltip to name an icon button. The button shows no text, so the tooltip tells sighted users what it does. Use the same text as the aria-label.',
             Component: IconButtons,
             source: iconButtonsSource,
         },
@@ -51,7 +52,7 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <HoverSurfaceGuide key="guide" />,
-        'Use a tooltip for a short label or hint, such as the name of an icon button. Touch users cannot hover, so never put the only copy of important information in a tooltip.',
+        'Touch users cannot hover, so never put the only copy of important information in a tooltip.',
         <>
             Do not put links or buttons in a tooltip. Use a <Link to="/components/ui/popover">Popover</Link>.
         </>,

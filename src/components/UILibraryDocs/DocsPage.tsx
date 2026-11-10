@@ -6,6 +6,7 @@ import { TreeMenu } from 'components/TreeMenu'
 import { ButtonLink } from 'components/UI/Button'
 import { Snippet } from 'components/UI/Snippet'
 import { catalogEntry, libraryNav } from './catalog'
+import { ruleOfThumb } from './ChoiceGuide'
 import Example from './Example'
 import PropsTable from './PropsTable'
 import type { ComponentDoc } from './types'
@@ -90,6 +91,7 @@ export function renderDocsPage(doc: ComponentDoc): JSX.Element {
                     {doc.notes?.length ? (
                         <section id={NOTES_ID}>
                             <h2>Usage</h2>
+                            <p>{ruleOfThumb}</p>
                             <ul>
                                 {doc.notes.map((note, index) => (
                                     <li key={index}>{note}</li>

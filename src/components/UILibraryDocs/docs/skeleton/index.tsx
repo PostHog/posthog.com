@@ -12,7 +12,7 @@ export const doc: ComponentDoc = {
             id: 'examples',
             title: 'Shapes and content',
             description:
-                'Placeholders match the shape and size of the content they stand in for. Use the button to switch.',
+                'Use this for content that takes long enough to load that users notice. Placeholders match the shape and size of the content. Use the button to switch.',
             Component: Examples,
             source: examplesSource,
         },
@@ -20,7 +20,6 @@ export const doc: ComponentDoc = {
     notes: [
         'Wrap the real layout in Skeleton. While it loads, Skeleton hides the content and draws the placeholder in exactly its space, so nothing moves when it loads. Render sample text in place of data that has not arrived.',
         'Without children, set lines, width, and height to estimate the size of content you cannot render yet.',
-        'Show skeletons only for loads that take long enough to notice.',
     ],
     props: [
         {

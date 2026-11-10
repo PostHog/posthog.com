@@ -1,5 +1,3 @@
-import React from 'react'
-import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
 import Determinate from './Determinate'
 import determinateSource from '!!../../rawSourceLoader!./Determinate.tsx?raw'
@@ -26,39 +24,36 @@ export const doc: ComponentDoc = {
             id: 'determinate',
             title: 'Determinate',
             description:
-                'Pass a value from 0 to 100. Progress.Value shows it as a percentage. Run export to fill the bar.',
+                'Use this for a task that runs and has a known end, such as an export. Pass a value from 0 to 100. Progress.Value shows it as a percentage.',
             Component: Determinate,
             source: determinateSource,
         },
         {
             id: 'indeterminate',
             title: 'Indeterminate',
-            description: 'Pass value={null} when the task has no known end. The bar shows a moving shimmer.',
+            description:
+                'Use this when you cannot know how long the task takes. Pass value={null}. The bar shows a moving shimmer.',
             Component: Indeterminate,
             source: indeterminateSource,
         },
         {
             id: 'colors',
             title: 'Colors',
-            description: 'Pass any brand color. The shimmer uses the same color.',
+            description:
+                'Use the default brand color in most places. Colors have no fixed meaning, so pick another one only to match the page. The shimmer uses the same color.',
             Component: Tones,
             source: tonesSource,
         },
         {
             id: 'meter',
             title: 'Meter thresholds',
-            description: 'Meter shows a fixed amount, such as quota use. Change the color above 80% and above 95%.',
+            description:
+                'Use Meter for an amount that does not run, such as quota use. This demo changes the color above 80% and above 95%.',
             Component: QuotaMeter,
             source: quotaMeterSource,
         },
     ],
-    notes: [
-        'Use Progress for a task that is running. For a fixed amount, such as quota use, use Meter.',
-        <>
-            When you cannot know how long the task takes, pass <Snippet.Inline>{'value={null}'}</Snippet.Inline> to show
-            an indeterminate bar.
-        </>,
-    ],
+    notes: ['Use Progress for a task that is running. Use Meter for a fixed amount, such as quota use or storage.'],
     props: ['Progress.Root', 'Meter.Root'].map((component) => ({
         component,
         rows: [

@@ -16,7 +16,7 @@ export const doc: ComponentDoc = {
         {
             id: 'headlines',
             title: 'Heading and sentence sizes',
-            description: 'The pill scales with the surrounding text.',
+            description: 'The pill scales with the text around it.',
             Component: Headlines,
             source: headlinesSource,
         },
@@ -30,7 +30,6 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         'The color is decoration and has no meaning. Pick the color that suits the page.',
-        'Emphasize one phrase in a heading at most.',
         <>
             For semantic emphasis, put an <Snippet.Inline>{'<em>'}</Snippet.Inline> or{' '}
             <Snippet.Inline>{'<strong>'}</Snippet.Inline> inside.

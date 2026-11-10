@@ -12,20 +12,20 @@ export default function Appearances(): JSX.Element {
         <div className="flex flex-col gap-6">
             <div className="grid gap-6 @2xl:grid-cols-3">
                 <div className="flex flex-col gap-2">
-                    <DemoLabel>Inset (default)</DemoLabel>
+                    <DemoLabel>inset · forms</DemoLabel>
                     <SearchInput aria-label="Search docs" placeholder="Search docs" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <DemoLabel>Line</DemoLabel>
+                    <DemoLabel>line · inline filters</DemoLabel>
                     <SearchInput appearance="line" aria-label="Search members" placeholder="Search members" />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <DemoLabel>Pill</DemoLabel>
+                    <DemoLabel>pill · above a list</DemoLabel>
                     <SearchInput appearance="pill" aria-label="Search insights" placeholder="Search insights" />
                 </div>
             </div>
             <div className="flex flex-col gap-2">
-                <DemoLabel>Floating</DemoLabel>
+                <DemoLabel>floating · over content</DemoLabel>
                 <div className="relative h-48 overflow-hidden rounded-md border border-[rgb(var(--text-primary)/0.12)]">
                     <img
                         src={imageLight}

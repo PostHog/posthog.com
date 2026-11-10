@@ -3,9 +3,9 @@ import { Card } from 'components/UI/Card'
 import type { CardAppearance } from 'components/UI/Card'
 
 const appearances: { appearance: CardAppearance; title: string; description: string }[] = [
-    { appearance: 'glass', title: 'Glass', description: 'Everyday content on the window.' },
-    { appearance: 'solid', title: 'Solid', description: 'An opaque surface that hides the wallpaper.' },
-    { appearance: 'dashed', title: 'Dashed', description: 'A later or optional step.' },
+    { appearance: 'glass', title: 'Glass', description: 'The default. Use it for most content.' },
+    { appearance: 'solid', title: 'Solid', description: 'Opaque. Use it behind dense data.' },
+    { appearance: 'dashed', title: 'Dashed', description: 'Use it for a later or optional step.' },
 ]
 
 export default function CardAppearances(): JSX.Element {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
-import HoverSurfaceGuide from '../../HoverSurfaceGuide'
+import { HoverSurfaceGuide } from '../../ChoiceGuide'
 import Delay from './Delay'
 import delaySource from '!!../../rawSourceLoader!./Delay.tsx?raw'
 import LinkPreviews from './LinkPreviews'
@@ -18,7 +18,7 @@ export const doc: ComponentDoc = {
             id: 'link-previews',
             title: 'Link previews',
             description:
-                'Hover a link to see its card. These links go to pages on this site, so each trigger renders a Gatsby Link.',
+                'Use a preview card to preview a linked page. Hover a link to see its card. Each trigger here renders a Gatsby Link.',
             Component: LinkPreviews,
             source: linkPreviewsSource,
         },
@@ -33,7 +33,7 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <HoverSurfaceGuide key="guide" />,
-        'Use PreviewCard to preview a linked page. Touch screens cannot hover, so do not put information in the card that the linked page does not have.',
+        'Touch screens cannot hover, so do not put information in the card that the linked page does not have.',
         <>
             For an internal link, pass <Snippet.Inline>{'render={<GatsbyLink to="/path" />}'}</Snippet.Inline> to{' '}
             <Snippet.Inline>{'PreviewCard.Trigger'}</Snippet.Inline>.

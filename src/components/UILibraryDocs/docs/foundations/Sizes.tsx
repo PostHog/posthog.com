@@ -5,9 +5,9 @@ import { Input } from 'components/UI/Input'
 import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 const sizes: { size: ButtonSize; label: string }[] = [
-    { size: 'sm', label: 'sm · 26px' },
-    { size: 'md', label: 'md · 36px' },
-    { size: 'lg', label: 'lg · 44px' },
+    { size: 'sm', label: 'sm · dense UI' },
+    { size: 'md', label: 'md · default' },
+    { size: 'lg', label: 'lg · hero' },
 ]
 
 export default function Sizes(): JSX.Element {

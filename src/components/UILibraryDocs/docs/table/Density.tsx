@@ -2,6 +2,8 @@ import React from 'react'
 import { Table } from 'components/UI/Table'
 import { DemoLabel } from 'components/UILibraryDocs/DemoLayout'
 
+const labels = { default: 'default · read', compact: 'compact · scan' } as const
+
 const events = [
     { name: '$pageview', count: '1,284,302' },
     { name: '$autocapture', count: '902,118' },
@@ -14,7 +16,7 @@ export default function Density(): JSX.Element {
         <div className="grid gap-5 @[44rem]:grid-cols-2">
             {(['default', 'compact'] as const).map((density) => (
                 <div key={density} className="flex min-w-0 flex-col gap-2">
-                    <DemoLabel>{density}</DemoLabel>
+                    <DemoLabel>{labels[density]}</DemoLabel>
                     <Table.Root density={density} striped aria-label={`${density} rows`}>
                         <Table.Header>
                             <Table.Row>

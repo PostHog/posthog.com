@@ -28,7 +28,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
+            description:
+                'Match the size of the buttons beside the field, and use lg only for a hero field. sm, md, and lg are 26, 36, and 44 pixels high.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -36,7 +37,7 @@ export const doc: ComponentDoc = {
             id: 'states',
             title: 'States',
             description:
-                'Inset is the default. Line shows only a bottom line, for light or inline editing. Set invalid or disabled on Field.Root for the other states.',
+                'Use inset by default and line for light or inline editing, with one appearance per form. Set invalid or disabled on Field.Root for the other states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },

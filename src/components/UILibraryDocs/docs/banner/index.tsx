@@ -1,7 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { StatusChoiceGuide } from '../../ChoiceGuide'
 import Tones from './Tones'
 import ContentOnly from './ContentOnly'
 import contentOnlySource from '!!../../rawSourceLoader!./ContentOnly.tsx?raw'
@@ -21,47 +21,43 @@ export const doc: ComponentDoc = {
         {
             id: 'tones',
             title: 'Statuses',
-            description: 'Each status sets a brand color and an icon. You can also pass any brand color.',
+            description:
+                'Use a status alias (info, success, warning, error, or neutral) when the message has a status. It sets the color and the icon. Use a brand color for a message with no status, such as an announcement.',
             Component: Tones,
             source: tonesSource,
         },
         {
             id: 'content-only',
             title: 'Without a title',
-            description: 'Omit the title for a compact notice. The icon is optional.',
+            description: 'Use a banner without a title for a short notice of one line. The icon is optional.',
             Component: ContentOnly,
             source: contentOnlySource,
         },
         {
             id: 'withaction',
             title: 'With an action',
-            description: 'The action moves below the body in narrow containers. Use ButtonLink for navigation.',
+            description:
+                'Use a small button for the action, and ButtonLink for navigation. The action moves below the body in narrow containers.',
             Component: WithAction,
             source: withActionSource,
         },
         {
             id: 'dismissible',
             title: 'Dismissible notice',
-            description: 'The caller controls the dismissed state. The close button sits on the title line.',
+            description:
+                'Use a close button when the user does not need the notice again, such as an announcement. The caller controls the dismissed state.',
             Component: Dismissible,
             source: dismissibleSource,
         },
     ],
     notes: [
-        'Use a status alias when the message has a status: info (blue), success (green), warning (yellow), error (coral), neutral (gray), or brand (orange). The alias also picks the matching icon. Use a brand color name for a message without a status. Say the meaning in words, because the icon and color are decorative.',
-        <>
-            Use Banner for a notice about the whole page or window that stays until the user acts or dismisses it. For
-            context inside content, use <Link to="/components/ui/note">Note</Link>. For brief feedback after an action,
-            use <Link to="/components/ui/toast">Toast</Link>.
-        </>,
+        <StatusChoiceGuide key="guide" />,
+        'Say the meaning in words, because the icon and the color are decorative.',
         <>
             <Snippet.Inline>{'Close'}</Snippet.Inline> only calls <Snippet.Inline>{'onDismiss'}</Snippet.Inline>. Remove
             the banner and remember the dismissal yourself.
         </>,
         'A banner is not announced to screen readers. If it appears after a user action, also announce it in a live region.',
-        <>
-            Use a small button in <Snippet.Inline>{'Action'}</Snippet.Inline>.
-        </>,
     ],
     props: [
         {

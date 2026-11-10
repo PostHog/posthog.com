@@ -16,14 +16,16 @@ export const doc: ComponentDoc = {
         {
             id: 'relative',
             title: 'Relative dates',
-            description: 'Hover over a time, tap it, or press Enter on it to see the exact local and UTC times.',
+            description:
+                'Use relative dates for recent activity, such as posts and events. Hover over a time, tap it, or press Enter on it to see the exact local and UTC times.',
             Component: Relative,
             source: relativeSource,
         },
         {
             id: 'date-format',
             title: 'Date format',
-            description: 'Use format="date" to show an absolute date. The locale sets the date format.',
+            description:
+                'Use format="date" when the day matters more than the age, such as a release date. The locale sets the date format.',
             Component: DateFormat,
             source: dateFormatSource,
         },

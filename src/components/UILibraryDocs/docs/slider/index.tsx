@@ -22,7 +22,7 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Label and value',
             description:
-                'Slider.Label names the slider. Slider.Value shows the value, and its digits roll when the value changes.',
+                'Use this for a value in a range, where the position matters more than the exact number. Slider.Value shows the value, and its digits roll when it changes.',
             Component: Basic,
             source: basicSource,
         },
@@ -37,7 +37,7 @@ export const doc: ComponentDoc = {
             id: 'range',
             title: 'Range',
             description:
-                'Pass an array of two values, and add one Slider.Thumb for each value. Slider.Indicator fills the track between the thumbs.',
+                'Use a range for a minimum and a maximum. Pass an array of two values, and add one Slider.Thumb for each value.',
             Component: Range,
             source: rangeSource,
         },

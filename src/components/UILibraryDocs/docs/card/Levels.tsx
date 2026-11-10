@@ -11,13 +11,13 @@ export default function CardLevels(): JSX.Element {
             <Section.Header>
                 <Section.Title>A section</Section.Title>
                 <Section.Description>
-                    A border on the window. It marks a region of a page, and it does not change the card levels.
+                    A flat border for a large region of a page, such as a long form. It does not change the card levels.
                 </Section.Description>
             </Section.Header>
             <Card.Root>
                 <Card.Header>
                     <Card.Title>Level 1: a card</Card.Title>
-                    <Card.Description>A raised pane of glass with a small shadow.</Card.Description>
+                    <Card.Description>A raised pane of glass. Use it for a small group of content.</Card.Description>
                 </Card.Header>
                 <Field.Root>
                     <Field.Label>Project name</Field.Label>
@@ -31,7 +31,7 @@ export default function CardLevels(): JSX.Element {
                             <Meter.Indicator />
                         </Meter.Track>
                     </Meter.Root>
-                    <Card.Description>Level 2: an inset well inside the card.</Card.Description>
+                    <Card.Description>Level 2: an inset well. Avoid a third level.</Card.Description>
                 </Card.Root>
                 <Card.Footer>
                     <Button>Cancel</Button>

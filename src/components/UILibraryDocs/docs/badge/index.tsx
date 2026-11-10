@@ -1,6 +1,17 @@
 import React from 'react'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { StatusChoiceGuide } from '../../ChoiceGuide'
+import {
+    tagAppearanceRow,
+    tagAppearancesDescription,
+    tagColorRow,
+    tagColorsDescription,
+    tagHrefRow,
+    tagPreviewDescription,
+    tagPreviewNote,
+    tagPreviewRow,
+} from '../../tagDocs'
 import Tones from './Tones'
 import tonesSource from '!!../../rawSourceLoader!./Tones.tsx?raw'
 import Variants from './Variants'
@@ -11,6 +22,8 @@ import Inline from './Inline'
 import inlineSource from '!!../../rawSourceLoader!./Inline.tsx?raw'
 import Links from './Links'
 import linksSource from '!!../../rawSourceLoader!./Links.tsx?raw'
+import Preview from './Preview'
+import previewSource from '!!../../rawSourceLoader!./Preview.tsx?raw'
 import WithIcon from './WithIcon'
 import withiconSource from '!!../../rawSourceLoader!./WithIcon.tsx?raw'
 
@@ -25,28 +38,29 @@ export const doc: ComponentDoc = {
         {
             id: 'colors',
             title: 'Colors',
-            description: 'Solid is the default. Pick the color that suits the page.',
+            description: tagColorsDescription,
             Component: Tones,
             source: tonesSource,
         },
         {
             id: 'variants',
             title: 'Solid and soft',
-            description: 'Solid is the default. Soft has a tint and a border.',
+            description: tagAppearancesDescription,
             Component: Variants,
             source: variantsSource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Use small badges in compact rows.',
+            description:
+                'Use sm (the default) for most badges. Use md when the badge sits beside larger text, such as a card title.',
             Component: Sizes,
             source: sizesSource,
         },
         {
             id: 'withicon',
             title: 'Icon and long text',
-            description: 'Icons add context. Long labels truncate.',
+            description: 'Use an icon when it makes the label faster to recognize. Long labels truncate.',
             Component: WithIcon,
             source: withiconSource,
         },
@@ -59,6 +73,13 @@ export const doc: ComponentDoc = {
             source: linksSource,
         },
         {
+            id: 'preview',
+            title: 'With a preview',
+            description: tagPreviewDescription('badge'),
+            Component: Preview,
+            source: previewSource,
+        },
+        {
             id: 'inline',
             title: 'Inline',
             description:
@@ -68,40 +89,27 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
+        <StatusChoiceGuide key="guide" />,
         <>
-            Use Badge for short status or category labels, such as a release stage. A badge with href is a link. For an
-            action, use a <Link to="/components/ui/button">Button</Link>.
+            A badge with href is a link. For an action, use a <Link to="/components/ui/button">Button</Link>.
         </>,
         'Put the meaning in the text. Colors are decoration and do not mean a status.',
+        tagPreviewNote('badge'),
     ],
     props: [
         {
             component: 'Badge',
             rows: [
-                {
-                    name: 'color',
-                    type: "'gray' | 'brand' | 'blue' | 'cobalt' | 'coral' | 'corn-blue' | 'green' | 'lemon' | 'lime' | 'purple' | 'tangerine' | 'teal' | 'violet' | 'yellow'",
-                    defaultValue: "'gray'",
-                    description: 'Sets the color. Gray or one of the PostHog brand colors.',
-                },
-                {
-                    name: 'appearance',
-                    type: "'solid' | 'soft'",
-                    defaultValue: "'solid'",
-                    description: 'Sets the fill and border.',
-                },
+                tagColorRow,
+                tagAppearanceRow,
                 {
                     name: 'size',
                     type: "'sm' | 'md' | 'inline'",
                     defaultValue: "'sm'",
                     description: 'Sets the height and text size. inline scales the badge with the text around it.',
                 },
-                {
-                    name: 'href',
-                    type: 'string',
-                    description:
-                        'Makes the badge a link. It renders the site Link, so internal links open in the app. For an external URL, pass externalNoIcon to open it in a new tab.',
-                },
+                tagHrefRow('badge'),
+                tagPreviewRow('badge'),
                 { name: 'icon', type: 'ReactNode', description: 'Adds a decorative icon before the label.' },
                 { name: 'children', type: 'ReactNode', description: 'The badge label.' },
             ],

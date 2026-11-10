@@ -115,7 +115,6 @@ function TeamChip({
             size={size}
             href={link ? `/teams/${slug}` : undefined}
             image={sized(team?.miniCrest?.data?.attributes.url, 48)}
-            imageShape="square"
             preview={<TeamPreview slug={slug} />}
         >
             {name}

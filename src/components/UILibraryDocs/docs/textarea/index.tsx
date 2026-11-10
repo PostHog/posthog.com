@@ -22,7 +22,7 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic',
             description:
-                'Put Textarea in Field.Root, like Field.Control. The box shows three rows. The user can drag it taller.',
+                'Use this for text longer than one line, such as a message. Put Textarea in Field.Root, like Field.Control. The user can drag it taller.',
             Component: Basic,
             source: basicSource,
         },
@@ -36,7 +36,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'sm, md, and lg set the text size and padding to match fields of the same size.',
+            description:
+                'Match the size of the fields and buttons beside it. sm, md, and lg set the text size and padding to match fields of the same size.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -44,7 +45,7 @@ export const doc: ComponentDoc = {
             id: 'states',
             title: 'States',
             description:
-                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+                'Use inset by default and line for light or inline editing, with one appearance per form. Hover and focus the fields to see those states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },

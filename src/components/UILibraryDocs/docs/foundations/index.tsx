@@ -38,7 +38,7 @@ export const doc: ComponentDoc = {
             id: 'appearances',
             title: 'Flat, outline, and raised',
             description:
-                'Flat has no fill and no depth until you hover it. Outline adds a border. Raised is a key with a 3D underside. Buttons, button groups, toggles, and tabs share these three looks.',
+                'Buttons, button groups, toggles, and tabs share these looks. For buttons, use raised by default, flat in toolbars and in actions that repeat in a list, and outline for a secondary action next to a raised one.',
             Component: Appearances,
             source: appearancesSource,
         },
@@ -118,14 +118,15 @@ export const doc: ComponentDoc = {
             id: 'tones',
             title: 'Status colors',
             description:
-                'Status names resolve to brand colors: info is blue, success is green, warning is yellow, and error is coral. Soft fills are for labels; solid fills are for strong emphasis.',
+                'Status names resolve to brand colors: info is blue, success is green, warning is yellow, and error is coral. Use soft when many labels show together, and solid for one label that must stand out.',
             Component: Tones,
             source: tonesSource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Fields and buttons share three heights. Use one size in a row.',
+            description:
+                'Fields and buttons share three heights: sm is 26px, md is 36px, and lg is 44px. Use md by default, sm in toolbars, table rows, and cards, and lg only for a hero. Use one size in a row.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -147,7 +148,6 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Fields and buttons share three heights: sm is 26px, md is 36px (the default), and lg is 44px. Use one size in a row.',
         'Fields use a see-through white fill, so they work on every wallpaper. Do not give a field a gray fill, because gray reads as disabled.',
         <>
             For your own borders and dividers, use the text color at low opacity, such as{' '}
@@ -182,7 +182,7 @@ export const doc: ComponentDoc = {
                     name: 'surfaceAppearances',
                     type: 'plain | outlined | raised',
                     description:
-                        'Container looks for menubars, toolbars, tables, and similar. Outlined is flat with a border.',
+                        'Container looks for menubars, toolbars, tables, and similar. Use raised on the window, plain inside a card, and outlined in a Section.',
                 },
                 {
                     name: 'controlSurface, sunkenTopEdge',

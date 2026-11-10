@@ -1,3 +1,5 @@
+import React from 'react'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import Examples from './Examples'
 import examplesSource from '!!../../rawSourceLoader!./Examples.tsx?raw'
@@ -13,12 +15,16 @@ export const doc: ComponentDoc = {
         {
             id: 'examples',
             title: 'Text sources',
-            description: 'Pass text for a fixed value, or getText to compute the value when the user clicks.',
+            description:
+                'Use this next to a value that users copy, such as a command or a token. Pass text for a fixed value, or getText to compute the value on click.',
             Component: Examples,
             source: examplesSource,
         },
     ],
     notes: [
+        <>
+            For appearance and variant, follow the rules on the <Link to="/components/ui/button">Button</Link> page.
+        </>,
         'Use a label that names what is copied, such as "Copy API key".',
         'Copying needs a secure context (HTTPS). When the browser blocks it, the button shows an error icon.',
     ],

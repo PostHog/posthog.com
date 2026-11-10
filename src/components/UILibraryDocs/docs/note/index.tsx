@@ -1,7 +1,6 @@
 import React from 'react'
-import { Snippet } from 'components/UI/Snippet'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { StatusChoiceGuide } from '../../ChoiceGuide'
 import Tones from './Tones'
 import ContentOnly from './ContentOnly'
 import contentOnlySource from '!!../../rawSourceLoader!./ContentOnly.tsx?raw'
@@ -26,21 +25,23 @@ export const doc: ComponentDoc = {
         {
             id: 'tones',
             title: 'Status colors',
-            description: 'Each status sets a brand color and an icon. You can also pass any brand color.',
+            description:
+                'Use a status alias (info, success, warning, error, or neutral) when the message has a status. It sets the color and the icon. Use a brand color for a message with no status, such as a tip.',
             Component: Tones,
             source: tonesSource,
         },
         {
             id: 'content-only',
             title: 'Without a title',
-            description: 'Omit the title for a compact notice. The icon is optional.',
+            description: 'Use a note without a title for a short message of one or two lines. The icon is optional.',
             Component: ContentOnly,
             source: contentOnlySource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'sm uses 13px text and less padding, for compact content.',
+            description:
+                'Use md (the default) in docs and pages. Use sm in dense UI, such as a sidebar or a card. sm uses 13px text and less padding.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -54,7 +55,8 @@ export const doc: ComponentDoc = {
         {
             id: 'withaction',
             title: 'With an action',
-            description: 'The action moves below the body in narrow containers.',
+            description:
+                'Use an action when the note leads to one next step, and use a small button for it. The action moves below the body in narrow containers.',
             Component: WithAction,
             source: withactionSource,
         },
@@ -67,15 +69,8 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        <>
-            Use Note for context inside content, such as docs and handbook pages. For a notice about the whole page, use{' '}
-            <Link to="/components/ui/banner">Banner</Link>. For brief feedback after an action, use{' '}
-            <Link to="/components/ui/toast">Toast</Link>.
-        </>,
-        'Use a status alias when the message has a status: info (blue), success (green), warning (yellow), error (coral), neutral (gray), or brand (orange). The alias also picks the matching icon. Use a brand color name for a message without a status. Say the meaning in words, because the icon and color are decorative.',
-        <>
-            Use a small button in <Snippet.Inline>{'Action'}</Snippet.Inline>.
-        </>,
+        <StatusChoiceGuide key="guide" />,
+        'Say the meaning in words, because the icon and the color are decorative.',
     ],
     props: [
         {

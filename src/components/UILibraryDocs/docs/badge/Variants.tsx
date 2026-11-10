@@ -5,11 +5,13 @@ import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
 const colors: ColorName[] = ['gray', 'blue', 'green', 'tangerine']
 
+const labels = { solid: 'solid · one standout label', soft: 'soft · many labels' }
+
 export default function Variants(): JSX.Element {
     return (
         <DemoRows>
             {(['solid', 'soft'] as const).map((appearance) => (
-                <DemoRow key={appearance} label={appearance}>
+                <DemoRow key={appearance} label={labels[appearance]}>
                     {colors.map((color) => (
                         <Badge key={color} color={color} appearance={appearance}>
                             {color}

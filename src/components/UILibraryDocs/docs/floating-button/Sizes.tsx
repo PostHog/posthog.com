@@ -9,8 +9,8 @@ const imageDark =
     'https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/Clean_Shot_2025_09_09_at_17_05_50_2x_8d74438a4a.png'
 
 const samples = [
-    { label: 'sm', node: <FloatingButton size="sm">Play</FloatingButton> },
-    { label: 'md', node: <FloatingButton size="md">Play</FloatingButton> },
+    { label: 'sm · dense', node: <FloatingButton size="sm">Play</FloatingButton> },
+    { label: 'md · default', node: <FloatingButton size="md">Play</FloatingButton> },
     { label: 'lg', node: <FloatingButton size="lg">Play</FloatingButton> },
     {
         label: 'Icon',

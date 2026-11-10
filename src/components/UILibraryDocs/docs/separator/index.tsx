@@ -16,14 +16,16 @@ export const doc: ComponentDoc = {
         {
             id: 'horizontal',
             title: 'Horizontal',
-            description: 'The default orientation. The line fills the width of its container.',
+            description:
+                'Use a separator to divide groups of content when white space is not enough. Horizontal is the default, and the line fills the width of its container.',
             Component: Horizontal,
             source: horizontalSource,
         },
         {
             id: 'vertical',
             title: 'Vertical',
-            description: 'Set orientation="vertical" to put a line between items in a row.',
+            description:
+                'Use vertical between groups of items in a row, such as links or actions. Set orientation="vertical".',
             Component: Vertical,
             source: verticalSource,
         },

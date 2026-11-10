@@ -5,10 +5,10 @@ import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 export default function Examples(): JSX.Element {
     return (
         <DemoRows>
-            <DemoRow label="sm · 14px">
+            <DemoRow label="sm · dense UI">
                 <Spinner size="sm" label="Loading insights" />
             </DemoRow>
-            <DemoRow label="md · 16px">
+            <DemoRow label="md · default">
                 <Spinner size="md" label="Loading insights" />
             </DemoRow>
             <DemoRow label="lg · 20px">

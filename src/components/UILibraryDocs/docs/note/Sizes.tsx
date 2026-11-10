@@ -6,7 +6,7 @@ export default function Sizes(): JSX.Element {
     return (
         <DemoColumns>
             {(['sm', 'md'] as const).map((size) => (
-                <DemoColumn key={size} label={size === 'md' ? 'md (default)' : 'sm'}>
+                <DemoColumn key={size} label={size === 'md' ? 'md · default' : 'sm · dense UI'}>
                     <Note.Root size={size}>
                         <Note.Icon />
                         <Note.Title>Check your plan</Note.Title>

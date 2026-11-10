@@ -33,7 +33,7 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic',
             description:
-                'Pass items as data. Each item has an id, a label, and an optional icon and children. Set selectionMode to single or multiple to let users select items. A line shows each level of nesting.',
+                'Use this for nested items, such as folders or categories. Pass items as data: each has an id, a label, and an optional icon and children. Set selectionMode to let users select items.',
             Component: Basic,
             source: basicSource,
         },
@@ -41,7 +41,7 @@ export const doc: ComponentDoc = {
             id: 'checkboxes',
             title: 'Checkbox tree',
             description:
-                'CheckboxTree shows a Checkbox on each row. A parent checks or clears all of its children, and shows a dash when only some are checked. The value has only the leaf ids.',
+                'Use CheckboxTree to pick many items from a nested list. A parent checks or clears all of its children, and shows a dash when only some are checked. The value has only leaf ids.',
             Component: Checkboxes,
             source: checkboxesSource,
         },
@@ -49,14 +49,15 @@ export const doc: ComponentDoc = {
             id: 'files',
             title: 'File tree',
             description:
-                'FileTree shows folder and file icons. An item with an href is a link. Pass currentId to mark the current page and open its folders.',
+                'Use FileTree for files or for page navigation. It shows folder and file icons. An item with an href is a link. Pass currentId to mark the current page.',
             Component: Files,
             source: filesSource,
         },
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Set size to sm, md, or lg. The sizes match the list items in Select and Combobox.',
+            description:
+                'Use md (the default) in most places and sm in dense UI, such as a sidebar. The sizes match the list items in Select and Combobox.',
             Component: Sizes,
             source: sizesSource,
         },

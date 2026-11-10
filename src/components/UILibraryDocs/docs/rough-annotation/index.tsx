@@ -20,7 +20,7 @@ export const doc: ComponentDoc = {
         {
             id: 'types',
             title: 'Every mark type',
-            description: 'Set type to one of seven hand-drawn marks. Each mark draws in when it scrolls into view.',
+            description: 'Set type to one of seven hand-drawn marks.',
             Component: Types,
             source: typesSource,
             replay: true,
@@ -58,7 +58,6 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Use annotations rarely, to draw attention to one phrase.',
         'Pass a brand color name. Lines use the full color. The highlight type uses a see-through tint of it, so the text stays readable. Gray follows the text color.',
         'The mark is decorative and screen readers skip it. Do not use it to carry meaning.',
     ],

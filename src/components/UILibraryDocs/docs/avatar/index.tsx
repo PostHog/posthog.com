@@ -24,7 +24,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'Set size on Avatar.Root to sm, md, or lg. The default is md.',
+            description:
+                'Use md (the default) in most places, sm in lists and dense UI, and lg in profile headers. Set size on Avatar.Root.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -39,7 +40,7 @@ export const doc: ComponentDoc = {
             id: 'group',
             title: 'Stacked group',
             description:
-                'Avatar.Group stacks its avatars and sets their size. max shows the first avatars and a "+N" count.',
+                'Use a group for the people on a team or in a thread. Avatar.Group stacks its avatars and sets their size. max shows the first avatars and a "+N" count.',
             Component: Group,
             source: groupSource,
         },

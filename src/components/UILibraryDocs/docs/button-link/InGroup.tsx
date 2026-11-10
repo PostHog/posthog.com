@@ -8,11 +8,16 @@ const productDocs = [
     { to: '/docs/feature-flags', label: 'Feature flags' },
 ]
 
+const appearances = [
+    { appearance: 'raised', label: 'raised · default' },
+    { appearance: 'flat', label: 'flat · toolbars' },
+] as const
+
 export default function ButtonLinkInGroup(): JSX.Element {
     return (
         <DemoRows>
-            {(['raised', 'flat'] as const).map((appearance) => (
-                <DemoRow key={appearance} label={appearance}>
+            {appearances.map(({ appearance, label }) => (
+                <DemoRow key={appearance} label={label}>
                     <ButtonGroup aria-label="Product docs" appearance={appearance}>
                         {productDocs.map(({ to, label }) => (
                             <ButtonLink key={to} to={to}>

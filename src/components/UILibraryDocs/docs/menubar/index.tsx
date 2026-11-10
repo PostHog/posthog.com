@@ -15,7 +15,7 @@ export const doc: ComponentDoc = {
             id: 'surfaces',
             title: 'Surfaces',
             description:
-                'Raised is the default. Use outlined or plain only where a raised bar does not fit, such as inside another raised surface.',
+                'Use raised on the window background, plain inside a card so there is no box in a box, and outlined in a Section or other flat region.',
             Component: Surfaces,
             source: surfacesSource,
         },

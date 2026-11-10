@@ -6,7 +6,7 @@ import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 export default function ButtonGroups(): JSX.Element {
     return (
         <DemoRows>
-            <DemoRow label="raised">
+            <DemoRow label="raised · default">
                 <ButtonGroup aria-label="Date range">
                     <Button>Day</Button>
                     <Button>Week</Button>
@@ -18,7 +18,7 @@ export default function ButtonGroups(): JSX.Element {
                     <IconButton aria-label="Share" icon={<IconShare />} />
                 </ButtonGroup>
             </DemoRow>
-            <DemoRow label="flat">
+            <DemoRow label="flat · toolbars">
                 <ButtonGroup aria-label="Date range" appearance="flat">
                     <Button>Day</Button>
                     <Button>Week</Button>

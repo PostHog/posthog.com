@@ -1,6 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
+import { InputChoiceGuide } from '../../ChoiceGuide'
 import Plans from './Plans'
 import plansSource from '!!../../rawSourceLoader!./Plans.tsx?raw'
 import Products from './Products'
@@ -22,14 +23,15 @@ export const doc: ComponentDoc = {
         {
             id: 'plans',
             title: 'Single choice',
-            description: 'The user selects one item.',
+            description: 'Use this for one choice, such as a plan. The user selects one item.',
             Component: Plans,
             source: plansSource,
         },
         {
             id: 'products',
             title: 'Multiple choice',
-            description: 'Set multiple to let the user select more than one item.',
+            description:
+                'Use multiple when the user can select more than one item, such as products. Set multiple on Choicebox.Group.',
             Component: Products,
             source: productsSource,
         },
@@ -42,10 +44,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        <>
-            Use Choicebox when each option needs a description or more room than a radio label. Set{' '}
-            <Snippet.Inline>{'multiple'}</Snippet.Inline> to allow more than one choice.
-        </>,
+        <InputChoiceGuide key="guide" />,
         <>
             Name the group with <Snippet.Inline>{'aria-label'}</Snippet.Inline> or{' '}
             <Snippet.Inline>{'aria-labelledby'}</Snippet.Inline>.

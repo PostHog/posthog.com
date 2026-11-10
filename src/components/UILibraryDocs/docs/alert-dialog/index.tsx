@@ -21,7 +21,7 @@ export const doc: ComponentDoc = {
             id: 'confirm',
             title: 'Confirm an action',
             description:
-                'AlertDialog.Header uses the standard header without a close button. Put each action in an AlertDialog.Close.',
+                'Use danger on the button that does the destructive act, not on the button that opens the dialog. The header has no close button.',
             Component: Confirm,
             source: confirmSource,
         },
@@ -49,7 +49,7 @@ export const doc: ComponentDoc = {
         </>,
         <>
             Name each action by what it does, such as &quot;Delete project&quot;, not &quot;OK&quot;. Put each one in{' '}
-            <Snippet.Inline>{'AlertDialog.Close'}</Snippet.Inline>.
+            <Snippet.Inline>{'AlertDialog.Close'}</Snippet.Inline>, unless the dialog waits for the action.
         </>,
         <>
             Every alert dialog needs an <Snippet.Inline>{'AlertDialog.Title'}</Snippet.Inline>, even when you leave out

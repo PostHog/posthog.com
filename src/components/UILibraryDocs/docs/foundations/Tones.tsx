@@ -10,14 +10,14 @@ const statuses: StatusAlias[] = ['info', 'success', 'warning', 'error']
 export default function Tones(): JSX.Element {
     return (
         <DemoRows>
-            <DemoRow label="Soft">
+            <DemoRow label="soft · many labels">
                 {statuses.map((status) => (
                     <Badge key={status} appearance="soft" color={statusColors[status]}>
                         {status}
                     </Badge>
                 ))}
             </DemoRow>
-            <DemoRow label="Solid">
+            <DemoRow label="solid · one label">
                 {statuses.map((status) => (
                     <Badge key={status} appearance="solid" color={statusColors[status]}>
                         {status}

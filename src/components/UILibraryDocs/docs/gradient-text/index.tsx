@@ -16,7 +16,7 @@ export const doc: ComponentDoc = {
         {
             id: 'palettes',
             title: 'Palettes',
-            description: 'Each palette blends three PostHog brand colors.',
+            description: 'Each palette blends three brand colors.',
             Component: Palettes,
             source: palettesSource,
         },
@@ -30,7 +30,6 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        'Use the effect on one large heading phrase per page at most.',
         <>
             Check the contrast against the real background. Pass <Snippet.Inline>{'animate={false}'}</Snippet.Inline>{' '}
             where motion distracts.

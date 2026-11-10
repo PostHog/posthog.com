@@ -45,7 +45,8 @@ export const doc: ComponentDoc = {
         {
             id: 'line-changes',
             title: 'Highlights and changes',
-            description: 'Highlight lines, and mark lines as added or removed. Line numbers can start at any value.',
+            description:
+                'Use highlights to point at the lines that the text talks about, and added or removed marks to show a change. Line numbers can start at any value.',
             Component: LineChanges,
             source: lineChangesSource,
         },

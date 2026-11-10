@@ -1,7 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { InputChoiceGuide } from '../../ChoiceGuide'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import Controlled from './Controlled'
@@ -44,11 +44,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        <>
-            Use radios for one choice from a few options that should all stay visible, about 5 or fewer. For more
-            options, use <Link to="/components/ui/select">Select</Link>. For one on or off choice, use{' '}
-            <Link to="/components/ui/checkbox">Checkbox</Link> or <Link to="/components/ui/switch">Switch</Link>.
-        </>,
+        <InputChoiceGuide key="guide" />,
         <>
             Name the group with <Snippet.Inline>{'aria-label'}</Snippet.Inline> or{' '}
             <Snippet.Inline>{'aria-labelledby'}</Snippet.Inline>, and put each radio and its text in a{' '}

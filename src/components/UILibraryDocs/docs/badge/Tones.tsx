@@ -5,7 +5,7 @@ import { colorNames } from 'components/UI/colors'
 export default function Colors(): JSX.Element {
     return (
         <div className="flex flex-wrap gap-2">
-            {colorNames.map((color) => (
+            {(['white', ...colorNames] as const).map((color) => (
                 <Badge key={color} color={color}>
                     {color}
                 </Badge>

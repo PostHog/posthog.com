@@ -22,28 +22,29 @@ export const doc: ComponentDoc = {
         {
             id: 'line',
             title: 'Line chart',
-            description: 'One series per line. Hover to see the values for a point.',
+            description:
+                'Use a line chart for change over time. Each series is one line. Hover to see the values for a point.',
             Component: Line,
             source: lineSource,
         },
         {
             id: 'bar',
             title: 'Bar chart',
-            description: 'Compare values across categories.',
+            description: 'Use a bar chart to compare values across categories.',
             Component: Bar,
             source: barSource,
         },
         {
             id: 'sparklines',
             title: 'Sparklines',
-            description: 'A small trend line next to a number.',
+            description: 'Use a sparkline for a small trend line next to a number, such as in a stat card.',
             Component: Sparklines,
             source: sparklinesSource,
         },
         {
             id: 'share',
             title: 'Share of a total',
-            description: 'PieChart and BarList show how a total splits into parts.',
+            description: 'Use BarList for a ranked share of a total. Use PieChart only for a few parts of one whole.',
             Component: Share,
             source: shareSource,
         },
@@ -54,7 +55,6 @@ export const doc: ComponentDoc = {
             <Snippet.Inline>{'Sparkline'}</Snippet.Inline> takes a <Snippet.Inline>{'height'}</Snippet.Inline> prop
             instead (120px by default).
         </>,
-        'Use a line chart for change over time, a bar chart to compare categories, and a BarList for a ranked share of a total. Use a pie chart only for a few parts of one whole.',
         <>
             Series colors come from the site palette in order. Pass <Snippet.Inline>{'color'}</Snippet.Inline> on a
             series only when a color must mean something specific.

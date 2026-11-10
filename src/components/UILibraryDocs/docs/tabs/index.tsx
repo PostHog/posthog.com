@@ -18,7 +18,8 @@ export const doc: ComponentDoc = {
         {
             id: 'horizontal',
             title: 'Horizontal',
-            description: 'The default orientation. The panels show below the list.',
+            description:
+                'Use this to switch between views of the same content. This is the default orientation. The panels show below the list.',
             Component: Horizontal,
             source: horizontalSource,
         },
@@ -34,15 +35,15 @@ export const doc: ComponentDoc = {
             id: 'appearances',
             title: 'Appearances',
             description:
-                'Tabs use the same looks as a ButtonGroup. The selected tab shows the pressed state. Set appearance, variant, and size on Root.',
+                'Use outline, the default, for tabs. Flat and raised are also available. The selected tab shows the pressed state. Set appearance and size on Root.',
             Component: Appearances,
             source: appearancesSource,
         },
     ],
     notes: [
         <>
-            Use Tabs to switch between views of the same content. For a marketing feature tour, use{' '}
-            <Link to="/components/ui/feature-tabs">FeatureTabs</Link>. To go to another page, use links.
+            For a marketing feature tour, use <Link to="/components/ui/feature-tabs">FeatureTabs</Link>. To go to
+            another page, use links.
         </>,
         'Keep tab labels to text and icons. Do not put links or buttons in a tab.',
     ],
@@ -53,14 +54,8 @@ export const doc: ComponentDoc = {
                 {
                     name: 'appearance',
                     type: "'flat' | 'raised' | 'outline'",
-                    defaultValue: "'flat'",
+                    defaultValue: "'outline'",
                     description: 'Sets the look of the tab list. It matches the ButtonGroup appearance.',
-                },
-                {
-                    name: 'variant',
-                    type: "'primary' | 'secondary' | 'danger'",
-                    defaultValue: "'secondary'",
-                    description: 'Sets the color of the tabs. It matches the ButtonGroup variant.',
                 },
                 {
                     name: 'size',

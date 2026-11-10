@@ -39,7 +39,7 @@ export const doc: ComponentDoc = {
             id: 'colors',
             title: 'Colors',
             description:
-                'Gray is the default and lets the surface show through. White and the brand colors are opaque.',
+                'Use gray (the default) in most cases, and one other color per section at most. The colors have no status meaning. Gray lets the surface show through, and the other colors are opaque.',
             Component: Colors,
             source: colorsSource,
         },
@@ -64,7 +64,6 @@ export const doc: ComponentDoc = {
             Use Snippet for a command to copy, and <Snippet.Inline>{'Snippet.Inline'}</Snippet.Inline> for code in a
             sentence. For multi-line code, use <Link to="/components/ui/code-block">CodeBlock</Link>.
         </>,
-        'Use gray in most cases, and one other color per section at most. The colors are decoration and have no status meaning.',
     ],
     props: [
         {

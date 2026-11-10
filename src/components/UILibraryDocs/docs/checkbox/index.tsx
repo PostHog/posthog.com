@@ -1,7 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { InputChoiceGuide } from '../../ChoiceGuide'
 import Controlled from './Controlled'
 import controlledSource from '!!../../rawSourceLoader!./Controlled.tsx?raw'
 import Disabled from './Disabled'
@@ -53,10 +53,7 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        <>
-            Use checkboxes for choices that a form saves on submit. For a setting that applies at once, use{' '}
-            <Link to="/components/ui/switch">Switch</Link>.
-        </>,
+        <InputChoiceGuide key="guide" />,
         <>
             Put <Snippet.Inline>{'Checkbox.Root'}</Snippet.Inline> and its text in a{' '}
             <Snippet.Inline>{'<label>'}</Snippet.Inline>, so a click on the text toggles it.

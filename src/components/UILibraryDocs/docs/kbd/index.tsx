@@ -14,7 +14,8 @@ export const doc: ComponentDoc = {
         {
             id: 'examples',
             title: 'Examples',
-            description: 'Show one key or a shortcut. Set platform="other" for Windows and Linux names.',
+            description:
+                'Use this to show a key or a shortcut in text. Use md by default and sm in dense UI. Set platform="other" for Windows and Linux names.',
             Component: Examples,
             source: examplesSource,
         },

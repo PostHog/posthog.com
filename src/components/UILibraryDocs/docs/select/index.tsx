@@ -1,7 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { InputChoiceGuide } from '../../ChoiceGuide'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Basic from './Basic'
@@ -39,7 +39,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
+            description:
+                'Match the size of the buttons beside the field, and use lg only for a hero field. sm, md, and lg are 26, 36, and 44 pixels high.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -47,17 +48,13 @@ export const doc: ComponentDoc = {
             id: 'states',
             title: 'States',
             description:
-                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+                'Use inset by default and line for light or inline editing, with one appearance per form. Hover and focus the fields to see those states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },
     ],
     notes: [
-        <>
-            Use Select for a short fixed list, about 10 options or fewer. For a longer list, use{' '}
-            <Link to="/components/ui/combobox">Combobox</Link>. For free text, use{' '}
-            <Link to="/components/ui/autocomplete">Autocomplete</Link>.
-        </>,
+        <InputChoiceGuide key="guide" />,
         <>
             Pass <Snippet.Inline>{'items'}</Snippet.Inline> to <Snippet.Inline>{'Select.Root'}</Snippet.Inline>. Without
             it, the trigger shows the raw value, such as <Snippet.Inline>{'us'}</Snippet.Inline>, not the label.

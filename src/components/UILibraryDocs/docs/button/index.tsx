@@ -26,14 +26,15 @@ export const doc: ComponentDoc = {
             id: 'variants',
             title: 'Appearances and variants',
             description:
-                'appearance sets the shape: raised (the default), flat, or outline. variant sets the meaning: secondary (the default), primary, or danger.',
+                'Use raised by default, flat in toolbars and repeated list actions, and outline next to a raised button. Use one primary per section for the main path. Use danger only for the final destructive act.',
             Component: Variants,
             source: variantsSource,
         },
         {
             id: 'sizes-states',
             title: 'Sizes and states',
-            description: 'Every appearance comes in sm, md, and lg. Click Save to see the loading state.',
+            description:
+                'Use md by default, sm in toolbars, table rows, cards, and status bars, and lg only for marketing hero calls to action. Click Save to see the loading state.',
             Component: Additions,
             source: additionsSource,
         },
@@ -61,14 +62,11 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Raised is the default. Use flat only where a raised button does not fit, such as toolbars, bars, and actions
-            that repeat in a list. Use outline for a secondary action next to a raised one. Make the main action in a
-            section primary, and use one primary per section. Over images or video, use{' '}
-            <Link to="/components/ui/floating-button">FloatingButton</Link>.
+            Over images, video, or a canvas, use <Link to="/components/ui/floating-button">FloatingButton</Link>.
         </>,
         <>
-            Pick the variant by what the button does. Use danger only for destructive actions, and confirm actions that
-            cannot be undone with an <Link to="/components/ui/alert-dialog">AlertDialog</Link>.
+            Confirm actions that cannot be undone with an <Link to="/components/ui/alert-dialog">AlertDialog</Link>. Put
+            danger on the confirm button in the dialog, not on the button that opens it.
         </>,
         <>
             Use <Snippet.Inline>{'loading'}</Snippet.Inline>, not <Snippet.Inline>{'disabled'}</Snippet.Inline>, while a

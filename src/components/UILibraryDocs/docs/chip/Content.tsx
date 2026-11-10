@@ -13,22 +13,14 @@ export default function ChipContent(): JSX.Element {
                 <Chip>Free tier</Chip>
                 <Chip>Open source</Chip>
             </DemoRow>
-            <DemoRow label="Icon">
+            <DemoRow label="Icon · products, features">
                 <Chip icon={<IconGear />}>Settings</Chip>
                 <Chip icon={<IconFlag />}>Feature flags</Chip>
                 <Chip icon={<IconRewindPlay />}>Session replay</Chip>
             </DemoRow>
-            <DemoRow label="Image">
+            <DemoRow label="Image · people, teams">
                 <Chip image={hogImage('night_hog_219fff00f3.png')}>Night hog</Chip>
                 <Chip image={hogImage('steve_hogs_17c7900b07.png')}>Steve hog</Chip>
-            </DemoRow>
-            <DemoRow label="Square image">
-                <Chip image={hogImage('night_hog_219fff00f3.png')} imageShape="square">
-                    Night hog
-                </Chip>
-                <Chip image={hogImage('steve_hogs_17c7900b07.png')} imageShape="square">
-                    Steve hog
-                </Chip>
             </DemoRow>
         </DemoRows>
     )

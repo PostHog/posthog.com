@@ -31,10 +31,10 @@ function StateColumn({ appearance }: { appearance: FieldAppearance }): JSX.Eleme
 export default function States(): JSX.Element {
     return (
         <DemoColumns>
-            <DemoColumn label="Inset (default)">
+            <DemoColumn label="inset · forms">
                 <StateColumn appearance="inset" />
             </DemoColumn>
-            <DemoColumn label="Line">
+            <DemoColumn label="line · inline editing">
                 <StateColumn appearance="line" />
             </DemoColumn>
         </DemoColumns>

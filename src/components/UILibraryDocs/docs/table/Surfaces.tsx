@@ -2,6 +2,12 @@ import React from 'react'
 import { Table } from 'components/UI/Table'
 import { DemoLabel } from 'components/UILibraryDocs/DemoLayout'
 
+const labels = {
+    raised: 'raised · on the window',
+    outlined: 'outlined · in a section',
+    plain: 'plain · inside a card',
+} as const
+
 const events = [
     { name: '$pageview', count: '48,210' },
     { name: '$autocapture', count: '31,904' },
@@ -13,7 +19,7 @@ export default function Surfaces(): JSX.Element {
         <div className="grid gap-5 @[52rem]:grid-cols-3">
             {(['raised', 'outlined', 'plain'] as const).map((appearance) => (
                 <div key={appearance} className="flex min-w-0 flex-col gap-2">
-                    <DemoLabel>{appearance}</DemoLabel>
+                    <DemoLabel>{labels[appearance]}</DemoLabel>
                     <Table.Root appearance={appearance}>
                         <Table.Header>
                             <Table.Row>

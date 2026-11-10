@@ -2,7 +2,7 @@ import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
-import HoverSurfaceGuide from '../../HoverSurfaceGuide'
+import { HoverSurfaceGuide } from '../../ChoiceGuide'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import OpenOnHover from './OpenOnHover'
@@ -21,7 +21,7 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic popover',
             description:
-                'Click the trigger to open the popover. Popover.Arrow points to the trigger. Set the width on Popover.Popup.',
+                'Use a popover for content that the user interacts with next to a trigger. Click the trigger to open it. Set the width on Popover.Popup.',
             Component: Basic,
             source: basicSource,
         },
@@ -45,9 +45,7 @@ export const doc: ComponentDoc = {
     notes: [
         <HoverSurfaceGuide key="guide" />,
         <>
-            Use a popover for content that the user interacts with next to a trigger. For a short text hint, use{' '}
-            <Link to="/components/ui/tooltip">Tooltip</Link>. For a task that needs full focus, use{' '}
-            <Link to="/components/ui/dialog">Dialog</Link>.
+            For a task that needs full focus, use <Link to="/components/ui/dialog">Dialog</Link>.
         </>,
         <>
             Do not set <Snippet.Inline>{'overflow'}</Snippet.Inline> on{' '}

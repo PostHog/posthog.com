@@ -24,7 +24,7 @@ export const doc: ComponentDoc = {
         {
             id: 'fieldsetfooter',
             title: 'Fieldset footer',
-            description: 'Place helper text or actions in Fieldset.Footer below the fields.',
+            description: 'Use Fieldset.Footer for helper text or actions below the fields.',
             Component: FieldsetFooter,
             source: fieldsetFooterSource,
         },

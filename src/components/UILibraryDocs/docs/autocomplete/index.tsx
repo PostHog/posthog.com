@@ -1,6 +1,6 @@
 import React from 'react'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { InputChoiceGuide } from '../../ChoiceGuide'
 import AppearanceStates from './AppearanceStates'
 import appearanceStatesSource from '!!../../rawSourceLoader!./AppearanceStates.tsx?raw'
 import Basic from './Basic'
@@ -38,7 +38,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
+            description:
+                'Match the size of the buttons beside the field, and use lg only for a hero field. sm, md, and lg are 26, 36, and 44 pixels high.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -46,17 +47,13 @@ export const doc: ComponentDoc = {
             id: 'states',
             title: 'States',
             description:
-                'Empty, filled, invalid, and disabled, in both appearances. Hover and focus the fields to see those states.',
+                'Use inset by default and line for light or inline editing, with one appearance per form. Hover and focus the fields to see those states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },
     ],
     notes: [
-        <>
-            Use Autocomplete when the user can type any value and the list only suggests. To pick from a fixed list, use{' '}
-            <Link to="/components/ui/select">Select</Link> for a short list or{' '}
-            <Link to="/components/ui/combobox">Combobox</Link> for a long one.
-        </>,
+        <InputChoiceGuide key="guide" />,
         'The list opens when the user types or presses an arrow key, not on click.',
     ],
     props: [

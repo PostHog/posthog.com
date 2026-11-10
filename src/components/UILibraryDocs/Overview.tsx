@@ -4,6 +4,7 @@ import SEO from 'components/seo'
 import Link from 'components/Link'
 import ReaderView from 'components/ReaderView'
 import { Card } from 'components/UI/Card'
+import { ruleOfThumb } from './ChoiceGuide'
 import { TreeMenu } from 'components/TreeMenu'
 import { docSections, docUrl, entriesIn, filledCategories, libraryNav } from './catalog'
 
@@ -43,6 +44,7 @@ export function renderOverview(): JSX.Element {
                         <Snippet.Inline>import {'{ Select }'} from 'components/UI/Select'</Snippet.Inline>. The
                         conventions are in <Snippet.Inline>src/components/UI/README.md</Snippet.Inline>.
                     </p>
+                    <p>Each page gives defaults for when to use the component and each variant. {ruleOfThumb}</p>
                     {docSections.map((section) => (
                         <section key={section.name} id={categoryId(section.name)}>
                             <h2>{section.name}</h2>

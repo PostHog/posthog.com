@@ -29,7 +29,7 @@ export const doc: ComponentDoc = {
             id: 'basic',
             title: 'Basic',
             description:
-                'Field.Root connects a label, a control, and a description. Field.Control is a styled text input.',
+                'Use this for a single line of text, such as a name or an email. Field.Root connects a label, a control, and a description.',
             Component: Basic,
             source: basicSource,
         },
@@ -52,7 +52,8 @@ export const doc: ComponentDoc = {
         {
             id: 'sizes',
             title: 'Sizes',
-            description: 'sm, md, and lg match the button heights: 26, 36, and 44 pixels.',
+            description:
+                'Use md by default, and match the size of the buttons beside the field. Use lg only for a single hero field, such as a newsletter sign-up. sm, md, and lg are 26, 36, and 44 pixels high.',
             Component: Sizes,
             source: sizesSource,
         },
@@ -60,7 +61,7 @@ export const doc: ComponentDoc = {
             id: 'states',
             title: 'States',
             description:
-                'Inset is the default. Line shows only a bottom line, for light or inline editing. Set invalid or disabled on Field.Root for the other states.',
+                'Use inset by default. Use line for light or inline editing, such as renaming in place, filters, and quick settings. Use one appearance per form. Set invalid or disabled on Field.Root for the other states.',
             Component: AppearanceStates,
             source: appearanceStatesSource,
         },
@@ -104,11 +105,6 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        <>
-            Use <Snippet.Inline>{'inset'}</Snippet.Inline> by default. Use <Snippet.Inline>{'line'}</Snippet.Inline> for
-            light or inline editing, such as renaming in place, filters, and quick settings. Use one appearance in a
-            form.
-        </>,
         <>
             A field outside a <Link to="/components/ui/form">Form</Link> validates only on submit, so it never shows
             errors. Put it in a form, or set <Snippet.Inline>{'validationMode'}</Snippet.Inline> to{' '}

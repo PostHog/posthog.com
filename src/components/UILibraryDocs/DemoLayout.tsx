@@ -7,7 +7,12 @@ export function DemoLabel({ children, className }: { children: React.ReactNode; 
 
 export function DemoRows({ children, className }: { children: React.ReactNode; className?: string }): JSX.Element {
     return (
-        <div className={cn('grid gap-x-6 gap-y-4 @md:grid-cols-[8rem_minmax(0,1fr)] @md:items-center', className)}>
+        <div
+            className={cn(
+                'grid gap-x-6 gap-y-4 @md:grid-cols-[minmax(8rem,max-content)_minmax(0,1fr)] @md:items-center',
+                className
+            )}
+        >
             {children}
         </div>
     )

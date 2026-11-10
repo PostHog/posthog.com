@@ -1,5 +1,6 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
+import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
 import NonModal from './NonModal'
 import nonModalSource from '!!../../rawSourceLoader!./NonModal.tsx?raw'
@@ -19,14 +20,15 @@ export const doc: ComponentDoc = {
             id: 'bottom',
             title: 'Bottom drawer',
             description:
-                'A drawer opens from the bottom edge by default. It shows a grab handle above the header. Swipe down to close it.',
+                'Use a bottom drawer for a secondary task on narrow screens. It opens from the bottom edge by default and shows a grab handle. Swipe down to close it.',
             Component: Bottom,
             source: bottomSource,
         },
         {
             id: 'side-panel',
             title: 'Side panel',
-            description: 'Set swipeDirection="right" on Drawer.Root to open a panel from the right edge.',
+            description:
+                'Use a side panel for details on wide screens. Set swipeDirection="right" on Drawer.Root to open it from the right edge.',
             Component: SidePanel,
             source: sidePanelSource,
         },
@@ -34,13 +36,16 @@ export const doc: ComponentDoc = {
             id: 'nonmodal',
             title: 'Non-modal reference panel',
             description:
-                'Set modal={false} to remove the backdrop and keep the page usable. Add disablePointerDismissal so clicks on the page do not close it.',
+                'Use this for reference content that the user reads while they work on the page. Set modal={false} to remove the backdrop. Add disablePointerDismissal so page clicks do not close it.',
             Component: NonModal,
             source: nonModalSource,
         },
     ],
     notes: [
-        'Use a drawer for a secondary task or for details that keep the page in view. Bottom drawers suit narrow screens. Side drawers suit details on wide screens.',
+        <>
+            Use a drawer for a secondary task that keeps the page in view. For a focused task that interrupts the page,
+            use <Link to="/components/ui/dialog">Dialog</Link>.
+        </>,
         <>
             Put the body in <Snippet.Inline>{'Drawer.Content'}</Snippet.Inline> and the actions in{' '}
             <Snippet.Inline>{'Drawer.Footer'}</Snippet.Inline>, after the content.

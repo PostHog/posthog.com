@@ -18,21 +18,23 @@ export const doc: ComponentDoc = {
         {
             id: 'noresults',
             title: 'No search results',
-            description: 'Clear the filters with a reset action.',
+            description:
+                'Use this when a search or filter returns no items. Give a reset action that clears the filters.',
             Component: NoResults,
             source: noResultsSource,
         },
         {
             id: 'firstrun',
             title: 'First run',
-            description: 'Use a primary action to create the first item.',
+            description: 'Use this before the user creates the first item. Give one primary action that creates it.',
             Component: FirstRun,
             source: firstRunSource,
         },
         {
             id: 'small',
             title: 'Small size',
-            description: 'Use a compact layout in a small region.',
+            description:
+                'Use md (the default) in most places. Use sm in dense UI or a small region, such as a card or a panel.',
             Component: Small,
             source: smallSource,
         },

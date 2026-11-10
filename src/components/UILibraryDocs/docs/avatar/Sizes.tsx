@@ -2,6 +2,8 @@ import React from 'react'
 import { Avatar } from 'components/UI/Avatar'
 import { DemoLabel } from 'components/UILibraryDocs/DemoLayout'
 
+const labels = { sm: 'sm · lists', md: 'md · default', lg: 'lg · profiles' }
+
 const nightHogImage = 'https://res.cloudinary.com/dmukukwp6/image/upload/c_fill,w_96,h_96/night_hog_219fff00f3.png'
 
 export default function AvatarSizes(): JSX.Element {
@@ -13,7 +15,7 @@ export default function AvatarSizes(): JSX.Element {
                         <Avatar.Image src={nightHogImage} alt="Night hog" />
                         <Avatar.Fallback>NH</Avatar.Fallback>
                     </Avatar.Root>
-                    <DemoLabel>{size}</DemoLabel>
+                    <DemoLabel>{labels[size]}</DemoLabel>
                 </div>
             ))}
         </div>

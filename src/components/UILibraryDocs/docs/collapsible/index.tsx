@@ -16,7 +16,8 @@ export const doc: ComponentDoc = {
         {
             id: 'basic',
             title: 'Basic',
-            description: 'Click the trigger to open and close the panel. The panel height animates.',
+            description:
+                'Use this for one region that you show or hide, such as advanced options. Click the trigger to open and close the panel.',
             Component: Basic,
             source: basicSource,
         },
@@ -31,8 +32,7 @@ export const doc: ComponentDoc = {
     ],
     notes: [
         <>
-            Use Collapsible for a single panel. For a set of panels, use{' '}
-            <Link to="/components/ui/accordion">Accordion</Link>.
+            For a list of sections, such as an FAQ, use <Link to="/components/ui/accordion">Accordion</Link>.
         </>,
     ],
 }

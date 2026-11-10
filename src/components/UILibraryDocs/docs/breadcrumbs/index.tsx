@@ -18,7 +18,8 @@ export const doc: ComponentDoc = {
         {
             id: 'basic',
             title: 'Basic',
-            description: 'Use links for parent pages and Page for the current page.',
+            description:
+                'Use this on a deep page, such as a docs or handbook page, to show where it sits. Use links for parent pages and Page for the current page.',
             Component: Basic,
             source: basicSource,
         },

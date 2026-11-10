@@ -20,7 +20,7 @@ export const doc: ComponentDoc = {
             id: 'surfaces',
             title: 'Surfaces',
             description:
-                'Raised is the default. Use outlined or plain only where a raised bar does not fit. Each Trigger opens its Content in one shared Popup.',
+                'Use raised on the window background, plain inside a card, and outlined in a Section or other flat region. Each Trigger opens its Content in one shared Popup.',
             Component: Surfaces,
             source: surfacesSource,
         },

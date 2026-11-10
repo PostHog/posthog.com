@@ -2,11 +2,17 @@ import React from 'react'
 import { Toolbar } from 'components/UI/Toolbar'
 import { DemoRow, DemoRows } from 'components/UILibraryDocs/DemoLayout'
 
+const appearances = [
+    { appearance: 'raised', label: 'raised · on window' },
+    { appearance: 'outlined', label: 'outlined · flat region' },
+    { appearance: 'plain', label: 'plain · in a card' },
+] as const
+
 export default function Surfaces(): JSX.Element {
     return (
         <DemoRows>
-            {(['raised', 'outlined', 'plain'] as const).map((appearance) => (
-                <DemoRow key={appearance} label={appearance}>
+            {appearances.map(({ appearance, label }) => (
+                <DemoRow key={appearance} label={label}>
                     <Toolbar.Root appearance={appearance} aria-label={`${appearance} insight controls`}>
                         <Toolbar.Button>Save insight</Toolbar.Button>
                         <Toolbar.Button>Export</Toolbar.Button>

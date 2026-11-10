@@ -1,6 +1,7 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
 import type { ComponentDoc } from '../../types'
+import { StatusChoiceGuide } from '../../ChoiceGuide'
 import Basic from './Basic'
 import basicSource from '!!../../rawSourceLoader!./Basic.tsx?raw'
 import WithAction from './WithAction'
@@ -35,13 +36,15 @@ export const doc: ComponentDoc = {
         {
             id: 'types',
             title: 'Types',
-            description: 'A status type sets the icon and its color.',
+            description:
+                'Use a status type when the toast reports a result, such as a save that failed. The type sets the icon and its color.',
             Component: Types,
             source: typesSource,
         },
     ],
     notes: [
-        'Use a toast for brief feedback after an action. Do not put information in it that the user must keep.',
+        <StatusChoiceGuide key="guide" />,
+        'Do not put information in a toast that the user must keep, because the toast closes.',
         <>
             The site root already renders the toast stack. Add a toast with{' '}
             <Snippet.Inline>{'Toast.useToastManager().add()'}</Snippet.Inline> in a component, or with{' '}

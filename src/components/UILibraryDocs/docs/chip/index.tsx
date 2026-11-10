@@ -1,7 +1,18 @@
 import React from 'react'
 import { Snippet } from 'components/UI/Snippet'
-import Link from 'components/Link'
 import type { ComponentDoc } from '../../types'
+import { StatusChoiceGuide } from '../../ChoiceGuide'
+import {
+    tagAppearanceRow,
+    tagAppearancesDescription,
+    tagColorRow,
+    tagColorsDescription,
+    tagHrefRow,
+    tagPreviewNote,
+    tagPreviewRow,
+} from '../../tagDocs'
+import Colors from './Colors'
+import colorsSource from '!!../../rawSourceLoader!./Colors.tsx?raw'
 import Content from './Content'
 import contentSource from '!!../../rawSourceLoader!./Content.tsx?raw'
 import Inline from './Inline'
@@ -11,6 +22,8 @@ import linksSource from '!!../../rawSourceLoader!./Links.tsx?raw'
 import References from './References'
 import referencesSource from '!!../../rawSourceLoader!./References.tsx?raw'
 import Removable from './Removable'
+import Variants from './Variants'
+import variantsSource from '!!../../rawSourceLoader!./Variants.tsx?raw'
 import removableSource from '!!../../rawSourceLoader!./Removable.tsx?raw'
 
 export const doc: ComponentDoc = {
@@ -25,14 +38,29 @@ export const doc: ComponentDoc = {
             id: 'content',
             title: 'Content',
             description:
-                'A chip shows text, an icon and text, or an image and text. The image is a circle by default. Set imageShape to square for a logo or an app icon.',
+                'A chip shows text, an icon and text, or an image and text. Use an image for a person or a team, and an icon for a product or a feature.',
             Component: Content,
             source: contentSource,
         },
         {
+            id: 'colors',
+            title: 'Colors',
+            description: tagColorsDescription,
+            Component: Colors,
+            source: colorsSource,
+        },
+        {
+            id: 'variants',
+            title: 'Solid and soft',
+            description: tagAppearancesDescription,
+            Component: Variants,
+            source: variantsSource,
+        },
+        {
             id: 'removable',
             title: 'Removable',
-            description: 'Pass onRemove to add a remove button.',
+            description:
+                'Use a remove button for a filter or a selected value that the user can clear. Pass onRemove to add it.',
             Component: Removable,
             source: removableSource,
         },
@@ -62,53 +90,35 @@ export const doc: ComponentDoc = {
         },
     ],
     notes: [
-        <>
-            Use Chip for a compact label or a selected value. For status, use{' '}
-            <Link to="/components/ui/badge">Badge</Link>.
-        </>,
+        <StatusChoiceGuide key="guide" />,
         <>
             When the children are not a string, pass <Snippet.Inline>{'removeLabel'}</Snippet.Inline>, so the remove
             button has a useful name.
         </>,
         'The image is decorative. The text must name the chip.',
-        'On a link chip, a preview repeats or extends what the link target shows. Do not put actions or required information in it, because touch users do not see it. A chip without href can hold them, because its card opens on tap.',
+        tagPreviewNote('chip'),
     ],
     props: [
         {
             component: 'Chip',
             rows: [
                 { name: 'children', type: 'ReactNode', description: 'The label. Required.' },
-                {
-                    name: 'href',
-                    type: 'string',
-                    description:
-                        'Makes the chip a link. It renders the site Link, so internal links open in the app. For an external URL, pass externalNoIcon to open it in a new tab.',
-                },
+                tagHrefRow('chip'),
                 {
                     name: 'size',
                     type: "'md' | 'inline'",
                     defaultValue: "'md'",
                     description: 'inline sizes the chip to the text around it, for use in a sentence.',
                 },
+                tagColorRow,
+                tagAppearanceRow,
                 { name: 'icon', type: 'ReactNode', description: 'An icon before the text.' },
                 {
                     name: 'image',
                     type: 'string',
-                    description: 'The URL of an image before the text. It replaces the icon.',
+                    description: 'The URL of a round image before the text. It replaces the icon.',
                 },
-                {
-                    name: 'imageShape',
-                    type: "'circle' | 'square'",
-                    defaultValue: "'circle'",
-                    description:
-                        'The shape of the image. Use circle for a person and square for a logo or an app icon.',
-                },
-                {
-                    name: 'preview',
-                    type: 'ReactNode',
-                    description:
-                        'The content of a card that opens on hover. With href, it is a PreviewCard. Without href, the chip becomes a button with a Popover. Not with onRemove. Load the data for the card inside this content, so the request starts when the card opens.',
-                },
+                tagPreviewRow('chip'),
                 {
                     name: 'onRemove',
                     type: '() => void',

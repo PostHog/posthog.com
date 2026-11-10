@@ -23,14 +23,16 @@ export const doc: ComponentDoc = {
         {
             id: 'basic',
             title: 'Basic',
-            description: 'A header with a title and a description, and a footer for actions.',
+            description:
+                'Use a card for a small group of related content, such as a feature, a plan, a setting, or a stat. A header holds the title, and a footer holds the actions.',
             Component: Basic,
             source: basicSource,
         },
         {
             id: 'variants',
             title: 'Appearances',
-            description: 'Glass is the default. Solid hides the wallpaper. Dashed marks a later or optional step.',
+            description:
+                'Use glass (the default) for most cards. Use solid when the wallpaper must not show through, such as behind dense data. Use dashed for a later or optional step, and say so in the text.',
             Component: Variants,
             source: variantsSource,
         },
@@ -38,7 +40,7 @@ export const doc: ComponentDoc = {
             id: 'levels',
             title: 'Levels and sections',
             description:
-                'A card is raised. A card inside a card becomes an inset well. A section is a flat border on the window.',
+                'A card inside a card becomes an inset well, so nesting sets the level for you. Avoid a third level. Use a divider or white space instead.',
             Component: Levels,
             source: levelsSource,
         },
@@ -52,16 +54,15 @@ export const doc: ComponentDoc = {
         {
             id: 'padding',
             title: 'Padding',
-            description: 'Three padding sizes. The default is md.',
+            description:
+                'Use md (the default) for most cards. Use none when the content has its own edges, such as a table, an image, or a code block. Sm and lg are also available.',
             Component: Padding,
             source: paddingSource,
         },
     ],
     notes: [
-        'Use a card for a small group of related content, such as a feature, a plan, a setting, or a stat. Do not use a card only to add space.',
+        'To add space, use white space or a divider, not a card.',
         'Use Section only for a large flat region of a page, such as a long form or a group of cards. When you are not sure, use a card.',
-        'Nesting sets the level for you: a card inside a card becomes an inset well. Avoid a third level. Use a divider or white space.',
-        'Glass is the default. Use solid when the wallpaper must not show through, such as behind dense data. Use dashed for a later or optional step, and say so in the text.',
     ],
     props: [
         {
