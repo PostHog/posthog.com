@@ -30,7 +30,7 @@ Every analytics setup, bought or built, has the same job.
 - You have to keep it safe for as long as anyone might need it, and nobody knows when that'll be. 
 - You have to keep it available for when you want to use it, or send it off wherever you want it to go.
 
-That sounds like three jobs. In practice it's six, and each one has its own ways in can go wrong.
+That sounds like three jobs. In practice it's six, and each one has its own ways it can go wrong.
 
 ### Step 1: Getting it in
 
@@ -44,7 +44,7 @@ If capture can't write to the queue, it returns an error and the SDK tries again
 
 For data from other tools, [sources](/docs/data-pipelines/sources) sync [Stripe](/docs/data-pipelines/sources/stripe), HubSpot, Postgres, S3, and more on a schedule, so you can query them next to your events with SQL. Synced rows have their own free tier and bill per row, separately from events.
 
-Without it, events from a phone with the wrong clock land on the wrong day, retries count twice, and ad blockers quietly create a blindspot in your data.
+Without it, events from a phone with the wrong clock land on the wrong day, retries count twice, and ad blockers quietly create a blind spot in your data.
 
 ### Step 2: Not losing it
 
@@ -173,7 +173,7 @@ In plain English, work out how much data you'll store by a given month and what 
 ```
 GB stored at month N = events × bytes × replicas × min(N, months retained) ÷ 1,000,000,000
 storage at month N   = GB stored × price per GB-month
-monthly total        = storage + compute + queue + (engineer hours × loaded rate)
+monthly total        = storage + compute + queue + (engineer hours × loaded rate) + on-call
 your cost per event  = monthly total ÷ events per month
 ```
 
