@@ -743,11 +743,11 @@ On iOS, the plugin now always resolves `posthog-ios` through Swift Package Manag
 
 - Remove `"posthog.useSpm"` from `ios/Podfile.properties.json` if you set it. The plugin no longer reads it.
 - The plugin no longer needs `use_frameworks! :linkage => :dynamic`. Keep it only if another dependency needs it.
-- Before you upgrade, remove the legacy `posthog-react-native-session-replay` package and any `pod 'PostHog'` line in your Podfile. Both install `posthog-ios` 3.x, which clashes with the plugin's 4.x, so `pod install` stops with an error that names the conflicting pod. If your own native code imports `PostHog`, add `posthog-ios` to that target as a Swift package instead.
+- Before you upgrade, remove the legacy `posthog-react-native-session-replay` package and any `pod 'PostHog'` line in your Podfile. Both install `posthog-ios` 3.x, which clashes with the plugin's 4.x, so `pod install` stops with an error that names the conflicting pod. If your own native code imports `PostHog`, add `posthog-ios` to that target as a Swift package instead. The check only sees pods your Podfile adds directly. Another pod that depends on `PostHog` still installs, and the Xcode build then fails with `Redefinition of module 'PostHog'`, so remove or update that pod too.
 - Remove these Podfile settings if you use them, because `pod install` now fails with them: `:generate_multiple_pod_projects => true`, `:deduplicate_targets => false`, and targets that use the plugin with different `platform` or `use_frameworks!` settings.
 - Make sure build machines can reach `https://github.com/PostHog/posthog-ios.git`, because Xcode now fetches `posthog-ios` from there.
 - If your app target has `import PostHog`, check that it still compiles. React Native's helper adds the package only to the plugin's pod target. This case isn't tested, but if the import no longer resolves, add `posthog-ios` to your app target as a Swift package with a compatible version.
-- Apps on React Native's full Swift Package Manager integration have no Podfile to change. Build with Xcode 26 or later, and resolve packages again if `Package.resolved` still pins `posthog-ios` 3.x. If your app target adds `posthog-ios` as a package too, raise it to 4.0.
+- Apps on React Native's full Swift Package Manager integration have no Podfile to change. Build with Xcode 26 or later, and resolve packages again if `Package.resolved` still pins `posthog-ios` 3.x. If your app target adds `posthog-ios` as a package too, require a 4.0.x version, because the plugin pins `posthog-ios` to 4.0.x. These apps no longer bundle the native surveys from `posthog-ios`, which the plugin doesn't use because surveys render in JavaScript.
 - If a custom dSYM upload script calls `${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh`, change it to `${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh`. The `uploadNativeSymbols` build phase from the Expo config plugin already checks both paths.
 
 Apps that use the plugin only through `posthog-react-native` need no code changes. If your code calls the plugin directly:
@@ -768,7 +768,7 @@ Apps that use the plugin only through `posthog-react-native` need no code change
 
 On iOS, native uploads (session replay and native crash reports) pause while cellular data is turned off for your app, instead of sending requests that fail.
 
-On iOS and Android, events that the plugin sends natively go to capture v1 (`/i/v1/analytics/events`) in `posthog-ios` 4.0 and `posthog-android` 4.0. These are native crash reports, `$exception` events from fatal exceptions, and push-opened events. Events captured in JavaScript still go to `/batch`. If you self-host PostHog or use a [reverse proxy](/docs/advanced/proxy):
+On iOS and Android, events that the plugin sends natively go to capture v1 (`/i/v1/analytics/events`) in `posthog-ios` 4.0 and `posthog-android` 4.0. These are native crash reports, `$exception` events from fatal exceptions, iOS rage clicks (`$rageclick`), and push-opened events. Events captured in JavaScript still go to `/batch`. If you self-host PostHog or use a [reverse proxy](/docs/advanced/proxy):
 
 - Forward `/i/v1/*` to PostHog.
 - Pass these request headers through unchanged: `Authorization`, `Content-Type`, `Content-Encoding`, `User-Agent`, `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id` and `PostHog-Request-Timestamp`.
@@ -776,14 +776,24 @@ On iOS and Android, events that the plugin sends natively go to capture v1 (`/i/
 - Proxy setups from our guides before 29 October 2026 strip `Authorization`, so PostHog answers `401` and drops the native events. Update yours from the current guide.
 - Don't rely on a custom `Authorization` header in `requestHeaders` for these requests. The SDK replaces it with `Bearer <projectToken>`, so authenticate your proxy with a different header. Session replay uploads to `/s/` still send your `Authorization` header.
 - Don't redirect these requests to another origin. The SDKs follow only a 307 or 308 redirect to the same origin as `host`, and drop the events on any other redirect.
+- If the path isn't served and the proxy answers `404`, each running app retries about every 30 seconds, and the native events stay queued on the device only until a full queue evicts them (1000 events by default), oldest first. Other errors, such as `401`, `403` or `405`, drop them.
 
-Native events report `$locale` as a full language tag with region, such as `de-CH` or `zh-Hant-TW` instead of `de` or `zh-TW`, and add `$app_language`, the language your app shows, once you call [`setAppLanguage()`](#setting-the-app-language). Update insights that filter on a two-letter `$locale`.
+These native events also change shape:
 
-If native code in your app, or a native library it uses, calls `posthog-ios` or `posthog-android` directly, update it for 4.0. See the [`posthog-ios` migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) and the [`posthog-android` migration guide](https://github.com/PostHog/posthog-android/blob/main/docs/migration-3.x-to-4.0.md). Android code compiled against `posthog-android` 3.x fails at runtime with errors such as `NoSuchMethodError`.
+- A native event whose distinct ID is empty, whitespace-only or over 200 UTF-8 bytes is dropped. Plugin 2.x shortened a long ID to 200 characters and kept the event. JavaScript events still shorten it, so with a long distinct ID, such as a JWT, your app keeps its JavaScript events but loses its native ones. Keep distinct IDs at 200 bytes or shorter.
+- On iOS, a property whose value is `null` is left out instead of sent as `null`. On Android, a `null` element in a list is kept at its position instead of being removed. `$set` and `$set_once` still send `null` values.
+
+Native events report `$locale` as a full language tag with region, such as `de-CH` or `zh-Hant-TW` instead of `de` or `zh-TW`, and add `$app_language`, the language your app shows, once you call [`setAppLanguage()`](#setting-the-app-language). On Android, `$locale` also uses the current codes `he`, `id` and `yi` instead of the legacy `iw`, `in` and `ji`, so `in-ID` becomes `id-ID`. Update insights that filter on a two-letter `$locale` or on those codes.
+
+If your app creates PostHog clients for more than one project, native events take `$app_language` only from clients of the project the native SDK was set up for.
+
+If native code in your app, or a native library it uses, calls `posthog-ios` or `posthog-android` directly, update it for 4.0. See the [`posthog-ios` migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) and the [`posthog-android` migration guide](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md). Android code compiled against `posthog-android` 3.x fails at runtime with errors such as `NoSuchMethodError`.
 
 The experimental iOS session replay option `sessionReplayConfig.screenshotModeBackgroundCapture` no longer has an effect, because `posthog-ios` 4.0 removes it.
 
 Session replay records only masked screenshots on iOS and Android, because `posthog-ios` 4.0 and `posthog-android` 4.0 remove wireframe capture. The plugin already forced screenshot mode, so your recordings don't change. If native code in your app sets `screenshotMode` (iOS) or `screenshot` (Android), remove it, because it no longer compiles.
+
+Masking also changes on iOS with `posthog-ios` 4.0. Secure text inputs stay masked inside a `ph-no-mask` view. If a masked view sits inside a view backed by its own `CALayer` subclass, such as a `lottie-react-native` animation, the SDK masks the whole window for that frame.
 
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
