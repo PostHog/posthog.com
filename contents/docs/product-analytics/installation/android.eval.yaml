@@ -118,7 +118,7 @@ checks:
       pages:
           - docs/libraries/android
           - docs/feature-flags/installation/android
-      prompt: &feature-flag-prompt >-
+      prompt: >-
           Put sharing a list in the Android app behind a PostHog feature flag.
       criteria:
           shared: [docs-read]
@@ -176,29 +176,3 @@ checks:
                   PostHogAndroidConfig with projectToken (the project token) and host,
                   then calls PostHogAndroid.setup(this, config) in onCreate. Fails if it
                   passes the token as apiKey. Cite the file and line(s).
-
-    - id: feature-flag-next
-      description: >-
-          The same task as feature-flag, for a project on posthog-android 4. Expected
-          to fail until the docs show that major.
-      codebase_to_test: oss-tasks-android-next
-      pages:
-          - docs/libraries/android
-          - docs/feature-flags/installation/android
-      prompt: *feature-flag-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              flag-evaluated: >-
-                  The app reads the flag with PostHog.getFeatureFlagResult("<key>") and
-                  checks enabled, or with PostHog.isFeatureEnabled("<key>"). Cite the
-                  file and line(s).
-              flags-loaded: >-
-                  Flags load before the read: preloadFeatureFlags is no longer false, or
-                  the flag is read in a PostHog.onFeatureFlags { loaded -> } listener
-                  registered before PostHogAndroid.setup(), or in the callback of
-                  PostHog.reloadFeatureFlags { loaded -> }. Fails if preloading stays off
-                  and nothing loads the flags, or if the code sets onFeatureFlags on the
-                  config or uses PostHogOnFeatureFlags.
-              flag-gates-share: >-
-                  Sharing a list is hidden or refused when the flag is off.

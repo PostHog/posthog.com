@@ -170,7 +170,9 @@ checks:
           shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/pubspec.yaml lists `posthog_flutter` at 6.x.
+                  {folder}/pubspec.yaml lists `posthog_flutter` at 6.x: a `^6` version
+                  constraint, or a path or git dependency on the posthog_flutter 6
+                  release source.
               android-setup: >-
                   android/app/src/main/AndroidManifest.xml has PostHog meta-data inside
                   <application>: either `com.posthog.posthog.PROJECT_TOKEN` and

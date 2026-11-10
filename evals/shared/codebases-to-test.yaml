@@ -125,18 +125,9 @@ oss-bouncer-ios: # SwiftUI iOS SMS filter, posthog-ios 3.92.0 (Package.resolved)
 oss-chainloop-next: # needs a commit where the app is on posthog-go v2
     repo: https://github.com/chainloop-dev/chainloop
     folder: .
-oss-codemod-cli-next: # needs a commit where the app is on posthog 1.0
-    repo: https://github.com/codemod/codemod
-    folder: crates/telemetry
 oss-polar-server-next: # needs a commit where the app is on posthog 8
     repo: https://github.com/polarsource/polar
     folder: server
-oss-element-x-ios-next: # needs a commit where the app is on posthog-ios 4
-    repo: https://github.com/element-hq/element-x-ios
-    folder: .
-oss-tasks-android-next: # needs a commit where the app is on posthog-android 4
-    repo: https://github.com/tasks/tasks
-    folder: app
 oss-saber: # Flutter note app (Android, iOS, desktop), no PostHog code
     repo: https://github.com/saber-notes/saber
     ref: c85af406e6d954402cc7c6d718a8f240f54408b2

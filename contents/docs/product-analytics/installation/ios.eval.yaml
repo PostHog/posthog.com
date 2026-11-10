@@ -96,7 +96,7 @@ checks:
       pages:
           - docs/libraries/ios/usage
           - docs/feature-flags/installation/ios
-      prompt: &feature-flag-prompt >-
+      prompt: >-
           Put creating polls in the iOS app behind a PostHog feature flag.
       criteria:
           shared: [docs-read]
@@ -158,30 +158,3 @@ checks:
                   calls PostHogSDK.shared.setup(config) once at launch, in the App's init()
                   or in application(_:didFinishLaunchingWithOptions:). Cite the file and
                   line(s).
-
-    - id: feature-flag-next
-      description: >-
-          The feature-flag task in Element X on posthog-ios 4, where the reload callback
-          receives the load result. Expected to fail until the docs show that major.
-      codebase_to_test: oss-element-x-ios-next
-      pages:
-          - docs/libraries/ios/usage
-          - docs/feature-flags/installation/ios
-      prompt: *feature-flag-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              flag-evaluated: >-
-                  The code reads the flag on PostHogSDK.shared, directly or through the
-                  app's PostHog client wrapper, with getFeatureFlagResult(<flag key>) and
-                  its `.enabled`, or with isFeatureEnabled(<flag key>). Cite the file and
-                  line(s).
-              flags-load: >-
-                  Flags get fetched: the change sets preloadFeatureFlags to true (or
-                  removes the line that sets it to false), or calls reloadFeatureFlags()
-                  before the flag is read. A reload with a completion block passes a
-                  closure that takes the PostHogFeatureFlagsLoaded result, such as
-                  reloadFeatureFlags { result in ... } or { _ in ... }. Fails if the closure
-                  takes no argument.
-              flag-gates-polls: >-
-                  Creating a poll is hidden or refused when the flag is off.
