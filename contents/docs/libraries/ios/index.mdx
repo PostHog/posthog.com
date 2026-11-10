@@ -93,7 +93,7 @@ PostHogSDK.shared.capture("signed_up", options: ["process_person_profile": false
 
 In Objective-C, use the selectors that end in `options:`, such as `captureWithEvent:distinctId:properties:userProperties:userPropertiesSetOnce:groups:timestamp:options:`.
 
-- An option wins over its legacy property, which still works. Other keys are sent unchanged, and PostHog ignores keys it doesn't know.
+- Legacy option properties still work, but an option overrides its legacy property. Use options. Other keys are sent unchanged, and PostHog ignores keys it doesn't know.
 - PostHog reads common forms of a value, such as `"false"` or `0` for a boolean, and drops an event whose option value it can't read.
 - For `identify`, the options apply to the `$identify` or `$set` event the call sends.
 - In `beforeSend`, read and change options through `event.options`. Edit the dictionary instead of replacing it: when person processing is off, the SDK sets `process_person_profile` to `false` there, and a new dictionary loses it.
