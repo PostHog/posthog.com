@@ -65,9 +65,7 @@ During the day, you will also have:
 *   A kick-off session (30 min) - a call to go over the challenge for the day.
 *   A peer team interview (30 min) - a chat with members of the team. You can ask them as many questions as you want.
 
-You will also have access to a personal Slack channel with the team. Use the channel for questions and blockers. Please do not send direct messages to people.
-
-Spend most of your time on the challenge and less on meeting people, because we base our decision on your output of the day.
+You’ll have a Slack channel with the team. Use it like a normal team channel for questions, progress, and blockers. Please don’t send direct messages.
 
 ##### How to prepare for the day
 
