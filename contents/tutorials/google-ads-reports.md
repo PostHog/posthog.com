@@ -49,18 +49,8 @@ After creating the bucket and uploading data, we must set up access. To do this:
 
 1. Open [IAM](https://console.aws.amazon.com/iam/home) and create a new policy to enable access to this bucket.
 2. On the left under **Access management**, select **Policies**, and click **Create policy**.
-3. Under the service, choose **S3**.
-4. Under **Actions**, select:
-    1. Under **List**, select **ListBucket** and **ListBucketMultipartUploads**
-    2. Under **Read**, select **GetBucketLocation** and **GetObject**
-    3. Under **Write**, select **AbortMultipartUpload** and **PutObject**
-    4. Under **Permission Management**, select **PutObjectAcl**
-5. Under **Resources**, select **Specific**, and click **object** → **Add ARN**.
-6. Specify your bucket name and toggle **Any object name**. In the example below, replace `ian-google-ads-reports` with the bucket name you chose in the previous section.
-
-![S3 permissions](https://res.cloudinary.com/dmukukwp6/image/upload/arn_2b56df042f.png)
-
-1. Click **Next,** give your policy a name, and click **Create policy**.
+3. Select the **JSON** tab and paste the read-only policy from our [S3 source docs](/docs/data-pipelines/sources/s3#create-an-access-key). Replace `your-bucket` with your bucket name, such as `ian-google-ads-reports`.
+4. Click **Next,** give your policy a name, and click **Create policy**.
 
 With your new policy, you can create a user and give them access to the bucket by attaching the policy.
 
@@ -74,7 +64,7 @@ With your new policy, you can create a user and give them access to the bucket b
 
 ## Linking S3 to PostHog
 
-With your access keys, you can go to the data warehouse tab in PostHog and click **Link source**. Under self managed, click **Link** next to S3. Add a table name, your S3 URL (like `https://ian-google-ads-reports.s3.us-west-2.amazonaws.com/ads_report.csv`), **CSV with headers** for file format, your access key and secret, and click **Next**.
+With your access keys, you can go to the [sources tab](https://app.posthog.com/data-management/sources) in PostHog and click **New source**. Click **Link** next to **Amazon S3**. Add your S3 URL (like `https://ian-google-ads-reports.s3.us-west-2.amazonaws.com/ads_report.csv`), your access key and secret, and **CSV with a header row** for file format. Click **Next**, select the table, choose a sync method and frequency, and click **Import**.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_07_19_at_09_03_09_0165123c88.png"
@@ -157,7 +147,7 @@ ORDER BY
     cost_per_user ASC
 ```
 
-Another way to do this is to join PostHog's [`sessions` and `events` table](/docs/data-warehouse/sources/posthog) using `session_id` and then filter for the events you want. This also enables more flexibility on what events you can count as a conversion.
+Another way to do this is to join PostHog's [`sessions` and `events` table](/docs/data-pipelines/sources/posthog) using `session_id` and then filter for the events you want. This also enables more flexibility on what events you can count as a conversion.
 
 ### Cost per click
 

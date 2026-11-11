@@ -9,13 +9,15 @@ If you've been invited to a PostHog SuperDay, here's what to expect and how to s
 
 ## What the SuperDay looks like
 
-The SuperDay is a paid full day of work ($1,000 USD). You'll receive a project task at the start of your day and submit your work at the end. The project is the main focus -- you'll build something from scratch, tailored to the role you're applying for. Expect to spend the majority of your day on it.
+The SuperDay is a paid full day of work ($1,000 USD). You'll receive a project task at the start of your day and submit your work when you wrap up. The project is the main focus -- you'll build something from scratch, tailored to the role you're applying for. Expect to spend the majority of your day on it.
+
+Treat it as a day of work, at a pace that works for you. There's no hard cutoff time. Most candidates spend around 8–10 hours working on the challenge before submitting, but that's a guide, not a requirement.
 
 Scheduled throughout the day, you'll also have:
 
-- **A debugging session (45 min)** -- a separate pairing session where you'll work through bugs and features in an existing codebase with an interviewer. This is a different codebase from your project.
+- **A debugging session (45 min, not all roles)** -- a separate pairing session where you'll work through bugs and features in an existing codebase with an interviewer. This is a different codebase from your project.
 - **A check-in call** -- your SuperDay buddy (the same engineer available to help you in Slack) will review your project progress partway through the day, ask about your decisions, and offer feedback.
-- **A short chat with a co-founder or exec** -- a brief conversation about culture and motivation.
+- **A short chat with a co-founder, Blitzscale Team member, or relevant Group Lead** -- a brief conversation about culture and motivation.
 
 You'll also have access to a dedicated Slack channel with the team throughout the day. Use it -- share progress, ask questions, surface blockers.
 
@@ -61,6 +63,8 @@ We notice when someone asks "what would actually help a user here?" and lets tha
 - **Take feedback seriously.** At the check-in, your interviewer will offer suggestions. We pay attention to whether those suggestions show up in your final submission. This is a signal of how you'd work with teammates day to day.
 
 ## The debugging session
+
+_Not every SuperDay includes it. If yours includes one, we'll tell you clearly in your SuperDay invite._
 
 ### What to expect
 

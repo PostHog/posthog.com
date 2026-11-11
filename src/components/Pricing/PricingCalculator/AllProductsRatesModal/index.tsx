@@ -18,6 +18,7 @@ type RatesProduct = {
     startsAt?: string | number
     freeLimit?: number
     billedWith?: string
+    freeAllocationText?: string
 }
 
 interface AllProductsRatesModalProps {
@@ -82,6 +83,7 @@ export default function AllProductsRatesModal({
                                         startsAt,
                                         freeLimit,
                                         billedWith,
+                                        freeAllocationText,
                                     }) => {
                                         const added = addedTypes.includes(type)
                                         return (
@@ -117,7 +119,9 @@ export default function AllProductsRatesModal({
                                                     )}
                                                 </td>
                                                 <td className="py-2.5 pr-4">
-                                                    {billedWith ? (
+                                                    {billedWith && freeAllocationText ? (
+                                                        <span className="text-secondary">{freeAllocationText}</span>
+                                                    ) : billedWith ? (
                                                         <span className="text-secondary">—</span>
                                                     ) : freeLimit ? (
                                                         `${Number(freeLimit).toLocaleString()} ${pluralizeUnit(

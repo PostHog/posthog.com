@@ -1,0 +1,102 @@
+---
+title: Traces and conversations
+shortTitle: Traces and conversations
+subtitle: Follow AI requests, inspect traces and conversation context, and debug incorrect answers with PostHog AI Observability.
+description: Follow AI requests, inspect traces and conversation context, and debug incorrect answers with PostHog AI Observability.
+pocketGuideOrder: 1
+---
+
+<RightPage>
+
+# Traces and conversations
+
+One of Twig's AI features is an AI trip planner designed to help visitors find the perfect getaway. One day, a visitor asks for a forest getaway for four.
+
+<AioConversationPreview />
+
+The trip planner responds with a recommendation: Adiron-shack. But the visitor changes their mind, and decides they'd rather go to the beach. They're happy with the beach stay, but they want to make sure the rental has a kitchen.
+
+It's a pretty average conversation with the AI trip planner, nothing really out of the norm. But Twig's engineers need to _see_ conversations like these to understand when things go wrong, or how to improve things even if they're going right.
+
+So they instrument the AI trip planner with PostHog AI Observability (AIO) and start to piece together the stories behind AI conversations happening in their product.
+
+## The data behind an AI answer
+
+Just inspecting the output from a conversation with the trip planner won't tell Twig's engineers:
+
+- Which request produced each answer
+- What information the planner used to produce each answer
+- Whether the planner remembers a visitor's requests from one message to another
+
+So they start with the visitor's first request: a forest stay for four. They open the request's <Term name="trace">trace</Term>, which groups all the elements of that request.
+
+Inside the trace, a <Term name="generation">generation</Term> records the model call: its input, answer, model, cost, and timing. The visitor just sees the recommendation, but Twig's engineers can also see the catalog information the model received to give that recommendation.
+
+Send the forest request, then inspect the information behind the recommendation:
+
+<AioRequestFigure />
+
+Seeing the input lets Twig's engineers check the trip planner's answer against the listing instead of relying on the answer's own claim.
+
+## Check the model's memory
+
+In this conversation, the visitor changed their mind and asked for a beach stay instead. In that request, they said "Actually, I'd prefer somewhere with beach access." The visitor hadn't repeated "for four", but it's likely they're still looking for a stay for four.
+
+Twig's engineers want to know whether the trip planner remembers the visitor wanted a stay for four, across all messages in the conversation. So they inspect the next generation's input. It includes the earlier messages and the group size, with the recommendation of Flamingo's Envy, which does accommodate four.
+
+To follow the related requests together, Twig's engineers open the visitor's <Term name="ai session">AI session</Term>: the conversation containing those requests. Each request still has its own trace inside that session.
+
+Continue the conversation, then ask whether the beach stay has a full kitchen:
+
+<AioConversationFigure />
+
+For the kitchen question, the input identifies Flamingo's Envy and includes "Full kitchen" in its amenities. That connects the answer to the right listing.
+
+## Find the cause of an incorrect answer
+
+Then another visitor reports a bug: they asked the trip planner for a city stay for four, and it recommended Le Nid Chic, a studio that fits two.
+
+Twig's engineers find the request in AIO and open its trace. A <Term name="span">span</Term> records an operation within a trace. They inspect the span for Twig's catalog-search function called `search_stays`.
+
+Compare the search input with the returned listing, then inspect the same request after the engineers fix the search:
+
+<AioSearchFixFigure />
+
+The span shows the cause: the catalog-search code wasn't filtering by guest count. Twig's engineers add the filter, rerun the request, and use the new trace to verify the change. The prompt stays the same, but now search supplies the right result.
+
+Notice the request has `$ai_is_error: false` because the model call _completed_, even if it returned the wrong answer. Twig's engineers use the recorded input and output to investigate correctness separately from call failures.
+
+## Keep context to investigate later
+
+The city bug shows Twig's engineers what they need to retain:
+
+- The visitor's request for four people
+- The search input that omitted the guest count
+- The returned studio's capacity
+- The incorrect recommendation
+
+Without those records, the engineers couldn't tell whether the search or the model caused the problem.
+
+Twig's engineers choose to capture that information for trip planner requests. They configure Twig to remove names, email addresses, and booking references before sending the content to PostHog. They leave <Term name="privacy mode">Privacy mode</Term> off for these calls because it would omit the inputs and answers they need to investigate. Privacy mode prevents that content from being captured – it doesn't selectively redact personal details.
+
+PostHog retains large AI properties, including recorded inputs and answers, for a [limited time](/docs/ai-observability/data-retention). Before that window expires, Twig's engineers save the city request and its catalog facts as a test case, with the expected outcome: explain that no city stay fits four people. That gives the engineers a lasting way to check whether the same bug returns.
+
+## Investigate a request in your project
+
+Copy this prompt into [PostHog AI](https://app.posthog.com/#panel=max:Help%20me%20investigate%20an%20AI%20answer%20in%20my%20project.%20Show%20a%20few%20recent%20traces%20with%20recorded%20inputs%20and%20outputs%20so%20I%20can%20choose%20one%2C%20or%20ask%20for%20a%20trace%20link%20if%20I%20already%20have%20it.%20For%20that%20request%2C%20show%20the%20model%20input%2C%20tool%20inputs%20and%20results%2C%20answer%2C%20and%20error%20status.%20If%20session%20data%20exists%2C%20show%20the%20related%20conversation%20turns%20and%20whether%20the%20follow-up%20received%20the%20context%20it%20needed.%20Explain%20the%20earliest%20recorded%20step%20that%20could%20account%20for%20an%20incorrect%20answer.%20Link%20to%20the%20evidence%20and%20identify%20missing%20information%20before%20drawing%20a%20conclusion.):
+
+<div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+
+```text
+Help me investigate an AI answer in my project. Show a few recent traces with recorded inputs and outputs so I can choose one, or ask for a trace link if I already have it. For that request, show the model input, tool inputs and results, answer, and error status. If session data exists, show the related conversation turns and whether the follow-up received the context it needed. Explain the earliest recorded step that could account for an incorrect answer. Link to the evidence and identify missing information before drawing a conclusion.
+```
+
+</div>
+
+<AioChapterFooter nextLabel="Online evaluations" nextHref="/learn/ai-observability/pocket-guide/online-evaluations">
+
+[Traces](/docs/ai-observability/traces) · [Generations](/docs/ai-observability/generations) · [Sessions](/docs/ai-observability/sessions) · [Privacy mode](/docs/ai-observability/privacy-mode)
+
+</AioChapterFooter>
+
+</RightPage>

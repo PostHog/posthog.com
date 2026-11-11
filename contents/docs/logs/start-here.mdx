@@ -23,7 +23,7 @@ import LogsInstallationPlatforms from "./installation/_snippets/installation-pla
     icon="IconCode"
 >
 
-PostHog Logs works with any OpenTelemetry client. No PostHog-specific packages required. Use the OTel SDKs you already have, point them at PostHog's HTTP endpoint, and drop in your project token.
+PostHog Logs works with any OpenTelemetry client. Use the OTel SDKs you already have, point them at PostHog's HTTP endpoint, and drop in your project token.
 
 On the frontend, our [JavaScript web SDK](/docs/logs/installation/javascript), [React Native SDK](/docs/logs/installation/react-native), [iOS SDK](/docs/logs/installation/ios), and [Android SDK](/docs/logs/installation/android) include first-class logging support.
 
@@ -225,7 +225,7 @@ PostHog's Logs is built to be cost-effective by default, with a generous free ti
 - First 10 GB of ingested logs per month are free
 - Above 10 GB we have usage-based pricing at $0.25/GB with discounts
 - All logs are retained 14 days by default. Set custom retention per service or per source for $0.05/GB per month retained – see [logs pricing](/docs/logs/pricing#retention) for more details
-- Set billing limits to avoid surprise charges
+- Set billing limits to avoid surprise charges (they don't cap custom retention)
 - See our [pricing page](/docs/logs/pricing) for more up-to-date details
 
 ---

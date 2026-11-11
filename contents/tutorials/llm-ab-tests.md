@@ -56,8 +56,8 @@ Run the following commands in your root directory:
 
 ```bash
 # in the root directory
-npm install posthog-node
-npm install posthog-js @posthog/react
+npm install posthog-node@5
+npm install posthog-js@1 @posthog/react@1
 touch src/app/providers.js
 ```
 
@@ -132,7 +132,7 @@ Now that we have PostHog set up, the next step is to capture events to use as ou
 
 To do this, we capture an event every time clicks the **Yes** or **No** buttons when asked if the LLM response was helpful. We assign a score of **+1** if they click Yes and **-1** if No.
 
-Update the code in `recipe-builder/page.js` to import the [`usePostHog()`](/docs/libraries/react#using-posthog-js-functions) hook and capture events in the `handleYesClick` and `handleNoClick` functions:
+Update the code in `recipe-builder/page.js` to import the [`usePostHog()`](/docs/libraries/react#calling-posthog-methods) hook and capture events in the `handleYesClick` and `handleNoClick` functions:
 
 ```js file=recipe-builder/page.js
 'use client';

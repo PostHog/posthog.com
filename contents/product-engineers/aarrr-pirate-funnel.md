@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/aarrr-pirate-funnel/pirate-metrics.jpeg
 featuredImageType: full
+ogImage: generated
 tags:
   - Product analytics
   - Product engineers
@@ -76,7 +77,7 @@ So those are the fundamentals of the pirate metrics framework, but why should yo
 
 So you're sold on the AARRR framework, how do you get started?
 
-It all starts with how you track user behavior in your product. While you can use Google Analytics to track some pirate metrics, it's best to use a product analytics tool like PostHog, [Amplitude](/blog/posthog-vs-amplitude) or [Mixpanel](/blog/posthog-vs-mixpanel).
+It all starts with how you track user behavior in your product. While you can use Google Analytics to track some pirate metrics, it's best to use a product analytics tool like PostHog, [Amplitude](/compare/posthog-vs-amplitude) or [Mixpanel](/blog/posthog-vs-mixpanel).
 
 > ☠️ **Try our AARRR dashboard template:** PostHog users can use our [customizable AARRR pirate metrics template](/templates/aarrr-dashboard) to get started. Simply input your events and tweak as you require.
 

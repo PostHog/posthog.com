@@ -7,39 +7,33 @@ showTitle: true
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
+PostHog Self-driving is priced on usage. You pay for the work agents do on your behalf: watching the [sources](/docs/self-driving/inbox/sources) you turn on, running [scouts](/docs/self-driving/scouts), researching [reports](/docs/self-driving/reports), and, if you turn them on, opening pull requests.
 
-Self-driving is in open beta and pricing is subject to change. It's improving quickly – expect rough edges, and expect them to disappear fast.
+Self-driving is charged in [AI credits](/docs/posthog-ai/pricing), the same unit other AI features in PostHog use. **1 AI credit = $0.01**.
 
-</CalloutBox>
+The number of credits each piece of work uses varies with how much effort it takes. A quick check uses few credits, and a deep investigation uses more.
 
-PostHog self-driving is priced on an outcome basis, which means you only pay for a completed piece of work.
+## Your first month
 
-You pay a flat **$15 per pull request**: an actionable [report](/docs/self-driving/reports) with a code change attached, surfaced in your [inbox](/docs/self-driving/inbox).
+Your first month of Self-driving comes with **1,000 AI credits, worth $10**, so you can see what the agents find in your product before you pay anything. During your first month, Self-driving creates up to 5 reports and runs up to 3 scouts. After that, there's no recurring free tier. You pay for what you use.
 
-You're only billed for actionable reports that become a pull request. Reports that aren't actionable, or that need your input instead of a code change, are always free.
+## How spend builds up
 
-## How PostHog assesses actionability
+Knowing where spend comes from tells you which settings shape it.
 
-Before a [report](/docs/self-driving/reports) can become a pull request, an agent investigates it. It digs into your codebase and your PostHog data to confirm the problem is real and to work out whether there's a concrete change it could make. Based on what it finds, every report lands in one of two states:
+- **Sources:** Each source you turn on sends [signals](/docs/self-driving/signals) to Self-driving. You pay for processing and grouping those signals, and for researching the reports they form.
+- **Scout runs:** Each scheduled scout run costs money, whether it finds something or not. A scout's schedule affects its spend more than what it finds.
+- **Pull requests:** Pull requests are off by default. If you turn them on, writing a pull request for an actionable report costs money.
 
-- **PR (= actionable):** There's a clear code change an agent can make right now.
-- **Report (= needs input):** A finding worth your attention that requires input, such as business context or a trade-off between several valid approaches.
+## Track your spend
 
-## What's free
+Self-driving shows your spend in these places:
 
-- Non-actionable reports surfaced in your inbox (a problem without a fix)
-- Your first 3 pull requests each month
+- **Usage table:** An overview of spend per source type and across your scouts in the current billing period. Find it in the **Settings** tab in Self-driving.
+- **Sources:** The **Sources** tab in Self-driving shows each source's spend in the current billing period.
+- **Scouts:** The **Scouts** tab in Self-driving shows each scout's average cost per run in the scout list.
 
-## Track your self-driving usage
-
-Each pull request you're billed for:
-
-- Appears in your usage alongside the rest of your PostHog spend
-- Respects a dollar **billing limit** you set
-- Pauses when you hit that limit, until usage resets next billing period
-
-Track your spend on the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages.
+Self-driving spend also appears in your usage alongside the rest of your PostHog spend, on the [billing overview](https://app.posthog.com/organization/billing/overview) and [billing usage](https://app.posthog.com/organization/billing/usage) pages.
 
 <CalloutBox icon="IconInfo" title="Important" type="fyi">
 
@@ -47,39 +41,71 @@ Usage data may take up to 24 hours to appear on the billing overview and billing
 
 </CalloutBox>
 
-## Control your self-driving spend
+## Understand and optimize your usage
 
-You can control your self-driving spend on both the usage and billing side.
+There are two ways to understand and optimize your Self-driving usage:
 
-### Usage
+- [Ask your agent](#ask-your-agent) to analyze your usage and recommend changes. This is the easiest way.
+- [Make changes manually](#make-changes-manually) to your sources, scouts, and other settings.
 
-* Disable [signal sources](/docs/self-driving/inbox/sources) with limited usefulness to you
-* Disable types of [scouts](/docs/self-driving/scouts) with limited usefulness to you
+### Ask your agent
 
-<CalloutBox icon="IconInfo" title="Coming soon" type="fyi">
+Ask your agent to run the [`managing-self-driving-spend`](https://github.com/PostHog/posthog/blob/master/products/signals/skills/managing-self-driving-spend/SKILL.md) skill through the [PostHog MCP](/docs/model-context-protocol), with a prompt like "Which sources and scouts drive my Self-driving usage?" or "How can I get more out of my Self-driving setup?"
 
-We're also considering letting you sample your data to control usage. If that's something you'd find useful, get in touch via in-app support.
+The skill:
+
+- Breaks your spend down by source, scout, and day
+- Compares each source and scout's spend with how many of its reports got resolved
+- Recommends changes ranked by impact, with what each one saves and what you give up
+- Applies a change only after you confirm it
+
+### Make changes manually
+
+#### Sources
+
+Your sources decide which reports get researched, so start here. [Turn off a source](/docs/self-driving/inbox/sources#configure-sources) to stop Self-driving from watching it. Reports that already exist stay in your inbox.
+
+Before you turn off a whole source, check whether one part of it drives the spend. Some sources let you turn down part of the signals they send:
+
+| Source                                         | What you can turn down                                                                                                                                                  |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Error Tracking](/docs/error-tracking)         | Turn new, reopened, and spiking issues off separately.                                                                                                                  |
+| [Replay Vision](/docs/replay-vision)           | Stop a scanner from sending findings to your inbox while it keeps scanning, lower the share of recordings it scans, or turn it off.                                     |
+| Linear                                         | Choose which teams' issues Self-driving watches.                                                                                                                        |
+
+Other sources, such as support tickets, have no setting that selects part of the source. Keep them, turn them off, or [steer them](#steering-instructions).
+
+#### Scouts
+
+- **Pause a scout:** Stops its scheduled runs. Its past reports stay in your inbox.
+- **[Run a scout less often](/docs/self-driving/scouts#setting-a-scouts-schedule):** Spend falls with the number of runs. Going from hourly to every 6 hours cuts that scout's spend by about five sixths.
+
+A scout that rarely creates reports can still be useful if it keeps existing reports up to date. Check what it edits before you pause it.
+
+#### Steering instructions
+
+[Steering instructions](/docs/self-driving/steering) tell scouts and research agents what to focus on and what to skip, for example "Skip support tickets that are low-priority questions about billing." Some sources also take their own [guidance](/docs/self-driving/inbox/sources#steer-a-source-with-guidance) about what to skip, but not every source supports it yet.
+
+Steering changes what agents spend effort on, not how much work arrives, so its effect on spend is hard to predict. Check your spend again after two weeks.
+
+#### Pull requests
+
+Pull requests are optional and off by default. Reports land in your inbox either way.
+
+- **PR generation:** Turn on automatic pull requests for actionable reports.
+- **Priority threshold:** Set the lowest report priority that opens a pull request automatically. Lower-priority fixes then need a manual start. You can also set your own threshold under **Your overrides**. The priorities, from highest to lowest, are **P0 – Critical**, **P1 – High**, **P2 – Medium**, **P3 – Low**, and **P4 – Minimal**.
+
+#### Limits
+
+| Limit                  | How it works                                                                                                                                                                                                                         |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Billing limit**      | A monthly cap on Self-driving spend. PostHog sets a default **$150** billing limit, which you can raise, lower, or remove on the [billing settings](https://app.posthog.com/organization/billing) page.                                |
+| **Daily report limit** | Caps how many new reports appear each day, in your project's timezone. It saves money on days with spikes. Set it in the **Settings** tab in Self-driving.                                                                            |
+
+When you reach either limit, new signals from your sources are dropped, scheduled scout runs are skipped, and research pauses. The billing limit resets at the next billing period, and the daily report limit resets at midnight.
+
+<CalloutBox icon="IconWarning" title="Signals past a limit are lost" type="caution">
+
+Limits drop new signals instead of queueing them. Issues found after you reach a limit never reach your inbox, even after the limit resets.
 
 </CalloutBox>
-
-### Billing
-
-* **Real-time tracking:** See costs as you go
-* **Custom billing limit:** Set hard caps to prevent overspending
-* **Default billing limit:** PostHog sets a default $150 billing limit so you don't accidentally rack up costs without a ceiling
-* **Usage alerts:** Get notified when you hit key thresholds
-
-Manage your billing limit and review your spend on the [billing settings](https://app.posthog.com/organization/billing) page.
-
-When you hit your billing limit, report and PR generation is paused until your usage resets at the next billing period.
-
-## Refunds
-
-Self-driving is in open beta, and we don't get it right every time yet.
-
-You're charged per PR, so a PR should be worth paying for. We hold every PR to two standards:
-
-* **Accurate report:** The report identifies a real issue and describes it correctly, without false positives or hallucinated problems.
-* **Solves the stated problem:** The code actually addresses the issue described in the report, rather than a tangent or partial fix.
-
-If a PR doesn't meet this bar, we'll refund it. Get in touch via in-app support and tell us what went wrong.

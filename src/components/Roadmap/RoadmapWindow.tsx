@@ -95,6 +95,7 @@ export default function RoadmapWindow({
                     dateCompleted,
                     socialSharing,
                     profiles,
+                    tags,
                 },
             },
         } = await fetch(
@@ -122,6 +123,7 @@ export default function RoadmapWindow({
             dateCompleted: dateCompleted || dayjs().format('YYYY-MM-DD'),
             social: { ...socialDefaults, ...(socialSharing ? JSON.parse(socialSharing) : {}) },
             author: profiles?.data?.[0] || undefined,
+            tags: tags || [],
         })
     }
 

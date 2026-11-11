@@ -5,7 +5,7 @@ import * as Icons from '@posthog/icons'
 import ReaderView from 'components/ReaderView'
 import OSButton from 'components/OSButton'
 import { AppsList } from 'components/Docs/AppsList'
-import Book, { BookShelf } from 'components/PocketGuides/Book'
+import Book, { BookShelf } from 'components/Learn/PocketGuides/Book'
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 import { TWIG_URL } from '../../constants'
@@ -110,13 +110,6 @@ const surfaces = [
         icon: 'IconTerminal',
         color: 'green',
         description: 'Query your data and ship work from your terminal.',
-    },
-    {
-        name: 'Desktop',
-        url: '/docs/posthog-desktop',
-        icon: 'IconCoffee',
-        color: 'burnt-orange',
-        description: 'Run tasks, review code, and use any model from your desktop.',
     },
 ]
 const sdkSections = [

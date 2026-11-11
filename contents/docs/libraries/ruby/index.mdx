@@ -21,6 +21,10 @@ It uses an internal queue to make calls fast and non-blocking. It also batches r
 
 > **Use a single client instance (singleton)** — Create the PostHog client once and reuse it throughout your application. Multiple client instances with the same API key can cause dropped events and inconsistent behavior. The SDK logs a warning if it detects multiple instances.
 
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
+
+<AgentIntegrationSection framework="Ruby" />
+
 ## Installation
 
 import RubyInstall from '../../integrate/_snippets/install-ruby.mdx'
@@ -47,15 +51,21 @@ Available client options:
 |--------|------|---------|-------------|
 | `api_key` | String | **required** | Your PostHog project token. |
 | `host` | String | `https://us.i.posthog.com` | Fully qualified PostHog API host. Include the protocol, for example `https://us.i.posthog.com` or `https://eu.i.posthog.com`. |
-| `personal_api_key` | String | `nil` | Personal API key. Required for local feature flag evaluation and remote config payloads. |
+| `secret_key` | String | `nil` | Personal API key (`phx_...`) or project secret API key (`phs_...`) for local feature flag evaluation and remote config payloads. |
+| `personal_api_key` | String | `nil` | Deprecated alias for `secret_key`. If both are set, `secret_key` takes precedence. |
 | `max_queue_size` | Integer | `10000` | Maximum number of events to keep in the async queue before dropping new events. |
 | `batch_size` | Integer | `100` | Maximum number of events to send in one async batch. |
+| `flush_interval_seconds` | Numeric | `5` | Maximum seconds to wait for an async batch to fill before sending. |
+| `compress_request` | Boolean | `true` | Gzip-compress batch uploads. |
+| `is_server` | Boolean | `true` | Mark events as server-side with `$is_server`. Set to `false` for client or CLI apps so device OS attribution works normally. |
 | `test_mode` | Boolean | `false` | Keep events queued and do not send them. Useful for tests. |
 | `sync_mode` | Boolean | `false` | Send events synchronously on the calling thread. Useful in forking environments like Sidekiq and Resque. |
 | `on_error` | Proc | no-op | Callback called as `on_error.call(status, error)` for API or serialization errors. |
 | `feature_flags_polling_interval` | Integer | `30` | Seconds between local feature flag definition polls. |
 | `feature_flag_request_timeout_seconds` | Integer | `3` | Timeout, in seconds, for feature flag requests. |
-| `before_send` | Proc | `nil` | Callback that receives the event hash before it is queued or sent. Return a modified event hash, or `nil` to drop the event. |
+| `feature_flag_request_max_retries` | Integer | `1` | Retries after transient flag request failures. Set to `0` to disable. Retry waits add to calling-thread latency. |
+| `feature_flags_async_load` | Boolean | `false` | Load local flag definitions on the background polling thread instead of blocking client initialization. |
+| `before_send` | Proc | `nil` | Callback that receives the event hash before it is queued or sent. Return a modified event hash, or `nil` to drop the event. If the callback raises, the event is dropped. |
 | `disable_singleton_warning` | Boolean | `false` | Suppress warnings about multiple clients with the same API key. Use only when you intentionally need multiple clients. |
 | `skip_ssl_verification` | Boolean | `false` | Disable SSL certificate verification. Intended only for local development or custom deployments. |
 | `flag_definition_cache_provider` | Object | `nil` | Provider for distributed feature flag definition caching. See [distributed flag definition caching](#distributed-flag-definition-caching). |
@@ -86,6 +96,17 @@ posthog.capture({ distinct_id: 'user_123', event: 'script_finished' })
 posthog.flush
 posthog.shutdown
 ```
+
+From version 3.22.0, both methods accept `timeout:` in seconds and return a Boolean:
+
+```ruby
+flushed = posthog.flush(timeout: 5)
+stopped = posthog.shutdown(timeout: 5)
+```
+
+In async mode, both return `true` when pending events are sent, or `false` on timeout. `flush` leaves the client running. `shutdown` stops it and drops events still queued at the deadline. Cleanup can take up to one extra second. Without a timeout, both wait indefinitely.
+
+With `sync_mode: true`, both wait for in-flight event requests without honoring `timeout:`.
 
 ## Identifying users
 
@@ -179,6 +200,17 @@ import RubyFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/f
 
 <RubyFeatureFlagsCode />
 
+### Default values
+
+From version 3.27.0, use `default_value:` when a flag has no value:
+
+```ruby
+flags = posthog.evaluate_flags("user_123")
+show_checkout = flags.enabled?("new-checkout", default_value: true)
+```
+
+The default applies only when the snapshot has no value for the flag. Evaluated values, including `false` and server-reported failures, take precedence. Without a default, missing flags return `false`.
+
 ### Legacy single-flag methods
 
 The following methods are still available during the migration period, but are deprecated. Prefer `evaluate_flags` for new code.
@@ -191,13 +223,42 @@ The following methods are still available during the migration period, but are d
 | `posthog.get_feature_flag_result(flag_key, distinct_id, ...)` | `posthog.evaluate_flags(distinct_id, ...)` and read `get_flag` / `get_flag_payload` |
 | `posthog.capture({ ..., send_feature_flags: true })` | `posthog.capture({ ..., flags: flags })` |
 
-### Local Evaluation
+### Local evaluation
 
 import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
 <LocalEvaluationIntro />
 
-For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
+Set `secret_key` to a personal or project secret API key with feature flag read access. Keep it on your server. Remote evaluation does not require it. See the [local evaluation guide](/docs/feature-flags/local-evaluation) for setup.
+
+#### Load definitions asynchronously
+
+From version 3.20.0, set `feature_flags_async_load: true` to avoid waiting for local flag definitions during client initialization:
+
+```ruby
+posthog = PostHog::Client.new({
+  api_key: "<ph_project_token>",
+  secret_key: ENV.fetch("POSTHOG_SECRET_KEY"),
+  feature_flags_async_load: true
+})
+
+posthog.feature_flags_loaded?
+```
+
+Until `feature_flags_loaded?` returns `true`, evaluations use a remote request. With `only_evaluate_locally: true`, unavailable flags have no value instead.
+
+#### Diagnose unresolved flags
+
+From version 3.29.0, inspect `unresolved_flags` to see why flags could not be evaluated:
+
+```ruby
+flags = posthog.evaluate_flags("user_123", only_evaluate_locally: true)
+flags.unresolved_flags.each do |key, reason|
+  posthog.logger.warn("Flag #{key} could not resolve locally: #{reason}")
+end
+```
+
+Reasons are `experience_continuity`, `unsupported_definition`, `unresolved_dependency`, or `missing_context`. Unresolved flags use the missing-flag default. The SDK also warns about definitions that cannot be evaluated locally.
 
 #### Evaluating feature flags locally in unicorn server
 
@@ -207,7 +268,7 @@ If you have `preload_app true` in your unicorn config, you can use the [`after_f
 after_fork do |_server, _worker|
   $posthog = PostHog::Client.new({
     api_key: '<ph_project_token>',
-    personal_api_key: '<ph_personal_api_key>',
+    secret_key: ENV.fetch("POSTHOG_SECRET_KEY"),
     host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }
   })
@@ -222,7 +283,7 @@ If you use Puma with multiple workers, you can use the `on_worker_boot` hook (wh
 on_worker_boot do
   $posthog = PostHog::Client.new({
     api_key: '<ph_project_token>',
-    personal_api_key: '<ph_personal_api_key>',
+    secret_key: ENV.fetch("POSTHOG_SECRET_KEY"),
     host: '<ph_client_api_host>',
     on_error: Proc.new { |status, msg| print msg }
   })
@@ -233,7 +294,7 @@ end
 
 `flag_definition_cache_provider` shares locally evaluated feature flag definitions across multiple workers or processes. The provider object must implement:
 
-- `flag_definitions` – returns cached definitions as a hash with `:flags`, `:group_type_mapping`, and `:cohorts`, or `nil` if empty.
+- `flag_definitions` – returns cached definitions as a hash with `:flags`, `:group_type_mapping`, `:cohorts`, `:minimal_flag_called_events`, and `:property_matching_version`, or `nil` if empty.
 - `should_fetch_flag_definitions?` – returns `true` if this process should fetch fresh definitions from PostHog.
 - `on_flag_definitions_received(data)` – stores freshly fetched definitions.
 - `shutdown` – releases locks or other resources.
@@ -241,14 +302,20 @@ end
 ```ruby
 posthog = PostHog::Client.new({
   api_key: '<ph_project_token>',
-  personal_api_key: '<ph_personal_api_key>',
+  secret_key: ENV.fetch("POSTHOG_SECRET_KEY"),
   flag_definition_cache_provider: my_cache_provider
 })
 ```
 
+Store the complete snapshot, including `property_matching_version`, to preserve flag matching behavior.
+
+From version 3.27.1, cache-only clients can omit `secret_key`. Without a key, they cannot fetch definitions if the cache is unavailable.
+
+In Rails, set `config.flag_definition_cache_provider` inside `PostHog.init` from `posthog-rails` 3.19.0.
+
 ### Remote config payloads
 
-Use `get_remote_config_payload` to fetch the decrypted remote config payload for a flag. This requires `personal_api_key`.
+Use `get_remote_config_payload` to fetch the decrypted remote config payload for a flag. This requires `secret_key`.
 
 ```ruby
 payload = posthog.get_remote_config_payload('flag-key')
@@ -342,6 +409,11 @@ The `capture_exception` method accepts the following parameters:
 | `distinct_id` | `String` | The distinct ID of the user. Optional; request context can provide a default, otherwise the SDK generates a UUID. |
 | `additional_properties` | `Hash` | Additional properties to attach to the exception event. Optional. |
 | `flags` | `PostHog::FeatureFlagEvaluations` | Optional keyword argument. Adds the same feature flag properties as `capture({ flags: flags })`. |
+| `mechanism` | `Hash` | Optional keyword argument to override the capture mechanism. Manual captures default to `generic` with `handled: true`. |
+
+Reports include chained causes and active OpenTelemetry trace and span IDs, when available. Repeated captures of the same mutable exception are ignored after the first successful report. Include identity and context on the first call.
+
+To associate errors with a deployment, see [link Ruby releases](/docs/error-tracking/link-releases/ruby).
 
 You can also override the [fingerprint](/docs/error-tracking/fingerprints) to customize how exceptions are grouped into issues:
 
@@ -354,6 +426,10 @@ posthog.capture_exception(
   }
 )
 ```
+
+## Transactional emails
+
+From version 3.30.0, use `posthog.emails` to send emails and check delivery status. See [send transactional emails with Ruby](/docs/workflows/transactional-emails/ruby) for setup and examples.
 
 ## Debug mode
 

@@ -10,7 +10,7 @@ availability:
 
 We want you to have the power to transform and export your data in real time, without the headache of maintaining your own service to get it done.
 
-Enter Hog: the language that drives our [realtime destinations](/docs/cdp/destinations).
+Enter Hog: the language that drives our [realtime destinations](/docs/data-pipelines/destinations).
 
 We’ve written Hog destination templates for dozens of services. But you can also write destinations yourself. Here’s how it works.
 
@@ -18,7 +18,7 @@ We’ve written Hog destination templates for dozens of services. But you can al
 
 ## Hog by example: webhook
 
-When creating a destination, you’ll start with an input interface sheet. This enables easy changes and maintenance to your destination. 
+When creating a destination, you’ll start with an input interface sheet. This enables easy changes and maintenance to your destination.
 
 You can include additional inputs while editing the destination:
 
@@ -27,7 +27,7 @@ You can include additional inputs while editing the destination:
 
 While editing your destination, each input's property name is noted beside its title.
 
-Let's walk through the default [webhook template](/docs/cdp/destinations/webhook). It's a great starting point for your own destinations.
+Let's walk through the default [webhook template](/docs/data-pipelines/destinations/webhook). It's a great starting point for your own destinations.
 
 ```hog
 
@@ -86,6 +86,7 @@ let table_patch := {
   'content': inputs.body
 }
 ```
+
 ### Keep in mind
 
 Hog was designed to be syntax-compatible with our SQL flavor. This means all our SQL expressions work as Hog code.
@@ -213,7 +214,6 @@ print(square(4))
 
 See [Hog's standard library](#hogs-standard-library) for a list of built-in functions.
 
-
 ### Logic
 
 ```rust
@@ -268,7 +268,6 @@ for (let food, value in obj) {
 }
 ```
 
-
 ## Hog's standard library
 
 Hog's standard library includes the following functions and will expand. To see the most up-to-date list, check the [Python VM's `stl/__init__.py` file](https://github.com/PostHog/posthog/blob/master/common/hogvm/python/stl/__init__.py).
@@ -319,6 +318,7 @@ Hog's standard library includes the following functions and will expand. To see 
 - `substring(arg: string, start: int, length?: int): string` - `start` is 1-based, e.g. `substring('hello world',1,5)` will return `hello`
 
 ### Objects and arrays
+
 - `length(arg: any[] | object): integer`
 - `empty(arg: any[] | object): boolean`
 - `notEmpty(arg: any[] | object): boolean`
@@ -340,6 +340,7 @@ Hog's standard library includes the following functions and will expand. To see 
 - `arrayCount(callback: (arg: any): boolean, array: any[]): integer`
 
 ### Date functions
+
 - `now(): DateTime`
 - `toUnixTimestamp(input: DateTime | Date | string, zone?: string): float`
 - `fromUnixTimestamp(input: number): DateTime`
@@ -359,6 +360,7 @@ Hog's standard library includes the following functions and will expand. To see 
 - `md5Hex(arg: string): string`
 - `sha256Hex(arg: string): string`
 - `sha256HmacChainHex(arg: string[]): string`
+- `ed25519Verify(message: string, signature: string, publicKey: string, encoding?: string): boolean` - Verifies an Ed25519 signature. `encoding` specifies the format for `signature` and `publicKey` (`'hex'` or `'base64'`, defaults to `'hex'`). Returns `true` for valid signatures, `false` for invalid or malformed input. Not supported in the browser runtime.
 
 ## Why Hog?
 
@@ -429,5 +431,3 @@ You can then run the complied `.hoge` file automatically with `bin/hog`.
 ```bash
 bin/hog hogvm/__tests__/mandelbrot.hoge
 ```
-
-
