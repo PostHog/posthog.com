@@ -38,6 +38,18 @@ All tables sync incrementally on the `date` field.
 - **Initial sync** - The first sync can pull up to approximately 1,000 days of historical data, the maximum window supported by the AppsFlyer aggregate Pull API.
 - **One app per source** - Each source connects to a single AppsFlyer app. To import data from multiple apps, create a separate source for each one.
 
+## Troubleshooting
+
+### Daily report API quota exhausted
+
+If setup reports that your AppsFlyer account has used up its daily report API quota, try connecting again after the quota resets. This message indicates a quota limit, so changing valid credentials won't resolve it.
+
+AppsFlyer can return HTTP `403` or `429` with `limit reached` in the response body when the quota is exhausted. PostHog retries sync requests that receive these responses. If the sync still fails, retry it after the quota resets.
+
+### Invalid credentials or app access
+
+For other authentication or access errors, check the API token (V2), your access to the app, the App ID from **My apps**, and whether your AppsFlyer subscription includes the aggregate Pull API.
+
 ## Configuration
 
 <SourceParameters />
