@@ -50,11 +50,11 @@ export const buildMemberQuery = (m: GeoProfile): string | null => {
 export const buildMemberGeocode = (m: GeoProfile): MemberGeocode | null => {
     const location = m.location?.trim()
     const country = m.country?.trim()
-    const query = location || country
+    const countryFilter = country && /^[a-z]{2}$/i.test(country) ? country.toLowerCase() : null
+    const query = countryFilter ? location || country : buildMemberQuery(m)
     if (!query) {
         return null
     }
-    const countryFilter = country && /^[a-z]{2}$/i.test(country) ? country.toLowerCase() : null
     return { query, countryFilter }
 }
 
