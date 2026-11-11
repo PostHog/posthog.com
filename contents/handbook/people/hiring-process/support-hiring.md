@@ -56,7 +56,9 @@ If you've been invited to a PostHog [SuperDay](/handbook/people/hiring-process#4
 
 ##### What the SuperDay looks like
 
-You will receive the challenge at the start of your day and send your work at the end. The challenge represents the day-to-day work of a TSE at PostHog, such as working on tickets. It is deliberately open, like real work. You will need to ask questions, make decisions, and decide what is most important.
+You get the challenge at the start of your day and send your work at the end. It’s a mix of what a TSE does here: support tickets, technical work, and some bigger questions about how we run support and where it goes next. There’s more than anyone could finish in a day, on purpose. Choose what’s most valuable to work on and take each thing as far as you can.
+
+The brief won’t tell you everything, so you’ll need to ask questions. You won’t be penalized for asking.
 
 During the day, you will also have:
 
