@@ -17,7 +17,7 @@ Scheduled throughout the day, you'll also have:
 
 - **A debugging session (45 min, not all roles)** -- a separate pairing session where you'll work through bugs and features in an existing codebase with an interviewer. This is a different codebase from your project.
 - **A check-in call** -- your SuperDay buddy (the same engineer available to help you in Slack) will review your project progress partway through the day, ask about your decisions, and offer feedback.
-- **A short chat with a co-founder or exec** -- a brief conversation about culture and motivation.
+- **A short chat with a co-founder, Blitzscale Team member, or relevant Group Lead** -- a brief conversation about culture and motivation.
 
 You'll also have access to a dedicated Slack channel with the team throughout the day. Use it -- share progress, ask questions, surface blockers.
 

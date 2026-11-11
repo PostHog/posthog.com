@@ -11,7 +11,7 @@ You should consider the following tools to help you manage data collection:
 
 | Feature | Description |
 |---------|-------------|
-| [Asking for opt out](#asking-for-opt-out) | A top-level opt out of all data collection |
+| [Asking for opt out](#asking-for-opt-out) | A top-level opt out of event capture |
 | [Using a consent management platform](#using-posthog-with-a-consent-management-platform-cmp) | Integrate PostHog with a CMP like OneTrust or Cookiebot |
 | [IP data capture](#ip-data-capture) | Control whether client IP addresses are captured or discarded |
 | [Autocapture behavior](#autocapture) | Configure what elements and interactions are automatically captured |
@@ -26,7 +26,12 @@ If you require that certain data never reaches PostHog servers, you can use one 
 
 Before capturing data, you may need to ask your users for consent. PostHog provides a top level switch to control data collection. 
 
-Opting out on a PostHog client will prevent **all data** from being captured and sent to PostHog. This includes any autocaptures, manual captures, and session replays.
+Opting out on a PostHog client stops it from capturing new events. This includes autocaptured events, manual captures, and session replays.
+
+Opting out doesn't affect:
+
+- **Feature flags.** Flags still load while the user is opted out. The SDK sends `/flags` requests that include the distinct ID and any person properties set for flag evaluation.
+- **Events captured before opting out.** Events already queued on the device can still be sent to PostHog after the user opts out.
 
 ### Opting in and out
 You can opt out the current device by calling `posthog.opt_out_capturing()`.
@@ -115,7 +120,7 @@ The problem: if the SDK never loads, it can't count the visitors who ignore or d
 
 The recommended pattern is to load PostHog opted out by default, then opt the user in once they consent:
 
-1. Initialize PostHog with `opt_out_capturing_by_default: true` (see [opting out by default](#opting-out-by-default)) so nothing is captured until the user consents.
+1. Initialize PostHog with `opt_out_capturing_by_default: true` (see [opting out by default](#opting-out-by-default)) so no events are captured until the user consents.
 2. When the user grants consent, call `posthog.opt_in_capturing()`.
 3. When the user withdraws or denies consent, call `posthog.opt_out_capturing()`.
 

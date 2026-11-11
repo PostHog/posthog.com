@@ -59,8 +59,8 @@ export default function MergedFeed(): JSX.Element | null {
 
     return (
         <div className="@container mx-auto mt-24">
-            <h3 className="!mt-0">Self-driving in PostHog, right now</h3>
-            <p>
+            <h3 className="!mt-0 mb-2">Self-driving in PostHog, right now</h3>
+            <p className="mt-0">
                 We run PostHog on PostHog. These pull requests came from Inbox reports on our own product. PostHog wrote
                 each one, and an engineer reviewed and merged it.
             </p>

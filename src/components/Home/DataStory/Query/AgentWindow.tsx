@@ -95,16 +95,20 @@ const GlyphSpinner = () => {
     )
 }
 
+type LightSize = keyof typeof SCENE_SIZE
+
 const LightButton = ({
     color,
     label,
     glyph,
     onClick,
+    size,
 }: {
     color: string
     label: string
     glyph: string
     onClick?: () => void
+    size: LightSize
 }) =>
     onClick ? (
         <button
@@ -117,7 +121,7 @@ const LightButton = ({
             }}
             className={cn(
                 SCENE_TEXT[9],
-                SCENE_SIZE[12],
+                SCENE_SIZE[size],
                 'flex items-center justify-center rounded-full font-sans font-bold leading-none text-black/60'
             )}
             style={{ backgroundColor: color }}
@@ -125,14 +129,14 @@ const LightButton = ({
             <span className="opacity-0 transition-opacity group-hover/lights:opacity-100">{glyph}</span>
         </button>
     ) : (
-        <span className={cn(SCENE_SIZE[12], 'rounded-full')} style={{ backgroundColor: color }} />
+        <span className={cn(SCENE_SIZE[size], 'rounded-full')} style={{ backgroundColor: color }} />
     )
 
-const TrafficLights = ({ onClose, onMinimize }: WindowControls) => (
+const TrafficLights = ({ onClose, onMinimize, size = 12 }: WindowControls & { size?: LightSize }) => (
     <span className="group/lights relative z-10 flex gap-1.5">
-        <LightButton color="#FF5F57" label="Close" glyph="×" onClick={onClose} />
-        <LightButton color="#FEBC2E" label="Minimize" glyph="−" onClick={onMinimize} />
-        <span className={cn(SCENE_SIZE[12], 'rounded-full bg-[#28C840]')} />
+        <LightButton color="#FF5F57" label="Close" glyph="×" onClick={onClose} size={size} />
+        <LightButton color="#FEBC2E" label="Minimize" glyph="−" onClick={onMinimize} size={size} />
+        <span className={cn(SCENE_SIZE[size], 'rounded-full bg-[#28C840]')} />
     </span>
 )
 
@@ -166,17 +170,19 @@ const WindowFrame = ({
     controls,
     className,
     titleBarClassName,
+    lightSize,
     children,
 }: {
     title: React.ReactNode
     controls?: WindowControls
     className?: string
     titleBarClassName?: string
+    lightSize?: LightSize
     children: React.ReactNode
 }) => (
     <div className={cn('flex flex-col overflow-hidden rounded-lg border shadow-xl', WINDOW_HEIGHT, className)}>
         <div className={cn('relative flex shrink-0 items-center px-3 py-2', titleBarClassName)}>
-            <TrafficLights {...controls} />
+            <TrafficLights {...controls} size={lightSize} />
             <span
                 className={cn(
                     SCENE_TEXT[12],
@@ -193,27 +199,43 @@ const WindowFrame = ({
 
 const TERMINAL_TEXT = cn(SCENE_TEXT[12.5], 'font-code leading-[1.55]')
 
-const ClaudeTerminal = ({ state, controls }: TerminalProps) => (
+const INPUT_BOX = 'rounded-md border border-[#5a5752] px-2.5 py-1'
+
+export const ClaudeTerminal = ({
+    state,
+    controls,
+    className,
+    lightSize,
+    suggestion,
+    cwd = '~/acme',
+}: TerminalProps & {
+    cwd?: string
+    className?: string
+    lightSize?: LightSize
+    suggestion?: { prompt: string; onRun: () => void }
+}) => (
     <WindowFrame
-        title="claude — ~/acme"
+        title={`claude — ${cwd}`}
         controls={controls}
-        className={cn(TERMINAL_TEXT, 'border-[#3a3835] bg-[#1F1E1D] text-[#E8E6E3]')}
+        lightSize={lightSize}
+        className={cn(TERMINAL_TEXT, 'border-[#3a3835] bg-[#1F1E1D] text-[#E8E6E3]', className)}
     >
         <ScrollToLatest className="px-3.5 pb-3">
             <div className="mb-3 rounded-md border px-3 py-2" style={{ borderColor: CLAUDE_CLAY }}>
                 <p className="m-0">
                     <span style={{ color: CLAUDE_CLAY }}>✻</span> Welcome to <strong>Claude Code</strong>!
                 </p>
-                <p className="m-0 pl-4 text-[#8F8B85]">cwd: ~/acme</p>
+                <p className="m-0 pl-4 text-[#8F8B85]">cwd: {cwd}</p>
             </div>
             {state.submitted && (
                 <motion.p {...LINE_ENTER} className="m-0 mb-2 text-[#8F8B85]">
                     &gt; {state.question}
                 </motion.p>
             )}
-            {state.calls.length > 0 && (
+            {state.intro && state.calls.length > 0 && (
                 <motion.p {...LINE_ENTER} className="m-0 mb-2">
-                    <span className="mr-2">⏺</span>I'll trace the checkout errors in PostHog.
+                    <span className="mr-2">⏺</span>
+                    {state.intro}
                 </motion.p>
             )}
             {state.calls.map(({ call, done }) => (
@@ -250,10 +272,24 @@ const ClaudeTerminal = ({ state, controls }: TerminalProps) => (
                         </>
                     )}
                 </p>
-                <div className="rounded-md border border-[#5a5752] px-2.5 py-1">
-                    &gt; {state.typed}
-                    <Caret className="bg-[#E8E6E3]" />
-                </div>
+                {suggestion ? (
+                    <button
+                        type="button"
+                        onClick={suggestion.onRun}
+                        className={cn(
+                            INPUT_BOX,
+                            'group flex w-full cursor-pointer items-center gap-2 bg-transparent text-left text-[#8F8B85] hover:border-[#8F8B85]'
+                        )}
+                    >
+                        <span className="truncate group-hover:text-[#E8E6E3]">&gt; {suggestion.prompt}</span>
+                        <span className="ml-auto shrink-0">⏎ run</span>
+                    </button>
+                ) : (
+                    <div className={INPUT_BOX}>
+                        &gt; {state.typed}
+                        <Caret className="bg-[#E8E6E3]" />
+                    </div>
+                )}
                 <p className={cn(SCENE_TEXT[11], 'm-0 mt-1 pl-2.5 text-[#8F8B85]')}>? for shortcuts</p>
             </div>
         </ScrollToLatest>
