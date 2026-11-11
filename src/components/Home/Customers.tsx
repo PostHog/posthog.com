@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import OSTable from 'components/OSTable'
 import OSButton from 'components/OSButton'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { IconRefresh } from '@posthog/icons'
 import { useCustomers } from 'hooks/useCustomers'
+import { WINDOW_BG } from 'constants/frostedSurfaces'
 
 export const COL1 = [
     'ycombinator',
@@ -306,9 +306,9 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
     }
 
     const currentLabels = companyBreakdowns[currentBreakdown as keyof typeof companyBreakdowns]
-    const columns = [
-        { name: currentLabels.col1, width: 'minmax(auto,1fr)', align: 'center' as const },
-        { name: currentLabels.col2, width: 'minmax(auto,1fr)', align: 'center' as const },
+    const groups = [
+        { label: currentLabels.col1, customers: column1 },
+        { label: currentLabels.col2, customers: column2 },
     ]
 
     const renderCustomerWithLink = (customer: any) => (
@@ -340,65 +340,61 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                     </Tooltip>
                 </OSButton>
             ) : (
-                <span className="inline-flex py-1.5 px-2">{renderLogo(customer)}</span>
+                <span className="inline-flex py-1.5 px-2 text-primary">{renderLogo(customer)}</span>
             )}
         </div>
     )
 
-    const rows = [
-        {
-            cells: [
-                {
-                    content: (
-                        <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
-                            {column1.map(renderCustomerWithLink)}
-                        </div>
-                    ),
-                    className: '!p-4',
-                },
-                {
-                    content: (
-                        <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
-                            {column2.map(renderCustomerWithLink)}
-                        </div>
-                    ),
-                    className: '!p-4',
-                },
-            ],
-        },
-    ]
-
     return (
         <div id="customers">
-            <h2>Social proof</h2>
-            <p>Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.</p>
-            <OSTable
-                columns={columns}
-                rows={rows}
-                size="sm"
-                rowAlignment="top"
-                width="full"
-                className="bg-white dark:bg-dark"
-                shadow
-            >
-                <div className="absolute top-2 left-[calc(50%-17px)]">
-                    <OSButton
-                        onClick={toggleBreakdown}
-                        variant="secondary"
-                        size="sm"
-                        className="font-semibold rounded-full [&_span]:rounded-full aspect-square [&_span]:aspect-square disabled:opacity-100"
-                        disabled={isAnimating}
-                        tooltip="Shuffle companies"
-                        icon={
-                            <IconRefresh
-                                className={`size-4 inline-block relative -top-px ${
-                                    isAnimating ? 'animate-spin [animation-direction:reverse]' : ''
-                                }`}
-                            />
-                        }
-                    />
+            <h2 className="mb-2">Social proof</h2>
+            <p className="mt-0">
+                Yes they actually use us, no it's not just some random engineer who tried us out 2+ years ago.
+            </p>
+            <div className="@container">
+                <div className="relative grid grid-cols-2 gap-x-2 @lg:gap-x-4">
+                    {groups.map((group, index) => (
+                        <div
+                            key={`card-${index}`}
+                            className={`pointer-events-none row-start-1 rounded-lg border border-primary ${
+                                index === 0 ? 'col-start-1' : 'col-start-2'
+                            } ${WINDOW_BG}`}
+                        />
+                    ))}
+                    <div className="relative z-10 col-span-2 col-start-1 row-start-1 grid grid-cols-2 gap-x-2 @lg:gap-x-4">
+                        {groups.map((group, index) => (
+                            <div key={`logos-${index}`} className="p-4">
+                                <div className="mb-5 text-center text-sm font-bold text-primary">{group.label}</div>
+                                <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center items-center">
+                                    {group.customers.map(renderCustomerWithLink)}
+                                </div>
+                            </div>
+                        ))}
+                        <div className="pointer-events-auto absolute left-1/2 top-2 -translate-x-1/2">
+                            <Tooltip
+                                trigger={
+                                    <button
+                                        type="button"
+                                        onClick={toggleBreakdown}
+                                        disabled={isAnimating}
+                                        aria-label="Shuffle companies"
+                                        className={`flex size-9 items-center justify-center rounded-full border border-primary text-primary disabled:cursor-default bg-white shadow-md scale-100 hover:top-[-0.5px] hover:scale-[1] active:top-[0.5px] active:scale-[.99] active:shadow-none relative`}
+                                    >
+                                        <IconRefresh
+                                            className={`size-4.5 ${
+                                                isAnimating ? 'animate-spin [animation-direction:reverse]' : ''
+                                            }`}
+                                        />
+                                    </button>
+                                }
+                                delay={0}
+                            >
+                                <p className="text-sm mb-0">Shuffle companies</p>
+                            </Tooltip>
+                        </div>
+                    </div>
                 </div>
-            </OSTable>
+            </div>
             <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
                 Open Customers
             </OSButton>
