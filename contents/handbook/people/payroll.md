@@ -89,4 +89,4 @@ Tell us as soon as you notice we will analyze and fix it. If you were underpaid,
 ## Questions
 
 - For anything that isn't confidential, post in the #team-people-and-ops Slack channel.
-- For anything sensitive about your pay, DM [@Milagros] (https://posthog.slack.com/team/U0B4W74LN83).
+- For anything sensitive about your pay, DM [@Milagros](https://posthog.slack.com/team/U0B4W74LN83).
