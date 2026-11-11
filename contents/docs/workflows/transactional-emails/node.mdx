@@ -9,7 +9,7 @@ The [Node.js SDK](/docs/libraries/node) sends transactional emails from version 
 <details>
 <summary>Prompt for your coding agent</summary>
 
-Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that agents often get wrong.
 
 ```text
 Add PostHog transactional email to this Node.js app with posthog-node.
@@ -143,8 +143,8 @@ new Worker(
 
 Pass the distinct ID that you pass to `identify()` as `distinctId`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinctId` out.
+- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinctId` out.
 
 ## Send content from your code
 
@@ -174,7 +174,7 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 }
 ```
 
-- **`templateKey`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`templateKey`** – Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
 - **`text`** - If you leave it out, PostHog makes it from `html`.
 - **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
 - **`captureEngagement`** - PostHog captures the email's engagement events unless you pass `captureEngagement: false`.

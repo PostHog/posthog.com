@@ -14,8 +14,8 @@ You need a [transactional email](/docs/workflows/transactional-emails#create-a-t
 POST https://us.posthog.com/api/projects/@current/messaging/send/email/
 ```
 
-- **Host** - Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
-- **Project** - `@current` is the project that the key belongs to. You can use your project ID instead.
+- **Host** – Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
+- **Project** – `@current` is the project that the key belongs to. You can use your project ID instead.
 
 ### Request
 
@@ -178,8 +178,8 @@ A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm
 
 Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinct_id` out.
 
 ## Send content from your code
 
