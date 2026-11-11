@@ -343,7 +343,7 @@ export const productAnalytics = {
             {
                 name: 'Amplitude',
                 key: 'amplitude',
-                link: '/blog/posthog-vs-amplitude',
+                link: '/compare/posthog-vs-amplitude',
             },
             {
                 name: 'Mixpanel',

@@ -100,6 +100,34 @@ Community events are better when organizers share what happened, what you learne
 
 PostHog team members who attended or presented at an event can share their feedback directly through our [event feedback form](/events-feedback-form).
 
+## Events during small team offsites
+
+If your team is together for an offsite, Builder Relations can organize and pay for an event where you meet users in person. Any team that wants to meet customers should consider one.
+
+### Event format
+
+We've learned that two formats work well: self-driving cafes and cohort dinners.
+
+- **A self-driving cafe** is an event where you'll take over a coffee shop for a morning (2 hours to be exact) to hand out merch and chat with customers. It's loosely organized and users of all types can attend. We've run these for the GTM offsite in [Austin](https://luma.com/ph-austin-cafe) (<PrivateLink url="https://posthog.slack.com/archives/C0A7Q222QF8/p1793991454953669">photos</PrivateLink>) and the Marketing teams offsite in [Madrid](https://luma.com/contexto-cafe-madrid) (<PrivateLink url="https://posthog.slack.com/archives/C0ABM7L5GCC/p1790937690847009?thread_ts=1790931877.054409&cid=C0ABM7L5GCC">photos</PrivateLink>).
+- **A cohort dinner** is a private dinner for groups of customers at a similar stage. We've run these with the Customer Success team. Further info is available on the [cohort dinners](/handbook/customer-success/cohort-dinners) page.
+
+### What we handle
+
+For either format, Builder Relations finds a venue (usually near your hotel), creates the event page, and invites local customers. For cafes, we also ship the merch. You just show up and talk to customers.
+
+The cost comes out of the Builder Relations event budget. Before the event, we add your point of contact to our Brex spend limit, so they can pay the venue without touching your team's budget.
+
+### How to set one up
+
+Post in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> at least one month before your offsite with:
+
+- Which format you want
+- Your preferred dates and times
+- Your hotel's location
+- Someone on your team designated as co-host and point of contact
+
+For cafes, we typically see 8-10 or 9-11am as the optimal times. We suggest having one employee for every 5 customers. And the cost comes out to $15 per guest because we like to include some bites as well as drinks.
+
 ## Sponsoring external events
 
 We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> channel.

@@ -337,7 +337,7 @@ export const experiments = {
             {
                 name: 'Amplitude',
                 key: 'amplitude',
-                link: '/blog/posthog-vs-amplitude',
+                link: '/compare/posthog-vs-amplitude',
             },
             // {
             //     name: 'Pendo',

@@ -7,6 +7,7 @@ showTitle: true
 The [Ruby SDK](/docs/libraries/ruby) sends transactional emails from version 3.30.0. You need a [transactional email](/docs/workflows/transactional-emails#create-a-transactional-email) and a [project secret API key](/docs/workflows/transactional-emails#create-an-api-key) first. The [quick start](/docs/workflows/transactional-emails#send-your-first-email) sets up both and sends a test email in a few minutes.
 
 <details>
+
 <summary>Prompt for your coding agent</summary>
 
 Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
@@ -35,7 +36,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 Add this to your `Gemfile`:
 
 ```ruby
-gem "posthog-ruby"
+gem "posthog-ruby", "~> 3.0"
 ```
 
 ## Set up the client
@@ -56,6 +57,22 @@ When `secret_key` is set, the client also loads flag definitions with it for [lo
 
 Shut the client down when your app exits, not after each send. If your app sends through a reverse proxy or a self-hosted PostHog, see [use a proxy or self-hosted PostHog](#use-a-proxy-or-self-hosted-posthog).
 
+### Use in Rails
+
+With [`posthog-rails`](/docs/libraries/ruby-on-rails), reuse the client initialized by `PostHog.init`. Add the secret key to your existing initializer:
+
+```ruby file=config/initializers/posthog.rb
+PostHog.init do |config|
+  config.api_key = "<ph_project_token>"
+  config.host = "<ph_client_api_host>"
+  config.secret_key = ENV.fetch("POSTHOG_PROJECT_SECRET_API_KEY")
+end
+```
+
+Use `PostHog.emails` wherever the examples below use `$posthog.emails`. Rails handles client shutdown.
+
+Pass email options such as `app_host` and `email_request_max_retries` as a hash to `PostHog.init(...)`, not in its configuration block.
+
 ## Send an email
 
 ```ruby
@@ -74,6 +91,8 @@ end
 ```
 
 `send` returns a `SendResult`, and `result.id` is the message ID. When PostHog doesn't queue the email, `send` raises `PostHog::EmailError`, and its `code` is one of the codes in the [errors table](/docs/workflows/transactional-emails#errors). A wrong argument raises `ArgumentError` before any request.
+
+A successful result means the email was queued, not delivered. Use [status checks](#check-an-emails-status) to confirm delivery.
 
 A `network_error` or a `503` doesn't mean that the email failed, because PostHog can still have queued it. Retry with the same idempotency key. If you resend the email through another email provider, the recipient can get it twice.
 
@@ -158,6 +177,8 @@ end
 
 A send has `template_id` or `template_key`, not both, or it raises `ArgumentError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+When migrating providers, set the client option `migrated_from`, for example `migrated_from: "resend"`.
+
 ### Open and click tracking
 
 `tracking` decides what PostHog tracks for an email from your code:
@@ -195,13 +216,15 @@ end
 
 `get` returns a `Status` with `id`, `status`, `created_at`, `status_at`, and `reason`. See [statuses and reasons](/docs/workflows/transactional-emails#check-an-emails-status) for what each value means. The helper returns `nil` while the status isn't there yet, so check for `nil` before you read the result as "not bounced".
 
+Statuses are available for 30 days. The key needs **Transactional email** read or write access.
+
 A `not_found` right after a send usually means that the first status hasn't arrived yet. It doesn't mean that the email failed. The client doesn't retry a `not_found`, so try again a few times with a short wait before you treat the email as missing.
 
 ## Test without sending email
 
 The client sends email with Ruby's `Net::HTTP`, so [WebMock](https://github.com/bblimke/webmock) can stub the request and show exactly what your code sends, with no network call. This tests your integration, not delivery. To test delivery, send a real email to your own address and check the email's **Sends** tab.
 
-The client also loads flag definitions when it starts, so stub that request too.
+`test_mode: true` does not disable email requests. Stub email sends, status reads, and feature flag definition requests in tests.
 
 ```ruby
 require 'posthog'

@@ -54,7 +54,7 @@ When we run `npm run dev`, this gives us a basic React app which we can use to t
 Next, we will add PostHog to your React app. This requires a PostHog instance, which you can [sign up for (for free)](https://app.posthog.com/signup). Once you have a PostHog instance, go back to your terminal and install `posthog-js`:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 After installing, go to `src/main.jsx` and set up the PostHog provider. To do this:
