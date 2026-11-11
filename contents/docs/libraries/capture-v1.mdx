@@ -6,8 +6,6 @@ showTitle: true
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-<!-- TODO(capture-v1): replace every TODO(...) comment in this file before merge. Search the PR for "TODO(capture-v1". -->
-
 PostHog SDKs are moving to [capture v1](/docs/api/capture-v1), a new way to send events. Each SDK moves to v1 in a new major version. Capture v1 gives you:
 
 - **A result for every event.** One bad event no longer fails the whole batch, and your SDK tells you which events PostHog didn't store and why.
@@ -38,8 +36,7 @@ Each SDK below moves to capture v1 in a new major version. These versions includ
 | [Android](/docs/libraries/android) | `4.0.0` | Android | [`3.x` to `4.0`](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md) |
 | [Flutter](/docs/libraries/flutter) | `6.0.0` | iOS, macOS, Android, Windows, and Linux | [`5.x` to `6.0`](https://github.com/PostHog/posthog-flutter/blob/main/posthog_flutter/MIGRATION.md) |
 
-<!-- TODO(capture-v1): list only released SDKs at merge; add each later SDK in its own PR on release day. -->
-Other SDKs, including the JavaScript Web SDK and React Native, use legacy capture. Flutter apps on the web use the JavaScript Web SDK, so they use legacy capture too.
+Other SDKs, including the JavaScript Web SDK and React Native, use legacy capture. Flutter apps on the web use the JavaScript Web SDK, so they use legacy capture too. One exception: with `@posthog/react-native-plugin` 3.0, the events the plugin sends natively, such as crash reports, fatal `$exception` events, and push-opened events, go through the iOS and Android 4.0 SDKs, so they use capture v1.
 
 ## What changes for everyone
 

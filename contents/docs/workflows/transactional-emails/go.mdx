@@ -12,7 +12,7 @@ The [Go SDK](/docs/libraries/go) sends transactional emails from version 1.40.0.
 Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
 
 ```text
-Add PostHog transactional email to this Go app with github.com/posthog/posthog-go.
+Add PostHog transactional email to this Go app with github.com/posthog/posthog-go/v2.
 
 Read https://posthog.com/docs/workflows/transactional-emails/go.md first. Follow it over anything you remember about PostHog.
 
@@ -33,7 +33,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-go get github.com/posthog/posthog-go
+go get github.com/posthog/posthog-go/v2
 ```
 
 ## Set up the client
@@ -45,7 +45,7 @@ import (
     "log"
     "os"
 
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 client, err := posthog.NewWithConfig("<ph_project_token>", posthog.Config{
@@ -109,7 +109,7 @@ import (
     "errors"
     "slices"
 
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
     "github.com/riverqueue/river"
 )
 
@@ -227,7 +227,7 @@ import (
     "net/http/httptest"
     "testing"
 
-    "github.com/posthog/posthog-go"
+    "github.com/posthog/posthog-go/v2"
 )
 
 func TestSendPasswordReset(t *testing.T) {
