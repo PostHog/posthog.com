@@ -16,10 +16,21 @@ Self-hosted instances are not subject to events retention and keep events until 
 
 ## Events retention by plan
 
-| Plan | Retention period |
-| :---- | :---- |
-| Free plan | 1 year |
-| Paid plans | Up to 7 years |
+| Plan | Default retention period | Maximum retention period |
+| :--- | :--- | :--- |
+| Free | 1 year | 1 year |
+| Pay-as-you-go | 2 years | 2 years |
+| Pay-as-you-go with Boost | 2 years | 3 years |
+| Pay-as-you-go with Scale | 2 years | 5 years |
+| Pay-as-you-go with Enterprise | 2 years | 7 years |
+
+These retention periods apply to organizations that start a paid plan on or after November 5, 2026, including organizations that upgrade from the Free plan.
+
+### Organizations on a paid plan before November 5, 2026
+
+If your organization was on a paid plan before November 5, 2026, it keeps its 7-year retention period while it stays on its current plan and [platform package](/platform-packages), or moves to a higher platform package. If it downgrades to the Free plan or to a lower platform package, it moves to the default retention period for its new plan.
+
+Storage for your whole retention period is part of the event price. [What you actually get when you pay for an event](/docs/billing/what-you-pay-for-per-event) explains what else it covers.
 
 ## How retention works
 
@@ -34,7 +45,7 @@ We may hold onto expired events for one of two reasons:
 - Not all customers are aware that their retention period has ended, and we want to give them time to extend it
 - We delete events in batches, so there is a delay between when an event expires and when it is deleted
 
-If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).  
+If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).
 
 #### Migrated events may expire as soon as they are uploaded
 
@@ -42,7 +53,9 @@ Because retention uses each event's `timestamp`, events you bring in through a [
 
 ## How to customize your retention period
 
-For customers on paid plans, retention periods can be adjusted in your organization's settings. You may also set a project-level override if you would like a project to have a retention period that is shorter or longer than your organization's retention period.
+For customers on paid plans, retention periods can be adjusted in your organization's settings, up to the maximum for your plan. You may also set a project-level override if you would like a project to have a retention period that is shorter or longer than your organization's retention period.
+
+To set a retention period longer than 2 years, add a [platform package](/platform-packages), then increase your retention period in your settings. Adding a package doesn't change your retention period automatically.
 
 Customizable data retention is not available on the Free plan. All projects on the Free plan have a 1-year retention period.
 
@@ -80,9 +93,15 @@ No. Person profiles and their properties are stored until you delete them. To re
 
 Your retention period changes to 1 year, the only period the Free plan offers.
 
+#### What happens to my retention period if I downgrade my platform package?
+
+If your retention period is longer than your new package allows, PostHog lowers it to your new package's maximum. This applies to your organization's retention period and to any project overrides. For example, a 5-year retention period on Scale becomes 3 years on Boost. Events older than your new retention period expire and may be deleted at any point.
+
+If your organization was on a paid plan before November 5, 2026, see [Organizations on a paid plan before November 5, 2026](#organizations-on-a-paid-plan-before-november-5-2026).
+
 #### When are expired events deleted?
 
-Expired events may be deleted at any point, and once they are deleted, they can't be restored. However, we do not automatically delete events as soon as they expire, so they may be stored longer than your retention period. If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).  
+Expired events may be deleted at any point, and once they are deleted, they can't be restored. However, we do not automatically delete events as soon as they expire, so they may be stored longer than your retention period. If you need more specificity around when your events will be deleted, please [contact support](https://app.posthog.com/#panel=support).
 
 #### If I extend my retention period, will I get my events back?
 

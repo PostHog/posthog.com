@@ -6,15 +6,6 @@ permissions:
 on:
     schedule:
         - cron: '0 11 * * 1' # Every Monday at 11am UTC
-    pull_request:
-        paths:
-            - 'contents/**'
-            - 'src/**'
-            - 'vercel.json'
-            - 'scripts/*link*'
-            - '.github/workflows/internal-links-check.yml'
-            - 'package.json'
-            - 'pnpm-lock.yaml'
     workflow_dispatch:
         inputs:
             save_results:
@@ -28,33 +19,16 @@ on:
                 default: 'true'
                 type: boolean
 
-concurrency:
-    group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id }}
-    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-
 jobs:
     check-internal-links:
         runs-on: depot-ubuntu-latest-8
         timeout-minutes: 45
-        strategy:
-            fail-fast: false
-            matrix:
-                target: ${{ fromJSON(github.event_name == 'pull_request' && '["head", "base"]' || '["head"]') }}
         env:
             NODE_OPTIONS: '--max-old-space-size=16384 --expose-gc'
             GATSBY_CPU_COUNT: 1
         steps:
             - name: Checkout code
               uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-              with:
-                  fetch-depth: 2
-            - name: Fetch PR base commit
-              if: ${{ github.event_name == 'pull_request' }}
-              run: |
-                  # The webhook base SHA can lag behind the checked-out PR merge ref.
-                  BASE_SHA=$(git rev-parse HEAD^1)
-                  git fetch --no-tags --depth=1 origin "$BASE_SHA"
-                  echo "BASE_SHA=$BASE_SHA" >> "$GITHUB_ENV"
             - name: Install pnpm
               uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
             - name: Setup Node.js
@@ -64,28 +38,15 @@ jobs:
                   cache: 'pnpm'
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
-            - name: Prepare site revision
-              env:
-                  TARGET: ${{ matrix.target }}
-              run: |
-                  SITE_DIR="$GITHUB_WORKSPACE"
-                  if [ "$TARGET" = base ]; then
-                    SITE_DIR="$RUNNER_TEMP/link-check-base"
-                    git worktree add --detach "$SITE_DIR" "$BASE_SHA"
-                    cd "$SITE_DIR"
-                    pnpm install --frozen-lockfile
-                  fi
-                  echo "SITE_DIR=$SITE_DIR" >> "$GITHUB_ENV"
             - name: Build site
               id: build
               env:
                   # Enables generated pipeline docs in sourceNodes. Use only the read-only job token.
                   GITHUB_API_KEY: ${{ github.token }}
               run: |
-                  mkdir -p "$GITHUB_WORKSPACE/link-check-results"
-                  cd "$SITE_DIR"
+                  mkdir -p link-check-results
                   for ATTEMPT in 1 2; do
-                    BUILD_LOG="$GITHUB_WORKSPACE/link-check-results/build-$ATTEMPT.log"
+                    BUILD_LOG="link-check-results/build-$ATTEMPT.log"
                     set +e
                     pnpm build > "$BUILD_LOG" 2>&1
                     EXIT_CODE=$?
@@ -98,28 +59,9 @@ jobs:
                     echo "Transient fetch failure. Retrying the build once; the first attempt log is saved."
                     sleep 10
                   done
-            - name: Check content links
+            - name: Check links
               if: ${{ !cancelled() && steps.build.outcome == 'success' }}
-              run: |
-                  cd "$SITE_DIR"
-                  set +e
-                  node "$GITHUB_WORKSPACE/scripts/check-links-post-build.js" "$GITHUB_WORKSPACE/link-check-results" > "$GITHUB_WORKSPACE/link-check-results/content.log" 2>&1
-                  EXIT_CODE=$?
-                  tail -n 60 "$GITHUB_WORKSPACE/link-check-results/content.log"
-                  # Findings are reported below. PR comparisons gate new findings; execution errors still fail.
-                  if [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
-                  exit "$EXIT_CODE"
-            - name: Check source code links
-              if: ${{ !cancelled() && steps.build.outcome == 'success' }}
-              run: |
-                  cd "$SITE_DIR"
-                  set +e
-                  node "$GITHUB_WORKSPACE/scripts/check-src-links.js" "$GITHUB_WORKSPACE/link-check-results" > "$GITHUB_WORKSPACE/link-check-results/source.log" 2>&1
-                  EXIT_CODE=$?
-                  tail -n 60 "$GITHUB_WORKSPACE/link-check-results/source.log"
-                  # Findings are reported below. PR comparisons gate new findings; execution errors still fail.
-                  if [ "$EXIT_CODE" -eq 1 ]; then exit 0; fi
-                  exit "$EXIT_CODE"
+              run: scripts/link-check-scan.sh link-check-results
             - name: Write link check summary
               if: ${{ !cancelled() }}
               run: node scripts/link-check-report.js link-check-results
@@ -128,12 +70,12 @@ jobs:
               id: upload-results
               uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
               with:
-                  name: ${{ matrix.target == 'head' && 'link-check-results' || 'link-check-base-results' }}
+                  name: link-check-results
                   path: link-check-results/
                   if-no-files-found: error
                   retention-days: 30
             - name: Send Slack notification
-              if: ${{ !cancelled() && github.event_name != 'pull_request' && (github.event_name != 'workflow_dispatch' || inputs.send_slack_notification != false) }}
+              if: ${{ !cancelled() && (github.event_name != 'workflow_dispatch' || inputs.send_slack_notification != false) }}
               env:
                   GH_REPOSITORY: ${{ github.repository }}
                   GH_RUN_ID: ${{ github.run_id }}
@@ -144,36 +86,3 @@ jobs:
                   ARTIFACT_ID: ${{ steps.upload-results.outputs.artifact-id }}
                   SAVE_RESULTS: ${{ inputs.save_results }}
               run: node scripts/link-check-report.js link-check-results --notify
-
-    compare-pr-links:
-        name: Check new broken links
-        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
-        needs: check-internal-links
-        runs-on: depot-ubuntu-latest-8
-        steps:
-            - name: Checkout checker
-              uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-            - name: Setup Node.js
-              uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
-              with:
-                  node-version: '22'
-            - name: Download PR report
-              uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-              with:
-                  name: link-check-results
-                  path: link-check-results/head
-            - name: Download base report
-              uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-              with:
-                  name: link-check-base-results
-                  path: link-check-results/base
-            - name: Compare findings
-              run: node scripts/link-check-report.js link-check-results/head --compare-base=link-check-results/base
-            - name: Upload comparison
-              if: ${{ !cancelled() }}
-              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-              with:
-                  name: link-check-comparison
-                  path: link-check-results/head/pr-link-check.json
-                  if-no-files-found: error
-                  retention-days: 30

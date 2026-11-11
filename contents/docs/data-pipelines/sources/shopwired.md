@@ -9,9 +9,9 @@ availability:
 sourceId: ShopWired
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The ShopWired connector syncs your e-commerce store data into the PostHog Data warehouse, so you can analyze your products, customers, and orders alongside your product analytics data.
 
@@ -31,7 +31,9 @@ When linking ShopWired, you'll need:
 
 <SyncModes />
 
-Orders support incremental sync using their creation date. ShopWired doesn't expose a modified-date filter, so incremental syncs only pick up newly created orders — changes to existing records are only captured by a full refresh.
+Orders and incomplete orders support incremental sync using their creation date. ShopWired doesn't expose a modified-date filter, so incremental syncs only pick up newly created records – changes to existing records are only captured by a full refresh. All other tables use full refresh.
+
+The `transactions` and `payouts` tables require ShopWired Payments to be enabled on your store. Product variations are synced through their parent products.
 
 ## Configuration
 

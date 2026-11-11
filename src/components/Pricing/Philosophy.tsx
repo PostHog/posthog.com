@@ -49,6 +49,13 @@ const PricingPhilosophy = (): JSX.Element => {
                     (Note: This doesn't include your buddy's two-person startup.)
                 </li>
                 <li>
+                    We don't charge extra to store your events or to query them.{' '}
+                    <Link href="/docs/billing/what-you-pay-for-per-event" state={{ newWindow: true }}>
+                        Here's what you actually get when you pay for an event
+                    </Link>
+                    .
+                </li>
+                <li>
                     We have significant revenue and are{' '}
                     <Link
                         href="/newsletter/the-companies-that-shaped-posthog#our-takeaways-2"

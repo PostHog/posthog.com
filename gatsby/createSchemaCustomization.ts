@@ -521,6 +521,18 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       required: Boolean
       description: String
     }
+    type SdkMarkdownReference implements Node @dontInfer {
+      slug: String!
+      title: String
+      contentMaxWidthClass: String
+      tableOfContents: [SdkMarkdownReferenceHeading]
+      body: String
+    }
+    type SdkMarkdownReferenceHeading {
+      value: String
+      url: String
+      depth: Int
+    }
     type AgentSkill implements Node @dontInfer {
       product: String
       name: String
@@ -534,6 +546,28 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       summary: String
       category: String
       feature: String
+    }
+    type PostHogScopeObject implements Node @dontInfer {
+      scopeObject: String
+      name: String
+      plural: String
+      description: String
+      group: String
+      groupOrder: Int
+      docsUrl: String
+      organizationWide: Boolean
+      actions: [PostHogScopeAction]
+      writeRequires: PostHogScopeRequirement
+    }
+    type PostHogScopeAction {
+      action: String
+      scope: String
+      oauth: Boolean
+      warning: String
+    }
+    type PostHogScopeRequirement {
+      scope: String
+      reason: String
     }
     type PostHogSource implements Node @dontInfer {
       mdx: Mdx @link(by: "frontmatter.sourceId", from: "sourceId")

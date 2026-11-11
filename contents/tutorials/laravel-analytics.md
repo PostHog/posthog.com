@@ -160,7 +160,7 @@ Run `php artisan serve` and navigate to `http://127.0.0.1:8000/log-in` to see ou
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, run `composer require posthog/posthog-php` to install [PostHog’s PHP SDK](/docs/libraries/php).
+To start, run `composer require "posthog/posthog-php:^4.0"` to install [PostHog’s PHP SDK](/docs/libraries/php).
 
 Next, we initialize PostHog in the `boot` method of `app/Providers/AppServiceProvider.php`. Replace the existing code in that file with the following:
 
