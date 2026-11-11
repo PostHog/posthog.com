@@ -1595,6 +1595,10 @@ export const handbookSidebar = [
                         url: '/handbook/customer-success/using-ai-to-analyze-customer-issues',
                     },
                     {
+                        name: 'Using AI as a CSM',
+                        url: '/handbook/customer-success/using-ai-as-a-csm',
+                    },
+                    {
                         name: 'Team lead tooling',
                         url: '/handbook/customer-success/team-lead-tooling',
                     },
