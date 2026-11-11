@@ -484,7 +484,9 @@ var systemPrompt = prompt.Compile(new Dictionary<string, object>
 });
 
 // Model parameters or other settings stored with the version, as a JsonElement (null when there are none)
-var model = prompt.Config?.GetProperty("model").GetString();
+var model = prompt.Config is { } config && config.TryGetProperty("model", out var configuredModel)
+    ? configuredModel.GetString()
+    : "your-default-model";
 
 // Use in your LLM call
 // ... your OpenAI/Anthropic call here
