@@ -27,7 +27,7 @@ The demo has three deliberate mistakes: a delivery question goes to the refund t
 
 ### 1. Install the SDK and configure access
 
-Install the latest SDK. The examples below require:
+Install the latest SDK. This quickstart requires:
 
 -   **Python:** Python 3.10+ and `posthog` 7.74.0+.
 -   **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
@@ -522,39 +522,191 @@ For the support-agent example, a boolean **Support task passed** scorer can requ
 
 ### Create the composite
 
-1. Open [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers) and click **New scorer**. Name it **Support task passed**.
-2. Set **Calculation** to **Composite formula**, **Output** to **Boolean**, and **Passing value** to **True means pass**.
-3. Under **Add input scorer**, select **Correct tool** and **Correct arguments**. Set their **Formula name** fields to `tool_correct` and `arguments_correct`. Select the exact **Version** of each scorer used by your experiment.
-4. Set **Formula** to `tool_correct and arguments_correct`. Click **Validate formula**, then **Create scorer**.
-5. Click **Copy version ID** on the saved scorer. Use this ID when requesting a calculation.
+Use the latest SDK for this section. Save this as `create_composite.py` or `create_composite.mts` and run it once with the environment variables from the quickstart. It uses your existing **Correct tool** and **Correct arguments** scorers.
+
+<MultiLanguage selector="tabs">
+
+```python file=Python
+import os
+from posthog.ai.evaluations import OfflineEvaluations, ScorerComposition
+
+with OfflineEvaluations(
+    project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
+    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
+    host=os.environ["POSTHOG_HOST"],
+) as evaluations:
+    tool = evaluations.scorers.get(os.environ["POSTHOG_TOOL_SCORER_ID"])
+    arguments = evaluations.scorers.get(os.environ["POSTHOG_ARGUMENTS_SCORER_ID"])
+    composition: ScorerComposition = {
+        "expression": "tool_correct and arguments_correct",
+        "inputs": [
+            {"alias": "tool_correct", "scorer_version_id": tool.current_version_id},
+            {"alias": "arguments_correct", "scorer_version_id": arguments.current_version_id},
+        ],
+    }
+    # Optional: check the formula without saving a scorer.
+    evaluations.scorers.validate_composition(kind="boolean", composition=composition)
+    composite = evaluations.scorers.create(
+        name="Support task passed",
+        kind="boolean",
+        calculation="composite",
+        config={"true_is_failure": False},
+        composition=composition,
+    )
+    print(composite.id)
+```
+
+```typescript file=TypeScript
+import { OfflineEvaluations } from "@posthog/ai/evaluations"
+
+const evaluations = new OfflineEvaluations({
+    projectId: Number(process.env.POSTHOG_PROJECT_ID),
+    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+    host: process.env.POSTHOG_HOST!,
+})
+
+try {
+    const tool = await evaluations.scorers.get(process.env.POSTHOG_TOOL_SCORER_ID!)
+    const argumentsScorer = await evaluations.scorers.get(process.env.POSTHOG_ARGUMENTS_SCORER_ID!)
+    const composition = {
+        expression: "tool_correct and arguments_correct",
+        inputs: [
+            { alias: "tool_correct", scorerVersionId: tool.currentVersionId },
+            { alias: "arguments_correct", scorerVersionId: argumentsScorer.currentVersionId },
+        ],
+    }
+    // Optional: check the formula without saving a scorer.
+    await evaluations.scorers.validateComposition({ kind: "boolean", composition })
+    const composite = await evaluations.scorers.create({
+        name: "Support task passed",
+        kind: "boolean",
+        calculation: "composite",
+        config: { trueIsFailure: false },
+        composition,
+    })
+    console.log(composite.id)
+} finally {
+    evaluations.close()
+}
+```
+
+</MultiLanguage>
+
+Save the printed scorer ID:
+
+```bash
+export POSTHOG_COMPOSITE_SCORER_ID="<support_task_passed_scorer_id>"
+```
+
+You can also create this scorer in [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers). Choose **Composite formula** and **Boolean**, add the two input scorers, and set their **Formula name** fields to `tool_correct` and `arguments_correct`. Use `tool_correct and arguments_correct` as the formula and **True means pass** as the passing value.
 
 Each input pins a scorer version. Creating a new version of an input scorer doesn't update the composite. Changing the formula or its input versions creates a new composite version; existing results keep their original values.
 
 ### Request a calculation for each item
 
-Creating a composite doesn't calculate results automatically. Request a calculation through the HTTP API or MCP for each item, after uploading its reported scores and before completing the experiment. Both input results must use the exact versions pinned by the composite.
+Creating a composite doesn't calculate results automatically. Upload its reported inputs and a calculation request together for each item, before completing the experiment.
 
-This request uses the environment variables from the quickstart. Replace `<experiment_id>` with `experiment.id`, `<item_id>` with the existing `EvaluationItem`'s `id`, and `<composite_version_id>` with the copied version ID:
+In `support_eval.py` or `support_eval.mts`, keep the agent, evaluator, and six cases. Add `EvaluationResult` to the SDK imports and replace the client block with the following code. It reads the input versions pinned by the composite, so later changes to the reported scorers don't change this run's inputs.
 
-```bash
-curl --fail-with-body --request POST \
-    "$POSTHOG_HOST/api/projects/$POSTHOG_PROJECT_ID/ai_observability/offline_experiments/<experiment_id>/upload/" \
-    --header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
-    --header "Content-Type: application/json" \
-    --data '{
-        "results": [
-            {
-                "item_id": "<item_id>",
-                "scorer_version_id": "<composite_version_id>",
-                "calculate": true
-            }
-        ]
-    }'
+<MultiLanguage selector="tabs">
+
+```python file=Python
+with OfflineEvaluations(
+    project_id=int(os.environ["POSTHOG_PROJECT_ID"]),
+    secret_key=os.environ["POSTHOG_PERSONAL_API_KEY"],
+    host=os.environ["POSTHOG_HOST"],
+) as evaluations:
+    composite = evaluations.scorers.get(os.environ["POSTHOG_COMPOSITE_SCORER_ID"])
+    input_versions = {source.alias: source.scorer_version_id for source in composite.input_scorers}
+    experiment = evaluations.create_experiment(
+        name="Support agent with composite",
+        suite_key="support-agent",
+        run_source="local",
+        expected_item_count=len(cases),
+        expected_result_count=len(cases) * 3,
+    )
+
+    try:
+        for case in cases:
+            output = run_agent(case["input"])
+            item = EvaluationItem(
+                case_key=case["id"], input=case["input"], output=output, expected_output=case["expected"],
+            )
+            scores = evaluate_answer(output, case["expected"])
+            receipt = experiment.upload_results([
+                EvaluationResult(item=item, scorer_version_id=input_versions["tool_correct"], **scores["tool"]),
+                EvaluationResult(item=item, scorer_version_id=input_versions["arguments_correct"], **scores["arguments"]),
+                EvaluationResult(item=item, scorer_version_id=composite.current_version_id, calculate=True),
+            ])
+            for chunk in receipt.chunks:
+                for outcome in chunk.results:
+                    if outcome.status == "error":
+                        print(f"{case['id']}: {outcome.scorer_version_id}: {outcome.error_code}")
+    except Exception:
+        experiment.fail()
+        raise
+
+    experiment.complete()
+    print(f"Completed experiment: {experiment.id}")
 ```
 
-Send only `item_id`, `scorer_version_id`, and `calculate: true` for a composite result. PostHog calculates and stores the value from the saved formula. You can include the reported inputs in the same upload request, or upload them first. When splitting uploads into batches, send the inputs before their composite requests.
+```typescript file=TypeScript
+const evaluations = new OfflineEvaluations({
+    projectId: Number(process.env.POSTHOG_PROJECT_ID),
+    secretKey: process.env.POSTHOG_PERSONAL_API_KEY!,
+    host: process.env.POSTHOG_HOST!,
+})
 
-For a new run of all six support-agent cases, set `expected_result_count` / `expectedResultCount` to **18**: twelve reported results and six composite results. Keep the same item IDs for all three scores. A completed run can't accept new composite calculations; start a new experiment to evaluate a different composite version.
+try {
+    const composite = await evaluations.scorers.get(process.env.POSTHOG_COMPOSITE_SCORER_ID!)
+    const inputVersions = new Map(composite.inputScorers.map((source) => [source.alias, source.scorerVersionId]))
+    const experiment = await evaluations.createExperiment({
+        name: "Support agent with composite",
+        suiteKey: "support-agent",
+        runSource: "local",
+        expectedItemCount: cases.length,
+        expectedResultCount: cases.length * 3,
+    })
+
+    try {
+        for (const testCase of cases) {
+            const output = await runAgent(testCase.input)
+            const item = new EvaluationItem({
+                caseKey: testCase.id, input: testCase.input, output, expectedOutput: testCase.expected,
+            })
+            const scores = evaluateAnswer(output, testCase.expected)
+            const receipt = await experiment.uploadResults([
+                new EvaluationResult({ item, scorerVersionId: inputVersions.get("tool_correct")!, ...scores.tool }),
+                new EvaluationResult({ item, scorerVersionId: inputVersions.get("arguments_correct")!, ...scores.arguments }),
+                new EvaluationResult({ item, scorerVersionId: composite.currentVersionId, calculate: true }),
+            ])
+            for (const chunk of receipt.chunks) {
+                for (const outcome of chunk.results) {
+                    if (outcome.status === "error") {
+                        console.error(`${testCase.id}: ${outcome.scorerVersionId}: ${outcome.errorCode}`)
+                    }
+                }
+            }
+        }
+    } catch (error) {
+        await experiment.fail()
+        throw error
+    }
+
+    await experiment.complete()
+    console.log(`Completed experiment: ${experiment.id}`)
+} finally {
+    evaluations.close()
+}
+```
+
+</MultiLanguage>
+
+Each composite declaration contains only the item, scorer version, and `calculate=True` / `calculate: true`. PostHog calculates and stores the value. The upload receipt includes its `status` and `error_code` / `errorCode`. A successful upload can contain a calculation error, so check these fields even when the upload doesn't raise an exception.
+
+This run expects **18** results: twelve reported results and six composite results. Accepted calculation errors and skipped results count toward that total. A completed run can't accept new composite calculations; start a new experiment to evaluate a different composite version.
+
+The example sends both inputs with each calculation and uses the quickstart's permissions. If you upload inputs separately, reusing them requires both `evaluation:read` and `llm_analytics:read` in addition to ingestion access. Ingestion-only keys must include every pinned input in the same request, including retries. For larger uploads, group each item's results together; the SDK keeps them in one request when splitting a batch.
 
 Open the experiment to see **Support task passed** alongside the two reported scorers. The composite summary covers only the items for which you requested a calculation. Items without a request show **Not requested** and don't lower its pass rate.
 
@@ -576,9 +728,9 @@ You can use arithmetic (`+`, `-`, `*`, `/`), comparisons, `and`, `or`, `not`, co
 
 ### Handle missing inputs and calculation errors
 
-If a pinned input result is missing, PostHog rejects the entire upload request. Upload that input for the same item and version, then retry.
+If a pinned input result is missing, PostHog rejects the entire upload request. Include that input for the same item and version when you retry.
 
-If an input has status `error`, `skipped`, or `not_applicable`, the composite inherits that status without a value. If several statuses apply, the order is `error`, then `skipped`, then `not_applicable`.
+If an input has status `error`, `skipped`, or `not_applicable`, the composite inherits that status without a value. If several statuses apply, the order is `error`, then `skipped`, then `not_applicable`. Input errors use the code `composite_input_error`.
 
 A calculation error, such as division by zero or a value outside the composite's configured bounds, produces an `error` result with code `composite_formula_error`. Valid reported inputs in the same request are still saved. These errors don't enter the composite's mean or pass rate.
 
