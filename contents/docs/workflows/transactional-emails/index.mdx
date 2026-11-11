@@ -138,6 +138,8 @@ You can also make a template transactional with the API. Call `POST /api/project
 
 For emails with sign-in codes, reset links, or other secrets, turn on **Protect sensitive data**. It's in the first step of a new email, and on the email's **API** tab. PostHog then keeps no copy of what each email contained, and doesn't track link clicks, so a code or a token in a link never goes through a tracking redirect. PostHog still tracks deliveries, opens, bounces, and the email's status. You can turn this setting on or off at any time.
 
+An email that you send from your code takes this setting from the template with the same key. With no such template, it's sensitive. Set [`sensitive`](/docs/workflows/transactional-emails/api#sensitive-emails) on the send to choose.
+
 ## Create an API key
 
 Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `transactional_email:write` scope. Keys with `hog_flow:write` still work. The same key can also [read the status](#check-an-emails-status) of each email that it sends.
@@ -282,5 +284,5 @@ Work down this list. Each step rules out one cause.
 - **Suppression still applies** - PostHog doesn't send to an address on your suppression list.
 - **Billing and quotas** - Transactional emails are billed and limited by quota like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
 - **Sending allowance** - Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its hourly or daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
-- **Engagement events** - If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails on the person whose distinct ID you send. An email from your code tracks opens but not clicks, unless you set [`tracking`](/docs/workflows/transactional-emails/api#open-and-click-tracking).
+- **Engagement events** - If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails on the person whose distinct ID you send. An email from your code tracks clicks only when it isn't [sensitive](/docs/workflows/transactional-emails/api#sensitive-emails), or when [`tracking`](/docs/workflows/transactional-emails/api#open-and-click-tracking) turns them on.
 - **Where to see sends** - [Read the status](#check-an-emails-status) of an email with its `message_id`. The email's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.
