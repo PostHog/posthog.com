@@ -99,7 +99,7 @@ export function GuideCardActions({ href }: { href: string }): JSX.Element {
 
     return (
         <div className="mt-auto flex items-center gap-2 pt-4">
-            <CallToAction to={guideUrl} size="sm">
+            <CallToAction to={guideUrl} state={{ newWindow: true }} size="sm">
                 Read the guide
             </CallToAction>
             <CallToAction type="secondary" size="sm" disabled={!skill?.raw} onClick={copySkill}>

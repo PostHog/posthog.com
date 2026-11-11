@@ -233,7 +233,7 @@ export default function PostgresSource(): JSX.Element {
             <SEO
                 title="Query your Postgres data in PostHog"
                 description="Connect your Postgres database to PostHog and answer questions about your accounts, plans, and usage in one place."
-                image="images/og/cdp.jpg"
+                image="/images/og/cdp.jpg"
             />
             <Editor
                 slug="/data-pipelines/sources/postgres"

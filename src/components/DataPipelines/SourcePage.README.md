@@ -1,4 +1,4 @@
-# SourcePage
+# Source page components
 
 Building blocks for the source pages under `/data-pipelines/sources/`. Each source page uses the same sections, jump links, and card style. Put them here, not in the page file, so that the pages stay the same.
 
@@ -59,7 +59,7 @@ To show other sections, pass `links`:
 </div>
 ```
 
-- **Read the guide** opens the pocket guide at `href`.
+- **Read the guide** opens the pocket guide at `href` in a new window, so the source page stays open.
 - **Copy skill** copies the guide's `SKILL.md` to the clipboard. The button is disabled if the guide has no skill file. If the browser blocks the clipboard, the button shows "Couldn't copy".
 
 `href` can use any pocket guide path form. The component resolves it with `pocketGuideDestination`, so it finds the skill file and links to the current guide URL. It uses `mt-auto`, so put it at the end of a `flex flex-col` card (such as `CARD`) to pin the buttons to the bottom.
