@@ -26,7 +26,7 @@ import {
     IconWarning,
     IconWebhooks,
 } from '@posthog/icons'
-import { HedgehogHahaBizzniss, HedgehogMoney, HedgehogOrganized } from '@posthog/brand/hoggies'
+import { HedgehogHahaBizzniss, HedgehogMoney } from '@posthog/brand/hoggies'
 
 type IconComponent = React.ComponentType<{ className?: string }>
 
@@ -329,7 +329,6 @@ export default function StripeSource(): JSX.Element {
                                 your billing model comes across, not a thin slice of it, including:
                             </>
                         }
-                        aside={<HedgehogOrganized className="w-full max-w-[9rem]" />}
                     >
                         <div className="grid grid-cols-1 gap-4 @md:grid-cols-2 @5xl:grid-cols-4">
                             {syncedTables.map((t) => (
