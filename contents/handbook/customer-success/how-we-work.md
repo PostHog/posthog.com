@@ -49,7 +49,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 ### Which accounts count toward your NRR
 
-Your book is the set of accounts where you're the CSM in [PostHog Customer Analytics]([link](https://us.posthog.com/project/2/customer_analytics/accounts)). We use the account relationship history there, so changes can be made at any time and we can still see who held what, and when.
+Your book is the set of accounts where you're the CSM in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">PostHog Customer Analytics</PrivateLink>. We use the account relationship history there, so changes can be made at any time and we can still see who held what, and when.
 
 An account counts toward your NRR for a quarter if **all** of these are true:
 
@@ -94,7 +94,7 @@ These never count toward CSM NRR:
 - Accounts in the YC program, including accounts that have received YC credits.
 - Accounts that churned or were recorded as churned in a previous quarter.
 - Accounts in a grace period, or approved as an at-risk exception, for the quarter they apply to.
-- Manual exclusions approved by Simon or Ben B. These are recorded in the [NRR exclusions sheet](https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975) so there's a record of every one.
+- Manual exclusions approved by Simon or Ben B. These are recorded in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975">NRR exclusions sheet</PrivateLink> so there's a record of every one.
 
 ## Working with engineering teams
 
@@ -156,7 +156,7 @@ We use Gmail for email. Pick whichever client works best for you – some of the
 We use Calendly for scheduling meetings. In order to schedule a meeting between a customer and multiple members on the PostHog team, click on "Event types" in the left hand navigation, then click "+ New Event Type" button in the top right, and select "Group" from the dropdown. This will allow you to create a group meeting and add multiple team members to the event and create a link you can share with the customer.
 
 **Zoom:**
-We use Zoom for all customer and sales calls. If you have Calendly properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers).
+We use Zoom for all customer and sales calls. If you have Calendly properly integrated, calls that are booked through the tool will default to Zoom. You can find backgrounds to use for the calls here: [This is fine \(and other awesome PostHog wallpapers\)](/blog/posthog-wallpapers). You can also [add a PostHog video to your Zoom waiting room](/handbook/growth/sales/sales-and-cs-tools#customize-your-zoom-waiting-room) for customers who join early.
 
 **Gong:**
 We use Gong to record calls. Once it's set up, Gong automatically joins your Zoom calls and saves the recording to a shared library the whole team can search and review. See [sales & CS tools](/handbook/growth/sales/sales-and-cs-tools#connecting-them-together) for how to connect Gong to your Zoom calls. [BuildBetter](https://app.buildbetter.app) is still where we store historical demos and meetings, and some teams continue to use it.

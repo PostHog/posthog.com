@@ -29,12 +29,13 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 - Reading the [CS](/handbook/customer-success/customer-success) and [sales](/handbook/growth/sales/overview) sections of the handbook.
 - Preparing your PostHog demo.
 - Picking a recent customer call on Gong to watch, and asking team members to add you to as many of their live calls as you can - the goal is exposure to how we talk about PostHog and how we talk to customers. Best way to do this is check folks' calendars and just ask to join calls that work with your schedule.
+- Meet with a couple of CSMs on the team to learn how they approach the role.
 - Nailing the product fundamentals - use the [framework](#learning-posthog) as a guide. For hands-on exercises, the [onboarding exercise](/handbook/customer-success/new-hire-onboarding-exercise) gets you familiar with the PostHog product, and the [HogLabs](https://github.com/PostHog/hoglabs-gtm) with implementing it. 
   - [Events](/docs/data/events), [persons](/docs/data/persons), and [product analytics](/docs/product-analytics) are the foundation for everything else - start here.
   - [Session replay](/docs/session-replay), [feature flags](/docs/feature-flags), and [experiments](/docs/experiments) are the next priority. They're PostHog's most mature products with the most overlap with everything else. But let your book guide you - if your customers are all-in on [error tracking](/docs/error-tracking), [logs](/docs/logs), or [AI observability](/docs/ai-observability), that's an opportunity to go deep early.
   - Learn how to use the [MCP](/docs/ai-engineering) across all products. This is increasingly how customers will interact with PostHog.
 - Exploring Slack. We're public by default, so Slack is one of the richest resources you have. You'll find outreach messages that worked, prior conversations with customers, PostHog history on decisions like pricing changes, and context that didn't make it into the handbook. Channels to join from day one: #team-customer-success (ask questions here by default), #group-cs-sales-support, #team-product-led-sales, #closed-won, #spike-detector, #customer-churn, and your local city/country channel. For #spike-detector, ask your team lead to add you and tag you as owner on your accounts.
-- Get your AI investigation setup running early - PostHog Desktop, Claude Code, and the MCPs. It quickly becomes a go-to for digging into accounts.
+- Get your AI investigation setup running early - PostHog Desktop, Claude Code, and the MCPs. It quickly becomes a go-to for digging into accounts. Clone [PostHog/posthog](https://github.com/PostHog/posthog) too, so Claude Code can read the code behind a customer's problem. Some tips can be found in the [developing locally guide](/handbook/engineering/developing-locally#cloning-the-repository).
 
 **How to think about each product.** As you go through the fundamentals, for each product you're trying to be able to answer:
 
@@ -75,7 +76,7 @@ This is when you start working with your customers. Reach out, take the first ca
 
 ## What good looks like at the end of week 4
 
-This is the bar for end of month 1.
+This is the bar for end of month 1, and it's what your team lead is looking at during your first check-in. During probation your team lead gets an automated [30, 60 and 80-day check-in](/handbook/people/onboarding#306090-day-check-ins) form. At each one they are working with you to make sure you are ramping up as expected. The benchmarks in this section and the next are the concrete things we compare against. We'll go through them during in-person onboarding and again at each check-in, so nothing here should come as a surprise. If you're behind on something, say so early. It's much easier to fix at day 30 than day 80.
 
 **You have a clear read on your book:**
 
@@ -86,29 +87,46 @@ This is the bar for end of month 1.
 
 **You're up and running with customers:**
 
-- Made contact with every customer in your book of business
-- Handling tickets and customer questions across the products your book uses, with help when needed
+- Reached out to every customer in your book of business, and have at least one customer call booked
+- Investigating and handling tickets and customer questions across the products your book uses, with help when needed - dig into the problem yourself before escalating
 - Doing demos for those products
 - Evaluating customer implementations and seeing where to improve them
 - Understanding how pricing works and the levers you have for cost optimization
 
 **You're working with signals.** You know what the signals are and have a sense of how to prioritise and work through them.
 
-**You're sharing with the team.** You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
+**You're contributing to the team.** You're an active voice in sprint planning, account review and team meetings - asking questions and sharing what you're seeing, not just observing. You're posting wins, learnings, opportunities for feedback, and anything else valuable in our shared channels. You were hired because we think you can improve our team, so don't be afraid to share opinions and approaches.
 
 ## Month 2 and beyond
 
-**By the end of month 2:**
+**By the end of month 2 (60-day check-in):**
 
+- Over half of your book has replied to you in some form
+- Delivered a strong demo - a practice run with the team or a real one - and taken on the feedback from your demo sessions
 - Saved your first 'we're going to churn' - it's going to happen, but you're going to save them!
-- Be independently working with your entire book to solve tricky technical problems with minimal assistance
+- Owning technical issues on your own - independently working with your entire book to solve tricky technical problems with minimal assistance
 - Focusing strategically on your customers - engaging with accounts based on risk and growth opportunity, not just reacting to tickets and signals
 
-**By the end of month 3:**
+**By the end of month 3 (end of probation):**
 
+- All but a few accounts have replied, and for the ones that haven't you know why and what you're doing about it
+- Picked a [quarterly goal](/handbook/customer-success/how-we-work) with your team lead and know how you'll measure it
 - On track to consistently hit your retention targets
-- You've suggested and made changes to our systems that enable you to do your job better
+- Actively influencing the way we work - you've suggested and made changes to our systems and processes that enable you and the team to do the job better
+- Picked and merged your first product PR: small, tied to a customer request or an outcome you want to move, and the owning team knows it's coming. See [shipping product changes](/handbook/customer-success/shipping-product-changes) for details. This is a goal, but not a requirement!
 - Think about customer health scores and add/change anything you learn here
+
+## What to Avoid
+
+While you're ramping up, here are some common mistakes we often see new joiners make in their first few months:
+
+- **Skimming the surface of your accounts.** [Discovery calls](/handbook/customer-success/getting-started-with-customers#3-your-first-call) stay at "anything we can help with?", your outreach is an introduction with no value, and your account read is whatever Claude said, pasted forward without checking the data behind it. PostHog CS is about going deeper than a typical account manager, and providing tangible value to customers based on their use case. Aim to understand how each product is implemented, how your customer is using it, and what value they're getting out of it. [The levers we have](/handbook/customer-success/customer-success#the-levers-we-have) are a great reference, and you should be familiar with all of them.
+
+- **Polishing instead of shipping.** Researching and understanding a problem is great, but don't let the pursuit of perfect get in the way of good enough. Try to get a problem at least 60% of the way there before [reaching out to a customer](/handbook/customer-success/getting-started-with-customers#2-reach-out), but don't wait for 100%, it's often not worth the work. Quiet customers [act on tips without ever replying](/handbook/customer-success/engaging-unengaged-customers#steady-drumbeat-of-usage-specific-tips), so a message you didn't send is value you withheld.
+
+- **Being a better support ticket.** Your week is driven by whatever lands in Slack and PostHog Support, and you never talk to an account unless something is broken. The loudest customers find us anyway, but the quietly struggling ones don't, and those are the ones that churn. [Investigate your book](/handbook/customer-success/getting-started-with-customers#4-ongoing), and use our [health tracking](/handbook/customer-success/health-tracking) and [churn signals](/handbook/customer-success/churn-reasons) to find risk and proactively address it.
+
+- **Being content with one champion.** One great contact always replies, so you stop looking for anyone else, and the PM or data team never learns you exist. [Champion leaves](/handbook/customer-success/churn-reasons#champion-leaves) is one of our most common churn reasons. Cast a wide net from day one and [keep working with new people and departments](/handbook/customer-success/lifecycle-csm#stage-2-establishing-trust).
 
 ## Learning PostHog
 

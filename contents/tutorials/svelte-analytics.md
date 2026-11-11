@@ -207,7 +207,7 @@ To add PostHog to our Svelte app, we need a PostHog instance ([sign up for free]
 Next, install `posthog-js`.
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In the `src/routes` folder, create a `+layout.js` (different from the `+layout.server.js` file you created earlier). In this file, check the environment is the browser, and initialize PostHog with your project token and host. You can find these in [your project settings](https://app.posthog.com/settings/project).

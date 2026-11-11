@@ -83,7 +83,7 @@ Questions from me
 
 ## In-person week (usually week 2)
 
-[In-person onboarding](/handbook/people/onboarding#in-person-onboarding) covers the company-wide process. Below is how we run the CSM week over 3-4 days - there's a [4-day agenda template](https://posthog.slack.com/docs/TSS5W8YQZ/F0BNBPN78EP) to start from, which we copy into a canvas in their onboarding channel. It's a living template - add what you learn from each onboarding. 3 days can feel tight with a lot of information, but it's enough to cover all the content!
+[In-person onboarding](/handbook/people/onboarding#in-person-onboarding) covers the company-wide process. Below is how we run the CSM week over 3-4 days - there's a <PrivateLink url="https://posthog.slack.com/docs/TSS5W8YQZ/F0BNBPN78EP">4-day agenda template</PrivateLink> to start from, which we copy into a canvas in their onboarding channel. It's a living template - add what you learn from each onboarding. 3 days can feel tight with a lot of information, but it's enough to cover all the content!
 
 By the end of the week they should:
 
@@ -99,6 +99,7 @@ Sessions tend to work best as observe, do, review - you do it once, they try it 
 
 - **CSM overview** - who we cover, why we exist, how comp works, the CSM + TAM overlay
 - **How we work** - sprint planning, account review, the quarterly goal
+- **The first 90 days** - walk through the [30/60/90 day benchmarks](/handbook/customer-success/new-hire-onboarding#what-good-looks-like-at-the-end-of-week-4) and how the keeper test works, so they know exactly what you'll be looking at during each probation check-in
 - **Tools & access check**
 - **Agent setup** - MCPs, a PostHog repo clone, impersonation, and a list of GTM skills from the [skills store](/docs/ai-engineering/skills-store)
 - **Finding info** - where to look (handbook vs repo vs Slack), maybe even a working exercise (e.g. "what is the Teams plan?")

@@ -62,7 +62,7 @@ Only accounts assigned to you count toward quota and commission.
 
 ### Automated assignments are temporary
 
-The Salesforce round robin and the [lead-gateway](https://github.com/PostHog/lead-gateway) assign accounts automatically (see [task assignment logic](/handbook/growth/sales/crm#task-assignment-logic)). This assignment also shows in Customer Analytics, but it makes you a temporary owner only. If you disqualify the task or unassign yourself in Salesforce, Customer Analytics removes you from the account.
+The Salesforce round robin and the <PrivateLink url="https://github.com/PostHog/lead-gateway">lead-gateway</PrivateLink> assign accounts automatically (see [task assignment logic](/handbook/growth/sales/crm#task-assignment-logic)). This assignment also shows in Customer Analytics, but it makes you a temporary owner only. If you disqualify the task or unassign yourself in Salesforce, Customer Analytics removes you from the account.
 
 A human assignment in Customer Analytics stays. If a person assigned you in Customer Analytics and you unassign yourself in Salesforce, Customer Analytics makes you the owner again in approximately 5 minutes. To come off the account, unassign yourself in Customer Analytics and remove any relevant tags.
 
@@ -259,7 +259,7 @@ If an account is struggling on these dimensions, that's a signal to invest more.
 
 ## Doing the allocation
 
-Each quarter, TAM and CSM team leads review coverage and rebalance books. TAM allocation requires Ben's approval; CSM allocation requires Simon's approval. Accounts can still be added during the quarter when a handover or qualified growth opportunity requires it.
+Each quarter, TAM and CSM team leads review coverage and rebalance books. TAM allocation requires Ben's approval; CSM allocation requires team lead approval. Accounts can still be added during the quarter when a handover or qualified growth opportunity requires it.
 
 ### TAM allocation
 
@@ -278,7 +278,7 @@ To request CSM coverage, add:
 
 ### CSM allocation
 
-Every $20k+ account should have a CSM. At the start of each quarter, CSM team leads, with Simon's approval, review:
+Every $20k+ account should have a CSM. At the start of each quarter, CSM team leads will review:
 
 1. **The <PrivateLink url="https://us.posthog.com/code/canvas/55b93018-aa64-4d36-9996-7b9415a043fd/01a0425d-ad76-7a59-9f74-e77d73a9a30a">Uncovered customer backlog</PrivateLink> canvas** to find accounts without a CSM
 2. **Accounts tagged `csm overlay needed` or `csm handover needed`** that need a CSM assigned
@@ -395,7 +395,7 @@ The incoming TAM should prepare by reviewing the following in Customer Analytics
 - [ ] **Billing & contract details** – annual plan dates, credit balances, discounts, renewal date, billing limits
 - [ ] **Product adoption** – which products are they paying for? What's underutilized?
 - [ ] **Usage metrics** – active users, project count, Feature Flag requests, Session Replay volume, insight/dashboard engagement
-- [ ] **Support history** – recent tickets in [PostHog Support](https://us.posthog.com/project/2/support/tickets), tags, priority, resolution status
+- [ ] **Support history** – recent tickets in <PrivateLink url="https://us.posthog.com/project/2/support/tickets">PostHog Support</PrivateLink>, tags, priority, resolution status
 - [ ] **Conversations & notes** – read all Customer Analytics notes, meeting summaries, and conversation history
 - [ ] **Customer Slack channel** – scan the shared channel for who's actually active on the customer side, what issues have come up, and any open threads worth asking the previous owner about. This is often where the most useful context lives.
 - [ ] **Internal Slack discussions** – search our own Slack (outside the shared channel) for mentions of the customer. Engineering debates, pricing conversations, support escalations, and context from the previous owner often surface things that were never written down in Customer Analytics.

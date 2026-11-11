@@ -15,7 +15,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { getTool } from '../../data/tools'
-import { applications, topFeatures } from './traces/slides'
+import { applications, keyFeatures } from './traces/slides'
 
 export const traces = {
     ...getTool('traces'),
@@ -65,11 +65,11 @@ export const traces = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -101,6 +101,7 @@ export const traces = {
     ],
     overview: {
         title: 'Find the span that broke, then fix it',
+        description: '"Find spans with a duration over 2 seconds since the last deploy"',
         eli5: 'A trace times one request through every service it touches. Open the waterfall and there’s the slow query six services deep, or the async job a stack trace gives up on. Traces come in over the same OpenTelemetry setup as Logs, so one install covers both. Traces get you to where a request went wrong, and the logs from that span tell you why.',
     },
     screenshots: {

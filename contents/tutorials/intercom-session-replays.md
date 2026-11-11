@@ -78,7 +78,7 @@ To set up session replays, we install PostHog in our app. If you don't have a Po
 After doing this, install the [`posthog-js`](/docs/libraries/js) SDK:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, create a `providers.js`  file in your `app`  folder. In it, initialize PostHog with your project token and instance address (from [your project settings](https://us.posthog.com/settings/project-details)) and export a provider component. If you use a US Cloud instance, also make sure your `ui_host` config option is set to `https://us.posthog.com`.

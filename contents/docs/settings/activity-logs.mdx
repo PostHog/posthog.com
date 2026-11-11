@@ -105,15 +105,16 @@ These events track changes to individual resources within projects.
 
 Each activity log entry contains the following information:
 
-| Field      | Description                                                                                                                                           |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Timestamp  | When the action occurred (UTC)                                                                                                                        |
-| Actor      | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user. |
-| Action     | The type of action performed (created, updated, deleted, etc.)                                                                                        |
-| Scope      | The type of resource affected (feature flag, dashboard, etc.)                                                                                         |
-| Target     | The specific resource that was affected (name and ID)                                                                                                 |
-| Changes    | Before and after values for each modified field                                                                                                       |
-| IP address | The IP address of the client that initiated the action. System-generated actions display "—"                                                          |
+| Field      | Description                                                                                                                                                                                                    |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp  | When the action occurred (UTC)                                                                                                                                                                                 |
+| Actor      | The user who performed the action (name, email). Actions performed via [MCP](/docs/model-context-protocol) display an **MCP** badge next to the user.                                                          |
+| Action     | The type of action performed (created, updated, deleted, etc.)                                                                                                                                                 |
+| Scope      | The type of resource affected (feature flag, dashboard, etc.)                                                                                                                                                  |
+| Target     | The specific resource that was affected (name and ID)                                                                                                                                                          |
+| Changes    | Before and after values for each modified field                                                                                                                                                                |
+| IP address | The IP address of the client that initiated the action. System-generated actions display "—"                                                                                                                   |
+| Credential | The credential used to authenticate the action (e.g., "Session", "Personal API key", "OAuth app"). Expanding a row shows the credential ID for login sessions, personal API keys, and project secret API keys. |
 
 ### Example log entry
 
@@ -151,7 +152,9 @@ Here's an example of what a log entry looks like when retrieved via the API:
   "created_at": "2024-01-15T10:30:00.000000Z",
   "is_system": false,
   "client": "mcp",
-  "ip_address": "192.0.2.1"
+  "ip_address": "192.0.2.1",
+  "credential_type": "personal_api_key",
+  "credential_id": "phx_abc123def456"
 }
 ```
 
@@ -343,7 +346,7 @@ Activity logs can be exported for offline analysis, compliance reporting, or int
 4. Select your preferred format (CSV or Excel)
 5. The export will be generated and available for download
 
-Exports include all log entry fields and respect any filters you have applied.
+Exports include all log entry fields and respect any filters you have applied. The `credential_type` and `credential_id` columns appear as the last two columns in CSV and Excel files.
 
 > **Note**: Export is currently only available in the project view. Organization-wide exports are not yet supported.
 
@@ -437,6 +440,7 @@ SELECT
     activity,
     scope,
     item_id,
+    credential_type,
     detail,
     created_at
 FROM system.activity_logs
@@ -451,7 +455,7 @@ This is useful for:
 - Analyzing change patterns across your team
 - Integrating activity data with other PostHog queries
 
-> **Note:** Only team-scoped activity logs are visible via HogQL. Organization-level logs (like membership changes) are not available in this table.
+> **Note:** Only team-scoped activity logs are visible via HogQL. Organization-level logs (like membership changes) are not available in this table. The `credential_type` field is available in HogQL queries. The `credential_id` field is not available in HogQL for security reasons.
 
 ## Security and privacy considerations
 

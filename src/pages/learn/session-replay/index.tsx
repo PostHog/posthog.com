@@ -1,9 +1,9 @@
 import React from 'react'
 
-import LearnLanding from 'components/PocketGuides/LearnLanding'
-import { SessionReplayLinkFigure } from 'components/PocketGuides/ProductAnalyticsIdentityExhibits'
-import LearnPage from 'components/PocketGuides/LearnPage'
-import type { LearnLandingProps } from 'components/PocketGuides/LearnPage'
+import LearnLanding from 'components/Learn/LearnLanding'
+import { SessionReplayLinkFigure } from 'components/Learn/TwigExhibits/ProductAnalyticsIdentityExhibits'
+import LearnPage from 'components/Learn/LearnPage'
+import type { LearnLandingProps } from 'components/Learn/LearnPage'
 
 const Landing = (props: LearnLandingProps): JSX.Element => (
     <LearnLanding {...props} playground={{ figure: <SessionReplayLinkFigure />, fullWidth: true }} />

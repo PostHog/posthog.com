@@ -9,7 +9,7 @@ availability:
 sourceId: ShipStation
 ---
 
-The ShipStation connector syncs your order, shipment, fulfillment, product, customer, store, and warehouse data into PostHog.
+The ShipStation connector syncs your order, shipment, fulfillment, product, customer, store, warehouse, user, service, package, and marketplace data into PostHog.
 
 ## Adding a data source
 
@@ -29,15 +29,19 @@ Once the syncs complete, you can query your ShipStation data in PostHog.
 
 ## Available tables
 
-| Table          | Description           | Sync method  |
-| -------------- | --------------------- | ------------ |
-| `orders`       | Order data            | Incremental  |
-| `shipments`    | Shipment data         | Incremental  |
-| `fulfillments` | Fulfillment data      | Incremental  |
-| `products`     | Product catalog       | Full refresh |
-| `customers`    | Customer data         | Full refresh |
-| `stores`       | Store information     | Full refresh |
-| `warehouses`   | Warehouse information | Full refresh |
+| Table          | Description                                                        | Sync method  |
+| -------------- | ------------------------------------------------------------------ | ------------ |
+| `customers`    | Customer records aggregated from orders                            | Full refresh |
+| `fulfillments` | Fulfillment records for orders shipped outside ShipStation         | Incremental  |
+| `marketplaces` | Marketplaces that can connect to ShipStation (v1 API only)         | Full refresh |
+| `orders`       | Customer orders imported from connected selling channels           | Incremental  |
+| `packages`     | Package types supported by carriers connected to the account       | Full refresh |
+| `products`     | Products in the ShipStation catalog                                | Full refresh |
+| `services`     | Shipping services available from carriers connected to the account | Full refresh |
+| `shipments`    | Shipments created for orders, including tracking and cost details  | Incremental  |
+| `stores`       | Connected selling channels that orders are imported from           | Full refresh |
+| `users`        | Users of the ShipStation account                                   | Full refresh |
+| `warehouses`   | Ship-from locations configured in ShipStation                      | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 

@@ -1,0 +1,39 @@
+### Files URL
+
+The **Files URL** tells PostHog which files to import. It starts with the bucket (or container) and can point to a folder, a single file, or a pattern:
+
+- Use `*` to match any part of a file or folder name, such as `orders/*.parquet`.
+- Use `**` to match across folders, such as `orders/**/*.parquet`.
+- A URL without a wildcard imports the folder or file it points to.
+
+The bucket name must be exact. Put wildcards only in the path after the bucket.
+
+### Supported file formats
+
+| Format | File extensions |
+| --- | --- |
+| CSV, with or without a header row | `.csv`, `.tsv` |
+| JSON Lines (one JSON object per line) | `.jsonl`, `.ndjson`, `.json` |
+| Parquet | `.parquet` |
+| Delta Lake tables | A folder that contains a `_delta_log/` folder |
+
+PostHog also reads gzip-compressed files, such as `.csv.gz`.
+
+By default, PostHog detects the format from the file extension. If your files have no extension or an unusual one, set **File format** to the format of your files. For CSV files, you can also tell PostHog if double quotes enclose the values. If they don't, PostHog reads quote characters as plain text.
+
+### How files become tables
+
+PostHog finds the files that match the URL and creates:
+
+- One table for each folder.
+- One table for each file directly in the folder that the URL points to.
+- One table for each Delta Lake table.
+
+If all the files share the same columns, such as a daily export, turn on **Combine every file into one table?** and enter a table name. PostHog then imports all the files into that one table. Delta Lake tables still get one table each.
+
+After you connect, select the tables to import, then choose a sync method and a sync frequency for each table.
+
+### Limits
+
+- A source can have up to 1,000 tables.
+- A table can have up to 50,000 files. If a table has more files, the sync fails. Use a more specific URL, or split the files into more folders.

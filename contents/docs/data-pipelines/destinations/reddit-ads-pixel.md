@@ -39,7 +39,7 @@ You should be aware that this destination relies on creating third-party cookies
 
 ### Is the source code for this destination available?
 
-PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/reddit/template_reddit_pixel.py) is available on GitHub.
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/products/cdp/backend/templates/reddit/template_reddit_pixel.py) is available on GitHub.
 
 <PostHogMaintained />
 

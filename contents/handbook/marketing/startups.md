@@ -6,11 +6,11 @@ showTitle: true
 
 > **Want to apply for our startups program?** [Sign-up here](/startups), or [apply on Bookface if you're in Y Combinator](https://bookface.ycombinator.com/deals/687). 
 
-We run two special programs for early-stage teams, plus external partnerships with [Lenny's Product Pass and Every.to](#external-partnerships). The primary place for discussing these is the [#project-startups-and-students](https://posthog.slack.com/archives/C088RSQKH2T) channel in Slack, where we also discuss [PostHog for Students](/students).
+We run two special programs for early-stage teams, plus external partnerships with [Lenny's Product Pass and Every.to](#external-partnerships). The primary place for discussing these is the <PrivateLink url="https://posthog.slack.com/archives/C088RSQKH2T">#project-startups-and-students</PrivateLink> channel in Slack, where we also discuss [PostHog for Students](/students).
 
 | Feature                     | Startups                                              | Y Combinator                                          |
 | --------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| Eligibility                 | <2 years old, <$5M raised, not acquired, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
+| Eligibility                 | <2 years old, <$5M raised, not acquired or owned by an ineligible company, company email domain | Must be in YC (proven with a [YC verification link](https://www.ycombinator.com/verify)), <$25m raised, company email domain |
 | Credit                      | $50,000 for 12 months                                 | $50k per year, whilst eligible                        |
 | Limit                       | Once per founder or org, whichever comes first | Once per founder or org, whichever comes first (annual renewals for the same org, and joining after PostHog for Startups credits end, don't count) |
 | Can use credit for add-ons? | ⚠️ Yes, but cannot use credit for BAA in Boost package | ✅ Yes, and can use credit for BAA in Boost package    |
@@ -38,6 +38,8 @@ All applications are **automatically approved**, then **manually reviewed** for 
 
 > ❗Credits are issued only **once per founder and once per organization**, whichever comes first. A founder who already got credits for one startup can't claim them again for a new company or a new PostHog organization. This rule covers both programs: a founder who got YC credits can't then claim PostHog for Startups credits. A team whose PostHog for Startups credits have ended can still join the YC program if it's eligible. Annual YC renewals for the same organization don't count as a new claim.
 
+> ❗Eligibility is based on the **company**, not the product. A new product, brand, or subsidiary that an ineligible company owns isn't eligible, even if the new entity is less than 2 years old and has no outside funding. This applies to a project in the parent's existing organization and to a new organization. If a group splits into several organizations to claim credits, that's a breach of our terms, and we remove the credits when we spot it. It's also a worse experience for the group: with separate subscriptions, each organization is billed on its own and can't pool usage to reach higher volume discounts, so we discourage it.
+
 Applications from free or disposable email domains (gmail.com, outlook.com, and similar) are rejected automatically at submission. This applies to both programs. Founders who don't have a company domain yet can still use the monthly free allowance on every product and apply once they have one.
 
 We track all PostHog for Startups applications in [this Zapier table](http://tables.zapier.com/app/tables/t/01JRARGWTSDYCGNS12HXN3B6DY) and [this Zap](https://zapier.com/editor/291861515/published?conversationId=6e76ea6b-ef2d-4851-9520-55be39df1232).
@@ -52,7 +54,7 @@ This program is similar to our startup program but has some key differences for 
 -   Access to HogPatch for the duration of their time in the batch
 -   Partner benefits with Speakeasy and Incident.io
 
-You can find the copy for the latest deal on Bookface in this [doc](https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo). To post updates, you need to ask James or Tim to do it.
+You can find the copy for the latest deal on Bookface in this <PrivateLink url="https://docs.google.com/document/d/1dmsMxrfWSVhKZY4bQp5QIRiXS2iCvLGJah5EKWOvoeI/edit?tab=t.0#heading=h.o7fhsqrlnheo">doc</PrivateLink>. To post updates, you need to ask James or Tim to do it.
 
 > This deal is not available to YC alumni, who started another company – if the new company is eligible and the founder hasn't received startup or YC credits before, they can apply for PostHog for Startups instead
 
@@ -97,7 +99,7 @@ Subscribers to [Every](https://every.to/) get:
    If they meet the basic criteria, we automatically apply the correct amount of Stripe credit.
 
 3. **Welcome + merch**
-   Shortly after, they receive an [automated email](https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185)) from <TeamMember name="Joe Black" photo />, in which we
+   Shortly after, they receive an <PrivateLink url="https://fly.customer.io/workspaces/127208/journeys/composer/actions/2185">automated email</PrivateLink>) from <TeamMember name="Joe Black" photo />, in which we
    - Confirm their acceptance, welcome them and explain perks
    - Provide unique code(s) to claim founder kit(s) from [the merch store](/merch) (orders are fulfilled by Micromerch, merch questions can go in the `#merch` Slack channel)
 
@@ -113,7 +115,7 @@ Subscribers to [Every](https://every.to/) get:
 Applications are automatically enriched with Clearbit and Clay, then approved. We then manually review all emails to ensure eligibility. If there's a mismatch (e.g. on founding date or funding raised), we’ll email the founder.
 If we don’t hear back in a week or confirm ineligibility, we remove the credits.
 
-We also check that the founder and the organization have not received startup or YC credits before. If either has, we reject the application or remove the credits. The exception is a YC application from a team whose PostHog for Startups credits have ended. People sometimes claim to be part of several startups to get credits again. Because credits are always issued at our discretion, we don't need to prove this before we decline. Don't tell applicants how we detect duplicate claims.
+We also check that the founder and the organization have not received startup or YC credits before. If either has, we reject the application or remove the credits. The exception is a YC application from a team whose PostHog for Startups credits have ended. We also decline applications from new products, brands, or subsidiaries of an established company. People sometimes claim to be part of several startups to get credits again. Because credits are always issued at our discretion, we don't need to prove this before we decline. Don't tell applicants how we detect duplicate claims.
 
 ## Merch
 
@@ -124,7 +126,7 @@ All merch is fulfilled through the [PostHog store](/merch) by Micromerch.
 -   If a team has more than 4 founders, they can [submit a support ticket](http://app.posthog.com/home#supportModal) to request more.
 -   Additional merch is occasionally granted at our discretion.
 
-Issues? Reach out in [#merch Slack](https://posthog.slack.com/archives/C04DWKH7DM3). Founders can also email [merch@posthog.com](mailto:merch@posthog.com).
+Issues? Reach out in <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch Slack</PrivateLink>. Founders can also email [merch@posthog.com](mailto:merch@posthog.com).
 
 ## Monthly Newsletter
 
@@ -170,17 +172,17 @@ Founders must clearly explain why they couldn’t use the credit in time and pro
 
 ## Reporting
 
-[We have a dashboard for this.](https://us.posthog.com/project/2/dashboard/188364)
+<PrivateLink url="https://us.posthog.com/project/2/dashboard/188364">We have a dashboard for this.</PrivateLink>
 
 ## Troubleshooting
 
-If the Slack invite isn't sent or you discover founders did not receive it, you can [manually invite users](https://slack.com/help/articles/201980108-Add-people-to-a-channel) to the [#posthog-founders-club](https://posthog.slack.com/archives/C04J1TJ11UZ) channel. Make sure to select that they are "An external organization" when prompted right after adding their email address. A Slack admin will need to approve them before they're fully added to the channel.
+If the Slack invite isn't sent or you discover founders did not receive it, you can [manually invite users](https://slack.com/help/articles/201980108-Add-people-to-a-channel) to the <PrivateLink url="https://posthog.slack.com/archives/C04J1TJ11UZ">#posthog-founders-club</PrivateLink> channel. Make sure to select that they are "An external organization" when prompted right after adding their email address. A Slack admin will need to approve them before they're fully added to the channel.
 
 If they have trouble ordering their startup program merch or the [YC Kit from the merch store](/merch?product=posthog-yc-kit):
 
 - If they did not receive the automated coupon email, check the `startup_plan_customer_added` event or Customer.io email history to find which coupon codes were generated or sent, then send those links to the founder.
 - For Shopify access, look up the Shopify credentials in the shared 1Password account.
-- If there is no `startup_plan_customer_added` event or Customer.io email record, open the [Shopify discounts page](https://admin.shopify.com/store/posthog/discounts), pick an active discount for the same merch type, duplicate it, regenerate the coupon code, confirm it is limited to one use, and save it. You'll have to repeat the process for every founder.
-- If they have the codes but they no longer work, the most common issue is that the codes expired. Search for each code from the [Shopify discounts page](https://admin.shopify.com/store/posthog/discounts). If the codes expired and should still work for this founder, extend the end date on those specific codes, for example by another month. If the codes are missing, already used, or should not be reused, follow the same instructions above to create new ones.
+- If there is no `startup_plan_customer_added` event or Customer.io email record, open the <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify discounts page</PrivateLink>, pick an active discount for the same merch type, duplicate it, regenerate the coupon code, confirm it is limited to one use, and save it. You'll have to repeat the process for every founder.
+- If they have the codes but they no longer work, the most common issue is that the codes expired. Search for each code from the <PrivateLink url="https://admin.shopify.com/store/posthog/discounts">Shopify discounts page</PrivateLink>. If the codes expired and should still work for this founder, extend the end date on those specific codes, for example by another month. If the codes are missing, already used, or should not be reused, follow the same instructions above to create new ones.
 
 Credentials for Zapier, Shopify, etc. are available in the shared 1Password account.

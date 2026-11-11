@@ -7,12 +7,6 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
-
-Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
-
-</CalloutBox>
-
 A scout is a scheduled agent that explores your PostHog data and raises a hand when it finds something worth knowing. Scouts are one of the things that start the [self-improving loop](/docs/self-driving/self-improving-loop): they turn raw product data into [signals](/docs/self-driving/signals) and [reports](/docs/self-driving/reports) the rest of the loop can act on.
 
 See [task environment detection](/docs/tasks/agent-environment) for the variables available to code and agent instructions in a scout's cloud sandbox.
@@ -68,7 +62,7 @@ To stop a scout from filing reports at all, turn off **Write signals to the inbo
 
 ### Instructions for all scouts
 
-A scout's settings and brief apply to that scout only. To give the same guidance to every scout in the project, a project admin can open [**Self-driving > Settings**](https://app.posthog.com/inbox/settings), find **Steering**, and write instructions in the **Scouts** tab. The same section has separate tabs for **Research** and **Implementation** agents.
+A scout's settings and brief apply to that scout only. To give the same guidance to every scout in the project, open [**Self-driving > Settings**](https://app.posthog.com/inbox/settings), find **Steering**, and write instructions in the **Scouts** tab. The same section has separate tabs for **Research** and **Implementation** agents.
 
 These instructions supplement your shared project instructions and each scout's brief. New and resumed runs receive them. See [steer Self-driving agents](/docs/self-driving/steering) for details and examples.
 
