@@ -85,16 +85,14 @@ A poll is charged in one of two ways:
 - **The definitions changed**, or the instance just started: PostHog returns the full definitions. This is charged as 10 requests.
 - **Nothing changed**: the SDK sends the ETag of the definitions it already holds, and PostHog replies `304 Not Modified` with no body. This is charged as 1 request.
 
-Your cost follows your poll rate and your instance count. One instance at the default interval makes 2 polls per minute. That is `2 * 60 * 24 * 30 = 86,400` polls per month. Almost all of them return `304 Not Modified`, so one instance costs about 86,400 requests per month. Each definition change adds 10 requests per instance. The Go SDK polls every 5 minutes by default, so one Go instance costs about 8,640 requests per month. Older SDK versions without ETag support are charged 10 requests for every poll, so the same instance costs `10 * 2 * 60 * 24 * 30 = 864,000 requests`.
+Your cost follows your poll rate and your instance count. One instance at the default interval makes 2 polls per minute. That is `2 * 60 * 24 * 30 = 86,400` polls per month.
 
 Definitions that hold only the flags PostHog creates for Surveys and product tours are not charged, for a `304` and for a full response.
-
-> **Note:** Before November 5, 2026, a poll that returned `304 Not Modified` was not charged. If your feature flag requests rose on that date, and your own request volume did not change, this is the reason.
 
 To keep this cost down:
 
 1. **Use an SDK version that sends ETags.** Support arrived in Node.js 5.17.2, Python 7.13.0, Go 1.12.2, Ruby 3.4.0, PHP 3.7.3, .NET 2.4.2, and Java (posthog-server) 2.2.0. These versions send the ETag automatically, so an unchanged poll costs 1 request instead of 10.
-2. **Increase the [polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-secret-api-key)** when initializing PostHog, for example every 5 minutes instead of every 30 seconds. This reduces the number of charged polls by the same factor, because a 5 minute interval makes 10 times fewer polls than a 30 second interval. The drawback is that a flag change takes up to 5 minutes (instead of 30 seconds) to reach your server.
+2. **Increase the [polling interval](/docs/feature-flags/local-evaluation#step-2-initialize-posthog-with-your-secret-api-key)** when initializing PostHog, for example every 5 minutes instead of every 30 seconds. The drawback is that a flag change takes up to 5 minutes (instead of 30 seconds) to reach your server.
 3. **Share definitions across instances.** Every instance polls on its own, so 20 instances cost 20 times as much as one. With an [external cache provider](/docs/feature-flags/local-evaluation/distributed-environments), one instance polls and the others read from the shared cache.
 
 <CalloutBox icon="IconWarning" title="Edge/Lambda environments" type="caution">
