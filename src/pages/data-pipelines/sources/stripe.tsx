@@ -238,7 +238,9 @@ const jumpLinks = [
     { id: 'across-posthog', label: 'Use it across PostHog' },
 ]
 
-function JumpLinks() {
+// Resolve targets inside this page, not the whole document: another open window can have a
+// section with the same id (like /mcp's "connect").
+function JumpLinks({ pageRef }: { pageRef: React.RefObject<HTMLDivElement> }) {
     return (
         <nav aria-label="On this page" className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
             <span className="font-semibold text-muted">On this page:</span>
@@ -246,7 +248,9 @@ function JumpLinks() {
                 <button
                     key={link.id}
                     type="button"
-                    onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() =>
+                        pageRef.current?.querySelector(`[id="${link.id}"]`)?.scrollIntoView({ behavior: 'smooth' })
+                    }
                     className="font-semibold text-red dark:text-yellow"
                 >
                     {link.label}
@@ -257,6 +261,8 @@ function JumpLinks() {
 }
 
 export default function StripeSource(): JSX.Element {
+    const pageRef = React.useRef<HTMLDivElement>(null)
+
     return (
         <>
             <SEO
@@ -274,7 +280,7 @@ export default function StripeSource(): JSX.Element {
                     description: 'Connect Stripe to PostHog and answer revenue questions with product data.',
                 }}
             >
-                <div className="@container not-prose mx-auto max-w-7xl p-4 pb-16 text-primary @xl:p-8">
+                <div ref={pageRef} className="@container not-prose mx-auto max-w-7xl p-4 pb-16 text-primary @xl:p-8">
                     <header className="grid gap-6 @3xl:grid-cols-[minmax(0,1fr)_minmax(12rem,15rem)] @3xl:items-center @3xl:gap-10">
                         <div className="min-w-0">
                             <h1 className="m-0 text-balance text-4xl font-bold leading-[1.1] tracking-tight @2xl:text-5xl">
@@ -312,7 +318,7 @@ export default function StripeSource(): JSX.Element {
                         <HedgehogMoney className="hidden w-full max-w-[15rem] justify-self-end @3xl:block" />
                     </header>
 
-                    <JumpLinks />
+                    <JumpLinks pageRef={pageRef} />
 
                     <Section
                         id="what-syncs"

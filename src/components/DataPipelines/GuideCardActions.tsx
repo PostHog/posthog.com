@@ -9,13 +9,18 @@ export default function GuideCardActions({ href }: { href: string }): JSX.Elemen
     const skills = useSkillFiles()
     const guideUrl = pocketGuideDestination(href)
     const skill = skills.get(normalizeUrl(guideUrl))
-    const [copied, setCopied] = useState(false)
+    const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle')
 
-    const copySkill = () => {
+    // Only report success once the write resolves: it rejects when the browser blocks clipboard access.
+    const copySkill = async () => {
         if (!skill?.raw) return
-        navigator.clipboard.writeText(skill.raw)
-        setCopied(true)
-        window.setTimeout(() => setCopied(false), 1500)
+        try {
+            await navigator.clipboard.writeText(skill.raw)
+            setCopyState('copied')
+        } catch {
+            setCopyState('failed')
+        }
+        window.setTimeout(() => setCopyState('idle'), 1500)
     }
 
     return (
@@ -24,7 +29,7 @@ export default function GuideCardActions({ href }: { href: string }): JSX.Elemen
                 Read the guide
             </CallToAction>
             <CallToAction type="secondary" size="sm" disabled={!skill?.raw} onClick={copySkill}>
-                {copied ? 'Copied' : 'Copy skill'}
+                {copyState === 'copied' ? 'Copied' : copyState === 'failed' ? "Couldn't copy" : 'Copy skill'}
             </CallToAction>
         </div>
     )
