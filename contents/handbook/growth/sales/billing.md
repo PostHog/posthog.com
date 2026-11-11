@@ -143,15 +143,30 @@ RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) s
 
 ### Disputes and chargebacks
 
-A dispute (chargeback) occurs when a cardholder asks their bank to reverse a charge. A dispute cancels the subscription and suspends access until it is resolved.
+A dispute (chargeback) occurs when a customer asks their bank to reverse a charge.
 
-1. **Get the facts in Stripe.** Read the dispute reason and the evidence due date. Compare the card's billing details with the Stripe customer. Cards saved through Stripe Link show the name and email of the Link account. Thus a personal email on the card does not always mean fraud.
-2. **Find who added the card.** In PostHog, look for `payment intent created` events and billing page views for the organization near the time that the card was added. Usually it is a team member who left the company or forgot about the card.
-3. **Contact the account.** Tell the account owner and the organization admins about the dispute. If the dispute is a mistake, ask the cardholder to withdraw it with their bank, and ask the account to add a new card. Do not share the cardholder's name or email with other people.
-4. **If the card was stolen,** refund the charge and use the `Fraudulent` reason. See [issuing a refund](/handbook/growth/sales/refunds#issuing-a-refund). Do not use `Fraudulent` for a mistake, because Stripe then blocks the card.
-5. **Restore access** when the dispute is withdrawn or resolved.
+#### Initial response
 
-If the account disputes a second charge, or the dispute looks like bad faith, escalate to RevOps in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
+Email all admins on the account immediately. There is no template. Write a custom email that:
+
+- Acknowledges the dispute.
+- Reminds them that we are generally generous with [refunds](/handbook/growth/sales/refunds).
+- Explains what the charge was for.
+- Tells them that Stripe cannot process a refund while the dispute is open, because the card network holds the funds.
+
+#### Path to a refund
+
+The customer must withdraw the dispute with their bank and send us a formal confirmation letter from the bank. When we receive the letter, we can process the refund immediately.
+
+#### Blocking access
+
+1. Cancel their subscription in Stripe.
+2. Block access to PostHog. In Django admin, set the organization's "Active" field to "No".
+3. Set `is_blocked_from_subscribing` to `true` in their Stripe customer metadata, so they cannot subscribe again.
+
+#### Restoring access
+
+By default, we do not restore access. The customer stays blocked. Billing support and finance can make an exception at their discretion, but exceptions should be fewer than 1% of cases.
 
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
