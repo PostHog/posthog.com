@@ -8,6 +8,15 @@ This page tells you how CSMs at PostHog use AI agents in their daily work, and w
 
 For how to check AI output before you share it, read [Using AI to analyze customer issues](/handbook/customer-success/using-ai-to-analyze-customer-issues). This page is about how to set up your work. That page is about how to trust the results.
 
+## Required tools
+
+Install and set up these tools before you start:
+
+- **[Hogpilot](https://github.com/PostHog/hogpilot):** Account memory for your agent sessions. It works in Claude Code, Codex, Cursor, and PostHog Desktop. It collects the important account facts from your sessions and stores them in PostHog. Built by Jake Sciotto.
+- **PostHog MCP on US project 2:** Authenticate the PostHog MCP against US cloud. If the session starts in a different project, use `switch-project` to go to project 2.
+- **<PrivateLink url="https://us.posthog.com/project/2/settings/user-personal-integrations">PostHog Connect</PrivateLink>:** A personal connection from US project 2 to your EU login. It lets your agent run MCP tools in EU with the `posthog-connection-call` tool. Built by Tom Owers.
+- **[`querying-production-databases`](https://github.com/PostHog/posthog/blob/master/.agents/skills/querying-production-databases/SKILL.md) skill:** Tells your agent how to query read-only production ClickHouse and Postgres in the US and EU through the MCP. It also gives the PostHog Connect setup steps and the scopes to select.
+
 ## Know which type of work you do
 
 Agent work for customers is usually one of two types. Set up each type differently.
@@ -29,14 +38,14 @@ A local folder for each customer is sufficient. You do not need a git repo for e
 
 Do not keep customer memory in a `CLAUDE.md` file or in notes in a customer folder. These files become old quickly, and agents read old facts as true facts.
 
-Use [Hogpilot](https://github.com/PostHog/hogpilot). It runs with your agent, collects the important account facts from your sessions, and stores them in PostHog. The next session, and your team, can then find that context. It also keeps facts that the data cannot show. For example, an account can have seasonal usage that looks like churn risk but is normal for that business.
+Use Hogpilot (refer to [Required tools](#required-tools)). It runs with your agent, collects the important account facts from your sessions, and stores them in PostHog. The next session, and your team, can then find that context. It also keeps facts that the data cannot show. For example, an account can have seasonal usage that looks like churn risk but is normal for that business.
 
 ### Query production data before you impersonate
 
 You usually do not have to impersonate a customer to get their data. The PostHog MCP on US project 2 can query read-only production ClickHouse and Postgres sources for the US and EU regions. To do this:
 
 1. Follow the [`querying-production-databases`](https://github.com/PostHog/posthog/blob/master/.agents/skills/querying-production-databases/SKILL.md) skill in the `posthog` repo.
-2. For EU accounts, connect your EU login to US project 2 one time with a personal PostHog connection. Then use the `posthog-connection-call` tool. The skill gives the setup steps and the scopes to select.
+2. For EU accounts, use your PostHog Connect connection with the `posthog-connection-call` tool. Refer to [Required tools](#required-tools).
 
 The agent does not always use these sources first. If it tries other tools or tells you that it cannot get the data, tell it to use the skill.
 
