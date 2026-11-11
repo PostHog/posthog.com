@@ -60,7 +60,7 @@ Metrics are stored in a columnar time series table and exposed to SQL as `postho
 
 ## What the alpha means here
 
-Ingestion doesn't depend on the viewer. PostHog accepts and stores the metrics you send whether or not you've turned on the Metrics viewer for the project, so enabling it later shows data sent earlier (within the 30-day retention). Ingestion returns a success response either way, so to confirm data landed, check the **Overview** tab or query the `posthog.metrics` table in the **SQL** tab.
+Ingestion doesn't depend on the viewer. Metrics you send while the Metrics viewer is off are stored for the project, so enabling it later shows data sent earlier (within the 30-day retention). A `200` response doesn't prove the data landed: an accepted request returns `200`, but a request with an unknown project token currently returns `200` too, so check your token. To confirm data landed, check the **Overview** tab or query the `posthog.metrics` table in the **SQL** tab.
 
 While metrics is in open alpha, ingestion details and limits may still change, and metrics data is kept for 30 days. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
 
