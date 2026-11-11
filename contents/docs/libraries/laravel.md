@@ -18,7 +18,7 @@ The [PostHog Laravel SDK](https://github.com/PostHog/posthog-laravel) supports L
 Install [`posthog/posthog-laravel`](https://packagist.org/packages/posthog/posthog-laravel) and publish its configuration:
 
 ```bash
-composer require "posthog/posthog-laravel:^0.3"
+composer require "posthog/posthog-laravel:^0.4"
 php artisan posthog:install
 ```
 

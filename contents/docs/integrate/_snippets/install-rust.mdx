@@ -19,7 +19,7 @@ If you need to use a synchronous client instead – like we do in our [CLI](http
 
 ```toml
 [dependencies]
-posthog-rs = { version = "0.14", default-features = false }
+posthog-rs = { version = "0.31", default-features = false }
 ```
 
 With the blocking client, the same methods are available without `.await`. Either way, `capture` is non-blocking: it hands the event to a background worker that batches and sends it, so it returns immediately instead of waiting on the network. Because delivery happens in the background, call `flush()` or `shutdown()` before your program exits, or buffered events may be lost.
