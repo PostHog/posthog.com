@@ -33,7 +33,7 @@ The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `instru
 <Step title="Install the packages" badge="required">
 
 ```bash
-npm install @posthog/mcp@1 posthog-node@5
+npm install @posthog/mcp@1 posthog-node@6
 ```
 
 `@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle. `@posthog/mcp` re-exports `PostHog`, so one import covers both. `posthog-node` is still a peer dependency, so install it too.
