@@ -1,5 +1,5 @@
 import React from 'react'
-import { HedgehogReadingIsMagic } from '@posthog/brand/hoggies'
+import readingIsMagic from '@posthog/brand/hoggies/png/reading-is-magic'
 import { SEO } from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
@@ -20,8 +20,11 @@ export const Handbook: React.FC = () => {
                 <section className="max-w-4xl">
                     <div className="flex flex-col @md:items-center @md:justify-end @md:flex-row-reverse gap-8 @md:gap-2 mb-8">
                         <div>
-                            <HedgehogReadingIsMagic
-                                title="A hedgehog reading a glowing book"
+                            <img
+                                src={readingIsMagic}
+                                alt="A hedgehog reading a glowing book"
+                                width={1000}
+                                height={1000}
                                 className="w-full max-w-[300px] h-auto"
                             />
                         </div>
