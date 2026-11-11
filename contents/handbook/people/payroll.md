@@ -33,17 +33,20 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 
 ## Your first payroll
 
-- In the UK, you will be invited to Sage by DRG our payroll provider.
 - Complete all your onboarding tasks in Deel (and BambooHR if you're in the US) during your first week. If anything is missing, you may not be included in your first payroll.
-- In the UK, send us your P45 from your previous employer, or fill in the [HMRC starter checklist](https://www.gov.uk/government/publications/paye-starter-checklist) if you don't have one. Without it, you may be put on an emergency tax code.
 - If you start after the payroll cutoff, you'll get your first payment in the next payroll cycle.
-  
+- **UK only**
+
+- We'll send you a new joiner form to fill in with your personal details.
+- Send us your P45 from your previous employer, or fill in the [HMRC starter checklist](https://www.gov.uk/government/publications/paye-starter-checklist) if you don't have one. Without it, you may be put on an emergency tax code.
+- DRG, our payroll provider, will invite you to Sage, where you'll find your payslips.
+
 ## Keeping your details up to date
 
 **Bank details**
 
 - Germany, EOR or contractor: update them in Deel.
-- UK: send them to Milagros through a 1Password share link.
+- UK: send them to [@Milagros](https://posthog.slack.com/team/U0B4W74LN83) through a 1Password share link.
 - US: update them in BambooHR.
 
 We'll never ask you to change your bank details through an email link or a message from someone you don't know. If you get a request like this, check with us in Slack first.
@@ -84,7 +87,7 @@ For an employment verification letter, request it in Deel if you're employed thr
 
 ## If something looks wrong
 
-Tell us as soon as you notice we will analyze and fix it. If you were underpaid, we'll fix it in the next payroll. If you were overpaid, we'll contact you and agree how to recover it.
+Tell us as soon as you notice and we'll look into it. If you were underpaid, we'll fix it in the next payroll. If you were overpaid, we'll contact you and agree how to recover it.
 
 ## Questions
 
