@@ -154,6 +154,14 @@ If you're actively talking to a customer and don't want the next automated email
 
 Never disable or archive `Onboarding:: Email sequence`. Turning it off doesn't stop the accounts waiting in it right away, but any account whose wait ends while it's off has its run canceled, so it never gets the rest of the sequence. If it does get turned off, turn it back on straight away: runs that haven't woken up yet carry on as normal ([how disabling works](/docs/workflows/editing-live-workflows#disabling-a-workflow-doesnt-cancel-runs)). To change it, [edit it in place](/docs/workflows/editing-live-workflows).
 
+#### When a contact leaves the company
+
+If an auto-reply says someone no longer works at the company, they're most likely still in the account's admin list, which is where the emails pull them from. The cleanest fix is on the customer's side: they remove that person as an admin of their organization, and the table updates on its own.
+
+You can also [add their address to the suppression list](/docs/workflows/opt-outs#the-suppression-list) in <PrivateLink url="https://us.posthog.com/project/2/workflows/suppression">Workflows > Suppression</PrivateLink>. `Admin emails` and `Power Users` already leave out anything on that list, so the person drops out after the next sync, and no workflow in project 2 emails them again.
+
+Don't set **Onboarding opted out** for this. It stops emails to the whole account.
+
 #### Failed payments
 
 `Onboarding:: Automated Payment Failed` runs once a day and emails accounts at stage 1 or 2 whose payment failed. An account gets at most one email every 30 days. It skips accounts with a CSM, AE or TAM, a referral tag or no admin emails, and it ignores **Onboarding opted out** on purpose, because it's about billing rather than onboarding.
