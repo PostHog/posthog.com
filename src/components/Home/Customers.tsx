@@ -395,9 +395,6 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                     </div>
                 </div>
             </div>
-            <OSButton asLink to="/customers" variant="secondary" size="md" className="mt-4" state={{ newWindow: true }}>
-                Open Customers
-            </OSButton>
         </div>
     )
 }
