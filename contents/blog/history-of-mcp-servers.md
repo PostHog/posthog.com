@@ -9,7 +9,7 @@ tags:
 - Inside PostHog
 ---
 
-I feel like a historian of the present whenever I look back at the short history of MCP servers. The [first PRs](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1) landed in the open-source repository in September 2024, and [Anthropic officially announced](https://www.anthropic.com/news/model-context-protocol) the protocol that November. That's forever ago in Silicon Valley years, given how fast most of us added MCPs to our stack. But it's also so, so recent: we're barely scratching the surface of this new age.
+I feel like a historian of the present whenever I look back at the short history of MCP servers. The [first PRs](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1) landed in the open-source repository in September 2024, and [Anthropic officially announced](https://www.anthropic.com/news/model-context-protocol) the protocol that November. That's forever ago in Silicon Valley years.
 
 Today PostHog made our MCP Analytics generally available, the next chapter in this technology's history for us. As an amateur contemporary historian, I wanted to understand what that changes for people building products today. So I hit the field to talk to [Lucas Faria](/community/profiles/32387), an engineer on our MCP Analytics team, with two research questions:
 
