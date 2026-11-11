@@ -232,10 +232,10 @@ function Section({
 }
 
 const jumpLinks = [
-    { id: 'questions', label: 'Questions you can answer' },
-    { id: 'across-posthog', label: 'Use it across PostHog' },
     { id: 'what-syncs', label: 'What syncs' },
     { id: 'connect', label: 'How to connect' },
+    { id: 'questions', label: 'Questions you can answer' },
+    { id: 'across-posthog', label: 'Use it across PostHog' },
 ]
 
 function JumpLinks() {
@@ -314,61 +314,6 @@ export default function StripeSource(): JSX.Element {
 
                     <JumpLinks />
 
-                    <Section id="questions" title="Questions you can answer with Stripe and PostHog">
-                        {questionGroups.map((group) => (
-                            <div key={group.role} className="mt-8 first:mt-0">
-                                <h3 className="m-0 mb-3 text-xl font-bold tracking-tight">{group.role}</h3>
-                                <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
-                                    {group.questions.map((q) => (
-                                        <div key={q.question} className={CARD}>
-                                            <q.Icon className={`mb-3 size-6 ${q.iconColor}`} />
-                                            <h4 className="m-0 mb-2 text-lg font-bold leading-tight">{q.question}</h4>
-                                            <p className="m-0 text-[15px] text-secondary">{q.answer}</p>
-                                            <GuideCardActions href={q.href} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </Section>
-
-                    <Section
-                        id="across-posthog"
-                        title="Use Stripe data across PostHog"
-                        intro="Once it's in PostHog, Stripe data isn't trapped in an analytics tab. You can use it everywhere you already work."
-                    >
-                        <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2 @6xl:grid-cols-3">
-                            {productUses.map((use) => (
-                                <div key={use.product} className={CARD}>
-                                    <h3 className="m-0 mb-2 flex items-center gap-2 text-lg font-bold leading-tight">
-                                        <use.Icon className={`size-5 shrink-0 ${use.iconColor}`} />
-                                        {use.product}
-                                    </h3>
-                                    <p className="m-0 text-[15px] text-secondary">{use.description}</p>
-                                    <div className="mt-auto pt-4">
-                                        <OSButton
-                                            asLink
-                                            to={maxPromptUrl(use.prompt)}
-                                            external
-                                            variant="secondary"
-                                            size="sm"
-                                        >
-                                            Try it in PostHog AI
-                                        </OSButton>
-                                    </div>
-                                </div>
-                            ))}
-                            <div className="flex h-full overflow-hidden rounded border border-primary bg-primary">
-                                <div className="w-1 shrink-0 bg-green" aria-hidden />
-                                <p className="m-0 p-5 text-[15px] text-secondary">
-                                    <strong className="text-primary">Tip:</strong> Build a{' '}
-                                    <em>&ldquo;paying and near their plan limit&rdquo;</em> cohort once, then reuse the
-                                    same group as a flag target, a survey audience, and an alert.
-                                </p>
-                            </div>
-                        </div>
-                    </Section>
-
                     <Section
                         id="what-syncs"
                         title="What syncs from Stripe"
@@ -427,6 +372,61 @@ export default function StripeSource(): JSX.Element {
                         intro="You don't need a data engineer or a warehouse of your own. The setup wizard walks you through it, and you choose which tables to sync and what access PostHog gets: connect with OAuth, or use a restricted API key with read access."
                     >
                         <WarehouseWizardHint />
+                    </Section>
+
+                    <Section id="questions" title="Questions you can answer with Stripe and PostHog">
+                        {questionGroups.map((group) => (
+                            <div key={group.role} className="mt-8 first:mt-0">
+                                <h3 className="m-0 mb-3 text-xl font-bold tracking-tight">{group.role}</h3>
+                                <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
+                                    {group.questions.map((q) => (
+                                        <div key={q.question} className={CARD}>
+                                            <q.Icon className={`mb-3 size-6 ${q.iconColor}`} />
+                                            <h4 className="m-0 mb-2 text-lg font-bold leading-tight">{q.question}</h4>
+                                            <p className="m-0 text-[15px] text-secondary">{q.answer}</p>
+                                            <GuideCardActions href={q.href} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </Section>
+
+                    <Section
+                        id="across-posthog"
+                        title="Use Stripe data across PostHog"
+                        intro="Once it's in PostHog, Stripe data isn't trapped in an analytics tab. You can use it everywhere you already work."
+                    >
+                        <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2 @6xl:grid-cols-3">
+                            {productUses.map((use) => (
+                                <div key={use.product} className={CARD}>
+                                    <h3 className="m-0 mb-2 flex items-center gap-2 text-lg font-bold leading-tight">
+                                        <use.Icon className={`size-5 shrink-0 ${use.iconColor}`} />
+                                        {use.product}
+                                    </h3>
+                                    <p className="m-0 text-[15px] text-secondary">{use.description}</p>
+                                    <div className="mt-auto pt-4">
+                                        <OSButton
+                                            asLink
+                                            to={maxPromptUrl(use.prompt)}
+                                            external
+                                            variant="secondary"
+                                            size="sm"
+                                        >
+                                            Try it in PostHog AI
+                                        </OSButton>
+                                    </div>
+                                </div>
+                            ))}
+                            <div className="flex h-full overflow-hidden rounded border border-primary bg-primary">
+                                <div className="w-1 shrink-0 bg-green" aria-hidden />
+                                <p className="m-0 p-5 text-[15px] text-secondary">
+                                    <strong className="text-primary">Tip:</strong> Build a{' '}
+                                    <em>&ldquo;paying and near their plan limit&rdquo;</em> cohort once, then reuse the
+                                    same group as a flag target, a survey audience, and an alert.
+                                </p>
+                            </div>
+                        </div>
                     </Section>
 
                     <section className={SECTION}>
