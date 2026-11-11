@@ -76,9 +76,11 @@ You’ll have a Slack channel with the team. Use it like a normal team channel f
 
 ##### During the day
 
-*   Communicate early. Share your progress and your blockers in Slack, and ask questions when something is not clear.
-*   Divide your time across the whole challenge.
-*   Work as you would on a normal day with real customers.
+*   Don’t go quiet, and communicate early. Share your progress and blockers in the channel, and ask questions when something is not clear.
+*   Treat it like a normal working day. Take lunch and stop at a normal time, after 8–10 hours at most. Working late won’t help, because we want to see what a normal day looks like.
+*   Prioritize as you would if you were already on the team. We won’t tell you what to focus on, because that choice is part of the day.
+*   Write things down. We can only assess what we can see, so note your assumptions and what you’d do with more time.
+*   Open at least one pull request, even if it’s a docs fix.
 
 > In line with our [values](/handbook/values) and [culture](/handbook/company/culture), you might get short replies like "step on toes" or "bias for action".
 
