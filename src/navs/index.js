@@ -1944,6 +1944,16 @@ export const handbookSidebar = [
                         url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
                     {
+                        name: 'Workflows enablement',
+                        url: '',
+                        children: [
+                            {
+                                name: 'Workflows positioning',
+                                url: '/handbook/growth/sales/workflows-positioning',
+                            },
+                        ],
+                    },
+                    {
                         name: 'Data Stack enablement',
                         url: '',
                         children: [
