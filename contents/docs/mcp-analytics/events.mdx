@@ -19,7 +19,6 @@ This page is the wire-level contract for the MCP Analytics SDKs, and for servers
 | `$mcp_initialize`         | Every `2025-11-25` client/server handshake, unless `sendInitializeEvent: false` (TypeScript) or `send_initialize_event=False` (Python) | `$mcp_client_name`, `$mcp_client_version`, `$mcp_server_name`, `$mcp_server_version`, `$mcp_protocol_version`                                                                                                        |
 | _(your event name)_       | A call to `analytics.capture({ event, properties })`                              | Sent under the verbatim `event` name you pass (a customer event, not `$`-prefixed), with your `properties` merged in. See [Custom events](/docs/mcp-analytics/custom-events).                                        |
 | `$mcp_missing_capability` | The `get_more_tools` virtual tool is invoked                                      | The agent's reasoning is captured as `$mcp_intent`. See [Tracking missing capabilities](/docs/mcp-analytics/missing-capability).                                                                                     |
-| `$mcp_feedback`           | The `send_feedback` virtual tool is invoked, when `collectFeedback` is on. TypeScript and Python only. | `$mcp_feedback_type` and the other [feedback properties](#feedback-properties), plus the summary and details as `$mcp_intent`. Never a `$mcp_tool_call`. |
 | `$identify`               | `identify()` returns a new or changed identity for a session. Ruby SDK only. The TypeScript, Python, Go, and Rust SDKs put the identity on every event instead. | `$set` populated from the identity's `properties`                                                                                                                                                                    |
 | `$exception`              | Sibling event whenever a tool call or resource request errors (unless `enableExceptionAutocapture: false`) | `$exception_list`, `$exception_level`, plus the same `$mcp_*` context as the main event                                                                                                                              |
 
@@ -132,24 +131,6 @@ Set on every event except `$exception` once `identify()` returns a user. The Rub
 The SDK sends `$set` to update the person profile. PostHog does not retain `$set` on the stored event. Query the resulting values as [person properties](/docs/product-analytics/person-properties) rather than filtering events by `$set`.
 
 In Rust, `$set` rides on every MCP event, `$exception` included. In Go, `$set` rides on `$mcp_tool_call`, `$mcp_unknown_tool`, and `$mcp_input_required`. It needs an explicit `DistinctID`. The SDK drops it without one, or if the event is too large.
-
-## Feedback properties
-
-Present on `$mcp_feedback` events. Turn the `send_feedback` tool on with `collectFeedback` (`collect_feedback` in Python). It also reports missing capabilities, as `feedback_type: "missing_capability"`. These reports don't appear in the [Missing capabilities](/docs/mcp-analytics/missing-capability) views. Query `$mcp_feedback` with SQL or insights.
-
-| Wire key | Source |
-| --- | --- |
-| `$mcp_feedback_type` | `"missing_capability"`, `"issue"`, `"praise"`, or `"other"` |
-| `$mcp_feedback_summary` | One sentence: the missing capability, or the tool and its problem |
-| `$mcp_feedback_details` | Optional longer context, such as what the agent tried and the error it saw |
-| `$mcp_feedback_tool` | The existing tool the feedback is about, for `issue` or `praise` |
-| `$mcp_feedback_task_completed` | Boolean. Whether the agent still completed the user's task |
-| `$mcp_feedback_sentiment` | `"positive"`, `"neutral"`, `"negative"`, or `"mixed"` |
-| `$mcp_feedback_friction_points` | The moments that slowed the agent down |
-| `$mcp_feedback_suggested_improvement` | The change that would have helped |
-| `$mcp_feedback_<key>` | Each key you declare in `extraProperties` (`extra_properties` in Python) |
-
-Feedback text gets the same PII redaction as `$mcp_intent` and is capped at 2,048 characters per field.
 
 ## Groups (`$groups`)
 
