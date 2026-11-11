@@ -571,6 +571,7 @@ export default function People({ initialView = 'list' }: { initialView?: 'list' 
                     <div className="h-[70vh] min-h-[480px] mt-2">
                         <PeopleMap
                             members={baseMembers}
+                            focusedMember={mapMatchedEmployee}
                             focusArea={geoArea}
                             focusNonce={focusNonce}
                             coordsByQuery={hasMemberCoords ? memberCoords : undefined}
