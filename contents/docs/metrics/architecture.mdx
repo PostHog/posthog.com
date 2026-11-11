@@ -42,7 +42,8 @@ You can hit the limit when:
 To stay under it:
 
 - **Aggregate before you export.** Use a periodic exporter with delta or cumulative temporality, so each export carries one point per series however many measurements were recorded. The default metric readers in the OpenTelemetry SDKs already work this way. Don't export a point for every event.
-- **Add a low-cardinality shard attribute.** If many senders have to share a series, add an attribute with a few values (4 to 8 is usually enough), for example derived from a random number or an ID. The load splits across that many series, each under the limit. Sum over the shard attribute in your queries, which charts already do unless you group by it.
+- **Give each cumulative sender its own series.** Senders that share a series must send delta counters or gauges. If several senders mix their cumulative totals into one series, `rate` and `increase` read the jumps between totals as growth or resets and return wrong numbers, even under the limit. Set a unique `service.instance.id` resource attribute on each sender, or switch to delta temporality.
+- **Add a low-cardinality shard attribute.** If many delta or gauge senders have to share a series, add an attribute with a few values (4 to 8 is usually enough), for example derived from a random number or an ID. The load splits across that many series, each under the limit. Sum over the shard attribute in your queries, which charts already do unless you group by it.
 
 ## Metric types and temporality
 
