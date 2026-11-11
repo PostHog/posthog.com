@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'components/Link'
-import Glow, { type GlowColor } from 'components/Glow'
 import ToolsTicker, { DEFAULT_HANDLES } from 'components/Home/ToolsTicker'
 import { isAppIconName, AppIcon } from 'components/OSIcons/AppIcon'
 import { CARD_H3, SectionHeading } from '../helpers'
@@ -12,24 +11,6 @@ interface PairItem {
     /** Optional className passed to AppIcon when parentIcon is used (e.g. "!size-6"). */
     className?: string
 }
-
-const GLOW_COLORS: GlowColor[] = [
-    'yellow',
-    'blue',
-    'red',
-    'green',
-    'green-2',
-    'purple',
-    'orange',
-    'teal',
-    'seagreen',
-    'salmon',
-    'black',
-    'white',
-]
-
-/** Product colors are free-form strings; only some of them are valid glow colors. */
-const toGlowColor = (color?: string): GlowColor | undefined => GLOW_COLORS.find((glowColor) => glowColor === color)
 
 const PairsWith = ({ id, productData, allProducts }: SectionComponentProps) => {
     const pairsWith: PairItem[] = productData?.pairsWith || []
@@ -62,48 +43,33 @@ const PairsWith = ({ id, productData, allProducts }: SectionComponentProps) => {
                     const productDetails = allProducts.find((product: any) => product.slug === pair.slug)
                     if (!productDetails) return null
 
-                    const glowColor = toGlowColor(productDetails.color)
-
-                    const card = (
-                        <Link
-                            to={`/${pair.slug}`}
-                            state={{ newWindow: true }}
-                            className="flex items-start gap-2.5 h-full border border-primary rounded bg-primary p-3 hover:bg-accent transition-colors"
-                        >
-                            <span
-                                className={`inline-block size-6 shrink-0 ${
-                                    productDetails.color ? `text-${productDetails.color}` : 'text-primary opacity-50'
-                                }`}
-                            >
-                                {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
-                                    <AppIcon name={productDetails.parentIcon} className={pair.className} />
-                                ) : (
-                                    productDetails.Icon && <productDetails.Icon className={pair.className} />
-                                )}
-                            </span>
-                            <span className="min-w-0">
-                                <strong className={`block underline ${CARD_H3}`}>{productDetails.name}</strong>
-                                <span className="block text-sm text-secondary leading-relaxed">{pair.description}</span>
-                            </span>
-                        </Link>
-                    )
-
                     return (
                         <li key={pair.slug} className="m-0">
-                            {glowColor ? (
-                                <Glow
-                                    color={glowColor}
-                                    size="sm"
-                                    intensity="gentle"
-                                    rounded="md"
-                                    hover
-                                    className="h-full"
+                            <Link
+                                to={`/${pair.slug}`}
+                                state={{ newWindow: true }}
+                                className="flex items-start gap-2.5 h-full border border-primary rounded bg-primary p-3 hover:bg-accent transition-colors"
+                            >
+                                <span
+                                    className={`inline-block size-6 shrink-0 ${
+                                        productDetails.color
+                                            ? `text-${productDetails.color}`
+                                            : 'text-primary opacity-50'
+                                    }`}
                                 >
-                                    {card}
-                                </Glow>
-                            ) : (
-                                card
-                            )}
+                                    {productDetails.parentIcon && isAppIconName(productDetails.parentIcon) ? (
+                                        <AppIcon name={productDetails.parentIcon} className={pair.className} />
+                                    ) : (
+                                        productDetails.Icon && <productDetails.Icon className={pair.className} />
+                                    )}
+                                </span>
+                                <span className="min-w-0">
+                                    <strong className={`block underline ${CARD_H3}`}>{productDetails.name}</strong>
+                                    <span className="block text-sm text-secondary leading-relaxed">
+                                        {pair.description}
+                                    </span>
+                                </span>
+                            </Link>
                         </li>
                     )
                 })}

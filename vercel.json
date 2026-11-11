@@ -7,6 +7,24 @@
     },
     "headers": [
         {
+            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x|migration):ext(\\.md)?",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex"
+                }
+            ]
+        },
+        {
+            "source": "/docs/libraries/python/reference:ext(\\.md)?",
+            "headers": [
+                {
+                    "key": "X-Robots-Tag",
+                    "value": "noindex"
+                }
+            ]
+        },
+        {
             "source": "/docs/:path*",
             "headers": [
                 {
@@ -648,6 +666,10 @@
         {
             "source": "/blog/best-amplitude-alternatives",
             "destination": "/compare/best-amplitude-alternatives"
+        },
+        {
+            "source": "/blog/posthog-vs-amplitude",
+            "destination": "/compare/posthog-vs-amplitude"
         },
         {
             "source": "/blog/best-braintrust-alternatives",
