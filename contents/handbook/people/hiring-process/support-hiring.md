@@ -69,8 +69,9 @@ You’ll have a Slack channel with the team. Use it like a normal team channel f
 
 ##### How to prepare for the day
 
-*   Dig into the product. You will be expected to know PostHog well when you start, so install it and use it before the day.
-*   Create some test data and try the main products, such as product analytics, session replay, feature flags, and experiments.
+*   Dig into the product. Create some test data and try the main products, such as product analytics, session replay, feature flags, and experiments.
+*   Try setting up a [local development environment](/handbook/engineering/developing-locally) before the day, so you don’t lose time on it during the challenge.
+*   Make sure you’re comfortable forking a repo and opening a pull request on GitHub.
 *   Read the [Support section of the handbook](/handbook/support/support-team) and our [docs](/docs).
 
 ##### During the day
