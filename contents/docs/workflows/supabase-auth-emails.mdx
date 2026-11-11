@@ -26,6 +26,12 @@ It also covers Supabase's security notifications: password changed, email addres
 
 PostHog records each email against the Supabase user's ID.
 
+<CalloutBox icon="IconLightBulb" title="Tip: Set it up with the MCP server" type="fyi">
+
+If you use an AI coding agent with the [PostHog MCP server](/docs/model-context-protocol), ask it to set up Supabase auth emails. It uses the `setting-up-supabase-auth-emails` agent skill, which does the PostHog side in a safe order and tells you what to click in Supabase. The agent asks whether you want to paste the Supabase hook secret into the chat or into the PostHog setup window, and gives you a link to the setup window if you choose that.
+
+</CalloutBox>
+
 <Steps>
 
 <Step title="Before you start" badge="required">
@@ -149,7 +155,3 @@ If Supabase retries a hook request, PostHog doesn't send the same email twice.
 </Step>
 
 </Steps>
-
-## Set it up over MCP
-
-Agents can do the PostHog side for you. Over the [PostHog MCP](/docs/workflows/surfaces/mcp), ask for something like "Connect my Supabase project to PostHog auth emails and create the starter templates". The agent uses `supabase-auth-emails-settings-get`, `supabase-auth-emails-settings-update`, and `supabase-auth-emails-starter-templates-create`. You still add and turn on the hook in Supabase yourself. To keep the hook secret out of the conversation, paste it into the setup window instead.
