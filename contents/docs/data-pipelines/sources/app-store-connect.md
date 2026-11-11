@@ -84,7 +84,19 @@ You'll be asked for:
 
 <SyncModes />
 
-All Apple (App Store Connect) tables are full refresh. Each sync replaces the contents of the table.
+Analytics report tables support incremental sync using `processing_date`, so later syncs capture new report instances, including restatements of earlier report dates. Continue to use the latest restatement when aggregating, as described above.
+
+The `sales_reports`, `subscription_reports`, and `subscription_event_reports` tables support incremental sync using `report_date`. All other tables use full refresh, which replaces their contents on each sync.
+
+### Analytics historical backfill
+
+On an analytics table's initial sync, resync, or full refresh, PostHog requests or reuses Apple's `ONE_TIME_SNAPSHOT` alongside ongoing daily reports. The snapshot imports available history older than the ongoing reports' coverage.
+
+Existing incremental tables do not automatically import snapshot history. To backfill an existing table, use [**Delete tables and resync**](/docs/data-pipelines/sources#managing-schemas-in-bulk) to delete its synced data and import it again.
+
+Snapshot requests require an API key with the **Admin** role. Apple takes [one to two days to generate the first reports](https://developer.apple.com/documentation/appstoreconnectapi/downloading-analytics-reports), so an initial sync or resync can remain empty while the snapshot is prepared.
+
+History depends on what Apple makes available for each report. Check Apple's [report reference](https://developer.apple.com/documentation/analytics-reports) for coverage. Apple retains report instances for 35 days and permits [one snapshot request per month](https://developer.apple.com/documentation/analytics-reports#Retrieve-missed-reports). PostHog reuses an available snapshot rather than requesting a new one on each sync.
 
 ## Configuration
 
