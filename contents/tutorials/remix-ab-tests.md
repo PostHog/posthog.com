@@ -51,7 +51,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
@@ -189,7 +189,7 @@ Server-side rendering is a way to avoid this. This fetches the feature flag befo
 To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
-npm install posthog-node
+npm install posthog-node@5
 ```
 
 Next, we create a `posthog.js` file in the `app` folder. In it, we initialize the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Once again, you need your project token and instance address from [your project settings](https://us.posthog.com/settings/project).

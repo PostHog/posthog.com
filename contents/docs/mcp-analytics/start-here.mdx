@@ -41,11 +41,11 @@ Install the SDK for your server's language:
 <MultiLanguage>
 
 ```bash file=TypeScript
-npm install @posthog/mcp posthog-node
+npm install @posthog/mcp@1 posthog-node@5
 ```
 
 ```bash file=Python
-pip install posthog
+pip install "posthog<8"
 ```
 
 ```bash file=Go
@@ -53,7 +53,7 @@ go get github.com/posthog/posthog-go/posthogmcpsdk/v2
 ```
 
 ```bash file=Ruby
-bundle add posthog-ruby
+bundle add posthog-ruby --version "~> 3.0"
 ```
 
 ```bash file=Rust
