@@ -141,6 +141,18 @@ Make it explicit in your outreach that if we can't agree a pre-commitment, the a
 
 RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
+### Disputes and chargebacks
+
+A dispute (chargeback) occurs when a cardholder asks their bank to reverse a charge. A dispute cancels the subscription and suspends access until it is resolved.
+
+1. **Get the facts in Stripe.** Read the dispute reason and the evidence due date. Compare the card's billing details with the Stripe customer. Cards saved through Stripe Link show the name and email of the Link account. Thus a personal email on the card does not always mean fraud.
+2. **Find who added the card.** In PostHog, look for `payment intent created` events and billing page views for the organization near the time that the card was added. Usually it is a team member who left the company or forgot about the card.
+3. **Contact the account.** Tell the account owner and the organization admins about the dispute. If the dispute is a mistake, ask the cardholder to withdraw it with their bank, and ask the account to add a new card. Do not share the cardholder's name or email with other people.
+4. **If the card was stolen,** refund the charge and use the `Fraudulent` reason. See [issuing a refund](/handbook/growth/sales/refunds#issuing-a-refund). Do not use `Fraudulent` for a mistake, because Stripe then blocks the card.
+5. **Restore access** when the dispute is withdrawn or resolved.
+
+If the account disputes a second charge, or the dispute looks like bad faith, escalate to RevOps in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
+
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
 - 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. The customer is responsible for completing the 3DS step (our billing system sends a couple of reminders) without which the payment will fail.
