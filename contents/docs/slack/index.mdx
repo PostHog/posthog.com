@@ -223,7 +223,7 @@ The bot reads your [agent instructions](/docs/tasks/agent-instructions) at the s
 
 Project admins set **Project instructions** for every run in the project. Each person can add **My instructions** for the runs they start. Instructions apply to a whole project, not to one Slack channel.
 
-The agent only reads what its tools can reach: your PostHog data, [Business Knowledge](/docs/business-knowledge), connected repositories, and the thread it's in. It can't read other Slack channels. To give it a channel's messages, sync them with the [Slack source](/docs/data-pipelines/sources/slack) and name the table in your instructions.
+The agent only reads what its tools can reach: your PostHog data, [Business Knowledge](/docs/business-knowledge), connected repositories, and the thread it's in. It can't read other Slack channels. To give it a channel's messages, sync them with the [Slack source](/docs/data-pipelines/sources/slack) and name the table in your instructions. Only messages sent after you set up the source and its webhook are synced; older messages aren't backfilled.
 
 ## The App Home tab
 
