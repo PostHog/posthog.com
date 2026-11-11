@@ -40,9 +40,9 @@ This is our usual first-round interview with a member of the Talent team.
 
 #### Technical interview
 
-The technical interview with [Abigail](/community/profiles/31138) (team lead) usually lasts 45 minutes. There is no live coding.
+The technical interview with <TeamMember name="Abigail Richardson" photo /> (team lead) usually lasts 45 minutes. There is no live coding. Most of it is hands-on: we share a few realistic support scenarios and you talk us through how you’d handle them. Just think out loud.
 
-The interview checks how you work as a technical person in a customer-facing role. We talk about how you investigate problems, how you learn new things, how you decide when to ask for help, how you prioritize, and how you use AI. We also want to understand why you want a support role.
+You don’t need to know PostHog well for this stage, but it helps to have tried it. Add it to a side project or a test app before the call.
 
 #### Culture and motivation interview
 
