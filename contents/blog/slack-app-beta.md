@@ -143,7 +143,7 @@ The code generation that lands from one sentence prompts are surprisingly good. 
 
 Generating PRs with @PostHog in Slack is so easy it feels illegal, and it's a glimpse at what the [self-driving product](/blog/self-driving-product) means in practice.
 
-Despite being a coding agent, it won't answer every @mention with a PR. Every @PostHog mention runs through a two-stage classifier before any work happens:
+Despite being a coding agent, it won't answer every @mention with a PR. Every @PostHog mention runs through a [two-stage classifier](/newsletter/decision-models#1-use-them-to-gate-expensive-llm-calls) before any work happens:
 
 1. **Task classifier** – Does this request need repo access, or is it analytics/data/config?
 2. **Repo router** – If it does require code generation, which GitHub repo does it go to?
