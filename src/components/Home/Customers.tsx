@@ -378,7 +378,7 @@ export const Customers = ({ tableClassName = '' }: { tableClassName?: string }) 
                                         onClick={toggleBreakdown}
                                         disabled={isAnimating}
                                         aria-label="Shuffle companies"
-                                        className={`flex size-9 items-center justify-center rounded-full border border-primary text-primary disabled:cursor-default bg-white shadow-md scale-100 hover:top-[-0.5px] hover:scale-[1] active:top-[0.5px] active:scale-[.99] active:shadow-none relative`}
+                                        className={`flex size-9 items-center justify-center rounded-full border border-primary bg-primary text-primary disabled:cursor-default shadow-md scale-100 hover:top-[-0.5px] hover:scale-[1] active:top-[0.5px] active:scale-[.99] active:shadow-none relative`}
                                     >
                                         <IconRefresh
                                             className={`size-4.5 ${
