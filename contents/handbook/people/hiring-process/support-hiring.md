@@ -26,11 +26,11 @@ Outside of the skills listed in the job description, we are generally looking fo
 
 ### How we evaluate candidates
 
-We want someone who solves the problem, not someone who routes it. We do not want a person who forwards hard questions to engineering because they look hard. Engineering time is valuable, so it is a win when a TSE solves a problem without extra help.
+We care more about attitude and aptitude than your previous job title. The hardest thing to teach is the “I can figure this out” mindset. We want people who are curious, unafraid of technology they haven’t seen before, and are quick to pick it up.
 
-A great litmus test for a candidate is if they can debug an unfamiliar problem and explain the fix in plain words. That is typically a good indicator that they have the right skills for the role.
+You don’t need to know every language. We look for a technical background that transfers, whether that’s from a development role, side projects, a bootcamp, or somewhere else, and for someone who can explain what they find clearly. People on our team came to support from a range of backgrounds.
 
-We use AI tools every day, and we expect TSEs to use them well. We do not want a TSE to paste AI answers to customers. We want a reply that is better than the one the AI would write.
+We also think every support ticket means something failed somewhere. The app wasn’t clear, the docs were missing something, or there was a bug. So we look for people who want to fix the cause as well as answer the ticket.
 
 ### Technical Support Engineer hiring process
 
