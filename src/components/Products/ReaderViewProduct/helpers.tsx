@@ -1,5 +1,8 @@
 import React from 'react'
 
+/** Typography shared by the H1 on Product, Docs, and Learn surfaces. */
+export const PRODUCT_SURFACE_H1 = '!text-4xl font-bold !leading-tight !tracking-normal'
+
 /** Title inside a bordered card or panel. Stays small on purpose. */
 export const CARD_H3 = 'text-base font-bold text-primary mt-0 mb-1 leading-snug'
 
@@ -54,7 +57,7 @@ export const LabeledList = ({
                 <React.Fragment key={typeof label === 'string' ? label : i}>
                     <div className={`pt-2 @lg:pt-4 @lg:pb-4 font-bold ${colSpanClass[labelCols]}`}>{label}</div>
                     <div
-                        className={`pb-2 @lg:pt-4 @lg:pb-4 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-balance ${colSpanClass[descCols]}`}
+                        className={`pb-2 @lg:pt-4 @lg:pb-4 @lg:pl-4 text-secondary text-[15px] border-b border-primary last:border-b-0 @lg:border-b-0 text-pretty ${colSpanClass[descCols]}`}
                     >
                         {description}
                     </div>

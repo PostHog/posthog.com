@@ -1,13 +1,28 @@
 import React, { useMemo } from 'react'
-import { IconBook, IconGraduationCap, IconPiggyBank, IconPresent } from '@posthog/icons'
+import {
+    IconBook,
+    IconCursorClick,
+    IconEye,
+    IconGraduationCap,
+    IconPiggyBank,
+    IconPresent,
+    IconTerminal,
+} from '@posthog/icons'
 import { TreeMenu } from 'components/TreeMenu'
-import Link from 'components/Link'
-import { learnChapterPath, useBookPages } from 'components/PocketGuides/bookModel'
+import { learnChapterPath, learnChapterSlug, sectionPages, useBookPages } from 'components/Learn/PocketGuides/bookModel'
+import { isSelfDrivingPage, pocketGuideUrl, volumeById } from '../../../constants/pocketGuides'
+import type { LearnHubPage } from '../../../constants/pocketGuides'
 import usePlatformList from 'hooks/docs/usePlatformList'
+import usePostHog from 'hooks/usePostHog'
 import type { MenuTab } from 'components/ReaderView'
 import { docsMenu } from '../../../navs'
 import ProductNav from './ProductNav'
 import type { ProductNavItem } from './types'
+
+const HUB_PAGES: Record<LearnHubPage, { name: string; icon: React.ReactNode }> = {
+    'agent-prompts-and-mcp': { name: 'Agent prompts and MCP', icon: <IconTerminal className="size-4" /> },
+    'live-playground': { name: 'Live playground', icon: <IconCursorClick className="size-4" /> },
+}
 
 const TAB_ICON: Record<'product' | 'pricing' | 'docs' | 'learn', React.ReactNode> = {
     product: <IconPresent className="size-4" />,
@@ -74,69 +89,99 @@ const DocsTreeMenu = ({
     )
 }
 
-/** One item per chapter, each its own page; `ProductNav` scrolls within one instead. */
+/** The same Learn tree is shown on the hub, agent page, and every chapter. */
 const LearnNav = ({
     volumeId,
     basePath,
     currentPath,
-    hasLanding,
-    interactiveLearningUrl,
+    section,
+    fullTitles,
 }: {
     volumeId: string
     basePath: string
     currentPath?: string
-    hasLanding?: boolean
-    interactiveLearningUrl?: string
+    /** Only list the pages with this `section:` frontmatter. */
+    section?: string
+    /** Label pages with their full title instead of their `shortTitle`. */
+    fullTitles?: boolean
 }) => {
-    const pages = useBookPages(volumeId)
+    const pages = sectionPages(useBookPages(volumeId), section)
+    const posthog = usePostHog()
+    const volume = volumeById(volumeId)
+    const guideBasePath = volume ? pocketGuideUrl(volume) : basePath
+    // Chapters are numbered as in the guide ("1. Events and properties"); the introduction is not.
+    const chapters = pages.map((page) => ({
+        name: fullTitles
+            ? page.title
+            : page.page
+            ? `${page.page}. ${page.shortTitle || page.title}`
+            : page.shortTitle || page.title,
+        url: learnChapterPath(guideBasePath, page),
+        // Full titles are questions, often longer than the sidebar is wide.
+        wrap: fullTitles,
+    }))
+    const hub = volume?.learnHub
+    const isSelfDriving = (index: number) => isSelfDrivingPage(volumeId, pages[index])
+    // Only the Self-driving introduction is numbered, so the scout pages come through unnumbered.
+    const scoutChapters = chapters.filter((_, index) => isSelfDriving(index))
+    const items = hub
+        ? [
+              { name: 'Overview', url: basePath, icon: <IconEye className="size-4" /> },
+              {
+                  name: 'Pocket guide',
+                  url: guideBasePath,
+                  icon: <IconBook className="size-4" />,
+                  children: [
+                      ...chapters.filter((_, index) => !pages[index].isFrontMatter && !isSelfDriving(index)),
+                      // The story ends in Self-driving, the guide's last numbered chapter. Its first
+                      // page is the introduction, so the label opens it and the chevron lists the scouts.
+                      ...(scoutChapters.length ? [{ ...scoutChapters[0], children: scoutChapters.slice(1) }] : []),
+                  ],
+              },
+              // Only the hub pages this volume has, so a smaller hub has no dead links.
+              ...(hub.pages ?? []).map((page) => {
+                  const children = hub.subpages?.[page]?.map(({ slug, name }) => ({
+                      name,
+                      url: `${basePath}/${page}/${slug}`,
+                  }))
+                  // A hub page with subpages has no page of its own, so it opens the first one.
+                  return { ...HUB_PAGES[page], url: children?.[0]?.url ?? `${basePath}/${page}`, children }
+              }),
+          ]
+        : chapters
 
-    if (hasLanding && interactiveLearningUrl) {
-        const storyPages = pages.map((page) => ({
-            name: page.shortTitle || page.title,
-            url: page.isFrontMatter ? `${basePath}/introduction` : learnChapterPath(basePath, page),
-        }))
-
-        return (
-            <TreeMenu
-                appearance="sidebar"
-                activeUrl={currentPath}
-                items={[
-                    {
-                        name: 'Learn through a story',
-                        url: `${basePath}/introduction`,
-                        children: storyPages,
-                    },
-                    { name: 'Learn by doing', url: interactiveLearningUrl },
-                    { name: 'Have your agent teach you', url: `${basePath}#agent-teacher` },
-                ]}
-            />
-        )
+    // Chapter links report their chapter; Overview and hub page links report their section.
+    const chapterByUrl = new Map(
+        pages.map((page) => [
+            learnChapterPath(guideBasePath, page),
+            page.isFrontMatter ? 'introduction' : learnChapterSlug(page),
+        ])
+    )
+    const trackClick = ({ url }: { url?: string }) => {
+        const chapter = url && chapterByUrl.get(url)
+        if (chapter) {
+            posthog?.capture('learn_chapter_selected', { volume: volumeId, chapter, placement: 'sidebar' })
+        } else if (url === basePath) {
+            posthog?.capture('learn_section_selected', { volume: volumeId, section: 'overview', placement: 'sidebar' })
+        } else {
+            const section = hub?.pages?.find((page) => url?.startsWith(`${basePath}/${page}`))
+            if (section) posthog?.capture('learn_section_selected', { volume: volumeId, section, placement: 'sidebar' })
+        }
     }
 
     return (
-        <nav>
-            <ul className="list-none m-0 p-0 flex flex-col gap-px">
-                {pages.map((page) => {
-                    const to =
-                        page.isFrontMatter && hasLanding ? `${basePath}/introduction` : learnChapterPath(basePath, page)
-                    const active = currentPath ? currentPath.replace(/\/$/, '') === to : false
-                    return (
-                        <li key={page.url} className="m-0 p-0">
-                            <Link
-                                to={to}
-                                className={`block w-full px-2 py-1 rounded text-sm !no-underline focus-visible:outline-offset-[-2px] ${
-                                    active
-                                        ? 'bg-dark/15 dark:bg-light/15 !text-primary font-semibold'
-                                        : '!text-primary hover:bg-dark/10 dark:hover:bg-light/10'
-                                }`}
-                            >
-                                <span data-sidebar-label>{page.shortTitle || page.title}</span>
-                            </Link>
-                        </li>
-                    )
-                })}
-            </ul>
-        </nav>
+        // Master's Learn nav used taller rows (31px) than the docs sidebar; keep that spacing for Learn only.
+        <div className="[&_a]:py-[5.5px]">
+            <TreeMenu
+                items={items}
+                appearance="sidebar"
+                // A section-only tab opens its first page at the Learn root, so mark that page there.
+                activeUrl={
+                    section && !hub && currentPath?.replace(/\/$/, '') === basePath ? items[0]?.url : currentPath
+                }
+                onItemClick={trackClick}
+            />
+        </div>
     )
 }
 
@@ -160,8 +205,10 @@ interface BuildProductMenuTabsArgs {
               docsSlug?: string
               /** Volume id from `src/constants/pocketGuides.ts`; setting it is the whole opt-in. */
               pocketGuideVolume?: string
-              /** Adds an interactive option to the Learn landing and makes the active Learn tab return there. */
-              interactiveLearningUrl?: string
+              /** Limits the Learn tab to the volume's pages with this `section:` frontmatter. */
+              pocketGuideSection?: string
+              /** Labels the Learn sidebar with each page's full title instead of its `shortTitle`. */
+              learnNavFullTitles?: boolean
           }
         | null
         | undefined
@@ -186,8 +233,8 @@ interface BuildProductMenuTabsArgs {
 
 export const surfaceBasePath = (productSlug: string, surface: ProductSurface): string => {
     if (surface === 'pricing') return `/${productSlug}/pricing`
-    // Under /docs so switching to Learn never leaves the docs sidebar.
-    if (surface === 'learn') return `/docs/${productSlug}/learn`
+    // Learn has its own URL namespace and keeps the shared product sidebar.
+    if (surface === 'learn') return `/learn/${productSlug}`
     return `/${productSlug}`
 }
 
@@ -216,10 +263,10 @@ export function buildProductMenuTabs({
         productMenu = [],
         pricingMenu = [],
         pocketGuideVolume,
-        interactiveLearningUrl,
+        pocketGuideSection,
+        learnNavFullTitles,
         docsSlug,
     } = productData
-    const hasLearnLanding = Boolean(interactiveLearningUrl)
 
     const navProductMenu = productMenu.filter((item) => !item.hideFromNav)
     const navPricingMenu = pricingMenu.filter((item) => !item.hideFromNav)
@@ -293,14 +340,13 @@ export function buildProductMenuTabs({
             icon: TAB_ICON.learn,
             default: activeSurface === 'learn',
             href: surfaceBasePath(productSlug, 'learn'),
-            navigateOnActiveClick: hasLearnLanding,
             menu: (
                 <LearnNav
                     volumeId={pocketGuideVolume}
+                    section={pocketGuideSection}
+                    fullTitles={learnNavFullTitles}
                     basePath={surfaceBasePath(productSlug, 'learn')}
                     currentPath={activeSurface === 'learn' ? currentPath : undefined}
-                    hasLanding={hasLearnLanding}
-                    interactiveLearningUrl={interactiveLearningUrl}
                 />
             ),
         })

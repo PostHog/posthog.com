@@ -17,6 +17,8 @@ features:
 
 This is an optional library you can install if you're working with PHP. It uses an internal queue to batch requests, flushes at the end of the request, and optionally does so in an async manner.
 
+Using Laravel? See our [Laravel guide](/docs/libraries/laravel) for the experimental Laravel SDK or [manual integration with the PHP SDK](/docs/libraries/laravel#manual-setup-with-the-php-sdk). Using the PHP SDK directly with your own instrumentation remains supported.
+
 ## Installation
 
 import PHPInstall from '../../integrate/_snippets/install-php.mdx'
@@ -111,13 +113,13 @@ import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-
 
 <LocalEvaluationIntro />
 
-To load feature flag definitions for local evaluation, initialize the SDK with your feature flags secure API key as `personalAPIKey`:
+To load feature flag definitions for local evaluation, initialize the SDK with your secret API key as `personalAPIKey`:
 
 ```php
 PostHog::init(
     '<ph_project_token>',
     ['host' => '<ph_client_api_host>'],
-    personalAPIKey: 'your feature flags secure API key'
+    personalAPIKey: 'your secret API key'
 );
 ```
 

@@ -47,7 +47,7 @@ Newly-joined users get the basic Member access level.
 
 ### Deleting an organization
 
-An organization can be deleted by any organization Owner. This action is irreversible. See the Danger Zone in your [organization settings](https://app.posthog.com/settings/organization) for more information.
+An organization can be deleted by any organization Owner. This action is irreversible. See the **Delete organization** section in your [organization settings](https://app.posthog.com/settings/organization) for more information.
 
 Deletion is processed asynchronously in the background. While it completes, all organization members are redirected to a blocking screen – this typically takes a couple of minutes. From this screen, you can switch to another organization (if you belong to one) or contact support.
 
@@ -64,6 +64,16 @@ This setting is particularly useful for organizations with GDPR compliance requi
 
 Individual projects can override this organization default by configuring their own IP data capture setting in **Settings** > **Project** > **General** under the **IP data capture configuration** setting.
 
+### Events retention
+
+Organization admins can set how many months PostHog keeps events, for every project that doesn't have its own window. Find it under [**Settings** > **Organization** > **General** > **Events retention**](https://app.posthog.com/settings/organization-details#organization-events-retention). Other members can see the setting but not change it.
+
+The setting shows the range of months you can choose from. A window can't be longer than your plan's.
+
+> **Warning:** PostHog deletes events older than the window at the next monthly cleanup. Deleted events can't be restored, so PostHog asks you to confirm before it saves.
+
+Each project can use its own window instead, under [**Settings** > **Project** > **Product analytics** > **Events retention**](https://app.posthog.com/settings/environment-product-analytics#project-events-retention). For more details, see [events data retention](/docs/data/events-retention#how-to-customize-your-retention-period).
+
 ### Notifications
 
 By default every time a member joins an organization in an [email-enabled PostHog instance](/docs/self-host/configure/email) (including PostHog Cloud), all existing members of the organization get notified about this with an email. This increases security by making it explicit who gains access to your product data.
@@ -77,7 +87,14 @@ Organization admins and owners can choose which email notifications members rece
 A setting you choose here overrides the member's own preference, and the member can't change it back. Members get an in-app notification when you change their settings.
 
 - A rule can apply to one project only.
-- Settings belong to the person, so a rule also applies in that member's other organizations.
+- An override you set only affects emails sent by your organization. The member's other organizations keep their own choice, which the member cannot change while your override is in place.
+
+Organizations with the [Approvals](/docs/settings/approvals) feature see two additional notification settings:
+
+| Setting                    | Controls                                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| **Approval requests**      | Emails sent to approvers when a change request needs their review                         |
+| **Change request updates** | Emails sent to requesters when their request is approved, rejected, expires, or goes live |
 
 > **Note:** Member notification settings are part of Member governance, which is available on the Boost, Scale, and Enterprise add-ons.
 
@@ -108,3 +125,33 @@ Find this setting under [**Settings** > **Organization** > **Security**](https:/
 When disabled, members only see themselves and other members in their projects.
 
 > **Note:** This feature requires the [Boost, Scale, or Enterprise plan](/platform-packages).
+
+### IP restrictions
+
+IP restrictions let you limit management access to your organization to a set of approved IP addresses or CIDR blocks. When enabled, only requests from an allowed network can access PostHog on behalf of your organization.
+
+Find this setting under [**Settings** > **Organization** > **Security** > **IP restrictions**](https://app.posthog.com/settings/organization-security).
+
+To configure IP restrictions:
+
+1. Add up to 100 IP addresses or CIDR blocks to the allowlist (e.g., `10.0.0.0/8`, `192.168.1.1`).
+2. Use the **Enabled** toggle to activate or deactivate enforcement. Disabling restrictions keeps your allowlist saved but unenforced.
+
+IP restrictions apply to:
+
+- Browser sessions
+- Personal API keys
+- OAuth access tokens
+- SCIM provisioning
+- Livestream connections
+
+The following are **exempt** and remain accessible regardless of IP restrictions:
+
+- SDK endpoints (event capture, feature flag evaluation)
+- Public survey pages
+- Shared and embedded dashboards
+- Email preference pages
+
+When a request is denied, the caller receives an HTTP 403 response with the code `ip_not_allowed`.
+
+> **Note:** IP restrictions require the [Enterprise plan](/platform-packages).

@@ -30,7 +30,7 @@ Subscriptions enable you to send [insights](/docs/product-analytics/insights) or
 
 <FeatureAvailability availability={_frontmatter.availability.features.subscriptions} />
 
-> **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/cdp/destinations) to learn how to send event or action data to webhooks, Slack, and more.
+> **Looking to subscribe to events or actions?** See our [realtime destination docs](/docs/data-pipelines/destinations) to learn how to send event or action data to webhooks, Slack, and more.
 
 ## Viewing all subscriptions
 
@@ -65,8 +65,8 @@ To create a subscription, click **Subscribe** in the sidebar of any insight or d
 
 When creating a subscription for a dashboard, you can select which specific insights to include. This is useful when different teams subscribe to the same dashboard but only need the insights relevant to them.
 
-- You can include up to six insights per subscription.
-- New subscriptions automatically pre-select the first six insights from the dashboard.
+- You can include up to 20 insights per subscription.
+- New subscriptions automatically pre-select the first 20 insights from the dashboard.
 - For dashboards with more than 10 insights, a search box appears to help you find specific ones.
 - Selected insights appear in the subscription in the same order as they appear on the dashboard.
 
@@ -124,6 +124,19 @@ You can then select any channel the app has access to and set a frequency. **Pri
   classes="rounded"
   alt="Slack channel selection"
 />
+
+### How Slack reports are formatted
+
+Slack subscription reports use native Slack formatting to preserve the structure of your data:
+
+- **Tables** - Data tables render with proper column alignment and spacing
+- **Headings and lists** - Structured content maintains its hierarchy and readability
+- **Code blocks** - Any code in your report preserves its formatting
+- **Charts** - Insight charts appear in a compact image gallery with direct links to each insight in PostHog
+
+For large reports, PostHog automatically splits the content across multiple messages while keeping tables and code blocks intact.
+
+AI-generated summaries also render with full formatting, including clickable links to relevant insights and dashboards.
 
 ## Asking @PostHog about subscription reports
 

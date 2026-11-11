@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-marketing/marketing-hog.jpg
 featuredImageType: full
+ogImage: generated
 featuredVideo: 'https://www.youtube-nocookie.com/embed/xWyDI4R-JR4'
 category: Using PostHog
 tags:
@@ -137,7 +138,7 @@ In a nutshell, 'Showed Intent' applies to any user who triggers an event we know
 - Visiting the [self-host section](/docs/self-host) of our docs
 - Booking a demo.
 
-We track these by using an 'action' – a way of combining similar events into single event you can use in insights. You can create actions [using the PostHog Toolbar](/tutorials/toolbar) or via the Data Management tab in PostHog – it's dead easy.
+We track these by using an 'action' – a way of combining similar events into single event you can use in insights. You can create actions [using the PostHog Toolbar](/docs/toolbar) or via the Data Management tab in PostHog – it's dead easy.
 
 Why do we use this and not just signed up users? There are a few good reasons:
 
@@ -169,7 +170,7 @@ Above is a funnel analysis for one of our most successful blog posts, a guide to
 
 At other end of the spectrum, we have our guide to [GDPR-compliant analytics tools](/compare/best-gdpr-compliant-analytics-tools). It only converts 6.3% of the time – perhaps the launch of [PostHog Cloud EU](https://eu.posthog.com/signup) will increase that figure? 🤔
 
-Comparison articles, such as [PostHog vs Amplitude](/blog/posthog-vs-amplitude) convert very well – in the region of 25%. This makes sense given people coming into these articles are already in a consideration phase, but the confirmation is useful. We also use these insights to compare similar articles.
+Comparison articles, such as [PostHog vs Amplitude](/compare/posthog-vs-amplitude) convert very well – in the region of 25%. This makes sense given people coming into these articles are already in a consideration phase, but the confirmation is useful. We also use these insights to compare similar articles.
 
 Overall, these are the kinds of insights that help us inform our content and SEO priorities, which is hugely important given we're a small team. We have a nearly identical dashboard for tracking the impact of [customer stories](/customers), too.
 
@@ -221,7 +222,7 @@ We hope this look at how we use PostHog will inspire you (and your marketing tea
 
 - [Non-obvious SEO advice for startups](/newsletter/seo-for-startups): Some more in-depth SEO advice based on our experience growing PostHog.
 
-- [Using the PostHog Toolbar to visualize behavior and create actions](/tutorials/toolbar): The PostHog Toolbar is a useful way to understand how users interact with your website. You can also use it to create actions.
+- [Using the PostHog Toolbar to visualize behavior and create actions](/docs/toolbar): The PostHog Toolbar is a useful way to understand how users interact with your website. You can also use it to create actions.
 
 - [How to track performance marketing](/tutorials/performance-marketing): An in-depth guide to tracking signups and conversions from different marketing channels.
 

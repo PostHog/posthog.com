@@ -16,7 +16,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './surveys/features'
-import { applications, topFeatures } from './surveys/slides'
+import { applications, keyFeatures } from './surveys/slides'
 
 export const surveys = {
     ...getTool('surveys'),
@@ -27,7 +27,7 @@ export const surveys = {
     type: 'surveys',
     slug: 'surveys',
     teamSlug: 'surveys',
-    forumTopicId: 347,
+    forumTag: 'surveys',
     color: 'salmon',
     colorSecondary: 'red',
     shortDescription: 'Ask users anything with no-code surveys',
@@ -74,11 +74,11 @@ export const surveys = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -115,6 +115,7 @@ export const surveys = {
     ],
     overview: {
         title: 'Ask anything with no-code surveys',
+        description: '"Build a product satisfaction survey with rating questions"',
         eli5: 'Surveys let you ask users anything right inside your product – freeform text, multiple choice, NPS, ratings, emoji reactions – as a no-code popup or via the API. Target by URL, person properties, events, or Feature Flags so you ask the right people at the right moment. Responses connect to Product Analytics and Session Replay, so you can see who answered and what they were doing.',
         textColor: 'text-white', // tw
     },

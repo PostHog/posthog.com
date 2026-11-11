@@ -46,7 +46,7 @@ Google Analytics tells you "10,000 people visited your site this week, 40% bounc
 
 For a deeper dive, check out our [AARRR pirate metrics framework](/product-engineers/aarrr-pirate-funnel) guide. 
 
-Building a mobile app? See our comparison of the [best mobile app analytics tools](/blog/best-mobile-app-analytics-tools). If open source matters to you, we've also rounded up the [best open source analytics tools](/blog/best-open-source-analytics-tools).
+Building a mobile app? See our comparison of the [best mobile app analytics tools](/compare/best-mobile-app-analytics-tools). If open source matters to you, we've also rounded up the [best open source analytics tools](/compare/best-open-source-analytics-tools).
 
 </details>
 
@@ -123,7 +123,7 @@ We've compared the best [feature flag tools](/compare/best-open-source-feature-f
 
 **Pair your analytics tool with:**
 
-- **[Data warehouse](/context-warehouse)** – create a single source of truth and query data from across product analytics, sales, finances, ops, and more. 
+- **[Data warehouse](/warehouse)** – create a single source of truth and query data from across product analytics, sales, finances, ops, and more. 
 - **[Group analytics](/docs/product-analytics/group-analytics)** – track funnels, retention, and feature adoption at the account level, not just individual users
 - **[Logs](/logs)** – debug issues across your backend alongside user behavior and error data
 - **[SQL access](/docs/data-warehouse/sql)** – write custom queries when the UI doesn't cover your edge case, build views for your data team
@@ -168,7 +168,7 @@ Every product has its own generous free tier, so you pay nothing until you have 
 - [Surveys](/surveys) with PMF templates, NPS, and targeting by user behavior
 - [Error tracking](/error-tracking) with stack traces alongside user behavior context
 - [LLM observability](/docs/ai-observability) to monitor and optimize AI features
-- [Data warehouse](/docs/data-warehouse) and [CDP](/docs/cdp) for cross-product queries, external source connections, and syncing data between tools
+- [Data warehouse](/docs/data-warehouse) and [CDP](/docs/data-pipelines) for cross-product queries, external source connections, and syncing data between tools
 
 ### Getting started
 
@@ -218,7 +218,7 @@ Use the [pricing calculator](/pricing) to estimate costs based on your actual vo
 - Your team is entirely non-technical – PMs who need point-and-click everything may find the learning curve steep
 - You *only* need in-app guides and onboarding flows
 - You want a warehouse-native analytics tool that sits on top of your existing BigQuery, Snowflake, or Databricks setup – PostHog has its own [data warehouse](/docs/data-warehouse) and can sync data in and out, but it's not designed to be a query layer for an external warehouse you already own
-- You want a [dedicated mobile analytics platform](/blog/best-mobile-app-analytics-tools) – PostHog has mobile SDKs and [mobile replay](/docs/session-replay), but you might be bettter served by a tool with deeper mobile-specific features
+- You want a [dedicated mobile analytics platform](/compare/best-mobile-app-analytics-tools) – PostHog has mobile SDKs and [mobile replay](/docs/session-replay), but you might be bettter served by a tool with deeper mobile-specific features
 
 </details>
 
@@ -297,7 +297,7 @@ If [you're pre-PMF and just need funnels and retention](/founders/early-stage-an
 
 ### What is Amplitude and why should startups consider it?
 
-[Amplitude](/blog/posthog-vs-amplitude) is a retention-focused analytics platform known for the deepest cohort math in the category – N-day, unbounded, and bracket retention with cohort comparison overlays. If understanding *why* users come back (or don't) is your primary workflow, Amplitude's retention tooling is best-in-class.
+[Amplitude](/compare/posthog-vs-amplitude) is a retention-focused analytics platform known for the deepest cohort math in the category – N-day, unbounded, and bracket retention with cohort comparison overlays. If understanding *why* users come back (or don't) is your primary workflow, Amplitude's retention tooling is best-in-class.
 
 The platform has expanded well beyond analytics. It now includes session replay, feature flags, A/B testing (Amplitude Experiment), and Guides & Surveys. A Unified Browser SDK lets you initialize analytics, replay, experiments, and guides in a single call.
 
@@ -349,7 +349,7 @@ Guides & Surveys, extra session replay volume, and additional automated syncs ar
 </details>
 
 <p>
-  <CallToAction to="https://posthog.com/blog/posthog-vs-amplitude">
+  <CallToAction to="https://posthog.com/compare/posthog-vs-amplitude">
     Compare PostHog and Amplitude
   </CallToAction>
 </p>
@@ -609,7 +609,7 @@ It starts with context. A full suite of developer tools – [AI Observability](/
 
 From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
 
-You can steer it from [Slack](/slack), the [web app](/ai), the [desktop app](/desktop), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
 </details>
 
@@ -651,7 +651,7 @@ Yes. **PostHog** has SDKs for iOS, Android, React Native, and Flutter. **Mixpane
 
 Mobile apps generate more events per session than web, so factor that into cost estimates on event-based pricing. 
 
-See our comparison of the [best mobile app analytics tools](/blog/best-mobile-app-analytics-tools).
+See our comparison of the [best mobile app analytics tools](/compare/best-mobile-app-analytics-tools).
 
 </details>
 

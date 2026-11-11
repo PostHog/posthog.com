@@ -1,0 +1,100 @@
+---
+title: Linking MySQL as a source
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+sourceId: MySQL
+---
+
+The MySQL connector can link your database tables to PostHog.
+
+To link MySQL:
+
+1. Go to the [Data pipeline page](https://app.posthog.com/data-management/sources) and the sources tab in PostHog
+2. Click **New source** and select MySQL
+3. Enter your database connection details:
+   - **Host:** The hostname or IP your database server like `db.example.com` or `123.132.1.100`.
+   - **Port:** The port your database server is listening to. The default is `3306`.
+   - **Database:** The name of the database you want like `analytics_db`.
+   - **User:** The username with the necessary permissions to access the database.
+   - **Password:** The password for the user.
+   - **Schema:** The schema for your database where your tables are located. The default is `public`.
+   - **Use SSL:** Whether to use SSL for the connection. Default is enabled.
+   - **TLS fields:** (Optional) Verify the server certificate, add a certificate authority, or add a client certificate. See [Verify the server certificate](#verify-the-server-certificate).
+4. If you need to connect through an SSH tunnel, enable and configure it (optional):
+   - **Tunnel host:** The hostname of your SSH server.
+   - **Tunnel port:** The port your SSH server is listening on.
+   - **Authentication type:**
+     - For password authentication, enter your SSH username and password.
+     - For key-based authentication, enter your SSH username, private key, and optional passphrase.
+5. Click **Next**
+
+The data warehouse then starts syncing your MySQL data. You can see details and progress in the [sources tab](https://app.posthog.com/data-management/sources).
+
+## Configuration
+
+<SourceParameters />
+
+## Verify the server certificate
+
+By default, PostHog does not check your database's TLS certificate. To make sure PostHog connects to your real database, set these fields when you link the source:
+
+- **Verify the server certificate?** Checks that your database's TLS certificate comes from a trusted authority and matches the host you entered. Off by default.
+- **Certificate authority (optional):** The PEM certificate of the authority that signed your database's certificate. Add it when your database uses a private authority or a self-signed certificate, such as the regional certificate bundle for Amazon RDS. Adding one turns on verification, even when the toggle above is off. Without it, PostHog checks against a standard set of public authorities.
+- **Client certificate (optional)** and **Client key (optional):** A PEM certificate and its private key that PostHog presents to your database. Add both when your database requires client certificates. The key must not have a passphrase. A client certificate always makes PostHog connect over TLS.
+
+Through an SSH tunnel, PostHog checks that the certificate comes from a trusted authority, but not that it matches the host. The tunnel presents your database on a local address, so the host name can't match.
+
+Any of these fields turns on TLS, whatever **Use SSL** says. If you leave them all empty, **Use SSL** asks for an encrypted connection, but PostHog still connects without encryption when the server does not offer TLS. To refuse an unencrypted connection, turn on **Verify the server certificate?**.
+
+### Certificate errors
+
+PostHog stops syncing on these errors, because retrying fails the same way until you change the source:
+
+- "PostHog could not verify your database's TLS certificate. Either an authority PostHog trusts did not sign it, or it does not match the host. Add the authority that signed it, check the host, or turn off certificate verification and remove the certificate authority."
+- "Your database rejected the client certificate, or requires one. Add a client certificate and key that your database trusts."
+- "A client certificate needs its private key. Add the key, or clear the certificate."
+- "The client key has a passphrase. Remove the passphrase and paste the key again."
+- "The MySQL server did not offer a TLS connection. Enable TLS on the server, or turn off certificate verification and remove the certificate authority and client certificate for this source."
+
+After you fix the certificate or the source settings, re-enable the sync.
+
+
+## Selecting columns
+
+By default, PostHog syncs all columns from each table. To sync only specific columns:
+
+1. During source setup, click **Columns** next to any table in the table picker.
+2. Uncheck columns you don't want to sync.
+3. Primary key columns and the incremental sync field (if configured) are always synced and cannot be disabled.
+
+You can also change column selection after setup:
+
+1. Go to the [sources tab](https://app.posthog.com/data-management/sources) and click your MySQL source.
+2. Click **Configure** next to any schema.
+3. Under **Columns**, select which columns to sync.
+
+<CalloutBox icon="IconInfo" title="Adding columns to existing syncs" type="fyi">
+
+When you add columns to a schema using incremental or append sync, PostHog prompts you to choose:
+
+- **Sync forward only** - New columns are populated only for future data. Existing rows show `NULL` for the new columns.
+- **Full resync** - Triggers a complete resync to backfill the new columns for all rows.
+
+</CalloutBox>
+<CalloutBox icon="IconWarning" title="Decimal precision limits" type="caution">
+
+Numeric or decimal columns with values exceeding a precision of 76 or scale of 32 cannot be synced. If your sync fails with this error, you have three options:
+
+- Constrain the column with a lower precision/scale
+- Cast it to text in a view
+- Round the values at the source
+
+</CalloutBox>
+
+import InboundIpAddresses from "../_snippets/inbound-ip-addresses.mdx";
+
+<InboundIpAddresses />

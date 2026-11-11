@@ -6,13 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/give-back-friday.png
 featuredImageType: full
+ogImage: generated
 tags:
   - Founders
-  - Growth
-  - Product
-  - Product analytics
-  - Product engineers
-  - Product metrics
+  - Finding product-market fit
 crosspost:
   - Product engineers
   - Blog

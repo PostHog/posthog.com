@@ -6,6 +6,12 @@ showTitle: true
 
 The Support widget is a chat interface that appears on your website so your customers can start conversations with your team. It loads automatically when enabled and captures session context for each ticket.
 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_18_51_fb4157c892.png"
+  alt="The Support widget channel"
+  classes="rounded"
+/>
+
 ## Enable the widget
 
 1. Go to **Support** in PostHog and click **Settings**
@@ -20,24 +26,36 @@ The widget appears as a floating button on your site. By default it appears in t
 
 Configure these settings in the **In-app widget** section of Support settings:
 
-| Setting | Description | Options | Default |
-|---------|-------------|---------|--------|
-| **Enable widget** | Show the chat widget on your site | `true`, `false` | `false` |
-| **Button color** | Primary color for the widget (hex) | Any hex color | `#5375ff` |
-| **Widget position** | Position of the widget on screen | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right` |
-| **Greeting message** | Welcome text shown when widget opens | Any string | `"Hi! How can we help?"` |
-| **Allowed domains** | Restrict which domains can show the widget | Array of domain strings | `[]` (all domains) |
+| Setting              | Description                                | Options                                                | Default                  |
+| -------------------- | ------------------------------------------ | ------------------------------------------------------ | ------------------------ |
+| **Enable widget**    | Show the chat widget on your site          | `true`, `false`                                        | `false`                  |
+| **Button color**     | Primary color for the widget (hex). A [theme](/docs/support/widget#theme-the-widget) overrides it | Any hex color                                          | `#5375ff`                |
+| **Widget position**  | Position of the widget on screen           | `bottom_right`, `bottom_left`, `top_right`, `top_left` | `bottom_right`           |
+| **Greeting message** | Welcome text shown when widget opens       | Any string                                             | `"Hi! How can we help?"` |
+| **Allowed domains**  | Restrict which domains can show the widget | Array of domain strings                                | `[]` (all domains)       |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_09_56_ac25e5a9fc.png"
+  alt="The Support widget: Configuration options"
+  classes="rounded"
+/>
 
 ### Identification form
 
 You can optionally require users to identify themselves before starting a conversation:
 
-| Setting | Description | Default |
-|---------|-------------|---------|
-| **Require email** | Users must enter their email to start chatting | `false` |
-| **Collect name** | Additionally collect a name | `false` |
-| **Form title** | Heading shown on the identification form | `"Before we start..."` |
-| **Form description** | Subtext shown below the title | `"Please provide your details so we can help you better."` |
+| Setting              | Description                                    | Default                                                    |
+| -------------------- | ---------------------------------------------- | ---------------------------------------------------------- |
+| **Require email**    | Users must enter their email to start chatting | `false`                                                    |
+| **Collect name**     | Additionally collect a name                    | `false`                                                    |
+| **Form title**       | Heading shown on the identification form       | `"Before we start..."`                                     |
+| **Form description** | Subtext shown below the title                  | `"Please provide your details so we can help you better."` |
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Screenshot_2026_10_20_at_15_10_03_e1531a421e.png"
+  alt="The Support widget: Identification form"
+  classes="rounded"
+/>
 
 When enabled, the form appears before they can send their first message. PostHog uses this information to link the ticket to a person.
 
@@ -52,42 +70,124 @@ You can restrict which domains the widget appears on for security:
 ```javascript
 // Configured in PostHog settings
 domains: [
-  "example.com",              // Exact match
-  "*.example.com",            // Wildcard: matches sub.example.com
-  "https://app.example.com"   // With protocol (protocol is stripped)
-]
+  "example.com", // Exact match
+  "*.example.com", // Wildcard: matches sub.example.com
+  "https://app.example.com", // With protocol (protocol is stripped)
+];
 ```
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_15_02_b890db240b.png"
+  alt="The Support widget: Allowed domains"
+  classes="rounded"
+/>
 
 If `domains` is empty or not set, the widget shows on all domains.
 
 ### Show and hide the widget
 
-Use the [JavaScript API](/docs/support/javascript-api) to programmatically show or hide the widget:
+`show()` adds the widget, including the launcher button. `hide()` removes it from the page. `show()` does nothing until the widget bundle has loaded. These methods are part of the [JavaScript API](/docs/support/javascript-api).
 
 ```javascript
-// Show the widget (renders it if not already rendered)
-posthog.conversations.show()
+// Add the widget, including the launcher button
+posthog.conversations.show();
 
-// Hide and remove the widget from DOM
-posthog.conversations.hide()
+// Remove the widget from the page
+posthog.conversations.hide();
 
-// Check if widget is currently visible
-const isVisible = posthog.conversations.isVisible()
+// Check if the widget is on the page
+const isVisible = posthog.conversations.isVisible();
 ```
 
-This is useful for:
-- Showing the widget only on certain pages
-- Triggering the widget from a custom button
-- Hiding the widget during specific user flows
+Use this to show the widget only on certain pages, or to hide it during a flow such as checkout. To open the chat from a button in your own UI, use [`open()`](/docs/support/widget#open-and-close-the-chat-panel).
+
+### Open and close the chat panel
+
+`open()` and `close()` control the chat panel. The launcher stays on the page. `open()` renders the widget first when it is not already there.
+
+```javascript
+// Open the chat panel. Renders the widget first if it is not on the page.
+posthog.conversations.open();
+
+// Close the panel. The launcher stays.
+posthog.conversations.close();
+```
+
+If you call `open()` or `close()` before the widget bundle has loaded, the last call runs once the bundle loads. A `hide()` call cancels an `open()` that is still waiting. `open()` does nothing on a domain that is not in **Allowed domains**. These methods need `posthog-js` 1.442.0 or later.
+
+### Theme the widget
+
+**Button color** in Support settings sets the primary color. To match the rest of your site, including dark mode, fonts, corner radius, and shadows, pass a theme when you initialize PostHog, or call `setTheme()` later.
+
+Theming needs `posthog-js` 1.444.0 or later.
+
+```javascript
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  conversations: {
+    theme: {
+      colorScheme: "auto", // "light" (default), "dark", or "auto"
+      primary: "#111827",
+      borderRadius: "16px",
+      launcherShadow: "none",
+      dark: { primary: "#f9fafb" },
+    },
+  },
+});
+```
+
+`colorScheme` picks the palette:
+
+- `light` is the default.
+- `dark` uses the built-in dark colors.
+- `auto` follows the visitor's `prefers-color-scheme`.
+
+The top-level colors apply to the light scheme only. `dark` holds the colors used when the dark scheme is active, so set `background`, `text`, and the other colors there for dark mode. A color you leave unset in `dark` falls back to the built-in dark color. `primary` and `primaryText` are the exception: they keep the light values until you set them under `dark`.
+
+```javascript
+// Switch the widget to dark mode after init
+posthog.conversations.setTheme({ colorScheme: "dark" });
+```
+
+`setTheme()` merges the object you pass over the current theme. The `dark` object merges the same way, so a later call can change one dark color without clearing the others. It is safe to call before the widget loads, and `posthog.reset()` keeps the theme.
+
+You can set the same values in your own stylesheet. The widget reads them as CSS custom properties on `#ph-conversations-widget-container`. A rule that selects `#ph-conversations-widget-container` overrides the theme from the SDK.
+
+```css
+html.dark #ph-conversations-widget-container {
+  --ph-conv-bg: #0b0f19;
+  --ph-conv-text: #e5e7eb;
+}
+```
+
+Values apply in this order: built-in defaults, the **Button color** from Support settings, the theme in `posthog.init()`, `setTheme()`, then your CSS.
+
+| Theme option | CSS variable | What it sets |
+| --- | --- | --- |
+| `colorScheme` | – | `light`, `dark`, or `auto` |
+| `primary` | `--ph-conv-primary` | Launcher, header, customer messages, and buttons. Overrides **Button color**. |
+| `primaryText` | `--ph-conv-on-primary` | Text and icons on `primary`. When this is unset, the widget picks black or white for contrast if `primary` is a hex color, and white otherwise. |
+| `background` | `--ph-conv-bg` | Window, message list, and input background |
+| `surface` | `--ph-conv-surface` | Identification form, unread tickets, and code blocks |
+| `text` | `--ph-conv-text` | Main text |
+| `mutedText` | `--ph-conv-muted` | Timestamps, author names, and descriptions |
+| `border` | `--ph-conv-border` | Borders and dividers |
+| `agentBubble` | `--ph-conv-agent-bubble` | Messages from your team |
+| `fontFamily` | `--ph-conv-font` | Font family |
+| `borderRadius` | `--ph-conv-radius` | Corner radius of the chat window, for example `16px` |
+| `launcherShadow` | `--ph-conv-launcher-shadow` | CSS `filter` on the launcher, for example `none` |
+| `windowShadow` | `--ph-conv-window-shadow` | CSS `box-shadow` of the chat window |
+
+Color options take any CSS color. `fontFamily`, `borderRadius`, `launcherShadow`, and `windowShadow` take the CSS value for that property. The widget ignores a value that contains `{`, `}`, `;`, `<`, or `>`, and logs a warning.
 
 ### Disable the widget
 
 You can disable conversations entirely via the PostHog init config:
 
 ```javascript
-posthog.init('<ph_project_token>', {
-  disable_conversations: true  // Prevents loading the conversations module
-})
+posthog.init("<ph_project_token>", {
+  disable_conversations: true, // Prevents loading the conversations module
+});
 ```
 
 This is different from hiding the widget – it completely disables the feature.
@@ -120,30 +220,27 @@ You typically call both: `identify()` for analytics tracking, and `setIdentity()
 
 ### How it works
 
-1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your **Secret API key** from Support settings
+1. Your server computes an HMAC-SHA256 hash of the user's `distinct_id` using your **Identity verification secret** from Support settings
 2. You pass this hash along with the `distinct_id` to the widget
 3. The widget API verifies the signature and uses the `distinct_id` for ticket lookup instead of the browser session
 
 With identity verification enabled, users see all their tickets on any browser or device.
 
-### Find your secret API key
+### Find your identity verification secret
 
-Copy the key from the **Secret API key** section of [**Support** > **Settings**](https://app.posthog.com/support/settings). If the section is empty, use the button next to it to generate a key.
+1. Go to **Support** > **Settings**
+2. Open the **Identity verification secret** section. If it is empty, click the button next to it to generate a secret
+3. Copy the key. Use it only on your server
 
+The secret lives at [**Support** > **Settings**](https://app.posthog.com/support/settings).
 
-If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first.
+If you sign the hash with a key that does not work, the widget API answers `403 Forbidden` and gives no detail about the cause. The response is the same for a wrong key, a bad signature, and a project with no key, so that the API tells anonymous callers nothing about your setup. If `GET /widget/tickets` or `POST /widget/message` answers `403`, check your key first. See [troubleshooting](/docs/support/troubleshooting#identity-verification-returns-403).
 
-When you rotate the key, PostHog keeps the previous key as a backup, and hashes signed with the backup keep working. Delete the backup key after all your servers use the new key.
+When you rotate the key, PostHog keeps the previous key verifying for 48 hours. Update your server-side code within that window. After 48 hours, the previous key expires on its own. No manual deletion is needed. If the previous key may be compromised, click **Expire now** in the settings banner to stop it verifying immediately.
 
 ### Server-side implementation
 
-Generate the identity hash on your backend. Never expose the secret API key in client-side code.
-
-**Generate a secret_api_token**
-
-1. Go to **Support** in PostHog and click **Settings**
-2. Go to the **Secret API Key** section 
-3. Click generate key button to generate a new key
+Generate the identity hash on your backend. Never expose the identity verification secret in client-side code.
 
 <MultiLanguage>
 
@@ -160,13 +257,10 @@ def compute_identity_hash(distinct_id: str, secret_api_key: str) -> str:
 ```
 
 ```node
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 function computeIdentityHash(distinctId, secretApiKey) {
-  return crypto
-    .createHmac('sha256', secretApiKey)
-    .update(distinctId)
-    .digest('hex');
+  return crypto.createHmac("sha256", secretApiKey).update(distinctId).digest("hex");
 }
 ```
 
@@ -209,11 +303,11 @@ Once you've computed the hash on your server, pass it to your frontend and set i
 If you know the user's identity when PostHog initializes, such as on a server-rendered page, pass it in the init config:
 
 ```javascript
-posthog.init('<ph_project_token>', {
-  api_host: '<ph_client_api_host>',
-  identity_distinct_id: 'user_123',       // From your auth system
-  identity_hash: 'a1b2c3d4e5f6...',       // HMAC hash from your server
-})
+posthog.init("<ph_project_token>", {
+  api_host: "<ph_client_api_host>",
+  identity_distinct_id: "user_123", // From your auth system
+  identity_hash: "a1b2c3d4e5f6...", // HMAC hash from your server
+});
 ```
 
 **Option 2: Set identity after login**
@@ -222,10 +316,10 @@ For single-page apps – or when the user logs in after page load – call `setI
 
 ```javascript
 // After user logs in, your server returns the hash
-const identityHash = await fetchIdentityHashFromServer(userId)
+const identityHash = await fetchIdentityHashFromServer(userId);
 
 // Pass it to the SDK
-posthog.setIdentity('user_123', identityHash)
+posthog.setIdentity("user_123", identityHash);
 ```
 
 **Clear identity on logout**
@@ -233,35 +327,41 @@ posthog.setIdentity('user_123', identityHash)
 When a user logs out, clear their identity so the widget falls back to session-based access:
 
 ```javascript
-posthog.clearIdentity()
+posthog.clearIdentity();
 ```
 
-<CalloutBox icon="IconWarning" title="Keep your secret API key secure" type="caution">
+<CalloutBox icon="IconWarning" title="Keep your identity verification secret secure" type="caution">
 
-Your secret API key must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
+Your identity verification secret must never be exposed in client-side code. Always compute the identity hash on your server and pass only the hash to the frontend.
 
 </CalloutBox>
 
 ### When to use identity verification
 
-| Scenario | Recommended approach |
-|----------|---------------------|
-| **Logged-in users** | Use identity verification for seamless cross-device access |
-| **Anonymous visitors** | Use the default widget session (no setup required) |
-| **Mixed audience** | Use identity verification when users are logged in, fall back to widget session for anonymous users |
+| Scenario               | Recommended approach                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------------------- |
+| **Logged-in users**    | Use identity verification for seamless cross-device access                                          |
+| **Anonymous visitors** | Use the default widget session (no setup required)                                                  |
+| **Mixed audience**     | Use identity verification when users are logged in, fall back to widget session for anonymous users |
 
-If your project has no secret API key, requests that carry identity fields get `403 Forbidden`. Generate a key in Support settings. Requests without identity fields keep using the browser session.
+If your project has no identity verification secret, requests that carry identity fields get `403 Forbidden`. Generate one in Support settings. Requests without identity fields keep using the browser session.
 
 ## Notifications
 
 Get notified when new tickets arrive, by email or in your browser.
 
+<CalloutBox icon="IconLightBulb" title="Use Workflows for advanced notifications" type="fyi">
+
+For more control over notifications – like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags – use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
+
+</CalloutBox>
+
 ### Email notifications
 
 Configure your team to receive email alerts when new tickets arrive.
 
-1. Go to **Settings** > **Support** in PostHog
-2. Find the **Email notifications** section
+1. Go to **Support** > **Settings** in PostHog
+2. Open the **Notifications** tab and find **Email notifications**
 3. Select team members who should receive alerts
 
 Emails include:
@@ -273,18 +373,18 @@ Emails include:
 
 Recipients must have access to the team to receive notifications.
 
-<CalloutBox icon="IconLightBulb" title="Use Workflows for advanced notifications" type="fyi">
-
-For more control over notifications – like sending alerts only for high-priority tickets, routing to specific Slack channels, or notifying different teams based on tags – use [workflow automation](/docs/support/workflows). Workflows let you trigger Slack messages, webhooks, and more based on any ticket event.
-
-</CalloutBox>
-
 ### Browser notifications
 
 Individual team members can enable browser notifications for new ticket activity.
 
 1. Go to **Support** in PostHog
 2. Enable **Browser notifications** in the notification settings
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Screenshot_2026_10_20_at_15_17_08_692dad5608.png"
+  alt="Email and browser notification settings"
+  classes="rounded"
+/>
 
 When enabled, a desktop notification appears when the unread ticket count increases. This works independently of email notifications – you can use one or both.
 

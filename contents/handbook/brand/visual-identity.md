@@ -126,7 +126,7 @@ Max is our hedgehog mascot. He's a core part of the PostHog visual identity. He'
 - Use competitor hedgehog styles or derivative designs.
 - Use our artwork on a personal website or for anything that isn't PostHog-related. While our code is open source, our brand assets are property of PostHog. (The exception is for assets explicitly intended for community use like desktop or mobile background images.)
 
-**Artwork library:** Team members can find all hedgehogs under the Account menu -> Art library.
+**Artwork library:** All approved hedgehogs are at [brand.posthog.com](https://brand.posthog.com/hoggies). The Account menu links there as Art library.
 
 ### Illustration style (general)
 
@@ -217,7 +217,7 @@ When photography is used:
 
 Use [html2design](https://www.figma.com/community/plugin/1159123024924461424) to capture real webpages and import them directly into Figma. This makes sanitizing data much easier than working from flat image exports.
 
-All screenshots are stored in a [private Figma file](https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&t=ODxST4bS2pHBADwU-1) (private because source data may contain PII).
+All screenshots are stored in a <PrivateLink url="https://www.figma.com/design/Nv3HFBfZDVLmF6M9ZiIqhm/Screenshots?node-id=17-4&amp;t=ODxST4bS2pHBADwU-1">private Figma file</PrivateLink> (private because source data may contain PII).
 
 **Using synthetic data**
 

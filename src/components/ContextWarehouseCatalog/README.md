@@ -12,10 +12,9 @@ import { CatalogLayers } from 'components/ContextWarehouseCatalog'
 
 ## Where it's used
 
-- `/context-warehouse` – "What's in your context warehouse"
 - `/self-driving` – "Everything lives in your context warehouse"
 
 ## Notes
 
-- Item URLs use `/context-warehouse/...` paths (`/data-stack/...` redirects there).
+- Item URLs point at `/warehouse` and `/data-pipelines`.
 - Odd-count sections span the last item across both columns at `@xl/reader-content` so the grid background doesn't show an empty cell.

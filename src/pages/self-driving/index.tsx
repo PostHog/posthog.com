@@ -12,7 +12,7 @@ import { WINDOW_BG } from '../../constants/frostedSurfaces'
 import useProduct from 'hooks/useProduct'
 import { useApp } from '../../context/App'
 import { GetStarted } from 'components/Home/Test'
-import VolumeCard from 'components/PocketGuides/VolumeCard'
+import VolumeCard from 'components/Learn/PocketGuides/VolumeCard'
 import { useSelfDrivingTemplates } from 'components/SelfDrivingInbox'
 import { volumeById } from '../../constants/pocketGuides'
 import { CatalogLayers } from 'components/ContextWarehouseCatalog'
@@ -165,7 +165,7 @@ const signalSources: { Icon: IconComponent; color: string; name: string; descrip
         color: 'text-purple',
         name: 'External tools',
         description: 'Zendesk, Linear, GitHub issues',
-        href: '/docs/self-driving/signals',
+        href: '/docs/self-driving/inbox/sources',
     },
 ]
 
@@ -196,7 +196,7 @@ const scoutGroups: IconGroup[] = [
 const loopTabs: TabbedCarouselTab[] = [
     {
         value: 'signals',
-        label: 'Signals',
+        label: 'Sources',
         color: 'bg-blue',
         activeText: 'text-white',
         progressBar: 'bg-white shadow-[0_0_6px_2px_rgba(0,0,0,0.2)]',
@@ -206,7 +206,10 @@ const loopTabs: TabbedCarouselTab[] = [
                 highlightedTitle="happening in your product"
                 image="https://res.cloudinary.com/dmukukwp6/image/upload/report_177cacd2dd.png"
             >
-                <p className="m-0">A signal is a single observation about your product.</p>
+                <p className="m-0">
+                    Sources stream your product data into PostHog, and every notable finding becomes evidence for a
+                    report.
+                </p>
                 <div className="not-prose mt-4 grid grid-cols-1 gap-x-4 gap-y-3 @sm:grid-cols-2">
                     {signalSources.map(({ Icon, color, name, description, href }) => (
                         <div key={name} className="flex items-start gap-2">
@@ -809,8 +812,8 @@ export default function SelfDrivingPage({
     return (
         <>
             <SEO
-                title="PostHog self-driving"
-                description="PostHog is the context warehouse and product toolkit that helps humans and AI agents understand, improve, and ship better products."
+                title="Self-driving – Proactive fixes from product data | PostHog"
+                description="PostHog proactively analyzes your events, errors, and session replays, spots what is hurting your product, and suggests targeted fixes before you ask."
                 image="/images/og/default.png"
             />
             <ReaderView
@@ -833,14 +836,13 @@ export default function SelfDrivingPage({
                                     </span>
                                 </h1>
                                 <p className="mt-5 mb-0 max-w-3xl text-lg leading-relaxed text-secondary">
-                                    <strong className="text-primary">
-                                        You have a new pull request ready for review.
-                                    </strong>{' '}
-                                    <em>(Yep, really.)</em>
+                                    <strong className="text-primary">You have a new report in your inbox.</strong>{' '}
+                                    <em>(It already has a pull request.)</em>
                                 </p>
                                 <p className="mb-0 mt-6 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
-                                    While you slept, PostHog dug through your product data, found what was worth fixing,
-                                    and had agents do the work. <Highlight>All you need to do is hit merge.</Highlight>
+                                    While you slept, PostHog dug through your product data, cut through the noise, and
+                                    turned what matters into prioritized reports. When the fix is clear, an agent does
+                                    the work. <Highlight>You decide what ships.</Highlight>
                                 </p>
                                 <p className="mb-0 mt-4 max-w-3xl text-[15px] text-secondary @xl/reader-content:text-[17px]">
                                     PostHog instruments your codebase, then combines that context with product data like
@@ -924,9 +926,9 @@ export default function SelfDrivingPage({
                                     color: 'text-blue',
                                     text: (
                                         <>
-                                            <strong className="text-primary">PRs {'>'} Issues.</strong> Raw signals are
-                                            deduped and clustered into reports. Actionable ones become PRs. You only pay
-                                            for real work completed.
+                                            <strong className="text-primary">PRs {'>'} Issues.</strong> Findings from
+                                            all your sources are deduped and clustered into reports. Actionable ones
+                                            become PRs. You only pay for real work completed.
                                         </>
                                     ),
                                 },

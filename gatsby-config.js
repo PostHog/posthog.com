@@ -1,4 +1,5 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
+const { isNoindexSdkReference, isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
 const qs = require('qs')
 const pLimit = require('p-limit')
 
@@ -17,6 +18,7 @@ const getQuestionPages = async (base) => {
         // Only need permalink for the sitemap — avoid populate:* payload
         const questionQuery = qs.stringify({
             fields: ['permalink'],
+            filters: { forumTopic: { id: { $notNull: true } } },
             pagination: {
                 page,
                 pageSize: 100,
@@ -51,7 +53,7 @@ const getQuestionPages = async (base) => {
     )
 
     const questions = allResponses.flatMap((response) =>
-        response.data.map((question) => ({ path: `${base}/questions/${question.attributes.permalink}` }))
+        response.data.map((question) => ({ path: `${base}/forum/p/${question.attributes.permalink}` }))
     )
 
     return questions
@@ -72,6 +74,7 @@ module.exports = {
     },
     flags: {
         DEV_SSR: false,
+        PARALLEL_SOURCING: process.env.NODE_ENV === 'development',
     },
     siteMetadata: {
         title: 'PostHog',
@@ -130,21 +133,24 @@ module.exports = {
             options: {
                 name: `contents`,
                 path: `${__dirname}/contents`,
-                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+                // Eval files sit beside their pages but are read only by evals/, never by the site.
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`, `**/*.eval.yaml`],
             },
         },
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
                 shouldBlockNodeFromTransformation: (node) =>
-                    node.internal.type === 'File' &&
-                    // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
-                    // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
-                    // (and thus pages).
-                    ((node.sourceInstanceName === 'posthog-main-repo' &&
-                        node.name === 'SKILL' &&
-                        (node.relativeDirectory || '').includes('/skills/')) ||
-                        (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com')),
+                    // SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js).
+                    isSdkReferenceFile(node) ||
+                    (node.internal.type === 'File' &&
+                        // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
+                        // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
+                        // (and thus pages).
+                        ((node.sourceInstanceName === 'posthog-main-repo' &&
+                            node.name === 'SKILL' &&
+                            (node.relativeDirectory || '').includes('/skills/')) ||
+                            (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com'))),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -207,7 +213,7 @@ module.exports = {
                 background_color: '#E5E7E0',
                 theme_color: '#E5E7E0',
                 display: 'minimal-ui',
-                icon: 'src/images/posthog-icon-white.svg', // This path is relative to the root of the site.
+                icon: 'src/images/posthog-icon-white.svg',
             },
         },
         `gatsby-plugin-postcss`,
@@ -237,7 +243,7 @@ module.exports = {
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
                     const transformedPages = allPages
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isNoindexSdkReference(path))
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,

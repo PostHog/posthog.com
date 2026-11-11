@@ -139,7 +139,7 @@ Our basic set up is now complete. Re-run `npx expo start` to see our app in acti
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, run `npx expo install posthog-react-native expo-file-system expo-application expo-device expo-localization` to install [PostHog’s React Native SDK](/docs/libraries/react-native).
+To start, run `npx expo install posthog-react-native@4 expo-file-system expo-application expo-device expo-localization` to install [PostHog’s React Native SDK](/docs/libraries/react-native).
 
 Then, we set up the `PostHogProvider` in `App.js` so that we can access our client throughout the app:
 
@@ -237,7 +237,7 @@ const posthog = usePostHog()
 posthog.overrideFeatureFlag({'my-cool-experiment': 'control'}) 
 ```
 
-Lastly, you can [view your test results](/docs/experiments/testing-and-launching#viewing-experiment-results) on the experiment page.
+Lastly, you can [view your test results](/docs/experiments/analyzing-results) on the experiment page.
 
 ## Further reading
 

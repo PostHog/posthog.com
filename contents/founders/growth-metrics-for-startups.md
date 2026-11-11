@@ -6,10 +6,10 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/how_to_with_no_experience_3d0f159f50.jpg
 featuredImageType: full
+ogImage: generated
 tags:
     - Founders
-    - Growth
-    - Ops & finance
+    - Finding product-market fit
 crosspost:
     - Blog
 ---

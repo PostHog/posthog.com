@@ -33,7 +33,7 @@ Counters are where most charting mistakes happen, so PostHog handles their sharp
 
 - **Cumulative counters** (the OpenTelemetry default) report an ever growing total since process start. The absolute value is meaningless for charting; what matters is how much it grew in each time bucket. The `rate` and `increase` aggregations compute per series differences, so a counter reported by twenty processes is twenty series diffed independently and then summed.
 - **Counter resets** happen when a process restarts and its total drops back toward zero. `rate` and `increase` detect resets the same way Prometheus does, so a restart never shows up as a huge negative spike.
-- **Delta counters** report only what happened since the last export. PostHog reads the temporality that your SDK declares and sums deltas as they are, without differencing.
+- **Delta counters** report only what happened since the last export. PostHog reads the temporality that your SDK declares and sums deltas as they are, without differencing. The `posthog.metrics` API in posthog-js, posthog-node, and posthog-python sends deltas. See [Query what you send](/docs/metrics/query-what-you-send) for how that reads back.
 - **Histograms** arrive as bucket counts with bucket boundaries. Percentile aggregations combine the buckets across the query window and interpolate the requested quantile, which is how `p95` works without storing every raw observation.
 - **Gauges** are stored as reported and aggregate naturally with `avg`, `sum`, or percentiles.
 
@@ -60,7 +60,9 @@ Metrics are stored in a columnar time series table and exposed to SQL as `postho
 
 ## What the alpha means here
 
-While metrics is in open alpha, ingestion details and limits may still change, and retention policy is not final. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
+Ingestion doesn't depend on the viewer. PostHog accepts and stores the metrics you send whether or not you've turned on the Metrics viewer for the project, so enabling it later shows data sent earlier (within the 30-day retention). Ingestion returns a success response either way, so to confirm data landed, check the **Overview** tab or query the `posthog.metrics` table in the **SQL** tab.
+
+While metrics is in open alpha, ingestion details and limits may still change, and metrics data is kept for 30 days. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
 
 ## Next steps
 

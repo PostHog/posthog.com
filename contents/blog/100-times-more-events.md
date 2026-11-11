@@ -13,6 +13,10 @@ author:
 category: PostHog news
 tags:
   - Product updates
+  - Founders
+  - Sales and pricing
+crosspost:
+  - Founders
 ---
 
 Today, we're announcing that we're giving away 1 million ingested events/month on [Cloud](https://app.posthog.com/signup), for free. That's up from 10k/month that we were offering before.

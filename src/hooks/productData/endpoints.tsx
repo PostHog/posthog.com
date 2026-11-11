@@ -13,7 +13,7 @@ import {
     IconSparkles,
 } from '@posthog/icons'
 import { features } from './endpoints/features'
-import { applications, topFeatures } from './endpoints/slides'
+import { applications, keyFeatures } from './endpoints/slides'
 import { getTool } from '../../data/tools'
 
 export const endpoints = {
@@ -23,8 +23,7 @@ export const endpoints = {
     // Beta in product/docs; no billing product yet (free during beta).
     status: 'beta',
     teamSlug: 'data-modeling',
-    // Squeak topic: /questions/topic/endpoints (squeakId from page-data).
-    forumTopicId: 393,
+    forumTag: 'endpoints',
     color: 'teal',
     colorSecondary: 'teal',
     shortDescription: 'Custom API endpoints powered by your PostHog data',
@@ -40,7 +39,7 @@ export const endpoints = {
     seo: {
         title: 'Endpoints – Custom API endpoints powered by your PostHog data',
         description:
-            'Custom API endpoints powered by your PostHog data – the context agents need to build embedded analytics, data feeds, and make your product self-driving.',
+            'Turn PostHog SQL queries into API endpoints. Build embedded analytics, customer dashboards, and data feeds from your product data.',
     },
     /**
      * Sections rendered on the Product surface (`/endpoints`). Each entry
@@ -75,11 +74,11 @@ export const endpoints = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -114,6 +113,7 @@ export const endpoints = {
     ],
     overview: {
         title: 'Custom API endpoints powered by your PostHog data',
+        description: '"Create an endpoint from this SQL query"',
         eli5: 'Endpoints turns any saved insight or SQL query into a stable, authenticated HTTP URL. You define the query once in PostHog – filters, breakdowns, variables, and all – and your app, agent, or internal tool fetches the results over HTTP. No custom analytics backend, no CSV exports on Monday, no Query API spaghetti. Versioning, caching, materialization, and an OpenAPI spec come with it.',
         textColor: 'text-black',
         layout: 'overlay',
@@ -239,7 +239,7 @@ export const endpoints = {
                 'Create insights in PostHog and expose their results through endpoints. Use trends, funnels, or retention analyses to power dashboards, feeds, or summaries in your application, without rebuilding the query elsewhere.',
         },
         {
-            slug: 'context-warehouse/managed-warehouse',
+            slug: 'warehouse',
             description:
                 "Combine product analytics data with other datasets using SQL in PostHog's data warehouse. Expose the results through endpoints when you need more control over how data is shaped or joined.",
             className: '!size-6',

@@ -6,12 +6,7 @@ showTitle: true
 
 ## The engagement lifecycle
 
-Every engagement moves through four phases:
-
-1. **Intake.** A colleague or customer raises a need with the information outlined in [how to get an FDE involved](/handbook/forward-deployed-engineering/how-to-get-fde-involved). That's enough for us to scope it.
-2. **Scope.** We then classify the engagement type, estimate effort, and quote if the shape calls for it. The output is a short brief the customer can confirm before we commit. Details below.
-3. **Execute.** We do the hands-on work: instrumentation, data modeling, migrations, integrations, dashboards, and reference implementations. We capture the durable artifacts as we go.
-4. **Wrap-up.** We confirm the deliverable was shipped and approved, then hand the relationship back to [sales and CS](/handbook/forward-deployed-engineering/working-with-sales-and-cs). We write down anything worth keeping for the next customer, along with any learnings to take back to product.
+Every engagement moves from opportunity through scoping and delivery to close. For each stage, see the [engagement lifecycle](/handbook/forward-deployed-engineering/fde-engagement-lifecycle).
 
 ## Scoping engagements
 
@@ -27,6 +22,8 @@ Pricing depends on shape, effort, and commercial context, so exact numbers live 
 - **Pricing is quoted per milestone deliverable**, not per hour. A deliverable that doubles in scope is a new quote, not an informal extension.
 
 Never invent an exact number on the spot. If a customer asks, say you'll get them a quote within a day and route it through the account owner.
+
+Customers can also apply their prepaid credits toward an FDE engagement on a discretionary basis, provided there is justifiable account-level upside.  This needs approval from Simon (Ben B as backup).
 
 ## Principles
 

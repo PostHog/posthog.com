@@ -4,7 +4,7 @@ title: Application metrics
 
 <CalloutBox icon="IconFlask" title="Metrics is in open alpha" type="action">
 
-Any team can turn on metrics: open [Metrics](https://app.posthog.com/metrics) in PostHog and select **Enable metrics** in the onboarding view. See [turn on metrics](#turn-on-metrics) below for the full flow. Setup details, including the ingestion endpoint, may change before general availability.
+Any team can turn on metrics: open [Metrics](https://app.posthog.com/metrics) in PostHog and select **Enable metrics** in the onboarding view. See [turn on metrics](#turn-on-metrics) below for the full flow. Setup details, including the ingestion endpoint, may change before general availability. During the alpha, PostHog keeps metrics data for 30 days.
 
 </CalloutBox>
 
@@ -19,6 +19,8 @@ Metrics is in **open alpha**. Any team can turn it on for their project — no i
 1. Open [Metrics](https://app.posthog.com/metrics) in PostHog.
 2. On a new project, the onboarding view shows a preview of the metrics viewer and a getting-started checklist. Select **Enable metrics**.
 3. Metrics turns on for your whole project, and the **Overview**, **Viewer**, and **SQL** tabs become available.
+
+The viewer only controls whether you can see metrics. PostHog stores the metrics you send either way, so data sent before you enable metrics is there when you do (subject to the 30-day retention). To confirm data is landing, check the **Overview** tab or query the `posthog.metrics` table in the **SQL** tab.
 
 Once enabled, there are three ways to send metrics:
 

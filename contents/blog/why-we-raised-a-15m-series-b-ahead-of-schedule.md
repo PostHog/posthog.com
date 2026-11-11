@@ -5,11 +5,17 @@ author:
   - joe-martin
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/series-b/series-b-baby.png
+ogImage: generated
 rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
 category: PostHog news
+crosspost:
+  - Founders
+tags:
+  - Founders
+  - Raising money
 ---
 
 Last week we proudly announced we’d successfully raised $15 million in a Series B funding round, with support from Y Combinator Continuity Fund and GV (formerly Google Ventures). You may have seen [the news on VentureBeat](https://venturebeat.com/2021/06/10/open-source-product-analytics-platform-posthog-raises-15m/).

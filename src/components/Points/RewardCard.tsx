@@ -167,9 +167,7 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
                     ? 'border-green bg-green/5 dark:bg-green/10'
                     : isActive
                     ? 'border-orange bg-orange/5 dark:bg-orange/10'
-                    : canRedeem
-                    ? 'border-primary'
-                    : 'border-primary opacity-60'
+                    : 'border-primary'
             }`}
         >
             {state === 'idle' && (
@@ -178,17 +176,14 @@ export default function RewardCard({ reward, total }: { reward: Reward; total: n
                     <h4 className="font-bold m-0 text-sm">{reward.title}</h4>
                     <p className="text-xs text-muted m-0 mb-2 flex-grow">{reward.description}</p>
                     <div className="flex items-center justify-between gap-2">
-                        <span className={`text-sm font-bold ${canRedeem ? 'text-green' : 'text-muted'}`}>
-                            {reward.price} pts
-                        </span>
-                        <OSButton
-                            size="sm"
-                            variant={canRedeem ? 'primary' : 'secondary'}
-                            disabled={!canRedeem}
-                            onClick={handleRedeem}
-                        >
-                            {canRedeem ? 'Redeem' : `${pointsNeeded} pts`}
-                        </OSButton>
+                        <span className="text-sm font-bold">{reward.price} pts</span>
+                        {canRedeem ? (
+                            <OSButton size="sm" variant="primary" onClick={handleRedeem}>
+                                Redeem
+                            </OSButton>
+                        ) : (
+                            <span className="text-sm text-muted">{pointsNeeded} to go</span>
+                        )}
                     </div>
                 </>
             )}

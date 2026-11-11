@@ -18,7 +18,7 @@ Migrating data from Heap is a three step process:
 
 ## 1. Exporting data from Heap
 
-Heap Connect enables you to export your data to S3, Redshift, BigQuery, or Snowflake. Data in each of these is much easier to access and capture into PostHog. See how to set this up in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/heap-connect-guide-overview/).
+Heap Connect enables you to export your data to S3, Redshift, BigQuery, or Snowflake. Data in each of these is much easier to access and capture into PostHog.
 
 This is only available on their *Pro* or *Premier* plans. The chart view CSV export doesn't provide the data we need.
 
@@ -28,7 +28,7 @@ These exports come in the form of multiple tables including ones for users, page
 
 ## 2. Converting and capturing event data
 
-The schema of Heap's exported event data is similar to PostHog's schema, but it does require conversion to work with the rest of PostHog's data. You can see details on Heap's schema in [their docs](https://help.heap.io/heap-connect/heap-connect-guide/data-schema/#schema) and events and properties PostHog autocaptures in [our docs](/docs/product-analytics/autocapture#autocaptured-events).
+The schema of Heap's exported event data is similar to PostHog's schema, but it does require conversion to work with the rest of PostHog's data. See [our docs](/docs/product-analytics/autocapture#types-of-autocaptured-events) for the events and properties PostHog autocaptures.
 
 To start, you need to query each of the production event tables because the `all_events` table doesn't contain any properties. For example, if you have a project named **My Cool App** and labeled an event **My Cool Event**, you query the `my_cool_app.heap_main_production.my_cool_event` table.
 

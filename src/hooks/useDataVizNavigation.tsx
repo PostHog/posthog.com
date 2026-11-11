@@ -7,7 +7,7 @@ import { TreeMenu } from 'components/TreeMenu'
 // Section headers are strings without handles, product items are handles
 const dataVizStructure = [
     'Data visualization', // Section header
-    { name: 'Overview', url: '/trends' }, // Manual entry
+    { name: 'Overview', url: '/product-analytics' }, // Manual entry
     'Insights', // Section header
     'trends',
     'funnels',
@@ -73,7 +73,7 @@ export function useDataVizNavigation() {
 
         return {
             name: 'Data visualization',
-            url: '/trends',
+            url: '/product-analytics',
             children,
         }
     }, [products])

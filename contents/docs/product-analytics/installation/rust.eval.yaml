@@ -1,0 +1,161 @@
+owner: wizard-and-docs
+tags: [install, rust, server]
+status: active
+
+# One check for each flow the Rust docs teach. Every check is a baseline: a short
+# prompt in a user's words, no docs added. The prompt names PostHog and the kind of
+# analytics, and no API. The rubrics describe the correct result for posthog-rs as the
+# docs show it. `install` runs in an app with no PostHog code. The other checks run in
+# codemod's CLI, which already uses posthog-rs 0.21. The docs have no Rust group
+# analytics section, so there is no groups check.
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Rust server from a one-line
+          request? rustypaste is an actix-web server with no PostHog code. The prompt
+          names only the stack; the agent gets no docs, so docs-read shows which pages
+          it finds on its own.
+      codebase_to_test: oss-rustypaste
+      prompt: &install-prompt >-
+          Set up PostHog in this Rust app.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/Cargo.toml lists `posthog-rs` at 0.14 or newer.
+              initialized: >-
+                  The app creates one client at startup with posthog_rs::client(),
+                  passing the project token or ClientOptionsBuilder options. Cite the
+                  file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable. It is not
+                  written in the source.
+              flushes-on-exit: >-
+                  After the server's run().await returns, the app awaits flush() and
+                  then shutdown() on the client. Fails if it only relies on the client
+                  being dropped.
+
+    - id: event-by-user
+      description: >-
+          Baseline in codemod's CLI, which is on posthog-rs 0.21 and already sends
+          telemetry and an email-only `$set` for logged-in users. Does an agent
+          capture the event with the user's ID and put the email and name on the
+          person? The prompt does not name the method.
+      codebase_to_test: oss-codemod-cli
+      pages:
+          - docs/libraries/rust
+          - docs/product-analytics/identify
+      prompt: >-
+          Track when a user unpublishes a codemod in the CLI, by user, with PostHog
+          product analytics. Make sure the user's email and name are populated.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  A successful unpublish builds a posthog_rs Event::new(<event>,
+                  <distinct ID>) with the logged-in user's ID as the distinct ID and
+                  captures it on the posthog-rs client, directly or through the repo's
+                  existing PostHog sender. Cite the file and line(s).
+              set-on-person: >-
+                  The email and a name are set on the person with a `$set` property on
+                  a captured event. They are not plain properties of the unpublish
+                  event.
+
+    - id: anonymous-event
+      description: >-
+          Baseline in the same CLI. Searching needs no login. Does an agent turn off
+          person processing for events from people who aren't signed in? The prompt
+          does not name the method. An agent that copies the CLI's existing telemetry
+          sends the search under an install ID with a person profile.
+      codebase_to_test: oss-codemod-cli
+      pages:
+          - docs/libraries/rust
+          - docs/data/anonymous-vs-identified-events
+      prompt: >-
+          Track each codemod search in the CLI, with PostHog product analytics. People
+          who search aren't signed in.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The search event is created with Event::new_anon, or it sets
+                  `$process_person_profile: false` in its properties. Cite the file and
+                  line(s).
+              distinct-id-per-person: >-
+                  Each person searching gets their own distinct ID, such as the ID
+                  Event::new_anon generates or a per-install ID. It is not one constant
+                  shared by everyone.
+
+    - id: error
+      description: >-
+          Baseline in the same CLI. The crate builds posthog-rs with
+          default-features = false, so error tracking is off. Does an agent turn the
+          `error-tracking` feature back on and report the handled error with
+          capture_exception_with, linked to the user?
+      codebase_to_test: oss-codemod-cli
+      pages:
+          - docs/libraries/rust
+          - docs/error-tracking/installation/rust
+      prompt: >-
+          Track errors when unpublishing a codemod fails in the CLI, by user, with
+          PostHog error tracking.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  A failed unpublish calls capture_exception_with(&error,
+                  CaptureExceptionOptions::new().distinct_id(<user ID>)) on the
+                  posthog-rs client, with the logged-in user's ID. Fails if it builds a
+                  `$exception` event by hand. Cite the file and line(s).
+              feature-enabled: >-
+                  crates/telemetry/Cargo.toml adds `error-tracking` to the posthog-rs
+                  features.
+
+    - id: feature-flag
+      description: >-
+          Baseline in the same CLI. Does an agent evaluate the flag the way the docs
+          recommend? An agent that works from memory uses the deprecated single-flag
+          methods.
+      codebase_to_test: oss-codemod-cli
+      pages:
+          - docs/libraries/rust
+          - docs/feature-flags/installation/rust
+      prompt: >-
+          Put unpublishing codemods in the CLI behind a PostHog feature flag.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code awaits evaluate_flags(<user ID>, EvaluateFlagsOptions) on
+                  the posthog-rs client and reads the flag from the result with
+                  is_enabled() or get_flag(). Fails if it calls is_feature_enabled() or
+                  get_feature_flag() on the client. Cite the file and line(s).
+              flag-gates-unpublish: >-
+                  Unpublishing is refused when the flag is off.
+
+    # Next major: the same tasks for a project on posthog 1.0. Expected to fail until
+    # the docs show that major.
+    - id: install-next
+      description: >-
+          The same task for an app that installs posthog 1.0. Expected to fail until
+          the docs show that major.
+      codebase_to_test: oss-rustypaste
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/Cargo.toml lists `posthog` at 1.x, or as a path or git
+                  dependency on the posthog 1.0 source.
+              initialized: >-
+                  The app creates one client at startup with posthog::client() or
+                  posthog::init_global(), passing the project token or
+                  ClientOptionsBuilder options. Cite the file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable. It is not
+                  written in the source.
+              flushes-on-exit: >-
+                  After the server's run().await returns, the app awaits shutdown() on
+                  the client (or posthog::shutdown() for the global client), which
+                  sends queued events. Fails if it only relies on
+                  the client being dropped.

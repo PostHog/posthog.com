@@ -4,7 +4,7 @@ import OSTable from 'components/OSTable'
 import Link from 'components/Link'
 import { Select } from 'components/RadixUI/Select'
 import { getLogo, getDarkClassForLogo } from 'constants/logos'
-import { SELF_HOSTED_SOURCES } from 'constants/sources'
+import { EXTRA_SOURCES } from 'constants/sources'
 
 const getIconUrl = (iconUrl: string) => {
     return iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
@@ -16,11 +16,11 @@ const Title = ({ pipeline }: { pipeline: any }) => {
         (pipeline.status !== 'coming_soon' &&
             pipeline.type === 'source' &&
             pipeline.slug &&
-            `/docs/data-warehouse/sources/${pipeline.slug}`) ||
+            `/docs/data-pipelines/sources/${pipeline.slug}`) ||
         (pipeline.status !== 'coming_soon' &&
             pipeline.type &&
             pipeline.slug &&
-            `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
+            `/docs/data-pipelines/${pipeline.type}s/${pipeline.slug}`)
 
     return (
         <div className="flex items-center space-x-2">
@@ -65,6 +65,11 @@ export default function IntegrationsLibrary(): JSX.Element {
                 nodes {
                     name
                     slug
+                    mdx {
+                        fields {
+                            slug
+                        }
+                    }
                     icon_url
                     unreleased
                 }
@@ -115,14 +120,14 @@ export default function IntegrationsLibrary(): JSX.Element {
             category: ['Data warehouse'],
             description: `Sync ${s.name} data into PostHog`,
         })),
-        ...SELF_HOSTED_SOURCES.map((s) => ({
+        ...EXTRA_SOURCES.map((s) => ({
             name: s.name,
             slug: s.slug,
             icon_url: getLogo(s.logo),
             status: 'live',
             type: 'source',
-            category: ['Cloud storage'],
-            description: `Link ${s.name} data to PostHog`,
+            category: ['Data warehouse'],
+            description: 'Upload a CSV, JSON, or Parquet file to PostHog',
         })),
         ...(data.destinations?.nodes || []).map((d: any) => ({
             ...d,

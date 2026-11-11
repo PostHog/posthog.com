@@ -10,6 +10,8 @@ import type {
 import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
+import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
+import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
 
@@ -156,32 +158,23 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
     const { createNode } = actions
 
     // Canonical MCP tool definitions from the PostHog monorepo, rendered on docs pages
-    // (e.g. /docs/ai-observability/surfaces/mcp). The schema file is kept in sync with the
-    // MCP source by a CI drift check. Failure degrades to an empty list, never a broken build.
+    // (e.g. /docs/ai-observability/surfaces/mcp). Failure degrades to an empty list, never a broken build.
     try {
-        const posthogBranch = process.env.GATSBY_POSTHOG_BRANCH || 'master'
-        const mcpToolsRes = await fetch(
-            `https://raw.githubusercontent.com/PostHog/posthog/${posthogBranch}/services/mcp/schema/tool-definitions-all.json`
-        )
-        if (mcpToolsRes.ok) {
-            const mcpTools: Record<string, any> = await mcpToolsRes.json()
-            Object.entries(mcpTools).forEach(([name, tool]) => {
-                createNode({
-                    id: createNodeId(`mcp-tool-${name}`),
-                    name,
-                    title: tool?.title || name,
-                    summary: tool?.summary || '',
-                    category: tool?.category || '',
-                    feature: tool?.feature || '',
-                    internal: {
-                        type: 'McpTool',
-                        contentDigest: createContentDigest({ name, ...tool }),
-                    },
-                })
+        const mcpTools = await fetchMCPToolDefinitions(process.env.GATSBY_POSTHOG_BRANCH || 'master')
+        Object.entries(mcpTools).forEach(([name, tool]) => {
+            createNode({
+                id: createNodeId(`mcp-tool-${name}`),
+                name,
+                title: tool?.title || name,
+                summary: tool?.summary || '',
+                category: tool?.category || '',
+                feature: tool?.feature || '',
+                internal: {
+                    type: 'McpTool',
+                    contentDigest: createContentDigest({ name, ...tool }),
+                },
             })
-        } else {
-            console.warn(`Failed to fetch MCP tool definitions: HTTP ${mcpToolsRes.status}`)
-        }
+        })
     } catch (err) {
         console.warn('Failed to source MCP tool definitions:', err)
     }
@@ -294,6 +287,73 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         }
     }
 
+    // MCP usage shares for /mcp/leaderboard. The endpoints return percentages only, never raw counts,
+    // because everything sourced here ships in public page data.
+    const sourceMCPLeaderboard = async () => {
+        if (!process.env.POSTHOG_APP_API_KEY) return
+
+        const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.POSTHOG_APP_API_KEY}`,
+        }
+        const fetchEndpoint = async (name: string) => {
+            const endpointUrl = `https://us.posthog.com/api/environments/2/endpoints/${name}`
+            // OFFSET is not allowed with a personal API key, so fetch every row in one request.
+            const res = await fetch(`${endpointUrl}/run`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ limit: 50000 }),
+            })
+            if (res.status !== 200) throw new Error(`${name} returned ${res.status}`)
+            const body: any = await res.json()
+            if (body.hasMore) throw new Error(`${name} returned more than 50000 rows`)
+            const columns: string[] = body.columns || []
+            const rows = (body.results || [])
+                .map((row: unknown[]) => Object.fromEntries(columns.map((column, i) => [column, row[i]])))
+                .filter((row: Record<string, unknown>) => row.week && row.facet && row.label)
+            return rows
+        }
+
+        // The page charts these weekly facets over time, and every daily facet. It shows every other weekly
+        // facet for the latest week only, so older weeks of those facets would only add weight to the page data.
+        // The model and client lists also compare with the week before, so they keep that week too.
+        const historyFacets = new Set(['total', 'model_vendor'])
+        const previousWeekFacets = new Set(['model', 'client'])
+
+        try {
+            const results = await Promise.all(
+                ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchEndpoint)
+            )
+            const rows = results.flat()
+            const weeks = Array.from(
+                new Set(rows.filter((row: any) => row.facet === 'total').map((row: any) => row.week as string))
+            ).sort()
+            const [previousWeek, latestWeek] = weeks.slice(-2)
+            const data = {
+                rows: rows.filter(
+                    (row: any) =>
+                        historyFacets.has(row.facet) ||
+                        row.facet.endsWith('_daily') ||
+                        row.week === latestWeek ||
+                        (previousWeekFacets.has(row.facet) && row.week === previousWeek)
+                ),
+                fetchedAt: new Date().toISOString(),
+            }
+            createNode({
+                id: createNodeId('mcp-leaderboard'),
+                parent: null,
+                children: [],
+                internal: {
+                    type: 'McpLeaderboard',
+                    contentDigest: createContentDigest(data),
+                },
+                ...data,
+            })
+        } catch (err) {
+            console.error('Error fetching the MCP leaderboard endpoints:', err)
+        }
+    }
+
     const createProductDataNode = async () => {
         const url = `${process.env.BILLING_SERVICE_URL}/api/products-v2?display_friendly=true`
         const headers = {
@@ -363,6 +423,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     },
                     githubUrls: true,
                     githubPRMetadata: true,
+                    tags: true,
                 },
             },
             {
@@ -495,54 +556,48 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         }
 
-        const statsFor = async (topicId: number | null) => {
-            const questionTopicFilter = topicId ? { topics: { id: { $eq: topicId } } } : {}
-            const replyTopicFilter = topicId ? { question: { topics: { id: { $eq: topicId } } } } : {}
+        const statsFor = async (forumTag: string | null) => {
+            const questionTagFilter = forumTag
+                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } } }
+                : {}
+            const replyTagFilter = forumTag ? { question: questionTagFilter } : {}
 
             const [questions, resolved, replies, helpful] = await Promise.all([
-                fetchTotal('questions', { ...notArchived, ...questionTopicFilter }),
+                fetchTotal('questions', { ...notArchived, ...questionTagFilter }),
                 fetchTotal('questions', {
                     ...notArchived,
-                    ...questionTopicFilter,
+                    ...questionTagFilter,
                     resolved: { $eq: true },
                 }),
-                fetchTotal('replies', { ...replyTopicFilter }),
-                fetchTotal('replies', { ...replyTopicFilter, helpful: { $eq: true } }),
+                fetchTotal('replies', { ...replyTagFilter }),
+                fetchTotal('replies', { ...replyTagFilter, helpful: { $eq: true } }),
             ])
 
             return { questions, resolved, replies, helpful }
         }
 
-        let topics: Array<{ id: number; attributes: { label?: string; slug?: string } }> = []
+        let forumTags: string[] = []
         try {
-            const topicsQuery = qs.stringify(
+            const tagsQuery = qs.stringify(
                 {
-                    fields: ['label', 'slug'],
-                    pagination: { pageSize: 200 },
+                    filters: { topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } },
+                    fields: ['slug'],
+                    pagination: { pageSize: 100 },
                 },
                 { encodeValuesOnly: true }
             )
-            const topicsRes = (await fetch(`${host}/api/topics?${topicsQuery}`).then((r) => r.json())) as any
-            topics = topicsRes?.data ?? []
+            const tagsRes = (await fetch(`${host}/api/forum-tags?${tagsQuery}`).then((r) => r.json())) as any
+            forumTags = (tagsRes?.data ?? []).map((tag: any) => tag.attributes?.slug).filter(Boolean)
         } catch (error) {
-            console.warn('Failed to fetch topics for community stats:', error)
+            console.warn('Failed to fetch forum tags for community stats:', error)
         }
 
-        const targets: Array<{ topicId: number | null; topicSlug: string | null; topicLabel: string | null }> = [
-            { topicId: null, topicSlug: null, topicLabel: null },
-            ...topics.map((t) => ({
-                topicId: t.id,
-                topicSlug: t.attributes?.slug ?? null,
-                topicLabel: t.attributes?.label ?? null,
-            })),
-        ]
-
         await Promise.all(
-            targets.map(async ({ topicId, topicSlug, topicLabel }) => {
-                const counts = await statsFor(topicId)
-                const data = { topicId, topicSlug, topicLabel, ...counts }
+            [null, ...forumTags].map(async (forumTag) => {
+                const counts = await statsFor(forumTag)
+                const data = { forumTag, ...counts }
                 createNode({
-                    id: createNodeId(`community-stats-${topicId ?? 'site'}`),
+                    id: createNodeId(`community-stats-${forumTag ?? 'site'}`),
                     parent: null,
                     children: [],
                     internal: {
@@ -892,7 +947,11 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
     const sourceG2Reviews = async () => {
         if (!process.env.G2_API_KEY) return
-        await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
+        try {
+            await fetchG2Reviews('https://data.g2.com/api/v1/survey-responses?page[size]=100')
+        } catch (err) {
+            console.warn('Failed to source G2 reviews:', err)
+        }
     }
 
     const sourceCloudinaryImages = async () => {
@@ -1109,7 +1168,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const fetchRows = async (filters: Record<string, unknown>, pageSize: number) => {
             const referenceQuery = qs.stringify(
                 {
-                    filters,
+                    // Markdown references share these referenceIds with no `data`; skip them so they don't take HogRef slots.
+                    filters: { ...filters, data: { $notNull: true } },
                     pagination: { page: 1, pageSize },
                     sort: ['createdAt:desc'],
                 },
@@ -1264,7 +1324,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 // Prefer the slug from the source's own posthog.com docsUrl so the listing link always
                 // matches the committed doc file (e.g. `active-campaign`, not the label-derived
                 // `activecampaign`). Fall back to the label for sources without a posthog docs URL.
-                const docsSlug = config.docsUrl?.match(/\/docs\/cdp\/sources\/([^/?#]+)/)?.[1]
+                const docsSlug = config.docsUrl?.match(
+                    /\/docs\/(?:cdp|data-pipelines|data-warehouse)\/sources\/([^/?#]+)/
+                )?.[1]
                 const labelSlug = displayName
                     .toLowerCase()
                     .replace(/\./g, '')
@@ -1284,7 +1346,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
                     docsUrl: config.docsUrl || null,
                     unreleased: config.unreleasedSource || false,
-                    beta: config.betaSource || false,
                     featured: config.featured || false,
                     caption: config.caption || null,
                     sourceFields: config.fields || [],
@@ -1295,6 +1356,53 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         } catch (error) {
             console.warn('Failed to fetch data warehouse sources:', error)
+        }
+    }
+
+    // The API scopes a person can grant to a personal API key or OAuth app, with what each one
+    // covers, for /docs/api/scopes. PostHog builds the list from the scope declarations in its repo
+    // (posthog/scope_docs.py) and oauth.posthog.com caches it. Fails soft: without it the page shows
+    // its empty state and the build still passes.
+    const fetchScopeReference = async () => {
+        try {
+            // The signal also aborts reading the body, so a stalled response can't hold up the build.
+            const response = await fetch('https://oauth.posthog.com/oauth/scopes', {
+                signal: AbortSignal.timeout(15000),
+            })
+            if (!response.ok) {
+                console.warn('Failed to fetch API scopes:', response.status)
+                return
+            }
+            const data = await response.json()
+            const groups: string[] = Array.isArray(data?.groups) ? data.groups : []
+            const objects = Array.isArray(data?.objects) ? data.objects : []
+
+            for (const scopeObject of objects) {
+                createNode({
+                    id: createNodeId(`posthog-scope-object-${scopeObject.object}`),
+                    internal: {
+                        type: 'PostHogScopeObject',
+                        contentDigest: createContentDigest(scopeObject),
+                    },
+                    scopeObject: scopeObject.object,
+                    name: scopeObject.name,
+                    plural: scopeObject.plural,
+                    description: scopeObject.description,
+                    group: scopeObject.group,
+                    groupOrder: groups.indexOf(scopeObject.group),
+                    docsUrl: scopeObject.docs_url || null,
+                    organizationWide: Boolean(scopeObject.organization_wide),
+                    actions: (scopeObject.actions || []).map((action) => ({
+                        action: action.action,
+                        scope: action.scope,
+                        oauth: Boolean(action.oauth),
+                        warning: action.warning || null,
+                    })),
+                    writeRequires: scopeObject.write_requires || null,
+                })
+            }
+        } catch (error) {
+            console.warn('Failed to fetch API scopes:', error)
         }
     }
 
@@ -1505,6 +1613,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         sourceChangelogVideos(),
         sourcePostCategories(),
         sourceCommunityStats(),
+        sourceMCPLeaderboard(),
         sourceShopifyNodes(),
         sourceSlackEmojis(),
         sourceG2Reviews(),
@@ -1519,5 +1628,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         fetchAchievementGroups(),
         fetchRewards(),
         fetchDataWarehouseSources(),
+        fetchScopeReference(),
     ])
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion, type Variants } from 'framer-motion'
 
 export type NotificationBadgeColor = 'red' | 'orange' | 'yellow' | 'green' | 'blue' | 'purple' | 'teal' | 'salmon'
 
@@ -56,7 +56,7 @@ export default function NotificationBadge({ count, max = 99, color = 'red', clas
     // Pops in off a spring, leaves quickly and without the overshoot — an arrival
     // is worth noticing, a dismissal is not. Reduced motion drops the scale and
     // fades instead, so nothing moves.
-    const variants = shouldReduceMotion
+    const variants: Variants = shouldReduceMotion
         ? {
               hidden: { opacity: 0, transition: { duration: 0.12 } },
               shown: { opacity: 1, transition: { duration: 0.12 } },

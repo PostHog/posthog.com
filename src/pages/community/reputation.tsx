@@ -15,7 +15,7 @@ export default function Reputation() {
                         <p className="text-sm text-secondary m-0">
                             Reputation is earned by participating in{' '}
                             <Link
-                                to="/questions"
+                                to="/forum"
                                 className="font-bold text-red dark:text-yellow"
                                 state={{ newWindow: true }}
                             >

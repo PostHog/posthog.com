@@ -16,7 +16,7 @@ const transactionTypeIcons: Record<string, React.ReactNode> = {
 }
 
 const QuestionSubjectLink = ({ metadata }: { metadata?: TransactionMetadata }) => (
-    <Link to={`/questions/${metadata?.question?.permalink || ''}`} className="text-red dark:text-yellow font-semibold">
+    <Link to={`/forum/p/${metadata?.question?.permalink || ''}`} className="text-red dark:text-yellow font-semibold">
         {metadata?.question?.subject}
     </Link>
 )

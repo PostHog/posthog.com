@@ -26,7 +26,7 @@ import ProductComparisonTable from 'components/ProductComparisonTable'
 
 ### What is PostHog?
 
-PostHog (yup, that's us!) is an open-source, all-in-one platform for feature management, A/B testing, product analytics, session replay, and user surveys. It's also building a [data warehouse for startups](/docs/data-warehouse) and a customer data platform (CDP), though both are currently in closed beta.
+PostHog (yup, that's us!) is an open-source, all-in-one platform for feature management, A/B testing, product analytics, session replay, and user surveys. PostHog also includes a [data warehouse for startups](/docs/data-warehouse) and a [customer data platform (CDP)](/docs/data-pipelines) for importing, transforming, querying, and routing data.
 
 By combining all these tools into one platform, it eliminates the need for stitching together integrations between third-party tools, and makes it easier for engineers to work with data. PostHog is popular with engineering-led companies, like AI startup [ElevenLabs](/customers/elevenlabs) and [Y Combinator](/customers/ycombinator), which use PostHog for both feature flags and analytics.
 
@@ -34,11 +34,11 @@ By combining all these tools into one platform, it eliminates the need for stitc
 
 -   🚩 **Feature flags:** Rollout features safely with [local evaluation](/docs/feature-flags/local-evaluation) (for faster performance), JSON payloads, and instant rollbacks.
 
--   🧪 **A/B tests:** Experiment in your app with up to nine test variations and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
+-   🧪 **A/B tests:** Experiment in your app with up to 19 test variants and track impact on primary and secondary metrics. Auto-calculate test duration, sample size, and statistical significance.
 
 -   📈 **Product analytics:** Custom trends, funnels, user paths, retention analysis, and segment user cohorts. Also, direct [SQL querying](/docs/data-warehouse/sql) for power users.
 
--   📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and 90-day data retention.
+-   📺 **Session replays:** View exactly how users are using your site. Includes event timelines, console logs, network activity, and [90-day data retention](/docs/session-replay/recording-retention) on the pay-as-you-go plan.
 
 -   💬 **Surveys:** Target surveys by event or person properties. Templates for [net promoter score (NPS)](/templates/nps-survey), [product-market fit (PMF)](/templates/pmf-survey) surveys, and more.
 
@@ -72,7 +72,7 @@ Both tools are open source. However, Flagsmith offers self-hosting while PostHog
 
 According to [G2 reviews](https://www.g2.com/products/posthog/reviews), companies use PostHog because:
 
-1. **It's many tools in one:** PostHog can replace Flagsmith (feature flags and A/B testing), [Amplitude](/blog/posthog-vs-amplitude) (analytics), and [Hotjar](/compare/posthog-vs-hotjar) (feedback and surveys). This simplifies workflows and ensures all product data is in one place.
+1. **It's many tools in one:** PostHog can replace Flagsmith (feature flags and A/B testing), [Amplitude](/compare/posthog-vs-amplitude) (analytics), and [Hotjar](/compare/posthog-vs-hotjar) (feedback and surveys). This simplifies workflows and ensures all product data is in one place.
 
 2. **They need a complete picture of users:** PostHog includes every tool necessary to understand users and build better products. This means creating funnels to track conversion, watching replays to see where users get stuck, testing solutions with A/B tests, and gathering feedback with user surveys.
 

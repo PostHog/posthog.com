@@ -1,0 +1,219 @@
+owner: wizard-and-docs
+tags: [install, python, server]
+status: active
+
+# One check for each flow the Python docs teach. Every check is a baseline: a short
+# prompt in a user's words, no docs added. The prompt names PostHog and the kind of
+# analytics, and no API. The rubrics describe the correct result for posthog 7, the
+# major the docs show. `install` runs in an app with no PostHog code. The other checks run
+# in an app that already uses posthog 7.
+checks:
+    - id: install
+      description: >-
+          Baseline: can an agent set up PostHog in a Python backend from a one-line
+          request? Mealie's backend is FastAPI with a Nuxt frontend, so the prompt says
+          "Python backend" and nothing else. The agent gets no docs, so docs-read shows
+          which pages it finds on its own.
+      codebase_to_test: oss-mealie
+      pages:
+          - docs/libraries/python
+      prompt: &install-prompt >-
+          Set up PostHog in this app's Python backend.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/pyproject.toml lists `posthog` at 7.x.
+              initialized: >-
+                  The backend creates one client at startup with Posthog(token,
+                  host=...) or AsyncPosthog(token, host=...) from the posthog package.
+                  Cite the file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable, directly or
+                  through the app's settings. It is not written in the source.
+              shuts-down-on-exit: >-
+                  The client's shutdown() runs when the server stops: called in the
+                  app's shutdown hook (awaited for AsyncPosthog), or by leaving an `async
+                  with AsyncPosthog(...)` block. Fails if nothing flushes or shuts the
+                  client down.
+
+    - id: event-by-user
+      description: >-
+          Baseline in Polar's FastAPI server, which is on posthog 7.76.1 and wraps the
+          client in a service with user, organization and anonymous helpers. Its user
+          helper sets `$set` but not email or name. Does an agent capture the event for
+          the user and put the email and name on the person? The prompt does not name
+          the method.
+      codebase_to_test: oss-polar-server
+      pages:
+          - docs/libraries/python
+          - docs/product-analytics/person-properties
+      prompt: >-
+          Track when a user leaves an organization in the backend, by user, with
+          PostHog product analytics. Make sure the user's email and name are
+          populated.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  Leaving an organization calls capture() on the posthog client,
+                  directly or through the app's PostHog service, with the leaving user's
+                  ID as distinct_id (such as user.posthog_distinct_id). Cite the file and
+                  line(s).
+              set-on-person: >-
+                  The email and name are set on the person, with `$set` in the captured
+                  event's properties or with set(distinct_id=..., properties=...). They
+                  are not plain properties of the event.
+
+    - id: events-by-organization
+      description: >-
+          Baseline in the same server. Its organization helper sends every event with
+          one shared distinct ID, `organization_event`. Does an agent attach the
+          organization as a group and keep the acting user as the distinct ID? The
+          prompt does not say how.
+      codebase_to_test: oss-polar-server
+      pages:
+          - docs/libraries/python
+          - docs/product-analytics/group-analytics
+      prompt: >-
+          Track organization member invitations per organization and by user in the
+          backend, with PostHog group analytics.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  When a user invites a member, the invite calls capture() on the posthog
+                  client, directly or through the app's PostHog service, with the
+                  inviting user's ID as distinct_id. Fails if the invite is also, or
+                  only, sent under the shared `organization_event` ID. Callers with an
+                  organization token may keep the existing organization event. Cite the
+                  file and line(s).
+              organization-as-group: >-
+                  The event passes the organization as a group: groups={"organization":
+                  <organization ID>}, or another group type key with the organization's
+                  ID.
+
+    - id: anonymous-event
+      description: >-
+          Baseline in the same server. Its anonymous helper sends every visitor as one
+          constant distinct ID, `polar_anonymous`, with person processing on. Does an
+          agent make the visitor event personless, as the docs say? The prompt does not
+          name the option.
+      codebase_to_test: oss-polar-server
+      pages:
+          - docs/libraries/python
+          - docs/data/anonymous-vs-identified-events
+      prompt: &anonymous-event-prompt >-
+          Track each visitor who opens a checkout link in the backend, with PostHog
+          product analytics. Visitors aren't signed in.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event is personless: its properties set `$process_person_profile`
+                  to False, or capture() is called with no distinct_id outside an
+                  identified context, which the SDK marks personless. Cite the file and
+                  line(s).
+              distinct-id-per-visitor: >-
+                  Visitors don't share one constant distinct ID, such as the app's
+                  `polar_anonymous`. A generated ID, a cookie, a hash or the SDK's
+                  auto-generated ID passes.
+
+    - id: error
+      description: >-
+          Baseline in the same server, which reports errors to Sentry and sends no
+          exceptions to PostHog. Does an agent report a handled error with
+          capture_exception and link it to the user?
+      codebase_to_test: oss-polar-server
+      pages:
+          - docs/libraries/python
+          - docs/error-tracking/installation/python
+      prompt: >-
+          Track errors when inviting a member to an organization fails in the backend,
+          by user, with PostHog error tracking.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  A failed invite calls capture_exception(error, distinct_id=...) on the
+                  posthog client, with the inviting user's ID as distinct_id, or runs the
+                  invite in a new_context() that calls identify_context(<user ID>). Cite
+                  the file and line(s).
+              error-still-raised: >-
+                  The failure still reaches the caller: the code re-raises or returns
+                  the same error response as before.
+
+    - id: feature-flag
+      description: >-
+          Baseline in the same server. Its PostHog service already has a flag helper
+          built on feature_enabled(), which the docs mark deprecated. Does an agent
+          evaluate the flag the way the docs recommend, or reuse the helper unchanged?
+      codebase_to_test: oss-polar-server
+      pages:
+          - docs/libraries/python
+          - docs/feature-flags/installation/python
+      prompt: >-
+          Put inviting organization members in the backend behind a PostHog feature
+          flag.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code calls evaluate_flags(<user distinct ID>) on the posthog client
+                  and reads the flag from the result with is_enabled() or get_flag(),
+                  directly or by changing the app's flag helper to do so. Fails if the
+                  flag is read with feature_enabled() or get_feature_flag(), including
+                  through the existing helper unchanged. Cite the file and line(s).
+              flag-gates-invite: >-
+                  Inviting a member is refused when the flag is off.
+
+    # Next major: the same tasks for a project on posthog 8. Expected to fail until the
+    # docs show that major.
+    - id: install-next
+      description: >-
+          The install task for a project on posthog 8. Expected to fail until the docs
+          show that major.
+      codebase_to_test: oss-mealie
+      pages:
+          - docs/libraries/python
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/pyproject.toml lists `posthog` at 8.x.
+              initialized: >-
+                  The backend creates one client at startup with Posthog(token,
+                  host=...) or AsyncPosthog(token, host=...) from the posthog package.
+                  Every argument after the token and host is passed by keyword. Cite the
+                  file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable, directly or
+                  through the app's settings. It is not written in the source.
+              shuts-down-on-exit: >-
+                  The client's shutdown() runs when the server stops: called in the
+                  app's shutdown hook (awaited for AsyncPosthog), or by leaving an `async
+                  with AsyncPosthog(...)` block. Fails if nothing flushes or shuts the
+                  client down.
+
+    - id: anonymous-event-next
+      description: >-
+          The anonymous-event task for a project on posthog 8. Expected to fail until
+          the docs show that major.
+      codebase_to_test: oss-polar-server-next
+      pages:
+          - docs/libraries/python
+          - docs/data/anonymous-vs-identified-events
+      prompt: *anonymous-event-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event is personless: capture() passes options={"process_person_profile":
+                  False}, or is called with no distinct_id outside an identified context,
+                  which the SDK marks personless. Fails if person processing is turned
+                  off only in `properties`. Cite the file and line(s).
+              distinct-id-per-visitor: >-
+                  Visitors don't share one constant distinct ID, such as the app's
+                  `polar_anonymous`. A generated ID, a cookie, a hash or the SDK's
+                  auto-generated ID passes.

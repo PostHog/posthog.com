@@ -54,7 +54,7 @@ When we run `npm run dev`, this gives us a basic React app which we can use to t
 Next, we will add PostHog to your React app. This requires a PostHog instance, which you can [sign up for (for free)](https://app.posthog.com/signup). Once you have a PostHog instance, go back to your terminal and install `posthog-js`:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 After installing, go to `src/main.jsx` and set up the PostHog provider. To do this:
@@ -134,7 +134,7 @@ Once all these settings are set as you prefer, you've set up a heatmap for your 
 
 ## Further reading
 
-- [Using the PostHog Toolbar to visualize behavior and create actions](/tutorials/toolbar)
+- [Using the PostHog Toolbar to visualize behavior and create actions](/docs/toolbar)
 - [How to create new events the easy way](/tutorials/how-to-capture-events-the-easy-way)
 - [How to use session recordings to get a deeper understanding of user behavior](/tutorials/explore-insights-session-recordings)
 

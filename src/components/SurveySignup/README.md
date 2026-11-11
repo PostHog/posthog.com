@@ -26,6 +26,9 @@ only when both the name and stage properties are present. Every submit also sets
 overrides the flag to `true` in the visitor's local persistence — harmless on posthog.com,
 which doesn't gate anything on these app flags.
 
+For a logged-in community user, the email input is pre-filled with their account email. The
+input stays editable, and the pre-fill never overwrites text the visitor has already typed.
+
 ## Props
 
 | Prop               | Type                       | Default                  | Notes |

@@ -21,6 +21,24 @@ test('serves Markdown on consecutive requests from each supported agent', async 
     }
 })
 
+test('gives agents the HTML when their Accept names text/html, as the Codex fetcher sends', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# Product analytics'))
+    const codexAccept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+
+    for (const agent of ['ChatGPT-User', 'Claude-User', 'Perplexity-User']) {
+        const request = new Request(page, {
+            headers: { 'user-agent': `Mozilla/5.0 ${agent}/1.0`, accept: codexAccept },
+        })
+        assert.equal(await middleware(request), undefined, agent)
+    }
+    assert.equal(fetch.mock.callCount(), 0)
+
+    const response = await middleware(
+        new Request(page, { headers: { 'user-agent': 'ChatGPT-User/1.0', accept: 'text/markdown, text/html, */*' } })
+    )
+    assert.equal(response?.headers.get('content-type'), 'text/markdown; charset=utf-8')
+})
+
 test('leaves browsers, crawlers, and unrelated user agents alone', async (t) => {
     const fetch = t.mock.method(globalThis, 'fetch', async () => new Response())
 
@@ -55,4 +73,14 @@ test('falls through when no Markdown sibling exists', async (t) => {
     t.mock.method(globalThis, 'fetch', async () => new Response('Not found', { status: 404 }))
 
     assert.equal(await middleware(new Request(page, { headers: { 'user-agent': 'ChatGPT-User' } })), undefined)
+})
+
+test('serves the MCP page brief to agents that fetch /mcp for a user', async (t) => {
+    const fetch = t.mock.method(globalThis, 'fetch', async () => new Response('# PostHog MCP server'))
+
+    const response = await middleware(
+        new Request('https://posthog.com/mcp', { headers: { 'user-agent': 'Claude-User/1.0' } })
+    )
+    assert.equal(await response?.text(), '# PostHog MCP server')
+    assert.equal(String(fetch.mock.calls[0].arguments[0]), 'https://posthog.com/mcp.md')
 })

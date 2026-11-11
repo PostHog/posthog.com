@@ -1,11 +1,11 @@
 import { graphql, useStaticQuery } from 'gatsby'
-import { volumeById } from '../constants/pocketGuides'
+import { isSelfDrivingPage, volumeById } from '../constants/pocketGuides'
 
 /** Numbered guides per volume, with an explicit opt-in for orientation-only volumes. */
 export default function usePocketGuideCounts(): Record<string, number> {
     const data = useStaticQuery(graphql`
         query PocketGuideCountsQuery {
-            guides: allMdx(filter: { fields: { slug: { regex: "/^/pocket-guides//" } } }) {
+            guides: allMdx(filter: { fields: { slug: { regex: "/^/learn/[^/]+/pocket-guide/" } } }) {
                 nodes {
                     fields {
                         slug
@@ -14,6 +14,7 @@ export default function usePocketGuideCounts(): Record<string, number> {
                         title
                         pocketGuideOrder
                         isPrimer
+                        section
                     }
                 }
             }
@@ -22,7 +23,7 @@ export default function usePocketGuideCounts(): Record<string, number> {
 
     const counts: Record<string, number> = {}
     for (const node of data?.guides?.nodes || []) {
-        const [, , volume, guide] = node.fields.slug.split('/')
+        const [, , volume, , guide] = node.fields.slug.split('/')
         // Skip sibling SKILL.md files, `_`-prefixed starters, and untitled drafts.
         if (!volume || guide?.startsWith('_') || !node.frontmatter?.title) {
             continue
@@ -34,7 +35,8 @@ export default function usePocketGuideCounts(): Record<string, number> {
             ? typeof order === 'number' && order >= 0
             : Boolean(guide && typeof order === 'number' && order > 0 && !node.frontmatter.isPrimer)
 
-        if (shouldCount) {
+        // Self-driving pages aren't chapters, so they don't count toward the volume's chapters.
+        if (shouldCount && !isSelfDrivingPage(volume, node.frontmatter)) {
             counts[volume] = (counts[volume] ?? 0) + 1
         }
     }
