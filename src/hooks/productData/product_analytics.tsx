@@ -17,7 +17,7 @@ import {
 } from '@posthog/icons'
 import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
-import { applications, topFeatures } from './product_analytics/slides'
+import { applications, keyFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
 
 export const productAnalytics = {
@@ -37,9 +37,9 @@ export const productAnalytics = {
     pricingDescription:
         'Product analytics is billed on events captured – pageviews, clicks, custom events, and everything autocapture picks up. You get 1 million events free every month.',
     seo: {
-        title: 'Product Analytics – Understand your product with PostHog',
+        title: 'Product Analytics – Funnels, retention, and paths | PostHog',
         description:
-            'Track usage, retention, and feature adoption with Product Analaytics. PostHog connects recordings, experiments, feature flags, and more for full product insight.',
+            'Track funnels, retention, user paths, and feature adoption with Product Analytics. Autocapture events, query with SQL, and get 1M events free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/product_analytics_d5ab5a02cb.jpg',
     },
     /**
@@ -77,11 +77,11 @@ export const productAnalytics = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -118,6 +118,7 @@ export const productAnalytics = {
     ],
     overview: {
         title: 'Product analytics with autocapture',
+        description: '"Show me retention for users who completed onboarding"',
         eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },
@@ -342,7 +343,7 @@ export const productAnalytics = {
             {
                 name: 'Amplitude',
                 key: 'amplitude',
-                link: '/blog/posthog-vs-amplitude',
+                link: '/compare/posthog-vs-amplitude',
             },
             {
                 name: 'Mixpanel',
@@ -449,7 +450,7 @@ export const productAnalytics = {
         overview:
             "<strong>Presenter notes:</strong> Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",
         features:
-            "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>SQL:</strong> Write queries against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/context-warehouse'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
+            "<strong>Funnels:</strong> Shows where users drop off. What's different: correlation analysis finds what makes users convert. Jump directly from any funnel step to watch those exact users' session recordings.<br /><br /><strong>Graph & trends:</strong> Your standard line charts plus formula mode for things like DAU/MAU. Break down by any property. Built-in sampling for when you have billions of events.<br /><br /><strong>Lifecycle:</strong> See who's new, returning, dormant, or coming back. Tells you if you're churning users as fast as you're getting them. Click any segment to dig deeper.<br /><br /><strong>User Paths:</strong> See the actual routes users take. Start anywhere, end anywhere. Use wildcards to group similar pages. Great for finding unexpected user behavior.<br /><br /><strong>Correlation Analysis:</strong> Automatically finds what successful users do differently. We've seen teams discover random actions that triple conversion rates.<br /><br /><strong>Retention:</strong> Define what 'return' means for your product. Compare cohorts. Click any data point to see the actual users. Way more flexible than standard retention charts.<br /><br /><strong>Stickiness:</strong> How often users do key actions. Different from retention - this is about depth, not just coming back. Helps you find power users.<br /><br /><strong>Powerful tools & features:</strong><br /><br /><strong>Dashboards:</strong> Unlimited. Real-time. Share publicly or embed. Subscribe via email/Slack.<br /><br /><strong>SQL:</strong> Write queries against your data. No separate data warehouse needed – though it works with yours if you have one, or you can <a href='/warehouse'>use ours</a>.<br /><br /><strong>Autocapture:</strong> Tracks everything automatically. Add custom events when you need them.<br /><br /><strong>Privacy controls:</strong> Mask sensitive data. Block internal users. EU data residency available.<br /><br /><strong>Group analytics:</strong> Track companies, not just users. See how all seat activity rolls up to the entire account level – essential for B2B.",
         answers:
             'These questions come from real users. The cool thing is you can answer them without writing code or bothering engineering. Define churn however you want, find those users, see what they did differently. Then watch their last sessions to understand why they left. Power users? We automatically find who uses features most. Make cohorts, message them differently, whatever you need.',
         pricing:

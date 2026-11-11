@@ -11,6 +11,7 @@ import { SUPPORTED_SDK_IDS } from '../src/components/SdkReferences/utils'
 import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
+import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
 
@@ -315,20 +316,26 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         // The page charts these weekly facets over time, and every daily facet. It shows every other weekly
         // facet for the latest week only, so older weeks of those facets would only add weight to the page data.
+        // The model and client lists also compare with the week before, so they keep that week too.
         const historyFacets = new Set(['total', 'model_vendor'])
+        const previousWeekFacets = new Set(['model', 'client'])
 
         try {
             const results = await Promise.all(
                 ['mcp_public_leaderboard_weekly', 'mcp_public_leaderboard_daily'].map(fetchEndpoint)
             )
             const rows = results.flat()
-            const latestWeek = rows
-                .filter((row: any) => row.facet === 'total')
-                .reduce((latest: string, row: any) => (row.week > latest ? row.week : latest), '')
+            const weeks = Array.from(
+                new Set(rows.filter((row: any) => row.facet === 'total').map((row: any) => row.week as string))
+            ).sort()
+            const [previousWeek, latestWeek] = weeks.slice(-2)
             const data = {
                 rows: rows.filter(
                     (row: any) =>
-                        historyFacets.has(row.facet) || row.facet.endsWith('_daily') || row.week === latestWeek
+                        historyFacets.has(row.facet) ||
+                        row.facet.endsWith('_daily') ||
+                        row.week === latestWeek ||
+                        (previousWeekFacets.has(row.facet) && row.week === previousWeek)
                 ),
                 fetchedAt: new Date().toISOString(),
             }
@@ -416,6 +423,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     },
                     githubUrls: true,
                     githubPRMetadata: true,
+                    tags: true,
                 },
             },
             {
@@ -550,7 +558,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
 
         const statsFor = async (forumTag: string | null) => {
             const questionTagFilter = forumTag
-                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: 'questions' } } } }
+                ? { forumTags: { slug: { $eq: forumTag }, topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } } }
                 : {}
             const replyTagFilter = forumTag ? { question: questionTagFilter } : {}
 
@@ -572,7 +580,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         try {
             const tagsQuery = qs.stringify(
                 {
-                    filters: { topic: { slug: { $eq: 'questions' } } },
+                    filters: { topic: { slug: { $eq: QUESTIONS_TOPIC_SLUG } } },
                     fields: ['slug'],
                     pagination: { pageSize: 100 },
                 },
@@ -1160,7 +1168,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const fetchRows = async (filters: Record<string, unknown>, pageSize: number) => {
             const referenceQuery = qs.stringify(
                 {
-                    filters,
+                    // Markdown references share these referenceIds with no `data`; skip them so they don't take HogRef slots.
+                    filters: { ...filters, data: { $notNull: true } },
                     pagination: { page: 1, pageSize },
                     sort: ['createdAt:desc'],
                 },
@@ -1315,7 +1324,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 // Prefer the slug from the source's own posthog.com docsUrl so the listing link always
                 // matches the committed doc file (e.g. `active-campaign`, not the label-derived
                 // `activecampaign`). Fall back to the label for sources without a posthog docs URL.
-                const docsSlug = config.docsUrl?.match(/\/docs\/cdp\/sources\/([^/?#]+)/)?.[1]
+                const docsSlug = config.docsUrl?.match(
+                    /\/docs\/(?:cdp|data-pipelines|data-warehouse)\/sources\/([^/?#]+)/
+                )?.[1]
                 const labelSlug = displayName
                     .toLowerCase()
                     .replace(/\./g, '')
@@ -1335,8 +1346,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     icon_url: config.iconPath ? `https://us.posthog.com${config.iconPath}` : null,
                     docsUrl: config.docsUrl || null,
                     unreleased: config.unreleasedSource || false,
-                    releaseStatus: config.releaseStatus || null,
-                    beta: config.betaSource || config.releaseStatus === 'beta' || false,
                     featured: config.featured || false,
                     caption: config.caption || null,
                     sourceFields: config.fields || [],
@@ -1347,6 +1356,53 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             }
         } catch (error) {
             console.warn('Failed to fetch data warehouse sources:', error)
+        }
+    }
+
+    // The API scopes a person can grant to a personal API key or OAuth app, with what each one
+    // covers, for /docs/api/scopes. PostHog builds the list from the scope declarations in its repo
+    // (posthog/scope_docs.py) and oauth.posthog.com caches it. Fails soft: without it the page shows
+    // its empty state and the build still passes.
+    const fetchScopeReference = async () => {
+        try {
+            // The signal also aborts reading the body, so a stalled response can't hold up the build.
+            const response = await fetch('https://oauth.posthog.com/oauth/scopes', {
+                signal: AbortSignal.timeout(15000),
+            })
+            if (!response.ok) {
+                console.warn('Failed to fetch API scopes:', response.status)
+                return
+            }
+            const data = await response.json()
+            const groups: string[] = Array.isArray(data?.groups) ? data.groups : []
+            const objects = Array.isArray(data?.objects) ? data.objects : []
+
+            for (const scopeObject of objects) {
+                createNode({
+                    id: createNodeId(`posthog-scope-object-${scopeObject.object}`),
+                    internal: {
+                        type: 'PostHogScopeObject',
+                        contentDigest: createContentDigest(scopeObject),
+                    },
+                    scopeObject: scopeObject.object,
+                    name: scopeObject.name,
+                    plural: scopeObject.plural,
+                    description: scopeObject.description,
+                    group: scopeObject.group,
+                    groupOrder: groups.indexOf(scopeObject.group),
+                    docsUrl: scopeObject.docs_url || null,
+                    organizationWide: Boolean(scopeObject.organization_wide),
+                    actions: (scopeObject.actions || []).map((action) => ({
+                        action: action.action,
+                        scope: action.scope,
+                        oauth: Boolean(action.oauth),
+                        warning: action.warning || null,
+                    })),
+                    writeRequires: scopeObject.write_requires || null,
+                })
+            }
+        } catch (error) {
+            console.warn('Failed to fetch API scopes:', error)
         }
     }
 
@@ -1572,5 +1628,6 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         fetchAchievementGroups(),
         fetchRewards(),
         fetchDataWarehouseSources(),
+        fetchScopeReference(),
     ])
 }

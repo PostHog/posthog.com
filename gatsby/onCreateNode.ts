@@ -8,6 +8,7 @@ import { GatsbyNode } from 'gatsby'
 import fs from 'fs'
 import path from 'path'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
+import { isSdkReferenceFile, splitFrontmatter } from './sdkMarkdownReferences'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -157,6 +158,25 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 }) => {
     const { createNodeField, createNode } = actions
 
+    // SDK references from Strapi are blocked from MDX, so they become SdkMarkdownReference nodes here.
+    if (isSdkReferenceFile(node)) {
+        const file = node as any
+        const raw = fs.readFileSync(file.absolutePath, 'utf-8')
+        const { frontmatter, body } = splitFrontmatter(raw)
+        createNode({
+            id: createNodeId(`sdk-markdown-reference-${file.id}`),
+            parent: file.id,
+            children: [],
+            slug: `/${file.relativePath.slice(0, -'.md'.length)}`,
+            title: frontmatter.title || '',
+            contentMaxWidthClass: frontmatter.contentMaxWidthClass,
+            tableOfContents: frontmatter.tableOfContents,
+            body,
+            internal: { type: 'SdkMarkdownReference', contentDigest: createContentDigest(raw) },
+        })
+        return
+    }
+
     // Canonical agent skills from the monorepo (products/<product>/skills/<name>/SKILL.md).
     // These File nodes are blocked from MDX transformation, so we parse them into
     // typed AgentSkill nodes here. Failures degrade to "skip this file", never break the build.
@@ -292,7 +312,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
-        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
+        if (/^\/docs\/(apps|data-pipelines)/.test(slug) && node?.frontmatter?.github && process.env.GITHUB_API_KEY) {
             const { name, owner } = GitUrlParse(node.frontmatter.github)
 
             try {
@@ -338,7 +358,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             }
         }
 
-        if (/^\/docs\/(apps|cdp)/.test(slug) && node?.frontmatter?.templateId) {
+        if (/^\/docs\/(apps|data-pipelines)/.test(slug) && node?.frontmatter?.templateId) {
             const templateIds = node.frontmatter.templateId
 
             try {

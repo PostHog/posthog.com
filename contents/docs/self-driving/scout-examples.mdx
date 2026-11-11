@@ -7,12 +7,6 @@ showTitle: true
 
 import { CallToAction } from 'components/CallToAction'
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
-
-Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
-
-</CalloutBox>
-
 A [scout](/docs/self-driving/scouts) can watch almost anything you land in PostHog. There are two kinds: the **canonical** scouts PostHog ships with, and **custom** scouts you create for the patterns specific to your product. This page is a catalog of both, to spark ideas for what to point a scout at.
 
 <CalloutBox icon="IconBook" title="Prefer to learn by use case?" type="fyi">
@@ -54,6 +48,7 @@ PostHog ships a fleet of canonical scouts out of the box, each watching a common
 | [Skills store](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-skills-store/SKILL.md) | Static, verifiable skill-authoring problems such as vague descriptions, stale file links, bloated bodies, and committed secrets |
 | [Surveys](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-surveys/SKILL.md) | NPS and CSAT regressions, plus recurring themes in open-text responses |
 | [Tasks](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-tasks/SKILL.md) | Agent task delivery health – runs failing, clustered by repo and error class, retry storms, and recurring asks that point at a product gap |
+| [Unused features](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-unused-features/SKILL.md) | Clickable elements and pages with low use relative to their reach, with likely causes and suggestions for features people can reach but rarely use |
 | [Web analytics](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-analytics/SKILL.md) | Acquisition channels diverging, attribution breakage, and 404 spikes |
 | [Web vitals](https://github.com/PostHog/posthog/blob/master/products/signals/skills/signals-scout-web-vitals/SKILL.md) | Core Web Vitals regressions and other recent performance shifts in web traffic |
 

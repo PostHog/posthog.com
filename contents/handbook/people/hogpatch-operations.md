@@ -7,7 +7,7 @@ showTitle: true
 
 Hogpatch is our San Francisco coworking space, shared with a handpicked group of YC founders who are active PostHog users. Teammates in the Bay Area (or visiting) are welcome to drop in regularly to work, meet users, gather feedback, or join [events](https://posthog.com/events) we host in the space. Here’s a quick guide to how it all operates.
 
-**<TeamMember name="Judy Opperwall" photo />**, our Office Manager, is on site **Mondays to Thursdays from 9am–5pm**. For any issues while she is not in, please reach out to the [hogpatch channel](https://posthog.slack.com/archives/C08RK3RBP62) or DM her directly.
+**<TeamMember name="Judy Opperwall" photo />**, our Office Manager, is on site **Mondays to Thursdays from 9am–5pm**. For any issues while she is not in, please reach out to the <PrivateLink url="https://posthog.slack.com/archives/C08RK3RBP62">hogpatch channel</PrivateLink> or DM her directly.
 
 
 ---
@@ -16,7 +16,7 @@ Hogpatch is our San Francisco coworking space, shared with a handpicked group of
 
 ### Building access
 
-PostHog teammates don’t need an invite to use Hogpatch – the space is open for you whenever you’re in town. If you know your SF travel dates in advance, it’s helpful to post in the [sf-bay-area channel](https://posthog.slack.com/archives/C034FCE7RCG) so we can make sure the space is ready for you.
+PostHog teammates don’t need an invite to use Hogpatch – the space is open for you whenever you’re in town. If you know your SF travel dates in advance, it’s helpful to post in the <PrivateLink url="https://posthog.slack.com/archives/C034FCE7RCG">sf-bay-area channel</PrivateLink> so we can make sure the space is ready for you.
 
 - If you are visiting for the first time, ring the **black intercom doorbell** on the front door.
 - <TeamMember name="Judy Opperwall" photo /> will be notified and will remotely unlock the door for you.
@@ -35,7 +35,7 @@ PostHog teammates don’t need an invite to use Hogpatch – the space is open f
 
 ### Housekeeping
 
-- If you notice anything missing or that needs replenishing, reach out to <TeamMember name="Judy Opperwall" photo /> on the [hogpatch channel](https://posthog.slack.com/archives/C08RK3RBP62).
+- If you notice anything missing or that needs replenishing, reach out to <TeamMember name="Judy Opperwall" photo /> on the <PrivateLink url="https://posthog.slack.com/archives/C08RK3RBP62">hogpatch channel</PrivateLink>.
 - A **cleaner** is scheduled to come in **once a week** to tidy up and water plants.
 - A **gardener** comes in **every two weeks** to maintain the plants around the space.
 
@@ -56,5 +56,5 @@ We’re able to curate the best experience for founders by making iterative upgr
 At the end of each batch, Judy <TeamMember name="Judy Opperwall" photo /> wraps things up with a retro, documenting what worked and what didn’t. This proposes all the improvements that should be made ahead of welcoming the next wave of YC founders.
 
 > Recent retros:
-> - [W26 retro](https://github.com/PostHog/company-internal/issues/2840)
-> - [F25 retro](https://github.com/PostHog/company-internal/issues/2490)
+> - <PrivateLink url="https://github.com/PostHog/company-internal/issues/2840">W26 retro</PrivateLink>
+> - <PrivateLink url="https://github.com/PostHog/company-internal/issues/2490">F25 retro</PrivateLink>

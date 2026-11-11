@@ -6,7 +6,7 @@ showTitle: true
 
 This page is for customer success managers, technical account managers (TAM), and anyone sitting on a customer who needs hands-on help setting up PostHog. It covers how to pull in a forward deployed engineer (FDE), and, just as often, how to sort the problem out without us. 
 
-New to FDE? Start with the [overview](/handbook/forward-deployed-engineering/overview). For our engagement lifecycle, see [how we work](/handbook/forward-deployed-engineering/how-we-work).
+New to FDE? Start with the [overview](/handbook/forward-deployed-engineering/overview). For our engagement lifecycle, see [engagement lifecycle](/handbook/forward-deployed-engineering/fde-engagement-lifecycle).
 
 ## First, try to self-serve
 
@@ -24,13 +24,14 @@ We also have a growing library of **[PostHog skills](https://github.com/PostHog/
 
 For the smaller questions that come up along the way, **PostHog AI** and the **PostHog Slack app** handle most of them without needing to pull in a person.
 
-## Self-serve and price a standard migration
+## Self-serve and price our standard packages
 
-If a customer is moving to PostHog from another product analytics tool, TAEs / TAMs can price a standard FDE-assisted migration without waiting on us.
+For certain types of FDE engagements, TAEs / TAMs can self-serve and price standard packages without needing to wait for FDE to scope it out manually. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
 
-You can use our <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations proposal builder</PrivateLink> to generate a customer-ready proposal PDF and share it right away. Just let us know there's an opportunity on the horizon so we can factor it into our capacity planning.
+- **PostHog Foundations 0-1**, for customers in a PoC or trial who would benefit from FDE assistance to ensure they are production-ready from day 1. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/foundations/">PostHog Foundations 0-1 proposal builder</PrivateLink>.
+- **Managed Migrations**, for customers moving to PostHog from another product analytics tool. Use the <PrivateLink url="https://fde-engagement-menu.hosthog.dev/managed-migrations/">Managed Migrations proposal builder</PrivateLink>.
 
-If the migration doesn't fit the standard package, bring it to #team-fde instead.
+If the customer doesn't fit a standard package, bring it to #team-fde instead.
 
 ## If the customer still needs hands-on help
 
@@ -42,6 +43,6 @@ Before you route anything to us, gather the context we need to get started – i
 3. **Set rough expectations on price.** Use the shape, not an exact number; see [what it costs](/handbook/forward-deployed-engineering/how-we-work#what-it-costs). If the customer wants an exact figure, tell them you'll get a quote within a day and route it through the account owner.
 4. **Confirm access and expected timelines.** Let us know what codebase or data access is available, and give us a rough expected timeline (a week, a month, longer).
 
-Once you have that, bring it straight to the <SmallTeam slug="forward-deployed-engineering" /> team in [#team-fde](https://posthog.slack.com/archives/C0ADE38DEFN) on Slack. We'll review it and come back to you with any questions. From there, an FDE picks it up and scopes it properly from the technical side.
+Once you have that, bring it straight to the <SmallTeam slug="forward-deployed-engineering" /> team in <PrivateLink url="https://posthog.slack.com/archives/C0ADE38DEFN">#team-fde</PrivateLink> on Slack. We'll review it and come back to you with any questions. From there, an FDE picks it up and scopes it properly from the technical side.
 
 Not sure if it's an FDE fit, or want help gathering this context from the customer? Just ask, even if you don't have everything yet, and we'll let you know.

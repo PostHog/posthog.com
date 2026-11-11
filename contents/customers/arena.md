@@ -2,7 +2,7 @@
 title: How Arena uses PostHog to ship without bias at the AI frontier
 customer: Arena
 featuredImage: >-
-    https://res.cloudinary.com/dmukukwp6/image/upload/Arena_3b0652e6e9.png
+    https://res.cloudinary.com/dmukukwp6/image/upload/arena_1920x1080_a4acc60df7.png
 date: 2026-02-10
 ---
 
@@ -71,7 +71,7 @@ For Lily, having PostHog AI as a data scientist on demand provides tangible time
 
 More recently, the team added [error tracking](/error-tracking) to the mix, connecting product visibility to reliability.
 
-"Being able to tie errors to the feature flags that were applied to them feels like a really great thing." Matt said. "We were using [Sentry](/blog/posthog-vs-sentry) – it worked – but it's just nicer having everything connected."
+"Being able to tie errors to the feature flags that were applied to them feels like a really great thing." Matt said. "We were using [Sentry](/compare/posthog-vs-sentry) – it worked – but it's just nicer having everything connected."
 
 ## Why PostHog works for Arena
 So why PostHog? Matt's take: it started as a practical choice, and quickly became foundational.

@@ -66,6 +66,7 @@ Approvals currently support gating the following actions:
 | Resource      | Gateable actions                                                      |
 | ------------- | --------------------------------------------------------------------- |
 | Feature flags | Enable, disable, change rollout percentage, change release conditions |
+| Experiments   | Launch, pause, change rollout percentage or variant split             |
 
 More resource types and actions are coming soon. If you need approval gates for other actions, [let us know](https://posthog.com/questions).
 
@@ -82,6 +83,30 @@ An **Update feature flag** policy requires approval when someone changes a flag'
 Renaming or describing a condition set doesn't need approval. Saving a flag without changing its conditions doesn't create a change request.
 
 Release condition changes need approval only on flags that no other product manages. A flag that an experiment, survey, product tour, or early access feature created needs approval for rollout percentage changes only, because those products update its conditions themselves.
+
+### Experiment policies
+
+Experiments have approval policies of their own. Each policy applies to the flags of one kind:
+
+| Flag | Policies that apply |
+| ---- | ------------------- |
+| A flag that no other product manages | **Enable feature flag**, **Disable feature flag**, **Update feature flag** |
+| A flag that an experiment manages | **Launch experiment**, **Pause experiment**, **Update experiment** |
+| A flag that a survey, product tour, or early access feature manages | None |
+
+- **Launch experiment** requires approval to launch or resume an experiment, which turns its flag on.
+- **Pause experiment** requires approval to pause an experiment, which turns its flag off.
+- **Update experiment** requires approval to change an experiment's rollout percentage, variant split, or holdout exclusion, including shipping a winning variant. Its [conditions](#conditions) work the same way as on **Update feature flag**.
+
+An experiment policy applies wherever the change is made, on the experiment or on its flag's page. Changes to an experiment's release conditions don't need approval, and neither do freezing exposure or resetting an experiment, because the experiment updates those conditions itself.
+
+A few changes are refused instead of creating a change request:
+
+- **Creating an experiment that is already running** while **Launch experiment** requires approval. Create the experiment as a draft, then launch it to request approval.
+- **Attaching a flag that is already on to an experiment** while **Launch experiment** requires approval. Turn the flag off first, or create a new one.
+- **Attaching a flag to an experiment, survey, or early access feature** when its new policies would let through a change that its current policies stop. Pick a different flag, or create a new one.
+
+Experiment policies are rolling out to organizations gradually. Until your organization has them, feature flag policies also cover experiment flags, and the policies page doesn't list experiment policies. When your organization gets them, its experiment policies start as copies of its feature flag policies.
 
 ## Approval policies
 
@@ -110,7 +135,7 @@ Each approval policy includes:
 
 ### Conditions
 
-Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval.
+Conditions let you require approval only when certain criteria are met. If no conditions are set, all matching actions require approval. For feature flag update policies, this means both rollout percentage and release condition changes are gated.
 
 > **Note**: Conditions on an **Update feature flag** policy apply to the rollout percentage. A policy with a rollout percentage condition doesn't require approval for [release condition changes](#release-condition-changes). To require approval for those too, leave the conditions empty.
 
@@ -317,3 +342,22 @@ Approvals integrate with PostHog's notification system to keep everyone informed
 - **Requesters** receive notifications when their request is approved, applied, rejected, or expires
 
 Notifications are delivered via email and in-app. In-app notifications appear in the notification popover and link directly to the approval detail page.
+
+### Email notification settings
+
+Members can control which approval emails they receive through two settings in their account notification preferences:
+
+| Setting                    | Controls                                                                                  |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| **Approval requests**      | Emails sent to approvers when a change request needs their review                         |
+| **Change request updates** | Emails sent to requesters when their request is approved, rejected, expires, or goes live |
+
+Both settings are enabled by default. Changes apply to approval emails from all of a member's organizations.
+
+To configure these settings, go to [**Settings** > **Account** > **Notifications**](https://app.posthog.com/settings/user-notifications).
+
+> **Note:** Organization admins can override these settings per-member through [member notification settings](/docs/settings/organizations#member-notification-settings). When an admin sets an override, the member cannot change that setting until the override is removed.
+
+### In-app notifications
+
+In-app notifications are not affected by email notification settings. Members can control in-app approval notifications separately through the in-app notification settings.

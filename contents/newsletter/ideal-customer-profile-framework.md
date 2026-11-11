@@ -57,7 +57,7 @@ Personas, on the other hand, describe the motivations and frustrations of specif
 
 Some people think an ICP is just a sales and marketing framework. And, sure, it will help you with those, but it’s so much more than that.
 
-An accurate ICP will define not just which customers you target, but every aspect of your product and go-to-market strategy. It’s the sun around which product, marketing, and sales orbit. For how your ICP shapes which marketing channels to prioritize first, see [the stuff nobody tells you about startup marketing](/newsletter/the-stuff-nobody-tells-you-about-startup-marketing).
+An accurate ICP will define not just which customers you target, but every aspect of your product and go-to-market strategy. It’s the sun around which product, marketing, and sales orbit. For how your ICP shapes which marketing channels to prioritize first, see [the stuff nobody tells you about startup marketing](/newsletter/startup-marketing-for-noobs).
 
 **Why is this important?** Broadly speaking, our ICP is high-growth B2B startups that have product-market fit, where engineers are the decision makers – see our handbook for a more detailed version.
 
@@ -178,8 +178,6 @@ Daniel Hsu, founder of Retool, believes outbound is very useful for early-stage 
 ## Good reads for product engineers 📖
 
 - [How to identify your ideal customer profile](https://www.lennysnewsletter.com/p/how-to-identify-your-ideal-customer) **– Lenny Rachitsky:** Lenny’s guide includes dozens of great anecdotes from startup founders and CEOs, and useful examples of initial ICPs from the likes of Linear, Retool, and Figma.
-
-- **[Should you have an AI strategy? Here's ours](/posts/should-you-have-an-ai-strategy-here-s-ours) – James Hawkins:** How should you think about AI if you’re not already an AI startup? Our take.
 
 - **[How to create actionable developer personas](https://www.developermarkepear.com/blog/developer-personas) – Jakub Czakon:** Want to go deeper on personas? Jakub’s guide is a comprehensive look at creating developer personas and Jobs To Be Done (JTBD).
 

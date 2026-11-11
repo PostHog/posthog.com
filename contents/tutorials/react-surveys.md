@@ -49,7 +49,7 @@ Finally, run `npm run dev` and go to `http://localhost:5173` to see our new home
 PostHog will manage our survey and track our results. To use [PostHog's React SDK](/docs/libraries/react), install `posthog-js` and `@posthog/react`:
 
 ```bash
-npm install posthog-js @posthog/react
+npm install posthog-js@1 @posthog/react@1
 ```
 
 Once installed, import PostHog into `src/main.jsx` and set up a client using your project token and host from [your project settings](https://us.posthog.com/settings/project). Then, wrap the app with `PostHogProvider` to access PostHog in any component.
@@ -90,7 +90,7 @@ This tutorial will cover how to implement both options.
 
 ## Option 1: Use PostHog's prebuilt survey UI
 
-For fast set up, you can use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#question-type) to choose from, and PostHog handles all the display logic and event capture for you.
+For fast set up, you can use PostHog's prebuilt surveys. There are variety of [survey types](/docs/surveys/creating-surveys#steps) to choose from, and PostHog handles all the display logic and event capture for you.
 
 To create a survey with a prebuilt UI, go to the [Surveys tab](https://us.posthog.com/surveys) in PostHog and click **New survey**. Select a template like **Open feedback**, customize it how you'd like, click **Save as draft**, and then **Launch**.
 

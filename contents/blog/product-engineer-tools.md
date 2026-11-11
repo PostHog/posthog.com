@@ -10,6 +10,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/posthog-engineering-blog.png
 featuredImageType: full
+ogImage: generated
 category: Engineering
 tags:
   - Guides
@@ -35,7 +36,7 @@ Product engineers supplement talking to users with product analytics and usage d
 
 For example, you set an OKR to increase feature usage by paid users. To measure and improve this, you need data on the usage of the feature and the areas surrounding the feature. With that data, you can analyze the feature usage conversion, retention, correlated behavior, and more.
 
-[PostHog](/product#top-features) has a suite of developer tools built for this. Product engineers (like [Y Combinator’s](/customers/ycombinator)) use PostHog to capture, organize, analyze, and visualize product usage data. PostHog also has session recordings for going into the details of an individual’s experience with the product.
+[PostHog](/product#key-features) has a suite of developer tools built for this. Product engineers (like [Y Combinator’s](/customers/ycombinator)) use PostHog to capture, organize, analyze, and visualize product usage data. PostHog also has session recordings for going into the details of an individual’s experience with the product.
 
 ![Session recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/session-recordings.png)
 <Caption>PostHog's <a href="/product/session-recording">session recordings</a> visualize what users are actually doing in your product</Caption>
@@ -85,7 +86,7 @@ As Uncle Ben from Spiderman once said “with great product power, comes great p
 
 Good tools for this include:
 - [Grafana](https://grafana.com/), [Better Stack](https://betterstack.com/), [Metabase](https://www.metabase.com/), and more to provide observability into issues in your code. 
-- [Sentry](/blog/posthog-vs-sentry) and [LogRocket](/compare/posthog-vs-logrocket) to monitor errors. 
+- [Sentry](/compare/posthog-vs-sentry) and [LogRocket](/compare/posthog-vs-logrocket) to monitor errors. 
 - [Incident.io](http://Incident.io) and [PagerDuty](https://www.pagerduty.com/) to help teams respond to incidents when they happen.
 
 ![Sentry](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/product-engineer-tools/sentry.png)

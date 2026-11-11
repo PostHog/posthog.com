@@ -51,7 +51,7 @@ Ask two things, together, and nothing else yet.
    - Sentry
 
    These are suggestions, not a closed list. Any analytics, session replay, feature flag, error tracking, survey, or logging tool they pay for counts, so always leave room for a free-text answer. If their opening prompt did name a tool, do not re-ask it – confirm it and ask what else sits alongside it.
-2. **Which capabilities do you actually want on PostHog?** List the PostHog products by name – product analytics, session replay, feature flags and experiments, error tracking, surveys, data warehouse, and so on. Estimate only what they select. Do not max out the catalog.
+2. **Which capabilities do you actually want on PostHog?** List the PostHog products by name – product analytics, session replay, feature flags and experiments, error tracking, surveys, sources, and so on. Estimate only what they select. Do not max out the catalog.
 
 Everything else you might want to know – how to see their usage, their logged-in share, their current spend – waits until Step 3, because the answers to those depend on what access you get.
 
@@ -83,7 +83,7 @@ Depending on the products in scope, you are looking for:
 | Feature flags & experiments | Flag evaluations/requests per month. If the tool reports only MAU or contexts, get that plus requests-per-user if known. |
 | Error tracking | Error events (exceptions) per month. |
 | Surveys | Survey responses per month. |
-| Data warehouse | Rows synced per month from external sources. |
+| Sources | Rows synced per month from external sources. |
 | Logs | GB of logs ingested per month. |
 | AI/LLM observability | LLM events (generations/traces) per month. |
 
@@ -128,7 +128,7 @@ PostHog's pricing calculator at https://posthog.com/pricing accepts URL paramete
 https://posthog.com/pricing?calculator=<primary_product>&products=<comma_separated_product_types>&<product>[volume]=<monthly_volume>&...
 ```
 
-Valid product keys: `product_analytics`, `session_replay`, `feature_flags`, `surveys`, `error_tracking`, `data_warehouse`, `logs`, `ai_observability`. Experiments bill through `feature_flags`. Set `calculator=` to the product that matters most to the user, so the page opens on that tab. List every selected product in `products=`; this sets the exact selection and order. Use `products=` with an empty value for no products.
+Valid product keys: `product_analytics`, `session_replay`, `feature_flags`, `surveys`, `error_tracking`, `data_warehouse` (Sources), `logs`, `ai_observability`. Experiments bill through `feature_flags`. Set `calculator=` to the product that matters most to the user, so the page opens on that tab. List every selected product in `products=`; this sets the exact selection and order. Use `products=` with an empty value for no products.
 
 For Product analytics, set both `product_analytics[types][productAnalyticsEvents][volume]` (identified events) and `product_analytics[types][websiteAnalyticsEvents][volume]` (anonymous events). Do not send a combined analytics volume. Include explicit zeros; omitted inputs use the calculator defaults.
 

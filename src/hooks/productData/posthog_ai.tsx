@@ -58,9 +58,9 @@ export const posthog_ai = {
         </div>
     ),
     seo: {
-        title: 'PostHog AI – Your copilot for PostHog data and insights',
+        title: 'PostHog AI – The AI agent for your product data',
         description:
-            'The interface humans and agents use to understand your product – the brain of self-driving. Ask in plain English; PostHog AI queries your data and acts on it.',
+            'PostHog AI answers questions and does the work with your events, replays, errors, logs, and warehouse data. Use it in PostHog, Slack, or your coding agent.',
     },
     overview: {
         title: 'Ask questions about how people use your product',

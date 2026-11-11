@@ -1,0 +1,133 @@
+---
+title: Releasing the wizard
+sidebar: Handbook
+showTitle: true
+---
+
+The wizard and the context mill release on their own cycles. A release reaches every user on their next run, so test the release candidate before you press the release button.
+
+## How a release ships
+
+Both repos use [release-please](https://github.com/googleapis/release-please). Every PR title needs a [conventional commit](https://www.conventionalcommits.org/) prefix like `feat:` or `fix:`, because release-please builds the changelog and version from them.
+
+| | Wizard | Context mill |
+|---|---|---|
+| What ships | The `@posthog/wizard` npm package | Skills, agent prompts, and menus |
+| The release candidate | The open release PR, `release-please--branches--main--components--wizard` | The open release PR in the context mill repo |
+| What merging does | The publish workflow pushes the new version to npm | The build scans every skill with Warlock, publishes a GitHub release, marks it latest, and mirrors it to S3 |
+| When users get it | The next time they run `npx @posthog/wizard@latest` | On their next wizard run, with no wizard release |
+
+Release the context mill first when both repos change. The wizard can then find the new skills as soon as it ships.
+
+## Prepare a monitoring plan
+
+Before you test the release candidate, decide how you'll know the release is healthy. Watch usage, run duration, cost, and completion rate, and compare the new version against the last one.
+
+The [`monitoring-a-wizard-release`](https://github.com/PostHog/wizard/tree/main/.claude/skills/monitoring-a-wizard-release) skill in the wizard repo lists the key events and funnels. Start from the two wizard dashboards, <PrivateLink url="https://us.posthog.com/project/2/dashboard/811546">one</PrivateLink> and <PrivateLink url="https://us.posthog.com/project/2/dashboard/1793563">two</PrivateLink>. Some of their tiles are broken, and the skill says which.
+
+## Test the release candidate
+
+Release-please keeps each release PR up to date with everything merged since the last release. That PR is the release candidate. Run every check below on it before you merge it. The [release checklist](https://github.com/PostHog/wizard/blob/main/docs/releasing.md) in the wizard repo has every command and option.
+
+<Steps>
+
+<Step title="Run the basic integration program by hand" badge="required">
+
+Check out the release PR and run the default program against a workbench app. This is the one check you never skip.
+
+```bash
+gh pr checkout <release PR number>
+pnpm install
+node scripts/generate-version.cjs
+pnpm try --install-dir=/tmp/express-todo
+```
+
+Copy `wizard-workbench/apps/basic-integration/javascript-node/express-todo` into `/tmp/express-todo` and run `git init` in it first. `pnpm try` runs from source, so it skips the build, but it needs the generated version file.
+
+</Step>
+
+<Step title="Run wizard CI on the release PR" badge="required">
+
+Comment on the release PR:
+
+```
+/wizard-ci sample
+```
+
+`sample` runs the first app for each framework, about 45 apps. To pair the wizard with an unreleased context mill branch, add `context-mill:<branch>`. On a context mill release PR, the same comment takes `wizard:<branch>` instead.
+
+The bot posts a results table and updates it as each app finishes. Apps that change code score out of 5, and warehouse and feature flag apps show pass or fail. Look for 4 or 5, or a pass, on everything outside the [known broken evals](https://github.com/PostHog/wizard/blob/main/docs/releasing.md#known-broken-evals).
+
+</Step>
+
+<Step title="Test what you added" badge="required">
+
+Run every program or skill your release changes by hand, in the real TUI. Attach the evidence to your PR: the outro, the report, and the diff the wizard made.
+
+</Step>
+
+<Step title="Attach snapshots" badge="recommended">
+
+After you've run a program by hand at least once, snapshot CI can capture the rest. Comment on a wizard PR:
+
+```
+/wizard-ci-snapshots basic-integration/javascript-node/express-todo
+```
+
+It drives the real TUI, captures every screen, and opens a workbench PR with the frames. For a big release, run the full sweep on every program locally with the [prompt below](#sample-prompt-for-a-snapshot-sweep).
+
+</Step>
+
+<Step checkpoint title="Merge and confirm" badge="required">
+
+Merge the release PR. When the publish workflow finishes, run `npx -y @posthog/wizard@latest --version` and confirm the new version.
+
+</Step>
+
+</Steps>
+
+## Known broken evals
+
+Some wizard CI apps fail today for reasons unrelated to most releases, like warehouse sources that never get created and programs that can't run in CI mode. The current list lives in the [wizard repo](https://github.com/PostHog/wizard/blob/main/docs/releasing.md#known-broken-evals). Update it in the same PR that fixes or breaks an eval.
+
+## Sample prompt for a snapshot sweep
+
+Paste this into Claude Code or Codex from the wizard workbench. Fill in the release PR first.
+
+```
+Run the wizard snapshot sweep for the release PR <URL> and post the evidence to it.
+
+Setup:
+- Wizard checkout on the release PR branch (`gh pr checkout <number>`), with `pnpm install`.
+  The harness runs from source, so no build is needed.
+- wizard-workbench .env has POSTHOG_PERSONAL_API_KEY (phx_), POSTHOG_WIZARD_PROJECT_ID,
+  POSTHOG_REGION=us, WIZARD_PATH (the wizard checkout), CONTEXT_MILL_PATH, and a gateway
+  token (POSTHOG_GATEWAY_TOKEN, or WIZARD_CI_GATEWAY_TOKEN_FILE).
+- To test unreleased skills, run the context mill dev server on port 8765 and set
+  POSTHOG_WIZARD_LOCAL_CONTEXT_MILL=true. Otherwise the run uses the latest release.
+
+Run:
+- The real-TUI snapshot sweep on every program that has src/programs/<id>/test/e2e.json.
+  Today that's ten: posthog-integration, error-tracking, error-tracking-upload-source-maps,
+  ai-observability, metrics, audit, replay-vision, self-driving, warehouse-source, feature-flags.
+- For each one: `pnpm wizard-ci-snapshots <app> --program <id>` from the workbench,
+  with an app from apps/ that matches the program.
+- Never scope it down to one app. If a program's e2e.json is broken, stop and report it.
+  Don't fix it.
+
+Check:
+- Read each run's report and the wizard log. A frame that shows the outro is not a pass,
+  check the run actually did the work.
+- Skip any frame that shows a token or key.
+
+Post:
+- Render each .ans frame to PNG with its colors, not raw escape codes.
+- Post one PR comment with a <details> block per program, summary "<program>: <result>",
+  and every frame in order inside it.
+- List any program that failed, and why, at the top of the comment.
+```
+
+## Go deeper
+
+- [Release checklist](https://github.com/PostHog/wizard/blob/main/docs/releasing.md), with every command and the known broken evals
+- [Handling wizard incidents](/handbook/wizard-and-docs/wizard-incidents), to undo a release

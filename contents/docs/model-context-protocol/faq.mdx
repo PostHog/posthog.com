@@ -23,11 +23,15 @@ Note that some MCP tools use LLMs internally, and usage of these MCP tools may b
 
 ### Are there rate limits?
 
-MCP tool calls execute against the PostHog API, so they're subject to the same [API rate limits](/docs/api#rate-limiting) – there's no separate MCP limit layered on top. These limits apply per team, across all users and keys in your organization.
+Yes. The MCP server applies its own limits before a request reaches the PostHog API: 480 requests per minute and 4,800 requests per hour. These limits count per credential, which is the exact OAuth token or personal API key your client connects with, not per team. A request over the limit gets a `429` response with a `Retry-After` header that tells you how long to wait.
+
+Every request counts against these limits, not only tool calls. Opening a session, telling the server your client is ready, and listing the available tools each cost one request. A client that opens a new session for every prompt spends part of its budget before it calls a single tool.
+
+MCP tool calls also run against the PostHog API, so [API rate limits](/docs/api#rate-limiting) can apply on top of the MCP limits. Which ones apply depends on how you authenticate and which endpoint the tool calls. The default API limits only count requests made with a personal API key, and they count per key. Requests authenticated with OAuth skip them. Some endpoints set their own limits that count per project or per organization, so everyone shares one budget.
 
 Some [AI-powered MCP tools](#how-much-does-it-cost) (for example, sentiment analysis and trace summarization) have their own additional, lower limits because they run LLMs internally.
 
-If you regularly hit these limits, consider pulling data through [batch exports](/docs/cdp/batch-exports) or [endpoints](/docs/endpoints) instead.
+If you regularly hit these limits, consider pulling data through [batch exports](/docs/data-pipelines/batch-exports) or [endpoints](/docs/endpoints) instead.
 
 ### Which AI clients and editors are supported?
 
@@ -43,7 +47,7 @@ Yes, but add one MCP connection for each. A single connection signs in as one ac
 
 ### Can my organization manage MCP access centrally through our IdP?
 
-Yes. If you're on an enterprise plan, you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
+Yes. If your organization has the Scale or Enterprise [platform add-on](/platform-packages), you can use [enterprise-managed authorization (ID-JAG)](/docs/model-context-protocol/enterprise-managed-authorization) to control MCP access through your identity provider (Okta, Entra ID, etc.) instead of per-user OAuth or API keys.
 
 ### Where is my data sent?
 
@@ -223,9 +227,9 @@ Available features:
 | ------------------------ | -------------------------------------------------------------------------------------- |
 | `workspace`              | Organization and project management                                                    |
 | `actions`                | [Action definitions](/docs/data/actions)                                               |
-| `activity_logs`          | Activity log viewing                                                                   |
+| `platform_features`      | Activity logs, comments, approvals, and organization and role details                  |
 | `alerts`                 | [Alert management](/docs/product-analytics/alerts)                                     |
-| `annotations`            | [Annotation management](/docs/product-analytics/annotations)                           |
+| `annotations`            | [Annotation management](/docs/data/annotations)                                        |
 | `cohorts`                | [Cohort management](/docs/data/cohorts)                                                |
 | `conversations`          | [Support ticket management](/docs/support)                                             |
 | `dashboards`             | [Dashboard creation and management](/docs/product-analytics/dashboards)                |
@@ -238,17 +242,16 @@ Available features:
 | `events`                 | Event and property definitions                                                         |
 | `experiments`            | [A/B testing experiments](/docs/experiments)                                           |
 | `flags`                  | [Feature flag management](/docs/feature-flags)                                         |
-| `hog_functions`          | [CDP function management](/docs/cdp)                                                   |
+| `hog_functions`          | [CDP function management](/docs/data-pipelines)                                                   |
 | `hog_function_templates` | CDP function template browsing                                                         |
-| `insights`               | [Analytics insights](/docs/product-analytics/insights)                                 |
-| `ai_observability`          | [AI observability evaluations](/docs/ai-observability)                                      |
-| `prompts`                | [LLM prompt management](/docs/prompt-management)                                          |
+| `insights`               | [Run insight queries](/docs/product-analytics/insights). Saved insights are in `product_analytics` |
+| `product_analytics`      | Saved insights and other product analytics tools                                       |
+| `llm_analytics`          | [AI observability](/docs/ai-observability), including evaluations and [prompts](/docs/prompt-management) |
 | `logs`                   | [Log querying](/docs/logs)                                     |
 | `notebooks`              | [Notebook management](/docs/notebooks)                                                 |
 | `persons`                | [Person and group management](/docs/data/persons)                                      |
 | `reverse_proxy`          | Reverse proxy record management                                                        |
-| `search`                 | Entity search across the project                                                       |
-| `sdk_doctor`             | [SDK health diagnostics](/docs/health-checks/sdk-health)                                             |
+| `health_issues`          | [Health checks](/docs/health-checks), including outdated SDKs                          |
 | `sql`                    | SQL query execution                                                                    |
 | `surveys`                | [Survey management](/docs/surveys)                                                     |
 | `workflows`              | [Workflow management](/docs/workflows)                                                 |
@@ -259,7 +262,7 @@ Available features:
 | `customer_analytics`     | [Customer analytics](/docs/customer-analytics/start-here)                              |
 | `conversations`          | [Support tickets](/docs/support)                                                       |
 | `signals`                | [Self-driving signals and inbox](/docs/self-driving)                                   |
-| `tasks`                  | [Tasks](/docs/posthog-desktop/tasks)                                                   |
+| `tasks`                  | [Tasks](/docs/tasks)                                                                   |
 | `tracing`                | [Distributed tracing](/docs/distributed-tracing/start-here)                            |
 
 > **Note:** Hyphens and underscores are treated as equivalent in feature names (e.g., `error-tracking` and `error_tracking` both work).

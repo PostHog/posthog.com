@@ -23,27 +23,63 @@ const ctaLinks: Record<CTALinkKey, { to: string; label: string; Icon: React.Comp
 
 const DEFAULT_LINKS: CTALinkKey[] = ['mcp', 'demo', 'talk-to-a-human']
 
-export const CTAs = ({ wizardCommand, links = DEFAULT_LINKS }: { wizardCommand?: string; links?: CTALinkKey[] }) => {
+/**
+ * Replaces the default "Get started - free" and "Install with AI" buttons. A product can
+ * set this with `ctaButtons` on its product data (e.g. a sales-led beta like
+ * `src/hooks/productData/data_warehouse.tsx`), which the Overview template passes through.
+ */
+export type CTAButtons = {
+    primary: { label: string; to: string }
+    secondary?: { label: string; to: string }
+}
+
+export const CTAs = ({
+    wizardCommand,
+    links = DEFAULT_LINKS,
+    buttons,
+}: {
+    wizardCommand?: string
+    links?: CTALinkKey[]
+    buttons?: CTAButtons
+}) => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
         <>
             <div className="@container">
-                <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
-                    <CallToAction
-                        to="https://app.posthog.com/signup"
-                        size="lg"
-                        state={{ newWindow: true, initialTab: 'signup' }}
-                    >
-                        Get started - free
-                    </CallToAction>
-                    <CallToAction
-                        type="secondary"
-                        size="lg"
-                        onClick={() => setShowIntegrationPrompt((current) => !current)}
-                    >
-                        Install with AI
-                    </CallToAction>
-                </div>
+                {buttons ? (
+                    <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
+                        <CallToAction to={buttons.primary.to} size="lg" state={{ newWindow: true }}>
+                            {buttons.primary.label}
+                        </CallToAction>
+                        {buttons.secondary && (
+                            <CallToAction
+                                type="secondary"
+                                size="lg"
+                                to={buttons.secondary.to}
+                                state={{ newWindow: true }}
+                            >
+                                {buttons.secondary.label}
+                            </CallToAction>
+                        )}
+                    </div>
+                ) : (
+                    <div className="flex flex-col @xs:flex-row gap-3 @sm:gap-2">
+                        <CallToAction
+                            to="https://app.posthog.com/signup"
+                            size="lg"
+                            state={{ newWindow: true, initialTab: 'signup' }}
+                        >
+                            Get started - free
+                        </CallToAction>
+                        <CallToAction
+                            type="secondary"
+                            size="lg"
+                            onClick={() => setShowIntegrationPrompt((current) => !current)}
+                        >
+                            Install with AI
+                        </CallToAction>
+                    </div>
+                )}
             </div>
             <motion.div
                 className="overflow-hidden"

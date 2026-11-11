@@ -17,6 +17,7 @@ export default function HogPatch(): JSX.Element {
                 showAddressBar={false}
                 headerBarOptions={[]}
                 fullScreen
+                viewportClasses="[&>div>div]:h-full"
             >
                 <iframe
                     src="https://candidate-rpg.vercel.app/game"

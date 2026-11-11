@@ -16,19 +16,19 @@ You can think of remote config flags as multivariate flags with a single variant
 
 ## Using remote config in client-side apps
 
-Non-encrypted remote config flags are served through the [`/flags` endpoint](/docs/api/flags) like any other feature flag, using your project API key (the one starting with `phc_`), which is safe to expose publicly. Read the payload with your SDK's flag payload function. For example, in [posthog-js](/docs/libraries/js):
+Non-encrypted remote config flags are served through the [`/flags` endpoint](/docs/api/flags) like any other feature flag, using your project token, which is safe to expose publicly. Read the payload with your SDK's flag payload function. For example, in [posthog-js](/docs/libraries/js):
 
 ```js
 const config = posthog.getFeatureFlagPayload('landing-page-config')
 ```
 
-This also works for CLIs, scripts, or anything else that can call `/flags` with your project API key.
+This also works for CLIs, scripts, or anything else that can call `/flags` with your project token.
 
 > **Note:** Flags with encrypted payloads are excluded from `/flags` entirely, so they can't be read client-side and require a server.
 
 ## Using remote config on the server
 
-Server-side SDKs fetch remote config payloads using your secret API key. This key is only required for [local evaluation](/docs/feature-flags/local-evaluation) and server-side remote config – not for remote config in general. It returns [encrypted payloads](#encrypted-payloads) redacted, so use a [personal API key](/docs/api/personal-api-keys) if you need them decrypted. Unlike your project API key, it must never be exposed publicly.
+Server-side SDKs fetch remote config payloads using your secret API key. This key is only required for [local evaluation](/docs/feature-flags/local-evaluation) and server-side remote config – not for remote config in general. It returns [encrypted payloads](#encrypted-payloads) redacted, so use a [personal API key](/docs/api/personal-api-keys) if you need them decrypted. Unlike your project token, it must never be exposed publicly.
 
 There are 3 steps to use remote config flags on the server:
 
@@ -54,7 +54,7 @@ import ConfigureSecretAPIKey from "../integrate/_snippets/configure-secret-api-k
 <MultiLanguage>
 
 ```node
-const config = posthog.getRemoteConfigPayload('landing-page-config')
+const config = await client.getRemoteConfigPayload("landing-page-config")
 // config is a JsonType
 ```
 

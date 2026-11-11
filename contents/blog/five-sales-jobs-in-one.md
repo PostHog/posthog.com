@@ -77,7 +77,7 @@ AI has again accelerated this work significantly. Researching accounts with deep
 
 ## Shipping it myself
 
-And again, thanks to PostHog Desktop, I can now either submit customer feature requests as GitHub issues directly for the right engineering team, or just build it out myself.
+And again, thanks to PostHog Desktop, I can now either submit [customer feature requests](/blog/being-in-a-sales-role-has-made-me-a-better-software-engineer#buying-software-is-not-fun) as GitHub issues directly for the right engineering team, or just build it out myself.
 
 In the year I've been here, I went from never having logged into GitHub to shipping a handful of features into the product, a few dozen PRs on our internal tooling, and [a PR against a customer's own open source repo](https://github.com/n8n-io/n8n/pull/31863), and all from sales!
 

@@ -1,5 +1,6 @@
 const Slugger = require('github-slugger')
 const settings = require('./algoliaSettings.json')
+const { isNoindexSdkReference } = require('./sdkMarkdownReferences')
 
 // Lower values win after Algolia's textual relevance criteria tie.
 const PATH_RANKING = {
@@ -74,7 +75,7 @@ const PAGE_TYPE_RULES = [
 const EXCLUDED_PAGE_PATTERNS = [
     /^\/(?:404|dev-404-page|offline-plugin-app-shell-fallback)(?:\/|$)/,
     /^\/(?:code|connect|posts|r)(?:\/|$)/,
-    /^\/(?:101|bookmarks|careers-og|components|display-options|events-feedback-form|image-annotator|old-home|reset-password|trash|wip)(?:\/|$)/,
+    /^\/(?:101|bookmarks|components|display-options|events-feedback-form|image-annotator|old-home|reset-password|trash|wip)(?:\/|$)/,
     /^\/(?:community\/profiles\/me|data-stack\/dw-installation-platforms|team-updates)(?:\/|$)/,
     /\/(?:edit|new|orders|subscriptions)\/?$/,
     // Hogpedia is a parody encyclopedia. Its pages are crawlable and in the sitemap, but they
@@ -206,6 +207,14 @@ const contentByPath = (nodes, sitePathsByContentId) => {
         )
         .forEach((node) => {
             const path = normalizePath(node.fields?.slug || node.slug)
+            // Learning source folders are independent of their published Learn/Docs URLs.
+            // Same pattern as POCKET_GUIDE_SOURCE in src/constants/pocketGuides.ts, which plain JS can't import.
+            if (/^\/?learn\/[^/]+\/pocket-guide(?:\/|$)/.test(path)) {
+                for (const publicPath of sitePathsByContentId.get(node.id) || []) {
+                    if (!isExcludedPath(publicPath)) content.set(publicPath, node)
+                }
+                return
+            }
             if (!sitePathsByContentId.get(node.id)?.has(path) || isExcludedPath(path)) return
             content.set(path, node)
         })
@@ -341,6 +350,18 @@ const retrieveSearchPages = {
               slug
             }
           }
+          sdkReferences: allSdkMarkdownReference {
+            nodes {
+              id
+              slug
+              title
+              body
+              tableOfContents {
+                value
+                depth
+              }
+            }
+          }
           tools: allTool {
             nodes {
               aliases
@@ -392,7 +413,20 @@ const retrieveSearchPages = {
     `,
     transformer: ({ data }) => {
         const pages = new Map()
-        const contentIds = new Set(data.content.nodes.map(({ id }) => id))
+        // SDK references are plain Markdown, not MDX, so they join the MDX content in the MDX shape. The pages
+        // that answer noindex stay out of search, as they stay out of the sitemap. A reference runs to about
+        // 400 KB, twice the largest page indexed today, so search reads its first 150,000 characters.
+        const sdkReferences = data.sdkReferences.nodes.map(({ id, slug, title, body, tableOfContents }) => ({
+            id,
+            slug,
+            fields: { slug },
+            frontmatter: { title, noindex: isNoindexSdkReference(slug) },
+            headings: (tableOfContents || []).map(({ value }) => ({ value, depth: 2 })),
+            rawBody: body.slice(0, 150000),
+            excerpt: '',
+        }))
+        const contentNodes = [...data.content.nodes, ...sdkReferences]
+        const contentIds = new Set(contentNodes.map(({ id }) => id))
         const sitePathsByContentId = new Map()
 
         data.pages.nodes.forEach((page) => {
@@ -411,7 +445,7 @@ const retrieveSearchPages = {
             }
         })
 
-        const content = contentByPath(data.content.nodes, sitePathsByContentId)
+        const content = contentByPath(contentNodes, sitePathsByContentId)
         const toolPaths = toolPathsFromNodes(data.tools.nodes).filter(({ path }) => pages.has(path))
         const records = new Map()
 

@@ -13,8 +13,10 @@ import {
     generatePricingMd,
     generatePlatformMd,
     generateProductPagesMarkdown,
+    generateMcpMd,
 } from './rawMarkdownUtils'
 import { MARKDOWN_CONTENT_PATHS } from '../src/constants'
+import { pocketGuideDestination } from '../src/constants/pocketGuides'
 import { SdkReferenceData } from '../src/templates/sdk/SdkReference.js'
 import { syncStandardSiteDocuments } from './standardSite'
 
@@ -131,17 +133,39 @@ const generateMarkdownArtifacts = async (graphql: any) => {
                     }
                 }
             }
+            allSdkMarkdownReference {
+                nodes {
+                    slug
+                    title
+                }
+            }
         }
-    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
+    `)) as {
+        data: {
+            allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> }
+            allSdkMarkdownReference: { nodes: Array<{ slug: string; title: string }> }
+        }
+    }
 
-    const filteredPages = await generateRawMarkdownPages(docsQuery.data.allMdx.nodes)
-    // Only include docs pages in llms.txt (not handbook)
-    const docsPages = filteredPages.filter((page) => page.fields.slug.startsWith('/docs'))
+    const filteredPages = await generateRawMarkdownPages([
+        ...docsQuery.data.allMdx.nodes.map((node) => ({
+            ...node,
+            fields: { ...node.fields, slug: pocketGuideDestination(node.fields.slug) },
+        })),
+        // SDK references from Strapi aren't MDX (gatsby/sdkMarkdownReferences.js), but get a .md copy like the docs.
+        ...docsQuery.data.allSdkMarkdownReference.nodes.map(({ slug, title }) => ({
+            fields: { slug },
+            frontmatter: { title },
+        })),
+    ])
+    // Include product documentation and learning pages, excluding the handbook.
+    const docsPages = filteredPages.filter((page) => /^\/(docs|learn)\//.test(page.fields.slug))
     generateLlmsTxt(docsPages)
 
     // Generate the self-driving platform overview + per-product markdown for LLMs/agents
     generatePlatformMd()
     generateProductPagesMarkdown()
+    generateMcpMd()
 
     // Generate changelog.md (+ per-year archives) from build-time Roadmap nodes for LLMs/agents.
     // The /changelog page renders a virtualized UI, so the HTML-scrape path can't cover it.
@@ -282,6 +306,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         title
+                        ogImage
                         featuredImage {
                             publicURL
                         }
@@ -338,22 +363,6 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                         featuredImage {
                             publicURL
                         }
-                    }
-                }
-            }
-            customers: allMdx(filter: { fields: { slug: { regex: "/^/customers/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    frontmatter {
-                        featuredImage {
-                            publicURL
-                        }
-                        logo {
-                            publicURL
-                        }
-                        title
                     }
                 }
             }

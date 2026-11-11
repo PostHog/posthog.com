@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import usePostHog from './usePostHog'
 
 export type EarlyAccessFeatureStage = 'concept' | 'alpha' | 'beta' | 'general-availability'
 
@@ -94,14 +93,11 @@ interface UseEarlyAccessFeaturesResult {
  *  - Revalidated client-side via posthog-js once it loads, so features added in-app since
  *    the last deploy still appear without a rebuild.
  *
- * posthog-js is loaded as a CDN snippet; its EAF methods only exist once the async
- * `array.js` has loaded, so revalidation polls for `getEarlyAccessFeatures` before calling
- * it and guards SSR (the snippet stub / window are absent at build time).
+ * The hosted loader exposes queued methods before the SDK initializes. Revalidation
+ * polls for the current initialized SDK and stops waiting after six seconds.
  */
 export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = {}): UseEarlyAccessFeaturesResult {
     const { stages = DEFAULT_STAGES, forceReload = true } = options
-    const posthog = usePostHog()
-
     const staticData = useStaticQuery(graphql`
         query EarlyAccessFeaturesQuery {
             allEarlyAccessFeature {
@@ -136,8 +132,8 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
     const stagesKey = JSON.stringify(stages)
 
     const fetchFeatures = useCallback(() => {
-        // SSR guard + method-availability guard (the snippet stub doesn't expose EAF methods yet).
-        if (typeof window === 'undefined' || typeof posthog?.getEarlyAccessFeatures !== 'function') {
+        const posthog = typeof window !== 'undefined' ? window.posthog : undefined
+        if (!posthog?.__loaded || typeof posthog.getEarlyAccessFeatures !== 'function') {
             return false
         }
 
@@ -202,7 +198,7 @@ export function useEarlyAccessFeatures(options: UseEarlyAccessFeaturesOptions = 
             return true
         }
         // stagesKey stands in for `stages` (a fresh array each render) in the dep list.
-    }, [posthog, forceReload, stagesKey])
+    }, [forceReload, stagesKey])
 
     useEffect(() => {
         if (fetchFeatures()) return

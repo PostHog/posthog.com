@@ -13,7 +13,7 @@ Bootstrapping feature flags makes them available as soon as React and PostHog lo
 
 To show you how you can bootstrap feature flags, we are going to build a React app with Vite, add PostHog, set up an Express server to server-side render our app, and finally bootstrap our flags from the server to the client.
 
-> Already have an app set up? [Skip straight to the feature flag bootstrapping implementation](#handle-feature-flags-on-the-backend).
+> Already have an app set up? [Skip straight to the feature flag bootstrapping implementation](#set-up-our-server-rendering-express-app).
 
 ## Create a React app with Vite and add PostHog
 
@@ -28,7 +28,7 @@ Once created, go into the new `client` folder and install the packages as well a
 ```bash
 cd client
 npm install
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, get your PostHog project token and instance address from the getting started flow or [your project settings](https://app.posthog.com/project/settings) and set up environment variables to store them. You can do this by creating a `.env.local` file in your project root:
@@ -174,7 +174,7 @@ To get the feature flags data on the backend and pass it to the frontend, we nee
 This starts by installing the necessary packages:
 
 ```bash
-npm install express cookie-parser posthog-node uuid dotenv
+npm install express cookie-parser posthog-node@5 uuid dotenv
 npm install --save-dev nodemon
 ```
 

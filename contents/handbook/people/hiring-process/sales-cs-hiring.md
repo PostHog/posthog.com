@@ -107,13 +107,13 @@ Scheduled throughout the day, you'll also have:
 *   A kick-off call (30 min) - a session with Dana or Phil to go over the task for the day!
 *   A product demo (30 min) - a session spent understanding your demoing style, your comfort with PostHog, and with ambiguous situations.
 *   A peer team interview (30 min) - a session dedicated to team members to get to know you, and for you to ask as many questions as you have!
-*   A short chat with a co-founder or exec - a brief conversation about culture and motivation.
+*   A short chat with a co-founder, Blitzscale Team member, or relevant Group Lead - a brief conversation about culture and motivation.
 
 You'll also have access to a dedicated Slack channel with the team throughout the day. Use it - share progress, ask questions, surface blockers.
 
 ##### How to prepare for the day
 
-*   Read the [CS section of the handbook](/handbook/cs-and-onboarding/customer-success) thoroughly.
+*   Read the [CS section of the handbook](/handbook/customer-success/customer-success) thoroughly.
 *   Install and get familiar with PostHog - you'll be expected to have a good understanding of PostHog going into SuperDay, so we recommend creating and playing with some test data.
 
 ##### During the day

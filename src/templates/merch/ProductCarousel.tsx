@@ -1,15 +1,16 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
-import { getProductImages, getShopifyImage, calculateAspectRatioDimensions } from './utils'
+import { calculateAspectRatioDimensions, getProductImages, getShopifyImage } from './utils'
 
 type ProductCarouselProps = {
     className?: string
     product: ShopifyProduct
     containerWidth?: number
+    activeSrc?: string
 }
 
 const Image = ({ index, image, title }: { index: number; image: { preview: { image: any } }; title: string }) => {
@@ -26,9 +27,17 @@ const Image = ({ index, image, title }: { index: number; image: { preview: { ima
 }
 
 export function ProductCarousel(props: ProductCarouselProps): React.ReactElement | null {
-    const { className, product, containerWidth } = props
+    const { className, product, containerWidth, activeSrc } = props
     const { media, title } = product
     const images = useMemo(() => getProductImages(media), [media])
+    const activeIndex = useMemo(() => {
+        const src = activeSrc?.split('?')[0]
+        if (!src || !images) return undefined
+        const index = images.findIndex((image) => image.preview?.image?.originalSrc?.split('?')[0] === src)
+        return index >= 0 ? index : undefined
+    }, [images, activeSrc])
+    const activeIndexRef = useRef(activeIndex)
+    activeIndexRef.current = activeIndex
     const [currentSlide, setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -39,15 +48,18 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         },
         created(s) {
             setLoaded(true)
-            setTimeout(s.update, 0)
+            setTimeout(() => {
+                s.update()
+                if (activeIndexRef.current !== undefined) s.moveToIdx(activeIndexRef.current)
+            }, 0)
         },
     })
 
     useEffect(() => {
-        setCurrentSlide(0)
-        instanceRef.current?.update()
-        instanceRef.current?.moveToIdx(0)
-    }, [product])
+        if (activeIndex === undefined) return
+        setCurrentSlide(activeIndex)
+        instanceRef.current?.moveToIdx(activeIndex)
+    }, [activeIndex])
 
     useEffect(() => {
         if (instanceRef.current && containerWidth) {
