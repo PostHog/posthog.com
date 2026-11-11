@@ -27,7 +27,7 @@ The [wizard](/blog/envoy-wizard-llm-agent) adds the crate with its `mcp` feature
 <Step title="Install the crate" badge="required">
 
 ```bash
-cargo add posthog --features mcp
+cargo add posthog@1 --features mcp
 ```
 
 The `mcp` feature pulls in `rmcp` with its `server` feature and turns on the async client. Your server already depends on `rmcp` for its tools. The snippets on this page also need `tokio` with its `macros` and `rt-multi-thread` features, and `rmcp` with `transport-io` for stdio or `transport-streamable-http-server` for HTTP.

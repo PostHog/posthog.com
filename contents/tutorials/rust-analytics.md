@@ -175,7 +175,7 @@ Add `posthog-rs`  to your `Cargo.toml` to install [PostHog's Rust SDK](/docs/lib
 # rest of config
 
 [dependencies]
-posthog-rs = "0.31"
+posthog-rs = "1"
 
 # rest of config
 ```
