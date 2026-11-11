@@ -96,7 +96,7 @@ Ideas for the agenda:
 - Dogfooding session – set PostHog up in a toy project from scratch, looking for pain points
 - Hackathon - try to leave 2 days for this, and most importantly avoid sessions interrupting hacking
 - Even some regular work on ongoing challenging projects - this is the best time for exchanging knowledge!
-- Meet users in person – Builder Relations can organize and pay for a [self-driving cafe or cohort dinner](/handbook/marketing/events#events-during-small-team-offsites). Ask at least one month before your offsite.
+- Buy customers coffee – Builder Relations organizes and pays for a [self-driving cafe](/handbook/marketing/events#events-during-small-team-offsites)
 
 > Don't run a hackathon during an onboarding offsite. Other offsites normally do have a hackathon. Participation should be _very_ strongly encouraged but not mandatory - if not everyone is taking part make sure that working spaces are available to accommodate the different styles of work. It is super important that people taking part are fully available and focused on participating. Given the offsite is an opportunity to work together there should be no teams of one. This extends beyond the formation of teams and into the hackathon itself in cases where there is team switching.
 
