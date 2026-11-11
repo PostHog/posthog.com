@@ -2,7 +2,7 @@
 title: Query what you send
 ---
 
-> **Note:** Metrics is in open alpha. Any team can turn it on — open [Metrics](https://app.posthog.com/metrics) and select **Enable metrics** in the onboarding view. The details on this page describe current behavior and may change before general availability.
+> **Note:** Metrics is in open alpha. Any team can turn it on. Open [Metrics](https://app.posthog.com/metrics) and select **Enable metrics** in the onboarding view. The details on this page describe current behavior and may change before general availability.
 
 This page shows how a metric you record with `posthog.metrics` in [posthog-js](/docs/metrics/installation/javascript), [posthog-node](/docs/metrics/installation/nodejs), or [posthog-python](/docs/metrics/installation/python) reads back when you query it. The most important thing to know first: **counters and histograms arrive as deltas, not running totals.**
 
@@ -16,7 +16,7 @@ The SDKs pre-aggregate in memory and flush one OTLP data point per series every 
 | `metrics.gauge()` | Gauge | – | The last value recorded in that window |
 | `metrics.histogram()` | Histogram | Delta | The count, sum, min, max, and per-bucket counts for that window |
 
-Delta temporality means each flush carries only what happened in that interval. It isn't a running total since process start. The [viewer](/docs/metrics/explore) and `increase` or `rate` aggregations account for this. If you query through a Prometheus-style tool, they don't, as the next sections explain.
+Delta temporality means each flush carries only what happened in that interval. It isn't a running total since process start. The [viewer](/docs/metrics/explore) and its `increase` and `rate` aggregations account for this. In PromQL, counters and histograms need different functions, as [Query with PromQL](#query-with-promql) explains.
 
 ## Resource attributes and names
 
@@ -32,7 +32,7 @@ Histograms use these bucket boundaries, in the unit you record (milliseconds for
 0, 5, 10, 25, 50, 75, 100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000
 ```
 
-There's one more bucket above the last boundary, so values over 10000 are still counted. To use different boundaries, pass `bounds` when you record (posthog-node 5.63.0 or later, posthog-js 1.447.0 or later):
+There's one more bucket above the last boundary, so values over 10000 are still counted. To use different boundaries in posthog-node (5.63.0 or later) or posthog-js (1.447.0 or later), pass `bounds` when you record:
 
 ```js
 posthog.metrics.histogram('job.duration', 42, {
@@ -43,44 +43,56 @@ posthog.metrics.histogram('job.duration', 42, {
 
 The first sample of a histogram (its name and unit) fixes the bounds until the client resets. A later sample with different bounds is recorded in the fixed buckets and logs a warning, and a sample with invalid bounds is dropped.
 
+posthog-python has no `bounds` option. Its `histogram()` takes only `unit` and `attributes`, so Python histograms always use the default boundaries above. If you need other boundaries in Python, record the histogram with an [OpenTelemetry SDK](/docs/metrics/installation) instead.
+
 ## Query with SQL
 
 Every data point lands in the `posthog.metrics` table, scoped to your project. Use the **SQL** tab in [Metrics](https://app.posthog.com/metrics) to read it back directly. See [Use your metrics](/docs/metrics/explore) for the viewer and SQL tab.
 
 ## Query with PromQL
 
-> **Note:** The behavior in this section comes from querying PostHog's Prometheus-compatible API with metrics sent by the SDKs. It describes what you see today and may change during the alpha.
-
 When you read metrics back as Prometheus series, expect this:
 
 - A histogram named `dash_query_duration_ms` reads back as `dash_query_duration_ms_bucket`, `dash_query_duration_ms_count`, and `dash_query_duration_ms_sum`, plus a bare `dash_query_duration_ms` series.
 - A counter keeps its name. PostHog doesn't add `_total`.
-- Resource attributes become labels, so you can filter on `service_name` or `region` (from `resourceAttributes`). Each series carries both the dotted OpenTelemetry label (`service.name`) and an underscore form (`service_name`), plus `deployment.environment` and `telemetry.sdk.*`.
-- Dotted names and labels must be quoted in PromQL: `{"deployment.environment"="production"}` and `sum by ("url.template", le)`. Grafana legend templates reference them as-is, for example `{{url.template}}`.
+- Resource attributes become labels, so you can filter on `service_name` or `region` (from `resourceAttributes`). Each series carries both the dotted OpenTelemetry label (`service.name`) and an underscore form (`service_name`), plus `job` (set to the service name), `deployment.environment`, and `telemetry.sdk.*`.
+- Dotted metric and label names work as you write them, for example `http.client.request.duration_count{service.name="checkout"}` or `sum by (url.template, le)`. Quoted forms such as `{"deployment.environment"="production"}` work too. Use the quoted form if another tool parses the query before it reaches PostHog, because a standard Prometheus parser rejects bare dots.
 
-### Counters: sum deltas, don't use rate()
+Counters and histograms read back differently:
 
-Because each point is a delta, `rate()` and `increase()` give wrong answers without an error. Sum the points instead:
+| Type | What PromQL reads | Use | Don't use |
+|------|-------------------|-----|-----------|
+| Counter | Each delta as its own sample | `sum_over_time()` | `rate()`, `increase()` |
+| Histogram (`_bucket`, `_count`, `_sum`) | A running total of the deltas, from the start of the query range | `rate()`, `increase()` | `sum_over_time()` |
+| Gauge | The last value in each window | The value as is, or `avg_over_time()` | – |
+
+### Counters: sum the deltas
+
+Because each counter point is a delta, `rate()` and `increase()` give wrong answers without an error. Sum the points instead:
 
 ```promql
 sum_over_time(checkout_completed{plan="pro"}[$__interval])
 ```
 
-### Histograms: percentiles from buckets
+### Histograms: use rate() or increase()
+
+PostHog turns the delta points of a histogram into a running total when it builds the `_bucket`, `_count`, and `_sum` series. Use them like Prometheus counters:
 
 ```promql
 histogram_quantile(
   0.95,
-  sum by (le) (sum_over_time(dash_query_duration_ms_bucket[5m]))
+  sum by (le) (rate(dash_query_duration_ms_bucket[5m]))
 )
 ```
 
-For the average duration, divide the summed `_sum` by the summed `_count`:
+For the average duration, divide the increase of `_sum` by the increase of `_count`:
 
 ```promql
-sum(sum_over_time(dash_query_duration_ms_sum[5m]))
-  / sum(sum_over_time(dash_query_duration_ms_count[5m]))
+sum(increase(dash_query_duration_ms_sum[5m]))
+  / sum(increase(dash_query_duration_ms_count[5m]))
 ```
+
+Don't use `sum_over_time()` on these series. It adds up running totals, so the result grows over the query range.
 
 ### Gauges
 
