@@ -48,7 +48,7 @@ We run Self-Driving on PostHog itself, because obviously. One [report](/docs/sel
 
 The chart got <TeamMember name="Andy Maguire" />, a product engineer on the team, digging into why the work was failing. That investigation is a big part of why Self-Driving is out of beta today. It also taught us that a report can be worth as much as a PR.
 
-Another report compared merge rates across the models our agents can use to write PRs. It flagged that one model had roughly half the merge rate of the others, then Self-Driving kept watching to check the gap held as the sample grew. It held. The model was GPT-6-luna-flex, by the way.
+Another report compared merge rates across the models our agents can use to write PRs. It flagged that one model had roughly half the merge rate of the others, then Self-Driving kept watching to check the gap held as the sample grew. It held. The model was GPT-6 Luna, by the way.
 
 We can't fix the model, but we can steer users away from it before it gives them a bad experience, so that's what we do now. Without that report we might not have noticed for weeks.
 
