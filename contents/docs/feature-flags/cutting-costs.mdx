@@ -85,9 +85,9 @@ A poll is charged in one of two ways:
 - **The definitions changed**, or the instance just started: PostHog returns the full definitions. This is charged as 10 requests.
 - **Nothing changed**: the SDK sends the ETag of the definitions it already holds, and PostHog replies `304 Not Modified` with no body. This is charged as 1 request.
 
-Your cost follows your poll rate and your instance count. One instance at the default interval makes 2 polls per minute. That is `2 * 60 * 24 * 30 = 86,400` polls per month.
+One instance at the default interval makes 2 polls per minute, which is `2 * 60 * 24 * 30 = 86,400` polls per month.
 
-Definitions that hold only the flags PostHog creates for Surveys and product tours are not charged, for a `304` and for a full response.
+Definitions that hold only Surveys and product tour flags are not charged.
 
 To keep this cost down:
 
