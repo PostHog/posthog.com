@@ -10,13 +10,13 @@ You should be able to find answers to most of your payroll questions here. If yo
 
 **Employees**
 
-- US (PostHog Inc): paid on the 15th and the last day of the month. Your payslip is in BambooHR.
-- UK (Hiberly Ltd): paid on the last working day of the month. Your payslip is in Sage.
-- Germany (PostHog GmbH): paid on the last working day of the month. Your payslip is in Deel.
+- US (PostHog Inc): paid on the 15th and the last day of the month. You'll find all your payslips in BambooHR.
+- UK (Hiberly Ltd): paid on the last working day of the month. You'll find all your payslips in Sage.
+- Germany (PostHog GmbH): paid on the last working day of the month. You'll find all your payslips in Deel.
 
 **Employed through Deel (EOR)**
 
-- Paid on the last working day of the month. Your payslip is in Deel.
+- Paid on the last working day of the month. You'll find all your payslips in Deel.
 - Canada is the exception: you're paid every two weeks.
 
 **Contractors**
@@ -33,6 +33,7 @@ If payday falls on a weekend or public holiday, you're paid on the working day b
 
 ## Your first payroll
 
+- In the UK, you will be invited to Sage by DRG our payroll provider.
 - Complete all your onboarding tasks in Deel (and BambooHR if you're in the US) during your first week. If anything is missing, you may not be included in your first payroll.
 - In the UK, send us your P45 from your previous employer, or fill in the [HMRC starter checklist](https://www.gov.uk/government/publications/paye-starter-checklist) if you don't have one. Without it, you may be put on an emergency tax code.
 - If you start after the payroll cutoff, you'll get your first payment in the next payroll cycle.
@@ -83,9 +84,9 @@ For an employment verification letter, request it in Deel if you're employed thr
 
 ## If something looks wrong
 
-Tell us as soon as you notice. If you were underpaid, we'll fix it in the next payroll. If you were overpaid, we'll contact you and agree how to recover it.
+Tell us as soon as you notice we will analize and fix it. If you were underpaid, we'll fix it in the next payroll. If you were overpaid, we'll contact you and agree how to recover it.
 
 ## Questions
 
 - For anything that isn't confidential, post in the #team-people-and-ops Slack channel.
-- For anything sensitive about your pay, DM Milagros.
+- For anything sensitive about your pay, DM [@Milagros] (https://posthog.slack.com/team/U0B4W74LN83).
