@@ -127,7 +127,16 @@ await Posthog().unregisterOptions('cookieless_mode');
 
 Use `registerOptions()` instead of registering a legacy property such as `$cookieless_mode` with `register()`. On web, the known options are registered as their legacy properties and other keys are dropped.
 
-Except on web, a registered `process_person_profile` set to `false` also reaches `identify`, `alias`, and `group`. PostHog drops the events these calls send on purpose, and the app shows no error. To create no person profiles, set `personProfiles = PostHogPersonProfiles.never` instead. The SDK then skips those calls on the device.
+Except on web, a registered `process_person_profile` set to `false` also reaches the events that `identify`, `alias`, `group`, and `setPersonProperties` send. PostHog drops `$identify`, `$create_alias`, and `$groupidentify` on purpose, and the app shows no error. The `$set` event from `setPersonProperties` is kept, but it doesn't update the person. To keep identifying, pass the option on the call. This also works for `alias`, `group`, and `setPersonProperties`. A `$process_person_profile` property doesn't work here, because a registered option wins over it:
+
+```dart
+await Posthog().identify(
+  userId: 'user-123',
+  options: {'process_person_profile': true},
+);
+```
+
+To create no person profiles, set `personProfiles = PostHogPersonProfiles.never` instead. The SDK then skips those calls on the device.
 
 ## Identifying users
 
@@ -665,6 +674,8 @@ On iOS, macOS, Android, Windows and Linux, an event's properties are merged in t
 3. the properties you pass to `capture` or another event-sending method
 
 In version 5, the SDK's own values won over the properties you registered or passed. In version 6, your value wins for that event. A registered `$session_id` now overrides the SDK's session ID, which can detach events from their session replay.
+
+This includes a registered `$process_person_profile`. Version 5 replaced it with its own value, so a registered `false` did nothing. In version 6, a registered `false` takes effect: PostHog drops `$identify`, `$create_alias`, and `$groupidentify` events, and after `identify`, other events stop updating the person. To keep identifying, pass `process_person_profile: true` on the call. See [event options](#event-options).
 
 `$lib` and `$lib_version` are the exception: the SDK fills them as a pair after the merge. If `$lib` is missing or empty, the SDK sets both, replacing a `$lib_version` you passed on its own. If `$lib` names another library, the SDK leaves both as you set them and doesn't add its own version.
 
