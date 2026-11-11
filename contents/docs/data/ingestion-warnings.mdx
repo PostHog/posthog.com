@@ -245,4 +245,4 @@ These warnings apply to [AI Observability](/docs/llm-analytics) events.
 
 ## Query warnings via MCP
 
-If you use the [PostHog MCP server](/docs/model-context-protocol), your AI agent can query ingestion warnings directly with the `ingestion-warnings-list` tool. Ask questions like "What ingestion warnings has my project received?" or "Why are my person merges failing?" and the agent will filter, search, and summarize warnings for you. See the [MCP tools reference](/docs/model-context-protocol/tools) for the full list of available tools.
+If you use the [PostHog MCP server](/docs/model-context-protocol), your AI agent can find ingestion warnings with the `health-issues-list` tool, filtered to the `ingestion_warning` kind, and look up individual warnings with `execute-sql` against the `system.ingestion_warnings` table. Ask questions like "What ingestion warnings has my project received?" or "Why are my person merges failing?" and the agent will filter, search, and summarize warnings for you. See the [MCP tools reference](/docs/model-context-protocol/tools) for the full list of available tools.

@@ -1,5 +1,6 @@
 import { Logo } from '@posthog/brand/logo'
 import ImageDrop, { type Image as UploadImage } from 'components/ImageDrop'
+import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import { OSInput } from 'components/OSForm'
 import uploadImage from 'components/Squeak/util/uploadImage'
@@ -672,6 +673,13 @@ export const SideProjectForm = ({
                         </span>
                     </span>
                 </label>
+                <p className="m-0 text-sm text-secondary">
+                    Built it with PostHog? Add a{' '}
+                    <Link to="https://brand.posthog.com/badges" external className="font-semibold underline">
+                        Built with PostHog badge
+                    </Link>{' '}
+                    to the project for extra kudos.
+                </p>
                 <div className="flex items-center gap-2">
                     <OSButton type="submit" variant="primary" size="md" disabled={!canSubmit}>
                         {submitting ? 'Saving…' : project?.id ? 'Save changes' : 'Add project'}

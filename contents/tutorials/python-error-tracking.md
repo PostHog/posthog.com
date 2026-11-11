@@ -27,7 +27,7 @@ Next, activate that virtual environment and install PostHog.
 
 ```bash
 source venv/bin/activate
-pip install "posthog>=8,<9"
+pip install "posthog<8"
 ```
 
 Once done, we can create our script in an `error.py` file. It initializes PostHog with a project token and host from [your project settings](https://us.posthog.com/settings/project), and then intentionally raises an exception. We can use PostHog’s `enable_exception_autocapture` config option to automatically capture that unhandled exception.

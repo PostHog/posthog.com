@@ -106,6 +106,16 @@ To fix this:
 4. If your dataset isn't in the US region, toggle **Manually specify your dataset region** and enter the correct region (e.g., `us-east1`, `europe-west1`).
 5. Re-run the sync.
 
+## Why is my BigQuery sync failing with "Billing has not been enabled"?
+
+If your BigQuery sync fails with a message like "BigQuery billing is not enabled for your Google Cloud project," your Google Cloud project is running in BigQuery sandbox mode. Sandbox mode doesn't allow the query jobs PostHog needs to import data. PostHog stops the sync instead of retrying it.
+
+To fix this:
+
+1. Go to the [Google Cloud billing console](https://console.cloud.google.com/billing) and enable billing for your project.
+2. In PostHog, go to [**Data pipelines > Sources**](https://app.posthog.com/data-management/sources) and select your BigQuery source.
+3. Re-run the sync.
+
 ## Why is my Stripe sync failing with an account access error?
 
 If your Stripe sync fails with a message like "does not have access to account," it means your API key isn't authorized for the configured Stripe account, or your OAuth application access has been revoked. This is a non-retryable error – PostHog stops the sync instead of retrying indefinitely.
@@ -230,21 +240,23 @@ This is useful if you have a complex query and you want to test parts of it with
 
 If your CSV data appears garbled, has missing columns, or shows unexpected characters, it may be due to incorrect quote handling settings.
 
-When linking a CSV file, PostHog provides a **CSV quote handling** option with two modes:
+When you import CSV files from object storage, PostHog asks **Do double quotes enclose CSV values?**:
 
-- **RFC 4180 double quotes** - Use this when your CSV uses standard double-quote escaping (e.g., `"Hello ""World"""` becomes `Hello "World"`)
-- **Literal quotes** - Use this when quotes in your data should be treated as regular characters (default)
+- **Yes** - Use this when your CSV uses standard double-quote escaping (e.g., `"Hello ""World"""` becomes `Hello "World"`). This is the default.
+- **No, treat them as plain text** - Use this when quotes in your data are regular characters.
 
-To fix parsing issues, try recreating the table with the other quote handling option selected.
+To fix parsing issues, change this setting in the source's configuration and sync the table again. Also make sure that **File format** matches your files, for example **CSV with a header row** or **CSV without a header row**.
 
-## Why am I getting "Some files in the bucket are archived"?
+## Why can't PostHog read archived files in my S3 bucket?
 
-This error occurs when files in your S3 bucket are stored in S3 Glacier or S3 Intelligent-Tiering archive storage classes. These storage classes are designed for long-term archival and cannot be accessed directly.
+PostHog can't read files in the S3 Glacier storage classes or in the archive tiers of S3 Intelligent-Tiering. These storage classes are designed for long-term archival and can't be read directly.
 
 To resolve this:
 
-1. Restore the files to Standard storage class in AWS S3.
-2. Or narrow your URL pattern to exclude the archived files.
+1. Restore the files to a standard storage class in AWS S3.
+2. Or change the files URL of the source so that it doesn't match the archived files.
+
+For other errors from the object storage sources, see the troubleshooting section of the [Amazon S3](/docs/data-pipelines/sources/s3#troubleshooting), [Google Cloud Storage](/docs/data-pipelines/sources/gcs#troubleshooting), [Azure Blob Storage](/docs/data-pipelines/sources/azure-blob#troubleshooting), or [Cloudflare R2](/docs/data-pipelines/sources/r2#troubleshooting) docs.
 
 ## Solved community questions
 

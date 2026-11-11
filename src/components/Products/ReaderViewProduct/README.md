@@ -77,7 +77,7 @@ productData.<surface>Menu        →   sections rendered in the article column
 
 ### `props` (optional)
 
-- Object passed straight through to the section component as extra props (alongside the standard `SectionComponentProps`). Used to feed slot-specific data into reusable templates – e.g. handing the `applications` and `top-features` carousel templates their slide arrays.
+- Object passed straight through to the section component as extra props (alongside the standard `SectionComponentProps`). Used to feed slot-specific data into reusable templates – e.g. handing the `applications` and `key-features` carousel templates their slide arrays.
 
 ---
 
@@ -101,7 +101,7 @@ Cross-product JSX primitives shared between slide content and templates (e.g. `L
 
 ```tsx
 // src/hooks/productData/session_replay.tsx
-import { applications, topFeatures } from './session_replay/slides'
+import { applications, keyFeatures } from './session_replay/slides'
 import { features } from './session_replay/features'
 
 export const sessionReplay = {
@@ -119,11 +119,11 @@ export const sessionReplay = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         { slug: 'getting-started', name: 'Get started', group: 'divided' },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true },

@@ -146,7 +146,7 @@ Run `python3 app.py` and navigate to `http://localhost:8000` to see our app in a
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-Run `pip3 install "posthog>=8,<9"` to install [PostHog's Python SDK](/docs/libraries/python). Then, initialize PostHog in `app.py` using your project token and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
+Run `pip3 install "posthog<8"` to install [PostHog's Python SDK](/docs/libraries/python). Then, initialize PostHog in `app.py` using your project token and instance address (you can find these in [your project settings](https://us.posthog.com/project/settings)):
 
 ```py file=app.py
 package main

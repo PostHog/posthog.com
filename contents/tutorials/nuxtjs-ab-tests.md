@@ -47,7 +47,7 @@ Run `npm run dev` to start your app.
 Next we add PostHog (if you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup)). To do this, first install `posthog-js` .
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 Then, store your PostHog token and host in environment variables. Add them to a `.env` file in your project's base directory. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project)
@@ -227,7 +227,7 @@ Server-side rendering is a way to avoid this. This fetches the feature flag befo
 To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
-npm install posthog-node@6
+npm install posthog-node@5
 ```
 
 Then, we use the PostHog Node library to fetch the feature flag using `useAsyncData` in `app.vue`:

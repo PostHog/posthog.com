@@ -52,7 +52,7 @@ To set up custom events, first you need to install the SDK for the language you 
 For example, with Python (and frameworks like [Django](/docs/libraries/django) or [Flask](/docs/libraries/flask)), setting up custom events starts with installing the PostHog with `pip` (or your package manager of choice).
 
 ```bash
-pip install "posthog>=8,<9"
+pip install "posthog<8"
 ```
 
 Second, with the SDK you chose, you need to configure PostHog. This includes adding your project’s API key and host. You can get these in [your project settings](https://us.posthog.com/settings/project).

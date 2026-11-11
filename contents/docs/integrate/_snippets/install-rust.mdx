@@ -1,25 +1,25 @@
-Install the `posthog-rs` crate by adding it to your `Cargo.toml`.
+Install the `posthog` crate by adding it to your `Cargo.toml`.
 
 ```toml file=Cargo.toml
 [dependencies]
-posthog-rs = "1"
+posthog = "1"
 ```
 
 Next, set up the client with your PostHog project key.
 
 ```rust
-let client = posthog_rs::client("<ph_project_token>").await;
+let client = posthog::client("<ph_project_token>").await;
 ```
 
 ### Blocking client
 
 Our Rust SDK supports both blocking and async clients. The async client is the default and is recommended for most use cases.
 
-If you need to use a synchronous client instead – like we do in our [CLI](https://github.com/PostHog/posthog/tree/master/cli) –, you can opt into it by turning off the default features in your `Cargo.toml` file. This also turns off TLS, so turn the `tls` feature back on to send events over HTTPS.
+If you need to use a synchronous client instead – like we do in our [CLI](https://github.com/PostHog/posthog/tree/master/cli) – you can opt into it by turning off the default features in your `Cargo.toml` file. This also turns off TLS, so turn the `tls` feature back on to send events over HTTPS.
 
 ```toml
 [dependencies]
-posthog-rs = { version = "1", default-features = false, features = ["tls"] }
+posthog = { version = "1", default-features = false, features = ["tls"] }
 ```
 
 With the blocking client, the same methods are available without `.await`. Either way, `capture` is non-blocking: it hands the event to a background worker that batches and sends it, so it returns immediately instead of waiting on the network. Because delivery happens in the background, call `flush()` or `shutdown()` before your program exits, or buffered events may be lost.

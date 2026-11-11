@@ -27,8 +27,8 @@ client.capture(event);
 To capture multiple events at once, use `capture_batch()`:
 
 ```rust
-let event1 = posthog_rs::Event::new("event 1", "distinct_id_of_user_A");
-let event2 = posthog_rs::Event::new("event 2", "distinct_id_of_user_B");
+let event1 = posthog::Event::new("event 1", "distinct_id_of_user_A");
+let event2 = posthog::Event::new("event 2", "distinct_id_of_user_B");
 
 client.capture_batch(vec![event1, event2], false);
 ```

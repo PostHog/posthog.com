@@ -56,7 +56,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In the `src/routes` folder, create a `+layout.js`. In this file, check the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).  
@@ -179,7 +179,7 @@ Server-side rendering is a way to avoid this. This fetches the feature flag befo
 To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
-npm install posthog-node@6
+npm install posthog-node@5
 ```
 
 In SvelteKit, server-side logic can be implemented using the [load](https://kit.svelte.dev/docs/load#page-data) function. To do this, create a new file `+page.server.js` in the same directory as `+page.svelte` and add the following code:

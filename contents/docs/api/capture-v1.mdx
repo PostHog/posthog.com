@@ -36,7 +36,7 @@ Capture v1 has two endpoints: one for analytics events and one for AI events. Bo
 
 Use `https://us.i.posthog.com` for US Cloud and `https://eu.i.posthog.com` for EU Cloud. Both endpoints accept POST only.
 
-Self-hosted (hobby) instances serve both endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward. [Upgrade your instance](/docs/self-host#upgrading) before you move an SDK to capture v1. An older instance doesn't serve one or both endpoints, and v1 SDKs drop events that still get a `404` after their retries.
+Self-hosted (hobby) instances serve both endpoints from PostHog commit `1d6f4d0` (October 21, 2026) onward. [Upgrade your instance](/docs/self-host#upgrading) before you move an SDK to capture v1. An older instance doesn't serve one or both endpoints. Server SDKs on capture v1 drop events that still get a `404` after their retries. The iOS, Android, and Flutter SDKs keep them queued until the path is served or their queue fills.
 
 ### Send each event to its own endpoint
 
@@ -56,7 +56,7 @@ Every request needs these headers. A missing or malformed header rejects the who
 | `Authorization` | Yes | `Bearer <ph_project_token>` – your [project token](https://app.posthog.com/project/settings). A personal API key (`phx_…`) is refused. |
 | `Content-Type` | Yes | `application/json` |
 | `User-Agent` | Yes | Any value that identifies your client |
-| `PostHog-Sdk-Info` | Yes | `<library>/<version>`, for example `my-backend/1.2.0`. PostHog sets `$lib` and `$lib_version` on every event from this header. |
+| `PostHog-Sdk-Info` | Yes | `<library>/<version>`, for example `my-backend/1.2.0`. PostHog uses it to fill in `$lib` and `$lib_version` on events that don't set them. See [library name and version](#library-name-and-version). |
 | `PostHog-Request-Id` | Yes | A UUID for this request. Send the **same** ID on every retry of the request. PostHog returns it in a response header of the same name. |
 | `PostHog-Attempt` | Yes | The attempt number: `1` for the first try, `2` for the first retry, and so on |
 | `PostHog-Request-Timestamp` | Yes | The time you send this attempt, in RFC 3339 format. Set it again on every retry. PostHog uses it to correct for a wrong client clock. |
@@ -106,9 +106,15 @@ Each event in `batch`:
 | `options` | No | Settings for how PostHog processes this event. See [event options](#event-options). |
 | `properties` | No | The event's properties. Must be a JSON object. |
 
-You don't need to send `$lib` or `$lib_version` – PostHog sets them from the `PostHog-Sdk-Info` header, which wins over any value in `properties`.
-
 The [capture spec in the SDK specs](https://github.com/PostHog/sdk-specs/blob/main/openspec/specs/capture/spec.md) describes the full wire contract that PostHog SDKs follow.
+
+### Library name and version
+
+Each event's `$lib` and `$lib_version` properties name the library that produced it. PostHog stores the values the event sends.
+
+If an event's `$lib` is missing, empty, or not a string, PostHog sets both properties from the `PostHog-Sdk-Info` header. If `$lib` matches the library in the header and `$lib_version` is missing, empty, or not a string, PostHog fills in `$lib_version` from the header. If `$lib` names a different library, PostHog stores both properties as sent, even if `$lib_version` is missing, so set both when you override them.
+
+If the `PostHog-Sdk-Info` value doesn't match `<library>/<version>` or is longer than 200 bytes, PostHog still accepts the request, but events without `$lib` are stored without it.
 
 ### Event UUIDs
 
@@ -131,12 +137,12 @@ Don't use one value for many people or machines, such as a server name or a plac
 
 Options control how PostHog processes an event. They replace the legacy option properties: the `$`-prefixed properties legacy capture reads as settings from `properties`.
 
-| Option | Type | What it does | Legacy option property |
+| Option | Type | What it does | Replaces |
 |---|---|---|---|
 | `process_person_profile` | Boolean | `false` sends an [anonymous event](/docs/data/anonymous-vs-identified-events) that doesn't create or update a person profile | `$process_person_profile` |
 | `cookieless_mode` | Boolean | `true` processes the event with [cookieless tracking](/tutorials/cookieless-tracking) | `$cookieless_mode` |
 | `disable_skew_correction` | Boolean | `true` keeps your `timestamp` as sent instead of [correcting for clock skew](#timestamps-and-clock-skew), unless it's more than 23 hours in the future | `$ignore_sent_at` |
-| `product_tour_id` | String | Links the event to a product tour. PostHog's web SDK sets it on product tour events, so you rarely need it | `$product_tour_id` |
+| `product_tour_id` | String | Links the event to a product tour. You rarely need it | `$product_tour_id` |
 
 - Booleans also accept common forms like `"true"`, `"false"`, `1`, and `0`. `null` means "not set".
 - `product_tour_id` also accepts a whole number. An empty string means "not set".
@@ -145,19 +151,15 @@ Options control how PostHog processes an event. They replace the legacy option p
 
 ### Legacy option properties
 
-Set these settings as options when you call capture v1 directly.
+Set these settings in `options`. The `$process_person_profile` and `$cookieless_mode` legacy option properties still work, but an option overrides its legacy property. Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use options; legacy properties may not be supported in future major versions.
 
-- Capture v1 doesn't read `$ignore_sent_at` or `$product_tour_id` from `properties`. Use the `disable_skew_correction` and `product_tour_id` options instead.
-- During the move to v1, PostHog still reads `$process_person_profile` and `$cookieless_mode` from `properties`. If you set both, the option wins. These legacy option properties are deprecated, and we'll stop reading them in a future release.
-- PostHog SDKs on v1 move legacy option properties into `options` for you.
-
-Your stored events don't change shape: PostHog stores options as the same properties you query today, so your insights and filters keep working.
+PostHog stores each option as its `$`-prefixed property, such as `$process_person_profile`, so your insights and filters keep working.
 
 ## Compression
 
 Compress the body and set `Content-Encoding` to one of `gzip`, `deflate`, `br`, or `zstd`. An uncompressed body needs no `Content-Encoding`. Don't send `Content-Encoding: identity`: it fails with `415`.
 
-Legacy formats such as `gzip-js`, `lz64`, and `base64` are not accepted on v1: a `Content-Encoding` value other than the four above fails with `415`, and a body in one of those formats isn't valid JSON, so the request fails with `400`. The `?compression=` query parameter is ignored.
+Legacy formats such as `gzip-js`, `lz64`, and `base64` aren't accepted on v1: a `Content-Encoding` value other than the four above fails with `415`, and a body in one of those formats isn't valid JSON, so the request fails with `400`. The `?compression=` query parameter is ignored.
 
 [SDKs](/docs/libraries/capture-v1#configuration) support different sets of these formats. Check your SDK's migration guide for which ones it offers.
 
@@ -204,7 +206,7 @@ PostHog SDKs always send these types. If you change an event in a `before_send` 
 | `Content-Encoding` | None, or `gzip`, `deflate`, `br`, or `zstd` (not `identity`) | `415` `unsupported_encoding` |
 | Header values | Visible ASCII characters only | `400` `invalid_header_value` |
 | Field types | See [field types](#field-types) | `400` `request_parsing_error`, nothing stored |
-| `PostHog-Sdk-Info` | `<library>/<version>`, with a `/`, up to 200 bytes | Request accepted, but PostHog doesn't set `$lib` and `$lib_version` from the header. Values in `properties` are kept. |
+| `PostHog-Sdk-Info` | `<library>/<version>`, with a `/`, up to 200 bytes | Request accepted, but PostHog doesn't fill in `$lib` and `$lib_version` from the header. Values in `properties` are kept. See [library name and version](#library-name-and-version). |
 
 ### Event limits
 
@@ -246,7 +248,6 @@ The request body limits above are for PostHog Cloud. On a self-hosted instance, 
 | `415` | Unsupported `Content-Type` or `Content-Encoding` | No |
 | `429` | Too many requests from one source. PostHog's network edge, in front of capture, can send this when a single client sends an unusually high request rate. It's rare. | Yes, after at least the `Retry-After` time if the response has one. Send fewer, larger requests. |
 | `500`, `502`, `503`, `504` | A temporary problem | Yes |
-
 
 Errors from capture use this body. `error` is a stable tag you can match on. A response from a proxy or from PostHog's network edge in front of capture, such as some `404`, `405`, `413`, or `429` responses, may not be JSON, so check the status code first.
 

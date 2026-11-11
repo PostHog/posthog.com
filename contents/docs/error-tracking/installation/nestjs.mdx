@@ -14,13 +14,13 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 Install the [PostHog Node SDK](/docs/libraries/node):
 
 ```bash
-npm install posthog-node@6
+npm install posthog-node@5
 # or
-yarn add posthog-node@6
+yarn add posthog-node@5
 # or
-pnpm add posthog-node@6
+pnpm add posthog-node@5
 # or
-bun add posthog-node@6
+bun add posthog-node@5
 ```
 
 </Step>
@@ -101,9 +101,12 @@ export class AppController {
     try {
       await processPayment(body)
     } catch (error) {
-      this.posthog.captureException(error, 'user_distinct_id', {
-        path: '/checkout',
-        method: 'POST',
+      this.posthog.captureException(error, {
+        distinctId: 'user_distinct_id',
+        properties: {
+          path: '/checkout',
+          method: 'POST',
+        },
       })
       throw error
     }

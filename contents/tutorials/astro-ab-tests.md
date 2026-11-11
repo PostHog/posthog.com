@@ -233,7 +233,7 @@ Server-side rendering is a way to avoid this. This fetches the feature flag befo
 To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
-npm install posthog-node@6
+npm install posthog-node@5
 ```
 
 In the `src` folder, create a `posthog-node.js` file. This is where we set up the code to create the PostHog Node client. You can find both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).

@@ -90,7 +90,7 @@ Next, we add PostHog. PostHog handles our feature flag evaluation and event capt
 To install it, run the following command:
 
 ```bash
-go get github.com/posthog/posthog-go
+go get github.com/posthog/posthog-go/v2
 ```
 
 Next, set up the PostHog client in your `main.go` file. To do this, you need your project token and instance address from [your project settings](https://app.posthog.com/project/settings). You also need to create a personal API key which is done in [your personal settings](https://app.posthog.com/me/settings). Use these values to create a `posthog.Config` to initialize `posthog.NewWithConfig()`.
@@ -104,7 +104,7 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"github.com/posthog/posthog-go"
+	"github.com/posthog/posthog-go/v2"
 )
 
 func main() {

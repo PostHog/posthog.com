@@ -4,6 +4,7 @@ import path from 'path'
 import fs from 'fs'
 import { execFile } from 'child_process'
 import { promisify } from 'util'
+import { setTimeout as delay } from 'timers/promises'
 
 import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTools'
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
@@ -15,6 +16,9 @@ export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
 
 const GATSBY_SOURCE_GIT_CACHE_DIR = path.resolve(__dirname, '../.cache/gatsby-source-git')
 const BRANCH_MANIFEST_FILE = path.join(GATSBY_SOURCE_GIT_CACHE_DIR, '.branch-manifest.json')
+
+// Download the region-independent release artifact. Runtime regions and proxies come from data-asset-host.
+const POSTHOG_BOOTSTRAP_URL = 'https://us-assets.i.posthog.com/static/1/loader-bootstrap.js'
 
 /**
  * Invalidates the gatsby-source-git cache if the configured branch has changed.
@@ -79,7 +83,91 @@ async function sparseCloneGitSource(store): Promise<void> {
     }
 }
 
+async function downloadPostHogBootstrap(): Promise<string> {
+    for (let attempt = 0; ; attempt++) {
+        let retryable = true
+        try {
+            // A Request bypasses the URL-only development cache for this mutable asset.
+            const response = await fetch(
+                new Request(POSTHOG_BOOTSTRAP_URL, {
+                    cache: 'no-store',
+                    signal: AbortSignal.timeout(30000),
+                })
+            )
+            if (!response.ok) {
+                retryable = response.status === 408 || response.status === 429 || response.status >= 500
+                await response.body?.cancel()
+                throw new Error(`Unable to download PostHog bootstrap: HTTP ${response.status}`)
+            }
+            const bootstrap = (await response.text()).replace(/\n\/\/# sourceMappingURL=.*\s*$/, '\n')
+            retryable = false
+            if (!bootstrap.trim()) {
+                throw new Error('Downloaded PostHog bootstrap is empty')
+            }
+            return bootstrap
+        } catch (error) {
+            if (!retryable || attempt === 2) throw error
+            await delay(500 * 2 ** attempt)
+        }
+    }
+}
+
+const LIBRARIES = path.resolve(__dirname, '../contents/docs/libraries')
+
+/** The pages Strapi can write: reference, migration, and one per major version, such as 7.x.x. */
+function isSdkReferencePage(file: string): boolean {
+    return file === 'reference.md' || file === 'migration.md' || file.endsWith('.x.x.md')
+}
+
+/**
+ * Writes each SDK reference that Strapi stores as Markdown to contents/docs/libraries/<sdk>/<version>.md,
+ * so it builds like any other docs page. The SDK repo writes the page, front matter included.
+ * These files are gitignored, and the ones from the last build are removed first.
+ */
+async function writeSdkMarkdownReferences(): Promise<void> {
+    const host = process.env.GATSBY_SQUEAK_API_HOST
+    if (!host) return
+    const query = [
+        'filters[markdown][$notNull]=true',
+        'filters[referenceId][$notNull]=true',
+        'filters[version][$notNull]=true',
+        'fields[0]=referenceId',
+        'fields[1]=version',
+        'fields[2]=markdown',
+        'pagination[pageSize]=100',
+    ].join('&')
+    let data
+    try {
+        const res = await fetch(`${host}/api/sdk-references?${query}`, { signal: AbortSignal.timeout(30000) })
+        // Strapi answers 400 with no data until its sdk-reference type has the `markdown` field.
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        ;({ data } = await res.json())
+    } catch (error) {
+        console.warn('Skipping the Markdown SDK references:', error)
+        return
+    }
+    for (const sdk of fs.existsSync(LIBRARIES) ? fs.readdirSync(LIBRARIES) : []) {
+        const dir = path.join(LIBRARIES, sdk)
+        if (!fs.statSync(dir).isDirectory()) continue
+        for (const file of fs.readdirSync(dir).filter(isSdkReferencePage)) fs.rmSync(path.join(dir, file))
+    }
+    for (const { attributes } of data ?? []) {
+        if (!attributes.referenceId || !attributes.version) continue
+        const sdk = attributes.referenceId.replace(/^posthog-/, '')
+        // A major version, such as 7, is served at 7.x.x. Other pages keep their name.
+        const page = isNaN(Number(attributes.version)) ? attributes.version : `${attributes.version}.x.x`
+        // A page can only be one of the names above, so a row can't replace a hand-written page.
+        // Each name must also be one plain path segment, so a row can't write outside contents/docs/libraries.
+        if (!isSdkReferencePage(`${page}.md`)) continue
+        if ([sdk, page].some((name) => name !== path.basename(name) || name.startsWith('.'))) continue
+        const dir = path.join(LIBRARIES, sdk)
+        fs.mkdirSync(dir, { recursive: true })
+        fs.writeFileSync(path.join(dir, `${page}.md`), attributes.markdown)
+    }
+}
+
 export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, store }) => {
+    await writeSdkMarkdownReferences()
     cacheFetchResponsesInDevelopment()
     // Invalidate gatsby-source-git cache if branch has changed
     invalidateGitCacheIfBranchChanged()
@@ -87,17 +175,12 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache, stor
     // Enrich video data with thumbnails and titles from APIs
     await enrichVideos()
     if (process.env.GATSBY_POSTHOG_API_KEY && process.env.GATSBY_POSTHOG_API_HOST) {
+        const bootstrap = await downloadPostHogBootstrap()
         const assetHost = process.env.GATSBY_POSTHOG_ASSET_HOST
-        // The "1" pins the array.js major version; strict_script_versioning makes the
-        // SDK load its lazy chunks from matching versioned paths on the asset host.
-        const arrayRoute = assetHost
-            ? `${assetHost}/static/1/array.js`
-            : `${process.env.GATSBY_POSTHOG_API_HOST}/static/array.js`
         const assetHostConfig = assetHost
             ? `asset_host: "${assetHost}",\n    strict_script_versioning: true,\n    `
             : ''
-        const posthogScript = `!function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src="${arrayRoute}",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
+        const posthogScript = `posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     api_host: "${process.env.GATSBY_POSTHOG_API_HOST}",
     ui_host: "${process.env.GATSBY_POSTHOG_UI_HOST}",
     defaults: 'latest',
@@ -119,6 +202,10 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     },
     error_tracking: {
         __capturePostHogExceptions: true,
+    },
+    metrics: {
+        flags: true,
+        serviceName: 'posthog.com',
     },
     // Drop exceptions coming from local dev servers so developers' local
     // exceptions (e.g. Gatsby dev-server ChunkLoadErrors on hot recompiles)
@@ -148,6 +235,7 @@ posthog.init("${process.env.GATSBY_POSTHOG_API_KEY}", {
     },
 })`
         const scriptsDir = path.resolve(__dirname, '../static/scripts')
+        fs.writeFileSync(path.join(scriptsDir, 'posthog-bootstrap.js'), bootstrap)
         fs.writeFileSync(path.join(scriptsDir, 'posthog-init.js'), posthogScript)
     }
 

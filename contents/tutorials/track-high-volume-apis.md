@@ -69,7 +69,7 @@ app.get('/big/:id', (req, res) => {
 Next, we install and set up PostHog. 
 
 ```bash
-npm i posthog-node@6
+npm i posthog-node@5
 ```
 
 We set up the PostHog client with our project token, instance address, and personal API key. The first two you can get from your [project settings](https://app.posthog.com/project/settings). The personal API key can be created in your [account settings](https://app.posthog.com/me/settings).

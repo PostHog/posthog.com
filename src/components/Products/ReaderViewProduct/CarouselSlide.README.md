@@ -1,10 +1,10 @@
 # CarouselSlide
 
-Renders the body of a `TabbedCarousel` tab from a structured `CarouselSlide` config. Designed so per-product carousel content (Applications, TopFeatures, etc.) can live alongside product-data hook files like [`session_replay.tsx`](../../../hooks/productData/session_replay.tsx) (typically in a `session_replay/slides.tsx` sibling) instead of being inlined as JSX in templates — making the templates themselves product-agnostic and reusable across products.
+Renders the body of a `TabbedCarousel` tab from a structured `CarouselSlide` config. Designed so per-product carousel content (Applications, KeyFeatures, etc.) can live alongside product-data hook files like [`session_replay.tsx`](../../../hooks/productData/session_replay.tsx) (typically in a `session_replay/slides.tsx` sibling) instead of being inlined as JSX in templates — making the templates themselves product-agnostic and reusable across products.
 
 ## What this component is for
 
-The two product-page templates that use `TabbedCarousel` ([Applications](templates/Applications.tsx) and [TopFeatures](templates/TopFeatures.tsx)) used to define their tab content inline as ~125 lines of JSX. Each new product would have to fork the templates to swap copy, screenshots, and styling.
+The two product-page templates that use `TabbedCarousel` ([Applications](templates/Applications.tsx) and [KeyFeatures](templates/KeyFeatures.tsx)) used to define their tab content inline as ~125 lines of JSX. Each new product would have to fork the templates to swap copy, screenshots, and styling.
 
 `<CarouselSlide>` lifts that content into a structured schema so every per-product detail (heading, description, screenshot, layout) lives in a `CarouselSlide[]` array on the page. The template receives `slides` as a prop, maps the array to `<TabbedCarousel>` tabs, and hands each one to `<CarouselSlide>`.
 
@@ -65,7 +65,7 @@ narrow:                          wide (@2xl/reader-content+):
                                  └────────────────────────────────────┘
 ```
 
-Best for portrait or smaller screenshots where text-wrapping reads well. Optional `<Glow>` halo around the image, opt-in via `image.glow`.
+Best for portrait or smaller screenshots where text-wrapping reads well.
 
 ## Props
 
@@ -76,7 +76,7 @@ Best for portrait or smaller screenshots where text-wrapping reads well. Optiona
 | Prop | Type | Notes |
 |---|---|---|
 | `slide` | `CarouselSlide` | The slide config (see schema below). |
-| `productData` | `any` | Used for resolving `image` string refs (`productData.screenshots[key]`), default glow color (`productData.color`), and the image alt fallback (`productData.name`). |
+| `productData` | `any` | Used for resolving `image` string refs (`productData.screenshots[key]`) and the image alt fallback (`productData.name`). |
 
 ## Schema: `CarouselSlide`
 
@@ -113,7 +113,7 @@ These are passed through to `TabbedCarouselTab` by the template — they're on t
 
 | Field | Type | Required | Notes |
 |---|---|---|---|
-| `image` | `string \| ImageConfig` | no | String shorthand resolves `productData.screenshots[key]`. Object form lets you carry overrides (`maxWidth`, `containerClassName`, `imgClassName`, `glow`, `frameless`). Omit for prose-only slides. See [Image config](#image-config-imageconfig). |
+| `image` | `string \| ImageConfig` | no | String shorthand resolves `productData.screenshots[key]`. Object form lets you carry overrides (`maxWidth`, `containerClassName`, `imgClassName`, `frameless`). Omit for prose-only slides. See [Image config](#image-config-imageconfig). |
 
 ### Overrides
 
@@ -140,7 +140,6 @@ Used when `slide.image` is an object instead of a string shorthand.
 | `framePadding` | `string` | `'p-4'` (framed) / `''` (frameless) | Replaces the default `p-4` frame padding. Accepts any Tailwind spacing class, including responsive container-query variants. Use this to add desktop-only padding (e.g. `'@3xl/reader-content:pt-4 @3xl/reader-content:px-4'`) without needing `!important` overrides. |
 | `containerClassName` | `string` | none | Extra classes on the wrapper div. Appended after frame classes. Use for `pb-0 leading-[0]` (flush-bottom), responsive border (`'@3xl/reader-content:border-t @3xl/reader-content:border-primary'`), or any other one-off styling. |
 | `imgClassName` | `string` | none | Extra classes on the `<img>` element. Appended after the defaults. The `stack` default applies `h-auto border border-secondary rounded-md` (or just `h-auto` when `frameless: true`). Use `'w-full !border-0 !rounded-none'` for a full-width borderless image. |
-| `glow` | `boolean \| GlowColor` | `undefined` | `float` layout only. `true` wraps the image in `<Glow>` using `productData.color`; pass a specific `GlowColor` (`'red'`, `'blue'`, etc.) to override. Ignored in `stack` layout. |
 
 ### Image source: three modes
 
@@ -183,7 +182,6 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
 - **Float image width**: `w-full @2xl:w-[46%] @3xl:w-[48%] @4xl:w-1/2` (percentage of the slide once floated, so the text column doesn't get crushed mid-resize).
 - **Theme-aware image**: when `siteSettings.theme === 'dark'` and `image.srcDark` exists, `srcDark` is used. Otherwise falls through to `src`.
 - **Image alt fallback**: `image.alt` ⟶ `productData.name`.
-- **Float glow color fallback**: `productData.color` (the product's brand color).
 
 ## Common recipes
 
@@ -237,7 +235,7 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
 }
 ```
 
-### Floating image with brand-color glow
+### Floating image
 
 ```tsx
 {
@@ -250,14 +248,8 @@ Rendered as `<li><strong>{title}</strong> {description}</li>`. The bullet list i
     layout: 'float',
     heading: 'Event timeline',
     description: '...',
-    image: { ref: 'overview', glow: true },                    // glow color comes from productData.color
+    image: 'overview',
 }
-```
-
-### Floating image with a specific glow color
-
-```tsx
-image: { ref: 'overview', glow: 'purple' }                     // any GlowColor: yellow|blue|red|green|purple|orange|teal|seagreen|black|white
 ```
 
 ### Centered image (less than full-width, centered)
@@ -301,7 +293,7 @@ image: {
 
 ## Trailing prose pattern
 
-The renderer's body order is `heading → description → bullets`. There's no built-in `afterBullets` slot. If you need prose **after** the bullets (e.g. the TopFeatures Event timeline pattern), put the entire body inside `description` as a Fragment and skip the `bullets` field:
+The renderer's body order is `heading → description → bullets`. There's no built-in `afterBullets` slot. If you need prose **after** the bullets (e.g. the KeyFeatures Event timeline pattern), put the entire body inside `description` as a Fragment and skip the `bullets` field:
 
 ```tsx
 {
@@ -339,7 +331,7 @@ Slide arrays live in the **page file** alongside the rest of the page-owned menu
 // src/pages/session-replay/index.tsx
 import { IconTarget, IconBolt, IconCursorClick, IconSparkles /* ... */ } from '@posthog/icons'
 import type { CarouselSlide, ProductNavItem } from 'components/Products/ReaderViewProduct/types'
-import { Applications, TopFeatures /* ... */ } from 'components/Products/ReaderViewProduct/templates'
+import { Applications, KeyFeatures /* ... */ } from 'components/Products/ReaderViewProduct/templates'
 
 const applications: CarouselSlide[] = [
     {
@@ -351,7 +343,7 @@ const applications: CarouselSlide[] = [
     // ...
 ]
 
-const topFeatures: CarouselSlide[] = [/* ... */]
+const keyFeatures: CarouselSlide[] = [/* ... */]
 
 export const productMenu: ProductNavItem[] = [
     // ... other items ...
@@ -364,12 +356,12 @@ export const productMenu: ProductNavItem[] = [
         props: { slides: applications },
     },
     {
-        slug: 'top-features',
-        name: 'Top features',
+        slug: 'key-features',
+        name: 'Key features',
         group: 'divided',
         icon: <IconSparkles className="size-4" />,
-        component: TopFeatures,
-        props: { slides: topFeatures },
+        component: KeyFeatures,
+        props: { slides: keyFeatures },
     },
 ]
 ```
@@ -382,9 +374,9 @@ If a future product genuinely needs to share identical slide content across mult
 
 ## Adding the same carousel to a new product
 
-1. Define `applications: CarouselSlide[]` and/or `topFeatures: CarouselSlide[]` in the new product's page file.
+1. Define `applications: CarouselSlide[]` and/or `keyFeatures: CarouselSlide[]` in the new product's page file.
 2. If using the `image: 'key'` shorthand or `image: { ref: 'key', ... }`, make sure those keys exist in `productData.screenshots` on the hook file.
-3. Add a menu item to the product's `productMenu` with `component: Applications` (or `TopFeatures`) and `props: { slides: applications }` (or `topFeatures`). The `slug` is just the section anchor — it can be anything.
+3. Add a menu item to the product's `productMenu` with `component: Applications` (or `KeyFeatures`) and `props: { slides: applications }` (or `keyFeatures`). The `slug` is just the section anchor — it can be anything.
 4. No template/component code changes needed.
 
 ## Out of scope

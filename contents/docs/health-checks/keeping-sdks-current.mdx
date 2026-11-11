@@ -195,7 +195,7 @@ npm update @posthog/nuxt
 
 ```bash file=Python
 # Updates the `posthog-python` package:
-pip install --upgrade "posthog>=8,<9"
+pip install --upgrade "posthog<8"
 ```
 
 ```bash file=Ruby
@@ -210,7 +210,7 @@ composer update posthog/posthog-php
 
 ```bash file=Go
 # Updates the `posthog-go` package:
-go get -u github.com/PostHog/posthog-go@latest
+go get -u github.com/posthog/posthog-go/v2@latest
 ```
 
 ```bash file=Elixir
@@ -221,7 +221,7 @@ mix deps.update posthog
 
 ```bash file=.NET
 # Updates the `posthog-dotnet` package:
-dotnet add package PostHog
+dotnet add package PostHog --version 2.21.2
 ```
 
 </MultiLanguage>

@@ -76,6 +76,12 @@ If you're already talking to an editor about this blog post, add them individual
 
 Once it's approved, go ahead and merge to publish!
 
+## After you publish
+
+Reply to the comments people leave on your post. Readers like that they can ask the author a question directly, and a post full of unanswered comments makes it look like nobody reads them.
+
+If a comment is junk and you don't plan to reply, delete it. A deleted comment is better than one that looks like we ghosted.
+
 ## Resources
 
 - <PrivateLink url="https://docs.google.com/document/d/1Jc9p_L79mo3atAikl9LmJY6FXMe2H-hocyTbvxI74PE/edit">Blog post template</PrivateLink> – if you'd rather draft in Google Docs

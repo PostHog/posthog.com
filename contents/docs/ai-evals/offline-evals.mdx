@@ -36,11 +36,11 @@ Install the latest SDK. The examples below require:
 -   **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
 
 ```bash file=Python
-pip install --upgrade "posthog>=8,<9"
+pip install --upgrade "posthog<8"
 ```
 
 ```bash file=TypeScript
-pnpm add @posthog/ai@latest
+pnpm add @posthog/ai@8
 ```
 
 Create a [personal API key](/docs/api#authentication) with access to your project and these scopes:
@@ -313,7 +313,7 @@ for (const row of items) {
 
 `from_dataset_item` / `fromDatasetItem` copies the input, expected output, metadata, and dataset item version into the experiment item. Supply the output from the new run. The dataset's `source_output` is a record of an earlier answer, not the output you're evaluating now.
 
-By default, `snapshot()` selects the latest revision when you call it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript.
+By default, `snapshot()` selects the latest revision when you call it. To repeat an earlier test set, pass `revision=12` in Python or `{ revision: 12 }` as the second argument in TypeScript. The revision must still be available under the [dataset retention policy](/docs/ai-evals/datasets#data-retention).
 
 ## Add more scores
 
@@ -343,7 +343,7 @@ All offline evals SDK operations are also available through the [PostHog MCP ser
 
 ## Data retention
 
-Item and result payloads expire 30 days after PostHog first accepts them.
+PostHog deletes evaluation inputs, actual outputs, expected outputs, and other payload fields 30 days after first accepting them. Scores, statuses, summaries, and trends are kept.
 
 | Data                                                                                    | Retention             |
 | --------------------------------------------------------------------------------------- | --------------------- |
@@ -351,7 +351,7 @@ Item and result payloads expire 30 days after PostHog first accepts them.
 | Result reasoning, error messages, and payload metadata                                  | Deleted after 30 days |
 | Experiment, item, and result records, including scores, statuses, summaries, and trends | Kept                  |
 
-Keep your own copy of payloads you need after 30 days.
+Keep your own copy of inputs, outputs, and other payload fields you need after 30 days. Keeping scores does not prevent the source dataset or revision from expiring. See [dataset retention](/docs/ai-evals/datasets#data-retention).
 
 ## Pricing
 

@@ -58,7 +58,10 @@ Here’s how it works:
   - Dates
   - Attendees
   - Number of attendees
-This will automatically create a Slack channel and Brex budget for all attendees. If the offsite is happening in London or San Francisco, it will also post an announcement in those channels so people can come and say hi 
+
+  This will automatically create a Slack channel and Brex budget for all attendees. If the offsite is happening in London or San Francisco, it will also post an announcement in those channels so people can come and say hi 
+
+- The team lead (or whoever is planning the offsite) must also add the offsite to the <PrivateLink url="https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20">In-person Onboarding Calendar</PrivateLink>. This calendar shows all in-person onboardings and small team offsites, so other teams can see where you will be and join you. Create an event for the offsite dates in your calendar, then invite `c_e37c6147344028becfd174cc1f51f69e9136475e51c1172088c65d0615a736de@group.calendar.google.com` as a guest.
 
 - Kendal will then:
   - Update the team’s Canvas with:
@@ -187,6 +190,8 @@ Below is a rough timeline for planning your next offsite, as well as links to te
   - Transportation to the offsite is usually one of the larger budget line items, so do some research on the cost of flights from team locations before finalizing a location.
   - Consider the cost of transportation to/from the airport, and around town, for when your team arrives at the offsite location.
   - Be mindful that people who take long flights won't appreciate a 2hr journey from the airport to accommodation!
+- [ ] Add the offsite to the In-person Onboarding Calendar
+  - See [small team offsites](#small-team-offsites) for how to do this.
 - [ ] Announce to team
   - You can have fun with this and build excitement by progressively dropping hints and having folks try to guess the location
 - [ ] Create an offsite Slack channel and invite team

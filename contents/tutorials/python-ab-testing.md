@@ -80,7 +80,7 @@ Finally run `flask --app hello run` and go to `http://127.0.0.1:5000` to see you
 Next, we install PostHog [Python SDK](/docs/libraries/python) and the `uuid` package to generate user IDs.
 
 ```bash
-pip install "posthog>=8,<9" uuid
+pip install "posthog<8" uuid
 ```
 
 We import both into our `hello.py` file then use your project token and instance address from [your project settings](https://app.posthog.com/project/settings) to initialize a PostHog client.

@@ -18,12 +18,16 @@ Try it, and report bugs or send patches to [posthog-ruby](https://github.com/Pos
 
 You need Ruby 3.0+ and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Dispatching MCP requests without an `MCP::Server`? See [Custom dispatchers](#custom-dispatchers).
 
+<WizardCommand command="mcp-analytics" />
+
+The [wizard](/blog/envoy-wizard-llm-agent) installs the gem and adds `PostHog::MCP.instrument` for you. To install by hand, follow the steps below.
+
 <Steps>
 
 <Step title="Install the gem" badge="required">
 
 ```ruby
-gem "posthog-ruby"
+gem "posthog-ruby", "~> 3.0"
 ```
 
 `PostHog::MCP.instrument` needs the `mcp` gem at runtime. You already have it, because you built your server with it.
