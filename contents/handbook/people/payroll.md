@@ -84,7 +84,7 @@ For an employment verification letter, request it in Deel if you're employed thr
 
 ## If something looks wrong
 
-Tell us as soon as you notice we will analize and fix it. If you were underpaid, we'll fix it in the next payroll. If you were overpaid, we'll contact you and agree how to recover it.
+Tell us as soon as you notice we will analyze and fix it. If you were underpaid, we'll fix it in the next payroll. If you were overpaid, we'll contact you and agree how to recover it.
 
 ## Questions
 
