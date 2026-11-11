@@ -85,7 +85,9 @@ A poll is charged in one of two ways:
 - **The definitions changed**, or the instance just started: PostHog returns the full definitions. This is charged as 10 requests.
 - **Nothing changed**: the SDK sends the ETag of the definitions it already holds, and PostHog replies `304 Not Modified` with no body. This is charged as 1 request.
 
-Every poll is charged, so your cost follows your poll rate and your instance count. One instance at the default interval makes 2 polls per minute. That is `2 * 60 * 24 * 30 = 86,400` polls per month. Almost all of them return `304 Not Modified`, so one instance costs about 86,400 requests per month. Each definition change adds 10 requests per instance. Older SDK versions without ETag support are charged 10 requests for every poll, so the same instance costs `10 * 2 * 60 * 24 * 30 = 864,000 requests`.
+Your cost follows your poll rate and your instance count. One instance at the default interval makes 2 polls per minute. That is `2 * 60 * 24 * 30 = 86,400` polls per month. Almost all of them return `304 Not Modified`, so one instance costs about 86,400 requests per month. Each definition change adds 10 requests per instance. The Go SDK polls every 5 minutes by default, so one Go instance costs about 8,640 requests per month. Older SDK versions without ETag support are charged 10 requests for every poll, so the same instance costs `10 * 2 * 60 * 24 * 30 = 864,000 requests`.
+
+Definitions that hold only the flags PostHog creates for surveys and product tours are not charged, for a `304` and for a full response.
 
 > **Note:** Before November 5, 2026, a poll that returned `304 Not Modified` was not charged. If your feature flag requests rose on that date, and your own request volume did not change, this is the reason.
 
