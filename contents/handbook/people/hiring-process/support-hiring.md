@@ -22,6 +22,7 @@ Outside of the skills listed in the job description, we are generally looking fo
 *   Clear writing - you explain a complex fix in plain words and do not bury the customer in options.
 *   Good judgment - you know when to keep digging and when to ask for help. You prioritize well across a busy queue.
 *   A genuine wish to do support - you want this type of work, and you want to make it better.
+*   Humility – you take feedback well, say when you don’t know something yet, and learn from anyone on the team.
 
 ### How we evaluate candidates
 
