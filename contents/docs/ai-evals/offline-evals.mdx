@@ -17,7 +17,7 @@ Each run follows four steps:
 3. **Score the output** – Your evaluator calculates a result for each item. For example, it might check whether the agent called the right tool or ask an LLM to judge its answer.
 4. **Upload the results** – Send each score to PostHog, then mark the experiment complete. PostHog displays the items and scores together.
 
-A _scorer_ defines what a result means: its name, value type, and passing rule. It doesn't run your evaluation code. For example, a boolean scorer named **Correct tool** records whether your agent selected the expected tool.
+A _scorer_ defines what a result means: its name, value type, and passing rule. A **reported scorer** records a result from your evaluation code, such as whether your agent selected the expected tool. A [**composite scorer**](#combine-scores-with-a-composite-scorer) calculates a result from other scores for the same item.
 
 ## Run your first experiment
 
@@ -411,7 +411,7 @@ Use the same test cases and scorer versions when you compare an agent change. Ch
 
 Pass rate counts passing results out of results with status `ok`. Errors, skipped checks, and not-applicable checks don't enter that denominator. For example, eight passing results and two evaluator errors produce a 100% pass rate, with only eight scored items.
 
-Read the **Coverage** column beside each scorer summary. Expand it to inspect the result statuses. A missing result means an uploaded item has no result for that scorer; it doesn't count cases that were never uploaded. Compare the received item count with your expected count too.
+Read the **Coverage** column beside each scorer summary. Expand it to inspect the result statuses. A missing reported result means an uploaded item has no result for that scorer; it doesn't count cases that were never uploaded. Composite calculations you haven't requested appear as **Not requested**. Compare the received item count with your expected count too.
 
 Numeric scorers show their mean score. Numeric and categorical scorers only have a pass rate when you configure a passing rule. A missing pass rate doesn't mean zero. Repeated trials each count as an item, so keep trial counts consistent when comparing runs.
 
@@ -504,7 +504,7 @@ Use a separate scorer for each thing you want to measure, such as correctness, r
 
 Create scorers with the SDK or in [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers). Their configuration defines valid values and, optionally, a passing rule. Each result references an immutable scorer version, so changing a scorer's configuration doesn't reinterpret earlier results.
 
-For each additional score, call `upload_result()` / `uploadResult()` with the same `EvaluationItem` and the additional scorer's version ID. Reuse the item object so all scores belong to the same execution. If you set an expected result count, include every item's scores in that count.
+For each additional reported score, call `upload_result()` / `uploadResult()` with the same `EvaluationItem` and the additional scorer's version ID. Reuse the item object so all scores belong to the same execution. If you set an expected result count, include every item's reported and composite results in that count.
 
 Your evaluator can use a code check, an LLM judge, or another evaluation library. Run it in your own environment and upload its result. Use `reasoning` to include an explanation and `application_trace_id` / `applicationTraceId` on the item to link the run to an [AI Observability trace](/docs/ai-observability/traces).
 
@@ -514,9 +514,77 @@ A failed quality check is still a valid score. For example, upload `value=False`
 
 If the evaluator can't produce a score, upload `status="error"` / `status: "error"`, omit `value`, and include an `error_message` / `errorMessage`. Use `skipped` for a check you didn't run, or `not_applicable` when a scorer doesn't apply to an item.
 
+## Combine scores with a composite scorer
+
+A composite scorer applies a formula to reported scores for the same experiment item. Use it when you need one result that combines several checks. You can return a boolean, a number, or category keys.
+
+For the support-agent example, a boolean **Support task passed** scorer can require both **Correct tool** and **Correct arguments** to pass. Three of the six cases pass both checks, so its pass rate is 50%.
+
+### Create the composite
+
+1. Open [**Scorers**](https://app.posthog.com/ai-evals/evaluations/scorers) and click **New scorer**. Name it **Support task passed**.
+2. Set **Calculation** to **Composite formula**, **Output** to **Boolean**, and **Passing value** to **True means pass**.
+3. Under **Add input scorer**, select **Correct tool** and **Correct arguments**. Set their **Formula name** fields to `tool_correct` and `arguments_correct`. Select the exact **Version** of each scorer used by your experiment.
+4. Set **Formula** to `tool_correct and arguments_correct`. Click **Validate formula**, then **Create scorer**.
+5. Click **Copy version ID** on the saved scorer. Use this ID when requesting a calculation.
+
+Each input pins a scorer version. Creating a new version of an input scorer doesn't update the composite. Changing the formula or its input versions creates a new composite version; existing results keep their original values.
+
+### Request a calculation for each item
+
+Creating a composite doesn't calculate results automatically. Request a calculation through the HTTP API or MCP for each item, after uploading its reported scores and before completing the experiment. Both input results must use the exact versions pinned by the composite.
+
+This request uses the environment variables from the quickstart. Replace `<experiment_id>` with `experiment.id`, `<item_id>` with the existing `EvaluationItem`'s `id`, and `<composite_version_id>` with the copied version ID:
+
+```bash
+curl --fail-with-body --request POST \
+    "$POSTHOG_HOST/api/projects/$POSTHOG_PROJECT_ID/ai_observability/offline_experiments/<experiment_id>/upload/" \
+    --header "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    --header "Content-Type: application/json" \
+    --data '{
+        "results": [
+            {
+                "item_id": "<item_id>",
+                "scorer_version_id": "<composite_version_id>",
+                "calculate": true
+            }
+        ]
+    }'
+```
+
+Send only `item_id`, `scorer_version_id`, and `calculate: true` for a composite result. PostHog calculates and stores the value from the saved formula. You can include the reported inputs in the same upload request, or upload them first. When splitting uploads into batches, send the inputs before their composite requests.
+
+For a new run of all six support-agent cases, set `expected_result_count` / `expectedResultCount` to **18**: twelve reported results and six composite results. Keep the same item IDs for all three scores. A completed run can't accept new composite calculations; start a new experiment to evaluate a different composite version.
+
+Open the experiment to see **Support task passed** alongside the two reported scorers. The composite summary covers only the items for which you requested a calculation. Items without a request show **Not requested** and don't lower its pass rate.
+
+### Write formulas
+
+These formulas use the two boolean inputs from the support-agent example:
+
+| Output | Formula | Meaning |
+| --- | --- | --- |
+| Boolean | `tool_correct and arguments_correct` | Pass only when both checks are true. |
+| Numeric | `(number(tool_correct) + number(arguments_correct)) / 2` | Return 0, 0.5, or 1 for each item. |
+| Categorical | `"pass" if tool_correct and arguments_correct else "fail"` | Return a category key configured on the composite. |
+
+Formulas read raw input values. `number(True)` is 1 and `number(False)` is 0, even if an input scorer treats `true` as a failure. For categorical inputs, test category keys with expressions such as `"helpful" in relevance`.
+
+The editor suggests a formula based on the output type and the inputs' passing rules. After you edit it, your formula stays unchanged when you edit inputs. Click **Use default formula** to restore the suggestion.
+
+You can use arithmetic (`+`, `-`, `*`, `/`), comparisons, `and`, `or`, `not`, conditional expressions, and the `number`, `min`, `max`, and `abs` functions. Each formula can reference up to 16 reported scorer versions. Every selected input must appear in the formula. Composite scorers can't use other composites as inputs or combine results across different items.
+
+### Handle missing inputs and calculation errors
+
+If a pinned input result is missing, PostHog rejects the entire upload request. Upload that input for the same item and version, then retry.
+
+If an input has status `error`, `skipped`, or `not_applicable`, the composite inherits that status without a value. If several statuses apply, the order is `error`, then `skipped`, then `not_applicable`.
+
+A calculation error, such as division by zero or a value outside the composite's configured bounds, produces an `error` result with code `composite_formula_error`. Valid reported inputs in the same request are still saved. These errors don't enter the composite's mean or pass rate.
+
 ## Use MCP
 
-All offline evals SDK operations are also available through the [PostHog MCP server](/docs/model-context-protocol). You can ask your agent to set up scorers, manage datasets, and work with your offline experiments.
+All offline evals SDK operations are also available through the [PostHog MCP server](/docs/model-context-protocol). You can ask your agent to set up scorers, manage datasets, and work with your offline experiments. For composites, ask it to pin the input scorer versions and request a calculation for each item with `calculate: true`.
 
 ## Data retention
 
@@ -532,6 +600,8 @@ Keep your own copy of inputs, outputs, and other payload fields you need after 3
 
 ## Pricing
 
-Each scorer result for one experiment item counts as one AI Observability event. For example, 100 items with three scores each count as 300 events.
+Each newly accepted reported scorer result for one experiment item counts as one AI Observability event. This includes reported results with status `error`, `skipped`, or `not_applicable`. Retrying the same result doesn't add another event.
+
+Calculated composite results don't add billed events. For example, the six support-agent cases with two reported scorers and one composite produce 18 results and count as 12 events.
 
 Offline evals share the [AI Observability event pricing and free tier](/pricing) with your other AI Observability events. They don't have a separate free allowance.
