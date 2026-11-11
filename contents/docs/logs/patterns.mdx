@@ -46,16 +46,16 @@ Go to the [Logs page](https://app.posthog.com/logs) and switch to the **Patterns
 
 Each row in the table represents a mined pattern:
 
-| Column        | Description                                                                                                                                                                                      |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Column        | Description                                                                                                                                                                                  |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Level**     | The dominant severity across the pattern's sample (e.g. `error`, `warn`, `info`). When multiple levels appear, the one with the highest count wins; ties break toward the more severe level. |
-| **Pattern**   | The template text. Variable parts are replaced with placeholder tokens (see below).                                                                                                              |
-| **Trend**     | A sparkline showing the pattern's volume over the selected time range.                                                                                                                           |
-| **Count**     | Estimated total occurrences across the full time window. Hover to see the underlying sample count.                                                                                               |
-| **Share**     | The pattern's percentage of total log volume.                                                                                                                                                    |
-| **Errors**    | Estimated error-level occurrences.                                                                                                                                                               |
-| **Services**  | The services that emitted lines matching this pattern.                                                                                                                                           |
-| **Last seen** | Timestamp of the most recent matching line.                                                                                                                                                      |
+| **Pattern**   | The template text. Variable parts are replaced with placeholder tokens (see below).                                                                                                          |
+| **Trend**     | A sparkline showing the pattern's volume over the selected time range.                                                                                                                       |
+| **Count**     | Estimated total occurrences across the full time window. Hover to see the underlying sample count.                                                                                           |
+| **Share**     | The pattern's percentage of total log volume.                                                                                                                                                |
+| **Errors**    | Estimated error-level occurrences.                                                                                                                                                           |
+| **Services**  | The services that emitted lines matching this pattern.                                                                                                                                       |
+| **Last seen** | Timestamp of the most recent matching line.                                                                                                                                                  |
 
 ### Placeholder tokens
 
@@ -70,6 +70,16 @@ The miner replaces variable content with typed placeholders:
 | `<hex>`  | Hexadecimal values          |
 
 Placeholders are highlighted in the table so you can distinguish them from literal text.
+
+### JSON-structured logs
+
+When a log body is a JSON object, pattern mining extracts the human-readable message before clustering. It checks these paths in order: `message`, `msg`, `log`, `msg_`, `_msg`, `content`, `event`, `fields.message`, `error`, and `fields.error`.
+
+This matters for loggers like Rust `tracing` that nest messages under `fields.message`. Without message extraction, every line from one logger shape lands in a single pattern like `<JSON:fields,level,span,target,timestamp>` – which tells you nothing about what the service is actually saying.
+
+PostHog splits these JSON key-set patterns by the message their rows carry. It samples rows from the key-set group, mines their extracted messages into templates, and scales the counts back to the group's total. The result is a set of meaningful patterns instead of one opaque key-set label.
+
+Counts for split patterns are estimates when the sample is smaller than the group. These appear prefixed with `~` in the table, and hovering shows the underlying sample size.
 
 ### Expand a pattern row
 
@@ -121,12 +131,12 @@ Scope the mine to one service when you can. An unscoped mine of a busy project r
 
 Prompts that work well:
 
-| Goal | Ask your agent |
-| --- | --- |
-| Get oriented | `Mine log patterns for the payments service over the last 24 hours` |
+| Goal                       | Ask your agent                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------ |
+| Get oriented               | `Mine log patterns for the payments service over the last 24 hours`                              |
 | Find what a deploy changed | `Compare log patterns from the last hour against the same hour yesterday and show me what's new` |
-| Cut the noise | `Which log patterns are the highest volume? Which ones are safe to stop logging?` |
-| Drill in | `Show me the actual log lines behind the top error pattern` |
+| Cut the noise              | `Which log patterns are the highest volume? Which ones are safe to stop logging?`                |
+| Drill in                   | `Show me the actual log lines behind the top error pattern`                                      |
 
 <CalloutBox icon="IconInfo" title="Diffing beats thresholds" type="fyi">
 
@@ -144,7 +154,7 @@ When your log volume is large, PostHog mines patterns from a representative samp
 - What share of the matching lines fell inside the sampled time slices
 - That counts are estimates extrapolated to the full window
 
-Hover any count to see the raw sample figure behind the estimate. Estimated counts are prefixed with `~` to indicate they're extrapolations.
+Hover any count to see the raw sample figure behind the estimate. Estimated counts are prefixed with `~` to indicate they're extrapolations. This applies both to body-mined pattern counts and to counts from split JSON key-set patterns.
 
 To improve accuracy, narrow your filters. A specific service, a severity level, or a shorter time range reduces the total volume and increases sample coverage.
 
