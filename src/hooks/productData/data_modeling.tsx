@@ -7,6 +7,7 @@ import { getTool } from '../../data/tools'
 // (`billedWith`), without a parent billing product to inherit a rate from.
 export const dataModeling = {
     ...getTool('data_modeling'),
+    name: 'Data Modeling',
     parentIcon: 'dataBlender',
     Icon: IconAsterisk,
     type: 'data_modeling',
