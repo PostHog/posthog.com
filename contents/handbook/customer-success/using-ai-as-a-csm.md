@@ -12,7 +12,7 @@ For how to check AI output before you share it, read [Using AI to analyze custom
 
 Install and set up these tools before you start:
 
-- **[Hogpilot](https://github.com/PostHog/hogpilot):** Account memory for your agent sessions. It works in Claude Code, Codex, Cursor, and PostHog Desktop. It collects the important account facts from your sessions and stores them in PostHog. Built by Jake Sciotto.
+- **<PrivateLink url="https://github.com/PostHog/hogpilot">Hogpilot</PrivateLink>:** Account memory for your agent sessions. It works in Claude Code, Codex, Cursor, and PostHog Desktop. It collects the important account facts from your sessions and stores them in PostHog. Built by Jake Sciotto.
 - **PostHog MCP on US project 2:** Authenticate the PostHog MCP against US cloud. If the session starts in a different project, use `switch-project` to go to project 2.
 - **<PrivateLink url="https://us.posthog.com/project/2/settings/user-personal-integrations">PostHog Connect</PrivateLink>:** A personal connection from US project 2 to your EU login. It lets your agent run MCP tools in EU with the `posthog-connection-call` tool. Built by Tom Owers.
 - **[`querying-production-databases`](https://github.com/PostHog/posthog/blob/master/.agents/skills/querying-production-databases/SKILL.md) skill:** Tells your agent how to query read-only production ClickHouse and Postgres in the US and EU through the MCP. It also gives the PostHog Connect setup steps and the scopes to select.
