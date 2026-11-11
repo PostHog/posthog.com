@@ -238,6 +238,22 @@ if (variant == "variant-name")
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
 
+## Prompt management
+
+Fetch [managed prompts](/docs/prompt-management) at runtime from the core package, with caching and a fallback. `SecretKey` must be a personal API key or a project secret API key with the `llm_prompt:read` scope.
+
+```csharp
+var prompt = await posthog.Prompts.GetAsync("support-system-prompt", new GetPromptOptions
+{
+    Label = "production",
+    Fallback = "You are a helpful assistant.",
+});
+
+var systemPrompt = prompt.Compile(new Dictionary<string, object> { ["company"] = "Acme Corp" });
+```
+
+See [using prompts in .NET](/docs/prompt-management#net) for versions, labels, caching, and linking prompts to traces.
+
 ## AI observability
 
 `PostHog.AI` adds [AI observability](/docs/ai-observability) for .NET applications using OpenAI or Azure OpenAI. It is currently pre-release, so expect breaking changes before a stable release.

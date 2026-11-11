@@ -26,11 +26,19 @@ const schema = { ...defaultSchema, attributes: { ...defaultSchema.attributes, co
 const text = (node): string =>
     !node ? '' : node.type === 'text' ? node.value : (node.children || []).map(text).join('')
 
+// A browser makes each element ID a global when no script has defined it, so a heading with the ID
+// `posthog` replaces `window.posthog` when posthog-js doesn't load, and the site's calls to it crash.
+const RESERVED_IDS = ['posthog']
+
+const safeId = (id: string) => (RESERVED_IDS.includes(id) ? `${id}-heading` : id)
+
 /** Gives each heading the ID that gatsby-remark-autolink-headers gives an MDX page, which the table of contents links to. */
 const headingIds = () => (tree) => {
     const slugger = new GithubSlugger()
     visit(tree, 'element', (node) => {
-        if (HEADINGS.includes(node.tagName)) node.properties.id = slugger.slug(text(node))
+        if (HEADINGS.includes(node.tagName)) node.properties.id = safeId(slugger.slug(text(node)))
+        const href = node.tagName === 'a' && node.properties?.href
+        if (typeof href === 'string' && href.startsWith('#')) node.properties.href = `#${safeId(href.slice(1))}`
     })
 }
 
@@ -83,7 +91,7 @@ export default function SdkMarkdownReference({ data: { sdkMarkdownReference } })
             <ReaderView
                 body={{ type: 'mdx', content: body }}
                 title={title}
-                tableOfContents={tableOfContents}
+                tableOfContents={tableOfContents?.map((entry) => ({ ...entry, url: safeId(entry.url) }))}
                 renderMdx={renderMarkdown}
                 contentMaxWidthClass={contentMaxWidthClass}
                 showSurvey

@@ -9,7 +9,7 @@ availability:
   enterprise: full
 ---
 
-You can restrict who can query synced or self-managed warehouse tables, views, and [materialized views](/docs/data-warehouse/views/materialize). Denied tables and views are removed from the [HogQL](/docs/sql) schema and can't be queried from any surface, including the SQL editor, [PostHog AI](/docs/posthog-ai), and MCP.
+You can restrict who can query warehouse tables, views, and [materialized views](/docs/data-warehouse/views/materialize). Denied tables and views are removed from the [HogQL](/docs/sql) schema and can't be queried from any surface, including the SQL editor, [PostHog AI](/docs/posthog-ai), and MCP.
 
 ## Access levels
 
@@ -22,10 +22,10 @@ Warehouse sources, tables, and views use the same four levels as other resources
 
 ## Restrict all sources, tables, or views
 
-In project [access control settings](https://app.posthog.com/settings/project-access), you can restrict:
+In project [access control settings](https://app.posthog.com/settings/project-access-control), you can restrict:
 
-- **Managed data warehouse sources** – Applies to external sources and the tables they sync. It doesn't apply to self-managed tables.
-- **Data warehouse tables and views** – Applies to all tables and views, including self-managed tables.
+- **Managed data warehouse sources** – Applies to sources and the tables they sync, including the tables of the object storage and file upload sources. It doesn't apply to self-managed tables that you linked before and haven't synced yet.
+- **Data warehouse tables and views** – Applies to all tables and views, including self-managed tables that you linked before.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/warehouse_resource_access_control_light_1f01796d71.png"
