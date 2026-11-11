@@ -89,6 +89,17 @@ Two or three recommendations, each with a saving attached. A longer list reads l
 Quantify roughly, keep the saving separate from the tradeoff, and say what the change actually takes – their engineering capacity decides what happens next. Don't invent numbers, and don't assume the biggest saving is the right one. Customers know their business better than we do.
 
 
+## Check retention before you suggest a downgrade
+
+A cheaper plan can cost a customer their event history. Before you suggest a lower [platform package](/platform-packages) or the Free plan, check what the change does to their [events retention](/docs/data/events-retention).
+
+- An organization that was on a paid plan before November 5, 2026 keeps 7-year retention. It keeps it only while it stays on its plan and platform package, or moves to a higher package. A downgrade ends it.
+- After a downgrade, retention can't be longer than the maximum for the new plan: 1 year on Free, 2 years on pay-as-you-go, 3 years on Boost, and 5 years on Scale.
+- Events older than the new retention period expire, and we can't restore them after we delete them.
+
+Present the retention change as its own tradeoff, next to the saving. Ask how far back they query their data. If they still want the downgrade, tell them to set up a [batch export](/docs/data-pipelines/batch-exports) first, because a batch export can only send events we still have.
+
+
 ## Common cost optimizations
 
 Most of the money sits in a handful of patterns. This isn't the full list, and it isn't the diagnostic guide – [checking the health of a customer's deployment](/handbook/customer-success/health-checks) has a checklist and some queries to run.
