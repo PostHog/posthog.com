@@ -5,7 +5,7 @@ import { RoughAnnotation } from 'components/Code/RoughAnnotation'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import WarehouseWizardHint from 'components/WarehouseWizardHint'
-import GuideCardActions from 'components/ContextWarehouse/GuideCardActions'
+import GuideCardActions from 'components/DataPipelines/GuideCardActions'
 import {
     IconBell,
     IconBug,
@@ -61,14 +61,14 @@ const questionGroups: QuestionGroup[] = [
                 iconColor: 'text-green',
                 question: 'Which features do my paying customers use?',
                 answer: 'Join Stripe MRR to feature-usage events to rank features by the revenue of the people who use them.',
-                href: '/pocket-guides/data-stack/features-drive-revenue',
+                href: '/learn/warehouse/pocket-guide/features-drive-revenue',
             },
             {
                 Icon: IconToggle,
                 iconColor: 'text-purple',
                 question: 'Did this new feature move revenue?',
                 answer: "Split users on a feature flag or experiment, then compare Stripe revenue and retention between the group that saw it and the group that didn't.",
-                href: '/pocket-guides/data-stack/feature-revenue-impact',
+                href: '/learn/warehouse/pocket-guide/feature-revenue-impact',
             },
         ],
     },
@@ -80,14 +80,14 @@ const questionGroups: QuestionGroup[] = [
                 iconColor: 'text-blue',
                 question: 'Which channels bought customers who stuck around?',
                 answer: 'Tie first-touch acquisition source to Stripe revenue, not just signups. The cheapest leads and the customers who still pay in month six may not come from the same channels.',
-                href: '/pocket-guides/data-stack/acquisition-channels-retention',
+                href: '/learn/warehouse/pocket-guide/acquisition-channels-retention',
             },
             {
                 Icon: IconRocket,
                 iconColor: 'text-orange',
                 question: 'When are customers ready to grow to the next tier?',
                 answer: 'Compare product usage against the plan limits in Stripe and flag accounts sitting near or over the line while still on a smaller tier.',
-                href: '/pocket-guides/data-stack/upsell-ready-accounts',
+                href: '/learn/warehouse/pocket-guide/upsell-ready-accounts',
             },
         ],
     },
@@ -99,14 +99,14 @@ const questionGroups: QuestionGroup[] = [
                 iconColor: 'text-red',
                 question: 'What do customers do right before they cancel?',
                 answer: 'Pull cancellation dates from Stripe and look at the 30 days of activity before each one. Find out what the warning signs were so you can act on them next time.',
-                href: '/pocket-guides/data-stack/pre-cancellation-behavior',
+                href: '/learn/warehouse/pocket-guide/pre-cancellation-behavior',
             },
             {
                 Icon: IconHeart,
                 iconColor: 'text-salmon',
                 question: 'Are my biggest customers happy?',
                 answer: "Put each account's revenue next to its engagement and find the high-paying, low-usage accounts so you can contact them before their contract is up for renewal.",
-                href: '/pocket-guides/data-stack/value-vs-engagement',
+                href: '/learn/warehouse/pocket-guide/value-vs-engagement',
             },
         ],
     },
@@ -265,7 +265,7 @@ export default function StripeSource(): JSX.Element {
                 image="images/og/cdp.jpg"
             />
             <Editor
-                slug="/context-warehouse/sources/stripe"
+                slug="/data-pipelines/sources/stripe"
                 maxWidth="100%"
                 hasPadding={false}
                 disableFormatting
@@ -300,7 +300,7 @@ export default function StripeSource(): JSX.Element {
                             <div className="mt-6">
                                 <OSButton
                                     asLink
-                                    to="/docs/data-warehouse/sources"
+                                    to="/docs/data-pipelines/sources"
                                     state={{ newWindow: true }}
                                     variant="primary"
                                     size="xl"
@@ -411,7 +411,7 @@ export default function StripeSource(): JSX.Element {
                         <div className="mt-6">
                             <OSButton
                                 asLink
-                                to="/docs/cdp/sources/stripe"
+                                to="/docs/data-pipelines/sources/stripe"
                                 state={{ newWindow: true }}
                                 variant="secondary"
                                 size="md"
@@ -441,7 +441,7 @@ export default function StripeSource(): JSX.Element {
                                 <div className="mt-5 flex flex-col items-start gap-3 @xs:flex-row @xs:items-center">
                                     <OSButton
                                         asLink
-                                        to="/docs/data-warehouse/sources"
+                                        to="/docs/data-pipelines/sources"
                                         state={{ newWindow: true }}
                                         variant="primary"
                                         size="xl"
