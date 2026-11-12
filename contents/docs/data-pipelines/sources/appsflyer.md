@@ -9,14 +9,14 @@ availability:
 sourceId: AppsFlyer
 ---
 
-Enter your AppsFlyer credentials to pull aggregate mobile attribution reports into the PostHog data warehouse. Each source connects to a single AppsFlyer app.
+Enter your AppsFlyer credentials to pull aggregate mobile attribution reports into the PostHog Data Warehouse. Each source connects to a single AppsFlyer app.
 
 ## Adding a data source
 
 1. Go to the [sources tab](https://app.posthog.com/data-management/sources) of the data pipeline section in PostHog.
 2. Click **+ New source** and then click **Link** next to AppsFlyer.
 3. In AppsFlyer, go to your **account menu** > **Security center** > **AppsFlyer API tokens** and copy your **API token (V2)**. Your account must have an active Pull API subscription.
-4. In AppsFlyer, open **My apps** and copy the **App ID** shown under the app name — for example, `id123456789` for iOS or `com.example.app` for Android.
+4. In AppsFlyer, open **My apps** and copy the **App ID** shown under the app name, for example, `id123456789` for iOS or `com.example.app` for Android.
 5. Back in PostHog, enter the **App ID** and **API token (V2)**, then click **Next**.
 6. Select the tables you want to sync, set the sync method and frequency, then click **Import**.
 
@@ -34,9 +34,21 @@ All tables sync incrementally on the `date` field.
 
 ## Sync behavior
 
-- **Incremental sync with lookback** - AppsFlyer doesn't finalize data until approximately 48 hours after the UTC day. Each incremental sync re-fetches the trailing two days to capture late-arriving data. Duplicates are merged on the dimension key.
-- **Initial sync** - The first sync can pull up to approximately 1,000 days of historical data, the maximum window supported by the AppsFlyer aggregate Pull API.
-- **One app per source** - Each source connects to a single AppsFlyer app. To import data from multiple apps, create a separate source for each one.
+- **Incremental sync with lookback**: AppsFlyer doesn't finalize data until approximately 48 hours after the UTC day. Each incremental sync re-fetches the trailing two days to capture late-arriving data. Duplicates are merged on the dimension key.
+- **Initial sync**: The first sync can pull up to approximately 1,000 days of historical data, the maximum window supported by the AppsFlyer aggregate Pull API.
+- **One app per source**: Each source connects to a single AppsFlyer app. To import data from multiple apps, create a separate source for each one.
+
+## Troubleshooting
+
+### Daily report API quota exhausted
+
+If setup reports that your AppsFlyer account has used up its daily report API quota, try connecting again after the quota resets. This message indicates a quota limit, so changing valid credentials won't resolve it.
+
+AppsFlyer can return HTTP `403` or `429` with `limit reached` in the response body when the quota is exhausted. PostHog retries sync requests that receive these responses. If the sync still fails, retry it after the quota resets.
+
+### Invalid credentials or app access
+
+For other authentication or access errors, check the API token (V2), your access to the app, the App ID from **My apps**, and whether your AppsFlyer subscription includes the aggregate Pull API.
 
 ## Configuration
 
