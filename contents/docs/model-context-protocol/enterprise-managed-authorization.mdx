@@ -52,6 +52,12 @@ PostHog handles both kinds the same way. It trusts the issuer URL that you enter
 
 You can leave **JWKS URL** and **Allowed client IDs** empty. PostHog finds the signing keys from the issuer URL. The [ID-JAG reference](/docs/settings/authentication/id-jag#2-configure-the-trusted-idp) explains each field.
 
+### Automatic setup
+
+A client that issues its own ID-JAGs can register its issuer URL for you, so you don't paste it. The client sends you to a PostHog consent screen, where an organization admin approves it. PostHog then creates a read-only XAA configuration for all of the organization's verified domains, tagged with the client's name. To stop trusting the client, delete that configuration.
+
+Only clients that PostHog approves can request this, with the `ema_issuer:manage` scope. Claude is the first. See [Claude automatic setup](/docs/model-context-protocol/claude-managed-authorization#automatic-setup).
+
 ## Set up your MCP client
 
 Your MCP client or identity provider asks for some of these values:

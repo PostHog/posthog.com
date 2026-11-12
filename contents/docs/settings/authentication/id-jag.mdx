@@ -86,6 +86,8 @@ Under **Domains**, choose **All domains** to cover every verified domain in your
 
 Use one XAA configuration per IdP and domain. If two configurations cover the same IdP and domain, PostHog rejects the request.
 
+Some MCP clients, such as Claude, can create the configuration for you after an admin approves them. PostHog tags that configuration with the client's name, for example **Set up from Claude**, and shows it read-only. ID-JAGs for it must carry your organization ID in `aud_tenant`, which the client sets. See [automatic setup](/docs/model-context-protocol/enterprise-managed-authorization#automatic-setup).
+
 ### 3. Register the client
 
 The client app needs a client ID that PostHog recognizes, and your IdP must issue ID-JAGs for that client ID.
@@ -138,6 +140,7 @@ For every error code, see [what all the error codes mean](#what-do-all-the-error
 | `jti` | A unique ID. Each ID-JAG works once. |
 | `scope` | Optional. Space-separated PostHog scopes. If the client sends no `scope`, the token gets all of them. PostHog ignores scopes it doesn't know. |
 | `tenant` | Optional. Set it when your IdP issues ID-JAGs for several tenants under one issuer. |
+| `aud_tenant` | Required only for a configuration that a client created with [automatic setup](/docs/model-context-protocol/enterprise-managed-authorization#automatic-setup). It must be your PostHog organization ID. PostHog ignores it for other configurations. |
 
 PostHog fetches your IdP's keys from the JWKS URL, or from OIDC discovery at `{issuer}/.well-known/openid-configuration`. It rejects issuer and JWKS URLs that point at internal, loopback, or cloud metadata addresses.
 
