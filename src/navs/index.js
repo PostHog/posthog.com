@@ -2910,7 +2910,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-js',
+                                    url: '/docs/libraries/js/reference',
                                 },
                             ],
                         },
@@ -2997,7 +2997,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-node',
+                                    url: '/docs/libraries/node/reference',
                                 },
                             ],
                         },
@@ -3015,7 +3015,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-python',
+                                    url: '/docs/libraries/python/reference',
                                 },
                             ],
                         },
@@ -3041,7 +3041,7 @@ export const docsMenu = {
                                 },
                                 {
                                     name: 'Reference',
-                                    url: '/docs/references/posthog-react-native',
+                                    url: '/docs/libraries/react-native/reference',
                                 },
                             ],
                         },
@@ -3068,6 +3068,155 @@ export const docsMenu = {
                         {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
+                        },
+                    ],
+                },
+                {
+                    name: 'SDK reference',
+                    url: '/docs/libraries/android/reference',
+                    icon: 'IconCode',
+                    children: [
+                        {
+                            name: 'Android',
+                            url: '/docs/libraries/android/reference',
+                            children: [
+                                {
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/android/3.x.x',
+                                },
+                                {
+                                    name: '4.x.x (experimental)',
+                                    url: '/docs/libraries/android/4.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/android/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Flutter',
+                            url: '/docs/libraries/flutter/reference',
+                            children: [
+                                {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/flutter/5.x.x',
+                                },
+                                {
+                                    name: '6.x.x (experimental)',
+                                    url: '/docs/libraries/flutter/6.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/flutter/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Go',
+                            url: '/docs/libraries/go/reference',
+                            children: [
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/go/1.x.x',
+                                },
+                                {
+                                    name: '2.x.x (experimental)',
+                                    url: '/docs/libraries/go/2.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/go/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'iOS',
+                            url: '/docs/libraries/ios/reference',
+                            children: [
+                                {
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/ios/3.x.x',
+                                },
+                                {
+                                    name: '4.x.x (experimental)',
+                                    url: '/docs/libraries/ios/4.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/ios/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'JavaScript Web',
+                            url: '/docs/libraries/js/reference',
+                            children: [
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/js/1.x.x',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/libraries/node/reference',
+                            children: [
+                                {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/node/5.x.x',
+                                },
+                                {
+                                    name: '6.x.x (experimental)',
+                                    url: '/docs/libraries/node/6.x.x',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/libraries/python/reference',
+                            children: [
+                                {
+                                    name: '7.x.x',
+                                    url: '/docs/libraries/python/7.x.x',
+                                },
+                                {
+                                    name: '8.x.x (experimental)',
+                                    url: '/docs/libraries/python/8.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/python/migration',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'React Native',
+                            url: '/docs/libraries/react-native/reference',
+                            children: [
+                                {
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/react-native/4.x.x',
+                                },
+                            ],
+                        },
+                        {
+                            name: 'Rust',
+                            url: '/docs/libraries/rust/reference',
+                            children: [
+                                {
+                                    name: '0.x.x',
+                                    url: '/docs/libraries/rust/0.x.x',
+                                },
+                                {
+                                    name: '1.x.x (experimental)',
+                                    url: '/docs/libraries/rust/1.x.x',
+                                },
+                                {
+                                    name: 'Migration guides',
+                                    url: '/docs/libraries/rust/migration',
+                                },
+                            ],
                         },
                     ],
                 },
@@ -6323,15 +6472,15 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'JavaScript web SDK',
-                            url: '/docs/references/posthog-js?filter=error-tracking',
+                            url: '/docs/libraries/js/reference#capture-exception',
                         },
                         {
                             name: 'Node.js SDK',
-                            url: '/docs/references/posthog-node?filter=error-tracking',
+                            url: '/docs/libraries/node/reference#capture-exception',
                         },
                         {
                             name: 'Python SDK',
-                            url: '/docs/references/posthog-python?filter=error-tracking',
+                            url: '/docs/libraries/python/reference#capture-exception',
                         },
                         {
                             name: 'Error tracking API',

@@ -206,7 +206,8 @@ export const Calculator = ({ hideHeader = false, id = 'calculator' }: Calculator
                                 for startups and non-profits
                             </SidebarListItem>
                             <SidebarListItem>
-                                We're transparent about <Link href="/docs/billing/what-you-pay-for-per-event" className={sidebarLinkClasses}>
+                                We're transparent about{' '}
+                                <Link href="/docs/billing/what-you-pay-for-per-event" className={sidebarLinkClasses}>
                                     what you actually pay for
                                 </Link>{' '}
                                 so you can decide whether to build or buy each part of our stack.

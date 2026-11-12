@@ -90,10 +90,7 @@ const faqs = [
             <p>
                 Collecting the event, processing it, storing it, and every query you run on it in PostHog. It also pays
                 for the engineers who keep that pipeline running, so your data arrives complete and correct.{' '}
-                <Link to="/docs/billing/what-you-pay-for-per-event">
-                    Our docs
-                </Link>{' '}
-                explains each step.
+                <Link to="/docs/billing/what-you-pay-for-per-event">Our docs</Link> explains each step.
             </p>
         ),
     },
