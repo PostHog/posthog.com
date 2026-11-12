@@ -35,7 +35,9 @@ You'll be asked for:
 
 <SyncModes />
 
-All Smartlead tables are full refresh. Each sync replaces the contents of the table.
+Most Smartlead tables are full refresh. Each sync replaces the contents of the table.
+
+The `day_wise_overall_stats` table syncs incrementally on `date` (UTC). Each run starts again from the last synced day, so the counts for that day are updated.
 
 ## Configuration
 
