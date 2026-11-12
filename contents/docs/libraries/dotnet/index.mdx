@@ -97,9 +97,19 @@ posthog.CaptureException(
 );
 ```
 
-For the full setup guide, see the [.NET error tracking installation docs](/docs/error-tracking/installation/dotnet).
+The SDK can also capture exceptions automatically. Both options are off by default:
 
-Automatic exception capture is not available in the .NET SDK yet.
+- `CaptureExceptions` on the ASP.NET Core request context middleware captures exceptions from your request pipeline.
+- `CaptureUnhandledExceptions` on `PostHogOptions` captures unhandled runtime exceptions and unobserved task exceptions. It requires `PostHog` version 2.23.0 or later.
+
+```csharp
+app.UsePostHogRequestContext(options =>
+{
+    options.CaptureExceptions = true;
+});
+```
+
+For the full setup guide, see the [.NET error tracking installation docs](/docs/error-tracking/installation/dotnet).
 
 ## Logs
 
@@ -237,6 +247,22 @@ if (variant == "variant-name")
 ```
 
 It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
+
+## Prompt management
+
+Fetch [managed prompts](/docs/prompt-management) at runtime from the core package, with caching and a fallback. `SecretKey` must be a personal API key or a project secret API key with the `llm_prompt:read` scope.
+
+```csharp
+var prompt = await posthog.Prompts.GetAsync("support-system-prompt", new GetPromptOptions
+{
+    Label = "production",
+    Fallback = "You are a helpful assistant.",
+});
+
+var systemPrompt = prompt.Compile(new Dictionary<string, object> { ["company"] = "Acme Corp" });
+```
+
+See [using prompts in .NET](/docs/prompt-management#net) for versions, labels, caching, and linking prompts to traces.
 
 ## AI observability
 

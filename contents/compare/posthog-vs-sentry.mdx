@@ -57,7 +57,7 @@ Sentry is much more focused and opinionated in how you use it. The tools are tai
 
 PostHog offers more flexibility and breadth. It's built for developers but also used by marketing, growth, and data teams. Startups and scaleups use PostHog for tracking [retention](/docs/product-analytics/retention), running targeted [A/B tests](/experiments), [booking user interviews](/tutorials/feedback-interviews-site-apps), and more.
 
-Because all of that is one dataset, you can [query it with SQL](/docs/sql). Data moves the other way too: [batch exports](/docs/cdp/batch-exports) and [CDP destinations](/docs/cdp/destinations) push PostHog data to your warehouse or other tools. Sentry's equivalent, data forwarding, covers error events only and is a Business-plan feature.
+Because all of that is one dataset, you can [query it with SQL](/docs/sql). Data moves the other way too: [batch exports](/docs/data-pipelines/batch-exports) and [CDP destinations](/docs/data-pipelines/destinations) push PostHog data to your warehouse or other tools. Sentry's equivalent, data forwarding, covers error events only and is a Business-plan feature.
 
 <WizardCTA />
 
@@ -289,7 +289,7 @@ Both PostHog and Sentry work with other tools, but PostHog can act more as a sin
 Both companies are building on the idea that an agent, not a person, should do the first pass on an error.
  
 - **Sentry** has Seer, a paid add-on ($40 per active contributor per month, not available on the free plan) that scans issues, finds root causes, and can open fix PRs, and a hosted MCP server that lets Claude, Cursor, and other clients query your Sentry data.
-- **PostHog** has [PostHog AI](/ai) for asking questions and generating fixes, [Scouts](/blog/what-is-a-scout) that watch your product data and send reports to an [Inbox](/docs/self-driving/inbox) where agents pick them up and open PRs (in beta, three PRs a month free), a free [MCP server](/mcp) with a read-only mode, and a [Slack app](/slack) you can tag in a thread to ask a question or ship a fix.
+- **PostHog** has [PostHog AI](/ai) for asking questions and generating fixes, [Scouts](/blog/what-is-a-scout) that watch your product data and send reports to an [Inbox](/docs/self-driving/inbox) where agents pick them up and open PRs, a free [MCP server](/mcp) with a read-only mode, and a [Slack app](/slack) you can tag in a thread to ask a question or ship a fix.
 
 The difference is scope. Seer works from the error outward. PostHog's agents work from everything the product knows about the user, the session, the flags they saw, and the error, which is the same context argument that runs through this whole comparison.
 
