@@ -86,8 +86,8 @@ export const freeTierProducts: FreeTierProduct[] = [
     {
         name: 'Data modeling',
         description: 'Billed with data warehouse. Free for now.',
-        icon: Icons.IconAsterisk,
-        iconColor: 'text-red',
+        icon: Icons.IconStack,
+        iconColor: 'text-lilac',
     },
     {
         name: 'Endpoints',

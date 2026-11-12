@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconAsterisk } from '@posthog/icons'
+import { IconStack } from '@posthog/icons'
 import { getTool } from '../../data/tools'
 
 // Data modeling has no product page. It will be billed as data warehouse, but that rate
@@ -9,10 +9,10 @@ export const dataModeling = {
     ...getTool('data_modeling'),
     name: 'Data Modeling',
     parentIcon: 'dataBlender',
-    Icon: IconAsterisk,
+    Icon: IconStack,
     type: 'data_modeling',
-    color: 'red',
-    colorSecondary: 'red',
+    color: 'lilac',
+    colorSecondary: 'lilac',
     seo: {
         title: 'Transform, enrich, and model your data',
         description: 'Get your data in the exact shape you need it.',
