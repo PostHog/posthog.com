@@ -11,8 +11,6 @@ sourceId: Missive
 
 The Missive connector automatically pulls your Missive shared inbox data – conversations, messages, comments, contacts, tasks, and more – into the PostHog data warehouse.
 
-> **Note:** This source is currently in **beta**.
-
 ## Prerequisites
 
 Missive API access requires a **Missive Productive plan**. Organizations on other plans cannot create API tokens.
