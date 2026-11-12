@@ -771,7 +771,7 @@ The experimental iOS session replay option `sessionReplayConfig.screenshotModeBa
 
 Session replay records only masked screenshots on iOS and Android, because `posthog-ios` 4.0 and `posthog-android` 4.0 remove wireframe capture. The plugin already forced screenshot mode, so your recordings don't change. If native code in your app sets `screenshotMode` (iOS) or `screenshot` (Android), remove it, because it no longer compiles.
 
-Masking also changes on iOS with `posthog-ios` 4.0. Secure text inputs stay masked inside a `ph-no-mask` view. If a masked view sits inside a view backed by its own `CALayer` subclass, such as a `lottie-react-native` animation, the SDK masks the whole window for that frame.
+Masking also changes on iOS with `posthog-ios` 4.0. Secure text inputs stay masked inside a `ph-no-mask` view. If a masked view sits inside a view backed by its own `CALayer` subclass, such as a `lottie-react-native` animation, the SDK masks the whole window for that frame. Fast scrolling on such a screen may also drop replay frames.
 
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
