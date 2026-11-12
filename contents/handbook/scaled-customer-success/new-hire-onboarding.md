@@ -41,7 +41,7 @@ This week is about getting set up and learning how we talk about PostHog. You'll
 ## Week 2
 
 - Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings. Check out our <PrivateLink url="https://app.buildbetter.app/folders/14521">Onboarding folder</PrivateLink>, where you can also find sessions on productivity and workflows.
-- Explore Customer Analytics and [Metabase](/handbook/scaled-customer-success/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
+- Explore Customer Analytics and [Metabase](/handbook/onboarding/metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
 - Try running through the [onboarding exercise](/handbook/customer-success/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Magda. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.

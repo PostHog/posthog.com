@@ -1897,7 +1897,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Metabase account analysis',
-                        url: '/handbook/scaled-customer-success/metabase-account-analysis',
+                        url: '/handbook/onboarding/metabase-account-analysis',
                     },
                     {
                         name: 'Creating sandboxes',
@@ -1943,7 +1943,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Chrome extension billing case study',
-                        url: '/handbook/scaled-customer-success/chrome-extension-billing-case-study-wildfire',
+                        url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
                     },
                     {
                         name: 'Data Stack enablement',

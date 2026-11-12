@@ -128,7 +128,7 @@ The default `localStorage+cookie`, and `cookie` persistence methods are problema
 
 Since PostHog instances in different contexts can't share the same storage for persistence, you should manage `distinct_id` values on your own to maintain continuity across contexts. See below for details.
 
-> **Note**: Improper distinct ID management in extensions can lead to billing issues due to repeated `identify()` calls and feature flag requests. See our [Chrome extension billing case study](/handbook/scaled-customer-success/chrome-extension-billing-case-study-wildfire) for details on how to avoid these problems.
+> **Note**: Improper distinct ID management in extensions can lead to billing issues due to repeated `identify()` calls and feature flag requests. See our [Chrome extension billing case study](/handbook/onboarding/chrome-extension-billing-case-study-wildfire) for details on how to avoid these problems.
 
 ## PostHog usage across extension contexts
 

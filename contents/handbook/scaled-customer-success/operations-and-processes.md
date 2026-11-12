@@ -99,7 +99,7 @@ The live email templates are in the Workflows <PrivateLink url="https://us.posth
 
 #### Account analysis for outreach and meetings
 
--   Take a look at the [Metabase primer](/handbook/scaled-customer-success/metabase-account-analysis) and follow the tips included there.
+-   Take a look at the [Metabase primer](/handbook/onboarding/metabase-account-analysis) and follow the tips included there.
 -   Check and get familiar with the [Account health check](https://posthog.com/handbook/customer-success/health-tracking) and the [Onboarding conversations](/handbook/scaled-customer-success/conversations-playbook) pages.
 -   Use our docs, and link to relevant information.
 -   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.

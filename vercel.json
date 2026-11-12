@@ -6870,8 +6870,18 @@
             "statusCode": 301
         },
         {
-            "source": "/handbook/onboarding/:path*",
-            "destination": "/handbook/scaled-customer-success/:path*",
+            "source": "/handbook/onboarding/onboarding-program:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/onboarding-program:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/sales-handover:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/sales-handover:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/new-hire-onboarding:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/new-hire-onboarding:ext?",
             "statusCode": 301
         },
         {
