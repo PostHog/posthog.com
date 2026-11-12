@@ -6845,6 +6845,36 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/onboarding/onboarding-team:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/scaled-customer-success-team:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-tracking:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/operations-and-processes:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-data:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/data:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-conversations-playbook:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/conversations-playbook:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-skills:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/:path*",
+            "destination": "/handbook/scaled-customer-success/:path*",
+            "statusCode": 301
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
             "destination": "/warehouse"
         },

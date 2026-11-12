@@ -1660,7 +1660,8 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Instrumenting PostHog in the development process',
-                        url: '/handbook/customer-success/shareable-guides/instrumenting-posthog-in-the-development-process',
+                        url:
+                            '/handbook/customer-success/shareable-guides/instrumenting-posthog-in-the-development-process',
                     },
                     {
                         name: 'LLM cost optimization',
@@ -1673,40 +1674,40 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Onboarding',
+                name: 'Scaled Customer Success',
                 url: '',
                 children: [
                     {
-                        name: 'Onboarding team',
-                        url: '/handbook/onboarding/onboarding-team',
+                        name: 'Overview',
+                        url: '/handbook/scaled-customer-success/scaled-customer-success-team',
+                    },
+                    {
+                        name: 'Operations and processes',
+                        url: '/handbook/scaled-customer-success/operations-and-processes',
                     },
                     {
                         name: 'Onboarding program',
-                        url: '/handbook/onboarding/onboarding-program',
+                        url: '/handbook/scaled-customer-success/onboarding-program',
                     },
                     {
-                        name: 'Onboarding process',
-                        url: '/handbook/onboarding/onboarding-tracking',
+                        name: 'Data',
+                        url: '/handbook/scaled-customer-success/data',
                     },
                     {
-                        name: 'Onboarding data',
-                        url: '/handbook/onboarding/onboarding-data',
+                        name: 'Conversations playbook',
+                        url: '/handbook/scaled-customer-success/conversations-playbook',
                     },
                     {
-                        name: 'Onboarding conversations playbook',
-                        url: '/handbook/onboarding/onboarding-conversations-playbook',
-                    },
-                    {
-                        name: 'Onboarding skills',
-                        url: '/handbook/onboarding/onboarding-skills',
+                        name: 'Skills',
+                        url: '/handbook/scaled-customer-success/skills',
                     },
                     {
                         name: 'Sales handover',
-                        url: '/handbook/onboarding/sales-handover',
+                        url: '/handbook/scaled-customer-success/sales-handover',
                     },
                     {
                         name: 'New hire onboarding',
-                        url: '/handbook/onboarding/new-hire-onboarding',
+                        url: '/handbook/scaled-customer-success/new-hire-onboarding',
                     },
                 ],
             },
@@ -1896,7 +1897,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Metabase account analysis',
-                        url: '/handbook/onboarding/metabase-account-analysis',
+                        url: '/handbook/scaled-customer-success/metabase-account-analysis',
                     },
                     {
                         name: 'Creating sandboxes',
@@ -1942,7 +1943,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Chrome extension billing case study',
-                        url: '/handbook/onboarding/chrome-extension-billing-case-study-wildfire',
+                        url: '/handbook/scaled-customer-success/chrome-extension-billing-case-study-wildfire',
                     },
                     {
                         name: 'Data Stack enablement',

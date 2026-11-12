@@ -73,7 +73,7 @@ Large account requests
 
 Before doing a refund, review customer's usage. Some useful sources:
 
--   Find the customer's Metabase usage dashboard (the [Metabase account analysis playbook](/handbook/onboarding/metabase-account-analysis) shows how). The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
+-   Find the customer's Metabase usage dashboard (the [Metabase account analysis playbook](/handbook/scaled-customer-success/metabase-account-analysis) shows how). The 'Event counts by type last X days' insight is particularly useful here - you can change the lookback period to see a longer time range. 
 -   <PrivateLink url="https://us.posthog.com/project/2/dashboard/259114">This dashboard</PrivateLink> for an overview with usage reports and invoice history.
 -   <PrivateLink url="https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&amp;project_id=">This dashboard</PrivateLink> to help identify issues for customers with many projects
 -   You can also make a copy of <PrivateLink url="https://us.posthog.com/project/2/insights/8nLWTLHu">this PostHog insight</PrivateLink> and use organization id to review account usage. Note that the org usage report can run 2-3 times per day, so numbers may be duplicated/inflated.

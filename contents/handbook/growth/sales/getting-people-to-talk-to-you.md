@@ -41,7 +41,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 - If you're reaching out to a non-English speaking team and getting no response, try writing your message in their language. Use Claude to draft it, or ideally – get a native speaker on your team to help you craft it.
 - Guest-list your customer to a cool event – a PostHog event, industry meetup, hackathon, etc. – where they can meet potential customers, partners, or peers in their space. You're putting them in front of people who can help their business – and that's a reason to talk to you.
 
-> Before you do any of this stuff, [get to know](/handbook/onboarding/onboarding-team#account-analysis) your customer as well as you possibly can. Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
+> Before you do any of this stuff, [get to know](/handbook/scaled-customer-success/scaled-customer-success-team#account-analysis) your customer as well as you possibly can. Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
 Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. Just adding a bunch people to the Slack channel is also a legit tactic - forgiveness, not permission. 
 

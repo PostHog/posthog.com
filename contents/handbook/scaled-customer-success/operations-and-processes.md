@@ -1,5 +1,5 @@
 ---
-title: Onboarding process
+title: Operations and processes
 sidebar: Handbook
 showTitle: true
 ---
@@ -50,7 +50,7 @@ For day-to-day operations, these are the statuses we use to track users in the *
 - `1. New Account` - Where new customers land when they become eligible. `Onboarding:: Enter queue` sets it once a day and adds the `onboarding lead` tag. During the outreach, we audit the account and share observations on current usage and optimization tips. We point out any configuration issues affecting their bill or ability to use the product properly. Our main objective is oriented towards trimming unnecessary spending, and communicating our position that [we are the cheapest for every product](https://posthog.com/why). This step can also involve refunding/adjusting bills for misconfigurations, per [our policy](https://posthog.com/handbook/growth/sales/refunds).
 - `2. Onboarding Initiated` - Assigned as soon as the first outreach goes out, whether the email sequence sent it or you did from your own inbox.
 - `3. Onboarding Completed` - The onboarding program has been completed, by the email sequence, by the daily close-out, or by hand.
-- `Sales Handoff` - Assigned to customers that we [hand over to sales](/handbook/onboarding/sales-handover). This can happen at any stage throughout the process.
+- `Sales Handoff` - Assigned to customers that we [hand over to sales](/handbook/scaled-customer-success/sales-handover). This can happen at any stage throughout the process.
 - `Purchased Onboarding Call` - Assigned when someone buys our consultation via the merch store. The status is applied automatically via <PrivateLink url="https://us.posthog.com/project/2/workflows/019ae005-7196-0000-2099-ab41737ab9f6/workflow">this Workflow</PrivateLink>.
 - `Onboarding Intervention` - Set by `Onboarding:: Scaled CS intervention` when it emails an unmanaged account above $20k ARR about a billing moment (more visits to the billing page, a usage spike that's also a billing spike, or a billing limit set on a product). It can land on an account at any stage except 1 and 2, and the sender becomes the account's Onboarding specialist for 30 days.
 
@@ -99,8 +99,8 @@ The live email templates are in the Workflows <PrivateLink url="https://us.posth
 
 #### Account analysis for outreach and meetings
 
--   Take a look at the [Metabase primer](https://posthog.com/handbook/onboarding/metabase-account-analysis) and follow the tips included there.
--   Check and get familiar with the [Account health check](https://posthog.com/handbook/customer-success/health-tracking) and the [Onboarding conversations](https://posthog.com/handbook/onboarding/onboarding-conversations-playbook) pages.
+-   Take a look at the [Metabase primer](/handbook/scaled-customer-success/metabase-account-analysis) and follow the tips included there.
+-   Check and get familiar with the [Account health check](https://posthog.com/handbook/customer-success/health-tracking) and the [Onboarding conversations](/handbook/scaled-customer-success/conversations-playbook) pages.
 -   Use our docs, and link to relevant information.
 -   Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
 -   Use Wappalyzer (browser or extension) to understand the customer's tech stack better. Credentials available in 1password.
@@ -132,7 +132,7 @@ Stage reactor keeps these in step with the stage, so you rarely add or remove th
 - `onboarding completed` - Replaces `onboarding lead` at `3. Onboarding Completed` or `Sales Handoff`, so other teams can see the Onboarding has been completed.
 - `onboarding intervention` - Added on top of the account's other tags when it reaches `Onboarding Intervention`.
 
-Any tag containing `referral` (like `ae referral`) stops every onboarding email and moves the account to `Sales Handoff`. See [Sales handover](/handbook/onboarding/sales-handover#lead-creation).
+Any tag containing `referral` (like `ae referral`) stops every onboarding email and moves the account to `Sales Handoff`. See [Sales handover](/handbook/scaled-customer-success/sales-handover#lead-creation).
 
 ### Alerts and revenue tracking
 
