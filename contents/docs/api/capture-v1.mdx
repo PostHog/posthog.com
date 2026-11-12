@@ -6,8 +6,6 @@ showTitle: true
 
 import CalloutBox from 'components/Docs/CalloutBox'
 
-<!-- TODO(capture-v1): replace every TODO(...) comment in this file before merge. Search the PR for "TODO(capture-v1". -->
-
 <CalloutBox icon="IconInfo" title="New capture API" type="fyi">
 
 Capture v1 is the new way to send events to PostHog. The [legacy capture endpoints](/docs/api/capture) still work and stay supported. We plan to retire them in the future and will announce a date well in advance.
@@ -454,5 +452,3 @@ A request that PostHog stores returns `200` with a result for each event:
 ```json
 {"results":{"019a0000-0000-7000-8000-000000000001":{"result":"ok"}}}
 ```
-
-<!-- TODO(capture-v1): run the examples against a local stack (hobby) before merge. -->
