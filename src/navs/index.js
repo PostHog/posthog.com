@@ -2555,12 +2555,8 @@ const posthogMcpNav = [
         url: '/docs/model-context-protocol/enterprise-managed-authorization',
     },
     {
-        name: 'Claude-issued identity',
-        url: '/docs/model-context-protocol/claude-issued-identity',
-    },
-    {
-        name: 'Okta Cross App Access',
-        url: '/docs/model-context-protocol/okta-cross-app-access',
+        name: 'Claude',
+        url: '/docs/model-context-protocol/claude-managed-authorization',
     },
     {
         name: 'Code editors',

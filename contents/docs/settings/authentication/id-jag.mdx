@@ -24,7 +24,7 @@ ID-JAG keeps authorization decisions in your IdP instead of spreading them acros
 - **Centralized revocation:** once your IdP stops issuing ID-JAGs for a user, clients can no longer get new access tokens for them.
 - **Scoped tokens:** the access token carries only the scopes your IdP granted, intersected with what the client requested.
 
-The most common use is connecting AI agents to the [PostHog MCP server](/docs/model-context-protocol) under central control. This page covers the PostHog side. For a full walkthrough with Claude, see [Claude-issued identity](/docs/model-context-protocol/claude-issued-identity) or [Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access).
+The most common use is connecting AI agents to the [PostHog MCP server](/docs/model-context-protocol) under central control. This page covers the PostHog side. For the MCP setup, see [enterprise-managed authorization](/docs/model-context-protocol/enterprise-managed-authorization). For a full walkthrough with Claude, see [Connect Claude](/docs/model-context-protocol/claude-managed-authorization).
 
 ## How it works
 
@@ -63,7 +63,7 @@ sequenceDiagram
 - The **Scale or Enterprise platform add-on** on your PostHog organization.
 - A **verified domain** in PostHog for the email domain your users sign in with.
 - Users who are **already members** of your PostHog organization. PostHog does not create accounts from ID-JAGs, so provision users with [SCIM](/docs/settings/authentication/scim) or SSO first.
-- An **IdP that can issue ID-JAGs** and publishes its signing keys where PostHog can reach them over the internet.
+- An **identity source that can issue ID-JAGs**, such as your IdP or an MCP client like Claude, that publishes its signing keys where PostHog can reach them over the internet.
 - A **client registered with PostHog**, such as an MCP client or your own app. Most MCP clients that support enterprise-managed authorization handle this for you.
 
 ## Setup
@@ -90,7 +90,7 @@ Use one XAA configuration per IdP and domain. If two configurations cover the sa
 
 The client app needs a client ID that PostHog recognizes, and your IdP must issue ID-JAGs for that client ID.
 
-- **MCP clients:** follow the client's enterprise-managed authorization setup. For Claude, see [Claude-issued identity](/docs/model-context-protocol/claude-issued-identity) or [Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access).
+- **MCP clients:** follow the client's enterprise-managed authorization setup. For Claude, see [Connect Claude](/docs/model-context-protocol/claude-managed-authorization).
 - **Your own app:** register an [OAuth app](/docs/api/oauth) with PostHog, then see [how to exchange an ID-JAG yourself](#how-do-i-exchange-an-id-jag-myself).
 
 ### 4. Grant the required scopes in your IdP
@@ -272,8 +272,7 @@ The token endpoint returns standard OAuth errors ([RFC 6749 §5.2](https://www.r
 ## Further reading
 
 - [Enterprise-managed authorization for MCP](/docs/model-context-protocol/enterprise-managed-authorization)
-- [Connect Claude with Claude-issued identity](/docs/model-context-protocol/claude-issued-identity)
-- [Connect Claude through Okta Cross App Access](/docs/model-context-protocol/okta-cross-app-access)
+- [Connect Claude with enterprise-managed authorization](/docs/model-context-protocol/claude-managed-authorization)
 - [ID-JAG / XAA specification](https://xaa.dev)
 - [SSO](/docs/settings/authentication/sso)
 - [OAuth integration](/docs/api/oauth)
