@@ -9,8 +9,6 @@ availability:
 sourceId: Pennylane
 ---
 
-> **Note:** This source is in **BETA**.
-
 The Pennylane connector syncs your accounting data from [Pennylane](https://www.pennylane.com/) – a French accounting and invoicing platform – into PostHog. This includes customers, suppliers, invoices, quotes, transactions, ledger entries, and more.
 
 ## Prerequisites
