@@ -280,7 +280,6 @@ const FOLDER_TO_HANDLE: Record<string, string> = {
     dashboards: 'dashboards',
     endpoints: 'endpoints',
     conversations: 'support',
-    user_interviews: 'user_interviews',
     tracing: 'trace_monitoring',
 }
 

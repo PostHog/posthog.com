@@ -9,7 +9,7 @@ availability:
 sourceId: Tavus
 ---
 
-The Tavus connector syncs your AI video generation data into PostHog, including videos, replicas (trained digital likenesses), personas (conversational AI configurations), and conversations (real-time CVI sessions).
+The Tavus connector syncs your AI video generation and conversational AI data into PostHog, including videos, faces, PALs, conversations, transcriptions, and canvas interactions.
 
 ## Adding a data source
 
@@ -30,7 +30,7 @@ To connect Tavus to PostHog, you need a Tavus API key:
 3. Create a new API key or copy an existing one.
 4. Paste the key into PostHog when linking the source.
 
-The API key provides read access to all your Tavus data, including videos, replicas, personas, and conversations.
+The API key provides read access to all your Tavus data, including videos, faces, PALs, conversations, transcriptions, and canvas interactions.
 
 ## Configuration
 
@@ -44,18 +44,26 @@ The API key provides read access to all your Tavus data, including videos, repli
 
 All Tavus tables use full refresh sync. Tavus's API doesn't support incremental filtering, so each sync fetches all records.
 
-| Table           | Sync method  |
-| --------------- | ------------ |
-| `videos`        | Full refresh |
-| `replicas`      | Full refresh |
-| `personas`      | Full refresh |
-| `conversations` | Full refresh |
+| Table                 | Sync method  |
+| --------------------- | ------------ |
+| `videos`              | Full refresh |
+| `replicas`            | Full refresh |
+| `personas`            | Full refresh |
+| `conversations`       | Full refresh |
+| `faces`               | Full refresh |
+| `pals`                | Full refresh |
+| `transcriptions`      | Full refresh |
+| `canvas_interactions` | Full refresh |
 
 ## Available tables
 
-| Table           | Description                                                                   |
-| --------------- | ----------------------------------------------------------------------------- |
-| `videos`        | Generated talking-head videos produced from a script and a replica            |
-| `replicas`      | Trained digital likenesses used to generate personalized videos               |
-| `personas`      | Conversational configurations (system prompt, layers, replica) for CVI agents |
-| `conversations` | Real-time Conversational Video Interface (CVI) sessions with a replica        |
+| Table                 | Description                                                                                              |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| `videos`              | Generated talking-head videos produced from a script and a face                                          |
+| `replicas`            | Trained digital likenesses used to generate personalized videos (legacy name for faces)                  |
+| `personas`            | Conversational configurations for CVI agents (legacy name for PALs)                                      |
+| `conversations`       | Real-time Conversational Video Interface (CVI) sessions                                                  |
+| `faces`               | Trained digital likenesses used in conversations and videos (current name for replicas)                  |
+| `pals`                | Agent configurations (system prompt, layers, default face) for conversations (current name for personas) |
+| `transcriptions`      | Speech-to-text jobs for video files                                                                      |
+| `canvas_interactions` | Magic Canvas interactions recorded in conversations (submit, skip, dismiss actions on cards)             |
