@@ -7,7 +7,6 @@ import {
     IconEye,
     IconInfo,
     IconMagic,
-    IconMessage,
     IconRocket,
     IconSparkles,
 } from '@posthog/icons'
@@ -30,9 +29,6 @@ export const mcpAnalytics = {
     Icon: IconMCP,
     type: 'mcp_analytics',
     teamSlug: 'mcp-analytics',
-    // The `mcp-analytics` tag does not exist in the forum yet. Until someone creates it, Questions? shows
-    // no recent discussions and the forum link opens an empty feed.
-    forumTag: 'mcp-analytics',
     color: 'purple',
     colorSecondary: 'sky-blue',
     wizardSupport: true,
@@ -85,7 +81,6 @@ export const mcpAnalytics = {
         { slug: 'mcp-leaderboard', name: 'MCP leaderboard', hideFromNav: true, component: LeaderboardSection },
         { slug: 'ask-anything', name: 'AI prompts', group: 'divided', icon: <IconChat className="size-4" /> },
         { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
         { slug: 'installation', name: 'Install', group: 'divided', icon: <IconCode className="size-4" /> },
         { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
     ],
