@@ -9,12 +9,6 @@ availability:
 sourceId: Holded
 ---
 
-<CalloutBox type="info" title="Beta">
-
-The Holded source is currently in beta.
-
-</CalloutBox>
-
 The Holded connector syncs invoices, purchases, payments, contacts, products, accounting, CRM, project, and team data from your Holded account into PostHog.
 
 ## Adding a data source
