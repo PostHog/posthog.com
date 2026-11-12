@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Simpro connector syncs your field service management data – customers, sites, jobs, quotes, invoices, employees, vendors, and more – into PostHog so you can analyze operations alongside your product data.
 
-> **Note:** This source is in **beta**. If you run into issues, [contact support](https://us.posthog.com/#panel=support%3Asupport%3Adata_warehouse%3A%3Atrue).
-
 ## Prerequisites
 
 You need a Simpro account with API access enabled. A Simpro administrator must create an API key for PostHog to use.
