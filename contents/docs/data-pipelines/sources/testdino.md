@@ -9,7 +9,7 @@ availability:
 sourceId: TestDino
 ---
 
-The TestDino connector syncs test runs, manual runs, manual test suites, manual test cases, and manual run test cases from your TestDino project into PostHog.
+The TestDino connector syncs test runs, manual runs, manual test suites, manual test cases, manual run test cases, spec file health, and automated test case metrics from your TestDino project into PostHog.
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ Once the syncs are complete, you can start using TestDino data in PostHog.
 
 ## Sync methods
 
-All five tables use full refresh sync only. Incremental sync isn't available because TestDino's endpoints lack updated-time filters that can detect later status changes (e.g., a run that moves from "running" to "passed"). If a sync is interrupted, `test_runs` and `manual_runs` can resume from where they left off. The other tables restart from the beginning.
+All tables use full refresh sync only. Incremental sync isn't available because TestDino's endpoints lack updated-time filters that can detect later status changes (e.g., a run that moves from "running" to "passed"). The `specs` and `test_cases` tables contain totals for the last 90 days, so each sync replaces them with a new 90-day snapshot. If a sync is interrupted, `test_runs`, `manual_runs`, `specs`, and `test_cases` can resume from where they left off. The other tables restart from the beginning.
 
 ## Limitations
 
