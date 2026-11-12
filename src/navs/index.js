@@ -2870,53 +2870,39 @@ export const docsMenu = {
                         },
                         {
                             name: 'JavaScript Web',
-                            url: '/docs/libraries/js',
+                            url: '/docs/libraries/js/reference',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                             children: [
                                 {
-                                    name: 'Setup',
-                                    url: '/docs/libraries/js',
-                                },
-                                {
-                                    name: 'Usage',
-                                    url: '/docs/libraries/js/usage',
-                                },
-                                {
-                                    name: 'Configuration',
-                                    url: '/docs/libraries/js/config',
-                                },
-                                {
-                                    name: 'Snippet versioning',
-                                    url: '/docs/libraries/js/snippet-versioning',
-                                },
-                                {
-                                    name: 'Security',
-                                    url: '/docs/libraries/js/security',
-                                },
-                                {
-                                    name: 'Persistence',
-                                    url: '/docs/libraries/js/persistence',
-                                },
-                                {
-                                    name: 'Types',
-                                    url: '/docs/libraries/js/types',
-                                },
-                                {
-                                    name: 'Reference',
-                                    url: '/docs/libraries/js/reference',
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/js/1.x.x',
                                 },
                             ],
                         },
                         {
                             name: 'Android',
-                            url: '/docs/libraries/android',
+                            url: '/docs/libraries/android/reference',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
+                            children: [
+                                {
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/android/4.x.x',
+                                },
+                                {
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/android/3.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/android/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Capacitor',
@@ -2931,11 +2917,39 @@ export const docsMenu = {
                         },
                         {
                             name: 'Flutter',
-                            url: '/docs/libraries/flutter',
+                            url: '/docs/libraries/flutter/reference',
+                            children: [
+                                {
+                                    name: '6.x.x',
+                                    url: '/docs/libraries/flutter/6.x.x',
+                                },
+                                {
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/flutter/5.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/flutter/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Go',
-                            url: '/docs/libraries/go',
+                            url: '/docs/libraries/go/reference',
+                            children: [
+                                {
+                                    name: '2.x.x',
+                                    url: '/docs/libraries/go/2.x.x',
+                                },
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/go/1.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/go/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Godot',
@@ -2947,23 +2961,23 @@ export const docsMenu = {
                         },
                         {
                             name: 'iOS',
-                            url: '/docs/libraries/ios',
+                            url: '/docs/libraries/ios/reference',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                             children: [
                                 {
-                                    name: 'Installation',
-                                    url: '/docs/libraries/ios',
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/ios/4.x.x',
                                 },
                                 {
-                                    name: 'Usage',
-                                    url: '/docs/libraries/ios/usage',
+                                    name: '3.x.x',
+                                    url: '/docs/libraries/ios/3.x.x',
                                 },
                                 {
-                                    name: 'Configuration',
-                                    url: '/docs/libraries/ios/configuration',
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/ios/migration',
                                 },
                             ],
                         },
@@ -2985,15 +2999,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Node.js',
-                            url: '/docs/libraries/node',
+                            url: '/docs/libraries/node/reference',
                             children: [
                                 {
-                                    name: 'Setup and usage',
-                                    url: '/docs/libraries/node',
+                                    name: '6.x.x',
+                                    url: '/docs/libraries/node/6.x.x',
                                 },
                                 {
-                                    name: 'Reference',
-                                    url: '/docs/libraries/node/reference',
+                                    name: '5.x.x',
+                                    url: '/docs/libraries/node/5.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/node/migration',
                                 },
                             ],
                         },
@@ -3003,15 +3021,19 @@ export const docsMenu = {
                         },
                         {
                             name: 'Python',
-                            url: '/docs/libraries/python',
+                            url: '/docs/libraries/python/reference',
                             children: [
                                 {
-                                    name: 'Setup and usage',
-                                    url: '/docs/libraries/python',
+                                    name: '8.x.x',
+                                    url: '/docs/libraries/python/8.x.x',
                                 },
                                 {
-                                    name: 'Reference',
-                                    url: '/docs/libraries/python/reference',
+                                    name: '7.x.x',
+                                    url: '/docs/libraries/python/7.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/python/migration',
                                 },
                             ],
                         },
@@ -3025,19 +3047,15 @@ export const docsMenu = {
                         },
                         {
                             name: 'React Native',
-                            url: '/docs/libraries/react-native',
+                            url: '/docs/libraries/react-native/reference',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                             children: [
                                 {
-                                    name: 'Setup and usage',
-                                    url: '/docs/libraries/react-native',
-                                },
-                                {
-                                    name: 'Reference',
-                                    url: '/docs/libraries/react-native/reference',
+                                    name: '4.x.x',
+                                    url: '/docs/libraries/react-native/4.x.x',
                                 },
                             ],
                         },
@@ -3055,7 +3073,21 @@ export const docsMenu = {
                         },
                         {
                             name: 'Rust',
-                            url: '/docs/libraries/rust',
+                            url: '/docs/libraries/rust/reference',
+                            children: [
+                                {
+                                    name: '1.x.x',
+                                    url: '/docs/libraries/rust/1.x.x',
+                                },
+                                {
+                                    name: '0.x.x',
+                                    url: '/docs/libraries/rust/0.x.x',
+                                },
+                                {
+                                    name: 'Migration guide',
+                                    url: '/docs/libraries/rust/migration',
+                                },
+                            ],
                         },
                         {
                             name: 'Unity',
@@ -3064,155 +3096,6 @@ export const docsMenu = {
                         {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
-                        },
-                    ],
-                },
-                {
-                    name: 'SDK reference',
-                    url: '/docs/libraries/android/reference',
-                    icon: 'IconCode',
-                    children: [
-                        {
-                            name: 'Android',
-                            url: '/docs/libraries/android/reference',
-                            children: [
-                                {
-                                    name: '3.x.x',
-                                    url: '/docs/libraries/android/3.x.x',
-                                },
-                                {
-                                    name: '4.x.x (experimental)',
-                                    url: '/docs/libraries/android/4.x.x',
-                                },
-                                {
-                                    name: 'Migration guides',
-                                    url: '/docs/libraries/android/migration',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Flutter',
-                            url: '/docs/libraries/flutter/reference',
-                            children: [
-                                {
-                                    name: '5.x.x',
-                                    url: '/docs/libraries/flutter/5.x.x',
-                                },
-                                {
-                                    name: '6.x.x (experimental)',
-                                    url: '/docs/libraries/flutter/6.x.x',
-                                },
-                                {
-                                    name: 'Migration guides',
-                                    url: '/docs/libraries/flutter/migration',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Go',
-                            url: '/docs/libraries/go/reference',
-                            children: [
-                                {
-                                    name: '1.x.x',
-                                    url: '/docs/libraries/go/1.x.x',
-                                },
-                                {
-                                    name: '2.x.x (experimental)',
-                                    url: '/docs/libraries/go/2.x.x',
-                                },
-                                {
-                                    name: 'Migration guides',
-                                    url: '/docs/libraries/go/migration',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'iOS',
-                            url: '/docs/libraries/ios/reference',
-                            children: [
-                                {
-                                    name: '3.x.x',
-                                    url: '/docs/libraries/ios/3.x.x',
-                                },
-                                {
-                                    name: '4.x.x (experimental)',
-                                    url: '/docs/libraries/ios/4.x.x',
-                                },
-                                {
-                                    name: 'Migration guides',
-                                    url: '/docs/libraries/ios/migration',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'JavaScript Web',
-                            url: '/docs/libraries/js/reference',
-                            children: [
-                                {
-                                    name: '1.x.x',
-                                    url: '/docs/libraries/js/1.x.x',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Node.js',
-                            url: '/docs/libraries/node/reference',
-                            children: [
-                                {
-                                    name: '5.x.x',
-                                    url: '/docs/libraries/node/5.x.x',
-                                },
-                                {
-                                    name: '6.x.x (experimental)',
-                                    url: '/docs/libraries/node/6.x.x',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Python',
-                            url: '/docs/libraries/python/reference',
-                            children: [
-                                {
-                                    name: '7.x.x',
-                                    url: '/docs/libraries/python/7.x.x',
-                                },
-                                {
-                                    name: '8.x.x (experimental)',
-                                    url: '/docs/libraries/python/8.x.x',
-                                },
-                                {
-                                    name: 'Migration guides',
-                                    url: '/docs/libraries/python/migration',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'React Native',
-                            url: '/docs/libraries/react-native/reference',
-                            children: [
-                                {
-                                    name: '4.x.x',
-                                    url: '/docs/libraries/react-native/4.x.x',
-                                },
-                            ],
-                        },
-                        {
-                            name: 'Rust',
-                            url: '/docs/libraries/rust/reference',
-                            children: [
-                                {
-                                    name: '0.x.x',
-                                    url: '/docs/libraries/rust/0.x.x',
-                                },
-                                {
-                                    name: '1.x.x (experimental)',
-                                    url: '/docs/libraries/rust/1.x.x',
-                                },
-                                {
-                                    name: 'Migration guides',
-                                    url: '/docs/libraries/rust/migration',
-                                },
-                            ],
                         },
                     ],
                 },

@@ -161,6 +161,91 @@
     ],
     "redirects": [
         {
+            "source": "/docs/libraries/js:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/js/usage:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/js/config:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/js/snippet-versioning:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/js/security:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/js/persistence:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/js/types:ext(\\.md)?",
+            "destination": "/docs/libraries/js/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/node:ext(\\.md)?",
+            "destination": "/docs/libraries/node/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/react-native:ext(\\.md)?",
+            "destination": "/docs/libraries/react-native/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/python:ext(\\.md)?",
+            "destination": "/docs/libraries/python/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/go:ext(\\.md)?",
+            "destination": "/docs/libraries/go/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/rust:ext(\\.md)?",
+            "destination": "/docs/libraries/rust/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios:ext(\\.md)?",
+            "destination": "/docs/libraries/ios/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/usage:ext(\\.md)?",
+            "destination": "/docs/libraries/ios/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/ios/configuration:ext(\\.md)?",
+            "destination": "/docs/libraries/ios/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/android:ext(\\.md)?",
+            "destination": "/docs/libraries/android/reference:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/docs/libraries/flutter:ext(\\.md)?",
+            "destination": "/docs/libraries/flutter/reference:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-js:ext(\\.md)?",
             "destination": "/docs/libraries/js/reference:ext?",
             "statusCode": 301
@@ -1134,7 +1219,7 @@
         },
         {
             "source": "/docs/libraries/js/installation:ext(\\.md)?",
-            "destination": "/docs/libraries/js:ext?",
+            "destination": "/docs/libraries/js/reference:ext?",
             "statusCode": 301
         },
         {
@@ -1881,7 +1966,7 @@
         },
         {
             "source": "/docs/integrations/android-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/android:ext?"
+            "destination": "/docs/libraries/android/reference:ext?"
         },
         {
             "source": "/docs/integrations/community:ext(\\.md)?",
@@ -1897,7 +1982,7 @@
         },
         {
             "source": "/docs/integrations/flutter-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/flutter:ext?"
+            "destination": "/docs/libraries/flutter/reference:ext?"
         },
         {
             "source": "/docs/integrations/gatsby-integration:ext(\\.md)?",
@@ -1905,19 +1990,19 @@
         },
         {
             "source": "/docs/integrations/go-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/go:ext?"
+            "destination": "/docs/libraries/go/reference:ext?"
         },
         {
             "source": "/docs/integrations/ios-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrations/javascript-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/js:ext?"
+            "destination": "/docs/libraries/js/reference:ext?"
         },
         {
             "source": "/docs/integrations/js-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/js:ext?"
+            "destination": "/docs/libraries/js/reference:ext?"
         },
         {
             "source": "/docs/integrations/message-formatting:ext(\\.md)?",
@@ -1957,7 +2042,7 @@
         },
         {
             "source": "/docs/integrations/node-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/node:ext?"
+            "destination": "/docs/libraries/node/reference:ext?"
         },
         {
             "source": "/docs/integrations/php-integration:ext(\\.md)?",
@@ -1965,11 +2050,11 @@
         },
         {
             "source": "/docs/integrations/python-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/python:ext?"
+            "destination": "/docs/libraries/python/reference:ext?"
         },
         {
             "source": "/docs/integrations/react-native-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/react-native:ext?"
+            "destination": "/docs/libraries/react-native/reference:ext?"
         },
         {
             "source": "/docs/integrations/ruby-integration:ext(\\.md)?",
@@ -2325,19 +2410,19 @@
         },
         {
             "source": "/docs/integrate/client/ios/index:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrate/client/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrate/client/js/index:ext(\\.md)?",
-            "destination": "/docs/libraries/js:ext?"
+            "destination": "/docs/libraries/js/reference:ext?"
         },
         {
             "source": "/docs/integrate/client/js:ext(\\.md)?",
-            "destination": "/docs/libraries/js:ext?"
+            "destination": "/docs/libraries/js/reference:ext?"
         },
         {
             "source": "/handbook/people/hiring-process/index",
@@ -3454,7 +3539,7 @@
         },
         {
             "source": "/docs/integrate/android:ext(\\.md)?",
-            "destination": "/docs/libraries/android:ext?"
+            "destination": "/docs/libraries/android/reference:ext?"
         },
         {
             "source": "/docs/integrate/api:ext(\\.md)?",
@@ -3470,15 +3555,15 @@
         },
         {
             "source": "/docs/integrate/flutter:ext(\\.md)?",
-            "destination": "/docs/libraries/flutter:ext?"
+            "destination": "/docs/libraries/flutter/reference:ext?"
         },
         {
             "source": "/docs/integrate/go:ext(\\.md)?",
-            "destination": "/docs/libraries/go:ext?"
+            "destination": "/docs/libraries/go/reference:ext?"
         },
         {
             "source": "/docs/integrate/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/docs/integrate/java:ext(\\.md)?",
@@ -3486,11 +3571,11 @@
         },
         {
             "source": "/docs/integrate/js:ext(\\.md)?",
-            "destination": "/docs/libraries/js:ext?"
+            "destination": "/docs/libraries/js/reference:ext?"
         },
         {
             "source": "/docs/integrate/node:ext(\\.md)?",
-            "destination": "/docs/libraries/node:ext?"
+            "destination": "/docs/libraries/node/reference:ext?"
         },
         {
             "source": "/docs/integrate/php:ext(\\.md)?",
@@ -3498,7 +3583,7 @@
         },
         {
             "source": "/docs/integrate/python:ext(\\.md)?",
-            "destination": "/docs/libraries/python:ext?"
+            "destination": "/docs/libraries/python/reference:ext?"
         },
         {
             "source": "/docs/integrate/react:ext(\\.md)?",
@@ -3506,7 +3591,7 @@
         },
         {
             "source": "/docs/integrate/react-native:ext(\\.md)?",
-            "destination": "/docs/libraries/react-native:ext?"
+            "destination": "/docs/libraries/react-native/reference:ext?"
         },
         {
             "source": "/docs/integrate/ruby:ext(\\.md)?",
@@ -3514,7 +3599,7 @@
         },
         {
             "source": "/docs/integrate/rust:ext(\\.md)?",
-            "destination": "/docs/libraries/rust:ext?"
+            "destination": "/docs/libraries/rust/reference:ext?"
         },
         {
             "source": "/docs/integrate/identifying-users:ext(\\.md)?",
@@ -3820,7 +3905,7 @@
         },
         {
             "source": "/docs/sdks/ios:ext(\\.md)?",
-            "destination": "/docs/libraries/ios:ext?"
+            "destination": "/docs/libraries/ios/reference:ext?"
         },
         {
             "source": "/signup/cloud/enterprise",
@@ -6860,7 +6945,7 @@
         },
         {
             "source": "/docs/libraries/js/features:ext(\\.md)?",
-            "destination": "/docs/libraries/js/usage:ext?"
+            "destination": "/docs/libraries/js/reference:ext?"
         },
         {
             "source": "/handbook/engineering/on-call-rotation:ext(\\.md)?",
