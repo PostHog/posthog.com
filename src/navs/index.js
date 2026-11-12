@@ -1058,6 +1058,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/growth-engineering/product-intents',
             },
             {
+                name: 'Per-product setup',
+                url: '/handbook/growth/growth-engineering/per-product-setup',
+            },
+            {
                 name: 'Per-product activation',
                 url: '/handbook/growth/growth-engineering/per-product-activation',
             },
