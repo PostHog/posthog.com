@@ -9,7 +9,7 @@ availability:
 sourceId: HighLevel
 ---
 
-The HighLevel connector syncs your CRM, sales, marketing, and payment data – contacts, opportunities, conversations, messages, forms, surveys, payments, and more – from a HighLevel sub-account into PostHog. This source is in **beta**.
+The HighLevel connector syncs your CRM, sales, marketing, and payment data – contacts, opportunities, conversations, messages, forms, surveys, payments, and more – from a HighLevel sub-account into PostHog.
 
 To link HighLevel:
 
