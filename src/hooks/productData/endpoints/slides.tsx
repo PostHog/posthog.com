@@ -12,7 +12,6 @@ import {
 } from '@posthog/icons'
 import { AnimatePresence, motion } from 'framer-motion'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
 import EndpointsPlayground, { scenarios } from 'components/Docs/EndpointsPlayground'
 import PlatformInstall from 'components/PlatformInstall'
 import { LabeledList } from 'components/Products/ReaderViewProduct/helpers'
@@ -93,19 +92,17 @@ export const applications: CarouselSlide[] = [
         heading: f.mcp.headline,
         description: (
             <>
-                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
-                    <Glow color="black" intensity="gentle" rounded="lg">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
-                            className="dark:hidden w-full"
-                            imgClassName="w-full"
-                        />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
-                            className="hidden dark:inline-block w-full"
-                            imgClassName="w-full"
-                        />
-                    </Glow>
+                <aside className="my-4 @xl/reader-content:mt-2 @xl/reader-content:float-right max-w-[100%_+_1rem] @xl/reader-content:max-w-[300px] @3xl/reader-content:max-w-[360px] @4xl/reader-content:max-w-[440px] @xl/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
+                        className="dark:hidden w-full"
+                        imgClassName="w-full"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
+                        className="hidden dark:inline-block w-full"
+                        imgClassName="w-full"
+                    />
                 </aside>
                 <p>{f.mcp.description}</p>
                 <div className="@container">

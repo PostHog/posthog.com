@@ -62,7 +62,7 @@ const STEPS = [
 
 export const StepsSection = (): JSX.Element => (
     <section>
-        <h2>
+        <h2 className="mb-3">
             How PostHog helps you{' '}
             <Emphasis className="bg-red/10 dark:bg-yellow/20 text-red dark:text-yellow">build better products</Emphasis>{' '}
         </h2>

@@ -12,6 +12,7 @@ import {
     IconGithub,
     IconInstagram,
     IconSparksJoy,
+    IconDiscord,
 } from 'components/OSIcons'
 import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
@@ -233,36 +234,12 @@ const addDocsProductIcons = (items: MenuItemType[], allProducts: any[]): MenuIte
     })
 
 // Build Products menu items
-const buildProductsMenuItems = (allProducts: any[]) => {
-    const items: any[] = [
-        ...PRODUCT_CATEGORIES.flatMap(({ label, handles }, index) => [
-            ...(index > 0 ? [{ type: 'separator' }] : []),
-            { type: 'label', label },
-            ...buildProductMenuItems(handles, allProducts),
-        ]),
-        { type: 'separator' },
-        {
-            type: 'item',
-            label: 'PostHog Self-driving',
-            link: '/self-driving',
-            icon: <Icons.IconFlag className="size-4 text-red" />,
-        },
-        {
-            type: 'item',
-            label: 'PostHog MCP',
-            link: '/mcp',
-            icon: <Icons.IconPlug className="size-4 text-gray" />,
-        },
-        {
-            type: 'item',
-            label: 'PostHog Slack',
-            link: '/slack',
-            icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
-        },
-    ]
-
-    return items
-}
+const buildProductsMenuItems = (allProducts: any[]) =>
+    PRODUCT_CATEGORIES.flatMap(({ label, handles }, index) => [
+        ...(index > 0 ? [{ type: 'separator' }] : []),
+        { type: 'label', label },
+        ...buildProductMenuItems(handles, allProducts),
+    ])
 
 export function useMenuData(): MenuType[] {
     const { isMobile } = useAppSettings()
@@ -271,7 +248,35 @@ export function useMenuData(): MenuType[] {
     const mainNavItems: MenuType[] = [
         {
             trigger: 'Products',
-            items: buildProductsMenuItems(taskbarProducts),
+            items: [
+                ...buildProductsMenuItems(taskbarProducts),
+                { type: 'separator' },
+                { type: 'label', label: 'Platform' },
+                {
+                    type: 'item',
+                    label: 'Self-driving',
+                    link: '/self-driving',
+                    icon: <Icons.IconFlag className="size-4 text-red" />,
+                },
+                {
+                    type: 'item',
+                    label: 'PostHog AI',
+                    link: '/ai',
+                    icon: <Icons.IconAI className="size-4 text-lilac" />,
+                },
+                {
+                    type: 'item',
+                    label: 'PostHog MCP',
+                    link: '/mcp',
+                    icon: <Icons.IconPlug className="size-4 text-gray" />,
+                },
+                {
+                    type: 'item',
+                    label: 'PostHog in Slack',
+                    link: '/slack',
+                    icon: <Icons.IconAtSign className="size-4 text-sky-blue" />,
+                },
+            ],
         },
         {
             trigger: 'Pricing',
@@ -288,12 +293,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: 'Community',
             items: [
-                {
-                    type: 'item',
-                    label: 'Newsletter',
-                    link: '/newsletter',
-                    icon: <Icons.IconNewspaper className="size-4 text-orange" />,
-                },
+                { type: 'label', label: 'Read' },
                 {
                     type: 'item',
                     label: 'Blog',
@@ -302,46 +302,35 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Founders hub',
-                    link: '/founders',
-                    icon: <Icons.IconRocket className="size-4 text-purple" />,
+                    label: 'Newsletter',
+                    link: '/newsletter',
+                    icon: <Icons.IconNewspaper className="size-4 text-red" />,
                 },
-                {
-                    type: 'item',
-                    label: 'Compare',
-                    link: '/compare',
-                    icon: <Icons.IconColumns className="size-4 text-lilac" />,
-                },
+                { type: 'separator' },
+                { type: 'label', label: 'Chat' },
                 {
                     type: 'item' as const,
                     label: 'Forums',
                     link: '/forum',
                     icon: <Icons.IconMessage className="size-4 text-green" />,
                 },
+                {
+                    type: 'item',
+                    label: 'Discord',
+                    link: 'https://discord.gg/t57vmkcm95',
+                    external: true,
+                    // Stroke the filled brand path so it matches the outline icons around it
+                    icon: (
+                        <IconDiscord className="size-4 text-blue" fill="none" stroke="currentColor" strokeWidth={1.2} />
+                    ),
+                },
                 { type: 'separator' },
-                {
-                    type: 'item',
-                    label: 'Startups',
-                    link: '/startups',
-                    icon: <Icons.IconPresent className="size-4 text-purple" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Merch store',
-                    link: '/merch',
-                    icon: <Icons.IconStore className="size-4 text-purple" />,
-                },
+                { type: 'label', label: 'Meet' },
                 {
                     type: 'item',
                     label: 'Events',
                     link: '/events',
                     icon: <Icons.IconCalendar className="size-4 text-red" />,
-                },
-                {
-                    type: 'item',
-                    label: 'Students',
-                    link: '/students',
-                    icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
                 },
                 {
                     type: 'item',
@@ -351,9 +340,9 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Cool tech jobs',
-                    link: '/cool-tech-jobs',
-                    icon: <Icons.IconLaptop className="size-4 text-blue" />,
+                    label: 'Students',
+                    link: '/students',
+                    icon: <Icons.IconGraduationCap className="size-4 text-blue" />,
                 },
                 {
                     type: 'item',
@@ -361,22 +350,37 @@ export function useMenuData(): MenuType[] {
                     link: '/places',
                     icon: <Icons.IconMap className="size-4 text-red" />,
                 },
+                { type: 'separator' },
+                { type: 'label', label: 'Fun stuff' },
+                {
+                    type: 'item',
+                    label: 'Merch',
+                    link: '/merch',
+                    icon: <Icons.IconStore className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Side projects',
+                    link: '/side-projects',
+                    icon: getMenuIcon(companyMenu.children, '/side-projects', 'IconRocket', 'purple'),
+                },
+                {
+                    type: 'item',
+                    label: 'Things that spark joy',
+                    link: '/sparks-joy',
+                    icon: <IconSparksJoy className="size-4" />,
+                },
             ],
         },
         {
             trigger: 'Company',
             items: [
+                { type: 'label', label: 'Meta' },
                 {
                     type: 'item',
                     label: 'About',
                     link: '/about',
                     icon: getMenuIcon(companyMenu.children, '/about', 'IconLogomark', 'gray'),
-                },
-                {
-                    type: 'item',
-                    label: 'Customers',
-                    link: '/customers',
-                    icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
                 },
                 {
                     type: 'item',
@@ -386,40 +390,13 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Roadmap',
-                    link: '/roadmap',
-                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
-                },
-                {
-                    type: 'item',
-                    label: 'Changelog',
-                    link: '/changelog',
-                    icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
-                },
-                {
-                    type: 'item',
-                    label: 'Media',
-                    link: '/media',
-                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
-                },
-                {
-                    type: 'item',
-                    label: 'Research',
-                    link: '/research',
-                    icon: <Icons.IconBrain className="size-4 text-purple" />,
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
                     label: 'People',
                     link: '/people',
                     icon: getMenuIcon(companyMenu.children, '/people', 'IconPeople', 'blue'),
                 },
                 {
                     type: 'item',
-                    label: 'Small teams',
+                    label: 'Teams',
                     link: '/teams',
                     icon: getMenuIcon(companyMenu.children, '/teams', 'IconShieldPeople', 'teal'),
                 },
@@ -431,19 +408,31 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Side projects',
-                    link: '/side-projects',
-                    icon: getMenuIcon(companyMenu.children, '/side-projects', 'IconRocket', 'purple'),
+                    label: 'Media',
+                    link: '/media',
+                    icon: getMenuIcon(companyMenu.children, '/media', 'IconNewspaper', 'salmon'),
+                },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Changelog',
+                    link: '/changelog',
+                    icon: getMenuIcon(companyMenu.children, '/changelog', 'IconCalendar', 'red'),
                 },
                 {
                     type: 'item',
-                    label: 'Partnerships',
-                    link: '/partnerships',
-                    icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'lilac'),
+                    label: 'Roadmap',
+                    link: '/roadmap',
+                    icon: getMenuIcon(companyMenu.children, '/roadmap', 'IconMap', 'orange'),
                 },
                 {
-                    type: 'separator',
+                    type: 'item',
+                    label: 'AI Research',
+                    link: '/research',
+                    icon: <Icons.IconBrain className="size-4 text-purple" />,
                 },
+                { type: 'separator' },
+                { type: 'label', label: 'Follow us', mobileDestination: false }, // Every item below is desktop-only
                 {
                     type: 'item',
                     label: 'X',
@@ -501,34 +490,7 @@ export function useMenuData(): MenuType[] {
                 </>
             ),
             items: [
-                {
-                    type: 'item',
-                    label: 'Things that spark joy',
-                    link: '/sparks-joy',
-                    icon: <IconSparksJoy className="size-4" />,
-                },
-                {
-                    type: 'separator',
-                },
-                {
-                    type: 'item',
-                    label: 'Display options',
-                    onClick: () => {
-                        navigate('/display-options', { state: { newWindow: true } })
-                    },
-                    icon: <Icons.IconBrightness className="size-4 text-yellow" />,
-                    mobileDestination: false, // Already exposed as a system item in the mobile logo menu
-                },
-                {
-                    type: 'item',
-                    label: 'System status',
-                    link: 'https://status.posthog.com',
-                    external: true,
-                    icon: <Icons.IconPulse className="size-4 text-red" />,
-                },
-                {
-                    type: 'separator',
-                },
+                { type: 'label', label: 'Work with us' },
                 {
                     type: 'item',
                     label: 'Enterprise',
@@ -542,8 +504,31 @@ export function useMenuData(): MenuType[] {
                     icon: <Icons.IconLaptop className="size-4 text-blue" />,
                 },
                 {
-                    type: 'separator',
+                    type: 'item',
+                    label: 'Partnerships',
+                    link: '/partnerships',
+                    icon: getMenuIcon(companyMenu.children, '/partnerships', 'IconPuzzle', 'lilac'),
                 },
+                {
+                    type: 'item',
+                    label: 'Startups',
+                    link: '/startups',
+                    icon: <Icons.IconPresent className="size-4 text-purple" />,
+                },
+                {
+                    type: 'item',
+                    label: 'Customers',
+                    link: '/customers',
+                    icon: getMenuIcon(companyMenu.children, '/customers', 'IconPerson', 'yellow'),
+                },
+                {
+                    type: 'item',
+                    label: 'Compare',
+                    link: '/compare',
+                    icon: <Icons.IconColumns className="size-4 text-lilac" />,
+                },
+                { type: 'separator' },
+                { type: 'label', label: 'Legal' },
                 {
                     type: 'item',
                     label: 'Terms',
@@ -586,12 +571,24 @@ export function useMenuData(): MenuType[] {
                     link: '/subprocessors',
                     icon: <Icons.IconServer className="size-4 text-orange" />,
                 },
-                // {
-                //     type: 'item',
-                //     label: 'Video library',
-                //     link: '/videos',
-                //     icon: <Icons.IconFolderOpenFilled className="size-4 text-orange" />,
-                // },
+                { type: 'separator' },
+                { type: 'label', label: 'Misc' },
+                {
+                    type: 'item',
+                    label: 'Display options',
+                    onClick: () => {
+                        navigate('/display-options', { state: { newWindow: true } })
+                    },
+                    icon: <Icons.IconBrightness className="size-4 text-yellow" />,
+                    mobileDestination: false, // Already exposed as a system item in the mobile logo menu
+                },
+                {
+                    type: 'item',
+                    label: 'System status',
+                    link: 'https://status.posthog.com',
+                    external: true,
+                    icon: <Icons.IconPulse className="size-4 text-red" />,
+                },
             ],
         },
     ]

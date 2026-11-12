@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Use the API to retrieve MCP Analytics data for dashboards, reports, or workflows. Reads require `mcp_analytics:read`. Submitting feedback or missing capabilities requires `mcp_analytics:write`. Generating session summaries and recomputing clusters also require write access.
+Use the API to retrieve MCP Analytics data for dashboards, reports, or workflows. Reads require `mcp_analytics:read`. Submitting missing capabilities requires `mcp_analytics:write`. Generating session summaries and recomputing clusters also require write access.
 
 For raw events, use the [query API](/docs/api/query). See [sample HogQL queries](/docs/mcp-analytics/queries).
 
@@ -22,10 +22,6 @@ List MCP sessions. Select a session to retrieve its tool calls. You can also gen
 **Intent clusters**
 
 Retrieve clustered agent intents with their tool distribution and error rates, or trigger a recompute after you capture new data. These endpoints work only in projects where intent clustering has rolled out. Other projects get a permission error.
-
-**Feedback**
-
-Read and submit feedback about your MCP tools, including the client, session, and trace context it came from.
 
 **Missing capabilities**
 

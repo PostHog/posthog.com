@@ -83,7 +83,7 @@ With our app set up, it’s time to install and set up PostHog. If you don't hav
 First install `posthog-js`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 Then, store your PostHog key and host in environment variables. Add them to a `.env` file in your project's base directory. You can find your project token in your [PostHog project settings](https://app.posthog.com/settings/project).
@@ -181,7 +181,7 @@ When you click the button now, PostHog captures a custom `home_button_clicked` e
 Nuxt is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the [`posthog-js` library](/docs/libraries/js) we installed won’t work on the server side. Instead, we must use the [`posthog-node` SDK](/docs/libraries/node). We can start by installing it:
 
 ```bash
-npm install posthog-node
+npm install posthog-node@5
 ```
 
 Next, initialize `posthog-node` wherever you'd like to capture events server-side, such as in your [server routes](https://nuxt.com/docs/guide/directory-structure/server) or in the [middleware](https://nuxt.com/docs/guide/directory-structure/server#server-middleware). For this tutorial, we'll show you how to capture an event in the middleware:

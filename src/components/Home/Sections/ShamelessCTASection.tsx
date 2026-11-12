@@ -3,7 +3,7 @@ import ShamelessCTA from 'components/Home/ShamelessCTA'
 
 export const ShamelessCTASection = () => (
     <div id="shameless-cta" className="overflow-x-hidden">
-        <h2>Shameless CTA</h2>
+        <h2 className="mb-2">Shameless CTA</h2>
         <ShamelessCTA />
     </div>
 )
