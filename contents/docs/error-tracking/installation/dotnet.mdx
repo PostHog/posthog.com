@@ -121,7 +121,7 @@ posthog.CaptureException(
 );
 ```
 
-For ASP.NET Core, you can opt into automatic capture for unhandled request exceptions in the next step. Other .NET apps continue to use `CaptureException` manually.
+The next steps cover automatic capture. ASP.NET Core apps can capture request exceptions, and any .NET app can capture unhandled runtime exceptions.
 
 </Step>
 
@@ -138,7 +138,67 @@ app.UsePostHogRequestContext(options =>
 });
 ```
 
-Place it before the request handlers whose unhandled exceptions you want to capture. If you use exception-handling middleware, register it first so it can handle the exception after PostHog throws it again. The PostHog middleware captures the exception with the active request context and adds the HTTP response status.
+Place it before the request handlers whose exceptions you want to capture. The PostHog middleware captures the exception with the active request context and adds the HTTP response status.
+
+How the exception appears in PostHog depends on where it stops:
+
+- **The exception escapes the PostHog middleware.** PostHog captures it as unhandled, then throws it again. Exception-handling middleware that you register before the PostHog middleware can still handle it.
+- **Exception-handling middleware that runs after the PostHog middleware handles the exception.** In `PostHog.AspNetCore` version 2.10.0 and later, PostHog still captures it, and marks it as handled. For example, this applies to `UseExceptionHandler`.
+
+```csharp
+app.UsePostHogRequestContext(options =>
+{
+    options.CaptureExceptions = true;
+});
+
+// PostHog also captures exceptions that this handler converts to an error response
+app.UseExceptionHandler("/error");
+```
+
+</Step>
+
+<Step title="Capture unhandled runtime exceptions" badge="optional">
+
+Some exceptions never reach a request. A background thread can crash the process, or a fire-and-forget task can fail with nobody observing it. In `PostHog` version 2.23.0 and later, enable `CaptureUnhandledExceptions` to capture these:
+
+```csharp
+using PostHog;
+
+public static readonly PostHogClient PostHog = new(new PostHogOptions {
+    ProjectToken = "<ph_project_token>",
+    HostUrl = new Uri("<ph_client_api_host>"),
+    CaptureUnhandledExceptions = true,
+});
+```
+
+For ASP.NET Core, set it in `appsettings.json`:
+
+```json
+{
+  "PostHog": {
+    "ProjectToken": "<ph_project_token>",
+    "HostUrl": "<ph_client_api_host>",
+    "CaptureUnhandledExceptions": true
+  }
+}
+```
+
+The option is off by default. When you enable it, the client listens to two .NET runtime events:
+
+| Runtime event | What PostHog captures |
+| --- | --- |
+| `AppDomain.UnhandledException` | An exception that no code caught. If it terminates the process, PostHog marks it as `fatal` and waits up to two seconds to send queued events before the process exits. |
+| `TaskScheduler.UnobservedTaskException` | An exception from a task that no code awaited or observed. PostHog reports the exception that the task threw, not the `AggregateException` that the runtime wraps it in. |
+
+PostHog marks both as unhandled. If the ASP.NET Core middleware already captured an exception, the runtime events don't capture it again.
+
+Dispose the client to stop listening to the runtime events.
+
+<CalloutBox icon="IconInfo" title="Logged exceptions are not captured" type="fyi">
+
+An exception that your code or a framework catches and logs doesn't reach either runtime event. For example, the .NET host logs a failed `BackgroundService` instead of leaving it unhandled. Capture these with `CaptureException` ([issue](https://github.com/PostHog/posthog-dotnet/issues/384)).
+
+</CalloutBox>
 
 </Step>
 
