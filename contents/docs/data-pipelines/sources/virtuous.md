@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Virtuous connector syncs your nonprofit CRM data – contacts, gifts, recurring gifts, pledges, projects, campaigns, events, and more – into PostHog, so you can analyze donor and fundraising data alongside your product data.
 
-> **Note:** This source is in **beta**. If you run into issues, [contact support](https://app.posthog.com/home#panel=support).
-
 ## Prerequisites
 
 You need a Virtuous CRM+ account with API key access. Create an API key in Virtuous under **Settings** > **Connectivity** > **API keys**. The key's permission group determines which tables it can read.
