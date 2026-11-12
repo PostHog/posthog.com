@@ -128,7 +128,7 @@ We'll drop `null` values and empty objects from properties, and store a few buil
 From November 30, [batch exports](/docs/data-pipelines/batch-exports) that use the [events model](/docs/data-pipelines/batch-exports#events-model) change in two ways:
 
 - They no longer include `$feature_flag_called` events, because these events move to their own table. You can export that table separately (see below).
-- They send `properties` and `person_properties` in the new storage format. The new format stores data more efficiently, so exported events are smaller.
+- They send `properties` and `person_properties` in the new storage format. This format stores feature flags more efficiently, so events with many flags are much smaller.
 
 This applies to every destination. The persons and sessions models don't change.
 
