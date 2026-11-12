@@ -28,6 +28,15 @@ The three tools layer on top of each other: Zoom hosts the call, Gong records it
    - Once connected, Gong automatically joins and records your Zoom calls into the shared library.
 3. **Granola** – Install the [Granola](https://www.granola.ai/) app and connect it to your calendar. It runs on your laptop and transcribes whatever call you're in (including your Zoom calls), so you get notes and a transcript without adding another bot to the meeting.
 
+#### Customize your Zoom waiting room
+
+You can show a video in your Zoom waiting room, so customers who join early can watch it before the call starts. The 90-second self-driving explainer is a good default.
+
+1. Get a video from the <PrivateLink url="https://drive.google.com/drive/folders/1o7SAm-zthfXJWM_2CRUownnul4qc86lT">PostHog videos folder</PrivateLink>.
+2. Compress the video to less than 30 MB. Zoom does not accept larger files. An AI agent or a tool such as [HandBrake](https://handbrake.fr/) can do this for you.
+3. Open the [Zoom web settings](https://zoom.us/profile/setting) and go to the **Settings** tab. This is not the Zoom desktop app.
+4. Find **Customize Waiting Room** and upload your video.
+
 ### AI investigation tools
 
 The fastest way to dig into an account is an AI agent wired into our tools. Not mandated, but many of us lean on it daily, and setting it up early will speed things up.

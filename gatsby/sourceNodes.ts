@@ -1168,7 +1168,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         const fetchRows = async (filters: Record<string, unknown>, pageSize: number) => {
             const referenceQuery = qs.stringify(
                 {
-                    filters,
+                    // Markdown references share these referenceIds with no `data`; skip them so they don't take HogRef slots.
+                    filters: { ...filters, data: { $notNull: true } },
                     pagination: { page: 1, pageSize },
                     sort: ['createdAt:desc'],
                 },

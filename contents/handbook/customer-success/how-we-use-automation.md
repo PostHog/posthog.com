@@ -68,6 +68,22 @@ The churn risk scout does not add the `churn risk` tag. If you agree that the ac
 
 Close the task when you act on it. Reply in the Slack thread when a task was useful or was noise, so that we can tune the scouts.
 
+### **Friction watches for your own book**
+
+Each friction watch skill catches a person who gets stuck in an area where a timely intervention from you can unblock them. These friction watches are low noise by design, and nothing is ever sent to a customer until you turn it on. Matches post to <PrivateLink url="https://posthog.slack.com/archives/C0C7GP99CP3">#project-managed-customers-consolidated-scouts</PrivateLink> and tag you.
+
+To set one up, ask your agent with the prompts below. The setup skill creates your own copy of the scout or workflow, and your own draft email workflow that sends from your address. 
+
+| Friction watch                                                                                                                         | What it catches                                                                                           | What you get                                                                                                                 | Limit                                                                                                    | Ask your agent                             |
+| -------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| <PrivateLink url="https://us.posthog.com/project/2/skills/cs-flag-exp-friction-watch-setup">Flag and experiment friction</PrivateLink> | A person starts a feature flag or experiment, doesn't save it within 48 hours, and reads the docs for it. | A post that tags you when there are matches. After you turn on the email workflow, each match gets an email from you that offers help. | One email per person every 90 days                                                                       | "Set up the flag friction watch for me"    |
+| <PrivateLink url="https://us.posthog.com/project/2/skills/cs-warehouse-friction-watch-setup">Warehouse friction</PrivateLink>          | A data warehouse source fails to connect and is still not connected 45 minutes later.                     | A post that tags you, with the error the person saw and a proposed email from you. Send it yourself, or turn on the email workflow. | One email per person every 90 days                                                                       | "Set up the data warehouse friction watch" |
+| <PrivateLink url="https://us.posthog.com/project/2/skills/cs-query-friction-outreach-setup">Query friction</PrivateLink>               | A person keeps hitting slow or failed queries, in the app or through the MCP.                             | After you turn on your workflow, an email from you to each person it finds, and a post that tags you each time an email goes out. | One email per person every 30 days. Each account hears from one owner only, in this order: CSM, TAM, AE. | "Set up query friction outreach for me"    |
+
+Before you turn on an email workflow:
+* Rewrite the default email so it sounds like you. `Query friction` has two emails, one for app queries and one for MCP queries.
+* Send yourself a test email to confirm everything looks good.
+
 ### **Human-first automation philosophy**
 
 Every automated workflow includes deliberate human decision points. For example, when an account begins using session replay, Customer Analytics can create a task suggesting outreach about their use case \- but the CSM determines whether and how to engage based on the account relationship and context.
@@ -80,7 +96,7 @@ This approach ensures automation enhances rather than replaces the human element
 
 * Review automated tasks such as Customer Analytics tasks, Slack alerts, and customer health scores at least twice weekly.   
 * Treat automated insights as starting points for investigation, not final answers\!  
-* Set up individual alerts in Customer Analytics or PostHog for signals that the [managed customer scouts](#managed-customer-scouts) do not cover. Do not copy those scouts for your own book, because they already watch every owned account.  
+* Set up individual alerts in Customer Analytics or PostHog for signals that the [managed customer scouts](#managed-customer-scouts) don't cover. Start with the [friction watches](#friction-watches-for-your-own-book). Do not copy the managed scouts for your own book, because they already watch every owned account.  
   * As an example, setting up your accounts as a Cohort in PostHog and then setting up CDP alerts/notifications to Slack based on product usage and activity.
 
 **What remains purely human:**

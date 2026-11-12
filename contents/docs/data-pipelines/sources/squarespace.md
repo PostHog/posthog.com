@@ -9,11 +9,11 @@ availability:
 sourceId: Squarespace
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Squarespace connector syncs your Commerce data – orders, transactions, products, inventory, store pages, and profiles – into the PostHog Data warehouse, so you can analyze your store alongside your product data.
+The Squarespace connector syncs your Commerce data – orders, transactions, products, inventory, store pages, profiles, contacts, discounts, and contact address books – into the PostHog Data warehouse, so you can analyze your store alongside your product data.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ You need a Squarespace site where you can create a Developer API key. The Commer
 
 When linking Squarespace, you'll need:
 
-- **API key** – create one in your Squarespace site under **Settings → Advanced → Developer API Keys**, granting read access to the data you want to sync: Orders (orders, transactions), Products (products, inventory, store pages), and Profiles (profiles).
+- **API key** – create one in your Squarespace site under **Settings → Advanced → Developer API Keys**, granting read access to the data you want to sync: Orders (orders, transactions), Products (products, inventory, store pages), Profiles (profiles), Contacts (contacts, contact address books), and Discounts (discounts).
 
 ## Sync modes
 

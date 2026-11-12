@@ -25,7 +25,7 @@ const Installation = ({ id, productData }: SectionComponentProps) => {
             <h2 className={SECTION_H2}>{heading}</h2>
             {description && <p className="text-base text-secondary mb-4">{description}</p>}
 
-            <div className="bg-primary rounded shadow-2xl p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
+            <div className="bg-primary rounded border border-primary p-4 @2xl/reader-content:p-8 @4xl/reader-content:p-10">
                 {installation.children || (
                     <InstallFrameworkGrid categories={enabledCategories} productSlug={productSlug} />
                 )}
