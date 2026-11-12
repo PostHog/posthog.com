@@ -40,6 +40,8 @@ You'll be asked for:
 
 The `commits` and `exported_events` tables support incremental sync. All other Sourcegraph tables use full refresh, which replaces the contents of the table on each sync.
 
+By default, Sourcegraph keeps exported events for 24 hours. Sync the `exported_events` table incrementally at least once a day. If you sync it less often, the table misses the events that Sourcegraph deleted between syncs. A full refresh replaces the table with only the events that Sourcegraph still keeps.
+
 ## Configuration
 
 <SourceParameters />
