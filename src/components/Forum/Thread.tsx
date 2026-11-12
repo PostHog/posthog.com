@@ -6,7 +6,6 @@ import {
     IconCheck,
     IconFolderMove,
     IconLock,
-    IconMegaphone,
     IconPencil,
     IconPin,
     IconShield,
@@ -16,7 +15,7 @@ import {
     IconUnlock,
 } from '@posthog/icons'
 import { QuestionForm, useQuestion } from 'components/Squeak'
-import { AskMax, CurrentQuestionContext } from 'components/Squeak/components/Question'
+import { AskMax, CurrentQuestionContext, ModeratorTools } from 'components/Squeak/components/Question'
 import { Replies } from 'components/Squeak/components/Replies'
 import { BlockedBadge, isProfileBlocked, Profile } from 'components/Squeak/components/Profile'
 import Days from 'components/Squeak/components/Days'
@@ -34,7 +33,6 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import DialogSelect from './DialogSelect'
 import SEO from 'components/seo'
 import { useUser } from 'hooks/useUser'
-import usePostHog from 'hooks/usePostHog'
 import { useToast } from '../../context/Toast'
 import { useWindow } from '../../context/Window'
 import { ForumTopic, useForumPost } from './hooks'
@@ -233,8 +231,6 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
     const { appWindow } = useWindow()
     const { addToast } = useToast()
     const { updatePost } = useForumPost()
-    const posthog = usePostHog()
-    const [escalated, setEscalated] = useState(false)
     const [expanded, setExpanded] = useState(true)
     const [editing, setEditing] = useState(false)
     const [dialog, setDialog] = useState<'move' | 'tags' | 'delete' | null>(null)
@@ -303,31 +299,7 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
         }
     }
 
-    const escalate = () => {
-        if (escalated || !posthog) return
-        const author = post.profile?.data?.attributes
-        posthog.capture('community question escalated', {
-            questionId: question.id,
-            subject: post.subject,
-            body: post.body,
-            url: `https://posthog.com/forum/p/${post.permalink}`,
-            permalink: post.permalink,
-            authorName: [author?.firstName, author?.lastName].filter(Boolean).join(' ') || 'Anonymous',
-            topics: [topic.attributes.label],
-            escalatedBy: [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ') || null,
-            escalatedByEmail: user?.email,
-        })
-        setEscalated(true)
-        addToast({ title: 'Escalated', description: 'Moderators have been notified.', duration: 3000 })
-    }
-
     const moderatorItems: ForumMenuItem[] = [
-        {
-            label: escalated ? 'Escalated' : 'Escalate',
-            icon: escalated ? <IconCheck /> : <IconMegaphone />,
-            onClick: escalate,
-        },
-        'divider',
         {
             label: post.pinnedToTopic ? `Unpin from #${topic.attributes.slug}` : `Pin to #${topic.attributes.slug}`,
             icon: <IconPin />,
@@ -531,6 +503,11 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                 </p>
                             )}
                         </div>
+                        {isForumModerator && (
+                            <div className="pb-4">
+                                <ModeratorTools questionData={question} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
