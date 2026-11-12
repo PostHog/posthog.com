@@ -11,7 +11,7 @@ sourceId: Wise
 
 The Wise connector syncs profiles, balances, transfers, recipients, and activities from your Wise business account into PostHog.
 
-> **Note:** This source is currently in **beta**. Personal API tokens are only available for Wise business accounts.
+> **Note:** Personal API tokens are only available for Wise business accounts.
 
 ## Adding a data source
 
