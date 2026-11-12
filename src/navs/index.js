@@ -2548,15 +2548,18 @@ const posthogMcpNav = [
         url: '/docs/model-context-protocol/faq',
     },
     {
-        name: 'Enterprise Managed Authorization (EMA)',
-    },
-    {
-        name: 'Overview',
+        name: 'Enterprise-managed authorization',
         url: '/docs/model-context-protocol/enterprise-managed-authorization',
-    },
-    {
-        name: 'Claude',
-        url: '/docs/model-context-protocol/claude-managed-authorization',
+        children: [
+            {
+                name: 'Overview',
+                url: '/docs/model-context-protocol/enterprise-managed-authorization',
+            },
+            {
+                name: 'Claude',
+                url: '/docs/model-context-protocol/claude-managed-authorization',
+            },
+        ],
     },
     {
         name: 'Code editors',
