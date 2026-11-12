@@ -6,7 +6,7 @@ availability:
   free: full
   selfServe: full
   enterprise: full
-sourceId: Circleso
+sourceId: CircleSo
 ---
 
 import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
