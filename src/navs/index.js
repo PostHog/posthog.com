@@ -2861,16 +2861,8 @@ export const docsMenu = {
                     icon: 'IconBox',
                     children: [
                         {
-                            name: 'SDK comparison',
+                            name: 'Choosing an SDK',
                             url: '/docs/libraries',
-                        },
-                        {
-                            name: 'SDK bootstrapping',
-                            url: '/docs/libraries/bootstrapping',
-                        },
-                        {
-                            name: 'Upgrading to capture v1',
-                            url: '/docs/libraries/capture-v1',
                         },
                         {
                             name: 'JavaScript Web',
@@ -3068,6 +3060,10 @@ export const docsMenu = {
                         {
                             name: 'C#/.NET',
                             url: '/docs/libraries/dotnet',
+                        },
+                        {
+                            name: 'SDK bootstrapping',
+                            url: '/docs/libraries/bootstrapping',
                         },
                     ],
                 },

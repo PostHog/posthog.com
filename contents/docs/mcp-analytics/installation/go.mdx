@@ -147,7 +147,7 @@ The SDK learns each tool's schema from `tools/list` and refreshes it when the se
 
 ## Event options
 
-Set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `WithEventOptions` and `EventOptions` keep them apart from the adapter's own options.
+Set [event options](/docs/api/capture-v1#event-options), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `WithEventOptions` and `EventOptions` keep them apart from the adapter's own options.
 
 `WithEventOptions` takes a resolver that returns `posthog.Options` for each tool call. The options apply to the `$mcp_tool_call` and its `$exception`:
 

@@ -4,15 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-import CalloutBox from 'components/Docs/CalloutBox'
+import CaptureV1Callout from './_snippets/capture-v1-callout.mdx'
 
-<CalloutBox icon="IconInfo" title="New capture API" type="fyi">
-
-Capture v1 is the new way to send events to PostHog. The [legacy capture endpoints](/docs/api/capture) still work and stay supported. We plan to retire them in the future and will announce a date well in advance.
-
-If you use a PostHog SDK, you don't need to call these endpoints yourself. Upgrade to an SDK version that uses capture v1 – see [upgrading to capture v1 SDKs](/docs/libraries/capture-v1).
-
-</CalloutBox>
+<CaptureV1Callout />
 
 Capture v1 has two endpoints: one for analytics events and one for AI events. Both take a batch of events and tell you what happened to **each event** in the batch, so one bad event never costs you the rest.
 
@@ -159,7 +153,7 @@ Compress the body and set `Content-Encoding` to one of `gzip`, `deflate`, `br`, 
 
 Legacy formats such as `gzip-js`, `lz64`, and `base64` aren't accepted on v1: a `Content-Encoding` value other than the four above fails with `415`, and a body in one of those formats isn't valid JSON, so the request fails with `400`. The `?compression=` query parameter is ignored.
 
-[SDKs](/docs/libraries/capture-v1#configuration) support different sets of these formats. Check your SDK's migration guide for which ones it offers.
+SDKs support different sets of these formats. Check your SDK's [migration guide](/docs/libraries#sdk-versions-and-capture-v1) for which ones it offers.
 
 ## Limits and validation
 

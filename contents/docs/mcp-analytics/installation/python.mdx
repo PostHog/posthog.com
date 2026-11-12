@@ -176,7 +176,7 @@ On raw low-level servers and standalone FastMCP, the SDK advertises the injected
 
 ## Event options
 
-Set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events with `event_options`. The name keeps them apart from `MCPAnalyticsOptions`.
+Set [event options](/docs/api/capture-v1#event-options), such as `cookieless_mode` or `process_person_profile`, on MCP events with `event_options`. The name keeps them apart from `MCPAnalyticsOptions`.
 
 `MCPAnalyticsOptions(event_options=...)` sets options on every event `instrument()` captures, including `$exception` events. Like `event_properties`, it's a function of `(request, extra)` that returns a dict or `None`, and it can be sync or async:
 

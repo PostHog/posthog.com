@@ -90,7 +90,7 @@ Capture only the final outcome of a call to a tool your server has. Don't captur
 - A result with `resultType: "input_required"`. Capture the retry that completes the call instead.
 - A task handle (`resultType: "task"`). It isn't a completed call.
 
-This is the event, as PostHog stores it. PostHog stores the `process_person_profile` [event option](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties) as a property, so it appears in `properties` below. When you send the event, set it as an option instead, as described in [Identify the user](#identify-the-user). If you use the [capture API](/docs/api/capture-v1), wrap the event in the request body that page describes, with your project token, and put the option in the event's `options`:
+This is the event, as PostHog stores it. PostHog stores the `process_person_profile` [event option](/docs/api/capture-v1#event-options) as a property, so it appears in `properties` below. When you send the event, set it as an option instead, as described in [Identify the user](#identify-the-user). If you use the [capture API](/docs/api/capture-v1), wrap the event in the request body that page describes, with your project token, and put the option in the event's `options`:
 
 ```json
 {
@@ -151,7 +151,7 @@ The only nested JSON values are `$mcp_parameters` and `$mcp_response` (see [the 
 
 If your server knows who is calling, such as from an OAuth token, set `distinct_id` to that user's ID. Send person properties as `$set` and groups as `$groups`, as described in [Identifying users](/docs/mcp-analytics/identifying-users).
 
-Otherwise, set `distinct_id` to the `$session_id` and turn off person processing. With a [capture v1 SDK](/docs/libraries/capture-v1), set the `process_person_profile` option to `false`. That way, anonymous calls don't create person profiles.
+Otherwise, set `distinct_id` to the `$session_id` and turn off person processing. With a [capture v1 SDK](/docs/libraries#sdk-versions-and-capture-v1), set the `process_person_profile` option to `false`. That way, anonymous calls don't create person profiles.
 
 </Step>
 

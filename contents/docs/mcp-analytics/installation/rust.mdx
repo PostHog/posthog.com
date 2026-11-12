@@ -152,7 +152,7 @@ The SDK logs its warnings through [`tracing`](https://docs.rs/tracing), never to
 
 ## Event options
 
-Set [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `event_options` and `event_option` keep them apart from `McpOptions`.
+Set [event options](/docs/api/capture-v1#event-options), such as `cookieless_mode` or `process_person_profile`, on MCP events. The names `event_options` and `event_option` keep them apart from `McpOptions`.
 
 - `McpOptionsBuilder::event_options` takes a callback that returns options for each request's events: its tool call, its `$exception`, and its listing or handshake.
 - `ToolCallRequest::event_option(key, value)` sets an option on one call's events in the [manual API](#custom-dispatchers). It wins over the callback.

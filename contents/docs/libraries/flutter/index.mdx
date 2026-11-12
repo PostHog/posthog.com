@@ -18,6 +18,16 @@ features:
   logs: true
 ---
 
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Capture v1" type="fyi">
+
+This page covers the Flutter SDK versions `6.0.0` and later, with support for the [Capture V1 API](/docs/api/capture-v1) for improved performance.
+
+If you're on an older version, [migrate now](/docs/libraries/flutter/migration) or see the [`5.x` reference](/docs/libraries/flutter/5.x.x).
+
+</CalloutBox>
+
 import FlutterIdentify from './_snippets/identify.mdx'
 
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.

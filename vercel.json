@@ -161,6 +161,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/libraries/capture-v1:ext(\\.md)?",
+            "destination": "/docs/libraries:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/references/posthog-js:ext(\\.md)?",
             "destination": "/docs/libraries/js/reference:ext?",
             "statusCode": 301

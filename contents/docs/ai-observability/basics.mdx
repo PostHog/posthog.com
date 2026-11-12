@@ -35,7 +35,7 @@ PostHog processes every `$ai_` event as an AI Observability event rather than a 
 
 PostHog owns the `$ai_` prefix. Don't use it for your own events, and don't use it for events that need person profiles or Product Analytics pricing.
 
-On [capture v1 SDKs](/docs/libraries/capture-v1#ai-events), send `$ai_` events with the SDK's AI capture method, such as `capture_ai`, and send every other event with `capture`. See [capture v1](/docs/api/capture-v1#send-each-event-to-its-own-endpoint) for how each endpoint handles events sent to the wrong one.
+On [capture v1 SDKs](/docs/libraries#sdk-versions-and-capture-v1), send `$ai_` events with the SDK's AI capture method, such as `capture_ai`, and send every other event with `capture`. See [capture v1](/docs/api/capture-v1#send-each-event-to-its-own-endpoint) for how each endpoint handles events sent to the wrong one.
 
 ## Generation properties
 

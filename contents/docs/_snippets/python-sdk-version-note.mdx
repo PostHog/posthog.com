@@ -1,6 +1,6 @@
 These docs cover version `8.x` of the PostHog Python SDK, which requires Python 3.10 or higher. Python 3.9 is no longer supported on `7.x.x` and higher – pin to the 6.x line with `pip install 'posthog<7'`, where `6.9.3` is the final release.
 
-Version `8.0` sends events with [capture v1](/docs/libraries/capture-v1) and adds event options, such as `options={"process_person_profile": False}`. Earlier versions don't take `options`. Read the [`7.x` to `8.0` migration guide](https://github.com/PostHog/posthog-python/blob/main/docs/migration-7.x-to-8.0.md) before you upgrade.
+Version `8.0` sends events with [capture v1](/docs/api/capture-v1) and adds event options, such as `options={"process_person_profile": False}`. Earlier versions don't take `options`. Read the [`7.x` to `8.0` migration guide](/docs/libraries/python/migration) before you upgrade.
 
 Event capture, the context API (`new_context`, `identify_context`, `set_context_session`), and `PosthogContextMiddleware` are identical on `6.9.3` and `7.0.0`: `7.0.0` only dropped Python 3.9 and bumped the optional LLM provider SDKs. That includes the middleware identifying the request context from the `X-POSTHOG-DISTINCT-ID` header and falling back to the authenticated user, which behaves the same across both lines.
 

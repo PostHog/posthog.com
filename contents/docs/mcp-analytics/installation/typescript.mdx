@@ -279,7 +279,7 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 
 ## Event options
 
-`eventOptions` sets [event options](/docs/libraries/capture-v1#event-options-replace-legacy-option-properties), such as `cookieless_mode` or `process_person_profile`, on MCP events. The name keeps them apart from the `instrument()` options.
+`eventOptions` sets [event options](/docs/api/capture-v1#event-options), such as `cookieless_mode` or `process_person_profile`, on MCP events. The name keeps them apart from the `instrument()` options.
 
 - Give `instrument()` an `eventOptions` callback for every auto-captured event. Like `eventProperties`, it takes `(request, extra)`. A failed call's `$exception` gets the same options.
 - Pass `eventOptions` per call to `analytics.capture()` and to the `PostHogMCP` capture methods.
