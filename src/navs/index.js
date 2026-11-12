@@ -1598,9 +1598,12 @@ export const handbookSidebar = [
                         name: 'Team lead tooling',
                         url: '/handbook/customer-success/team-lead-tooling',
                     },
-                    {
-                        name: 'Scaled Customer Success',
-                    },
+                ],
+            },
+            {
+                name: 'Scaled Customer Success',
+                url: '',
+                children: [
                     {
                         name: 'Overview',
                         url: '/handbook/scaled-customer-success/scaled-customer-success-team',
