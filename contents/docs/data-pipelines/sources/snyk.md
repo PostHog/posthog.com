@@ -3,9 +3,9 @@ title: Linking Snyk as a source
 sidebar: Docs
 showTitle: true
 availability:
-free: full
-selfServe: full
-enterprise: full
+  free: full
+  selfServe: full
+  enterprise: full
 sourceId: Snyk
 ---
 
