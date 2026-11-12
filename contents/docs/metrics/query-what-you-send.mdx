@@ -32,7 +32,7 @@ Histograms use these bucket boundaries, in the unit you record (milliseconds for
 0, 5, 10, 25, 50, 75, 100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000
 ```
 
-There's one more bucket above the last boundary, so values over 10000 are still counted. To use different boundaries in posthog-node (5.63.0 or later) or posthog-js (1.447.0 or later), pass `bounds` when you record:
+There's one more bucket above the last boundary, so values over 10000 are still counted. In posthog-node (5.63.0 or later) and posthog-js (1.447.0 or later), you can pass `bounds` when you record to use different boundaries:
 
 ```js
 posthog.metrics.histogram('job.duration', 42, {

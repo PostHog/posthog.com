@@ -1601,6 +1601,44 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Scaled Customer Success',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/scaled-customer-success/scaled-customer-success-team',
+                    },
+                    {
+                        name: 'Operations and processes',
+                        url: '/handbook/scaled-customer-success/operations-and-processes',
+                    },
+                    {
+                        name: 'Onboarding program',
+                        url: '/handbook/scaled-customer-success/onboarding-program',
+                    },
+                    {
+                        name: 'Data',
+                        url: '/handbook/scaled-customer-success/data',
+                    },
+                    {
+                        name: 'Conversations playbook',
+                        url: '/handbook/scaled-customer-success/conversations-playbook',
+                    },
+                    {
+                        name: 'Skills',
+                        url: '/handbook/scaled-customer-success/skills',
+                    },
+                    {
+                        name: 'Sales handover',
+                        url: '/handbook/scaled-customer-success/sales-handover',
+                    },
+                    {
+                        name: 'New hire onboarding',
+                        url: '/handbook/scaled-customer-success/new-hire-onboarding',
+                    },
+                ],
+            },
+            {
                 name: 'Forward deployed engineering',
                 url: '',
                 children: [
@@ -1669,44 +1707,6 @@ export const handbookSidebar = [
                     {
                         name: 'Setting up Replay Vision scanners',
                         url: '/handbook/customer-success/shareable-guides/replay-vision-scanners',
-                    },
-                ],
-            },
-            {
-                name: 'Onboarding',
-                url: '',
-                children: [
-                    {
-                        name: 'Onboarding team',
-                        url: '/handbook/onboarding/onboarding-team',
-                    },
-                    {
-                        name: 'Onboarding program',
-                        url: '/handbook/onboarding/onboarding-program',
-                    },
-                    {
-                        name: 'Onboarding process',
-                        url: '/handbook/onboarding/onboarding-tracking',
-                    },
-                    {
-                        name: 'Onboarding data',
-                        url: '/handbook/onboarding/onboarding-data',
-                    },
-                    {
-                        name: 'Onboarding conversations playbook',
-                        url: '/handbook/onboarding/onboarding-conversations-playbook',
-                    },
-                    {
-                        name: 'Onboarding skills',
-                        url: '/handbook/onboarding/onboarding-skills',
-                    },
-                    {
-                        name: 'Sales handover',
-                        url: '/handbook/onboarding/sales-handover',
-                    },
-                    {
-                        name: 'New hire onboarding',
-                        url: '/handbook/onboarding/new-hire-onboarding',
                     },
                 ],
             },
