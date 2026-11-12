@@ -13,8 +13,6 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-> **Note:** The Dialpad source is currently in **beta**.
-
 The Dialpad connector syncs your communication data – calls, users, call centers, departments, offices, contacts, numbers, rooms, channels, coaching teams, and call labels – into PostHog, so you can analyze your call activity alongside your product data.
 
 ## Prerequisites
