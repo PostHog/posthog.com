@@ -61,7 +61,7 @@ To configure a percentile metric:
 
 PostHog calculates the percentile across all matching events in each variant, rather than averaging per-user values. Events without a numeric value for the selected property don't count.
 
-Percentile metrics support Bayesian and frequentist analysis, including [sequential testing](/docs/experiments/statistics-frequentist#sequential-testing). Breakdowns, data warehouse sources, time series, and [CUPED](/docs/experiments/cuped) aren't supported.
+Percentile metrics support Bayesian and frequentist analysis, including [sequential testing](/docs/experiments/statistics-frequentist#sequential-testing).
 
 PostHog can show "Not enough metric data" when too many values repeat near the percentile or too few users generate most events. This can happen even with a large event count.
 
