@@ -1660,8 +1660,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Instrumenting PostHog in the development process',
-                        url:
-                            '/handbook/customer-success/shareable-guides/instrumenting-posthog-in-the-development-process',
+                        url: '/handbook/customer-success/shareable-guides/instrumenting-posthog-in-the-development-process',
                     },
                     {
                         name: 'LLM cost optimization',
