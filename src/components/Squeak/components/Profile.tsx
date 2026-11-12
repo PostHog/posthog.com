@@ -35,7 +35,7 @@ export const Profile = ({ className, profile, compact = false }: ProfileProps) =
                     } rounded-full overflow-hidden`}
                 >
                     <Avatar
-                        className={compact ? 'size-8' : 'w-[40px]'}
+                        className={compact ? 'size-7' : 'w-[40px]'}
                         image={getAvatarURL(profile)}
                         color={profile.attributes.color}
                     />

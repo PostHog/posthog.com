@@ -23,6 +23,7 @@ Through MCP tools, your agent can:
 - **Move between revisions.** `workflows-list-revisions`, `workflows-get-revision`, and `workflows-restore-revision` let you inspect history and roll back.
 - **Organize with tags.** `workflows-create` and `workflows-update` accept a `tags` array to label workflows by team or topic, and `workflows-list` takes a `tags` filter to return only matching workflows.
 - **Manage message categories.** `message-categories-list`, `message-categories-get`, `message-categories-create`, and `message-categories-update` let you create and update the [message categories](/docs/workflows/opt-outs#message-categories) that workflow email steps reference. Recipients can opt out of marketing categories; transactional categories ignore opt-outs.
+- **Send Supabase auth emails.** `supabase-auth-emails-settings-get`, `supabase-auth-emails-settings-update`, and `supabase-auth-emails-starter-templates-create` connect a Supabase project and map its [auth emails](/docs/workflows/supabase-auth-emails) to templates. These tools are in private beta.
 
 For the full list of tools and how to scope a session to a subset, see the [MCP tools reference](/docs/model-context-protocol/tools).
 

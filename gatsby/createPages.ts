@@ -146,6 +146,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         createPage({ path: pagePath, component: path.resolve('src/templates/UILibraryDocs.tsx'), context: {} })
     }
 
+    // Minimal builds, such as the preview deploys, need these pages too.
+    await createSdkMarkdownReferencePages({ createPage, graphql })
+
     if (isMinimalBuild) {
         return createMinimalPages({ createPage, graphql })
     }
@@ -1217,6 +1220,31 @@ function createSdkReferencePages({
                 })
             }
         })
+    })
+}
+
+/** SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js). */
+async function createSdkMarkdownReferencePages({
+    createPage,
+    graphql,
+}: {
+    createPage: Parameters<GatsbyNode['createPages']>[0]['actions']['createPage']
+    graphql: Parameters<GatsbyNode['createPages']>[0]['graphql']
+}) {
+    const result = (await graphql(`
+        {
+            allSdkMarkdownReference {
+                nodes {
+                    id
+                    slug
+                }
+            }
+        }
+    `)) as any
+    if (result.errors) throw result.errors
+    const component = path.resolve(`src/templates/sdk/SdkMarkdownReference.tsx`)
+    result.data.allSdkMarkdownReference.nodes.forEach(({ id, slug }) => {
+        createPage({ path: slug, component, context: { id } })
     })
 }
 
