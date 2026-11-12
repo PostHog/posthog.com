@@ -1329,6 +1329,10 @@
             "destination": "/desktop"
         },
         {
+            "source": "/inbox",
+            "destination": "/self-driving"
+        },
+        {
             "source": "/teams/logs",
             "destination": "/teams/apm"
         },
