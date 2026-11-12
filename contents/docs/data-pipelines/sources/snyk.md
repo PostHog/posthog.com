@@ -3,9 +3,9 @@ title: Linking Snyk as a source
 sidebar: Docs
 showTitle: true
 availability:
-  free: full
-  selfServe: full
-  enterprise: full
+free: full
+selfServe: full
+enterprise: full
 sourceId: Snyk
 ---
 
@@ -13,11 +13,16 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Snyk connector pulls your organizations, projects, targets, and vulnerability issues into the PostHog Data warehouse, so you can track your security backlog, severity mix, and remediation trends alongside your product data.
+The Snyk connector pulls your organizations, projects, targets, vulnerability issues, memberships, collections, container images, and audit logs into the PostHog Data warehouse, so you can track your security backlog, severity mix, and remediation trends alongside your product data.
 
 ## Prerequisites
 
 You need a Snyk account with REST API access so you can generate an API token. The token can read every organization it has access to, so a service account token scoped to the organizations you want to sync works well.
+
+Some tables need more access:
+
+- **Group memberships and group organizations:** The token must be able to view the Snyk group.
+- **Organization and group audit logs:** Your Snyk account must be on an Enterprise plan, and the token must be able to view audit logs.
 
 ## Adding a data source
 
@@ -33,7 +38,9 @@ When linking Snyk, you'll need:
 
 <SyncModes />
 
-The issues table supports incremental syncs on `updated_at` (recommended) or `created_at`. The other tables are full refresh only.
+The issues table supports incremental syncs on `updated_at` (recommended) or `created_at`. The organization and group audit log tables support incremental syncs on `created`. The other tables are full refresh only.
+
+Snyk keeps audit logs for 90 days, so the audit log tables sync at most the last 90 days of events.
 
 ## Configuration
 
@@ -43,7 +50,7 @@ The issues table supports incremental syncs on `updated_at` (recommended) or `cr
 
 <SourceTables />
 
-Tables scoped to an organization (projects, targets, and issues) include an `organization_id` column, so you can join them back to the organizations table.
+Tables scoped to an organization (such as projects, targets, issues, container images, and organization audit logs) include an `organization_id` column, so you can join them back to the organizations table. Tables scoped to a group (group memberships, group organizations, and group audit logs) include a `group_id` column.
 
 ## Troubleshooting
 
