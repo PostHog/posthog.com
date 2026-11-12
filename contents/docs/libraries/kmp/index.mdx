@@ -303,6 +303,7 @@ val uuid = PostHog.captureAi(
 - **Separate queue.** AI events have their own on-disk queue, so large events don't push your other events out. It keeps up to `captureAiMaxQueueSize` events and at most 50 MiB. Past either limit, the oldest events are dropped.
 - **Size limit.** The SDK drops an AI event that's over 8 MiB plus 64 KiB once serialized. Everything you pass is sent as is. The SDK doesn't truncate or redact prompts, outputs, or media.
 - **`capture` doesn't reroute AI events.** `capture` never sends `$ai_` events to the AI endpoint, so use `captureAi` for them. PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`.
+- **Reverse proxies.** `captureAi` sends to `/i/v1/ai/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, it has to serve that path too, with the same headers and responses as `/i/v1/analytics/events`.
 
 These `PostHogConfig` settings apply only to `captureAi`, and are ignored on JavaScript and Wasm:
 
@@ -835,7 +836,7 @@ On the JVM, event capture, identification, feature flags, groups, error tracking
 
 Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) lists every change. These changes apply on Android, iOS, macOS, and the JVM. They don't apply to the web target.
 
-- **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path. A reverse proxy must also:
+- **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path, and `/i/v1/ai/events` if you call [`captureAi`](#ai-events). A reverse proxy must also:
   - Pass these request headers through unchanged: `Authorization`, `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id`, `PostHog-Request-Timestamp`, `Content-Type`, `Content-Encoding` and `User-Agent`.
   - Return PostHog's response status, body and `Retry-After` header unchanged. The SDKs read them to decide which events to retry or drop, and drop the events on a `2xx` whose body isn't PostHog's.
   - Proxy setups from our guides before 29 October 2026 strip `Authorization`, so PostHog answers `401` and drops the events. Update yours from the current guide.
