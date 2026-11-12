@@ -9,9 +9,9 @@ Customer Success Managers (CSMs) help customers get more value out of PostHog so
 ## Principles
 
 - **Show, don't tell.** Help customers prioritize their needs, deliver bad news early, and stay on top of their questions. Under promise, over deliver.
-- **Be helpful upfront, and sound like a human.** Make assumptions and give value first, even without full context, instead of opening with questions. Write like our [voice & tone guide](/handbook/brand/tone#the-core-principle) says: to a smart friend, not a prospect you're trying to close.
+- **Be a genuinely helpful human.** You'll go a long way if you're [genuinely helpful](/handbook/growth/sales/getting-people-to-talk-to-you#why-is-it-helpful-for-someone-to-talk-to-you) to your customers. They're busy and self-serve, so find ways to help before they ask, even without full context. Make an assumption, build them something, or fix a bug you've seen them hit. Any of these beats "how can I help?" We care far more about long-term value than short-term revenue, and finding concrete ways to [save them money](/handbook/customer-success/cost-optimization) is one way we show it.
+- **Write like you'd speak.** We're PostHog! Not yet-another-CSM who sounds like a salesperson. Write the way you'd talk to the customer - say what you mean and don't put generic filler phrases that won't matter to them. Our [voice & tone guide](/handbook/brand/tone#the-core-principle) has more.
 - **Take it as far as you can.** If you've found the cause, it's yours to see through, and if you can fix it, fix it. Customers love that. Pull in an engineer when the change is big (see [PR or context?](/handbook/engineering/feature-ownership#pr-or-context)), or when talking to the customer is worth more to them than your fix, e.g. on a newer product.
-- **Help them save money, even when it costs us short term.** Long-term value matters more.
 - **Be their voice inside PostHog.** Advocacy only works if you're willing to go to bat for them. Push product and engineering to understand why a feature matters.
 
 ## Who we manage
