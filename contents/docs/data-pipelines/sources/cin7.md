@@ -17,8 +17,6 @@ The Cin7 Core connector syncs your inventory management data – products, stock
 
 > **Note:** This source supports Cin7 Core (formerly DEAR Inventory) only. It doesn't support Cin7 Omni.
 
-This source is currently in **beta**.
-
 ## Prerequisites
 
 You need a Cin7 Core account with API access enabled. To get your credentials:
