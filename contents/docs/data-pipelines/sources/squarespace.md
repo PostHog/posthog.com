@@ -43,5 +43,6 @@ When linking Squarespace, you'll need:
 
 - If you see an authentication error, your API key is invalid or has been revoked. Create a new API key in your Squarespace developer settings, then reconnect.
 - If you see a permissions error, the key or the site's plan is missing access needed to sync this data. Grant the relevant permission, and ensure the site is on a Commerce plan for orders and inventory, then reconnect.
+- If you see "Your Squarespace site's billing is expired, so Squarespace is refusing API access. Resolve the site's billing in Squarespace, then reconnect.", Squarespace refused the request with a `402 Payment Required` response. Squarespace [returns this code](https://developers.squarespace.com/commerce-apis/changelog#new-response-code-for-expired-websites) for requests on behalf of a site whose billing has expired. PostHog stops the sync instead of retrying it, because a retry can't fix the site's billing. Resolve the site's billing in Squarespace, then reconnect.
 
 <TroubleshootingLink />
