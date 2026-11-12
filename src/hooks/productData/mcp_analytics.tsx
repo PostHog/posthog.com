@@ -48,7 +48,12 @@ export const mcpAnalytics = {
      * Page-only sections live in ./mcp_analytics/sections.tsx.
      */
     productMenu: [
-        { slug: 'overview', name: 'Overview', icon: <IconEye className="size-4" /> },
+        {
+            slug: 'overview',
+            name: 'Overview',
+            icon: <IconEye className="size-4" />,
+            props: { showStatusLabel: true },
+        },
         {
             slug: 'eli5',
             name: 'What does it do?',
