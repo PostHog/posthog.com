@@ -81,16 +81,17 @@ Now send it from your app:
 - [Other languages, with the API](/docs/workflows/transactional-emails/api)
 
 For complete flows, such as sign-in codes, invites, and receipts with a PDF, see the [examples](/docs/workflows/transactional-emails/examples).
+
 ## Choose where the email's content lives
 
 You can write the email in PostHog, or send content that your code renders. Both get the same idempotency keys, statuses, suppression checks, and engagement events.
 
-| | Write it in PostHog | Send content from your code |
-| --- | --- | --- |
-| Who edits it | Anyone on your team, in the PostHog editor, with no deploy | Engineers, in your codebase |
-| Best for | Copy that changes often, and teams that want drafts, versions, and a preview | [React Email](https://react.email) or other templates that you already have, and a move from another email provider |
-| What a send carries | `template_id` and the template's variables | `template_key`, `subject`, and `html` or `text` |
-| Copies and attachments | Not on the send | `cc` and `bcc`, on the API. Attachments are [temporarily unavailable](/docs/workflows/transactional-emails/api#copies-and-attachments). |
+|                        | Write it in PostHog                                                          | Send content from your code                                                                                                             |
+| ---------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Who edits it           | Anyone on your team, in the PostHog editor, with no deploy                   | Engineers, in your codebase                                                                                                             |
+| Best for               | Copy that changes often, and teams that want drafts, versions, and a preview | [React Email](https://react.email) or other templates that you already have, and a move from another email provider                     |
+| What a send carries    | `template_id` and the template's variables                                   | `template_key`, `subject`, and `html` or `text`                                                                                         |
+| Copies and attachments | Not on the send                                                              | `cc` and `bcc`, on the API. Attachments are [temporarily unavailable](/docs/workflows/transactional-emails/api#copies-and-attachments). |
 
 The rest of this page covers emails that you write in PostHog. For content from your code, see your SDK's page or [the API](/docs/workflows/transactional-emails/api#send-content-from-your-code).
 
@@ -138,6 +139,8 @@ You can also make a template transactional with the API. Call `POST /api/project
 
 For emails with sign-in codes, reset links, or other secrets, turn on **Protect sensitive data**. It's in the first step of a new email, and on the email's **API** tab. PostHog then keeps no copy of what each email contained, and doesn't track link clicks, so a code or a token in a link never goes through a tracking redirect. PostHog still tracks deliveries, opens, bounces, and the email's status. You can turn this setting on or off at any time.
 
+For [content sent from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code), use the `tracking` and `sensitive` fields to control this per-send. See [control tracking and sensitivity](/docs/workflows/transactional-emails/api#control-tracking-and-sensitivity) in the API docs.
+
 ## Create an API key
 
 Send transactional emails with a [project secret API key](/docs/api/project-secret-api-keys) that has the `transactional_email:write` scope. Keys with `hog_flow:write` still work. The same key can also [read the status](#check-an-emails-status) of each email that it sends.
@@ -173,13 +176,13 @@ Without an `Idempotency-Key`, a retry after a timeout or a `503` can send the em
 
 Build the key from the record that caused the email. A random value or a timestamp makes each retry look like a new email.
 
-| Email | Key |
-| --- | --- |
-| Password reset | `password-reset-{reset_request_id}` |
-| Sign-in code | `sign-in-code-{code_id}` |
-| Email address check | `verify-email-{verification_id}` |
-| Team invite | `invite-{invite_id}` |
-| Receipt | `receipt-{order_id}` |
+| Email               | Key                                 |
+| ------------------- | ----------------------------------- |
+| Password reset      | `password-reset-{reset_request_id}` |
+| Sign-in code        | `sign-in-code-{code_id}`            |
+| Email address check | `verify-email-{verification_id}`    |
+| Team invite         | `invite-{invite_id}`                |
+| Receipt             | `receipt-{order_id}`                |
 
 A key is 1 to 255 visible ASCII characters, with no spaces. Keys are separate for each project.
 
@@ -203,27 +206,27 @@ An error response has this shape:
 
 Use `code` in your error handling. The text in `detail` can change.
 
-| Status | `code` | What it means | Retry? | What to do |
-| --- | --- | --- | --- | --- |
-| `400` | Varies, with `"type": "validation_error"` | The body isn't valid. For example, `to` is missing or isn't an email address. `attr` names the field. | No | Fix the request. |
-| `400` | `invalid_recipient` | The `to` address contains `{` or `}`. | No | Send a plain email address. |
-| `400` | `invalid_idempotency_key` | The `Idempotency-Key` header isn't 1 to 255 visible ASCII characters. | No | Use a valid key. |
-| `400` | `template_not_transactional` | The template isn't transactional. | No | [Make the template transactional](#use-an-existing-template). |
-| `400` | `template_not_sendable` | The template has no subject or no body. | No | Add them and publish the template. |
-| `400` | `marketing_template` | The template is in a marketing category. | No | Move the template to a transactional category, or remove its category. |
-| `400` | `transactional_email_paused` | The workflow that sends this template isn't active, or it was deleted. | No | A retry gets the same error. |
-| `401` | `not_authenticated` or `authentication_failed` | The `Authorization` header is missing, or the key isn't valid. | No | Send a valid project secret API key. |
-| `403` | `permission_denied` | The key doesn't have the `transactional_email:write` scope, or the key belongs to a different project. | No | Use a key from this project with the correct scope. |
-| `404` | `not_found` | The template doesn't exist in this project, or transactional emails aren't turned on for the project. | No | Check the template ID and the project. |
-| `409` | `idempotency_key_in_flight` | A request with the same `Idempotency-Key` is still in progress. | Yes | Retry with the same key after a few seconds. |
-| `422` | `idempotency_key_reused` | The `Idempotency-Key` was already used for a different request. | No | Use a new key for a new email. |
-| `422` | `recipient_suppressed` | The address is on your project's [suppression list](/docs/workflows/opt-outs#the-suppression-list) after a hard bounce or a spam complaint. | No | Remove the address from the suppression list only if you know that it can receive email again. |
-| `422` | `recipient_unreachable` | The address isn't valid, or its domain has no mail servers, so the email would bounce. | No | Check the address for a typo. |
-| `422` | `sending_paused` | Sending is paused for this transactional email because of its bounce or complaint rate. | No | Check the **Reputation** tab in Workflows. |
-| `422` | `sending_suspended` | Email sending is suspended for your project. | No | Check the **Reputation** tab in Workflows. |
-| `429` | `throttled` | You sent too many requests. | Yes | Wait for the number of seconds in the `Retry-After` header, then retry. |
-| `429` | `quota_limited` | Your project is over its email quota. | No | Check your usage and [billing limits](/docs/billing/limits-alerts). A retry gets the same error until the project is under its quota. |
-| `503` | `delivery_unavailable` | PostHog couldn't confirm that it queued the email. | Yes | Retry with backoff and the same `Idempotency-Key`, so that the email doesn't go out twice. |
+| Status | `code`                                         | What it means                                                                                                                               | Retry? | What to do                                                                                                                            |
+| ------ | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `400`  | Varies, with `"type": "validation_error"`      | The body isn't valid. For example, `to` is missing or isn't an email address. `attr` names the field.                                       | No     | Fix the request.                                                                                                                      |
+| `400`  | `invalid_recipient`                            | The `to` address contains `{` or `}`.                                                                                                       | No     | Send a plain email address.                                                                                                           |
+| `400`  | `invalid_idempotency_key`                      | The `Idempotency-Key` header isn't 1 to 255 visible ASCII characters.                                                                       | No     | Use a valid key.                                                                                                                      |
+| `400`  | `template_not_transactional`                   | The template isn't transactional.                                                                                                           | No     | [Make the template transactional](#use-an-existing-template).                                                                         |
+| `400`  | `template_not_sendable`                        | The template has no subject or no body.                                                                                                     | No     | Add them and publish the template.                                                                                                    |
+| `400`  | `marketing_template`                           | The template is in a marketing category.                                                                                                    | No     | Move the template to a transactional category, or remove its category.                                                                |
+| `400`  | `transactional_email_paused`                   | The workflow that sends this template isn't active, or it was deleted.                                                                      | No     | A retry gets the same error.                                                                                                          |
+| `401`  | `not_authenticated` or `authentication_failed` | The `Authorization` header is missing, or the key isn't valid.                                                                              | No     | Send a valid project secret API key.                                                                                                  |
+| `403`  | `permission_denied`                            | The key doesn't have the `transactional_email:write` scope, or the key belongs to a different project.                                      | No     | Use a key from this project with the correct scope.                                                                                   |
+| `404`  | `not_found`                                    | The template doesn't exist in this project, or transactional emails aren't turned on for the project.                                       | No     | Check the template ID and the project.                                                                                                |
+| `409`  | `idempotency_key_in_flight`                    | A request with the same `Idempotency-Key` is still in progress.                                                                             | Yes    | Retry with the same key after a few seconds.                                                                                          |
+| `422`  | `idempotency_key_reused`                       | The `Idempotency-Key` was already used for a different request.                                                                             | No     | Use a new key for a new email.                                                                                                        |
+| `422`  | `recipient_suppressed`                         | The address is on your project's [suppression list](/docs/workflows/opt-outs#the-suppression-list) after a hard bounce or a spam complaint. | No     | Remove the address from the suppression list only if you know that it can receive email again.                                        |
+| `422`  | `recipient_unreachable`                        | The address isn't valid, or its domain has no mail servers, so the email would bounce.                                                      | No     | Check the address for a typo.                                                                                                         |
+| `422`  | `sending_paused`                               | Sending is paused for this transactional email because of its bounce or complaint rate.                                                     | No     | Check the **Reputation** tab in Workflows.                                                                                            |
+| `422`  | `sending_suspended`                            | Email sending is suspended for your project.                                                                                                | No     | Check the **Reputation** tab in Workflows.                                                                                            |
+| `429`  | `throttled`                                    | You sent too many requests.                                                                                                                 | Yes    | Wait for the number of seconds in the `Retry-After` header, then retry.                                                               |
+| `429`  | `quota_limited`                                | Your project is over its email quota.                                                                                                       | No     | Check your usage and [billing limits](/docs/billing/limits-alerts). A retry gets the same error until the project is under its quota. |
+| `503`  | `delivery_unavailable`                         | PostHog couldn't confirm that it queued the email.                                                                                          | Yes    | Retry with backoff and the same `Idempotency-Key`, so that the email doesn't go out twice.                                            |
 
 The SDKs also return the code `network_error` when they get no answer from PostHog. Treat it like a `503`: PostHog can still have queued the email, so retry with the same key.
 
@@ -237,14 +240,14 @@ Each project secret API key can send 600 requests per minute and 20,000 requests
 
 Each send returns a message ID. Read the email's status with it, for 30 days after the send. Your SDK's page shows how.
 
-| `status` | What it means |
-| --- | --- |
-| `queued` | The email waits to go out. |
-| `sent` | PostHog handed the email to the email provider. |
-| `failed` | The email wasn't sent. `reason` says why. |
-| `delivered` | The recipient's mail server accepted the email. |
-| `bounced` | The recipient's mail server refused the email. `reason` is `hard`, `soft`, or `unknown`. |
-| `complained` | The recipient marked the email as spam. |
+| `status`     | What it means                                                                            |
+| ------------ | ---------------------------------------------------------------------------------------- |
+| `queued`     | The email waits to go out.                                                               |
+| `sent`       | PostHog handed the email to the email provider.                                          |
+| `failed`     | The email wasn't sent. `reason` says why.                                                |
+| `delivered`  | The recipient's mail server accepted the email.                                          |
+| `bounced`    | The recipient's mail server refused the email. `reason` is `hard`, `soft`, or `unknown`. |
+| `complained` | The recipient marked the email as spam.                                                  |
 
 A status only moves forward. For example, a `delivered` email never goes back to `sent`. New statuses can appear in the future, so handle a value that you don't know.
 

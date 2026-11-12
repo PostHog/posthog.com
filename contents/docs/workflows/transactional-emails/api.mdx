@@ -21,20 +21,20 @@ POST https://us.posthog.com/api/projects/@current/messaging/send/email/
 
 Send these headers:
 
-| Header | Value |
-| --- | --- |
-| `Authorization` | `Bearer` followed by your project secret API key |
-| `Content-Type` | `application/json` |
+| Header            | Value                                                                                                                                 |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `Authorization`   | `Bearer` followed by your project secret API key                                                                                      |
+| `Content-Type`    | `application/json`                                                                                                                    |
 | `Idempotency-Key` | Optional. A unique key for this email. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key). |
 
 Send a JSON body with these fields:
 
-| Field | Required | Description |
-| --- | --- | --- |
-| `template_id` | Yes | The ID of the transactional template to send. |
-| `to` | Yes | The email address of the recipient. One address for each request. |
-| `message_data` | No | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
-| `distinct_id` | No | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. Pass the distinct ID that you pass to `identify()`. See [link emails to your users](#link-emails-to-your-users). |
+| Field          | Required | Description                                                                                                                                                                                                                                                              |
+| -------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `template_id`  | Yes      | The ID of the transactional template to send.                                                                                                                                                                                                                            |
+| `to`           | Yes      | The email address of the recipient. One address for each request.                                                                                                                                                                                                        |
+| `message_data` | No       | An object with the values for the template's `{{ variables.* }}` placeholders. For example, `{"reset_link": "https://example.com/reset"}` fills `{{ variables.reset_link }}`. The template can't read person properties, so pass all the data that the email needs here. |
+| `distinct_id`  | No       | The distinct ID of the recipient's person. PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against this person. Pass the distinct ID that you pass to `identify()`. See [link emails to your users](#link-emails-to-your-users). |
 
 In the template, use the same names that you send in `message_data`:
 
@@ -76,12 +76,12 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
 
 ```js file=Node.js
 const { data, error } = await posthog.emails.send({
-    to: "jane@example.com",
-    templateId: "<template_id>",
-    templateData: { first_name: "Jane", reset_link: "https://example.com/reset?token=abc123" },
-    distinctId: "user_123",
-    idempotencyKey: "password-reset-8f14e45f",
-})
+  to: "jane@example.com",
+  templateId: "<template_id>",
+  templateData: { first_name: "Jane", reset_link: "https://example.com/reset?token=abc123" },
+  distinctId: "user_123",
+  idempotencyKey: "password-reset-8f14e45f",
+});
 ```
 
 ```python file=Python
@@ -185,19 +185,21 @@ Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usu
 
 You can also send the subject and the body from your code, without a template in PostHog. Use this when your code renders the email. For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and send the result as `html`. Name the email with `template_key`, and send the content in the body. Use the same `POST` route and headers as for a [template send](#send-an-email).
 
-| Field | Required | Description |
-| --- | --- | --- |
-| `template_key` | Yes | A name for this email, such as `password-reset`. It has at most 400 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time you send this email. |
-| `to` | Yes | The email address of the recipient. |
-| `distinct_id` | No | The distinct ID of the recipient's person, as for a template send. See [link emails to your users](#link-emails-to-your-users). |
-| `subject` | Yes | The subject of the email. |
-| `html` | One of `html` and `text` | The HTML body. PostHog sends it as you wrote it and renders no placeholders. |
-| `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
-| `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
-| `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
-| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is `true`. Send `false` to turn capture off for this email. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
+| Field                | Required                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| -------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `template_key`       | Yes                      | A name for this email, such as `password-reset`. It has at most 400 letters, digits, hyphens (`-`), and underscores (`_`). PostHog groups the metrics and the sends of this email under the key, so use the same key every time you send this email.                                                                                                                                                                                                                                                                  |
+| `to`                 | Yes                      | The email address of the recipient.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `distinct_id`        | No                       | The distinct ID of the recipient's person, as for a template send. See [link emails to your users](#link-emails-to-your-users).                                                                                                                                                                                                                                                                                                                                                                                       |
+| `subject`            | Yes                      | The subject of the email.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `html`               | One of `html` and `text` | The HTML body. PostHog sends it as you wrote it and renders no placeholders.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `text`               | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`.                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `from`               | No                       | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender.                                                                                                                                                                                                                                                                                                                                   |
+| `reply_to`           | No                       | A list of up to 10 addresses that replies go to, without a display name.                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `capture_engagement` | No                       | **Deprecated: use `tracking.engagement`.** Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). Defaults to `true`. A send with `tracking` can't also carry this field.                                                                                                                                                                                                                                                                                                       |
+| `tracking`           | No                       | What PostHog tracks for the email. `true` tracks opens and clicks and captures engagement events. `false` turns off all tracking. An object `{ opens, clicks, engagement }` sets each kind on its own, and a kind left out keeps its default. Without this field, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. Click tracking needs open tracking. A link with `data-ph-no-track` keeps its own address either way. The object form needs a JSON body. |
+| `sensitive`          | No                       | Mark the email as sensitive when it carries login links, reset tokens, or codes. Sensitive emails keep their links unchanged unless `tracking` turns clicks on, leave the subject off engagement events, and keep the content out of logs. Defaults to the matched template's setting, or `true` when no template matches. Can't be `false` when the matched template is sensitive.                                                                                                                                   |
 
-A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, `capture_engagement`, `tracking`, and `sensitive`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
 
 If the `to` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
@@ -222,14 +224,14 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
 
 ```js file=Node.js
 const { data, error } = await posthog.emails.send({
-    to: "jane@example.com",
-    templateKey: "password-reset",
-    subject: "Reset your password",
-    html,
-    from: "Hedgebox <security@example.com>",
-    distinctId: "user_123",
-    idempotencyKey: "password-reset-8f14e45f",
-})
+  to: "jane@example.com",
+  templateKey: "password-reset",
+  subject: "Reset your password",
+  html,
+  from: "Hedgebox <security@example.com>",
+  distinctId: "user_123",
+  idempotencyKey: "password-reset-8f14e45f",
+});
 ```
 
 ```python file=Python
@@ -321,6 +323,38 @@ $result = PostHog::emails()->send([
 
 </MultiLanguage>
 
+### Control tracking and sensitivity
+
+By default, PostHog tracks opens and captures [engagement events](/docs/workflows/engagement-events) for every code send, and tracks clicks only when the email isn't sensitive.
+
+`tracking` accepts three forms:
+
+- **`true`** — track opens and clicks, and capture engagement events.
+- **`false`** — turn off all tracking, now and for any kind of tracking added later.
+- **An object** — set each kind on its own. A kind left out keeps its default.
+
+```json
+{
+  "tracking": { "opens": true, "clicks": false, "engagement": true }
+}
+```
+
+Click tracking needs open tracking. Turning on `clicks` with `opens` off returns a `400`.
+
+A link with `data-ph-no-track` keeps its own address whether or not click tracking is on.
+
+`sensitive` marks an email that carries login links, reset tokens, or codes. A sensitive email:
+
+- Keeps its links unchanged, unless `tracking` turns clicks on.
+- Leaves its subject off engagement events.
+- Keeps its content out of logs.
+
+When you leave `sensitive` out, it defaults to the matched template's setting, or `true` when no template matches. Setting `sensitive` to `false` when the matched template is marked sensitive returns a `400`.
+
+`capture_engagement` still works but is deprecated. Use `tracking.engagement` instead. A send that carries both `tracking` and `capture_engagement` returns a `400`.
+
+If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+
 ### Copies and attachments
 
 <CalloutBox icon="IconWarning" title="Attachments are temporarily unavailable" type="warning">
@@ -331,11 +365,11 @@ A send with `attachments` gets a `400` error with the code `invalid_request`, an
 
 Content from your code also takes these fields. A template send takes none of them, because the template uses its own settings.
 
-| Field | Required | Description |
-| --- | --- | --- |
-| `cc` | No | A list of up to 10 addresses that get a copy, without a display name. |
-| `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
-| `attachments` | No | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
+| Field         | Required | Description                                                                                                                                                                                        |
+| ------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cc`          | No       | A list of up to 10 addresses that get a copy, without a display name.                                                                                                                              |
+| `bcc`         | No       | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them.                                                                                  |
+| `attachments` | No       | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
 
 - **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
 - **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
@@ -345,10 +379,11 @@ Content from your code also takes these fields. A template send takes none of th
 
 These checks apply to content from your code, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. PostHog sends nothing when a check fails.
 
-| Status | Code | Cause | What to do |
-| --- | --- | --- | --- |
-| `400` | A code for the field, such as `required` or `invalid` | A field is missing or breaks a rule above, or PostHog doesn't take the field. The `type` is `validation_error`, and `attr` names the field, such as `subject`. | Fix the field. If the field comes from a newer SDK, update PostHog or leave the field out. |
-| `400` | `sender_not_verified` | No verified sender of the project can send from the `from` address. Or the request has no `from`, and the project has no verified default sender. | Send from an address on a verified domain, or [set a default sender](/docs/workflows/configure-channels) and leave out `from`. |
+| Status | Code                                                  | Cause                                                                                                                                                          | What to do                                                                                                                     |
+| ------ | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `400`  | A code for the field, such as `required` or `invalid` | A field is missing or breaks a rule above, or PostHog doesn't take the field. The `type` is `validation_error`, and `attr` names the field, such as `subject`. | Fix the field. If the field comes from a newer SDK, update PostHog or leave the field out.                                     |
+| `400`  | `sensitive_template`                                  | `sensitive` is `false`, but the matched template is marked sensitive.                                                                                          | Leave `sensitive` out, or unmark the template.                                                                                 |
+| `400`  | `sender_not_verified`                                 | No verified sender of the project can send from the `from` address. Or the request has no `from`, and the project has no verified default sender.              | Send from an address on a verified domain, or [set a default sender](/docs/workflows/configure-channels) and leave out `from`. |
 
 ## Check an email's status
 
@@ -388,7 +423,7 @@ curl "https://us.posthog.com/api/projects/@current/messaging/emails/<message_id>
 ```
 
 ```js file=Node.js
-const { data: status, error } = await posthog.emails.get("<message_id>")
+const { data: status, error } = await posthog.emails.get("<message_id>");
 ```
 
 ```python file=Python
