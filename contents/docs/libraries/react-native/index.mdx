@@ -761,17 +761,15 @@ These native events also change shape:
 - A native event whose distinct ID is empty, whitespace-only or over 200 UTF-8 bytes is dropped. Plugin 2.x shortened a long ID to 200 characters and kept the event. JavaScript events still shorten it, so with a long distinct ID, such as a JWT, your app keeps its JavaScript events but loses its native ones. Keep distinct IDs at 200 bytes or shorter.
 - On iOS, a property whose value is `null` is left out instead of sent as `null`. On Android, a `null` element in a list is kept at its position instead of being removed. `$set` and `$set_once` still send `null` values.
 
-Native events report `$locale` as a full language tag with region, such as `de-CH` or `zh-Hant-TW` instead of `de` or `zh-TW`, and add `$app_language`, the language your app shows, once you call [`setAppLanguage()`](#setting-the-app-language). On Android, `$locale` also uses the current codes `he`, `id` and `yi` instead of the legacy `iw`, `in` and `ji`, so `in-ID` becomes `id-ID`. Update insights that filter on a two-letter `$locale` or on those codes.
+Native events report `$locale` as the device's preferred language, as a full language tag with region, such as `de-CH` or `zh-Hant-TW` instead of `de` or `zh-TW`. On iOS this used to be the language your app bundle resolved, so an English-only app on a French device now sends `fr-FR` instead of `en`. Native events also add `$app_language`, the language your app shows, once you call [`setAppLanguage()`](#setting-the-app-language). On Android, `$locale` also uses the current codes `he`, `id` and `yi` instead of the legacy `iw`, `in` and `ji`, so `in-ID` becomes `id-ID`. Update insights that filter on a two-letter `$locale` or on those codes.
 
 If your app creates PostHog clients for more than one project, native events take `$app_language` only from clients of the project the native SDK was set up for.
 
 If native code in your app, or a native library it uses, calls `posthog-ios` or `posthog-android` directly, update it for 4.0. See the [`posthog-ios` migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) and the [`posthog-android` migration guide](https://github.com/PostHog/posthog-android/blob/main/MIGRATION.md). Android code compiled against `posthog-android` 3.x fails at runtime with errors such as `NoSuchMethodError`.
 
-The experimental iOS session replay option `sessionReplayConfig.screenshotModeBackgroundCapture` no longer has an effect, because `posthog-ios` 4.0 removes it.
+Session replay records only masked screenshots on iOS and Android, because `posthog-ios` 4.0 and `posthog-android` 4.0 remove wireframe capture. The plugin already forced screenshot mode, so recordings keep the same mode. If native code in your app sets `screenshotMode` (iOS) or `screenshot` (Android), remove it, because it no longer compiles.
 
-Session replay records only masked screenshots on iOS and Android, because `posthog-ios` 4.0 and `posthog-android` 4.0 remove wireframe capture. The plugin already forced screenshot mode, so your recordings don't change. If native code in your app sets `screenshotMode` (iOS) or `screenshot` (Android), remove it, because it no longer compiles.
-
-Masking also changes on iOS with `posthog-ios` 4.0. Secure text inputs stay masked inside a `ph-no-mask` view. If a masked view sits inside a view backed by its own `CALayer` subclass, such as a `lottie-react-native` animation, the SDK masks the whole window for that frame. Fast scrolling on such a screen may also drop replay frames.
+Masking also changes on iOS. It covers content a masked view draws outside its bounds, such as unclipped images, layer shadows and button titles, and secure text inputs stay masked inside a `ph-no-mask` view. If a masked view sits inside a view backed by its own `CALayer` subclass, such as a `lottie-react-native` animation, the SDK masks the whole window for that frame. Fast scrolling on such a screen may also drop replay frames.
 
 ## Upgrading from V1, V2 to V3 or V3 to V4
 
