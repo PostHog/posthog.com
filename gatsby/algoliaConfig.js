@@ -50,7 +50,7 @@ const CANONICAL_ROUTES = {
 }
 
 const PAGE_TYPE_RULES = [
-    // `/products` is the Tool directory, not the canonical page for the WIP User Interviews entry.
+    // `/products` is the Tool directory.
     { type: 'tools', pattern: /^\/products$/ },
     { type: 'docs', pattern: /^\/(?:docs|manual|pricing)(?:\/|$)/ },
     { type: 'handbook', pattern: /^\/(?:handbook|product-engineer)(?:\/|$)/ },
