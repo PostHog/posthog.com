@@ -9,7 +9,7 @@ availability:
 sourceId: SamCart
 ---
 
-The SamCart connector syncs orders, charges, subscriptions, and refunds from your SamCart account into PostHog. This source is currently in **beta**.
+The SamCart connector syncs orders, charges, subscriptions, and refunds from your SamCart account into PostHog.
 
 ## Adding a data source
 
