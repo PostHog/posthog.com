@@ -303,6 +303,32 @@ If you are involved in interviewing it is important to keep your calendar up to 
 
 If you have an interview booked in you cannot make, do not just respond "no" to the calendar invite, please let the ops team know asap, or even better find a replacement for your interview and let Ops know, and we can update the interview. We aim to provide a great candidate experience and moving interviews is one way to reduce the quality of that experience.
 
+### How to use archive reasons in Ashby
+
+The archive reason is how we find people again. Ashby filters and Claude (through the Ashby connector) both rely on the archive reason to find candidates. There are three types of archive reason: Lead, Applicant, and Admin.
+
+-   **Lead or Applicant?** If they applied, or were sourced and moved into the interview process/had a first call, use an **[Applicant]** reason. Otherwise, use a **[Lead]** reason.
+-   **Don't use Ashby's default reasons.** "Fraudulent Candidate", "Not Interested after Outreach" and "Did Not Respond to Outreach" are Ashby defaults that can't be removed or edited. Use the best alternative instead.
+-   Be specific when choosing the archive reason and add a short archive note when possible.
+
+#### Lead vs. Applicant reasons
+
+You can find a breakdown of when to use which reason in the [Lead vs Applicant document](https://docs.google.com/document/d/1KX_5XDf4tRCHDfcz8nEGYnIxcyde3iRtRnYBgPdBwx4/edit?tab=t.0).
+
+#### Admin reasons and edge cases
+
+-   **Moving someone to another role:** archive them on the old job with "[Applicant] - Moved to another role" to avoid a fake rejection.
+-   **Duplicates:** use "[Admin] - Duplicate candidate/application" (or "[Admin] - Duplicate referral") and keep the profile with the most history.
+-   **Closing a role:** archive any uncontacted leads still on it with "[Lead] - Not contacted - Role closed before outreach".
+-   **Bulk cleanup:** "[Admin] - System clean up" is only for database tidying or test profiles.
+
+#### Resurfacing candidates
+
+-   **In Ashby:** filter candidates by archive reason, then narrow by job or team and archive date.
+-   **With Claude:** ask in plain language, as it searches Ashby through the connector.
+
+Old reasons that were archived instead of renamed can be unarchived, and they can still be searched.
+
 ## Hiring stage overview
 
 ### Application
