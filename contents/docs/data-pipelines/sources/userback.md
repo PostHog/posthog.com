@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Userback connector syncs your feedback, feedback comments, session recordings, projects, members, and workflows into PostHog, so you can analyze customer feedback alongside your product data.
 
-> **Note:** This source is in **beta**.
-
 ## Prerequisites
 
 You need:
