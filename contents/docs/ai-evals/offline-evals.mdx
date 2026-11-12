@@ -2,9 +2,11 @@
 title: Offline evals
 ---
 
-Offline evals test your AI agent against known inputs before you ship a prompt, model, or code change. Your code runs the agent and scores its outputs. The PostHog SDK uploads the results so you can compare runs and inspect failures.
+import ImageAnnotations from "components/ImageAnnotations"
 
-Run evals locally or in CI with your existing test framework. [Online evaluations](/docs/ai-evals) score production traffic; use failures you find there to grow your offline test set.
+Offline evals test your AI agent against known inputs before you ship a prompt, model, or code change. Run your agent and score its outputs locally or in your CI, using your existing test framework. The PostHog SDK uploads the results so you can compare runs and inspect failures.
+
+[Online evaluations](/docs/ai-evals) help you find failures in production. Add those failures to your offline test set to check that your next change fixes them.
 
 ## How offline evals work
 
@@ -15,7 +17,7 @@ Each run follows four steps:
 3. **Score the output** – Use code checks, an LLM judge, or your existing evaluation library.
 4. **Upload the results** – Send the items and scores to PostHog, then mark the experiment complete.
 
-A _scorer_ defines what a result means: its name, value type, and passing rule. A **reported scorer** records a result from your evaluation code, such as whether your agent selected the expected tool. A [**composite scorer**](#combine-scores-with-a-composite-scorer) calculates a result from other scores for the same item.
+A _scorer_ defines what a result means: its name, value type, and passing rule. A **reported scorer** records scores calculated by your evaluation code and reported to PostHog, such as whether your agent selected the expected tool. With a [**composite scorer**](#combine-scores-with-a-composite-scorer), PostHog calculates a score from other reported scores for the same item.
 
 ## Run your first experiment
 
@@ -30,15 +32,21 @@ Install the latest SDK. This quickstart requires:
 -   **Python:** Python 3.10+ and `posthog` 7.74.0+.
 -   **TypeScript:** Node.js matching `^20.20.0 || >=22.22.0` and `@posthog/ai` 8.16.0+.
 
+<MultiLanguage selector="tabs">
+
 ```bash file=Python
 pip install --upgrade posthog
 ```
 
-```bash file=TypeScript
+```shell file=TypeScript
 pnpm add @posthog/ai@latest
 ```
 
-Create a [personal API key](/docs/api#authentication) with access to your project and these scopes:
+</MultiLanguage>
+
+This walkthrough uses a [personal API key](/docs/api/personal-api-keys) to create and read scorers. Experiments you create with it are attributed to your PostHog user. For uploads from your CI, use a [project secret API key](/docs/api/project-secret-api-keys), which isn't tied to a person. See [Use results in your CI](#use-results-in-your-ci).
+
+Create a personal API key with access to your project and these scopes:
 
 | Scope                                | Used for                                                     |
 | ------------------------------------ | ------------------------------------------------------------ |
@@ -55,7 +63,9 @@ export POSTHOG_PROJECT_ID="<your_project_id>"
 export POSTHOG_HOST="https://us.posthog.com"
 ```
 
-Find your project ID in [project settings](https://app.posthog.com/settings/project). For an EU project, set `POSTHOG_HOST` to `https://eu.posthog.com`. Use a personal API key, not your public project token. Keep it on your server or in CI.
+Find your project ID in [project settings](https://app.posthog.com/settings/project). For an EU project, set `POSTHOG_HOST` to `https://eu.posthog.com`.
+
+Keep your API key in an environment variable or your CI's secret store. Never commit it or expose it in browser code. Your public project token can't authenticate these requests.
 
 ### 2. Create two scorers
 
@@ -110,13 +120,17 @@ try {
 
 </MultiLanguage>
 
+<MultiLanguage selector="tabs">
+
 ```bash file=Python
 python create_scorers.py
 ```
 
-```bash file=TypeScript
+```shell file=TypeScript
 pnpm dlx tsx create_scorers.mts
 ```
+
+</MultiLanguage>
 
 Save the two printed scorer IDs. The run script fetches each scorer once and uses its current version for every case:
 
@@ -372,22 +386,46 @@ try {
 
 Run the script with the environment variables from the previous steps:
 
+<MultiLanguage selector="tabs">
+
 ```bash file=Python
 python support_eval.py
 ```
 
-```bash file=TypeScript
+```shell file=TypeScript
 pnpm dlx tsx support_eval.mts
 ```
 
+</MultiLanguage>
+
 Open [**Experiments**](https://app.posthog.com/ai-evals/evaluations/offline/experiments) and select **Support agent baseline**. You should see six items and twelve results. **Correct tool** passes five of six cases (83.33%), and **Correct arguments** passes four of six (66.67%).
 
-<ProductScreenshot
-imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/1bb3a5a4-02ae-4426-b214-fbe5e2a9e337.jpg"
-imageDark="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/a8be0300-2237-4c3c-85e0-7c30bf81fd01.jpg"
+<ImageAnnotations annotations={[{ x: 81, y: 67.3, title: "Click Fail to inspect this argument check." }]}>
+
+<div className="dark:hidden rounded border border-primary bg-accent p-4">
+
+<ImageAnnotations.Image
+src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/85e5b267-1ac4-4b18-9162-687dc293b2c6.jpg"
 alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
-classes="rounded"
+imgClassName="rounded"
+style={{ maxWidth: "100%" }}
 />
+
+</div>
+<div className="hidden dark:block rounded border border-primary bg-accent p-4">
+
+<ImageAnnotations.Image
+src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/0f241dae-87e5-43d8-a733-9a1f529eacfd.jpg"
+alt="Six support-agent cases with Correct tool and Correct arguments scores. Tool selection passes five cases, and arguments pass four."
+imgClassName="rounded"
+style={{ maxWidth: "100%" }}
+/>
+
+</div>
+
+<div><ImageAnnotations.Key title="" className="mb-4" /></div>
+
+</ImageAnnotations>
 
 Keep `suite_key` / `suiteKey` the same across runs of a test suite and `case_key` / `caseKey` the same for each test case. To repeat a case within one run, create a new `EvaluationItem` with the same case key and a distinct `trial`, such as `"1"` or `"2"`.
 
@@ -402,12 +440,32 @@ Open [**AI Evals** > **Offline evals** > **Experiments**](https://app.posthog.co
 3. Select **Support agent baseline**. Each row is an experiment item, and each scorer version has its own column.
 4. Click **Fail** under **Correct arguments** for `refund_other_order`. The inspector shows why: the agent selected the right tool but passed order ID `1001` instead of `1004`.
 
-<ProductScreenshot
-imageLight="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/9d7e1acb-52b2-4012-a77e-1da16000b928.jpg"
-imageDark="https://raw.githubusercontent.com/PostHog/pr-assets/b43b91d92697b6e52b3be08fcfe0649789fd1898/2026/11/12ac8c6a-b8a8-400a-8d94-c741e6a6f17f.jpg"
-alt="Refund case inspector showing a passing tool check and a failing argument check: the agent sent order ID 1001 instead of 1004."
-classes="rounded"
+<ImageAnnotations annotations={[{ x: 64, y: 29.8, title: "Expected order 1004; received order 1001." }]}>
+
+<div className="dark:hidden rounded border border-primary bg-accent p-4">
+
+<ImageAnnotations.Image
+src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/92f4b7e6-4735-4600-9016-06b5c4dc6569.jpg"
+alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
+imgClassName="rounded"
+style={{ maxWidth: "100%" }}
 />
+
+</div>
+<div className="hidden dark:block rounded border border-primary bg-accent p-4">
+
+<ImageAnnotations.Image
+src="https://raw.githubusercontent.com/PostHog/pr-assets/1c77ff41c95df05b609ba99d0a273c6094d8c55a/2026/11/38927b3b-c40d-47ac-bb9f-e64df4d228bf.jpg"
+alt="The refund case failed the argument check: the agent sent order ID 1001 instead of 1004. The inspector shows the input, output, expected output, and reasoning."
+imgClassName="rounded"
+style={{ maxWidth: "100%" }}
+/>
+
+</div>
+
+<div><ImageAnnotations.Key title="" className="mb-4" /></div>
+
+</ImageAnnotations>
 
 To fix the demo, pass the extracted order ID to the cancellation and refund tools, and return `look_up_order` for delivery questions. Run the same cases again with the experiment name **Support agent routing fix**. Both scorers should pass all six cases.
 
@@ -421,7 +479,13 @@ Expand **Coverage** beside each scorer summary to check errors, skipped checks, 
 
 Numeric scorers show their mean. Numeric and categorical scorers need a passing rule to show a pass rate. Repeated trials each count as an item, so keep trial counts consistent when comparing runs.
 
-### Use results in CI
+### Use results in your CI
+
+Use a [project secret API key](/docs/api/project-secret-api-keys) with the `offline_evaluation_ingestion:write` scope for your CI uploads. It can create experiments, upload results, and mark runs complete or failed without depending on a teammate's account.
+
+Project secret keys can't create or read scorers or fetch datasets. Set up scorers and load any PostHog dataset with a personal key first. In your CI script, pass the project key as `secret_key` / `secretKey` and use saved scorer version IDs instead of calling `scorers.get()`.
+
+For a composite, save its version ID and the exact input versions it pins. Send those input results with each calculation request.
 
 In your CI, set `run_source="ci"` in Python or `runSource: "ci"` in TypeScript. Record your agent's commit SHA in `application_version` or `applicationVersion`. You can also record `model_version` and `prompt_version` (`modelVersion` and `promptVersion` in TypeScript).
 
