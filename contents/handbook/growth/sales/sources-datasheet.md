@@ -18,7 +18,7 @@ PostHog Sources is a fully managed tool that extracts data from your apps and da
 
 Move data in minutes, set and forget.
 
-- **700+ sources:** Stripe, HubSpot, Salesforce, Zendesk, Postgres and more, with new connectors shipping regularly.
+- **1,400+ sources:** Stripe, HubSpot, Salesforce, Zendesk, Postgres and more, with new connectors shipping regularly.
 - **AI-assisted setup:** Paste in a read-only key and pick your tables, or run `npx @posthog/wizard warehouse` and the wizard finds your databases and APIs for you.
 - **Free historical syncs:** Every row synced in a new source's first 7 days is free, so backfills don't land on the bill.
 - **A reliable sync engine:** Every incremental sync runs on deltalite, our own upsert engine. Memory scales with the batch, not the table, so big tables sync reliably.
