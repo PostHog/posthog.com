@@ -17,7 +17,7 @@ The Ably connector syncs your app's aggregated usage statistics — message volu
 
 ## Prerequisites
 
-You need an Ably account with an **app API key** that has permission to read stats. API keys are created per-app in the [Ably dashboard](https://ably.com/dashboard) and follow the format `app-id.key-id:key-secret`.
+You need an Ably account with an **app API key** that has the `stats` [capability](https://ably.com/docs/auth/capabilities). The key always needs `stats`, because PostHog calls Ably's stats endpoint to check the key when you link the source. API keys are created per-app in the [Ably dashboard](https://ably.com/dashboard) and follow the format `app-id.key-id:key-secret`.
 
 ## Adding a data source
 
@@ -33,7 +33,7 @@ When linking Ably, you'll need:
 1. Log in to the [Ably dashboard](https://ably.com/dashboard).
 2. Select the app you want to sync stats from.
 3. Go to the **API Keys** tab.
-4. Copy an existing key or create a new one. The key must include both parts: `app-id.key-id:key-secret`.
+4. Copy an existing key or create a new one. The key must include both parts: `app-id.key-id:key-secret`, and it must have the `stats` capability.
 5. Paste the full key into PostHog when linking the source.
 
 ## Configuration
@@ -56,7 +56,8 @@ The `Stats` table supports incremental sync on `interval_start_ms`. When using i
 
 ## Troubleshooting
 
-- **Authorization errors** – your API key is invalid, revoked, or missing the secret portion. Keys must be the full `app-id.key-id:key-secret` string. Generate a new key in the [Ably dashboard](https://ably.com/dashboard) and update the source credentials.
+- **Rejected API key** – when you link the source, PostHog shows "Ably rejected your API key. Check that you copied the whole key and that it has the `stats` capability, then reconnect." Ably refused the key when PostHog used it to read stats. The key is invalid or revoked, or it doesn't have the `stats` capability. PostHog doesn't retry this check and doesn't save the source. To see a key's capabilities, open the **API Keys** tab in the [Ably dashboard](https://ably.com/dashboard) and click **Settings** for the key. Use a key with the `stats` capability, then link the source again. See Ably's [capabilities docs](https://ably.com/docs/auth/capabilities) for more.
+- **Incomplete API key** – PostHog shows "Your Ably API key is incomplete. Copy the whole key from your Ably dashboard, including the part after the colon." The key has no secret after the colon, so PostHog doesn't send it to Ably. Copy the full `app-id.key-id:key-secret` string from the [Ably dashboard](https://ably.com/dashboard), then link the source again.
 - **Empty results** – check that the app has had traffic in the selected granularity window. A newly created app with no messages or connections won't have any stats to sync.
 - **Wrong granularity** – the stats granularity (`minute`, `hour`, `day`, `month`) is set when you link the source. To change it, update the source configuration and run a full refresh.
 
