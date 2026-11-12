@@ -447,7 +447,7 @@ The `beforeSend` callbacks only apply to events captured via Dart APIs:
 - Crash events
 - `$feature_flag_called` events
 
-Since version 6, on every platform except web, the callbacks get the final event, with the system properties (like `$device_type` and `$session_id`) and registered super properties the SDK adds, and their changes are final. `PostHogEvent` also has the event's `uuid`, `distinctId` and `timestamp`. On web, the callbacks see only the properties you passed, and `posthog-js` adds the rest later.
+Since version 6, on every platform except web, the callbacks get the final event, with the system properties (like `$device_type` and `$session_id`) and registered super properties the SDK adds, and their changes are final. `PostHogEvent` also has the event's `uuid`, `distinctId` and `timestamp`. On web, the callbacks see the properties you passed plus `$current_url`, `$host` and `$pathname`, and `posthog-js` adds the rest later.
 
 ### Filtering native events
 
@@ -786,3 +786,11 @@ The new `$app_language` property is the language your app shows. `PosthogObserve
 - Move anything that reads `version` or `build` on iOS and macOS lifecycle events to `$app_version` and `$app_build`.
 - On Windows and Linux, await calls or `Posthog().close()` before `exit()`.
 - Fix the remaining compile errors, including any test fakes of the platform classes.
+
+### Rolling back to version 5
+
+If you ship version 6 and then go back to version 5, version 5 sends the events still queued on the device to `/batch/`, which doesn't read event options. On iOS, macOS, Windows and Linux:
+
+- Events that version 6 marked as personless (`process_person_profile: false`) are processed as person events.
+- Options such as `cookieless_mode`, passed through `options` or `registerOptions()`, are lost.
+- AI events that version 6 queued are never sent.
