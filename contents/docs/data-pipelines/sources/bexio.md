@@ -11,8 +11,6 @@ sourceId: Bexio
 
 The Bexio connector syncs your Bexio business management and accounting data into PostHog, including contacts, invoices, quotes, orders, bills, expenses, projects, timesheets, journal entries, and the chart of accounts.
 
-> **This source is in beta.** It's available to all users, but the table list and sync behavior may change.
-
 ## Prerequisites
 
 You need a Bexio account and a personal access token.
