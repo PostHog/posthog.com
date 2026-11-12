@@ -60,7 +60,7 @@ Dataflare is self-hosted by design. It runs in your Cloudflare account, you sign
 
 PostHog Cloud is hosted in the US [or EU](/blog/posthog-cloud-eu), with unlimited team members on the free plan, SSO and role-based access on paid plans, SOC 2 Type 2, and a BAA if you need HIPAA.
 
-It's also [free to start](/pricing). More than 97% of companies use PostHog for free, and [startups](/startups) can get $50,000 in credits. If you'd rather self-host, [you can](/docs/self-host), though Dataflare's version of self-hosting is a lot lighter than ours (more on that [below](#self-hosting)).
+It's also [free to start](/pricing). More than 97% of companies use PostHog for free, and [startups](/startups) can get $50,000 in credits. If you'd rather self-host, [you can](/docs/self-host), though Dataflare's version of self-hosting is a lot lighter than ours (more on that below).
 
 <WizardCTA />
 
@@ -263,7 +263,7 @@ Both tools assume an agent will do much of the querying, and both give it [an MC
 
 - **Dataflare** runs its MCP server on your own Worker. Setup writes an `AGENTS.md`, a Claude Code skill, and an MCP config into your repo, so your coding agent can query trends, funnels, retention, people, and replays, run read-only SQL, and create flags and experiments right away. Every result comes back with its SQL and a dashboard link, and there's a read-only key for agents that shouldn't change anything. There's no built-in assistant, so you bring your own agent.
 
-- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents open PRs (in beta, three a month free).
+- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents open PRs.
 
 <WizardCTA slim />
 
