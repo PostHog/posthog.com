@@ -13,9 +13,7 @@ PostHog ships agent skills for AI Observability that teach your coding agent how
 
 1. Make sure there's LLM data to investigate – if you haven't instrumented yet, [install a PostHog SDK or provider integration](/docs/ai-observability/installation).
 
-2. [Connect the PostHog MCP server](/docs/ai-observability/surfaces/mcp). (The AI plugin in step 3 does this for you.)
-
-3. Install the [PostHog AI plugin](https://github.com/PostHog/ai-plugin) – it bundles every PostHog skill and keeps them up to date. Its README covers installation in Claude Code, Codex, Cursor, and Gemini CLI.
+2. [Connect the PostHog MCP server](/docs/ai-observability/surfaces/mcp). The skills ship with the MCP server, so there's nothing extra to install: your agent loads the one it needs when a task calls for it.
 
 <CalloutBox icon="IconInfo" title="Want the skills directly?" type="fyi">
 
