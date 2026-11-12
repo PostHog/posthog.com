@@ -22,6 +22,38 @@ import JavaInstall from '../../integrate/_snippets/install-java.mdx'
 
 <JavaInstall />
 
+## Configuration
+
+You set the options when you build `PostHogConfig`. Each option has a builder method with the same name:
+
+```java
+PostHogConfig config = PostHogConfig
+    .builder(POSTHOG_API_KEY)
+    .host(POSTHOG_HOST)
+    .flushAt(50)
+    .flushIntervalSeconds(10)
+    .build();
+```
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `host` | `https://us.i.posthog.com` | Your PostHog host. Use `https://eu.i.posthog.com` for PostHog Cloud EU. |
+| `debug` | `false` | Logs debug messages. |
+| `flushAt` | `100` | Number of queued events that triggers a flush. |
+| `flushIntervalSeconds` | `5` | Interval in seconds between flushes of the queue. |
+| `maxBatchSize` | `100` | Maximum number of events sent in one request. |
+| `maxQueueSize` | `10000` | Maximum number of events held in memory. When the queue is full, the SDK drops the oldest event. |
+| `sendFeatureFlagEvent` | `true` | Sends a `$feature_flag_called` event when you evaluate a feature flag. Experiments use these events. |
+| `featureFlagCalledCacheSize` | `1000` | Maximum number of entries in the cache that prevents duplicate `$feature_flag_called` events. |
+| `personalApiKey` | `null` | Your [personal API key](/docs/api/overview#personal-api-keys-recommended). Required for [local evaluation](#local-evaluation). |
+| `localEvaluation` | `false` | Evaluates feature flags locally. Setting `personalApiKey` changes the default to `true`. |
+| `pollIntervalSeconds` | `30` | Interval in seconds between polls for feature flag definitions, when local evaluation is on. |
+| `proxy` | `null` | A `java.net.Proxy` for requests to PostHog. |
+
+For the feature flag cache options, see [feature flag caching](#feature-flag-caching).
+
+> **Note:** These defaults are for `posthog-server`. The Android SDK uses different defaults. Do not copy values from the [Android configuration](/docs/libraries/android).
+
 ## Identifying users
 
 import IdentifyBackendCallout from '../../_snippets/identify-backend-callout.mdx'
