@@ -1,5 +1,5 @@
 ---
-title: Onboarding conversations playbook
+title: Conversations playbook
 sidebar: Handbook
 showTitle: true
 ---
