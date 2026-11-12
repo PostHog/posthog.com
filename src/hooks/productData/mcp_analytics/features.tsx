@@ -117,9 +117,10 @@ export const features = {
         ],
     },
     missing_capabilities: {
-        title: 'Missing capabilities',
-        headline: 'Missing capabilities',
-        description: 'Find out what agents wish they could do with your MCP through agent feedback.',
+        title: 'Agent feedback',
+        headline: 'Agent feedback',
+        description:
+            "Find out what agents wish they could do with your MCP, but can't. Agents self-report when a tool is missing, through the `get_more_tools` virtual tool.",
         icon: <IconPuzzle />,
         color: 'orange',
         images: [
