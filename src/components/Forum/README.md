@@ -31,7 +31,7 @@ The page files return `null`. `Router` in `src/components/AppWindow/index.tsx` r
 | `GettingStarted.tsx` | A hedgehog that peeks up from the bottom right of the feed views. A signed-out visitor gets a welcome with Join and Sign in. A member gets a chat of first steps, checked by `useForumProgress`, and a confetti burst on the first visit. Each has its own "don't show again" key in localStorage (`forum-welcome-dismissed`, `forum-getting-started-dismissed`). `index.tsx` loads it with `React.lazy`, so its SVG stays out of the shared bundle |
 | `Drafts.tsx`, `DeletePostDialog.tsx` | The drafts list, and the confirmation for deleting a post or draft |
 | `FilterMenu.tsx` | The feed filters: a "No replies yet" checkbox (`numReplies: 0`), then the tags, with a subscribe bell for each tag. On All posts it groups the tags by topic |
-| `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where members choose no emails or a daily digest |
+| `TopicSubscribeButton.tsx`, `ManageSubscriptions.tsx` | The bell beside a topic's name (a daily digest), and the subscription list, where members unsubscribe |
 | `TopicForm.tsx`, `DeleteTopicDialog.tsx` | Staff tools for topics |
 | `TopicTags.tsx` | Staff page for one topic's tags: search, add, edit the name and description, and delete or move to another tag |
 | `ForumAlerts.tsx` | Staff page that sets which teams get a Slack message for each topic and tag. Saves with `PUT /api/teams/:id` |
