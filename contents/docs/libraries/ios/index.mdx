@@ -32,6 +32,13 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 
 ## Installation
 
+> **CocoaPods is becoming read-only.** [CocoaPods has announced](https://blog.cocoapods.org/CocoaPods-Specs-Repo/) the following schedule for its public specs repository:
+>
+> - November 2–6, 2026: A read-only dry run will prevent us from publishing new PostHog iOS SDK versions to CocoaPods.
+> - December 2, 2026 onward: The repository will be permanently read-only. New PostHog iOS SDK versions will only be available through Swift Package Manager (SPM).
+>
+> Existing versions will remain available through CocoaPods, but you'll need SPM to get new releases during the dry run and after December 2. To migrate, remove the `PostHog` entry from your `Podfile`, run `pod install`, and follow the [Swift Package Manager installation instructions](#swift-package-manager) below.
+
 <IOSInstall />
 
 ## Identifying users
@@ -73,143 +80,6 @@ You can learn more about configuring method swizzling in the [configuration page
 ## Push notifications
 
 The iOS SDK can register a device for [Workflows](/docs/workflows) push notifications and capture when a user opens one. For setup, including automatic and manual registration, capturing opens, and identity verification, see [Push notifications](/docs/workflows/push-notifications).
-
-## Event options
-
-From version 4.0, `capture`, `screen`, `identify`, `setPersonProperties`, `alias`, `group`, and `captureException` take an `options` argument. Options tell PostHog how to process the event and are sent apart from its properties. They replace the `$`-prefixed properties that earlier versions sent as settings:
-
-| Option | Legacy property |
-| --- | --- |
-| `process_person_profile` | `$process_person_profile` |
-| `cookieless_mode` | `$cookieless_mode` |
-| `disable_skew_correction` | `$ignore_sent_at` |
-| `product_tour_id` | `$product_tour_id` |
-
-For example, set `process_person_profile` to `false` to capture an event without processing a [person profile](/docs/data/persons):
-
-```swift
-PostHogSDK.shared.capture("signed_up", options: ["process_person_profile": false])
-```
-
-In Objective-C, use the selectors that end in `options:`, such as `captureWithEvent:distinctId:properties:userProperties:userPropertiesSetOnce:groups:timestamp:options:`.
-
-- Legacy option properties still work, but an option overrides its legacy property. Use options. Other keys are sent unchanged, and PostHog ignores keys it doesn't know.
-- PostHog reads common forms of a value, such as `"false"` or `0` for a boolean, and drops an event whose option value it can't read.
-- For `identify`, the options apply to the `$identify` or `$set` event the call sends.
-- In `beforeSend`, read and change options through `event.options`. Edit the dictionary instead of replacing it: when person processing is off, the SDK sets `process_person_profile` to `false` there, and a new dictionary loses it.
-- There are no global options. To set one on every event, register its legacy property, for example `PostHogSDK.shared.register(["$cookieless_mode": true])`. A registered `$process_person_profile` set to `false` also reaches the events that `identify`, `alias`, `group`, and `setPersonProperties` send. PostHog drops `$identify`, `$create_alias`, and `$groupidentify` on purpose, and the app shows no error. The `$set` event from `setPersonProperties` is kept, but it doesn't update the person. To keep identifying, pass the option on the call. This also works for `alias`, `group`, and `setPersonProperties`:
-
-  ```swift
-  PostHogSDK.shared.identify("user-123", options: ["process_person_profile": true])
-  ```
-
-  To create no person profiles, set `personProfiles = .never` instead. The SDK then skips those calls on the device.
-
-## Upgrading from version 3 to version 4
-
-This section covers what most apps need. The [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md) lists every removed API, including the Objective-C names.
-
-React Native, Flutter, and Kotlin Multiplatform apps get this SDK through their PostHog package. Upgrade that package instead of adding `posthog-ios` 4.0 yourself.
-
-### Requirements
-
-| | Version 3 | Version 4 |
-| --- | --- | --- |
-| Xcode | Swift tools 5.3 or later | 26 or later (`swift-tools-version` 6.2) |
-| iOS and Mac Catalyst | 13.0 | 15.0 |
-| macOS | 10.15 | 11.0 |
-| tvOS | 13.0 | 15.0 |
-| watchOS | 6.0 | 10.0 |
-| visionOS | 1.0 | 1.0 |
-| Installation | Swift Package Manager or CocoaPods | Swift Package Manager only |
-
-To move from CocoaPods, remove `pod 'PostHog'` from your `Podfile`, run `pod install`, and [add the Swift package](#installation). If a Run Script phase [uploads dSYMs](/docs/error-tracking/upload-source-maps/ios), change its path to the Swift Package Manager one, or symbol uploads fail. Version 3 stays available on CocoaPods.
-
-### Changes the compiler won't flag
-
-These change behavior without a build error, so check them even if your app builds cleanly.
-
-**Session replay records screenshots.** Wireframe recording is gone, so [recordings show real pixels](/docs/session-replay/mobile#how-it-works) for everything that isn't masked. If you didn't already set `screenshotMode = true`:
-
-- Custom-drawn views, maps, video, and charts are now visible. Mask anything sensitive with `.postHogMask()` in SwiftUI, or add `ph-no-capture` to a UIKit view's `accessibilityIdentifier`.
-- A `WKWebView` is masked whole when `maskAllTextInputs` or `maskAllImages` is on, but recorded in full when both are off.
-- Apps with a SwiftUI window root recorded nothing before and now start recording, which counts against your replay quota and may need a consent or privacy update.
-- Each frame uses more bandwidth and CPU.
-- `$sdk_debug_replay_capture_mode` is always `screenshot`.
-
-**Replay screen names.** The name comes from the visible screen, and SwiftUI screens report their view name. A plain `UIViewController`'s `title` is no longer used. `$screen` events are unchanged.
-
-**Feature flag payloads.** A malformed, empty, or whitespace-only payload now reads as `nil` instead of the raw string. The flag's value isn't affected. A bootstrapped string payload such as `"123"` stays a string instead of being decoded again.
-
-**Empty flag variants.** A flag whose variant is an empty string reads as disabled. `isFeatureEnabled` returns `false`, `enabled` is `false` in `getFeatureFlagResult` and `getAllFeatureFlags`, `onFeatureFlags` leaves the flag out of `flags` and `variants`, and events leave it out of `$active_feature_flags`. Version 3 treated it as enabled. `variant`, `getFeatureFlag`, and the event's `$feature/<key>` property still return `""`. PostHog no longer accepts empty variants for new flags, so only flags created earlier through the API, MCP or Terraform are affected. `/flags` still returns `enabled: true` for them, and other PostHog SDKs can still report them as enabled, so rename the variant before you upgrade.
-
-**Lifecycle events.** `Application Installed`, `Application Updated`, and `Application Opened` no longer send `version` and `build`. Use `$app_version` and `$app_build` in insights, cohorts, and actions. To find cold launches, filter on `from_background = false`.
-
-**Network detection.** A connection that needs user action, such as a VPN waiting for a password, counts as reachable. Queues pause while cellular data is off for your app. Events captured in the first 100 ms after setup may leave out `$network_wifi` and `$network_cellular`.
-
-**Queued 2.x events.** If an app updates straight from a 2.x SDK, events still queued on disk are deleted. Distinct ID, anonymous ID, groups, and cached flags carry over.
-
-**Capture v1.** Analytics events now go to `/i/v1/analytics/events` instead of `/batch`. If you use a reverse proxy or self-host PostHog, forward that path before you upgrade. A reverse proxy must serve `/i/v1/*` and pass the `Authorization` header (`Bearer phc_…`) through unchanged, because the project token now travels there instead of in the request body. See the [proxy reference](/docs/advanced/proxy/proxy-reference#checklist) for the full list, and the [capture v1 upgrade guide](/docs/api/capture-v1) for what else changes. The SDK now drops an event with an empty name before sending it, PostHog drops an event whose name is over 200 UTF-8 bytes, and the SDK follows only 307 and 308 redirects to the same origin as `host`. If your proxy redirects capture requests to another host, point `host` at the final host.
-
-**Long distinct IDs.** PostHog now drops an event whose distinct ID is over 200 UTF-8 bytes. Version 3 shortened the ID and kept the event. If you identify users with a long ID, such as a JWT or a long email address, shorten or hash it before you upgrade, or every event for that user is dropped.
-
-**`Authorization` in `requestHeaders`.** Event requests send `Authorization: Bearer <projectToken>`, which replaces any `Authorization` header you set in `requestHeaders`. If your proxy authenticates with `Authorization`, switch it to another header, such as `X-Proxy-Token`.
-
-**Personal API keys.** A personal API key (`phx_…`) in `projectToken` now disables the SDK at setup and logs a warning. Version 3 started and PostHog rejected every event. Use your project token (`phc_…`).
-
-**Person processing in `beforeSend`.** When `personProfiles` turns person processing off, the SDK now sets the `process_person_profile` [option](#event-options) to `false` instead of the `$process_person_profile` property, so `beforeSend` hooks see it in `event.options`. A `$process_person_profile` you register or pass now wins over the SDK's value. Version 3 replaced a registered value with its own, so a registered `false` did nothing. In version 4 it takes effect: PostHog drops `$identify`, `$create_alias`, and `$groupidentify` events, and after `identify`, other events stop updating the person. To keep identifying, pass `process_person_profile: true` on the call. See [event options](#event-options).
-
-**Null properties.** A property set to `NSNull()` or a `nil` optional is now left out of the event instead of sent as `null`, also inside nested dictionaries and when `beforeSend` sets it. Filters such as "is set" and "is not set" match differently. `$set`, `$set_once`, and `$group_set` still send `null` to clear a property.
-
-**Property precedence.** Values you register or pass now win over the SDK's own. A registered super property overrides `$os`, `$app_version`, and other SDK properties, and a passed `$is_identified` or `$geoip_disable` overrides the SDK's value. A registered `$session_id` can detach events from their recording. `$lib` and `$lib_version` are the exception: the SDK fills them as a pair. See the [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#property-precedence).
-
-**`$locale` and `$app_language`.** `$locale` is now the device's preferred language with its region, such as `de-CH` instead of `de`. The new `$app_language` property is the language your app shows, such as `de` or `pt-BR`. Update cohorts, insights, and actions that match `$locale`: to filter on your app's language, use `$app_language`. If your app sets its language itself instead of using iOS localizations, call `PostHogSDK.shared.setAppLanguage("de")` at startup and whenever it changes.
-
-### Compile errors
-
-| Version 3 | Version 4 |
-| --- | --- |
-| `PostHogConfig(apiKey:)`, `PostHogConfig(apiKey:host:)`, `config.apiKey` | `PostHogConfig(projectToken:)`, `PostHogConfig(projectToken:host:)`, `config.projectToken` |
-| `config.evaluationEnvironments` | `config.evaluationContexts` |
-| `config.propertiesSanitizer`, `PostHogPropertiesSanitizer` | `config.setBeforeSend(_:)` |
-| `config.remoteConfig` | Delete it. Remote config is always loaded. |
-| `config.dataMode = .cellular` | `.any` |
-| `config.maxRetries` | `config.pushNotificationSubscriptionMaxRetries` |
-| `sessionReplayConfig.screenshotMode`, `maskPhotoLibraryImages` | Delete them. |
-| `sessionReplayConfig.debouncerDelay` | `sessionReplayConfig.throttleDelay` |
-| `PostHogLogLevel`, `PostHogLogEntry` | `PostHogConsoleLogLevel`, `PostHogConsoleLogEntry` |
-| `getFeatureFlagPayload(key)` | `getFeatureFlagResult(key, sendFeatureFlagEvent: false)?.payload` |
-| `reloadFeatureFlags { ... }` | `reloadFeatureFlags { result in ... }`, where `result.errorsLoading` is `true` if the reload failed |
-| `PostHogSDK.didReceiveFeatureFlags` | [`onFeatureFlags(_:)`](/docs/libraries/ios/usage) |
-| `PostHogSessionManager` | `getSessionId()`, `startSession()`, and `endSession()` on `PostHogSDK`. Custom session IDs (`setSessionId(_:)`) have no public replacement. |
-| `PostHogStorageManager`, `config.storageManager` | `identify(_:)`, `getDistinctId()`, `getAnonymousId()`, `getDeviceId()`, and `reset()` on `PostHogSDK` |
-
-Utility APIs that were public by accident, such as `Gzip`, `toISO8601String(_:)`, `toISO8601Date(_:)`, `dateToMillis(_:)`, and `UIColor(hex:)`, are no longer public, so copy the code you need into your app. Internals that only PostHog's React Native and Flutter SDKs use, such as `PostHogSessionManager` and `PostHogStorageManager`, moved behind `@_spi(PostHogInternal)`. The [full migration guide](https://github.com/PostHog/posthog-ios/blob/main/MIGRATION.md#internal-and-utility-apis) lists them all.
-
-Callbacks the SDK can call off the main thread are now `@Sendable`: `reloadFeatureFlags(_:)`, `setBeforeSend(_:)`, `getAnonymousId`, `pushIdentityProvider`, and `logSanitizer`. In Swift 6 mode, a closure that touches main-actor state no longer compiles. In `reloadFeatureFlags(_:)` and `pushIdentityProvider`, hop with `Task { @MainActor in ... }`. The others must return right away, so don't read main-actor state in them. In Swift 6 mode, passing a stored closure or method reference to `setBeforeSend(_:)` fails to compile: declare it as `BeforeSendBlock`, or pass it in an array.
-
-### New: AI events
-
-`captureAi` sends AI events, such as `$ai_generation`, to PostHog's AI endpoint (`/i/v1/ai/events`). It takes the same arguments as `capture`, and the events go through the same `beforeSend` hooks:
-
-```swift
-PostHogSDK.shared.captureAi("$ai_generation", properties: ["$ai_model": "gpt-5", "$ai_trace_id": traceId])
-```
-
-PostHog drops an event sent with `captureAi` whose name doesn't start with `$ai_`. `capture` never sends events to the AI endpoint. See [AI events](/docs/libraries/ios/usage#ai-events) for the return value, the separate queue, and the `captureAi` settings.
-
-### Optional: leave out features
-
-Swift Package Manager apps can leave out session replay, crash reporting, or surveys with the new `SessionReplay`, `CrashReporting`, and `Surveys` package traits. All three are on by default, so nothing changes unless you list traits. Listing traits replaces the defaults, and a trait's public API is removed when it's off:
-
-```swift file=Package.swift
-dependencies: [
-  // Keep crash reporting, leave out session replay and surveys
-  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0", traits: ["CrashReporting"])
-],
-```
-
-In an Xcode app project, you can pick a package's traits from Xcode 26.4. SwiftPM turns a trait back on if any dependency in your graph uses posthog-ios with the default traits, so check that the build actually leaves the feature out.
 
 ## Next steps
 
