@@ -157,7 +157,7 @@ Defaults are tuned for cellular-aware mobile apps. Raise `rateCapMaxLogs` and `m
 
 <Step title="Filter or redact with beforeSend" badge="optional">
 
-Use `config.logsConfig.beforeSend` for redaction, sampling, or filtering by level. It is a `List<BeforeSendLogCallback>`, where each callback is a `PostHogLogRecord? Function(PostHogLogRecord)`. Callbacks run **in Dart on all platforms (including web)**, evaluated left-to-right. Each callback receives a mutable `PostHogLogRecord` (with mutable `body`, `level`, and `attributes`) and returns either the (possibly mutated) record or `null` to drop it. Callbacks must be synchronous.
+Use `config.logsConfig.beforeSend` for redaction, sampling, or filtering by level. It is a `List<BeforeSendLogCallback>`, where each callback is a `PostHogLogRecord? Function(PostHogLogRecord)`. Callbacks run **in Dart on all platforms (including web)**, evaluated left-to-right. Each callback receives a mutable `PostHogLogRecord` (with mutable `body`, `level`, and `attributes`) and returns either the (possibly mutated) record or `null` to drop it. In 6.0 and later, callbacks must be synchronous. On 5.x, they can also be asynchronous.
 
 ```dart
 config.logsConfig.beforeSend = [
