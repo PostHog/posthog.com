@@ -85,6 +85,19 @@ const faqs = [
         ),
     },
     {
+        q: 'What does the price of an event include?',
+        a: (
+            <p>
+                Collecting the event, processing it, storing it, and every query you run on it in PostHog. It also pays
+                for the engineers who keep that pipeline running, so your data arrives complete and correct.{' '}
+                <Link to="/docs/billing/what-you-pay-for-per-event">
+                    Our docs
+                </Link>{' '}
+                explains each step.
+            </p>
+        ),
+    },
+    {
         q: 'How long does PostHog retain data (events, recordings, logs)?',
         a: (
             <>
@@ -287,7 +300,7 @@ const faqs = [
                 </p>
                 <p>
                     You can read how we stack up against competitors like{' '}
-                    <Link to="/blog/posthog-vs-amplitude">Amplitude</Link>,{' '}
+                    <Link to="/compare/posthog-vs-amplitude">Amplitude</Link>,{' '}
                     <Link to="/blog/posthog-vs-mixpanel">Mixpanel</Link>,{' '}
                     <Link to="/compare/posthog-vs-heap">Heap</Link>,{' '}
                     <Link to="/compare/posthog-vs-fullstory">FullStory</Link>,{' '}

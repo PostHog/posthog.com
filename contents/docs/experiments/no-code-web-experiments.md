@@ -48,6 +48,8 @@ Launch the toolbar on your website:
 2. Add your website URL as an authorized domain if you haven't already.
 3. Click **Launch** to open the toolbar on your site.
 
+The [Chrome extension](/docs/toolbar/extension) does the same from a side panel. Open its **Experiments** tool to edit a variant and preview it on the page.
+
 Once on your site with the toolbar active:
 
 1. Click the **<IconTestTube className="inline w-4 h-4" /> Experiment** tab on the toolbar.

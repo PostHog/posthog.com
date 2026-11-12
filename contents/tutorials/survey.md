@@ -25,7 +25,7 @@ Once created, go into the folder and install `posthog-js`.
 
 ```bash
 cd surveys
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, go into your `app` folder and create a `providers.js` file. Create a client-side PostHog initialization using the project token and instance address (from your [project settings](https://app.posthog.com/project/settings)). Make sure to add the `use client` directive and a check for the window. Altogether, this looks like this:

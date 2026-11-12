@@ -97,7 +97,7 @@ Now, we can run `ng serve` in our terminal and go to [`http://localhost:4200/`](
 With our app set up, it’s time to install and set up PostHog. To start, install the [JavaScript Web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 To preemptively fix a TypeScript compilation error, we need to install some `rrweb` types and then clear the `npm` cache.

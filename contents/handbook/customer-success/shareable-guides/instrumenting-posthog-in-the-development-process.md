@@ -20,7 +20,7 @@ A better tool does not fix this. A better process does. This guide puts tracking
 2. **Turn the PRD into an event spec.** An agent skill or a planning prompt can draft the spec. A person approves it.
 3. **Assign an owner.** The PM and the lead engineer own the spec, the launch dashboard, and the grade.
 4. **Build behind a feature flag.** The events ship in the same pull request as the feature code.
-5. **Verify the events.** Trigger the feature locally and confirm that each event arrives in the [activity tab](/docs/data/events) with the correct properties.
+5. **Verify the events.** Trigger the feature locally and confirm that each event arrives in the [activity tab](/docs/data/events) with the correct properties. Send local events to a separate development project so test data stays out of production. If you don't have one yet, see [how to set up PostHog for multiple environments](/tutorials/multiple-environments).
 6. **Launch.** Roll out the flag.
 7. **Grade the launch.** Compare the result to the PRD metric.
 8. **Hold a retro.** Decide what the data changes about your next piece of work.
@@ -171,8 +171,6 @@ Keep one dashboard for launches, and rotate it. While a feature launches, the da
 
 After the launch window, move the insights that still matter to the dashboard for that product area. Then clear the launch dashboard for the next launch, and [clean up the flag](/docs/feature-flags/cleaning-up-stale-flags).
 
-A large number of dashboards is not the real problem. The real problem is that nobody can find the one they need. A few core dashboards for top-level questions, plus one launch dashboard, keep each answer easy to find.
-
 ## Start backend events with one closed loop
 
 Frontend events show what users try. Backend events show what happened. [Backend tracking is also more reliable](/docs/product-analytics/best-practices#7-prefer-backend-to-frontend-tracking), because ad blockers and browser network errors do not drop it.
@@ -194,7 +192,7 @@ Send the account ID and plan as properties on each backend event. You can then b
 ## Anti-patterns
 
 - **A flag evaluated in a latency hot path.** Each remote evaluation is a network request. Use [server-side local evaluation](/docs/feature-flags/local-evaluation), and [evaluate the flag once, not on every request](/docs/feature-flags/best-practices#evaluate-once-not-continuously).
-- **A launch with no list of the events it fires.** If nobody can name the events, nobody can grade the launch. Step 5 of the loop prevents this.
+- **A launch with no list of the events it fires.** If nobody can name the events, nobody can grade the launch. Step 2 of the loop prevents this.
 - **An agent that builds a whole feature with no tracking plan.** The agent invents names and properties, and nobody checks them against the PRD metric. Give the agent the event spec and the rules first.
 
 ## Common questions
@@ -205,6 +203,6 @@ Send the account ID and plan as properties on each backend event. You can then b
 
 **We already have events with inconsistent names. Do we fix them?** Leave the old events as they are, and apply the convention to new events from now on. When an old event and a new event track the same thing, create an [action](/docs/data/actions) that matches both.
 
-## The one-line version
+## TL;DR
 
 **Decide what to track before you build, send every event through one typed module, and make every pull request say what it tracks.**

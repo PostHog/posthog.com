@@ -90,7 +90,7 @@ You can write the email in PostHog, or send content that your code renders. Both
 | Who edits it | Anyone on your team, in the PostHog editor, with no deploy | Engineers, in your codebase |
 | Best for | Copy that changes often, and teams that want drafts, versions, and a preview | [React Email](https://react.email) or other templates that you already have, and a move from another email provider |
 | What a send carries | `template_id` and the template's variables | `template_key`, `subject`, and `html` or `text` |
-| Copies and attachments | Not on the send | `cc`, `bcc`, and `attachments`, on the API |
+| Copies and attachments | Not on the send | `cc` and `bcc`, on the API. Attachments are [temporarily unavailable](/docs/workflows/transactional-emails/api#copies-and-attachments). |
 
 The rest of this page covers emails that you write in PostHog. For content from your code, see your SDK's page or [the API](/docs/workflows/transactional-emails/api#send-content-from-your-code).
 
@@ -137,6 +137,8 @@ You can also make a template transactional with the API. Call `POST /api/project
 ### Protect sensitive data
 
 For emails with sign-in codes, reset links, or other secrets, turn on **Protect sensitive data**. It's in the first step of a new email, and on the email's **API** tab. PostHog then keeps no copy of what each email contained, and doesn't track link clicks, so a code or a token in a link never goes through a tracking redirect. PostHog still tracks deliveries, opens, bounces, and the email's status. You can turn this setting on or off at any time.
+
+An email that you send from your code takes this setting from the template with the same key. With no such template, it's sensitive. Set [`sensitive`](/docs/workflows/transactional-emails/api#sensitive-emails) on the send to choose.
 
 ## Create an API key
 
@@ -282,5 +284,5 @@ Work down this list. Each step rules out one cause.
 - **Suppression still applies** - PostHog doesn't send to an address on your suppression list.
 - **Billing and quotas** - Transactional emails are billed and limited by quota like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
 - **Sending allowance** - Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its hourly or daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
-- **Engagement events** - If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails on the person whose distinct ID you send.
+- **Engagement events** - If you [capture email engagement events](/docs/workflows/engagement-events), PostHog records them for transactional emails on the person whose distinct ID you send. An email from your code tracks clicks only when it isn't [sensitive](/docs/workflows/transactional-emails/api#sensitive-emails), or when [`tracking`](/docs/workflows/transactional-emails/api#open-and-click-tracking) turns them on.
 - **Where to see sends** - [Read the status](#check-an-emails-status) of an email with its `message_id`. The email's **Sends** tab lists each send with its log messages. The **Metrics** tab shows their metrics. Each send also appears on the recipient's person.

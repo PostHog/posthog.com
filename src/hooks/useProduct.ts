@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import {
-    IconThoughtBubble,
     IconCoffee,
     IconDashboard,
     IconDownload,
@@ -65,12 +64,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconTrends,
             color: 'green',
             colorSecondary: 'green',
-        },
-        {
-            ...getTool('user_interviews'),
-            Icon: IconThoughtBubble,
-            color: 'purple',
-            colorSecondary: 'purple',
         },
         support,
         {

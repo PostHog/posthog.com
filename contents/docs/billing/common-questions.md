@@ -12,6 +12,12 @@ If you have special circumstances where this doesn't work for you, contact our [
 
 You can check our doc on [estimating usage and costs](/docs/billing/estimating-usage-costs), or use the [pricing calculator](/pricing) to estimate costs. However, often the best way to estimate costs is to signup for free and go from there.
 
+## What does the price of an event include?
+
+Collecting it, processing it, storing it, and every query you run on it in PostHog. [What you actually get when you pay for an event](/docs/billing/what-you-pay-for-per-event) explains each step.
+
+It's also confidence that your data is safe, that there's a team of on-call engineers responsible for maintaining it, and that it's been stored correctly. Those things are harder to quantify, but they're still part of the value.
+
 ## Do projects share usage and free allowances?
 
 Yes. Billing is organization-wide, so usage from all projects in an organization is combined into one bill with one free allowance. For example, if your development, staging, and production projects each send 400,000 events in a month, that counts as 1.2 million events, not three separate free tiers.
@@ -55,7 +61,7 @@ Events that a [transformation](/docs/data-pipelines/transformations/drop-events)
 | --- | --- |
 | `/flags` requests | Yes |
 | Local evaluation polls that return new definitions, 10 requests each | Yes |
-| Local evaluation polls that return `304` | No |
+| Local evaluation polls that return `304`, 1 request each | Yes |
 | `$feature_flag_called` | No |
 
 | [Experiments](/experiments/pricing), billed through Feature Flags | Billed |
