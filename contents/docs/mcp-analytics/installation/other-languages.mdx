@@ -5,7 +5,7 @@ platformIconName: IconCode
 showStepsToc: true
 ---
 
-import { Steps, Step } from 'components/Docs/Steps'
+import { Steps, Step } from "components/Docs/Steps";
 
 MCP Analytics has SDKs for [TypeScript](/docs/mcp-analytics/installation/typescript), [Python](/docs/mcp-analytics/installation/python), [Go](/docs/mcp-analytics/installation/go), [Ruby](/docs/mcp-analytics/installation/ruby), and [Rust](/docs/mcp-analytics/installation/rust). If your MCP server uses another language, such as Java, Kotlin, C#, PHP, Elixir, or Swift, you can still use MCP Analytics. The SDKs send ordinary PostHog events. Send events with the same shape and PostHog shows your server in MCP Analytics.
 
@@ -68,11 +68,11 @@ When a call arrives, remove `context` from the arguments before the handler runs
 
 Every event needs a non-empty `$session_id`. It groups the calls of one agent conversation, so it must never group calls from different clients. Pick the first case that fits your server:
 
-| Your server | `$session_id` |
-| --- | --- |
-| HTTP with a session ID that stays the same across a client's requests, such as the `Mcp-Session-Id` header or an SSE `sessionId` | `ses_` followed by a hash of that ID, such as the first 32 hex characters of its SHA-256. Use the same hash on every replica. |
-| stdio, WebSocket, or another connection that serves only one client | A `ses_<UUIDv7>` generated when the connection opens. Generate a new one when a tool call arrives 30 minutes or more after the previous call ended, because one stdio process can serve many separate chats. |
-| HTTP with no session ID, which includes every request on the `2026-07-28` revision | A fresh `ses_<UUIDv7>` for each request. Each call is then its own session. The SDKs use [conversation IDs](/docs/mcp-analytics/conversation-id) to group these calls. |
+| Your server                                                                                                                      | `$session_id`                                                                                                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| HTTP with a session ID that stays the same across a client's requests, such as the `Mcp-Session-Id` header or an SSE `sessionId` | `ses_` followed by a hash of that ID, such as the first 32 hex characters of its SHA-256. Use the same hash on every replica.                                                                                |
+| stdio, WebSocket, or another connection that serves only one client                                                              | A `ses_<UUIDv7>` generated when the connection opens. Generate a new one when a tool call arrives 30 minutes or more after the previous call ended, because one stdio process can serve many separate chats. |
+| HTTP with no session ID, which includes every request on the `2026-07-28` revision                                               | A fresh `ses_<UUIDv7>` for each request. Each call is then its own session. The SDKs use [conversation IDs](/docs/mcp-analytics/conversation-id) to group these calls.                                       |
 
 Don't use credentials, cookies, or client IP addresses as the session. Different clients can share them.
 
@@ -119,27 +119,27 @@ This is the event, as PostHog stores it. If you use the [capture API](/docs/api/
 
 Every `$mcp_tool_call` needs these properties:
 
-| Property | Value |
-| --- | --- |
-| `$mcp_source` | Always the string `"posthog_mcp_analytics"`. MCP Analytics ignores events without it. |
-| `$mcp_tool_name` | The tool's name, at most 256 characters. |
-| `$mcp_is_error` | A JSON boolean, never the string `"false"`. |
-| `$mcp_duration_ms` | A JSON number of milliseconds from the start of the request to the handler's result. |
-| `$session_id` | From the previous step. |
+| Property           | Value                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `$mcp_source`      | Always the string `"posthog_mcp_analytics"`. MCP Analytics ignores events without it.                            |
+| `$mcp_tool_name`   | The tool's name, at most 256 characters.                                                                         |
+| `$mcp_is_error`    | A JSON boolean, never the string `"false"`.                                                                      |
+| `$mcp_duration_ms` | A JSON number of milliseconds from the start of the request to the handler's result.                             |
+| `$session_id`      | From the previous step.                                                                                          |
 | `$mcp_server_name` | Your server's name, at most 256 characters, the same on every event. PostHog uses it to tell your servers apart. |
-| `timestamp` | When the request started, not when the event was sent. |
+| `timestamp`        | When the request started, not when the event was sent.                                                           |
 
 Send these properties whenever you have the value:
 
-| Property | Value |
-| --- | --- |
-| `$mcp_intent`, `$mcp_intent_source` | The `context` value, [redacted](#redact-free-text) and cut to 2,048 characters, with source `"context_parameter"`. Leave both out when the agent sent no context. |
-| `$mcp_client_name`, `$mcp_client_version` | The client's `clientInfo` from the request's `_meta` (`io.modelcontextprotocol/clientInfo`), or else from the `initialize` handshake of the same session. |
-| `$mcp_protocol_version` | The MCP revision of the request, such as `"2025-11-25"`, from `_meta` (`io.modelcontextprotocol/protocolVersion`), the `MCP-Protocol-Version` header, or the `initialize` handshake. |
-| `$mcp_client_user_agent`, `$mcp_vendor_client` | The `User-Agent` and `X-Anthropic-Client` headers on HTTP. PostHog uses them to tell clients apart, such as Claude Code from Claude.ai. |
-| `$mcp_server_version` | Your server's version. |
-| `$mcp_tool_description` | The tool's description, at most 2,048 characters. |
-| `$mcp_resource_name` | The tool's name, same as `$mcp_tool_name`. |
+| Property                                       | Value                                                                                                                                                                                |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `$mcp_intent`, `$mcp_intent_source`            | The `context` value, [redacted](#redact-free-text) and cut to 2,048 characters, with source `"context_parameter"`. Leave both out when the agent sent no context.                    |
+| `$mcp_client_name`, `$mcp_client_version`      | The client's `clientInfo` from the request's `_meta` (`io.modelcontextprotocol/clientInfo`), or else from the `initialize` handshake of the same session.                            |
+| `$mcp_protocol_version`                        | The MCP revision of the request, such as `"2025-11-25"`, from `_meta` (`io.modelcontextprotocol/protocolVersion`), the `MCP-Protocol-Version` header, or the `initialize` handshake. |
+| `$mcp_client_user_agent`, `$mcp_vendor_client` | The `User-Agent` and `X-Anthropic-Client` headers on HTTP. PostHog uses them to tell clients apart, such as Claude Code from Claude.ai.                                              |
+| `$mcp_server_version`                          | Your server's version.                                                                                                                                                               |
+| `$mcp_tool_description`                        | The tool's description, at most 2,048 characters.                                                                                                                                    |
+| `$mcp_resource_name`                           | The tool's name, same as `$mcp_tool_name`.                                                                                                                                           |
 
 Cut names, versions, and header values to 256 characters. The [event reference](/docs/mcp-analytics/events) lists every property.
 
@@ -159,12 +159,12 @@ Otherwise, set `distinct_id` to the `$session_id` and set `$process_person_profi
 
 A call fails when the handler throws, or when it returns a result with `isError: true`. For a failed call, set:
 
-| Property | Value |
-| --- | --- |
-| `$mcp_is_error` | `true` |
-| `$mcp_error_type` | A low-cardinality label, never the message. Use one of `validation`, `permission`, `missing_context`, `timeout`, `rate_limited`, `api_4xx`, `api_5xx`, `cancelled`, `input_required`, or `internal` when one fits. Otherwise use the thrown error's type name, or `"Error"` for an `isError` result. |
-| `$mcp_error_message` | The error message, or the text of the `isError` result, [redacted](#redact-free-text) and cut to 2,048 characters. |
-| `$mcp_error_status` | Optional. The upstream HTTP status code, as a number, when the failure came from an HTTP call. |
+| Property             | Value                                                                                                                                                                                                                                                                                                |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `$mcp_is_error`      | `true`                                                                                                                                                                                                                                                                                               |
+| `$mcp_error_type`    | A low-cardinality label, never the message. Use one of `validation`, `permission`, `missing_context`, `timeout`, `rate_limited`, `api_4xx`, `api_5xx`, `cancelled`, `input_required`, or `internal` when one fits. Otherwise use the thrown error's type name, or `"Error"` for an `isError` result. |
+| `$mcp_error_message` | The error message, or the text of the `isError` result, [redacted](#redact-free-text) and cut to 2,048 characters.                                                                                                                                                                                   |
+| `$mcp_error_status`  | Optional. HTTP status code behind the failure, as a number. PostHog's own MCP server sets this from the PostHog API request that failed. SDK servers derive it from the first status found on the thrown error or its cause chain. Only set when a status is found.                                  |
 
 Analytics capture must never change what the client receives. Catch every error from your instrumentation code, and return or throw the tool's own failure unchanged.
 
