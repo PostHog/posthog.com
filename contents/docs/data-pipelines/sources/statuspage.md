@@ -50,6 +50,6 @@ The **component_uptime** and **component_group_uptime** tables hold one uptime s
 - If the connection fails with an authorization error, the API key is wrong, expired, or has been revoked. Create a new one, then reconnect the source.
 - If a table syncs no rows, the credential may not have access to that data. Check its permissions, then reconnect the source.
 - If the **component_uptime** table has no row for a component, turn on uptime showcase for that component in Statuspage. A component group gets a **component_group_uptime** row only when at least one of its components has uptime showcase turned on.
-- If the **page_access_user_components** table is empty, your pages have no page access users. This table only has rows for audience-specific status pages.
+- If the **page_access_user_components** table is empty, either your pages have no page access users, or your page access users have no components assigned. This table only has rows for audience-specific status pages.
 
 <TroubleshootingLink />
