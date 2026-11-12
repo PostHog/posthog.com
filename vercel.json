@@ -6916,6 +6916,46 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/onboarding/onboarding-team:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/scaled-customer-success-team:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-tracking:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/operations-and-processes:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-data:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/data:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-conversations-playbook:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/conversations-playbook:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-skills:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/skills:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/onboarding-program:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/onboarding-program:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/sales-handover:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/sales-handover:ext?",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/onboarding/new-hire-onboarding:ext(\\.md)?",
+            "destination": "/handbook/scaled-customer-success/new-hire-onboarding:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/customer-data-infrastructure/:path*",
             "destination": "/warehouse"
         },
