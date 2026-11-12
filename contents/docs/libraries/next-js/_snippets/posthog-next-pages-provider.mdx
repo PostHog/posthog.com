@@ -7,7 +7,7 @@ import { PostHogProvider, PostHogPageView } from '@posthog/next/pages'
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <PostHogProvider
-            apiKey={process.env.NEXT_PUBLIC_POSTHOG_KEY!}
+            projectToken={process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN!}
             clientOptions={{ api_host: '/ingest', defaults: '<ph_posthog_js_defaults>' }}
         >
             <PostHogPageView captureRouteTemplate />
