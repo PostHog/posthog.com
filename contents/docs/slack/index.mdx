@@ -85,13 +85,13 @@ Once the agent finishes, you can reply to it by sending a new message in the thr
 
 Teammates can send follow-ups too. Each message is forwarded to the running agent as a new turn in the same conversation, so teammates can steer the run together, drop in extra context, or answer a question the agent asked.
 
-Who can join is up to whoever started the thread. Set it in the [App Home tab](#the-app-home-tab) under **Multiplayer**:
+Who can join is up to whoever started the thread. Set it in the [App Home tab](#the-app-home-tab) under **Who can join your threads**:
 
 | Option | What happens |
 |---|---|
 | **Let anyone join** (default) | Anyone who mentions `@PostHog` in the thread is picked up |
-| **Ask me once per thread** | The first time someone else joins, you get a prompt only you can see. Approve once and anyone can join that thread |
-| **Ask me for each person** | You approve each new person separately |
+| **Ask once per thread** | The first time someone else joins, you get a prompt only you can see. Approve once and anyone can join that thread |
+| **Ask for each person** | You approve each new person separately |
 | **Ignore them** | Only you can talk to the agent in your threads |
 
 Follow-ups are multiplayer: each turn runs as the PostHog user who sent it. For GitHub, it depends on how the run started:
@@ -101,7 +101,7 @@ Follow-ups are multiplayer: each turn runs as the PostHog user who sent it. For 
 
 ### Reply without tagging the bot
 
-Once a task is running in a thread, the bot can also pick up replies that don't mention `@PostHog`. Whether it does is up to whoever started the thread – set your preference in the [App Home tab](#the-app-home-tab) under **Thread follow-ups**:
+Once a task is running in a thread, the bot can also pick up replies that don't mention `@PostHog`. Whether it does is up to whoever started the thread. To set your preference, click **Configure** in the footer of any bot reply to open the [App Home tab](#the-app-home-tab). Then pick an option under **Reply settings > Thread follow-ups**:
 
 | Option | What happens |
 |---|---|
@@ -223,6 +223,8 @@ The bot reads your [agent instructions](/docs/tasks/agent-instructions) at the s
 
 Project admins set **Project instructions** for every run in the project. Each person can add **My instructions** for the runs they start. Instructions apply to a whole project, not to one Slack channel.
 
+You can't edit agent instructions from Slack. To change them, go to [Settings > AI > Agent instructions](https://app.posthog.com/settings/project-task-agent-instructions) in PostHog, or [use the API](/docs/tasks/agent-instructions#set-them-with-the-api). A change applies to runs that start after you save it. To be sure a reply uses the new text, start a new thread. A thread uses the **My instructions** of the person who started it, also for follow-ups from teammates.
+
 The agent only reads what its tools can reach: your PostHog data, [Business Knowledge](/docs/business-knowledge), connected repositories, and the thread it's in. It can't read other Slack channels. To give it a channel's messages, sync them with the [Slack source](/docs/data-pipelines/sources/slack) and name the table in your instructions. Only messages sent after you set up the source and its webhook are synced; older messages aren't backfilled.
 
 ## The App Home tab
@@ -234,7 +236,7 @@ Open the PostHog app's **Home** tab in Slack (or click **Configure** in the foot
 - **AI model** – which model and reasoning effort your mentions run on, and where that comes from, plus the **Use auto model choice** option. Editing it here edits your PostHog task agent default, so the change also applies in the task composer and PostHog Desktop.
 - **Thread follow-ups** – how the bot treats [untagged replies](#reply-without-tagging-the-bot) in threads you started.
 - **Questions in channels** – whether the bot offers to answer [your untagged channel questions](#questions-in-channels).
-- **Multiplayer** – who can [join threads you started](#follow-ups-in-a-thread).
+- **Who can join your threads** – who can [join threads you started](#follow-ups-in-a-thread).
 - **Channel welcome** – where the greeting goes when someone adds the bot to a channel. Visible to Slack workspace admins and owners only.
 - **Linked accounts** – your PostHog account link and personal GitHub connections.
 - **Tasks** – the tasks you've started from Slack with thread activity in the last 14 days, filterable by repo and status, with links to the web, desktop, and PR.
