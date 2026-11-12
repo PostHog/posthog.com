@@ -20,7 +20,6 @@ import {
     IconArrowRight,
     IconPieChart,
     IconTelescope,
-    IconNotification,
     IconChevronLeft,
     IconChevronRight,
     IconX,
@@ -101,13 +100,13 @@ const jobs: {
     },
 ]
 
-// The self-driving pitch, aimed at the AI-forward reader.
-const selfDrivingCapabilities: { Icon: IconComponent; color: string; title: string; copy: React.ReactNode }[] = [
+// The product pitch, aimed at the AI-forward reader. Data and tools first, self-driving last.
+const capabilities: { Icon: IconComponent; color: string; title: string; copy: React.ReactNode }[] = [
     {
         Icon: IconStack,
         color: 'text-blue',
         title: 'Centralize your context',
-        copy: 'Every signal — events, replays, errors, feedback — lands in one place, so nothing gets lost between tools.',
+        copy: 'Every signal – events, replays, errors, feedback – lands in one place, so nothing gets lost between tools.',
     },
     {
         Icon: IconSparkles,
@@ -118,20 +117,35 @@ const selfDrivingCapabilities: { Icon: IconComponent; color: string; title: stri
     {
         Icon: IconBolt,
         color: 'text-yellow',
-        title: 'Set itself up',
-        copy: 'The wizard instruments your app and names your events, so you skip the tagging spreadsheet.',
+        title: 'Pull it into Claude',
+        copy: (
+            <>
+                The{' '}
+                <Link to="/mcp" state={{ newWindow: true }} className="font-semibold underline">
+                    PostHog MCP
+                </Link>{' '}
+                gives Claude and other agents your product data, so they can query it and act on it.
+            </>
+        ),
+    },
+    {
+        Icon: IconMessage,
+        color: 'text-teal',
+        title: 'Work from Slack',
+        copy: (
+            <>
+                <Link to="/slack" state={{ newWindow: true }} className="font-semibold underline">
+                    @PostHog in Slack
+                </Link>{' '}
+                brings reports, data answers, and agent work into the channels each team already watches.
+            </>
+        ),
     },
     {
         Icon: IconTelescope,
         color: 'text-orange',
         title: 'Go deep on one surface',
         copy: "Scouts are specialist agents. They run on a schedule and build durable memory of what they've seen.",
-    },
-    {
-        Icon: IconNotification,
-        color: 'text-teal',
-        title: 'Get one prioritized list',
-        copy: 'Your Inbox clusters related findings into researched reports, ranked by priority.',
     },
     {
         Icon: IconPullRequest,
@@ -228,9 +242,7 @@ function NewsletterSection(): JSX.Element {
     return (
         <div className="m-4 @3xl:m-8 max-w-6xl border-t border-primary pt-8">
             <h2 className="mb-2">If you're subscribed to Lenny, welcome to Build Mode</h2>
-            <p className="mb-6 max-w-3xl">
-                With 80,000+ readers, we focus on weekly posts with tools, tactics, and taste for product builders
-            </p>
+            <p className="mb-6 max-w-3xl">Weekly posts for product builders. 80,000+ people read them.</p>
             <div className="relative mb-6 not-prose">
                 <div
                     ref={scrollerRef}
@@ -304,7 +316,7 @@ const faqItems = [
         trigger: 'Where do I get my code?',
         content: (
             <p>
-                From Lenny. We hand codes to Lenny's team, who assign them to Product Pass holders — so grab yours from{' '}
+                From Lenny. We hand codes to Lenny's team, who assign them to Product Pass holders – so grab yours from{' '}
                 <Link to={productPassUrl} externalNoIcon className="underline font-semibold">
                     Lenny's Product Pass
                 </Link>
@@ -336,7 +348,7 @@ const faqItems = [
         content: (
             <p>
                 No paid PostHog invoices before December 1, 2025. Time spent on the free tier doesn't count against you
-                — plenty of people run on free for a long while before they ever pay us.
+                – plenty of people run on free for a long while before they ever pay us.
             </p>
         ),
     },
@@ -354,7 +366,7 @@ const faqItems = [
         content: (
             <p>
                 It depends on whether you've ever paid us. If you have no paid invoices before December 1, 2025, you're
-                eligible — even if you've been on the free tier for years. If you were already paying us before that
+                eligible – even if you've been on the free tier for years. If you were already paying us before that
                 date, this one isn't for you.
             </p>
         ),
@@ -368,7 +380,7 @@ const faqStructuredData = [
     },
     {
         question: 'Do I need a PostHog account before claiming the Lenny offer?',
-        answer: "Yes, and the claim link handles it either way — log in and you land on the claim page, or create an account and you're redirected there after verification, then continue into onboarding.",
+        answer: "Yes, and the claim link handles it either way – log in and you land on the claim page, or create an account and you're redirected there after verification, then continue into onboarding.",
     },
     {
         question: "Who is eligible for the PostHog offer in Lenny's Product Pass?",
@@ -451,15 +463,18 @@ export default function LennyProductPass(): JSX.Element {
                     {/* What you'd actually use it for – four jobs, as sticky notes. */}
                     <div className="m-4 @3xl:m-8 max-w-6xl">
                         <h2 className="mb-2">Every tool a product leader needs, in one place</h2>
-                        <p className="mb-6 max-w-3xl">See how it all connects, then decide what's next.</p>
+                        <p className="mb-6 max-w-3xl">
+                            Analytics, experiments, support, and data in one product, so you can go from a question to a
+                            shipped change without switching tools.
+                        </p>
                         <div className="not-prose grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-4 gap-4 @3xl:gap-6">
                             {jobs.map(({ bg, rotate, title, copy, tools }) => (
                                 <div key={title} className={`${bg} ${rotate} p-4 text-black`}>
                                     <h3 className="text-base my-1 leading-tight">{title}</h3>
                                     <p className="text-sm mb-3">{copy}</p>
-                                    <ul className="list-none p-0 m-0 space-y-1.5">
+                                    <ul className="list-none p-0 m-0 space-y-0.5">
                                         {tools.map(({ Icon, name, slug }) => (
-                                            <li key={name} className="flex items-center gap-1.5">
+                                            <li key={name} className="flex items-center gap-1.5 leading-snug">
                                                 <Icon className="size-4 shrink-0 text-black/70" />
                                                 <Link
                                                     to={`/${slug}`}
@@ -486,7 +501,7 @@ export default function LennyProductPass(): JSX.Element {
                             analytics events, errors, and recordings to understand problems and propose fixes.
                         </p>
                         <div className="not-prose grid @2xl:grid-cols-2 gap-4">
-                            {selfDrivingCapabilities.map(({ Icon, color, title, copy }) => (
+                            {capabilities.map(({ Icon, color, title, copy }) => (
                                 <div key={title} className="border border-primary rounded-md p-4 bg-primary">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Icon className={`size-5 shrink-0 ${color}`} />
@@ -496,13 +511,7 @@ export default function LennyProductPass(): JSX.Element {
                                 </div>
                             ))}
                         </div>
-                        <p className="mt-4 mb-3 max-w-3xl text-base">
-                            <Link to="/slack" state={{ newWindow: true }} className="font-semibold underline">
-                                @PostHog in Slack
-                            </Link>{' '}
-                            brings reports, data answers, and agent work into the channels each team already watches.
-                        </p>
-                        <p className="mt-0 mb-0">
+                        <p className="mt-4 mb-0">
                             <Link
                                 to="/self-driving"
                                 state={{ newWindow: true }}
@@ -526,9 +535,7 @@ export default function LennyProductPass(): JSX.Element {
                                 <h2 className="mb-2 mt-0">
                                     How to claim it, <Highlight>around the campfire</Highlight>
                                 </h2>
-                                <p className="mb-6 max-w-3xl">
-                                    Three steps, and then you're off to the races with your Lenny pass for PostHog.
-                                </p>
+                                <p className="mb-6 max-w-3xl">Three steps to claim your Lenny pass for PostHog.</p>
                                 <div className="not-prose grid grid-cols-1 @2xl:grid-cols-3 gap-4">
                                     {claimSteps.map(({ title, copy }, index) => (
                                         <div key={title} className="border border-primary rounded-md bg-primary p-4">
@@ -563,7 +570,7 @@ export default function LennyProductPass(): JSX.Element {
                                         </Link>
                                     </li>
                                     <li>
-                                        You have no paid PostHog invoices before December 1, 2025 — years on the free
+                                        You have no paid PostHog invoices before December 1, 2025 – years on the free
                                         tier don't count against you
                                     </li>
                                     <li>You have an active paid PostHog subscription</li>
@@ -597,7 +604,7 @@ export default function LennyProductPass(): JSX.Element {
                                         </span>
                                     </h2>
                                     <p className="text-[15px] @lg:text-base max-w-xl mb-5">
-                                        Free Scale for 12 months and double the free tier on every product — a $16,500
+                                        Free Scale for 12 months and double the free tier on every product – a $16,500
                                         value, and the first deal like it we've ever done. Yours as an annual subscriber
                                         to Lenny's Newsletter.
                                     </p>
