@@ -9,7 +9,7 @@ availability:
 sourceId: PlanningCenter
 ---
 
-The Planning Center connector syncs your church management data – people, groups, giving, check-ins, services, and calendars – into the PostHog data warehouse. This source is currently in **beta**.
+The Planning Center connector syncs your church management data – people, groups, giving, check-ins, services, and calendars – into the PostHog data warehouse.
 
 ## Prerequisites
 
