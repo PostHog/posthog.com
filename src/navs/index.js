@@ -568,6 +568,7 @@ export const handbookSidebar = [
             { name: 'Design hiring', url: '/handbook/people/hiring-process/design-hiring' },
             { name: 'Leadership hiring', url: '/handbook/people/hiring-process/exec-hiring' },
             { name: 'Sales and CS hiring', url: '/handbook/people/hiring-process/sales-cs-hiring' },
+            { name: 'Support hiring', url: '/handbook/people/hiring-process/support-hiring' },
         ],
     },
     {
@@ -8438,6 +8439,16 @@ export const docsMenu = {
                             url: '/docs/workflows/push-notifications/push-step-options',
                         },
                     ],
+                },
+                {
+                    name: 'Supabase auth emails',
+                    url: '/docs/workflows/supabase-auth-emails',
+                    icon: 'IconLock',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Workflow events',

@@ -36,6 +36,8 @@ As always, we expect you to use this with restraint and with your own good judge
 
 Please note that any free merch received outside of your birthday kit, work anniversary kit, or new hire kit is considered a taxable benefit in most jurisdictions and may be subject to tax. If you have questions about how this applies to you, we recommend checking with your local tax advisor. We will send the details of any free merch you have claimed to payroll once a year (usually in December) and any tax due will be deducted from that payroll (please note this is jurisdiction dependent, and also depends on your employment type at PostHog).
 
+Any other non-merch related gifting (wedding, baby etc) are at the discretion of the Team Lead. Gifts should be <$150 and all receipts should be uploaded into Brex.  
+
 ## Support open-source projects
 
 Everyone gets a monthly [open-source sponsorship](/handbook/people/spending-money#open-source-sponsorship-for-individuals) budget to spend as they see fit to support open source projects of their choice.

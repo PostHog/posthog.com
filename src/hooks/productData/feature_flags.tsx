@@ -299,9 +299,6 @@ export const featureFlags = {
                     description: 'like Vercel Edge Config',
                 },
                 {
-                    title: 'Approvals',
-                },
-                {
                     title: 'Multi-armed bandit',
                 },
             ],

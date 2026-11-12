@@ -128,6 +128,10 @@ Post in <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-
 
 For cafes, we typically see 8-10 or 9-11am as the optimal times. We suggest having one employee for every 5 customers. And the cost comes out to $15 per guest because we like to include some bites as well as drinks.
 
+![Self-driving cafe in Madrid](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/img_8836_5e685c9237.jpg)
+
+<Caption>Self-driving cafe in Madrid's Salamanca neighborhood, during the Marketing team offsite in 2026</Caption>
+
 ## Sponsoring external events
 
 We often get invited to sponsor events - these range in size, location, and audience. We rarely say yes.  For these to be a worthwhile endeavor, the sponsorship should be a win-win primarily for the end user and secondarily for us. Hence, it's important that the audience, content, format, and ethos to all align. Even if we don't sponsor financially, we encourage team members to speak at events and we can support with merch. Ask in the <PrivateLink url="https://posthog.slack.com/archives/C0AB78YBCNA">#team-builder-relations</PrivateLink> channel.
