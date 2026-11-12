@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The SmartRecruiters connector syncs your recruiting data – jobs, candidates, users, offers, reports, and configuration – into PostHog so you can analyze your hiring pipeline alongside your product data.
 
-> **Note:** This source is currently in **beta**.
-
 ## Prerequisites
 
 You need a SmartRecruiters account with administrator access. An administrator can create an API key in the [Credential Manager](https://www.smartrecruiters.com/settings/administration/app-management/custom-applications):
