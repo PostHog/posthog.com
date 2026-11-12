@@ -31,8 +31,9 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="data-modeling" />
 -   <SmallTeam slug="data-tools" />
--   <SmallTeam slug="managed-warehouse" />
+-   <SmallTeam slug="warehouse" />
 -   <SmallTeam slug="warehouse-sources" />
+-   <SmallTeam slug="batch-exports" />
 
 </fieldset>
 
@@ -48,19 +49,8 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="error-tracking" />
 -   <SmallTeam slug="replay" />
--   <SmallTeam slug="surveys" />
 -   <SmallTeam slug="website" />
 - Cross-product growth reviews
-
-
-</fieldset>
-
-<fieldset>
-<legend className="bg-transparent"><TeamMember name="Abe Basu" photo /></legend>
-
--   <SmallTeam slug="batch-exports" />
--   <SmallTeam slug="apm" />
--   <SmallTeam slug="workflows" />
 
 
 </fieldset>
@@ -69,7 +59,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend className="bg-transparent"><TeamMember name="Mike Warren" photo /></legend>
 
 -   <SmallTeam slug="query-performance" />
--   <SmallTeam slug="mcp-analytics" />
 -   <SmallTeam slug="product-analytics" />
 -   <SmallTeam slug="web-analytics" />
 
@@ -81,6 +70,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 
 -   <SmallTeam slug="ai-observability" />
 -   <SmallTeam slug="ai-gateway" />
+-   <SmallTeam slug="mcp-analytics" />
 
 
 </fieldset>
@@ -98,10 +88,16 @@ Here is a overview that shows which of our PMs currently works with which team:
 <legend className="bg-transparent">Product teams with no PM currently</legend>
 
 -   <SmallTeam slug="conversations" />
+-   <SmallTeam slug="surveys" />
+-   <SmallTeam slug="apm" />
+-   <SmallTeam slug="workflows" />
+-   <SmallTeam slug="platform-features" />
 
 </fieldset>
 
 </div>
+
+For more detail on the PM assignments, see this <PrivateLink url="https://posthog.slack.com/archives/C0845BU18Q0/p1794243882509629">internal doc</PrivateLink>.
 
 ## Product goals
 
