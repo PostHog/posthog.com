@@ -144,7 +144,7 @@ Here's everything that changes in exported events:
 | A property set to `null`, like `{"plan": null}` | Included as `null` | Not included | Treat a missing property as not set |
 | An empty object, like `{"filters": {}}` | Included as `{}` | Not included | Treat a missing property as not set |
 | A number in a built-in text property, like `$browser_version` or `$group_0` to `$group_4` | A number, like `155` | Text, like `"155"` | Convert the value to a number if your tools need one |
-| Built-in properties that an event didn't send, like `$browser` or `$exception_list` | Left out | Included with an empty value: `""` for text and `[]` for lists | Treat `""` and `[]` as not set |
+| Built-in properties that an event didn't send, like `$browser` or `$exception_list` | Left out | Included with an empty value: `""` for text, `[]` for lists, and `{}` for `$feature_flags` | Treat `""`, `[]`, and an empty `$feature_flags` as not set |
 | Built-in person properties that a person doesn't have, like `$initial_os` | Left out of `person_properties` | Included as `""` | Treat `""` as not set |
 
 Here's an example of the `properties` of one event in a **batch export** before November 30:
