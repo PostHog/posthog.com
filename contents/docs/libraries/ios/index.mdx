@@ -149,7 +149,7 @@ These change behavior without a build error, so check them even if your app buil
 
 **Queued 2.x events.** If an app updates straight from a 2.x SDK, events still queued on disk are deleted. Distinct ID, anonymous ID, groups, and cached flags carry over.
 
-**Capture v1.** Analytics events now go to `/i/v1/analytics/events` instead of `/batch`. If you use a reverse proxy or self-host PostHog, forward that path before you upgrade. A reverse proxy must serve `/i/v1/*` and pass the `Authorization` header (`Bearer phc_…`) through unchanged, because the project token now travels there instead of in the request body. See the [proxy reference](/docs/advanced/proxy/proxy-reference#checklist) for the full list, and the [capture v1 upgrade guide](/docs/libraries/capture-v1) for what else changes. The SDK now drops an event with an empty name before sending it, PostHog drops an event whose name is over 200 UTF-8 bytes, and the SDK follows only 307 and 308 redirects to the same origin as `host`. If your proxy redirects capture requests to another host, point `host` at the final host.
+**Capture v1.** Analytics events now go to `/i/v1/analytics/events` instead of `/batch`. If you use a reverse proxy or self-host PostHog, forward that path before you upgrade. A reverse proxy must serve `/i/v1/*` and pass the `Authorization` header (`Bearer phc_…`) through unchanged, because the project token now travels there instead of in the request body. See the [proxy reference](/docs/advanced/proxy/proxy-reference#checklist) for the full list, and the [capture v1 upgrade guide](/docs/api/capture-v1) for what else changes. The SDK now drops an event with an empty name before sending it, PostHog drops an event whose name is over 200 UTF-8 bytes, and the SDK follows only 307 and 308 redirects to the same origin as `host`. If your proxy redirects capture requests to another host, point `host` at the final host.
 
 **Long distinct IDs.** PostHog now drops an event whose distinct ID is over 200 UTF-8 bytes. Version 3 shortened the ID and kept the event. If you identify users with a long ID, such as a JWT or a long email address, shorten or hash it before you upgrade, or every event for that user is dropped.
 
@@ -175,7 +175,7 @@ These change behavior without a build error, so check them even if your app buil
 | `config.remoteConfig` | Delete it. Remote config is always loaded. |
 | `config.dataMode = .cellular` | `.any` |
 | `config.maxRetries` | `config.pushNotificationSubscriptionMaxRetries` |
-| `sessionReplayConfig.screenshotMode`, `screenshotModeBackgroundCapture`, `maskPhotoLibraryImages` | Delete them. |
+| `sessionReplayConfig.screenshotMode`, `maskPhotoLibraryImages` | Delete them. |
 | `sessionReplayConfig.debouncerDelay` | `sessionReplayConfig.throttleDelay` |
 | `PostHogLogLevel`, `PostHogLogEntry` | `PostHogConsoleLogLevel`, `PostHogConsoleLogEntry` |
 | `getFeatureFlagPayload(key)` | `getFeatureFlagResult(key, sendFeatureFlagEvent: false)?.payload` |

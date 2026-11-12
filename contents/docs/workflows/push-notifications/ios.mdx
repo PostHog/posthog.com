@@ -18,7 +18,7 @@ Available in the iOS SDK version 3.69.0 and newer.
 By default the SDK registers the device token and captures opens for you, by hooking into the system callbacks:
 
 ```swift
-let config = PostHogConfig(projectToken: "<ph_project_api_key>")
+let config = PostHogConfig(projectToken: "<ph_project_token>")
 // Both default to true, shown here for clarity:
 config.capturePushNotificationSubscriptions = true // register the device token with PostHog
 config.capturePushNotificationOpened = true        // capture `$push_notification_opened` on tap

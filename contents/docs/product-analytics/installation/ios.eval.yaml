@@ -4,9 +4,10 @@ status: active
 
 # One check for each flow the iOS docs teach. Every check is a baseline: a short prompt
 # in a user's words, no docs added. The prompt names PostHog and the kind of analytics,
-# and no API. The rubrics describe the correct result for posthog-ios 3, the major the
-# docs show. `install` runs in an app with no PostHog code. The other checks run in apps
-# that already use posthog-ios 3. iOS can't build in Gauge, so there's no `builds`.
+# and no API. `install` runs in an app with no PostHog code and is graded for
+# posthog-ios 4, the major the docs show. The other checks run in apps that already use
+# posthog-ios 3, and their rubrics describe the correct result for that major. iOS can't
+# build in Gauge, so there's no `builds`.
 checks:
     - id: install
       description: >-
@@ -21,12 +22,12 @@ checks:
           shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  posthog-ios is a Swift Package dependency at 3.x: either a package
+                  posthog-ios is a Swift Package dependency at 4.x: either a package
                   reference to https://github.com/PostHog/posthog-ios(.git) in the Xcode
-                  project with the `PostHog` product linked to the app target, or
-                  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "3.x")
+                  project with the `PostHog` library linked to the app target, or
+                  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0")
                   with .product(name: "PostHog", package: "posthog-ios") in a Package.swift
-                  target the app uses. A CocoaPods `pod "PostHog"` at 3.x also passes.
+                  target the app uses. Fails if it installs PostHog with CocoaPods.
               initialized: >-
                   The app imports PostHog, creates PostHogConfig(projectToken:host:) and
                   calls PostHogSDK.shared.setup(config) once at launch, in the App's init()
@@ -135,28 +136,3 @@ checks:
                   or captureException(error, properties:), directly or through the app's
                   PostHog client wrapper, with the Swift Error from the failure. Cite the
                   file and line(s). Fails if it sends a plain capture() event instead.
-
-    # Next major: the same tasks for a project on posthog-ios 4. Expected to fail until the
-    # docs show that major.
-    - id: install-next
-      description: >-
-          The install task in an app with no PostHog code, graded for posthog-ios 4, which
-          the agent gets as the newest release. Expected to fail until the docs show that
-          major.
-      codebase_to_test: oss-icecubes
-      prompt: *install-prompt
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              sdk-installed: >-
-                  posthog-ios is a Swift Package dependency at 4.x: either a package
-                  reference to https://github.com/PostHog/posthog-ios(.git) in the Xcode
-                  project with the `PostHog` library linked to the app target, or
-                  .package(url: "https://github.com/PostHog/posthog-ios.git", from: "4.0.0")
-                  with .product(name: "PostHog", package: "posthog-ios") in a Package.swift
-                  target the app uses. Fails if it installs PostHog with CocoaPods.
-              initialized: >-
-                  The app imports PostHog, creates PostHogConfig(projectToken:host:) and
-                  calls PostHogSDK.shared.setup(config) once at launch, in the App's init()
-                  or in application(_:didFinishLaunchingWithOptions:). Cite the file and
-                  line(s).
