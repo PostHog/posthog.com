@@ -641,7 +641,7 @@ The listener returns a subscription you can `unsubscribe()`, and it differs from
 - Bootstrapped flags arrive just after `setup()` is called, not synchronously inside it.
 - A reload on a disabled SDK doesn't call listeners. `reloadFeatureFlags(callback)` still gets `errorsLoading = true` in that case.
 
-The `reloadFeatureFlags()` callback still runs on a background thread, so switch to the main thread before touching UI. See [ensuring flags are loaded before usage](/docs/feature-flags/adding-feature-flag-code?tab=Android#ensuring-flags-are-loaded-before-usage).
+The `reloadFeatureFlags()` callback still runs on a background thread, or right away on the calling thread when no load is attempted, so switch to the main thread before touching UI. See [ensuring flags are loaded before usage](/docs/feature-flags/adding-feature-flag-code?tab=Android#ensuring-flags-are-loaded-before-usage).
 
 A trailing lambda such as `PostHog.reloadFeatureFlags { mainHandler.post { refreshUi() } }` still compiles, so check whether it should read `errorsLoading`. The callback also runs after a failed load.
 
