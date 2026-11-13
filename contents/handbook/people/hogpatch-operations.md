@@ -20,7 +20,7 @@ PostHog teammates don’t need an invite to use Hogpatch – the space is open f
 
 - If you are visiting for the first time, ring the **black intercom doorbell** on the front door.
 - <TeamMember name="Judy Opperwall" photo /> will be notified and will remotely unlock the door for you.
- - <TeamMember name="Carol Donnelly" photo /> and <TeamMember name="Scott Lewis" photo /> also share intercom access so can open the door for you 24/7.
+ - <TeamMember name="Carol Donnelly" photo /> also has intercom access and can open the door for you 24/7.
 - There’s no check-in or reservations needed, it's a very relaxed setup.
 
 ---

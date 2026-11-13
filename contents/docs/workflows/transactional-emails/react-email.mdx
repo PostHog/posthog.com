@@ -1,0 +1,138 @@
+---
+title: Send React Email components with PostHog
+sidebar: Docs
+showTitle: true
+---
+
+[React Email](https://react.email) lets you write emails as React components. Keep React Email to write your emails, and send them with the [Node.js SDK](/docs/workflows/transactional-emails/node). Pass the component to `send` as `react`, and the SDK renders its HTML and plain text. PostHog sends the content as you rendered it. You don't need a template in PostHog.
+
+The Node.js SDK takes `react` from version 5.69.0. Before you start, [create a project secret API key](/docs/workflows/transactional-emails#create-an-api-key) with the **Transactional email** scope.
+
+## Install
+
+```bash
+npm install posthog-node@5 @react-email/render react-email react react-dom
+```
+
+The SDK renders the component with `@react-email/render`, version 2.1.0 or later. It's an optional peer dependency of the SDK, so install it next to `posthog-node`.
+
+## Write an email
+
+Write the email as a component, with the components from `react-email`:
+
+```jsx
+// emails/order-shipped.jsx
+import { Body, Button, Html, Text } from "react-email"
+
+export function OrderShippedEmail({ firstName, trackingUrl }) {
+    return (
+        <Html lang="en">
+            <Body>
+                <Text>Hi {firstName}, your order is on its way.</Text>
+                <Button href={trackingUrl}>Track your order</Button>
+            </Body>
+        </Html>
+    )
+}
+```
+
+## Set up the client
+
+Reuse the PostHog client your application already creates, and set `secretKey` to your project secret API key. See [set up the client](/docs/workflows/transactional-emails/node#set-up-the-client) for the host and for local evaluation.
+
+```js
+// posthog.js
+import { PostHog } from "posthog-node"
+
+export const posthog = new PostHog("<ph_project_token>", {
+    host: "<ph_client_api_host>",
+    secretKey: process.env.POSTHOG_PROJECT_SECRET_API_KEY,
+    // This client only sends email, so it doesn't poll flag definitions with the secret key
+    enableLocalEvaluation: false,
+})
+```
+
+## Send an email
+
+Pass the component as `react`. The SDK renders it to HTML, makes the plain text version from the HTML, and sends both:
+
+```jsx
+// send-order-shipped.jsx
+import { OrderShippedEmail } from "./emails/order-shipped"
+import { posthog } from "./posthog"
+
+export async function sendOrderShipped({ userId, email, firstName, trackingUrl, orderId }) {
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateKey: "order-shipped",
+        subject: "Your order shipped",
+        react: <OrderShippedEmail firstName={firstName} trackingUrl={trackingUrl} />,
+        from: "Shop <shop@example.com>",
+        distinctId: userId,
+        // Identifies this one email, so a retry doesn't send it twice
+        idempotencyKey: `order-shipped-${orderId}`,
+    })
+    if (error) {
+        // An EmailError. Branch on error.code
+        throw error
+    }
+    return data.id
+}
+```
+
+- **Key:** `templateKey` names the email. PostHog groups the email's metrics and sends under it, so use one key for each component, such as `order-shipped`.
+- **Text:** The SDK makes the plain text with `toPlainText` from `@react-email/render`, which keeps the link of each button and drops the markup. To send your own plain text, pass `text`. The SDK then sends your `text` and renders only the HTML.
+- **Props:** The SDK renders the element after you call `send`, before it sends the request. Don't change the objects that you pass as props until the send finishes.
+- **Sender:** `from` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender.
+- **User:** Pass the distinct ID that you pass to `identify()` as `distinctId`, so PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against that user. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
+- **Tracking:** An email with no template in PostHog is sensitive by default, so PostHog doesn't track its clicks. An order email carries no secrets, so you can pass `sensitive: false` to track its clicks. `sensitive` needs version 5.71.0 or later. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
+- **Retries:** The idempotency key identifies the email. A retry with the same key in the 24 hours after PostHog queues the email doesn't send it again. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) and [timeouts and retries](/docs/workflows/transactional-emails/node#timeouts-and-retries).
+
+`send` returns `{ data, error }` and doesn't throw. `data.id` is the message ID, which you can pass to [`get`](/docs/workflows/transactional-emails/node#check-an-emails-status) to read the email's status.
+
+## Errors from a React send
+
+A send with `react` can return these error codes. For each one, the SDK sends nothing:
+
+| Code | Cause | Fix |
+| --- | --- | --- |
+| `invalid_form` | The send has `react` and `html`, or `react` and `templateId`. Or it has `sensitive` on an SDK version earlier than 5.71.0. `error.message` names the field. | `react` replaces `html`, so pass one of them. A template in PostHog takes no `react`, because PostHog renders the template. For `sensitive`, upgrade to version 5.71.0 or later. |
+| `missing_react_renderer` | The SDK can't load `@react-email/render`. | Install `@react-email/render` with `react` and `react-dom` next to `posthog-node`. |
+| `react_render_failed` | The component threw an error, or didn't finish rendering before the email request timeout. The timeout is 15 seconds by default, and `emailRequestTimeoutMs` on the client changes it. | If the component threw, `error.cause` holds its error. Fix the component, and render it in a test with the same props to see the error. |
+
+For every other error code, see the [errors table](/docs/workflows/transactional-emails#errors).
+
+## Send from Next.js
+
+Send from a route handler or a server action on the Node.js runtime, which is the default. React Email doesn't render in a Next.js route on the edge runtime, whether the SDK renders it or you do. A send with `react` from a route with `export const runtime = "edge"` returns `react_render_failed` after the email request timeout, and sends nothing.
+
+## Render the email yourself
+
+To keep the rendered HTML, such as to store a copy, or to send with an SDK version earlier than 5.69.0, render the component yourself. Render it with `render`, make the plain text with `toPlainText`, and pass both as `html` and `text`:
+
+```jsx
+// send-order-shipped-html.jsx
+import { render, toPlainText } from "react-email"
+import { OrderShippedEmail } from "./emails/order-shipped"
+import { posthog } from "./posthog"
+
+export async function sendOrderShipped({ userId, email, firstName, trackingUrl, orderId }) {
+    const html = await render(<OrderShippedEmail firstName={firstName} trackingUrl={trackingUrl} />)
+    const { data, error } = await posthog.emails.send({
+        to: email,
+        templateKey: "order-shipped",
+        subject: "Your order shipped",
+        html,
+        text: toPlainText(html),
+        from: "Shop <shop@example.com>",
+        distinctId: userId,
+        idempotencyKey: `order-shipped-${orderId}`,
+    })
+    if (error) {
+        throw error
+    }
+    return data.id
+}
+```
+
+The SDK sends content from your code from version 5.62.0. If you leave out `text`, PostHog makes it from `html`.
