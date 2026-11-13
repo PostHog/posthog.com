@@ -47,8 +47,6 @@ import EmbeddingEvent from '../_snippets/embedding-event.mdx'
 
 ## Large events
 
-On the iOS and Android SDKs (`4.0.0`+) and the Flutter SDK (`6.0.0`+, except on web, where `captureAi` sends nothing), send the events above with `captureAi` instead of `capture` – see the [iOS](/docs/libraries/ios/usage#ai-events), [Android](/docs/libraries/android#ai-events), and [Flutter](/docs/libraries/flutter#ai-events) docs.
-
 For large events, use the dedicated AI ingestion path – see [capturing large AI events](/docs/ai-observability/large-events).
 
 In Python, large events sent with `capture()` are dropped: posthog-python 7.x drops events over 900 KiB, and on 8.0 PostHog drops events over [the 1MB event limit](/docs/data/ingestion-warnings#discarded-event-exceeding-1mb-limit). Call `capture_ai()` instead, with the same arguments, to send events up to 8MB:
