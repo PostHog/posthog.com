@@ -121,7 +121,7 @@ Our basic set up is now complete. Build and run your app to see it in action.
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios#cocoapods)).
+First, add [`posthog-ios`](/docs/libraries/ios) as a dependency to your app using [Swift Package Manager](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) (or if you prefer, you can use [CocoaPods](/docs/libraries/ios/reference#install)).
 
 To add the package dependency to your Xcode project, select `File > Add Package Dependency` and enter the URL `https://github.com/PostHog/posthog-ios.git`. Select `posthog-ios` and click Add Package.
 
@@ -163,7 +163,7 @@ To check your setup, build and run your app. You should start seeing events in t
 
 ## 3. Implement the event capture code
 
-To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [PostHogSDK.shared.capture()](/docs/libraries/ios/usage#capturing-events):
+To show how to capture events with PostHog, we capture an event when the submit button on the home page is clicked. To do this, we call [PostHogSDK.shared.capture()](/docs/libraries/ios/reference#capture):
 
 ```swift file=ContentView.swift
 import SwiftUI
@@ -204,7 +204,7 @@ struct HomeView: View {
 
 ### Identifying users
 
-Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`PostHogSDK.shared.identify()`](/docs/libraries/ios/usage#identifying-users) with a `distinctId` argument. The `distinctId` must be a unique identifier for the user – usually their email or database ID.
+Linking events to specific users enables you to build a full picture of how they're using your product across different sessions, devices, and platforms. To link events from anonymous to specific users, we call [`PostHogSDK.shared.identify()`](/docs/libraries/ios/reference#identify) with a `distinctId` argument. The `distinctId` must be a unique identifier for the user – usually their email or database ID.
 
 To show you an example, update the code for the login button to the following:
 
@@ -231,7 +231,7 @@ To test this, press logout, fill the form in and press login. Then, in the home 
   classes="rounded"
 />
 
-Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](/docs/libraries/ios/usage#reset-after-logout). This resets the PostHog ID and ensures that events are associated to the correct user.
+Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](/docs/libraries/ios/reference#reset). This resets the PostHog ID and ensures that events are associated to the correct user.
 ```swift file=ContentView.swift
      Button("Logout") {
                 isAuthenticated = false
@@ -245,7 +245,7 @@ Lastly, when the user logs out, you should call [`PostHogSDK.shared.reset()`](/d
 
 To enable group analytics, you'll need to [upgrade](https://us.posthog.com/organization/billing) your PostHog account to include them. This requires entering your credit card, but don't worry, we have a [generous free tier](/pricing) of 1 million events per month – so you won't be charged anything yet.
 
-To create groups in PostHog, simply include them in your code by calling [`PostHogSDK.shared.group()`](/docs/libraries/ios/usage#group-analytics):
+To create groups in PostHog, simply include them in your code by calling [`PostHogSDK.shared.group()`](/docs/libraries/ios/reference#group):
 
 ```swift file=ContentView.swift
 struct LoginView: View {
