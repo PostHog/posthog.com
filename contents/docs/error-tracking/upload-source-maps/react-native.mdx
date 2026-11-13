@@ -294,15 +294,15 @@ If you aren't using the Expo config plugin, wire up the uploads manually.
 
 #### iOS
 
-In Xcode, add a **Run Script** build phase to your main app target and place it **last** so it runs after the dSYM bundle is produced. The `upload-symbols.sh` script ships with the transitive `posthog-ios` dependency. Use the script path that matches your [iOS dependency path](/docs/libraries/react-native#choose-an-ios-dependency-path-for-the-native-plugin).
+In Xcode, add a **Run Script** build phase to your main app target and place it **last** so it runs after the dSYM bundle is produced. The `upload-symbols.sh` script ships with the transitive `posthog-ios` dependency. Use the script path that matches your [iOS dependency path](/docs/libraries/react-native#choose-an-ios-dependency-path-for-the-native-plugin). With `@posthog/react-native-plugin` 3.0 and later, use the **SwiftPM** path on every iOS dependency path, including CocoaPods. The **CocoaPods** path applies only to plugin 2.x on CocoaPods.
 
 <MultiLanguage>
 
-```bash file=CocoaPods (plugin 2.x)
+```bash file=CocoaPods
 "${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
 ```
 
-```bash file=Swift Package Manager (and plugin 3.0 and later)
+```bash file=SwiftPM
 "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
 ```
 
@@ -317,11 +317,11 @@ To also upload native source files for source-code context (iOS only), prefix th
 
 <MultiLanguage>
 
-```bash file=CocoaPods (plugin 2.x)
+```bash file=CocoaPods
 POSTHOG_INCLUDE_SOURCE=1 "${PODS_ROOT}/PostHog/build-tools/upload-symbols.sh"
 ```
 
-```bash file=Swift Package Manager (and plugin 3.0 and later)
+```bash file=SwiftPM
 POSTHOG_INCLUDE_SOURCE=1 "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/posthog-ios/build-tools/upload-symbols.sh"
 ```
 
