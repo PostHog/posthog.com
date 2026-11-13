@@ -105,7 +105,7 @@ Once done, we can run `npm run start` in the terminal to see our basic app in ac
 Start by installing the `posthog-js` package:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, create a new `renderer.js` file to import and initialize PostHog with our project token and host (which you can get in [your project settings](https://us.posthog.com/settings/project)). Importantly, because Electron has security restrictions about loading external code, we need to import PostHog's full bundle. This means our Electron initialization look like this:

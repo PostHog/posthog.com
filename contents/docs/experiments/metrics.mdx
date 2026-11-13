@@ -10,7 +10,7 @@ Once you've created your experiment, you can assign metrics to let you evaluate 
 
 ## Metric types
 
-PostHog supports four types of metrics to measure different aspects of your experiment's impact. Choose the metric type that best aligns with your hypothesis.
+PostHog supports five types of metrics to measure different aspects of your experiment's impact. Choose the metric type that best aligns with your hypothesis.
 
 ### Funnel
 
@@ -47,6 +47,23 @@ For example:
 - If you select **average revenue**, we first compute each user's average (total revenue / number of events), then average those values across users.
 
 You can also use custom [HogQL expressions](/docs/sql/expressions) as the aggregation method. This supports both numeric functions like `sum()` and `avg()` as well as non-numeric functions like `uniqExact()` and `count()`. For example, `uniqExact(properties.category)` counts the number of unique category values per user, even when the property contains strings.
+
+### Percentile
+
+Use percentile metrics to measure values such as median (p50) order value or p90 load time. The p90 is the value that 90% of events are at or below.
+
+To configure a percentile metric:
+
+1. Select **Percentile** as the metric type.
+2. Choose an event or action.
+3. Select a numeric event property, such as `load_time_ms`.
+4. Choose p50, p75, p90, p95, or p99, or enter a **Custom** percentile from 1 to 99, such as 97.5.
+
+PostHog calculates the percentile across all matching events in each variant, rather than averaging per-user values. Events without a numeric value for the selected property don't count.
+
+Percentile metrics support Bayesian and frequentist analysis, including [sequential testing](/docs/experiments/statistics-frequentist#sequential-testing).
+
+PostHog can show "Not enough metric data" when too many values repeat near the percentile or too few users generate most events. This can happen even with a large event count.
 
 ### Ratio
 
@@ -175,7 +192,7 @@ The control (baseline) is always shown in gray. Other bars will be green or redâ
 
 When you select an event property and choose "sum" as the aggregation, PostHog computes the **mean of per-user totals**, not a raw sum across all events. For example, if user A has $50 in revenue and user B has $10, the result is ($50 + $10) / 2 = $30, not $60.
 
-Experiments always compare per-user values between variants, so there's no raw total view. If you need raw totals, use a [trends insight](/docs/product-analytics/trends/overview) outside the experiment.
+Mean metrics compare per-user values between variants, so there's no raw total view. If you need raw totals, use a [trends insight](/docs/product-analytics/trends/overview) outside the experiment.
 
 ## Set an explicit conversion window
 
@@ -188,7 +205,7 @@ Two other behaviors to know:
 
 ## Shared metrics
 
-Create a shared metric to reuse a metric across experiments. All metric types can be shared: funnel, mean, ratio, and retention. This is ideal for key company metrics like conversion, revenue, churn, and more.
+Create a shared metric to reuse a metric across experiments. All metric types can be shared: funnel, mean, percentile, ratio, and retention. This is ideal for key company metrics like conversion, revenue, churn, and more.
 
 To create one, go to the [shared metrics tab](https://app.posthog.com/experiments/shared-metrics) and click **New shared metric**. From here, they are created the same way as single-use metrics.
 

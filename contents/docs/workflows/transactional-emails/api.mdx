@@ -14,8 +14,8 @@ You need a [transactional email](/docs/workflows/transactional-emails#create-a-t
 POST https://us.posthog.com/api/projects/@current/messaging/send/email/
 ```
 
-- **Host** - Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
-- **Project** - `@current` is the project that the key belongs to. You can use your project ID instead.
+- **Host** – Use `https://us.posthog.com` or `https://eu.posthog.com`, the host where you log in to PostHog. Don't use an ingestion host like `us.i.posthog.com`. If you self-host PostHog, use the URL of your instance.
+- **Project** – `@current` is the project that the key belongs to. You can use your project ID instead.
 
 ### Request
 
@@ -168,7 +168,7 @@ Each SDK page shows how to set up the client and handle errors.
 
 The older route, `POST /api/projects/@current/messaging_templates/:template_id/send/`, still works. It takes the template ID in the URL and the distinct ID as `identifiers.distinct_id`.
 
-When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors) and the [checks for content from your code](#checks-for-content-from-your-code).
+When a send fails, the response carries a `code`. See [errors](/docs/workflows/transactional-emails#errors), the [checks for content from your code](#checks-for-content-from-your-code), and the [checks for files](#checks-for-files).
 
 ### `delivery_unavailable`
 
@@ -178,8 +178,8 @@ A `503` with the code `delivery_unavailable` means that PostHog couldn't confirm
 
 Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinct_id` out.
 
 ## Send content from your code
 
@@ -195,9 +195,11 @@ You can also send the subject and the body from your code, without a template in
 | `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
 | `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
 | `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
-| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is `true`. Send `false` to turn capture off for this email. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
+| `sensitive` | No | Whether the email is sensitive. Mark the email as sensitive when it carries login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](#sensitive-emails). |
+| `tracking` | No | Whether PostHog tracks the email's opens and clicks, and captures its [engagement events](/docs/workflows/engagement-events). Send `true`, `false`, or an object. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking). |
+| `capture_engagement` | No | Deprecated. Use `tracking` with `engagement` instead. It still works: `false` turns off engagement events for this email, the same as `"tracking": {"engagement": false}`. A request can't have both `capture_engagement` and `tracking`. |
 
-A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, `sensitive`, `tracking`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
 
 If the `to` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
@@ -321,6 +323,83 @@ $result = PostHog::emails()->send([
 
 </MultiLanguage>
 
+### Sensitive emails
+
+Mark the email as sensitive when it carries login links, reset tokens, or codes. For a sensitive email, PostHog:
+
+- **Keeps links unchanged** – PostHog doesn't rewrite the email's links to count clicks, so a token in a link never goes through a tracking redirect. [`tracking`](#open-and-click-tracking) can still turn clicks on.
+- **Leaves the subject off engagement events** – The email's [engagement events](/docs/workflows/engagement-events) don't carry its subject.
+- **Keeps no copy of the content** – PostHog doesn't keep the email's subject or body.
+
+`sensitive` takes `true` or `false`. If you leave it out:
+
+- **A template has the same key** – When a template in your project has the key that you send as `template_key`, the email takes that template's [**Protect sensitive data**](/docs/workflows/transactional-emails#protect-sensitive-data) setting.
+- **No template has the key** – The email is sensitive.
+
+Send `"sensitive": false` for an email that carries no secrets, such as an order confirmation. PostHog then tracks its clicks too, as it does for a template without **Protect sensitive data**. `sensitive` doesn't change opens or engagement events.
+
+```json
+{
+  "template_key": "order-shipped",
+  "to": "jane@example.com",
+  "subject": "Your order is on its way",
+  "html": "<p>Hi Jane, your order has shipped.</p>",
+  "sensitive": false
+}
+```
+
+### Open and click tracking
+
+`tracking` decides what PostHog tracks for an email from your code. Send `true`, `false`, or an object with any of `opens`, `clicks`, and `engagement`:
+
+| `tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Left out | On | Follows `sensitive` | On |
+| `true` | On | On | On |
+| `false` | Off | Off | Off |
+| An object | `opens`, on by default | `clicks`, default follows `sensitive` | `engagement`, on by default |
+
+- **Opens** – PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** – PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** – PostHog captures the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send.
+
+A key that you leave out of the object keeps its default, so `{}` is the same as leaving out `tracking`.
+
+#### Clicks and sensitive emails
+
+When you leave out `clicks`, PostHog tracks clicks only for an email that isn't [sensitive](#sensitive-emails). A tracked link goes through a redirect, so a login link or a reset token in it would go through the redirect too.
+
+- **An email without secrets** – Send `"sensitive": false`, and PostHog tracks its clicks.
+- **A sensitive email with safe links** – Send `"tracking": {"clicks": true}`, or `"tracking": true`. PostHog tracks its clicks, and keeps the email's other protections.
+- **An email that isn't sensitive** – Send `"tracking": {"clicks": false}` to keep its links unchanged.
+
+A `clicks` value that you send wins over `sensitive`. To keep one link as it is, add `data-ph-no-track` or `clicktracking="off"` to its `<a>` tag, as for [workflow emails](/docs/workflows/library#disabling-link-click-tracking).
+
+#### Turn tracking off
+
+With `"tracking": false`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and it captures no engagement events for it. You can still [read the email's status](#check-an-emails-status). `false` also turns off any kind of tracking that PostHog adds later.
+
+```json
+{
+  "template_key": "welcome",
+  "to": "jane@example.com",
+  "subject": "Welcome to Hedgebox",
+  "html": "<p>Hi Jane, welcome to Hedgebox.</p>",
+  "tracking": false
+}
+```
+
+In a form-encoded request, `tracking` and `sensitive` take `true` or `false`. Send JSON to use the `tracking` object.
+
+#### Requests that PostHog refuses
+
+PostHog returns a `400` and sends nothing when:
+
+- **An unknown key** – The object has a key other than `opens`, `clicks`, and `engagement`.
+- **Clicks without opens** – `opens` is `false` and `clicks` is `true`. Click tracking needs open tracking. Turn on `opens`, or turn off `clicks`. With `opens` set to `false` and `clicks` left out, PostHog tracks no clicks, whatever `sensitive` says.
+- **Both fields** – The request has `tracking` and `capture_engagement`. Move the value of `capture_engagement` to `tracking.engagement`.
+- **A template send** – The request has `template_id` and `tracking` or `sensitive`. A template uses its own settings.
+
 ### Copies and attachments
 
 Content from your code also takes these fields. A template send takes none of them, because the template uses its own settings.
@@ -329,11 +408,151 @@ Content from your code also takes these fields. A template send takes none of th
 | --- | --- | --- |
 | `cc` | No | A list of up to 10 addresses that get a copy, without a display name. |
 | `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
-| `attachments` | No | A list of up to 10 files, 512 KB in total after decoding. Each file is an object with `filename`, `content` in Base64, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
+| `attachments` | No | A list of up to 10 files that you [uploaded first](#send-files). Each file is an object with `sha256`, `filename`, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
 
-- **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
-- **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
-- **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+- **Size** – An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
+- **Inline images** – Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
+- **Content type parameters** – `content_type` can have parameters after the type. For a calendar invite, add `method=REQUEST`, so that mail apps can show the file as an invitation, not as a plain file:
+
+  ```json
+  {
+    "sha256": "1c54c1de7da52dae1aa7c8caea31c87272055e3f5308b8a81b456bce26c721ba",
+    "filename": "invite.ics",
+    "content_type": "text/calendar; charset=utf-8; method=REQUEST"
+  }
+  ```
+
+  PostHog refuses a `name` or `filename` parameter, because the file name comes from `filename`.
+- **Blocked files** – PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
+- **Viruses** – PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
+- **SDKs** – The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
+- **Older PostHog versions** – A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+
+### Send files
+
+The files of an email go to PostHog before the email. Your SDK does these steps for you. With the API, do them yourself:
+
+1. **Hash each file.** Get the SHA-256 of the file's bytes, as 64 lowercase hex characters, and the size of the file in bytes.
+2. **Ask where to upload.** Send the hash and the size of each file of the email to the [upload route](#ask-where-to-upload). PostHog answers `present` for a file that it already has, and `upload` with an upload URL for each other file.
+3. **Upload the files.** Send the bytes of each `upload` file to its URL. Don't send your PostHog API key with the upload.
+4. **Send the email.** When all uploads are successful, send the email. Put the `sha256` and the `filename` of each file in `attachments`.
+
+Ask where to upload before each send, also for a file that you sent before. PostHog answers `present` for a file that it still has, so a file that you send to many recipients, such as your terms, goes up only one time.
+
+#### Ask where to upload
+
+```
+POST https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/
+```
+
+Send the `Authorization` and `Content-Type` headers of a [send](#request). The key needs the `transactional_email:write` scope. Send a JSON body with a `files` list of 1 to 10 files, all for one email:
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `sha256` | Yes | The SHA-256 of the file's bytes, as 64 lowercase hex characters. |
+| `size` | Yes | The size of the file in bytes, at least 1. |
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "files": [
+      {"sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252", "size": 48213},
+      {"sha256": "aba4cc7ef2a4423000b9ec5269993717c92b29f092eac5b791c7e9ce24a69306", "size": 120544}
+    ]
+  }'
+```
+
+A successful request returns `200`, with one answer for each file, in the order of the request:
+
+```json
+{
+  "files": [
+    {
+      "sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252",
+      "status": "upload",
+      "url": "https://<bucket>.s3.us-east-1.amazonaws.com/<key>?X-Amz-Algorithm=AWS4-HMAC-SHA256&...",
+      "method": "PUT",
+      "headers": {
+        "Content-Length": "48213",
+        "x-amz-checksum-sha256": "0AyjwilurOCYZYqFdtr+yKlZ9dpTalHI+dBgwA5CclI="
+      },
+      "url_expires_at": "2026-11-10T09:15:00Z"
+    },
+    {
+      "sha256": "aba4cc7ef2a4423000b9ec5269993717c92b29f092eac5b791c7e9ce24a69306",
+      "status": "present",
+      "expires_at": "2026-12-16T09:00:00Z"
+    }
+  ]
+}
+```
+
+- **`present`** – PostHog has this file from an earlier upload by your project. Upload nothing. `expires_at` is the time when PostHog deletes the file, if no send uses it before then.
+- **`upload`** – Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes. The bytes of each `upload` file count toward your project's daily upload limit when PostHog gives you the URL, even if you don't upload the file. Upload each file soon after you ask.
+
+#### Upload a file
+
+```bash
+curl -X PUT "<url>" \
+  -H "Content-Length: 48213" \
+  -H "x-amz-checksum-sha256: 0AyjwilurOCYZYqFdtr+yKlZ9dpTalHI+dBgwA5CclI=" \
+  --data-binary @invoice-1042.pdf
+```
+
+A successful upload returns `200`. The upload fails with a `400` or a `403` when the bytes don't agree with `size` and `sha256`, when a header isn't as given, or when the URL expired. Ask where to upload again to get a new URL. Don't send the email until all uploads are successful.
+
+#### Allow the upload host
+
+The upload goes to Amazon S3, not to the PostHog host. The SDKs upload there too. If your network limits outgoing traffic, let your servers connect with HTTPS to the host of `url`:
+
+| PostHog Cloud | Upload host |
+| --- | --- |
+| US | A host that ends in `.s3.us-east-1.amazonaws.com` |
+| EU | A host that ends in `.s3.eu-central-1.amazonaws.com` |
+
+#### Send the email with its files
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: receipt-1042" \
+  -d '{
+    "to": "jane@example.com",
+    "template_key": "receipt",
+    "subject": "Your receipt for order 1042",
+    "html": "<p>Thanks for your order. Your invoice and our terms are attached.</p>",
+    "attachments": [
+      {"sha256": "d00ca3c2296eace098658a8576dafec8a959f5da536a51c8f9d060c00e427252", "filename": "invoice-1042.pdf", "content_type": "application/pdf"},
+      {"sha256": "aba4cc7ef2a4423000b9ec5269993717c92b29f092eac5b791c7e9ce24a69306", "filename": "terms.pdf", "content_type": "application/pdf"}
+    ]
+  }'
+```
+
+For a complete script, see the [receipt with a PDF](/docs/workflows/transactional-emails/examples#receipt-with-a-pdf) example.
+
+### Checks for files
+
+These checks apply to the upload route and to sends with `attachments`, in addition to the [errors](/docs/workflows/transactional-emails#errors) of every send. After a `400`, a `404`, or a `429`, PostHog sends nothing. The body of a `400` or a `429` has `why` and `fix` in addition to `code` and `attr`, which tell you the cause and what to do.
+
+| Status | Code | Route | Cause | What to do |
+| --- | --- | --- | --- | --- |
+| `400` | `field_not_accepted` | Both | PostHog can't send files for your project yet. | Send the email without files. |
+| `404` | `not_found` | Upload | Content from your code is off for your project, or your PostHog version has no upload route. | Send the email without files. |
+| `400` | `too_many_attachments` | Both | The email has more than 10 files. | Send 10 files at most. Link to other files from the email body. |
+| `400` | `message_too_large` | Both | The email is over 40 MB after Base64 encoding. On the upload route, `attr` names the largest file, such as `files__1__size`. | Send fewer or smaller files, or link to large files from the email body. |
+| `400` | `attachment_not_uploaded` | Send | Your project has no uploaded file with this SHA-256. The upload didn't finish, the file expired, or a different project uploaded it. `attr` names the file, such as `attachments__0__sha256`. | Ask where to upload again, upload the file, and send the email again. |
+| `400` | `blocked_file_type` | Send | Mailbox providers block this file type, such as `.exe`. | Send a different file type, or link to the file from the email body. |
+| `400` | `unsafe_filename` | Send | `filename` has a path or a line break. | Send only the file name, such as `invoice.pdf`. |
+| `400` | `not_mime_type` | Send | `content_type` isn't a MIME type, or it has a `name` or `filename` parameter. | Send a type such as `application/pdf` or `text/calendar; method=REQUEST`, or leave out `content_type`. Set the file name in `filename`. |
+| `400` | `unsafe_content_id` | Send | `content_id` has `<`, `>`, or a line break. | Send only the ID, such as `logo`. |
+| `400` | `content_too_large` | Both | The request body is over 20 MB. | Make the request smaller. Files go to the upload URL, never in the request body. |
+| `429` | `upload_quota_exceeded` | Upload | Your project asked to upload all the file bytes that it can upload today. A file counts when PostHog gives you its upload URL, even if you don't upload it, and again each time that you ask for a new URL. The day starts at midnight UTC. | Send files that PostHog already has, because they don't count. Link to new files from the email body. Or ask again after midnight UTC. |
+| `503` | `delivery_unavailable` | Both | PostHog couldn't get to its file storage. On a send, it can also mean that PostHog couldn't confirm that it queued the email, so PostHog can still send it. See [`delivery_unavailable`](#delivery_unavailable). | Send the same request again after a short wait. For a send, use the same `Idempotency-Key`, so that the email doesn't go out twice. |
+
+Other problems with `attachments` or `files`, such as a hash that isn't 64 lowercase hex characters, return the code `invalid_request`, and `attr` names the field.
 
 ### Checks for content from your code
 

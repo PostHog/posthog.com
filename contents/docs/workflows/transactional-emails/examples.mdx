@@ -155,20 +155,44 @@ Without a distinct ID, PostHog records the email on a person whose distinct ID i
 
 ## Receipt with a PDF
 
-Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional-emails#choose-where-the-emails-content-lives), so your code renders the email. The SDKs don't send copies and attachments yet, so this example uses the API.
+Send a receipt with the invoice attached, and a copy to the customer's billing contact. Attachments and copies work only with [content from your code](/docs/workflows/transactional-emails#choose-where-the-emails-content-lives), so your code renders the email.
 
 | Setting | Value |
 | --- | --- |
 | Template key | `receipt` |
 | Copies | `cc` to the billing contact, if the customer has one |
-| Attachment | The invoice PDF, 512 KB at most for all files together |
+| Attachment | The invoice PDF. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. |
 | Distinct ID | The customer's user ID |
 | Idempotency key | `receipt-{order_id}` |
 
 <MultiLanguage selector="tabs">
 
 ```bash file=cURL
-curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
+#!/usr/bin/env bash
+set -euo pipefail
+
+FILE="invoice-1042.pdf"
+SHA256=$(shasum -a 256 "$FILE" | cut -d " " -f 1)
+SIZE=$(wc -c < "$FILE" | tr -d " ")
+
+# 1. Ask where to upload the file
+ANSWER=$(curl -sS --fail-with-body -X POST "https://us.posthog.com/api/projects/@current/messaging/attachments/uploads/" \
+  -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "{\"files\": [{\"sha256\": \"$SHA256\", \"size\": $SIZE}]}") || { echo "$ANSWER" >&2; exit 1; }
+SLOT=$(jq ".files[0]" <<< "$ANSWER")
+
+# 2. Upload the file, if PostHog doesn't have it yet
+if [ "$(jq -r .status <<< "$SLOT")" = "upload" ]; then
+  HEADERS=()
+  while IFS= read -r HEADER; do
+    HEADERS+=(-H "$HEADER")
+  done < <(jq -r '.headers | to_entries[] | "\(.key): \(.value)"' <<< "$SLOT")
+  curl -sS --fail-with-body -X PUT "$(jq -r .url <<< "$SLOT")" "${HEADERS[@]}" --data-binary "@$FILE"
+fi
+
+# 3. Send the email with the file
+curl -sS --fail-with-body -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/" \
   -H "Authorization: Bearer $POSTHOG_PROJECT_SECRET_API_KEY" \
   -H "Content-Type: application/json" \
   -H "Idempotency-Key: receipt-ord_1042" \
@@ -180,14 +204,59 @@ curl -X POST "https://us.posthog.com/api/projects/@current/messaging/send/email/
     "html": "<p>Thanks for your order. Your invoice is attached.</p>",
     "distinct_id": "user_123",
     "attachments": [
-      {"filename": "invoice-1042.pdf", "content": "'"$(base64 < invoice-1042.pdf | tr -d '\n')"'", "content_type": "application/pdf"}
+      {"sha256": "'"$SHA256"'", "filename": "invoice-1042.pdf", "content_type": "application/pdf"}
     ]
   }'
 ```
 
+```js file=Node.js
+import { readFile } from "node:fs/promises"
+
+export async function sendReceipt({ order, html, invoicePath }) {
+    const { error } = await posthog.emails.send({
+        to: order.customer.email,
+        templateKey: "receipt",
+        subject: `Your receipt for order ${order.number}`,
+        html,
+        cc: order.customer.billingEmail,
+        attachments: [
+            { filename: `invoice-${order.number}.pdf`, content: await readFile(invoicePath), contentType: "application/pdf" },
+        ],
+        distinctId: order.customer.userId,
+        idempotencyKey: `receipt-${order.id}`,
+    })
+    if (error) {
+        throw error
+    }
+}
+```
+
+```python file=Python
+from pathlib import Path
+
+
+def send_receipt(order, html: str, invoice_path: str) -> None:
+    posthog.emails.send(
+        to=order.customer.email,
+        template_key="receipt",
+        subject=f"Your receipt for order {order.number}",
+        html=html,
+        cc=order.customer.billing_email,
+        attachments=[
+            {
+                "filename": f"invoice-{order.number}.pdf",
+                "content": Path(invoice_path).read_bytes(),
+                "content_type": "application/pdf",
+            }
+        ],
+        distinct_id=str(order.customer.user_id),
+        idempotency_key=f"receipt-{order.id}",
+    )
+```
+
 </MultiLanguage>
 
-Send the file's content in Base64. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments) for the limits.
+The SDKs hash and upload the file for you, and upload nothing when PostHog already has it. With the API, the script does these steps itself. It needs `bash`, `curl`, `shasum`, and [`jq`](https://jqlang.org). On Linux without `shasum`, use `sha256sum "$FILE"` in its place. See [send files](/docs/workflows/transactional-emails/api#send-files) for each step, and your SDK's page for its attachment fields.
 
 ## Measure whether an email works
 

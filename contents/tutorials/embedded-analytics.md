@@ -58,7 +58,7 @@ export default function Home() {
 To capture analytics for our app, start by installing `posthog-js`:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Afterwards, create an `instrumentation-client.ts` file at the base of your project and set up a PostHog initialization in it using your project token and host from [your project settings](http://app.posthog.com/settings/project).

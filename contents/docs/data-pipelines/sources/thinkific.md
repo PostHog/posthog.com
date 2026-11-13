@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Thinkific connector syncs your course, enrollment, and order data into PostHog, so you can analyze your online learning business alongside your product data.
+The Thinkific connector syncs your course, chapter, lesson content, course review, enrollment, order, and coupon data into PostHog, so you can analyze your online learning business alongside your product data.
 
 ## Prerequisites
 

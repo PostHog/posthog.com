@@ -113,7 +113,7 @@ We used Sonnet 4.5 on [early agents](/blog/8-learnings-from-1-year-of-agents-pos
 Typically this means:
 
 - **Cheap models for one-shot jobs with simple outputs.** We use claude-haiku-4-5 for titles and Slack app classifiers, gpt-4.1-mini for MCP intent generation and survey summaries.
-- **Frontier models where the reasoning is the product.** claude-opus-4-8 is the default for PostHog Desktop and query materialization fixes. gpt-5.6-luna classifies Slack app tasks and reasons about which model to use for them.
+- **Frontier models where the reasoning is the product.** claude-opus-4-8 is the default for PostHog Desktop and query materialization fixes. gpt-5.6-luna classifies Slack app tasks and reasons about [which model to use](/newsletter/decision-models#2-use-them-as-model-routers) for them.
 - **Gemini where it’s structurally the right tool, not just cheaper.** We use gemini-3-flash-preview for [Replay Vision](/replay-vision) because it actually watches the video (others don’t) and gemini-2.5-flash-lite-preview for summarizing huge volumes of LLM traces because it needs a cheap model with a huge context window.
 
 A router can provide a gateway to many models, which is helpful for testing and optimizing. Using multiple models, and routing to different ones per request, is [the current meta](https://www.interconnects.ai/p/use-multiple-models) with some companies saving [60-75% on workloads](https://www.kalviumlabs.ai/blog/model-cost-optimization-cutting-llm-bills/).
