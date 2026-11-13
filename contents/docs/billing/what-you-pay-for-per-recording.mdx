@@ -18,7 +18,7 @@ A recording is one session: everything a person does in your product until they 
 
 <Pricing productType="session_replay" />
 
-[Mobile recordings](/docs/session-replay/mobile) bill separately, with their own rates and a free tier of 2,500 a month. Keeping recordings for longer than 90 days needs a [platform package](/pricing). [Replay Vision](/docs/replay-vision), which uses AI to review recordings for you, bills in its own credits.
+[Mobile recordings](/docs/session-replay/mobile) bill separately, with their own rates and a free tier of 2,500 a month. Keeping recordings for longer than 90 days needs a [platform package](/pricing). [Replay Vision](/docs/replay-vision), which uses AI to review recordings for you, bills in its own credits, and asking [PostHog AI to find a recording](/docs/session-replay/find-replays-ai) in plain English spends [AI credits](/docs/posthog-ai/pricing).
 
 Those are the only line items. We don't charge to watch a recording, to share one, or per seat, so your whole team can watch as many as they like.
 
@@ -32,11 +32,11 @@ In practice that's six steps.
 
 Your customer is halfway through checkout on an old laptop with 40 tabs open. The recorder runs in that same tab. Every time the page changes, it has to notice, write the change down, and send it off, and the page can't feel any slower for it. On a phone, it also has to go easy on the battery and the data plan.
 
-**How it works at PostHog:** On the web, the recorder loads separately from the main [JavaScript SDK](/docs/libraries/js), so it only downloads when a session is going to be recorded. It's built on rrweb. It takes one full snapshot of the page, then records only what changes: DOM mutations, clicks, scrolls, and input. It batches those changes, compresses them, and sends them to a capture endpoint that handles recordings only.
+**How it works at PostHog:** On the web, the recorder loads separately from the main [JavaScript SDK](/docs/libraries/js), so it only downloads when recording is switched on. It's built on rrweb. It takes one full snapshot of the page, then records only what changes: DOM mutations, clicks, scrolls, and input. It batches those changes, compresses them, and sends them to a capture endpoint that handles recordings only.
 
 Mobile apps don't have a DOM, so the [mobile SDKs](/docs/session-replay/mobile) work differently. The native iOS and Android SDKs read the screen's view hierarchy and send a wireframe by default. React Native and Flutter send screenshots.
 
-Sampling, minimum duration, and [trigger rules](/docs/session-replay/how-to-control-which-sessions-you-record) run on the device, so a session you don't want is never uploaded and never billed.
+Sampling, minimum duration, and [trigger rules](/docs/session-replay/how-to-control-which-sessions-you-record) run on the device. While a trigger waits to match, the recorder keeps a short buffer in memory, so a session that never qualifies is never uploaded and never billed.
 
 A recorder is code that runs inside your product, so a bug in the recorder is a bug in your product. [In January 2026, a change to our replay code broke some customers' sites](/handbook/company/post-mortems/2026-01-17-replay-sdk-fetch-wrapper-incident) for several days. We published what happened and what we're changing so it doesn't happen again.
 
@@ -174,7 +174,7 @@ If you're not sure which side you're on, fill in the ledger.
 
 ### Does PostHog charge to watch or share a recording?
 
-No. You pay once per recording. Watching, sharing, comments, and filters are included for everyone on your team. Replay Vision bills in its own credits.
+No. You pay once per recording. Watching, sharing, comments, and filters are included for everyone on your team. Replay Vision and AI search bill in their own credits.
 
 ### Do mobile recordings cost more?
 
