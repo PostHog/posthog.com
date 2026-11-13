@@ -10,6 +10,7 @@ import SEO from 'components/seo'
 import { useToast } from '../../context/Toast'
 import { ForumTopic, useForumDraft } from './hooks'
 import DeletePostDialog from './DeletePostDialog'
+import IncidentBanner from './IncidentBanner'
 import TopicIcon from './TopicIcon'
 
 export default function Composer({
@@ -86,6 +87,7 @@ export default function Composer({
                         </div>
                     )}
                 </div>
+                <IncidentBanner className="mb-4" />
                 {draftLoading && (
                     // A placeholder with the shape of the form while the draft loads.
                     <div className="space-y-3" aria-busy>
