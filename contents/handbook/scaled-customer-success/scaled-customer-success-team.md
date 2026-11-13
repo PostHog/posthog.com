@@ -1,5 +1,5 @@
 ---
-title: Onboarding team
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---

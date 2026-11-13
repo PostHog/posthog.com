@@ -1,5 +1,5 @@
 ---
-title: Onboarding skills
+title: Skills
 sidebar: Handbook
 showTitle: true
 ---
