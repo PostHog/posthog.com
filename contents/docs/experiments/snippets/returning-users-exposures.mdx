@@ -2,7 +2,7 @@ The `$feature_flag_called` event is deduplicated by the SDK to avoid sending red
 
 > **Note:** Mobile SDKs (iOS, Android, React Native, Flutter) deduplicate per session by default, so this issue does not apply to them.
 
-To fix this in the web SDK, enable `advanced_feature_flags_dedup_per_session` in your [PostHog config](/docs/libraries/js/config#advanced-configuration):
+To fix this in the web SDK, enable `advanced_feature_flags_dedup_per_session` in your [PostHog config](/docs/libraries/js/reference#posthogconfig-1):
 
 ```js
 posthog.init('<ph_project_api_key>', {

@@ -118,7 +118,7 @@ posthog.capture(
 )
 ```
 
-If you plan to call the flag immediately after the event, you will likely need to [set the property for the flag manually](/docs/libraries/js/usage#overriding-server-properties) with `setPersonPropertiesForFlags()`.
+If you plan to call the flag immediately after the event, you will likely need to [set the property for the flag manually](/docs/libraries/js/reference#set-person-properties-for-flags) with `setPersonPropertiesForFlags()`.
 
 ```js
 posthog.setPersonPropertiesForFlags({
@@ -265,7 +265,7 @@ After the move, queries on flag calls return at most the last 90 days.
 
 ### Async compatibility (Python / FastAPI)
 
-Version `7.45.0` and later of the Python SDK includes the asyncio-native `AsyncPosthog` client. Use it in FastAPI, Starlette, and other asyncio apps to capture events, evaluate flags, and fetch remote config without blocking the event loop. See the [Python asyncio client guide](/docs/libraries/python#use-the-asyncio-client) for installation and lifecycle examples.
+Version `7.45.0` and later of the Python SDK includes the asyncio-native `AsyncPosthog` client. Use it in FastAPI, Starlette, and other asyncio apps to capture events, evaluate flags, and fetch remote config without blocking the event loop. See the [Python asyncio client guide](/docs/libraries/python/reference#asyncclient) for installation and lifecycle examples.
 
 The synchronous `Posthog` client remains supported. If you keep it in an asyncio app, run network-bound calls in a worker thread with `asyncio.to_thread()` instead of calling them on the event loop.
 

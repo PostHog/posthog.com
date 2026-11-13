@@ -91,7 +91,7 @@ app.onError(async (err, c) => {
 
 For Node.js, register the [optional context processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) on your existing OpenTelemetry provider before requests start. Reuse the existing `posthog` client. Keep your exporter and sampler, and put tracing middleware outside the PostHog middleware.
 
-Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname. Replace the earlier `posthogServerMiddleware` with this middleware and register it before your routes:
+Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your backend hostname. Replace the earlier `posthogServerMiddleware` with this middleware and register it before your routes:
 
 ```js
 import { enrichCurrentSpan } from 'posthog-node/otel'
@@ -125,5 +125,5 @@ This automatic context setup requires the Node.js entry point. The SDK's edge en
 ## Next steps
 
 To read more about how to integrate specific PostHog features into Hono, have a look at our [Node SDK docs](/docs/libraries/node) for concepts such as:
-- [Capturing custom events, setting properties, and more.](/docs/libraries/node#capturing-events)
-- [Setting up feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
+- [Capturing custom events, setting properties, and more.](/docs/libraries/node/reference#capture)
+- [Setting up feature flags including variants and payloads.](/docs/libraries/node/reference#get-feature-flag)

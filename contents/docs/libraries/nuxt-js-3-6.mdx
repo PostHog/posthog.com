@@ -31,8 +31,8 @@ PostHog can then be accessed throughout your Nuxt.js using the provider accessor
 ```
 
 See the [JavaScript SDK docs](/docs/libraries/js/usage) for all usable functions, such as:
-- [Capture custom event capture, identify users, and more.](/docs/libraries/js/usage#capturing-events)
-- [Feature flags including variants and payloads.](/docs/libraries/js/usage#feature-flags)
+- [Capture custom event capture, identify users, and more.](/docs/libraries/js/reference#capture)
+- [Feature flags including variants and payloads.](/docs/libraries/js/reference#get-feature-flag)
 
 <TracingHeaders />
 
@@ -103,8 +103,8 @@ export default defineEventHandler(async (event) => {
 > PostHog queues events into larger batches, and this call forces all batched events to be flushed immediately.
 
 See the [Node SDK docs](/docs/libraries/node) for all usable functions, such as:
-- [Capture custom event capture, identify users, and more.](/docs/libraries/node#capturing-events)
-- [Feature flags including variants and payloads.](/docs/libraries/node#feature-flags)
+- [Capture custom event capture, identify users, and more.](/docs/libraries/node/reference#capture)
+- [Feature flags including variants and payloads.](/docs/libraries/node/reference#get-feature-flag)
 
 ## Next steps
 
