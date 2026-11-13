@@ -22,63 +22,31 @@ seo:
 
 We planned to launch the PostHog Web redesign through a sensible, controlled rollout. Instead, we accidentally shipped it to everyone.
 
-On November 2, Ruby was opting a user out of the internal testing flag for the new UI. The conditions of the flag, to her memory, were reordered, and there was a 0% rollout condition at the bottom. So she clicked on it (to remove it), thinking she’d added it by accident. Instead of opting her user out as planned, she removed the condition *preventing* all users from seeing it.
-
 For two hours and 23 minutes, about 9,000 people in 7,800 organizations opened PostHog to a homepage and sidebar they'd never seen, with no explanation and no way back.
 
 Users on X noticed before we did.
 
 ![Posts on X from users reacting to the new PostHog UI on November 2](https://res.cloudinary.com/dmukukwp6/image/upload/x_ui_nov_2_grabs_4d197a3311.png)
 
-We turned it off shortly after, and [generated a PR](https://github.com/PostHog/posthog/pull/127717) with a confirmation step for flag rollouts. Ruby then replied to everyone who posted with the truth: we shipped it by mistake.
+How’d that happen? Ruby, the PM for team surfaces, was taking one user off the internal testing flag for the new UI. The flag’s conditions weren’t in the order she remembered, and a 0% rollout condition sat at the bottom. She figured she’d added it by accident and deleted it. But that condition was the one keeping everyone else *out*.
 
-Most people were curious, and a few even asked to be opted back in. Those who were upset weren’t upset about the UI, but the lack of warning. So consider this a warning, and one you can [opt yourself into](https://app.posthog.com/settings/user-feature-previews#today-rail-nav).
+With it gone, the flag turned on for everyone.
 
-## Why focus on UI when people are using agents?
+After a brief moment of panic, we realized most people were curious about the new UI, and a few even asked to be opted back in. Those who were upset weren’t upset about the change itself, but the lack of warning.
 
-UI refreshes are generally considered “low-leverage” product work because users don’t care much about fonts and color. A new UI lands like a new logo (“why should I care?”) and can feel corporate and try-hard.
+A few others asked the obvious question: if people are handing more of the work to agents, why redo the UI at all?
 
-We did it anyway because of two phrases we hear a lot:
+## Too much PostHog
 
-<div className="flex justify-center">
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/new_ui_meme_faf0391fde.jpg" alt="Meme: what users expect from your exciting new UI launch, showing two near-identical school photos of the same kid in a different shirt" />
-</div>
-
-### 1. “The PostHog UI is overwhelming”
-
-We’ve heard this for years. Tim, our co-founder, reckons every other tweet about us says some version of it (he’s not far off).
+It’s been a theme for years: “The PostHog UI is overwhelming.” Tim, our co-founder, reckons every other tweet about us says some version of it (he’s not far off).
 
 Customers say it on calls too. When we sorted the complaints from our recorded customer calls by topic, usability came up about twice as often as anything else. The biggest theme: PostHog is too big and too hard to learn, especially if you’re not an engineer.
 
-No wonder. There are (quite literally) thousands of things to do in PostHog. A single [Trends chart](/docs/product-analytics/trends/overview) has at least 9,600 possible setups before you add a filter. The Web app has 236 pages, but just ten pages get more than half of all pageviews. Every extra choice slows people down (that’s [Hick’s law](https://lawsofux.com/hicks-law/)).
+No wonder. There are (quite literally) thousands of things to do in PostHog. A single [Trends chart](/trends) has at least 9,600 possible setups before you add a filter. The Web app has 236 pages, but just ten pages get more than half of all pageviews. Every extra choice slows people down (that’s [Hick’s law](https://lawsofux.com/hicks-law/)).
 
 We needed to fix how you get in, do what you need, and get out.
 
-### 2. “I want to check my agents’ work”
-
-Nearly half of everything people create or change in PostHog now happens through [the MCP](/mcp), and we’re actively encouraging it. So is a redesign of the web app even worth it?
-
-Yes, because the data says [you’re still looking at it](/blog/agents-killing-ui). MCP users work with their agent, then check a [dashboard](/dashboards) or flag in the web app. Last week, about 40,000 users came back to the web app within an hour of an MCP call. Most went straight to a dashboard (~11K people), then [session replays](/session-replay) (~6K), then insights, [web analytics](/web-analytics), [feature flags](/feature-flags) and [experiments](/experiments) – typically under a minute later.
-
-They're either clicking a link their agent gave them, or opening a new tab, y’know, “just to check”. They want an instant sense of state and, perhaps more importantly, a feeling of control.
-
-## What’s new and worth your attention
-
-A sense of state is exactly what the new Home is for. The old home was a list of pages you could open. The new one is a short briefing, built from your own product data, to answer: what needs my attention today?
-
-It has three parts:
-
-1. **At a glance.** Four key numbers with sparklines. We suggest them at first (look for the sparkles). Pin your own from Edit, or with "Add to home" in any insight's menu. Hovering over a sparkline opens a modal with a detailed view so you don’t need to open another page.
-2. **Jump back in.** The last few things you opened, each with a hover card that shows where it lives.
-3. **For you today.** If you have [self-driving](/blog/self-driving-ga) set up, the highest-priority reports are listed here. Each one says what changed, shows the evidence, and lets you ask [PostHog AI](/ai) about it without leaving the page. If you don’t use self-driving, reports are snapshots of risks, opportunities, and notable changes in your product data.
-
-Above that is a task composer. Type what you want done, and PostHog AI kicks off the work.
-
-![The new PostHog Home with a task composer, At a glance numbers, Jump back in, and For you today reports](https://res.cloudinary.com/dmukukwp6/image/upload/today_home_changelog_8c94bafbf4.png)
-
-Note: orgs without AI features won’t see the task composer or self-driving reports.
-
-## The nav rail sorts PostHog by the question you're asking
+### The new nav sorts PostHog by the question you're asking
 
 If you’ve used PostHog for a while, you’ve seen [many versions of the sidebar](/blog/redesigned-nav-menu). The new rail has five items, each built around a question you’d actually ask of your data.
 
@@ -94,35 +62,48 @@ Some of these took a lot of debate, and we haven’t nailed it (yet). For exampl
 
 If you disagree on the hierarchy, let [Adam Leith](/community/profiles/32193) know.
 
-## Eighteen interviews couldn't tell us what two hours did
+## Agents do the work. People still check it.
 
-I wouldn’t recommend it as a research method, but the accidental rollout gave us more data in two hours than weeks of interviews did.
+Nearly half of everything people create or change in PostHog now happens through [the MCP](/mcp), and we’re actively encouraging it.
 
-Before this, [Ruby](/community/profiles/44280) had spent weeks screen-sharing the new UI with users, asking what they thought and writing it all up. People wanted to customize Home, said our default charts were the wrong ones, and found “For you today” empty unless they used self-driving.
+Yes, because the data says [you’re still looking at it](/blog/agents-killing-ui). MCP users work with their agent, then check a [dashboard](/dashboards) or flag in the web app. Last week, about 40,000 users came back to the web app within an hour of an MCP call. Most went straight to a dashboard (~11K people), then [session replays](/session-replay) (~6K), then insights, web analytics, [feature flags](/feature-flags) and [experiments](/experiments) – typically under a minute later.
 
-Two hours gave us 2,000 session replays to run through [Replay Vision](/replay-vision). Nearly 20% of people used Jump back in. And only 1.1% opened a report in “For you today”, mostly because 76% had nothing in it (we’ve fixed that). Interviews had already told us why the rest didn’t bother clicking: the reports felt redundant or wordy.
+They're either clicking a link their agent gave them, or opening a new tab, y’know, “just to check”. They want an instant sense of state and, perhaps more importantly, a feeling of control.
 
-We [talk to users](/newsletter/talk-to-users) a lot. You should too, but keep in mind it’s just a controlled slice of reality. Folks who agree to a 30-minute call tend to like you (several opened by telling Ruby how much they love PostHog). And when they get stuck, someone’s right there to help.
+### The new Home shows you what needs your attention
+
+A sense of state is exactly what the new Home is for. The old home was a list of pages you could open. The new one is a short briefing, built from your own product data, to answer: what needs my attention today?
+
+It has three parts:
+
+1. **At a glance.** Four key numbers with sparklines. We suggest them at first (look for the sparkles). Pin your own from Edit, or with "Add to home" in any insight's menu. Hovering over a sparkline opens a modal with a detailed view so you don’t need to open another page.
+2. **Jump back in.** The last few things you opened, each with a hover card that shows where it lives.
+3. **For you today.** If you have [self-driving](/blog/self-driving-ga) set up, the highest-priority reports are listed here. Each one says what changed, shows the evidence, and lets you ask [PostHog AI](/ai) about it without leaving the page. If you don’t use self-driving, reports are snapshots of risks, opportunities, and notable changes in your product data.
+
+Above that is a task composer. Type what you want done, and PostHog AI kicks off the work.
+
+![The new PostHog Home with a task composer, At a glance numbers, Jump back in, and For you today reports](https://res.cloudinary.com/dmukukwp6/image/upload/today_home_changelog_8c94bafbf4.png)
+
+Note: orgs without AI features won’t see the task composer or self-driving reports.
+
+## Peer reviewed by a few thousand strangers
+
+We wouldn’t recommend it as a research method, but the accidental rollout gave us more data in two hours than weeks of interviews did: 2,000 session replays, which we ran through [Replay Vision](/replay-vision). Nearly 20% of people used Jump back in. Only 1.1% opened a report in “For you today”, and 76% of people had none to open (we’ve fixed that).
+
+Ruby had already spent weeks screen-sharing the new UI with users, asking what they thought and writing it all up. People wanted to customize Home, said our default charts were the wrong ones, and couldn’t find things that used to live somewhere familiar. They also told her the reports felt redundant or wordy. We fixed all of it, but only as fast as the feedback came in.
+
+We [talk to users](/product-engineers/user-research) a lot. You should too, but a call is a controlled slice of reality. People who agree to 30 minutes tend to like you (several opened by telling Ruby how much they love PostHog). And when they get stuck, someone’s right there to help.
 
 To see what people actually do, sometimes you just have to ship it.
 
-![A Slack thread confirming the new UI rolled out to 100%, next to a PostHog post with an "it's so over, we're so back" yin-yang meme](https://res.cloudinary.com/dmukukwp6/image/upload/its_so_over_were_so_back_9596dd326d.png)
+![A Slack thread where PostHog AI confirms the new UI rolled out to 100% and a reply calls it one way to get early feedback, next to a "we're so back, it's so over" yin-yang meme](https://res.cloudinary.com/dmukukwp6/image/upload/slack_one_way_to_get_feedback_89e77f875a.png)
 
-## Complaints welcome (until early 2027)
+## Complaints welcome
+
+The new UI has one job: get you back to your own product faster. If you hate it, no worries – you can still [use PostHog without using PostHog](/mcp).
 
 Worried you can’t find something? Nothing was removed, and pages keep their URLs, so bookmarks and shared links still work. Every sidebar has a search box that filters as you type, and Cmd+K still searches everything.
 
-Turn on the new UI in [feature previews](https://app.posthog.com/settings/user-feature-previews#today-rail-nav), or wait for the in-app prompt when you log into PostHog Web. If it gets in your way, click "Use old navigation" and you're back instantly. Do us a favor though and fill out the quick survey (we'll actually read it).
+Turn on the new UI in [feature previews](https://app.posthog.com/settings/user-feature-previews#today-rail-nav), or wait for the in-app prompt when you log into PostHog Web. If it gets in your way, click "Use old navigation" and you're back to the old UI instantly (until early 2027). Do us a favor though and fill out the quick survey (we'll actually read it).
 
-### Things we’re still working on
-
-- **A more useful Home:** better default numbers in At a glance (you told us ours were the wrong ones), and smarter picks for which self-driving reports land in For you.
-- **Release:** a nav item for feature flags, experiments and early access.
-- **Monitor:** a nav item for [error tracking](/error-tracking), [logs](/logs), metrics, tracing, uptime, [AI observability](/ai-observability) and MCP analytics in one place. Each is small on its own, but together they’re an engineer’s daily to-do list.
-- **Data:** a nav item for sources, definitions, pipelines and batch exports.
-- **Canvases:** generated views built on your data, for anything a dashboard or notebook can’t show.
-- **PostHog AI 2.0:** pick your own model, run agents in the cloud, and BYOS.
-
-P.S. Not everyone loved the old UI. On Reddit, one user said: "Posthog ui is unusable, better just connect an MCP and talk to it."
-
-Fair enough. Our goal with the new UI is that you'll spend less time in PostHog and more time in your own product. Either way, [you don’t have to use PostHog](/mcp) to use PostHog.
+P.S. Ruby [made sure](https://github.com/PostHog/posthog/pull/127717) the next person gets a confirmation prompt before a flag goes out to everyone.
