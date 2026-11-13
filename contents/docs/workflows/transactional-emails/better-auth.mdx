@@ -91,8 +91,8 @@ export const auth = betterAuth({
 ```
 
 - **Background sends** - Better Auth waits for these functions in some requests, such as a request for a new verification email. Because they return before the send finishes, the send doesn't change the response time or the response, so neither one shows whether an account exists.
-- **Sign-up** - To keep sign-up from showing whether an account exists, set `requireEmailVerification: true` in `emailAndPassword`. Better Auth then answers a sign-up for an address that already has an account the same way as a sign-up for a new one. Without it, the sign-up for an existing address fails.
-- **Other platforms** - On Cloudflare Workers, use the request's `ctx.waitUntil` in place of `waitUntil`. On a long-running Node.js server, the send finishes after the response anyway, so call `posthog.emails.send(...).then(...)` without the `waitUntil` wrapper.
+- **Sign-up** - To keep sign-up from showing whether an account exists, set `requireEmailVerification: true` in `emailAndPassword`. Better Auth then answers a sign-up for an address that already has an account the same way as a sign-up for a new one. With this option, sign-up doesn't sign the user in, and the user can't sign in until they verify their email address. Without it, the sign-up for an existing address fails.
+- **Other platforms** - On Cloudflare Workers, import `waitUntil` from `cloudflare:workers` in place of `@vercel/functions`. On a long-running Node.js server, the send finishes after the response anyway, so call `posthog.emails.send(...).then(...)` without the `waitUntil` wrapper.
 - **Errors** - `send` returns `{ data, error }` and doesn't throw. `sendAuthEmail` logs the `error`, with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). A failed send never fails the request.
 - **Sensitive** - `sensitive: true` keeps the link as it is, so it doesn't go through a click tracking redirect, and keeps the subject off engagement events. PostHog still counts the opens of an HTML email. A text-only email has no open pixel. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
 - **Retries** - The client makes an idempotency key for each `send` call. It retries network errors, rate limits, an in-flight idempotency key, and a `503` with that same key, so its own retries never send the email twice.
@@ -107,10 +107,12 @@ When a job queue, such as [BullMQ](https://docs.bullmq.io), already sends your a
 
 ```ts
 sendResetPassword: async ({ user, url }) => {
-    const job = emailQueue.add(
+    const queued = emailQueue.add(
         "reset-password",
         { to: user.email, userId: user.id, url },
         {
+            // A random job ID stays unique even if Redis restarts BullMQ's job counter
+            jobId: crypto.randomUUID(),
             // Retry a failed send, with a growing wait between attempts
             attempts: 5,
             backoff: { type: "exponential", delay: 10_000 },
@@ -119,7 +121,7 @@ sendResetPassword: async ({ user, url }) => {
             removeOnFail: true,
         }
     )
-    waitUntil(job.catch((error) => console.error("Better Auth email not queued", error)))
+    waitUntil(queued.catch((error) => console.error("Better Auth email not queued", error)))
 },
 ```
 
