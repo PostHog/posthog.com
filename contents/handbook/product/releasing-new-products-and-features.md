@@ -86,6 +86,8 @@ A beta doesn't need to be perfect, but it should provide value to the user and h
 
 Betas do not need to be performant for high-volume users and can have big bugs, but should be clearly marked as such in the UI.
 
+Keep betas short, and tell users up front that the product will get its own pricing at GA. See [pricing products that start in beta](/handbook/engineering/feature-pricing#pricing-products-that-start-in-beta).
+
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 
   It's helpful to let the Developer Marketing team know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">the marketing Slack channel</PrivateLink>.

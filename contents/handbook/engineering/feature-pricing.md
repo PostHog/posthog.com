@@ -100,6 +100,16 @@ Each product should be usable on its own. For example, session replay can be ena
 	- Self-serve paid customers get a limited transition period (e.g. three months) with grandfathered pricing. This ensures that there's a clear deadline for the new pricing taking effect, while showing goodwill to customers who were already paying us. This also applies to customers who have a contract with us.
 	- Nobody gets legacy pricing forever. If you think a customer needs an exception, that should be a time-boxed decision, and not the default.
 
+### Pricing products that start in beta
+
+Many products reach customers in beta before their final pricing is set. We don't require pricing to be complete before a beta starts. But when pricing at GA is a surprise, it damages trust with the customers who helped us test the product. These are guidelines, not hard rules.
+
+- **Don't give a number unless we're confident in it.** Any figure we share, whether it's a ballpark from the product team or a description like "cost plus", becomes the number the customer plans around. If the final price is higher, it feels like we broke a promise. If we aren't sure yet, say what's undecided and when we expect to know. Share a range only when it's modeled on real usage.
+- **Any price we set is an anchor.** If we launch a new product with interim pricing, for example by billing it like an existing product's usage, customers compare the GA price to that interim price. A different GA price then looks like a pricing change instead of the pricing for a new product. Products with nothing to compare against tend to go smoothly. If you do set an interim price, say clearly that it's temporary.
+- **Be explicit when selling a beta.** When we ask customers to adopt a beta, tell them it will get its own pricing at GA and that this could be meaningfully higher than what they pay today. We don't need to give a number. We only need to set the expectation. This applies to anyone who invites customers into a beta, including product teams, sales, and CS.
+- **Check the timing against large contracts.** If a heavy beta user signs or renews a large contract shortly before new pricing lands, the pricing feels like a bait-and-switch, even if that wasn't the intent. Before announcing pricing, check which heavy beta users have recent or upcoming contracts and tell their account owners, so the conversation happens during the renewal and not after it. See [contracts for customers on time-limited plans](/handbook/growth/sales/contract-rules#contracts-for-customers-on-time-limited-plans).
+- **Keep betas short, and signal pricing early.** The longer a beta runs, the more usage, expectations, and anchors build up around it. Prefer short betas. Don't wait until the end of a beta to decide on pricing or to indicate where it's heading. Even a direction, like "usage-based and priced separately", helps customers plan.
+
 ### Deciding on a free volume, and making changes to it
 
 - When choosing a free volume for a new product, we should choose a value that is in line with our pricing principles: It should give customers the opportunity to experience the product before paying for it, and we should roughly match our competitors if they offer a free tier.

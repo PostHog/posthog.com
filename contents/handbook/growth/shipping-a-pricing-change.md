@@ -34,6 +34,8 @@ Open an RFC in <PrivateLink url="https://github.com/PostHog/requests-for-comment
 
 For existing customers, grandfather the old pricing. For beta-to-GA price changes, the grandfathering period is usually 1 month. For changes to existing GA pricing, it's usually 2 months.
 
+For beta-to-GA pricing, also list the heavy beta users who have signed or are about to renew a contract, and say in the RFC how their account owners will be told before launch. See [pricing products that start in beta](/handbook/engineering/feature-pricing#pricing-products-that-start-in-beta).
+
 ### Reviewers
 
 Get a mix. At minimum:
