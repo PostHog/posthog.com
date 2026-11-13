@@ -9,7 +9,7 @@ The [Node.js SDK](/docs/libraries/node) sends transactional emails from version 
 <details>
 <summary>Prompt for your coding agent</summary>
 
-Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that agents often get wrong.
 
 ```text
 Add PostHog transactional email to this Node.js app with posthog-node.
@@ -143,8 +143,8 @@ new Worker(
 
 Pass the distinct ID that you pass to `identify()` as `distinctId`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinctId` out.
+- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinctId` out.
 
 ## Send content from your code
 
@@ -172,13 +172,13 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 }
 ```
 
-- **`templateKey`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
-- **`react`** - A React Email element. See [send React Email components](/docs/workflows/transactional-emails/react-email) for the install, the errors, and Next.js.
-- **`text`** - If you leave it out, PostHog makes it from `html`, or the SDK makes it from the rendered `react` element.
-- **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
-- **`sensitive`** - Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
-- **`tracking`** - What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
-- **`captureEngagement`** - Deprecated. Pass `tracking: { engagement: false }` instead. It still works, but a send that sets both `captureEngagement` and `tracking` gets an error.
+- **`templateKey`** – Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`react`** – A React Email element. See [send React Email components](/docs/workflows/transactional-emails/react-email) for the install, the errors, and Next.js.
+- **`text`** – If you leave it out, PostHog makes it from `html`, or the SDK makes it from the rendered `react` element.
+- **`from`** – Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
+- **`sensitive`** – Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
+- **`tracking`** – What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
+- **`captureEngagement`** – Deprecated. Pass `tracking: { engagement: false }` instead. It still works, but a send that sets both `captureEngagement` and `tracking` gets an error.
 
 A send has `templateId` or `templateKey`, not both. Content from your code takes no `templateData`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
@@ -222,9 +222,9 @@ See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files
 | `tracking: false` | Off | Off | Off |
 | An object, such as `tracking: { clicks: true }` | `opens`, on by default | `clicks`, default follows `sensitive` | `engagement`, on by default |
 
-- **Opens** - PostHog adds an open pixel to the email, so it can count opens.
-- **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
-- **Engagement events** - PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+- **Opens** – PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** – PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** – PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
 
 If you leave out clicks, PostHog tracks them only when the email isn't sensitive, because a login link or a reset token in a tracked link would go through a redirect. Pass `sensitive: false` for an email that carries no secrets. For a sensitive email with links that are safe to rewrite, pass `tracking: { clicks: true }`. A clicks value in `tracking` wins over `sensitive`.
 
