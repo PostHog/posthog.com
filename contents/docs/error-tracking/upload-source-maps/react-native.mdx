@@ -223,7 +223,7 @@ If you are not using the Expo plugin (step 1), you will need to also disable Use
 
 The steps above upload **JavaScript** source maps, which symbolicate exceptions thrown in your JS/TS code (including Hermes bytecode). They do **not** cover native iOS and Android crashes.
 
-If you enable [native crash autocapture](/docs/libraries/react-native/reference#autocaptureoptions) (`errorTracking.autocapture.nativeCrashes`, `errorTracking.autocapture.androidNdkCrashes`, or both), you also need to upload **native** debug symbols at build time so those crash reports are readable. This reuses the native PostHog SDKs' own tooling:
+If you enable [native crash autocapture](/docs/libraries/react-native#native-crash-autocapture) (`errorTracking.autocapture.nativeCrashes`, `errorTracking.autocapture.androidNdkCrashes`, or both), you also need to upload **native** debug symbols at build time so those crash reports are readable. This reuses the native PostHog SDKs' own tooling:
 
 | Platform | Crashes | Symbols | Uploaded by |
 | --- | --- | --- | --- |
@@ -242,7 +242,7 @@ If you enable [native crash autocapture](/docs/libraries/react-native/reference#
 Symbolicated native crashes need all three of these working together:
 
 1. **Build-time** – upload native symbols (this section).
-2. **Runtime** – enable [`errorTracking.autocapture.nativeCrashes`](/docs/libraries/react-native/reference#autocaptureoptions) (and `errorTracking.autocapture.androidNdkCrashes` for Android NDK crashes) and install `@posthog/react-native-plugin`.
+2. **Runtime** – enable [`errorTracking.autocapture.nativeCrashes`](/docs/libraries/react-native#native-crash-autocapture) (and `errorTracking.autocapture.androidNdkCrashes` for Android NDK crashes) and install `@posthog/react-native-plugin`.
 3. **Server-side** – enable the **Enable exception autocapture** setting in your project's [error tracking settings](https://app.posthog.com/settings/project-error-tracking#error-tracking-exception-autocapture).
 
 </CalloutBox>
@@ -294,7 +294,7 @@ If you aren't using the Expo config plugin, wire up the uploads manually.
 
 #### iOS
 
-In Xcode, add a **Run Script** build phase to your main app target and place it **last** so it runs after the dSYM bundle is produced. The `upload-symbols.sh` script ships with the transitive `posthog-ios` dependency. Use the script path that matches your [iOS dependency path](/docs/error-tracking/installation/react-native#ios-dependency-resolution-for-native-crash-capture).
+In Xcode, add a **Run Script** build phase to your main app target and place it **last** so it runs after the dSYM bundle is produced. The `upload-symbols.sh` script ships with the transitive `posthog-ios` dependency. Use the script path that matches your [iOS dependency path](/docs/libraries/react-native#choose-an-ios-dependency-path-for-the-native-plugin).
 
 <MultiLanguage>
 
