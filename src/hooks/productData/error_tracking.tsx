@@ -18,6 +18,7 @@ import {
 import { features } from './error_tracking/features'
 import { applications, keyFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const errorTracking = {
     ...getTool('error_tracking'),
@@ -26,7 +27,7 @@ export const errorTracking = {
     teamSlug: 'error-tracking',
     pocketGuideVolume: 'error-tracking',
     forumTag: 'error-tracking',
-    color: 'orange',
+    color: PRODUCT_COLORS.error_tracking,
     colorSecondary: 'red',
     wizardSupport: true,
     shortDescription: 'Catch and fix issues with full context',

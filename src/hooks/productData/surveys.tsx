@@ -17,6 +17,7 @@ import {
 } from '@posthog/icons'
 import { features } from './surveys/features'
 import { applications, keyFeatures } from './surveys/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const surveys = {
     ...getTool('surveys'),
@@ -28,7 +29,7 @@ export const surveys = {
     slug: 'surveys',
     teamSlug: 'surveys',
     forumTag: 'surveys',
-    color: 'salmon',
+    color: PRODUCT_COLORS.surveys,
     colorSecondary: 'red',
     shortDescription: 'Ask users anything with no-code surveys',
     pricingDescription:

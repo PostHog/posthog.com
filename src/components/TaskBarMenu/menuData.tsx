@@ -18,6 +18,7 @@ import { useAppSettings } from '../../context/App'
 import { IconChevronDown } from '@posthog/icons'
 import { navigate } from 'gatsby'
 import { PRODUCT_CATEGORIES, buildProductMenuItems } from 'constants/productNavigation'
+import { PRODUCT_COLORS } from 'constants/productColors'
 import { TWIG_URL } from '../../constants'
 
 interface DocsMenuItem {
@@ -56,7 +57,7 @@ const docsMenuItems: MenuItemType[] = [
         type: 'item',
         label: 'Self-driving',
         link: '/docs/self-driving',
-        icon: <Icons.IconFlag className="size-4 text-red" />,
+        icon: <Icons.IconFlag className={`size-4 text-${PRODUCT_COLORS.self_driving}`} />,
     },
     { type: 'separator' },
     { type: 'label', label: 'Products' },
@@ -256,7 +257,7 @@ export function useMenuData(): MenuType[] {
                     type: 'item',
                     label: 'Self-driving',
                     link: '/self-driving',
-                    icon: <Icons.IconFlag className="size-4 text-red" />,
+                    icon: <Icons.IconFlag className={`size-4 text-${PRODUCT_COLORS.self_driving}`} />,
                 },
                 {
                     type: 'item',

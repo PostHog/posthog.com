@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconPlug } from '@posthog/icons'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // this data powers the CDP page, but the product icons that appear on /products and in the menu bar are defined in productNavigation.ts under the 'integrations' handle.
 
@@ -9,7 +10,7 @@ export const cdp = {
     parentIcon: 'spreadsheetSearch',
     Icon: IconPlug,
     type: 'cdp', // integrations
-    color: 'sky-blue',
+    color: PRODUCT_COLORS.cdp,
     colorSecondary: 'blue',
     hideFromPricingTableAndCalculator: true,
     seo: {

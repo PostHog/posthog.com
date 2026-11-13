@@ -1,9 +1,11 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
 /**
- * Spine colors. Each is the color of the volume's product icon in the Products menu (`color` in
- * `src/hooks/productData`, or the icon class in `TaskBarMenu/menuData.tsx` for Self-driving), so a book
- * matches its product. Limited to safelisted tokens, since the spine is built as `bg-<token>`.
+ * Spine colors. Each volume's `token` must equal its product's color in `PRODUCT_COLORS`
+ * (src/constants/productColors.ts), the color of the product's icon in the Products menu, so a book
+ * matches its product. It is a copy because this file has no imports (`node --test` and `gatsby/` load
+ * it directly); pocketGuides.test.ts fails if they differ. Limited to safelisted tokens, since the spine
+ * is built as `bg-<token>`.
  */
 export type PocketGuideToken = 'blue' | 'purple' | 'yellow' | 'seagreen' | 'orange' | 'red'
 

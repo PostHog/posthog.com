@@ -19,6 +19,7 @@ import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/
 import { features } from './product_analytics/features'
 import { applications, keyFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const productAnalytics = {
     ...getTool('product_analytics'),
@@ -30,7 +31,7 @@ export const productAnalytics = {
     pocketGuideVolume: 'product-analytics',
     // Product Analytics has a learning hub, separate from the story reader.
     learnHub: true,
-    color: 'blue',
+    color: PRODUCT_COLORS.product_analytics,
     colorSecondary: 'sky-blue',
     wizardSupport: true,
     shortDescription: 'Understand how people use your product',
