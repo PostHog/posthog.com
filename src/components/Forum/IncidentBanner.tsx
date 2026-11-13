@@ -10,7 +10,7 @@ export default function IncidentBanner({ className = '' }: { className?: string 
     if (!status || !incidentStatuses.includes(status)) return null
 
     return (
-        <div data-scheme="secondary" className={`p-4 bg-primary border border-primary ${className}`}>
+        <div data-scheme="secondary" className={`p-4 bg-primary border border-primary rounded ${className}`}>
             <h5 className="m-0">Heads up!</h5>
             <p className="m-0 text-sm">
                 We're currently experiencing an incident. Check{' '}

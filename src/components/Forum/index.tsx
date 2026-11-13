@@ -21,7 +21,6 @@ import TopicForm from './TopicForm'
 import DeleteTopicDialog from './DeleteTopicDialog'
 import TopicTags from './TopicTags'
 import ForumAlerts from './ForumAlerts'
-import IncidentBanner from './IncidentBanner'
 import ManageSubscriptions from './ManageSubscriptions'
 
 const GettingStarted = typeof window !== 'undefined' ? lazy(() => import('./GettingStarted')) : () => null
@@ -196,16 +195,13 @@ export default function Forum(props: any) {
                 )
             default:
                 return (
-                    <>
-                        <IncidentBanner className="mx-4 mt-4" />
-                        <Feed
-                            title="All posts"
-                            description="Everything from every topic, newest posts first."
-                            tags={tags}
-                            showTopic
-                            empty="No posts yet. Start the conversation!"
-                        />
-                    </>
+                    <Feed
+                        title="All posts"
+                        description="Everything from every topic, newest posts first."
+                        tags={tags}
+                        showTopic
+                        empty="No posts yet. Start the conversation!"
+                    />
                 )
         }
     }
