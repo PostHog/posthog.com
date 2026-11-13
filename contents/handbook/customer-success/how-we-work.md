@@ -34,18 +34,15 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - For example: 
     -  If you start in September, your Q3 bonus is flat at 100% and prorated to one month, and two thirds (for October and November) are flat at 100%, and then we will prorate the December component based on your actual NRR performance. 
     - Similarly, if you start in July, your Q3 bonus is flat at 100% until Q4.
-- Bonuses are paid at the end of January, April, July and October. We wait to see which invoices are paid in the first two weeks of the next quarter, then send you a breakdown of your result.
+- Bonuses are paid in the month after the quarter ends: January, April, July, and October. RevOps takes a snapshot of your NRR on the 15th, and you're paid from it. See [quarter end](/handbook/growth/revops/commissions#quarter-end).
 
 ### How NRR is calculated
 
-- We compare each account's annualized usage this quarter with the previous quarter (e.g. Q4 2026 vs Q3 2026).
-  - Monthly customers: the total of their 3 invoices in the quarter × 4.
-  - Annual customers: their usage-based spend in the quarter × 4. We don't use the total contract value ÷ 12.
-- Usage is measured before discounts and excludes tax.
-- If we credit or refund a customer for an accidental billing spike, the spike is removed from their usage so it doesn't inflate or deflate your NRR. This needs to be conveyed to the customer in writing and spike credits must be given via the billing admin with the reason `Unwanted Spike`. Credits and refunds for genuine usage are left in.
-- If we offer a customer a product trial where we will provide credit for their usage back, this will be removed from their usage in the NRR to align with billing addon trials which are not counted towards revenue either.  The goal of a trial is to ascertain whether a product is fit for purpose for a customer's needs and as such isn't considered 'retained' as a product until that customer is paying for it.
-- If a customer churns or gives formal notice of churn during the quarter, their ARR counts as $0 and they're removed from your book at the start of the following quarter.
-- Once a quarter has been paid out, it's final. If we later find a correction, we fix it in the next quarter's calculation, not by reopening the past quarter.
+NRR compares each account's annualized usage this quarter with its base ARR, which is what it actually spent last quarter, taken from last quarter's payout snapshot. The [Commissions](/handbook/growth/revops/commissions#how-nrr-is-calculated) page has the full rules and examples, including how usage is measured, credits and refunds, trials, churn, and [grace](/handbook/growth/revops/commissions#grace).
+
+To remove an accidental billing spike from your NRR, tell the customer in writing and give the credit in the billing admin with the reason `Unwanted Spike`. Without that reason, the spike stays in your NRR.
+
+If your number looks wrong, see [commission adjustments](/handbook/growth/revops/commissions#commission-adjustments). Once a quarter's snapshot is taken, corrections are made in the final payout sheet shared with Finance, not by reopening the quarter.
 
 ### Which accounts count toward your NRR
 
@@ -55,8 +52,9 @@ An account counts toward your NRR for a quarter if **all** of these are true:
 
 1. You're the assigned CSM on the second-to-last day of the quarter.
 2. You've held it for at least one month of that quarter.
-3. It isn't in a grace period or an approved exception (see below).
-4. It isn't excluded (see "Excluded accounts" below).
+3. It isn't excluded (see "Excluded accounts" below).
+
+Accounts in a grace period or an approved at-risk exception still count, but only their growth. A drop doesn't count against you (see below).
 
 #### Adding accounts
 
@@ -73,7 +71,7 @@ An account counts toward your NRR for a quarter if **all** of these are true:
 
 #### Grace period: accounts nobody has looked after
 
-- If you take on an account that wasn't actively managed (ie. engaged proactively with the customer) by another CSM, TAE or TAM in the previous 90 days before you were assigned, its churn or contraction doesn't count against you **for the quarter you were assigned it**. 
+- If you take on an account that wasn't actively managed (ie. engaged proactively with the customer) by another CSM, TAE or TAM in the previous 90 days before you were assigned, its churn or contraction doesn't count against you **for the quarter you were assigned it**. Growth on the account still counts.
 - We do this so you can help customers right-size their spend, rather than leaving them to waste money on a poor implementation.
 - From the next quarter onwards the account counts as normal. If it has churned or fallen below $20k ARR by then, work with your Team Lead to get it removed before the grace quarter ends.
 
@@ -93,7 +91,6 @@ These never count toward CSM NRR:
 
 - Accounts in the YC program, including accounts that have received YC credits.
 - Accounts that churned or were recorded as churned in a previous quarter.
-- Accounts in a grace period, or approved as an at-risk exception, for the quarter they apply to.
 - Manual exclusions approved by Simon or Ben B. These are recorded in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975">NRR exclusions sheet</PrivateLink> so there's a record of every one.
 
 ## Working with engineering teams
