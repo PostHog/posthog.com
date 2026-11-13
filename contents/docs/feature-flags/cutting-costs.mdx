@@ -60,7 +60,7 @@ import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
 
 In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
 
-You can do the following using the [advanced configuration](/docs/libraries/js/config#advanced-configuration):
+You can do the following using the [advanced configuration](/docs/libraries/js/reference#posthogconfig-1):
 
 1. Set `advanced_disable_feature_flags_on_first_load` to `true`. This prevents the SDK from automatically requesting feature flags during its initial initialization. Note that other SDK methods (like `posthog.identify()`) will still trigger flag requests when called. This is useful when you're immediately calling `identify()` anyway, since that requests flags on its own.
 
@@ -279,4 +279,4 @@ posthog.init('<ph_project_token>', {
 })
 ```
 
-See [advanced configuration options](/docs/libraries/js/config#advanced-configuration) for details.
+See [advanced configuration options](/docs/libraries/js/reference#posthogconfig-1) for details.

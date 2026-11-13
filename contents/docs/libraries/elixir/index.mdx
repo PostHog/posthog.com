@@ -64,7 +64,7 @@ end
 
 The plug adds request metadata such as `$current_url`, `$host`, `$pathname`, `$request_method`, `$user_agent`, and `$ip`. It also reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` as analytics context so backend events and errors can be linked to frontend users and sessions.
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Phoenix or Plug backend hostname so browser requests include these headers.
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your Phoenix or Plug backend hostname so browser requests include these headers.
 
 Tracing headers are client-controlled analytics context, not authentication or authorization. Pass an authenticated `distinct_id` explicitly for security-sensitive server-side decisions.
 
@@ -88,7 +88,7 @@ The PostHog plug sets context for child spans. Phoenix with Cowboy starts its re
 OpentelemetryPhoenix.setup(adapter: :cowboy2)
 ```
 
-Configure instrumentation once, before the endpoint starts. Keep other existing options in the same configuration. Do not capture all request headers. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) in the browser SDK so it sends these headers to your selected backend hostname.
+Configure instrumentation once, before the endpoint starts. Keep other existing options in the same configuration. Do not capture all request headers. Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) in the browser SDK so it sends these headers to your selected backend hostname.
 
 Cowboy supplies the captured headers as initial span attributes. The processor sanitizes them and uses them only when no process identity or explicit canonical span attribute is present. Without header capture, an earlier request span stays unchanged. Missing IDs stay absent.
 

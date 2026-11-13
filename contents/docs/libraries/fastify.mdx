@@ -76,7 +76,7 @@ await app.listen({ port: 3000, host: "127.0.0.1" })
 
 ## Request context and identity
 
-Keep `onRequest` callback-based, not `async`. Calling `done` inside [`withContext`](/docs/libraries/node#contexts) continues the request in that context. `{ fresh: true }` prevents inheritance from an outer context.
+Keep `onRequest` callback-based, not `async`. Calling `done` inside [`withContext`](/docs/libraries/node/reference#posthogwithcontext) continues the request in that context. `{ fresh: true }` prevents inheritance from an outer context.
 
 `request.user` belongs to your application. It is not a built-in Fastify identity. Populate it with a verified user and a string `id` in an earlier authentication hook. Without authentication, this example captures exceptions without creating person profiles.
 
@@ -90,7 +90,7 @@ This optional setup requires the Node SDK release with `posthog-node/otel`. The 
 
 To add browser session and person IDs to application spans, register the [optional Node context processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) on your existing OpenTelemetry provider before requests start. Reuse the `posthog` client above and keep the existing exporter and sampler.
 
-Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. Replace the earlier `onRequest` hook with this Node.js setup:
+Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your backend hostname in the browser SDK. Replace the earlier `onRequest` hook with this Node.js setup:
 
 ```js
 import { enrichCurrentSpan } from 'posthog-node/otel'
@@ -133,7 +133,7 @@ app.get("/hello", async (request) => {
 })
 ```
 
-See the [Node.js capture documentation](/docs/libraries/node#capturing-events) for more event options.
+See the [Node.js capture documentation](/docs/libraries/node/reference#capture) for more event options.
 
 ## Error handling
 

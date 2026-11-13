@@ -194,7 +194,7 @@ PostHog::withContext([
 });
 ```
 
-You can extract PostHog context from frontend tracing headers with `contextFromHeaders()`. If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your PHP backend hostname so browser requests include the session and distinct ID headers.
+You can extract PostHog context from frontend tracing headers with `contextFromHeaders()`. If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your PHP backend hostname so browser requests include the session and distinct ID headers.
 
 Then read the incoming headers on the server:
 

@@ -72,7 +72,7 @@ PostHog::identify([
 
 The SDK uses the authenticated user's ID automatically, or you can pass a distinct ID explicitly as shown above. Without an identity, each event gets a new random ID without a person profile; these IDs don't identify returning visitors.
 
-To link browser sessions to backend events, configure the JavaScript SDK's [tracing headers](/docs/libraries/js/config#tracing-headers). These headers are untrusted analytics input, not authentication. Pass an authenticated identity explicitly for security-sensitive events or flag decisions.
+To link browser sessions to backend events, configure the JavaScript SDK's [tracing headers](/docs/data/sessions#automatically-sending-session-ids). These headers are untrusted analytics input, not authentication. Pass an authenticated identity explicitly for security-sensitive events or flag decisions.
 
 The SDK doesn't collect request bodies, query strings, or email by default. Check your own event properties and exception messages for sensitive data.
 
@@ -278,7 +278,7 @@ class AppServiceProvider extends ServiceProvider
 
 ### Request context middleware
 
-Client SDKs such as [PostHog JS](/docs/libraries/js) can send tracing headers to your Laravel backend. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Laravel backend hostname so browser requests include the session and distinct ID headers.
+Client SDKs such as [PostHog JS](/docs/libraries/js) can send tracing headers to your Laravel backend. Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your Laravel backend hostname so browser requests include the session and distinct ID headers.
 
 The PHP SDK can read `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` headers and apply them to events captured during the request. Tracing headers are client-controlled analytics context, not authentication or authorization. For security-sensitive server-side events or decisions, pass an authenticated `distinctId` explicitly, such as `auth()->id()`. For the lower-level context APIs, see the [PHP request context docs](/docs/libraries/php#request-context).
 

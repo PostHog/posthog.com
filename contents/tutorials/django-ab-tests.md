@@ -152,7 +152,7 @@ Once created, set the primary metric to a trend of `pageview` and then click **L
 
 To implement the A/B test, we: 
 
-1. Fetch the `my-cool-experiment` flag using [`posthog.get_feature_flag()`](/docs/libraries/python#feature-flags). 
+1. Fetch the `my-cool-experiment` flag using [`posthog.get_feature_flag()`](/docs/libraries/python/reference#get-feature-flag). 
 2. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 ```python file=views.py
@@ -184,7 +184,7 @@ When you restart your app and refresh the page, you should see the text updated 
 
 To ensure our goal metric is correctly calculated for each experiment variant, we need to include our feature flag information when capturing our `$pageview` event.
 
-To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/python#step-2-include-feature-flag-information-when-capturing-events) key to our event properties:
+To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/python/reference#capture) key to our event properties:
 
 ```python file=views.py
 

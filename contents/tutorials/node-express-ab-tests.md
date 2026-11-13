@@ -136,7 +136,7 @@ Once created, set the primary metric to a trend of `endpoint_called` and then cl
 To implement the A/B test, we: 
 
 1. Change our request handler to `async`.
-2. Fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node#feature-flags). 
+2. Fetch the `my-cool-experiment` flag using [`posthog.getFeatureFlag()`](/docs/libraries/node/reference#get-feature-flag). 
 3. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 
@@ -187,7 +187,7 @@ When you restart your app and refresh the page, you should see the text updated 
 
 To ensure our goal metric is correctly calculated for each experiment variant, we need to include our feature flag information when capturing our `endpoint_called` event.
 
-To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/node#step-2-include-feature-flag-information-when-capturing-events) key to our event properties:
+To do this, we add the [`$feature/my-cool-experiment`](/docs/feature-flags/adding-feature-flag-code?tab=Node.js#method-2-include-the-featurefeature_flag_name-property-manually) key to our event properties:
 
 ```js file=server.js
 app.get('/', async (req, res) => {
