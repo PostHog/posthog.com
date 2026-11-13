@@ -33,7 +33,7 @@ import posthog from "posthog-js"
 export const onClientEntry = () => {
     posthog.init("<ph_project_token>", {
         api_host: "<ph_client_api_host>",
-        defaults: "2025-05-24",
+        defaults: "<ph_posthog_js_defaults>",
         capture_pageview: "history_change",
     })
 }
