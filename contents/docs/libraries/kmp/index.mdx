@@ -788,10 +788,10 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `capturePushNotificationSubscriptions` | `Boolean` | `true` | Registers the FCM token at startup when Firebase Messaging is available (Android only). |
 | `capturePushNotificationOpened` | `Boolean` | `true` | Captures push notification opens automatically (Android only). |
 | `evaluationContexts` | `List<String>?` | `null` | Evaluates only feature flags with one of these evaluation tags, plus untagged flags. `null` evaluates every flag. |
-| `captureAiCompression` | `PostHogCompression` | `GZIP` | How [`captureAi`](#ai-events) request bodies are compressed (Android, iOS, macOS, and JVM). |
-| `captureAiMaxQueueSize` | `Int` | `100` | Maximum number of [`captureAi`](#ai-events) events kept in their own on-disk queue (Android, iOS, macOS, and JVM). |
-| `captureAiTimeout` | `Int` | `60` | Seconds a [`captureAi`](#ai-events) request can go without network activity before it times out (Android, iOS, macOS, and JVM). |
-| `captureAiMaxEventBytes` | `Int` | `8454144` (8 MiB + 64 KiB) | Maximum size of a serialized [`captureAi`](#ai-events) event. Can only be lowered (Android, iOS, macOS, and JVM). |
+| `captureAiCompression` | `PostHogCompression?` | `null` (`GZIP`) | How [`captureAi`](#ai-events) request bodies are compressed (Android, iOS, macOS, and JVM). |
+| `captureAiMaxQueueSize` | `Int?` | `null` (`100`) | Maximum number of [`captureAi`](#ai-events) events kept in their own on-disk queue (Android, iOS, macOS, and JVM). |
+| `captureAiTimeout` | `Int?` | `null` (`60`) | Seconds a [`captureAi`](#ai-events) request can go without network activity before it times out (Android, iOS, macOS, and JVM). |
+| `captureAiMaxEventBytes` | `Int?` | `null` (8 MiB + 64 KiB) | Maximum size of a serialized [`captureAi`](#ai-events) event. Can only be lowered (Android, iOS, macOS, and JVM). |
 
 ### Error Tracking options
 
@@ -845,7 +845,7 @@ Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The 
 - **Retries:** until your host serves the path, a `404` is retried about every 30 seconds, and events stay queued only until a full queue evicts them (`maxQueueSize`, 1000 by default). Other errors that aren't retried, such as `401` or `403`, drop the events. Only `307` and `308` redirects to the same origin are followed, `3xx` responses are no longer retried, `Retry-After` is capped at 30 seconds, the wait between failed sends doubles with jitter, and a request carries at most about 5 MiB.
 - **Project token:** if `projectToken` is a personal API key (`phx_...`), the SDK disables itself at setup. Use your project token (`phc_...`).
 - **Super properties:** values that you set with `register` replace the properties that the SDK sets, such as `$os_name`. A registered `$session_id` replaces the SDK's session ID, which can detach events from their session replay.
-- **Registered `$process_person_profile`:** a `$process_person_profile = false` set with `register()` now applies to every event, including the ones `identify()`, `alias()`, `group()`, and `setPersonProperties()` send. PostHog then drops the `$identify`, `$create_alias`, and `$groupidentify` events and doesn't update the person, and the SDK doesn't report it. Remove the registered value and use `personProfiles` instead.
+- **Registered `$process_person_profile`:** a `$process_person_profile = false` set with `register()`, or a `process_person_profile = false` set with `registerOptions()`, now applies to every event except the ones `identify()`, `alias()`, `group()`, and `setPersonProperties()` send. In 0.10 the SDK replaced it with its own value, so it had no effect. Events after `identify()` that get it are still linked to the person and billed as identified events, but don't update the person profile. Remove the registered value and use `personProfiles` instead: the default `PersonProfiles.IDENTIFIED_ONLY` skips person profiles for anonymous users, and `PersonProfiles.NEVER` creates none.
 - **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets. Build your Xcode app once and commit the updated `KotlinMultiplatformLinkedPackage`, which now pins posthog-ios 4.0.
 - **Binary compatibility:** recompile any library built against posthog-kmp 0.10. Its Android and JVM bytecode fails at runtime with `NoSuchMethodError`. Java callers of `screen()`, `identify()`, `alias()`, `group()`, `setPersonProperties()`, `captureException()`, and `new CaptureOptions(groups, timestamp)` must pass the new `eventOptions` argument.
 - **Other PostHog artifacts:** if the same Android or JVM build uses `posthog-server`, use 2.25.0 or later. If it uses `posthog-android-surveys-compose`, declare `posthog-android` 4.0.0 or later alongside it.
