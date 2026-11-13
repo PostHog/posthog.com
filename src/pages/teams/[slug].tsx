@@ -241,7 +241,7 @@ export default function TeamPage(props: TeamPageProps) {
                     }
                 }
             }
-            allSlackEmoji {
+            allSlackEmoji(sort: { fields: name, order: ASC }) {
                 nodes {
                     name
                     url
