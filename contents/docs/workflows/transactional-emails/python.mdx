@@ -9,7 +9,7 @@ The [Python SDK](/docs/libraries/python) sends transactional emails from version
 <details>
 <summary>Prompt for your coding agent</summary>
 
-Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that agents often get wrong.
 
 ```text
 Add PostHog transactional email to this Python app with the posthog package.
@@ -165,8 +165,8 @@ def send_password_reset_email(self, user_id: str, email: str, first_name: str, r
 
 Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinct_id` out.
 
 ## Send content from your code
 
@@ -204,12 +204,12 @@ async def send_password_reset(user_id: str, email: str, html: str, reset_request
 
 </MultiLanguage>
 
-- **`template_key`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
-- **`text`** - If you leave it out, PostHog makes it from `html`.
-- **`from_`** - The sender. It has a trailing underscore because `from` is a Python keyword. It needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
-- **`sensitive`** - Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
-- **`tracking`** - What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
-- **`capture_engagement`** - Deprecated. Pass `tracking={"engagement": False}` instead. It still works, but a send that sets both `capture_engagement` and `tracking` gets an error.
+- **`template_key`** – Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`text`** – If you leave it out, PostHog makes it from `html`.
+- **`from_`** – The sender. It has a trailing underscore because `from` is a Python keyword. It needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
+- **`sensitive`** – Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
+- **`tracking`** – What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
+- **`capture_engagement`** – Deprecated. Pass `tracking={"engagement": False}` instead. It still works, but a send that sets both `capture_engagement` and `tracking` gets an error.
 
 A send has `template_id` or `template_key`, not both, or it raises `TypeError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
@@ -226,9 +226,9 @@ A send has `template_id` or `template_key`, not both, or it raises `TypeError`. 
 | `tracking=False` | Off | Off | Off |
 | A dict, such as `tracking={"clicks": True}` | `"opens"`, on by default | `"clicks"`, default follows `sensitive` | `"engagement"`, on by default |
 
-- **Opens** - PostHog adds an open pixel to the email, so it can count opens.
-- **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
-- **Engagement events** - PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+- **Opens** – PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** – PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** – PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
 
 If you leave out clicks, PostHog tracks them only when the email isn't sensitive, because a login link or a reset token in a tracked link would go through a redirect. Pass `sensitive=False` for an email that carries no secrets. For a sensitive email with links that are safe to rewrite, pass `tracking={"clicks": True}`. A clicks value in `tracking` wins over `sensitive`.
 
