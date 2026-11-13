@@ -82,30 +82,29 @@ export async function sendOrderShipped({ userId, email, firstName, trackingUrl, 
 
 - **Key:** `templateKey` names the email. PostHog groups the email's metrics and sends under it, so use one key for each component, such as `order-shipped`.
 - **Text:** The SDK makes the plain text with `toPlainText` from `@react-email/render`, which keeps the link of each button and drops the markup. To send your own plain text, pass `text`. The SDK then sends your `text` and renders only the HTML.
-- **One element for each send:** The SDK renders the element after `send` returns. Make a new element for each send, and don't change its props while the send is pending.
+- **Props:** The SDK renders the element after you call `send`, before it sends the request. Don't change the objects that you pass as props until the send finishes.
 - **Sender:** `from` needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender.
 - **User:** Pass the distinct ID that you pass to `identify()` as `distinctId`, so PostHog records the send and its [engagement events](/docs/workflows/engagement-events) against that user. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
-- **Tracking:** An email with no template in PostHog is sensitive by default, so PostHog doesn't track its clicks. An order email carries no secrets, so you can pass `sensitive: false` to track its clicks. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
+- **Tracking:** An email with no template in PostHog is sensitive by default, so PostHog doesn't track its clicks. An order email carries no secrets, so you can pass `sensitive: false` to track its clicks. `sensitive` needs version 5.71.0 or later. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
 - **Retries:** The idempotency key identifies the email. A retry with the same key in the 24 hours after PostHog queues the email doesn't send it again. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key) and [timeouts and retries](/docs/workflows/transactional-emails/node#timeouts-and-retries).
 
 `send` returns `{ data, error }` and doesn't throw. `data.id` is the message ID, which you can pass to [`get`](/docs/workflows/transactional-emails/node#check-an-emails-status) to read the email's status.
 
 ## Errors from a React send
 
-A send with `react` can return two more error codes. For both, the SDK sends nothing:
+A send with `react` can return these error codes. For each one, the SDK sends nothing:
 
 | Code | Cause | Fix |
 | --- | --- | --- |
+| `invalid_form` | The send has `react` and `html`, or `react` and `templateId`. | `react` replaces `html`, so pass one of them. A template in PostHog takes no `react`, because PostHog renders the template. |
 | `missing_react_renderer` | The SDK can't load `@react-email/render`. | Install `@react-email/render` with `react` and `react-dom` next to `posthog-node`. |
-| `react_render_failed` | The component threw an error, or didn't finish rendering before the email request timeout, 15 seconds by default. `error.cause` holds the component's error. | Fix the component. Render it in a test with the same props to see the error. |
-
-`react` replaces `html`. A send with both returns `invalid_form`. A send with `templateId` takes no `react`, because PostHog renders the template.
+| `react_render_failed` | The component threw an error, or didn't finish rendering before the email request timeout. The timeout is 15 seconds by default, and `emailRequestTimeoutMs` on the client changes it. | If the component threw, `error.cause` holds its error. Fix the component, and render it in a test with the same props to see the error. |
 
 For every other error code, see the [errors table](/docs/workflows/transactional-emails#errors).
 
 ## Send from Next.js
 
-Send from a route handler or a server action on the Node.js runtime, which is the default. React Email doesn't render on the edge runtime, so a send with `react` from a route with `export const runtime = "edge"` returns `react_render_failed` after the timeout, and sends nothing.
+Send from a route handler or a server action on the Node.js runtime, which is the default. React Email doesn't render in a Next.js route on the edge runtime, whether the SDK renders it or you do. A send with `react` from a route with `export const runtime = "edge"` returns `react_render_failed` after the email request timeout, and sends nothing.
 
 ## Render the email yourself
 
