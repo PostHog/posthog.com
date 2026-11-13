@@ -49,35 +49,22 @@ The CSM stays on every $20k+ account, so there's no handoff when a TAM's work is
 > This plan, including the OTE to quota ratio, is likely to change as we scale up the size and complexity of our sales machine! For example, the rate plan will be reviewed when median book cash exceeds 5x OTE. This is completely normal - we will ensure everyone is treated fairly. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. 
 
 **How we calculate**
-- Quota is calculated annually, and is paid out quarterly
-- A deal counts toward quota in the quarter of its **effective date**. For annual deals, the effective date is the contract start date or the signature date, whichever is later. For monthly accounts, each payment counts toward the quarter it falls in.
-- Because the signature date sets the floor, a deal can never be credited to a quarter that has already closed, even if its contract start was backdated to align with the customer's current billing period.
-- The Commission rate is 10% flat and uncapped on annual agreements. The commission rate is 5% on monthly contracts
-	- There is also an additional 6.7% incentive on growth in annual renewals
-	- There is no additional incentive on monthly payments
- - An account counts toward your quota only from the date it is added to your book (when the TAM field is set in Customer Analytics). Cash paid before that date does not count toward commission, even if it lands in the current quarter. We don't pay retroactively on an account that wasn't yet in your book.
 
-**Examples**
-Ator, the TAM, has a book account that pays month to month. In the quarter, that account makes 3 payments of $2,200, $2,100, and $2,500, totaling $6,800. The quota realized and paid out to Ator on this account is 5% of the total for that quarter: $340.
+- Quota is calculated annually, and is paid out quarterly, in the month after the quarter ends.
+- You're paid a percentage of what your customers pay: one rate on annual contracts, a growth incentive on renewals and expansions, and a lower rate on monthly invoices.
+- An account counts only from the date it's added to your book (when the TAM field is set in Customer Analytics). We don't pay retroactively on an account that wasn't yet in your book.
 
-Ator has another book account that he lands on an annual credit purchase that quarter. In the first month of the quarter, they paid $8,000 on their monthly plan, and then they signed an annual credit purchase for $142,857.15 in credits. After discount, they paid PostHog $100,000. Ator realizes:
+The [Commissions](/handbook/growth/revops/commissions) page has the rules and worked examples:
 
-- $10,000 in quota from the 10% on the annual cash paid
-- $400 in quota from the 5% on their single monthly payment that quarter
+- [Current rates](/handbook/growth/revops/commissions#rates-from-q4-2026) and [who gets paid](/handbook/growth/revops/commissions#who-gets-paid), including handoffs
+- [Which quarter a deal counts in](/handbook/growth/revops/commissions#which-quarter-an-annual-contract-counts-in)
+- [The annual base](/handbook/growth/revops/commissions#annual-base) and [multi-year contracts](/handbook/growth/revops/commissions#how-multi-year-contracts-count)
+- [Renewals and growth](/handbook/growth/revops/commissions#deal-type)
+- [Monthly invoices alongside an annual contract](/handbook/growth/revops/commissions#monthly-paying-customers)
+- [Payment status, the cutoff, and clawbacks](/handbook/growth/revops/commissions#payment-status)
+- [Your dashboard](/handbook/growth/revops/commissions#dashboards) and [how to ask for a correction](/handbook/growth/revops/commissions#commission-adjustments)
 
-Ator is paid a total of $10,400 for that account that quarter.
-
-Ator has (yet) another book account coming up for renewal. Last year, that account spent $100,000 with PostHog. This year, they are increasing their annual credit purchase to $171,428.57. After discount, they pay PostHog $120,000. Ator realizes:
-
-- $12,000 in quota from the 10% on the annual cash paid
-- $1,340 in quota from the 6.7% incentive on the $20,000 increase over last year
-
-Ator is paid a total of $13,340 for this account.
-
-**Effective date example**
-A customer's billing period runs June 23 to July 23. The TAM signs the annual deal on July 20 and the contract start is set to June 23. The effective date is July 20, the later of the two, so the deal counts toward Q3 rather than the already-closed Q2.
-
-Situations where PostHog credits a customer due to circumstances outside of the TAM's control will be handled on a case by case basis.
+Situations where PostHog credits a customer due to circumstances outside of the TAM's control will be handled on a case by case basis, as a [commission adjustment](/handbook/growth/revops/commissions#commission-adjustments).
 
 **During ramp**
 
@@ -111,6 +98,8 @@ To calculate the team quota, we combine the quota of all team members with prora
  - For team members who begin the quarter still in their first three months in the role we add 50% of their quota to the team quota.
 
 Example: With a flat quota of $250,000 and 3 fully ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
+
+How your team's closed-won total adds up against this quota is on the [Commissions](/handbook/growth/revops/commissions#tam-leads) page.
 
 > If someone leaves the team, we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple.
 
