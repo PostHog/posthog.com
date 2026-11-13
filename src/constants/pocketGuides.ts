@@ -1,7 +1,11 @@
 /** The volumes on the shelf. Data only, so `gatsby/` can import it in Node at build time. */
 
-/** Spine colours. Limited to safelisted tokens, since the spine is built as `bg-<token>`. */
-export type PocketGuideToken = 'orange' | 'purple' | 'blue' | 'yellow' | 'red'
+/**
+ * Spine colors. Each is the color of the volume's product icon in the Products menu (`color` in
+ * `src/hooks/productData`, or the icon class in `TaskBarMenu/menuData.tsx` for Self-driving), so a book
+ * matches its product. Limited to safelisted tokens, since the spine is built as `bg-<token>`.
+ */
+export type PocketGuideToken = 'blue' | 'purple' | 'yellow' | 'seagreen' | 'orange' | 'red'
 
 /** Optional pages under a Learn hub, at /learn/<product>/<page>. */
 export type LearnHubPage = 'agent-prompts-and-mcp' | 'live-playground'
@@ -86,7 +90,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         title: 'Data Stack',
         description:
             'Model revenue, conversion, activation, and usage once, so every dashboard and downstream model reuses the same definition.',
-        token: 'blue',
+        token: 'purple',
         volume: 3,
         docsProduct: 'data-warehouse',
         productHandle: 'data_warehouse',
@@ -107,7 +111,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         id: 'feature-flags',
         title: 'Feature Flags',
         description: 'Ship code turned off, then decide from PostHog who gets it – and turn it back off in seconds.',
-        token: 'orange',
+        token: 'seagreen',
         volume: 6,
         docsProduct: 'feature-flags',
         productHandle: 'feature_flags',
@@ -118,7 +122,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         id: 'self-driving',
         title: 'Self-driving',
         description: 'Scouts that watch your product and open a pull request when something breaks.',
-        token: 'orange',
+        token: 'red',
         volume: 1,
         docsProduct: 'self-driving',
         learnPath: '/docs/self-driving/pocket-guide',
@@ -127,7 +131,7 @@ export const POCKET_GUIDE_VOLUMES: PocketGuideVolume[] = [
         id: 'error-tracking',
         title: 'Error Tracking',
         description: 'Catch what breaks, measure who it hurts, and hand the fix to an agent.',
-        token: 'red',
+        token: 'orange',
         volume: 7,
         docsProduct: 'error-tracking',
         productHandle: 'error_tracking',
