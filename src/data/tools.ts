@@ -49,7 +49,6 @@ export const tools = [
         description: 'Custom API endpoints powered by your PostHog data.',
         slug: 'endpoints',
         category: 'product_engineering',
-        status: 'beta',
         aliases: ['Query API endpoint'],
     },
     {
@@ -344,7 +343,6 @@ export const tools = [
         searchDescription: 'Transform, enrich, and model your data.',
         slug: 'context-warehouse/data-modeling',
         category: 'data',
-        status: 'beta',
     },
     {
         handle: 'sql_editor',

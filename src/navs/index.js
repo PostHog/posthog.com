@@ -2548,8 +2548,18 @@ const posthogMcpNav = [
         url: '/docs/model-context-protocol/faq',
     },
     {
-        name: 'Enterprise auth (ID-JAG)',
+        name: 'Enterprise-managed authorization',
         url: '/docs/model-context-protocol/enterprise-managed-authorization',
+        children: [
+            {
+                name: 'Overview',
+                url: '/docs/model-context-protocol/enterprise-managed-authorization',
+            },
+            {
+                name: 'Claude',
+                url: '/docs/model-context-protocol/claude-managed-authorization',
+            },
+        ],
     },
     {
         name: 'Code editors',
@@ -8391,6 +8401,10 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/api',
                         },
                         {
+                            name: 'React Email',
+                            url: '/docs/workflows/transactional-emails/react-email',
+                        },
+                        {
                             name: 'Examples',
                             url: '/docs/workflows/transactional-emails/examples',
                         },
@@ -8464,6 +8478,12 @@ export const docsMenu = {
                     url: '/docs/workflows/opt-outs',
                     icon: 'IconShieldLock',
                     color: 'green',
+                },
+                {
+                    name: 'Frequency cap',
+                    url: '/docs/workflows/frequency-cap',
+                    icon: 'IconClock',
+                    color: 'purple',
                 },
                 {
                     name: 'Sending reputation and allowance',

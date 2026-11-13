@@ -84,6 +84,7 @@ export type ForumTagData = {
 // /api/forum-subscriptions returns flat records, not the usual { id, attributes } shape.
 export type ForumSubscription = {
     id: number
+    // 'eachPost' is retired: old subscriptions may still have it, but it sends no email.
     deliveryMode: 'none' | 'dailyDigest' | 'eachPost'
     forumTopic: (Pick<ForumTopicData, 'label' | 'slug'> & { id: number }) | null
     forumTag:
