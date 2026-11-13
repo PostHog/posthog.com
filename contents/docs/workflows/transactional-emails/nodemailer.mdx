@@ -95,13 +95,15 @@ In TypeScript, importing `posthog-node/nodemailer` adds `posthog` to Nodemailer'
 
 ## Send mail from a queue
 
-The client retries a failed request for you, with the same idempotency key. See [timeouts and retries](/docs/workflows/transactional-emails/node#timeouts-and-retries). When a job queue retries a failed job, each retry is a new `sendMail` call. Without an `idempotency_key`, each call gets a new random key, and the recipient can get the email twice.
+The client retries some failed requests for you, such as network errors and a `503`, with the same idempotency key. See [timeouts and retries](/docs/workflows/transactional-emails/node#timeouts-and-retries). When a job queue retries a failed job, each retry is a new `sendMail` call. Without an `idempotency_key`, each call gets a new random key, and the recipient can get the email twice.
 
 So when you send from a job queue, set `idempotency_key` from what the email is for, such as the order and the email's name. Never use a random value or a timestamp. Each retry must also send the same message, so build the subject and content only from the job's stored data:
 
 ```js
 posthog: { idempotency_key: `order-${order.id}-shipped` }
 ```
+
+When the queue owns the retries, create the transport's client with `emailRequestMaxRetries: 0`, so that the client doesn't also retry inside each job.
 
 PostHog remembers a key for 24 hours after it queues the email. If a queue retries a job later than that, the same key doesn't stop a second email, so stop retrying a send after 24 hours.
 
@@ -117,7 +119,7 @@ Before the send, the transport has Nodemailer read the streams and URLs in the m
 
 ## Messages PostHog can't send
 
-PostHog never drops the content, recipients, or options of a message. It ignores only the headers that the `unsupported_header` row names, and sets its own. If PostHog can't carry another part of a message, `sendMail` rejects before the transport sends a request, and PostHog sends nothing. The error has `code: "EPOSTHOGUNSUPPORTED"`, and `error.refusal` tells you why:
+PostHog never drops the content, recipients, or options of a message. It ignores only the headers that the `unsupported_header` row names and the display names of every address except `from`, and sets its own headers. If PostHog can't carry another part of a message, `sendMail` rejects before the transport sends a request, and PostHog sends nothing. The error has `code: "EPOSTHOGUNSUPPORTED"`, and `error.refusal` tells you why:
 
 | `refusal` | The message has | What to do |
 | --- | --- | --- |
