@@ -65,7 +65,7 @@ Headers are the one place a mailer can set options for one email. The delivery m
 | `X-PostHog-Track-Clicks` | `true` or `false`: whether PostHog rewrites the links to count clicks. Without it, PostHog tracks clicks only when the email isn't sensitive. |
 | `X-PostHog-Capture-Engagement` | `true` or `false`: whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). |
 
-The last four set `sensitive` and `tracking` as on the [Ruby page](/docs/workflows/transactional-emails/ruby#open-and-click-tracking). Leave a header out and PostHog decides. Without `X-PostHog-Sensitive`, an email is sensitive unless a template in your project has its template key, so PostHog doesn't track clicks on mail named after its mailer, such as `user_mailer-welcome`. Set it to `false` for mail that carries no secrets. PostHog refuses `X-PostHog-Track-Opens: false` with `X-PostHog-Track-Clicks: true`, because click tracking needs open tracking.
+The last four set `sensitive` and `tracking` as on the [Ruby page](/docs/workflows/transactional-emails/ruby#open-and-click-tracking). Leave a header out and PostHog decides. Without `X-PostHog-Sensitive`, an email takes the **Protect sensitive data** setting of the template in your project that has its template key, and is sensitive when no template has that key. So PostHog doesn't track clicks on mail named after its mailer, such as `user_mailer-welcome`. Set it to `false` for mail that carries no secrets. PostHog refuses `X-PostHog-Track-Opens: false` with `X-PostHog-Track-Clicks: true`, because click tracking needs open tracking.
 
 ```ruby file=app/mailers/user_mailer.rb
 def welcome(user)
@@ -91,11 +91,11 @@ def shipped(order)
 end
 ```
 
-Without the header, the client makes a key that covers only its own retries within one send. A retry has to render the same mail: when the view renders a timestamp or a fresh token, the retry gets `idempotency_key_reused`, which means the first attempt was probably sent.
+Without the header, the client makes a key that covers only its own retries within one send. A retry has to render the same mail: when the view renders a timestamp or a fresh token, the retry gets `idempotency_key_reused`, which means the first attempt was probably sent, so don't send it again by hand.
 
 ## What PostHog can't send
 
-PostHog sends one email to one recipient, with an HTML body, a text body, or both, and copies to up to 10 `Cc` and 10 `Bcc` addresses. The delivery method refuses a mail that PostHog can't send as written, before any request. Apart from the display names of recipients, it never drops part of a mail. It raises `PostHog::Rails::UnsupportedMailError`, and `error.refusal` tells you why:
+PostHog sends one email to one recipient, with an HTML body, a text body, or both, and copies to up to 10 `Cc` and 10 `Bcc` addresses. The delivery method refuses a mail that PostHog can't send as written, before any request. Apart from the display names of recipients and the headers that Mail writes, such as `Message-ID` and `Date`, it never drops part of a mail. It raises `PostHog::Rails::UnsupportedMailError`, and `error.refusal` tells you why:
 
 | `refusal` | When |
 | --- | --- |
@@ -129,7 +129,7 @@ ActiveSupport.on_load(:action_mailer) do
     if error.retryable? && executions < 5
       retry_job wait: error.retry_after || 30 * executions
     else
-      Rails.logger.error("PostHog did not send an email: #{error.code} #{error.detail}")
+      Rails.logger.error("PostHog refused an email: #{error.code} #{error.detail}")
       PostHog.capture_exception(error)
     end
   end
