@@ -197,6 +197,28 @@ end
 
 A send has `template_id` or `template_key`, not both. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+Copies and attachments need version 2.22.0 or later.
+
+Content from your code also takes `cc`, `bcc`, and `attachments`. `cc` and `bcc` take one address or a list of plain addresses. Each attachment is a map with `filename`, the file's bytes as `content`, and optionally `content_type` and `content_id`. The SDK gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The SDK checks this limit before it uploads a file. If an upload fails, `send` returns an error, and PostHog sends nothing. The SDK uploads the files to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, [allow the upload host](/docs/workflows/transactional-emails/api#allow-the-upload-host).
+
+```elixir
+PostHog.Emails.send(
+  to: user.email,
+  template_key: "receipt",
+  subject: "Your receipt",
+  html: html,
+  cc: "billing@example.com",
+  attachments: [
+    %{filename: "receipt.pdf", content: File.read!(pdf_path), content_type: "application/pdf"}
+  ],
+  distinct_id: to_string(user.id)
+)
+```
+
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
+
 ### Open and click tracking
 
 `sensitive` and `tracking` need version 2.21.0 or later.

@@ -33,7 +33,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-cargo add posthog-rs@0.32 serde_json
+cargo add posthog-rs@0.33 serde_json
 ```
 
 ## Set up the client
@@ -188,6 +188,30 @@ async fn send_password_reset(
 - **`capture_engagement`** – Deprecated. Call `.tracking(EmailTrackingOptions::new().engagement(false))` instead. It still works, but a send that sets both `capture_engagement` and `tracking` gets an error.
 
 A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+### Copies and attachments
+
+Copies and attachments need version 0.33.0 or later.
+
+A `CodeEmail` takes copies and files. Call `cc` or `bcc` once for each plain address, and `attachment` once for each file. `EmailAttachment::new` takes the file name and the file's bytes. Add `content_type` to set the file type, or `content_id` to show the file inline. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, `send` returns an error, and PostHog sends nothing. The client uploads the files to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, [allow the upload host](/docs/workflows/transactional-emails/api#allow-the-upload-host). A `TemplateEmail` takes none of them, because the template uses its own settings.
+
+```rust
+use posthog_rs::{CodeEmail, EmailAttachment};
+
+let receipt_pdf = std::fs::read(pdf_path)?;
+posthog
+    .emails()
+    .send(
+        CodeEmail::new(&user.email, "receipt", "Your receipt")
+            .html(html)
+            .cc("billing@example.com")
+            .attachment(EmailAttachment::new("receipt.pdf", receipt_pdf).content_type("application/pdf"))
+            .distinct_id(&user.id),
+    )
+    .await?;
+```
+
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
 
 ### Open and click tracking
 

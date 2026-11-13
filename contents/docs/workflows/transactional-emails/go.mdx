@@ -195,6 +195,28 @@ func sendPasswordReset(ctx context.Context, client posthog.Client, userID, email
 
 A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+Copies and attachments need version 1.44.0 or later.
+
+A `CodeEmail` takes `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is a `posthog.EmailAttachment` with a `Filename` and the file's bytes as `Content`, and optionally `ContentType` and `ContentID`. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, `Send` returns an error, and PostHog sends nothing. The client uploads the files to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, [allow the upload host](/docs/workflows/transactional-emails/api#allow-the-upload-host).
+
+```go
+_, err := client.Emails().Send(ctx, posthog.CodeEmail{
+    To:          email,
+    TemplateKey: "receipt",
+    Subject:     "Your receipt",
+    HTML:        html,
+    Cc:          []string{"billing@example.com"},
+    Attachments: []posthog.EmailAttachment{
+        {Filename: "receipt.pdf", Content: pdfBytes, ContentType: "application/pdf"},
+    },
+    DistinctID: userID,
+})
+```
+
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
+
 ### Open and click tracking
 
 `Sensitive` and `Tracking` need version 1.43.0 or later.
