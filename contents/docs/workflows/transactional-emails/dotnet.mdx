@@ -206,7 +206,7 @@ public async Task<string> SendPasswordResetAsync(User user, string html, string 
 ```
 
 - **`TemplateKey`** – Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
-- **`Text`** - If you leave it out, PostHog makes it from `Html`.
+- **`Text`** – If you leave it out, PostHog makes it from `Html`.
 - **`From`** – Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `ReplyTo` takes a list of addresses.
 - **`Sensitive`** – Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
 - **`Tracking`** – What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
