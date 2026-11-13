@@ -291,12 +291,6 @@ export function useMenuData(): MenuType[] {
             items: addDocsProductIcons(docsMenuItems, taskbarProducts),
         },
         {
-            trigger: 'Learn',
-            link: '/learn',
-            items: [],
-            hideChevron: true,
-        },
-        {
             trigger: 'Community',
             items: [
                 { type: 'label', label: 'Read' },

@@ -38,7 +38,7 @@ The search matches each volume's title and description. The collection is one gr
 ## Hero
 
 - `LearnLogo` is the "PostHog Learn" lockup: the hedgehog logomark from `@posthog/brand/logo`, then "PostHog Learn" in RoundHog (`font-rounded`). The mark size, gap, and baseline follow the brand's landscape lockup. Dark mode uses the mono white mark, the same as the homepage.
-- "building products" uses the same highlight classes as the homepage headline (`Home/HeroCopy`).
+- "data and agents" uses the same highlight classes as the homepage headline (`Home/HeroCopy`).
 - The start links open the Product Analytics pocket guide and the Product Analytics starter prompt.
 
 ## Analytics

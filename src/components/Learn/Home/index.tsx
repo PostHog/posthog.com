@@ -18,7 +18,7 @@ const SECTIONS: Record<LearnHomeSection, { title: string; description: string }>
     'pocket-guides': {
         title: 'Learn – PostHog',
         description:
-            'Guides, agent prompts, and a real product to tinker with. Learn PostHog however works best for you.',
+            'Guides, videos, agent prompts, and real apps to tinker with. Learn PostHog however works best for you.',
     },
     prompts: {
         title: 'Prompts for your agent – Learn – PostHog',
@@ -82,11 +82,12 @@ function Hero(): JSX.Element {
             <div className="min-w-0 max-w-xl flex-1">
                 <LearnLogo />
                 <h1 className="m-0 text-3xl font-bold leading-tight @xl:text-4xl">
-                    Everything we know about {/* The same highlight as the homepage headline (`Home/HeroCopy`). */}
-                    <span className="rounded-md bg-blue/10 px-1 text-blue dark:bg-blue/20">building products</span>
+                    Build better products with {/* The same highlight as the homepage headline (`Home/HeroCopy`). */}
+                    <span className="rounded-md bg-blue/10 px-1 text-blue dark:bg-blue/20">data and agents</span>
                 </h1>
                 <p className="mb-0 mt-4 text-lg leading-relaxed text-secondary">
-                    Guides, agent prompts, and a real product to tinker with. Learn however works best for you.
+                    Guides, videos, agent prompts, and real apps to tinker with. Learn PostHog however works best for
+                    you.
                 </p>
                 <div className="mt-6 border-t border-primary pt-5">
                     <p className="m-0 text-sm font-bold text-secondary">New here? Start with one of these.</p>
