@@ -5,7 +5,7 @@ import usePostHog from '../../../hooks/usePostHog'
 
 import { Logo } from '@posthog/brand/logo'
 
-import { PocketGuideVolume, pocketGuideUrl } from '../../../constants/pocketGuides'
+import { POCKET_GUIDE_VOLUMES, PocketGuideVolume, pocketGuideUrl } from '../../../constants/pocketGuides'
 
 import { volumeArt } from './volumeArt'
 import { openPocketGuide } from './bookOpening'
@@ -37,14 +37,16 @@ function Frame({ token, children }: { token: string; children: React.ReactNode }
     )
 }
 
-// Fit the longest word without losing the cover’s proportional type scale.
+// Every cover title uses one size, so short titles don't look bigger than long ones. The size is 2.4em, or smaller
+// if the longest word on any cover (today "Observability") would not fit the cover's width at 2.4em.
 const TITLE_EM_PER_CHAR = 0.62
+const LONGEST_TITLE_WORD = Math.max(
+    ...POCKET_GUIDE_VOLUMES.flatMap((volume) => volume.title.split(/\s+/).map((word) => word.length))
+)
+const TITLE_FONT_SIZE = `min(2.4em, ${(100 / (LONGEST_TITLE_WORD * TITLE_EM_PER_CHAR)).toFixed(2)}cqi)`
 
 function Masthead({ title }: { title: string }): JSX.Element {
     // All dimensions share the cover's scale, independent of the surrounding page's type size.
-    const long = title.length > 12
-    const longestWord = Math.max(...title.split(/\s+/).map((word) => word.length))
-    const fit = `${(100 / (longestWord * TITLE_EM_PER_CHAR)).toFixed(2)}cqi`
     return (
         <header>
             {/* Wordmark only, pinned black: the cover is white stock in both themes. */}
@@ -54,7 +56,7 @@ function Masthead({ title }: { title: string }): JSX.Element {
             </p>
             <h3
                 className="font-bold leading-tight text-black [hyphens:none] [overflow-wrap:normal]"
-                style={{ margin: '0.25em 0 0', fontSize: `min(${long ? '2.4em' : '3em'}, ${fit})` }}
+                style={{ margin: '0.25em 0 0', fontSize: TITLE_FONT_SIZE }}
             >
                 {title}
             </h3>

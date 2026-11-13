@@ -70,6 +70,29 @@ When a chart is worth keeping, turn it into something durable:
 - **Add to dashboard** drops it onto an existing or new dashboard.
 - **New service dashboard** builds a starter dashboard in one step — pick the metrics (optionally scoped to a service) and PostHog creates one insight per metric, each charted with its recommended aggregation.
 
+### Metrics table on a dashboard
+
+A **Metrics table** widget puts one row per value of a label on a dashboard, with each column reading a different metric. Use it for the Grafana-style endpoint view: request rate, errors, and p95 latency side by side for every route, without building a separate insight for each one. New label values get a row automatically.
+
+> **Note:** The Metrics table widget is only available to teams enrolled in the Metrics alpha (the `metrics` feature flag). If you don't see it in the widget picker, you're not enrolled yet.
+
+To add one:
+
+1. Open a dashboard and click **Add widget**.
+2. Choose **Metrics table** from the **Metrics** group.
+3. Set the **label** to group rows by, for example `http.route` for one row per endpoint.
+4. Add up to six columns. For each one, search for a metric and choose how to read it: a counter rate or increase, a histogram percentile such as p95, or an average, sum, min, or max.
+5. Optionally add a label filter to a column. For an errors column, filter `http.response.status_code` with `=~ 5..`.
+6. Set the date range, sort column, and row limit (up to 100), then save.
+
+Each cell shows the average over the date range with a sparkline. Sparklines in a column share a scale, so you can compare rows at a glance. Click a row value to open full charts for that row, or tick several rows and choose **Open in full charts** to compare them on one chart.
+
+A few limits to know about:
+
+- Shared and public dashboards show a placeholder instead of the table.
+- The table keeps only as many rows as the row limit allows, and the sort column and direction decide which ones. With **Highest first**, the rows with the smallest values are dropped. With **Lowest first**, the rows with the largest values are dropped.
+- The widget reads ingested metrics. A project that only sends traces or logs has nothing for it to show.
+
 ## Alerting
 
 Charts and dashboards are for when you're watching; an alert is for when you're not. To get notified when a metric crosses a threshold, save the chart as an insight first — metric alerts are built on insights, so they live alongside your other alerts on the insights and dashboards you already use.

@@ -1,18 +1,11 @@
 import Explorer from 'components/Explorer'
-import Cover from 'components/Learn/PocketGuides/Cover'
-import { useBookPages } from 'components/Learn/PocketGuides/bookModel'
+import ShelfCover from 'components/Learn/PocketGuides/ShelfCover'
 import SEO from 'components/seo'
 import React from 'react'
 
 import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 
-import { POCKET_GUIDE_VOLUMES, type PocketGuideVolume } from '../../constants/pocketGuides'
-
-/** A shelf cover opens its book on the first chapter, skipping the introduction. */
-function ShelfCover({ volume, count }: { volume: PocketGuideVolume; count: number }): JSX.Element {
-    const firstChapter = useBookPages(volume.id).find((page) => !page.isFrontMatter)
-    return <Cover placement="shelf" volume={volume} count={count} to={firstChapter?.url} />
-}
+import { POCKET_GUIDE_VOLUMES } from '../../constants/pocketGuides'
 
 export default function PocketGuidesPage(): JSX.Element {
     const counts = usePocketGuideCounts()

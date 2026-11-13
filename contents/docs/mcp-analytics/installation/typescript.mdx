@@ -20,9 +20,14 @@ import { Steps, Step } from 'components/Docs/Steps'
 | `@modelcontextprotocol/sdk` | v1 | `2025-11-25` and earlier |
 | `@modelcontextprotocol/core`, `/server`, `/client` | v2 | `2025-11-25` and `2026-07-28` |
 
-The minimum versions are `@modelcontextprotocol/sdk` 1.26.0 for v1 and `@modelcontextprotocol/server` 2.0.0 for v2.
+You need:
 
-You need Node.js 20.20+ or 22.22+, `posthog-node` 5, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
+- Node.js 20.20+ or 22.22+
+- `@modelcontextprotocol/sdk` 1.26.0+ (v1) or `@modelcontextprotocol/server` 2.0.0+ (v2)
+- `posthog-node` 5
+- A PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key)
+
+Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
 
 <WizardCommand command="mcp-analytics" />
 
@@ -33,7 +38,7 @@ The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `instru
 <Step title="Install the packages" badge="required">
 
 ```bash
-npm install @posthog/mcp posthog-node
+npm install @posthog/mcp@1 posthog-node@5
 ```
 
 `@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle. `@posthog/mcp` re-exports `PostHog`, so one import covers both. `posthog-node` is still a peer dependency, so install it too.
@@ -92,6 +97,15 @@ server.registerTool("search_events", { /* ... */ }, async (args) => {
 
 ```ts
 process.on("SIGTERM", async () => {
+  await posthog.shutdown()
+  process.exit(0)
+})
+```
+
+The MCP spec tells stdio clients to close `stdin` first and send `SIGTERM` only if the server doesn't exit in time, so the `SIGTERM` handler may never run. On a stdio server, also shut down when `stdin` ends:
+
+```ts
+process.stdin.on("end", async () => {
   await posthog.shutdown()
   process.exit(0)
 })
@@ -262,7 +276,6 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | `identify` | – | `(request, extra) => UserIdentity \| null`, or a static `UserIdentity`. Maps a request to [one of your users](/docs/mcp-analytics/identifying-users). |
 | `reportMissing` | `false` | Add the `get_more_tools` tool for [missing capabilities](/docs/mcp-analytics/missing-capability). |
 | `missingCapabilityToolName` | `"get_more_tools"` | Renames the `reportMissing` tool. |
-| `collectFeedback` | `false` | Add the `send_feedback` tool, which emits [`$mcp_feedback`](/docs/mcp-analytics/events#feedback-properties). It reports missing capabilities too, but the MCP Analytics views read only `reportMissing` reports. Pass `{ toolName, description, extraProperties, onFeedback }` to customize it. |
 | `enableExceptionAutocapture` | `true` | Emit a `$exception` event for each failed tool call. |
 | `sendInitializeEvent` | `true` | Emit `$mcp_initialize` for each `initialize` handshake. Set to `false` to stop it. Other events keep their sessions and client names. MCP onboarding and the default dashboard's users and sessions tiles then show no data. |
 | `sendToolsListEvent` | `true` | Emit `$mcp_tools_list` for each `tools/list`. Set to `false` to stop it. Tools keep their injected arguments. |
@@ -276,7 +289,7 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 
 ## Custom dispatchers
 
-`instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes its constructor arguments, plus `serverBuild`, `captureModel`, `enableConversationId`, `missingCapabilityToolName`, and `collectFeedback`:
+`instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes its constructor arguments, plus `serverBuild`, `captureModel`, `enableConversationId`, and `missingCapabilityToolName`:
 
 ```ts
 import { PostHogMCP, getMoreToolsResult } from "@posthog/mcp"
@@ -295,8 +308,14 @@ const tools = posthog.prepareToolList(myTools, { reportMissing: true })
 // When you answer tools/call, before the tool runs:
 const prepared = posthog.prepareToolCall(name, request.params.arguments)
 if (prepared.isMissingCapability) {
-  posthog.captureMissingCapability({ context: prepared.intent, distinctId: user.id })
-  return getMoreToolsResult()
+  const reply = posthog.prepareToolResult(getMoreToolsResult(), prepared)
+  posthog.captureMissingCapability({
+    context: prepared.intent,
+    sessionId: reply.sessionId,
+    conversationId: reply.conversationId,
+    distinctId: user.id,
+  })
+  return reply.result
 }
 
 const start = Date.now()
@@ -338,7 +357,6 @@ Pass `errorType` to `captureToolCall` to set `$mcp_error_type` to your own label
 Other capture methods cover the rest of the protocol:
 
 - `captureToolsList({ toolNames })` sends `$mcp_tools_list`. Without it, a dispatcher server has no listing events, so you can't find tools that are advertised but never called.
-- `captureFeedback({ report })` sends `$mcp_feedback`. Call it when `prepared.isFeedback` is true, with `report` set to `prepared.feedbackReport`. Return `sendFeedbackResult()` to the agent. To advertise the tool, set `collectFeedback` on the constructor and pass `collectFeedback: true` to `prepareToolList`.
 - `getToolInputProperties(args, inputSchema, { inputAliases })` returns `$mcp_input_keys`, plus `$mcp_input_aliases_used` when you pass `inputAliases`, for the original arguments. Pass the result in `properties`.
 
 These methods queue events and never throw, so analytics can't break your tool. Flush at the end of each invocation, as in [step 3](#send-queued-events-on-shutdown).

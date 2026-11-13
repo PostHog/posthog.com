@@ -157,3 +157,7 @@ We share channels via [Slack Connect](https://slack.com/resources/using-slack/ge
 See [Shared Slack channels with customers](/handbook/growth/sales/slack-channels) for the full setup steps, including channel naming, who to invite, and how to support customers who use MS Teams instead.
 
 > It's your job to ensure your customer issues are resolved, make sure you follow up with Support and Engineering if you feel like the issue isn't getting the right level of attention.
+
+## Customer calls on Zoom
+
+We run all customer calls on Zoom. See [sales & CS tools](/handbook/growth/sales/sales-and-cs-tools#connecting-them-together) for how to set up Zoom, Gong, and Granola. You can also [add a PostHog video to your Zoom waiting room](/handbook/growth/sales/sales-and-cs-tools#customize-your-zoom-waiting-room) for customers who join early.

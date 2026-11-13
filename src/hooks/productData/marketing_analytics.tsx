@@ -6,7 +6,7 @@ import { IconMegaphone } from '@posthog/icons'
 // pricing table and calculator show it as "Billed with Sources", the same way Evaluations point
 // at AI Observability.
 export const marketingAnalytics = {
-    name: 'Marketing analytics',
+    name: 'Marketing Analytics',
     Icon: IconMegaphone,
     description: 'Measure ad spend and ROAS across your marketing channels.',
     handle: 'marketing_analytics',

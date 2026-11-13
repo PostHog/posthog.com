@@ -11,7 +11,6 @@ import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
-import { useAppStatus } from 'hooks/useAppStatus'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { OSSelect } from 'components/OSForm'
@@ -142,7 +141,6 @@ function QuestionFormMain({
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
-    const { status } = useAppStatus()
     const posting = submissionState === 'posting'
     const savingDraft = submissionState === 'saving-draft'
     const loading = posting || savingDraft
@@ -206,23 +204,6 @@ function QuestionFormMain({
                                 data-scheme="primary"
                                 className={`${forum ? '' : isInForum ? '@sm:pl-[55px]' : 'pl-[55px]'} space-y-2`}
                             >
-                                {status && status !== 'operational' && (
-                                    <div data-scheme="secondary" className="p-4 bg-primary border border-primary">
-                                        <h5 className="m-0">Heads up!</h5>
-                                        <p className="m-0 text-sm">
-                                            We're currently experiencing an incident. Check{' '}
-                                            <Link
-                                                className="text-red dark:text-yellow font-bold"
-                                                to="https://www.posthogstatus.com"
-                                                externalNoIcon
-                                            >
-                                                here
-                                            </Link>{' '}
-                                            for the latest info.
-                                        </p>
-                                    </div>
-                                )}
-
                                 {forum?.fields({ values, setFieldValue })}
                                 {subject && (
                                     <>

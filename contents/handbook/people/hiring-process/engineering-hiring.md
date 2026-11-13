@@ -60,10 +60,10 @@ Each engineering SuperDay will have a SuperDay buddy, this person will conduct t
 An engineering SuperDay usually looks like this (_there is a degree of flexibility due to time zone differences)_:
 
 *   An invitation to a personal Slack channel for the SuperDay, which we'll use throughout the day
-   * This will include:- the talent team, cofounders, exec, hiring lead, & the SuperDay buddy      
+   * This will include:- the talent team, cofounders, a Blitzscale Team member or relevant Group Lead, the hiring lead, & the SuperDay buddy      
 *   Time to focus on the task
 *   An interview with the SuperDay buddy
-*   A chat with an exec
+*   A chat with a Blitzscale Team member or relevant Group Lead
 *   Wrapping up – at the end of the work day, they'll send us what they've built, along with a summary
 
 Usually the Superday buddy will review the output, but they can ask other engineers for input when needed, and we'll get back to the candidate with our final decision ASAP (always within a few days).
@@ -102,5 +102,5 @@ You should try and keep your approach relatively consistent for the first 5-10 i
 
 - Regularly shadow other interviewers, have other interviewers shadow you. Give each other feedback
 - Speak with Talent Partners, ask for their feedback
-- Ask exec's why they gave specific scores about candidates you interviewed
+- Ask Blitzscale Team members or relevant Group Leads why they gave specific scores about candidates you interviewed
 - Keep track of how the candidates you have assessed get on in the later stages 
