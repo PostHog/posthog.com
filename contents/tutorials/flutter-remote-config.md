@@ -87,6 +87,8 @@ dependencies:
   posthog_flutter: ^6.0.0
 ```
 
+`posthog_flutter` 6 needs Flutter 3.41 or later on every platform.
+
 Next, we configure PostHog in each platform using our project token and instance address which you can find in [your project settings](https://us.posthog.com/settings/project).
 
 ### Android setup
@@ -116,7 +118,7 @@ defaultConfig {
 
 ### iOS setup
 
-For iOS, `posthog_flutter` version 6 needs Flutter 3.41 or later with [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers) turned on, which is the default from Flutter 3.44. Add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
+For iOS, `posthog_flutter` version 6 installs through [Swift Package Manager](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers), which is on by default from Flutter 3.44. On Flutter 3.41 to 3.43, run `flutter config --enable-swift-package-manager`. Add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

@@ -73,7 +73,7 @@ In both cases, you'll also need to update the minimum Android SDK version to `23
 
 There are 2 ways of initializing the SDK, automatically and manually.
 
-Version 6 and later install on iOS and macOS only through [Swift Package Manager (SPM)](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers), which needs Flutter 3.41 or later. Flutter 3.44 and later enable SPM by default. On earlier versions, or if you disabled SPM, enable it with `flutter config --enable-swift-package-manager`. Version 5 also supports [CocoaPods](https://guides.cocoapods.org/using/getting-started.html). Flutter add-to-app modules can't use SPM yet, so they need version 5.
+Version 6 and later install on iOS and macOS only through [Swift Package Manager (SPM)](https://docs.flutter.dev/packages-and-plugins/swift-package-manager/for-app-developers), which needs Flutter 3.41 or later. Flutter 3.44 and later enable SPM by default. On earlier versions, or if you disabled SPM, enable it with `flutter config --enable-swift-package-manager`. Version 5 also supports [CocoaPods](https://guides.cocoapods.org/using/getting-started.html). Flutter add-to-app modules on iOS need Flutter 3.50 or later to install plugins through SPM. On earlier Flutter versions, they need version 5.
 
 Automatically:
 
@@ -121,7 +121,7 @@ platform :ios, '15.0'
 # rest of your config
 ```
 
-In Xcode, set the **Minimum Deployments** version to iOS 15.0 (or macOS 11.0) for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**). After you change **Minimum Deployments**, regenerate the project's configuration files:
+Set the **Minimum Deployments** version to iOS 15.0 (or macOS 11.0) for the `Runner` target in Xcode (**Runner > General > Minimum Deployments**). After you change **Minimum Deployments**, regenerate the project's configuration files:
 
 ```bash
 flutter build ios --config-only
