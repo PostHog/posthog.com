@@ -412,16 +412,17 @@ Content from your code also takes these fields. A template send takes none of th
 
 - **Size** - An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
 - **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
-- **Content type parameters** - `content_type` can have parameters after the type, such as `method=REQUEST` for a calendar invite. Mail apps can then show the file as an invitation, not as a plain file. PostHog refuses a `name` or `filename` parameter, because the file name comes from `filename`:
+- **Content type parameters** - `content_type` can have parameters after the type. For a calendar invite, add `method=REQUEST`, so that mail apps can show the file as an invitation, not as a plain file:
 
   ```json
   {
-    "attachments": [
-      {"sha256": "1c54c1de7da52dae1aa7c8caea31c87272055e3f5308b8a81b456bce26c721ba", "filename": "invite.ics", "content_type": "text/calendar; charset=utf-8; method=REQUEST"}
-    ]
+    "sha256": "1c54c1de7da52dae1aa7c8caea31c87272055e3f5308b8a81b456bce26c721ba",
+    "filename": "invite.ics",
+    "content_type": "text/calendar; charset=utf-8; method=REQUEST"
   }
   ```
 
+  PostHog refuses a `name` or `filename` parameter, because the file name comes from `filename`.
 - **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
 - **Viruses** - PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
 - **SDKs** - The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
