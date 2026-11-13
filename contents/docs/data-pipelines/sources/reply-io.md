@@ -25,7 +25,7 @@ You need a Reply account with API access so you can create an API key. API keys 
 
 When linking Reply.io, you'll need:
 
-- **API key** – create one under **Settings → API Keys** in your Reply account. To sync every table, the key needs the `contacts:read`, `sequences:read`, `tasks:read`, `channels:read`, and `inbox:read` scopes (or broader scopes that include them). Tables whose scope is missing can be deselected in the table picker.
+- **API key**: create one under **Settings → API Keys** in your Reply account. To sync every table, the key needs the `contacts:read`, `sequences:read`, `tasks:read`, `channels:read`, `inbox:read`, and `reporting:read` scopes (or broader scopes that include them). The `email_activity` and `meetings` tables require `reporting:read`. Tables whose scope is missing can be deselected in the table picker.
 
 ## Sync modes
 
