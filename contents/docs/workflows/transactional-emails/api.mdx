@@ -410,9 +410,9 @@ Content from your code also takes these fields. A template send takes none of th
 | `bcc` | No | A list of up to 10 addresses that get a hidden copy, without a display name. The other recipients don't see them. |
 | `attachments` | No | A list of up to 10 files that you [uploaded first](#send-files). Each file is an object with `sha256`, `filename`, and optionally `content_type`, such as `application/pdf`, and `content_id`. |
 
-- **Size** - An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
-- **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
-- **Content type parameters** - `content_type` can have parameters after the type. For a calendar invite, add `method=REQUEST`, so that mail apps can show the file as an invitation, not as a plain file:
+- **Size** – An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
+- **Inline images** – Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
+- **Content type parameters** – `content_type` can have parameters after the type. For a calendar invite, add `method=REQUEST`, so that mail apps can show the file as an invitation, not as a plain file:
 
   ```json
   {
@@ -423,10 +423,10 @@ Content from your code also takes these fields. A template send takes none of th
   ```
 
   PostHog refuses a `name` or `filename` parameter, because the file name comes from `filename`.
-- **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
-- **Viruses** - PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
-- **SDKs** - The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
-- **Older PostHog versions** - A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
+- **Blocked files** – PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
+- **Viruses** – PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
+- **SDKs** – The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
+- **Older PostHog versions** – A PostHog version that doesn't take these fields yet refuses the send with a `400` that names the field. PostHog then sends nothing, and never sends the email without the field.
 
 ### Send files
 
@@ -489,8 +489,8 @@ A successful request returns `200`, with one answer for each file, in the order 
 }
 ```
 
-- **`present`** - PostHog has this file from an earlier upload by your project. Upload nothing. `expires_at` is the time when PostHog deletes the file, if no send uses it before then.
-- **`upload`** - Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes. The bytes of each `upload` file count toward your project's daily upload limit when PostHog gives you the URL, even if you don't upload the file. Upload each file soon after you ask.
+- **`present`** – PostHog has this file from an earlier upload by your project. Upload nothing. `expires_at` is the time when PostHog deletes the file, if no send uses it before then.
+- **`upload`** – Send the file's bytes to `url`, with `method` and with the `headers` exactly as given, before `url_expires_at`. The URL is valid for 15 minutes. The bytes of each `upload` file count toward your project's daily upload limit when PostHog gives you the URL, even if you don't upload the file. Upload each file soon after you ask.
 
 #### Upload a file
 

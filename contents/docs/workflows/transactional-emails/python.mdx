@@ -219,8 +219,8 @@ Copies and attachments need version 7.91.0 or later.
 
 Content from your code takes `cc`, `bcc`, and `attachments`:
 
-- **`cc` and `bcc`** - One address or a list of plain addresses.
-- **`attachments`** - A list of dictionaries. Each one has `filename` and `content`, and can also have `content_type` and `content_id`.
+- **`cc` and `bcc`** – One address or a list of plain addresses.
+- **`attachments`** – A list of dictionaries. Each one has `filename` and `content`, and can also have `content_type` and `content_id`.
 
 Pass the file's bytes as `content`. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, `send` raises an error, and PostHog sends nothing. The client uploads the files to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, [allow the upload host](/docs/workflows/transactional-emails/api#allow-the-upload-host).
 
