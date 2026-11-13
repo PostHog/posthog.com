@@ -5,6 +5,7 @@ import OSButton from 'components/OSButton'
 type SelectOption = {
     label: string
     value: any
+    image?: string
 }
 
 export function Combobox({
@@ -95,8 +96,8 @@ export function Combobox({
             </div>
             <div
                 className={`relative bg-primary border border-primary rounded ring-0 px-2.5 py-2 ${
-                    touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                }`}
+                    focused ? 'z-30' : ''
+                } ${touched && error ? 'border-red dark:border-yellow' : 'border-primary'}`}
                 onMouseDown={(e) => {
                     if ((e.target as HTMLElement).tagName !== 'INPUT') {
                         e.preventDefault()
@@ -113,6 +114,7 @@ export function Combobox({
                                 key={String(v)}
                                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-primary text-xs bg-accent h-[28px]"
                             >
+                                {chip.image && <img src={chip.image} className="size-4 object-contain" />}
                                 <span>{chip.label}</span>
                                 <button
                                     type="button"
@@ -204,7 +206,10 @@ export function Combobox({
                                 }}
                             >
                                 <span className="flex items-center justify-between gap-2">
-                                    <span>{opt.label}</span>
+                                    <span className="flex items-center gap-2">
+                                        {opt.image && <img src={opt.image} className="size-5 object-contain" />}
+                                        <span>{opt.label}</span>
+                                    </span>
                                     {(value || []).includes(opt.value) && (
                                         <span
                                             className="inline-flex items-center justify-center"
