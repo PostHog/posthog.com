@@ -317,11 +317,7 @@ Because the plan may end partway through the term, credits burn at one rate befo
 
 Apply your usual growth assumption to both halves. The post-plan run rate is their current spend plus whatever the plan is currently absorbing: the list price of any free add-on, and the usage that currently falls inside an inflated free tier.
 
-**If the plan has no fixed end date** (e.g. beta plans where we may change pricing at any time) don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing changes.
-
-### Don't quote a price for an unpriced product
-
-If a product in beta has no final price, don't give the customer a number or a "cost plus" estimate unless the product team has confirmed it. Customers plan around the first number they hear, and a higher final price breaks their trust. Say that pricing isn't final, and ask the product team for the expected direction. If a heavy beta user is renewing, raise the coming pricing during the renewal. See [pricing products that start in beta](/handbook/growth/shipping-a-pricing-change#pricing-a-product-that-started-in-beta).
+**If the plan has no fixed end date** (e.g. beta plans where we may change pricing at any time) don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing changes. Don't quote a price or estimate for a beta product unless the product team has confirmed it. See [pricing considerations during a beta](/handbook/product/releasing-new-products-and-features#pricing-considerations-during-a-beta).
 
 ### Tell the customer about the step-up
 
