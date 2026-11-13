@@ -43,10 +43,10 @@ That loop only closes if the agent can see the whole picture. Errors and replays
 
 **Problem:** Agents that don't see revenue, plan tier, or support history can't prioritize. They see a stack trace, not the fact that the error hit your top customer.
 
-**Solution:** Sources pull Stripe, HubSpot, Salesforce, Zendesk, and 40+ other systems into PostHog so every signal carries its business context – for your engineers and your agents.
+**Solution:** Sources pull Stripe, HubSpot, Salesforce, Zendesk, and 1,400+ other systems into PostHog so every signal carries its business context – for your engineers and your agents.
 
 **Supporting features:**
-- 44 sources, free to import
+- 1,400+ sources, free to import
 - Warehouse Sources for Snowflake, BigQuery, Databricks, Postgres
 - Unified SQL across product and business data
 - MCP exposes the same data to Claude Code, Cursor, and other agent runtimes
@@ -59,7 +59,7 @@ That loop only closes if the agent can see the whole picture. Errors and replays
 **Solution:** PostHog covers the whole loop – analytics, replay, flags, experiments, warehouse, CDP, agents – in one platform. Destinations fan out from the same event stream. Product teams self-serve.
 
 **Supporting features:**
-- 145+ integrations (44 sources, 41 real-time destinations, 7 batch-export targets)
+- 1,400+ sources, 41 real-time destinations, and 7 batch-export targets
 - Hog functions in JS or Hog
 - One SDK, one event schema
 - Contract buyouts when you commit annually

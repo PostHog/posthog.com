@@ -125,6 +125,21 @@ When prompted for the output path, choose a location that's accessible from your
 
 On subsequent runs, the CLI only updates the file if your schema has changed.
 
+### TypeScript SDK options
+
+By default, `schema pull` for TypeScript generates a module that wraps `posthog-js` – you import it instead of `posthog-js` and get type-checked `capture()` calls. If your app uses a different SDK (e.g. `posthog-react-native` or `posthog-node`), pass `--sdk none` to generate only the event type definitions with no SDK import:
+
+```bash
+posthog-cli exp schema pull --sdk none
+```
+
+| Flag         | Output file         | What it generates                                                    |
+| ------------ | ------------------- | -------------------------------------------------------------------- |
+| _(default)_  | `posthog-typed.ts`  | A typed `posthog-js` wrapper with `capture()` and `captureRaw()`     |
+| `--sdk none` | `posthog-events.ts` | Standalone types: `EventSchemas`, `EventName`, and `EventProperties` |
+
+The CLI saves the `sdk` setting in `posthog.json`, so subsequent runs remember your choice.
+
 ### Check schema status
 
 ```bash
@@ -135,11 +150,13 @@ This shows your current sync status, including the schema hash, last updated tim
 
 ## Using typed events in your app
 
-Once you've downloaded your schema, import and use the generated PostHog client:
+Once you've downloaded your schema, import and use the generated types.
 
-<MultiLanguage selector="tabs">
+### posthog-js (default)
 
-```typescript file=TypeScript
+The default TypeScript output wraps `posthog-js` with type-safe `capture()` and `captureRaw()` methods:
+
+```typescript
 import posthog from "./posthog-typed";
 
 // Use typed events with autocomplete and type safety on known events:
@@ -153,8 +170,28 @@ posthog.capture("button_clicked", {
 posthog.captureRaw("dynamic_event", { whatever: "data" });
 ```
 
-```go file=Go
+### Types only (`--sdk none`)
 
+With `--sdk none`, the generated `posthog-events.ts` file exports only the event types. Import them and use them with any PostHog SDK:
+
+```typescript
+import type { EventName, EventProperties } from "./posthog-events";
+import PostHog from "posthog-react-native";
+
+// Create a typed wrapper around any SDK's capture method:
+function track<K extends EventName>(event: K, properties: EventProperties<K>) {
+  posthog.capture(event, properties);
+}
+
+track("button_clicked", {
+  button_name: "signup", // ✓ Type-checked
+  click_count: 5, // ✓ Type-checked
+});
+```
+
+### Go
+
+```go
 import (
     "github.com/posthog/posthog-go/v2"
     typed "your-project/posthog-typed"
@@ -190,11 +227,11 @@ func captureEventWithFullCaptureControl(client posthog.Client) error {
         },
     ))
 }
-
 ```
 
-```python file=Python
+### Python
 
+```python
 import os
 
 from posthog_typed import PosthogTyped
@@ -212,10 +249,7 @@ def main():
     posthog.capture_user_logged_in(extra_properties={"test": "property"}, distinct_id="distinct_id")
     # Base captures are still possible
     posthog.capture("capture_raw_example", distinct_id="distinct_id", properties={"test": "property"})
-
 ```
-
-</MultiLanguage>
 
 The generated typed file provides:
 

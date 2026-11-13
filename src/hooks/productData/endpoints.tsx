@@ -20,21 +20,20 @@ export const endpoints = {
     ...getTool('endpoints'),
     Icon: IconEndpoints,
     type: 'endpoints',
-    // Beta in product/docs; no billing product yet (free during beta).
-    status: 'beta',
     teamSlug: 'data-modeling',
     forumTag: 'endpoints',
     color: 'teal',
     colorSecondary: 'teal',
     shortDescription: 'Custom API endpoints powered by your PostHog data',
-    pricingDescription:
-        'Endpoints is free during beta. When pricing ships, it will be usage-based with a generous monthly free tier – billed on compute time and data scanned, like the rest of PostHog.',
+    billingDescription: <p className="m-0">Billed with data warehouse. Free for now.</p>,
+    billedWith: 'Data warehouse',
+    freeAllocationText: 'Free for now',
+    pricingDescription: 'Endpoints is billed with data warehouse and is free for now.',
     // Same "How pricing works" section chrome as Experiments (`BilledWithPricing`).
-    pricingLead: 'Pricing is coming soon.',
+    pricingLead: 'Free for now.',
     pricingHighlights: [
         "We'll offer usage-based pricing with a generous monthly free tier – like we do with all of our paid products.",
     ],
-    pricingFooter: 'Endpoints is free during beta.',
     pricingEventsLink: false,
     seo: {
         title: 'Endpoints – Custom API endpoints powered by your PostHog data',
