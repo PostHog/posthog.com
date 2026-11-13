@@ -36,6 +36,8 @@ Start your migration by formatting your data correctly. There is no way to selec
 
 To capture events, you must use the PostHog Python SDK, the [capture v1 endpoint](/docs/api/capture-v1), or the PostHog API `batch` endpoint with the `historical_migration` set to `true`. This ensures we handle this data correctly and you aren't charged standard ingestion fees for it. The flag applies to a whole request, so don't mix migrated and live events in one request.
 
+In the Python, Go, and Node.js SDKs, a client with historical migration on sends only historical events, so use a separate client for live events. In Rust, it applies to that `capture_batch` call only.
+
 Using our Python or Node SDKs, you can capture events like this:
 
 <SDKMigration />

@@ -13,7 +13,7 @@ Install the SDK in your Fastify app:
 pnpm add posthog-node@6
 ```
 
-This guide uses Fastify 5 and `posthog-node` 5.52.1 on Node.js. Get your project token and API host from your [project settings](https://us.posthog.com/settings/project).
+This guide uses Fastify 5 and `posthog-node` 6 on Node.js. Get your project token and API host from your [project settings](https://us.posthog.com/settings/project).
 
 ## Set up PostHog
 
@@ -88,7 +88,7 @@ Do not use `x-posthog-distinct-id` as proof of identity. Tracing headers are cli
 
 ## Trace context
 
-This optional setup requires the Node SDK release with `posthog-node/otel`. The base SDK version stated above does not include these APIs.
+This optional setup uses the `posthog-node/otel` entry point.
 
 To add browser session and person IDs to application spans, register the [optional Node context processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) on your existing OpenTelemetry provider before requests start. Reuse the `posthog` client above and keep the existing exporter and sampler.
 

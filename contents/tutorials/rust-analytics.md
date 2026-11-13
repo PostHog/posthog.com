@@ -169,13 +169,13 @@ Run `cargo run` and navigate to `http://localhost:8000` to see our app in action
 
 With our app set up, it's time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-Add `posthog-rs`  to your `Cargo.toml` to install [PostHog's Rust SDK](/docs/libraries/rust):
+Add `posthog` to your `Cargo.toml` to install [PostHog's Rust SDK](/docs/libraries/rust):
 
 ```rust file=Cargo.toml
 # rest of config
 
 [dependencies]
-posthog-rs = "1"
+posthog = "1"
 
 # rest of config
 ```
@@ -186,12 +186,11 @@ With this set up, we're ready to capture events.
 
 To show how to capture events with PostHog, we capture an event when the button on the `dashboard` page is clicked. To do this, we call [`posthog.capture()`](/docs/libraries/rust#capturing-events).
 
-First, import `posthog_rs::Event` at the top of `main.rs`. We also need to import `tokio::task` to convert our asynchronous capture request to synchronous:
+First, import `posthog::Event` at the top of `main.rs`:
 
 ```rust file=main.rs
 // other imports
-use posthog_rs::Event;
-use tokio::task;
+use posthog::Event;
 ```
 
 Then update our `api_dashboard()` function to initialize a PostHog client and capture an event. You'll need your project token for this, which you can find in [your project settings](https://us.posthog.com/project/settings):
@@ -199,11 +198,10 @@ Then update our `api_dashboard()` function to initialize a PostHog client and ca
 ```rust file=main.rs
 async fn api_dashboard(session: Session) -> impl Responder {
     if let Some(user_email) = session.get::<String>("email").unwrap() {
-        let _result = task::spawn_blocking(move || {
-            let client: posthog_rs::Client = posthog_rs::client("<ph_project_token>");
-            let event = Event::new("dashboard_api_called", &user_email);
-            client.capture(event).unwrap();
-        }).await;
+        let client = posthog::client("<ph_project_token>").await;
+        let event = Event::new("dashboard_api_called", user_email.as_str());
+        client.capture(event);
+        client.shutdown().await;
     }
     HttpResponse::Ok().body("API endpoint reached")
 }
@@ -236,12 +234,11 @@ async fn api_dashboard(session: Session) -> impl Responder {
         session.get::<String>("email").unwrap(),
         session.get::<String>("name").unwrap()
     ) {
-        let _result = task::spawn_blocking(move || {
-            let client: posthog_rs::Client = posthog_rs::client("<ph_project_token>");
-            let mut event = Event::new("dashboard_api_called", &user_email);
-            event.insert_prop("user_name", user_name).unwrap();
-            client.capture(event).unwrap();
-        }).await;
+        let client = posthog::client("<ph_project_token>").await;
+        let mut event = Event::new("dashboard_api_called", user_email.as_str());
+        event.insert_prop("user_name", user_name).unwrap();
+        client.capture(event);
+        client.shutdown().await;
     }
     HttpResponse::Ok().body("API endpoint reached")
 }

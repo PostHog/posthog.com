@@ -40,7 +40,7 @@ import os
 from posthog import Posthog
 
 posthog = Posthog(
-    api_key="<ph_project_token>",
+    "<ph_project_token>",
     host="<ph_client_api_host>",
     enable_exception_autocapture=True
 )
