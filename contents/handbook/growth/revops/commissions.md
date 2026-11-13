@@ -8,7 +8,7 @@ This page explains how commission and bonuses are calculated and paid each quart
 
 This page covers the math: what earns credit, who gets it, and which quarter it counts in. Your team page covers your plan: on-target earnings (OTE) split, quota, ramp, book rules, and how attainment turns into pay. See How we work for [TAEs and BDRs](/handbook/growth/sales/new-business-how-we-work), [TAMs](/handbook/growth/sales/how-we-work), and [CSMs](/handbook/customer-success/how-we-work).
 
-This page is the source of truth for the rules. The comp views in PostHog implement them. If a team page, a view, or a dashboard disagrees with this page, post in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>. One of them has a bug, and RevOps fixes it.
+This page is the source of truth for the rules. The comp views in PostHog implement them. If a team page, a view, or a dashboard disagrees with this page, post in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> and RevOps will review.
 
 Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead), Clover (CSM), and Quill (BDR). The customers are made up. No real hedgehogs were invoiced.
 
@@ -20,7 +20,7 @@ Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead
 | Cutoff: the 14th of the month after the quarter ends | [Payment status](#payment-status) is locked for the quarter. Overdue invoices don't count. | Follow up with any customer who hasn't paid. An invoice that's overdue on the 14th won't count toward your number.|
 | Snapshot: the 15th | RevOps freezes the numbers. This is what you're paid on. See [quarter end](#quarter-end). | Compare your dashboard with the snapshot. Raise anything that doesn't match in #team-revops. |
 | Payment | You're paid in the month after the quarter ends. For Q3, that's October. | Nothing. |
-| The next cutoff | Last quarter's at-risk invoices that are still unpaid are clawed back. Last quarter's overdue invoices that have since been paid are paid out now. | Keep chasing unpaid invoices. You're paid once the customer pays. |
+| The next cutoff | Last quarter's at-risk invoices that are still unpaid are clawed back. Last quarter's overdue invoices that have since been paid are paid out now. | Keep chasing unpaid invoices. You'll be paid in the quarter the customer pays. |
 
 ### How your credit becomes pay
 
