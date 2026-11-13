@@ -284,7 +284,7 @@ export const posthog = {
                 include_and_exclude_wildcards: true,
                 max_number_of_steps: '20',
                 monetization_analytics: true,
-                predictive_insights: false,
+                predictive_insights: true,
                 private_insights: true,
                 project_level_permissions: true,
                 ready_made_insight_types: true,
