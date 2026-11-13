@@ -148,6 +148,15 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         })
     }
 
+    if (stage === 'build-html') {
+        actions.setWebpackConfig({
+            externals: [
+                ({ request }: { request?: string }, callback: (err?: Error | null, result?: string) => void) =>
+                    request?.startsWith('node:') ? callback(null, `commonjs ${request}`) : callback(),
+            ],
+        })
+    }
+
     if (stage === 'develop-html') {
         actions.setWebpackConfig({
             plugins: [

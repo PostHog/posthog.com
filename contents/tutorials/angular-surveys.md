@@ -8,6 +8,7 @@ sidebar: Docs
 featuredVideo: https://www.youtube-nocookie.com/embed/KSzLc80FIx4
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+ogImage: generated
 tags:
   - surveys
 ---
@@ -54,7 +55,7 @@ We use PostHog to create and control our survey as well as monitor results. If y
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In `src/main.ts`, initialize PostHog using your project token and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).

@@ -11,7 +11,7 @@ Before you start, [create a project secret API key](/docs/workflows/transactiona
 ## Install
 
 ```bash
-npm install posthog-node nodemailer
+npm install posthog-node@5 nodemailer@10
 ```
 
 ## Create the transport
@@ -30,10 +30,15 @@ const posthog = new PostHog("<ph_project_token>", {
     enableLocalEvaluation: false,
 })
 
-export const transporter = nodemailer.createTransport(createPostHogTransport({ client: posthog }))
+export const transporter = nodemailer.createTransport(
+    createPostHogTransport({ client: posthog, defaultTemplateKey: "app-email" })
+)
 ```
 
-The client sends email to the app host of your PostHog Cloud region. For a reverse proxy or a self-hosted instance, set `appHost` on the client. See [set up the client](/docs/workflows/transactional-emails/node#set-up-the-client) for the key scopes and hosts.
+- **`client`** - A posthog-node client with `secretKey` set to your project secret API key. See [set up the client](/docs/workflows/transactional-emails/node#set-up-the-client) for the key's scope and local evaluation.
+- **`defaultTemplateKey`** - The template key of a message that doesn't set one. It defaults to `nodemailer`.
+
+On PostHog Cloud, the client sends email to your region's app host. If you send through a reverse proxy or a self-hosted PostHog, set `appHost` on the client. See [use a proxy or self-hosted PostHog](/docs/workflows/transactional-emails/node#use-a-proxy-or-self-hosted-posthog).
 
 ## Send an email
 
@@ -51,9 +56,15 @@ const info = await transporter.sendMail({
 
 `info.messageId` is PostHog's message ID. Use it with [`posthog.emails.get`](/docs/workflows/transactional-emails/node#check-an-emails-status) to check the email's status.
 
-- **Sender:** `from` needs an address on a domain that your project verified. Without `from`, PostHog uses the project's default sender.
-- **Recipients:** A message has one `to` address. `cc`, `bcc`, and `replyTo` take a list. PostHog keeps the display name of `from` and sends the other addresses without their names.
-- **Attachments:** You can attach files, and inline images that have a `cid`.
+- **Sender** - `from` needs an address on a domain that your project verified. Without `from`, PostHog uses the project's default sender.
+- **Recipients** - A message has exactly one `to` address. `cc`, `bcc`, and `replyTo` take a list. PostHog keeps the display name of `from`, and sends the other addresses without their names.
+- **Attachments** - Nodemailer reads each file of `attachments`, and posthog-node uploads it to PostHog before it sends the email. An inline image needs a `cid`.
+
+<CalloutBox icon="IconWarning" title="Attachments are temporarily unavailable" type="warning">
+
+A message with `attachments` fails, and PostHog sends nothing. Leave out `attachments` to send the email. `cc` and `bcc` still work. See [copies and attachments](/docs/workflows/transactional-emails/api#copies-and-attachments).
+
+</CalloutBox>
 
 ## Set PostHog options
 
@@ -61,57 +72,63 @@ Put PostHog's options for one message in `posthog`:
 
 ```js
 await transporter.sendMail({
-    from: "Hedgebox <orders@example.com>",
-    to: "jane@example.com",
-    subject: "Your order shipped",
-    html: "<p>Your order is on its way.</p>",
+    from: "Hedgebox <security@example.com>",
+    to: user.email,
+    subject: "Reset your password",
+    html: `<p><a href="${resetLink}">Reset your password</a></p>`,
     posthog: {
-        template_key: "order-shipped",
+        template_key: "password-reset",
         distinct_id: user.id,
-        idempotency_key: `order-shipped-${order.id}`,
-        capture_engagement: true,
+        idempotency_key: `password-reset-${resetRequest.id}`,
+        sensitive: true,
     },
 })
 ```
 
-- **`template_key`** names the email, such as `order-shipped`. PostHog groups the email's metrics and sends under it. Without it, the transport uses `defaultTemplateKey` from `createPostHogTransport`, or `nodemailer`. Use letters, digits, hyphens, and underscores.
-- **`distinct_id`** records the email against the person with this distinct ID. Without it, PostHog uses a person whose distinct ID is the `to` address. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
-- **`idempotency_key`** identifies this one email. PostHog sends an email only once for each key, for 24 hours after it queues the email. See [retry safely](/docs/workflows/transactional-emails#retry-safely-with-an-idempotency-key).
-- **`capture_engagement`** turns the email's [engagement events](/docs/workflows/engagement-events) on or off. It defaults to `true`.
+- **`template_key`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key. Without it, the transport uses `defaultTemplateKey`. Use letters, digits, hyphens, and underscores, up to 400 characters.
+- **`distinct_id`** - Records the email on the person with this distinct ID. Without it, PostHog uses a person whose distinct ID is the `to` address. See [link emails to your users](/docs/workflows/transactional-emails/node#link-emails-to-your-users).
+- **`idempotency_key`** - Identifies this one email. PostHog sends an email only once for each key, for 24 hours after it queues the email. See [send mail from a queue](#send-mail-from-a-queue).
+- **`sensitive`** - Marks the email as sensitive, for login links, reset tokens, or codes. PostHog keeps its links as they are unless `tracking` turns clicks on, and keeps its subject and content out of events and logs. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
+- **`tracking`** - What PostHog tracks for the email: `true` or `false` for everything, or an object such as `{ opens, clicks, engagement }`. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
 
 In TypeScript, importing `posthog-node/nodemailer` adds `posthog` to Nodemailer's message type.
 
 ## Send mail from a queue
 
-The client retries network errors, rate limits, and a `503` up to two times, with the same idempotency key. When a job queue retries a failed send, each retry is a new `sendMail` call. Without an `idempotency_key`, each call gets a new random key, and the recipient can get the email twice.
+The client retries network errors, rate limits, and a `503` up to two times, with the same idempotency key. When a job queue retries a failed job, each retry is a new `sendMail` call. Without an `idempotency_key`, each call gets a new random key, and the recipient can get the email twice.
 
-So when you queue mail, set `idempotency_key` from a stable ID of the email, such as the order ID and the email's name:
+So when you send from a job queue, set `idempotency_key` from what the email is for, such as the order and the email's name. Never use a random value or a timestamp:
 
 ```js
-posthog: { idempotency_key: `order-shipped-${order.id}` }
+posthog: { idempotency_key: `order-${order.id}-shipped` }
 ```
 
 PostHog remembers a key for 24 hours after it queues the email. If a queue retries a job later than that, the same key doesn't stop a second email, so stop retrying a send after 24 hours.
 
-A failed `sendMail` rejects with an error that tells you if a retry can succeed:
+## Handle errors
 
-- `error.retryable` is `true` when a retry with the same `idempotency_key` can succeed. After a network error or a `503`, PostHog might have queued the email, so retry with the same key, not through another provider.
-- `error.retry_after` is the number of seconds that PostHog asked you to wait, when it sent one.
-- `error.code`, `error.status`, `error.detail`, and `error.attr` come from the [errors table](/docs/workflows/transactional-emails#errors).
+A failed send rejects `sendMail` with an error that tells you if a retry can succeed:
+
+- **`error.retryable`** - `true` when sending the same message again, with the same `idempotency_key`, can succeed. After a network error or a `503`, PostHog might have queued the email, so retry with the same key, not through another email provider.
+- **`error.retry_after`** - The number of seconds that PostHog asked you to wait, when it sent one.
+- **`error.code`**, **`error.status`**, **`error.detail`**, and **`error.attr`** - The code, HTTP status, message, and field of the error. See the [errors table](/docs/workflows/transactional-emails#errors).
+
+Nodemailer reads streams and URLs in the message, such as an attachment's `path`, before the send. If that takes more than 60 seconds, `sendMail` rejects with `code: "ETIMEDOUT"`, and PostHog sends nothing.
 
 ## Messages PostHog can't send
 
-PostHog never drops part of a message. If PostHog can't send part of a message, `sendMail` rejects before PostHog gets a request, and sends nothing. The error has `code: "EPOSTHOGUNSUPPORTED"`, and `error.refusal` tells you why:
+PostHog never drops part of a message. If PostHog can't carry part of a message, `sendMail` rejects before the transport sends a request, and PostHog sends nothing. The error has `code: "EPOSTHOGUNSUPPORTED"`, and `error.refusal` tells you why:
 
-| `refusal` | The message has |
-| --- | --- |
-| `multiple_to` | no `to` address, or more than one. Send one message for each recipient. |
-| `unsupported_header` | a custom header, an attachment with its own `headers`, `inReplyTo`, `references`, `list`, or a `sender` that isn't the `from` address. |
-| `unsupported_part` | an `amp`, `icalEvent`, `watchHtml`, `alternatives`, or `raw` part, or an attachment with a `raw` source. |
-| `unsupported_priority` | a `priority` other than `normal`. |
-| `envelope_mismatch` | an `envelope` with a different sender or other recipients than the message. |
-| `inline_without_cid` | an inline attachment with no `cid`. |
-| `invalid_template_key` | a `posthog.template_key` with characters other than letters, digits, hyphens, and underscores. |
+| `refusal` | The message has | What to do |
+| --- | --- | --- |
+| `multiple_to` | No `to` address, or more than one. | Send one message for each recipient. Put copies in `cc` or `bcc`. |
+| `inline_without_cid` | An inline attachment without a `cid`. | Set `cid`, and use it in the HTML as `<img src="cid:logo">`. |
+| `unsupported_header` | A custom header other than `Message-ID`, `Date`, `MIME-Version`, `X-Mailer`, `Content-Type`, and `Content-Transfer-Encoding`. Also `inReplyTo`, `references`, `list`, `otp`, a `sender` that isn't the `from` address, or an attachment with its own `headers`. | Leave the header out. |
+| `envelope_mismatch` | An `envelope` whose addresses differ from `from`, `to`, `cc`, and `bcc`. | Leave out `envelope`, or make it match the message. |
+| `unsupported_priority` | A `priority` other than `normal`. | Leave out `priority`. |
+| `unsupported_part` | An `amp`, `watchHtml`, `icalEvent`, `alternatives`, or `raw` part, or a `raw` source for `html`, `text`, or an attachment. | Send the content as `html` and `text`. |
+| `invalid_template_key` | A `posthog.template_key` with characters other than letters, digits, hyphens, and underscores, or longer than 400 characters. | Fix the key. |
+| `unsupported_option` | Any other Nodemailer message option that PostHog can't apply, such as DKIM, REQUIRETLS, or a plugin that changes the built message. | Leave out the option, or remove the plugin from the transporter. |
 
 ```js
 try {

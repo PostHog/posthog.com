@@ -1,0 +1,63 @@
+---
+title: Prompts
+shortTitle: Prompts
+subtitle: Manage AI prompts in PostHog, track prompt versions, and verify which instructions your application uses.
+description: Manage AI prompts in PostHog, track prompt versions, and verify which instructions your application uses.
+pocketGuideOrder: 4
+---
+
+<RightPage>
+
+# Prompts
+
+The updated instructions help Twig's support agent recognize the broken-amenity exception. Now Twig's engineers need to save those instructions, get them into the application, and verify which version produced each answer.
+
+## Save the corrected instructions
+
+Twig's engineers use PostHog's <Term name="prompt management">prompt management</Term> to store instructions the application can fetch. They name the support prompt `support-refunds`.
+
+The original cancellation instructions are `v1`. Twig's engineers publish the corrected instructions as `v2`. PostHog numbers each <Term name="prompt version">prompt version</Term> automatically and preserves its instructions and configuration, so the engineers can compare changes or return to earlier content.
+
+## Verify the version reaches the model
+
+Twig's application is pinned to `v1`. Publishing `v2` doesn't update that setting, so the support agent continues refusing the heating refund.
+
+Send the complaint, then switch the application to fetch `v2` and send it again. Inspect the version and instructions recorded with each answer:
+
+<AioPromptVersionFigure />
+
+Twig's engineers attach `$ai_prompt_name` and `$ai_prompt_version` to each generation. They also capture the instructions sent to the model. Together, those records connect an answer to the prompt that produced it.
+
+PostHog's **Usage** tab shows which versions the application fetched by name. A fetch alone doesn't prove those instructions reached the model: if the generation still contains the old instructions, the engineers investigate the application's prompt fetch and cache.
+
+## Reuse a prompt with different inputs
+
+The cancellation cases use the same instructions but different notice periods. Twig's engineers add `{{days_before_arrival}}`, a <Term name="template variable">template variable</Term>: a placeholder filled with a value for each request.
+
+Change the notice period to see what the application sends to the model:
+
+<AioPromptTemplateFigure />
+
+The engineers also save their refund policy as `refund-policy` and include it through a <Term name="prompt reference">prompt reference</Term>, which inserts another managed prompt's content. They keep that policy version fixed while comparing instructions, so a policy change can't explain a different answer.
+
+They record the prompt and application-code versions with each offline experiment so another engineer can reproduce the comparison.
+
+## Inspect prompts in your project
+
+Copy this prompt into [PostHog AI](https://app.posthog.com/#panel=max:Help%20me%20verify%20which%20prompt%20my%20AI%20feature%20uses.%20Find%20recent%20generations%20with%20recorded%20prompt%20names%20and%20versions%2C%20then%20help%20me%20choose%20one%20to%20inspect.%20Compare%20its%20captured%20instructions%20with%20the%20managed%20prompt%20version%2C%20and%20check%20available%20fetch%20history.%20Distinguish%20evidence%20that%20a%20prompt%20was%20fetched%20from%20evidence%20that%20it%20reached%20the%20model.%20Identify%20missing%20metadata%20or%20inputs%20before%20drawing%20a%20conclusion.%20Don%E2%80%99t%20change%20any%20prompts%20or%20application%20settings.):
+
+<div className="[&_.min-w-fit]:min-w-0 [&_.whitespace-pre]:whitespace-pre-wrap [&_.whitespace-pre]:break-words">
+
+```text
+Help me verify which prompt my AI feature uses. Find recent generations with recorded prompt names and versions, then help me choose one to inspect. Compare its captured instructions with the managed prompt version, and check available fetch history. Distinguish evidence that a prompt was fetched from evidence that it reached the model. Identify missing metadata or inputs before drawing a conclusion. Don’t change any prompts or application settings.
+```
+
+</div>
+
+<AioChapterFooter nextLabel="Cost and performance" nextHref="/learn/ai-observability/pocket-guide/cost-and-performance">
+
+[Prompt management](/docs/prompt-management) · [Playground](/docs/ai-observability/playground)
+
+</AioChapterFooter>
+
+</RightPage>

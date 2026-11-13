@@ -9,6 +9,7 @@ import {
 } from '../src/components/SdkReferences/utils'
 import { convertHtmlToAgentMarkdown, extractTitleFromHtml } from './turndownService'
 import { getChangelogDocsPath, stripPostHogOrigin } from '../src/components/Changelog/docsLinks'
+import { buildMcpBrief, BriefToolCategory } from '../src/components/MCPPage/agentBrief'
 import { withCompanionAddons } from '../src/components/Pricing/PricingCalculator/calculatorLogic'
 
 // Prepended to every generated .md file so LLM crawlers landing on a single page
@@ -630,7 +631,7 @@ export const generateProductPagesMarkdown = () => {
     const publicPath = path.resolve(__dirname, '../public')
 
     const pages = [
-        // Web / MCP point at existing pages, no bespoke .md
+        // Web points at an existing page, no bespoke .md. MCP has its own: generateMcpMd
         ...PLATFORM_ITEMS.filter((item) => item.slug).map((item) => ({
             name: item.name,
             slug: item.slug as string,
@@ -663,6 +664,25 @@ For features, screenshots, and details, see ${page.pageLink}.
         fs.writeFileSync(outputPath, withAgentSignpost(content), 'utf8')
         console.log(`Generated: ${page.slug}.md`)
     }
+}
+
+// The /mcp page is a React page, so the HTML-scrape path can't produce useful markdown for it.
+// The page's "Agent" view renders the same brief, so the two can't drift.
+export const generateMcpMd = () => {
+    const publicPath = path.resolve(__dirname, '../public')
+    const toolsPath = path.resolve(__dirname, '../src/data/mcp-tools.json')
+    let categories: BriefToolCategory[] | null = null
+    try {
+        categories = JSON.parse(fs.readFileSync(toolsPath, 'utf8')).categories
+    } catch {
+        // The tool list is fetched in onPreBootstrap. Without it, the brief links to the tools reference.
+    }
+    fs.writeFileSync(
+        path.join(publicPath, 'mcp.md'),
+        buildMcpBrief(categories, new Date().toISOString().slice(0, 10)),
+        'utf8'
+    )
+    console.log('Generated: mcp.md')
 }
 
 type ChangelogRoadmapNode = {
@@ -911,7 +931,7 @@ If the wizard doesn't support the framework, see the [SDKs and Libraries](https:
 
 **API:** The PostHog API base URL is \`https://us.i.posthog.com\` (US cloud) or \`https://eu.i.posthog.com\` (EU cloud). Use a personal API key (not the project API key) for API access. See the [API docs](https://posthog.com/docs/api.md).
 
-**MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`.
+**MCP and AI tools:** PostHog has an official MCP server for AI coding assistants. Install with \`npx @posthog/wizard mcp add\`. There is also a Claude Code plugin: \`claude plugin install posthog\`. To decide if the MCP server fits a task, read the [MCP brief](https://posthog.com/mcp.md): what it does, its limits, safety controls, and the full tool list.
 
 `
 
@@ -1195,7 +1215,7 @@ All prices are in USD. Full interactive pricing calculator: https://posthog.com/
 PostHog has two plans:
 
 - **Free** — No credit card required. Generous monthly usage limits on every product. 1 project. 1 year data retention. Community support.
-- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 7 year data retention. Email support.
+- **Paid** (pay-as-you-go) — $0/mo base price. You get a free tier on every product, then pay only for what you use above it. The free tier resets every month. 6 projects. 2-year data retention. Email support.
 
 There are no per-seat charges. Your whole team can use PostHog.
 

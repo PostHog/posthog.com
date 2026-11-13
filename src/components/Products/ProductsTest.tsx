@@ -21,6 +21,14 @@ const statusDotColor: Record<string, string> = {
     WIP: 'bg-red',
 }
 
+const statusTooltipLabel: Record<string, string> = {
+    beta: 'Beta',
+    alpha: 'Alpha',
+    WIP: 'On the roadmap',
+    coming_soon: 'On the roadmap',
+    stable: 'Stable',
+}
+
 const sections = [
     {
         title: 'Context warehouse',
@@ -82,7 +90,7 @@ const sections = [
                 colSpan: 2,
                 columns: [
                     ['feature_flags', 'experiments', 'no_code_ab_testing', 'early_access', 'endpoints', 'webhooks'],
-                    ['workflows_emails', 'surveys', 'support', 'user_interviews'],
+                    ['workflows_emails', 'surveys', 'support'],
                 ],
             },
         ],
@@ -298,7 +306,18 @@ const ProductRow = ({ product }: { product: any }) => {
                 {product.name}
             </span>
             {product.status && (
-                <span className={`size-1.5 shrink-0 rounded-full ${statusDotColor[product.status] || 'bg-muted'}`} />
+                <Tooltip
+                    delay={0}
+                    trigger={
+                        <span
+                            className={`inline-block size-1.5 shrink-0 rounded-full ${
+                                statusDotColor[product.status] || 'bg-muted'
+                            }`}
+                        />
+                    }
+                >
+                    <span>{statusTooltipLabel[product.status] || product.status}</span>
+                </Tooltip>
             )}
         </button>
     )
