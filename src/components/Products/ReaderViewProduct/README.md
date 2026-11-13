@@ -216,7 +216,7 @@ The only invariant: wrap the output in `<section id={id} className="scroll-mt-20
 
 | Template key           | Reads from `productData`                | Summary                                                        |
 | ---------------------- | --------------------------------------- | -------------------------------------------------------------- |
-| `overview`             | `name`, `Icon`, `overview`, `screenshots`, `status` | Hero: title, description, product icon, screenshot. |
+| `overview`             | `name`, `Icon`, `overview`, `screenshots`, `status` | Hero: title, description, product icon, screenshot. Shows a "Beta" `Label` above the title when the menu item passes `props: { showStatusLabel: true }` and `status` is `'beta'`. |
 | `features`             | `features`                              | Vertical list of feature cards (headline, description, images, children, sub-features, labels). |
 | `ai`                   | `ai`, `name`                            | AI skills + prompts + hero image.                              |
 | `posthog-on-posthog`   | `postHogOnPostHog`                      | How PostHog uses this product internally.                      |
