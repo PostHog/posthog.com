@@ -195,9 +195,11 @@ You can also send the subject and the body from your code, without a template in
 | `text` | One of `html` and `text` | The plain-text body. If you leave it out, PostHog makes it from `html`. |
 | `from` | No | The sender, as `security@example.com` or `Hedgebox <security@example.com>`, on a domain that your project verified. If you leave it out, PostHog uses the project's default sender. |
 | `reply_to` | No | A list of up to 10 addresses that replies go to, without a display name. |
-| `capture_engagement` | No | Whether PostHog captures the email's [engagement events](/docs/workflows/engagement-events). The default is `true`. Send `false` to turn capture off for this email. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send. |
+| `sensitive` | No | Whether the email is sensitive. Mark the email as sensitive when it carries login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](#sensitive-emails). |
+| `tracking` | No | Whether PostHog tracks the email's opens and clicks, and captures its [engagement events](/docs/workflows/engagement-events). Send `true`, `false`, or an object. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking). |
+| `capture_engagement` | No | Deprecated. Use `tracking` with `engagement` instead. It still works: `false` turns off engagement events for this email, the same as `"tracking": {"engagement": false}`. A request can't have both `capture_engagement` and `tracking`. |
 
-A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
+A request has `template_id` or `template_key`, not both. Content from your code takes no `message_data`, because PostHog renders nothing. A template send takes none of `subject`, `html`, `text`, `from`, `reply_to`, `sensitive`, `tracking`, and `capture_engagement`, because the template uses its own settings. PostHog returns a `400` that names the field in `attr`.
 
 If the `to` address is on the [suppression list](/docs/workflows/opt-outs#the-suppression-list), PostHog sends nothing and returns `recipient_suppressed`.
 
@@ -320,6 +322,83 @@ $result = PostHog::emails()->send([
 ```
 
 </MultiLanguage>
+
+### Sensitive emails
+
+Mark the email as sensitive when it carries login links, reset tokens, or codes. For a sensitive email, PostHog:
+
+- **Keeps links unchanged** - PostHog doesn't rewrite the email's links to count clicks, so a token in a link never goes through a tracking redirect. [`tracking`](#open-and-click-tracking) can still turn clicks on.
+- **Leaves the subject off engagement events** - The email's [engagement events](/docs/workflows/engagement-events) don't carry its subject.
+- **Keeps no copy of the content** - PostHog doesn't keep the email's subject or body.
+
+`sensitive` takes `true` or `false`. If you leave it out:
+
+- **A template has the same key** - When a template in your project has the key that you send as `template_key`, the email takes that template's [**Protect sensitive data**](/docs/workflows/transactional-emails#protect-sensitive-data) setting.
+- **No template has the key** - The email is sensitive.
+
+Send `"sensitive": false` for an email that carries no secrets, such as an order confirmation. PostHog then tracks its clicks too, as it does for a template without **Protect sensitive data**. `sensitive` doesn't change opens or engagement events.
+
+```json
+{
+  "template_key": "order-shipped",
+  "to": "jane@example.com",
+  "subject": "Your order is on its way",
+  "html": "<p>Hi Jane, your order has shipped.</p>",
+  "sensitive": false
+}
+```
+
+### Open and click tracking
+
+`tracking` decides what PostHog tracks for an email from your code. Send `true`, `false`, or an object with any of `opens`, `clicks`, and `engagement`:
+
+| `tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Left out | On | Follows `sensitive` | On |
+| `true` | On | On | On |
+| `false` | Off | Off | Off |
+| An object | `opens`, on by default | `clicks`, default follows `sensitive` | `engagement`, on by default |
+
+- **Opens** - PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** - PostHog captures the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever you send.
+
+A key that you leave out of the object keeps its default, so `{}` is the same as leaving out `tracking`.
+
+#### Clicks and sensitive emails
+
+When you leave out `clicks`, PostHog tracks clicks only for an email that isn't [sensitive](#sensitive-emails). A tracked link goes through a redirect, so a login link or a reset token in it would go through the redirect too.
+
+- **An email without secrets** - Send `"sensitive": false`, and PostHog tracks its clicks.
+- **A sensitive email with safe links** - Send `"tracking": {"clicks": true}`, or `"tracking": true`. PostHog tracks its clicks, and keeps the email's other protections.
+- **An email that isn't sensitive** - Send `"tracking": {"clicks": false}` to keep its links unchanged.
+
+A `clicks` value that you send wins over `sensitive`. To keep one link as it is, add `data-ph-no-track` or `clicktracking="off"` to its `<a>` tag, as for [workflow emails](/docs/workflows/library#disabling-link-click-tracking).
+
+#### Turn tracking off
+
+With `"tracking": false`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and it captures no engagement events for it. You can still [read the email's status](#check-an-emails-status). `false` also turns off any kind of tracking that PostHog adds later.
+
+```json
+{
+  "template_key": "welcome",
+  "to": "jane@example.com",
+  "subject": "Welcome to Hedgebox",
+  "html": "<p>Hi Jane, welcome to Hedgebox.</p>",
+  "tracking": false
+}
+```
+
+In a form-encoded request, `tracking` and `sensitive` take `true` or `false`. Send JSON to use the `tracking` object.
+
+#### Requests that PostHog refuses
+
+PostHog returns a `400` and sends nothing when:
+
+- **An unknown key** - The object has a key other than `opens`, `clicks`, and `engagement`.
+- **Clicks without opens** - `opens` is `false` and `clicks` is `true`. Click tracking needs open tracking. Turn on `opens`, or turn off `clicks`. With `opens` set to `false` and `clicks` left out, PostHog tracks no clicks, whatever `sensitive` says.
+- **Both fields** - The request has `tracking` and `capture_engagement`. Move the value of `capture_engagement` to `tracking.engagement`.
+- **A template send** - The request has `template_id` and `tracking` or `sensitive`. A template uses its own settings.
 
 ### Copies and attachments
 

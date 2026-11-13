@@ -148,7 +148,7 @@ export const TabContent = ({
     const { type, volume, billingData, slider, costByTier, freeAllocationText, startsAt, freeLimit } = activeProduct
     const [showBreakdown, setShowBreakdown] = useState(false)
     const freeAmount = freeLimit || slider?.min
-    const unitLabel = pluralizeUnit(billingData.unit, 2)
+    const unitLabel = billingData?.unit ? pluralizeUnit(billingData.unit, 2) : ''
     const isAIObservability = type === 'ai_observability'
 
     return (
@@ -368,7 +368,13 @@ export default function Tabbed({ defaultProducts = DEFAULT_PRODUCT_TYPES }: Tabb
         }
         return initialProducts
             .filter(
-                (product) => !!product.unit && !product.hideFromPricingTableAndCalculator && !product.hideFromCalculator
+                (product) =>
+                    // A billed-with product belongs in the list even when it has no rate yet.
+                    // Marketing analytics inherits Sources' unit. Data modeling and Endpoints
+                    // do not: the data warehouse rate is not final.
+                    (!!product.unit || !!product.billedWith) &&
+                    !product.hideFromPricingTableAndCalculator &&
+                    !product.hideFromCalculator
             )
             .sort((a, b) => navOrder(a) - navOrder(b))
             .map((product): any =>

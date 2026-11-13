@@ -33,7 +33,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-cargo add posthog-rs serde_json
+cargo add posthog-rs@0.32 serde_json
 ```
 
 ## Set up the client
@@ -183,7 +183,9 @@ async fn send_password_reset(
 - **Template key** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
 - **`text`** - If you leave it out, PostHog makes it from `html`.
 - **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. Call `reply_to` once for each reply-to address.
-- **`capture_engagement`** - PostHog captures the email's engagement events unless you call `capture_engagement(false)`.
+- **`sensitive`** - Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
+- **`tracking`** - What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
+- **`capture_engagement`** - Deprecated. Call `.tracking(EmailTrackingOptions::new().engagement(false))` instead. It still works, but a send that sets both `capture_engagement` and `tracking` gets an error.
 
 A `TemplateEmail` sends a template made in PostHog, and a `CodeEmail` sends your content. A `CodeEmail` takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
@@ -208,6 +210,29 @@ posthog
 ```
 
 See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
+
+### Open and click tracking
+
+`sensitive` and `tracking` need version 0.32.0 or later.
+
+`tracking` decides what PostHog tracks for an email from your code:
+
+| `tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Not called | On | Follows `sensitive` | On |
+| `.tracking(EmailTracking::On)` | On | On | On |
+| `.tracking(EmailTracking::Off)` | Off | Off | Off |
+| `EmailTrackingOptions::new()` with its builder methods | `opens`, on by default | `clicks`, default follows `sensitive` | `engagement`, on by default |
+
+- **Opens** - PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** - PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+
+If you leave out clicks, PostHog tracks them only when the email isn't sensitive, because a login link or a reset token in a tracked link would go through a redirect. Call `.sensitive(false)` for an email that carries no secrets. For a sensitive email with links that are safe to rewrite, call `.tracking(EmailTrackingOptions::new().clicks(true))`. A clicks value in `tracking` wins over `sensitive`.
+
+With `.tracking(EmailTracking::Off)`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and captures no engagement events for it.
+
+PostHog refuses `EmailTrackingOptions::new().opens(false).clicks(true)`, because click tracking needs open tracking. See [open and click tracking](/docs/workflows/transactional-emails/api#open-and-click-tracking) for every rule.
 
 ## Check an email's status
 

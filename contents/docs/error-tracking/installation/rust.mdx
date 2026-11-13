@@ -18,14 +18,14 @@ import AgentIntegrationSection from "../../components/AgentIntegrationSection.md
 Install the [PostHog Rust SDK](/docs/libraries/rust):
 
 ```bash
-cargo add posthog-rs
+cargo add posthog-rs@0.31
 ```
 
 Error tracking ships enabled by default through the `error-tracking` feature. If you build with `default-features = false`, add it back explicitly:
 
 ```toml
 [dependencies]
-posthog-rs = { version = "*", default-features = false, features = ["error-tracking"] }
+posthog-rs = { version = "0.31", default-features = false, features = ["error-tracking"] }
 ```
 
 <CalloutBox icon="IconInfo" title="Debug symbol uploads" type="fyi">

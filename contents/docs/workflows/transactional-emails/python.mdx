@@ -33,7 +33,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-pip install posthog
+pip install "posthog<8"
 ```
 
 For async code, install `posthog[async]` instead.
@@ -207,7 +207,9 @@ async def send_password_reset(user_id: str, email: str, html: str, reset_request
 - **`template_key`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
 - **`text`** - If you leave it out, PostHog makes it from `html`.
 - **`from_`** - The sender. It has a trailing underscore because `from` is a Python keyword. It needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
-- **`capture_engagement`** - PostHog captures the email's engagement events unless you pass `capture_engagement=False`.
+- **`sensitive`** - Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
+- **`tracking`** - What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
+- **`capture_engagement`** - Deprecated. Pass `tracking={"engagement": False}` instead. It still works, but a send that sets both `capture_engagement` and `tracking` gets an error.
 
 A send has `template_id` or `template_key`, not both, or it raises `TypeError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
@@ -237,6 +239,29 @@ posthog.emails.send(
 ```
 
 See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
+
+### Open and click tracking
+
+`sensitive` and `tracking` need version 7.89.0 or later.
+
+`tracking` decides what PostHog tracks for an email from your code:
+
+| `tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Left out | On | Follows `sensitive` | On |
+| `tracking=True` | On | On | On |
+| `tracking=False` | Off | Off | Off |
+| A dict, such as `tracking={"clicks": True}` | `"opens"`, on by default | `"clicks"`, default follows `sensitive` | `"engagement"`, on by default |
+
+- **Opens** - PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** - PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** - PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+
+If you leave out clicks, PostHog tracks them only when the email isn't sensitive, because a login link or a reset token in a tracked link would go through a redirect. Pass `sensitive=False` for an email that carries no secrets. For a sensitive email with links that are safe to rewrite, pass `tracking={"clicks": True}`. A clicks value in `tracking` wins over `sensitive`.
+
+With `tracking=False`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and captures no engagement events for it.
+
+PostHog refuses `tracking={"opens": False, "clicks": True}`, because click tracking needs open tracking. See [open and click tracking](/docs/workflows/transactional-emails/api#open-and-click-tracking) for every rule.
 
 ## Check an email's status
 
