@@ -9,11 +9,11 @@ availability:
 sourceId: TawkTo
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The tawk.to connector syncs your live chat and support data – chats with their message transcripts, tickets, properties, and property members – into the PostHog Data warehouse, so you can analyze support conversations alongside your product data.
+The tawk.to connector syncs your live chat and support data – chats with their message transcripts, tickets, knowledge base articles, properties, and property members – into the PostHog Data warehouse, so you can analyze support conversations alongside your product data.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ tawk.to's REST API is available by request. Submit the [REST API Access Request 
 
 When linking tawk.to, you'll need:
 
-- **API key** – generated under **Edit Profile → REST API Keys** in your tawk.to dashboard after your REST API access request is approved. The key needs read access to properties, chat history, tickets, and members.
+- **API key** – generated under **Edit Profile → REST API Keys** in your tawk.to dashboard after your REST API access request is approved. The key needs read access to properties, chat history, tickets, members, and the knowledge base.
 - **Property ID** (optional) – the ID of a single property to sync. Leave it blank to sync data from every property your API key can access.
 
 ## Sync modes

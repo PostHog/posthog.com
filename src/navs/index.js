@@ -568,6 +568,7 @@ export const handbookSidebar = [
             { name: 'Design hiring', url: '/handbook/people/hiring-process/design-hiring' },
             { name: 'Leadership hiring', url: '/handbook/people/hiring-process/exec-hiring' },
             { name: 'Sales and CS hiring', url: '/handbook/people/hiring-process/sales-cs-hiring' },
+            { name: 'Support hiring', url: '/handbook/people/hiring-process/support-hiring' },
         ],
     },
     {
@@ -1600,6 +1601,44 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Scaled Customer Success',
+                url: '',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/scaled-customer-success/scaled-customer-success-team',
+                    },
+                    {
+                        name: 'Operations and processes',
+                        url: '/handbook/scaled-customer-success/operations-and-processes',
+                    },
+                    {
+                        name: 'Onboarding program',
+                        url: '/handbook/scaled-customer-success/onboarding-program',
+                    },
+                    {
+                        name: 'Data',
+                        url: '/handbook/scaled-customer-success/data',
+                    },
+                    {
+                        name: 'Conversations playbook',
+                        url: '/handbook/scaled-customer-success/conversations-playbook',
+                    },
+                    {
+                        name: 'Skills',
+                        url: '/handbook/scaled-customer-success/skills',
+                    },
+                    {
+                        name: 'Sales handover',
+                        url: '/handbook/scaled-customer-success/sales-handover',
+                    },
+                    {
+                        name: 'New hire onboarding',
+                        url: '/handbook/scaled-customer-success/new-hire-onboarding',
+                    },
+                ],
+            },
+            {
                 name: 'Forward deployed engineering',
                 url: '',
                 children: [
@@ -1668,44 +1707,6 @@ export const handbookSidebar = [
                     {
                         name: 'Setting up Replay Vision scanners',
                         url: '/handbook/customer-success/shareable-guides/replay-vision-scanners',
-                    },
-                ],
-            },
-            {
-                name: 'Onboarding',
-                url: '',
-                children: [
-                    {
-                        name: 'Onboarding team',
-                        url: '/handbook/onboarding/onboarding-team',
-                    },
-                    {
-                        name: 'Onboarding program',
-                        url: '/handbook/onboarding/onboarding-program',
-                    },
-                    {
-                        name: 'Onboarding process',
-                        url: '/handbook/onboarding/onboarding-tracking',
-                    },
-                    {
-                        name: 'Onboarding data',
-                        url: '/handbook/onboarding/onboarding-data',
-                    },
-                    {
-                        name: 'Onboarding conversations playbook',
-                        url: '/handbook/onboarding/onboarding-conversations-playbook',
-                    },
-                    {
-                        name: 'Onboarding skills',
-                        url: '/handbook/onboarding/onboarding-skills',
-                    },
-                    {
-                        name: 'Sales handover',
-                        url: '/handbook/onboarding/sales-handover',
-                    },
-                    {
-                        name: 'New hire onboarding',
-                        url: '/handbook/onboarding/new-hire-onboarding',
                     },
                 ],
             },
@@ -2547,8 +2548,18 @@ const posthogMcpNav = [
         url: '/docs/model-context-protocol/faq',
     },
     {
-        name: 'Enterprise auth (ID-JAG)',
+        name: 'Enterprise-managed authorization',
         url: '/docs/model-context-protocol/enterprise-managed-authorization',
+        children: [
+            {
+                name: 'Overview',
+                url: '/docs/model-context-protocol/enterprise-managed-authorization',
+            },
+            {
+                name: 'Claude',
+                url: '/docs/model-context-protocol/claude-managed-authorization',
+            },
+        ],
     },
     {
         name: 'Code editors',
@@ -8390,6 +8401,10 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/api',
                         },
                         {
+                            name: 'React Email',
+                            url: '/docs/workflows/transactional-emails/react-email',
+                        },
+                        {
                             name: 'Examples',
                             url: '/docs/workflows/transactional-emails/examples',
                         },
@@ -8438,6 +8453,16 @@ export const docsMenu = {
                             url: '/docs/workflows/push-notifications/push-step-options',
                         },
                     ],
+                },
+                {
+                    name: 'Supabase auth emails',
+                    url: '/docs/workflows/supabase-auth-emails',
+                    icon: 'IconLock',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
                     name: 'Workflow events',

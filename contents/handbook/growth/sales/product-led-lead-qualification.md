@@ -65,7 +65,7 @@ Before you reach out, confirm nobody else is already working this account:
 - **Slack:** Look for a channel following the `#posthog-[company]` convention
 - **Salesforce:** Check for an existing lead task or opportunity
 
-Product-led leads can overlap with onboarding referrals, TAE pipeline, and CSM accounts. The [sales handover page](/handbook/onboarding/sales-handover) documents how the onboarding team evaluates these same accounts from their side. If someone is already engaged, coordinate before reaching out.
+Product-led leads can overlap with onboarding referrals, TAE pipeline, and CSM accounts. The [sales handover page](/handbook/scaled-customer-success/sales-handover) documents how the onboarding team evaluates these same accounts from their side. If someone is already engaged, coordinate before reaching out.
 
 ## Step 5: Is it qualified?
 

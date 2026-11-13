@@ -14,7 +14,7 @@ For non-urgent requests we should capture them in Customer analytics using the p
 
 # Tracking feature requests in Customer analytics
 
-We track feature requests in PostHog itself, on the Feature requests tab of <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/feature-requests">Customer analytics</PrivateLink>. This replaces the custom object we used to keep in Vitally, so don't add new requests there.
+We track feature requests in PostHog itself, on the Feature requests tab of <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/feature-requests">Customer analytics</PrivateLink>.
 
 ## Creating a new request
 
@@ -35,7 +35,7 @@ There's no status or priority field on the form. New requests start as `Requeste
 
 ## Evidence
 
-Evidence is the biggest change from how we worked in Vitally. Context attaches to each account instead of to one shared text field, so you can still tell who asked for what, and when.
+Evidence attaches context to each account on a request, so you can tell who asked for what, and when.
 
 Each evidence item has:
 
