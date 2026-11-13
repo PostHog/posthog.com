@@ -142,7 +142,7 @@ Run `php -S localhost:8000` and navigate to `http://localhost:8000` to see our a
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, make sure [Composer](https://getcomposer.org/) is installed. Then run `composer require posthog/posthog-php` to install [PostHog’s PHP SDK](/docs/libraries/php).
+To start, make sure [Composer](https://getcomposer.org/) is installed. Then run `composer require "posthog/posthog-php:^4.0"` to install [PostHog’s PHP SDK](/docs/libraries/php).
 
 Then, we initialize PostHog in `api/dashboard.php`. This is where we will add our event capture code in the next step of this tutorial.
 

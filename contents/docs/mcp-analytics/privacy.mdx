@@ -40,7 +40,7 @@ The SDK runs a deterministic sanitizer:
 - **PostHog API key patterns** (`ph[a-z]_…`) in any string value -> replaced with `"[redacted]"`.
 - **Credentials inside URLs** – replaced with `[redacted]`. This applies to string values in resource names, parameters, responses, and exception messages. See the URL rules below.
 - **Credential-looking words** – detected through entropy and known formats, such as `sk-…` and PEM markers. The SDK replaces these words in parameters, responses, intent, and exception messages. It preserves surrounding diagnostic text.
-- **Personal data in intent** – emails, phone numbers, IP addresses, card numbers, and US Social Security numbers in `$mcp_intent` are replaced with `[redacted]`. This pass applies only to intent and agent feedback text, not to `$mcp_parameters` or `$mcp_response`, because structured tool data often holds the same shapes as legitimate values.
+- **Personal data in intent** – emails, phone numbers, IP addresses, card numbers, and US Social Security numbers in `$mcp_intent` are replaced with `[redacted]`. This pass applies only to intent text, not to `$mcp_parameters` or `$mcp_response`, because structured tool data often holds the same shapes as legitimate values.
 
 Automatic sanitization is not configurable. It detects known key formats and sensitive property names, but it cannot detect every secret. Other text, including exception messages, remains unchanged. Use your [before-send hook](#3-your-before-send-hook-optional) for additional filtering.
 

@@ -60,7 +60,7 @@ Run `ng serve` and navigate to http://localhost:4200 to see your app in action.
 With our app set up, it’s time to install and set up PostHog. To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In `src/main.ts`, initialize PostHog using your project token and instance address. You can get both in your [project settings](https://us.posthog.com/project/settings).  

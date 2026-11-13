@@ -596,7 +596,7 @@ function PipelinesPage({ location }) {
         <Layout>
             <SEO
                 title="CDP sources & destinations"
-                description="Get all your data into PostHog with 60+ sources & destinations"
+                description="Get all your data into PostHog with 1,400+ sources & destinations"
                 image={`images/og/cdp.jpg`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>

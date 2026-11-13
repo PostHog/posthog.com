@@ -115,6 +115,12 @@ const boostedFreeCredits = (
 
 const planRows: { label: string; free: PlanValue; paid: PlanValue }[] = [
     { label: 'Monthly free credits', free: boostedFreeCredits, paid: boostedFreeCredits },
+    {
+        label: 'After free credits',
+        free: 'Scans pause until the next billing period',
+        paid: `$${CREDIT_PRICE.toFixed(2)}/credit, up to your spending limit`,
+    },
+    { label: 'Credit card', free: 'Not required', paid: 'Required' },
     { label: 'Monthly volume', free: `Up to ${FREE_CREDITS.toLocaleString()} credits`, paid: 'Unlimited' },
     { label: 'All scanner types', free: true, paid: true },
     { label: 'All AI models', free: true, paid: true },
@@ -144,19 +150,6 @@ export const PricingPlans = ({ id, intro }: SectionComponentProps & { intro?: Re
                     <span className="hidden @xl:block" />
                     <span className="text-base font-bold text-primary">Totally free</span>
                     <span className="text-base font-bold text-primary">Pay-as-you-go</span>
-                </div>
-
-                {/* Price per credit */}
-                <div className={`${ROW_GRID} ${ROW_PADDING} items-start`}>
-                    <span className={`${LABEL_CELL} text-base text-primary/70`}>Price per credit</span>
-                    <span>
-                        <strong className="text-lg text-primary">$0</strong>
-                        <span className="block text-sm text-primary/50 mt-0.5">No credit card required</span>
-                    </span>
-                    <span>
-                        <strong className="text-lg text-primary">${CREDIT_PRICE.toFixed(2)}/credit</strong>
-                        <span className="block text-sm text-primary/50 mt-0.5">1 credit = $0.01</span>
-                    </span>
                 </div>
 
                 {/* Feature rows */}

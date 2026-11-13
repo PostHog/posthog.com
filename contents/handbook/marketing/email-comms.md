@@ -22,17 +22,17 @@ Treat every email we send from PostHog like code. At least one peer must review 
 For customer-facing comms, we recommend all comms are reviewed by a member of the <SmallTeam slug="developer-marketing" />. You can do this in two ways:
 
 - **If you've already created the email,** ask for feedback in the #team-developer-marketing Slack channel.
-- **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the [Requests for Comments Internal repo](https://github.com/PostHog/requests-for-comments-internal), and assign a member of the team. They'll figure it out from there. 
+- **If you'd like the team to create the email for you,** create a messaging issue in the [Marketing repo](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) or the <PrivateLink url="https://github.com/PostHog/requests-for-comments-internal">Requests for Comments Internal repo</PrivateLink>, and assign a member of the team. They'll figure it out from there. 
 
 ## Writing emails with AI
 
 We care a lot about keeping AI slop out of our emails, so we recommend you don't use AI to write original email content.
 
-When you use an agent to edit email copy, ask it to use the [`no-slop` skill](https://us.posthog.com/project/2/skills/no-slop?owner_id=3301) from the PostHog skills store. The skill removes or flags common AI writing patterns and applies the [PostHog style guide](/handbook/content/posthog-style-guide).
+When you use an agent to edit email copy, ask it to use the <PrivateLink url="https://us.posthog.com/project/2/skills/no-slop?owner_id=3301">`no-slop` skill</PrivateLink> from the PostHog skills store. The skill removes or flags common AI writing patterns and applies the [PostHog style guide](/handbook/content/posthog-style-guide).
 
 ## Building emails in Workflows
 
-We usually send emails as HTML blocks. Use the [PostHog HTML Email Maker](https://us.posthog.com/project/2/skills/posthog-html-email-maker?owner_id=3301) skill to style your HTML blocks so they match the rest of our emails. It works great if you just feed it the copy and image you want as raw text!
+We usually send emails as HTML blocks. Use the <PrivateLink url="https://us.posthog.com/project/2/skills/posthog-html-email-maker?owner_id=3301">PostHog HTML Email Maker</PrivateLink> skill to style your HTML blocks so they match the rest of our emails. It works great if you just feed it the copy and image you want as raw text!
 
 All new broadcasts and automations should use these defaults:
 
@@ -83,7 +83,7 @@ Since we started moving to Workflows, Workflows has automatically paused some br
 
 The way users interact with PostHog is also changing. Previously, we relied on a `user has logged in` property to check if they were active. Now, users don't need to login at all to interact with their PostHog data, if they use our MCP, for example.
 
-We solve both of these issues by using the [Active PostHog users (last 90 days)](https://us.posthog.com/project/2/cohorts/671128) cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, interacting with `@PostHog` in Slack, loading the toolbar, or creating a feature flag. 
+We solve both of these issues by using the <PrivateLink url="https://us.posthog.com/project/2/cohorts/671128">Active PostHog users (last 90 days)</PrivateLink> cohort. It includes everyone with an email address who showed an engagement signal in the last 90 days, such as logging in, sending data, making an MCP call, interacting with `@PostHog` in Slack, loading the toolbar, or creating a feature flag. 
 
 **Add this cohort to all broadcasts by default.**
 
@@ -101,7 +101,7 @@ If you want to notify a specific group of users about a breaking change, inciden
 ## After you send
 
 - **Watch bounces and complaints.** Check them after every large send. If Workflows pauses a broadcast, find out why before you resume it. The cause is usually the audience.
-- **Measure the result.** Add an [annotation](https://us.posthog.com/project/2/data-management/annotations) on the send date. About a week later, check the [engagement events](/docs/workflows/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
+- **Measure the result.** Add an <PrivateLink url="https://us.posthog.com/project/2/data-management/annotations">annotation</PrivateLink> on the send date. About a week later, check the [engagement events](/docs/workflows/engagement-events) for opens, clicks, and unsubscribes, and use what you learn in the next email.
 
 ## Linking to the PostHog app or PostHog AI
 
@@ -166,13 +166,43 @@ Any ad-hoc customer email broadcasts are owned by the <SmallTeam slug="developer
 
 These emails are usually categorized as `Service updates` in Workflows when they include important account or product information. They have a dedicated unsubscribe option in the footer, which makes it clear that we don't recommend users unsubscribe from them. 
 
-Important service updates are the _only_ type of email we may send to unsubscribed users, and only when it's warranted.
+Important service updates are the _only_ type of email we may send to unsubscribed users, and only when it's warranted. The one exception is legal comms, when Hector tells us to. See [legal updates](#legal-updates). 
+
+For changes that require email comms, loop in Hector as early as possible for his legal assessment. 
 
 > `Service updates` emails are often part of an [engineering incident](/handbook/engineering/operations/incidents). We handle comms for those too. 
 
 Whenever we need to send an email broadcast like this, we begin by creating an issue using the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md) in the marketing repo. If it involves personal information, we discuss it in <PrivateLink url="https://github.com/PostHog/company-internal">Company Internal</PrivateLink> instead. This lets us summarize information and get approval from teams while keeping our work open source. Issues are closed when an email is sent.
 
 If you'd like to work with Marketing on an email activity, start by opening an issue with the [messaging template](https://github.com/PostHog/marketing/issues/new?template=messaging-template.md).
+
+### Legal updates
+We use the `Legal updates` category in Workflows for all legal comms. These include, but are not limited to:
+
+- Updates to our terms and conditions
+- Updates to our list of subprocessors
+- Changes to other legal terms
+
+Use `Legal updates` for every legal email by default. New users are subscribed to this category automatically, and users can unsubscribe from it.
+
+Do not send a legal email to users who unsubscribed unless Hector gives you specific direction to do so. Only then, use the `Legal notices (required)` category instead. This category is transactional, so it ignores opt-outs.
+
+## Transactional emails
+Timing matters when deciding how to communicate changes to users. Think of it as choosing between a just in case and a just in time approach.
+
+- Just in case: Like reading a book about bikes, so you have the knowledge when you take it out for a ride. In email, this means announcing a change to a broad audience ahead of time, even if it doesn't affect what they're doing right now.
+- Just in time: Like pulling out the bike manual when you get a flat tire. In email, this means notifying specific users when they're about to encounter a change or when it becomes relevant to their workflow.
+
+For the second approach, think about how users interact with our product over time and which actions or events could trigger a transactional email. Sometimes the best email is not a one-off broadcast to a large audience, but a drip of accurately timed transactional emails.
+
+The best just-in-time emails are specific and personalized to the user's situation. You can use Liquid code to pull in relevant events and user or organization properties, making each email more contextual and actionable.
+
+Things to check with engineers and PMs before writing:
+
+- Map the scenarios: Identify common use cases and edge cases, including both straightforward and branched workflows.
+
+- Check available events and properties: Find out which events our data infrastructure already captures across those scenarios. This will help you determine which events or custom properties you'll need to reference in your Liquid code.
+
 
 ## Email campaigns
 We run many email campaigns to help users get more out of PostHog. All of these campaigns now live in PostHog Workflows, not Customer.io. The most developed and documented of these are our four onboarding campaigns.  

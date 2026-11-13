@@ -12,6 +12,7 @@ Use them to tell agents how your team works. For example:
 - Which checks to run before a pull request
 - How to write commit messages, pull request descriptions, and code comments
 - Your personal preferences, such as the language or the level of detail in replies
+- Where to look for context, such as a Business Knowledge source or a data warehouse table
 
 The repository's own `AGENTS.md`, `CLAUDE.md`, and Cursor rules still apply. Use agent instructions for guidance that is not in a repository, or that applies to more than one repository.
 
@@ -25,6 +26,24 @@ Go to [Settings > AI > Agent instructions](https://app.posthog.com/settings/proj
 | **My instructions** | Every project member, for their own text | Cloud task runs that you start |
 
 Each field accepts up to 20,000 characters of Markdown. Agents read the project instructions first, then your personal instructions.
+
+### Set them with the API
+
+Send the full text in `agent_instructions`. Each call replaces the earlier text, and an empty string clears it. The personal API key needs the `task:write` scope.
+
+| Instructions | Endpoint |
+|---|---|
+| Project instructions (project admins) | `POST /api/projects/:project_id/tasks/config/agent_instructions/` |
+| My instructions | `POST /api/projects/:project_id/tasks/@me/config/agent_instructions/` |
+
+```bash
+curl -X POST "https://us.posthog.com/api/projects/:project_id/tasks/config/agent_instructions/" \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"agent_instructions": "# Slack replies\n- Start with a one-line answer, then up to three bullets."}'
+```
+
+To read the current text, send `GET` to `/api/projects/:project_id/tasks/config/` or `/api/projects/:project_id/tasks/@me/config/`.
 
 ## Which runs use them
 
