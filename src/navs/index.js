@@ -8401,6 +8401,10 @@ export const docsMenu = {
                             url: '/docs/workflows/transactional-emails/api',
                         },
                         {
+                            name: 'React Email',
+                            url: '/docs/workflows/transactional-emails/react-email',
+                        },
+                        {
                             name: 'Examples',
                             url: '/docs/workflows/transactional-emails/examples',
                         },
