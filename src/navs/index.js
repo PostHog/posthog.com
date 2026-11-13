@@ -6635,6 +6635,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'Support overview',
+                    url: '/docs/support/overview',
+                    icon: 'IconTrends',
+                    color: 'yellow',
+                },
+                {
                     name: 'Slack (SupportHog)',
                     url: '/docs/support/surfaces/slack',
                     icon: 'IconChat',

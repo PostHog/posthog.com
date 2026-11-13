@@ -1,0 +1,43 @@
+---
+title: Support overview
+sidebar: Docs
+showTitle: true
+---
+
+The **Overview** tab shows the state of your support queue. It shows how many tickets need attention now, and daily trends for ticket volume, response time, and SLAs.
+
+To open it, go to [**Support** > **Overview**](https://app.posthog.com/support) in PostHog.
+
+## Numbers
+
+Four cards at the top count your unresolved tickets now. An unresolved ticket has the status `new`, `open`, `pending`, or `on_hold`. The cards do not use the date range.
+
+| Card             | What it counts                                                   |
+| ---------------- | ---------------------------------------------------------------- |
+| **Open tickets** | All tickets that are not resolved                                |
+| **Unassigned**   | Unresolved tickets that have no user or role assigned            |
+| **SLA at risk**  | Unresolved tickets with an SLA deadline in the next hour         |
+| **SLA breached** | Unresolved tickets with an SLA deadline in the past              |
+
+Click a card to open the [ticket list](/docs/support/inbox) with the filters for those tickets. The SLA cards sort the list by SLA deadline.
+
+If no unresolved ticket has an SLA, the SLA cards show a message instead of a number. To set SLAs, use [workflows](/docs/support/workflows).
+
+## Trends
+
+Four charts show one value for each day in the date range. The default range is the last 30 days. Use the date picker to change it. The **All time** option is not available, because the charts need a start date.
+
+| Chart                      | What it shows                                                                                         |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Tickets created**        | The number of new tickets each day                                                                    |
+| **Tickets resolved**       | The number of tickets that changed to `resolved` each day                                             |
+| **Time to first response** | The median number of hours from ticket creation to the first reply from your team, by the day the ticket was created |
+| **SLA attainment**         | The percentage of team replies sent before the SLA deadline, on tickets that have an SLA              |
+
+**Time to first response** includes a reply that your team sent after the end of the range, so a slow first reply stays in the median. A ticket that has no reply yet is not in the chart.
+
+**SLA attainment** does not count replies on tickets that have no SLA.
+
+## Access to tickets
+
+The numbers and the charts count only the tickets that you can read. If your organization uses [access control](/docs/settings/access-control) to limit access to tickets, two teammates can see different values on the overview.
