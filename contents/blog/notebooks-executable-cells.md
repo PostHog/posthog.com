@@ -1,5 +1,5 @@
 ---
-title: How we rebuilt Notebooks around executable cells
+title: We rebuilt Notebooks around executable cells
 date: 2026-11-02
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/what_s_new_in_notebooks_5a1d4bdcc6.png
