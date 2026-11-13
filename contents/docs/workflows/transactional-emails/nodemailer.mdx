@@ -109,7 +109,7 @@ PostHog remembers a key for 24 hours after it queues the email. If a queue retri
 
 A failed send rejects `sendMail` with an error that tells you if a retry can succeed:
 
-- **`error.retryable`** - `true` when sending the same message again, with the same `idempotency_key`, can succeed. After a network error or a `503`, PostHog might have queued the email, so retry with the same key, not through another email provider.
+- **`error.retryable`** - `true` when sending the same message again, with the same `idempotency_key`, can succeed. A message without an `idempotency_key` is never retryable, because an earlier attempt might have queued the email. After a network error or a `503`, PostHog might have queued the email too, so retry with the same key, not through another email provider.
 - **`error.retry_after`** - The number of seconds that PostHog asked you to wait, when it sent one.
 - **`error.code`**, **`error.status`**, **`error.detail`**, and **`error.attr`** - The code, HTTP status, message, and field of the error. See the [errors table](/docs/workflows/transactional-emails#errors).
 
@@ -123,12 +123,12 @@ PostHog never drops part of a message. If PostHog can't carry part of a message,
 | --- | --- | --- |
 | `multiple_to` | No `to` address, or more than one. | Send one message for each recipient. Put copies in `cc` or `bcc`. |
 | `inline_without_cid` | An inline attachment without a `cid`. | Set `cid`, and use it in the HTML as `<img src="cid:logo">`. |
-| `unsupported_header` | A custom header other than `Message-ID`, `Date`, `MIME-Version`, `X-Mailer`, `Content-Type`, and `Content-Transfer-Encoding`. Also `inReplyTo`, `references`, `list`, `otp`, a `sender` that isn't the `from` address, or an attachment with its own `headers`. | Leave the header out. |
+| `unsupported_header` | A custom header other than `Message-ID`, `Date`, `MIME-Version`, `X-Mailer`, `Content-Type`, and `Content-Transfer-Encoding`. Also `inReplyTo`, `references`, `list`, `otp`, a `sender` that isn't the `from` address, or an `html`, `text`, or attachment part with its own `headers`. | Leave the header out. |
 | `envelope_mismatch` | An `envelope` whose addresses differ from `from`, `to`, `cc`, and `bcc`. | Leave out `envelope`, or make it match the message. |
 | `unsupported_priority` | A `priority` other than `normal`. | Leave out `priority`. |
 | `unsupported_part` | An `amp`, `watchHtml`, `icalEvent`, `alternatives`, or `raw` part, or a `raw` source for `html`, `text`, or an attachment. | Send the content as `html` and `text`. |
 | `invalid_template_key` | A `posthog.template_key` with characters other than letters, digits, hyphens, and underscores, or longer than 400 characters. | Fix the key. |
-| `unsupported_option` | Any other Nodemailer message option that PostHog can't apply, such as DKIM, REQUIRETLS, or a plugin that changes the built message. | Leave out the option, or remove the plugin from the transporter. |
+| `unsupported_option` | Any other Nodemailer message option that PostHog can't apply, such as DKIM or REQUIRETLS, or any `stream` plugin on the transporter. | Leave out the option, or remove the plugin from the transporter. |
 
 ```js
 try {
