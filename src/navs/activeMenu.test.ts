@@ -81,8 +81,12 @@ describe('the real docs nav', () => {
         const pages = {
             go: ['1.x.x', '2.x.x', 'migration'],
             rust: ['0.x.x', '1.x.x', 'migration'],
+            ios: ['3.x.x', '4.x.x', 'migration'],
+            android: ['3.x.x', '4.x.x', 'migration'],
+            flutter: ['5.x.x', '6.x.x', 'migration'],
             js: ['1.x.x'],
             node: ['5.x.x', '6.x.x', 'migration'],
+            'react-native': ['4.x.x'],
         }
         for (const [sdk, names] of Object.entries(pages)) {
             const expected = sectionFor(`/docs/libraries/${sdk}/reference`)

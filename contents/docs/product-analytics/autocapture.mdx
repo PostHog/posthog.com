@@ -44,7 +44,7 @@ Autocapture is available in the following SDKs, each with a different set of cap
 - [Android](/docs/libraries/android) – navigation, lifecycle, and deep-link autocapture enabled by default; interaction autocapture is not supported
 - [iOS](/docs/libraries/ios) – enabled by default (element interactions – `$autocapture` events disabled by default)
 - [React Native](/docs/libraries/react-native) – disabled by default
-- [Flutter](/docs/libraries/flutter) – lifecycle autocapture enabled by default; interaction autocapture is not supported on iOS or Android, and on [Flutter Web via posthog-js](/docs/libraries/flutter#interaction-autocapture) it is disabled by default
+- [Flutter](/docs/libraries/flutter) – lifecycle autocapture enabled by default; interaction autocapture is not supported on iOS or Android, and on [Flutter Web via posthog-js](/docs/product-analytics/autocapture#web-interaction-autocapture) it is disabled by default
 
 <CalloutBox icon="IconInfo" title="Looking for session and exception autocapture?" type="fyi">
 
@@ -228,7 +228,7 @@ A rage click is captured when a user clicks three times in rapid succession in r
 
 The event is captured as a `$rageclick` event. You can use it to identify opportunities to improve your UI, as it often points to where users are frustrated with your product.
 
-Rage click detection runs inside interaction autocapture, so `autocapture` must be enabled for `$rageclick` to fire. For canvas-rendered apps such as Flutter Web, see [rage clicks on Flutter Web](/docs/libraries/flutter#rage-click-autocapture).
+Rage click detection runs inside interaction autocapture, so `autocapture` must be enabled for `$rageclick` to fire. For canvas-rendered apps such as Flutter Web, see [rage clicks on Flutter Web](/docs/libraries/js/reference#rageclickconfig).
 
 <details>
 <summary>Reducing rage click false positives</summary>
@@ -248,7 +248,7 @@ We recommend confirming rage clicks against [session replays](/docs/session-repl
 
 The PostHog [iOS SDK](/docs/libraries/ios) can capture UIKit interaction events when `captureElementInteractions` is enabled. Autocaptured interaction events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...` or `value_changed ...`.
 
-See the [iOS autocapture documentation](/docs/libraries/ios/configuration#autocapture-configuration) for supported events, configuration options, and privacy controls.
+See the [iOS autocapture documentation](/docs/libraries/ios/reference#posthogconfig) for supported events, configuration options, and privacy controls.
 
 </Tab.Panel>
 <Tab.Panel>
@@ -357,7 +357,7 @@ PostHogSDK.shared.setup(config)
 
 ### Android navigation and lifecycle autocapture
 
-Android lifecycle, screen, and deep-link autocapture are documented in the [Android SDK capturing events guide](/docs/libraries/android#capturing-events). Configuration options are documented in the [Android SDK configuration reference](/docs/libraries/android#all-configuration-options).
+Android lifecycle, screen, and deep-link autocapture are documented in the [Android SDK capturing events guide](/docs/libraries/android/reference#capture). Configuration options are documented in the [Android SDK configuration reference](/docs/libraries/android/reference#posthogandroidconfig).
 
 Android does not currently support interaction autocapture for arbitrary taps or gestures.
 

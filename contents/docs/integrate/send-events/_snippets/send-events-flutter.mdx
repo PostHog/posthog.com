@@ -126,7 +126,7 @@ The Flutter SDK doesn't autocapture taps or other widget interactions on iOS or 
 
 ### Rage click autocapture
 
-> **Note:** On iOS and macCatalyst, the native SDK captures `$rageclick` by default through `PostHogConfig.rageClickConfig`. These events don't name the widget. Android doesn't support rage clicks. See the [iOS rage click configuration](/docs/libraries/ios/configuration#autocapture-configuration) for the thresholds.
+> **Note:** On iOS and macCatalyst, the native SDK captures `$rageclick` by default through `PostHogConfig.rageClickConfig`. These events don't name the widget. Android doesn't support rage clicks. See the [iOS rage click configuration](/docs/libraries/ios/reference#posthogconfig) for the thresholds.
 
 On Flutter Web, a `$rageclick` event names the widget a user tapped, but only after you enable autocapture in posthog-js and semantics in Flutter. Without both, you either get no rage clicks or rage clicks that only report `flutter-view`.
 
