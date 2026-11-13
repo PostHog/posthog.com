@@ -1,13 +1,12 @@
 import React from 'react'
-import { IconArrowRight } from '@posthog/icons'
+import CloudinaryImage from 'components/CloudinaryImage'
 import OSButton from 'components/OSButton'
 import usePostHog from 'hooks/usePostHog'
 import { TWIG_URL } from '../../../constants'
 import { handOffToTwig } from '../learnTracking'
-import TwigHomePreview from '../TwigExhibits/TwigHomePreview'
 
-const PANEL_ACTIONS = ['Take a tour', 'Explore on your own']
-const LABS = ['Product Analytics', 'AI Observability', 'Session Replay', 'Error Tracking']
+const TWIG_PLAYGROUND_SCREENSHOT =
+    'https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/twig_playground_3cbc146b4b.jpg'
 
 /** The Playground section of the Learn home: what Twig is, one link to it, and a preview of Twig with its PostHog panel. */
 export default function PlaygroundPreview(): JSX.Element {
@@ -37,10 +36,7 @@ export default function PlaygroundPreview(): JSX.Element {
                     Explore Twig
                 </OSButton>
             </div>
-            <figure
-                aria-label="A preview of Twig, with the PostHog Playground panel on the right"
-                className="m-0 mt-5 overflow-hidden rounded-md border border-primary bg-accent"
-            >
+            <figure className="m-0 mt-5 overflow-hidden rounded-md border border-primary bg-accent">
                 <div aria-hidden="true" className="flex items-center gap-2 border-b border-primary px-3 py-2">
                     <span className="size-2.5 rounded-full bg-brand-coral" />
                     <span className="size-2.5 rounded-full bg-brand-yellow" />
@@ -49,38 +45,17 @@ export default function PlaygroundPreview(): JSX.Element {
                         twig.com
                     </span>
                 </div>
-                <div className="@container flex">
-                    <div className="min-w-0 flex-1">
-                        <TwigHomePreview />
-                    </div>
-                    {/* The panel stays pinned to the right. Narrow windows show Twig only. */}
-                    <aside className="hidden w-60 shrink-0 border-l border-primary bg-white p-4 dark:bg-dark @2xl:block">
-                        <p className="m-0 text-xs font-semibold text-secondary">PostHog Playground</p>
-                        <p className="mb-0 mt-2 text-lg font-bold">Meet Twig</p>
-                        <p className="mb-0 mt-1 text-sm text-secondary">
-                            Twig is a demo vacation rental site. The PostHog Playground shows the PostHog events and
-                            code behind it.
-                        </p>
-                        {PANEL_ACTIONS.map((label) => (
-                            <span
-                                key={label}
-                                className="mt-3 flex items-center justify-between rounded border border-primary px-3 py-2 text-sm font-semibold"
-                            >
-                                {label}
-                                <IconArrowRight className="size-4" />
-                            </span>
-                        ))}
-                        <div className="mt-3 rounded border border-primary px-3 py-2">
-                            <p className="m-0 text-sm font-semibold">Learn with labs</p>
-                            <ul className="m-0 mt-1 list-none p-0 text-sm">
-                                {LABS.map((lab) => (
-                                    <li key={lab} className="border-t border-primary py-1.5 first:border-t-0">
-                                        {lab} labs
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </aside>
+                {/* A screenshot of twig.com with the PostHog Playground open, so the sidebar and tool rail match Twig exactly.
+                    Retake it when Twig's Playground changes. It stays light in dark mode, like Twig. */}
+                <div className="leading-[0]">
+                    <CloudinaryImage
+                        src={TWIG_PLAYGROUND_SCREENSHOT}
+                        alt="Twig's home page, with the PostHog Playground open on the right: Meet Twig, Take a tour, Explore on your own, and labs for each PostHog product"
+                        width={2200}
+                        height={1375}
+                        loading="lazy"
+                        imgClassName="block h-auto w-full"
+                    />
                 </div>
             </figure>
         </section>

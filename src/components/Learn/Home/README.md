@@ -18,7 +18,7 @@ Each page renders `<LearnHome section="..." />`. Every section shows the same si
 | --- | --- |
 | `index.tsx` | `LearnHome`: SEO, the `ReaderView` shell, the sidebar items, the hero, and the pocket guide collection |
 | `PromptLibrary.tsx` | The prompt library. It reads `LEARN_PROMPT_SETS` and `learnPrompts()`, so it copies the same text as the product prompt pages. Each prompt is a `Learn/PromptSnippet`. Each product heading uses the product's icon and color from `useProduct()`, the same as the Products menu |
-| `PlaygroundPreview.tsx` | The Playground section. The Twig part of the preview is `TwigExhibits/TwigHomePreview.tsx` |
+| `PlaygroundPreview.tsx` | The Playground section. The preview is a screenshot of twig.com with the PostHog Playground open (on Cloudinary), in a browser frame. Retake it when Twig's Playground changes |
 
 ## Sidebar
 
