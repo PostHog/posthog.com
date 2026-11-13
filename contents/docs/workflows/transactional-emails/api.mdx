@@ -412,6 +412,16 @@ Content from your code also takes these fields. A template send takes none of th
 
 - **Size** - An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. Base64 encoding makes each file about a third larger, and the email's HTML and text count too, also at their Base64 size. One file can use all of the limit.
 - **Inline images** - Set `content_id` on a file, and use it in the HTML as `<img src="cid:logo">`.
+- **Content type parameters** - `content_type` can have parameters after the type, such as `method=REQUEST` for a calendar invite. Mail apps can then show the file as an invitation, not as a plain file. PostHog refuses a `name` or `filename` parameter, because the file name comes from `filename`:
+
+  ```json
+  {
+    "attachments": [
+      {"sha256": "1c54c1de7da52dae1aa7c8caea31c87272055e3f5308b8a81b456bce26c721ba", "filename": "invite.ics", "content_type": "text/calendar; charset=utf-8; method=REQUEST"}
+    ]
+  }
+  ```
+
 - **Blocked files** - PostHog refuses file types that mailbox providers block, such as `.exe`, and a filename with a path.
 - **Viruses** - PostHog's email provider scans each file. If it finds a virus, the email gets the status `failed` with the reason `provider_rejected`.
 - **SDKs** - The SDKs hash, upload, and attach the files for you. Give each file's bytes to the SDK.
@@ -535,7 +545,7 @@ These checks apply to the upload route and to sends with `attachments`, in addit
 | `400` | `attachment_not_uploaded` | Send | Your project has no uploaded file with this SHA-256. The upload didn't finish, the file expired, or a different project uploaded it. `attr` names the file, such as `attachments__0__sha256`. | Ask where to upload again, upload the file, and send the email again. |
 | `400` | `blocked_file_type` | Send | Mailbox providers block this file type, such as `.exe`. | Send a different file type, or link to the file from the email body. |
 | `400` | `unsafe_filename` | Send | `filename` has a path or a line break. | Send only the file name, such as `invoice.pdf`. |
-| `400` | `not_mime_type` | Send | `content_type` isn't a MIME type. | Send a type such as `application/pdf`, or leave out `content_type`. |
+| `400` | `not_mime_type` | Send | `content_type` isn't a MIME type, or it has a `name` or `filename` parameter. | Send a type such as `application/pdf` or `text/calendar; method=REQUEST`, or leave out `content_type`. Set the file name in `filename`. |
 | `400` | `unsafe_content_id` | Send | `content_id` has `<`, `>`, or a line break. | Send only the ID, such as `logo`. |
 | `400` | `content_too_large` | Both | The request body is over 20 MB. | Make the request smaller. Files go to the upload URL, never in the request body. |
 | `429` | `upload_quota_exceeded` | Upload | Your project asked to upload all the file bytes that it can upload today. A file counts when PostHog gives you its upload URL, even if you don't upload it, and again each time that you ask for a new URL. The day starts at midnight UTC. | Send files that PostHog already has, because they don't count. Link to new files from the email body. Or ask again after midnight UTC. |
