@@ -59,7 +59,7 @@ posthog = Posthog(
 
 Use your **project token** (the same one you use for capturing events), not a [personal API key](/docs/api#authentication). Tracing works with the synchronous `Posthog` client and the module-level API, not `AsyncPosthog`.
 
-See the [Python SDK docs](/docs/libraries/python#configuration) for batching, queue, and span-limit options, and [`before_span_send`](/docs/libraries/python#scrubbing-and-dropping-spans) for scrubbing attributes or dropping spans before they're exported.
+See the [Python SDK docs](/docs/libraries/python/reference#client) for batching, queue, and span-limit options, and [`before_span_send`](/docs/libraries/python/reference#client) for scrubbing attributes or dropping spans before they're exported.
 
 </Step>
 
@@ -81,13 +81,13 @@ If an exception escapes the block, the span records it, its status is set to `er
 
 Span names should be low-cardinality operation names – `GET /users/:id`, not `GET /users/123`. Variable values belong in attributes.
 
-For work that can't wrap a block, call `start_span` without `with` and call `end()` yourself. See the [Python SDK docs](/docs/libraries/python#distributed-tracing) for the full span API and for continuing a trace across services with W3C `traceparent` headers.
+For work that can't wrap a block, call `start_span` without `with` and call `end()` yourself. See the [Python SDK docs](/docs/libraries/python/reference#traces) for the full span API and for continuing a trace across services with W3C `traceparent` headers.
 
 </Step>
 
 <Step title="Link spans to people and sessions" badge="recommended" titleSize="h3">
 
-Spans created inside a PostHog [context](/docs/libraries/python#contexts) that has a distinct ID or session ID carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a Session Replay recording.
+Spans created inside a PostHog [context](/docs/libraries/python/reference#posthognew_context) that has a distinct ID or session ID carry `posthogDistinctId` and `sessionId` attributes, which is what makes a trace reachable from a person or a Session Replay recording.
 
 ```python
 from posthog import new_context, identify_context, set_context_session
@@ -100,7 +100,7 @@ with new_context():
         process_order()
 ```
 
-If you use Django, the [contexts middleware](/docs/libraries/django#django-contexts-middleware) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
+If you use Django, the [contexts middleware](/docs/libraries/django#django-contexts-middleware) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) sends from the browser.
 
 </Step>
 
@@ -209,7 +209,7 @@ provider.add_span_processor(PostHogContextSpanProcessor())
 
 Keep your existing provider, exporter, and sampler. This integration supports OpenTelemetry SDK 1.20.0 or later. The processor adds missing `posthogDistinctId` and `sessionId` attributes from the active PostHog context when each span starts. Explicit attributes take precedence. If the span has too little attribute capacity, enrichment is skipped to preserve its existing attributes.
 
-The PostHog Django, Flask, and ASGI integrations also enrich an active request span after they read the request context. Put the OpenTelemetry request middleware outside the PostHog middleware. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) in the browser SDK. The [PostHog framework integrations](/docs/libraries/python#django) capture these headers by default with Python SDK 7.71.0 or later. Set `capture_tracing_headers=False`, or `POSTHOG_MW_CAPTURE_TRACING_HEADERS = False` in Django, to disable extraction. These headers are untrusted analytics context.
+The PostHog Django, Flask, and ASGI integrations also enrich an active request span after they read the request context. Put the OpenTelemetry request middleware outside the PostHog middleware. Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) in the browser SDK. The [PostHog framework integrations](/docs/libraries/python/reference#posthogintegrationsdjangoposthogcontextmiddleware) capture these headers by default with Python SDK 7.71.0 or later. Set `capture_tracing_headers=False`, or `POSTHOG_MW_CAPTURE_TRACING_HEADERS = False` in Django, to disable extraction. These headers are untrusted analytics context.
 
 For Celery, initialize the PostHog Celery integration before OpenTelemetry Celery instrumentation. This order also preserves task context for eager or nested execution.
 

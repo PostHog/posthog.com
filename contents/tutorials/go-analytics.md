@@ -210,7 +210,7 @@ With this set up, we're ready to capture events.
 
 ## 3. Implement the event capture code
 
-To show how to capture events with PostHog, we capture an event when the button on the `dashboard` page is clicked. To do this, we call [`posthog.Capture`](/docs/libraries/go#capturing-events):
+To show how to capture events with PostHog, we capture an event when the button on the `dashboard` page is clicked. To do this, we call [`posthog.Capture`](/docs/libraries/go/reference#capture):
 
 ```go file=main.go
 func apiDashboardHandler(w http.ResponseWriter, r *http.Request) {

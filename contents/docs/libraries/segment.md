@@ -25,7 +25,7 @@ Make sure you have a [Segment account](https://segment.com/docs/#getting-started
 
 The simple Segment destination only supports tracking of pageviews, custom events, and identifying users. To use the full feature set of PostHog like autocapture, session recording, feature flags, heatmaps, surveys, or the toolbar we need to load our own Javascript snippet directly.
 
-1. In addition to Segment, install your [PostHog snippet](/docs/libraries/js#installation).
+1. In addition to Segment, install your [PostHog snippet](/docs/libraries/js/reference#getting-started).
 
 2. Modify the initialization to pass the Segment `analytics` object through for PostHog to sync with:
 
@@ -130,7 +130,7 @@ This example removes PostHog's `$sdk_debug_*` properties from Segment enrichment
 
 Return the properties to add, or `null` to skip all PostHog enrichment for that event. If a filter returns `null` or throws, the remaining filters don't run and the original Segment event continues unchanged. This doesn't drop the event.
 
-Filtering only affects Segment enrichment, not events captured directly by the PostHog SDK. The top-level [`before_send`](/docs/libraries/js/usage#amending-or-sampling-events) hook doesn't run for Segment enrichment.
+Filtering only affects Segment enrichment, not events captured directly by the PostHog SDK. The top-level [`before_send`](/docs/libraries/js/reference#beforesendfn) hook doesn't run for Segment enrichment.
 
 ## Sending events to PostHog
 

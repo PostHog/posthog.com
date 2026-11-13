@@ -35,7 +35,7 @@ Open a flag and go to the **Usage** tab to see how often your code called it and
 
 One date filter drives both charts, starting at the last 30 days. Your selection is stored in the URL, so you can send someone a link to the exact window you were looking at. Underneath the charts, an event table lists individual `$feature_flag_called` calls with the value each one returned, on its own date range.
 
-Send [enriched flag analytics](/docs/libraries/js/usage#enriched-flag-analytics) from your app to get two more charts here, covering how many people viewed the feature and how many interacted with it.
+Send [enriched flag analytics](/docs/libraries/react#method-2-using-the-posthogfeature-component) from your app to get two more charts here, covering how many people viewed the feature and how many interacted with it.
 
 These charts aren't saved insights, so they don't add anything to your insight or dashboard lists. If you want a usage dashboard you can edit, share, and subscribe to, create one by calling `POST /api/projects/:project_id/feature_flags/:id/dashboard/`. The flag's `usage_dashboard` field then points to it, and the **Usage** tab shows that dashboard instead of the charts above. Flags that already have a usage dashboard keep showing it, which is why older flags can look different from new ones.
 

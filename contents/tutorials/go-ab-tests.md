@@ -150,7 +150,7 @@ Once created, set the primary metric to a trend of `pageview` and then click **L
 
 To implement the A/B test, we: 
 
-1. Fetch the `my-cool-experiment` flag using [`client.GetFeatureFlag()`](/docs/libraries/go#feature-flags). 
+1. Fetch the `my-cool-experiment` flag using [`client.GetFeatureFlag()`](/docs/libraries/go/reference#get-feature-flag). 
 2. Update the paragraph text based on whether the user is in the `control` or `test` variant of the experiment.
 
 ```js file=server.js
@@ -190,7 +190,7 @@ When you restart your app and refresh the page, you should see the text updated 
 
 To ensure our goal metric is correctly calculated for each experiment variant, we need to include our feature flag information when capturing our `$pageview` event.
 
-To do this, we add the [`$feature/my-cool-experiment`](/docs/libraries/node#step-2-include-feature-flag-information-when-capturing-events) key to our event properties:
+To do this, we add the [`$feature/my-cool-experiment`](/docs/feature-flags/adding-feature-flag-code?tab=Node.js#method-2-include-the-featurefeature_flag_name-property-manually) key to our event properties:
 
 ```go file=main.go
   http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
