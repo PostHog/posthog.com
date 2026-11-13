@@ -146,12 +146,6 @@ export interface HogQLQueryResponse {
   limit?: number;
   /** Rows skipped before the default row limit applied. */
   offset?: number;
-  /** True when the default row limit applied and more rows exist. Not set when the query has its own LIMIT. */
-  hasMore?: boolean;
-  /** The default row limit that applied (100 for API queries). Not set when the query has its own LIMIT. */
-  limit?: number;
-  /** Rows skipped before the default row limit applied. */
-  offset?: number;
 }
 ```
 
