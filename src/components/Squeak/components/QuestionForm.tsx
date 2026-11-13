@@ -509,6 +509,12 @@ export const QuestionForm = ({
         setSubmissionState(forum && values.draft ? 'saving-draft' : 'posting')
         const transformedValues = await transformValues(values, user)
         setError('')
+        const showError = (err: Error) => {
+            setSubmissionState('idle')
+            setFormValues(transformedValues)
+            setError(err.message)
+            setView('question-form')
+        }
 
         if (formType === 'question') {
             const create = forum ? saveForumPost : createQuestion
@@ -519,11 +525,8 @@ export const QuestionForm = ({
                     setFormValues(null)
                     onSubmit?.(transformedValues, formType, data)
                 })
-                .catch((err) => {
-                    // Keep the form and what was typed, and say what went wrong.
-                    setSubmissionState('idle')
-                    setError((err as Error).message)
-                })
+                // Keep the form and what was typed, and say what went wrong.
+                .catch(showError)
         } else if (formType === 'reply' && questionId && reply) {
             setSubmissionState('idle')
             setView(null)
@@ -532,11 +535,7 @@ export const QuestionForm = ({
                 .then((data) => {
                     onSubmit?.(transformedValues, formType, data)
                 })
-                .catch((err) => {
-                    setFormValues(transformedValues)
-                    setError((err as Error).message)
-                    setView('question-form')
-                })
+                .catch(showError)
         }
     }
 
