@@ -12,7 +12,6 @@ import {
     IconDashboard,
 } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
-import Glow from 'components/Glow'
 import Link from 'components/Link'
 import type { CarouselSlide } from 'components/Products/ReaderViewProduct/types'
 import { features as f } from './features'
@@ -21,7 +20,7 @@ import PlatformInstall from 'components/PlatformInstall'
 
 /**
  * Applications = workflows / ways you show up to the product (like session replay's
- * Editor / Search / Browse). Capability detail belongs in `topFeatures`.
+ * Editor / Search / Browse). Capability detail belongs in `keyFeatures`.
  */
 export const applications: CarouselSlide[] = [
     {
@@ -35,19 +34,17 @@ export const applications: CarouselSlide[] = [
         heading: 'Check traffic without leaving your editor',
         description: (
             <>
-                <aside className="my-4 @lg/reader-content:mt-2 @lg/reader-content:float-right max-w-[100%_+_1rem] @lg/reader-content:max-w-[300px] @xl/reader-content:max-w-[360px] @3xl/reader-content:max-w-[440px] @lg/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
-                    <Glow color="black" intensity="gentle" rounded="lg">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
-                            className="dark:hidden w-full"
-                            imgClassName="w-full"
-                        />
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
-                            className="hidden dark:inline-block w-full"
-                            imgClassName="w-full"
-                        />
-                    </Glow>
+                <aside className="my-4 @xl/reader-content:mt-2 @xl/reader-content:float-right max-w-[100%_+_1rem] @xl/reader-content:max-w-[300px] @3xl/reader-content:max-w-[360px] @4xl/reader-content:max-w-[440px] @xl/reader-content:ml-8 -mr-4 @2xl/reader-content:-mr-8 @4xl/reader-content:-mr-10">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_light_cf355dbe0d.png"
+                        className="dark:hidden w-full"
+                        imgClassName="w-full"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/mcp_example_dark_c535f2d8b4.png"
+                        className="hidden dark:inline-block w-full"
+                        imgClassName="w-full"
+                    />
                 </aside>
                 <p>
                     Ask PostHog AI about traffic from Cursor, Claude Code, VS Code, or any MCP-compatible agent – then
@@ -140,11 +137,11 @@ export const applications: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'referrers', glow: true },
+        image: 'referrers',
     },
 ]
 
-export const topFeatures: CarouselSlide[] = [
+export const keyFeatures: CarouselSlide[] = [
     {
         slug: 'core-metrics',
         label: 'Core metrics',
@@ -170,7 +167,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.core_metrics.images[0].src,
             alt: f.core_metrics.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -195,7 +191,7 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'referrers', glow: true },
+        image: 'referrers',
     },
     {
         slug: 'web-vitals',
@@ -231,7 +227,6 @@ export const topFeatures: CarouselSlide[] = [
         image: {
             src: f.web_vitals.images[0].src as `https://res.cloudinary.com/${string}`,
             alt: f.web_vitals.images[0].alt,
-            glow: true,
         },
     },
     {
@@ -325,7 +320,7 @@ export const topFeatures: CarouselSlide[] = [
                 </div>
             </>
         ),
-        image: { ref: 'home', glow: true },
+        image: 'home',
     },
     // MCP lives under Applications (Editor workflow) – avoid a second nearly-identical slide here.
 ]

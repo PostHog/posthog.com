@@ -8,6 +8,7 @@ hideAnchor: true
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/how-we-raised-3-million-open-source-project.png
 featuredImageType: full
+ogImage: generated
 author:
   - james-hawkins
 category: Startups

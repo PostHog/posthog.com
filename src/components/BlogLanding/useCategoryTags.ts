@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import uniqBy from 'lodash/uniqBy'
 import qs from 'qs'
 
 export interface CategoryTag {
@@ -33,7 +34,7 @@ export function useCategoryTags(folder: string): { tags: CategoryTag[]; loading:
             .then((response) => response.json())
             .then((data) => {
                 if (cancelled) return
-                setTags(data.data || [])
+                setTags(uniqBy(data.data || [], 'attributes.label'))
                 setLoading(false)
             })
             .catch(() => !cancelled && setLoading(false))

@@ -85,12 +85,27 @@ const faqs = [
         ),
     },
     {
+        q: 'What does the price of an event include?',
+        a: (
+            <p>
+                Collecting the event, processing it, storing it, and every query you run on it in PostHog. It also pays
+                for the engineers who keep that pipeline running, so your data arrives complete and correct.{' '}
+                <Link to="/docs/billing/what-you-pay-for-per-event">
+                    Our docs
+                </Link>{' '}
+                explains each step.
+            </p>
+        ),
+    },
+    {
         q: 'How long does PostHog retain data (events, recordings, logs)?',
         a: (
             <>
                 <p>
-                    Events and metadata are guaranteed to be retained for 7 years on any paid plan and 1 year on a free
-                    plan. After 1 year, data may be moved into cold storage so queries may run more slowly.
+                    Events are retained for 1 year on free plans and 2 years on pay-as-you-go plans. Platform packages
+                    let you set a custom retention policy to keep events for longer: up to 3 years on Boost, 5 years on
+                    Scale, and 7 years on Enterprise. For more information on data retention, see the{' '}
+                    <Link to="/docs/data/events-retention">events data retention docs</Link>.
                 </p>
                 <p>
                     Recordings on the free plan are retained for 1 month. On the pay-as-you-go plan, recordings are
@@ -285,7 +300,7 @@ const faqs = [
                 </p>
                 <p>
                     You can read how we stack up against competitors like{' '}
-                    <Link to="/blog/posthog-vs-amplitude">Amplitude</Link>,{' '}
+                    <Link to="/compare/posthog-vs-amplitude">Amplitude</Link>,{' '}
                     <Link to="/blog/posthog-vs-mixpanel">Mixpanel</Link>,{' '}
                     <Link to="/compare/posthog-vs-heap">Heap</Link>,{' '}
                     <Link to="/compare/posthog-vs-fullstory">FullStory</Link>,{' '}

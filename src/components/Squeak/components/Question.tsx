@@ -259,15 +259,107 @@ export const AskMax = ({
     ) : null
 }
 
+export function ModeratorTools({ questionData }: { questionData: StrapiRecord<QuestionData> }) {
+    const { user, isModerator } = useUser()
+    const { addToast } = useToast()
+    const posthog = usePostHog()
+    const [escalateState, setEscalateState] = useState<'idle' | 'sent'>('idle')
+
+    const handleEscalateToSupport = () => {
+        if (escalateState === 'sent' || !posthog) return
+        const authorProfile = questionData.attributes.profile?.data
+        const authorName =
+            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
+            'Anonymous'
+        posthog.capture('community question escalated', {
+            questionId: questionData.id,
+            subject: questionData.attributes.subject,
+            body: questionData.attributes.body,
+            url: `https://posthog.com/forum/p/${questionData.attributes.permalink}`,
+            permalink: questionData.attributes.permalink,
+            authorName,
+            topics: questionData.attributes.forumTopic?.data
+                ? [questionData.attributes.forumTopic.data.attributes.label]
+                : questionData.attributes.topics?.data?.map((topic) => topic.attributes.label),
+            escalatedBy: [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ') || null,
+            escalatedByEmail: user?.email,
+        })
+        setEscalateState('sent')
+        addToast({
+            title: 'Escalated',
+            description: 'Moderators have been notified.',
+            duration: 3000,
+        })
+    }
+
+    return (
+        <div className="bg-accent rounded-md p-6 text-primary border border-border">
+            <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">Moderator tools</h4>
+            {isModerator && (
+                <div className="grid grid-cols-2">
+                    <div>
+                        <Link
+                            to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
+                            className="text-yellow font-bold"
+                        >
+                            {questionData?.attributes?.profile?.data?.attributes?.firstName
+                                ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
+                                : 'Anonymous'}
+                        </Link>
+                        <input
+                            className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
+                            type="text"
+                            value={questionData?.attributes?.profile?.data?.attributes?.user?.data?.attributes?.email}
+                            readOnly
+                            onFocus={(e) => e.target.select()}
+                        />
+                    </div>
+                    <div className="w-full relative">
+                        <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
+                            <Link className="font-bold" to={questionData.attributes.permalink} externalNoIcon>
+                                View in PostHog
+                            </Link>
+                            <Link
+                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
+                                externalNoIcon
+                                className="font-bold"
+                            >
+                                View in Strapi
+                            </Link>
+                            <OSButton
+                                variant="secondary"
+                                size="sm"
+                                onClick={handleEscalateToSupport}
+                                disabled={escalateState === 'sent'}
+                            >
+                                {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
+                            </OSButton>
+                        </p>
+                    </div>
+                </div>
+            )}
+            {!isModerator && (
+                <div className="mb-4">
+                    <OSButton
+                        variant="secondary"
+                        size="sm"
+                        onClick={handleEscalateToSupport}
+                        disabled={escalateState === 'sent'}
+                    >
+                        {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
+                    </OSButton>
+                </div>
+            )}
+        </div>
+    )
+}
+
 export function Question(props: QuestionProps) {
     const { id, question, showSlug, buttonText, showActions = true, isInForum = false, refreshList } = props
     const [expanded, setExpanded] = useState(props.expanded || false)
     const [isEditingQuestion, setIsEditingQuestion] = useState(false)
     const { user, notifications, setNotifications, isModerator, isForumModerator } = useUser()
     const { appWindow } = useWindow()
-    const { addToast } = useToast()
-    const posthog = usePostHog()
-    const [escalateState, setEscalateState] = useState<'idle' | 'sent'>('idle')
     const [maxQuestions, setMaxQuestions] = useState(
         appWindow?.location?.state?.askMax ? [{ manual: false, withContext: false }] : []
     )
@@ -323,31 +415,6 @@ export function Question(props: QuestionProps) {
         if (data.askMax) {
             setMaxQuestions([...maxQuestions, { manual: false, withContext: true }])
         }
-    }
-
-    const handleEscalateToSupport = () => {
-        if (escalateState === 'sent' || !posthog) return
-        const authorProfile = questionData.attributes.profile?.data
-        const authorName =
-            [authorProfile?.attributes?.firstName, authorProfile?.attributes?.lastName].filter(Boolean).join(' ') ||
-            'Anonymous'
-        posthog.capture('community question escalated', {
-            questionId: questionData.id,
-            subject: questionData.attributes.subject,
-            body: questionData.attributes.body,
-            url: `https://posthog.com/forum/p/${questionData.attributes.permalink}`,
-            permalink: questionData.attributes.permalink,
-            authorName,
-            topics: questionData.attributes.topics?.data?.map((topic) => topic.attributes.label),
-            escalatedBy: [user?.profile?.firstName, user?.profile?.lastName].filter(Boolean).join(' ') || null,
-            escalatedByEmail: user?.email,
-        })
-        setEscalateState('sent')
-        addToast({
-            title: 'Escalated',
-            description: 'Moderators have been notified.',
-            duration: 3000,
-        })
     }
 
     const archived = questionData?.attributes.archived
@@ -537,73 +604,7 @@ export function Question(props: QuestionProps) {
                     </div>
                     {isForumModerator && isInForum && (
                         <div className="p-4 pb-0">
-                            <div className="bg-accent rounded-md p-6 text-primary border border-border">
-                                <h4 className="text-xs opacity-70 mb-2 -mt-2 p-0 font-semibold uppercase">
-                                    Moderator tools
-                                </h4>
-                                {isModerator && (
-                                    <div className="grid grid-cols-2">
-                                        <div>
-                                            <Link
-                                                to={`/community/profiles/${questionData?.attributes?.profile?.data?.id}`}
-                                                className="text-yellow font-bold"
-                                            >
-                                                {questionData?.attributes?.profile?.data?.attributes?.firstName
-                                                    ? `${questionData?.attributes?.profile?.data?.attributes?.firstName} ${questionData?.attributes?.profile?.data?.attributes?.lastName}`
-                                                    : 'Anonymous'}
-                                            </Link>
-                                            <input
-                                                className="w-full m-0 font-normal text-sm text-primary border-none p-0 bg-transparent focus:ring-0"
-                                                type="text"
-                                                value={
-                                                    questionData?.attributes?.profile?.data?.attributes?.user?.data
-                                                        ?.attributes?.email
-                                                }
-                                                readOnly
-                                                onFocus={(e) => e.target.select()}
-                                            />
-                                        </div>
-                                        <div className="w-full relative">
-                                            <p className="!text-sm pt-0.5 pb-0 mb-0 flex flex-col items-end space-y-1.5">
-                                                <Link
-                                                    className="font-bold"
-                                                    to={questionData.attributes.permalink}
-                                                    externalNoIcon
-                                                >
-                                                    View in PostHog
-                                                </Link>
-                                                <Link
-                                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/api::question.question/${questionData.id}`}
-                                                    externalNoIcon
-                                                    className="font-bold"
-                                                >
-                                                    View in Strapi
-                                                </Link>
-                                                <OSButton
-                                                    variant="secondary"
-                                                    size="sm"
-                                                    onClick={handleEscalateToSupport}
-                                                    disabled={escalateState === 'sent'}
-                                                >
-                                                    {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
-                                                </OSButton>
-                                            </p>
-                                        </div>
-                                    </div>
-                                )}
-                                {!isModerator && (
-                                    <div className="mb-4">
-                                        <OSButton
-                                            variant="secondary"
-                                            size="sm"
-                                            onClick={handleEscalateToSupport}
-                                            disabled={escalateState === 'sent'}
-                                        >
-                                            {escalateState === 'sent' ? 'Escalated ✓' : 'Escalate'}
-                                        </OSButton>
-                                    </div>
-                                )}
-                            </div>
+                            <ModeratorTools questionData={questionData} />
                         </div>
                     )}
                 </div>

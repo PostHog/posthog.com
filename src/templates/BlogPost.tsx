@@ -235,7 +235,7 @@ export const getSortOption = (root?: string) =>
 
 const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {
     return activeMenu?.children?.length > 0 ? (
-        <div className="mb-1 flex items-center justify-between sticky top-0 z-10 pl-1.5">
+        <div className="mb-1 flex items-center justify-between pl-1.5">
             <h5 className="m-0 text-sm font-semibold text-muted">{activeMenu?.name}</h5>
             <div className="flex items-center">
                 <MenuBar
@@ -292,6 +292,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         featuredImageCaption,
         featuredVideo,
         featuredImageType,
+        ogImage,
         contributors,
         tags,
         seo,
@@ -384,13 +385,18 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
         setParams(getParams(root, tag, sort.sort))
     }, [root, tag, sort])
 
+    const ogImageUrl =
+        featuredImage?.publicURL && ogImage !== 'generated'
+            ? featuredImage.publicURL
+            : `${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`
+
     return (
         <>
             <SEO
                 title={seo?.metaTitle || title + ' - PostHog'}
                 description={seo?.metaDescription || excerpt}
                 article
-                image={`${process.env.GATSBY_CLOUDFRONT_OG_URL}/${fields.slug.replace(/\//g, '')}.jpeg`}
+                image={ogImageUrl}
                 imageType="absolute"
                 // Standard.site document rkey (only for /blog posts; this template is shared with other sections)
                 documentRkey={
@@ -449,6 +455,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 title={title}
                 tableOfContents={tableOfContents}
                 mdxComponents={components}
+                renderMdx={(content) => <MDXRenderer>{content}</MDXRenderer>}
                 homeURL={`/${root}`}
             />
         </>
@@ -492,6 +499,7 @@ export const query = graphql`
                 hideAnchor
                 description
                 featuredImageType
+                ogImage
                 featuredVideo
                 featuredImage {
                     publicURL
