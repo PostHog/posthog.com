@@ -18,14 +18,14 @@ The [PostHog Laravel SDK](https://github.com/PostHog/posthog-laravel) supports L
 Install [`posthog/posthog-laravel`](https://packagist.org/packages/posthog/posthog-laravel) and publish its configuration:
 
 ```bash
-composer require posthog/posthog-laravel
+composer require "posthog/posthog-laravel:^0.4"
 php artisan posthog:install
 ```
 
 Add your project token and ingestion host to your server's `.env`:
 
 ```bash file=.env
-POSTHOG_API_KEY=<ph_project_token>
+POSTHOG_PROJECT_TOKEN=<ph_project_token>
 POSTHOG_HOST=<ph_client_api_host>
 ```
 
@@ -226,10 +226,16 @@ The wizard installs the PHP SDK, not the experimental Laravel SDK.
 
 ### Initialize the PHP SDK
 
-Install the PHP SDK as described in the [PHP installation guide](/docs/libraries/php#installation), then add your project token and host to `.env`:
+Install the PHP SDK as described in the [PHP installation guide](/docs/libraries/php#installation):
+
+```bash
+composer require "posthog/posthog-php:^4.0"
+```
+
+Then add your project token and host to `.env`:
 
 ```bash file=.env
-POSTHOG_API_KEY=<ph_project_token>
+POSTHOG_PROJECT_TOKEN=<ph_project_token>
 POSTHOG_HOST=<ph_client_api_host>
 ```
 
@@ -237,7 +243,7 @@ Add PostHog to Laravel's services config:
 
 ```php file=config/services.php
 'posthog' => [
-    'api_key' => env('POSTHOG_API_KEY'),
+    'project_token' => env('POSTHOG_PROJECT_TOKEN'),
     'host' => env('POSTHOG_HOST', 'https://us.i.posthog.com'),
 ],
 ```
@@ -256,12 +262,12 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        if (! config('services.posthog.api_key')) {
+        if (! config('services.posthog.project_token')) {
             return;
         }
 
         PostHog::init(
-            config('services.posthog.api_key'),
+            config('services.posthog.project_token'),
             [
                 'host' => config('services.posthog.host'),
             ]
@@ -292,7 +298,7 @@ final class PostHogRequestContext
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (! config('services.posthog.api_key')) {
+        if (! config('services.posthog.project_token')) {
             return $next($request);
         }
 
@@ -333,7 +339,7 @@ use Throwable;
 
 ->withExceptions(function (Exceptions $exceptions): void {
     $exceptions->report(function (Throwable $e): void {
-        if (! config('services.posthog.api_key')) {
+        if (! config('services.posthog.project_token')) {
             return;
         }
 
@@ -359,7 +365,7 @@ If you prefer immediate delivery in queue workers, configure the PHP SDK with `b
 
 ```php
 PostHog::init(
-    '<ph_project_token>',
+    config('services.posthog.project_token'),
     [
         'host' => config('services.posthog.host'),
         'batch_size' => 1,

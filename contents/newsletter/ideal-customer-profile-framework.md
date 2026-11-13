@@ -179,8 +179,6 @@ Daniel Hsu, founder of Retool, believes outbound is very useful for early-stage 
 
 - [How to identify your ideal customer profile](https://www.lennysnewsletter.com/p/how-to-identify-your-ideal-customer) **– Lenny Rachitsky:** Lenny’s guide includes dozens of great anecdotes from startup founders and CEOs, and useful examples of initial ICPs from the likes of Linear, Retool, and Figma.
 
-- **[Should you have an AI strategy? Here's ours](/posts/should-you-have-an-ai-strategy-here-s-ours) – James Hawkins:** How should you think about AI if you’re not already an AI startup? Our take.
-
 - **[How to create actionable developer personas](https://www.developermarkepear.com/blog/developer-personas) – Jakub Czakon:** Want to go deeper on personas? Jakub’s guide is a comprehensive look at creating developer personas and Jobs To Be Done (JTBD).
 
 - **[Metrics that cannot even be measured in retrospect](https://longform.asmartbear.com/unmeasurable-metrics) – Jason Cohen:** Some product choices, such as small design changes, are impossible to measure. Jason shares some great examples of things you shouldn’t try to measure.

@@ -1,0 +1,474 @@
+---
+title: 'In-depth: PostHog vs Dataflare'
+date: 2026-11-12
+author:
+    - natalia-amorim
+rootPage: /compare
+sidebar: Compare
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/comparisons_blog_post_template_2bf378d807.png
+featuredImageType: full
+ogImage: generated
+category: General
+tags:
+    - Comparisons
+seo:
+    metaTitle: 'PostHog vs Dataflare: open source analytics compared'
+    metaDescription: 'PostHog vs Dataflare: which open source analytics tool fits your team? Compare features, pricing, self-hosting on Cloudflare, and MCP access for agents.'
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog and [Dataflare](https://dataflare.dev) are both open source tools that put [web analytics](/web-analytics), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), and [A/B tests](/experiments) behind one SDK, and both are built to be driven by AI agents; the difference is where each one runs and how far it goes.
+
+1. **Dataflare** is an MIT-licensed analytics tool that deploys into your own Cloudflare account with one command: a Worker, a D1 database, and an R2 bucket. There's no hosted version, no vendor account, and no subscription, so you only pay Cloudflare for what it uses. It covers websites and web apps, and it's built for developers who already ship on Cloudflare. It's also brand new: the first public release was in November 2026.
+
+2. **PostHog** is your product's context layer. On top of [product analytics](/product-analytics) and [web analytics](/web-analytics), it includes [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), [AI observability](/ai-observability), [surveys](/surveys), an [AI assistant](/ai), and more. A [data warehouse](/warehouse) and [Data Pipelines](/data-pipelines) tie it all together and unify that context into one source agents can read across. You can work with all of it from [Slack](/slack), the [CLI](/docs/cli), or your own editor via [the MCP](/mcp). It's built for engineers, AI builders, and product teams.
+
+In this post, we compare features, pricing, self-hosting, and agent access, and say where each one is the better fit.
+
+<details>
+<summary>PostHog vs Dataflare: the short version</summary>
+
+- **Choose Dataflare** if you're a solo developer or a small team on Cloudflare, your product is a website or web app, and you want the core tools running in your own account, usually for $0 to $5 a month, with no servers to manage and no vendor in the loop.
+
+- **Choose PostHog** if you need more than the browser (mobile and server SDKs), more than the core tools (error tracking, logs, AI observability, surveys, a data warehouse, and a CDP), teammates with their own logins and permissions, or a hosted service with support and compliance paperwork.
+
+Both are open source, both have a free way to start, and both give your agents [an MCP server](/docs/model-context-protocol).
+
+</details>
+
+## How is PostHog different?
+
+### 1. It covers your whole product, not just the browser
+
+Dataflare has one SDK, for the browser, plus an HTTP endpoint for server events. PostHog has [SDKs](/docs/libraries) for web, iOS, Android, React Native, Flutter, and server languages including Python, Node, Go, Ruby, PHP, Java, .NET, Rust, and Elixir, so the same user is one person across your site, your app, and your backend. Session replay, feature flags, and experiments work on mobile too.
+
+### 2. It's a context layer, not just the core tools
+
+Dataflare covers what it calls the core: web and product analytics, replay, flags, and experiments. PostHog adds everything around them:
+
+-   [Error tracking](/error-tracking) for grouping exceptions into issues, with the replay attached
+-   [Logs](/logs) for searching what your servers wrote, next to the replay and error they relate to
+-   [AI observability](/ai-observability) for tracing LLM generations with their cost, latency, and errors
+-   [Surveys](/surveys) to capture user feedback, track NPS, and book interviews
+-   A [data warehouse](/warehouse) and [CDP](/cdp) to sync in your external data ([Stripe](/docs/data-pipelines/sources/stripe), [HubSpot](/docs/data-pipelines/sources/hubspot), or [Postgres](/docs/data-pipelines/sources/postgres), for example) and push it back out
+
+### 3. Someone else runs it, and your team can join
+
+Dataflare is self-hosted by design. It runs in your Cloudflare account, you sign in with an API key, and upgrades, limits, and data are yours to manage. 
+
+PostHog Cloud is hosted in the US [or EU](/blog/posthog-cloud-eu), with unlimited team members on the free plan, SSO and role-based access on paid plans, SOC 2 Type 2, and a BAA if you need HIPAA.
+
+It's also [free to start](/pricing). More than 97% of companies use PostHog for free, and [startups](/startups) can get $50,000 in credits. If you'd rather self-host, [you can](/docs/self-host), though Dataflare's version of self-hosting is a lot lighter than ours (more on that below).
+
+<WizardCTA />
+
+## Comparing PostHog and Dataflare
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        'web_analytics',
+        'product_analytics',
+        'session_replay',
+        'feature_flags',
+        'experiments',
+        'heatmaps',
+        'surveys',
+        'error_tracking',
+        'ai_observability',
+        'logs',
+        'data_warehouse',
+        'cdp',
+    ]}
+/>
+</p>
+
+### Web analytics
+
+Both cover the essentials: [visitors and pageviews](/docs/web-analytics/dashboard), [sessions](/docs/data/sessions), [bounce rate](/docs/web-analytics/dashboard#bounce-rate), [sources](/docs/web-analytics/dashboard#channels-referrers-utms), [UTM campaigns](/docs/data/utm-segmentation), [entry and exit pages](/docs/web-analytics/dashboard#paths), and [Core Web Vitals](/docs/web-analytics/web-vitals). Both can [run without cookies](/docs/privacy/data-collection#cookieless-tracking).
+
+Dataflare's edge is weight; its browser SDK is about 4 KB gzipped, and it can be served from your own domain so ad blockers are less likely to catch it. 
+
+PostHog adds value by integrating web analytics with other features: the same events feed [product analytics](/product-analytics), [session replay](/session-replay), and [experiments](/experiments), and a [reverse proxy](/docs/advanced/proxy) does the same first-party job.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        'web_analytics.features.pageviews',
+        'web_analytics.features.sessions',
+        'web_analytics.features.traffic_breakdown',
+        'web_analytics.features.utm_tracking',
+        'web_analytics.features.bounce_rate',
+        'web_analytics.features.entry_exit_paths',
+        'web_analytics.features.conversions',
+        'web_analytics.features.outbound_clicks',
+        'web_analytics.features.web_vitals',
+        'web_analytics.features.cookieless_tracking',
+        'web_analytics.features.snippet_install',
+        'web_analytics.features.script_size',
+    ]}
+/>
+</p>
+
+### Product analytics
+
+Both offer [trends](/docs/product-analytics/trends/overview), [funnels](/docs/product-analytics/funnels), [retention](/docs/product-analytics/retention), [user profiles](/docs/data/persons), and [SQL](/docs/data-warehouse/sql) on your raw events. Dataflare shows the SQL behind every chart, which is a nice touch for you and for your agent.
+
+PostHog goes deeper. [Autocapture](/docs/product-analytics/autocapture) records every click, input, and form submission rather than links and buttons only, and you get [user paths](/docs/product-analytics/paths), [lifecycle](/docs/product-analytics/lifecycle), [stickiness](/docs/product-analytics/stickiness), [group analytics](/docs/product-analytics/group-analytics) for B2B products, [custom formulas](/docs/product-analytics/trends/formulas), and [alerts](/docs/alerts). Paths, stickiness, lifecycle, and alerts are on Dataflare's roadmap.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        {
+            path: 'product_analytics.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Core features' },
+        'product_analytics.features.autocapture',
+        'product_analytics.features.custom_events',
+        'product_analytics.features.user_profiles',
+        'product_analytics.features.cohorts',
+        'product_analytics.insights.sql_editor',
+        'product_analytics.features.alerts',
+        { label: 'Insights & visualizations' },
+        'product_analytics.trends',
+        'product_analytics.funnels',
+        'product_analytics.retention',
+        'product_analytics.user_paths',
+        'product_analytics.lifecycle',
+        'product_analytics.stickiness',
+        'product_analytics.group_analytics',
+    ]}
+/>
+</p>
+
+### Session replay
+
+Both record web sessions with console logs and network requests alongside, and both mask inputs. Dataflare's replay is off until you set a sample rate, and it can keep the last minute in memory and upload it only when an error happens. 
+
+It also turns every session into a text transcript of the pages, clicks (with their CSS selectors), errors, and failed requests, so a coding agent can read what happened.
+
+PostHog adds [mobile replay](/docs/session-replay/mobile) for [iOS](/docs/session-replay/installation/ios), [Android](/docs/session-replay/installation/android), [React Native](/docs/session-replay/installation/react-native), and [Flutter](/docs/session-replay/installation/flutter), [canvas recording](/docs/session-replay/canvas-recording), a [DOM explorer](/docs/session-replay/how-to-watch-recordings), [performance monitoring](/docs/session-replay/network-recording), and [heatmaps](/docs/toolbar/heatmaps).
+
+And you don't have to watch every recording: [Replay Vision](/replay-vision) runs [AI scanners](/docs/replay-vision/scanner-types) across them to flag dead ends and frustration, and logs what it finds [as events](/docs/replay-vision/observations#querying-observations-as-events) you can chart or [alert on](/docs/replay-vision/alerts). The first 2,500 [credits](/docs/replay-vision/quota-and-limits) a month are free.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        {
+            path: 'session_replay.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Supported platforms' },
+        'session_replay.platform_support.web_app_recordings',
+        'session_replay.platform_support.mobile_app_recordings',
+        { label: 'Analysis tools' },
+        'session_replay.analysis.console_logs',
+        'session_replay.analysis.network_monitor',
+        'session_replay.analysis.heatmaps',
+        'session_replay.ai.ai_summaries',
+        'session_replay.ai.replay_vision',
+        { label: 'Recording controls' },
+        'session_replay.features.conditional_recording',
+        'session_replay.privacy.privacy_masking',
+        'session_replay.targeting.target_by_sample',
+        'session_replay.features.canvas_recording',
+        'session_replay.export.retention_policy',
+    ]}
+/>
+</p>
+
+### Feature flags
+
+Both have boolean and multivariate flags, percentage rollouts, and targeting on person properties and location. Dataflare evaluates flags in your own Worker, so rules that mention person properties never reach the browser.
+
+PostHog flags also carry JSON payloads for [remote config](/docs/feature-flags/remote-config), target [cohorts](/docs/data/cohorts) and groups, can be [scheduled](/docs/feature-flags/scheduled-flag-changes), and work in mobile and server SDKs with [local evaluation](/docs/feature-flags/local-evaluation).
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        {
+            path: 'feature_flags.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Flag types' },
+        'feature_flags.features.boolean_flags',
+        'feature_flags.features.multivariate_flags',
+        'feature_flags.features.json_payloads',
+        { label: 'Targeting' },
+        'feature_flags.targeting.features.target_by_percentage',
+        'feature_flags.targeting.features.target_by_person_properties',
+        'feature_flags.targeting.features.geographic_targeting',
+        'feature_flags.targeting.features.target_by_cohorts',
+        'feature_flags.targeting.features.group_targeting',
+        { label: 'Implementation' },
+        'feature_flags.implementation.features.sdk_support',
+        'feature_flags.implementation.features.api_access',
+    ]}
+/>
+</p>
+
+### Experiments
+
+In both tools, an experiment is a flag plus a goal. Dataflare's stats are strong for such a young product: a Bayesian model for conversion rates, Welch's t-test for value metrics, and a sample ratio check that refuses to declare a winner when the split looks broken. It documents one goal event per experiment.
+
+PostHog lets you choose [Bayesian](/docs/experiments/statistics-bayesian) or [frequentist](/docs/experiments/statistics-frequentist) statistics and adds [funnel](/docs/experiments/metrics#funnel), [ratio](/docs/experiments/metrics#ratio), and [count](/docs/experiments/metrics#mean) metrics, [secondary metrics](/docs/experiments/metrics#primary-and-secondary-metrics), [holdouts](/docs/experiments/holdouts), a [shared metrics library](/docs/experiments/metrics#shared-metrics), and experiments on [mobile](/docs/experiments/installation) and on [data warehouse tables](/docs/experiments/data-warehouse).
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        {
+            path: 'experiments.pricing.free_tier',
+            label: 'Free usage',
+            description: 'Monthly free tier',
+        },
+        { label: 'Supported platforms' },
+        'experiments.platforms.features.web',
+        'experiments.platforms.features.mobile',
+        { label: 'Metrics & analysis' },
+        'experiments.supported_tests.features.ab_testing',
+        'experiments.features.custom_goals',
+        'experiments.analysis.features.statistical_significance',
+        'experiments.analysis.features.statistics_engine',
+    ]}
+/>
+</p>
+
+### Error tracking, logs, and AI observability
+
+This is where the two stop overlapping. Dataflare captures uncaught JavaScript errors as events and shows them in replays with their stack frames, but it has no error tracking product, no logs, and no AI observability.
+
+In PostHog, [error tracking](/error-tracking) groups exceptions into issues with source maps, alerts, and the replay attached. [Logs](/logs) sit next to the session and error they belong to. [AI observability](/ai-observability) captures every LLM generation with its tokens, cost, latency, and output, and lets you run evals on production traffic or A/B test a prompt behind a feature flag.
+
+### AI and MCP
+
+Both tools assume an agent will do much of the querying, and both give it [an MCP server](/docs/model-context-protocol).
+
+- **Dataflare** runs its MCP server on your own Worker. Setup writes an `AGENTS.md`, a Claude Code skill, and an MCP config into your repo, so your coding agent can query trends, funnels, retention, people, and replays, run read-only SQL, and create flags and experiments right away. Every result comes back with its SQL and a dashboard link, and there's a read-only key for agents that shouldn't change anything. There's no built-in assistant, so you bring your own agent.
+
+- **PostHog** has [PostHog AI](/ai) for questions, SQL, and fixes (500 credits a month free), a free [MCP server](/mcp) with a read-only mode, a [Slack app](/slack) you can tag in a thread, a [CLI](/docs/cli), [Replay Vision](/replay-vision) for scanning recordings in bulk, and [Scouts](/blog/what-is-a-scout) that watch your data and send reports to an [Inbox](/docs/self-driving/inbox) where agents open PRs.
+
+<WizardCTA slim />
+
+### Platform and SDKs
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        'platform.deployment.open_source',
+        'platform.deployment.self_host',
+        { label: 'Hosted cloud', description: 'A managed service you do not run yourself', values: [true, false] },
+        'platform.deployment.eu_hosting',
+        'platform.deployment.reverse_proxy',
+        'platform.developer.client_side_sdks',
+        'platform.developer.server_side_sdks',
+        'platform.developer.mobile_sdks',
+        'platform.developer.api',
+        'platform.developer.sql',
+        'platform.developer.mcp_scope',
+        'platform.developer.agent_surfaces',
+        'platform.developer.collaboration',
+    ]}
+/>
+</p>
+
+<details>
+<summary>How does self-hosting PostHog compare to Dataflare?</summary>
+
+Self-hosting is where Dataflare is at its best. One command creates a Worker, a D1 database, and an R2 bucket in your Cloudflare account, and that's the whole deployment: no servers, no Docker, and upgrades that ship from CI.
+
+Self-hosted PostHog is a different proposition. It's the same MIT-licensed product we run on PostHog Cloud, deployed with Docker Compose on a VM with around 4 vCPU and 16 GB of RAM. We [don't offer support or guarantees](/docs/self-host/open-source/disclaimer) for it, paid-plan features are Cloud-only, and we recommend [PostHog Cloud](/pricing) for almost everyone.
+
+So if "it must run in my own account" is the requirement and you're on Cloudflare, Dataflare is the lighter way to get there. 
+
+That said, you don't need to self-host PostHog to use it with Cloudflare. PostHog works in [Cloudflare Workers](/docs/libraries/cloudflare-workers), and you can [proxy it through Cloudflare](/docs/advanced/proxy/cloudflare) so events are sent from your own domain.
+
+</details>
+
+### Price comparison
+
+#### PostHog pricing philosophy
+
+**PostHog charges based on usage.** Every product has a [free monthly allowance](/pricing), and past that you pay published per-unit rates, with billing limits you can set per product. The price covers the infrastructure, upgrades, and support, and we've written up [what you pay for per event](/docs/billing/what-you-pay-for-per-event).
+
+#### Dataflare pricing philosophy
+
+**Dataflare doesn't charge anything.** There's no subscription and no per-event price. Cloudflare bills you for the Worker requests, D1 rows, and R2 storage Dataflare uses, and by its own estimate a small site fits Cloudflare's free plan and most others fit the $5 a month Workers Paid plan, which you may already be paying.
+
+#### PostHog and Dataflare pricing comparison
+
+| | PostHog | Dataflare |
+|---|---|---|
+| **Free plan** | 1M events, 5,000 web + 2,500 mobile replays, 1M flag requests, 100k errors, 10 GB logs, 1M warehouse rows, and 1,500 survey responses a month | The software is free. Cloudflare's free plan covers small sites: 100,000 Worker requests and 100,000 D1 row writes a day, 500 MB per database |
+| **Users on the free plan** | Unlimited | No user accounts. One admin key and one read-only key |
+| **Paid plans** | No base fee; usage-based per product, with a billing limit you can set per product | None. Cloudflare's Workers Paid plan is $5 a month and includes 10M requests and 50M D1 row writes |
+| **Public pricing** | Yes, with a calculator | Yes: Cloudflare's list prices, with a calculator |
+| **Startup program** | [$50k in credits for 12 months](/startups) (under 2 years old, under $5M raised) | Not applicable |
+| **Self-hosting** | Free (MIT, open core) with Docker Compose on your own VM, unsupported | The only option: serverless, in your own Cloudflare account |
+| **Who runs it** | PostHog, in the US or EU | You |
+
+### Security and compliance
+
+With Dataflare, your data never leaves your own Cloudflare account. IP addresses aren't stored, and there's a cookieless mode, a consent API, and a command to delete a person. That's a strong privacy position, with no processor in the loop beyond Cloudflare.
+
+What it doesn't have is the organizational layer. There are no user accounts, SSO, or roles: you sign in with an admin key or a read-only key (Cloudflare Access support is on its roadmap). There are no compliance statements either, because there's no vendor to make them. Whether your deployment meets GDPR or HIPAA is yours to work out. 
+
+PostHog Cloud is SOC 2 Type 2 certified and GDPR-ready with US and EU hosting, signs BAAs on its platform packages, and has SSO, role-based access, and audit logs on paid plans.
+
+<p>
+<ProductComparisonTable
+    competitors={['posthog', 'dataflare']}
+    rows={[
+        'platform.security.cookieless_tracking',
+        'platform.security.data_anonymization',
+        'platform.security.user_privacy_options',
+        'platform.security.bot_blocking',
+        'platform.security.role_based_access_control',
+        'platform.security.saml_sso',
+        'platform.security.two_factor_auth',
+        'platform.security.soc2_certified',
+        'platform.security.gdpr_ready',
+    ]}
+/>
+</p>
+
+## When to choose PostHog vs Dataflare
+
+- Want one platform where every [event](/docs/data/events), [replay](/docs/session-replay), [error](/docs/error-tracking), [flag](/docs/feature-flags), and [LLM trace](/docs/ai-observability/traces) is tied to the [same user](/docs/data/persons) across [web, mobile, and backend](/docs/libraries)? How about a [data warehouse](/warehouse) for your business data, agents that work from [Slack](/slack) or [the MCP](/mcp), [teammates with their own logins](/docs/settings/organizations), and someone else running it? Go with **PostHog**.
+
+- Building a website or web app on Cloudflare, solo or in a small team, and want analytics, replay, flags, and experiments in your own account for the price of a Workers plan? **Dataflare** is a good fit, as long as you're comfortable building on a 0.x project.
+
+## Recommendations by team type
+
+**For solo developers and side projects on Cloudflare**
+- **Dataflare** – One command + no servers + a bill that's usually $0 to $5 a month is a great combo. PostHog's free tier is the alternative if you'd rather not run anything, even something this small.
+
+**For product and engineering teams**
+- **PostHog** – The same core tools plus the rest of a developer's toolkit: [error tracking](/error-tracking), [logs](/logs), [distributed tracing](/docs/distributed-tracing), [AI observability](/ai-observability), a [data warehouse](/warehouse), and SDKs for mobile and backend, all tied to the same users and sessions.
+
+**For mobile apps**
+- **PostHog** – SDKs and session replay for iOS, Android, React Native, and Flutter. Dataflare has no mobile SDKs.
+
+**For teams building AI features**
+- **PostHog** – [AI observability](/ai-observability) traces every LLM generation with its cost, latency, and errors, tied to the user's session replay, with 100k AI events a month free. Dataflare has no equivalent.
+
+**For teams that work mostly through coding agents**
+- **Tied** – Both are built for it. Dataflare writes the agent setup into your repo on install and returns the SQL with every answer. PostHog gives the agent far more to read, and adds Slack, the CLI, and agents that open PRs on their own.
+
+**For privacy-conscious and regulated organizations**
+- **PostHog** if you need a vendor with SOC 2 Type 2, a DPA, EU hosting, and a BAA. **Dataflare** if the requirement is that no third party holds the data at all and you're prepared to own compliance yourself.
+
+**For early-stage startups**
+- **PostHog** – Generous free tiers on every product, [$50k in credits](/startups) if you qualify, and nothing to migrate when you add a mobile app, a second engineer, or an AI feature.
+
+<WizardCTA />
+
+## Frequently asked questions
+
+<details>
+<summary>What does it mean for PostHog to be your product's context layer?</summary>
+
+Dataflare can tell you what a visitor did on your site, show you the replay, and tell you which flag they saw. PostHog knows that too, plus what broke, what your server logged, what your LLM said to them, what they told you in a survey, and what they pay you, across web, mobile, and backend. That's because [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [feature flags](/feature-flags), [logs](/logs), and [AI observability](/ai-observability) all write to the same place and share one model of users and sessions.
+
+The [data warehouse](/warehouse) and [CDP](/cdp) extend that to the business data that lives elsewhere, like Stripe, HubSpot, and Postgres. It's synced in, and anything can be pushed back out. As a result, a question like "did the users who hit this error last week churn, and what were they paying us?" is one SQL query, and an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees your product as a whole.
+
+</details>
+
+<details>
+<summary>PostHog says it makes your product "self-driving" – what does that mean?</summary>
+
+It means PostHog digs through your product data, finds what's worth fixing, and has agents do the work.
+
+It starts with the context layer described above: every product writes to one place, and the [data warehouse](/warehouse) unifies it into a single source agents can read across. From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+
+You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
+
+</details>
+
+<details>
+<summary>What are the main differences between PostHog and Dataflare?</summary>
+
+- **Where it runs:** PostHog is a hosted cloud (US or EU) that you can also self-host; Dataflare only runs in your own Cloudflare account
+- **Scope:** Dataflare covers web analytics, product analytics, session replay, feature flags, and A/B tests; PostHog adds error tracking, logs, AI observability, surveys, a data warehouse, and a CDP
+- **Platforms:** Dataflare has a browser SDK and an HTTP endpoint; PostHog has web, mobile, and server SDKs
+- **Pricing:** PostHog has a free tier and then usage-based pricing per product; Dataflare is free, and you pay Cloudflare for what it uses
+- **Teams:** PostHog has user accounts, roles, and SSO; Dataflare has an admin key and a read-only key
+- **Maturity:** PostHog has run in production for years at very large scale; Dataflare's first release was in November 2026
+
+</details>
+
+<details>
+<summary>What are the main similarities between PostHog and Dataflare?</summary>
+
+- Both are open source under the MIT license (PostHog is open core)
+- Both combine web analytics, product analytics, session replay, feature flags, and A/B tests on one event stream
+- Both let you query your raw events with SQL
+- Both have an MCP server that lets agents query data and manage flags and experiments, plus a CLI
+- Both offer cookieless tracking and can be served from your own domain
+
+</details>
+
+<details>
+<summary>Can Dataflare replace PostHog?</summary>
+
+It depends on how much of PostHog you use. For a website or web app that only needs the basics, Dataflare covers trends, funnels, retention, replay, flags, and A/B tests, and event names and properties carry over if you switch. It's a young project, though, and its migration steps don't cover historical data.
+
+It's not a like-for-like replacement if you rely on mobile or server SDKs, error tracking, logs, AI observability, surveys, the data warehouse, group analytics, user paths, or team accounts with SSO and permissions.
+
+</details>
+
+<details>
+<summary>Is PostHog cheaper than Dataflare?</summary>
+
+Under PostHog's free tier, both cost nothing: PostHog's first 1M events, 5,000 recordings, and 1M flag requests each month are free. Beyond that, Dataflare's Cloudflare bill will usually be lower than PostHog's usage-based pricing, and is often just $5 a month.
+
+It's worth considering what's included; with PostHog you're paying for a hosted service with support, team accounts, compliance, and every other product on the same data. With Dataflare, you run it, and you'll need other tools for the things it doesn't cover.
+
+</details>
+
+<details>
+<summary>Is Dataflare ready for production?</summary>
+
+Dataflare describes itself as "new (0.x) and used in production by its authors." Its first public release was in early November 2026, and it shipped more than ten releases in its first week. It's MIT-licensed and covered by automated tests, but it doesn't yet have a long track record or a company behind it. That's fine for a side project and worth weighing for anything business-critical.
+
+</details>
+
+<details>
+<summary>Is Dataflare made by Cloudflare?</summary>
+
+No. Dataflare is an independent open source project that runs on Cloudflare's developer platform, and it isn't affiliated with Cloudflare. It's also different from [Cloudflare Web Analytics](/compare/best-web-analytics-tools), Cloudflare's own free traffic dashboard, and from a couple of unrelated products that share the Dataflare name. This post is about the analytics tool at dataflare.dev.
+
+</details>
+
+<details>
+<summary>Can I run PostHog on Cloudflare?</summary>
+
+Not PostHog itself, which needs more than a Worker and a D1 database to run. But you can use PostHog in apps deployed on [Cloudflare Workers](/docs/libraries/cloudflare-workers), and route events through a [Cloudflare reverse proxy](/docs/advanced/proxy/cloudflare) so they're sent from your own domain.
+
+</details>
+
+<details>
+<summary>Does Dataflare work for mobile apps?</summary>
+
+Not natively. Dataflare has a browser SDK and an HTTP endpoint you can post events to from a backend, but no mobile SDKs and no mobile session replay. PostHog has SDKs and replay for iOS, Android, React Native, and Flutter.
+
+</details>
+
+<details>
+<summary>How do I move from Dataflare to PostHog?</summary>
+
+Run the [PostHog wizard](/wizard) to install the SDK, then swap your capture, identify, and flag calls for their PostHog equivalents. Your event names and properties can stay the same. Dataflare stores events in a D1 database in your own account, so you can export them and import your history with PostHog's [historical migration](/docs/migrate) API.
+
+</details>

@@ -69,6 +69,9 @@ const Router = (props) => {
     if (/^\/forum(\/|$)/.test(path)) {
         return <Forum {...props} />
     }
+    if (/^\/components\/ui(\/|$)/.test(path) && React.isValidElement(children)) {
+        return React.cloneElement(children, { key: 'components-ui' })
+    }
     // Learn pages share one shell, so the sidebar stays mounted between them.
     if (/^\/learn\/[^/]+/.test(path)) {
         return (

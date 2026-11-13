@@ -1,4 +1,5 @@
 const algoliaConfig = require('./gatsby/algoliaConfig')
+const { isNoindexSdkReference, isSdkReferenceFile } = require('./gatsby/sdkMarkdownReferences')
 const qs = require('qs')
 const pLimit = require('p-limit')
 
@@ -140,14 +141,16 @@ module.exports = {
             resolve: 'gatsby-plugin-mdx',
             options: {
                 shouldBlockNodeFromTransformation: (node) =>
-                    node.internal.type === 'File' &&
-                    // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
-                    // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
-                    // (and thus pages).
-                    ((node.sourceInstanceName === 'posthog-main-repo' &&
-                        node.name === 'SKILL' &&
-                        (node.relativeDirectory || '').includes('/skills/')) ||
-                        (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com')),
+                    // SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js).
+                    isSdkReferenceFile(node) ||
+                    (node.internal.type === 'File' &&
+                        // Ingested agent-skill files (products/*/skills/*/SKILL.md) are parsed
+                        // into AgentSkill nodes in onCreateNode — never turn them into Mdx nodes
+                        // (and thus pages).
+                        ((node.sourceInstanceName === 'posthog-main-repo' &&
+                            node.name === 'SKILL' &&
+                            (node.relativeDirectory || '').includes('/skills/')) ||
+                            (node.url && new URL(node.url).hostname === 'raw.githubusercontent.com'))),
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -240,7 +243,7 @@ module.exports = {
                     const VERSIONED_SDK_REFERENCE = /^\/docs\/references\/[a-z0-9-]+-(\d|latest)/
 
                     const transformedPages = allPages
-                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path))
+                        .filter(({ path }) => !VERSIONED_SDK_REFERENCE.test(path) && !isNoindexSdkReference(path))
                         .map(({ path }) => {
                             return {
                                 path: `${site.siteMetadata.siteUrl}${path}`,

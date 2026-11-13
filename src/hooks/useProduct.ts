@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import {
-    IconThoughtBubble,
     IconCoffee,
     IconDashboard,
     IconDownload,
@@ -65,12 +64,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconTrends,
             color: 'green',
             colorSecondary: 'green',
-        },
-        {
-            ...getTool('user_interviews'),
-            Icon: IconThoughtBubble,
-            color: 'purple',
-            colorSecondary: 'purple',
         },
         support,
         {
@@ -2500,17 +2493,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 title: 'PostHog AI - PostHog data stack',
                 description:
                     "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
-            },
-        },
-        {
-            ...getTool('data_modeling'),
-            parentIcon: 'dataBlender',
-            Icon: IconAsterisk,
-            color: 'red',
-            colorSecondary: 'red',
-            seo: {
-                title: 'Transform, enrich, and model your data',
-                description: 'Get your data in the exact shape you need it.',
             },
         },
         // {

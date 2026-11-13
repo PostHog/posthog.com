@@ -42,7 +42,7 @@ Now you have the template for a Vue app that is ready for PostHog and a cookie c
 Using PostHog starts by installing the `posthog-js` package.
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, we’ll set up PostHog using the Composition API.
