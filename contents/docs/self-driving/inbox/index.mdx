@@ -37,6 +37,8 @@ Triage is also how you teach the loop. When you dismiss or snooze a report and s
 
 The inbox is available across surfaces – the [web app](/docs/self-driving/web) and Slack – so you can review and act on work wherever you are. It's the same inbox everywhere; only the way you open it changes.
 
+Project-wide Inbox notifications can be filtered by priority. In **Self-driving > Settings**, choose a **Min. priority** for the team Slack channel to receive only reports at that priority or higher. Leave it unset to receive all eligible report notifications. This setting applies to the project-wide channel and does not change a scout's own Slack destination.
+
 When a report notification arrives in Slack, reply in that thread and mention `@PostHog` to continue the work on that report. PostHog links the task to the report, so the follow-up stays with the original finding instead of starting as unrelated work. See the [Slack app docs](/docs/slack) for the other things you can do from a mention.
 
 Each report notification shows the priority of the report, from P0 to P4. The notification also has an **Implement** button when the report is **Actionable** and no fix exists or is in progress. Click **Implement** to start an [implementation agent](/docs/self-driving/inbox/implementation) from Slack. The agent works in the thread of the notification and opens a pull request. After the agent starts, PostHog removes the button from the message. To use the button, you need access to the PostHog project and editor access to tasks.
