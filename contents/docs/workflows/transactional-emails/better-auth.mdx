@@ -90,16 +90,16 @@ export const auth = betterAuth({
 })
 ```
 
-- **Background sends** - Better Auth waits for these functions in some requests, such as a request for a new verification email. Because they return before the send finishes, the send doesn't change the response time or the response, so neither one shows whether an account exists.
-- **Sign-up** - To keep sign-up from showing whether an account exists, set `requireEmailVerification: true` in `emailAndPassword`. Better Auth then answers a sign-up for an address that already has an account the same way as a sign-up for a new one. With this option, sign-up doesn't sign the user in, and the user can't sign in until they verify their email address. Without it, the sign-up for an existing address fails.
-- **Other platforms** - On Cloudflare Workers, import `waitUntil` from `cloudflare:workers` in place of `@vercel/functions`. On a long-running Node.js server, the send finishes after the response anyway, so call `posthog.emails.send(...).then(...)` without the `waitUntil` wrapper.
-- **Errors** - `send` returns `{ data, error }` and doesn't throw. `sendAuthEmail` logs the `error`, with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). A failed send never fails the request.
-- **Sensitive** - `sensitive: true` keeps the link as it is, so it doesn't go through a click tracking redirect, and keeps the subject off engagement events. PostHog still counts the opens of an HTML email. A text-only email has no open pixel. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
-- **Retries** - The client makes an idempotency key for each `send` call. It retries network errors, rate limits, an in-flight idempotency key, and a `503` with that same key, so its own retries never send the email twice.
-- **Users** - `distinctId: user.id` records each email and its [engagement events](/docs/workflows/engagement-events) on the user's person. Pass the same ID to `identify()`.
-- **Key** - `templateKey` names the email, so PostHog groups each email's metrics and sends under it.
-- **Sender** - PostHog sends from the project's default sender. To send from another verified address, add `from`, such as `from: "Hedgebox <security@example.com>"`.
-- **HTML** - To send HTML, pass `html` next to `text` or in its place. For a [React Email](https://react.email) component, see [send content from your code](/docs/workflows/transactional-emails/node#send-content-from-your-code).
+- **Background sends** – Better Auth waits for these functions in some requests, such as a request for a new verification email. Because they return before the send finishes, the send doesn't change the response time or the response, so neither one shows whether an account exists.
+- **Sign-up** – To keep sign-up from showing whether an account exists, set `requireEmailVerification: true` in `emailAndPassword`. Better Auth then answers a sign-up for an address that already has an account the same way as a sign-up for a new one. With this option, sign-up doesn't sign the user in, and the user can't sign in until they verify their email address. Without it, the sign-up for an existing address fails.
+- **Other platforms** – On Cloudflare Workers, import `waitUntil` from `cloudflare:workers` in place of `@vercel/functions`. On a long-running Node.js server, the send finishes after the response anyway, so call `posthog.emails.send(...).then(...)` without the `waitUntil` wrapper.
+- **Errors** – `send` returns `{ data, error }` and doesn't throw. `sendAuthEmail` logs the `error`, with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). A failed send never fails the request.
+- **Sensitive** – `sensitive: true` keeps the link as it is, so it doesn't go through a click tracking redirect, and keeps the subject off engagement events. PostHog still counts the opens of an HTML email. A text-only email has no open pixel. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
+- **Retries** – The client makes an idempotency key for each `send` call. It retries network errors, rate limits, an in-flight idempotency key, and a `503` with that same key, so its own retries never send the email twice.
+- **Users** – `distinctId: user.id` records each email and its [engagement events](/docs/workflows/engagement-events) on the user's person. Pass the same ID to `identify()`.
+- **Key** – `templateKey` names the email, so PostHog groups each email's metrics and sends under it.
+- **Sender** – PostHog sends from the project's default sender. To send from another verified address, add `from`, such as `from: "Hedgebox <security@example.com>"`.
+- **HTML** – To send HTML, pass `html` next to `text` or in its place. For a [React Email](https://react.email) component, see [send content from your code](/docs/workflows/transactional-emails/node#send-content-from-your-code).
 
 ## Send from a job queue
 
