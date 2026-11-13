@@ -219,6 +219,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (parent?.internal.type === 'PostHogPull' || parent?.internal.type === 'PostHogIssue') return
+        node.frontmatter = JSON.parse(JSON.stringify(node.frontmatter))
 
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         const imageUrls = [...imageFields, 'images'].flatMap((field) => node.frontmatter?.[field] || [])

@@ -140,6 +140,7 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-mdx',
             options: {
+                lessBabel: true,
                 shouldBlockNodeFromTransformation: (node) =>
                     // SDK references from Strapi render as plain Markdown, never as MDX (gatsby/sdkMarkdownReferences.js).
                     isSdkReferenceFile(node) ||
