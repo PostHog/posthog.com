@@ -251,12 +251,6 @@ This is where the two stop overlapping. Dataflare captures uncaught JavaScript e
 
 In PostHog, [error tracking](/error-tracking) groups exceptions into issues with source maps, alerts, and the replay attached. [Logs](/logs) sit next to the session and error they belong to. [AI observability](/ai-observability) captures every LLM generation with its tokens, cost, latency, and output, and lets you run evals on production traffic or A/B test a prompt behind a feature flag.
 
-<CalloutBox icon="IconInfo" title="Good to know" type="fyi">
-
-An AI feature fails in two ways: the exception your code throws when a provider times out, and the generation that returns fine but gives the user a bad answer. [Error tracking](/error-tracking) catches the first and [AI observability](/ai-observability) catches the second, and in PostHog both land in the same session as the [replay](/session-replay).
-
-</CalloutBox>
-
 ### AI and MCP
 
 Both tools assume an agent will do much of the querying, and both give it [an MCP server](/docs/model-context-protocol).
