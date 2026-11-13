@@ -97,9 +97,19 @@ posthog.CaptureException(
 );
 ```
 
-For the full setup guide, see the [.NET error tracking installation docs](/docs/error-tracking/installation/dotnet).
+The SDK can also capture exceptions automatically. Both options are off by default:
 
-Automatic exception capture is not available in the .NET SDK yet.
+- `CaptureExceptions` on the ASP.NET Core request context middleware captures exceptions from your request pipeline.
+- `CaptureUnhandledExceptions` on `PostHogOptions` captures unhandled runtime exceptions and unobserved task exceptions. It requires `PostHog` version 2.23.0 or later.
+
+```csharp
+app.UsePostHogRequestContext(options =>
+{
+    options.CaptureExceptions = true;
+});
+```
+
+For the full setup guide, see the [.NET error tracking installation docs](/docs/error-tracking/installation/dotnet).
 
 ## Logs
 

@@ -10,7 +10,7 @@ The [Ruby SDK](/docs/libraries/ruby) sends transactional emails from version 3.3
 
 <summary>Prompt for your coding agent</summary>
 
-Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that agents often get wrong.
 
 ```text
 Add PostHog transactional email to this Ruby app with the posthog-ruby gem.
@@ -146,8 +146,8 @@ end
 
 Pass the distinct ID that you pass to `identify()` as `distinct_id`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinct_id` out.
+- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinct_id` out.
 
 ## Send content from your code
 
@@ -168,14 +168,66 @@ def send_password_reset(user, html, reset_request_id)
 end
 ```
 
-- **`template_key`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
-- **`text`** - If you leave it out, PostHog makes it from `html`.
-- **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
-- **`capture_engagement`** - PostHog captures the email's engagement events unless you pass `capture_engagement: false`.
+- **`template_key`** – Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`text`** – If you leave it out, PostHog makes it from `html`.
+- **`from`** – Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `reply_to` takes one address or a list.
+- **`sensitive`** – Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
+- **`tracking`** – What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
+- **`capture_engagement`** – Deprecated. Pass `tracking: { engagement: false }` instead. It still works, but a send that sets both `capture_engagement` and `tracking` gets an error.
 
 A send has `template_id` or `template_key`, not both, or it raises `ArgumentError`. Content from your code takes no `template_data`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
+### Copies and attachments
+
+Copies and attachments need version 3.34.0 or later.
+
+Content from your code takes `cc`, `bcc`, and `attachments`:
+
+- **`cc` and `bcc`** – One address or a list of plain addresses.
+- **`attachments`** – A list of Hashes. Each one has `filename` and the file's bytes as `content`, and can also have `content_type` and `content_id`.
+
+Read the file with `File.binread`, not `File.read`. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, `send` raises an error, and PostHog sends nothing. The client uploads the files to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, [allow the upload host](/docs/workflows/transactional-emails/api#allow-the-upload-host).
+
+```ruby
+$posthog.emails.send(
+  to: user.email,
+  template_key: 'receipt',
+  subject: 'Your receipt',
+  html: html,
+  cc: 'billing@example.com',
+  attachments: [
+    { filename: 'receipt.pdf', content: File.binread(pdf_path), content_type: 'application/pdf' }
+  ],
+  distinct_id: user.id.to_s
+)
+```
+
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
+
 When migrating providers, set the client option `migrated_from`, for example `migrated_from: "resend"`.
+
+### Open and click tracking
+
+`sensitive` and `tracking` need version 3.33.0 or later.
+
+`tracking` decides what PostHog tracks for an email from your code:
+
+| `tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Left out | On | Follows `sensitive` | On |
+| `tracking: true` | On | On | On |
+| `tracking: false` | Off | Off | Off |
+| A hash, such as `tracking: { clicks: true }` | `opens`, on by default | `clicks`, default follows `sensitive` | `engagement`, on by default |
+
+- **Opens** – PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** – PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** – PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+
+If you leave out clicks, PostHog tracks them only when the email isn't sensitive, because a login link or a reset token in a tracked link would go through a redirect. Pass `sensitive: false` for an email that carries no secrets. For a sensitive email with links that are safe to rewrite, pass `tracking: { clicks: true }`. A clicks value in `tracking` wins over `sensitive`.
+
+With `tracking: false`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and captures no engagement events for it.
+
+PostHog refuses `tracking: { opens: false, clicks: true }`, because click tracking needs open tracking. See [open and click tracking](/docs/workflows/transactional-emails/api#open-and-click-tracking) for every rule.
 
 ## Check an email's status
 

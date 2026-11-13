@@ -1,5 +1,5 @@
 ---
-title: Onboarding team
+title: Overview
 sidebar: Handbook
 showTitle: true
 ---
@@ -10,38 +10,40 @@ First and foremost, we’re account-agnostic, which makes us different from othe
 
 Day-to-day, we collaborate closely with Account Executives and Account Managers, especially when a customer would benefit from a dedicated PostHog human, and the Support team on solving issues.
 
-Onboarding sessions are a mine of information about our users and their needs, which makes us a fantastic liaison for the Product teams. We share product feedback whenever it surfaces. 
+Customer conversations are a mine of information about our users and their needs, which makes us a fantastic liaison for the Product teams. We share product feedback whenever it surfaces. 
 
-Since the Onboarding team is still a relatively new addition to a wider GTM team, we're a highly collaborative and creative bunch who are not afraid to try new ideas, iterate, and build the foundation for the future Onboarding endeavors.
+Since our team is still a relatively new addition to the wider GTM team, we're a highly collaborative and creative bunch who are not afraid to try new ideas, iterate, and build the foundation for the team's future work.
 
-### What does this team do?
+## Scaled Customer Success
 
-The core job of an Onboarding Specialist (OS) is to ensure a successful start of the user journey with PostHog. That means making sure that our customers get the most value out of using PostHog, they are aware of best practices, their setup is solid, and they don’t pay for something they don’t need. Ultimately, we serve as the customer's sparring partner in achieving their goals, so we need to understand their needs, their business, and where they’re coming from. 
+We’re the first GTM team at PostHog built to work with customers at scale. While our original focus was helping customers get off to a successful start, our vision for Scaled Customer Success goes beyond onboarding.
 
-The north star metric for the Onboarding team is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked in the <PrivateLink url="https://app.posthog.com/project/2/dashboard/363452">onboarding team retention dashboard</PrivateLink>.
+We want to bridge the gap between self-serve support and dedicated Customer Success by being there for higher-paying customers who don’t have a PostHog person assigned to them. By using signals from product usage, billing, and customer activity, we can identify moments when someone might be struggling, missing out on value, or at risk of quietly churning.
 
-We also care about net dollar retention for this segment, but we treat it as an auxiliary metric.
+Rather than waiting for customers to ask for help, we want to proactively reach out with relevant advice, practical guidance, and a human touch when it matters most. Ultimately, our goal is to help more customers succeed with PostHog, even when they don’t have a dedicated person looking after them.
 
-### Which customers get onboarding?
+### Onboarding program
 
-The segment consists of customers who self-serve PostHog and generate a forecasted bill of over $500. In practice, because billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts > $500 forecast are routed to us. We also handle a couple of other segments:
+The onboarding program ensures a successful start of the user journey with PostHog. That means making sure that our customers get the most value out of using PostHog, they are aware of best practices, their setup is solid, and they don’t pay for something they don’t need. Ultimately, we serve as the customer's sparring partner in achieving their goals, so we need to understand their needs, their business, and where they’re coming from.
+
+The north star metric for the onboarding program is 3-month logo retention at 90% from the first $100+ forecasted bill, which can be tracked in the <PrivateLink url="https://app.posthog.com/project/2/dashboard/363452">onboarding retention dashboard</PrivateLink>. We also care about net dollar retention for this segment, but we treat it as an auxiliary metric.
+
+The program covers customers who self-serve PostHog and generate a forecasted bill of over $500. In practice, billing is metered and in arrears, and we don't know what people will pay when they sign up (or when they first exceed a $100 forecast), so _most_ accounts with a forecast over $500 are routed to the program. It also covers a couple of other segments:
 
 -   YC program participants at the roll-off of the plan.
 -   Startup customers rolling off, who have generated a first bill in the $500-$1500 range.
 -   Startup plan customers with high credit usage (> ~$1500).
 -   Hype startups we want to work with (despite being below $ thresholds), or longer-standing customers that have paid in this range and need billing or setup assistance.
 
-### Which customers are out of scope
+Since the program focuses on customers who've signed up and have a forecasted bill, in most circumstances, it's not the right fit for customers who:
 
-Since we primarily focus on customers who've signed up and have a forecasted bill, in most circumstances, we're not the right choice to talk to customers who've:
+-   Haven't signed up or generated a bill, but have contacted sales.
+-   Are early-stage startups on the startup plan with no billing or low credit usage (<$500/mo).
+-   Have paid more than 3 bills.
 
--   Not signed up/generated a bill, but have contacted sales.
--   Are early-stage startups on the startup plan with no billing/low credit usage (<$500/mo).
--   Customers who paid over 3 bills
+### Paid consultation
 
-### Merch store consultation
-
-Customers who normally fall outside our scope still have a chance to get help! They can buy an Onboarding consultation [via our merch store](https://posthog.com/merch?product=30-min-onboarding-consultation).
+Customers who normally fall outside the onboarding program still have a chance to get help! They can buy an Onboarding consultation [via our merch store](https://posthog.com/merch?product=30-min-onboarding-consultation).
 
 After making the purchase, the customer gets a link to book a meeting, and they can contact our Billing team if they can't find an appropriate time slot. The billing team handles issuing credits/refunds accordingly. However, since it's a paid service, we should prioritize these and try to make space in our calendars, if possible.
 

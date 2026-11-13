@@ -7,6 +7,7 @@ import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
 import fs from 'fs'
 import path from 'path'
+import DataLoader from 'dataloader'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
 import { isSdkReferenceFile, splitFrontmatter } from './sdkMarkdownReferences'
 
@@ -30,7 +31,7 @@ const isValidUrl = (url: string): boolean => {
 const cloudinaryCache = {}
 // Persisted copy of the Cloudinary resource list. Produced by the master cache-warmup job and
 // restored in the preview build (see .github/workflows/{cache-warmup,deploy-preview}.yml), this
-// lets preview builds skip the multi-minute Cloudinary crawl in onPreInit below.
+// lets preview builds skip Cloudinary requests for cached images.
 const CLOUDINARY_CACHE_FILE = path.resolve(__dirname, '../.cloudinary-resources.json')
 
 let templateListPromise: Promise<any[]> | null = null
@@ -83,6 +84,7 @@ function parseSkillFrontmatter(raw: string): { name?: string; description?: stri
     return { name: fields.name, description: fields.description, body }
 }
 
+let cloudinaryLoader: DataLoader<string, any> | undefined
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
     if (
         !process.env.CLOUDINARY_API_KEY ||
@@ -93,8 +95,8 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         return
     }
 
-    // Reuse a previously fetched resource list when available. The crawl below paginates the
-    // entire Cloudinary library (~2 min over the network), so skipping it greatly speeds up
+    // Reuse a previously fetched resource list when available. The loader below fetches only
+    // missing entries from Cloudinary, so restoring metadata greatly speeds up
     // preview builds. A missing entry only omits image dimensions in onCreateNode (logged as a
     // warning), so a stale cache degrades gracefully.
     if (fs.existsSync(CLOUDINARY_CACHE_FILE)) {
@@ -102,38 +104,32 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
             const cached = JSON.parse(fs.readFileSync(CLOUDINARY_CACHE_FILE, 'utf-8'))
             Object.assign(cloudinaryCache, cached)
             console.log(`Loaded ${Object.keys(cached).length} Cloudinary resources from cache`)
-            return
         } catch {
-            // Corrupted/unreadable cache file — fall through to a fresh crawl
+            // Corrupted/unreadable cache file — fall through to fresh lookups
+            console.warn('Could not load cached Cloudinary metadata')
         }
     }
-
-    console.log('Fetching cloudinary data')
 
     const cloudinaryAuth = `Basic ${Buffer.from(
         `${process.env.CLOUDINARY_API_KEY}:${process.env.CLOUDINARY_API_SECRET}`
     ).toString('base64')}`
 
-    const fetchCloudinaryImages = async (nextCursor = null) => {
-        const { resources, next_cursor } = await fetch(
-            `https://api.cloudinary.com/v1_1/${
-                process.env.GATSBY_CLOUDINARY_CLOUD_NAME
-            }/resources/image?type=upload&max_results=500${nextCursor ? `&next_cursor=${nextCursor}` : ``}`,
+    const fetchCloudinaryImages = async (publicIds: readonly string[]) => {
+        const query = new URLSearchParams(publicIds.map((id) => ['public_ids[]', id]))
+        const { resources } = await fetch(
+            `https://api.cloudinary.com/v1_1/${process.env.GATSBY_CLOUDINARY_CLOUD_NAME}/resources/image/upload?max_results=500&${query}`,
             { headers: { Authorization: cloudinaryAuth } }
         ).then((res) => res.json())
         resources.forEach((resource) => {
             cloudinaryCache[resource.public_id] = resource
         })
 
-        if (next_cursor) {
-            await fetchCloudinaryImages(next_cursor)
-        }
+        // Persist for reuse by later builds (saved to the Actions cache by the master warmup job).
+        fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
+        return publicIds.map((id) => cloudinaryCache[id])
     }
 
-    await fetchCloudinaryImages()
-
-    // Persist for reuse by later builds (saved to the Actions cache by the master warmup job).
-    fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
+    cloudinaryLoader = new DataLoader(fetchCloudinaryImages, { maxBatchSize: 100 })
 }
 
 // onCreateNode runs once per source node (thousands of Mdx/MarkdownRemark nodes). The
@@ -223,8 +219,20 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     if (node.internal.type === `MarkdownRemark` || node.internal.type === 'Mdx') {
         const parent = getNode(node.parent)
         if (parent?.internal.type === 'PostHogPull' || parent?.internal.type === 'PostHogIssue') return
+        node.frontmatter = JSON.parse(JSON.stringify(node.frontmatter))
 
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
+        const imageUrls = [...imageFields, 'images'].flatMap((field) => node.frontmatter?.[field] || [])
+        await Promise.all(
+            imageUrls
+                .filter(
+                    (url) =>
+                        typeof url === 'string' && isValidUrl(url) && new URL(url).hostname === 'res.cloudinary.com'
+                )
+                .map(getPublicID)
+                .filter((id) => !cloudinaryCache[id])
+                .map((id) => cloudinaryLoader?.load(id))
+        )
         imageFields.forEach((field) => {
             if (node.frontmatter?.[field] && new URL(node.frontmatter[field]).hostname === 'res.cloudinary.com') {
                 const publicId = getPublicID(node.frontmatter?.[field])
