@@ -41,15 +41,15 @@ Install the SDK for your server's language:
 <MultiLanguage>
 
 ```bash file=TypeScript
-npm install @posthog/mcp@1 posthog-node@5
+npm install @posthog/mcp@1 posthog-node@6
 ```
 
 ```bash file=Python
-pip install "posthog<8"
+pip install "posthog>=8,<9"
 ```
 
 ```bash file=Go
-go get github.com/posthog/posthog-go/posthogmcpsdk
+go get github.com/posthog/posthog-go/posthogmcpsdk/v2
 ```
 
 ```bash file=Ruby
@@ -57,7 +57,7 @@ bundle add posthog-ruby --version "~> 3.0"
 ```
 
 ```bash file=Rust
-cargo add posthog-rs@0.31 --features mcp
+cargo add posthog@1 --features mcp
 ```
 
 </MultiLanguage>
@@ -138,10 +138,10 @@ use rmcp::ServiceExt;
 
 let token = std::env::var("POSTHOG_PROJECT_TOKEN")?;
 let posthog = Arc::new(
-    posthog_rs::client((token.as_str(), "https://us.i.posthog.com")).await, // or https://eu.i.posthog.com
+    posthog::client((token.as_str(), "https://us.i.posthog.com")).await, // or https://eu.i.posthog.com
 );
 
-let server = posthog_rs::mcp::instrument(server, posthog.clone());
+let server = posthog::mcp::instrument(server, posthog.clone());
 server.serve(rmcp::transport::stdio()).await?.waiting().await?;
 
 posthog.shutdown().await;
@@ -236,7 +236,7 @@ PostHog::MCP.instrument(
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .capture_responses(false) // keep tool results out of PostHog
@@ -377,7 +377,7 @@ PostHog::MCP.instrument(
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{Identity, McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .identify(|request| {
@@ -428,7 +428,7 @@ posthogmcpsdk.Instrument(server, posthogmcp.New(client),
 ```
 
 ```rust file=Rust
-use posthog_rs::mcp::{McpAnalytics, McpOptionsBuilder};
+use posthog::mcp::{McpAnalytics, McpOptionsBuilder};
 
 let options = McpOptionsBuilder::default()
     .missing_capability_tool("get_more_tools")

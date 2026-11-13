@@ -121,9 +121,12 @@ try {
 try {
   host = readTripHost(hosts, stay.hostId);
 } catch (error) {
-  posthog.captureException(error, distinctId, {
-    surface: "trip_details",
-    stay_id: stay.id,
+  posthog.captureException(error, {
+    distinctId,
+    properties: {
+      surface: "trip_details",
+      stay_id: stay.id,
+    },
   });
 }
 ```
@@ -178,8 +181,10 @@ import { PostHogErrorBoundary } from "@posthog/react";
 
 ```js file=Fastify
 app.setErrorHandler((error, request, reply) => {
-  posthog.captureException(error, undefined, {
-    $request_path: request.routeOptions.url,
+  posthog.captureException(error, {
+    properties: {
+      $request_path: request.routeOptions.url,
+    },
   });
   reply.code(500).send(error);
 });

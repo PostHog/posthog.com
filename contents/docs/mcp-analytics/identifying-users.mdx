@@ -20,7 +20,7 @@ Before `identify` returns a user, events use the session ID. Later events use th
 
 ## Anonymous sessions and person profiles
 
-Events for sessions with **no** resolved identity are sent with `$process_person_profile: false`. This keeps anonymous MCP sessions from each creating a person profile (which would inflate your person count and billing). Once `identify` resolves an identity for a session, person processing stays on and the events create/update that user's profile as normal.
+Events for sessions with **no** resolved identity are sent with person processing turned off. This keeps anonymous MCP sessions from each creating a person profile (which would inflate your person count and billing). Once `identify` resolves an identity for a session, person processing stays on and the events create/update that user's profile as normal.
 
 <a id="wiring-identify" />
 

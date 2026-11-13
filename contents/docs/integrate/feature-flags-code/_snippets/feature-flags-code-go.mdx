@@ -42,7 +42,7 @@ if enabledVariant == "variant-key" { // replace "variant-key" with the key of yo
 
 `flags.GetFlag()` returns the variant string for multivariate flags, `true` for enabled boolean flags, `false` for disabled flags, and `nil` when the flag wasn't returned by the evaluation.
 
-> **Note:** `client.IsFeatureEnabled()`, `client.GetFeatureFlag()`, `client.GetFeatureFlagPayload()`, and `Capture.SendFeatureFlags` still work during the migration period, but they're deprecated. Prefer `EvaluateFlags()` for new code.
+> **Note:** `client.IsFeatureEnabled()`, `client.GetFeatureFlag()`, `client.GetFeatureFlagPayload()`, and `Capture.SendFeatureFlags` still work in posthog-go 1.x and 2.x, but they're deprecated. Prefer `EvaluateFlags()` for new code.
 
 import IncludePropertyInEvents from "./include-feature-flag-property-in-backend-events.mdx"
 
@@ -141,7 +141,7 @@ You can configure the `FeatureFlagRequestTimeout` parameter when initializing yo
 client, _ := posthog.NewWithConfig(
     os.Getenv("<ph_project_token>"),
     posthog.Config{
-        PersonalApiKey:            "your personal API key", // Optional, but much more performant. If this token is not supplied, then fetching feature flag values will be slower.
+        SecretKey:                 "your secret API key", // Optional, but much more performant. If this key is not supplied, then fetching feature flag values will be slower.
         Endpoint:                  "<ph_client_api_host>",
         FeatureFlagRequestTimeout: 3 * time.Second, // Defaults to 3 seconds.
     },

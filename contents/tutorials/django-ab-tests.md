@@ -65,7 +65,7 @@ Run `python3 manage.py migrate` to migrate the database (you only need to run th
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, run `pip install "posthog<8"` to install [PostHog’s Python SDK](/docs/libraries/python).
+To start, run `pip install "posthog>=8,<9"` to install [PostHog’s Python SDK](/docs/libraries/python).
 
 Then, set the PostHog token and host in your `AppConfig` in `basic_app/apps.py` so that's it's available everywhere:
 

@@ -161,6 +161,11 @@
     ],
     "redirects": [
         {
+            "source": "/docs/libraries/capture-v1:ext(\\.md)?",
+            "destination": "/docs/libraries:ext?",
+            "statusCode": 301
+        },
+        {
             "source": "/docs/libraries/js:ext(\\.md)?",
             "destination": "/docs/libraries/js/reference:ext?",
             "statusCode": 301
@@ -4955,6 +4960,10 @@
         {
             "source": "/docs/billing/annual-plans:ext(\\.md)?",
             "destination": "/docs/billing/pre-paid-plans:ext?"
+        },
+        {
+            "source": "/docs/billing/limits:ext(\\.md)?",
+            "destination": "/docs/billing/limits-alerts:ext?"
         },
         {
             "source": "/legal",

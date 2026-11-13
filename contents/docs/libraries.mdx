@@ -1,15 +1,34 @@
 ---
-title: PostHog SDK comparison
-sidebarTitle: Libraries
+title: Choosing a PostHog SDK
+sidebarTitle: Choosing an SDK
 sidebar: Docs
 showTitle: true
 ---
 
 import LibraryComparison from "components/LibraryComparison"
 
-PostHog provides a number of both official and community maintained libraries to help you easily integrate with your preferred language or framework.
+PostHog has official SDKs for web, mobile, and server-side languages, plus libraries the community maintains. Use the SDK for the language or framework your app runs on.
 
-This document outlines all of our current client-side and server-side libraries, as well as which features each of them currently supports.
+## SDK versions and capture v1
+
+PostHog is moving to the [capture v1](/docs/api/capture-v1) API to improve performance.
+
+The SDKs below support it in their latest major version. Each of these major versions has breaking changes, so read its migration guide before you upgrade.
+
+We suggest you migrate as soon as possible, but the older major versions keep working and stay supported.
+
+| SDK | Moves to capture v1 in | Migration guide |
+|---|---|---|
+| [Python](/docs/libraries/python) | `8.0.0` | [`7.x` to `8.0`](/docs/libraries/python/migration) |
+| [Go](/docs/libraries/go) | `v2.0.0` | [`v1` to `v2`](/docs/libraries/go/migration) |
+| [Rust](/docs/libraries/rust) | `1.0.0` | [`0.x` to `1.0`](/docs/libraries/rust/migration) |
+| [Node.js](/docs/libraries/node) | `6.0.0` | [`5.x` to `6.0`](https://github.com/PostHog/posthog-js/blob/main/packages/node/MIGRATION.md) |
+
+Every other SDK, including the JavaScript Web SDK and the mobile SDKs, stays on legacy capture for now.
+
+For how capture v1 handles events, see the [Capture API (v1)](/docs/api/capture-v1).
+
+## Feature comparison
 
 >**Note:** Session recording and autocapture are not possible in server libraries.
 
