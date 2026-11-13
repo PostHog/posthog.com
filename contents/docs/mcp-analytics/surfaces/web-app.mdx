@@ -25,6 +25,8 @@ Each tab answers a different question.
 
 The dashboard shows session counts, tool calls, error rates, and p95 latency. It also shows clients, harnesses, tool usage, and errors over time. The **Sessions flagged for review** card lists up to five sessions worth reading: the highest error rate among busy sessions, a session where every call failed, the most exploratory session, a short successful session, and the busiest session. Each rule has a minimum, such as 3 calls, so the card leaves out a rule when no session meets it. A session appears only once, so the card can be short or empty.
 
+To hide the sections you don't need, select **Customize** next to the date filter. Clear the checkbox for a section: **Key metrics**, **Models**, **Protocol**, **What agents do**, or **Reliability**. When a section is hidden, the button shows how many sections are hidden. PostHog remembers your choice for each project in this browser. To show them again, select **Show all sections**.
+
 ### Activity
 
 The activity feed shows tool calls as they arrive. Use it to check instrumentation or observe a release.
