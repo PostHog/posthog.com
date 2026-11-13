@@ -49,34 +49,34 @@ In addition to the weekly sprint planning meeting on a Monday, we do a weekly te
   - Quickly expanding them into new products using the relationship you've developed in onboarding them as customers.
 - We aim for a 50/50 split between base/commission when calculating OTE by default.
 
-> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
+> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. The Finance team runs this process with RevOps. If you have questions about your number, ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
-**Variables**
+**Your plan**
 
-- Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
+- Your quota depends on your OTE. It's set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
-- Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
-  - The invoice payment amount for any pre-purchased credit deals in the first 12 months after they become a paying customer.
-    - If the purchase is a renewal of an earlier credit purchase (i.e. at the end of the first year) then you'll get recognised on the difference between the initial purchase and renewal purchase.
-    - If the purchase is a [top-up of the current term](/handbook/growth/sales/contract-rules#starting-a-new-term-early) (i.e. a new order form for more credits that expire with the existing term, signed in the first 6 months of the term), then you'll get recognised on the full invoice payment amount of the top-up. A purchase after the first 6 months that starts a new term is an early renewal, and you'll get recognised on the difference as above.
- - ARR from monthly customers for the first _12 months_ after you sign them up as a monthly customer as long as you are the primary account owner.
- - Only accounts that you [own in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics) count toward quota. Your assignment comes from Salesforce automatically, but the `AE Managed` tag does not. Add the `AE Managed` tag in Customer Analytics once you've aligned with team leadership.
-  - For multiyear contracts, we will true the quota ARR up to the year 1 equivalent amount as you'll have given a deeper discount but there is more committed revenue for PostHog which is a good thing.
-    - The way we work this out is by taking the annual credit purchased by the customer and applying the standard 1 year discount to it.
-  - Your quota will depend on your OTE
-- A deal counts toward quota in the quarter of its effective date. For annual deals, the effective date is the contract start date or the signature date, whichever is later. For monthly accounts, each payment counts toward the quarter it falls in.
-- Commission is paid out quarterly, and is subject to clawbacks if the invoices remain unpaid.
-  - We want you to secure upfront payment - which helps PostHog and helps you.
-    - If you close an annual contract with monthly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
-  - We want you to ensure the customer has paid, and we don't want AEs to throw invoice chasing to a finance person
-    -  This means you should make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay.
-  - For monthly customers, commission is only paid after all 3 invoices have been paid
-    - Commission is still paid out quarterly even if the customer pays monthly
-  - Overdue invoices from the current quarter will be excluded from commission payouts, with the cutoff being the 14th of the calendar month following the quarter (January, April, July, and October)
-  - Invoices that are issued in the final period of the current quarter, but are due at a date beyond the 14th of the calendar month following the quarter (January, April, July, and October), will be paid on the good faith assumption that the customer will pay on time and you will assist in securing timely payment. If the invoice becomes overdue in a future quarter, it will be subject to a clawback in that quarter. 
-  - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis or via clawback.
-  - Commission payments are made at the end of January, April, July, and October. Fraser will send you an email that breaks down your commission and explains how you did.
+- Quota is based on the $ amount sold after discounts, not credits or product usage, so you can't sell a $500k deal with an 80% discount and claim the full $500k.
+- You get credit for annual contracts you close, and for monthly customers for the first _12 months_ after you sign them up.
+- Only accounts that you [own in Customer Analytics](/handbook/growth/sales/account-allocation#account-ownership-in-customer-analytics) count toward quota. Your assignment comes from Salesforce automatically, but the `AE Managed` tag does not. Add the `AE Managed` tag in Customer Analytics once you've aligned with team leadership.
 - In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
+
+**How your credit is calculated**
+
+The [Commissions](/handbook/growth/revops/commissions) page has the rules and examples for how every deal is credited:
+
+- [Which quarter a deal counts in](/handbook/growth/revops/commissions#which-quarter-an-annual-contract-counts-in)
+- [Deal value](/handbook/growth/revops/commissions#deal-value), including buyouts and [multi-year contracts](/handbook/growth/revops/commissions#how-multi-year-contracts-count)
+- [Renewals and mid-term expansions](/handbook/growth/revops/commissions#deal-type)
+- [Monthly customers](/handbook/growth/revops/commissions#tae)
+- [Payment status, the cutoff, and clawbacks](/handbook/growth/revops/commissions#payment-status)
+- [Your dashboard](/handbook/growth/revops/commissions#dashboards) and [how to ask for a correction](/handbook/growth/revops/commissions#commission-adjustments)
+
+**Getting paid**
+
+- Commission is paid in the month after the quarter ends. The Finance team sends you a breakdown of your commission.
+- We want you to secure upfront payment - which helps PostHog and helps you.
+- We want you to ensure the customer has paid, and we don't want AEs to throw invoice chasing to a finance person. Make friends with the finance person on the customer's side, and ensure all payment paperwork is in order to allow for the customer to pay. An invoice that's overdue at the cutoff doesn't count until the customer pays.
+- If we have to give a customer a big refund, we'll deal with your commission on a case by case basis or via clawback.
 
 ### Performance expectations for Technical Account Executives
 
@@ -98,16 +98,16 @@ These standards are likely to change as the TAE role evolves. Any changes will b
   - Getting people in who fit our ICP, ie. are easier for us to sell to
 - We aim for a 70/30 split between base/commission when calculating OTE by default.
 
-> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. Fraser runs this process, so if you have any questions, ask him in the first instance.
+> This plan will almost certainly change as we scale up the size and complexity of our sales machine! This is completely normal - we will ensure everyone is always treated fairly, but you need to be comfortable with this. For now we are generally trying to optimize for something straightforward here so it’s easy for PostHog (and you) to calculate commission. The Finance team runs this process with RevOps. If you have questions about your number, ask in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>.
 
 **Variables**
 
-- Quota is based on the number of sales qualified opportunities you generate - basically when an account is moved into the initial Opportunity stage in SFDC.
+- Quota is based on the number of sales qualified opportunities (SQOs) you generate. What counts as an SQO, and who gets credit for it, is on the [Commissions](/handbook/growth/revops/commissions#bdr) page.
 - In your first 3 months, you'll be paid 100% OTE fixed. You can find more info on how quotas work in your ramp period [in the new hire FAQ](/handbook/growth/sales/new-hire-onboarding#new-hire-frequently-asked-questions)
 - After your ramp period, the 30% commission portion of your OTE will be based on 9 sales-qualified opportunities per quarter per representative, which breaks down to 3 sales-qualified opportunities per month per representative. 
 - Your quota is set for the year and then divided by 4 - this means you don't have to cram meetings into the end of a quarter.
 - Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%.
-- Commission is paid out quarterly.
+- Commission is paid out quarterly, in the month after the quarter ends.
 
 ## Team lead quota
 
@@ -121,6 +121,8 @@ To calculate the team quota, we combine the quota of all team members with prora
  - For team members who begin the quarter still in their first three months in the role we add 50% of their quota to the team quota.
 
 Example: With a flat quota of $250,000 and 3 fully ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
+
+How your team's credit adds up against this quota is on the [Commissions](/handbook/growth/revops/commissions#tae-leads) page.
 
 > If someone leaves the team, we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple.
 
