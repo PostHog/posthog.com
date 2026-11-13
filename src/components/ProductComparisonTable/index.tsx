@@ -29,6 +29,7 @@ import { contentsquare } from '../../hooks/competitorData/contentsquare'
 import { counter } from 'hooks/competitorData/counter'
 import { crazy_egg } from '../../hooks/competitorData/crazy_egg'
 import { datadog } from '../../hooks/competitorData/datadog'
+import { dataflare } from '../../hooks/competitorData/dataflare'
 import { devcycle } from '../../hooks/competitorData/devcycle'
 import { drip } from '../../hooks/competitorData/drip'
 import { dynamic_yield } from '../../hooks/competitorData/dynamic_yield'
@@ -655,6 +656,7 @@ export default function ProductComparisonTable({
         counter,
         crazy_egg,
         datadog,
+        dataflare,
         devcycle,
         dynamic_yield,
         dynatrace,
