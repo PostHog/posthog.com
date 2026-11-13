@@ -27,20 +27,20 @@ Ratios such as `attainment` and `nrr` are decimals: 1.2 means 120%.
 
 ## Views
 
-All views are in the **RevOps** folder of the SQL editor.
+All views are in the **RevOps** folder of the SQL editor. Each view's header comment and column descriptions explain the rule it applies, so read them before writing your own query.
 
 | View | Data | One row per | Filter to yourself |
 |---|---|---|---|
-| `comp_tae_quota_lines` | Live | TAE credit line | `quarter_start`, `tae_email` |
-| `comp_tam_payout_lines` | Live | TAM payout line (one monthly invoice or one annual contract) | `quarter_start`, `tam_email` |
-| `comp_bdr_sqo_lines` | Live | SQO | `quarter_start`, `bdr_email` |
-| `comp_account_lines_live` | Live | Account line per quarter, every team | `quarter_start`, `team`, `person_email` |
-| `comp_annual_deals` | Live | Annual contract | `opportunity_id` |
-| `comp_quotas` | Live | Person per quarter | `team`, `quarter_start`, `email` |
-| `comp_tam_book` | Live | TAM assignment per quarter | `quarter_start`, `tam_email` |
-| `comp_quarters` | Live | Quarter | `quarter_label` |
-| `comp_account_snapshots` | Snapshot | Account line per quarter | `quarter_start`, `team`, `person_email` |
-| `comp_quota_snapshots` | Snapshot | Person per quarter | `quarter_start`, `team`, `person_email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fe0d-0967-0000-9c94-487f6c01d223">comp_tae_quota_lines</PrivateLink> | Live | TAE credit line | `quarter_start`, `tae_email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd97-f31c-0000-84d2-1c1ccc62644d">comp_tam_payout_lines</PrivateLink> | Live | TAM payout line (one monthly invoice or one annual contract) | `quarter_start`, `tam_email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fe89-cc84-0000-ae66-ff01c65bab04">comp_bdr_sqo_lines</PrivateLink> | Live | SQO | `quarter_start`, `bdr_email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a14103-6b88-0000-e989-dafe23cb58c2">comp_account_lines_live</PrivateLink> | Live | Account line per quarter, every team | `quarter_start`, `team`, `person_email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a1023f-e022-0000-ef08-18cffc37554f">comp_annual_deals</PrivateLink> | Live | Annual contract | `opportunity_id` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd17-3e5a-0000-2b84-92633966a379">comp_quotas</PrivateLink> | Live | Person per quarter | `team`, `quarter_start`, `email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd30-24d0-0000-905e-244923567e9c">comp_tam_book</PrivateLink> | Live | TAM assignment per quarter | `quarter_start`, `tam_email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd15-14f3-0000-2a3b-a69f95d9ed46">comp_quarters</PrivateLink> | Live | Quarter | `quarter_label` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a14104-e22f-0000-4b06-aff178434df0">comp_account_snapshots</PrivateLink> | Snapshot | Account line per quarter | `quarter_start`, `team`, `person_email` |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a1412c-20f9-0000-17ab-cf934c4d6b1a">comp_quota_snapshots</PrivateLink> | Snapshot | Person per quarter | `quarter_start`, `team`, `person_email` |
 
 Three things to know:
 
@@ -52,9 +52,9 @@ Three things to know:
 
 ### My quota this quarter
 
-- **Use it when** - you want to know your quota
-- **Data** - live, this quarter
-- **Returns** - one row per team you're on
+- **Use it when** – you want to know your quota
+- **Data** – live, this quarter
+- **Returns** – one row per team you're on
 
 ```sql
 SELECT team, quarter_start, quota, quarter_quota, monthly_quota
@@ -67,9 +67,9 @@ WHERE email = 'you@posthog.com'
 
 ### My result for last quarter
 
-- **Use it when** - you want the number you were paid on
-- **Data** - snapshot, last quarter
-- **Returns** - one row per team, with your result in that team's unit
+- **Use it when** – you want the number you were paid on
+- **Data** – snapshot, last quarter
+- **Returns** – one row per team, with your result in that team's unit
 
 ```sql
 SELECT s.team AS team,
@@ -104,9 +104,9 @@ TAM leads don't appear here yet. Use the dashboard tile. See [TAM leads](#tam-le
 
 ### My adjustments
 
-- **Use it when** - you want to see manual changes made to your lines
-- **Data** - the adjustments tab of the quota sheet
-- **Returns** - one row per adjustment credited to you
+- **Use it when** – you want to see manual changes made to your lines
+- **Data** – the adjustments tab of the quota sheet
+- **Returns** – one row per adjustment credited to you
 
 ```sql
 SELECT quarter, team, account_name, action, amount, move_to_quarter, reason, approved_by_email
@@ -115,13 +115,13 @@ WHERE lower(credit_to_email) = 'you@posthog.com'
 ORDER BY quarter DESC
 ```
 
-This covers TAE, TAM, and BDR adjustments. See [adjustments](/handbook/growth/revops/commissions#adjustments) for what each action does.
+This covers TAE, TAM, and BDR adjustments. See [adjustments](/handbook/growth/revops/commissions#commission-adjustments) for what each action does.
 
 ### Live versus snapshot for my lines
 
-- **Use it when** - your dashboard and your paid number don't match
-- **Data** - live and snapshot, last quarter
-- **Returns** - only the lines that differ
+- **Use it when** – your dashboard and your paid number don't match
+- **Data** – live and snapshot, last quarter
+- **Returns** – only the lines that differ
 
 ```sql
 SELECT coalesce(l.line_id, s.line_id) AS line_id,
@@ -153,9 +153,9 @@ No rows means the two match. You're paid from the snapshot. If a difference look
 
 ### Why a line paid what it paid
 
-- **Use it when** - you want the rule behind each line from last quarter
-- **Data** - snapshot, last quarter
-- **Returns** - one row per line
+- **Use it when** – you want the rule behind each line from last quarter
+- **Data** – snapshot, last quarter
+- **Returns** – one row per line
 
 ```sql
 SELECT team, account_name, line_type, status, base_amount, comp_amount,
@@ -172,9 +172,9 @@ For a TAM line, read `exclusion_reason` from `details` the same way.
 
 ### My deals this quarter
 
-- **Use it when** - a deal is missing, or you want to see how its credit was calculated
-- **Data** - live, this quarter
-- **Returns** - one row per annual contract or monthly-paying customer credited to you
+- **Use it when** – a deal is missing, or you want to see how its credit was calculated
+- **Data** – live, this quarter
+- **Returns** – one row per annual contract or monthly-paying customer credited to you
 
 ```sql
 SELECT account_name, deal_type, status, credit, at_risk_credit, calc_note, reason
@@ -193,9 +193,9 @@ ORDER BY credit DESC
 
 ### My attainment this quarter
 
-- **Use it when** - you want your total credit and attainment so far
-- **Data** - live, this quarter
-- **Returns** - `total_credit`, `attainment`
+- **Use it when** – you want your total credit and attainment so far
+- **Data** – live, this quarter
+- **Returns** – `total_credit`, `attainment`
 
 ```sql
 SELECT
@@ -215,9 +215,9 @@ This should match the **Attainment** tile on the dashboard. If it doesn't, post 
 
 ### My at-risk invoices
 
-- **Use it when** - you want to chase unpaid invoices before the next cutoff
-- **Data** - live, this quarter and last quarter
-- **Returns** - one row per at-risk deal, soonest due first
+- **Use it when** – you want to chase unpaid invoices before the next cutoff
+- **Data** – live, this quarter and last quarter
+- **Returns** – one row per at-risk deal, soonest due first
 
 ```sql
 SELECT quarter_start, account_name, deal_type,
@@ -233,9 +233,9 @@ Last quarter's at-risk deals are clawed back if they're still unpaid at the next
 
 ### My attainment by quarter
 
-- **Use it when** - you want your paid attainment for every past quarter
-- **Data** - snapshot, all quarters
-- **Returns** - one row per quarter
+- **Use it when** – you want your paid attainment for every past quarter
+- **Data** – snapshot, all quarters
+- **Returns** – one row per quarter
 
 ```sql
 SELECT c.quarter_start AS quarter_start,
@@ -263,9 +263,9 @@ If you have no quota row for a quarter, that quarter won't appear.
 
 ### My team's attainment this quarter
 
-- **Use it when** - you want your team's roll-up against your lead quota
-- **Data** - live, this quarter
-- **Returns** - your team's credit, lead quota, and attainment
+- **Use it when** – you want your team's roll-up against your lead quota
+- **Data** – live, this quarter
+- **Returns** – your team's credit, lead quota, and attainment
 
 ```sql
 WITH team AS (
@@ -298,9 +298,9 @@ Your team comes from the Salesforce role hierarchy: the TAEs whose role reports 
 
 ### My payout lines this quarter
 
-- **Use it when** - a customer pays less than you expect, or a line pays $0
-- **Data** - live, this quarter
-- **Returns** - one row per paid monthly invoice or annual contract in your book
+- **Use it when** – a customer pays less than you expect, or a line pays $0
+- **Data** – live, this quarter
+- **Returns** – one row per paid monthly invoice or annual contract in your book
 
 ```sql
 SELECT account_name, line_type, status, payout, exclusion_reason
@@ -322,13 +322,13 @@ If `payout` is $0, `exclusion_reason` tells you why:
 | `credit_covered` | Paid with prepaid credit, account balance, or a credit note |
 | `paid_out_of_band` | Marked as paid outside Stripe |
 | `overdue_invoice` | The contract invoice was overdue at the cutoff |
-| `contract_voided` | A credit note cancelled the contract |
+| `contract_voided` | A credit note canceled the contract |
 
 ### My total payout this quarter
 
-- **Use it when** - you want one number for this quarter so far
-- **Data** - live, this quarter
-- **Returns** - total payout, the at-risk part, and line counts
+- **Use it when** – you want one number for this quarter so far
+- **Data** – live, this quarter
+- **Returns** – total payout, the at-risk part, and line counts
 
 ```sql
 SELECT round(sum(payout), 2) AS total_payout,
@@ -342,9 +342,9 @@ WHERE quarter_start = toStartOfQuarter(today())
 
 ### My at-risk invoices
 
-- **Use it when** - you want to chase unpaid invoices before the next cutoff
-- **Data** - live, this quarter and last quarter
-- **Returns** - one row per at-risk line, soonest due first
+- **Use it when** – you want to chase unpaid invoices before the next cutoff
+- **Data** – live, this quarter and last quarter
+- **Returns** – one row per at-risk line, soonest due first
 
 ```sql
 SELECT quarter_start, account_name, line_type, round(payout, 2) AS payout,
@@ -358,9 +358,9 @@ ORDER BY earliest_unpaid_due_date
 
 ### My book this quarter
 
-- **Use it when** - you want to check which accounts are in your book
-- **Data** - live, this quarter
-- **Returns** - one row per account, with assignment dates
+- **Use it when** – you want to check which accounts are in your book
+- **Data** – live, this quarter
+- **Returns** – one row per account, with assignment dates
 
 ```sql
 SELECT b.org_id AS org_id,
@@ -380,9 +380,9 @@ ORDER BY account_name
 
 ### My payout by quarter
 
-- **Use it when** - you want your paid total for every past quarter
-- **Data** - snapshot, all quarters
-- **Returns** - one row per quarter
+- **Use it when** – you want your paid total for every past quarter
+- **Data** – snapshot, all quarters
+- **Returns** – one row per quarter
 
 ```sql
 SELECT quarter_start, count() AS lines, round(sum(comp_amount), 2) AS payout
@@ -402,9 +402,9 @@ Use the **TAM Lead attainment (closed-won, PLS West / East)** and **TAM Lead det
 
 ### My accounts this quarter
 
-- **Use it when** - you want to check your book account by account
-- **Data** - live, this quarter
-- **Returns** - one row per account counted in your NRR
+- **Use it when** – you want to check your book account by account
+- **Data** – live, this quarter
+- **Returns** – one row per account counted in your NRR
 
 ```sql
 SELECT account_name, status, base_amount, comp_amount,
@@ -421,9 +421,9 @@ ORDER BY base_amount DESC
 
 ### My NRR so far this quarter
 
-- **Use it when** - you want one number for this quarter so far
-- **Data** - live, this quarter
-- **Returns** - accounts, base ARR, counted ARR, and NRR
+- **Use it when** – you want one number for this quarter so far
+- **Data** – live, this quarter
+- **Returns** – accounts, base ARR, counted ARR, and NRR
 
 ```sql
 SELECT person_email,
@@ -440,9 +440,9 @@ GROUP BY person_email
 
 ### My NRR by quarter
 
-- **Use it when** - you want your paid NRR for every past quarter
-- **Data** - snapshot, all quarters
-- **Returns** - one row per quarter
+- **Use it when** – you want your paid NRR for every past quarter
+- **Data** – snapshot, all quarters
+- **Returns** – one row per quarter
 
 ```sql
 SELECT quarter_start,
@@ -462,9 +462,9 @@ ORDER BY quarter_start
 
 ### My team's NRR this quarter
 
-- **Use it when** - you want your team's combined NRR
-- **Data** - live, this quarter
-- **Returns** - one row per CS team (EU and NA)
+- **Use it when** – you want your team's combined NRR
+- **Data** – live, this quarter
+- **Returns** – one row per CS team (EU and NA)
 
 ```sql
 SELECT coalesce(nullIf(t.team, ''), 'unknown') AS cs_team,
@@ -487,9 +487,9 @@ Each CSM's team comes from the `CS_name_email` table, the same one the CSM dashb
 
 ### My SQOs this quarter
 
-- **Use it when** - you want to check every SQO is credited to you, and in which month
-- **Data** - live, this quarter
-- **Returns** - one row per SQO
+- **Use it when** – you want to check every SQO is credited to you, and in which month
+- **Data** – live, this quarter
+- **Returns** – one row per SQO
 
 ```sql
 SELECT month_start, account_name, opportunity_name, credit_source
@@ -503,14 +503,14 @@ Missing an SQO? Check the opportunity's lead source is **Outbound**, and that yo
 
 `credit_source` shows how the SQO was credited:
 
-- **Outbound lead task** - By the rule
-- **Manual credit** - By an [adjustment](/handbook/growth/revops/commissions#adjustments)
+- **Outbound lead task** – By the rule
+- **Manual credit** – By an [adjustment](/handbook/growth/revops/commissions#commission-adjustments)
 
 ### My attainment this quarter
 
-- **Use it when** - you want your SQOs against quota so far
-- **Data** - live, this quarter
-- **Returns** - SQOs, quarterly quota, and attainment
+- **Use it when** – you want your SQOs against quota so far
+- **Data** – live, this quarter
+- **Returns** – SQOs, quarterly quota, and attainment
 
 ```sql
 SELECT count() AS sqos,
