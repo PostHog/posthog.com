@@ -90,22 +90,26 @@ export const auth = betterAuth({
 })
 ```
 
-- **Background sends:** Better Auth waits for these functions in some requests, such as a request for a new verification email. Because they return before the send finishes, the response time and the response don't tell anyone whether an account exists. On Cloudflare Workers, use the request's `ctx.waitUntil` in place of `waitUntil`. On a long-running Node.js server, the send finishes after the response anyway, so remove the `waitUntil` call and keep the send inside it.
-- **Errors:** `send` returns `{ data, error }` and doesn't throw. `sendAuthEmail` logs the `error`, with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). A failed send never fails the request.
-- **Sensitive:** `sensitive: true` keeps the link as it is, so it doesn't go through a click tracking redirect, and keeps the subject off engagement events. PostHog still counts opens. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
-- **Retries:** The client retries network errors, rate limits, an in-flight idempotency key, and a `503` with the same idempotency key, so a retry never sends the email twice.
-- **Users:** `distinctId: user.id` records each email and its [engagement events](/docs/workflows/engagement-events) on the user's person. Pass the same ID to `identify()`.
-- **Key:** `templateKey` names the email, so PostHog groups each email's metrics and sends under it.
-- **Sender:** PostHog sends from the project's default sender. To send from another verified address, add `from`, such as `from: "Hedgebox <security@example.com>"`.
-- **HTML:** To send HTML, pass `html` next to `text` or in its place. For a [React Email](https://react.email) component, see [send content from your code](/docs/workflows/transactional-emails/node#send-content-from-your-code).
+- **Background sends** - Better Auth waits for these functions in some requests, such as a request for a new verification email. Because they return before the send finishes, the send doesn't change the response time or the response, so neither one shows whether an account exists. Sign-up has its own check: with `requireEmailVerification: true`, Better Auth answers a sign-up for an address that already has an account the same way as a sign-up for a new one. On Cloudflare Workers, use the request's `ctx.waitUntil` in place of `waitUntil`. On a long-running Node.js server, the send finishes after the response anyway, so remove the `waitUntil` call and keep the send inside it.
+- **Errors** - `send` returns `{ data, error }` and doesn't throw. `sendAuthEmail` logs the `error`, with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). A failed send never fails the request.
+- **Sensitive** - `sensitive: true` keeps the link as it is, so it doesn't go through a click tracking redirect, and keeps the subject off engagement events. PostHog still counts opens. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
+- **Retries** - The client retries network errors, rate limits, an in-flight idempotency key, and a `503` with the same idempotency key, so a retry never sends the email twice.
+- **Users** - `distinctId: user.id` records each email and its [engagement events](/docs/workflows/engagement-events) on the user's person. Pass the same ID to `identify()`.
+- **Key** - `templateKey` names the email, so PostHog groups each email's metrics and sends under it.
+- **Sender** - PostHog sends from the project's default sender. To send from another verified address, add `from`, such as `from: "Hedgebox <security@example.com>"`.
+- **HTML** - To send HTML, pass `html` next to `text` or in its place. For a [React Email](https://react.email) component, see [send content from your code](/docs/workflows/transactional-emails/node#send-content-from-your-code).
 
 ## Send from a job queue
 
-When a job queue already sends your app's emails, add a job in Better Auth's function:
+When a job queue already sends your app's emails, add a job when Better Auth calls your function. Don't wait for the queue either, so that the response time doesn't show whether an account exists:
 
 ```ts
 sendResetPassword: async ({ user, url }) => {
-    await emailQueue.add("reset-password", { to: user.email, userId: user.id, url })
+    waitUntil(
+        emailQueue.add("reset-password", { to: user.email, userId: user.id, url }).catch((error) => {
+            console.error("Better Auth email not queued", error)
+        })
+    )
 },
 ```
 
