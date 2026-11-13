@@ -46,7 +46,7 @@ With the flag on, nothing is truncated or redacted. On posthog-python 8.0.0+ and
 
 ## Calling capture_ai directly
 
-If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture` and returns the captured event's UUID. The other capture v1 SDKs have an AI capture method too: `EnqueueAI` in Go, `capture_ai` in Rust, and `captureAi` on [iOS](/docs/libraries/ios/usage#ai-events), [Android](/docs/libraries/android#ai-events), and [Flutter](/docs/libraries/flutter#ai-events). Your SDK's [migration guide](/docs/libraries#sdk-versions-and-capture-v1) lists its AI settings. The mobile SDKs keep AI events in their own on-disk queue and drop an event over 8 MiB plus 64 KiB before sending it. On Flutter web, `captureAi` is a no-op.
+If you build AI events yourself instead of using the integrations, call `capture_ai` (Python) or `captureAi` (Node) instead of `capture`. It takes the same arguments as `capture` and returns the captured event's UUID. The other capture v1 SDKs have an AI capture method too: `EnqueueAI` in Go, `capture_ai` in Rust, and `captureAi` on [iOS](/docs/libraries/ios/reference#capture-ai), [Android](/docs/libraries/android/reference#capture-ai), and [Flutter](/docs/libraries/flutter/reference#capture-ai). Your SDK's [migration guide](/docs/libraries#sdk-versions-and-capture-v1) lists its AI settings. The mobile SDKs keep AI events in their own on-disk queue and drop an event over 8 MiB plus 64 KiB before sending it. On Flutter web, `captureAi` is a no-op.
 
 <CalloutBox icon="IconWarning" title="Plain capture drops large events in Python" type="caution">
 
