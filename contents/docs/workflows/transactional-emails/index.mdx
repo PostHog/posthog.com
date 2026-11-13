@@ -280,7 +280,7 @@ Work down this list. Each step rules out one cause.
 
 ## How transactional emails behave
 
-- **No opt-outs or frequency caps** - Transactional emails ignore marketing [opt-outs](/docs/workflows/opt-outs) and frequency caps. Use them only for emails that a person needs, never for marketing.
+- **No opt-outs or frequency caps** - Transactional emails ignore marketing [opt-outs](/docs/workflows/opt-outs) and the [frequency cap](/docs/workflows/frequency-cap). Use them only for emails that a person needs, never for marketing.
 - **Suppression still applies** - PostHog doesn't send to an address on your suppression list.
 - **Billing and quotas** - Transactional emails are billed and limited by quota like other workflow emails. See [pricing](/pricing) and [billing limits](/docs/billing/limits-alerts).
 - **Sending allowance** - Transactional emails count toward your project's [sending allowance](/docs/workflows/sending-reputation). When your project reaches its hourly or daily cap, emails wait in the queue until the allowance frees up. If a transactional email gets too many bounces or complaints, PostHog can pause its sending, and sends return `sending_paused`.
