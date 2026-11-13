@@ -664,6 +664,24 @@ PostHog.setup(
 
 Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.11.0 removed wireframe recording and the `screenshot` option; remove `screenshot` from your `SessionRecordingConfig` when you upgrade. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
 
+### Compose Multiplatform screens on iOS
+
+On iOS, session replay masks content by finding UIKit views, such as text fields and image views. Compose Multiplatform draws its whole UI into one view, so the SDK can't find the text fields, text, or images inside it, and `maskAllTextInputs` and `maskAllImages` don't mask them. Android isn't affected: it masks Compose content.
+
+From `posthog-kmp` 0.11.0, iOS records Compose Multiplatform screens as they appear, including what users type. Before 0.11.0, iOS didn't record Compose Multiplatform screens at all.
+
+Until the SDK can mask inside Compose on iOS, mask the whole Compose view if it can show sensitive content. Set `ph-no-capture` as the accessibility identifier of the view controller's view where you create it, usually in your Swift app code:
+
+```swift
+func makeUIViewController(context: Context) -> UIViewController {
+    let controller = MainViewControllerKt.MainViewController()
+    controller.view.accessibilityIdentifier = "ph-no-capture"
+    return controller
+}
+```
+
+Recordings then show that view as a black block, and you can still see the session's events, network requests and logs. To leave out iOS altogether, enable `sessionRecording` only on Android.
+
 On Android, enable experimental mask-alignment verification to help preserve screenshot captures during pixel-only redraws, such as continuously animated content:
 
 ```kotlin
@@ -852,7 +870,7 @@ Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The 
 - **Person processing in `beforeSend`:** when the SDK doesn't process person profiles for an event, it marks the event with the `process_person_profile` [event option](#event-options) instead of a `$process_person_profile = false` property. `beforeSend` reads and changes it in `event.options["process_person_profile"]`, and setting the `$process_person_profile` property there doesn't turn person processing on. A `$process_person_profile` that you pass to `capture()` now applies, even with `personProfiles = PersonProfiles.NEVER`. To turn person processing on, set the option in `beforeSend`, pass `CaptureOptions(eventOptions = mapOf(PostHogEventOptions.PROCESS_PERSON_PROFILE to true))` to `capture()`, call `identify()`, or set `personProfiles = PersonProfiles.ALWAYS`.
 - **Event options:** `$process_person_profile`, `$cookieless_mode`, `$ignore_sent_at`, and `$product_tour_id` have [event options](#event-options) that replace them. The properties still work.
 - **Event changes:** events with an empty name, or whose distinct ID `beforeSend` blanks, are dropped. `$feature_flag_called` for a missing flag leaves out `$feature_flag_response` – filter on *is not set*. `Application Installed`, `Application Updated`, and `Application Opened` no longer have `version` and `build` on iOS and macOS – use `$app_version` and `$app_build`. `$locale` is now the device's preferred language and region on Android, iOS, and macOS, such as `de-CH`, and a BCP 47 tag that keeps the script on the JVM, such as `zh-Hant-TW`. PostHog drops events whose name or distinct ID is over 200 bytes. On iOS and macOS, a `null` value inside a nested map is left out. On Android and the JVM, a `null` list element is sent as `null` at its position instead of being removed. `$sdk_debug_replay_capture_mode` is always `screenshot`. Android's `Deep Link Opened` leaves out query parameters whose name starts with `$`. Refer to the [migration guide](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md#event-changes) for the full list.
-- **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. On Android, Compose screens, including Compose Multiplatform UI, are now recorded, which can count against your replay quota. Because `screenshot` is gone, `SessionRecordingConfig` positional arguments and destructuring shift, so use named arguments. Refer to [Session replay](#session-replay).
+- **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. On Android, Compose screens, including Compose Multiplatform UI, are now recorded, which can count against your replay quota. On iOS, Compose Multiplatform screens are now recorded too, but their text fields, text and images aren't masked, so mask the Compose view first. Refer to [Compose Multiplatform screens on iOS](#compose-multiplatform-screens-on-ios). Because `screenshot` is gone, `SessionRecordingConfig` positional arguments and destructuring shift, so use named arguments. Refer to [Session replay](#session-replay).
 - **Replay throttling:** use `throttleDelayMs` instead of the deprecated `debouncerDelayMs`. The constructor still accepts `debouncerDelayMs`, but `copy(debouncerDelayMs = ...)` no longer compiles.
 - **Payloads:** `FeatureFlagResult.payload` is `null` for a payload that isn't valid JSON, instead of the raw string. On Android and the JVM, a JSON `null` payload is `null` instead of the string `"null"`. On the web target it's still the raw string.
 
