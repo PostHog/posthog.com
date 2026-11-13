@@ -25,6 +25,7 @@ export default function EditWrapper({
         onEditingChange?.(value)
     }
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
     const { user, getJwt } = useUser()
     const { mutate } = useContext(CurrentQuestionContext)
     const body = data?.attributes?.body
@@ -37,6 +38,7 @@ export default function EditWrapper({
         onSubmit: async (values) => {
             if (loading || !user?.profile?.id) return
             setLoading(true)
+            setError('')
             const jwt = await getJwt()
             const transformedValues = await transformValues(values, user?.profile?.id, jwt)
 
@@ -67,7 +69,7 @@ export default function EditWrapper({
             handleSetEditing(false)
 
             try {
-                await fetch(
+                const res = await fetch(
                     `${process.env.GATSBY_SQUEAK_API_HOST}/api/${
                         type === 'reply' ? 'replies' : 'questions'
                     }/${contentID}`,
@@ -84,9 +86,15 @@ export default function EditWrapper({
                         }),
                     }
                 )
+                if (!res.ok) {
+                    const json = await res.json().catch(() => null)
+                    throw new Error(json?.error?.message || 'Your edit could not be saved. Please try again.')
+                }
                 await onSubmit()
-            } catch {
+            } catch (err) {
                 if (mutate) await mutate()
+                setError((err as Error).message)
+                handleSetEditing(true)
             }
             setLoading(false)
         },
@@ -111,9 +119,17 @@ export default function EditWrapper({
                                 >
                                     {loading ? 'Saving...' : 'Save'}
                                 </OSButton>
-                                <OSButton onClick={() => handleSetEditing(false)} variant="secondary" size="md">
+                                <OSButton
+                                    onClick={() => {
+                                        setError('')
+                                        handleSetEditing(false)
+                                    }}
+                                    variant="secondary"
+                                    size="md"
+                                >
                                     Cancel
                                 </OSButton>
+                                {error && <span className="text-sm text-red dark:text-yellow">{error}</span>}
                             </>
                         )}
                     />

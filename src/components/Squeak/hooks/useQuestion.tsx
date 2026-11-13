@@ -209,7 +209,7 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                 mutate(optimisticData, false)
             }
 
-            const data = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
+            const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/replies`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -231,7 +231,13 @@ export const useQuestion = (id: number | string, options?: UseQuestionOptions) =
                         },
                     },
                 }),
-            }).then((res) => res.json())
+            })
+            const data = await res.json()
+            if (!res.ok) {
+                throw new Error(
+                    data?.error?.message || data?.message || 'The reply could not be posted. Please try again.'
+                )
+            }
 
             posthog?.capture('squeak reply', {
                 questionId: questionID,
