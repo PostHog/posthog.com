@@ -86,8 +86,6 @@ A beta doesn't need to be perfect, but it should provide value to the user and h
 
 Betas do not need to be performant for high-volume users and can have big bugs, but should be clearly marked as such in the UI.
 
-Keep betas short, and tell users up front that the product will get its own pricing at GA. See [pricing a product that started in beta](/handbook/growth/shipping-a-pricing-change#pricing-a-product-that-started-in-beta).
-
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 
   It's helpful to let the Developer Marketing team know when new betas are added. They'll then add the beta to [the changelog](/changelog), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/marketing/issues/new?template=launch-plan.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via <PrivateLink url="https://posthog.slack.com/archives/C08CG24E3SR">the marketing Slack channel</PrivateLink>.
@@ -103,6 +101,15 @@ Joining an alpha or beta triggers automatic feedback emails from the `beta-feedb
 Regardless, replies to this Google Group are routed to the support inbox, where the support team assesses each customer issue or piece of feedback, responds to the customer first, and routes it to the correct engineering team for follow-up. PMs and team leads are still encouraged to respond to and action this feedback for their alpha and beta releases, and to give merch credits as a thank you where appropriate.
 
 Teams can collect additional feedback if needed and the <SmallTeam slug="website" /> is able to help with creating feedback emails or funnels.
+
+### Pricing considerations during a beta
+
+Because betas are usually open to anyone who opts in, our sales team will often want customers to try them. These customers typically give us our best feedback, so getting them into betas is valuable from a product standpoint as well. The risk is that customers adopt a beta product without realizing its pricing will likely change at GA. This applies to open betas too, since any pricing during the beta can differ from the final GA pricing. To avoid surprises, set the right expectations during the beta:
+
+- **Don't ballpark a price unless we're confident in it.** Early estimates can come in far lower than the final price, and that's harder to walk back than not giving a number at all.
+- **Remember that any price sets an anchor.** If we charge for a beta product under an existing pricing model, customers may see the GA pricing as a price change rather than pricing for a new product. Products with nothing to compare against carry less of this risk.
+- **Consider the timing of new pricing relative to large contracts.** New pricing that lands right after a customer signs a big upfront deal is a bad experience. If a customer is a heavy user of a beta product, discuss it with them or give them a heads-up during their renewal.
+- **Be explicit about pricing when selling beta products.** When we ask customers to adopt a beta product, we should tell them it will get its own pricing at GA and that the price could be meaningfully higher. We don't need to give a number, just set the expectation.
 
 ## Phase 4: Releasing & launching to general availability
 
