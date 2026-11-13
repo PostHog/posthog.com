@@ -215,7 +215,10 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         const imageUrls = [...imageFields, 'images'].flatMap((field) => node.frontmatter?.[field] || [])
         await Promise.all(
             imageUrls
-                .filter((url) => typeof url === 'string' && url.includes('res.cloudinary.com/'))
+                .filter(
+                    (url) =>
+                        typeof url === 'string' && isValidUrl(url) && new URL(url).hostname === 'res.cloudinary.com'
+                )
                 .map(getPublicID)
                 .filter((id) => !cloudinaryCache[id])
                 .map((id) => cloudinaryLoader?.load(id))
