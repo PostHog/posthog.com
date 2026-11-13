@@ -17,7 +17,7 @@ import {
 } from '@posthog/icons'
 import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
-import { applications, topFeatures } from './product_analytics/slides'
+import { applications, keyFeatures } from './product_analytics/slides'
 import { getTool } from '../../data/tools'
 
 export const productAnalytics = {
@@ -77,11 +77,11 @@ export const productAnalytics = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',
@@ -343,7 +343,7 @@ export const productAnalytics = {
             {
                 name: 'Amplitude',
                 key: 'amplitude',
-                link: '/blog/posthog-vs-amplitude',
+                link: '/compare/posthog-vs-amplitude',
             },
             {
                 name: 'Mixpanel',

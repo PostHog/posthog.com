@@ -15,7 +15,7 @@ import {
     IconUnlock,
 } from '@posthog/icons'
 import { QuestionForm, useQuestion } from 'components/Squeak'
-import { AskMax, CurrentQuestionContext } from 'components/Squeak/components/Question'
+import { AskMax, CurrentQuestionContext, ModeratorTools } from 'components/Squeak/components/Question'
 import { Replies } from 'components/Squeak/components/Replies'
 import { BlockedBadge, isProfileBlocked, Profile } from 'components/Squeak/components/Profile'
 import Days from 'components/Squeak/components/Days'
@@ -503,6 +503,11 @@ export default function Thread({ permalink, topics }: { permalink: string; topic
                                 </p>
                             )}
                         </div>
+                        {isForumModerator && (
+                            <div className="pb-4">
+                                <ModeratorTools questionData={question} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

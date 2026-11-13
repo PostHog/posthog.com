@@ -70,7 +70,7 @@ Here are some activities your Tier 1 launch could include:
 - Blog announcement
 - Social media brief for Liam 
 - Demo video
-- Email announcement (or multiple, if you want to segment users and personalize your message)
+- [Email announcement](/handbook/marketing/email-comms) (or multiple, if you want to segment users and personalize your message)
 - Custom designs for blog covers, social posts, etc. 
 - <PrivateLink url="https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoglitos?node-id=3962-6">Memes</PrivateLink>
 
@@ -165,7 +165,7 @@ When informing users about maintenance, it is important to answer all of the fol
 - What will the impact be? Will insights, etc., still function?
 - Why is the maintenance being done, and what benefit will there be for users?
 
-We typically notify users of upcoming maintenance by email, so the Developer Marketing team will need a way to target the correct users before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
+We typically notify users of upcoming maintenance by email, so the Developer Marketing team will need a way to [target the correct users](/handbook/marketing/email-comms#targeting-emails) before they can update them. For smaller maintenance updates which will not cause any user updates, engineering teams can also update our status page.
 
 ## Incident communications
 

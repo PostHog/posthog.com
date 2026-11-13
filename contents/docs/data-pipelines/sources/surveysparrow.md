@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The SurveySparrow connector syncs your survey and feedback data into the PostHog Data warehouse, so you can analyze surveys, responses, questions, and contacts alongside your product data.
+The SurveySparrow connector syncs your survey and feedback data into the PostHog Data warehouse, so you can analyze surveys, responses, questions, contacts, support tickets, users, and share channels alongside your product data.
 
 ## Prerequisites
 
@@ -44,7 +44,7 @@ If you're unsure which data center your account uses, check your SurveySparrow a
 
 <SyncModes />
 
-The `responses` table supports incremental sync on `completed_time`, using SurveySparrow's server-side submission date filter. Only completed responses are synced – partial (in-progress) submissions are not imported. All other tables are full refresh only, since their API endpoints expose no reliable incremental cursor.
+The `responses` table supports incremental sync on `completed_time`, using SurveySparrow's server-side submission date filter. Only completed responses are synced – partial (in-progress) submissions are not imported. The `tickets` table supports incremental sync on `updated_at`, using SurveySparrow's server-side updated date filter. Each incremental sync starts one day before the last synced value, because SurveySparrow doesn't document the filter's timezone. Tickets in the overlap are merged, not duplicated. Tables without an incremental field are full refresh only, since their API endpoints expose no reliable incremental cursor.
 
 ## Configuration
 

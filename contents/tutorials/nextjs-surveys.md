@@ -7,6 +7,7 @@ showTitle: true
 sidebar: Docs
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/banners/tutorial-12.png
+ogImage: generated
 tags:
   - surveys
 ---
@@ -57,7 +58,7 @@ We'll use PostHog to create and control our survey as well as monitor results. I
 First, set up PostHog for use on the [client-side](/docs/libraries/next-js#client-side-setup) by installing the [JavaScript React SDK](/docs/libraries/react):
 
 ```bash
-npm install posthog-js @posthog/react
+npm install posthog-js@1 @posthog/react@1
 ```
 
 Then integrate PostHog by creating a `providers.js` file in your app folder and exporting a `PHProvider` component:

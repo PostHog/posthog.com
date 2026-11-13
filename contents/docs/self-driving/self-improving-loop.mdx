@@ -8,12 +8,6 @@ showTitle: true
 import { CallToAction } from 'components/CallToAction'
 import LiveSelfDrivingLoop from 'components/LiveSelfDrivingLoop'
 
-<CalloutBox icon="IconFlask" title="Open beta" type="action">
-
-Self-driving is in open beta. It's improving quickly – expect rough edges, and expect them to disappear fast.
-
-</CalloutBox>
-
 The self-improving loop is how PostHog turns product data into shipped changes, then checks whether they worked. The [overview](/docs/self-driving) has the loop at a glance. This page is how it works under the hood, stage by stage. Prefer it concrete? [Anatomy of a pull request](/docs/self-driving/anatomy-of-a-pr) follows one bug through every stage below.
 
 <LiveSelfDrivingLoop />
@@ -34,10 +28,10 @@ An agent investigates every report. It digs into your codebase and your PostHog 
 
 What happens next depends on whether the report is actionable:
 
-- If the report is **actionable**, an agent opens a **pull request** for it. The change is built in a sandbox and comes back with your CI and code review attached, like a teammate's PR.
+- If the report is **actionable** and you've turned on pull requests, an agent opens a **pull request** for it. The change is built in a sandbox and comes back with your CI and code review attached, like a teammate's PR.
 - Otherwise, the report is **surfaced in your inbox for input**, for example when it needs business context or a choice between valid approaches.
 
-Every actionable report gets a pull request, so the work that reaches you already has a proposed change attached. Since [pricing](/docs/self-driving/pricing) is per pull request, that's also what you're billed for.
+Pull requests are off by default. [Turn them on and set a priority threshold](/docs/self-driving/pricing#pull-requests) to choose which actionable reports get one, so the work that reaches you already has a proposed change attached.
 
 ## Review and ship
 

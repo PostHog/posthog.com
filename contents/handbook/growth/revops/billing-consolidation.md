@@ -61,7 +61,7 @@ Get a clear yes on each of these in addition to the confirmations above:
 
 1. **Add any grandfathered grants to the target organization.** Do this before any project moves.
 2. **Set access in the target organization.** Set the default access for the existing projects so that only their current team can open them. Do this before you invite new users, or they see all the existing projects.
-3. **Move the projects.** In the same region, an owner or admin of both organizations moves each project from project settings. Across regions, a PostHog engineer moves it. A source organization must have at least two projects to move one, so create an empty project in each source organization before you move its last project.
+3. **Move the projects.** In the same region, an owner or admin of both organizations moves each project from project settings. Across regions, a PostHog engineer moves it. A source organization can move its last project, so it does not need a second one.
 4. **Set access on each moved project.** Give access only to the team that owns the project.
 5. **Invite the users of each source organization to the target organization.** Each user then sees only the projects that you gave their team.
 6. **Cancel and invoice each source organization.** After all its projects move, cancel its subscription and invoice its accrued usage for the partial period. Do not cancel a subscription while the organization still has active projects. A free plan organization has usage limits, and the customer can lose data.

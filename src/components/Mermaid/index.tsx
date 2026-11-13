@@ -29,7 +29,14 @@ const Controls = () => {
     )
 }
 
-export default function Mermaid({ children }: { children: string }): JSX.Element {
+/** `config` styles this diagram only. It goes in as an init directive, so it never changes Mermaid's global config. */
+export default function Mermaid({
+    children,
+    config,
+}: {
+    children: string
+    config?: Record<string, unknown>
+}): JSX.Element {
     const [loading, setLoading] = useState(true)
     const mermaidRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
@@ -53,7 +60,7 @@ export default function Mermaid({ children }: { children: string }): JSX.Element
                 <Controls />
                 <TransformComponent contentStyle={{ width: '100%' }} wrapperStyle={{ width: '100%' }}>
                     <div ref={mermaidRef} className={`${loading ? 'invisible' : ''} mermaid-container w-full`}>
-                        {children}
+                        {config ? `%%{init: ${JSON.stringify(config)}}%%\n${children}` : children}
                     </div>
                 </TransformComponent>
             </TransformWrapper>

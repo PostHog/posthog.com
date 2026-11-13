@@ -43,7 +43,7 @@ Ask People & Ops in your onboarding channel when to expect GitHub access.
 
 -   Say hi to your new joiner in their onboarding channel and decide together where and when the in-person onboarding will happen. Request a budget through the Slack offsite app `/offsite`! For the budget and travel, see [In-person onboarding](/handbook/people/onboarding#in-person-onboarding).
 -   Please make sure you spend at least 3 days together, working through the [first week onboarding list](/handbook/people/onboarding#your-first-week) and spending time working on any role-specific tasks that are outlined in the new joiner's personal onboarding checklist.
-    -   Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite the in-person onboarding calendar as a guest.
+    -   Make sure to add the details of the in-person onboarding to the [In-person Onboarding Calendar](https://calendar.google.com/calendar/u/0?cid=Y19lMzdjNjE0NzM0NDAyOGJlY2ZkMTc0Y2MxZjUxZjY5ZTkxMzY0NzVlNTFjMTE3MjA4OGM2NWQwNjE1YTczNmRlQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20) so that other PostHog team members can join, if possible. Simply create an event in your calendar and then invite `c_e37c6147344028becfd174cc1f51f69e9136475e51c1172088c65d0615a736de@group.calendar.google.com` as a guest. The same calendar also lists [small team offsites](/handbook/company/offsites#small-team-offsites).
 -   You will remain the new joiner's main point of contact for the first few weeks, so please continue to check in with them at least once a week for the first month or so.
 -   As onboarding buddy, you are responsible for making sure the onboarding is fun and effective, so you should make sure there's a clear plan for work _and_ social time. Great in-person onboarding is crucial for getting someone started at PostHog.
     -   The plan doesn't need to be minute-by-minute, but do have a rough shape for the days you're together so the new joiner isn't left wondering what's next once the initial intro conversations are done. A little structure goes a long way, and still leaves plenty of room to explore and learn by doing.
@@ -240,7 +240,7 @@ If you have any issues or any feedback on how to improve a specific intro just p
 
 ## Finding answers at PostHog
 
-Need help finding something? We have a strong culture of self-sourcing answers - it helps you get unblocked faster and builds your intuition for where things live. Start with #ask-max, our AI that's read every handbook and documentation page. It'll point you to relevant docs instantly and is available 24/7.
+Need help finding something? We have a strong culture of self-sourcing answers - it helps you get unblocked faster and builds your intuition for where things live. Start in #at-posthog-anything - tag `@posthog` and it'll search every handbook and documentation page for you. It'll point you to relevant docs instantly and is available 24/7.
 
 Of course, if you're stuck or need context beyond what's documented, just ask in the relevant channel - people are always happy to help. The goal isn't to make you figure everything out alone, it's to give you the fastest path to answers.
 
@@ -250,15 +250,15 @@ Below are a list of Slack channels you may find helpful:
 
 ### Work-related channels
 
--   `#ask-max` - Max has access to all of our documentation and our handbook, and is a great place to start with many questions
--   <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> - ask the team when you cannot find an answer in the handbook, the docs, or `#ask-max`
+-   <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#at-posthog-anything</PrivateLink> - tag @posthog to draft PRs, pull usage info, or surface content from the handbook
+-   <PrivateLink url="https://posthog.slack.com/archives/C02E3BKC78F">#ask-posthog-anything</PrivateLink> - ask the team when you cannot find an answer in the handbook, the docs, or #at-posthog-anything
 -   <PrivateLink url="https://posthog.slack.com/archives/C0351B1DMUY">#tell-posthog-anything</PrivateLink> - company-wide announcements about our people, products, policies, and projects
--   <PrivateLink url="https://posthog.slack.com/archives/C07TQR0V16U">#at-posthog-anything</PrivateLink> - tag ```@posthog``` to draft PRs, pull usage info, or surface content from the handbook
 -   <PrivateLink url="https://posthog.slack.com/archives/CSPHFDZH8">#general</PrivateLink> - see new starters, work anniversaries, birthdays and all-hands recordings
 -   <PrivateLink url="https://posthog.slack.com/archives/C099B0YCULT">#changelog</PrivateLink> - keep up with all the cool things we're shipping across the team
--   `#today-i-learned` - where we share what we learn
--   `#demo-posthog-anything` - show the team something you built, or see what others are building
--   `#phishing-attempts` - report suspicious emails, texts, and messages here
+-   <PrivateLink url="https://posthog.slack.com/archives/C0975UEGHT5">#today-i-learned</PrivateLink> - where we share what we learn
+-   <PrivateLink url="https://posthog.slack.com/archives/C0AP5NXF8D7">#demo-posthog-anything</PrivateLink> - show the team something you built, or see what others are building
+-   <PrivateLink url="https://posthog.slack.com/archives/C0A4UC0H5AB">#shitposters-unite</PrivateLink> - the place to share earnest and shitposts alike
+-   <PrivateLink url="https://posthog.slack.com/archives/C09KU4CVBGX">#phishing-attempts</PrivateLink> - report suspicious emails, texts, and messages here
 -   <PrivateLink url="https://posthog.slack.com/archives/C015CRUQR7Y">#content-and-video-ideas</PrivateLink> - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
 -   <PrivateLink url="https://posthog.slack.com/archives/C01RJ7T212S">#newsletters</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C03C60FT1J7">#brand-mentions</PrivateLink>
@@ -271,15 +271,14 @@ Below are a list of Slack channels you may find helpful:
 If you are an engineer, join these in addition to the work-related channels above:
 
 -   <PrivateLink url="https://posthog.slack.com/archives/C0113360FFV">#dev</PrivateLink> - general engineering discussion
--   `#dev-ai` - how we use AI tools and coding agents in our own work
--   `#dev-stamp-exchange` - ask for a quick review when nobody on your team is free. See [how we review](/handbook/engineering/how-we-review)
--   `#github-rfcs` - all of our [RFCs](/handbook/company/communication#requests-for-comment-rfcs) are posted here
--   `#flakey-tests` - reports of tests that fail intermittently in CI
--   `#incidents` - incident declarations and post-mortem summaries. Set this channel to notify you about every message
+-   <PrivateLink url="https://posthog.slack.com/archives/C0AEM55RJ77">#dev-stamp-exchange</PrivateLink> - ask for a quick review when nobody on your team is free. See [how we review](/handbook/engineering/how-we-review)
+-   <PrivateLink url="https://posthog.slack.com/archives/C04B5C39X36">#github-rfcs</PrivateLink> - all of our [RFCs](/handbook/company/communication#requests-for-comment-rfcs) are posted here
+-   <PrivateLink url="https://posthog.slack.com/archives/C09ADEV3AJD">#flakey-tests</PrivateLink> - reports of tests that fail intermittently in CI
+-   <PrivateLink url="https://posthog.slack.com/archives/C03V7SP3Z3K">#incidents</PrivateLink> - incident declarations and post-mortem summaries. Set this channel to notify you about every message
 -   <PrivateLink url="https://posthog.slack.com/archives/C0185UNBSJZ">#alerts</PrivateLink> - company-wide alerts. Teams also have their own `#alerts-[team-name]` channels
--   `#support-infrastructure` - deployment problems, infrastructure questions, and requests for cloud access
--   `#aws-access` - use the `/awsaccess` command here to get temporary AWS permissions. See [cloud providers](/handbook/engineering/cloud-providers)
--   `#papercuts` - small product annoyances that anyone at PostHog can report. Your team's [support hero](/handbook/engineering/support-hero) picks up the ones in your area
+-   <PrivateLink url="https://posthog.slack.com/archives/C045QJCUGQ4">#support-infrastructure</PrivateLink> - deployment problems, infrastructure questions, and requests for cloud access
+-   <PrivateLink url="https://posthog.slack.com/archives/C09ULM0E6SW">#aws-access</PrivateLink> - use the `/awsaccess` command here to get temporary AWS permissions. See [cloud providers](/handbook/engineering/cloud-providers)
+-   <PrivateLink url="https://posthog.slack.com/archives/C0ACRAMJUAG">#papercuts</PrivateLink> - small product annoyances that anyone at PostHog can report. Your team's [support hero](/handbook/engineering/support-hero) picks up the ones in your area
 
 Every small team also has a `#team-[team-name]` channel and a `#support-[team-name]` channel, named after the team on the [teams page](/teams). Join the channels for your own team, then add the teams you work with most.
 
@@ -314,12 +313,11 @@ We encourage you to join and create channels focused around different types of h
 -   <PrivateLink url="https://posthog.slack.com/archives/C03PJA57E3V">#homelab</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C076X3C284D">#kids</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C01EJ20SK42">#listening-to</PrivateLink>
--   `#merch`
+-   <PrivateLink url="https://posthog.slack.com/archives/C04DWKH7DM3">#merch</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C02G88X9R2R">#pets</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C01LREJ3NPL">#rockets</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C08HBBYT9DW">#running</PrivateLink>
--   `#shitposters-unite`
--   `#skiing`
+-   <PrivateLink url="https://posthog.slack.com/archives/C05SHCN8NF2">#skiing</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C01L9FZBRPD">#stonks</PrivateLink>
 -   <PrivateLink url="https://posthog.slack.com/archives/C082AS81RD0">#wedding-planners</PrivateLink>
 

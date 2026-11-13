@@ -184,6 +184,13 @@ export const logrocket = {
         workflows: {
             available: false,
         },
+        data_warehouse: {
+            available: false,
+        },
+        // Galileo AI analyzes user sessions; there is no LLM call tracing
+        ai_observability: {
+            available: false,
+        },
     },
     platform: {
         deployment: {

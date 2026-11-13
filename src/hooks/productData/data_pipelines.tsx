@@ -38,11 +38,10 @@ const HedgehogCarryingPipe = (props: React.ComponentProps<typeof HedgehogConstru
 export const dataPipelines = {
     ...getTool('cdp'),
     handle: 'data_pipelines',
-    name: 'Data pipelines',
+    name: 'Data Pipelines',
     slug: 'data-pipelines',
     Icon: IconDecisionTree,
     type: 'data_pipelines',
-    // Must be a `Glow` colour, or the hero screenshot loses its glow.
     color: 'blue',
     colorSecondary: 'blue',
     docsSlug: 'data-pipelines',
