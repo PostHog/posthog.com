@@ -383,7 +383,7 @@ Call it right after you create the client and again whenever the language change
 ```js
 // With i18next or react-i18next
 posthog.setAppLanguage(i18n.resolvedLanguage)
-i18n.on('languageChanged', (language) => posthog.setAppLanguage(language))
+i18n.on('languageChanged', () => posthog.setAppLanguage(i18n.resolvedLanguage ?? null))
 ```
 
 Pass `null` to stop sending it:
