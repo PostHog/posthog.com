@@ -4,47 +4,11 @@ status: active
 
 # One check for each flow the Flutter docs teach. Every check is a baseline: a short
 # prompt in a user's words, no docs added. The prompt names PostHog and the kind of
-# analytics, and no API. The rubrics describe the correct result for posthog_flutter 5,
+# analytics, and no API. The rubrics describe the correct result for posthog_flutter 6,
 # the major the docs show. `install` runs in an app with no PostHog code. The other
 # checks run in apps that already use posthog_flutter 5. Agents don't build the app:
 # the rubrics are graded from the diff.
 checks:
-    - id: install
-      description: >-
-          Baseline: can an agent set up PostHog in a Flutter app from a one-line
-          request? The prompt names only the stack; the agent gets no docs, so docs-read
-          shows which pages it finds on its own. Saber targets Android, iOS and
-          desktop, with no web/ folder, so the native Android and iOS setup is graded
-          and the web snippet is not.
-      codebase_to_test: oss-saber
-      prompt: &install-prompt >-
-          Set up PostHog in this Flutter app.
-      criteria:
-          shared: [docs-read]
-          rubrics:
-              sdk-installed: >-
-                  {folder}/pubspec.yaml lists `posthog_flutter` at 5.x.
-              android-setup: >-
-                  android/app/src/main/AndroidManifest.xml has PostHog meta-data inside
-                  <application>: either `com.posthog.posthog.PROJECT_TOKEN` and
-                  `com.posthog.posthog.POSTHOG_HOST` (automatic setup), or
-                  `com.posthog.posthog.AUTO_INIT` set to false (manual setup). Fails if
-                  the token key is `com.posthog.posthog.API_KEY`. Cite the file and
-                  line(s).
-              ios-setup: >-
-                  ios/Runner/Info.plist has the same PostHog keys: either
-                  `com.posthog.posthog.PROJECT_TOKEN` and
-                  `com.posthog.posthog.POSTHOG_HOST`, or `com.posthog.posthog.AUTO_INIT`
-                  set to false. Fails if the token key is `com.posthog.posthog.API_KEY`.
-                  Cite the file and line(s).
-              dart-setup: >-
-                  If either platform sets AUTO_INIT to false, main() calls
-                  WidgetsFlutterBinding.ensureInitialized() and awaits
-                  Posthog().setup(config) with a PostHogConfig(<project token>) and
-                  config.host before runApp(). Fails if AUTO_INIT is false and nothing
-                  calls Posthog().setup(). Passes with no Dart change if both platforms
-                  use automatic setup.
-
     - id: event-by-user
       description: >-
           Baseline in Spark (sprksocial/client), an AT Protocol social app on
@@ -159,13 +123,16 @@ checks:
                   and the caught stack trace. Fails if it sends the error as a custom
                   event with capture(). Cite the file and line(s).
 
-    # Next major: the same tasks for a project on posthog_flutter 6. Expected to fail until the docs show that major.
-    - id: install-next
+    - id: install
       description: >-
-          The same task as install, for a project on posthog_flutter 6. Expected to
-          fail until the docs show that major.
+          Baseline: can an agent set up PostHog in a Flutter app from a one-line
+          request? The prompt names only the stack; the agent gets no docs, so docs-read
+          shows which pages it finds on its own. Saber targets Android, iOS and
+          desktop, with no web/ folder, so the native Android and iOS setup is graded
+          and the web snippet is not.
       codebase_to_test: oss-saber
-      prompt: *install-prompt
+      prompt: >-
+          Set up PostHog in this Flutter app.
       criteria:
           shared: [docs-read]
           rubrics:
