@@ -321,7 +321,7 @@ Apply your usual growth assumption to both halves. The post-plan run rate is the
 
 ### Don't quote a price for an unpriced product
 
-If a product in beta has no final price, don't give the customer a number or a "cost plus" estimate unless the product team has confirmed it. Customers plan around the first number they hear, and a higher final price breaks their trust. Say that pricing isn't final, and ask the product team for the expected direction. If a heavy beta user is renewing, raise the coming pricing during the renewal. See [pricing products that start in beta](/handbook/engineering/feature-pricing#pricing-products-that-start-in-beta).
+If a product in beta has no final price, don't give the customer a number or a "cost plus" estimate unless the product team has confirmed it. Customers plan around the first number they hear, and a higher final price breaks their trust. Say that pricing isn't final, and ask the product team for the expected direction. If a heavy beta user is renewing, raise the coming pricing during the renewal. See [pricing products that start in beta](/handbook/growth/shipping-a-pricing-change#pricing-a-product-that-started-in-beta).
 
 ### Tell the customer about the step-up
 

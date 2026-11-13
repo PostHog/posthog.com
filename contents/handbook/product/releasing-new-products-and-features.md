@@ -86,7 +86,7 @@ A beta doesn't need to be perfect, but it should provide value to the user and h
 
 Betas do not need to be performant for high-volume users and can have big bugs, but should be clearly marked as such in the UI.
 
-Keep betas short, and tell users up front that the product will get its own pricing at GA. See [pricing products that start in beta](/handbook/engineering/feature-pricing#pricing-products-that-start-in-beta).
+Keep betas short, and tell users up front that the product will get its own pricing at GA. See [pricing a product that started in beta](/handbook/growth/shipping-a-pricing-change#pricing-a-product-that-started-in-beta).
 
 <CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
 
