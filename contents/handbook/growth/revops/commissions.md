@@ -10,7 +10,7 @@ This page covers the math: what earns credit, who gets it, and which quarter it 
 
 If this page and a team page disagree on the math, this page is correct. Tell RevOps in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> so we can fix the other page.
 
-Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead), Clover (CSM), and Quill (BDR). The customers are made up. No real hedgehogs were invoiced.
+Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead), Clover (CSM), and Quill (BDR). The customers are made up. No real hedgehogs were invoiced
 
 ## How you get paid
 
