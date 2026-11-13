@@ -68,9 +68,9 @@ export default defineEventHandler(async (event) => {
   const requestHeaders = getRequestHeaders(event)
   for (const [key, value] of Object.entries(requestHeaders)) {
     const name = key.toLowerCase()
-    // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    const isNonBearerAuth = name === 'authorization' && !value?.startsWith('Bearer phc_')
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    const isNonBearerAuth = name === 'authorization' && !/^Bearer ph[csx]_/.test(value ?? '')
     if (value && !excludedHeaders.includes(name) && !isNonBearerAuth) {
       headers.set(key, value)
     }
@@ -130,9 +130,9 @@ export default defineEventHandler(async (event) => {
   const requestHeaders = getRequestHeaders(event)
   for (const [key, value] of Object.entries(requestHeaders)) {
     const name = key.toLowerCase()
-    // Forward the SDK's project token (Bearer phc_...), which capture v1 needs. Strip any other credentials.
-    // If your project token doesn't start with phc_, match exactly 'Bearer <your project token>' instead.
-    const isNonBearerAuth = name === 'authorization' && !value?.startsWith('Bearer phc_')
+    // Forward PostHog keys (Bearer phc_, phs_ or phx_), which the SDKs need. Strip any other credentials.
+    // To allow an older key without one of these prefixes, also match its exact 'Bearer <key>' value.
+    const isNonBearerAuth = name === 'authorization' && !/^Bearer ph[csx]_/.test(value ?? '')
     if (value && !excludedHeaders.includes(name) && !isNonBearerAuth) {
       headers.set(key, value)
     }
@@ -180,7 +180,7 @@ Here's what the code does:
 
 - Routes `/static/*` and `/array/*` requests to PostHog's asset server and everything else to the main API
 - Preserves query parameters (like `?compression=gzip-js`) required for compressed requests
-- Forwards relevant headers while excluding ones that shouldn't be proxied, such as cookies and any `Authorization` header that isn't a `Bearer phc_` project token. Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, so the handler forwards that header. If your project token doesn't start with `phc_`, check for exactly `Bearer <your project token>` instead.
+- Forwards relevant headers while excluding ones that shouldn't be proxied, such as cookies and any `Authorization` header that isn't a PostHog key (`Bearer phc_`, `phs_` or `phx_`). Capture v1 SDKs send the project token as `Authorization: Bearer <token>`, so the handler forwards that header. Keys created before these prefixes need their exact `Bearer <key>` value allowed too.
 - Reads the request body as binary to preserve gzip-compressed data
 - Forwards the client's IP address for accurate geolocation
 - Returns the response as binary data to handle all content types correctly

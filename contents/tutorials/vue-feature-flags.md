@@ -60,7 +60,7 @@ Since PostHog handles the management and evaluation of feature flags, we must se
 Start by installing the `posthog-js` library to get access to the [JavaScript Web SDK](/docs/libraries/js).
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 Create a new [plugin](https://vuejs.org/guide/reusability/plugins) by creating a new folder in your base directory called `plugins` and then a new file `posthog.js`:

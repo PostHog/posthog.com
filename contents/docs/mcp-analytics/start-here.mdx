@@ -41,11 +41,11 @@ Install the SDK for your server's language:
 <MultiLanguage>
 
 ```bash file=TypeScript
-npm install @posthog/mcp posthog-node
+npm install @posthog/mcp@1 posthog-node@5
 ```
 
 ```bash file=Python
-pip install posthog
+pip install "posthog<8"
 ```
 
 ```bash file=Go
@@ -53,11 +53,11 @@ go get github.com/posthog/posthog-go/posthogmcpsdk
 ```
 
 ```bash file=Ruby
-bundle add posthog-ruby
+bundle add posthog-ruby --version "~> 3.0"
 ```
 
 ```bash file=Rust
-cargo add posthog-rs --features mcp
+cargo add posthog-rs@0.31 --features mcp
 ```
 
 </MultiLanguage>
@@ -67,8 +67,7 @@ Set `POSTHOG_PROJECT_TOKEN` in your environment. Wrap your existing server once,
 <MultiLanguage>
 
 ```ts file=TypeScript
-import { PostHog } from "posthog-node"
-import { instrument } from "@posthog/mcp"
+import { PostHog, instrument } from "@posthog/mcp"
 
 const posthog = new PostHog(process.env.POSTHOG_PROJECT_TOKEN, {
   host: "https://us.i.posthog.com", // or https://eu.i.posthog.com
@@ -146,7 +145,7 @@ posthog.shutdown().await;
 
 Every SDK has the same defaults. Intent, model capture, conversation IDs, and exception events are on. Missing-capability reports are opt-in. The [Ruby](/docs/mcp-analytics/installation/ruby) and [Rust](/docs/mcp-analytics/installation/rust) SDKs are experimental.
 
-For TypeScript and Python servers, the wizard does the setup for you:
+For TypeScript, Python, Go, Ruby, and Rust servers, the wizard does the setup for you:
 
 <WizardCommand command="mcp-analytics" />
 

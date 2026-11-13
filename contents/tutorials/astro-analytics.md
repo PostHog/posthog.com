@@ -203,7 +203,7 @@ When you reload your page, it shows different button text controlled by the Post
 So far, we have only used PostHog on the client side. We can also set up PostHog on the server side to capture events on page load, evaluate feature flags before page loads, and more. To do this, start by installing the [Node SDK](/docs/libraries/node) by running:
 
 ```bash
-npm i posthog-node
+npm i posthog-node@5
 ```
 
 In the `src` folder, create a `posthog.js` file. This is where we set up the code to create the PostHog Node client using our project token and instance address.

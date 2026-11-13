@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The TestRail connector syncs your test management data — projects, test cases, runs, plans, and results — into the PostHog Data warehouse, so you can analyze QA activity and test outcomes alongside your product data.
+The TestRail connector syncs your test management data — projects, test cases, runs, plans, and results, along with the custom field, template, and configuration definitions they reference — into the PostHog Data warehouse, so you can analyze QA activity and test outcomes alongside your product data.
 
 ## Prerequisites
 

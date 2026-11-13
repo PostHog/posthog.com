@@ -16,7 +16,7 @@ import {
     IconWarning,
 } from '@posthog/icons'
 import { features } from './error_tracking/features'
-import { applications, topFeatures } from './error_tracking/slides'
+import { applications, keyFeatures } from './error_tracking/slides'
 import { getTool } from '../../data/tools'
 
 export const errorTracking = {
@@ -24,6 +24,7 @@ export const errorTracking = {
     Icon: IconWarning,
     type: 'error_tracking',
     teamSlug: 'error-tracking',
+    pocketGuideVolume: 'error-tracking',
     forumTag: 'error-tracking',
     color: 'orange',
     colorSecondary: 'red',
@@ -32,9 +33,9 @@ export const errorTracking = {
     pricingDescription:
         'Error Tracking is billed on $exception events ingested. You get 100k free every month, then pay for what you use – no per-seat charges.',
     seo: {
-        title: 'Error Tracking – Catch and fix issues faster with PostHog',
+        title: 'Error Tracking – Error monitoring and alerts | PostHog',
         description:
-            'Capture exceptions with stack traces, group them into issues, and get alerts. See the session replay behind every error. 100K exceptions free monthly.',
+            'Error monitoring with stack traces, issue grouping, and alerts. See the session replay behind every error. 100K exceptions free monthly.',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_ae1263a1b8.jpg',
     },
     /**
@@ -72,11 +73,11 @@ export const errorTracking = {
             props: { slides: applications },
         },
         {
-            slug: 'top-features',
-            name: 'Top features',
+            slug: 'key-features',
+            name: 'Key features',
             group: 'divided',
             icon: <IconSparkles className="size-4" />,
-            props: { slides: topFeatures },
+            props: { slides: keyFeatures },
         },
         {
             slug: 'ask-anything',

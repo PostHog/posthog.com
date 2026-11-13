@@ -255,7 +255,7 @@ The snippet is great for getting started fast, but it doesn’t provide customiz
 We can add all this functionality with the PostHog Python library, and this starts with installing it.
 
 ```bash
-pip install posthog
+pip install "posthog<8"
 ```
 
 In your `tutorial` project settings page, add your `project_api_key` (found in project settings) and your `api_host` (like `https://us.i.posthog.com` or `https://eu.i.posthog.com` if you’re on Cloud).

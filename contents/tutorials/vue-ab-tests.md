@@ -55,7 +55,7 @@ Run `npm run serve` to start your app.
 Next, we add PostHog (if you don't have a PostHog instance, you can [sign up for free](https://app.posthog.com/signup)). To do this, first install `posthog-js` .
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 Create a new [plugin](https://vuejs.org/guide/reusability/plugins) by first creating a new folder in your base directory called `plugins` and then a new file `posthog.js`:

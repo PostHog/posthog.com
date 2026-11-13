@@ -331,6 +331,10 @@ export const sentry = {
                 },
             },
         },
+        // Alert rules notify on issues, but there is no workflow builder for product events
+        workflows: {
+            available: false,
+        },
     },
     platform: {
         deployment: {
