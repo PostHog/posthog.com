@@ -90,10 +90,12 @@ export const auth = betterAuth({
 })
 ```
 
-- **Background sends** - Better Auth waits for these functions in some requests, such as a request for a new verification email. Because they return before the send finishes, the send doesn't change the response time or the response, so neither one shows whether an account exists. Sign-up has its own check: with `requireEmailVerification: true`, Better Auth answers a sign-up for an address that already has an account the same way as a sign-up for a new one. On Cloudflare Workers, use the request's `ctx.waitUntil` in place of `waitUntil`. On a long-running Node.js server, the send finishes after the response anyway, so remove the `waitUntil` call and keep the send inside it.
+- **Background sends** - Better Auth waits for these functions in some requests, such as a request for a new verification email. Because they return before the send finishes, the send doesn't change the response time or the response, so neither one shows whether an account exists.
+- **Sign-up** - To keep sign-up from showing whether an account exists, set `requireEmailVerification: true` in `emailAndPassword`. Better Auth then answers a sign-up for an address that already has an account the same way as a sign-up for a new one. Without it, the sign-up for an existing address fails.
+- **Other platforms** - On Cloudflare Workers, use the request's `ctx.waitUntil` in place of `waitUntil`. On a long-running Node.js server, the send finishes after the response anyway, so call `posthog.emails.send(...).then(...)` without the `waitUntil` wrapper.
 - **Errors** - `send` returns `{ data, error }` and doesn't throw. `sendAuthEmail` logs the `error`, with the `code` from the [errors table](/docs/workflows/transactional-emails#errors). A failed send never fails the request.
-- **Sensitive** - `sensitive: true` keeps the link as it is, so it doesn't go through a click tracking redirect, and keeps the subject off engagement events. PostHog still counts opens. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
-- **Retries** - The client retries network errors, rate limits, an in-flight idempotency key, and a `503` with the same idempotency key, so a retry never sends the email twice.
+- **Sensitive** - `sensitive: true` keeps the link as it is, so it doesn't go through a click tracking redirect, and keeps the subject off engagement events. PostHog still counts the opens of an HTML email. A text-only email has no open pixel. See [open and click tracking](/docs/workflows/transactional-emails/node#open-and-click-tracking).
+- **Retries** - The client makes an idempotency key for each `send` call. It retries network errors, rate limits, an in-flight idempotency key, and a `503` with that same key, so its own retries never send the email twice.
 - **Users** - `distinctId: user.id` records each email and its [engagement events](/docs/workflows/engagement-events) on the user's person. Pass the same ID to `identify()`.
 - **Key** - `templateKey` names the email, so PostHog groups each email's metrics and sends under it.
 - **Sender** - PostHog sends from the project's default sender. To send from another verified address, add `from`, such as `from: "Hedgebox <security@example.com>"`.
@@ -101,15 +103,23 @@ export const auth = betterAuth({
 
 ## Send from a job queue
 
-When a job queue already sends your app's emails, add a job when Better Auth calls your function. Don't wait for the queue either, so that the response time doesn't show whether an account exists:
+When a job queue, such as [BullMQ](https://docs.bullmq.io), already sends your app's emails, add a job when Better Auth calls your function. Don't wait for the queue either, so that the response time doesn't show whether an account exists:
 
 ```ts
 sendResetPassword: async ({ user, url }) => {
-    waitUntil(
-        emailQueue.add("reset-password", { to: user.email, userId: user.id, url }).catch((error) => {
-            console.error("Better Auth email not queued", error)
-        })
+    const job = emailQueue.add(
+        "reset-password",
+        { to: user.email, userId: user.id, url },
+        {
+            // Retry a failed send, with a growing wait between attempts
+            attempts: 5,
+            backoff: { type: "exponential", delay: 10_000 },
+            // The job data holds the reset link, so remove the job when it ends
+            removeOnComplete: true,
+            removeOnFail: true,
+        }
     )
+    waitUntil(job.catch((error) => console.error("Better Auth email not queued", error)))
 },
 ```
 
@@ -117,4 +127,4 @@ Send the email in the job as [send from a background job](/docs/workflows/transa
 
 ## Check that it works
 
-Sign up with your own email address, and open the link in the email. Each email appears under its key on the **Transactional** page in PostHog, with its sends and its [status](/docs/workflows/transactional-emails#check-an-emails-status).
+Sign up with your own email address, and open the link in the email. Each email appears under its key on the [**Transactional**](https://app.posthog.com/transactional) page in PostHog, with its sends and its [status](/docs/workflows/transactional-emails#check-an-emails-status).
