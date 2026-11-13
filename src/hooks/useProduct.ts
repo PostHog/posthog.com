@@ -2495,17 +2495,6 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                     "Omniscient AI for your business. Generate SQL queries, model your data, and get insights about your users' behavior all using PostHog AI to work faster than ever before.",
             },
         },
-        {
-            ...getTool('data_modeling'),
-            parentIcon: 'dataBlender',
-            Icon: IconAsterisk,
-            color: 'red',
-            colorSecondary: 'red',
-            seo: {
-                title: 'Transform, enrich, and model your data',
-                description: 'Get your data in the exact shape you need it.',
-            },
-        },
         // {
         //     name: 'Integrations library (145+)',
         //     parentIcon: 'spreadsheetSearch',
