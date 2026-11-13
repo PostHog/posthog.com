@@ -59,13 +59,13 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'AI datasets',
         owner: ['ai-observability'],
         notes: 'Dataset curation, versioning, exports, and retention for AI evaluations.',
-        label: 'llma/evals',
+        label: 'ai-observability',
     },
     'ai-evaluations': {
         feature: 'AI evaluations',
         owner: ['ai-observability'],
         notes: 'Online and offline evaluations, scorers, trace reviews, review queues, and evaluation reports.',
-        label: 'llma/evals',
+        label: 'ai-observability',
     },
     'ai-gateway': {
         feature: 'AI gateway',
@@ -76,7 +76,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'AI Observability',
         owner: ['ai-observability'],
         notes: 'LLM tracing, cost and latency analytics, multimodal content, trace summaries, and sentiment analysis.',
-        label: 'feature/llm-analytics',
+        label: 'ai-observability',
     },
     'ai-playground': {
         feature: 'AI playground',
@@ -92,7 +92,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'AI trace clustering',
         owner: ['ai-observability'],
         notes: 'Groups similar LLM traces to identify usage patterns and failure modes.',
-        label: 'feature/llma-clusters',
+        label: 'ai-observability',
     },
     alerts: {
         feature: 'Alerts',
