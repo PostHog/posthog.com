@@ -65,7 +65,7 @@ See our [identify docs](/docs/product-analytics/identify#how-to-merge-users) for
 
 PostHog drops events with invalid UUIDs.
 
-There are very few cases where it would be good to provide an event UUID. PostHog generates these for you.
+On legacy capture, there are very few cases where it would be good to provide an event UUID, because PostHog generates these for you. On [capture v1](/docs/api/capture-v1#event-uuids), every event must carry a `uuid`, and PostHog SDKs generate it.
 
 When generating UUIDs, there are many gotchas to be aware of. For example, deduping based on event UUID is not guaranteed due to how merges work in [ClickHouse](/docs/how-posthog-works/clickhouse).
 
@@ -191,7 +191,7 @@ Start with the `lib` and `lib_version` details. Warnings clustered on a single o
 
 Every event needs a `distinct_id` to attribute it to a person. PostHog reads the top-level `distinct_id` first, then falls back to `properties.distinct_id`, and drops the event when neither holds a usable value – when it's missing from both, `null`, empty, or only whitespace.
 
-PostHog accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. On [capture v1](/docs/api/capture-v1#choosing-a-distinct-id), events with these placeholder values are stored without a person profile. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) – placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
+Legacy capture accepts a wide range of values here: numbers and objects are converted to strings, and literal strings like `"null"`, `"undefined"`, and `"anonymous"` are valid IDs. On [capture v1](/docs/api/capture-v1#choosing-a-distinct-id), `distinct_id` must be a string, and events with these placeholder values are stored without a person profile. [Prefer real user IDs](/docs/getting-started/identify-users#2-use-unique-strings-for-distinct-ids) – placeholder values group unrelated users onto a single person, and merging them later raises [`cannot_merge_with_illegal_distinct_id`](#refused-to-merge-with-an-illegal-distinct-id).
 
 Most PostHog SDKs block the obvious mistakes for you - for example in the posthog-js SDK, `identify()` refuses `null`, `undefined`, an empty string, and the literal strings `"null"` and `"undefined"`. It logs `Unique user id has not been set in posthog.identify` and sends nothing, so a plain `identify()` call is rarely the source of this warning. Common causes include:
 

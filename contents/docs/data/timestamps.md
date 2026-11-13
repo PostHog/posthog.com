@@ -27,7 +27,7 @@ PostHog automatically computes timestamps for captured events, but you can also 
 
 ## Timestamp format
 
-To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO 8601` format like `2023-12-13T15:45:30.123Z` or `YYYY-MM-DDTHH:MM:SSZ`.
+On legacy capture, `timestamp` and `sent_at` fields should be in `ISO 8601` format like `2023-12-13T15:45:30.123Z` or `YYYY-MM-DDTHH:MM:SSZ`. Capture v1 needs RFC 3339 format, as described above.
 
 > **Note:** `posthog-js` also sends `$time` property, but this isn't used anywhere in the ingestion pipeline.
 

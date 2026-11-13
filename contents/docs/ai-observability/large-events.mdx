@@ -50,7 +50,7 @@ If you build AI events yourself instead of using the integrations, call `capture
 
 <CalloutBox icon="IconWarning" title="Plain capture drops large events in Python" type="caution">
 
-In posthog-python 7.x, `capture()` drops any event over 900 KiB before sending it and only logs an error. In 8.0, PostHog drops an event over [the 1MB event limit](/docs/data/ingestion-warnings#discarded-event-exceeding-1mb-limit) and the SDK reports it as `event_too_big`. Either way, a large `$ai_generation`, for example one that carries base64 images or audio, never reaches PostHog. Use `capture_ai()` for these events.
+In posthog-python 7.x, `capture()` drops any event over 900 KiB before sending it and only logs an error. In 8.0, PostHog drops an AI event over about 1MB that's sent with `capture()`, and the SDK reports it as `ai_event_too_big`. Either way, a large `$ai_generation`, for example one that carries base64 images or audio, never reaches PostHog. Use `capture_ai()` for these events.
 
 </CalloutBox>
 
