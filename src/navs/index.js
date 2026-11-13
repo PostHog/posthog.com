@@ -1951,14 +1951,6 @@ export const handbookSidebar = [
                                 name: 'Observability positioning',
                                 url: '/handbook/growth/sales/observability-positioning',
                             },
-                            {
-                                name: 'Error tracking positioning',
-                                url: '/handbook/growth/sales/error-tracking-positioning',
-                            },
-                            {
-                                name: 'Logs positioning',
-                                url: '/handbook/growth/sales/logs-positioning',
-                            },
                         ],
                     },
                 ],

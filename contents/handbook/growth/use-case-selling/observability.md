@@ -270,7 +270,6 @@ Error Tracking tells you what's wrong. Logs show what the system was doing when 
 - **Session Replay docs:** [Session Replay](/docs/session-replay)
 - **Product Analytics docs:** [Product Analytics](/docs/product-analytics)
 - **PostHog AI docs:** [Enable PostHog AI](/docs/posthog-ai/allow-access) · [Example prompts](/docs/posthog-ai/example-prompts)
-- **Competitive battlecard:** *To be added: Sentry / Datadog competitive positioning*
 
 ## Appendix: Company archetype considerations
 

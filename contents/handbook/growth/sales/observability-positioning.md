@@ -18,18 +18,13 @@ This page covers positioning, messaging, pricing, and competitors. For the basic
 
 **Who it's for:** engineering leads, platform, backend and product engineers at product-led companies, usually scaling startups to mid-market. Best fit: already on PostHog for analytics or replay, and running 3 to 4 disconnected tools (for example Sentry + LogRocket + Datadog).
 
-**Unique belief:** when something breaks, debugging is an investigation across tools. The error is in one place, the replay in another, the logs in a third, and the user's journey in your analytics. PostHog built observability on top of analytics, so errors, replays and logs share the same user and session.
-
 ## Key messages
 
 **Value prop:** product observability that already knows who your users are.
 
-| Every bug comes with the user attached | One product, one bill, no syncing | Ask your agent, skip the tabs |
-| --- | --- | --- |
-| See their replay, properties and events on every issue | Errors, replays, logs and traces together | Your coding agent queries errors, logs, traces and replays through the PostHog MCP |
-| Log lines link to the replay and error | No data to pipe between tools | Works in Cursor, Claude Code and VS Code, or use PostHog AI |
-| Go from a slow span to the user who waited | Analytics, flags and experiments right next to them | |
-| Sort issues by how many users they hit, and see which ones hurt conversion | | |
+- **Every bug comes with the user attached.** Errors, replays, logs and traces share the same user and session. [See how the clues connect](/handbook/growth/sales/observability-foundations#how-posthog-connects-the-clues).
+- **One product, one bill, no syncing.** Everything sits next to analytics, flags and experiments, with no data to pipe between tools.
+- **Ask your agent, skip the tabs.** Coding agents query errors, logs, traces and replays through the PostHog MCP in Cursor, Claude Code and VS Code, or use PostHog AI.
 
 ## Customer pains and what we say
 
@@ -61,6 +56,8 @@ No per-seat charges and a $0 base price. Every product has a free tier every mon
 
 At list prices, the same volumes cost roughly 2 to 5 times more on Datadog, mostly because of log indexing and per-host APM.
 
+We don't do battle cards. For detailed comparisons, use the [compare pages](/compare): [PostHog vs Sentry](/compare/posthog-vs-sentry), [Datadog](/compare/posthog-vs-datadog), [FullStory](/compare/posthog-vs-fullstory), and [LogRocket](/compare/posthog-vs-logrocket).
+
 > Find example deal sizes in the <PrivateLink url="https://www.figma.com/slides/yHjzK2vmjWdbkcNA9Ee4ph">sales training deck</PrivateLink>.
 
 | Competitor | Where we win | Where they win |
@@ -68,18 +65,6 @@ At list prices, the same volumes cost roughly 2 to 5 times more on Datadog, most
 | Sentry | User context on every error, and customers say we act on feedback much faster | More mature error tracking, feature for feature |
 | Datadog | Product context, usage-based pricing, no per-host APM | Infrastructure, Kubernetes, synthetics |
 | New Relic | Product context, no per-seat pricing | Far more mature APM |
-
-## Battle cards
-
-More detailed battle cards are in the making.
-
-| Competitor | Where they're strong | Where we win | Say this |
-| --- | --- | --- | --- |
-| Sentry | Mature error tracking with wide SDK coverage, plus performance and profiling | Errors sit next to product analytics, flags, experiments and replay with the same user. No seats. | Keep the error, add the user who hit it and what they did |
-| Datadog | Full infra and APM: hosts, Kubernetes, service maps, profiling | Price, the user side (replay and product analytics), and no per-host pricing | We're not replacing your infra monitoring. We're the part that knows the user |
-| New Relic | Full-stack monitoring in one platform | No per-user pricing (New Relic charges per Pro full user) and the product side of the story | Everyone on the team can use it without a seat bill |
-| FullStory, LogRocket | Replay and digital experience analytics | Replay sits next to errors, logs and traces, so devs can fix what they watch | Watch the bug, then see the error and the logs behind it |
-| Grafana | Open source dashboards and infra metrics, self-hosting | User context, and nothing to run | Grafana tells you the system is sad. PostHog tells you which user and why |
 
 ## What we're not
 
