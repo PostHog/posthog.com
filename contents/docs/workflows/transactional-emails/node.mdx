@@ -150,19 +150,17 @@ Pass the distinct ID that you pass to `identify()` as `distinctId`. This is usua
 
 From version 5.62.0, `send` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Name the email with `templateKey`, and pass `subject` with `html`, `text`, or both. PostHog sends the content as you wrote it.
 
-For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and pass the result as `html`:
+From version 5.69.0, you can pass a [React Email](https://react.email) component as `react`, in place of `html`. The SDK renders its HTML and plain text with `@react-email/render`, which you install next to `posthog-node`:
 
 ```jsx
-import { render } from "@react-email/render"
 import { PasswordResetEmail } from "./emails/password-reset"
 
 export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
-    const html = await render(<PasswordResetEmail firstName={firstName} resetLink={resetLink} />)
     const { data, error } = await posthog.emails.send({
         to: email,
         templateKey: "password-reset",
         subject: "Reset your password",
-        html,
+        react: <PasswordResetEmail firstName={firstName} resetLink={resetLink} />,
         from: "Hedgebox <security@example.com>",
         distinctId: userId,
         idempotencyKey: `password-reset-${resetRequestId}`,
@@ -175,7 +173,8 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 ```
 
 - **`templateKey`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
-- **`text`** - If you leave it out, PostHog makes it from `html`.
+- **`react`** - A React Email element. See [send React Email components](/docs/workflows/transactional-emails/react-email) for the install, the errors, and Next.js.
+- **`text`** - If you leave it out, PostHog makes it from `html`, or the SDK makes it from the rendered `react` element.
 - **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
 - **`sensitive`** - Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
 - **`tracking`** - What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
