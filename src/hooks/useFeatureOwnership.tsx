@@ -365,7 +365,7 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
     },
     'pipeline-transformations': {
         feature: 'Pipeline transformations',
-        owner: ['workflows'],
+        owner: ['ingestion'],
         label: 'feature/pipelines',
     },
     'pipeline-destinations': {

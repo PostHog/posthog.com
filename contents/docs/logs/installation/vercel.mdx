@@ -1,0 +1,78 @@
+---
+title: Vercel Logs installation
+platformIconName: IconCode
+showStepsToc: true
+---
+
+import { Steps, Step } from "components/Docs/Steps";
+import LogsNextSteps from "./_snippets/logs-next-steps.mdx";
+
+If you're deploying on Vercel, you can forward your Vercel logs to PostHog by creating a [log drain](https://vercel.com/docs/drains/reference/logs) that points to PostHog's Vercel-compatible endpoint. Every log line becomes a row in PostHog Logs.
+
+<Steps>
+
+<Step title="Get your project token" badge="required">
+
+You'll need your PostHog project token to authenticate log requests. This is the same key you use for capturing events and exceptions with the PostHog SDK.
+
+> **Important:** Use your **project token** which starts with `phc_`. Do **not** use a personal token (which starts with `phx_`).
+
+You can find your project token in [Project Settings](https://app.posthog.com/settings/project).
+
+</Step>
+
+<Step title="Create a Vercel log drain" badge="required">
+
+In your Vercel dashboard, create a log drain with a custom endpoint pointing to PostHog. The endpoint format is:
+
+```
+<ph_client_api_host>/i/v1/logs/vercel
+```
+
+Set authentication by adding a custom header on the drain:
+
+```
+Authorization: Bearer <ph_project_token>
+```
+
+> **Note:** You can also pass the token in the URL path (`/i/v1/logs/vercel/<ph_project_token>`) or as a query parameter (`?token=<ph_project_token>`), but the header approach is preferred because it keeps the token out of proxy access logs.
+
+Both JSON and NDJSON drain formats are supported. Vercel sends a test request with an empty body when the drain is created — PostHog acknowledges it with a 200.
+
+</Step>
+
+<Step title="Test your setup" badge="recommended">
+
+Once the log drain is created, verify that logs are flowing into PostHog:
+
+1. Trigger a deployment or generate some activity in your Vercel project
+2. Open the PostHog Logs interface
+3. Check that your Vercel log entries appear
+
+Your logs are tagged with `service.name` set to your Vercel project name, so you can filter by that attribute to find them.
+
+<CallToAction type="primary" to="https://app.posthog.com/logs">
+  View your logs in PostHog
+</CallToAction>
+
+</Step>
+
+<LogsNextSteps />
+
+</Steps>
+
+## How Vercel logs are mapped
+
+PostHog maps Vercel log drain fields to standard attributes:
+
+| Vercel field                                     | PostHog attribute                                                          | Notes                                                                                |
+| ------------------------------------------------ | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `message`                                        | `body`                                                                     | Falls back to `<method> <path> <status>` for request lines with no message           |
+| `timestamp`                                      | `timestamp`                                                                | Milliseconds                                                                         |
+| `projectName` / `projectId`                      | `service.name`                                                             | Project name preferred, falls back to project ID                                     |
+| `level`                                          | `severity`                                                                 | `fatal`, `error`, `warning` map to their equivalents; everything else maps to `info` |
+| `proxy.method`, `proxy.path`, `proxy.statusCode` | `http.request.method`, `url.path`, `http.response.status_code`             | Uses OpenTelemetry semantic conventions                                              |
+| `deploymentId`, `environment`, `branch`          | `vercel.deployment.id`, `deployment.environment.name`, `vcs.ref.head.name` | Stored as resource attributes                                                        |
+| `traceId` / `spanId`                             | Trace and span IDs                                                         | Hex values are converted for the row                                                 |
+
+Other Vercel-specific fields like `source`, `cache`, `pathType`, and `wafAction` are stored with a `vercel.*` prefix.

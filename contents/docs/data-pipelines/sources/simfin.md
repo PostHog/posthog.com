@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The SimFin connector syncs standardized financial statements, derived ratios, daily share prices, shares outstanding, and company metadata into the PostHog Data Warehouse, so you can analyze market and fundamentals data alongside your product data.
+The SimFin connector syncs standardized financial statements, derived ratios, daily share prices, shares outstanding, company metadata, filing metadata, and SimFin database changes into the PostHog Data Warehouse, so you can analyze market and fundamentals data alongside your product data.
 
 ## Prerequisites
 
@@ -32,7 +32,7 @@ When linking SimFin, you'll need:
 
 <SyncModes />
 
-Every SimFin table syncs as a full refresh.
+Every SimFin table syncs as a full refresh. The `filings`, `data_change_log`, and `changed_companies` tables are off by default, so select them when you configure the source.
 
 Most tables, including `filings`, make one API request per configured ticker on every sync. The `companies`, `data_change_log`, and `changed_companies` tables cover all companies and ignore the ticker setting. The `data_change_log` table makes one request per page.
 
