@@ -29,6 +29,9 @@ const isValidUrl = (url: string): boolean => {
 }
 
 const cloudinaryCache = {}
+// Persisted copy of the Cloudinary resource list. Produced by the master cache-warmup job and
+// restored in the preview build (see .github/workflows/{cache-warmup,deploy-preview}.yml), this
+// lets preview builds skip Cloudinary requests for cached images.
 const CLOUDINARY_CACHE_FILE = path.resolve(__dirname, '../.cloudinary-resources.json')
 
 let templateListPromise: Promise<any[]> | null = null
@@ -92,12 +95,17 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
         return
     }
 
+    // Reuse a previously fetched resource list when available. The loader below fetches only
+    // missing entries from Cloudinary, so restoring metadata greatly speeds up
+    // preview builds. A missing entry only omits image dimensions in onCreateNode (logged as a
+    // warning), so a stale cache degrades gracefully.
     if (fs.existsSync(CLOUDINARY_CACHE_FILE)) {
         try {
             const cached = JSON.parse(fs.readFileSync(CLOUDINARY_CACHE_FILE, 'utf-8'))
             Object.assign(cloudinaryCache, cached)
             console.log(`Loaded ${Object.keys(cached).length} Cloudinary resources from cache`)
         } catch {
+            // Corrupted/unreadable cache file — fall through to fresh lookups
             console.warn('Could not load cached Cloudinary metadata')
         }
     }
@@ -116,6 +124,7 @@ export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
             cloudinaryCache[resource.public_id] = resource
         })
 
+        // Persist for reuse by later builds (saved to the Actions cache by the master warmup job).
         fs.writeFileSync(CLOUDINARY_CACHE_FILE, JSON.stringify(cloudinaryCache))
         return publicIds.map((id) => cloudinaryCache[id])
     }
