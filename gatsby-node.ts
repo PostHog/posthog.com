@@ -146,6 +146,13 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         })
     }
 
+    if (stage === 'build-javascript' || stage === 'build-html') {
+        const config = getConfig()
+        const babelLoader = require('fs').realpathSync('node_modules/gatsby/dist/utils/babel-loader.js')
+        config.resolveLoader.alias = { [babelLoader]: path.resolve('gatsby/htmlJsLoader.cjs') }
+        actions.replaceWebpackConfig(config)
+    }
+
     if (stage === 'build-html') {
         actions.setWebpackConfig({
             optimization: {

@@ -675,6 +675,9 @@ importers:
       dataloader:
         specifier: 1.4.0
         version: 1.4.0
+      esbuild:
+        specifier: 0.25.9
+        version: 0.25.9
       eslint:
         specifier: ^7.9.0
         version: 7.32.0
