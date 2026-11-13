@@ -23,6 +23,8 @@ interface MenuItem {
     }
     /** `sidebar` appearance only: wrap a long label onto more lines instead of truncating it. */
     wrap?: boolean
+    /** `sidebar` appearance only: show the item grayed out, with no link. Pair it with a badge that says why. */
+    disabled?: boolean
 }
 
 /** A flat list of `{name}` headers + `{name,url}` links grouped into sections. */
@@ -220,6 +222,22 @@ const SidebarLink = ({
     const arrow = showsExternalArrow(menuItem)
     const [hovering, setHovering] = useState(false)
 
+    if (menuItem.disabled) {
+        return (
+            <span
+                aria-disabled="true"
+                className="flex items-center gap-1 w-full min-w-0 px-2 py-1 rounded text-sm text-primary opacity-50 cursor-not-allowed"
+                style={index > 0 ? { paddingLeft: 8 + index * 12 } : undefined}
+            >
+                <SidebarIcon icon={menuItem.icon} />
+                <MarqueeLabel hovering={false} wrap={menuItem.wrap}>
+                    {menuItem.name}
+                </MarqueeLabel>
+                <Badge badge={menuItem.badge} />
+            </span>
+        )
+    }
+
     return (
         <Link
             to={menuItem.url || ''}
@@ -323,7 +341,7 @@ const renderSidebarItems = (
 
         return (
             <React.Fragment key={key}>
-                {item.url ? (
+                {item.url || item.disabled ? (
                     <SidebarLink menuItem={item} index={index} onClick={onClick} activeItem={activeItem} />
                 ) : (
                     <SidebarSectionLabel>{item.name}</SidebarSectionLabel>
@@ -477,7 +495,7 @@ const buildSections = (items: MenuItem[]): MenuSection[] => {
     let started = false
 
     items.forEach((item) => {
-        const isHeader = !item.url && !(item.children && item.children.length > 0)
+        const isHeader = !item.url && !item.disabled && !(item.children && item.children.length > 0)
         if (isHeader) {
             if (started || current.items.length > 0) sections.push(current)
             current = { heading: item.name, items: [] }
