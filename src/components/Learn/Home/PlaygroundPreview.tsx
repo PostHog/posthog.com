@@ -1,6 +1,5 @@
 import React from 'react'
 import { IconArrowRight } from '@posthog/icons'
-import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import usePostHog from 'hooks/usePostHog'
 import { TWIG_URL } from '../../../constants'
@@ -20,18 +19,21 @@ export default function PlaygroundPreview(): JSX.Element {
     }
     return (
         <section>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-                <div className="max-w-xl">
-                    <h2 className="m-0 text-xl font-bold">Tinker with Twig</h2>
-                    <p className="mb-0 mt-1 text-secondary">
-                        <Link to={TWIG_URL} external>
-                            Twig
-                        </Link>{' '}
-                        is a live vacation rental website with PostHog built in. Click around, then open the PostHog
-                        Playground to see the events and code behind every click.
-                    </p>
-                </div>
-                <OSButton asLink to={TWIG_URL} external variant="primary" size="md" onClick={exploreTwig}>
+            <div className="max-w-xl">
+                <h2 className="m-0 text-xl font-bold">Tinker with Twig</h2>
+                <p className="mb-0 mt-1 text-secondary">
+                    Twig is a live vacation rental website with PostHog built in. Click around, then open the PostHog
+                    Playground to see the events and code behind every click.
+                </p>
+                <OSButton
+                    asLink
+                    to={TWIG_URL}
+                    external
+                    variant="primary"
+                    size="md"
+                    onClick={exploreTwig}
+                    className="mt-4"
+                >
                     Explore Twig
                 </OSButton>
             </div>

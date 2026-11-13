@@ -1,49 +1,23 @@
 import React, { useMemo, useState } from 'react'
-import { IconCheck, IconCopy } from '@posthog/icons'
-import OSButton from 'components/OSButton'
-import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import { Select } from 'components/RadixUI/Select'
 import { SearchInput } from 'components/UI/SearchInput'
+import PromptSnippet from 'components/Learn/PromptSnippet'
 import usePostHog from 'hooks/usePostHog'
+import useProduct from 'hooks/useProduct'
 import { POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides'
-import { LEARN_PROMPT_SETS, learnPrompts, type LearnPrompt } from '../learnPrompts'
+import { LEARN_PROMPT_SETS, learnPrompts } from '../learnPrompts'
 
 const ALL = 'all'
 
-function PromptCard({ prompt, volume }: { prompt: LearnPrompt; volume?: string }): JSX.Element {
-    const posthog = usePostHog()
-    const [copied, setCopied] = useState(false)
-    const copy = () => {
-        navigator.clipboard.writeText(prompt.prompt)
-        // Records the copy, not the prompt text. Same event as the product prompt pages.
-        posthog?.capture('learn_prompt_copied', { volume, resource: prompt.resource, surface: 'prompt_library' })
-        setCopied(true)
-        setTimeout(() => setCopied(false), 1500)
-    }
-    return (
-        <article className="flex min-w-0 flex-col gap-3 rounded-md border border-primary bg-primary p-4">
-            <div className="flex items-center justify-between gap-3">
-                <h4 className="m-0 text-base font-bold">{prompt.title}</h4>
-                <OSButton
-                    type="button"
-                    size="sm"
-                    variant="secondary"
-                    icon={copied ? <IconCheck /> : <IconCopy />}
-                    onClick={copy}
-                    aria-label={`Copy prompt: ${prompt.title}`}
-                >
-                    {copied ? 'Copied' : 'Copy'}
-                </OSButton>
-            </div>
-            {/* A preview: the card copies the full prompt. */}
-            <pre className="m-0 line-clamp-4 whitespace-pre-wrap break-words rounded border border-primary bg-white p-3 font-code text-[13px] leading-5 text-secondary dark:bg-dark">
-                {prompt.prompt}
-            </pre>
-        </article>
-    )
-}
-
 /** Every Learn agent prompt in one place, grouped by product, with search and a product filter. */
 export default function PromptLibrary(): JSX.Element {
+    const posthog = usePostHog()
+    const products = useProduct() as any[]
+    // Same icon and color as the Products menu.
+    const productIcon = (handle: string, className: string) => {
+        const info = products.find((p) => p.handle === handle)
+        return info?.Icon ? <info.Icon className={`${className} shrink-0 text-${info.color}`} /> : null
+    }
     const [query, setQuery] = useState('')
     const [product, setProduct] = useState(ALL)
 
@@ -66,23 +40,34 @@ export default function PromptLibrary(): JSX.Element {
             <p className="mb-0 mt-1 text-secondary">
                 Prompts that teach you PostHog using your own code and data. Copy one into your coding agent.
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center gap-2">
                 <SearchInput
                     value={query}
                     onValueChange={setQuery}
+                    appearance="pill"
                     placeholder="Search prompts"
                     aria-label="Search prompts"
-                    className="w-full @md:w-60"
+                    className="min-w-[200px] flex-1"
                 />
-                <ToggleGroup
-                    title="Filter by product"
-                    hideTitle
+                <Select
+                    groups={[
+                        {
+                            label: '',
+                            items: [
+                                { value: ALL, label: 'All products' },
+                                ...LEARN_PROMPT_SETS.map((set) => ({
+                                    value: set.productHandle,
+                                    label: set.productName,
+                                    icon: productIcon(set.productHandle, 'size-4'),
+                                })),
+                            ],
+                        },
+                    ]}
+                    placeholder="Product"
+                    ariaLabel="Filter by product"
                     value={product}
                     onValueChange={setProduct}
-                    options={[
-                        { label: 'All', value: ALL, default: true },
-                        ...LEARN_PROMPT_SETS.map((set) => ({ label: set.productName, value: set.productHandle })),
-                    ]}
+                    dataScheme="primary"
                 />
             </div>
             {groups.length === 0 && (
@@ -92,10 +77,25 @@ export default function PromptLibrary(): JSX.Element {
             )}
             {groups.map(({ set, volume, prompts }) => (
                 <div key={set.productHandle} className="mt-8">
-                    <h3 className="m-0 text-lg font-bold">{set.productName}</h3>
-                    <div className="mt-3 grid grid-cols-1 gap-4 @2xl:grid-cols-2">
+                    <h3 className="m-0 flex items-center gap-2 text-lg font-bold">
+                        {productIcon(set.productHandle, 'size-5')}
+                        {set.productName}
+                    </h3>
+                    <div className="mt-3 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
                         {prompts.map((prompt) => (
-                            <PromptCard key={prompt.title} prompt={prompt} volume={volume} />
+                            <PromptSnippet
+                                key={prompt.title}
+                                title={prompt.title}
+                                prompt={prompt.prompt}
+                                // Records the copy, not the prompt text. Same event as the product prompt pages.
+                                onCopy={() =>
+                                    posthog?.capture('learn_prompt_copied', {
+                                        volume,
+                                        resource: prompt.resource,
+                                        surface: 'prompt_library',
+                                    })
+                                }
+                            />
                         ))}
                     </div>
                 </div>

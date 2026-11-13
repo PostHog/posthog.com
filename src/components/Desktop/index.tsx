@@ -16,6 +16,8 @@ import {
     TRASH_SILHOUETTE,
     MCP_SILHOUETTE,
     MCP_VIEWBOX,
+    LEARN_SILHOUETTE,
+    LEARN_VIEWBOX,
 } from 'components/OSIcons/glyphs'
 import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
@@ -71,6 +73,12 @@ export const useProductLinks = () => {
                 label: 'Docs',
                 Icon: <GlassIcon path={DOCS_SILHOUETTE} fillRule="evenodd" />,
                 url: '/docs',
+                source: 'desktop',
+            },
+            {
+                label: 'Learn',
+                Icon: <GlassIcon path={LEARN_SILHOUETTE} viewBox={LEARN_VIEWBOX} />,
+                url: '/learn',
                 source: 'desktop',
             },
             {
