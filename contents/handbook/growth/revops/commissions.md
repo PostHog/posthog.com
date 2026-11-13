@@ -8,9 +8,9 @@ This page explains how commission and bonuses are calculated and paid each quart
 
 This page covers the math: what earns credit, who gets it, and which quarter it counts in. Your team page covers your plan: on-target earnings (OTE) split, quota, ramp, book rules, and how attainment turns into pay. See How we work for [TAEs and BDRs](/handbook/growth/sales/new-business-how-we-work), [TAMs](/handbook/growth/sales/how-we-work), and [CSMs](/handbook/customer-success/how-we-work).
 
-If this page and a team page disagree on the math, this page is correct. Tell RevOps in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> so we can fix the other page.
+This page is the source of truth for the rules. The comp views in PostHog implement them. If a team page, a view, or a dashboard disagrees with this page, post in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink>. One of them has a bug, and RevOps fixes it.
 
-Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead), Clover (CSM), and Quill (BDR). The customers are made up. No real hedgehogs were invoiced
+Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead), Clover (CSM), and Quill (BDR). The customers are made up. No real hedgehogs were invoiced.
 
 ## How you get paid
 
@@ -20,7 +20,7 @@ Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead
 | Cutoff: the 14th of the month after the quarter ends | [Payment status](#payment-status) is locked for the quarter. Overdue invoices don't count. | Follow up with any customer who hasn't paid. An invoice that's overdue on the 14th won't count toward your number.|
 | Snapshot: the 15th | RevOps freezes the numbers. This is what you're paid on. See [quarter end](#quarter-end). | Compare your dashboard with the snapshot. Raise anything that doesn't match in #team-revops. |
 | Payment | You're paid in the month after the quarter ends. For Q3, that's October. | Nothing. |
-| The next pay period | Prior-period at-risk invoices that are still unpaid will be clawed back. Prior-period overdue invoices that have since been paid will be compensated under that period’s rules.| Follow up on at-risk invoices or you lose that $ next quarter. |
+| The next cutoff | Last quarter's at-risk invoices that are still unpaid are clawed back. Last quarter's overdue invoices that have since been paid are paid out now. | Keep chasing unpaid invoices. You're paid once the customer pays. |
 
 ### How your credit becomes pay
 
@@ -28,9 +28,9 @@ Our examples use Spike (TAE), Hazel (TAE lead), Bramble (TAM), Thistle (TAM lead
 |---|---|---|
 | TAE | Annual contracts and monthly-paying customers you own. See [TAE](#tae). | Attainment = credit ÷ quarterly quota |
 | TAE lead | Your team's TAE credit. See [TAE leads](#tae-leads). | Attainment = team credit ÷ team quota |
-| TAM | Invoices and annual contracts for customers in your book. See [TAM](#tam). | The % of the dollar amount paid to the business|
+| TAM | Invoices and annual contracts for customers in your book. See [TAM](#tam). | A percentage of what the customer paid. See [rates](#rates-from-q4-2026). |
 | TAM lead | Your team's annual contracts and monthly invoices. See [TAM leads](#tam-leads). | Attainment = closed-won total ÷ lead quota |
-| CSM | The ARR of accounts in your book. See [CSM](#csm). | NRR = this quarter's ARR ÷ end of previous quarter's ARR |
+| CSM | The ARR of accounts in your book. See [CSM](#csm). | NRR = counted ARR this quarter ÷ base ARR from last quarter's payout snapshot |
 | CSM lead | Your team's combined books. See [CSM leads](#csm-leads). | Combined NRR of your team's books |
 | BDR | Sales-qualified opportunities (SQOs) you source. See [BDR](#bdr). | Attainment = SQOs ÷ quarterly SQO quota |
 
@@ -43,7 +43,7 @@ In your first three months, you're paid at least 100% of your OTE. See the [new 
 | Term | What it means |
 |---|---|
 | Annual contract | A customer who prepays credits for one year or more of expected usage. |
-| Monthly-paying customer | A customer with no prepaid annual credits, who pays a monthly |
+| Monthly-paying customer | A customer with no prepaid annual credits, who pays a monthly invoice. |
 | Close date | The date the deal is closed-won in Salesforce. |
 | Effective date | The later of the signature date and the contract start date. See [which quarter an annual contract counts in](#which-quarter-an-annual-contract-counts-in). |
 | Cutoff | The 14th of the month after the quarter ends: January 14, April 14, July 14, or October 14. Payment status at the end of that day is final. |
@@ -51,7 +51,9 @@ In your first three months, you're paid at least 100% of your OTE. See the [new 
 | Deal value | What an annual contract is worth for credit, after discounts. See [deal value](#deal-value). |
 | Prior value | The value of the annual contract a renewal replaces. This is the Salesforce **Up for renewal** amount. If that's empty, it's the prior contract's discounted annual recurring revenue (ARR). |
 | Growth | Deal value minus prior value. It's never below $0. |
-| Quota sheet | Who is on which team each quarter and their quota. To change a quota or team - flag in #team-revops. |
+| Quota sheet | Who is on which team each quarter, and their quota. To change a quota or team, post in #team-revops. |
+
+All dates are US/Pacific.
 
 ## What earns credit
 
@@ -59,7 +61,7 @@ In your first three months, you're paid at least 100% of your OTE. See the [new 
 |---|---|---|---|
 | TAE | Deal value or growth | Change in monthly real cash, quarter over quarter | – |
 | TAE lead | Your team's TAE credit | Your team's TAE credit | – |
-| TAM | % of the annual base, plus % of growth on renewals and expansions | % of each paid monthly invoice | – |
+| TAM | 10% of the annual base, plus 6.7% of growth on renewals and expansions | 5% of each paid monthly invoice | – |
 | TAM lead | Deal value of your team's annual contracts | Your team's paid monthly invoices | – |
 | CSM | Usage in the quarter × 4, toward NRR | The quarter's three invoices × 4, toward NRR | – |
 | BDR | – | – | Each SQO you source |
@@ -73,7 +75,7 @@ These rules apply to TAEs, TAMs, and TAM leads. CSMs are measured on usage inste
 #### Which quarter an annual contract counts in
 An annual contract counts in, and is paid in, the quarter of its effective date. The effective date is whichever comes later: the signature date or the contract start date.
 
-Customers sometimes backdate the start date to line up with their billing cycle, which can put it in a quarter that’s already closed. Because the effective date can never be earlier than the signature date, the contract still counts in an open quarter. This rule applies to contracts closed on or after July 1, 2026.
+Customers sometimes backdate the start date to line up with their billing cycle, which can put it in a quarter that's already closed. Because the effective date can never be earlier than the signature date, the contract still counts in an open quarter. This rule applies to contracts closed on or after July 1, 2026.
 
 | Customer | Signature date | Contract start date | Date we use | Quarter |
 |---|---|---|---|---|
@@ -104,8 +106,8 @@ For buyout deals, we remove the free buyout credit first: deal value = (list −
 
 How the customer pays decides how much of a multi-year contract counts:
 
-- **Paid upfront** - The full contract value counts in the quarter it starts.
-- **Paid yearly** - Only year one counts, at the standard one-year discount.
+- **Paid upfront** – The full contract value counts in the quarter it starts.
+- **Paid yearly** – Only year one counts, at the standard one-year discount.
 
 The same contract can be worth very different amounts depending on how it's paid.
 
@@ -157,17 +159,19 @@ The status decides whether an annual contract counts toward your credit (TAE) or
 |---|---|---|
 | Confirmed | The contract invoice is paid by the cutoff | Yes |
 | At risk | Not paid yet but not overdue, or a one-year contract with no invoice yet | Yes, until it's paid or clawed back |
-| Excluded | Overdue at the cutoff, or cancelled by a credit note | No |
+| Excluded | Overdue at the cutoff, or canceled by a credit note | Not this quarter. If the customer pays later, you're paid in the quarter they pay. |
 | Other quarter | Closed this quarter, but the effective date is in a later quarter | Counts in the quarter of its effective date |
 
 | Unpaid invoice | Before the cutoff | At the cutoff | At the next cutoff |
 |---|---|---|---|
-| Due before the cutoff | At risk until the due date, then excluded | Excluded | If paid late, you receive $ per the rules of the quarter of the effective date |
+| Due before the cutoff | At risk until the due date, then excluded | Excluded | Paid since: paid out in the quarter it was paid. Still unpaid: stays excluded. |
 | Due after the cutoff | At risk | At risk (counts) | Still unpaid: clawed back next quarter |
 
 An invoice created after the quarter ends never changes that quarter's status.
 
-> Hibernation Health signs in Q3. The invoice is due October 30, after the October 14 cutoff, so the contract counts in Q3 as at risk. If Hibernation Health sleeps through winter and hasn't paid by January 14, we claw the credit back in Q4.
+You're always paid once the customer pays. A late payment counts in the quarter it's paid, not the quarter the deal closed. Today RevOps adds late payments with an `include` [adjustment](#commission-adjustments); this will be automated.
+
+> Hibernation Health signs in Q3. The invoice is due October 30, after the October 14 cutoff, so the contract counts in Q3 as at risk. If Hibernation Health sleeps through winter and hasn't paid by January 14, we claw the credit back in Q4. If it pays in February, the credit is paid out in Q1.
 
 ### Monthly-paying customers
 
@@ -175,8 +179,8 @@ These rules apply to TAEs, TAMs, and TAM leads. CSMs are measured on usage inste
 
 - Only real cash counts.
 - A monthly invoice counts in the quarter it's paid.
-- **TAMs and TAM leads** - Monthly invoices still count when the customer also has an annual contract. This includes invoices paid before the annual contract starts, and invoices for usage beyond it.
-- **TAEs** - Monthly credit stops when the customer signs an annual contract. In that quarter, you're credited for the annual deal only.
+- **TAMs and TAM leads** – Monthly invoices still count when the customer also has an annual contract. This includes invoices paid before the annual contract starts, and invoices for usage beyond it.
+- **TAEs** – Monthly credit stops when the customer signs an annual contract. In that quarter, you're credited for the annual deal only.
 
 The TAE and TAM math is different. See [TAE](#tae) and [TAM](#tam).
 
@@ -184,8 +188,8 @@ The TAE and TAM math is different. See [TAE](#tae) and [TAM](#tam).
 
 Make sure you're the opportunity owner in Salesforce. Credit goes to the owner, if they're on the quota sheet as a TAE for the quarter.
 
-- **Annual contracts** - Credit is the **What counts** amount from the [deal type](#deal-type) table. At-risk contracts count. Excluded contracts don't.
-- **Attainment** - Credit ÷ quarterly quota.
+- **Annual contracts** – Credit is the **What counts** amount from the [deal type](#deal-type) table. At-risk contracts count. Excluded contracts don't.
+- **Attainment** – Credit ÷ quarterly quota.
 
 ### Monthly-paying customers
 
@@ -195,15 +199,15 @@ Make sure you're the opportunity owner in Salesforce. Credit goes to the owner, 
 - Credit = (this quarter's real cash × 4) − (last quarter's real cash × 4). **It can be negative**
 - The customer needs three paid monthly invoices in the quarter to count.
 
-> Spike closes Prickle & Co on a monthly plan. Prickle & Co paid $3,000 a month last quarter ($9,000 for the quarter) and pays $4,000 a month this quarter ($12,000 for the quarter). Spike’s credit is the annualized increase: ($12,000 × 4) − ($9,000 × 4) = $12,000. That $12,000 counts toward Spike’s quota attainment.
+> Spike closes Prickle & Co on a monthly plan. Prickle & Co paid $3,000 a month last quarter ($9,000 for the quarter) and pays $4,000 a month this quarter ($12,000 for the quarter). Spike's credit is the annualized increase: ($12,000 × 4) − ($9,000 × 4) = $12,000. That $12,000 counts toward Spike's quota attainment.
 
 ## TAE leads
 
 Your attainment is your team's combined attainment against quota.
 
-- **Team credit** - The sum of your TAEs' credit under the [TAE](#tae) rules
-- **Team quota** - The sum of your TAEs' quarterly quotas
-- **Attainment** - Team credit ÷ team quota
+- **Team credit** – The sum of your TAEs' credit under the [TAE](#tae) rules
+- **Team quota** – The sum of your TAEs' quarterly quotas. A TAE who starts the quarter in their first three months adds 50% of their quota. The quota sheet holds this as your TAE lead quota
+- **Attainment** – Team credit ÷ team quota
 
 > Hazel leads three ramped TAEs and one ramping TAE, each with a $250,000 quarterly quota. The team quota is ($250,000 × 3) + $125,000 = $875,000. The team earns $1,050,000 in credit, so Hazel is at 120%.
 
@@ -211,9 +215,9 @@ Your attainment is your team's combined attainment against quota.
 
 ### Who gets paid
 
-- **Monthly invoices** - The TAM assigned to the customer prior to the date the invoice is created.
-- **Annual contracts** - The TAM assigned to the customer prior to the close date, who is also the Salesforce opportunity owner. Make sure you're assigned as the TAM before the deal closes. If you're added after the close date, the contract doesn't count
-- **Handoffs** - If a customer moves to another TAM mid-quarter, each TAM is paid for the invoices from their time with the customer.
+- **Monthly invoices** – The TAM assigned to the customer on or before the date the invoice is created.
+- **Annual contracts** – The TAM assigned to the customer on or before the close date, who is also the Salesforce opportunity owner. If you're added after the close date, the contract doesn't count.
+- **Handoffs** – If a customer moves to another TAM mid-quarter, each TAM is paid for the invoices from their time with the customer.
 
 The customer must still be in a TAM book on the last day of the quarter. If it left earlier, no TAM is paid for it that quarter.
 
@@ -242,13 +246,13 @@ A line pays $0 if:
 - you aren't the Salesforce opportunity owner of an annual contract
 - you're not on the TAM roster that quarter
 - the invoice was paid with prepaid credit, account balance, or a credit note
-- the contract is overdue by the 14th [snapshot cut off date]
+- the contract invoice was overdue at the cutoff (the 14th)
 
 ## TAM leads
 
-- **Your team** - The TAMs who report to you in Salesforce, plus your own customers. A person counts if they're on the quota sheet as a TAM or TAM lead for the quarter. People on that quarter's TAE sheet don't count.
-- **Closed-won total** - The deal value of annual contracts that pay a TAM on your team. Add the real cash from monthly invoices that pay a TAM on your team. Excluded contracts drop out. At-risk contracts count.
-- **Attainment** - Closed-won total ÷ your lead quota.
+- **Your team** – The TAMs who report to you in Salesforce, plus your own customers. A person counts if they're on the quota sheet as a TAM or TAM lead for the quarter. People on that quarter's TAE sheet don't count.
+- **Closed-won total** – The deal value of annual contracts that pay a TAM on your team. Add the real cash from monthly invoices that pay a TAM on your team. Excluded contracts drop out. At-risk contracts count.
+- **Attainment** – Closed-won total ÷ your lead quota.
 
 > Thistle has a $1,000,000 lead quota. The team closes $1,100,000 in annual deal value and collects $200,000 from monthly invoices. Thistle is at $1,300,000 ÷ $1,000,000 = 130%.
 
@@ -258,37 +262,33 @@ CSMs earn a bonus on net revenue retention (NRR), not on deals. Your [team page]
 
 ### Which accounts count
 
-Your book is the set of accounts where you’re listed as CSM in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>.
+Your book is the accounts where you're listed as CSM in <PrivateLink url="https://us.posthog.com/project/2/customer_analytics/accounts">Customer Analytics</PrivateLink>. An account counts toward your NRR for a quarter if all of these are true:
 
-### Which accounts count toward your NRR
+- You're the assigned CSM on the second-to-last day of the quarter.
+- You've been the CSM for at least one month of that quarter.
+- The account isn't excluded (see below).
 
-An account counts toward your NRR for a quarter if all of these are true:
+**Changes to your book**
 
-- You’re the assigned CSM on the second-to-last day of the quarter.
-- You’ve been the CSM for at least one month of that quarter.
-- The account isn’t excluded (see below).
-- Changes to your book
+In the first month of each quarter, review your book and tell your team lead about any account that shouldn't be there.
 
-In the first month of each quarter, review your book and tell your team lead about any account that shouldn’t be there.
-
-- Removed in the first month: doesn’t count that quarter.
+- Removed in the first month: doesn't count that quarter.
 - Added in the last month: starts counting next quarter.
-- After the first month: the account stays in your book for the rest of the quarter. The only exceptions are:
-- The account moves to the YC/Startup program.
-- Simon or Ben Bradley approves the removal in a public Slack thread.
-- Excluded accounts
+- After the first month: the account stays in your book for the rest of the quarter, unless it moves to the YC/Startup program, or Simon or Ben Bradley approves the removal in a public Slack thread.
+
+**Excluded accounts**
 
 These accounts never count toward NRR:
 
 - Accounts in the YC program, including any that received YC credits
 - Accounts that churned in an earlier quarter
-- Accounts that have been manually exclude per various reasons
+- Accounts on the <PrivateLink url="https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ/edit?gid=1381975975#gid=1381975975">NRR exclusions sheet</PrivateLink>, approved by Simon or Ben Bradley. See [commission adjustments](#commission-adjustments).
 
 ### How NRR is calculated
 
-- **NRR** - Counted ARR this quarter ÷ base ARR.
-- **Base ARR** - What the account actually spent last quarter × 4, before discounts. If it was in a CSM book last quarter, this comes from last quarter's [snapshot](#how-csm-data-carries-into-the-next-quarter). Grace doesn't change it.
-- **Counted ARR** - The account's usage this quarter × 4. For monthly-paying customers, that's their three invoices in the quarter × 4. For annual contracts, it's their usage-based spend × 4, not the contract value ÷ 12.
+- **NRR** – Counted ARR this quarter ÷ base ARR.
+- **Base ARR** – What the account actually spent last quarter × 4, before discounts, taken from last quarter's payout [snapshot](#how-csm-data-carries-into-the-next-quarter). Grace doesn't change it. An account new to a CSM book has no snapshot row, so its base is last quarter's usage × 4.
+- **Counted ARR** – The account's usage this quarter × 4. For monthly-paying customers, that's their three invoices in the quarter × 4. For annual contracts, it's their usage-based spend × 4, not the contract value ÷ 12.
 
 An account needs spend in all three months of last quarter to have a base. If it doesn't have one, it starts counting next quarter.
 
@@ -325,10 +325,10 @@ CSM team leads are paid on the combined NRR of their team's books. The CS lead i
 
 ## BDR
 
-- **SQO** - A Salesforce opportunity with lead source **Outbound**. It counts in the month it's created. The deal doesn't need to close.
-- **Who gets it** - The BDR who created an Outbound task on the same account. If more than one BDR did, the earliest task wins. You must be on the quota sheet.
-- **Quarterly quota** - 3 × your monthly quota.
-- **Attainment** - SQOs ÷ quarterly quota. There's no cap.
+- **SQO** – A Salesforce opportunity with lead source **Outbound**. It counts in the month it's created. The deal doesn't need to close.
+- **Who gets it** – The BDR who created an Outbound task on the same account. If more than one BDR did, the earliest task wins. You must be on the quota sheet.
+- **Quarterly quota** – 3 × your monthly quota.
+- **Attainment** – SQOs ÷ quarterly quota. There's no cap.
 
 > Quill has a monthly quota of three, so the quarterly quota is nine. Quill books 12 SQOs, which is 133%. Quill dug deep into the outbound list.
 
@@ -346,9 +346,11 @@ The snapshot doesn't include deal changes after the snapshot date. If a number i
 
 Each quarter's CSM snapshot sets the base for the next quarter: each account's actual ARR, before any grace adjustment. For example, Q4 ARR is compared against the Q3 snapshot. A late change to live Q3 data can't move the Q4 base.
 
-## Adjustments
+## Commission adjustments
 
 Sometimes the data is right but a rule gives the wrong answer, like a deal paid through AWS Marketplace or credit that belongs to someone else. RevOps fixes these with a row in an adjustments sheet. Don't edit the dashboards or views.
+
+These are different from [revenue adjustments](/handbook/growth/revops/revenue-adjustments), which apply to company retention metrics, not to pay.
 
 ### How to ask for one
 
@@ -357,7 +359,7 @@ Sometimes the data is right but a rule gives the wrong answer, like a deal paid 
 3. **RevOps adds the row.** Ben Bradley or RevOps approves it. Don't edit the sheets yourself.
 4. **Check it took effect after the next sync.** The quota sheet syncs every six hours, and the CSM sheet every 24 hours. On the TAE, TAM, and BDR dashboards, the **Adjustments (from the quota sheet)** tile shows each row and how it applies.
 
-Adjustments must be in before the snapshot on the 15th to count for that quarter.
+An adjustment must be in before the snapshot on the 15th to count for that quarter.
 
 ### TAE, TAM, and BDR
 
@@ -377,8 +379,8 @@ Every row needs a reason and the approver's email.
 
 CSM adjustments go in the <PrivateLink url="https://docs.google.com/spreadsheets/d/1SJbrgkLeGoO5nu0FG0hJ-u2N1vXtOFhfcEBQeCCjgiQ">CSM adjustments sheet</PrivateLink>:
 
-- **nrr_exclusions** - Leaves an account out of NRR for one or more quarters. Simon or Ben B approves each one.
-- **Quarterly adjustments** - Replaces an account's revenue for a month, for example after an accidental spike that wasn't credited with the right reason.
+- **nrr_exclusions** – Leaves an account out of NRR for one or more quarters. Simon or Ben B approves each one.
+- **Quarterly adjustments** – Replaces an account's revenue for a month, for example after an accidental spike that wasn't credited with the right reason.
 
 ### After the snapshot
 
@@ -396,16 +398,41 @@ Start here. Set the **Comp quarter** filter first, for example `2026-Q4`. Then f
 
 | Team | Dashboard | Filter to yourself |
 |---|---|---|
-| TAE | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2117716">TAE Quota Attribution (2026)</PrivateLink> | **tae** - part of your email, for example `spike` |
+| TAE | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2117716">TAE Quota Attribution (2026)</PrivateLink> | **tae** – part of your email, for example `spike` |
 | TAE lead | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2117716">TAE Quota Attribution (2026)</PrivateLink> | Leave **tae** blank to see everyone, or filter to each TAE. There's no team roll-up tile yet. |
-| TAM | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2066634">TAM Compensation (2026 Comp Model)</PrivateLink> | **tam** - your full email or full name |
+| TAM | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2066634">TAM Compensation (2026 Comp Model)</PrivateLink> | **tam** – your full email or full name |
 | TAM lead | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2066634">TAM Compensation (2026 Comp Model)</PrivateLink>, the **TAM Lead attainment (closed-won)** and **TAM Lead detail** tiles at the bottom | Quarter only. Each tile shows every team. |
-| CSM and CSM lead | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2158711">CSM Quarterly Attainment - NRR</PrivateLink> | **nrr_quarter** - the first day of the quarter, for example `2026-10-01`. **csm_email_accounts_drilldown** - your email. |
-| BDR | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2164347">BDR Quota Attribution (2026)</PrivateLink> | **bdr** - part of your email or name |
+| CSM and CSM lead | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2158711">CSM Quarterly Attainment - NRR</PrivateLink> | **nrr_quarter** – the first day of the quarter, for example `2026-10-01`. **csm_email_accounts_drilldown** – your email. |
+| BDR | <PrivateLink url="https://us.posthog.com/project/2/dashboard/2164347">BDR Quota Attribution (2026)</PrivateLink> | **bdr** – part of your email or name |
 
 To see everyone, leave the person filter blank. On the TAM dashboard, you can also filter by **account_name**. Part of the name is enough.
 
-The TAE, TAM, and BDR dashboards each have a Data checks (RevOps) tile that lists records to fix. On the TAM dashboard, it also lists annual contracts that don’t count, because the TAM was added after the close date or isn’t the opportunity owner. These three dashboards also have an **Adjustments (from the quota sheet)** tile. See [adjustments](#adjustments).
+The TAE, TAM, and BDR dashboards each have a **Data checks (RevOps)** tile that lists records to fix. On the TAM dashboard, it also lists annual contracts that don't count, because the TAM was added after the close date or isn't the opportunity owner. These three dashboards also have an **Adjustments (from the quota sheet)** tile. See [adjustments](#commission-adjustments).
+
+### How the numbers flow
+
+```
+Salesforce (contracts, owners, dates) ──┐
+Stripe (invoices, payments, refunds) ───┼─> comp_* views (live, one rule each) ─> dashboards
+Quota sheet (quotas, teams, adjustments)┤                                          │
+TAM assignment history ─────────────────┘        snapshot on the 15th <─────────────┘
+                                                        │
+                                           comp_account_snapshots (frozen: what you're paid on)
+```
+
+Each view applies one part of this page. Its header comment and column descriptions say which. The monthly revenue behind the CSM number comes from the [revenue views](/handbook/growth/revops/revenue-views).
+
+| View | What it applies |
+|---|---|
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd18-fe2a-0000-ea97-9a7640b80c57">comp_deals</PrivateLink> | Effective date, deal value, deal type, growth |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a1023f-e022-0000-ef08-18cffc37554f">comp_annual_deals</PrivateLink> | Paid upfront, payment status, TAE credit, TAM base |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd16-39a6-0000-6135-3c32c38a75f8">comp_invoices</PrivateLink> | Real cash, paid date, credit notes |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fe0d-0967-0000-9c94-487f6c01d223">comp_tae_quota_lines</PrivateLink> | TAE credit, including monthly credit and adjustments |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd97-f31c-0000-84d2-1c1ccc62644d">comp_tam_payout_lines</PrivateLink> | TAM payout, rates, who gets paid, adjustments |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fe89-cc84-0000-ae66-ff01c65bab04">comp_bdr_sqo_lines</PrivateLink> | SQOs and who gets them |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a0fd17-3e5a-0000-2b84-92633966a379">comp_quotas</PrivateLink> | Quotas and teams from the quota sheet |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a14103-6b88-0000-e989-dafe23cb58c2">comp_account_lines_live</PrivateLink> | Every team's lines in one place, including CSM NRR |
+| <PrivateLink url="https://us.posthog.com/project/2/sql?open_view=01a14104-e22f-0000-4b06-aff178434df0">comp_account_snapshots</PrivateLink> | The frozen record you're paid from |
 
 ### Queries
 
