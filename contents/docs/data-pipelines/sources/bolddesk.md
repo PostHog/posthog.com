@@ -15,8 +15,6 @@ import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The BoldDesk connector syncs your help desk data – tickets, ticket updates, ticket worklogs, contacts, contact groups, agents, satisfaction ratings, groups, and brands – into PostHog, so you can analyze support activity alongside your product data.
 
-> **Note:** This source is currently in **beta**.
-
 ## Prerequisites
 
 You need a BoldDesk account with API access. You'll need your BoldDesk subdomain and an API key.
