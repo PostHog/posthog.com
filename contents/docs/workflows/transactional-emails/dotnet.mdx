@@ -33,7 +33,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-dotnet add package PostHog --version 2.24.0
+dotnet add package PostHog --version 2.25.0
 ```
 
 For ASP.NET Core, install `PostHog.AspNetCore` instead.
@@ -215,6 +215,8 @@ public async Task<string> SendPasswordResetAsync(User user, string html, string 
 `SendTemplateEmailOptions` sends a template made in PostHog, and `SendCodeEmailOptions` sends your content. Content from your code takes no template data, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
 
 ### Copies and attachments
+
+Copies and attachments need version 2.25.0 or later.
 
 `SendCodeEmailOptions` takes `Cc`, `Bcc`, and `Attachments`. `Cc` and `Bcc` are lists of plain addresses. Each attachment is an `EmailAttachment` with a `Filename` and the file's bytes as `Content`, and optionally `ContentType` and `ContentId`. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, the send fails with an error, and PostHog sends nothing. The client uploads the files to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, [allow the upload host](/docs/workflows/transactional-emails/api#allow-the-upload-host). A template send takes none of these fields, because the template uses its own settings.
 
