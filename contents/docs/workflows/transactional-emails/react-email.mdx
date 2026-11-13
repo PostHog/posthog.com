@@ -96,7 +96,7 @@ A send with `react` can return these error codes. For each one, the SDK sends no
 
 | Code | Cause | Fix |
 | --- | --- | --- |
-| `invalid_form` | The send has `react` and `html`, or `react` and `templateId`. | `react` replaces `html`, so pass one of them. A template in PostHog takes no `react`, because PostHog renders the template. |
+| `invalid_form` | The send has `react` and `html`, or `react` and `templateId`. Or it has `sensitive` on an SDK version earlier than 5.71.0. `error.message` names the field. | `react` replaces `html`, so pass one of them. A template in PostHog takes no `react`, because PostHog renders the template. For `sensitive`, upgrade to version 5.71.0 or later. |
 | `missing_react_renderer` | The SDK can't load `@react-email/render`. | Install `@react-email/render` with `react` and `react-dom` next to `posthog-node`. |
 | `react_render_failed` | The component threw an error, or didn't finish rendering before the email request timeout. The timeout is 15 seconds by default, and `emailRequestTimeoutMs` on the client changes it. | If the component threw, `error.cause` holds its error. Fix the component, and render it in a test with the same props to see the error. |
 
