@@ -181,8 +181,10 @@ Steps:
 -   Something seems off
 -   They've asked for multiple refunds lately
 -   The case doesn't match the simple cases above
--   It's a big customer (spending $1,667+ monthly)
+-   It's a big customer (spending $1,667+ monthly), unless it's a small credit (see below)
 -   Need to create or modify an invoice for the correction. Support team should not create or modify invoices. Invoicing responsibilities will be handled by RevOps to maintain accuracy.
+
+You don't need to escalate a small credit only because the customer is big. If the credit is under $1,000, it's for a first occurrence, it clearly fits one of the scenarios above, and nothing else on this list applies, use your judgement and go ahead. Add a note with your calculation and a reference link, so others can see why you gave it.
 
 Post in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> and tag the RevOps team Slack group with what you checked, what you think we should do, and any other relevant context, and attach a private note to the ticket linking to the conversation. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
 
