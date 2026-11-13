@@ -277,7 +277,7 @@ You can steer it from [Slack](/slack), the [web app](/ai), or your own editor vi
 - **GrowthBook** is the best choice for teams with a data warehouse – it's completely free to self-host with no limits. 
 - **Flipt** is the best choice if you want a free, open-source tool with Git-native flag management. 
 
-For more options beyond open source, check out our guide to the [best feature flag tools for developers](/blog/best-feature-flag-software-for-developers).
+For more options beyond open source, check out our guide to the [best feature flag tools for developers](/compare/best-feature-flag-tools-for-developers).
 
 </details>
 
