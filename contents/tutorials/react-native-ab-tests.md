@@ -164,7 +164,7 @@ export default function App() {
 
 You can find your project token and instance address in [your project settings](https://us.posthog.com/project/settings).
 
-Finally, we [capture a custom event](/docs/libraries/react-native#capturing-events) when the button on `SecondScreen` is clicked. We'll use this event as our goal metric in our A/B test.
+Finally, we [capture a custom event](/docs/libraries/react-native/reference#capture) when the button on `SecondScreen` is clicked. We'll use this event as our goal metric in our A/B test.
 
 ```js SecondScreen.js
 import { View, Button, StyleSheet } from 'react-native';
@@ -215,7 +215,7 @@ The final step is to add the experiment code. We'll add code that does the follo
 1. Fetch the `my-cool-experiment` flag.
 2. Change the background color of `SecondScreen` based on the value of the flag (`control` or `test`).
 
-To do this, we implement the [`useFeatureFlag`](/docs/libraries/react-native#feature-flags) hook:
+To do this, we implement the [`useFeatureFlag`](/docs/libraries/react-native/reference#usefeatureflag) hook:
 
 ```js file=SecondScreen.js
 import { View, Button, StyleSheet } from 'react-native';
