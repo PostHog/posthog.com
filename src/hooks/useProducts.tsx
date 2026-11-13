@@ -27,6 +27,7 @@ import { endpoints } from './productData/endpoints'
 import { inbox } from './productData/inbox'
 import { posthogDesktop } from './productData/posthog_desktop'
 import { replayVision } from './productData/replay_vision'
+import { mcpAnalytics } from './productData/mcp_analytics'
 
 const initialProducts = [
     productAnalytics,
@@ -50,6 +51,7 @@ const initialProducts = [
     posthogDesktop,
     endpoints,
     replayVision,
+    mcpAnalytics,
 ]
 
 export default function useProducts() {

@@ -1,5 +1,6 @@
 import React from 'react'
 import * as Icons from '@posthog/icons'
+import { IconMCP } from 'components/OSIcons'
 
 /**
  * The monthly free-tier allowance for each product.
@@ -119,6 +120,12 @@ export const freeTierProducts: FreeTierProduct[] = [
         description: 'Billed with AI observability',
         icon: Icons.IconListCheck,
         iconColor: 'text-lilac',
+    },
+    {
+        name: 'MCP Analytics',
+        allocation: '100K events',
+        icon: IconMCP,
+        iconColor: 'text-purple',
     },
     {
         name: 'PostHog AI',
