@@ -46,7 +46,7 @@ import ConfigureSecretAPIKey from "../integrate/_snippets/configure-secret-api-k
 
 <ConfigureSecretAPIKey />
 
-> **Note:** By default, initializing PostHog with your secret API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
+> **Note:** By default, initializing PostHog with your secret API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config. In the Java SDK, `.personalApiKey(...)` also enables local evaluation, and `.localEvaluation(false)` turns it off.
 
 
 ### Step 3: Use remote config flags
@@ -76,6 +76,27 @@ config = posthog.get_remote_config_payload('landing-page-config')
 ```csharp
 var config = await posthog.GetRemoteConfigPayloadAsync("landing-page-config");
 // config is a JsonDocument
+```
+
+```php
+$config = PostHog::getRemoteConfigPayload('landing-page-config');
+// config is returned as a parsed value. A JSON object becomes an associative array.
+```
+
+```java
+Object config = posthog.getRemoteConfigPayload("landing-page-config");
+// config is a parsed JSON value: a Map, List, String, Number, Boolean, or null.
+// It is null when the call fails or the flag has no payload.
+```
+
+```rust
+let config = client.get_remote_config_payload("landing-page-config").await?;
+// config is an Option<serde_json::Value>. It is None when the client is disabled.
+```
+
+```elixir
+{:ok, config} = PostHog.FeatureFlags.get_remote_config_payload("landing-page-config")
+# config is a decoded JSON value, such as a map.
 ```
 
 </MultiLanguage>
