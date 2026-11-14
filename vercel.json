@@ -1,5 +1,5 @@
 {
-    "buildCommand": "NODE_OPTIONS=\"$NODE_OPTIONS --max-semi-space-size=256\" gatsby build",
+    "buildCommand": "NODE_OPTIONS=\"$NODE_OPTIONS --max-semi-space-size=256 --network-family-autoselection-attempt-timeout=2000\" gatsby build",
     "git": {
         "deploymentEnabled": {
             "master": true,
