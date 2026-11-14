@@ -22,19 +22,19 @@ If you want a written summary of what a scanner has been finding rather than a n
 
 Pick the type in the first step:
 
-- **Every matching observation** notifies you about each observation that matches your condition, within about a minute. Matches that arrive together are bundled into one message, so a burst sends one notification instead of many. The message lists up to 10 matches, each with its verdict, score, tags, or title and a line of the scanner's own reasoning or summary, so you can see what happened without opening the recording.
+- **Every matching observation** notifies you about each observation that matches your condition, within about a minute. Matches that arrive together are bundled into one message, so a burst sends one notification instead of many. The message lists up to 10 matches, each with its verdict, score, tags, or title and a line of the scanner's own reasoning or summary. In Slack, each match includes a **View** link that opens the observation directly, so you're one click from the full details and the recording.
 - **Metric threshold** measures your matching observations over a rolling window and notifies you when the number crosses a limit you set. PostHog checks it about once an hour.
 
 ## Which observations count
 
 An alert first picks out the observations it cares about. The fields depend on the [scanner type](/docs/replay-vision/scanner-types):
 
-| Scanner type | What you can filter on |
-| --- | --- |
-| **Monitor** | Verdict: `Yes`, `No`, or `Inconclusive`. |
+| Scanner type   | What you can filter on                                                                                                                                                                                                   |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Monitor**    | Verdict: `Yes`, `No`, or `Inconclusive`.                                                                                                                                                                                 |
 | **Classifier** | Tags. An observation matches if it carries any of them. The picker suggests the scanner's configured tags first, then freeform tags it has applied in past observations, and you can also type a tag it hasn't used yet. |
-| **Scorer** | A minimum score, a maximum score, or both. |
-| **Summarizer** | Nothing to filter on, so an alert covers every observation. |
+| **Scorer**     | A minimum score, a maximum score, or both.                                                                                                                                                                               |
+| **Summarizer** | Nothing to filter on, so an alert covers every observation.                                                                                                                                                              |
 
 Leave everything empty to match every observation the scanner produces. Only succeeded observations count. Failed and ineligible ones are never matched.
 
@@ -89,13 +89,13 @@ PostHog sends an HTTP `POST` with a JSON body.
 
 The `type` field tells you what happened. Route on it:
 
-| `type` | Meaning |
-| --- | --- |
-| `replay_vision_alert.match` | New observations matched an "every matching observation" alert. |
-| `replay_vision_alert.firing` | A metric alert crossed its threshold. |
-| `replay_vision_alert.resolved` | A firing metric alert came back within its threshold. |
-| `replay_vision_alert.errored` | A check couldn't run. The body carries `error_message`. |
-| `replay_vision_alert.auto_disabled` | Checks failed repeatedly and PostHog switched the alert off. |
+| `type`                              | Meaning                                                         |
+| ----------------------------------- | --------------------------------------------------------------- |
+| `replay_vision_alert.match`         | New observations matched an "every matching observation" alert. |
+| `replay_vision_alert.firing`        | A metric alert crossed its threshold.                           |
+| `replay_vision_alert.resolved`      | A firing metric alert came back within its threshold.           |
+| `replay_vision_alert.errored`       | A check couldn't run. The body carries `error_message`.         |
+| `replay_vision_alert.auto_disabled` | Checks failed repeatedly and PostHog switched the alert off.    |
 
 A firing payload looks like this:
 
@@ -121,21 +121,21 @@ A firing payload looks like this:
 }
 ```
 
-A `replay_vision_alert.match` payload carries `matched_count`, `observation_ids`, and `summary` in place of the metric fields. `summary` is plain text with one line per match, in the same form as the Slack message.
+A `replay_vision_alert.match` payload carries `matched_count`, `observation_ids`, `summary`, and `summary_text` in place of the metric fields. `summary` contains Slack mrkdwn formatting, including a **View** link for each listed observation. `summary_text` is plain text without links or markup, suitable for webhook consumers that parse JSON.
 
 ## Alert states
 
 The **Alerts** tab shows where each alert stands:
 
-| State | Meaning |
-| --- | --- |
-| **Active** | An "every matching observation" alert, watching. These have no firing state. |
-| **Not firing** | The metric is within its threshold. |
-| **Firing** | The metric has crossed its threshold and you've been notified. |
-| **Snoozed** | Someone snoozed the alert until a set time. |
-| **Errored** | A recent check failed. PostHog keeps trying. |
-| **Broken** | Checks failed repeatedly, so the alert was switched off. |
-| **Disabled** | You turned it off. |
+| State          | Meaning                                                                      |
+| -------------- | ---------------------------------------------------------------------------- |
+| **Active**     | An "every matching observation" alert, watching. These have no firing state. |
+| **Not firing** | The metric is within its threshold.                                          |
+| **Firing**     | The metric has crossed its threshold and you've been notified.               |
+| **Snoozed**    | Someone snoozed the alert until a set time.                                  |
+| **Errored**    | A recent check failed. PostHog keeps trying.                                 |
+| **Broken**     | Checks failed repeatedly, so the alert was switched off.                     |
+| **Disabled**   | You turned it off.                                                           |
 
 Notification cooldown and quiet hours hold back notifications, but they don't change the alert's state.
 
