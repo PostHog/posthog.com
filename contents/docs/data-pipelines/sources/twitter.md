@@ -9,12 +9,12 @@ availability:
 sourceId: Twitter
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-The Twitter (X) connector syncs one X account's profile, posts, mentions, likes, followers, following, and owned lists into PostHog. Use it to join social reach and engagement to your product and revenue data, so you can see which posts bring in signups.
+The Twitter (X) connector syncs one X account's profile, posts, mentions, likes, followers, following, owned lists, searched posts, and API usage into PostHog. Use it to join social reach and engagement to your product and revenue data, so you can see which posts bring in signups.
 
 This connector reads organic account data. For ad spend and campaign performance, use the Twitter Ads source instead.
 
@@ -45,11 +45,17 @@ You need two values:
 
 The handle decides whose data is synced. To sync more than one account, add one source per account and give each a different table prefix.
 
+Optionally, you can also configure:
+
+- **Search query** – an X search query used by the SearchedPosts table to sync posts matching specific keywords, hashtags, or other criteria from the last 7 days. When left blank, the SearchedPosts table is unavailable. Accepts [X search operators](https://docs.x.com/x-api/posts/search/integrate/build-a-query).
+
 ## Sync modes
 
 <SyncModes />
 
-**Posts** and **Mentions** support incremental syncs on `created_at`, because X lets PostHog ask for posts after a given time. Every other table is a full refresh: X has no time filter on those endpoints, so an "incremental" sync would still read the whole list on every run.
+**Posts**, **Mentions**, and **SearchedPosts** support incremental syncs on `created_at`, because X lets PostHog ask for posts after a given time. **ApiUsage** syncs incrementally on `date`, requesting only the days since the last sync (up to 90 days back). Every other table is a full refresh: X has no time filter on those endpoints, so an "incremental" sync would still read the whole list on every run.
+
+SearchedPosts only returns posts from the last 7 days due to X API limitations. Incremental syncs preserve older posts that were previously synced. ApiUsage only supports incremental merge and full refresh, not append.
 
 Every post PostHog reads costs you credits, and X caps pay-per-usage projects at 3 million post reads per billing cycle. X charges a repeated read of the same resource once per UTC day, so a sync that runs more than once a day costs little more than one that runs daily.
 
@@ -72,5 +78,7 @@ Reads also count against a rate limit whose windows are 15 minutes wide. On a la
 **"X has no account with the handle"**: check the handle for typos. A suspended or deleted account also reports as missing.
 
 **Fewer posts than expected**: X limits how far back a timeline goes, so the first sync may not reach the account's oldest posts.
+
+**"Add a search query to the source settings to sync this table"**: the SearchedPosts table requires a search query. Add one in the source's configuration to enable this table.
 
 <TroubleshootingLink />
