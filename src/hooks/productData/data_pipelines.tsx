@@ -19,6 +19,7 @@ import { getTool } from '../../data/tools'
 import { applications, GetStarted, PricingIntro, topFeatures } from './data_pipelines/slides'
 import { dataWarehouse } from './data_warehouse'
 import { realtimeDestinations } from './realtime_destinations'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // this data powers the data pipelines page. It reuses the CDP tool entry (whose aliases include "Data pipelines").
 
@@ -42,7 +43,7 @@ export const dataPipelines = {
     slug: 'data-pipelines',
     Icon: IconDecisionTree,
     type: 'data_pipelines',
-    color: 'blue',
+    color: PRODUCT_COLORS.data_pipelines,
     colorSecondary: 'blue',
     docsSlug: 'data-pipelines',
     forumTag: 'cdp-and-pipelines',

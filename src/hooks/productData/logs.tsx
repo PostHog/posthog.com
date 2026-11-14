@@ -18,6 +18,7 @@ import { HedgehogMagnifyingGlass } from '@posthog/brand/hoggies'
 import { features } from './logs/features'
 import { applications, keyFeatures } from './logs/slides'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 const logsHogAlt = 'A hedgehog inspecting logs with a magnifying glass'
 
@@ -31,7 +32,7 @@ export const logs = {
     teamSlug: 'apm',
     // No community topic for Logs yet (checked Squeak topics API – none with slug "logs").
     // forumTopicId: /* create topic, then uncomment community menu item below */,
-    color: 'red',
+    color: PRODUCT_COLORS.logs,
     colorSecondary: 'green-2',
     wizardSupport: 'Coming soon',
     includeAddonRates: true,

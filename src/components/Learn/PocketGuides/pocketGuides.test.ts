@@ -4,6 +4,7 @@ import path from 'node:path'
 import { describe, test } from 'node:test'
 
 import { isSelfDrivingPage, POCKET_GUIDE_VOLUMES } from '../../../constants/pocketGuides.ts'
+import { PRODUCT_COLORS } from '../../../constants/productColors.ts'
 
 const repoRoot = path.resolve(import.meta.dirname, '../../../..')
 // Each volume's guide lives at contents/learn/<id>/pocket-guide/.
@@ -100,6 +101,15 @@ describe('pocket guide volumes', () => {
             )
             .map((volume) => volume.id)
         assert.deepEqual(volumesWithoutLearnTab, [])
+    })
+
+    test("each spine is its product's color in PRODUCT_COLORS", () => {
+        // Self-driving has no product handle; its key is `self_driving`.
+        const mismatched = POCKET_GUIDE_VOLUMES.filter((volume) => {
+            const key = (volume.productHandle ?? volume.id.replace(/-/g, '_')) as keyof typeof PRODUCT_COLORS
+            return volume.token !== PRODUCT_COLORS[key]
+        }).map((volume) => volume.id)
+        assert.deepEqual(mismatched, [])
     })
 })
 

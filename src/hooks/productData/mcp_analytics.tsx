@@ -18,6 +18,7 @@ import { applications, keyFeatures } from './mcp_analytics/slides'
 import MCPAnalyticsInstall from './mcp_analytics/install'
 import { LeaderboardSection } from './mcp_analytics/sections'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // MCP Analytics is a beta product (@posthog/mcp on npm) with a dedicated scene in the app
 // gated behind the `mcp-analytics` early access feature. Copy comes from the reviewed copy draft,
@@ -29,7 +30,7 @@ export const mcpAnalytics = {
     Icon: IconMCP,
     type: 'mcp_analytics',
     teamSlug: 'mcp-analytics',
-    color: 'purple',
+    color: PRODUCT_COLORS.mcp_analytics,
     colorSecondary: 'sky-blue',
     wizardSupport: true,
     wizardCommand: 'mcp-analytics',

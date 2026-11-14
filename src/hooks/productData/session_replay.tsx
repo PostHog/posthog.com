@@ -19,6 +19,7 @@ import { features } from './session_replay/features'
 import { applications, keyFeatures } from './session_replay/slides'
 import { getTool } from '../../data/tools'
 import FieldGuideCallout from 'components/FieldGuide/FieldGuideCallout'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const sessionReplay = {
     ...getTool('session_replay'),
@@ -29,7 +30,7 @@ export const sessionReplay = {
     forumTag: 'session-replay',
     // Volume id in src/constants/pocketGuides.ts – gives the docs a Learn tab.
     pocketGuideVolume: 'session-replay',
-    color: 'yellow',
+    color: PRODUCT_COLORS.session_replay,
     colorSecondary: '[#B56C00]',
     wizardSupport: true,
     includeAddonRates: true,

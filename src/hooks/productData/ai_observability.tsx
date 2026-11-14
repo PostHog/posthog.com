@@ -17,6 +17,7 @@ import {
 import { getTool } from '../../data/tools'
 import { features } from './ai_observability/features'
 import { applications, keyFeatures, wizardSupports } from './ai_observability/slides'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 export const aiObservability = {
     ...getTool('ai_observability'),
@@ -32,7 +33,7 @@ export const aiObservability = {
     // Volume id in src/constants/pocketGuides.ts. Set it and the shared Questions section links
     // the product's pocket guide; products without a volume leave it out and show nothing.
     pocketGuideVolume: 'ai-observability',
-    color: 'purple',
+    color: PRODUCT_COLORS.ai_observability,
     colorSecondary: 'green-2',
     wizardSupport: true,
     // Wizard subcommand appended to `npx @posthog/wizard` in the hero and Get
