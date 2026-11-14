@@ -317,7 +317,7 @@ Because the plan may end partway through the term, credits burn at one rate befo
 
 Apply your usual growth assumption to both halves. The post-plan run rate is their current spend plus whatever the plan is currently absorbing: the list price of any free add-on, and the usage that currently falls inside an inflated free tier.
 
-**If the plan has no fixed end date** (e.g. beta plans where we may change pricing at any time) don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing changes.
+**If the plan has no fixed end date** (e.g. beta plans where we may change pricing at any time) don't guess. Size on current usage, tell the customer that pricing isn't final, and use the [additional credit purchase](#additional-credit-purchase) provision to right-size once pricing changes. Don't quote a price or estimate for a beta product unless the product team has confirmed it. See [pricing considerations during a beta](/handbook/product/releasing-new-products-and-features#pricing-considerations-during-a-beta).
 
 ### Tell the customer about the step-up
 
