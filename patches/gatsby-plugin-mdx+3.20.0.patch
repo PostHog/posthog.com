@@ -71,3 +71,16 @@ diff --git a/node_modules/gatsby-plugin-mdx/loaders/mdx-loader.js b/node_modules
 +    filesByCompilation.set(this._compilation, getNodesByType(`File`))
 +  }
 +  let fileNode = filesByCompilation.get(this._compilation).find(
+diff --git a/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js b/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js
+--- a/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js
++++ b/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js
+@@ -268,2 +271,5 @@
+         async resolve(mdxNode) {
++          const key = `mdx-reading-time-${mdxNode.internal.contentDigest}`
++          const saved = await cache.get(key)
++          if (saved) return saved
+           const { mdast } = await processMDX({ node: mdxNode })
+@@ -276,2 +282,3 @@
+           }
++          await cache.set(key, timeToRead)
+           return timeToRead
