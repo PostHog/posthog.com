@@ -25,7 +25,7 @@ In your app-level `build.grade` file, add PostHog as a dependency like this:
 // /PostHogRemoteConfig/app/build.gradle.kts
 dependencies {
 
-    implementation("com.posthog:posthog-android:3.+")
+    implementation("com.posthog:posthog-android:4.+")
     // ... other dependencies
 
 }
@@ -45,7 +45,7 @@ class MyApplication : Application() {
         super.onCreate()
 
         val config = PostHogAndroidConfig(
-            apiKey = "<ph_project_token>",
+            projectToken = "<ph_project_token>",
             host = "<ph_client_api_host>"
         )
         PostHogAndroid.setup(this, config)
