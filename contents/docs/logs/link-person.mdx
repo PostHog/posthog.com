@@ -99,13 +99,15 @@ log.Info("Checkout completed",
 
 If the log does not appear, check:
 
-- **Attribute key spelling**: `posthogDistinctId` is camelCase with a lowercase `p`. PostHog matches it exactly. `distinct_id`, `posthog_distinct_id`, and `user_id` are not equivalent unless you've explicitly configured one of them — see [Customizing the attribute key](#customizing-the-attribute-key) below.
+- **Attribute key spelling**: `posthogDistinctId` is camelCase with a lowercase `p`. PostHog matches it exactly. `distinct_id`, `posthog_distinct_id`, and `user_id` are not equivalent unless you've explicitly configured one of them — see [Customizing the attribute keys](#customizing-the-attribute-keys) below.
 - **Attribute value**: must equal one of the person's `distinct_id`s. Prefixed or partial matches are not picked up.
 - **The log's timestamp**: the **Logs** tab respects the date range picker. Extend the range if the log is older than the default window.
 
-## Customizing the attribute key
+## Customizing the attribute keys
 
-If your pipeline emits the person identifier under a different key (for example `user.id`, `customerId`, or a legacy `distinct_id`), you can change it in [**Settings** > **Logs**](https://app.posthog.com/settings/environment-logs#logs-distinct-id-attribute-key) under **Link to person**. This setting requires admin access.
+If your pipeline emits the person identifier under a different key (for example `user.id`, `customerId`, or a legacy `distinct_id`), you can configure additional keys in [**Settings** > **Logs**](https://app.posthog.com/settings/environment-logs#logs-distinct-id-attribute-key) under **Link to person**. This setting requires admin access.
+
+The setting is a multi-select — add as many attribute keys as your pipeline uses. When multiple keys are configured, a log is linked to a person when **any** of the configured attributes matches one of the person's distinct IDs.
 
 You can also reach this setting from the gear icon on any person's **Logs** tab.
 
@@ -115,18 +117,18 @@ Alternatively, update it via the API:
 curl -X PATCH "https://app.posthog.com/api/projects/<PROJECT_ID>/logs_config/" \
      -H "Authorization: Bearer <PERSONAL_API_KEY>" \
      -H "Content-Type: application/json" \
-     -d '{"logs_distinct_id_attribute_key": "user.id"}'
+     -d '{"logs_distinct_id_attribute_keys": ["posthogDistinctId", "user.id"]}'
 ```
 
-Only one key per project. Pick the key your pipeline actually emits — there is no fallback chain, so a log that lacks the configured key is unlinked from any person.
+A log that lacks all configured keys is unlinked from any person.
 
-When the key has been customized, the person profile's **Logs** tab shows a small hint above the volume chart indicating which attribute is being used as the person pivot.
+When the keys have been customized, the person profile's **Logs** tab shows a hint above the volume chart indicating which attributes are being used (for example, "Scoped to this person via `posthogDistinctId` or `user.id` log attributes").
 
 ## What this does not do
 
-- It does not retroactively re-link old logs after you change the configured key. Logs are matched at query time, so the new key applies as soon as it's saved, but logs ingested under the old key still need to match the configured key to appear on a person profile.
+- It does not retroactively re-link old logs after you change the configured keys. Logs are matched at query time, so the new keys apply as soon as they're saved, but logs ingested under a previous key still need to match one of the configured keys to appear on a person profile.
 - It does not link by IP, user-agent, or any other heuristic. Only attribute-value equality.
-- It does not affect ingestion. Logs without the configured attribute are stored normally; they're just not surfaced on any person profile.
+- It does not affect ingestion. Logs without any of the configured attributes are stored normally; they're just not surfaced on any person profile.
 
 ## See also
 
