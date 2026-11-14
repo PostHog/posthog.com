@@ -1,10 +1,12 @@
 import React from 'react'
+import { useVirtualizer } from '@tanstack/react-virtual'
 import { IconX, IconCheck } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
 type SelectOption = {
     label: string
     value: any
+    image?: string
 }
 
 export function Combobox({
@@ -42,6 +44,13 @@ export function Combobox({
         return availableOptions.filter((opt) => opt.label.toLowerCase().includes(q))
     }, [query, availableOptions])
 
+    const virtualizer = useVirtualizer({
+        count: filtered.length,
+        getScrollElement: () => listRef.current,
+        estimateSize: () => 32,
+        overscan: 8,
+    })
+
     React.useEffect(() => {
         // Clamp or reset highlighted index when the filtered list changes or focus toggles
         if (!focused || filtered.length === 0) {
@@ -52,10 +61,8 @@ export function Combobox({
     }, [filtered, focused])
 
     React.useEffect(() => {
-        if (!listRef.current) return
         if (highlightedIndex < 0) return
-        const child = listRef.current.children[highlightedIndex] as HTMLElement | undefined
-        child?.scrollIntoView({ block: 'nearest' })
+        virtualizer.scrollToIndex(highlightedIndex, { align: 'auto' })
     }, [highlightedIndex])
 
     const addValueByValue = (valueToAdd: any) => {
@@ -95,8 +102,8 @@ export function Combobox({
             </div>
             <div
                 className={`relative bg-primary border border-primary rounded ring-0 px-2.5 py-2 ${
-                    touched && error ? 'border-red dark:border-yellow' : 'border-primary'
-                }`}
+                    focused ? 'z-30' : ''
+                } ${touched && error ? 'border-red dark:border-yellow' : 'border-primary'}`}
                 onMouseDown={(e) => {
                     if ((e.target as HTMLElement).tagName !== 'INPUT') {
                         e.preventDefault()
@@ -113,6 +120,7 @@ export function Combobox({
                                 key={String(v)}
                                 className="inline-flex items-center gap-1 px-2 py-0.5 rounded border border-primary text-xs bg-accent h-[28px]"
                             >
+                                {chip.image && <img src={chip.image} className="size-4 object-contain" />}
                                 <span>{chip.label}</span>
                                 <button
                                     type="button"
@@ -188,41 +196,53 @@ export function Combobox({
                         // Floats under the field, so opening it does not push the content below down.
                         className="absolute left-0 right-0 top-full z-20 mt-1 max-h-40 overflow-auto rounded border border-primary bg-primary shadow-lg focus:outline-none"
                     >
-                        {filtered.map((opt, idx) => (
-                            <button
-                                type="button"
-                                role="option"
-                                aria-selected={idx === highlightedIndex}
-                                key={`${String(opt.value)}-${opt.label}`}
-                                className={`block w-full text-left px-2.5 py-1 text-sm focus:outline-none ${
-                                    idx === highlightedIndex ? 'bg-accent' : 'hover:bg-accent'
-                                }`}
-                                onMouseEnter={() => setHighlightedIndex(idx)}
-                                onMouseDown={(e) => {
-                                    e.preventDefault()
-                                    addValueByValue(opt.value)
-                                }}
-                            >
-                                <span className="flex items-center justify-between gap-2">
-                                    <span>{opt.label}</span>
-                                    {(value || []).includes(opt.value) && (
-                                        <span
-                                            className="inline-flex items-center justify-center"
-                                            onMouseDown={(e) => {
-                                                e.preventDefault()
-                                                e.stopPropagation()
-                                                removeValue(opt.value)
-                                            }}
-                                            aria-label="Deselect"
-                                            title="Deselect"
-                                            role="button"
-                                        >
-                                            <IconCheck className="size-4 text-primary opacity-80 cursor-pointer" />
+                        <div className="relative w-full" style={{ height: virtualizer.getTotalSize() }}>
+                            {virtualizer.getVirtualItems().map((virtualRow) => {
+                                const opt = filtered[virtualRow.index]
+                                const idx = virtualRow.index
+                                return (
+                                    <button
+                                        type="button"
+                                        role="option"
+                                        aria-selected={idx === highlightedIndex}
+                                        key={`${String(opt.value)}-${opt.label}`}
+                                        data-index={idx}
+                                        ref={virtualizer.measureElement}
+                                        style={{ transform: `translateY(${virtualRow.start}px)` }}
+                                        className={`absolute left-0 top-0 w-full text-left px-2.5 py-1 text-sm focus:outline-none ${
+                                            idx === highlightedIndex ? 'bg-accent' : 'hover:bg-accent'
+                                        }`}
+                                        onMouseEnter={() => setHighlightedIndex(idx)}
+                                        onMouseDown={(e) => {
+                                            e.preventDefault()
+                                            addValueByValue(opt.value)
+                                        }}
+                                    >
+                                        <span className="flex items-center justify-between gap-2">
+                                            <span className="flex items-center gap-2">
+                                                {opt.image && <img src={opt.image} className="size-5 object-contain" />}
+                                                <span>{opt.label}</span>
+                                            </span>
+                                            {(value || []).includes(opt.value) && (
+                                                <span
+                                                    className="inline-flex items-center justify-center"
+                                                    onMouseDown={(e) => {
+                                                        e.preventDefault()
+                                                        e.stopPropagation()
+                                                        removeValue(opt.value)
+                                                    }}
+                                                    aria-label="Deselect"
+                                                    title="Deselect"
+                                                    role="button"
+                                                >
+                                                    <IconCheck className="size-4 text-primary opacity-80 cursor-pointer" />
+                                                </span>
+                                            )}
                                         </span>
-                                    )}
-                                </span>
-                            </button>
-                        ))}
+                                    </button>
+                                )
+                            })}
+                        </div>
                     </div>
                 )}
                 {allowCreate &&
