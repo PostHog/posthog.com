@@ -6,9 +6,9 @@ Skills are versioned, reusable instructions for AI agents, stored centrally in P
 
 Skills also power the rest of self-driving PostHog: every [scout](/docs/self-driving/scouts) is a skill you can read, edit, or write yourself. And you don't have to start from scratch – browse the [community skills store](/docs/skills/community) to install skills shared by other PostHog users, or publish your own.
 
-> **Shortcut: install the PostHog AI plugin.**
+> **Shortcut: connect the PostHog MCP server.**
 >
-> The [PostHog AI plugin](https://github.com/PostHog/ai-plugin) ships an official [`skills-store` skill](https://github.com/PostHog/ai-plugin/tree/main/skills/skills-store) – maintained alongside the [canonical version in the PostHog monorepo](https://github.com/PostHog/posthog/tree/master/products/skills/skills/skills-store) – that teaches your agent exactly how to discover, load, create, and update skills via the PostHog MCP tools. Install the plugin in [Claude Code](/docs/model-context-protocol/claude-code), [Codex](/docs/model-context-protocol/codex), Cursor, or Gemini CLI and your agent already knows how to use the store.
+> PostHog publishes an official [`skills-store` skill](https://github.com/PostHog/posthog/tree/master/products/skills/skills/skills-store) that teaches your agent exactly how to discover, load, create, and update skills via the PostHog MCP tools. It ships with the [PostHog MCP server](/docs/model-context-protocol), so once your agent is connected it can load the skill when it needs it – there's nothing extra to install.
 
 ## Why use PostHog as your skills store?
 
@@ -188,9 +188,7 @@ This works identically in Claude Code, Cursor, Codex, or any other MCP-connected
 
 ## Step 3: Set up a bridge skill (optional shortcut)
 
-Step 2 is all you need. If you've installed the [PostHog AI plugin](https://github.com/PostHog/ai-plugin), you can skip this step entirely – the plugin's `skills-store` skill already provides the bridge.
-
-Otherwise, if your agent supports local skills (like Claude Code's `.claude/skills/` directory), you can drop in a tiny DIY bridge that bootstraps into the PostHog skills store. You only need **one** generic bridge:
+Step 2 is all you need. If your agent supports local skills (like Claude Code's `.claude/skills/` directory), you can drop in a tiny DIY bridge that bootstraps into the PostHog skills store. You only need **one** generic bridge:
 
 ### Claude Code example
 

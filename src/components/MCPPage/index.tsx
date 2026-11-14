@@ -332,13 +332,12 @@ function MCPConnectors(): JSX.Element {
             <div className="mt-6 flex items-start gap-3">
                 <IconPlug className="mt-0.5 size-5 shrink-0 text-blue" />
                 <p className="m-0 text-sm leading-relaxed text-secondary">
-                    <span className="font-semibold text-primary">Want skills too?</span> The{' '}
-                    <Link to="https://github.com/PostHog/ai-plugin" className="font-semibold underline">
-                        PostHog AI plugin
+                    <span className="font-semibold text-primary">Want skills too?</span> PostHog{' '}
+                    <Link to="/docs/skills" className="font-semibold underline">
+                        skills
                     </Link>{' '}
-                    installs the same MCP server plus more than 30 PostHog skills in one step. It works in Claude Code,
-                    Codex, Cursor, and Gemini CLI. If you connect the server by hand, you get the same tools without the
-                    bundled skills.
+                    ship with the MCP server, so there's nothing extra to install. Once your agent is connected, it
+                    loads the skill it needs when a task calls for it.
                 </p>
             </div>
         </section>
