@@ -8498,6 +8498,12 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Import from Resend',
+                    url: '/docs/workflows/import-from-resend',
+                    icon: 'IconUpload',
+                    color: 'blue',
+                },
+                {
                     name: 'Resources',
                 },
                 {
