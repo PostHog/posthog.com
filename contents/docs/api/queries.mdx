@@ -5,11 +5,11 @@ sidebar: Docs
 showTitle: true
 ---
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
+import { CalloutBox } from "components/Docs/CalloutBox";
 
 API queries enable you to query your data in PostHog. This is useful for:
 
-- Building [embedded analytics](/tutorials/embedded-analytics). 
+- Building [embedded analytics](/tutorials/embedded-analytics).
 - Pulling aggregated PostHog data into your own or other apps.
 
 <CalloutBox icon="IconWarning" type="caution" title="The /query endpoint is not for exports">
@@ -38,12 +38,11 @@ To create a query, you make a `POST` request to the `/api/projects/:project_id/q
 
 <CalloutBox icon="IconInfo" type="fyi" title="Query limits">
 
-By default, API queries return up to 100 rows. If you specify your own `LIMIT`, you can return up to 50k rows per query.
+By default, API queries return up to 100 rows. Check `hasMore` in the response to detect when this limit was applied. If you specify your own `LIMIT`, you can return up to 50k rows per query.
 
 For paginating beyond a single query, you **must** use [keyset pagination on `timestamp`](#7-use-keyset-pagination-instead-of-offset). `OFFSET` is not supported for programmatic requests and is currently rejected with HTTP 400 for personal API keys. For exporting larger volumes, use [batch exports](/docs/data-pipelines/batch-exports) or [file download exports](/docs/data-pipelines/file-download-exports) – `/query` is not a supported export path.
 
 </CalloutBox>
-
 
 For example, to create a query that gets events where the `$current_url` contains blog, you use `kind: HogQLQuery` and SQL like:
 
@@ -90,16 +89,17 @@ async function createQuery() {
   const url = "<ph_app_host>/api/projects/:project_id/query/";
   const headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+    Authorization: "Bearer {POSTHOG_PERSONAL_API_KEY}",
   };
 
   const payload = {
-    "query": {
-      "kind": "HogQLQuery",
-      "query": "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100"
+    query: {
+      kind: "HogQLQuery",
+      query:
+        "select properties.$current_url from events where properties.$current_url like '%/blog%' limit 100",
     },
-    "name": "get 100 blog urls"
-  }
+    name: "get 100 blog urls",
+  };
 
   const response = await fetch(url, {
     method: "POST",
@@ -111,7 +111,7 @@ async function createQuery() {
   console.log(data);
 }
 
-createQuery()
+createQuery();
 ```
 
 </MultiLanguage>
@@ -161,16 +161,16 @@ async function createQuery() {
   const url = "<ph_app_host>/api/projects/:project_id/query/";
   const headers = {
     "Content-Type": "application/json",
-    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+    Authorization: "Bearer {POSTHOG_PERSONAL_API_KEY}",
   };
 
   const payload = {
-    "query": {
-      "kind": "HogQLQuery",
-      "query": "select properties.email from persons where properties.email is not null"
+    query: {
+      kind: "HogQLQuery",
+      query: "select properties.email from persons where properties.email is not null",
     },
-    "name": "get user emails"
-  }
+    name: "get user emails",
+  };
 
   const response = await fetch(url, {
     method: "POST",
@@ -182,7 +182,7 @@ async function createQuery() {
   console.log(data);
 }
 
-createQuery()
+createQuery();
 ```
 
 </MultiLanguage>
@@ -191,7 +191,7 @@ Every query you run is logged in the [`query_log` table](/docs/data/query-log) a
 
 ## Writing performant queries
 
-import OptimalQueries from '../_snippets/optimal-queries.mdx'
+import OptimalQueries from "../_snippets/optimal-queries.mdx";
 
 <OptimalQueries />
 
@@ -222,7 +222,7 @@ The `refresh` parameter controls the execution mode of the query. It can be one 
 
 ### Query types
 
-The `kind` property in the `query` parameter can be one of the following values. 
+The `kind` property in the `query` parameter can be one of the following values.
 
 - `HogQLQuery`: Queries using [PostHog's version of SQL](/docs/sql).
 - `EventsQuery`: Raw event data retrieval
@@ -387,6 +387,27 @@ The response format depends on the query type, but all responses include:
 - `is_cached` (for cached responses): Indicates the result came from cache
 - `timings` (when available): Performance metrics for the query execution
 
+### HogQL pagination fields
+
+When you run a `HogQLQuery` without an explicit `LIMIT` clause, the response includes fields that indicate whether the default 100-row limit was applied:
+
+- `hasMore`: `true` when the default limit applied and more rows exist beyond the returned results. Not set when your query includes its own `LIMIT`, uses `UNION`, or runs with `sendRawQuery`.
+- `limit`: The row limit that was applied (100 for queries without an explicit `LIMIT`). Not set when your query includes its own `LIMIT`.
+- `offset`: Rows skipped before the default row limit applied.
+
+Use `hasMore` to detect when your results are truncated:
+
+```json
+{
+  "results": [[1], [2], ["..."]],
+  "hasMore": true,
+  "limit": 100,
+  "offset": 0
+}
+```
+
+If `hasMore` is `true`, add an explicit `LIMIT` to your query to retrieve more rows (up to 50k), or use [keyset pagination](#7-use-keyset-pagination-instead-of-offset) for larger result sets.
+
 ### Cached responses
 
 API queries are cached by default. You can check if a response is cached by checking the `is_cached` property. Responses also contain cache-related details like:
@@ -429,13 +450,13 @@ API queries are limited at the project-level to:
 - 10 seconds of max execution time
   - applies to query execution time, not HTTP request duration
 
-
 At this time, we are not offering higher limits than these, but you may wish to try our [endpoints product](/docs/endpoints), which offers query customization and higher limits. Alternatively, you may be able to use our [batch exports product](/docs/data-pipelines/batch-exports) to pull the data that you need from our events or persons tables on a faster cadence, or a [file download export](/docs/data-pipelines/file-download-exports) for a one-off export.
 
 If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
 
 <CalloutBox type="fyi" icon="IconLightBulb" title="Legacy query limits">
-Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
+  Some customers haven't been migrated to the above limit and are on an old limit of 120
+  queries/hour.
 </CalloutBox>
 
 ### Hourly read budget
