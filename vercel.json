@@ -1,5 +1,4 @@
 {
-    "buildCommand": "NODE_OPTIONS=\"$NODE_OPTIONS --max-semi-space-size=128\" gatsby build",
     "git": {
         "deploymentEnabled": {
             "master": true,
