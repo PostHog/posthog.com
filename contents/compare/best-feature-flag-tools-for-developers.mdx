@@ -83,7 +83,7 @@ Developer-focused tools often go further with:
 
 ![PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2026_02_11_at_09_54_29_2x_96f74a428a.png)
 
-PostHog is your product's context layer, and [feature flags](/feature-flags) are one of the things writing to it. They're woven into a broader workflow that includes [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more, all tied to the same users, so every error and replay already knows which flag variant the user was in.
+PostHog is your product's context layer, and [feature flags](/feature-flags) are one of the things writing to it. They're woven into a broader workflow that includes [product analytics](/product-analytics), [session replay](/session-replay), [experiments](/experiments), [error tracking](/error-tracking), [AI observability](/ai-observability), [logs](/logs), and more, all tied to the same users, so you can connect flag exposure with the events, recordings, errors, and AI traces of those users.
 
 This means you can [roll out a feature to 10% of users](/docs/feature-flags/phased-rollout), [watch session replays of those users](/docs/session-replay/how-to-watch-recordings), check whether the flag variant increased conversion, [catch any errors it triggered](/docs/error-tracking/capture), and [get feedback about their experience](/docs/surveys/creating-surveys) – all without leaving the platform. It also powers PostHog's [experimentation](/experiments) features, so you can easily go from "ship it behind a flag" to "measure its impact with statistical significance".
 
@@ -97,7 +97,7 @@ Your agents get the same access: the free [MCP server](/mcp) can create, update,
 
 - **Experiments:** Any flag becomes an [A/B test](/experiments) with Bayesian or frequentist stats, holdouts, and primary and secondary metrics.
 
-- **Context:** Every replay, error, event, and LLM trace carries the flag variant the user saw.
+- **Context:** PostHog can connect flag exposure with events, recordings, errors, and AI traces. The available context depends on your SDK and instrumentation, so pass flag values as [custom properties](/docs/ai-observability/custom-properties) where needed.
 
 #### How much does PostHog cost?
 
@@ -403,7 +403,7 @@ It's completely free to get started – no credit card required. Our [setup wiza
 <details>
 <summary>What does it mean for PostHog to be your product's context layer?</summary>
 
-In PostHog, [feature flags](/feature-flags), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), and [AI observability](/ai-observability) all write to the same database with one model of users and sessions, so every event, replay, and exception already carries the flag variant the user was in.
+In PostHog, [feature flags](/feature-flags), [product analytics](/product-analytics), [session replay](/session-replay), [error tracking](/error-tracking), [experiments](/experiments), and [AI observability](/ai-observability) all write to the same database with one model of users and sessions, so you can connect flag exposure with events, recordings, errors, and AI traces. The available context depends on your SDK and instrumentation, so pass flag values as custom properties where needed.
  
 The [data warehouse](/context-warehouse) and [CDP](/cdp) extend that to your Stripe, HubSpot, and Postgres data, so you can roll out to paying customers specifically and check what it did to revenue. And an agent working from [Slack](/slack), the [web app](/ai), or your editor via [the MCP](/mcp) sees all of it, which is what lets it ship a flag, watch the rollout, and roll back without you copying anything between tools.
  
