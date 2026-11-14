@@ -310,6 +310,21 @@ To check if a user is opted out:
 await Posthog().isOptOut();
 ```
 
+## Disable GeoIP enrichment
+
+By default, PostHog uses the IP address of the request to find the location of the user. To stop this, set `disableGeoIp` to `true` in the `PostHogConfig` object (requires the Flutter SDK `5.61.0`+):
+
+```dart
+final config = PostHogConfig('<ph_project_token>');
+config.host = '<ph_client_api_host>';
+config.disableGeoIp = true;
+await Posthog().setup(config);
+```
+
+When `disableGeoIp` is `true`, the SDK adds `$geoip_disable: true` to each event and sends `geoip_disable: true` with feature flag requests. The SDK adds the property after the `beforeSend` callbacks run, so a callback cannot see or remove it. On Android, this option requires posthog-android `3.77.0` or later.
+
+Flutter Web does not apply `disableGeoIp`. Instead, set `$geoip_disable: true` on events in the `before_send` option of your `posthog.init` call.
+
 ## Amending or dropping events
 
 Since version 5.13.0, you can provide `beforeSend` callbacks when initializing the SDK to amend or drop events before they are sent to PostHog.
