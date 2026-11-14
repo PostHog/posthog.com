@@ -7,14 +7,7 @@ contentMaxWidthClass: max-w-5xl
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 import { IconGraph, IconWarning, IconAIText, IconWrench, IconPlug } from '@posthog/icons'
 import OSButton from 'components/OSButton'
-import CalloutBox from 'components/Docs/CalloutBox'
 import WizardCommand from 'components/WizardCommand'
-
-<CalloutBox icon="IconFlask" title="MCP Analytics is in beta" type="fyi">
-
-The TypeScript package `@posthog/mcp` is pre-1.0. The Python integration is in beta, and the Ruby and Rust integrations are experimental. We're building them in public, so event shapes and options may still change. Pin a specific version.
-
-</CalloutBox>
 
 <QuestLog firstSpeechBubble="Let's instrument your MCP server!" lastSpeechBubble="Time to ship MCP Analytics!">
 
@@ -292,7 +285,7 @@ subtitle="Recommended"
 icon="IconLineGraph"
 >
 
-MCP events work with PostHog insights, dashboards, alerts, and SQL. The [MCP Analytics view](/docs/mcp-analytics) provides built-in views during the beta. Start with these four queries:
+MCP events work with PostHog insights, dashboards, alerts, and SQL. The [MCP Analytics view](/docs/mcp-analytics) provides built-in views. Start with these four queries:
 
 - ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/> Top tools per server
 Which tools do agents call most often?

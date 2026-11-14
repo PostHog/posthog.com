@@ -19,10 +19,8 @@ import MCPAnalyticsInstall from './mcp_analytics/install'
 import { LeaderboardSection } from './mcp_analytics/sections'
 import { getTool } from '../../data/tools'
 
-// MCP Analytics is a beta product (@posthog/mcp on npm) with a dedicated scene in the app
-// gated behind the `mcp-analytics` early access feature. Copy comes from the reviewed copy draft,
-// checked against contents/docs/mcp-analytics/. See src/components/EarlyAccessOptIn/README.md for how
-// the opt-in links to the early access feature in the app (identity isn't shared with the website).
+// MCP Analytics (@posthog/mcp on npm) has a dedicated scene in the app. Copy comes from the reviewed copy draft,
+// checked against contents/docs/mcp-analytics/.
 
 export const mcpAnalytics = {
     ...getTool('mcp_analytics'),
@@ -265,7 +263,7 @@ export const mcpAnalytics = {
     ],
     presenterNotes: {
         overview:
-            'MCP Analytics is beta (<code>@posthog/mcp</code> on npm). Lead with the one-line wrap and "it\'s all just PostHog events." No new tooling to learn.',
+            'MCP Analytics ships as <code>@posthog/mcp</code> on npm. Lead with the one-line wrap and "it\'s all just PostHog events." No new tooling to learn.',
     },
 }
 
