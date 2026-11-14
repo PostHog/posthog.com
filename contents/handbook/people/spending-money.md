@@ -190,6 +190,7 @@ As a guide, here's what we'd consider reasonable spend:
 - Desk - up to $500
 - Chair - up to $500
 - Keyboard - up to $250
+- Headphones - up to $350
 
 If you want something more expensive, you can pay personally and submit a reimbursement request on Brex for up to the amount above.
 
