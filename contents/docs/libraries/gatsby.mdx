@@ -7,13 +7,51 @@ import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-rever
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
 import DetailPostHogIPs from "../integrate/_snippets/details/posthog-ips.mdx"
 
-> **Deprecated:** The `gatsby-plugin-posthog` plugin is deprecated and no longer maintained. Use the [JavaScript Web SDK](/docs/libraries/js) instead. The instructions below are retained for existing integrations.
+> **Deprecated:** The `gatsby-plugin-posthog` plugin is deprecated and no longer maintained. Use the [JavaScript Web SDK](/docs/libraries/js) instead. The plugin instructions below are retained for existing integrations.
+
+## Use the JavaScript Web SDK
+
+If you're migrating from the plugin, remove `gatsby-plugin-posthog` from your `gatsby-config.js` plugins array and uninstall it:
+
+```bash
+pnpm remove gatsby-plugin-posthog
+```
+
+Remove any manual `posthog.capture("$pageview")` calls in `onRouteUpdate`. The SDK captures pageviews automatically with the configuration below. Running both methods can cause duplicate pageviews.
+
+Install the SDK:
+
+```bash
+pnpm add posthog-js
+```
+
+In your project's root `gatsby-browser.js` file, initialize PostHog in Gatsby's `onClientEntry` hook. If the file already exports `onClientEntry`, add the initialization to that function.
+
+```js
+import posthog from "posthog-js"
+
+export const onClientEntry = () => {
+    posthog.init("<ph_project_token>", {
+        api_host: "<ph_client_api_host>",
+        defaults: "<ph_posthog_js_defaults>",
+        capture_pageview: "history_change",
+    })
+}
+```
+
+Find your project token and API host in your [project settings](https://app.posthog.com/settings/project).
+
+Setting `capture_pageview: "history_change"` captures the initial pageview and subsequent path changes through the browser history API, including Gatsby navigation. You don't need an `onRouteUpdate` hook for pageview tracking.
+
+With `defaults: "2025-05-24"` or later, `capture_pageview` already defaults to `"history_change"`, so you can omit the explicit setting. See the [JavaScript SDK configuration](/docs/libraries/js/config) and [single-page app pageview guide](/tutorials/single-page-app-pageviews) for more details.
+
+## Deprecated plugin
 
 > This [library](https://github.com/posthog/gatsby-plugin-posthog) was built by the community. Thanks to [Ritesh Kadmawala](https://github.com/kgritesh) for building it.
 
 Gatsby behaves like a single-page app which means to track `$pageview` events special care is needed. This integration takes care of that.
 
-## Install
+### Install
 
 ```bash
 yarn add gatsby-plugin-posthog
@@ -29,7 +67,7 @@ import CspAllowancesCallout from "../_snippets/csp-allowances-callout.mdx"
 
 <CspAllowancesCallout />
 
-## How to use
+### How to use
 
 ```js
 // In your gatsby-config.js
