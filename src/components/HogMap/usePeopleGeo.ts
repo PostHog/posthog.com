@@ -13,7 +13,9 @@ export type GeoProfile = {
     country?: string
 }
 
-const LONDON: Coordinates = { longitude: -0.1276, latitude: 51.5074 }
+type MemberGeocode = { query: string; countryFilter: string | null }
+
+const MEMBER_PLACE_TYPES = 'place,locality,district,region,country'
 
 // Collapse whitespace and dashes so a "#Jean-Luc-Picard" hash matches "Jean-Luc Picard".
 const normalizeName = (s: string): string =>
@@ -45,6 +47,45 @@ export const buildMemberQuery = (m: GeoProfile): string | null => {
     return q || null
 }
 
+export const buildMemberGeocode = (m: GeoProfile): MemberGeocode | null => {
+    const location = m.location?.trim()
+    const country = m.country?.trim()
+    const countryFilter = country && /^[a-z]{2}$/i.test(country) ? country.toLowerCase() : null
+    const query = countryFilter ? location || country : buildMemberQuery(m)
+    if (!query) {
+        return null
+    }
+    return { query, countryFilter }
+}
+
+const buildForwardGeocodeUrl = (query: string, types: string, token: string, countryFilter?: string | null): URL => {
+    const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
+    url.searchParams.set('q', query)
+    url.searchParams.set('types', types)
+    if (countryFilter) {
+        url.searchParams.set('country', countryFilter)
+    }
+    url.searchParams.set('access_token', token)
+    return url
+}
+
+const geocodeMemberPlace = async (
+    { query, countryFilter }: MemberGeocode,
+    token: string
+): Promise<Coordinates | null> => {
+    try {
+        const resp = await fetch(buildForwardGeocodeUrl(query, MEMBER_PLACE_TYPES, token, countryFilter).toString())
+        const json = await resp.json()
+        const coords = json?.features?.[0]?.geometry?.coordinates
+        if (!Array.isArray(coords) || coords.length < 2) {
+            return null
+        }
+        return { longitude: coords[0], latitude: coords[1] }
+    } catch {
+        return null
+    }
+}
+
 export const isWithinBbox = (coords: Coordinates, bbox: BBox): boolean => {
     const [minLng, minLat, maxLng, maxLat] = bbox
     return (
@@ -55,56 +96,41 @@ export const isWithinBbox = (coords: Coordinates, bbox: BBox): boolean => {
     )
 }
 
-// Forward-geocode each unique "location, country" string, cached by query.
+// Forward-geocode each unique "location, country" string, cached by query; unresolved places stay unpinned.
 export const useCoordsByQuery = (
     isClient: boolean,
     token: string | undefined,
     members: GeoProfile[]
 ): Record<string, Coordinates> => {
-    const [coordsByQuery, setCoordsByQuery] = useState<Record<string, Coordinates>>({})
-    const queries = useMemo(() => {
-        const set = new Set<string>()
+    const [coordsByQuery, setCoordsByQuery] = useState<Record<string, Coordinates | null>>({})
+    const geocodeByQuery = useMemo(() => {
+        const byQuery: Record<string, MemberGeocode> = {}
         members.forEach((m) => {
             const q = buildMemberQuery(m)
-            if (q) {
-                set.add(q)
+            const geocode = buildMemberGeocode(m)
+            if (q && geocode) {
+                byQuery[q] = geocode
             }
         })
-        return Array.from(set)
+        return byQuery
     }, [members])
     useEffect(() => {
         if (!isClient || !token) {
             return
         }
-        const toFetch = queries.filter((q) => !coordsByQuery[q])
+        const toFetch = Object.keys(geocodeByQuery).filter((q) => !(q in coordsByQuery))
         if (toFetch.length === 0) {
             return
         }
         let cancelled = false
         const fetchAll = async () => {
-            const results: Record<string, Coordinates> = {}
+            const results: Record<string, Coordinates | null> = {}
             await Promise.all(
                 toFetch.map(async (q) => {
-                    try {
-                        const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
-                        url.searchParams.set('q', q)
-                        url.searchParams.set('types', 'place,region,country')
-                        url.searchParams.set('access_token', token)
-                        const resp = await fetch(url.toString())
-                        const json = await resp.json()
-                        const feature = json?.features?.[0]
-                        const coords = feature?.geometry?.coordinates
-                        if (Array.isArray(coords) && coords.length >= 2) {
-                            results[q] = { longitude: coords[0], latitude: coords[1] }
-                        } else {
-                            results[q] = { ...LONDON }
-                        }
-                    } catch {
-                        results[q] = { ...LONDON }
-                    }
+                    results[q] = await geocodeMemberPlace(geocodeByQuery[q], token)
                 })
             )
-            if (!cancelled && Object.keys(results).length > 0) {
+            if (!cancelled) {
                 setCoordsByQuery((prev) => ({ ...prev, ...results }))
             }
         }
@@ -112,8 +138,16 @@ export const useCoordsByQuery = (
         return () => {
             cancelled = true
         }
-    }, [isClient, token, queries, coordsByQuery])
-    return coordsByQuery
+    }, [isClient, token, geocodeByQuery, coordsByQuery])
+    return useMemo(() => {
+        const resolvedCoordsByQuery: Record<string, Coordinates> = {}
+        Object.entries(coordsByQuery).forEach(([q, coords]) => {
+            if (coords) {
+                resolvedCoordsByQuery[q] = coords
+            }
+        })
+        return resolvedCoordsByQuery
+    }, [coordsByQuery])
 }
 
 // Use the feature's bbox, or a small box around a point result if it has none.
@@ -133,7 +167,11 @@ const bboxForFeature = (feature: any): BBox | null => {
 
 // Geocode a query into an area, or null when it isn't a place (a name/role) —
 // the signal to fall back to text search.
-export const useGeocodedArea = (query: string, token: string | undefined): GeocodedArea | null => {
+export const useGeocodedArea = (
+    query: string,
+    token: string | undefined,
+    countryFilter?: string | null
+): GeocodedArea | null => {
     const [area, setArea] = useState<GeocodedArea | null>(null)
     const trimmed = query.trim()
 
@@ -151,11 +189,13 @@ export const useGeocodedArea = (query: string, token: string | undefined): Geoco
         const controller = new AbortController()
         const handle = setTimeout(async () => {
             try {
-                const url = new URL('https://api.mapbox.com/search/geocode/v6/forward')
-                url.searchParams.set('q', trimmed)
-                url.searchParams.set('types', 'country,region,place,district,locality')
+                const url = buildForwardGeocodeUrl(
+                    trimmed,
+                    'country,region,place,district,locality',
+                    token,
+                    countryFilter
+                )
                 url.searchParams.set('limit', '1')
-                url.searchParams.set('access_token', token)
                 const resp = await fetch(url.toString(), { signal: controller.signal })
                 const json = await resp.json()
                 const feature = json?.features?.[0]
@@ -185,7 +225,7 @@ export const useGeocodedArea = (query: string, token: string | undefined): Geoco
             clearTimeout(handle)
             controller.abort()
         }
-    }, [trimmed, token])
+    }, [trimmed, token, countryFilter])
 
     return area
 }
