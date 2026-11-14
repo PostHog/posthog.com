@@ -24,9 +24,14 @@ Coming from Customer.io? [Import your opt-out lists](/docs/workflows/import-cust
 
 ## The suppression list
 
-The suppression list is address-level and category-independent – a suppressed recipient receives nothing. Each entry records the recipient, how it got there (**bounces** or **manual**), the reason or last bounce diagnostic, and when it was suppressed.
+The suppression list is address-level. Each entry records the recipient, how it got there (**bounces** or **manual**), the reason or last bounce diagnostic, and when it was suppressed.
 
-PostHog adds addresses automatically when mail to them hard-bounces, which is what protects your sending domain's reputation. You can add an address by hand, and you can remove an entry if you believe the bounce was a one-off – but removing a genuine hard bounce means you'll bounce again.
+How a suppression affects a send depends on the message type:
+
+- **Marketing** email is blocked by every suppression – hard bounces, soft bounces, spam complaints, and manual entries.
+- **Transactional** email (password resets, invoices, login codes) is blocked only by a **hard bounce**, because that means the address can't receive mail at all. Soft bounces, spam complaints, and manual entries don't block it.
+
+PostHog adds addresses automatically when mail to them hard-bounces, which is what protects your sending domain's reputation. Addresses also enter the list after repeated soft bounces or a spam complaint. You can add an address by hand, and you can remove an entry if you believe the bounce was a one-off – but removing a genuine hard bounce means you'll bounce again.
 
 ## Managing the lists over the API
 
