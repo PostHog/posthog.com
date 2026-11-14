@@ -76,7 +76,7 @@ In Go, source 3 applies only to sessionless one-client connections (stdio and in
 
 A **harness** is the client label on the dashboard, such as "Claude Code", "Cursor", or "ChatGPT". PostHog derives it at query time from these properties, in priority order:
 
-1. **`$mcp_vendor_client`** – the vendor header (e.g. `x-anthropic-client`), the only signal separating Anthropic's pooled surfaces (Claude.ai, Cowork, Claude Design) from each other, since they all report the same `clientInfo.name`.
+1. **`$mcp_vendor_client`** – the vendor header (e.g. `x-anthropic-client`), the only signal separating Anthropic's pooled surfaces (Claude.ai, Cowork, Claude Design, Claude Artifacts) from each other, since they report the same or a generic `clientInfo.name`. For example, Claude Artifacts reports the generic name `Claude`. Without the vendor header, that call appears as "Other".
 2. **`$mcp_client_user_agent`** – identifies the Claude Code interface: `(cli)`, `(sdk-ts)`, `(claude-vscode)`, or `(claude-desktop)`. It is also the fallback when no client name is available.
 3. **`$mcp_client_name`** – the `clientInfo.name` the client reported.
 
