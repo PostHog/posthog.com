@@ -117,7 +117,7 @@ $tracerProvider = TracerProvider::builder()
 
 Use this configuration in place of the builder above. Keep your existing provider, exporter, and sampler. Register the processor before requests start. OpenTelemetry SDK 1.0.0 or later is supported and remains an optional application dependency.
 
-The processor reads this client's PostHog context when each span starts. The [Laravel request middleware](/docs/libraries/laravel) sets that context with `PostHog::withContext()`. With the processor registered, entering a context also enriches the active request span in normal PHP execution. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK.
+The processor reads this client's PostHog context when each span starts. The [Laravel request middleware](/docs/libraries/laravel) sets that context with `PostHog::withContext()`. With the processor registered, entering a context also enriches the active request span in normal PHP execution. Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your backend hostname in the browser SDK.
 
 Existing `sessionId` and `posthogDistinctId` span attributes take precedence. Missing IDs stay absent. The scope closes after success or failure, while spans that already started keep their attributes.
 

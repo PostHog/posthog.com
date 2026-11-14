@@ -35,7 +35,7 @@ For example, if a user browses your marketing site, then signs up and you call `
 
 > Be sure to call `posthog.reset()` on logout (or when users change) to ensure events captures disconnect from the old user and can connect to a new (right) one.
 
-You can also use `posthog.identify()` to add properties to the user, such as their signup source, plan, or website link. You can see more details on the JavaScript `posthog.identify()` call [in the docs](/docs/libraries/js/usage#identifying-users).
+You can also use `posthog.identify()` to add properties to the user, such as their signup source, plan, or website link. You can see more details on the JavaScript `posthog.identify()` call [in the docs](/docs/libraries/js/reference#identify).
 
 ## Identifying and setting user IDs for every other library
 
@@ -49,7 +49,7 @@ If you don’t have a unique ID like an email, you can always generate a UUID or
 - Storing the ID on the frontend and passing the values to the backend when they make a request
 - Use an ID based on the resources they are accessing on the backend
 
-> **Note:** `posthog.identify()` works differently in non-JavaScript libraries. It only updates the user’s properties, and won’t connect the user you identify with future events captured. Check out [your library’s docs](/docs/getting-started/install?tab=sdks) for more details (here’s [Python](/docs/libraries/python#identifying-users) for example).
+> **Note:** `posthog.identify()` works differently in non-JavaScript libraries. It only updates the user’s properties, and won’t connect the user you identify with future events captured. Check out [your library’s docs](/docs/getting-started/install?tab=sdks) for more details (here’s [Python](/docs/libraries/python/reference#identify) for example).
 
 ## The importance of setting accurate distinct user IDs
 

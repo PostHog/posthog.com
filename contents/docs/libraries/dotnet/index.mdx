@@ -51,7 +51,7 @@ var app = builder.Build();
 app.UsePostHogRequestContext();
 ```
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your ASP.NET Core backend hostname so browser requests include the session and distinct ID headers.
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your ASP.NET Core backend hostname so browser requests include the session and distinct ID headers.
 
 The middleware reads `X-PostHog-Distinct-Id` and `X-PostHog-Session-Id` as request-scoped analytics context. It also adds request metadata such as `$current_url`, `$request_method`, `$request_path`, `$user_agent`, and `$ip`. Explicit distinct IDs and event properties always override request context.
 
