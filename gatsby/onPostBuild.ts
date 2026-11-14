@@ -147,7 +147,7 @@ const generateMarkdownArtifacts = async (graphql: any) => {
         }
     }
 
-    const filteredPages = await generateRawMarkdownPages([
+    const markdownPages = generateRawMarkdownPages([
         ...docsQuery.data.allMdx.nodes.map((node) => ({
             ...node,
             fields: { ...node.fields, slug: pocketGuideDestination(node.fields.slug) },
@@ -158,6 +158,7 @@ const generateMarkdownArtifacts = async (graphql: any) => {
             frontmatter: { title },
         })),
     ])
+    const [filteredPages] = await Promise.all([markdownPages, generatePostBuildData(graphql)])
     // Include product documentation and learning pages, excluding the handbook.
     const docsPages = filteredPages.filter((page) => /^\/(docs|learn)\//.test(page.fields.slug))
     generateLlmsTxt(docsPages)
@@ -233,7 +234,9 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     // Publish/update Standard.site document records for blog posts.
     // Self-gates on env (STANDARD_SITE_SYNC) and BSKY_APP_PASSWORD; safe no-op otherwise.
     await syncStandardSiteDocuments(graphql)
+}
 
+const generatePostBuildData = async (graphql: any) => {
     // Strapi sync + OG image generation run in GitHub Actions from this JSON.
     const { data } = await graphql(`
         query {
