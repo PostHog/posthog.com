@@ -65,6 +65,9 @@ importers:
       '@mdx-js/react':
         specifier: ^1.6.22
         version: 1.6.22(react@18.3.1)
+      '@mixmark-io/domino':
+        specifier: 2.2.0
+        version: 2.2.0
       '@mdxeditor/editor':
         specifier: ^3.32.3
         version: 3.45.1(@codemirror/language@6.11.3)(@lezer/highlight@1.2.1)(@types/react-dom@18.3.7(@types/react@16.14.66))(@types/react@16.14.66)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(yjs@13.6.27)

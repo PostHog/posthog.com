@@ -1,17 +1,12 @@
 import TurndownService from 'turndown'
-import { JSDOM } from 'jsdom'
-
-// One shared document for every page. A new JSDOM per page leaks through the
-// selector engine's cache (about 18 MB per page across thousands of pages).
-let sharedDom: JSDOM | null = null
+import { createDocument } from '@mixmark-io/domino'
 
 export const preprocessHtmlForTabs = (html: string, transformDocument?: (document: Document) => void): string => {
-    sharedDom ??= new JSDOM('<!DOCTYPE html><html><head></head><body></body></html>')
-    const doc = sharedDom.window.document
-    doc.documentElement.innerHTML = html
-    doc.querySelectorAll(
+    const doc = createDocument(html) as Document
+    const controls = doc.querySelectorAll(
         'button[aria-label="Copy this page as Markdown"], button[aria-label="More Markdown actions"], .ask-posthog-ai-code-snippet, [data-md-export="skip"]'
-    ).forEach((control) => control.remove())
+    )
+    Array.from(controls).forEach((control) => control.remove())
     transformDocument?.(doc)
 
     const tabContainers = Array.from(doc.querySelectorAll('div.my-4')) as HTMLElement[]
@@ -56,7 +51,7 @@ export const preprocessHtmlForTabs = (html: string, transformDocument?: (documen
     })
 
     // ProductScreenshot renders both themes. Keep one image without hiding other tab content.
-    doc.querySelectorAll('img[class~="dark:hidden"] + img[class~="dark:block"]').forEach((image) => {
+    Array.from(doc.querySelectorAll('img[class~="dark:hidden"] + img[class~="dark:block"]')).forEach((image) => {
         if (image.previousElementSibling?.getAttribute('alt') === image.getAttribute('alt')) {
             image.remove()
         }
@@ -394,7 +389,7 @@ const PAGE_FEEDBACK_HEADINGS = new Set(['Still have questions?', 'Was this page 
 const MIN_TABLE_OF_CONTENTS_SECTIONS = 3
 
 function removePageFeedback(document: Document) {
-    document.querySelectorAll('h3').forEach((heading) => {
+    Array.from(document.querySelectorAll('h3')).forEach((heading) => {
         if (!PAGE_FEEDBACK_HEADINGS.has((heading.textContent ?? '').trim())) return
         heading.parentElement?.remove()
     })
@@ -417,12 +412,12 @@ function removeTabCountBadges(document: Document) {
 function convertCollapsiblesToSections(document: Document) {
     const collapsibles = Array.from(document.querySelectorAll('details'))
     collapsibles.forEach((collapsible) => {
-        const summary = collapsible.querySelector(':scope > summary')
+        const summary = Array.from(collapsible.children).find((child) => child.tagName === 'SUMMARY')
         if (summary) {
             const summaryHeading = document.createElement('p')
             const summaryText = document.createElement('strong')
             summaryText.textContent = (summary.textContent ?? '').trim()
-            summaryHeading.append(summaryText)
+            summaryHeading.appendChild(summaryText)
             summary.replaceWith(summaryHeading)
         }
         collapsible.replaceWith(...collapsible.childNodes)
@@ -443,13 +438,13 @@ function flattenBlockLinks(document: Document) {
         flatLink.setAttribute('href', link.getAttribute('href') ?? '')
         flatLink.textContent = blockTexts.length > 0 ? blockTexts.join(': ') : (link.textContent ?? '').trim()
         const linkParagraph = document.createElement('p')
-        linkParagraph.append(flatLink)
+        linkParagraph.appendChild(flatLink)
         link.replaceWith(linkParagraph)
     })
 }
 
 function removeClientOnlyToggles(document: Document) {
-    document.querySelectorAll('[role="group"], [role="radiogroup"]').forEach((group) => {
+    Array.from(document.querySelectorAll('[role="group"], [role="radiogroup"]')).forEach((group) => {
         if (!group.querySelector('[role="radio"]')) return
         group.remove()
     })
