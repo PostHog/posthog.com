@@ -141,6 +141,33 @@ Make it explicit in your outreach that if we can't agree a pre-commitment, the a
 
 RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) so the invoice is sent, credits are applied and the subscription is scheduled correctly.
 
+### Disputes and chargebacks
+
+A dispute (chargeback) occurs when a customer asks their bank to reverse a charge.
+
+#### Initial response
+
+Email all admins on the account immediately. There is no template. Write a custom email that:
+
+- Acknowledges the dispute.
+- Reminds them that we are generally generous with [refunds](/handbook/growth/sales/refunds).
+- Explains what the charge was for.
+- Tells them that Stripe cannot process a refund while the dispute is open, because the card network holds the funds.
+
+#### Path to a refund
+
+The customer must withdraw the dispute with their bank and send us a formal confirmation letter from the bank. When we receive the letter, we can process the refund immediately.
+
+#### Blocking access
+
+1. Cancel their subscription in Stripe.
+2. Block access to PostHog. In Django admin, set the organization's "Active" field to "No".
+3. Set `is_blocked_from_subscribing` to `true` in their Stripe customer metadata, so they cannot subscribe again.
+
+#### Restoring access
+
+By default, we do not restore access. The customer stays blocked. Billing support and finance can make an exception at their discretion, but exceptions should be fewer than 1% of cases.
+
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
 - 3DS payment failures: Indian banks require 3DS (one time password) for international card payments. The customer is responsible for completing the 3DS step (our billing system sends a couple of reminders) without which the payment will fail.
