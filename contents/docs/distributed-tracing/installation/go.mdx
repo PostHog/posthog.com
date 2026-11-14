@@ -122,13 +122,13 @@ func chargeCustomer(ctx context.Context, customerID string) error {
 Install the optional PostHog OpenTelemetry module:
 
 ```bash
-go get github.com/posthog/posthog-go/otel
+go get github.com/posthog/posthog-go/otel/v2
 ```
 
 Register the context processor on your existing provider before requests start, then wrap your HTTP handler:
 
 ```go
-import posthogotel "github.com/posthog/posthog-go/otel"
+import posthogotel "github.com/posthog/posthog-go/otel/v2"
 
 tp.RegisterSpanProcessor(posthogotel.NewContextSpanProcessor(client))
 handler := posthogotel.NewRequestContextMiddleware(client, existingHandler)

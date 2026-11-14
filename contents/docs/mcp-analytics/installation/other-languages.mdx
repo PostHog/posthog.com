@@ -90,7 +90,7 @@ Capture only the final outcome of a call to a tool your server has. Don't captur
 - A result with `resultType: "input_required"`. Capture the retry that completes the call instead.
 - A task handle (`resultType: "task"`). It isn't a completed call.
 
-This is the event, as PostHog stores it. If you use the [capture API](/docs/api/capture), wrap it in the request body that page describes, with your project token:
+This is the event, as PostHog stores it. PostHog stores the `process_person_profile` [event option](/docs/api/capture-v1#event-options) as a property, so it appears in `properties` below. When you send the event, set it as an option instead, as described in [Identify the user](#identify-the-user). If you use the [capture API](/docs/api/capture-v1), wrap the event in the request body that page describes, with your project token, and put the option in the event's `options`:
 
 ```json
 {
@@ -151,7 +151,7 @@ The only nested JSON values are `$mcp_parameters` and `$mcp_response` (see [the 
 
 If your server knows who is calling, such as from an OAuth token, set `distinct_id` to that user's ID. Send person properties as `$set` and groups as `$groups`, as described in [Identifying users](/docs/mcp-analytics/identifying-users).
 
-Otherwise, set `distinct_id` to the `$session_id` and set `$process_person_profile` to `false`. That way, anonymous calls don't create person profiles.
+Otherwise, set `distinct_id` to the `$session_id` and turn off person processing. With a [capture v1 SDK](/docs/libraries#sdk-versions-and-capture-v1), set the `process_person_profile` option to `false`. That way, anonymous calls don't create person profiles.
 
 </Step>
 
@@ -168,7 +168,7 @@ A call fails when the handler throws, or when it returns a result with `isError:
 
 Analytics capture must never change what the client receives. Catch every error from your instrumentation code, and return or throw the tool's own failure unchanged.
 
-To see failures in [Error Tracking](/docs/error-tracking) too, capture the exception with your SDK's exception capture. Use the same `distinct_id` and `$process_person_profile` as the call event, redact the message, and add the call's `$session_id`, `$mcp_tool_name`, and `$exception_source: "mcp.tool_call"`.
+To see failures in [Error Tracking](/docs/error-tracking) too, capture the exception with your SDK's exception capture. Use the same `distinct_id` and person processing setting as the call event, redact the message, and add the call's `$session_id`, `$mcp_tool_name`, and `$exception_source: "mcp.tool_call"`.
 
 </Step>
 
@@ -207,7 +207,7 @@ Without a redaction pass, leave both properties out. All other features work wit
 
 <Step title="Capture the handshake" badge="recommended">
 
-On revisions before `2026-07-28`, a client starts each session with an `initialize` request. Capture a `$mcp_initialize` event for it, with the same `distinct_id`, `$session_id`, and `$process_person_profile` as the session's tool calls, plus `$mcp_source`, `$mcp_client_name`, `$mcp_client_version`, `$mcp_protocol_version`, `$mcp_server_name`, and `$mcp_server_version`. The "MCP clients" and "MCP users and sessions" insights in the MCP Analytics dashboard template count these events.
+On revisions before `2026-07-28`, a client starts each session with an `initialize` request. Capture a `$mcp_initialize` event for it, with the same `distinct_id`, `$session_id`, and person processing setting as the session's tool calls, plus `$mcp_source`, `$mcp_client_name`, `$mcp_client_version`, `$mcp_protocol_version`, `$mcp_server_name`, and `$mcp_server_version`. The "MCP clients" and "MCP users and sessions" insights in the MCP Analytics dashboard template count these events.
 
 </Step>
 

@@ -67,7 +67,7 @@ To start, run `go mod init go-ab-tests` to initialize our project and then insta
 
 ```bash
 go mod init go-ab-tests
-go get github.com/posthog/posthog-go
+go get github.com/posthog/posthog-go/v2
 ```
 
 Next, we set up the PostHog client in `main.go`. To do this, you need your project token and instance address from [your project settings](https://us.posthog.com/project/settings). You also need to [create a personal API key](https://us.posthog.com/settings/user-api-keys). Use these values to initialize `posthog.NewWithConfig()`. Lastly, we [capture](/docs/product-analytics/capture-events) a `$pageview` event in our HTTP function handler. 
@@ -81,7 +81,7 @@ import (
   "fmt"
   "net/http"
 
-  "github.com/posthog/posthog-go"
+  "github.com/posthog/posthog-go/v2"
 )
 
 func main() {

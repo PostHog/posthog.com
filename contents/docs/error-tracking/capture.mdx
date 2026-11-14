@@ -72,9 +72,12 @@ posthog.captureException(error, {
 ```
 
 ```javascript file=Node.js
-posthog.captureException(e, 'user_distinct_id', {
-  custom_property: "custom_value",
-  custom_list: ["custom_value_1", "custom_value_2"],
+posthog.captureException(e, {
+  distinctId: 'user_distinct_id',
+  properties: {
+    custom_property: "custom_value",
+    custom_list: ["custom_value_1", "custom_value_2"],
+  },
 })
 ```
 
@@ -373,10 +376,13 @@ try {
 try {
   // ...
 } catch (error) {
- posthog.captureException(error, 'user_123', { 
-      "custom_property": "custom_value",
-      // Optional: you can also override generated properties like fingerprint
-      "$exception_fingerprint": "CustomExceptionGroup",
+ posthog.captureException(error, {
+      distinctId: 'user_123',
+      properties: {
+        "custom_property": "custom_value",
+        // Optional: you can also override generated properties like fingerprint
+        "$exception_fingerprint": "CustomExceptionGroup",
+      },
     });
 }
 ```

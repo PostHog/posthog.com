@@ -145,7 +145,7 @@ How you link events to individual groups depends on your SDK:
 - **JavaScript Web SDK:** Call `posthog.group()` once and all session events link to that individual group automatically.
 - **Other SDKs:** Pass the group information in the `groups` parameter for every event you capture.
 
-Events must be [identified](/docs/data/anonymous-vs-identified-events) to link to individual groups. If `$process_person_profile` is set to `false`, the event won't link to the group.
+Events must be [identified](/docs/data/anonymous-vs-identified-events) to link to individual groups. If the event is sent with person processing turned off, it won't link to the group.
 
 #### Multiple groups per event
 

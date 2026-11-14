@@ -4,9 +4,9 @@ sidebar: Docs
 showTitle: true
 ---
 
-PostHog automatically computes timestamps for captured events, but you can also set them manually. For example:
+PostHog automatically computes timestamps for captured events, but you can also set them manually. On [legacy capture](/docs/api/capture):
 
-- If the payload contains `timestamp` and `sent_at` fields, the `sent_at` field is compared to the server time to account for clock skew. The event's `timestamp` is adjusted by this difference before being stored. This is the method our libraries use.
+- If the payload contains `timestamp` and `sent_at` fields, the `sent_at` field is compared to the server time to account for clock skew. The event's `timestamp` is adjusted by this difference before being stored. This is the method SDKs on legacy capture use.
 
 - If the payload includes a `timestamp` but no `sent_at` field, then `timestamp` is directly used as the event timestamp.
 
@@ -16,11 +16,22 @@ PostHog automatically computes timestamps for captured events, but you can also 
 
 - Finally, as a fallback when no `timestamp` or `offset` are included in the payload, the capture time recorded by the server is used as the event timestamp.
 
-To ensure maximum compatibility with PostHog, `timestamp` and `sent_at` fields should be in `ISO 8601` format like `2023-12-13T15:45:30.123Z` or `YYYY-MM-DDTHH:MM:SSZ`.
+## Capture v1
+
+[Capture v1](/docs/api/capture-v1#timestamps-and-clock-skew) works the same way, with different fields:
+
+- Every event must have a `timestamp`, in RFC 3339 format with at least millisecond precision.
+- The `PostHog-Request-Timestamp` header replaces `sent_at`. PostHog compares it with the time it received the request and adjusts each event's `timestamp` by the difference.
+- The `disable_skew_correction` [event option](/docs/api/capture-v1#event-options) replaces `$ignore_sent_at`. It keeps your `timestamp` as sent. A timestamp more than 23 hours in the future is still replaced with the time PostHog received it.
+- `offset` isn't used.
+
+## Timestamp format
+
+On legacy capture, `timestamp` and `sent_at` fields should be in `ISO 8601` format like `2023-12-13T15:45:30.123Z` or `YYYY-MM-DDTHH:MM:SSZ`. Capture v1 needs RFC 3339 format, as described above.
 
 > **Note:** `posthog-js` also sends `$time` property, but this isn't used anywhere in the ingestion pipeline.
 
-Here's a flowchart for how event timestamp is computed during ingestion:
+Here's a flowchart for how legacy capture computes the event timestamp:
 
 ```mermaid
 graph TD

@@ -24,7 +24,7 @@ You need:
 
 - Node.js 20.20+ or 22.22+
 - `@modelcontextprotocol/sdk` 1.26.0+ (v1) or `@modelcontextprotocol/server` 2.0.0+ (v2)
-- `posthog-node` 5
+- `posthog-node` 6
 - A PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key)
 
 Using a dispatcher with no MCP SDK server object? See [Custom dispatchers](#custom-dispatchers).
@@ -38,7 +38,7 @@ The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `instru
 <Step title="Install the packages" badge="required">
 
 ```bash
-npm install @posthog/mcp@1 posthog-node@5
+npm install @posthog/mcp@1 posthog-node@6
 ```
 
 `@posthog/mcp` uses your [`posthog-node`](/docs/libraries/node) client to send events. You own that client's lifecycle. `@posthog/mcp` re-exports `PostHog`, so one import covers both. `posthog-node` is still a peer dependency, so install it too.
@@ -48,6 +48,8 @@ npm install @posthog/mcp@1 posthog-node@5
 <Step title="Wrap your server" badge="required">
 
 Call `instrument(server, posthog)` once, before the server accepts requests. Pass the `McpServer` or the low-level `Server`. The SDK also instruments tools that you register later.
+
+`instrument()` labels the whole client: every event it sends reports `$lib` `posthog-node-mcp` and the `@posthog/mcp` version. If your app also captures its own events, give MCP analytics its own `PostHog` client. To find MCP traffic, filter on `$mcp_*` events rather than `$lib`.
 
 <MultiLanguage>
 
@@ -281,11 +283,36 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | `sendToolsListEvent` | `true` | Emit `$mcp_tools_list` for each `tools/list`. Set to `false` to stop it. Tools keep their injected arguments. |
 | `beforeSend` | – | `(event) => event \| null`. Change or drop each event before it's sent. See [Privacy](/docs/mcp-analytics/privacy). |
 | `eventProperties` | – | `(request, extra) => Record<string, unknown>`. Adds [properties](/docs/mcp-analytics/custom-events) to every event. |
+| `eventOptions` | – | `(request, extra) => Record<string, unknown> \| null`. Sets [event options](#event-options) on every auto-captured event. |
 | `serverBuild` | – | An immutable build ID, such as a Git SHA, sent as `$mcp_server_build`. 1 to 256 characters. |
 | `shouldRecordInputKey` | declared names | Decides which argument names `$mcp_input_keys` records. Other names become one `[redacted]` entry. |
 | `resolveInputAliases` | – | `(toolName) => aliases`. Lists alternative argument names, recorded as `$mcp_input_aliases_used`. |
 | `resolveOriginalTool` | – | `(toolName) => { inputSchema } \| undefined`. Resolves input ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
 | `logger` | no-op | `(message) => void`. A stdio-safe sink for SDK warnings. |
+
+## Event options
+
+`eventOptions` sets [event options](/docs/api/capture-v1#event-options), such as `cookieless_mode` or `process_person_profile`, on MCP events. The name keeps them apart from the `instrument()` options.
+
+- Give `instrument()` an `eventOptions` callback for every auto-captured event. Like `eventProperties`, it takes `(request, extra)`. A failed call's `$exception` gets the same options.
+- Pass `eventOptions` per call to `analytics.capture()` and to the `PostHogMCP` capture methods.
+
+```ts
+const analytics = instrument(server, posthog, {
+  eventOptions: (request, extra) => ({ cookieless_mode: true }),
+})
+
+await analytics.capture({ event: "report_exported", eventOptions: { cookieless_mode: true } })
+
+// On a custom dispatcher, where posthog is a PostHogMCP client:
+posthog.captureToolCall({ toolName: "search_docs", sessionId, eventOptions: { cookieless_mode: true } })
+```
+
+An event from a session with no resolved identity gets `process_person_profile: false` by default. An explicit `process_person_profile` in `eventOptions` wins over that default.
+
+- `beforeSend` receives the options as `event.options` and can change them.
+- On `posthog-node` 5, `eventOptions` supports only `process_person_profile`, `cookieless_mode`, `disable_skew_correction`, and `product_tour_id`, and drops other keys.
+- `PostHogMCP.capture()` is posthog-node's own `capture()`, so it takes `options` instead.
 
 ## Custom dispatchers
 
@@ -373,6 +400,7 @@ Every capture method takes these fields:
 | `groups` | `$groups` | `{ groupType: groupKey }`. |
 | `setProperties` | `$set` | Person properties, such as name or plan. |
 | `properties` | event properties | Extra properties, added as they are. |
+| `eventOptions` | event `options` | [Event options](#event-options) for this event and its `$exception`. |
 | `timestamp` | event time | Defaults to the time of the call. |
 
-The `instrument()` hooks (`identify`, `intentFallback`, `eventProperties`) don't run on this path. Pass identity on each call. `prepareToolCall` and `prepareToolResult` handle intent, model capture, and conversation IDs. On a stateless server, pass the original tool as the `originalTool` option of `prepareToolCall`, so a process that didn't serve `tools/list` still knows which arguments it added. On `2026-07-28`, don't send `$mcp_initialize`, because that revision has no handshake.
+The `instrument()` hooks (`identify`, `intentFallback`, `eventProperties`, `eventOptions`) don't run on this path. Pass identity, and any `eventOptions`, on each call. `prepareToolCall` and `prepareToolResult` handle intent, model capture, and conversation IDs. On a stateless server, pass the original tool as the `originalTool` option of `prepareToolCall`, so a process that didn't serve `tools/list` still knows which arguments it added. On `2026-07-28`, don't send `$mcp_initialize`, because that revision has no handshake.
