@@ -1,0 +1,15 @@
+diff --git a/node_modules/gatsby/dist/utils/worker/child/index.js b/node_modules/gatsby/dist/utils/worker/child/index.js
+--- a/node_modules/gatsby/dist/utils/worker/child/index.js
++++ b/node_modules/gatsby/dist/utils/worker/child/index.js
+@@ -45,2 +45,3 @@ function deleteModuleCache(htmlComponentRendererPath) {
+ }
++exports.initializeCache = () => { require(`../../cache-lmdb`).default.getStore(); };
+ //# sourceMappingURL=index.js.map
+\ No newline at end of file
+diff --git a/node_modules/gatsby/dist/bootstrap/index.js b/node_modules/gatsby/dist/bootstrap/index.js
+--- a/node_modules/gatsby/dist/bootstrap/index.js
++++ b/node_modules/gatsby/dist/bootstrap/index.js
+@@ -40,2 +40,3 @@ async function bootstrap(initialContext) {
+   if (process.env.GATSBY_EXPERIMENTAL_PARALLEL_QUERY_RUNNING) {
++    await Promise.all(workerPool.all.initializeCache());
+     const program = context.store.getState().program;
