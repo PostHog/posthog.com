@@ -1962,6 +1962,20 @@ export const handbookSidebar = [
                             },
                         ],
                     },
+                    {
+                        name: 'Observability enablement',
+                        url: '',
+                        children: [
+                            {
+                                name: 'Observability foundations',
+                                url: '/handbook/growth/sales/observability-foundations',
+                            },
+                            {
+                                name: 'Observability positioning',
+                                url: '/handbook/growth/sales/observability-positioning',
+                            },
+                        ],
+                    },
                 ],
             },
             {

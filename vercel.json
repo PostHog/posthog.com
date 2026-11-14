@@ -1439,6 +1439,16 @@
             "statusCode": 301
         },
         {
+            "source": "/handbook/marketing/how-we-position-and-sell/error-tracking",
+            "destination": "/handbook/growth/sales/observability-positioning",
+            "statusCode": 301
+        },
+        {
+            "source": "/handbook/marketing/how-we-position-and-sell/logs",
+            "destination": "/handbook/growth/sales/observability-positioning",
+            "statusCode": 301
+        },
+        {
             "source": "/handbook/marketing/how-we-position-and-sell/:path*",
             "destination": "/handbook/marketing/positioning/:path*",
             "statusCode": 301
