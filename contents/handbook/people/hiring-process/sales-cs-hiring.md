@@ -92,7 +92,7 @@ The small team interview with the relevant team lead usually lasts 45 minutes.  
 
 #### Culture and motivation interview
 
-In this 30-minute interview, you'll meet with [Simon](/community/profiles/28895), who will be trying to answer "Are they a good cultural fit for the Sales team at PostHog?".
+In this 30-minute interview, you'll meet with [Simon](/community/profiles/28895), who will be trying to answer "Are they a good cultural fit for the Customer Success team at PostHog?".
 
 #### Customer Success SuperDay
 
