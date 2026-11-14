@@ -1,0 +1,201 @@
+---
+title: What you actually get when you pay for a session recording
+---
+
+import Pricing from 'components/Pricing/PricingCalculator/SingleProduct.tsx'
+
+When you pay for session replay in PostHog, you pay per recording. The first 5,000 web recordings and 2,500 mobile recordings each month are free, and the price per recording drops as you record more. That price covers recording the session without slowing your product down, masking private data before it leaves the device, storing the recording, playing it back, and linking it to everything else you know about that user.
+
+Recording a session is the easy part. [rrweb](https://github.com/rrweb-io/rrweb), the open-source library our web recorder is built on, is free, and an AI agent can wire up a basic version in an afternoon. This page explains the rest of the work, so you know what the price includes and can compare it with building your own like with like.
+
+Every section starts in plain English and ends with the technical detail, so you don't need to be an engineer to follow it.
+
+> **No bill yet?** Every PostHog product has a free tier, and they're big enough that 97% of users never pay us a penny. If you record fewer than 5,000 web sessions a month, your recordings cost nothing.
+
+## The price
+
+A recording is one session: everything a person does in your product until they go quiet for 30 minutes, up to 24 hours. [Session Replay](/session-replay) bills per recording, so one person who visits three times in a day can make three recordings. Below are the live rates for web recordings.
+
+<Pricing productType="session_replay" />
+
+[Mobile recordings](/docs/session-replay/mobile) bill separately, with their own rates and a free tier of 2,500 a month. Keeping recordings for longer than 90 days needs a [platform package](/pricing). [Replay Vision](/docs/replay-vision), which uses AI to review recordings for you, bills in its own credits, and asking [PostHog AI to find a recording](/docs/session-replay/find-replays-ai) in plain English spends [AI credits](/docs/posthog-ai/pricing).
+
+Those are the only line items. We don't charge to watch a recording, to share one, or per seat, so your whole team can watch as many as they like.
+
+## What happens to one recording
+
+A session replay tool has the same jobs whether you buy it or build it. It has to record what people do without getting in their way, keep what they type private, and get every piece of the recording to you. Then it has to play it back and help you find the one recording worth watching out of thousands.
+
+In practice that's six steps.
+
+### Step 1: Recording it without slowing your product down
+
+Your customer is halfway through checkout on an old laptop with 40 tabs open. The recorder runs in that same tab. Every time the page changes, it has to notice, write the change down, and send it off, and the page can't feel any slower for it. On a phone, it also has to go easy on the battery and the data plan.
+
+**How it works at PostHog:** On the web, the recorder loads separately from the main [JavaScript SDK](/docs/libraries/js), so it only downloads when recording is switched on. It's built on rrweb. It takes one full snapshot of the page, then records only what changes: DOM mutations, clicks, scrolls, and input. It batches those changes, compresses them, and sends them to a capture endpoint that handles recordings only.
+
+Mobile apps don't have a DOM, so the [mobile SDKs](/docs/session-replay/mobile) work differently. The native iOS and Android SDKs read the screen's view hierarchy and send a wireframe by default. React Native and Flutter send screenshots.
+
+Sampling, minimum duration, and [trigger rules](/docs/session-replay/how-to-control-which-sessions-you-record) run on the device. While a trigger waits to match, the recorder keeps a short buffer in memory, so a session that never qualifies is never uploaded and never billed.
+
+A recorder is code that runs inside your product, so a bug in the recorder is a bug in your product. [In January 2026, a change to our replay code broke some customers' sites](/handbook/company/post-mortems/2026-01-17-replay-sdk-fetch-wrapper-incident) for several days. We published what happened and what we're changing so it doesn't happen again.
+
+Without it, the recorder becomes the slowest thing on your page, and the customer you most wanted to watch gives up before checkout.
+
+### Step 2: Keeping private data private
+
+People type passwords and card numbers into your product. A recording that captures them is a liability, and you usually find out when your security team does.
+
+**How it works at PostHog:** [Privacy controls](/docs/session-replay/privacy) run in the browser or app, before anything is sent, so masked data never reaches PostHog. On the web, every input field is masked by default, and the mobile SDKs start with masking on too. Add the `ph-no-capture` class to any element to leave it out entirely. [Network capture](/docs/session-replay/network-recording) scrubs common sensitive headers automatically, and you can add your own function to scrub request and response bodies.
+
+Each recording is encrypted with its own key. When you delete a person and their recordings, we destroy the key, so nobody can ever play those recordings again.
+
+Without it, every new form your team ships is a new way to record something you shouldn't.
+
+### Step 3: Not losing it
+
+A recording doesn't arrive in one piece. It arrives in many small batches, from every tab the person has open, over as long as 24 hours. Some batches arrive late, and the laptop can close in the middle of one.
+
+**How it works at PostHog:** Recordings go through the same kind of pipeline as [events](/docs/billing/what-you-pay-for-per-event#step-2-not-losing-it). The capture service writes each batch to Kafka before anything else touches it, so a traffic spike or a problem further down the line waits in the queue instead of losing data. A session that sends an unusual amount of data moves to an overflow lane, so it can't slow down anyone else's recordings.
+
+Every batch carries a session ID and a window ID, so ingestion can put the pieces from different tabs back together in order.
+
+Without it, recordings have gaps where batches went missing, and two tabs play back as one confusing mess.
+
+### Step 4: Storing it
+
+Your support team gets a bug report on Monday about something that happened on Friday. The recording needs to still be there, and it needs to load in seconds. A recording holds every change to the page for the whole session, which makes it far bigger than an event.
+
+**How it works at PostHog:** Ingestion buffers each session for up to 10 seconds, compresses it with Snappy, and writes it to object storage (S3) in blocks. A ClickHouse table keeps the metadata for each recording, such as who it was, which pages they visited, how many times they clicked, and any console errors, plus where each block lives. That's what makes recordings searchable without opening each one.
+
+Recordings are stored by retention period and expire on their own. Free plans keep recordings for 30 days, and pay-as-you-go keeps them for 90. [Platform packages](/pricing) go up to one year, or five years on Enterprise. You can [export a recording to JSON](/docs/session-replay/recording-retention#exporting-recordings) to keep it for longer.
+
+To be fair, this is the cheap part. Object storage costs very little per GB, and recordings expire. If you build your own, storage is unlikely to be your biggest bill.
+
+Without the metadata, finding one recording means opening thousands.
+
+### Step 5: Watching it
+
+A recording is a list of page changes, so something has to rebuild them into a page, in order, at the right speed, with the right fonts and styles. And whoever is watching wants to skip the 20 minutes when the user went to make a coffee.
+
+**How it works at PostHog:** The player fetches compressed blocks straight from storage through short-lived signed links, decompresses them in your browser, and rebuilds the page with rrweb. Next to it, a DevTools-style panel shows [console logs](/docs/session-replay/console-log-recording), [network requests](/docs/session-replay/network-recording), and errors in sync with the recording. You can [skip inactive time](/docs/session-replay/how-to-watch-recordings), change the speed, leave comments, and [share or embed](/docs/session-replay/sharing) a recording for someone outside PostHog.
+
+Watching is in the price. Your whole team can watch the same recording a hundred times, and the bill doesn't change.
+
+Without it, you have a bucket of JSON and nothing to watch it with.
+
+### Step 6: Finding the one that matters
+
+Nobody watches all their recordings. You want the five where someone rage-clicked the pay button, or the one from the customer who just emailed support.
+
+**How it works at PostHog:** Every recording is linked to the person, their [events](/docs/product-analytics), their [feature flags](/docs/feature-flags), and their [errors](/docs/error-tracking). You can filter recordings by any event or property, [watch the users who dropped off a funnel](/tutorials/explore-insights-session-recordings), and go from an error straight to the session behind it. [PostHog AI can find recordings](/docs/session-replay/find-replays-ai) from a plain-English description, and [Replay Vision](/docs/replay-vision) reviews recordings for you and surfaces the moments that match what you're looking for.
+
+Without it, you have thousands of recordings and no way to find the one that explains the bug.
+
+## If you build it yourself
+
+Every one of those jobs still exists when you run replay yourself. This table shows what each one looks like on both sides. The second column is what we run for you, the third is what you'd run instead, and the last is when the job needs time from your team.
+
+| Job | What PostHog runs | What you run instead | When it needs your team |
+|---|---|---|---|
+| Recording it | A web recorder, SDKs for iOS, Android, React Native, and Flutter, and sampling and triggers on the device | rrweb on the web, and a separate approach for each mobile platform | When a browser or framework update changes how your pages render |
+| Keeping it private | Masking on the device, header scrubbing, and an encryption key for each recording | Masking rules for every sensitive screen, and a way to delete one person's recordings | When someone ships a new form |
+| Not losing it | A capture endpoint for recordings, Kafka, and an overflow lane | An endpoint, a queue, and logic that puts batches from many tabs back together | When traffic spikes or batches arrive late |
+| Storing it | Compressed blocks in object storage, metadata in ClickHouse, and expiry by retention period | A bucket, a metadata database, and a job that deletes expired recordings | When storage grows faster than you planned |
+| Watching it | A player with console, network, and error panels, inactivity skipping, comments, and sharing | rrweb's player, plus the UI around it | When the player can't rebuild a page your team just changed |
+| Finding it | Filters on events, people, flags, and errors, plus AI search and Replay Vision | A link from each recording to your analytics, and a search UI | When someone asks for "the users who hit this bug" |
+
+## Costs that arrive later
+
+A first build covers recording and playback. The costs below show up once it's in production.
+
+### The recorder is code in your product
+
+You own its performance budget, its bundle size, and its bugs. Every browser release and frontend framework upgrade can change what it sees. Our January incident shows how that can go wrong, even for a team that works on replay full time.
+
+### Privacy is never finished
+
+Every new screen your team ships needs someone to check what the recorder can see. A missed mask on a payment form is a security incident.
+
+### The player
+
+rrweb ships a basic player. Your team will want speed controls, inactivity skipping, the console and network next to the recording, comments, and share links. Every request is reasonable, and every one is more code to maintain.
+
+### Recordings that link to nothing
+
+A recording on its own tells you what one person did. Most of its value comes from finding it at the right moment: from the error, the funnel step, or the support ticket. That needs your recordings and your analytics to share user and session IDs, and someone to build the search. In PostHog, the [events you already send](/docs/billing/what-you-pay-for-per-event) do this job.
+
+### Time and trust
+
+The rest is the same as for events. There are the [hours your team doesn't spend on your product](/docs/billing/what-you-pay-for-per-event#time-you-dont-spend-on-your-product), and the controls your own build would need to match: [SOC 2](/docs/privacy/soc2), [HIPAA](/docs/privacy/hipaa-compliance), and a public [status page](/status). Recordings show exactly what your users see, so they need at least as much care as your events.
+
+## Your own ledger
+
+This is where you do the math. You'll want an engineer for the technical rows, but anyone can fill in the rest. If an agent is helping with your estimate, ask it to fill this in too and say where each number came from.
+
+| Input | Your number | Notes |
+|---|---|---|
+| Recordings per month | | Your [billing page](https://app.posthog.com/organization/billing) shows it |
+| Compressed MB per recording | | Measure it on your real recordings. Canvas, network bodies, and long sessions change it a lot |
+| Months retained | | How far back you need to watch. Pay-as-you-go keeps [90 days](/docs/session-replay/recording-retention) |
+| Storage price per GB-month | | Your cloud's object storage list price |
+| Requests and egress | | Every batch you write and every recording you play back |
+| Ingestion compute and queue | | Capture, a queue, and the workers that assemble sessions |
+| Metadata database | | What you search recordings with |
+| Engineer hours per month | | Recorder upgrades, masking reviews, and player fixes |
+| On-call | | Who, and what it costs them |
+
+In plain English, work out how much you'll store by a given month and what that costs. Add the servers and the people, then divide by the number of recordings you make. As a formula:
+
+```
+GB stored at month N    = recordings × MB × min(N, months retained) ÷ 1,000
+storage at month N      = GB stored × price per GB-month
+monthly total           = storage + requests + compute + queue + database + (engineer hours × loaded rate) + on-call
+your cost per recording = monthly total ÷ recordings per month
+```
+
+Compare the last line with [a PostHog bill](/pricing) at the same volume. Take the Session Replay total from the pricing calculator and divide it by your monthly recordings. The free 5,000 and the falling tiers mean that average comes out lower than the rates at the top of this page. If an agent is doing the math, point it at our [pricing guide for agents](/pricing/agent-estimates).
+
+Don't be surprised if storage is the smallest line. The ledger also leaves out the costs you can't put a price on, like a privacy miss, a slower checkout, and recordings nobody can find.
+
+## When building is the right call
+
+Building your own replay is the better choice for some teams. These are the cases where we'd build it too.
+
+**You only need a few recordings of one internal tool.** rrweb and a storage bucket will do, and you can skip most of this page.
+
+**Recordings can never leave your infrastructure.** If a policy says so, a hosted tool is out at any price. Check what [masking](/docs/session-replay/privacy) can do first, because it often covers the data the policy is about.
+
+**You sell replay, or you need a player that does something ours doesn't.** Then the player is your product, and the engineering time is the business.
+
+If you're not sure which side you're on, fill in the ledger.
+
+## Common questions
+
+### Does PostHog charge to watch or share a recording?
+
+No. You pay once per recording. Watching, sharing, comments, and filters are included for everyone on your team. Replay Vision and AI search bill in their own credits.
+
+### Do mobile recordings cost more?
+
+Yes. Mobile recordings have their own rates, which are higher than web rates, and their own free tier of 2,500 a month. The [pricing page](/pricing) has both tables.
+
+### How long does PostHog keep recordings?
+
+30 days on the free plan and 90 days on pay-as-you-go. Platform packages go up to one year, and Enterprise up to five. See [recording retention](/docs/session-replay/recording-retention).
+
+### Is it cheaper to self-host rrweb?
+
+The recording library is free, and storing recordings is cheap. Most of the cost is the work around them: a recorder that's safe to ship, masking, a player, and search. The [ledger](#your-own-ledger) works it out with your numbers.
+
+## How to lower your PostHog bill
+
+If you want to keep using PostHog but pay less, these changes help most.
+
+- [Record only the sessions you want](/tutorials/limit-session-recordings). Sampling, a minimum duration, and triggers on URLs, events, or feature flags cut the count without losing the recordings that matter.
+
+- Set a [billing limit](/docs/billing/limits-alerts) so you know the most you'll pay in a month.
+
+- Pick the [retention](/docs/session-replay/recording-retention) you need, not the longest one available.
+
+If you'd like help with your setup, [talk to us](/talk-to-a-human).

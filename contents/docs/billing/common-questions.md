@@ -18,6 +18,10 @@ Collecting it, processing it, storing it, and every query you run on it in PostH
 
 It's also confidence that your data is safe, that there's a team of on-call engineers responsible for maintaining it, and that it's been stored correctly. Those things are harder to quantify, but they're still part of the value.
 
+## What does the price of a session recording include?
+
+Recording the session without slowing your product down, masking private data on the device, storing the recording, and playback for everyone on your team. [What you actually get when you pay for a session recording](/docs/billing/what-you-pay-for-per-recording) explains each step.
+
 ## Do projects share usage and free allowances?
 
 Yes. Billing is organization-wide, so usage from all projects in an organization is combined into one bill with one free allowance. For example, if your development, staging, and production projects each send 400,000 events in a month, that counts as 1.2 million events, not three separate free tiers.

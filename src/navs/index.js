@@ -3902,6 +3902,10 @@ export const docsMenu = {
                             url: '/docs/billing/what-you-pay-for-per-event',
                         },
                         {
+                            name: 'What you actually get when you pay for a session recording',
+                            url: '/docs/billing/what-you-pay-for-per-recording',
+                        },
+                        {
                             name: 'Pre-paid plans',
                             url: '/docs/billing/pre-paid-plans',
                         },
