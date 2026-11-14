@@ -146,6 +146,14 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
         })
     }
 
+    if (stage === 'build-javascript' || stage === 'build-html') {
+        const config = getConfig()
+        config.resolve.plugins = config.resolve.plugins.filter(
+            (plugin) => plugin.constructor.name !== 'GatsbyThemeComponentShadowingResolverPlugin'
+        )
+        actions.replaceWebpackConfig(config)
+    }
+
     if (stage === 'build-html') {
         actions.setWebpackConfig({
             optimization: {
