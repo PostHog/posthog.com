@@ -3,8 +3,8 @@ const pLimit = require('p-limit')
 
 const files = {}
 
-const PATHS_PER_QUERY = 100
-const CONCURRENCY = 8
+const PATHS_PER_QUERY = 25
+const CONCURRENCY = 32
 const MAX_ATTEMPTS = 5
 
 const historyQuery = (owner, repo, paths, commitLimit) => {
