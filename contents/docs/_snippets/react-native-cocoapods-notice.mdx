@@ -1,8 +1,7 @@
-> **CocoaPods is becoming read-only.** [CocoaPods has announced](https://blog.cocoapods.org/CocoaPods-Specs-Repo/) the following schedule for its public specs repository:
+> **CocoaPods is becoming read-only.** [CocoaPods trunk becomes read-only on December 2, 2026](https://blog.cocoapods.org/CocoaPods-Specs-Repo/), and `posthog-ios` 4.0 and later is only published through Swift Package Manager (SPM).
 >
-> - November 2–6, 2026: A read-only dry run will prevent us from publishing new PostHog iOS SDK versions to CocoaPods.
-> - December 2, 2026 onward: The repository will be permanently read-only. New PostHog iOS SDK versions will only be available through Swift Package Manager (SPM).
+> `@posthog/react-native-plugin` 3.0 and later always resolves `posthog-ios` through SPM, including on the CocoaPods path, so upgrading the plugin is enough. See [Upgrading to `@posthog/react-native-plugin` 3.0](/docs/libraries/react-native#upgrading-to-posthogreact-native-plugin-30).
 >
-> Existing iOS SDK versions will remain available through CocoaPods. To keep receiving iOS SDK updates, migrate the native plugin's `posthog-ios` dependency to SPM using the [hybrid CocoaPods and SPM setup](/docs/libraries/react-native#cocoapods-with-posthog-ios-through-swift-package-manager), or use [full SPM integration](/docs/libraries/react-native#full-swift-package-manager) if your app supports it. The hybrid path keeps CocoaPods for the plugin and other React Native dependencies.
+> Plugin 2.x pins `posthog-ios` 3.92.x on every iOS dependency path, including the hybrid and full SPM setups, so switching paths doesn't bring newer iOS SDK versions. To get `posthog-ios` 4.0 and later, upgrade to plugin 3.0.
 >
-> This change does not affect `@posthog/react-native-plugin` releases on npm or Android.
+> This change doesn't affect `@posthog/react-native-plugin` releases on npm or Android.
