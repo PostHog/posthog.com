@@ -123,8 +123,8 @@ PostHogAndroid.setup(context, config)
 
 ```ios
 let config = PostHogConfig(
-    apiKey: "YOUR_API_KEY",
-    host: "https://app.posthog.com"
+    projectToken: "<ph_project_token>",
+    host: "<ph_client_api_host>"
 )
 config.evaluationContexts = ["main-app", "ios", "mobile"]
 PostHogSDK.shared.setup(config)

@@ -38,8 +38,8 @@ Each SDK records something different, and starts from a different default.
 | Platform | What it records | Masked out of the box | Unmask individually? |
 | --- | --- | --- | --- |
 | Web | The DOM, rebuilt in the player | Inputs only | Yes, through a callback rather than a selector |
-| Android | A wireframe, or screenshots if you turn screenshot mode on | Text and images | Yes, and revealing beats masking |
-| iOS | A wireframe, or screenshots if you turn screenshot mode on | Text and images | Yes, and revealing beats masking |
+| Android | Screenshots, with masking, from posthog-android 4.0. Earlier versions record a wireframe unless screenshot mode is on | Text and images | Yes, and revealing beats masking |
+| iOS | Screenshots, with masking, from posthog-ios 4.0. Earlier versions record a wireframe unless screenshot mode is on | Text and images | Yes, and revealing beats masking |
 | React Native | Always screenshots | Text, inputs, and images | No – only an app-wide default |
 | Flutter | Always screenshots | Text and images | No – only an app-wide default |
 

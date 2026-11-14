@@ -56,7 +56,7 @@ Support for the `ph-no-mask` identifier is added in iOS SDK version 3.71.0.
 
 Apps built with Xcode 26 use a new SwiftUI rendering model that changes how SwiftUI views map to UIKit. This can cause `postHogMask()` and `postHogNoMask()` to behave inconsistently on primitive views like `Text`, `Image`, and `Button`.
 
-**If you're building with Xcode 26**, update to [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later to ensure these modifiers work correctly.
+Version 4.x requires Xcode 26 and includes the fix. **If you're on 3.x and building with Xcode 26**, use [version 3.36.2](https://github.com/PostHog/posthog-ios/releases/tag/3.36.2) or later so these modifiers work correctly.
 
 </CalloutBox>
 
