@@ -60,6 +60,14 @@ Apps built with Xcode 26 use a new SwiftUI rendering model that changes how Swif
 
 </CalloutBox>
 
+### Masking with GPU capture
+
+When `screenshotModeGPUCapture` is enabled, PostHog redacts masked content in place instead of covering it with black boxes:
+
+- Masked text shows as `*` characters. This shows the length of the text.
+- Masked images are black.
+- Views drawn on top of masked content, such as sheets, buttons, and toolbars, stay visible.
+
 ### Precedence and propagation
 
 `ph-no-mask` applies to the view it is set on and all of its subviews, and it takes precedence over both `ph-no-capture` and PostHog's default masking heuristics. A view marked with `ph-no-capture` that sits inside a `ph-no-mask` subtree is **not** masked, and neither are sensitive views such as text fields that PostHog would otherwise mask automatically. Only set `ph-no-mask` on a subtree you know contains no sensitive data.

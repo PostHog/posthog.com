@@ -82,6 +82,22 @@ config.sessionReplayConfig.screenshotMode = true
 // Requires SDK version 3.58.1 or higher.
 config.sessionReplayConfig.screenshotModeBackgroundCapture = false
 
+// Experimental. Only has an effect when `screenshotMode` is enabled.
+// Renders a copy of the screen on the GPU, so each capture takes less time on
+// the main thread. This reduces jank and dropped frames.
+// Takes precedence over `screenshotModeBackgroundCapture` if both are enabled.
+// iOS and Mac Catalyst only. See the GPU capture limitations below. Default is false.
+// Requires SDK version 3.97.0 or higher.
+config.sessionReplayConfig.screenshotModeGPUCapture = false
+
+// Experimental. Only has an effect when `screenshotMode` is enabled.
+// Sets screenshot resolution as a fraction of the screen's native resolution.
+// For example, on a 3x device 1.0 is native resolution and 0.5 is 1.5 pixels per point.
+// Values are clamped between 0.1 and 1.0. Applies to standard and GPU capture.
+// Default is nil (one pixel per point).
+// Requires SDK version 3.93.0 or higher.
+config.sessionReplayConfig.screenshotScale = nil
+
 // Sets the minimum time interval (in seconds) between session replay snapshots.
 // A higher value reduces performance impact but decreases replay smoothness. Default is 1.0s.
 // Note: Previously known as `debouncerDelay` before version 3.21.0
@@ -102,10 +118,19 @@ config.sessionReplayConfig.sampleRate = nil
 - WebView is only supported if `screenshotMode` is enabled. A placeholder will be shown as a fallback.
 - Currently only available on iOS.
 
+### GPU capture limitations
+
+Compared to the standard screenshot capture, `screenshotModeGPUCapture` has these limitations:
+
+- Metal content (MapKit, SceneKit, SpriteKit, and `MTKView`) shows as a placeholder.
+- Liquid Glass is approximated. On iOS 27, sheets, alerts, and dialogs show as a flat panel.
+- The frame leaves out your app's own `CALayer` subclasses while they animate, for example a playing Lottie animation.
+- The app uses roughly 25 to 30 MB more memory while recording.
+
 ## Troubleshooting
 
 - Update your SDK.
 - If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
     - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug in [issue #263](https://github.com/PostHog/posthog-ios/issues/263).
     - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request in [issue #250](https://github.com/PostHog/posthog-android/issues/250).
-- If session replay looks janky or drops frames on high-refresh-rate (120Hz ProMotion) iPhones when `screenshotMode` is enabled, turn on `config.sessionReplayConfig.screenshotModeBackgroundCapture` (experimental, requires SDK 3.58.1 or higher) to move screenshot capture off the main thread. This can trigger Xcode's Main Thread Checker warnings, so disable it in your scheme's Run diagnostics if that happens.
+- If session replay looks janky or drops frames on high-refresh-rate (120Hz ProMotion) iPhones when `screenshotMode` is enabled, turn on `config.sessionReplayConfig.screenshotModeGPUCapture` (experimental, requires SDK 3.97.0 or higher) to render screenshots on the GPU. Check the [GPU capture limitations](#gpu-capture-limitations) first. As an alternative, turn on `config.sessionReplayConfig.screenshotModeBackgroundCapture` (experimental, requires SDK 3.58.1 or higher) to move screenshot capture off the main thread. This can trigger Xcode's Main Thread Checker warnings, so disable it in your scheme's Run diagnostics if that happens.
