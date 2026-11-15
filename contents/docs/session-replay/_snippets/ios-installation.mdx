@@ -124,8 +124,8 @@ Compared to the standard screenshot capture, `screenshotModeGPUCapture` has thes
 
 - Metal content (MapKit, SceneKit, SpriteKit, and `MTKView`) shows as a placeholder.
 - Liquid Glass is approximated. On iOS 27, sheets, alerts, and dialogs show as a flat panel.
-- The frame leaves out your app's own `CALayer` subclasses while they animate, for example a playing Lottie animation.
-- The app uses roughly 25 to 30 MB more memory while recording.
+- While a `CALayer` subclass from your app or a framework moves or changes shape, the frame leaves out that layer and everything under it, for example a playing Lottie animation.
+- The app uses roughly 25 to 30 MB more memory on average while recording.
 
 ## Troubleshooting
 
