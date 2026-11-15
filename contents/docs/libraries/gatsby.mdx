@@ -17,6 +17,8 @@ If you're migrating from the plugin, remove `gatsby-plugin-posthog` from your `g
 pnpm remove gatsby-plugin-posthog
 ```
 
+If your code uses `window.posthog`, add `import posthog from "posthog-js"` to those modules and replace `window.posthog` calls with `posthog` calls. The npm SDK doesn't create the plugin's `window.posthog` global.
+
 Remove any manual `posthog.capture("$pageview")` calls in `onRouteUpdate`. The SDK captures pageviews automatically with the configuration below. Running both methods can cause duplicate pageviews.
 
 Install the SDK:
