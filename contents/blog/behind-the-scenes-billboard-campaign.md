@@ -102,7 +102,7 @@ This is the dashboard we have set up now:
 
 The unsatisfying truth is that the answer to “were billboards worth it?” is 70% vibes-based, since awareness is the goal.
 
-Billboards are just one touchpoint on the way to a customer picking a product. We won’t be able to track every user that may have seen an ad, looked us up, and then a month later signed up when they needed an all-in-one product analytics and warehouse provider for their app or website. Billboards can also help existing customers feel more strongly towards a company.
+Billboards are just one touchpoint on the way to a customer picking a product. We won’t be able to track every user that may have seen an ad, looked us up, and then a month later when they needed an all-in-one product analytics and warehouse provider for their app or website, signed up. Billboards can also help existing customers feel more strongly towards a company.
 
 They’re a tool in the advertising arsenal; most useful when the rest of your army is fighting well on other fronts.
 
