@@ -30,7 +30,7 @@ Realtime cohorts are evaluated on PostHog's servers. A server-side SDK can't eva
 
 ## Which cohorts qualify
 
-PostHog works this out from the criteria you choose. There is no setting to turn on.
+PostHog works this out from the criteria you choose. A cohort that qualifies also needs [realtime turned on](#turning-realtime-on-and-off) before a feature flag can use it.
 
 A cohort qualifies when every one of its criteria is one of these:
 
@@ -61,15 +61,35 @@ A single criterion from this list makes the whole cohort fall back to the standa
 
 [Static cohorts](/docs/data/cohorts#static-cohorts) are never realtime. They don't change on their own, and they already work in feature flags.
 
+## Turning realtime on and off
+
+Realtime is a setting on each cohort. It is off until you turn it on.
+
+- **When you create a cohort.** Select the **Turn on realtime** checkbox. It shows only after you add an event criterion. If PostHog can't turn realtime on, it still saves the cohort and shows a warning. The cohort page tells you why.
+- **For a cohort that exists.** Open the cohort. Beside **Flag targeting**, click **Turn on realtime**. When realtime is on, the same place shows **Turn off realtime**.
+
+When you turn realtime on for a cohort, PostHog also turns it on for every realtime cohort that this cohort includes as criteria. Then it works through the history of each one. PostHog refuses to turn realtime on if the cohort or a cohort it includes doesn't qualify, is deleted, or is a cohort you can't edit.
+
+PostHog refuses to turn realtime off while any of these use the cohort:
+
+- A feature flag that isn't deleted or archived, if the cohort has event criteria.
+- An active [workflow](/docs/workflows).
+- Another cohort that has realtime on and includes this cohort as criteria. Turn realtime off for that cohort first.
+
+When you turn realtime off, feature flags can't target the cohort. If you turn it on again, PostHog works through the cohort's history again before a flag can use it.
+
+In projects that already had realtime cohorts before this setting existed, realtime is on for every cohort that qualified.
+
 ## Using a realtime cohort in a feature flag
 
-1. Create the cohort, or edit its criteria, as you normally would.
+1. Create the cohort, or edit its criteria, as you normally would. Make sure that realtime is [turned on](#turning-realtime-on-and-off) for it.
 2. Wait while PostHog works through the cohort's history. The errors below call this the backfill. However small the cohort, it takes about 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events.
 3. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
 
 If the flag won't save, the error tells you which step you're on:
 
 - "Cohort 'X' is still being backfilled and cannot be used in feature flags yet" means step 2 hasn't finished. Wait and save again. If it doesn't clear, [tell us](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue).
+- "Realtime is off for cohort 'X'" means that realtime isn't turned on for the cohort. Turn it on from the cohort page, then do step 2.
 - "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means either the cohort doesn't qualify, or realtime cohorts aren't switched on for the project. Compare its criteria against the list above first.
 
 ## Editing a cohort a flag uses
@@ -94,7 +114,9 @@ The same error blocks a rename from the cohort page, because saving there sends 
 
 ### How do I tell whether a cohort is realtime?
 
-Fetch it from the [cohorts API](/docs/api/cohorts) and read `cohort_type`. Qualifying cohorts have `"cohort_type": "realtime"`. The field reads the criteria and nothing else. It doesn't tell you whether realtime cohorts are switched on for the project, or whether PostHog has finished working through the history, so saving the flag is still the test for both.
+Fetch it from the [cohorts API](/docs/api/cohorts) and read `cohort_type`. Qualifying cohorts have `"cohort_type": "realtime"`. The field reads the criteria and nothing else. Read `realtime_enabled` to see whether realtime is turned on for the cohort. Neither field tells you whether realtime cohorts are switched on for the project, or whether PostHog has finished working through the history, so saving the flag is still the test for both.
+
+To turn realtime on when you create a cohort through the API, send `"realtime_enabled": true`. For a cohort that exists, send `{"enabled": true}` or `{"enabled": false}` in a `POST` to `/api/projects/:project_id/cohorts/:id/realtime/`.
 
 ### Do I still need the static cohort workaround?
 
