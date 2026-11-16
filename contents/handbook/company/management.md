@@ -77,7 +77,7 @@ Team leads can't fill this gap on their own. Most small teams have only a few pe
 
 ### Is it official?
 
-Yes. Each group and its group lead is written down below and in the org chart, so team leads know who to go to. Like team leads, group leads don't get a new job title.
+Yes. Each group and its group lead is in the org chart, so team leads know who to go to. Like team leads, group leads don't get a new job title.
 
 Being a group lead is a responsibility. It doesn't change your level or your pay, and like [any management role at PostHog](#what-you-can-expect-as-a-manager), you can move back to a pure IC role. It is a good way to get exposure to more senior work, and we take it into account when we look at someone's level.
 
@@ -91,15 +91,9 @@ We've talked about engineering managers a lot, and decided against the term:
 
 What has worked well at PostHog is people who step up to look after several teams, with a lean toward people. Group leads make this explicit.
 
-### Current group leads
+### Who are the group leads?
 
-- <TeamMember name="Michael Kutsch" /> – infrastructure (Cloud Foundations, Cloud Platform, and Security)
-- <TeamMember name="Paweł Ledwoń" /> – ingestion
-- <TeamMember name="Annika Schmid" /> – product managers
-- <TeamMember name="Joe Martin" /> and <TeamMember name="Andy Vandervell" /> – marketing
-- <TeamMember name="Simon Fisher" /> – customer success
-
-Not every team has a group lead. Many teams will report straight to a Blitzscale member for a long time, and that's fine. We'll add group leads where they make sense.
+We keep track of groups and group leads in the org chart. Not every team has a group lead. Many teams will report straight to a Blitzscale member for a long time, and that's fine. We'll add group leads where they make sense.
 
 If you want to do more of this kind of work, talk to the Blitzscale member you report to. We also want to get better at hiring people with management experience who could grow into group leads.
 
