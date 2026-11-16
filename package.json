@@ -39,7 +39,6 @@
         "test:gatsby-functions": "node --test scripts/gatsby-functions.test.cjs",
         "test:posthog-loader": "node --test scripts/posthog-loader.test.cjs scripts/early-access-features.test.cjs",
         "test:gatsby-utils": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/utils.test.ts",
-        "test:build-reads": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test gatsby/buildReads.test.ts",
         "test:mcp-rest-mapping": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test scripts/mcp-rest-mapping.test.ts",
         "test:internal-path": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/lib/internalPath.test.ts",
         "test:navs": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --test src/navs/activeMenu.test.ts src/navs/applicationMetrics.test.ts src/navs/applicationMetricsPresence.test.ts src/components/ReaderView/tabNavigation.test.ts src/components/Learn/learnRoutes.test.ts src/components/Learn/learnTracking.test.ts src/components/Docs/AppsList/index.test.ts",
