@@ -16,7 +16,7 @@ tags:
     - Infrastructure
 seo:
     metaTitle: Queries are 2x faster, but we're making some event properties temporary
-    metaDescription: "We're rebuilding how PostHog stores events. Queries are about a third faster on average, and up to 2x faster for common queries. Here's what changes on November 30."
+    metaDescription: "We're rebuilding how PostHog stores events. Queries are about a third faster on average, and up to 2x faster for common queries. Here's what changes when we start rolling it out on November 30."
 ---
 
 ## TL;DR
@@ -28,7 +28,7 @@ seo:
 - We'll drop `null` values and empty objects from properties, and store a few built-in properties as text. [See what this changes](#how-some-property-values-change).
 - These changes will also impact batch exports of events: flags arrive as one map, and some properties are left out or added as empty values. [See what changes for batch exports](#what-changes-for-batch-exports).
 - Other person and event properties are unaffected. They stay on your persons and on every event, queryable as before.
-- All of this takes effect on November 30.
+- We start rolling out these changes on November 30. We'll email you before your organization moves.
 
 ## We're making queries faster
 
@@ -53,7 +53,7 @@ We looked at how event properties get queried. A small set, mostly SDK diagnosti
 
 `$set` and `$set_once` are the biggest part of this. They're instructions to our person-merging engine ("update this person's properties"), which we apply the moment an event arrives. The result is stored on the person and on every event as person properties. Keeping the raw instruction forever also meant storing the same data twice, both the properties and the instructions on how to change the properties.
 
-From November 30 2026, we will keep these properties for 60 days before dropping them. This means you can still inspect them and use them to debug, but they won't be included on persons or events forever. This means less data stored twice in PostHog and faster queries for everyone. 
+When your organization moves to the new storage (rollout starts November 30 2026), we will keep these properties for 60 days before dropping them. This means you can still inspect them and use them to debug, but they won't be included on persons or events forever. This means less data stored twice in PostHog and faster queries for everyone. 
 
 ## Moving feature flag data to its own table
 
@@ -68,13 +68,13 @@ Here's more details on what this means:
 
 ### Do you need to change anything for flag calls?
 
-Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. From November 30, they show at most the last 90 days of flag calls. Destinations and workflows keep receiving `$feature_flag_called` events. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
+Probably not. Insights, funnels, cohorts, actions, experiments, and SQL queries on `$feature_flag_called` keep working. After your organization moves, they show at most the last 90 days of flag calls. Destinations and workflows keep receiving `$feature_flag_called` events. [Paths](/docs/product-analytics/paths) that read every event, or that build steps from a SQL expression, no longer include `$feature_flag_called` events.
 
 Three exceptions:
 
 - **SQL with `SELECT *`, `SAMPLE`, or `FINAL`:** a query that reads `$feature_flag_called` with any of these returns an error. List the columns you need instead of `*`, and remove `SAMPLE` and `FINAL`.
-- **Batch exports:** from November 30, exports of the `events` table will not include `$feature_flag_called` events. To keep exporting them, see [What changes for batch exports](#what-changes-for-batch-exports).
-- **Legacy apps:** from November 30, legacy apps won't receive `$feature_flag_called` events. To keep receiving them, switch to the matching destination, such as [Customer.io](/docs/data-pipelines/destinations/customerio) or [RudderStack](/docs/data-pipelines/destinations/rudderstack).
+- **Batch exports:** after your organization moves, exports of the `events` table will not include `$feature_flag_called` events. To keep exporting them, see [What changes for batch exports](#what-changes-for-batch-exports).
+- **Legacy apps:** after your organization moves, legacy apps won't receive `$feature_flag_called` events. To keep receiving them, switch to the matching destination, such as [Customer.io](/docs/data-pipelines/destinations/customerio) or [RudderStack](/docs/data-pipelines/destinations/rudderstack).
 
 We'll email you before your organization moves. For details, see [Where does PostHog store flag calls?](/docs/feature-flags/troubleshooting#where-does-posthog-store-flag-calls)
 
@@ -95,7 +95,7 @@ Good to know:
 
 - **Person properties are not affected.** We apply `$set` and `$set_once` to the person as soon as the event arrives. The resulting person properties stay on every event and stay queryable as before. Only the raw instruction on the event expires.
 - **The 60 days count from when we received the event**, not from the event's timestamp.
-- **Historical events:** on November 30, events we received more than 60 days earlier (before roughly October 1) lose `$set`, `$set_once` and the other properties in this table. Their person properties are kept.
+- **Historical events:** when your organization moves, events we received more than 60 days earlier lose `$set`, `$set_once` and the other properties in this table. Their person properties are kept.
 - **Not affected:** `$sent_at`, `$sdk_debug_current_session_duration` and `$debug_images` stay permanent, because people use them in longer-term queries and for error symbolication.
 
 ## What properties we're removing
@@ -126,7 +126,7 @@ We'll drop `null` values and empty objects from properties, and store a few buil
 
 ## What changes for batch exports
 
-From November 30, [batch exports](/docs/data-pipelines/batch-exports) that use the [events model](/docs/data-pipelines/batch-exports#events-model) change in two ways:
+After your organization moves, [batch exports](/docs/data-pipelines/batch-exports) that use the [events model](/docs/data-pipelines/batch-exports#events-model) change in two ways:
 
 - They no longer include `$feature_flag_called` events, because these events move to their own table. You can export that table separately (see below).
 - They send `properties` and `person_properties` in the new storage format. This format stores feature flags more efficiently, so events with many flags are much smaller.
@@ -148,7 +148,7 @@ Here's everything that changes in exported events:
 | Built-in properties that an event didn't send, like `$browser` or `$exception_list` | Left out | Included with an empty value: `""` for text, `[]` for lists, and `{}` for `$feature_flags` | Treat `""`, `[]`, and an empty `$feature_flags` as not set |
 | Built-in person properties that a person doesn't have, like `$initial_os` | Left out of `person_properties` | Included as `""` | Treat `""` as not set |
 
-Here's an example of the `properties` of one event in a **batch export** before November 30:
+Here's an example of the `properties` of one event in a **batch export** before your organization moves:
 
 ```json
 {
@@ -163,7 +163,7 @@ Here's an example of the `properties` of one event in a **batch export** before 
 }
 ```
 
-And the same event in a **batch export** after November 30. The list of empty built-in properties is shortened:
+And the same event in a **batch export** after your organization moves. The list of empty built-in properties is shortened:
 
 ```json
 {
@@ -180,4 +180,4 @@ And the same event in a **batch export** after November 30. The list of empty bu
 
 ## When
 
-The changes take effect on November 30. Questions? [Get in touch with support](/support).
+We start rolling out the changes on November 30, and we'll email you before your organization moves. Questions? [Get in touch with support](/support).
