@@ -23,9 +23,9 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Import payments, orders, refunds, payouts, catalogue, and staff from your Yoco business.
+Import payments, orders, refunds, payouts, catalogue, staff, and Capital financing from your Yoco business.
 
-Create an API key in the [Yoco Developer Console](https://developer.yoco.com/ui). Give the key the scopes for the tables you want to sync: `business/orders:read` for payments, orders, refunds, and payment links, `business/payouts:read` for payouts and payout entries, `business/catalogue:read` for items, categories, brands, and modifier groups, `business/locations:read` for locations, `business/staff:read` for staff, and `business/devices:read` for card machines.
+Create an API key in the [Yoco Developer Console](https://developer.yoco.com/ui). Give the key the scopes for the tables you want to sync: `business/orders:read` for payments, orders, refunds, and payment links, `business/payouts:read` for payouts and payout entries, `business/catalogue:read` for items, categories, brands, modifier groups, and taxes, `business/locations:read` for locations, `business/staff:read` for staff, `business/devices:read` for card machines, `business/capital_advances:read` for active Capital advances, and `business/capital_offers:read` for active Capital offers.
 
 You'll be asked for:
 
@@ -36,6 +36,8 @@ You'll be asked for:
 <SyncModes />
 
 All Yoco tables are full refresh. Each sync replaces the contents of the table.
+
+The Capital tables list only active advances and offers. When an advance is repaid or an offer expires, the next sync removes it from the table.
 
 ## Configuration
 
