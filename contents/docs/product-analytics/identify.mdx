@@ -191,7 +191,7 @@ client.capture(event);
 
 </MultiLanguage>
 
-Some frameworks attach the `distinct_id` for you, often via [contexts](/docs/libraries/python#contexts). The examples below are copied directly from each framework's setup guide.
+Some frameworks attach the `distinct_id` for you, often via [contexts](/docs/libraries/python/reference#posthognew_context). The examples below are copied directly from each framework's setup guide.
 
 <Tab.Group tabs={['Python', 'Node', 'Elixir']}>
 
@@ -343,7 +343,7 @@ posthog.alias("frontend_id", "backend_id");
 use posthog_rs::Event;
 
 // The Rust SDK doesn't currently expose an alias helper.
-// See /docs/libraries/rust#alias for more details.
+// See /docs/libraries/rust/reference#alias for more details.
 let mut event = Event::new("$create_alias", "frontend_id");
 event.insert_prop("alias", "backend_id").unwrap();
 
