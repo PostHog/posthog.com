@@ -17,8 +17,7 @@
 **What we'll ship:**
 
 1. A HogQL query service: one deployment that compiles HogQL queries, with a single deploy and a single rollback.
-2. The query API and background workers moved over to call it, highest query volume first, with a tracked list of what still runs HogQL in-process.
-3. Gradual rollouts for HogQL changes: a new version takes a slice of traffic first and the rollout stops when query failure rate goes up.
+2. Gradual rollouts for HogQL changes: a new version takes a slice of traffic first and the rollout stops when query failure rate goes up.
 
 ### Objective 3: Safely bring the JSON Events Table into production <TeamMember name="Sandy Spicer" photo />
 
