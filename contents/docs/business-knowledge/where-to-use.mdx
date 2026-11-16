@@ -32,3 +32,15 @@ The [PostHog MCP server](/docs/model-context-protocol) gives any MCP client tool
 | `business_knowledge:write` | Add text and URL sources, update a source, and create, update, or delete libraries |
 
 Upload files and delete sources in PostHog. MCP can't do either. See the [MCP tools reference](/docs/model-context-protocol/tools) for each tool.
+
+## Your own agents
+
+To let your own agent or backend service read your sources, give it a [project secret API key](/docs/api/project-secret-api-keys) with the `business_knowledge:read` scope. The key belongs to the project, not to a person, so it keeps working when people leave.
+
+The key can search sources, read the text around a match, list and get libraries, and search or read files in selected GitHub repositories. It can't add, change, or delete anything, and it can't open sources, settings, or the playground.
+
+- **Use the project's main environment.** A key from a child environment can't read Business Knowledge.
+- **Have access to Business Knowledge.** You need it to create, update, or roll a key with this scope.
+- **Create a new key.** The key that replaced your project's legacy secret token can't take this scope.
+
+Requests from a key count against a limit for that key and a limit for all keys in the project.

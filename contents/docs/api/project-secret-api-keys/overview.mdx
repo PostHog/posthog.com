@@ -1,11 +1,12 @@
 Project secret API keys are server-to-server credentials scoped to a single project. They're the right choice when a backend service needs scoped, project-level access without being tied to anyone's user account.
 
-Unlike a [personal API key](/docs/api/personal-api-keys), a project secret API key doesn't represent a user—it isn't affected when a teammate leaves, and it only has the scopes you grant it. 
+Unlike a [personal API key](/docs/api/personal-api-keys), a project secret API key doesn't represent a user—it isn't affected when a teammate leaves, and it only has the scopes you grant it.
 
 Today, they're supported on a growing set of scopes:
 - Feature flag [local evaluation](/docs/feature-flags/local-evaluation) and [remote config](/docs/feature-flags/remote-config) (`feature_flag:read` scope)
 - Endpoints execution (`endpoint:read` scope)
 - Support external tickets API reads (`support_ticket:read` scope)
+- [Business Knowledge](/docs/business-knowledge/where-to-use#your-own-agents) reads (`business_knowledge:read` scope)
 
 <CalloutBox icon="IconInfo" title="Migrating from the feature flags secure API key" type="fyi">
 
