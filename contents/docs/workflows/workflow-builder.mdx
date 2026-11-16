@@ -225,25 +225,25 @@ The **Frequency** setting on the trigger step controls how often one person can 
 | Option                       | What it does                                                                                                                       |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | Every time the trigger fires | Default. Each matching event starts a new run, even if the person is already in the workflow.                                      |
-| One time                     | A person enters once, and then can't enter again until the window you choose ends. The window is 5 minutes to 365 days, or **indefinitely**. |
+| One time                     | A person enters once, then can't enter again until the window ends. Choose a window from 5 minutes to 365 days, or **indefinitely**. |
 | Once per calendar day        | A person enters at most once each day.                                                                                             |
 
-Use **One time** when the same event can arrive more than once for one real occurrence, for example a server that sends an event again on a retry. With **Every time the trigger fires**, each copy starts its own run, so the person gets the same email once for each copy. Set the window a bit longer than the time over which duplicates can arrive, but shorter than the time until the person should get the message again.
+Use **One time** when the same event can arrive more than once for one real occurrence, for example a server that sends an event again on a retry. With **Every time the trigger fires**, each copy starts its own run, so the person gets the same email once for each copy. Make the window longer than the gap between duplicates, and shorter than the time before the person should get the message again.
 
-Some other trigger types show their own frequency options that fit them.
+Some other trigger types have their own frequency options.
 
 #### Trigger frequency or frequency cap
 
-The [frequency cap](/docs/workflows/frequency-cap) and trigger frequency both limit messages, but they work differently:
+Trigger frequency and the [frequency cap](/docs/workflows/frequency-cap) both limit messages:
 
 | | Trigger frequency | Frequency cap |
 | --- | --- | --- |
 | Scope | One workflow | All workflows and broadcasts in the project |
 | What it limits | Runs. Extra trigger events don't start a run. | Marketing messages. A message over the cap is skipped or held. |
 | Transactional messages | Applies | Doesn't apply |
-| Non-message steps | Applies, because no run starts | Doesn't apply |
+| Other steps, such as webhooks | Applies, because the run doesn't start | Doesn't apply |
 
-Use trigger frequency to stop one workflow from running too often for one person, such as duplicate events or a welcome flow that should run only once. Use the frequency cap to limit the total number of marketing messages a person gets from all of your workflows.
+Use trigger frequency to stop one workflow from running too often for one person, for example when an event arrives twice, or for a welcome flow that should run only once. Use the frequency cap to limit how many marketing messages a person gets from all of your workflows and broadcasts.
 
 ### Conversion goals
 
