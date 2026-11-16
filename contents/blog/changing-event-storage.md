@@ -28,7 +28,7 @@ seo:
 - We'll drop `null` values and empty objects from properties, and store a few built-in properties as text. [See what this changes](#how-some-property-values-change).
 - These changes will also impact batch exports of events: flags arrive as one map, and some properties are left out or added as empty values. [See what changes for batch exports](#what-changes-for-batch-exports).
 - Other person and event properties are unaffected. They stay on your persons and on every event, queryable as before.
-- We start rolling out these changes on November 30. We'll email you before your organization moves.
+- We start rolling out these changes on November 30.
 
 ## We're making queries faster
 
@@ -180,4 +180,4 @@ And the same event in a **batch export** after your organization moves. The list
 
 ## When
 
-We start rolling out the changes on November 30, and we'll email you before your organization moves. Questions? [Get in touch with support](/support).
+We start rolling out the changes on November 30. Questions? [Get in touch with support](/support).
