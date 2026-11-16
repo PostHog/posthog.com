@@ -1,6 +1,6 @@
 ---
 title: "We accidentally launched our new UI"
-date: 2026-11-13
+date: 2026-11-16
 rootPage: /blog
 sidebar: Blog
 showTitle: true
@@ -20,7 +20,7 @@ seo:
 
 > **TL;DR:** The new Home page opens on what needs your attention today. A new nav rail down the left sorts every product by the question it answers. It's opt-in, changing based on your feedback, and if you *really* don’t like it, you can switch back (until early 2027). [Try the new design →](https://app.posthog.com/settings/user-feature-previews#today-rail-nav)
 
-We planned to launch the PostHog Web redesign through a sensible, controlled rollout. Instead, we accidentally shipped it to everyone.
+We planned to launch the PostHog redesign through a sensible, controlled rollout. Instead, we accidentally shipped it to everyone.
 
 For two hours and 23 minutes, about 9,000 people in 7,800 organizations opened PostHog to a homepage and sidebar they'd never seen, with no explanation and no way back.
 
@@ -28,7 +28,7 @@ Users on X noticed before we did.
 
 ![Posts on X from users reacting to the new PostHog UI on November 2](https://res.cloudinary.com/dmukukwp6/image/upload/x_ui_nov_2_grabs_4d197a3311.png)
 
-How’d that happen? Ruby, the PM for team surfaces, was taking one user off the internal testing flag for the new UI. The flag’s conditions weren’t in the order she remembered, and a 0% rollout condition sat at the bottom. She figured she’d added it by accident and deleted it. But that condition was the one keeping everyone else *out*.
+How’d that happen? Ruby, the PM for team [surfaces](/teams/surfaces), was taking one user off the internal testing flag for the new UI. The flag’s conditions weren’t in the order she remembered, and a 0% rollout condition sat at the bottom. She figured she’d added it by accident and deleted it. But that condition was the one keeping everyone else *out*.
 
 With it gone, the flag turned on for everyone.
 
@@ -60,7 +60,7 @@ If you’ve used PostHog for a while, you’ve seen [many versions of the sideba
 
 Some of these took a lot of debate, and we haven’t nailed it (yet). For example, **Analytics** is one item because people go from web analytics to a replay to the [SQL editor](/sql) in one session, and splitting them up takes needless clicks.
 
-If you disagree on the hierarchy, let [Adam Leith](/community/profiles/32193) know.
+Two additional categories, Monitor and Release, will be added soon and complete the new UX. If you disagree on the hierarchy, let [Adam Leith](/community/profiles/32193) know.
 
 ## Agents do the work. People still check it.
 
