@@ -1,0 +1,57 @@
+---
+title: Usage analytics
+sidebar: Docs
+showTitle: true
+contentMaxWidthClass: max-w-5xl
+---
+
+import PrivateBeta from "./_snippets/private-beta.mdx";
+import OSButton from "components/OSButton";
+
+<PrivateBeta />
+
+The **Usage** tab shows how often the support agent cites your business knowledge sources when it works on tickets. Use it to understand which sources are most valuable and spot gaps in coverage.
+
+<OSButton variant="primary" external asLink to="https://app.posthog.com/business-knowledge/usage">
+  View usage
+</OSButton>
+
+## Time period
+
+Select **7 days**, **30 days**, or **90 days** to filter all statistics. The default is 30 days. Changing the period reloads every metric and chart on the page.
+
+## Summary metrics
+
+Three cards summarize citation activity for the selected period:
+
+| Metric                                   | What it means                                                                                            |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Agent runs that cited knowledge**      | Total ticket replies where the support agent used at least one source                                    |
+| **Cited knowledge learned from tickets** | How many of those runs cited sources [learned from support](/docs/business-knowledge/learn-from-support) |
+| **Sources cited**                        | How many unique sources were cited, out of your total source count                                       |
+
+## Daily chart
+
+A bar chart shows agent runs that cited knowledge per day over the selected period. Use it to spot trends or unusual drops in citation activity.
+
+## Most cited sources
+
+A table lists the sources cited most often in the selected period. Each row shows:
+
+- **Source** – The source name, linked to its detail page. Sources learned from support tickets show a **Learned** tag.
+- **Agent runs** – How many ticket replies cited this source.
+- **Last cited** – When the source was last cited.
+
+Deleted sources are excluded from this table.
+
+## Cited in column
+
+Each source in the [sources list](/docs/business-knowledge/sources) also shows a **Cited in** column. It displays the number of agent runs that cited that source and when the last citation happened. Sources that haven't been cited yet show **Not cited yet**.
+
+## Empty and error states
+
+If no sources were cited in the selected period, the tab shows:
+
+> No agent run cited your knowledge in the last X days. The support agent cites a source when it uses it on a ticket. Add sources that cover common support questions, and check that the support agent is turned on.
+
+If the usage data fails to load, an error banner appears with a **Try again** button.
