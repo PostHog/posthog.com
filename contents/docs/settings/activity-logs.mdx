@@ -288,7 +288,9 @@ Activity logs support a range of filters to help you find specific events.
 ### Available filters
 
 **Date range**
-Filter events to a specific time period. Use preset ranges like "Last 7 days" or select custom start and end dates.
+Filter events to a specific time period. Use preset ranges like "Last 7 days", or a rolling range in hours, days, weeks, months, or years, such as "Last 6 hours". You can also select custom start and end dates, and set a time on each to filter to a window shorter than a day.
+
+To see activity around a specific moment, select **Jump to timestamp**. Enter a timestamp and pick a window size and direction (before, after, or around the timestamp). Times without a UTC offset use your project's timezone.
 
 **User**
 Filter by the team member who performed the action. Select one or multiple users to see only their changes.
@@ -430,6 +432,8 @@ For full details on query parameters, request/response formats, and all availabl
 - **EU region**: [eu.posthog.com/api/schema/swagger-ui/](https://eu.posthog.com/api/schema/swagger-ui/)
 
 Search for "activity_log" to find the relevant endpoints.
+
+The `start_date` and `end_date` parameters of the advanced activity logs endpoints accept ISO 8601 timestamps, so you can request a window shorter than a day. Include a UTC offset, such as `2026-01-15T10:30:00Z`. The API reads a value without an offset as UTC, but the [MCP](/docs/model-context-protocol) tool rejects it.
 
 ## Query with HogQL
 
