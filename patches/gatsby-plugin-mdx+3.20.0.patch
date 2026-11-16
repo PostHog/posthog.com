@@ -48,3 +48,14 @@ index 10a4ededb4..1abbe97e06 100644
  
  const componentsAndGuards = {}
  
+diff --git a/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js b/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js
+--- a/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js
++++ b/node_modules/gatsby-plugin-mdx/gatsby/create-schema-customization.js
+@@ -18,1 +18,3 @@
+ const genMDX = require(`../utils/gen-mdx`)
++const mdx = require(`@mdx-js/mdx`)
++const grayMatter = require(`gray-matter`)
+@@ -205,1 +207,2 @@
+-          const { mdast } = await processMDX({ node: mdxNode })
++          const { content } = grayMatter(mdxNode.rawBody, options)
++          const mdast = mdx.createMdxAstCompiler(options).parse(content)

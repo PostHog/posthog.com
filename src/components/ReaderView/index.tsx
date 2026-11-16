@@ -105,6 +105,8 @@ interface ReaderViewProps {
     leftSidebar?: React.ReactNode
     hideLeftSidebar?: boolean
     hideRightSidebar?: boolean
+    /** Hides the search box at the top of the left sidebar, for pages that put their own search in the content. */
+    hideSidebarSearch?: boolean
     contentMaxWidthClass?: string
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
@@ -447,6 +449,7 @@ export default function ReaderView({
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize = 'sm',
@@ -487,6 +490,7 @@ export default function ReaderView({
                 leftSidebar={leftSidebar}
                 hideLeftSidebar={hideLeftSidebar}
                 hideRightSidebar={hideRightSidebar}
+                hideSidebarSearch={hideSidebarSearch}
                 contentMaxWidthClass={contentMaxWidthClass}
                 padding={padding}
                 proseSize={proseSize}
@@ -1459,6 +1463,7 @@ function ReaderViewContent({
     leftSidebar,
     hideLeftSidebar = false,
     hideRightSidebar = false,
+    hideSidebarSearch = false,
     contentMaxWidthClass,
     padding = true,
     proseSize,
@@ -1712,11 +1717,13 @@ function ReaderViewContent({
                         hideAppOptions={hideAppOptions}
                         productSelect={productSelect}
                         inlineSearch={
-                            <InlineSearch
-                                contentRef={onSearch ? undefined : contentRef}
-                                onSearch={onSearch}
-                                currentPath={appWindow?.path}
-                            />
+                            hideSidebarSearch ? undefined : (
+                                <InlineSearch
+                                    contentRef={onSearch ? undefined : contentRef}
+                                    onSearch={onSearch}
+                                    currentPath={appWindow?.path}
+                                />
+                            )
                         }
                         menuTabs={menuTabs}
                         contentRef={onSearch ? undefined : contentRef}

@@ -19,7 +19,7 @@ They follow the [normal territory assignment rules](https://posthog.com/handbook
 
 **New business sales team**
 1. Completed the book a demo form (organic inbound, paid ads campaign, or outbound)
-2. [Onboarding specialist referral](/handbook/onboarding/sales-handover)
+2. [Onboarding specialist referral](/handbook/scaled-customer-success/sales-handover)
 3. First signup from a company with 500+ employees who have ingested at least 1 event and invited at least 1 person 
 4. Customers who have used 50% or more of their startup credits and had a last invoice greater than $5000
 5. Customers set to roll off startup plan in the next ~100 days with last invoice between $2k–$5k

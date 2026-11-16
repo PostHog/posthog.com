@@ -169,7 +169,7 @@ const claimSteps: { title: string; copy: React.ReactNode }[] = [
     },
     {
         title: 'Redeem and build',
-        copy: 'The coupon applies, then you drop into onboarding.',
+        copy: 'On the free plan? Add a card to upgrade first. You only pay for what you use, and you can set billing limits as low as $0. Then the coupon applies, and you drop into onboarding.',
     },
 ]
 
@@ -344,8 +344,26 @@ const faqItems = [
         trigger: 'What happens after the 12 months?',
         content: (
             <p>
-                The special plans and features run for 12 months from the day you redeem, then we switch you back to the
-                default paid plans. Nothing you built goes away.
+                The special plans and features run for 12 months from the day you redeem. The offer doesn't renew. When
+                it ends, the free Scale add-on switches to paid{' '}
+                <Link to="/platform-packages" className="font-semibold underline">
+                    Scale
+                </Link>{' '}
+                and your other products go back to the default paid plans. We email you 30 days and 7 days before, so
+                you can remove Scale first if you don't want it. Nothing you built goes away.
+            </p>
+        ),
+    },
+    {
+        trigger: 'Will I pay anything during the 12 months?',
+        content: (
+            <p>
+                Scale is free. If your usage goes above the doubled free allowance, you pay for the extra usage at our
+                usual{' '}
+                <Link to="/pricing" className="font-semibold underline">
+                    pricing
+                </Link>
+                . Set billing limits to control your spend.
             </p>
         ),
     },
@@ -376,7 +394,11 @@ const faqStructuredData = [
     },
     {
         question: 'What happens after the 12 months of free PostHog Scale?',
-        answer: 'The special plans and features are available for 12 months from the date you redeem your coupon. After that, you switch back to the default paid plans.',
+        answer: "The special plans and features are available for 12 months from the date you redeem your coupon. The offer doesn't renew. When it ends, the free Scale add-on switches to paid Scale and your other products go back to the default paid plans. PostHog emails you 30 days and 7 days before, so you can remove Scale first if you don't want it.",
+    },
+    {
+        question: 'Will I pay anything during the 12 months of the Lenny offer?',
+        answer: 'Scale is free. If your usage goes above the doubled free allowance, you pay for the extra usage at the usual PostHog pricing. Set billing limits to control your spend.',
     },
     {
         question: 'What counts as a new PostHog customer?',
@@ -566,7 +588,10 @@ export default function LennyProductPass(): JSX.Element {
                                         You have no paid PostHog invoices before December 1, 2025 — years on the free
                                         tier don't count against you
                                     </li>
-                                    <li>You have an active paid PostHog subscription</li>
+                                    <li>
+                                        You have an active paid PostHog subscription. If you're on the free plan, you
+                                        can upgrade when you claim
+                                    </li>
                                 </ul>
                             </div>
                         </div>

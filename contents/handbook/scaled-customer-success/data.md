@@ -1,5 +1,5 @@
 ---
-title: Onboarding Data
+title: Data
 sidebar: Handbook
 showTitle: true
 ---
