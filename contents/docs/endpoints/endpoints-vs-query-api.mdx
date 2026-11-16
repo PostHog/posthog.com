@@ -27,9 +27,12 @@ Endpoints provide a more stable, purpose-built solution for production use cases
 
 ## When to use each
 
+If a query runs on a schedule or repeatedly from your own servers, use an endpoint, even when you're only querying your own data and it isn't customer-facing. Scheduled Query API calls are the most common source of timeouts and capacity or concurrency errors, because they run on shared compute. Endpoints can run on isolated compute and cache or materialize results.
+
 | Use case | Recommendation |
 |----------|----------------|
 | Ad-hoc and explorative queries | Query API |
+| Scheduled or recurring queries (cron jobs, weekly reports, pipelines) | Endpoints |
 | Production application | Endpoints |
 | Customer-facing analytics | Endpoints |
 | High traffic | Endpoints |
