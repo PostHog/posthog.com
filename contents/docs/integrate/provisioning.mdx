@@ -192,7 +192,7 @@ The review looks at your metadata document and your public website. To pass:
 
 PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP address, or on a throwaway host such as a tunnel (for example ngrok), a request bin, or a JSON or paste hosting service. Register from the website your users actually use, not from a local or preview environment.
 
-If your clients are [linked to a PostHog organization](#link-your-partner-app-to-a-posthog-organization-optional), accepting one client also covers your other clients on the same registrable domain that are linked to the same organization. For example, after `https://yourapp.com/.well-known/yourapp.json` is accepted, a staging client on `staging.yourapp.com` linked to the same organization is accepted without a new review.
+Once PostHog accepts one client on a domain, other clients on the same registrable domain are accepted without a new review. For example, after `https://yourapp.com/.well-known/yourapp.json` is accepted, a staging client on `staging.yourapp.com` is accepted too.
 
 <a id="sign-requests-with-a-key-optional" />
 
