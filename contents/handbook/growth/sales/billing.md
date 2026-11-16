@@ -153,7 +153,7 @@ Before you contact the customer, check:
 - What the charge was for.
 - The customer's PostHog activity: when they signed up, when they subscribed, and how much they have used the product.
 
-Most disputes come from customers who wanted to cancel and went to their bank instead. Some are mistakes, such as the wrong card being added and charged.
+Most disputes come from customers who wanted to cancel and went to their bank instead. Some are mistakes, such as the wrong card being added and charged. If it looks like genuine fraud, raise it in #team-billing in Slack.
 
 #### 2. Email the customer
 
@@ -184,13 +184,13 @@ Stripe sends the evidence to the bank, and the bank makes the decision. This usu
 When you counter the dispute:
 
 1. Cancel their subscription in Stripe.
-2. Block access to PostHog. In Django admin, set the organization's "Active" field to "No".
+2. Block access to PostHog. In Django admin, set the organization's "Active" field to "No". In the "De-activated reason" field, type an explanation, for example "Access revoked due to a disputed payment." Users see this text in the app, so keep it short and factual.
 3. Set `is_blocked_from_subscribing` to `true` in their Stripe customer metadata, so they cannot subscribe again.
 4. Email the admins to tell them about these steps.
 
 #### Restoring access
 
-We decide case by case whether to restore access or let the customer subscribe again. About 99% of the time, we do neither. Billing support and finance can make an exception.
+We decide case by case whether to restore access or let the customer subscribe again. About 99% of the time, we do neither. If you think a customer should get an exception, ask billing support and finance.
 
 ### India-based customers
 - GST: India-based customers are required to provide their GSTIN when signing up. The customer is liable to manage all GST under the Reverse Charge Mechanism.
