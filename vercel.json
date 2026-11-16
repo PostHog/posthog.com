@@ -7,7 +7,7 @@
     },
     "headers": [
         {
-            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x|migration):ext(\\.md)?",
+            "source": "/docs/libraries/:sdk/:page(\\d+\\.x\\.x):ext(\\.md)?",
             "headers": [
                 {
                     "key": "X-Robots-Tag",
@@ -166,41 +166,6 @@
             "statusCode": 301
         },
         {
-            "source": "/docs/libraries/js:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/js/usage:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/js/config:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/js/snippet-versioning:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/js/security:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/js/persistence:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/libraries/js/types:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/libraries/node:ext(\\.md)?",
             "destination": "/docs/libraries/node/reference:ext?",
             "statusCode": 301
@@ -218,26 +183,6 @@
         {
             "source": "/docs/libraries/rust:ext(\\.md)?",
             "destination": "/docs/libraries/rust/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-js:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-js/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-js-:version([^/]+?):ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
-            "statusCode": 301
-        },
-        {
-            "source": "/docs/references/posthog-js-:version/:path*:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
             "statusCode": 301
         },
         {
@@ -1174,7 +1119,7 @@
         },
         {
             "source": "/docs/libraries/js/installation:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?",
+            "destination": "/docs/libraries/js:ext?",
             "statusCode": 301
         },
         {
@@ -1953,11 +1898,11 @@
         },
         {
             "source": "/docs/integrations/javascript-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?"
+            "destination": "/docs/libraries/js:ext?"
         },
         {
             "source": "/docs/integrations/js-integration:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?"
+            "destination": "/docs/libraries/js:ext?"
         },
         {
             "source": "/docs/integrations/message-formatting:ext(\\.md)?",
@@ -2373,11 +2318,11 @@
         },
         {
             "source": "/docs/integrate/client/js/index:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?"
+            "destination": "/docs/libraries/js:ext?"
         },
         {
             "source": "/docs/integrate/client/js:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?"
+            "destination": "/docs/libraries/js:ext?"
         },
         {
             "source": "/handbook/people/hiring-process/index",
@@ -3526,7 +3471,7 @@
         },
         {
             "source": "/docs/integrate/js:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?"
+            "destination": "/docs/libraries/js:ext?"
         },
         {
             "source": "/docs/integrate/node:ext(\\.md)?",
@@ -6904,7 +6849,7 @@
         },
         {
             "source": "/docs/libraries/js/features:ext(\\.md)?",
-            "destination": "/docs/libraries/js/reference:ext?"
+            "destination": "/docs/libraries/js/usage:ext?"
         },
         {
             "source": "/handbook/engineering/on-call-rotation:ext(\\.md)?",

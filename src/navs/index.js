@@ -2876,15 +2876,43 @@ export const docsMenu = {
                         },
                         {
                             name: 'JavaScript Web',
-                            url: '/docs/libraries/js/reference',
+                            url: '/docs/libraries/js',
                             badge: {
                                 title: 'Popular',
                                 className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
                             },
                             children: [
                                 {
-                                    name: '1.x.x',
-                                    url: '/docs/libraries/js/1.x.x',
+                                    name: 'Setup',
+                                    url: '/docs/libraries/js',
+                                },
+                                {
+                                    name: 'Usage',
+                                    url: '/docs/libraries/js/usage',
+                                },
+                                {
+                                    name: 'Configuration',
+                                    url: '/docs/libraries/js/config',
+                                },
+                                {
+                                    name: 'Snippet versioning',
+                                    url: '/docs/libraries/js/snippet-versioning',
+                                },
+                                {
+                                    name: 'Security',
+                                    url: '/docs/libraries/js/security',
+                                },
+                                {
+                                    name: 'Persistence',
+                                    url: '/docs/libraries/js/persistence',
+                                },
+                                {
+                                    name: 'Types',
+                                    url: '/docs/libraries/js/types',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-js',
                                 },
                             ],
                         },
@@ -6337,7 +6365,7 @@ export const docsMenu = {
                     children: [
                         {
                             name: 'JavaScript web SDK',
-                            url: '/docs/libraries/js/reference#capture-exception',
+                            url: '/docs/references/posthog-js?filter=error-tracking',
                         },
                         {
                             name: 'Node.js SDK',

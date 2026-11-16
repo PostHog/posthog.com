@@ -10,7 +10,7 @@ import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTo
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
 import { cacheFetchResponsesInDevelopment } from './devFetchCache'
-import { isSdkReferencePage } from './sdkMarkdownReferences'
+import { PUBLISHED_SDK_REFERENCES, isSdkReferencePage } from './sdkMarkdownReferences'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
@@ -150,6 +150,7 @@ async function writeSdkMarkdownReferences(): Promise<void> {
     }
     for (const { attributes } of data ?? []) {
         if (!attributes.referenceId || !attributes.version) continue
+        if (!PUBLISHED_SDK_REFERENCES.includes(attributes.referenceId)) continue
         const sdk = attributes.referenceId.replace(/^posthog-/, '')
         // A major version, such as 7, is served at 7.x.x. Other pages keep their name.
         const page = isNaN(Number(attributes.version)) ? attributes.version : `${attributes.version}.x.x`

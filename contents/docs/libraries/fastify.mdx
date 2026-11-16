@@ -92,7 +92,7 @@ This optional setup uses the `posthog-node/otel` entry point.
 
 To add browser session and person IDs to application spans, register the [optional Node context processor](/docs/distributed-tracing/installation/nodejs#with-opentelemetry) on your existing OpenTelemetry provider before requests start. Reuse the `posthog` client above and keep the existing exporter and sampler.
 
-Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your backend hostname in the browser SDK. Replace the earlier `onRequest` hook with this Node.js setup:
+Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK. Replace the earlier `onRequest` hook with this Node.js setup:
 
 ```js
 import { enrichCurrentSpan } from 'posthog-node/otel'
