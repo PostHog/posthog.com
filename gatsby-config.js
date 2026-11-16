@@ -101,12 +101,6 @@ module.exports = {
             },
         },
         {
-            resolve: `gatsby-mapbox-locations`,
-            options: {
-                mapboxToken: process.env.MAPBOX_TOKEN,
-            },
-        },
-        {
             resolve: 'gatsby-plugin-mailchimp',
             options: {
                 endpoint:

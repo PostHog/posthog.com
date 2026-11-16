@@ -1177,7 +1177,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 { encodeValuesOnly: true }
             )
             const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
-            const { data } = await readJson<{ data?: Array<{ attributes?: { data?: Record<string, unknown> } }> }>(url)
+            const { data } = await readJson<{ data?: Array<{ attributes?: { data?: Record<string, unknown> } }> }>(
+                url,
+                { timeoutMs: 120000 }
+            )
             return data ?? []
         }
 
