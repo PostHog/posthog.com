@@ -1,0 +1,384 @@
+1
+00:00:00,353 --> 00:00:04,037
+Someone asked your AI trip
+planner for a city stay for four.
+
+2
+00:00:04,087 --> 00:00:06,465
+It suggests a studio for two.
+
+3
+00:00:06,505 --> 00:00:10,588
+Cozy, potentially friendship ending.
+
+4
+00:00:07,470 --> 00:00:08,770
+[dramatic sting]
+
+5
+00:00:10,753 --> 00:00:15,603
+The request completed successfully though,
+and there's no error in sight.
+
+6
+00:00:15,753 --> 00:00:17,703
+So what went wrong?
+
+7
+00:00:18,087 --> 00:00:22,147
+In this lesson, we'll use a trace
+in PostHog's AI observability
+
+8
+00:00:22,187 --> 00:00:24,047
+to see inside one request.
+
+9
+00:00:24,087 --> 00:00:28,170
+We'll look at every model call,
+every tool, and every message.
+
+10
+00:00:28,453 --> 00:00:31,380
+We'll work backwards from
+the answer, find the bug,
+
+11
+00:00:31,420 --> 00:00:34,503
+then check that the fix actually works.
+
+12
+00:00:34,720 --> 00:00:38,698
+Say your app is Twig, a rental
+site with an AI trip planner.
+
+13
+00:00:38,738 --> 00:00:41,488
+Here's roughly what happens
+when someone uses it.
+
+14
+00:00:41,587 --> 00:00:44,470
+Someone types a message
+and it goes to the model.
+
+15
+00:00:44,520 --> 00:00:49,303
+The model figures it needs to look
+something up, so it calls Twig's search.
+
+16
+00:00:49,353 --> 00:00:52,203
+The search sends back a place to stay.
+
+17
+00:00:52,320 --> 00:00:54,970
+And the model turns that into a reply.
+
+18
+00:00:55,087 --> 00:00:57,880
+That reply goes back to
+the person who asked,
+
+19
+00:00:57,920 --> 00:01:00,913
+and as far as anyone can tell, it worked.
+
+20
+00:01:00,953 --> 00:01:04,732
+But the visitor asked for four,
+and this place sleeps two.
+
+21
+00:01:04,772 --> 00:01:07,922
+Somewhere in those four steps,
+something went wrong.
+
+22
+00:01:07,987 --> 00:01:12,147
+To debug this, we start with the one
+thing we know is wrong, the answer.
+
+23
+00:01:12,187 --> 00:01:15,213
+Then we ask, what did the model receive?
+
+24
+00:01:15,253 --> 00:01:17,303
+Where did that information come from?
+
+25
+00:01:17,353 --> 00:01:19,170
+And what inputs produced it?
+
+26
+00:01:19,453 --> 00:01:21,613
+The answer on its own can't tell us.
+
+27
+00:01:21,653 --> 00:01:24,137
+We need to see inside the request.
+
+28
+00:01:24,287 --> 00:01:26,537
+So how does PostHog see this?
+
+29
+00:01:26,987 --> 00:01:30,647
+Each model call goes through
+the PostHog SDK with a trace ID,
+
+30
+00:01:30,687 --> 00:01:32,770
+and the search goes as a span.
+
+31
+00:01:32,887 --> 00:01:36,103
+All of it lands in PostHog as one trace.
+
+32
+00:01:36,287 --> 00:01:40,813
+A trace is everything your app recorded
+for one request, one message in,
+
+33
+00:01:40,853 --> 00:01:43,703
+one answer out, and every step in between.
+
+34
+00:01:43,787 --> 00:01:48,598
+The model call is a generation,
+the messages we sent and what came back.
+
+35
+00:01:48,638 --> 00:01:51,913
+Here, it asks for a tool, search_stays.
+
+36
+00:01:51,953 --> 00:01:55,398
+Our app runs the search
+and records it as a span.
+
+37
+00:01:55,438 --> 00:01:57,165
+A span is one step of work
+
+38
+00:01:57,205 --> 00:02:00,222
+with the filters going in
+and the results coming back.
+
+39
+00:02:00,320 --> 00:02:02,947
+The results go to a second generation.
+
+40
+00:02:02,987 --> 00:02:05,337
+That's where Twig's answer comes from.
+
+41
+00:02:05,420 --> 00:02:07,865
+All three share one trace ID.
+
+42
+00:02:07,905 --> 00:02:09,922
+That's how PostHog groups them.
+
+43
+00:02:10,153 --> 00:02:12,903
+Let's start with what the model received.
+
+44
+00:02:12,953 --> 00:02:16,003
+The visitor asked for
+a city stay for four,
+
+45
+00:02:16,087 --> 00:02:19,970
+and the search returned
+Le Nid Chic, capacity
+
+46
+00:02:19,970 --> 00:02:23,370
+[romantic accordion music]
+
+47
+00:02:23,720 --> 00:02:24,613
+2.
+
+48
+00:02:24,653 --> 00:02:28,498
+Hmm, so the model was handed a
+stay that can't fit the group
+
+49
+00:02:28,538 --> 00:02:31,598
+and its instructions say to
+recommend the first result.
+
+50
+00:02:31,638 --> 00:02:33,588
+So the model did its job.
+
+51
+00:02:33,720 --> 00:02:35,270
+Let's open the search.
+
+52
+00:02:35,553 --> 00:02:38,513
+Ah, look here, it filtered for city stays.
+
+53
+00:02:38,553 --> 00:02:42,047
+Good. But there's no guest filter at all.
+
+54
+00:02:42,087 --> 00:02:44,198
+Who picked those filters?
+
+55
+00:02:44,238 --> 00:02:47,088
+Well, it was the model
+in the first generation.
+
+56
+00:02:47,187 --> 00:02:49,847
+See here, it couldn't ask for guests.
+
+57
+00:02:49,887 --> 00:02:52,047
+The tool only takes a setting.
+
+58
+00:02:52,087 --> 00:02:55,970
+So the search worked, it just
+searched for the wrong thing.
+
+59
+00:02:56,287 --> 00:02:58,513
+So where is that tool defined?
+
+60
+00:02:58,553 --> 00:03:00,470
+We could dig through our code.
+
+61
+00:03:01,120 --> 00:03:04,703
+I mean, let's just send a
+robot to dig through our code.
+
+62
+00:03:05,820 --> 00:03:07,803
+Look, the robot found it.
+
+63
+00:03:08,520 --> 00:03:12,613
+The search_stays tool has a setting,
+but nowhere for the group size.
+
+64
+00:03:12,653 --> 00:03:15,147
+So we have the robot
+add a guests parameter,
+
+65
+00:03:15,187 --> 00:03:17,937
+so the search only returns stays that fit.
+
+66
+00:03:18,053 --> 00:03:24,022
+Then we rerun the same request with the
+same model and instructions to test it.
+
+67
+00:03:23,670 --> 00:03:25,270
+[cheering]
+
+68
+00:03:26,053 --> 00:03:29,780
+In the new trace,
+the model asks for four guests,
+
+69
+00:03:29,820 --> 00:03:33,803
+and the search returns
+The Coop, capacity 4.
+
+70
+00:03:34,053 --> 00:03:36,937
+The model got a stay that
+fits and recommended it.
+
+71
+00:03:37,053 --> 00:03:38,170
+Good robot.
+
+72
+00:03:37,800 --> 00:03:39,000
+[cute robot beeps]
+
+73
+00:03:39,553 --> 00:03:42,713
+The first call succeeded,
+so nothing alerted us.
+
+74
+00:03:42,753 --> 00:03:47,170
+We'd have found out when
+the lawsuit arrived.
+
+75
+00:03:46,200 --> 00:03:47,700
+[gavel bangs]
+
+76
+00:03:47,287 --> 00:03:50,580
+Success means the model ran,
+not that it was right.
+
+77
+00:03:50,620 --> 00:03:54,880
+Next time your AI feature gets it wrong,
+ask the same three questions.
+
+78
+00:03:54,920 --> 00:03:56,513
+What did the model receive?
+
+79
+00:03:56,553 --> 00:03:58,480
+Where did that information come from?
+
+80
+00:03:58,520 --> 00:04:00,470
+And what inputs produced it?
+
+81
+00:04:00,520 --> 00:04:03,837
+Then rerun the request
+and follow the evidence.
+
+82
+00:04:03,887 --> 00:04:08,513
+Now this process works for a
+dozen traces, but as Twig grows,
+
+83
+00:04:08,553 --> 00:04:11,598
+there are more traces
+than any human can read.
+
+84
+00:04:11,638 --> 00:04:14,183
+So how do you know it's
+getting answers right?
+
+85
+00:04:14,223 --> 00:04:17,258
+That's where evals come in,
+in the next video.
+
+86
+00:04:17,387 --> 00:04:23,337
+To learn more about PostHog's AI
+observability, visit posthog.com/learn.

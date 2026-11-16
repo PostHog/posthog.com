@@ -1071,6 +1071,29 @@ const appSettings: AppSettings = {
             type: 'standard',
         },
     },
+    // Learn TV videos open like the /demo video, tall enough for the details and transcript under the player.
+    // No toolbar: the page draws its own title bar, with the video title centered next to "Learn TV".
+    '/learn/videos/aio-traces': {
+        toolbar: false,
+        size: {
+            min: {
+                width: 960,
+                height: 1000,
+            },
+            max: {
+                width: 960,
+                height: 1000,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+        modal: {
+            type: 'standard',
+        },
+    },
     '/changelog-video': {
         size: {
             min: {

@@ -3,10 +3,11 @@ import React from 'react'
 import LearnLanding from 'components/Learn/LearnLanding'
 import { TwigTripTracesFigure } from 'components/Learn/TwigExhibits/AiObservabilityPlaygroundExhibits'
 import LearnPage from 'components/Learn/LearnPage'
+import { learnVideoBySlug } from 'components/Learn/LearnTV/videos'
 import type { LearnLandingProps } from 'components/Learn/LearnPage'
 
 const Landing = (props: LearnLandingProps): JSX.Element => (
-    <LearnLanding {...props} playground={{ figure: <TwigTripTracesFigure /> }} />
+    <LearnLanding {...props} video={learnVideoBySlug('aio-traces')} playground={{ figure: <TwigTripTracesFigure /> }} />
 )
 
 export default function AiObservabilityLearn(): JSX.Element {

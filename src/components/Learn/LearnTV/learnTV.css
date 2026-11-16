@@ -1,0 +1,12 @@
+/*
+ * Learn TV captions. RoundHog's @font-face comes from components/Layout/Fonts.css; the fallback is the same
+ * stack as Tailwind's `font-rounded`. No font-size: browsers scale cues with the player.
+ * Safari only partly supports ::cue, and its system caption preferences override these styles,
+ * so users' own caption settings still win.
+ */
+.learn-tv-video::cue {
+    font-family: RoundHog, sans-serif;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.8);
+    line-height: 1.35;
+}
