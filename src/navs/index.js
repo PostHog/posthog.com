@@ -8253,14 +8253,14 @@ export const docsMenu = {
             },
         },
         {
-            name: 'Workflows',
+            name: 'Email & Messaging',
             icon: 'IconMegaphone',
             color: 'red',
             url: '/docs/workflows',
-            description: 'Create automations or campaigns to send messages to your users.',
+            description: 'Send transactional email, broadcasts, and automations from your product data.',
             children: [
                 {
-                    name: 'Workflows',
+                    name: 'Email & Messaging',
                 },
                 {
                     name: 'Overview',
