@@ -8534,6 +8534,12 @@ export const docsMenu = {
                     name: 'Migrate',
                 },
                 {
+                    name: 'Migrate from Customer.io',
+                    url: '/docs/workflows/migrate-from-customer-io',
+                    icon: 'IconArrowRight',
+                    color: 'orange',
+                },
+                {
                     name: 'Import opt-out lists from Customer.io',
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconUpload',

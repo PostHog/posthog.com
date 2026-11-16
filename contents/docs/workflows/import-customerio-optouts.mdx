@@ -41,6 +41,7 @@ Go back to PostHog, paste the key into the first step, select which data to impo
 
 - All available categories from Customer.io
 - All customers who are generally unsubscribed (not subscribed to any category)
+- Suppressed addresses: the addresses that Customer.io's email provider bounced, marked as invalid, or got a spam report for. PostHog sends no email to a bounced or invalid address, and no marketing email to an address with a spam report.
 
 Customer.io only supports importing globally unsubscribed users via API, so per-category opt-outs need to be imported through a CSV in the next step.
 

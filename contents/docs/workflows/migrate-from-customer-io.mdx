@@ -1,0 +1,64 @@
+---
+title: Migrate from Customer.io
+sidebar: Docs
+showTitle: true
+---
+
+Your people are already in PostHog if you capture events with a PostHog SDK, so you move the things around them: opt-outs, suppressions, and automations. PostHog imports automations as draft workflows, and drafts never send until you enable them.
+
+## What moves
+
+| From Customer.io | In PostHog | How |
+| --- | --- | --- |
+| Subscription topics | Message categories | Opt-out import, step 1 |
+| Global unsubscribes | Opt-outs | Opt-out import, step 1 |
+| Bounced and invalid addresses | Suppression list. PostHog sends them no email. | Opt-out import, step 1 |
+| Spam reports | Suppression list. PostHog sends them no marketing email. | Opt-out import, step 1 |
+| Per-topic preferences | Opt-outs per category | Opt-out import, step 2 (CSV) |
+| Automations | Draft workflows, with their email content, snippets, layouts, and images | Automation import |
+| Dynamic segments that an automation uses | Realtime cohorts, when every rule has an exact match | Automation import |
+| Sender identities | Matched to the PostHog sender with the same address | Automation import |
+
+These don't move:
+
+- **People and their profiles.** Capture them with a [PostHog SDK](/docs/workflows/installation) instead. The import never copies customer profiles, segment members, deliveries, or events.
+- **Static segment members.** A workflow can't check a static cohort, so rebuild a static segment as conditions.
+- **SMS and push steps.** They import as notes. To keep sending push to existing app installs, [import your device tokens](/docs/workflows/push-notifications/import-device-tokens).
+- **Sending history.** Past deliveries and broadcast results stay in Customer.io.
+
+## 1. Set up sending
+
+[Verify your sending domain](/docs/workflows/verify-domain) and add a sender for each from-address your Customer.io emails use. The automation import matches each email to the PostHog sender with the same address. When there's no match, the draft gets a note that asks you for a sender.
+
+## 2. Import opt-outs and suppressions
+
+Do this before you import automations. The opt-out import creates the message categories that the automation import maps Customer.io topics to, and it stores the App API key that lets PostHog read your email content.
+
+Follow [import opt-out lists from Customer.io](/docs/workflows/import-customerio-optouts). It also shows how to keep opt-outs in sync both ways while you run the two tools side by side.
+
+## 3. Import automations
+
+On the [Workflows](https://app.posthog.com/workflows) page, click **Import from Customer.io**. There are two ways to bring automations over:
+
+- **Ask your coding agent.** With the Customer.io MCP and the [PostHog MCP](/docs/workflows/surfaces/mcp) connected, ask "Move our Customer.io campaigns into PostHog". The [`migrating-from-customer-io` agent skill](/docs/workflows/skills) reads each automation, previews the import, and imports it after you confirm.
+- **Upload files from the Customer.io CLI.** Export each automation, and any template or segment it uses, as JSON with `cio api`, then drop the files into the import modal.
+
+The import runs a preview first, which saves nothing. Each automation gets one of these notes:
+
+| Note | Meaning | What to do |
+| --- | --- | --- |
+| Needs input | The draft needs a setting only your team can give, such as a sender, a trigger cohort, or a branch condition. | Fix it before you enable the workflow. |
+| Approximated | The step works differently in PostHog, such as a wait capped at 30 days. | Check it before you enable the workflow. |
+| Unsupported | The setting has no PostHog equivalent and was left out, such as an SMS step. | Rebuild it another way, or leave it out. |
+
+The notes also show on each imported workflow in PostHog.
+
+Importing an automation again replaces its draft, so you can fix something in Customer.io and run the import again. Edits your team made to that draft since are lost. A workflow that someone already enabled is never changed.
+
+### Segments
+
+A dynamic segment becomes a realtime cohort only when every rule matches a cohort condition exactly, such as a person attribute that equals, contains, or exists, or an absolute date. Rules on events, message activity, other segments, devices, relationships, or relative dates ("in the last 30 days") have no exact match. The import leaves those segments out and adds a note that names the rules, so you can build the cohort yourself.
+
+## 4. Test and enable
+
+Open each draft, handle its notes, and [test it](/docs/workflows/launch-workflow) before you enable it. Turn off the matching automation in Customer.io when you enable the PostHog workflow, so nobody gets the same email twice.
