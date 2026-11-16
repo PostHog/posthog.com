@@ -270,13 +270,3 @@ It also includes these data sources:
 ## Upgrading
 
 To move to a newer release, raise the `version` constraint if needed and run `terraform init -upgrade`. Before you upgrade, read the [changelog](https://github.com/PostHog/terraform-provider-posthog/blob/main/CHANGELOG.md) for breaking changes and upgrade notes, and run `terraform plan` to check the changes before you apply them.
-
-### `@current` is no longer accepted as an organization ID
-
-Version 1.0.31 and later reject `organization_id = "@current"` in the provider block, in `POSTHOG_ORGANIZATION_ID`, on resources and data sources, and in import IDs. `@current` meant the organization you last opened in the PostHog app, so switching organizations in the app between runs could point an existing configuration at a different organization.
-
-To migrate:
-
-1. Set the provider's `organization_id`, or `POSTHOG_ORGANIZATION_ID`, to the UUID of the organization your resources are in.
-2. Replace every other `"@current"` in your configuration, including on resources, data sources, and import blocks, with the same UUID.
-3. Run `terraform apply`. Resources whose state holds `"@current"` are updated in place to record the real ID. Terraform doesn't replace them.
