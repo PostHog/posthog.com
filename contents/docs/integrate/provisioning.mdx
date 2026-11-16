@@ -113,7 +113,7 @@ Requirements:
 - **`redirect_uris`** is required and must contain at least one HTTPS URI. This is where PostHog redirects existing users during the consent flow.
 - **`logo_uri`** (optional) must be HTTPS if provided.
 - **`token_endpoint_auth_method`** must be `"private_key_jwt"` with an HTTPS `jwks_uri` if your app creates accounts. Your app then authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits). Publish your keys at the `jwks_uri` before you register. See [sign requests with a key](#sign-requests-with-a-key).
-- The document must be served with `Content-Type: application/json` and be under 5 KB.
+- The document must be served with `Content-Type: application/json` and be under 5 KB. A `charset` parameter is fine. PostHog refuses a document that declares `com.posthog.provisioning` and is served with another type, such as `text/plain` or `text/html`.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
 - The URL must be on a domain you control. PostHog doesn't accept metadata documents on throwaway hosts. See [how PostHog reviews your app](#how-posthog-reviews-your-app) for where to host it.
 
@@ -183,7 +183,9 @@ To check the status, call the [registration endpoint](#register-your-app) again.
 
 Once the review accepts your app, the `provisioning_enabled` check reports `Active`.
 
-The review looks at your metadata document and your public website. To pass:
+The review reads your metadata document and researches your app on the web. PostHog loads the homepage at your `client_uri` and searches the web for your product, your domain, and reports of abuse. A model then judges three things from that evidence: whether your app is a real product of the organization that owns the domain, whether it shows signs of abuse, and whether the metadata document is on your own site. When the model isn't sure, PostHog staff decide.
+
+To pass:
 
 - Host the metadata document on the live production domain of your product. A subdomain such as `api.yourapp.com` is fine.
 - Use a real `client_name` that matches your product.
@@ -192,7 +194,7 @@ The review looks at your metadata document and your public website. To pass:
 
 PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP address, or on a throwaway host such as a tunnel (for example ngrok), a request bin, or a JSON or paste hosting service. The review also won't accept a document on a site where anyone can publish content, such as a public Etherpad, a public git forge, or shared object storage. Register from the website your users actually use, not from a local or preview environment.
 
-Once PostHog accepts one client on a domain, other clients on the same registrable domain are accepted without a new review. For example, after `https://yourapp.com/.well-known/yourapp.json` is accepted, a staging client on `staging.yourapp.com` is accepted too.
+Once PostHog accepts one client, another client whose metadata document is on the same host is accepted even when the model isn't sure about it, as long as the document is on your own site and shows no signs of abuse. For example, after `https://api.yourapp.com/.well-known/yourapp.json` is accepted, `https://api.yourapp.com/.well-known/yourapp-staging.json` is accepted too. A client on another host, such as `staging.yourapp.com`, gets its own review.
 
 <a id="sign-requests-with-a-key-optional" />
 
