@@ -20,7 +20,7 @@ It's also confidence that your data is safe, that there's a team of on-call engi
 
 ## What does the price of a session recording include?
 
-Recording the session without slowing your product down, masking private data on the device, storing the recording, and playback for everyone on your team. [What you actually get when you pay for a session recording](/docs/billing/what-you-pay-for-per-recording) explains each step.
+Recording the session without slowing your product down, masking private data on the device, storing the recording, and playback for everyone on your team. Check our breakdown of [what you pay for per recording](/docs/billing/what-you-pay-for-per-recording) for a detailed explanation of each step.
 
 ## Do projects share usage and free allowances?
 

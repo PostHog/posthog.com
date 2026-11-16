@@ -144,7 +144,7 @@ Your first build gives you an events table and a dashboard. A week later, someon
 
 This adds a lot of work and scope over time. You can trust us on that. 
 
-In PostHog, the same events already power [feature flag targeting](/docs/feature-flags), [experiment metrics](/docs/experiments), and the filters in [Session Replay](/docs/session-replay). You pay for an event once, and every product can use it. An event store you build talks to nothing until you write the connection yourself. Our post on [building your own feature flags](/blog/build-or-buy-feature-flags) covers the same trade-off. Recordings have their own pipeline and their own price. See [what you actually get when you pay for a session recording](/docs/billing/what-you-pay-for-per-recording).
+In PostHog, the same events already power [feature flag targeting](/docs/feature-flags), [experiment metrics](/docs/experiments), and the filters in [Session Replay](/docs/session-replay). You pay for an event once, and every product can use it. An event store you build talks to nothing until you write the connection yourself. Our post on [building your own feature flags](/blog/build-or-buy-feature-flags) covers the same trade-off. [Recordings have their own pipeline and their own price](/docs/billing/what-you-pay-for-per-recording).
 
 ### Trust
 
@@ -201,15 +201,15 @@ No. You pay once per event, and storing it and querying it in PostHog are includ
 
 ### Why do identified events cost more?
 
-They go through identity resolution. We create the person, merge their anonymous history when they identify, and keep their properties up to date. That's [the most expensive step in our pipeline](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper). Send [anonymous events](/docs/data/anonymous-vs-identified-events) where you don't need person data.
+They go through identity resolution. We create the person, merge their anonymous history when they identify, and keep their properties up to date. That's [the most expensive step in our pipeline](/blog/analytics-pricing#why-are-anonymous-events-so-much-cheaper). You can control for this cost by using [anonymous events](/docs/data/anonymous-vs-identified-events) where you don't need person data.
 
 ### How long does PostHog keep events?
 
-One year on the free plan, and [many years](/docs/data/events-retention) on paid plans. You can set a shorter window.
+One year on the free plan, and [many years](/docs/data/events-retention) on paid plans. You can set a shorter window if needed. 
 
 ### Is it cheaper to run ClickHouse myself?
 
-The servers can cost less than your PostHog bill. Most of the cost is the work around them: the queue, identity resolution, upgrades, and on-call. The [ledger](#your-own-ledger) works it out with your numbers, and [when building is the right call](#when-building-is-the-right-call) lists the cases where we'd build it too.
+The servers can cost less than your PostHog bill, but most of the cost is the work around them: the queue, identity resolution, upgrades, and on-call. The [ledger](#your-own-ledger) below works it out with your numbers, and can help you decide [when building is the right call](#when-building-is-the-right-call).
 
 ## How to lower your PostHog bill
 
