@@ -239,7 +239,7 @@ The request body limits above are for PostHog Cloud. On a self-hosted instance, 
 | `200` | PostHog read the batch. Check the [result for each event](#per-event-results). | Only events with result `retry` |
 | `400` | The whole request is invalid, for example a missing header, bad JSON, an empty batch, or an invalid `uuid`. Nothing was stored. | No – fix the request |
 | `401` | The project token is missing or malformed, or you used a personal API key. A well-formed token that doesn't match a project still gets `200`, with `ok` for every event, but nothing is stored. | No |
-| `402` | Nothing in this request is stored, and the response has no per-event results. You get it when your project is over its product analytics event [billing limit](/docs/billing/limits-alerts), which refuses every event in the request, including exception, survey, and AI events. You also get it when another product's quota leaves no event in the request to store. If only some events are over a product's quota, you get `200` instead, and only those events are dropped. | No – raise or remove the limit |
+| `402` | Nothing in this request is stored, and the response has no per-event results. You get it when billing quotas leave no event in the request to store. Exception, survey, and AI events count only against their own product's quota, not your product analytics event [billing limit](/docs/billing/limits-alerts). If some events in the request can still be stored, you get `200` instead, and only the events over a quota are dropped. | No – raise or remove the limit |
 | `404` | Nothing serves this path, for example a self-hosted instance that predates capture v1 or a proxy that doesn't forward it | Yes. If it keeps failing, check the host, your proxy, and your instance version. |
 | `408` | The request timed out while PostHog read it | Yes |
 | `413` | The body is over the size limit | No – send smaller requests |
@@ -304,7 +304,7 @@ PostHog writes each key as a lowercase UUID with hyphens, whatever form you sent
 | `person_processing_disabled` | `ok` or `warning` | Stored without a person profile. The result is `ok` when the distinct ID is a placeholder like `anonymous`, and `warning` when PostHog's rate limiter turned person processing off |
 | `not_persisted` | `retry` | PostHog couldn't store it right now |
 
-When an event is over a product's quota, the result is `drop` and `details` names the quota that was exceeded: `exceptions_over_quota`, `survey_responses_over_quota`, or `llm_events_over_quota`.
+When an event is over a quota, the result is `drop` and `details` names the quota that was exceeded: `events_over_quota` for your product analytics event limit, or `exceptions_over_quota`, `survey_responses_over_quota`, or `llm_events_over_quota`.
 
 This list isn't complete, and PostHog can add new values. Handle an event by its `result`, and treat a `details` value you don't know as a label only. Treat a `result` value you don't know as stored.
 

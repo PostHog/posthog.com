@@ -245,7 +245,6 @@ module.exports = {
                     // These SDKs' HogRef pages redirect to their Markdown references (see vercel.json).
                     const REDIRECTED_SDK_REFERENCES = [
                         'posthog-python',
-                        'posthog-js',
                         'posthog-node',
                         'posthog-react-native',
                     ]

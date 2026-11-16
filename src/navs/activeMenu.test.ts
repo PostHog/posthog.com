@@ -84,7 +84,6 @@ describe('the real docs nav', () => {
             ios: ['3.x.x', '4.x.x', 'migration'],
             android: ['3.x.x', '4.x.x', 'migration'],
             flutter: ['5.x.x', '6.x.x', 'migration'],
-            js: ['1.x.x'],
             node: ['5.x.x', '6.x.x', 'migration'],
             'react-native': ['4.x.x'],
         }
