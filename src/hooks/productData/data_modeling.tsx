@@ -1,6 +1,7 @@
 import React from 'react'
 import { IconStack } from '@posthog/icons'
 import { getTool } from '../../data/tools'
+import { PRODUCT_COLORS } from 'constants/productColors'
 
 // Data modeling has no product page. It will be billed as data warehouse, but that rate
 // is not final, so the pricing page shows no price. Same shape as Marketing analytics
@@ -11,7 +12,7 @@ export const dataModeling = {
     parentIcon: 'dataBlender',
     Icon: IconStack,
     type: 'data_modeling',
-    color: 'lilac',
+    color: PRODUCT_COLORS.data_modeling,
     colorSecondary: 'lilac',
     seo: {
         title: 'Transform, enrich, and model your data',
