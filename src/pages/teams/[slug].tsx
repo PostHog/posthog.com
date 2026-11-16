@@ -646,7 +646,7 @@ export default function TeamPage(props: TeamPageProps) {
     return (
         <>
             <SEO
-                title={`${name || teamData?.name || slug} - PostHog`}
+                title={`${name || teamData?.name || slug} Team - PostHog`}
                 description="We're organized into multi-disciplinary small teams."
                 image={`/images/small-teams.png`}
             />

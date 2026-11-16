@@ -366,7 +366,7 @@ export const Pizza = () => {
                             <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
                                 Small teams who<span className="hidden @4xl:inline-block">...</span>
                             </p>
-                            <div className="flex items-baseline gap-1">
+                            <div className="flex items-baseline gap-1 leading-none">
                                 <h3 className="text-[19px] leading-tight m-0 font-bold">
                                     <span className="text-yellow">are SPLIT</span>
                                 </h3>

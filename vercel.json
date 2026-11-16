@@ -692,6 +692,10 @@
             "destination": "/compare/best-fathom-alternatives"
         },
         {
+            "source": "/blog/best-feature-flag-software-for-developers",
+            "destination": "/compare/best-feature-flag-tools-for-developers"
+        },
+        {
             "source": "/blog/best-flagsmith-alternatives",
             "destination": "/compare/best-flagsmith-alternatives"
         },
@@ -1306,11 +1310,6 @@
             "statusCode": 301
         },
         {
-            "source": "/mcp-analytics",
-            "destination": "/docs/mcp-analytics",
-            "statusCode": 301
-        },
-        {
             "source": "/docs/data-warehouse/run-sql-mcp:ext(\\.md)?",
             "destination": "/docs/data-warehouse/surfaces/mcp:ext?",
             "statusCode": 301
@@ -1327,6 +1326,10 @@
         {
             "source": "/code",
             "destination": "/desktop"
+        },
+        {
+            "source": "/inbox",
+            "destination": "/self-driving"
         },
         {
             "source": "/teams/logs",
