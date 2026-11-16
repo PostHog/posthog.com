@@ -62,7 +62,7 @@ If you spot a customer trending this way, reach out early to explain the credit 
 
 ### Customers moving to monthly
 
-If a customer moves to monthly payments at the end of their contract, even for one month, set the renewal opportunity to Closed - Lost. Add a note that says they moved to monthly.
+If a customer moves to monthly payments at the end of their contract, even for one month, set the renewal opportunity to Closed - Lost. Set the Loss Reason to `Moved to monthly`.
 
 When you start to move them back to credits, do not reopen the old renewal opportunity. Create a new opportunity with the record type "Existing - Convert to Annual" and the type "Annual Contract" (see [opportunity record types](/handbook/growth/sales/crm#opportunity-record-types)). When this opportunity is Closed Won, Salesforce creates the next renewal opportunity automatically.
 
