@@ -27,7 +27,7 @@ List MCP sessions. Select a session to retrieve its tool calls. You can also gen
 
 **Intent clusters**
 
-Retrieve clustered agent intents with their tool distribution and error rates, or trigger a recompute after you capture new data. These endpoints work only in projects where intent clustering has rolled out. Other projects get a permission error.
+Retrieve clustered agent intents with their tool distribution and error rates, or trigger a recompute after you capture new data. The response also includes a long-tail group for clusters with only one intent, and a list of recurring intents. A recurring intent is an intent text that opens 3 or more sessions, such as from a scheduled agent. Recurring intents are not in the clusters. If the caller does not have access to the `$mcp_intent` property, every intent string is empty and `intent_text_redacted` is `true`. These endpoints work only in projects where intent clustering has rolled out. Other projects get a permission error.
 
 **Missing capabilities**
 

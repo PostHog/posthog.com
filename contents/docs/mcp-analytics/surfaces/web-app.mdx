@@ -43,7 +43,11 @@ The button requires a connected GitHub integration. See [Self-driving reports](#
 
 ### Intent clustering
 
-Groups what agents said they were trying to do into themes, so you can see the jobs your server actually gets used for. Includes a journey view of how agents move between tools within a cluster. Intent comes from [`$mcp_intent`](/docs/mcp-analytics/intent) plus generated session summaries. Intent clustering is still rolling out, so this tab may not appear in your project yet.
+Groups what agents said they were trying to do into themes, so you can see the jobs your server actually gets used for. Includes a journey view of how agents move between tools within a cluster. Intent comes from [`$mcp_intent`](/docs/mcp-analytics/intent) plus generated session summaries.
+
+Automated traffic, such as scheduled agents and cron runs, often opens many sessions with the same intent text. When an intent text opens 3 or more sessions, PostHog keeps it out of the clusters, so automation does not fill the top clusters. Clusters with only one intent are not shown. The [API](/docs/mcp-analytics/surfaces/api) and [MCP](/docs/mcp-analytics/surfaces/mcp) responses include the recurring intents as a separate list, and the single-intent clusters as one long-tail group. If property access control hides `$mcp_intent` from you, the intent text is empty.
+
+Intent clustering is still rolling out, so this tab may not appear in your project yet.
 
 ### Missing capabilities
 
