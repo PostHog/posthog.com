@@ -26,8 +26,8 @@ export const LEARN_VIDEOS: LearnVideo[] = [
         series: 'AI Observability',
         description:
             'Use a trace to see inside one AI request, work back from a bad answer to the bug, then check that the fix works.',
-        src: `${CLOUDINARY}/AIO_TRACES_FINAL_CUT_compressed_4f96698634.mp4`,
-        poster: `${CLOUDINARY}/so_2,f_jpg/AIO_TRACES_FINAL_CUT_compressed_4f96698634.jpg`,
+        src: `${CLOUDINARY}/AIO_TRACES_FINAL_CUT_compressed3_f95c55454b.mp4`,
+        poster: `${CLOUDINARY}/so_2,f_jpg/AIO_TRACES_FINAL_CUT_compressed3_f95c55454b.jpg`,
         captions: '/learn/videos/aio-traces.en.vtt',
         next: { title: 'Evals' },
     },

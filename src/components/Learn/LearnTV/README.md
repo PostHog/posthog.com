@@ -16,7 +16,7 @@ The Learn video player. Each video opens in its own Learn TV modal window, the s
 
 ## Add a video
 
-1. Upload the MP4 to Cloudinary. Do not commit video files.
+1. Compress the MP4, then upload it to Cloudinary. Do not commit video files. The first video uses HandBrake: 1920×1080, constant 30 fps, H.264 (x264, Slow preset), 630 kbps two-pass, and AAC 128 kbps stereo. That is about 24 MB for 4:24. Keep the frame rate and the frame count of the edit, or the captions go out of sync.
 2. Put the WebVTT captions in `static/learn/videos/<slug>.en.vtt`. Do not edit the caption text. Add the SRT next to it if you have one.
 3. Add the video to `LEARN_VIDEOS` in `videos.ts`. If the previous video's `next` has no `url`, add one.
 4. Add `src/pages/learn/videos/<slug>.tsx`. Copy `aio-traces.tsx`.
