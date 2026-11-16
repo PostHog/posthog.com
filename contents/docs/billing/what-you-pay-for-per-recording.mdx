@@ -32,7 +32,7 @@ Those are the only line items. We don't charge to watch a recording, to share on
 
 A session replay tool has the same jobs whether you buy it or build it. It has to record what people do without getting in their way, keep what they type private, and get every piece of the recording to you. Then it has to play it back. 
 
-A frequent challenge for teams using session replays is finding which recordings are actually worth watching. PostHog solves this with [Replay Vision](/replay-vision), which can watch and summarize recordings for you with AI, but it is it's own tool. AI summarization is not typically part of most session replay stacks. 
+A frequent challenge for teams using session replays is finding which recordings are actually worth watching. PostHog solves this with [Replay Vision](/replay-vision), which can watch and summarize recordings for you with AI, but it is its own tool. AI summarization is not typically part of most session replay stacks. 
 
 In practice that's six steps.
 
@@ -57,7 +57,7 @@ If people type passwords and card numbers into your product (or any other PII) t
 
 Additionally, each recording is encrypted with its own key. When you delete a person and their recordings, we destroy the key, so nobody can ever play those recordings again.
 
-Without it, every new form your team ships is a new way to record something you shouldn't.
+Without these data protections in place, every new form your team ships is a new way to record something you shouldn't – and a new risk you have to manage in your product stack.
 
 ### Step 3: Not losing it
 
@@ -91,7 +91,7 @@ Without it, you have a bucket of JSON and nothing to watch it with.
 
 ### Step 6: Finding the one that matters
 
-Nobody watches all their recordings. Despite capturing all that data what you really want isn't the five hours of them successfully using your product – it's the the five second where they rage-clicked a button because something wasn't working as they expected. So, how do you find just that segment?
+Nobody watches all their recordings. Despite capturing all that data what you really want isn't the five hours of them successfully using your product – it's the five seconds where they rage-clicked a button because something wasn't working as they expected. So, how do you find just that segment?
 
 **How it works at PostHog:** Every recording is linked to the person, their [events](/docs/product-analytics), their [feature flags](/docs/feature-flags), and their [errors](/docs/error-tracking). You can filter recordings by any event or property, [watch the users who dropped off a funnel](/tutorials/explore-insights-session-recordings), and go from an error straight to the session behind it. 
 
@@ -169,7 +169,7 @@ Don't be surprised if storage is the smallest line. The ledger also leaves out t
 
 Building your own replay product is the better choice for some teams. These are the cases where we'd build it too.
 
-**You only need a few recordings of one internal tool.** rrweb and a storage bucket will do, and you can skip most of this page because you're neither handling personal data, requiring long-term storage, or needing a UI to surface and poll it all. 
+**You only need a few recordings of one internal tool.** rrweb and a storage bucket will do, and you can skip most of this page because you're neither handling personal data, requiring long-term storage, nor needing a UI to surface and poll it all. 
 
 **Recordings can never leave your infrastructure.** If you need a self-hosted product, you need a self-hosted product. The important thing to clarify however is whether a specific policy is in place for this – often teams may think they need a self-hosted product without being aware of what [masking](/docs/session-replay/privacy) can do for them.
 
