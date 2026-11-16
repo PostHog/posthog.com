@@ -64,7 +64,7 @@ We use PostHog to create and control our survey as well as monitor results. If y
 First, install `posthog-js`:
 
 ```bash
-npm install posthog-js
+npm install posthog-js@1
 ```
 
 Create a new [plugin](https://vuejs.org/guide/reusability/plugins) by creating a new folder in your base directory called `plugins` and then a new file `posthog.js`:

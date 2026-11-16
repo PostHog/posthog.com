@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Stack Overflow for Teams connector syncs your internal Q&A knowledge base into the PostHog Data warehouse – questions, answers, articles, tags, users, and collections. This is for [Stack Overflow for Teams](https://stackoverflowteams.com/) (the private, enterprise knowledge base by Prosus/Stack Exchange), not the public Stack Overflow website.
+The Stack Overflow for Teams connector syncs your internal Q&A knowledge base into the PostHog Data warehouse – questions, answers, comments on questions and answers, articles, tags and their subject matter experts, users, collections, and communities. This is for [Stack Overflow for Teams](https://stackoverflowteams.com/) (the private, enterprise knowledge base by Prosus/Stack Exchange), not the public Stack Overflow website.
 
 Once synced, you can query your knowledge base data alongside your product data, join it with other sources, and use it in insights and dashboards.
 
@@ -36,14 +36,18 @@ When linking Stack Overflow for Teams, you need:
 
 All Stack Overflow for Teams tables use full refresh only. The Stack Overflow for Teams v3 API doesn't expose reliable server-side timestamp filters, so each sync reloads all data.
 
-| Table         | Sync method  |
-| ------------- | ------------ |
-| `Questions`   | Full refresh |
-| `Answers`     | Full refresh |
-| `Articles`    | Full refresh |
-| `Tags`        | Full refresh |
-| `Users`       | Full refresh |
-| `Collections` | Full refresh |
+| Table                     | Sync method  |
+| ------------------------- | ------------ |
+| `Questions`               | Full refresh |
+| `Answers`                 | Full refresh |
+| `Articles`                | Full refresh |
+| `Tags`                    | Full refresh |
+| `Users`                   | Full refresh |
+| `Collections`             | Full refresh |
+| `Communities`             | Full refresh |
+| `QuestionComments`        | Full refresh |
+| `AnswerComments`          | Full refresh |
+| `TagSubjectMatterExperts` | Full refresh |
 
 ## Configuration
 
@@ -55,14 +59,18 @@ All Stack Overflow for Teams tables use full refresh only. The Stack Overflow fo
 
 ## Available tables
 
-| Table         | Description                                                                                      |
-| ------------- | ------------------------------------------------------------------------------------------------ |
-| `Questions`   | Questions posted to your knowledge base, including title, body, tags, score, and view count.     |
-| `Answers`     | Answers posted to questions, including body, score, accepted status, and the parent question ID. |
-| `Articles`    | Knowledge-base articles (Business/Enterprise tier), including title, body, type, and tags.       |
-| `Tags`        | Tags used to categorize questions and articles, with post counts and watcher counts.             |
-| `Users`       | Users on your team site, including name, email, department, job title, and reputation.           |
-| `Collections` | Curated collections of questions and articles, including title, description, and tags.           |
+| Table                     | Description                                                                                      |
+| ------------------------- | ------------------------------------------------------------------------------------------------ |
+| `Questions`               | Questions posted to your knowledge base, including title, body, tags, score, and view count.     |
+| `Answers`                 | Answers posted to questions, including body, score, accepted status, and the parent question ID. |
+| `Articles`                | Knowledge-base articles (Business/Enterprise tier), including title, body, type, and tags.       |
+| `Tags`                    | Tags used to categorize questions and articles, with post counts and watcher counts.             |
+| `Users`                   | Users on your team site, including name, email, department, job title, and reputation.           |
+| `Collections`             | Curated collections of questions and articles, including title, description, and tags.           |
+| `Communities`             | Communities on your team site: groups of members and the tags they follow.                       |
+| `QuestionComments`        | Comments on questions, including body, score, author, and the parent question ID.                |
+| `AnswerComments`          | Comments on answers, including body, score, author, and the parent answer and question IDs.      |
+| `TagSubjectMatterExperts` | Subject matter experts assigned to each tag, with one row for each expert user or user group.    |
 
 > **Note:** The `Articles` table is only available on Stack Overflow for Teams Business and Enterprise plans.
 
@@ -71,5 +79,6 @@ All Stack Overflow for Teams tables use full refresh only. The Stack Overflow fo
 - **Authorization error (401)** – your personal access token is invalid or has expired. Create a new token under **Account Settings → Personal access tokens** in Stack Overflow for Teams, then reconnect.
 - **Permission error (403)** – your personal access token doesn't have access to this team or resource. Check that the token is scoped to the correct team, then reconnect.
 - **Missing articles** – articles are only available on Stack Overflow for Teams Business and Enterprise plans. If your team is on the Basic plan, the `Articles` table won't return data.
+- **Empty subject matter experts table** – the `TagSubjectMatterExperts` table only has data for tags that have subject matter experts assigned. If the subject matter experts feature is turned off for your team, this table stays empty.
 
 <TroubleshootingLink />

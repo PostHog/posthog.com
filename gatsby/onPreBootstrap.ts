@@ -10,6 +10,7 @@ import { fetchAndProcessMCPTools, writeMCPToolsToFile } from './utils/fetchMCPTo
 import { fetchScoutSkills, writeScoutSkillsToFile } from './utils/fetchScoutSkills'
 import { enrichVideos } from './enrichVideos'
 import { cacheFetchResponsesInDevelopment } from './devFetchCache'
+import { isSdkReferencePage } from './sdkMarkdownReferences'
 
 export const PAGEVIEW_CACHE_KEY = 'onPreBootstrap@@posthog-pageviews'
 export const MCP_TOOLS_CACHE_KEY = 'onPreBootstrap@@mcp-tools'
@@ -114,15 +115,11 @@ async function downloadPostHogBootstrap(): Promise<string> {
 
 const LIBRARIES = path.resolve(__dirname, '../contents/docs/libraries')
 
-/** The pages Strapi can write: reference, migration, and one per major version, such as 7.x.x. */
-function isSdkReferencePage(file: string): boolean {
-    return file === 'reference.md' || file === 'migration.md' || file.endsWith('.x.x.md')
-}
-
 /**
  * Writes each SDK reference that Strapi stores as Markdown to contents/docs/libraries/<sdk>/<version>.md,
  * so it builds like any other docs page. The SDK repo writes the page, front matter included.
- * These files are gitignored, and the ones from the last build are removed first.
+ * These files are gitignored, and the ones from the last build are removed first. They render as
+ * plain Markdown, never as MDX (see gatsby/sdkMarkdownReferences.js).
  */
 async function writeSdkMarkdownReferences(): Promise<void> {
     const host = process.env.GATSBY_SQUEAK_API_HOST

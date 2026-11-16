@@ -154,7 +154,7 @@ npm run dev
 Up next is adding PostHog, which you can install by running:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Once done, you need your project token and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
@@ -351,7 +351,7 @@ Our post page now shows the updated button, which you can toggle remotely with t
 Remix is a full stack framework, parts of it run on both the client and server side. So far, we’ve only used PostHog on the client side and the [JavaScript Web library](/docs/libraries/js) we installed won’t work on the server side. Instead, we must use the [`posthog-node` SDK](/docs/libraries/node). We can start by installing it:
 
 ```bash
-npm i posthog-node
+npm i posthog-node@5
 ```
 
 Next, we create a `posthog.js` file in the `app` folder. In it, we set up an initialization of the `posthog-node` client. We also set up logic to return the existing client if it is already initialized. Again, you need your project token and instance address from [your project settings](https://app.posthog.com/settings/project).

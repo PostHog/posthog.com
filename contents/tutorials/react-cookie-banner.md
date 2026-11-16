@@ -40,7 +40,7 @@ Running these commands gives us a working React app.
 Next, we want to set up PostHog to track activity on our site. To do this, first, we'll install the `posthog-js` and `@posthog/react` packages.
 
 ```bash
-npm install --save posthog-js @posthog/react
+npm install --save posthog-js@1 @posthog/react@1
 ```
 
 Next, we’ll go to `src/main.jsx` to initialize PostHog. We’ll import PostHog and the `PostHogProvider` component from `@posthog/react` and run `posthog.init` with our project key and instance address (which you can get in your [project settings](https://us.posthog.com/settings/project))

@@ -97,7 +97,7 @@ npm test
 If we’ve created our React app and run our first test, we want to add PostHog. First, we need a PostHog instance ([sign up for free](https://app.posthog.com/signup)). We then need our project token and instance address from it. Once we have them, in our React app, install `posthog-js`:
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 Next, add the `PostHogProvider` to `main.jsx`. This enables access to PostHog throughout your React app.

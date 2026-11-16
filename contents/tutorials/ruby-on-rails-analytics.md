@@ -236,8 +236,8 @@ If you want access to all the features of PostHog, including custom event captur
 To set this up, add `posthog-ruby` and `posthog-rails` to your `Gemfile`:
 
 ```ruby file=Gemfile
-gem 'posthog-ruby'
-gem 'posthog-rails'
+gem 'posthog-ruby', '~> 3.0'
+gem 'posthog-rails', '~> 3.0'
 ```
 
 Then install the gems and run the PostHog install generator:

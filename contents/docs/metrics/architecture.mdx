@@ -21,11 +21,29 @@ A **series** is one stream of values identified by the combination of:
 - the metric name
 - the metric type (`gauge`, `sum`, `histogram`, `exponential_histogram`, or `summary`)
 - the service name
+- the full set of resource attributes (host, process, SDK, and so on)
 - the full set of attribute key/value pairs
 
 Record `http.requests.total` with `route=/api/checkout` and `status=200`, then again with `status=500`, and you have two series. Group a chart by `status` and each series becomes its own line.
 
 This is why attribute cardinality matters. Ten routes times five status codes is fifty series: cheap, useful, chartable. A user ID attribute with a million values is a million series: expensive, and no chart with a million lines answers a question. Keep attributes to dimensions with a bounded set of values, and reach for [logs](/docs/logs) or [traces](/docs/distributed-tracing) when you need per user or per request detail.
+
+## Points per series limit
+
+A series keeps at most 10,000 points per hour. Points past that in the same hour are dropped, so charts for that hour undercount.
+
+Most senders never get close. Because resource attributes are part of the series, each process or host normally forms its own series, and an SDK that exports every 10 to 60 seconds sends 60 to 360 points per series an hour.
+
+You can hit the limit when:
+
+- **Many senders share one series.** If every sender reports identical resource attributes and attributes, for example many browsers running the same web SDK, their points all land in the same series.
+- **Something sends a point per event.** Anything above about 3 points a second for one series reaches 10,000 within the hour.
+
+To stay under it:
+
+- **Aggregate before you export.** Use a periodic exporter with delta or cumulative temporality, so each export carries one point per series however many measurements were recorded. The default metric readers in the OpenTelemetry SDKs already work this way. Don't export a point for every event.
+- **Give each cumulative sender its own series.** Senders that share a series must send delta counters or gauges. If several senders mix their cumulative totals into one series, `rate` and `increase` read the jumps between totals as growth or resets and return wrong numbers, even under the limit. Set a unique `service.instance.id` resource attribute on each sender, or switch to delta temporality.
+- **Add a low-cardinality shard attribute.** If many delta or gauge senders have to share a series, add an attribute with a few values (4 to 8 is usually enough), for example derived from a random number or an ID. The load splits across that many series, each under the limit. Sum over the shard attribute in your queries, which charts already do unless you group by it.
 
 ## Metric types and temporality
 
@@ -60,7 +78,7 @@ Metrics are stored in a columnar time series table and exposed to SQL as `postho
 
 ## What the alpha means here
 
-Ingestion doesn't depend on the viewer. PostHog accepts and stores the metrics you send whether or not you've turned on the Metrics viewer for the project, so enabling it later shows data sent earlier (within the 30-day retention). Ingestion returns a success response either way, so to confirm data landed, check the **Overview** tab or query the `posthog.metrics` table in the **SQL** tab.
+Ingestion doesn't depend on the viewer. Metrics you send while the Metrics viewer is off are stored for the project, so enabling it later shows data sent earlier (within the 30-day retention). A `200` response doesn't prove the data landed: an accepted request returns `200`, but a request with an unknown project token currently returns `200` too, so check your token. To confirm data landed, check the **Overview** tab or query the `posthog.metrics` table in the **SQL** tab.
 
 While metrics is in open alpha, ingestion details and limits may still change, and metrics data is kept for 30 days. The OTLP endpoint, the series model, and the aggregation semantics described above are the stable core the product is built on.
 

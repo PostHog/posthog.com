@@ -133,15 +133,31 @@ const generateMarkdownArtifacts = async (graphql: any) => {
                     }
                 }
             }
+            allSdkMarkdownReference {
+                nodes {
+                    slug
+                    title
+                }
+            }
         }
-    `)) as { data: { allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> } } }
+    `)) as {
+        data: {
+            allMdx: { nodes: Array<{ fields: { slug: string }; frontmatter: { title: string } }> }
+            allSdkMarkdownReference: { nodes: Array<{ slug: string; title: string }> }
+        }
+    }
 
-    const filteredPages = await generateRawMarkdownPages(
-        docsQuery.data.allMdx.nodes.map((node) => ({
+    const filteredPages = await generateRawMarkdownPages([
+        ...docsQuery.data.allMdx.nodes.map((node) => ({
             ...node,
             fields: { ...node.fields, slug: pocketGuideDestination(node.fields.slug) },
-        }))
-    )
+        })),
+        // SDK references from Strapi aren't MDX (gatsby/sdkMarkdownReferences.js), but get a .md copy like the docs.
+        ...docsQuery.data.allSdkMarkdownReference.nodes.map(({ slug, title }) => ({
+            fields: { slug },
+            frontmatter: { title },
+        })),
+    ])
     // Include product documentation and learning pages, excluding the handbook.
     const docsPages = filteredPages.filter((page) => /^\/(docs|learn)\//.test(page.fields.slug))
     generateLlmsTxt(docsPages)

@@ -39,7 +39,7 @@ Skip anything already on a team's roadmap, or anything that spans products. Ware
 ## Getting it merged
 
 - A merge needs green CI and one review. Learn what each check does, and whether a failure is yours or already broken on `master`. That one review should come from someone on the team that owns the part of the platform you're working on.
-- For right now, Greptile and Veria review everything. Read what they flagged on recent PRs in the same product, and fix it before they find it in yours.
+- For right now, Greptile and Veria review everything. Read what they flagged on recent PRs in the same product, and fix it before they find it in yours. You can also use <PrivateLink url="https://us.posthog.com/project/2/code-review">Code Review</PrivateLink> to review your PRs.
 - Drafts are fine early. When it's done, mark it ready and ask the owning team for a review. See [how we review PRs](/handbook/engineering/how-we-review).
 - The stale bot labels a PR after 7 quiet days and closes it 7 days later. Do not be afraid if you get a few bot comments that your PR is now stale. Removing the label, commenting or pushing restarts the 7-day clock. Removing the label doesn't re-run your checks, so push a commit when you need a fresh CI run before another review.
 - Once you've been blessed with a review, comment `/trunk merge` on your PR. A bot then comments as it reaches dev, prod-us and prod-eu, and #platform-bots shows the progress.

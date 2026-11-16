@@ -9,7 +9,7 @@ The [Node.js SDK](/docs/libraries/node) sends transactional emails from version 
 <details>
 <summary>Prompt for your coding agent</summary>
 
-Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that are easy to get wrong.
+Paste this into Claude Code, Cursor, or another coding agent. It sends the agent to this page and gives it the rules that agents often get wrong.
 
 ```text
 Add PostHog transactional email to this Node.js app with posthog-node.
@@ -33,7 +33,7 @@ Ask me for the template ID and the names of its variables. Don't create the API 
 ## Install
 
 ```bash
-npm install posthog-node
+npm install posthog-node@5
 ```
 
 ## Set up the client
@@ -143,26 +143,24 @@ new Worker(
 
 Pass the distinct ID that you pass to `identify()` as `distinctId`. This is usually your user's ID. PostHog then records the email's [engagement events](/docs/workflows/engagement-events), such as sent, opened, and clicked, on that user's person, in the same timeline as their product events.
 
-- **No distinct ID** - PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
-- **Not a user yet** - For an invite, or an email address check before the account exists, leave `distinctId` out.
+- **No distinct ID** – PostHog records the email on a person whose distinct ID is the email address. That's a different person from your user, unless your app identifies users by their email address.
+- **Not a user yet** – For an invite, or an email address check before the account exists, leave `distinctId` out.
 
 ## Send content from your code
 
 From version 5.62.0, `send` also takes content that your code rendered, with no template in PostHog. Use it when your emails already live in your codebase, or when you move from another email provider. Name the email with `templateKey`, and pass `subject` with `html`, `text`, or both. PostHog sends the content as you wrote it.
 
-For a [React Email](https://react.email) component, render it to HTML with `render` from `@react-email/render`, and pass the result as `html`:
+From version 5.69.0, you can pass a [React Email](https://react.email) component as `react`, in place of `html`. The SDK renders its HTML and plain text with `@react-email/render`, which you install next to `posthog-node`:
 
 ```jsx
-import { render } from "@react-email/render"
 import { PasswordResetEmail } from "./emails/password-reset"
 
 export async function sendPasswordReset({ userId, email, firstName, resetLink, resetRequestId }) {
-    const html = await render(<PasswordResetEmail firstName={firstName} resetLink={resetLink} />)
     const { data, error } = await posthog.emails.send({
         to: email,
         templateKey: "password-reset",
         subject: "Reset your password",
-        html,
+        react: <PasswordResetEmail firstName={firstName} resetLink={resetLink} />,
         from: "Hedgebox <security@example.com>",
         distinctId: userId,
         idempotencyKey: `password-reset-${resetRequestId}`,
@@ -174,12 +172,65 @@ export async function sendPasswordReset({ userId, email, firstName, resetLink, r
 }
 ```
 
-- **`templateKey`** - Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
-- **`text`** - If you leave it out, PostHog makes it from `html`.
-- **`from`** - Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
-- **`captureEngagement`** - PostHog captures the email's engagement events unless you pass `captureEngagement: false`.
+- **`templateKey`** – Names the email, such as `password-reset`. PostHog groups the email's metrics and sends under this key, so use the same key every time you send this email.
+- **`react`** – A React Email element. See [send React Email components](/docs/workflows/transactional-emails/react-email) for the install, the errors, and Next.js.
+- **`text`** – If you leave it out, PostHog makes it from `html`, or the SDK makes it from the rendered `react` element.
+- **`from`** – Needs an address on a domain that your project verified. Without it, PostHog uses the project's default sender. `replyTo` takes one address or a list.
+- **`sensitive`** – Marks the email as sensitive, for login links, reset tokens, or codes. If you leave it out, the email takes the setting of the template with the same key, or is sensitive when no template has that key. See [sensitive emails](/docs/workflows/transactional-emails/api#sensitive-emails).
+- **`tracking`** – What PostHog tracks for the email. If you leave it out, PostHog tracks opens and captures engagement events, and tracks clicks only when the email isn't sensitive. See [open and click tracking](#open-and-click-tracking).
+- **`captureEngagement`** – Deprecated. Pass `tracking: { engagement: false }` instead. It still works, but a send that sets both `captureEngagement` and `tracking` gets an error.
 
 A send has `templateId` or `templateKey`, not both. Content from your code takes no `templateData`, because PostHog renders nothing. See [content from your code](/docs/workflows/transactional-emails/api#send-content-from-your-code) for each field and its checks.
+
+### Copies and attachments
+
+Copies and attachments need version 5.72.0 or later.
+
+Content from your code takes `cc`, `bcc`, and `attachments`:
+
+- **`cc` and `bcc`** – One address or a list of plain addresses.
+- **`attachments`** – A list of files. Each file has `filename` and `content`, and can also have `contentType` and `contentId`.
+
+Pass the file's bytes, such as a `Buffer`, as `content`. The client gets the SHA-256 of each file, uploads the files that PostHog doesn't have yet, and then sends the email. An email can have 10 files and 40 MB per message after Base64 encoding, about 29 MB of files. The client checks this limit before it uploads a file. If an upload fails, `send` returns an error, and PostHog sends nothing. The client uploads the files to Amazon S3, not to the PostHog host. If your network limits outgoing traffic, [allow the upload host](/docs/workflows/transactional-emails/api#allow-the-upload-host).
+
+```js
+import { readFile } from "node:fs/promises"
+
+const { error } = await posthog.emails.send({
+    to: user.email,
+    templateKey: "receipt",
+    subject: "Your receipt",
+    html,
+    cc: "billing@example.com",
+    attachments: [{ filename: "receipt.pdf", content: await readFile(pdfPath), contentType: "application/pdf" }],
+    distinctId: user.id,
+})
+```
+
+See [checks for files](/docs/workflows/transactional-emails/api#checks-for-files) for the errors that PostHog returns for files.
+
+### Open and click tracking
+
+`sensitive` and `tracking` need version 5.71.0 or later.
+
+`tracking` decides what PostHog tracks for an email from your code:
+
+| `tracking` | Opens | Clicks | Engagement events |
+| --- | --- | --- | --- |
+| Left out | On | Follows `sensitive` | On |
+| `tracking: true` | On | On | On |
+| `tracking: false` | Off | Off | Off |
+| An object, such as `tracking: { clicks: true }` | `opens`, on by default | `clicks`, default follows `sensitive` | `engagement`, on by default |
+
+- **Opens** – PostHog adds an open pixel to the email, so it can count opens.
+- **Clicks** – PostHog rewrites the email's links to go through a tracking redirect, so it can count clicks.
+- **Engagement events** – PostHog captures the email's engagement events on the recipient's person. If the project's **Capture email engagement events** setting is off, PostHog captures nothing, whatever the send says.
+
+If you leave out clicks, PostHog tracks them only when the email isn't sensitive, because a login link or a reset token in a tracked link would go through a redirect. Pass `sensitive: false` for an email that carries no secrets. For a sensitive email with links that are safe to rewrite, pass `tracking: { clicks: true }`. A clicks value in `tracking` wins over `sensitive`.
+
+With `tracking: false`, the email goes out without the open pixel and without rewritten links. PostHog can't count its opens and clicks, and captures no engagement events for it.
+
+PostHog refuses `tracking: { opens: false, clicks: true }`, because click tracking needs open tracking. See [open and click tracking](/docs/workflows/transactional-emails/api#open-and-click-tracking) for every rule.
 
 ## Check an email's status
 

@@ -131,7 +131,7 @@ To move a tile into a group, click the **⋯** menu on any insight card, text ca
 
 To remove a tile from its group, open the same **Move to** submenu and select **Take out of group**. The tile returns to the ungrouped area of the dashboard.
 
-You can also drag and drop tiles between groups while in edit mode. Drag a tile from one group's section and drop it onto another group's section to move it.
+You can also drag and drop tiles between groups. Drag a tile from one group's section and drop it onto another group's section to move it.
 
 ### Collapsing groups
 
@@ -302,24 +302,32 @@ Tiles ignoring dashboard filters display an **Ignores dashboard filters** indica
 
 ### Editing the layout
 
-If you have edit access to a dashboard, you can resize tiles directly without entering edit mode. Hover near any edge or corner of a tile to reveal resize handles, then drag to resize. Grabbing a handle automatically enters edit mode so the resize takes effect immediately. Corner handles support diagonal resizing.
+If you have edit access to a dashboard, you can drag and resize tiles directly – no edit mode required. Layout changes save automatically as you make them.
 
-For moving tiles and other layout changes, enter 'Edit layout' mode. You can do this in several ways:
+To **resize** a tile, hover near any edge or corner to reveal resize handles, then drag to resize. Corner handles support diagonal resizing. You can also click once on a resize handle to start resizing, then click again to set the size. Press **Escape** while resizing to restore the original size. If you drag a resize handle and release the mouse button, the resize continues until you click to set the size.
 
-- Tap 'E' on your keyboard
-- Click on the '...' icon at the top of the dashboard and click 'Edit layout'
-- Click on the '...' icon on any insight card and click 'Edit layout'
-- Click or start dragging on any insight card, text card, or button tile (outside the interactive chart area)
+To **move** a tile, grab its header or body area and drag it to a new position. You can also click once on a tile's header (where the grab cursor appears) to pick it up, then click again to place it. Press **Escape** while carrying a tile to return it to its original position. If you hold and drag a tile, releasing the mouse button continues the move until you click to place it – this is useful for scrolling across large dashboards mid-drag.
 
-You can also move tiles without holding the mouse button. Click once on a tile's header (where the grab cursor appears) to pick it up, then click again to place it. Press **Escape** while carrying a tile to return it to its original position. If you hold and drag a tile, releasing the mouse button continues the move until you click to place it – this is useful for scrolling across large dashboards mid-drag.
+The grid background and drop space only appear while you are actively dragging a tile.
 
-Once in edit mode, press 'E' again to save your changes and exit edit mode, or press 'Escape' to discard changes and exit.
+#### Undoing and redoing layout changes
 
-Tapping 'F' enables full-screen mode.
+An **Undo** button appears in the dashboard header after you make a layout change. You can undo up to 20 layout changes. The undo history is local to your current page session and is not persisted – reloading the page clears it.
 
-While in edit mode, you can click **Collapse view** to zoom out and see all tiles at a smaller size. This makes it easier to drag and rearrange items on large dashboards without excessive scrolling. You can also tap 'Z' to toggle collapsed view. When collapsed, you can drag tiles to rearrange them, but resizing is disabled. Click **Expand view** (or tap 'Z' again) to return to the normal size.
+You can also undo and redo layout changes from the **Edit** menu, which shows **Undo layout change** and **Redo layout change** options.
+
+Keyboard shortcuts:
+
+- `Cmd` + `Z` (Mac) or `Ctrl` + `Z` (Windows/Linux) – Undo the last layout change
+- `Shift` + `Cmd` + `Z` (Mac) or `Shift` + `Ctrl` + `Z` (Windows/Linux) – Redo an undone layout change
+
+These shortcuts are disabled while an input field has focus.
+
+Tapping `F` enables full-screen mode.
 
 > **Note:** On smaller screens, dashboard tiles are automatically stacked in a single column based on the desktop layout order. Layout editing (drag and resize) is only available on wider viewports.
+>
+> [Cross-project dashboards](#cross-project-dashboards) use their own edit mode for layout changes.
 
 ### Insight card options
 
