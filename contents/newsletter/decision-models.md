@@ -4,7 +4,7 @@ date: 2026-11-09
 author:
   - jina-yoon
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/decision_models_hero_10ccd0f313.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/not_everything_needs_an_llm_website_0b4bed5191.png
 featuredImageType: full
 tags:
   - Product engineers
