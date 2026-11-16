@@ -9,6 +9,7 @@ import {
     IconVolumeHalf,
     IconVolumeMuted,
 } from 'components/OSIcons/Icons'
+import OSButton from 'components/OSButton'
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
 import type { LearnVideo } from './videos'
@@ -65,6 +66,8 @@ export default function LearnTVPlayer({
     const [captionsOn, setCaptionsOn] = useState(true)
     const [lines, setLines] = useState<TranscriptLine[]>([])
     const [activeIds, setActiveIds] = useState<string[]>([])
+    // The MP4 failed to load (network or decode error). Play does nothing until a retry reloads the source.
+    const [loadError, setLoadError] = useState(false)
 
     // Read the cues from the captions track. "hidden" still loads cues and fires cuechange, so a transcript
     // keeps following along when captions are off.
@@ -115,6 +118,15 @@ export default function LearnTVPlayer({
         else el.pause()
     }
 
+    // load() refetches the source, which play() alone does not do after a fatal error.
+    const retry = () => {
+        const el = videoRef.current
+        if (!el) return
+        setLoadError(false)
+        el.load()
+        void el.play().catch(() => setIsPlaying(false))
+    }
+
     const playFrom = useCallback(
         (time: number) => {
             seek(time)
@@ -148,7 +160,7 @@ export default function LearnTVPlayer({
         <>
             {/* The same layout and controls as components/MediaPlayer */}
             <section className="@container bg-accent px-2 pb-2" aria-label={`Video: ${video.title}`}>
-                <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
+                <div className="relative flex-1 flex flex-col justify-center items-center bg-primary mb-2">
                     <video
                         ref={videoRef}
                         src={video.src}
@@ -161,7 +173,14 @@ export default function LearnTVPlayer({
                         onPlay={() => setIsPlaying(true)}
                         onPause={() => setIsPlaying(false)}
                         onEnded={() => setIsPlaying(false)}
-                        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+                        onLoadedMetadata={(e) => {
+                            setLoadError(false)
+                            setDuration(e.currentTarget.duration)
+                        }}
+                        onError={() => {
+                            setLoadError(true)
+                            setIsPlaying(false)
+                        }}
                         onTimeUpdate={(e) => !isScrubbing && setCurrentTime(e.currentTarget.currentTime)}
                         onRateChange={(e) => setPlaybackRate(e.currentTarget.playbackRate)}
                         onVolumeChange={(e) => {
@@ -179,10 +198,21 @@ export default function LearnTVPlayer({
                         />
                         <a href={video.src}>Download video: {video.title}</a>
                     </video>
+                    {loadError && (
+                        <div
+                            role="alert"
+                            className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/80 p-4 text-center"
+                        >
+                            <p className="m-0 text-sm font-semibold text-white">The video didn't load.</p>
+                            <OSButton variant="primary" size="md" onClick={retry}>
+                                Try again
+                            </OSButton>
+                        </div>
+                    )}
                 </div>
 
                 {/* Scrubbing bar */}
-                <div className="w-full px-2 py-1 bg-[#EFF7DE] dark:bg-primary border border-primary rounded-sm flex items-center gap-2">
+                <div className="w-full px-2 py-1 bg-primary border border-primary rounded-sm flex items-center gap-2">
                     <span className="text-sm font-semibold text-right dark:text-white w-24 shrink-0">
                         {formatTime(shownTime)} / {formatTime(duration)}
                     </span>

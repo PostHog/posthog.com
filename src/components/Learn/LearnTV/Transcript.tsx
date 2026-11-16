@@ -24,7 +24,8 @@ export default function Transcript({
         const list = listRef.current
         const active = list?.querySelector<HTMLElement>('[aria-current="true"]')
         if (!list || !active) return
-        const top = active.offsetTop - list.offsetTop
+        // The list is `relative`, so it is the line's offset parent: offsetTop is already inside the list.
+        const top = active.offsetTop
         if (top < list.scrollTop || top + active.offsetHeight > list.scrollTop + list.clientHeight) {
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
             list.scrollTo({ top: top - 8, behavior: reduceMotion ? 'auto' : 'smooth' })
@@ -42,13 +43,13 @@ export default function Transcript({
                 </a>
             </div>
             {lines.length === 0 ? (
-                <p className="m-0 mt-2 rounded-md border border-primary bg-white dark:bg-dark px-3 py-2 text-sm text-secondary">
+                <p className="m-0 mt-2 rounded-md border border-primary bg-light dark:bg-dark px-3 py-2 text-sm text-secondary">
                     Loading transcript…
                 </p>
             ) : (
                 <ol
                     ref={listRef}
-                    className={`relative m-0 mt-2 p-0 list-none overflow-y-auto rounded-md border border-primary bg-white dark:bg-dark ${listClassName}`}
+                    className={`relative m-0 mt-2 p-0 list-none overflow-y-auto rounded-md border border-primary bg-light dark:bg-dark ${listClassName}`}
                 >
                     {lines.map((line) => {
                         const active = activeIds.includes(line.id)
@@ -58,7 +59,9 @@ export default function Transcript({
                                     onClick={() => playFrom(line.start)}
                                     aria-current={active ? 'true' : undefined}
                                     className={`flex w-full gap-2.5 px-3 py-2 text-left text-sm border-l-[3px] hover:bg-accent focus-visible:bg-accent ${
-                                        active ? 'border-yellow bg-yellow/20' : 'border-transparent'
+                                        active
+                                            ? 'border-brand-yellow bg-brand-yellow-lighter dark:bg-brand-yellow/20'
+                                            : 'border-transparent'
                                     }`}
                                 >
                                     <span className="w-10 shrink-0 text-secondary tabular-nums">
