@@ -218,6 +218,33 @@ Slack-triggered workflows have no associated person, so person-dependent steps (
 
 Messages posted by PostHog never start a run, so a workflow can reply in Slack without triggering itself.
 
+### Trigger frequency
+
+The **Frequency** setting on the trigger step controls how often one person can enter the workflow. Event triggers have these options:
+
+| Option                       | What it does                                                                                                                       |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Every time the trigger fires | Default. Each matching event starts a new run, even if the person is already in the workflow.                                      |
+| One time                     | A person enters once, and then can't enter again until the window you choose ends. The window is 5 minutes to 365 days, or **indefinitely**. |
+| Once per calendar day        | A person enters at most once each day.                                                                                             |
+
+Use **One time** when the same event can arrive more than once for one real occurrence, for example a server that sends an event again on a retry. With **Every time the trigger fires**, each copy starts its own run, so the person gets the same email once for each copy. Set the window a bit longer than the time over which duplicates can arrive, but shorter than the time until the person should get the message again.
+
+Some other trigger types show their own frequency options that fit them.
+
+#### Trigger frequency or frequency cap
+
+The [frequency cap](/docs/workflows/frequency-cap) and trigger frequency both limit messages, but they work differently:
+
+| | Trigger frequency | Frequency cap |
+| --- | --- | --- |
+| Scope | One workflow | All workflows and broadcasts in the project |
+| What it limits | Runs. Extra trigger events don't start a run. | Marketing messages. A message over the cap is skipped or held. |
+| Transactional messages | Applies | Doesn't apply |
+| Non-message steps | Applies, because no run starts | Doesn't apply |
+
+Use trigger frequency to stop one workflow from running too often for one person, such as duplicate events or a welcome flow that should run only once. Use the frequency cap to limit the total number of marketing messages a person gets from all of your workflows.
+
 ### Conversion goals
 
 Conversion goals let you define success criteria for your workflow. When a user meets the conversion goal, PostHog records a conversion metric and emits a `$workflows_conversion` event for the converting person.
@@ -260,7 +287,7 @@ The limit applies to the whole workflow. It counts the emails the workflow sends
 
 When the workflow reaches the limit, the next emails wait in a queue and send as soon as the limit allows. The limit doesn't drop emails. The workflow's **Logs** tab shows a message for each email that waits.
 
-To control how often one person goes through an event-triggered workflow, use the **Frequency** setting on the trigger step. For example, **Once per calendar day** lets each person enter the workflow at most once a day.
+To control how often one person goes through an event-triggered workflow, use the [**Frequency**](#trigger-frequency) setting on the trigger step. For example, **Once per calendar day** lets each person enter the workflow at most once a day.
 
 This limit is separate from your project's [sending allowance](/docs/workflows/sending-reputation), which caps email across all of your workflows.
 
