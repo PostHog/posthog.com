@@ -8269,7 +8269,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Setup',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -8285,8 +8285,8 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Launch your first workflow',
-                    url: '/docs/workflows/launch-workflow',
+                    name: 'Configure a channel',
+                    url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
@@ -8299,36 +8299,6 @@ export const docsMenu = {
                     url: '/docs/workflows/surfaces/web-app',
                     icon: 'IconLaptop',
                     color: 'yellow',
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/workflows/surfaces/web-app',
-                        },
-                        {
-                            name: 'Workflow builder',
-                            url: '/docs/workflows/workflow-builder',
-                        },
-                        {
-                            name: 'Editing a live workflow',
-                            url: '/docs/workflows/editing-live-workflows',
-                        },
-                        {
-                            name: 'Content library and message templates',
-                            url: '/docs/workflows/library',
-                        },
-                        {
-                            name: 'Create emails with PostHog AI',
-                            url: '/docs/workflows/create-emails-ai',
-                        },
-                        {
-                            name: 'Run AI tasks from a workflow',
-                            url: '/docs/workflows/ai-tasks',
-                        },
-                        {
-                            name: 'Watch sessions with Replay Vision',
-                            url: '/docs/workflows/replay-vision',
-                        },
-                    ],
                 },
                 {
                     name: 'PostHog MCP',
@@ -8343,16 +8313,7 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
-                    name: 'Broadcasts',
-                },
-                {
-                    name: 'Send a broadcast',
-                    url: '/docs/workflows/broadcasts',
-                    icon: 'IconSend',
-                    color: 'orange',
-                },
-                {
-                    name: 'Transactional emails',
+                    name: 'Transactional email',
                 },
                 {
                     name: 'Send transactional emails',
@@ -8411,14 +8372,81 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Channels',
+                    name: 'Supabase auth emails',
+                    url: '/docs/workflows/supabase-auth-emails',
+                    icon: 'IconLock',
+                    color: 'green',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
-                    name: 'Configure a channel',
-                    url: '/docs/workflows/configure-channels',
+                    name: 'Broadcasts',
+                },
+                {
+                    name: 'Send a broadcast',
+                    url: '/docs/workflows/broadcasts',
+                    icon: 'IconSend',
+                    color: 'orange',
+                },
+                {
+                    name: 'Content library and message templates',
+                    url: '/docs/workflows/library',
+                    icon: 'IconPalette',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Create emails with PostHog AI',
+                    url: '/docs/workflows/create-emails-ai',
+                    icon: 'IconMagic',
+                    color: 'purple',
+                },
+                {
+                    name: 'Automations',
+                },
+                {
+                    name: 'Launch your first workflow',
+                    url: '/docs/workflows/launch-workflow',
                     icon: 'IconMegaphone',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    name: 'Workflow builder',
+                    url: '/docs/workflows/workflow-builder',
+                    icon: 'IconDecisionTree',
+                    color: 'blue',
+                },
+                {
+                    name: 'Editing a live workflow',
+                    url: '/docs/workflows/editing-live-workflows',
+                    icon: 'IconPencil',
+                    color: 'blue',
+                },
+                {
+                    name: 'Create a drip campaign',
+                    url: '/docs/workflows/email-drip-campaign',
+                    icon: 'IconLetter',
+                    color: 'orange',
+                },
+                {
+                    name: 'A/B testing in workflows',
+                    url: '/tutorials/workflows-ab-testing',
+                    icon: 'IconFlask',
+                    color: 'orange',
+                },
+                {
+                    name: 'Run AI tasks from a workflow',
+                    url: '/docs/workflows/ai-tasks',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'Watch sessions with Replay Vision',
+                    url: '/docs/workflows/replay-vision',
+                    icon: 'IconRewindPlay',
+                    color: 'yellow',
                 },
                 {
                     name: 'Push notifications',
@@ -8455,23 +8483,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Supabase auth emails',
-                    url: '/docs/workflows/supabase-auth-emails',
-                    icon: 'IconLock',
-                    color: 'green',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Workflow events',
-                    url: '/docs/workflows/engagement-events',
-                    icon: 'IconGraph',
-                    color: 'yellow',
-                },
-                {
-                    name: 'Opt-outs',
+                    name: 'Deliverability',
                 },
                 {
                     name: 'Opt-outs and suppression',
@@ -8492,6 +8504,18 @@ export const docsMenu = {
                     color: 'orange',
                 },
                 {
+                    name: 'Measure',
+                },
+                {
+                    name: 'Workflow events',
+                    url: '/docs/workflows/engagement-events',
+                    icon: 'IconGraph',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Migrate',
+                },
+                {
                     name: 'Import opt-out lists from Customer.io',
                     url: '/docs/workflows/import-customerio-optouts',
                     icon: 'IconUpload',
@@ -8499,18 +8523,6 @@ export const docsMenu = {
                 },
                 {
                     name: 'Resources',
-                },
-                {
-                    name: 'Create a drip campaign',
-                    url: '/docs/workflows/email-drip-campaign',
-                    icon: 'IconLetter',
-                    color: 'orange',
-                },
-                {
-                    name: 'A/B testing in workflows',
-                    url: '/tutorials/workflows-ab-testing',
-                    icon: 'IconFlask',
-                    color: 'orange',
                 },
                 {
                     name: 'Best practices',

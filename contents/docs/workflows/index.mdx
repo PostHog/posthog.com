@@ -8,9 +8,19 @@ contentMaxWidthClass: max-w-5xl
 import { IconLaptop, IconMagic, IconBrackets, IconMegaphone, IconPalette, IconShieldLock } from '@posthog/icons'
 import OSButton from 'components/OSButton'
 
-Workflows is PostHog's no-code, drag-and-drop tool for automating processes and sending messages to your users. You decide when a workflow is triggered, who it reaches, and what happens at each step – triggers, delays, audience splits, message sends, and PostHog actions.
+Workflows sends email and other messages to your users from the events and person data already in PostHog. It does three jobs: transactional email that your code sends to one person, broadcasts to an audience, and automations that react to what each person does. Every send, open, and click comes back as an event on the person who got it.
 
-Because workflows run on the same events and person properties you already send to PostHog, you can act on real product behavior instead of a separate marketing dataset. Any [real-time destination](/docs/data-pipelines/destinations) in PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and automation.
+Because it runs on the same events and person properties you already send to PostHog, you act on real product behavior instead of a separate marketing dataset. Any [real-time destination](/docs/data-pipelines/destinations) in PostHog can be dropped into a workflow as a dispatch step, so one tool covers both messaging and automation.
+
+## Which one do you need?
+
+| You want to | Use | Start with |
+| --- | --- | --- |
+| Send one email to one person when your code says so, such as a password reset, a sign-in code, a receipt, or an invite | Transactional email | [Send transactional emails](/docs/workflows/transactional-emails) |
+| Send one email to many people, once or on a schedule, such as a product update, a changelog, or an event invite | Broadcasts | [Send a broadcast](/docs/workflows/broadcasts) |
+| Send messages that react to what each person does, such as an onboarding sequence, a re-engagement email, or a Slack alert when someone upgrades | Automations | [Launch your first workflow](/docs/workflows/launch-workflow) |
+
+Automations are built in the drag-and-drop builder. You decide when a workflow is triggered, who it reaches, and what happens at each step: triggers, delays, audience splits, message sends, and PostHog actions.
 
 <OSButton variant="primary" asLink to="/docs/workflows/start-here">Get started</OSButton>
 
