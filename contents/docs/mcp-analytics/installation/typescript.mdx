@@ -287,6 +287,8 @@ The SDK strips only arguments that it added. It reads a Zod schema as the MCP SD
 | `resolveOriginalTool` | – | `(toolName) => { inputSchema } \| undefined`. Resolves input ownership on a fresh low-level server. See [Resolve tool arguments on fresh low-level servers](#resolve-tool-arguments-on-fresh-low-level-servers). |
 | `logger` | no-op | `(message) => void`. A stdio-safe sink for SDK warnings. |
 
+`context`, `captureModel`, and `enableConversationId` are on by default, and each adds an argument to every tool: `context`, `llm_model`, and `conversation_id`. The model sees these arguments and their descriptions when it lists your tools, and they take up part of its context. `enableConversationId` also adds the `conversation_id` to each tool result so the model can send it back. Set an option to `false` to remove its argument.
+
 ## Custom dispatchers
 
 `instrument()` needs an MCP SDK server object. A Hono, Express, Cloudflare Workers, or edge handler that implements the protocol itself has none. Use `PostHogMCP` instead. It extends the `posthog-node` client and takes its constructor arguments, plus `serverBuild`, `captureModel`, `enableConversationId`, and `missingCapabilityToolName`:
