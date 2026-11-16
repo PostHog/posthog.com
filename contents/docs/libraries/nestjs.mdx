@@ -77,7 +77,7 @@ Tracing headers are client-controlled analytics context, not authentication or a
 
 ### Send headers from the client
 
-If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your NestJS backend hostname so browser requests include `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which the `PostHogInterceptor` reads automatically.
+If you're using [PostHog JS](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your NestJS backend hostname so browser requests include `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which the `PostHogInterceptor` reads automatically.
 
 ### Capturing events in controllers
 

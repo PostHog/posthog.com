@@ -73,7 +73,7 @@ You can also provide:
 - `extra_properties` to add application-specific properties to the request context
 - `trust_tracing_headers` to accept PostHog session and distinct ID headers
 
-If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your Flask backend hostname so browser requests include the session and distinct ID headers.
+If you're using [PostHog JavaScript Web](/docs/libraries/js) on the frontend, configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your Flask backend hostname so browser requests include the session and distinct ID headers.
 
 The integration ignores these headers by default because clients can control them. Set `trust_tracing_headers=True` when registering the integration to accept them as analytics context. Don't use them for authentication or authorization.
 

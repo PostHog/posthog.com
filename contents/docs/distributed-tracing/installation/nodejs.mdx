@@ -94,7 +94,7 @@ posthog.withContext({ distinctId: user.id, sessionId }, async () => {
 })
 ```
 
-If you use Express, the [PostHog middleware](/docs/libraries/node/reference#setupexpressrequestcontext) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) sends from the browser.
+If you use Express, the [PostHog middleware](/docs/libraries/node/reference#setupexpressrequestcontext) sets this up for every request, and reads the `X-POSTHOG-DISTINCT-ID` and `X-POSTHOG-SESSION-ID` headers that [`tracing_headers`](/docs/libraries/js/config#tracing-headers) sends from the browser.
 
 </Step>
 
@@ -224,7 +224,7 @@ const provider = new NodeTracerProvider({
 
 Use this configuration in place of the provider configuration above. Keep your existing exporter and sampler. Register the processor before requests start.
 
-For Express, put [`setupExpressRequestContext`](/docs/libraries/node/reference#setupexpressrequestcontext) before your routes. It reads the browser tracing headers and adds missing `posthogDistinctId` and `sessionId` attributes to the active request span. The processor adds the same attributes to child spans when they start. Configure [`tracing_headers`](/docs/data/sessions#automatically-sending-session-ids) for your backend hostname in the browser SDK.
+For Express, put [`setupExpressRequestContext`](/docs/libraries/node/reference#setupexpressrequestcontext) before your routes. It reads the browser tracing headers and adds missing `posthogDistinctId` and `sessionId` attributes to the active request span. The processor adds the same attributes to child spans when they start. Configure [`tracing_headers`](/docs/libraries/js/config#tracing-headers) for your backend hostname in the browser SDK.
 
 For a custom integration, call `enrichCurrentSpan(posthog)` from `posthog-node/otel` after you set the IDs inside `posthog.withContext()`. The helper is also exported from the main `posthog-node` entry without loading OpenTelemetry. It requires the registered processor. It does not manage another framework's request lifetime.
 
