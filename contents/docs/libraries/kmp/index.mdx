@@ -12,7 +12,7 @@ features:
   sessionRecording: true
   featureFlags: true
   groupAnalytics: true
-  surveys: false
+  surveys: true
   aiObservability: false
   errorTracking: true
   logs: false
@@ -693,6 +693,38 @@ sessionRecording = SessionRecordingConfig(
 
 `verifyScreenshotMaskAlignment` defaults to `false` and only affects Android. It adds view-hierarchy walks during capture, so evaluate its performance in your app. Windows with a Compose root already use verification regardless of this flag; setting it to `false` doesn't disable verification for those windows. Other platforms ignore this option.
 
+## Surveys
+
+The SDK loads [surveys](/docs/surveys) and shows the popover surveys that match the user, using each platform's own survey UI:
+
+- **iOS:** iOS 15 or later. Nothing else to add.
+- **Web:** PostHog.js shows them.
+- **Android:** from `posthog-kmp` 0.11.0, when your app also depends on `posthog-android-surveys-compose`. Without it, Android shows no surveys.
+- **macOS and the JVM:** surveys aren't shown.
+
+On Android, add the survey UI to your shared module's `androidMain` source set:
+
+```kotlin file=shared/build.gradle.kts
+kotlin {
+    sourceSets {
+        androidMain.dependencies {
+            implementation("com.posthog:posthog-android-surveys-compose:<version>")
+        }
+    }
+}
+```
+
+You can find the latest version on [Maven Central](https://central.sonatype.com/artifact/com.posthog/posthog-android-surveys-compose). From `posthog-kmp` 0.12.0, also declare `com.posthog:posthog-android` 4.0.0 or later in the same source set, so Gradle doesn't resolve the 3.x version the survey UI depends on.
+
+To keep the SDK from loading or showing surveys, set `surveys = false` (0.11.0 and later):
+
+```kotlin
+PostHogConfig(
+    projectToken = "<ph_project_token>",
+    surveys = false,
+)
+```
+
 ## Opt out of data capture
 
 You can opt users out of data capture in two ways.
@@ -891,6 +923,6 @@ Android, iOS, macOS (Apple silicon), web, and JVM (desktop). The SDK is designed
 
 Yes. The [Android SDK](/docs/libraries/android) is for native Android apps. The KMP SDK is for shared Kotlin code targeting multiple platforms, and it wraps the native Android, iOS, and web SDKs so you can call one common API from `commonMain`.
 
-### Why don't I see surveys or logs?
+### Why don't I see logs?
 
-The KMP wrapper currently exposes event capture, identification, feature flags, group analytics, screen tracking, session replay, and error tracking. Surveys and logs aren't wrapped yet. If you'd like [logs](/docs/logs) support, upvote the [logs feature request on GitHub](https://github.com/PostHog/posthog-kmp/issues/30) – subscribing to the issue is the best way to follow along.
+The KMP wrapper doesn't support logs yet. If you'd like [logs](/docs/logs) support, upvote the [logs feature request on GitHub](https://github.com/PostHog/posthog-kmp/issues/30) – subscribing to the issue is the best way to follow along.
