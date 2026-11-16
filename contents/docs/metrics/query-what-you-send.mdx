@@ -60,6 +60,29 @@ When you read metrics back as Prometheus series, expect this:
 - Resource attributes become labels, so you can filter on `service_name` or `region` (from `resourceAttributes`). Each series carries both the dotted OpenTelemetry label (`service.name`) and an underscore form (`service_name`), plus `deployment.environment` and `telemetry.sdk.*`.
 - Dotted names and labels must be quoted in PromQL: `{"deployment.environment"="production"}` and `sum by ("url.template", le)`. Grafana legend templates reference them as-is, for example `{{url.template}}`.
 
+### Connect Grafana
+
+If your project has the Prometheus-compatible API, [Metrics](https://app.posthog.com/metrics) shows a **Connect Grafana** button. It opens a modal with the details to add PostHog as a Prometheus data source:
+
+- **Prometheus server URL**: Paste this URL into a Prometheus data source in Grafana. It has the form `https://us.posthog.com/api/projects/<project_id>/metrics/prometheus` (use your region's host). Other Prometheus clients use the same URL.
+- **Authentication**: In the data source settings, add an HTTP header named `Authorization` with the value `Bearer <your_personal_api_key>`. Select **Create personal API key** to make a key with only the `metrics:read` scope.
+- **Test connection**: Runs the same test query (`1+1`) that Grafana runs when you save the data source.
+- **Provision as code**: A Grafana provisioning file for the data source. Set `POSTHOG_PERSONAL_API_KEY` in the environment of Grafana:
+
+```yaml
+apiVersion: 1
+datasources:
+  - name: PostHog
+    type: prometheus
+    access: proxy
+    url: https://us.posthog.com/api/projects/<project_id>/metrics/prometheus
+    jsonData:
+      httpMethod: POST
+      httpHeaderName1: Authorization
+    secureJsonData:
+      httpHeaderValue1: Bearer $POSTHOG_PERSONAL_API_KEY
+```
+
 ### Counters: sum deltas, don't use rate()
 
 Because each point is a delta, `rate()` and `increase()` give wrong answers without an error. Sum the points instead:
