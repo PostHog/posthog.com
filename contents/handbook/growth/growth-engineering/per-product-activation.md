@@ -8,6 +8,8 @@ Because PostHog offers so many products, and people sign up with all sorts of di
 
 Every product should have activation criteria - these are used to determine if a user has activated for a specific product yet. If they haven't, and they've showed [intent for that product](/handbook/growth/growth-engineering/product-intents), we can nudge them in the right direction. These are also used to understand what retention looks like for the product, and to figure out what PostHog can do to offer a better experience!
 
+You can find the current activation criteria and rates for every product on the <PrivateLink url="https://us.posthog.com/project/2/dashboard/130345">per-product activation dashboard</PrivateLink>.
+
 ## How we track activation, and how to set up an activation query for a new product
 
 This is the basic structure of our activation queries:
