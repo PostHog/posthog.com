@@ -365,46 +365,48 @@ export const workflows = {
         imageAlt: 'A robot hedgehog running a workflow',
         imageClasses: 'max-w-[360px]',
         description: 'build the automation and ship it on your behalf',
-        // Reshaped from ai.skills + contents/docs/workflows/create-emails-ai.mdx
-        intro: 'Ask PostHog AI to generate email templates and set up multi-step workflows from the triggers, conditions, and actions you describe.',
+        intro: 'Install the PostHog AI plugin in Claude Code, Codex, or Cursor, and your agent loads the right skill from what you ask.',
+        // Skills run in a coding agent, and transactional setup edits backend code, so prompts copy instead of opening PostHog AI.
+        copyPrompts: true,
+        hideSurfaces: true,
         mcpFeatures: ['workflows'],
         skills: [
             'Generates email templates for your content library',
             'Sets up multi-step workflows from the triggers, conditions, and actions you describe',
             'Recommends which workflows to build and when to run them based on your product metrics',
         ],
-        // Prompts reshaped from previous ai.prompts + contents/docs/workflows/create-emails-ai.mdx.
-        // Tool names verified against src/data/mcp-tools.json (feature: workflows).
+        // Skill names from products/{messaging,workflows}/skills in the PostHog monorepo.
         groups: [
             {
-                title: 'Create workflows',
-                tool: 'workflows-create',
+                title: 'Transactional email',
+                tool: 'sending-transactional-emails',
                 prompts: [
-                    'Build an onboarding email sequence to help new users get started',
-                    'Create a workflow that notifies our Slack channel when someone upgrades to a paid plan',
-                    'Generate a SMS sequence to encourage users to complete a survey',
+                    'Send password resets from our Node backend with PostHog',
+                    'Send sign-in codes without PostHog logging them',
+                    'Move our receipts from Postmark to PostHog',
                 ],
             },
             {
-                title: 'Create email templates',
-                tool: 'workflows-create-email-template',
+                title: 'Broadcasts',
+                tool: 'designing-email-templates, building-workflows',
                 prompts: [
-                    'Create a welcome email for new users who just signed up',
-                    "Write a re-engagement email for users who haven't logged in for 30 days",
-                    'Generate an email template for announcing a new feature',
-                    'Create an onboarding drip email series for trial users',
-                    "Create a welcome email template with a hero image, greeting with the user's name, and a CTA button",
+                    'Design a launch email for the new editor in our brand colors',
+                    'Send it Tuesday at 9am to everyone on the old editor',
                 ],
             },
             {
-                title: 'Inspect templates',
-                tool: 'workflows-show-email-template',
-                prompts: ['Show me the current welcome email template'],
+                title: 'Automation',
+                tool: 'building-workflows, migrating-from-customer-io',
+                prompts: [
+                    "Build an onboarding sequence: a welcome email at sign-up, and a nudge two days later if they haven't created a project",
+                    'Post in #sales when someone upgrades to a paid plan',
+                    'Move our Customer.io campaigns into PostHog',
+                ],
             },
             {
-                title: 'Update templates',
-                tool: 'workflows-update-email-template',
-                prompts: ['Update the onboarding template to include their company name in the subject'],
+                title: 'Results',
+                tool: 'measuring-email-performance',
+                prompts: ["How did last week's product update do, and who upgraded after opening it?"],
             },
         ],
     },
