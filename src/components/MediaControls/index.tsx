@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { IconFastForward, IconPauseFilled, IconPlayFilled } from '@posthog/icons'
 import {
     IconClosedCaptions,
@@ -72,14 +72,28 @@ export default function MediaControls({
     const [isScrubbing, setIsScrubbing] = useState(false)
     const [scrubTime, setScrubTime] = useState(0)
     const shownTime = isScrubbing ? scrubTime : currentTime
+    const inputRef = useRef<HTMLInputElement>(null)
+    // The latest onSeek, for the release listener that a drag adds to the window.
+    const onSeekRef = useRef(onSeek)
+    onSeekRef.current = onSeek
+    const stopListening = useRef<(() => void) | null>(null)
+    useEffect(() => () => stopListening.current?.(), [])
 
-    const startScrub = () => {
+    // The release can happen outside the slider, so listen on the window, not on the input.
+    const startScrub = (endEvents: string[]) => {
         setIsScrubbing(true)
         setScrubTime(currentTime)
-    }
-    const endScrub = (event: React.SyntheticEvent<HTMLInputElement>) => {
-        onSeek(Number(event.currentTarget.value))
-        setIsScrubbing(false)
+        stopListening.current?.()
+        const end = () => {
+            stopListening.current?.()
+            if (inputRef.current) onSeekRef.current(Number(inputRef.current.value))
+            setIsScrubbing(false)
+        }
+        endEvents.forEach((type) => window.addEventListener(type, end))
+        stopListening.current = () => {
+            endEvents.forEach((type) => window.removeEventListener(type, end))
+            stopListening.current = null
+        }
     }
 
     return (
@@ -98,15 +112,21 @@ export default function MediaControls({
                         value={shownTime}
                         aria-label="Seek"
                         aria-valuetext={`${formatTime(shownTime)} of ${formatTime(duration)}`}
-                        onMouseDown={startScrub}
-                        onTouchStart={startScrub}
+                        ref={inputRef}
+                        onMouseDown={() => startScrub(['mouseup'])}
+                        onTouchStart={() => startScrub(['touchend', 'touchcancel'])}
                         onChange={(e) => {
                             const time = Number(e.target.value)
                             setScrubTime(time)
-                            // Keyboard changes have no mouseup, so seek right away.
-                            if (!isScrubbing) onSeek(time)
+                            if (isScrubbing) return
+                            // Not a drag: a page key, or a screen reader's increment (for example a VoiceOver swipe),
+                            // which moves one 0.1 s step. Make a single step jump like the arrow keys.
+                            const delta = time - currentTime
+                            onSeek(Math.abs(delta) < 1 ? currentTime + Math.sign(delta) * KEY_STEP : time)
                         }}
                         onKeyDown={(e) => {
+                            // Until the player knows the duration, there is nothing to seek in.
+                            if (!duration) return
                             // The 0.1 s step is for smooth dragging. Keys jump like other video players.
                             const target = {
                                 ArrowLeft: currentTime - KEY_STEP,
@@ -118,10 +138,9 @@ export default function MediaControls({
                             }[e.key]
                             if (target === undefined) return
                             e.preventDefault()
-                            onSeek(Math.max(0, Math.min(target, duration || target)))
+                            // The player clamps the time.
+                            onSeek(target)
                         }}
-                        onMouseUp={endScrub}
-                        onTouchEnd={endScrub}
                         className="quicktime-scrubber"
                     />
                     <div

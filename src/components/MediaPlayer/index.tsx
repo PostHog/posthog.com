@@ -266,6 +266,8 @@ const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(functi
         if (playerState.player) {
             if (source === 'youtube') {
                 playerState.player.setVolume(volume)
+                // YouTube keeps its mute state when the volume changes, so a muted player stays silent.
+                if (volume > 0 && (playerState.isMuted || playerState.player.isMuted?.())) playerState.player.unMute()
             } else if (source === 'wistia') {
                 playerState.player.volume(volume / 100)
             }

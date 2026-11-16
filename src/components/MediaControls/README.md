@@ -28,9 +28,10 @@ Place it inside an `@container` element. In a narrow player, the volume slider a
 
 ## Behavior
 
-- **Scrubbing:** while the pointer drags the scrubber, the time shows the drag position. `onSeek` runs once, on release.
-- **Keyboard:** with the scrubber focused, the arrow keys seek 5 seconds back or forward, and Home and End go to the start and the end. Each key calls `onSeek` at once.
-- **±10 seconds:** the back and forward buttons call `onSeek(currentTime ∓ 10)`. The player clamps the time.
+- **Scrubbing:** while the pointer drags the scrubber, the time shows the drag position. `onSeek` runs once, on release. The release can be anywhere on the page: the component listens on the window.
+- **Keyboard and screen readers:** with the scrubber focused, the arrow keys seek 5 seconds back or forward, and Home and End go to the start and the end. A screen reader's increment or decrement (for example a VoiceOver swipe) also seeks 5 seconds. Page Up and Page Down keep the browser's larger jump. Keys do nothing until the player knows the duration.
+- **±10 seconds:** the back and forward buttons call `onSeek(currentTime ∓ 10)`.
+- **Clamping:** `onSeek` can get a time below 0 or past the end. The player clamps it.
 - **Captions:** the CC button shows only when you pass `captions`. It has `aria-pressed`.
 - **Accessibility:** every control is a native button or range input with an `aria-label`. The scrubber has an `aria-valuetext` such as "1:05 of 4:23".
 
