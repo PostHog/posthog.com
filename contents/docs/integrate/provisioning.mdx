@@ -65,7 +65,7 @@ Most of the provisioning API is self-serve. The rest needs PostHog to turn it on
 
 | Capability                                                                     | How to get it                                                                                                                                                                      |
 | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Create accounts and organizations for your users                               | Self-serve. [Register your app](#register-your-app) and [sign your requests](#sign-requests-with-a-key).                                                                           |
+| Create accounts and organizations for your users                               | Self-serve. [Register your app](#register-your-app), pass the [review](#how-posthog-reviews-your-app), and [sign your requests](#sign-requests-with-a-key).                        |
 | Provision projects and [rotate their credentials](#rotate-project-credentials) | Self-serve, once you register.                                                                                                                                                     |
 | Higher [rate limits](#rate-limits)                                             | Self-serve. Signing your requests gives you 5x the base limits, and [linking your app to an organization](#link-your-partner-app-to-a-posthog-organization-optional) doubles that. |
 | [Deep links](#deep-linking) that log users into their project                  | Ask PostHog. Your app must also sign its requests.                                                                                                                                 |
@@ -93,6 +93,7 @@ Create a JSON file at a stable HTTPS URL, for example `https://yourapp.com/.well
 {
   "client_id": "https://yourapp.com/.well-known/yourapp.json",
   "client_name": "Your App Name",
+  "client_uri": "https://yourapp.com",
   "redirect_uris": ["https://yourapp.com/callbacks/posthog"],
   "logo_uri": "https://yourapp.com/logo.png",
   "token_endpoint_auth_method": "private_key_jwt",
@@ -114,14 +115,14 @@ Requirements:
 - **`token_endpoint_auth_method`** must be `"private_key_jwt"` with an HTTPS `jwks_uri` if your app creates accounts. Your app then authenticates by signing an assertion with your own key, which also raises your [rate limits](#rate-limits). Publish your keys at the `jwks_uri` before you register. See [sign requests with a key](#sign-requests-with-a-key).
 - The document must be served with `Content-Type: application/json` and be under 5 KB.
 - The URL must use HTTPS, include a path component, and must not contain query parameters or fragments.
-- The URL must be on a domain you control. PostHog doesn't accept metadata documents on throwaway hosts.
+- The URL must be on a domain you control. PostHog doesn't accept metadata documents on throwaway hosts. See [how PostHog reviews your app](#how-posthog-reviews-your-app) for where to host it.
 
 PostHog fetches and caches this document automatically.
 Subsequent requests reuse the cached version and refresh it in the background based on your `Cache-Control: max-age` header (clamped between 5 minutes and 24 hours, default 1 hour).
 
 ### Register your app
 
-Once your metadata document is live, register it. PostHog fetches the document, validates it, and turns on provisioning access if it declares `com.posthog.provisioning`.
+Once your metadata document is live, register it. PostHog fetches the document, validates it, and turns on provisioning access if it declares `com.posthog.provisioning` and your app passes [review](#how-posthog-reviews-your-app).
 
 This call is not authenticated, because an app that hasn't registered yet has no credential to present. That's why the opt-in lives in your document rather than in this request.
 
@@ -167,6 +168,31 @@ Call this endpoint again whenever you want to re-check your setup. It re-fetches
 You can also verify a [signed assertion](#sign-requests-with-a-key) end to end by sending `client_assertion` and `client_assertion_type`, which is worth doing once before you depend on `private_key_jwt`. Verifying consumes the assertion's `jti`, so mint a fresh one for the check rather than reusing it afterwards.
 
 Until your app is registered, the other endpoints return HTTP 401 with a message pointing back here.
+
+#### How PostHog reviews your app
+
+After you register a client that declares `com.posthog.provisioning`, PostHog reviews it before it can provision. Until the review accepts your app, provisioning stays inactive: your app can't create accounts or provision resources. Most reviews finish within minutes. Some go to PostHog staff and take longer.
+
+To check the status, call the [registration endpoint](#register-your-app) again. While your app is under review, registration fails, and its `provisioning_enabled` check fails with one of these details:
+
+| Detail                                                                                                | What it means                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `PostHog is reviewing this client before it can provision. Register again in a few minutes to check.` | The review is in progress. Call the registration endpoint again in a few minutes.                                                |
+| `PostHog staff are reviewing this client before it can provision. Register again later to check.`     | PostHog staff are reviewing your app. Call the registration endpoint again later.                                                |
+| `Provisioning is blocked for this client. Contact PostHog support if that is unexpected.`             | PostHog blocked provisioning for your app, for example because the review rejected it. Registering again doesn't lift the block. |
+
+Once the review accepts your app, the `provisioning_enabled` check reports `Active`.
+
+The review looks at your metadata document and your public website. To pass:
+
+- Host the metadata document on the live production domain of your product. A subdomain such as `api.yourapp.com` is fine.
+- Use a real `client_name` that matches your product.
+- Set `client_uri` to your product's homepage.
+- Optionally, add `logo_uri`, `tos_uri`, `policy_uri`, and `contacts` on the same domain. These help the review.
+
+PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP address, or on a throwaway host such as a tunnel (for example ngrok), a request bin, or a JSON or paste hosting service. Register from the website your users actually use, not from a local or preview environment.
+
+Once PostHog accepts one client on a domain, other clients on the same registrable domain are accepted without a new review. For example, after `https://yourapp.com/.well-known/yourapp.json` is accepted, a staging client on `staging.yourapp.com` is accepted too.
 
 <a id="sign-requests-with-a-key-optional" />
 
