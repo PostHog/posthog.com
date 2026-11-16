@@ -37,9 +37,9 @@ export const workflows = {
     pricingDescription:
         'First 10,000 emails and 10,000 push and other destination dispatches free each month. Then starts at $0.003/email and $0.00075/dispatch, with volume discounts as usage grows.',
     seo: {
-        title: 'Email & Messaging – Email for product engineers',
+        title: 'Email & Messaging – Send email from your product data',
         description:
-            'Send transactional email from the PostHog SDK, broadcast to a cohort, and automate campaigns from live user behavior. 10K emails free monthly.',
+            'Send transactional email from the PostHog SDK, broadcasts to cohorts, and sequences triggered by events. 10,000 emails a month free.',
     },
     /**
      * Sections rendered on the Product surface (`/workflows`). Each entry
@@ -79,8 +79,8 @@ export const workflows = {
                 heading: 'Transactional email',
                 intro: (
                     <p>
-                        This is the email your code sends: password resets, sign-in codes, receipts, invites. One call
-                        from the SDK you already run, and the send shows up on the person who triggered it.
+                        Send password resets, sign-in codes, receipts, and invites from your backend. It's one call on
+                        the PostHog client you already run, and each email shows up on the person it went to.
                     </p>
                 ),
             },
@@ -96,9 +96,8 @@ export const workflows = {
                 heading: 'Broadcasts',
                 intro: (
                     <p>
-                        A broadcast is one email to a lot of people: a product update, a changelog, a webinar invite.
-                        The audience is a cohort or a property filter you already have in PostHog, so there is no list
-                        to export and nothing goes stale.
+                        Send a product update, changelog, or event invite to a cohort you already have in PostHog.
+                        There's no list to upload and no sync job to keep running.
                     </p>
                 ),
             },
@@ -114,9 +113,9 @@ export const workflows = {
                 heading: 'Automation',
                 intro: (
                     <p>
-                        Campaigns that run themselves. An event starts one, a delay or a condition decides what happens
-                        next, and each step can send an email, a push, a Slack message, or a webhook. This is where
-                        Workflows started, and it still does the Zapier-shaped jobs too.
+                        Build sequences that start from an event, a cohort, or a schedule. Each step can wait, branch,
+                        or send an email, push notification, Slack message, or webhook. This is the original Workflows
+                        product, and it still replaces most Zapier jobs.
                     </p>
                 ),
             },
@@ -162,17 +161,16 @@ export const workflows = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Email for product engineers',
-        description:
-            'Send the password reset, the product update, and the onboarding drip from one SDK, then see what people did after they opened it.',
+        title: 'Send email from your product data',
+        description: '"Send a product update to everyone who used the old editor this month"',
         eli5: (
             <>
                 <p>
-                    Transactional email, broadcasts, and automated campaigns, sent from the same PostHog SDK that tracks
-                    your events. Start with the password reset. When that works, send a product update to a cohort, then
-                    wire up the onboarding drip. Every email lands on the person who got it, next to their events and
-                    replays, so you can see whether the reset got them back in and whether the drip got them to
-                    activate. The first 10,000 emails a month are free.
+                    Email & Messaging sends the email your product needs, from password resets and receipts to product
+                    updates and onboarding sequences, from the same PostHog SDK that captures your events. Every send,
+                    open, and click is an event on the person who got it, so you check whether an email worked in the
+                    funnels and replays you already use, instead of exporting a CSV from your email tool. The first
+                    10,000 emails a month are free.
                 </p>
             </>
         ),
@@ -221,23 +219,23 @@ export const workflows = {
         rows: [
             [
                 'Backend Engineers',
-                'Send the password reset from the SDK you already run, and drop Resend, Postmark, or SendGrid from the stack',
+                'Send password resets, sign-in codes, and receipts from the PostHog SDK you already run, without a separate Resend or Postmark account',
             ],
             [
                 'Product Engineers',
-                'See whether the reset email was delivered, opened, and clicked, on the same person as their session replay',
+                'See whether a reset email was delivered, opened, and clicked, then watch the session that followed',
             ],
             [
                 'Growth Engineers',
-                'Trigger an onboarding drip from sign-up, nudge the people who stall, and A/B test the message',
+                'Start an onboarding sequence at sign-up and email the people who stall before they activate',
             ],
             [
                 'Product Marketers',
-                'Send a product update to a cohort you already have, with opt-outs by category and a conversion goal on every broadcast',
+                'Send a product update to a cohort you already built, and let people opt out of one category instead of everything',
             ],
             [
-                'Product Leads / Technical PMs',
-                'Replace Customer.io and Zapier with flows that run on the events you already track',
+                'Founders',
+                'Replace Customer.io and the Zapier glue with one tool that runs on the events you already track',
             ],
         ],
     },
@@ -252,7 +250,7 @@ export const workflows = {
         title: 'Install',
         headline: 'Install',
         description:
-            "Workflows is a no-code product – you can create and launch Workflows without installing any SDK. However, installing a PostHog SDK unlocks event-based triggers, letting you start Workflows when users perform specific actions in your app. These are the same SDKs used for Product Analytics – if you already have PostHog installed, you're good to go.",
+            "You can build broadcasts and sequences in PostHog without an SDK. Install a PostHog SDK to send transactional email from your backend and to start sequences from events. It's the same SDK as Product Analytics, so if PostHog is installed already, you're set.",
         productSlug: 'workflows',
         categories: ['web', 'mobile', 'backend-languages', 'backend-frameworks'],
     },

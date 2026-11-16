@@ -35,12 +35,12 @@ export const broadcasts: CarouselSlide[] = [
         icon: <IconMegaphone className="size-5" />,
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'One email to an audience, once or on a schedule',
+        heading: 'Send to an audience now, later, or every week',
         description: (
             <>
                 <p>
-                    Pick who gets it, write it, choose when, and launch. PostHog saves a draft as you go, and a
-                    broadcast can recur, so a weekly digest is a broadcast on a schedule.
+                    Pick the audience, write the email, and choose when it goes. PostHog saves a draft as you go, and a
+                    recurring broadcast covers a weekly digest.
                 </p>
                 {list([
                     {
@@ -78,8 +78,8 @@ export const broadcasts: CarouselSlide[] = [
         description: (
             <>
                 <p>
-                    The people you message are the people in your analytics, so there is no list to upload and no sync
-                    job to keep it fresh.
+                    You email the same people you see in your analytics, so there's no list to upload and no sync job to
+                    keep running.
                 </p>
                 {list([
                     {
@@ -108,10 +108,12 @@ export const broadcasts: CarouselSlide[] = [
         icon: <IconPencil className="size-5" />,
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'Templates, merge tags, and a test send',
+        heading: 'Write emails with templates and merge tags',
         description: (
             <>
-                <p>Build emails in the editor or start from a template, then use them in any broadcast or campaign.</p>
+                <p>
+                    Build emails in the editor or start from a template, then reuse them in any broadcast or sequence.
+                </p>
                 {list([
                     {
                         label: 'Templates',
@@ -148,12 +150,12 @@ export const broadcasts: CarouselSlide[] = [
         icon: <IconToggle className="size-5" />,
         progressBar: 'bg-red',
         layout: 'stack',
-        heading: 'Opt-outs by category, not all or nothing',
+        heading: 'Let people opt out of one category at a time',
         description: (
             <>
                 <p>
-                    Someone can decline your newsletter and still get a receipt. Message categories keep the two apart,
-                    and PostHog enforces them on every send.
+                    Someone can turn off your newsletter and still get their receipts. Message categories keep the two
+                    apart, and PostHog checks them on every send.
                 </p>
                 {list([
                     {
@@ -192,12 +194,12 @@ export const broadcasts: CarouselSlide[] = [
         icon: <IconGraph className="size-5" />,
         progressBar: 'bg-green',
         layout: 'stack',
-        heading: 'Every send is an event',
+        heading: 'See who converted after a broadcast',
         description: (
             <>
                 <p>
-                    Opens and clicks are table stakes. What you want to know is whether the email got anyone to upgrade,
-                    and because every send is an event on the person, that is a funnel like any other.
+                    Every send is an event on the person, so you can see who upgraded after the email in a funnel, the
+                    same way you check any other step.
                 </p>
                 {list([
                     {

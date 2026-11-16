@@ -152,7 +152,7 @@ export const tools = [
     {
         handle: 'workflows_emails',
         name: 'Email & Messaging',
-        description: 'Transactional email, broadcasts, and automation on your product data',
+        description: 'Send transactional email, broadcasts, and sequences from your product data',
         slug: 'workflows',
         category: 'automation',
         aliases: ['Workflows', 'Customer messaging'],

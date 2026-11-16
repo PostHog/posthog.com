@@ -203,12 +203,12 @@ export const transactional: CarouselSlide[] = [
         icon: <IconCode className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'One call from the SDK you already run',
+        heading: 'Send from the SDK you already use',
         description: (
             <>
                 <p>
-                    Add a project secret API key to the PostHog client you already run, in Node.js, Python, Go, .NET,
-                    Ruby, Rust, Elixir, or PHP, and send. The REST API works from anything else. The client retries,
+                    Add a project secret API key to your PostHog client and call send. Node.js, Python, Go, Ruby, PHP,
+                    .NET, Rust, and Elixir all support it, and the REST API covers everything else. The client retries,
                     sets the idempotency key, and returns a message ID.
                 </p>
                 <SendCode />
@@ -238,12 +238,12 @@ export const transactional: CarouselSlide[] = [
         icon: <IconLaptop className="size-5" />,
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'Design, publish, and watch every send',
+        heading: 'Design and publish templates in PostHog',
         description: (
             <>
                 <p>
-                    Each transactional email has its own page: design it, publish a version, and see what happened to
-                    every send without leaving PostHog.
+                    Each transactional email gets its own page in PostHog, where you write it, publish versions, and see
+                    every send.
                 </p>
                 {list([
                     {
@@ -275,12 +275,12 @@ export const transactional: CarouselSlide[] = [
         icon: <IconSend className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'A send API built for retries',
+        heading: 'Retry without sending twice',
         description: (
             <>
                 <p>
-                    Each send returns a message ID, each failure returns an error code you can branch on, and an
-                    idempotency key means a retry never sends twice.
+                    Every send returns a message ID. Errors come back with a code you can handle, and an idempotency key
+                    makes a retry safe.
                 </p>
                 {list([
                     {
@@ -318,12 +318,12 @@ export const transactional: CarouselSlide[] = [
         icon: <IconDecisionTree className="size-5" />,
         progressBar: 'bg-orange',
         layout: 'stack',
-        heading: 'Out the door the moment you call send',
+        heading: 'Send right away from your own domain',
         description: (
             <>
                 <p>
-                    There is no queue of marketing email in front of your password reset. It goes out when you call
-                    send, from a domain you verified, and if PostHog refuses an address it tells you why.
+                    Password resets don't wait behind a marketing send. PostHog sends from your verified domain, and
+                    returns an error code when it can't deliver to an address.
                 </p>
                 {list([
                     {
@@ -360,12 +360,12 @@ export const transactional: CarouselSlide[] = [
         icon: <IconGraph className="size-5" />,
         progressBar: 'bg-blue',
         layout: 'stack',
-        heading: 'See what happened after the email',
+        heading: 'See what people did after the email',
         description: (
             <>
                 <p>
-                    Delivery is the start. Every send sits on the person's timeline next to their events, replays, and
-                    flags, so you can see whether the reset email got them back in.
+                    Sends, opens, and clicks are events on the person, next to their sessions and feature flags. Check
+                    whether the reset email got them to log back in.
                 </p>
                 {list([
                     {
@@ -393,12 +393,12 @@ export const transactional: CarouselSlide[] = [
         icon: <IconShieldLock className="size-5" />,
         progressBar: 'bg-red',
         layout: 'stack',
-        heading: 'Sign-in codes stay secret',
+        heading: 'Keep sign-in codes out of logs',
         description: (
             <>
                 <p>
-                    Turn on <strong>Protect sensitive data</strong> for emails that carry codes, reset links, or
-                    receipts, in the template or per send from code.
+                    Turn on <strong>Protect sensitive data</strong> for emails with codes or reset links, in the
+                    template or per send from code. PostHog then keeps no copy of the content and skips link tracking.
                 </p>
                 {list([
                     {

@@ -29,13 +29,12 @@ export const automation: CarouselSlide[] = [
         icon: <IconDecisionTree className="size-5" />,
         progressBar: 'bg-teal',
         layout: 'stack',
-        heading: 'Sequences that follow what a person does',
+        heading: 'Send sequences based on what people do',
         description: (
             <>
                 <p>
-                    A welcome email when someone signs up, then a nudge a day later for the ones who haven't finished
-                    onboarding. You build it on a canvas, and the branches use the same events and properties as your
-                    insights.
+                    Send a welcome email at sign-up, then a nudge a day later to people who haven't finished onboarding.
+                    You build it on a canvas, and branches use the same events and properties as your insights.
                 </p>
                 {list([
                     {
@@ -69,11 +68,11 @@ export const automation: CarouselSlide[] = [
         icon: <IconBolt className="size-5" />,
         progressBar: 'bg-yellow',
         layout: 'stack',
-        heading: 'Triggers: an event, a cohort, or a schedule',
+        heading: 'Start from an event, a cohort, or a schedule',
         description: (
             <>
                 <p>
-                    Every message starts from something PostHog already knows: an event a person just did, a cohort they
+                    A sequence starts from something PostHog already knows: an event someone just did, a cohort they
                     joined, or a schedule you set.
                 </p>
                 {list([
