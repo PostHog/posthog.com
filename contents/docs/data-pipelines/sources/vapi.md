@@ -34,6 +34,9 @@ Once the syncs are complete, you can start using Vapi data in PostHog.
 | `chats`         | Text-based chat interactions with assistants                                                     | Incremental (by `createdAt`)                |
 | `sessions`      | Sessions that group related chats and calls into one conversation context                        | Incremental (by `createdAt`)                |
 | `campaigns`     | Outbound call campaigns with live progress counters                                              | Full refresh                                |
+| `scorecards`    | Scorecards that grade completed calls by awarding points per metric                              | Full refresh                                |
+| `evals`         | Eval definitions: mock conversations that test an assistant's or squad's responses               | Full refresh                                |
+| `eval_runs`     | Runs of an eval against an assistant or squad, with status, per-eval results, and cost           | Full refresh                                |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
@@ -41,7 +44,9 @@ Once the syncs are complete, you can start using Vapi data in PostHog.
 
 The `calls` table supports incremental sync by either `createdAt` (default) or `updatedAt`. Using `updatedAt` re-syncs calls whose analysis or artifacts were attached after the call ended. The `chats` and `sessions` tables only support `createdAt` incremental sync since the Vapi API can't sort these by `updatedAt`.
 
-Configuration tables like `assistants`, `squads`, `tools`, and `campaigns` use full refresh because they mutate in place – a `createdAt` watermark would miss updates to existing records.
+Configuration tables like `assistants`, `squads`, `tools`, `campaigns`, `scorecards`, and `evals` use full refresh because they mutate in place – a `createdAt` watermark would miss updates to existing records.
+
+The `eval_runs` table also uses full refresh. The status, results, and costs of an eval run change until the run ends, and the Vapi API can only sort eval runs by `createdAt`, so a `createdAt` watermark would not get the final values of runs that are in progress.
 
 ## Configuration
 
