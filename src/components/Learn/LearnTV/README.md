@@ -8,7 +8,8 @@ The Learn video player. Each video opens in its own Learn TV modal window, the s
 | --- | --- |
 | `Player.tsx` | `LearnTVPlayer`: the `<video>`, its captions track, and the control bar. Its `children` render prop gets the caption cues and `playFrom` |
 | `Transcript.tsx` | The transcript list for a `LearnTVPlayer` |
-| `index.tsx` | `LearnTV`: the Learn TV window. Its own title bar ("Learn TV" and the centered video title), the player, the details with Up next, and the transcript |
+| `index.tsx` | `LearnTV`: the Learn TV window body. A visually hidden `h1` with the video title, the player, the details with Up next, and the transcript |
+| `LearnTVPage.tsx` | `LearnTVPage`: the page for one video, by `slug`. It sets the SEO tags and the window title ("Learn TV") |
 | `videos.ts` | `LEARN_VIDEOS`, the list of videos, and the `learnVideoUrl` and `learnVideoBySlug` helpers |
 | `VideoLibrary.tsx` | The `/learn/videos` grid, grouped by product with the same heading as the prompt library (product icon and color) |
 | `VideoCard.tsx` | A poster card that opens the Learn TV window. Pass `to` to link somewhere else |
@@ -19,9 +20,10 @@ The Learn video player. Each video opens in its own Learn TV modal window, the s
 1. Compress the MP4, then upload it to Cloudinary. Do not commit video files. The first video uses HandBrake: 1920×1080, constant 30 fps, H.264 (x264, Slow preset), 630 kbps two-pass, and AAC 128 kbps stereo. That is about 24 MB for 4:24. Keep the frame rate and the frame count of the edit, or the captions go out of sync.
 2. Put the WebVTT captions in `static/learn/videos/<slug>.en.vtt`. Do not edit the caption text. Add the SRT next to it if you have one.
 3. Add the video to `LEARN_VIDEOS` in `videos.ts`. If the previous video's `next` has no `url`, add one.
-4. Add `src/pages/learn/videos/<slug>.tsx`. Copy `aio-traces.tsx`.
-5. If the product has a Learn hub, add `'videos'` to that volume's `learnHub.pages` in `src/constants/pocketGuides.ts` and add `src/pages/learn/<product>/videos.tsx`. Copy the AI Observability page: a header, a divider, and a `VideoCard` per video.
-6. Add a `/learn/videos/<slug>` window entry in `src/context/App.tsx`. Copy the `aio-traces` entry.
+4. Add `src/pages/learn/videos/<slug>.tsx`, which renders `<LearnTVPage slug="<slug>" />`.
+5. If the product's Learn hub has no Videos page yet, add `'videos'` to that volume's `learnHub.pages` in `src/constants/pocketGuides.ts`. Then add `src/pages/learn/<product>/videos.tsx`, which renders `LearnVideosPage` (in `components/Learn`) with the product's handle, name, and intro line. The hub overview then shows the product's first video in its Watch the lesson section.
+
+`src/context/App.tsx` builds a window entry for each video in `LEARN_VIDEOS`, so a new video needs no window entry.
 
 ## Video hosting
 
@@ -46,7 +48,6 @@ The control bar copies the layout and styles of `components/MediaPlayer` (`quick
 
 ## Window
 
-The window entry turns the toolbar off, so `LearnTV` draws its own title bar with the video title centered next to "Learn TV". `AppWindow` puts the close button at the top right.
-
+Each video's window uses `LEARN_TV_WINDOW` in `src/context/App.tsx`: a standard modal, 960×1000, with the toolbar on. `LearnTVPage` sets the toolbar title to "Learn TV". The video title is not shown. It is the window's `h1` for screen readers only.
 
 `AppWindow` normally wraps every `/learn/*` page in `LearnShell`. A Learn page with a `modal` window entry skips the shell and opens as a modal, like `/demo`.

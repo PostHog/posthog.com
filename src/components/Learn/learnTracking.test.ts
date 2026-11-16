@@ -210,6 +210,7 @@ test('Twig clicks use current consent and SDK, and create profiles only for a ha
         '../../hooks/usePostHog': () => window.posthog,
         './PocketGuides/Cover': () => null,
         './LearnTV/VideoCard': () => null,
+        './LearnTV/videos': { LEARN_VIDEOS: [] },
         './PocketGuides/bookOpening': { openPocketGuide: () => undefined },
         './PocketGuides/bookModel': { learnChapterPath: (base: string) => base, useBookPages: () => [] },
     })

@@ -9,7 +9,7 @@ import usePocketGuideCounts from '../../hooks/usePocketGuideCounts'
 import usePostHog from '../../hooks/usePostHog'
 import Cover from './PocketGuides/Cover'
 import VideoCard from './LearnTV/VideoCard'
-import type { LearnVideo } from './LearnTV/videos'
+import { LEARN_VIDEOS } from './LearnTV/videos'
 import { openPocketGuide } from './PocketGuides/bookOpening'
 import { learnChapterPath, useBookPages } from './PocketGuides/bookModel'
 import { handOffToTwig } from './learnTracking'
@@ -104,8 +104,6 @@ interface LearnLandingContent {
     storyText?: string
     /** Shows the Learn by doing preview, which links to Twig. */
     playground?: LearnLandingPlayground
-    /** Shows a Watch the lesson section, whose card opens the video in Learn TV. */
-    video?: LearnVideo
 }
 
 /** A Learn hub overview: the product, its pocket guide, and the agent and Twig previews when the hub has them. */
@@ -119,9 +117,12 @@ export default function LearnLanding({
     storyLead,
     storyText,
     playground,
-    video,
 }: LearnLandingProps & LearnLandingContent): JSX.Element {
     const volume = volumeById(volumeId)
+    // Like the agent preview, the hub's pages decide: a hub that lists 'videos' shows its first video here.
+    const video = volume?.learnHub?.pages?.includes('videos')
+        ? LEARN_VIDEOS.find((v) => v.productHandle === volume.productHandle)
+        : undefined
     const counts = usePocketGuideCounts()
     const coverRef = React.useRef<HTMLDivElement>(null)
     const posthog = usePostHog()
@@ -208,7 +209,7 @@ export default function LearnLanding({
                             <p className="mt-0 mb-5 leading-relaxed text-secondary">{video.description}</p>
                             <OSButton
                                 asLink
-                                to="/learn/videos"
+                                to={`${learnUrl}/videos`}
                                 onClick={() => selectResource('video', 'all_videos')}
                                 variant="secondary"
                                 size="md"

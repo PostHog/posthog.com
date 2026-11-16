@@ -4,18 +4,13 @@ import LearnTVPlayer from './Player'
 import Transcript from './Transcript'
 import type { LearnVideo } from './videos'
 
-/** The Learn TV window: the video title, the player, the video details with Up next, and the transcript. */
+/** The Learn TV window body: the player, the video details with Up next, and the transcript. AppWindow's toolbar shows
+ * "Learn TV". */
 export default function LearnTV({ video }: { video: LearnVideo }): JSX.Element {
     return (
         <div className="@container w-full h-full flex flex-col min-h-1" data-app="LearnTV">
-            {/* The window's title bar (the route has no toolbar), styled like AppWindow's: "Learn TV" on the left,
-                the video title centered, and room on the right for the window's close button. */}
-            <div className="relative flex min-h-[34px] items-center bg-primary py-0.5 pl-1 pr-10">
-                <p className="m-0 ml-1.5 shrink-0 font-rounded text-sm font-semibold text-primary">Learn TV</p>
-                <h1 className="pointer-events-none absolute inset-x-24 m-0 truncate text-center font-rounded text-sm font-semibold leading-tight text-primary">
-                    {video.title}
-                </h1>
-            </div>
+            {/* The video title is not shown, but screen readers still get a heading for the window. */}
+            <h1 className="sr-only">{video.title}</h1>
             {/* The primary scheme, so bg-primary and bg-accent are the panel (#FDFDF8) and chrome (#E5E7E0) neutrals of the
                 Learn TV design. Without it, the window's tertiary scheme makes the player chrome a darker grey. */}
             <div data-scheme="primary" className="flex flex-col bg-primary">
