@@ -10,14 +10,15 @@
 2. Surfaced regressions/frustrating paths proactively raised with the team, grounded in tested hypothesis to avoid hallucinations with possible suggestions for fixes.
 3. A way to continuously help our customers get to their data in an efficient way (through app, API and MCP), for example by spotting slow (saved) queries and offering (data-backed) ways to make these faster.
 
-### Objective 2: Make query-performance experiments easy to run and trust <TeamMember name="Andy Zhao" photo />
+### Objective 2: Run HogQL from one dedicated query service <TeamMember name="Andy Zhao" photo />
 
-**Motivation:** We can already experiment with query variants, but testing ClickHouse versions, sharding and physical data layouts requires more setup. A repeatable environment would let us explore larger improvements and build confidence before production changes.
+**Motivation:** HogQL is a shared library that around 10 independently deployed services run in-process. A single service that owns HogQL execution gives us one place to deploy, watch and roll back.
 
 **What we'll ship:**
 
-1. A (documented) test environment with representative data distributions and a repeatable way to run experiments.
-2. Clear metrics / benchmark results at the end of a test to be able to compare across experiments.
+1. A HogQL query service: one deployment that compiles and runs HogQL queries, with a single deploy and a single rollback.
+2. The query API and background workers moved over to call it, highest query volume first, with a tracked list of what still runs HogQL in-process.
+3. Gradual rollouts for HogQL changes: a new version takes a slice of traffic first and the rollout stops when query failure rate goes up.
 
 ### Objective 3: Safely bring the JSON Events Table into production <TeamMember name="Sandy Spicer" photo />
 
