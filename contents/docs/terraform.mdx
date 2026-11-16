@@ -25,7 +25,7 @@ terraform {
 
 Then run `terraform init` to download it.
 
-The `~> 1.0` constraint accepts any 1.x release. The [Terraform Registry](https://registry.terraform.io/providers/PostHog/posthog/latest) lists the latest version, and the [changelog](https://github.com/PostHog/terraform-provider-posthog/blob/main/CHANGELOG.md) lists what changed in each one.
+The `~> 1.0` constraint accepts any release in major version 1. The [Terraform Registry](https://registry.terraform.io/providers/PostHog/posthog/latest) lists the latest version, and the [changelog](https://github.com/PostHog/terraform-provider-posthog/blob/main/CHANGELOG.md) lists what changed in each one.
 
 ## Authenticate
 
@@ -239,7 +239,7 @@ The provider includes these resources:
 | [`posthog_dashboard_layout`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/dashboard_layout) | The tiles on a dashboard and where they sit |
 | [`posthog_early_access_feature`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/early_access_feature) | Early access features |
 | [`posthog_experiment`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/experiment) | Experiments |
-| [`posthog_external_data_source`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/external_data_source) | Data warehouse sources, such as Stripe or Postgres |
+| [`posthog_external_data_source`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/external_data_source) | Data Warehouse sources, such as Stripe or Postgres |
 | [`posthog_feature_flag`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/feature_flag) | Feature flags |
 | [`posthog_hog_function`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/hog_function) | Destinations, transformations, and webhooks |
 | [`posthog_insight`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/insight) | Insights |
@@ -256,7 +256,7 @@ The provider includes these resources:
 | [`posthog_role_membership`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/role_membership) | Role members |
 | [`posthog_subscription`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/subscription) | Dashboard and insight subscriptions |
 | [`posthog_survey`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/survey) | Surveys |
-| [`posthog_warehouse_table`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/warehouse_table) | Data warehouse tables backed by files in your own bucket |
+| [`posthog_warehouse_table`](https://registry.terraform.io/providers/PostHog/posthog/latest/docs/resources/warehouse_table) | Data Warehouse tables backed by files in your own bucket |
 
 It also includes these data sources:
 
