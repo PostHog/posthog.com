@@ -81,6 +81,8 @@ If the audience is larger than your project's batch limit, PostHog doesn't send 
 
 The broadcast page shows its status and how many emails were sent, delivered, opened, and clicked. If you set a goal, it also shows how many recipients converted. The **Broadcasts** list shows the same numbers for every broadcast.
 
+If your email provider accepted some emails but didn't report a delivery or a bounce for them, the broadcast page shows these emails as **With no result**. This often happens when the receiving mail server asks to try again later. When a result arrives later, the email moves to **Delivered** or **Bounced**. Some emails never get a result.
+
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcasts_docs_results_light_9a00756ef5.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/broadcasts_docs_results_dark_5aba53c8ef.png"
