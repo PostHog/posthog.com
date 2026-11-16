@@ -173,7 +173,7 @@ If you believe you have a customer who falls into one of these categories and wo
 
 ## Additional credit purchase
 
-It's often difficult to right-size the credit needed for a longer term plan, so customers can buy additional credit in the first half of a contract term (e.g. 6 months for an annual plan). See [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term) for how those purchases are priced. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
+It's often difficult to right-size the credit needed for a longer term plan, so customers can buy additional credit in the first half of their full contract term. On an annual plan, that is the first 6 months. On a multi-year contract, it is the first half of the whole term, not of each contract year. For example, on a 3-year contract the customer can buy additional credit until the end of month 18. This is the same for multi-year contracts paid up front and paid yearly. See [when they don't have enough credit to cover their term](#when-they-dont-have-enough-credit-to-cover-their-term) for how those purchases are priced. Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not. There are also alerts set up in `#sales-alerts` to help notify account owners about this.
 
 ## Price guarantees & lock-ins
 
@@ -203,7 +203,7 @@ The dates for the subsequent invoices are in the `Contract Setup` Google calenda
 
 If a customer wishes to use subsequent year's credit early they must agree to pay the invoice for that year early before the credit is transferred.
 
-The additional credit purchase applies to each year separately, e.g. they can purchase additional credits at the same discount level in the first 6 months of each year.
+The additional credit purchase window is the first half of the full contract term, the same as for contracts paid up front. It does not reset each contract year. For example, a 3-year contract paid yearly that starts on 1 January 2026 can buy additional credits at the same discount level until 1 July 2027 (the end of month 18). After that, the customer cannot top up, even after a new annual invoice.
 
 You can see a signed multi-year contract set up in this way by navigating to Documents -> Examples (folder) inside of [PandaDoc](https://app.pandadoc.com).
 
