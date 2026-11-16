@@ -910,7 +910,7 @@ export const posthog = {
             cross_domain_tracking: true,
             mobile_sdks: true,
             native_data_sources: true,
-            sdks: '14',
+            sdks: '19',
             server_side_sdks: true,
             sql: true,
             terraform: true,
