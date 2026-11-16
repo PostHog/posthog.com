@@ -8,6 +8,7 @@ import { GatsbyNode } from 'gatsby'
 import fs from 'fs'
 import path from 'path'
 import DataLoader from 'dataloader'
+import { queryJson } from './buildReads'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
 import { isSdkReferenceFile, splitFrontmatter } from './sdkMarkdownReferences'
 
@@ -33,6 +34,34 @@ const cloudinaryCache = {}
 // restored in the preview build (see .github/workflows/{cache-warmup,deploy-preview}.yml), this
 // lets preview builds skip Cloudinary requests for cached images.
 const CLOUDINARY_CACHE_FILE = path.resolve(__dirname, '../.cloudinary-resources.json')
+const ashbyLocations = new Map<string, Promise<string>>()
+
+function getAshbyLocationName(id: string): Promise<string> {
+    let location = ashbyLocations.get(id)
+    if (!location) {
+        location = queryJson<{ results?: { name?: string } }>(
+            'https://api.ashbyhq.com/location.info',
+            { locationId: id },
+            {
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: `Basic ${Buffer.from(`${process.env.ASHBY_API_KEY}:`).toString('base64')}`,
+                },
+            }
+        )
+            .then((data) => {
+                const name = data.results?.name
+                if (typeof name !== 'string' || !name.trim()) throw new Error(`Ashby location ${id} has no name`)
+                return name
+            })
+            .catch((error) => {
+                ashbyLocations.delete(id)
+                throw error
+            })
+        ashbyLocations.set(id, location)
+    }
+    return location
+}
 
 let templateListPromise: Promise<any[]> | null = null
 async function getTemplateList() {
@@ -86,6 +115,7 @@ function parseSkillFrontmatter(raw: string): { name?: string; description?: stri
 
 let cloudinaryLoader: DataLoader<string, any> | undefined
 export const onPreInit: GatsbyNode['onPreInit'] = async function ({ actions }) {
+    ashbyLocations.clear()
     if (
         !process.env.CLOUDINARY_API_KEY ||
         !process.env.CLOUDINARY_API_SECRET ||
@@ -443,28 +473,6 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             node.logo___NODE = image && image.id
         }
     }
-
-    const getAshbyLocationName = async (id) =>
-        fetch(`https://api.ashbyhq.com/location.info`, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-                Authorization: `Basic ${Buffer.from(`${process.env.ASHBY_API_KEY}:`).toString('base64')}`,
-            },
-            body: JSON.stringify({ locationId: id }),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (!data?.results?.name) {
-                    console.log('No name found for location', data)
-                }
-                return data?.results?.name
-            })
-            .catch((e) => {
-                console.error('Error fetching Ashby location name', e)
-                return null
-            })
 
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')

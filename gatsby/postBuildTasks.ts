@@ -1,6 +1,6 @@
 import path from 'path'
 import fs from 'fs'
-import nodeFetch from 'node-fetch'
+import { readBytes } from './buildReads'
 
 import pLimit from 'p-limit'
 import qs from 'qs'
@@ -20,23 +20,14 @@ export const createOGImages = async (data) => {
     if (!fs.existsSync(ogImagesDir)) fs.mkdirSync(ogImagesDir, { recursive: true })
     const fontDir = path.resolve(__dirname, '../fonts')
     if (!fs.existsSync(fontDir)) fs.mkdirSync(fontDir)
-    const res = await nodeFetch(process.env.CLOUDFRONT_FONT_URL, {
-        headers: {
-            Origin: 'https://posthog.com',
-        },
-    })
-    await new Promise((resolve, reject) => {
-        const fileStream = fs.createWriteStream(path.resolve(__dirname, '../fonts/matter.woff'))
-        res.body.pipe(fileStream)
-        res.body.on('error', (err) => {
-            reject(err)
+    const fontBuffer = Buffer.from(
+        await readBytes(process.env.CLOUDFRONT_FONT_URL, {
+            headers: {
+                Origin: 'https://posthog.com',
+            },
         })
-        fileStream.on('finish', function () {
-            resolve()
-        })
-    })
-
-    const fontBuffer = fs.readFileSync(path.resolve(__dirname, '../fonts/matter.woff'))
+    )
+    await fs.promises.writeFile(path.resolve(__dirname, '../fonts/matter.woff'), fontBuffer)
     const takumi = await createTakumiRenderer()
     await registerMatterFont(takumi, fontBuffer)
     const docsHandbookMenus = flattenMenu([...handbookSidebar, ...docsMenu.children])

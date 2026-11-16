@@ -12,6 +12,7 @@ import { tools } from '../src/data/tools'
 import dayjs from 'dayjs'
 import { fetchMCPToolDefinitions } from './utils/fetchMCPTools'
 import { QUESTIONS_TOPIC_SLUG } from '../src/components/Forum/questionTags'
+import { readJson } from './buildReads'
 
 const DEFAULT_CHANGELOG_PLAYLIST_ID = 'PLnOY1RYHjDfxcuWI_L1xwuhoXAsxR59VL'
 
@@ -1176,8 +1177,8 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                 { encodeValuesOnly: true }
             )
             const url = `${process.env.GATSBY_SQUEAK_API_HOST}/api/sdk-references?${referenceQuery}`
-            const { data } = await fetch(url).then((res) => res.json())
-            return (data ?? []) as Array<{ attributes?: { data?: Record<string, unknown> } }>
+            const { data } = await readJson<{ data?: Array<{ attributes?: { data?: Record<string, unknown> } }> }>(url)
+            return data ?? []
         }
 
         const createReferenceNode = (refData: Record<string, unknown>) => {

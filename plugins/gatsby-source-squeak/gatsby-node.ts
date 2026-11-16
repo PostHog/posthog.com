@@ -2,6 +2,7 @@ import { GatsbyNode } from 'gatsby'
 
 import qs from 'qs'
 import pLimit from 'p-limit'
+import { readJson } from '../../gatsby/buildReads'
 import authors from '../../src/data/authors.json'
 
 const authorProfileIds = authors.filter((a) => a.profile_id).map((a) => a.profile_id)
@@ -53,7 +54,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             }
         )
 
-        const profiles = await fetch(`${apiHost}/api/profiles?${profileQuery}`).then((res) => res.json())
+        const profiles = await readJson<any>(`${apiHost}/api/profiles?${profileQuery}`)
 
         for (const profile of profiles.data) {
             const { avatar, ...profileData } = profile.attributes
@@ -110,7 +111,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             },
             { encodeValuesOnly: true }
         )
-        const forumPosts = await fetch(`${apiHost}/api/questions?${forumPostQuery}`).then((res) => res.json())
+        const forumPosts = await readJson<any>(`${apiHost}/api/questions?${forumPostQuery}`)
         for (const post of forumPosts.data ?? []) {
             const { subject, body, permalink, resolved, forumTopic, forumTags, resolvedBy } = post.attributes
             const forumPost = {
@@ -147,7 +148,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         }
     )
 
-    const topics = await fetch(`${apiHost}/api/topics?${topicQuery}`).then((res) => res.json())
+    const topics = await readJson<any>(`${apiHost}/api/topics?${topicQuery}`)
 
     for (const topic of topics.data) {
         createNode({
@@ -222,7 +223,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
         }
     )
 
-    const teams = await fetch(`${apiHost}/api/teams?${teamQuery}`).then((res) => res.json())
+    const teams = await readJson<any>(`${apiHost}/api/teams?${teamQuery}`)
 
     for (const team of teams.data) {
         const { roadmaps, crest, miniCrest, teamImage, ...rest } = team.attributes
@@ -386,7 +387,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async (
             },
         })
 
-        const response = await fetch(`${apiHost}/api/roadmaps?${roadmapQuery}`).then((res) => res.json())
+        const response = await readJson<any>(`${apiHost}/api/roadmaps?${roadmapQuery}`)
         roadmaps.push(...response.data)
 
         if (response.meta.pagination.page < response.meta.pagination.pageCount) {
