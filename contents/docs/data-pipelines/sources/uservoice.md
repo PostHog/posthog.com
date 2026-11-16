@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The UserVoice connector syncs suggestions, forums, users, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
+The UserVoice connector syncs suggestions, forums, users, feedback records, CRM accounts, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
 ## Prerequisites
 
