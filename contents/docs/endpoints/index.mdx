@@ -16,12 +16,12 @@ Want to see one in production? Our [MCP leaderboard](/mcp/leaderboard) is powere
 
 <OSButton variant="primary" asLink to="/docs/endpoints/start-here">Get started</OSButton>
 
-## When to use endpoints
+## When to use Endpoints
 
 Use an endpoint whenever code, not a person, runs a PostHog query:
 
 - **Backend services and scheduled jobs** that pull counts, sums, or breakdowns on a schedule or per request.
-- **Customer-facing analytics**, where each of your users sees their own stats. Pass the user or customer ID as a [variable](/docs/endpoints/variables) instead of building SQL strings.
+- **Customer-facing analytics**, where each of your users sees their own stats. Pass each user's or customer's ID as a [variable](/docs/endpoints/variables) instead of building SQL strings.
 - **Internal tools and scripts** that run the same query more than once.
 
 For heavy aggregates that run often, turn on [materialization](/docs/endpoints/materialization) so requests read a precomputed table instead of scanning events. Not every query can be materialized. The materialization page lists the rules.
@@ -36,9 +36,10 @@ Use something else when:
 If your code calls `/api/projects/:project_id/query/`:
 
 1. Paste the SQL from your code into the [SQL editor](https://us.posthog.com/sql) and run it.
-2. Replace values your code changes on each call, like a user ID or a date, with variables: `WHERE properties.user_id = {variables.user_id}`.
+2. Replace values your code changes on each call, like a user ID or a date, with variables: `WHERE properties.user_id = {variables.user_id}`. Then add each variable in the **Variables** tab with its type, for example `user_id` as a `String`. You can't create the endpoint while the query uses a variable that isn't defined.
 3. [Create an endpoint](/docs/endpoints/start-here/create-endpoint) from the query. If it aggregates over a lot of events, turn on materialization.
-4. In your code, replace the `/query` request with a request to the endpoint:
+4. Get an API key with the `endpoint:read` scope. A key that only has the **Query Read** permission can't run endpoints. See [authentication](/docs/endpoints/surfaces/api#authentication) for which key type to use.
+5. In your code, replace the `/query` request with a request to the endpoint:
 
    ```bash
    curl -X POST \
@@ -48,7 +49,7 @@ If your code calls `/api/projects/:project_id/query/`:
      "<ph_app_host>/api/environments/{project_id}/endpoints/{endpoint_name}/run"
    ```
 
-   To page through results, pass `limit` and `offset` in the request body. Unlike `/query`, endpoints support `offset`.
+   To page through results from a SQL endpoint, pass `limit` and `offset` in the request body. Endpoints built from insights don't support pagination.
 
 If your code pages through raw rows to copy them somewhere else, move it to [batch exports](/docs/data-pipelines/batch-exports) instead.
 

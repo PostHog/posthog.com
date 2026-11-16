@@ -9,9 +9,9 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 API queries let you run SQL and insight queries against your PostHog data. Use them for one-off and exploratory queries.
 
-<CalloutBox icon="IconInfo" type="action" title="Use endpoints for production code">
+<CalloutBox icon="IconInfo" type="action" title="Use Endpoints for production code">
 
-If your code, script, scheduled job, or customer-facing feature runs a query more than once, use [endpoints](/docs/endpoints) instead of `/query`. An endpoint saves the query in PostHog and gives you a named route to call. Use [variables](/docs/endpoints/variables) for per-user or per-customer lookups, and [materialization](/docs/endpoints/materialization) for heavy aggregates. Materialized endpoints have higher limits than `/query` (see [rate limits](/docs/api/queries#rate-limits)).
+If your code, script, scheduled job, or customer-facing feature runs a query more than once, use [Endpoints](/docs/endpoints) instead of `/query`. An endpoint saves the query in PostHog and gives you a named route to call. Use [variables](/docs/endpoints/variables) for per-user or per-customer lookups, and [materialization](/docs/endpoints/materialization) for heavy aggregates. Materialized endpoints have higher limits than `/query` (see [rate limits](/docs/api/queries#rate-limits)).
 
 - To ask questions about your data from an AI agent, use the [PostHog MCP](/docs/model-context-protocol).
 - To export data to a warehouse or another tool, use [batch exports](/docs/data-pipelines/batch-exports).
@@ -22,7 +22,7 @@ See [Endpoints vs Query API](/docs/endpoints/endpoints-vs-query-api) for a full 
 
 <CalloutBox icon="IconWarning" type="caution" title="The /query endpoint is not for exports">
 
-The `/query` endpoint is intended for ad-hoc and exploratory analytics. For embedded or customer-facing analytics, use [endpoints](/docs/endpoints). It is **not a supported export mechanism**.
+The `/query` endpoint is intended for ad-hoc and exploratory analytics. For embedded or customer-facing analytics, use [Endpoints](/docs/endpoints). It is **not a supported export mechanism**.
 
 - **Bulk or recurring exports of `events`, `persons`, or `query_log` are not supported** over `/query`. Use [batch exports](/docs/data-pipelines/batch-exports) for ETL, data warehouse syncs, and any integration that pulls more than a few thousand rows on a schedule. For one-off bulk exports, use [file download exports](/docs/data-pipelines/file-download-exports).
 - **Third-party connectors must use [batch exports](/docs/data-pipelines/batch-exports) or [file download exports](/docs/data-pipelines/file-download-exports)**, not `/query`. Connectors built on `/query` are not supported and will be rate-limited or rejected.
@@ -438,7 +438,7 @@ API queries are limited at the project-level to:
   - applies to query execution time, not HTTP request duration
 
 
-These limits are fixed. For production traffic, use [endpoints](/docs/endpoints). Materialized endpoints have higher rate and concurrency limits (see [endpoint rate limits](/docs/endpoints/rate-limits)). To pull raw data on a schedule, use [batch exports](/docs/data-pipelines/batch-exports), or a [file download export](/docs/data-pipelines/file-download-exports) for a one-off export.
+These limits are fixed. For production traffic, use [Endpoints](/docs/endpoints). Materialized endpoints have higher rate and concurrency limits (see [endpoint rate limits](/docs/endpoints/rate-limits)). To pull raw data on a schedule, use [batch exports](/docs/data-pipelines/batch-exports), or a [file download export](/docs/data-pipelines/file-download-exports) for a one-off export.
 
 If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
 
