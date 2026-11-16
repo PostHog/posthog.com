@@ -51,7 +51,7 @@ On the iOS and Android SDKs (`4.0.0`+) and the Flutter SDK (`6.0.0`+, except on 
 
 For large events, use the dedicated AI ingestion path – see [capturing large AI events](/docs/ai-observability/large-events).
 
-In Python, large events sent with `capture()` are dropped: posthog-python 7.x drops events over 900 KiB, and on 8.0 PostHog drops events over [the 1MB event limit](/docs/data/ingestion-warnings#discarded-event-exceeding-1mb-limit). Call `capture_ai()` instead, with the same arguments, to send events up to 8MB:
+In Python, large events sent with `capture()` are dropped: posthog-python `7.x.x` drops events over 900 KiB, and on `8.0.0` and later PostHog drops events over [the 1MB event limit](/docs/data/ingestion-warnings#discarded-event-exceeding-1mb-limit). Call `capture_ai()` instead, with the same arguments, to send events up to 8MB:
 
 ```python
 posthog.capture_ai("$ai_generation", distinct_id="user_123", properties={...})
