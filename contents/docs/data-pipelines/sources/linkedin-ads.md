@@ -23,7 +23,7 @@ Additional reports will be added based on user feedback we receive via our [in-a
 
 ## Requirements
 
-- A LinkedIn Ads account with permission to access data from accounts you want to sync.
+- A LinkedIn member with a role on the ad account you want to sync in [Campaign Manager](https://www.linkedin.com/campaignmanager/) (such as Account Manager, Campaign Manager, Creative Manager, or Viewer).
 - Your numeric account ID from the campaign manager (digits only – see how to find it in the image below, or take it from the URL like `https://www.linkedin.com/campaignmanager/accounts/(ID here)/overview?businessId=personal`)
 
 <ProductScreenshot
@@ -89,3 +89,15 @@ To resolve this:
 1. Contact LinkedIn to resolve the account restriction.
 2. Once the restriction is lifted, re-authorize the LinkedIn Ads integration in PostHog.
 3. Re-sync the source.
+
+### Empty account picker
+
+If the account picker shows no accounts when setting up LinkedIn Ads, or you see the error "The LinkedIn member you connected with has no role on any ad account", it means the LinkedIn member you used to connect has no role in Campaign Manager.
+
+LinkedIn only returns ad accounts where the signed-in member has an assigned role. Reconnecting with the same member returns the same empty list.
+
+To resolve this:
+
+1. Ask an account admin to add your LinkedIn member to the ad account in [Campaign Manager](https://www.linkedin.com/campaignmanager/) with an appropriate role.
+2. Or, reconnect with a LinkedIn member who already has a role on the ad account.
+3. After the role is added or you've reconnected, try setting up the source again.
