@@ -51,3 +51,16 @@ You can search the table by owner name, email, or scope. Click any of the **Owne
 The actual key secret is never exposed – only the masked value is shown.
 
 > **Note:** This feature requires a plan that includes organization security settings and is only visible to organization admins and owners.
+
+### Roll or revoke a member's key
+
+Organization admins and owners can roll or revoke one member's key from this table. Click the **...** menu at the end of the key's row, then select **Roll key** or **Revoke key**.
+
+- **Roll key** – The key gets a new secret that nobody sees. The old secret stops working immediately. The key keeps its scopes and settings, but it does not work until the owner rolls it again in their [personal API key settings](https://app.posthog.com/settings/user-api-keys) and updates their integrations with the new secret.
+- **Revoke key** – The key is permanently deleted. Any integration or script that uses it stops working immediately. You can't undo this.
+
+If the key also works in other organizations that its owner belongs to, the confirmation dialog tells you. The change applies in those organizations too.
+
+PostHog sends the key owner an email about the change, and records it in the [activity logs](/docs/settings/activity-logs).
+
+To roll or revoke a key, you must be signed in to the PostHog app with your own account. You can't do this with a personal API key.
