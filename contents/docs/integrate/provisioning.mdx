@@ -190,7 +190,7 @@ The review looks at your metadata document and your public website. To pass:
 - Set `client_uri` to your product's homepage.
 - Optionally, add `logo_uri`, `tos_uri`, `policy_uri`, and `contacts` on the same domain. These help the review.
 
-PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP address, or on a throwaway host such as a tunnel (for example ngrok), a request bin, or a JSON or paste hosting service. Register from the website your users actually use, not from a local or preview environment.
+PostHog doesn't accept a `client_id` on `localhost`, on a private or reserved IP address, or on a throwaway host such as a tunnel (for example ngrok), a request bin, or a JSON or paste hosting service. The review also won't accept a document on a site where anyone can publish content, such as a public Etherpad, a public git forge, or shared object storage. Register from the website your users actually use, not from a local or preview environment.
 
 Once PostHog accepts one client on a domain, other clients on the same registrable domain are accepted without a new review. For example, after `https://yourapp.com/.well-known/yourapp.json` is accepted, a staging client on `staging.yourapp.com` is accepted too.
 
