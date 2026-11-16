@@ -160,12 +160,12 @@ Most disputes come from customers who wanted to cancel and went to their bank in
 Email all admins on the account. There is no template. Write a custom email that:
 
 - Acknowledges the dispute and explains what the charge was for.
-- Points them to our [refund policy](/handbook/growth/sales/refunds) and says we are generally happy to refund if they withdraw the dispute with their bank.
+- Points them to our [refund policy](https://posthog.com/handbook/growth/sales/refunds) and says we are generally happy to refund if they withdraw the dispute with their bank.
 - Explains that we cannot refund while the dispute is open, because the card network holds the funds.
 - Gives them one week to withdraw the dispute.
 - Tells them that if they do not, we will contest the dispute, cancel their subscription, and block their access to PostHog.
 
-If they withdraw, process the refund when Stripe shows the dispute as closed.
+If they withdraw, process the refund when Stripe shows the dispute as closed. Cancel their subscription, and block their access to PostHog once done.
 
 #### 3. Counter the dispute
 
