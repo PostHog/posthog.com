@@ -153,7 +153,7 @@ Before you contact the customer, check:
 - What the charge was for.
 - The customer's PostHog activity: when they signed up, when they subscribed, and how much they have used the product.
 
-Most disputes come from customers who wanted to cancel and went to their bank instead. Some are mistakes, such as the wrong card being added and charged. If it looks like genuine fraud (for example, a stolen card, or nobody at the organization recognizes the sign-up), do not counter it. Accept the dispute and block the account.
+Most disputes come from customers who wanted to cancel and went to their bank instead. Some are mistakes, such as the wrong card being added and charged.
 
 #### 2. Email the customer
 
