@@ -48,22 +48,7 @@ To configure the channel, you need to provide the following details:
 
 This is the address that recipients will see in their inbox. Each one is a separate channel, and only a sender that exists shows in the **From** dropdown of an email step in the [workflow builder](/docs/workflows/workflow-builder). To add another sender later, use the [**Channels** tab](https://app.posthog.com/workflows/channels) again.
 
-To maximize deliverability and avoid spam folders, you must verify your domain.
-
-1. After adding your email address, PostHog shows DNS records for **SPF** and **DKIM**.
-2. Copy these into your domain host (e.g. Cloudflare, GoDaddy).
-3. Verification may take a few minutes to propagate.
-
-Once verified, you'll see a green check mark in your settings.
-
-Verification applies to the domain, not to the address. If the domain is already verified for another sender in the same project, you do not need to add the DNS records again for a new address on that domain.
-
-<ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_light_c2f3b925c5.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/verified_email_8fc6c512da.png"
-    alt="How to verify your domain in PostHog" 
-    classes="rounded"
-/>
+To send from this address, verify its domain: add the DNS records PostHog shows, then wait for the green check mark. Verification applies to the domain, so other senders on a verified domain in the same project don't need the records again. See [verify your sending domain](/docs/workflows/verify-domain) for each record and what to do when it stays pending.
 
 </Tab.Panel>
 <Tab.Panel>

@@ -8285,6 +8285,18 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    name: 'Agent skills',
+                    url: '/docs/workflows/skills',
+                    icon: 'IconSparkles',
+                    color: 'purple',
+                },
+                {
+                    name: 'Verify your sending domain',
+                    url: '/docs/workflows/verify-domain',
+                    icon: 'IconCheckCircle',
+                    color: 'green',
+                },
+                {
                     name: 'Configure a channel',
                     url: '/docs/workflows/configure-channels',
                     icon: 'IconMegaphone',
@@ -8389,6 +8401,12 @@ export const docsMenu = {
                     url: '/docs/workflows/broadcasts',
                     icon: 'IconSend',
                     color: 'orange',
+                },
+                {
+                    name: 'Choose an audience',
+                    url: '/docs/workflows/audiences',
+                    icon: 'IconPeople',
+                    color: 'blue',
                 },
                 {
                     name: 'Content library and message templates',

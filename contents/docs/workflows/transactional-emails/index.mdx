@@ -16,7 +16,7 @@ Transactional emails are the one-off emails that a person triggers in your produ
 
 ## Send your first email
 
-You need a verified sending domain first. If your project doesn't have one yet, [configure an email channel](/docs/workflows/configure-channels) and add its DNS records to your domain. Verification usually takes a few minutes.
+You need a verified sending domain first. If your project doesn't have one yet, [verify your sending domain](/docs/workflows/verify-domain). Verification usually takes a few minutes.
 
 <Steps>
 
@@ -98,7 +98,7 @@ The rest of this page covers emails that you write in PostHog. For content from 
 
 With the [PostHog MCP server](/docs/model-context-protocol) in your coding agent, ask the agent to set up a transactional email. It can design the email from your brand, make it transactional, and write the code that sends it. It asks you to confirm before it makes a template transactional, and you create the API key yourself.
 
-Each SDK page also has a prompt that you can paste into your agent. The prompt sends the agent to the page's Markdown version and lists the rules that agents get wrong: where the secret key lives, how to build idempotency keys, and which errors to retry.
+The [`sending-transactional-emails` agent skill](/docs/workflows/skills) teaches your agent this setup. Each SDK page also has a prompt that you can paste into your agent. The prompt sends the agent to the page's Markdown version and lists the rules that agents get wrong: where the secret key lives, how to build idempotency keys, and which errors to retry.
 
 ## Create a transactional email
 

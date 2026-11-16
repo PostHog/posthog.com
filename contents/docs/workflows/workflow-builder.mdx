@@ -132,7 +132,7 @@ The trigger shows a real-time estimate of how many persons will be affected (e.g
 
 #### Email deduplication
 
-When a batch workflow includes an email dispatch step, PostHog deduplicates recipients by email address. Multiple persons sharing the same email address (after lowercasing and trimming whitespace) are collapsed into a single send, so each unique email address receives the email only once. Persons without an email address are unaffected and processed individually.
+When a batch workflow includes an email dispatch step, PostHog deduplicates recipients by email address. Multiple persons sharing the same email address (after lowercasing and trimming whitespace) are collapsed into a single send, so each unique email address receives the email only once. Persons without an email address are unaffected and processed individually. Deduplication applies when every email step sends to the standard `person.properties.email` property. An email step with a custom recipient isn't deduplicated.
 
 The audience preview estimate reflects this deduplication, showing the number of emails that will be sent rather than the total number of matching persons.
 
