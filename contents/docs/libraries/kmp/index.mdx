@@ -58,7 +58,7 @@ You can find the latest version on [Maven Central](https://central.sonatype.com/
 
 On iOS, the SDK uses Kotlin's [Swift Package Manager (SwiftPM) integration](https://kotlinlang.org/docs/multiplatform/multiplatform-spm-import.html) to link the native `posthog-ios` package and copy its resources, including privacy manifests, into your app.
 
-`posthog-kmp` 0.7.0 and later requires iOS 15 or later. `posthog-kmp` 0.11.0 and later requires Xcode 26 or later to build, and macOS 11 or later for macOS targets.
+`posthog-kmp` 0.7.0 and later requires iOS 15 or later. `posthog-kmp` 0.12.0 and later requires Xcode 26 or later to build, and macOS 11 or later for macOS targets.
 
 After adding the dependency, run the linkage task once from your project root:
 
@@ -91,9 +91,9 @@ PostHog.setup(
 
 You can find your project token and host in [your project settings](https://us.posthog.com/settings/project). For convenience, `PostHogConfig.HOST_US` and `PostHogConfig.HOST_EU` are provided as constants for the two PostHog Cloud hosts.
 
-Use your project token (`phc_...`), not a personal API key. From `posthog-kmp` 0.11.0, the SDK stays disabled on Android, iOS, macOS and the JVM if `projectToken` is a personal API key (`phx_...`).
+Use your project token (`phc_...`), not a personal API key. From `posthog-kmp` 0.12.0, the SDK stays disabled on Android, iOS, macOS and the JVM if `projectToken` is a personal API key (`phx_...`).
 
-> **Note:** From `posthog-kmp` 0.11.0, Android, iOS, macOS and the JVM send events to `/i/v1/analytics/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, make sure it forwards that path and passes the request headers and PostHog's response through unchanged. Refer to Upgrade to 0.11.0 below for the full list.
+> **Note:** From `posthog-kmp` 0.12.0, Android, iOS, macOS and the JVM send events to `/i/v1/analytics/events`. If `host` points to a [reverse proxy](/docs/advanced/proxy) or a self-hosted instance, make sure it forwards that path and passes the request headers and PostHog's response through unchanged. Refer to Upgrade to 0.12.0 below for the full list.
 
 ### Platform-specific setup
 
@@ -257,7 +257,7 @@ PostHog.capture(
 
 ### Event options
 
-From `posthog-kmp` 0.11.0, settings that tell PostHog how to process an event are sent as event options, apart from its properties. Pass them in `CaptureOptions.eventOptions`, or in the `eventOptions` parameter of `screen()`, `identify()`, `alias()`, `group()`, `setPersonProperties()`, and `captureException()`. `PostHogEventOptions` has the keys:
+From `posthog-kmp` 0.12.0, settings that tell PostHog how to process an event are sent as event options, apart from its properties. Pass them in `CaptureOptions.eventOptions`, or in the `eventOptions` parameter of `screen()`, `identify()`, `alias()`, `group()`, `setPersonProperties()`, and `captureException()`. `PostHogEventOptions` has the keys:
 
 | Option | Replaces the property |
 | --- | --- |
@@ -283,7 +283,7 @@ The legacy properties still work, and an option wins over its property. On Andro
 
 ## AI events
 
-To send [AI observability](/docs/ai-observability) events you build yourself, such as `$ai_generation`, `$ai_span`, or `$ai_embedding`, call `captureAi` instead of `capture`. It's available from `posthog-kmp` 0.11.0 on Android, iOS, macOS, and the JVM. It takes the same arguments as `capture` and runs the same `beforeSend` callbacks, then sends the event to PostHog's [AI endpoint](/docs/ai-observability/large-events), which accepts much larger events than `capture`.
+To send [AI observability](/docs/ai-observability) events you build yourself, such as `$ai_generation`, `$ai_span`, or `$ai_embedding`, call `captureAi` instead of `capture`. It's available from `posthog-kmp` 0.12.0 on Android, iOS, macOS, and the JVM. It takes the same arguments as `capture` and runs the same `beforeSend` callbacks, then sends the event to PostHog's [AI endpoint](/docs/ai-observability/large-events), which accepts much larger events than `capture`.
 
 ```kotlin
 val uuid = PostHog.captureAi(
@@ -348,7 +348,7 @@ PostHog.setup(
 
 Callbacks run synchronously in list order. Each callback receives the event returned by the previous callback. Returning `null` skips the remaining callbacks. If a callback throws, the SDK drops the event and skips the remaining callbacks.
 
-From `posthog-kmp` 0.11.0, `event.options` holds the event's [event options](#event-options), including the ones the SDK set, such as `process_person_profile` set to `false` for an anonymous user's event. Return a copy with changed `options` to change them. On JavaScript and Wasm, `options` is always `null`.
+From `posthog-kmp` 0.12.0, `event.options` holds the event's [event options](#event-options), including the ones the SDK set, such as `process_person_profile` set to `false` for an anonymous user's event. Return a copy with changed `options` to change them. On JavaScript and Wasm, `options` is always `null`.
 
 Versions 0.3.0 through 0.4.1 ignore a callback exception and continue with the last valid event.
 
@@ -662,25 +662,25 @@ PostHog.setup(
 )
 ```
 
-Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.11.0 removed wireframe recording and the `screenshot` option; remove `screenshot` from your `SessionRecordingConfig` when you upgrade. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
+Session replay records masked screenshots of your app. Text inputs and images are masked by default, but custom-drawn content such as maps, video or canvas drawing is captured as it appears, so mask it before you ship. `posthog-kmp` 0.12.0 removed wireframe recording and the `screenshot` option; remove `screenshot` from your `SessionRecordingConfig` when you upgrade. See [how mobile replay works](/docs/session-replay/mobile#how-it-works).
 
 ### Compose Multiplatform screens on iOS
 
-On iOS, session replay masks content by finding UIKit views, such as text fields and image views. Compose Multiplatform draws its whole UI into one view, so the SDK can't find the text fields, text, or images inside it, and `maskAllTextInputs` and `maskAllImages` don't mask them. Android isn't affected: it masks Compose content.
+On iOS, session replay masks content by finding UIKit views, such as text fields and image views. Compose Multiplatform draws its whole UI into a few views, so the SDK can't mask the text fields, text, or images inside them one by one. Android isn't affected: it masks Compose content.
 
-From `posthog-kmp` 0.11.0, iOS records Compose Multiplatform screens as they appear, including what users type. Before 0.11.0, iOS didn't record Compose Multiplatform screens at all.
+From `posthog-kmp` 0.12.0, iOS records Compose Multiplatform screens. While `maskAllTextInputs` or `maskAllImages` is on, as they are by default, the SDK masks those views whole, so a Compose screen is recorded as one masked block. You can still see the session's events, network requests and logs. Before 0.12.0, iOS didn't record Compose Multiplatform screens at all.
 
-Until the SDK can mask inside Compose on iOS, mask the whole Compose view if it can show sensitive content. Set `ph-no-capture` as the accessibility identifier of the view controller's view where you create it, usually in your Swift app code:
+To show a Compose screen in recordings, set `ph-no-mask` as the accessibility identifier of the view controller's view where you create it, usually in your Swift app code. The recording then also shows what users type, so only do this for screens that can't show sensitive content:
 
 ```swift
 func makeUIViewController(context: Context) -> UIViewController {
     let controller = MainViewControllerKt.MainViewController()
-    controller.view.accessibilityIdentifier = "ph-no-capture"
+    controller.view.accessibilityIdentifier = "ph-no-mask"
     return controller
 }
 ```
 
-Recordings then show that view as a black block, and you can still see the session's events, network requests and logs. To leave out iOS altogether, enable `sessionRecording` only on Android.
+To leave out iOS altogether, enable `sessionRecording` only on Android.
 
 On Android, enable experimental mask-alignment verification to help preserve screenshot captures during pixel-only redraws, such as continuously animated content:
 
@@ -805,6 +805,7 @@ Pass these to `PostHogConfig` when calling `setup`.
 | `errorTracking` | `ErrorTrackingConfig?` | `null` | Enables and configures Error Tracking. |
 | `capturePushNotificationSubscriptions` | `Boolean` | `true` | Registers the FCM token at startup when Firebase Messaging is available (Android only). |
 | `capturePushNotificationOpened` | `Boolean` | `true` | Captures push notification opens automatically (Android only). |
+| `surveys` | `Boolean` | `true` | Loads surveys and shows the ones that match. `false` keeps the SDK from loading or showing them. Applies on iOS 15+ and the web. On Android, surveys display only when the app also depends on `com.posthog:posthog-android-surveys-compose`. Ignored on macOS and the JVM. Available from 0.11.0. |
 | `evaluationContexts` | `List<String>?` | `null` | Evaluates only feature flags with one of these evaluation tags, plus untagged flags. `null` evaluates every flag. |
 | `captureAiCompression` | `PostHogCompression?` | `null` (`GZIP`) | How [`captureAi`](#ai-events) request bodies are compressed (Android, iOS, macOS, and JVM). |
 | `captureAiMaxQueueSize` | `Int?` | `null` (`100`) | Maximum number of [`captureAi`](#ai-events) events kept in their own on-disk queue (Android, iOS, macOS, and JVM). |
@@ -837,6 +838,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | `captureLogcat` | `Boolean` | `true` | Captures Android logcat output (Android only). |
 | `throttleDelayMs` | `Long` | `1000` | Minimum delay in milliseconds between replay snapshots (Android and iOS). Replaces the deprecated `debouncerDelayMs`. |
 | `verifyScreenshotMaskAlignment` | `Boolean` | `false` | Experimental mask-alignment verification for Android screenshots. Adds view-hierarchy walks during capture. Compose-rooted windows always use verification. Ignored on other platforms. |
+| `iosCaptureMethod` | `IosCaptureMethod` | `STANDARD` | How iOS captures each replay screenshot (iOS only, 0.12.0 and later). `STANDARD` draws the window on the main thread. `BACKGROUND` draws it on a background queue, which can briefly freeze the app on the first capture. `GPU` (experimental) renders a copy of the window's layers on the GPU and doesn't capture web view pages or Metal content. |
 
 ## Platform support
 
@@ -844,7 +846,7 @@ Pass a `SessionRecordingConfig` to `PostHogConfig.sessionRecording`. Defaults ma
 | --- | --- | --- |
 | Android | ✅ | [PostHog Android](/docs/libraries/android) (native) |
 | iOS | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM) |
-| macOS (Apple silicon) | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM). Version 0.11.0 and later requires macOS 11 or later. |
+| macOS (Apple silicon) | ✅ | [PostHog iOS](/docs/libraries/ios) (native, via SwiftPM). Version 0.12.0 and later requires macOS 11 or later. |
 | Web | ✅ | [PostHog.js](/docs/libraries/js) |
 | JVM (desktop) | ✅ | `com.posthog:posthog`, the [JVM core library](/docs/libraries/java) the Android SDK is built on |
 
@@ -852,9 +854,9 @@ Because the SDK delegates to the native library on each platform, feature availa
 
 On the JVM, event capture, identification, feature flags, groups, error tracking, and super properties are all supported. Mobile and browser-only concepts don't apply, so `sessionRecording`, `captureApplicationLifecycleEvents`, `captureScreenViews`, `captureDeepLinks`, and `autocapture` are ignored. The JVM also has no standard app-manifest source, so `$app_version`, `$app_build`, and `$app_namespace` person properties aren't set – feature flags targeting those won't match desktop users.
 
-## Upgrade to 0.11.0
+## Upgrade to 0.12.0
 
-Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) lists every change. These changes apply on Android, iOS, macOS, and the JVM. Of these, only the **Session replay** and **Replay throttling** changes reach the web target, as compile errors in common code. The feature flag changes after the list also apply there.
+Version 0.12.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The [migration guide on GitHub](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md) lists every change. These changes apply on Android, iOS, macOS, and the JVM. Of these, only the **Session replay** and **Replay throttling** changes reach the web target, as compile errors in common code. The feature flag changes after the list also apply there.
 
 - **Capture endpoint:** the SDK sends events to `/i/v1/analytics/events`. If you use a [reverse proxy](/docs/advanced/proxy) or you self-host PostHog, make sure that your proxy or instance serves this path, and `/i/v1/ai/events` if you call [`captureAi`](#ai-events). A reverse proxy must also:
   - Pass these request headers through unchanged: `Authorization`, `PostHog-Sdk-Info`, `PostHog-Attempt`, `PostHog-Request-Id`, `PostHog-Request-Timestamp`, `Content-Type`, `Content-Encoding` and `User-Agent`.
@@ -863,14 +865,14 @@ Version 0.11.0 uses the native Android 4.0, JVM core 7.0, and iOS 4.0 SDKs. The 
 - **Retries:** until your host serves the path, a `404` is retried about every 30 seconds, and events stay queued only until a full queue evicts them (`maxQueueSize`, 1000 by default). Other errors that aren't retried, such as `401` or `403`, drop the events. Only `307` and `308` redirects to the same origin are followed, `3xx` responses are no longer retried, `Retry-After` is capped at 30 seconds, the wait between failed sends doubles with jitter, and a request carries at most about 5 MiB.
 - **Project token:** if `projectToken` is a personal API key (`phx_...`), the SDK disables itself at setup. Use your project token (`phc_...`).
 - **Super properties:** values that you set with `register` replace the properties that the SDK sets, such as `$os_name`. A registered `$session_id` replaces the SDK's session ID, which can detach events from their session replay.
-- **Registered `$process_person_profile`:** a `$process_person_profile = false` set with `register()`, or a `process_person_profile = false` set with `registerOptions()`, now applies to every event except the ones `identify()`, `alias()`, `group()`, and `setPersonProperties()` send. In 0.10 the SDK replaced it with its own value, so it had no effect. Events after `identify()` that get it are still linked to the person and billed as identified events, but don't update the person profile. Remove the registered value and use `personProfiles` instead: the default `PersonProfiles.IDENTIFIED_ONLY` skips person profiles for anonymous users, and `PersonProfiles.NEVER` creates none.
+- **Registered `$process_person_profile`:** a `$process_person_profile = false` set with `register()`, or a `process_person_profile = false` set with `registerOptions()`, now applies to every event except the ones `identify()`, `alias()`, `group()`, and `setPersonProperties()` send. Before 0.12.0 the SDK replaced it with its own value, so it had no effect. Events after `identify()` that get it are still linked to the person and billed as identified events, but don't update the person profile. Remove the registered value and use `personProfiles` instead: the default `PersonProfiles.IDENTIFIED_ONLY` skips person profiles for anonymous users, and `PersonProfiles.NEVER` creates none.
 - **Build requirements:** Xcode 26 or later, and macOS 11 or later for macOS targets. Build your Xcode app once and commit the updated `KotlinMultiplatformLinkedPackage`, which now pins posthog-ios 4.0.
-- **Binary compatibility:** recompile any library built against posthog-kmp 0.10. Its Android and JVM bytecode fails at runtime with `NoSuchMethodError`. Java callers of `screen()`, `identify()`, `alias()`, `group()`, `setPersonProperties()`, `captureException()`, and `new CaptureOptions(groups, timestamp)` must pass the new `eventOptions` argument.
+- **Binary compatibility:** recompile any library built against posthog-kmp 0.11 or earlier. Its Android and JVM bytecode fails at runtime with `NoSuchMethodError`. Java callers of `screen()`, `identify()`, `alias()`, `group()`, `setPersonProperties()`, `captureException()`, and `new CaptureOptions(groups, timestamp)` must pass the new `eventOptions` argument.
 - **Other PostHog artifacts:** if the same Android or JVM build uses `posthog-server`, use 2.25.0 or later. If it uses `posthog-android-surveys-compose`, declare `posthog-android` 4.0.0 or later alongside it.
 - **Person processing in `beforeSend`:** when the SDK doesn't process person profiles for an event, it marks the event with the `process_person_profile` [event option](#event-options) instead of a `$process_person_profile = false` property. `beforeSend` reads and changes it in `event.options["process_person_profile"]`, and setting the `$process_person_profile` property there doesn't turn person processing on. A `$process_person_profile` that you pass to `capture()` now applies, even with `personProfiles = PersonProfiles.NEVER`. To turn person processing on, set the option in `beforeSend`, pass `CaptureOptions(eventOptions = mapOf(PostHogEventOptions.PROCESS_PERSON_PROFILE to true))` to `capture()`, call `identify()`, or set `personProfiles = PersonProfiles.ALWAYS`.
 - **Event options:** `$process_person_profile`, `$cookieless_mode`, `$ignore_sent_at`, and `$product_tour_id` have [event options](#event-options) that replace them. The properties still work.
 - **Event changes:** events with an empty name, or whose distinct ID `beforeSend` blanks, are dropped. `$feature_flag_called` for a missing flag leaves out `$feature_flag_response` – filter on *is not set*. `Application Installed`, `Application Updated`, and `Application Opened` no longer have `version` and `build` on iOS and macOS – use `$app_version` and `$app_build`. `$locale` is now the device's preferred language and region on Android, iOS, and macOS, such as `de-CH`, and a BCP 47 tag that keeps the script on the JVM, such as `zh-Hant-TW`. PostHog drops events whose name or distinct ID is over 200 bytes. On iOS and macOS, a `null` value inside a nested map is left out. On Android and the JVM, a `null` list element is sent as `null` at its position instead of being removed. `$sdk_debug_replay_capture_mode` is always `screenshot`. Android's `Deep Link Opened` leaves out query parameters whose name starts with `$`. Refer to the [migration guide](https://github.com/PostHog/posthog-kmp/blob/main/MIGRATION.md#event-changes) for the full list.
-- **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. On Android, Compose screens, including Compose Multiplatform UI, are now recorded, which can count against your replay quota. On iOS, Compose Multiplatform screens are now recorded too, but their text fields, text and images aren't masked, so mask the Compose view first. Refer to [Compose Multiplatform screens on iOS](#compose-multiplatform-screens-on-ios). Because `screenshot` is gone, `SessionRecordingConfig` positional arguments and destructuring shift, so use named arguments. Refer to [Session replay](#session-replay).
+- **Session replay:** recordings are always masked screenshots, and the `screenshot` option is gone. On Android, Compose screens, including Compose Multiplatform UI, are now recorded, which can count against your replay quota. On iOS, Compose Multiplatform screens are now recorded too, as one masked block while `maskAllTextInputs` or `maskAllImages` is on. Refer to [Compose Multiplatform screens on iOS](#compose-multiplatform-screens-on-ios). Because `screenshot` is gone, `SessionRecordingConfig` positional arguments and destructuring shift, so use named arguments. Refer to [Session replay](#session-replay).
 - **Replay throttling:** use `throttleDelayMs` instead of the deprecated `debouncerDelayMs`. The constructor still accepts `debouncerDelayMs`, but `copy(debouncerDelayMs = ...)` no longer compiles.
 - **Payloads:** `FeatureFlagResult.payload` is `null` for a payload that isn't valid JSON, instead of the raw string. On Android and the JVM, a JSON `null` payload is `null` instead of the string `"null"`. On the web target it's still the raw string.
 
