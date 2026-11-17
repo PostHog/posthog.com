@@ -52,17 +52,28 @@ type LibraryData = {
     }
 }
 
+// These SDKs' docs are their generated references, which carry no frontmatter, so they're listed here.
+const REFERENCE_SDKS = [
+    { label: 'Node.js', url: '/docs/libraries/node/reference', image: getLogo('nodejs') },
+    { label: 'Python', url: '/docs/libraries/python/reference', image: getLogo('python') },
+    { label: 'Go', url: '/docs/libraries/go/reference', image: getLogo('go') },
+    { label: 'Rust', url: '/docs/libraries/rust/reference', image: getLogo('rust') },
+]
+
 export const SDKs = () => {
     const { sdks } = useStaticQuery<LibraryData>(query)
 
     return (
         <List
             className="grid @sm:grid-cols-2 @xl:grid-cols-3"
-            items={sdks.nodes.map(({ fields: { slug }, frontmatter: { title, platformLogo, icon } }) => ({
-                label: title,
-                url: slug,
-                image: platformLogo ? getLogo(platformLogo) : icon?.publicURL,
-            }))}
+            items={[
+                ...sdks.nodes.map(({ fields: { slug }, frontmatter: { title, platformLogo, icon } }) => ({
+                    label: title,
+                    url: slug,
+                    image: platformLogo ? getLogo(platformLogo) : icon?.publicURL,
+                })),
+                ...REFERENCE_SDKS,
+            ]}
         />
     )
 }
@@ -95,18 +106,14 @@ const query = graphql`
                             "/docs/libraries/android"
                             "/docs/libraries/elixir"
                             "/docs/libraries/flutter"
-                            "/docs/libraries/go"
                             "/docs/libraries/ios"
                             "/docs/libraries/java"
                             "/docs/libraries/kmp"
-                            "/docs/libraries/node"
                             "/docs/libraries/php"
-                            "/docs/libraries/python"
                             "/docs/libraries/react"
                             "/docs/libraries/react-native"
                             "/docs/libraries/roblox"
                             "/docs/libraries/ruby"
-                            "/docs/libraries/rust"
                             "/docs/libraries/unity"
                         ]
                     }
