@@ -1,0 +1,308 @@
+---
+title: Choose a judge method
+---
+
+Every evaluation needs a judge: something that reads a generation and returns a result. PostHog has three judge methods. Pick one before you create an [evaluation](/docs/ai-evals), because the method decides what you write, what it costs, and what you get back.
+
+|  | LLM with explanation | Decision model | Code-based (Hog) |
+|---|---|---|---|
+| **How it judges** | An LLM reads your prompt and the generation | An LLM reads your prompt and the generation | Your Hog code runs against the generation |
+| **Returns** | A result plus written reasoning | A result, no reasoning | A result, plus optional reasoning from `print()` |
+| **Cost** | One LLM API call per evaluation | One LLM API call per evaluation, faster and lower-cost | Free |
+| **Best for** | Subjective checks where you want to know why it failed | Subjective checks at volume, when you don't need the reasoning | Deterministic rules: format, keywords, length |
+| **You write** | A prompt | A prompt | Hog code |
+
+Not sure yet? Start with an LLM with explanation. The reasoning shows you whether the judge understood your prompt. Once its verdicts match yours, switch to a decision model to cut cost, or rewrite the check in Hog if it's a fixed rule. See [test and refine your eval](/docs/ai-evals#test-and-refine-your-eval).
+
+## LLM-as-a-judge evaluations
+
+### How they work
+
+When a [generation](/docs/ai-observability/generations) is captured, PostHog samples it based on your configured rate (0.1% to 100%). If sampled, the generation's input and output are sent to an LLM judge with your evaluation prompt. The judge returns a result in the evaluation's [output type](/docs/ai-evals#choosing-an-output-type), which is stored and linked to the original generation. The behavior depends on the [judge method](#explanation-or-decision-model) you select: **LLM with explanation** judges use chat completions and return written reasoning alongside the result, while **Decision model** judges return typed results without reasoning.
+
+You can optionally filter which generations get evaluated using event properties or person properties. For example, only evaluate generations from production, from a specific model, or above a certain cost threshold. You can also use person properties to exclude internal users or target specific user segments.
+
+### What the judge receives
+
+The LLM judge receives a structured prompt containing sections extracted from the generation event:
+
+```text
+Input: <the generation's input messages or prompt>
+
+Tools available:
+<list of tools the agent could call — only present when the event includes a tool catalog>
+
+Output: <the generation's output response>
+```
+
+#### Tool call and result correlation
+
+When the generation includes tool calls (common in agentic workflows), PostHog renders them with correlation IDs so the judge can match each tool result to the call that produced it:
+
+- Assistant tool calls render as `[tool_call <id>: name(args)]`
+- Tool results render as `tool[<id>]: <result>`
+
+For example, a conversation with parallel tool calls appears as:
+
+```text
+assistant: [tool_call call_abc: search_docs({"query": "pricing"})] [tool_call call_def: get_user({"id": 42})]
+tool[call_abc]: {"results": ["Free tier includes 1M events"]}
+tool[call_def]: {"name": "Jane", "plan": "pro"}
+```
+
+This lets the judge reliably evaluate prompts like "did the agent handle the tool failure correctly?" even when multiple tool calls run in parallel.
+
+#### Tool catalog format
+
+When the event's `$ai_tools` property contains the list of tools the agent could call, PostHog renders a compact summary:
+
+```text
+- search_docs: Search the documentation (query, limit?)
+- get_user: Fetch user details (user_id)
+```
+
+Each line shows the tool name, description, and parameters. A `?` suffix marks optional parameters. This format supports OpenAI, Anthropic, and Gemini tool definitions.
+
+#### Shaping custom events for evaluations
+
+If you emit custom `$ai_generation` events or span/trace events and want the judge to have full context, include these properties:
+
+| Property                             | Purpose                                      |
+| ------------------------------------ | -------------------------------------------- |
+| `$ai_input`                          | The input messages or prompt                 |
+| `$ai_output_choices` or `$ai_output` | The output response                          |
+| `$ai_tools`                          | The tool catalog (array of tool definitions) |
+
+For tool call correlation within messages, include:
+
+- A `tool_calls` array on assistant messages, where each entry has `id`, `function.name`, and `function.arguments`
+- A `tool_call_id` field on tool result messages matching the `id` from the corresponding tool call
+
+### Built-in templates
+
+PostHog provides pre-built templates to get you started. When you click **Create evaluation**, the template picker opens with these tabs:
+
+- **Recommended** shows a short list of popular templates.
+- **All** shows every template.
+- **Answer quality**, **Safety**, **Agent behavior**, **User insights**, and **Cost & speed** show the templates in that category.
+
+The picker includes LLM judge, Hog code, and sentiment templates. Some LLM judge templates are:
+
+| Template                   | What it checks                                                                    | Output type   |
+| -------------------------- | --------------------------------------------------------------------------------- | ------------- |
+| **Response quality score** | Rates each answer from 1 to 5 for accuracy, completeness, and clarity             | Numeric score |
+| **Task outcome**           | How each conversation ended: resolved, partly resolved, unresolved, or handed off | Categorical   |
+| **User correction**        | Messages where the user corrects the assistant or repeats a request               | Categorical   |
+| **Relevance**              | Whether the answer addresses what the user asked                                  | Boolean       |
+| **Hallucination**          | Claims in the answer that are made up or unsupported                              | Boolean       |
+| **Prompt injection**       | User messages that try to override your instructions or reveal the system prompt  | Boolean       |
+
+This list is not complete. The template catalog changes over time, so check the picker for the current templates.
+
+### Explanation or decision model
+
+LLM-as-a-judge evaluations have a **Judge method** setting that controls how the judge processes your prompt:
+
+- **LLM with explanation** – Uses chat completions. The judge returns a result and written reasoning explaining its decision. Choose this when you want to understand why the judge passed or failed a generation.
+- **Decision model** – Uses typed decisions. The judge returns a result without written reasoning. Choose this when you need faster, lower-cost evaluations and don't need explanations.
+
+The model picker filters to models that support the selected method. Some models support both methods and remain available regardless of your choice. Switching methods keeps a compatible model and its saved connection. If the current model doesn't support the new method, it's cleared without changing your prompt or output settings.
+
+Existing evaluations without an explicit method selection continue using automatic routing until you choose a method.
+
+### Setting a reasoning level
+
+When you use **LLM with explanation** with an Anthropic or OpenAI reasoning model, a brain button appears next to the model selector. Select it to choose how much the judge reasons before it gives a verdict: **Minimal**, **Low**, **Medium**, or **High**.
+
+**Model default** sends no level, so the model uses its own default. Many current models already reason at about a medium level by default, so choosing **Medium** may not change anything.
+
+Higher levels cost more and take longer, and they don't always change the verdict. Try a level on a sample of your data before you switch an evaluation over.
+
+Each provider applies the level differently:
+
+- **Anthropic:** Claude models before 4.6 get a thinking budget of 1,024 to 8,192 tokens, depending on the level. Newer models get adaptive thinking at that effort. Claude has no minimal level, so **Minimal** becomes **Low**.
+- **OpenAI:** PostHog sets `reasoning_effort`. Only the original GPT-5 models accept **Minimal**. Other models use **Low** instead.
+
+The button only appears for models that support a reasoning level. If you switch to a model without support, the level is cleared. The API rejects a reasoning level for those models and for the **Decision model** judge method.
+
+### Creating an LLM judge evaluation
+
+1. Navigate to **AI Evals** > **Evaluations**
+2. Click **Create evaluation**
+3. Select an LLM judge template, or click **Start from scratch**
+4. If you start from scratch, set **Method** to **LLM as a judge**
+5. Configure the evaluation:
+   - **Name**: A descriptive name for the evaluation
+   - **Prompt**: The instructions for the LLM judge (templates provide sensible defaults)
+   - **Judge method**: Choose **LLM with explanation** or **Decision model** (see [Choosing a judge method](#explanation-or-decision-model))
+   - **Model**: Select a model from your configured AI providers – the list is filtered by the selected judge method
+   - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
+   - **Property filters** (optional): Narrow which generations to evaluate using event or person properties
+6. Enable the evaluation and click **Save**
+
+### Writing custom prompts
+
+When creating a custom evaluation, your prompt should describe what makes a good or bad response. PostHog tells the judge which output format to use, so you don't need to ask for `true` or `false`, a score format, or category keys. For a numeric score, describe what each score means. For categories, describe when each category applies. The judge receives the generation's input, output, and (when present) the available tool catalog for context. See [What the judge receives](#what-the-judge-receives) for details on the full prompt structure.
+
+Tips for effective evaluation prompts:
+
+- Be specific about what constitutes a pass or fail
+- Include examples of edge cases when relevant
+- Keep the prompt concise but comprehensive
+
+Example custom prompt:
+
+```text
+You are evaluating whether an LLM response follows our brand voice guidelines.
+
+Given the user input and assistant response, determine if the response:
+- Uses a friendly, conversational tone
+- Avoids corporate jargon
+- Addresses the user by name when provided
+
+Return true if the response follows these guidelines, false otherwise.
+Explain your reasoning briefly.
+```
+
+Before you rely on a new judge, [test and refine it](/docs/ai-evals#test-and-refine-your-eval) on real traffic.
+
+## Code-based evaluations (Hog)
+
+Code-based evaluations run [Hog](/docs/hog) code you write against each generation. They execute in milliseconds with zero LLM cost, making them ideal for high-volume, deterministic checks.
+
+### How they work
+
+1. You write Hog code that inspects the generation's input and output.
+2. On save, PostHog compiles your code to bytecode.
+3. When a generation is sampled, the code runs against it in PostHog's HogVM.
+4. Your code returns a result that matches the evaluation's [output type](/docs/ai-evals#choosing-an-output-type). Use `print()` to add reasoning.
+5. If **Allow N/A responses** is enabled, returning `null` marks the result as N/A (not applicable).
+
+Code-based evaluations share the same sampling rate and property filter options as LLM judge evaluations.
+
+### Available globals
+
+Your Hog code has access to these variables:
+
+| Variable            | Type             | Description                              |
+| ------------------- | ---------------- | ---------------------------------------- |
+| `input`             | string or object | The LLM input (prompt or messages array) |
+| `output`            | string or object | The LLM output (response or choices)     |
+| `properties`        | object           | All event properties from the generation |
+| `event.uuid`        | string           | The event UUID                           |
+| `event.event`       | string           | The event name                           |
+| `event.distinct_id` | string           | The distinct ID of the user              |
+
+### Creating a code-based evaluation
+
+1. Navigate to **AI Evals** > **Evaluations**
+2. Click **New evaluation**
+3. Select **Code-based (Hog)** as the evaluation type
+4. Write your Hog code in the editor
+5. Click **Test on sample** to run your code against recent generations and verify it works
+6. Configure:
+   - **Name**: A descriptive name for the evaluation
+   - **Sampling rate**: Percentage of generations to evaluate (0.1% – 100%)
+   - **Allow N/A responses**: Whether your code can return `null` to skip inapplicable generations
+   - **Property filters** (optional): Narrow which generations to evaluate
+7. Enable the evaluation and click **Save**
+
+### Writing Hog evaluation code
+
+What your code returns depends on the evaluation's output type:
+
+- **Boolean**: `true` for pass, `false` for fail.
+- **Numeric score**: a finite number, like `4` or `0.85`.
+- **Categorical**: a list of category keys, like `['wrong_tool']`. With **One category**, you can also return a single key, like `'wrong_tool'`.
+
+Use `print()` statements to provide reasoning – the output is captured and stored alongside the result.
+
+> **Hog tip:** Use single quotes for strings (`'hello'`), `length()` instead of `len()`, and wrap property access with `ifNull()` to avoid null comparison errors.
+
+**Check output length:**
+
+```hog
+let maxLength := 2000
+let outputLength := length(ifNull(output, ''))
+
+if (outputLength > maxLength) {
+    print('Output too long: ' + toString(outputLength) + ' characters (max ' + toString(maxLength) + ')')
+    return false
+}
+
+print('Output length OK: ' + toString(outputLength) + ' characters')
+return true
+```
+
+**Check for required keywords:**
+
+```hog
+let requiredKeywords := ['disclaimer', 'not financial advice']
+let outputLower := lower(ifNull(output, ''))
+
+for (let i := 0; i < length(requiredKeywords); i := i + 1) {
+    if (outputLower !ilike '%' + requiredKeywords[i] + '%') {
+        print('Missing required keyword: ' + requiredKeywords[i])
+        return false
+    }
+}
+
+print('All required keywords found')
+return true
+```
+
+**Check model and cost thresholds:**
+
+```hog
+let model := ifNull(properties.$ai_model, 'unknown')
+let cost := ifNull(properties.$ai_total_cost_usd, 0)
+let maxCost := 0.05
+
+if (cost > maxCost) {
+    print('Cost too high for model ' + model + ': $' + toString(cost))
+    return false
+}
+
+print('Cost within budget: $' + toString(cost))
+return true
+```
+
+**Return N/A for non-applicable generations** (requires **Allow N/A responses** enabled):
+
+```hog
+let model := ifNull(properties.$ai_model, '')
+
+// Only evaluate GPT-4 generations
+if (model !ilike '%gpt-4%') {
+    print('Skipping non-GPT-4 model: ' + model)
+    return null
+}
+
+// Check that the output is non-empty
+if (length(ifNull(output, '')) == 0) {
+    print('Empty output from GPT-4')
+    return false
+}
+
+print('GPT-4 output OK')
+return true
+```
+
+### Testing on sample data
+
+Before saving, use the **Test on sample** button to run your code against recent generations. This shows:
+
+- The input and output from each sampled generation
+- Whether your code returned pass, fail, or N/A
+- Any `print()` output (reasoning)
+- Any errors in your code
+
+Testing does not create evaluation events or affect your data – it runs entirely in preview mode.
+
+### Using AI to generate evaluations
+
+Click **Generate with AI** in the code editor to open Max, PostHog's AI assistant, with your evaluation context pre-loaded. Max can help you:
+
+- Write Hog evaluation code from a description of what you want to check
+- Debug errors in your existing code
+- Iterate on the logic by testing and refining

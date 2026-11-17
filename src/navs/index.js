@@ -7700,6 +7700,10 @@ export const docsMenu = {
                             url: '/docs/ai-evals',
                         },
                         {
+                            name: 'Choose a judge method',
+                            url: '/docs/ai-evals/judge-methods',
+                        },
+                        {
                             name: 'Backfills',
                             url: '/docs/ai-evals/backfills',
                         },
