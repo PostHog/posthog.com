@@ -134,6 +134,7 @@ const ResetPasswordForm: React.FC = () => {
                                     direction="row"
                                     touched={!!touched.password}
                                     error={errors.password}
+                                    autoComplete="new-password"
                                     {...getFieldProps('password')}
                                 />
                                 <Input
@@ -143,6 +144,7 @@ const ResetPasswordForm: React.FC = () => {
                                     direction="row"
                                     touched={!!touched.confirmPassword}
                                     error={errors.confirmPassword}
+                                    autoComplete="new-password"
                                     {...getFieldProps('confirmPassword')}
                                 />
                                 <button type="submit" className="hidden" />

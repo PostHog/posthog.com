@@ -116,6 +116,7 @@ const RegisterForm: React.FC = () => {
                                 direction="row"
                                 touched={!!touched.firstName}
                                 error={errors.firstName}
+                                autoComplete="given-name"
                                 {...getFieldProps('firstName')}
                             />
                             <Input
@@ -125,6 +126,7 @@ const RegisterForm: React.FC = () => {
                                 direction="row"
                                 touched={!!touched.lastName}
                                 error={errors.lastName}
+                                autoComplete="family-name"
                                 {...getFieldProps('lastName')}
                             />
                             <Input
@@ -134,6 +136,7 @@ const RegisterForm: React.FC = () => {
                                 direction="row"
                                 touched={!!touched.email}
                                 error={errors.email}
+                                autoComplete="username"
                                 {...getFieldProps('email')}
                             />
                             <Input
@@ -143,6 +146,7 @@ const RegisterForm: React.FC = () => {
                                 direction="row"
                                 touched={!!touched.password}
                                 error={errors.password}
+                                autoComplete="new-password"
                                 {...getFieldProps('password')}
                             />
                             <button type="submit" className="hidden" />

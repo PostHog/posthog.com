@@ -134,6 +134,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                                 direction="row"
                                 touched={!!touched.email}
                                 error={errors.email}
+                                autoComplete="username"
                                 {...getFieldProps('email')}
                             />
                             <Input
@@ -143,6 +144,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
                                 direction="row"
                                 touched={!!touched.password}
                                 error={errors.password}
+                                autoComplete="current-password"
                                 {...getFieldProps('password')}
                             />
                             <button type="submit" className="hidden" />

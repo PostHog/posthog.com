@@ -126,6 +126,7 @@ const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingTo
                                         size="sm"
                                         direction="row"
                                         name="email"
+                                        autoComplete="username"
                                         value={identifier}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                             setIdentifier(e.target.value)
@@ -137,6 +138,7 @@ const PostHogDisambiguation: React.FC<PostHogDisambiguationProps> = ({ pendingTo
                                         size="sm"
                                         direction="row"
                                         name="password"
+                                        autoComplete="current-password"
                                         value={password}
                                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                                             setPassword(e.target.value)
