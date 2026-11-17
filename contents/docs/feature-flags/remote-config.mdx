@@ -111,7 +111,7 @@ Use `getRemoteConfigPayload` to read a remote config flag on the server, and alw
 
 | Method | Needs a distinct ID | Key used | Encrypted payloads |
 | --- | --- | --- | --- |
-| `getRemoteConfigPayload` | No | Secret API key or personal API key | Returned. See [encrypted payloads](#encrypted-payloads) for which key decrypts them |
+| `getRemoteConfigPayload` | No | Secret API key or personal API key | Returned decrypted with a personal API key, redacted with a secret API key. See [encrypted payloads](#encrypted-payloads) |
 | Flag payload method | Yes | Project token | Excluded from `/flags` |
 
 ## Encrypted payloads
