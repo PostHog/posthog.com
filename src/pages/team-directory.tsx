@@ -19,7 +19,6 @@ const columns = [
     { name: 'Teams', width: 'minmax(200px,1fr)', align: 'left' as const },
     { name: 'Team lead', width: 'minmax(100px,auto)', align: 'left' as const },
     { name: 'Pineapple?', width: 'auto', align: 'center' as const },
-    { name: 'T-shirt fit', width: 'minmax(82px,auto)', align: 'left' as const },
     { name: 'Start date', width: 'minmax(120px,auto)', align: 'left' as const },
 ]
 
@@ -43,34 +42,6 @@ function useSaveFlash() {
     const borderClass = saved ? 'border-green' : 'border-primary'
 
     return { flash, borderClass }
-}
-
-function EditableTShirtFitCell({
-    member,
-    updateProfile,
-}: {
-    member: TeamMember
-    updateProfile: (id: number, updates: Partial<TeamMember>) => Promise<boolean>
-}) {
-    const { flash, borderClass } = useSaveFlash()
-
-    return (
-        <select
-            className={`${baseInputClass} ${borderClass} cursor-pointer`}
-            value={member.tShirtFit || ''}
-            onChange={async (e) => {
-                const fit = e.target.value || null
-                const newSizes = fit === 'female' ? femaleSizes : unisexSizes
-                const size = member.tShirtSize && newSizes.includes(member.tShirtSize) ? member.tShirtSize : null
-                const ok = await updateProfile(member.id, { tShirtFit: fit, tShirtSize: size })
-                if (ok) flash()
-            }}
-        >
-            <option value="">—</option>
-            <option value="unisex">Unisex</option>
-            <option value="female">Female</option>
-        </select>
-    )
 }
 
 function EditableTextCell({ value, onSave }: { value: string | null; onSave: (newValue: string) => Promise<boolean> }) {
@@ -137,14 +108,6 @@ function memberToRow(
             { content: member.teams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.leadsTeams.map((t) => `${t} Team`).join(', ') || '—', className: 'text-sm' },
             { content: member.pineappleOnPizza === true ? 'Yes' : member.pineappleOnPizza === false ? 'No' : '—' },
-            {
-                content: isEditing ? (
-                    <EditableTShirtFitCell member={member} updateProfile={updateProfile} />
-                ) : (
-                    member.tShirtFit || '—'
-                ),
-                className: 'text-sm',
-            },
             { content: member.startDate || '—', className: 'text-sm' },
         ],
     }
@@ -282,16 +245,6 @@ export default function Team(): JSX.Element {
                         ],
                         filter: (obj: TeamMember, value: boolean) =>
                             value ? obj.leadsTeams.length > 0 : obj.leadsTeams.length === 0,
-                        operator: 'equals',
-                    },
-                    {
-                        label: 't-shirt fit',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'Unisex', value: 'unisex' },
-                            { label: 'Female', value: 'female' },
-                        ],
-                        filter: (obj: TeamMember, value: string) => obj.tShirtFit === value,
                         operator: 'equals',
                     },
                 ]}
