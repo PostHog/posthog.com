@@ -216,6 +216,8 @@ A few habits make this work:
 ## Gotchas when creating workflows
 
 - Watch for loops or workflows that are dependent on one another.
+- Plan for edge cases. Data won't always be there when a workflow runs, so give every workflow a fallback. When ours can't set an SLA, it alerts `#alerts-support` instead of failing silently.
+- Test changes before you trust them. For bigger changes, I run a shadow copy of the workflow alongside the live one and compare the results before switching over.
 - AI tasks are attributed to the workflow's creator, so their cost shows up under that person, not the workflow.
 - AI tasks have limits. By default, each workflow can create 100 AI tasks in a rolling 24 hours, and each project 500, but you can [raise these limits yourself](/docs/workflows/ai-tasks#limits).
 - Not everything a workflow can do shows up in the UI. For example, in the template that clears the SLA deadline when a ticket goes to on hold, pending, or resolved, you can't see all of the trigger conditions in the editor. I'd recommend getting your agent to build you a draft.
