@@ -32,9 +32,9 @@ The latter spend matches in your first year, and if it’s the first time an org
 
 The goods and services exchanged for that money amounted to more than 3,000 tube card panels, above-ground placements (bus shelters, train stations, and billboards), and a big chunk of space in Old Street Station for two weeks.
 
-We negotiated and purchased where we were gonna put the advertisements at the end of July, for a go-live date of late September/early October, three months before we had a design.
-
 The objective was to plaster the brand around Old Street and Shoreditch, because it’s London’s startup hub. Our Ideal Customer Profile (ICP) is AI-pilled developers working at high-growth startups, hence why we chose that area over somewhere that just had maximum foot traffic.
+
+We negotiated and purchased where we were gonna put the advertisements at the end of July, for a go-live date of late September/early October, three months before we had a design.
 
 ## The brainstorming process
 
