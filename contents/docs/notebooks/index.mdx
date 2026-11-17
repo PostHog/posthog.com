@@ -261,6 +261,16 @@ Yes, members of your organization can access and edit the notebooks you create. 
 
 Sharing externally isn't available yet, but you can request it in the notebook sharing menu.
 
+### Can I export a notebook?
+
+Yes. Open the notebook's options menu (the **...** icon), or go to **File** > **Export** in the notebook menu bar. You can export a notebook in these formats:
+
+- Markdown, to download the notebook as a `.md` file or copy it to your clipboard.
+- **Download PNG**, to save the notebook as an image.
+- **Print / save PDF**, to print the notebook or save it as a PDF.
+
+When you choose **Download PNG** or **Print / save PDF**, PostHog loads all the charts in the notebook first. Review the results, then click the button in the banner to confirm. A PNG export can't include embedded frames. If your notebook has them, use **Print / save PDF** instead.
+
 ### Do notebooks support real-time multiplayer editing?
 
 No. Although other people can see and edit your notebooks, they can't edit them at the same time. We do conflict detection and warn you of potential conflicts when you are trying to save (overwrite or revert).
