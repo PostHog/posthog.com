@@ -275,3 +275,11 @@ To re-enable a disabled subscription:
 PostHog validates that the issue is resolved before allowing re-enable. If the prerequisite is still broken (e.g., Slack is still disconnected or the bot isn't in the channel), re-enabling is rejected with an error message.
 
 When you successfully re-enable a subscription, PostHog immediately sends a confirmation delivery and sets the next scheduled delivery date.
+
+## Subscription ownership
+
+Each subscription delivers with the access of its owner, who is the person who created it. If the owner leaves your organization or loses access to the content, PostHog can't re-enable the subscription. When you try to re-enable it, PostHog offers to let you take ownership. This makes you the owner and enables the subscription, so deliveries run with your access.
+
+Organization admins can also transfer a subscription to another organization member. Send a `POST` request to `/api/projects/:project_id/subscriptions/:id/take_ownership/` with the new owner's `user_uuid`. Leave out `user_uuid` to take ownership yourself. The request also enables the subscription.
+
+The new owner needs access to the subscription's content, such as its dashboard or insight and the tables it reads. If they don't have access, PostHog rejects the change. Ownership changes appear in the activity log.

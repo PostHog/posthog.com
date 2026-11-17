@@ -420,6 +420,14 @@ Disabled alerts don't re-enable themselves. After fixing the configuration issue
 
 </CalloutBox>
 
+## Alert ownership
+
+Each alert runs its checks with the access of its owner, who is the person who created it. If the owner leaves your organization or loses access to the insight, PostHog can't enable the alert. When you try to enable it, PostHog offers to let you take ownership. This makes you the owner and enables the alert, so checks run with your access.
+
+Organization admins can also transfer an alert to another organization member. Send a `POST` request to `/api/projects/:project_id/alerts/:id/take_ownership/` with the new owner's `user_uuid`. Leave out `user_uuid` to take ownership yourself. The request also enables the alert.
+
+The new owner needs access to the alert's insight and the data it queries. If they don't have access, PostHog rejects the change. Ownership changes appear in the alert's activity log.
+
 ## Further reading
 
 For more ideas on how to get started with Alerts, check out our [alerts examples](/blog/alerts-examples).
