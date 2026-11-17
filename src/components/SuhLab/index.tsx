@@ -104,8 +104,8 @@ export default function SuhLab(): JSX.Element {
 
     return (
         <>
-            <h2 id="calculators">Hedgehog calculators</h2>
-            <p>Bring your own dimensions. We'll supply the hedgehogs.</p>
+            <h2 id="calculators">Conversion and calculation</h2>
+            <p>Enter the input values in the specified units. The calculators express the results in SUH units.</p>
             <div className="not-prose space-y-6">
                 <Fieldset legend="Length converter">
                     <div className="grid @md:grid-cols-2 gap-3">
@@ -166,31 +166,32 @@ export default function SuhLab(): JSX.Element {
                             <span id="suh-box-error">{measurementError}</span>
                         ) : (
                             <>
-                                {format(box.area)} h² footprint
+                                Area: {format(box.area)} h²
                                 <br />
-                                {format(box.volume)} h³ volume
+                                Volume: {format(box.volume)} h³
                             </>
                         )}
                     </output>
                     <p className="text-sm text-secondary mt-2 mb-0">
-                        Footprint = length × width. Volume = length × width × height. The hedgehogs remain
-                        three-dimensional.
+                        Area = length × width. Volume = length × width × height. All input dimensions use meters.
                     </p>
                 </Fieldset>
             </div>
 
-            <h2 id="experiments">The hedgehog physics laboratory</h2>
+            <h2 id="experiments">Physical simulations</h2>
             <p>
-                One snuffle is one second. Here, Earth's gravity is {format(gravityInHedgehogs)} h/sn² (9.81 m/s²).
-                These are idealized experiments without air resistance. Only virtual hedgehogs participate.
+                One snuffle equals one second. The simulations use a constant gravitational acceleration of{" "}
+                {format(gravityInHedgehogs)} h/sn² (9.81 m/s²). The symbol g denotes gravitational acceleration. Both
+                simulations exclude air resistance.
             </p>
             {reducedMotion && (
-                <p>Reduced motion is on. Use the time sliders to inspect each experiment without playback.</p>
+                <p>Reduced motion is active. Use the time sliders to inspect the simulations. Playback is disabled.</p>
             )}
             <div className="not-prose space-y-6">
                 <Fieldset legend="Free fall">
                     <p className="text-sm mt-0">
-                        Release a hedgehog from rest. Double the height and see whether the fall takes twice as long.
+                        This simulation calculates vertical motion from rest. Set the initial height. Start the
+                        simulation or select a time with the slider.
                     </p>
                     <label className="text-sm mb-2">
                         Drop height: {fallHeight} h ({format(fallHeight * hedgehogLengthMeters)} m)
@@ -211,7 +212,9 @@ export default function SuhLab(): JSX.Element {
                     <div
                         className="relative h-64 my-4 border-b border-primary overflow-hidden"
                         role="img"
-                        aria-label={`Virtual hedgehog has fallen ${format(fall.distance)} of ${fallHeight} hedgehogs`}
+                        aria-label={`Downward displacement: ${format(
+                            fall.distance
+                        )} hedgehogs. Initial height: ${fallHeight} hedgehogs.`}
                     >
                         <div className="absolute left-3 inset-y-2 border-l border-dashed border-primary" />
                         <span className="absolute left-6 top-0 text-sm">{fallHeight} h</span>
@@ -233,8 +236,8 @@ export default function SuhLab(): JSX.Element {
                             {running === "fall"
                                 ? "Pause fall"
                                 : fallTime >= fall.duration
-                                ? "Drop again"
-                                : "Drop hedgehog"}
+                                ? "Restart fall"
+                                : "Start fall"}
                         </OSButton>
                         <OSButton
                             size="sm"
@@ -261,24 +264,26 @@ export default function SuhLab(): JSX.Element {
                         }}
                     />
                     <p className="font-mono text-sm mt-3 mb-0" data-fall-readout>
-                        {format(fall.distance)} h fallen · {format(fall.speed)} h/sn{" "}
-                        {fallTime >= fall.duration ? "just before landing" : "downward"}
+                        Displacement: {format(fall.distance)} h · speed: {format(fall.speed)} h/sn{" "}
+                        {fallTime >= fall.duration ? "(before contact)" : "(downward)"}
                     </p>
                     <p className="text-sm text-secondary mt-2 mb-0">
-                        d = ½gt² · v = gt · landing time = √(2H/g). Motion is to scale within the drop; the icon is not.
+                        d = ½gt² · v = gt · contact time = √(2H/g). H is the initial height. The symbol t denotes
+                        elapsed time. Downward displacement is positive. The icon size does not indicate scale.
                     </p>
                     <p className="text-sm m-0" role="status">
                         {fallTime >= fall.duration
-                            ? "Landed. The hedgehog has filed a complaint."
+                            ? "The body reached the reference surface."
                             : running === "fall"
-                            ? "Falling."
-                            : "Ready when you are."}
+                            ? "The simulation is active."
+                            : "The simulation is inactive."}
                     </p>
                 </Fieldset>
 
-                <Fieldset legend="Hedgehog pendulum">
+                <Fieldset legend="Simple pendulum">
                     <p className="text-sm mt-0">
-                        A longer string makes a slower clock. The hedgehog's mass does not change the period.
+                        This simulation calculates periodic motion for a simple pendulum. The period increases with
+                        string length. The period does not depend on the mass of the body.
                     </p>
                     <label className="text-sm mb-2">
                         String length: {pendulumLength} h ({format(pendulumLength * hedgehogLengthMeters)} m)
@@ -299,7 +304,7 @@ export default function SuhLab(): JSX.Element {
                     <div
                         className="relative h-64 my-4 overflow-hidden"
                         role="img"
-                        aria-label={`Hedgehog pendulum at ${format(angle)} degrees from vertical`}
+                        aria-label={`Pendulum angle: ${format(angle)} degrees from vertical.`}
                     >
                         <div className="absolute top-2 left-1/2 h-56 border-l border-dashed border-primary" />
                         <div
@@ -318,7 +323,7 @@ export default function SuhLab(): JSX.Element {
                     </div>
                     <div className="flex flex-wrap gap-2 mb-3">
                         <OSButton size="sm" disabled={!!reducedMotion} onClick={() => play("pendulum")}>
-                            {running === "pendulum" ? "Pause pendulum" : "Swing hedgehog"}
+                            {running === "pendulum" ? "Pause pendulum" : "Start pendulum"}
                         </OSButton>
                         <OSButton
                             size="sm"
@@ -348,8 +353,11 @@ export default function SuhLab(): JSX.Element {
                         Period: {format(period)} sn · frequency: {format(1 / period)} hertzog
                     </p>
                     <p className="text-sm text-secondary mt-2 mb-0">
-                        T = 2π√(L/g) · f = 1/T. Small-angle model, released at 10°, with a massless string and no
-                        friction. Illustration not to scale.
+                        T = 2π√(L/g) · f = 1/T. T is the period. f is the frequency. L is the string length.
+                    </p>
+                    <p className="text-sm text-secondary mt-2 mb-0">
+                        The model uses the small-angle approximation. The initial angle is 10°. The string has no mass.
+                        The model excludes friction. The illustration does not indicate scale.
                     </p>
                 </Fieldset>
             </div>

@@ -10,63 +10,53 @@ import { hedgehogLengthMeters } from "components/SuhLab/physics"
 const hedgehogLengthCm = hedgehogLengthMeters * 100
 
 const baseUnits = [
-    ["Length", "hedgehog", "h", "Exactly 17.78 cm. Nose to rump, with the hedgehog's cooperation."],
-    ["Mass", "heft", "hf", "Exactly 1 kg. The mass of the reference hedgehog after a very successful lunch."],
-    ["Time", "snuffle", "sn", "Exactly 1 second. The committee refused to wait for an actual hedgehog."],
-    ["Electric current", "hedgeamp", "hA", "Exactly 1 mA. A theoretical quantity; do not wire up a hedgehog."],
+    ["Length", "hedgehog", "h", "The hedgehog is a unit of length equal to exactly 0.1778 m."],
+    ["Mass", "heft", "hf", "The heft is a unit of mass equal to exactly 1 kg."],
+    ["Time", "snuffle", "sn", "The snuffle is a unit of time equal to exactly 1 s."],
+    ["Electric current", "hedgeamp", "hA", "The hedgeamp is a unit of electric current equal to exactly 1 mA."],
     [
         "Temperature",
         "hedgekelvin",
         "hK",
-        "Exactly 1 K. Zero is absolute zero, at which point the hedgehog has left the experiment.",
+        "The hedgekelvin is a unit of thermodynamic temperature equal to exactly 1 K.",
     ],
     [
         "Amount of substance",
         "hedgemole",
         "hmol",
-        "Exactly 6.02214076 × 10²³ specified entities. If the entities are hedgehogs, we need a bigger garden.",
+        "The hedgemole contains exactly 6.02214076 × 10²³ elementary entities. Specify the type of entity for each measurement.",
     ],
-    [
-        "Luminous intensity",
-        "hedgela",
-        "hcd",
-        "Exactly 1 cd. The reference hedgehog holding a flashlight in a specified direction.",
-    ],
+    ["Luminous intensity", "hedgela", "hcd", "The hedgela is a unit of luminous intensity equal to exactly 1 cd."],
 ]
 
 const derivedUnits = [
-    ["Area", "square hedgehog", "h²", "A square one hedgehog long on each side. No hedgehogs are flattened."],
-    ["Volume", "cubic hedgehog", "h³", "A cube one hedgehog long on each edge. Contents may be spiky."],
-    [
-        "Speed",
-        "hedgehog per snuffle",
-        "h/sn",
-        "One reference length per snuffle. Whether the hedgehog agrees to move is a separate question.",
-    ],
+    ["Area", "square hedgehog", "h²", "The area of a square with a side length of 1 h."],
+    ["Volume", "cubic hedgehog", "h³", "The volume of a cube with an edge length of 1 h."],
+    ["Speed", "hedgehog per snuffle", "h/sn", "The speed of a body that moves a distance of 1 h in 1 sn."],
     [
         "Acceleration",
         "hedgehog per snuffle squared",
         "h/sn²",
-        "A change in speed of one hedgehog per snuffle, every snuffle. Usually snack-induced.",
+        "The acceleration that changes velocity by 1 h/sn in 1 sn.",
     ],
-    ["Force", "newhog", "hf·h/sn²", "The force needed to accelerate one heft by one hedgehog per snuffle squared."],
-    ["Frequency", "hertzog", "sn⁻¹", "One recurring event per snuffle. Includes unsolicited rustling at night."],
+    ["Force", "newhog", "hf·h/sn²", "The force that gives a mass of 1 hf an acceleration of 1 h/sn²."],
+    ["Frequency", "hertzog", "sn⁻¹", "The frequency of a periodic event that occurs once in 1 sn."],
 ]
 
 const prefixes = [
-    ["nano", "n", "10⁻⁹", "A hedgehog's contribution to the rent."],
-    ["micro", "μ", "10⁻⁶", "The chance of the committee agreeing on a logo."],
-    ["milli", "m", "10⁻³", "A small but formally recognized amount of hog."],
-    ["centi", "c", "10⁻²", "One hundredth of a hedgehog. A measurement, not an instruction."],
-    ["kilo", "k", "10³", "One thousand hedgehogs. The garden is now their garden."],
-    ["mega", "M", "10⁶", "One million hedgehogs. A planning problem."],
-    ["giga", "G", "10⁹", "One billion hedgehogs. A government problem."],
+    ["nano", "n", "10⁻⁹", "1 nh = 0.1778 nm"],
+    ["micro", "μ", "10⁻⁶", "1 μh = 0.1778 μm"],
+    ["milli", "m", "10⁻³", "1 mh = 0.1778 mm"],
+    ["centi", "c", "10⁻²", "1 ch = 1.778 mm"],
+    ["kilo", "k", "10³", "1 kh = 177.8 m"],
+    ["mega", "M", "10⁶", "1 Mh = 177.8 km"],
+    ["giga", "G", "10⁹", "1 Gh = 177,800 km"],
 ]
 
 const examples = [
-    { label: "The reference hedgehog", centimeters: hedgehogLengthCm },
-    { label: "A one-meter ruler", centimeters: 100 },
-    { label: "A 1.8-meter human", centimeters: 180 },
+    { label: "Reference length, 1 h", centimeters: hedgehogLengthCm },
+    { label: "Ruler length, 1 m", centimeters: 100 },
+    { label: "Human height, 1.8 m", centimeters: 180 },
 ]
 
 export default function StandardUnitOfHedgehog(): JSX.Element {
@@ -74,19 +64,19 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
         <>
             <SEO
                 title="Standard Unit of Hedgehog (SUH) - PostHog"
-                description="A perfectly serious system of measurement in which everything is measured in hedgehogs. Definitions, base units, prefixes, and unusually cooperative wildlife."
+                description="Definitions, conversion factors, notation, and calculation methods for the Standard Unit of Hedgehog (SUH)."
                 image="/images/og/default.png"
             />
             <Editor title="Standard Unit of Hedgehog" proseSize="base" hideToolbar className="[&_article]:pt-10">
-                <p className="text-secondary !mt-0">From the International Bureau of Weights and Hedgehogs</p>
+                <p className="text-secondary !mt-0">International Bureau of Weights and Hedgehogs</p>
                 <p>
-                    The <strong>Standard Unit of Hedgehog (SUH)</strong> is a system of measurement based on an
-                    unusually cooperative hedgehog. It provides a common language for length, mass, time, and four other
-                    things the committee insisted we include.
+                    The <strong>Standard Unit of Hedgehog (SUH)</strong> defines seven base units. This document
+                    specifies conversions to the International System of Units (SI). The hedgehog, symbol h, is the base
+                    unit of length.
                 </p>
                 <p>
-                    Its central achievement is replacing the question "How big is that?" with the much more useful
-                    question "How many hedgehogs is that?" PostHog already uses the system to measure{" "}
+                    This document specifies unit definitions, derived quantities, decimal prefixes, and notation.
+                    PostHog uses the reference length to express combined{" "}
                     <Link to="/teams/growth" state={{ newWindow: true }}>
                         team heights
                     </Link>
@@ -98,7 +88,7 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                         <div className="w-44 shrink-0">
                             <img
                                 src="/images/hedgehog.svg"
-                                alt="The reference hedgehog, facing left"
+                                alt="Reference hedgehog with a length indicator"
                                 width="176"
                                 height="176"
                                 className="w-full h-auto"
@@ -107,17 +97,19 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                             <p className="text-center text-sm font-mono mt-2 mb-0">1 h</p>
                         </div>
                         <div className="text-center @sm:text-left">
-                            <p className="text-xl font-bold mb-2">One hedgehog. Exactly.</p>
+                            <p className="text-xl font-bold mb-2">Reference length</p>
                             <p className="font-mono mb-2">1 h = 7 in = 17.78 cm</p>
                             <p className="text-sm text-secondary mb-0">
-                                Measured nose to rump. Spines excluded.
+                                The length extends from the nose to the rump.
                                 <br />
-                                Illustration not to scale.
+                                The reference excludes spines.
+                                <br />
+                                The illustration does not indicate scale.
                             </p>
                         </div>
                     </div>
                     <figcaption className="text-sm text-secondary text-center mt-5">
-                        Figure 1. The reference hedgehog. Please do not feed the standard.
+                        Figure 1. The reference hedgehog represents a length of 1 h.
                     </figcaption>
                 </figure>
 
@@ -140,10 +132,10 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                             <a href="#practical-measurement">Practical measurement</a>
                         </li>
                         <li>
-                            <a href="#calculators">Hedgehog calculators</a>
+                            <a href="#calculators">Conversion and calculation</a>
                         </li>
                         <li>
-                            <a href="#experiments">Physics experiments</a>
+                            <a href="#experiments">Physical simulations</a>
                         </li>
                         <li>
                             <a href="#writing-units">Writing units</a>
@@ -156,23 +148,22 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
 
                 <h2 id="definition">Definition</h2>
                 <p>
-                    One hedgehog, symbol <strong>h</strong>, is defined as exactly seven inches (0.1778 meters). This
-                    follows the convention used by PostHog's team pages. The definition is fixed; actual hedgehogs
-                    remain free to vary in length, curl into balls, or walk off the ruler.
+                    One hedgehog, symbol <strong>h</strong>, equals exactly seven inches (0.1778 meters). This
+                    definition uses the reference length from PostHog's team pages.
                 </p>
                 <p>
-                    A reference hedgehog must be awake, uncurled, and facing the same way as the other reference
-                    hedgehogs. A curled hedgehog is a different instrument, known as a ball bearing.
+                    The reference length is a fixed numerical value. Biological variation does not change the unit.
+                    Measurement does not require a physical hedgehog.
                 </p>
                 <p className="text-sm text-secondary">
-                    This is a parody standard. The reference values below are stipulated for this system, not claims
-                    about the size, mass, temperature, or electrical properties of real hedgehogs.
+                    SUH is a fictional system of units. Its definitions do not specify the biological properties of
+                    hedgehogs.
                 </p>
 
                 <h2 id="base-units">Base units</h2>
                 <p>
-                    There are seven base units. Each measures a different physical quantity using a reference hedgehog,
-                    a hedgehog-related event, or a hedgehog with an implausibly specific job description.
+                    Each base unit corresponds to one physical quantity. The definitions below specify exact conversion
+                    factors to SI units.
                 </p>
                 <div className="not-prose">
                     <OSTable
@@ -197,14 +188,13 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                     />
                 </div>
                 <p className="text-sm text-secondary">
-                    Symbols belong to their own quantities. A heft cannot be added to a snuffle, even if both hedgehogs
-                    look roughly the same.
+                    Add quantities only when their dimensions agree. A mass and a time have different dimensions.
                 </p>
 
                 <h2 id="derived-units">Derived units</h2>
                 <p>
-                    Base units can be multiplied and divided to describe more complicated things. This is how the
-                    committee discovered that a hedgehog can be squared without upsetting it.
+                    Products and quotients of base units define derived units. Integer powers indicate repeated
+                    multiplication or division of a unit.
                 </p>
                 <div className="not-prose">
                     <OSTable
@@ -237,8 +227,8 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
 
                 <h2 id="prefixes">Prefixes</h2>
                 <p>
-                    Decimal prefixes let us describe very small and very large quantities without recruiting more
-                    hedgehogs. For example, 1 kh = 1,000 h = 177.8 meters. No actual giant hedgehog is required.
+                    A decimal prefix multiplies a unit by a specified power of ten. For example, 1 kh equals 1,000 h, or
+                    177.8 meters.
                 </p>
                 <div className="not-prose">
                     <OSTable
@@ -250,7 +240,7 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                             { name: "Prefix", width: "80px" },
                             { name: "Symbol", width: "70px" },
                             { name: "Factor", width: "80px" },
-                            { name: "Suggested application", width: "minmax(230px, 1fr)" },
+                            { name: "Equivalent length", width: "minmax(230px, 1fr)" },
                         ]}
                         rows={prefixes.map(([prefix, symbol, factor, application]) => ({
                             cells: [
@@ -263,15 +253,14 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                     />
                 </div>
                 <p className="text-sm text-secondary">
-                    Selected prefixes shown. Uppercase matters: a megahog and a millihog require very different
-                    enclosures.
+                    This table lists selected prefixes. Prefix symbols are case-sensitive. The symbols M and m indicate
+                    factors of 10⁶ and 10⁻³, respectively.
                 </p>
 
                 <h2 id="practical-measurement">Practical measurement</h2>
                 <p>
-                    Divide a length in centimeters by 17.78 to obtain its length in hedgehogs. The following
-                    measurements use the same icon as our team pages. A partial icon denotes a fractional hedgehog; no
-                    hedgehogs were divided in the preparation of this document.
+                    Divide a length in centimeters by 17.78 to calculate its value in hedgehogs. Each complete icon
+                    represents 1 h. A partial icon represents the remaining fraction.
                 </p>
                 <div className="not-prose space-y-4 my-6">
                     {examples.map(({ label, centimeters }) => {
@@ -287,8 +276,8 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                     })}
                 </div>
                 <p>
-                    The icons wrap when the window gets smaller. The human does not. For real-world measurement, use a
-                    tape measure and do the arithmetic; lining up live hedgehogs introduces significant drift.
+                    A line break does not change the measurement. Use a length instrument to obtain the input value.
+                    Apply the conversion factor after measurement.
                 </p>
 
                 <SuhLab />
@@ -296,43 +285,42 @@ export default function StandardUnitOfHedgehog(): JSX.Element {
                 <h2 id="writing-units">Writing units</h2>
                 <ul>
                     <li>
-                        Put a space between the number and symbol: <strong>12 h</strong>, not 12h.
+                        Insert a space between the numerical value and the unit symbol. Write <strong>12 h</strong>.
                     </li>
                     <li>
-                        Symbols do not become plural: two hedgehogs is <strong>2 h</strong>, not 2 hs.
+                        Do not add a plural ending to a unit symbol. Write <strong>2 h</strong>.
                     </li>
                     <li>
-                        Keep prefixes attached to symbols: <strong>1 kh</strong>, not 1 k h.
+                        Attach the prefix directly to the unit symbol. Write <strong>1 kh</strong>.
                     </li>
                     <li>
-                        Use <strong>h</strong> for hedgehog in this document. Elsewhere it may mean hour. Check before
-                        scheduling a meeting.
+                        Use <strong>h</strong> for the hedgehog only within the SUH context. In SI notation, h denotes
+                        the hour.
                     </li>
-                    <li>Round the result, not the hedgehog.</li>
+                    <li>Use the exact conversion factor. Round the final result to the required precision.</li>
                 </ul>
 
                 <h2 id="history">History and governance</h2>
                 <p>
-                    In the beginning, PostHog measured team heights in hedgehogs. Someone then asked whether this
-                    counted as a system of units. Rather than answer the question, we established a bureau.
+                    PostHog's team pages use seven inches as the reference length for a hedgehog. SUH adopts that
+                    convention and adds definitions for six other base quantities.
                 </p>
                 <p>
-                    The fictional International Bureau of Weights and Hedgehogs maintains the reference standard in a
-                    climate-controlled garden. The General Conference on Weights and Hedgehogs meets whenever everyone
-                    is awake at the same time. No resolutions have passed during hibernation season.
+                    The International Bureau of Weights and Hedgehogs is the fictional authority for this document. The
+                    numerical definitions in this document determine the units.
                 </p>
                 <p>
-                    Earlier attempts to keep a physical reference hedgehog under glass were abandoned when the reference
-                    standard ate its certificate. The current definition is numerical, which is harder to eat.
+                    The calculators use these definitions. Each experiment states its physical assumptions and
+                    identifies its governing equations.
                 </p>
                 <hr />
                 <p className="text-sm text-secondary">
-                    Inspired by the{" "}
+                    Structural reference:{" "}
                     <a href="https://en.wikipedia.org/wiki/International_System_of_Units">
                         International System of Units
                     </a>
-                    . Original parody by PostHog. Not endorsed by any metrology organization, or by the hedgehog. More
-                    questionable uses of our time:{" "}
+                    . PostHog maintains this fictional specification. The specification does not represent an official
+                    metrology standard. Site directory:{" "}
                     <Link to="/sparks-joy" state={{ newWindow: true }}>
                         things that spark joy
                     </Link>
