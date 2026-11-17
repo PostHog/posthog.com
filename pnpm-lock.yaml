@@ -672,6 +672,9 @@ importers:
       css-loader:
         specifier: ^6.4.0
         version: 6.11.0(webpack@5.101.3)
+      dataloader:
+        specifier: 1.4.0
+        version: 1.4.0
       eslint:
         specifier: ^7.9.0
         version: 7.32.0

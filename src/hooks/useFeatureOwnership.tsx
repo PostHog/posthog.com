@@ -55,10 +55,28 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         owner: ['growth'],
         label: 'feature/agentic-provisioning',
     },
+    'ai-datasets': {
+        feature: 'AI datasets',
+        owner: ['ai-observability'],
+        notes: 'Dataset curation, versioning, exports, and retention for AI evaluations.',
+        label: 'aio/evals',
+    },
+    'ai-evaluations': {
+        feature: 'AI evaluations',
+        owner: ['ai-observability'],
+        notes: 'Online and offline evaluations, scorers, trace reviews, review queues, and evaluation reports.',
+        label: 'aio/evals',
+    },
     'ai-gateway': {
         feature: 'AI gateway',
         owner: ['agent-infrastructure'],
         label: 'feature/ai-gateway',
+    },
+    'ai-observability': {
+        feature: 'AI Observability',
+        owner: ['ai-observability'],
+        notes: 'LLM tracing, cost and latency analytics, multimodal content, trace summaries, and sentiment analysis.',
+        label: 'feature/ai-observability',
     },
     'ai-playground': {
         feature: 'AI playground',
@@ -69,6 +87,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
         feature: 'AI plugin (Claude Code, Codex, Cursor, Gemini CLI)',
         owner: ['context-and-mcp'],
         label: false,
+    },
+    'ai-trace-clustering': {
+        feature: 'AI trace clustering',
+        owner: ['ai-observability'],
+        notes: 'Groups similar LLM traces to identify usage patterns and failure modes.',
+        label: 'feature/aio-clusters',
     },
     alerts: {
         feature: 'Alerts',
@@ -424,6 +448,12 @@ const FEATURE_DATA: Record<string, BaseFeature> = {
             </>
         ),
         label: false,
+    },
+    'prompt-management': {
+        feature: 'Prompt management',
+        owner: ['experiments'],
+        notes: 'Prompt versioning, labels, configuration, and prompt A/B testing.',
+        label: 'feature/prompt-management',
     },
     'property-filters': {
         feature: 'Property filters',
