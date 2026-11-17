@@ -240,7 +240,7 @@ We'll email you before your organization moves. PostHog won't stop writing flag 
 
 ### What you can do now
 
-- If you write [SQL](/docs/sql) that reads `$feature_flag_called`, list the columns you need instead of `*`, and don't use `SAMPLE` or `FINAL`. After the move, these queries return an error.
+- If you write [SQL](/docs/sql) that reads `$feature_flag_called`, list the columns you need instead of `*`, and write `SAMPLE` as a ratio, such as `SAMPLE 0.1`. After the move, a query that reads `$feature_flag_called` with `SELECT *`, `COLUMNS(...)`, a `SAMPLE` with an `OFFSET`, or a `SAMPLE` of a row count returns an error.
 - The SQL editor warns you when a query reads `$feature_flag_called` from the `events` table.
 
 ### What shows flag calls after the move

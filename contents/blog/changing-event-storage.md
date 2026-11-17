@@ -74,7 +74,7 @@ From November 30, queries that read every event and don't name `$feature_flag_ca
 
 Three exceptions:
 
-- **SQL with `SELECT *`, `SAMPLE`, or `FINAL`:** a query that reads `$feature_flag_called` with any of these returns an error. List the columns you need instead of `*`, and remove `SAMPLE` and `FINAL`.
+- **SQL with `SELECT *` or some `SAMPLE` forms:** a query that reads `$feature_flag_called` with `SELECT *`, `COLUMNS(...)`, a `SAMPLE` with an `OFFSET`, or a `SAMPLE` of a row count returns an error. List the columns you need instead of `*`, and write `SAMPLE` as a ratio, such as `SAMPLE 0.1`.
 - **Batch exports:** from November 30, exports of the `events` table will not include `$feature_flag_called` events. To keep exporting them, see [What changes for batch exports](#what-changes-for-batch-exports).
 - **Legacy apps:** from November 30, legacy apps won't receive `$feature_flag_called` events. To keep receiving them, switch to the matching destination, such as [Customer.io](/docs/data-pipelines/destinations/customerio) or [RudderStack](/docs/data-pipelines/destinations/rudderstack).
 
