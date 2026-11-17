@@ -34,6 +34,7 @@ List of ingestion warnings:
 - [Ignored an invalid timestamp, event was still ingested](#ignored-an-invalid-timestamp-event-was-still-ingested)
 - [An event was sent more than 23 hours in the future](#an-event-was-sent-more-than-23-hours-in-the-future)
 - [Discarded event exceeding 1MB limit](#discarded-event-exceeding-1mb-limit)
+- [Person properties nested too deep](#person-properties-nested-too-deep)
 - [Event ingestion has overflowed capacity](#event-ingestion-has-overflowed-capacity)
 - [Skipped person profile processing for a high-volume distinct ID](#skipped-person-profile-processing-for-a-high-volume-distinct-id)
 - [Ingested event after shortening its distinct ID to the 200 character limit](#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit)
@@ -96,6 +97,20 @@ This warning indicates PostHog is receiving more events for a single `distinct_i
 One distinct ID sent events much faster than expected, so PostHog skipped [person processing](/docs/how-posthog-works/ingestion-pipeline#2-person-processing) for those events. The events are still ingested. They just don't create or update a person profile while the limit is active.
 
 This usually means one distinct ID is shared by many users or machines. See [rate limiting high-volume distinct IDs](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids) for how to fix it.
+
+## Person properties nested too deep
+
+PostHog rejects person property updates when the properties are nested more than 128 levels deep. When this happens, the update is dropped and the person's events cannot be processed until the problem is resolved.
+
+This usually happens when you accidentally pass a complex object as a person property value – for example, a DOM element, a React node, or an SDK instance – instead of a plain value like a string, number, or simple object.
+
+To fix this:
+
+1. Find where the complex object is being passed as a person property value.
+2. Replace it with a plain value (string, number, boolean, or simple object).
+3. If a person already has deeply nested properties stored, [delete the person](/docs/data/persons#deleting-person-data) to resume processing their events.
+
+After deleting an affected person, their next event creates a new person profile.
 
 ## Ingested event after shortening its distinct ID to the 200 character limit
 
