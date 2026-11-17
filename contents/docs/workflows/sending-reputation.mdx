@@ -4,6 +4,13 @@ sidebar: Docs
 showTitle: true
 ---
 
+This page explains what you get when PostHog sends your email, transactional or marketing. In short:
+
+- **No IP address to warm up.** Your email goes out over Amazon SES IP addresses that many senders share, so you don't need a dedicated IP address. See [shared sending infrastructure](#shared-sending-infrastructure).
+- **Your domain keeps its reputation.** You send from your own domain, and you can set it up next to your old provider before you switch. See [move from another provider](#move-from-another-provider).
+- **Transactional email never waits.** It counts toward your daily allowance, but it goes out at once even when the allowance is empty, so you can move it on day one. See [the allowance FAQ](#do-transactional-emails-count-against-the-allowance).
+- **Marketing volume grows with your record.** A sending tier paces your other email, from 100 emails per day up to 1,000,000. If you move from another provider and need more sooner, [request a higher allowance](#can-i-request-a-higher-tier).
+
 Every project holds a sending tier from 0 to 7. The tier caps how many emails your workflows send per day, and how large one batch audience can be. A new project starts at tier 0 and moves up one tier at a time as it sends with low bounce and spam complaint rates.
 
 Why the caps? All workflow email leaves through PostHog's shared sending infrastructure. Mailbox providers judge that infrastructure on the bounce and complaint rates of everything it sends. One project with a bad list hurts deliverability for every project. The tiers keep an unproven project's volume small until its record shows it is safe.
@@ -34,6 +41,8 @@ Mailbox providers use the same thresholds. A project above either threshold cann
 | 5 | 100,000 | 100,000 |
 | 6 | 300,000 | 300,000 |
 | 7 | 1,000,000 | 1,000,000 |
+
+The tiers pace workflow email and broadcasts. Transactional email counts toward the allowance but never waits for it, so you can move all of your transactional email on day one, even at tier 0. It still uses up allowance, which your other email then waits for.
 
 The daily allowance refills continuously, not at midnight. A project with a full allowance can send its whole daily cap at once. After that, the allowance refills at one day's cap spread over 24 hours.
 
@@ -80,6 +89,30 @@ PostHog sends workflow email through Amazon SES, from one sending account per cl
 
 Your email goes out over IP addresses that Amazon SES shares between many senders. Mailbox providers also judge your sending domain on its own, and that reputation stays with the domain, whichever provider sends for it.
 
+## Move from another provider
+
+Your domain keeps its reputation when you move, because mailbox providers judge the domain, not only the provider that sends for it. They still notice when a domain starts to send from new infrastructure, so move gradually.
+
+### Set up your domain next to your old provider
+
+You can add PostHog's DNS records while your old provider still sends. The [Channels tab](/docs/workflows/configure-channels) shows each record for your domain.
+
+- **DKIM.** PostHog gives you three CNAME records under `_domainkey`, with names that only PostHog uses. Your old provider's DKIM records stay as they are, and each provider signs its own email.
+- **SPF.** A domain can have only one SPF record. A second one makes SPF fail for all email from the domain. If your domain already has an SPF record, add `include:amazonses.com` to it instead of creating a new record.
+- **Bounce subdomain.** PostHog also needs a subdomain for bounces, `feedback` by default, with one MX record and one SPF record. Nothing else may use it to send or receive email. If something already uses `feedback`, set another **Bounce subdomain** under **Advanced** when you add the domain.
+- **DMARC.** If your domain already has a DMARC record, keep it. PostHog only checks that one exists.
+
+Your old provider keeps sending as long as its records stay in place. Remove them only after its last email goes out, or that email fails authentication.
+
+### Move your email in steps
+
+1. **Verify your domain.** Add your sending domain or subdomain on the [Channels tab](/docs/workflows/configure-channels), as above.
+2. **Bring your lists first.** Import your old provider's bounces, complaints, and unsubscribes before the first send. Add bounces and complaints in bulk with the [messaging suppressions API](/docs/api/messaging-suppressions), and set each entry's `reason` to `bounce` or `complaint`. Only a `bounce` entry also blocks transactional email. Add unsubscribes with the [messaging preferences API](/docs/api/messaging-preferences). Sending to an address that already bounced or opted out costs reputation right away.
+3. **Start with engaged recipients.** Move transactional email and your most active users first. Move the rest over a few weeks. The sending tiers pace the move as well. If they are too slow for your current volume, [request a higher allowance](#can-i-request-a-higher-tier).
+4. **Watch the Reputation tab.** Check your bounce and complaint rates after each step, before you move more volume.
+
+Amazon's [guide to migrating to Amazon SES](https://aws.amazon.com/blogs/messaging-and-targeting/guide-to-ip-and-domain-warming-and-migrating-to-amazon-ses/) has more detail.
+
 ## Frequently asked questions
 
 ### Do I need to warm up an IP address?
@@ -104,20 +137,9 @@ All projects in a region still share the regional SES account, so these steps re
 
 No. Workflow email always goes out through PostHog's Amazon SES setup. You bring the sending domain, not the mail server, so you can't connect your own SMTP server or an email provider account.
 
-### How do I move my email from another provider?
-
-Your domain keeps its reputation when you move. Mailbox providers still notice when a domain starts to send from new infrastructure, so move gradually.
-
-1. **Verify your domain.** Add your sending domain or subdomain on the [Channels tab](/docs/workflows/configure-channels).
-2. **Bring your lists first.** Import your old provider's bounces, complaints, and unsubscribes before the first send. Add bounces and complaints in bulk with the [messaging suppressions API](/docs/api/messaging-suppressions), and set each entry's `reason` to `bounce` or `complaint`. Only a `bounce` entry also blocks transactional email. Add unsubscribes with the [messaging preferences API](/docs/api/messaging-preferences). Sending to an address that already bounced or opted out costs reputation right away.
-3. **Start with engaged recipients.** Move transactional email and your most active users first. Move the rest over a few weeks. The sending tiers pace the move as well. If they are too slow for your current volume, [request a higher allowance](#can-i-request-a-higher-tier).
-4. **Watch the Reputation tab.** Check your bounce and complaint rates after each step, before you move more volume.
-
-Amazon's [guide to migrating to Amazon SES](https://aws.amazon.com/blogs/messaging-and-targeting/guide-to-ip-and-domain-warming-and-migrating-to-amazon-ses/) has more detail.
-
 ### Can I request a higher tier?
 
-Sending earns tiers, and the daily review is the same for every project. If you have a sending history elsewhere, for example because you are moving from another provider, and need more volume sooner, ask for a higher allowance. This needs a plan that can open support tickets, such as a paid plan. Click **Request a higher allowance** on the sending allowance card of the [Reputation tab](https://app.posthog.com/workflows/reputation). It opens a support form, filled in with your project's sending record. Add your use case and send the form. If you are on such a plan and the card doesn't show the link, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
+Sending earns tiers, and the daily review is the same for every project. If you have a sending history elsewhere, for example because you are moving from another provider, and need more volume sooner, ask for a higher allowance. Click **Request a higher allowance** on the sending allowance card of the [Reputation tab](https://app.posthog.com/workflows/reputation). It opens a support form, filled in with your project's sending record. Add your use case and send the form. The link shows for organizations that can open a support ticket, such as those on a paid plan. Otherwise, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
 
 ### Do transactional emails count against the allowance?
 
