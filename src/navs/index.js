@@ -7177,7 +7177,7 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
-                    name: 'Setup',
+                    name: 'Get started',
                 },
                 {
                     name: 'Start here',
@@ -7445,74 +7445,24 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Self-driving',
-                    url: '/docs/ai-observability/self-driving',
-                    icon: 'IconBolt',
-                    color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Where to use',
-                },
-                {
-                    name: 'PostHog Web',
-                    url: '/docs/ai-observability/surfaces/web-app',
-                    icon: 'IconLaptop',
-                    color: 'seagreen',
-                    featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/ai-observability/surfaces/web-app',
-                        },
-                        {
-                            name: 'Analyze LLM performance',
-                            url: '/docs/ai-observability/dashboard',
-                        },
-                        {
-                            name: 'Playground',
-                            url: '/docs/ai-observability/playground',
-                        },
-                        {
-                            name: 'Clusters',
-                            url: '/docs/ai-observability/clusters',
-                        },
-                        {
-                            name: 'Sentiment',
-                            url: '/docs/ai-observability/sentiment',
-                        },
-                        {
-                            name: 'Trace summarization',
-                            url: '/docs/ai-observability/summarization',
-                        },
-                        {
-                            name: 'Analyze traces with PostHog AI',
-                            url: '/docs/ai-observability/analyze-traces-ai',
-                        },
-                    ],
-                },
-                {
-                    name: 'PostHog MCP',
-                    url: '/docs/ai-observability/surfaces/mcp',
-                    icon: 'IconLlmPromptEvaluation',
-                    color: 'green',
-                    featured: true,
-                },
-                {
-                    name: 'Skills',
-                    url: '/docs/ai-observability/skills',
-                    icon: 'IconMagicWand',
+                    name: 'Tracking custom properties',
+                    url: '/docs/ai-observability/custom-properties',
+                    icon: 'IconGear',
                     color: 'purple',
                     featured: true,
                 },
                 {
-                    name: 'API',
-                    url: '/docs/ai-observability/surfaces/api',
+                    name: 'Custom parsers',
+                    url: '/docs/ai-observability/custom-parser',
                     icon: 'IconBrackets',
-                    color: 'seagreen',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
                 },
                 {
-                    name: 'Traces and spans',
+                    name: 'Tracing',
                 },
                 {
                     name: 'Basics',
@@ -7569,30 +7519,29 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Tracking custom properties',
-                    url: '/docs/ai-observability/custom-properties',
-                    icon: 'IconGear',
-                    color: 'purple',
-                    featured: true,
-                },
-                {
-                    name: 'Custom parsers',
-                    url: '/docs/ai-observability/custom-parser',
-                    icon: 'IconBrackets',
-                    color: 'purple',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
-                },
-                {
-                    name: 'Data retention',
-                    url: '/docs/ai-observability/data-retention',
-                    icon: 'IconDatabase',
+                    name: 'Analyze LLM performance',
+                    url: '/docs/ai-observability/dashboard',
+                    icon: 'IconGraph',
                     color: 'blue',
                 },
                 {
-                    name: 'Integrations',
+                    name: 'Calculating LLM costs',
+                    url: '/docs/ai-observability/calculating-costs',
+                    icon: 'IconBalance',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Trace summarization',
+                    url: '/docs/ai-observability/summarization',
+                    icon: 'IconAIText',
+                    color: 'purple',
+                },
+                {
+                    name: 'Analyze traces with PostHog AI',
+                    url: '/docs/ai-observability/analyze-traces-ai',
+                    icon: 'IconMagicWand',
+                    color: 'orange',
                 },
                 {
                     name: 'Link Session Replay',
@@ -7607,9 +7556,6 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'User feedback',
-                },
-                {
                     name: 'Collect user feedback',
                     url: '/docs/ai-observability/collect-user-feedback',
                     icon: 'IconMessage',
@@ -7617,32 +7563,7 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Pocket guides',
-                    url: '/learn/ai-observability',
-                    badge: {
-                        title: 'New',
-                        className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
-                    },
-                },
-                {
-                    name: 'Calculating LLM costs',
-                    url: '/docs/ai-observability/calculating-costs',
-                    icon: 'IconBalance',
-                    color: 'green',
-                    featured: true,
-                },
-                {
-                    name: 'Large events',
-                    url: '/docs/ai-observability/large-events',
-                    icon: 'IconSend',
-                    color: 'teal',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
+                    name: 'Online evals',
                 },
                 {
                     name: 'Evaluations',
@@ -7650,44 +7571,94 @@ export const docsMenu = {
                     icon: 'IconTarget',
                     color: 'yellow',
                     featured: true,
-                    children: [
-                        {
-                            name: 'Overview',
-                            url: '/docs/ai-evals',
-                        },
-                        {
-                            name: 'Choose a judge method',
-                            url: '/docs/ai-evals/judge-methods',
-                        },
-                        {
-                            name: 'Backfills',
-                            url: '/docs/ai-evals/backfills',
-                        },
-                        {
-                            name: 'Evaluation reports',
-                            url: '/docs/ai-evals/reports',
-                        },
-                        {
-                            name: 'Trace reviews',
-                            url: '/docs/ai-observability/trace-reviews',
-                        },
-                        {
-                            name: 'Datasets',
-                            url: '/docs/ai-evals/datasets',
-                        },
-                        {
-                            name: 'Offline evals',
-                            url: '/docs/ai-evals/offline-evals',
-                        },
-                        {
-                            name: 'Review and compare experiments',
-                            url: '/docs/ai-evals/experiments',
-                        },
-                        {
-                            name: 'Scorers',
-                            url: '/docs/ai-evals/scorers',
-                        },
-                    ],
+                },
+                {
+                    name: 'Choose a judge method',
+                    url: '/docs/ai-evals/judge-methods',
+                    icon: 'IconTarget',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Backfills',
+                    url: '/docs/ai-evals/backfills',
+                    icon: 'IconRewindPlay',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Sentiment',
+                    url: '/docs/ai-observability/sentiment',
+                    icon: 'IconMessage',
+                    color: 'green',
+                },
+                {
+                    name: 'Trace reviews',
+                    url: '/docs/ai-observability/trace-reviews',
+                    icon: 'IconPerson',
+                    color: 'blue',
+                },
+                {
+                    name: 'Eval reports',
+                },
+                {
+                    name: 'Evaluation reports',
+                    url: '/docs/ai-evals/reports',
+                    icon: 'IconBell',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Offline evals',
+                },
+                {
+                    name: 'Offline evals',
+                    url: '/docs/ai-evals/offline-evals',
+                    icon: 'IconFlask',
+                    color: 'purple',
+                },
+                {
+                    name: 'Review and compare experiments',
+                    url: '/docs/ai-evals/experiments',
+                    icon: 'IconLineGraph',
+                    color: 'purple',
+                },
+                {
+                    name: 'Scorers',
+                    url: '/docs/ai-evals/scorers',
+                    icon: 'IconTarget',
+                    color: 'purple',
+                },
+                {
+                    name: 'Datasets',
+                    url: '/docs/ai-evals/datasets',
+                    icon: 'IconDatabase',
+                    color: 'purple',
+                },
+                {
+                    name: 'Clusters',
+                },
+                {
+                    name: 'Clusters',
+                    url: '/docs/ai-observability/clusters',
+                    icon: 'IconCompass',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Self-driving',
+                },
+                {
+                    name: 'Self-driving',
+                    url: '/docs/ai-observability/self-driving',
+                    icon: 'IconBolt',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Tools for iterating',
+                },
+                {
+                    name: 'Playground',
+                    url: '/docs/ai-observability/playground',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'blue',
                 },
                 {
                     name: 'Prompt management',
@@ -7709,6 +7680,63 @@ export const docsMenu = {
                             url: '/docs/prompt-management/temporal',
                         },
                     ],
+                },
+                {
+                    name: 'Where to use',
+                },
+                {
+                    name: 'PostHog Web',
+                    url: '/docs/ai-observability/surfaces/web-app',
+                    icon: 'IconLaptop',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'PostHog MCP',
+                    url: '/docs/ai-observability/surfaces/mcp',
+                    icon: 'IconLlmPromptEvaluation',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Skills',
+                    url: '/docs/ai-observability/skills',
+                    icon: 'IconMagicWand',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'API',
+                    url: '/docs/ai-observability/surfaces/api',
+                    icon: 'IconBrackets',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Pocket guides',
+                    url: '/learn/ai-observability',
+                    badge: {
+                        title: 'New',
+                        className: 'uppercase !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50',
+                    },
+                },
+                {
+                    name: 'Large events',
+                    url: '/docs/ai-observability/large-events',
+                    icon: 'IconSend',
+                    color: 'teal',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Data retention',
+                    url: '/docs/ai-observability/data-retention',
+                    icon: 'IconDatabase',
+                    color: 'blue',
                 },
                 {
                     name: 'Demos & examples',
