@@ -1,8 +1,10 @@
 ---
-title: How we run support through Workflows in PostHog
-date: 2026-10-22
+title: How we run support through PostHog Workflows
+date: 2026-11-17
 author:
   - abigail-richardson
+featuredImage: >-
+    https://res.cloudinary.com/dmukukwp6/image/upload/rebuilding_support_workflows_in_posthog_1_d4519bdb96.png
 tags:
   - Support
   - Guides
@@ -29,11 +31,11 @@ Here are some examples of what I built:
 
 ## Triaging and categorizing tickets
 
-In our old world, triage was mostly manual – customers had to pick a product area and priority when submitting a ticket. That was fine when PostHog had a couple of products, but with so many now, customers have no idea which area to pick.
+In Zendesk, triage was mostly manual – customers had to pick a product area and priority when submitting a ticket. That was fine when PostHog had a couple of products, but with so many now, customers have no idea which area to pick.
 
 It was also a lot of upkeep for me and for engineering teams. Every time a team was created, renamed, or split, we had to update the sidebar topics and the Zendesk triggers that routed tickets.
 
-Moving to our new world, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [Workflows AI task step](/docs/workflows/ai-tasks). It helps us do all of our triage and categorization in one workflow. On every new ticket it:
+Moving to PostHog Support, I was adamant that I didn't want a branch per team that I'd have to maintain forever. The solution was the [Workflows AI task step](/docs/workflows/ai-tasks). It helps us do all of our triage and categorization in one workflow. On every new ticket it:
 
 1. Fetches the ticket.
 2. Runs a spam pre-filter, and skips and auto-resolves anything we don't want classified.
@@ -69,7 +71,7 @@ We have several workflows to keep tickets moving:
 
 ## Managing service level agreements
 
-SLAs are the biggest set of workflows we have. Most helpdesks have SLAs built in: you set your working hours and a policy per plan, and the tool decides behind the scenes when each deadline starts, pauses, and stops. In Workflows, nothing happens unless you say so. Every point where a deadline gets set or cleared is a step in a workflow, with its own working hours.
+SLAs are the biggest set of workflows we have. Most helpdesks have SLAs built in: you set your working hours and a policy per plan, and the tool decides behind the scenes when each deadline starts, pauses, and stops. In Workflows, nothing happens unless you say so. Every point where a deadline gets set or cleared is a step in a workflow.
 
 That's more to set up, but it means I decide exactly how our SLAs behave, rather than working around someone else's idea of when a clock should start. I could give some customers different working hours, or put certain tickets on a 24/7 clock. We don't need that today, but nothing stops us. And because I describe what I want and AI builds the workflow, the extra setup is mostly a conversation, not hours in an editor.
 
@@ -87,7 +89,7 @@ When a ticket moves to pending, resolved, or on hold, a separate workflow clears
 
 For every new ticket, this workflow checks the customer's organization in [Customer Analytics](/docs/customer-analytics) for customers our sales or customer success teams have marked as high priority or churn risks. These get special alerts into our internal channels.
 
-Otherwise, a conditional step checks the plan on the customer's organization and sets the SLA deadline on the ticket. It also tags the ticket with the plan, so engineers can see at a glance whether it's Enterprise, Scale, Boost, or something else, and we can easily report on these. When setting the SLA deadline, I set our working hours to Monday to Friday, 5am to 9pm Canada/Atlantic. That's 9am UK to 5pm Pacific, kept inside one day in one time zone.
+Otherwise, a conditional step checks the plan on the customer's organization and sets the SLA deadline on the ticket. It also tags the ticket with the plan, so engineers can see at a glance whether it's Enterprise, Scale, Boost, or something else, and we can easily report on these. When setting the SLA deadline, I set our working hours to Monday to Friday, 9am UK to 5pm Pacific, kept inside one day in one time zone.
 
 There are a couple of fallbacks:
 
@@ -98,9 +100,9 @@ There are a couple of fallbacks:
 
 ### Setting the next response time
 
-This works in a similar way to the FRT workflow, but runs on every customer reply. It rechecks segment and plan, in case either has changed since the ticket was created, and updates the tags as necessary.
+This works in a similar way to the first response time workflow, but runs on every customer reply. It rechecks segment and plan, in case either has changed since the ticket was created, and updates the tags as necessary.
 
-It only sets a new SLA deadline if the ticket has no SLA deadline set, or the new one would be shorter than the existing one. So, if a customer writes in twice before we've answered, they keep the original, shorter SLA deadline.
+It only sets a new SLA deadline if the ticket has no SLA deadline set, or the new one would be shorter than the existing one. So, if a customer replies twice before we've answered, they keep the original, shorter SLA deadline.
 
 The same SLA is applied when someone reopens a ticket, for example if it was set to pending or resolved by mistake. That workflow keys off the plan or segment tag already on the ticket.
 
@@ -189,11 +191,11 @@ Turning this feedback into tickets means we can reply to customers who are missi
 
 Individual support engineers have also customized their own workflows.
 
-Christiaan built a workflow to keep track of his own SLA deadlines. It posts a Slack warning 15 minutes before the SLA deadline on any ticket assigned to him that's still unresolved.
+<TeamMember name="Christiaan Hendriksen" photo /> built a workflow to keep track of his own SLA deadlines. It posts a Slack warning 15 minutes before the SLA deadline on any ticket assigned to him that's still unresolved.
 
-Chris built two workflows that connect tickets to our incident.io incidents. When an incident is declared, an AI task finds open tickets about it and tags them, so they're all in one place. New tickets about an open or recently closed incident get the same tag.
+<TeamMember name="Chris Shine" photo /> built two workflows that connect tickets to our incident.io incidents. When an incident is declared, an AI task finds open tickets about it and tags them, so they're all in one place. New tickets about an open or recently closed incident get the same tag.
 
-Christian set up a workflow so that when a customer replies, the ticket assignee gets an email. He also built one so that anyone who escalates a ticket to an engineering team automatically follows that ticket, so they can see what the engineering team says. Luke then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily go to a Slack channel.
+<TeamMember name="Christian Rafferty" photo /> set up a workflow so that when a customer replies, the ticket assignee gets an email. He also built one so that anyone who escalates a ticket to an engineering team automatically follows that ticket, so they can see what the engineering team says. <TeamMember name="Luke Belton" photo /> then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily go to a Slack channel.
 
 > **Try it yourself:** With the **notify the assignee when the customer replies** template.
 
