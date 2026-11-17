@@ -62,6 +62,17 @@ The fastest way to build a useful dataset is to harvest real traffic. On a [trac
 
 Open a dataset and add an item directly, filling in **Input**, **Expected output**, and **Metadata** as JSON.
 
+## Example: turn a production failure into a test case
+
+Twig's AI trip planner helps guests find a place to stay. One day it books a group of four into a nest that sleeps two. Here's how that failure becomes a test that runs on every change:
+
+1. An [online evaluation](/docs/ai-evals) called "Stay fits the group" fails the trace in production.
+2. On the trace, click **Add to dataset** and pick your regression dataset. PostHog fills in the input and saves the planner's answer as `source_output`.
+3. Open the new item and set **Expected output** to a stay that sleeps four.
+4. Fix the guest filter in the planner and open a pull request.
+5. Your CI runs [offline evals](/docs/ai-evals/offline-evals) against the latest dataset revision, new item included. The fix passes, so you merge it.
+6. Every later pull request runs the same item. If the bug comes back, CI fails before a guest sees it.
+
 ## Versioning
 
 Every item change creates an immutable version and a new dataset revision. You can view past revisions and restore an earlier version of an item while that history is still available under the [retention policy](#data-retention).
