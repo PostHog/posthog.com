@@ -17,7 +17,7 @@ tags:
   - Roundups
 seo:
   metaTitle: Best open source LLM observability tools
-  metaDescription: Compare the best free and open source LLM observability tools, including PostHog, Langfuse, Opik, OpenLLMetry, Phoenix, and Helicone.
+  metaDescription: Compare the best free and open source LLM observability tools, including PostHog, Langfuse, Opik, OpenLLMetry, and Phoenix.
 ---
 
 To build LLM-powered apps, developers need to know how users are using their app. 
@@ -26,10 +26,10 @@ LLM observability tools help them do this by capturing LLM provider requests and
 
 To help you pick the best of these tools, we put together this list. All of the following products:
 
-1. Integrate with popular LLM providers like OpenAI, Anthropic, and Vercel AI SDK to capture generations.
+1. Integrate with popular LLM providers and frameworks like OpenAI, Anthropic, and Vercel AI SDK to capture generations.
 2. Let you view individual generations and traces from your app.
 3. Calculate and display an aggregated metrics dashboard with cost, latency, and more.
-4. Are open source and self-hostable.
+4. Are open source (or source-available) and self-hostable.
 5. Have a free hosted version (minus one of them…)
 
 <details>
@@ -37,7 +37,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 
 | Tool | License | Free hosted plan |
 |---|---|---|
-| **PostHog** | MIT | 100k events a month, unlimited seats, 30-day retention |
+| **PostHog** | MIT | 100k events a month, unlimited seats, 1-year retention (30 days for prompts and outputs) |
 | **Langfuse** | MIT | 50k units a month, 2 users, 30-day data access |
 | **Opik** | Apache 2.0 | 25k spans a month, 10 team members, 60-day retention |
 | **OpenLLMetry** | Apache 2.0 | Via Traceloop: 50k spans a month, 5 seats, 24-hour retention |
@@ -53,7 +53,7 @@ If open source is not a requirement, check out our [best AI observability tools]
 
 - **Who it's for:** teams that want [LLM traces](/docs/ai-observability/traces) tied to the same users as their [product analytics](/docs/product-analytics), [session replays](/docs/session-replay), [experiments](/docs/experiments), [errors](/docs/error-tracking), and more, and want their agents to be able to [query all of it](/docs/model-context-protocol).
 - **Who it isn't for:** teams that need a built-in LLM gateway or proxy, or want to self-host at scale.
-- **License:** MIT
+- **License:** MIT (enterprise features are licensed separately)
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
 <ProductScreenshot
@@ -77,9 +77,9 @@ Its LLM observability product, [AI observability](/ai-observability), captures d
 
 #### How much does PostHog AI observability cost?
  
-PostHog Cloud is free to start: 100k AI observability events every month, with unlimited seats and 30-day retention. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
+PostHog Cloud is free to start: 100k AI observability events every month, with unlimited seats and 1-year retention (prompts and outputs are kept for 30 days). Beyond this, pricing is usage-based and [totally transparent](/pricing). 
 
-You can also [self-host PostHog](/docs/self-host) for free under the MIT license, though we recommend Cloud.
+You can also [self-host PostHog](/docs/self-host) for free under the MIT license (free-plan features only), though we recommend Cloud.
  
 Use the [setup wizard](/wizard) to get started in minutes – no sales call or elaborate configuration needed.
  
@@ -92,7 +92,7 @@ Use the [setup wizard](/wizard) to get started in minutes – no sales call or e
 
 ## 2. Langfuse
 
-- **Who it's for:** teams that want the a complete and dedicated LLM engineering platform, self-hosted or managed.
+- **Who it's for:** teams that want a complete and dedicated LLM engineering platform, self-hosted or managed.
 - **Who it isn't for:** teams that want product analytics, session replay, or experiments in the same tool, or more than two users on the free cloud plan.
 - **License:** MIT (enterprise features are licensed separately)
 - [Langfuse on GitHub](https://github.com/langfuse/langfuse)
@@ -108,12 +108,12 @@ ClickHouse acquired Langfuse in January 2026. Both companies say the core stays 
 - **Tracing:** LLM call tracking and tracing with session tracking, native SDKs for Python and JavaScript, and integrations with most LLM providers and agent frameworks.
 - **OpenTelemetry:** Can act as an OpenTelemetry backend, so any OTel-instrumented app can send it traces.
 - **Evaluation:** Scores, datasets, and annotation queues for human review, plus prompt management and a playground.
-- **Breadth:** Langfuse lists more than 80 features, from session tracking to batch exports to SOC 2 reports.
+- **Breadth:** Langfuse lists dozens of features, from session tracking to batch exports to SOC 2 reports.
 - **AI and agent tools:** An MCP server with read and write tools, an in-app assistant called Halo, and an AI gateway in public beta.
 
 #### How much does Langfuse cost?
  
-Langfuse can be self-hosted for free, though a few features, like audit logs and project-level roles, need an enterprise license key. 
+Langfuse can be self-hosted for free, though some admin and security features, like audit logs and project-level roles, need an enterprise license key. 
 
 If you prefer a managed service, Langfuse Cloud is free to use up to 50k units per month and 2 users, but this only includes 30 days of data access. 
 
@@ -155,7 +155,7 @@ Beyond this, its Pro plan is $19 per month for 100k spans per month and up to 50
 
 ![OpenLLMetry dashboard](https://res.cloudinary.com/dmukukwp6/image/upload/openllmetry_aa916c3921.png)
 
-**OpenLLMetry** is an open-source observability product for LLM applications based on OpenTelemetry. It was built by Traceloop and recommends using its SDK to capture data.
+**OpenLLMetry** is an open-source set of LLM instrumentations built on OpenTelemetry. It doesn't have its own UI, so you view the data in Traceloop or another backend. It was built by Traceloop and recommends using its SDK to capture data.
  
 ServiceNow announced it was acquiring Traceloop in March 2026, and has since made its platform part of ServiceNow’s AI Control Tower. OpenLLMetry itself remains open source and is still shipping releases.
 
@@ -182,7 +182,7 @@ For more, you'll need to talk to sales, which now means ServiceNow.
 
 ![Phoenix](https://res.cloudinary.com/dmukukwp6/image/upload/phoenix_fb7498c189.png)
 
-Phoenix is an open source AI observability platform. It provides tracing, evaluation, datasets and experiments, a playground, prompt management, and more. It works out-of-the-box with frameworks like LlamaIndex and LangChain as well as LLM providers like OpenAI, Bedrock, and more. 
+Phoenix is a source-available AI observability platform. It provides tracing, evaluation, datasets and experiments, a playground, prompt management, and more. It works out-of-the-box with frameworks like LlamaIndex and LangChain as well as LLM providers like OpenAI, Bedrock, and more. 
 
 It's built by Arize AI, a unified AI observability and evaluation platform that Dynatrace acquired in October 2026.
 
@@ -205,9 +205,9 @@ Dynatrace says Phoenix and AX will both continue, with Arize’s capabilities in
  
 These didn't make the list, either because they miss one of the criteria above or because they're newer and smaller:
  
-- **MLflow** – One of the largest open source ML projects, with an Apache 2.0 license and a home at the Linux Foundation. Its tracing supports 50+ frameworks and providers. There's no free hosted version from the project itself; managed MLflow runs on Databricks and AWS.
+- **MLflow** – One of the largest open source ML projects, with an Apache 2.0 license and a home at the Linux Foundation. Its tracing supports 40+ frameworks and providers. There's no free hosted version from the project itself; managed MLflow runs on Databricks and AWS.
 - **LangWatch** – Open core (Apache 2.0, with separately licensed enterprise code) and known for agent simulation testing. Its free cloud plan covers 50k events a month for 2 users, with 14-day retention.
-- **Laminar** – Fully Apache 2.0, with tracing and dashboards for cost, tokens, and latency. The free cloud plan is small: 1 GB of data, 7-day retention, and one seat.
+- **Laminar** – Open core (Apache 2.0, with an Elastic License 2.0 enterprise edition), with tracing and dashboards for cost, tokens, and latency. The free cloud plan is small: 1 GB of data, 7-day retention, and one seat.
 - **Lunary** – An observability and prompt management platform built for LLM chatbots; its repository is no longer public, self-hosting now needs an enterprise license, and there's no free plan, so we removed it.
 
 LangSmith and Braintrust come up a lot too, but neither is open source. We cover them in [the best AI observability tools](/compare/best-ai-observability-tools).
@@ -216,7 +216,7 @@ LangSmith and Braintrust come up a lot too, but neither is open source. We cover
 
 [Helicone](/docs/ai-observability/integrations/helicone-posthog) was on earlier versions of this list. It's still open source (Apache 2.0) and you can self-host it, but Mintlify acquired it in March 2026 and put it into maintenance mode, and new sign-ups to the hosted product are disabled. 
 
-It has since left Mintlify, and in November 2026 its site announced that it's now part of Experiential Labs, with details to come.
+In November 2026, its site announced that it's now part of Experiential Labs, with details to come.
 
 If you're on Helicone today, see our [Helicone alternatives](/compare/best-helicone-alternatives).
 
@@ -228,7 +228,7 @@ If you're on Helicone today, see our [Helicone alternatives](/compare/best-helic
 - Need a dedicated, fully-featured LLM observability platform you can self-host? **Langfuse**
 - Building or fine-tuning models as well as LLM apps? **Opik**
 - Already using OpenTelemetry and want LLM instrumentation to fit into your existing stack? **OpenLLMetry**
-- Need AI observability beyond LLMs, including ML models and computer vision? **Phoenix**
+- Need AI observability beyond LLMs, including ML models and computer vision? **Phoenix** (with Arize AX)
 
 ## Is PostHog right for you?
 
@@ -237,7 +237,7 @@ Here's the (short) sales pitch.
 We're biased, obviously, but we think you'll love PostHog if:
 
 - You want LLM observability connected to the rest of your product data – session replays, feature flags, A/B testing, and analytics all in one place
-- You're already using PostHog, so adding AI Observability requires no extra setup or contract
+- You're already using PostHog, so adding AI Observability requires no new vendor or contract
 - You want your coding agent to check LLM costs, errors, and traces through [the MCP](/mcp)
 - You want to try before you buy (we're self-serve with a [generous free tier](/pricing))
 
@@ -268,7 +268,7 @@ It means PostHog digs through your product data, finds what's worth fixing, and 
 
 It starts with context. A full suite of developer tools – [AI observability](/ai-observability), [product analytics](/product-analytics), [session replay](/session-replay), [feature flags](/feature-flags), [experiments](/experiments), [error tracking](/error-tracking), [logs](/logs), and more – captures everything happening in your product, and a [data warehouse](/warehouse) unifies it into one source agents can read across.
 
-From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR. You review and merge.
+From there, [Scouts](/blog/what-is-a-scout) read across all of it and sort what's worth knowing from what's just noise. What clears the bar becomes a report in your inbox: an agent picks it up, roots out the cause, and opens a PR when the fix is clear. You review and merge.
 
 You can steer it from [Slack](/slack), the [web app](/ai), or your own editor via [the MCP](/mcp) or [CLI](/docs/cli).
 
@@ -323,19 +323,19 @@ Most tools on this list are free to start, so there's no reason to wait.
 PostHog, Langfuse, Opik, and Phoenix all have one, so a coding agent like Claude Code or Cursor can query your traces and costs directly:
  
 - **PostHog** – The [MCP server](/docs/ai-observability/surfaces/mcp) covers AI observability along with the rest of the platform, so an agent can go from a trace to the session replay or error behind it.
-- **Langfuse** – A native MCP server with read and write tools for prompts, observations, scores, and datasets.
+- **Langfuse** – A native MCP server with read and write tools for prompts, scores, and datasets, plus read access to observations.
 - **Opik** and **Phoenix** – Each ships its own MCP server.
 
-OpenLLMetry takes a different angle: it instruments MCP calls so they show up in your traces.
+OpenLLMetry takes a different angle: it instruments MCP calls so they show up in your traces. Traceloop also has a separate MCP server for querying OpenTelemetry traces.
  
 </details>
 
 <details>
 <summary>Do I need a separate LLM observability tool if I already use PostHog?</summary>
 
-No. PostHog's [LLM observability](/docs/ai-observability) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without any additional setup or contract. You get 100k LLM events free per month.
+No. PostHog's [LLM observability](/docs/ai-observability) product is built into the platform, so if you're already using PostHog for product analytics or session replay, you can add LLM observability without a new vendor or contract. You get 100k LLM events free per month.
 
-[Getting started](/docs/ai-observability/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically.
+[Getting started](/docs/ai-observability/start-here) is easy; once you install the SDK, it will handle all the heavy lifting. Swap in our wrapped LLM client and we'll capture your generations automatically.
 
 </details>
 
@@ -351,7 +351,7 @@ No. PostHog's [LLM observability](/docs/ai-observability) product is built into 
 <details>
 <summary>Are these tools compatible with all LLM providers?</summary>
 
-Most tools on this list support the major providers – OpenAI, Anthropic, Google Gemini, and AWS Bedrock – as well as popular frameworks like LangChain, LlamaIndex, and Vercel AI SDK. Coverage varies by tool. **Langfuse** and **PostHog** have the broadest integration coverage.
+Most tools on this list support the major providers – OpenAI, Anthropic, Google Gemini, and AWS Bedrock – as well as popular frameworks like LangChain, LlamaIndex, and Vercel AI SDK. Coverage varies by tool.
 
 For specific provider support, check each tool's documentation.
 
@@ -360,7 +360,7 @@ For specific provider support, check each tool's documentation.
 ## Related reading
 
 - [PostHog AI observability documentation](/docs/ai-observability)
-- [How to A/B test LLM prompts with PostHog](/tutorials/llm-ab-tests)
+- [How to A/B test LLM models and prompts](/tutorials/llm-ab-tests)
 - [The best AI observability tools](/compare/best-ai-observability-tools) for more options
 - [The cheapest AI observability tools](/compare/cheapest-ai-observability-tools) for budget-conscious teams
 - [PostHog vs Langfuse](/compare/posthog-vs-langfuse) and the [best Langfuse alternatives](/compare/best-langfuse-alternatives)
