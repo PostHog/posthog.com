@@ -8,6 +8,8 @@ rootPage: /blog
 sidebar: Blog
 showTitle: true
 hideAnchor: true
+featuredImage: >-
+https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bts_billboard_blog_ca14f527ed.png
 featuredImageType: full
 ogImage: generated
 category: Inside PostHog
