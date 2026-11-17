@@ -1,0 +1,94 @@
+---
+title: Instrumentation best practices
+---
+
+The [SDK wrappers](/docs/ai-observability/installation) capture every LLM call your app makes, but each call arrives on its own. A few extra fields turn those calls into structured traces, and each one unlocks part of AI Observability:
+
+| Send | What it unlocks |
+|---|---|
+| The same trace ID on every call in one run | The step tree and timeline in [Traces](/docs/ai-observability/traces), and evaluations that grade a whole run |
+| `$ai_session_id` on every turn of a conversation | The [Sessions](/docs/ai-observability/sessions) tab, and cost and errors per conversation |
+| `distinct_id` set to your user ID | Cost per user, and links to [Session Replay](/docs/session-replay) and product data |
+| Tool definitions and tool calls | The [Tools](/docs/ai-observability/tools) tab |
+
+## Group each run into a trace
+
+Pass the same trace ID to every wrapped call your app makes while it handles one request. Without it, each LLM call becomes its own trace, and you can't see which steps led to an answer.
+
+<MultiLanguage>
+
+```python
+import uuid
+
+trace_id = str(uuid.uuid4())
+
+response = client.responses.create(
+    model="gpt-5-mini",
+    input=[{"role": "user", "content": "Find a stay in Lisbon for four guests"}],
+    posthog_distinct_id=user.id,
+    posthog_trace_id=trace_id,
+    posthog_properties={"$ai_session_id": conversation.id},
+)
+```
+
+```ts
+const traceId = crypto.randomUUID()
+
+const response = await openai.responses.create({
+    model: "gpt-5-mini",
+    input: [{ role: "user", content: "Find a stay in Lisbon for four guests" }],
+    posthogDistinctId: user.id,
+    posthogTraceId: traceId,
+    posthogProperties: { $ai_session_id: conversation.id },
+})
+```
+
+</MultiLanguage>
+
+For steps that aren't LLM calls, like retrieval or a tool run, capture `$ai_span` events with the same `$ai_trace_id`, and set `$ai_parent_id` to nest them under the step that started them. See [manual capture](/docs/ai-observability/installation/manual-capture) and [Spans](/docs/ai-observability/spans).
+
+The LangChain, LangGraph, OpenAI Agents SDK, and Claude Agent SDK integrations capture these spans for you.
+
+## Group conversation turns into a session
+
+Set `$ai_session_id` in `posthog_properties` (Python) or `posthogProperties` (JavaScript), with the same value for every turn of a conversation. Use your own conversation or thread ID.
+
+One-shot workloads, like batch jobs or single generations, have no conversation. Send `$ai_session_id` as `null` for them, so the instrumentation checklist knows it's on purpose. See [Sessions](/docs/ai-observability/sessions).
+
+## Identify the user
+
+Set `posthog_distinct_id` (Python) or `posthogDistinctId` (JavaScript) to the same user ID you use everywhere else in PostHog. Never use the trace ID. With a real user ID, you see cost per user, and each trace links to that person's sessions and product usage.
+
+## Capture tool calls
+
+The SDK wrappers capture the tools you offer the model (`$ai_tools`) and the tool calls in its response automatically. With [manual capture](/docs/ai-observability/installation/manual-capture), send both yourself, with the tool calls in `$ai_output_choices`.
+
+## Check your instrumentation
+
+Once AI events start arriving, the **Instrumentation checklist** at the top of the [AI Observability dashboard](https://app.posthog.com/ai-observability) tells you which parts of your instrumentation are working and which features are missing data. Use it to confirm your setup after you install, and again after you change how you capture events.
+
+The checklist looks at your AI events from the last 30 days and runs four checks:
+
+| Check | What it looks for | If it warns |
+|---|---|---|
+| **Sessions** | Traces that include `$ai_session_id` | If your product has multi-turn conversations, set `$ai_session_id` so related traces group together in the [Sessions](/docs/ai-observability/sessions) tab. If each workload finishes in one trace, like batch jobs or one-shot generation, send `$ai_session_id` as `null` instead. That marks the workload as complete, so the check passes. |
+| **Tool calls** | Generations that record tool or function calls | If your app uses tool calling, capture those calls to see which tools run and how often. If you're sending tool definitions but no calls show up, check that your SDK version reports tool calls. See [Tools](/docs/ai-observability/tools). |
+| **User identity** | Generations whose `distinct_id` is a real user rather than the trace ID | Set `distinct_id` to your own user identifier so usage and cost can be tied to people. |
+| **Trace structure** | Spans, or events with `$ai_parent_id` | Without spans, a trace shows your LLM calls but not the retrieval, chains, or sub-agent steps around them. Capture `$ai_span` events, or set `$ai_parent_id`, to fill in the tree. |
+
+### Check statuses
+
+- **Passing** - The instrumentation is present.
+- **Needs attention** - The instrumentation is missing. The check explains what to send and links to the relevant docs.
+- **Still collecting data** - There isn't enough data to judge yet. Each check runs once the project has 20 generations, or 20 AI events for trace structure.
+- **Not applicable** - Someone on your team dismissed the check. Dismissing a check applies to the whole project. Click **Recheck** to grade it again.
+
+### Tips
+
+- After you change your instrumentation, click **Refresh** in the checklist footer. Otherwise you may see results from before your change.
+- A passing check means the data exists, not that it's everywhere. A check passes as soon as some of your events include what it looks for. If you instrument several code paths, check that each one sends the property.
+- Dismiss checks that don't fit your app. For example, dismiss the tool calls check if your app doesn't use tools. If your workloads finish in a single trace, prefer sending `$ai_session_id: null` over dismissing the sessions check, because the check then reflects how your app actually works.
+- The user identity check only counts events from PostHog SDKs. Generations sent over OpenTelemetry aren't counted, because PostHog can't tell whether they're identified.
+- Empty tabs explain themselves. If a tab like **Sessions** is empty because of a failing check, its empty state shows the same explanation and docs link.
+
+You can also read the checklist through the API with `GET /api/projects/:project_id/ai_observability/instrumentation_checklist/`. See the [API reference](/docs/api/ai-observability).
