@@ -56,7 +56,7 @@ I don't need to worry about team changes anymore. The task uses what's currently
 
 Workflows also knows which email address a ticket was sent to or what channel was used (email, widget, Slack, etc.), so I can have a workflow that routes tickets sent to our merch email address straight to our merch team.
 
-> **Try it yourself:** The **AI triage and investigation** template investigates with your PostHog data, tags a category and priority, and posts its findings as a private note. It runs read-only and never replies to the customer. Ours also routes to team channels through custom destinations, but the template leaves this out.
+> **Try it yourself:** The [AI triage and investigation](https://app.posthog.com/workflows/new/workflow?templateId=01a12fb6-3cfe-0000-5d45-25a5b3a944e0) template investigates with your PostHog data, tags a category and priority, and posts its findings as a private note. It runs read-only and never replies to the customer. Ours also routes to team channels through custom destinations, but the template leaves this out.
 
 ## Updating the ticket lifecycle
 
@@ -67,7 +67,7 @@ We have several workflows to keep tickets moving:
 - **Reopen on reply** - reopens a ticket when the customer replies (this is one of the few things I think should be native).
 - **Resolve stale pending tickets** - when a ticket goes to pending, it waits 5 days and checks in with the customer in case they want to add anything. After 2 more days with no reply, it marks the ticket resolved.
 
-> **Try it yourself:** With the **acknowledge new tickets**, **reopen when the customer replies**, and **nudge, then auto-resolve pending tickets** templates.
+> **Try it yourself:** With the [acknowledge new tickets](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-6b1e-2f4e8a6d71c3), [support reply notification](https://app.posthog.com/workflows/new/workflow?templateId=a638999a-bf53-4fde-af36-c85ad9827076), [reopen when the customer replies](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-1f8d-9b3a5c7e2d14), and [nudge, then auto-resolve pending tickets](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-a4c2-6e1d0f8b3a57) templates.
 
 ## Managing service level agreements
 
@@ -96,7 +96,7 @@ There are a couple of fallbacks:
 - If we can't find a plan but the ticket came from a shared Slack or Microsoft Teams channel, we treat the customer as Enterprise.
 - If we still can't set an SLA, the workflow alerts `#alerts-support` so I can work out why.
 
-> **Try it yourself:** With the **set first response time** and **pause while pending, on hold or resolved** templates. They tier by an example `plan` person property and default to 9:00 to 17:00 UTC working hours, so you'll need to fill in your own properties and working hours. If you also want special handling for important customers, add the **prioritize important customers** template, which sets high priority and assigns the ticket to a lead.
+> **Try it yourself:** With the [set first response time](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-5b93-e08a4c1f7d26) and [pause while pending, on hold or resolved](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-4a8c-d27f15e6b093) templates. They tier by an example `plan` person property and default to 9:00 to 17:00 UTC working hours, so you'll need to fill in your own properties and working hours. If you also want special handling for important customers, add the [prioritize important customers](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-f15b-82c6d9a3e047) template, which sets high priority and assigns the ticket to a lead.
 
 ### Setting the next response time
 
@@ -106,13 +106,13 @@ It only sets a new SLA deadline if the ticket has no SLA deadline set, or the ne
 
 The same SLA is applied when someone reopens a ticket, for example if it was set to pending or resolved by mistake. That workflow keys off the plan or segment tag already on the ticket.
 
-> **Try it yourself:** With the **set next response time when the customer replies** and **set next response time when a ticket is reopened** templates.
+> **Try it yourself:** With the [set next response time when the customer replies](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-c7a0-1d5e93b8f4e2) and [set next response time when a ticket is reopened](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-2e6f-8a4d1c9b5f73) templates.
 
 ### Setting the update time
 
 When we send a reply, the workflow checks the ticket's status. If the team member set it to pending, resolved, or on hold, there's nothing to do. If it's still new or open, it sets an update time based on the plan tag. We don't want to just go quiet on a customer while we investigate.
 
-> **Try it yourself:** With the **set follow-up time after the team replies** template.
+> **Try it yourself:** With the [set follow-up time after the team replies](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-9f14-b6c03e7a2d58) template.
 
 ### Breach warnings
 
@@ -137,7 +137,7 @@ The Slack alert shows the deadline, the assignee, the priority, and the status, 
 
 You can also add an escalation step, so if a ticket is still open and past its deadline, it gets reassigned to a lead or team, and posted to Slack.
 
-> **Try it yourself:** With the **warn before a breach** and **escalate overdue tickets** templates.
+> **Try it yourself:** With the [warn before a breach](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-e3b7-5f9a28c4d1e6) and [escalate overdue tickets](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-7c25-a91e4b6f8d30) templates.
 
 ## Working with sales and customer success
 
@@ -152,7 +152,7 @@ If either is assigned, the workflow also posts to an internal Slack channel that
 
 AEs and CSMs can then filter tickets by their own tag and see everything raised by customers they own. It's a simple way for our sales and CS folks to keep an eye on tickets they might care about.
 
-> **Try it yourself:** With the **notify the account owner** template.
+> **Try it yourself:** With the [notify the account owner](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-0d3a-6f84e1b7c259) template.
 
 ## Handling our out-of-office schedule
 
@@ -162,7 +162,7 @@ This workflow runs on every customer reply. A conditional branch splits by the t
 
 The date range is the important part: it only applies while you're away, so you don't have to remember to switch it off when you're back!
 
-> **Try it yourself:** With the **reassign while an agent is out of office** template.
+> **Try it yourself:** With the [reassign while an agent is out of office](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-b8e6-3c0f72d94a15) template.
 
 ## Sending CSAT surveys
 
@@ -177,7 +177,7 @@ The second triggers based on a completed survey response. It:
 
 ![CSAT in Slack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2026_10_26_at_18_18_26_2x_6510ccae29.png)
 
-> **Try it yourself:** With the **send survey after resolve** and **post responses to Slack and the ticket** templates.
+> **Try it yourself:** With the [send survey after resolve](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-3d7e-c2b9f05a1e68) and [post responses to Slack and the ticket](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-8e51-47f2d6b09c3a) templates.
 
 ## Creating proactive tickets
 
@@ -197,7 +197,7 @@ Individual support engineers have also customized their own workflows.
 
 <TeamMember name="Christian Rafferty" photo /> set up a workflow so that when a customer replies, the ticket assignee gets an email. He also built one so that anyone who escalates a ticket to an engineering team automatically follows that ticket, so they can see what the engineering team says. <TeamMember name="Luke Belton" photo /> then built on that, so anyone can follow a ticket and get emailed when someone replies or leaves a private note. The team chose email, but it could just as easily go to a Slack channel.
 
-> **Try it yourself:** With the **notify the assignee when the customer replies** template.
+> **Try it yourself:** With the [notify the assignee when the customer replies](https://app.posthog.com/workflows/new/workflow?templateId=01a1352a-0c41-0000-6a92-c4e07b1f5d38) template.
 
 ## How all these workflows were built
 
