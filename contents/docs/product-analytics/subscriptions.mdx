@@ -76,6 +76,17 @@ You can give each subscription a custom name to help distinguish between them. T
 
 For Slack subscriptions, the custom name appears in the message header. For example, a subscription named "Weekly KPI Report" for a dashboard called "Main Dashboard" displays as **Weekly KPI Report** (dashboard: Main Dashboard) in the Slack message. Without a custom name, the message references the dashboard or insight name directly.
 
+## Setting the image size
+
+By default, PostHog sizes insight images automatically. To set a custom size, expand **Size** in the subscription settings and enter a **Width** and a **Height** in pixels:
+
+- **Width:** 320 to 4,000 pixels
+- **Height:** 200 to 5,000 pixels
+
+The size applies to each insight image in the subscription. Leave a dimension blank for automatic sizing. The content fits inside the size without stretching or cropping. To remove the custom size, click **Reset to automatic**.
+
+Image size is not available for [prompt subscriptions](#prompt-subscriptions).
+
 ## Email subscriptions
 
 When configuring an email subscription you can subscribe multiple emails at once, whether they are a member of your PostHog team or not and set the frequency of the subscription.

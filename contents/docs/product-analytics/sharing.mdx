@@ -66,7 +66,7 @@ In the same panel as above, copy the HTML code to embed the insight on a webpage
 ></iframe>
 ```
 
-You can adjust the width, height, and other attributes of the iframe to customize its appearance.
+To change the width and height, [set a custom size](#setting-a-custom-size) in the sharing panel. You can also adjust other attributes of the iframe to customize its appearance.
 
 ### Refreshing shared insights
 
@@ -119,7 +119,7 @@ In the same panel as above, copy the HTML code to embed the dashboard on a webpa
 ></iframe>
 ```
 
-Again, you can adjust the width, height, and other attributes of the iframe to customize its appearance.
+Again, you can [set a custom size](#setting-a-custom-size) in the sharing panel, and adjust other attributes of the iframe to customize its appearance.
 
 The dashboard fires a `posthog:dimensions` event when it loads and you can use the height value from it to adjust the iframe like this:
 
@@ -148,6 +148,21 @@ The dashboard fires a `posthog:dimensions` event when it loads and you can use t
 Shared and embedded dashboards auto-refresh every 30 minutes while the page is open. Auto-refresh pauses when the browser tab is inactive and resumes when the tab becomes visible again.
 
 If the dashboard data is more than 30 minutes old when you first open a shared link, the dashboard automatically triggers a one-time full refresh to ensure you see up-to-date data. This also applies when you return to an inactive browser tab – the dashboard checks for staleness and refreshes if needed.
+
+## Setting a custom size
+
+You can set the size of a shared insight or dashboard. The size applies to the public link and to the embed code.
+
+1. Open the sharing panel and turn on sharing.
+2. Expand **Size**. By default, the size is **Automatic**.
+3. Enter a **Width** and a **Height** in pixels.
+
+| Dimension | Range | If you leave it blank |
+| --- | --- | --- |
+| Width | 320 to 4,000 pixels | The content fills the available space. |
+| Height | 200 to 5,000 pixels | The default height is used. |
+
+Tall content remains scrollable. To remove the custom size, click **Reset to automatic**.
 
 ## Password protecting a shared link
 
