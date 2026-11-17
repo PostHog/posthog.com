@@ -17,15 +17,16 @@ crosspost:
 
 Before anyone can use your product, you must make sure it actually works as expected. Figuring this out is trickier than just running it locally. Changes often have unintended consequences on other parts of the app or create non-obvious issues. 
 
-One way to track and prevent this is synthetic monitoring, which relies on simulated behaviors and software tests. The second way, which we cover in this post, is real user monitoring. 
+One way to track and prevent this is synthetic monitoring, which relies on simulated behaviors and software tests. The second way, which we cover in this post, is real user monitoring (RUM). 
 
 ## What is real user monitoring?
 
-Real user monitoring is tracking the usage, performance, and quality of your product based on how users are experiencing it.
+Real user monitoring is tracking the usage, performance, and quality of your product based on how users are experiencing it, including problems that tests might miss.  
 
-Because it tracks real user behavior, it is a closer representation of reality. It identifies real issues, largely broken down into two classes:
+Because it tracks real user behavior, it is a closer representation of reality. It identifies issues, largely broken down into three classes:
 
 - Performance: loading, page, and query speed, web vitals
+- Reliability: JavaScript exceptions, failed requests, application errors
 - Usability: errors, confusion, bugs, rageclicks, unclear UI
 
 ![Types](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/classes.png)
@@ -48,7 +49,7 @@ There are always endless potential improvements to your product. To get the larg
 
 - A user complains a feature "sucks." This feedback by itself is unclear. It could mean slow page speed, poor design, a bug, or a lack of knowledge.
 
-Real user monitoring helps you get the information to understand and prioritize the issues. It also provides details on how to solve those issues; for example, session replays are bug recreation steps and query metrics show which ones are slow.
+Real user monitoring helps you get the information to understand and prioritize the issues based on their impact. [Session replays](https://posthog.com/session-replay) provide context about what users experienced before a problem occurred, while performance metrics and [error tracking](https://posthog.com/error-tracking) help identify what went wrong.
 
 ### 2. Manage risk
 
@@ -58,23 +59,27 @@ By knowing error rates, page and query speeds, and product usage, teams are able
 
 For large companies, this is critical. These promises are often solidified in a service-level agreement, or SLA, which is a contract defining the expected service levels an application must provide (such as uptime and performance).
 
-## How to setup real user monitoring with PostHog
+## How to set up real user monitoring with PostHog
 
-Setup happens over three stages: capture, analyze, and action. PostHog, as an all-in-one developer platform, has the tools to do all three.
+Setup happens over three stages: capture, analyze, and action. PostHog, as an all-in-one developer platform, has the tools to do all three through its Web Analytics, Error Tracking, Session Replay, and Product Analytics features. These features work together to help you identify issues, maintain reliability, and, most importantly, keep users happy. 
 
-> Not a PostHog user? [Get started for free](https://app.posthog.com/signup?utm_source=real-user-monitoring-blog) – all users get 1 million events and 5k recordings free every month, no card required.
+> Not a PostHog user? [Get started for free](https://app.posthog.com/signup?utm_source=real-user-monitoring-blog) – all users get 1 million events, 5k recordings for session replay, and 100k exceptions for error tracking free every month, no card required.
 
 ### 1. Capture
 
-To capture data for real user monitoring in PostHog, we rely on [session replays](/docs/session-replay) and [custom event capture](/docs/getting-started/send-events#2-capture-custom-events). 
-
-Session replays capture a visual of exactly how users are interacting with your product. To enable session replays, install and initialize the [JavaScript Web SDK](/docs/libraries/js) or add the [snippet](/docs/getting-started/install?tab=snippet) to your site. After, make sure to enable the options related to "Recordings" in your [project settings](https://us.posthog.com/replay/settings).
+To capture real user monitoring data in PostHog, start by installing and initializing the [JavaScript Web SDK](/docs/libraries/js) or add the [snippet](/docs/getting-started/install?tab=snippet) to your site. After, make sure to enable the options related to "Recordings" in your [project settings](https://us.posthog.com/replay/settings).
 
 ![Recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/recordings.png)
 
-To capture errors, query speed, and other events relevant to the real usage of your product, you need a way to know when those events happen in your code. This could be an error boundary, web vital report, or a server profiler. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/capture).
+From there, you can capture the data you need using a few PostHog tools:
 
-Alternatively, for error capture, you can use our [error tracking app](/docs/error-tracking).
+- **Web Vitals:** Find out whether your pages are slow, unresponsive, or jumping around as they load. Enable [Web Vitals](https://posthog.com/docs/web-analytics/web-vitals) autocapture to track metrics like Largest Contentful Paint (LCP), Interaction to Next Paint (INP), and Cumulative Layout Shift (CLS). You don't even need to instrument these yourself!
+
+- **Error Tracking:** Now you can catch exceptions and see what's breaking. PostHog groups similar exceptions into issues, so you can see which errors keep happening instead of digging through individual events. You can also use `posthog.captureException(error)` to capture handled errors.
+
+- **Session Replay:** See what users were doing before something went wrong. Session Replay recordings show how people interact with your product, while optional console logs and network recording give you more context when debugging.
+
+For things PostHog doesn't automatically capture, like the time it takes a specific backend query to run, you can use custom events or instrument the operation. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/capture).
 
 ### 2. Analyze
 
