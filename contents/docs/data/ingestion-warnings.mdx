@@ -36,6 +36,7 @@ List of ingestion warnings:
 - [Discarded event exceeding 1MB limit](#discarded-event-exceeding-1mb-limit)
 - [Event ingestion has overflowed capacity](#event-ingestion-has-overflowed-capacity)
 - [Skipped person profile processing for a high-volume distinct ID](#skipped-person-profile-processing-for-a-high-volume-distinct-id)
+- [Person properties were nested more than 128 levels deep and were rejected](#person-properties-were-nested-more-than-128-levels-deep-and-were-rejected)
 - [Ingested event after shortening its distinct ID to the 200 character limit](#ingested-event-after-shortening-its-distinct-id-to-the-200-character-limit)
 - [Replay event timestamp is invalid](#replay-event-timestamp-is-invalid)
 - [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
@@ -95,6 +96,17 @@ This warning indicates PostHog is receiving more events for a single `distinct_i
 One distinct ID sent events much faster than expected, so PostHog skipped [person processing](/docs/how-posthog-works/ingestion-pipeline#2-person-processing) for those events. The events are still ingested. They just don't create or update a person profile while the limit is active.
 
 This usually means one distinct ID is shared by many users or machines. See [rate limiting high-volume distinct IDs](/docs/how-posthog-works/ingestion-pipeline#rate-limiting-high-volume-distinct-ids) for how to fix it.
+
+## Person properties were nested more than 128 levels deep and were rejected
+
+PostHog can't process person properties with values nested more than 128 levels deep. This warning fires in two cases:
+
+- **An update is too deep.** A `$set` or `$set_once` value is nested more than 128 levels deep. PostHog rejects the person property update, and the person keeps their previous properties.
+- **A stored person is too deep.** The person's stored properties are already nested more than 128 levels deep, so PostHog can't read the person. Events for this person are not processed until you delete the person.
+
+This usually means an object such as a DOM element, a React node, or an SDK instance was passed as a person property value. Find where the property is set and pass a plain value instead, like a string, a number, or a small object.
+
+If a stored person is too deep, [delete the person](/docs/data/persons#deleting-person-data) to resume processing their events. The warning's details include the person's ID when PostHog knows it.
 
 ## Ingested event after shortening its distinct ID to the 200 character limit
 
