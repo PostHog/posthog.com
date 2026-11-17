@@ -2,22 +2,18 @@ import React from 'react'
 import {
     IconChat,
     IconCheckCircle,
-    IconCode,
-    IconConfetti,
-    IconCursorClick,
     IconEye,
     IconGraph,
     IconInfo,
     IconList,
-    IconMagic,
-    IconMessage,
     IconPieChart,
     IconRocket,
+    IconServer,
     IconSparkles,
 } from '@posthog/icons'
 import { MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
 import { features } from './product_analytics/features'
-import { applications, keyFeatures } from './product_analytics/slides'
+import { closingCTA, eventJourney, faq, heroHog, midCTA, queryExamples, whyPostHog } from './product_analytics/page'
 import { getTool } from '../../data/tools'
 import { PRODUCT_COLORS } from 'constants/productColors'
 
@@ -55,56 +51,24 @@ export const productAnalytics = {
             slug: 'overview',
             name: 'Overview',
             icon: <IconEye className="size-4" />,
+            props: { hideScreenshot: true, hog: heroHog },
         },
         {
-            slug: 'eli5',
-            name: 'What does it do?',
-            hideFromNav: true,
-            group: 'divided',
-            icon: <IconInfo className="size-4" />,
-        },
-        {
-            slug: 'use-cases',
-            name: 'Who is it for?',
-            hideFromNav: true,
-            group: 'divided',
-            icon: <IconMagic className="size-4" />,
-        },
-        {
-            slug: 'applications',
-            name: 'How do I use it?',
-            group: 'divided',
-            icon: <IconCursorClick className="size-4" />,
-            props: { slides: applications },
-        },
-        {
-            slug: 'key-features',
-            name: 'Key features',
-            group: 'divided',
-            icon: <IconSparkles className="size-4" />,
-            props: { slides: keyFeatures },
-        },
-        {
-            slug: 'ask-anything',
-            name: 'AI prompts',
-            group: 'divided',
+            slug: 'what-you-can-do',
+            name: 'Ask PostHog',
+            template: 'query-examples',
             icon: <IconChat className="size-4" />,
         },
         {
-            slug: 'installation',
-            name: 'Install',
-            group: 'divided',
-            icon: <IconCode className="size-4" />,
+            slug: 'how-it-works',
+            name: 'Getting events and using them',
+            template: 'event-journey',
+            icon: <IconServer className="size-4" />,
         },
-        {
-            slug: 'feature-comparison',
-            name: 'Feature comparison',
-            group: 'divided',
-            icon: <IconList className="size-4" />,
-        },
-        { slug: 'community', name: 'Questions?', group: 'divided', icon: <IconMessage className="size-4" /> },
-        { slug: 'pairs-with', name: 'Pairs with...', hideFromNav: true, icon: <IconConfetti className="size-4" /> },
-        { slug: 'getting-started', name: 'Get started', group: 'divided', icon: <IconRocket className="size-4" /> },
+        { slug: 'mid-cta', name: 'Get started', hideFromNav: true },
+        { slug: 'why-posthog', name: 'Why PostHog', icon: <IconSparkles className="size-4" /> },
+        { slug: 'get-started', name: 'Get started', template: 'closing-cta', icon: <IconRocket className="size-4" /> },
+        { slug: 'faq', name: 'FAQ', icon: <IconInfo className="size-4" /> },
     ],
     /**
      * Sections rendered on the Pricing surface (`/product-analytics/pricing`).
@@ -118,8 +82,10 @@ export const productAnalytics = {
         { slug: 'pricing-cta', name: 'Get started', hideFromNav: true },
     ],
     overview: {
-        title: 'Product analytics with autocapture',
-        description: '"Show me retention for users who completed onboarding"',
+        title: 'Product analytics (and so much more)',
+        description:
+            "Ingest events from your product, link them to a person or group profile, analyze them with PostHog AI or pre-built tools to visualize funnels, trends, stickiness, and more. SQL available if you're a masochist.",
+        footnote: 'Your first 1M events are free, every month. 97% of users never pay for PostHog.',
         eli5: "Product Analytics turns what people do in your product into answers you can act on. Autocapture tracks pageviews, clicks, and form submissions without extra code. From there you build trends, funnels, retention curves, paths, and SQL queries – then jump straight into the session recordings behind any data point when you need the 'why'.",
         textColor: 'text-white', // tw
     },
@@ -217,6 +183,12 @@ export const productAnalytics = {
         ],
     },
     features,
+    eventJourney,
+    queryExamples,
+    midCTA,
+    whyPostHog,
+    closingCTA,
+    faq,
     mcp: {
         title: 'MCP',
         headline: 'Analyze product usage from your editor',
@@ -282,7 +254,7 @@ export const productAnalytics = {
             url: '/tutorials/power-users#identifying-your-power-user',
         },
         {
-            question: 'Where do my users spend the most time on?',
+            question: 'Where do my users spend the most time?',
             url: '/tutorials/session-metrics',
         },
         {
@@ -294,11 +266,11 @@ export const productAnalytics = {
             url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
         },
         {
-            question: 'How do far are my users scrolling down my app?',
+            question: 'How far are my users scrolling down my app?',
             url: '/tutorials/scroll-depth',
         },
         {
-            question: 'How to I track performance marketing?',
+            question: 'How do I track performance marketing?',
             url: '/tutorials/performance-marketing',
         },
         {

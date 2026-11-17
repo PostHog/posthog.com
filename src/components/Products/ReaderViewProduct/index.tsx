@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import SEO from 'components/seo'
+import SEO, { buildProductStructuredData } from 'components/seo'
 import ReaderView from 'components/ReaderView'
 import useProduct from 'hooks/useProduct'
 import { useProductInterest } from 'hooks/useProductInterest'
@@ -108,6 +108,15 @@ export default function ProductReaderView({
                 title={seoOverrides?.title || productData?.seo?.title}
                 description={seoOverrides?.description || productData?.seo?.description}
                 image={seoOverrides?.image || productData?.seo?.image || `/images/og/default.png`}
+                structuredData={
+                    surface === 'product' && productData.faq?.items?.length
+                        ? buildProductStructuredData({
+                              name: productData.name,
+                              slug: productData.slug,
+                              faq: productData.faq.items,
+                          })
+                        : undefined
+                }
             />
             <ReaderView
                 title={productData?.name}

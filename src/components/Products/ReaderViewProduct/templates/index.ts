@@ -20,6 +20,12 @@ import Plans from './Plans'
 import PricingFooterCTA from './PricingFooterCTA'
 import BilledWithPricing from './BilledWithPricing'
 import CommunityQuestions from './CommunityQuestions'
+import EventJourney from './EventJourney'
+import QueryExamples from './QueryExamples'
+import MidCTA from './MidCTA'
+import WhyPostHog from './WhyPostHog'
+import ClosingCTA from './ClosingCTA'
+import FAQ from './FAQ'
 
 /**
  * Registry of available section templates, keyed by the `template` string on
@@ -48,6 +54,12 @@ export const templateRegistry: Record<string, React.ComponentType<SectionCompone
     'pricing-cta': PricingFooterCTA,
     'billed-with': BilledWithPricing,
     community: CommunityQuestions,
+    'event-journey': EventJourney,
+    'query-examples': QueryExamples,
+    'mid-cta': MidCTA,
+    'why-posthog': WhyPostHog,
+    'closing-cta': ClosingCTA,
+    faq: FAQ,
 }
 
 export {
@@ -71,4 +83,10 @@ export {
     PricingFooterCTA,
     BilledWithPricing,
     CommunityQuestions,
+    EventJourney,
+    QueryExamples,
+    MidCTA,
+    WhyPostHog,
+    ClosingCTA,
+    FAQ,
 }

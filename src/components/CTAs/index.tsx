@@ -37,10 +37,13 @@ export const CTAs = ({
     wizardCommand,
     links = DEFAULT_LINKS,
     buttons,
+    footnote,
 }: {
     wizardCommand?: string
     links?: CTALinkKey[]
     buttons?: CTAButtons
+    /** A short line directly under the buttons, e.g. the free tier. */
+    footnote?: React.ReactNode
 }) => {
     const [showIntegrationPrompt, setShowIntegrationPrompt] = useState(false)
     return (
@@ -80,6 +83,7 @@ export const CTAs = ({
                         </CallToAction>
                     </div>
                 )}
+                {footnote && <p className="!text-sm text-secondary m-0 mt-3">{footnote}</p>}
             </div>
             <motion.div
                 className="overflow-hidden"
@@ -94,26 +98,28 @@ export const CTAs = ({
                 </div>
             </motion.div>
 
-            <p className="!text-sm flex flex-wrap items-center gap-2 mt-4 justify-start">
-                {links.map((key, index) => {
-                    const { to, label, Icon } = ctaLinks[key]
-                    const external = to.startsWith('http')
-                    return (
-                        <React.Fragment key={key}>
-                            {index > 0 && <span className="text-secondary">•</span>}
-                            <Link
-                                to={to}
-                                state={external ? undefined : { newWindow: true }}
-                                externalNoIcon={external}
-                                className="text-secondary hover:text-primary"
-                            >
-                                <Icon className="size-4 mr-1 inline-block relative -top-px" />
-                                <span className="underline font-semibold">{label}</span>
-                            </Link>
-                        </React.Fragment>
-                    )
-                })}
-            </p>
+            {links.length > 0 && (
+                <p className="!text-sm flex flex-wrap items-center gap-2 mt-4 justify-start">
+                    {links.map((key, index) => {
+                        const { to, label, Icon } = ctaLinks[key]
+                        const external = to.startsWith('http')
+                        return (
+                            <React.Fragment key={key}>
+                                {index > 0 && <span className="text-secondary">•</span>}
+                                <Link
+                                    to={to}
+                                    state={external ? undefined : { newWindow: true }}
+                                    externalNoIcon={external}
+                                    className="text-secondary hover:text-primary"
+                                >
+                                    <Icon className="size-4 mr-1 inline-block relative -top-px" />
+                                    <span className="underline font-semibold">{label}</span>
+                                </Link>
+                            </React.Fragment>
+                        )
+                    })}
+                </p>
+            )}
         </>
     )
 }

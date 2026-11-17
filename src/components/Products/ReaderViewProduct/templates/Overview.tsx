@@ -6,12 +6,26 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { PRODUCT_SURFACE_H1 } from '../helpers'
 import Label from 'components/Label'
 
-const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & { showStatusLabel?: boolean }) => {
-    const { name, overview, screenshots, hogs, status } = productData ?? {}
+interface HeroHog {
+    Component?: React.ComponentType<{ className?: string; title?: string }>
+    src?: string
+    alt?: string
+    className?: string
+}
+
+const Overview = ({
+    id,
+    productData,
+    showStatusLabel,
+    hideScreenshot,
+    hog: hogOverride,
+}: SectionComponentProps & { showStatusLabel?: boolean; hideScreenshot?: boolean; hog?: HeroHog }) => {
+    const { name, overview, hogs, status } = productData ?? {}
+    const screenshots = hideScreenshot ? undefined : productData?.screenshots
     // Sized by height, not width: the art ranges from wide to tall portraits, and
     // a fixed width makes the tall ones swamp the screenshot. It grows with the
     // screenshot's side column at `@3xl` and `@6xl`.
-    const hog = hogs?.mobileHog
+    const hog: HeroHog | undefined = hogOverride ?? hogs?.mobileHog
     const HogComponent = hog?.Component
     const hogSizeClasses = hog?.className || 'h-32 @3xl/reader-content:h-44 @6xl/reader-content:h-52'
 
@@ -79,6 +93,7 @@ const Overview = ({ id, productData, showStatusLabel }: SectionComponentProps & 
                             wizardCommand={productData?.wizardCommand}
                             links={productData?.ctaLinks}
                             buttons={productData?.ctaButtons}
+                            footnote={overview?.footnote}
                         />
                     </div>
                 </div>
