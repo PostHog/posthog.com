@@ -644,7 +644,7 @@ It provides crash reporting, performance monitoring, and user experience insight
  
 **GlitchTip** is an open-source (MIT) reimplementation of Sentry's backend, built by Burke Software. It's compatible with Sentry's SDKs, so you point the Sentry client you already use at a GlitchTip DSN and keep going. You can self-host it with Docker Compose or Helm, with 512 MB of RAM recommended, or use the hosted version, which has EU hosting on every plan.
  
-It covers the basics well and skips the rest: there's no session replay, profiling, or AI root cause analysis, and alerts go out by email or webhook (including Slack, Discord, and Google Chat formats).
+It covers the basics well and skips the rest: there's no session replay, profiling, or AI root cause analysis, and alerts go out by email or webhook (including Slack and Discord).
  
 #### Key features
  
@@ -689,7 +689,7 @@ It covers the basics well and skips the rest: there's no session replay, profili
 * GlitchTip is MIT-licensed and free to self-host on modest hardware; Sentry's main web app is source-available (FSL) and its self-hosted stack is far heavier to run.
 * Sentry includes session replay, profiling, metrics, and the paid Seer agent; GlitchTip has none of these and keeps to errors, uptime, performance, and logs.
 * GlitchTip's hosted free plan covers 1,000 events a month with unlimited users; Sentry's covers 5k errors for 1 user.
-* GlitchTip alerts by email and webhook (including Slack, Discord, and Google Chat formats); Sentry has native Slack, PagerDuty, and issue-tracker integrations.
+* GlitchTip alerts by email and webhook (including Slack and Discord); Sentry has native Slack, PagerDuty, and issue-tracker integrations.
 
 </details>
 
