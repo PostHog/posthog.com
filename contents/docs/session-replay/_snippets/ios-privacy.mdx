@@ -62,6 +62,6 @@ Version 4.x requires Xcode 26 and includes the fix. **If you're on 3.x and build
 
 ### Precedence and propagation
 
-`ph-no-mask` applies to the view it is set on and all of its subviews, and it takes precedence over both `ph-no-capture` and PostHog's default masking heuristics. A view marked with `ph-no-capture` that sits inside a `ph-no-mask` subtree is **not** masked, and neither are sensitive views such as text fields that PostHog would otherwise mask automatically. Only set `ph-no-mask` on a subtree you know contains no sensitive data.
+`ph-no-mask` applies to the view it is set on and all of its subviews, and it takes precedence over both `ph-no-capture` and PostHog's default masking heuristics. A view marked with `ph-no-capture` that sits inside a `ph-no-mask` subtree is **not** masked, and neither are sensitive views such as text fields that PostHog would otherwise mask automatically. From version 4.0, secure-entry text fields, such as password fields and SwiftUI `SecureField`, stay masked inside a `ph-no-mask` subtree. Only set `ph-no-mask` on a subtree you know contains no sensitive data.
 
 <SensitiveThirdPartyScreens />
