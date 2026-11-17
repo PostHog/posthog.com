@@ -31,7 +31,7 @@ PostHog filters subject discovery, definitions, results, health, and notificatio
 
 ## Unified MCP tools
 
-The data quality MCP surface has eight enabled tools. These tools work across tables, views, metrics, and PostHog tables, so you don't need a subject-specific tool name.
+The data quality MCP surface has nine enabled tools. These tools work across tables, views, metrics, and PostHog tables, so you don't need a subject-specific tool name.
 
 | Tool | Use it to |
 | --- | --- |
@@ -40,6 +40,7 @@ The data quality MCP surface has eight enabled tools. These tools work across ta
 | `data-quality-check-create` | Create a check or return an existing check with the same subject and assertion. |
 | `data-quality-check-update` | Change a check's definition or presentation without changing its subject or history. |
 | `data-quality-check-run` | Start one check and return its suite run. |
+| `data-quality-run` | Start several checks in one call and return one suite run. Pass `check_ids`, or `subject_type` and `subject_uuid` for every enabled check on one subject. Pass neither for every enabled check in the project. |
 | `data-quality-check-results` | Read the check's recent executions, counts, errors, and compiled diagnostic queries. |
 | `data-quality-check-schedule` | Update the schedule for a metric or PostHog table. |
 | `data-quality-check-delete` | Soft-delete a check while keeping its run history queryable. |
@@ -72,6 +73,17 @@ For example, create an error-severity check on `orders.customer_id`:
 The create tool is idempotent for the same subject and assertion. A near-duplicate with different configuration creates separate coverage, so inspect existing checks first.
 
 Call `data-quality-check-run` with the returned check `id`, and save the suite `id` that it returns. The tool returns this suite run before the individual check finishes. Poll the historical results from `data-quality-check-results` with the check ID until a result whose `suite_run` equals the saved suite ID is `passed`, `failed`, `errored`, or `skipped`. Inspect that matched result.
+
+To run more than one check, call `data-quality-run` one time. Don't call `data-quality-check-run` in a loop. Then query `system.information_schema.data_quality_check_runs` for the rows whose `suite_run_id` equals the returned suite ID.
+
+## Run limits
+
+`data-quality-check-run` and `data-quality-run` share the same run limits. These limits also apply to the `POST data_quality_checks/{id}/run/` and `POST data_quality_runs/` API endpoints:
+
+- Each caller can send 20 run requests a minute and 60 an hour. PostHog counts by personal API key, or by user for other logins.
+- Each project can send 180 run requests an hour across all callers. More keys don't add more requests.
+
+One `data-quality-run` call counts as one request, however many checks it runs. Each request counts, whatever the response. A request over your own limit doesn't count toward the project limit. Over a limit, the call fails with HTTP 429. Wait for the time in the `Retry-After` header before you try again. Listing and polling runs have no run limit. Runs after source syncs, view refreshes, and schedules don't count.
 
 ## Update or delete a check
 

@@ -77,6 +77,18 @@ If a check, table, view, or metric is missing from the Data quality page:
 
 For MCP and SQL permission troubleshooting, see the [data quality MCP and SQL reference](/docs/data-warehouse/data-quality/mcp#permissions-and-scopes).
 
+## Fix run limit errors
+
+Manual runs have limits. Each person or personal API key can send 20 run requests a minute and 60 an hour. Each project can send 180 run requests an hour across all callers. A request over a limit fails with HTTP 429 and a `Retry-After` header that tells you how many seconds to wait.
+
+If you reach a limit:
+
+1. Wait for the time in `Retry-After`, then try again.
+2. Run many checks in one request. Use **Run all checks** on a table, view, or metric, or call `POST data_quality_runs/` with `subject_type` and `subject_uuid`. MCP agents use the `data-quality-run` tool. One request counts one time, however many checks it runs.
+3. Don't run checks one at a time on a timer. Use a [schedule or an automatic trigger](/docs/data-warehouse/data-quality/triggers) instead. Those runs don't count toward the limits.
+
+See the [data quality MCP and SQL reference](/docs/data-warehouse/data-quality/mcp#run-limits) for the full limit rules.
+
 ## Fix query errors and timeouts
 
 Open the run's error details before you change the assertion. Common causes include invalid HogQL, a renamed column, a missing table, changed permissions, an unsupported metric definition, or a query timeout.

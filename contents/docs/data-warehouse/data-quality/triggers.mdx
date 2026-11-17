@@ -22,6 +22,8 @@ The project-wide Data quality page also has **Run all checks**. It runs every en
 
 Manual runs use the permissions of the person who starts them. They don't change the automatic schedule or its last run.
 
+Manual runs have limits. Each person or personal API key can send 20 run requests a minute and 60 an hour. Each project can send 180 run requests an hour across all people and keys. **Run now** and **Run all checks** count toward the same limits, and one **Run all checks** action counts as one request, however many checks it runs. Runs after source syncs, view refreshes, and schedules don't count. See [fix run limit errors](/docs/data-warehouse/data-quality/troubleshooting#fix-run-limit-errors) if you reach a limit.
+
 ## Run checks after a source sync
 
 Checks on a connected warehouse table run after that table completes a source sync. A check on one table doesn't wait for or run with other tables from the same source.
