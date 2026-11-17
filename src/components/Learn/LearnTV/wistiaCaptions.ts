@@ -19,7 +19,17 @@ const toSeconds = (timestamp: string): number => {
     return parts.reduce((total, part) => total * 60 + part, 0)
 }
 
-/** Parses WebVTT text into cues, by start time. Multi-line cue text joins with spaces, and inline tags are removed. */
+/**
+ * The plain text of a cue. WebVTT cue text can hold tags (`<i>`, `<c.name>`, `<v Speaker>`) and entities (`&amp;`).
+ * The browser's HTML parser reads them into text. It does not run scripts, and unlike a regex it cannot leave a
+ * partial tag behind. `parseVtt` runs in the browser, after `useWistiaCaptions` fetches the captions.
+ */
+const cueText = (markup: string): string =>
+    typeof DOMParser === 'undefined'
+        ? markup
+        : new DOMParser().parseFromString(markup, 'text/html').body.textContent ?? ''
+
+/** Parses WebVTT text into cues, by start time. Multi-line cue text joins with spaces, as plain text. */
 export function parseVtt(vtt: string): TranscriptLine[] {
     const lines: TranscriptLine[] = []
     const blocks = vtt.replace(/\r\n?/g, '\n').split(/\n\s*\n/)
@@ -28,11 +38,7 @@ export function parseVtt(vtt: string): TranscriptLine[] {
         const timing = rows.findIndex((row) => row.includes('-->'))
         if (timing === -1) continue
         const [start, end] = rows[timing].split('-->').map((part) => toSeconds(part.trim().split(/\s+/)[0]))
-        const text = rows
-            .slice(timing + 1)
-            .join(' ')
-            .replace(/<[^>]+>/g, '')
-            .trim()
+        const text = cueText(rows.slice(timing + 1).join(' ')).trim()
         if (text) lines.push({ id: String(lines.length), start, end, text })
     }
     return lines.sort((a, b) => a.start - b.start)
