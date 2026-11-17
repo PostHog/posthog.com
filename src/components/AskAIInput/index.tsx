@@ -52,7 +52,7 @@ export default function AskAIInput({ placeholder = DEFAULT_PLACEHOLDER, classNam
                     value={question}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuestion(e.target.value)}
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                        if (e.key === 'Enter') {
+                        if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
                             handleSubmit()
                         }
                     }}

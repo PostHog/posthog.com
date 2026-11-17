@@ -547,7 +547,7 @@ const NameInput = ({ onSubmit, onBack }: { onSubmit: (name: string) => void; onB
     }
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (e.key === 'Enter' && name.trim()) {
+        if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229 && name.trim()) {
             handleSubmit()
         }
     }

@@ -78,7 +78,7 @@ const Search = ({
     }
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && e.shiftKey) {
+        if (e.key === 'Enter' && e.shiftKey && !e.nativeEvent.isComposing && e.keyCode !== 229) {
             e.preventDefault()
             e.stopPropagation()
             openChat()

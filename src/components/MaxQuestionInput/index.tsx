@@ -80,7 +80,7 @@ export const PostHogAIQuestionInput = ({
                                 onChange={(e) => setQuestion(e.target.value)}
                                 onClick={() => setQuestion('')}
                                 onKeyDown={(e) => {
-                                    if (e.key === 'Enter') {
+                                    if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
                                         handleSubmit()
                                     }
                                 }}

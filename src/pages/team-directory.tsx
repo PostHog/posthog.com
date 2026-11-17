@@ -124,7 +124,7 @@ function EditableTextCell({ value, onSave }: { value: string | null; onSave: (ne
             onChange={(e) => setEditValue(e.target.value)}
             onBlur={handleSave}
             onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' && !e.nativeEvent.isComposing && e.keyCode !== 229) {
                     e.currentTarget.blur()
                 } else if (e.key === 'Escape') {
                     setEditValue(value || '')
