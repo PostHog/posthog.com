@@ -123,7 +123,7 @@ The SDK deduplicates these events per `(distinct_id, flag, value)` in a local ca
 
 ### Blocking client
 
-With `default-features = false`, add the `tls` feature, or events can't reach PostHog over HTTPS:
+With `default-features = false`, the Rust SDK 1.x.x has no TLS. Add the `tls` feature:
 
 ```toml
 posthog = { version = "1", default-features = false, features = ["tls"] }
