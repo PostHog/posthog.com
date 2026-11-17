@@ -35,6 +35,12 @@ Once the syncs are complete, you can start using MailerLite data in PostHog.
 | `forms_embedded` | Embedded forms | Full refresh |
 | `forms_promotion` | Promotion forms | Full refresh |
 | `webhooks` | Configured webhooks | Full refresh |
+| `forms_popup_subscribers` | Subscribers who signed up through each pop-up form | Full refresh |
+| `forms_embedded_subscribers` | Subscribers who signed up through each embedded form | Full refresh |
+| `forms_promotion_subscribers` | Subscribers who signed up through each promotion form | Full refresh |
+| `ecommerce_customers` | Customers of each connected shop, linked to subscribers | Full refresh |
+| `timezones` | Timezones that you can set on subscribers and account settings | Full refresh |
+| `campaign_languages` | Languages that you can use for campaigns | Full refresh |
 
 **Incremental** tables sync only new or updated records on each run. **Full refresh** tables reload all data on each sync.
 
