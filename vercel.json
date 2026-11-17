@@ -752,6 +752,10 @@
             "destination": "/compare/best-mouseflow-alternatives"
         },
         {
+            "source": "/blog/best-open-source-llm-observability-tools",
+            "destination": "/compare/best-open-source-llm-observability-tools"
+        },
+        {
             "source": "/blog/best-optimizely-alternatives",
             "destination": "/compare/best-optimizely-alternatives"
         },
