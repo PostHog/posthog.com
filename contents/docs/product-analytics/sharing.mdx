@@ -149,6 +149,16 @@ Shared and embedded dashboards auto-refresh every 30 minutes while the page is o
 
 If the dashboard data is more than 30 minutes old when you first open a shared link, the dashboard automatically triggers a one-time full refresh to ensure you see up-to-date data. This also applies when you return to an inactive browser tab – the dashboard checks for staleness and refreshes if needed.
 
+## Custom image dimensions
+
+When sharing or embedding an insight or dashboard, you can set custom dimensions for the output. In the sharing modal, expand the **Size** panel under the appearance settings and enter a **Width** (320–4000 pixels) and/or **Height** (200–5000 pixels). Leave either field blank to size it automatically.
+
+Custom dimensions apply to the public link, the embed iframe, and PNG exports. Content fits inside the requested size without stretching or cropping. Click **Reset to automatic** to restore the default sizing.
+
+### PNG export dimensions
+
+When downloading an insight or dashboard as a PNG, a dialog prompts you to choose dimensions before exporting. Enter a **Width** and/or **Height**, or leave both blank for automatic sizing. Custom PNGs render at 1× pixel density and fit the content without stretching or cropping.
+
 ## Password protecting a shared link
 
 You can require a password to view a shared insight or dashboard. This works for public links and embeds. Password protection is part of [access control](/docs/settings/access-control), available on the [Boost, Scale, and Enterprise plans](/platform-packages).
