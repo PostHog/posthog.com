@@ -2,16 +2,6 @@
 title: Clusters
 ---
 
-<details>
-<summary>Requirements</summary>
-
-- **Data captured:** Set up LLM event capture using the [installation guide](/docs/ai-observability/installation).
-- **AI data processing enabled:** Your organization must enable AI data processing consent, as required for [trace summarization](/docs/ai-observability/summarization).
-- **Clustering enabled:** Enable clustering for your project from **AI Observability** > **Clusters**.
-- **Enough matching data:** Each enabled job needs at least 10 eligible items within its [analysis window](#minimum-data-per-job).
-
-</details>
-
 Clusters group similar [traces](/docs/ai-observability/traces), [generations](/docs/ai-observability/generations), or [evaluation results](/docs/ai-evals) so you can find recurring topics and problems.
 
 ## Why use clusters?
@@ -21,14 +11,20 @@ Clusters group similar [traces](/docs/ai-observability/traces), [generations](/d
 - **Monitor trends** – Daily runs show how usage patterns evolve over time.
 - **Surface outliers** – Items that don't fit any cluster are flagged as unusual behavior.
 
+## Enable clustering
+
+Before you start, [capture LLM events](/docs/ai-observability/installation) and enable AI data processing for your organization, as required for [trace summarization](/docs/ai-observability/summarization).
+
+Go to **AI Observability** > **Clusters** and enable clustering for your project. PostHog creates default clustering jobs. Each job defines which data to group, such as traces from a specific model or results from one evaluator. Open **Manage jobs** to customize them.
+
+Jobs run daily, so results don't appear immediately. Keep sending events after enabling clustering. PostHog doesn't automatically process your older traces when you enable it.
+
 ## How clusters work
 
 1. Each enabled job selects recent data that matches its analysis level and filters.
 2. Similar items are grouped together based on their content.
 3. AI generates a title and description for each cluster.
 4. Metrics like average cost, latency, token usage, and error rate are computed per cluster.
-
-Jobs run automatically on the existing schedule. Enabling clustering does not start an immediate run or backfill historical traces.
 
 ### Minimum data per job
 
@@ -38,15 +34,14 @@ Jobs run automatically on the existing schedule. Enabling clustering does not st
 | Generations | 10 generations from different traces | Last 7 days |
 | Evaluations | 10 evaluation results | Last 3 days |
 
-These minimums apply after the job's filters and data preparation. Evaluation jobs exclude numeric and categorical scores.
-Enough data alone does not guarantee a cluster: the items must also be similar enough to form groups.
+These minimums apply after filtering. Evaluation jobs exclude numeric and categorical scores.
+Enough data alone doesn't guarantee a cluster: the items must also be similar enough to form groups.
 
 ### Before clusters appear
 
-The **No clusters yet** page shows these requirements after you enable clustering.
-Use **Manage jobs** to check that your jobs are enabled and their filters match the data you want to group.
+If no clusters appear, open **Manage jobs** and check that a job is enabled and its filters match enough data to meet the minimum above.
 
-You can turn clustering off from this page or the **Jobs** panel. This stops future runs and keeps existing results available.
+You can turn clustering off from the **No clusters yet** page or the **Jobs** panel. This stops future runs and keeps existing results available.
 
 ## Viewing clusters
 
@@ -54,17 +49,16 @@ Navigate to **AI Observability** > **Clusters** to see the overview.
 
 ### Managing clustering jobs
 
-Clustering jobs let you group different sets of data, such as traces from a specific model or results from one evaluator.
 Click **Jobs** in the Clusters view, or **Manage jobs** before your first clusters appear.
 
 Each job has the following settings:
 
 - **Name** – A label to identify the job (e.g. "Production GPT-4o")
-- **Analysis level:** Whether to cluster traces (entire conversations), generations (individual LLM calls), or evaluation results.
-- **Event filters:** Property filters that select the data to include. Leave empty to include all eligible data.
+- **Analysis level** – Whether to cluster traces (entire conversations), generations (individual LLM calls), or evaluation results
+- **Event filters** – Property filters that select the data to include (leave empty to include all eligible data)
 - **Enabled** – Toggle a job on or off without deleting it
 
-You can create up to 10 clustering jobs per project. Jobs run automatically during the next scheduled cycle.
+You can create up to 10 clustering jobs per project.
 The run selector includes the job name so you can identify which job produced each run.
 
 ### Analysis levels
@@ -73,7 +67,7 @@ Choose one analysis level for each job:
 
 - **Traces** – Cluster entire conversations, giving you a high-level view of what users are doing.
 - **Generations** – Cluster individual LLM calls, useful for analyzing specific model interactions.
-- **Evaluations:** Group related evaluation results to find recurring patterns in the verdicts and reasoning.
+- **Evaluations** – Group related evaluation results to find recurring patterns in the verdicts and reasoning.
 
 The analysis level is configured per job in the [jobs panel](#managing-clustering-jobs). You can also use the level toggle at the top of the Clusters page to filter which runs are displayed.
 
@@ -81,23 +75,11 @@ The analysis level is configured per job in the [jobs panel](#managing-clusterin
 
 Click **Map** to show the interactive scatter plot beside the cluster table. Hover over a cluster row to highlight its dots.
 
-<details>
-<summary>How to read the scatter plot</summary>
-
-Unlike a typical scatter plot, the X and Y axes here don't represent any specific metric — there are no axis labels on purpose. Each trace or generation is converted into a high-dimensional embedding (a numerical fingerprint of its content), which is then projected down to 2D for visualization.
-
-**The only thing that matters is distance: similar items are closer together, different items are farther apart.** Think of it as a map of your LLM usage where related conversations form neighborhoods.
-
-This means:
-- A tight group of dots = traces or generations that your LLM handled in a similar way
-- Dots far from any group = outliers or unusual behavior
-- The absolute position on the chart doesn't mean anything — only relative distances between dots matter
-
-</details>
+Nearby dots represent items with similar content. The axes don't represent metrics such as cost or latency.
 
 | Feature | Description |
 |---------|-------------|
-| Dots | Each dot represents one trace or generation, color-coded by cluster |
+| Dots | Each dot represents one trace, generation, or evaluation result, color-coded by cluster |
 | Centroids | Larger dots marking the center of each cluster |
 | Click dot | Open the item in a drawer without leaving the cluster view |
 | Click centroid | Navigate to the cluster detail page |
@@ -110,7 +92,7 @@ The table shows each cluster with:
 
 - **AI-generated title and description** summarizing the cluster's content
 - **Size** – Item count and percentage of total
-- **Metrics:** Average cost, average latency, and error rate. Evaluation clusters show pass rate instead of error rate.
+- **Metrics** – Average cost, average latency, and error rate (pass rate for evaluation clusters)
 
 Expand a row to preview its items. Click an item to inspect it in a drawer, or click the cluster title for the detail page.
 
@@ -123,7 +105,8 @@ Click a cluster title or centroid to open the detail page. Here you'll find:
 - **Cluster title, description, and item count** with the date range
 - **Focused scatter plot** showing only items in this cluster
 - **Paginated item list** with summaries
-- Click an item to inspect it in a drawer and move between items in the same cluster
+
+Click an item to inspect it in a drawer and move between items in the same cluster.
 
 ## Clusters in trace view
 
