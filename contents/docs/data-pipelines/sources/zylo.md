@@ -3,9 +3,9 @@ title: Linking Zylo as a source
 sidebar: Docs
 showTitle: true
 availability:
-  free: full
-  selfServe: full
-  enterprise: full
+    free: full
+    selfServe: full
+    enterprise: full
 sourceId: Zylo
 ---
 
@@ -35,19 +35,21 @@ You need:
 
 Different tables require different API key scopes. If your token doesn't have a particular scope, those tables show a permission error but other tables still sync successfully.
 
-| Tables                                                               | Required scope                                         |
-| -------------------------------------------------------------------- | ------------------------------------------------------ |
-| Applications, ApplicationLicenses, SavingsEvents, ApplicationBudgets | `applications:read`                                    |
-| Contracts, ContractLineItems, Suppliers                              | `contracts:read`                                       |
-| Payments                                                             | `spend:read`                                           |
-| ApplicationUsers, ActivityHistory                                    | `team:read`                                            |
-| PurchaseOrders, POLineItems                                          | `applications:read` and `spend:read` (premium feature) |
+| Tables                                                               | Required scope                                          |
+| -------------------------------------------------------------------- | ------------------------------------------------------- |
+| Applications, ApplicationLicenses, SavingsEvents, ApplicationBudgets | `applications:read`                                     |
+| Contracts, ContractLineItems, Suppliers, PendingContracts            | `contracts:read`                                        |
+| Payments                                                             | `spend:read`                                            |
+| ApplicationUsers, ActivityHistory, Users                             | `team:read`                                             |
+| PurchaseOrders, POLineItems                                          | `applications:read` and `spend:read` (premium feature)  |
+| ApplicationStats                                                     | `applications:read`, `spend:read`, and `contracts:read` |
+| Views                                                                | `admin`                                                 |
 
 ## Sync modes
 
 <SyncModes />
 
-All Zylo tables support incremental sync using either `zylo_created_at` or `zylo_modified_at` timestamps. Full refresh is also available for all tables.
+All Zylo tables except `application_stats` support incremental sync using either `zylo_created_at` or `zylo_modified_at` timestamps. The `application_stats` table supports full refresh only, because its spend and usage aggregates change every day. Full refresh is also available for all tables.
 
 ## Configuration
 
@@ -69,6 +71,10 @@ All Zylo tables support incremental sync using either `zylo_created_at` or `zylo
 - **savings_events** - Cost-savings events like license reductions
 - **application_budgets** - Yearly budget allocations per application
 - **activity_history** - Audit log of changes to Zylo records
+- **pending_contracts** - Uploaded contract documents whose extracted data is not yet a committed contract
+- **application_stats** - Aggregated spend, license utilization, user, contract, and renewal stats, one row per application (full refresh only)
+- **users** - People in your Zylo team directory, from direct, HR, or SSO integrations
+- **views** - Named groupings of applications, such as a cost center or business unit
 
 ## Troubleshooting
 
