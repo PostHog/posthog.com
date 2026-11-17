@@ -210,7 +210,7 @@ The same goes for understanding a workflow. For my most complex workflows, the q
 A few habits make this work:
 
 - **Write the description first.** Every workflow has a plain-English description of what it does and why. That's what lets an agent, or a teammate, change it safely later.
-- **Name it like a folder.** Mine follow `Support:: <area>:: <what it does>`, so they're easy to find and sort.
+- **Tag it.** I tag every workflow with `support` and its area, like `sla`, `triage`, or `csat`, so they're easy to find and filter.
 - **Start as a draft.** A workflow stays a draft until someone has reviewed it and enabled it.
 
 ## Gotchas when creating workflows
