@@ -80,4 +80,16 @@ When you add columns to a schema using incremental or append sync, PostHog promp
 
 </CalloutBox>
 
+## Troubleshooting
+
+### No primary key detected
+
+For **Incremental replication**, open the table's sync method settings and select one or more **Primary key** columns. Choose columns whose combined values uniquely identify each row and contain no null values. You also need an incremental field to track new or updated rows.
+
+Redshift [materialized views](https://docs.aws.amazon.com/redshift/latest/dg/materialized-view-create-sql-command.html) cannot declare primary keys. To sync a materialized view incrementally, select the key columns manually in PostHog. This selection does not add a constraint in Redshift.
+
+Redshift [does not enforce primary key constraints](https://docs.aws.amazon.com/redshift/latest/dg/t_Defining_constraints.html), so check that the selected columns are unique even when PostHog detects a declared key.
+
+If no columns uniquely identify each row, choose **Full table replication** (full refresh) instead.
+
 <InboundIpAddresses />

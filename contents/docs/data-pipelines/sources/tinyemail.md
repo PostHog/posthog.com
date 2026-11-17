@@ -9,9 +9,9 @@ availability:
 sourceId: Tinyemail
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The tinyEmail connector syncs your email marketing data – campaigns, contact lists, contact members, and sender details – into PostHog, so you can analyze campaign performance and audience growth alongside your product data.
 
@@ -33,7 +33,7 @@ The tinyEmail API allows 60 requests per minute per API key. PostHog automatical
 
 <SyncModes />
 
-The tinyEmail API doesn't offer a way to filter records by modification time, so all tables sync as full refresh.
+Most tinyEmail tables sync as full refresh because the API doesn't offer a way to filter records by modification time. The `new_subscriber_engagement` table is the exception – it supports incremental sync on the `date` field since the API accepts a date range in its request body.
 
 ## Configuration
 
