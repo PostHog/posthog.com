@@ -9,7 +9,7 @@ sidebar: Blog
 showTitle: true
 hideAnchor: true
 featuredImage: >-
-https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bts_billboard_blog_ca14f527ed.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/bts_billboard_blog_alt_title_06d203d06e.png
 featuredImageType: full
 ogImage: generated
 category: Inside PostHog
@@ -17,8 +17,8 @@ tags:
   - Marketing
   - Inside PostHog
 seo:
-  metaTitle: Behind the scenes of a billboard campaign
-  metaDescription: How we bought, designed, got approval for, and measured a London billboard campaign aimed at developers around Old Street and Shoreditch.
+  metaTitle: Behind the scenes of a $400,000 billboard campaign
+  metaDescription: How we bought, designed, got approval for, and measured a London billboard campaign aimed at developers in London.
 ---
 
 As a mostly normal person, I always figured billboard campaigns were a huge waste of money for whatever company did them. That was until my comrade Charles came to me and said “I’m gonna be off for a month, so someone needs to take over our London billboard campaign”.
