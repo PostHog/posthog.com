@@ -3486,6 +3486,10 @@ export const docsMenu = {
                             url: '/docs/api/scopes',
                         },
                         {
+                            name: 'Terraform provider',
+                            url: '/docs/terraform',
+                        },
+                        {
                             name: 'Popular',
                         },
                         {

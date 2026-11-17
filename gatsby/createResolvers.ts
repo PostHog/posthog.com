@@ -1,7 +1,23 @@
 import { GatsbyNode } from 'gatsby'
 
-export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers, getNodeAndSavePathDependency }) => {
+export const createResolvers: GatsbyNode['createResolvers'] = ({
+    createResolvers,
+    getNodeAndSavePathDependency,
+    cache,
+}) => {
     const resolvers = {
+        Mdx: {
+            timeToRead: {
+                async resolve(source, args, context, info) {
+                    const key = `mdx-reading-time-${source.internal.contentDigest}`
+                    const saved = await cache.get(key)
+                    if (saved !== undefined) return saved
+                    const timeToRead = await info.originalResolver(source, args, context, info)
+                    await cache.set(key, timeToRead)
+                    return timeToRead
+                },
+            },
+        },
         Contributors: {
             teamData: {
                 resolve: async (source, args, context, info) => {

@@ -37,17 +37,18 @@ Beyond optimization, we offer discounts based on three levers:
 - **$500-999k:** 40% base discount
 - **$1M+:** Contact us for custom pricing
 
-> Two things to be clear on when working out which tier applies:
+> Three things to be clear on when working out which tier applies:
 >
 > - **It's credit value, not cash.** The tier is set by the amount of credit the customer receives (the pre-discount, list-price value), not the amount they pay us after discounts.
 > - **It's per contract year, not per term.** On a multi-year deal, use the credit allocated for a single contract year. A 2-year deal with $250k of credit a year sits in the $250-499k tier at 35%, not the $500-999k tier at 40% — the reward for paying for more of the term upfront is the timing of cash lever below, not a bigger volume tier.
+> - **The credit purchase must be sized in good faith to cover the customer's forecasted usage for the full contract year.** A purchase that clearly covers only part of the year doesn't qualify for a volume discount.
 
 #### 2. Timing of cash discount (additive)
 - **Net 30 (our standard):** No additional discount
 - **Multi-year deals:** +2.5% per additional year paid upfront (+2.5% for 2 years, +5% for 3 years. capped at +5%)
 - **Extended payment terms:** -2.5% for every 15 days beyond Net 30 (e.g., Net 60 = -5% from total discount)
 
-> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can purchase fewer credits upfront at the corresponding discount tier and then add more later. 
+> Note: We require upfront payment for all discounted contracts. Quarterly or split payment terms are not available as they impact our cash flow and add administrative overhead. If the full projected amount exceeds budget, customers can stay on monthly billing, or buy credits sized to a lower but credible 12-month forecast. A credible forecast starts from the customer's current run rate, annualized. A lower amount only qualifies if we've agreed a concrete plan with them to [bring usage down](/docs/billing/estimating-usage-costs) (the specific changes, the saving from each, and when they'll make them).
 
 #### 3. Ability to forecast - mutual commitment to timing (additive)
 
@@ -84,7 +85,7 @@ One-off free credits appear on order forms in three cases: [contract buyouts](#c
 
 ### Why we require up-front payment for credit purchases
 
-We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer needs payment flexibility, we're happy to adjust the credit amount and discount, per guidelines above, to fit their budget while maintaining up-front payment.
+We've found that split payment terms create friction for both teams – customers chasing internal approvals, us chasing invoices, nobody focused on delivering value. When customers pay quarterly or monthly, they often consume credits faster than they pay for them, effectively turning us into a line of credit. We are vendors, not lenders. Our focus is on [building the best product](/handbook/how-we-make-money), not managing accounts receivable. Up-front payments keep everyone focused on customer success and let us invest cash immediately into building features and support. If a customer can't pay for a full year up front, they can stay on monthly billing, or buy credits sized to a lower but credible 12-month forecast at whatever tier that amount qualifies for. We don't split payments, and we don't discount a purchase that only covers part of the year.
 
 ### Credit for case studies
 
