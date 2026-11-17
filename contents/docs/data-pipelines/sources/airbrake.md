@@ -13,7 +13,7 @@ import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
 import SyncModes from "../_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
 
-The Airbrake connector syncs your error monitoring data – projects, error groups, error occurrences (notices), and deploys – into PostHog, so you can track error rates by project and environment over time and correlate error spikes with deploys.
+The Airbrake connector syncs your error monitoring data – projects, error groups, error occurrences (notices), deploys, project activity, and error volume statistics – into PostHog, so you can track error rates by project and environment over time and correlate error spikes with deploys.
 
 ## Prerequisites
 
@@ -33,6 +33,10 @@ The `groups` table supports incremental sync on `createdAt`, which only picks up
 
 The `notices` table fetches occurrences per error group across every project, making it the most API-expensive table. It is not synced by default and only the most recent pages of history are pulled per group.
 
+The `project_stats` and `group_stats` tables support incremental sync on `time`. `project_stats` has one row per project per day, and `group_stats` has one row per error group per hour. A full refresh reads the last 90 days for `project_stats` and the last 7 days for `group_stats`. An incremental sync never reads further back than that, so if a sync is paused for longer, the buckets outside that window are skipped. Like `notices`, `group_stats` fetches data per error group across every project, so it is not synced by default.
+
+The `activities` table has no unique identifier, so it only supports full refresh.
+
 ## Configuration
 
 <SourceParameters />
@@ -41,7 +45,7 @@ The `notices` table fetches occurrences per error group across every project, ma
 
 <SourceTables />
 
-Deploy rows don't include a project reference in Airbrake's API, so PostHog adds a `projectId` column to the `deploys` table for joining against `projects`.
+Deploy rows don't include a project reference in Airbrake's API, so PostHog adds a `projectId` column to the `deploys` table for joining against `projects`. For the same reason, PostHog adds `projectId` to `project_stats`, and `projectId` and `groupId` to `group_stats`.
 
 ## Troubleshooting
 
