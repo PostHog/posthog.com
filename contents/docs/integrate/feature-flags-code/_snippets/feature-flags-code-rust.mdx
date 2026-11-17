@@ -123,7 +123,7 @@ The SDK deduplicates these events per `(distinct_id, flag, value)` in a local ca
 
 ### Blocking client
 
-If you're using the blocking client (with `default-features = false`), the API is the same but without `.await`:
+If you're using the blocking client (with `default-features = false`), the API is the same but without `.await`. Turning off the default features also turns off TLS, so turn the `tls` feature back on to reach PostHog over HTTPS:
 
 ```rust
 use posthog::EvaluateFlagsOptions;

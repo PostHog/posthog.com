@@ -45,4 +45,4 @@ client.flush().await;
 client.shutdown().await;
 ```
 
-With the blocking client (`default-features = false`), call `flush()` and `shutdown()` without `.await`.
+With the blocking client (`default-features = false`), call `flush()` and `shutdown()` without `.await`. Turning off the default features also turns off TLS, so turn the `tls` feature back on to send events over HTTPS.
