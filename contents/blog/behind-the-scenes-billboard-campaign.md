@@ -40,7 +40,7 @@ We negotiated and purchased where we were gonna put the advertisements at the en
 
 We have a small, invite-only Slack channel for billboard campaigns, where feedback goes. This runs against the grain of everything being public at PostHog, but in this specific instance, it helps keep out excessive noise and let those in charge make decisive calls.
 
-I began by throwing out some very bad ideas for what we could go with. I, you see, think our name is hilarious and that we should lean into its colloquial meaning. Smarter people than I in the aforementioned group, however, disagree and think it’s a bad idea.
+I began by throwing out some very bad ideas for what we could go with. I think our name is hilarious and that we should lean into its colloquial meaning. Smarter people than I in the group, however, disagree and think it’s a bad idea.
 
 A few failed word docs with copy headlines and healthy disagreements later, it was settled that Lottie, our lead designer extraordinaire, and I would work on an idea that was already proposed weeks earlier by the exec team: a mock newspaper campaign. We’d draft inflammatory, fictitious news bits which our [ICP would chuckle at](https://x.com/camjodev/status/2105592791690809351).
 
