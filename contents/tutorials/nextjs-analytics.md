@@ -206,7 +206,7 @@ A key part of the popularity of Next.js its is combination of client and server 
 To do this, start by installing the PostHog Node SDK.
 
 ```bash
-npm install posthog-node
+npm install posthog-node@5
 ```
 
 Next, create a `posthog.js` file in the app folder that returns a PostHog Node client:

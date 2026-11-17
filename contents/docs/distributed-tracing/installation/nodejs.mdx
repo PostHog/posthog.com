@@ -22,7 +22,7 @@ Both routes send OTLP spans to the same endpoint, so you can start with one and 
 
 ## With `posthog-node`
 
-> **Minimum version:** `posthog-node@5.52.0` or later.
+> **Minimum version:** `posthog-node@5.52.0` or later. The native tracing API is experimental, so its options can change in a minor release. The ingestion endpoint currently returns `200` even for an unknown project token, so check your token, and confirm spans landed by searching for your `serviceName` in [Tracing](https://app.posthog.com/tracing).
 
 <Steps>
 

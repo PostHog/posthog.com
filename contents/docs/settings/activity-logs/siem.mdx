@@ -14,6 +14,7 @@ You can forward PostHog [activity logs](/docs/settings/activity-logs) into a sec
 PostHog exposes activity logs as a paginated API that your SIEM polls on a schedule, so you configure the integration in your SIEM rather than in PostHog.
 
 There are two ways to configure a SIEM integration:
+
 - **Recommended setup:** Use the API
 - Use the [Splunk add-on](#splunk)
 
@@ -28,9 +29,9 @@ You need:
 
 ### 1. Choose an endpoint
 
-| Endpoint | Use it for |
-| --- | --- |
-| `GET /api/projects/@current/advanced_activity_logs/` | Activity in a single project |
+| Endpoint                                                           | Use it for                                                                         |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| `GET /api/projects/@current/advanced_activity_logs/`               | Activity in a single project                                                       |
 | `GET /api/organizations/<organization_id>/advanced_activity_logs/` | Activity across every project in the organization. Restricted to admins and owners |
 
 Most SIEM integrations use the organization endpoint, so one input covers the whole account.
@@ -55,11 +56,11 @@ Set `schema=ocsf` to receive events in [Open Cybersecurity Schema Framework](htt
 
 Activity maps to three OCSF classes:
 
-| Class | `class_uid` | Covers |
-| --- | --- | --- |
-| Entity Management | `3004` | Changes to insights, dashboards, feature flags, and other resources |
-| Authentication | `3002` | Logins and logouts |
-| Account Change | `3001` | SCIM provisioning changes |
+| Class             | `class_uid` | Covers                                                              |
+| ----------------- | ----------- | ------------------------------------------------------------------- |
+| Entity Management | `3004`      | Changes to insights, dashboards, feature flags, and other resources |
+| Authentication    | `3002`      | Logins and logouts                                                  |
+| Account Change    | `3001`      | SCIM provisioning changes                                           |
 
 Activity types without a direct OCSF equivalent use `activity_id: 99` and carry the original PostHog activity name in `activity_name`, so nothing is dropped.
 
@@ -76,9 +77,13 @@ By default, an event records which fields changed but not their values:
   "time_dt": "2026-08-06T12:16:09.290628+00:00",
   "metadata": { "uid": "00000000-0000-0000-0000-000000000000", "version": "1.5.0" },
   "entity": { "type": "FeatureFlag", "uid": "1234", "name": "beta-checkout" },
-  "actor": { "user": { "email_addr": "person@example.com" }, "app_name": "posthog-python" },
+  "actor": {
+    "user": { "email_addr": "person@example.com" },
+    "app_name": "posthog-python",
+    "session": { "credential_uid": "phx_abc123" }
+  },
   "src_endpoint": { "ip": "203.0.113.4" },
-  "unmapped": { "changed_fields": ["filters"] }
+  "unmapped": { "changed_fields": ["filters"], "credential_type": "personal_api_key" }
 }
 ```
 
@@ -87,6 +92,16 @@ This answers who changed what and when, which is what an audit trail needs.
 `time` is epoch milliseconds, as OCSF specifies. `metadata.uid` is the activity log entry's ID and is stable across replays, so you can deduplicate on it.
 
 Set `include_values=true` to also receive the previous and new values, mapped to the OCSF `entity` and `entity_result` attributes. Values can contain the content of the changed object, such as the body of a notebook or the targeting rules on a feature flag. Including them makes responses larger and sends that content to your SIEM, where it counts toward your ingest volume.
+
+### Credential tracking
+
+Each OCSF event includes the credential that authenticated the action:
+
+- `unmapped.credential_type` – the kind of credential, such as `session`, `personal_api_key`, or `oauth`.
+- `actor.session.uid` – for login sessions, the session ID.
+- `actor.session.credential_uid` – for personal API keys and project secret API keys, the key ID.
+
+The credential ID is null for impersonated actions and for credential types that don't expose an ID (such as OAuth apps or internal PostHog services). This matches the visibility rules in the PostHog UI and API.
 
 ### 5. Bound the first run
 
@@ -112,11 +127,11 @@ On **Splunk Enterprise**, install from Splunkbase, or build it from source and c
 
 Open the add-on from the Splunk apps menu, go to **Configuration**, and click **Add**.
 
-| Field | Value |
-| --- | --- |
-| Name | A name for the account, so you can pick it when you add an input |
-| PostHog host | `https://us.posthog.com`, `https://eu.posthog.com`, or your self-hosted address |
-| Personal API key | A key with the `activity_log:read` scope |
+| Field            | Value                                                                           |
+| ---------------- | ------------------------------------------------------------------------------- |
+| Name             | A name for the account, so you can pick it when you add an input                |
+| PostHog host     | `https://us.posthog.com`, `https://eu.posthog.com`, or your self-hosted address |
+| Personal API key | A key with the `activity_log:read` scope                                        |
 
 The key is held in Splunk's encrypted credential store. One account can serve several inputs.
 
@@ -128,15 +143,15 @@ If you self-host PostHog, enter your own address. It has to be https, because th
 
 Go to **Inputs** and click **Create New Input**.
 
-| Field | Value |
-| --- | --- |
-| Name | A name for this input |
-| Account | The account you just added |
-| Organization ID | Find it in PostHog under **Settings** > **Organization** |
-| Interval | How often to poll, in seconds. 300 is a reasonable start |
-| Index | The index to write to. Note which one you pick, you need it to search |
-| Include changed values | Leave off unless you need before and after values |
-| Start date | Optional ISO-8601 lower bound for the first run |
+| Field                  | Value                                                                 |
+| ---------------------- | --------------------------------------------------------------------- |
+| Name                   | A name for this input                                                 |
+| Account                | The account you just added                                            |
+| Organization ID        | Find it in PostHog under **Settings** > **Organization**              |
+| Interval               | How often to poll, in seconds. 300 is a reasonable start              |
+| Index                  | The index to write to. Note which one you pick, you need it to search |
+| Include changed values | Leave off unless you need before and after values                     |
+| Start date             | Optional ISO-8601 lower bound for the first run                       |
 
 Save. Splunk polls on your interval and resumes from where it stopped, so entries are not collected twice.
 
@@ -162,10 +177,10 @@ Set the time range to **All time** for this first check. Splunk's default range 
 
 The add-on writes its own log, which you can search in Splunk with `index=_internal source=*ta_posthog_activity_logs*`. Raise the detail level on the add-on's **Configuration** > **Logging** tab.
 
-| Problem | Cause |
-| --- | --- |
-| `401` from PostHog | The personal API key is wrong or was revoked |
-| `403` from PostHog | The key does not have the `activity_log:read` scope |
+| Problem                  | Cause                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------- |
+| `401` from PostHog       | The personal API key is wrong or was revoked                                 |
+| `403` from PostHog       | The key does not have the `activity_log:read` scope                          |
 | Runs but indexes nothing | The input is up to date. Make a change in PostHog and wait for the next poll |
 
 To re-read history from the beginning, add a new input with a different name. The collection position is stored per input name and is not removed when you delete an input, so an input recreated under the same name resumes where the old one stopped and collects nothing.

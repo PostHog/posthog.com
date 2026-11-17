@@ -9,9 +9,9 @@ availability:
 sourceId: Billomat
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
 The Billomat connector syncs clients, suppliers, invoices, and more into the PostHog data warehouse, so you can analyze them alongside your product data.
 
@@ -23,7 +23,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 <SourceSetupIntro />
 
-Sync clients, suppliers, invoices, estimates, credit notes and incoming supplier bills from Billomat.
+Sync clients, suppliers, invoices, estimates, credit notes, incoming supplier bills, reminders, articles, delivery notes, and the activity feed from Billomat.
 
 You'll be asked for:
 
@@ -34,7 +34,10 @@ You'll be asked for:
 
 <SyncModes />
 
-All Billomat tables are full refresh. Each sync replaces the contents of the table.
+Billomat tables use one of two sync modes:
+
+- **Full refresh:** Each sync replaces the contents of the table. Used by Clients, Suppliers, Recurrings, ClientContacts, Articles, and ActivityFeed.
+- **Incremental:** Only new and updated records since the last sync are fetched (based on the `date` field). Used by Invoices, Estimates, CreditNotes, Incomings, InvoicePayments, Confirmations, Reminders, and DeliveryNotes.
 
 ## Configuration
 

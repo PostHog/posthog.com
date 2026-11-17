@@ -182,7 +182,7 @@ Server-side rendering is a way to avoid this. This fetches the feature flag befo
 To set this up, we must install and use [PostHog’s Ruby SDK](/docs/libraries/ruby) (because we are making server-side requests). Add `posthog-ruby` to your `Gemfile`:
 
 ```Gemfile
-gem "posthog-ruby"
+gem "posthog-ruby", "~> 3.0"
 ```
 
 Then `bundle install` to install the gem.

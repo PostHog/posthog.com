@@ -13,7 +13,7 @@ import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
 import SyncModes from "../\_snippets/sync-modes.mdx"
 import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Telnyx connector syncs your messaging, voice, verification, wireless, and media storage detail records into the PostHog Data warehouse, so you can analyze your communication data alongside your product data.
+The Telnyx connector syncs your messaging, voice, verification, wireless, and media storage detail records, plus the phone numbers, messaging profiles, connections, and conferences they reference, into the PostHog Data warehouse, so you can analyze your communication data alongside your product data.
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ When linking Telnyx, you'll need:
 
 <SyncModes />
 
-The messaging, verify, wireless, and media storage detail record tables support incremental syncs using the record's `created_at` timestamp. Conference, conference participant, and AMD detail record tables use full refresh since they don't have a documented server-side timestamp filter.
+The messaging, verify, wireless, and media storage detail record tables support incremental syncs using the record's `created_at` timestamp. Conference, conference participant, and AMD detail record tables use full refresh since they don't have a documented server-side timestamp filter. The phone number, messaging profile, connection, and conference tables also use full refresh, because their Telnyx list endpoints don't have a server-side time filter.
 
 ## Configuration
 

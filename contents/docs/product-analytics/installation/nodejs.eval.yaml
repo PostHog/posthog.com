@@ -2,21 +2,196 @@ owner: wizard-and-docs
 tags: [install, javascript, node, server]
 status: active
 
+# One check for each flow the Node.js docs teach. Every check is a baseline: a short
+# prompt in a user's words, no docs added. The prompt names PostHog and the kind of
+# analytics, and no API. The rubrics describe the correct result for posthog-node 5, the
+# major the docs show. `install` runs in an app with no PostHog code. The other checks run
+# in an app that already uses posthog-node 5.
 checks:
     - id: install
       description: >-
           Baseline: can an agent set up PostHog in a Node.js app from a one-line
           request? The prompt names only the stack; the agent gets no docs, so docs-read
           shows which pages it finds on its own.
-      codebase_to_test: node-express
-      prompt: >-
-          Set up PostHog in the Node.js app in {folder}/.
+      codebase_to_test: oss-etherpad
+      prompt: &install-prompt >-
+          Set up PostHog in this Node.js app.
       criteria:
-          shared: [builds, docs-read]
+          shared: [docs-read]
           rubrics:
               sdk-installed: >-
-                  {folder}/package.json lists `posthog-node`.
+                  {folder}/package.json lists `posthog-node` at 5.x.
               initialized: >-
-                  The app creates a client with new PostHog(token, { host }) from
-                  posthog-node, passing the project token and a host option. Cite the
+                  The app creates one client at startup with new PostHog(token, { host
+                  }) from posthog-node. Cite the file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable. It is not
+                  written in the source.
+              flushes-on-exit: >-
+                  The app awaits the client's shutdown() when the server stops.
+
+    - id: event-by-user
+      description: >-
+          Baseline in Hoppscotch's NestJS backend, which is on posthog-node 5.50.0 and
+          sends only instance telemetry. Does an agent capture the event for the user
+          and put the email and name on the person? The prompt does not name the
+          method.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+      prompt: >-
+          Track when a user accepts a team invitation in the backend, by user, with
+          PostHog product analytics. Make sure the user's email and name are populated.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              event-captured: >-
+                  Accepting an invitation calls capture({ distinctId, event, properties
+                  }) on the posthog-node client, with the accepting user's ID as
+                  distinctId. Cite the file and line(s).
+              set-on-person: >-
+                  The email and name are set on the person, with `$set` in the captured
+                  event or with identify({ distinctId, properties }). They are not plain
+                  properties of the event.
+
+    - id: events-by-team
+      description: >-
+          Baseline in the same backend. Does an agent attach the team as a group and
+          keep the acting user as the distinct ID? The prompt does not say how.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+          - docs/product-analytics/group-analytics
+      prompt: >-
+          Track team invitations per team and by user in the backend, with PostHog
+          group analytics.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              events-captured: >-
+                  Creating and accepting an invitation each call capture() on the
+                  posthog-node client, with the acting user's ID as distinctId. Cite the
                   file and line(s).
+              team-as-group: >-
+                  Each of those events passes the team as a group: groups: { team:
+                  <team ID> }.
+
+    - id: anonymous-event
+      description: >-
+          Baseline in the same backend. Does an agent turn off person processing for
+          events that are not about a signed-in user? The prompt does not name the
+          option.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+      prompt: &anonymous-event-prompt >-
+          Track each visitor who opens a published doc in the backend, with PostHog
+          product analytics. Visitors aren't signed in.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event sets `$process_person_profile: false` in its properties.
+                  Cite the file and line(s).
+              distinct-id-per-visitor: >-
+                  Each visitor gets their own distinct ID, such as a generated ID, a
+                  cookie or a hash. It is not one constant shared by all visitors.
+
+    - id: error
+      description: >-
+          Baseline in the same backend. Does an agent report a handled error with
+          captureException and link it to the user?
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+          - docs/error-tracking/installation/node
+      prompt: &error-prompt >-
+          Track errors when creating a team invitation fails in the backend, by user,
+          with PostHog error tracking.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  A failed create calls captureException(error, distinctId, properties)
+                  on the posthog-node client, with the inviting user's ID as the second
+                  argument. Cite the file and line(s).
+
+    - id: feature-flag
+      description: >-
+          Baseline in the same backend. Does an agent evaluate the flag the way the
+          docs recommend? An agent that works from memory uses the older single-flag
+          methods.
+      codebase_to_test: oss-hoppscotch-backend
+      pages:
+          - docs/libraries/node
+          - docs/feature-flags/installation/nodejs
+      prompt: >-
+          Put creating team invitations in the backend behind a PostHog feature flag.
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              flag-evaluated: >-
+                  The code awaits evaluateFlags(<user ID>) on the posthog-node client and
+                  reads the flag from the result, with isEnabled() or getFlag(). Cite the
+                  file and line(s).
+              flag-gates-create: >-
+                  Creating an invitation is refused when the flag is off.
+
+    # Next major: the same tasks for a project on posthog-node 6. Expected to fail until
+    # the docs show that major.
+    - id: install-next
+      description: >-
+          The same task as `install`, graded for posthog-node 6. The agent installs the
+          newest release, so this check is expected to fail until posthog-node 6 ships
+          and the docs show it.
+      codebase_to_test: oss-etherpad
+      prompt: *install-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              sdk-installed: >-
+                  {folder}/package.json lists `posthog-node` at 6.x.
+              initialized: >-
+                  The app creates one client at startup with new PostHog(token, { host
+                  }) from posthog-node. Cite the file and line(s).
+              token-from-env: >-
+                  The project token comes from an environment variable. It is not
+                  written in the source.
+              flushes-on-exit: >-
+                  The app awaits the client's shutdown() when the server stops.
+
+    - id: anonymous-event-next
+      description: >-
+          The same task as `anonymous-event`, for a project on posthog-node 6. Expected
+          to fail until the docs show that major.
+      codebase_to_test: oss-hoppscotch-backend-next
+      pages:
+          - docs/libraries/node
+      prompt: *anonymous-event-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              no-person-profile: >-
+                  The event turns off person processing with options: {
+                  process_person_profile: false } in the capture call. Cite the file and
+                  line(s).
+              distinct-id-per-visitor: >-
+                  Each visitor gets their own distinct ID, such as a generated ID, a
+                  cookie or a hash. It is not one constant shared by all visitors.
+
+    - id: error-next
+      description: >-
+          The same task as `error`, for a project on posthog-node 6. Expected to fail
+          until the docs show that major.
+      codebase_to_test: oss-hoppscotch-backend-next
+      pages:
+          - docs/libraries/node
+          - docs/error-tracking/installation/node
+      prompt: *error-prompt
+      criteria:
+          shared: [docs-read]
+          rubrics:
+              exception-captured: >-
+                  A failed create calls captureException(error, { distinctId, properties
+                  }) on the posthog-node client: one options object, with the inviting
+                  user's ID as distinctId. Cite the file and line(s).

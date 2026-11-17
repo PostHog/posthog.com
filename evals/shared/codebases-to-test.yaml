@@ -63,6 +63,84 @@ acme-dispatch-rails:
     ref: e6ded42fe15148d937a9bb9a4ecdf4365eea8d18
     folder: .
 
+# --- Open-source production apps (not Gauge's). The install checks need a real app with
+# no PostHog code. The other SDK checks need a real app that already uses the SDK: each
+# `ref` is a commit where the app is on the SDK major named in the comment, so don't move
+# a `ref` past the commit where the app upgrades to the next major.
+oss-etherpad: # Express server, no PostHog code
+    repo: https://github.com/ether/etherpad-lite
+    ref: 937a117439e30c919453a5fbf52e1ab9f007f881
+    folder: src
+oss-hoppscotch-backend: # NestJS API, posthog-node 5.50.0
+    repo: https://github.com/hoppscotch/hoppscotch
+    ref: 55908a76a1d0555c9bbb5d74244c14173df95b06
+    folder: packages/hoppscotch-backend
+oss-hoppscotch-backend-next: # needs a commit where the app is on posthog-node 6
+    repo: https://github.com/hoppscotch/hoppscotch
+    folder: packages/hoppscotch-backend
+oss-miniflux: # Go RSS server (net/http, Postgres), no PostHog code
+    repo: https://github.com/miniflux/v2
+    ref: 9447aaeceb98ebdf7c4528b3e96dc5b44b35af5b
+    folder: .
+oss-chainloop: # Go control plane (Kratos gRPC/HTTP, Ent), posthog-go v1.37.0
+    repo: https://github.com/chainloop-dev/chainloop
+    ref: 2a002e084300baa35285aaf5122a908d33c05c1e
+    folder: .
+oss-rustypaste: # actix-web file paste server, no PostHog code
+    repo: https://github.com/orhun/rustypaste
+    ref: f7e20aac23d46e1eeef8b95036a7c7d34f657193
+    folder: .
+oss-codemod-cli: # Rust CLI (clap, tokio), posthog-rs 0.21.0 with async-client only
+    repo: https://github.com/codemod/codemod
+    ref: 0187ff2835991e213312e625571f778653889177
+    folder: crates/telemetry
+oss-fossify-calendar: # Kotlin Android app (Views, version catalog), no PostHog code
+    repo: https://github.com/FossifyOrg/Calendar
+    ref: 0a936ec8c43b669ffb0a8c29b0d08347066a75ae
+    folder: .
+oss-tasks-android: # Kotlin Android + KMP app, posthog-android 3.72.3 (googleplay flavor)
+    repo: https://github.com/tasks/tasks
+    ref: 3b9982e596f82a3b4754a1ff7455cd6df52395ed
+    folder: app
+oss-mealie: # FastAPI backend with a Nuxt frontend, no PostHog code
+    repo: https://github.com/mealie-recipes/mealie
+    ref: 471c7936d3c782a431fd2081b632f404cb3dbb1a
+    folder: .
+oss-polar-server: # FastAPI API, posthog 7.76.1
+    repo: https://github.com/polarsource/polar
+    ref: ba3f8138458c9c615bf86aa7285a107234339633
+    folder: server
+oss-icecubes: # SwiftUI iOS Mastodon client, no PostHog code (uses TelemetryDeck)
+    repo: https://github.com/Dimillian/IceCubesApp
+    ref: 98098b9c4b5928f89f338203193c2bf40ab7f38c
+    folder: .
+oss-element-x-ios: # SwiftUI iOS Matrix client (XcodeGen), posthog-ios 3.92.6 exact pin in project.yml
+    repo: https://github.com/element-hq/element-x-ios
+    ref: 931e3866d40c52842b288f2bd5736d2e27afd689
+    folder: .
+oss-bouncer-ios: # SwiftUI iOS SMS filter, posthog-ios 3.92.0 (Package.resolved)
+    repo: https://github.com/afterxleep/Bouncer
+    ref: 8c6f44fd5467c507d4d6355daa010493c9c43656
+    folder: .
+oss-chainloop-next: # needs a commit where the app is on posthog-go v2
+    repo: https://github.com/chainloop-dev/chainloop
+    folder: .
+oss-polar-server-next: # needs a commit where the app is on posthog 8
+    repo: https://github.com/polarsource/polar
+    folder: server
+oss-saber: # Flutter note app (Android, iOS, desktop), no PostHog code
+    repo: https://github.com/saber-notes/saber
+    ref: c85af406e6d954402cc7c6d718a8f240f54408b2
+    folder: .
+oss-spark: # Flutter AT Protocol social app (Riverpod, AutoRoute), posthog_flutter 5.60.0
+    repo: https://github.com/sprksocial/client
+    ref: 4f034bfb29f632e14491db9148a6cbe57c04184f
+    folder: .
+oss-spark-before-screens: # Flutter AT Protocol social app (auto_route), posthog_flutter 5.23.1, no screen tracking
+    repo: https://github.com/sprksocial/client
+    ref: fbaf575b523d76705e277259e8001de93cd791f4
+    folder: .
+
 # --- Placeholders. These repos don't exist: PostHog/docs-eval-fixtures was planned
 # but never built. Checks that use them can't run. Replace each with a real codebase
 # above (and rewrite the check's file paths to match), then delete the placeholder.

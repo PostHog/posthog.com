@@ -60,7 +60,7 @@ We use PostHog to create and control our survey as well as monitor results. If y
 To start, install the [JavaScript web SDK](/docs/libraries/js):
 
 ```bash
-npm i posthog-js
+npm i posthog-js@1
 ```
 
 In the `src/routes` folder, create a `+layout.js`. In this file, we check if the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).

@@ -16,6 +16,10 @@ The Go SDK is in beta. It has the same defaults as the other SDKs, but captures 
 
 You need Go 1.25+, `posthogmcpsdk` v1.34.0 or later, and a PostHog [project token](/docs/feature-flags/installation#where-to-find-your-project-api-key). Using a server that isn't built on go-sdk? See [Custom dispatchers](#custom-dispatchers).
 
+<WizardCommand command="mcp-analytics" />
+
+The [wizard](/blog/envoy-wizard-llm-agent) installs the package and adds `posthogmcpsdk.Instrument` for you. To install by hand, follow the steps below.
+
 <Steps>
 
 <Step title="Install the package" badge="required">
@@ -265,7 +269,6 @@ The Go SDK doesn't yet have:
 - `$mcp_tools_list`, `$mcp_initialize`, resource, and prompt events
 - Task handling
 - Client name and version on legacy `2025-11-25` stateless servers. The protocol version is still present
-- Wizard support
 
 Some behavior to know about:
 

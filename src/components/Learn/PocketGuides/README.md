@@ -42,6 +42,8 @@ For a new frontmatter field used in GraphQL, check the declarations in `gatsby/c
 
 Place `<CoverWithChapters />` in every guide introduction, after the opening paragraphs, on the left page. Put setup instructions on the right page. The marker renders the shared `Cover` and a centered Start reading button beside the Chapters list; they stack in narrow containers. `<PocketGuideCover />` and `<StartReading>` also work alone (add `align="center"` to center the button). An introduction without `<CoverWithChapters />` shows the Chapters list after its body.
 
+`Cover` scales its typography, spine, spacing, and artwork together using its own inline-size container. Keep dimensions proportional to the cover rather than inheriting the surrounding page’s typography or reflowing at thumbnail sizes.
+
 The cover, Start reading, and every chapter link open chapter 1 or the linked chapter with the book-opening transition. Do not add another reading CTA to an introduction. Keep introduction copy in one section beneath the topic heading, without a separate "Where to start" section. Include a setup wizard only when readers need an installed integration to follow along; keep demos and extra illustrations in chapters.
 
 ## MDX and figure placement
@@ -168,3 +170,5 @@ The transition animates an inert copy of the cover in a temporary layer clipped 
 - A navigation that stalls for 5 seconds restores the source page.
 
 Run `pnpm exec node --test src/components/Learn/PocketGuides/bookOpening.test.ts` after changes.
+
+Term popup definitions in `terms.tsx` support Markdown backticks for inline code. These render through the shared `InlineCode` component, using the website’s existing light and dark styling.

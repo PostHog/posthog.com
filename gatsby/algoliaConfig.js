@@ -1,5 +1,6 @@
 const Slugger = require('github-slugger')
 const settings = require('./algoliaSettings.json')
+const { isNoindexSdkReference } = require('./sdkMarkdownReferences')
 
 // Lower values win after Algolia's textual relevance criteria tie.
 const PATH_RANKING = {
@@ -49,7 +50,7 @@ const CANONICAL_ROUTES = {
 }
 
 const PAGE_TYPE_RULES = [
-    // `/products` is the Tool directory, not the canonical page for the WIP User Interviews entry.
+    // `/products` is the Tool directory.
     { type: 'tools', pattern: /^\/products$/ },
     { type: 'docs', pattern: /^\/(?:docs|manual|pricing)(?:\/|$)/ },
     { type: 'handbook', pattern: /^\/(?:handbook|product-engineer)(?:\/|$)/ },
@@ -349,6 +350,18 @@ const retrieveSearchPages = {
               slug
             }
           }
+          sdkReferences: allSdkMarkdownReference {
+            nodes {
+              id
+              slug
+              title
+              body
+              tableOfContents {
+                value
+                depth
+              }
+            }
+          }
           tools: allTool {
             nodes {
               aliases
@@ -400,7 +413,20 @@ const retrieveSearchPages = {
     `,
     transformer: ({ data }) => {
         const pages = new Map()
-        const contentIds = new Set(data.content.nodes.map(({ id }) => id))
+        // SDK references are plain Markdown, not MDX, so they join the MDX content in the MDX shape. The pages
+        // that answer noindex stay out of search, as they stay out of the sitemap. A reference runs to about
+        // 400 KB, twice the largest page indexed today, so search reads its first 150,000 characters.
+        const sdkReferences = data.sdkReferences.nodes.map(({ id, slug, title, body, tableOfContents }) => ({
+            id,
+            slug,
+            fields: { slug },
+            frontmatter: { title, noindex: isNoindexSdkReference(slug) },
+            headings: (tableOfContents || []).map(({ value }) => ({ value, depth: 2 })),
+            rawBody: body.slice(0, 150000),
+            excerpt: '',
+        }))
+        const contentNodes = [...data.content.nodes, ...sdkReferences]
+        const contentIds = new Set(contentNodes.map(({ id }) => id))
         const sitePathsByContentId = new Map()
 
         data.pages.nodes.forEach((page) => {
@@ -419,7 +445,7 @@ const retrieveSearchPages = {
             }
         })
 
-        const content = contentByPath(data.content.nodes, sitePathsByContentId)
+        const content = contentByPath(contentNodes, sitePathsByContentId)
         const toolPaths = toolPathsFromNodes(data.tools.nodes).filter(({ path }) => pages.has(path))
         const records = new Map()
 

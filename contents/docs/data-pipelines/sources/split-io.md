@@ -27,20 +27,23 @@ Once the syncs are complete, you can start using Split data in PostHog.
 
 ## Available tables
 
-| Table | Description | Sync method |
-| ----- | ----------- | ----------- |
-| `workspaces` | Workspaces in your Split organization | Full refresh |
-| `environments` | Environments, fetched per workspace | Full refresh |
-| `traffic_types` | Traffic types, fetched per workspace | Full refresh |
-| `feature_flags` | Feature flags (splits), fetched per workspace | Full refresh |
-| `segments` | Segments, fetched per workspace | Full refresh |
-| `rollout_statuses` | Rollout statuses, fetched per workspace | Full refresh |
-| `flag_sets` | Flag sets, fetched per workspace | Full refresh |
-| `groups` | Groups in your organization | Full refresh |
-| `users` | Active members of your organization | Full refresh |
-| `change_requests` | Change requests awaiting or past approval | Full refresh |
+| Table                      | Description                                                                                     | Sync method  |
+| -------------------------- | ----------------------------------------------------------------------------------------------- | ------------ |
+| `workspaces`               | Workspaces in your Split organization                                                           | Full refresh |
+| `environments`             | Environments, fetched per workspace                                                             | Full refresh |
+| `traffic_types`            | Traffic types, fetched per workspace                                                            | Full refresh |
+| `feature_flags`            | Feature flags (splits), fetched per workspace                                                   | Full refresh |
+| `segments`                 | Segments, fetched per workspace                                                                 | Full refresh |
+| `rollout_statuses`         | Rollout statuses, fetched per workspace                                                         | Full refresh |
+| `flag_sets`                | Flag sets, fetched per workspace                                                                | Full refresh |
+| `groups`                   | Groups in your organization                                                                     | Full refresh |
+| `users`                    | Active members of your organization                                                             | Full refresh |
+| `change_requests`          | Change requests awaiting or past approval                                                       | Full refresh |
+| `attributes`               | Attributes defined on a traffic type, fetched per workspace and traffic type                    | Full refresh |
+| `feature_flag_definitions` | Flag configuration per environment: treatments, targeting rules, and traffic allocation         | Full refresh |
+| `segment_keys`             | Keys that are members of a segment in an environment, one row per segment, environment, and key | Full refresh |
 
-Tables fetched per workspace carry an injected `_workspace_id` column identifying the workspace each row came from.
+Tables fetched per workspace carry an injected `_workspace_id` column. Some tables also include additional injected columns such as `_environment_id`, `_traffic_type_id`, or `_segment_name` to identify the parent resource each row belongs to.
 
 ## Sync limitations
 

@@ -26,14 +26,17 @@ const claudeCodePromptUrl = (prompt: string): string => `claude-cli://open?q=${e
 export default function AgentTeachingActions({
     prompt = AGENT_TEACHING_PROMPT,
     volume,
+    resource = 'agent_teacher',
 }: {
     prompt?: string
     /** Volume id for `learn_resource_selected`. */
     volume?: string
+    /** Which prompt was opened, for `learn_resource_selected`. Matches the copy event's `resource`. */
+    resource?: string
 }): JSX.Element {
     const posthog = usePostHog()
     const open = (option: string, url: string) => {
-        posthog?.capture('learn_resource_selected', { volume, resource: 'agent_teacher', option })
+        posthog?.capture('learn_resource_selected', { volume, resource, option })
         window.location.assign(url)
     }
     return (

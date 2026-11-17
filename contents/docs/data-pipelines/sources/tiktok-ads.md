@@ -9,7 +9,7 @@ availability:
 sourceId: TikTokAds
 ---
 
-You can sync data from TikTok Ads reports by configuring it as a source in PostHog. The supported reports that can be synced include Ad Groups, Campaigns, Ads, Ad Group Report, Campaign Report, and Ad Report, as described here:
+You can sync data from TikTok Ads reports by configuring it as a source in PostHog. The supported tables include entity tables, performance reports, and optional website attribution reports:
 
 - [Ad Groups](https://business-api.tiktok.com/portal/docs?id=1739314558673922)
 - [Campaigns](https://business-api.tiktok.com/portal/docs?id=1739315828649986)
@@ -19,6 +19,27 @@ You can sync data from TikTok Ads reports by configuring it as a source in PostH
 - [Ad Report](https://business-api.tiktok.com/portal/docs?id=1740302848100353): Filter by `ad_ids`
 
 Additional reports will be added based on user feedback we receive via our [in-app support form](https://app.posthog.com/#panel=support%3Afeedback%3Adata_warehouse%3Alow%3Atrue).
+
+## Website attribution tables
+
+TikTok Ads sources on API v2.0 can optionally sync daily website attribution reports at the campaign, ad group, and ad level:
+
+- `campaign_website_attribution_report`
+- `ad_group_website_attribution_report`
+- `ad_website_attribution_report`
+
+These tables use TikTok's Reporting API v2.0 and provide click-attributed website purchase metrics:
+
+- **`cta_complete_payment`** – Number of website purchases attributed to ad clicks.
+- **`cta_complete_payment_value`** – Total value of website purchases attributed to ad clicks.
+- **`complete_payment`** – Total website purchases (all attribution).
+- **`spend`** – Total spend for the reporting period.
+
+These tables are **off by default**. Enable them in the table selection step when configuring your source.
+
+New TikTok Ads sources default to API v2.0. Existing sources pinned to v1.3 keep their current table catalog and do not see these tables until the source version is changed to v2.0.
+
+> **Upgraded Smart+ campaigns:** In v2.0 website attribution tables, `ad_id` identifies the ad asset group rather than the legacy creative. Do not join this ID directly to legacy creative-level ad IDs for those campaigns.
 
 ## Requirements
 

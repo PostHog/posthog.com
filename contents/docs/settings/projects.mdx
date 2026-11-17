@@ -90,7 +90,7 @@ The setting shows the organization's window and the range of months you can choo
 
 > **Warning:** PostHog deletes events older than the window at the next monthly cleanup. Deleted events can't be restored.
 
-If you remove the project's window, the project uses the organization's window. See [events data retention](/docs/data/events-retention#custom-retention) for more details.
+If you remove the project's window, the project uses the organization's window. See [events data retention](/docs/data/events-retention#how-to-customize-your-retention-period) for more details.
 
 It's best to use separate projects for:
 
@@ -107,10 +107,7 @@ You can move a project from one organization to another through [project setting
 
 Before moving a project, keep these requirements in mind:
 
-- You need to be an owner or admin of both the originating organization and the target organization to transfer a project
-- The originating organization must have at least two projects before you can move one
-- Since free organizations are limited to one project, you may need to temporarily upgrade your plan and add billing details to create a second project
-- After the move is complete, you can downgrade the original organization back to the free plan if desired
+- You need to be an owner or admin of both the originating organization and the target organization to move a project
 
 > Moving a project will mean all original organization members will lose access (including via things like API keys) unless they also are part of the target organization.
 
@@ -119,11 +116,11 @@ Before moving a project, keep these requirements in mind:
 If both organizations are in the **same region** (e.g., both on US Cloud or both on EU Cloud), you can move projects yourself through the UI:
 
 1. Go to your project settings
-2. Navigate to the "Move project" section
+2. Navigate to the "Move project" section under "Danger zone"
 3. Select the destination organization
 4. Confirm the move
 
-This option is **free and available to all customers** regardless of plan level. Since both organizations are in the same data center, the move simply transfers project ownership without needing to physically relocate any data.
+This option is **free and available to all customers** regardless of plan level. You can do this even if the project you're moving is the only one in your organization. There's no need to create a second project or upgrade first. Since both organizations are in the same data center, the move simply transfers project ownership without needing to physically relocate any data.
 
 ### Cross-region (requires Scale or Enterprise)
 

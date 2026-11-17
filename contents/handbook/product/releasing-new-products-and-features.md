@@ -35,7 +35,7 @@ In short: you set a feature's stage in **Early Access Management**, and users ac
 
 Create an early access feature in the `concept` stage early. Concept-stage features appear in the **Coming soon** tab of feature previews, and adding them early offers several advantages. It enables us to gauge interest in a new feature via sign-ups, equips our marketing teams with news they can promote to users, and ensures that betas can have sample users ready from the moment they launch.
 
-When someone joins a coming soon waitlist (in-app or on posthog.com), a `$feature_enrollment_update` event with `$feature_enrollment_stage: concept` is sent to Customer.io through a data pipeline, and they immediately receive a simple confirmation that they're on the waitlist. See [onboarding and lifecycle emails](/handbook/marketing/onboarding-and-lifecycle-emails#the-waitlist-alpha-beta-onboarding-flow) for the full flow.
+When someone joins a coming soon waitlist (in-app or on posthog.com), a `$feature_enrollment_update` event with `$feature_enrollment_stage: concept` enters them into a flow in PostHog Workflows, and they immediately receive a simple confirmation that they're on the waitlist. See [onboarding and lifecycle emails](/handbook/marketing/onboarding-and-lifecycle-emails#the-waitlist-alpha-beta-onboarding-flow) for the full flow.
 
 Concept features can either be large or small, so use your judgement about what is of interest to users, but it should be something that you expect to work on in the next 3-6 months.
 

@@ -1,0 +1,7 @@
+- **The storage settings are invalid**: Make sure that the files URL is in the format that the example shows, and that the bucket name doesn't contain a wildcard.
+- **The storage provider denied access to the bucket**: Make sure that the credentials are correct and can list and read the files in the bucket.
+- **The bucket doesn't exist**: Make sure that the bucket name in the URL is correct.
+- **No importable files were found**: Make sure that the URL matches at least one file in a [supported format](#supported-file-formats). If your files have no extension, set **File format** to the format of your files.
+- **The table has more files than PostHog can import**: Use a more specific URL, or split the files into more folders.
+- **Couldn't parse the file**: Make sure that **File format** matches your files. For CSV files, try to change the double quotes setting. For JSON files, make sure each line holds one JSON object, not a single JSON array.
+- **The Delta table uses features PostHog can't read**: Some Delta Lake features aren't supported. Export the table to Parquet files and import those files instead.

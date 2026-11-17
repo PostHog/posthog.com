@@ -9,11 +9,11 @@ availability:
 sourceId: Shippo
 ---
 
-import SourceSetupIntro from "../_snippets/source-setup-intro.mdx"
-import SyncModes from "../_snippets/sync-modes.mdx"
-import TroubleshootingLink from "../_snippets/dw-troubleshooting-link.mdx"
+import SourceSetupIntro from "../\_snippets/source-setup-intro.mdx"
+import SyncModes from "../\_snippets/sync-modes.mdx"
+import TroubleshootingLink from "../\_snippets/dw-troubleshooting-link.mdx"
 
-The Shippo connector syncs your shipping data – shipments, purchased labels, orders, addresses, parcels, refunds, customs data, and carrier accounts – into the PostHog Data warehouse, so you can analyze fulfillment and delivery alongside your product data.
+The Shippo connector syncs your shipping data – shipments, rates, purchased labels, orders, addresses, parcels, manifests, refunds, tracking status, customs data, carrier accounts, and managed Shippo accounts – into the PostHog Data warehouse, so you can analyze fulfillment and delivery alongside your product data.
 
 ## Prerequisites
 
@@ -32,6 +32,12 @@ When linking Shippo, you'll need:
 <SyncModes />
 
 The `shipments` table supports incremental syncs on its creation time. Note that the Shippo API doesn't return shipments older than 390 days, which bounds how far back the initial sync can reach. The other tables are synced with a full refresh.
+
+The `rates` table retrieves shipping quotes per shipment. Because rates are tied to shipments, the same 390-day API limit applies – rates for older shipments are not available.
+
+The `tracks` table provides the current delivery status and tracking history for each trackable transaction. Transactions whose rates have expired are excluded because their carrier can no longer be resolved.
+
+The `shippo_accounts` table syncs managed Shippo accounts. This table requires access to Shippo's Managed Accounts feature, which is available to platform customers.
 
 ## Configuration
 

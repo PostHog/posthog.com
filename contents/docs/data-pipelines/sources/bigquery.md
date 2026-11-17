@@ -119,12 +119,13 @@ You can also change column selection after setup:
 
 PostHog creates and deletes [temporary tables](https://cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) when querying your data. This is necessary for handling large BigQuery tables. Temporary tables help break down large data processing tasks into manageable chunks. However, they incur storage and query costs in BigQuery while they exist. We delete them as soon as the job is done.
 
-PostHog requires a unique primary key when importing data and will look for it in this order:
+Incremental syncs need a unique primary key to merge updated rows. Full table syncs don't need one. PostHog uses the first key it finds in this order:
 
-1. PostHog will use the `id` column as the primary key if it exists
-2. If the `id` column does not exist, PostHog will use any primary key constraints in the table
+1. The primary key columns you select, during source setup or under **Configure** for an existing table
+2. Primary key constraints declared on the table
+3. The `id` column, if the table has one
 
-After selecting the primary key, PostHog will query the table to see if the column is unique. If it is not, PostHog will fail the import with a `DuplicatePrimaryKeysException`. If you have no `id` column and no primary key constraints, future incremental imports will fail.
+BigQuery doesn't enforce primary key constraints, so PostHog queries the table to check that the key is unique. If it isn't, the sync fails with a `DuplicatePrimaryKeysException`. If PostHog finds no key, every incremental sync after the table's first sync fails. To fix this, select primary key columns for the table. After the first incremental sync, the key is locked. See [primary key columns](/docs/data-pipelines/sources#primary-key-columns) for details.
 
 ### Costs
 

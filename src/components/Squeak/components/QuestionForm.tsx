@@ -6,13 +6,11 @@ import Authentication from './Authentication'
 import Avatar from './Avatar'
 import RichText from './RichText'
 import getAvatarURL from '../util/getAvatar'
-import { usePost } from 'components/PostLayout/hooks'
 import qs from 'qs'
 import OSButton from 'components/OSButton'
 import uploadImage from '../util/uploadImage'
 import usePostHog from 'hooks/usePostHog'
 import { navigate } from 'gatsby'
-import { useAppStatus } from 'hooks/useAppStatus'
 import Link from 'components/Link'
 import Input from 'components/OSForm/input'
 import { OSSelect } from 'components/OSForm'
@@ -44,19 +42,17 @@ export type ForumFormOptions = {
 
 const DEFAULT_FORUM_TOPIC_SLUG = 'questions'
 
-const COMMENT_THREAD_SECTIONS = [
-    'blog',
-    'newsletter',
-    'founders',
-    'product-engineers',
-    'data-stack',
-    'posts',
-    'customers',
-    'spotlight',
-]
-
-const isCommentThreadPage = (pageSlug?: string) =>
-    COMMENT_THREAD_SECTIONS.includes(pageSlug?.split('/').filter(Boolean)[0] ?? '')
+const FORUM_TOPIC_MAPPING: Map<string, number | null> = new Map([
+    ['blog', null],
+    ['newsletter', null],
+    ['founders', null],
+    ['product-engineers', null],
+    ['data-stack', null],
+    ['posts', null],
+    ['customers', null],
+    ['community', null],
+    ['spotlight', null],
+])
 
 interface Topic {
     id: number
@@ -145,7 +141,6 @@ function QuestionFormMain({
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
-    const { status } = useAppStatus()
     const posting = submissionState === 'posting'
     const savingDraft = submissionState === 'saving-draft'
     const loading = posting || savingDraft
@@ -209,23 +204,6 @@ function QuestionFormMain({
                                 data-scheme="primary"
                                 className={`${forum ? '' : isInForum ? '@sm:pl-[55px]' : 'pl-[55px]'} space-y-2`}
                             >
-                                {status && status !== 'operational' && (
-                                    <div data-scheme="secondary" className="p-4 bg-primary border border-primary">
-                                        <h5 className="m-0">Heads up!</h5>
-                                        <p className="m-0 text-sm">
-                                            We're currently experiencing an incident. Check{' '}
-                                            <Link
-                                                className="text-red dark:text-yellow font-bold"
-                                                to="https://www.posthogstatus.com"
-                                                externalNoIcon
-                                            >
-                                                here
-                                            </Link>{' '}
-                                            for the latest info.
-                                        </p>
-                                    </div>
-                                )}
-
                                 {forum?.fields({ values, setFieldValue })}
                                 {subject && (
                                     <>
@@ -453,14 +431,16 @@ export const QuestionForm = ({
     const createQuestion = async ({ subject, body }: QuestionFormValues) => {
         const token = await getJwt()
         const pageSlugs = slug ? [{ slug }] : []
-        const forumTopicId = isCommentThreadPage(slug)
-            ? null
+
+        const forumTopicSlug = slug?.split('/').filter(Boolean)[0] ?? ''
+        const forumTopicId = FORUM_TOPIC_MAPPING.has(forumTopicSlug)
+            ? FORUM_TOPIC_MAPPING.get(forumTopicSlug)
             : (await suggestedForumTopicId(subject, body)) ?? (await defaultForumTopicId())
         const data = forumTopicId
             ? { subject, body, permalink: '', forumTopic: forumTopicId, slugs: pageSlugs }
             : { subject, body, resolved: false, permalink: '', slugs: pageSlugs }
 
-        const { data: questionData } = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
+        const res = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -470,17 +450,21 @@ export const QuestionForm = ({
                 data,
             }),
         }).then((res) => res.json())
+        const questionData = res?.data
+        if (!questionData?.id) {
+            throw new Error(
+                res?.error?.message || res?.message || 'The question could not be posted. Please try again.'
+            )
+        }
 
         // Fires only for new questions (replies use a separate `reply()` path), and only
         // after the API confirms creation — a reliable count of new questions asked.
-        if (questionData?.id) {
-            posthog?.capture('squeak question created', {
-                questionId: questionData.id,
-                forumTopicId,
-                slug,
-                subject,
-            })
-        }
+        posthog?.capture('squeak question created', {
+            questionId: questionData.id,
+            forumTopicId,
+            slug,
+            subject,
+        })
 
         return questionData
     }
@@ -524,10 +508,16 @@ export const QuestionForm = ({
         if (forum) setLoadingLabel(values.draft ? 'Saving…' : 'Posting…')
         setSubmissionState(forum && values.draft ? 'saving-draft' : 'posting')
         const transformedValues = await transformValues(values, user)
+        setError('')
+        const showError = (err: Error) => {
+            setSubmissionState('idle')
+            setFormValues(transformedValues)
+            setError(err.message)
+            setView('question-form')
+        }
 
         if (formType === 'question') {
             const create = forum ? saveForumPost : createQuestion
-            setError('')
             create(transformedValues)
                 .then((data) => {
                     setSubmissionState('idle')
@@ -535,18 +525,17 @@ export const QuestionForm = ({
                     setFormValues(null)
                     onSubmit?.(transformedValues, formType, data)
                 })
-                .catch((err) => {
-                    // Keep the form and what was typed, and say what went wrong.
-                    setSubmissionState('idle')
-                    setError((err as Error).message)
-                })
+                // Keep the form and what was typed, and say what went wrong.
+                .catch(showError)
         } else if (formType === 'reply' && questionId && reply) {
             setSubmissionState('idle')
             setView(null)
             setFormValues(null)
-            reply(transformedValues.body).then((data) => {
-                onSubmit?.(transformedValues, formType, data)
-            })
+            reply(transformedValues.body)
+                .then((data) => {
+                    onSubmit?.(transformedValues, formType, data)
+                })
+                .catch(showError)
         }
     }
 

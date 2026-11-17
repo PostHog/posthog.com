@@ -95,7 +95,7 @@ A BAA is available on Mixpanel's Enterprise plan.
 
 ![Countly - open source analytics tools](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/open-source-analytics-tools/countly-screenshot.png)
 
-**Countly** is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to [mobile app analytics](/blog/best-mobile-app-analytics-tools).
+**Countly** is an analytics platform for mobile, web, and desktop applications that also offers add-ons for remote configuration, A/B testing, and user surveys. Support for app crash and error reports, and push notifications, makes it particularly well-suited to [mobile app analytics](/compare/best-mobile-app-analytics-tools).
 
 #### Countly and HIPAA compliance
 
@@ -143,7 +143,7 @@ PiwikPRO offers HIPAA compliance as part of its PRO Enterprise plan, either by s
 
 ![amplitude](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-vs-amplitude/amplitude-screenshot.png)
 
-[Amplitude](/blog/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, A/B testing, and Guides & Surveys. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."
+[Amplitude](/compare/posthog-vs-amplitude) sits somewhere between PostHog and Mixpanel. It's a product analytics tool at its core, but also has extra features such as session replay, feature flags, A/B testing, and Guides & Surveys. It also has anomaly detection, which will automatically flag when certain metrics fall outside expected trends, and creating insights based on natural language questions like "signups in the last 30 days."
 
 #### Amplitude and HIPAA compliance
 
