@@ -10,6 +10,7 @@ import {
 } from 'components/OSIcons/Icons'
 import { Select } from 'components/RadixUI/Select'
 import ZoomHover from 'components/ZoomHover'
+import OSButton from 'components/OSButton'
 import React, { useEffect, useImperativeHandle, useRef, useState } from 'react'
 // Add types for YouTube and Wistia APIs to avoid TS errors
 declare global {
@@ -38,12 +39,13 @@ export interface MediaPlayerHandle {
     playFrom: (seconds: number) => void
 }
 
-/** Turns the captions of a Wistia video on or off. */
-function setWistiaCaptions(video: any, on: boolean): void {
+/** Turns the captions of a Wistia video on or off. Returns false if the captions plugin is not ready yet. */
+function setWistiaCaptions(video: any, on: boolean): boolean {
     const plugin = video?.plugin?.captions
-    if (!plugin) return
+    if (!plugin) return false
     if (on) plugin.show?.() ?? plugin.enable?.()
     else plugin.hide?.() ?? plugin.disable?.()
+    return true
 }
 
 const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(function MediaPlayer(
@@ -63,6 +65,9 @@ const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(functi
     const [scrubTime, setScrubTime] = useState(0)
     const [isSeeking, setIsSeeking] = useState(false)
     const [captionsOn, setCaptionsOn] = useState(captions)
+    // The player script did not load. Retry adds the script again.
+    const [loadFailed, setLoadFailed] = useState(false)
+    const [reloadKey, setReloadKey] = useState(0)
     const seekSuppressTimeout = useRef<NodeJS.Timeout | null>(null)
     const containerRef = React.useRef<HTMLDivElement>(null)
 
@@ -129,6 +134,10 @@ const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(functi
             if (!window.YT) {
                 const tag = document.createElement('script')
                 tag.src = 'https://www.youtube.com/iframe_api'
+                tag.onerror = () => {
+                    tag.remove()
+                    setLoadFailed(true)
+                }
                 const firstScriptTag = document.getElementsByTagName('script')[0]
                 if (firstScriptTag && firstScriptTag.parentNode) {
                     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
@@ -219,12 +228,16 @@ const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(functi
                 script.src = 'https://fast.wistia.com/assets/external/E-v1.js'
                 script.async = true
                 script.onload = initializeWistiaPlayer
+                script.onerror = () => {
+                    script.remove()
+                    setLoadFailed(true)
+                }
                 document.head.appendChild(script)
             } else {
                 initializeWistiaPlayer()
             }
         }
-    }, [videoId, source, startTime, borderRadius])
+    }, [videoId, source, startTime, borderRadius, reloadKey])
 
     const handlePlayPause = () => {
         if (playerState.player) {
@@ -383,10 +396,23 @@ const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(functi
         },
     }))
 
-    const toggleCaptions = () => {
-        const on = !captionsOn
-        setWistiaCaptions(playerState.player, on)
-        setCaptionsOn(on)
+    const toggleCaptions = () => setCaptionsOn((on) => !on)
+
+    // Apply the CC choice to the Wistia player. The captions plugin can load after the player is ready, and the viewer
+    // can press CC before either, so retry for a short time until the plugin takes it.
+    useEffect(() => {
+        if (!captions || source !== 'wistia' || !playerState.player) return
+        if (setWistiaCaptions(playerState.player, captionsOn)) return
+        let tries = 0
+        const interval = setInterval(() => {
+            if (setWistiaCaptions(playerState.player, captionsOn) || ++tries >= 20) clearInterval(interval)
+        }, 250)
+        return () => clearInterval(interval)
+    }, [captions, source, playerState.player, captionsOn])
+
+    const retryLoad = () => {
+        setLoadFailed(false)
+        setReloadKey((key) => key + 1)
     }
 
     useEffect(() => {
@@ -407,7 +433,7 @@ const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(functi
                 >
                     <section className="bg-accent px-2 pb-2">
                         {/* Main video area */}
-                        <div className="flex-1 flex flex-col justify-center items-center bg-primary mb-2">
+                        <div className="relative flex-1 flex flex-col justify-center items-center bg-primary mb-2">
                             {source === 'youtube' ? (
                                 <div id={`video-player-iframe-${videoId}`} className="rounded w-full aspect-video" />
                             ) : (
@@ -415,6 +441,17 @@ const MediaPlayer = React.forwardRef<MediaPlayerHandle, MediaPlayerProps>(functi
                                     ref={containerRef}
                                     className={`w-full aspect-video ${borderRadius ? 'rounded' : 'rounded-none'}`}
                                 />
+                            )}
+                            {loadFailed && (
+                                <div
+                                    role="alert"
+                                    className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/80 p-4 text-center"
+                                >
+                                    <p className="m-0 text-sm font-semibold text-white">The video didn't load.</p>
+                                    <OSButton variant="primary" size="md" onClick={retryLoad}>
+                                        Try again
+                                    </OSButton>
+                                </div>
                             )}
                         </div>
 
