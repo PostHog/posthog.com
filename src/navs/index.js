@@ -7472,6 +7472,12 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Instrumentation best practices',
+                    url: '/docs/ai-observability/instrumentation',
+                    icon: 'IconWrench',
+                    color: 'orange',
+                },
+                {
                     name: 'Privacy mode',
                     url: '/docs/ai-observability/privacy-mode',
                     icon: 'IconLock',
