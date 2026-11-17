@@ -30,7 +30,7 @@ Realtime cohorts are evaluated on PostHog's servers. A server-side SDK can't eva
 
 ## Which cohorts qualify
 
-PostHog works this out from the criteria you choose. There is no setting to turn on.
+PostHog works this out from the criteria you choose. A cohort that qualifies still needs realtime turned on before a feature flag can target it. See [using a realtime cohort in a feature flag](#using-a-realtime-cohort-in-a-feature-flag).
 
 A cohort qualifies when every one of its criteria is one of these:
 
@@ -64,12 +64,16 @@ A single criterion from this list makes the whole cohort fall back to the standa
 ## Using a realtime cohort in a feature flag
 
 1. Create the cohort, or edit its criteria, as you normally would.
-2. Wait while PostHog works through the cohort's history. The errors below call this the backfill. However small the cohort, it takes about 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events.
-3. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
+2. Add the cohort to a feature flag [release condition](/docs/feature-flags/creating-feature-flags#release-conditions).
+3. If realtime is off for the cohort, a notice under the condition set says so. Click **Turn on realtime** in the notice. You can also turn it on from the cohort page, next to **Flag targeting**.
+4. Wait while PostHog works through the cohort's history. The errors below call this the backfill. However small the cohort, it takes about 20 minutes at the earliest, and longer for cohorts that look a long way back or match a lot of events. The notice under the condition set shows that PostHog is still preparing the cohort.
+5. Save the flag.
+
+Your plan limits how many cohorts in a project can have realtime on, and how far back their criteria can look. If a cohort's criteria look back further than your plan allows, the notice says so instead of showing the button. Shorten the time range in the cohort's criteria to turn realtime on.
 
 If the flag won't save, the error tells you which step you're on:
 
-- "Cohort 'X' is still being backfilled and cannot be used in feature flags yet" means step 2 hasn't finished. Wait and save again. If it doesn't clear, [tell us](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue).
+- "Cohort 'X' is still being backfilled and cannot be used in feature flags yet" means step 4 hasn't finished. Wait and save again. If it doesn't clear, [tell us](https://app.posthog.com#panel=support%3Afeedback%3A%3Alow%3Atrue).
 - "Cohort 'X' has an event-based condition ... and cannot be used in feature flags" means either the cohort doesn't qualify, or realtime cohorts aren't switched on for the project. Compare its criteria against the list above first.
 
 ## Editing a cohort a flag uses
