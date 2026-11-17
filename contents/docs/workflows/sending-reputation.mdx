@@ -45,7 +45,7 @@ An email that does not fit in the current allowance stays queued. The worker sen
 
 A batch send is different. When the audience is larger than the tier allows, the trigger button blocks the launch and shows the current limit. Add filters to narrow the audience, set a sending rate limit, or wait for the next tier. This batch cap only applies to workflows with an email step.
 
-A sending rate limit raises the batch cap. All of your workflows share the daily allowance, so a batch that sends slowly leaves room for the others. With a rate limit of at most half your daily allowance, a batch can reach as many people as that rate sends to in 7 days, up to about 3.5 times your daily allowance. For example, at tier 3, a rate of 200 emails per hour lets a batch reach 33,600 people. You can't change the rate limit while such a batch still sends.
+A sending rate limit raises the batch cap. All of your workflows share the daily allowance, so a batch that sends slowly leaves room for the others. With a rate limit of at most half your daily allowance, the batch cap becomes the number of people that rate sends to in 7 days, when that is more than the tier's cap. That is up to about 3.5 times your daily allowance. For example, at tier 3, a rate of 200 emails per hour lets a batch reach 33,600 people. You can't change the rate limit while such a batch still sends.
 
 </CalloutBox>
 
@@ -117,7 +117,7 @@ Amazon's [guide to migrating to Amazon SES](https://aws.amazon.com/blogs/messagi
 
 ### Can I request a higher tier?
 
-Sending earns tiers, and the daily review is the same for every project. If you have a sending history elsewhere, for example because you move from another provider, and need more volume sooner, ask for a higher allowance. Click **Request a higher allowance** on the sending allowance card of the [Reputation tab](https://app.posthog.com/workflows/reputation). It opens a support ticket with your project's sending record. If the card doesn't show the link, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
+Sending earns tiers, and the daily review is the same for every project. If you have a sending history elsewhere, for example because you are moving from another provider, and need more volume sooner, ask for a higher allowance. This needs a plan that can open support tickets, such as a paid plan. Click **Request a higher allowance** on the sending allowance card of the [Reputation tab](https://app.posthog.com/workflows/reputation). It opens a support form, filled in with your project's sending record. Add your use case and send the form. If the card doesn't show the link, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
 
 ### Do transactional emails count against the allowance?
 
