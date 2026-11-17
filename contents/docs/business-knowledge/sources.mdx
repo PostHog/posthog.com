@@ -5,28 +5,30 @@ showTitle: true
 contentMaxWidthClass: max-w-5xl
 ---
 
-import PrivateBeta from './_snippets/private-beta.mdx'
-import { SurfaceCards, SurfaceCard } from 'components/Docs/SurfaceCards'
-import OSButton from 'components/OSButton'
+import PrivateBeta from "./_snippets/private-beta.mdx";
+import { SurfaceCards, SurfaceCard } from "components/Docs/SurfaceCards";
+import OSButton from "components/OSButton";
 
 <PrivateBeta />
 
-<OSButton variant="primary" external asLink to="https://app.posthog.com/business-knowledge">Add a source</OSButton>
+<OSButton variant="primary" external asLink to="https://app.posthog.com/business-knowledge">
+  Add a source
+</OSButton>
 
 ## Source types
 
 <SurfaceCards columns={3}>
 
 <SurfaceCard icon="IconPencil" color="purple" title="Text" url="#text" cta="Paste text">
-A policy, an FAQ, or any other text you paste.
+  A policy, an FAQ, or any other text you paste.
 </SurfaceCard>
 
 <SurfaceCard icon="IconGlobe" color="blue" title="URL" url="#url" cta="Add a URL">
-A public page, a sitemap, or a crawl of one site.
+  A public page, a sitemap, or a crawl of one site.
 </SurfaceCard>
 
 <SurfaceCard icon="IconUpload" color="orange" title="File" url="#file" cta="Upload a file">
-A PDF, DOCX, Markdown, CSV, or plain text file.
+  A PDF, DOCX, Markdown, CSV, or plain text file.
 </SurfaceCard>
 
 </SurfaceCards>
@@ -43,11 +45,11 @@ Paste a public `http` or `https` URL and choose how PostHog should read it. Post
 - **Sitemap.xml** reads the sitemap at that URL, or `/sitemap.xml` on the same site, and indexes each listed page.
 - **Same-origin crawl** indexes that page and the pages under its path on the same site. A URL at the site root covers the whole site.
 
-| Crawl option | What it does |
-| --- | --- |
-| **Skip paths** | Leaves out matching paths, one pattern per line. `/docs/private/*` skips that section. |
-| **Max pages** | Caps how many pages the source indexes. |
-| **Max depth** | Caps how many links deep a same-origin crawl goes. |
+| Crawl option      | What it does                                                                              |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| **Skip paths**    | Leaves out matching paths, one pattern per line. `/docs/private/*` skips that section.    |
+| **Max pages**     | Caps how many pages the source indexes.                                                   |
+| **Max depth**     | Caps how many links deep a same-origin crawl goes.                                        |
 | **Include globs** | Under **Advanced: override include scope**. Replaces the path PostHog takes from the URL. |
 
 The crawler follows `robots.txt` and identifies itself as `PostHog-BusinessKnowledge`. If a refresh fails, the row shows **refresh failed** and the previous text keeps answering questions.
@@ -78,15 +80,15 @@ The text injected from these sources is capped at 20,000 characters combined. Po
 
 ### Source status
 
-| Status | Meaning |
-| --- | --- |
-| Pending | Waiting to start |
-| Processing | Fetching or indexing |
-| Indexing | The content check has passed and keyword search works. Semantic search is still building. This can take up to an hour. |
-| Ready | Keyword and semantic search are both available |
-| Error | The source failed. Open it to read the reason. |
-| Disabled | A learned source that a newer learned answer replaced. PostHog keeps it and doesn't use it in replies. |
-| Unsafe content | At least one page was flagged and search leaves it out |
+| Status         | Meaning                                                                                                                |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Pending        | Waiting to start                                                                                                       |
+| Processing     | Fetching or indexing                                                                                                   |
+| Indexing       | The content check has passed and keyword search works. Semantic search is still building. This can take up to an hour. |
+| Ready          | Keyword and semantic search are both available                                                                         |
+| Error          | The source failed. Open it to read the reason.                                                                         |
+| Disabled       | A learned source that a newer learned answer replaced. PostHog keeps it and doesn't use it in replies.                 |
+| Unsafe content | At least one page was flagged and search leaves it out                                                                 |
 
 Search leaves out documents that haven't passed the content check, for both keyword and semantic search.
 
@@ -97,6 +99,19 @@ PostHog checks each document before using it in an answer. Search leaves out a d
 On a URL source, **Indexed pages** lists each page as **safe**, **unsafe**, or **pending**. Pending means search skips that page until the check finishes. Unsafe means the page stays listed and search excludes it.
 
 The source shows **unsafe content** when it has at least one flagged page.
+
+## Citation tracking
+
+The sources list includes a **Cited in** column that shows how the support agent uses each source.
+
+| Cited in display                | Meaning                                                                     |
+| ------------------------------- | --------------------------------------------------------------------------- |
+| **Not cited yet**               | The support agent hasn't used this source in a ticket reply                 |
+| **X agent runs** with timestamp | The source was cited in X ticket replies, with the last citation time shown |
+
+A citation means the support agent used content from that source when working on a ticket. Use this column to understand which sources are most valuable and which might need updates or replacement.
+
+For more detailed usage analytics, see [Usage analytics](/docs/business-knowledge/usage).
 
 ## Manage sources
 
@@ -113,16 +128,16 @@ Delete removes the source and its chunks. PostHog records the change in the acti
 
 ### Limits
 
-| Limit | Value |
-| --- | --- |
-| Sources you add | 500 per project |
-| Learned sources | 10,000 per project |
-| Chunks | 250,000 per project |
-| Pasted text | 1 MB |
-| Uploaded file | 50 MB |
-| One fetched page | 10 MB |
-| Pages in one URL source | 5,000 (default 200) |
-| Same-origin depth | 5 (default 2) |
-| PDF pages | 2,000 |
-| CSV rows kept | 10,000 |
-| Always-included text | 20,000 characters combined |
+| Limit                   | Value                      |
+| ----------------------- | -------------------------- |
+| Sources you add         | 500 per project            |
+| Learned sources         | 10,000 per project         |
+| Chunks                  | 250,000 per project        |
+| Pasted text             | 1 MB                       |
+| Uploaded file           | 50 MB                      |
+| One fetched page        | 10 MB                      |
+| Pages in one URL source | 5,000 (default 200)        |
+| Same-origin depth       | 5 (default 2)              |
+| PDF pages               | 2,000                      |
+| CSV rows kept           | 10,000                     |
+| Always-included text    | 20,000 characters combined |

@@ -6638,6 +6638,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
             ],
+                {
+                    name: 'Usage analytics',
+                    url: '/docs/business-knowledge/usage',
+                    icon: 'IconGraph',
+                    color: 'green',
+                },
         },
         {
             name: 'Support',
