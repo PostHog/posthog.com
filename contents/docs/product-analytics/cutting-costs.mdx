@@ -25,7 +25,27 @@ Alternatively, you can [disable autocapture](/docs/product-analytics/autocapture
 
 ## Only call `identify()` once per session
 
-It's only necessary to [identify](/docs/product-analytics/identify) a user once per session, and you don't need to add your own checks to prevent duplicate calls. If the user is already identified, calling `identify()` again with the same distinct ID doesn't capture another `$identify` event. Instead, it captures a `$set` event only when the person properties you pass have changed. 
+It's only necessary to [identify](/docs/product-analytics/identify) a user once per session. If the user is already identified, calling `identify()` again with the same distinct ID doesn't capture another `$identify` event. If you pass person properties, it captures a `$set` event instead, unless it already sent the same properties since the page loaded.
+
+That check only lasts until the page reloads. On a multi-page site, or in any app that reloads the page, calling `identify()` with person properties on every page load sends a `$set` event on every page load. Each one is billed as an identified event.
+
+To avoid this, call `identify()` without properties on page load, and send person properties only when they change, such as at login or when the user updates their profile. If you can't easily tell when properties change, keep a once-per-session check:
+
+```js-web
+const id = String(user.id)
+const key = `${id}|${user.plan}`
+let sent = false
+try { sent = sessionStorage.getItem('ph_person_props') === key } catch (e) {}
+
+if (sent) {
+  posthog.identify(id) // already identified with these properties: sends nothing
+} else {
+  posthog.identify(id, { plan: user.plan })
+  try { sessionStorage.setItem('ph_person_props', key) } catch (e) {}
+}
+```
+
+To check whether this affects you, compare your `$set` and `$pageview` counts in a [trends insight](/docs/product-analytics/trends/overview). If you have nearly as many `$set` events as pageviews from logged-in users, you're probably resending properties on every page load.
 
 ## Only call `group()` once per session
 
