@@ -25,7 +25,7 @@ Credentials that can read the data you want to sync. PostHog only reads data, so
 
 Connect Veracode with an API service account's **API ID** and **secret key**, generated under **Account settings → API credentials** in the Veracode Platform. Requests are signed with Veracode's HMAC scheme.
 
-The service account needs the **Results API** and **Applications API** roles to read the application portfolio and findings. Pick the region your Veracode account lives in - data is isolated per region.
+The service account needs the **Results API** and **Applications API** roles to read the application portfolio and findings. The `scans` table also needs the **Reporting API** role, and Veracode support must turn on the Reporting API for your account. The `policies` table needs the **Policy Administrator** role, and the `teams` and `business_units` tables need the **Admin API** role. Pick the region your Veracode account lives in - data is isolated per region.
 
 You'll be asked for:
 
@@ -38,6 +38,8 @@ You'll be asked for:
 <SyncModes />
 
 All Veracode tables are full refresh. Each sync replaces the contents of the table.
+
+The tables that start with `sca_workspace` hold agent-based Software Composition Analysis (SCA) scan data. Your Veracode account needs agent-based scanning for these tables, so they're off by default.
 
 ## Configuration
 
