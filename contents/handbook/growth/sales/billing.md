@@ -143,7 +143,7 @@ RevOps will follow the routine [upfront payment setup](#upfront-payment-setup) s
 
 ### Disputes and chargebacks
 
-A dispute (chargeback) occurs when a customer asks their bank to reverse a charge. While the dispute is open, the card network holds the funds, so we cannot refund the charge through Stripe.
+A dispute (chargeback) occurs when a customer asks their bank to reverse a charge. While the dispute is open, the card network holds the funds, so we cannot refund the charge through Stripe. This process is handled by Finance.
 
 #### 1. Review the dispute
 
