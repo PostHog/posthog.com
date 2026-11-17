@@ -94,7 +94,7 @@ We also have this retro to go off of: [link]
 
 Help me build a new analysis dashboard for this London campaign, step by step. Explain what KPIs were tracked in Charles and Ian's dashboards, and what we should keep or newly include.
 
-October 5th to November 1st is when this will be running. We have placements primarily in and around Old Street Station.
+September 21 to October 18 is when this will be running. We have placements primarily in and around Old Street Station.
 ```
 
 I was thrilled with the depth of detail the bot went into for me. Charles then proceeded to tell me to delete all but five of the measures. Keep it simple.
