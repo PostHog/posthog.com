@@ -6,10 +6,9 @@ showTitle: true
 
 ### Summary
 
-Metabase dashboards mirror a customer’s PostHog usage so we can diagnose billing, implementation quality, and quick-win optimizations. For audio and video learners, check out these:
+Metabase dashboards mirror a customer’s PostHog usage so we can diagnose billing, implementation quality, and quick-win optimizations. For audio and video learners, check out this:
 
 - <PrivateLink url="https://app.buildbetter.app/call/314774">Metabase overview recording</PrivateLink>
-- <PrivateLink url="https://www.loom.com/share/9c1080638919475dac8a9ca1c55d361f">Billing deep dive walkthrough</PrivateLink>
 
 While checking the account in Vitally, you can access a dedicated Metabase dashboard for this account directly from the sidebar:
 
