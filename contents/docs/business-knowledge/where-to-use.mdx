@@ -32,3 +32,14 @@ The [PostHog MCP server](/docs/model-context-protocol) gives any MCP client tool
 | `business_knowledge:write` | Add text and URL sources, update a source, and create, update, or delete libraries |
 
 Upload files and delete sources in PostHog. MCP can't do either. See the [MCP tools reference](/docs/model-context-protocol/tools) for each tool.
+
+### Connect your own agent
+
+Your own AI agent can search your sources through the PostHog MCP server without a user. It signs in with a key. Set it up under **Connect your agent** in [Business Knowledge settings](https://app.posthog.com/business-knowledge/settings):
+
+1. Create a key. A project admin chooses a library, names the key, and selects **Create key**. The key can read only that library. If you aren't an admin, ask one to create the key. To let an agent read every library, create a [project secret API key](https://app.posthog.com/settings/environment-secret-api-keys) with the `business_knowledge:read` scope.
+2. Copy the configuration into your agent. When you create a key, the configuration already contains it. Copy it immediately, because PostHog doesn't show the key again.
+
+The agent can search and read your sources, libraries, and selected repositories. It can't change anything or read other PostHog data. The panel lists your keys, what each key reads, and when it was last used. To roll or delete a key, go to project secret API keys.
+
+Keep the key on your server. Anyone who has the key can read the business knowledge that it covers, so don't put it in a website or a mobile app.
