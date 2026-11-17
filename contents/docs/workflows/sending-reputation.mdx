@@ -50,7 +50,7 @@ Tier 0 is a probation tier for a domain with no sending record. Its caps sit far
 
 <CalloutBox icon="IconInfo" title="Emails above the cap wait, they are not lost" type="fyi">
 
-An email that does not fit in the current allowance stays queued. The worker sends it once the allowance refills. The workflow's invocations show the delay. Transactional email never waits, as [the FAQ](#do-transactional-emails-count-against-the-allowance) explains. This is different from the per-person [frequency cap](/docs/workflows/frequency-cap), which skips marketing messages over the cap unless you set a hold time.
+An email that does not fit in the current allowance stays queued. The worker sends it once the allowance refills. The workflow's invocations show the delay. This is different from the per-person [frequency cap](/docs/workflows/frequency-cap), which skips marketing messages over the cap unless you set a hold time.
 
 A batch send is different. When the audience is larger than the tier allows, the trigger button blocks the launch and shows the current limit. Add filters to narrow the audience, set a sending rate limit, or wait for the next tier. This batch cap only applies to workflows with an email step.
 
@@ -98,7 +98,7 @@ Your domain keeps its reputation when you move, because mailbox providers judge 
 You can add PostHog's DNS records while your old provider still sends. The [Channels tab](/docs/workflows/configure-channels) shows each record for your domain.
 
 - **DKIM.** PostHog gives you three CNAME records under `_domainkey`, with names that only PostHog uses. Your old provider's DKIM records stay as they are, and each provider signs its own email.
-- **SPF.** A domain can have only one SPF record. A second one makes SPF fail for all email from the domain. If your domain already has an SPF record, add `include:amazonses.com` to it instead of creating a new record.
+- **SPF.** PostHog lists an SPF record with `include:amazonses.com` for your domain. A domain can have only one SPF record, and a second one makes SPF fail for all email from the domain. If your domain already has an SPF record, add `include:amazonses.com` to it instead of creating a new record. Your domain verifies without it, because PostHog's email passes SPF on the bounce subdomain below. Skip it if your record is close to SPF's limit of 10 DNS lookups.
 - **Bounce subdomain.** PostHog also needs a subdomain for bounces, `feedback` by default, with one MX record and one SPF record. Nothing else may use it to send or receive email. If something already uses `feedback`, set another **Bounce subdomain** under **Advanced** when you add the domain.
 - **DMARC.** If your domain already has a DMARC record, keep it. PostHog only checks that one exists.
 
@@ -139,7 +139,7 @@ No. Workflow email always goes out through PostHog's Amazon SES setup. You bring
 
 ### Can I request a higher tier?
 
-Sending earns tiers, and the daily review is the same for every project. If you have a sending history elsewhere, for example because you are moving from another provider, and need more volume sooner, ask for a higher allowance. Click **Request a higher allowance** on the sending allowance card of the [Reputation tab](https://app.posthog.com/workflows/reputation). It opens a support form, filled in with your project's sending record. Add your use case and send the form. The link shows for organizations that can open a support ticket, such as those on a paid plan. Otherwise, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
+Sending earns tiers, and the daily review is the same for every project. If you have a sending history elsewhere, for example because you are moving from another provider, and need more volume sooner, ask for a higher allowance. Click **Request a higher allowance** on the sending allowance card of the [Reputation tab](https://app.posthog.com/workflows/reputation). It opens a support form, filled in with your project's sending record. Add your use case and send the form. The link shows for organizations that can open a support ticket, such as those on a paid plan. If you are on such a plan and don't see the link, [contact support](https://app.posthog.com/#panel=support) and explain your use case.
 
 ### Do transactional emails count against the allowance?
 
