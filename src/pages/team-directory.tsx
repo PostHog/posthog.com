@@ -22,10 +22,6 @@ const columns = [
     { name: 'Start date', width: 'minmax(120px,auto)', align: 'left' as const },
 ]
 
-// Also defined in src/pages/community/profiles/[id].tsx — update both if changed
-const unisexSizes = ['XS', 'S', 'M', 'L', 'XL', '2XL']
-const femaleSizes = ['S', 'M', 'L', 'XL', '2XL', '3XL']
-
 const baseInputClass =
     'w-full bg-transparent border rounded px-1 py-0.5 text-sm text-primary outline-none focus:border-yellow transition-colors duration-300'
 
@@ -129,20 +125,6 @@ export default function Team(): JSX.Element {
         () => Array.from(new Set(teamMembers.map((m) => m.country).filter(Boolean) as string[])).sort(),
         [teamMembers]
     )
-
-    const sizeCounts = useMemo(() => {
-        const all = [...teamMembers, ...futureJoiners]
-        const unisex: Record<string, number> = {}
-        const female: Record<string, number> = {}
-        for (const m of all) {
-            if (m.tShirtFit === 'unisex' && m.tShirtSize) {
-                unisex[m.tShirtSize] = (unisex[m.tShirtSize] || 0) + 1
-            } else if (m.tShirtFit === 'female' && m.tShirtSize) {
-                female[m.tShirtSize] = (female[m.tShirtSize] || 0) + 1
-            }
-        }
-        return { unisex, female }
-    }, [teamMembers, futureJoiners])
 
     const applyFilters = (data: TeamMember[]) => {
         if (!activeFilters) return data
@@ -291,96 +273,6 @@ export default function Team(): JSX.Element {
                                 memberToRow(member, index, isEditing, updateProfile)
                             )}
                         />
-                        {displayFutureJoiners.length > 0 && (
-                            <>
-                                <h3 className="mt-6 mb-2 text-base font-semibold">Future joiners</h3>
-                                <p className="!mt-0 mb-2 text-sm text-muted">
-                                    {displayFutureJoiners.length} upcoming joiner
-                                    {displayFutureJoiners.length !== 1 ? 's' : ''} with a start date in the future
-                                </p>
-                                <OSTable
-                                    columns={columns}
-                                    size="sm"
-                                    rows={displayFutureJoiners.map((member, index) =>
-                                        memberToRow(member, index, isEditing, updateProfile)
-                                    )}
-                                />
-                            </>
-                        )}
-                        <div className="flex flex-wrap gap-8 mt-6">
-                            {unisexSizes.some((s) => sizeCounts.unisex[s]) && (
-                                <div>
-                                    <h3 className="mb-2 text-base font-semibold">Unisex</h3>
-                                    <OSTable
-                                        columns={[
-                                            { name: 'Size', width: '80px', align: 'left' as const },
-                                            { name: 'Count', width: '80px', align: 'right' as const },
-                                        ]}
-                                        size="sm"
-                                        rows={[
-                                            ...unisexSizes
-                                                .filter((s) => sizeCounts.unisex[s])
-                                                .map((s) => ({
-                                                    key: s,
-                                                    cells: [
-                                                        { content: s, className: 'text-sm font-medium' },
-                                                        { content: sizeCounts.unisex[s], className: 'text-sm' },
-                                                    ],
-                                                })),
-                                            {
-                                                key: 'total',
-                                                cells: [
-                                                    { content: 'Total', className: 'text-sm font-bold' },
-                                                    {
-                                                        content: Object.values(sizeCounts.unisex).reduce(
-                                                            (a, b) => a + b,
-                                                            0
-                                                        ),
-                                                        className: 'text-sm font-bold',
-                                                    },
-                                                ],
-                                            },
-                                        ]}
-                                    />
-                                </div>
-                            )}
-                            {femaleSizes.some((s) => sizeCounts.female[s]) && (
-                                <div>
-                                    <h3 className="mb-2 text-base font-semibold">Women's</h3>
-                                    <OSTable
-                                        columns={[
-                                            { name: 'Size', width: '80px', align: 'left' as const },
-                                            { name: 'Count', width: '80px', align: 'right' as const },
-                                        ]}
-                                        size="sm"
-                                        rows={[
-                                            ...femaleSizes
-                                                .filter((s) => sizeCounts.female[s])
-                                                .map((s) => ({
-                                                    key: s,
-                                                    cells: [
-                                                        { content: s, className: 'text-sm font-medium' },
-                                                        { content: sizeCounts.female[s], className: 'text-sm' },
-                                                    ],
-                                                })),
-                                            {
-                                                key: 'total',
-                                                cells: [
-                                                    { content: 'Total', className: 'text-sm font-bold' },
-                                                    {
-                                                        content: Object.values(sizeCounts.female).reduce(
-                                                            (a, b) => a + b,
-                                                            0
-                                                        ),
-                                                        className: 'text-sm font-bold',
-                                                    },
-                                                ],
-                                            },
-                                        ]}
-                                    />
-                                </div>
-                            )}
-                        </div>
                     </>
                 )}
             </Editor>
