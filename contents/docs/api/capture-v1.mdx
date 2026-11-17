@@ -183,7 +183,7 @@ The response's `error_description` names the field and what's wrong with it, for
 
 `properties` and `options` are checked per event: a value that isn't an object drops only that event, with the detail `malformed_event_properties` or `invalid_options`. `"options": null` counts as no options, but `"properties": null` drops the event, so leave `properties` out or send `{}`. An unreadable `historical_migration` counts as `false`.
 
-PostHog SDKs always send these types. If you change an event in a `before_send` hook, keep these types.
+PostHog SDKs always send these types. If you change an event in a hook such as `before_send` or `beforeSend`, keep these types.
 
 ### Request limits
 
