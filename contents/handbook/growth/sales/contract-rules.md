@@ -245,6 +245,18 @@ Do not change the payment terms or the payment method on the order form to allow
 
 > We absolutely do not allow payment by check. This is made clear on order forms. 
 
+### Payment currency
+
+We invoice in USD, and we expect bank transfer payments in USD. We do not accept non-USD bank transfers for credits bought via an order form. This is because:
+
+- PostHog Inc is a US entity, and our billing system is USD-only.
+- A non-USD bank transfer needs manual Stripe reconciliation, and no team owns that process today.
+- Any FX risk on a non-USD payment falls on PostHog.
+
+If a customer can't pay in USD by bank transfer, they can stay on (or move to) a monthly self-serve plan and pay by card in their local currency. They don't get the discounts that come with an order form, [for the same reasons we don't accept card payments for order forms](#payment-method).
+
+We make exceptions rarely, and only with buy-in from <SmallTeam slug="revops" /> and finance. If you think a customer needs one, raise it in <PrivateLink url="https://posthog.slack.com/archives/C0BSAUQENEA">#team-revops</PrivateLink> before you commit to anything with the customer.
+
 ## Contract buyouts
 
 > **Are you a potential customer who wants to speak to us about a contract buyout?** Get in touch with the Sales team via your shared Slack channel, or [reach out directly](/talk-to-a-human).
