@@ -45,4 +45,10 @@ client.flush().await;
 client.shutdown().await;
 ```
 
-With the blocking client (`default-features = false`), call `flush()` and `shutdown()` without `.await`. Turning off the default features also turns off TLS, so turn the `tls` feature back on to send events over HTTPS.
+With the blocking client (`default-features = false`), call `flush()` and `shutdown()` without `.await`.
+
+With `default-features = false`, add the `tls` feature, or events can't reach PostHog over HTTPS:
+
+```toml
+posthog = { version = "1", default-features = false, features = ["tls"] }
+```

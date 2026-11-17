@@ -21,7 +21,7 @@ Install the [PostHog Rust SDK](/docs/libraries/rust):
 cargo add posthog@1
 ```
 
-Error tracking ships enabled by default through the `error-tracking` feature. If you build with `default-features = false`, add it back explicitly, along with `tls`, which the default features also turn off:
+Error tracking ships enabled by default through the `error-tracking` feature. If you build with `default-features = false`, add `error-tracking` back, and add the `tls` feature, or events can't reach PostHog over HTTPS:
 
 ```toml
 [dependencies]
@@ -45,7 +45,11 @@ let client = posthog::client((
 )).await;
 ```
 
-The default client is async (Tokio). Building with `default-features = false` gives you a blocking client instead, with the same methods without `.await`. Keep the `tls` feature on, as in the previous step, or events can't reach PostHog over HTTPS.
+The default client is async (Tokio). Building with `default-features = false` gives you a blocking client instead, with the same methods without `.await`. With `default-features = false`, add the `tls` feature, or events can't reach PostHog over HTTPS:
+
+```toml
+posthog = { version = "1", default-features = false, features = ["error-tracking", "tls"] }
+```
 
 </Step>
 
