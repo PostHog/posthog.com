@@ -6672,19 +6672,39 @@
         },
         {
             "source": "/docs/ai-engineering/langfuse-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/langfuse-posthog:ext?"
+            "destination": "/compare/posthog-vs-langfuse"
         },
         {
             "source": "/docs/ai-engineering/helicone-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/helicone-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
         },
         {
             "source": "/docs/ai-engineering/keywords-ai-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/keywords-ai-posthog:ext?"
+            "destination": "/docs/ai-observability/start-here:ext?"
         },
         {
             "source": "/docs/ai-engineering/traceloop-posthog:ext(\\.md)?",
-            "destination": "/docs/ai-observability/integrations/traceloop-posthog:ext?"
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/langfuse-posthog:ext(\\.md)?",
+            "destination": "/compare/posthog-vs-langfuse"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/helicone-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/helicone:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/keywords-ai-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/start-here:ext?"
+        },
+        {
+            "source": "/docs/ai-observability/integrations/traceloop-posthog:ext(\\.md)?",
+            "destination": "/docs/ai-observability/installation/opentelemetry:ext?"
         },
         {
             "source": "/docs/llm-analytics/manual-capture:ext(\\.md)?",
