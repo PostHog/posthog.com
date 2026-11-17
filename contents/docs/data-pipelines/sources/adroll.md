@@ -11,11 +11,12 @@ sourceId: AdRoll
 
 You can sync advertising entity data from AdRoll (NextRoll) by configuring it as a source in PostHog. The supported entities that can be synced include:
 
-| Entity                                                                        | Description                               |
-| ----------------------------------------------------------------------------- | ----------------------------------------- |
-| [Advertisables](https://developers.nextroll.com/docs/native-api/advertisable) | Your organization's advertisable entities |
-| [Campaigns](https://developers.nextroll.com/docs/native-api/campaign)         | Campaigns for each advertisable           |
-| [Ads](https://developers.nextroll.com/docs/native-api/ad)                     | Ads for each advertisable                 |
+| Entity                                                                        | Description                                                     |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [Advertisables](https://developers.nextroll.com/docs/native-api/advertisable) | Your organization's advertisable entities                       |
+| [Campaigns](https://developers.nextroll.com/docs/native-api/campaign)         | Campaigns for each advertisable                                 |
+| [Ads](https://developers.nextroll.com/docs/native-api/ad)                     | Ads for each advertisable                                       |
+| [Contextual categories](https://apidocs.nextroll.com/crud-api/reference.html) | Categories that adgroups in Web Contextual campaigns can target |
 
 Campaigns and ads include an `_advertisable_eid` field that links each row back to its parent advertisable. All entities use `eid` as their primary key and sync via full refresh.
 
