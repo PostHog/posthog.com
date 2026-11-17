@@ -111,9 +111,11 @@ For example, breaking your insights down by page enables you to see what pages h
 
 Real user monitoring can also integrate with your business processes because a high-quality experience doesn’t only mean the product, but also your interactions with users. For example, you can send notifications to webhooks on errors. You can then use these webhooks to send details to the places your team spends time in like Slack or Teams.
 
-At PostHog, we do this with a [broken link checker](/tutorials/broken-link-checker), which sends us a notification in Slack when someone navigates to a page that doesn’t exist and gets a 404. This helps us fix these links and provide a better user experience.
+At PostHog, we use a [Scout](https://posthog.com/docs/self-driving/scouts) to find broken links on our website. For example, one report identified a stale link to our API environments documentation abd showed how many 404s it was causing. This allowed us to follow up and fix the issue before it impacted any other users. 
 
-![404s](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/404.png)
+## Recap
+
+Real user monitoring is only useful if you act on what you find. So, start by capturing performance metrics, errors, and user behaviors with PostHog. And once you've shipped a fix, make sure to check the data again the make sure that it actually worked. After all, nobody cares how good your dashboards look if your product is still broken.
 
 ## Further reading
 
